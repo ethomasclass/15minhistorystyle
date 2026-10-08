@@ -29,6 +29,13 @@
 - **Music:** see `MUSIC.md`. The Davilla song itself waits on a scan of the score (HNOC request drafted).
 - **Images:** see `IMAGES.md`. Archival only: no AI images in this video (your call). Masks give the coral tint and teal trace; `tools/layers.py` splits masked photos into parallax layers.
 
+## The last line
+
+"It played." gets a held breath: `python3 tools/pause.py ch09_who "It played." 1.5` puts 1.5 s of silence before it
+(re-run it after any re-voice of ch09). The answer's cue resolves on "everything.", the picture sinks toward black
+with only record crackle, then a hard cut: the needle drops, a low boom, IT PLAYED. in tape, the cornet player in
+coral, and the 1918 record swells once the line is said. The title holds about 5 seconds before the thank-you.
+
 ## Plugs (your request)
 
 Two friendly like-and-subscribe reminders, voiced separately so they can be cut without re-voicing a chapter:
