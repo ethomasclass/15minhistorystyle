@@ -3,19 +3,24 @@
 import React from 'react';
 import words from '../../public/audio/ch03_spy.words.json';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Bed, Blamed, Clip, Desk, Pic, Sounds} from '../kit/ax';
+import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {AbsoluteFill} from 'remotion';
+import {Bed, Blamed, Desk, DropCard, Pic, Sounds} from '../kit/ax';
+import {IMG} from '../imgs';
+import {MASKS} from '../masks';
 import {P} from '../pics';
 
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
+const BESUMER = IMG[P.besumer.src] ?? [313, 349];
 
 /** Five weeks later: another grocery, another back room. */
 const June: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
     <Desk a={0}>
-      <Clip src={P.besumer.src} x={1060} y={150} w={620} rot={3} at={t.at('Louis Besumer')} />
+      <CropCard src={P.besumer.src} size={BESUMER} x={1180} y={170} w={500} h={560} fx={156} fy={174} scale={1.62} rot={3} at={t.at('Louis Besumer')} mask={MASKS.besumer} traceAt={t.at('Louis Besumer') + 6}
+        bw="grayscale(1) sepia(0.25) contrast(1.2)" />
       {g >= t.at('June') && <Highlight text="JUNE 27, 1918" x={110} y={110} size={96} at={t.at('June')} seed={31} rot={-2} />}
       <Note text="five weeks later" x={140} y={270} size={56} rot={-3} at={t.at('Five weeks')} color="#ffffff" />
       <Note text="another grocery" x={140} y={430} size={64} rot={-4} at={t.at('Another grocery,')} />
@@ -27,16 +32,17 @@ const June: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** 1918 is wartime: spy fever. */
+/** 1918 is wartime: a war parade on Canal Street, then spy fever. */
 const SpyFever: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Pic src={P.spyPoster.src} tag={P.spyPoster.tag} a={t.at('Then things')} b={t.at("He isn't.")} z0={1.02} z1={1.12}>
+    <Pic src={P.parade.src} tag={P.parade.tag} a={t.at('Then things')} b={t.at("He isn't.")} z0={1.03} z1={1.12} tagTop>
       {() => (
         <>
           {g >= t.at("It's 1918.") && <Highlight text="1918: AT WAR" x={110} y={100} size={96} at={t.at("It's 1918.")} seed={33} rot={-2} />}
-          <Note text="the whole country: jumpy about spies" x={120} y={260} size={56} rot={-3} at={t.at('jumpy')} />
-          <Note text="letters in foreign languages" x={120} y={860} size={58} rot={-3} at={t.at('foreign')} color="#ffffff" />
+          <Note text="jumpy about spies" x={120} y={260} size={60} rot={-3} at={t.at('jumpy')} />
+          <DropCard src={P.spyPoster.src} x={1260} y={110} w={520} rot={4} at={t.at('spies.') - 2} />
+          <Note text="letters in foreign languages" x={120} y={900} size={56} rot={-3} at={t.at('foreign')} color="#ffffff" />
         </>
       )}
     </Pic>
@@ -64,10 +70,12 @@ const Deathbed: React.FC<{t: TL}> = ({t}) => {
       <Blamed x={160} y={180} at={t.at('But in August')} w={820}
         rows={[{name: 'Andrew Maggio, the barber', at: -999, clear: -999}, {name: 'Louis Besumer: "a German spy"', at: -999, clear: -999},
           {name: 'Louis Besumer: murder', at: t.at('attacker.') + 8}]} />
-      <Note text="before she dies, she names him" x={1060} y={240} size={56} rot={-3} at={t.at('names her')} color="#ffffff" />
-      <Note text="the victim, charged with murder" x={1060} y={400} size={58} rot={-3} at={t.at('charged')} color={pal.subject} />
-      <Stamp text="9 MONTHS" x={1080} y={540} at={t.at('nine months')} size={130} />
-      <Note text="in jail" x={1520} y={700} size={60} rot={-4} at={t.at('in jail.')} />
+      <Note text="before she dies," x={1060} y={180} size={56} rot={-3} at={t.at('Before she')} color="#ffffff" />
+      <Note text="she names him" x={1100} y={270} size={56} rot={-3} at={t.at('names her')} color="#ffffff" />
+      <Note text="the victim:" x={1060} y={410} size={58} rot={-3} at={t.at('charged')} color={pal.subject} />
+      <Note text="charged with murder" x={1100} y={500} size={58} rot={-3} at={t.at('charged')} color={pal.subject} />
+      <Stamp text="9 MONTHS" x={1080} y={640} at={t.at('nine months')} size={130} />
+      <Note text="in jail" x={1540} y={800} size={60} rot={-4} at={t.at('in jail.')} />
     </Desk>
   );
 };
@@ -76,12 +84,13 @@ const Deathbed: React.FC<{t: TL}> = ({t}) => {
 const Verdict: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Desk a={t.at('At his trial')}>
+    <Pic src={P.courtroom.src} tag={P.courtroom.tag} a={t.at('At his trial')} b={t.at('Remember Besumer.')} z0={1.04} z1={1.12} vignette={0.8}>{() => (<>
+      <AbsoluteFill style={{background: 'rgba(8,6,4,0.55)'}} />
       {g >= t.at('At his trial') && <Highlight text="MAY 1919" x={120} y={110} size={96} at={t.at('At his trial') + 2} seed={35} rot={-2} />}
       <Stamp text="10 MINUTES" x={180} y={320} at={t.at('ten minutes', 1)} size={180} />
       {g >= t.at('not guilty.') && <Highlight text="NOT GUILTY" x={260} y={600} size={110} at={t.at('not guilty.')} seed={37} rot={-3} />}
       <Note text="(barely enough time to find your coat)" x={340} y={850} size={56} rot={-3} at={t.at('find your')} color="#ffffff" />
-    </Desk>
+    </>)}</Pic>
   );
 };
 
@@ -116,8 +125,8 @@ const Body: React.FC = () => {
       <Bed src="music/j_intrigue.mp3" from={0} to={t.frames + 34} vol={0.14} />
       <Sounds t={t} cuts={cuts.map(([f]) => f)}
         stamps={['June', "It's 1918.", 'not guilty.']}
-        writes={['Five weeks', 'Another grocery,', 'hatchet', 'bakery', 'Alive.', 'jumpy', 'foreign', "he's a German", "He isn't.", 'two days', 'names her', 'attacker.', 'charged', 'in jail.', 'find your', "won't be"]}
-        ticks={['Louis Besumer']}
+        writes={['Five weeks', 'Another grocery,', 'hatchet', 'bakery', 'Alive.', 'jumpy', 'foreign', "he's a German", "He isn't.", 'two days', 'Before she', 'names her', 'attacker.', 'charged', 'in jail.', 'find your', "won't be"]}
+        ticks={['Louis Besumer', 'spies.']}
         booms={['nine months', 'ten minutes']} />
     </>
   );

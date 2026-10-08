@@ -4,7 +4,9 @@ import React from 'react';
 import words from '../../public/audio/ch06_gretna.words.json';
 import {Highlight, Note, Tag, useGFrame} from '../kit/Kit';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
-import {Bed, Blamed, Counter, Desk, Door, Pic, Plain, Sounds} from '../kit/ax';
+import {AbsoluteFill} from 'remotion';
+import {Bed, Blamed, Counter, Desk, Door, DropCard, Parallax, Pic, Plain, Sounds} from '../kit/ax';
+import {MASKS} from '../masks';
 import {P} from '../pics';
 
 const N = words as Narration;
@@ -15,14 +17,14 @@ const PAST = [{name: 'Andrew Maggio, the barber', at: -999, clear: -999}, {name:
 const River: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Pic src={P.gretna.src} tag={P.gretna.tag} a={0} b={t.at('Charles and Rosie')} z0={1.02} z1={1.08}>
+    <Parallax src={P.ferry.src} tag={P.ferry.tag} layer="ferry" mask={MASKS.ferry} a={0} b={t.at('Charles and Rosie')} fx={1500} fy={1250} z0={1.06} z1={1.14} pan={[0.03, -0.02]} depth={1.06} tint={null} traceAt={t.at('Mississippi')}>
       {() => (
         <>
           {g >= t.at('Gretna,') && <Highlight text="GRETNA · MARCH 10, 1919" x={110} y={100} size={86} at={t.at('Gretna,')} seed={71} rot={-2} />}
           <Note text="just across the river" x={140} y={250} size={58} rot={-3} at={t.at('across')} color="#ffffff" />
         </>
       )}
-    </Pic>
+    </Parallax>
   );
 };
 
@@ -31,7 +33,7 @@ const Night: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('Charles and Rosie')} push={0.02}>
     <Door x={1360} y={200} h={560} at={t.at('back door.') - 4} cut={t.at('back door.') + 4} />
     <Counter label="BACK DOORS" n={3} at={t.at('back door.') + 12} />
-    <Plain text="Charles and Rosie Cortimiglia, and their daughter Mary, two years old." x={140} y={200} w={1100} size={56} at={t.at('Charles and Rosie') + 2} />
+    <Plain text="Charles and Rosie Cortimiglia, and their little daughter, Mary." x={140} y={200} w={1100} size={56} at={t.at('Charles and Rosie') + 2} />
     <Plain text="Charles and Rosie are badly hurt." x={140} y={520} w={1100} size={56} at={t.at('badly hurt.')} />
     <Plain text="Mary is killed." x={140} y={680} w={1100} size={56} at={t.at('Mary is killed')} />
   </Desk>
@@ -44,19 +46,21 @@ const Accused: React.FC<{t: TL}> = ({t}) => (
       rows={[...PAST, {name: 'Iorlando Jordano', at: t.at('Jordano and his')}, {name: 'Frank Jordano, 18', at: t.at('Frank.')}]} />
     <Note text="the neighbor who ran to help" x={990} y={180} size={50} rot={-3} at={t.at('runs across')} />
     <Note text="her husband: not true" x={990} y={420} size={54} rot={-3} at={t.at("isn't true.")} color="#ffffff" />
-    <Note text="Iorlando: 69, in poor health" x={990} y={560} size={50} rot={-3} at={t.at('69')} />
+    <Note text="Iorlando: old, in poor health" x={990} y={560} size={50} rot={-3} at={t.at('old man,')} />
     <Note text="Frank: over six feet tall" x={990} y={700} size={50} rot={-3} at={t.at('six feet')} />
     <Note text="too big for the hole in the door" x={990} y={840} size={50} rot={-3} at={t.at('Too big,')} />
   </Desk>
 );
 
 const Court: React.FC<{t: TL}> = ({t}) => (
-  <Pic src={P.courthouse.src} tag={P.courthouse.tag} a={t.at("They're convicted")} b={t.at('In December')} z0={1.02} z1={1.08} vignette={0.8}>
+  <Pic src={P.courtroom2.src} tag={`${P.courtroom2.tag} · ${P.sentence.tag}`} a={t.at("They're convicted")} b={t.at('In December')} z0={1.02} z1={1.08} vignette={0.8}>
     {() => (
       <>
-        <Plain text="Convicted anyway." x={120} y={160} size={72} at={t.at("They're convicted")} w={1400} />
-        <Plain text="Frank: sentenced to hang." x={120} y={600} size={60} at={t.at('Frank is')} w={1400} />
-        <Plain text="His father: life in prison." x={120} y={720} size={60} at={t.at('His father')} w={1400} />
+        <AbsoluteFill style={{background: 'rgba(8,6,4,0.5)'}} />
+        <DropCard src={P.sentence.src} x={1100} y={160} w={680} rot={2} at={t.at('Frank is')} look="news" />
+        <Plain text="Convicted anyway." x={120} y={160} size={72} at={t.at("They're convicted")} w={900} />
+        <Plain text="Frank: sentenced to hang." x={120} y={600} size={60} at={t.at('Frank is')} w={900} />
+        <Plain text="His father: life in prison." x={120} y={720} size={60} at={t.at('His father')} w={900} />
       </>
     )}
   </Pic>
@@ -99,7 +103,7 @@ const Body: React.FC = () => {
       <Bed src="music/j_grief.mp3" from={at('In December') - 10} to={t.frames + 34} vol={0.13} fadeIn={30} />
       <Sounds t={t} cuts={cuts.map(([f]) => f)}
         stamps={['Gretna,']}
-        writes={['across', 'Jordano and his', 'Frank.', 'runs across', "isn't true.", '69', 'six feet', 'Too big,', 'In December', 'she lied.', 'set free.']} />
+        writes={['across', 'Jordano and his', 'Frank.', 'runs across', "isn't true.", 'old man,', 'six feet', 'Too big,', 'In December', 'she lied.', 'set free.']} />
     </>
   );
 };

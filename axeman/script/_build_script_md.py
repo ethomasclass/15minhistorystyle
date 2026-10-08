@@ -24,6 +24,8 @@ for i, f in enumerate(files):
     out += [f'## {int(t // 60)}:{int(t % 60):02d} | {NAMES.get(stem, stem)}', '', txt, '']
     n = len(re.sub(r'[*{}]', '', txt).split())
     t += n / (165 if stem == 'ch06' else 185) * 60 + (10 if i == 0 else 2.5)
+for name, title in (('plug_mid', 'Mid-video plug (end of ch04)'), ('plug_end', 'End plug (over the end screen)')):
+    out += [f'## {title}', '', open(os.path.join(HERE, name + '.txt')).read().strip(), '']
 out += ['---', '', open(os.path.join(HERE, '_notes.md')).read().strip(), '']
 open(os.path.join(HERE, 'SCRIPT.md'), 'w').write('\n'.join(out))
 print('SCRIPT.md', words, 'words, est', f'{int(t // 60)}:{int(t % 60):02d}')

@@ -5,7 +5,8 @@ import {AbsoluteFill} from 'remotion';
 import words from '../../public/audio/ch05_why_grocers.words.json';
 import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
-import {Bed, Clip, Desk, Pic, Sounds, Strike} from '../kit/ax';
+import {Bed, Desk, Parallax, Pic, Sounds, Strike} from '../kit/ax';
+import {MASKS} from '../masks';
 import {P} from '../pics';
 
 const N = words as Narration;
@@ -14,7 +15,7 @@ export const CH05_FRAMES = chapterFrames(N, LEAD);
 const Market: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Pic src={P.market.src} tag={P.market.tag} a={0} b={t.at('To a lot')} z0={1.03} z1={1.16}>
+    <Parallax src={P.market.src} tag={P.market.tag} layer="market_cart" mask={MASKS.marketCart} a={0} b={t.at('To a lot')} fx={1500} fy={1450} z0={1.08} z1={1.2} pan={[0.03, -0.03]} depth={1.07} traceAt={t.at('small groceries')}>
       {() => (
         <>
           {g >= t.at('why corner') && <Highlight text="WHY GROCERS?" x={110} y={100} size={100} at={t.at('why corner')} seed={51} rot={-2} />}
@@ -24,7 +25,7 @@ const Market: React.FC<{t: TL}> = ({t}) => {
           <Note text="corner groceries, family in back" x={1000} y={930} size={54} rot={-3} at={t.at('small groceries')} />
         </>
       )}
-    </Pic>
+    </Parallax>
   );
 };
 
@@ -32,16 +33,19 @@ const BlackHand: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <Desk a={t.at('To a lot')}>
-      <Clip src={P.blackHand.src} x={1020} y={140} w={680} rot={3} at={t.at('Black Hand:')} />
-      <Note text="the newspapers said:" x={130} y={110} size={56} rot={-3} at={t.at('newspapers,')} color="#ffffff" />
-      {g >= t.at('The Mafia.') && <Highlight text="THE MAFIA" x={140} y={230} size={110} at={t.at('The Mafia.')} seed={53} rot={-2} />}
-      {g >= t.at('Black Hand:') && <Highlight text="THE BLACK HAND" x={180} y={420} size={96} at={t.at('Black Hand:')} seed={55} rot={-3} />}
-      <Note text="letters demanding money" x={200} y={600} size={60} rot={-3} at={t.at('letters')} />
-      <Note text="pay... or else" x={240} y={730} size={66} rot={-4} at={t.at('threatened')} color={pal.subject} />
-      <Note text="(that really did happen)" x={220} y={880} size={56} rot={-3} at={t.at('really did')} color="#ffffff" />
-      <Tag text={P.blackHand.tag} />
-    </Desk>
+    <Pic src={P.blackHand.src} tag={P.blackHand.tag} a={t.at('To a lot')} b={t.at("But there's a problem.")} z0={1.04} z1={1.14} vignette={0.7}>
+      {() => (
+        <>
+          <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,6,4,0.8) 0%, rgba(8,6,4,0.45) 45%, transparent 75%)'}} />
+          <Note text="the newspapers said:" x={110} y={90} size={56} rot={-3} at={t.at('newspapers,')} color="#ffffff" />
+          {g >= t.at('The Mafia.') && <Highlight text="THE MAFIA" x={120} y={210} size={104} at={t.at('The Mafia.')} seed={53} rot={-2} />}
+          {g >= t.at('Black Hand:') && <Highlight text="THE BLACK HAND" x={160} y={390} size={92} at={t.at('Black Hand:')} seed={55} rot={-3} />}
+          <Note text="letters demanding money" x={180} y={570} size={58} rot={-3} at={t.at('letters')} />
+          <Note text="pay... or else" x={220} y={690} size={64} rot={-4} at={t.at('threatened')} color={pal.subject} />
+          <Note text="(that really did happen)" x={200} y={830} size={54} rot={-3} at={t.at('really did')} color="#ffffff" />
+        </>
+      )}
+    </Pic>
   );
 };
 

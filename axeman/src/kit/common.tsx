@@ -7,7 +7,7 @@ import {useGFrame, usePal} from './Kit';
 export const MAP = {w: 4986, h: 4608};
 
 /** The sound under every handwritten note (one place to change it) and its level. */
-export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
+export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.12};
 
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
   <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>

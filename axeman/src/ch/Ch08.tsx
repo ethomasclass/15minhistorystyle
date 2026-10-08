@@ -60,6 +60,7 @@ const Timeline: React.FC<{t: TL}> = ({t}) => {
       <Note text="Mike Pepitone," x={1360} y={730} size={50} rot={-3} at={t.at('Mike Pepitone,')} />
       <Note text="father of six" x={1380} y={810} size={50} rot={-3} at={t.at('father of six.')} color="#ffffff" />
       <XMark x={1590} y={900} at={t.at('dies of')} size={80} />
+      <Note text="(first reports: two men, an iron bar)" x={1060} y={960} size={40} rot={-2} at={t.at('dies of') + 10} color={pal.box} />
       <Tag text={P.pepitone.tag} />
     </Desk>
   );
@@ -83,7 +84,7 @@ const Stops: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   const end = interpolate(g, [t.at('He just') + 30, t.at('He just') + 60], [1, 0.3], clamp);
   return (
-    <Pic src={P.street.src} tag={P.street.tag} a={t.at("He doesn't get")} b={t.frames + 30} z0={1.04} z1={1.1} look="night" flicker>
+    <Pic src={P.nightStreet.src} tag={P.nightStreet.tag} a={t.at("He doesn't get")} b={t.frames + 30} fy={800} z0={1.04} z1={1.1} look="night" flicker>
       {() => (
         <AbsoluteFill style={{opacity: end}}>
           <Note text="never caught" x={160} y={200} size={84} rot={-4} at={t.at('caught.')} color="#ffffff" />

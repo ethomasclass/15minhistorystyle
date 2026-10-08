@@ -14,6 +14,7 @@ on January 1, 2022), from Library of Congress National Jukebox masters. Provenan
 | 04 | August → "the newspapers have a name" | `g_grip` | 0.17 | Tightening ostinato for two attacks in a week. |
 | 04 | The name and the panic | `a_newsroom` | 0.17 | Ragtime-tinged newsroom swagger: the papers make "the Axeman". |
 | 04 | "And then, nothing" | `r_dix` (first 45 s) | 0.10 | Quiet for the flu and the seven quiet months. |
+| 04 | Mid-video plug | `r_schools` | 0.11 | Light and friendly (Ouija's "fun" theme) for the like-and-subscribe beat. |
 | 05 | Whole chapter | `r_nativism` | 0.13 | Written for immigrants and hostility: lament, then the mob. |
 | 06 | Gretna (heavy) | `w_aftermath` (grave first half) → `j_grief` | 0.11 / 0.13 | The grave set. No jokes, slower voice. |
 | 07 | The letter | `r_spirits_dark` | 0.12 | Fear again, under the letter read word by word. |
@@ -23,7 +24,9 @@ on January 1, 2022), from Library of Congress National Jukebox masters. Provenan
 | 08 | The last attacks | `w_aftermath` from 20 s; heartbeat (`sfx/heartbeat.wav`) under "He just stops" | 0.12 | Grave, building; the heartbeat stops with him. |
 | 09 | Suspects | `r_cold_open` | 0.15 | The investigators' cue. |
 | 09 | The answer | `r_ending` (warm first 30 s) | 0.15 | The channel's closing cue. |
-| 09 | "It played." + 12 s end screen | `pd/ending.mp3` (ODJB, *Tiger Rag*, Victor 18472-B, 1918) | 0.32 | The city answering with jazz. Long fade under the end screen. |
+| 09 | "It played." + end plug + 10 s end screen | `pd/ending.mp3` (ODJB, *Tiger Rag*, Victor 18472-B, 1918) | 0.32 → 0.14 under the thank-you → 0.30 | The city answering with jazz; it ducks under the end plug, then plays out under the end screen. |
+
+**Sound effects:** turned down at your request: cut whooshes 0.30 → 0.13, card ticks 0.45 → 0.20, the logo break's three clock ticks 0.18 → 0.07, note-writing 0.20 → 0.12, title stamps 0.28 → 0.22, the channel intro's card ticks 0.45 → 0.20. The party montage no longer ticks on every cut.
 
 **Levels:** the three PD files used in the video were loudness-normalized (−14 LUFS, −16 for the muffled one) so
 their beds compare with the library cues. The raw transfers stay untouched in `public/music/pd/` for Content ID

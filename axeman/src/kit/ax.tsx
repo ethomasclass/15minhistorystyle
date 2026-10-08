@@ -86,7 +86,7 @@ export const Pic: React.FC<{src: string; tag: string; a: number; b: number; fx?:
   return (
     <AbsoluteFill style={{background: '#0b0a08', overflow: 'hidden'}}>
       <Picture src={src} place={place} size={size} bw={LOOK[look]} />
-      {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint ?? undefined} />}
+      {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint ?? undefined} strength={interpolate(f, [(traceAt ?? a + 4) - 2, (traceAt ?? a + 4) + 6], [0, 1], clamp)} />}
       {mask && <Traced paths={mask.data.shapes.subject} place={place} at={traceAt ?? a + 4} dur={12} width={5} part={0.93} />}
       <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,${vignette}) 100%)`}} />
       {flicker && <Flicker />}
@@ -96,9 +96,58 @@ export const Pic: React.FC<{src: string; tag: string; a: number; b: number; fx?:
   );
 };
 
+/**
+ * The Ouija parallax, for archival pictures: the subject (cut out by tools/mask.py, split by tools/layers.py) floats
+ * at `depth` over the picture with the subject painted out, so a slow push and pan reads as depth. The subject keeps
+ * its coral tint and teal trace. Falls back to the flat Pic until the layers exist.
+ */
+export const Parallax: React.FC<{src: string; tag: string; layer: string; mask: MaskRef; a: number; b: number; fx?: number; fy?: number; z0?: number; z1?: number;
+  pan?: [number, number]; depth?: number; look?: keyof typeof LOOK; tint?: string | null; traceAt?: number; vignette?: number; flicker?: boolean; tagTop?: boolean;
+  children?: (p: Place) => React.ReactNode}> = ({src, tag, layer, mask, a, b, fx, fy, z0 = 1.05, z1 = 1.14, pan = [-0.02, 0.02], depth = 1.06, look = 'bw', tint, traceAt,
+  vignette = 0.62, flicker, tagTop, children}) => {
+  const f = useCurrentFrame();
+  const fgSrc = `img/layers/${layer}_fg.png`, bgSrc = `img/layers/${layer}_bg.jpg`;
+  if (!has(src) || !hasFile(fgSrc) || !hasFile(bgSrc)) {
+    return <Pic src={src} tag={tag} a={a} b={b} fx={fx} fy={fy} z0={z0} z1={z1} look={look} mask={mask} tint={tint} traceAt={traceAt} vignette={vignette} flicker={flicker} tagTop={tagTop}>{children}</Pic>;
+  }
+  const [W, H] = sizeOf(src);
+  const u = interpolate(f, [a, b], [0, 1], {...clamp, easing: Easing.inOut(Easing.sin)});
+  const z = z0 + (z1 - z0) * u;
+  const base = Math.max(1920 / W, 1080 / H) * z;
+  // camera centre in source pixels, kept where the background still covers the frame
+  const cx0 = (fx ?? W / 2) + (pan[0] + (pan[1] - pan[0]) * u) * W;
+  const cx = Math.min(W - 960 / base, Math.max(960 / base, cx0));
+  const cy = Math.min(H - 540 / base, Math.max(540 / base, fy ?? H / 2));
+  const dr = {x: noise2D(`${layer}x`, f * 0.018, 0) * 3, y: noise2D(`${layer}y`, 0, f * 0.018) * 3};
+  const place = (d: number): Place => {
+    const sc = base * d;
+    return {left: 960 - cx * sc + dr.x * d, top: 540 - cy * sc + dr.y * d, scale: sc};
+  };
+  const bg = place(1);
+  const fg = place(depth);
+  const img = (p: string, pl: Place, extra?: React.CSSProperties) => (
+    <Img src={staticFile(p)} style={{position: 'absolute', left: pl.left, top: pl.top, width: W * pl.scale, height: H * pl.scale, filter: LOOK[look], ...extra}} />
+  );
+  return (
+    <AbsoluteFill style={{background: '#0b0a08', overflow: 'hidden'}}>
+      {img(bgSrc, bg)}
+      {/* contact shadow: the lifted subject darkens what's behind it */}
+      {img(fgSrc, fg, {filter: 'brightness(0) blur(14px)', opacity: 0.35, transform: 'translate(8px, 12px)'})}
+      {img(fgSrc, fg)}
+      {tint !== null && <Tint mask={mask.alpha} place={fg} size={[W, H]} color={tint ?? undefined} strength={interpolate(f, [(traceAt ?? a + 4) - 2, (traceAt ?? a + 4) + 6], [0, 1], clamp)} />}
+      <Traced paths={mask.data.shapes.subject} place={fg} at={traceAt ?? a + 4} dur={12} width={5} part={0.93} />
+      <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,${vignette}) 100%)`}} />
+      {flicker && <Flicker />}
+      {children?.(fg)}
+      <Tag text={tag} y={tagTop ? 40 : undefined} />
+    </AbsoluteFill>
+  );
+};
+
 /** A tall picture fitted whole over a blurred, darkened copy of itself (portraits, sheet music on a 16:9 frame). */
-export const Fit: React.FC<{src: string; tag: string; a: number; b: number; z0?: number; z1?: number; look?: keyof typeof LOOK; card?: boolean; x?: number; children?: (p: Place) => React.ReactNode}> = ({
-  src, tag, a, b, z0 = 1, z1 = 1.06, look = 'bw', card = true, x, children,
+export const Fit: React.FC<{src: string; tag: string; a: number; b: number; z0?: number; z1?: number; look?: keyof typeof LOOK; card?: boolean; x?: number;
+  mask?: MaskRef; tint?: string | null; traceAt?: number; children?: (p: Place) => React.ReactNode}> = ({
+  src, tag, a, b, z0 = 1, z1 = 1.06, look = 'bw', card = true, x, mask, tint, traceAt, children,
 }) => {
   const f = useCurrentFrame();
   if (!has(src)) return <AbsoluteFill><DarkPaper /><StandIn x={660} y={90} w={600} h={900} label={src} /><Tag text={tag} /></AbsoluteFill>;
@@ -113,6 +162,8 @@ export const Fit: React.FC<{src: string; tag: string; a: number; b: number; z0?:
       <Img src={staticFile(src)} style={{position: 'absolute', inset: -40, width: 2000, height: 1160, objectFit: 'cover', filter: `${LOOK[look]} blur(22px) brightness(0.35)`}} />
       {card && <div style={{position: 'absolute', left: left - 14, top: top - 14, width: w + 28, height: h + 28, background: '#f4efe6', boxShadow: '0 20px 50px rgba(0,0,0,0.8)'}} />}
       <Img src={staticFile(src)} style={{position: 'absolute', left, top, width: w, height: h, filter: LOOK[look]}} />
+      {mask && tint !== null && traceAt !== undefined && <Tint mask={mask.alpha} place={{left, top, scale: s}} size={size} color={tint ?? undefined} strength={interpolate(f, [traceAt - 2, traceAt + 6], [0, 1], clamp)} />}
+      {mask && traceAt !== undefined && <Traced paths={mask.data.shapes.subject} place={{left, top, scale: s}} at={traceAt} dur={12} width={5} part={0.93} />}
       {children?.({left, top, scale: s})}
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.55) 100%)'}} />
       <Tag text={tag} />
@@ -362,14 +413,29 @@ export const Counter: React.FC<{label: string; n: number | string; at: number; c
 };
 
 const jit = (seed: string, i: number, amp: number) => (random(`${seed}${i}`) - 0.5) * amp;
-const wobblyRect = (x: number, y: number, w: number, h: number, seed: string) => {
+const wobblyRect = (x: number, y: number, w: number, h: number, seed: string, amp = 6) => {
   const pts = [[x, y], [x + w, y], [x + w, y + h], [x, y + h], [x + 4, y - 3]];
-  return pts.map(([px, py], i) => `${i ? 'L' : 'M'}${(px + jit(seed + 'x', i, 6)).toFixed(1)},${(py + jit(seed + 'y', i, 6)).toFixed(1)}`).join(' ');
+  return pts.map(([px, py], i) => `${i ? 'L' : 'M'}${(px + jit(seed + 'x', i, amp)).toFixed(1)},${(py + jit(seed + 'y', i, amp)).toFixed(1)}`).join(' ');
+};
+/** A ragged hole: a rectangle whose edges are splintered, as if chiseled out of the wood. */
+const raggedRect = (x: number, y: number, w: number, h: number, seed: string) => {
+  const pts: number[][] = [];
+  const side = (x0: number, y0: number, x1: number, y1: number, n: number, k: string) => {
+    for (let i = 0; i < n; i++) {
+      const u = i / n;
+      const nx = -(y1 - y0), ny = x1 - x0, l = Math.hypot(nx, ny);
+      const d = (i % 2 ? 1 : -0.4) * Math.abs(jit(seed + k, i, 16));
+      pts.push([x0 + (x1 - x0) * u + (nx / l) * d, y0 + (y1 - y0) * u + (ny / l) * d]);
+    }
+  };
+  side(x, y, x + w, y, 9, 't'); side(x + w, y, x + w, y + h, 11, 'r'); side(x + w, y + h, x, y + h, 9, 'b'); side(x, y + h, x, y, 11, 'l');
+  return pts.map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)},${py.toFixed(1)}`).join(' ') + ' Z';
 };
 
 /**
- * The back door: a teal line drawing (frame, four panels, knob) that draws on at `at`. At `cut` the lower-left panel
- * flashes coral and falls out, leaving a dark hole. `h` is the door's height; (x, y) its top-left.
+ * The back door: a teal pen drawing (jamb, sill, four bevelled panels, hinges, knob and keyhole), every line gone
+ * over twice like a quick sketch. At `cut` the lower-left panel flashes coral and falls out, leaving a ragged dark
+ * hole with chisel marks. `h` is the door's height; (x, y) its top-left.
  */
 export const Door: React.FC<{x: number; y: number; h: number; at: number; cut?: number; done?: boolean; label?: string}> = ({x, y, h, at, cut = 1e7, done = false, label}) => {
   const g = useGFrame();
@@ -377,27 +443,60 @@ export const Door: React.FC<{x: number; y: number; h: number; at: number; cut?: 
   const pal = usePal();
   if (g < at) return null;
   const w = h * 0.46;
+  const sw = Math.max(3, h / 120);
   const draw = interpolate(g, [at, at + 12], [0, 1], clamp);
+  const draw2 = interpolate(g, [at + 4, at + 16], [0, 1], clamp);
   const pw = w * 0.34, ph = h * 0.3;
   const px = x + w * 0.11, py = y + h * 0.56; // lower-left panel: the one that gets chiseled out
-  const panels = [[x + w * 0.11, y + h * 0.08, pw, h * 0.38], [x + w * 0.55, y + h * 0.08, pw, h * 0.38], [x + w * 0.55, py, pw, ph]];
+  const panels: [number, number, number, number][] = [[x + w * 0.11, y + h * 0.08, pw, h * 0.38], [x + w * 0.55, y + h * 0.08, pw, h * 0.38], [x + w * 0.55, py, pw, ph]];
   const out = done ? 1 : interpolate(f, [cut, cut + 14], [0, 1], {...clamp, easing: Easing.in(Easing.quad)});
   const flash = done ? 0 : interpolate(g, [cut - 4, cut, cut + 6], [0, 1, 0], clamp);
-  const stroke = {fill: 'none', stroke: pal.mark, strokeWidth: 6, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const, pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 - draw};
+  const gone = done || g >= cut;
+  const st = (p: number, width = sw, op = 1) => ({fill: 'none', stroke: pal.mark, strokeWidth: width, strokeOpacity: op, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const,
+    pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 - p});
+  const twice = (d: (k: string) => string, key: string, width = sw) => (
+    <React.Fragment key={key}>
+      <path d={d(key)} {...st(draw, width)} />
+      <path d={d(key + 'b')} {...st(draw2, width * 0.45, 0.55)} />
+    </React.Fragment>
+  );
+  const bevel = (a: number, b: number, c: number, d: number, k: string) => wobblyRect(a + c * 0.14, b + d * 0.08, c * 0.72, d * 0.84, k, 3);
   return (
     <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
-      {/* the opening behind the panel: dark once the panel is gone */}
-      {(done || g >= cut) && <path d={wobblyRect(px, py, pw, ph, 'hole')} fill="#050403" stroke={pal.subject} strokeWidth={5} opacity={Math.max(out, done ? 1 : 0)} />}
-      <path d={wobblyRect(x, y, w, h, 'frame')} {...stroke} strokeWidth={7} />
-      {panels.map(([a, b, c, d], i) => <path key={i} d={wobblyRect(a, b, c, d, `p${i}`)} {...stroke} />)}
-      <circle cx={x + w * 0.88} cy={y + h * 0.52} r={9} fill={pal.mark} opacity={draw} />
+      {/* jamb and sill */}
+      {twice((k) => `M${x - w * 0.08},${y + h + 2} L${x - w * 0.08 + jit(k, 1, 4)},${y - h * 0.04} L${x + w * 1.08 + jit(k, 2, 4)},${y - h * 0.04 + jit(k, 3, 4)} L${x + w * 1.08},${y + h + 2}`, 'jamb', sw * 0.8)}
+      {twice((k) => `M${x - w * 0.2},${y + h + sw * 2 + jit(k, 1, 3)} L${x + w * 1.2},${y + h + sw * 2 + jit(k, 2, 3)}`, 'sill', sw * 1.1)}
+      {/* the opening behind the panel: dark and splintered once the panel is gone */}
+      {gone && (
+        <g opacity={done ? 1 : Math.min(1, out * 2)}>
+          <path d={raggedRect(px, py, pw, ph, 'hole')} fill="#050403" stroke={pal.subject} strokeWidth={sw * 0.9} strokeLinejoin="round" />
+          {[0, 1, 2, 3, 4, 5].map((i) => {
+            const ex = i < 3 ? px + pw * (0.2 + i * 0.3) : px + (i === 3 ? -6 : pw + 6), ey = i < 3 ? py - 4 : py + ph * (0.3 + (i - 3) * 0.25);
+            const dx = i < 3 ? jit('cm', i, 10) : (i === 3 ? -14 : 14), dy = i < 3 ? -16 : jit('cm', i, 8);
+            return <line key={i} x1={ex} y1={ey} x2={ex + dx} y2={ey + dy} stroke={pal.subject} strokeWidth={sw * 0.6} strokeLinecap="round" />;
+          })}
+        </g>
+      )}
+      {twice((k) => wobblyRect(x, y, w, h, k), 'frame', sw * 1.15)}
+      {panels.map(([a, b, c, d], i) => (
+        <React.Fragment key={i}>
+          {twice((k) => wobblyRect(a, b, c, d, k), `p${i}`)}
+          <path d={bevel(a, b, c, d, `bv${i}`)} {...st(draw2, sw * 0.5, 0.45)} />
+        </React.Fragment>
+      ))}
+      {/* hinges, knob, keyhole */}
+      {[0.14, 0.82].map((v, i) => <path key={i} d={wobblyRect(x - sw * 1.5, y + h * v, sw * 4, h * 0.07, `hg${i}`, 2)} {...st(draw2, sw * 0.7)} />)}
+      <circle cx={x + w * 0.88} cy={y + h * 0.52} r={sw * 1.8} fill={pal.mark} opacity={draw} />
+      <path d={`M${x + w * 0.88},${y + h * 0.56} l0,${h * 0.03}`} stroke={pal.mark} strokeWidth={sw * 0.8} strokeLinecap="round" opacity={draw2} />
       {/* the panel itself: falls away at `cut` */}
       {out < 1 && (
         <g transform={`translate(0 ${out * h * 0.5}) rotate(${out * 24} ${px + pw / 2} ${py + ph / 2})`} opacity={1 - out}>
-          <path d={wobblyRect(px, py, pw, ph, 'p3')} {...stroke} fill={g >= cut - 4 ? pal.subject : 'none'} fillOpacity={0.35 + flash * 0.5} />
+          {g >= cut - 4 && <path d={wobblyRect(px, py, pw, ph, 'p3')} fill={pal.subject} fillOpacity={0.3 + flash * 0.55} stroke="none" />}
+          {twice((k) => wobblyRect(px, py, pw, ph, k), 'p3')}
+          <path d={bevel(px, py, pw, ph, 'bv3')} {...st(draw2, sw * 0.5, 0.45)} />
         </g>
       )}
-      {label && g >= at + 8 && <text x={x + w / 2} y={y + h + 70} textAnchor="middle" fontFamily='"Nanum Pen Script"' fontSize={62} fill={pal.mark}
+      {label && g >= at + 8 && <text x={x + w / 2} y={y + h + 80} textAnchor="middle" fontFamily='"Nanum Pen Script"' fontSize={62} fill={pal.mark}
         style={{paintOrder: 'stroke', stroke: '#111', strokeWidth: 6}}>{label}</text>}
     </svg>
   );
@@ -443,7 +542,7 @@ export const Clock: React.FC<{cx: number; cy: number; r: number; at: number; a: 
   const pal = usePal();
   if (g < at) return null;
   const draw = interpolate(g, [at, at + 10], [0, 1], clamp);
-  const m = Math.floor(interpolate(g, [a, b], [m0, m1], clamp));
+  const m = b > a ? Math.floor(interpolate(g, [a, b], [m0, m1], clamp)) : m0;
   const ma = (m / 60) * Math.PI * 2 - Math.PI / 2;
   const ha = ((m / 60) / 12) * Math.PI * 2 - Math.PI / 2;
   const ring = Array.from({length: 77}, (_, i) => {
@@ -457,10 +556,15 @@ export const Clock: React.FC<{cx: number; cy: number; r: number; at: number; a: 
       {glow > 0 && <circle cx={cx} cy={cy} r={r * 1.5} fill={pal.subject} opacity={0.12 * glow} />}
       {wedge && <path d={wedge} fill={pal.subject} opacity={0.75} />}
       <path d={ring} fill="none" stroke={pal.mark} strokeWidth={10} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
+      <path d={ring} transform={`rotate(4 ${cx} ${cy}) translate(${cx * 0.012} ${cy * 0.012}) scale(0.988)`} fill="none" stroke={pal.mark} strokeOpacity={0.5} strokeWidth={4} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
       {draw >= 1 && Array.from({length: 12}, (_, i) => {
         const t = (i / 12) * Math.PI * 2;
         const r0 = i % 3 === 0 ? 0.74 : 0.84;
         return <line key={i} x1={cx + Math.sin(t) * r * r0} y1={cy - Math.cos(t) * r * r0} x2={cx + Math.sin(t) * r * 0.95} y2={cy - Math.cos(t) * r * 0.95} stroke={pal.mark} strokeWidth={i % 3 === 0 ? 9 : 5} strokeLinecap="round" />;
+      })}
+      {draw >= 1 && [[12, 0], [3, 1], [6, 2], [9, 3]].map(([n, q]) => {
+        const t = (q / 4) * Math.PI * 2;
+        return <text key={n} x={cx + Math.sin(t) * r * 0.58} y={cy - Math.cos(t) * r * 0.58 + r * 0.075} textAnchor="middle" fontFamily='"Abril Fatface"' fontSize={r * 0.2} fill="#f4efe6" opacity={0.9}>{n}</text>;
       })}
       {draw >= 1 && (
         <>
@@ -491,9 +595,9 @@ export const Shadow: React.FC<{a: number; b: number; y?: number; size?: number; 
       background: 'radial-gradient(ellipse 900px 620px at 50% 46%, rgba(255,250,238,0.2) 0%, rgba(255,250,238,0.07) 55%, transparent 100%)'}} />
     <svg style={{position: 'absolute', left: x, top: y, overflow: 'visible', opacity: o, filter: 'blur(12px)'}} width={size} height={size}>
       <g transform={`scale(${s}) rotate(${-18 + u * 10} 50 50)`}>
-        <rect x={46} y={18} width={7} height={86} rx={3} fill="#030201" />
-        <path d="M44,14 C30,10 18,14 10,24 C16,30 18,40 14,52 C28,48 38,40 46,34 Z" fill="#030201" />
-        <rect x={42} y={12} width={14} height={22} rx={3} fill="#030201" />
+        <path d="M47,14 C49,40 51,70 48,106 L55,106 C57,70 56,40 54,14 Z" fill="#030201" />
+        <path d="M45,8 L57,8 L59,24 L45,26 C38,27 30,31 22,40 C18,44 15,50 13,56 C9,44 9,26 14,12 C16,6 20,2 24,0 C30,6 37,8 45,8 Z" fill="#030201" />
+        <path d="M57,10 L64,13 L64,21 L58,23 Z" fill="#030201" />
       </g>
     </svg>
     </>
@@ -516,10 +620,10 @@ export const Sounds: React.FC<{t: TL; cuts: number[]; stamps?: string[]; writes?
   t, cuts, stamps = [], writes = [], ticks = [], booms = [], extra = [],
 }) => (
   <>
-    {cuts.slice(1).map((f, i) => <Sfx key={`w${i}`} at={f} src="sfx/whoosh.wav" volume={0.3} />)}
-    {stamps.map((c, i) => <Sfx key={`s${i}`} at={t.at(c)} src="sfx/stamp.wav" volume={0.28} />)}
+    {cuts.slice(1).map((f, i) => <Sfx key={`w${i}`} at={f} src="sfx/whoosh.wav" volume={0.13} />)}
+    {stamps.map((c, i) => <Sfx key={`s${i}`} at={t.at(c)} src="sfx/stamp.wav" volume={0.22} />)}
     {writes.map((c, i) => <Sfx key={`n${i}`} at={t.at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
-    {ticks.map((c, i) => <Sfx key={`t${i}`} at={typeof c === 'number' ? c : t.at(c)} src="sfx/tick.wav" volume={0.45} />)}
+    {ticks.map((c, i) => <Sfx key={`t${i}`} at={typeof c === 'number' ? c : t.at(c)} src="sfx/tick.wav" volume={0.2} />)}
     {booms.map((c, i) => <Sfx key={`b${i}`} at={t.at(c)} src="sfx/boom.wav" volume={0.42} />)}
     {extra.map(([f, src, v], i) => <Sfx key={`x${i}`} at={f} src={src} volume={v} />)}
   </>
@@ -564,24 +668,38 @@ export const Pavement: React.FC = () => (
   </AbsoluteFill>
 );
 
-/** The witnesses' description as a police sketch: a drawn teal figure in a slouch hat, labelled as each detail is spoken. */
-export const Witness: React.FC<{x: number; y: number; h: number; at: number}> = ({x, y, h, at}) => {
+/**
+ * The witnesses' description as a police sketch: a faceless, heavy-set man in a slouch hat and dark suit, drawn in teal
+ * and gone over twice. `parts` reveal the hat, the body and the suit as each is spoken (frames; omit to draw all at `at`).
+ */
+export const Witness: React.FC<{x: number; y: number; h: number; at: number; hat?: number; body?: number; suit?: number}> = ({x, y, h, at, hat, body, suit}) => {
   const g = useGFrame();
   const pal = usePal();
   if (g < at) return null;
-  const p = interpolate(g, [at, at + 14], [0, 1], clamp);
   const s = h / 100;
-  const st = {fill: 'none', stroke: pal.mark, strokeWidth: 6 / s, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 - p};
+  const p = (from: number | undefined) => interpolate(g, [from ?? at, (from ?? at) + 12], [0, 1], clamp);
+  const line = (d: string, k: number, from?: number, op = 1, w = 0.9) => (
+    <path d={d} fill="none" stroke={pal.mark} strokeWidth={w} strokeOpacity={op} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p(from) * (k ? 0.96 : 1)}
+      transform={k ? 'translate(0.5 0.4)' : undefined} />
+  );
+  const both = (d: string, from?: number, w = 0.9) => <>{line(d, 0, from, 1, w)}{line(d, 1, from, 0.45, w * 0.45)}</>;
+  // the figure lives in a 64 x 100 box
+  const HEAD = 'M27,17 C26,23 28,28 32,28 C36,28 38,23 37,17';
+  const HAT = 'M12,17 C18,13 25,13 32,13 C40,13 47,14 52,18 C47,20 42,18 32,18 C22,18 17,20 12,17 Z M21,14 C21,7 25,4 32,4 C39,4 43,7 43,14 M30,4.5 C31,7 33,7 34,4.5 M21.5,11.5 C28,13 36,13 42.5,11.5';
+  const COAT = 'M18,32 C22,29 27,28.5 32,30 C37,28.5 42,29 46,32 L52,60 L47,61 L46,82 L18,82 L17,61 L12,60 Z M32,30 L28,44 L32,56 L36,44 Z';
+  const LEGS = 'M20,82 L20,98 L30,98 L31,84 M33,84 L34,98 L44,98 L44,82';
+  const SUIT = 'M28,44 L22,40 M36,44 L42,40 M24,58 L30,58 M24,62 L30,62 M32,58 L32,80 M14,60 C13,52 15,44 18,36 M50,60 C51,52 49,44 46,36';
   return (
-    <svg style={{position: 'absolute', left: x, top: y, overflow: 'visible'}} width={h * 0.6} height={h}>
+    <svg style={{position: 'absolute', left: x, top: y, overflow: 'visible'}} width={64 * s} height={100 * s}>
       <g transform={`scale(${s})`}>
-        {/* slouch hat: a wide drooping brim and a soft crown */}
-        <path d="M12,15 C18,11 26,10 30,10 C34,10 42,11 48,15 C42,14 38,15 30,15 C22,15 18,14 12,15 Z" {...st} />
-        <path d="M21,12 C22,4 38,4 39,12" {...st} />
-        <circle cx={30} cy={20} r={6.5} {...st} />
-        {/* heavy-set body in a dark suit */}
-        <path d="M14,32 C16,27 22,26 30,26 C38,26 44,27 46,32 L49,62 L42,62 L41,98 L32,98 L30,66 L28,98 L19,98 L18,62 L11,62 Z" {...st} />
-        <path d="M30,27 L27,40 L30,54 L33,40 Z" {...st} />
+        {/* the face stays blank: nobody saw it */}
+        <path d={`${HEAD} Z`} fill="#0d0c09" opacity={p(body) * 0.8} />
+        {both(HEAD, body)}
+        {both(HAT, hat, 1)}
+        {both(COAT, body, 1.1)}
+        {both(LEGS, body)}
+        {both(SUIT, suit, 0.7)}
+        <text x={32} y={25} textAnchor="middle" fontFamily='"Nanum Pen Script"' fontSize={9} fill={pal.mark} opacity={p(body) * 0.85}>?</text>
       </g>
     </svg>
   );

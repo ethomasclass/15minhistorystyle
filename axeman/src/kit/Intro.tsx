@@ -97,11 +97,11 @@ const Body: React.FC = () => {
         <Wordmark clockAt={clockAt} numAt={numAt} minAt={minAt} hisAt={hisAt} />
       </AbsoluteFill>
       <Finish vignette={0.45} />
-      {CARDS.map((_, i) => <Sfx key={i} at={i * 6} src="sfx/tick.wav" volume={0.45} />)}
-      <Sfx at={clearAt} src="sfx/whoosh.wav" volume={0.5} />
-      <Sfx at={clockAt + 8} src="sfx/tick.wav" volume={0.5} />
-      <Sfx at={clockAt + 14} src="sfx/tick.wav" volume={0.5} />
-      <Sfx at={clockAt + 20} src="sfx/tick.wav" volume={0.5} />
+      {CARDS.map((_, i) => <Sfx key={i} at={i * 6} src="sfx/tick.wav" volume={0.2} />)}
+      <Sfx at={clearAt} src="sfx/whoosh.wav" volume={0.25} />
+      <Sfx at={clockAt + 8} src="sfx/tick.wav" volume={0.25} />
+      <Sfx at={clockAt + 14} src="sfx/tick.wav" volume={0.25} />
+      <Sfx at={clockAt + 20} src="sfx/tick.wav" volume={0.25} />
       <Sfx at={minAt} src="sfx/stamp.wav" volume={0.45} />
       <Sfx at={hisAt} src="sfx/boom.wav" volume={0.5} />
       <Sequence from={numAt - 4} layout="none"><Audio src={staticFile('music/title_sting.mp3')} volume={(f) => interpolate(f, [0, 3, 50, 74], [0, 0.45, 0.45, 0], clamp)} /></Sequence>

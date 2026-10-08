@@ -23,8 +23,20 @@
     breaks of the night-attack chapters.
   - **The party night (ch07)**: hard cuts on the beat of a real 1918 Original Dixieland Jass Band record (public
     domain), card montage with a counter, and the clock reaching 12:15 — then silence and "Nobody was attacked that night."
+- **Masks and parallax:** coral tint + teal trace on the pianist (cover), the Maggios, Besumer, the shotgun man in the
+  1919 cartoon, the flu patient, the market cart and the Gretna ferry (trace only: ch06 is quiet). The flu ward, the
+  French Market and the ferry are 2.5D parallax shots (`tools/layers.py`, the Ouija technique for photographs).
 - **Music:** see `MUSIC.md`. The Davilla song itself waits on a scan of the score (HNOC request drafted).
-- **Images:** see `IMAGES.md`. Archival first; AI paintings only for the gaps listed in `GEMINI_PROMPTS.md`.
+- **Images:** see `IMAGES.md`. Archival only: no AI images in this video (your call). Masks give the coral tint and teal trace; `tools/layers.py` splits masked photos into parallax layers.
+
+## Plugs (your request)
+
+Two friendly like-and-subscribe reminders, voiced separately so they can be cut without re-voicing a chapter:
+- **Mid-video** (`script/plug_mid.txt`, ~10 s), at the end of ch04 right after "the Axeman is quiet": "Quick favor,
+  while things are quiet. If you're enjoying this one, tap like and subscribe. It honestly helps a small history
+  channel more than you'd think. / Okay. Back to New Orleans."
+- **End** (`script/plug_end.txt`, ~7 s), over the end screen after "It played.": "Thanks so much for watching. If you
+  liked this one, give it a like and subscribe for more 15 Minute History. I'll see you next time."
 
 ## Pronunciation (for ElevenLabs)
 
@@ -80,13 +92,17 @@ Test file: `script/tests/pronunciation.txt`. Listen before voicing the chapters.
 10. **1891 lynching (ch05).** Police chief David Hennessy was shot in October 1890; on March 14, 1891 a mob stormed
     Parish Prison and killed 11 Italian men, some of whom had just been acquitted and others not yet tried. Usually
     described as the largest single mass lynching in U.S. history; the script hedges with "It's often called".
-11. **Gretna (ch06).** March 10, 1919 (the Exoneration Registry says about 3 a.m., March 9–10). Mary, two years old,
-    killed in her mother's arms. Iorlando Jordano (69) and Frank (18 in most accounts; 17 in the Exoneration Registry).
+11. **Gretna (ch06).** March 10, 1919 (the Exoneration Registry says about 3 a.m., March 9–10). Mary killed in her
+    mother's arms. **Ages differ between sources**, so the script gives none: Mary is "two years old" in the Exoneration
+    Registry, "infant" on Wikipedia and "4-year-old" in the AP item of October 12, 1919; Iorlando is 68, 69 or (AP) 76;
+    Frank 17 or 18. The script says "their little daughter, Mary" and "an old man, in poor health".
     Convicted; Frank sentenced to hang, Iorlando to life. Rosie recanted December 7, 1920 (Crime Library; National
     Registry of Exonerations). "Too big, many said, to fit through the hole in the door": Wikipedia/Katz.
-12. **The letter (ch07).** Dated "Hell, March 13, 1919". Publication date is reported as March 13, 14 or 16; the script
-    says "Three days after Gretna, a letter turns up... And the Times-Picayune prints it," which doesn't commit to a
-    print date. **Check the actual *Times-Picayune* page (NewsBank) before publishing.** Quoted lines are verbatim from
+12. **The letter (ch07).** Dated "Hell, March 13, 1919". Secondary sources give March 13, 14 or 16 for publication.
+    *The Herald* (New Orleans), March 20, 1919 ("That Ax-Man's Letter", Chronicling America, shown on screen) says the
+    letter "made good Sunday reading", so the *Times-Picayune* printed it on **Sunday, March 16, 1919**, matching HNOC
+    and the St. Tammany library. The script says "Three days after Gretna, a letter turns up at the newspapers"
+    (written March 13) "And the Times-Picayune prints it" (no date). Quoted lines are verbatim from
     the letter as reprinted: "Esteemed Mortal", "They have never caught me and they never will", "a spirit and a demon
     from the hottest hell" (some reprints: "a fell demon"), "I am very fond of jazz music, and I swear by all the devils
     in the nether regions that every person shall be spared in whose home a jazz band is in full swing", "jazz it out",
@@ -95,16 +111,25 @@ Test file: `script/tests/pronunciation.txt`. Listen before voicing the chapters.
     Tuesday night" is the night of March 18–19, St. Joseph's Night. Consistent.
 14. **The party (ch07).** Dance halls full, bands at house parties: Katz 2010, p. 59; HNOC. "Played records or pounded
     on the family piano" is from later retellings and is hedged with "reportedly".
-15. **The song (ch01, ch07).** *The Mysterious Axman's Jazz (Don't Scare Me Papa)*, Joseph John Davilla, arr. Jos.
+15. **The cover (ch01).** The script describes the real cover: a family playing piano, trombone and drum, the door
+    open behind them. One line of the cover's small print, the title of Davilla's earlier song, contains a racial slur;
+    the display copy used in the video covers that line (`img/ch01/mysterious_axman_jazz_cover_1919_display.jpg`). The
+    original file is kept unaltered next to it.
+15b. **The song (ch01, ch07).** *The Mysterious Axman's Jazz (Don't Scare Me Papa)*, Joseph John Davilla, arr. Jos.
     Garrow, World's Music Publishing Co., New Orleans, 1919 (HNOC 2008.0052). HNOC says Davilla wrote it "while he
     waited for the axman." **Cover description in ch01 (band, woman at the piano looking over her shoulder) must be
     checked against the scan** and adjusted if needed.
-16. **"Probably never wrote it" (ch07).** No proof either way. Most modern accounts treat the letter as a hoax
-    (newspaper prank or publicity stunt). The script hedges: "Probably not, because he probably never wrote it... Nobody
-    ever proved who wrote it."
+16. **"Probably never wrote it" (ch07).** No proof either way. Most modern accounts treat the letter as a hoax. The
+    script now cites the contemporary evidence: *The Herald*, March 20, 1919, called it "this joke-letter" and said "it
+    looks to us that someone put one over on the Times-Picayune" (quoted as "Someone put one over on the
+    Times-Picayune," it said). The same editorial says the *Times-Picayune* "gloated over it Wednesday morning by
+    publishing a cartoon showing one of the many families in a state of fright, the mother... playing jazz music":
+    that cartoon is the sheet-music cover art ("Courtesy of The Times-Picayune, March 19, 1919").
 17. **1919 attacks (ch08).** Steve Boca, August 10, 1919 (survived); Sarah Laumann, 19, September 3, 1919 (survived,
     attacked through an open window; the script doesn't mention a door for her); Mike Pepitone, October 27, 1919
-    (killed; father of six). Last attack attributed.
+    (killed; father of six). Last attack attributed. The AP item shown on screen (October 28, 1919) reported "blows
+    from an iron bar" and "two assailants"; later accounts say one large man with an axe. The video notes the first
+    reports in orange (a disputed claim) and the narration keeps "a large man".
 18. **Los Angeles (ch09).** A 1921 newspaper story (dates given as December 1920 or December 1921) that Pepitone's
     widow, Esther Albano, shot a man called Joseph Mumfre/Manfre in Los Angeles and said he killed her husband.
     Researchers have not found independent records confirming it; the script says "A couple of years later,

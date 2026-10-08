@@ -4,7 +4,8 @@ import React from 'react';
 import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch01_cold_open.words.json';
 import {clamp} from '../lib/anim';
-import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from '../kit/Kit';
+import {Arrow, Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from '../kit/Kit';
+import {MASKS} from '../masks';
 import {Sfx} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
 import {makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
@@ -21,26 +22,39 @@ const TITLE_FRAMES = 150;
 const END = Math.ceil(N.duration * 30) + 20;
 export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 
-/** The sheet music, whole, on the desk. Marks are placed as fractions of the picture (fx, fy). */
-const Sheet: React.FC<{t: TL}> = ({t}) => (
-  <Fit src={P.sheet.src} tag={P.sheet.tag} a={0} b={t.at("That's")} z0={1} z1={1.07}>
-    {(p) => {
-      const S = (fx: number, fy: number) => [p.left + fx * SHEET[0] * p.scale, p.top + fy * SHEET[1] * p.scale];
-      const [bx, by] = S(0.5, 0.55);
-      const [wx, wy] = S(0.32, 0.62);
-      return (
-        <>
-          <Note text="new orleans, 1919" x={1330} y={140} size={56} rot={-4} at={t.at('New Orleans,')} color="#ffffff" />
-          <Loop cx={bx} cy={by} rx={260} ry={150} at={t.at('band')} seed={3} tilt={-6} />
-          <Note text="full blast" x={1330} y={420} size={56} rot={-3} at={t.at('full blast.')} />
-          <Note text="...and her" x={140} y={760} size={56} rot={-5} at={t.at('woman')} />
-          <Loop cx={wx} cy={wy} rx={110} ry={120} at={t.at('looks')} seed={5} tilt={4} />
-          <Note text="don't scare me, papa" x={1250} y={820} size={60} rot={-4} at={t.at("Don't Scare")} color={usePal().subject} />
-        </>
-      );
-    }}
-  </Fit>
-);
+/** The sheet music, whole: the pianist picked out in coral, each instrument and the open door named as it's spoken. */
+const Sheet: React.FC<{t: TL}> = ({t}) => {
+  const pal = usePal();
+  return (
+    <Fit src={P.sheet.src} tag={P.sheet.tag} a={0} b={t.at("That's")} z0={1} z1={1.06} mask={MASKS.sheetPiano} traceAt={t.at('Piano.')}>
+      {(p) => {
+        const S = (fx: number, fy: number) => [p.left + fx * SHEET[0] * p.scale, p.top + fy * SHEET[1] * p.scale];
+        const [tx, ty] = S(0.5, 0.105);
+        const [px, py] = S(0.36, 0.46);
+        const [bx, by] = S(0.82, 0.43);
+        const [dx, dy] = S(0.9, 0.69);
+        const [ox, oy] = S(0.69, 0.33);
+        return (
+          <>
+            <Note text="new orleans, 1919" x={1440} y={200} size={46} rot={-4} at={t.at('New Orleans,')} color="#ffffff" />
+            <Note text="the whole family" x={80} y={250} size={50} rot={-4} at={t.at('whole family')} />
+            <Note text="piano" x={250} y={430} size={60} rot={-4} at={t.at('Piano.')} />
+            <Arrow x1={420} y1={470} x2={px - 40} y2={py} bow={-24} at={t.at('Piano.') + 4} />
+            <Note text="trombone" x={1390} y={330} size={56} rot={-4} at={t.at('Trombone.')} />
+            <Arrow x1={1390} y1={390} x2={bx + 30} y2={by} bow={20} at={t.at('Trombone.') + 4} />
+            <Note text="a kid on a drum" x={1370} y={700} size={50} rot={-3} at={t.at('drum.')} />
+            <Arrow x1={1450} y1={690} x2={dx + 24} y2={dy - 20} bow={-18} at={t.at('drum.') + 4} />
+            <Loop cx={ox} cy={oy} rx={64} ry={118} at={t.at('wide open')} seed={5} tilt={2} />
+            <Note text="...and the door" x={110} y={700} size={56} rot={-4} at={t.at('the door')} color={pal.subject} />
+            <Loop cx={tx} cy={ty} rx={370} ry={62} at={t.at('title:')} seed={3} tilt={-2} />
+            <Note text={"don't scare me,"} x={1350} y={850} size={50} rot={-4} at={t.at("Don't Scare")} color={pal.subject} />
+            <Note text="papa" x={1470} y={930} size={50} rot={-4} at={t.at('Papa.')} color={pal.subject} />
+          </>
+        );
+      }}
+    </Fit>
+  );
+};
 
 /** "That's a song about a serial killer. And people bought it." */
 const Song: React.FC<{t: TL}> = ({t}) => {
@@ -59,7 +73,7 @@ const Song: React.FC<{t: TL}> = ({t}) => {
 const Party: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Pic src={P.band.src} tag={P.band.tag} a={t.at('Because')} b={t.at('A killer')} z0={1.03} z1={1.14}>
+    <Pic src={P.cave.src} tag={P.cave.tag} a={t.at('Because')} b={t.at('A killer')} z0={1.03} z1={1.14}>
       {() => (
         <>
           {g >= t.at('March') && <Highlight text="MARCH 1919" x={110} y={100} size={100} at={t.at('March')} seed={7} rot={-2} />}
@@ -149,7 +163,7 @@ const Body: React.FC = () => {
       <Bed src="music/r_cold_open.mp3" from={at("So here's") - 6} to={END} vol={0.16} fadeIn={12} fadeOut={20} skip={52} />
       <Sounds t={t} cuts={cuts.map(([f]) => f)}
         stamps={['March', 'How', 'whole city', 'throw']}
-        writes={['New Orleans,', 'full blast.', 'woman', "Don't Scare", 'song', 'serial', 'bought', 'almost every', 'living rooms', "wasn't", 'A killer', 'told', 'question', 'corner', 'back door.']}
+        writes={['New Orleans,', 'whole family', 'Piano.', 'Trombone.', 'drum.', 'the door', "Don't Scare", 'song', 'serial', 'bought', 'almost every', 'living rooms', "wasn't", 'A killer', 'told', 'question', 'corner', 'back door.']}
         extra={[[stop - 2, 'sfx/needle.wav', 0.5], [at('A killer'), 'sfx/heartbeat.wav', 0.5], [at('hole'), 'sfx/chisel.wav', 0.45]]} />
       <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.4} />
     </AbsoluteFill>
