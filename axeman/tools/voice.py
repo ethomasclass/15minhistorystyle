@@ -27,7 +27,12 @@ CACHE = os.path.join(OUT, "cache")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill"}
+PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill",
+             # The Axeman (1918-19): Italian names said the New Orleans way. One word in, one word out.
+             "Maggio": "Mah-joe", "Maggios": "Mah-joes", "Besumer": "Bez-oo-mer", "Cortimiglia": "Kor-tee-meel-ya",
+             "Iorlando": "Yor-lahn-doe", "Jordano": "Jor-dah-no", "Jordanos": "Jor-dah-nos",
+             "Schiambra": "Skee-ahm-bra", "Pepitone": "Pep-ih-toe-nee", "Davilla": "Dah-vil-uh",
+             "Laumann": "Law-mun", "Picayune": "Pick-ee-yoon", "Orleanians": "Or-lee-nee-uns"}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
