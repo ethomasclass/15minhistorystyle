@@ -159,10 +159,10 @@ const Quiet: React.FC<{t: TL}> = ({t}) => {
       <DropCard src={P.armistice.src} x={720} y={160} w={1000} rot={3} at={t.at('war ends.') - 2} />
       <Note text="november 11: the war ends" x={820} y={110} size={52} rot={-2} at={t.at('war ends.')} />
       {months.map((m, i) => g >= a + i * 3 && (
-        <div key={m} style={{position: 'absolute', left: 300 + i * 190, top: 860, fontFamily: '"IBM Plex Mono"', fontSize: 40, letterSpacing: 2, color: '#fff', transform: `rotate(${(random(m) - 0.5) * 8}deg)`}}>{m}</div>
+        <div key={m} style={{position: 'absolute', left: 300 + i * 190, top: 820, fontFamily: '"IBM Plex Mono"', fontSize: 40, letterSpacing: 2, color: '#fff', transform: `rotate(${(random(m) - 0.5) * 8}deg)`}}>{m}</div>
       ))}
-      <Note text="7 quiet months" x={760} y={950} size={60} rot={-2} at={t.at('quiet.')} color={pal.subject} />
-      <Tag text={`${P.fluAd.tag} · ${P.armistice.tag}`} y={40} />
+      <Note text="7 quiet months" x={760} y={920} size={56} rot={-2} at={t.at('quiet.')} color={pal.subject} />
+      <Tag text="Grunewald's ad, Oct. 1918 · John Gasquet, Armistice Day on Canal Street, 1918 · Wikimedia Commons" y={40} />
     </Desk>
   );
 };

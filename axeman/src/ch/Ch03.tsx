@@ -102,7 +102,7 @@ const Remember: React.FC<{t: TL}> = ({t}) => {
       <Blamed x={160} y={180} at={t.at('Remember Besumer.')} w={820}
         rows={[{name: 'Andrew Maggio, the barber', at: -999, clear: -999}, {name: 'Louis Besumer: "a German spy"', at: -999, clear: -999},
           {name: 'Louis Besumer: murder', at: -999, clear: t.at('Remember Besumer.') + 4}]} />
-      <Note text="won't be the last" x={1120} y={420} size={84} rot={-4} at={t.at("won't be")} color={pal.subject} />
+      <Note text="won't be the last" x={1040} y={420} size={76} rot={-4} at={t.at("won't be")} color={pal.subject} />
     </Desk>
   );
 };

@@ -22,7 +22,7 @@ const Market: React.FC<{t: TL}> = ({t}) => {
           <Note text="why italian families?" x={130} y={260} size={60} rot={-3} at={t.at('Italian families?')} />
           <Note text="one of the South's biggest italian communities" x={110} y={820} size={54} rot={-2} at={t.at('biggest')} color="#ffffff" />
           <Note text="mostly from sicily" x={1260} y={260} size={62} rot={-4} at={t.at('Sicily.')} />
-          <Note text="corner groceries, family in back" x={1000} y={930} size={54} rot={-3} at={t.at('small groceries')} />
+          <Note text="corner groceries, family in back" x={880} y={900} size={50} rot={-3} at={t.at('small groceries')} />
         </>
       )}
     </Parallax>

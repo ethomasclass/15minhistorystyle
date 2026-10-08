@@ -95,8 +95,8 @@ const Panel: React.FC<{t: TL}> = ({t}) => {
 const Found: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at("Joseph's brothers")}>
     <Clip src={P.maggio.src} x={460} y={140} w={1000} rot={-1} at={t.at("Joseph's brothers")} drop={false} />
-    <Note text="his brothers find them" x={150} y={860} size={56} rot={-3} at={t.at('They find')} color="#ffffff" />
-    <Note text="Catherine: killed · Joseph: dies minutes later" x={150} y={950} size={50} rot={-2} at={t.at('Catherine is')} color="#ffffff" />
+    <Note text="his brothers find them" x={150} y={820} size={56} rot={-3} at={t.at('They find')} color="#ffffff" />
+    <Note text="Catherine: killed · Joseph: dies minutes later" x={150} y={905} size={50} rot={-2} at={t.at('Catherine is')} color="#ffffff" />
     <Tag text={P.maggio.tag} y={40} />
   </Desk>
 );

@@ -1,21 +1,19 @@
 // YouTube thumbnail concepts, drawn at 1920x1080 with the video's own kit and exported at 1280x720
 // (tools/thumbs.mjs renders frame 140 so every write-on has finished).
-//   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
-//   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+//   A · the shotgun man: the Times-Picayune's 1919 cartoon of a man sitting up by the back door, picked out in coral.
+//   B · the sheet music: the cover on the desk, the pianist in coral, the title in tape.
 import React from 'react';
-import {AbsoluteFill, staticFile} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
-import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
+import {Finish, Highlight, Note, PALETTES, PaletteCtx, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
+import {Door} from './kit/ax';
+import {IMG} from './imgs';
 import {MASKS} from './masks';
-import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
+import {P} from './pics';
 
 export const THUMB_FRAMES = 150;
-const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
-const GOLD = '#FF9F1C';
-const MASK = MASKS.sully; // the mask that matches THUMB_PORTRAIT.src
 
 /** Channel logo, top-left (YouTube covers the bottom-right with the running time). */
 const Logo: React.FC = () => {
@@ -29,73 +27,49 @@ const Logo: React.FC = () => {
   );
 };
 
-const cut = (alpha: string): React.CSSProperties =>
-  ({WebkitMaskImage: `url(${staticFile(alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(alpha)})`, maskSize: '100% 100%'}) as React.CSSProperties;
-
-/**
- * The subject tint on one side of the line x = `mid`. The clip sits on each blended layer itself: a clip-path on a
- * wrapper would isolate the blend and the tint would come out flat.
- */
-const SideTint: React.FC<{place: Place; color: string; mid: number; side: 'left' | 'right'}> = ({place, color, mid, side}) => {
-  const w = P.size[0] * place.scale;
-  const m0 = mid - place.left;
-  const m: React.CSSProperties = {
-    position: 'absolute', left: place.left, top: place.top, width: w, height: P.size[1] * place.scale, ...cut(MASK.alpha),
-    clipPath: side === 'left' ? `inset(0 ${w - m0}px 0 0)` : `inset(0 0 0 ${m0}px)`,
-  };
+/** A picture on a cream card with its subject tinted coral and traced in teal. */
+const TintCard: React.FC<{src: string; mask: typeof MASKS.sully; x: number; y: number; h: number; rot: number; filter?: string}> = ({src, mask, x, y, h, rot, filter = 'grayscale(1) contrast(1.25)'}) => {
+  const size = IMG[src];
+  const s = h / size[1];
+  const place: Place = {left: 0, top: 0, scale: s};
   return (
-    <>
-      <div style={{...m, background: color, mixBlendMode: 'color'}} />
-      <div style={{...m, background: color, mixBlendMode: 'multiply', opacity: 0.3}} />
-      <div style={{...m, background: color, mixBlendMode: 'screen', opacity: 0.28}} />
-    </>
+    <div style={{position: 'absolute', left: x, top: y, transform: `rotate(${rot}deg)`, background: '#f4efe6', padding: 18, boxShadow: '0 24px 50px rgba(0,0,0,0.75)'}}>
+      <div style={{position: 'relative', width: size[0] * s, height: h, overflow: 'visible'}}>
+        <Img src={staticFile(src)} style={{position: 'absolute', left: 0, top: 0, width: size[0] * s, height: h, filter}} />
+        <Tint mask={mask.alpha} place={place} size={size} color={CORAL} />
+        <div style={{position: 'absolute', left: 0, top: 0}}><Traced paths={mask.data.shapes.subject} place={place} at={0} dur={1} width={7} part={0.93} /></div>
+      </div>
+    </div>
   );
 };
 
-export const ThumbA: React.FC = () => {
-  const place: Place = {left: 960 - P.faceX * P.scale, top: P.top, scale: P.scale};
-  const S = (x: number, y: number) => [place.left + x * place.scale, place.top + y * place.scale];
-  const [x0, y] = S(P.crownLeft, P.crownY);
-  const [x1] = S(P.crownRight, P.crownY);
-  return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)'}} />
-        <div style={{position: 'absolute', left: place.left, top: place.top, width: P.size[0] * place.scale, height: P.size[1] * place.scale, ...cut(MASK.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
-          <Picture src={P.src} place={{left: 0, top: 0, scale: place.scale}} size={P.size} bw="grayscale(1) contrast(1.25) brightness(0.9)" />
-        </div>
-        <SideTint place={place} color={TEAL} mid={960} side="left" />
-        <SideTint place={place} color={CORAL} mid={960} side="right" />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
-        <div style={{position: 'absolute', left: 956, top: 0, width: 8, height: 1080, background: '#f4efe6'}} />
-        <AbsoluteFill style={{filter: 'drop-shadow(0 0 3px #0d0c09) drop-shadow(0 6px 10px rgba(0,0,0,0.8))'}}>
-          <DrawnCrown x0={x0} x1={x1} y={y} h={125} at={0} dur={1} width={15} color={GOLD} />
-        </AbsoluteFill>
-        <Highlight text={THUMB_WORDS.left} x={170} y={855} size={150} at={0} seed={71} rot={-3} />
-        <Highlight text={THUMB_WORDS.right} x={1010} y={855} size={150} at={0} seed={73} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
-  );
-};
+/** A: the man sitting up with his shotgun by the door, and the threat in tape. */
+export const ThumbA: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill>
+      <DarkPaper />
+      <TintCard src={P.cartoon.src} mask={MASKS.cartoonGuard} x={980} y={70} h={900} rot={3} filter="grayscale(1) contrast(1.35) brightness(0.98)" />
+      <Highlight text="PLAY JAZZ" x={90} y={330} size={190} at={0} seed={7} rot={-3} />
+      <Highlight text="OR ELSE" x={150} y={590} size={190} at={0} seed={9} rot={-2} />
+      <Note text="new orleans, 1919" x={170} y={860} size={70} rot={-4} at={0} />
+      <Logo />
+      <Finish vignette={0.35} />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
 
-export const ThumbB: React.FC = () => {
-  const place: Place = {left: 1080, top: 60, scale: 0.42};
-  return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <DarkPaper />
-        <Picture src={P.src} place={place} size={P.size} bw="grayscale(1) contrast(1.3)" />
-        <Tint mask={MASK.alpha} place={place} size={P.size} />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={8} />
-        <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,7,5,0.95) 0%, rgba(8,7,5,0.85) 45%, rgba(8,7,5,0) 62%)'}} />
-        <Note text="the People's President..." x={90} y={330} size={70} rot={-3} color={TEAL} />
-        <Highlight text={TITLE.split(' ')[0]} x={80} y={440} size={230} at={0} seed={75} rot={-3} />
-        <Highlight text={`${TITLE.split(' ').slice(1).join(' ')}?`} x={120} y={700} size={170} at={0} seed={77} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
-  );
-};
+/** B: the sheet music, the pianist in coral, the door that was never safe. */
+export const ThumbB: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill>
+      <DarkPaper />
+      <TintCard src={P.sheet.src} mask={MASKS.sheetPiano} x={1060} y={60} h={940} rot={-3} />
+      <Door x={110} y={250} h={560} at={-100} done />
+      <Highlight text="JAZZ" x={500} y={300} size={200} at={0} seed={11} rot={-3} />
+      <Highlight text="OR THE AXE" x={420} y={560} size={130} at={0} seed={13} rot={-2} />
+      <Note text="the killer who asked for a party" x={420} y={790} size={58} rot={-3} at={0} />
+      <Logo />
+      <Finish vignette={0.35} />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);

@@ -36,7 +36,7 @@ const LA: React.FC<{t: TL}> = ({t}) => (
     <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,6,4,0.92) 0%, rgba(8,6,4,0.75) 26%, transparent 46%)'}} />
     <Note text="los angeles, december 1921" x={90} y={760} size={52} rot={-3} at={t.at('Los Angeles,')} color="#ffffff" />
     <Note text="Pepitone's widow shoots a man" x={110} y={850} size={60} rot={-3} at={t.at('widow')} />
-    <Note text={'"he killed my husband"'} x={140} y={950} size={56} rot={-3} at={t.at('She said')} />
+    <Note text={'"he killed my husband"'} x={140} y={925} size={54} rot={-3} at={t.at('She said')} />
     <Tag text={`${P.laTimes.tag} · ${P.omaha.tag}`} y={40} />
   </Desk>
 );
@@ -79,7 +79,7 @@ const Suspects: React.FC<{t: TL}> = ({t}) => {
         );
       })}
       <Note text="stitched into one monster by the newspapers" x={150} y={800} size={60} rot={-3} at={t.at('stitched')} color={pal.subject} />
-      <Note text="some attacks don't match at all" x={190} y={930} size={54} rot={-3} at={t.at("don't match")} color="#ffffff" />
+      <Note text="some attacks don't match at all" x={190} y={900} size={52} rot={-3} at={t.at("don't match")} color="#ffffff" />
     </Desk>
   );
 };
@@ -120,8 +120,9 @@ const Letter: React.FC<{t: TL}> = ({t}) => {
     <Desk a={t.at('And then a letter,')}>
       <Clip src={P.herald.src} x={150} y={140} w={580} rot={-4} at={t.at('And then a letter,')} />
       <Note text="almost certainly fake" x={820} y={200} size={64} rot={-3} at={t.at('almost certainly')} color={pal.box} />
-      <Note text="something to do with all that fear" x={820} y={420} size={60} rot={-3} at={t.at('something to do')} />
-      <Note text="something they were good at" x={860} y={620} size={70} rot={-4} at={t.at('good at.')} color={pal.subject} />
+      <Note text="something to do" x={820} y={400} size={62} rot={-3} at={t.at('something to do')} />
+      <Note text="with all that fear" x={860} y={490} size={62} rot={-3} at={t.at('all that fear.')} />
+      <Note text="something they were good at" x={820} y={650} size={62} rot={-4} at={t.at('good at.')} color={pal.subject} />
     </Desk>
   );
 };
