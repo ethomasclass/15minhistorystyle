@@ -9,6 +9,7 @@ import maggios from '../public/img/masks/maggios.json';
 import marketCart from '../public/img/masks/market_cart.json';
 import fluPatient from '../public/img/masks/flu_patient.json';
 import ferry from '../public/img/masks/ferry.json';
+import eagleCornet from '../public/img/masks/eagle_cornet.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -19,4 +20,5 @@ export const MASKS = {
   marketCart: maskRef('market_cart', marketCart),
   fluPatient: maskRef('flu_patient', fluPatient),
   ferry: maskRef('ferry', ferry),
+  eagleCornet: maskRef('eagle_cornet', eagleCornet),
 };

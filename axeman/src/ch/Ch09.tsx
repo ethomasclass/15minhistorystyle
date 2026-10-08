@@ -1,7 +1,7 @@
 // Chapter 9 · So Who Was the Axeman? The Los Angeles story, the suspects, the question answered, and the last
 // line: "It played." Then a 12-second end screen on the band with the record playing.
 import React from 'react';
-import {AbsoluteFill, Audio, interpolate, random, Sequence, staticFile} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch09_who.words.json';
 import plugWords from '../../public/audio/plug_end.words.json';
 import {boxOf, Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
@@ -9,13 +9,15 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {clamp} from '../lib/anim';
 import {Bed, Blamed, Clip, Desk, DropCard, Fit, Sounds, SrcView, Witness} from '../kit/ax';
 import {M} from '../music';
+import {MASKS} from '../masks';
 import {WRITE} from '../kit/common';
 import {P} from '../pics';
 
 const N = words as Narration;
 const PLUG = plugWords as Narration;
 /** "It played." lands, the record plays a beat, then the thank-you plug; then ~10 s of music only for YouTube's end screen. */
-const PLUG_GAP = 50;
+/** The record plays this long, under IT PLAYED., before the thank-you starts: the line gets room to land. */
+const PLUG_GAP = 170;
 const END_SCREEN = PLUG_GAP + Math.ceil(PLUG.duration * 30) + 300;
 export const CH09_FRAMES = chapterFrames(N, LEAD) + END_SCREEN;
 
@@ -127,17 +129,25 @@ const Letter: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-const Name: React.FC<{t: TL}> = ({t}) => (
-  <Fit src={P.sheet.src} tag={P.sheet.tag} a={t.at('New Orleans never')} b={t.at('It played.')} z0={1} z1={1.08}>
-    {() => (
-      <>
-        <Note text="never learned" x={1400} y={240} size={56} rot={-4} at={t.at('never learned')} color="#ffffff" />
-        <Note text="his name" x={1460} y={330} size={56} rot={-4} at={t.at('never learned') + 6} color="#ffffff" />
-        <Note text="so it answered him" x={1360} y={720} size={52} rot={-4} at={t.at('So it answered')} />
-      </>
-    )}
-  </Fit>
-);
+/** The sheet music once more, then the held breath: the music resolves and the picture sinks toward black. */
+const Name: React.FC<{t: TL}> = ({t}) => {
+  const f = useCurrentFrame();
+  const hush = interpolate(f, [t.end('everything.'), t.at('It played.') - 2], [0, 0.75], {...clamp, easing: Easing.in(Easing.quad)});
+  return (
+    <AbsoluteFill>
+      <Fit src={P.sheet.src} tag={P.sheet.tag} a={t.at('New Orleans never')} b={t.at('It played.')} z0={1} z1={1.12}>
+        {() => (
+          <>
+            <Note text="never learned" x={1400} y={240} size={56} rot={-4} at={t.at('never learned')} color="#ffffff" />
+            <Note text="his name" x={1460} y={330} size={56} rot={-4} at={t.at('never learned') + 6} color="#ffffff" />
+            <Note text="so it answered him" x={1360} y={720} size={52} rot={-4} at={t.at('So it answered')} />
+          </>
+        )}
+      </Fit>
+      <AbsoluteFill style={{background: '#000', opacity: hush}} />
+    </AbsoluteFill>
+  );
+};
 
 /** It played: the band, the record up full, a friendly thank-you, and the end screen. */
 const Played: React.FC<{t: TL; tp: TL; plugAt: number}> = ({t, tp, plugAt}) => {
@@ -146,11 +156,11 @@ const Played: React.FC<{t: TL; tp: TL; plugAt: number}> = ({t, tp, plugAt}) => {
   const at = (p: string) => plugAt + tp.at(p);
   const dim = interpolate(g, [plugAt - 6, plugAt + 6], [0, 1], clamp);
   return (
-    <Fit src={P.eagle.src} tag={P.eagle.tag} a={t.at('It played.')} b={t.frames + END_SCREEN} z0={1.02} z1={1.12}>
+    <Fit src={P.eagle.src} tag={P.eagle.tag} a={t.at('It played.')} b={t.frames + END_SCREEN} z0={1.0} z1={1.14} mask={MASKS.eagleCornet} traceAt={t.at('It played.') + 3}>
       {() => (
         <>
           <AbsoluteFill style={{background: 'rgba(0,0,0,0.45)', opacity: dim}} />
-          {g >= t.at('It played.') && g < plugAt && <Highlight text="IT PLAYED." x={120} y={110} size={140} at={t.at('It played.')} seed={103} rot={-2} />}
+          {g >= t.at('It played.') && g < plugAt - 6 && <Highlight text="IT PLAYED." x={90} y={80} size={190} at={t.at('It played.')} seed={103} rot={-3} />}
           <Note text="thanks so much for watching" x={120} y={110} size={70} rot={-3} at={at('Thanks')} color="#ffffff" />
           {g >= at('like') && <Highlight text="LIKE" x={140} y={270} size={110} at={at('like')} seed={105} rot={-3} />}
           {g >= at('subscribe') && <Highlight text="SUBSCRIBE" x={460} y={270} size={110} at={at('subscribe')} seed={107} rot={-2} />}
@@ -183,13 +193,18 @@ const Body: React.FC = () => {
     <>
       {scene}
       <Bed src="music/r_cold_open.mp3" from={0} to={at("So let's") + 6} vol={0.15} fadeOut={12} />
-      <Bed src="music/r_ending.mp3" from={at("So let's") - 4} to={at('It played.') + 2} vol={0.15} fadeOut={4} skip={30} />
-      {/* the record plays up, ducks under the thank-you, then comes back for the end screen */}
-      <Sequence from={at('It played.') - 2} layout="none">
+      {/* the answer's cue resolves on "everything." and leaves the held breath to the record's crackle */}
+      <Bed src="music/r_ending.mp3" from={at("So let's") - 4} to={t.end('everything.') + 16} vol={0.15} fadeOut={26} skip={30} />
+      <Bed src="sfx/crackle.wav" from={t.end('everything.') - 4} to={at('It played.') + 6} vol={0.16} fadeIn={14} fadeOut={4} />
+      {/* the needle drops on "It played.": the record sits under the line, swells once it's said, ducks under the thank-you,
+          then plays out under the end screen */}
+      <Sequence from={at('It played.') - 1} layout="none">
         <Audio src={staticFile(M.ending)} volume={(f) => {
-          const F = f + at('It played.') - 2;
-          return interpolate(F, [at('It played.') - 2, at('It played.') + 4, plugAt - 8, plugAt + 4, plugAt + Math.ceil(PLUG.duration * 30), plugAt + Math.ceil(PLUG.duration * 30) + 20, end - 60, end],
-            [0, 0.32, 0.32, 0.14, 0.14, 0.3, 0.3, 0], clamp);
+          const F = f + at('It played.') - 1;
+          const said = t.end('It played.') + 4;
+          const plugEnd = plugAt + Math.ceil(PLUG.duration * 30);
+          return interpolate(F, [at('It played.') - 1, at('It played.') + 2, said, said + 10, plugAt - 10, plugAt + 2, plugEnd, plugEnd + 20, end - 60, end],
+            [0, 0.2, 0.2, 0.4, 0.4, 0.13, 0.13, 0.32, 0.32, 0], clamp);
         }} />
       </Sequence>
       <Sequence from={plugAt} layout="none"><Audio src={staticFile('audio/plug_end.wav')} /></Sequence>
@@ -197,7 +212,8 @@ const Body: React.FC = () => {
         stamps={['So who', 'How did', 'whole city', 'throw him', 'It played.']}
         writes={['Los Angeles,', 'widow', 'She said', 'perfect ending.', 'hard to check.', 'never turned', 'There are other', 'stitched', "don't match", 'back to', 'He probably', 'so was the fear.',
           'Newspapers that', 'again and again.', 'almost certainly', 'something to do', 'good at.', 'never learned', 'So it answered']}
-        extra={[...['like', 'subscribe'].map((p) => [plugAt + tp.at(p), 'sfx/stamp.wav', 0.2] as [number, string, number]),
+        extra={[[at('It played.') - 3, 'sfx/needle.wav', 0.5], [at('It played.'), 'sfx/boom.wav', 0.32],
+          ...['like', 'subscribe'].map((p) => [plugAt + tp.at(p), 'sfx/stamp.wav', 0.2] as [number, string, number]),
           ...['Thanks', 'next time.'].map((p) => [plugAt + tp.at(p) - 2, WRITE.src, WRITE.volume] as [number, string, number])]}
         ticks={['criminal record.', 'the women', 'The Mafia.', 'Copycats.', 'several different', 'And then a letter,', 'Innocent people']} />
     </>
