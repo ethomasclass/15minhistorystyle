@@ -183,7 +183,7 @@ const Body: React.FC = () => {
     <>
       {scene}
       <Bed src="music/r_cold_open.mp3" from={0} to={at("So let's") + 6} vol={0.15} fadeOut={12} />
-      <Bed src="music/r_ending.mp3" from={at("So let's") - 4} to={at('It played.') + 2} vol={0.15} fadeOut={4} />
+      <Bed src="music/r_ending.mp3" from={at("So let's") - 4} to={at('It played.') + 2} vol={0.15} fadeOut={4} skip={30} />
       {/* the record plays up, ducks under the thank-you, then comes back for the end screen */}
       <Sequence from={at('It played.') - 2} layout="none">
         <Audio src={staticFile(M.ending)} volume={(f) => {

@@ -20,10 +20,10 @@ on January 1, 2022), from Library of Congress National Jukebox masters. Provenan
 | 07 | The letter | `r_spirits_dark` | 0.12 | Fear again, under the letter read word by word. |
 | 07 | **The party night** | `pd/party.mp3` (ODJB, *At the Jazz Band Ball*, Victor 18457-A, 1918) | 0.24 | The right title, on sale in 1918. Montage cuts every 22 frames (about a bar). |
 | 07 | Midnight → 12:15 → morning | silence + `sfx/crackle.wav`, clock ticks, needle-drag on "Midnight" | 0.10 | The record stops; only the clock. |
-| 07 | "So did the Axeman keep his word?" | `a_price` | 0.22 | Caper underscore with a cheeky button: the hoax. (Quiet Suno file, −17.3 LUFS, so the bed is higher.) |
-| 08 | The last attacks | `w_aftermath` from 20 s; heartbeat (`sfx/heartbeat.wav`) under "He just stops" | 0.12 | Grave, building; the heartbeat stops with him. |
+| 07 | "So did the Axeman keep his word?" | `r_spirits_dark` from 40 s | 0.12 | Eerie, not playful (your note: `a_price` was too upbeat). Options: `g_pyramid`, `g_grip`. |
+| 08 | The last attacks | `g_southampton` from 0; heartbeat (`sfx/heartbeat.wav`) under "He just stops" | 0.18 | Grave suspense, low drones and a heartbeat drum (your note: `w_aftermath`'s second half was too upbeat). Options: `r_spirits_dark`, `w_aftermath` first half. |
 | 09 | Suspects | `r_cold_open` | 0.15 | The investigators' cue. |
-| 09 | The answer | `r_ending` (warm first 30 s) | 0.15 | The channel's closing cue. |
+| 09 | The answer | `r_ending` from 30 s (its dark half, ending on an unresolved chord) | 0.15 | Your note: the warm first half was too positive. Options: `r_dix`, `r_utopia`'s darkening last part. |
 | 09 | "It played." + end plug + 10 s end screen | `pd/ending.mp3` (ODJB, *Tiger Rag*, Victor 18472-B, 1918) | 0.32 → 0.14 under the thank-you → 0.30 | The city answering with jazz; it ducks under the end plug, then plays out under the end screen. |
 
 **Sound effects:** turned down at your request: cut whooshes 0.30 → 0.13, card ticks 0.45 → 0.20, the logo break's three clock ticks 0.18 → 0.07, note-writing 0.20 → 0.12, title stamps 0.28 → 0.22, the channel intro's card ticks 0.45 → 0.20. The party montage no longer ticks on every cut.

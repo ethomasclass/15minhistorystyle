@@ -111,7 +111,7 @@ const Body: React.FC = () => {
   return (
     <>
       {scene}
-      <Bed src="music/w_aftermath.mp3" from={0} to={at("He doesn't get") + 10} vol={0.12} skip={20} fadeOut={30} />
+      <Bed src="music/g_southampton.mp3" from={0} to={at("He doesn't get") + 10} vol={0.18} fadeOut={30} />
       <Sounds t={t} cuts={cuts.map(([f]) => f)}
         stamps={['the last attack']}
         writes={['whoever', "wasn't finished.", 'Mike Pepitone,', 'Steve Boca', 'no memory', 'Sarah Laumann,', 'living alone,', 'She survives', 'lawn.', 'father of six.', 'caught.', 'write again.', 'He just']}

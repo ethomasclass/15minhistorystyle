@@ -219,7 +219,7 @@ const Body: React.FC = () => {
       <Bed src="sfx/crackle.wav" from={at('Now remember,') - 10} to={party} vol={0.12} />
       <Bed src={M.party} from={party - 8} to={mid + 2} vol={0.24} fadeIn={6} fadeOut={2} />
       <Bed src="sfx/crackle.wav" from={mid} to={at('Nobody was attacked') + 20} vol={0.1} fadeIn={2} />
-      <Bed src="music/a_price.mp3" from={at('So did') - 6} to={t.frames + 34} vol={0.22} />
+      <Bed src="music/r_spirits_dark.mp3" from={at('So did') - 6} to={t.frames + 34} vol={0.12} skip={40} />
       <Sounds t={t} cuts={cuts.map(([f]) => f).filter((f) => f !== party - 1)}
         stamps={['Hell,', 'Nobody was attacked', 'The party was']}
         writes={['Three days', 'prints it.', "isn't human.", 'brags', 'an offer.', '12:15', "St. Joseph's", 'Anyone who', 'jazz is new.', 'noise.', 'jazzed', 'The dance halls', 'house parties', 'records,',
