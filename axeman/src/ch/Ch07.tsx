@@ -5,7 +5,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch07_letter.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {Bed, Clock, clockTicks, Counter, Desk, DropCard, Fit, Flicker, Pic, Sounds, SyncQuote} from '../kit/ax';
 import {M} from '../music';
 import {P} from '../pics';
@@ -99,7 +99,8 @@ const NewMusic: React.FC<{t: TL}> = ({t}) => (
 const Party: React.FC<{t: TL}> = ({t}) => {
   const f = useCurrentFrame();
   const a = t.at('And on Tuesday');
-  const pics = [P.band, P.band2, P.band, P.band2];
+  const gen = {src: 'img/gen/ch07_house_party.png', tag: "Illustration · A house party on St. Joseph's Night, 1919"};
+  const pics = hasFile(gen.src) ? [P.band, gen, P.band2, gen] : [P.band, P.band2, P.band, P.band2];
   const beat = 22; // about the record's tempo: a cut every bar
   const i = Math.max(0, Math.floor((f - a) / beat)) % pics.length;
   const pic = pics[i];
