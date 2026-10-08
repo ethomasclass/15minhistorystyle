@@ -67,7 +67,7 @@ export const ThumbB: React.FC = () => (
       <Door x={110} y={250} h={560} at={-100} done />
       <Highlight text="JAZZ" x={500} y={300} size={200} at={0} seed={11} rot={-3} />
       <Highlight text="OR THE AXE" x={420} y={560} size={130} at={0} seed={13} rot={-2} />
-      <Note text="the killer who asked for a party" x={420} y={790} size={58} rot={-3} at={0} />
+      <Note text="the killer who asked for a party" x={60} y={905} size={50} rot={-3} at={0} />
       <Logo />
       <Finish vignette={0.35} />
     </AbsoluteFill>

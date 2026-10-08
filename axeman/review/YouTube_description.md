@@ -1,7 +1,6 @@
 # YouTube text: Jazz It Out (The Axeman of New Orleans)
 
-**Timestamps are estimates from the placeholder voice.** Re-time from `tools/render.sh`'s chapter start times after
-the real narration is recorded, then run `python3 tools/youtube_check.py`.
+Timestamps are from the final render (9:55).
 
 ## Title
 
@@ -22,14 +21,14 @@ This is the true, unsolved story of the Axeman of New Orleans (1918–1919), tol
 
 ⏱️ CHAPTERS
 0:00 The Axman's Jazz: a song about a serial killer
-0:56 The back door: the Maggio murders (May 1918)
-2:20 A spy, a hatchet and a deathbed: Louis Besumer
-3:20 A city sitting up at night: the panic of 1918
-4:25 Why Italian grocers? The Black Hand and 1891
-5:35 Gretna: the Cortimiglia attack and a false accusation
-6:40 A letter from Hell: the jazz night of March 19, 1919
-8:15 The last door: the final attacks
-8:55 So who was the Axeman?
+0:52 The back door: the Maggio murders (May 1918)
+2:02 A spy, a hatchet and a deathbed: Louis Besumer
+2:58 A city sitting up at night: the panic of 1918
+4:10 Why Italian grocers? The Black Hand and 1891
+5:12 Gretna: the Cortimiglia attack and a false accusation
+6:15 A letter from Hell: the jazz night of March 19, 1919
+7:46 The last door: the final attacks
+8:28 So who was the Axeman?
 
 📚 IN THIS VIDEO
 • The 1919 sheet music "The Mysterious Axman's Jazz (Don't Scare Me Papa)"
@@ -44,7 +43,7 @@ This is the true, unsolved story of the Axeman of New Orleans (1918–1919), tol
 👍 If you like true history mysteries, subscribe for more 15 Minute History.
 
 🖼️ SOURCES & CREDITS
-Historical images: Times-Picayune (1910–1919, public domain), Library of Congress, Wikimedia Commons. Sheet music courtesy of The Historic New Orleans Collection (pending permission). Period recordings: Original Dixieland Jass Band (Victor, 1917–1918), public domain, Library of Congress National Jukebox. Narration uses an AI voice; other music is AI-generated.
+Historical images: Times-Picayune (1910–1919), The Herald (New Orleans), Los Angeles Times, Library of Congress (Chronicling America, Detroit Publishing Co., Bain News Service, Arnold Genthe), U.S. Navy Medicine, Wikimedia Commons. All public domain. Sheet music cover: World's Music Publishing Co., 1919, via Wikimedia Commons. Period recordings: Original Dixieland Jass Band (Victor, 1917–1918), public domain, Library of Congress National Jukebox. No AI images. Narration uses an AI voice; underscore music is AI-generated.
 
 #AxemanOfNewOrleans #TrueCrime #History
 ```
@@ -60,5 +59,5 @@ axeman of new orleans, the axeman, axeman letter, axman's jazz, mysterious axman
 - Category: Education. Made for kids: No.
 - Content warning in the first line of the description isn't needed; the video has no gore, but it does describe
   murders, including a child's. Consider "Contains descriptions of violent crime" in the description if you want.
-- End screen: the last 12 seconds hold on the band with music only (room for two elements).
+- End screen: after the thank-you plug, the last 10 seconds hold on the band with music only (room for two elements).
 - Chapters: keep the first at 0:00, every chapter at least 10 seconds.
