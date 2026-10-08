@@ -18,7 +18,7 @@ const PLUG = plugWords as Narration;
 /** "It played." lands, the record plays a beat, then the thank-you plug; then ~10 s of music only for YouTube's end screen. */
 /** The record plays this long, under IT PLAYED., before the thank-you starts: the line gets room to land. */
 const PLUG_GAP = 170;
-const END_SCREEN = PLUG_GAP + Math.ceil(PLUG.duration * 30) + 300;
+const END_SCREEN = PLUG_GAP + Math.ceil(PLUG.duration * 30) + 240;
 export const CH09_FRAMES = chapterFrames(N, LEAD) + END_SCREEN;
 
 const Who: React.FC<{t: TL}> = ({t}) => {
