@@ -1,0 +1,1445 @@
+{
+ "levels": [
+  "Beds 0.13–0.17 under narration with 15–20-frame fades (skill voice-and-audio.md §6; ChapterShell does this). Default bed 0.15.",
+  "Cold open 0.17, dipping at the end (Reform: to 0.06; Grip Tighter: to 0.12; King Andrew: to 0).",
+  "Title sting 0.45, starting 4 frames before the '15' (fade 0→0.45 in 3 frames, hold to frame 50, out by frame 74). War Nobody Won title_fanfare 0.45–0.5.",
+  "Heavy chapters: a grave cue at ~0.12 or near-silence ('near-silence is a choice, not a gap').",
+  "ElevenLabs King Andrew cues are quieter than the Lyria cues: Ouija runs j_good_feelings / j_gossip / j_cold_open / r_intrigue(j_intrigue) at 0.26–0.3 (Ouija MUSIC.md: 'about 6 dB quieter… beds go about 2× higher').",
+  "Grip Tighter: the Suno cues are 3–4 dB quieter than the Reform (Lyria) cues, so their beds are 0.14–0.17.",
+  "Loudest cues (r_spirits_dark, w_aftermath, r_schools): keep at 0.12–0.14 (Ouija MUSIC.md).",
+  "Final mix is normalized by tools/master.py to −14 LUFS (two-pass loudnorm + limiter), so cues only need to balance against each other.",
+  "Measured integrated loudness: Lyria cues −10.7…−13.1 LUFS; ElevenLabs cues −12.8…−19.6 LUFS; raw Suno cues −14.7…−17.3 LUFS (r_spirits_dark, a mastered Suno cue, −12.1)."
+ ],
+ "suno": {
+  "mode": "Custom, Instrumental ON. Paste the Styles text as written; paste the Exclude line into Exclude Styles.",
+  "exclude_styles_bierce_and_ouija": "vocals, choir, lyrics, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap",
+  "exclude_styles_grip_tighter": "vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat",
+  "length": "Suno makes 2+ minute tracks; that's fine — cues are cut, trimmed and faded to the narration (Ouija: anything 1:30 or longer).",
+  "pick": "Pick the take whose first 30–40 seconds already sound like the cue; most of each cue is built from its opening.",
+  "delivery": "MP3 (WAV if the plan has it), named as shown; drag into the chat or add to video/public/music/.",
+  "ouija_cover_trick": "Make the theme first (simplest, clearest tune in the first 20 s), then make every other cue as a Cover of that take (Remix/Edit → Cover) with new Styles text, so one melody returns in several arrangements.",
+  "ouija_lyrics_box": "[Intro] [Main Theme] [Variation] [Break] [Main Theme] [Outro] [End]",
+  "credit_line": "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History."
+ },
+ "cues": [
+  {
+   "canonical": "r_title_sting",
+   "md5": "34e9f472db457b86e14ce8ceec2178aa",
+   "duration_s": 29.6,
+   "integrated_lufs": -11.33,
+   "true_peak_dbtp": -0.19,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3-clip-preview",
+   "prompt": "A 10-second title sting for a history documentary called 'Fix Everything': one warm, bold orchestral and piano hit with a low boom and a rising string swell that rings out. Instrumental only.",
+   "mood": "Channel title sting: one warm, bold orchestral + piano hit with a low boom and rising string swell that rings out.",
+   "good_part": "Only the first ~10 s are used (the file is 29.6 s); the intro fades it out by frame 74 (~2.5 s after the hit).",
+   "notes": "Channel identity. Also ships in the 15-minute-history skill template on the King Andrew branch.",
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Intro / title card (Intro.tsx), starts 4 frames before the '15'",
+     "bed_volume": "0.45 (fade 0→0.45 in 3 f, hold to f50, out by f74)"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Intro / title card",
+     "bed_volume": "0.45"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Intro / title card (music/v3/title_sting.mp3)",
+     "bed_volume": "0.45"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Intro / title card",
+     "bed_volume": "0.45"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Intro / title card (music/title_sting.mp3; r_title_sting.mp3 is an identical copy)",
+     "bed_volume": "0.45"
+    },
+    {
+     "video": "15-minute-history skill template",
+     "where": ".claude/skills/15-minute-history/assets/template/public/music/title_sting.mp3",
+     "bed_volume": "0.45"
+    }
+   ],
+   "alias_names": [
+    "r_title_sting.mp3",
+    "title_sting.mp3"
+   ],
+   "group": "Stings",
+   "file": "cues/r_title_sting.mp3"
+  },
+  {
+   "canonical": "w_title_fanfare",
+   "md5": "d3b8d07bb5ad4687a95673897b636846",
+   "duration_s": 29.02,
+   "integrated_lufs": -10.79,
+   "true_peak_dbtp": 0.53,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3-clip-preview",
+   "prompt": "A short theatrical overture flourish for the title card of a toy-theater play: bright brass fanfare, fife and field drums playing a martial 1812-era march phrase, cymbal crash, then a big final chord that rings out. Instrumental only, no vocals.",
+   "mood": "Short theatrical overture flourish: bright brass fanfare, fife + field drums, martial 1812 march phrase, cymbal crash, big ringing final chord.",
+   "good_part": null,
+   "notes": "The War Nobody Won's own title sting (toy-theater look) — not the channel sting.",
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "ColdOpen → title playbill",
+     "bed_volume": "0.5"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Legacy (closing flourish)",
+     "bed_volume": "0.45"
+    }
+   ],
+   "alias_names": [
+    "title_fanfare.mp3"
+   ],
+   "group": "Stings",
+   "file": "cues/w_title_fanfare.mp3"
+  },
+  {
+   "canonical": "r_cold_open",
+   "md5": "d4b0ace29de914ec0393224f933e1414",
+   "duration_s": 76.49,
+   "integrated_lufs": -12.42,
+   "true_peak_dbtp": 0.32,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 75-second cue. Opens as a mystery: a low, patient felt-piano ostinato, muted pizzicato basses and a soft ticking clock pulse, like investigators tracing a ship's route on a map. It tightens and builds suspense to a sharp, dark accent at about 28 seconds, then opens up curious and restless: brisk pizzicato strings and light percussion driving a quick montage, rising to a held, questioning chord at the end. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Mystery / 'investigators' cue: felt-piano ostinato, muted pizzicato bass, ticking clock; dark accent ~28 s; then restless montage energy; ends on a held questioning chord.",
+   "good_part": "Dark accent at ~28 s (Grip Tighter lands it on 'Between 55 and 60 white people were killed'); the closing questioning chord sits under the video's big question.",
+   "notes": "The channel's cold-open identity cue.",
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch01 Cold open: the pamphlet in Savannah",
+     "bed_volume": "0.17, dipping to 0.06 at the end"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch01 An Unknown Destination",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch09 Walking Off the Map (until 'So back', then r_ending)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch01 King Andrew the First (music/v3/r_cold_open.mp3)",
+     "bed_volume": "0.17, fading to 0 at the end"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch01 The Proclamation",
+     "bed_volume": "0.17 → 0.12 over the last 60 frames"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage)",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "cold_open.mp3",
+    "r_cold_open.mp3"
+   ],
+   "group": "Cold opens and mystery",
+   "file": "cues/r_cold_open.mp3"
+  },
+  {
+   "canonical": "j_cold_open",
+   "md5": "eea1166d086b38e027940dedfbbf7fed",
+   "duration_s": 62.04,
+   "integrated_lufs": -17.77,
+   "true_peak_dbtp": -2.08,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Tense, restrained documentary underscore for a history explainer about an 1806 pistol duel in Tennessee. Low solo cello and string drones, sparse plucked pizzicato, a soft ticking pulse, distant frame drum heartbeat, a lonely fiddle line. Slow build of suspense, then a held, unresolved chord. Instrumental only, no vocals, leaves room for a narrator.",
+   "mood": "Tense, restrained: low solo cello, string drones, sparse pizzicato, soft ticking pulse, distant frame-drum heartbeat, lonely fiddle; slow suspense build to a held unresolved chord.",
+   "good_part": "Written for the 1806 duel: King Andrew MUSIC.md says start it at 'Then came the Revolution' so the swell lands on the duel.",
+   "notes": "Quiet file (−17.8 LUFS) — needs a higher bed than Lyria cues (Ouija uses 0.27).",
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 ColdOpen (the 1806 Dickinson duel)",
+     "bed_volume": "bedVol curve (pulled down for the shot, gone for 'boring', back for the title)"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch02 Dirty Boots",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch05 Patience Worth",
+     "bed_volume": "0.27"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback for Ch03/Ch05; copied in as j_cold_open, unused",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "cold_open.mp3",
+    "j_cold_open.mp3"
+   ],
+   "group": "Cold opens and mystery",
+   "file": "cues/j_cold_open.mp3"
+  },
+  {
+   "canonical": "j_intrigue",
+   "md5": "f1c3dd1a3b0fe46caf9878937ca08ada",
+   "duration_s": 125.05,
+   "integrated_lufs": -15.4,
+   "true_peak_dbtp": -0.89,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Sly, suspenseful documentary underscore about a backroom political deal in 1825 Washington. Low clarinet and bassoon, sneaky pizzicato strings, a ticking harpsichord, a muted snare brushing in; tension that builds to an angry brass sting around the middle, then a brooding, suspicious tail. Instrumental only, no vocals, leaves room for a narrator.",
+   "mood": "Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail.",
+   "good_part": "Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter.",
+   "notes": "Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3, so Ouija named it r_intrigue — canonical prefix is j_.",
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Judas1824 (Corrupt Bargain)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 PunchBowl (from B until 'weird')",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch04 The Corrupt Bargain",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Lowell (until 'home')",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "jh/MapTest (a map-motion test, not a chapter; file is music/intrigue.mp3 in Reform-Era)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch02 Knock Once for Yes (as r_intrigue)",
+     "bed_volume": "0.26"
+    }
+   ],
+   "alias_names": [
+    "intrigue.mp3",
+    "r_intrigue.mp3"
+   ],
+   "group": "Cold opens and mystery",
+   "file": "cues/j_intrigue.mp3"
+  },
+  {
+   "canonical": "r_spirits",
+   "md5": "ea72c8cc06614220e45843e843ba5c32",
+   "duration_s": 102.5,
+   "integrated_lufs": -10.74,
+   "true_peak_dbtp": 0.38,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 100-second cue: playful and eerie for a story about spirit rappings and seances in 1848: a music box, slightly detuned piano, tremolo strings and soft knocks, curious and a little comic; in the second half it turns earnest and wide for pioneers trekking west across the country. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Playful and eerie: music box, detuned piano, tremolo strings, soft knocks; second half turns earnest and wide (pioneers trekking west).",
+   "good_part": "First ~50 s (music box, detuned piano, soft knocks) is the Fox-sisters part; the second half turns earnest/wide.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Originally scored for Ch03 Knock Once for Yes, then replaced by r_spirits_dark (Suno) in commit 8e5d49a; not referenced by any Reform chapter now",
+     "bed_volume": "—"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch01, quiet music-box bed under the title card after the sting (startFrom 240 f = 8 s)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "TestScene (production test 'Knock Once for Yes')",
+     "bed_volume": "animated"
+    }
+   ],
+   "alias_names": [
+    "r_spirits.mp3",
+    "spirits.mp3"
+   ],
+   "group": "Cold opens and mystery",
+   "file": "cues/r_spirits.mp3"
+  },
+  {
+   "canonical": "w_calm_sea",
+   "md5": "c4db5176b93b23b5b5b4ffd621d898ca",
+   "duration_s": 67.29,
+   "integrated_lufs": -12.48,
+   "true_peak_dbtp": -0.31,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 70-second cue. Calm, open, slightly uneasy morning at sea, June 1807: a small theater-pit orchestra - gently rocking 6/8 low strings like swells, a solo wooden flute with a simple sea-shanty-like phrase, soft harp, creaking-rope textures from col legno strings. After about 30 seconds a low cello ostinato creeps in and the harmony darkens as a threat approaches. End on a held, unresolved minor chord. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Calm, open, slightly uneasy morning at sea: rocking 6/8 low strings, solo wooden flute shanty phrase, harp, col legno rope creaks; darkens after ~30 s with a low cello ostinato; held unresolved minor chord.",
+   "good_part": "First ~30 s calm; the threat (cello ostinato) creeps in after ~30 s.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "ColdOpen (Chesapeake–Leopard, until 'opens fire')",
+     "bed_volume": "0.2"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Previously ch05 Patience Worth (review/music_options/ch05_current_calm_sea), replaced by j_cold_open; still in the folder",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "calm_sea.mp3",
+    "w_calm_sea.mp3"
+   ],
+   "group": "Cold opens and mystery",
+   "file": "cues/w_calm_sea.mp3"
+  },
+  {
+   "canonical": "r_schools",
+   "md5": "e1c43856efbb3dab602106be6bfeb8ba",
+   "duration_s": 62.04,
+   "integrated_lufs": -12.39,
+   "true_peak_dbtp": 0.09,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 60-second cue: light, bright and curious for the story of the first free public schools: pizzicato strings, glockenspiel, clarinet and a bouncy piano, playful with a knowing, comic final button. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Light, bright, curious: pizzicato, glockenspiel, clarinet, bouncy piano; knowing comic final button (Ouija's 'fun' theme).",
+   "good_part": "The comic final button (Ouija lands it on \"It's the point.\").",
+   "notes": "Ouija MUSIC.md: among the loudest cues; keep 0.12–0.14.",
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch07 The Equalizer (Horace Mann)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch02 Thirteen A's",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch07 Next to Monopoly (cuts out at 'Which made…')",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 montage, 'Fun' beat (startFrom 72 f)",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "r_schools.mp3",
+    "schools.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/r_schools.mp3"
+  },
+  {
+   "canonical": "j_gossip",
+   "md5": "5e477227a6b5be3488fd6ac7c561653c",
+   "duration_s": 120.03,
+   "integrated_lufs": -12.82,
+   "true_peak_dbtp": -0.5,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Playful, gossipy, mischievous documentary underscore about a scandal among 1830s Washington high society: tiptoeing pizzicato strings, a fussy harpsichord, a sly clarinet, teacup-delicate percussion, occasional dramatic 'gasp' string swells, building to a dramatic finish. Instrumental only, no vocals, leaves room for a narrator.",
+   "mood": "Playful, gossipy, mischievous: tiptoeing pizzicato, fussy harpsichord, sly clarinet, teacup percussion, 'gasp' string swells, dramatic finish.",
+   "good_part": null,
+   "notes": "Ouija treats it as a quiet King Andrew cue (bed 0.3), though its integrated loudness (−12.8 LUFS) is close to the Lyria cues; its range is wide (LRA 14).",
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Petticoat (Petticoat Affair)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch07 The Petticoat Affair",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "NewOrleans (from the twist)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch08 Captain Howdy (from 'But here's the twist', startFrom 240 f = 8 s)",
+     "bed_volume": "0.3"
+    }
+   ],
+   "alias_names": [
+    "gossip.mp3",
+    "j_gossip.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/j_gossip.mp3"
+  },
+  {
+   "canonical": "a_price",
+   "md5": "e1fd9f80df9513e062c137f307d6a3f1",
+   "duration_s": 64.66,
+   "integrated_lufs": -17.29,
+   "true_peak_dbtp": 0.3,
+   "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "caper underscore, gilded age confidence, plucked upright bass walking line, staccato clarinet, pizzicato strings, piano stabs, light brushed snare, sneaky build of tension, then a triumphant cheeky brass button at the end, playful, witty, documentary, space for narrator, instrumental",
+   "mood": "Caper underscore, Gilded Age confidence: walking upright bass, staccato clarinet, pizzicato, piano stabs, brushed snare, sneaky tension, cheeky triumphant brass button at the end.",
+   "good_part": "The cheeky brass button at the end.",
+   "notes": "Quietest Suno cue (−17.3 LUFS).",
+   "used_in": [
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch06 Name Your Price",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch03 Good Luck (button lands on \"I'm a Presbyterian\"; runs under the subscribe plug)",
+     "bed_volume": "0.2"
+    }
+   ],
+   "alias_names": [
+    "a_price.mp3",
+    "price.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/a_price.mp3"
+  },
+  {
+   "canonical": "a_newsroom",
+   "md5": "1ef3bc699d60a119a5e1dec6f3753ada",
+   "duration_s": 64.9,
+   "integrated_lufs": -15.1,
+   "true_peak_dbtp": -0.07,
+   "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "sly sardonic underscore, 1890s newsroom, ragtime-tinged upright piano, pizzicato strings, staccato bassoon, muted trumpet, typewriter-like percussion ticks, mischievous, sharp, witty, confident swagger, documentary, space for narrator, instrumental",
+   "mood": "Sly sardonic 1890s newsroom: ragtime-tinged piano, pizzicato, staccato bassoon, muted trumpet, typewriter ticks, witty swagger.",
+   "good_part": null,
+   "notes": "Tied to Bierce (Ouija MUSIC.md). Very low dynamic range (LRA 2.2).",
+   "used_in": [
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch05 Bitter Bierce, first half (until 'And in his', then r_spirits_dark)",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "newsroom.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/a_newsroom.mp3"
+  },
+  {
+   "canonical": "r_temperance",
+   "md5": "76cd312f5ff4cc496f11dcb9f32a9e54",
+   "duration_s": 60.94,
+   "integrated_lufs": -12.6,
+   "true_peak_dbtp": -0.0,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 60-second cue: comic and bouncy for America's 1830s drinking habits: a honky-tonk upright piano and fiddle with tuba and brushes, a little tipsy; halfway it shifts to hopeful and determined strings as reformers get people to sign a pledge, ending warm and upbeat. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Comic, bouncy, tipsy honky-tonk piano + fiddle + tuba; halfway turns hopeful/determined, ends warm and upbeat.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch05 Seven Gallons (temperance)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch04 Go West, Young Grump (stand-in; the Suno west.mp3 never arrived)",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "temperance.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/r_temperance.mp3"
+  },
+  {
+   "canonical": "j_good_feelings",
+   "md5": "d262822c243f4998f20a679914452f39",
+   "duration_s": 90.04,
+   "integrated_lufs": -19.59,
+   "true_peak_dbtp": -1.23,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Light, warm, slightly wry documentary underscore for a history explainer about the calm 'Era of Good Feelings' in 1820s America. Gentle plucked strings, a lilting parlor fiddle melody, soft fife, piano-forte, a relaxed walking pulse; pleasant and a little too cozy, with a faint hint of mischief near the end. Instrumental only, no vocals, leaves room for a narrator.",
+   "mood": "Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme).",
+   "good_part": "Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end.",
+   "notes": "Quietest file in the library (−19.6 LUFS, ~7 dB under the Lyria cues): beds 0.26–0.3 in Ouija.",
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Election1820 (Era of Good Feelings)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Campaign1828 (scene music)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch06 To the Victors",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "v3 BreakDemo",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Lowell (from 'home')",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Legacy (from 'why' to 'sad')",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch01 Two Pictures (Rockwell half, hard cut to r_spirits_dark)",
+     "bed_volume": "0.3"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch04 Knees Touching (startFrom 240 f = 8 s)",
+     "bed_volume": "0.28"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 montage 'Love' beat (startFrom 240) and end screen",
+     "bed_volume": "0.3"
+    }
+   ],
+   "alias_names": [
+    "good_feelings.mp3",
+    "j_good_feelings.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/j_good_feelings.mp3"
+  },
+  {
+   "canonical": "j_campaign",
+   "md5": "6fd2c7cf1150739d9f4ba1b1bbb67939",
+   "duration_s": 100.02,
+   "integrated_lufs": -14.53,
+   "true_peak_dbtp": -0.87,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Rowdy, energetic 1820s American campaign march for a history explainer: fife and field drum, a bright brass band, banjo and fiddle, hand claps and a crowd feel, playful and a bit chaotic. Instrumental only, no vocals, leaves room for a narrator.",
+   "mood": "Rowdy, energetic 1820s campaign march: fife + field drum, bright brass band, banjo, fiddle, hand claps, crowd feel; playful and a bit chaotic.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 PunchBowl (scene music)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Campaign1828 (from Cb)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch05 King Mob (before grief, then again from startFrom 600 f = 20 s for the inauguration)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "WarHawks",
+     "bed_volume": "0.12"
+    }
+   ],
+   "alias_names": [
+    "campaign.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/j_campaign.mp3"
+  },
+  {
+   "canonical": "g_world_outside",
+   "md5": "9ca67d2bdaefc1f0473b7fd041a20a29",
+   "duration_s": 110.02,
+   "integrated_lufs": -14.67,
+   "true_peak_dbtp": -1.33,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "warm dignified documentary underscore, quiet strength and resilience, solo cello melody in the spirit of an old American spiritual, soft sustained strings, gentle piano, slow hymn-like pace, intimate and humane, gradually rises to a restrained hopeful swell, never sentimental, space for narrator, instrumental",
+   "mood": "Warm, dignified: solo cello melody in the spirit of a spiritual, soft strings, gentle piano, hymn-like; rises to a restrained hopeful swell.",
+   "good_part": null,
+   "notes": "Grip Tighter's one warm cue.",
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch08 A World Outside Work (the swell falls on Harriet Jacobs)",
+     "bed_volume": "0.14"
+    }
+   ],
+   "alias_names": [
+    "world_outside.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/g_world_outside.mp3"
+  },
+  {
+   "canonical": "r_curtain",
+   "md5": "46811159c35a7c6fc79949aeb06aada7",
+   "duration_s": 90.8,
+   "integrated_lufs": -12.69,
+   "true_peak_dbtp": -0.24,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 90-second cue for women's rights in the 1840s: starts restrained and quietly indignant (low strings, a steady piano pulse), builds with determination through rising strings and a noble horn line, and reaches a proud but restrained high point, then settles thoughtfully. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Women's rights: restrained, quietly indignant (low strings, piano pulse) → determined build with noble horn → proud restrained peak → thoughtful settle.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch08 The Curtain (Seneca Falls)",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "curtain.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/r_curtain.mp3"
+  },
+  {
+   "canonical": "r_utopia",
+   "md5": "eb37deff08044b0e08b3eebd984681bd",
+   "duration_s": 122.46,
+   "integrated_lufs": -12.12,
+   "true_peak_dbtp": -0.18,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 120-second cue in three parts: first dreamy and pastoral for writers seeking truth in nature (acoustic guitar, flute, soft strings, birdsong-like figures); then a gentle, plain hymn-like section in the style of the 1848 Shaker tune 'Simple Gifts', played by strings and flute; then it darkens into unease and quiet menace with low drones for a controlling commune, ending somber and unresolved. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Three parts: dreamy pastoral (guitar, flute, birdsong) → plain hymn in the style of 'Simple Gifts' → darkening unease, low drones, somber unresolved end.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch09 Utopia (Transcendentalists, Shakers, Oneida)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Alternate in the folder (backup for ch05)",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "r_utopia.mp3",
+    "utopia.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/r_utopia.mp3"
+  },
+  {
+   "canonical": "r_revival",
+   "md5": "ce166ce812ed6976518704c9592f125e",
+   "duration_s": 91.04,
+   "integrated_lufs": -12.07,
+   "true_peak_dbtp": -0.06,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 90-second cue for an 1820s camp-meeting revival in upstate New York: a stomping, clapping 3/4 pulse, a droning fiddle, open-fifth harmonies with the rugged sound of shape-note Sacred Harp singing played by low strings and a wordless hummed choir pad (no words), building in fervor like a revival spreading from town to town, then settling to a warm glow at the end. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "1820s camp-meeting revival: stomping/clapping 3/4, droning fiddle, shape-note open fifths, building fervor, settles to a warm glow.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch02 Burned Over (Second Great Awakening)",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "revival.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/r_revival.mp3"
+  },
+  {
+   "canonical": "g_founding",
+   "md5": "edaeedc747b59c75014b03f57bcb16db",
+   "duration_s": 55.44,
+   "integrated_lufs": -15.51,
+   "true_peak_dbtp": -2.34,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "early American chamber underscore, 1790s, stately and calm, harpsichord and string quartet, slow minuet pulse, gentle and dignified, quietly uncertain harmony underneath, then darkens into a held unresolved low cello note, documentary, restrained, space for narrator, instrumental",
+   "mood": "Early American chamber (1790s): harpsichord + string quartet, slow minuet, stately, quietly uncertain; darkens into a held low cello note.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch02 Supposed to Die (enters at chapter frame 150 = 5 s; the dark cello lands on 'Hold that thought')",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Copied in as g_founding; not used (listed as written for slavery)",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "founding.mp3",
+    "g_founding.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/g_founding.mp3"
+  },
+  {
+   "canonical": "r_dix",
+   "md5": "6deb66d059bd356f03689f6186bd9ebd",
+   "duration_s": 62.09,
+   "integrated_lufs": -11.88,
+   "true_peak_dbtp": -0.23,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 60-second cue: grave, quiet and humane for a reformer documenting suffering in jails and poorhouses: a sparse solo piano and a low cello, cold and restrained, no melodrama; in the last 15 seconds a slow, hopeful rise with strings as her work succeeds. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Grave, quiet, humane: sparse solo piano + low cello, cold and restrained, no melodrama; slow hopeful string rise in the last ~15 s.",
+   "good_part": "First ~45 s before its hopeful rise = grave bed; the last ~15 s is the hopeful rise.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch06 Cages (Dorothea Dix)",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch07 Not a Highlight Reel (heavy chapter)",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch06 Sunup to Sundown (first ~45 s, then j_grief)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback for Ch08 (its hopeful last 15 s, extended)",
+     "bed_volume": "—"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Alternate in the folder (backup for ch06)",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "dix.mp3",
+    "r_dix.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/r_dix.mp3"
+  },
+  {
+   "canonical": "j_grief",
+   "md5": "27422f375542ac836594b0ca662be94c",
+   "duration_s": 40.02,
+   "integrated_lufs": -13.99,
+   "true_peak_dbtp": -1.46,
+   "source_video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+   "generator": "ElevenLabs Music",
+   "model": "ElevenLabs /v1/music",
+   "prompt": "Quiet, grieving solo cello with a soft sustained string pad, slow and simple, for the death of a beloved wife in 1828. Instrumental only, no vocals.",
+   "mood": "Quiet grieving solo cello over a soft sustained string pad, slow and simple (Ouija's 'grief' theme).",
+   "good_part": null,
+   "notes": "Short (40 s). Requested length 40000 ms.",
+   "used_in": [
+    {
+     "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
+     "where": "v1 Campaign1828 (Rachel Jackson's death)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch05 King Mob (Rachel's death, solo)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Legacy (from 'sad')",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch06 Sunup to Sundown (from 'Some enslaved people', Douglass beat)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch06 Empty Chairs (from 'So picture one house')",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 montage 'Grief' beat",
+     "bed_volume": "0.16"
+    }
+   ],
+   "alias_names": [
+    "grief.mp3",
+    "j_grief.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/j_grief.mp3"
+  },
+  {
+   "canonical": "w_aftermath",
+   "md5": "3bb94ebed16ac347ef642046175befd1",
+   "duration_s": 58.91,
+   "integrated_lufs": -12.78,
+   "true_peak_dbtp": -0.23,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 60-second cue. The aftermath of a sudden naval attack, 1807: low sustained strings, a distant muffled field drum like a heartbeat, a mournful solo fiddle line, sparse and grave. In the second half it turns quietly questioning and builds tension toward something larger, with a slow crescendo in the strings and a soft snare roll. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Aftermath of an attack: low sustained strings, distant muffled field drum like a heartbeat, mournful solo fiddle, sparse and grave; second half questioning, slow crescendo + soft snare roll.",
+   "good_part": "First half is the grave part; second half builds tension.",
+   "notes": "Ouija MUSIC.md: among the loudest; keep 0.12–0.14.",
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "ColdOpen (from 'Three')",
+     "bed_volume": "0.2"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Impressment",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Legacy (until 'why')",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch10 Let Him Enforce It, Trail of Tears (after w_frontier)",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch07 No Law Above Him (ends before Celia; her story plays over room tone)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch06 Empty Chairs (until 'So picture')",
+     "bed_volume": "0.12"
+    }
+   ],
+   "alias_names": [
+    "aftermath.mp3",
+    "w_aftermath.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/w_aftermath.mp3"
+  },
+  {
+   "canonical": "r_abolition_a",
+   "md5": "7314385d306f98e3940db69515d9dacd",
+   "duration_s": 98.32,
+   "integrated_lufs": -13.08,
+   "true_peak_dbtp": 0.05,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 100-second cue: serious, resolute and dignified for the fight against slavery and David Walker's Appeal of 1829: low strings and a slow, deep heartbeat drum, a solemn piano theme; tension rises for a hidden pamphlet smuggled south and a bounty, then falls to a grieving quiet. No stereotypes. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Serious, resolute, dignified: low strings, slow deep heartbeat drum, solemn piano theme; tension rise mid-cue; falls to grieving quiet.",
+   "good_part": "Tension rise in the middle (Grip Tighter: coffles / ships to New Orleans), grieving quiet at the end.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch10 Not Someday, first half (David Walker), until 'mid'",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch04 Sold South",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "abolition_a.mp3",
+    "r_abolition_a.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/r_abolition_a.mp3"
+  },
+  {
+   "canonical": "a_civil_war",
+   "md5": "042083be46ff9219c3c3207e02b89535",
+   "duration_s": 85.3,
+   "integrated_lufs": -15.37,
+   "true_peak_dbtp": 0.05,
+   "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "Civil War documentary underscore, begins with a lone field snare and a fife-like wooden flute, young and eager march, then turns somber and heavy, low strings, distant muted brass, slow timpani, grief without melodrama, then fragile and quiet with solo cello, restrained, respectful, space for narrator, cinematic, instrumental",
+   "mood": "Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello.",
+   "good_part": "Somber second half is the reusable grave part.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch03 Broke Like a Walnut",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback (somber second half) for Ch09 aftermath; copied in as a_civil_war, unused",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "a_civil_war.mp3",
+    "civil_war.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/a_civil_war.mp3"
+  },
+  {
+   "canonical": "w_frontier",
+   "md5": "097fcd9b70cf72d3decab4ab81008c6a",
+   "duration_s": 95.71,
+   "integrated_lufs": -11.97,
+   "true_peak_dbtp": 0.07,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 95-second cue for the story of the Shawnee leader Tecumseh and his brother, Indiana Territory, 1805-1811: dignified and serious, a slow solo cello and a low wooden flute over sustained strings, a soft, steady deep drum like a heartbeat; builds to urgency and alarm in the middle for a dawn battle, then falls to a grieving, burnt-out quiet. Respectful, no stereotypes, no chanting. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Tecumseh / Tenskwatawa: dignified, slow solo cello + low wooden flute, heartbeat drum; urgency/alarm mid-cue (dawn battle); grieving burnt-out quiet.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Tecumseh",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch10 Let Him Enforce It (before w_aftermath)",
+     "bed_volume": "0.12"
+    }
+   ],
+   "alias_names": [
+    "frontier.mp3",
+    "w_frontier.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/w_frontier.mp3"
+  },
+  {
+   "canonical": "r_spirits_dark",
+   "md5": "9c4504bab33f2e2aece66a3ad11a48d9",
+   "duration_s": 100.05,
+   "integrated_lufs": -12.05,
+   "true_peak_dbtp": -1.72,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": null,
+   "mood": "Dark, low and eerie (Ouija's 'fear' theme); the darker Suno replacement for r_spirits.",
+   "good_part": null,
+   "notes": "Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.7 dB, 44.1 kHz/192k). Ouija MUSIC.md: one of the loudest cues, keep at 0.12–0.14.",
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch03 Knock Once for Yes (new religions)",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch05 Bitter Bierce, second half (Owl Creek, from 'And in his')",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch01 Two Pictures (the 1973 half, hard cut from j_good_feelings)",
+     "bed_volume": "0.15 → 0.12"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch08 Captain Howdy (until 'But here's the twist')",
+     "bed_volume": "0.13"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 four-feeling montage, 'Fear' beat (startFrom 960 f = 32 s)",
+     "bed_volume": "0.14"
+    }
+   ],
+   "alias_names": [
+    "r_spirits_dark.mp3",
+    "spirits_dark.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/r_spirits_dark.mp3"
+  },
+  {
+   "canonical": "g_grip",
+   "md5": "05232d177e53ecc0a39fab552b3d24a9",
+   "duration_s": 70.01,
+   "integrated_lufs": -16.34,
+   "true_peak_dbtp": -0.19,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "tense political documentary underscore, slow tightening ostinato in low strings, ticking clock pulse, cold and deliberate, sparse piano stabs, each phrase a little heavier and closer, restrained brass swells, ominous and inevitable, ends on a sustained dark chord, space for narrator, instrumental",
+   "mood": "Tense political: slow tightening low-string ostinato, ticking clock, sparse piano stabs, restrained brass swells, ominous, ends on a sustained dark chord.",
+   "good_part": "First ~70 s used; starting 13 s into the chapter puts its closing chord under the restated question.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending)",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "grip.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/g_grip.mp3"
+  },
+  {
+   "canonical": "g_southampton",
+   "md5": "1180a5d5e75355a34890f4c7040dc688",
+   "duration_s": 109.78,
+   "integrated_lufs": -15.89,
+   "true_peak_dbtp": -0.07,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "grave suspense documentary underscore, prophetic and foreboding, low string drones, distant deep drum like a slow heartbeat, sparse eerie high strings like an eclipse, dread slowly rising, a sudden dark swell, then hollow silence and a grieving low cello aftermath, restrained, no action music, no heroics, space for narrator, instrumental",
+   "mood": "Grave prophetic suspense: low drones, slow heartbeat drum, eerie high strings (eclipse), rising dread, sudden dark swell, hollow silence, grieving cello aftermath.",
+   "good_part": null,
+   "notes": "Embedded Suno title tag says 'World Outside' (id 0a2e74c2…), but it was uploaded as 'South Hampton.mp3' and differs from g_world_outside.",
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch09 Southampton (swell runs from the hiding through the hanging, then quiet for 'Historians still wrestle')",
+     "bed_volume": "0.14"
+    }
+   ],
+   "alias_names": [
+    "southampton.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/g_southampton.mp3"
+  },
+  {
+   "canonical": "g_pyramid",
+   "md5": "7dc151d8d9b536de55fb4ef0dd27444c",
+   "duration_s": 100.01,
+   "integrated_lufs": -15.81,
+   "true_peak_dbtp": -0.27,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "antebellum southern parlor elegance turned uneasy, slow stately piano and string quartet, cold and polished, quiet tension underneath, low drone, sparse harp, restrained documentary underscore, in the last third the harmony darkens and a low pulse appears like fear, space for narrator, instrumental",
+   "mood": "Antebellum parlor elegance turned uneasy: stately piano + string quartet, cold and polished, low drone, harp; last third darkens with a low fear pulse.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch05 The Pyramid (from the top; fades just before '…one more reason. Fear.')",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Copied in as g_pyramid; was option A for ch02/C for ch05 (review/music_options), not used",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "g_pyramid.mp3",
+    "pyramid.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/g_pyramid.mp3"
+  },
+  {
+   "canonical": "g_cotton_engine",
+   "md5": "64a7bdb9317cce40c6c99b9185ac4adf",
+   "duration_s": 104.86,
+   "integrated_lufs": -14.95,
+   "true_peak_dbtp": -0.18,
+   "source_video": "Grip Tighter (Slaveryvideo)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "industrial revolution documentary underscore, mechanical ostinato like turning gears and a cotton gin crank, pizzicato strings and muted piano repeating pattern, steady ticking pulse, gradually adds low strings and brass, momentum building relentlessly, darker and heavier as it grows, ominous undertone, no melody hooks, cinematic, space for narrator, instrumental",
+   "mood": "Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier.",
+   "good_part": null,
+   "notes": "Embedded Suno title tag says 'Founding' (id 27d1a598…), but it was uploaded as 'Cotton Engine.mp3' and is a different take from g_founding.",
+   "used_in": [
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch03 Fifty Pounds a Day (enters at chapter frame 180 = 6 s)",
+     "bed_volume": "0.16"
+    }
+   ],
+   "alias_names": [
+    "cotton_engine.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/g_cotton_engine.mp3"
+  },
+  {
+   "canonical": "r_nativism",
+   "md5": "2111be6186f6c4c37484a84f41ff7178",
+   "duration_s": 108.33,
+   "integrated_lufs": -12.33,
+   "true_peak_dbtp": 0.28,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 110-second cue about immigrants and the hostility they met, 1830s-1850s: opens with a sorrowful Irish low whistle and cello lament over sustained strings (famine and emigration), then turns uneasy and ominous with a low pulsing ostinato and dark brass swells (a mob, a burning building), then sly and sardonic with plucked strings (a fake bestseller), ending with a tense, secretive march on muted snare. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march.",
+   "good_part": "Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch04 Know Nothing (immigration, nativism)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch09 The Monster (Bank War gap filler; startFrom 1650 f = 55 s, i.e. the second half)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Fallback for Ch05 if newsroom.mp3 missing (skip 50 f)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback for Ch10 if grip.mp3 missing; copied in as r_nativism but unused",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "nativism.mp3",
+    "r_nativism.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/r_nativism.mp3"
+  },
+  {
+   "canonical": "r_abolition_b",
+   "md5": "077af3efde300f2ee9af8650858fbd65",
+   "duration_s": 109.43,
+   "integrated_lufs": -12.35,
+   "true_peak_dbtp": 0.02,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 110-second cue: defiant and building for a newspaper editor who refuses to back down, 1831: driving low strings and a steady pulse that grow into a powerful, uncompromising theme with timpani hits, then danger and chaos (a mob) with dissonant strings, then a stubborn, resolved ending. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch10 Not Someday, second half (Garrison)",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch08 It Must Be Preserved (music/v3/r_abolition_b.mp3)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Fallback for Ch06 if price.mp3 missing",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Copied in as r_abolition_b, unused",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "abolition_b.mp3",
+    "r_abolition_b.mp3"
+   ],
+   "group": "Tension, dread and dark",
+   "file": "cues/r_abolition_b.mp3"
+  },
+  {
+   "canonical": "w_sea_battle",
+   "md5": "6bd3eed50632f377e06e35beb8cd5174",
+   "duration_s": 75.7,
+   "integrated_lufs": -11.26,
+   "true_peak_dbtp": 0.2,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 75-second cue: a heroic, swashbuckling 1812 naval battle for a toy theater: brisk strings, brass fanfares, fife, field drums and timpani like cannon fire, a triumphant cheering ending. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Heroic swashbuckling naval battle: brisk strings, brass fanfares, fife, field drums, timpani like cannon fire, triumphant cheering ending.",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Ironsides",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "NewOrleans (until the twist)",
+     "bed_volume": "0.14"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch03 Old Hickory (duck low under the Creek land-grab lines)",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "sea_battle.mp3",
+    "w_sea_battle.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/w_sea_battle.mp3"
+  },
+  {
+   "canonical": "w_fire",
+   "md5": "57e65093bb6c27fd3e36a6a44181ad7a",
+   "duration_s": 87.72,
+   "integrated_lufs": -11.08,
+   "true_peak_dbtp": 0.76,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 90-second cue: the night the British burned Washington, 1814. Opens urgent and anxious (hurried tremolo strings, a ticking clock pulse), a tender quiet interlude for saving a treasured painting, then dark and heavy as flames rise: low brass, timpani rolls, a descending minor theme. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Burning of Washington: urgent anxious tremolo + ticking clock → tender quiet interlude (saving the painting) → dark and heavy, low brass, timpani, descending minor theme.",
+   "good_part": null,
+   "notes": "Loudest Lyria cue (−11.1 LUFS, true peak +0.8 dBTP).",
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "WashingtonBurns",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback for Ch09 Southampton; copied in as w_fire, unused",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "fire.mp3",
+    "w_fire.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/w_fire.mp3"
+  },
+  {
+   "canonical": "w_dawn",
+   "md5": "ff3195017f1bc4b41903002f7f551835",
+   "duration_s": 66.4,
+   "integrated_lufs": -11.6,
+   "true_peak_dbtp": 0.69,
+   "source_video": "The War Nobody Won (Jackson repo, src/v2)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 65-second cue: night bombardment of a harbour fort, 1814: low rumbling timpani and anxious strings waiting in the dark, then a slow sunrise swell into a warm, noble, hopeful chorale for brass and strings as a flag is revealed still flying. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
+   "mood": "Night bombardment of Fort McHenry: rumbling timpani, anxious strings in the dark, then a slow sunrise swell into a warm noble hopeful brass/string chorale.",
+   "good_part": "Dark first part, then the sunrise swell (the hopeful part) later in the cue.",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "FortMcHenry",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "The War Nobody Won (Jackson repo, src/v2)",
+     "where": "Legacy (final, from fin−10)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Alternate in the folder (backup for the ending)",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "dawn.mp3",
+    "w_dawn.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/w_dawn.mp3"
+  },
+  {
+   "canonical": "a_mexico",
+   "md5": "d29c4fb4410b42fedc4332ecfe3bb47b",
+   "duration_s": 89.88,
+   "integrated_lufs": -15.69,
+   "true_peak_dbtp": -1.36,
+   "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarrón bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
+   "mood": "Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet.",
+   "good_part": null,
+   "notes": "Tied to Bierce (Ouija MUSIC.md).",
+   "used_in": [
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch08 One Last War",
+     "bed_volume": "0.15"
+    }
+   ],
+   "alias_names": [
+    "mexico.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/a_mexico.mp3"
+  },
+  {
+   "canonical": "a_mexico_short",
+   "md5": "95fff0147ac111d0f8927b076baf3fed",
+   "duration_s": 64.8,
+   "integrated_lufs": -14.69,
+   "true_peak_dbtp": 0.05,
+   "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarrón bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
+   "mood": "Alternate take of a_mexico (65 s, low dynamic range).",
+   "good_part": null,
+   "notes": null,
+   "used_in": [
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Not referenced by any chapter",
+     "bed_volume": "—"
+    }
+   ],
+   "alias_names": [
+    "mexico_short.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/a_mexico_short.mp3"
+  },
+  {
+   "canonical": "r_ending",
+   "md5": "00f26a809380d9c8602c7ee4d78bd17d",
+   "duration_s": 61.47,
+   "integrated_lufs": -11.97,
+   "true_peak_dbtp": -0.26,
+   "source_video": "Fix Everything (Reform-Era)",
+   "generator": "Google Lyria",
+   "model": "lyria-3.5",
+   "prompt": "A 60-second closing cue: reflective, warm piano and strings looking back over a story; in the second half it slowly turns dark and tense with low strings and brass, ending on an unresolved chord. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
+   "mood": "Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord.",
+   "good_part": "Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King').",
+   "notes": null,
+   "used_in": [
+    {
+     "video": "Fix Everything (Reform-Era)",
+     "where": "Ch11 Why (conclusion)",
+     "bed_volume": "0.15 rising to 0.2 at the end"
+    },
+    {
+     "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
+     "where": "Ch09 Walking Off the Map (from 'So back')",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "King Andrew (Jackson repo, src/v3)",
+     "where": "Ch11 Same Man, Two Crowns (music/v3/r_ending.mp3)",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Ch10 Grip Tighter (takes over from grip at 'Then the cotton')",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Grip Tighter (Slaveryvideo)",
+     "where": "Fallback for Ch02 (first 50 s) if founding.mp3 missing",
+     "bed_volume": "—"
+    },
+    {
+     "video": "Good Luck (Ouija)",
+     "where": "Ch09 Who Moves It?, last lines (warm first ~30 s only)",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "ending.mp3",
+    "r_ending.mp3"
+   ],
+   "group": "Endings",
+   "file": "cues/r_ending.mp3"
+  }
+ ]
+}

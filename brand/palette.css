@@ -1,0 +1,19 @@
+/* 15 Minute History palette, for web pages, slides and design tools. Values match the video kit (src/kit/Kit.tsx). */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=IBM+Plex+Mono&family=Inter:wght@600;800&family=Nanum+Pen+Script&family=Playfair+Display:wght@900&display=swap');
+
+:root {
+  --fmh-teal: #2FE0C4;    /* mark: outlines, notes, arrows, routes, pins */
+  --fmh-orange: #FF9F1C;  /* box: torn highlighter title strips */
+  --fmh-coral: #FF6F61;   /* subject: the one figure in colour */
+  --fmh-ink: #111111;     /* type on colour, outlines on handwriting */
+  --fmh-bone: #EDE7DC;    /* quiet (heavy) chapters: title strips */
+  --fmh-cream: #F4EFE6;   /* photo-card borders, the "15", quotes */
+  --fmh-black: #0D0C09;
+  --fmh-desk: radial-gradient(ellipse at 45% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%);
+
+  --fmh-font-display: 'Abril Fatface', serif;       /* UPPERCASE titles */
+  --fmh-font-hand: 'Nanum Pen Script', cursive;     /* lowercase notes, render at 1.55x the nominal size */
+  --fmh-font-quote: 'Playfair Display', serif;      /* 900, primary-source quotes */
+  --fmh-font-ui: 'Inter', sans-serif;               /* 600, definition bars and captions */
+  --fmh-font-mono: 'IBM Plex Mono', monospace;      /* UPPERCASE source tags, 1px tracking */
+}

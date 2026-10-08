@@ -1,0 +1,36 @@
+{
+  "locked": {
+    "_note": "Normal chapters. One job per colour: teal draws and explains, orange labels (titles), coral is the story's subject, ink is type on colour.",
+    "mark_teal": "#2FE0C4",
+    "box_orange": "#FF9F1C",
+    "subject_coral": "#FF6F61",
+    "ink": "#111111"
+  },
+  "quiet": {
+    "_note": "Heavy chapters (slavery, asylums, Indian Removal, war dead). Teal lines only, titles on bone paper, no coral tint.",
+    "mark_teal": "#2FE0C4",
+    "box_bone": "#EDE7DC",
+    "ink": "#111111"
+  },
+  "neutrals": {
+    "card_cream": "#F4EFE6",
+    "envelope_paper": "#F3EAD8",
+    "desk_paper_gradient": "radial-gradient(ellipse at 45% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)",
+    "desk_ruling": "1px rgba(255,255,255,0.35) every 64px, layer opacity 0.12",
+    "map_base": "#15130F",
+    "deep_black": "#0D0C09",
+    "photo_base": "#111111",
+    "white": "#FFFFFF"
+  },
+  "finish": {
+    "vignette": "radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,0.3) 100%)",
+    "grain": "SVG feTurbulence fractalNoise, baseFrequency 0.9, numOctaves 2, desaturated, opacity 0.13, mix-blend-mode overlay, re-seeded every 2 frames"
+  },
+  "image_filters": {
+    "archival_bw": "grayscale(1) contrast(1.2) brightness(0.97)",
+    "engraving_hot": "grayscale(1) contrast(1.4)",
+    "document": "sepia(0.3) contrast(1.1)",
+    "dimmed_background": "grayscale(1) contrast(1.25) brightness(0.55)",
+    "map_1836": "grayscale(1) sepia(0.25) contrast(1.2) brightness(0.8)"
+  }
+}
