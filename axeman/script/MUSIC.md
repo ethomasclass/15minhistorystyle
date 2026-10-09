@@ -1,6 +1,6 @@
 # Music: Jazz It Out (The Axeman of New Orleans)
 
-Reuse first: every underscore cue comes from the channel library (`../../music/cues/`, prefixes kept). The period
+Reuse first: every underscore cue comes from the channel library (`music/cues/` in the `15minhistorystyle` style repo, prefixes kept). The period
 jazz is **real public-domain records** from 1917–1918 (US recordings published before 1923 entered the public domain
 on January 1, 2022), from Library of Congress National Jukebox masters. Provenance and the other candidates are in
 `PD_MUSIC.md`. No new music was generated.

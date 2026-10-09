@@ -11,5 +11,6 @@ SCRIPT.md, a prompts file, a MUSIC.md or YouTube text for a new video, it should
 | [04 King Andrew](04_King_Andrew/) | script, Gemini prompts, music plan, YouTube text, handoff |
 | [05 Grip Tighter](05_Grip_Tighter/) | script, **fact-check with verdicts**, image plan, music plan with Suno prompts, YouTube text, viewing guide |
 | [06 Good Luck (Ouija)](06_Good_Luck_Ouija/) | script, production plan, prompts (paintings, music, SFX), music plan, YouTube text, handoff |
+| [07 Jazz It Out (Axeman)](07_Axeman/) | script with fact-check flags and sources, image list with credits, music plan, **public-domain records research**, YouTube text, handoff |
 
 Paths inside these files point into each video's own repo, not into this one.

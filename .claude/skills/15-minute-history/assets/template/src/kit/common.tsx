@@ -7,10 +7,14 @@ import {useGFrame, usePal} from './Kit';
 export const MAP = {w: 4986, h: 4608};
 
 /** The sound under every handwritten note (one place to change it) and its level. */
-export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
+export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.12};
 
-export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
+/** One sound effect at frame `at`. It plays for `len` frames (default 5 s, longer than any effect in sfx/) and the last
+ * 6 frames fade, so an effect is never chopped off mid-sound with a click. */
+export const Sfx: React.FC<{at: number; src: string; volume?: number; len?: number}> = ({at, src, volume = 0.5, len = 150}) => (
+  <Sequence from={Math.max(0, at)} durationInFrames={len} layout="none">
+    <Audio src={staticFile(src)} volume={(f) => volume * interpolate(f, [len - 6, len], [1, 0], clamp)} />
+  </Sequence>
 );
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */

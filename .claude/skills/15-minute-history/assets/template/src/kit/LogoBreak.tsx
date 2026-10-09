@@ -68,7 +68,7 @@ export const LogoBreak: React.FC = () => {
       <AbsoluteFill style={{opacity: logo, transform: 'scale(0.62)', transformOrigin: '945px 540px'}}>
         <Wordmark sweep={sweep} />
       </AbsoluteFill>
-      {TICKS.map((t) => <Sfx key={t} at={t} src="sfx/tick_soft.wav" volume={0.18} />)}
+      {TICKS.map((t) => <Sfx key={t} at={t} src="sfx/tick_soft.wav" volume={0.07} />)}
     </AbsoluteFill>
   );
 };

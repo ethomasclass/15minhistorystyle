@@ -17,7 +17,8 @@ to see how the style has developed:
 [Fix Everything](lookbook/01_Fix_Everything.jpg) ·
 [The War Nobody Won](lookbook/02_War_Nobody_Won.jpg) (the toy-theater look, before the channel look) ·
 [Bierce](lookbook/03_Bierce.jpg) · [King Andrew](lookbook/04_King_Andrew.jpg) ·
-[Grip Tighter](lookbook/05_Grip_Tighter.jpg) · [Good Luck (Ouija)](lookbook/06_Good_Luck_Ouija.jpg)
+[Grip Tighter](lookbook/05_Grip_Tighter.jpg) · [Good Luck (Ouija)](lookbook/06_Good_Luck_Ouija.jpg) ·
+[Jazz It Out (Axeman)](lookbook/07_Axeman.jpg)
 
 ---
 
@@ -45,6 +46,9 @@ to see how the style has developed:
 | **Strike-through** | An orange 8 px stroke drawn across a note in 5 frames. | Rejected ideas ("guns?", "pray harder?") | Fix Everything | `components/ambrose/bits.tsx` `StrikeLine` |
 | **Big statement** | Stacked 96 px lines alternating orange-box and plain teal type on a dimmed map. | The driving question, the thesis | Fix Everything | compose from Highlight |
 | **Scene counter** | "1/7" or "LIFE 3/7" in mono at top right. | Montages and episodic structures | Fix Everything, Bierce | `components/ambrose/bits.tsx` `Lives` |
+| **Text fit** | `Note` and `Highlight` shrink to fit before x = 1860 (`fitSize`) instead of running off the frame. A fallback, not a licence for long titles. | Every note and title, automatically | Axeman | template `Kit.tsx` |
+| **Typed heading** | A mono column heading typed out letter by letter while the narrator says it, so a desk scene is never empty. | Two-sided comparisons ("MANY NEW ORLEANIANS SAW / ITALIAN FAMILIES SAW") | Axeman | Axeman `Ch05.tsx` `TypeHead` |
+| **Chalk** | A message written on drawn pavement word by word with the voice. | A message left at a scene | Axeman | `components/axeman/ax.tsx` |
 
 ## Marking up a picture
 
@@ -57,6 +61,9 @@ to see how the style has developed:
 | **Punch-in** | A hard cut to a 1.65–2.3× crop of a detail, still creeping in. A hard ×1.14 punch lands on the climax word. | Energy in light chapters | Fix Everything | Fix Everything `Ch02.tsx` `PunchIns` |
 | **Doc + DocMark** | A scanned document on a cream card. Boxes, loops, underlines and a coral wash are drawn **in the scan's own pixels**, so they move with the paper as the camera pushes in. | Primary sources: notices, laws, articles, census pages | Grip Tighter (used 24×) | `components/grip_tighter/gt.tsx` (needs `src/imgs.ts` from `img_sizes.py`) |
 | **SrcView** | A camera that travels over a large document or picture along keyframes, with marks in source pixels. | Reading across a magazine cover, ad or article | Ouija | `components/ouija/oj.tsx` |
+| **Line boil** | Every drawn line wobbles between three seeded poses, swapped every 5 frames: it reads as drawn, not vector. | Every Traced, Loop, Arrow, strike and sketched motif | Axeman | template `Kit.tsx` (`BoilDefs`, `boilUrl`, `useBoilId`) |
+| **Polygon masks** | A hand-traced polygon (20–30 points) as the subject mask, for pictures rembg can't cut: halftone clippings, cartoons, line art. | Newspaper photos and cartoons | Axeman | `components/axeman/tools/polymask.py` |
+| **Clip** | A newspaper clipping on the desk with underlines and boxes in the clipping's own pixels. | Headlines and quoted lines from period papers | Axeman | `components/axeman/ax.tsx` |
 
 ## Pictures on the desk
 
@@ -70,6 +77,8 @@ to see how the style has developed:
 | **DropCard** | A card falls onto the desk with a spring, a little air rotation, motion blur and a contact shadow that tightens. | Instead of the pop, when a card should feel like it has weight | Ouija | `components/ouija/oj.tsx` (needs `@remotion/motion-blur`) |
 | **Photo** | A full-bleed B&W image with a slow push (1.02 → 1.10), optional tint and trace. | Most archival beats | King Andrew | template `shell.tsx` |
 | **Blurred fill** | A portrait fitted `contain` over a blurred, darkened copy of itself. | Tall images in a 16:9 frame | Fix Everything / Bierce | `components/ambrose/bits.tsx` `Full` |
+| **Parallax (photographs)** | The Ouija 2.5D move for real photos: a rembg mask, then `layers.py` writes the subject on transparency and an inpainted background, and the subject slides over it with a contact shadow. | Photos with one clear foreground figure, in a video with no paintings | Axeman | `components/axeman/ax.tsx` `Parallax`, `components/axeman/tools/layers.py` |
+| **Fit** | A whole picture fitted on the desk, uncropped, with optional tint and trace. Hard cuts every ~22 frames make a beat-matched montage. | Odd-shaped archival pictures; party montages | Axeman | `components/axeman/ax.tsx` |
 
 ## Paintings (AI illustrations for gaps)
 
@@ -107,6 +116,11 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 | **Person** | A drawn voter or crowd figure; dashed for the people left out. | Who could vote; who counted as "the people" | King Andrew | template `figures.tsx` |
 | **Pyramid** | A social-pyramid diagram with one level lit. | Class structure | Grip Tighter | Grip Tighter `Ch05.tsx` |
 | **Ember** | A coral ember with rising sparks that flares on cue. | A recurring motif ("the spark") | Fix Everything | template `common.tsx` |
+| **Recurring drawn motif** | One sketched object that returns each time the story repeats, with a counter: a back door whose lower panel gets chiseled out ("BACK DOORS 4"). | A pattern the viewer should start to expect | Axeman | `components/axeman/ax.tsx` `Door`, `Counter` |
+| **Blamed card** | An index card listing people blamed, each struck through as they're cleared. It grows chapter by chapter. | Scapegoats, suspects, accusations that fell apart | Axeman | `components/axeman/ax.tsx` `Blamed` |
+| **Police sketch** | A faceless figure drawn detail by detail as a witness description is read (body, suit, hat), with a "?" for the face. | Witness descriptions; an unknown culprit | Axeman | `components/axeman/ax.tsx` `Witness` |
+| **Deadline clock** | A drawn clock whose minute hand ticks to a deadline, the swept wedge in coral, with ticks on the sound. | A countdown ("12:15") | Axeman | `components/axeman/ax.tsx` `Clock`, `clockTicks` |
+| **Shadow** | A lamp-lit axe silhouette sliding across the desk: menace without gore. | Night attacks in a violent story | Axeman | `components/axeman/ax.tsx` |
 
 ## Structure and transitions
 
@@ -120,6 +134,8 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 | **Chapter wrapper with sound lists** | Adds a whoosh per cut and stamp, write, tick and boom sounds from lists of cue words, so sound doesn't have to be placed by hand. | Bierce | `components/ambrose/bits.tsx` `Chapter` |
 | **End screen** | Hold the last image about 15 s with music only, leaving room for YouTube's end-screen elements. | Ouija | `ChapterShell extra` in Ouija's `shell.tsx` |
 | **Montage** | Seven hard cuts on the beat, with a counter and a tick on each. | Fix Everything | Fix Everything `Ch01.tsx` |
+| **The held last line** | Silence cut into the narration before the last line (`pause.py`), the music pulled out, record crackle, a needle drop 3 frames before the word, then the record plays under the end plug and end screen. | Axeman ("It played.") | template `tools/pause.py`; Axeman `Ch09.tsx` |
+| **J- and L-cuts** | The next scene's sound starts before the picture cut (J), or the last scene's sound runs past it (L). | Axeman | any `Bed` or `Sfx` whose `from` or `to` straddles the cut; see `voice-and-audio.md` §8 |
 
 ## Checks (run them, every time)
 
@@ -131,6 +147,7 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 | `audit_text.py` | Titles on screen for under 2 s (your rule) | `components/ambrose/tools/` (hard-codes 30 fps) |
 | `trace.py fromfile` alignment check | A Gemini mask pass that was redrawn or shifted instead of pixel-aligned | `components/ambrose/tools/trace.py` (the template's copy lacks the check and the `matte` mode) |
 | `tools/youtube_check.py` | Title, description, tag and chapter limits | template |
+| `tools/beatcheck.py` | Payoff lines (the script's `*italic*` lines) with too little silence before them, music running into them, or a hit that peaks before the word. Writes a waveform strip per beat. | template |
 
 ---
 

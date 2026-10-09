@@ -12,7 +12,8 @@ prefix says which video the cue was made for:
 | `a_` | *The Man Who Couldn't Sit Still* (Ambrose Bierce) | Suno |
 | `g_` | *Grip Tighter: Slavery and the Cotton South* | Suno |
 
-*Good Luck* (Ouija) made no new music; it reused 19 of these. Keep the prefixes when you copy a cue into a video
+*Good Luck* (Ouija) made no new music; it reused 19 of these. *Jazz It Out* (Axeman) made none either: 12 reused cues plus three public-domain 1917–18 records
+(see [Public-domain records](#public-domain-records)). Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
 
 **Reuse first.** Before generating anything, find a cue below for each chapter and write the video's `script/MUSIC.md`
@@ -144,6 +145,28 @@ gets this suffix:
 **Adding a cue to this library:** give it the new video's prefix, copy it to `cues/`, measure it
 (`ffmpeg -i cues/x.mp3 -af loudnorm=print_format=summary -f null -`), and add a row above and an entry in `catalog.json` with its prompt.
 
+## Public-domain records
+
+Real records, not generated cues: US sound recordings first published before 1923 have been public domain since
+January 1, 2022 (17 U.S.C. §1401), and so have compositions published more than 95 years ago. *Jazz It Out* used three
+Original Dixieland Jazz Band sides from Library of Congress National Jukebox masters, loudness-normalized for use as beds.
+They're in [`pd/`](pd/). Ten more candidates (Sweatman, the Louisiana Five, Jim Europe's 369th, Jelly Roll Morton), with
+sources, matrix numbers, measured loudness and a period-accuracy note for each, are in
+[`examples/07_Axeman/PD_MUSIC.md`](../examples/07_Axeman/PD_MUSIC.md).
+
+| File | Record | LUFS | How *Jazz It Out* used it |
+|---|---|---|---|
+| `pd_odjb_one_step_far.mp3` | *Dixie Jass Band One-Step*, Victor 18255-A, 1917, band-passed and echoed so it sounds like a record playing in the next room | −16.3 | Cold open under the sheet music, with `sfx/crackle.wav`, stopped by `sfx/needle.wav` · bed 0.20 |
+| `pd_odjb_jazz_band_ball.mp3` | *At the Jazz Band Ball*, Victor 18457-A, 1918 | −14.7 | Ch07, the party night montage (cuts every 22 frames, about a bar) · bed 0.24 |
+| `pd_odjb_tiger_rag.mp3` | *Tiger Rag*, Victor 18472-B, 1918 | −15.0 | Ch09, "It played." (after a needle drop), ducked under the end plug, then the end screen · bed 0.32 → 0.13 → 0.32 |
+
+- **Content ID:** public-domain records can still draw a claim (*Tiger Rag* is the likeliest). Keep the LoC source URL to
+  dispute it.
+- **Credit line:** "Period recordings: Original Dixieland Jass Band (Victor, 1917–1918), public domain, Library of Congress
+  National Jukebox."
+- **Mood:** these are joyful dance records. In a dark story they work as irony, the city dancing in the face of a killer,
+  not as underscore. Muffle them, stop them dead with a needle drag, or let them answer a silence.
+
 ## Every cue with its prompt
 
 
@@ -186,6 +209,8 @@ The channel's cold-open identity cue.
 - King Andrew: Ch01 King Andrew the First (music/v3/r_cold_open.mp3) · bed 0.17, fading to 0 at the end
 - Grip Tighter: Ch01 The Proclamation · bed 0.17 → 0.12 over the last 60 frames
 - Good Luck: Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage) · bed 0.13
+- Jazz It Out: Ch01 cold open, the driving question (from 52 s) · bed 0.16
+- Jazz It Out: Ch09 So Who Was the Axeman? (the suspects) · bed 0.15
 
 ### `j_cold_open`
 
@@ -214,6 +239,7 @@ Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3
 - The War Nobody Won: Lowell (until 'home') · bed 0.13
 - Fix Everything: jh/MapTest (a map-motion test, not a chapter; file is music/intrigue.mp3 in Reform-Era) · bed 0.16
 - Good Luck: Ch02 Knock Once for Yes (as r_intrigue) · bed 0.26
+- Jazz It Out: Ch03 A Spy, a Hatchet and a Deathbed (whole chapter) · bed 0.14
 
 ### `r_spirits`
 
@@ -246,6 +272,7 @@ Ouija MUSIC.md: among the loudest cues; keep 0.12–0.14.
 - The Man Who Couldn't Sit Still: Ch02 Thirteen A's · bed 0.15
 - Good Luck: Ch07 Next to Monopoly (cuts out at 'Which made…') · bed 0.13
 - Good Luck: Ch09 montage, 'Fun' beat (startFrom 72 f) · bed 0.13
+- Jazz It Out: Ch04 the mid-video like-and-subscribe plug · bed 0.11
 
 ### `j_gossip`
 
@@ -270,6 +297,7 @@ Quietest Suno cue (−17.3 LUFS).
 
 - The Man Who Couldn't Sit Still: Ch06 Name Your Price · bed 0.15
 - Good Luck: Ch03 Good Luck (button lands on "I'm a Presbyterian"; runs under the subscribe plug) · bed 0.2
+- Jazz It Out: Tried for Ch07 'So did the Axeman keep his word?', rejected as too upbeat for a murder story · bed —
 
 ### `a_newsroom`
 
@@ -282,6 +310,7 @@ Quietest Suno cue (−17.3 LUFS).
 Tied to Bierce (Ouija MUSIC.md). Very low dynamic range (LRA 2.2).
 
 - The Man Who Couldn't Sit Still: Ch05 Bitter Bierce, first half (until 'And in his', then r_spirits_dark) · bed 0.15
+- Jazz It Out: Ch04 A City Sitting Up at Night (the name and the panic) · bed 0.17
 
 ### `r_temperance`
 
@@ -376,6 +405,7 @@ Grip Tighter's one warm cue.
 - Grip Tighter: Ch06 Sunup to Sundown (first ~45 s, then j_grief) · bed 0.12
 - Grip Tighter: Fallback for Ch08 (its hopeful last 15 s, extended) · bed —
 - Good Luck: Alternate in the folder (backup for ch06) · bed —
+- Jazz It Out: Ch04 'And then, nothing' (first 45 s: the flu, the quiet months) · bed 0.10
 
 ### `j_grief`
 
@@ -391,6 +421,7 @@ Short (40 s). Requested length 40000 ms.
 - Grip Tighter: Ch06 Sunup to Sundown (from 'Some enslaved people', Douglass beat) · bed 0.12
 - Good Luck: Ch06 Empty Chairs (from 'So picture one house') · bed 0.15
 - Good Luck: Ch09 montage 'Grief' beat · bed 0.16
+- Jazz It Out: Ch06 Gretna, from 'In December' · bed 0.13
 
 ### `w_aftermath`
 
@@ -406,6 +437,7 @@ Ouija MUSIC.md: among the loudest; keep 0.12–0.14.
 - King Andrew: Ch10 Let Him Enforce It, Trail of Tears (after w_frontier) · bed 0.13
 - Grip Tighter: Ch07 No Law Above Him (ends before Celia; her story plays over room tone) · bed 0.12
 - Good Luck: Ch06 Empty Chairs (until 'So picture') · bed 0.12
+- Jazz It Out: Ch06 Gretna (heavy; grave first half only, its second half was too upbeat for Ch08) · bed 0.11
 
 ### `r_abolition_a`
 
@@ -447,6 +479,9 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 - Good Luck: Ch01 Two Pictures (the 1973 half, hard cut from j_good_feelings) · bed 0.15 → 0.12
 - Good Luck: Ch08 Captain Howdy (until 'But here's the twist') · bed 0.13
 - Good Luck: Ch09 four-feeling montage, 'Fear' beat (startFrom 960 f = 32 s) · bed 0.14
+- Jazz It Out: Ch02 The Back Door (whole chapter; out for the chalk message) · bed 0.13 / 0.12
+- Jazz It Out: Ch07 A Letter from Hell (the letter) · bed 0.12
+- Jazz It Out: Ch07 'So did the Axeman keep his word?' (from 40 s; replaced a_price, which was too upbeat) · bed 0.12
 
 ### `g_grip`
 
@@ -455,6 +490,7 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 > tense political documentary underscore, slow tightening ostinato in low strings, ticking clock pulse, cold and deliberate, sparse piano stabs, each phrase a little heavier and closer, restrained brass swells, ominous and inevitable, ends on a sustained dark chord, space for narrator, instrumental
 
 - Grip Tighter: Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending) · bed 0.15
+- Jazz It Out: Ch04 A City Sitting Up at Night (August, up to 'the newspapers have a name') · bed 0.17
 
 ### `g_southampton`
 
@@ -465,6 +501,7 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 Embedded Suno title tag says 'World Outside' (id 0a2e74c2…), but it was uploaded as 'South Hampton.mp3' and differs from g_world_outside.
 
 - Grip Tighter: Ch09 Southampton (swell runs from the hiding through the hanging, then quiet for 'Historians still wrestle') · bed 0.14
+- Jazz It Out: Ch08 The Last Door (the last attacks, a heartbeat under 'He just stops') · bed 0.18
 
 ### `g_pyramid`
 
@@ -495,6 +532,7 @@ Embedded Suno title tag says 'Founding' (id 27d1a598…), but it was uploaded as
 - King Andrew: Ch09 The Monster (Bank War gap filler; startFrom 1650 f = 55 s, i.e. the second half) · bed 0.12
 - The Man Who Couldn't Sit Still: Fallback for Ch05 if newsroom.mp3 missing (skip 50 f) · bed 0.15
 - Grip Tighter: Fallback for Ch10 if grip.mp3 missing; copied in as r_nativism but unused · bed —
+- Jazz It Out: Ch05 Why Italian Grocers? (whole chapter) · bed 0.13
 
 ### `r_abolition_b`
 
@@ -572,3 +610,4 @@ Tied to Bierce (Ouija MUSIC.md).
 - Grip Tighter: Ch10 Grip Tighter (takes over from grip at 'Then the cotton') · bed 0.12
 - Grip Tighter: Fallback for Ch02 (first 50 s) if founding.mp3 missing · bed —
 - Good Luck: Ch09 Who Moves It?, last lines (warm first ~30 s only) · bed 0.13
+- Jazz It Out: Ch09 the answer (from 30 s: its dark half, ending unresolved; the warm first half was too positive) · bed 0.15

@@ -138,6 +138,8 @@ Durations are in frames at 30 fps. Graphics step at 12 fps (see §5), so an 8-fr
 | Wipe-on | box scales X from 0 → 1 from the **left** over **8 frames**. Text fades in frames 3–7. |
 | "after" text | extra words set **outside** the box in **box orange**, same font and size, gap **0.28 × size**, shadow `0 3px 14px rgba(0,0,0,0.55)`, fades in frames 6–10. Example: [SALVATION] IS A CHOICE. |
 | Rotation | usually **−2°**, sometimes +2°, ±3° for variety in stacked lists |
+| Shadow | a **hard** drop shadow, `drop-shadow(4px 5px 0 rgba(0,0,0,0.5))`: torn tape sits on the paper, it doesn't float (*Axeman*) |
+| Fit | never wraps. If the text plus `after` words would run past x = 1860, `fitSize()` shrinks it to fit (*Axeman*). |
 | Sound | stamp |
 
 ### 4.2 Traced outline (`Traced`)
@@ -148,16 +150,19 @@ Durations are in frames at 30 fps. Graphics step at 12 fps (see §5), so an 8-fr
 | Offset | outline sits outside the subject: the mask is dilated **7 source px**, blurred (σ = 4.2), simplified (2.5 px) and Chaikin-smoothed twice |
 | Draw-on | **14 frames** default, **8–12** used, starting 1–4 frames after the cue |
 | Open loop | `part` 0.86–0.93 leaves a small gap, like a hand-drawn loop that doesn't close |
+| Boil | yes (see §5 *Line boil*) |
 
 ### 4.3 Hand-drawn loop (`Loop`)
 - An ellipse drawn as a 70-segment polyline plus **6 extra segments of overshoot** (about 31° past the start). Radius wobble ±1%, and the radius grows 3% over the stroke, so the end misses the start like a real pen.
 - Stroke **5px** default, **6px** in chapters. Teal. Tilt −12° to +3°.
 - Draw-on **12 frames** default, **8–12** used.
 - On the map, `MapLoop` uses a 7px screen stroke and a 10-frame draw.
+- Boils (§5).
 
 ### 4.4 Arrow (`Arrow`)
 - A quadratic curve with a sideways **bow of 40px** default (±18 to ±30 used). Stroke **5px**, teal, round cap.
 - Shaft draws over **8 frames**. The head appears once the shaft is complete: an open chevron of two **26px** strokes at ±0.45 rad (about 26°).
+- Boils (§5).
 
 ### 4.5 Handwritten note (`Note`)
 | Property | Value |
@@ -168,6 +173,7 @@ Durations are in frames at 30 fps. Graphics step at 12 fps (see §5), so an 8-fr
 | Write-on | revealed left → right with a clip-path over **10 frames** default (9–16 used; longer lines get longer) |
 | Rotation | default **−4°**. Range in use **−6° to +8°**, mostly −2° to −5°. |
 | Exit | hard off at `out` (no fade) |
+| Fit | never wraps. A note that would run past x = 1860 is shrunk to fit (`fitSize()`), so a long line set near the right never leaves the frame. |
 | Sound | marker stroke, 2 frames before the note |
 
 ### 4.6 Photo card (`Card`)
@@ -248,6 +254,9 @@ White `rgba(255,255,255,0.55)` 1.5px lines, **88px cells**, layer opacity **0.5*
 | Punch-ins | a hard cut to a 1.65–2.3× crop of a detail, still creeping +0.2% per frame. A **hard ×1.14 punch** on the climax word ("DEAD OR ALIVE"). |
 | Cuts | **hard cuts only**, 1–2 frames before the cue word, each with a whoosh. No dissolves. The only fade is the channel intro's last 8 frames. |
 | Exits | marks switch off instantly at their `out` frame |
+| Line boil | every hand-drawn **line** (Traced, Loop, Arrow, Strike, and any sketched motif) wobbles: three seeded `feTurbulence` + `feDisplacementMap` poses, **3.2 px**, swapped every **5 frames** on the graphics clock (`BoilDefs` / `boilUrl` / `useBoilId` in `Kit.tsx`). Poses swap, never blend. Text and pictures don't boil. It costs about 25% render time on line-heavy stretches. (*Axeman*) |
+| Holds | a finished mark rests **3–6 frames** (100–200 ms) before the next thing moves near it. Nothing lands and moves on in the same beat. |
+| Weight | things with mass overshoot **3–5%** (card pops, drops, stamps) and wind up **10–20%** the other way first when they're thrown (a card flicked off, a door slammed). Paper and ink never bounce more than once. Moving things travel on a slight arc, not a ruler line. |
 | Sync | narration has word-level timings (ElevenLabs forced alignment). A cue is "the frame word X starts" (optionally the nth occurrence). Titles land **on** the word. Notes start **2–4 frames before** the word. Cards pop **1–2 frames before**. Outlines start 1–4 frames after the subject is named. |
 | Wordmark push | the intro scales 1 → 1.04 from the "15" to the end |
 
@@ -259,16 +268,22 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 
 | Event | File | Volume | Timing |
 |---|---|---|---|
-| Handwritten note | `sfx/marker_tick.wav` (the `WRITE` setting) | **0.2** | 2 frames before the note's word |
-| Highlighter title | `sfx/stamp.wav` | 0.26–0.45 (0.26–0.28 in chapters) | on the word |
-| Pin / card flip / montage beat / clock tick | `sfx/tick.wav` | 0.45–0.5 | on the pop |
-| Scene cut | `sfx/whoosh.wav` | 0.28–0.3 (Ch02–03), 0.4–0.5 (Ch01) | at the cut frame |
-| Big hit ("DEAD OR ALIVE", "HISTORY") | `sfx/boom.wav` | 0.45–0.5 | on the word |
+| Handwritten note | `sfx/marker_tick.wav` (the `WRITE` setting) | **0.12** | 2 frames before the note's word |
+| Highlighter title | `sfx/stamp.wav` | **0.22** in chapters (0.45 in the channel intro) | on the word |
+| Pin / card flip / montage beat / clock tick | `sfx/tick.wav` | **0.2** | on the pop |
+| Scene cut | `sfx/whoosh.wav` | **0.13** (0.16 in the cold open) | at the cut frame |
+| Big hit ("DEAD OR ALIVE", "HISTORY") | `sfx/boom.wav` | 0.42 (0.32 under a quiet payoff) | on the word |
 | Knock | `sfx/knock.wav` | 0.5 | on each "knock" |
 | Letter sent / diagram flip | `sfx/page_turn.wav` | 0.45–0.5 | on the action |
 | Sea voyage bed | `sfx/sea_ambience.wav` | 0.12 | fades in and out over 10–30 frames |
 | Music under narration | `music/<chapter>.mp3` | **0.15** (Ch02, Ch03), 0.16 (map sequence), 0.17 (Ch01, dipping to 0.06 at the end) | 15–20-frame fade in and out |
 | Title sting | `music/title_sting.mp3` | 0.45 | 4 frames before the "15" |
+
+Effect levels were halved in *Axeman* after the note that transition clicks "can be a bit jarring": a whoosh on every
+cut adds up over 10 minutes. The effect should be felt more than heard; if you notice it on a second watch, it's too loud.
+Every `Sfx` plays out and fades over its last 6 frames (`len`, default 150), so no effect is ever cut off mid-sound.
+Record crackle (`sfx/crackle.wav`), a needle drop (`sfx/needle.wav`), a slow heartbeat (`sfx/heartbeat.wav`) and a
+chisel on wood (`sfx/chisel.wav`) were added for *Axeman* and are in the style repo's `sfx/` folder.
 
 ---
 
@@ -377,3 +392,12 @@ none of them is standard yet; ask before using one. Code and stills are in the s
   - Warm and full-colour grades on some paintings, and a full-colour thumbnail.
   - 24 fps with marks on twos (see the frame-rate note in the style repo's `techniques/README.md`).
   - The coral-subject rule held: the planchette was the one coral thing in every board shot.
+- ***Jazz It Out* (the Axeman of New Orleans), a true-crime mystery:** no AI images at all, so photographs, clippings
+  and line art carried it.
+  - Parallax on real photographs, and hand-traced polygon masks for halftone clippings.
+  - A drawn motif set (a back door that gets chiseled, a 12:15 clock, a faceless police-sketch witness, a "people
+    blamed" card), all with line boil.
+  - Public-domain 1917–18 jazz records as score.
+  - A 1.5 s silence and a needle drop before the last line.
+  - Halved effect levels.
+  - Its kit is in `techniques/components/axeman/`.

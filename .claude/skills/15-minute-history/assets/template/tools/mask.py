@@ -22,13 +22,15 @@ PUB = os.path.join(HERE, "..", "public")
 JOBS = {
     # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model)
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
+    # An optional 4th value lowers min_area (default 20000 px) for small subjects.
+    # rembg fails on halftone clippings and line drawings: trace those by hand (techniques/components/axeman/tools/polymask.py).
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }
 
 
-def run(name, src, box, model, sessions={}):
+def run(name, src, box, model, min_area=20000, sessions={}):
     im = Image.open(os.path.join(PUB, src)).convert("RGB")
     crop = im.crop(box) if box else im
     small = crop.copy()
@@ -39,7 +41,7 @@ def run(name, src, box, model, sessions={}):
     full = np.zeros((im.height, im.width), np.uint8)
     x0, y0 = (box[0], box[1]) if box else (0, 0)
     full[y0:y0 + crop.height, x0:x0 + crop.width] = (a > 128).astype(np.uint8) * 255
-    m = clean(full, close=9, min_area=20000)
+    m = clean(full, close=9, min_area=min_area)
     n, lab, stats, _ = cv2.connectedComponentsWithStats(m)
     if n > 2:                        # keep only the biggest piece (the subject)
         big = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))

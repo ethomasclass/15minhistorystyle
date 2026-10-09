@@ -1,7 +1,7 @@
 // Chapter 5 · Why Italian Grocers? Sicilian New Orleans, the Black Hand theory and its problem, 1891, and the
 // same evidence read two ways.
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, interpolate} from 'remotion';
 import words from '../../public/audio/ch05_why_grocers.words.json';
 import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
@@ -71,7 +71,7 @@ const Problem: React.FC<{t: TL}> = ({t}) => {
 const Lynching: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Pic src={P.lynching1891.src} tag={P.lynching1891.tag} a={t.at("there's a darker")} b={t.at('So when')} z0={1.02} z1={1.1} vignette={0.75}>
+    <Pic src={P.lynching1891.src} tag={P.lynching1891.tag} a={t.at("there's a darker")} b={t.at('plenty of')} z0={1.02} z1={1.1} vignette={0.75}>
       {() => (
         <>
           {g >= t.at('In 1891,') && <Highlight text="1891" x={110} y={100} size={110} at={t.at('In 1891,')} seed={61} rot={-2} />}
@@ -84,15 +84,23 @@ const Lynching: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** The same attacks, seen from two sides. */
+/** A column heading typed out while the narrator says it. */
+const TypeHead: React.FC<{text: string; x: number; a: number; b: number; color: string}> = ({text, x, a, b, color}) => {
+  const g = useGFrame();
+  if (g < a) return null;
+  const n = Math.round(interpolate(g, [a, b], [0, text.length], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  return <div style={{position: 'absolute', left: x, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color}}>{text.slice(0, n)}{n < text.length ? '_' : ''}</div>;
+};
+
+/** The same attacks, seen from two sides. Each heading types out as the narrator names that side. */
 const TwoViews: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
-    <Desk a={t.at('So when')}>
+    <Desk a={t.at('plenty of')}>
       <div style={{position: 'absolute', left: 958, top: 120, width: 4, height: 840, background: '#f4efe6', opacity: 0.6}} />
-      <div style={{position: 'absolute', left: 140, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: pal.mark}}>MANY NEW ORLEANIANS SAW</div>
+      <TypeHead text="MANY NEW ORLEANIANS SAW" x={140} a={t.at('plenty of')} b={t.at('saw the Mafia.')} color={pal.mark} />
       <Note text="the mafia" x={200} y={300} size={110} rot={-4} at={t.at('saw the Mafia.')} color={pal.box} />
-      <div style={{position: 'absolute', left: 1060, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: pal.subject}}>ITALIAN FAMILIES SAW</div>
+      <TypeHead text="ITALIAN FAMILIES SAW" x={1060} a={t.at('A lot of Italian')} b={t.at('something else.')} color={pal.subject} />
       <Note text="we're the ones" x={1080} y={300} size={90} rot={-4} at={t.at('They were')} color={pal.subject} />
       <Note text="being hunted" x={1120} y={440} size={90} rot={-4} at={t.at('being hunted.')} color={pal.subject} />
       <Note text="...and nobody protecting us" x={1060} y={660} size={56} rot={-3} at={t.at('protecting')} color="#ffffff" />
@@ -119,7 +127,7 @@ const Body: React.FC = () => {
     [at('To a lot') - 1, <BlackHand t={t} />],
     [at("But there's a problem.") - 1, <Problem t={t} />],
     [at("there's a darker") - 1, <Lynching t={t} />],
-    [at('So when') - 1, <TwoViews t={t} />],
+    [at('plenty of') - 1, <TwoViews t={t} />],
     [at('Same evidence.') - 1, <Same t={t} />],
   ];
   const scene = useScene(cuts);

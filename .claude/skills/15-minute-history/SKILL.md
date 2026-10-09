@@ -83,7 +83,7 @@ src/         project.ts (per-video settings), chapters.ts, masks.ts, Thumbnail.t
 public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for AI, masks/, maps/), music/, sfx/, fonts/
 tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, trace.py, find_images.py, stills.mjs,
              sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, music_eleven.py,
-             sfx_eleven.py, brand.mjs
+             sfx_eleven.py, brand.mjs, pause.py (silence before a payoff line), beatcheck.py (do the payoffs land?)
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master
 ```

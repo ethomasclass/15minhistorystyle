@@ -130,9 +130,11 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
 
 ## 6. Sound
 
-Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
-the marker sound 2 frames before every `Note` (`WRITE`, 0.2), a tick on pins and card flips (0.45). Music beds go
+Per chapter, in `Body`: a whoosh on every cut after the first (0.13), a stamp on every `Highlight` (0.22),
+the marker sound 2 frames before every `Note` (`WRITE`, 0.12), a tick on pins and card flips (0.2). Music beds go
 in `ChapterShell`'s `music` at 0.13–0.17. Keep the lists of cue words next to the scenes so they stay in sync.
+(Levels were halved in *Axeman*: see `visual-style.md` §6. Pauses, J/L-cuts and the payoff check are in
+`voice-and-audio.md` §5 and §8.)
 
 ## 7. Checking your work
 
@@ -150,6 +152,7 @@ Do all of these before sending the user anything. Each one caught real problems 
    480p preview, so treat any hit as a bug.
 5. **After rendering:** `python3 tools/frames_sheet.py out/ch/chNN.mp4 out/check.jpg 12 18.5 40` to look at the
    finished frames, especially every spot the probe flagged and every new graphic.
+6. **Payoffs:** `python3 tools/beatcheck.py` and look at `out/beats.png` (`voice-and-audio.md` §8).
 
 ## 8. Lessons from earlier videos
 
@@ -161,5 +164,20 @@ Do all of these before sending the user anything. Each one caught real problems 
 - **One subject in color per image.** If two people matter, use two scenes or trace the second without tint.
 - **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end.
 - **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
+- **No scene sits empty for more than about a second** (*Axeman*). A desk scene that cuts in before its first mark
+  shows a blank desk and a heading while the narrator talks. Either hold the last picture until the first mark's word
+  (cut at the phrase that fills the new scene, not the start of the sentence), or give the heading something to do:
+  *Axeman*'s two-column scene types each column heading out letter by letter while the narrator says it.
+- **Line art should boil.** Anything drawn as strokes (a door, a clock, a police-sketch figure) wraps its strokes in
+  `<g filter={boilUrl(id, g)}>` with `<BoilDefs id={id} />` (see `visual-style.md` §5). Without it, sketches look
+  like vector clip art next to the boiling traces.
+- **Text fits itself; the probe still checks.** `Note` and `Highlight` shrink to fit before x = 1860 (`fitSize`), but
+  shrinking is a fallback: if a title shrinks noticeably, shorten it.
+- **Photographs get parallax too.** *Axeman* had no paintings, so real photos got the 2.5D treatment: a rembg mask,
+  then `layers.py` (style repo `techniques/components/axeman/tools/`) writes the subject on transparency and an
+  inpainted background, and `Parallax` slides one over the other. Works on photos with a clear foreground figure;
+  skip it for flat documents and clippings.
+- **rembg can't cut halftone clippings or line drawings.** Trace those by hand as polygons (`polymask.py` in the same
+  folder): about 20–30 points around the figure is enough, since the trace is meant to be loose.
 - **The bundle copies public/ into /tmp** (~500 MB for a full video) on every render; the tools delete theirs.
   If the disk fills, remove `/tmp/remotion-webpack-bundle-*` and `out/` scratch files.

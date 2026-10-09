@@ -5,9 +5,10 @@
 2. Voicing the narration
 3. Pace settings (locked)
 4. Pronunciation
-5. Re-voicing one chapter
+5. Re-voicing one chapter (and dramatic pauses)
 6. Music
 7. Sound effects
+8. Do the payoffs land? (beat check, J- and L-cuts)
 
 ## 1. Keys and safety
 
@@ -75,6 +76,21 @@ python3 tools/anchors.py ch04_corrupt_bargain --src src/ch/Ch04.tsx
 Changed words can break anchors (a phrase that no longer exists throws at render time), and every later anchor
 shifts. Re-check stills for that chapter after re-voicing.
 
+### Dramatic pauses
+
+ElevenLabs leaves 0.25–0.35 s between sentences, which is too little before a payoff line. Don't fight it with
+punctuation; add the silence afterwards:
+
+```sh
+python3 tools/pause.py ch09_who "It played." 1.5      # 1.5 s of silence before the phrase
+```
+
+It cuts silence into the WAV halfway through the gap before the phrase, shifts every later word timing, grows the
+duration and records the pause in the `.words.json`, so scenes keyed with `t.at()` follow automatically. It refuses to
+add a second pause before the same phrase. **Re-voicing a chapter wipes its pauses**: run `pause.py` again after (the
+list is in `"pauses"` in the old words file and in `script/_notes.md`). Guide: 0.2–0.3 s for a beat ("Now the papers have
+a name for him. *The Axeman.*"), 1–2 s for the line the video was built to land, with the music pulled out under it.
+
 ## 6. Music
 
 - **Reuse first.** Every cue the channel has made (38, deduplicated, with prompts, lengths, loudness and where each
@@ -102,4 +118,30 @@ The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
 `python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. Volumes are in `building-scenes.md` §6. Keep
-effects quiet; they should be felt more than heard.
+effects quiet; they should be felt more than heard. Levels are in `visual-style.md` §6.
+
+## 8. Do the payoffs land? (`tools/beatcheck.py`)
+
+Mark each payoff line in the script with `*asterisks*` (the channel already does, for emphasis). After rendering:
+
+```sh
+python3 tools/beatcheck.py            # every chapter in out/ch/;  or: python3 tools/beatcheck.py 07 09
+```
+
+For each italic line it prints the **gap** (silence in the narration before it), the **room** (how much quieter the mix
+is in that gap than the chapter's typical level) and the **hit** (where the loudest 100 ms in the next 1.5 s falls), and
+writes `out/beats.png`, a waveform strip per beat with the word marked. Act on:
+
+- `tight` (gap under 0.3 s) on a line that ends a chapter or turns the story → `tools/pause.py`.
+- `no room` (under 3 dB) → the music or an effect is running straight into the line. Dip the bed, end the cue, or move
+  the effect.
+- a negative **hit** → a sting or boom is peaking before the word and stepping on it. Move it to the word or after.
+
+Mid-sentence emphasis (an italic phrase inside a sentence) needs neither gap nor room; ignore its flags.
+
+### J-cuts and L-cuts
+A hard picture cut doesn't need a hard sound cut. **J-cut:** the next scene's sound (crackle, a room tone, the first
+note of its cue) starts 6–15 frames *before* the picture cuts, pulling the viewer across. **L-cut:** the last scene's
+sound runs 6–20 frames *past* the cut and fades, so a heavy moment isn't chopped. In Remotion that's just a `Bed` or
+`Sfx` whose `from` sits before (J) or whose `to` sits after (L) the cut frame. *Axeman* used J-cuts for the record
+crackle into the party night and the needle drop 3 frames before "It played."

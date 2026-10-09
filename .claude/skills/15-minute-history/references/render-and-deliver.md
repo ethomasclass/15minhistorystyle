@@ -32,6 +32,9 @@ tools/render.sh 03 07        # re-render only these chapters, then rejoin and ma
 - The script prints each chapter's start time in the finished video. Use those for the YouTube chapter list and
   to re-time the headings in SCRIPT.md.
 - A full 15-minute video takes a while; run it in the background and keep working.
+- **Concurrency isn't the lever.** On a 4-core cloud container, 2, 3 and 4 render threads all ran at the same speed
+  (about 6.5 frames a second on a busy chapter) and 6 failed; leave `Config.setConcurrency(null)`. What does cost time
+  is filters: line boil adds about 25% on line-heavy stretches, and blend-mode tints add more. A full 10-minute video takes about 45 minutes here.
 - Verify the output before telling the user it's done: duration, 1920×1080 at 30 fps, and loudness
   (`ffmpeg -i out/<SLUG>_1080p.mp4 -af ebur128 -f null -` should report about −14 LUFS integrated). Then pull
   frames at a few spots with `tools/frames_sheet.py` and look at them.

@@ -29,6 +29,17 @@
 - **Music:** see `MUSIC.md`. The Davilla song itself waits on a scan of the score (HNOC request drafted).
 - **Images:** see `IMAGES.md`. Archival only: no AI images in this video (your call). Masks give the coral tint and teal trace; `tools/layers.py` splits masked photos into parallax layers.
 
+## Pauses cut in after voicing
+
+`tools/beatcheck.py` measures the silence before every *italic* payoff line. Three got more air with `tools/pause.py`.
+**Re-run these after re-voicing ch04, ch08 or ch09** (voicing writes fresh files without them):
+
+```sh
+python3 tools/pause.py ch04_sitting_up "The Axeman." 0.2
+python3 tools/pause.py ch08_last_door "He just stops." 0.3
+python3 tools/pause.py ch09_who "It played." 1.5
+```
+
 ## The last line
 
 "It played." gets a held breath: `python3 tools/pause.py ch09_who "It played." 1.5` puts 1.5 s of silence before it

@@ -67,11 +67,17 @@ export const HANDS: Record<string, Hand> = {
 export const HandCtx = React.createContext<Hand>(HANDS.nanum);
 export const useHand = () => React.useContext(HandCtx);
 
+// Children mount only once the faces are in, so fitSize() measures real glyphs on every frame, the first included.
 export const JFonts: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [h] = useState(() => delayRender('jh-fonts'));
+  const [ready, setReady] = useState(false);
   useEffect(() => {
-    Promise.all(FACES.map((f) => document.fonts.load(f))).then(() => continueRender(h));
-  }, [h]);
+    Promise.all(FACES.map((f) => document.fonts.load(f))).then(() => setReady(true));
+  }, []);
+  useEffect(() => {
+    if (ready) continueRender(h);
+  }, [ready, h]);
+  if (!ready) return null;
   return <>{children}{getInputProps().probe ? <TextProbe /> : null}</>;
 };
 
@@ -139,15 +145,17 @@ export const Traced: React.FC<{paths: string[]; place: Place; at?: number; dur?:
 }) => {
   color = color ?? usePal().mark;
   const frame = useGFrame();
+  const id = useBoilId();
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp) * part;
   return (
     <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', pointerEvents: 'none'}} width={1920} height={1080}>
-      <g transform={`translate(${place.left + jitter} ${place.top}) scale(${place.scale})`}>
+      <BoilDefs id={id} />
+      <g filter={boilUrl(id, frame)}><g transform={`translate(${place.left + jitter} ${place.top}) scale(${place.scale})`}>
         {paths.map((d, i) => (
           <path key={i} d={d} fill="none" stroke={color} strokeWidth={width / place.scale} strokeLinejoin="round" strokeLinecap="round"
             pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />
         ))}
-      </g>
+      </g></g>
     </svg>
   );
 };
@@ -158,6 +166,7 @@ export const Loop: React.FC<{cx: number; cy: number; rx: number; ry: number; at?
 }) => {
   color = color ?? usePal().mark;
   const frame = useGFrame();
+  const id = useBoilId();
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp);
   const pts: string[] = [];
   const n = 70;
@@ -168,8 +177,11 @@ export const Loop: React.FC<{cx: number; cy: number; rx: number; ry: number; at?
   }
   return (
     <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
-      <polyline points={pts.join(' ')} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round"
-        pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} transform={`rotate(${tilt} ${cx} ${cy})`} />
+      <BoilDefs id={id} />
+      <g filter={boilUrl(id, frame)}>
+        <polyline points={pts.join(' ')} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round"
+          pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} transform={`rotate(${tilt} ${cx} ${cy})`} />
+      </g>
     </svg>
   );
 };
@@ -185,9 +197,11 @@ export const Highlight: React.FC<{text: string; after?: string; x: number; y: nu
   const steps = 40;
   for (let i = 0; i <= steps; i++) pts.push(`${(i / steps) * 100}% ${random(`t${seed}${i}`) * 9}%`);
   for (let i = steps; i >= 0; i--) pts.push(`${(i / steps) * 100}% ${100 - random(`b${seed}${i}`) * 9}%`);
+  size = fitSize(text + (after ? ' ' + after : ''), JF.display, 400, size, x, 0.44 + (after ? 0.28 : 0));
   return (
     <div style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: size * 0.28, transform: `rotate(${rot}deg)`}}>
-      <div style={{position: 'relative', padding: `${size * 0.1}px ${size * 0.22}px ${size * 0.06}px`}}>
+      {/* hard shadow: torn tape sits on the paper, it doesn't float */}
+      <div style={{position: 'relative', padding: `${size * 0.1}px ${size * 0.22}px ${size * 0.06}px`, filter: 'drop-shadow(4px 5px 0 rgba(0,0,0,0.5))'}}>
         <div style={{position: 'absolute', inset: 0, background: boxOf(pal), clipPath: `polygon(${pts.join(',')})`, transformOrigin: 'left', transform: `scaleX(${wipe})`}} />
         <div style={{position: 'relative', fontFamily: JF.display, fontSize: size, lineHeight: 1.05, color: pal.ink, whiteSpace: 'nowrap', opacity: interpolate(frame, [at + 3, at + 7], [0, 1], clamp)}}>{text}</div>
       </div>
@@ -211,8 +225,9 @@ export const Note: React.FC<{text: string; x: number; y: number; size?: number; 
   const hand = useHand();
   if (frame < at || frame >= out) return null;
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp);
+  const px = fitSize(text, hand.family, hand.weight, size * hand.scale, x);
   return (
-    <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: size * hand.scale, color: color ?? accent, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap',
+    <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: px, color: color ?? accent, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap',
       textShadow: '0 0 2px #111, 0 0 4px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)', clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`}}>{text}</div>
   );
 };
@@ -222,6 +237,7 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; bo
   const pal = usePal();
   color = color ?? accentOf(pal);
   const frame = useGFrame();
+  const id = useBoilId();
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp);
   if (frame < at || frame >= out) return null;
   const mx = (x1 + x2) / 2 - ((y2 - y1) / Math.hypot(x2 - x1, y2 - y1)) * bow;
@@ -230,9 +246,12 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; bo
   const h = 26;
   return (
     <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
-      <path d={`M${x1},${y1} Q${mx},${my} ${x2},${y2}`} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />
-      {p >= 1 && <path d={`M${x2 - h * Math.cos(ang - 0.45)},${y2 - h * Math.sin(ang - 0.45)} L${x2},${y2} L${x2 - h * Math.cos(ang + 0.45)},${y2 - h * Math.sin(ang + 0.45)}`}
-        fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" />}
+      <BoilDefs id={id} />
+      <g filter={boilUrl(id, frame)}>
+        <path d={`M${x1},${y1} Q${mx},${my} ${x2},${y2}`} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />
+        {p >= 1 && <path d={`M${x2 - h * Math.cos(ang - 0.45)},${y2 - h * Math.sin(ang - 0.45)} L${x2},${y2} L${x2 - h * Math.cos(ang + 0.45)},${y2 - h * Math.sin(ang + 0.45)}`}
+          fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" />}
+      </g>
     </svg>
   );
 };
@@ -241,6 +260,42 @@ export const Tag: React.FC<{text: string; x?: number; y?: number}> = ({text, x =
   <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
     textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div>
 );
+
+/**
+ * Line boil: three slightly different wobbles of every drawn line, each held ~5 frames and swapped instantly (never
+ * blended), like a hand redrawing the line on each drawing. Put <BoilDefs /> in an <svg> and wrap the strokes in
+ * <g filter={boilUrl(id, g)}>. Strength is in screen pixels.
+ */
+export const BoilDefs: React.FC<{id: string; strength?: number}> = ({id, strength = 3.2}) => (
+  <defs>
+    {[0, 1, 2].map((k) => (
+      <filter key={k} id={`${id}b${k}`} x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency={0.032} numOctaves={1} seed={7 + k * 11} result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale={strength} xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    ))}
+  </defs>
+);
+export const boilUrl = (id: string, g: number) => `url(#${id}b${Math.floor(g / 5) % 3})`;
+/** A stable id for an SVG's filters (React 18 useId is unique per component instance). */
+export const useBoilId = () => 'bl' + React.useId().replace(/[^a-zA-Z0-9]/g, '');
+
+/** Text fitting: the largest size up to `px` at which `text`, starting at x, ends before `limit` (1860: the 60 px safe
+ * margin). `extra` reserves that many times the size for padding (Highlight's tape). It measures the real font (JFonts
+ * mounts scenes only after the faces load). tools/probe_text.mjs stays the final check. */
+let measureCtx: CanvasRenderingContext2D | null = null;
+export const fitSize = (text: string, family: string, weight: number, px: number, x: number, extra = 0, limit = 1860): number => {
+  if (typeof document === 'undefined') return px;
+  measureCtx = measureCtx ?? document.createElement('canvas').getContext('2d');
+  const font = `${weight} ${px}px ${family}`;
+  let w = text.length * px * 0.62;
+  if (measureCtx && document.fonts.check(font)) {
+    measureCtx.font = font;
+    w = measureCtx.measureText(text).width;
+  }
+  const room = limit - x - extra * px;
+  return w > room && room > 0 ? (px * room) / w : px;
+};
 
 /** Paper/film texture and a soft vignette over everything. */
 export const Finish: React.FC<{vignette?: number}> = ({vignette = 0.55}) => {

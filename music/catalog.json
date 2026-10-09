@@ -148,6 +148,16 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage)",
      "bed_volume": "0.13"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch01 cold open, the driving question (from 52 s)",
+     "bed_volume": "0.16"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch09 So Who Was the Axeman? (the suspects)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -242,6 +252,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch02 Knock Once for Yes (as r_intrigue)",
      "bed_volume": "0.26"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch03 A Spy, a Hatchet and a Deathbed (whole chapter)",
+     "bed_volume": "0.14"
     }
    ],
    "alias_names": [
@@ -353,6 +368,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 montage, 'Fun' beat (startFrom 72 f)",
      "bed_volume": "0.13"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch04 the mid-video like-and-subscribe plug",
+     "bed_volume": "0.11"
     }
    ],
    "alias_names": [
@@ -427,6 +447,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch03 Good Luck (button lands on \"I'm a Presbyterian\"; runs under the subscribe plug)",
      "bed_volume": "0.2"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Tried for Ch07 'So did the Axeman keep his word?', rejected as too upbeat for a murder story",
+     "bed_volume": "—"
     }
    ],
    "alias_names": [
@@ -454,6 +479,11 @@
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
      "where": "Ch05 Bitter Bierce, first half (until 'And in his', then r_spirits_dark)",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch04 A City Sitting Up at Night (the name and the panic)",
+     "bed_volume": "0.17"
     }
    ],
    "alias_names": [
@@ -781,6 +811,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Alternate in the folder (backup for ch06)",
      "bed_volume": "—"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch04 'And then, nothing' (first 45 s: the flu, the quiet months)",
+     "bed_volume": "0.10"
     }
    ],
    "alias_names": [
@@ -833,6 +868,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 montage 'Grief' beat",
      "bed_volume": "0.16"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch06 Gretna, from 'In December'",
+     "bed_volume": "0.13"
     }
    ],
    "alias_names": [
@@ -885,6 +925,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch06 Empty Chairs (until 'So picture')",
      "bed_volume": "0.12"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch06 Gretna (heavy; grave first half only, its second half was too upbeat for Ch08)",
+     "bed_volume": "0.11"
     }
    ],
    "alias_names": [
@@ -1028,6 +1073,21 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 four-feeling montage, 'Fear' beat (startFrom 960 f = 32 s)",
      "bed_volume": "0.14"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch02 The Back Door (whole chapter; out for the chalk message)",
+     "bed_volume": "0.13 / 0.12"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch07 A Letter from Hell (the letter)",
+     "bed_volume": "0.12"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch07 'So did the Axeman keep his word?' (from 40 s; replaced a_price, which was too upbeat)",
+     "bed_volume": "0.12"
     }
    ],
    "alias_names": [
@@ -1055,6 +1115,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending)",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch04 A City Sitting Up at Night (August, up to 'the newspapers have a name')",
+     "bed_volume": "0.17"
     }
    ],
    "alias_names": [
@@ -1081,6 +1146,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Ch09 Southampton (swell runs from the hiding through the hanging, then quiet for 'Historians still wrestle')",
      "bed_volume": "0.14"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch08 The Last Door (the last attacks, a heartbeat under 'He just stops')",
+     "bed_volume": "0.18"
     }
    ],
    "alias_names": [
@@ -1180,6 +1250,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch10 if grip.mp3 missing; copied in as r_nativism but unused",
      "bed_volume": "—"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch05 Why Italian Grocers? (whole chapter)",
+     "bed_volume": "0.13"
     }
    ],
    "alias_names": [
@@ -1432,6 +1507,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 Who Moves It?, last lines (warm first ~30 s only)",
      "bed_volume": "0.13"
+    },
+    {
+     "video": "Jazz It Out (Axeman)",
+     "where": "Ch09 the answer (from 30 s: its dark half, ending unresolved; the warm first half was too positive)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
