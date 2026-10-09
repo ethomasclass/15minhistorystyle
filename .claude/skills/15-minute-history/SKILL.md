@@ -118,5 +118,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - "YouTube description / tags": `references/thumbnail-and-youtube.md`, timestamps from the real render, then
   `python3 tools/youtube_check.py`.
 - "Handout / viewing guide / questions for the video": `references/classroom-handout.md`. Keep it simple.
+- "Shorts / vertical clips / Reels / TikToks" from a finished video: use the `15-minute-history-shorts` skill
+  (`.claude/skills/15-minute-history-shorts/` in the style repo). It has the vertical shell, the cover checks and the
+  outro line.
 - Working inside an existing video project (not the template): the same kit lives under `src/v3/` or `src/jh/`
   there; read that project's `HANDOFF.md` or `README.md` first and follow its paths.

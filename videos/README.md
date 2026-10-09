@@ -63,5 +63,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - Short YouTube titles. Tags within the 500-character limit.
 - Master READMEs include Windows PowerShell join commands.
 
+**Shorts**
+- Keep the video's own voiceover and content; the only new asset is a voiced outro: watch the full video, then subscribe.
+- Fun music under the story, from the library.
+- The automatic thumbnail has to work: the headline is on every frame, and frame 0 is a finished cover.
+- About 45 seconds (the Temperance short ran 68). Make one as a test first.
+
 **Classroom handouts**
 - "Way more simple": 10–12 questions using Explain, Describe and Identify. (Grip Tighter's 26-question guide with an answer key was an exception.)

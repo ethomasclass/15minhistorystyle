@@ -23,6 +23,7 @@ little wry, and it gets quieter and slower when the subject is suffering.
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |
 | [`.claude/skills/15-minute-history/`](.claude/skills/15-minute-history/) | The Claude skill that makes a video end to end, its reference guides, and the starter project |
+| [`.claude/skills/15-minute-history-shorts/`](.claude/skills/15-minute-history-shorts/) | The Claude skill that cuts vertical YouTube Shorts from a finished video: the vertical shell, cover checks, outro line |
 
 ## The guides
 
@@ -36,6 +37,8 @@ The detailed guides live inside the skill, so Claude reads them while it works, 
 - [Render and deliver](.claude/skills/15-minute-history/references/render-and-deliver.md): render, master to −14 LUFS, previews, the 1080p master
 - [Thumbnail and YouTube](.claude/skills/15-minute-history/references/thumbnail-and-youtube.md): the thumbnail formula, title, description, chapters, tags
 - [Classroom handout](.claude/skills/15-minute-history/references/classroom-handout.md): the simple 10–12 question viewing guide
+- [Shorts](.claude/skills/15-minute-history-shorts/SKILL.md) and [Shorts layout and covers](.claude/skills/15-minute-history-shorts/references/layout-and-covers.md):
+  vertical cutdowns with the video's own narration, safe zones, a cover that works as YouTube's automatic thumbnail, the subscribe outro
 
 ## Making a new video
 
@@ -57,6 +60,12 @@ type-checks, and renders chapter stills, thumbnails and the logo files.
 
 Keys (ElevenLabs for the voice, Gemini for paintings) go in the project's `.env`, never in a repo or a chat.
 
+## Making Shorts
+
+With the finished video's repo attached as well, ask in your own words: *"Make two shorts from Fix Everything, one on the Fox sisters
+and one on temperance."* The shorts skill reuses the video's narration, pictures and music, adds a voiced "watch the full video and
+subscribe" line at the end, and makes one as a test before the rest. Each comes with its caption, description and upload settings.
+
 ## Keeping it up to date
 
 When a video is finished, add what it made here, so the next one starts from it:
@@ -64,7 +73,7 @@ When a video is finished, add what it made here, so the next one starts from it:
 - new sound effects to `sfx/`
 - the chosen thumbnail to `brand/thumbnails/`
 - a look book: `python3 .claude/skills/15-minute-history/scripts/lookbook.py <720p.mp4> techniques/lookbook/NN_Name.jpg "Title"`
-- its script, prompts and YouTube text to `examples/`
+- its script, prompts and YouTube text to `examples/` (and `SHORTS.md` once it has shorts)
 - any new component to `techniques/components/`, or into the template's kit once it has proved itself
 
 Claude will offer to do this at the end of each video.
