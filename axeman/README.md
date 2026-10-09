@@ -39,10 +39,15 @@ chat once, so rotate it in the ElevenLabs dashboard.
 
 ## How it's built
 
-1. **Narration:** run `tools/voice_all.sh` (ElevenLabs v3, the locked pace). The heavy chapter and the ending are
-   slower: `HEAVY="06 09"`. Every scene is keyed to a spoken phrase (`t.at('phrase')`), so re-voicing re-times the
-   video. Two pauses were added after voicing with `tools/pause.py`, which you must **run again after re-voicing those
-   chapters**:
+1. **Narration:**
+   - Run `tools/voice_all.sh` (ElevenLabs v3, the locked pace). `HEAVY="06 09"` gives the heavy chapter and the
+     ending longer pauses.
+   - Chapters 6 and 9 were voiced before the one-speed rule, at the old slower stretch (1.08 instead of 1.15).
+     Re-voicing them with today's `voice_all.sh` brings them to the same speed as the rest. The speech comes from the
+     cache, so only the alignment call costs credits.
+   - Every scene is keyed to a spoken phrase (`t.at('phrase')`), so re-voicing re-times the video.
+   - Three pauses were added after voicing with `tools/pause.py`. **Run them again after re-voicing those
+     chapters**:
    - `ch04_sitting_up "The Axeman." 0.2`
    - `ch08_last_door "He just stops." 0.3`
    - `ch09_who "It played." 1.5`

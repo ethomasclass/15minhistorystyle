@@ -71,7 +71,9 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
-- A/B the pace when the subject is heavy.
+- **One voice speed for the whole video.** "The speed swaps change pitch and make some VOs sound funny" (after Axeman).
+  Heavy chapters get longer pauses, not a slower voice. A/B the pace for the whole video when the subject is heavy, then
+  use that one pace in every chapter.
 - Give music options and let you pick.
 - Transition sounds stay low. You found the whooshes and ticks "a bit jarring" (Axeman), so their levels were halved.
 - In a dark story the cues stay dark. You flagged two cues as "too upbeat and positive" for a murder story (Axeman).

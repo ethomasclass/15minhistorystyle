@@ -55,7 +55,8 @@ Plain, quick and a little wry: a smart friend explaining history, not a textbook
 - **Humanize the people.** Loyal? Absolutely. Stubborn? Also absolutely. Grief, temper and friendship explain
   choices; use them.
 - **Heavy material gets no jokes.** Slavery, removal, deaths: plain statements, numbers, a primary source, and
-  space. The heavy chapter is voiced slower (see voice-and-audio.md).
+  space. The heavy chapter gets longer pauses, but the voice keeps the same speed as every other chapter (see
+  voice-and-audio.md §3).
 - **Numbers as people say them**: "about 23 million acres", "about one in ten", "perhaps as many as one in four".
   The voice tool spells out years and numbers itself, so write digits.
 

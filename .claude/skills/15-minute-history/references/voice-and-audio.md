@@ -31,7 +31,7 @@ GEMINI_API_KEY=...    # only if tools/trace.py paint is used
 
 ```sh
 tools/voice_all.sh                     # every chapter at the locked pace
-HEAVY="10 11" tools/voice_all.sh       # same, with chapters 10 and 11 slower (heavy chapter, ending)
+HEAVY="10 11" tools/voice_all.sh       # same, with longer pauses in chapters 10 and 11 (heavy chapter, ending)
 tools/voice_all.sh 04 07               # only these chapters
 ```
 
@@ -48,13 +48,23 @@ After voicing:
 
 Matched to the channel's earlier videos; don't change them without the user asking.
 
+**One voice speed for the whole video.** The user's rule (after *Axeman*): "I want a consistent speed of my voice.
+The speed swaps change pitch and make some VOs sound funny." Every chapter, the plugs and any re-voice use the same
+`VOICE_SPEED` and `VOICE_STRETCH`. Heavy chapters get their weight from **longer pauses**, quieter music and fewer
+marks, never from a slower voice. If a whole video should be slower (*Grip Tighter* was A/B tested at about 168 wpm),
+set the stretch once for every chapter.
+
 | Chapters | VOICE_STRETCH | VOICE_MAX_PAUSE | VOICE_SENT_GAP | VOICE_PARA_GAP |
 |---|---|---|---|---|
 | Normal | 1.15 | 0.25 | 0 | 0.35 |
-| Heavy chapter and the ending (`HEAVY=`) | 1.08 | 0.35 | 0.05 | 0.55 |
+| Heavy chapter and the ending (`HEAVY=`) | **1.15 (same)** | 0.35 | 0.05 | 0.55 |
 
-`STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
-The result is about 185 words a minute for normal chapters.
+`STRETCH` is a local tempo change applied after ElevenLabs (>1 is faster). It keeps the pitch in theory, but each
+ratio colours the voice a little differently, which is why it must not change between chapters. `MAX_PAUSE` shortens
+the voice's own pauses. The result is about 185 words a minute.
+
+Before *Axeman*, heavy chapters used a stretch of 1.08. Videos up to and including *Axeman* mix the two.
+`voice.py` now records `"pace"` in every `.words.json`, and `tools/render.sh` warns when chapters don't match.
 
 ## 4. Pronunciation
 

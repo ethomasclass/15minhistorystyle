@@ -163,7 +163,8 @@ Do all of these before sending the user anything. Each one caught real problems 
 - **Every image gets a source tag**, generated ones too ("Illustration · ...").
 - **One subject in color per image.** If two people matter, use two scenes or trace the second without tint.
 - **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end.
-- **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
+- **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, longer pauses (the voice's speed never
+  changes within a video), respectful images.
 - **No scene sits empty for more than about a second** (*Axeman*). A desk scene that cuts in before its first mark
   shows a blank desk and a heading while the narrator talks. Either hold the last picture until the first mark's word
   (cut at the phrase that fills the new scene, not the start of the sentence), or give the heading something to do:

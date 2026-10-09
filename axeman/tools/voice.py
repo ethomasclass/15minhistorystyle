@@ -320,7 +320,7 @@ def main():
             w["s"], w["e"] = round(grp[0][1], 3), round(grp[-1][2], 3)
         assert j == len(aligned), f"alignment word count mismatch: {j} vs {len(aligned)}"
     json.dump({"voice": "piper-placeholder" if use_piper else os.environ.get("VOICE_ID"),
-               "duration": round(len(pcm) / 2 / RATE, 3), "words": words},
+               "duration": round(len(pcm) / 2 / RATE, 3), "pace": {"speed": SPEED, "stretch": STRETCH}, "words": words},
               open(os.path.join(OUT, name + ".words.json"), "w"), indent=0)
     print(f"wrote {wav} ({len(pcm) / 2 / RATE:.1f}s, {len(words)} words)")
 
