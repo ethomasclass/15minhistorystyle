@@ -9,6 +9,15 @@ FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
 SLUG=$(sed -n "s/^export const SLUG = '\(.*\)';/\1/p" src/project.ts)
 ALL=$(grep -o "id: 'Ch[0-9]*'" src/chapters.ts | grep -o '[0-9][0-9]*')
 mkdir -p out/ch renders
+# One voice speed per video: warn if chapters were voiced at different stretch/speed settings
+python3 - <<'PY'
+import glob, json
+paces = {f.split('/')[-1][:-11]: json.load(open(f)).get('pace') for f in sorted(glob.glob('public/audio/ch*.words.json'))}
+known = {k: (v['speed'], v['stretch']) for k, v in paces.items() if v}
+if len(set(known.values())) > 1:
+    print('WARNING: chapters voiced at different speeds (speed, stretch):', known)
+    print('         Re-voice the odd ones out with tools/voice_all.sh so the voice sounds the same throughout.')
+PY
 for n in ${*:-$ALL}; do
   npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER --log=error || exit 1
   echo "rendered ch$n"

@@ -1,11 +1,10 @@
 ## Production notes
 
 - **Title card:** JAZZ IT OUT · *The Axeman of New Orleans* · 1918 – 1919. ("Jazz it out" is the letter's own phrase.)
-- **Heavy chapter:** chapter 6 (Gretna, a two-year-old killed). `quiet` palette (teal only, bone titles), voiced slower
-  (`HEAVY="06 09" tools/voice_all.sh`), no jokes, no punch-ins, respectful images (the street, the courthouse, the
-  newspaper column; never the victims' bodies). The ending (ch09) is voiced at the heavy pace too. *Since then the
-  channel rule is one voice speed per video: `HEAVY` now only lengthens pauses, and re-voicing ch06/ch09 brings them
-  to the standard stretch (1.15).*
+- **Heavy chapter:** chapter 6 (Gretna, a two-year-old killed). `quiet` palette (teal only, bone titles), longer
+  pauses at the same voice speed (`HEAVY="06 09" tools/voice_all.sh`), no jokes, no punch-ins, respectful images
+  (the street, the courthouse, the newspaper column; never the victims' bodies). The ending (ch09) gets the longer
+  pauses too. *Both were first voiced slower and re-voiced at the standard speed: one voice speed per video.*
 - **Recurring motifs (callbacks):**
   - **The sheet music** (ch01 cold open → ch07 "Yes. That's our sheet music." → ch09 last line). Same image every time.
   - **The back door panel** (ch02 "Hold onto that back door" → ch04 Romano → ch06 "the hole in the door" → ch08 Boca). A

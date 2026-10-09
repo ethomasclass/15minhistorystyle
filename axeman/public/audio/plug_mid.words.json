@@ -1,6 +1,10 @@
 {
 "voice": "mI4rIAStSQeKeqsz4FwM",
 "duration": 10.089,
+"pace": {
+"speed": 0.9,
+"stretch": 1.15
+},
 "words": [
 {
 "w": "Quick",

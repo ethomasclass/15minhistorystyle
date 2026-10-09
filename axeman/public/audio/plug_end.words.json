@@ -1,6 +1,10 @@
 {
 "voice": "mI4rIAStSQeKeqsz4FwM",
 "duration": 6.693,
+"pace": {
+"speed": 0.9,
+"stretch": 1.15
+},
 "words": [
 {
 "w": "Thanks",

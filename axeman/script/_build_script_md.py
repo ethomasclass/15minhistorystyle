@@ -15,7 +15,7 @@ out = ['# Jazz It Out: The Axeman of New Orleans', '',
        '**Answer:** He probably didn\'t. The attacks and the fear were real; newspapers gave the fear a name; innocent people were '
        'blamed again and again; and a letter that was almost certainly a prank gave a frightened city something to do with its fear. '
        'The party was real. The invitation almost certainly wasn\'t.', '',
-       'Audience: general (no vocab cards). Chapter 6 is the heavy chapter: `quiet` palette, slower voice, no jokes.', '',
+       'Audience: general (no vocab cards). Chapter 6 is the heavy chapter: `quiet` palette, longer pauses (same voice speed), no jokes.', '',
        'Timestamps are estimates at the locked pace (~185 wpm) and get re-timed after voicing.', '', '---', '']
 t = 0.0
 for i, f in enumerate(files):
