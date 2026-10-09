@@ -1,13 +1,13 @@
 # Jazz It Out: The Axeman of New Orleans
 
-**15 Minute History** · narration script · 1,644 words · about 9 minutes of narration (about 9:20–9:40 finished, with the intro, title card and logo breaks)
+**15 Minute History** · narration script · 1,644 words · 9:53 finished (with the intro, title card, logo breaks, two plugs and the end screen)
 
 **Driving question (cold open, answered in the last chapter):** How did a killer get a whole city to throw him a party?
 **Answer:** He probably didn't. The attacks and the fear were real; newspapers gave the fear a name; innocent people were blamed again and again; and a letter that was almost certainly a prank gave a frightened city something to do with its fear. The party was real. The invitation almost certainly wasn't.
 
-Audience: general (no vocab cards). Chapter 6 is the heavy chapter: `quiet` palette, slower voice, no jokes.
+Audience: general (no vocab cards). Chapter 6 is the heavy chapter: `quiet` palette, longer pauses (same voice speed), no jokes.
 
-Timestamps are estimates at the locked pace (~185 wpm) and get re-timed after voicing.
+Chapter times are from the final render (9:53; `tools/render.sh` prints them).
 
 ---
 
@@ -27,7 +27,7 @@ So here's the question I want to answer today: *How did a killer get a whole cit
 
 It starts in a corner grocery, with a hole in the back door.
 
-## 0:54 | The Back Door
+## 0:52 | The Back Door
 
 May 23rd, 1918. Uptown New Orleans, the corner of Upperline and Magnolia.
 
@@ -47,7 +47,7 @@ Police guessed that meant the wife of Anthony Schiambra, another Italian grocer,
 
 Hold onto that back door. You're going to see it again.
 
-## 2:04 | A Spy, a Hatchet and a Deathbed
+## 2:02 | A Spy, a Hatchet and a Deathbed
 
 Five weeks later. June 27th. Another grocery, another back room.
 
@@ -65,7 +65,7 @@ Ten minutes. That's barely enough time to find your coat.
 
 Remember Besumer. *He won't be the last person blamed for this.*
 
-## 3:02 | A City Sitting Up at Night
+## 2:58 | A City Sitting Up at Night
 
 Then August. And things speed up.
 
@@ -83,7 +83,7 @@ That's mass hysteria. *Fear spreading faster than the facts.*
 
 And then, nothing. That fall, the flu shuts down the city's schools, churches and theaters. In November, the war ends. And for seven months, the Axeman is quiet.
 
-## 4:04 | Why Italian Grocers?
+## 4:10 | Why Italian Grocers?
 
 So why corner grocers? And why so many Italian families?
 
@@ -99,7 +99,7 @@ So when the Axeman hit Italian homes, plenty of New Orleanians saw the Mafia. A 
 
 Same evidence. Two very different stories.
 
-## 5:09 | Gretna
+## 5:12 | Gretna
 
 March 10th, 1919. Gretna, just across the Mississippi River from New Orleans.
 
@@ -117,7 +117,7 @@ In December 1920, Rosie Cortimiglia comes forward and admits she lied. The Jorda
 
 A child was dead. Two innocent men had nearly died for it. *And the Axeman was still out there.*
 
-## 6:10 | A Letter from Hell
+## 6:12 | A Letter from Hell
 
 Three days after Gretna, a letter turns up at the newspapers. It's dated "Hell, March 13th, 1919." And the Times-Picayune prints it.
 
@@ -141,7 +141,7 @@ So did the Axeman keep his word? Probably not, because he probably never wrote i
 
 The party was real. *The invitation almost certainly wasn't.*
 
-## 7:40 | The Last Door
+## 7:43 | The Last Door
 
 But whoever the Axeman was, he wasn't finished.
 
@@ -155,7 +155,7 @@ That's the last attack anyone has tied to the Axeman.
 
 He doesn't get caught. He doesn't write again. *He just stops.*
 
-## 8:21 | So Who Was the Axeman?
+## 8:25 | So Who Was the Axeman?
 
 So who was he?
 
@@ -190,9 +190,10 @@ Thanks so much for watching. If you liked this one, give it a like and subscribe
 ## Production notes
 
 - **Title card:** JAZZ IT OUT · *The Axeman of New Orleans* · 1918 – 1919. ("Jazz it out" is the letter's own phrase.)
-- **Heavy chapter:** chapter 6 (Gretna, a two-year-old killed). `quiet` palette (teal only, bone titles), voiced slower
-  (`HEAVY="06 09" tools/voice_all.sh`), no jokes, no punch-ins, respectful images (the street, the courthouse, the
-  newspaper column; never the victims' bodies). The ending (ch09) is voiced at the heavy pace too.
+- **Heavy chapter:** chapter 6 (Gretna, a two-year-old killed). `quiet` palette (teal only, bone titles), longer
+  pauses at the same voice speed (`HEAVY="06 09" tools/voice_all.sh`), no jokes, no punch-ins, respectful images
+  (the street, the courthouse, the newspaper column; never the victims' bodies). The ending (ch09) gets the longer
+  pauses too. *Both were first voiced slower and re-voiced at the standard speed: one voice speed per video.*
 - **Recurring motifs (callbacks):**
   - **The sheet music** (ch01 cold open → ch07 "Yes. That's our sheet music." → ch09 last line). Same image every time.
   - **The back door panel** (ch02 "Hold onto that back door" → ch04 Romano → ch06 "the hole in the door" → ch08 Boca). A
@@ -217,6 +218,17 @@ Thanks so much for watching. If you liked this one, give it a like and subscribe
   French Market and the ferry are 2.5D parallax shots (`tools/layers.py`, the Ouija technique for photographs).
 - **Music:** see `MUSIC.md`. The Davilla song itself waits on a scan of the score (HNOC request drafted).
 - **Images:** see `IMAGES.md`. Archival only: no AI images in this video (your call). Masks give the coral tint and teal trace; `tools/layers.py` splits masked photos into parallax layers.
+
+## Pauses cut in after voicing
+
+`tools/beatcheck.py` measures the silence before every *italic* payoff line. Three got more air with `tools/pause.py`.
+**Re-run these after re-voicing ch04, ch08 or ch09** (voicing writes fresh files without them):
+
+```sh
+python3 tools/pause.py ch04_sitting_up "The Axeman." 0.2
+python3 tools/pause.py ch08_last_door "He just stops." 0.3
+python3 tools/pause.py ch09_who "It played." 1.5
+```
 
 ## The last line
 

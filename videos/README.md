@@ -13,7 +13,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 3 | ***King Andrew:** How the People's President Got a Crown*, 1767–1845 | 15:30 | 11 | 2,757 | `Jackson` · `claude/jackson-explainer-videos-oseyfs` (`src/v3/`) | "…a word ready for that. / King." |
 | 4 | ***Grip Tighter:** Slavery and the Cotton South*, 1790–1860 | 17:24 | 10 | 2,760 | `Slaveryvideo` · `ccr-ec669e6a-l5w6ai` | "…the closer the whole country came to tearing apart." |
 | 5 | ***Good Luck:** How the Ouija board went from romantic to scary*, 1886–1973 | 9:48 | 9 | 1,600 | `Ouija` · `ccr-6addf590-j2w0xz` | "…that was up to whoever was holding it." + a 15 s end screen |
-| 6 | ***Jazz It Out:** The Axeman of New Orleans*, 1918–1919 | RUNTIME | 9 | 1,644 | `Axeman` · `main` (its own private repo; master in Git LFS) | "It played." + a thank-you plug and a 10 s end screen |
+| 6 | ***Jazz It Out:** The Axeman of New Orleans*, 1918–1919 | 9:53 | 9 | 1,644 | `Axeman` · `main` (its own private repo; master in Git LFS) | "It played." + a thank-you plug and a 10 s end screen |
 
 ## What each one added
 

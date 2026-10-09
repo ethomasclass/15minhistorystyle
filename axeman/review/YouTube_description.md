@@ -1,6 +1,6 @@
 # YouTube text: Jazz It Out (The Axeman of New Orleans)
 
-Timestamps are from the final render (9:55).
+Timestamps are from the final render (9:53).
 
 ## Title
 
@@ -26,9 +26,9 @@ This is the true, unsolved story of the Axeman of New Orleans (1918–1919), tol
 2:58 A city sitting up at night: the panic of 1918
 4:10 Why Italian grocers? The Black Hand and 1891
 5:12 Gretna: the Cortimiglia attack and a false accusation
-6:15 A letter from Hell: the jazz night of March 19, 1919
-7:46 The last door: the final attacks
-8:28 So who was the Axeman?
+6:12 A letter from Hell: the jazz night of March 19, 1919
+7:43 The last door: the final attacks
+8:25 So who was the Axeman?
 
 📚 IN THIS VIDEO
 • The 1919 sheet music "The Mysterious Axman's Jazz (Don't Scare Me Papa)"

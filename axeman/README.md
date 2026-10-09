@@ -1,6 +1,6 @@
 # Jazz It Out: The Axeman of New Orleans
 
-A RUNTIME **15 Minute History** video about the Axeman of New Orleans (1918–1919), for a general audience. It
+A 9:53 **15 Minute History** video about the Axeman of New Orleans (1918–1919), for a general audience. It
 answers one question: *how did a killer get a whole city to throw him a party?* This page says where everything is
 and how to change or rebuild it.
 
@@ -103,5 +103,5 @@ git lfs install                # the 1080p master is stored in Git LFS
   - **Thumbnail:** pick A or B.
   - **Fact-check flags:** `SCRIPT.md` has 20 flags, each with its sources and how the script hedges. Read them before
     publishing. The softest claims are "money and jewelry" (flag 2) and the shotguns (flag 7, illustrative).
-- **Runtime limit:** the video must stay under 10:00. It's RUNTIME now, so any added pause has to come out of the end
-  screen.
+- **Runtime limit:** the video must stay under 10:00. It's 9:53 now, which leaves about 7 seconds for any added
+  pause or a longer end screen.
