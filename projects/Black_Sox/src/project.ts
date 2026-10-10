@@ -12,7 +12,7 @@ export const DATES = '1865 – 1921';
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg'];
+export const INTRO_CARDS = ['img/ch06/joe_jackson_cleveland_1911.jpg', 'img/ch06/eddie_cicotte_1917.jpg', 'img/ch01/landis_commissioner_bain_1920s.jpg', 'img/ch02/currier_ives_american_national_game_1866.jpg', 'img/ch06/white_sox_team_bain_1919.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {

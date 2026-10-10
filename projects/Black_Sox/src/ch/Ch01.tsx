@@ -1,87 +1,145 @@
-// Chapter 1 · the cold open (driving question), then the channel intro and the title card.
-// Chapter 1 has no logo break in front; it ends on the intro + title instead. Replace the scenes, keep the shape.
+// Chapter 1 · Two Documents: the cold open (Landis 1921 vs MLB 2026, the driving question), then the channel intro
+// and the title card.
 import React from 'react';
-import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch01_cold_open.words.json';
 import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
-import {DarkPaper, MapView, Sfx, WRITE} from '../kit/common';
+import {Sfx, WRITE} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
-import {CropCard, DrawnCrown, makeTimeline, type Narration, Photo, type TL, useScene} from '../kit/shell';
+import {Definition, hasFile, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {Arch, Desk, DropCard, FlowCard, LOOK, StandIn, SyncQuote} from '../kit/bs';
+import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 import {DATES, SUBTITLE, TITLE} from '../project';
 
 const N = words as Narration;
-/** Title card length (frames) after the channel intro. */
 const TITLE_FRAMES = 150;
-/** Narration ends; the channel intro starts 20 frames later. */
 const END = Math.ceil(N.duration * 30) + 20;
 export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 
-const SULLY: [number, number] = [1920, 2288];
+/** The user's screenshot of the league's release (mlb.com, March 19, 2026). Stand-in until it exists. */
+const RELEASE = 'img/ch01/mlb_polymarket_release_2026.png';
 
-/** Full-bleed portrait: B&W, coral subject, teal trace, slow push-in, a title on the year. */
-const Portrait: React.FC<{t: TL}> = ({t}) => (
-  <Photo src="img/demo/sully_jackson_1845.jpg" size={SULLY} fx={960} fy={900} z0={1.02} z1={1.12} a={0} b={t.at("That's")} mask={MASKS.sully} traceAt={t.at('old')}>
+/** August 3rd, 1921: Landis on a Washington street, coral, traced; the date as the title. */
+const Landis: React.FC<{t: TL}> = ({t}) => (
+  <Parallax name="landis_street" src="img/ch01/landis_street_1924_crop.jpg" size={[3280, 2430]} a={0} b={t.at('"Regardless')} fx={0.56} fy={0.4}
+    cam={{z: [1.02, 1.14]}} mask={MASKS.landis_street} traceAt={t.at('Judge') + 2} tag="Library of Congress · National Photo Co., 1924">
     {() => (
       <>
-        <Highlight text="1845" x={110} y={100} size={110} at={t.at('1845.')} seed={11} rot={-2} />
-        <Note text="wild white hair" x={1250} y={260} size={56} rot={-4} at={t.at('wild')} />
-        <Note text="(he fought a few)" x={1250} y={820} size={50} rot={-3} at={t.at('fought')} color="#ffffff" />
-        <Tag text="Thomas Sully, Andrew Jackson, 1845 · National Gallery of Art" />
+        <Highlight text="AUGUST 3, 1921" x={100} y={100} size={96} at={t.at('August')} seed={11} rot={-2} />
+        <Note text="baseball's brand-new boss" x={110} y={300} size={50} rot={-3} at={t.at('brand-new') - 3} color="#ffffff" />
+        <Note text="Judge Kenesaw Mountain Landis" x={110} y={850} size={50} rot={-3} at={t.at('Judge') - 2} />
       </>
     )}
-  </Photo>
+  </Parallax>
 );
 
-/** Same face, two names: a cropped card on the desk with a crown drawn on for the enemies' name. */
-const TwoNames: React.FC<{t: TL}> = ({t}) => {
-  const g = useGFrame();
+/** His statement, word by word over the dimmed desk portrait. */
+const Statement: React.FC<{t: TL}> = ({t}) => {
+  const pal = usePal();
   return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <CropCard mask={MASKS.sully} tint={null} src="img/demo/sully_jackson_1845.jpg" size={SULLY} x={140} y={150} w={560} h={760} fx={960} fy={1000} scale={0.5} rot={-2} at={1} traceAt={6}>
-        {(S) => {
-          // Source pixels -> screen: the crown rests on the hair (see references/thumbnail-and-youtube.md for the geometry)
-          const [x0, y] = S(660, 275);
-          const [x1] = S(1200, 275);
-          return <DrawnCrown x0={x0} x1={x1} y={y} h={90} at={t.at('King')} />;
-        }}
-      </CropCard>
-      <Note text="his fans:" x={860} y={200} size={50} rot={-3} at={t.at('fans')} color="#ffffff" />
-      {g >= t.at("People's") && <Highlight text="THE PEOPLE'S PRESIDENT" x={860} y={290} size={70} at={t.at("People's")} seed={13} rot={-2} />}
-      <Note text="his enemies:" x={860} y={520} size={50} rot={-3} at={t.at('enemies')} color="#ffffff" />
-      {g >= t.at('King') && <Highlight text="KING ANDREW" x={860} y={610} size={100} at={t.at('King')} seed={15} rot={-3} />}
-    </AbsoluteFill>
+    <Arch src="img/ch01/landis_commissioner_bain_1920s.jpg" tag="Library of Congress · Bain News Service, c. 1921" a={t.at('"Regardless')} b={t.at('Eight')} z={[1.05, 1.12]} pos="50% 45%" look="dim">
+      <SyncQuote t={t} phrase="Regardless of the verdict of juries," x={150} y={190} w={1620} size={74} close={false} marks={{3: pal.subject}} />
+      <SyncQuote t={t} phrase="no player that throws a ball game... will ever play professional baseball." x={150} y={420} w={1620} size={74} open={false} marks={{3: pal.subject}} />
+      <Note text="Landis · Aug. 3, 1921" x={1260} y={850} size={46} rot={-3} at={t.at('it says') - 2} color="#ffffff" />
+    </Arch>
   );
 };
 
-/** The driving question, written on the desk. */
+/** The eight, a day after the verdict: the courtroom photo, FOR LIFE, NOT GUILTY. */
+const Eight: React.FC<{t: TL}> = ({t}) => (
+  <Arch src="img/ch01/black_sox_at_trial_1921.jpg" tag="The players at trial, Chicago, 1921 · Wikimedia Commons" a={t.at('Eight')} b={t.at('Now jump')} z={[1.04, 1.12]} pos="50% 40%">
+    <Stamp text="FOR LIFE." x={90} y={870} at={t.at('For life')} size={130} color="#FF6F61" />
+    <Note text="the day before:" x={1200} y={800} size={52} rot={-3} at={t.at('The day before') - 2} color="#ffffff" />
+    <Note text="NOT GUILTY" x={1240} y={880} size={80} rot={-4} at={t.at('not guilty') - 2} color="#FF9F1C" />
+  </Arch>
+);
+
+/** 105 years later: a second document on the desk. */
+const Release: React.FC<{t: TL}> = ({t}) => {
+  const f = useCurrentFrame();
+  return (
+  <Desk a={t.at('Now jump')}>
+    <Stamp text="+105 YEARS" x={110} y={110} at={t.at('105')} size={130} />
+    <Note text="March 2026" x={130} y={300} size={60} rot={-3} at={t.at('March') - 2} />
+    {hasFile(RELEASE) ? <DropCard src={RELEASE} x={900} y={150} w={880} rot={2} at={t.at('Another') - 1} filter={LOOK.doc} />
+      : t.at('Another') - 1 <= f && <StandIn x={900} y={150} w={880} h={560} rot={2} label="your screenshot: MLB press release, Mar 19 2026 → img/ch01/mlb_polymarket_release_2026.png" />}
+    <Highlight text="POLYMARKET" x={120} y={470} size={104} at={t.at('Polymarket')} seed={21} rot={-2} />
+    <Definition term="prediction market" def="where people trade on what's going to happen" at={t.at('prediction market') + 8} x={120} y={660} w={760} />
+    <Note text="including baseball games" x={150} y={880} size={52} rot={-3} at={t.at('Including') - 2} color="#ffffff" />
+  </Desk>
+  );
+};
+
+/** Same sport, two documents side by side. */
+const TwoDocs: React.FC<{t: TL}> = ({t}) => {
+  const pal = usePal();
+  return (
+    <Desk a={t.at('Same sport')}>
+      <DropCard src="img/ch01/eight_men_banned_1920.png" x={230} y={110} w={540} rot={-3} at={t.at('Same sport') - 1} filter={LOOK.doc} />
+      {hasFile(RELEASE) ? <DropCard src={RELEASE} x={1080} y={180} w={640} rot={2} at={t.at('Same sport') + 3} filter={LOOK.doc} />
+        : <StandIn x={1080} y={180} w={640} h={430} rot={2} label="MLB press release, 2026" />}
+      <div style={{position: 'absolute', left: 958, top: 90, width: 4, height: 860, background: 'rgba(244,239,230,0.55)'}} />
+      <div style={{position: 'absolute', left: 230, top: 760, fontFamily: JF.mono, fontSize: 28, letterSpacing: 3, color: pal.mark}}>1921</div>
+      <div style={{position: 'absolute', left: 1090, top: 760, fontFamily: JF.mono, fontSize: 28, letterSpacing: 3, color: pal.subject}}>2026</div>
+      <Note text="bans players over gambling" x={200} y={810} size={46} rot={-3} at={t.at('bans') - 3} />
+      <Note text="names an official partner" x={1080} y={810} size={46} rot={-3} at={t.at('The other names') - 2} color={pal.subject} />
+    </Desk>
+  );
+};
+
+/** The myth, crossed out: before 1919 it wasn't taboo; it was everywhere. A big 1865 crowd behind. */
+const Everywhere: React.FC<{t: TL}> = ({t}) => {
+  const g = useGFrame();
+  const strike = interpolate(g, [t.at("wasn't taboo"), t.at("wasn't taboo") + 5], [0, 1], clamp);
+  return (
+    <Arch src="img/ch02/athletics_atlantics_beale_1865.jpg" tag="J. B. Beale · Athletics vs. Atlantics, Philadelphia, 1865 · Library of Congress" a={t.at("So it's easy")} b={t.at("So here's")} z={[1.05, 1.16]} pos="40% 55%" look="dim">
+      <Note text="back then: taboo" x={180} y={190} size={78} rot={-3} at={t.at('back then') - 2} color="#ffffff" />
+      <div style={{position: 'absolute', left: 170, top: 262, height: 9, borderRadius: 5, background: '#FF9F1C', width: 560 * strike, transform: 'rotate(-3deg)'}} />
+      <Note text="now: everywhere" x={180} y={330} size={78} rot={-3} at={t.at('and now') - 2} color="#ffffff" />
+      <Note text="before 1919?" x={180} y={560} size={70} rot={-3} at={t.at('Before 1919') - 2} />
+      <Highlight text="EVERYWHERE." x={180} y={690} size={130} at={t.at('everywhere', 2)} seed={23} rot={-2} />
+    </Arch>
+  );
+};
+
+/** The driving question on the desk. */
 const Question: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <Note text="the question:" x={200} y={220} size={60} rot={-3} at={t.at('question')} color="#ffffff" />
-      <Note text="how did one man" x={260} y={360} size={88} rot={-3} at={t.at('How')} />
-      <Note text="earn both names?" x={300} y={500} size={88} rot={-3} at={t.at('both')} color={pal.subject} />
-      <Loop cx={1460} cy={620} rx={220} ry={120} at={t.at('evidence')} seed={17} tilt={-6} />
-      <Note text="the evidence" x={1300} y={590} size={60} rot={-3} at={t.at('evidence')} />
-    </AbsoluteFill>
+    <Desk a={t.at("So here's")}>
+      <Note text="the question:" x={180} y={150} size={60} rot={-3} at={t.at('question') - 2} color="#ffffff" />
+      <Note text="how did betting go from" x={220} y={270} size={84} rot={-3} at={t.at('How did') - 2} />
+      <Note text="part of the game," x={280} y={400} size={84} rot={-3} at={t.at('part of') - 2} />
+      <Note text="to baseball's unforgivable sin," x={280} y={530} size={84} rot={-3} at={t.at('unforgivable') - 6} color={pal.subject} />
+      <Note text="and back again?" x={280} y={660} size={84} rot={-3} at={t.at('back again') - 2} />
+      <Loop cx={640} cy={720} rx={330} ry={95} at={t.at('back again') + 8} seed={17} tilt={-4} />
+    </Desk>
   );
 };
 
-/** Title card after the channel intro: the map dimmed, the title on orange, the subtitle in teal. */
+/** Hook into chapter 2: the 1865 catcher card. */
+const Catcher: React.FC<{t: TL}> = ({t}) => (
+  <Desk a={t.at('It starts')}>
+    <FlowCard file="card_catcher_1865.png" x={700} y={110} w={520} rot={-2} at={t.at('It starts') - 1} tab="1865" />
+    <Note text="a catcher who couldn't catch" x={560} y={900} size={62} rot={-3} at={t.at('catcher') - 3} />
+  </Desk>
+);
+
+/** Title card after the channel intro: the Currier & Ives Hoboken print dimmed, title on orange, subtitle teal. */
 const Title: React.FC = () => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <AbsoluteFill style={{background: '#15130f'}}>
-      <MapView cx={2600} cy={2320} s={0.26 + g * 0.0003} rot={0} dim={0.5} />
+    <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+      <Img src={staticFile('img/ch02/currier_ives_american_national_game_1866.jpg')} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+        filter: 'grayscale(1) contrast(1.2) brightness(0.45)', transform: `scale(${1.04 + g * 0.0004})`}} />
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, rgba(8,6,4,0.2) 30%, rgba(8,6,4,0.85) 100%)'}} />
-      <Highlight text={TITLE} x={330} y={360} size={180} at={4} seed={61} rot={-2} />
-      {g >= 14 && <div style={{position: 'absolute', left: 380, top: 640, fontFamily: JF.display, fontSize: 64, color: pal.mark, textShadow: '0 3px 16px rgba(0,0,0,0.8)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
-      <Note text={DATES} x={1340} y={760} size={52} rot={-5} at={24} />
+      <Highlight text={TITLE} x={250} y={330} size={170} at={4} seed={61} rot={-2} />
+      {g >= 14 && <div style={{position: 'absolute', left: 290, top: 600, fontFamily: JF.display, fontSize: 58, color: pal.mark, whiteSpace: 'nowrap', textShadow: '0 3px 16px rgba(0,0,0,0.8)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
+      <Note text={DATES} x={1300} y={740} size={56} rot={-5} at={24} />
+      <Tag text="Currier & Ives · The American National Game of Base Ball, Hoboken, 1866 · Library of Congress" />
     </AbsoluteFill>
   );
 };
@@ -90,11 +148,15 @@ const Body: React.FC = () => {
   const frame = useCurrentFrame();
   const t = makeTimeline(N, 30);
   const at = t.at;
-  // [cut frame, scene]: cut 1 frame before the word that starts the new idea
   const cuts: [number, React.ReactNode][] = [
-    [0, <Portrait t={t} />],
-    [at("That's") - 1, <TwoNames t={t} />],
+    [0, <Landis t={t} />],
+    [at('"Regardless') - 1, <Statement t={t} />],
+    [at('Eight') - 1, <Eight t={t} />],
+    [at('Now jump') - 1, <Release t={t} />],
+    [at('Same sport') - 1, <TwoDocs t={t} />],
+    [at("So it's easy") - 1, <Everywhere t={t} />],
     [at("So here's") - 1, <Question t={t} />],
+    [at('It starts') - 1, <Catcher t={t} />],
   ];
   let scene = useScene(cuts);
   if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><Title /></Sequence>;
@@ -104,10 +166,14 @@ const Body: React.FC = () => {
       {scene}
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
-      {/* cold-open music bed, e.g. <Audio src={staticFile('music/cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, 0.17, 0.17, 0], clamp)} /> */}
-      {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
-      {['1845.', "People's", 'King'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}
-      {['wild', 'fought', 'fans', 'enemies', 'question', 'How', 'both', 'evidence'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
+      <Audio src={staticFile('music/r_cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 40, END], [0, 0.17, 0.17, 0], clamp)} />
+      {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.32} />)}
+      {['August', 'Polymarket', 'everywhere'].map((c) => <Sfx key={c} at={c === 'everywhere' ? at(c, 2) : at(c)} src="sfx/stamp.wav" volume={0.3} />)}
+      {['For life', '105'].map((c) => <Sfx key={c} at={at(c)} src="sfx/boom.wav" volume={0.3} />)}
+      {['brand-new', 'Judge', 'not guilty', 'March', 'Including', 'bans', 'The other names', 'back then', 'and now', 'Before 1919', 'question', 'How did', 'catcher'].map((c) => (
+        <Sfx key={c} at={at(c) - 3} src={WRITE.src} volume={WRITE.volume} />
+      ))}
+      <Sfx at={at('Another')} src="sfx/page_turn.wav" volume={0.4} />
       <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.4} />
     </AbsoluteFill>
   );
