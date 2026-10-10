@@ -184,7 +184,7 @@ const Money: React.FC<{t: TL}> = ({t}) => (
   </Desk>
 );
 
-const Body: React.FC = () => {
+export const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
   const cuts: [number, React.ReactNode][] = [

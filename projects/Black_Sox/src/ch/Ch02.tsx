@@ -107,7 +107,7 @@ const Banned: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-const Body: React.FC = () => {
+export const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
   const cuts: [number, React.ReactNode][] = [

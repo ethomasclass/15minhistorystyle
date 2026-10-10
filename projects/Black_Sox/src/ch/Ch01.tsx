@@ -143,7 +143,7 @@ const Title: React.FC = () => {
   );
 };
 
-const Body: React.FC = () => {
+export const Body: React.FC = () => {
   const frame = useCurrentFrame();
   const t = makeTimeline(N, 30);
   const at = t.at;
