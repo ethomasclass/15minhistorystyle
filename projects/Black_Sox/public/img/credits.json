@@ -54,5 +54,33 @@
     "date": "1920",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Eight_men_banned.png"
+  },
+  "ch07/weaver_risberg_trial_1921.jpg": {
+    "title": "File:Weaver-risberg-flip.jpg",
+    "artist": "Chicago Daily News photo",
+    "date": "published 1921",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Weaver-risberg-flip.jpg"
+  },
+  "ch07/still_black_sox_cartoon_1921.png": {
+    "title": "File:Still Black Sox.png",
+    "artist": "Ted Brown[1]",
+    "date": "1921-08-20",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Still_Black_Sox.png"
+  },
+  "ch02/currier_ives_american_national_game_1866.jpg": {
+    "title": "File:The American national game of base ball. Grand match for the championship at the Elysian Fields, Hoboken, N.J. - lith. of Currier & Ives. LCCN90708565.jpg",
+    "artist": "Currier &amp; Ives.",
+    "date": "1866",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:The_American_national_game_of_base_ball._Grand_match_for_the_championship_at_the_Elysian_Fields,_Hoboken,_N.J._-_lith._of_Currier_%26_Ives._LCCN90708565.jpg"
+  },
+  "ch02/currier_ives_american_national_game_1866_met.jpg": {
+    "title": "File:The American National Game of Base Ball- Grand Match for the Championship at the Elysian Fields, Hoboken, N. J. MET DP-19840-001.jpg",
+    "artist": "Currier and Ives",
+    "date": "1866date QS:P571,+1866-00-00T00:00:00Z/9",
+    "licence": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:The_American_National_Game_of_Base_Ball-_Grand_Match_for_the_Championship_at_the_Elysian_Fields,_Hoboken,_N._J._MET_DP-19840-001.jpg"
   }
 }
