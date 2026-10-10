@@ -112,10 +112,11 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
  * Chapter wrapper. With `lead` > 0 the chapter opens on the channel-logo break, then fades up.
  * Narration starts at `lead`; `body` is rendered in narration time (frame 0 = first sample of narration).
  */
-export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean;
-  music?: {src: string; volume?: number; startFrom?: number; from?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, music = [], children}) => {
+export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number;
+  music?: {src: string; volume?: number; startFrom?: number; from?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
   const frame = useCurrentFrame();
-  const total = chapterFrames(n, lead);
+  // `extra` frames after the narration: a music-only end screen on the last chapter (add the same to its FRAMES)
+  const total = chapterFrames(n, lead) + extra;
   const up = interpolate(frame, [lead, lead + FADE], [lead ? 0 : 1, 1], clamp);
   const down = interpolate(frame, [total - FADE, total], [1, 0], clamp);
   return (

@@ -13,6 +13,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 3 | ***King Andrew:** How the People's President Got a Crown*, 1767–1845 | 15:30 | 11 | 2,757 | `Jackson` · `claude/jackson-explainer-videos-oseyfs` (`src/v3/`) | "…a word ready for that. / King." |
 | 4 | ***Grip Tighter:** Slavery and the Cotton South*, 1790–1860 | 17:24 | 10 | 2,760 | `Slaveryvideo` · `ccr-ec669e6a-l5w6ai` | "…the closer the whole country came to tearing apart." |
 | 5 | ***Good Luck:** How the Ouija board went from romantic to scary*, 1886–1973 | 9:48 | 9 | 1,600 | `Ouija` · `ccr-6addf590-j2w0xz` | "…that was up to whoever was holding it." + a 15 s end screen |
+| 6 | ***Say It Ain't So:** Baseball's Gambling Problem Before the Black Sox*, 1865–1921 (+ today) | 10:23 | 8 | 1,709 | this repo · `black-sox-video` (`projects/Black_Sox/`) | "…It's who's watching when they do." + subscribe line and a 12 s end screen. Plus 4 vertical Shorts |
 
 ## What each one added
 
@@ -32,6 +33,16 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   falling cards, a drifting desk, word-by-word quotes, a narrated subscribe plug tied to the topic, and a music-only end screen. It made no new
   music (19 reused cues, with A/B/C/D options for you to pick from) and ran at 24 fps.
 
+- **Say It Ain't So (Black Sox)** was the first video built inside this repo (`projects/Black_Sox/`) and the first with **YouTube
+  Shorts**. Made for the World Series window, weighted two-thirds to the little-known pre-1919 story. It added: **2.5D parallax for
+  archival photos** (`Parallax`: rembg mask → subject/background layers, a crop that keeps the camera inside a glass negative's black
+  border, any frame size); a recurring **BANNED ledger** that fills in across chapters and gets stamped in the finale; a drawn **wall**
+  that goes up, gets knocked down and becomes a dashed line; a **hand-drawn phone** (teal sketch, logo on a coral screen) for a
+  modern company; a catcher **masked out of an engraving** to stand in for a person with no surviving photo; **two narrated subscribe
+  reminders** (now a standing rule); a readable **script PDF** for review; and **native vertical Shorts** that splice hook-first lines
+  out of the chapter narration (no new voice) with word-by-word captions. No AI images (your call); 9 reused music cues, none new.
+  Thumbnail: BANNED 1921 / PARTNER 2026 with Shoeless Joe (C).
+
 ## Your standing preferences (from your notes across the videos)
 
 **Script**
@@ -50,6 +61,21 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - Drawn diagrams and cards beat fussy illustrated props.
 - No caricatured engravings in a serious chapter.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
+
+**Neutral on today's companies and people**
+- When a modern company or a living person comes up (Polymarket, players under indictment), describe the company in its own and
+  official terms, don't name people who haven't been convicted, say "charged" and "pleaded not guilty", keep a scandal and a company in
+  separate sentences unless they're connected, and give critics' views as critics' views. Date anything that can change ("when this
+  video was made").
+
+**Images**
+- **AI images are a per-video call.** Black Sox used none ("roll with what is available"); Grip Tighter used none; Ouija used many.
+  Ask before writing prompts. When a gap has no photo, prefer an engraving detail, a period document or a drawn diagram.
+
+**Shorts**
+- **Native vertical, not letterboxed.** Rebuild each scene for 9:16 (full-screen subject, big captions), open on the strongest
+  line (splice it from the narration), 30–45 s, an end card pointing to the full video. Keep text out of YouTube's UI zones (top
+  ~150 px, bottom ~400 px, right ~150 px below y 900).
 
 **Thumbnail**
 - The whole head is in frame, and any symbol sits on the head at the right size.

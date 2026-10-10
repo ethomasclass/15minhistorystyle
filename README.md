@@ -4,7 +4,7 @@
 
 Everything that makes a 15 Minute History video look and sound like one: the logo, colours and fonts, every music cue and
 sound effect, the on-screen techniques, the writing and packaging conventions, and a tested starter project. It was collected from
-all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter* and *Good Luck*.
+all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck* and *Say It Ain't So*.
 
 **The look in one paragraph.** A researcher's desk at night. Black-and-white archival engravings and photographs sit on dark, faintly
 ruled paper. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
@@ -23,6 +23,7 @@ little wry, and it gets quieter and slower when the subject is suffering.
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |
 | [`.claude/skills/15-minute-history/`](.claude/skills/15-minute-history/) | The Claude skill that makes a video end to end, its reference guides, and the starter project |
+| [`projects/`](projects/) | Video projects built inside this repo (*Say It Ain't So*: `projects/Black_Sox/` on the `black-sox-video` branch; big renders via Git LFS) |
 
 ## The guides
 
@@ -36,6 +37,7 @@ The detailed guides live inside the skill, so Claude reads them while it works, 
 - [Render and deliver](.claude/skills/15-minute-history/references/render-and-deliver.md): render, master to −14 LUFS, previews, the 1080p master
 - [Thumbnail and YouTube](.claude/skills/15-minute-history/references/thumbnail-and-youtube.md): the thumbnail formula, title, description, chapters, tags
 - [Classroom handout](.claude/skills/15-minute-history/references/classroom-handout.md): the simple 10–12 question viewing guide
+- [Shorts](.claude/skills/15-minute-history/references/shorts.md): native vertical Shorts from the video's own narration and assets
 
 ## Making a new video
 

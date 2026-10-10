@@ -77,6 +77,11 @@ These came from the user directly; follow them in every video.
 - **Don't imply false continuity with today.** If a party, institution or word shares a modern name, say plainly
   it was different: "Same name as today's Democrats, but a very different party, with very different ideas."
 - **No modern politicians**, even by implication. The closer can gesture at "ever since" without naming anyone.
+- **Modern companies and living people** (*Say It Ain't So*: Polymarket, two indicted pitchers): describe a company in its
+  own and the official terms ("names an official partner", "where people trade on what's going to happen"), don't name
+  people who haven't been convicted ("charged", "pleaded not guilty", "when this video was made"), keep a scandal and a
+  company in separate sentences unless they're connected, and attribute criticism to critics. Re-read every present-day
+  line with this in mind before voicing.
 - **Hedge what's uncertain, in plain words**: "reportedly", "probably never said that", "There's no proof of an
   actual deal." Myths get named and corrected ("You may have heard that he said...").
 - **Say who was left out** when "the people" or "democracy" is the theme: women, enslaved people, Native nations,

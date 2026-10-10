@@ -11,5 +11,6 @@ SCRIPT.md, a prompts file, a MUSIC.md or YouTube text for a new video, it should
 | [04 King Andrew](04_King_Andrew/) | script, Gemini prompts, music plan, YouTube text, handoff |
 | [05 Grip Tighter](05_Grip_Tighter/) | script, **fact-check with verdicts**, image plan, music plan with Suno prompts, YouTube text, viewing guide |
 | [06 Good Luck (Ouija)](06_Good_Luck_Ouija/) | script, production plan, prompts (paintings, music, SFX), music plan, YouTube text, handoff |
+| [07 Say It Ain't So (Black Sox)](07_Say_It_Aint_So/) | script with fact-check flags (and a readable PDF), image index with credits, music plan, unused Flow "tobacco card" prompts, YouTube text, **Shorts text**, handoff |
 
-Paths inside these files point into each video's own repo, not into this one.
+Paths inside these files point into each video's own repo, not into this one (07's point into `projects/Black_Sox/` on the `black-sox-video` branch of this repo).

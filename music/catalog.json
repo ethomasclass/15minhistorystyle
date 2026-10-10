@@ -65,6 +65,11 @@
      "video": "15-minute-history skill template",
      "where": ".claude/skills/15-minute-history/assets/template/public/music/title_sting.mp3",
      "bed_volume": "0.45"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Intro / title card",
+     "bed_volume": "0.45"
     }
    ],
    "alias_names": [
@@ -148,6 +153,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage)",
      "bed_volume": "0.13"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch01 Two Documents (cold open); Short 4",
+     "bed_volume": "0.17 (Short: 0.15)"
     }
    ],
    "alias_names": [
@@ -190,6 +200,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch03/Ch05; copied in as j_cold_open, unused",
      "bed_volume": "—"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch07 Regardless of the Verdict",
+     "bed_volume": "0.20"
     }
    ],
    "alias_names": [
@@ -242,6 +257,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch02 Knock Once for Yes (as r_intrigue)",
      "bed_volume": "0.26"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch03 On Paper",
+     "bed_volume": "0.17"
     }
    ],
    "alias_names": [
@@ -427,6 +447,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch03 Good Luck (button lands on \"I'm a Presbyterian\"; runs under the subscribe plug)",
      "bed_volume": "0.2"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch05 Prince Hal; Short 2",
+     "bed_volume": "0.22"
     }
    ],
    "alias_names": [
@@ -454,6 +479,11 @@
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
      "where": "Ch05 Bitter Bierce, first half (until 'And in his', then r_spirits_dark)",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch04 The Open Secret; Ch08 first half (from 10 s in)",
+     "bed_volume": "0.17 / 0.13"
     }
    ],
    "alias_names": [
@@ -485,6 +515,11 @@
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
      "where": "Ch04 Go West, Young Grump (stand-in; the Suno west.mp3 never arrived)",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch02 Everybody Bet; Short 3",
+     "bed_volume": "0.13"
     }
    ],
    "alias_names": [
@@ -1055,6 +1090,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending)",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch06 The Fix; Short 1",
+     "bed_volume": "0.18 (Short: 0.16)"
     }
    ],
    "alias_names": [
@@ -1432,6 +1472,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 Who Moves It?, last lines (warm first ~30 s only)",
      "bed_volume": "0.13"
+    },
+    {
+     "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Ch08 from 'It was never really gone' through the end screen",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [

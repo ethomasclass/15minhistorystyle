@@ -54,6 +54,7 @@ everywhere it applies.
 | 9 | **Feedback rounds** | batched fixes, partial re-renders, new previews | `references/render-and-deliver.md` |
 | 10 | **Package** | thumbnail concepts, YouTube title/description/tags, 1080p via Git LFS | `references/thumbnail-and-youtube.md` |
 | 11 | **Classroom** (if asked) | a simple note-taking handout | `references/classroom-handout.md` |
+| 12 | **Shorts** | 3–4 native vertical Shorts from the video's own narration and assets, plus their text | `references/shorts.md` |
 
 Phases 6 and 7 overlap with 5: scenes can be built on placeholder timings (`tools/fake_voice.py`) while the user
 reviews the script or makes Gemini images, and the real voice re-times them automatically.
@@ -81,8 +82,8 @@ script/      chNN_slug.txt per chapter, SCRIPT.md, GEMINI_PROMPTS.md, MUSIC.md
 src/         project.ts (per-video settings), chapters.ts, masks.ts, Thumbnail.tsx, Brand.tsx (logo stills), ch/ChNN.tsx,
              kit/ (shared look, maps, charts), lib/
 public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for AI, masks/, maps/), music/, sfx/, fonts/
-tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, trace.py, find_images.py, stills.mjs,
-             sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, music_eleven.py,
+tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
+             sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, script_pdf.py, music_eleven.py,
              sfx_eleven.py, brand.mjs
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master
@@ -96,7 +97,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - **Objective, evidence-first, both sides.** No historian names, no modern politicians, no false continuity with
   today's parties or institutions. Say who was left out of "the people."
 - **Archival first.** Real people only from period images. AI paintings only for gaps, never showing a
-  recognizable real person, all sharing one style paragraph.
+  recognizable real person, all sharing one style paragraph. **Ask before writing AI prompts**: some videos use none
+  (*Grip Tighter*, *Say It Ain't So*); an engraving detail, a period document or a drawn diagram can fill a gap.
 - **One subject in color per image, a source tag on every image, text never off the frame edge.** Run the text
   probe on every chapter before each render the user will see.
 - **Check your own work visually before the user does**: contact sheets of stills, the text-edge probe, the
@@ -118,5 +120,7 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - "YouTube description / tags": `references/thumbnail-and-youtube.md`, timestamps from the real render, then
   `python3 tools/youtube_check.py`.
 - "Handout / viewing guide / questions for the video": `references/classroom-handout.md`. Keep it simple.
+- "Make Shorts": `references/shorts.md`. Native vertical, hook first, only the video's own assets.
+- "Send me the script" / "a readable file": `python3 tools/script_pdf.py "<Title>" "<Subtitle>" review/<Slug>_script.pdf`.
 - Working inside an existing video project (not the template): the same kit lives under `src/v3/` or `src/jh/`
   there; read that project's `HANDOFF.md` or `README.md` first and follow its paths.

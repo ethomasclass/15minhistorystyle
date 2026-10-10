@@ -67,6 +67,7 @@ Every thumbnail made so far is in [`thumbnails/`](thumbnails/). The one marked �
 | King Andrew | ★ [`A`](thumbnails/04_King_Andrew_A.png) · [`B`](thumbnails/04_King_Andrew_B.png) · [`C`](thumbnails/04_King_Andrew_C.png) | HERO / OR KING? (split teal/coral portrait, drawn crown) |
 | Grip Tighter | [`A`](thumbnails/05_Grip_Tighter_A.png) · ★ [`B`](thumbnails/05_Grip_Tighter_B.png) | SLAVERY WAS SUPPOSED TO FADE… / "then came cotton." |
 | Good Luck (Ouija) | ★ [`06_Good_Luck_Ouija.png`](thumbnails/06_Good_Luck_Ouija.png) | WHO MADE IT / SCARY? (full-colour painting; breaks the usual rules) |
+| Say It Ain't So (Black Sox) | [`A`](thumbnails/07_Say_It_Aint_So_A.png) · [`B`](thumbnails/07_Say_It_Aint_So_B.png) · ★ [`C`](thumbnails/07_Say_It_Aint_So_C.png) | SAY IT / AIN'T SO (Jackson split) · EVERYBODY BET. · 1921 BANNED / 2026 PARTNER (Jackson waist-up beside a drawn phone) |
 
 **The formula** (full rules in
 [`thumbnail-and-youtube.md`](../.claude/skills/15-minute-history/references/thumbnail-and-youtube.md)):

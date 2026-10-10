@@ -97,3 +97,18 @@ mask version in place of the original; compare the two files before using either
   `git fetch origin <branch>` and `git checkout origin/<branch> -- <paths>` (or `git show`), and never push to it.
 - Check what arrived: file names, sizes, and that the originals aren't the mask versions.
 - Copy images into `public/img/gen/` (AI) or `public/img/chNN/` (archival) with the names the scenes expect.
+
+## 5. Archival parallax and checking masks (from *Say It Ain't So*)
+
+- **Check every mask** before a scene uses it: `python3 tools/mask_preview.py out/masks.jpg name1 name2 ...` (coral fill
+  and teal outline on a contact sheet). A white uniform against a pale sky often comes back as a head only: re-run that job
+  with `u2net_human_seg` instead of `isnet-general-use`. Engraved portraits that fade out at the bottom also do better with it.
+- **2.5D layers for any masked photo**: `python3 tools/layers.py [names]` writes `public/img/layers/<name>_fg.webp` and
+  `_bg.jpg` from the rembg mask (no Gemini pass needed). `src/kit/parallax.tsx`'s `Parallax` uses them (falls back to the flat
+  picture until they exist). Pass `crop` (source pixels) to keep the camera inside a glass negative's black border, and
+  `frame={[1080, 1920]}` for vertical.
+- **A figure from an engraving can stand in for a person with no photo**: give `mask.py` a tight crop box around one small
+  figure in a big print, then show that detail (`CropCard`, or `Parallax` with a small `crop`; build its layers with
+  `LAYERS_MAX=4000` so they stay sharp). Say on screen whose photo doesn't survive.
+- **Tight portraits don't fit a full-bleed frame**: a close-up (a face that fills the source) zoomed to cover 16:9 puts
+  every note on the face. Use the "subject left, notes right" `CropCard` layout instead.
