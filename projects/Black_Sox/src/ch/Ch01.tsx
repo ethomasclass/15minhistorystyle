@@ -7,8 +7,8 @@ import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {Sfx, WRITE} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
-import {CropCard, Definition, hasFile, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, LOOK, StandIn, SyncQuote} from '../kit/bs';
+import {CropCard, Definition, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {Arch, Desk, DropCard, LOOK, PhoneSketch, SyncQuote} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 import {DATES, SUBTITLE, TITLE} from '../project';
@@ -18,8 +18,6 @@ const TITLE_FRAMES = 150;
 const END = Math.ceil(N.duration * 30) + 20;
 export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 
-/** The user's screenshot of the league's release (mlb.com, March 19, 2026). Stand-in until it exists. */
-const RELEASE = 'img/ch01/mlb_polymarket_release_2026.png';
 
 /** August 3rd, 1921: Landis on a Washington street, coral, traced; the date as the title. */
 const Landis: React.FC<{t: TL}> = ({t}) => (
@@ -63,8 +61,8 @@ const Release: React.FC<{t: TL}> = ({t}) => {
   <Desk a={t.at('Now jump')}>
     <Stamp text="+105 YEARS" x={110} y={110} at={t.at('105')} size={130} />
     <Note text="March 2026" x={130} y={300} size={60} rot={-3} at={t.at('March') - 2} />
-    {hasFile(RELEASE) ? <DropCard src={RELEASE} x={900} y={150} w={880} rot={2} at={t.at('Another') - 1} filter={LOOK.doc} />
-      : t.at('Another') - 1 <= f && <StandIn x={900} y={150} w={880} h={560} rot={2} label="your screenshot: MLB press release, Mar 19 2026 → img/ch01/mlb_polymarket_release_2026.png" />}
+    <PhoneSketch x={1240} y={70} w={430} at={t.at('Another') - 1} rot={3} />
+    {f >= t.at('Another') && <Tag text="Polymarket logo · polymarket.com" />}
     <Highlight text="POLYMARKET" x={120} y={470} size={104} at={t.at('Polymarket')} seed={21} rot={-2} />
     <Definition term="prediction market" def="where people trade on what's going to happen" at={t.at('prediction market') + 8} x={120} y={660} w={760} />
     <Note text="including baseball games" x={150} y={880} size={52} rot={-3} at={t.at('Including') - 2} color="#ffffff" />
@@ -78,8 +76,7 @@ const TwoDocs: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={t.at('Same sport')}>
       <DropCard src="img/ch01/eight_men_banned_1920.png" x={230} y={110} w={540} rot={-3} at={t.at('Same sport') - 1} filter={LOOK.doc} />
-      {hasFile(RELEASE) ? <DropCard src={RELEASE} x={1080} y={180} w={640} rot={2} at={t.at('Same sport') + 3} filter={LOOK.doc} />
-        : <StandIn x={1080} y={180} w={640} h={430} rot={2} label="MLB press release, 2026" />}
+      <PhoneSketch x={1260} y={80} w={320} at={t.at('Same sport') + 3} rot={3} buttons={false} />
       <div style={{position: 'absolute', left: 958, top: 90, width: 4, height: 860, background: 'rgba(244,239,230,0.55)'}} />
       <div style={{position: 'absolute', left: 230, top: 760, fontFamily: JF.mono, fontSize: 28, letterSpacing: 3, color: pal.mark}}>1921</div>
       <div style={{position: 'absolute', left: 1090, top: 760, fontFamily: JF.mono, fontSize: 28, letterSpacing: 3, color: pal.subject}}>2026</div>

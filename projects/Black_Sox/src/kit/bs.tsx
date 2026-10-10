@@ -255,3 +255,56 @@ export const Sounds: React.FC<{cuts: number[]; stamps?: number[]; writes?: numbe
     {extra.map((e, i) => <Snd key={`e${i}`} at={e.at} src={e.src} volume={e.volume ?? 0.35} />)}
   </>
 );
+
+// ---------------------------------------------------------------------------------------------
+// A hand-drawn phone (teal marks, drawn on at 12 fps with a slight line boil) with the Polymarket logo on a coral
+// screen and two YES / NO buttons: the channel's sketch style for "a prediction market in every pocket".
+
+const jitterRect = (x0: number, y0: number, x1: number, y1: number, r: number, seed: string, amp: number) => {
+  const pts: [number, number][] = [];
+  const arc = (cx: number, cy: number, a0: number) => {
+    for (let i = 0; i <= 6; i++) {
+      const a = a0 + (i / 6) * (Math.PI / 2);
+      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+  };
+  arc(x1 - r, y0 + r, -Math.PI / 2);
+  arc(x1 - r, y1 - r, 0);
+  arc(x0 + r, y1 - r, Math.PI / 2);
+  arc(x0 + r, y0 + r, Math.PI);
+  pts.push(pts[0]);
+  return 'M' + pts.map(([px, py], i) => `${(px + (random(`${seed}x${i}`) - 0.5) * amp).toFixed(1)},${(py + (random(`${seed}y${i}`) - 0.5) * amp).toFixed(1)}`).join(' L');
+};
+
+export const PhoneSketch: React.FC<{x: number; y: number; w: number; at: number; rot?: number; buttons?: boolean}> = ({x, y, w, at, rot = 0, buttons = true}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  if (g < at) return null;
+  const h = w * 2.05;
+  const draw = interpolate(g, [at, at + 12], [0, 1], clamp);
+  const fill = interpolate(g, [at + 9, at + 15], [0, 1], clamp);
+  const boil = Math.floor(g / 5);   // redraw the wobble a little, the way a hand-drawn line boils
+  const sx = w * 0.07, sy = w * 0.2;
+  const sw = w - 2 * sx, sh = h - 2 * sy;
+  const stroke = {fill: 'none', stroke: pal.mark, strokeWidth: 6, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const, pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 - draw};
+  return (
+    <div style={{position: 'absolute', left: x, top: y, width: w, height: h, transform: `rotate(${rot}deg)`}}>
+      <div style={{position: 'absolute', left: sx, top: sy, width: sw, height: sh, borderRadius: w * 0.04, background: pal.subject, opacity: fill, overflow: 'hidden',
+        boxShadow: 'inset 0 0 40px rgba(0,0,0,0.25)'}}>
+        <Img src={staticFile('img/ch01/polymarket_mark_white.png')} style={{position: 'absolute', left: sw * 0.33, top: sh * 0.17, width: sw * 0.34}} />
+        <Img src={staticFile('img/ch01/polymarket_word_white.png')} style={{position: 'absolute', left: sw * 0.1, top: sh * 0.43, width: sw * 0.8}} />
+        {buttons && ['YES', 'NO'].map((b, i) => (
+          <div key={b} style={{position: 'absolute', left: sw * (0.1 + i * 0.43), top: sh * 0.66, width: sw * 0.37, height: sh * 0.11, borderRadius: sh * 0.03,
+            border: `4px solid ${i ? '#EDE7DC' : pal.mark}`, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: JF.sans, fontWeight: 800, fontSize: sw * 0.11, color: i ? '#EDE7DC' : '#0d2420', background: i ? 'transparent' : pal.mark}}>{b}</div>
+        ))}
+      </div>
+      <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={w} height={h}>
+        <path d={jitterRect(3, 3, w - 3, h - 3, w * 0.14, `ph${boil}`, 4)} {...stroke} />
+        <path d={jitterRect(sx - 2, sy - 2, w - sx + 2, h - sy + 2, w * 0.04, `sc${boil}`, 3)} {...stroke} strokeWidth={4} />
+        <path d={`M${w * 0.4},${sy * 0.5} L${w * 0.6},${sy * 0.5 + (random(`sp${boil}`) - 0.5) * 3}`} {...stroke} />
+        <path d={`M${w * 0.36},${h - sy * 0.5} L${w * 0.64},${h - sy * 0.5 + (random(`hb${boil}`) - 0.5) * 3}`} {...stroke} />
+      </svg>
+    </div>
+  );
+};

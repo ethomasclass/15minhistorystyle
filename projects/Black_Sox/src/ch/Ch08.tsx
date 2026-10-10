@@ -5,14 +5,13 @@ import {interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch08_full_circle.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, JF, Loop, Note, Tag, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, Definition, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, Ledger, Line, LOOK, ROWS, Sounds, StandIn, Wall} from '../kit/bs';
+import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {Arch, Desk, Ledger, Line, PhoneSketch, ROWS, Sounds, Wall} from '../kit/bs';
 
 const N = words as Narration;
 /** Music-only end screen after the last word (the shell adds its own tail and fade). */
 const END_SCREEN = 330;
 export const CH08_FRAMES = chapterFrames(N, LEAD) + END_SCREEN;
-const RELEASE = 'img/ch01/mlb_polymarket_release_2026.png';
 const CI = 'img/ch02/currier_ives_american_national_game_1866.jpg';
 
 /** Rule 21, as a card on the desk. */
@@ -94,14 +93,13 @@ const Case: React.FC<{t: TL}> = ({t}) => (
 /** 2026: the league's partnership, with the single-pitch safeguard. */
 const Deal: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('In 2026')}>
-    {hasFile(RELEASE) ? <DropCard src={RELEASE} x={1020} y={130} w={760} rot={2} at={t.at('In 2026') - 1} filter={LOOK.doc} />
-      : <StandIn x={1020} y={130} w={760} h={500} rot={2} label="MLB press release, Mar 19 2026 (callback to ch01)" />}
+    <PhoneSketch x={1250} y={80} w={430} at={t.at('In 2026') - 1} rot={3} />
     <Highlight text="2026" x={150} y={130} size={110} at={t.at('In 2026') + 3} seed={129} rot={-2} />
     <Note text="the league's deal" x={160} y={330} size={54} rot={-3} at={t.at('signed its deal') - 3} color="#ffffff" />
     <Note text="with Polymarket" x={200} y={420} size={54} rot={-3} at={t.at('with Polymarket') - 3} color="#ffffff" />
     <Note text="single-pitch markets:" x={160} y={560} size={58} rot={-3} at={t.at('Part of that') - 3} />
     <Note text="off the board" x={200} y={660} size={78} rot={-3} at={t.at('off the board') - 3} />
-    <Tag text="MLB press release, March 19, 2026" />
+    <Tag text="Polymarket logo · polymarket.com · MLB press release, March 19, 2026" />
   </Desk>
 );
 

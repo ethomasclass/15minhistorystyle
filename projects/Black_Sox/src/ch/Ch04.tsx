@@ -2,7 +2,7 @@
 // the 1908 bribe attempt on Bill Klem.
 import React from 'react';
 import words from '../../public/audio/ch04_open_secret.words.json';
-import {Highlight, Note, Tag, usePal} from '../kit/Kit';
+import {Highlight, Note, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Arch, Desk, Ledger, ROWS, Sounds} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
