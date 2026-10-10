@@ -118,7 +118,7 @@ export const SyncQuote: React.FC<{t: TL; phrase: string; nth?: number; x: number
         const k = interpolate(f, [at, at + 5], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
         const u = marks[i];
         const p = u ? interpolate(f, [at + 4, at + 10], [0, 1], clamp) : 0;
-        const word = wd.w.replace(/^["“]|["”,]$/g, '').replace(/["”]/g, '');
+        const word = wd.w.replace(/["“”]/g, '');
         return (
           <span key={i} style={{position: 'relative', display: 'inline-block', paddingRight: '0.28em', color, opacity: k, transform: `translateY(${(1 - k) * 12}px)`}}>
             {(i === 0 && open ? '“' : '') + word + (i === n - 1 && close ? '”' : '')}

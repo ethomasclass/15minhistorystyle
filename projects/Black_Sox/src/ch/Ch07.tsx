@@ -53,8 +53,8 @@ const Commissioner: React.FC<{t: TL}> = ({t}) => (
     cam={{z: [1.04, 1.12]}} mask={MASKS.landis_1907} traceAt={t.at('federal judge') + 3} tag="Judge Kenesaw Mountain Landis · Library of Congress">
     {() => (
       <>
-        <Note text="the owners are scared" x={90} y={100} size={56} rot={-3} at={t.at('owners') - 3} color="#ffffff" />
-        <Note text="a fixed World Series can't be hidden" x={100} y={210} size={50} rot={-3} at={t.at('A fixed') - 3} />
+        <Note text="the owners are scared" x={1080} y={110} size={56} rot={-3} at={t.at('owners') - 3} color="#ffffff" />
+        <Note text="a fixed Series can't be hidden" x={1090} y={220} size={46} rot={-3} at={t.at('A fixed') - 3} />
         <Highlight text="COMMISSIONER" x={90} y={690} size={96} at={t.at('commissioner,')} seed={105} rot={-2} />
         <Definition term="commissioner" def="baseball's first boss, with almost total power" at={t.at('almost total') - 2} x={100} y={870} w={1100} />
       </>
@@ -75,7 +75,7 @@ const Verdict: React.FC<{t: TL}> = ({t}) => (
   <Arch src="img/ch01/black_sox_at_trial_1921.jpg" tag="The players at trial, Chicago, 1921 · Wikimedia Commons" a={t.at('On August')} b={t.at('The next day')} z={[1.12, 1.2]} pos="50% 45%">
     <Highlight text="AUG. 2, 1921" x={90} y={860} size={84} at={t.at('August')} seed={109} rot={-2} />
     <Stamp text="NOT GUILTY" x={1000} y={860} at={t.at('not guilty')} size={110} color="#FF9F1C" />
-    <Note text="jurors celebrate with them (reportedly)" x={980} y={760} size={44} rot={-3} at={t.at('jurors') - 3} color="#ffffff" />
+    <Note text="jurors celebrate with them (reportedly)" x={900} y={770} size={38} rot={-3} at={t.at('jurors') - 3} color="#ffffff" />
   </Arch>
 );
 
@@ -98,8 +98,8 @@ const Weaver: React.FC<{t: TL}> = ({t}) => {
         <>
           <Note text="even 3rd baseman Buck Weaver" x={90} y={90} size={54} rot={-3} at={t.at('Buck Weaver') - 3} color="#ffffff" />
           <Note text="took no money. played hard." x={100} y={200} size={52} rot={-3} at={t.at('took no') - 3} />
-          <Note text="knew. didn't report it." x={100} y={800} size={64} rot={-3} at={t.at('He knew') - 3} color={pal.subject} />
-          <Note text="that was enough." x={1300} y={880} size={60} rot={-3} at={t.at('That was enough') - 3} color="#ffffff" />
+          <Note text="knew. didn't report it." x={90} y={900} size={58} rot={-3} at={t.at('He knew') - 3} color={pal.subject} />
+          <Note text="that was enough." x={1340} y={780} size={56} rot={-3} at={t.at('That was enough') - 3} color="#ffffff" />
         </>
       )}
     </Parallax>

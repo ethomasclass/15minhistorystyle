@@ -3,9 +3,8 @@
 import React from 'react';
 import words from '../../public/audio/ch03_louisville.words.json';
 import {Highlight, Loop, Note, Tag, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Arch, Desk, DropCard, FlowCard, Ledger, ROWS, Sounds} from '../kit/bs';
-import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -25,19 +24,17 @@ const Hippo: React.FC<{t: TL}> = ({t}) => (
 
 /** 1876: William Hulbert's new league and its promises. */
 const Hulbert: React.FC<{t: TL}> = ({t}) => (
-  <Parallax name="hulbert" src="img/ch03/william_hulbert_1870s.jpg" size={[3840, 4357]} crop={[300, 300, 3300, 4000]} a={t.at('So in 1876')} b={t.at('The promise')} fx={0.42} fy={0.32}
-    cam={{z: [1.05, 1.15]}} mask={MASKS.hulbert} traceAt={t.at('William') + 3} tag="William A. Hulbert · New York Public Library">
-    {() => (
-      <>
-        <Highlight text="1876" x={100} y={90} size={110} at={t.at('1876,')} seed={45} rot={-2} />
-        <Note text="William Hulbert, Chicago" x={110} y={900} size={54} rot={-3} at={t.at('William') - 2} color="#ffffff" />
-        <Highlight text="THE NATIONAL LEAGUE" x={1000} y={120} size={70} at={t.at('National League')} seed={47} rot={-2} />
-        <Note text="✓ no betting pools" x={1120} y={330} size={58} rot={-3} at={t.at('No betting') - 3} />
-        <Note text="✓ no beer" x={1120} y={450} size={58} rot={-3} at={t.at('No beer') - 3} />
-        <Note text="✓ fixers: gone" x={1120} y={570} size={58} rot={-3} at={t.at('Players who') - 3} />
-      </>
-    )}
-  </Parallax>
+  <Desk a={t.at('So in 1876')}>
+    <CropCard src="img/ch03/william_hulbert_1870s.jpg" size={[3840, 4357]} x={150} y={130} w={600} h={800} fx={1721} fy={2250} scale={0.3} rot={-2} at={t.at('So in 1876') - 1}
+      mask={MASKS.hulbert} traceAt={t.at('William') + 3} />
+    <Highlight text="1876" x={880} y={110} size={110} at={t.at('1876,')} seed={45} rot={-2} />
+    <Note text="William Hulbert, Chicago" x={890} y={300} size={52} rot={-3} at={t.at('William') - 2} color="#ffffff" />
+    <Highlight text="THE NATIONAL LEAGUE" x={880} y={420} size={72} at={t.at('National League')} seed={47} rot={-2} />
+    <Note text="✓ no betting pools" x={900} y={590} size={54} rot={-3} at={t.at('No betting') - 3} />
+    <Note text="✓ no beer" x={900} y={690} size={54} rot={-3} at={t.at('No beer') - 3} />
+    <Note text="✓ fixers: gone" x={900} y={790} size={54} rot={-3} at={t.at('Players who') - 3} />
+    <Tag text="William A. Hulbert · New York Public Library" />
+  </Desk>
 );
 
 /** 1877: the Grays cruise, then collapse. */
@@ -47,8 +44,8 @@ const Grays: React.FC<{t: TL}> = ({t}) => {
     <Desk a={t.at('The promise')}>
       <Note text="year two:" x={150} y={130} size={58} rot={-3} at={t.at('The promise') - 2} color="#ffffff" />
       <Highlight text="1877" x={150} y={230} size={110} at={t.at('1877.')} seed={49} rot={-2} />
-      <DropCard src="img/ch03/louisville_grays_team_1876.jpg" x={760} y={110} w={900} rot={2} at={t.at('The Louisville') - 1} />
-      <Note text="Louisville Grays: cruising" x={150} y={460} size={56} rot={-3} at={t.at('cruising') - 3} />
+      <DropCard src="img/ch03/louisville_grays_team_1876.jpg" x={900} y={110} w={820} rot={2} at={t.at('The Louisville') - 1} />
+      <Note text="Louisville Grays: cruising" x={150} y={460} size={50} rot={-3} at={t.at('cruising') - 3} />
       <Stamp text="COLLAPSE." x={140} y={620} at={t.at('collapse')} size={120} color={pal.subject} />
       <Note text="errors · wild throws · loss after loss" x={160} y={850} size={54} rot={-3} at={t.at('Errors') - 3} color="#ffffff" />
       <Tag text="Louisville Grays, 1876 · Wikimedia Commons" />
@@ -70,15 +67,15 @@ const Four: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at('The telegrams show')}>
-      <DropCard src="img/ch03/jim_devlin_1876.jpg" x={150} y={150} w={300} rot={-3} at={t.at('Jim Devlin') - 1} />
-      <Note text="Jim Devlin, pitcher" x={130} y={720} size={46} rot={-3} at={t.at('Jim Devlin') - 2} />
-      <DropCard src="img/ch03/george_hall_1874.jpg" x={560} y={120} w={330} rot={2} at={t.at('George Hall') - 1} />
-      <Note text="George Hall, outfield" x={540} y={720} size={46} rot={-3} at={t.at('George Hall') - 2} />
-      <Note text="Al Nichols, utility" x={990} y={300} size={46} rot={-3} at={t.at('Al Nichols') - 2} />
-      <Note text="(no photo)" x={1020} y={370} size={36} rot={-3} at={t.at('Al Nichols') + 2} color="#ffffff" />
-      <Note text="took gamblers' money to lose" x={140} y={860} size={60} rot={-3} at={t.at("gamblers'") - 3} color={pal.subject} />
-      <Note text="Bill Craver, captain:" x={1250} y={300} size={46} rot={-3} at={t.at('Bill Craver') - 2} />
-      <Note text="refused to hand his over" x={1250} y={370} size={46} rot={-3} at={t.at('refused') - 2} color="#FF9F1C" />
+      <DropCard src="img/ch03/jim_devlin_1876.jpg" x={130} y={130} w={290} rot={-3} at={t.at('Jim Devlin') - 1} />
+      <Note text="Devlin, pitcher" x={130} y={690} size={42} rot={-3} at={t.at('Jim Devlin') - 2} />
+      <DropCard src="img/ch03/george_hall_1874.jpg" x={520} y={110} w={310} rot={2} at={t.at('George Hall') - 1} />
+      <Note text="Hall, outfield" x={530} y={690} size={42} rot={-3} at={t.at('George Hall') - 2} />
+      <Note text="Nichols, utility" x={930} y={250} size={42} rot={-3} at={t.at('Al Nichols') - 2} />
+      <Note text="(no photo)" x={950} y={320} size={34} rot={-3} at={t.at('Al Nichols') + 2} color="#ffffff" />
+      <Note text="Craver, captain:" x={1340} y={250} size={42} rot={-3} at={t.at('Bill Craver') - 2} />
+      <Note text="refused to hand his over" x={1300} y={320} size={38} rot={-3} at={t.at('refused') - 2} color="#FF9F1C" />
+      <Note text="took gamblers' money to lose" x={140} y={850} size={60} rot={-3} at={t.at("gamblers'") - 3} color={pal.subject} />
       <Tag text="Devlin, c. 1876 · Hall, 1874 · Wikimedia Commons" />
     </Desk>
   );

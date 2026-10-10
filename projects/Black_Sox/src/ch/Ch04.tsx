@@ -57,7 +57,7 @@ const Quietly: React.FC<{t: TL}> = ({t}) => {
       <Highlight text="BAD FOR BUSINESS" x={160} y={400} size={90} at={t.at('bad for business')} seed={63} rot={-2} />
       <Note text="handled quietly:" x={170} y={600} size={60} rot={-3} at={t.at('quietly') - 3} color={pal.subject} />
       <Note text="a trade." x={200} y={700} size={60} rot={-3} at={t.at('A trade') - 2} color="#ffffff" />
-      <Note text="a release." x={420} y={700} size={60} rot={-3} at={t.at('A release') - 2} color="#ffffff" />
+      <Note text="a release." x={560} y={700} size={60} rot={-3} at={t.at('A release') - 2} color="#ffffff" />
       <Note text="no headlines." x={200} y={810} size={60} rot={-3} at={t.at('No headlines') - 2} />
       <FlowCard file="card_quiet_release.png" x={1220} y={180} w={460} rot={3} at={t.at('Clubs usually') - 1} tab="QUIETLY" />
     </Desk>
@@ -90,9 +90,9 @@ const Klem: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <Note text="umpire Bill Klem" x={110} y={110} size={60} rot={-3} at={t.at('Bill Klem') - 3} color="#ffffff" />
-          <FlowCard file="card_bribe_1908.png" x={1330} y={130} w={430} rot={3} at={t.at('a man offers') - 1} tab="THE OFFER" />
-          <Note text="thousands of dollars" x={110} y={760} size={64} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
-          <Note text="Klem says no. reports it." x={110} y={880} size={64} rot={-3} at={t.at('Klem says') - 3} />
+          <FlowCard file="card_bribe_1908.png" x={1360} y={110} w={380} rot={3} at={t.at('a man offers') - 1} tab="THE OFFER" />
+          <Note text="thousands of dollars" x={1150} y={780} size={64} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
+          <Note text="Klem says no. reports it." x={1150} y={890} size={64} rot={-3} at={t.at('Klem says') - 3} />
         </>
       )}
     </Parallax>

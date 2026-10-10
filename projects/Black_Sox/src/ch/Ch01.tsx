@@ -28,8 +28,8 @@ const Landis: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <Highlight text="AUGUST 3, 1921" x={100} y={100} size={96} at={t.at('August')} seed={11} rot={-2} />
-        <Note text="baseball's brand-new boss" x={110} y={300} size={50} rot={-3} at={t.at('brand-new') - 3} color="#ffffff" />
-        <Note text="Judge Kenesaw Mountain Landis" x={110} y={850} size={50} rot={-3} at={t.at('Judge') - 2} />
+        <Note text="baseball's brand-new boss" x={1180} y={300} size={50} rot={-3} at={t.at('brand-new') - 3} color="#ffffff" />
+        <Note text="Judge Kenesaw Mountain Landis" x={1060} y={860} size={50} rot={-3} at={t.at('Judge') - 2} />
       </>
     )}
   </Parallax>

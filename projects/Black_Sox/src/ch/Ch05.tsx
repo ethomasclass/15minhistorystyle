@@ -3,9 +3,8 @@
 import React from 'react';
 import words from '../../public/audio/ch05_prince_hal.words.json';
 import {Arrow, Highlight, Note, Tag, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Arch, Desk, DropCard, Ledger, ROWS, Sounds} from '../kit/bs';
-import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -13,18 +12,16 @@ export const CH05_FRAMES = chapterFrames(N, LEAD);
 
 /** Hal Chase: Prince Hal, best-fielding first baseman, and the accusation. */
 const Chase: React.FC<{t: TL}> = ({t}) => (
-  <Parallax name="chase" src="img/ch05/hal_chase_1917.jpg" size={[1920, 2233]} a={0} b={t.at('1910.')} fx={0.5} fy={0.3}
-    cam={{z: [1.03, 1.13]}} mask={MASKS.chase} traceAt={t.at('Hal Chase') + 3} tag="Hal Chase, Cincinnati, 1917 · Charles Conlon · Wikimedia Commons">
-    {() => (
-      <>
-        <Highlight text="HAL CHASE" x={90} y={100} size={110} at={t.at('Hal Chase')} seed={71} rot={-2} />
-        <Note text="best-fielding 1st baseman" x={100} y={300} size={52} rot={-3} at={t.at('best-fielding') - 3} color="#ffffff" />
-        <Note text={'"Prince Hal"'} x={1380} y={180} size={70} rot={-4} at={t.at('Prince Hal') - 3} />
-        <Note text="losing games on purpose?" x={100} y={790} size={58} rot={-3} at={t.at('losing games') - 3} color="#FF9F1C" />
-        <Note text="say several of his own managers" x={110} y={890} size={46} rot={-3} at={t.at('according') - 3} color="#ffffff" />
-      </>
-    )}
-  </Parallax>
+  <Desk a={0}>
+    <CropCard src="img/ch05/hal_chase_1917.jpg" size={[1920, 2233]} x={150} y={130} w={620} h={800} fx={960} fy={1116} scale={0.36} rot={-2} at={1}
+      mask={MASKS.chase} traceAt={t.at('Hal Chase') + 3} />
+    <Highlight text="HAL CHASE" x={880} y={110} size={110} at={t.at('Hal Chase')} seed={71} rot={-2} />
+    <Note text="best-fielding 1st baseman of his time" x={890} y={320} size={48} rot={-3} at={t.at('best-fielding') - 3} color="#ffffff" />
+    <Note text={'fans: "Prince Hal"'} x={890} y={430} size={62} rot={-4} at={t.at('Prince Hal') - 3} />
+    <Note text="losing games on purpose?" x={890} y={640} size={56} rot={-3} at={t.at('losing games') - 3} color="#FF9F1C" />
+    <Note text="say several of his own managers" x={900} y={750} size={44} rot={-3} at={t.at('according') - 3} color="#ffffff" />
+    <Tag text="Hal Chase, Cincinnati, 1917 · Charles Conlon · Wikimedia Commons" />
+  </Desk>
 );
 
 /** 1910: the manager accuses, the owner sides with Chase, the manager leaves, Chase gets his job. */
@@ -46,16 +43,15 @@ const Nineteen10: React.FC<{t: TL}> = ({t}) => {
 
 /** 1918: Christy Mathewson, Reds manager, suspends him. */
 const Matty: React.FC<{t: TL}> = ({t}) => (
-  <Parallax name="mathewson" src="img/ch05/christy_mathewson_reds_bain_1916.jpg" size={[1920, 2813]} crop={[60, 220, 1880, 2700]} a={t.at('1918.')} b={t.at('The case')} fx={0.5} fy={0.32}
-    cam={{z: [1.04, 1.14]}} mask={MASKS.mathewson} traceAt={t.at('Christy') + 3} tag="Christy Mathewson, Cincinnati, 1916 · Library of Congress · Bain News Service">
-    {() => (
-      <>
-        <Highlight text="1918 · CINCINNATI" x={90} y={90} size={90} at={t.at('1918.')} seed={75} rot={-2} />
-        <Note text="manager Christy Mathewson" x={100} y={780} size={56} rot={-3} at={t.at('Christy') - 3} color="#ffffff" />
-        <Note text="suspends Chase: bribes" x={100} y={890} size={62} rot={-3} at={t.at('suspends') - 3} color="#FF6F61" />
-      </>
-    )}
-  </Parallax>
+  <Desk a={t.at('1918.')}>
+    <CropCard src="img/ch05/christy_mathewson_reds_bain_1916.jpg" size={[1920, 2813]} x={150} y={130} w={620} h={800} fx={822} fy={1800} scale={0.44} rot={-2} at={t.at('1918.') - 1}
+      mask={MASKS.mathewson} traceAt={t.at('Christy') + 3} />
+    <Highlight text="1918 · CINCINNATI" x={880} y={110} size={90} at={t.at('1918.')} seed={75} rot={-2} />
+    <Note text="manager Christy Mathewson" x={890} y={330} size={54} rot={-3} at={t.at('Christy') - 3} color="#ffffff" />
+    <Note text="(the great pitcher)" x={910} y={430} size={44} rot={-3} at={t.at('great pitcher') - 3} />
+    <Note text="suspends Chase: bribes" x={890} y={600} size={64} rot={-3} at={t.at('suspends') - 3} color="#FF6F61" />
+    <Tag text="Christy Mathewson, Cincinnati, 1916 · Library of Congress · Bain News Service" />
+  </Desk>
 );
 
 /** January 1919: the hearing, Mathewson in France, no witnesses, cleared. */
@@ -123,7 +119,7 @@ const Body: React.FC = () => {
       <Sounds cuts={cuts.map((c) => c[0])}
         stamps={[at('Hal Chase'), at('1910.'), at('1918.'), at('January'), at('Giants sign'), at('1919.', 2)]}
         booms={[at('cleared'), at('Twice')]}
-        writes={['best-fielding', 'Prince Hal', 'losing games', 'according', 'accuses', 'owner', 'leaves', 'Chase gets', 'Christy', 'suspends', 'National League president', 'France', 'Key witnesses', 'enough evidence', 'A few weeks', 'accused', 'every player', 'White Sox'].map((p) => at(p))}
+        writes={['great pitcher', 'best-fielding', 'Prince Hal', 'losing games', 'according', 'accuses', 'owner', 'leaves', 'Chase gets', 'Christy', 'suspends', 'National League president', 'France', 'Key witnesses', 'enough evidence', 'A few weeks', 'accused', 'every player', 'White Sox'].map((p) => at(p))}
         ticks={[at('National League president'), at('France')]} />
     </>
   );

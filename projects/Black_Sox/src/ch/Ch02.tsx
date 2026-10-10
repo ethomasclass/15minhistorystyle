@@ -24,7 +24,7 @@ const Pools: React.FC<{t: TL}> = ({t}) => (
     <FlowCard file="card_pool_seller.png" x={150} y={110} w={500} rot={-3} at={t.at('Gamblers') - 1} tab="POOL SELLING" />
     <Highlight text="POOL SELLING" x={760} y={130} size={96} at={t.at('pool selling')} seed={33} rot={-2} />
     <Definition term="pool selling" def="auctioning shares of a betting pool on a game" at={t.at('auction')} x={770} y={300} w={1000} />
-    <DropCard src="img/ch02/broadway_gambling_hall_engraving_1882.jpg" x={1180} y={470} w={460} rot={3} at={t.at('often') - 1} />
+    <DropCard src="img/ch02/broadway_gambling_hall_engraving_1882.jpg" x={1330} y={560} w={390} rot={3} at={t.at('often') - 1} />
     <Note text="right at the ballpark" x={760} y={560} size={52} rot={-3} at={t.at('right there') - 3} />
     <Tag text="Illustration · pool selling, 1860s   /   McCabe, New York by Sunlight and Gaslight, 1882" />
   </Desk>

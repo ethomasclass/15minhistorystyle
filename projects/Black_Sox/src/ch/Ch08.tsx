@@ -22,7 +22,7 @@ const Rule21: React.FC<{t: TL}> = ({t}) => {
   const k = interpolate(f, [0, 6], [0, 1], clamp);
   return (
     <Desk a={0}>
-      <div style={{position: 'absolute', left: 260, top: 120, width: 1000, padding: '40px 50px', background: '#f4efe6', boxShadow: '0 18px 34px rgba(0,0,0,0.6)',
+      <div style={{position: 'absolute', left: 200, top: 90, width: 1000, padding: '40px 50px', background: '#f4efe6', boxShadow: '0 18px 34px rgba(0,0,0,0.6)',
         transform: `rotate(-1.5deg) scale(${0.6 + 0.4 * k})`, opacity: Math.min(1, k * 2)}}>
         <div style={{fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#555'}}>MAJOR LEAGUE RULES · MISCONDUCT</div>
         <div style={{fontFamily: JF.display, fontSize: 84, color: '#111', margin: '8px 0 18px'}}>RULE 21 (d)</div>
@@ -31,9 +31,9 @@ const Rule21: React.FC<{t: TL}> = ({t}) => {
           shall be declared <span style={{background: f >= t.at('banned for life') ? 'rgba(255,111,97,0.45)' : 'transparent'}}>permanently ineligible.</span>
         </div>
       </div>
-      <Note text="posted in every clubhouse" x={1320} y={260} size={52} rot={-4} at={t.at('posted') - 3} />
-      <Note text="(still is)" x={1380} y={350} size={44} rot={-4} at={t.at('clubhouse') + 4} color="#ffffff" />
-      <Stamp text="FOR LIFE." x={1300} y={700} at={t.at('banned for life') + 4} size={120} color={pal.subject} />
+      <Note text="posted in every clubhouse" x={220} y={780} size={52} rot={-3} at={t.at('posted') - 3} />
+      <Note text="(it still is)" x={260} y={880} size={44} rot={-3} at={t.at('clubhouse') + 4} color="#ffffff" />
+      <Stamp text="FOR LIFE." x={1260} y={760} at={t.at('banned for life') + 4} size={120} color={pal.subject} />
       <Tag text="Major League Rules, Rule 21 (d)(2), current text" />
     </Desk>
   );
@@ -94,12 +94,13 @@ const Case: React.FC<{t: TL}> = ({t}) => (
 /** 2026: the league's partnership, with the single-pitch safeguard. */
 const Deal: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('In 2026')}>
-    {hasFile(RELEASE) ? <DropCard src={RELEASE} x={880} y={130} w={880} rot={2} at={t.at('In 2026') - 1} filter={LOOK.doc} />
-      : <StandIn x={880} y={130} w={880} h={560} rot={2} label="MLB press release, Mar 19 2026 (callback to ch01)" />}
+    {hasFile(RELEASE) ? <DropCard src={RELEASE} x={1020} y={130} w={760} rot={2} at={t.at('In 2026') - 1} filter={LOOK.doc} />
+      : <StandIn x={1020} y={130} w={760} h={500} rot={2} label="MLB press release, Mar 19 2026 (callback to ch01)" />}
     <Highlight text="2026" x={150} y={130} size={110} at={t.at('In 2026') + 3} seed={129} rot={-2} />
-    <Note text="the league's deal with Polymarket" x={160} y={330} size={54} rot={-3} at={t.at('signed its deal') - 3} color="#ffffff" />
-    <Note text="single-pitch markets:" x={160} y={500} size={58} rot={-3} at={t.at('Part of that') - 3} />
-    <Note text="off the board" x={200} y={600} size={78} rot={-3} at={t.at('off the board') - 3} />
+    <Note text="the league's deal" x={160} y={330} size={54} rot={-3} at={t.at('signed its deal') - 3} color="#ffffff" />
+    <Note text="with Polymarket" x={200} y={420} size={54} rot={-3} at={t.at('with Polymarket') - 3} color="#ffffff" />
+    <Note text="single-pitch markets:" x={160} y={560} size={58} rot={-3} at={t.at('Part of that') - 3} />
+    <Note text="off the board" x={200} y={660} size={78} rot={-3} at={t.at('off the board') - 3} />
     <Tag text="MLB press release, March 19, 2026" />
   </Desk>
 );
@@ -139,7 +140,8 @@ const TheLine: React.FC<{t: TL}> = ({t}) => {
       <Wall x={160} y={240} w={1600} rows={6} at={t.at('Now the line') - 30} dur={1} brickH={56} line={t.at('moved') - 2} />
       <div style={{position: 'absolute', left: 170, top: 120, fontFamily: JF.mono, fontSize: 28, letterSpacing: 4, color: '#EDE7DC', opacity: 0.85}}>THE STANDS</div>
       <Note text="fans can bet" x={180} y={200} size={60} rot={-3} at={t.at('Fans can') - 3} color="#ffffff" />
-      <Note text="leagues can partner with sportsbooks and prediction markets" x={180} y={300} size={50} rot={-3} at={t.at('Leagues') - 3} color="#ffffff" />
+      <Note text="leagues can partner with sportsbooks" x={180} y={300} size={50} rot={-3} at={t.at('Leagues') - 3} color="#ffffff" />
+      <Note text="and prediction markets" x={240} y={390} size={50} rot={-3} at={t.at('prediction markets') - 3} color="#ffffff" />
       <div style={{position: 'absolute', left: 170, top: 640, fontFamily: JF.mono, fontSize: 28, letterSpacing: 4, color: pal.mark}}>THE FIELD</div>
       <Note text="the rule from 1921 stays:" x={180} y={720} size={58} rot={-3} at={t.at('The rule that') - 3} />
       <Note text="the people on the field can't be in on it" x={180} y={830} size={64} rot={-3} at={t.at('the people on') - 3} color={pal.subject} />
@@ -159,7 +161,8 @@ const TwoViews: React.FC<{t: TL}> = ({t}) => {
       <Note text="regulated" x={160} y={380} size={54} rot={-3} at={t.at('regulated') - 3} />
       <Note text="watched for anything suspicious" x={140} y={500} size={46} rot={-3} at={t.at('watched for') - 3} />
       <Note text="a bet in every fan's pocket" x={1040} y={260} size={52} rot={-3} at={t.at('puts a bet') - 3} color={pal.subject} />
-      <Note text="more temptation close to the game" x={1040} y={380} size={44} rot={-3} at={t.at('more temptation') - 3} color={pal.subject} />
+      <Note text="more temptation" x={1040} y={380} size={52} rot={-3} at={t.at('more temptation') - 3} color={pal.subject} />
+      <Note text="close to the game" x={1060} y={480} size={52} rot={-3} at={t.at('close to') - 3} color={pal.subject} />
     </Desk>
   );
 };

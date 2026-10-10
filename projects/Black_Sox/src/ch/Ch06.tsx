@@ -5,7 +5,7 @@ import {interpolate} from 'remotion';
 import words from '../../public/audio/ch06_the_fix.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Arch, Desk, DropCard, FlowCard, Sounds} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
@@ -57,23 +57,21 @@ const Comiskey: React.FC<{t: TL}> = ({t}) => {
   const s1 = interpolate(g, [t.at('Some of that'), t.at('Some of that') + 5], [0, 1], clamp);
   const s2 = interpolate(g, [t.at('no evidence'), t.at('no evidence') + 5], [0, 1], clamp);
   return (
-    <Parallax name="comiskey" src="img/ch06/charles_comiskey_1914.jpg" size={[2174, 3000]} crop={[150, 300, 2060, 2900]} a={t.at("You've")} b={t.at('First baseman')} fx={0.35} fy={0.3}
-      cam={{z: [1.03, 1.1]}} mask={MASKS.comiskey} traceAt={t.at('Charles Comiskey') + 3} tag="Charles Comiskey, White Sox owner, 1914 · Library of Congress · Bain News Service" vignette={0.75}>
-      {() => (
-        <>
-          <Note text="owner Charles Comiskey" x={90} y={90} size={54} rot={-3} at={t.at('Charles Comiskey') - 3} color="#ffffff" />
-          <Note text="the legend:" x={980} y={130} size={52} rot={-3} at={t.at('cheap') - 6} color="#ffffff" />
-          <Note text="too cheap, underpaid everyone" x={1000} y={230} size={52} rot={-3} at={t.at('cheap') - 3} color="#FF9F1C" />
-          <div style={{position: 'absolute', left: 990, top: 265, height: 7, borderRadius: 4, background: '#FF9F1C', width: 690 * s1, transform: 'rotate(-3deg)'}} />
-          <Note text="benched his star to dodge a bonus" x={1000} y={340} size={52} rot={-3} at={t.at('benched') - 3} color="#FF9F1C" />
-          <div style={{position: 'absolute', left: 990, top: 375, height: 7, borderRadius: 4, background: '#FF9F1C', width: 790 * s2, transform: 'rotate(-3deg)'}} />
-          <Note text="the records:" x={980} y={500} size={52} rot={-3} at={t.at('Salary records') - 3} color="#ffffff" />
-          <Note text="one of the highest payrolls" x={1000} y={600} size={56} rot={-3} at={t.at('highest payrolls') - 3} />
-          <Note text="no evidence for the bonus story" x={1000} y={700} size={56} rot={-3} at={t.at('no evidence') - 3} />
-          <Note text="but some players felt cheated" x={980} y={860} size={62} rot={-3} at={t.at('felt cheated') - 3} color={pal.subject} />
-        </>
-      )}
-    </Parallax>
+    <Desk a={t.at("You've")}>
+      <CropCard src="img/ch06/charles_comiskey_1914.jpg" size={[2174, 3000]} x={130} y={130} w={520} h={800} fx={1071} fy={1427} scale={0.31} rot={-2} at={t.at("You've") - 1}
+        mask={MASKS.comiskey} traceAt={t.at('Charles Comiskey') + 3} />
+      <Note text="owner Charles Comiskey" x={140} y={960} size={44} rot={-3} at={t.at('Charles Comiskey') - 3} color="#ffffff" />
+      <Note text="the legend:" x={760} y={110} size={48} rot={-3} at={t.at('cheap') - 6} color="#ffffff" />
+      <Note text="too cheap, underpaid everyone" x={780} y={200} size={48} rot={-3} at={t.at('cheap') - 3} color="#FF9F1C" />
+      <div style={{position: 'absolute', left: 770, top: 232, height: 7, borderRadius: 4, background: '#FF9F1C', width: 640 * s1, transform: 'rotate(-3deg)'}} />
+      <Note text="benched his star to dodge a bonus" x={780} y={300} size={48} rot={-3} at={t.at('benched') - 3} color="#FF9F1C" />
+      <div style={{position: 'absolute', left: 770, top: 332, height: 7, borderRadius: 4, background: '#FF9F1C', width: 740 * s2, transform: 'rotate(-3deg)'}} />
+      <Note text="the records:" x={760} y={460} size={48} rot={-3} at={t.at('Salary records') - 3} color="#ffffff" />
+      <Note text="one of the highest payrolls" x={780} y={550} size={54} rot={-3} at={t.at('highest payrolls') - 3} />
+      <Note text="no evidence for the bonus story" x={780} y={650} size={54} rot={-3} at={t.at('no evidence') - 3} />
+      <Note text="but some players felt cheated" x={760} y={830} size={60} rot={-3} at={t.at('felt cheated') - 3} color={pal.subject} />
+      <Tag text="Charles Comiskey, White Sox owner, 1914 · Library of Congress · Bain News Service" />
+    </Desk>
   );
 };
 
@@ -85,8 +83,8 @@ const Gandil: React.FC<{t: TL}> = ({t}) => (
       <>
         <Note text="first baseman Chick Gandil" x={90} y={100} size={56} rot={-3} at={t.at('Chick Gandil') - 3} color="#ffffff" />
         <Note text="goes to the gamblers" x={110} y={210} size={56} rot={-3} at={t.at('goes to') - 3} />
-        <Note text="the plan: lose the Series" x={110} y={760} size={58} rot={-3} at={t.at('The plan') - 3} color="#ffffff" />
-        <Stamp text="$100,000" x={100} y={850} at={t.at('100,000')} size={120} color="#FF6F61" />
+        <Note text="the plan: lose the Series" x={1230} y={740} size={58} rot={-3} at={t.at('The plan') - 3} color="#ffffff" />
+        <Stamp text="$100,000" x={1240} y={840} at={t.at('100,000')} size={120} color="#FF6F61" />
       </>
     )}
   </Parallax>
@@ -110,9 +108,10 @@ const Eight: React.FC<{t: TL}> = ({t}) => {
         </React.Fragment>
       ))}
       <Note text="8 in on it, or knew" x={140} y={930} size={60} rot={-3} at={t.at('or at least') - 3} />
-      <DropCard src="img/ch06/arnold_rothstein_desk_c1915.jpg" x={1360} y={110} w={380} rot={3} at={t.at('The money') - 1} />
-      <Note text="reportedly: Arnold Rothstein" x={1280} y={680} size={48} rot={-3} at={t.at('Arnold') - 3} color="#FF9F1C" />
-      <Note text="New York's biggest gambler" x={1290} y={770} size={42} rot={-3} at={t.at('biggest') - 3} color="#ffffff" />
+      <DropCard src="img/ch06/arnold_rothstein_desk_c1915.jpg" x={1380} y={110} w={360} rot={3} at={t.at('The money') - 1} />
+      <Note text="reportedly:" x={1330} y={650} size={42} rot={-3} at={t.at('Arnold') - 3} color="#FF9F1C" />
+      <Note text="Arnold Rothstein" x={1330} y={730} size={48} rot={-3} at={t.at('Arnold') - 3} color="#FF9F1C" />
+      <Note text="New York's biggest gambler" x={1300} y={820} size={34} rot={-3} at={t.at('biggest') - 3} color="#ffffff" />
       <Tag text="Library of Congress · Bain News Service; Rothstein, c. 1915 · Wikimedia Commons" />
     </Desk>
   );
@@ -131,13 +130,14 @@ const Signal: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at("Cicotte's")}>
-      <FlowCard file="card_signal_pitch.png" x={140} y={100} w={500} rot={-3} at={t.at("Cicotte's") - 1} tab="THE SIGNAL" />
-      <DropCard src="img/ch06/morrie_rath_reds_1919.jpg" x={1340} y={110} w={380} rot={3} at={t.at('leadoff') - 1} />
-      <Note text="Reds leadoff man Morrie Rath" x={1220} y={720} size={44} rot={-3} at={t.at('leadoff') - 2} color="#ffffff" />
-      <Note text="2nd pitch: in the back" x={760} y={170} size={56} rot={-3} at={t.at('second pitch') - 3} />
-      <Highlight text="THE SIGNAL" x={740} y={330} size={100} at={t.at('signal')} seed={99} rot={-2} />
-      <Note text="the fix is on." x={770} y={520} size={70} rot={-3} at={t.at('The fix') - 3} color={pal.subject} />
-      <Note text="not exactly subtle." x={790} y={650} size={56} rot={-3} at={t.at('Not exactly') - 3} color="#ffffff" />
+      <FlowCard file="card_signal_pitch.png" x={120} y={100} w={470} rot={-3} at={t.at("Cicotte's") - 1} tab="THE SIGNAL" />
+      <DropCard src="img/ch06/morrie_rath_reds_1919.jpg" x={1430} y={110} w={320} rot={3} at={t.at('leadoff') - 1} />
+      <Note text="Morrie Rath," x={1430} y={620} size={40} rot={-3} at={t.at('leadoff') - 2} color="#ffffff" />
+      <Note text="Reds leadoff" x={1440} y={690} size={40} rot={-3} at={t.at('leadoff') + 2} color="#ffffff" />
+      <Note text="2nd pitch: in the back" x={680} y={170} size={52} rot={-3} at={t.at('second pitch') - 3} />
+      <Highlight text="THE SIGNAL" x={670} y={320} size={90} at={t.at('signal')} seed={99} rot={-2} />
+      <Note text="the fix is on." x={690} y={510} size={66} rot={-3} at={t.at('The fix') - 3} color={pal.subject} />
+      <Note text="not exactly subtle." x={700} y={640} size={52} rot={-3} at={t.at('Not exactly') - 3} color="#ffffff" />
       <Tag text="Illustration · the signal pitch, Oct. 1, 1919   /   Morrie Rath, 1919 · Library of Congress" />
     </Desk>
   );
@@ -145,7 +145,7 @@ const Signal: React.FC<{t: TL}> = ({t}) => {
 
 /** The odds swing; sportswriters notice (the next day's paper). */
 const Odds: React.FC<{t: TL}> = ({t}) => (
-  <Arch src="img/ch06/ny_herald_1919-10-02_p18.jpg" tag="New York Herald, Oct. 2, 1919 · Wikimedia Commons" a={t.at('Right before')} b={t.at('The Reds win')} z={[1.4, 1.55]} pos="50% 8%" look="doc">
+  <Arch src="img/ch06/ny_herald_1919-10-02_p18.jpg" tag="New York Herald, Oct. 2, 1919 · Wikimedia Commons" a={t.at('Right before')} b={t.at('The Reds win')} z={[1.4, 1.55]} pos="50% 8%" look="dim">
     <Note text="the odds swung hard to Cincinnati" x={110} y={760} size={58} rot={-3} at={t.at('odds') - 3} color="#ffffff" />
     <Note text="sportswriters noticed. a few said so." x={110} y={880} size={58} rot={-3} at={t.at('Sportswriters') - 3} />
   </Arch>
@@ -154,7 +154,7 @@ const Odds: React.FC<{t: TL}> = ({t}) => (
 /** Reds win, five games to three (the newsreel's own intertitle). */
 const Result: React.FC<{t: TL}> = ({t}) => (
   <Arch src={P('199s_title_fourth_inning_cicotte')} tag={PATHE} a={t.at('The Reds win')} b={t.at('And Joe')} z={[1.02, 1.06]} pos="50% 50%">
-    <Stamp text="REDS, 5 GAMES TO 3" x={130} y={800} at={t.at('5 games')} size={92} color="#FF6F61" />
+    <Stamp text="REDS, 5 GAMES TO 3" x={140} y={920} at={t.at('5 games')} size={78} color="#FF6F61" />
     <Note text="best of nine" x={1400} y={120} size={52} rot={-3} at={t.at('best-of-nine') - 3} />
   </Arch>
 );
