@@ -1,6 +1,6 @@
 # Say It Ain't So: Baseball's Gambling Problem Before the Black Sox
 
-**15 Minute History** · narration script · 1,691 words · about 9:30 of narration with the intro and logo breaks (about 9:45 finished with a 15-second end screen)
+**15 Minute History** · narration script · 1,709 words · about 9:34 of narration with the intro and logo breaks (about 9:50 finished with a 15-second end screen)
 
 **Driving question (cold open, answered in the last chapter):** How did betting go from part of the game, to baseball's unforgivable sin, and back again?
 **Answer:** It was never gone. Before 1919 the rule against gambling existed on paper (1865, 1877, 1882), but enforcing it meant admitting a problem, so clubs mostly handled it quietly (the 1908 bribe, Hal Chase cleared and rehired). The 1919 World Series fix was too big to hide, so the owners gave Landis near-total power and built a wall that held for a century. In 2018 the law changed and the line moved: fans may bet and leagues may partner with betting companies, but the 1921 rule still stands, that the people on the field can't be in on it. Supporters and critics read that change differently; the video gives both.
@@ -14,7 +14,7 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps assume ~185 wpm plus ~10 s for 
 
 ## 0:00 | Two Documents
 
-`ch01_cold_open.txt` · 170 words
+`ch01_cold_open.txt` · 167 words
 
 August 3rd, 1921. A one-paragraph statement from baseball's brand-new boss, Judge Kenesaw Mountain Landis.
 
@@ -22,9 +22,9 @@ August 3rd, 1921. A one-paragraph statement from baseball's brand-new boss, Judg
 
 Eight Chicago White Sox players are out. For life. The day before, a jury had found them *not guilty*.
 
-Now jump ahead 105 years. March 2026. Another one-page document. Major League Baseball names an official partner: Polymarket, a {prediction market}, where people buy and sell bets on what's going to happen. Including baseball games.
+Now jump ahead 105 years. March 2026. Another one-page document. Major League Baseball names an official partner: Polymarket, a {prediction market}, where people trade on what's going to happen. Including baseball games.
 
-Same sport. One document bans players over gambling. The other makes a betting market a business partner.
+Same sport. One document bans players over gambling. The other names a prediction market an official partner.
 
 So it's easy to think that back then gambling was taboo, and now it's everywhere. But that's not quite how it went. Before 1919, gambling in baseball wasn't taboo. It was *everywhere*.
 
@@ -34,7 +34,7 @@ It starts with a catcher who couldn't catch.
 
 ---
 
-## 1:05 | Everybody Bet
+## 1:04 | Everybody Bet
 
 `ch02_everybody_bet.txt` · 174 words
 
@@ -54,7 +54,7 @@ Remember that. It's going to keep happening.
 
 ---
 
-## 2:03 | On Paper
+## 2:02 | On Paper
 
 `ch03_louisville.txt` · 222 words
 
@@ -76,7 +76,7 @@ Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, 
 
 ---
 
-## 3:07 | The Open Secret
+## 3:15 | The Open Secret
 
 `ch04_open_secret.txt` · 217 words
 
@@ -96,7 +96,7 @@ Which seems like the obvious next question.
 
 ---
 
-## 4:19 | Prince Hal
+## 4:27 | Prince Hal
 
 `ch05_prince_hal.txt` · 161 words
 
@@ -118,7 +118,7 @@ That's baseball in 1919. Now, about the White Sox.
 
 ---
 
-## 5:12 | The Fix
+## 5:21 | The Fix
 
 `ch06_the_fix.txt` · 233 words
 
@@ -140,7 +140,7 @@ By their own accounts, the players got only part of the money they were promised
 
 ---
 
-## 6:29 | Regardless of the Verdict
+## 6:38 | Regardless of the Verdict
 
 `ch07_regardless.txt` · 192 words
 
@@ -160,9 +160,9 @@ This time, nobody came back. That's the wall. Gambling goes from an open secret 
 
 ---
 
-## 7:33 | Full Circle
+## 7:42 | Full Circle
 
-`ch08_full_circle.txt` · 323 words
+`ch08_full_circle.txt` · 343 words
 
 Baseball later wrote it down in plain words, Rule 21, and posted it in every clubhouse. Bet on a game you have a part in, and you're banned for life.
 
@@ -170,15 +170,19 @@ The wall held for most of a century. In 1989, Pete Rose, baseball's all-time hit
 
 Then the law changed. In 2018, the Supreme Court cleared the way for states to legalize sports betting. Within a few years, betting apps were sponsoring teams and advertising during games.
 
-In 2025, baseball ruled that a lifetime ban ends at death. That took Joe Jackson, the rest of the 1919 Sox, and Pete Rose off the banned list. That same year, two Cleveland pitchers were charged with rigging single pitches for gamblers placing {microbets}, bets on a single pitch. They've pleaded not guilty. And in 2026, baseball signed its deal with Polymarket, which includes keeping markets on single pitches off the board.
+In 2025, baseball ruled that a lifetime ban ends at death. That took Joe Jackson, the rest of the 1919 Sox, and Pete Rose off the banned list.
+
+That same year, federal prosecutors charged two Cleveland pitchers with rigging single pitches for bettors placing {microbets}, bets on a single pitch. Both pleaded not guilty, and when this video was made, their case hadn't gone to trial.
+
+In 2026, baseball signed its deal with Polymarket. Part of that deal keeps markets on single pitches off the board.
 
 So let's go back to the question. How did betting go from part of the game, to the unforgivable sin, and back?
 
 It was never really gone. Before 1919, the rule existed, but enforcing it meant admitting a problem, so mostly nobody did. 1919 was too big to hide. So baseball built a wall and kept it up for a hundred years.
 
-Now the line has moved. Fans can bet. Leagues can partner with the companies taking those bets. The rule that stays is the one from 1921: the people on the field can't be in on it.
+Now the line has moved. Fans can bet. Leagues can partner with sportsbooks and prediction markets. The rule that stays is the one from 1921: the people on the field can't be in on it.
 
-To supporters, that's betting out in the open, watched and regulated. To critics, it's the 1919 problem with a phone in every pocket.
+To supporters, that's betting out in the open, regulated and watched for anything suspicious. To critics, it puts a bet in every fan's pocket, and more temptation close to the game.
 
 Either way, since Hoboken in 1865, the question has never been *whether* people will bet on baseball.
 
@@ -210,7 +214,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 
 **Subscribe reminders (standing request).** Mid-video at the end of ch03 (about 3:00), tied to Wansley; on screen a small teal Note "subscribe ↓". At the end, after the closing line, over the 15 s end screen.
 
-**Neutrality.** No modern politicians. The two Cleveland pitchers are not named; the narration says *charged* and *pleaded not guilty*. Polymarket is named only because the league's own release names it. The ending gives supporters' and critics' readings and no verdict.
+**Neutrality.** No modern politicians. **Modern-era wording check (Oct 10):** Polymarket is described only in the league's and its own terms ("official partner," "people trade on what's going to happen") and credited with the single-pitch safeguard; it is never called a bookmaker or linked to any scandal. Critics' view is about sports betting in general, attributed to critics. The two Cleveland pitchers are unnamed, presumed innocent, and in a separate paragraph from Polymarket. Pete Rose is stated as record only. The two Cleveland pitchers are not named; the narration says *charged* and *pleaded not guilty*. Polymarket is named only because the league's own release names it. The ending gives supporters' and critics' readings and no verdict.
 
 ## Pronunciation (for ElevenLabs)
 
@@ -270,7 +274,7 @@ Put these in `PRONOUNCE` in `tools/voice.py` (same word count as the original):
 | 28 | 1989 Rose banned for betting while managing the Reds. | Agreed to permanent ineligibility Aug 24, 1989. | Exact. |
 | 29 | 2018 Supreme Court cleared the way for states to legalize sports betting. | *Murphy v. NCAA*, May 14, 2018. | Exact. |
 | 30 | 2025: lifetime bans end at death; Jackson, the 1919 Sox and Rose off the list. | Manfred, May 13, 2025. | Exact. |
-| 31 | 2025: two Cleveland pitchers charged with rigging single pitches for microbets; pleaded not guilty. | Clase and Ortiz indicted Nov 2025; not-guilty pleas to a revised indictment Feb 2026; joint trial ordered Aug 2026. | Not named; "charged," "pleaded not guilty." **Re-check status before publishing** (a verdict could land). |
+| 31 | 2025: federal prosecutors charged two Cleveland pitchers with rigging single pitches for bettors placing microbets; both pleaded not guilty; case hadn't gone to trial when the video was made. | Clase and Ortiz indicted Nov 2025; not-guilty pleas Feb 2026; joint trial ordered Aug 2026; jury selection was scheduled for Nov 2, 2026 (ESPN, March 2026). The bets in the indictment were not placed on Polymarket. | Not named; "charged," "pleaded not guilty," "when this video was made." Kept in its own paragraph, apart from the Polymarket sentence, so nothing implies a link. **Re-check before publishing.** |
 | 32 | 2026 Polymarket deal keeps single-pitch markets off the board. | The release restricts markets on individual pitches. | Matches. |
 
 ## Sources
