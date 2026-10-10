@@ -2,7 +2,7 @@
 // 1280x720 (tools/thumbs.mjs renders frame 140).
 //   A · the split: Shoeless Joe Jackson (1920, White Sox) cut out, teal half / coral half, SAY IT / AIN'T SO under him.
 //   B · title-led: the real 1908 Polo Grounds crowd, "before the Black Sox..." and EVERYBODY BET.
-//   C · then vs now: Landis 1921 (BANNED) beside the hand-drawn Polymarket phone 2026 (PARTNER).
+//   C · then vs now: Shoeless Joe Jackson, waist up (BANNED 1921) beside the hand-drawn Polymarket phone (PARTNER 2026).
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
@@ -92,20 +92,22 @@ export const ThumbB: React.FC = () => (
   </PaletteCtx.Provider>
 );
 
-const LS = {src: 'img/ch01/landis_street_1924_crop.jpg', size: [3280, 2430] as [number, number], mask: MASKS.landis_street};
 
 export const ThumbC: React.FC = () => {
-  const place: Place = {left: 540 - 1813 * 0.4, top: 200 - 491 * 0.4, scale: 0.4};
+  // Jackson from the waist up: cap top at y 190, the face centred on x 500, the belt just above the BANNED tape
+  const place: Place = {left: 500 - 715 * 1.12, top: 190 - 154 * 1.12, scale: 1.12};
   return (
     <PaletteCtx.Provider value={PALETTES.locked}>
       <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
         <DarkPaper />
-        <Cutout src={LS.src} size={LS.size} place={place} alpha={LS.mask.alpha} />
-        <Tint mask={LS.mask.alpha} place={place} size={LS.size} />
-        <Traced paths={LS.mask.data.shapes.subject} place={place} at={0} dur={1} width={8} />
+        <div style={{position: 'absolute', left: 0, top: 0, width: 956, height: 1080, overflow: 'hidden'}}>
+          <Cutout src={JX.src} size={JX.size} place={place} alpha={JX.mask.alpha} />
+          <Tint mask={JX.mask.alpha} place={place} size={JX.size} />
+          <Traced paths={JX.mask.data.shapes.subject} place={place} at={0} dur={1} width={8} />
+        </div>
         <div style={{position: 'absolute', left: 956, top: 60, width: 8, height: 960, background: 'rgba(244,239,230,0.75)'}} />
         <PhoneSketch x={1270} y={70} w={360} at={0} rot={4} />
-        <div style={{position: 'absolute', left: 120, top: 800, fontFamily: JF.mono, fontSize: 40, letterSpacing: 6, color: TEAL}}>1921</div>
+        <div style={{position: 'absolute', left: 740, top: 790, fontFamily: JF.mono, fontSize: 40, letterSpacing: 6, color: TEAL}}>1921</div>
         <div style={{position: 'absolute', left: 1060, top: 800, fontFamily: JF.mono, fontSize: 40, letterSpacing: 6, color: CORAL}}>2026</div>
         <Highlight text="BANNED" x={100} y={855} size={150} at={0} seed={79} rot={-3} />
         <Highlight text="PARTNER" x={1040} y={855} size={150} at={0} seed={81} rot={-2} />
