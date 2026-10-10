@@ -1,6 +1,6 @@
 # Say It Ain't So: Baseball's Gambling Problem Before the Black Sox
 
-**15 Minute History** · narration script · 1,644 words · about 9:13 of narration with the intro and logo breaks (about 9:45 finished with a 15-second end screen)
+**15 Minute History** · narration script · 1,691 words · about 9:30 of narration with the intro and logo breaks (about 9:45 finished with a 15-second end screen)
 
 **Driving question (cold open, answered in the last chapter):** How did betting go from part of the game, to baseball's unforgivable sin, and back again?
 **Answer:** It was never gone. Before 1919 the rule against gambling existed on paper (1865, 1877, 1882), but enforcing it meant admitting a problem, so clubs mostly handled it quietly (the 1908 bribe, Hal Chase cleared and rehired). The 1919 World Series fix was too big to hide, so the owners gave Landis near-total power and built a wall that held for a century. In 2018 the law changed and the line moved: fans may bet and leagues may partner with betting companies, but the 1921 rule still stands, that the people on the field can't be in on it. Supporters and critics read that change differently; the video gives both.
