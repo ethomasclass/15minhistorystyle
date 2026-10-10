@@ -4,7 +4,7 @@ import React from 'react';
 import words from '../../public/audio/ch04_open_secret.words.json';
 import {Highlight, Note, Tag, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, FlowCard, Ledger, ROWS, Sounds} from '../kit/bs';
+import {Arch, Desk, Ledger, ROWS, Sounds} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 
@@ -59,7 +59,6 @@ const Quietly: React.FC<{t: TL}> = ({t}) => {
       <Note text="a trade." x={200} y={700} size={60} rot={-3} at={t.at('A trade') - 2} color="#ffffff" />
       <Note text="a release." x={560} y={700} size={60} rot={-3} at={t.at('A release') - 2} color="#ffffff" />
       <Note text="no headlines." x={200} y={810} size={60} rot={-3} at={t.at('No headlines') - 2} />
-      <FlowCard file="card_quiet_release.png" x={1220} y={180} w={460} rot={3} at={t.at('Clubs usually') - 1} tab="QUIETLY" />
     </Desk>
   );
 };
@@ -90,9 +89,9 @@ const Klem: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <Note text="umpire Bill Klem" x={110} y={110} size={60} rot={-3} at={t.at('Bill Klem') - 3} color="#ffffff" />
-          <FlowCard file="card_bribe_1908.png" x={1360} y={110} w={380} rot={3} at={t.at('a man offers') - 1} tab="THE OFFER" />
-          <Note text="thousands of dollars" x={1060} y={780} size={60} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
-          <Note text="Klem says no. reports it." x={1060} y={890} size={54} rot={-3} at={t.at('Klem says') - 3} />
+          <Note text="a bribe: thousands" x={70} y={620} size={48} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
+          <Note text="Klem says no." x={70} y={740} size={50} rot={-3} at={t.at('Klem says') - 3} />
+          <Note text="and reports it." x={80} y={850} size={50} rot={-3} at={t.at('reports it') - 3} color="#ffffff" />
         </>
       )}
     </Parallax>
@@ -133,7 +132,7 @@ const Body: React.FC = () => {
         stamps={[at('1900s'), at('bad for business'), at('October')]}
         booms={[at('40'), at('banned for life'), at('banned from every')]}
         writes={['enforcing', 'almost nobody', 'two major', 'big new', 'World Series', 'Bettors', 'Players bet', 'Club officials', 'Usually', 'Not always', "Why didn't", 'admitting', 'quietly', 'A trade', 'A release', 'No headlines', 'Dick Higham', 'writing letters', 'only umpire', 'the Giants', 'Bill Klem', 'thousands', 'Klem says', 'team doctor', 'Who sent', 'Nobody really', 'obvious'].map((p) => at(p))}
-        ticks={[at('Clubs usually'), at('a man offers')]}
+        ticks={[]}
         extra={[{at: at('The betting comes'), src: 'sfx/rowdy_crowd.wav', volume: 0.1}, {at: at('And in October'), src: 'sfx/crowd_cheer.wav', volume: 0.12}]} />
     </>
   );

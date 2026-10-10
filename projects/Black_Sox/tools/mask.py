@@ -41,6 +41,7 @@ JOBS = {
     "rath": ("img/ch06/morrie_rath_reds_1919.jpg", None, "isnet-general-use"),
     "weaver": ("img/ch07/buck_weaver_1917.jpg", None, "u2net_human_seg"),
     "landis_1907": ("img/ch07/landis_judge_seated_1907.jpg", None, "isnet-general-use"),
+    "catcher_ci": ("img/ch02/currier_ives_american_national_game_1866.jpg", (1040, 1800, 1290, 2260), "isnet-general-use"),
     "landis_desk": ("img/ch01/landis_commissioner_bain_1920s.jpg", (400, 1900, 3300, 4500), "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

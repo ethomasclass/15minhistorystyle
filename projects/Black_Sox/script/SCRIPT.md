@@ -194,7 +194,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 
 ## Production notes
 
-**Look.** The channel look (B&W archive, one coral subject with teal trace, orange torn-tape titles, teal notes). Real people only from period photos (Bain News Service at the Library of Congress covers nearly everyone from 1905 to 1925). The 1860s–1880s chapters lean on engravings and Currier & Ives. For the gaps (pool selling, telegrams, the 1908 bribe, the signal pitch), the new **baseball-card illustration** series in `PROMPTS.md`, used as cards dropped on the desk, not full-bleed, so they read as artifacts rather than AI paintings.
+**Look.** The channel look (B&W archive, one coral subject with teal trace, orange torn-tape titles, teal notes). Real people only from period photos (Bain News Service at the Library of Congress covers nearly everyone from 1905 to 1925). The 1860s–1880s chapters lean on engravings and Currier & Ives. **No AI images** (the user's call): the gaps are filled with archival material: McCabe's 1882 description and engravings of pool selling and gambling dens, a catcher masked out of the 1866 Currier & Ives Hoboken print (no photo of Wansley survives), the 1875 Western Union room, Pathé newsreel stills of Game 1, the 1920 Daily News page, the Criminal Courts Building.
 
 **The two documents (ch01, ch08).** ch01 opens on Landis's statement (newspaper print of Aug 3–4, 1921) and the MLB press release of March 19, 2026, side by side as `Doc` cards. ch08 returns to the same two cards: callback. The user screenshots the MLB press release (mlb.com) for the second card; it is shown as a document, cropped to the headline.
 

@@ -4,7 +4,7 @@ import React from 'react';
 import words from '../../public/audio/ch07_regardless.words.json';
 import {Highlight, Note, Tag, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, FlowCard, Ledger, ROWS, Sounds, SyncQuote, Wall} from '../kit/bs';
+import {Arch, Desk, DropCard, Ledger, ROWS, Sounds, SyncQuote, Wall} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 
@@ -39,11 +39,11 @@ const Confess: React.FC<{t: TL}> = ({t}) => {
 /** "Say it ain't so, Joe": the legend, and Jackson's denial. */
 const SayIt: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('Outside')}>
-    <FlowCard file="card_courthouse_boy.png" x={150} y={100} w={500} rot={-3} at={t.at('Outside') - 1} tab="THE STORY GOES" />
+    <DropCard src="img/ch07/criminal_courts_building_doorway_habs_1964.jpg" x={150} y={110} w={520} rot={-3} at={t.at('Outside') - 1} />
     <Note text="the story goes..." x={790} y={160} size={56} rot={-3} at={t.at('the story goes') - 3} color="#ffffff" />
     <SyncQuote t={t} phrase={'"Say it ain\'t so, Joe."'} x={780} y={300} w={1000} size={96} />
     <Note text="Jackson: it never happened" x={800} y={640} size={64} rot={-3} at={t.at('Jackson said') - 3} color="#FF9F1C" />
-    <Tag text="Illustration · outside the courthouse, Sept. 1920" />
+    <Tag text="Criminal Courts Building doorway, Chicago (site of the 1920 grand jury) · HABS, 1964" />
   </Desk>
 );
 

@@ -2,8 +2,9 @@
 import React from 'react';
 import words from '../../public/audio/ch02_everybody_bet.words.json';
 import {Highlight, Note, Tag, usePal} from '../kit/Kit';
-import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, FlowCard, Ledger, LOOK, ROWS, Sounds} from '../kit/bs';
+import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {Arch, Desk, DropCard, Ledger, LOOK, ROWS, Sounds} from '../kit/bs';
+import {MASKS} from '../masks';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
@@ -21,12 +22,12 @@ const Sixties: React.FC<{t: TL}> = ({t}) => (
 /** Pool selling: the Flow card, the term, and the 1882 description of New York's pool rooms. */
 const Pools: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('Gamblers')}>
-    <FlowCard file="card_pool_seller.png" x={150} y={110} w={500} rot={-3} at={t.at('Gamblers') - 1} tab="POOL SELLING" />
+    <DropCard src="img/ch02/pool_selling_text_page_mccabe_1882.jpg" x={150} y={90} w={500} rot={-3} at={t.at('Gamblers') - 1} filter={LOOK.doc} />
     <Highlight text="POOL SELLING" x={760} y={130} size={96} at={t.at('pool selling')} seed={33} rot={-2} />
     <Definition term="pool selling" def="auctioning shares of a betting pool on a game" at={t.at('auction')} x={770} y={300} w={1000} />
     <DropCard src="img/ch02/broadway_gambling_hall_engraving_1882.jpg" x={1330} y={560} w={390} rot={3} at={t.at('often') - 1} />
-    <Note text="right at the ballpark" x={760} y={560} size={52} rot={-3} at={t.at('right there') - 3} />
-    <Tag text="Illustration · pool selling, 1860s   /   McCabe, New York by Sunlight and Gaslight, 1882" />
+    <Note text="right at the ballpark" x={760} y={560} size={44} rot={-3} at={t.at('right there') - 3} />
+    <Tag text="McCabe, New York by Sunlight and Gaslight, 1882 (pool selling; a gambling hall) · Internet Archive" />
   </Desk>
 );
 
@@ -57,9 +58,11 @@ const Catcher: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at("The Mutuals'")}>
-      <FlowCard file="card_catcher_1865.png" x={170} y={110} w={500} rot={-2} at={t.at("The Mutuals'") - 1} tab="THE CATCHER" />
+      <CropCard src="img/ch02/currier_ives_american_national_game_1866.jpg" size={[3840, 2773]} x={150} y={130} w={560} h={780} fx={1170} fy={2010} scale={1.15} rot={-2} at={t.at("The Mutuals'") - 1}
+        mask={MASKS.catcher_ci} traceAt={t.at("catcher,") + 3} />
+      <Tag text="A catcher, from Currier & Ives, Hoboken, 1866 (detail) · Library of Congress" />
       <Highlight text="WILLIAM WANSLEY" x={780} y={140} size={90} at={t.at('William')} seed={37} rot={-2} />
-      <Note text="(no photo of him survives)" x={800} y={300} size={44} rot={-3} at={t.at('has a terrible') - 3} color="#ffffff" />
+      <Note text="(no photo of Wansley survives)" x={800} y={300} size={44} rot={-3} at={t.at('has a terrible') - 3} color="#ffffff" />
       <Stamp text="6 PASSED BALLS" x={790} y={420} at={t.at('Six')} size={92} color={pal.subject} />
       <Note text="11 runs in one inning" x={800} y={600} size={56} rot={-3} at={t.at('score') - 3} />
       <Stamp text="23–11" x={800} y={720} at={t.at('23')} size={150} />
@@ -72,7 +75,8 @@ const Paid: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at('Bad day')}>
-      <FlowCard file="card_cash_hands.png" x={1180} y={110} w={520} rot={3} at={t.at('A gambler') - 1} tab="THE PAYOFF" />
+      <DropCard src="img/ch02/low_class_gambling_den_engraving_1882.jpg" x={1200} y={110} w={520} rot={3} at={t.at('A gambler') - 1} />
+      <Tag text="A New York gambling den · McCabe, New York by Sunlight and Gaslight, 1882" />
       <Note text="bad day?" x={170} y={170} size={84} rot={-3} at={t.at('Bad day') - 2} color="#ffffff" />
       <Note text="not exactly." x={230} y={300} size={84} rot={-3} at={t.at('Not exactly') - 2} color={pal.subject} />
       <Stamp text="$100" x={170} y={470} at={t.at('100')} size={160} />

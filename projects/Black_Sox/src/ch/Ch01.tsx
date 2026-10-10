@@ -7,8 +7,8 @@ import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {Sfx, WRITE} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
-import {Definition, hasFile, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, FlowCard, LOOK, StandIn, SyncQuote} from '../kit/bs';
+import {CropCard, Definition, hasFile, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {Arch, Desk, DropCard, LOOK, StandIn, SyncQuote} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 import {DATES, SUBTITLE, TITLE} from '../project';
@@ -122,8 +122,10 @@ const Question: React.FC<{t: TL}> = ({t}) => {
 /** Hook into chapter 2: the 1865 catcher card. */
 const Catcher: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('It starts')}>
-    <FlowCard file="card_catcher_1865.png" x={700} y={110} w={520} rot={-2} at={t.at('It starts') - 1} tab="1865" />
+    <CropCard src="img/ch02/currier_ives_american_national_game_1866.jpg" size={[3840, 2773]} x={560} y={100} w={800} h={700} fx={1190} fy={2000} scale={1.1} rot={-2} at={t.at('It starts') - 1}
+      mask={MASKS.catcher_ci} traceAt={t.at('catcher') + 3} />
     <Note text="a catcher who couldn't catch" x={560} y={900} size={62} rot={-3} at={t.at('catcher') - 3} />
+    <Tag text="Currier & Ives, Hoboken, 1866 (detail) · Library of Congress" />
   </Desk>
 );
 

@@ -1,5 +1,7 @@
 # Image prompts: Say It Ain't So (Google Flow)
 
+> **Not used (Oct 10).** The user chose no AI images for this video; every gap is filled with archival material (see `public/img/IMAGES.md`). Kept for reference: the tobacco-card style may suit a later video.
+
 Real people (Landis, Jackson, Cicotte, Comiskey, Chase, Mathewson, Klem, Hulbert, Weaver and the rest) come **only from
 archival photos** (`public/img/IMAGES.md`). These prompts fill the gaps where no photo exists: a pool seller, the
 telegrams, the 1908 bribe, the signal pitch, the boy outside the courthouse, a phone in the stands.

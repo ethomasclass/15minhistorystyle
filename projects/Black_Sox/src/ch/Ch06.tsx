@@ -6,7 +6,7 @@ import words from '../../public/audio/ch06_the_fix.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, FlowCard, Sounds} from '../kit/bs';
+import {Arch, Desk, DropCard, LOOK, Sounds} from '../kit/bs';
 import {Parallax} from '../kit/parallax';
 import {MASKS} from '../masks';
 
@@ -130,7 +130,8 @@ const Signal: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at("Cicotte's")}>
-      <FlowCard file="card_signal_pitch.png" x={120} y={100} w={470} rot={-3} at={t.at("Cicotte's") - 1} tab="THE SIGNAL" />
+      <DropCard src={P('182s_redland_field_play_game1')} x={110} y={140} w={520} rot={-3} at={t.at("Cicotte's") - 1} />
+      <Note text="Game 1, Redland Field" x={120} y={590} size={40} rot={-3} at={t.at("Cicotte's") + 4} color="#ffffff" />
       <DropCard src="img/ch06/morrie_rath_reds_1919.jpg" x={1430} y={110} w={320} rot={3} at={t.at('leadoff') - 1} />
       <Note text="Morrie Rath," x={1430} y={620} size={40} rot={-3} at={t.at('leadoff') - 2} color="#ffffff" />
       <Note text="Reds leadoff" x={1440} y={690} size={40} rot={-3} at={t.at('leadoff') + 2} color="#ffffff" />
@@ -138,7 +139,7 @@ const Signal: React.FC<{t: TL}> = ({t}) => {
       <Highlight text="THE SIGNAL" x={670} y={320} size={90} at={t.at('signal')} seed={99} rot={-2} />
       <Note text="the fix is on." x={690} y={510} size={66} rot={-3} at={t.at('The fix') - 3} color={pal.subject} />
       <Note text="not exactly subtle." x={700} y={640} size={52} rot={-3} at={t.at('Not exactly') - 3} color="#ffffff" />
-      <Tag text="Illustration · the signal pitch, Oct. 1, 1919   /   Morrie Rath, 1919 · Library of Congress" />
+      <Tag text="Pathé newsreel, Game 1, 1919 · Wikimedia Commons   /   Morrie Rath, 1919 · Library of Congress" />
     </Desk>
   );
 };
@@ -176,7 +177,8 @@ const Avg: React.FC<{t: TL}> = ({t}) => (
 /** The money under the pillow: only part of what was promised. */
 const Money: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('By their')}>
-    <FlowCard file="card_hotel_envelope.png" x={1150} y={110} w={520} rot={3} at={t.at('By their') - 1} tab="THE PAYOFF" />
+    <DropCard src="img/ch07/ny_daily_news_1920-10-29_p20.jpg" x={1220} y={70} w={520} rot={3} at={t.at('By their') - 1} filter={LOOK.doc} />
+    <Tag text="New York Daily News, Oct. 29, 1920 · Wikimedia Commons" />
     <Note text="by their own accounts:" x={170} y={300} size={62} rot={-3} at={t.at('By their') + 2} color="#ffffff" />
     <Note text="only part of the money" x={200} y={430} size={78} rot={-3} at={t.at('only part') - 3} color="#FF6F61" />
   </Desk>

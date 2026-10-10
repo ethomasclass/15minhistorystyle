@@ -4,7 +4,7 @@ import React from 'react';
 import words from '../../public/audio/ch03_louisville.words.json';
 import {Highlight, Loop, Note, Tag, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Arch, Desk, DropCard, FlowCard, Ledger, ROWS, Sounds} from '../kit/bs';
+import {Arch, Desk, DropCard, Ledger, ROWS, Sounds} from '../kit/bs';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -13,12 +13,12 @@ export const CH03_FRAMES = chapterFrames(N, LEAD);
 /** Hippodroming: the term, with the circus-race card. */
 const Hippo: React.FC<{t: TL}> = ({t}) => (
   <Desk a={0}>
-    <FlowCard file="card_hippodrome.png" x={1240} y={110} w={480} rot={3} at={t.at('"hippodroming,"') - 1} tab="HIPPODROMING" />
+    <DropCard src="img/ch02/harpers_athletics_atlantics_1865.jpg" x={1000} y={720} w={780} rot={2} at={t.at('Plenty') - 1} />
     <Highlight text="THE 1870s" x={140} y={120} size={96} at={t.at('1870s')} seed={41} rot={-2} />
     <Highlight text="HIPPODROMING" x={140} y={330} size={104} at={t.at('"hippodroming,"')} seed={43} rot={-2} />
     <Definition term="hippodroming" def="a fixed game, staged like a circus race" at={t.at('like a staged') - 2} x={150} y={510} w={900} />
     <Note text="any loss might be bought" x={160} y={760} size={62} rot={-3} at={t.at('Plenty') - 3} color="#ffffff" />
-    <Tag text="Illustration · a staged race, 1870s" />
+    <Tag text="Harper's Weekly, Nov. 18, 1865 · Internet Archive Book Images" />
   </Desk>
 );
 
@@ -57,7 +57,7 @@ const Grays: React.FC<{t: TL}> = ({t}) => {
 const Wires: React.FC<{t: TL}> = ({t}) => (
   <Arch src="img/ch03/western_union_operating_room_1875.jpg" tag="Western Union operating room, 1875 · Wikimedia Commons" a={t.at('A local')} b={t.at('The telegrams show')} z={[1.04, 1.12]} pos="40% 50%">
     <Note text="a newspaperman asks questions" x={110} y={120} size={56} rot={-3} at={t.at('newspaperman') - 3} color="#ffffff" />
-    <FlowCard file="card_telegrams.png" x={1230} y={150} w={480} rot={3} at={t.at('telegrams.') - 1} tab="TELEGRAMS" />
+    <Note text="a lot of telegrams" x={1180} y={130} size={56} rot={-3} at={t.at('telegrams.') - 3} />
     <Note text="the club wants to read them" x={110} y={860} size={56} rot={-3} at={t.at('demands') - 3} />
   </Arch>
 );
@@ -109,7 +109,8 @@ const Subscribe: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at('Quick thing')}>
-      <FlowCard file="card_cash_hands.png" x={1220} y={140} w={460} rot={4} at={t.at('unlike William') - 1} tab="NOT ME" />
+      <CropCard src="img/ch02/currier_ives_american_national_game_1866.jpg" size={[3840, 2773]} x={1220} y={160} w={480} h={640} fx={1170} fy={2010} scale={0.95} rot={4} at={t.at('unlike William') - 1}
+        mask={MASKS.catcher_ci} tint={null} traceAt={t.at('unlike William') + 4} />
       <Note text="quick thing:" x={170} y={170} size={60} rot={-3} at={t.at('Quick thing') - 2} color="#ffffff" />
       <Highlight text="SUBSCRIBE" x={170} y={300} size={130} at={t.at('subscribe.')} seed={55} rot={-2} />
       <Note text="free" x={200} y={530} size={64} rot={-3} at={t.at('free') - 3} />
@@ -139,8 +140,8 @@ const Body: React.FC = () => {
       <Sounds cuts={cuts.map((c) => c[0])}
         stamps={[at('1870s'), at('"hippodroming,"'), at('1876,'), at('National League'), at('1877.'), at('On paper'), at('subscribe.')]}
         booms={[at('collapse'), at('For life')]}
-        writes={['Plenty', 'William', 'No betting', 'No beer', 'Players who', 'The promise', 'cruising', 'Errors', 'newspaperman', 'demands', 'Jim Devlin', 'George Hall', 'Al Nichols', "gamblers'", 'Bill Craver', 'refused', 'banned all four', 'unlike 1865', 'Devlin begged', 'Hulbert said', 'almost from', 'Quick thing', 'free', 'really helps', "nobody's"].map((p) => at(p))}
-        ticks={[at('The Louisville'), at('telegrams.'), at('unlike William')]}
+        writes={['Plenty', 'telegrams.', 'William', 'No betting', 'No beer', 'Players who', 'The promise', 'cruising', 'Errors', 'newspaperman', 'demands', 'Jim Devlin', 'George Hall', 'Al Nichols', "gamblers'", 'Bill Craver', 'refused', 'banned all four', 'unlike 1865', 'Devlin begged', 'Hulbert said', 'almost from', 'Quick thing', 'free', 'really helps', "nobody's"].map((p) => at(p))}
+        ticks={[at('The Louisville'), at('Plenty'), at('unlike William')]}
         extra={[{at: at('telegrams.') + 4, src: 'sfx/tick_soft.wav', volume: 0.4}]} />
     </>
   );
