@@ -91,8 +91,8 @@ const Klem: React.FC<{t: TL}> = ({t}) => {
         <>
           <Note text="umpire Bill Klem" x={110} y={110} size={60} rot={-3} at={t.at('Bill Klem') - 3} color="#ffffff" />
           <FlowCard file="card_bribe_1908.png" x={1360} y={110} w={380} rot={3} at={t.at('a man offers') - 1} tab="THE OFFER" />
-          <Note text="thousands of dollars" x={1150} y={780} size={64} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
-          <Note text="Klem says no. reports it." x={1150} y={890} size={64} rot={-3} at={t.at('Klem says') - 3} />
+          <Note text="thousands of dollars" x={1060} y={780} size={60} rot={-3} at={t.at('thousands') - 3} color={pal.subject} />
+          <Note text="Klem says no. reports it." x={1060} y={890} size={54} rot={-3} at={t.at('Klem says') - 3} />
         </>
       )}
     </Parallax>

@@ -33,7 +33,7 @@ const Rule21: React.FC<{t: TL}> = ({t}) => {
       </div>
       <Note text="posted in every clubhouse" x={220} y={780} size={52} rot={-3} at={t.at('posted') - 3} />
       <Note text="(it still is)" x={260} y={880} size={44} rot={-3} at={t.at('clubhouse') + 4} color="#ffffff" />
-      <Stamp text="FOR LIFE." x={1260} y={760} at={t.at('banned for life') + 4} size={120} color={pal.subject} />
+      <Stamp text="FOR LIFE." x={1060} y={760} at={t.at('banned for life') + 4} size={120} color={pal.subject} />
       <Tag text="Major League Rules, Rule 21 (d)(2), current text" />
     </Desk>
   );
@@ -55,8 +55,8 @@ const Law: React.FC<{t: TL}> = ({t}) => (
     <Wall x={160} y={140} w={1600} rows={6} at={t.at('Then the law') - 30} dur={1} knock={t.at('changed')} />
     <Note text="then the law changed" x={170} y={530} size={66} rot={-3} at={t.at('Then the law') + 2} color="#ffffff" />
     <Highlight text="2018" x={170} y={660} size={110} at={t.at('2018,')} seed={123} rot={-2} />
-    <Note text="Supreme Court: states may legalize sports betting" x={180} y={850} size={50} rot={-3} at={t.at('Supreme Court') - 3} />
-    <Note text="betting apps sponsor teams, advertise in games" x={180} y={950} size={46} rot={-3} at={t.at('betting apps') - 3} color="#ffffff" />
+    <Note text="Supreme Court: states may legalize sports betting" x={180} y={820} size={48} rot={-3} at={t.at('Supreme Court') - 3} />
+    <Note text="betting apps sponsor teams, advertise in games" x={180} y={915} size={42} rot={-3} at={t.at('betting apps') - 3} color="#ffffff" />
   </Desk>
 );
 

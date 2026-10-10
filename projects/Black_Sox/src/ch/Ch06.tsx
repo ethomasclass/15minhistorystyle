@@ -60,7 +60,7 @@ const Comiskey: React.FC<{t: TL}> = ({t}) => {
     <Desk a={t.at("You've")}>
       <CropCard src="img/ch06/charles_comiskey_1914.jpg" size={[2174, 3000]} x={130} y={130} w={520} h={800} fx={1071} fy={1427} scale={0.31} rot={-2} at={t.at("You've") - 1}
         mask={MASKS.comiskey} traceAt={t.at('Charles Comiskey') + 3} />
-      <Note text="owner Charles Comiskey" x={140} y={960} size={44} rot={-3} at={t.at('Charles Comiskey') - 3} color="#ffffff" />
+      <Note text="owner Charles Comiskey" x={140} y={945} size={40} rot={-3} at={t.at('Charles Comiskey') - 3} color="#ffffff" />
       <Note text="the legend:" x={760} y={110} size={48} rot={-3} at={t.at('cheap') - 6} color="#ffffff" />
       <Note text="too cheap, underpaid everyone" x={780} y={200} size={48} rot={-3} at={t.at('cheap') - 3} color="#FF9F1C" />
       <div style={{position: 'absolute', left: 770, top: 232, height: 7, borderRadius: 4, background: '#FF9F1C', width: 640 * s1, transform: 'rotate(-3deg)'}} />
@@ -83,7 +83,7 @@ const Gandil: React.FC<{t: TL}> = ({t}) => (
       <>
         <Note text="first baseman Chick Gandil" x={90} y={100} size={56} rot={-3} at={t.at('Chick Gandil') - 3} color="#ffffff" />
         <Note text="goes to the gamblers" x={110} y={210} size={56} rot={-3} at={t.at('goes to') - 3} />
-        <Note text="the plan: lose the Series" x={1230} y={740} size={58} rot={-3} at={t.at('The plan') - 3} color="#ffffff" />
+        <Note text="the plan: lose the Series" x={1150} y={740} size={50} rot={-3} at={t.at('The plan') - 3} color="#ffffff" />
         <Stamp text="$100,000" x={1240} y={840} at={t.at('100,000')} size={120} color="#FF6F61" />
       </>
     )}
@@ -107,7 +107,7 @@ const Eight: React.FC<{t: TL}> = ({t}) => {
           <Note text={name} x={130 + (i % 4) * 300} y={410 + Math.floor(i / 4) * 420} size={40} rot={-3} at={a + 4 + i * 3} color="#ffffff" />
         </React.Fragment>
       ))}
-      <Note text="8 in on it, or knew" x={140} y={930} size={60} rot={-3} at={t.at('or at least') - 3} />
+      <Note text="8 in on it, or knew" x={140} y={905} size={60} rot={-3} at={t.at('or at least') - 3} />
       <DropCard src="img/ch06/arnold_rothstein_desk_c1915.jpg" x={1380} y={110} w={360} rot={3} at={t.at('The money') - 1} />
       <Note text="reportedly:" x={1330} y={650} size={42} rot={-3} at={t.at('Arnold') - 3} color="#FF9F1C" />
       <Note text="Arnold Rothstein" x={1330} y={730} size={48} rot={-3} at={t.at('Arnold') - 3} color="#FF9F1C" />
