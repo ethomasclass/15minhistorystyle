@@ -97,13 +97,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:William_A._Hulbert,_president_of_National_League_(NYPL_b13537024-56505).jpg"
   },
-  "ch03/william_hulbert_1870s_b.jpg": {
-    "title": "File:William A. Hulbert, president of National League (NYPL b13537024-56506).jpg",
-    "artist": "Scan by NYPL",
-    "date": "",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:William_A._Hulbert,_president_of_National_League_(NYPL_b13537024-56506).jpg"
-  },
   "ch03/jim_devlin_1876.jpg": {
     "title": "File:Jim Devlin 1876.jpg",
     "artist": "Unknown authorUnknown author",
@@ -152,13 +145,6 @@
     "date": "1876",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:1876_Louisville_Grays_baseball_team.jpg"
-  },
-  "ch03/jim_devlin_1870s.jpg": {
-    "title": "File:Jim Devlin (NYPL b13537024-56725).jpg",
-    "artist": "Scan by NYPL",
-    "date": "",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Jim_Devlin_(NYPL_b13537024-56725).jpg"
   },
   "ch03/george_hall_1874.jpg": {
     "title": "File:George Hall, Boston Red Stockings, 1874, right field (NYPL b13537024-56764).jpg",
@@ -412,5 +398,666 @@
     "date": "1915",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Hal_Chase_Reds.jpeg"
+  },
+  "ch05/hal_chase_1917.jpg": {
+    "title": "File:Hal Chase 1917.jpeg",
+    "artist": "Charles M. Conlon",
+    "date": "1917",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hal_Chase_1917.jpeg"
+  },
+  "ch02/champions_of_america_atlantics_c1865.jpg": {
+    "title": "Champions of America / Williamson, Brooklyn.",
+    "artist": "Williamson, C. H. (Charles H.), 1826-1874, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication; no copyright renewal.",
+    "page": "https://www.loc.gov/item/92514548/",
+    "source": "loc:92514548"
+  },
+  "ch02/currier_ives_the_national_game_1860.jpg": {
+    "title": "The national game. Three \"outs\" and one \"run\"",
+    "artist": "Currier & Ives., Maurer, Louis, 1832-1932, artist",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003674584/",
+    "source": "loc:2003674584"
+  },
+  "ch03/red_stockings_champion_bat_1869.jpg": {
+    "title": "Presentation of a champion bat to the \"Red Stocking\" base-ball club, Cincinnati, Ohio, on its return home / sketched by J.A. Gervis.",
+    "artist": "",
+    "date": "1869-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2008676718/",
+    "source": "loc:2008676718"
+  },
+  "ch08/landis_signing_scorecards_world_series_1924.jpg": {
+    "title": "Judge Landis signing scorecards for fans at World Series, 10/10/24",
+    "artist": "",
+    "date": "1924-01-01",
+    "licence": "No known restrictions on publication. For more information, see National Photo Company Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/275_npco.html",
+    "page": "https://www.loc.gov/item/2016849502/",
+    "source": "loc:2016849502"
+  },
+  "ch06/eddie_cicotte_1914.jpg": {
+    "title": "[Eddie Cicotte, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1914-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014697831/",
+    "source": "loc:2014697831"
+  },
+  "ch06/eddie_cicotte_1917.jpg": {
+    "title": "[Eddie Cicotte, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1917-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014719462/",
+    "source": "loc:2014719462"
+  },
+  "ch06/joe_jackson_white_sox_1920.jpg": {
+    "title": "[Shoeless Joe Jackson, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1920-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014711114/",
+    "source": "loc:2014711114"
+  },
+  "ch06/joe_jackson_c1920.jpg": {
+    "title": "Joe Jackson",
+    "artist": "",
+    "date": "1920-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002705883/",
+    "source": "loc:2002705883"
+  },
+  "ch06/joe_jackson_cleveland_1911.jpg": {
+    "title": "[Joe Jackson, Cleveland AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1911-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014690481/",
+    "source": "loc:2014690481"
+  },
+  "ch06/lefty_williams_1917.jpg": {
+    "title": "[Claude \"Lefty\" Williams, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1917-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014719459/",
+    "source": "loc:2014719459"
+  },
+  "ch06/happy_felsch_1920.jpg": {
+    "title": "[Oscar \"Happy\" Felsch, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1920-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014711296/",
+    "source": "loc:2014711296"
+  },
+  "ch06/happy_felsch_1920_b.jpg": {
+    "title": "[Oscar \"Happy\" Felsch, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1920-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014711297/",
+    "source": "loc:2014711297"
+  },
+  "ch06/buck_weaver_1920.jpg": {
+    "title": "[Buck Weaver, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1920-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014711298/",
+    "source": "loc:2014711298"
+  },
+  "ch07/buck_weaver_1917.jpg": {
+    "title": "[Buck Weaver, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1917",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014719458/",
+    "source": "loc:2014719458"
+  },
+  "ch05/hal_chase_highlanders_1910.jpg": {
+    "title": "File:Hal Chase, first baseman, New York Highlanders, ca. 1910.jpg",
+    "artist": "\u2026trialsanderrors",
+    "date": "1910",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hal_Chase,_first_baseman,_New_York_Highlanders,_ca._1910.jpg"
+  },
+  "ch05/christy_mathewson_reds_manager_1916.jpg": {
+    "title": "File:Mathewson, Christy 1916 - DPLA - 1fdf5d3771246c84f78c56d8de701b6c.jpg",
+    "artist": "Underwood &amp; Underwood",
+    "date": "1916",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mathewson,_Christy_1916_-_DPLA_-_1fdf5d3771246c84f78c56d8de701b6c.jpg"
+  },
+  "ch05/christy_mathewson_1917.jpg": {
+    "title": "File:Mathewson, Christy 1917 - DPLA - 5ea37a735606b001ad4ac2c0a044627d.jpg",
+    "artist": "Central News Photo Service",
+    "date": "1917",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mathewson,_Christy_1917_-_DPLA_-_5ea37a735606b001ad4ac2c0a044627d.jpg"
+  },
+  "ch05/christy_mathewson_army_uniform_1918.jpg": {
+    "title": "File:Christy Mathewson in Military Uniform photograph.jpg",
+    "artist": "Publisher: New York World-Telegram",
+    "date": "circa 1918",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Christy_Mathewson_in_Military_Uniform_photograph.jpg"
+  },
+  "ch05/christy_mathewson_giants_1910.jpg": {
+    "title": "File:Christy Mathewson2.jpg",
+    "artist": "Paul Thompson, restored by Michel Vuijlsteke",
+    "date": "1910-12-14",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Christy_Mathewson2.jpg"
+  },
+  "ch05/john_heydler_bain_c1918.jpg": {
+    "title": "File:Jaheydler.jpg",
+    "artist": "Bain News Service",
+    "date": "before 1918date QS:P,+1918-00-00T00:00:00Z/7,P1326,+1918-00-00T00:00:00Z/9 (when he became president of the NL)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jaheydler.jpg"
+  },
+  "ch06/charles_comiskey_1914.jpg": {
+    "title": "[Charles Comiskey, owner, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1914-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014695361/",
+    "source": "loc:2014695361"
+  },
+  "ch06/morrie_rath_reds_1919.jpg": {
+    "title": "[Morrie Rath, Cincinnati NL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1919-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014709360/",
+    "source": "loc:2014709360"
+  },
+  "ch08/landis_heydler_flag_raising_1925.jpg": {
+    "title": "John Heydler & Judge Landis raising of championship flag, 6/11/25",
+    "artist": "",
+    "date": "1925-01-01",
+    "licence": "No known restrictions on publication. For more information, see National Photo Company Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/275_npco.html",
+    "page": "https://www.loc.gov/item/2016840075/",
+    "source": "loc:2016840075"
+  },
+  "ch04/umpires_klem_byron_hildebrand_dinneen_1915.jpg": {
+    "title": "[Bill Byron, George Hildebrand, Bill Klem, Bill Dinneen (umpires) (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1915-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014697771/",
+    "source": "loc:2014697771"
+  },
+  "ch05/hal_chase_manager_highlanders_with_wallace_1911.jpg": {
+    "title": "[Managers Bobby Wallace, St. Louis AL & Hal Chase, New York AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1911-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014689292/",
+    "source": "loc:2014689292"
+  },
+  "ch06/fred_mcmullin_1917.jpg": {
+    "title": "[Fred McMullin, Chicago AL (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1917-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014705565/",
+    "source": "loc:2014705565"
+  },
+  "ch05/john_heydler_1918.jpg": {
+    "title": "File:1918 John Heydler.jpeg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1918",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1918_John_Heydler.jpeg"
+  },
+  "ch05/john_mcgraw_1918.jpg": {
+    "title": "File:McGraw, John 1918 - DPLA - dbbdf7a947615deb1b04b033a4070ce2.jpg",
+    "artist": "",
+    "date": "1918",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:McGraw,_John_1918_-_DPLA_-_dbbdf7a947615deb1b04b033a4070ce2.jpg"
+  },
+  "ch05/john_mcgraw_1916.jpg": {
+    "title": "File:McGraw, John 1916 - DPLA - d74737bb03b513118dd6dfc29919b03b.jpg",
+    "artist": "Underwood &amp; Underwood",
+    "date": "27 July 1916",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:McGraw,_John_1916_-_DPLA_-_d74737bb03b513118dd6dfc29919b03b.jpg"
+  },
+  "ch02/broadway_gambling_hall_mccabe_1882.jpg": {
+    "title": "New York by sunlight and gaslight. A work descriptive of the great American metropolis.. (page 563)",
+    "artist": "McCabe, James Dabney, 1842-1883",
+    "date": "1882",
+    "licence": "public domain by age (1882)",
+    "page": "https://archive.org/details/newyorkbysunligh00mcca/page/n563",
+    "source": "iabook:newyorkbysunligh00mcca:563"
+  },
+  "ch02/low_class_gambling_den_mccabe_1882.jpg": {
+    "title": "New York by sunlight and gaslight. A work descriptive of the great American metropolis.. (page 566)",
+    "artist": "McCabe, James Dabney, 1842-1883",
+    "date": "1882",
+    "licence": "public domain by age (1882)",
+    "page": "https://archive.org/details/newyorkbysunligh00mcca/page/n566",
+    "source": "iabook:newyorkbysunligh00mcca:566"
+  },
+  "ch02/pool_selling_text_page_mccabe_1882.jpg": {
+    "title": "New York by sunlight and gaslight. A work descriptive of the great American metropolis.. (page 567)",
+    "artist": "McCabe, James Dabney, 1842-1883",
+    "date": "1882",
+    "licence": "public domain by age (1882)",
+    "page": "https://archive.org/details/newyorkbysunligh00mcca/page/n567",
+    "source": "iabook:newyorkbysunligh00mcca:567"
+  },
+  "ch06/joe_jackson_1919.jpg": {
+    "title": "File:1919 Shoeless Joe Jackson.jpg",
+    "artist": "unattributed",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Shoeless_Joe_Jackson.jpg"
+  },
+  "ch06/joe_jackson_conlon_1913.jpg": {
+    "title": "File:Shoeless Joe Jackson by Conlon, 1913.jpeg",
+    "artist": "Charles M. Conlon",
+    "date": "1913",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Shoeless_Joe_Jackson_by_Conlon,_1913.jpeg"
+  },
+  "ch06/chick_gandil_harris_ewing_c1913.jpg": {
+    "title": "File:Chick Gandil.jpg",
+    "artist": "Harris &amp; Ewing",
+    "date": "between circa 1912 and circa 1915date QS:P,+1912-00-00T00:00:00Z/8,P1319,+1912-00-00T00:00:00Z/9,P1326,+1915-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Chick_Gandil.jpg"
+  },
+  "ch07/buck_weaver_conlon_1916.jpg": {
+    "title": "File:1916 Buck Weaver by Conlon.jpeg",
+    "artist": "Charles M. Conlon",
+    "date": "1916",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1916_Buck_Weaver_by_Conlon.jpeg"
+  },
+  "ch06/charles_comiskey_1919.jpg": {
+    "title": "File:1919 Charles Comiskey.jpg",
+    "artist": "unattributed",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Charles_Comiskey.jpg"
+  },
+  "ch06/arnold_rothstein_1921.jpg": {
+    "title": "File:Arnold Rothstein (1).jpg",
+    "artist": "Unknown photographer",
+    "date": "1921",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Arnold_Rothstein_(1).jpg"
+  },
+  "ch06/arnold_rothstein_desk_c1915.jpg": {
+    "title": "File:American Gambler Arnold Rothstein At His Desk.jpg",
+    "artist": "Jack Benton",
+    "date": "circa 1915date QS:P,+1915-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:American_Gambler_Arnold_Rothstein_At_His_Desk.jpg"
+  },
+  "ch06/white_sox_team_1919.jpg": {
+    "title": "File:1919 Chicago White Sox.jpg",
+    "artist": "\"International\", 228 William St, NY",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Chicago_White_Sox.jpg"
+  },
+  "ch06/black_sox_tribune_1919.png": {
+    "title": "File:Black Sox.png",
+    "artist": "Chicago Tribune",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Black_Sox.png"
+  },
+  "ch06/white_sox_outfield_conlon_1919.jpg": {
+    "title": "File:1919-Chicago-Black-Sox-Outfield-by-Charles-Conlon.jpg",
+    "artist": "Charles Conlon",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919-Chicago-Black-Sox-Outfield-by-Charles-Conlon.jpg"
+  },
+  "ch06/world_series_tribune_1919.png": {
+    "title": "File:1919 World series.png",
+    "artist": "Chicago Tribune",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_World_series.png"
+  },
+  "ch06/ny_herald_1919-10-02_p18.jpg": {
+    "title": "File:New York Herald Thu Oct 2 1919 page 18.jpg",
+    "artist": "New York Herald",
+    "date": "1919-10-02",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:New_York_Herald_Thu_Oct_2_1919_page_18.jpg"
+  },
+  "ch06/world_series_1919_program.png": {
+    "title": "File:1919WorldSeries.png",
+    "artist": "Unknown, possibly Cincinnati Reds publicity",
+    "date": "2015-06-05",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919WorldSeries.png"
+  },
+  "ch04/bushnell_cartoon_uncle_sam_baseball_1919.jpg": {
+    "title": "File:Bushnell cartoon about Uncle Sam ignoring problems for baseball.jpg",
+    "artist": "E. A. Bushnell",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bushnell_cartoon_about_Uncle_Sam_ignoring_problems_for_baseball.jpg"
+  },
+  "ch06/kid_gleason_1919.jpg": {
+    "title": "File:Kid Gleason 1919.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kid_Gleason_1919.jpg"
+  },
+  "ch07/ny_daily_news_1920-10-29_p20.jpg": {
+    "title": "File:Daily News Fri Oct 29 1920 page 20.jpg",
+    "artist": "New York Daily News",
+    "date": "1920-10-29",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Daily_News_Fri_Oct_29_1920_page_20.jpg"
+  },
+  "ch06/cincinnati_reds_team_1919.jpg": {
+    "title": "File:1919 World Champion Cincinnati Reds.jpeg",
+    "artist": "Original photographer:Unknown authorUnknown author Jam22smith",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_World_Champion_Cincinnati_Reds.jpeg"
+  },
+  "ch06/hugh_fullerton_sportswriter.jpg": {
+    "title": "File:Hugh S. Fullerton, Writer on baseball (NYPL b13537024-56163).jpg",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hugh_S._Fullerton,_Writer_on_baseball_(NYPL_b13537024-56163).jpg"
+  },
+  "ch06/hugh_fullerton_1912.jpg": {
+    "title": "File:Hugh S Fullerton.jpg",
+    "artist": "Crowell Collier Pub. co.",
+    "date": "1912",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hugh_S_Fullerton.jpg"
+  },
+  "ch07/criminal_courts_building_hubbard_st_habs_1964.jpg": {
+    "title": "File:Historic American Buildings Survey Harold Allen, Photographer 24 May 1964 SOUTH (FRONT) AND EAST ELEVATIONS - Chicago Criminal Courts Building, 54 West Hubbard Street, Chicago, HABS ILL,16-CHIG,38-1.tif",
+    "artist": "",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Historic_American_Buildings_Survey_Harold_Allen,_Photographer_24_May_1964_SOUTH_(FRONT)_AND_EAST_ELEVATIONS_-_Chicago_Criminal_Courts_Building,_54_West_Hubbard_Street,_Chicago,_HABS_ILL,16-CHIG,38-1.tif"
+  },
+  "ch07/criminal_courts_building_doorway_habs_1964.jpg": {
+    "title": "File:Historic American Buildings Survey Harold Allen, Photographer 24 May 1964 DOORWAY, SOUTH (FRONT) ELEVATION - Chicago Criminal Courts Building, 54 West Hubbard Street, Chicago, HABS ILL,16-CHIG,38-3.tif",
+    "artist": "",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Historic_American_Buildings_Survey_Harold_Allen,_Photographer_24_May_1964_DOORWAY,_SOUTH_(FRONT)_ELEVATION_-_Chicago_Criminal_Courts_Building,_54_West_Hubbard_Street,_Chicago,_HABS_ILL,16-CHIG,38-3.tif"
+  },
+  "ch04/west_side_grounds_stands_1908.jpg": {
+    "title": "File:West Side Grounds Stands 1908.jpg",
+    "artist": "Chicago Daily News.",
+    "date": "Created 1908",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:West_Side_Grounds_Stands_1908.jpg"
+  },
+  "ch04/west_side_grounds_reds_cubs_1908.jpg": {
+    "title": "File:West Side Grounds II, Cincy Reds vs. Chicago Cubs, 1908.jpg",
+    "artist": "Chicago Daily News",
+    "date": "Created 1908",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:West_Side_Grounds_II,_Cincy_Reds_vs._Chicago_Cubs,_1908.jpg"
+  },
+  "ch04/west_side_park_postcard_1908.png": {
+    "title": "File:Chicago West Side Park (II) Postcard (Front).png",
+    "artist": "Franklin Post Card Co.",
+    "date": "1908",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Chicago_West_Side_Park_(II)_Postcard_(Front).png"
+  },
+  "ch08/landis_first_ball_c1924.jpg": {
+    "title": "File:Landis first ball.jpg",
+    "artist": "Photographer from Bain News Service",
+    "date": "circa 1924date QS:P,+1924-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Landis_first_ball.jpg"
+  },
+  "ch08/landis_and_ruppert_c1923.jpg": {
+    "title": "File:Landis and Ruppert.jpg",
+    "artist": "Photographer of Bain News Service",
+    "date": "circa 1923date QS:P,+1923-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Landis_and_Ruppert.jpg"
+  },
+  "ch05/christy_mathewson_reds_manager_red_cross_1917.jpg": {
+    "title": "File:American Red Cross - Soliciting Funds - Personal Appeal - Christy mathewson contributes to Red Cross War Fund. Well known baseball player and manager of the Cincinnati Baseball Club, donates his bit to the Red Cr(...) - NARA - 20802798.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "1917 \u2013 1918",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:American_Red_Cross_-_Soliciting_Funds_-_Personal_Appeal_-_Christy_mathewson_contributes_to_Red_Cross_War_Fund._Well_known_baseball_player_and_manager_of_the_Cincinnati_Baseball_Club,_donates_his_bit_to_the_Red_Cr(...)_-_NARA_-_20802798.jpg"
+  },
+  "ch06/charles_comiskey_c1910.jpg": {
+    "title": "File:Charles Comiskey.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "circa 1910date QS:P,+1910-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_Comiskey.jpg"
+  },
+  "ch01/landis_bain_c1910s.jpg": {
+    "title": "File:Kenesaw Mountain Landis.jpg",
+    "artist": "Bain News Service, publisher",
+    "date": "1910",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kenesaw_Mountain_Landis.jpg"
+  },
+  "ch02/new_york_mutuals_team_c1870.jpg": {
+    "title": "File:Mutuals of New York, M. Nelson, Martin, Swandell, Eggler, E. Mills, Hatfield, Walton, Peterson (NYPL b13537024-56269).jpg",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mutuals_of_New_York,_M._Nelson,_Martin,_Swandell,_Eggler,_E._Mills,_Hatfield,_Walton,_Peterson_(NYPL_b13537024-56269).jpg"
+  },
+  "ch02/new_york_mutuals_1870.jpg": {
+    "title": "File:1870 New York Mutuals.jpg",
+    "artist": "Peck &amp; Snyder",
+    "date": "1870",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1870_New_York_Mutuals.jpg"
+  },
+  "ch07/landis_judge_seated_1907.jpg": {
+    "title": "File:Kenesaw Mountain Landis, half-length portrait, seated, facing front LCCN98509687.jpg",
+    "artist": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+    "date": "1907",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kenesaw_Mountain_Landis,_half-length_portrait,_seated,_facing_front_LCCN98509687.jpg"
+  },
+  "ch05/christy_mathewson_reds_bain_1916.jpg": {
+    "title": "File:Christy Mathewson, Cincinnati NL (baseball) LCCN2014702354.tif",
+    "artist": "Bain News Service, publisher",
+    "date": "1916",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Christy_Mathewson,_Cincinnati_NL_(baseball)_LCCN2014702354.tif"
+  },
+  "ch07/landis_with_child_harris_ewing.jpg": {
+    "title": "LANDIS, K.M., JUDGE",
+    "artist": "Harris & Ewing, photographer",
+    "date": "1905-01-01",
+    "licence": "No known restrictions on publication. For more information, see Harris & Ewing Photographs - Rights and Restrictions Information https://www.loc.gov/rr/print/res/140_harr.html",
+    "page": "https://www.loc.gov/item/2016862299/",
+    "source": "loc:2016862299"
+  },
+  "ch02/broadway_gambling_hall_engraving_1882.jpg": {
+    "title": "New York by sunlight and gaslight. A work descriptive of the great American metropolis.. (page 563) (engraving cropped from page)",
+    "artist": "McCabe, James Dabney, 1842-1883",
+    "date": "1882",
+    "licence": "public domain by age (1882)",
+    "page": "https://archive.org/details/newyorkbysunligh00mcca/page/n563",
+    "source": "iabook:newyorkbysunligh00mcca:563"
+  },
+  "ch02/low_class_gambling_den_engraving_1882.jpg": {
+    "title": "New York by sunlight and gaslight. A work descriptive of the great American metropolis.. (page 566) (engraving cropped from page)",
+    "artist": "McCabe, James Dabney, 1842-1883",
+    "date": "1882",
+    "licence": "public domain by age (1882)",
+    "page": "https://archive.org/details/newyorkbysunligh00mcca/page/n566",
+    "source": "iabook:newyorkbysunligh00mcca:566"
+  },
+  "ch06/pathe_ws1919_101s_cincinnati_title_card_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 101s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_117s_redland_field_crowd_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 117s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_127s_redland_field_grandstand_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 127s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_143s_teams_lined_up.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 143s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_152s_white_sox_bench.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 152s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_171s_pat_moran_handshake.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 171s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_182s_redland_field_play_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 182s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_199s_title_fourth_inning_cicotte.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 199s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_19s_chicago_crowd_game3.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 19s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_214s_redland_field_action_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 214s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_235s_redland_field_crowd_game1_b.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 235s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_250s_redland_field_aerial_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 250s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_256s_redland_field_aerial_game1_b.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 256s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_268s_reds_handshake_game1.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 268s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_34s_chicago_field_game3.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 34s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_51s_chicago_play_game3.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 51s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_7s_chicago_title_card.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 7s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_85s_chicago_crowd_game3_b.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 85s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
+  },
+  "ch06/pathe_ws1919_91s_ny_scoreboard_1000_miles.jpg": {
+    "title": "File:1919 Pathe World Series.webm (frame at 91s, cropped to 4:3 picture area)",
+    "artist": "British Canadian Pathe",
+    "date": "1919",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1919_Pathe_World_Series.webm",
+    "source": "commons:File:1919 Pathe World Series.webm"
   }
 }

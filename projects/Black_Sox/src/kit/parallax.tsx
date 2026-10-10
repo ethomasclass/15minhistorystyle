@@ -69,11 +69,12 @@ type Cam = {z?: [number, number]; x?: [number, number]; y?: [number, number]; ea
  * A picture as a 2.5D scene over frames a..b. `size` is the source's pixel size (masks are in source pixels).
  * `fx`/`fy` (0..1) is the point the camera centres on; `cam` z/x/y are [start, end] (zoom; extra pan as a fraction of
  * the picture). The subject floats at `depth` (1 = flat), so it slides against the background as the camera moves.
+ * `crop` (source pixels x0, y0, x1, y1) keeps the camera inside a region, e.g. inside a glass negative's black border.
  * `tint` colours the subject coral (null for none: Flow cards are already coral); `traceAt` draws the teal outline.
  */
 export const Parallax: React.FC<{name: string; src: string; size: [number, number]; a: number; b: number; tag: string; fx?: number; fy?: number; cam?: Cam;
-  depth?: number; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
-  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
+  depth?: number; crop?: [number, number, number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
+  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
 }) => {
   const f = useCurrentFrame();
   const layered = hasFile(`img/layers/${name}_fg.webp`) && hasFile(`img/layers/${name}_bg.jpg`);
@@ -81,11 +82,12 @@ export const Parallax: React.FC<{name: string; src: string; size: [number, numbe
   const lerp = (r: [number, number] | undefined, d: number) => (r ? r[0] + (r[1] - r[0]) * u : d);
   const [W, H] = size;
   const z = lerp(cam.z, 1.03 + 0.07 * u);
-  const base = Math.max(1920 / W, 1080 / H) * z;
-  // the centre point, clamped so the picture always covers the frame (no black edges)
-  const half = (n: number, s: number) => n / 2 / s;
-  const cx = Math.min(W - half(1920, base), Math.max(half(1920, base), fx * W + lerp(cam.x, 0) * W));
-  const cy = Math.min(H - half(1080, base), Math.max(half(1080, base), fy * H + lerp(cam.y, 0) * H));
+  const [x0, y0, x1, y1] = crop ?? [0, 0, W, H];
+  const base = Math.max(1920 / (x1 - x0), 1080 / (y1 - y0)) * z;
+  // the centre point, clamped so the visible window stays inside the crop (no black edges, no film border)
+  const hw = 960 / base, hh = 540 / base;
+  const cx = Math.min(x1 - hw, Math.max(x0 + hw, x0 + fx * (x1 - x0) + lerp(cam.x, 0) * (x1 - x0)));
+  const cy = Math.min(y1 - hh, Math.max(y0 + hh, y0 + fy * (y1 - y0) + lerp(cam.y, 0) * (y1 - y0)));
   const drift = {x: noise2D(`${name}x`, f * 0.018, 0) * 3, y: noise2D(`${name}y`, 0, f * 0.018) * 3};
   const place = (d: number): Place => {
     const s = base * d;

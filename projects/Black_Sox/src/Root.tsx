@@ -7,6 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/Intro';
 import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
+import {PARALLAX_TEST_FRAMES, ParallaxTest} from './ch/ParallaxTest';
 
 export const Root: React.FC = () => (
   <>
@@ -15,6 +16,7 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
+    <Composition id="ParallaxTest" width={W} height={H} fps={FPS} durationInFrames={PARALLAX_TEST_FRAMES} component={() => <JFonts><ParallaxTest /></JFonts>} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
