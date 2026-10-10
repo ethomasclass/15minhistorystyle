@@ -85,8 +85,8 @@ export const FlowCard: React.FC<{file: string; x: number; y: number; w: number; 
 };
 
 /** Full-bleed archival picture, B&W, slow push with a tiny drift, source tag. `pos` is the CSS object-position. */
-export const Arch: React.FC<{src: string; tag: string; a: number; b: number; z?: [number, number]; pos?: string; look?: Look; fit?: 'cover' | 'contain'; children?: React.ReactNode}> = ({
-  src, tag, a, b, z = [1.02, 1.1], pos = '50% 50%', look = 'bw', fit = 'cover', children,
+export const Arch: React.FC<{src: string; tag: string; a: number; b: number; z?: [number, number]; pos?: string; look?: Look; fit?: 'cover' | 'contain'; tagY?: number; children?: React.ReactNode}> = ({
+  src, tag, a, b, z = [1.02, 1.1], pos = '50% 50%', look = 'bw', fit = 'cover', tagY, children,
 }) => {
   const f = useCurrentFrame();
   const k = interpolate(f, [a, b], z, {...clamp, easing: Easing.inOut(Easing.sin)});
@@ -98,7 +98,7 @@ export const Arch: React.FC<{src: string; tag: string; a: number; b: number; z?:
         transform: `translate(${d.x}px, ${d.y}px) scale(${k})`, transformOrigin: pos}} />
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,0.62) 100%)'}} />
       {children}
-      <Tag text={tag} />
+      <Tag text={tag} y={tagY} />
     </AbsoluteFill>
   );
 };

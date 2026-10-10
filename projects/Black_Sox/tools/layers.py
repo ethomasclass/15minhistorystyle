@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 PUB = os.path.join(HERE, "..", "public")
 OUT = os.path.join(PUB, "img", "layers")
-MAX = 2400
+MAX = int(os.environ.get("LAYERS_MAX", "2400"))
 
 
 def jobs():

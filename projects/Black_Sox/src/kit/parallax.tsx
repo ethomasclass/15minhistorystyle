@@ -73,8 +73,8 @@ type Cam = {z?: [number, number]; x?: [number, number]; y?: [number, number]; ea
  * `tint` colours the subject coral (null for none: Flow cards are already coral); `traceAt` draws the teal outline.
  */
 export const Parallax: React.FC<{name: string; src: string; size: [number, number]; a: number; b: number; tag: string; fx?: number; fy?: number; cam?: Cam;
-  depth?: number; crop?: [number, number, number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
-  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
+  depth?: number; crop?: [number, number, number, number]; frame?: [number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
+  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, frame = [1920, 1080], mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
 }) => {
   const f = useCurrentFrame();
   const layered = hasFile(`img/layers/${name}_fg.webp`) && hasFile(`img/layers/${name}_bg.jpg`);
@@ -83,15 +83,16 @@ export const Parallax: React.FC<{name: string; src: string; size: [number, numbe
   const [W, H] = size;
   const z = lerp(cam.z, 1.03 + 0.07 * u);
   const [x0, y0, x1, y1] = crop ?? [0, 0, W, H];
-  const base = Math.max(1920 / (x1 - x0), 1080 / (y1 - y0)) * z;
+  const [FW, FH] = frame;
+  const base = Math.max(FW / (x1 - x0), FH / (y1 - y0)) * z;
   // the centre point, clamped so the visible window stays inside the crop (no black edges, no film border)
-  const hw = 960 / base, hh = 540 / base;
+  const hw = FW / 2 / base, hh = FH / 2 / base;
   const cx = Math.min(x1 - hw, Math.max(x0 + hw, x0 + fx * (x1 - x0) + lerp(cam.x, 0) * (x1 - x0)));
   const cy = Math.min(y1 - hh, Math.max(y0 + hh, y0 + fy * (y1 - y0) + lerp(cam.y, 0) * (y1 - y0)));
   const drift = {x: noise2D(`${name}x`, f * 0.018, 0) * 3, y: noise2D(`${name}y`, 0, f * 0.018) * 3};
   const place = (d: number): Place => {
     const s = base * d;
-    return {left: 960 - cx * s + drift.x * d, top: 540 - cy * s + drift.y * d, scale: s};
+    return {left: FW / 2 - cx * s + drift.x * d, top: FH / 2 - cy * s + drift.y * d, scale: s};
   };
   const img = (file: string, p: Place, extra?: React.CSSProperties) => (
     <Img src={staticFile(file)} style={{position: 'absolute', left: p.left, top: p.top, width: W * p.scale, height: H * p.scale, filter, ...extra}} />
@@ -117,7 +118,7 @@ export const Parallax: React.FC<{name: string; src: string; size: [number, numbe
         <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,${vignette}) 100%)`}} />
         {film && <Effect fx={{kind: 'film'}} />}
       </AbsoluteFill>
-      <Tag text={tag} />
+      <Tag text={tag} y={FH - 50} />
     </AbsoluteFill>
   );
 };
