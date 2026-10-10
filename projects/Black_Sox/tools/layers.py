@@ -1,6 +1,6 @@
 """2.5D parallax layers for any picture that has a subject mask (archival photo or Flow card).
 
-Reads the source path from tools/mask.py JOBS and the mask from public/img/masks/<name>_subject_a.png, and writes
+Reads the source path from tools/mask.py JOBS and the mask from public/img/masks/<name>_subject.png, and writes
   public/img/layers/<name>_fg.webp  the subject alone, soft-edged, on transparency
   public/img/layers/<name>_bg.jpg   the picture with the subject painted out, so the subject can slide over it
 The background fill only has to hold up at the edges: the subject layer covers it except for the few pixels the
@@ -33,7 +33,7 @@ def run(name, src, grow=3, hole_px=25):
     if max(pic.size) > MAX:                  # layers only need to hold up at 1080p with a push; the scene stretches them
         pic.thumbnail((MAX, MAX), Image.LANCZOS)
     im = np.asarray(pic)
-    m = np.asarray(Image.open(os.path.join(PUB, "img", "masks", name + "_subject_a.png")).convert("L"))
+    m = np.asarray(Image.open(os.path.join(PUB, "img", "masks", name + "_subject.png")).convert("L"))
     if m.shape != im.shape[:2]:
         m = cv2.resize(m, (im.shape[1], im.shape[0]), interpolation=cv2.INTER_NEAREST)
     m = (m > 128).astype(np.uint8) * 255
@@ -59,6 +59,6 @@ def run(name, src, grow=3, hole_px=25):
 
 if __name__ == "__main__":
     J = jobs()
-    names = sys.argv[1:] or [n for n in J if os.path.exists(os.path.join(PUB, "img", "masks", n + "_subject_a.png"))]
+    names = sys.argv[1:] or [n for n in J if os.path.exists(os.path.join(PUB, "img", "masks", n + "_subject.png"))]
     for n in names:
         run(n, J[n][0])

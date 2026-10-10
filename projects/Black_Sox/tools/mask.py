@@ -23,7 +23,8 @@ JOBS = {
     # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model)
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
-    # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
+    "landis_street": ("img/ch01/landis_street_1924_crop.jpg", (850, 400, 2600, 2430), "isnet-general-use"),
+    "landis_desk": ("img/ch01/landis_commissioner_bain_1920s.jpg", (400, 1900, 3300, 4500), "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }
 
