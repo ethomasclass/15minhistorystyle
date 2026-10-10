@@ -21,6 +21,8 @@ import rath from '../public/img/masks/rath.json';
 import weaver from '../public/img/masks/weaver.json';
 import landis_1907 from '../public/img/masks/landis_1907.json';
 import catcher_ci from '../public/img/masks/catcher_ci.json';
+import jackson_1919 from '../public/img/masks/jackson_1919.json';
+import jackson_c1920 from '../public/img/masks/jackson_c1920.json';
 import landis_desk from '../public/img/masks/landis_desk.json';
 
 export const MASKS = {
@@ -44,5 +46,7 @@ export const MASKS = {
   weaver: maskRef('weaver', weaver),
   landis_1907: maskRef('landis_1907', landis_1907),
   catcher_ci: maskRef('catcher_ci', catcher_ci),
+  jackson_1919: maskRef('jackson_1919', jackson_1919),
+  jackson_c1920: maskRef('jackson_c1920', jackson_c1920),
   landis_desk: maskRef('landis_desk', landis_desk),
 };

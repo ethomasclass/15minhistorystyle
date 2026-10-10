@@ -11,7 +11,7 @@ const outDir = path.resolve('out/thumb_bundle');
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), outDir});
 const browserExecutable = process.env.REMOTION_CHROME || null;
 fs.mkdirSync('renders/thumbnails', {recursive: true});
-for (const k of ['A', 'B']) {
+for (const k of ['A', 'B', 'C']) {
   const composition = await selectComposition({serveUrl, id: `Thumb-${k}`, browserExecutable});
   const big = path.resolve(`out/thumb_${k}.png`);
   await renderStill({composition, serveUrl, frame: 140, output: big, imageFormat: 'png', browserExecutable});
