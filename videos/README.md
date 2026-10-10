@@ -39,7 +39,9 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").
 - Open on a real document or artifact. Trim to time with a cut list.
-- Keep likes and subscribes in the description. The exception is when a plug can be part of the story, as in Ouija.
+- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug a third of the way in, tied to the topic
+  with a wry twist (Ouija: the board spells it; Black Sox: "unlike William Wansley, nobody's paying me to say it"), and a one-line
+  thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.

@@ -53,15 +53,25 @@ def cardinal(n):
 
 
 def year(n):
-    """1767 -> seventeen sixty-seven, 1806 -> eighteen oh-six, 1800 -> eighteen hundred."""
+    """1767 -> seventeen sixty-seven, 1806 -> eighteen oh-six, 1800 -> eighteen hundred, 1919 -> nineteen nineteen,
+    2005 -> two thousand five, 2026 -> twenty twenty-six."""
+    if 2000 <= n < 2010:
+        return cardinal(n)
     hi, lo = divmod(n, 100)
     return two(hi) + (" hundred" if lo == 0 else " oh-" + ONES[lo] if lo < 10 else " " + two(lo))
 
 
+def average(m):
+    """A batting average: .375 -> three seventy-five, .305 -> three oh-five, .400 -> four hundred."""
+    d, lo = int(m.group(1)), int(m.group(2))
+    return ONES[d] + (" hundred" if lo == 0 else " oh-" + ONES[lo] if lo < 10 else " " + two(lo))
+
+
 def number_words(text):
-    text = re.sub(r"\b1([78])00s\b", lambda m: two(int("1" + m.group(1))) + " hundreds", text)
-    text = re.sub(r"\b(1[78]\d)0s\b", lambda m: re.sub(r"y$", "ie", year(int(m.group(1) + "0"))) + "s", text)
-    text = re.sub(r"(?<![\d,])\b(1[78]\d\d)\b(?!,\d)", lambda m: year(int(m.group(1))), text)
+    text = re.sub(r"(?<![\w.])\.(\d)(\d\d)\b", average, text)
+    text = re.sub(r"\b1([789])00s\b", lambda m: two(int("1" + m.group(1))) + " hundreds", text)
+    text = re.sub(r"\b(1[789]\d)0s\b", lambda m: re.sub(r"y$", "ie", year(int(m.group(1) + "0"))) + "s", text)
+    text = re.sub(r"(?<![\d,])\b(1[789]\d\d|20\d\d)\b(?!,\d)", lambda m: year(int(m.group(1))), text)
     text = re.sub(r"(?<![\d.])\b\d{1,3}(?:,\d{3})+\b|(?<![\d.,])\b\d+\b(?![.,]\d)", lambda m: cardinal(int(m.group().replace(",", ""))), text)
     return text
 

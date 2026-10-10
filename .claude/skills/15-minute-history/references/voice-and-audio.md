@@ -20,6 +20,18 @@ VOICE_ID=...          # the user's own ElevenLabs voice clone
 GEMINI_API_KEY=...    # only if tools/trace.py paint is used
 ```
 
+- **The channel's narrator is the user's own clone: `VOICE_ID=mI4rIAStSQeKeqsz4FwM` ("Ellis", an ElevenLabs cloned
+  voice).** Use it for every video. The voice ID is not secret; the API key is. Check that the key reaches that voice
+  before voicing (`GET /v1/voices/<id>` should return name "Ellis").
+- **Quality:** model `eleven_v3`, `similarity_boost` 0.85, the locked pace below, 44.1 kHz. The account is on the
+  **Starter** plan, so the API's best output is `mp3_44100_128` (192 kbps needs Creator, PCM needs Pro). That is fine:
+  the WAVs are mixed and mastered to −14 LUFS, and the preview MP3s are exported at 192 kbps.
+- **Check the credit budget first** (`GET /v1/user/subscription`: `character_count` of `character_limit`). Starter is
+  90,000 characters a month. A 10-minute script is about 10,000 characters, 15 minutes about 16,000. Only re-voice the
+  chapters that changed. The cache makes re-runs with new pause settings free.
+- **Years and numbers:** `spoken()` reads 1700s–1900s years as people say them ("nineteen nineteen", "nineteen oh-eight"),
+  2010+ as "twenty twenty-six", 2000–2009 as "two thousand five", and batting averages (".375") as "three seventy-five".
+  Before *Say It Ain't So* it read 1919 as "one thousand nine hundred nineteen", so check `spoken()` on any new number format.
 - Never print, paste or commit a key, and don't put one in a chat reply. If `.env` is missing, ask the user to add
   it (or set the values in their environment settings); say which variable is missing.
 - Rendering from committed audio needs no keys.

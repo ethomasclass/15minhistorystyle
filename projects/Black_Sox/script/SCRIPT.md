@@ -56,7 +56,7 @@ Remember that. It's going to keep happening.
 
 ## 2:03 | On Paper
 
-`ch03_louisville.txt` · 193 words
+`ch03_louisville.txt` · 222 words
 
 By the 1870s, fans had a word for fixed games: "hippodroming," like a staged race at the circus. Plenty of fans assumed any loss might be bought.
 
@@ -71,6 +71,8 @@ The telegrams show that pitcher Jim Devlin, outfielder George Hall and utility m
 The league banned all four. For life. And unlike 1865, it meant it. Devlin begged to be let back in, year after year. Hulbert said no every time.
 
 So the rule against gambling isn't new. It's been there almost from the start. *On paper.*
+
+Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike William Wansley, nobody's paying me to say it.
 
 ---
 
@@ -160,7 +162,7 @@ This time, nobody came back. That's the wall. Gambling goes from an open secret 
 
 ## 7:33 | Full Circle
 
-`ch08_full_circle.txt` · 304 words
+`ch08_full_circle.txt` · 323 words
 
 Baseball later wrote it down in plain words, Rule 21, and posted it in every clubhouse. Bet on a game you have a part in, and you're banned for life.
 
@@ -181,6 +183,8 @@ To supporters, that's betting out in the open, watched and regulated. To critics
 Either way, since Hoboken in 1865, the question has never been *whether* people will bet on baseball.
 
 It's who's watching when they do.
+
+Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 
 ---
 
@@ -203,6 +207,8 @@ It's who's watching when they do.
 **Numbers on screen:** 23–11 (1865); 6 passed balls; 4 banned (1877); 29 wins; .375; 5–3; $100,000; $5,000; 105 years; 2018; 2025; 2026.
 
 **Ending.** Last two lines over the Currier & Ives Hoboken print (callback), pushing slowly into the crowd; the wall line draws once more under the final word. Then a 15 s music-only end screen.
+
+**Subscribe reminders (standing request).** Mid-video at the end of ch03 (about 3:00), tied to Wansley; on screen a small teal Note "subscribe ↓". At the end, after the closing line, over the 15 s end screen.
 
 **Neutrality.** No modern politicians. The two Cleveland pitchers are not named; the narration says *charged* and *pleaded not guilty*. Polymarket is named only because the league's own release names it. The ending gives supporters' and critics' readings and no verdict.
 

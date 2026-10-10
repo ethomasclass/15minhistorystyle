@@ -28,8 +28,15 @@ after voicing means re-voicing that chapter and re-checking its anchors.
 - **The last chapter answers the question out loud** ("So let's go back to the question."), pulls the threads
   together through callbacks, and ends on a short line for a general audience that lands the title. *King
   Andrew* ended on one word: "King." *Fix Everything* ended on a one-line tease of what comes next ("It split
-  the country in two. But that's a story for next time."). Either works; asks to like or subscribe belong in
-  the description, not the narration.
+  the country in two. But that's a story for next time."). Either works.
+- **Two subscribe reminders, every video** (the user's standing request). (1) **Mid-video**, about a third of the way
+  in, at a chapter's end: two or three sentences, tied to the topic, with a wry turn. "Quick thing before we go on. If
+  you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike William Wansley, nobody's
+  paying me to say it." (Black Sox) / "the board would like you to subscribe... That's my hand on the pointer" (Ouija).
+  (2) **At the end**, its own last paragraph *after* the closing line, voiced over the end screen: "Thanks for
+  watching. If you want more stories like this one, subscribe, and I'll see you next time." Never let the plug step
+  on the closing line, and never put it in a heavy chapter. On screen: a small teal Note ("subscribe ↓"), nothing
+  louder.
 - **Early life gets color.** One or two vivid, human details (the boots, the duel, the bullet he carried) make the
   rest of the story land.
 - When the user asks for something to be cut "to get to 15 minutes", give a cut list with word counts per cut and
