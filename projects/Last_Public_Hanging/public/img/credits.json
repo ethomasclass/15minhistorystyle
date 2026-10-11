@@ -35,13 +35,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Electric_Chair_at_Sing_Sing.jpg"
   },
-  "../../../../../../../tmp/claude-0/sanborn_ind.jpg": {
-    "title": "File:Sanborn Fire Insurance Map from Owensboro, Daviess County, Kentucky, 1910, Plate ind.jpg",
-    "artist": "Unknown authorUnknown author",
-    "date": "1910",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_ind.jpg"
-  },
   "owensboro_farmers_line_up_fsa_1938.jpg": {
     "title": "Farmers lined up at liquid feed loading station, Owensboro, Kentucky",
     "artist": "Lee, Russell, 1903-1986, photographer",
@@ -79,5 +72,197 @@
     "date": "1910",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_0005.jpg"
+  },
+  "crowd_owensboro_1936_left_vertical_ivp.jpg": {
+    "title": "Crowd at Owensboro, 14 Aug 1936 - left third of NEA photo (crowd only, no scaffold)",
+    "artist": "Imperial Valley Press (El Centro, Calif.)",
+    "date": "1936-08-20",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn92070146/1936-08-20/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn92070146/1936-08-20/ed-1/seq-1"
+  },
+  "crowd_owensboro_1936_foreground_strip_ivp.jpg": {
+    "title": "Crowd at Owensboro, 14 Aug 1936 - foreground strip of NEA photo (heads/hats only)",
+    "artist": "Imperial Valley Press (El Centro, Calif.)",
+    "date": "1936-08-20",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn92070146/1936-08-20/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn92070146/1936-08-20/ed-1/seq-1"
+  },
+  "crowd_owensboro_1936_right_vertical_ivp.jpg": {
+    "title": "Crowd at Owensboro, 14 Aug 1936 - right third of NEA photo (steps + crowd)",
+    "artist": "Imperial Valley Press (El Centro, Calif.)",
+    "date": "1936-08-20",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn92070146/1936-08-20/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn92070146/1936-08-20/ed-1/seq-1"
+  },
+  "imperial_valley_press_1936-08-20_p1_CW.jpg": {
+    "title": "Imperial Valley Press front page 20 Aug 1936 \"Death Makes a Holiday\" (FULL PAGE - photo shows the hanged man; do not show uncropped)",
+    "artist": "Imperial Valley Press (El Centro, Calif.)",
+    "date": "1936-08-20",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn92070146/1936-08-20/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn92070146/1936-08-20/ed-1/seq-1"
+  },
+  "laredo_times_1936-08-17_p7_CW.jpg": {
+    "title": "Laredo Times p.7 17 Aug 1936 \"Kentucky Crowd Turn Hanging Into Holiday Affair\" (FULL PAGE - photo shows the hanged man; do not show uncropped)",
+    "artist": "The Laredo Times (Laredo, Tex.)",
+    "date": "1936-08-17",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn86089568/1936-08-17/ed-1/?sp=7",
+    "source": "chroniclingamerica:sn86089568/1936-08-17/ed-1/seq-7"
+  },
+  "adw_1936-08-16_man_hangs_20000_jeer_scaffold.jpg": {
+    "title": "Atlanta Daily World 16 Aug 1936: \"MAN HANGS--20,000 JEER\" - INS photo of officials on the scaffold before the drop",
+    "artist": "Atlanta Daily World (Atlanta, Ga.)",
+    "date": "1936-08-16",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82015425/1936-08-16/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn82015425/1936-08-16/ed-1/seq-1"
+  },
+  "adw_1936-08-16_p1.jpg": {
+    "title": "Atlanta Daily World front page, 16 Aug 1936",
+    "artist": "Atlanta Daily World (Atlanta, Ga.)",
+    "date": "1936-08-16",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82015425/1936-08-16/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn82015425/1936-08-16/ed-1/seq-1"
+  },
+  "evening_star_1936-08-14_curious_throng_ascends_gallows.jpg": {
+    "title": "Evening Star 14 Aug 1936 p.3 \"Curious Throng Sees Hanging\" - Bethea between officers ascending the gallows (A.P. Wirephoto)",
+    "artist": "Evening Star / Sunday Star (Washington, D.C.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn83045462/1936-08-14/ed-1/?sp=3",
+    "source": "chroniclingamerica:sn83045462/1936-08-14/ed-1/seq-3"
+  },
+  "evening_star_1936-08-14_p1.jpg": {
+    "title": "Evening Star front page 14 Aug 1936 (\"10,000 Throng Gathers to Witness Execution\")",
+    "artist": "Evening Star / Sunday Star (Washington, D.C.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn83045462/1936-08-14/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn83045462/1936-08-14/ed-1/seq-1"
+  },
+  "sunday_star_1936-08-16_they_are_watching_a_man_die.jpg": {
+    "title": "Sunday Star 16 Aug 1936 p.A-3 \"They Are Watching a Man Die\" - faces of boys in the crowd (A.P. Wirephoto)",
+    "artist": "Evening Star / Sunday Star (Washington, D.C.)",
+    "date": "1936-08-16",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn83045462/1936-08-16/ed-1/?sp=3",
+    "source": "chroniclingamerica:sn83045462/1936-08-16/ed-1/seq-3"
+  },
+  "washington_daily_news_1936-08-14_15000_watch_headline.jpg": {
+    "title": "Washington Daily News 14 Aug 1936 p.2: \"15,000 Watch as Slayer Is Hanged in Kentucky\" with Florence Thompson photo",
+    "artist": "The Washington Daily News (Washington, D.C.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82016181/1936-08-14/ed-1/?sp=2",
+    "source": "chroniclingamerica:sn82016181/1936-08-14/ed-1/seq-2"
+  },
+  "florence_thompson_1936_wdn_changes_mind.jpg": {
+    "title": "\"Mrs. Florence Thompson\" - portrait in Washington Daily News, 14 Aug 1936",
+    "artist": "The Washington Daily News (Washington, D.C.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82016181/1936-08-14/ed-1/?sp=2",
+    "source": "chroniclingamerica:sn82016181/1936-08-14/ed-1/seq-2"
+  },
+  "washington_daily_news_1936-08-15_p14_editorial.jpg": {
+    "title": "Washington Daily News editorial page 15 Aug 1936 (\"public hangman's holiday in the heart of Owensboro\")",
+    "artist": "The Washington Daily News (Washington, D.C.)",
+    "date": "1936-08-15",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82016181/1936-08-15/ed-1/?sp=14",
+    "source": "chroniclingamerica:sn82016181/1936-08-15/ed-1/seq-14"
+  },
+  "florence_thompson_1936_wash_times_prepares.jpg": {
+    "title": "Washington Times 13 Aug 1936 \"Prepares\" - Sheriff Florence Thompson portrait (International News Photo)",
+    "artist": "The Washington Times (Washington, D.C.)",
+    "date": "1936-08-13",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn84026749/1936-08-13/ed-1/?sp=6",
+    "source": "chroniclingamerica:sn84026749/1936-08-13/ed-1/seq-6"
+  },
+  "florence_thompson_1936_woman_sheriff_to_be_hangman.jpg": {
+    "title": "Times-News (Hendersonville) 11 Jul 1936 \"Woman Sheriff to Be Hangman\" - Florence Thompson portrait (NEA)",
+    "artist": "The Times-News (Hendersonville, N.C.)",
+    "date": "1936-07-11",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn86063811/1936-07-11/ed-1/?sp=3",
+    "source": "chroniclingamerica:sn86063811/1936-07-11/ed-1/seq-3"
+  },
+  "san_antonio_light_1936-08-14_p1_10000_witness.jpg": {
+    "title": "San Antonio Light front page 14 Aug 1936: \"10,000 WITNESS NEGRO HANGING\" banner",
+    "artist": "San Antonio Light (San Antonio, Tex.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn85060004/1936-08-14/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn85060004/1936-08-14/ed-1/seq-1"
+  },
+  "san_antonio_light_1936-08-14_banner_crop.jpg": {
+    "title": "San Antonio Light 14 Aug 1936 masthead + banner headline (crop)",
+    "artist": "San Antonio Light (San Antonio, Tex.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn85060004/1936-08-14/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn85060004/1936-08-14/ed-1/seq-1"
+  },
+  "henderson_daily_dispatch_1936-08-14_p1.jpg": {
+    "title": "Henderson Daily Dispatch front page 14 Aug 1936 (\"10,000 See Hanging in Owensboro\")",
+    "artist": "Henderson Daily Dispatch (Henderson, N.C.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn91068401/1936-08-14/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn91068401/1936-08-14/ed-1/seq-1"
+  },
+  "brownsville_herald_1936-08-14_p1.jpg": {
+    "title": "Brownsville Herald front page 14 Aug 1936 (\"Hangman's Hood Torn By Souvenir Hunters\")",
+    "artist": "Brownsville Herald (Brownsville, Tex.)",
+    "date": "1936-08-14",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn86063730/1936-08-14/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn86063730/1936-08-14/ed-1/seq-1"
+  },
+  "adw_1938-03-11_p1_anderson_repeal.jpg": {
+    "title": "Atlanta Daily World front page 11 Mar 1938: Charles W. Anderson Jr. \"Wins Fight to Repeal Kentucky's Infamous ... Public Hanging Law\"",
+    "artist": "Atlanta Daily World (Atlanta, Ga.)",
+    "date": "1938-03-11",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82015425/1938-03-11/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn82015425/1938-03-11/ed-1/seq-1"
+  },
+  "adw_1938-03-11_anderson_repeal_column.jpg": {
+    "title": "Atlanta Daily World 11 Mar 1938: column on repeal of the public hanging law, with portrait of Rep. Charles W. Anderson Jr.",
+    "artist": "Atlanta Daily World (Atlanta, Ga.)",
+    "date": "1938-03-11",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82015425/1938-03-11/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn82015425/1938-03-11/ed-1/seq-1"
+  },
+  "charles_w_anderson_jr_1938_adw.jpg": {
+    "title": "Charles W. Anderson Jr., Kentucky's first Black legislator, who led the 1938 repeal (Atlanta Daily World, 11 Mar 1938)",
+    "artist": "Atlanta Daily World (Atlanta, Ga.)",
+    "date": "1938-03-11",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn82015425/1938-03-11/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn82015425/1938-03-11/ed-1/seq-1"
+  },
+  "imperial_valley_press_1936-08-20_death_makes_a_holiday_headline.jpg": {
+    "title": "Imperial Valley Press 20 Aug 1936 photo headline \"Death Makes a Holiday\" (text only)",
+    "artist": "Imperial Valley Press (El Centro, Calif.)",
+    "date": "1936-08-20",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn92070146/1936-08-20/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn92070146/1936-08-20/ed-1/seq-1"
+  },
+  "laredo_times_1936-08-17_holiday_affair_headline.jpg": {
+    "title": "Laredo Times 17 Aug 1936 headline \"Kentucky Crowd Turn Hanging Into Holiday Affair\" (text only)",
+    "artist": "The Laredo Times (Laredo, Tex.)",
+    "date": "1936-08-17",
+    "licence": "Chronicling America (Library of Congress): 'The Library of Congress believes that the newspapers in Chronicling America are in the public domain or have no known copyright restrictions.' Published 1936/1938; no issue/contribution renewal found (Online Books Page periodical-renewal survey; CCE 1963-64 Works of Art renewals checked for AP, NEA, INS photos: none for this event).",
+    "page": "https://www.loc.gov/resource/sn86089568/1936-08-17/ed-1/?sp=7",
+    "source": "chroniclingamerica:sn86089568/1936-08-17/ed-1/seq-7"
   }
 }
