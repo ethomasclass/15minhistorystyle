@@ -49,7 +49,7 @@ const Speech: React.FC<{t: TL}> = ({t}) => {
     <Board>
       <CropCard src="img/ch07/harrison_inaugural_sadd.jpg" size={SADD} x={110} y={170} w={440} h={600} fx={980} fy={1250} scale={0.36} rot={-2} at={1} />
       <SpeechScroll x={650} y={110} w={230} at={t.at('the longest') - 4} dur={90} to={1200} />
-      {g >= t.at('the longest') && <Highlight text="LONGEST INAUGURAL EVER" x={960} y={110} size={74} at={t.at('the longest')} seed={103} rot={-2} />}
+      {g >= t.at('the longest') && <Highlight text="LONGEST INAUGURAL EVER" x={940} y={110} size={60} at={t.at('the longest')} seed={103} rot={-2} />}
       <Stamp text="8,000+ WORDS" x={980} y={280} at={t.at('More than')} size={96} color="#f4efe6" />
       <Stamp text="NEARLY 2 HOURS" x={980} y={430} at={t.at('Nearly two')} size={96} color={pal.subject} />
       <Sketch d={COLUMN} x={1500} y={600} w={150} at={t.at('ancient Rome.') - 2} dur={10} seed="col" />
@@ -64,7 +64,7 @@ const Rome: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Board>
-      <Sketch d={CABIN} x={200} y={360} w={520} at={t.at('ran on') - 2} dur={10} seed="rc1" />
+      <Sketch d={CABIN} x={200} y={360} w={520} at={t.at('The man who ran')} dur={10} seed="rc1" />
       <Arrow x1={780} y1={540} x2={1200} y2={540} bow={-50} at={t.at('spends two') - 2} />
       <Sketch d={COLUMN} x={1300} y={250} w={260} at={t.at('spends two')} dur={8} seed="rc2" />
       <Note text="ran on a log cabin" x={220} y={820} size={56} rot={-3} at={t.at('ran on') - 3} />
@@ -89,7 +89,7 @@ const Days: React.FC<{t: TL}> = ({t}) => (
 
 /** Pneumonia? Typhoid? The White House water? Nobody really knows. */
 const Cause: React.FC<{t: TL}> = ({t}) => (
-  <Photo src="img/ch07/presidents_house_1841.jpg" size={HOUSE} fx={1500} fy={1250} z0={1.3} z1={1.4} a={t.at('The story goes')} b={t.at('No president had')}>
+  <Photo src="img/ch07/presidents_house_1841.jpg" size={HOUSE} fx={1500} fy={1250} z0={1.3} z1={1.4} a={t.at('The story goes')} b={t.at('No president had')} bw="grayscale(1) contrast(1.2) brightness(0.6)">
     {() => (
       <>
         <Note text="the story: a cold, then pneumonia" x={100} y={80} size={54} rot={-3} at={t.at('caught a cold') - 3} color="#FF9F1C" />
@@ -134,8 +134,8 @@ const Tyler: React.FC<{t: TL}> = ({t}) => {
       <Note text="critics: 'His Accidency'" x={810} y={280} size={58} rot={-3} at={t.at('His Accidency.') - 3} color={pal.subject} />
       <Note text="a former Democrat" x={810} y={400} size={52} rot={-3} at={t.at('a former Democrat') - 3} color="#ffffff" />
       <Note text="vetoes the Whigs' bank bill" x={810} y={500} size={52} rot={-3} at={t.at('vetoed') - 3} />
-      <Sketch d={DOOR} x={1520} y={560} w={200} at={t.at('So the Whigs threw') - 2} dur={8} seed="dr" />
-      <RubberStamp text="OUT" x={1520} y={660} at={t.at('out of the party.')} size={110} rot={-14} />
+      <Sketch d={DOOR} x={1620} y={620} w={200} at={t.at('So the Whigs threw') - 2} dur={8} seed="dr" />
+      <RubberStamp text="OUT" x={1600} y={720} at={t.at('out of the party.')} size={110} rot={-14} />
       <Note text="the Whigs throw out their own VP" x={810} y={640} size={48} rot={-3} at={t.at('So the Whigs threw') - 3} />
       <Note text="within months" x={850} y={760} size={60} rot={-3} at={t.at('Within months.') - 3} color={pal.subject} />
       <Tag text="Charles Fenderich, John Tyler, 1841 · Library of Congress" />
@@ -162,11 +162,11 @@ const WoreIt: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
     <Board>
-      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={560} y={250} w={800} h={790} fx={1000} fy={1150} scale={0.42} at={-10} traceAt={2}>
-        {() => <Sketch d={COSTUME} x={580} y={67} w={760} at={t.at('They wore it.') - 4} dur={10} seed="cos2" width={7} />}
+      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={1040} y={250} w={760} h={760} fx={1000} fy={1400} scale={0.42} at={-10} traceAt={2}>
+        {() => <Sketch d={COSTUME} x={1040} y={-51} w={760} at={t.at('They wore it.') - 4} dur={10} seed="cos2" width={7} />}
       </CropCard>
-      <Note text="they didn't argue with the insult" x={140} y={70} size={52} rot={-3} at={t.at("didn't argue") - 3} color="#ffffff" />
-      {g >= t.at('They wore it.') && <Highlight text="THEY WORE IT." x={150} y={150} size={110} at={t.at('They wore it.')} seed={107} rot={-3} />}
+      <Note text="they didn't argue with the insult" x={110} y={260} size={52} rot={-3} at={t.at("didn't argue") - 3} color="#ffffff" />
+      {g >= t.at('They wore it.') && <Highlight text="THEY WORE IT." x={110} y={400} size={120} at={t.at('They wore it.')} seed={107} rot={-3} />}
       <Tag text="Albert Gallatin Hoit, William Henry Harrison, 1840 (cabin drawn on) · via Wikimedia Commons" />
     </Board>
   );

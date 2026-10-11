@@ -78,7 +78,7 @@ const LeftOut: React.FC<{t: TL}> = ({t}) => {
         {groups.map(([cue, label, dress], i) => (
           <React.Fragment key={cue}>
             {[0, 1].map((j) => <Person key={j} x={330 + i * 400 + j * 90 - 45} y={640} h={260} at={t.at(cue) + j * 2} dashed dress={dress && j === 0} color="#EDE7DC" />)}
-            {g >= t.at(cue) && <div style={{position: 'absolute', left: 330 + i * 400 - 170, top: 680, width: 340, textAlign: 'center', fontFamily: JF.mono, fontSize: 24, letterSpacing: 2, color: '#EDE7DC', textTransform: 'uppercase', lineHeight: 1.4}}>{label}</div>}
+            {g >= t.at(cue) && <div style={{position: 'absolute', left: 330 + i * 400 - 170, top: 680, width: 340, textAlign: 'center', fontFamily: JF.mono, fontSize: 28, letterSpacing: 2, color: "#EDE7DC", textTransform: 'uppercase', lineHeight: 1.4}}>{label}</div>}
           </React.Fragment>
         ))}
         <Line text="the biggest turnout America had seen..." x={140} y={830} at={t.at('So the biggest') - 2} size={46} />

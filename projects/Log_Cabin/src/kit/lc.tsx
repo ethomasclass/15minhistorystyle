@@ -112,7 +112,7 @@ export const COSTUME: Drawing = {w: 220, h: 182, strokes: [
   S([[26, 80], [26, 178]]),
   S([[194, 80], [194, 178]]),
   S([[0, 180], [220, 180]], {width: 0.8}),
-  S(rect(96, 152, 124, 178), {fill: 'mark', fillOpacity: 0.18}),
+  S(rect(96, 160, 124, 178), {fill: 'mark', fillOpacity: 0.18}),
   ...[158, 168, 176].flatMap((y) => [S([[26, y], [90, y]], {width: 0.6}), S([[130, y], [194, y]], {width: 0.6})]),
   ...[90, 108, 126, 144, 162].flatMap((y) => [S(ell(24, y, 5, 6.5, 10), {width: 0.6, closed: true}), S(ell(196, y, 5, 6.5, 10), {width: 0.6, closed: true})]),
 ]};

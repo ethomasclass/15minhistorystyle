@@ -25,7 +25,7 @@ const HOE: [number, number] = [1536, 1059];
 const Party: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Photo src="img/ch05/whig_parade_hard_cider_adams.jpg" size={PARADE} fx={1120} fy={1500} z0={1.02} z1={1.1} a={0} b={t.at('Whig rallies')}>
+    <Photo src="img/ch05/whig_parade_hard_cider_adams.jpg" size={PARADE} fx={1120} fy={1500} z0={1.02} z1={1.1} a={0} b={t.at('Whig rallies')} bw="grayscale(1) contrast(1.3) brightness(0.7)">
       {() => (
         <>
           <Note text="not really a campaign..." x={110} y={90} size={58} rot={-3} at={t.at("isn't really") - 3} color="#ffffff" />
@@ -40,7 +40,7 @@ const Party: React.FC<{t: TL}> = ({t}) => {
 /** Rallies: silk ribbons from the 1840 conventions, crowds "in the tens of thousands". */
 const Rallies: React.FC<{t: TL}> = ({t}) => (
   <Desk a={0}>
-    <Stamp text="TENS OF THOUSANDS" x={110} y={150} at={t.at('tens of thousands')} size={92} color="#f4efe6" />
+    <Stamp text="TENS OF THOUSANDS" x={110} y={150} at={t.at('tens of thousands')} size={78} color="#f4efe6" />
     <Note text="at a single rally" x={130} y={290} size={52} rot={-3} at={t.at('tens of thousands') + 6} />
     <Note text="(newspapers claim more)" x={130} y={390} size={50} rot={-3} at={t.at('Newspapers claim') - 3} color="#FF9F1C" />
     <Note text="parades" x={140} y={560} size={62} rot={-3} at={t.at('Parades,') - 3} />
@@ -65,7 +65,7 @@ const Slogan: React.FC<{t: TL}> = ({t}) => {
           <Note text="the big hit:" x={110} y={80} size={56} rot={-3} at={t.at('The big hit') - 3} color="#ffffff" />
           {g >= t.at('Tippecanoe and Tyler') && <Highlight text="TIPPECANOE AND TYLER TOO" x={100} y={170} size={92} at={t.at('Tippecanoe and Tyler')} seed={73} rot={-2} />}
           {g >= t.at('Tyler is') && <CropCard mask={MASKS.tyler} src="img/ch07/tyler_fenderich_1841.jpg" size={TYLER} x={1440} y={380} w={340} h={430} fx={1180} fy={1200} scale={0.27} rot={3} at={t.at('Tyler is') - 1} traceAt={t.at('John Tyler,') + 2} />}
-          <Note text="John Tyler, running mate" x={1300} y={880} size={48} rot={-3} at={t.at('John Tyler,') - 2} />
+          <Note text="John Tyler, running mate" x={1020} y={870} size={46} rot={-3} at={t.at('John Tyler,') - 2} />
           <Note text="it rhymes." x={200} y={820} size={86} rot={-4} at={t.at('It rhymes,') - 3} color={pal.subject} />
           <Tag text="'Tip & Ty' campaign banner, 1840 · via Wikimedia Commons; Charles Fenderich, John Tyler, 1841 · Library of Congress" />
         </>
@@ -92,16 +92,16 @@ const Songs: React.FC<{t: TL}> = ({t}) => {
 const CityCabins: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
-    <Photo src="img/ch05/almighty_lever.jpg" size={LEVER} fx={620} fy={760} z0={1.45} z1={1.6} a={t.at('Whig clubs')} b={t.at('A Philadelphia')}>
+    <Photo src="img/ch05/almighty_lever.jpg" size={LEVER} fx={620} fy={760} z0={1.45} z1={1.6} a={t.at('Whig clubs')} b={t.at('A Philadelphia')} bw="grayscale(1) contrast(1.2) brightness(0.62)">
       {(p) => {
         const S = onScreen(p);
-        const [cx, cy] = S(640, 780);
+        const [cx, cy] = S(600, 830);
         return (
           <>
             <Note text="Whig clubs build cabins in cities..." x={110} y={80} size={56} rot={-3} at={t.at('Whig clubs') - 3} color="#ffffff" />
             <Loop cx={cx} cy={cy} rx={330} ry={210} at={t.at('in the middle') + 2} seed={75} />
             <Note text="for meetings" x={1360} y={220} size={60} rot={-4} at={t.at('hold meetings') - 3} />
-            <Sketch d={RACCOON} x={1460} y={600} w={330} at={t.at('Sometimes the raccoon') - 1} dur={10} seed="rc2" width={6} />
+            <Sketch d={RACCOON} x={1500} y={420} w={300} at={t.at('Sometimes the raccoon') - 1} dur={10} seed="rc2" width={6} />
             <Note text="sometimes the raccoon is real" x={940} y={960} size={52} rot={-3} at={t.at('is real.') - 3} color={pal.subject} />
             <Tag text="Detail · Edward Williams Clay, The Almighty Lever, 1840 · Library of Congress" />
           </>
@@ -193,7 +193,7 @@ const OK: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <Photo src="img/ch05/hard_road_to_hoe.jpg" size={HOE} fx={420} fy={420} z0={1.6} z1={1.75} a={t.at('The Democrats fight')} b={t.at('outlived') + 60}>
+    <Photo src="img/ch05/hard_road_to_hoe.jpg" size={HOE} fx={420} fy={420} z0={1.6} z1={1.75} a={t.at('The Democrats fight')} b={t.at('outlived') + 60} bw="grayscale(1) contrast(1.2) brightness(0.55)">
       {(p) => {
         const S = onScreen(p);
         const [ox, oy] = S(232, 345);
@@ -201,7 +201,7 @@ const OK: React.FC<{t: TL}> = ({t}) => {
           <>
             <Note text="the Democrats' answer:" x={1050} y={90} size={56} rot={-3} at={t.at('The Democrats fight') - 3} color="#ffffff" />
             {g >= t.at('O.K. clubs.') && <Highlight text="O.K. CLUBS" x={1060} y={190} size={100} at={t.at('O.K. clubs.')} seed={83} rot={-2} />}
-            <Loop cx={ox} cy={oy} rx={150} ry={95} at={t.at('O.K. for') + 1} seed={85} color={pal.subject} />
+            <Loop cx={ox + 10} cy={oy} rx={175} ry={100} at={t.at('O.K. for') + 1} seed={85} color={pal.subject} />
             <Note text="O.K. = Old Kinderhook" x={1060} y={380} size={60} rot={-3} at={t.at('Old Kinderhook') - 3} />
             <Note text="(Van Buren's hometown)" x={1080} y={480} size={48} rot={-3} at={t.at("Van Buren's hometown") - 3} color="#ffffff" />
             <Note text="already a joke abbreviation" x={1060} y={600} size={52} rot={-3} at={t.at('already a silly') - 3} />
