@@ -36,8 +36,8 @@ const Costume: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
     <Board>
-      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={1040} y={250} w={760} h={760} fx={1000} fy={1400} scale={0.42} rot={0} at={-10} traceAt={2}>
-        {() => <Sketch d={COSTUME} x={1040} y={-51} w={760} at={t.at('the log cabin candidate') - 6} dur={14} seed="cos" width={7} />}
+      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={1040} y={250} w={760} h={620} fx={1000} fy={1258} scale={0.34} rot={0} at={-10} traceAt={2}>
+        {() => <Sketch d={COSTUME} x={1070} y={31} w={700} at={t.at('the log cabin candidate') - 6} dur={14} seed="cos" width={7} />}
       </CropCard>
       {g >= t.at('the log cabin candidate') && <Highlight text="THE LOG CABIN" x={110} y={330} size={110} at={t.at('the log cabin candidate')} seed={51} rot={-2} />}
       {g >= t.at('the log cabin candidate') + 6 && <Highlight text="CANDIDATE" x={130} y={490} size={110} at={t.at('the log cabin candidate') + 6} seed={52} rot={-3} />}

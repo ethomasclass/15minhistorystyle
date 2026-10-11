@@ -135,7 +135,7 @@ const Tyler: React.FC<{t: TL}> = ({t}) => {
       <Note text="a former Democrat" x={810} y={400} size={52} rot={-3} at={t.at('a former Democrat') - 3} color="#ffffff" />
       <Note text="vetoes the Whigs' bank bill" x={810} y={500} size={52} rot={-3} at={t.at('vetoed') - 3} />
       <Sketch d={DOOR} x={1660} y={560} w={190} at={t.at('So the Whigs threw') - 2} dur={8} seed="dr" />
-      <RubberStamp text="OUT" x={1630} y={660} at={t.at('out of the party.')} size={110} rot={-14} />
+      <RubberStamp text="OUT" x={1560} y={660} at={t.at('out of the party.')} size={110} rot={-14} />
       <Note text="they throw out their own VP" x={810} y={640} size={46} rot={-3} at={t.at('So the Whigs threw') - 3} />
       <Note text="within months" x={850} y={760} size={60} rot={-3} at={t.at('Within months.') - 3} color={pal.subject} />
       <Tag text="Charles Fenderich, John Tyler, 1841 · Library of Congress" />
@@ -162,10 +162,10 @@ const WoreIt: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
     <Board>
-      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={1040} y={250} w={760} h={760} fx={1000} fy={1400} scale={0.42} at={-10} traceAt={2}>
-        {() => <Sketch d={COSTUME} x={1040} y={-51} w={760} at={t.at('They wore it.') - 4} dur={10} seed="cos2" width={7} />}
+      <CropCard mask={MASKS.harrison} src="img/ch03/harrison_hoit_1840.jpg" size={HOIT} x={1040} y={250} w={760} h={620} fx={1000} fy={1258} scale={0.34} at={-10} traceAt={2}>
+        {() => <Sketch d={COSTUME} x={1070} y={31} w={700} at={t.at('They wore it.') - 4} dur={10} seed="cos2" width={7} />}
       </CropCard>
-      <Note text="they didn't argue with the insult" x={110} y={260} size={52} rot={-3} at={t.at("didn't argue") - 3} color="#ffffff" />
+      <Note text="they didn't argue with the insult" x={100} y={260} size={46} rot={-3} at={t.at("didn't argue") - 3} color="#ffffff" />
       {g >= t.at('They wore it.') && <Highlight text="THEY WORE IT." x={110} y={400} size={120} at={t.at('They wore it.')} seed={107} rot={-3} />}
       <Tag text="Albert Gallatin Hoit, William Henry Harrison, 1840 (cabin drawn on) · via Wikimedia Commons" />
     </Board>
