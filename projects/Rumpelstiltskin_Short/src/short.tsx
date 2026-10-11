@@ -94,6 +94,7 @@ const FilmStrip: React.FC<{t: TL}> = ({t}) => {
 const Scenes: React.FC<{t: TL}> = ({t}) => {
   const at = t.at;
   const pal = usePal();
+  const frame = useCurrentFrame();
   const phone = {x: 50, y: 360, w: 980};
   const sw = phone.w * 0.8, sh = phone.w * 0.62 - phone.w * 0.07;
   const below = phone.y + phone.w * 0.62 + 14;
@@ -129,12 +130,12 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [at("That's how memory") - 1, (
       <Desk a={at("That's how memory")}>
         <Note text="memory ≠ a recording" x={80} y={260} size={62} rot={-3} at={at('play back') - 2} color="#ffffff" />
-        {useCurrentFrame() < at('A real title.') ? (
+        {frame < at('A real title.') ? (
           <>
             <PhoneWide x={phone.x} y={phone.y} w={phone.w} at={at('rebuilds') - 4}>
               {() => <ClipInPhone src={CLIP.dance} frames={CLIP.danceFrames} still="video/ai_clip_dance_last.jpg" a={at('rebuilds') - 4} freeze={at('rebuilds') - 4 + CLIP.danceFrames} sw={sw} sh={sh} grey={at('fills the gaps')} />}
             </PhoneWide>
-            {useCurrentFrame() >= at('rebuilds') - 4 && <Credit y={below} />}
+            {frame >= at('rebuilds') - 4 && <Credit y={below} />}
             <Note text="it rebuilds it" x={90} y={1050} size={66} rot={-3} at={at('rebuilds') - 2} color={pal.mark} />
           </>
         ) : (
