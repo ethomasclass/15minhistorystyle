@@ -41,5 +41,43 @@
     "date": "1910",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_ind.jpg"
+  },
+  "owensboro_farmers_line_up_fsa_1938.jpg": {
+    "title": "Farmers lined up at liquid feed loading station, Owensboro, Kentucky",
+    "artist": "Lee, Russell, 1903-1986, photographer",
+    "date": "1938-01-01",
+    "licence": "No known restrictions. For information, see U.S. Farm Security Administration/Office of War Information Black & White Photographs https://www.loc.gov/rr/print/res/071_fsab.html",
+    "page": "https://www.loc.gov/item/2017736452/",
+    "source": "loc:2017736452"
+  },
+  "ohio_river_near_owensboro_1939.jpg": {
+    "title": "Ohio River near Owensboro, Kentucky",
+    "artist": "Rothstein, Arthur, 1915-1985, photographer",
+    "date": "1939-01-01",
+    "licence": "No known restrictions. For information, see U.S. Farm Security Administration/Office of War Information Black & White Photographs https://www.loc.gov/rr/print/res/071_fsab.html",
+    "page": "https://www.loc.gov/item/2017777327/",
+    "source": "loc:2017777327"
+  },
+  "owensboro_ames_factory_c1914.jpg": {
+    "title": "The F.A. Ames Mfg. Co., Owensboro, Ky.",
+    "artist": "Wells View Co., copyright claimant",
+    "date": "1914-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2007661782/",
+    "source": "loc:2007661782"
+  },
+  "sanborn_owensboro_1910_sheet7_county_jail.jpg": {
+    "title": "File:Sanborn Fire Insurance Map from Owensboro, Daviess County, Kentucky, 1910, Plate 0007.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1910",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_0007.jpg"
+  },
+  "sanborn_owensboro_1910_sheet5_courthouse.jpg": {
+    "title": "File:Sanborn Fire Insurance Map from Owensboro, Daviess County, Kentucky, 1910, Plate 0005.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1910",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_0005.jpg"
   }
 }
