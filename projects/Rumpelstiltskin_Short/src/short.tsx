@@ -146,13 +146,13 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [at('The story itself') - 1, (
       <Desk a={at('The story itself')}>
         <Folder at={at('The story itself') - 1} label="KINDER- UND HAUSMÄRCHEN" />
-        <Card p={IMG.grimm1812} x={110} y={400} w={430} rot={-3} at={at('The Brothers')} />
+        <Card p={IMG.grimm1812} x={110} y={390} w={340} rot={-3} at={at('The Brothers')} />
         <Stamp text="1812" x={590} y={430} at={at('1812', 1)} size={150} color={pal.subject} rot={-5} />
-        <Card p={IMG.spinning} x={560} y={620} w={400} rot={3} at={at('A miller')} />
-        <Note text="straw → gold" x={110} y={900} size={60} rot={-3} at={at('straw into') - 2} color="#2b2113" />
-        <Note text="✓ necklace" x={110} y={980} size={52} rot={-3} at={at('necklace,') - 2} color="#2b2113" />
-        <Note text="✓ ring" x={470} y={980} size={52} rot={-3} at={at('her ring,') - 2} color="#2b2113" />
-        <Note text="her firstborn child" x={110} y={1050} size={58} rot={-3} at={at('firstborn') - 2} color="#b3261e" />
+        <Card p={IMG.spinning} x={580} y={540} w={330} rot={3} at={at('A miller')} />
+        <Note text="straw → gold" x={100} y={925} size={60} rot={-3} at={at('straw into') - 2} color="#2b2113" />
+        <Note text="✓ necklace" x={100} y={1000} size={52} rot={-3} at={at('necklace,') - 2} color="#2b2113" />
+        <Note text="✓ ring" x={460} y={1000} size={52} rot={-3} at={at('her ring,') - 2} color="#2b2113" />
+        <Note text="her firstborn child" x={100} y={1070} size={58} rot={-3} at={at('firstborn') - 2} color="#b3261e" />
       </Desk>
     )],
     [at('She gets out') - 1, (
@@ -164,14 +164,14 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:50 Two endings, split top and bottom
     [at('In 1812, he') - 1, (
       <Desk a={at('In 1812, he')}>
-        <Card p={IMG.dance} x={90} y={300} w={420} rot={-3} at={at('In 1812, he')} />
-        <Note text="1812:" x={560} y={360} size={70} rot={-3} at={at('In 1812, he')} color="#ffffff" />
-        <Note text="storms off." x={560} y={450} size={66} rot={-3} at={at('storms off') - 2} color={pal.mark} />
-        <Card p={IMG.ending} x={570} y={650} w={400} rot={3} at={at('By 1857,')} />
-        <Note text="1857:" x={90} y={700} size={70} rot={-3} at={at('By 1857,')} color="#ffffff" />
-        <Note text="tears himself" x={90} y={790} size={62} rot={-3} at={at('tears himself') - 2} color={pal.subject} />
-        <Note text="in two." x={110} y={870} size={62} rot={-3} at={at('in two.') - 2} color={pal.subject} />
-        <Note text="okay. dramatic." x={300} y={1040} size={66} rot={-4} at={at('Okay.') - 2} color="#ffffff" />
+        <Card p={IMG.dance} x={90} y={300} w={360} rot={-3} at={at('In 1812, he')} />
+        <Note text="1812:" x={500} y={360} size={70} rot={-3} at={at('In 1812, he')} color="#ffffff" />
+        <Note text="storms off." x={500} y={450} size={66} rot={-3} at={at('storms off') - 2} color={pal.mark} />
+        <Card p={IMG.ending} x={600} y={600} w={300} rot={3} at={at('By 1857,')} />
+        <Note text="1857:" x={90} y={760} size={70} rot={-3} at={at('By 1857,')} color="#ffffff" />
+        <Note text="tears himself" x={90} y={850} size={62} rot={-3} at={at('tears himself') - 2} color={pal.subject} />
+        <Note text="in two." x={110} y={930} size={62} rot={-3} at={at('in two.') - 2} color={pal.subject} />
+        <Note text="okay. dramatic." x={90} y={1040} size={66} rot={-4} at={at('Okay.') - 2} color="#ffffff" />
       </Desk>
     )],
     // 0:57 Thousands of years; then the phone again: 1812 → 2026 (the loop)

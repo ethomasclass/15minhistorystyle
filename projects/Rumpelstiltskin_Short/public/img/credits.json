@@ -26,5 +26,107 @@
     "date": "",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Rumpelstiltskin.jpg"
+  },
+  "khm_1857_rumpelstilzchen_first_page.jpg": {
+    "title": "Kinder und Hausm\u00e4rchen: Gesammelt durch die Br\u00fcder Grimm (page 317)",
+    "artist": "Jacob Grimm,  Wilhelm Grimm",
+    "date": "1857",
+    "licence": "public domain by age (1857)",
+    "page": "https://archive.org/details/kinderundhausmr09grimgoog/page/n317",
+    "source": "iabook:kinderundhausmr09grimgoog:317"
+  },
+  "khm_1857_rumpelstilzchen_ending_tears_in_two.jpg": {
+    "title": "Kinder und Hausm\u00e4rchen: Gesammelt durch die Br\u00fcder Grimm (page 320)",
+    "artist": "Jacob Grimm,  Wilhelm Grimm",
+    "date": "1857",
+    "licence": "public domain by age (1857)",
+    "page": "https://archive.org/details/kinderundhausmr09grimgoog/page/n320",
+    "source": "iabook:kinderundhausmr09grimgoog:320"
+  },
+  "khm_1857_title_page_vol1.jpg": {
+    "title": "Kinder und Hausm\u00e4rchen: Gesammelt durch die Br\u00fcder Grimm (page 11)",
+    "artist": "Jacob Grimm,  Wilhelm Grimm",
+    "date": "1857",
+    "licence": "public domain by age (1857)",
+    "page": "https://archive.org/details/kinderundhausmr09grimgoog/page/n11",
+    "source": "iabook:kinderundhausmr09grimgoog:11"
+  },
+  "cruikshank_1823_plate_foot_in_floor.jpg": {
+    "title": "German popular stories: translated from the Kinder und Haus-M\u00e4rchen. 1 (page 255)",
+    "artist": "",
+    "date": "1823",
+    "licence": "public domain by age (1823)",
+    "page": "https://archive.org/details/10926024bsb/page/n255",
+    "source": "iabook:10926024bsb:255"
+  },
+  "german_popular_stories_1823_rumpel_stilts_kin_p213.jpg": {
+    "title": "German popular stories: translated from the Kinder und Haus-M\u00e4rchen. 1 (page 250)",
+    "artist": "",
+    "date": "1823",
+    "licence": "public domain by age (1823)",
+    "page": "https://archive.org/details/10926024bsb/page/n250",
+    "source": "iabook:10926024bsb:250"
+  },
+  "delacroix_1828_marguerite_spinning_wheel.jpg": {
+    "title": "Marguerite at the Spinning Wheel",
+    "artist": "Eug\u00e8ne Delacroix\nFrench, 1798-1863",
+    "date": "1828",
+    "licence": "CC0 (Art Institute of Chicago)",
+    "page": "https://www.artic.edu/artworks/7416",
+    "source": "aic:7416"
+  },
+  "millet_1868_the_spinner.jpg": {
+    "title": "The Spinner",
+    "artist": "Jean Fran\u00e7ois Millet\nFrench, 1814-1875",
+    "date": "1868\u201369",
+    "licence": "CC0 (Art Institute of Chicago)",
+    "page": "https://www.artic.edu/artworks/49884",
+    "source": "aic:49884"
+  },
+  "bresdin_spinners_interior.jpg": {
+    "title": "Spinner's Interior",
+    "artist": "Rodolphe Bresdin (French, 1822\u20131885)",
+    "date": "mid\u2013late 1800s",
+    "licence": "CC0 (Cleveland Museum of Art)",
+    "page": "https://clevelandart.org/art/1945.365",
+    "source": "cma:124394"
+  },
+  "rembrandt_1641_the_windmill_etching.jpg": {
+    "title": "The Windmill",
+    "artist": "Rembrandt van Rijn (Dutch, 1606\u20131669)",
+    "date": "1641",
+    "licence": "CC0 (Cleveland Museum of Art)",
+    "page": "https://clevelandart.org/art/1941.657",
+    "source": "cma:120956"
+  },
+  "jacque_1848_the_mill_etching.jpg": {
+    "title": "The Mill",
+    "artist": "Charles-\u00c9mile Jacque (French, 1813\u20131894)",
+    "date": "1848",
+    "licence": "CC0 (Cleveland Museum of Art)",
+    "page": "https://clevelandart.org/art/1921.239",
+    "source": "cma:103159"
+  },
+  "daubigny_1848_the_mill.jpg": {
+    "title": "The Mill",
+    "artist": "Charles Fran\u00e7ois Daubigny (French, 1817-1878)\nafter Jan Symonsz Pynas (Dutch, 1583/84-1631)",
+    "date": "1848",
+    "licence": "CC0 (Art Institute of Chicago)",
+    "page": "https://www.artic.edu/artworks/43249",
+    "source": "aic:43249"
+  },
+  "khm_1812_rumpelstilzchen_p253.jpg": {
+    "title": "File:Kinder und Hausm\u00e4rchen (Grimm) 1812 I 253.jpg",
+    "artist": "Br\u00fcder Grimm",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kinder_und_Hausm%C3%A4rchen_(Grimm)_1812_I_253.jpg"
+  },
+  "rackham_1909_fire_dance.jpg": {
+    "title": "File:Grimm-Rackham-204.jpg",
+    "artist": "Brothers Grimm",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Grimm-Rackham-204.jpg"
   }
 }
