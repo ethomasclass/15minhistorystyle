@@ -8,7 +8,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, interpolate, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from './lib/anim';
 import {makeTimeline, type Narration} from './lib/timing';
-import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, usePal} from './kit/Kit';
+import {Finish, Highlight, JF, Loop as Ring, Note, PALETTES, PaletteCtx, StepCtx, usePal} from './kit/Kit';
 import {Sfx} from './kit/common';
 import {hasFile, Stamp, type TL, useScene} from './kit/shell';
 import {Desk, DropCard, LOOK, StandIn} from './kit/bs';
@@ -164,17 +164,21 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
         <Highlight text="GUESS HIS NAME" x={90} y={1060} size={88} at={at('guessing his name')} seed={81} rot={-3} />
       </Desk>
     )],
-    // 0:50 Two endings, split top and bottom
+    // 0:50 Two endings, in the Grimms' own copy of 1812: the printed ending crossed out, the new one in the margin
     [at('In 1812, he') - 1, (
       <Desk a={at('In 1812, he')}>
-        <Card p={IMG.dance} x={90} y={300} w={360} rot={-3} at={at('In 1812, he')} />
-        <Note text="1812:" x={500} y={360} size={70} rot={-3} at={at('In 1812, he')} color="#ffffff" />
-        <Note text="storms off." x={500} y={450} size={66} rot={-3} at={at('storms off') - 2} color={pal.mark} />
-        <Card p={IMG.ending} x={600} y={600} w={300} rot={3} at={at('By 1857,')} />
-        <Note text="1857:" x={90} y={760} size={70} rot={-3} at={at('By 1857,')} color="#ffffff" />
-        <Note text="tears himself" x={90} y={850} size={62} rot={-3} at={at('tears himself') - 2} color={pal.subject} />
-        <Note text="in two." x={110} y={930} size={62} rot={-3} at={at('in two.') - 2} color={pal.subject} />
-        <Note text="okay. dramatic." x={90} y={1040} size={66} rot={-4} at={at('Okay.') - 2} color="#ffffff" />
+        <Card p={IMG.page255} x={90} y={300} w={900} rot={-1} at={at('In 1812, he')} out={at('Okay.')} />
+        {frame < at('Okay.') && (
+          <>
+            <Ring cx={360} cy={614} rx={300} ry={48} at={at('storms off') - 2} dur={10} width={7} seed={11} />
+            <Ring cx={845} cy={715} rx={150} ry={200} at={at('By 1857,') + 2} dur={12} width={7} seed={12} color={pal.subject} />
+            <Note text="the Grimms' own copy, 1812" x={90} y={250} size={46} rot={-2} at={at('In 1812, he')} color="#ffffff" />
+            <Note text="printed: storms off." x={90} y={950} size={60} rot={-3} at={at('storms off') - 2} color={pal.mark} />
+            <Note text="margin: tears himself in two." x={90} y={1040} size={56} rot={-3} at={at('tears himself') - 2} color={pal.subject} />
+          </>
+        )}
+        <Card p={IMG.nielsen} x={230} y={300} w={600} rot={2} at={at('Okay.') - 1} />
+        <Note text="okay. dramatic." x={220} y={1090} size={64} rot={-4} at={at('Okay.') + 2} color="#ffffff" />
       </Desk>
     )],
     // 0:57 Thousands of years; then the phone again: 1812 → 2026 (the loop)
