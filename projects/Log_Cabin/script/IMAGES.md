@@ -1,5 +1,7 @@
 # Log Cabin: images
 
+**No AI images or AI video for this video (user's call).** Gaps are filled with archival details, period documents and hand-drawn teal graphics.
+
 Archival images downloaded so far are in `public/img/chNN/`. Every download's credit is in `public/img/credits.json`. All of them passed the source's public-domain test (LOC "No known restrictions", Commons PD/CC0, or Internet Archive books published before 1930).
 
 ## By chapter
