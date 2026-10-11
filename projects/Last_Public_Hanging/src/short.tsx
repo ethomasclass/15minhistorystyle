@@ -10,7 +10,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from './lib/anim';
 import {makeTimeline, type Narration, type Word} from './lib/timing';
-import {Arrow, Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, usePal} from './kit/Kit';
+import {Arrow, Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, usePal} from './kit/Kit';
 import {DarkPaper, Sfx} from './kit/common';
 import {Wordmark} from './kit/Intro';
 import {hasFile, Stamp, type TL, useScene} from './kit/shell';
@@ -181,7 +181,7 @@ const Crowd: React.FC<{a: number; b: number; z: [number, number]; children?: Rea
 const Scenes: React.FC<{t: TL}> = ({t}) => {
   const at = t.at;
   const pal = usePal();
-  const S = IMG.scaffold;
+  const T = (p: Pic) => <Tag text={p.tag} x={44} y={TAG_Y} />;
   const cuts: [number, React.ReactNode][] = [
     // 0:00 Sunrise · 20,000 · "usually called"
     [0, (
@@ -197,24 +197,27 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [at('That June') - 1, (
       <Desk a={at('That June')}>
         <Folder at={at('That June') - 1} label="DAVIESS CO. · 1936" />
-        <Card p={IMG.town} x={110} y={380} w={560} rot={-3} at={at('That June')} filter={LOOK.doc} />
-        <Note text="June 1936" x={700} y={420} size={60} rot={-4} at={at('That June')} />
+        <Card p={IMG.town} x={110} y={350} w={330} rot={-3} at={at('That June')} filter={LOOK.doc} />
+        {T(IMG.town)}
+        <Note text="June 1936" x={600} y={420} size={60} rot={-4} at={at('That June')} />
         <Note text="Lischia Edwards, 70" x={110} y={830} size={60} rot={-3} at={at('Lischia') - 3} color="#ffffff" />
         <Note text="killed in her home" x={130} y={915} size={52} rot={-3} at={at('attacked') - 3} color="#ffffff" />
-        <Note text="Rainey Bethea" x={110} y={995} size={56} rot={-3} at={at('Rainey') - 2} color="#ffffff" />
-        <Stamp text="CONFESSED" x={110} y={1065} at={at('confessed')} size={74} color={pal.subject} rot={-3} />
+        <Note text="Rainey Bethea" x={110} y={975} size={56} rot={-3} at={at('Rainey') - 2} color="#ffffff" />
+        <Stamp text="CONFESSED" x={110} y={1078} at={at('confessed')} size={74} color={pal.subject} rot={-3} />
       </Desk>
     )],
     // 0:19 The law: two crimes, two punishments
     [at('Under Kentucky') - 1, (
       <Desk a={at('Under Kentucky')}>
         <Folder at={-99} label="KENTUCKY LAW · 1936" />
-        <Card p={IMG.prison} x={100} y={360} w={880} rot={-2} at={at('Under Kentucky')} />
+        <Card p={IMG.prison} x={120} y={340} w={740} rot={-2} at={at('Under Kentucky')} />
+        <Note text="Eddyville, Ky." x={620} y={300} size={44} rot={-3} at={at('Under Kentucky') + 4} color="#2b2113" />
+        {T(IMG.prison)}
         <Note text="murder → electric chair" x={90} y={810} size={60} rot={-3} at={at('murder') - 2} color="#ffffff" />
         <Note text="(inside prison walls)" x={130} y={885} size={44} rot={-3} at={at('inside') - 2} color="#ffffff" />
         <Note text="sexual assault →" x={90} y={965} size={60} rot={-3} at={at('one crime') - 2} color={pal.subject} />
         <Note text="a PUBLIC hanging" x={150} y={1045} size={66} rot={-3} at={at('public') - 2} color={pal.subject} />
-        <Stamp text="CHARGED: THAT ONE" x={130} y={560} at={at('So prosecutors')} size={76} color="#FF9F1C" rot={-6} />
+        <Stamp text="CHARGED: THAT ONE" x={130} y={600} at={at('So prosecutors')} size={76} color="#FF9F1C" rot={-6} />
       </Desk>
     )],
     // 0:30 Guilty plea · the jury stopwatch
@@ -226,52 +229,67 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
         <Stopwatch x={540} y={860} r={210} a={at('took about')} b={at('minutes.') + 6} mins={4.5} />
       </Desk>
     )],
-    // 0:35 The headline: Sheriff Florence Thompson
+    // 0:35 The headline: Sheriff Florence Thompson, as the 1936 papers ran her
     [at('Then reporters') - 1, (
-      hasFile(IMG.thompson.src) ? (
-        <Arch src={IMG.thompson.src} tag={IMG.thompson.tag} a={at('Then reporters')} b={at("She didn't.")} z={[1.04, 1.14]} pos={IMG.thompson.pos ?? '50% 30%'} tagY={TAG_Y}>
-          <Note text="the headline:" x={70} y={300} size={58} rot={-3} at={at('headline') - 2} color="#ffffff" />
-          <Highlight text="A WOMAN SHERIFF" x={60} y={380} size={96} at={at('a woman')} seed={71} rot={-3} />
-          <Note text="Sheriff Florence Thompson" x={70} y={900} size={56} rot={-3} at={at('Florence') - 2} color="#ffffff" />
-          <Note text="would she pull the lever?" x={70} y={1010} size={62} rot={-3} at={at('Would she') - 2} color={pal.subject} />
-        </Arch>
-      ) : (
-        <Desk a={at('Then reporters')}>
-          <Card p={IMG.thompson} x={260} y={330} w={560} at={at('Then reporters')} />
-          <Note text="would she pull the lever?" x={70} y={1010} size={62} rot={-3} at={at('Would she') - 2} color={pal.subject} />
-        </Desk>
-      )
+      <Desk a={at('Then reporters')}>
+        <Card p={IMG.thompson} x={70} y={300} w={360} rot={-2} at={at('Then reporters')} filter={LOOK.doc} />
+        {T(IMG.thompson)}
+        <Note text="the headline:" x={480} y={330} size={56} rot={-3} at={at('headline') - 2} color="#ffffff" />
+        <Note text="a woman sheriff" x={480} y={420} size={62} rot={-3} at={at('a woman')} color={pal.subject} />
+        <Note text="Florence Thompson" x={480} y={540} size={54} rot={-3} at={at('Florence') - 2} color="#ffffff" />
+        <Note text="sheriff since April," x={480} y={620} size={46} rot={-3} at={at('took the job') - 2} color="#ffffff" />
+        <Note text="when her husband died" x={480} y={685} size={46} rot={-3} at={at('husband') - 2} color="#ffffff" />
+        <Note text="would she" x={480} y={820} size={62} rot={-3} at={at('Would she') - 2} color={pal.mark} />
+        <Note text="pull the lever?" x={490} y={900} size={62} rot={-3} at={at('pull the') - 2} color={pal.mark} />
+      </Desk>
     )],
-    // 0:44 "She didn't. A volunteer did." Back to the crowd; the scaffold circled.
+    // 0:44 "She didn't. A volunteer did." The scaffold, cropped below the platform; circled.
     [at("She didn't.") - 1, (
-      <Crowd a={at("She didn't.")} b={at('Papers across')} z={[1.0, 1.06]}>
-        <Loop cx={S.x} cy={S.y} rx={S.rx} ry={S.ry} at={at("She didn't.") + 4} dur={14} width={7} seed={5} />
-        <Note text="she didn't." x={70} y={300} size={70} rot={-3} at={at("She didn't.")} color="#ffffff" />
-        <Note text="a volunteer did." x={90} y={1010} size={66} rot={-3} at={at('A volunteer') - 2} color={pal.mark} />
-      </Crowd>
+      <Desk a={at("She didn't.")}>
+        <Card p={IMG.scaffold} x={60} y={330} w={960} rot={-1} at={at("She didn't.") - 1} />
+        <Loop cx={330} cy={560} rx={300} ry={230} at={at("She didn't.") + 4} dur={14} width={7} seed={5} />
+        {T(IMG.scaffold)}
+        <Note text="she didn't." x={70} y={1010} size={66} rot={-3} at={at("She didn't.")} color="#ffffff" />
+        <Note text="a volunteer did." x={480} y={1010} size={66} rot={-3} at={at('A volunteer') - 2} color={pal.mark} />
+      </Desk>
     )],
     // 0:47 The coverage: "a carnival" vs "exaggerated"
     [at('Papers across') - 1, (
       <Desk a={at('Papers across')}>
-        <Card p={IMG.paper} x={70} y={290} w={600} rot={-3} at={at('Papers across')} filter={LOOK.doc} />
-        <Note text={'papers: "a carnival"'} x={80} y={920} size={62} rot={-3} at={at('a carnival') - 3} color="#ffffff" />
-        <Note text="people there: exaggerated" x={80} y={1020} size={58} rot={-3} at={at('exaggerated') - 6} color={pal.mark} />
+        <Card p={IMG.holiday} x={70} y={320} w={930} rot={-2} at={at('Papers across')} />
+        <Card p={IMG.affair} x={90} y={470} w={900} rot={1.5} at={at('Papers across') + 6} />
+        <Card p={IMG.watch15} x={150} y={590} w={760} rot={-1.5} at={at('Papers across') + 12} />
+        {T(IMG.holiday)}
+        <Note text={'papers: "a carnival"'} x={80} y={1000} size={60} rot={-3} at={at('a carnival') - 3} color="#ffffff" />
+        <Note text="people there: exaggerated" x={80} y={1080} size={54} rot={-3} at={at('exaggerated') - 6} color={pal.mark} />
       </Desk>
     )],
-    // 0:54 1938
+    // 0:54 1938: the repeal
     [at('Either way') - 1, (
       <Desk a={at('Either way')}>
-        <Folder at={-99} label="ACTS OF KENTUCKY · 1938" />
-        <Card p={IMG.statute} x={150} y={360} w={780} rot={-2} at={at('Either way')} filter={LOOK.doc} />
-        <Note text="Kentucky, embarrassed" x={90} y={300} size={56} rot={-3} at={at('embarrassed') - 3} color="#ffffff" />
-        <Stamp text="1938 · ENDED" x={110} y={980} at={at('1938,')} size={130} color={pal.subject} rot={-4} />
+        <Note text="Kentucky, embarrassed" x={80} y={300} size={56} rot={-3} at={at('embarrassed') - 3} color="#ffffff" />
+        <Card p={IMG.anderson} x={90} y={400} w={330} rot={-2} at={at('In 1938,')} />
+        {T(IMG.anderson)}
+        <Note text="the repeal bill:" x={470} y={430} size={50} rot={-3} at={at('In 1938,')} color="#ffffff" />
+        <Note text="Rep. Charles W." x={470} y={510} size={52} rot={-3} at={at('In 1938,') + 4} color={pal.mark} />
+        <Note text="Anderson Jr." x={490} y={580} size={52} rot={-3} at={at('In 1938,') + 8} color={pal.mark} />
+        <Note text="Kentucky's first" x={470} y={680} size={44} rot={-3} at={at('it ended') - 2} color="#ffffff" />
+        <Note text="Black legislator" x={480} y={740} size={44} rot={-3} at={at('it ended') + 2} color="#ffffff" />
+        <Stamp text="1938 · ENDED" x={110} y={1000} at={at('public hangings.')} size={120} color={pal.subject} rot={-4} />
       </Desk>
     )],
-    // 0:58 the same crowd, the same crop as the first frame: the loop
+    // 0:58 "Twenty thousand people came to watch." The faces in the crowd.
     [at('Twenty thousand') - 1, (
-      <Crowd a={at('Twenty thousand')} b={at('Thanks') - 8} z={[1.0, 1.12]}>
-        <Note text="20,000 came to watch." x={70} y={300} size={64} rot={-3} at={at('Twenty thousand')} color="#ffffff" />
-        <Note text="the end of watching." x={90} y={1010} size={70} rot={-3} at={at('end of watching') - 2} color={pal.subject} />
+      <Desk a={at('Twenty thousand')}>
+        <Card p={IMG.faces} x={60} y={320} w={960} rot={-1} at={at('Twenty thousand') - 1} />
+        {T(IMG.faces)}
+        <Note text="20,000 came to watch." x={70} y={1060} size={64} rot={-3} at={at('Twenty thousand')} color="#ffffff" />
+      </Desk>
+    )],
+    // 1:00 the same crowd, the same crop as the first frame: the loop
+    [at('What they really') - 1, (
+      <Crowd a={at('What they really')} b={at('Thanks') - 8} z={[1.0, 1.12]}>
+        <Note text="the end of watching." x={90} y={1040} size={74} rot={-3} at={at('end of watching') - 2} color="#ffffff" />
       </Crowd>
     )],
   ];
@@ -311,7 +329,7 @@ export const LastPublicShort: React.FC = () => {
   const t = makeTimeline(NARR, FPS);
   const endAt = t.at('Thanks') - 10;
   const cut = Math.round(CUT * FPS);
-  const cutsAt = ['That June', 'Under Kentucky', 'He pleaded', 'Then reporters', "She didn't.", 'Papers across', 'Either way', 'Twenty thousand'].map((p) => t.at(p) - 1);
+  const cutsAt = ['That June', 'Under Kentucky', 'He pleaded', 'Then reporters', "She didn't.", 'Papers across', 'Either way', 'Twenty thousand', 'What they really'].map((p) => t.at(p) - 1);
   return (
     <PaletteCtx.Provider value={PALETTES.locked}>
       <StepCtx.Provider value={2.5}>
@@ -333,7 +351,7 @@ export const LastPublicShort: React.FC = () => {
           {cutsAt.map((f, i) => <Sfx key={i} at={f} src="sfx/page_turn.wav" volume={0.18} />)}
           <Sfx at={t.at('confessed')} src="sfx/stamp.wav" volume={0.25} />
           <Sfx at={t.at('pleaded')} src="sfx/stamp.wav" volume={0.25} />
-          <Sfx at={t.at('1938,')} src="sfx/stamp.wav" volume={0.3} />
+          <Sfx at={t.at('public hangings.')} src="sfx/stamp.wav" volume={0.3} />
           <Sfx at={t.at('took about')} src="sfx/tick.wav" volume={0.2} />
           <Sfx at={t.at('tap like') + 2} src="sfx/marker_tick.wav" volume={0.3} />
           <Sfx at={t.at('and subscribe') + 4} src="sfx/marker_tick.wav" volume={0.3} />
