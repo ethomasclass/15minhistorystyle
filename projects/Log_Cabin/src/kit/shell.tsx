@@ -113,7 +113,7 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
  * Narration starts at `lead`; `body` is rendered in narration time (frame 0 = first sample of narration).
  */
 export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number;
-  music?: {src: string; volume?: number; startFrom?: number; from?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
+  music?: {src: string; volume?: number; startFrom?: number; from?: number; to?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
   const frame = useCurrentFrame();
   // `extra` frames after the narration: a music-only end screen on the last chapter (add the same to its FRAMES)
   const total = chapterFrames(n, lead) + extra;
@@ -132,7 +132,11 @@ export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; 
             {music.map((m, i) => (
               <Sequence key={i} from={m.from ?? 0} layout="none">
                 <Audio src={staticFile(m.src)} startFrom={m.startFrom ?? 0}
-                  volume={(f) => interpolate(f, [0, 20, total - lead - (m.from ?? 0) - 40, total - lead - (m.from ?? 0)], [0, m.volume ?? 0.15, m.volume ?? 0.15, 0], clamp)} />
+                  volume={(f) => {
+                    // fade out by `to` (narration frame) if given, else at the chapter's end
+                    const end = (m.to ?? total - lead) - (m.from ?? 0);
+                    return interpolate(f, [0, 20, end - 40, end], [0, m.volume ?? 0.15, m.volume ?? 0.15, 0], clamp);
+                  }} />
               </Sequence>
             ))}
           </Sequence>
