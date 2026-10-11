@@ -19,7 +19,8 @@ import {IMG, type Pic} from './images';
 const WAV = 'audio/short_rumpelstiltskin.wav';
 const BEAT = 0.9;
 const HOLD = 45;
-const MUSIC = {src: 'music/j_good_feelings.mp3', from: 8, vol: 0.27};
+// r_schools: its comic final button (the last note before 59.3 s of the cue) lands on "a computer did too."
+const MUSIC = {src: 'music/r_schools.mp3', vol: 0.13, soundEnd: 59.27, landOn: 'did too.'};
 const CLIP = {tiptoe: 'video/ai_clip_tiptoe_shush_muted.mp4', dance: 'video/ai_clip_dance_muted.mp4', tiptoeFrames: 99, danceFrames: 75};
 
 const {narr: NARR, cut: CUT, lastWordEnd} = withBeat(words as Narration, 'Thanks', BEAT);
@@ -213,8 +214,9 @@ export const RumpelShort: React.FC = () => {
           <Sequence from={cut + Math.round(BEAT * FPS)} layout="none">
             <Audio src={staticFile(WAV)} startFrom={cut} />
           </Sequence>
-          <Audio src={staticFile(MUSIC.src)} startFrom={MUSIC.from * FPS}
-            volume={(g) => interpolate(g, [0, 12, endAt - 10, endAt + 20], [0, MUSIC.vol, MUSIC.vol, 0.08], clamp)} />
+          <Sequence from={Math.max(0, t.end(MUSIC.landOn) + 6 - Math.round(MUSIC.soundEnd * FPS))} layout="none">
+            <Audio src={staticFile(MUSIC.src)} volume={(g) => interpolate(g, [0, 8], [0, MUSIC.vol], clamp)} />
+          </Sequence>
           {cutsAt.map((g, i) => <Sfx key={i} at={g} src="sfx/whoosh.wav" volume={0.22} />)}
           <Sfx at={t.at('made with AI,')} src="sfx/stamp.wav" volume={0.3} />
           <Sfx at={t.at('1812', 1)} src="sfx/stamp.wav" volume={0.25} />

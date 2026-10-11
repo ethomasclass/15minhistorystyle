@@ -65,7 +65,7 @@ Thanks for watching. If you want more history like this, tap like, and subscribe
 - **"thousands of years old"**: a counter rolling back the years (the counter idea), stopping on "?".
 - **Topic strip:** **THIS SCENE NEVER EXISTED**.
 - **Loop:** the last frame is the drawn phone again, now stamped **1812 → 2026**, matching the first frame's phone.
-- **Music:** something curious and light from the library (`j_good_feelings`, the "pleasant, with a hint of mischief" Ouija cue, at a 0.26–0.3 bed; or `r_spirits_dark` at about 0.13 for an eerier take).
+- **Music: `r_schools`** (your pick), the bouncy pizzicato and glockenspiel cue, at a 0.13 bed. It comes in about 4.7 s in, on "tiptoes", so its comic final button lands on "a computer did too." The end card plays under the narration with no music.
 
 ### Cut list (to get under a minute)
 
