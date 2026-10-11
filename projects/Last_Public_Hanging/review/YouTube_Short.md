@@ -24,3 +24,13 @@ Images: 1936 and 1938 newspapers from the Library of Congress (Chronicling Ameri
 - Audience: "Not made for kids".
 - If YouTube limits ads, request a human review. The Short is non-graphic and educational: the hanging itself is never shown, and the body is never shown.
 - If Thompson's modern portrait from the sheriff's office (CC BY-SA 3.0) goes back into the Short, add the line: `Sheriff Florence Thompson portrait: Daviess County Sheriff's Office, CC BY-SA 3.0`.
+
+**Pinned comment** (pick one):
+
+```
+One detail that didn't fit in 60 seconds: the 1938 bill that ended public executions in Kentucky was sponsored by Rep. Charles W. Anderson Jr., the first Black member of the state legislature. What's a piece of local history from your town that most people have never heard of?
+```
+
+```
+The sheriff in this story never pulled the lever, but newspapers across the country had already written the headline. What's a moment in history you think the newspapers got wrong?
+```
