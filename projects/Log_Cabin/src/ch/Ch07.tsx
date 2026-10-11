@@ -134,9 +134,9 @@ const Tyler: React.FC<{t: TL}> = ({t}) => {
       <Note text="critics: 'His Accidency'" x={810} y={280} size={58} rot={-3} at={t.at('His Accidency.') - 3} color={pal.subject} />
       <Note text="a former Democrat" x={810} y={400} size={52} rot={-3} at={t.at('a former Democrat') - 3} color="#ffffff" />
       <Note text="vetoes the Whigs' bank bill" x={810} y={500} size={52} rot={-3} at={t.at('vetoed') - 3} />
-      <Sketch d={DOOR} x={1620} y={620} w={200} at={t.at('So the Whigs threw') - 2} dur={8} seed="dr" />
-      <RubberStamp text="OUT" x={1600} y={720} at={t.at('out of the party.')} size={110} rot={-14} />
-      <Note text="the Whigs throw out their own VP" x={810} y={640} size={48} rot={-3} at={t.at('So the Whigs threw') - 3} />
+      <Sketch d={DOOR} x={1660} y={560} w={190} at={t.at('So the Whigs threw') - 2} dur={8} seed="dr" />
+      <RubberStamp text="OUT" x={1630} y={660} at={t.at('out of the party.')} size={110} rot={-14} />
+      <Note text="they throw out their own VP" x={810} y={640} size={46} rot={-3} at={t.at('So the Whigs threw') - 3} />
       <Note text="within months" x={850} y={760} size={60} rot={-3} at={t.at('Within months.') - 3} color={pal.subject} />
       <Tag text="Charles Fenderich, John Tyler, 1841 · Library of Congress" />
     </Board>
