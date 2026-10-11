@@ -19,7 +19,7 @@ import {Cover} from './cover';
 
 const WAV = 'audio/short_rumpelstiltskin.wav';
 const BEAT = 0.9;
-const COVER = {id: 'A' as const, frames: 45, fade: 6};  // hook cover: the first 1.5 s, fully drawn from frame 0 (pick it as the Shorts cover)
+const COVER = {id: 'C' as const, frames: 45, fade: 6};  // hook cover: the first 1.5 s, fully drawn from frame 0 (pick it as the Shorts cover)
 const HOLD = 45;
 // r_schools: its comic final button (the last note before 59.3 s of the cue) lands on "a computer did too."
 const MUSIC = {src: 'music/r_schools.mp3', vol: 0.13, soundEnd: 59.27, landOn: 'did too.'};
