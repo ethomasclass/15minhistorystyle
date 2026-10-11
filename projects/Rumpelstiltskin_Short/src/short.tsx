@@ -15,9 +15,11 @@ import {Desk, DropCard, LOOK, StandIn} from './kit/bs';
 import {Captions, EndCard, Folder, FPS, Mark, PhoneWide, ScreenStill, TopicStrip, withBeat} from './kit/vshort';
 import words from '../public/audio/short_rumpelstiltskin.words.json';
 import {IMG, type Pic} from './images';
+import {Cover} from './cover';
 
 const WAV = 'audio/short_rumpelstiltskin.wav';
 const BEAT = 0.9;
+const COVER = {id: 'A' as const, frames: 45, fade: 6};  // hook cover: the first 1.5 s, fully drawn from frame 0 (pick it as the Shorts cover)
 const HOLD = 45;
 // r_schools: its comic final button (the last note before 59.3 s of the cue) lands on "a computer did too."
 const MUSIC = {src: 'music/r_schools.mp3', vol: 0.13, soundEnd: 59.27, landOn: 'did too.'};
@@ -198,6 +200,7 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
 };
 
 export const RumpelShort: React.FC = () => {
+  const frame = useCurrentFrame();
   const t = makeTimeline(NARR, FPS);
   const endAt = t.at('Thanks') - 10;
   const cut = Math.round(CUT * FPS);
@@ -208,8 +211,13 @@ export const RumpelShort: React.FC = () => {
         <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
           <Scenes t={t} />
           <EndCard t={t} />
-          <Captions n={NARR} until={endAt} />
+          {frame >= COVER.frames && <Captions n={NARR} until={endAt} />}
           <TopicStrip text="THIS SCENE NEVER EXISTED" until={endAt} />
+          {frame < COVER.frames + COVER.fade && (
+            <AbsoluteFill style={{opacity: interpolate(frame, [COVER.frames, COVER.frames + COVER.fade], [1, 0], clamp)}}>
+              <Cover id={COVER.id} at={-40} />
+            </AbsoluteFill>
+          )}
           <Mark />
           <Audio src={staticFile(WAV)} endAt={cut} />
           <Sequence from={cut + Math.round(BEAT * FPS)} layout="none">

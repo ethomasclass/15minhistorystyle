@@ -18,11 +18,13 @@ import {Arch, Desk, DropCard, LOOK, StandIn} from './kit/bs';
 import {Parallax} from './kit/parallax';
 import words from '../public/audio/short_last_public_hanging.words.json';
 import {IMG, type Pic} from './images';
+import {Cover} from './cover';
 
 const FPS = 30;
 const FRAME: [number, number] = [1080, 1920];
 const WAV = 'audio/short_last_public_hanging.wav';
-const BEAT = 0.9;      // extra silence before the like/subscribe line, seconds
+const BEAT = 0.9;
+const COVER = {id: 'B' as const, frames: 45, fade: 6};  // hook cover: the first 1.5 s, fully drawn from frame 0 (pick it as the Shorts cover)      // extra silence before the like/subscribe line, seconds
 const HOLD = 45;       // end card holds after the last word, frames
 const TAG_Y = 1490;
 const MUSIC = {src: 'music/w_aftermath.mp3', vol: 0.12};
@@ -326,6 +328,7 @@ const EndCard: React.FC<{t: TL}> = ({t}) => {
 };
 
 export const LastPublicShort: React.FC = () => {
+  const frame = useCurrentFrame();
   const t = makeTimeline(NARR, FPS);
   const endAt = t.at('Thanks') - 10;
   const cut = Math.round(CUT * FPS);
@@ -337,9 +340,14 @@ export const LastPublicShort: React.FC = () => {
           <Scenes t={t} />
           <EndCard t={t} />
           {/* a dark band behind the captions so they read over any picture */}
-          {useCurrentFrame() < endAt && <div style={{position: 'absolute', left: 0, top: 1130, width: 1080, height: 360, background: 'linear-gradient(180deg, rgba(8,7,5,0) 0%, rgba(8,7,5,0.75) 30%, rgba(8,7,5,0.75) 75%, rgba(8,7,5,0) 100%)'}} />}
-          <Captions n={NARR} until={endAt} />
+          {frame < endAt && <div style={{position: 'absolute', left: 0, top: 1130, width: 1080, height: 360, background: 'linear-gradient(180deg, rgba(8,7,5,0) 0%, rgba(8,7,5,0.75) 30%, rgba(8,7,5,0.75) 75%, rgba(8,7,5,0) 100%)'}} />}
+          {frame >= COVER.frames && <Captions n={NARR} until={endAt} />}
           <TopicStrip until={endAt} underlineAt={t.at('usually')} />
+          {frame < COVER.frames + COVER.fade && (
+            <AbsoluteFill style={{opacity: interpolate(frame, [COVER.frames, COVER.frames + COVER.fade], [1, 0], clamp)}}>
+              <Cover id={COVER.id} at={-40} />
+            </AbsoluteFill>
+          )}
           <Mark />
           {/* narration: the story, then (after a beat) the like/subscribe line */}
           <Audio src={staticFile(WAV)} endAt={cut} />
