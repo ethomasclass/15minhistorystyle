@@ -121,7 +121,7 @@ const Booze: React.FC<{t: TL}> = ({t}) => {
       <Note text="whiskey in cabin-shaped bottles" x={780} y={230} size={56} rot={-3} at={t.at('sells whiskey') - 3} />
       <Note text="the word 'booze' comes from this?" x={780} y={380} size={52} rot={-3} at={t.at('some people say') - 3} color="#FF9F1C" />
       {g >= t.at('booze') && <Highlight text="BOOZE?" x={800} y={480} size={120} at={t.at('booze')} seed={77} rot={-3} />}
-      <RubberStamp text="MYTH" x={1260} y={470} at={t.at("It isn't.", 2)} size={120} rot={-12} />
+      <RubberStamp text="MYTH" x={1420} y={520} at={t.at("It isn't.", 2)} size={120} rot={-12} />
       <Note text="the word is much older" x={800} y={760} size={64} rot={-3} at={t.at('much older.') - 3} />
     </Board>
   );

@@ -94,7 +94,7 @@ const Whigs: React.FC<{t: TL}> = ({t}) => {
       {g >= t.at('The Whigs.') && <Highlight text="THE WHIGS" x={110} y={200} size={130} at={t.at('The Whigs.')} seed={31} rot={-2} />}
       <Note text="a new party, built to stop Jackson" x={130} y={420} size={56} rot={-3} at={t.at('A new party') - 3} />
       <DrawnCrown x0={1220} x1={1600} y={560} h={170} at={t.at('opposed kings') - 2} />
-      <Strike x1={1150} y1={600} x2={1690} y2={330} at={t.at('acted like one') - 2} color={pal.subject} />
+      <Strike x1={1290} y1={640} x2={1690} y2={330} at={t.at('acted like one') - 2} color={pal.subject} />
       <Note text="named for a British party that opposed kings" x={130} y={560} size={46} rot={-3} at={t.at('The name comes') - 3} />
       <Note text="(we have a whole video on that)" x={150} y={840} size={44} rot={-3} at={t.at('We have a whole') - 3} color="#ffffff" />
     </Board>
