@@ -27,7 +27,7 @@ CACHE = os.path.join(OUT, "cache")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "4th": "fourth", "O.K.": "Oh-kay"}
+PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "4th": "fourth"}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
@@ -79,6 +79,7 @@ def number_words(text):
 def spoken(text):
     text = re.sub(r"\$([\d,]+)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
     text = re.sub(r"\bJanuary 1\b", "January first", text)
+    text = text.replace("O.K.", "Oh-kay")
     for k, v in PRONOUNCE.items():
         text = re.sub(rf"\b{re.escape(k)}\b", v, text)
     return number_words(text)
