@@ -1,0 +1,5 @@
+clip_in/
+out/
+node_modules/
+.env
+__pycache__/
