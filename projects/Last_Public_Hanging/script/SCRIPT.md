@@ -1,6 +1,6 @@
 # The Last Public Execution in America (1936)
 
-**15 Minute History · Short** · standalone native vertical (1080×1920) · narration script · 184 words · about 0:59 at the locked pace (188 wpm), about 1:06 at the slower heavy pace (~168 wpm)
+**15 Minute History · Short** · standalone native vertical (1080×1920) · narration script · 201 words (184 story + 17 subscribe) · about 1:05 at the locked pace (188 wpm), about 1:12 at the slower heavy pace (~168 wpm)
 
 **Hook:** 20,000 people at sunrise to watch a hanging.
 **The point:** Kentucky had one crime that still carried a public hanging, prosecutors used it, and the national coverage that followed embarrassed the state into ending public executions.
@@ -41,7 +41,13 @@ Papers across the country called it a carnival. Some people who were there said 
 
 Twenty thousand people came to watch. What they really saw was the end of watching.
 
-**End card (3 s, no narration):** 15 Minute History · subscribe. The Short stands alone, so there's no "full story" pointer. A narrated subscribe line would step on the closing line, so it stays off. Put it in the description.
+## 0:58 | Like and subscribe (end card)
+
+*(a full beat of silence after "the end of watching", then:)*
+
+Thanks for watching. If you want more history like this, tap like, and subscribe. They're right there.
+
+**On screen:** the desk clears to the logo. On "tap like" a teal hand-drawn arrow draws toward the like button (right rail), with a small coral heart sketched at its tip. On "and subscribe" a second arrow draws down toward the Subscribe button next to the channel name (bottom left). On "right there" both arrows give one small 12 fps wiggle. A soft marker tick on each arrow and no music swell. Layout is under *End card layout* below.
 
 ---
 
@@ -55,6 +61,20 @@ Twenty thousand people came to watch. What they really saw was the end of watchi
 - **Music:** one low, sparse bed from the library, nothing percussive. A soft stamp on "1938".
 - **Pace:** A/B test 188 against ~168 wpm, since the subject is heavy. If 168 wins and you need it under 60 s, the cut list below brings it down.
 
+### End card layout (1080×1920, measured from a Short on the channel)
+
+YouTube draws its own buttons over the bottom and right of the video, so the arrows point *at* them from inside the safe area and never sit under them.
+
+| Element | Where YouTube puts it (video px) | Our arrow |
+|---|---|---|
+| Like (heart), right rail | about x 995, y 975 | starts at the word "like" around (640, 780) and ends at (920, 940), pointing right |
+| Subscribe button, next to the channel name, bottom left | about x 560–760, y 1515 | starts at the word "subscribe" around (330, 1180) and ends at (560, 1420), pointing down |
+| Comments / Share | right rail, y 1110 to 1700 | nothing here |
+
+- During the end card, captions move up to y ~1040 (or switch off) so the bottom arrow has room.
+- The logo sits small at the top left (x 40–330, y 40–150), as on the Black Sox Shorts. Nothing goes under the search icon at the top right.
+- Check on a real phone before posting: upload it unlisted, then compare a screenshot with these numbers. The button positions shift a little between phone sizes.
+
 ### Cut list (if it runs long)
 
 | Cut | Words saved |
@@ -62,16 +82,19 @@ Twenty thousand people came to watch. What they really saw was the end of watchi
 | "inside prison walls" | 3 |
 | "who took the job when her husband died that spring" → drop the clause | 10 |
 | "Sunrise." (first word) | 1 |
-| **Total** | 14 → 170 words, about 1:01 at 168 wpm |
+| "Thanks for watching." | 3 |
+| **Total** | 17 → 184 words, about 0:59 at 188 wpm |
 
-## Pronunciation (for ElevenLabs, test before voicing)
+## Pronunciation (locked after the test, in `tools/voice.py` PRONOUNCE)
 
-| Word | Say it | Note |
+| Word | Respelling | Status |
 |---|---|---|
-| Owensboro | OH-wenz-burr-oh | local pronunciation, worth checking |
-| Bethea | buh-THAY | please confirm. Family usage varies, so check a local source |
-| Lischia | LISH-uh | spelled Lischia or Lishia in different sources. Not confirmed |
-| Daviess (not in the narration) | DAY-vis | only if you add it |
+| Bethea | Buh-thee-uh | chosen by you from the test |
+| Lischia | Lish-uh | chosen by you from the test |
+| Owensboro | Oh-wenz-burr-oh | chosen by you from the test |
+| Daviess (not in the narration) | Day-viss | only if it's added |
+
+Test MP3: `script/tests/Last_Public_Hanging_pronunciation_test.mp3`.
 
 ## Fact-check flags
 
