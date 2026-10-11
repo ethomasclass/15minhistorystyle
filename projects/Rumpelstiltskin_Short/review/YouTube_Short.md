@@ -21,7 +21,7 @@ Illustrations: Anne Anderson; George Cruikshank (German Popular Stories, 1823, a
 
 **Posting notes**
 - Set "Altered or synthetic content" to **Yes**. Both the voice clone and the AI clip need it.
-- Audience: "Not made for kids". It's about kids' stories, but the YouTube Kids rules make a Short "made for kids" a poor fit here.
+- Audience: "Not made for kids" (the Short is for a general audience, not children).
 - Pick the cover from the first second (cover C, "THIS MOVIE NEVER EXISTED").
 - Search terms people use for this clip: "Rumpelstiltskin 1987", "tip toe", "Mandela effect". The title and first line already carry them, so no extra tags are needed.
-- If a copyright claim lands on the clip or the poster, the drawn-phone sketch version is ready as a swap for the clip. Only those scenes change.
+- If a copyright claim lands on the clip or the poster, the clip can be swapped for the drawn-phone sketches, or the poster for a typed index card. Only those scenes change.
