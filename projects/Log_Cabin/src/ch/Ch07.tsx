@@ -116,7 +116,7 @@ const Clause: React.FC<{t: TL}> = ({t}) => {
           <span style={{background: mark ? 'rgba(255,159,28,0.55)' : 'transparent'}}>the Same shall devolve on the Vice President</span>...
         </div>
       </PaperCard>
-      <Note text="the same what?" x={1380} y={520} size={64} rot={-4} at={t.at('whether the vice') + 4} color="#FF9F1C" />
+      <Note text="the same what?" x={1360} y={520} size={58} rot={-4} at={t.at('whether the vice') + 4} color="#FF9F1C" />
       <Note text="the office?" x={1400} y={650} size={56} rot={-3} at={t.at('became president,') - 3} />
       <Note text="or just the job?" x={1400} y={760} size={56} rot={-3} at={t.at('or just took') - 3} />
     </Board>
@@ -186,7 +186,7 @@ const TwoViews: React.FC<{t: TL}> = ({t}) => {
       <Note text="millions of ordinary voters" x={1040} y={240} size={58} rot={-3} at={t.at('millions of ordinary') - 3} />
       <Note text="who'd never felt invited" x={1050} y={380} size={58} rot={-3} at={t.at('never felt') - 3} />
       <Note text="historians still argue." x={560} y={860} size={60} rot={-3} at={t.at('Historians still') - 3} color="#ffffff" />
-      <Note text="both had a point." x={640} y={960} size={60} rot={-3} at={t.at('Both had') - 3} />
+      <Note text="both had a point." x={640} y={930} size={60} rot={-3} at={t.at('Both had') - 3} />
     </Board>
   );
 };

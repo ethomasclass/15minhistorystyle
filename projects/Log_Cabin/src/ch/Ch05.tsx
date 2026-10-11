@@ -102,7 +102,7 @@ const CityCabins: React.FC<{t: TL}> = ({t}) => {
             <Loop cx={cx} cy={cy} rx={330} ry={210} at={t.at('in the middle') + 2} seed={75} />
             <Note text="for meetings" x={1360} y={220} size={60} rot={-4} at={t.at('hold meetings') - 3} />
             <Sketch d={RACCOON} x={1500} y={420} w={300} at={t.at('Sometimes the raccoon') - 1} dur={10} seed="rc2" width={6} />
-            <Note text="sometimes the raccoon is real" x={940} y={960} size={52} rot={-3} at={t.at('is real.') - 3} color={pal.subject} />
+            <Note text="sometimes the raccoon is real" x={900} y={900} size={52} rot={-3} at={t.at('is real.') - 3} color={pal.subject} />
             <Tag text="Detail · Edward Williams Clay, The Almighty Lever, 1840 · Library of Congress" />
           </>
         );
@@ -149,7 +149,7 @@ const Ball: React.FC<{t: TL}> = ({t}) => {
   return (
     <Board>
       <svg style={{position: 'absolute', left: 0, top: 0}} width={1920} height={1080}><path d="M0,840 L1920,840" stroke="rgba(237,231,220,0.5)" strokeWidth={4} strokeDasharray="30 22" /></svg>
-      <RollingBall x0={-200} x1={1300} y={840} d={420} a={a} b={a + 110} text="TIP & TY" />
+      <RollingBall x0={240} x1={1300} y={840} d={420} a={a} b={a + 110} text="TIP & TY" />
       <Note text="town to town" x={1350} y={880} size={52} rot={-3} at={t.at('town to town') - 3} color="#ffffff" />
       {g >= t.at('keep the ball') && <Highlight text="KEEP THE BALL ROLLING!" x={110} y={110} size={100} at={t.at('keep the ball')} seed={81} rot={-2} />}
       <Note text="(that's where the phrase is said to come from)" x={130} y={290} size={46} rot={-3} at={t.at('said to') - 3} color="#FF9F1C" />

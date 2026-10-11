@@ -90,7 +90,7 @@ const Skins: React.FC<{t: TL}> = ({t}) => {
             <Loop cx={rx} cy={ry} rx={95} ry={95} at={t.at('raccoon skins') + 2} seed={53} />
             <Note text="raccoon skin" x={rx + 110} y={ry - 160} size={56} rot={-4} at={t.at('raccoon skins') - 2} />
             <Loop cx={bx} cy={by} rx={170} ry={100} at={t.at('a barrel') + 2} seed={55} color={pal.subject} />
-            <Note text="hard cider by the door" x={bx - 120} y={by + 120} size={56} rot={-3} at={t.at('a barrel') - 2} color={pal.subject} />
+            <Note text="hard cider by the door" x={bx - 160} y={880} size={56} rot={-3} at={t.at('a barrel') - 2} color={pal.subject} />
             <Tag text="Detail · Whig campaign print, 1840 · Library of Congress" />
           </>
         );
