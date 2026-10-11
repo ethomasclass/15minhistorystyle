@@ -54,8 +54,8 @@ Thanks for watching. If you want more history like this, tap like, and subscribe
   - `ai_clip_tiptoe_shush_muted.mp4`, 3.3 s: the wide tiptoe, the shush, the young woman gasping. **Used at 0:00** under "A tiny man in a sparkly tuxedo tiptoes…", playing inside the teal hand-drawn phone.
   - `ai_clip_dance_muted.mp4`, 2.5 s: the dance. **Used once at 0:21** under "It *rebuilds* the scene", where it freezes and goes gray as the gaps get filled.
   - That's under 6 seconds of a 21-second clip, always framed in our phone with our notes over it, and the Short is commentary about the clip itself. That's the fair-use setup.
-  - On-screen label, kept the whole time it plays: **"AI-generated clip, 2026 · original by @stroinaya (Instagram)"**. Leave YouTube's "Altered or synthetic content" set to Yes.
-  - A permission message to @stroinaya is still worth sending. If she objects, or a claim comes in, the backup is the teal line sketches of the scene, stamped "Rumpelstiltskin (1987)" with a coral **?**. Only those two scenes change.
+  - **Credit:** small and centered directly under the phone's screen, never in a corner: a teal handwritten **"AI clip, 2026 · @stroinaya"** at about 34 px, only while the clip plays. The words **"AI clip"** stay, because they're what makes clear the footage is fake. Leave YouTube's "Altered or synthetic content" set to Yes.
+  - A permission message is optional. If the creator objects, or a claim comes in, the backup is the teal line sketches of the scene, stamped "Rumpelstiltskin (1987)" with a coral **?**. Only those two scenes change.
   - The source file (`clip_in/`) stays out of git because it still has the song on it.
 - **"They don't." / "made with AI"** gets a stamp, **AI · 2026**, slapped on the phone.
 - **The real 1987 film.** Posters and stills are copyrighted. Use a typed **index card** ("RUMPELSTILTSKIN · Cannon Films · April 1987 · Billy Barty (title role) · Amy Irving") and, if a free one turns up, a public-domain photo of Billy Barty from his early career. Teal "the barn scene: ✗".
