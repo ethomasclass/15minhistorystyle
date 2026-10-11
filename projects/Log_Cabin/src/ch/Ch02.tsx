@@ -93,8 +93,8 @@ const Whigs: React.FC<{t: TL}> = ({t}) => {
       <Note text="his opponents:" x={110} y={110} size={60} rot={-3} at={t.at('And who are') - 3} color="#ffffff" />
       {g >= t.at('The Whigs.') && <Highlight text="THE WHIGS" x={110} y={200} size={130} at={t.at('The Whigs.')} seed={31} rot={-2} />}
       <Note text="a new party, built to stop Jackson" x={130} y={420} size={56} rot={-3} at={t.at('A new party') - 3} />
-      <DrawnCrown x0={1220} x1={1600} y={560} h={170} at={t.at('opposed kings') - 2} />
-      <Strike x1={1290} y1={640} x2={1690} y2={330} at={t.at('acted like one') - 2} color={pal.subject} />
+      <DrawnCrown x0={1380} x1={1740} y={560} h={170} at={t.at('opposed kings') - 2} />
+      <Strike x1={1350} y1={640} x2={1800} y2={330} at={t.at('acted like one') - 2} color={pal.subject} />
       <Note text="named for a British party that opposed kings" x={130} y={560} size={46} rot={-3} at={t.at('The name comes') - 3} />
       <Note text="(we have a whole video on that)" x={150} y={840} size={44} rot={-3} at={t.at('We have a whole') - 3} color="#ffffff" />
     </Board>
