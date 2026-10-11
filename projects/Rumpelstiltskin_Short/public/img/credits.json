@@ -83,14 +83,6 @@
     "page": "https://www.artic.edu/artworks/49884",
     "source": "aic:49884"
   },
-  "bresdin_spinners_interior.jpg": {
-    "title": "Spinner's Interior",
-    "artist": "Rodolphe Bresdin (French, 1822\u20131885)",
-    "date": "mid\u2013late 1800s",
-    "licence": "CC0 (Cleveland Museum of Art)",
-    "page": "https://clevelandart.org/art/1945.365",
-    "source": "cma:124394"
-  },
   "rembrandt_1641_the_windmill_etching.jpg": {
     "title": "The Windmill",
     "artist": "Rembrandt van Rijn (Dutch, 1606\u20131669)",
@@ -106,14 +98,6 @@
     "licence": "CC0 (Cleveland Museum of Art)",
     "page": "https://clevelandart.org/art/1921.239",
     "source": "cma:103159"
-  },
-  "daubigny_1848_the_mill.jpg": {
-    "title": "The Mill",
-    "artist": "Charles Fran\u00e7ois Daubigny (French, 1817-1878)\nafter Jan Symonsz Pynas (Dutch, 1583/84-1631)",
-    "date": "1848",
-    "licence": "CC0 (Art Institute of Chicago)",
-    "page": "https://www.artic.edu/artworks/43249",
-    "source": "aic:43249"
   },
   "khm_1812_rumpelstilzchen_p253.jpg": {
     "title": "File:Kinder und Hausm\u00e4rchen (Grimm) 1812 I 253.jpg",
@@ -247,5 +231,42 @@
     "date": "",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Kinder_und_Hausm%C3%A4rchen_(Grimm)_1812_I_p_001.jpg"
+  },
+  "khm_1812_grimm_handexemplar_binding.jpg": {
+    "title": "File:Kinder und Hausm\u00e4rchen (Grimm) 1812 I t 001.jpg",
+    "artist": "Br\u00fcder Grimm",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kinder_und_Hausm%C3%A4rchen_(Grimm)_1812_I_t_001.jpg"
+  },
+  "nielsen_1925_rumpelstiltskin_stamps_in_rage.jpg": {
+    "title": "File:Hansel and Gretel and other stories - color plate at frontispiece.jpg",
+    "artist": "Kay Rasmus Nielsen",
+    "date": "1921",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Hansel_and_Gretel_and_other_stories_-_color_plate_at_frontispiece.jpg"
+  },
+  "marcus_c1920_queen_with_baby_name_guessing.jpg": {
+    "title": "File:Otto-Marcus-Illustration-zu-Rumpelstilzchen.jpg",
+    "artist": "Otto Marcus",
+    "date": "circa 1920date QS:P,+1920-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Otto-Marcus-Illustration-zu-Rumpelstilzchen.jpg"
+  },
+  "ostade_1652_woman_spinning_etching.jpg": {
+    "title": "The Woman Spinning",
+    "artist": "Adriaen van Ostade (Dutch, 1610\u20131684)",
+    "date": "1652",
+    "licence": "CC0 (Cleveland Museum of Art)",
+    "page": "https://clevelandart.org/art/1943.604",
+    "source": "cma:123369"
+  },
+  "gold_half_pound_elizabeth_i_1558.jpg": {
+    "title": "Half Pound: Elizabeth I (obverse); Crowned Shield of Arms (reverse)",
+    "artist": "",
+    "date": "1558\u20131560",
+    "licence": "CC0 (Cleveland Museum of Art)",
+    "page": "https://clevelandart.org/art/1969.187",
+    "source": "cma:144453"
   }
 }
