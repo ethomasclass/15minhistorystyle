@@ -1,6 +1,6 @@
 # Log Cabin: How an Insult Won the White House
 
-**15 Minute History** · narration script · 1,324 words · about 7:10 of narration (about 7:45 finished, with the intro, title card and logo breaks)
+**15 Minute History** · narration script · 1,324 words · 7:13 of voiced narration (about 7:45 finished, with the intro, title card and logo breaks)
 
 **Driving question (asked in the cold open, answered in the last chapter):** How did an insult about a log cabin get a man elected president?
 **Answer:** the Whigs didn't argue with the insult, they wore it. The "log cabin candidate" was a rich Virginian's son with no platform, and the costume worked: nearly eight in ten eligible men voted. Critics saw politics turning into a loud, empty costume party. Supporters saw millions of ordinary voters finally being invited in. Both had a point, and the winner lasted 31 days.
@@ -9,7 +9,7 @@
 **Tone:** the absurd is the engine. Dry asides land on the props (cabins on wheels, raccoons, gold spoons, a two-hour speech on Rome). The Tippecanoe battle, the voting limits and the death get plain statements, no jokes.
 **Jackson link:** loose on purpose. Van Buren is "Jackson's vice president"; the Whig name gets one line and "we have a whole video on that." Nothing else.
 
-Timestamps assume the locked pace (~185 wpm) plus about 10 seconds for the channel intro and title card after the cold open. Re-time after voicing.
+Timestamps are from the voiced narration (Oct. 2026; chapters 6 and 7 voiced at the slower heavy pace), plus about 10 seconds for the intro and title card. Logo breaks will add a few seconds each.
 
 ---
 
@@ -33,7 +33,7 @@ To see why this worked, we have to start with a crash.
 
 ---
 
-## 1:03 | Hard Times
+## 0:56 | Hard Times
 
 1837. Andrew Jackson leaves office and hands the country to his vice president, Martin Van Buren. Van Buren is a Democrat, Jackson's party. Same name as today's party, very different one.
 
@@ -49,7 +49,7 @@ December 1839. They hold a {nominating convention}, a big meeting to choose thei
 
 ---
 
-## 2:07 | Old Tippecanoe
+## 2:01 | Old Tippecanoe
 
 William Henry Harrison. Age 67. Former congressman, governor and general.
 
@@ -63,7 +63,7 @@ Then the editor in Baltimore hands them one.
 
 ---
 
-## 2:54 | The Log Cabin Candidate
+## 2:46 | The Log Cabin Candidate
 
 The Whigs read the insult, and they don't get mad. They hug it. Fine. Harrison is the log cabin candidate.
 
@@ -77,7 +77,7 @@ Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, 
 
 ---
 
-## 3:48 | The Party
+## 3:41 | The Party
 
 Then the campaign starts. And it isn't really a campaign. It's a party.
 
@@ -97,7 +97,7 @@ The Democrats fight back with their own gimmick: O.K. clubs. O.K. for "Old Kinde
 
 ---
 
-## 5:08 | The Count
+## 4:59 | The Count
 
 November 1840. Harrison wins, 234 electoral votes to 60. In the popular vote, it's closer: about 53 percent to 47.
 
@@ -111,7 +111,7 @@ So the biggest turnout America had seen happens with millions of people left on 
 
 ---
 
-## 5:38 | Thirty-One Days
+## 5:36 | Thirty-One Days
 
 March 4th, 1841. Inauguration day. It's cold and windy. Harrison, now 68, rides to the Capitol on a white horse, with no overcoat and no hat. Then he gives the longest inaugural address ever. More than 8,000 words. Nearly two hours. Much of it is about ancient Rome.
 
