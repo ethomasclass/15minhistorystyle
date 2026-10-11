@@ -12,5 +12,34 @@
     "date": "1939date QS:P571,+1939-00-00T00:00:00Z/9",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:State_Penitentiary_-_NARA_-_280615.jpg"
+  },
+  "owensboro_courthouse_post_office_1901.jpg": {
+    "title": "File:Owensboro Kentucky courthouse and post office 1901.jpg",
+    "artist": "US Treasury Dept.",
+    "date": "1901",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Owensboro_Kentucky_courthouse_and_post_office_1901.jpg"
+  },
+  "sing_sing_electrocution_chamber_1915.jpg": {
+    "title": "Sing Sing Prison, new electrocution chamber",
+    "artist": "Robbins, T. Fred, photographer",
+    "date": "1915-01-01",
+    "licence": "No known restrictions on publication. No renewal found in Copyright.",
+    "page": "https://www.loc.gov/item/2012646357/",
+    "source": "loc:2012646357"
+  },
+  "electric_chair_sing_sing_eastman.jpg": {
+    "title": "File:Electric Chair at Sing Sing.jpg",
+    "artist": "George Eastman House",
+    "date": "2008-09-19 16:18:38",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Electric_Chair_at_Sing_Sing.jpg"
+  },
+  "../../../../../../../tmp/claude-0/sanborn_ind.jpg": {
+    "title": "File:Sanborn Fire Insurance Map from Owensboro, Daviess County, Kentucky, 1910, Plate ind.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1910",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sanborn_Fire_Insurance_Map_from_Owensboro,_Daviess_County,_Kentucky,_1910,_Plate_ind.jpg"
   }
 }
