@@ -1,9 +1,10 @@
 # The Last Public Execution in America (1936)
 
-**15 Minute History · Short** · standalone native vertical (1080×1920) · narration script · 180 words · about 0:58 at the locked pace (188 wpm), about 1:04 at the slower heavy pace (~168 wpm)
+**15 Minute History · Short** · standalone native vertical (1080×1920) · narration script · 184 words · about 0:59 at the locked pace (188 wpm), about 1:06 at the slower heavy pace (~168 wpm)
 
 **Hook:** 20,000 people at sunrise to watch a hanging.
 **The point:** Kentucky had one crime that still carried a public hanging, prosecutors used it, and the national coverage that followed embarrassed the state into ending public executions.
+**YouTube-safe wording:** the word "rape" is never spoken, captioned or titled. The narration says "sexual assault", once, in a legal sentence, with no detail.
 **Tone:** heavy. No jokes, no asides. Plain statements and numbers, room to breathe.
 
 **Kept neutral on purpose.** No present-day news, no modern people or parties, and no position on the death penalty for or against. The script covers how the execution came to be public and why public executions ended. It doesn't say whether executions should happen at all. The press account and the local account both get a line.
@@ -24,7 +25,7 @@ That June, a 70-year-old woman named Lischia Edwards had been attacked and kille
 
 ## 0:19 | The law
 
-Under Kentucky law, murder meant the electric chair, inside prison walls. But rape could still mean a *public* hanging, in the county where it happened. So prosecutors charged him with rape only.
+Under Kentucky law, murder meant the electric chair, inside prison walls. But one crime, sexual assault, could still mean a *public* hanging, in the county where it happened. So prosecutors charged him with that crime only.
 
 He pleaded guilty. An all-white jury took about four and a half minutes.
 
@@ -49,7 +50,7 @@ Twenty thousand people came to watch. What they really saw was the end of watchi
 - **Images are all archival, no AI.** The best-known 1936 crowd photographs, taken from rooftops above the lot, are a likely Parallax subject. Also: a period portrait of Sheriff Florence Thompson, a front page from the national coverage, and the 1938 Kentucky statute or a newspaper report of the repeal.
 - **Show the scaffold and the crowd, never the moment of death.** A photo of the hanged man doesn't belong in this Short.
 - **Coral subject per scene:** the crowd (0:00), Thompson (0:33), the front page (0:44).
-- **Teal notes:** "1936", "~20,000", "rape → public hanging / murder → electric chair" (a two-line card at 0:19), "4½ min", "1938: ended".
+- **Teal notes:** "1936", "~20,000", "murder → electric chair / sexual assault → public hanging" (a two-line card at 0:19; keep the on-screen wording the same as the narration), "4½ min", "1938: ended".
 - **Captions:** the Shorts standard (Inter 800, three words at a time, the spoken word in orange).
 - **Music:** one low, sparse bed from the library, nothing percussive. A soft stamp on "1938".
 - **Pace:** A/B test 188 against ~168 wpm, since the subject is heavy. If 168 wins and you need it under 60 s, the cut list below brings it down.
@@ -61,7 +62,7 @@ Twenty thousand people came to watch. What they really saw was the end of watchi
 | "inside prison walls" | 3 |
 | "who took the job when her husband died that spring" → drop the clause | 10 |
 | "Sunrise." (first word) | 1 |
-| **Total** | 14 → 166 words, about 0:59 at 168 wpm |
+| **Total** | 14 → 170 words, about 1:01 at 168 wpm |
 
 ## Pronunciation (for ElevenLabs, test before voicing)
 
@@ -80,7 +81,7 @@ Twenty thousand people came to watch. What they really saw was the end of watchi
 4. **The victim.** Lischia (or Lishia) Edwards, 70, killed in her home on East Fifth Street on June 7, 1936. The script names her so the Short isn't only about the man who killed her.
 5. **"A young man."** His age is uncertain. His own statements put his birth between 1909 and 1913, and sources give 22, 26 or 27. "Young" avoids a number.
 6. **Race.** Bethea was Black, Edwards was white, and the jury was all white. Two sources give the jury detail. These are plain facts of the case, and recent coverage (the 2025 book and the WKMS piece) treats them as central to why it drew a crowd. The script states them and draws no conclusion from them. You can cut "He was Black. She was white." (6 words) if you'd rather, but the "all-white jury" line would then need context.
-7. **Charged with rape only.** Kentucky law at the time set electrocution at the state penitentiary in Eddyville for murder, while rape could be punished by public hanging in the county seat. He was indicted only for rape, although testimony described the killing.
+7. **Charged with that crime only.** Kentucky law at the time set electrocution at the state penitentiary in Eddyville for murder, while rape could be punished by public hanging in the county seat. He was indicted only for rape, although testimony described the killing. The narration says "sexual assault" to stay advertiser-friendly. That's today's broader term for the 1936 charge, so it's accurate without being the statute's exact word. If a viewer asks, the legal charge was rape.
 8. **Plea and jury.** He pleaded guilty on June 25, 1936. The jury deliberated about four and a half minutes; some reports say "under five minutes."
 9. **Florence Thompson.** She became Daviess County sheriff after her husband died in April 1936, and the execution was legally her responsibility. She did not spring the trap. She accepted the free services of Arthur Hash, a former Louisville police officer, which is why the script says "a volunteer." Accounts say Hash was drunk and a deputy may have tripped the trap. The script says "A volunteer did" and doesn't go further, so it stays true under either account.
 10. **"Called it a carnival" / "exaggerated."** National papers reported an unruly, festive crowd, including souvenir hunters. A 2001 *New York Times* piece and local accounts say 1936 reporters exaggerated it. The script gives both.
