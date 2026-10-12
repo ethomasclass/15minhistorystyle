@@ -121,5 +121,53 @@
     "licence": "CC0 (Cleveland Museum of Art)",
     "page": "https://clevelandart.org/art/1965.553",
     "source": "cma:142029"
+  },
+  "ch08_america/pettigrew_1834_history_of_egyptian_mummies_title.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 10)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n10",
+    "source": "iabook:historyofegyptia00pett:10"
+  },
+  "ch02_word/pettigrew_1834_on_mummy_as_a_drug_chapter.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 36)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n36",
+    "source": "iabook:historyofegyptia00pett:36"
+  },
+  "ch03_mistake/pettigrew_1834_plate_mummy_cases.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 304)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n304",
+    "source": "iabook:historyofegyptia00pett:304"
+  },
+  "ch04_trade/pettigrew_1834_plate_coffin_lids.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 310)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n310",
+    "source": "iabook:historyofegyptia00pett:310"
+  },
+  "ch03_mistake/pettigrew_1834_plate_coffin_front_back.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 312)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n312",
+    "source": "iabook:historyofegyptia00pett:312"
+  },
+  "ch08_america/pettigrew_1834_plate_funeral_boat_mummy_figures.jpg": {
+    "title": "A history of Egyptian mummies, and an account of the worship and embalming of the sacred animals by the Egyptians; with remarks on the funeral ceremonies of different nations, and observations on the mummies of the Canary islands, of the ancient Peruvians, Burman priests, &c (page 298)",
+    "artist": "Pettigrew, Thomas Joseph, 1791-1865",
+    "date": "1834",
+    "licence": "public domain by age (1834)",
+    "page": "https://archive.org/details/historyofegyptia00pett/page/n298",
+    "source": "iabook:historyofegyptia00pett:298"
   }
 }
