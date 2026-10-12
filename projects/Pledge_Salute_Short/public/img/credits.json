@@ -38,5 +38,28 @@
     "call_number": "LC-USW3-041740-E",
     "source": "loc:2017864922",
     "file_url": "https://tile.loc.gov/storage-services/master/pnp/fsa/8d34000/8d34700/8d34754u.tif"
+  },
+  "youths_companion_1892_09_08_official_programme_page.jpg": {
+    "title": "The Youth's Companion  1892-09-08: Vol 65 Iss 36 (page 5)",
+    "artist": "",
+    "date": "1892-09-08",
+    "licence": "public domain by age (1892)",
+    "page": "https://archive.org/details/sim_youths-companion_1892-09-08_65_36/page/n5",
+    "source": "iabook:sim_youths-companion_1892-09-08_65_36:5"
+  },
+  "youths_companion_1892_09_08_cover.jpg": {
+    "title": "The Youth's Companion  1892-09-08: Vol 65 Iss 36 (page 0)",
+    "artist": "",
+    "date": "1892-09-08",
+    "licence": "public domain by age (1892)",
+    "page": "https://archive.org/details/sim_youths-companion_1892-09-08_65_36/page/n0",
+    "source": "iabook:sim_youths-companion_1892-09-08_65_36:0"
+  },
+  "francis_bellamy_portrait.jpg": {
+    "title": "File:Portrait of Francis Bellamy 01.jpg",
+    "artist": "Unknown photographer",
+    "date": "by 1894date QS:P,+1894-00-00T00:00:00Z/7,P1326,+1894-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_Francis_Bellamy_01.jpg"
   }
 }
