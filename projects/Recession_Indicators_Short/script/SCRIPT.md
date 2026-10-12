@@ -1,46 +1,60 @@
-# Weird Recession Predictors (Short)
+# Can Underwear Predict a Recession? (Short)
 
-**15 Minute History · Short** · standalone vertical · 173 words (159 story + 14 subscribe) · about **0:59** at the normal pace (based on the World Series Short: 155 + 14 words = 58 s).
-**Tone:** wry and quick, like the Ouija and World Series Shorts. One aside ("More than we needed to know.").
-**Neutral:** no politicians, no parties, no prediction. The ending is a fact (no recession has followed the 2022 signal so far), not a forecast. The Fed chair goes unnamed on purpose ("a Federal Reserve chairman"), per the channel's no-modern-officials habit.
+**15 Minute History · Short** · standalone vertical · 160 words (146 story + 14 subscribe) · about **0:54** at the normal pace.
+**Built for everyone:** it opens on a question and answers it out loud at the end. Each predictor follows the same pattern: the name, "The idea:" in plain words, then the evidence or a real number. No jargon (the yield curve is cut). Underwear is saved for last because it's the hook and the payoff.
+**Neutral:** no politicians, no parties, no forecast. The Fed chair is unnamed ("a Federal Reserve chairman").
 
-## Script and pictures
+## Script
 
-**Built for everyone:** it opens on a question and answers it out loud at the end. Each predictor follows the same pattern: the name, "The idea:" in plain words, then a one-word verdict. The yield curve is explained without jargon ("if you lend money for longer, you get paid more. When that flips, investors are scared").
+> Can men's underwear predict a recession?
+>
+> People have actually tried. So let's check.
+>
+> Skirts. The idea: short skirts mean good times, long skirts mean bad times. In 2010, researchers tested it. It didn't work.
+>
+> Lipstick. The idea: in hard times, people still buy small treats, like lipstick. After 9/11, lipstick sales jumped 11%. But in 2008, the worst recession in decades? They *fell* almost 6%.
+>
+> Skyscrapers. The idea: record-tall buildings open right as the economy crashes. The Empire State Building opened in 1931, in the Great Depression. Statisticians say: *coincidence.*
+>
+> And underwear. The idea: when money's tight, men stop buying new ones. A Federal Reserve chairman reportedly watched it. Yes, really. And in 2009? Men's underwear sales were on track to fall for the first time since anyone started tracking them.
+>
+> So, can underwear predict a recession? Once, maybe. But one lucky guess isn't a forecast.
+>
+> If you want more history like this, tap like, and subscribe. They're right there.
 
-| Time | Narration | Picture |
-|---|---|---|
-| 0:00 | Can you predict a recession by looking at… men's underwear? People have tried. | **Cover (1.5 s):** **CAN UNDERWEAR PREDICT A RECESSION?** over three drawn icons (a skirt, a lipstick, briefs). Then a teal checklist: ☐ skirts ☐ lipstick ☐ underwear ☐ skyscrapers ☐ ??? |
-| 0:04 | Skirts. The idea: short skirts mean good times, long skirts mean bad times. In 2010, researchers tested it. It didn't work. | A 1920s flapper next to a 1930s long dress (public domain), with a teal hemline arrow. Stamp **✗ DIDN'T WORK**. |
-| 0:13 | Lipstick. The idea: in hard times, people still buy small treats, like lipstick. Sometimes true. Often not. | A drawn lipstick and a zig-zag sales line. Checkbox **~**. |
-| 0:21 | Underwear. The idea: when money's tight, men stop buying new ones. A Federal Reserve chairman reportedly watched it. *Too much information.* | A vintage underwear ad (pre-1930), a teal "reportedly", and the card flipping face-down on "too much information". Checkbox **~**. |
-| 0:30 | Skyscrapers. The idea: record-tall buildings open right as the economy crashes. The Empire State Building, 1931. Statisticians say: *coincidence.* | The Empire State Building under construction (Library of Congress). Stamp **COINCIDENCE**, checkbox **✗**. |
-| 0:39 | So what actually works? Economists watch the yield curve. Normally, if you lend money for longer, you get paid more. When that flips, investors are scared. Since the 1960s, that's come before almost every recession. But in 2022, it flipped, and no recession came. Not yet. | Two drawn arrows: "lend 2 years → paid less, lend 10 years → paid more", which swap places (**FLIPPED**). Coral dots for past recessions all checked; a red **2022** with a "?". |
-| 0:52 | So, can you predict a recession? Not with underwear. The best tool we have is right most of the time. Not always. | The checklist again: the last box gets **"usually"**. The answer appears on screen in big type: **NOT WITH UNDERWEAR.** |
-| 0:57 | If you want more history like this, tap like, and subscribe. They're right there. | The standard end card. |
+## Pictures
 
-**Topic strip:** `WEIRD RECESSION PREDICTORS` · **Music:** `r_schools` or `a_price` (light and comic).
-**Images:** public-domain 1920s and 1930s fashion plates or photos (Library of Congress / Met / Commons), a pre-1930 underwear ad, the Empire State Building under construction (Lewis Hine, Library of Congress), the rest drawn in house. No modern logos. Estée Lauder is named but not shown.
+| Beat | Picture |
+|---|---|
+| Hook | **Cover (1.5 s):** **CAN UNDERWEAR PREDICT A RECESSION?** over drawn briefs. Then a teal checklist: ☐ skirts ☐ lipstick ☐ skyscrapers ☐ underwear |
+| Skirts | A 1920s flapper and a 1930s long dress (public domain), with a teal hemline arrow. Stamp **✗ DIDN'T WORK**. |
+| Lipstick | A drawn bar chart with two bars only: **2001: +11%** (teal, up) and **2008: −6%** (coral, down). Checkbox **✗**. |
+| Skyscrapers | The Empire State Building under construction (Library of Congress), a "1931" tag, stamp **COINCIDENCE**, checkbox **✗**. |
+| Underwear | A vintage underwear ad (pre-1930), a teal "reportedly", then a drawn sales line rising 2004–08 that dips in **2009** ("first drop since tracking began"). Checkbox **?** |
+| Answer | The checklist again: three ✗ and one **"once, maybe"**. On screen: **ONE LUCKY GUESS ≠ A FORECAST**. |
+| End card | The standard end card. |
+
+**Topic strip:** `CAN UNDERWEAR PREDICT A RECESSION?` · **Music:** `r_schools` (the comic button can land on "isn't a forecast") or `a_price`.
 
 ## YouTube text (draft)
-Title: `Can Underwear Predict a Recession?` (33 characters). Also: `Economists Tried to Predict Recessions With Underwear`. Alternative: `The Weirdest Ways People Predicted Recessions`
+Title: `Can Underwear Predict a Recession?` (33 characters)
 ```
-Skirts, lipstick, men's underwear, skyscrapers: people have tried to predict recessions with all of them. Most failed. Then there's the one economists actually trust, and what happened in 2022.
+Skirts, lipstick, skyscrapers and men's underwear: people have really tried to predict recessions with all of them. Here's what the actual sales numbers say.
 
 #Recession #Economics #History
 ```
 Pinned comment: `What's the weirdest sign of a bad economy you've noticed in real life?`
 
 ## Fact-check flags
-1. **Hemline Index, "tested in 2010… urban legend."** Franses and van Baardwijk at Erasmus University (2010) coded hemlines from the fashion magazine *L'Officiel* back to 1921 against economic cycle data from the National Bureau of Economic Research. They called the index an urban legend; at most, fashion lags the economy by about three years. The often-cited 1926 origin (George Taylor) is shaky, so the script gives no origin date.
-2. **Lipstick.** Leonard Lauder, then Estée Lauder's chairman, pointed to an 11% rise in U.S. lipstick sales after September 11, 2001. Sources describe the index as increasingly unreliable since then, hence "hit or miss."
-3. **Underwear.** Widely reported as a favorite indicator of Alan Greenspan, the former Fed chair. It's secondhand, hence "reportedly." He's left unnamed in the narration.
-4. **Skyscrapers.** The "Skyscraper Index" was proposed by the analyst Andrew Lawrence in 1999. The Empire State Building opened in 1931 during the Depression; the Burj Khalifa opened in January 2010, after Dubai's 2009 debt crisis. Barr, Mizrach and Mundra (2015) found no reliable statistical link, hence "coincidence."
-5. **Yield curve.** New York Fed research (Estrella and Mishkin) found the inverted curve preceded every U.S. recession since the late 1960s, with a few false alarms (mid-1960s, 1998), hence "almost every one." The 2022–24 inversion was the longest on record, and no recession had followed by October 2026, with the U.S. not in recession per current reporting. **Re-check before posting.** If a recession is declared, change the ending.
+1. **Hemline Index, "tested in 2010… didn't work."** Franses and van Baardwijk (Erasmus University, 2010) coded hemlines from the fashion magazine *L'Officiel* back to 1921 against economic cycle data from the National Bureau of Economic Research, and called the index an urban legend. At most, fashion lags the economy by about three years.
+2. **Lipstick +11% after 9/11.** Leonard Lauder (Estée Lauder) cited an 11% rise in U.S. lipstick sales after September 11, 2001.
+3. **Lipstick fell almost 6% in 2008.** The market researcher Kline & Company reported U.S. lipstick sales fell 5.8% in 2008. Kline reported another −5.3% in 2009; NPD put 2009 at nearly −10%. "The worst recession in decades" is the Great Recession (Dec 2007 – June 2009).
+4. **Skyscrapers.** The Empire State Building opened May 1, 1931. The "Skyscraper Index" (Andrew Lawrence, 1999) found no reliable statistical support in later tests (Barr, Mizrach and Mundra, 2015), hence "coincidence."
+5. **Underwear.** Reported as a favorite indicator of Alan Greenspan (secondhand, hence "reportedly"). The market researcher Mintel projected a 2.3% drop in U.S. men's underwear sales for 2009, the first decline since it began tracking in 2003 (as reported by the Washington Post, NBC News and HuffPost in 2009). It was a projection, hence "on track to fall."
+6. **"Once, maybe."** The 2009 underwear dip lined up with a recession; the other three don't hold up. This is the honest summary, not a claim that underwear works.
 
 ## Sources
 - [Hemline index (Wikipedia)](https://en.wikipedia.org/wiki/Hemline_index) · [Erasmus University: The Hemline index, true or false?](https://www.eur.nl/en/news/hemline-index-true-or-false)
-- [Economic indicators: lipstick and underwear (Berkeley Business Review)](https://businessreview.studentorg.berkeley.edu/economic-indicators-lipstick-and-underwear/) · [The most unusual indicators (loveMONEY)](https://www.lovemoney.com/gallerylist/154152/the-most-unusual-indicators-of-economic-prosperity)
+- [Should we stop talking about the 'lipstick effect'? (Stacker)](https://stacker.com/stories/business-economy/should-we-stop-talking-about-lipstick-effect) · [The lipstick index (Business Insider)](https://businessinsider.nl/the-lipstick-index-says-people-buy-more-makeup-when-times-get-tough-heres-where-it-comes-from-and-whether-it-can-really-predict-a-recession/)
+- [What underwear says about the economy (NBC News, 2009)](https://www.nbcnews.com/id/wbna32623977) · [HuffPost on Mintel's men's underwear figures](https://m.huffpost.com/us/entry/184863) · [Tightie Whities, the Recession, and You (TIME)](https://business.time.com/?p=1048)
 - [Skyscraper Index (Wikipedia)](https://en.wikipedia.org/wiki/Skyscraper_Index) · [The myth of the skyscraper index (History News Network)](https://historynewsnetwork.org/article/the-myth-of-the-skyscraper-index)
-- [Yield curve inversion becomes the longest on record (Globe and Mail)](https://theglobeandmail.com/investing/article-us-treasury-key-yield-curve-inversion-becomes-the-longest-on-record/)
-- [How is the economy doing right now? (NerdWallet)](https://www.nerdwallet.com/finance/learn/state-of-the-economy)
