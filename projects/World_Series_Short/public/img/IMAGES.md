@@ -48,7 +48,9 @@ Sizes are pixels (W x H). Headline crops are separate files, cut from the full p
 |---|---|---|---|---|---|
 | `john_t_brush_bain_1911.jpg` | John T. Brush, Giants owner, standing by a car (Bain News Service) | Commons (LOC LCCN2014689855) | PD (1911) | 3840x2770 | Brush portrait (the best one) |
 | `john_t_brush_bain_1910.jpg` | John T. Brush seated in an open car at the Polo Grounds (Bain) | LOC P&P 2014688602 | No known restrictions | 3000x2192 | Alternative Brush |
-| `john_mcgraw_1910_loc.jpg` | John McGraw in a NY uniform, close portrait, "c1910 Dec. 14" | LOC P&P 2007677512 | No known restrictions | 3000x2229 | McGraw (no c.1904 hi-res found; this is about 6 years later) |
+| `john_mcgraw_1905_ny_uniform.jpg` | John J. McGraw in a N.Y. uniform, 1905 (Louis Van Oeyen), holding a small elephant figure | Commons (DPLA / Cleveland Public Library) | PD (1905) | 1920x3049 | **McGraw around 1904** (vertical: suits a Short) |
+| `john_mcgraw_1910_loc.jpg` | John McGraw in a NY uniform, close portrait, "c1910 Dec. 14" | LOC P&P 2007677512 | No known restrictions | 3000x2229 | Alternative McGraw (later) |
+| `ny_giants_1904.jpg` | 1904 New York Giants team photo (Charles M. Conlon) | Commons | PD (1904) | 1920x1371 | The NL champions who refused to play |
 | `crop_1905_reach_no_worlds_championship_1904.jpg` | "THE WORLD'S CHAMPIONSHIP. THERE was no world's championship series in the fall of 1904 owing to the New York National League Club refusing to take notice of a formal challenge... issued by the Boston American League Club." | Crop of `reach_guide_1905_no_series_1904_page.jpg` | PD (1905) | 2323x1267 | **Key 1904 document** |
 | `crop_1905_reach_american_league_snubbed_brush.jpg` | "THE AMERICAN LEAGUE SNUBBED... President Brush... claimed the National League as the premier organization of America... classing the American League as a minor league." | Crop of `reach_guide_1905_american_league_snubbed_page.jpg` | PD (1905) | 2299x1248 | Brush's reasoning in print |
 | `reach_guide_1905_no_series_1904_page.jpg` / `reach_guide_1905_american_league_snubbed_page.jpg` | Full pages 102 and 105, Reach's Guide 1905 | Internet Archive `reachofficialame19041phil` | PD (1905) | 2472x3961 | Source pages |
@@ -93,7 +95,7 @@ Sizes are pixels (W x H). Headline crops are separate files, cut from the full p
   - a 1910s "WORLD'S SERIES" headline from a New York paper (the 1911 Victoria and 1923 Glendale papers are used instead).
 
   A later retry of LOC could add them. Good searches: Evening World / NY Tribune, Oct 1904, "Brush" "Boston" "world's championship"; NY Sun, Oct 1884, "championship of the world" Providence.
-- **The New York World front page from 1884** (the year of the first "world's championship"): Commons has *The Royal Feast of Belshazzar* (World front page cartoon, Oct 30, 1884). If it downloaded, it is `new_york_world_1884_belshazzar_front_page.jpg` (see the report).
-- **John McGraw c.1904 in high resolution**: LOC's 1899 halftone (2002707945) is only available as a thumbnail offsite. Commons "John J. McGraw in N.Y. Uniform, 1905" is listed in the report if it downloaded.
-- **1884 Providence Grays at high resolution**: the Commons 889x1600 version and the 1904 Giants (Conlon) photo are listed in the report if they downloaded.
-- **Pulitzer "American Editors" Allen & Ginter card (Met, CC0)**: the Met API returned 410 from here; got it via Commons only if listed in the report.
+- **The World front page from 1884**: Commons only has *The Royal Feast of Belshazzar* (Oct 30, 1884), a cartoon crop at 1096x806 with no nameplate. Not downloaded. The 1915 and 1917 nameplates are used instead.
+- **John McGraw, 1899 halftone (LOC 2002707945)**: LOC offers only a thumbnail offsite. Not needed now that the 1905 Commons portrait is here.
+- **1884 Providence Grays, larger Commons version (889x1600, `File:1884 Providence Grays.jpg`)** and **Pulitzer's 1887 Allen & Ginter "American Editors" card (Met, CC0)**: both licence-cleared, but Wikimedia returned 429 rate limits until the downloads were stopped. The Met API returned 410.
+- **Commons `Fans on the field at the Huntington Avenue Grounds, 1903 World Series`**: blocked by the same 429; two other 1903 crowd photos are here.
