@@ -58,7 +58,7 @@ export const Mark: React.FC = () => {
   return (
     <div style={{position: 'absolute', left: 40, top: 40, width: 1440 * s, height: 530 * s, overflow: 'hidden', borderRadius: 12, background: 'rgba(13,12,9,0.7)'}}>
       <div style={{position: 'absolute', left: -170 * s, top: -275 * s, width: 1920, height: 1080, transform: `scale(${s})`, transformOrigin: '0 0'}}>
-        <Wordmark clockAt={0} numAt={0} minAt={0} hisAt={0} />
+        <Wordmark clockAt={-90} numAt={-90} minAt={-90} hisAt={-90} />
       </div>
     </div>
   );
