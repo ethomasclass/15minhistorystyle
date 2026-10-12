@@ -43,6 +43,14 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   out of the chapter narration (no new voice) with word-by-word captions. No AI images (your call); 9 reused music cues, none new.
   Thumbnail: BANNED 1921 / PARTNER 2026 with Shoeless Joe (C).
 
+
+## Shorts results (log each one 48 hours after posting)
+
+| Short | Stayed to watch | Avg viewed | Views | Note |
+|---|---|---|---|---|
+| Say It Ain't So · Banned → Partner (vertical) | 12.2% | 0:18 of 0:43 (42%) | 81 | The opening was two small cards and an early quote; lost two-thirds of viewers in the first 13 s |
+| The Last Public Execution | 55.3% | 0:50 of ~1:10 | 1.1k | Cover frame, a scene with people first, no early text |
+
 ## Your standing preferences (from your notes across the videos)
 
 **Script**
