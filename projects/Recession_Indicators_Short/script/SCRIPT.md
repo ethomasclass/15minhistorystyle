@@ -1,27 +1,29 @@
 # Weird Recession Predictors (Short)
 
-**15 Minute History · Short** · standalone vertical · 172 words (158 story + 14 subscribe) · about **0:58** at the normal pace (based on the World Series Short: 155 + 14 words = 58 s).
+**15 Minute History · Short** · standalone vertical · 173 words (159 story + 14 subscribe) · about **0:59** at the normal pace (based on the World Series Short: 155 + 14 words = 58 s).
 **Tone:** wry and quick, like the Ouija and World Series Shorts. One aside ("More than we needed to know.").
 **Neutral:** no politicians, no parties, no prediction. The ending is a fact (no recession has followed the 2022 signal so far), not a forecast. The Fed chair goes unnamed on purpose ("a Federal Reserve chairman"), per the channel's no-modern-officials habit.
 
 ## Script and pictures
 
+**Built for everyone:** it opens on a question and answers it out loud at the end. Each predictor follows the same pattern: the name, "The idea:" in plain words, then a one-word verdict. The yield curve is explained without jargon ("if you lend money for longer, you get paid more. When that flips, investors are scared").
+
 | Time | Narration | Picture |
 |---|---|---|
-| 0:00 | Economists have tried to predict recessions with skirts, lipstick, and men's underwear. Let's see how that went. | **Cover (1.5 s):** three drawn icons (a skirt, a lipstick, briefs) under the title **PREDICTING RECESSIONS WITH… UNDERWEAR?** Then a teal checklist appears: ☐ skirts ☐ lipstick ☐ underwear ☐ skyscrapers ☐ ??? |
-| 0:06 | The Hemline Index: short skirts mean good times, long skirts mean trouble. When researchers finally tested it in 2010? *Urban legend.* | A public-domain 1920s flapper photo vs. a 1930s long-dress fashion plate, with a teal hemline arrow moving up and down. On "urban legend": stamped **MYTH** and the checkbox ✗. |
-| 0:16 | Lipstick. In 2001, the head of Estée Lauder noticed lipstick sales jumping in hard times. The theory: skip the dress, buy a small treat. Since then? Hit or miss. | A drawn lipstick, with a sales line going up, then zig-zagging. Checkbox: **~** (hit or miss). |
-| 0:26 | Underwear. Even a Federal Reserve chairman reportedly watched men's underwear sales. When money's tight, men stop replacing it. More than we needed to know. | A vintage underwear ad (pre-1930, public domain) on the desk. A teal note: "reportedly". On the aside: the card flips face-down. |
-| 0:35 | Skyscrapers. Record-tall buildings keep opening right as the economy falls. The Empire State Building, 1931. Dubai's Burj Khalifa, 2010. Statisticians call it *coincidence.* | The Empire State Building under construction, 1930–31 (Library of Congress, public domain), with a teal sketch of the Burj beside it, plus a "1931" and a "2010" tag. Stamp: **COINCIDENCE**. |
-| 0:45 | So does anything work? Economists' favorite is the yield curve. When short-term loans pay more than long-term ones, a recession usually follows. It's predicted almost every one since the 1960s. Then it flashed red in 2022, longer than ever. | A hand-drawn chart: two lines that cross and invert, with small coral dots on past recessions (1970, '73, '80, '81, '90, 2001, 2008, 2020) all hit. Then a long red stretch labeled **2022**. |
-| 0:55 | And the recession? *Still waiting.* | The checklist's last box gets a "?" and a stopwatch keeps ticking. Loop: back to the first frame's icons. |
+| 0:00 | Can you predict a recession by looking at… men's underwear? People have tried. | **Cover (1.5 s):** **CAN UNDERWEAR PREDICT A RECESSION?** over three drawn icons (a skirt, a lipstick, briefs). Then a teal checklist: ☐ skirts ☐ lipstick ☐ underwear ☐ skyscrapers ☐ ??? |
+| 0:04 | Skirts. The idea: short skirts mean good times, long skirts mean bad times. In 2010, researchers tested it. It didn't work. | A 1920s flapper next to a 1930s long dress (public domain), with a teal hemline arrow. Stamp **✗ DIDN'T WORK**. |
+| 0:13 | Lipstick. The idea: in hard times, people still buy small treats, like lipstick. Sometimes true. Often not. | A drawn lipstick and a zig-zag sales line. Checkbox **~**. |
+| 0:21 | Underwear. The idea: when money's tight, men stop buying new ones. A Federal Reserve chairman reportedly watched it. *Too much information.* | A vintage underwear ad (pre-1930), a teal "reportedly", and the card flipping face-down on "too much information". Checkbox **~**. |
+| 0:30 | Skyscrapers. The idea: record-tall buildings open right as the economy crashes. The Empire State Building, 1931. Statisticians say: *coincidence.* | The Empire State Building under construction (Library of Congress). Stamp **COINCIDENCE**, checkbox **✗**. |
+| 0:39 | So what actually works? Economists watch the yield curve. Normally, if you lend money for longer, you get paid more. When that flips, investors are scared. Since the 1960s, that's come before almost every recession. But in 2022, it flipped, and no recession came. Not yet. | Two drawn arrows: "lend 2 years → paid less, lend 10 years → paid more", which swap places (**FLIPPED**). Coral dots for past recessions all checked; a red **2022** with a "?". |
+| 0:52 | So, can you predict a recession? Not with underwear. The best tool we have is right most of the time. Not always. | The checklist again: the last box gets **"usually"**. The answer appears on screen in big type: **NOT WITH UNDERWEAR.** |
 | 0:57 | If you want more history like this, tap like, and subscribe. They're right there. | The standard end card. |
 
 **Topic strip:** `WEIRD RECESSION PREDICTORS` · **Music:** `r_schools` or `a_price` (light and comic).
 **Images:** public-domain 1920s and 1930s fashion plates or photos (Library of Congress / Met / Commons), a pre-1930 underwear ad, the Empire State Building under construction (Lewis Hine, Library of Congress), the rest drawn in house. No modern logos. Estée Lauder is named but not shown.
 
 ## YouTube text (draft)
-Title: `Economists Tried to Predict Recessions With Underwear` (51 characters). Alternative: `The Weirdest Ways People Predicted Recessions`
+Title: `Can Underwear Predict a Recession?` (33 characters). Also: `Economists Tried to Predict Recessions With Underwear`. Alternative: `The Weirdest Ways People Predicted Recessions`
 ```
 Skirts, lipstick, men's underwear, skyscrapers: people have tried to predict recessions with all of them. Most failed. Then there's the one economists actually trust, and what happened in 2022.
 
