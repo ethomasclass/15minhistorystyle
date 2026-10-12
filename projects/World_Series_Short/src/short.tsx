@@ -50,8 +50,8 @@ const Shrinking: React.FC<{a: number; b: number; c: number; y: number}> = ({a, b
   );
   const done = f >= c;
   return (
-    <div style={{position: 'absolute', left: 0, width: 1080, top: y, textAlign: 'center', fontFamily: JF.display, fontSize: 92, lineHeight: 1.1, color: done ? (pal.box ?? '#FF9F1C') : '#f4efe6',
-      textShadow: '0 6px 22px rgba(0,0,0,0.85)', whiteSpace: 'nowrap'}}>
+    <div style={{position: 'absolute', left: 60, width: 960, top: y, textAlign: 'center', fontFamily: JF.display, fontSize: 84, lineHeight: 1.1, color: done ? (pal.box ?? '#FF9F1C') : '#f4efe6',
+      textShadow: '0 6px 22px rgba(0,0,0,0.85)'}}>
       {word('WORLD', null, 'w')}
       {word('’S', b, 's')}
       {' '}
@@ -90,8 +90,8 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
         <Card p={IMG.world} x={70} y={380} w={430} rot={-2} at={at('New York World.') - 6} />
         {T(IMG.world)}
         <Stamp text="MYTH" x={90} y={600} at={at('Not true.')} size={170} color={pal.subject} rot={-12} />
-        <Note text="never sponsored it" x={540} y={560} size={54} rot={-3} at={at('never sponsored') - 2} color="#ffffff" />
-        <Note text="first claimed in print:" x={540} y={680} size={46} rot={-3} at={at('earliest') - 2} color="#ffffff" />
+        <Note text="never sponsored it" x={530} y={560} size={44} rot={-3} at={at('never sponsored') - 2} color="#ffffff" />
+        <Note text="first claimed in print:" x={530} y={680} size={38} rot={-3} at={at('earliest') - 2} color="#ffffff" />
         <Stamp text="1991" x={560} y={760} at={at('1991.')} size={130} color={pal.mark} rot={-4} />
       </Desk>
     )],
@@ -109,9 +109,9 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
         <Card p={IMG.grays} x={110} y={360} w={520} rot={-3} at={at('1884.')} />
         {T(IMG.grays)}
         <Stamp text="1884" x={680} y={400} at={at('1884.')} size={130} color={pal.subject} rot={-6} />
-        <Note text="NL champs vs AA champs" x={110} y={715} size={46} rot={-3} at={at('two rival') - 2} color="#2b2113" />
-        <Card p={IMG.headline1884} x={100} y={790} w={860} rot={1.5} at={at("World's Championship") - 4} />
-        <Note text="best baseball on Earth? right here." x={70} y={1105} size={46} rot={-3} at={at('best baseball') - 2} color="#b3261e" />
+        <Note text="NL champs vs AA champs" x={110} y={700} size={42} rot={-3} at={at('two rival') - 2} color="#2b2113" />
+        <Card p={IMG.headline1884} x={120} y={795} w={790} rot={1.5} at={at("World's Championship") - 4} />
+        <Note text="best baseball on Earth? right here." x={70} y={1110} size={44} rot={-3} at={at('best baseball') - 2} color="#b3261e" />
       </Desk>
     )],
     // 0:35 1904: the Giants refuse
@@ -130,8 +130,8 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:44 The name stuck: the words fall away over a hand-drawn trophy
     [at('The name stuck.') - 1, (
       <Desk a={at('The name stuck.')}>
-        <Shrinking a={at("World's Series.")} b={at('Then just:')} c={at('the World Series.', 2)} y={270} />
-        <Trophy x={330} y={440} w={420} at={at('The name stuck.')} />
+        <Shrinking a={at("World's Series.")} b={at('Then just:')} c={at('the World Series.', 2)} y={250} />
+        <Trophy x={330} y={470} w={420} at={at('The name stuck.')} />
       </Desk>
     )],
     // 0:49 The kicker: 2026, Venezuela
