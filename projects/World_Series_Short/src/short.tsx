@@ -55,7 +55,7 @@ const Shrinking: React.FC<{a: number; b: number; c: number; y: number}> = ({a, b
       {word('WORLD', null, 'w')}
       {word('’S', b, 's')}
       {' '}
-      {word('CHAMPIONSHIP ', a, 'c')}
+      {word('CHAMPIONSHIP\u00a0', a, 'c')}
       {word('SERIES', null, 'e')}
     </div>
   );
