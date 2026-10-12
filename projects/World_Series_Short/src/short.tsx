@@ -21,7 +21,8 @@ const WAV = 'audio/short_world_series.wav';
 const BEAT = 0.6;
 const HOLD = 30;
 const COVER = {frames: 45, fade: 6};
-const MUSIC = {src: 'music/a_newsroom.mp3', vol: 0.15};
+// a_price: its cheeky brass button (first hit at 61.5 s of the cue, after a short break) lands on "To Venezuela."
+const MUSIC = {src: 'music/a_price.mp3', vol: 0.22, button: 61.5, landOn: 'Venezuela.'};
 
 const {narr: NARR, cut: CUT, lastWordEnd} = withBeat(words as Narration, 'If', BEAT);
 export const SHORT_FRAMES = Math.ceil(lastWordEnd * FPS) + HOLD;
@@ -165,7 +166,8 @@ export const WorldSeriesShort: React.FC = () => {
           <Sequence from={cut + Math.round(BEAT * FPS)} layout="none">
             <Audio src={staticFile(WAV)} startFrom={cut} />
           </Sequence>
-          <Audio src={staticFile(MUSIC.src)} volume={(g) => interpolate(g, [0, 10, endAt - 10, endAt + 20], [0, MUSIC.vol, MUSIC.vol, 0.05], clamp)} />
+          <Audio src={staticFile(MUSIC.src)} startFrom={Math.max(0, Math.round(MUSIC.button * FPS) - t.at(MUSIC.landOn))}
+            volume={(g) => interpolate(g, [0, 10], [0, MUSIC.vol], clamp)} />
           {cutsAt.map((g, i) => <Sfx key={i} at={g} src="sfx/whoosh.wav" volume={0.22} />)}
           <Sfx at={t.at('exactly twice.')} src="sfx/stamp.wav" volume={0.3} />
           <Sfx at={t.at('Not true.')} src="sfx/stamp.wav" volume={0.35} />
