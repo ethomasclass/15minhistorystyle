@@ -21,7 +21,9 @@ const WAV = 'audio/short_pledge_salute.wav';
 const BEAT = 0.7;
 const HOLD = 30;
 const COVER = {frames: 45, fade: 6};
-const MUSIC = {src: 'music/r_dix.mp3', vol: 0.12};
+// j_intrigue repeats a 10 s phrase that ends in ~1.5 s of near-silence (cue 8.5–10 s, 18.5–20 s, …). Starting 7.5 s in
+// puts those silences just before "Columbus Day", "Then came", "So that December" and on the closing line.
+const MUSIC = {src: 'music/j_intrigue.mp3', vol: 0.18, from: 7.5};
 
 const {narr: NARR, cut: CUT, lastWordEnd} = withBeat(words as Narration, 'If', BEAT);
 export const SHORT_FRAMES = Math.ceil(lastWordEnd * FPS) + HOLD;
@@ -152,7 +154,7 @@ export const PledgeShort: React.FC = () => {
           <Sequence from={cut + Math.round(BEAT * FPS)} layout="none">
             <Audio src={staticFile(WAV)} startFrom={cut} />
           </Sequence>
-          <Audio src={staticFile(MUSIC.src)} volume={(g) => interpolate(g, [0, 10, endAt - 10, endAt + 20], [0, MUSIC.vol, MUSIC.vol, 0.04], clamp)} />
+          <Audio src={staticFile(MUSIC.src)} startFrom={Math.round(MUSIC.from * FPS)} volume={(g) => interpolate(g, [0, 10, endAt - 10, endAt + 20], [0, MUSIC.vol, MUSIC.vol, 0.04], clamp)} />
           {cutsAt.map((g, i) => <Sfx key={i} at={g} src="sfx/page_turn.wav" volume={0.18} />)}
           <Sfx at={t.at('fifty years.')} src="sfx/stamp.wav" volume={0.25} />
           <Sfx at={t.at('straight out')} src="sfx/marker_tick.wav" volume={0.3} />
