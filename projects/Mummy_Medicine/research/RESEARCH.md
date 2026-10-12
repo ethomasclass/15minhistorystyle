@@ -3,7 +3,7 @@
 **Format:** long episode, about 10–12 minutes (8–9 chapters, ~1,900–2,100 words at the channel's pace).
 **Driving question:** *How did eating mummies become medicine, and why was it still for sale in 1924?*
 **Short answer:** It started as a mistranslation (a mineral called *mumia* became "mummy"). Demand and fraud kept it going for centuries; science slowly killed it, but it lingered in catalogs into the 20th century, two years after Tutankhamun's tomb was opened.
-**Tone:** wry where it's absurd (fakes, Twain), plain and respectful about the dead. These were real people; say so once.
+**Tone:** dry humor and sarcasm aimed at the *living*: the dealers, the doctors, the customers, the marketing, the translators. Never aimed at the dead, who were real people (say so once). Chapter 6 stays joke-free. See "Humor plan" below.
 
 ## Chapter outline
 
@@ -13,11 +13,50 @@
 | 2 | The word | *Mūmiyā*: Persian and Arabic for a natural bitumen (mineral pitch) sold as medicine. It had nothing to do with corpses. | "The whole thing started with a translation mistake." |
 | 3 | The mistake | 12th century: Gerard of Cremona's Latin translations describe *mumia* as what forms in embalmed bodies. Natural bitumen runs short; "mummy" becomes the medicine. | "Somebody read 'pitch' and wrote 'people.'" |
 | 4 | The trade | Tombs raided; bodies broken up and shipped through Alexandria and Cairo; England taxed imported mumia. Who used it: Francis I of France carried mumia and rhubarb; Paracelsus and Robert Boyle praised it. | Subscribe plug here (wry: "Unlike mumia, it's free and contains no one."). |
-| 5 | The fakes | Demand outruns supply; Egypt bans export (16th c.); dealers make "mummies" from recent corpses. The royal physician Guy de la Fontaine's visit to an Alexandria dealer (told in Pomet's 1694 *History of Drugs*); Ambroise Paré stops prescribing it. | "The mummies were fake. The bodies weren't." |
+| 5 | The fakes | Three-step escalation: real mummies → fake mummies from recent corpses (Alexandria, then Venice and Lyon) → a published recipe for making your own from a fresh body (the red-haired man). Egypt bans export (16th c.). The royal physician Guy de la Fontaine's visit to an Alexandria dealer (told in Pomet's 1694 *History of Drugs*); Ambroise Paré stops prescribing it. | "The mummies were fake. The bodies weren't." |
 | 6 | Beyond mummies | Corpse medicine in general: powdered skull, "King's Drops" (Charles II's skull tincture), moss from skulls, human fat for gout, blood at executions. Montaigne's point: Europeans called others cannibals. | Heavy beat: no jokes. |
 | 7 | The decline | 1718: "quite out of use in Prescription" (John Quincy). Science changes medicine; it survives at the edges. | |
 | 8 | America's mummies | 19th-century Egyptomania: mummies shipped to America; the "mummy paper" legend (Isaiah Deck, 1847 trip; rags vs. mummy wrappings); Twain's 1869 joke about burning mummies in locomotives, taken literally for a century. Mummy brown paint on artists' palettes. | "Mark Twain made a joke. People believed it for 150 years." |
 | 9 | Answer | Back to 1924. Mistranslation, demand, fraud; science ended it slowly. Closing line lands the title. | "It took about 800 years for Europe to stop eating mummies. And the mistake was in the first sentence." |
+
+## When the real mummies ran out: fresh substitutes
+
+This was the user's question: did people turn to newer bodies when they couldn't get mummies? **Yes.** It's the strongest material for chapter 5 and the bridge into chapter 6.
+
+1. **Fakes from recent corpses (Egypt).** Once Egypt restricted mummy exports in the 16th century, dealers in Alexandria and Cairo made "ancient" mummies from recent bodies. Their sources were people nobody claimed: executed criminals, the poor and the sick. They stuffed the bodies with bitumen and dried them in the sun or in ovens, then sold them as genuine. The royal physician Guy de la Fontaine visited a dealer who showed him a pile of bodies and admitted none of them was old (told by Paré and repeated by Pomet; date and wording are being verified).
+2. **Fakes made in Europe.** Pomet (1694) complains that counterfeit mummy was also being made in **Venice and Lyon**: local bodies, bitumen and an oven. So you could buy genuine Egyptian mummy, made in France. (Quoted secondhand in Dickens's *Household Words*, vol. XV, p. 197.) **Caution:** Pomet blames Jewish dealers. The script says "dealers" and doesn't repeat his slur.
+3. **The DIY recipe.** Some physicians skipped Egypt entirely and published instructions for making mumia from a *fresh* body. The recipe calls for a red-haired man of about 24 who died violently (hanged, broken on the wheel or impaled). The body was left a day and a night in the sun and moon, cut up, steeped in myrrh, aloe and spirit of wine, then dried. It's often credited to Oswald Croll's *Basilica Chymica* (1609) and appears in Johann Schroeder's *Pharmacopoeia Medico-Chymica* (1656). The exact first source is being verified. Red hair was preferred because the blood was supposedly "thinner."
+4. **The theory made it worse.** Paracelsians held that a body's healing "spirit" (its *mumia*) was strongest in someone young and healthy who died suddenly. By that logic an executed young man beat a 3,000-year-old pharaoh. The ancient part, the one thing that made "Egyptian mummy" special, stopped mattering.
+5. **Plague worry (optional, hedged).** A geographer has suggested that fakes made from plague victims could have carried disease (Science News, after a talk to the Association of American Geographers). It's speculative, so use it only as "some researchers have even wondered…"
+6. **Volume.** John Sanderson of the Levant Company shipped about 600 lb of mummy pieces from Egypt to England in 1586 (Purchas; being verified). That shows how big the market was before the fakes took over.
+
+**Where it goes:** this expands chapter 5 ("The fakes") into a three-step escalation: real mummies, then fake mummies, then a recipe for making your own. The theory point (4) is the hinge into chapter 6, where the tone turns heavy and the jokes stop.
+
+## Humor plan
+
+The channel's voice is a smart friend who's a little wry. The comedy here comes from deadpan understatement and from how confident everyone was. Aim the jokes at the dealers, doctors, customers, marketing and translators. Never aim them at the dead. Use about one line per 30–45 seconds and let the visuals (notes, stamps, tags) carry half of it.
+
+| Ch | Line (draft) | Visual gag |
+|---|---|---|
+| 1 | "In 1924 you could order Egyptian mummy from a drug catalog. By the kilo. With free shipping, probably." | A stamp on the catalog: "IN STOCK" |
+| 2 | "Mūmiyā was a mineral. Black, sticky, comes out of a mountain. No one was in it." | A teal note pointing at the rock: "no one in here" |
+| 3 | "Somebody read 'pitch' and wrote 'people.' Easily the worst typo in medical history." | The word is crossed out and rewritten |
+| 3 | "To be fair to the translator, nobody fact-checked the 1100s." | |
+| 4 | "Francis I, King of France, carried mummy and rhubarb in a pouch at all times. Just in case." | An index card: "KING'S EMERGENCY KIT: 1. mummy 2. rhubarb" |
+| 4 | Subscribe: "Quick thing: if you're enjoying this, subscribe. Unlike mumia, it's free and contains no one." | |
+| 5 | "So the dealers solved the supply problem the way dealers always do. They made more." | Counter ticks up |
+| 5 | "Ancient Egyptian mummy, aged a full several weeks." | Tape label: "ANCIENT*" with fine print "*recently" |
+| 5 | "You could buy genuine Egyptian mummy made in Lyon. Like champagne, but the opposite." | A map arrow from Lyon labeled "EGYPT" |
+| 5 | "Then the doctors decided Egypt was overrated anyway. The best mummy, they said, was fresh." | |
+| 5 | Recipe beat: read it completely flat, then pause: "That's a real recipe. It was in a pharmacy book." | A recipe card with "red hair (required)" circled |
+| 6 | **No jokes.** Plain statements, then Montaigne's line about who the real cannibals were. | Teal only, quiet |
+| 7 | "In 1718 a pharmacist called it 'quite out of use.' Europe took that as more of a suggestion." | |
+| 8 | "Mark Twain wrote that Egyptian trains burned mummies for fuel. He was joking. The internet was not." | A stamp on the quote: "JOKE" |
+| 8 | Mummy paper: "A newspaper claimed it was printed on mummy wrappings. It was printed on rags. From Egypt. Close enough, apparently." | |
+| 8 | Mummy brown: "Artists squeezed it onto their palettes for a century, and most of them had no idea what was in the tube." | |
+| 9 | Close: "It took Europe about 800 years to stop eating mummies. The mistake was in the first sentence." | |
+
+**Guardrails:** don't joke about the people whose bodies were used, especially executed prisoners and the poor in chapter 5. In chapter 5 the joke is on the dealers and the buyers. Say once, plainly, who those bodies belonged to.
 
 ## Key facts (with sourcing status)
 
