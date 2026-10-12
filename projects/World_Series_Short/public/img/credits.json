@@ -19,5 +19,162 @@
     "date": "1905date QS:P571,+1905-00-00T00:00:00Z/9",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:New_York_Giants_team_picture_-_DPLA_-_fd7ebf536e17844aa33932026511c5e2.jpg"
+  },
+  "new_york_sunday_world_poster_1896.jpg": {
+    "title": "The New York Sunday World Sunday, March 1st.",
+    "artist": "",
+    "date": "[1896]",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2015648009/",
+    "source": "loc:2015648009",
+    "file_url": "https://cdn.loc.gov/master/pnp/ppmsca/43400/43471u.tif"
+  },
+  "radbourn_old_judge_card_loc.jpg": {
+    "title": "[Old Hoss Radbourn, Boston Beaneaters, baseball card portrait]",
+    "artist": "",
+    "date": "1887-1890.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2007685696/",
+    "source": "loc:2007685696",
+    "file_url": "https://cdn.loc.gov/master/pnp/bbc/0000/0080/0088fu.tif"
+  },
+  "new_york_metropolitans_1882.jpg": {
+    "title": "Metropolitan baseball nine 1882",
+    "artist": "Sarony, Napoleon, 1821-1896",
+    "date": "c1882.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2008678966/",
+    "source": "loc:2008678966",
+    "file_url": "https://cdn.loc.gov/master/pnp/ppmsca/18700/18773u.tif"
+  },
+  "john_t_brush_bain_1910.jpg": {
+    "title": "John T. Brush",
+    "artist": "Bain News Service",
+    "date": "[1910]",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2014688602/",
+    "source": "loc:2014688602",
+    "file_url": "https://cdn.loc.gov/master/pnp/ggbain/08600/08611u.tif"
+  },
+  "huntington_ave_grounds_1904_boston_vs_ny.jpg": {
+    "title": "American League Park, Huntington Ave., Boston, Mass., Boston vs. New York, Oct. 8, 1904, attendance 28,040",
+    "artist": "",
+    "date": "1904 October 8.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2007663979/",
+    "source": "loc:2007663979",
+    "file_url": "https://cdn.loc.gov/master/pnp/pan/6a34000/6a34400/6a34445u.tif"
+  },
+  "polo_grounds_1905_deciding_game.jpg": {
+    "title": "Deciding game bet. Nationals & American Leagues B.B.",
+    "artist": "",
+    "date": "c1905.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2007663702/",
+    "source": "loc:2007663702",
+    "file_url": "https://cdn.loc.gov/master/pnp/pan/6a28000/6a28800/6a28819u.tif"
+  },
+  "worlds_championship_series_1906_cubs_whitesox.jpg": {
+    "title": "Fifth game, World's Championship Series, Cubs vs. White Sox, National League grounds, Saturday, Oct. 13, 1906",
+    "artist": "",
+    "date": "1906 October 13.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2007663703/",
+    "source": "loc:2007663703",
+    "file_url": "https://cdn.loc.gov/master/pnp/pan/6a29000/6a29100/6a29181u.tif"
+  },
+  "polo_grounds_1905_crowd.jpg": {
+    "title": "Polo Grounds, New York, Pittsburg vs. New York, May 20, 1905, attendance 24,620",
+    "artist": "",
+    "date": "1905 May 20.",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/2007663697/",
+    "source": "loc:2007663697",
+    "file_url": "https://cdn.loc.gov/master/pnp/pan/6a28000/6a28500/6a28531u.tif"
+  },
+  "maps_of_the_world_1851.jpg": {
+    "title": "[Maps of the world]",
+    "artist": "",
+    "date": "[1851]",
+    "licence": "No known restrictions on publication (Library of Congress)",
+    "page": "https://www.loc.gov/pictures/item/95522154/",
+    "source": "loc:95522154",
+    "file_url": "https://cdn.loc.gov/master/pnp/cph/3c10000/3c15000/3c15300/3c15363u.tif"
+  },
+  "radbourn_old_judge_card.jpg": {
+    "title": "File:Charles Radbourn Baseball Card.jpg",
+    "artist": "Goodwin &amp; Company",
+    "date": "between 1887 and 1890date QS:P,+1850-00-00T00:00:00Z/7,P1319,+1887-00-00T00:00:00Z/9,P1326,+1890-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_Radbourn_Baseball_Card.jpg"
+  },
+  "reach_guide_1905_no_series_1904_page.jpg": {
+    "title": "The Reach official American League base ball guide (page 450)",
+    "artist": "",
+    "date": "1883",
+    "licence": "public domain by age (1883)",
+    "page": "https://archive.org/details/reachofficialame19041phil/page/n450",
+    "source": "iabook:reachofficialame19041phil:450"
+  },
+  "reach_guide_1905_american_league_snubbed_page.jpg": {
+    "title": "The Reach official American League base ball guide (page 452)",
+    "artist": "",
+    "date": "1883",
+    "licence": "public domain by age (1883)",
+    "page": "https://archive.org/details/reachofficialame19041phil/page/n452",
+    "source": "iabook:reachofficialame19041phil:452"
+  },
+  "reach_guide_1904_worlds_championship_series_1903_page.jpg": {
+    "title": "The Reach official American League base ball guide (page 58)",
+    "artist": "",
+    "date": "1883",
+    "licence": "public domain by age (1883)",
+    "page": "https://archive.org/details/reachofficialame19041phil/page/n58",
+    "source": "iabook:reachofficialame19041phil:58"
+  },
+  "spalding_guide_1906_worlds_championship_records_1884_page.jpg": {
+    "title": "Spalding's base ball guide, and official league book for ... : a complete hand book of the national game of base ball .. (page 460)",
+    "artist": "",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/spaldingsbasebal19051chic/page/n460",
+    "source": "iabook:spaldingsbasebal19051chic:460"
+  },
+  "spalding_guide_1905_worlds_championship_rules_page.jpg": {
+    "title": "Spalding's base ball guide, and official league book for ... : a complete hand book of the national game of base ball .. (page 342)",
+    "artist": "",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/spaldingsbasebal19051chic/page/n342",
+    "source": "iabook:spaldingsbasebal19051chic:342"
+  },
+  "spalding_guide_1906_scenes_worlds_championship_1905.jpg": {
+    "title": "Spalding's base ball guide, and official league book for ... : a complete hand book of the national game of base ball .. (page 469)",
+    "artist": "",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/spaldingsbasebal19051chic/page/n469",
+    "source": "iabook:spaldingsbasebal19051chic:469"
+  },
+  "ws1903_huntington_crowd.jpg": {
+    "title": "File:Boston Americans and Pittsburgh Pirates, Huntington Avenue Grounds, 1903 World Series - DPLA - 06a4c3efee09da7af9045446daae16f0.jpg",
+    "artist": "Chickering, Elmer",
+    "date": "1903date QS:P571,+1903-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Boston_Americans_and_Pittsburgh_Pirates,_Huntington_Avenue_Grounds,_1903_World_Series_-_DPLA_-_06a4c3efee09da7af9045446daae16f0.jpg"
+  },
+  "ws1903_fans_outside.jpg": {
+    "title": "File:Fans outside the Huntington Avenue Grounds, 1903 World Series - DPLA - 9c0daf8418d590b3ff3786a640e2e99e.jpg",
+    "artist": "",
+    "date": "1903date QS:P571,+1903-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Fans_outside_the_Huntington_Avenue_Grounds,_1903_World_Series_-_DPLA_-_9c0daf8418d590b3ff3786a640e2e99e.jpg"
+  },
+  "huntington_grounds_1903_panorama.jpg": {
+    "title": "File:1903 Boston vs Chicago at Huntington Avenue Grounds crop.jpg",
+    "artist": "E. Checkering and Company",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1903_Boston_vs_Chicago_at_Huntington_Avenue_Grounds_crop.jpg"
   }
 }
