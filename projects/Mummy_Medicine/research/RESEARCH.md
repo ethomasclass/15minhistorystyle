@@ -23,12 +23,12 @@
 
 This was the user's question: did people turn to newer bodies when they couldn't get mummies? **Yes.** It's the strongest material for chapter 5 and the bridge into chapter 6.
 
-1. **Fakes from recent corpses (Egypt).** Once Egypt restricted mummy exports in the 16th century, dealers in Alexandria and Cairo made "ancient" mummies from recent bodies. Their sources were people nobody claimed: executed criminals, the poor and the sick. They stuffed the bodies with bitumen and dried them in the sun or in ovens, then sold them as genuine. The royal physician Guy de la Fontaine visited a dealer who showed him a pile of bodies and admitted none of them was old (told by Paré and repeated by Pomet; date and wording are being verified).
-2. **Fakes made in Europe.** Pomet (1694) complains that counterfeit mummy was also being made in **Venice and Lyon**: local bodies, bitumen and an oven. So you could buy genuine Egyptian mummy, made in France. (Quoted secondhand in Dickens's *Household Words*, vol. XV, p. 197.) **Caution:** Pomet blames Jewish dealers. The script says "dealers" and doesn't repeat his slur.
-3. **The DIY recipe.** Some physicians skipped Egypt entirely and published instructions for making mumia from a *fresh* body. The recipe calls for a red-haired man of about 24 who died violently (hanged, broken on the wheel or impaled). The body was left a day and a night in the sun and moon, cut up, steeped in myrrh, aloe and spirit of wine, then dried. It's often credited to Oswald Croll's *Basilica Chymica* (1609) and appears in Johann Schroeder's *Pharmacopoeia Medico-Chymica* (1656). The exact first source is being verified. Red hair was preferred because the blood was supposedly "thinner."
+1. **Fakes from recent corpses (Egypt).** Once Egypt restricted mummy exports in the 16th century, dealers in Alexandria and Cairo made "ancient" mummies from recent bodies. In **1564** Guy de la Fontaine, physician to the King of Navarre, visited a dealer in Alexandria. The dealer showed him 30–40 bodies, all prepared within the last four years from "slaves, or other persons." He said he didn't care whether they had died of leprosy, pox or plague. (**Confirmed:** Paré, *Discours de la mumie*, 1582, ch. VII; retold by Pomet, 1694.) Say "enslaved people and others", **not** "criminals". Paré separately says French apothecaries stole hanged men's bodies, which can be a one-line add.
+2. **Fakes made in Europe.** Pomet (1694) complains that counterfeit mummy was also being made in **Venice and Lyon**: local bodies, bitumen and an oven. So you could buy genuine Egyptian mummy, made in France. (**Confirmed:** Pomet, 1712 English edition: mummies from "Alexandria, Egypt, Venice and Lyons" were recent corpses stuffed with bitumen and pitch and dried in ovens. Dickens's *Household Words*, 28 Feb 1857, pp. 196–197, quotes it word for word.) **Bonus:** Pomet says mummy's "greatest Use is for catching Fish." **Caution:** Pomet blames Jewish dealers. The script says "dealers" and doesn't repeat his slur.
+3. **The DIY recipe.** Some physicians skipped Egypt entirely and published instructions for making mumia from a *fresh* body. The recipe calls for a red-haired man of about 24 who died violently (hanged, broken on the wheel or impaled). The body was left a day and a night in the sun and moon, cut up, steeped in myrrh, aloe and spirit of wine, then dried. **Confirmed:** it first appears in Oswald Croll's *Basilica Chymica* (1609), in the recipe "Theriaca de Mumia." Schroeder copied it (1641; his 1669 English edition credits Croll). Red hair was preferred because the blood was supposedly "thinner."
 4. **The theory made it worse.** Paracelsians held that a body's healing "spirit" (its *mumia*) was strongest in someone young and healthy who died suddenly. By that logic an executed young man beat a 3,000-year-old pharaoh. The ancient part, the one thing that made "Egyptian mummy" special, stopped mattering.
 5. **Plague worry (optional, hedged).** A geographer has suggested that fakes made from plague victims could have carried disease (Science News, after a talk to the Association of American Geographers). It's speculative, so use it only as "some researchers have even wondered…"
-6. **Volume.** John Sanderson of the Levant Company shipped about 600 lb of mummy pieces from Egypt to England in 1586 (Purchas; being verified). That shows how big the market was before the fakes took over.
+6. **Volume.** In 1586 John Sanderson shipped "600. pounds" of mummy pieces, plus one whole body, to England on the *Hercules* for the Turkey Company, which later became the Levant Company. (**Confirmed:** *Purchas His Pilgrimes*, MacLehose edition, vol. IX, pp. 418–419.) That shows how big the market was before the fakes took over.
 
 **Where it goes:** this expands chapter 5 ("The fakes") into a three-step escalation: real mummies, then fake mummies, then a recipe for making your own. The theory point (4) is the hinge into chapter 6, where the tone turns heavy and the jokes stop.
 
@@ -45,13 +45,15 @@ The channel's voice is a smart friend who's a little wry. The comedy here comes 
 | 4 | "Francis I, King of France, carried mummy and rhubarb in a pouch at all times. Just in case." | An index card: "KING'S EMERGENCY KIT: 1. mummy 2. rhubarb" |
 | 4 | Subscribe: "Quick thing: if you're enjoying this, subscribe. Unlike mumia, it's free and contains no one." | |
 | 5 | "So the dealers solved the supply problem the way dealers always do. They made more." | Counter ticks up |
-| 5 | "Ancient Egyptian mummy, aged a full several weeks." | Tape label: "ANCIENT*" with fine print "*recently" |
+| 5 | "Ancient Egyptian mummy, aged a full four years, tops." (the dealer's own number) | Tape label: "ANCIENT*" with fine print "*recently" |
 | 5 | "You could buy genuine Egyptian mummy made in Lyon. Like champagne, but the opposite." | A map arrow from Lyon labeled "EGYPT" |
 | 5 | "Then the doctors decided Egypt was overrated anyway. The best mummy, they said, was fresh." | |
 | 5 | Recipe beat: read it completely flat, then pause: "That's a real recipe. It was in a pharmacy book." | A recipe card with "red hair (required)" circled |
 | 6 | **No jokes.** Plain statements, then Montaigne's line about who the real cannibals were. | Teal only, quiet |
+| 5 | Pomet, the king's own drug expert, on what mummy was actually good for: "its greatest Use is for catching Fish." | Stamp: "FISH BAIT" |
 | 7 | "In 1718 a pharmacist called it 'quite out of use.' Europe took that as more of a suggestion." | |
 | 8 | "Mark Twain wrote that Egyptian trains burned mummies for fuel. He was joking. The internet was not." | A stamp on the quote: "JOKE" |
+| 8 | Burne-Jones (1881): he found out what was in the tube over Sunday lunch, went outside and gave it a proper burial. His daughter planted a daisy on top. | A small cross drawn over the tube |
 | 8 | Mummy paper: "A newspaper claimed it was printed on mummy wrappings. It was printed on rags. From Egypt. Close enough, apparently." | |
 | 8 | Mummy brown: "Artists squeezed it onto their palettes for a century, and most of them had no idea what was in the tube." | |
 | 9 | Close: "It took Europe about 800 years to stop eating mummies. The mistake was in the first sentence." | |
@@ -72,13 +74,16 @@ The channel's voice is a smart friend who's a little wry. The comedy here comes 
 - Montaigne's "Of Cannibals" contrasted European practices with those Europeans called savage. (Smithsonian.)
 - Mummy brown pigment: ground mummy with white pitch and myrrh, sold by London colourmen in the 18th–19th centuries, tubes reportedly sold into the 1960s. (Art UK; FSU Art History.)
 - Twain, *The Innocents Abroad* (1869): the locomotives-burning-mummies line, hedged ("stated to me for a fact"); no evidence it happened. (Straight Dope; Benjamin Radford, *Skeptical Inquirer*.)
-- Mummy paper: Isaiah Deck's 1847 Egypt trip and his proposal; the Syracuse newspaper "printed on mummy rags" claim traced to a paper that said "Rags from Egypt." (Wikipedia "Mummy paper".)
+- Mummy paper: Isaiah Deck's proposal (1855); the Syracuse newspaper "printed on mummy rags" claim traced to a paper that said "Rags from Egypt." (Wikipedia "Mummy paper".)
 
-**To verify before scripting**
-- Guy de la Fontaine's Alexandria visit: the often-quoted date 1564 and the dealer's confession (the source is Pomet, 1694; get the passage itself).
-- The "King's Drops" origin story (said to be bought from Jonathan Goddard); confirm with Sugg.
-- Whether a specific American apothecary sold mumia (a colonial or early U.S. price list would make a strong U.S. tie-in).
-- Burne-Jones burying his tube of mummy brown (often told; trace to Rudyard Kipling's or Georgiana Burne-Jones's account).
+**Fact-check results** (full quotes, sources and narration wording in `VERIFY.md`)
+- **de la Fontaine:** confirmed, 1564, Paré. The bodies were "slaves, or other persons," not criminals.
+- **King's Drops:** confirmed that Charles II took them on his deathbed in Feb 1685, along with "Spirit of human Skull 40 drops," and that they're credited to Jonathan Goddard. **The price is unproven** (£1,500, £5,000 and £6,000 all appear later). Say "reportedly paid a fortune," with no number.
+- **Burne-Jones:** confirmed, 1881 (Georgiana Burne-Jones, *Memorials*, vol. II, p. 114; Kipling, 1937).
+- **Colonial American apothecaries:** no evidence found. Don't claim it. Use instead: the first American *Merck's Index* (New York, 1889) listed "Mummy, true Egyptian."
+- **Padihershef:** Massachusetts General Hospital, 1823, then a tour. Say "one of the first" complete mummies in the US.
+- **Mummy paper:** the claims and proposals are real, but whether it was ever actually made is disputed. Present it as a legend with a real paper trail.
+- **Croll recipe, Pomet's fakes, Sanderson, Merck 1924, Quincy 1718:** confirmed.
 
 ## Images (public domain candidates)
 - Pierre Pomet, *Histoire générale des drogues* (1694) and the English edition (1712): plates of mumia and the mummy trade.
