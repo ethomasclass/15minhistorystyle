@@ -1,6 +1,6 @@
 # Can Underwear Predict a Recession? (Short)
 
-**15 Minute History · Short** · standalone vertical · 171 words (157 story + 14 subscribe) · about **0:58** at the normal pace.
+**15 Minute History · Short** · standalone vertical · 169 words (155 story + 14 subscribe) · about **0:58** at the normal pace.
 **Built for everyone:** it opens on a question and answers it out loud at the end. Each predictor follows the same pattern: the name, "The idea:" in plain words, then the evidence or a real number. No jargon (the yield curve is cut). Underwear is saved for last because it's the hook and the payoff.
 **Neutral:** no politicians, no parties, no forecast. The Fed chair is unnamed ("a Federal Reserve chairman").
 
