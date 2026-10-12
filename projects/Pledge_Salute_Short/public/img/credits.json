@@ -68,5 +68,35 @@
     "date": "1915-09-12",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bellamy_salute_1915.jpg"
+  },
+  "whittier_primary_school_1899_saluting_the_flag.jpg": {
+    "title": "Saluting the flag at the Whittier Primary School [Hampton, Virginia]",
+    "artist": "Johnston, Frances Benjamin, 1864-1952",
+    "date": "1899 or 1900",
+    "licence": "No known restrictions on publication (LOC; published before 1930, public domain)",
+    "page": "https://www.loc.gov/item/2001703861/",
+    "call_number": "LOT 11051-4; repro LC-USZ62-65770",
+    "source": "loc:2001703861",
+    "file_url": "https://tile.loc.gov/storage-services/master/pnp/cph/3b10000/3b13000/3b13200/3b13292u.tif"
+  },
+  "rochester_1943_classroom_flag_salute.jpg": {
+    "title": "Rochester, New York. Earl Babcock's school day begins with the salute to the flag",
+    "artist": "Collins, Marjory, 1912-1985 (U.S. Office of War Information)",
+    "date": "1943 Mar.",
+    "licence": "No known restrictions on publication (U.S. government work, public domain)",
+    "page": "https://www.loc.gov/item/2017849349/",
+    "call_number": "LC-USW3-021733-C",
+    "source": "loc:2017849349",
+    "file_url": "https://tile.loc.gov/storage-services/master/pnp/fsa/8d27000/8d27700/8d27701u.tif"
+  },
+  "weill_school_1942_hand_over_heart_lange.jpg": {
+    "title": "San Francisco, Calif., April 1942. First-graders, some of Japanese ancestry, at the Weill public school ... pledge of allegiance",
+    "artist": "Lange, Dorothea (War Relocation Authority)",
+    "date": "1942 April 20",
+    "licence": "No known restrictions on publication (U.S. government work, War Relocation Authority)",
+    "page": "https://www.loc.gov/item/2001705948/",
+    "call_number": "LOT 1801; repro LC-USZ62-42810",
+    "source": "loc:2001705948",
+    "file_url": "https://tile.loc.gov/storage-services/master/pnp/cph/3a40000/3a43000/3a43100/3a43126u.tif"
   }
 }

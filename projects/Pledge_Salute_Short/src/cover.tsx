@@ -15,7 +15,7 @@ export const Cover: React.FC<{at?: number}> = ({at = 0}) => {
       <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,7,5,0.55) 0%, rgba(8,7,5,0.1) 35%, rgba(8,7,5,0.15) 60%, rgba(8,7,5,0.8) 100%)'}} />
       <Highlight text="AMERICAN KIDS," x={60} y={250} size={118} at={at} seed={71} rot={-3} />
       <Highlight text="1942" x={100} y={420} size={150} at={at + 3} seed={72} rot={-2} />
-      <Ring cx={560} cy={860} rx={360} ry={150} at={at + 4} dur={8} width={8} seed={7} color={pal.subject} />
+      <Ring cx={600} cy={760} rx={360} ry={170} at={at + 4} dur={8} width={8} seed={7} color={pal.subject} />
     </>
   );
   if (!hasFile(P.src)) {

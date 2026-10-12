@@ -53,16 +53,22 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [0, (
       <Photo p={IMG.photo1942} a={at('Like this.') - 4} b={at('Like this.') + 4} z={[1.05, 1.35]}>
         <Note text="Connecticut, May 1942" x={70} y={300} size={58} rot={-3} at={at('Connecticut.') - 2} color="#ffffff" />
-        <Ring cx={560} cy={860} rx={330} ry={140} at={at('salute the flag.')} dur={10} width={8} seed={7} color={pal.subject} />
+        <Ring cx={600} cy={720} rx={340} ry={170} at={at('salute the flag.')} dur={10} width={8} seed={7} color={pal.subject} />
       </Photo>
     )],
-    // 0:06 Fifty years: a drawn timeline, the same salute at both ends
+    // 0:06 The classroom: the same salute indoors (c. 1941)
     [at('That was the salute') - 1, (
-      <Desk a={at('That was the salute')}>
-        <Note text="the Pledge of Allegiance salute" x={70} y={290} size={52} rot={-3} at={at('Pledge of Allegiance') - 2} color="#ffffff" />
-        <FlagSketch x={790} y={420} w={200} at={at('That was the salute')} />
-        <SaluteFigure x={20} y={540} h={400} at={at('That was the salute')} from="salute" to="salute" />
-        <SaluteFigure x={380} y={540} h={400} at={at('across the country')} from="salute" to="salute" />
+      <Photo p={IMG.classroom} a={at('That was the salute')} b={at('In schools across')} z={[1.02, 1.1]}>
+        <Note text="the Pledge of Allegiance" x={70} y={300} size={58} rot={-3} at={at('Pledge of Allegiance') - 2} color="#ffffff" />
+      </Photo>
+    )],
+    // 0:09 Fifty years: a drawn timeline, the same salute at both ends
+    [at('In schools across') - 1, (
+      <Desk a={at('In schools across')}>
+        <Note text="in schools everywhere" x={70} y={290} size={52} rot={-3} at={at('In schools across')} color="#ffffff" />
+        <FlagSketch x={790} y={420} w={200} at={at('In schools across')} />
+        <SaluteFigure x={20} y={540} h={400} at={at('In schools across')} from="salute" to="salute" />
+        <SaluteFigure x={380} y={540} h={400} at={at('across the country') + 6} from="salute" to="salute" />
         <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1080} height={1920}>
           <path d="M140,1010 L940,1010" fill="none" stroke={pal.mark} strokeWidth={6} strokeLinecap="round" pathLength={1} strokeDasharray={1}
             strokeDashoffset={1 - interpolate(useCurrentFrame(), [at('fifty years.') - 6, at('fifty years.') + 6], [0, 1], clamp)} />
@@ -95,7 +101,7 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:29 That October: millions said it together
     [at('That October,') - 1, (
       <Photo p={IMG.schoolroom} a={at('That October,')} b={at('Then came')} z={[1.02, 1.12]}>
-        <Note text="October 1892" x={70} y={300} size={58} rot={-3} at={at('That October,')} color="#ffffff" />
+        <Note text="the salute in practice, 1899" x={70} y={300} size={58} rot={-3} at={at('That October,')} color="#ffffff" />
         <Counter from={0} to={10000000} a={at('millions') - 4} b={at('first time.')} x={70} y={880} size={120} prefix="~" round={100000} />
         <Note text="schoolchildren, all at once" x={80} y={1010} size={52} rot={-3} at={at('schoolchildren') - 2} color="#ffffff" />
       </Photo>
@@ -112,7 +118,6 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:43 December 1942: the arm moves to the heart
     [at('So that December,') - 1, (
       <Desk a={at('So that December,')}>
-        <Card p={IMG.flagcode} x={600} y={380} w={360} rot={3} at={at('So that December,')} />
         <Stamp text="DEC. 1942" x={80} y={330} at={at('So that December,')} size={110} color={pal.subject} rot={-5} />
         <FlagSketch x={150} y={500} w={170} at={at('So that December,')} />
         <SaluteFigure x={250} y={520} h={520} at={at('So that December,')} from="salute" to="heart" a={at('Right hand,')} b={at('over the heart.') + 6} />
@@ -135,7 +140,7 @@ export const PledgeShort: React.FC = () => {
   const t = makeTimeline(NARR, FPS);
   const endAt = t.at('If you want') - 10;
   const cut = Math.round(CUT * FPS);
-  const cutsAt = ['That was the salute', 'So where', 'In 1892,', 'That October,', 'Then came', 'So that December,', 'So why were'].map((p) => t.at(p) - 1);
+  const cutsAt = ['That was the salute', 'In schools across', 'So where', 'In 1892,', 'That October,', 'Then came', 'So that December,', 'So why were'].map((p) => t.at(p) - 1);
   return (
     <PaletteCtx.Provider value={PALETTES.locked}>
       <StepCtx.Provider value={2.5}>
