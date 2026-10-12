@@ -87,10 +87,12 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [at("You've probably") - 1, (
       <Desk a={at("You've probably")}>
         <Note text="the story you've heard:" x={80} y={290} size={56} rot={-3} at={at("You've probably")} color="#ffffff" />
-        <Card p={IMG.world} x={70} y={400} w={940} rot={-2} at={at('New York World.') - 6} />
-        <Stamp text="MYTH" x={330} y={460} at={at('Not true.')} size={200} color={pal.subject} rot={-12} />
-        <Note text="never sponsored it" x={90} y={900} size={60} rot={-3} at={at('never sponsored') - 2} color="#ffffff" />
-        <Note text="first claimed in print: 1991" x={90} y={990} size={58} rot={-3} at={at('1991.') - 6} color={pal.mark} />
+        <Card p={IMG.world} x={70} y={380} w={430} rot={-2} at={at('New York World.') - 6} />
+        {T(IMG.world)}
+        <Stamp text="MYTH" x={90} y={600} at={at('Not true.')} size={170} color={pal.subject} rot={-12} />
+        <Note text="never sponsored it" x={540} y={560} size={54} rot={-3} at={at('never sponsored') - 2} color="#ffffff" />
+        <Note text="first claimed in print:" x={540} y={680} size={46} rot={-3} at={at('earliest') - 2} color="#ffffff" />
+        <Stamp text="1991" x={560} y={760} at={at('1991.')} size={130} color={pal.mark} rot={-4} />
       </Desk>
     )],
     // 0:20 The real answer
@@ -104,23 +106,25 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     [at('1884.') - 1, (
       <Desk a={at('1884.')}>
         <Folder at={at('1884.') - 1} label="1884 · THE FIRST ONE" />
-        <Card p={IMG.grays} x={110} y={380} w={560} rot={-3} at={at('1884.')} />
-        <Stamp text="1884" x={700} y={420} at={at('1884.')} size={130} color={pal.subject} rot={-6} />
-        <Note text="NL champs vs AA champs" x={110} y={830} size={50} rot={-3} at={at('two rival') - 2} color="#2b2113" />
-        <Card p={IMG.headline1884} x={90} y={900} w={880} rot={1.5} at={at("World's Championship") - 4} />
-        <Note text="best baseball on Earth? right here." x={70} y={1080} size={50} rot={-3} at={at('best baseball') - 2} color="#b3261e" />
+        <Card p={IMG.grays} x={110} y={360} w={520} rot={-3} at={at('1884.')} />
+        {T(IMG.grays)}
+        <Stamp text="1884" x={680} y={400} at={at('1884.')} size={130} color={pal.subject} rot={-6} />
+        <Note text="NL champs vs AA champs" x={110} y={715} size={46} rot={-3} at={at('two rival') - 2} color="#2b2113" />
+        <Card p={IMG.headline1884} x={100} y={790} w={860} rot={1.5} at={at("World's Championship") - 4} />
+        <Note text="best baseball on Earth? right here." x={70} y={1105} size={46} rot={-3} at={at('best baseball') - 2} color="#b3261e" />
       </Desk>
     )],
     // 0:35 1904: the Giants refuse
     [at('How confident') - 1, (
       <Desk a={at('How confident')}>
-        <Note text="how confident?" x={80} y={300} size={70} rot={-3} at={at('How confident')} color="#ffffff" />
-        <Card p={IMG.brush} x={90} y={420} w={420} rot={-3} at={at('In 1904,')} filter={LOOK.bw} />
-        <Note text="Giants owner" x={560} y={460} size={52} rot={-3} at={at('New York Giants') - 2} color="#ffffff" />
-        <Note text="John T. Brush" x={560} y={530} size={56} rot={-3} at={at('New York Giants') + 4} color={pal.mark} />
-        <Stamp text="1904:" x={560} y={660} at={at('refused')} size={110} color="#f4efe6" rot={-4} />
-        <Stamp text="NO SERIES" x={540} y={790} at={at('refused') + 4} size={100} color={pal.subject} rot={-4} />
-        <Note text="the other league? “minor.”" x={80} y={1040} size={60} rot={-3} at={at('minor."') - 8} color={pal.mark} />
+        <Note text="how confident?" x={80} y={290} size={70} rot={-3} at={at('How confident')} color="#ffffff" />
+        <Card p={IMG.brush} x={80} y={400} w={300} rot={-3} at={at('In 1904,')} filter={LOOK.bw} />
+        {T(IMG.brush)}
+        <Note text="Giants owner John T. Brush" x={420} y={410} size={42} rot={-3} at={at('New York Giants') - 2} color="#ffffff" />
+        <Stamp text="1904:" x={430} y={480} at={at('refused')} size={100} color="#f4efe6" rot={-4} />
+        <Stamp text="NO SERIES" x={420} y={590} at={at('refused') + 4} size={96} color={pal.subject} rot={-4} />
+        <Note text="the other league? “minor.”" x={420} y={730} size={48} rot={-3} at={at('minor."') - 8} color={pal.mark} />
+        <Card p={IMG.noSeries} x={80} y={860} w={900} rot={-1} at={at('refused') + 2} />
       </Desk>
     )],
     // 0:44 The name stuck: the words fall away over a hand-drawn trophy

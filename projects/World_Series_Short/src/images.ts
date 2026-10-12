@@ -8,8 +8,9 @@ export const IMG = {
   logo: {src: 'img/ws_logo_1997_globe.png', size: [500, 281]} as Pic,
   venezuela: {src: 'img/venezuela_wbc_2026_celebration.jpg', size: [480, 639], tag: 'Venezuela, World Baseball Classic, 2026'} as Pic,
   // archival, filled in when the image search lands
-  world: {src: 'img/new_york_world_masthead.jpg', size: [1600, 400]} as Pic,
-  grays: {src: 'img/providence_grays_1884.jpg', size: [1200, 900]} as Pic,
-  headline1884: {src: 'img/worlds_championship_headline_1884.jpg', size: [1600, 300]} as Pic,
-  brush: {src: 'img/john_t_brush.jpg', size: [800, 1100]} as Pic,
+  world: {src: 'img/new_york_sunday_world_poster_1896.jpg', size: [1994, 3000], tag: 'The New York World, 1896 · Library of Congress'} as Pic,
+  grays: {src: 'img/providence_grays_1884_alt.jpg', size: [980, 641], tag: 'Providence Grays, 1884'} as Pic,
+  headline1884: {src: 'img/worlds_championship_records_heading_spalding_1906.jpg', size: [2248, 790]} as Pic,
+  brush: {src: 'img/john_t_brush_crop.jpg', size: [1498, 2161], tag: 'John T. Brush · Bain News Service · Library of Congress'} as Pic,
+  noSeries: {src: 'img/no_series_1904_reach_1905_crop.jpg', size: [2275, 772]} as Pic,
 };
