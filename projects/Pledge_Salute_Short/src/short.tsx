@@ -81,8 +81,8 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:12 Where from? Columbus Day
     [at('So where') - 1, (
       <Desk a={at('So where')}>
-        <Note text="so where did it come from?" x={80} y={520} size={70} rot={-3} at={at('So where')} color="#ffffff" />
-        <Highlight text="COLUMBUS DAY" x={90} y={660} size={150} at={at('Columbus Day.', 1)} seed={73} rot={-4} />
+        <Note text="so where did it come from?" x={70} y={520} size={60} rot={-3} at={at('So where')} color="#ffffff" />
+        <Highlight text="COLUMBUS DAY" x={70} y={660} size={118} at={at('Columbus Day.', 1)} seed={73} rot={-4} />
       </Desk>
     )],
     // 0:15 1892: the magazine, Bellamy, and the salute drawn on
@@ -127,7 +127,7 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:47 The answer, back on the 1942 photo (the loop)
     [at('So why were') - 1, (
       <Photo p={IMG.photo1942} a={at('So why were')} b={at('If you want')} z={[1.05, 1.05]}>
-        <Highlight text="THE PLEDGE'S SALUTE." x={50} y={300} size={92} at={at('Because it was')} seed={74} rot={-3} />
+        <Highlight text="THE PLEDGE'S SALUTE." x={50} y={300} size={74} at={at('Because it was')} seed={74} rot={-3} />
         <Note text="decades before anyone else" x={90} y={470} size={56} rot={-3} at={at('decades before') - 2} color="#ffffff" />
       </Photo>
     )],
