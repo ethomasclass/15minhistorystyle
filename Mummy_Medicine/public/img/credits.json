@@ -678,5 +678,61 @@
     "source": "American Antiquarian Society broadsheet (BDSDS 1850), via Yale Peabody \"Echoes of Egypt\"",
     "url": "https://echoesofegypt.peabody.yale.edu/node/229",
     "license": "Public domain (1850 printed broadsheet; faithful scan). Credit: American Antiquarian Society"
+  },
+  "ai/ch02_bitumen_seep.jpg": {
+    "title": "Bitumen (mumiya) seep, Persia, c. 1000",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · Bitumen (mumiya) seep, Persia, c. 1000"
+  },
+  "ai/ch02_translator.jpg": {
+    "title": "A translator at work, Toledo, c. 1170",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · A translator at work, Toledo, c. 1170"
+  },
+  "ai/ch03_tomb_night.jpg": {
+    "title": "Tomb robbers at Saqqara, c. 1550",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · Tomb robbers at Saqqara, c. 1550"
+  },
+  "ai/ch03_ship_loading.jpg": {
+    "title": "Loading cargo at Alexandria, c. 1580",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · Loading cargo at Alexandria, c. 1580"
+  },
+  "ai/ch03_apothecary_grinding.jpg": {
+    "title": "An apothecary grinding mumia, London, c. 1650",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · An apothecary grinding mumia, London, c. 1650"
+  },
+  "ai/ch04_dealer_storeroom.jpg": {
+    "title": "A mummy dealer's storeroom, Alexandria, 1564",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · A mummy dealer's storeroom, Alexandria, 1564"
+  },
+  "ai/ch04_oven_fakes.jpg": {
+    "title": "Drying fake mummies in an oven, Lyon, c. 1690",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · Drying fake mummies in an oven, Lyon, c. 1690"
+  },
+  "ai/ch07_unwrapping_party.jpg": {
+    "title": "A mummy unwrapping party, London, 1850",
+    "source": "AI-generated illustration (Gemini) for 15 Minute History",
+    "url": "",
+    "license": "Generated for this video",
+    "tag": "Illustration · A mummy unwrapping party, London, 1850"
   }
 }
