@@ -85,3 +85,59 @@ A grand London drawing room in 1850, afternoon. Tall windows with heavy curtains
 ---
 
 **Dropped from v1:** the scaffold, the locomotive, the garden burial, the last-jar still life, the chocolate still life and the distillery. They're either drawn by hand now, or the heavy chapter stays image-light.
+
+---
+
+# Motion prompts (image to video)
+
+These are optional: only for paintings you've already generated and liked. Run each one in an image-to-video model (Veo in Gemini, or
+Kling or Runway) with the painting as the **starting frame**. Upload the clips to `public/video/ai/` with the same name and `.mp4`.
+
+**Settings for every clip:** 16:9, 1080p, **5–6 seconds**, one continuous shot, no cuts.
+
+**Why the motion stays small:** the channel's look gives each painting *one living detail* (fire, smoke, water, light) while the people stay
+still. The coral tint and teal outline come from a still mask, so if the subject moves, the color slides off. I'll also slow the clip a
+little and turn it black and white, so subtle motion reads well.
+
+**Paste this rule line at the end of every motion prompt:**
+
+> Keep the oil-painting look: visible brushstrokes, craquelure and muted colors, not photorealistic. People stay almost completely still;
+> no one turns toward the camera and no faces change. Wrapped bundles stay fully wrapped. No new objects, no text, no morphing, no
+> camera cut. Slow, subtle, calm motion only.
+
+---
+
+### 1. `ch02_bitumen_seep.mp4`
+The black tar slowly oozes down the rock face and glistens. A small bubble swells in the tar pool and gently pops. Faint heat shimmer
+rises over the distant ridges. The donkey flicks its ear once. Camera: a very slow push-in toward the tar.
+
+### 2. `ch02_translator.mp4`
+The candle flame flickers softly, and its light dances across the parchment and the stone wall. Dust motes drift in the window light. The
+quill tip moves a few small strokes. Camera: almost still, with a barely noticeable drift to the right.
+
+### 3. `ch03_tomb_night.mp4`
+The lantern flames flicker and the lanterns sway gently. Wisps of sand blow low across the ground. A few stars twinkle. The men and the
+wrapped bundle stay still. Camera: a slow push-in toward the shaft opening.
+
+### 4. `ch04_dealer_storeroom.mp4`
+Thin smoke drifts slowly across the racks of wrapped bundles. The oil lamp flame flickers, and shadows shift softly across the room. Dust
+floats in the lamplight. The dealer and the visitor stay still. Camera: a slow sideways slide along the racks, left to right.
+
+### 5. `ch03_ship_loading.mp4` (optional painting)
+Small waves ripple across the harbor, with gold glints on the water. The ship's pennants and loose rigging flutter in the breeze. Distant
+gulls wheel in the sky. The porters stay still. Camera: a slow pan from the quay to the ship.
+
+### 6. `ch03_apothecary_grinding.mp4` (optional painting)
+The pestle turns slowly in the mortar, and a little fine brown powder rises into the window light. The hanging crocodile sways very
+slightly. The apothecary's body stays still apart from the grinding hand. Camera: still.
+
+### 7. `ch04_oven_fakes.mp4` (optional painting)
+The oven fire flickers and glows, with a few embers drifting up. Smoke curls slowly along the ceiling beams. The workman stays still.
+Camera: a slow push-in toward the oven.
+
+### 8. `ch07_unwrapping_party.mp4` (optional painting)
+The surgeon lifts the loose strip of linen slowly upward, only a few inches, and the bundle stays fully wrapped. The chandelier crystals
+glint. The curtains stir slightly. Steam rises from a teacup on the side table. The guests stay still. Camera: a slow push-in toward the table.
+
+**If a clip goes wrong** (faces melting, people walking, the bundle opening), don't fix it. Regenerate, or skip it, and I'll use the still
+painting with a slow push and a drawn living detail instead.
