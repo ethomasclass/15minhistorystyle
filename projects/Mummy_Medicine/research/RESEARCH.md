@@ -60,6 +60,28 @@ The channel's voice is a smart friend who's a little wry. The comedy here comes 
 
 **Guardrails:** don't joke about the people whose bodies were used, especially executed prisoners and the poor in chapter 5. In chapter 5 the joke is on the dealers and the buyers. Say once, plainly, who those bodies belonged to.
 
+## Unwrapping parties (new section, ch 7)
+
+**The hinge:** "Europe stopped eating mummies. So it started unwrapping them for fun." The surgeon who ran the most famous unwrappings, Thomas Pettigrew, opens his 1834 book with a chapter titled "On Mummy as a Drug." Medicine and entertainment share the same people.
+
+- **Pettigrew ("Mummy Pettigrew"):** a London surgeon who unrolled mummies before paying, ticketed audiences. The best known was at the Royal College of Surgeons in Jan 1834. Pieces of the bandages were handed out to people who attended. (Wikipedia; RCS/Atlas Obscura.) "Party favors: a little piece of somebody."
+- **The invitation:** Lord Londesborough's at-home card for Monday, 10 June 1850, at 144 Piccadilly: "A Mummy from Thebes to be unrolled at half-past Two." (Spectator, 2004, describing the card; widely cited. We have no scan of the card, so show it as a typed index card.)
+- **Gliddon in Boston, June 1850 (the American tie-in):**
+  - George Gliddon sold subscriptions at **$5 for four tickets** to three lectures at Tremont Temple, capped at 300 subscribers. The general public paid 50¢ a lecture. He put the mummy's cost at $1,500.
+  - His broadsheet promised an "Unopened Mummy… Daughter of the High Priest of Thebes." The subscribers included Louis Agassiz and leading Boston doctors.
+  - Doctors on the stage started arguing about the body's sex during the unwrapping. At the final lecture the examiners announced it was a **man**. The *Daily Evening Transcript* said it "excited no little surprise and amusement."
+  - Gliddon's defense: the labels must have been switched about 3,000 years earlier, during embalming. **The audience applauded.**
+  - Later study identified him as a Theban man in his 50s, a priest and overseer of craftsmen in the Temple of Amun.
+  - (Mummymania exhibit, Tulane/BAR; image: the AAS broadsheet, saved.)
+- **Edgar Allan Poe, "Some Words with a Mummy" (1845):** a satire in which an unwrapping party jolts a mummy awake with electricity, and he lectures the guests on how backward they are. It shows how ordinary unwrapping parties already were in the 1840s, ordinary enough to parody.
+- **Unverified, don't use:** the story that the Archbishop of Canterbury was turned away from a sold-out Pettigrew unwrapping.
+
+**Draft lines:**
+- "In 1850, a London lord sent out invitations. Monday. 144 Piccadilly. A mummy from Thebes, to be unrolled at half past two. Light refreshments, presumably."
+- "Gliddon's princess turned out to be a man. Gliddon blamed a filing error. Three thousand years ago. Boston applauded."
+
+**Where it goes:** this replaces mummy paper, which is disputed, with one line at most. Ch 7 becomes the unwrapping parties, then Twain, then mummy brown, about 260 words. The 9,000-character budget still holds.
+
 ## Key facts (with sourcing status)
 
 **Confirmed**

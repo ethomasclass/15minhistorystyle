@@ -111,6 +111,7 @@ Colour items are museum photos or hand-coloured prints: desaturate for the chann
 
 | File | Shows | Source | License | Size | Use |
 |---|---|---|---|---|---|
+| `gliddon_1850_unwrapping_broadsheet_yale.jpg` | 1850 Boston subscription broadsheet: 'Unopened Mummy … Daughter of the High Priest of Thebes', $5 for three lectures (603x800, low-res: use as an inset or punch-in) | [AAS via Yale Echoes of Egypt](https://echoesofegypt.peabody.yale.edu/node/229) | PD (1850); credit AAS | 603x800 | Unwrapping parties: Gliddon's 'princess' |
 | `denon_unrolling_a_mummy_print.jpg` | Lithograph 'Mr. Denon unrolling a mummy' (c.1818-25): salon crowd watching an unwrapping (small, no detail of remains) | [loc:2016652470](https://www.loc.gov/pictures/item/2016652470/) | PD (LOC: no known restrictions) | 2400x1891 | 19th-c. Egyptomania / mummy unwrapping |
 | `field_1835_chromatography_mummy_egyptian_brown.jpg` | George Field, Chromatography (1835) p.162: 'XI. Mummy, or Egyptian Brown, is also a bituminous substance combined with animal remains, brought from the catacombs...' | [iabook:chromatographyor00fieluoft:189](https://archive.org/details/chromatographyor00fieluoft/page/n189) | PD (1835 book) | 2392x3458 | Mummy brown definition |
 | `mark_twain_abdullah_freres_1867.jpg` | Mark Twain photographed by Abdullah Freres, Constantinople, 1867 (during the Quaker City trip) | [commons:Mark Twain by Abdullah Frères, 1867.jpg](https://commons.wikimedia.org/wiki/File:Mark_Twain_by_Abdullah_Fr%C3%A8res,_1867.jpg) | Public domain | 1101x1468 | Twain portrait, exact period |
