@@ -85,7 +85,17 @@ The channel's voice is a smart friend who's a little wry. The comedy here comes 
 - **Mummy paper:** the claims and proposals are real, but whether it was ever actually made is disputed. Present it as a legend with a real paper trail.
 - **Croll recipe, Pomet's fakes, Sanderson, Merck 1924, Quincy 1718:** confirmed.
 
-## Images (public domain candidates)
+## Images: archive search results (86 images; see `public/img/IMAGES.md` and `out/contact_sheet.jpg`)
+- **Cold-open find:** Merck's own 1903 price list (Internet Archive): "Mumia vera aegyptica, **solange Vorrath** · K 17.50", genuine Egyptian mummy, *while supplies last*, 17.50 marks a kilo. It's the 1903 list, not 1924, so don't show it as the 1924 page. Use it as: "In 1903 Merck listed it at 17.50 marks a kilo, while supplies last. Supplies lasted. In 1924 it was still there." The 1924 price (12 gold marks) is narration only.
+- **Pomet:** the 1694 "Des Mumies" plate; the 1712 and 1725 English mummy plates; the 1725 p.228 Fontaine page. Paraphrase the "a Jew" wording; don't show it at reading size.
+- **Quincy 1718:** p.148 "quite out of use" (ch 7) and p.592, a liniment with "Man's Grease, Moss of Human Skull… Mummy and Man's Blood" (ch 6).
+- **Twain:** *Innocents Abroad* p.632 with the locomotive line, and the 1867 Constantinople photo.
+- **Mummy brown:** F. Weber's 1888 Philadelphia price list showing "Mummy", and Field's 1835 *Chromatography*.
+- **Library of Congress:** photos of Carter at Tutankhamun's coffins, c. 1926. Also the Apotheken-Museum "PULV. MUMIAE VER." jar.
+- **Credits needed:** the CC BY items (Wellcome, Apotheken-Museum, the Gerard initial) and the CC BY-SA jars (files marked `_ccbysa`).
+- **Crop:** the Pettigrew mummy-cases plate (a small unwrapped body, lower right) and the *Description* "momie de femme" plate.
+
+## Images (original candidate list)
 - Pierre Pomet, *Histoire générale des drogues* (1694) and the English edition (1712): plates of mumia and the mummy trade.
 - Apothecary-shop engravings (16th–17th c.); drug jars labeled MUMIA (museum CC0 collections).
 - Merck price-list page (from the corporate archive, if licensable) or a period German catalog.
