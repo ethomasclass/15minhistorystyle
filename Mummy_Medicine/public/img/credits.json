@@ -734,5 +734,29 @@
     "url": "",
     "license": "Generated for this video",
     "tag": "Illustration · A mummy unwrapping party, London, 1850"
+  },
+  "ch05_fresh/schroeder_1669_modern_mummy_recipe_page.jpg": {
+    "title": "The compleat chymical dispensatory, in five books (page 520, Book V: 'A fifth sort is the modern Mummy')",
+    "artist": "Schröder, Johann, 1600-1664 (trans. William Rowland)",
+    "date": "1669",
+    "licence": "public domain by age (1669)",
+    "page": "https://archive.org/details/b30342065/page/n435",
+    "source": "iabook:b30342065:435"
+  },
+  "ch05_fresh/croll_basilica_chymica_theriaca_de_mumia_page.jpg": {
+    "title": "Oswaldi Crollii Basilica chymica ... aucta a Joan Hartmanno (Geneva: Pierre Chouët, 1635) (page 358, 'Theriaca de Mumia')",
+    "artist": "Croll, Oswald",
+    "date": "1635",
+    "licence": "public domain by age (1635); scan BIU Santé, Licence ouverte / Open licence Etalab",
+    "page": "https://archive.org/details/BIUSante_pharma_011283/page/n610",
+    "source": "iabook:BIUSante_pharma_011283:610"
+  },
+  "ch05_fresh/croll_basilica_chymica_title_page.jpg": {
+    "title": "Oswaldi Crollii Basilica chymica ... aucta a Joan Hartmanno (Geneva: Pierre Chouët, 1635) (title page)",
+    "artist": "Croll, Oswald",
+    "date": "1635",
+    "licence": "public domain by age (1635); scan BIU Santé, Licence ouverte / Open licence Etalab",
+    "page": "https://archive.org/details/BIUSante_pharma_011283/page/n5",
+    "source": "iabook:BIUSante_pharma_011283:5"
   }
 }
