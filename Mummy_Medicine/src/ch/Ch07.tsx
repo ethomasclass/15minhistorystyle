@@ -40,7 +40,7 @@ const OutOfUse: React.FC<{t: TL}> = ({t}) => (
           <AbsoluteFill style={{background: 'linear-gradient(transparent 60%, rgba(0,0,0,0.78) 84%)'}} />
           <Highlight text="1718" x={1500} y={90} size={100} at={t.at('In 1718')} seed={71} rot={-2} />
           <Note text="doctors: losing faith" x={110} y={860} size={52} rot={-3} at={t.at('losing faith')} color="#ffffff" />
-          <Note text="'quite out of use'" x={110} y={950} size={60} rot={-3} at={t.at('quite out')} />
+          <Note text="'quite out of use'" x={110} y={930} size={60} rot={-3} at={t.at('quite out')} />
           <Tag text="John Quincy, The Compleat English Dispensatory, 1718, p. 148 · Internet Archive" x={44} y={40} />
         </>
       );
@@ -153,7 +153,7 @@ const Boston: React.FC<{t: TL}> = ({t}) => {
         <>
           {g >= t.at('Boston') && <Highlight text="BOSTON, 1850" x={110} y={90} size={96} at={t.at('Boston')} seed={75} rot={-2} />}
           <Note text="George Gliddon, lecturer" x={110} y={240} size={54} rot={-3} at={t.at('Gliddon')} color="#ffffff" />
-          <Note text="$5 = 4 tickets, 3 lectures" x={1150} y={880} size={58} rot={-4} at={t.at('Five dollars')} />
+          <Note text="$5 = 4 tickets, 3 lectures" x={1060} y={880} size={54} rot={-4} at={t.at('Five dollars')} />
           <Tag text="Illustration · A mummy unwrapping party, 1850" x={44} y={40} />
         </>
       )}
@@ -171,7 +171,8 @@ const Poster: React.FC<{t: TL}> = ({t}) => {
       <Note text="the poster promised:" x={1000} y={170} size={56} rot={-3} at={t.at('promised')} color="#ffffff" />
       <Note text="'Daughter of the" x={1020} y={290} size={70} rot={-4} at={t.at('Daughter')} color={pal.subject} />
       <Note text="High Priest of Thebes'" x={1060} y={400} size={70} rot={-4} at={t.at('High Priest')} color={pal.subject} />
-      <Note text="signed up: Boston's top doctors + scientists" x={1000} y={600} size={46} rot={-3} at={t.at('signed up')} color="#ffffff" />
+      <Note text="signed up: Boston's top" x={1000} y={580} size={46} rot={-3} at={t.at('signed up')} color="#ffffff" />
+      <Note text="doctors and scientists" x={1030} y={670} size={46} rot={-3} at={t.at('signed up') + 4} color="#ffffff" />
       <Tag text="Gliddon's subscription broadsheet, Boston, 1850 · American Antiquarian Society" />
     </AbsoluteFill>
   );
@@ -204,7 +205,7 @@ const Princess: React.FC<{t: TL}> = ({t}) => {
       {g >= t.at("Gliddon's explanation") && <Note text="Gliddon's explanation:" x={1040} y={560} size={50} rot={-3} at={t.at("Gliddon's explanation")} color="#ffffff" />}
       <Note text="labels switched in embalming" x={1060} y={650} size={44} rot={-3} at={t.at('labels')} />
       <Stamp text="FILING ERROR, 3,000 YRS AGO" x={150} y={880} at={t.at('Three thousand')} size={70} color={pal.subject} rot={-3} />
-      <Note text="Boston applauded." x={1380} y={960} size={56} rot={-4} at={t.at('applauded')} />
+      <Note text="Boston applauded." x={1380} y={930} size={56} rot={-4} at={t.at('applauded')} />
     </AbsoluteFill>
   );
 };

@@ -139,7 +139,7 @@ const PriceList: React.FC<{t: TL}> = ({t}) => {
   return (
     <Photo src={IMG.weber.src} size={IMG.weber.size} fx={900} fy={1180} z0={1.5} z1={1.6} a={t.at('In 1888') - 1} b={t.at('In 1881')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
       {(place) => {
-        const [mx, my] = onScreen(place)(325, 1265);
+        const [mx, my] = onScreen(place)(340, 1252);
         return (
           <>
             <AbsoluteFill style={{background: 'linear-gradient(90deg, transparent 58%, rgba(0,0,0,0.8) 74%)'}} />
@@ -197,7 +197,7 @@ const Burial: React.FC<{t: TL}> = ({t}) => {
       {g >= bur && <Sketch pts={[[1250, 765], [1330, 742], [1420, 744], [1515, 768]]} x={0} y={0} at={bur} dur={8} width={8} color="#8a5a3a" />}
       <Note text="a proper burial." x={860} y={880} size={64} rot={-3} at={bur} color={pal.subject} />
       <Daisy x={1385} y={745} at={t.at('daisy')} />
-      <Note text="+ a daisy on top" x={980} y={560} size={52} rot={-4} at={t.at('daisy') + 6} />
+      <Note text="+ a daisy on top" x={880} y={480} size={52} rot={-4} at={t.at('daisy') + 6} />
     </AbsoluteFill>
   );
 };

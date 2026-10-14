@@ -35,7 +35,7 @@ const Raid: React.FC<{t: TL}> = ({t}) => (
       <>
         <Note text="old burial shafts near Cairo" x={110} y={100} size={56} rot={-3} at={t.at('burial')} color="#ffffff" />
         <Note text="broken into pieces" x={1250} y={820} size={58} rot={-4} at={t.at('broke')} />
-        <Note text="→ sold to merchants" x={1250} y={920} size={58} rot={-4} at={t.at('sold')} />
+        <Note text="→ sold to merchants" x={1180} y={910} size={54} rot={-4} at={t.at('sold')} />
         <Tag text="Illustration · Tomb robbers at Saqqara, c. 1550" />
       </>
     )}
@@ -93,7 +93,7 @@ const Apothecary: React.FC<{t: TL}> = ({t}) => {
           {uses.map(([label, word], i) => (
             <Note key={word} text={`${label} ✓`} x={1430} y={120 + i * 105} size={58} rot={-4} at={t.at(word)} />
           ))}
-          <Note text="pretty much everything" x={1180} y={680} size={64} rot={-4} at={t.at('pretty much')} color={pal.subject} />
+          <Note text="pretty much everything" x={1040} y={680} size={58} rot={-4} at={t.at('pretty much')} color={pal.subject} />
           <Tag text="Illustration · An apothecary grinding mumia, London, c. 1650" />
         </>
       )}

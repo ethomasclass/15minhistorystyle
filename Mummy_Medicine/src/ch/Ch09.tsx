@@ -94,9 +94,9 @@ const Gallery: React.FC<{t: TL}> = ({t}) => {
   const gold = '#c9a34a';
   return (
     <AbsoluteFill style={{background: '#14110d', overflow: 'hidden'}}>
-      <div style={{position: 'absolute', left: -800, top: -400, width: 5400, height: 2000, transform: `translate(${tx}px, ${ty}px) scale(${z})`, transformOrigin: '0 0'}}>
-        <div style={{position: 'absolute', inset: 0, background: 'repeating-linear-gradient(90deg, #1b1712 0, #1b1712 180px, #19150f 181px, #19150f 360px)'}} />
-        <div style={{position: 'absolute', left: 800, top: 400}}>
+      <div style={{position: 'absolute', left: 0, top: 0, width: 3600, height: 1200, transform: `translate(${tx}px, ${ty}px) scale(${z})`, transformOrigin: '0 0'}}>
+        <div style={{position: 'absolute', left: -3000, top: -1500, width: 9600, height: 4200, background: 'repeating-linear-gradient(90deg, #1b1712 0, #1b1712 180px, #19150f 181px, #19150f 360px)'}} />
+        <div style={{position: 'absolute', left: 0, top: 0}}>
         {WALL.map(([src, x, y, w, r], i) => {
           const h = w * r;
           const last = i === WALL.length - 1;

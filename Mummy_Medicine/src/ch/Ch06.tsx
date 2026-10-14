@@ -41,7 +41,7 @@ const SkullPage: React.FC<{t: TL}> = ({t}) => (
       return (
         <>
           <Box S={S} x0={1580} y0={425} x1={3030} y1={700} at={t.at('Powdered') + 4} />
-          <Box S={S} x0={1860} y0={1120} x1={2840} y1={1215} at={t.at('Moss') + 4} />
+          <Box S={S} x0={1860} y0={1060} x1={2840} y1={1160} at={t.at('Moss') + 4} />
           <Shade />
           <Note text="powdered human skull: for epilepsy" x={110} y={850} size={54} rot={-2} at={t.at('Powdered')} color="#ffffff" />
           <Note text="moss from old skulls: to stop bleeding" x={110} y={950} size={54} rot={-2} at={t.at('Moss')} />
@@ -111,7 +111,7 @@ const Scaffold: React.FC<{t: TL}> = ({t}) => (
         <Note text="at public executions: waiting with cups" x={110} y={830} size={52} rot={-2} at={t.at('waited')} color="#ffffff" />
         <Note text="they believed the blood would cure epilepsy" x={110} y={925} size={48} rot={-2} at={t.at('They believed')} />
         <Stamp text="1908" x={1540} y={110} at={t.at('1908')} size={120} color="#EDE7DC" rot={-2} />
-        <Note text="Germany: a reported attempt" x={1260} y={260} size={48} rot={-2} at={t.at('1908') + 4} color="#ffffff" />
+        <Note text="Germany: a reported attempt" x={1160} y={260} size={44} rot={-2} at={t.at('1908') + 4} color="#ffffff" />
         <Tag text="William Hogarth, The Idle 'Prentice Executed at Tyburn, 1747 · Wellcome Collection" x={44} y={40} />
       </>
     )}
