@@ -1485,6 +1485,174 @@
    ],
    "group": "Endings",
    "file": "cues/r_ending.mp3"
+  },
+  {
+   "canonical": "m_1924",
+   "md5": "41a29434c4371e5a41e7f3f3990bdbd5",
+   "duration_s": 78.43,
+   "integrated_lufs": -15.9,
+   "true_peak_dbtp": -2.7,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "1920s foxtrot dance band, muted trumpet, clarinet, tuba bass, banjo, stride piano, brushed snare, vintage shellac record warmth, wry and jaunty, light, mid-tempo, instrumental",
+   "mood": "Wry 1920s foxtrot band: muted trumpet, clarinet, tuba, banjo, stride piano, brushed snare, shellac warmth.",
+   "good_part": "Bouncy throughout; strong from the top, so it works as a cold-open bed.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch01 cold open (0.15) + Ch09 ending",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_old_world",
+   "md5": "9ea8c56d41f4fa963fcbd03e5a3be336",
+   "duration_s": 67.99,
+   "integrated_lufs": -15.4,
+   "true_peak_dbtp": -4.3,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Renaissance early music, lute, viola da gamba, recorder, soft frame drum, curious and contemplative, candlelit study, gentle mid-tempo, modal melody, warm and intimate, sparse, instrumental",
+   "mood": "Renaissance early music: lute, viola da gamba, recorder, soft frame drum; curious, candlelit.",
+   "good_part": "Fullest 14–50 s; thins out in the last 6 s (a natural tail).",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch02 The Typo + Ch07 opening",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_alexandria",
+   "md5": "21f341d141cf3a7847f5f2d5b7cfe052",
+   "duration_s": 74.78,
+   "integrated_lufs": -17.7,
+   "true_peak_dbtp": -5.2,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Middle Eastern cinematic underscore, oud, ney flute, qanun, riq and darbuka, low string drone, maqam hijaz, mysterious night market, slow steady groove, restrained, documentary, instrumental",
+   "mood": "Middle Eastern night-market underscore: oud, ney, qanun, riq/darbuka, string drone, maqam hijaz.",
+   "good_part": "Quiet first ~8 s, then builds; densest 38–60 s.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch03 The Trade",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_tomb",
+   "md5": "e586ad84e9a8ba3b8b9774928b2e3cf6",
+   "duration_s": 54.38,
+   "integrated_lufs": -16.5,
+   "true_peak_dbtp": -5.3,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Dark ambient cinematic tension, low cello drone, deep frame drum heartbeat, distant metallic scrapes, breathy low flute, slow build, suspenseful and patient, no melody hook, minimal, instrumental",
+   "mood": "Dark ambient tension: low cello drone, frame-drum heartbeat, metallic scrapes, breathy flute.",
+   "good_part": "Near-silent first 2 s; steady tension from ~4 s on.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch03 tomb raid + Ch04 storeroom",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_apothecary",
+   "md5": "5debb65479d13db3335318d193015e77",
+   "duration_s": 68.18,
+   "integrated_lufs": -16.2,
+   "true_peak_dbtp": -2.8,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar",
+   "mood": "Dark whimsy: pizzicato, bassoon, harpsichord, celesta, tick-tock percussion; sneaky and macabre.",
+   "good_part": "Mischievous all through; fullest 40–56 s; ends ~64 s.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch04 The Fakes + Ch05 Fresh Is Best",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_lament",
+   "md5": "27a369110e13946bc5503b3d6ebfc63f",
+   "duration_s": 81.6,
+   "integrated_lufs": -15.8,
+   "true_peak_dbtp": -4.5,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Baroque lament, solo viola da gamba and cello, soft chamber organ, slow descending bass line, grave and respectful, very sparse, long held notes, no percussion, quiet, instrumental",
+   "mood": "Baroque lament: viola da gamba and cello, soft chamber organ, descending bass; grave and spare.",
+   "good_part": "Gentle opening, swells 8–16 s and 40–46 s; long quiet tail.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch06 Beyond Mummies (heavy)",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_parlor",
+   "md5": "3939812077e417ce45b8f9c6ccbfa0da",
+   "duration_s": 64.82,
+   "integrated_lufs": -16.5,
+   "true_peak_dbtp": -4.1,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Victorian parlor music, upright piano, music box, clarinet, pizzicato violin, waltz time, quaint and curious with a slightly eerie undertone, gaslight atmosphere, gentle, sparse, instrumental",
+   "mood": "Victorian parlor waltz: upright piano, music box, clarinet, pizzicato violin; quaint with an eerie edge.",
+   "good_part": "Lively 8–52 s; fades 54 s on.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Ch07 The Party + Ch08 The Tube",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "m_reveal",
+   "md5": "54cad42f662c790abe68c692b7f4ad49",
+   "duration_s": 69.62,
+   "integrated_lufs": -17.4,
+   "true_peak_dbtp": -3.8,
+   "source_video": "When Europe Ate Mummies",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "Cinematic documentary build, ticking clock percussion, pizzicato strings, low piano ostinato, rising tension, layers added every few bars, punchy, ends with one hard orchestral hit and silence, 60 seconds, instrumental",
+   "mood": "Shorts engine: ticking clock, pizzicato, low piano ostinato, layers stacking toward a hit.",
+   "good_part": "Hits by ~4 s and builds through; the last strong accent is near 64 s.",
+   "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
+   "used_in": [
+    {
+     "video": "When Europe Ate Mummies",
+     "where": "Shorts (not yet used)",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
   }
  ]
 }
