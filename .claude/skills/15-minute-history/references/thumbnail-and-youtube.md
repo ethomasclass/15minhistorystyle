@@ -59,6 +59,7 @@ This is <topic> explained in 15 minutes: <the big topics, in video order, named 
 Great for APUSH Period <N> (<years>) review, U.S. History class, or anyone who wants to understand <topic>.
 
 👍 If this helped, like and subscribe for more 15 Minute History.   (add "Next time: ..." only if the next video is decided)
+🛍️ Stickers from 15 Minute History: https://www.teepublic.com/user/minutehistory   (the user's shop: in every description)
 
 🖼️ SOURCES & CREDITS
 Historical images: <institutions actually used, from public/img/credits.json: Library of Congress, Wikimedia Commons, ...>. A few scenes with no surviving image were illustrated with AI image generation. Narration uses an AI voice; music is AI-generated.

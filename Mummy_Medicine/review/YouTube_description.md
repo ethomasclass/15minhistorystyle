@@ -37,6 +37,7 @@ This is the history of mummy medicine in under 10 minutes: a translation mistake
 Great for World History or AP European History, or anyone who loves strange history.
 
 👍 If you enjoyed this, like and subscribe for more 15 Minute History.
+🛍️ Stickers from 15 Minute History: https://www.teepublic.com/user/minutehistory
 
 🖼️ SOURCES & CREDITS
 Historical images: Internet Archive, Wellcome Collection (CC BY 4.0), Library of Congress, Wikimedia Commons, The Metropolitan Museum of Art, Art Institute of Chicago, Cleveland Museum of Art, American Antiquarian Society, Bibliothèque nationale de France and BIU Santé. Pharmacy jars for human fat: Bullenwächter, CC BY-SA 3.0. The gallery paintings at the end are illustrations only; none is known to contain mummy brown. A few scenes with no surviving image were illustrated with AI image generation. Narration uses an AI voice; music is AI-generated (Suno).
