@@ -758,5 +758,53 @@
     "licence": "public domain by age (1635); scan BIU Santé, Licence ouverte / Open licence Etalab",
     "page": "https://archive.org/details/BIUSante_pharma_011283/page/n5",
     "source": "iabook:BIUSante_pharma_011283:5"
+  },
+  "ch09_answer/gallery_1.jpg": {
+    "title": "William Forsyth (1749–1814)",
+    "artist": "Sir Henry Raeburn",
+    "date": "ca. 1800",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/437363",
+    "source": "met:437363"
+  },
+  "ch09_answer/gallery_2.jpg": {
+    "title": "Mrs. James Pulham Sr. (Frances Amys, ca. 1766–1856)",
+    "artist": "John Constable",
+    "date": "1818",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/435921",
+    "source": "met:435921"
+  },
+  "ch09_answer/gallery_3.jpg": {
+    "title": "The Experts",
+    "artist": "Alexandre-Gabriel Decamps",
+    "date": "1837",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/436114",
+    "source": "met:436114"
+  },
+  "ch09_answer/gallery_4.jpg": {
+    "title": "The Love Song",
+    "artist": "Sir Edward Burne-Jones",
+    "date": "1868–77",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/435826",
+    "source": "met:435826"
+  },
+  "ch09_answer/gallery_5.jpg": {
+    "title": "Hautbois Common, Norfolk",
+    "artist": "John Crome",
+    "date": "probably ca. 1810",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/436057",
+    "source": "met:436057"
+  },
+  "ch09_answer/gallery_6.jpg": {
+    "title": "The Mill of Montmartre",
+    "artist": "Georges Michel",
+    "date": "probably ca. 1820",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/437080",
+    "source": "met:437080"
   }
 }

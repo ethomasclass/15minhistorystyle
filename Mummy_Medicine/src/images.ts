@@ -40,4 +40,24 @@ export const IMG = {
   crollPage: im('img/ch05_fresh/croll_basilica_chymica_theriaca_de_mumia_page.jpg', 1566, 2645),
   schroederPage: im('img/ch05_fresh/schroeder_1669_modern_mummy_recipe_page.jpg', 3427, 5282),
   mummyCase: im('img/ch04_trade/cartonnage_mummy_case_cma.jpg', 1011, 2048),
+  // ch06
+  pometSkull: im('img/ch06_corpse_medicine/pomet_1725_human_fat_and_moss_upon_human_skull_page.jpg', 3062, 4301),
+  fatJars: im('img/ch06_corpse_medicine/albarelli_axungia_hominis_human_fat_jars_ccbysa.jpg', 1920, 1486),
+  quincy592: im('img/ch06_corpse_medicine/quincy_1718_sympathetick_liniment_moss_of_skull_page.jpg', 2088, 3682),
+  charles: im('img/ch06_corpse_medicine/charles_ii_standing_engraving_sherwin.jpg', 2400, 3856),
+  tyburn: im('img/ch06_corpse_medicine/hogarth_idle_prentice_executed_tyburn_crowd_1747.jpg', 2400, 1644),
+  montaigne: im('img/ch06_corpse_medicine/montaigne_engraving_saint_aubin_1774_met.jpg', 1920, 2415),
+  // ch07
+  quincy148: im('img/ch07_decline/quincy_1718_dispensatory_mummia_quite_out_of_use_page.jpg', 2088, 3682),
+  denon: im('img/ch08_america/denon_unrolling_a_mummy_print.jpg', 2400, 1891),
+  pettigrewTitle: im('img/ch08_america/pettigrew_1834_history_of_egyptian_mummies_title.jpg', 2142, 2895),
+  party: im('img/ai/ch07_unwrapping_party.jpg', 1376, 768),
+  gliddon: im('img/ch08_america/gliddon_1850_unwrapping_broadsheet_yale.jpg', 603, 800),
+  // ch08
+  twain: im('img/ch08_america/mark_twain_abdullah_freres_1867_loc.jpg', 1043, 1536),
+  twainPage: im('img/ch08_america/twain_innocents_abroad_1869_mummy_locomotive_page.jpg', 2268, 3912),
+  weber: im('img/ch08_america/weber_1888_price_list_oil_colours_incl_mummy.jpg', 2122, 3446),
+  field: im('img/ch08_america/field_1835_chromatography_mummy_egyptian_brown.jpg', 2392, 3458),
+  // ch09
+  merckFactory: im('img/ch09_answer/merck_darmstadt_factory_engraving_1903.jpg', 4228, 2500),
 };
