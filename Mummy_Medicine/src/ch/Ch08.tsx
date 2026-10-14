@@ -24,7 +24,7 @@ const Twain: React.FC<{t: TL}> = ({t}) => {
           <Note text="not every mummy ended up in a pharmacy" x={110} y={110} size={48} rot={-3} at={0} color="#ffffff" />
           {g >= t.at('In 1869') && <Highlight text="1869" x={1400} y={300} size={110} at={t.at('In 1869')} seed={81} rot={-2} />}
           <Note text="Mark Twain" x={1400} y={470} size={68} rot={-3} at={t.at('Mark Twain')} color="#ffffff" />
-          <Note text="The Innocents Abroad" x={1380} y={580} size={50} rot={-3} at={t.at('Mark Twain') + 6} />
+          <Note text="The Innocents Abroad" x={1320} y={580} size={46} rot={-3} at={t.at('Mark Twain') + 6} />
           <Tag text="Mark Twain, Constantinople, 1867 · Library of Congress" />
         </>
       )}
@@ -146,7 +146,7 @@ const PriceList: React.FC<{t: TL}> = ({t}) => {
             <Loop cx={mx} cy={my} rx={150} ry={52} at={t.at('listed it')} seed={83} color={pal.subject} />
             {g >= t.at('In 1888') && <Highlight text="1888" x={1480} y={110} size={100} at={t.at('In 1888')} seed={84} rot={-2} />}
             <Note text="Philadelphia" x={1470} y={270} size={54} rot={-3} at={t.at('Philadelphia')} color="#ffffff" />
-            <Note text="'Mummy': right there with the other browns" x={1440} y={440} size={40} rot={-3} at={t.at('right there')} />
+            <Note text="'Mummy', with the browns" x={1440} y={440} size={40} rot={-3} at={t.at('right there')} />
             <Tag text="F. Weber & Co., artists' price list, Philadelphia, 1888 · Internet Archive" x={44} y={1030} />
           </>
         );
