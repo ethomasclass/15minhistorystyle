@@ -59,20 +59,20 @@ const Locomotive: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   const a = t.at('wrote that');
-  const ox = interpolate(g, [a, a + 120], [1380, 300], clamp) - 620;
+  const ox = interpolate(g, [a, a + 120], [1250, 250], clamp) - 620;
   const oy = 520;
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sketch pts={[[0, oy + 250], [1920, oy + 250]]} x={0} y={0} at={a} dur={8} width={5} smooth={false} color="#EDE7DC" />
-      {LOCO.map((p, i) => <Sketch key={i} pts={p} x={ox + 620} y={oy} at={a + i * 2} dur={10} width={7} smooth={false} />)}
-      {[[90, 225, 30], [210, 225, 30], [380, 210, 45]].map(([cx, cy, r], i) => <Wheel key={i} cx={ox + 620 + cx} cy={oy + cy} r={r} at={a + 10} spin={g / 3 + i} />)}
+      <Sketch pts={[[0, oy + 210], [1920, oy + 210]]} x={0} y={0} at={a} dur={8} width={5} smooth={false} color="#EDE7DC" />
+      {LOCO.map((p, i) => <Sketch key={i} pts={p} x={ox + 620} y={oy - 130} s={1.5} at={a + i * 2} dur={10} width={7} smooth={false} />)}
+      {[[90, 225, 30], [210, 225, 30], [380, 210, 45]].map(([cx, cy, r], i) => <Wheel key={i} cx={ox + 620 + cx * 1.5} cy={oy - 130 + cy * 1.5} r={r * 1.5} at={a + 10} spin={g / 3 + i} />)}
       {[0, 1, 2, 3, 4, 5].map((i) => {
         const born = a + 8 + i * 10;
         if (g < born) return null;
         const age = g - born;
-        const px = ox + 620 + 95 + age * 3;
-        const py = oy + 10 - age * 4.5;
+        const px = ox + 620 + 140 + age * 4;
+        const py = oy - 100 - age * 4;
         const sc = 1 + age * 0.04;
         return <Sketch key={i} pts={COFFIN.map(([x, y]) => [x * sc, y * sc] as P)} x={px} y={py} at={born} dur={3} width={4} closed color="#EDE7DC" />;
       })}
@@ -93,8 +93,8 @@ const TwainPage: React.FC<{t: TL}> = ({t}) => (
         <>
           <Sketch pts={[[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0 + 6]]} x={0} y={0} at={t.at('People repeated') + 2} dur={10} width={6} smooth={false} />
           <AbsoluteFill style={{background: 'linear-gradient(transparent 62%, rgba(0,0,0,0.8) 84%)'}} />
-          <Note text="repeated as fact for" x={110} y={880} size={54} rot={-3} at={t.at('as fact')} color="#ffffff" />
-          <CountUp from={0} to={150} at={t.at('next hundred')} dur={14} x={640} y={850} size={110} label="years" />
+          <Note text="repeated as fact for" x={110} y={880} size={50} rot={-3} at={t.at('as fact')} color="#ffffff" />
+          <CountUp from={0} to={150} at={t.at('next hundred')} dur={14} x={780} y={840} size={110} label="years" />
           <Tag text="Mark Twain, The Innocents Abroad, 1869, p. 632 · Internet Archive" x={44} y={40} />
         </>
       );
@@ -126,7 +126,7 @@ const MummyBrown: React.FC<{t: TL}> = ({t}) => {
       )}
       {g >= t.at('mummy brown') && <Highlight text="MUMMY BROWN" x={140} y={110} size={110} at={t.at('mummy brown')} seed={82} rot={-2} />}
       <Definition term="mum·my brown" def="an artists' brown paint, made at least some of the time from ground-up mummies" at={t.at('It was made')} x={160} y={740} w={1400} />
-      <Note text="for generations, artists bought it" x={1100} y={280} size={50} rot={-3} at={t.at('artists bought')} color="#ffffff" />
+      <Note text="for generations, artists bought it" x={980} y={280} size={46} rot={-3} at={t.at('artists bought')} color="#ffffff" />
       <Note text="(at least some of the time)" x={1100} y={900} size={46} rot={-3} at={t.at('at least')} color={pal.subject} />
     </AbsoluteFill>
   );
@@ -137,15 +137,16 @@ const PriceList: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <Photo src={IMG.weber.src} size={IMG.weber.size} fx={900} fy={900} z0={1.5} z1={1.6} a={t.at('In 1888') - 1} b={t.at('In 1881')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
+    <Photo src={IMG.weber.src} size={IMG.weber.size} fx={900} fy={1180} z0={1.5} z1={1.6} a={t.at('In 1888') - 1} b={t.at('In 1881')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
       {(place) => {
-        const [mx, my] = onScreen(place)(320, 1110);
+        const [mx, my] = onScreen(place)(325, 1265);
         return (
           <>
-            <Loop cx={mx} cy={my} rx={130} ry={46} at={t.at('listed it')} seed={83} color={pal.subject} />
-            {g >= t.at('In 1888') && <Highlight text="1888" x={1460} y={90} size={100} at={t.at('In 1888')} seed={84} rot={-2} />}
-            <Note text="Philadelphia" x={1440} y={240} size={58} rot={-3} at={t.at('Philadelphia')} color="#ffffff" />
-            <Note text="right there with the other browns" x={1050} y={900} size={50} rot={-3} at={t.at('right there')} />
+            <AbsoluteFill style={{background: 'linear-gradient(90deg, transparent 58%, rgba(0,0,0,0.8) 74%)'}} />
+            <Loop cx={mx} cy={my} rx={150} ry={52} at={t.at('listed it')} seed={83} color={pal.subject} />
+            {g >= t.at('In 1888') && <Highlight text="1888" x={1480} y={110} size={100} at={t.at('In 1888')} seed={84} rot={-2} />}
+            <Note text="Philadelphia" x={1470} y={270} size={54} rot={-3} at={t.at('Philadelphia')} color="#ffffff" />
+            <Note text="'Mummy': right there with the other browns" x={1440} y={440} size={40} rot={-3} at={t.at('right there')} />
             <Tag text="F. Weber & Co., artists' price list, Philadelphia, 1888 · Internet Archive" x={44} y={1030} />
           </>
         );
@@ -196,7 +197,7 @@ const Burial: React.FC<{t: TL}> = ({t}) => {
       {g >= bur && <Sketch pts={[[1250, 765], [1330, 742], [1420, 744], [1515, 768]]} x={0} y={0} at={bur} dur={8} width={8} color="#8a5a3a" />}
       <Note text="a proper burial." x={860} y={880} size={64} rot={-3} at={bur} color={pal.subject} />
       <Daisy x={1385} y={745} at={t.at('daisy')} />
-      <Note text="+ a daisy on top" x={1460} y={560} size={52} rot={-4} at={t.at('daisy') + 6} />
+      <Note text="+ a daisy on top" x={980} y={560} size={52} rot={-4} at={t.at('daisy') + 6} />
     </AbsoluteFill>
   );
 };

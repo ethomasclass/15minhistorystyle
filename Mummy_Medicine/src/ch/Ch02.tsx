@@ -34,7 +34,7 @@ const Seep: React.FC<{t: TL}> = ({t}) => {
 
 /** Egyptian embalming: black resins and pitch on dark, glossy bodies (a coffin plate, no remains). */
 const Embalmed: React.FC<{t: TL}> = ({t}) => (
-  <Photo src={IMG.blackCoffin.src} size={IMG.blackCoffin.size} fx={843} fy={1300} z0={1.02} z1={1.1} a={t.at('But the ancient') - 1} b={t.at('Black stuff in')}>
+  <Photo src={IMG.blackCoffin.src} size={IMG.blackCoffin.size} fx={843} fy={720} z0={1.02} z1={1.1} a={t.at('But the ancient') - 1} b={t.at('Black stuff in')}>
     {() => (
       <>
         <Note text="ancient Egypt: black resin + pitch" x={110} y={110} size={56} rot={-3} at={t.at('black resins')} color="#ffffff" />

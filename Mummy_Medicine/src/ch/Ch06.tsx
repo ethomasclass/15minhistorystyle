@@ -40,8 +40,8 @@ const SkullPage: React.FC<{t: TL}> = ({t}) => (
       const S = onScreen(place);
       return (
         <>
-          <Box S={S} x0={1580} y0={640} x1={3020} y1={830} at={t.at('Powdered') + 4} />
-          <Box S={S} x0={1880} y0={970} x1={2820} y1={1075} at={t.at('Moss') + 4} />
+          <Box S={S} x0={1580} y0={425} x1={3030} y1={700} at={t.at('Powdered') + 4} />
+          <Box S={S} x0={1860} y0={1120} x1={2840} y1={1215} at={t.at('Moss') + 4} />
           <Shade />
           <Note text="powdered human skull: for epilepsy" x={110} y={850} size={54} rot={-2} at={t.at('Powdered')} color="#ffffff" />
           <Note text="moss from old skulls: to stop bleeding" x={110} y={950} size={54} rot={-2} at={t.at('Moss')} />
@@ -68,12 +68,12 @@ const Fat: React.FC<{t: TL}> = ({t}) => (
 
 /** Quincy, 1718: the sympathetic liniment. */
 const Liniment: React.FC<{t: TL}> = ({t}) => (
-  <Photo src={IMG.quincy592.src} size={IMG.quincy592.size} fx={1560} fy={2640} z0={1.6} z1={1.7} a={t.at('A London') - 1} b={t.at('In 1685')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
+  <Photo src={IMG.quincy592.src} size={IMG.quincy592.size} fx={1600} fy={3110} z0={1.45} z1={1.55} a={t.at('A London') - 1} b={t.at('In 1685')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
     {(place) => {
       const S = onScreen(place);
       return (
         <>
-          <Box S={S} x0={1060} y0={2480} x1={2088} y1={2885} at={t.at('listed') + 2} />
+          <Box S={S} x0={1110} y0={2860} x1={2080} y1={3390} at={t.at('listed') + 2} />
           <Shade />
           <Highlight text="1718" x={110} y={90} size={96} at={t.at('1718')} seed={62} rot={-2} />
           <Note text="a London pharmacy book's 'Sympathetick Liniment'" x={110} y={940} size={46} rot={-2} at={t.at('still listed')} color="#ffffff" />
@@ -127,13 +127,14 @@ const Montaigne: React.FC<{t: TL}> = ({t}) => {
       <DarkPaper />
       <CropCard src={IMG.montaigne.src} size={IMG.montaigne.size} x={180} y={140} w={560} h={760} fx={960} fy={1100} scale={0.5} rot={-1.5} at={t.at('Around 1580') - 2} />
       {g >= t.at('Around 1580') && <Highlight text="c. 1580" x={860} y={130} size={100} at={t.at('Around 1580')} seed={64} rot={-2} />}
-      <Note text="Michel de Montaigne, 'Of Cannibals'" x={880} y={290} size={52} rot={-2} at={t.at('Michel')} color="#ffffff" />
-      {g < back && <Arrow x1={900} y1={470} x2={1760} y2={470} bow={-20} at={t.at('called cannibals')} width={7} />}
-      {g < back && <Note text="'cannibals'" x={1180} y={380} size={54} rot={-2} at={t.at('called cannibals')} />}
-      <Note text="Europe: just as savage, and called it normal" x={880} y={560} size={50} rot={-2} at={t.at('Europe did')} color="#ffffff" />
-      <Note text="(he meant torture and war)" x={900} y={660} size={46} rot={-2} at={t.at('torture')} />
-      {g >= back && <Arrow x1={1760} y1={800} x2={900} y2={800} bow={60} at={back} width={7} />}
-      {g >= back && <Note text="...and the pharmacy." x={1100} y={850} size={66} rot={-2} at={t.at('the pharmacy')} />}
+      <Note text="Michel de Montaigne, 'Of Cannibals'" x={880} y={270} size={50} rot={-2} at={t.at('Michel')} color="#ffffff" />
+      {g < back && <Note text="'cannibals'" x={1150} y={390} size={52} rot={-2} at={t.at('called cannibals')} />}
+      {g < back && <Arrow x1={900} y1={500} x2={1760} y2={500} bow={-20} at={t.at('called cannibals')} width={7} />}
+      <Note text="Europe: just as savage," x={880} y={560} size={52} rot={-2} at={t.at('Europe did')} color="#ffffff" />
+      <Note text="and called it normal" x={920} y={650} size={52} rot={-2} at={t.at('called them')} color="#ffffff" />
+      <Note text="(he meant torture and war)" x={900} y={750} size={46} rot={-2} at={t.at('torture')} />
+      {g >= back && <Arrow x1={1760} y1={860} x2={900} y2={860} bow={50} at={back} width={7} />}
+      {g >= back && <Note text="...and the pharmacy." x={1000} y={890} size={64} rot={-2} at={t.at('the pharmacy')} />}
       <Tag text="Michel de Montaigne, engraving by Saint-Aubin, 1774 · The Metropolitan Museum of Art" />
     </AbsoluteFill>
   );

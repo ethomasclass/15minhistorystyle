@@ -155,13 +155,14 @@ const MadeInFrance: React.FC<{t: TL}> = ({t}) => {
 const Fish: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
-    <Photo src={IMG.pomet1712Plate.src} size={IMG.pomet1712Plate.size} fx={1600} fy={1900} z0={1.0} z1={1.08} a={t.at("Pomet's verdict") - 1} b={t.frames + 30} bw="grayscale(1) contrast(1.15) sepia(0.2)">
+    <Photo src={IMG.pomet1712Plate.src} size={IMG.pomet1712Plate.size} fx={2200} fy={1800} z0={1.45} z1={1.55} a={t.at("Pomet's verdict") - 1} b={t.frames + 30} bw="grayscale(1) contrast(1.15) sepia(0.2)">
       {() => (
         <>
-          <Note text="Pomet's verdict on the finest grade:" x={110} y={100} size={52} rot={-3} at={t.at("Pomet's verdict")} color="#ffffff" />
-          <Note text="its greatest use:" x={1180} y={760} size={56} rot={-3} at={t.at('greatest use')} color="#ffffff" />
-          <Stamp text="FISH BAIT" x={1150} y={840} at={t.at('catching fish')} size={130} color={pal.subject} rot={-6} />
-          <Tag text="Pomet, A Compleat History of Druggs, 1712, plate of mummies · Internet Archive" />
+          <AbsoluteFill style={{background: 'linear-gradient(rgba(0,0,0,0.75) 0%, transparent 22%, transparent 66%, rgba(0,0,0,0.8) 86%)'}} />
+          <Note text="Pomet's verdict on the finest grade:" x={110} y={70} size={52} rot={-3} at={t.at("Pomet's verdict")} color="#ffffff" />
+          <Note text="its greatest use:" x={140} y={860} size={56} rot={-3} at={t.at('greatest use')} color="#ffffff" />
+          <Stamp text="FISH BAIT" x={760} y={830} at={t.at('catching fish')} size={150} color={pal.subject} rot={-6} />
+          <Tag text="Pomet, A Compleat History of Druggs, 1712, plate of mummies · Internet Archive" x={1000} y={40} />
         </>
       )}
     </Photo>

@@ -56,8 +56,9 @@ const Archive: React.FC<{t: TL}> = ({t}) => (
   <Photo src={IMG.merckFactory.src} size={IMG.merckFactory.size} fx={2114} fy={1250} z0={1.02} z1={1.1} a={t.at('A box of') - 1} b={t.at('And mummy brown')}>
     {() => (
       <>
-        <Note text="a box of Merck's mummy:" x={110} y={820} size={56} rot={-3} at={t.at('A box of')} color="#ffffff" />
-        <Note text="still in the company archive" x={150} y={920} size={64} rot={-3} at={t.at('still sits')} />
+        <AbsoluteFill style={{background: 'linear-gradient(transparent 70%, rgba(0,0,0,0.8) 86%)'}} />
+        <Note text="a box of Merck's mummy:" x={110} y={890} size={52} rot={-3} at={t.at('A box of')} color="#ffffff" />
+        <Note text="still in the company archive" x={700} y={880} size={60} rot={-3} at={t.at('still sits')} />
         <Tag text="E. Merck works, Darmstadt, engraving, 1903 · Internet Archive" x={44} y={40} />
       </>
     )}
@@ -93,8 +94,9 @@ const Gallery: React.FC<{t: TL}> = ({t}) => {
   const gold = '#c9a34a';
   return (
     <AbsoluteFill style={{background: '#14110d', overflow: 'hidden'}}>
-      <div style={{position: 'absolute', left: 0, top: 0, width: 3600, height: 1200, transform: `translate(${tx}px, ${ty}px) scale(${z})`, transformOrigin: '0 0'}}>
+      <div style={{position: 'absolute', left: -800, top: -400, width: 5400, height: 2000, transform: `translate(${tx}px, ${ty}px) scale(${z})`, transformOrigin: '0 0'}}>
         <div style={{position: 'absolute', inset: 0, background: 'repeating-linear-gradient(90deg, #1b1712 0, #1b1712 180px, #19150f 181px, #19150f 360px)'}} />
+        <div style={{position: 'absolute', left: 800, top: 400}}>
         {WALL.map(([src, x, y, w, r], i) => {
           const h = w * r;
           const last = i === WALL.length - 1;
@@ -112,6 +114,7 @@ const Gallery: React.FC<{t: TL}> = ({t}) => {
             </React.Fragment>
           );
         })}
+        </div>
       </div>
       <Note text="which browns? artists rarely wrote it down" x={110} y={90} size={50} rot={-2} at={t.at('rarely')} color="#ffffff" out={t.at('Which means')} />
       <Note text="and they're hard to tell apart" x={140} y={180} size={50} rot={-2} at={t.at('tell them apart')} out={t.at('Which means')} />
@@ -129,11 +132,11 @@ const EndScreen: React.FC<{t: TL}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Jar x={170} y={170} h={740} at={a} labels={[{text: 'MUMIA', at: a, size: 10}]} fill={[[a, 0.7]]} />
-      {g >= a + 4 && <Highlight text="THANKS FOR WATCHING" x={760} y={150} size={80} at={a + 4} seed={92} rot={-2} />}
-      <Note text="subscribe ↓" x={800} y={330} size={84} rot={-3} at={t.at('subscribe')} />
-      <Note text="more stories like this one" x={820} y={480} size={54} rot={-3} at={t.at('more stories')} color="#ffffff" />
-      <Note text="(contains no one)" x={840} y={590} size={50} rot={-3} at={t.at('subscribe') + 10} color={pal.subject} />
+      <Jar x={110} y={190} h={700} at={a} labels={[{text: 'MUMIA', at: a, size: 10}]} fill={[[a, 0.7]]} />
+      {g >= a + 4 && <Highlight text="THANKS FOR WATCHING" x={620} y={170} size={64} at={a + 4} seed={92} rot={-2} />}
+      <Note text="subscribe ↓" x={640} y={330} size={84} rot={-3} at={t.at('subscribe')} />
+      <Note text="more stories like this one" x={660} y={480} size={54} rot={-3} at={t.at('more stories')} color="#ffffff" />
+      <Note text="(contains no one)" x={680} y={590} size={50} rot={-3} at={t.at('subscribe') + 10} color={pal.subject} />
     </AbsoluteFill>
   );
 };

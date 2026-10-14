@@ -140,7 +140,7 @@ const Title: React.FC = () => {
   const frame = useCurrentFrame();
   const pal = usePal();
   const {src, size} = IMG.pometPlate;
-  const place = fill(size, 1600, 1500, 1.0 + frame * 0.0004);
+  const place = fill(size, 2100, 1900, 1.25 + frame * 0.0004);
   return (
     <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
       <div style={{opacity: 0.35}}><Picture src={src} place={place} size={size} /></div>

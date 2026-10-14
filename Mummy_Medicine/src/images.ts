@@ -9,7 +9,7 @@ export const IMG = {
   carter: im('img/ch01_1924/howard_carter_beside_tutankhamun_coffin_c1926.jpg', 1536, 1140),
   museumJar: im('img/ch01_1924/deutsches_apothekenmuseum_mumia_jar.jpg', 1920, 2880),
   seep: im('img/ai/ch02_bitumen_seep.jpg', 1376, 768),
-  pometPlate: im('img/ch05_fakes/pomet_1712_mummies_plate.jpg', 3229, 3881),
+  pometPlate: im('img/ch05_fakes/pomet_1712_mummies_plate_upright.jpg', 3881, 3229),
   // ch02
   translator: im('img/ai/ch02_translator.jpg', 1376, 768),
   sarcophagus: im('img/ch03_mistake/description_egypte_mummy_shaped_sarcophagus_boulaq_1809.jpg', 3840, 2813),
@@ -18,7 +18,7 @@ export const IMG = {
   gerardPage: im('img/ch03_mistake/gerard_of_cremona_wellcome_diagram_page.jpg', 1920, 2301),
   avicenna: im('img/ch02_word/avicenna_canon_persian_manuscript_isfahan_1632.jpg', 2400, 4746),
   blackCoffin: im('img/ch03_mistake/coffin_of_paankhaenamun_aic.jpg', 1686, 5058),
-  pomet1712Plate: im('img/ch05_fakes/pomet_1712_mummies_plate.jpg', 3229, 3881),
+  pomet1712Plate: im('img/ch05_fakes/pomet_1712_mummies_plate_upright.jpg', 3881, 3229),
   // ch03
   cairoTombs: im('img/ch04_trade/description_egypte_cairo_city_of_tombs_1809.jpg', 3840, 2753),
   tomb: im('img/ai/ch03_tomb_night.jpg', 1376, 768),

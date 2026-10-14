@@ -29,11 +29,11 @@ const DrawnBundle: React.FC<{x: number; y: number; s?: number; at: number}> = ({
 
 /** Quincy, 1718: "quite out of use". */
 const OutOfUse: React.FC<{t: TL}> = ({t}) => (
-  <Photo src={IMG.quincy148.src} size={IMG.quincy148.size} fx={560} fy={1800} z0={1.55} z1={1.65} a={0} b={t.at('Europe took')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
+  <Photo src={IMG.quincy148.src} size={IMG.quincy148.size} fx={600} fy={2470} z0={1.45} z1={1.55} a={0} b={t.at('Europe took')} bw="grayscale(1) contrast(1.15) sepia(0.2)">
     {(place) => {
       const S = onScreen(place);
-      const [a, b] = S(330, 1880);
-      const [c] = S(1000, 1880);
+      const [a, b] = S(480, 2598);
+      const [c] = S(1065, 2598);
       return (
         <>
           <Sketch pts={[[a, b], [c, b + 4]]} x={0} y={0} at={t.at('quite out')} dur={8} width={8} color="#FF9F1C" smooth={false} />
@@ -58,7 +58,7 @@ const Dusty: React.FC<{t: TL}> = ({t}) => {
       <Jar x={330} y={140} h={780} at={a - 2} labels={[{text: 'MUMIA', at: a - 2, size: 10}]} fill={[[a - 2, 0.6]]} cobweb={a + 4} dust={a + 2} />
       <IndexCard x={850} y={170} w={560} h={190} at={a + 2} rot={4} lines={[{text: 'quite out of use', at: a + 6, color: '#b8402f'}]} size={44} />
       <Note text="Europe took it as a suggestion." x={880} y={470} size={58} rot={-3} at={t.at('suggestion')} color={pal.subject} />
-      <Note text="still in catalogs: 2 more centuries" x={880} y={600} size={54} rot={-3} at={t.at('stayed')} color="#ffffff" />
+      <Note text="still in catalogs: 2 more centuries" x={860} y={600} size={48} rot={-3} at={t.at('stayed')} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -95,7 +95,7 @@ const Pettigrew: React.FC<{t: TL}> = ({t}) => {
       {g >= t.at('Thomas Pettigrew') && <Highlight text="THOMAS PETTIGREW" x={870} y={220} size={84} at={t.at('Thomas Pettigrew')} seed={73} rot={-2} />}
       <Note text="a.k.a. 'Mummy' Pettigrew" x={900} y={380} size={60} rot={-3} at={t.at('called him')} />
       <Note text="guests bought tickets" x={900} y={520} size={54} rot={-3} at={t.at('Guests')} color="#ffffff" />
-      <Note text="some went home with a scrap of bandage" x={900} y={620} size={48} rot={-3} at={t.at('scrap')} color="#ffffff" />
+      <Note text="some took home a scrap of bandage" x={900} y={620} size={44} rot={-3} at={t.at('scrap')} color="#ffffff" />
       <Note text="party favors." x={960} y={750} size={80} rot={-4} at={t.at('Party favors')} color={pal.subject} />
       <Tag text="T. J. Pettigrew, A History of Egyptian Mummies, 1834 · Internet Archive" />
     </AbsoluteFill>
@@ -129,17 +129,17 @@ const Invitation: React.FC<{t: TL}> = ({t}) => {
       {g >= a && <Highlight text="1850" x={110} y={90} size={100} at={a} seed={74} rot={-2} />}
       <Note text="a London lord's invitation" x={110} y={240} size={50} rot={-3} at={t.at('lord')} color="#ffffff" />
       {g >= sp + 10 && (
-        <div style={{position: 'absolute', left: 1010, top: 200, width: 820, height: 470, background: '#f4efe6', boxShadow: '0 18px 34px rgba(0,0,0,0.6)', transform: `rotate(3deg) scale(${interpolate(g, [sp + 10, sp + 15], [0.7, 1], clamp)})`,
+        <div style={{position: 'absolute', left: 960, top: 180, width: 880, height: 470, background: '#f4efe6', boxShadow: '0 18px 34px rgba(0,0,0,0.6)', transform: `rotate(3deg) scale(${interpolate(g, [sp + 10, sp + 15], [0.7, 1], clamp)})`,
           border: '10px double #b9a98a'}}>
           <div style={{position: 'absolute', left: 0, right: 0, top: 22, textAlign: 'center', fontFamily: JF.heavy, fontWeight: 900, fontSize: 30, letterSpacing: 4, color: '#3b3222'}}>AT HOME</div>
           {lines.map((l, i) => g >= l.at && (
-            <div key={i} style={{position: 'absolute', left: 40, top: 86 + i * 82, fontFamily: hand.family, fontSize: 46 * hand.scale, lineHeight: 1, color: '#2a2418', whiteSpace: 'nowrap',
+            <div key={i} style={{position: 'absolute', left: 40, top: 86 + i * 82, fontFamily: hand.family, fontSize: 38 * hand.scale, lineHeight: 1, color: '#2a2418', whiteSpace: 'nowrap',
               clipPath: `inset(-30% ${(1 - interpolate(g, [l.at, l.at + 10], [0, 1], clamp)) * 100}% -30% -5%)`}}>{l.text}</div>
           ))}
         </div>
       )}
-      <Note text="light refreshments, presumably" x={1060} y={760} size={58} rot={-3} at={t.at('Light')} color={pal.subject} />
-      <Note text="(the card's wording, as described; no scan survives)" x={1060} y={870} size={36} rot={-2} at={t.at('Light') + 10} color="#ffffff" />
+      <Note text="light refreshments, presumably" x={960} y={760} size={52} rot={-3} at={t.at('Light')} color={pal.subject} />
+      <Note text="(wording as described; no scan survives)" x={980} y={870} size={34} rot={-2} at={t.at('Light') + 10} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -189,10 +189,10 @@ const Princess: React.FC<{t: TL}> = ({t}) => {
       <DarkPaper />
       <DrawnBundle x={260} y={520} s={1} at={t.at('Halfway') - 2} />
       <Sketch pts={[[860, 610], [980, 470]]} x={0} y={0} at={t.at('Halfway') + 6} dur={6} width={4} color="#EDE7DC" smooth={false} />
-      <div style={{position: 'absolute', left: 940, top: 330, width: 560, height: 170, background: '#e9dcc0', transform: 'rotate(-8deg)', boxShadow: '0 12px 24px rgba(0,0,0,0.5)', borderRadius: '0 18px 18px 0',
+      <div style={{position: 'absolute', left: 940, top: 330, width: 700, height: 170, background: '#e9dcc0', transform: 'rotate(-8deg)', boxShadow: '0 12px 24px rgba(0,0,0,0.5)', borderRadius: '0 18px 18px 0',
         opacity: g >= t.at('Halfway') + 8 ? 1 : 0}}>
         <div style={{position: 'absolute', left: 24, top: 22, fontFamily: JF.mono, fontSize: 22, color: '#555', letterSpacing: 2}}>CONTENTS</div>
-        <div style={{position: 'absolute', left: 24, top: 58, fontFamily: hand.family, fontSize: 40 * hand.scale, color: '#2a2418', whiteSpace: 'nowrap', lineHeight: 1}}>
+        <div style={{position: 'absolute', left: 24, top: 58, fontFamily: hand.family, fontSize: 34 * hand.scale, color: '#2a2418', whiteSpace: 'nowrap', lineHeight: 1}}>
           <span style={{position: 'relative'}}>{k < 1 ? 'DAUGHTER' : 'SON'}
             {k > 0 && k < 1 && <span style={{position: 'absolute', left: -4, top: '50%', height: 5, width: `${k * 110}%`, background: '#FF9F1C'}} />}
           </span> of the High Priest
@@ -200,11 +200,11 @@ const Princess: React.FC<{t: TL}> = ({t}) => {
       </div>
       <Note text="doctors on stage: arguing" x={160} y={150} size={56} rot={-3} at={t.at('arguing')} color="#ffffff" />
       <Note text="last lecture: agreed." x={160} y={250} size={56} rot={-3} at={t.at('agreed')} color="#ffffff" />
-      <Note text="the princess was a man." x={160} y={800} size={78} rot={-3} at={man} color={pal.subject} />
-      {g >= t.at("Gliddon's explanation") && <Note text="Gliddon's explanation:" x={1100} y={600} size={52} rot={-3} at={t.at("Gliddon's explanation")} color="#ffffff" />}
-      <Note text="labels switched during embalming" x={1100} y={690} size={48} rot={-3} at={t.at('labels')} />
-      <Stamp text="FILING ERROR, 3,000 YRS AGO" x={150} y={930} at={t.at('Three thousand')} size={78} color={pal.subject} rot={-3} />
-      <Note text="Boston applauded." x={1260} y={870} size={64} rot={-4} at={t.at('applauded')} />
+      <Note text="the princess was a man." x={160} y={740} size={74} rot={-3} at={man} color={pal.subject} />
+      {g >= t.at("Gliddon's explanation") && <Note text="Gliddon's explanation:" x={1040} y={560} size={50} rot={-3} at={t.at("Gliddon's explanation")} color="#ffffff" />}
+      <Note text="labels switched in embalming" x={1060} y={650} size={44} rot={-3} at={t.at('labels')} />
+      <Stamp text="FILING ERROR, 3,000 YRS AGO" x={150} y={880} at={t.at('Three thousand')} size={70} color={pal.subject} rot={-3} />
+      <Note text="Boston applauded." x={1380} y={960} size={56} rot={-4} at={t.at('applauded')} />
     </AbsoluteFill>
   );
 };
