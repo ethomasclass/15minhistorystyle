@@ -89,6 +89,19 @@ the frontier (Comanche lands, Tejano towns, settler flow, the Gonzales flag). Ev
 All masking as usual: rembg masks → coral tint + teal trace; 2.5D parallax on the strongest photos (Lincoln, Polk, Seguín,
 Grant) using the Black Sox `Parallax` component.
 
+## 2b. The engraving treatment (locked: "version B")
+
+Every Flow engraving goes through `Engraving` (`src/kit/engraving.tsx`): black and white with contrast 1.25, a slow push,
+and a **soft fade from a bright centre into the dark desk** (opaque to 58% of the oval, gone at the edge). The bright
+centre is placed over the scene's subject (`focus`), and the fade **blooms open from the dark** as the scene starts and
+closes at the end. Coral tint and teal trace work as usual inside the bright area. Tag: `Illustration · …`.
+
+- **Quiet chapters** (ch 9, the San Patricios beat): `quiet` = the heavier "faded print" (small bright centre, washed-out
+  ink, no coral tint).
+- **Real archival documents and portraits** don't get the fade: they stay cards on the desk, so an illustration never
+  passes for a source.
+- Look test: `StyleTest` composition.
+
 ## 3. Transitions (new)
 
 You said the chapter endings feel abrupt, so the shell now does this at the end of every chapter:
