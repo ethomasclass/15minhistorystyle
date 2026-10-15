@@ -77,3 +77,19 @@ Black-and-white 1840s illustrated-newspaper wood engraving: fine parallel lines 
 - **Masks:** no magenta mask pass needed with Flow; engravings cut out cleanly, so I'll mask them locally.
 - **Naming:** save each as its scene name + `.png` (e.g. `ch06_cork_leg.png`) and drop them in the chat or
   `projects/Mexican_American_War/public/img/gen/`.
+
+## Status (Oct 15)
+
+**Received (11), in `public/img/gen/` as `.jpg`:** ch02_settlers_arrive, ch02_tejano_ranch, ch03_austin_jail,
+ch03_come_and_take_it, ch03_washington_on_the_brazos, ch04_alamo_dawn, ch06_flag_and_gallows, ch08_gold, ch09_sick_tents,
+ch10_house_chamber, ch10_arsenic. The engraving style came through well.
+
+**Still to make (8):** ch05_rio_grande_camp (must), ch05_rider (must), ch06_blockade (must), ch06_cork_leg (must),
+ch09_land_hearing (must), ch04_marsh_grass, ch05_ambush, ch08_trist_letter.
+
+**Notes on what came back:**
+- ch04_alamo_dawn: the chapel has the **curved top**, which wasn't added until 1850. Small in frame, but teachers will spot it.
+  Regenerate with "the chapel's façade is flat across the top, roofless, with no curved parapet", or I keep it small and soft.
+- ch03_come_and_take_it: the cannon sits on a regular spoked gun carriage, not crude tree-trunk wheels. Fine to keep.
+- ch02_tejano_ranch: the carreta has spoked wheels (real carretas had solid wooden wheels). Fine to keep.
+- ch10_arsenic: the bottle holds liquid, not white powder; the journal has unreadable pseudo-handwriting. Fine to keep.
