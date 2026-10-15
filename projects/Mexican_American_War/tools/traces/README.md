@@ -19,3 +19,6 @@ python3 tools/refine_mask.py alamo_chapel --only tools/traces/alamo_chapel.json 
 (polk, lincoln, santa_anna and signer start from a fresh `tools/mask.py <name>` run.) Then rebuild layers
 (`tools/layers.py <name>`, with `LAYERS_FILL=paper` for engravings) and check every edge with `tools/mask_closeup.py`.
 Entries in tools/mask.py marked "hand-traced" must not be re-run with rembg.
+python3 tools/refine_mask.py gast_columbia --sub tools/traces/gast_coach.json --close 9 --smooth 2   # after tools/mask.py gast_columbia
+python3 tools/refine_mask.py camp_matamoros --only tools/traces/camp_matamoros.json --close 0 --smooth 0
+python3 tools/refine_mask.py ambush_dragoons --only tools/traces/ambush_dragoons.json --close 0 --smooth 2

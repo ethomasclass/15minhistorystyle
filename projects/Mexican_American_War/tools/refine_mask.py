@@ -31,10 +31,11 @@ def polys(path, size):
 
 
 def fill_holes(m):
+    # pad first, so background cut off from the corner by a subject touching two edges still counts as outside
     h, w = m.shape
-    flood = m.copy()
-    cv2.floodFill(flood, np.zeros((h + 2, w + 2), np.uint8), (0, 0), 255)
-    return m | cv2.bitwise_not(flood)
+    flood = cv2.copyMakeBorder(m, 1, 1, 1, 1, cv2.BORDER_CONSTANT, value=0)
+    cv2.floodFill(flood, np.zeros((h + 4, w + 4), np.uint8), (0, 0), 255)
+    return m | cv2.bitwise_not(flood[1:-1, 1:-1])
 
 
 def main():

@@ -38,6 +38,9 @@ JOBS = {
     "huddle_santa_anna": ("img/ch04/huddle_surrender.jpg", (595, 400, 712, 712), "isnet-general-use", 3000),  # hand-traced: tools/traces/ (see README there), do not re-run
     "cartoon_santa_anna": ("img/ch04/cartoon_capture_1836.jpg", (1150, 740, 2200, 2100), "isnet-general-use"),
     "houston": ("img/ch04/houston_1855.jpg", (150, 100, 1620, 2000), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "gast_columbia": ("img/ch05/gast_american_progress.jpg", (940, 170, 1830, 1290), "isnet-general-use"),
+    "camp_matamoros": ("img/gen/ch05_rio_grande_camp.jpg", (0, 90, 1184, 205), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "ambush_dragoons": ("img/gen/ch05_ambush.jpg", (400, 180, 1045, 520), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
     "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
     "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),

@@ -19,6 +19,9 @@ import alamo_chapel from '../public/img/masks/alamo_chapel.json';
 import huddle_santa_anna from '../public/img/masks/huddle_santa_anna.json';
 import cartoon_santa_anna from '../public/img/masks/cartoon_santa_anna.json';
 import houston from '../public/img/masks/houston.json';
+import gast_columbia from '../public/img/masks/gast_columbia.json';
+import camp_matamoros from '../public/img/masks/camp_matamoros.json';
+import ambush_dragoons from '../public/img/masks/ambush_dragoons.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -39,4 +42,7 @@ export const MASKS = {
   huddle_santa_anna: maskRef('huddle_santa_anna', huddle_santa_anna),
   cartoon_santa_anna: maskRef('cartoon_santa_anna', cartoon_santa_anna),
   houston: maskRef('houston', houston),
+  gast_columbia: maskRef('gast_columbia', gast_columbia),
+  camp_matamoros: maskRef('camp_matamoros', camp_matamoros),
+  ambush_dragoons: maskRef('ambush_dragoons', ambush_dragoons),
 };

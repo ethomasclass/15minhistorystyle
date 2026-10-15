@@ -138,5 +138,30 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2022641541/",
     "source": "loc:2022641541"
+  },
+  "ch05/polk_diary_429.jpg": {
+    "title": "The diary of James K. Polk during his presidency, 1845 to 1849 : now first printed from the original manuscript in the collections of the Chicago Historical Society (page 429)",
+    "artist": "['Polk, James K. (James Knox), 1795-1849', 'Quaife, Milo Milton, 1880-1959']",
+    "date": "1910",
+    "licence": "public domain by age (1910)",
+    "page": "https://archive.org/details/diaryofjameskpol01polk/page/n429",
+    "source": "iabook:diaryofjameskpol01polk:429"
+  },
+  "ch05/polk_diary_431.jpg": {
+    "title": "The diary of James K. Polk during his presidency, 1845 to 1849 : now first printed from the original manuscript in the collections of the Chicago Historical Society (page 431)",
+    "artist": "['Polk, James K. (James Knox), 1795-1849', 'Quaife, Milo Milton, 1880-1959']",
+    "date": "1910",
+    "licence": "public domain by age (1910)",
+    "page": "https://archive.org/details/diaryofjameskpol01polk/page/n431",
+    "source": "iabook:diaryofjameskpol01polk:431"
+  },
+  "ch05/gast_american_progress.jpg": {
+    "title": "American progress",
+    "artist": "Crofutt, George A.",
+    "date": "1873",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/97507547/",
+    "source": "loc:97507547",
+    "note": "chromolithograph after John Gast, published by George A. Crofutt (c1873); cropped to the picture"
   }
 }
