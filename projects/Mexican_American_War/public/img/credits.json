@@ -216,5 +216,32 @@
     "page": "https://www.loc.gov/item/2017896497/",
     "source": "loc:2017896497",
     "note": "Brady studio, between 1855 and 1865; cropped"
+  },
+  "ch10/wilmot.jpg": {
+    "title": "David Wilmot, 1814-1868",
+    "artist": "",
+    "date": "1857-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003690370/",
+    "source": "loc:2003690370",
+    "note": "cropped"
+  },
+  "ch10/emerson.jpg": {
+    "title": "Ralph Waldo Emerson / L. Grozelier 1859 ; lith. by L. Grozelier Boston.",
+    "artist": "Grozelier, Leopold, 1830-1865, lithographer, Knoedler, M., publisher, Goupil & Cie, publisher, J.H. Bufford's Lith., printer",
+    "date": "1859-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003688869/",
+    "source": "loc:2003688869",
+    "note": "cropped"
+  },
+  "ch10/appomattox.jpg": {
+    "title": "Surrender of Genl. Lee, at Appomattox C.H. Va. April 9th. 1865",
+    "artist": "Currier & Ives.",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002695773/",
+    "source": "loc:2002695773",
+    "note": "cropped"
   }
 }

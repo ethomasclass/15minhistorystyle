@@ -32,6 +32,11 @@ import trist_stack from '../public/img/masks/trist_stack.json';
 import gold from '../public/img/masks/gold.json';
 import orderly from '../public/img/masks/orderly.json';
 import ranchero from '../public/img/masks/ranchero.json';
+import wilmot from '../public/img/masks/wilmot.json';
+import emerson from '../public/img/masks/emerson.json';
+import grant_lee from '../public/img/masks/grant_lee.json';
+import house_speaker from '../public/img/masks/house_speaker.json';
+import arsenic from '../public/img/masks/arsenic.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -65,4 +70,9 @@ export const MASKS = {
   gold: maskRef('gold', gold),
   orderly: maskRef('orderly', orderly),
   ranchero: maskRef('ranchero', ranchero),
+  wilmot: maskRef('wilmot', wilmot),
+  emerson: maskRef('emerson', emerson),
+  grant_lee: maskRef('grant_lee', grant_lee),
+  house_speaker: maskRef('house_speaker', house_speaker),
+  arsenic: maskRef('arsenic', arsenic),
 };

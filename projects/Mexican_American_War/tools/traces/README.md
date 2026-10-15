@@ -32,3 +32,8 @@ python3 tools/refine_mask.py gold --only tools/traces/gold.json --close 0 --smoo
 python3 tools/refine_mask.py trist --close 15 --smooth 3 && python3 tools/refine_mask.py trist --sub tools/traces/trist_chair.json --close 0 --smooth 2
 python3 tools/refine_mask.py ranchero --only tools/traces/ranchero.json --close 0 --smooth 2
 python3 tools/refine_mask.py orderly --add tools/traces/orderly_bucket.json --close 5 --smooth 1.5   # after tools/mask.py orderly
+python3 tools/refine_mask.py grant_lee --keep tools/traces/grant_lee_keep.json --close 9 --smooth 2   # after tools/mask.py grant_lee
+python3 tools/refine_mask.py wilmot --close 15 --smooth 3 && python3 tools/refine_mask.py wilmot --keep tools/traces/wilmot_bust.json --close 0 --smooth 3
+python3 tools/refine_mask.py emerson --close 15 --smooth 3
+python3 tools/refine_mask.py house_speaker --only tools/traces/house_speaker.json --close 0 --smooth 1.5
+python3 tools/refine_mask.py arsenic --only tools/traces/arsenic.json --close 0 --smooth 1.5

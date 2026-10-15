@@ -46,6 +46,11 @@ JOBS = {
     "orderly": ("img/gen/ch09_sick_tents.jpg", (780, 260, 915, 600), "isnet-general-use"),  # then refine_mask --add tools/traces/orderly_bucket.json
     "ranchero": ("img/gen/ch09_land_hearing.jpg", (165, 195, 555, 768), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
+    "wilmot": ("img/ch10/wilmot.jpg", None, "u2net_human_seg"),
+    "emerson": ("img/ch10/emerson.jpg", None, "u2net_human_seg"),
+    "grant_lee": ("img/ch10/appomattox.jpg", (180, 500, 1540, 1950), "isnet-general-use"),  # then refine_mask --keep tools/traces/grant_lee_keep.json
+    "house_speaker": ("img/gen/ch10_house_chamber.jpg", None, "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "arsenic": ("img/gen/ch10_arsenic.jpg", None, "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "trist": ("img/ch08/trist.jpg", None, "u2net_human_seg"),
     "trist_stack": ("img/gen/ch08_trist_letter.jpg", (245, 290, 400, 395), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "gold": ("img/gen/ch08_gold.jpg", (550, 335, 790, 475), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
