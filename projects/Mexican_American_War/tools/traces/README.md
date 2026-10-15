@@ -30,3 +30,5 @@ python3 tools/refine_mask.py blockade_steamer --only tools/traces/blockade_steam
 python3 tools/refine_mask.py trist_stack --only tools/traces/trist_stack.json --close 0 --smooth 1.5
 python3 tools/refine_mask.py gold --only tools/traces/gold.json --close 0 --smooth 1.5
 python3 tools/refine_mask.py trist --close 15 --smooth 3 && python3 tools/refine_mask.py trist --sub tools/traces/trist_chair.json --close 0 --smooth 2
+python3 tools/refine_mask.py ranchero --only tools/traces/ranchero.json --close 0 --smooth 2
+python3 tools/refine_mask.py orderly --add tools/traces/orderly_bucket.json --close 5 --smooth 1.5   # after tools/mask.py orderly

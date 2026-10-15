@@ -30,6 +30,8 @@ import jackson from '../public/img/masks/jackson.json';
 import trist from '../public/img/masks/trist.json';
 import trist_stack from '../public/img/masks/trist_stack.json';
 import gold from '../public/img/masks/gold.json';
+import orderly from '../public/img/masks/orderly.json';
+import ranchero from '../public/img/masks/ranchero.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -61,4 +63,6 @@ export const MASKS = {
   trist: maskRef('trist', trist),
   trist_stack: maskRef('trist_stack', trist_stack),
   gold: maskRef('gold', gold),
+  orderly: maskRef('orderly', orderly),
+  ranchero: maskRef('ranchero', ranchero),
 };

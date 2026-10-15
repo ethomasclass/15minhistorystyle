@@ -43,6 +43,8 @@ JOBS = {
     "ambush_dragoons": ("img/gen/ch05_ambush.jpg", (400, 180, 1045, 520), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "chapultepec_castle": ("img/ch06/chapultepec_1849.jpg", (550, 245, 1245, 455), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "blockade_steamer": ("img/gen/ch06_blockade.jpg", (405, 220, 1215, 690), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "orderly": ("img/gen/ch09_sick_tents.jpg", (780, 260, 915, 600), "isnet-general-use"),  # then refine_mask --add tools/traces/orderly_bucket.json
+    "ranchero": ("img/gen/ch09_land_hearing.jpg", (165, 195, 555, 768), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
     "trist": ("img/ch08/trist.jpg", None, "u2net_human_seg"),
     "trist_stack": ("img/gen/ch08_trist_letter.jpg", (245, 290, 400, 395), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
