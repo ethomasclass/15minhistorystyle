@@ -10,7 +10,7 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {type Cam3, Count, Dot, Hand, MAP3D, Map3D, type MapData, MovingBorder, PlaceTag, Route, Stand} from '../kit/map3d';
 import {Person} from '../kit/figures';
 import {Parallax} from '../kit/parallax';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -152,6 +152,9 @@ const Seguin: React.FC<{t: TL}> = ({t}) => {
         <Note text="Juan Seguín: the Tejano who rode for help" x={110} y={80} size={54} rot={-2} at={t.at('Juan') - 2} color={BONE} out={t.at('Years later')} />
         <Note text="accused of siding with Mexico" x={110} y={180} size={52} rot={-2} at={t.at('accused') - 2} color={pal.mark} out={t.at('Years later')} />
         <Note text="under pressure, he ends up fighting for Mexico" x={110} y={880} size={50} rot={-2} at={t.at('Under') - 2} color={BONE} out={t.at('Years later')} />
+        <CropCard src="img/ch04/seguin_1838.jpg" size={[1464, 1306]} x={1380} y={240} w={420} h={480} fx={700} fy={560} scale={0.42} rot={2} at={t.at('Juan') - 2}
+          mask={MASKS.seguin} tint={null} traceAt={t.at('Juan') + 2} />
+        {g >= t.at('Juan') - 2 && <Tag text="Juan N. Seguín, painted from life by Thomas Jefferson Wright, 1838 · Texas State Capitol" />}
         <AbsoluteFill style={{background: '#000', opacity: quiet}} />
         <Quote text="a foreigner in my native land" at={t.at('"a')} x={240} y={420} w={1440} size={84} who="Juan N. Seguín, Personal Memoirs (1858)" />
       </AbsoluteFill>

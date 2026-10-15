@@ -37,3 +37,4 @@ python3 tools/refine_mask.py wilmot --close 15 --smooth 3 && python3 tools/refin
 python3 tools/refine_mask.py emerson --close 15 --smooth 3
 python3 tools/refine_mask.py house_speaker --only tools/traces/house_speaker.json --close 0 --smooth 1.5
 python3 tools/refine_mask.py arsenic --only tools/traces/arsenic.json --close 0 --smooth 1.5
+python3 tools/refine_mask.py seguin --close 15 --smooth 3

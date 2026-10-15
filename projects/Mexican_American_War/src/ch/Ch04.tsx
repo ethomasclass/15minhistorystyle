@@ -50,7 +50,10 @@ const March: React.FC<{t: TL}> = ({t}) => {
       <AbsoluteFill>
         {g >= t.at('February') && <Highlight text="FEBRUARY 1836" x={100} y={90} size={96} at={t.at('February')} seed={111} rot={-2} />}
         <Note text="~200 Texans dig in" x={120} y={250} size={60} rot={-3} at={t.at('200') - 2} color="#ffffff" />
+        <CropCard src="img/ch04/seguin_1838.jpg" size={[1464, 1306]} x={1380} y={250} w={420} h={480} fx={700} fy={560} scale={0.42} rot={2} at={t.at('Tejano') - 2}
+          mask={MASKS.seguin} tintStrength={0.45} traceAt={t.at('Juan') + 2} />
         <Note text="Juan Seguín, Tejano captain" x={120} y={760} size={62} rot={-3} at={t.at('Tejano') - 2} />
+        {g >= t.at('Tejano') - 2 && <Tag text="Juan N. Seguín, painted from life by Thomas Jefferson Wright, 1838 · Texas State Capitol" />}
         {g >= t.at('Remember') && <Highlight text="REMEMBER HIM" x={140} y={880} size={80} at={t.at('Remember')} seed={113} rot={-2} />}
       </AbsoluteFill>
     </>

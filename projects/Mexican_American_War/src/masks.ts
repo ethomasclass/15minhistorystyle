@@ -37,6 +37,7 @@ import emerson from '../public/img/masks/emerson.json';
 import grant_lee from '../public/img/masks/grant_lee.json';
 import house_speaker from '../public/img/masks/house_speaker.json';
 import arsenic from '../public/img/masks/arsenic.json';
+import seguin from '../public/img/masks/seguin.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -75,4 +76,5 @@ export const MASKS = {
   grant_lee: maskRef('grant_lee', grant_lee),
   house_speaker: maskRef('house_speaker', house_speaker),
   arsenic: maskRef('arsenic', arsenic),
+  seguin: maskRef('seguin', seguin),
 };

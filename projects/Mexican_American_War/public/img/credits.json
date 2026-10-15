@@ -251,5 +251,13 @@
     "licence": "public domain by age (1885)",
     "page": "https://archive.org/details/personalmemoirs01gran/page/n65",
     "source": "iabook:personalmemoirs01gran:65"
+  },
+  "ch04/seguin_1838.jpg": {
+    "title": "Juan Nepomuceno Segu\u00edn, painted from life in 1838",
+    "artist": "Thomas Jefferson Wright",
+    "date": "1838",
+    "licence": "public domain (painted 1838)",
+    "page": "https://www.worldhistory.org/image/20988/juan-seguin/",
+    "source": "Texas State Preservation Board, Capitol Historical Artifact Collection (via World History Encyclopedia / Wikimedia Commons)"
   }
 }

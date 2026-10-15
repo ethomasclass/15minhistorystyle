@@ -46,6 +46,7 @@ JOBS = {
     "orderly": ("img/gen/ch09_sick_tents.jpg", (780, 260, 915, 600), "isnet-general-use"),  # then refine_mask --add tools/traces/orderly_bucket.json
     "ranchero": ("img/gen/ch09_land_hearing.jpg", (165, 195, 555, 768), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
+    "seguin": ("img/ch04/seguin_1838.jpg", None, "u2net_human_seg"),
     "wilmot": ("img/ch10/wilmot.jpg", None, "u2net_human_seg"),
     "emerson": ("img/ch10/emerson.jpg", None, "u2net_human_seg"),
     "grant_lee": ("img/ch10/appomattox.jpg", (180, 500, 1540, 1950), "isnet-general-use"),  # then refine_mask --keep tools/traces/grant_lee_keep.json
