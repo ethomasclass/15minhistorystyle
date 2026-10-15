@@ -44,12 +44,12 @@ everywhere it applies.
 | # | Phase | You produce | Read |
 |---|---|---|---|
 | 1 | **Set up** | new project from the template | below |
-| 2 | **Script** | beat outline → full draft in `script/SCRIPT.md` + one `chNN_slug.txt` per chapter | `references/script-writing.md` |
+| 2 | **Script** | beat outline → full draft in `script/SCRIPT.md` + one `chNN_slug.txt` per chapter | `references/script-writing.md`, `references/explainer-craft.md` |
 | 3 | **Content review** | answers to "are we missing anything?", cuts to ~15 min, fact-check flags | `references/script-writing.md` |
 | 4 | **Pronunciation check** | respellings + a test MP3 for the user | `references/voice-and-audio.md` |
 | 5 | **Voice** | chapter WAVs + word timings, a narration preview MP3 | `references/voice-and-audio.md` |
 | 6 | **Images** | archival images with credits; `GEMINI_PROMPTS.md` for the gaps; masks | `references/images-and-masks.md` |
-| 7 | **Scenes** | `src/ch/ChNN.tsx` per chapter, checked with stills, anchor and text probes | `references/building-scenes.md`, `references/visual-style.md` |
+| 7 | **Scenes** | `src/ch/ChNN.tsx` per chapter, checked with stills, anchor and text probes | `references/building-scenes.md`, `references/visual-style.md`, `references/explainer-craft.md` §3–5 |
 | 8 | **Render** | 1080p master, 720p, a <30 MB preview for the user | `references/render-and-deliver.md` |
 | 9 | **Feedback rounds** | batched fixes, partial re-renders, new previews | `references/render-and-deliver.md` |
 | 10 | **Package** | thumbnail concepts, YouTube title/description/tags, 1080p via Git LFS | `references/thumbnail-and-youtube.md` |
@@ -90,6 +90,10 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 ```
 
 ## Principles that hold across phases
+
+- **Easy to follow comes first.** Write for a general audience: one name per thing, every term defined where it
+  appears, numbers in pairs, callbacks said out loud. Run `references/explainer-craft.md`'s script checklist and its
+  confusion pass on every draft. (It borrows what Vox explainers do well; it does not restyle the channel.)
 
 - **The script drives everything.** Scenes are timed to spoken words, not seconds, so a re-voice re-times the
   video. Lock the script before voicing; a later wording change means re-voicing that chapter and re-checking its

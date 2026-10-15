@@ -156,6 +156,8 @@ Always do this before voicing a whole video; the user asked for it explicitly.
 
 ## 9. The review loop with the user
 
+Run the checklist in `explainer-craft.md` §1 on the outline, on the full draft, and before voicing.
+
 The user steers content in short messages. Expect, and invite, these passes:
 
 1. **Beat outline** (chapter list with one line each, the driving question and the answer). Get approval.
@@ -164,4 +166,6 @@ The user steers content in short messages. Expect, and invite, these passes:
 3. **Coverage checks** the user names (a required concept, a topic to touch lightly and save for another video,
    a favorite moment from an earlier draft to keep). Answer each directly, then edit.
 4. **Trim to time** with a cut list.
-5. **Fact-check flags and pronunciation check**, then voice.
+5. **Confusion pass** (`explainer-craft.md` rule 14): read each chapter as someone new to the story; fix every
+   "wait, what?", every quote left untranslated, every callback that isn't said out loud. List the fixes in SCRIPT.md.
+6. **Fact-check flags and pronunciation check**, then voice.

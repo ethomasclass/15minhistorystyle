@@ -46,6 +46,9 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 ## Your standing preferences (from your notes across the videos)
 
 **Script**
+- **Written for a general audience, easy to follow** (from *Dressed to Kill*). Learn from what Vox explainers do well, don't copy
+  their look: see the skill's `references/explainer-craft.md`. One name per thing, terms defined where they appear, a confusion pass
+  before voicing.
 - No historian names in the narration ("historians still argue" is fine). No modern politicians. No implied link to today's parties.
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").

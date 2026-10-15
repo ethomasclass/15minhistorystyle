@@ -1,4 +1,4 @@
-# Explainer craft: what to borrow from Vox (DRAFT)
+# Explainer craft: what to borrow from Vox
 
 Vox's explainers are easy to follow. This page lists the habits worth borrowing and how each one looks in the
 channel's own style. **It is not a restyle.** The look (B&W archive, coral subject, teal marks, orange tape, 12 fps,
