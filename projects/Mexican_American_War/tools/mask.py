@@ -44,6 +44,9 @@ JOBS = {
     "chapultepec_castle": ("img/ch06/chapultepec_1849.jpg", (550, 245, 1245, 455), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "blockade_steamer": ("img/gen/ch06_blockade.jpg", (405, 220, 1215, 690), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
+    "trist": ("img/ch08/trist.jpg", None, "u2net_human_seg"),
+    "trist_stack": ("img/gen/ch08_trist_letter.jpg", (245, 290, 400, 395), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "gold": ("img/gen/ch08_gold.jpg", (550, 335, 790, 475), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "grant": ("img/ch06/grant.jpg", None, "u2net_human_seg"),
     "lee": ("img/ch06/lee.jpg", None, "u2net_human_seg"),
     "jackson": ("img/ch06/jackson.jpg", None, "u2net_human_seg"),

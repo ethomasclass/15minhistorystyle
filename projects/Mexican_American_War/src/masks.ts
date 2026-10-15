@@ -27,6 +27,9 @@ import chapultepec_castle from '../public/img/masks/chapultepec_castle.json';
 import grant from '../public/img/masks/grant.json';
 import lee from '../public/img/masks/lee.json';
 import jackson from '../public/img/masks/jackson.json';
+import trist from '../public/img/masks/trist.json';
+import trist_stack from '../public/img/masks/trist_stack.json';
+import gold from '../public/img/masks/gold.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -55,4 +58,7 @@ export const MASKS = {
   grant: maskRef('grant', grant),
   lee: maskRef('lee', lee),
   jackson: maskRef('jackson', jackson),
+  trist: maskRef('trist', trist),
+  trist_stack: maskRef('trist_stack', trist_stack),
+  gold: maskRef('gold', gold),
 };

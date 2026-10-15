@@ -207,5 +207,14 @@
     "licence": "public domain by age (1885)",
     "page": "https://archive.org/details/personalmemoirs01gran/page/n62",
     "source": "iabook:personalmemoirs01gran:62"
+  },
+  "ch08/trist.jpg": {
+    "title": "Nicholas Philip Trist",
+    "artist": "",
+    "date": "1855",
+    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+    "page": "https://www.loc.gov/item/2017896497/",
+    "source": "loc:2017896497",
+    "note": "Brady studio, between 1855 and 1865; cropped"
   }
 }

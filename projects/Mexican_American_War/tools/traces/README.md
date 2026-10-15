@@ -27,3 +27,6 @@ python3 tools/refine_mask.py jackson --close 15 --smooth 3 && python3 tools/refi
 python3 tools/refine_mask.py lee --close 15 --smooth 3
 python3 tools/refine_mask.py chapultepec_castle --only tools/traces/chapultepec_castle.json --close 0 --smooth 1.5
 python3 tools/refine_mask.py blockade_steamer --only tools/traces/blockade_steamer.json --close 0 --smooth 1.5
+python3 tools/refine_mask.py trist_stack --only tools/traces/trist_stack.json --close 0 --smooth 1.5
+python3 tools/refine_mask.py gold --only tools/traces/gold.json --close 0 --smooth 1.5
+python3 tools/refine_mask.py trist --close 15 --smooth 3 && python3 tools/refine_mask.py trist --sub tools/traces/trist_chair.json --close 0 --smooth 2
