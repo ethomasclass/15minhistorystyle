@@ -19,19 +19,57 @@ time is on it.
   serif, teal handwriting for notes.
 - Proof: `out/maptest/MapTest.mp4` (the review copy is in `review/`).
 
-### The map's recurring jobs
+### How borders and claims are shown (every map beat uses the same code)
 
-| Ch | Map beat |
-|---|---|
-| 1 | Wide view of the continent → tilt down onto Texas → the **two rivers** draw on (Nueces, then Rio Grande) → the strip between them rises coral → "the spot?" hovers over it. This is the video's signature shot. |
-| 2 | Mexico in 1821 rises as one slab, Texas a thin edge of it. **Flow arrows** (many small dashed arrows, Vox-style) stream from the American South into Texas while a counter ticks up ("Americans" vs "Tejanos"). |
-| 3 | Coahuila y Tejas as one slab with a pin at Saltillo, "capital: hundreds of miles away." A small **"Come and take it" flag** stands up at Gonzales. |
-| 4 | Pins stand up for the Alamo, Goliad and San Jacinto as each is named. Then Texas **grows**: the Nueces-line Texas slab rises, and the claimed Texas rises *taller* beside it, to the Rio Grande and north to 42°N. The strip is the difference ("That's where Lincoln's spot will be"). |
-| 5 | Taylor's arrow from Corpus Christi into the strip, a fort pin across from Matamoros, an **X stake** at the ambush site. Then the camera pulls back across the continent while a rider icon crawls from the Rio Grande to Washington with a **day counter (14)**. |
-| 6 | Santa Anna's dotted route Havana → Veracruz, slipping past three small blockade-ship markers. **Three arrows** (north, west, Veracruz → Mexico City) for the war. A Chapultepec pin. |
-| 7 | Back to the strip from the cold open; the X stake from ch 5 is "the spot." |
-| 8 | **The Cession rises**, big and slow, with a square-mile counter; then today's state lines fade in on top ("California, Nevada, Utah…"); a gold pin at Coloma for the gold line. |
-| 10 | **The vote map:** the 1846 states seen tilted; Northern states rise, Southern states sink, labelled "yes" and "no", both parties split the same way. At the end, the camera pulls back from the strip to the whole continent while "1848 → 1861" is stamped. |
+Rivers that are borders or claims are never just "a river." Each one is drawn as a **border**: a thick line with border ticks and
+a glow, and **its name and whose line it is printed along it** on the map (it reads in perspective, like a printed atlas).
+
+| Line | Style | Name along it |
+|---|---|---|
+| **Nueces**: Mexico's line | teal, **dashed** (a claim) | NUECES · MEXICO'S LINE |
+| **Rio Grande**: Texas's (later the U.S.'s) claim | orange, **dashed** (a claim) | RIO GRANDE · TEXAS'S CLAIM |
+| The **Nueces Strip** between them | coral hatching, "DISPUTED" standing on it | — |
+| The **1819 line** (Sabine, Red River, Arkansas River, 100°W, 42°N): Mexico's real northern border before 1836 | bone, **solid** | SABINE · RED RIVER · ARKANSAS RIVER · 42°N |
+| Texas's claim north from the Rio Grande's source to 42°N | orange, dashed | TEXAS'S CLAIM |
+| The **1848 border** (Rio Grande to El Paso, the old New Mexico line, the Gila, to the Pacific) | teal, **solid** (agreed) | RIO GRANDE · NEW BORDER, 1848 / GILA RIVER |
+
+Rule: **dashed = a claim, solid = an agreed border.** Teal = Mexico's side, orange = Texas/U.S. claims, coral = the land in
+dispute or changing hands. The colour key appears once, in ch 1, as two small swatches standing on the map.
+
+### Every map beat
+
+| Ch | Narration cue | Map beat | What it helps people understand |
+|---|---|---|---|
+| 1 | "So look at Texas. Two rivers." | Wide continent → tilt onto Texas. The **Nueces border** draws on (teal, dashed, named), then the **Rio Grande border** (orange, dashed, named). The strip fills with coral hatching, "DISPUTED" stands up, "the spot?" hovers. | Where the argument is, and that it's an argument about which river. |
+| 2 | "Texas isn't empty… only a few thousand." | **Comanche lands** shaded and named; three **Tejano towns** (San Antonio, Goliad, Nacogdoches) as dots in a huge frontier. | Why Mexico wanted settlers at all. |
+| 2 | "Americans jump at the deal… from the South" | **Flow arrows** stream from the American South into Texas; a counter ticks "Americans" past "Tejanos". | How fast Texas filled up, and from where. |
+| 2 | "In 1830, Mexico bans new American settlers" | The **1819 border** (Sabine) draws on solid, a **CLOSED** stamp lands on it… and the arrows keep crossing. | The ban, and that it didn't work. |
+| 3 | "joined it to a bigger one, Coahuila" | **Coahuila y Tejas** rises as one slab; a pin at Saltillo; a route line "hundreds of miles" to the Texas settlements. | Why Texans wanted their own state. |
+| 3 | "moves power to the capital… centralism" | Mexico's **state lines** light up, then **arrows pull from every state into Mexico City** as the states dim. | The vocab word, as a picture. |
+| 3 | "October 1835. Gonzales" | The small **"Come and take it" flag** stands up at Gonzales. | Where the revolution started. |
+| 4 | "Santa Anna marches north" → San Jacinto | Santa Anna's **route north** from Mexico City to San Antonio; pins for the **Alamo, Goliad**; Houston's **retreat east**, then the turn at **San Jacinto**. | The distances, and why "caught off guard" worked. |
+| 4 | "says its border is the Rio Grande… stopped at the Nueces" | The **Mexican-Texas slab** (to the Nueces) rises; then the **claimed Texas** rises taller beside it (to the Rio Grande and north to 42°N, the orange dashed claim line drawing on). The difference glows: the strip. | How much bigger the claim was than Texas, and where the spot will be. |
+| 4 | "a big new slave state would start a fight" | The U.S. turns: **13 free states** (bone) and **13 slave states** (dark red) rise, counters "13 free / 13 slave", then **Texas lands on the slave side**, bigger than any of them. | Why annexation waited nine years. |
+| 5 | "He wants California… harbor at San Francisco" | California and New Mexico outlined in a **dotted "for sale" line**, a **$25 million** tag standing on it, a pin at San Francisco Bay. | What Polk wanted, and that he tried to buy it first. |
+| 5 | "orders… to the Rio Grande" → "April 25th" | Taylor's **arrow** from Corpus Christi across the strip; a fort pin across from Matamoros; the **X stake** lands at the ambush site, inside the hatched strip. | Who moved into whose claim. |
+| 5 | "news travels at the speed of a horse" | Camera pulls back across the continent; a rider icon crawls the Rio Grande → Washington line, **day counter 1 → 14**. | Why Polk could decide before the news arrived. |
+| 6 | "let me through your navy's blockade" | Santa Anna's **dashed sea route** Havana → Veracruz, slipping between three blockade-ship markers. | The double-cross, in one move. |
+| 6 | "captured his cork leg on the battlefield" | A pin at **Cerro Gordo** on Scott's route, the leg standing on it. | Where the leg story happened. |
+| 6 | "push in from three directions" | **Three arrows**: Taylor south from the Rio Grande, the West (Santa Fe → California), Scott Veracruz → Mexico City; pins at Chapultepec and Mexico City. | The shape of the war in 15 seconds. |
+| 7 | "That fight happened in the strip" | Back to the cold-open map: both claim lines, the hatched strip, the X stake. | Lincoln's point, on the map. |
+| 8 | "the Rio Grande is the border… the Mexican Cession" | The **Rio Grande becomes solid** (agreed border, "RIO GRANDE · NEW BORDER, 1848"), the **Gila** draws on; the **Cession rises**, square-mile counter. | The new border is a river border too, and the size of the Cession. |
+| 8 | "Today that's California, Nevada, Utah…" | **Today's state lines** fade in on the Cession slab; the states that came from it get names. | Connects 1848 to the map people know. |
+| 8 | "Counting Texas, Mexico lost about half its land" | **Mexico in 1821** as one teal slab; **Texas and the Cession lift off and slide north**, leaving today's Mexico; "about 50%". | How big the loss was for Mexico. |
+| 8 | "Nine days earlier… found gold" | Two pins with dates: **Coloma, Jan 24** and **Guadalupe Hidalgo, Feb 2**, a line between them. | Nobody at the table knew; news was slow. |
+| 9 | "They didn't move. The border did." (quiet, teal only) | Town dots (Santa Fe, Taos, Albuquerque, Tucson, Los Angeles, San Diego, Monterey, San Francisco) stay put while **the border slides south over them**, from the 1819 line to the 1848 line. **Native nations' names** stand up across the region. | Who was already living there, and that they weren't asked. |
+| 10 | "look at the vote" | The 1846 states: **Northern states rise** ("yes"), **Southern states sink** ("no"); party labels split the same way. | Sectionalism, as a picture. |
+| 10 | "Every acre forced the question" | The Cession slab with a **question mark**; optional: the **36°30′ line** extends west across it (sets up Lesson 3). | Why new land made slavery harder. |
+| 10 | "Where was the spot?" | Back to the strip and the X stake, both claim lines. | The answer to the cold open. |
+| 10 | "It took about 13 years to work." | The Cession glows, then the same states **split in 1861**: Union (bone), border states (grey), Confederacy (coral, rising). | The poison taking effect. |
+
+Built and tested so far (`src/MapTest.tsx`, review copy `review/Exact_Spot_map_test.mp4`): the river claims and disputed strip,
+the free/slave balance with Texas, Mexico losing half, the border sweeping over the towns with Native nations named, 1861, and
+the frontier (Comanche lands, Tejano towns, settler flow, the Gonzales flag). Every other beat uses the same pieces.
 
 ## 2. Archival and paintings, with the coral subject
 

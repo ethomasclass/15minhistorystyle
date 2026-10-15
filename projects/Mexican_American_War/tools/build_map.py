@@ -161,7 +161,7 @@ def main(src):
 
     # The Nueces Strip (claimed by Texas from 1836, by Mexico as Tamaulipas/Coahuila): between the Nueces and the Rio Grande.
     rio_lower = upto(rio, lambda p: p[0] <= -100.9)                       # mouth -> about Del Rio
-    strip = nue + rio_lower[::-1]
+    strip = nue + rio_lower[::-1] + [(-96.6, 25.95), (-96.6, 27.9)]      # out to sea and back; the coast clips it
 
     # Republic of Texas as claimed, Dec 1836: Rio Grande mouth -> source, north to 42N, then the Adams-Onis line (1819).
     ark_up = [p for p in ark if p[0] <= -100.0]                            # Arkansas from 100W to its source
@@ -187,10 +187,33 @@ def main(src):
     # The Gadsden Purchase (1853), simplified.
     gadsden = [(-106.53, 31.78), (-108.21, 31.78), (-108.21, 31.33), (-111.07, 31.33), (-114.81, 32.49), (-114.72, 32.72)] + gila_up + [(-108.25, 31.78)]
 
+    # --- borders as lines, for the river-border beats -------------------------------------------------------------
+    rio_to_elpaso = upto(rio, lambda p: p[1] >= 31.75 and p[0] <= -106.4)  # Rio Grande, mouth -> El Paso
+    gila_down = gila_up[::-1]                                              # Gila, upper end -> Yuma
+    # the 1848 border, west -> east: south of San Diego, Yuma, up the Gila, the old New Mexico line, El Paso, down the Rio Grande
+    border1848 = [(-117.12, 32.53), (-114.72, 32.72)] + gila_up + [(-108.25, gila_up[-1][1]), (-108.25, 31.78)] + rio_to_elpaso[::-1]
+    # Mexico's northern border from 1819 (Adams-Onis), west -> east, starting at the Pacific coast
+    old_border = [(-124.3, 42.0)] + ao[1:]
+    # Mexican Texas before 1836 (the province, simplified): the Nueces to its source, north to the Red, east to the Sabine
+    texas_province = nue + [(-100.0, 34.56)] + red_east + [(-94.04, 33.55), (-94.04, 32.0)] + sab_up[::-1] + [(-93.5, 28.0), (-97.0, 27.5)]
+    # Comanche homeland in the 1830s-40s (Comancheria), approximate
+    comancheria = [(-104.6, 38.4), (-102.4, 38.9), (-100.0, 38.5), (-98.6, 37.6), (-97.8, 36.1), (-97.9, 34.4), (-97.3, 32.8), (-97.9, 31.3),
+                   (-98.9, 30.2), (-100.3, 29.9), (-101.9, 30.4), (-103.4, 31.4), (-104.6, 32.7), (-105.3, 34.2), (-105.6, 35.8), (-105.2, 37.3)]
+    # the Missouri Compromise line, 36 30' N, carried west across the Cession
+    mo3630 = [(lon / 2, 36.5) for lon in range(-179, -249, -1)]
+
+    def big(ring):
+        q = [px(lo, la) for lo, la in ring]
+        xs, ys = [a for a, _ in q], [b for _, b in q]
+        return (max(xs) - min(xs)) * (max(ys) - min(ys)) > 4000
+
+    def pts(line, tol=1.0):
+        return [[round(x, 1), round(y, 1)] for x, y in dp([px(lo, la) for lo, la in line], tol)]
+
     states = {}
     for f in load(src, "ne_10m_admin_1_states_provinces"):
         p = f["properties"]
-        if p.get("adm0_a3") in ("USA", "MEX") and any(in_box(g, 0) for g in rings_of(f["geometry"])):
+        if p.get("adm0_a3") in ("USA", "MEX") and any(in_box(g, 9) for g in rings_of(f["geometry"])):
             states[f"{p['adm0_a3']}:{p['name']}"] = path(rings_of(f["geometry"]), tol=1.5)
 
     places = {
@@ -203,19 +226,38 @@ def main(src):
         "sonoma": (-122.46, 38.29), "coloma": (-120.89, 38.80), "neworleans": (-90.07, 29.95), "havana": (-82.38, 23.13),
         "washingtonDC": (-77.04, 38.90), "springfieldIL": (-89.65, 39.80), "delRio": (-100.90, 29.36), "laredo": (-99.51, 27.51),
         "austin": (-97.74, 30.27), "houston": (-95.37, 29.76), "independence": (-94.42, 39.09),
+        "nacogdoches": (-94.66, 31.60), "taos": (-105.57, 36.41), "albuquerque": (-106.65, 35.08), "tucson": (-110.97, 32.22),
+        "monterey": (-121.89, 36.60), "santaBarbara": (-119.70, 34.42), "fortLeavenworth": (-94.92, 39.35),
+        "guadalupeHidalgo": (-99.12, 19.48), "corpusChristiBay": (-97.30, 27.70),
+    }
+    # where to stand Native nations' names (approximate homelands, for labels only)
+    nations = {
+        "Comanche": (-101.3, 34.2), "Apache": (-108.6, 33.2), "Navajo (Diné)": (-109.4, 36.4), "Ute": (-107.8, 39.4),
+        "Pueblo nations": (-106.2, 35.4), "Tohono O'odham": (-112.2, 32.0), "California nations": (-119.3, 36.3),
+        "Paiute": (-116.8, 38.6), "Shoshone": (-113.6, 41.3), "Kiowa": (-99.4, 36.4),
     }
 
     out = {
         "name": NAME, "size": [W, H], "bbox": BBOX,
         "proj": {"type": "albers", "lat1": LAT1, "lat2": LAT2, "lat0": LAT0, "lon0": LON0, "k": K, "xmin": XMIN, "ymax": YMAX},
         "land": path(land), "lakes": path(lakes),
+        # the mainland and big islands only: what raised slabs clip to (tiny islands would stand up as pillars)
+        "landMain": path([g for g in land if big(g)]),
         "rivers": {k: path(v, closed=False, tol=0.8) for k, v in riv.items() if v},
         "regions": {
             "nuecesStrip": path([strip]), "texasClaim": path([texas_claim]), "mexicoNorth": path([mex_north]),
             "mexicoNow": path(mexico_now), "cession": path([cession]), "gadsden": path([gadsden]),
+            "texasProvince": path([texas_province]), "comancheria": path([comancheria]),
         },
-        "lines": {"adamsOnis": path([ao], closed=False), "nueces": path([nue], closed=False), "rioGrande": path([rio], closed=False),
-                  "rioLower": path([rio_lower], closed=False)},
+        "lines": {"adamsOnis": path([old_border], closed=False), "nueces": path([nue], closed=False), "rioGrande": path([rio], closed=False),
+                  "rioLower": path([rio_lower], closed=False), "rioToElPaso": path([rio_to_elpaso], closed=False),
+                  "gila": path([gila_down], closed=False), "border1848": path([border1848], closed=False),
+                  "texasClaimWest": path([[rio[-1], (rio[-1][0], 42.0)]], closed=False),
+                  "sabine": path([sab_up], closed=False), "redBorder": path([red_east], closed=False), "arkansasBorder": path([ark_down], closed=False),
+                  "parallel42": path([[(-124.3, 42.0), (-106.3, 42.0)]], closed=False), "mo3630": path([mo3630], closed=False)},
+        # point lists (west -> east) for the moving border in ch 9
+        "polylines": {"oldBorder": pts(old_border), "newBorder": pts(border1848)},
+        "nations": {k: [round(c, 1) for c in px(*v)] for k, v in nations.items()},
         "states": states,
         "places": {k: [round(c, 1) for c in px(*v)] for k, v in places.items()},
     }
