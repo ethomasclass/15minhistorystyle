@@ -163,5 +163,41 @@
     "page": "https://www.loc.gov/item/97507547/",
     "source": "loc:97507547",
     "note": "chromolithograph after John Gast, published by George A. Crofutt (c1873); cropped to the picture"
+  },
+  "ch06/chapultepec_1849.jpg": {
+    "title": "The storming of Chapultepec Sept. 13, 1847",
+    "artist": "",
+    "date": "1849-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003664217/",
+    "source": "loc:2003664217",
+    "note": "cropped to the picture"
+  },
+  "ch06/grant.jpg": {
+    "title": "[Ulysses S. Grant, head-and-shoulders portrait, facing left] / [...] & Joslyn, Photographers of the Army of the West.",
+    "artist": "",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002716519/",
+    "source": "loc:2002716519",
+    "note": "cropped to head and shoulders"
+  },
+  "ch06/lee.jpg": {
+    "title": "Robert E. Lee. April 1865",
+    "artist": "Brady, Mathew B., approximately 1823-1896, photographer",
+    "date": "1865",
+    "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+    "page": "https://www.loc.gov/item/2018667428/",
+    "source": "loc:2018667428",
+    "note": "cropped to head and shoulders"
+  },
+  "ch06/jackson.jpg": {
+    "title": "Stonewall Jackson",
+    "artist": "",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2011645459/",
+    "source": "loc:2011645459",
+    "note": "cropped to head and shoulders"
   }
 }

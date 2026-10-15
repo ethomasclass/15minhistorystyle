@@ -41,7 +41,12 @@ JOBS = {
     "gast_columbia": ("img/ch05/gast_american_progress.jpg", (940, 170, 1830, 1290), "isnet-general-use"),
     "camp_matamoros": ("img/gen/ch05_rio_grande_camp.jpg", (0, 90, 1184, 205), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     "ambush_dragoons": ("img/gen/ch05_ambush.jpg", (400, 180, 1045, 520), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "chapultepec_castle": ("img/ch06/chapultepec_1849.jpg", (550, 245, 1245, 455), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "blockade_steamer": ("img/gen/ch06_blockade.jpg", (405, 220, 1215, 690), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
+    "grant": ("img/ch06/grant.jpg", None, "u2net_human_seg"),
+    "lee": ("img/ch06/lee.jpg", None, "u2net_human_seg"),
+    "jackson": ("img/ch06/jackson.jpg", None, "u2net_human_seg"),
     "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
     "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),
     "austin": ("img/ch02/austin_1836.jpg", None, "u2net_human_seg"),

@@ -22,6 +22,11 @@ import houston from '../public/img/masks/houston.json';
 import gast_columbia from '../public/img/masks/gast_columbia.json';
 import camp_matamoros from '../public/img/masks/camp_matamoros.json';
 import ambush_dragoons from '../public/img/masks/ambush_dragoons.json';
+import blockade_steamer from '../public/img/masks/blockade_steamer.json';
+import chapultepec_castle from '../public/img/masks/chapultepec_castle.json';
+import grant from '../public/img/masks/grant.json';
+import lee from '../public/img/masks/lee.json';
+import jackson from '../public/img/masks/jackson.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -45,4 +50,9 @@ export const MASKS = {
   gast_columbia: maskRef('gast_columbia', gast_columbia),
   camp_matamoros: maskRef('camp_matamoros', camp_matamoros),
   ambush_dragoons: maskRef('ambush_dragoons', ambush_dragoons),
+  blockade_steamer: maskRef('blockade_steamer', blockade_steamer),
+  chapultepec_castle: maskRef('chapultepec_castle', chapultepec_castle),
+  grant: maskRef('grant', grant),
+  lee: maskRef('lee', lee),
+  jackson: maskRef('jackson', jackson),
 };
