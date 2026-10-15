@@ -32,6 +32,7 @@ JOBS = {
     # archival portraits
     "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
     "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),
+    "austin": ("img/ch02/austin_1836.jpg", None, "u2net_human_seg"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

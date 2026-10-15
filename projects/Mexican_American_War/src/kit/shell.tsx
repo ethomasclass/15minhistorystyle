@@ -165,8 +165,8 @@ const LogoLead: React.FC = () => {
  * inside a w x h window at (x, y). `children(S)` get a source->screen mapper for overlays.
  */
 export const CropCard: React.FC<{src: string; size: [number, number]; x: number; y: number; w: number; h: number; fx: number; fy: number; scale: number; rot?: number; at?: number;
-  bw?: string; outline?: boolean; mask?: MaskRef; tint?: string | null; traceAt?: number; children?: (S: (sx: number, sy: number) => number[]) => React.ReactNode}> = ({
-  src, size, x, y, w, h, fx, fy, scale, rot = 0, at = -999, bw = 'grayscale(1) contrast(1.2)', outline = false, mask, tint, traceAt, children,
+  bw?: string; outline?: boolean; mask?: MaskRef; tint?: string | null; tintStrength?: number; traceAt?: number; children?: (S: (sx: number, sy: number) => number[]) => React.ReactNode}> = ({
+  src, size, x, y, w, h, fx, fy, scale, rot = 0, at = -999, bw = 'grayscale(1) contrast(1.2)', outline = false, mask, tint, tintStrength = 1, traceAt, children,
 }) => {
   const g = useGFrame();
   const pal = usePal();
@@ -181,7 +181,7 @@ export const CropCard: React.FC<{src: string; size: [number, number]; x: number;
         transform: `scale(${0.6 + 0.4 * k}) rotate(${rot}deg)`, opacity: Math.min(1, k * 2), outline: outline ? `5px solid ${pal.mark}` : undefined, outlineOffset: 10}}>
         <div style={{position: 'absolute', left: 14, top: 14, width: w, height: h, overflow: 'hidden'}}>
           <Img src={staticFile(src)} style={{position: 'absolute', left, top, width: size[0] * scale, height: size[1] * scale, filter: bw}} />
-          {mask && tint !== null && <Tint mask={mask.alpha} place={{left, top, scale}} size={size} color={tint} />}
+          {mask && tint !== null && <Tint mask={mask.alpha} place={{left, top, scale}} size={size} color={tint ?? undefined} strength={tintStrength} />}
           {mask && <Traced paths={mask.data.shapes.subject} place={{left, top, scale}} at={traceAt ?? (at > -999 ? at + 5 : 4)} dur={12} width={5} />}
         </div>
       </div>

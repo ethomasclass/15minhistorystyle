@@ -9,6 +9,7 @@ import rider from '../public/img/masks/rider.json';
 import lincoln from '../public/img/masks/lincoln.json';
 import polk from '../public/img/masks/polk.json';
 import tejano_rancher from '../public/img/masks/tejano_rancher.json';
+import austin from '../public/img/masks/austin.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -19,4 +20,5 @@ export const MASKS = {
   lincoln: maskRef('lincoln', lincoln),
   polk: maskRef('polk', polk),
   tejano_rancher: maskRef('tejano_rancher', tejano_rancher),
+  austin: maskRef('austin', austin),
 };

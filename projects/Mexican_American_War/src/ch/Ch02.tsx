@@ -16,8 +16,8 @@ const pl = D.places;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
 
 const GEN: [number, number] = [1376, 768];
-const AUSTIN = 'img/ch02/austin_npg.jpg';
-const AUSTIN_SIZE: [number, number] = [1699, 2000];
+const AUSTIN = 'img/ch02/austin_1836.jpg';
+const AUSTIN_SIZE: [number, number] = [1960, 2490];
 
 /** Mexico in 1821 rises; then Texas: Comanche lands, a few Tejano towns. */
 const North: React.FC<{t: TL}> = ({t}) => {
@@ -36,8 +36,8 @@ const North: React.FC<{t: TL}> = ({t}) => {
             <Slab api={api} region="mexicoNow" at={t.at('Mexico')} h={34} layers={8} fall={t.at('Comanche')} />
             <Slab api={api} region="mexicoNorth" at={t.at('Mexico') + 3} h={34} layers={8} fall={t.at('Comanche')} />
             <Stand api={api} at={pl.zacatecas} z={60} show={t.at('Mexico') + 8} out={t.at('Comanche')}><RegionName text="MEXICO" size={110} /></Stand>
-            <Fill api={api} region="texasProvince" at={t.at('Texas.')} out={t.at('Comanche')} outline={MAP3D.mexico} color={MAP3D.mexico} opacity={0.18} />
-            <Stand api={api} at={[3300, 1780]} z={60} show={t.at('Texas.')} out={t.at('Comanche')}><Hand text="Texas" size={90} bg /></Stand>
+            <Fill api={api} region="texasProvince" at={t.at('Texas.')} out={t.at('Tejanos,')} outline={MAP3D.mexico} color={MAP3D.mexico} opacity={0.18} />
+            <Stand api={api} at={[3300, 1780]} z={60} show={t.at('Texas.')} out={t.at('Tejanos,')}><Hand text="Texas" size={90} bg /></Stand>
             <Fill api={api} region="comancheria" at={t.at('Comanche')} color="#7d6b55" opacity={0.35} hatch="rgba(60,50,40,0.45)" />
             <Stand api={api} at={D.nations.Comanche} z={10} show={t.at('Comanche') + 2}><Hand text="Comanche lands" size={60} color="#f4efe6" bg /></Stand>
             {towns.map(([k, name], i) => (
@@ -69,8 +69,8 @@ const Ranch: React.FC<{t: TL}> = ({t}) => (
         <Note text="Mexico's idea:" x={1250} y={160} size={56} rot={-3} at={t.at('idea.') - 2} color="#ffffff" />
         <Note text="invite people in" x={1290} y={280} size={62} rot={-3} at={t.at('Invite') - 2} />
         <Note text="cheap land…" x={1290} y={400} size={62} rot={-3} at={t.at('cheap') - 2} />
-        <Note text="→ they farm it" x={1320} y={520} size={56} rot={-3} at={t.at('farm') - 2} />
-        <Note text="→ they help defend it" x={1320} y={620} size={56} rot={-3} at={t.at('defend') - 2} />
+        <Note text="→ they farm it" x={1210} y={520} size={56} rot={-3} at={t.at('farm') - 2} />
+        <Note text="→ they help defend it" x={1210} y={620} size={56} rot={-3} at={t.at('defend') - 2} />
       </>
     )}
   </Parallax>
@@ -95,13 +95,13 @@ const Austin: React.FC<{t: TL}> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       {hasFile(AUSTIN) ? (
-        <CropCard src={AUSTIN} size={AUSTIN_SIZE} x={150} y={130} w={600} h={780} fx={850} fy={820} scale={0.55} rot={-2} at={a} />
+        <CropCard src={AUSTIN} size={AUSTIN_SIZE} x={150} y={130} w={600} h={780} fx={1000} fy={1050} scale={0.5} rot={-2} at={a} mask={MASKS.austin} tintStrength={0.5} traceAt={t.at('Austin,')} />
       ) : (
         <Note text="[Stephen F. Austin portrait]" x={160} y={480} size={50} color="#ffffff" />
       )}
       <Note text="Stephen F. Austin" x={190} y={960} size={50} rot={-2} at={t.at('Stephen') - 2} color="#ffffff" />
       {rules}
-      <Tag text="Unidentified artist, Stephen F. Austin, c. 1840 · National Portrait Gallery" />
+      <Tag text="Stephen F. Austin, portrait painted 1836 · E. C. Barker, Life of Stephen F. Austin (1925)" />
     </AbsoluteFill>
   );
 };
@@ -176,7 +176,7 @@ const Closed: React.FC<{t: TL}> = ({t}) => {
         {(api) => (
           <>
             <Border api={api} d={D.lines.sabine} at={a + 2} color="#f4efe6" label="Sabine River · Mexico's border" labelSize={24} />
-            <Stand api={api} at={[3640, 1700]} z={40} show={t.at('bans')}><div style={{fontFamily: '"Abril Fatface", serif', fontSize: 110, color: pal.subject, border: `8px solid ${pal.subject}`, padding: '0 22px', transform: 'rotate(-8deg)', background: 'rgba(14,14,14,0.6)'}}>CLOSED</div></Stand>
+            <Stand api={api} at={[3930, 1700]} z={40} show={t.at('bans')}><div style={{fontFamily: '"Abril Fatface", serif', fontSize: 90, color: pal.subject, border: `8px solid ${pal.subject}`, padding: '0 22px', transform: 'rotate(-8deg)', background: 'rgba(14,14,14,0.6)'}}>CLOSED</div></Stand>
             <Flow api={api} from={[4100, 1600]} to={[3350, 1900]} at={t.at('keep')} n={30} spread={170} toSpread={140} color={MAP3D.us} seed="ch2b" />
           </>
         )}
@@ -186,8 +186,8 @@ const Closed: React.FC<{t: TL}> = ({t}) => {
         <Note text="no new Americans" x={120} y={250} size={56} rot={-3} at={t.at('American settlers') - 2} color="#ffffff" />
         <Note text="no new enslaved people" x={140} y={340} size={56} rot={-3} at={t.at('enslaved', 2) - 2} color="#ffffff" />
         <Note text="+ soldiers to collect taxes" x={160} y={430} size={56} rot={-3} at={t.at('soldiers') - 2} color="#ffffff" />
-        <Note text="they keep coming anyway" x={1000} y={860} size={64} rot={-3} at={t.at('keep') - 2} />
-        <Note text="something has to give" x={1040} y={960} size={64} rot={-3} at={t.at('Something') - 2} color={pal.subject} />
+        <Note text="they keep coming anyway" x={1000} y={800} size={64} rot={-3} at={t.at('keep') - 2} />
+        <Note text="something has to give" x={1040} y={900} size={64} rot={-3} at={t.at('Something') - 2} color={pal.subject} />
       </AbsoluteFill>
     </>
   );
