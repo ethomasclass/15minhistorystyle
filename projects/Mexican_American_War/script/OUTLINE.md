@@ -1,5 +1,7 @@
 # The Exact Spot: Texas, the Mexican-American War, and the Question It Reopened
 
+> **Superseded by [`SCRIPT.md`](SCRIPT.md) (draft 1).** Changes since this outline: the revolt causes got their own chapter, Manifest Destiny is in, the ending is the poison line, and Thoreau was cut for time.
+
 **15 Minute History** · beat outline (phase 2, step 1) · target **about 12:00 finished** (range 10:30–13:00)
 About 2,150 words of narration at the locked pace (~185 wpm). The heavy chapter (8) is voiced slower. About 35 s of intro, title card and logo breaks, plus a 12 s end screen.
 
