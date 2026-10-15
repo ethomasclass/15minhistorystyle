@@ -1,17 +1,19 @@
 # The Exact Spot: Texas, the Mexican-American War, and the Question It Reopened
 
-**15 Minute History** · narration script · 2,269 words · about 12:45 (draft 1) with the intro and logo breaks (about 12:55 with a 10-second end screen)
+**15 Minute History** · narration script · 2,474 words · about 13:52 (draft 2) with the intro and logo breaks (about 14:02 with a 10-second end screen)
 
 **Driving question (cold open, answered in the last chapter):** How did a fight over a strip of land between two rivers become a war that cost Mexico half its land? And why did winning that war make America's biggest problem worse?
 
 **Answer:** Texas broke from Mexico over self-rule *and* slavery: its declaration lists grievances about rights, and its constitution two weeks later locks in slavery. Polk wanted California, tried to buy it, then sent the army into the land between the Nueces and the Rio Grande. When the shooting started, Congress voted for a war that had already begun. Supporters saw a defense of American soil and Manifest Destiny; critics, Lincoln and Grant among them, saw a war of conquest. The treaty took the land, and the people already living on it paid. Every new acre then forced the question "slave or free?", and the Wilmot Proviso vote showed the answer would split the country by region, not party. Emerson's "Mexico will poison us" took about 13 years to come true.
 
 **Title:** The Exact Spot · subtitle *Texas, the Mexican-American War, and the Question It Reopened* · dates *1821 – 1848*
-**Audience:** general viewers of all ages and students (Lesson 2 · Day 2). Short sentences, every term defined as it appears, concrete details a 12-year-old will remember (the cannon flag, Santa Anna in a private's uniform, news at the speed of a horse, the 65-page "no", the gold nine days before the treaty). Light and wry through chapter 8. Chapter 9 is heavy: no jokes.
+**Audience:** general viewers of all ages and students (Lesson 2 · Day 2). Short sentences, every term defined as it appears, concrete details a 12-year-old will remember (the cannon flag, Santa Anna in a private's uniform, news at the speed of a horse, the 65-page "no", the gold nine days before the treaty, Santa Anna's double-cross and his captured leg). Light and wry through chapter 8, except the San Patricios beat at the end of chapter 6. Chapter 9 is heavy: no jokes.
 
 Markup: `*emphasis*`, `{vocab term}`. Timestamps assume ~185 wpm (168 for chapter 9), plus ~10 s for the intro and title card and ~1.5 s per logo break. Re-time after voicing.
 
 **Changes since the outline:** the revolt's causes now have their own chapter (3, *Come and Take It*): the Coahuila merger, Austin jailed, Santa Anna's centralism, Gonzales, and the Texas Declaration of Independence compared with the Texas constitution. Manifest Destiny is defined in chapter 5 and answered in chapter 7. The ending is the poison line. Thoreau was cut for time (it's in the cut-back list below).
+
+**Changes in draft 2 (drama pass):** chapter 6 is now *Plot Twists*: Santa Anna's deal with Polk to get through the blockade (and his double-cross), his leg (the funeral, the mob, the cork leg in Illinois), and the San Patricios hanged as the flag rose over Chapultepec. Chapter 10 adds Grant and Lee talking about Mexico at Appomattox, right before the poison line. Cut to pay for it: the "contracts" sentence (ch 2), the Southern/Northern answers (ch 10), and small trims in ch 6, 7, 8 and 10. Net: +205 words, about 1:05 longer.
 
 ---
 
@@ -37,7 +39,7 @@ It starts with Mexico inviting Americans in.
 
 ## 1:06 | Come On In
 
-`ch02_come_on_in.txt` · 186 words
+`ch02_come_on_in.txt` · 172 words
 
 1821. Mexico wins its independence from Spain, and inherits a huge northern frontier called Texas.
 
@@ -49,13 +51,13 @@ Many of the settlers come from the South to grow cotton. And they bring enslaved
 
 By the early 1830s, Americans in Texas outnumber Tejanos many times over. Mexico's plan worked. A little too well.
 
-So Mexico tries to slow things down. In 1829, it *abolishes slavery*. Texas wins an exception, and settlers make enslaved people sign "contracts" that bind them for decades. Slavery in all but name.
+So Mexico tries to slow things down. In 1829, it *abolishes slavery*. Texas talks its way into an exception.
 
 In 1830, Mexico bans new American settlers and new enslaved people, and sends soldiers to collect new taxes on imports. Americans keep coming anyway.
 
 ---
 
-## 2:08 | Come and Take It
+## 2:04 | Come and Take It
 
 `ch03_come_and_take_it.txt` · 279 words
 
@@ -81,9 +83,9 @@ So was the Texas Revolution about freedom, or about slavery? To the settlers, it
 
 ---
 
-## 3:40 | Remember the Alamo
+## 3:36 | Remember the Alamo
 
-`ch04_remember_the_alamo.txt` · 269 words
+`ch04_remember_the_alamo.txt` · 268 words
 
 Santa Anna marches north with thousands of soldiers.
 
@@ -105,7 +107,7 @@ Quick thing before the war starts. If you're enjoying this, hit subscribe. It's 
 
 ---
 
-## 5:09 | Polk Acts First
+## 5:04 | Polk Acts First
 
 `ch05_polk_acts_first.txt` · 310 words
 
@@ -131,21 +133,33 @@ So who decided this country would go to war? Congress declared it. But the Presi
 
 ---
 
-## 6:51 | The War, Fast
+## 6:46 | Plot Twists
 
-`ch06_the_war_fast.txt` · 99 words
+`ch06_plot_twists.txt` · 298 words · ends on a heavy beat (San Patricios): no music sting, plain read
 
-The war moves fast. Three arrows. Taylor wins in the north and becomes a national hero. American forces take New Mexico, and after hard fighting with the Californios, Mexican Californians, California too. And General Winfield Scott lands at Veracruz and marches on Mexico City.
+The war moves fast. And it comes with a plot twist.
 
-September 1847. Scott's army storms the castle of Chapultepec. Mexico still honors six teenage cadets who died there: the Niños Héroes, the boy heroes. The next day, Americans march into Mexico City.
+When the war starts, Santa Anna isn't even in Mexico. He's in exile in Cuba. So he sends Polk a message: let me through your navy's blockade, and I'll make you a deal. Polk says yes. The U.S. Navy lets him sail right past. Santa Anna lands, takes command of Mexico's army, and fights the United States for the rest of the war.
+
+So much for the deal.
+
+Santa Anna, by the way, has only one leg. He lost the other fighting the French in 1838, and later gave it a state funeral. A few years after that, an angry crowd dug it up. Then in 1847, soldiers from Illinois captured his cork leg on the battlefield. It's still in a museum in Springfield, Illinois. Mexico has asked for it back.
+
+Meanwhile, the Americans push in from three directions. Taylor wins in the north and becomes a national hero. American forces take New Mexico, and after hard fighting with the Californios, Mexican Californians, California too. And General Winfield Scott lands at Veracruz and marches on Mexico City.
+
+September 13th, 1847. Scott's army storms the castle of Chapultepec. Mexico still honors six teenage cadets who died there: the Niños Héroes, the boy heroes.
+
+That same morning, a few miles away, 30 men stand on wagons with nooses around their necks. They're San Patricios: mostly Irish Catholic immigrants who had deserted the American army to fight for Mexico. The American colonel makes them wait, watching the castle, until the U.S. flag goes up over Chapultepec. Then they're hanged.
+
+The next day, Americans march into Mexico City.
 
 Some of the young American officers: Ulysses S. Grant. Robert E. Lee. Stonewall Jackson. In about 14 years, they'll be fighting each other.
 
 ---
 
-## 7:25 | The Spot
+## 8:24 | The Spot
 
-`ch07_the_spot.txt` · 204 words
+`ch07_the_spot.txt` · 200 words
 
 Which brings us back to Lincoln. December 1847. The war is basically won, and he asks: was the spot really American soil?
 
@@ -153,7 +167,7 @@ He had a point. That fight happened in the strip between the rivers. Land Texas 
 
 And he wasn't alone. Less than two weeks later, the House votes, 85 to 81, that the war was "unnecessarily and unconstitutionally begun by the President." While it's still going on. Awkward.
 
-Lincoln pays for it. Papers back home call him "Spotty Lincoln." He'd already agreed to serve just one term, and he goes home.
+Lincoln pays for it. Papers back home call him "Spotty Lincoln." He serves his one term and goes home.
 
 And a young officer who fought in the war, Ulysses S. Grant, later called it "one of the most unjust ever waged by a stronger against a weaker nation."
 
@@ -163,9 +177,9 @@ So was it defense, or conquest? Historians have argued about that for more than 
 
 ---
 
-## 8:32 | The Man Who Was Fired
+## 9:31 | The Man Who Was Fired
 
-`ch08_the_man_who_was_fired.txt` · 221 words
+`ch08_the_man_who_was_fired.txt` · 213 words
 
 Now Polk needs a peace treaty. He sends a diplomat, Nicholas Trist. The talks drag on, and Polk orders him home.
 
@@ -175,7 +189,7 @@ February 2nd, 1848. Trist signs the {Treaty of Guadalupe Hidalgo}. A peace treat
 
 Polk calls him a "scoundrel" in his diary. But it's the deal he wanted, and the Senate approves it. Trist doesn't get paid until 1871.
 
-The deal: the Rio Grande is the border of Texas. And Mexico hands over the {Mexican Cession}, about 530,000 square miles. Today that's California, Nevada and Utah, most of Arizona and New Mexico, and parts of Colorado and Wyoming. Counting Texas, Mexico lost about half its land. The United States pays 15 million dollars.
+The deal: the Rio Grande is the border of Texas. And Mexico hands over the {Mexican Cession}, about 530,000 square miles. Today that's California, Nevada, Utah, and most of the Southwest. Counting Texas, Mexico lost about half its land. The United States pays 15 million dollars.
 
 And here's what nobody at the table knew. Nine days earlier, a carpenter in California had found gold.
 
@@ -183,7 +197,7 @@ The treaty makes promises to the people already living there. Article 8 says the
 
 ---
 
-## 9:45 | Who Paid
+## 10:41 | Who Paid
 
 `ch09_who_paid.txt` · 178 words · heavy, voiced slower
 
@@ -205,9 +219,9 @@ Years later, he called himself "a foreigner in my native land."
 
 ---
 
-## 10:51 | Poison
+## 11:46 | Poison
 
-`ch10_poison.txt` · 349 words
+`ch10_poison.txt` · 382 words
 
 Now back to August 1846, three months into the war. Polk asks Congress for money to buy land from Mexico. And a congressman from Pennsylvania, David Wilmot, adds one sentence to the bill.
 
@@ -217,7 +231,7 @@ Wilmot wasn't an abolitionist. He said he wanted the land kept for free white wo
 
 It passes the House, 83 to 64. It dies in the Senate. It comes back again and again, and it *never becomes law*.
 
-But look at the vote. Almost every yes came from the North. Almost every no came from the South. Both big parties of the day, the Democrats and the Whigs, split the same way. That's {sectionalism}: loyalty to your region over your party. Southern leaders said the new land belonged to all the states, slaveholders included. Many Northerners said slavery shouldn't spread one more mile.
+But look at the vote. Almost every yes came from the North. Almost every no came from the South. Both big parties of the day, the Democrats and the Whigs, split the same way. That's {sectionalism}: loyalty to your region over your party.
 
 Here's why winning made it harder. Texas was already a slave state when it joined. This land was new. Every acre forced the question: slave, or free?
 
@@ -227,7 +241,9 @@ So, back to Lincoln's question. Where was the spot? In land both countries claim
 
 But the bigger question was never where the war started. It was what the new land would become.
 
-Grant later wrote that the Civil War was "largely the outgrowth of the Mexican war."
+Remember those young officers? April 1865. Two of them meet at Appomattox, Virginia. Robert E. Lee is surrendering his army to Ulysses S. Grant. And for a while, they talk about Mexico, back when they were on the same side. Grant wrote that the talk got so pleasant, he almost forgot why they were there.
+
+Grant also wrote that the Civil War was "largely the outgrowth of the Mexican war."
 
 Emerson had warned that Mexico would poison the country that conquered it.
 
@@ -236,9 +252,12 @@ It took about 13 years to work.
 Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 
 ---
+
 ## Production notes
 
 **Heavy chapter:** 9, *Who Paid*. Quiet mode, all teal, voiced slower, no music swell, no jokes. Seguín's quote gets 2–3 seconds of silence after it.
+
+**Ch 6 tone shift:** the chapter goes light → serious. The leg is the last joke. "Meanwhile, the Americans push in from three directions" is the reset (music changes here). The San Patricios paragraph goes teal-only and quiet, with a beat of silence after "Then they're hanged." No illustration of the hanging itself: the distant gallows painting or a drawn diagram (castle on the hill, flagpole, the wagons a few miles off).
 
 **Vocab cards** (highlighter title + definition bar):
 | Term | Chapter | Definition on screen |
@@ -258,7 +277,8 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 - **Lincoln's Spot Resolutions** (1 → 7 → 10): the same manuscript, "the particular spot" circled.
 - **Juan Seguín** (4 → 9): the 1838 portrait. Coral in ch 4, teal-only in ch 9.
 - **"Hold that thought"** Mexico still says Texas is Mexico (4 → 5); Article 10 (8 → 9).
-- **The young officers** (6 → 10): the row of portraits returns under Grant's quote.
+- **The young officers** (6 → 10): the row of portraits (Grant, Lee, Jackson) returns at Appomattox; Jackson's drops out (killed 1863), Grant and Lee slide together.
+- **Santa Anna** (3 → 4 → 6): the same portrait each time; in ch 6 a teal arrow from Cuba past the blockade ships to Veracruz.
 - **The poison**: Emerson's quote card (10) uses the arsenic bottle painting; the final line plays over the 1848 → 1861 dates.
 
 **Quote cards** (attributed on screen, dated):
@@ -269,15 +289,17 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 - Treaty, Article VIII, 1848: "inviolably respected."
 - Seguín, *Personal Memoirs*, 1858: "a foreigner in my native land."
 - Emerson, journal, 1846: "Mexico will poison us."
+- Grant, *Personal Memoirs*, on Appomattox: "Our conversation grew so pleasant that I almost forgot the object of our meeting." (narration paraphrases it)
 - Grant, *Personal Memoirs*: "largely the outgrowth of the Mexican war."
 
 **Emphasis graphics:**
 - Ch 3 **"two documents"** split screen: the Declaration of Independence (March 2) on the left with its grievances ticked in teal, the Constitution (March 17) on the right with General Provisions §9 boxed. A teal note over the declaration: "slavery: 0 mentions."
 - Ch 5 **the timeline that matters**: Apr 25 (fight) → May 9 morning (cabinet: war) → May 9 evening (news arrives) → May 13 (war declared). A horse-and-rider icon crawls along a two-week line.
 - Ch 9 **disease vs. battle**: 1 coral figure for battle, 7 teal figures for disease, repeated.
+- Ch 6 **the leg**: a three-step card — 1838 lost (French cannonball) → 1842 state funeral → 1844 dug up → 1847 captured → today, Springfield, Illinois. Photo of the cork leg if a public-domain or licensed one is found; otherwise the Gemini painting.
 - Ch 10 **the vote map**: North and South, yes and no, with the two party labels shown splitting the same way.
 
-**Subscribe reminders:** mid-video at the end of ch 4 (about 4:55, "unlike Texas, you won't wait nine years"), and the end-screen line after "It took about 13 years to work."
+**Subscribe reminders:** mid-video at the end of ch 4 (about 4:55–5:00, "unlike Texas, you won't wait nine years"), and the end-screen line after "It took about 13 years to work."
 
 **Ending:** "Emerson had warned that Mexico would poison the country that conquered it." Beat. "It took about 13 years to work." Hard cut to the end screen; then the thank-you line.
 
@@ -287,16 +309,23 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 
 | Cut | Words | Saves | New total |
 |---|---|---|---|
-| Ch 6 *The War, Fast* (move "young officers" to one line in ch 10) | −85 | ~0:30 | ~12:25 |
-| Ch 2: the "contracts" paragraph | −30 | ~0:10 | |
-| Ch 4: Goliad sentence | −15 | ~0:05 | |
-| Ch 10: the Southern/Northern answers | −24 | ~0:08 | |
+| Ch 6: the San Patricios paragraph (keeps the chapter light) | −54 | ~0:18 | ~13:44 |
+| Ch 6: the leg paragraph | −63 | ~0:20 | ~13:24 |
+| Ch 10: Appomattox (keep Grant's "outgrowth" line) | −55 | ~0:18 | ~13:06 |
+| Ch 6: the three-directions paragraph (Taylor, California, Scott) | −46 | ~0:15 | ~12:51 |
+| Ch 4: Goliad sentence | −15 | ~0:05 | ~12:46 |
+
+Totals are finished length, starting from 14:02.
 
 **And if you want to add any back (cost):**
 - Thoreau's night in jail, ch 7 (+38 words, ~12 s).
 - "Remember the Alamo! Remember Goliad!" battle cry, ch 4 (+9 words).
 - Zacatecas, the other state Santa Anna crushed, ch 3 (+13 words). It shows the revolt against centralism wasn't only Texas's.
-- The San Patricios, Irish Catholic soldiers who switched sides (about +45 words). Better as a Short.
+- The contracts that kept slavery going after 1829, ch 2 (+17 words).
+- The Southern and Northern answers to the Proviso, ch 10 (+24 words).
+- Grant hauling a cannon up a church bell tower at Mexico City, ch 6 (+35 words).
+- Travis's "Victory or Death" letter; Crockett myth vs. evidence; Joe, the enslaved survivor of the Alamo, ch 4 (+40 words each).
+- The Bear Flag Revolt, ch 6 (+45 words). Scott's guava marmalade for Trist, ch 8 (+30 words). Polk's 103-day retirement, ch 10 (+25 words).
 - The Gadsden Purchase, 1853 (+20 words).
 
 ---
@@ -320,6 +349,8 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 | Californios | kal-ih-FOR-nee-ohs |
 | Veracruz | vair-uh-KROOZ |
 | Chapultepec | chah-POOL-teh-pek |
+| San Patricios | san pah-TREE-see-ohs |
+| Appomattox | ap-uh-MAT-uks |
 | Niños Héroes | NEEN-yohs AIR-oh-ess |
 | Guadalupe Hidalgo | gwah-dah-LOO-pay ee-DAHL-goh |
 | Trist | trist |
@@ -342,7 +373,7 @@ Run the test MP3 (one sentence per term) before voicing. Respellings must keep t
 | 5 | Austin "the first 300 families" | The "Old Three Hundred": 297 grants | Fine as rounded. |
 | 6 | Become Catholic | Required by colonization law; loosely enforced | Fine. |
 | 7 | "outnumber Tejanos many times over" by the early 1830s | Mid-1830s estimates: ~20,000–30,000 Anglo Americans vs ~4,000 Tejanos | Hedged; no ratio given. |
-| 8 | 1829 abolition; Texas exception; "contracts" binding for decades | Guerrero decree Sept 1829; Texas exempted Dec 1829; 1830s labor contracts (some for 99 years) | Solid. "Decades" is safe. |
+| 8 | 1829 abolition; Texas exception; "contracts" binding for decades | Guerrero decree Sept 1829; Texas exempted Dec 1829; 1830s labor contracts (some for 99 years) | Draft 2 cut the contracts sentence; the script now says only that Texas got an exception. |
 | 9 | 1830: no new American settlers, no new enslaved people, tariffs and soldiers | Law of April 6, 1830 (Art. 11 immigration ban; slave import ban); customs houses and garrisons followed | Solid. Immigration ban repealed 1834; the script doesn't say otherwise. |
 | 10 | Coahuila y Tejas, capital "hundreds of miles away" | Capital Saltillo, later Monclova: 300+ mi from the Anglo colonies | Solid. |
 | 11 | "Laws written in Spanish. No jury trials. Only one religion." | Spanish was official; jury trial was a 1836 grievance (a limited 1834 law was never in force); Catholicism the state religion | Solid. |
@@ -389,6 +420,11 @@ Run the test MP3 (one sentence per term) before voicing. Respellings must keep t
 | 52 | Emerson quote, 1846 | Journal, 1846 | Exact. |
 | 53 | Grant: "largely the outgrowth of the Mexican war" | *Personal Memoirs*, vol. 1, ch. 3 | Exact. |
 | 54 | "About 13 years" | Treaty 1848 → Fort Sumter 1861 | Solid. |
+| 55 | Santa Anna in exile in Cuba; offered Polk a deal to pass the blockade; Navy let him through; he then fought the U.S. | Santa Anna's agent (Alexander Atocha) and Polk's envoy (Alexander Slidell Mackenzie) met him in Havana in 1846; Polk ordered the Gulf squadron to let him pass; he landed at Veracruz Aug 16, 1846 on a British steamer and took command | Solid. "Thrown out" → said as "in exile". |
+| 56 | Lost his leg fighting the French in 1838; state funeral; dug up by a crowd; cork leg captured 1847 by Illinois soldiers; in Springfield; Mexico has asked for it back | Pastry War, Veracruz, Dec 1838; leg reburied with honors in Mexico City, Sept 1842; mob dug it up during his overthrow, Dec 1844; 4th Illinois Infantry captured a cork leg at Cerro Gordo, April 18, 1847; Illinois State Military Museum, Springfield; Mexican requests reported over the years | Solid. Avoid saying Illinois "refused"; the script only says Mexico has asked. Check the museum still displays it before publishing. |
+| 57 | Sept 13, 1847: 30 San Patricios hanged as the U.S. flag rose over Chapultepec, a few miles away; "mostly Irish Catholic immigrants" | Col. William Harney, at Mixcoac (about 2 mi away); 30 hanged when the flag went up; 16 had been hanged at San Ángel on Sept 10 and 4 more on Sept 11. The battalion was majority Irish-born, with Germans and others; most were Catholic | Solid. "Mostly" covers the mix. |
+| 58 | Appomattox, April 1865: Grant and Lee talked about Mexico and the old army; "so pleasant he almost forgot why they were there" | Grant, *Personal Memoirs*, vol. 2: "We soon fell into a conversation about old army times… Our conversation grew so pleasant that I almost forgot the object of our meeting." | Exact (paraphrased in narration). |
+| 59 | Stonewall Jackson served in Mexico | 1st Artillery; at Chapultepec | Solid. |
 
 Democrats/Whigs (ch 10): no comparison to today's parties is made. If the on-screen label says "Democrats", add a small note "(not today's party)".
 
@@ -405,6 +441,9 @@ Democrats/Whigs (ch 10): no comparison to today's parties is made. If the on-scr
 - Ulysses S. Grant, *Personal Memoirs* (1885), vol. 1.
 - Juan N. Seguín, *Personal Memoirs of John N. Seguín* (1858).
 - Ralph Waldo Emerson, *Journals*, 1846.
+- Ulysses S. Grant, *Personal Memoirs* (1885–86), vol. 2 (Appomattox).
+- Illinois State Military Museum (Santa Anna's leg); *Handbook of Texas Online* and Mexican sources on Santa Anna's 1842 leg funeral.
+- On the San Patricios: U.S. Army court-martial records (1847) and Mexican accounts; the battalion's roster.
 - John L. O'Sullivan, "Annexation," *United States Magazine and Democratic Review* (1845).
 - Texas State Historical Association, *Handbook of Texas Online* (Austin, Seguín, Gonzales, Goliad, Thornton Affair, slavery).
 - U.S. Department of Veterans Affairs, *America's Wars* (casualties).

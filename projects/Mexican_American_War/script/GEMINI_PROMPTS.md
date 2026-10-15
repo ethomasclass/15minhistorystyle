@@ -1,6 +1,6 @@
 # Gemini image prompts: The Exact Spot
 
-These cover only moments with no surviving picture. Real people (Lincoln, Polk, Santa Anna, Austin, Houston, Seguín, Taylor, Scott,
+These cover only moments with no surviving picture. **Draft 2 adds three (17–19) for chapter 6.** Real people (Lincoln, Polk, Santa Anna, Austin, Houston, Seguín, Taylor, Scott,
 Trist, Grant, Wilmot, Emerson) come from archival portraits (list at the bottom). **No prompt shows a recognizable real person.** Where
 a real person is in the scene, they're seen from behind, at a distance or in shadow.
 
@@ -90,6 +90,25 @@ a real person is in the scene, they're seen from behind, at a distance or in sha
 > *[Style]*
 > *Mask pass:* the rider and the horse, as one shape.
 
+## Chapter 6 · Plot Twists
+
+### 17. `ch06_blockade.png` · must-have
+*Covers:* "Polk says yes. The U.S. Navy lets him sail right past."
+> The Gulf of Mexico off Veracruz, a bright hot morning in August 1846. In the foreground, a British paddle-wheel mail steamer with a tall black funnel and two masts steams toward the low white city of Veracruz and the stone fortress of San Juan de Ulúa on the horizon. Close by, a U.S. Navy sailing frigate of the blockade squadron lies at anchor with its gun ports open, sailors in white frocks and dark hats lining the rail, simply watching it pass. On the steamer's deck, one gentleman in a dark frock coat and top hat stands at the rail with his back to the viewer, face not visible, looking toward shore. Blue-green water, gulls, heat haze.
+> *[Style]*
+> *Mask pass:* the British steamer.
+
+### 18. `ch06_cork_leg.png` · must-have
+*Covers:* "Then in 1847, soldiers from Illinois captured his cork leg on the battlefield."
+> A rocky mountain road near Cerro Gordo, Mexico, April 18, 1847, just after a battle. An abandoned, elegant black carriage with a broken wheel sits tilted at the roadside, its door open. Three American volunteer soldiers in sky-blue wool jackets, white cross-belts and forage caps (ordinary anonymous young men from Illinois) gather by the door; one holds up a 19th-century artificial leg made of cork and wood with a laced leather socket and brass fittings, and the others laugh in disbelief. A roast chicken and a toppled bottle lie on the carriage seat. Scrubby hills, drifting smoke in the distance, bright afternoon light. Comic, but not cartoonish.
+> *[Style]*
+> *Mask pass:* the artificial leg.
+
+### 19. `ch06_flag_and_gallows.png` · optional (heavy, teal only, no mask)
+*Covers:* "The American colonel makes them wait, watching the castle, until the U.S. flag goes up over Chapultepec."
+> A wide, distant view across a flat valley outside Mexico City, early morning, September 13, 1847. In the middle distance, a long row of army mule wagons stands beneath a long rough timber beam on posts; on the wagons stand a line of small, dark, indistinct standing figures, too far away to see any faces, guarded by ranks of soldiers in sky-blue uniforms. Far away on the horizon, on a steep wooded hill, the stone castle of Chapultepec is wreathed in grey battle smoke. No hanging bodies, no violence shown, nothing close up. Pale, hazy, cold light; a sense of waiting and dread.
+> *[Style]*
+
 ## Chapter 8 · The Man Who Was Fired
 
 ### 11. `ch08_trist_letter.png`
@@ -144,9 +163,9 @@ a real person is in the scene, they're seen from behind, at a distance or in sha
 | 3 | Santa Anna portrait; Texas Declaration of Independence; 1836 Constitution, General Provisions §9; Navarro portrait | Texas State Library; Commons |
 | 4 | Juan Seguín (Jefferson Wright portrait, 1838); Sam Houston; 1840s–1850s Alamo sketches (Edward Everett, 1847) | Texas State Library; Commons |
 | 5 | Zachary Taylor; O'Sullivan's 1845 *Democratic Review*; John Gast, *American Progress* (1872, label it with its date) | LOC; Commons |
-| 6 | Winfield Scott; Carl Nebel lithographs (Chapultepec, Scott's entry into Mexico City, 1851); Niños Héroes monument | LOC; Commons |
+| 6 | Santa Anna portraits (c. 1840s); Winfield Scott; Carl Nebel lithographs (Chapultepec, Scott's entry into Mexico City, 1851); Niños Héroes monument; a period print of the San Patricios or their 1847 court-martial record; a photo of the cork leg (Illinois State Military Museum: check the licence, else use painting 18) | LOC; Commons; museum |
 | 6, 10 | Young officers: Grant (c. 1843), Lee, Jackson, as early as available | LOC; Commons |
 | 7 | Grant's *Personal Memoirs* page; Ashmun amendment entry in the *Congressional Globe* | Internet Archive; LOC |
 | 8 | Nicholas Trist portrait; the treaty's signature page; Sutter's Mill photo (c. 1850) | National Archives; Commons |
 | 9 | Seguín's *Personal Memoirs* title page (1858); a California land-case diseño | Internet Archive; Bancroft Library / Calisphere |
-| 10 | David Wilmot (Brady); Emerson (c. 1846–50); a House vote tally or *Congressional Globe* page | LOC; Commons |
+| 10 | David Wilmot (Brady); Emerson (c. 1846–50); a House vote tally or *Congressional Globe* page; a period print of Lee's surrender at Appomattox (1865–67 lithographs); the McLean House photo (1865) | LOC; Commons |
