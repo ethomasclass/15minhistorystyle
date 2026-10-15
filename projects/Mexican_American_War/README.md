@@ -8,7 +8,7 @@ Mexico, and the Wilmot Proviso*).
 | **Status** | Phase 2–3: script draft 1, waiting for your notes |
 | **Script** | [`script/SCRIPT.md`](script/SCRIPT.md) (narration, production notes, cut list, pronunciation, fact-check flags, sources) · readable PDF in [`review/`](review/) |
 | **Chapter files** | `script/ch01_cold_open.txt` … `script/ch10_poison.txt` (what gets voiced) |
-| **Painting prompts** | [`script/GEMINI_PROMPTS.md`](script/GEMINI_PROMPTS.md) (16 images, 9 must-have) + the archival list |
+| **Painting prompts** | [`script/GEMINI_PROMPTS.md`](script/GEMINI_PROMPTS.md) (16 images, 8 must-have) + the archival list |
 | **Outline** | [`script/OUTLINE.md`](script/OUTLINE.md) (v1, superseded by the script) |
 | **Required content** | [`reference/lesson2_day2_card.png`](reference/lesson2_day2_card.png) |
 
