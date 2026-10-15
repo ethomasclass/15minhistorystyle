@@ -1,6 +1,6 @@
 # Dressed to Kill: How Arsenic Green Took Over the 1800s
 
-**15 Minute History** · narration script · 1,648 words · about 9:55 finished (draft 2)
+**15 Minute History** · narration script · 1,654 words · about 9:55 finished (draft 2)
 
 **Driving question (cold open, answered in ch08):** How did a poison end up on the walls, on the dresses, and on the candy? And why did it take so long to get it off?
 
@@ -11,6 +11,7 @@
 Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates; re-time after voicing.
 
 ---
+
 
 ## 0:00 | The Library Book
 
@@ -36,11 +37,11 @@ It starts with a Swedish chemist, a beautiful new color, and a warning.
 
 ## 1:10 | The Perfect Green
 
-`ch02_perfect_green.txt` · 180 words
+`ch02_perfect_green.txt` · 185 words
 
 1775. Sweden. A chemist named Carl Wilhelm Scheele mixes copper with arsenic and gets something remarkable: a bright, clean green. Brighter than any plant dye. And cheap.
 
-It's called {Scheele's Green}. And Scheele knew exactly what was in it. A couple of years later he wrote that people using it ought to be warned it was poisonous.
+It's called {Scheele's Green}. And Scheele knew exactly what was in it. In a letter to a friend, he said he'd told people it had arsenic in it, in case someone hurt themselves making it.
 
 Not a great sign.
 
@@ -56,7 +57,7 @@ All of it, arsenic.
 
 ---
 
-## 2:16 | Dressed to Kill
+## 2:18 | Dressed to Kill
 
 `ch03_dressed_to_kill.txt` · 201 words
 
@@ -80,31 +81,31 @@ If you're enjoying this, hit subscribe. Unlike a Victorian ball gown, it's compl
 
 ---
 
-## 3:30 | The Walls *(heavy chapter: no jokes, slower voice)*
+## 3:32 | The Walls *(heavy chapter: no jokes, slower voice)*
 
-`ch04_the_walls.txt` · 221 words
+`ch04_the_walls.txt` · 219 words
 
 London, 1861. Matilda Scheurer is 19 years old. She makes {artificial flowers}, dusting fake leaves with green powder, in a workshop with about a hundred other young women. They tie thin cloth over their mouths. It doesn't help much.
 
-After a year and a half, she gets sick. She throws up something green. In November 1861, she dies. A doctor finds arsenic in her lungs and her liver. Her sister had died the same way.
+For a year and a half, she's sick on and off. She throws up something green. In November 1861, she dies. A doctor finds arsenic in her lungs and her liver. Her sister had died the same way.
 
 The {inquest}, the official investigation into her death, calls it an accident. Caused, it says, by the arsenic "used in her employment."
 
-A few months later, on the other side of London, a bricklayer's family named Turner is losing children, one after another. The doctors call it diphtheria, a throat infection. Then the youngest, three-year-old Ann Amelia, gets sick too.
+A few months later, on the other side of London, a bricklayer's family named Turner is losing children, one after another. The doctors call it diphtheria, a throat infection. Then three-year-old Ann Amelia gets sick too.
 
 The surgeon who comes to see her, Thomas Orton, notices the walls. Green paper. Damp. The color came off on your hand "like paint."
 
 A chemist tests it. Arsenic. Four children in about two months.
 
-The jury at the inquest hears all of this, and decides the children died of natural causes.
+The jury at her inquest hears all of this, and calls it a natural death.
 
 And that was the pattern. People got sick at home. They got better when they went away. They came home, and got sick again. And very often, nobody thought to look at the walls.
 
 ---
 
-## 4:51 | Witch Fever
+## 4:52 | Witch Fever
 
-`ch05_witch_fever.txt` · 298 words
+`ch05_witch_fever.txt` · 300 words
 
 So if doctors were finding arsenic in the walls, why didn't it stop? Three reasons.
 
@@ -114,19 +115,19 @@ Two: doctors couldn't agree on *how* a wall could poison you. One theory blamed 
 
 You might have heard that wallpaper killed Napoleon. His really did have arsenic in it. But it almost certainly didn't kill him. Stomach cancer did.
 
-Three: money. One English wallpaper maker said he went through two tons of arsenic a week.
+Three: money. One manufacturer said he went through about two tons of arsenic a week.
 
-Which brings us to William Morris, probably the most famous designer of his day. His family's fortune came from an arsenic mine, one of the biggest in the world, and from 1871 to 1875 he sat on its board. His early wallpapers used arsenic green.
+Which brings us to William Morris, probably the most famous designer of his day. His family's fortune came from a copper mine that became one of the biggest arsenic producers in the world, and from 1871 to 1875 he sat on its board. His early wallpapers used arsenic green.
 
 In 1885, Morris wrote to a colleague: "As to the arsenic scare a greater folly it is hardly possible to imagine: the doctors were bitten as people were bitten by the witch-fever."
 
 {Witch fever}. In other words: a panic. His own theory? The real problem was the toilets.
 
-To be fair to Morris, his company had stopped using arsenic years earlier, and the science really was disputed. To his critics, it's a man whose fortune came out of an arsenic mine, calling the danger a panic.
+To be fair to Morris, his company had stopped using arsenic years earlier, and the science really was disputed. To his critics, it's a man whose fortune came out of that mine, calling the danger a panic.
 
 ---
 
-## 6:40 | Shall We Poison Our Homes?
+## 6:41 | Shall We Poison Our Homes?
 
 `ch06_poison_our_homes.txt` · 273 words
 
@@ -152,7 +153,7 @@ His headline was a question: "Shall we poison our homes?"
 
 ---
 
-## 8:19 | Arsenic-Free
+## 8:21 | Arsenic-Free
 
 `ch07_arsenic_free.txt` · 153 words
 
@@ -168,13 +169,13 @@ But the green didn't disappear. It moved. Back in the 1860s and 70s, a beetle wa
 
 ---
 
-## 9:16 | Back to the Book
+## 9:17 | Back to the Book
 
-`ch08_back_to_the_book.txt` · 153 words
+`ch08_back_to_the_book.txt` · 154 words
 
 So let's go back to the question. How did a poison end up on the walls? And why did it take so long to get it off?
 
-It got there because it was beautiful, and cheap. It stayed because the proof was messy, the money was big, and nobody had to prove it was safe. It was up to the sick to prove it wasn't. A family in Limehouse couldn't. A jury looked at four children and green walls, and called it natural.
+It got there because it was beautiful, and cheap. It stayed because the proof was messy, the money was big, and nobody had to prove it was safe. It was up to the sick to prove it wasn't. A family in Limehouse couldn't. A jury looked at green walls and a dead three-year-old, and called it natural.
 
 In Britain, it was shoppers who finally got it off the walls, not lawmakers.
 
@@ -204,7 +205,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
   no); ch07 says what the 1900 law limited, and dates the potato beetle ("the 1860s and 70s") instead of "around the same time".
 - **Ending**: both lines, in your order.
 
-**Length:** 1,648 words. Past videos ran about 167 words a minute finished, so this lands about **9:50–10:05**. We'll know exactly after
+**Length:** 1,654 words. Past videos ran about 167 words a minute finished, so this lands about **9:50–10:05**. We'll know exactly after
 voicing. If it runs over, the next cut is Emma (ch06, −22 words).
 
 ## Production notes
@@ -273,21 +274,21 @@ Morris called it witch fever. But this time, the witch was real." Then the thank
 | 3 | First sample from the house where a girl about ten died "that year" | Dr. L. A. Foote's letter of July 2, 1874; Kedzie: "the first specimen leaf"; it came from the room next to hers | Safe; "house" not "her room" |
 | 4 | Four or five copies survive; handled in gloves; 2018 scan in a protective suit | NLM (4), Michiganology (5); NLM Circulating Now Part 2 (Tyvek suit) | Safe as "four or five" |
 | 5 | Scheele, 1775, copper + arsenic | Discovered 1775, published 1778 | Safe |
-| 6 | Scheele "wrote that people using it ought to be warned it was poisonous" | 1777 letter, via Harley, *Artists' Pigments* | **Medium**: one secondary source. Hedge to "reportedly wrote" if it can't be confirmed |
+| 6 | Scheele told a friend he'd disclosed the arsenic in case someone hurt themselves making it | Scheele to J. G. Gahn, 9 Feb 1777 (Nordenskiöld, *Nachgelassene Briefe*, 1892, p.195) | **Confirmed** (round 2); wording follows the letter |
 | 7 | 1814, brighter version, later called Paris green | Emerald/Schweinfurt green, 1814 | Safe |
 | 8 | "one Victorian poet called it arsenic green" | W. S. Gilbert, "Only a Dancing Girl," *Bab Ballads* (1869): "hangs in arsenic green" | Safe |
-| 9 | New printing machines made it affordable; 1.2 million rolls (1834) → about 32 million (40 years later) | Roller printing from 1839; tax repealed 1836; Hoskins via OUP *Journal of Victorian Culture* blog; Hawksley's "2,615%" agrees | **Medium-High**; "about" on both numbers |
+| 9 | New printing machines made it affordable; 1.2 million rolls (1834) → about 32 million (40 years later) | Roller printing from 1839; tax repealed 1836; Hoskins via OUP *Journal of Victorian Culture* blog; Hawksley's "2,615%" agrees | **Partly confirmed**: 1834 = 1,222,753 rolls from tax records (Sugden & Edmondson 1926, p.139); "32 million" has no source earlier than that book. Keep "about". Don't use Hawksley's "2,615%" (it's a miscalculation) |
 | 10 | 1862 wreath: "to poison twenty persons" | Hofmann's analysis for the Ladies' Sanitary Association (*Chicago Medical Examiner*, Sept 1862) | Exact |
 | 11 | BMJ "skirts" quote | BMJ, 15 Feb 1862, p.177 | Exact |
 | 12 | Punch "The Arsenic Waltz," same month | *Punch*, 8 Feb 1862 | Safe |
 | 13 | Most wearers fine; makers in danger | Draper 1872 (occasional wearing not seriously harmful; dressmakers poisoned) | Safe, framed as "most" and "usually" |
-| 14 | Matilda Scheurer, 19, flower maker, ~100 workers, cloth over mouths, 18 months, green vomit, arsenic in lungs and liver, sister died, accidental death "used in her employment" | Draper 1872 (citing *Med. Times & Gazette*); *Northampton Mercury* 30 Nov 1861 (via a secondary transcription) | High core / **Medium** details (sister, muslin): re-check against a primary newspaper scan |
-| 16 | Turner children, Limehouse, 1862; diphtheria diagnosis; Ann Amelia, 3; Thomas Orton; paper "came off… like paint"; four children in about two months | Draper 1872; Hawksley; Orton, *The Lancet* (Nov 1862) | Safe. Draper's wording: "the stain came off on the hand like paint" |
-| 17 | Jury returned natural causes | Hawksley pp.166–67 via Victorian Web | **Medium-High**; keep "decides the children died of natural causes" |
+| 14 | Matilda Scheurer, 19, flower maker, ~100 workers, cloth over mouths, sick on and off for 18 months, green vomit, arsenic in lungs and liver, sister died, accidental death "used in her employment" | *Medical Times & Gazette*, 30 Nov 1861, p.560 (98 girls, muslin) | **Confirmed**, every detail (round 2) |
+| 16 | Turner children, Limehouse, 1862; diphtheria diagnosis; Ann Amelia, 3; Thomas Orton; paper "came off… like paint"; four children in about two months | *Med. Times & Gazette* 26 Apr and 3 May 1862; Orton, *The Lancet*, 8 Nov 1862; Draper 1872 | **Confirmed**. Ann Amelia was the last to die, not the youngest (a 16-month-old died earlier), so the script no longer says "youngest" |
+| 17 | The jury at her inquest called it a natural death | *Med. Times & Gazette* 1862 | **Confirmed**; the inquest was on Ann Amelia alone, hence "her inquest". The coroner publicly disagreed with the verdict (confirmed; not in the script) |
 | 18 | Gas from mold is real but weaker than feared; dust the likelier route | Gosio 1890s; Challenger 1933 (trimethylarsine); Cullen & Bentley 2005 | Safe as hedged ("modern tests suggest") |
 | 19 | Napoleon: arsenic in his wallpaper; stomach cancer killed him | Jones & Ledingham, *Nature* 1982; INFN hair study 2008; Lugli 2007 | Safe ("almost certainly") |
-| 20 | A maker "went through two tons of arsenic a week" | 1860 claim quoted by Draper 1872 | **Medium**: a period claim; "said he" keeps it attributed |
-| 21 | Morris: family fortune from an arsenic mine, one of the world's biggest; board 1871–75; early papers used arsenic green | Devon Great Consols; Meharg 2004 | Safe |
+| 20 | "One manufacturer said he went through about two tons of arsenic a week" | A. S. Taylor, *On Poisons* (1859), p.430: "a manufacturer", "about two tons weekly" | **Partly confirmed**: 1859, and not said to be a wallpaper maker, so the script now says "manufacturer" |
+| 21 | Morris: family fortune from a copper mine that became one of the world's biggest arsenic producers; board 1871–75; early papers used arsenic green | Mackail 1899 (board from 1871, four years); *Mining Journal* 1876 ("the largest arsenic producers"); Meharg 2004 | **Confirmed**; the fortune was made in copper, hence the wording |
 | 22 | Morris letter, 1885, after a customer complained, to a colleague | Morris to Thomas Wardle, 3 Oct 1885 (MS image, Univ. of Iowa) | Exact wording, spoken in full. "Colleague" = his dyer |
 | 23 | His company stopped using arsenic years earlier | Meharg: arsenic stops "somewhere around 1872" | Safe |
 | 24 | Draper, 1872; Massachusetts board of health "the first one in the country" | Draper report, Jan 1872; Mass. State Board of Health est. 1869, the first state board | Safe |
@@ -300,13 +301,15 @@ Morris called it witch fever. But this time, the witch was real." Then the thank
 | 31 | Kedzie found arsenic in all 86 | Kedzie; NLM catalog | Safe |
 | 32 | "Shall we poison our homes?" was his headline | Essay heading: "ARSENICAL WALL PAPER. SHALL WE POISON OUR HOMES?" | Exact |
 | 33 | "arsenic-free" in ads by the 1880s | Jeffrey & Co. "Patent Hygienic," 1884 | Safe |
-| 34 | Sweden 1876; Germany 1880s; Britain never banned it; arsenic-free by about 1900 | Kulturen (Lund); German ordinances 1882/1887; Hawksley; Home Office 1896–1900 | Sweden **Medium-High** (some say 1879); rest safe |
+| 34 | Sweden 1876; Germany 1880s; Britain never banned it; arsenic-free by about 1900 | Kulturen (Lund); German ordinances 1882/1887; Hawksley; Home Office 1896–1900 | Sweden 1876 **confirmed** (1879 was a later testing decree); rest safe |
 | 35 | Massachusetts set a legal limit on arsenic in wallpaper and cloth in 1900, 28 years after Draper | Mass. Acts 1900 ch. 325 (in force 1 Jan 1901); toys and candy were banned earlier, 1891 ch. 374 (cut for time) | Safe |
 | 36 | Paris green on potato beetles in the 1860s and 70s; one of the first big U.S. insecticides | From 1867 on; beetle reached the Atlantic by 1874 | Safe |
 | 37 | No death toll given anywhere | No reliable total exists | Deliberate |
 
 **Name dropped from the outline:** "Dr. Robert M. Hodges" (no record found). **Not used:** "arsine gas," Bradford 1858, Queen Victoria's
 palace wallpaper (unverified), "thousands dead."
+
+**Round 2 fact-check** (primary sources for flags 6, 9, 14, 16, 17, 20, 21, 34): `research/FACT_CHECK_2.md`.
 
 ## Sources
 

@@ -1,6 +1,6 @@
 1775. Sweden. A chemist named Carl Wilhelm Scheele mixes copper with arsenic and gets something remarkable: a bright, clean green. Brighter than any plant dye. And cheap.
 
-It's called {Scheele's Green}. And Scheele knew exactly what was in it. A couple of years later he wrote that people using it ought to be warned it was poisonous.
+It's called {Scheele's Green}. And Scheele knew exactly what was in it. In a letter to a friend, he said he'd told people it had arsenic in it, in case someone hurt themselves making it.
 
 Not a great sign.
 
