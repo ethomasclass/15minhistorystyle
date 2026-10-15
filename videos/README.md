@@ -50,13 +50,16 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").
 - Open on a real document or artifact. Trim to time with a cut list.
-- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug a third of the way in, tied to the topic
+- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug (from *The Exact Spot* on: about **two-thirds** of the way in, after the story's big build, not a third in where it kills momentum), tied to the topic
   with a wry twist (Ouija: the board spells it; Black Sox: "unlike William Wansley, nobody's paying me to say it"), and a one-line
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
 - Big titles stay on screen for at least 2 seconds.
+- **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
+- **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
+- **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.
 - No black edges, and the camera never shows past the edge of a map or stage.
 - Drawn diagrams and cards beat fussy illustrated props.
 - No caricatured engravings in a serious chapter.

@@ -1,6 +1,6 @@
 # The Exact Spot: Texas, the Mexican-American War, and the Question It Reopened
 
-**15 Minute History** · narration script · 2,474 words · about 13:52 (draft 2) with the intro and logo breaks (about 14:02 with a 10-second end screen)
+**15 Minute History** · narration script · 2,485 words · about 14:45 finished (draft 3, voiced: 13:43 of narration, plus the intro, logo breaks, 2-second chapter tails and a 20-second end screen)
 
 **Driving question (cold open, answered in the last chapter):** How did a fight over a strip of land between two rivers become a war that cost Mexico half its land? And why did winning that war make America's biggest problem worse?
 
@@ -13,13 +13,15 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps assume ~185 wpm (168 for chapte
 
 **Changes since the outline:** the revolt's causes now have their own chapter (3, *Come and Take It*): the Coahuila merger, Austin jailed, Santa Anna's centralism, Gonzales, and the Texas Declaration of Independence compared with the Texas constitution. Manifest Destiny is defined in chapter 5 and answered in chapter 7. The ending is the poison line. Thoreau was cut for time (it's in the cut-back list below).
 
+**Changes in draft 3 (voiced):** the mid-video subscribe plug moved from the end of ch 4 to the end of ch 7, to keep momentum into the war; ch 2 ends on "Something has to give" and ch 4 on "Now all it would take is a spark" so each chapter hands off forward; pronunciations locked (Noo-ay-sis, Ko-ah-wee-lah, Seh-geen, San Juh-sin-toe, Neen-yos Air-oh-es, Gwah-dah-loo-pay Ee-dahl-go, "seventeen hundred").
+
 **Changes in draft 2 (drama pass):** chapter 6 is now *Plot Twists*: Santa Anna's deal with Polk to get through the blockade (and his double-cross), his leg (the funeral, the mob, the cork leg in Illinois), and the San Patricios hanged as the flag rose over Chapultepec. Chapter 10 adds Grant and Lee talking about Mexico at Appomattox, right before the poison line. Cut to pay for it: the "contracts" sentence (ch 2), the Southern/Northern answers (ch 10), and small trims in ch 6, 7, 8 and 10. Net: +205 words, about 1:05 longer.
 
 ---
 
 ## 0:00 | The Exact Spot
 
-`ch01_cold_open.txt` · 174 words
+`ch01_cold_open.txt` · 174 words · voiced 55.6 s
 
 December 22nd, 1847. A brand-new congressman from Illinois stands up in the House. He's 38 years old. His name is Abraham Lincoln.
 
@@ -37,9 +39,9 @@ It starts with Mexico inviting Americans in.
 
 ---
 
-## 1:06 | Come On In
+## 1:02 | Come On In
 
-`ch02_come_on_in.txt` · 172 words
+`ch02_come_on_in.txt` · 176 words · voiced 60.2 s
 
 1821. Mexico wins its independence from Spain, and inherits a huge northern frontier called Texas.
 
@@ -53,13 +55,13 @@ By the early 1830s, Americans in Texas outnumber Tejanos many times over. Mexico
 
 So Mexico tries to slow things down. In 1829, it *abolishes slavery*. Texas talks its way into an exception.
 
-In 1830, Mexico bans new American settlers and new enslaved people, and sends soldiers to collect new taxes on imports. Americans keep coming anyway.
+In 1830, Mexico bans new American settlers and new enslaved people, and sends soldiers to collect new taxes on imports. Americans keep coming anyway. Something has to give.
 
 ---
 
-## 2:04 | Come and Take It
+## 2:06 | Come and Take It
 
-`ch03_come_and_take_it.txt` · 279 words
+`ch03_come_and_take_it.txt` · 279 words · voiced 93.3 s
 
 So why did Texas break away? Let's look at the evidence.
 
@@ -83,9 +85,9 @@ So was the Texas Revolution about freedom, or about slavery? To the settlers, it
 
 ---
 
-## 3:36 | Remember the Alamo
+## 3:44 | Remember the Alamo
 
-`ch04_remember_the_alamo.txt` · 268 words
+`ch04_remember_the_alamo.txt` · 247 words · voiced 81.8 s
 
 Santa Anna marches north with thousands of soldiers.
 
@@ -101,15 +103,13 @@ And the new Republic of Texas says its border is the Rio Grande, even though Tex
 
 For nine years, Texas is its own country, with slavery written into its laws. It asks to join the United States right away. But a big new slave state would start a fight in Congress, and maybe a war with Mexico. So: not yet.
 
-In 1845, Congress finally {annexes} Texas, adding it to the United States. Mexico breaks off relations.
-
-Quick thing before the war starts. If you're enjoying this, hit subscribe. It's free, it helps the channel, and unlike Texas, you won't wait nine years for an answer.
+In 1845, Congress finally {annexes} Texas, adding it to the United States. Mexico breaks off relations. Now all it would take is a spark.
 
 ---
 
-## 5:04 | Polk Acts First
+## 5:09 | Polk Acts First
 
-`ch05_polk_acts_first.txt` · 310 words
+`ch05_polk_acts_first.txt` · 310 words · voiced 104.2 s
 
 Meet the new president, James K. Polk. He wants California, and its great harbor at San Francisco.
 
@@ -133,9 +133,9 @@ So who decided this country would go to war? Congress declared it. But the Presi
 
 ---
 
-## 6:46 | Plot Twists
+## 6:57 | Plot Twists
 
-`ch06_plot_twists.txt` · 298 words · ends on a heavy beat (San Patricios): no music sting, plain read
+`ch06_plot_twists.txt` · 298 words · voiced 99.1 s · ends on a heavy beat (San Patricios): no music sting, plain read
 
 The war moves fast. And it comes with a plot twist.
 
@@ -157,9 +157,9 @@ Some of the young American officers: Ulysses S. Grant. Robert E. Lee. Stonewall 
 
 ---
 
-## 8:24 | The Spot
+## 8:40 | The Spot
 
-`ch07_the_spot.txt` · 200 words
+`ch07_the_spot.txt` · 228 words · voiced 72.7 s
 
 Which brings us back to Lincoln. December 1847. The war is basically won, and he asks: was the spot really American soil?
 
@@ -175,11 +175,13 @@ But supporters saw it differently. Mexico had refused to negotiate. It had stopp
 
 So was it defense, or conquest? Historians have argued about that for more than a century. Some blame Mexico. Others blame Polk. The evidence gives each side something to hold onto.
 
+Quick thing before we get to the treaty. If you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike Lincoln, I'm only asking once.
+
 ---
 
-## 9:31 | The Man Who Was Fired
+## 9:57 | The Man Who Was Fired
 
-`ch08_the_man_who_was_fired.txt` · 213 words
+`ch08_the_man_who_was_fired.txt` · 213 words · voiced 70.9 s
 
 Now Polk needs a peace treaty. He sends a diplomat, Nicholas Trist. The talks drag on, and Polk orders him home.
 
@@ -197,9 +199,9 @@ The treaty makes promises to the people already living there. Article 8 says the
 
 ---
 
-## 10:41 | Who Paid
+## 11:12 | Who Paid
 
-`ch09_who_paid.txt` · 178 words · heavy, voiced slower
+`ch09_who_paid.txt` · 178 words · voiced 65.6 s · heavy, voiced slower
 
 So who paid for all this?
 
@@ -219,9 +221,9 @@ Years later, he called himself "a foreigner in my native land."
 
 ---
 
-## 11:46 | Poison
+## 12:21 | Poison
 
-`ch10_poison.txt` · 382 words
+`ch10_poison.txt` · 382 words · voiced 120.3 s
 
 Now back to August 1846, three months into the war. Polk asks Congress for money to buy land from Mexico. And a congressman from Pennsylvania, David Wilmot, adds one sentence to the bill.
 
@@ -299,7 +301,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 - Ch 6 **the leg**: a three-step card — 1838 lost (French cannonball) → 1842 state funeral → 1844 dug up → 1847 captured → today, Springfield, Illinois. Photo of the cork leg if a public-domain or licensed one is found; otherwise the Gemini painting.
 - Ch 10 **the vote map**: North and South, yes and no, with the two party labels shown splitting the same way.
 
-**Subscribe reminders:** mid-video at the end of ch 4 (about 4:55–5:00, "unlike Texas, you won't wait nine years"), and the end-screen line after "It took about 13 years to work."
+**Subscribe reminders:** moved later in draft 3 so it doesn't stall the build-up to the war: the mid-video plug now closes ch 7 (about 10:00, "unlike Lincoln, I'm only asking once"), after the debate and before the treaty. The end-screen line follows "It took about 13 years to work."
 
 **Ending:** "Emerson had warned that Mexico would poison the country that conquered it." Beat. "It took about 13 years to work." Hard cut to the end screen; then the thank-you line.
 

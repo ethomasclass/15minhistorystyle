@@ -14,10 +14,12 @@ export type {Narration};
 
 /** Frames of black-with-logo at the start of chapters 2-11 before the chapter fades up. */
 export const LEAD = 44;
-/** Frames the chapter picture takes to fade up from black / down to black. */
-export const FADE = 10;
-/** Frames after the last word before the chapter fades out. */
-export const TAIL = 24;
+/** Frames the chapter picture takes to fade up from black / down to black (a gentle dip, not a cut). */
+export const FADE = 18;
+/** Frames after the last word before the chapter fades out: room to breathe while the music lifts a little. */
+export const TAIL = 54;
+/** How much the music bed lifts in the tail after the last word (1 = no lift). */
+export const TAIL_LIFT = 1.6;
 
 /** A chapter's total length: optional logo lead, the narration, a tail and the fade to black. */
 export const chapterFrames = (n: Narration, lead: number) => lead + Math.ceil(n.duration * 30) + TAIL + FADE;
@@ -132,7 +134,15 @@ export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; 
             {music.map((m, i) => (
               <Sequence key={i} from={m.from ?? 0} layout="none">
                 <Audio src={staticFile(m.src)} startFrom={m.startFrom ?? 0}
-                  volume={(f) => interpolate(f, [0, 20, total - lead - (m.from ?? 0) - 40, total - lead - (m.from ?? 0)], [0, m.volume ?? 0.15, m.volume ?? 0.15, 0], clamp)} />
+                  volume={(f) => {
+                    // fade in, sit under the narration, lift in the tail after the last word, fade out with the picture
+                    const v = m.volume ?? 0.15;
+                    const from = m.from ?? 0;
+                    const end = total - lead - from;
+                    const said = Math.max(21, Math.ceil(n.duration * 30) - from);
+                    const lift = Math.min(end - 31, said + 18);
+                    return interpolate(f, [0, 20, said, lift, end - 30, end], [0, v, v, v * TAIL_LIFT, v * TAIL_LIFT, 0], clamp);
+                  }} />
               </Sequence>
             ))}
           </Sequence>
