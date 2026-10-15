@@ -26,14 +26,18 @@ JOBS = {
     # The Exact Spot (Flow engravings, 1376x768 unless noted)
     "settlers_enslaved": ("img/gen/ch02_settlers_arrive.jpg", (870, 350, 1265, 690), "isnet-general-use"),
     "corkleg_soldier": ("img/gen/ch06_cork_leg.jpg", (585, 85, 1000, 650), "isnet-general-use"),
-    "corkleg_leg": ("img/gen/ch06_cork_leg.jpg", (640, 370, 1005, 610), "isnet-general-use", 3000),  # small subject
+    "corkleg_leg": ("img/gen/ch06_cork_leg.jpg", (640, 370, 1005, 610), "isnet-general-use", 3000),  # hand-traced: tools/traces/ (see README there), do not re-run
     "rider": ("img/gen/ch05_rider.jpg", (175, 30, 1010, 768), "isnet-general-use"),
     "tejano_rancher": ("img/gen/ch02_tejano_ranch.jpg", (480, 290, 860, 680), "isnet-general-use", 5000),
-    "jail_austin": ("img/gen/ch03_austin_jail.jpg", (660, 195, 990, 690), "isnet-general-use"),  # hand-traced polygon: do not re-run
-    "gonzales_cannon": ("img/gen/ch03_come_and_take_it.jpg", (430, 440, 790, 700), "isnet-general-use"),  # hand-traced polygon: do not re-run
-    "gonzales_flag": ("img/gen/ch03_come_and_take_it.jpg", (345, 10, 575, 215), "isnet-general-use", 3000),  # hand-traced polygon (rembg finds nothing): do not re-run
+    "jail_austin": ("img/gen/ch03_austin_jail.jpg", (660, 195, 990, 690), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "gonzales_cannon": ("img/gen/ch03_come_and_take_it.jpg", (430, 440, 790, 700), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "gonzales_flag": ("img/gen/ch03_come_and_take_it.jpg", (345, 10, 575, 215), "isnet-general-use", 3000),  # hand-traced: tools/traces/ (see README there), do not re-run
     "signer": ("img/gen/ch03_washington_on_the_brazos.jpg", (525, 315, 775, 480), "isnet-general-use", 3000),
-    "santa_anna": ("img/ch03/santa_anna.jpg", (330, 450, 1260, 1650), "u2net_human_seg"),
+    "santa_anna": ("img/ch03/santa_anna.jpg", (230, 430, 1340, 1880), "u2net_human_seg"),
+    "alamo_chapel": ("img/gen/ch04_alamo_dawn.jpg", (588, 185, 815, 290), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "huddle_santa_anna": ("img/ch04/huddle_surrender.jpg", (595, 400, 712, 712), "isnet-general-use", 3000),  # hand-traced: tools/traces/ (see README there), do not re-run
+    "cartoon_santa_anna": ("img/ch04/cartoon_capture_1836.jpg", (1150, 740, 2200, 2100), "isnet-general-use"),
+    "houston": ("img/ch04/houston_1855.jpg", (150, 100, 1620, 2000), "isnet-general-use"),  # hand-traced: tools/traces/ (see README there), do not re-run
     # archival portraits
     "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
     "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),

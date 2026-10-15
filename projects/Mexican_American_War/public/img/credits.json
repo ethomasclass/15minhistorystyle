@@ -106,5 +106,37 @@
     "licence": "public domain by age (1924)",
     "page": "https://archive.org/details/menwhomadetexasf00dixo/page/n44",
     "source": "iabook:menwhomadetexasf00dixo:44"
+  },
+  "ch04/houston_1855.jpg": {
+    "title": "The life of Sam Houston (The only authentic memoir of him ever published) (page 11)",
+    "artist": "['Lester, C. Edwards (Charles Edwards), 1815-1890', 'Making of America Project']",
+    "date": "1855",
+    "licence": "public domain by age (1855)",
+    "page": "https://archive.org/details/lifeofsamhouston00lestrich/page/n11",
+    "source": "iabook:lifeofsamhouston00lestrich:11"
+  },
+  "ch04/huddle_surrender.jpg": {
+    "title": "File:Painting, \"Surrender of Santa Anna,\" by William Henry Huddle, in the South Foyer of the Texas Capitol, Austin, Texas LCCN2014632129.tif",
+    "artist": "Carol M. Highsmith",
+    "date": "Taken on\u00a017 April 2014, 11:47\u00a0(according to Exif data)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Painting,_%22Surrender_of_Santa_Anna,%22_by_William_Henry_Huddle,_in_the_South_Foyer_of_the_Texas_Capitol,_Austin,_Texas_LCCN2014632129.tif",
+    "note": "photo of the painting by Carol M. Highsmith (LOC 2014632129), cropped to the canvas"
+  },
+  "ch04/cartoon_capture_1836.jpg": {
+    "title": "Houston, Santa Anna, and Cos",
+    "artist": "Robinson, Henry R., -1850.",
+    "date": "1836-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2008661295/",
+    "source": "loc:2008661295"
+  },
+  "ch04/alamo_siege_1897.jpg": {
+    "title": "Siege of the Alamo. March 6, 1836",
+    "artist": "",
+    "date": "1897",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2022641541/",
+    "source": "loc:2022641541"
   }
 }

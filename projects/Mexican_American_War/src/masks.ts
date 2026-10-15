@@ -15,6 +15,10 @@ import gonzales_flag from '../public/img/masks/gonzales_flag.json';
 import gonzales_cannon from '../public/img/masks/gonzales_cannon.json';
 import signer from '../public/img/masks/signer.json';
 import santa_anna from '../public/img/masks/santa_anna.json';
+import alamo_chapel from '../public/img/masks/alamo_chapel.json';
+import huddle_santa_anna from '../public/img/masks/huddle_santa_anna.json';
+import cartoon_santa_anna from '../public/img/masks/cartoon_santa_anna.json';
+import houston from '../public/img/masks/houston.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -31,4 +35,8 @@ export const MASKS = {
   gonzales_cannon: maskRef('gonzales_cannon', gonzales_cannon),
   signer: maskRef('signer', signer),
   santa_anna: maskRef('santa_anna', santa_anna),
+  alamo_chapel: maskRef('alamo_chapel', alamo_chapel),
+  huddle_santa_anna: maskRef('huddle_santa_anna', huddle_santa_anna),
+  cartoon_santa_anna: maskRef('cartoon_santa_anna', cartoon_santa_anna),
+  houston: maskRef('houston', houston),
 };
