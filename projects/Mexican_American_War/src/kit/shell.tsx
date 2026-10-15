@@ -115,7 +115,7 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
  * Narration starts at `lead`; `body` is rendered in narration time (frame 0 = first sample of narration).
  */
 export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number;
-  music?: {src: string; volume?: number; startFrom?: number; from?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
+  music?: {src: string; volume?: number; startFrom?: number; from?: number; to?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
   const frame = useCurrentFrame();
   // `extra` frames after the narration: a music-only end screen on the last chapter (add the same to its FRAMES)
   const total = chapterFrames(n, lead) + extra;
@@ -141,7 +141,9 @@ export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; 
                     const end = total - lead - from;
                     const said = Math.max(21, Math.ceil(n.duration * 30) - from);
                     const lift = Math.min(end - 31, said + 18);
-                    return interpolate(f, [0, 20, said, lift, end - 30, end], [0, v, v, v * TAIL_LIFT, v * TAIL_LIFT, 0], clamp);
+                    // `to`: hand over to the next cue, fading out over a second
+                    const off = m.to === undefined ? 1 : interpolate(f, [m.to - from - 30, m.to - from], [1, 0], clamp);
+                    return off * interpolate(f, [0, 20, said, lift, end - 30, end], [0, v, v, v * TAIL_LIFT, v * TAIL_LIFT, 0], clamp);
                   }} />
               </Sequence>
             ))}

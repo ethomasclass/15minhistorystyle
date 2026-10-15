@@ -29,6 +29,11 @@ JOBS = {
     "corkleg_leg": ("img/gen/ch06_cork_leg.jpg", (640, 370, 1005, 610), "isnet-general-use", 3000),  # small subject
     "rider": ("img/gen/ch05_rider.jpg", (175, 30, 1010, 768), "isnet-general-use"),
     "tejano_rancher": ("img/gen/ch02_tejano_ranch.jpg", (480, 290, 860, 680), "isnet-general-use", 5000),
+    "jail_austin": ("img/gen/ch03_austin_jail.jpg", (660, 195, 990, 690), "isnet-general-use"),  # hand-traced polygon: do not re-run
+    "gonzales_cannon": ("img/gen/ch03_come_and_take_it.jpg", (430, 440, 790, 700), "isnet-general-use"),  # hand-traced polygon: do not re-run
+    "gonzales_flag": ("img/gen/ch03_come_and_take_it.jpg", (345, 10, 575, 215), "isnet-general-use", 3000),  # hand-traced polygon (rembg finds nothing): do not re-run
+    "signer": ("img/gen/ch03_washington_on_the_brazos.jpg", (525, 315, 775, 480), "isnet-general-use", 3000),
+    "santa_anna": ("img/ch03/santa_anna.jpg", (330, 450, 1260, 1650), "u2net_human_seg"),
     # archival portraits
     "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
     "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),

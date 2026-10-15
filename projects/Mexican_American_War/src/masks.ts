@@ -10,6 +10,11 @@ import lincoln from '../public/img/masks/lincoln.json';
 import polk from '../public/img/masks/polk.json';
 import tejano_rancher from '../public/img/masks/tejano_rancher.json';
 import austin from '../public/img/masks/austin.json';
+import jail_austin from '../public/img/masks/jail_austin.json';
+import gonzales_flag from '../public/img/masks/gonzales_flag.json';
+import gonzales_cannon from '../public/img/masks/gonzales_cannon.json';
+import signer from '../public/img/masks/signer.json';
+import santa_anna from '../public/img/masks/santa_anna.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
@@ -21,4 +26,9 @@ export const MASKS = {
   polk: maskRef('polk', polk),
   tejano_rancher: maskRef('tejano_rancher', tejano_rancher),
   austin: maskRef('austin', austin),
+  jail_austin: maskRef('jail_austin', jail_austin),
+  gonzales_flag: maskRef('gonzales_flag', gonzales_flag),
+  gonzales_cannon: maskRef('gonzales_cannon', gonzales_cannon),
+  signer: maskRef('signer', signer),
+  santa_anna: maskRef('santa_anna', santa_anna),
 };
