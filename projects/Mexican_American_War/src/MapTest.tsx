@@ -5,7 +5,7 @@ import data from '../public/maps/mex1846.json';
 import {PALETTES, PaletteCtx, StepCtx} from './kit/Kit';
 import {
   BORDER_1861, Border, CONFEDERACY_1861, type Cam3, Count, Dot, Fill, Flag3, Flow, FREE_1837, Hand, MAP3D, Map3D, type MapData,
-  MovingBorder, Pin3, PlaceTag, RegionName, SLAVE_1837, Slab, Stake, Stand, StateTiles, UNION_FREE_1861,
+  MovingBorder, PlaceTag, RegionName, SLAVE_1837, Slab, Stake, Stand, StateTiles, UNION_FREE_1861,
 } from './kit/map3d';
 
 const D = data as unknown as MapData;
@@ -152,7 +152,6 @@ const Frontier: React.FC = () => {
           <Flow api={api} from={[4050, 1650]} to={[3420, 1950]} at={30} n={22} spread={160} toSpread={120} color="#FF9F1C" seed="settlers" />
           <Stand api={api} at={pl.gonzales} show={70}><Flag3 /></Stand>
           <Stand api={api} at={[3900, 1560]} z={20} show={34}><Hand text="settlers from the South" size={52} color="#FF9F1C" /></Stand>
-          <Stand api={api} at={pl.sanAntonio} z={0} show={0} out={-1}><Pin3 /></Stand>
         </>
       )}
     </Map3D>

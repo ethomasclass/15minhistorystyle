@@ -473,7 +473,7 @@ export const Dot: React.FC<{api: Api; at: [number, number]; show?: number; r?: n
 /** Something standing up off the map at a map pixel, facing the camera (labels, pins, notes, portraits). */
 export const Stand: React.FC<{api: Api; at: [number, number] | number[]; z?: number; show?: number; out?: number; children: React.ReactNode}> = ({api, at, z = 0, show = -999, out = 1e9, children}) => {
   const g = useGFrame();
-  if (g < show || g >= out + 6) return null;
+  if (g < show || g >= out + 6 || out <= show + 5) return null;
   const k = interpolate(g, [show, show + 5, out, out + 6], [0, 1, 1, 0], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 3)});
   const [x, y] = api.P(at[0], at[1]);
   return (
