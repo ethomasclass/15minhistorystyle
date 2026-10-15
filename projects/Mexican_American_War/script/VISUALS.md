@@ -89,17 +89,16 @@ the frontier (Comanche lands, Tejano towns, settler flow, the Gonzales flag). Ev
 All masking as usual: rembg masks → coral tint + teal trace; 2.5D parallax on the strongest photos (Lincoln, Polk, Seguín,
 Grant) using the Black Sox `Parallax` component.
 
-## 2b. The engraving treatment (locked: "version B")
+## 2b. The engraving treatment
 
-Every Flow engraving goes through `Engraving` (`src/kit/engraving.tsx`): black and white with contrast 1.25, a slow push,
-and a **soft fade from a bright centre into the dark desk** (opaque to 58% of the oval, gone at the edge). The bright
-centre is placed over the scene's subject (`focus`), and the fade **blooms open from the dark** as the scene starts and
-closes at the end. Coral tint and teal trace work as usual inside the bright area. Tag: `Illustration · …`.
+Every Flow engraving goes through `Engraving` (`src/kit/engraving.tsx`): **full frame, showing as much of the picture as
+possible** (cropped only to 16:9), black and white with contrast 1.2, a slow gentle push (1.00 → 1.06), a light edge
+vignette, and a soft fade in from black and out again at the scene's ends. Coral tint and teal trace as usual; a faint dark
+band at the foot keeps the `Illustration · …` tag readable on light paper. The oval centre-fade was tried and dropped (it
+hid too much of the picture).
 
-- **Quiet chapters** (ch 9, the San Patricios beat): `quiet` = the heavier "faded print" (small bright centre, washed-out
-  ink, no coral tint).
-- **Real archival documents and portraits** don't get the fade: they stay cards on the desk, so an illustration never
-  passes for a source.
+- **Quiet chapters** (ch 9, the San Patricios beat): `quiet` = lower contrast, no coral tint, still full frame.
+- **Real archival documents and portraits** stay cards on the desk, so an illustration never passes for a source.
 - Look test: `StyleTest` composition.
 
 ## 3. Transitions (new)
