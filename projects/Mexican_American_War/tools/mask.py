@@ -28,6 +28,10 @@ JOBS = {
     "corkleg_soldier": ("img/gen/ch06_cork_leg.jpg", (585, 85, 1000, 650), "isnet-general-use"),
     "corkleg_leg": ("img/gen/ch06_cork_leg.jpg", (640, 370, 1005, 610), "isnet-general-use", 3000),  # small subject
     "rider": ("img/gen/ch05_rider.jpg", (175, 30, 1010, 768), "isnet-general-use"),
+    "tejano_rancher": ("img/gen/ch02_tejano_ranch.jpg", (480, 290, 860, 680), "isnet-general-use", 5000),
+    # archival portraits
+    "lincoln": ("img/ch01/lincoln_shepherd_1846.jpg", None, "u2net_human_seg"),
+    "polk": ("img/ch01/polk_brady_1849.jpg", None, "u2net_human_seg"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

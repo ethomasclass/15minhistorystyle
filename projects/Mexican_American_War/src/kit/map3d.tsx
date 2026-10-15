@@ -265,13 +265,13 @@ export const Fill: React.FC<{api: Api; region?: string; d?: string; at: number; 
 };
 
 /** A name running along a path, in mono caps on the paper (it reads in perspective, like a printed map). */
-export const PathText: React.FC<{api: Api; d: string; text: string; at: number; size?: number; color?: string; offset?: string; dy?: number; step?: number; from?: number; to?: number; z?: number}> = ({
-  api, d, text, at, size = 26, color = '#f4efe6', offset = '50%', dy = -14, step = 10, from = 0, to = 1, z = 2,
+export const PathText: React.FC<{api: Api; d: string; text: string; at: number; out?: number; size?: number; color?: string; offset?: string; dy?: number; step?: number; from?: number; to?: number; z?: number}> = ({
+  api, d, text, at, out = 1e9, size = 26, color = '#f4efe6', offset = '50%', dy = -14, step = 10, from = 0, to = 1, z = 2,
 }) => {
   const g = useGFrame();
   const id = useId('m3t');
-  if (g < at) return null;
-  const k = interpolate(g, [at, at + 6], [0, 1], clamp);
+  if (g < at || g >= out + 6) return null;
+  const k = Math.min(interpolate(g, [at, at + 6], [0, 1], clamp), interpolate(g, [out, out + 6], [1, 0], clamp));
   const sp = smoothPath(d, step, from, to);
   const fs = size / api.cam.z;
   return (
@@ -290,8 +290,8 @@ export const PathText: React.FC<{api: Api; d: string; text: string; at: number; 
  * running along it. Used for every river border: the Nueces vs. Rio Grande claims, the 1819 line, the 1848 line.
  */
 export const Border: React.FC<{api: Api; d: string; at: number; dur?: number; color?: string; width?: number; dashed?: boolean; ticks?: boolean;
-  label?: string; labelAt?: number; labelSize?: number; labelOffset?: string; labelDy?: number; labelFrom?: number; labelTo?: number; out?: number; z?: number}> = ({
-  api, d, at, dur = 22, color, width = 6, dashed = false, ticks = true, label, labelAt, labelSize = 26, labelOffset = '50%', labelDy = -16, labelFrom, labelTo, out = 1e9, z = 2,
+  label?: string; labelAt?: number; labelOut?: number; labelSize?: number; labelOffset?: string; labelDy?: number; labelFrom?: number; labelTo?: number; out?: number; z?: number}> = ({
+  api, d, at, dur = 22, color, width = 6, dashed = false, ticks = true, label, labelAt, labelOut, labelSize = 26, labelOffset = '50%', labelDy = -16, labelFrom, labelTo, out = 1e9, z = 2,
 }) => {
   const g = useGFrame();
   const pal = usePal();
@@ -319,7 +319,7 @@ export const Border: React.FC<{api: Api; d: string; at: number; dur?: number; co
           {ticks && <path d={d} fill="none" stroke={c} strokeWidth={line(width * 2.8)} strokeDasharray={`${line(2.5)} ${line(18)}`} opacity={tick} />}
         </g>
       </Layer>
-      {label && <PathText api={api} d={d} text={label} at={labelAt ?? at + Math.round(dur * 0.6)} size={labelSize} color={c} offset={labelOffset} dy={labelDy} from={labelFrom} to={labelTo} z={z + 1} />}
+      {label && <PathText api={api} d={d} text={label} at={labelAt ?? at + Math.round(dur * 0.6)} out={labelOut ?? out} size={labelSize} color={c} offset={labelOffset} dy={labelDy} from={labelFrom} to={labelTo} z={z + 1} />}
     </>
   );
 };
@@ -549,9 +549,11 @@ export const RegionName: React.FC<{text: string; size?: number; color?: string}>
 );
 
 /** Handwritten teal note standing on the map. */
-export const Hand: React.FC<{text: string; size?: number; color?: string; rot?: number}> = ({text, size = 60, color, rot = -3}) => {
+export const Hand: React.FC<{text: string; size?: number; color?: string; rot?: number; bg?: boolean}> = ({text, size = 60, color, rot = -3, bg = false}) => {
   const pal = usePal();
-  return <div style={{fontFamily: '"Nanum Pen Script", cursive', fontSize: size, lineHeight: 1, color: color ?? pal.mark, whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`, textShadow: '0 3px 10px rgba(0,0,0,0.9), 0 0 2px #000'}}>{text}</div>;
+  // `bg`: a dark tab behind the writing, for notes that sit on the light paper of the map
+  return <div style={{fontFamily: '"Nanum Pen Script", cursive', fontSize: size, lineHeight: 1, color: color ?? pal.mark, whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`,
+    textShadow: '0 3px 10px rgba(0,0,0,0.9), 0 0 2px #000', ...(bg ? {background: 'rgba(14,14,14,0.82)', padding: '6px 18px 10px', borderRadius: 6, boxShadow: '0 8px 18px rgba(0,0,0,0.45)'} : {})}}>{text}</div>;
 };
 
 /** A count that ticks up (stepped), in display type, for screen-space overlays. */

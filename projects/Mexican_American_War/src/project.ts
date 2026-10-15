@@ -4,15 +4,15 @@
 export const SLUG = 'Exact_Spot';
 
 /** Title card after the channel intro: a highlighter title, a teal subtitle and a handwritten date range. */
-export const TITLE = 'KING ANDREW';
-export const SUBTITLE = "How the People's President Got a Crown";
-export const DATES = '1767 – 1845';
+export const TITLE = 'THE EXACT SPOT';
+export const SUBTITLE = "Texas, the Mexican-American War, and the Question It Reopened";
+export const DATES = '1821 – 1848';
 
 /**
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg'];
+export const INTRO_CARDS = ['img/ch01/lincoln_shepherd_1846.jpg', 'img/ch01/spot_resolutions.jpg', 'img/ch01/polk_brady_1849.jpg', 'img/gen/ch03_come_and_take_it.jpg', 'img/gen/ch06_cork_leg.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {
