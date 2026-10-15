@@ -78,18 +78,35 @@ Black-and-white 1840s illustrated-newspaper wood engraving: fine parallel lines 
 - **Naming:** save each as its scene name + `.png` (e.g. `ch06_cork_leg.png`) and drop them in the chat or
   `projects/Mexican_American_War/public/img/gen/`.
 
-## Status (Oct 15)
+## Status (Oct 15, after batch 2)
 
-**Received (11), in `public/img/gen/` as `.jpg`:** ch02_settlers_arrive, ch02_tejano_ranch, ch03_austin_jail,
-ch03_come_and_take_it, ch03_washington_on_the_brazos, ch04_alamo_dawn, ch06_flag_and_gallows, ch08_gold, ch09_sick_tents,
-ch10_house_chamber, ch10_arsenic. The engraving style came through well.
+**In `public/img/gen/` (18 of 19), best of the two batches** (batch 2 = the lighter "newsprint" set):
 
-**Still to make (8):** ch05_rio_grande_camp (must), ch05_rider (must), ch06_blockade (must), ch06_cork_leg (must),
-ch09_land_hearing (must), ch04_marsh_grass, ch05_ambush, ch08_trist_letter.
+| Scene | Batch | Why |
+|---|---|---|
+| ch02_settlers_arrive | 1 | batch 2 dropped the enslaved people, the point of the shot |
+| ch02_tejano_ranch | 1 | batch 2 printed a caption |
+| ch03_austin_jail | 1 | |
+| ch03_come_and_take_it | **2** | the right tree-trunk wheels; flag correct |
+| ch03_washington_on_the_brazos | 1 | |
+| ch04_alamo_dawn | 1 | both have the 1850 curved top; batch 1's is small and dark (regenerate if you can) |
+| ch05_rio_grande_camp | **2** | caption cropped off |
+| ch05_ambush | **2** | |
+| ch05_rider | **2** | |
+| ch06_blockade | **2** | |
+| ch06_cork_leg | **2** | caption cropped off; caps look a little Civil War, fine at this size |
+| ch06_flag_and_gallows | 1 | batch 2 printed a caption and showed the gallows closer |
+| ch08_trist_letter | **2** | "DEC. 1847" tag and border cropped off |
+| ch08_gold | 1 | more gold, stronger light |
+| ch09_sick_tents | 1 | |
+| ch09_land_hearing | **2** | |
+| ch10_house_chamber | **2** | clearer man holding up the paper (the subject) |
+| ch10_arsenic | 1 | darker, more ominous |
 
-**Notes on what came back:**
-- ch04_alamo_dawn: the chapel has the **curved top**, which wasn't added until 1850. Small in frame, but teachers will spot it.
-  Regenerate with "the chapel's façade is flat across the top, roofless, with no curved parapet", or I keep it small and soft.
-- ch03_come_and_take_it: the cannon sits on a regular spoked gun carriage, not crude tree-trunk wheels. Fine to keep.
-- ch02_tejano_ranch: the carreta has spoked wheels (real carretas had solid wooden wheels). Fine to keep.
-- ch10_arsenic: the bottle holds liquid, not white powder; the journal has unreadable pseudo-handwriting. Fine to keep.
+**Rejected: ch04_marsh_grass (batch 2).** The man hiding in the grass came out as a Black man, so the scene reads as armed men
+hunting a freedom seeker, not soldiers finding Santa Anna. Not usable. Regenerate with the fix below.
+
+**Two re-dos (both optional; scenes work without them):**
+- ch04_marsh_grass: add "The crouching man is a Mexican army soldier: a Mexican man with dark straight hair, in a short
+  Mexican infantry jacket with a high collar and white trousers, seen from behind."
+- ch04_alamo_dawn: add "The chapel's façade is flat across the top and roofless, with no curved parapet or hump."
