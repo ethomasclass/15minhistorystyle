@@ -304,7 +304,7 @@ const TM = makeTimeline(N, 30);
 export const Ch06: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch06_plot_twists.wav" lead={LEAD} music={[
     {src: 'music/a_price.mp3', volume: 0.15, to: TM.at('Meanwhile,') + 6},
-    {src: 'music/a_civil_war.mp3', volume: 0.14, from: TM.at('Meanwhile,') - 6, to: TM.at('That same') + 6},
+    {src: 'music/m_war_drums.mp3', volume: 0.17, startFrom: 20 * 30, from: TM.at('Meanwhile,') - 6, to: TM.at('That same') + 6},
     {src: 'music/j_grief.mp3', volume: 0.11, from: TM.at('That same') - 6},
   ]}>
     <Body />

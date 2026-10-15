@@ -28,6 +28,8 @@ I'll mix two options for chapters 2 and 9 (new cue vs. fallback) so you can choo
 
 ## The three new Suno cues
 
+**Delivered** (Oct 15): `m_frontier` (1:09, -15.2 LUFS) → ch 2 at 0.12 · `m_war_drums` (1:09, builds to its peak ~50 s, -17.9 LUFS) → ch 5 from "So in January 1846" (peak lands on "Congress declares war") and ch 6 from "Meanwhile" (from 0:20) at 0.17 · `m_lament` (1:08, -16.3 LUFS) → ch 9 at 0.13. The end screen keeps `r_ending`'s tail.
+
 Suno: **Custom** mode, **Instrumental ON**, paste Styles as written, and use the library's default Exclude line:
 > vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat
 

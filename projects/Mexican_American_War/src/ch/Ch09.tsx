@@ -186,7 +186,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch09: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch09_who_paid.wav" lead={LEAD} quiet music={[{src: 'music/r_dix.mp3', volume: 0.12}]}>
+  <ChapterShell n={N} audio="audio/ch09_who_paid.wav" lead={LEAD} quiet music={[{src: 'music/m_lament.mp3', volume: 0.13}]}>
     <Body />
   </ChapterShell>
 );
