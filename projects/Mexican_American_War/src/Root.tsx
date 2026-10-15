@@ -9,6 +9,7 @@ import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {MAPTEST_FRAMES, MapTest} from './MapTest';
 import {STYLETEST_FRAMES, StyleTest} from './StyleTest';
+import {PARALLAXTEST_FRAMES, ParallaxTest} from './ParallaxTest';
 
 export const Root: React.FC = () => (
   <>
@@ -21,6 +22,7 @@ export const Root: React.FC = () => (
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     <Composition id="MapTest" width={W} height={H} fps={FPS} durationInFrames={MAPTEST_FRAMES} component={() => <JFonts><MapTest /></JFonts>} />
     <Composition id="StyleTest" width={W} height={H} fps={FPS} durationInFrames={STYLETEST_FRAMES} component={() => <JFonts><StyleTest /></JFonts>} />
+    <Composition id="ParallaxTest" width={W} height={H} fps={FPS} durationInFrames={PARALLAXTEST_FRAMES} component={() => <JFonts><ParallaxTest /></JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
   </>
 );

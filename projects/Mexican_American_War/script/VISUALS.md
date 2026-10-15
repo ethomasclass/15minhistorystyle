@@ -101,6 +101,37 @@ hid too much of the picture).
 - **Real archival documents and portraits** stay cards on the desk, so an illustration never passes for a source.
 - Look test: `StyleTest` composition.
 
+## 2c. Masking and parallax on every engraving
+
+Every engraving gets a **mask** (coral tint at 60% strength, softer on line art, plus the teal trace) and **2.5D parallax**
+(the subject on its own layer, floating at depth 1.05–1.06 so it slides against the background as the camera moves).
+Engraving layers use `LAYERS_FILL=paper`: the gap behind the lifted subject is filled with plain paper (it reads as a
+cut-out lifted off the page) instead of a blurred grey inpaint, and holes inside the subject are filled first. Masks come
+from rembg with a crop box; small or low-contrast subjects (the cork leg) are traced by hand.
+
+| Image | Masked subject | Masking idea beyond the tint |
+|---|---|---|
+| ch02_settlers_arrive | the enslaved family (done) | the family stays in colour while the wagon family dims on "they bring enslaved people with them" |
+| ch02_tejano_ranch | the rancher on horseback | — |
+| ch03_austin_jail | Austin on the cot | the light shaft brightens as the subject is traced |
+| ch03_come_and_take_it | the cannon + flag | "COME AND TAKE IT" lettered onto the flag, riding the flag layer |
+| ch03_washington_on_the_brazos | the man signing | the crowd dims, the signer stays lit |
+| ch04_alamo_dawn | the chapel | — (small, dark, quiet trace only) |
+| ch05_rio_grande_camp | Matamoros across the river (second mask: the fort diggers) | **two masks in turn**: the U.S. camp, then the Mexican town |
+| ch05_ambush | the dragoons | — |
+| ch05_rider | rider + horse (done) | the strongest parallax (depth 1.08): the road slides by |
+| ch06_blockade | the British steamer | the steamer layer drifts left across the frigate |
+| ch06_cork_leg | **the leg** (done, hand-traced) | the leg lifts off the page (a little extra depth) on "cork leg" |
+| ch06_flag_and_gallows | none (quiet) | — |
+| ch08_trist_letter | the stack of pages | the stack layer grows a little taller on "65 pages long" |
+| ch08_gold | the gold | a slow glint sweep across the gold only |
+| ch09_sick_tents | the orderly with the bucket | quiet: trace only, no tint |
+| ch09_land_hearing | the ranchero | quiet: trace only, no tint |
+| ch10_house_chamber | the man holding the paper | the room dims around him on "one sentence" |
+| ch10_arsenic | the bottle | the candle flickers; the bottle is the last thing lit before the end card |
+
+Tested: `ParallaxTest` (settlers, rider, cork leg), review copy `review/Exact_Spot_parallax_test.mp4`.
+
 ## 3. Transitions (new)
 
 You said the chapter endings feel abrupt, so the shell now does this at the end of every chapter:
