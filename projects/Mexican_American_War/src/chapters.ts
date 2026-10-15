@@ -7,6 +7,7 @@ import {Ch03, CH03_FRAMES} from './ch/Ch03';
 import {Ch04, CH04_FRAMES} from './ch/Ch04';
 import {Ch05, CH05_FRAMES} from './ch/Ch05';
 import {Ch06, CH06_FRAMES} from './ch/Ch06';
+import {Ch07, CH07_FRAMES} from './ch/Ch07';
 
 export const CHAPTERS: {id: string; C: React.FC; frames: number}[] = [
   {id: 'Ch01', C: Ch01, frames: CH01_FRAMES},
@@ -15,4 +16,5 @@ export const CHAPTERS: {id: string; C: React.FC; frames: number}[] = [
   {id: 'Ch04', C: Ch04, frames: CH04_FRAMES},
   {id: 'Ch05', C: Ch05, frames: CH05_FRAMES},
   {id: 'Ch06', C: Ch06, frames: CH06_FRAMES},
+  {id: 'Ch07', C: Ch07, frames: CH07_FRAMES},
 ];

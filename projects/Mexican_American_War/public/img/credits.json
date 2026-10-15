@@ -199,5 +199,13 @@
     "page": "https://www.loc.gov/item/2011645459/",
     "source": "loc:2011645459",
     "note": "cropped to head and shoulders"
+  },
+  "ch07/grant_memoirs_p53.jpg": {
+    "title": "Personal memoirs of U.S. Grant .. (page 62)",
+    "artist": "Grant, Ulysses S. (Ulysses Simpson), 1822-1885",
+    "date": "1885",
+    "licence": "public domain by age (1885)",
+    "page": "https://archive.org/details/personalmemoirs01gran/page/n62",
+    "source": "iabook:personalmemoirs01gran:62"
   }
 }
