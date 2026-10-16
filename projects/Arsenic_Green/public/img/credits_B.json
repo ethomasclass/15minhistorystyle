@@ -122,5 +122,69 @@
     "licence": "Public Domain Mark (Wellcome Collection)",
     "page": "https://wellcomecollection.org/works/hy87xfww",
     "source": "https://iiif.wellcomecollection.org/image/V0027677/full/2091,/0/default.jpg"
+  },
+  "ch03/met_green_silk_dress_1868.jpg": {
+    "title": "Dress (American, C.I.53.72.1a\u2013c)",
+    "artist": "unknown",
+    "date": "1868",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/107839",
+    "source": "met:107839"
+  },
+  "ch03/met_green_silk_dress_1868_view2.jpg": {
+    "title": "Dress (American, C.I.53.72.1a\u2013c)",
+    "artist": "unknown",
+    "date": "1868",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/107839",
+    "source": "met:107839 additionalImages[0]"
+  },
+  "ch03/met_green_dress_1864.jpg": {
+    "title": "Dress (American, C.I.50.50.3)",
+    "artist": "unknown",
+    "date": "1864\u201365",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/103567",
+    "source": "met:103567"
+  },
+  "ch03/met_green_dress_1868_70.jpg": {
+    "title": "Dress (American, C.I.44.92.1a\u2013c)",
+    "artist": "unknown",
+    "date": "1868\u201370",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/82630",
+    "source": "met:82630"
+  },
+  "ch03/met_evening_dress_green_trim_french_c1865.jpg": {
+    "title": "Dress (French, C.I.69.33.9a\u2013e)",
+    "artist": "unknown",
+    "date": "ca. 1865",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/84436",
+    "source": "met:84436"
+  },
+  "ch03/met_wedding_headdress_green_leaves_1863.jpg": {
+    "title": "Wedding headdress (American, C.I.46.68.2)",
+    "artist": "unknown",
+    "date": "1863",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/123429",
+    "source": "met:123429"
+  },
+  "ch03/met_fashion_study_woman_green_dress.jpg": {
+    "title": "Fashion Study: Woman in a Green Dress (, 1982.1011.1)",
+    "artist": "Anonymous, French, 19th century",
+    "date": "19th century",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/384449",
+    "source": "met:384449"
+  },
+  "ch03/met_young_lady_green_sash_c1857_photo.jpg": {
+    "title": "[Young Lady in White Dress with Green Sash] (, 47.41.13)",
+    "artist": "Unknown",
+    "date": "ca. 1857",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/269145",
+    "source": "met:269145"
   }
 }

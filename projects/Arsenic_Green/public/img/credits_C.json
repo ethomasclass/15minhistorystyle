@@ -290,5 +290,29 @@
     "licence": "public domain by age (1876)",
     "page": "https://archive.org/details/potatopests00rile/page/n74",
     "source": "iabook:potatopests00rile:74"
+  },
+  "ch05/morris_trellis_wallpaper_1864_met.jpg": {
+    "title": "Trellis",
+    "artist": "William Morris",
+    "date": "1864",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/384020",
+    "source": "met:384020"
+  },
+  "ch05/morris_daisy_wallpaper_1864_met.jpg": {
+    "title": "Daisy",
+    "artist": "William Morris",
+    "date": "1864",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/384017",
+    "source": "met:384017"
+  },
+  "ch07/advert_wallpaper_free_from_arsenic_c1890.jpg": {
+    "title": "Advert for wall paper 'free from Arsenic', in National Health Society pamphlet 'In a Sick Room'",
+    "artist": "National Health Society (Great Britain); Allman & Son",
+    "date": "c. 1890",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/mu8u5sh4",
+    "source": "wellcome:L0048804"
   }
 }
