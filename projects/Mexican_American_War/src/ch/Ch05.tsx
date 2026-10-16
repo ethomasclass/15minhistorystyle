@@ -1,7 +1,7 @@
 // Chapter 5 · Polk Acts First: Polk wants California, Manifest Destiny, the offer Mexico won't hear, Taylor to the
 // Rio Grande, the April 25 ambush, two weeks by horse, the May 9 cabinet and diary, the war message and vote, who decided.
 import React from 'react';
-import {AbsoluteFill, interpolate} from 'remotion';
+import {AbsoluteFill, interpolate, random} from 'remotion';
 import mapData from '../../public/maps/mex1846.json';
 import words from '../../public/audio/ch05_polk_acts_first.words.json';
 import {clamp} from '../lib/anim';
@@ -173,22 +173,136 @@ const Camp: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** April 25: the patrol surrounded. */
-const Ambush: React.FC<{t: TL}> = ({t}) => (
-  <Parallax name="ambush_dragoons" src="img/gen/ch05_ambush.jpg" size={GEN} a={t.at('April') - 1} b={t.at('In 1846,')} fx={0.5} fy={0.45}
-    cam={{z: [1.0, 1.12], x: [0.0, 0.02]}} depth={1.05} vignette={0.45} mask={MASKS.ambush_dragoons} tint={null} traceAt={t.at('patrol.')}
-    tag="Illustration · Rancho de Carricitos, April 25, 1846">
-    {() => (
-      <>
-        <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.75) 100%)'}} />
-        <Highlight text="APRIL 25, 1846" x={100} y={70} size={90} at={t.at('April')} seed={139} rot={-2} />
-        <Note text="Mexican cavalry surround a U.S. patrol" x={800} y={90} size={46} rot={-2} at={t.at('surround') - 2} color="#ffffff" />
-        <Note text="more than a dozen killed or wounded" x={120} y={860} size={56} rot={-3} at={t.at('dozen') - 2} color="#ffffff" />
-        <Note text="most of the rest captured" x={150} y={950} size={56} rot={-3} at={t.at('captured.') - 4} color="#ffffff" />
-      </>
-    )}
-  </Parallax>
-);
+/** The trap at Rancho de Carricitos, top-down: a field closed in by chaparral, one gate; the dragoons ride in, the
+ *  Mexican cavalry rings the brush and shuts the gate. Drawn as a diagram card over the map. Card coordinates 0..800. */
+const TrapDiagram: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  const C = [420, 455];
+  const GATE = (150 * Math.PI) / 180;   // the gap in the brush, lower left
+  const GAP = (15 * Math.PI) / 180;
+  const pol = (r: number, ang: number) => [C[0] + r * Math.cos(ang), C[1] + r * Math.sin(ang)];
+  const rnd = (k: string) => random(`trap-${k}`);
+  const k = interpolate(g, [a, a + 8], [0, 1], clamp);
+  const sur = t.at('surround');
+  // the brush ring, drawn on around the field
+  const brushP = interpolate(g, [a + 2, a + 18], [0, 1], clamp);
+  const bushes = Array.from({length: 230}).map((_, i) => {
+    let ang = (i / 230) * Math.PI * 2 + rnd(`ba${i}`) * 0.03;
+    const d = Math.atan2(Math.sin(ang - GATE), Math.cos(ang - GATE));
+    if (Math.abs(d) < GAP) return null;
+    const r = 232 + rnd(`br${i}`) * 50;
+    const [x, y] = pol(r, ang);
+    const order = ((ang - GATE + Math.PI * 4) % (Math.PI * 2)) / (Math.PI * 2);
+    if (order > brushP) return null;
+    return <circle key={i} cx={x} cy={y} r={9 + rnd(`bs${i}`) * 9} fill="#3a3229" stroke="#1d1914" strokeWidth={1.5} opacity={0.9} />;
+  });
+  // dragoons: ride in through the gate, then mill inside
+  const inAt = a + 10, inEnd = t.at('Mexican cavalry');
+  const killed = t.at('dozen');
+  const caught = t.at('captured.') - 6;
+  const dragoons = Array.from({length: 16}).map((_, i) => {
+    const s = interpolate(g, [inAt + i * 1.2, inEnd + i * 1.2], [0, 1], {...clamp, easing: (x) => 1 - Math.pow(1 - x, 2)});
+    const [x0, y0] = pol(380, GATE);
+    const [x1, y1] = pol(60 + rnd(`dr${i}`) * 120, GATE + 2.2 + rnd(`da${i}`) * 2.2);
+    const x = x0 + (x1 - x0) * s, y = y0 + (y1 - y0) * s;
+    const dead = i % 4 === 0 && g >= killed + i;
+    const held = !dead && g >= caught;
+    if (g < inAt + i * 1.2) return null;
+    return (
+      <g key={i}>
+        {dead ? <text x={x} y={y + 11} textAnchor="middle" fontSize={34} fontFamily={JF.sans} fontWeight={900} fill="#3a332b">✕</text>
+          : <circle cx={x} cy={y} r={11} fill={MAP3D.us} stroke="#1b1712" strokeWidth={2.5} />}
+        {held && <circle cx={x} cy={y} r={17} fill="none" stroke={MAP3D.mexico} strokeWidth={3} />}
+      </g>
+    );
+  });
+  // Mexican cavalry: close in from outside to a ring around the brush; a group shuts the gate
+  const lancers = Array.from({length: 34}).map((_, i) => {
+    const atGate = i < 7;
+    const ang = atGate ? GATE + (i - 3) * 0.045 : (i / 34) * Math.PI * 2 + rnd(`la${i}`) * 0.1;
+    const r1 = atGate ? 245 + (i % 2) * 32 : 305 + rnd(`lr${i}`) * 20;
+    const s = interpolate(g, [t.at('Mexican cavalry') - 4 + (i % 6), sur + 10 + (i % 6) + (atGate ? 8 : 0)], [0, 1], {...clamp, easing: (x) => 1 - Math.pow(1 - x, 2)});
+    const [x0, y0] = pol(520 + rnd(`l0${i}`) * 80, ang);
+    const [x1, y1] = pol(r1, ang);
+    if (s <= 0) return null;
+    const x = x0 + (x1 - x0) * s, y = y0 + (y1 - y0) * s;
+    return (
+      <g key={i}>
+        <line x1={x} y1={y} x2={x + 5} y2={y - 26} stroke="#1b1712" strokeWidth={2} />
+        <circle cx={x} cy={y} r={10} fill={MAP3D.mexico} stroke="#1b1712" strokeWidth={2.5} />
+      </g>
+    );
+  });
+  const gateShut = interpolate(g, [sur + 14, sur + 22], [0, 1], clamp);
+  const [gx, gy] = pol(340, GATE);
+  return (
+    <div style={{position: 'absolute', left: 1020, top: 110, width: 800, height: 840, background: '#efe8d8', boxShadow: '0 22px 40px rgba(0,0,0,0.65)',
+      opacity: k, transform: `scale(${0.85 + 0.15 * k}) rotate(1.2deg)`, transformOrigin: '50% 40%'}}>
+      <svg width={800} height={840} style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
+        <defs>
+          <pattern id="trapgrass" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+            <line x1="0" y1="0" x2="0" y2="14" stroke="#c9bfa8" strokeWidth="1.2" />
+          </pattern>
+        </defs>
+        <circle cx={C[0]} cy={C[1]} r={232} fill="url(#trapgrass)" />
+        {bushes}
+        {dragoons}
+        {lancers}
+        {/* the gate: two posts at the gap */}
+        {[-1, 1].map((sgn) => { const [px, py] = pol(258, GATE + sgn * GAP * 0.95); return <rect key={sgn} x={px - 5} y={py - 16} width={10} height={32} fill="#1b1712" opacity={brushP} />; })}
+        {/* the way in */}
+        <text x={gx + 40} y={gy + 92} textAnchor="middle" style={{fontFamily: '"Nanum Pen Script", cursive', fontSize: 40, fill: '#1b1712', opacity: interpolate(g, [a + 16, a + 22, sur, sur + 6], [0, 1, 1, 0], clamp)}}>the only way in</text>
+        <path d={`M${gx + 30},${gy + 58} L${gx + 40},${gy + 18}`} stroke="#1b1712" strokeWidth={3} opacity={interpolate(g, [a + 16, a + 22, sur, sur + 6], [0, 1, 1, 0], clamp)} />
+        <text x={640} y={150} textAnchor="middle" style={{fontFamily: '"Nanum Pen Script", cursive', fontSize: 38, fill: '#1b1712', opacity: interpolate(g, [a + 14, a + 20], [0, 1], clamp)}}>thick chaparral</text>
+        {gateShut > 0 && <text x={gx - 40} y={gy - 40} textAnchor="middle" style={{fontFamily: '"Nanum Pen Script", cursive', fontSize: 44, fill: pal.subject, opacity: gateShut}}>shut</text>}
+      </svg>
+      <div style={{position: 'absolute', left: 30, top: 18, fontFamily: JF.heavy, fontWeight: 900, fontSize: 32, letterSpacing: 2, color: '#1b1712'}}>RANCHO DE CARRICITOS</div>
+      <div style={{position: 'absolute', left: 30, top: 58, fontFamily: JF.mono, fontSize: 20, letterSpacing: 2, color: '#5a5248'}}>A TRAP · DIAGRAM, NOT TO SCALE</div>
+      <div style={{position: 'absolute', left: 30, bottom: 22, display: 'flex', gap: 28, alignItems: 'center', fontFamily: JF.sans, fontWeight: 600, fontSize: 22, color: '#1b1712'}}>
+        <span><span style={{display: 'inline-block', width: 18, height: 18, borderRadius: 9, background: MAP3D.us, border: '2px solid #1b1712', verticalAlign: -3, marginRight: 8}} />U.S. dragoons (63)</span>
+        <span><span style={{display: 'inline-block', width: 18, height: 18, borderRadius: 9, background: MAP3D.mexico, border: '2px solid #1b1712', verticalAlign: -3, marginRight: 8}} />Mexican cavalry</span>
+      </div>
+    </div>
+  );
+};
+
+/** April 25: on the map, the X in the strip; beside it, the trap. */
+const Ambush: React.FC<{t: TL}> = ({t}) => {
+  const g = useGFrame();
+  const a = t.at('April') - 1;
+  const keys: Cam3[] = [
+    {f: a, x: 3420, y: 2380, z: 1.6, tilt: 52, rot: -10},
+    {f: t.at('In 1846,') - 1, x: 3440, y: 2420, z: 1.9, tilt: 54, rot: -12},
+  ];
+  return (
+    <>
+      <Map3D data={D} keys={keys}>
+        {(api) => (
+          <>
+            <Border api={api} d={D.lines.nueces} at={-99} dur={1} color={MAP3D.mexico} dashed />
+            <Border api={api} d={D.lines.rioGrande} at={-99} dur={1} color={MAP3D.us} dashed />
+            <Fill api={api} region="nuecesStrip" at={-99} color="#FF6F61" opacity={0.25} hatch="rgba(255,111,97,0.7)" />
+            <Dot api={api} at={pl.matamoros} color={MAP3D.mexico} r={12} />
+            <Stand api={api} at={[pl.matamoros[0] - 20, pl.matamoros[1] + 16]}><PlaceTag text="Matamoros" size={26} /></Stand>
+            <Stand api={api} at={pl.carricitos} show={a + 2}><Stake /></Stand>
+            <Stand api={api} at={[pl.carricitos[0] - 70, pl.carricitos[1] - 30]} z={20} show={a + 6}><PlaceTag text="Rancho de Carricitos" size={26} /></Stand>
+          </>
+        )}
+      </Map3D>
+      <AbsoluteFill>
+        <AbsoluteFill style={{background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 40%)'}} />
+        {g >= t.at('April') && <Highlight text="APRIL 25, 1846" x={90} y={70} size={84} at={t.at('April')} seed={139} rot={-2} />}
+        <Note text="a U.S. patrol rides into a ranch field" x={90} y={230} size={44} rot={-2} at={a + 8} color="#ffffff" />
+        <Note text="Mexican cavalry surround it" x={90} y={320} size={48} rot={-2} at={t.at('surround') - 2} color="#ffffff" />
+        <Note text="a dozen+ killed or wounded" x={90} y={800} size={50} rot={-3} at={t.at('dozen') - 2} color="#ffffff" />
+        <Note text="most of the rest captured" x={110} y={890} size={50} rot={-3} at={t.at('captured.') - 4} color="#ffffff" />
+        <TrapDiagram t={t} a={a} />
+        <Tag text="Diagram after the accounts of the Thornton Affair · not to scale" />
+      </AbsoluteFill>
+    </>
+  );
+};
 
 /** News travels at the speed of a horse. */
 const Rider: React.FC<{t: TL}> = ({t}) => (

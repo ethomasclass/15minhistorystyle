@@ -91,7 +91,7 @@ Black-and-white 1840s illustrated-newspaper wood engraving: fine parallel lines 
 | ch03_washington_on_the_brazos | 1 | |
 | ch04_alamo_dawn | 1 | both have the 1850 curved top; batch 1's is small and dark (regenerate if you can) |
 | ch05_rio_grande_camp | **2** | caption cropped off |
-| ch05_ambush | **2** | |
+| ch05_ambush | **2** | not used: replaced in ch 5 by a drawn diagram of the trap (the field, the chaparral, one gate) |
 | ch05_rider | **2** | |
 | ch06_blockade | **2** | |
 | ch06_cork_leg | **2** | caption cropped off; caps look a little Civil War, fine at this size |
