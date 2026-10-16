@@ -105,6 +105,7 @@ const Atlantic: React.FC<{t: TL}> = ({t}) => {
   const end = t.at('Massachusetts');
   const keys: Cam[] = [
     {f: 0, x: 3700, y: 1380, s: 0.62},
+    {f: t.at('in America'), x: 3650, y: 1390, s: 0.63},
     {f: t.at('same walls') + 10, x: 2520, y: 1640, s: 0.8},
     {f: end + 30, x: 2470, y: 1660, s: 0.84},
   ];
@@ -151,7 +152,7 @@ const FirstLine: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <Desk a={t.at('His first')}>
-      <DocWindow src="img/ch06/draper_report_p17_everybody_knows_1872.jpg" x={120} y={150} w={1680} h={560} fx={880} fy={980} sc={1.2} at={t.at('His first') - 1} rot={-1}
+      <DocWindow src="img/ch06/draper_report_p17_everybody_knows_1872.jpg" x={120} y={150} w={1680} h={560} fx={975} fy={1000} sc={1.0} at={t.at('His first') - 1} rot={-1}
         push={[t.at('His first'), t.at('Bedroom')]} zoom={1.08}
         marks={[{at: t.at('Everybody knows'), to: t.end('deadly poison'), swipe: [[245, 1100, 1515, 1160]]}]} />
       <Note text="his first line:" x={130} y={800} size={58} rot={-3} at={t.at('His first') - 2} color={WHITE} />
@@ -169,9 +170,9 @@ const Hiding: React.FC<{t: TL}> = ({t}) => {
       <Note text="bedroom walls." x={120} y={170} size={60} rot={-3} at={t.at('Bedroom') - 3} color={WHITE} />
       <Note text="children's paint boxes." x={140} y={300} size={56} rot={-3} at={t.at("Children's") - 3} color={WHITE} />
       <Note text="candy wrappers," x={120} y={470} size={60} rot={-3} at={t.at('Candy') - 3} color={pal.subject} />
-      <Note text="in a top Boston shop window" x={140} y={580} size={46} rot={-3} at={t.at('window of') - 3} color={WHITE} />
-      <DocWindow src="img/ch06/draper_report_p31_boston_confectioner_1872.jpg" x={880} y={150} w={940} h={700} fx={930} fy={2380} sc={0.6} at={t.at('Candy') - 1} rot={1.5}
-        push={[t.at('Candy'), t.at('He even')]} zoom={1.15}
+      <Note text="in a top Boston shop window" x={140} y={580} size={40} rot={-3} at={t.at('window of') - 3} color={WHITE} />
+      <DocWindow src="img/ch06/draper_report_p31_boston_confectioner_1872.jpg" x={900} y={150} w={920} h={700} fx={925} fy={2380} sc={0.56} at={t.at('Candy') - 1} rot={1.5}
+        push={[t.at('Candy'), t.at('He even')]} zoom={1.05}
         marks={[{at: t.at('window of'), to: t.end("Boston's best shops"), swipe: [[1600, 2260, 1700, 2308], [145, 2328, 1700, 2378], [145, 2396, 535, 2446]]}]} />
       <Tag text={`${DRAPER}, p. 31 · Internet Archive`} />
     </Desk>
@@ -265,9 +266,10 @@ const Emma: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <AbsoluteFill style={{background: 'linear-gradient(transparent 52%, rgba(0,0,0,0.78))'}} />
-          <Note text="he collected cases." x={110} y={690} size={52} rot={-3} at={t.at('He collected') - 2} color={WHITE} />
-          <Note text="Emma, 9: sick in her green bedroom" x={130} y={800} size={54} rot={-3} at={t.at('Emma') - 3} color={WHITE} />
-          <Note text="moved out: got better" x={150} y={910} size={60} rot={-3} at={t.at('got better') - 3} color={pal.subject} />
+          <Note text="he collected cases." x={110} y={640} size={46} rot={-3} at={t.at('He collected') - 2} color={WHITE} />
+          <Note text="Emma, 9: sick in her" x={120} y={730} size={50} rot={-3} at={t.at('Emma') - 3} color={WHITE} />
+          <Note text="green bedroom" x={140} y={815} size={50} rot={-3} at={t.at('green bedroom') - 3} color={WHITE} />
+          <Note text="moved out: got better" x={130} y={920} size={54} rot={-3} at={t.at('got better') - 3} color={pal.subject} />
         </>
       )}
     </Sil>
@@ -288,8 +290,8 @@ const SpringPort: React.FC<{t: TL}> = ({t}) => {
       <Loop cx={x + pad + 1270 * sc * ((w - 2 * pad) / w)} cy={y + pad + 2690 * sc * ((w - 2 * pad) / w)} rx={70} ry={40} at={t.at('Spring Port') + 2} seed={613} tilt={-4} />
       <Note text="Spring Port, Michigan" x={130} y={y + mh * sc + 40} size={50} rot={-3} at={t.at('Spring Port') - 3} color={WHITE} />
       <DropCard src="img/ch01/kedzie_specimen_n018_first_leaf_spring_port.jpg" x={1160} y={80} w={560} rot={3} at={t.at('the girl from') - 1} filter="contrast(1.04)" />
-      <Note text="page one" x={1120} y={880} size={56} rot={-4} at={t.at('first page') - 3} color={WHITE} />
-      <Note text="green in nearly every room" x={760} y={600} size={54} rot={-6} at={t.at('nearly every') - 3} color={pal.subject} />
+      <Note text="page one" x={850} y={330} size={60} rot={-4} at={t.at('first page') - 3} color={WHITE} />
+      <Note text="green in nearly every room" x={150} y={910} size={54} rot={-3} at={t.at('nearly every') - 3} color={pal.subject} />
       <Tag text={`Springport Twp., Atlas of Jackson County, 1874 · Kedzie's first specimen leaf, 1874 · ${NLM}`} />
     </Desk>
   );
@@ -319,7 +321,7 @@ const TheBook: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('Then he bound')}>
     <DropCard src="img/ch01/kedzie_cover_green_label_crop_1874.jpg" x={600} y={70} w={720} rot={-2} at={t.at('Then he bound') - 1} filter="contrast(1.04)" />
     <Note text="bound into a book..." x={110} y={300} size={52} rot={-3} at={t.at('into a book') - 3} color={WHITE} />
-    <Note text="...mailed to the libraries" x={1370} y={560} size={48} rot={-3} at={t.at('mailed it') - 3} color={WHITE} />
+    <Note text="...mailed to the libraries" x={110} y={420} size={48} rot={-3} at={t.at('mailed it') - 3} color={WHITE} />
     <Highlight text="THIS BOOK." x={700} y={880} size={110} at={t.at('This book.')} seed={615} rot={-2} />
     <Tag text={`Kedzie, Shadows from the Walls of Death, 1874: cover label (itself arsenical paper) · ${NLM}`} y={40} />
   </Desk>
@@ -366,7 +368,7 @@ export const Body: React.FC = () => {
     at('difficult') - 3, at('Translation') - 3, at('Americans') - 3, at('tell a business') - 3,
     at('Stop buying') - 3, at('Stop buying') + 1, at("they'll stop") - 3,
     at('a chemistry') - 3, at('see it') - 3,
-    at('He collected') - 2, at('Emma') - 3, at('got better') - 3,
+    at('He collected') - 2, at('Emma') - 3, at('green bedroom') - 3, at('got better') - 3,
     at('Spring Port') - 3, at('first page') - 3, at('nearly every') - 3,
     at('So Kedzie') - 2, at('ordinary stores') - 3, at('tested every') - 3, at('had arsenic') - 3,
     at('into a book') - 3, at('mailed it') - 3, at('His headline') - 2,
