@@ -34,7 +34,7 @@ export const GEN: [number, number] = [1376, 768];
  */
 export const Sil: React.FC<{name: string; file: string; label: string; a: number; b: number; fx?: number; fy?: number;
   z?: [number, number]; x?: [number, number]; y?: [number, number]; depth?: number; effects?: Fx[]; mask?: MaskRef; traceAt?: number; children?: (p: Place) => React.ReactNode}> = ({
-  name, file, label, a, b, fx = 0.5, fy = 0.5, z = [1.04, 1.14], x, y, depth = 1.07, effects, mask, traceAt, children,
+  name, file, label, a, b, fx = 0.5, fy = 0.5, z = [1.04, 1.14], x, y, depth = 1.05, effects, mask, traceAt, children,
 }) => (
   <Parallax name={name} src={`img/gen/${file}`} size={GEN} a={a} b={b} tag={`Illustration · ${label}`} fx={fx} fy={fy} cam={{z, x, y}} depth={depth}
     filter="contrast(1.04) saturate(1.05)" tint={null} mask={mask} traceAt={traceAt} vignette={0.45}

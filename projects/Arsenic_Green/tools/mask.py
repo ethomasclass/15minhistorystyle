@@ -20,17 +20,17 @@ from trace import clean, save  # noqa: E402
 
 PUB = os.path.join(HERE, "..", "public")
 JOBS = {
-    # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model)
+    # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model[, cut rects])
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # Dressed to Kill: silhouette paintings (1376x768) — one figure each, for parallax layers
-    "g_library": ("img/gen/ch01_library_1874.jpg", (180, 150, 560, 768), "isnet-general-use"),
+    "g_library": ("img/gen/ch01_library_1874.jpg", (150, 120, 505, 768), "isnet-general-use", [(425, 388, 505, 768), (486, 230, 505, 388)]),
     "g_ballroom": ("img/gen/ch03_ballroom_1862.jpg", (600, 200, 1000, 768), "isnet-general-use"),
-    "g_matilda": ("img/gen/ch04_matilda_workbench.jpg", (180, 40, 700, 768), "isnet-general-use"),
-    "g_workshop": ("img/gen/ch04_flower_workshop.jpg", (40, 150, 460, 768), "isnet-general-use"),
+    "g_matilda": ("img/gen/ch04_matilda_workbench.jpg", (180, 40, 720, 768), "isnet-general-use", [(330, 572, 720, 768), (500, 492, 720, 572)]),
+    "g_workshop": ("img/gen/ch04_flower_workshop.jpg", (180, 80, 580, 540), "isnet-general-use", [(335, 432, 580, 540)]),
     "g_street": ("img/gen/ch04_turner_street_1862.jpg", (650, 420, 860, 768), "isnet-general-use"),
     "g_doctor": ("img/gen/ch04_limehouse_room.jpg", (1000, 160, 1260, 768), "isnet-general-use"),
-    "g_chemist": ("img/gen/ch06_chemist_testing.jpg", (800, 60, 1300, 768), "isnet-general-use"),
+    "g_chemist": ("img/gen/ch06_chemist_testing.jpg", (650, 40, 1376, 768), "isnet-general-use", [(650, 548, 990, 768), (820, 462, 960, 548)]),
     "g_emma": ("img/gen/ch06_emma_bedroom.jpg", (620, 170, 1130, 768), "isnet-general-use"),
     "g_farmer": ("img/gen/ch07_potato_field.jpg", (900, 80, 1180, 768), "isnet-general-use"),
     # Dressed to Kill: archival subjects
@@ -46,7 +46,7 @@ JOBS = {
 }
 
 
-def run(name, src, box, model, sessions={}):
+def run(name, src, box, model, cut=None, sessions={}):
     im = Image.open(os.path.join(PUB, src)).convert("RGB")
     crop = im.crop(box) if box else im
     small = crop.copy()
@@ -57,6 +57,8 @@ def run(name, src, box, model, sessions={}):
     full = np.zeros((im.height, im.width), np.uint8)
     x0, y0 = (box[0], box[1]) if box else (0, 0)
     full[y0:y0 + crop.height, x0:x0 + crop.width] = (a > 128).astype(np.uint8) * 255
+    for x0c, y0c, x1c, y1c in cut or []:   # optional rectangles to remove (a tray, a table, a book merged with the figure)
+        full[y0c:y1c, x0c:x1c] = 0
     m = clean(full, close=9, min_area=20000)
     n, lab, stats, _ = cv2.connectedComponentsWithStats(m)
     if n > 2:                        # keep only the biggest piece (the subject)
