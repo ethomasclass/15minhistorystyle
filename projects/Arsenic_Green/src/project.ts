@@ -4,15 +4,15 @@
 export const SLUG = 'Dressed_To_Kill';
 
 /** Title card after the channel intro: a highlighter title, a teal subtitle and a handwritten date range. */
-export const TITLE = 'KING ANDREW';
-export const SUBTITLE = "How the People's President Got a Crown";
-export const DATES = '1767 – 1845';
+export const TITLE = 'DRESSED TO KILL';
+export const SUBTITLE = 'How Arsenic Green Took Over the 1800s';
+export const DATES = '1775 – 1900';
 
 /**
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg'];
+export const INTRO_CARDS = ['img/ch03/arsenic_waltz_punch_1862.jpg', 'img/ch01/kedzie_cover_green_label_crop_1874.jpg', 'img/ch03/met_green_silk_dress_1868.jpg', 'img/ch05/william_morris_hollyer_c1887.jpg', 'img/ch04/vernois_1859_plate_flower_makers_hands.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {
