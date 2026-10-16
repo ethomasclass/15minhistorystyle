@@ -86,11 +86,11 @@ const Waltz: React.FC<{t: TL}> = ({t}) => {
   const end = t.at('Twelve') - 1;
   if (f < c1) {
     return (
-      <WaltzShot fx={1500} fy={1250} z0={1.1} z1={1.22} a={0} b={c1} shade>
+      <WaltzShot fx={1500} fy={980} z0={1.0} z1={1.12} a={0} b={c1} shade>
         {() => (
           <>
-            <Note text="the most fashionable colour" x={110} y={70} size={50} rot={-3} at={t.at('most fashionable') - 3} color="#ffffff" />
-            <Highlight text="OF THE 1860s" x={110} y={180} size={100} at={t.at('1860s')} seed={11} rot={-2} />
+            <Note text="the most fashionable colour of" x={90} y={60} size={48} rot={-3} at={t.at('most fashionable') - 3} color="#ffffff" />
+            <Highlight text="THE 1860s" x={90} y={160} size={84} at={t.at('1860s')} seed={11} rot={-2} />
             <Note text="...was made with arsenic." x={1080} y={800} size={60} rot={-3} at={t.at('made with') - 3} color={pal.subject} />
             <Note text="and people knew it." x={1180} y={910} size={52} rot={-3} at={t.at('And people') - 3} color="#ffffff" />
           </>
@@ -103,11 +103,11 @@ const Waltz: React.FC<{t: TL}> = ({t}) => {
       <WaltzShot fx={1487} fy={700} z0={1.0} z1={1.06} a={c1} b={c2} shade>
         {(p) => {
           const S = onScreen(p);
-          const [dx, dy] = S(2822, 64);
+          const [dx, dy] = S(2805, 64);
           const [hx, hy] = S(1493, 62);
           return (
             <>
-              <Loop cx={dx} cy={dy} rx={128 * p.scale + 16} ry={40} at={t.at('1862')} seed={13} tilt={-3} />
+              <Loop cx={dx} cy={dy} rx={110 * p.scale + 8} ry={38} at={t.at('1862')} seed={13} tilt={-3} />
               <Loop cx={hx} cy={hy} rx={720 * p.scale + 20} ry={44} at={t.at('London magazine') + 2} seed={14} tilt={-1} />
               <Note text="Punch, a London humour magazine" x={110} y={880} size={48} rot={-3} at={t.at('London magazine') - 2} color="#ffffff" />
               <Note text={'"may I have this dance?"'} x={1100} y={600} size={50} rot={-4} at={t.at('asks') - 3} />
@@ -128,7 +128,7 @@ const Waltz: React.FC<{t: TL}> = ({t}) => {
             <>
               <Loop cx={mx} cy={my} rx={170} ry={190} at={t.at('closer') + 1} seed={15} tilt={-8} width={6} />
               <Loop cx={lx} cy={ly} rx={130} ry={160} at={t.at('both') + 1} seed={16} tilt={4} width={6} />
-              <Stamp text="SKELETONS." x={110} y={880} at={t.at('skeletons')} size={130} color={pal.subject} rot={-2} />
+              <Stamp text="SKELETONS." x={110} y={820} at={t.at('skeletons')} size={130} color={pal.subject} rot={-2} />
             </>
           );
         }}
@@ -215,7 +215,7 @@ const Library: React.FC<{t: TL}> = ({t}) => (
   <Sil name="g_library" file="ch01_library_1874.jpg" label="a librarian opens the book, 1874" a={t.at("We'll")} b={END} z={[1.04, 1.12]} fx={0.45}>
     {() => (
       <>
-        <Note text="the most famous designer of his day..." x={880} y={830} size={40} rot={-3} at={t.at('most famous') - 3} color="#ffffff" />
+        <Note text="the most famous designer of his day..." x={900} y={930} size={40} rot={-2} at={t.at('most famous') - 3} color="#ffffff" />
         <Note text="witch fever?" x={1250} y={150} size={72} rot={-5} at={t.at('witch fever') - 3} color="#FF9F1C" />
       </>
     )}

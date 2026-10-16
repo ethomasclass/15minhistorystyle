@@ -96,10 +96,10 @@ const Wreath: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <DropCard src="img/ch03/met_wedding_headdress_green_leaves_1863.jpg" x={120} y={150} w={620} rot={-3} at={a} filter="contrast(1.04)" pad={14} />
       <Highlight text="1862" x={140} y={720} size={110} at={t.at('1862')} seed={33} rot={-2} />
-      <Note text="the chemist: A. W. Hofmann" x={150} y={890} size={46} rot={-3} at={t.at('a chemist') - 3} color="#ffffff" />
+      <Note text="chemist: A. W. Hofmann" x={130} y={890} size={44} rot={-3} at={t.at('a chemist') - 3} color="#ffffff" />
       <Doc src={HOF} x={860} y={-330} w={1000} rot={2} at={t.at('hair wreaths') - 1} push={[t.at('hair wreaths'), t.at('The British')]} fx={1425} fy={2100} zoom={1.2}
         marks={[{at: t.at('to poison twenty') - 2, to: t.end('persons'), swipe: [[1138, 2082, 1712, 2124]]}]} />
-      <Tag text="Headdress, 1863 · The Met · Chicago Medical Examiner, Sept. 1862" />
+      <Tag text="Headdress, 1863 · The Met · Chicago Med. Examiner, 1862" />
     </Desk>
   );
 };

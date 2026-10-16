@@ -21,12 +21,12 @@ const DAMP = 'img/ch04/builder_1862_a_damp_room_and_its_dangers.jpg';
 
 /** London, 1861: Matilda at her bench (no picture of her survives). */
 const Matilda: React.FC<{t: TL}> = ({t}) => (
-  <Sil name="g_matilda" file="ch04_matilda_workbench.jpg" label="an artificial-flower maker, 1861 (no picture of Matilda survives)" a={0} b={t.at('in a workshop')} fx={0.42} fy={0.45} z={[1.04, 1.1]}>
+  <Sil name="g_matilda" file="ch04_matilda_workbench.jpg" label="an artificial-flower maker, 1861" a={0} b={t.at('in a workshop')} fx={0.42} fy={0.45} z={[1.04, 1.1]}>
     {() => (
       <>
         <Highlight text="LONDON, 1861" x={100} y={90} size={84} at={t.at('London 1861')} seed={41} rot={-2} />
-        <Note text="Matilda Scheurer, 19" x={1180} y={790} size={52} rot={-3} at={t.at('Matilda Scheurer') - 3} color="#ffffff" />
-        <Note text="no picture of her survives" x={1190} y={895} size={38} rot={-3} at={t.at('Matilda Scheurer') + 14} color="#ffffff" />
+        <Note text="Matilda Scheurer, 19" x={1180} y={90} size={52} rot={-3} at={t.at('Matilda Scheurer') - 3} color="#ffffff" />
+        <Note text="no picture of her survives" x={1200} y={190} size={38} rot={-3} at={t.at('Matilda Scheurer') + 14} color="#ffffff" />
       </>
     )}
   </Sil>
@@ -69,7 +69,7 @@ const Inquest: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('The inquest') - 1;
   return (
     <Desk a={a} push={0.02}>
-      <Doc src={MTG61} x={-267} y={-990} w={1700} rot={-1} at={a} push={[a, t.at('A few months')]} fx={1490} fy={1930} zoom={1.1}
+      <Doc src={MTG61} x={-700} y={-1550} w={2300} rot={-1} at={a} push={[a, t.at('A few months')]} fx={1490} fy={1930} zoom={1.1}
         marks={[
           {at: t.at('an accident') - 2, to: t.end('an accident') + 6, swipe: [[1150, 1886, 1368, 1914]]},
           {at: t.at('by the arsenic') - 2, to: t.end('employment'), swipe: [[1733, 1918, 1940, 1948], [1037, 1950, 1515, 1980]]},
@@ -98,9 +98,9 @@ const Room: React.FC<{t: TL}> = ({t}) => (
     z={[1.04, 1.14]} x={[0.02, -0.05]}>
     {() => (
       <>
-        <Note text="Ann Amelia, 3" x={1270} y={120} size={52} rot={-3} at={t.at('Ann Amelia') - 3} color="#ffffff" />
-        <Note text="Thomas Orton, surgeon" x={1270} y={220} size={46} rot={-3} at={t.at('Thomas Orton') - 3} />
-        <Note text="green paper. damp." x={1290} y={880} size={50} rot={-3} at={t.at('Green paper') - 3} color="#ffffff" />
+        <Note text="Ann Amelia, 3" x={130} y={600} size={52} rot={-3} at={t.at('Ann Amelia') - 3} color="#ffffff" />
+        <Note text="Thomas Orton, surgeon" x={1100} y={80} size={50} rot={-3} at={t.at('Thomas Orton') - 3} />
+        <Note text="green paper. damp." x={800} y={930} size={50} rot={-3} at={t.at('Green paper') - 3} color="#ffffff" />
       </>
     )}
   </Sil>
@@ -114,7 +114,7 @@ const Page: React.FC<{t: TL; children?: React.ReactNode}> = ({t, children}) => {
   ];
   return (
     <Desk a={t.at('The color came')} push={0.02}>
-      <Doc src={MTG62} x={-336} y={329} w={1800} rot={-1} at={t.at('The color came') - 1} push={[t.at('The color came'), t.at('And that was the pattern')]} fx={1250} fy={220} zoom={1.12} marks={marks} />
+      <Doc src={MTG62} x={-429} y={276} w={2300} rot={-1} at={t.at('The color came') - 1} push={[t.at('The color came'), t.at('And that was the pattern')]} fx={1250} fy={220} zoom={1.12} marks={marks} />
       {children}
       <Tag text="Medical Times & Gazette, 3 May 1862, p.471 · Internet Archive" y={40} />
     </Desk>

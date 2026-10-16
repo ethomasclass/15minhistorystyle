@@ -101,7 +101,7 @@ const Bans: React.FC<{t: TL}> = ({t}) => {
     <Desk a={t.at('Other countries')}>
       <Note text="other countries did ban it:" x={150} y={60} size={50} rot={-2} at={t.at('Other countries') - 2} color="#ffffff" />
       <BanCard t={t} x={150} y={180} w={900} />
-      <Stamp text="NO BAN" x={560} y={455} at={t.at('never banned')} size={130} color={pal.subject} rot={-5} />
+      <Stamp text="NO BAN" x={600} y={548} at={t.at('never banned')} size={130} color={pal.subject} rot={-5} />
       <Note text="(it didn't have to)" x={1150} y={190} size={54} rot={-3} at={t.at('didnt have to') - 2} color="#ffffff" />
       <Highlight text="BY c.1900" x={1150} y={350} size={100} at={t.at('By about 1900')} seed={705} rot={-2} />
       <Note text="nobody wanted it," x={1160} y={560} size={60} rot={-3} at={t.at('nobody wanted') - 2} />
@@ -143,9 +143,10 @@ const Mass: React.FC<{t: TL}> = ({t}) => {
       <CropCard src={DRAPER} size={sizeOf(DRAPER)} x={150} y={150} w={400} h={540} fx={505} fy={640} scale={0.4} rot={-2} at={t.at('In America') - 1}
         mask={MASKS.draper} traceAt={t.at('Drapers') + 2} />
       <Note text="in America:" x={150} y={40} size={50} rot={-2} at={t.at('In America') + 1} color="#ffffff" />
-      <Note text="Draper: “leave it alone”" x={130} y={760} size={52} rot={-3} at={t.at('leave it alone') - 2} color={boxOf(pal)} />
-      <Note text="...a long test" x={200} y={870} size={52} rot={-3} at={t.at('a long test') - 2} color="#ffffff" />
-      <Doc src={MASS} x={640} y={70} w={500} rot={1.5} at={t.at('Massachusetts') - 1} push={[t.at('Massachusetts'), t.at('But the green')]} zoom={1.12} fy={1600}
+      <Note text="Draper's idea:" x={130} y={740} size={46} rot={-3} at={t.at('Drapers') - 2} color="#ffffff" />
+      <Note text="“leave it alone”" x={150} y={830} size={54} rot={-3} at={t.at('leave it alone') - 2} color={boxOf(pal)} />
+      <Note text="...a long test" x={210} y={930} size={42} rot={-3} at={t.at('a long test') - 2} color="#ffffff" />
+      <Doc src={MASS} x={700} y={70} w={480} rot={1.5} at={t.at('Massachusetts') - 1} push={[t.at('Massachusetts'), t.at('But the green')]} zoom={1.12} fy={1600}
         marks={[{at: t.at('Massachusetts') + 8, box: [90, 1132, 1550, 1238], pad: 14, seed: 7},
           {at: t.at('legal limit'), to: t.at('cloth') + 8, swipe: [[90, 2010, 1556, 2062]]}]} />
       <Highlight text="1900" x={1260} y={110} size={120} at={t.at('in 1900')} seed={707} rot={-2} />
@@ -189,10 +190,10 @@ const Farmer: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <Highlight text="PARIS GREEN" x={110} y={80} size={96} at={t.at('Paris green')} seed={713} rot={-2} />
-          <Note text="killed the beetle" x={130} y={250} size={50} rot={-3} at={t.at('killed it') - 2} color="#ffffff" />
-          <Note text="the same poison:" x={120} y={420} size={50} rot={-3} at={t.at('So the same') - 2} color="#ffffff" />
-          <Note text="torn off the walls..." x={140} y={510} size={54} rot={-3} at={t.at('tearing off') - 2} color="#ffffff" />
-          <Note text="...dusted on the potatoes" x={160} y={610} size={54} rot={-3} at={t.at('dusting onto') - 2} color={pal.subject} />
+          <Note text="killed the beetle" x={130} y={225} size={50} rot={-3} at={t.at('killed it') - 2} color="#ffffff" />
+          <Note text="the same poison:" x={120} y={330} size={50} rot={-3} at={t.at('So the same') - 2} color="#ffffff" />
+          <Note text="torn off the walls..." x={140} y={420} size={54} rot={-3} at={t.at('tearing off') - 2} color="#ffffff" />
+          <Note text="...dusted on the potatoes" x={160} y={515} size={54} rot={-3} at={t.at('dusting onto') - 2} color={pal.subject} />
         </>
       )}
     </Sil>
@@ -230,7 +231,7 @@ const Body: React.FC = () => {
         stamps={[at('In Britain'), at('By the 1880s'), at('By about 1900'), at('in 1900'), at('It moved'), at('Paris green'), at('insecticides'), at('1876') + 2, at('1880s', 2) + 2]}
         booms={[at('never banned'), at('28')]}
         writes={[at('how did it end') - 2, at('not with a law') - 2, at('Doctors') - 2, at('newspapers') - 2, at('shoppers got scared') - 2, at('Other countries') - 2,
-          at('Sweden') - 1, at('Germany') - 1, at('But Britain') - 1, at('didnt have to') - 2, at('nobody wanted') - 2, at('so nobody made') - 2, at('In America') + 1,
+          at('Sweden') - 1, at('Germany') - 1, at('But Britain') - 1, at('didnt have to') - 2, at('nobody wanted') - 2, at('so nobody made') - 2, at('In America') + 1, at('Drapers') - 2,
           at('leave it alone') - 2, at('a long test') - 2, at('legal limit') - 2, at('in wallpaper and cloth') - 2, at('after his report') - 2, at('But the green') - 2,
           at('a beetle') - 2, at('eating its way') - 2, at('potato fields') - 2, at('killed it') - 2, at('So the same') - 2, at('tearing off') - 2, at('dusting onto') - 2,
           at('one of the first') - 2, at('in the country') - 2]}

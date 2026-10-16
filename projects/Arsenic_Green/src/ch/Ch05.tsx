@@ -66,15 +66,16 @@ const DocWindow: React.FC<{src: string; x: number; y: number; w: number; h: numb
 };
 
 /** A hand-drawn stroke in screen pixels (points smoothed), drawn on from `at` over `dur`. */
-const Stroke: React.FC<{pts: number[][]; at: number; dur?: number; color?: string; width?: number; dash?: string; closed?: boolean; seed?: string}> = ({
-  pts, at, dur = 10, color, width = 5, dash, closed, seed = 's',
+const Stroke: React.FC<{pts: number[][]; at: number; dur?: number; color?: string; width?: number; dash?: string; closed?: boolean; straight?: boolean; seed?: string}> = ({
+  pts, at, dur = 10, color, width = 5, dash, closed, straight, seed = 's',
 }) => {
   const g = useGFrame();
   const pal = usePal();
   if (g < at) return null;
   const p = interpolate(g, [at, at + dur], [0, 1], clamp);
   const jit = pts.map(([x, y], i) => [x + (random(`${seed}x${i}`) - 0.5) * 3, y + (random(`${seed}y${i}`) - 0.5) * 3]);
-  const d = smooth(closed ? [...jit, jit[0]] : jit);
+  const all = closed ? [...jit, [jit[0][0] + 4, jit[0][1] - 3]] : jit;
+  const d = straight ? all.map(([x, y], i) => `${i ? 'L' : 'M'}${x},${y}`).join(' ') : smooth(all);
   return (
     <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
       <path d={d} fill="none" stroke={color ?? pal.mark} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round"
@@ -181,8 +182,8 @@ const Diagram: React.FC<{t: TL}> = ({t}) => {
   // wall panel (screen px)
   const W = {x0: 150, x1: 430, y0: 200, y1: 880};
   const lattice: number[][][] = [];
-  for (let i = 0; i < 6; i++) lattice.push([[W.x0, W.y0 + i * 130], [W.x1, W.y0 + i * 130 + 120]]);
-  for (let i = 0; i < 6; i++) lattice.push([[W.x1, W.y0 + i * 130], [W.x0, W.y0 + i * 130 + 120]]);
+  for (let i = 0; i < 5; i++) lattice.push([[W.x0, W.y0 + i * 136], [W.x1, W.y0 + i * 136 + 136]]);
+  for (let i = 0; i < 5; i++) lattice.push([[W.x1, W.y0 + i * 136], [W.x0, W.y0 + i * 136 + 136]]);
   const wisp = (i: number) => {
     const bx = 455 + i * 55;
     return Array.from({length: 7}, (_, k) => [bx + Math.sin(k * 1.3 + i) * 24 + k * 22, 470 - k * 50]);
@@ -201,8 +202,8 @@ const Diagram: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Counter n={2} />
       {/* the wall */}
-      <Stroke pts={[[W.x0, W.y0], [W.x1, W.y0], [W.x1, W.y1], [W.x0, W.y1]]} closed at={a - 1} dur={8} width={6} seed="wall" />
-      {g >= a + 6 && lattice.map((l, i) => <Stroke key={i} pts={l} at={a + 6 + i} dur={4} width={2.5} color="rgba(47,224,196,0.45)" seed={`lat${i}`} />)}
+      <Stroke pts={[[W.x0, W.y0], [W.x1, W.y0], [W.x1, W.y1], [W.x0, W.y1]]} closed straight at={a - 1} dur={8} width={6} seed="wall" />
+      {g >= a + 6 && lattice.map((l, i) => <Stroke key={i} pts={l} straight at={a + 6 + i} dur={4} width={2.5} color="rgba(47,224,196,0.45)" seed={`lat${i}`} />)}
       <Stroke pts={[[90, 880], [1860, 880]]} at={a + 2} dur={8} width={4} color="rgba(237,231,220,0.55)" seed="floor" />
       <Note text="the wall" x={170} y={90} size={44} rot={-3} at={a + 2} color={WHITE} />
       {/* the gas theory: wisps rising, then struck out */}

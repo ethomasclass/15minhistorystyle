@@ -22,7 +22,6 @@ const MINE = 'img/ch05/mining_journal_1876-12-09_devon_great_consols_arsenic_let
 const WOOLLAMS = 'img/ch07/advert_wallpaper_free_from_arsenic_c1890_crop.jpg';
 const BOARD = 'img/ch01/kedzie_cover_green_label_1874.jpg';
 const LEAF = 'img/ch01/kedzie_specimen_n184.jpg';
-const LEAF2 = 'img/ch01/kedzie_specimen_n110.jpg';
 const WALTZ = 'img/ch03/arsenic_waltz_punch_1862.jpg';
 const NLM = 'Courtesy of the National Library of Medicine';
 
@@ -42,11 +41,26 @@ const Question: React.FC<{t: TL}> = ({t}) => {
 /** "It got there because it was beautiful, and cheap." A green wallpaper, in its own colour. */
 const Beautiful: React.FC<{t: TL}> = ({t}) => (
   <Arch src={IVY} tag="Sidewall, England, 1840s, Arthur Sanderson & Sons · Cooper Hewitt, Smithsonian Design Museum" a={t.at('It got there')} b={t.at('It stayed')} z={[1.04, 1.12]} look="card">
+    <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,9,7,0.55) 0%, rgba(10,9,7,0.3) 55%, transparent 80%)'}} />
     <Note text="it got there because it was..." x={130} y={180} size={56} rot={-3} at={t.at('It got there') - 2} color="#ffffff" />
     <Highlight text="BEAUTIFUL," x={140} y={360} size={130} at={t.at('beautiful')} seed={801} rot={-2} />
     <Highlight text="AND CHEAP." x={260} y={580} size={130} at={t.at('cheap')} seed={803} rot={-3} />
   </Arch>
 );
+
+/** A teal hand underline drawn on under a quoted line (screen coords). */
+const Underline: React.FC<{x0: number; y0: number; x1: number; y1: number; at: number}> = ({x0, y0, x1, y1, at}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  if (g < at) return null;
+  const p = interpolate(g, [at, at + 8], [0, 1], clamp);
+  const d = Array.from({length: 10}, (_, i) => `${i ? 'L' : 'M'}${x0 + ((x1 - x0) * i) / 9},${y0 + ((y1 - y0) * i) / 9 + (random(`ul${i}`) - 0.5) * 4 + 6}`).join(' ');
+  return (
+    <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
+      <path d={d} fill="none" stroke={pal.mark} strokeWidth={5} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />
+    </svg>
+  );
+};
 
 /** Why it stayed: messy proof, big money (Morris, the mine), and nobody had to prove it safe. */
 const Stayed: React.FC<{t: TL}> = ({t}) => {
@@ -55,18 +69,18 @@ const Stayed: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={t.at('It stayed')}>
       <Note text="it stayed because..." x={130} y={90} size={56} rot={-3} at={t.at('It stayed') - 2} color="#ffffff" />
-      <Note text="1. the proof was messy" x={150} y={250} size={60} rot={-3} at={t.at('the proof') - 2} />
-      <Note text="2. the money was big" x={150} y={420} size={60} rot={-3} at={money - 2} />
-      <Note text="3. nobody had to prove it was safe" x={150} y={590} size={60} rot={-3} at={t.at('nobody had to') - 2} color={pal.subject} />
+      <Note text="1. the proof was messy" x={150} y={230} size={58} rot={-3} at={t.at('the proof') - 2} />
+      <Note text="2. the money was big" x={150} y={380} size={58} rot={-3} at={money - 2} />
+      <Note text="3. nobody had to prove it was safe" x={150} y={530} size={56} rot={-3} at={t.at('nobody had to') - 2} color={pal.subject} />
       <PhotoCard src={MORRIS} x={1320} y={70} w={300} h={380} rot={3} at={money - 1} />
-      <CropCard src={MINE} size={sizeOf(MINE)} x={1080} y={560} w={720} h={200} fx={1990} fy={1300} scale={0.5} rot={-2} at={money + 4} bw="grayscale(1) sepia(0.3) contrast(1.15)">
+      <CropCard src={MINE} size={sizeOf(MINE)} x={1060} y={690} w={760} h={170} fx={1990} fy={1300} scale={0.5} rot={-2} at={money + 4} bw="grayscale(1) sepia(0.3) contrast(1.15)">
         {(S) => {
-          const [x0, y0] = S(1935, 1335);
-          const [x1] = S(2420, 1335);
-          return <Arrow x1={x0 - 60} y1={y0 + 120} x2={(x0 + x1) / 2 - 40} y2={y0 + 14} bow={-20} at={t.at('was big') + 2} />;
+          const [x0, y0] = S(1935, 1334);
+          const [x1, y1] = S(2420, 1334);
+          return <Underline x0={x0} y0={y0} x1={x1} y1={y1} at={t.at('was big') + 2} />;
         }}
       </CropCard>
-      <Note text="“the largest arsenic producers”" x={1060} y={830} size={42} rot={-2} at={t.at('was big') + 2} color="#ffffff" />
+      <Note text="“the largest arsenic producers”" x={1100} y={890} size={42} rot={-2} at={t.at('was big') + 2} color="#ffffff" />
       <Tag text="William Morris, Frederick Hollyer, c.1887 · Supplement to the Mining Journal, 9 Dec 1876" />
     </Desk>
   );
@@ -80,8 +94,8 @@ const Burden: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <Note text="the sick had to prove it" x={110} y={40} size={52} rot={-2} at={t.at('up to the sick') - 2} color="#ffffff" />
-          <Note text="a family in Limehouse couldn't." x={130} y={900} size={50} rot={-2} at={t.at('A family in Limehouse') - 2} color="#ffffff" />
-          <Note text="verdict: “natural”" x={880} y={900} size={56} rot={-3} at={t.at('called it natural') - 2} color={pal.subject} />
+          <Note text="a family in Limehouse couldn't." x={130} y={130} size={46} rot={-2} at={t.at('A family in Limehouse') - 2} color="#ffffff" />
+          <Note text="verdict: “natural”" x={700} y={880} size={60} rot={-3} at={t.at('called it natural') - 2} color={pal.subject} />
         </>
       )}
     </Sil>
@@ -136,7 +150,7 @@ const Sealed: React.FC<{t: TL}> = ({t}) => {
   const a = t.at("Kedzie's book");
   const sealed = t.at('sealed in plastic');
   const green = t.at('Still green');
-  const [x, y, w] = [930, 200, 520];
+  const [x, y, w] = [990, 200, 500];
   const h = (w * 7483) / 5569;
   const k = interpolate(g, [a, a + 5], [0, 1], {...clamp, easing: (v) => 1 - Math.pow(1 - v, 3) * (1 - 2.2 * v * (1 - v))});
   const col = interpolate(g, [green, green + 8], [0, 1], clamp);
@@ -175,7 +189,7 @@ const Witch: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <GreenParallax name="waltz_lady" src={WALTZ} size={sizeOf(WALTZ)} a={t.at('William Morris') - 1} b={t.at('Thanks') + 10}
-      tag="The Arsenic Waltz, Punch, 8 Feb 1862 · Wellcome Collection" fx={0.43} fy={0.3} cam={{z: [1.12, 1.55]}} depth={1.05} mask={MASKS.waltz_lady} vignette={0.65}>
+      tag="The Arsenic Waltz, Punch, 8 Feb 1862 · Wellcome Collection" fx={0.43} fy={0.27} cam={{z: [1.2, 1.9]}} depth={1.05} mask={MASKS.waltz_lady} vignette={0.65}>
       {() => (
         <>
           <Note text="William Morris called it" x={110} y={60} size={50} rot={-3} at={t.at('William Morris') - 2} color="#ffffff" />
@@ -202,11 +216,11 @@ const EndScreen: React.FC<{t: TL}> = ({t}) => {
   const leaf = interpolate(g, [a, a + 20], [0, 1], clamp);
   return (
     <Desk a={a} push={0.02}>
-      {/* the faint green leaf, kept in its own colour, low in the corner and clear of both slots */}
-      <Img src={staticFile(LEAF2)} style={{position: 'absolute', left: 1180, top: 790, width: 900, transform: 'rotate(-8deg)', opacity: 0.2 * leaf, filter: 'saturate(0.85) brightness(0.8)',
-        WebkitMaskImage: 'linear-gradient(180deg, #000 0%, transparent 32%)', maskImage: 'linear-gradient(180deg, #000 0%, transparent 32%)'}} />
-      <Img src={staticFile(LEAF2)} style={{position: 'absolute', left: -260, top: -620, width: 720, transform: 'rotate(14deg)', opacity: 0.14 * leaf, filter: 'saturate(0.85) brightness(0.8)',
-        WebkitMaskImage: 'linear-gradient(0deg, #000 0%, transparent 40%)', maskImage: 'linear-gradient(0deg, #000 0%, transparent 40%)'}} />
+      {/* a faint green Kedzie leaf, in its own colour, lying in the top-right corner, clear of both slots */}
+      <div style={{position: 'absolute', left: 1610, top: -150, width: 360, transform: 'rotate(12deg)', opacity: 0.34 * leaf, background: '#f4efe6', padding: 10,
+        boxShadow: '0 18px 34px rgba(0,0,0,0.6)'}}>
+        <Img src={staticFile(LEAF)} style={{width: '100%', display: 'block', filter: 'contrast(1.05)'}} />
+      </div>
       <Note text="thanks for watching" x={150} y={140} size={62} rot={-3} at={a - 2} color="#ffffff" />
       <Note text="next: Good Luck · the Ouija board" x={160} y={790} size={46} rot={-2} at={a + 30} color="#ffffff" />
       <Note text="subscribe" x={1300} y={770} size={66} rot={-3} at={t.at('subscribe') - 2} color={pal.subject} />
