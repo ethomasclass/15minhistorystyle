@@ -101,7 +101,7 @@ const Bans: React.FC<{t: TL}> = ({t}) => {
     <Desk a={t.at('Other countries')}>
       <Note text="other countries did ban it:" x={150} y={60} size={50} rot={-2} at={t.at('Other countries') - 2} color="#ffffff" />
       <BanCard t={t} x={150} y={180} w={900} />
-      <Stamp text="NO BAN" x={600} y={548} at={t.at('never banned')} size={130} color={pal.subject} rot={-5} />
+      <Stamp text="NO BAN" x={660} y={548} at={t.at('never banned')} size={130} color={pal.subject} rot={-5} />
       <Note text="(it didn't have to)" x={1150} y={190} size={54} rot={-3} at={t.at('didnt have to') - 2} color="#ffffff" />
       <Highlight text="BY c.1900" x={1150} y={350} size={100} at={t.at('By about 1900')} seed={705} rot={-2} />
       <Note text="nobody wanted it," x={1160} y={560} size={60} rot={-3} at={t.at('nobody wanted') - 2} />
@@ -146,7 +146,7 @@ const Mass: React.FC<{t: TL}> = ({t}) => {
       <Note text="Draper's idea:" x={130} y={740} size={46} rot={-3} at={t.at('Drapers') - 2} color="#ffffff" />
       <Note text="“leave it alone”" x={150} y={830} size={54} rot={-3} at={t.at('leave it alone') - 2} color={boxOf(pal)} />
       <Note text="...a long test" x={210} y={930} size={42} rot={-3} at={t.at('a long test') - 2} color="#ffffff" />
-      <Doc src={MASS} x={700} y={70} w={480} rot={1.5} at={t.at('Massachusetts') - 1} push={[t.at('Massachusetts'), t.at('But the green')]} zoom={1.12} fy={1600}
+      <Doc src={MASS} x={700} y={90} w={480} rot={1.5} at={t.at('Massachusetts') - 1} push={[t.at('Massachusetts'), t.at('But the green')]} zoom={1.06} fy={1700}
         marks={[{at: t.at('Massachusetts') + 8, box: [90, 1132, 1550, 1238], pad: 14, seed: 7},
           {at: t.at('legal limit'), to: t.at('cloth') + 8, swipe: [[90, 2010, 1556, 2062]]}]} />
       <Highlight text="1900" x={1260} y={110} size={120} at={t.at('in 1900')} seed={707} rot={-2} />

@@ -6,7 +6,7 @@ import {AbsoluteFill, Easing, Img, interpolate, random, spring, staticFile, useC
 import words from '../../public/audio/ch02_perfect_green.words.json';
 import {clamp} from '../lib/anim';
 import {FPS} from '../lib/theme';
-import {boxOf, Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
+import {boxOf, Highlight, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Desk, DropCard, LOOK, Sounds} from '../kit/bs';
 import {Doc, GREEN, Swatch, sizeOf} from '../kit/dk';
@@ -20,6 +20,7 @@ const BLOSSOMS = 'img/ch02/green_wallpaper_blossoms_usa_1840s_ch.jpg';
 const DRESS = 'img/ch03/met_green_silk_dress_1868.jpg';
 const WREATH = 'img/ch03/met_wedding_headdress_green_leaves_1863.jpg';
 const SCHEELE = 'img/ch02/scheele_scheffner_engraving.png';
+const BAB = 'img/ch02/bab_ballads_only_a_dancing_girl_1869_p2_arsenic_green.jpg';
 
 /** A colour CropCard that creeps in from its pop (a slow punch-in). */
 const Creep: React.FC<{src: string; x: number; y: number; w: number; h: number; fx: number; fy: number; scale: number; rot: number; at: number}> = ({src, x, y, w, h, fx, fy, scale, rot, at}) => {
@@ -87,14 +88,14 @@ const Recipe: React.FC<{t: TL}> = ({t}) => {
           {at: t.at('knew exactly'), box: [100, 395, 1440, 560], seed: 7}]} />
       <Note text="copper" x={790} y={120} size={64} rot={-3} at={t.at('copper') - 3} />
       <Note text="+ arsenic" x={1050} y={120} size={64} rot={-3} at={t.at('arsenic') - 3} color={pal.subject} />
-      <Note text="=" x={1360} y={115} size={64} rot={0} at={t.at('bright') - 3} />
-      <Patch x={1440} y={95} w={220} h={150} at={t.at('clean green')} />
+      <Note text="=" x={1405} y={115} size={64} rot={0} at={t.at('bright') - 3} />
+      <Patch x={1490} y={95} w={220} h={150} at={t.at('clean green')} />
       <Note text="brighter than any plant dye" x={800} y={320} size={52} rot={-3} at={t.at('Brighter') - 3} color="#ffffff" />
       <Note text="...and cheap." x={830} y={420} size={60} rot={-3} at={t.at('cheap') - 3} color={pal.subject} />
       <Highlight text="SCHEELE'S GREEN" x={790} y={570} size={88} at={t.at("Scheele's Green")} seed={45} rot={-2} />
       <Definition term="Scheele's green" def="copper + arsenic: the first bright, cheap green paint" at={t.at("Scheele's Green") + 9} x={800} y={740} w={1020} />
       <Note text="and he knew exactly what was in it" x={800} y={900} size={46} rot={-3} at={t.at('knew exactly') - 3} color="#ffffff" />
-      <Tag text="Scheele, 'Method of preparing a new green colour. 1778', Chemical Essays (London, 1786), p. 253 · Wellcome Collection" />
+      <Tag text="Scheele, 'A new green colour, 1778', Chemical Essays, 1786, p. 253 · Wellcome Collection" x={660} />
     </Desk>
   );
 };
@@ -124,13 +125,19 @@ const Paris: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Highlight text="1814" x={110} y={90} size={110} at={t.at('1814')} seed={47} rot={-2} />
-      <Note text="German chemists: even brighter" x={130} y={260} size={56} rot={-3} at={t.at('German') - 3} color="#ffffff" />
+      <Note text="German chemists: even brighter" x={130} y={260} size={48} rot={-3} at={t.at('German') - 3} color="#ffffff" />
       <Highlight text="PARIS GREEN" x={110} y={390} size={96} at={t.at('Paris green')} seed={48} rot={-2} />
       <Definition term="Paris green" def="copper, arsenic and vinegar: Scheele's green, only brighter" at={t.at('Paris green') + 9} x={120} y={560} w={900} />
       <Note text="(for us: the same thing)" x={140} y={710} size={50} rot={-3} at={t.at('same thing') - 3} />
       <Highlight text="ARSENIC GREEN" x={110} y={830} size={96} at={t.at('arsenic green')} seed={49} rot={-2} />
-      <Doc src="img/ch02/bab_ballads_only_a_dancing_girl_1869_p2_arsenic_green.jpg" x={1190} y={90} w={560} at={poet} rot={2} push={[poet, t.at('So why')]} fx={970} fy={1030} zoom={1.3}
+      <Doc src={BAB} x={1190} y={90} w={560} at={poet} rot={2} push={[poet, t.at('So why')]} fx={970} fy={1030} zoom={1.3}
         marks={[{at: t.at('arsenic green') - 1, box: [815, 1008, 1125, 1052], tint: true, seed: 3}]} />
+      <CropCard src={BAB} size={sizeOf(BAB)} x={1060} y={700} w={740} h={140} fx={980} fy={1030} scale={1.4} rot={-2} at={t.at('arsenic green') - 2} bw={LOOK.doc}>
+        {(S) => {
+          const [cx, cy] = S(970, 1030);
+          return <Loop cx={cx} cy={cy} rx={240} ry={52} at={t.at('arsenic green') + 3} seed={9} tilt={-2} />;
+        }}
+      </CropCard>
       <Tag text="W. S. Gilbert, 'Only a Dancing Girl', The Bab Ballads, 1869, p. 25 · Internet Archive" />
     </Desk>
   );
@@ -162,8 +169,8 @@ const Timing: React.FC<{t: TL}> = ({t}) => {
       {half('img/ch02/dore_over_london_by_rail_1872.jpg', 0, '45% 30%', 'grayscale(1) contrast(1.3) brightness(0.9)')}
       {f >= t.at('Green was') - 1 && half('img/ch02/wyld_manchester_from_kersal_moor_1852.jpg', 962, '30% 60%', 'grayscale(1) contrast(1.25) brightness(0.95)')}
       <div style={{position: 'absolute', left: 958, top: 0, width: 4, height: 1080, background: '#f4efe6'}} />
-      <div style={{position: 'absolute', left: 80, top: 60, fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: pal.mark, textShadow: '0 2px 8px #000'}}>THE CITY</div>
-      {f >= t.at('Green was') - 1 && <div style={{position: 'absolute', left: 1040, top: 60, fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: pal.subject, textShadow: '0 2px 8px #000'}}>THE COUNTRY</div>}
+      <div style={{position: 'absolute', left: 80, top: 60, fontFamily: JF.mono, fontSize: 34, letterSpacing: 3, color: pal.mark, background: 'rgba(10,10,10,0.75)', padding: '6px 14px'}}>THE CITY</div>
+      {f >= t.at('Green was') - 1 && <div style={{position: 'absolute', left: 1040, top: 60, fontFamily: JF.mono, fontSize: 34, letterSpacing: 3, color: pal.subject, background: 'rgba(10,10,10,0.75)', padding: '6px 14px'}}>THE COUNTRY</div>}
       <Note text="smoke and soot" x={110} y={860} size={64} rot={-3} at={t.at('smoke') - 3} color="#ffffff" />
       <Note text="green = the countryside" x={1040} y={760} size={54} rot={-3} at={t.at('countryside') - 3} color="#ffffff" />
       <Note text="everything the city wasn't" x={1060} y={870} size={54} rot={-3} at={t.at('city wasnt') - 3} />
@@ -212,7 +219,7 @@ const RollsChart: React.FC<{t: TL}> = ({t}) => {
           textShadow: '0 3px 12px rgba(0,0,0,0.8)'}}>32 million</div>
       )}
       <Note text="rolls of wallpaper a year, Britain" x={990} y={110} size={44} rot={-2} at={t.at('rolls') - 3} color="#ffffff" />
-      <Note text="(about 27 times as many)" x={1250} y={980} size={40} rot={-2} at={rs + 16} />
+      <Note text="about 27×" x={1110} y={620} size={56} rot={-3} at={rs + 16} />
     </>
   );
 };

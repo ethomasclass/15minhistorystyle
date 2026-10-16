@@ -194,7 +194,7 @@ const Witch: React.FC<{t: TL}> = ({t}) => {
         <>
           <Note text="William Morris called it" x={110} y={60} size={50} rot={-3} at={t.at('William Morris') - 2} color="#ffffff" />
           <Note text="“witch fever.”" x={150} y={160} size={70} rot={-3} at={t.at('witch fever') - 2} color={boxOf(pal)} />
-          <Note text="but this time..." x={1340} y={110} size={56} rot={-3} at={t.at('But this time') - 2} color="#ffffff" />
+          <Note text="but this time..." x={190} y={290} size={56} rot={-3} at={t.at('But this time') - 2} color="#ffffff" />
           <Highlight text="THE WITCH WAS REAL." x={120} y={860} size={100} at={t.at('the witch was real')} seed={811} rot={-2} />
         </>
       )}
