@@ -257,14 +257,14 @@ const Appomattox: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <Parallax name="grant_lee" src="img/ch10/appomattox.jpg" size={[1590, 2100]} a={t.at('Remember') - 1} b={t.at('Grant also')} fx={0.5} fy={0.42}
-      crop={[60, 380, 1590, 1980]} cam={{z: [1.0, 1.1], y: [-0.03, 0.01]}} depth={1.05} vignette={0.45} mask={MASKS.grant_lee} tint={null}
+    <Parallax name="grant_lee" src="img/ch10/appomattox.jpg" size={[1590, 2100]} a={t.at('Remember') - 1} b={t.at('Grant also')} fx={0.5} fy={0.275}
+      crop={[60, 380, 1590, 1980]} cam={{z: [1.0, 1.05], y: [0, 0]}} depth={1.05} vignette={0.45} mask={MASKS.grant_lee} tint={null}
       traceAt={t.at('Appomattox,')} filter="grayscale(1) contrast(1.15)" tag="Currier & Ives, Surrender of Genl. Lee at Appomattox C.H., April 9th 1865 · Library of Congress">
       {() => (
         <>
-          <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.75) 100%)'}} />
-          <Note text="remember those young officers?" x={100} y={60} size={52} rot={-2} at={t.at('Remember') - 2} color="#ffffff" />
-          {g >= t.at('April') && <Highlight text="APRIL 1865 · APPOMATTOX" x={1000} y={60} size={64} at={t.at('April')} seed={231} rot={-2} />}
+          <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 14%, rgba(0,0,0,0) 66%, rgba(0,0,0,0.8) 100%)'}} />
+          <Note text="remember those young officers?" x={110} y={870} size={56} rot={-3} at={t.at('Remember') - 2} color="#ffffff" out={t.at('talk about') - 2} />
+          {g >= t.at('April') && <Highlight text="APRIL 1865 · APPOMATTOX" x={1080} y={760} size={64} at={t.at('April')} seed={231} rot={-2} />}
           <Note text="they talk about Mexico" x={110} y={850} size={56} rot={-3} at={t.at('talk about') - 2} color={pal.subject} out={t.at('Grant wrote')} />
           <Note text="…back when they were on the same side" x={140} y={950} size={50} rot={-3} at={t.at('same side.') - 6} color="#ffffff" out={t.at('Grant wrote')} />
           <Note text="so pleasant, he almost forgot why they were there" x={110} y={900} size={52} rot={-2} at={t.at('pleasant,') - 2} color="#ffffff" />
@@ -307,7 +307,9 @@ const Thirteen: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   const a = t.at('Emerson had') - 1;
-  const split = t.at('It took') - 2;
+  // the states split on "poison the country"; the war is named on "13 years" (the end screen keeps the labels)
+  const split = t.at('poison the country') - 4;
+  const war = t.at('13') - 2;
   const keys: Cam3[] = [
     {f: a, x: 3600, y: 1500, z: 0.3, tilt: 38, rot: 0},
     {f: t.at('Thanks') - 1, x: 3700, y: 1450, z: 0.32, tilt: 40, rot: 0},
@@ -317,18 +319,31 @@ const Thirteen: React.FC<{t: TL}> = ({t}) => {
       <Map3D data={D} keys={keys} states={interpolate(g, [a, a + 10], [0, 0.5], clamp)}>
         {(api) => (
           <>
-            <Slab api={api} region="cession" at={a} h={30} layers={6} color="#FF6F61" fall={split + 30} />
+            <Slab api={api} region="cession" at={a} h={30} layers={6} color="#FF6F61" fall={split + 20} />
             <Glow api={api} d={D.regions.cession} at={a + 6} color="#FF9F1C" />
             <StateTiles api={api} names={UNION_FREE_1861} at={split + 10} stagger={1} h={26} color={FREE_C} />
             <StateTiles api={api} names={BORDER_1861} at={split + 16} stagger={1} h={20} color={BORDER_C} />
             <StateTiles api={api} names={CONFEDERACY_1861} at={split + 22} stagger={1} h={48} color={SLAVE_C} />
+            <Stand api={api} at={[4800, 560]} z={60} show={split + 22}><RegionName text="UNION" size={86} /></Stand>
+            <Stand api={api} at={[4150, 1880]} z={60} show={split + 28}><RegionName text="CONFEDERACY" size={86} /></Stand>
+            <Stand api={api} at={[4050, 1020]} z={30} show={split + 32}><Hand text="border states" size={44} color="#ffffff" bg /></Stand>
+            <Stand api={api} at={[5420, 1330]} z={20} show={war}><Hand text="← Fort Sumter, April 1861" size={40} color="#ffffff" bg /></Stand>
           </>
         )}
       </Map3D>
       <AbsoluteFill>
         <Note text="Emerson's warning: the poison" x={110} y={80} size={54} rot={-2} at={t.at('Emerson had') - 2} color="#ffffff" />
-        {g >= split && <Highlight text="1848 → 1861" x={110} y={190} size={110} at={split} seed={233} rot={-2} />}
+        {g >= t.at('It took') - 2 && <Highlight text="1848 → 1861" x={110} y={190} size={110} at={t.at('It took') - 2} seed={233} rot={-2} />}
         <Note text="about 13 years" x={130} y={380} size={66} rot={-3} at={t.at('13') - 2} color={pal.subject} />
+        {g >= war && <Highlight text="THE CIVIL WAR" x={110} y={840} size={120} at={war} seed={235} rot={-2} />}
+        {g >= war + 8 && (
+          <div style={{position: 'absolute', left: 120, top: 560, display: 'flex', flexDirection: 'column', gap: 12, fontFamily: JF.sans, fontWeight: 700, fontSize: 30, color: '#f4efe6',
+            opacity: interpolate(g, [war + 8, war + 16], [0, 1], clamp), background: 'rgba(12,12,12,0.78)', padding: '18px 26px', borderRadius: 6}}>
+            {[[FREE_C, 'Union'], [BORDER_C, 'Union slave states (border)'], [SLAVE_C, 'Confederacy']].map(([c, l]) => (
+              <span key={l}><span style={{display: 'inline-block', width: 26, height: 26, background: c, verticalAlign: -5, marginRight: 14, border: '2px solid #111'}} />{l}</span>
+            ))}
+          </div>
+        )}
       </AbsoluteFill>
     </>
   );
