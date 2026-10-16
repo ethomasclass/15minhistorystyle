@@ -7,6 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/Intro';
 import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB, ThumbC, ThumbD} from './Thumbnail';
+import {VSHORTS} from './vshorts';
 
 export const Root: React.FC = () => (
   <>
@@ -17,6 +18,7 @@ export const Root: React.FC = () => (
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
     <Composition id="Thumb-C" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbC /></JFonts>} />
     <Composition id="Thumb-D" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbD /></JFonts>} />
+    {VSHORTS.map((v) => <Composition key={v.id} id={v.id} width={1080} height={1920} fps={FPS} durationInFrames={v.frames} component={() => <JFonts><v.C /></JFonts>} />)}
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
