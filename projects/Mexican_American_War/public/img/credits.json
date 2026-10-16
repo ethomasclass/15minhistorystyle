@@ -259,5 +259,14 @@
     "licence": "public domain (painted 1838)",
     "page": "https://www.worldhistory.org/image/20988/juan-seguin/",
     "source": "Texas State Preservation Board, Capitol Historical Artifact Collection (via World History Encyclopedia / Wikimedia Commons)"
+  },
+  "ch06/currier_chapultepec_1847.jpg": {
+    "title": "Storming of the Fortress of Chapultepec, at the City of Mexico Sept. 13th 1847",
+    "artist": "N. Currier (Firm)",
+    "date": "c1847",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001706295/",
+    "source": "loc:2001706295",
+    "note": "cropped to the picture; used for the thumbnail"
   }
 }

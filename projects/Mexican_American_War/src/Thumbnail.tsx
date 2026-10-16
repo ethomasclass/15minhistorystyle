@@ -124,3 +124,31 @@ export const ThumbC: React.FC = () => {
   );
 };
 
+
+/** D · the war itself: Currier's 1847 Storming of Chapultepec, the U.S. charge washed coral and the Mexican defenders teal
+ *  (the map's colours), the question across the bottom. */
+export const ThumbD: React.FC = () => {
+  const size: [number, number] = [2200, 1355];
+  const s = Math.max(1920 / size[0], 1080 / size[1]) * 1.04;
+  const place: Place = {left: (1920 - size[0] * s) / 2, top: -60, scale: s};
+  const wash = (blend: React.CSSProperties['mixBlendMode'], o: number) => (
+    <AbsoluteFill style={{mixBlendMode: blend, opacity: o,
+      background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL} 52%, ${MAP3D.mexico} 70%, ${MAP3D.mexico} 100%)`}} />
+  );
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <AbsoluteFill style={{isolation: 'isolate'}}>
+          <Picture src="img/ch06/currier_chapultepec_1847.jpg" place={place} size={size} bw="grayscale(1) contrast(1.35) brightness(0.92)" />
+          {wash('color', 0.75)}
+          {wash('multiply', 0.18)}
+        </AbsoluteFill>
+        <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,7,5,0.92) 0%, rgba(8,7,5,0.65) 28%, rgba(8,7,5,0) 48%)'}} />
+        <Highlight text="MEXICAN-AMERICAN WAR:" x={90} y={700} size={92} at={0} seed={251} rot={-2} />
+        <Highlight text="WHO STARTED IT?" x={80} y={830} size={170} at={0} seed={253} rot={-2} />
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
