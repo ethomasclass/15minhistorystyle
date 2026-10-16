@@ -11,15 +11,18 @@ Files: `renders/shorts/When_Europe_Ate_Mummies_Short1.mp4` … `Short5.mp4` (108
 ---
 
 ## Fri Oct 17, about 4 PM ET · Short 1 (Mummy, by the kilo)
-**Title:** `Drug Catalogs Sold Mummy by the Kilo (Until 1924)`
+**Title:** `Pharmacies Sold Mummies by the Kilo 😳`  (alternates: `This Drug Catalog Sold Real Mummies (1903)` · `You Could Buy Mummy by the Kilo Until 1924`)
+**Cover:** `renders/shorts/When_Europe_Ate_Mummies_Short1_cover.png` (also frame 0 of the Short)
 **Description:**
 ```
-In 1903, a German drug catalog sold "genuine Egyptian mummy" by the kilo. While supplies last. It was still listed in 1924.
-Full story on the channel: When Europe Ate Mummies.
+In 1903, a German drug company sold "genuine Egyptian mummy" by the kilo, while supplies last. It was still in the catalog in 1924. 😳
+
+Europeans ate mummies as medicine for centuries. The full story (fakes, recipes and unwrapping parties): When Europe Ate Mummies, on the channel.
+
 🛍️ Stickers: https://www.teepublic.com/user/minutehistory
-#History #WeirdHistory #Mummies
+#History #Mummies #WeirdHistory
 ```
-**Pinned comment:** `Would you have bought it? 1903 price: 17.50 marks a kilo. 👇`
+**Pinned comment:** `Would you have bought it? 17.50 marks a kilo... while supplies last. 👇`
 
 ## Sun Oct 19 · Short 3 (The princess was a man)
 **Title:** `The Princess Was a Man`
