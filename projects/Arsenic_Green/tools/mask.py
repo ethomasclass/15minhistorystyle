@@ -23,6 +23,24 @@ JOBS = {
     # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model)
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
+    # Dressed to Kill: silhouette paintings (1376x768) — one figure each, for parallax layers
+    "g_library": ("img/gen/ch01_library_1874.jpg", (180, 150, 560, 768), "isnet-general-use"),
+    "g_ballroom": ("img/gen/ch03_ballroom_1862.jpg", (600, 200, 1000, 768), "isnet-general-use"),
+    "g_matilda": ("img/gen/ch04_matilda_workbench.jpg", (180, 40, 700, 768), "isnet-general-use"),
+    "g_workshop": ("img/gen/ch04_flower_workshop.jpg", (40, 150, 460, 768), "isnet-general-use"),
+    "g_street": ("img/gen/ch04_turner_street_1862.jpg", (650, 420, 860, 768), "isnet-general-use"),
+    "g_doctor": ("img/gen/ch04_limehouse_room.jpg", (1000, 160, 1260, 768), "isnet-general-use"),
+    "g_chemist": ("img/gen/ch06_chemist_testing.jpg", (800, 60, 1300, 768), "isnet-general-use"),
+    "g_emma": ("img/gen/ch06_emma_bedroom.jpg", (620, 170, 1130, 768), "isnet-general-use"),
+    "g_farmer": ("img/gen/ch07_potato_field.jpg", (900, 80, 1180, 768), "isnet-general-use"),
+    # Dressed to Kill: archival subjects
+    "waltz_lady": ("img/ch03/arsenic_waltz_punch_1862.jpg", (40, 400, 1500, 2150), "isnet-general-use"),
+    "waltz_man": ("img/ch03/arsenic_waltz_punch_1862.jpg", (1450, 200, 2850, 2050), "isnet-general-use"),
+    "morris": ("img/ch05/william_morris_hollyer_c1887.jpg", None, "isnet-general-use"),
+    "draper": ("img/ch06/draper_portrait_burrage_1923.jpg", None, "isnet-general-use"),
+    "kedzie": ("img/ch06/kedzie_portrait_beal_1915.jpg", (0, 0, 850, 1230), "isnet-general-use"),
+    "dress": ("img/ch03/met_green_silk_dress_1868.jpg", None, "isnet-general-use"),
+    "scheele": ("img/ch02/scheele_scheffner_engraving.png", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }
