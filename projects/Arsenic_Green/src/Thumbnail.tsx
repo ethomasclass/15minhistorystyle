@@ -1,21 +1,17 @@
-// YouTube thumbnail concepts, drawn at 1920x1080 with the video's own kit and exported at 1280x720
-// (tools/thumbs.mjs renders frame 140 so every write-on has finished).
-//   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
-//   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+// YouTube thumbnail concepts for Dressed to Kill, drawn at 1920x1080 with the video's own kit and exported at 1280x720
+// (tools/thumbs.mjs renders frame 140 so every write-on has finished). Logo top-left; bottom-right kept clear (duration badge).
+//   A · the Arsenic Waltz: both skulls in frame, the lady's gown arsenic green, DRESSED TO KILL.
+//   B · the ballroom silhouette, tight on the green gown: DEADLY GREEN.
+//   C · Kedzie's book: the poison-green cover on the desk with green leaves fanned: DO NOT TOUCH.
 import React from 'react';
-import {AbsoluteFill, staticFile} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
-import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
+import {Finish, Highlight, Note, PALETTES, PaletteCtx} from './kit/Kit';
 import {DarkPaper} from './kit/common';
-import {MASKS} from './masks';
-import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
+import {Sil} from './kit/dk';
+import {WaltzShot} from './kit/waltz';
 
 export const THUMB_FRAMES = 150;
-const TEAL = '#2FE0C4';
-const CORAL = '#FF6F61';
-const GOLD = '#FF9F1C';
-const MASK = MASKS.sully; // the mask that matches THUMB_PORTRAIT.src
 
 /** Channel logo, top-left (YouTube covers the bottom-right with the running time). */
 const Logo: React.FC = () => {
@@ -29,73 +25,48 @@ const Logo: React.FC = () => {
   );
 };
 
-const cut = (alpha: string): React.CSSProperties =>
-  ({WebkitMaskImage: `url(${staticFile(alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(alpha)})`, maskSize: '100% 100%'}) as React.CSSProperties;
+const Frame: React.FC<{children: React.ReactNode}> = ({children}) => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill style={{background: '#000'}}>
+      {children}
+      <Finish vignette={0.35} />
+      <Logo />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
 
-/**
- * The subject tint on one side of the line x = `mid`. The clip sits on each blended layer itself: a clip-path on a
- * wrapper would isolate the blend and the tint would come out flat.
- */
-const SideTint: React.FC<{place: Place; color: string; mid: number; side: 'left' | 'right'}> = ({place, color, mid, side}) => {
-  const w = P.size[0] * place.scale;
-  const m0 = mid - place.left;
-  const m: React.CSSProperties = {
-    position: 'absolute', left: place.left, top: place.top, width: w, height: P.size[1] * place.scale, ...cut(MASK.alpha),
-    clipPath: side === 'left' ? `inset(0 ${w - m0}px 0 0)` : `inset(0 0 0 ${m0}px)`,
-  };
-  return (
-    <>
-      <div style={{...m, background: color, mixBlendMode: 'color'}} />
-      <div style={{...m, background: color, mixBlendMode: 'multiply', opacity: 0.3}} />
-      <div style={{...m, background: color, mixBlendMode: 'screen', opacity: 0.28}} />
-    </>
-  );
-};
+/** Hide the source tag at thumbnail size. */
+const NoTag: React.FC = () => <style>{'div[style*="IBM Plex Mono"][style*="uppercase"]{display:none}'}</style>;
 
-export const ThumbA: React.FC = () => {
-  const place: Place = {left: 960 - P.faceX * P.scale, top: P.top, scale: P.scale};
-  const S = (x: number, y: number) => [place.left + x * place.scale, place.top + y * place.scale];
-  const [x0, y] = S(P.crownLeft, P.crownY);
-  const [x1] = S(P.crownRight, P.crownY);
-  return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)'}} />
-        <div style={{position: 'absolute', left: place.left, top: place.top, width: P.size[0] * place.scale, height: P.size[1] * place.scale, ...cut(MASK.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
-          <Picture src={P.src} place={{left: 0, top: 0, scale: place.scale}} size={P.size} bw="grayscale(1) contrast(1.25) brightness(0.9)" />
-        </div>
-        <SideTint place={place} color={TEAL} mid={960} side="left" />
-        <SideTint place={place} color={CORAL} mid={960} side="right" />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
-        <div style={{position: 'absolute', left: 956, top: 0, width: 8, height: 1080, background: '#f4efe6'}} />
-        <AbsoluteFill style={{filter: 'drop-shadow(0 0 3px #0d0c09) drop-shadow(0 6px 10px rgba(0,0,0,0.8))'}}>
-          <DrawnCrown x0={x0} x1={x1} y={y} h={125} at={0} dur={1} width={15} color={GOLD} />
-        </AbsoluteFill>
-        <Highlight text={THUMB_WORDS.left} x={170} y={855} size={150} at={0} seed={71} rot={-3} />
-        <Highlight text={THUMB_WORDS.right} x={1010} y={855} size={150} at={0} seed={73} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
-  );
-};
+export const ThumbA: React.FC = () => (
+  <Frame>
+    <WaltzShot fx={1487} fy={1000} z0={1.0} z1={1.0} a={0} b={1} green={0} shade>{() => null}</WaltzShot>
+    <NoTag />
+    <Highlight text="DRESSED" x={90} y={700} size={170} at={0} seed={901} rot={-3} />
+    <Highlight text="TO KILL" x={160} y={880} size={150} at={0} seed={903} rot={-2} />
+  </Frame>
+);
 
-export const ThumbB: React.FC = () => {
-  const place: Place = {left: 1080, top: 60, scale: 0.42};
-  return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <DarkPaper />
-        <Picture src={P.src} place={place} size={P.size} bw="grayscale(1) contrast(1.3)" />
-        <Tint mask={MASK.alpha} place={place} size={P.size} />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={8} />
-        <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,7,5,0.95) 0%, rgba(8,7,5,0.85) 45%, rgba(8,7,5,0) 62%)'}} />
-        <Note text="the People's President..." x={90} y={330} size={70} rot={-3} color={TEAL} />
-        <Highlight text={TITLE.split(' ')[0]} x={80} y={440} size={230} at={0} seed={75} rot={-3} />
-        <Highlight text={`${TITLE.split(' ').slice(1).join(' ')}?`} x={120} y={700} size={170} at={0} seed={77} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
-  );
-};
+export const ThumbB: React.FC = () => (
+  <Frame>
+    <Sil name="g_ballroom" file="ch03_ballroom_1862.jpg" label="" a={0} b={1} fx={0.56} fy={0.62} z={[1.75, 1.75]} effects={[]} />
+    <NoTag />
+    <Highlight text="DEADLY" x={60} y={300} size={150} at={0} seed={911} rot={-3} />
+    <Highlight text="GREEN" x={90} y={480} size={150} at={0} seed={913} rot={-2} />
+  </Frame>
+);
+
+export const ThumbC: React.FC = () => (
+  <Frame>
+    <DarkPaper />
+    {['n110', 'n126', 'n048'].map((n, i) => (
+      <Img key={n} src={staticFile(`img/ch01/kedzie_specimen_${n}.jpg`)} style={{position: 'absolute', left: 1180 + i * 150, top: 170 + i * 60, width: 420, height: 560, objectFit: 'cover',
+        transform: `rotate(${[8, -4, 12][i]}deg)`, boxShadow: '0 18px 34px rgba(0,0,0,0.6)', border: '14px solid #f4efe6'}} />
+    ))}
+    <Img src={staticFile('img/ch01/kedzie_cover_green_label_crop_1874.jpg')} style={{position: 'absolute', left: 700, top: 120, width: 720, height: 720, objectFit: 'cover',
+      transform: 'rotate(-5deg)', boxShadow: '0 24px 44px rgba(0,0,0,0.7)', border: '18px solid #f4efe6'}} />
+    <Highlight text="DO NOT" x={80} y={560} size={170} at={0} seed={921} rot={-3} />
+    <Highlight text="TOUCH" x={110} y={760} size={190} at={0} seed={923} rot={-2} />
+    <Note text="a library book, 1874" x={110} y={960} size={60} rot={-3} at={0} color="#ffffff" />
+  </Frame>
+);
