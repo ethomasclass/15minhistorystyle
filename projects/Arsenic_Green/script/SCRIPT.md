@@ -1,8 +1,8 @@
 # Dressed to Kill: How Arsenic Green Took Over the 1800s
 
-**15 Minute History** · narration script · 1,654 words · about 9:55 finished (draft 2)
+**15 Minute History** · narration script · 1,664 words · about 9:55 finished (draft 3)
 
-**Driving question (cold open, answered in ch08):** How did a poison end up on the walls, on the dresses, and on the candy? And why did it take so long to get it off?
+**Driving question (cold open, answered in ch08):** If everybody knew arsenic was poison, how did it end up on the walls, on the dresses, and on the candy? And why did it take so long to get it off?
 
 **Answer:** It got there because it was beautiful and cheap. It stayed because the proof was messy, the money was big, and nobody had to prove it was safe: the sick had to prove it wasn't. In Britain shoppers, not lawmakers, finally drove it out; in America a state report doubted a ban could work "under a government organized like our own," and the first legal limit on wallpaper came 28 years later.
 
@@ -13,33 +13,32 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates; re-time after vo
 ---
 
 
-## 0:00 | The Library Book
 
-`ch01_cold_open.txt` · 169 words
+## 0:00 | Dressed in Poison
 
-November 1874. Lansing, Michigan.
+`ch01_cold_open.txt` · 163 words
 
-This book goes out in the mail to 100 public libraries. Inside, just page after page of wallpaper. 86 samples, all of it on sale in ordinary stores.
+The most fashionable color of the 1860s was made with arsenic. And people knew it.
 
-Now look at the letter in the front. Because of "the poisonous nature of the paper of which this book is made," it says, maybe don't let children handle it.
+In 1862, a London magazine drew this. A gentleman asks a lady to dance. Now look closer. They're both skeletons. The joke was her green dress.
 
-Every page has *arsenic* in it.
+Twelve years later, the state of Michigan mailed this book to 100 public libraries. Every page is real wallpaper, and every page has arsenic in it.
 
-And the very first sample came from the house where a girl, about ten years old, had died that year.
+The letter in the front asks librarians not to let children handle it. And the very first sample came from the house where a girl, about ten years old, had died that year.
 
-Only four or five copies survive. Librarians handle them with gloves. When one was scanned in 2018, the person scanning it wore a protective suit.
+So here's the question I want to answer today: If everybody knew arsenic was poison, how did it end up on the walls, on the dresses, and on the candy? And why did it take so long to get it off?
 
-By 1874, everybody knew arsenic was poison. So here's the question I want to answer today: How did a poison end up on the walls, on the dresses, and on the candy? And why did it take so long to get it off?
-
-It starts with a Swedish chemist, a beautiful new color, and a warning.
+We'll come back to that girl. And to the most famous designer of his day, who called the whole thing witch fever.
 
 ---
 
-## 1:10 | The Perfect Green
+## 1:08 | The Perfect Green
 
-`ch02_perfect_green.txt` · 185 words
+`ch02_perfect_green.txt` · 209 words
 
-1775. Sweden. A chemist named Carl Wilhelm Scheele mixes copper with arsenic and gets something remarkable: a bright, clean green. Brighter than any plant dye. And cheap.
+By the 1860s, if you wanted to be in fashion, you wanted green. On your walls. On your dress. In your hair.
+
+And it goes back to a chemist in Sweden. In 1775, Carl Wilhelm Scheele mixes copper with arsenic and gets something remarkable: a bright, clean green. Brighter than any plant dye. And cheap.
 
 It's called {Scheele's Green}. And Scheele knew exactly what was in it. In a letter to a friend, he said he'd told people it had arsenic in it, in case someone hurt themselves making it.
 
@@ -51,15 +50,15 @@ So why did everyone want it? Timing. Factories were filling cities with smoke an
 
 In 1834, Britain made about 1.2 million rolls of wallpaper. Forty years later? About 32 million.
 
-So arsenic green went everywhere. On parlor walls. On ball gowns. In the fake leaves women pinned in their hair. On candy wrappers, children's toys, even book covers.
+So arsenic green went everywhere. Parlor walls. Ball gowns. The fake leaves women pinned in their hair. Candy wrappers, children's toys, even book covers.
 
 All of it, arsenic.
 
 ---
 
-## 2:18 | Dressed to Kill
+## 2:25 | Dressed to Kill
 
-`ch03_dressed_to_kill.txt` · 201 words
+`ch03_dressed_to_kill.txt` · 193 words
 
 The most dangerous place to wear it? Possibly a dance.
 
@@ -69,9 +68,7 @@ In 1862, a chemist tested one of those hair wreaths. It held enough arsenic, he 
 
 The British Medical Journal did the math on a whole dress. A lady at a ball, it wrote, "carries in her skirts poison enough to slay the whole of the admirers she may meet with in half a dozen ball-rooms."
 
-Which is one way to keep admirers at a distance.
-
-The same month, the comic magazine *Punch* ran this. "The Arsenic Waltz." A gentleman bows to a lady and asks her to dance. Now look closer. They're both skeletons.
+Which is one way to keep admirers at a distance. And it's why the comic magazine *Punch* drew those two skeletons that same month. It called the cartoon "The Arsenic Waltz."
 
 But here's the twist. Most of the women wearing those dresses were fine. One evening in a green gown usually wasn't enough to hurt you. The people in real danger were the ones who *made* them, breathing that green dust all day, every day.
 
@@ -81,7 +78,7 @@ If you're enjoying this, hit subscribe. Unlike a Victorian ball gown, it's compl
 
 ---
 
-## 3:32 | The Walls *(heavy chapter: no jokes, slower voice)*
+## 3:35 | The Walls *(heavy chapter: no jokes, slower voice)*
 
 `ch04_the_walls.txt` · 219 words
 
@@ -103,7 +100,7 @@ And that was the pattern. People got sick at home. They got better when they wen
 
 ---
 
-## 4:52 | Witch Fever
+## 4:56 | Witch Fever
 
 `ch05_witch_fever.txt` · 300 words
 
@@ -127,7 +124,7 @@ To be fair to Morris, his company had stopped using arsenic years earlier, and t
 
 ---
 
-## 6:41 | Shall We Poison Our Homes?
+## 6:45 | Shall We Poison Our Homes?
 
 `ch06_poison_our_homes.txt` · 273 words
 
@@ -153,7 +150,7 @@ His headline was a question: "Shall we poison our homes?"
 
 ---
 
-## 8:21 | Arsenic-Free
+## 8:25 | Arsenic-Free
 
 `ch07_arsenic_free.txt` · 153 words
 
@@ -169,7 +166,7 @@ But the green didn't disappear. It moved. Back in the 1860s and 70s, a beetle wa
 
 ---
 
-## 9:17 | Back to the Book
+## 9:21 | Back to the Book
 
 `ch08_back_to_the_book.txt` · 154 words
 
@@ -189,6 +186,25 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 
 ---
 
+## Draft 3: retention rewrite (cold open)
+
+**What the Ouija graph shows** (`research/retention/ouija_retention.png`): the loss happens in the **first 10–15 seconds** (100% → about
+50% by 0:08, 31% at 0:30). After 0:30 the curve is fairly flat (about 25% at 1:00, about 10% at the end), and there is no visible
+cliff at the channel intro. Ouija's first line was a date and a magazine ("May 1st, 1920. The cover of The Saturday Evening Post…"),
+and the "scary" its title promised didn't arrive until about 0:25.
+
+**So this cold open now:**
+- **Opens on the hook line**, not a date: "The most fashionable color of the 1860s was made with arsenic. And people knew it."
+- **Delivers the thumbnail by 0:05**: the Arsenic Waltz skeletons are on screen from frame 1 (the title is *Dressed to Kill*).
+- **Real green is on screen by about 0:20**: the book's poison-green cover label.
+- **Sets up two promises that pay off later**: "We'll come back to that girl" (ch06, "the girl from the first page") and "the most
+  famous designer of his day, who called the whole thing witch fever" (ch05).
+- **Chapter 2 starts in the craze** ("By the 1860s, if you wanted to be in fashion, you wanted green."), with Scheele as a short
+  flashback. **Chapter 3** turns the skeletons into a callback.
+
+**First-5-seconds build rules for ch01:** no fade from black; the Waltz is already on the desk at frame 0 with the lady's gown in
+arsenic green; the voice starts by frame 6; first camera move within the first second.
+
 ## Draft 2: what changed
 
 - **Cuts applied** (your OK on cuts 1–7 and 9): board-of-health "first in the country", Emma's brother, the 1891 toys-and-candy law,
@@ -205,7 +221,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
   no); ch07 says what the 1900 law limited, and dates the potato beetle ("the 1860s and 70s") instead of "around the same time".
 - **Ending**: both lines, in your order.
 
-**Length:** 1,654 words. Past videos ran about 167 words a minute finished, so this lands about **9:50–10:05**. We'll know exactly after
+**Length:** 1,664 words. Past videos ran about 167 words a minute finished, so this lands about **9:50–10:05**. We'll know exactly after
 voicing. If it runs over, the next cut is Emma (ch06, −22 words).
 
 ## Production notes
