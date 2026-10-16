@@ -138,6 +138,34 @@ const Cover: React.FC<{lines: {text: string; x: number; y: number; size: number}
   );
 };
 
+/** An illustrated cover (a Flow image) with the title on torn tape: shown on frame 0 and faded by frame 45, or as a still. */
+const ArtCover: React.FC<{src: string; size: [number, number]; shiftY: number; lines: {text: string; x: number; y: number; size: number}[]; still?: boolean}> = ({src, size, shiftY, lines, still}) => {
+  const f = useCurrentFrame();
+  if (!still && f >= 45) return null;
+  const w = 1080, h = (size[1] * 1080) / size[0];
+  return (
+    <AbsoluteFill style={{opacity: still ? 1 : interpolate(f, [28, 45], [1, 0], clamp), background: '#120e0b'}}>
+      <Img src={staticFile(src)} style={{position: 'absolute', left: 0, top: shiftY, width: w, height: h}} />
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, #120e0b 0%, rgba(18,14,11,0.85) 12%, rgba(18,14,11,0) 26%)'}} />
+      {lines.map((l, i) => <Highlight key={i} text={l.text} x={l.x} y={l.y} size={l.size} at={-40} seed={210 + i} rot={i % 2 ? -2 : -3} />)}
+    </AbsoluteFill>
+  );
+};
+const COVER1 = {src: 'img/ai/short1_cover_mummy_scale.jpg', size: [768, 1376] as [number, number], shiftY: 170,
+  lines: [{text: 'MUMMY.', x: 60, y: 150, size: 140}, {text: 'BY THE KILO.', x: 80, y: 310, size: 112}]};
+/** The Short 1 cover as a still (1080x1920), for a custom thumbnail. */
+export const Cover1Still: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <StepCtx.Provider value={2.5}>
+      <AbsoluteFill style={{background: '#120e0b'}}>
+        <ArtCover {...COVER1} still />
+        <Mark />
+        <Finish vignette={0.25} />
+      </AbsoluteFill>
+    </StepCtx.Provider>
+  </PaletteCtx.Provider>
+);
+
 /** The outro, under the subscribe line: the full video's title, a subscribe arrow at YouTube's button, then a hold. */
 const Outro: React.FC<{t: TL; at: number}> = ({t, at}) => {
   const f = useCurrentFrame();
@@ -236,7 +264,7 @@ const S1: Def = {
   segs: [[1, 'Mumia vera', 'supplies last.'], [1, 'Supplies lasted', 'the catalog.'], [1, 'For centuries', 'Scientists did it.'], [3, 'Bruises', 'pretty much everything.'],
     [1, 'And when the real', 'fresher ones.'], [9, 'It started with', 'became a body.'], [2, 'Somebody read', 'wrote people.']],
   payoff: ['wrote people'],
-  cover: <Cover lines={[{text: 'MUMMY.', x: 70, y: 280, size: 160}, {text: 'BY THE KILO.', x: 90, y: 490, size: 120}]} />,
+  cover: <ArtCover {...COVER1} />,
   cuts: (t) => [
     [0, merckLineScene(t)],
     [t.at('Supplies lasted') - 1, (
