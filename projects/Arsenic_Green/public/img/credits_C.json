@@ -1,41 +1,33 @@
 {
   "ch04/flower_makers_workshop_godwin_1864.jpg": {
-    "title": "File:An overcrowded artificial flower maker's workshop Wellcome M0012977.jpg",
+    "title": "An overcrowded artificial flower maker's workshop Wellcome M0012977",
     "artist": "",
     "date": "",
     "licence": "CC BY 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:An_overcrowded_artificial_flower_maker%27s_workshop_Wellcome_M0012977.jpg"
   },
   "ch04/atelier_de_fleuriste_monde_illustre_1903.jpg": {
-    "title": "File:Un atelier de fleuriste. G.36370.jpg",
-    "artist": "Le Monde illustr\u00e9, editeur",
-    "date": "En 1903",
+    "title": "Un atelier de fleuriste. G.36370",
+    "artist": "Le Monde illustré, editeur",
+    "date": "1903",
     "licence": "CC0",
     "page": "https://commons.wikimedia.org/wiki/File:Un_atelier_de_fleuriste._G.36370.jpg"
   },
   "ch04/vernois_1859_plate_flower_makers_hands.jpg": {
-    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 349)",
-    "artist": "",
-    "date": "1859 (19e si\u00e8cle / 19th century)",
-    "licence": "public domain by age (1859)",
+    "title": "Maxime Vernois, 'Mémoire sur les accidents produits par l'emploi des verts arsenicaux chez les ouvriers fleuristes', plates, Annales d'hygiène publique et de médecine légale, 2e sér., t.12 (plate, figs 1-5: hands)",
+    "artist": "Maxime Vernois",
+    "date": "1859",
+    "licence": "Licence Ouverte / Open Licence (Etalab); attribution: BIU Santé, Université Paris Cité",
     "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n349",
     "source": "iabook:BIUSante_90141x1859x12:349"
   },
   "ch04/vernois_1859_plate_explanation_page.jpg": {
-    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 347)",
-    "artist": "",
-    "date": "1859 (19e si\u00e8cle / 19th century)",
-    "licence": "public domain by age (1859)",
+    "title": "Maxime Vernois, 'Mémoire sur les accidents produits par l'emploi des verts arsenicaux chez les ouvriers fleuristes', plates, Annales d'hygiène publique et de médecine légale, 2e sér., t.12 (Explication de la planche, p.346)",
+    "artist": "Maxime Vernois",
+    "date": "1859",
+    "licence": "Licence Ouverte / Open Licence (Etalab); attribution: BIU Santé, Université Paris Cité",
     "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n347",
     "source": "iabook:BIUSante_90141x1859x12:347"
-  },
-  "ch04/vernois_1859_plate_face_sores.jpg": {
-    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 350)",
-    "artist": "",
-    "date": "1859 (19e si\u00e8cle / 19th century)",
-    "licence": "public domain by age (1859)",
-    "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n350",
-    "source": "iabook:BIUSante_90141x1859x12:350"
   },
   "ch04/medical_times_gazette_1861-11-30_p560_scheurer_inquest.jpg": {
     "title": "The Medical times and gazette (page 567)",
@@ -94,28 +86,20 @@
     "source": "wellcome:V0020280"
   },
   "ch05/arsenic_furnace_encyclopedie_goussier.jpg": {
-    "title": "Furnace used in processing arsenic. Etching (Encyclop\u00e9die plate).",
-    "artist": "B\u00e9nard after L.-J. Goussier",
+    "title": "Furnace used in processing arsenic. Etching (Encyclopédie plate).",
+    "artist": "Bénard after L.-J. Goussier",
     "date": "18th century",
     "licence": "Public Domain Mark (Wellcome Collection)",
     "page": "https://wellcomecollection.org/works/zjdtrnmn",
     "source": "wellcome:V0023587"
   },
   "ch05/arsenic_furnace_encyclopedie_goussier_b.jpg": {
-    "title": "Furnace used in the processing of arsenic. Etching by B\u00e9nard after L.J. Goussier.",
-    "artist": "B\u00e9nard after L.-J. Goussier",
+    "title": "Furnace used in the processing of arsenic. Etching by Bénard after L.J. Goussier.",
+    "artist": "Bénard after L.-J. Goussier",
     "date": "18th century",
     "licence": "Public Domain Mark (Wellcome Collection)",
     "page": "https://wellcomecollection.org/works/ma7nqtxg",
     "source": "wellcome:V0023588"
-  },
-  "ch04/daumier_chemist_arsenic_demonstration_1841.jpg": {
-    "title": "A chemist gives a demonstration involving arsenic to an audience. Coloured lithograph by H. Daumier, 1841.",
-    "artist": "Honor\u00e9 Daumier",
-    "date": "1841",
-    "licence": "Public Domain Mark (Wellcome Collection)",
-    "page": "https://wellcomecollection.org/works/qjurmfkb",
-    "source": "wellcome:V0011761"
   },
   "ch05/death_of_napoleon_steuben_lithograph.jpg": {
     "title": "The death of Napoleon Bonaparte at St Helena, 1821. Lithograph after C. de Steuben.",
@@ -126,35 +110,19 @@
     "source": "wellcome:V0006755"
   },
   "ch05/last_moments_napoleon_bovinet_after_gudin.jpg": {
-    "title": "The last moments of Napoleon at St Helena. Bovinet and Couch\u00e9 after Gudin.",
-    "artist": "Bovinet and Couch\u00e9 after Gudin",
+    "title": "The last moments of Napoleon at St Helena. Bovinet and Couché after Gudin.",
+    "artist": "Bovinet and Couché after Gudin",
     "date": "19th century",
     "licence": "Public Domain Mark (Wellcome Collection)",
     "page": "https://wellcomecollection.org/works/shq68n7b",
     "source": "wellcome:V0006900"
   },
   "ch04/dore_over_london_by_rail_1872.jpg": {
-    "title": "File:Bpt6k10470488 f277.jpg",
-    "artist": "Gustave Dor\u00e9",
-    "date": "1873-04-01",
+    "title": "Bpt6k10470488 f277",
+    "artist": "Gustave Doré",
+    "date": "1872 (this impression: Gallica scan of the 1873 French edition)",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bpt6k10470488_f277.jpg"
-  },
-  "ch04/godwin_1864_damp_room_page27.jpg": {
-    "title": "Another blow for life (page 42)",
-    "artist": "George Godwin",
-    "date": "1864",
-    "licence": "public domain by age (1864)",
-    "page": "https://archive.org/details/anotherblowforl00godwgoog/page/n42",
-    "source": "iabook:anotherblowforl00godwgoog:42"
-  },
-  "ch04/godwin_1864_flower_makers_page42.jpg": {
-    "title": "Another blow for life (page 57)",
-    "artist": "George Godwin",
-    "date": "1864",
-    "licence": "public domain by age (1864)",
-    "page": "https://archive.org/details/anotherblowforl00godwgoog/page/n57",
-    "source": "iabook:anotherblowforl00godwgoog:57"
   },
   "ch04/godwin_1864_home_in_bethnal_green_frontis.jpg": {
     "title": "Another blow for life (page 7)",
@@ -188,14 +156,6 @@
     "page": "https://archive.org/details/sim_building-uk_1862-06-28_20_1012/page/n4",
     "source": "iabook:sim_building-uk_1862-06-28_20_1012:4"
   },
-  "ch07/paris_green_label_tiger_head_herrmann_1907.jpg": {
-    "title": "[Trademark registration by Morris Herrmann & Co. for [Tiger Head Logo] brand Paris Green]",
-    "artist": "",
-    "date": "1907",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2026693688/",
-    "source": "loc:2026693688"
-  },
   "ch07/paris_green_label_herrmann_hi_grade_1907.jpg": {
     "title": "[Trademark registration by Morris Herrmann & Co. for Herrmann's Hi-Grade Pure Paris  Green brand Paris Green]",
     "artist": "",
@@ -204,18 +164,10 @@
     "page": "https://www.loc.gov/item/2026693850/",
     "source": "loc:2026693850"
   },
-  "ch07/paris_green_label_star_brand_1911.jpg": {
-    "title": "[Trademark registration by Fred L. Lavanburg for Star brand Paris Green]",
-    "artist": "",
-    "date": "1911",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2026709388/",
-    "source": "loc:2026709388"
-  },
   "ch04/dore_bluegate_fields_shadwell_1872.jpg": {
-    "title": "File:Bpt6k10470488 f319.jpg",
-    "artist": "Gustave Dor\u00e9",
-    "date": "1873-04-01",
+    "title": "Bpt6k10470488 f319",
+    "artist": "Gustave Doré",
+    "date": "1872 (this impression: Gallica scan of the 1873 French edition)",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bpt6k10470488_f319.jpg"
   },
@@ -228,10 +180,10 @@
     "source": "loc:2022669503"
   },
   "ch07/massachusetts_acts_1900_ch325_arsenic_p259.jpg": {
-    "title": "Acts and resolves passed by the General Court (page 330)",
+    "title": "Acts and Resolves passed by the General Court of Massachusetts, 1900, p.259: Chap. 325, An Act relative to the manufacture and sale of textile fabrics and papers containing arsenic",
     "artist": "Massachusetts",
-    "date": "1663",
-    "licence": "public domain by age (1663)",
+    "date": "1900",
+    "licence": "public domain (published 1900)",
     "page": "https://archive.org/details/actsresolvespass1900mass/page/n330",
     "source": "iabook:actsresolvespass1900mass:330"
   },
@@ -259,22 +211,6 @@
     "page": "https://archive.org/details/potatopests00rile/page/n20",
     "source": "iabook:potatopests00rile:20"
   },
-  "ch07/riley_potato_pests_1876_paris_green_applicator_a.jpg": {
-    "title": "Potato pests (page 67)",
-    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
-    "date": "1876",
-    "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/potatopests00rile/page/n67",
-    "source": "iabook:potatopests00rile:67"
-  },
-  "ch07/riley_potato_pests_1876_paris_green_applicator_b.jpg": {
-    "title": "Potato pests (page 68)",
-    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
-    "date": "1876",
-    "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/potatopests00rile/page/n68",
-    "source": "iabook:potatopests00rile:68"
-  },
   "ch07/riley_1876_farmer_spraying_paris_green_p63.jpg": {
     "title": "Potato pests (page 72)",
     "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
@@ -282,14 +218,6 @@
     "licence": "public domain by age (1876)",
     "page": "https://archive.org/details/potatopests00rile/page/n72",
     "source": "iabook:potatopests00rile:72"
-  },
-  "ch07/riley_1876_farmer_dusting_paris_green_p65.jpg": {
-    "title": "Potato pests (page 74)",
-    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
-    "date": "1876",
-    "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/potatopests00rile/page/n74",
-    "source": "iabook:potatopests00rile:74"
   },
   "ch05/morris_trellis_wallpaper_1864_met.jpg": {
     "title": "Trellis",
@@ -363,14 +291,6 @@
     "page": "https://archive.org/details/gri_33125008618163/page/n179",
     "source": "iabook:gri_33125008618163:179"
   },
-  "ch04/royal_college_of_chemistry_laboratories_1846.jpg": {
-    "title": "The Royal College of Chemistry: the laboratories. Lithograph by Day & Haghe after J. Lockyer, 1846.",
-    "artist": "Day & Haghe after J. Lockyer",
-    "date": "1846",
-    "licence": "Public Domain Mark (Wellcome Collection)",
-    "page": "https://wellcomecollection.org/works/zc3xj8hj",
-    "source": "wellcome:V0013588"
-  },
   "ch05/cooke_1872_plate12_paper_moulds.jpg": {
     "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 170)",
     "artist": "Cooke, M. C. (Mordecai Cubitt), b. 1825",
@@ -378,14 +298,6 @@
     "licence": "public domain by age (1872)",
     "page": "https://archive.org/details/rustsmutmildewmo00cook/page/n170",
     "source": "iabook:rustsmutmildewmo00cook:170"
-  },
-  "ch05/cooke_1872_mould_microscope_plate.jpg": {
-    "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 181)",
-    "artist": "Cooke, M. C. (Mordecai Cubitt), b. 1825",
-    "date": "1872",
-    "licence": "public domain by age (1872)",
-    "page": "https://archive.org/details/rustsmutmildewmo00cook/page/n181",
-    "source": "iabook:rustsmutmildewmo00cook:181"
   },
   "ch05/cooke_1872_plate13_moulds_microscope.jpg": {
     "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 174)",
@@ -404,9 +316,9 @@
     "source": "iabook:cu31924031490059:30"
   },
   "ch04/dore_wentworth_street_whitechapel_1872.jpg": {
-    "title": "File:Bpt6k10470488 f289.jpg",
-    "artist": "Gustave Dor\u00e9",
-    "date": "1873-04-01",
+    "title": "Bpt6k10470488 f289",
+    "artist": "Gustave Doré",
+    "date": "1872 (this impression: Gallica scan of the 1873 French edition)",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bpt6k10470488_f289.jpg"
   },
@@ -419,16 +331,16 @@
     "source": "iabook:sim_mining-journal_1876-12-09_46_supplement:5"
   },
   "ch04/henry_letheby_portrait_1860s.jpg": {
-    "title": "File:Henry Letheby.jpg",
-    "artist": "Unknown authorUnknown author",
-    "date": "1860sdate QS:P,+1860-00-00T00:00:00Z/8",
+    "title": "Henry Letheby",
+    "artist": "Unknown author",
+    "date": "1860s",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Henry_Letheby.jpg"
   },
   "ch05/william_morris_hollyer_c1887.jpg": {
-    "title": "File:William Morris age 53.jpg",
+    "title": "William Morris age 53",
     "artist": "Frederick Hollyer",
-    "date": "First published 1899 (photo c. 1887)",
+    "date": "c. 1887 (published 1899)",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:William_Morris_age_53.jpg"
   },
@@ -439,5 +351,159 @@
     "licence": "Public domain (Chronicling America, Library of Congress; published 1875)",
     "page": "https://www.loc.gov/resource/sn83030313/1875-06-22/ed-1/?sp=3",
     "source": "chroniclingamerica:sn83030313/1875-06-22/ed-1/seq-3"
+  },
+  "ch04/chemical_laboratory_interior_19th_century.jpg": {
+    "title": "Interior of chemical laboratory in the 19th century",
+    "artist": "Wellcome Collection",
+    "date": "19th century",
+    "licence": "CC BY 4.0 (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/d2jpyjhd",
+    "source": "wellcome:L0012187"
+  },
+  "ch04/will_1855_marsh_apparatus_page.jpg": {
+    "title": "Outlines of chemical analysis : prepared for the chemical laboratory at Giessen (page 40)",
+    "artist": "Heinrich Will",
+    "date": "1855",
+    "licence": "public domain by age (1855)",
+    "page": "https://archive.org/details/outlinesofchemic00hein/page/n40",
+    "source": "iabook:outlinesofchemic00hein:40"
+  },
+  "ch05/longwood_house_photo_rijksmuseum_1850s80s.jpg": {
+    "title": "Napoleon's huis in Longwood (Napoleon's house at Longwood, St Helena)",
+    "artist": "anonymous",
+    "date": "1850-1880",
+    "licence": "CC0 (Rijksmuseum)",
+    "page": "https://www.rijksmuseum.nl/en/collection/RP-F-F02293",
+    "source": "rijksmuseum:RP-F-F02293"
+  },
+  "ch05/morris_fruit_pomegranate_wallpaper_c1866_met.jpg": {
+    "title": "Fruit (or Pomegranate)",
+    "artist": "William Morris",
+    "date": "ca. 1866",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/365338",
+    "source": "met:365338"
+  },
+  "ch04/builder_1862_a_damp_room_and_its_dangers.jpg": {
+    "title": "The Builder  1862-07-05: Vol 20 Iss 1013 (page 9) - detail: 'A damp room; and its dangers' (wood engraving, p.478)",
+    "artist": "",
+    "date": "1862-07-05",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_building-uk_1862-07-05_20_1013/page/n9",
+    "source": "iabook:sim_building-uk_1862-07-05_20_1013:9"
+  },
+  "ch04/builder_1862_flower_makers_blighting_the_buds.jpg": {
+    "title": "The Builder  1862-06-28: Vol 20 Iss 1012 (page 4) - detail: 'Artificial-flower makers: blighting the buds' (wood engraving, p.457)",
+    "artist": "",
+    "date": "1862-06-28",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_building-uk_1862-06-28_20_1012/page/n4",
+    "source": "iabook:sim_building-uk_1862-06-28_20_1012:4"
+  },
+  "ch04/naquet_1876_marsh_test_apparatus_fig6.jpg": {
+    "title": "Legal chemistry. A guide to detection of poisons, examination of stains, etc. etc. as applied to chemical jurisprudence (page 30) - detail: Fig. 6, Marsh's apparatus",
+    "artist": "['Naquet, Alfred, 1834-1916', 'Battershall, Jesse Park, 1851-1891']",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/cu31924031490059/page/n30",
+    "source": "iabook:cu31924031490059:30"
+  },
+  "ch04/will_1855_marsh_apparatus_fig15.jpg": {
+    "title": "Outlines of chemical analysis : prepared for the chemical laboratory at Giessen (page 40) - detail: Marsh's apparatus, Fig. 15",
+    "artist": "Heinrich Will",
+    "date": "1855",
+    "licence": "public domain by age (1855)",
+    "page": "https://archive.org/details/outlinesofchemic00hein/page/n40",
+    "source": "iabook:outlinesofchemic00hein:40"
+  },
+  "ch07/riley_1876_colorado_potato_beetle_fig2_crop.jpg": {
+    "title": "Potato pests (page 20) - detail: Fig. 2, Colorado potato-beetle",
+    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/potatopests00rile/page/n20",
+    "source": "iabook:potatopests00rile:20"
+  },
+  "ch07/riley_1876_grays_sprinkler_paris_green_crop.jpg": {
+    "title": "Potato pests (page 72) - detail: Fig. 35, Gray's improved sprinkler for the use of Paris green water",
+    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/potatopests00rile/page/n72",
+    "source": "iabook:potatopests00rile:72"
+  },
+  "ch07/advert_wallpaper_free_from_arsenic_c1890_crop.jpg": {
+    "title": "Advert for wall paper 'free from Arsenic', in National Health Society pamphlet 'In a Sick Room' (cropped)",
+    "artist": "National Health Society (Great Britain); Allman & Son",
+    "date": "c. 1890",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/mu8u5sh4",
+    "source": "wellcome:L0048804"
+  },
+  "ch07/riley_1876_peck_spray_machine_paris_green_p65.jpg": {
+    "title": "Potato pests (page 74)",
+    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/potatopests00rile/page/n74",
+    "source": "iabook:potatopests00rile:74"
+  },
+  "ch07/riley_1876_peck_spray_machine_crop.jpg": {
+    "title": "Potato pests (page 74) - detail: Fig. 36, Peck's spray machine",
+    "artist": "Riley, Charles Valentine, 1843-1895. [from old catalog]",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/potatopests00rile/page/n74",
+    "source": "iabook:potatopests00rile:74"
+  },
+  "ch04/vernois_1859_plate_face_finger_crop.jpg": {
+    "title": "Maxime Vernois, 'Mémoire sur les accidents produits par l'emploi des verts arsenicaux chez les ouvriers fleuristes', plates, Annales d'hygiène publique et de médecine légale, 2e sér., t.12 (plate, figs 6, 7, 9; cropped)",
+    "artist": "Maxime Vernois",
+    "date": "1859",
+    "licence": "Licence Ouverte / Open Licence (Etalab); attribution: BIU Santé, Université Paris Cité",
+    "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n350",
+    "source": "iabook:BIUSante_90141x1859x12:350"
+  },
+  "ch05/devon_great_consols_calciners_2014_ccbysa.jpg": {
+    "title": "Calciners at Devon Great Consols (4972)",
+    "artist": "Nilfanion",
+    "date": "2014-05-31 15:52:14",
+    "licence": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Calciners_at_Devon_Great_Consols_(4972).jpg"
+  },
+  "ch05/william_morris_watts_portrait_1870.jpg": {
+    "title": "George Frederic Watts portrait of William Morris 1870",
+    "artist": "George Frederic Watts (scan of a reproduction by User:PKM)",
+    "date": "1870",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:George_Frederic_Watts_portrait_of_William_Morris_1870.jpg"
+  },
+  "ch05/morris_and_burne_jones_hollyer_1874.jpg": {
+    "title": "Frederick Hollyer Edward Burne-Jones and William Morris 1874",
+    "artist": "Frederick Hollyer",
+    "date": "1874",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Frederick_Hollyer_Edward_Burne-Jones_and_William_Morris_1874.jpg"
+  },
+  "ch05/devon_great_consols_tamar_panorama_2011_ccbysa.jpg": {
+    "title": "Devon Great Consols and Tamar valley",
+    "artist": "Nilfanion",
+    "date": "2011-04-12 15:12:40",
+    "licence": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Devon_Great_Consols_and_Tamar_valley.jpg"
+  },
+  "ch05/morris_daisy_sidewall_cooper_hewitt.jpg": {
+    "title": "Sidewall, Daisy, 1862 (CH 18340095)",
+    "artist": "Made by Jeffrey & Company",
+    "date": "1862",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Sidewall,_Daisy,_1862_(CH_18340095).jpg"
+  },
+  "ch05/morris_trellis_design_drawing_1862.jpg": {
+    "title": "William Morris design for Trellis wallpaper 1862",
+    "artist": "William Morris",
+    "date": "1862",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:William_Morris_design_for_Trellis_wallpaper_1862.jpg"
   }
 }

@@ -242,5 +242,77 @@
     "licence": "public domain by age (1862)",
     "page": "https://archive.org/details/sim_british-medical-journal_january-4-june-28-1862_1/page/n176",
     "source": "iabook:sim_british-medical-journal_january-4-june-28-1862_1:176"
+  },
+  "ch02/green_wallpaper_ivy_england_1840s_ch.jpg": {
+    "title": "Sidewall (England), 1840s: ivy in five shades of green (Cooper Hewitt 1954-49-2-a,b)",
+    "artist": "Arthur Sanderson & Sons",
+    "date": "1840s",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18401227",
+    "source": "https://images.collection.cooperhewitt.org/238673_8679207ff10d3956_x.jpg"
+  },
+  "ch02/green_wallpaper_blossoms_usa_1840s_ch.jpg": {
+    "title": "Sidewall (USA), 1840s: green blossoms (Cooper Hewitt 1956-171-9)",
+    "artist": "unknown",
+    "date": "1840s",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18407709",
+    "source": "https://images.collection.cooperhewitt.org/65747_67cd511bded90719_x.jpg"
+  },
+  "ch02/green_wallpaper_vase_france_1860_ch.jpg": {
+    "title": "Sidewall (France), 1860: flower vase on green ground (Cooper Hewitt 1955-51-6)",
+    "artist": "unknown",
+    "date": "1860",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18404687",
+    "source": "https://images.collection.cooperhewitt.org/44153_3ae68e773c3eacbb_x.jpg"
+  },
+  "ch02/green_wallpaper_blinds_dufour_leroy_c1860_ch.jpg": {
+    "title": "Sidewall (France), ca. 1860: green trompe-l'oeil blinds (Cooper Hewitt 1998-62-7)",
+    "artist": "Dufour et Leroy",
+    "date": "ca. 1860",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18670829",
+    "source": "https://images.collection.cooperhewitt.org/41936_8dc7f87725d3bd89_x.jpg"
+  },
+  "ch02/green_wallpaper_stripes_usa_1850s_ch.jpg": {
+    "title": "Sidewall (USA), 1850\u201360: green stripes (Cooper Hewitt 1940-74-5-a/d)",
+    "artist": "unknown",
+    "date": "1850\u201360",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18559301",
+    "source": "https://images.collection.cooperhewitt.org/64121_432abbcbbcb30c43_x.jpg"
+  },
+  "ch02/green_wallpaper_faded_usa_1836_ch.jpg": {
+    "title": "Sidewall and border (USA), 1836: faded to the green flowers (Cooper Hewitt 1986-32-2)",
+    "artist": "unknown",
+    "date": "1836",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18620703",
+    "source": "https://images.collection.cooperhewitt.org/331314_9fe3717e67cf9bc0_x.jpg"
+  },
+  "ch02/green_wallpaper_fragment_usa_c1850_ch.jpg": {
+    "title": "Sidewall (USA), ca. 1850: green leaf fragments (Cooper Hewitt 1976-48-71)",
+    "artist": "unknown",
+    "date": "ca. 1850",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18491053",
+    "source": "https://images.collection.cooperhewitt.org/248671_4426c42b5fce3ed3_x.jpg"
+  },
+  "ch02/wallpaper_production_processes_1882_ch.jpg": {
+    "title": "Print, Processes of Wallpaper Production (wood engraving) (Cooper Hewitt 1955-91-1)",
+    "artist": "unknown",
+    "date": "1882",
+    "licence": "Public domain (PD-old; Cooper Hewitt, Smithsonian Design Museum)",
+    "page": "https://collection.cooperhewitt.org/objects/18406939",
+    "source": "https://images.collection.cooperhewitt.org/45853_22780405c5f40943_x.jpg"
+  },
+  "ch03/hofmann_twenty_persons_chicago_med_examiner_sep1862_p537.jpg": {
+    "title": "The Chicago Medical Examiner  1862-09: Vol 3 Iss 9 (page 14)",
+    "artist": "",
+    "date": "1862-09",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_medical-examiner-journal-of-medical-sciences_1862-09_3_9/page/n14",
+    "source": "iabook:sim_medical-examiner-journal-of-medical-sciences_1862-09_3_9:14"
   }
 }
