@@ -12,5 +12,115 @@
     "date": "1789",
     "licence": "CC BY 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Medal_commemorating_Carl_Wilhelm_Scheele_by_I_G_Wikman,_1789_(obverse).jpg"
+  },
+  "ch02/scheele_scheffner_engraving.png": {
+    "title": "File:Carl Wilhelm Scheele by Johann Gottfried Scheffner.png",
+    "artist": "Johann Gottfried Scheffner",
+    "date": "1780/1800",
+    "licence": "PDM-owner",
+    "page": "https://commons.wikimedia.org/wiki/File:Carl_Wilhelm_Scheele_by_Johann_Gottfried_Scheffner.png"
+  },
+  "ch02/schweinfurt_merian_1648.jpg": {
+    "title": "File:Schweinfurt-1648-Merian.jpg",
+    "artist": "",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Schweinfurt-1648-Merian.jpg"
+  },
+  "ch03/arsenic_waltz_punch_1862_page.jpg": {
+    "title": "Punch  1862: Vol 42 (page 69)",
+    "artist": "",
+    "date": "1862",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_punch_1862_42/page/n69",
+    "source": "iabook:sim_punch_1862_42:69"
+  },
+  "ch03/the_ball_punch_1862_page.jpg": {
+    "title": "Punch  1862: Vol 42 (page 79)",
+    "artist": "",
+    "date": "1862",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_punch_1862_42/page/n79",
+    "source": "iabook:sim_punch_1862_42:79"
+  },
+  "ch02/great_lozenge_maker_punch_1858.jpg": {
+    "title": "The Great Lozenge-Maker. A Hint to Paterfamilias, Punch, 20 Nov 1858 (Wellcome L0078890)",
+    "artist": "after John Leech",
+    "date": "1858",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/mj8x9hdn",
+    "source": "https://iiif.wellcomecollection.org/image/L0078890/full/5255,/0/default.jpg"
+  },
+  "ch03/arsenic_waltz_punch_1862.jpg": {
+    "title": "The Arsenic Waltz. The new Dance of Death (Dedicated to the Green Wreath and Dress-Mongers), Punch, 8 Feb 1862 (Wellcome V0042226)",
+    "artist": "Punch (possibly John Leech)",
+    "date": "1862",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/awbr7whm",
+    "source": "https://iiif.wellcomecollection.org/image/V0042226/full/2974,/0/default.jpg"
+  },
+  "ch02/bab_ballads_only_a_dancing_girl_1869_p1.jpg": {
+    "title": "The \"Bab\" ballads. Much sound and little sense (page 27)",
+    "artist": "Gilbert, W. S. (William Schwenck), 1836-1911",
+    "date": "1869",
+    "licence": "public domain by age (1869)",
+    "page": "https://archive.org/details/babballadsmuch00gilb/page/n27",
+    "source": "iabook:babballadsmuch00gilb:27"
+  },
+  "ch02/bab_ballads_only_a_dancing_girl_1869_p2_arsenic_green.jpg": {
+    "title": "The \"Bab\" ballads. Much sound and little sense (page 28)",
+    "artist": "Gilbert, W. S. (William Schwenck), 1836-1911",
+    "date": "1869",
+    "licence": "public domain by age (1869)",
+    "page": "https://archive.org/details/babballadsmuch00gilb/page/n28",
+    "source": "iabook:babballadsmuch00gilb:28"
+  },
+  "ch02/scheele_letter_gahn_9feb1777_p194.jpg": {
+    "title": "Nachgelassene Briefe und Aufzeichnungen, hrsg. von A.E. Nordenski\u00f6ld (page 245)",
+    "artist": "['Scheele, Karl Wilhelm, 1742-1786', 'Nordenski\u00f6ld, A. E. (Adolf Erik), 1832-1901']",
+    "date": "1892",
+    "licence": "public domain by age (1892)",
+    "page": "https://archive.org/details/nachgelassenebri00scheuoft/page/n245",
+    "source": "iabook:nachgelassenebri00scheuoft:245"
+  },
+  "ch02/scheele_letter_gahn_9feb1777_p195_arsenic.jpg": {
+    "title": "Nachgelassene Briefe und Aufzeichnungen, hrsg. von A.E. Nordenski\u00f6ld (page 246)",
+    "artist": "['Scheele, Karl Wilhelm, 1742-1786', 'Nordenski\u00f6ld, A. E. (Adolf Erik), 1832-1901']",
+    "date": "1892",
+    "licence": "public domain by age (1892)",
+    "page": "https://archive.org/details/nachgelassenebri00scheuoft/page/n246",
+    "source": "iabook:nachgelassenebri00scheuoft:246"
+  },
+  "ch02/scheele_new_green_colour_1778_essays1786_p253.jpg": {
+    "title": "The chemical essays of Charles-William Scheele : translated from the Transactions of the Academy of Sciences at Stockholm, with additions (page 272)",
+    "artist": "Royal College of Physicians of London. n 80046799",
+    "date": "1786",
+    "licence": "public domain by age (1786)",
+    "page": "https://archive.org/details/b28039403/page/n272",
+    "source": "iabook:b28039403:272"
+  },
+  "ch02/scheele_new_green_colour_1778_essays1786_p254.jpg": {
+    "title": "The chemical essays of Charles-William Scheele : translated from the Transactions of the Academy of Sciences at Stockholm, with additions (page 273)",
+    "artist": "Royal College of Physicians of London. n 80046799",
+    "date": "1786",
+    "licence": "public domain by age (1786)",
+    "page": "https://archive.org/details/b28039403/page/n273",
+    "source": "iabook:b28039403:273"
+  },
+  "ch03/hofmann_stipple_cook_c1853.jpg": {
+    "title": "August William Hofmann. Stipple engraving by G. Cook (Wellcome V0002829)",
+    "artist": "G. Cook",
+    "date": "c. 1853",
+    "licence": "CC BY 4.0 (Wellcome Collection)",
+    "page": "https://commons.wikimedia.org/wiki/File:August_William_Hofmann._Stipple_engraving_by_Cook._Wellcome_V0002829.jpg",
+    "source": "https://iiif.wellcomecollection.org/image/V0002829/full/2249,/0/default.jpg"
+  },
+  "ch03/hofmann_process_print_1902.jpg": {
+    "title": "August Wilhelm von Hofmann. Process print, 1902, after a photograph of c. 1864 (Wellcome V0027677)",
+    "artist": "unknown",
+    "date": "1902 (photo c. 1864)",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/hy87xfww",
+    "source": "https://iiif.wellcomecollection.org/image/V0027677/full/2091,/0/default.jpg"
   }
 }
