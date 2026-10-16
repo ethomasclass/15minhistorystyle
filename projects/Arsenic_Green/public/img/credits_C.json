@@ -362,5 +362,82 @@
     "licence": "public domain by age (1884)",
     "page": "https://archive.org/details/gri_33125008618163/page/n179",
     "source": "iabook:gri_33125008618163:179"
+  },
+  "ch04/royal_college_of_chemistry_laboratories_1846.jpg": {
+    "title": "The Royal College of Chemistry: the laboratories. Lithograph by Day & Haghe after J. Lockyer, 1846.",
+    "artist": "Day & Haghe after J. Lockyer",
+    "date": "1846",
+    "licence": "Public Domain Mark (Wellcome Collection)",
+    "page": "https://wellcomecollection.org/works/zc3xj8hj",
+    "source": "wellcome:V0013588"
+  },
+  "ch05/cooke_1872_plate12_paper_moulds.jpg": {
+    "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 170)",
+    "artist": "Cooke, M. C. (Mordecai Cubitt), b. 1825",
+    "date": "1872",
+    "licence": "public domain by age (1872)",
+    "page": "https://archive.org/details/rustsmutmildewmo00cook/page/n170",
+    "source": "iabook:rustsmutmildewmo00cook:170"
+  },
+  "ch05/cooke_1872_mould_microscope_plate.jpg": {
+    "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 181)",
+    "artist": "Cooke, M. C. (Mordecai Cubitt), b. 1825",
+    "date": "1872",
+    "licence": "public domain by age (1872)",
+    "page": "https://archive.org/details/rustsmutmildewmo00cook/page/n181",
+    "source": "iabook:rustsmutmildewmo00cook:181"
+  },
+  "ch05/cooke_1872_plate13_moulds_microscope.jpg": {
+    "title": "Rust, smut, mildew, & mould : an introduction to the study of microscopic fungi (page 174)",
+    "artist": "Cooke, M. C. (Mordecai Cubitt), b. 1825",
+    "date": "1872",
+    "licence": "public domain by age (1872)",
+    "page": "https://archive.org/details/rustsmutmildewmo00cook/page/n174",
+    "source": "iabook:rustsmutmildewmo00cook:174"
+  },
+  "ch04/naquet_1876_marsh_test_apparatus_page.jpg": {
+    "title": "Legal chemistry. A guide to detection of poisons, examination of stains, etc. etc. as applied to chemical jurisprudence (page 30)",
+    "artist": "['Naquet, Alfred, 1834-1916', 'Battershall, Jesse Park, 1851-1891']",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/cu31924031490059/page/n30",
+    "source": "iabook:cu31924031490059:30"
+  },
+  "ch04/dore_wentworth_street_whitechapel_1872.jpg": {
+    "title": "File:Bpt6k10470488 f289.jpg",
+    "artist": "Gustave Dor\u00e9",
+    "date": "1873-04-01",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bpt6k10470488_f289.jpg"
+  },
+  "ch05/mining_journal_1876-12-09_devon_great_consols_arsenic_letters.jpg": {
+    "title": "The Mining Journal  1876-12-09: Vol 46 Supplement (page 5)",
+    "artist": "",
+    "date": "1876-12-09",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/sim_mining-journal_1876-12-09_46_supplement/page/n5",
+    "source": "iabook:sim_mining-journal_1876-12-09_46_supplement:5"
+  },
+  "ch04/henry_letheby_portrait_1860s.jpg": {
+    "title": "File:Henry Letheby.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1860sdate QS:P,+1860-00-00T00:00:00Z/8",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Henry_Letheby.jpg"
+  },
+  "ch05/william_morris_hollyer_c1887.jpg": {
+    "title": "File:William Morris age 53.jpg",
+    "artist": "Frederick Hollyer",
+    "date": "First published 1899 (photo c. 1887)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:William_Morris_age_53.jpg"
+  },
+  "ch07/new_york_herald_1875-06-22_p3_potato_bug_paris_green.jpg": {
+    "title": "The New York Herald, 22 June 1875, p. 3: 'The Potato Bug. The Destructive March of the Insect Described... Results of Paris Green'",
+    "artist": "The New York Herald",
+    "date": "1875-06-22",
+    "licence": "Public domain (Chronicling America, Library of Congress; published 1875)",
+    "page": "https://www.loc.gov/resource/sn83030313/1875-06-22/ed-1/?sp=3",
+    "source": "chroniclingamerica:sn83030313/1875-06-22/ed-1/seq-3"
   }
 }

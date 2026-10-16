@@ -186,5 +186,61 @@
     "licence": "CC0 (The Met Open Access)",
     "page": "https://www.metmuseum.org/art/collection/search/269145",
     "source": "met:269145"
+  },
+  "ch02/parlor_interior_stereograph_1870s_loc.jpg": {
+    "title": "Parlor interior",
+    "artist": "Warren, Joseph W., photographer",
+    "date": "1870-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2017650477/",
+    "source": "loc:2017650477"
+  },
+  "ch02/sitting_room_stereograph_1875_loc.jpg": {
+    "title": "[Sitting room]",
+    "artist": "Woodward & Son, photographer, Woodward, William Finley, photographer, Woodward, James A., photographer",
+    "date": "1875-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2017650480/",
+    "source": "loc:2017650480"
+  },
+  "ch02/paper_doll_nursery_1883_met.jpg": {
+    "title": "Paper Doll Nursery (, 1970.565.136(3))",
+    "artist": "Anonymous, German, 19th century",
+    "date": "1883",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/916267",
+    "source": "met:916267"
+  },
+  "ch02/blodgett_family_parlour_1864_met.jpg": {
+    "title": "Christmas-Time, The Blodgett Family (American, 1983.486)",
+    "artist": "Eastman Johnson",
+    "date": "1864",
+    "licence": "CC0 (The Met Open Access)",
+    "page": "https://www.metmuseum.org/art/collection/search/11258",
+    "source": "met:11258"
+  },
+  "ch03/grand_ball_prince_of_wales_new_york_1860_loc.jpg": {
+    "title": "Grand ball given by the citizens of New York to the Prince of Wales, at the Academy of Music, October 12, 1860",
+    "artist": "",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002722592/",
+    "source": "loc:2002722592"
+  },
+  "ch03/ball_japanese_embassy_new_york_1860_loc.jpg": {
+    "title": "Ball given by the City of New York to the Japan[es]e embassy at the Metropolitan Hotel, June 25, 1860",
+    "artist": "",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003689165/",
+    "source": "loc:2003689165"
+  },
+  "ch03/bmj_15feb1862_p177_poison_enough.jpg": {
+    "title": "British Medical Journal  January 4-June 28, 1862: Vol 1 (page 176)",
+    "artist": "",
+    "date": "January 4-June 28, 1862",
+    "licence": "public domain by age (1862)",
+    "page": "https://archive.org/details/sim_british-medical-journal_january-4-june-28-1862_1/page/n176",
+    "source": "iabook:sim_british-medical-journal_january-4-june-28-1862_1:176"
   }
 }
