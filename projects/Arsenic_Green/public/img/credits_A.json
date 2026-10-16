@@ -453,5 +453,29 @@
     "date": "1866",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Birds_eye_view_of_the_city_of_Lansing,_Michigan_1866._LOC_73693436.jpg"
+  },
+  "ch01/bpl_bates_hall_1876_page.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 904)",
+    "artist": "United States. Bureau of Education",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/cu31924029529553/page/n904",
+    "source": "iabook:cu31924029529553:904"
+  },
+  "ch01/bpl_periodicals_reading_room_1876_page.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 908)",
+    "artist": "United States. Bureau of Education",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/cu31924029529553/page/n908",
+    "source": "iabook:cu31924029529553:908"
+  },
+  "ch01/cincinnati_public_library_interior_1876_page.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 952)",
+    "artist": "United States. Bureau of Education",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/cu31924029529553/page/n952",
+    "source": "iabook:cu31924029529553:952"
   }
 }
