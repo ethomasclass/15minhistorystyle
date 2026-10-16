@@ -49,6 +49,9 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Written for a general audience, easy to follow** (from *Dressed to Kill*). Learn from what Vox explainers do well, don't copy
   their look: see the skill's `references/explainer-craft.md`. One name per thing, terms defined where they appear, a confusion pass
   before voicing.
+- **Hook-first cold opens** (from *Dressed to Kill*, after the retention graphs): the first sentence is the hook, never a date; the
+  thumbnail's image is on screen at frame 0; the question by about 0:40; one or two promises that pay off later. The channel intro
+  at about 1:00 is fine (no cliff there in *King Andrew*'s graph). Promoted views skip fast, so judge retention on organic traffic.
 - No historian names in the narration ("historians still argue" is fine). No modern politicians. No implied link to today's parties.
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").

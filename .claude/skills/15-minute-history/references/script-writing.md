@@ -21,6 +21,15 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   *King Andrew*: 2,757 words → 14:53 of narration → 15:30 finished.
 - **10–11 chapters**, one idea each, 30 seconds to 2:20 long. Short chapters (30–45 s) are fine for a single beat.
   A chapter is the unit of re-voicing and re-rendering, so keep each one self-contained.
+- **The first 10 seconds decide the video** (the channel's own data, Oct 2026: *Good Luck* lost half its viewers by 0:08,
+  mostly promoted traffic; *King Andrew*, mostly organic, kept 66% at 0:30 and about half to 13:00, with no cliff at the
+  channel intro). So for every cold open: **the first sentence is the hook itself, never a date or a place** ("The most
+  fashionable color of the 1860s was made with arsenic. And people knew it." not "November 1874. Lansing, Michigan.");
+  **what the thumbnail shows is on screen at frame 0** (no fade from black, camera already moving); the question lands by
+  about 0:40; and the cold open ends on the question plus **one or two promises** that pay off later ("We'll come back to
+  that girl."). Chapter 2 starts in the action, not with backstory: background comes in as a short flashback. Write two or
+  three versions of the first 30 seconds and pick the strongest before voicing. Judge retention by organic traffic (Studio
+  → Advanced mode → Traffic source), not the blended graph.
 - **Chapter 1 is a cold open, under a minute.** Open on a concrete artifact: a cartoon, a pamphlet, a portrait,
   a document. Describe it in short sentences. Then pose the **driving question** the whole video answers:
   "So here's the question I want to answer today: How did the People's President end up being called a king?"
