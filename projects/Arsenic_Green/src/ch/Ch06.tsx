@@ -218,10 +218,10 @@ const TooSacred: React.FC<{t: TL}> = ({t}) => {
       <DocWindow src="img/ch06/draper_report_p57_too_sacred_1872.jpg" x={110} y={100} w={1700} h={460} fx={930} fy={1170} sc={1.0} at={t.at('That would') - 1} rot={-1}
         push={[t.at('That would'), t.at("That's laissez-faire")]} zoom={1.08}
         marks={[{at: t.at('under a government'), to: t.end('too sacred'), swipe: [[1370, 1085, 1705, 1146], [150, 1152, 1705, 1216], [150, 1222, 1212, 1282]]}]} />
-      <Note text={'"difficult," he wrote...'} x={130} y={640} size={52} rot={-3} at={t.at('difficult') - 3} color={WHITE} />
-      <Note text="translation:" x={130} y={740} size={52} rot={-3} at={t.at('Translation') - 3} color={WHITE} />
-      <Note text="Americans won't let the government" x={170} y={840} size={56} rot={-3} at={t.at('Americans') - 3} />
-      <Note text="tell a business what it can't sell" x={190} y={940} size={56} rot={-3} at={t.at('tell a business') - 3} color={pal.subject} />
+      <Note text={'"difficult," he wrote...'} x={130} y={600} size={52} rot={-3} at={t.at('difficult') - 3} color={WHITE} />
+      <Note text="translation:" x={130} y={690} size={52} rot={-3} at={t.at('Translation') - 3} color={WHITE} />
+      <Note text="Americans won't let the government" x={170} y={785} size={56} rot={-3} at={t.at('Americans') - 3} />
+      <Note text="tell a business what it can't sell" x={190} y={880} size={56} rot={-3} at={t.at('tell a business') - 3} color={pal.subject} />
       <Tag text={`${DRAPER}, p. 57 · Internet Archive`} y={40} />
     </Desk>
   );

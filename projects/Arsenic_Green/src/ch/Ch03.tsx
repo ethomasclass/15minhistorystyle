@@ -10,6 +10,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {Desk, DropCard, Sounds} from '../kit/bs';
 import {Doc, GREEN, Sil, sizeOf, Swatch, SWATCH_LABELS} from '../kit/dk';
 import {MASKS} from '../masks';
+import {WaltzShot} from '../kit/waltz';
 
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
@@ -46,17 +47,9 @@ const ColourCrop: React.FC<{src: string; x: number; y: number; w: number; h: num
   );
 };
 
-/** The Arsenic Waltz as in the cold open: the lady's gown in arsenic green, slow push. */
+/** The Arsenic Waltz as in the cold open (shared WaltzShot): the lady's gown already arsenic green, slow push. */
 const Waltz: React.FC<{a: number; b: number; z?: [number, number]; children?: React.ReactNode}> = ({a, b, z = [1.05, 1.12], children}) => (
-  <Parallax name="waltz_lady" src={WALTZ} size={sizeOf(WALTZ)} a={a} b={b} fx={0.5} fy={0.38} cam={{z}} depth={1.05} mask={MASKS.waltz_lady} tint={null}
-    tag="Punch, 8 Feb. 1862 · Wellcome Collection" filter="grayscale(1) contrast(1.25) brightness(0.98)">
-    {(p) => (
-      <>
-        <Tint mask={MASKS.waltz_lady.alpha} place={p} size={sizeOf(WALTZ)} color={GREEN} strength={0.7} />
-        {children}
-      </>
-    )}
-  </Parallax>
+  <WaltzShot fx={1487} fy={1000} z0={z[0]} z1={z[1]} a={a} b={b} green={a - 30} shade>{() => <>{children}</>}</WaltzShot>
 );
 
 /** "Possibly a dance." The ballroom, the green gown. */

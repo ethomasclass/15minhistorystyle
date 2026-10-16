@@ -10,6 +10,7 @@ import {ChapterShell, chapterFrames, CropCard, LEAD, makeTimeline, type Narratio
 import {Arch, Desk, Sounds} from '../kit/bs';
 import {Doc, GreenParallax, Plain, Sil, SWATCH_LABELS, Swatch, sizeOf} from '../kit/dk';
 import {MASKS} from '../masks';
+import {WaltzShot} from '../kit/waltz';
 
 const N = words as Narration;
 /** Music-only end screen after the narration (the shell adds its own tail and fade): ~14 s of music after the last word. */
@@ -188,8 +189,7 @@ const Changed: React.FC<{t: TL}> = ({t}) => (
 const Witch: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
-    <GreenParallax name="waltz_lady" src={WALTZ} size={sizeOf(WALTZ)} a={t.at('William Morris') - 1} b={t.at('Thanks') + 10}
-      tag="The Arsenic Waltz, Punch, 8 Feb 1862 · Wellcome Collection" fx={0.43} fy={0.27} cam={{z: [1.2, 1.9]}} depth={1.05} mask={MASKS.waltz_lady} vignette={0.65}>
+    <WaltzShot fx={1279} fy={640} z0={1.2} z1={1.9} a={t.at('William Morris') - 1} b={t.at('Thanks') + 10} green={t.at('William Morris') - 31}>
       {() => (
         <>
           <Note text="William Morris called it" x={110} y={60} size={50} rot={-3} at={t.at('William Morris') - 2} color="#ffffff" />
@@ -198,7 +198,7 @@ const Witch: React.FC<{t: TL}> = ({t}) => {
           <Highlight text="THE WITCH WAS REAL." x={120} y={860} size={100} at={t.at('the witch was real')} seed={811} rot={-2} />
         </>
       )}
-    </GreenParallax>
+    </WaltzShot>
   );
 };
 
