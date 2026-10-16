@@ -1,21 +1,22 @@
-// YouTube thumbnail concepts, drawn at 1920x1080 with the video's own kit and exported at 1280x720
-// (tools/thumbs.mjs renders frame 140 so every write-on has finished).
-//   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
-//   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+// YouTube thumbnail concepts for The Exact Spot, drawn at 1920x1080 with the video's own kit and exported at
+// 1280x720 (tools/thumbs.mjs renders frame 140 so every write-on has finished).
+//   A · the spot: the tilted map, the disputed strip raised and hatched, the X stake; Lincoln cut out on the right.
+//   B · the split: Polk (coral) and Lincoln (teal) facing across the line, the strip between them, "WHOSE SOIL?".
+//   C · the oddity: the cork-leg engraving, the leg in coral, "HIS LEG IS IN ILLINOIS".
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
+import mapData from '../public/maps/mex1846.json';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
+import {Border, Fill, MAP3D, Map3D, type MapData, Slab, Stake, Stand} from './kit/map3d';
+import type {MaskRef} from './kit/maskref';
 import {MASKS} from './masks';
-import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
 export const THUMB_FRAMES = 150;
 const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
-const GOLD = '#FF9F1C';
-const MASK = MASKS.sully; // the mask that matches THUMB_PORTRAIT.src
+const D = mapData as unknown as MapData;
 
 /** Channel logo, top-left (YouTube covers the bottom-right with the running time). */
 const Logo: React.FC = () => {
@@ -32,47 +33,46 @@ const Logo: React.FC = () => {
 const cut = (alpha: string): React.CSSProperties =>
   ({WebkitMaskImage: `url(${staticFile(alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(alpha)})`, maskSize: '100% 100%'}) as React.CSSProperties;
 
-/**
- * The subject tint on one side of the line x = `mid`. The clip sits on each blended layer itself: a clip-path on a
- * wrapper would isolate the blend and the tint would come out flat.
- */
-const SideTint: React.FC<{place: Place; color: string; mid: number; side: 'left' | 'right'}> = ({place, color, mid, side}) => {
-  const w = P.size[0] * place.scale;
-  const m0 = mid - place.left;
-  const m: React.CSSProperties = {
-    position: 'absolute', left: place.left, top: place.top, width: w, height: P.size[1] * place.scale, ...cut(MASK.alpha),
-    clipPath: side === 'left' ? `inset(0 ${w - m0}px 0 0)` : `inset(0 0 0 ${m0}px)`,
-  };
-  return (
-    <>
-      <div style={{...m, background: color, mixBlendMode: 'color'}} />
-      <div style={{...m, background: color, mixBlendMode: 'multiply', opacity: 0.3}} />
-      <div style={{...m, background: color, mixBlendMode: 'screen', opacity: 0.28}} />
-    </>
-  );
-};
+/** A portrait cut out along its mask, tinted one colour, outlined in cream, with a drop shadow. */
+const Cutout: React.FC<{src: string; size: [number, number]; mask: MaskRef; place: Place; color: string}> = ({src, size, mask, place, color}) => (
+  <>
+    <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * place.scale, height: size[1] * place.scale, ...cut(mask.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+      <Picture src={src} place={{left: 0, top: 0, scale: place.scale}} size={size} bw="grayscale(1) contrast(1.25) brightness(0.92)" />
+    </div>
+    <Tint mask={mask.alpha} place={place} size={size} color={color} />
+    <Traced paths={mask.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
+  </>
+);
 
+const LINCOLN: [number, number] = [1920, 2432];
+const POLK: [number, number] = [1920, 2309];
+
+/** The strip on the tilted map: both claim lines, the hatched slab, the X. */
+const SpotMap: React.FC<{x: number; y: number; z: number; tilt?: number; rot?: number}> = ({x, y, z, tilt = 50, rot = -10}) => (
+  <Map3D data={D} keys={[{f: 0, x, y, z, tilt, rot}]}>
+    {(api) => (
+      <>
+        <Border api={api} d={D.lines.nueces} at={-99} dur={1} color={MAP3D.mexico} width={14} dashed />
+        <Border api={api} d={D.lines.rioGrande} at={-99} dur={1} color={MAP3D.us} width={14} dashed />
+        <Slab api={api} region="nuecesStrip" at={-99} h={60} hatch="rgba(255,255,255,0.4)" />
+        <Stand api={api} at={D.places.carricitos}><div style={{transform: 'scale(2.2)', transformOrigin: '50% 100%'}}><Stake /></div></Stand>
+      </>
+    )}
+  </Map3D>
+);
+
+/** A · the spot. */
 export const ThumbA: React.FC = () => {
-  const place: Place = {left: 960 - P.faceX * P.scale, top: P.top, scale: P.scale};
-  const S = (x: number, y: number) => [place.left + x * place.scale, place.top + y * place.scale];
-  const [x0, y] = S(P.crownLeft, P.crownY);
-  const [x1] = S(P.crownRight, P.crownY);
+  const place: Place = {left: 1350 - 1030 * 0.5, top: 120, scale: 0.5};
   return (
     <PaletteCtx.Provider value={PALETTES.locked}>
       <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)'}} />
-        <div style={{position: 'absolute', left: place.left, top: place.top, width: P.size[0] * place.scale, height: P.size[1] * place.scale, ...cut(MASK.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
-          <Picture src={P.src} place={{left: 0, top: 0, scale: place.scale}} size={P.size} bw="grayscale(1) contrast(1.25) brightness(0.9)" />
-        </div>
-        <SideTint place={place} color={TEAL} mid={960} side="left" />
-        <SideTint place={place} color={CORAL} mid={960} side="right" />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
-        <div style={{position: 'absolute', left: 956, top: 0, width: 8, height: 1080, background: '#f4efe6'}} />
-        <AbsoluteFill style={{filter: 'drop-shadow(0 0 3px #0d0c09) drop-shadow(0 6px 10px rgba(0,0,0,0.8))'}}>
-          <DrawnCrown x0={x0} x1={x1} y={y} h={125} at={0} dur={1} width={15} color={GOLD} />
-        </AbsoluteFill>
-        <Highlight text={THUMB_WORDS.left} x={170} y={855} size={150} at={0} seed={71} rot={-3} />
-        <Highlight text={THUMB_WORDS.right} x={1010} y={855} size={150} at={0} seed={73} rot={-2} />
+        <SpotMap x={3330} y={2420} z={1.25} tilt={46} rot={-6} />
+        <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,7,5,0.88) 0%, rgba(8,7,5,0.55) 30%, rgba(8,7,5,0) 50%)'}} />
+        <Cutout src="img/ch01/lincoln_shepherd_1846.jpg" size={LINCOLN} mask={MASKS.lincoln} place={place} color={TEAL} />
+        <Note text="Lincoln asked:" x={90} y={560} size={78} rot={-4} color="#ffffff" />
+        <Highlight text="WHERE WAS" x={70} y={660} size={150} at={0} seed={241} rot={-3} />
+        <Highlight text="THE SPOT?" x={100} y={860} size={150} at={0} seed={243} rot={-2} />
         <Logo />
         <Finish vignette={0.3} />
       </AbsoluteFill>
@@ -80,22 +80,47 @@ export const ThumbA: React.FC = () => {
   );
 };
 
+/** B · the split: Polk vs. Lincoln, the strip between them. */
 export const ThumbB: React.FC = () => {
-  const place: Place = {left: 1080, top: 60, scale: 0.42};
+  const polk: Place = {left: 470 - 720 * 0.46, top: 150, scale: 0.46};
+  const lincoln: Place = {left: 1450 - 1030 * 0.44, top: 150, scale: 0.44};
   return (
     <PaletteCtx.Provider value={PALETTES.locked}>
       <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <DarkPaper />
-        <Picture src={P.src} place={place} size={P.size} bw="grayscale(1) contrast(1.3)" />
-        <Tint mask={MASK.alpha} place={place} size={P.size} />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={8} />
-        <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,7,5,0.95) 0%, rgba(8,7,5,0.85) 45%, rgba(8,7,5,0) 62%)'}} />
-        <Note text="the People's President..." x={90} y={330} size={70} rot={-3} color={TEAL} />
-        <Highlight text={TITLE.split(' ')[0]} x={80} y={440} size={230} at={0} seed={75} rot={-3} />
-        <Highlight text={`${TITLE.split(' ').slice(1).join(' ')}?`} x={120} y={700} size={170} at={0} seed={77} rot={-2} />
+        <AbsoluteFill style={{filter: 'brightness(0.55)'}}><SpotMap x={3160} y={2280} z={1.05} tilt={46} rot={-8} /></AbsoluteFill>
+        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(8,6,4,0) 25%, rgba(8,6,4,0.75) 100%)'}} />
+        <Cutout src="img/ch01/polk_brady_1849.jpg" size={POLK} mask={MASKS.polk} place={polk} color={CORAL} />
+        <Cutout src="img/ch01/lincoln_shepherd_1846.jpg" size={LINCOLN} mask={MASKS.lincoln} place={lincoln} color={TEAL} />
+        <Note text="“American soil”" x={150} y={760} size={64} rot={-3} color="#ffffff" />
+        <Note text="show me the spot" x={1200} y={760} size={64} rot={-3} color="#ffffff" />
+        <Highlight text="WHOSE SOIL?" x={500} y={860} size={150} at={0} seed={245} rot={-2} />
         <Logo />
         <Finish vignette={0.3} />
       </AbsoluteFill>
     </PaletteCtx.Provider>
   );
 };
+
+/** C · the oddity: Santa Anna's cork leg. */
+export const ThumbC: React.FC = () => {
+  const size: [number, number] = [1340, 705];
+  const s = Math.max(1920 / size[0], 1080 / size[1]) * 1.12;
+  const place: Place = {left: Math.max(1920 - size[0] * s, Math.min(0, 960 - 760 * s)), top: 1080 - size[1] * s, scale: s};
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <Picture src="img/gen/ch06_cork_leg.jpg" place={place} size={size} bw="grayscale(1) contrast(1.25) brightness(0.92)" />
+        <Tint mask={MASKS.corkleg_leg.alpha} place={place} size={size} color={CORAL} />
+        <Traced paths={MASKS.corkleg_leg.data.shapes.subject} place={place} at={0} dur={1} width={9} color={TEAL} />
+        <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,7,5,0.9) 0%, rgba(8,7,5,0.4) 30%, rgba(8,7,5,0) 45%)'}} />
+        <div style={{position: 'absolute', left: 1030, top: 175, width: 780, height: 120, background: 'rgba(12,11,9,0.85)', borderRadius: 8, transform: 'rotate(-4deg)', boxShadow: '0 10px 24px rgba(0,0,0,0.5)'}} />
+        <Note text="Santa Anna's cork leg" x={1060} y={190} size={66} rot={-4} color="#ffffff" />
+        <Highlight text="WHY IS IT IN" x={90} y={760} size={130} at={0} seed={247} rot={-2} />
+        <Highlight text="ILLINOIS?" x={1030} y={760} size={130} at={0} seed={249} rot={-3} />
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
