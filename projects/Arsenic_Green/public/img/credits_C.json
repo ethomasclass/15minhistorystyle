@@ -1,0 +1,40 @@
+{
+  "ch04/flower_makers_workshop_godwin_1864.jpg": {
+    "title": "File:An overcrowded artificial flower maker's workshop Wellcome M0012977.jpg",
+    "artist": "",
+    "date": "",
+    "licence": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:An_overcrowded_artificial_flower_maker%27s_workshop_Wellcome_M0012977.jpg"
+  },
+  "ch04/atelier_de_fleuriste_monde_illustre_1903.jpg": {
+    "title": "File:Un atelier de fleuriste. G.36370.jpg",
+    "artist": "Le Monde illustr\u00e9, editeur",
+    "date": "En 1903",
+    "licence": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Un_atelier_de_fleuriste._G.36370.jpg"
+  },
+  "ch04/vernois_1859_plate_flower_makers_hands.jpg": {
+    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 349)",
+    "artist": "",
+    "date": "1859 (19e si\u00e8cle / 19th century)",
+    "licence": "public domain by age (1859)",
+    "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n349",
+    "source": "iabook:BIUSante_90141x1859x12:349"
+  },
+  "ch04/vernois_1859_plate_explanation_page.jpg": {
+    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 347)",
+    "artist": "",
+    "date": "1859 (19e si\u00e8cle / 19th century)",
+    "licence": "public domain by age (1859)",
+    "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n347",
+    "source": "iabook:BIUSante_90141x1859x12:347"
+  },
+  "ch04/vernois_1859_plate_face_sores.jpg": {
+    "title": "Annales d'hygi\u00e8ne publique et de m\u00e9decine l\u00e9gale (page 350)",
+    "artist": "",
+    "date": "1859 (19e si\u00e8cle / 19th century)",
+    "licence": "public domain by age (1859)",
+    "page": "https://archive.org/details/BIUSante_90141x1859x12/page/n350",
+    "source": "iabook:BIUSante_90141x1859x12:350"
+  }
+}
