@@ -162,7 +162,8 @@ type Def = {id: string; segs: Seg[]; payoff: [string, number?]; cover: React.Rea
 const Short: React.FC<{d: Def; b: Built}> = ({d, b}) => {
   const t = makeTimeline(b.n, FPS);
   const end = Math.round(b.storyEnd * FPS);
-  const cuts = d.cuts(t);
+  // key every scene so React remounts it at each cut (scenes call hooks in different numbers)
+  const cuts = d.cuts(t).map(([f, node], i): [number, React.ReactNode] => [f, <React.Fragment key={i}>{node}</React.Fragment>]);
   const scene = useScene(cuts);
   const payoff = t.at(d.payoff[0], d.payoff[1] ?? 1) / FPS;
   const startFrom = Math.max(0, Math.round((ACCENT - payoff) * FPS));
