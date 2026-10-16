@@ -195,28 +195,41 @@ const Short: React.FC<{d: Def; b: Built}> = ({d, b}) => {
 };
 
 // ---------- 1 · Mummy, by the kilo ----------
-const merckLineScene = (t: TL) => (
-  <VPhoto src={IMG.merckPage.src} size={IMG.merckPage.size} fx={1240} fy={3404} z0={1.18} z1={1.25} a={0} b={t.at('Supplies lasted')} sy={640}
-    bw="grayscale(1) contrast(1.15) sepia(0.25)" tag="E. Merck, Preis-Liste, 1903, p. 254 · Internet Archive">
-    {(S) => {
-      const [ux0, uy] = S(240, 3440);
-      const [ux1] = S(1030, 3440);
-      const [px, py] = S(2160, 3404);
-      const [sx0] = S(1050, 3440);
-      const [sx1] = S(1545, 3440);
-      return (
-        <>
-          <Sketch pts={[[ux0, uy], [ux1, uy + 4]]} x={0} y={0} at={t.at('Mumia vera')} dur={8} width={7} smooth={false} />
-          <Note text="= genuine Egyptian mummy" x={70} y={uy + 60} size={58} rot={-3} at={t.at('Genuine')} />
-          <Loop cx={Math.min(px, 980)} cy={py} rx={120} ry={70} at={t.at('Seventeen')} seed={4} color={CORAL} />
-          <Note text="17.50 marks a kilo" x={420} y={uy + 170} size={56} rot={-3} at={t.at('Seventeen') + 4} color="#ffffff" />
-          <Sketch pts={[[sx0, uy + 4], [sx1, uy + 8]]} x={0} y={0} at={t.at('While supplies')} dur={6} width={7} smooth={false} color="#FF9F1C" />
-          {useGFrame() >= t.at('While supplies') && <Highlight text="WHILE SUPPLIES LAST" x={60} y={uy + 290} size={84} at={t.at('While supplies')} seed={12} rot={-2} />}
-        </>
-      );
-    }}
-  </VPhoto>
-);
+/** Two cards cut from Merck's page 254: the mumia line (with the musk above it), and the price, blown up. */
+const PageCut: React.FC<{x: number; y: number; w: number; h: number; sx: number; sy: number; sc: number; at: number; rot?: number}> = ({x, y, w, h, sx, sy, sc, at, rot = -1.5}) => {
+  const g = useGFrame();
+  if (g < at) return null;
+  const k = interpolate(g, [at, at + 5], [0.75, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, width: w, height: h, overflow: 'hidden', background: '#f4efe6', boxShadow: '0 24px 44px rgba(0,0,0,0.7)', transform: `scale(${k}) rotate(${rot}deg)`}}>
+      <Picture src={IMG.merckPage.src} place={{left: -sx * sc, top: -sy * sc, scale: sc}} size={IMG.merckPage.size} bw="grayscale(1) contrast(1.2) sepia(0.25)" />
+    </div>
+  );
+};
+const merckLineScene = (t: TL) => {
+  // card A: source x 200..1600, y 3290..3470 at scale 0.72 -> 1008 x 130; the mumia line baseline at about y 3440
+  const A = {x: 36, y: 330, sx: 200, sy: 3285, sc: 0.72};
+  const toA = (px: number, py: number) => [A.x + (px - A.sx) * A.sc, A.y + (py - A.sy) * A.sc];
+  const [ux0, uy] = toA(240, 3440);
+  const [ux1] = toA(1030, 3440);
+  const [sx0] = toA(1050, 3440);
+  const [sx1] = toA(1545, 3440);
+  return (
+    <Desk>
+      <Note text="a 1903 drug catalog:" x={70} y={200} size={56} rot={-3} at={-40} color="#ffffff" />
+      <PageCut x={A.x} y={A.y} w={1008} h={150} sx={A.sx} sy={A.sy} sc={A.sc} at={-40} />
+      <Sketch pts={[[ux0, uy], [ux1, uy + 4]]} x={0} y={0} at={t.at('Mumia vera')} dur={8} width={7} smooth={false} />
+      <Note text="= genuine Egyptian mummy" x={70} y={520} size={60} rot={-3} at={t.at('Genuine')} />
+      <PageCut x={500} y={650} w={520} h={250} sx={2000} sy={3320} sc={1.6} at={t.at('Seventeen') - 2} rot={2} />
+      <Loop cx={760} cy={775} rx={250} ry={120} at={t.at('Seventeen') + 2} seed={4} color={CORAL} />
+      <Note text="17.50 marks" x={70} y={700} size={58} rot={-3} at={t.at('Seventeen') + 4} color="#ffffff" />
+      <Note text="a kilo" x={110} y={800} size={58} rot={-3} at={t.at('a kilo')} color="#ffffff" />
+      <Sketch pts={[[sx0, uy + 4], [sx1, uy + 8]]} x={0} y={0} at={t.at('While supplies')} dur={6} width={7} smooth={false} color="#FF9F1C" />
+      {useGFrame() >= t.at('While supplies') && <Highlight text="WHILE SUPPLIES LAST" x={50} y={970} size={84} at={t.at('While supplies')} seed={12} rot={-2} />}
+      <VTag text="E. Merck, Preis-Liste, 1903, p. 254 · Internet Archive" />
+    </Desk>
+  );
+};
 const S1: Def = {
   id: 'VShort1',
   segs: [[1, 'Mumia vera', 'supplies last.'], [1, 'Supplies lasted', 'the catalog.'], [1, 'For centuries', 'Scientists did it.'], [3, 'Bruises', 'pretty much everything.'],
@@ -351,14 +364,14 @@ const S2: Def = {
         {() => (
           <>
             <Note text="arriving from Venice + Lyon" x={70} y={200} size={58} rot={-3} at={t.at('arriving')} color="#ffffff" />
-            <Note text="recent bodies" x={80} y={940} size={66} rot={-4} at={t.at('Recent')} />
-            <Note text="+ pitch + an oven" x={100} y={1050} size={60} rot={-3} at={t.at('stuffed')} />
+            <Note text="recent bodies" x={80} y={320} size={66} rot={-4} at={t.at('Recent')} />
+            <Note text="+ pitch + an oven" x={100} y={430} size={60} rot={-3} at={t.at('stuffed')} />
           </>
         )}
       </VPhoto>
     )],
     [t.at("Pomet's verdict") - 1, (
-      <VPhoto src={IMG.pomet1712Plate.src} size={IMG.pomet1712Plate.size} fx={2250} fy={1800} z0={1.0} z1={1.06} a={t.at("Pomet's verdict")} b={t.at('If you want')} sy={720}
+      <VPhoto src={IMG.pomet1712Plate.src} size={IMG.pomet1712Plate.size} fx={2250} fy={1132} z0={1.35} z1={1.4} a={t.at("Pomet's verdict")} b={t.at('If you want')} sy={720}
         bw="grayscale(1) contrast(1.15) sepia(0.2)" tag="Pomet, A Compleat History of Druggs, 1712 · Internet Archive">
         {() => (
           <>
