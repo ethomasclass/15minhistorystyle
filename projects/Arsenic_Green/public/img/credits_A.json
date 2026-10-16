@@ -455,27 +455,51 @@
     "page": "https://commons.wikimedia.org/wiki/File:Birds_eye_view_of_the_city_of_Lansing,_Michigan_1866._LOC_73693436.jpg"
   },
   "ch01/bpl_bates_hall_1876_page.jpg": {
-    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 904)",
-    "artist": "United States. Bureau of Education",
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 904)",
+    "artist": "United States. Education, Office of",
     "date": "1876",
     "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/cu31924029529553/page/n904",
-    "source": "iabook:cu31924029529553:904"
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n904",
+    "source": "iabook:publiclibrariesi00unituoft:904"
   },
   "ch01/bpl_periodicals_reading_room_1876_page.jpg": {
-    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 908)",
-    "artist": "United States. Bureau of Education",
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 908)",
+    "artist": "United States. Education, Office of",
     "date": "1876",
     "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/cu31924029529553/page/n908",
-    "source": "iabook:cu31924029529553:908"
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n908",
+    "source": "iabook:publiclibrariesi00unituoft:908"
   },
   "ch01/cincinnati_public_library_interior_1876_page.jpg": {
-    "title": "Public libraries in the United States of America; their history, condition, and management. Special report, Department of the Interior, Bureau of Education. Part I (page 952)",
-    "artist": "United States. Bureau of Education",
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 952)",
+    "artist": "United States. Education, Office of",
     "date": "1876",
     "licence": "public domain by age (1876)",
-    "page": "https://archive.org/details/cu31924029529553/page/n952",
-    "source": "iabook:cu31924029529553:952"
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n952",
+    "source": "iabook:publiclibrariesi00unituoft:952"
+  },
+  "ch01/bpl_bates_hall_1876.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 904) [crop: engraving with caption, box (100, 740, 2100, 3460) of ch01/bpl_bates_hall_1876_page.jpg]",
+    "artist": "United States. Education, Office of",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n904",
+    "source": "iabook:publiclibrariesi00unituoft:904"
+  },
+  "ch01/bpl_periodicals_reading_room_1876.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 908) [crop: engraving with caption, box (330, 1080, 1870, 3030) of ch01/bpl_periodicals_reading_room_1876_page.jpg]",
+    "artist": "United States. Education, Office of",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n908",
+    "source": "iabook:publiclibrariesi00unituoft:908"
+  },
+  "ch01/cincinnati_public_library_interior_1876.jpg": {
+    "title": "Public libraries in the United States of America; their history, condition, and management .. (page 952) [crop: engraving with caption, box (140, 640, 2150, 3400) of ch01/cincinnati_public_library_interior_1876_page.jpg]",
+    "artist": "United States. Education, Office of",
+    "date": "1876",
+    "licence": "public domain by age (1876)",
+    "page": "https://archive.org/details/publiclibrariesi00unituoft/page/n952",
+    "source": "iabook:publiclibrariesi00unituoft:952"
   }
 }
