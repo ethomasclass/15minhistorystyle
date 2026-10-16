@@ -128,7 +128,7 @@ const Waltz: React.FC<{t: TL}> = ({t}) => {
             <>
               <Loop cx={mx} cy={my} rx={170} ry={190} at={t.at('closer') + 1} seed={15} tilt={-8} width={6} />
               <Loop cx={lx} cy={ly} rx={130} ry={160} at={t.at('both') + 1} seed={16} tilt={4} width={6} />
-              <Stamp text="SKELETONS." x={110} y={820} at={t.at('skeletons')} size={130} color={pal.subject} rot={-2} />
+              <Stamp text="SKELETONS." x={860} y={830} at={t.at('skeletons')} size={130} color={pal.subject} rot={-2} />
             </>
           );
         }}

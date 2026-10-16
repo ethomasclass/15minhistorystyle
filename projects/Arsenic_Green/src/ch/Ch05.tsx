@@ -216,7 +216,7 @@ const Diagram: React.FC<{t: TL}> = ({t}) => {
       <Dust x0={W.x1 - 8} x1={W.x1 + 4} y0={W.y0 + 40} y1={W.y1 - 160} floor={W.y1} at={dust} n={26} seed="d1" rate={2.4} loop={64} pile={40} />
       <Dust x0={W.x1 - 6} x1={W.x1 + 6} y0={430} y1={560} floor={W.y1} at={brush + 4} n={24} seed="d2" rate={0.6} />
       <Highlight text="DUST" x={560} y={560} size={88} at={t.at('as dust')} seed={507} rot={-3} />
-      <Note text="every brush past the wall" x={480} y={720} size={42} rot={-3} at={brush - 3} color={WHITE} />
+      <Note text="every brush past the wall" x={450} y={720} size={40} rot={-3} at={brush - 3} color={WHITE} />
       {/* the hand, then the mouth */}
       <Arrow x1={560} y1={850} x2={990} y2={800} bow={30} at={touch - 1} />
       <Stroke pts={handPts} at={touch} dur={12} width={6} seed="hand" />

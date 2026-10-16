@@ -319,10 +319,10 @@ const Shopping: React.FC<{t: TL}> = ({t}) => {
 /** Then he bound them into a book and mailed it to the libraries. This book. */
 const TheBook: React.FC<{t: TL}> = ({t}) => (
   <Desk a={t.at('Then he bound')}>
-    <DropCard src="img/ch01/kedzie_cover_green_label_crop_1874.jpg" x={600} y={70} w={720} rot={-2} at={t.at('Then he bound') - 1} filter="contrast(1.04)" />
+    <DropCard src="img/ch01/kedzie_cover_green_label_crop_1874.jpg" x={840} y={80} w={680} rot={-2} at={t.at('Then he bound') - 1} filter="contrast(1.04)" />
     <Note text="bound into a book..." x={110} y={300} size={52} rot={-3} at={t.at('into a book') - 3} color={WHITE} />
     <Note text="...mailed to the libraries" x={110} y={420} size={48} rot={-3} at={t.at('mailed it') - 3} color={WHITE} />
-    <Highlight text="THIS BOOK." x={700} y={880} size={110} at={t.at('This book.')} seed={615} rot={-2} />
+    <Highlight text="THIS BOOK." x={880} y={880} size={110} at={t.at('This book.')} seed={615} rot={-2} />
     <Tag text={`Kedzie, Shadows from the Walls of Death, 1874: cover label (itself arsenical paper) · ${NLM}`} y={40} />
   </Desk>
 );
