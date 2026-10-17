@@ -80,11 +80,11 @@ Project layout:
 ```
 script/      chNN_slug.txt per chapter, SCRIPT.md, GEMINI_PROMPTS.md, MUSIC.md
 src/         project.ts (per-video settings), chapters.ts, masks.ts, Thumbnail.tsx, Brand.tsx (logo stills), ch/ChNN.tsx,
-             kit/ (shared look, maps, charts), lib/
+             kit/ (shared look, maps incl. the 3D map map3d.tsx, engraving.tsx, parallax.tsx, charts), lib/
 public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for AI, masks/, maps/), music/, sfx/, fonts/
 tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
              sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, script_pdf.py, music_eleven.py,
-             sfx_eleven.py, brand.mjs
+             sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master
 ```
@@ -99,6 +99,10 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - **Archival first.** Real people only from period images. AI paintings only for gaps, never showing a
   recognizable real person, all sharing one style paragraph. **Ask before writing AI prompts**: some videos use none
   (*Grip Tighter*, *Say It Ain't So*); an engraving detail, a period document or a drawn diagram can fill a gap.
+  Before photography, AI gaps are period **wood engravings** from one master prompt (*The Exact Spot*). Search anywhere
+  for archival images (LOC, Internet Archive books, museums), not just Wikimedia.
+- **Check every mask at full resolution** (`tools/mask_closeup.py`) and fix rough ones with `tools/refine_mask.py` and
+  hand traces (images-and-masks.md §6). If a picture can be misread, draw the event instead.
 - **One subject in color per image, a source tag on every image, text never off the frame edge.** Run the text
   probe on every chapter before each render the user will see.
 - **Check your own work visually before the user does**: contact sheets of stills, the text-edge probe, the

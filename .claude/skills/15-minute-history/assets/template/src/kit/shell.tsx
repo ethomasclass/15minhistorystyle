@@ -14,10 +14,12 @@ export type {Narration};
 
 /** Frames of black-with-logo at the start of chapters 2-11 before the chapter fades up. */
 export const LEAD = 44;
-/** Frames the chapter picture takes to fade up from black / down to black. */
-export const FADE = 10;
-/** Frames after the last word before the chapter fades out. */
-export const TAIL = 24;
+/** Frames the chapter picture takes to fade up from black / down to black (a gentle dip, not a cut). */
+export const FADE = 18;
+/** Frames after the last word before the chapter fades out: room to breathe while the music lifts a little. */
+export const TAIL = 54;
+/** How much the music bed lifts in the tail after the last word (1 = no lift). */
+export const TAIL_LIFT = 1.6;
 
 /** A chapter's total length: optional logo lead, the narration, a tail and the fade to black. */
 export const chapterFrames = (n: Narration, lead: number) => lead + Math.ceil(n.duration * 30) + TAIL + FADE;
@@ -113,7 +115,7 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
  * Narration starts at `lead`; `body` is rendered in narration time (frame 0 = first sample of narration).
  */
 export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number;
-  music?: {src: string; volume?: number; startFrom?: number; from?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
+  music?: {src: string; volume?: number; startFrom?: number; from?: number; to?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
   const frame = useCurrentFrame();
   // `extra` frames after the narration: a music-only end screen on the last chapter (add the same to its FRAMES)
   const total = chapterFrames(n, lead) + extra;
@@ -132,7 +134,17 @@ export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; 
             {music.map((m, i) => (
               <Sequence key={i} from={m.from ?? 0} layout="none">
                 <Audio src={staticFile(m.src)} startFrom={m.startFrom ?? 0}
-                  volume={(f) => interpolate(f, [0, 20, total - lead - (m.from ?? 0) - 40, total - lead - (m.from ?? 0)], [0, m.volume ?? 0.15, m.volume ?? 0.15, 0], clamp)} />
+                  volume={(f) => {
+                    // fade in, sit under the narration, lift in the tail after the last word, fade out with the picture
+                    const v = m.volume ?? 0.15;
+                    const from = m.from ?? 0;
+                    const end = total - lead - from;
+                    const said = Math.max(21, Math.ceil(n.duration * 30) - from);
+                    const lift = Math.min(end - 31, said + 18);
+                    // `to`: hand over to the next cue, fading out over a second
+                    const off = m.to === undefined ? 1 : interpolate(f, [m.to - from - 30, m.to - from], [1, 0], clamp);
+                    return off * interpolate(f, [0, 20, said, lift, end - 30, end], [0, v, v, v * TAIL_LIFT, v * TAIL_LIFT, 0], clamp);
+                  }} />
               </Sequence>
             ))}
           </Sequence>
@@ -155,8 +167,8 @@ const LogoLead: React.FC = () => {
  * inside a w x h window at (x, y). `children(S)` get a source->screen mapper for overlays.
  */
 export const CropCard: React.FC<{src: string; size: [number, number]; x: number; y: number; w: number; h: number; fx: number; fy: number; scale: number; rot?: number; at?: number;
-  bw?: string; outline?: boolean; mask?: MaskRef; tint?: string | null; traceAt?: number; children?: (S: (sx: number, sy: number) => number[]) => React.ReactNode}> = ({
-  src, size, x, y, w, h, fx, fy, scale, rot = 0, at = -999, bw = 'grayscale(1) contrast(1.2)', outline = false, mask, tint, traceAt, children,
+  bw?: string; outline?: boolean; mask?: MaskRef; tint?: string | null; tintStrength?: number; traceAt?: number; children?: (S: (sx: number, sy: number) => number[]) => React.ReactNode}> = ({
+  src, size, x, y, w, h, fx, fy, scale, rot = 0, at = -999, bw = 'grayscale(1) contrast(1.2)', outline = false, mask, tint, tintStrength = 1, traceAt, children,
 }) => {
   const g = useGFrame();
   const pal = usePal();
@@ -171,7 +183,7 @@ export const CropCard: React.FC<{src: string; size: [number, number]; x: number;
         transform: `scale(${0.6 + 0.4 * k}) rotate(${rot}deg)`, opacity: Math.min(1, k * 2), outline: outline ? `5px solid ${pal.mark}` : undefined, outlineOffset: 10}}>
         <div style={{position: 'absolute', left: 14, top: 14, width: w, height: h, overflow: 'hidden'}}>
           <Img src={staticFile(src)} style={{position: 'absolute', left, top, width: size[0] * scale, height: size[1] * scale, filter: bw}} />
-          {mask && tint !== null && <Tint mask={mask.alpha} place={{left, top, scale}} size={size} color={tint} />}
+          {mask && tint !== null && <Tint mask={mask.alpha} place={{left, top, scale}} size={size} color={tint ?? undefined} strength={tintStrength} />}
           {mask && <Traced paths={mask.data.shapes.subject} place={{left, top, scale}} at={traceAt ?? (at > -999 ? at + 5 : 4)} dur={12} width={5} />}
         </div>
       </div>

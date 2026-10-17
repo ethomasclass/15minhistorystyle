@@ -46,3 +46,21 @@ document, no tabs), otherwise a `.docx` or Markdown file in `review/`. Example q
 ```
 
 Offer an answer key in one line at the end of your reply rather than building one unasked.
+
+## Viewing guide built from a lesson card (from *The Exact Spot*)
+
+When the user gives a lesson card (an image of the day's required content) and asks for a worksheet to fill in **while
+watching**, this format worked:
+
+- **True/false and short answer only.** No essays; a few words per answer.
+- **20 questions at most** (the first draft had more and the user asked to pare it down), plus one warm-up blank.
+- **The video's exact wording**: blanks are words the narrator says ("one of the most ______ ever waged by a stronger
+  against a weaker nation"), and true/false statements reuse its phrasing, with false ones changed in one clear detail.
+- **No date questions.** Dates aren't important to this teacher.
+- A **time stamp** on each, in video order, grouped into parts that match the card's sections so every required point is
+  covered. A few **ASK** questions (the card's discussion questions) and **Define** questions for its vocabulary.
+- A **Teacher Key** in a second tab of the same Claude Doc: each answer in the narration's own words, with any
+  "also accept" alternatives.
+
+The example is `examples/08_Exact_Spot/Exact_Spot_viewing_guide.md` and `Exact_Spot_teacher_key.md`. Check every time
+stamp against the master (chapter start + the word's time in the chapter's `words.json`).

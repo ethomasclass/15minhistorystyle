@@ -14,6 +14,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 4 | ***Grip Tighter:** Slavery and the Cotton South*, 1790–1860 | 17:24 | 10 | 2,760 | `Slaveryvideo` · `ccr-ec669e6a-l5w6ai` | "…the closer the whole country came to tearing apart." |
 | 5 | ***Good Luck:** How the Ouija board went from romantic to scary*, 1886–1973 | 9:48 | 9 | 1,600 | `Ouija` · `ccr-6addf590-j2w0xz` | "…that was up to whoever was holding it." + a 15 s end screen |
 | 6 | ***Say It Ain't So:** Baseball's Gambling Problem Before the Black Sox*, 1865–1921 (+ today) | 10:23 | 8 | 1,709 | this repo · `black-sox-video` (`projects/Black_Sox/`) | "…It's who's watching when they do." + subscribe line and a 12 s end screen. Plus 4 vertical Shorts |
+| 7 | ***The Exact Spot:** Texas, the Mexican-American War, and the Question It Reopened*, 1821–1848 | 14:45 | 10 | 2,485 | this repo · `claude/relaxed-lamport-62biq7` (`projects/Mexican_American_War/`) | "It took about 13 years to work." + thank-you/subscribe line and a 15 s end screen |
 
 ## What each one added
 
@@ -42,6 +43,15 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   reminders** (now a standing rule); a readable **script PDF** for review; and **native vertical Shorts** that splice hook-first lines
   out of the chapter narration (no new voice) with word-by-word captions. No AI images (your call); 9 reused music cues, none new.
   Thumbnail: BANNED 1921 / PARTNER 2026 with Shoeless Joe (C).
+- **The Exact Spot (Mexican-American War)** was built from a lesson card (Lesson 2 Day 2) and paired with a **student viewing guide and
+  teacher key** (a Claude Doc). It added: the **3D tilted map** (our own Natural Earth map in perspective: slabs, claim lines dashed vs.
+  agreed borders solid, standing labels, a border sliding over towns, free/slave state tiles turning into the 1861 split); **Flow wood
+  engravings** for every gap (17 scenes, one master prompt, shown full frame with a soft fade) instead of oil paintings; parallax on
+  engravings with a plain-paper fill; a **mask clean-up toolkit** (`refine_mask.py`, hand traces, full-resolution close-ups) after you
+  flagged a rough portrait; loops placed on facsimile text lines found by line detection; a **drawn ambush diagram** in place of a
+  confusing engraving; a broken-axis timeline; gentle chapter endings (the music lifts after the last word); cue hand-overs on a phrase;
+  and an end screen with drawn slots. Three new Suno cues (`m_frontier`, `m_war_drums`, `m_lament`) and 10 reused. Four thumbnails, the
+  last one topic-led ("MEXICAN-AMERICAN WAR: WHO STARTED IT?" over a period print, no single person).
 
 ## Your standing preferences (from your notes across the videos)
 
@@ -61,7 +71,10 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.
 - No black edges, and the camera never shows past the edge of a map or stage.
-- Drawn diagrams and cards beat fussy illustrated props.
+- Drawn diagrams and cards beat fussy illustrated props. **If an image can be misread, replace it with a drawn diagram** (The Exact Spot: soldiers "inside a fence" became a drawn trap beside the map).
+- **Masks are checked at full resolution** (`tools/mask_closeup.py`), not just on the contact sheet. A rough edge gets cleaned or hand-traced before the scene ships.
+- **Heads stay in frame** through every push and drift. Check the first and last frame of each push into a group.
+- **Make an allusion explicit.** When a map points to a later event (the 1861 split), label it on screen: sides, a key, a dated pin, the event's name.
 - No caricatured engravings in a serious chapter.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
 
@@ -74,6 +87,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 **Images**
 - **AI images are a per-video call.** Black Sox used none ("roll with what is available"); Grip Tighter used none; Ouija used many.
   Ask before writing prompts. When a gap has no photo, prefer an engraving detail, a period document or a drawn diagram.
+- When AI images are used for a pre-photography era, **period wood engravings** (Flow, one master prompt) fit best beside real prints.
+- **Search anywhere for images** (from *The Exact Spot*): Library of Congress, Internet Archive books, state collections, museums, not just Wikimedia. Credit every one in `credits.json`.
 
 **Shorts**
 - **Native vertical, not letterboxed.** Rebuild each scene for 9:16 (full-screen subject, big captions), open on the strongest
@@ -84,6 +99,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - The whole head is in frame, and any symbol sits on the head at the right size.
 - Text stays clear of the face.
 - The headline is big and the kicker smaller.
+- A **topic-led** option is welcome: the topic people search for plus a question ("MEXICAN-AMERICAN WAR: WHO STARTED IT?") over images of the event, not one person.
 
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
@@ -96,3 +112,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Classroom handouts**
 - "Way more simple": 10–12 questions using Explain, Describe and Identify. (Grip Tighter's 26-question guide with an answer key was an exception.)
+- **Viewing guide to fill in while watching** (from *The Exact Spot*): **true/false and short answer**, **20 questions at most**, in the **video's exact
+  wording** so students can catch the answer as it's said, each with a timestamp, in the order of the video, grouped to match the lesson
+  card's parts so the card's content is covered. **No date questions** (dates aren't important to you). Short answers only, no essays.
+- **Teacher key** in a separate tab of the same doc, with the answer and the timestamp for each question.

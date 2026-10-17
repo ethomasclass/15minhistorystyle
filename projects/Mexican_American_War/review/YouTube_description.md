@@ -62,7 +62,7 @@ mexican american war, mexican-american war, lincoln spot resolutions, spotty lin
 - **Altered or synthetic content: Yes.** About 17 scenes use AI-illustrated wood engravings (in
   `public/img/gen/`), and the narrator is an AI voice clone.
 - **Category:** Education.
-- **Thumbnail:** `renders/thumbnails/Exact_Spot_A.png`, `_B.png` or `_C.png` (your pick).
+- **Thumbnail:** `renders/thumbnails/Exact_Spot_A.png`, `_B.png`, `_C.png` or `_D.png` (your pick; D is the topic-led "Who started it?").
 - **Video file:** `renders/Exact_Spot_1080p.mp4` (the Git LFS master).
 - **End screen:** from 14:25 to the end. Put two video elements over the outlined boxes on the left and the
   subscribe element over the circle on the right.

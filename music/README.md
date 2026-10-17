@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History so far: **38 cues, about 66 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History so far: **41 cues, about 75 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -11,8 +11,9 @@ prefix says which video the cue was made for:
 | `w_` | *The War Nobody Won* (War of 1812) | Google Lyria |
 | `a_` | *The Man Who Couldn't Sit Still* (Ambrose Bierce) | Suno |
 | `g_` | *Grip Tighter: Slavery and the Cotton South* | Suno |
+| `m_` | *The Exact Spot* (Texas and the Mexican-American War) | Suno |
 
-*Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. Keep the prefixes when you copy a cue into a video
+*Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *The Exact Spot* reused 10 and added three Suno cues (`m_`). Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
 
 **Reuse first.** Before generating anything, find a cue below for each chapter and write the video's `script/MUSIC.md`
@@ -26,29 +27,29 @@ prefix says which video the cue was made for:
 - **Cold open: 0.17**, dipping at the end. **Title sting: 0.45**, starting 4 frames before the "15" (already wired into `Intro.tsx`).
 - **Heavy chapters** get a grave cue at about 0.12, or near-silence. Near-silence is a choice, not a gap.
 - **The generators master to different levels.** Lyria cues measure −10.7 to −13.1 LUFS. ElevenLabs cues measure −12.8 to −19.6, and Suno
-  cues −14.7 to −17.3. So a quiet cue needs a higher bed: `j_good_feelings` (−19.6) ran at 0.26–0.3 in *Good Luck*. Use the LUFS column:
+  cues −14.7 to −17.9. So a quiet cue needs a higher bed: `j_good_feelings` (−19.6) ran at 0.26–0.3 in *Good Luck*. Use the LUFS column:
   every 6 dB quieter than about −12 means roughly doubling the bed. The loudest cues (`r_spirits_dark`, `w_aftermath`, `r_schools`) sit at 0.12–0.14.
 - `tools/master.py` normalizes the final mix to −14 LUFS, so cues only need to balance against each other and the voice.
+- **Tail lift and hand-overs** (*The Exact Spot*): every chapter's music lifts to ×1.6 for the ~2 s after the last word, then fades with the picture (`TAIL_LIFT` in `kit/shell.tsx`), so pick cues whose tail still sounds good louder. A music entry's `to:` ends one cue with a 30-frame fade as the next one's `from:` starts (`{src, volume, startFrom, from, to}`), so a chapter can change cue on a phrase: `to: TM.at('October') + 6` / `from: TM.at('October') - 6`.
 
 **Credit line for the description:** "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History."
 
 ## Pick by feeling
 
-
 ### Stings
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_title_sting`](cues/r_title_sting.mp3) | 0:30 | -11.3 | Channel title sting: one warm, bold orchestral + piano hit with a low boom and rising string swell that rings out. | Only the first ~10 s are used (the file is 29.6 s); the intro fades it out by frame 74 (~2.5 s after the hit). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
+| [`r_title_sting`](cues/r_title_sting.mp3) | 0:30 | -11.3 | Channel title sting: one warm, bold orchestral + piano hit with a low boom and rising string swell that rings out. | Only the first ~10 s are used (the file is 29.6 s); the intro fades it out by frame 74 (~2.5 s after the hit). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot |
 | [`w_title_fanfare`](cues/w_title_fanfare.mp3) | 0:29 | -10.8 | Short theatrical overture flourish: bright brass fanfare, fife + field drums, martial 1812 march phrase, cymbal crash, big ringing final chord. |  | The War Nobody Won |
 
 ### Cold opens and mystery
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_cold_open`](cues/r_cold_open.mp3) | 1:16 | -12.4 | Mystery / 'investigators' cue: felt-piano ostinato, muted pizzicato bass, ticking clock; dark accent ~28 s; then restless montage energy; ends on a held questioning chord. | Dark accent at ~28 s (Grip Tighter lands it on 'Between 55 and 60 white people were killed'); the closing questioning chord sits under the video's big question. | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
+| [`r_cold_open`](cues/r_cold_open.mp3) | 1:16 | -12.4 | Mystery / 'investigators' cue: felt-piano ostinato, muted pizzicato bass, ticking clock; dark accent ~28 s; then restless montage energy; ends on a held questioning chord. | Dark accent at ~28 s (Grip Tighter lands it on 'Between 55 and 60 white people were killed'); the closing questioning chord sits under the video's big question. | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot |
 | [`j_cold_open`](cues/j_cold_open.mp3) | 1:02 | -17.8 | Tense, restrained: low solo cello, string drones, sparse pizzicato, soft ticking pulse, distant frame-drum heartbeat, lonely fiddle; slow suspense build to a held unresolved chord. | Written for the 1806 duel: King Andrew MUSIC.md says start it at 'Then came the Revolution' so the swell lands on the duel. | Jackson Video 1 / Part One, King Andrew, Good Luck, Grip Tighter, Say It Ain't So |
-| [`j_intrigue`](cues/j_intrigue.mp3) | 2:05 | -15.4 | Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail. | Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Fix Everything, Good Luck, Say It Ain't So |
+| [`j_intrigue`](cues/j_intrigue.mp3) | 2:05 | -15.4 | Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail. | Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Fix Everything, Good Luck, Say It Ain't So, The Exact Spot |
 | [`r_spirits`](cues/r_spirits.mp3) | 1:42 | -10.7 | Playful and eerie: music box, detuned piano, tremolo strings, soft knocks; second half turns earnest and wide (pioneers trekking west). | First ~50 s (music box, detuned piano, soft knocks) is the Fox-sisters part; the second half turns earnest/wide. | Fix Everything, Good Luck |
 | [`w_calm_sea`](cues/w_calm_sea.mp3) | 1:07 | -12.5 | Calm, open, slightly uneasy morning at sea: rocking 6/8 low strings, solo wooden flute shanty phrase, harp, col legno rope creaks; darkens after ~30 s with a low cello ostinato; held unresolved minor chord. | First ~30 s calm; the threat (cello ostinato) creeps in after ~30 s. | The War Nobody Won, Good Luck |
 
@@ -58,7 +59,7 @@ prefix says which video the cue was made for:
 |---|---|---|---|---|---|
 | [`r_schools`](cues/r_schools.mp3) | 1:02 | -12.4 | Light, bright, curious: pizzicato, glockenspiel, clarinet, bouncy piano; knowing comic final button (Ouija's 'fun' theme). | The comic final button (Ouija lands it on "It's the point."). | Fix Everything, The Man Who Couldn't Sit Still, Good Luck |
 | [`j_gossip`](cues/j_gossip.mp3) | 2:00 | -12.8 | Playful, gossipy, mischievous: tiptoeing pizzicato, fussy harpsichord, sly clarinet, teacup percussion, 'gasp' string swells, dramatic finish. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck |
-| [`a_price`](cues/a_price.mp3) | 1:05 | -17.3 | Caper underscore, Gilded Age confidence: walking upright bass, staccato clarinet, pizzicato, piano stabs, brushed snare, sneaky tension, cheeky triumphant brass button at the end. | The cheeky brass button at the end. | The Man Who Couldn't Sit Still, Good Luck, Say It Ain't So |
+| [`a_price`](cues/a_price.mp3) | 1:05 | -17.3 | Caper underscore, Gilded Age confidence: walking upright bass, staccato clarinet, pizzicato, piano stabs, brushed snare, sneaky tension, cheeky triumphant brass button at the end. | The cheeky brass button at the end. | The Man Who Couldn't Sit Still, Good Luck, Say It Ain't So, The Exact Spot |
 | [`a_newsroom`](cues/a_newsroom.mp3) | 1:05 | -15.1 | Sly sardonic 1890s newsroom: ragtime-tinged piano, pizzicato, staccato bassoon, muted trumpet, typewriter ticks, witty swagger. |  | The Man Who Couldn't Sit Still, Say It Ain't So |
 | [`r_temperance`](cues/r_temperance.mp3) | 1:01 | -12.6 | Comic, bouncy, tipsy honky-tonk piano + fiddle + tuba; halfway turns hopeful/determined, ends warm and upbeat. |  | Fix Everything, The Man Who Couldn't Sit Still, Say It Ain't So |
 | [`j_good_feelings`](cues/j_good_feelings.mp3) | 1:30 | -19.6 | Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme). | Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck |
@@ -73,29 +74,31 @@ prefix says which video the cue was made for:
 | [`r_utopia`](cues/r_utopia.mp3) | 2:02 | -12.1 | Three parts: dreamy pastoral (guitar, flute, birdsong) → plain hymn in the style of 'Simple Gifts' → darkening unease, low drones, somber unresolved end. |  | Fix Everything, Good Luck |
 | [`r_revival`](cues/r_revival.mp3) | 1:31 | -12.1 | 1820s camp-meeting revival: stomping/clapping 3/4, droning fiddle, shape-note open fifths, building fervor, settles to a warm glow. |  | Fix Everything |
 | [`g_founding`](cues/g_founding.mp3) | 0:55 | -15.5 | Early American chamber (1790s): harpsichord + string quartet, slow minuet, stately, quietly uncertain; darkens into a held low cello note. |  | Grip Tighter, Good Luck |
+| [`m_frontier`](cues/m_frontier.mp3) | 1:09 | -15.3 | Frontier theme: nylon guitar and solo fiddle trading a folk melody, guitarrón, hand drum; hopeful and open, then low strings bring unease in the second half. | Hopeful opening for arrivals; the turn toward unease in the second half (The Exact Spot lands it on 'a little too well'). | The Exact Spot |
 
 ### Grave (heavy chapters)
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
 | [`r_dix`](cues/r_dix.mp3) | 1:02 | -11.9 | Grave, quiet, humane: sparse solo piano + low cello, cold and restrained, no melodrama; slow hopeful string rise in the last ~15 s. | First ~45 s before its hopeful rise = grave bed; the last ~15 s is the hopeful rise. | Fix Everything, The Man Who Couldn't Sit Still, Grip Tighter, Good Luck |
-| [`j_grief`](cues/j_grief.mp3) | 0:40 | -14.0 | Quiet grieving solo cello over a soft sustained string pad, slow and simple (Ouija's 'grief' theme). |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Grip Tighter, Good Luck |
-| [`w_aftermath`](cues/w_aftermath.mp3) | 0:59 | -12.8 | Aftermath of an attack: low sustained strings, distant muffled field drum like a heartbeat, mournful solo fiddle, sparse and grave; second half questioning, slow crescendo + soft snare roll. | First half is the grave part; second half builds tension. | The War Nobody Won, King Andrew, Grip Tighter, Good Luck |
+| [`j_grief`](cues/j_grief.mp3) | 0:40 | -14.0 | Quiet grieving solo cello over a soft sustained string pad, slow and simple (Ouija's 'grief' theme). |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Grip Tighter, Good Luck, The Exact Spot |
+| [`w_aftermath`](cues/w_aftermath.mp3) | 0:59 | -12.8 | Aftermath of an attack: low sustained strings, distant muffled field drum like a heartbeat, mournful solo fiddle, sparse and grave; second half questioning, slow crescendo + soft snare roll. | First half is the grave part; second half builds tension. | The War Nobody Won, King Andrew, Grip Tighter, Good Luck, The Exact Spot |
 | [`r_abolition_a`](cues/r_abolition_a.mp3) | 1:38 | -13.1 | Serious, resolute, dignified: low strings, slow deep heartbeat drum, solemn piano theme; tension rise mid-cue; falls to grieving quiet. | Tension rise in the middle (Grip Tighter: coffles / ships to New Orleans), grieving quiet at the end. | Fix Everything, Grip Tighter |
 | [`a_civil_war`](cues/a_civil_war.mp3) | 1:25 | -15.4 | Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello. | Somber second half is the reusable grave part. | The Man Who Couldn't Sit Still, Grip Tighter |
 | [`w_frontier`](cues/w_frontier.mp3) | 1:36 | -12.0 | Tecumseh / Tenskwatawa: dignified, slow solo cello + low wooden flute, heartbeat drum; urgency/alarm mid-cue (dawn battle); grieving burnt-out quiet. |  | The War Nobody Won, King Andrew |
+| [`m_lament`](cues/m_lament.mp3) | 1:09 | -16.3 | Borderlands lament: slow nylon-guitar arpeggios and low cello, one distant muted trumpet phrase mid-cue, long silences; humane, no swell, ends unresolved. |  | The Exact Spot |
 
 ### Tension, dread and dark
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
 | [`r_spirits_dark`](cues/r_spirits_dark.mp3) | 1:40 | -12.1 | Dark, low and eerie (Ouija's 'fear' theme); the darker Suno replacement for r_spirits. |  | Fix Everything, The Man Who Couldn't Sit Still, Good Luck |
-| [`g_grip`](cues/g_grip.mp3) | 1:10 | -16.3 | Tense political: slow tightening low-string ostinato, ticking clock, sparse piano stabs, restrained brass swells, ominous, ends on a sustained dark chord. | First ~70 s used; starting 13 s into the chapter puts its closing chord under the restated question. | Grip Tighter, Say It Ain't So |
+| [`g_grip`](cues/g_grip.mp3) | 1:10 | -16.3 | Tense political: slow tightening low-string ostinato, ticking clock, sparse piano stabs, restrained brass swells, ominous, ends on a sustained dark chord. | First ~70 s used; starting 13 s into the chapter puts its closing chord under the restated question. | Grip Tighter, Say It Ain't So, The Exact Spot |
 | [`g_southampton`](cues/g_southampton.mp3) | 1:50 | -15.9 | Grave prophetic suspense: low drones, slow heartbeat drum, eerie high strings (eclipse), rising dread, sudden dark swell, hollow silence, grieving cello aftermath. |  | Grip Tighter |
 | [`g_pyramid`](cues/g_pyramid.mp3) | 1:40 | -15.8 | Antebellum parlor elegance turned uneasy: stately piano + string quartet, cold and polished, low drone, harp; last third darkens with a low fear pulse. |  | Grip Tighter, Good Luck |
 | [`g_cotton_engine`](cues/g_cotton_engine.mp3) | 1:45 | -14.9 | Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier. |  | Grip Tighter |
 | [`r_nativism`](cues/r_nativism.mp3) | 1:48 | -12.3 | Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march. | Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories. | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
-| [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
+| [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter, The Exact Spot |
 
 ### Action and war
 
@@ -104,14 +107,15 @@ prefix says which video the cue was made for:
 | [`w_sea_battle`](cues/w_sea_battle.mp3) | 1:16 | -11.3 | Heroic swashbuckling naval battle: brisk strings, brass fanfares, fife, field drums, timpani like cannon fire, triumphant cheering ending. |  | The War Nobody Won, King Andrew |
 | [`w_fire`](cues/w_fire.mp3) | 1:28 | -11.1 | Burning of Washington: urgent anxious tremolo + ticking clock → tender quiet interlude (saving the painting) → dark and heavy, low brass, timpani, descending minor theme. |  | The War Nobody Won, Grip Tighter |
 | [`w_dawn`](cues/w_dawn.mp3) | 1:06 | -11.6 | Night bombardment of Fort McHenry: rumbling timpani, anxious strings in the dark, then a slow sunrise swell into a warm noble hopeful brass/string chorale. | Dark first part, then the sunrise swell (the hopeful part) later in the cue. | The War Nobody Won, Good Luck |
-| [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still |
+| [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still, The Exact Spot |
 | [`a_mexico_short`](cues/a_mexico_short.mp3) | 1:05 | -14.7 | Alternate take of a_mexico (65 s, low dynamic range). |  | The Man Who Couldn't Sit Still |
+| [`m_war_drums`](cues/m_war_drums.mp3) | 1:10 | -17.9 | War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note. | Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push. | The Exact Spot |
 
 ### Endings
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
+| [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot |
 ## Recurring roles
 
 These cues have become the channel's regulars:
@@ -145,7 +149,6 @@ gets this suffix:
 
 ## Every cue with its prompt
 
-
 ### `r_title_sting`
 
 0:30 · -11.3 LUFS · Google Lyria (`lyria-3-clip-preview`) · made for *Fix Everything*
@@ -159,6 +162,7 @@ Channel identity. Also ships in the 15-minute-history skill template on the King
 - King Andrew: Intro / title card (music/v3/title_sting.mp3) · bed 0.45
 - Grip Tighter: Intro / title card · bed 0.45
 - Good Luck: Intro / title card (music/title_sting.mp3; r_title_sting.mp3 is an identical copy) · bed 0.45
+- The Exact Spot: Intro / title card · bed 0.45
 
 ### `w_title_fanfare`
 
@@ -185,6 +189,8 @@ The channel's cold-open identity cue.
 - King Andrew: Ch01 King Andrew the First (music/v3/r_cold_open.mp3) · bed 0.17, fading to 0 at the end
 - Grip Tighter: Ch01 The Proclamation · bed 0.17 → 0.12 over the last 60 frames
 - Good Luck: Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage) · bed 0.13
+- The Exact Spot: Ch01 The Exact Spot (cold open) · bed 0.17, lifting ×1.5 under the last line, then out
+- The Exact Spot: Ch07 The Spot (reprise, startFrom 30 s) · bed 0.15
 
 ### `j_cold_open`
 
@@ -213,6 +219,7 @@ Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3
 - The War Nobody Won: Lowell (until 'home') · bed 0.13
 - Fix Everything: jh/MapTest (a map-motion test, not a chapter; file is music/intrigue.mp3 in Reform-Era) · bed 0.16
 - Good Luck: Ch02 Knock Once for Yes (as r_intrigue) · bed 0.26
+- The Exact Spot: Ch05 Polk Acts First (Polk's cabinet, until 'So in January') · bed 0.15
 
 ### `r_spirits`
 
@@ -269,6 +276,8 @@ Quietest Suno cue (−17.3 LUFS).
 
 - The Man Who Couldn't Sit Still: Ch06 Name Your Price · bed 0.15
 - Good Luck: Ch03 Good Luck (button lands on "I'm a Presbyterian"; runs under the subscribe plug) · bed 0.2
+- The Exact Spot: Ch06 Plot Twists (Santa Anna's deal and the cork leg, until 'Meanwhile') · bed 0.15
+- The Exact Spot: Ch08 The Man Who Was Fired (Trist, startFrom 40 s) · bed 0.15
 
 ### `a_newsroom`
 
@@ -390,6 +399,8 @@ Short (40 s). Requested length 40000 ms.
 - Grip Tighter: Ch06 Sunup to Sundown (from 'Some enslaved people', Douglass beat) · bed 0.12
 - Good Luck: Ch06 Empty Chairs (from 'So picture one house') · bed 0.15
 - Good Luck: Ch09 montage 'Grief' beat · bed 0.16
+- The Exact Spot: Ch06 Plot Twists (from 'That same morning': the San Patricios) · bed 0.11
+- The Exact Spot: Ch10 Poison ('In 1846' to 'But the bigger') · bed 0.12
 
 ### `w_aftermath`
 
@@ -405,6 +416,7 @@ Ouija MUSIC.md: among the loudest; keep 0.12–0.14.
 - King Andrew: Ch10 Let Him Enforce It, Trail of Tears (after w_frontier) · bed 0.13
 - Grip Tighter: Ch07 No Law Above Him (ends before Celia; her story plays over room tone) · bed 0.12
 - Good Luck: Ch06 Empty Chairs (until 'So picture') · bed 0.12
+- The Exact Spot: Ch04 Remember the Alamo (Alamo and Goliad, until 'April') · bed 0.14
 
 ### `r_abolition_a`
 
@@ -454,6 +466,8 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 > tense political documentary underscore, slow tightening ostinato in low strings, ticking clock pulse, cold and deliberate, sparse piano stabs, each phrase a little heavier and closer, restrained brass swells, ominous and inevitable, ends on a sustained dark chord, space for narrator, instrumental
 
 - Grip Tighter: Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending) · bed 0.15
+- The Exact Spot: Ch03 Come and Take It (grievances, until 'October') · bed 0.15
+- The Exact Spot: Ch10 Poison (Wilmot, until 'In 1846') · bed 0.15
 
 ### `g_southampton`
 
@@ -505,6 +519,7 @@ Embedded Suno title tag says 'Founding' (id 27d1a598…), but it was uploaded as
 - King Andrew: Ch08 It Must Be Preserved (music/v3/r_abolition_b.mp3) · bed 0.12
 - The Man Who Couldn't Sit Still: Fallback for Ch06 if price.mp3 missing · bed 0.15
 - Grip Tighter: Copied in as r_abolition_b, unused · bed —
+- The Exact Spot: Ch03 Come and Take It (from 'October 1835': Gonzales onward) · bed 0.15
 
 ### `w_sea_battle`
 
@@ -548,6 +563,7 @@ Loudest Lyria cue (−11.1 LUFS, true peak +0.8 dBTP).
 Tied to Bierce (Ouija MUSIC.md).
 
 - The Man Who Couldn't Sit Still: Ch08 One Last War · bed 0.15
+- The Exact Spot: Ch04 Remember the Alamo (from 'April 21st': San Jacinto, the Republic, annexation) · bed 0.15
 
 ### `a_mexico_short`
 
@@ -571,3 +587,35 @@ Tied to Bierce (Ouija MUSIC.md).
 - Grip Tighter: Ch10 Grip Tighter (takes over from grip at 'Then the cotton') · bed 0.12
 - Grip Tighter: Fallback for Ch02 (first 50 s) if founding.mp3 missing · bed —
 - Good Luck: Ch09 Who Moves It?, last lines (warm first ~30 s only) · bed 0.13
+- The Exact Spot: Ch10 Poison (from 'But the bigger' through the end screen) · bed 0.16
+
+### `m_frontier`
+
+1:09 · -15.3 LUFS · Suno (`Suno`) · made for *The Exact Spot*
+
+> 1820s–1840s American and Mexican frontier, wide open plains at dawn, nylon-string guitar and solo fiddle trading a simple folk melody, soft guitarrón bass, light hand drum and shaker, open fifths, gentle walking pulse; hopeful and curious at first, then a slow undercurrent of unease creeps in with low strings in the second half; documentary, restrained, space for narrator, instrumental
+
+Written to be reused for westward expansion, the Oregon Trail, the Gold Rush, any 'new land' chapter in the 1800s.
+
+- The Exact Spot: Ch02 Come On In (settlers arrive in Mexican Texas) · bed 0.12
+
+### `m_war_drums`
+
+1:10 · -17.9 LUFS · Suno (`Suno`) · made for *The Exact Spot*
+
+> 1840s army on the march, steady field snare and bass drum cadence, low string ostinato, distant bugle-like brass call, building momentum and tension over two minutes, ominous and serious, never triumphant or heroic, no fanfare payoff, ends on a held low note; documentary, restrained, space for narrator, instrumental
+
+Quiet file (−17.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, Spanish-American War) or a battle montage.
+
+- The Exact Spot: Ch05 Polk Acts First (from 'So in January 1846'; peak on the war declaration) · bed 0.17
+- The Exact Spot: Ch06 Plot Twists (startFrom 20 s, 'Meanwhile' to 'That same morning': the push on Mexico City) · bed 0.17
+
+### `m_lament`
+
+1:09 · -16.3 LUFS · Suno (`Suno`) · made for *The Exact Spot*
+
+> grave borderlands lament, slow solo nylon-string guitar arpeggios and a low cello melody, sparse, one distant muted trumpet phrase near the middle, long silences between phrases, humane and dignified, no melodrama, no swell, ends quiet and unresolved; documentary, restrained, space for narrator, instrumental
+
+Reuse for any heavy chapter about loss of land or home: Mexican American and Southwestern history, removal and displacement.
+
+- The Exact Spot: Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Seguín) · bed 0.13

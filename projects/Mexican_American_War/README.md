@@ -1,18 +1,22 @@
 # The Exact Spot (Mexican-American War)
 
-A 15 Minute History video, about 13:50, for general viewers of all ages and for students (Lesson 2 · Day 2: *Texas, the War with
+A 15 Minute History video, **14:45**, 10 chapters, for general viewers and for students (Lesson 2 · Day 2: *Texas, the War with
 Mexico, and the Wilmot Proviso*).
 
 | | |
 |---|---|
-| **Status** | Phase 4: pronunciation test written (`script/tests/pronunciation.txt`), waiting on an ElevenLabs key to voice it. Remotion project set up from the template (`src/`, `tools/`, `public/`); `npm install` not run yet. |
-| **Script** | [`script/SCRIPT.md`](script/SCRIPT.md) (narration, production notes, cut list, pronunciation, fact-check flags, sources) · readable PDF in [`review/`](review/) |
-| **Chapter files** | `script/ch01_cold_open.txt` … `script/ch10_poison.txt` (what gets voiced) |
-| **Painting prompts** | [`script/GEMINI_PROMPTS.md`](script/GEMINI_PROMPTS.md) (19 images, 10 must-have) + the archival list |
-| **Outline** | [`script/OUTLINE.md`](script/OUTLINE.md) (v1, superseded by the script) |
+| **Status** | **Finished.** Master and 720p copy rendered, thumbnails, YouTube text and the student viewing guide with its teacher key done. |
+| **Video** | `renders/Exact_Spot_1080p.mp4` (upload this) and `renders/Exact_Spot_720p.mp4` (Git LFS) · chapter previews in `review/` |
+| **Thumbnails** | `renders/thumbnails/Exact_Spot_A.png` … `_D.png` (D: "MEXICAN-AMERICAN WAR: WHO STARTED IT?") |
+| **YouTube text** | [`review/YouTube_description.md`](review/YouTube_description.md) (title, description, chapters, tags, upload settings) |
+| **Viewing guide** | Claude Doc with a Teacher Key tab: https://claude.ai/code/artifact/14da76ee-0ff6-4447-994b-8ca75586c15f (markdown copies in `examples/08_Exact_Spot/`) |
+| **Script** | [`script/SCRIPT.md`](script/SCRIPT.md) · chapter files `script/ch01_cold_open.txt` … `script/ch10_poison.txt` |
+| **Images** | Archival (credited in `public/img/credits.json`) + Flow wood engravings ([`script/FLOW_PROMPT.md`](script/FLOW_PROMPT.md)) |
+| **Music** | [`script/MUSIC.md`](script/MUSIC.md) |
+| **Masks** | `tools/mask.py` JOBS, then `tools/refine_mask.py` with the hand traces in [`tools/traces/`](tools/traces/README.md) |
 | **Required content** | [`reference/lesson2_day2_card.png`](reference/lesson2_day2_card.png) |
 
-Next steps: pronunciation test MP3 → lock the script → voice → images (your Gemini PNGs into `public/img/gen/`) → scenes.
+Render everything with `tools/render.sh` (or `tools/render.sh 05` for one chapter; it re-joins and re-masters).
 
 ## Voicing
 
@@ -24,4 +28,4 @@ VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.15 \
   python3 tools/voice.py script/tests/pronunciation.txt pronunciation_test
 ```
 
-The placeholder narration in `public/audio/` (from `tools/fake_voice.py`) isn't committed; the real voice replaces it.
+The chapters were voiced with these settings; the WAVs and word timings are in `public/audio/`.

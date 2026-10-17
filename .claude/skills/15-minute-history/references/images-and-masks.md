@@ -5,6 +5,8 @@
 2. AI paintings for gaps (Gemini prompts)
 3. Masks: the coral tint and teal trace
 4. Getting files from the user
+5. Archival parallax and checking masks
+6. Wood engravings, clean masks and marked-up pages (from *The Exact Spot*)
 
 ## 1. Archival first
 
@@ -55,6 +57,8 @@ and uploads the PNGs. Write the prompts into `script/GEMINI_PROMPTS.md`:
   fingers, modern objects or wrong details, and the scene still works if they skip an image.
 - In scenes: read the real size (it won't be exactly 16:9), tag it `Illustration · <what it shows>`, and treat it
   like any archival image (B&W, one coral subject).
+- **Pre-photography videos: use the wood-engraving style instead** (section 6). It sits beside real period prints,
+  looks less "AI", and masks cleanly.
 
 ## 3. Masks
 
@@ -112,3 +116,52 @@ mask version in place of the original; compare the two files before using either
   `LAYERS_MAX=4000` so they stay sharp). Say on screen whose photo doesn't survive.
 - **Tight portraits don't fit a full-bleed frame**: a close-up (a face that fills the source) zoomed to cover 16:9 puts
   every note on the face. Use the "subject left, notes right" `CropCard` layout instead.
+
+## 6. Wood engravings, clean masks and marked-up pages (from *The Exact Spot*)
+
+**Flow wood engravings.** For a story before photography, ask for every gap image as a black-and-white wood engraving
+from an 1840s–50s illustrated newspaper, all from **one master prompt** (Google Flow) so they read as a series. The
+style block, kept word for word (adjust the decades):
+
+> A black-and-white wood engraving from an illustrated newspaper of the 1840s–1850s, such as the Illustrated London News.
+> All shading made with fine parallel lines and cross-hatching. Crisp black ink on slightly yellowed paper, white
+> highlights cut out of the block, slight ink spread and uneven printing. Bold, clean line work and high contrast. No
+> color, no grey gradients, no airbrushing, no painterly texture, no photographic look. Figures drawn the way period
+> engravers drew them: slightly stiff, clear silhouettes, simple uncluttered backgrounds. Light and mood are shown only
+> through the density of lines (dense hatching for night and shadow, open paper for daylight).
+
+Plus the usual rules (accurate details, no text anywhere, including flags; no frame; no recognizable real person; one
+clear subject; no gore). The full prompt is `examples/08_Exact_Spot/FLOW_PROMPT.md`. Show them with `Engraving`
+(`src/kit/engraving.tsx`: full frame, cropped only to 16:9, slow push, soft fade in and out) or `Parallax` with layers
+built by `LAYERS_FILL=paper python3 tools/layers.py <name>` (plain paper behind the subject; a blurred inpaint looks like
+grey mush against hatching). Real documents and portraits stay cards on the desk, so an illustration never passes for a source.
+**If a picture can be misread, replace it**: an engraving of dragoons inside a ranch fence read as a pen, not an ambush;
+a drawn diagram beside the map fixed it.
+
+**Search anywhere for archival images**: Library of Congress, Internet Archive scans of pre-1930 books (often the only
+good copy of a facsimile or a diary page), state collections, museums. Wikimedia rate-limits; don't depend on it. Credit
+every file in `public/img/credits.json`.
+
+**Masks are checked at full resolution, and fixed by hand when rembg can't.** The user caught a rough portrait mask
+that looked fine on the contact sheet.
+
+1. `python3 tools/mask.py <name>` (rembg). A 4th JOBS field sets the smallest piece kept (`min_area`, default 20000 px).
+2. `python3 tools/mask_closeup.py out/closeup.jpg <names>`: each mask at full size, outline beside the cut-out. Look at
+   every edge: hair, hands, sleeves, chair backs, a bucket the figure holds.
+3. Fix with `python3 tools/refine_mask.py <name>`: `--close N` closes gaps, `--smooth N` smooths the edge, holes are filled
+   (it pads first, so subjects touching the image edge work), specks dropped. For what rembg gets wrong, trace polygons
+   by hand: `python3 tools/trace_grid.py <src> out/grid.jpg x0 y0 x1 y1 step [mask]` gives a crop with a labelled pixel
+   grid; write the points (source pixels) to `tools/traces/<name>.json` and apply with `--add` (union), `--sub` (cut away a
+   chair or table), `--keep` (clip, e.g. to a portrait's oval) or `--only` (the trace alone, for flags, cannons, buildings
+   and small figures rembg finds nothing in).
+4. Write each command in `tools/traces/README.md`, and comment the job in `mask.py` "hand-traced: tools/traces/… do not
+   re-run", so nobody overwrites it with a fresh rembg pass. Then rebuild layers and look again.
+
+**Loops on the right line of a scanned page.** Eyeballed coordinates put the loops on Polk's diary one line off. Run
+`python3 tools/text_lines.py <page.jpg> [x0 x1]`: it prints each text line's centre and extent in source pixels; use them
+for the `Loop`'s `cy` and `rx` inside a `CropCard`'s `S()` mapping, then check a still.
+
+**Keep heads in frame.** On a push into a picture of two or more people, set the focus (`fy`) on the faces, keep the push
+small (`z` 1.0 → 1.05) with no vertical drift, and look at the first and last frame. Grant and Lee's heads left the shot on
+the first try.
+

@@ -8,7 +8,8 @@
   "Grip Tighter: the Suno cues are 3–4 dB quieter than the Reform (Lyria) cues, so their beds are 0.14–0.17.",
   "Loudest cues (r_spirits_dark, w_aftermath, r_schools): keep at 0.12–0.14 (Ouija MUSIC.md).",
   "Final mix is normalized by tools/master.py to −14 LUFS (two-pass loudnorm + limiter), so cues only need to balance against each other.",
-  "Measured integrated loudness: Lyria cues −10.7…−13.1 LUFS; ElevenLabs cues −12.8…−19.6 LUFS; raw Suno cues −14.7…−17.3 LUFS (r_spirits_dark, a mastered Suno cue, −12.1)."
+  "Measured integrated loudness: Lyria cues −10.7…−13.1 LUFS; ElevenLabs cues −12.8…−19.6 LUFS; raw Suno cues −14.7…−17.3 LUFS (r_spirits_dark, a mastered Suno cue, −12.1).",
+  "The Exact Spot: every chapter's music lifts to ×1.6 for the ~2 s after the last word, then fades with the picture (TAIL_LIFT in src/kit/shell.tsx); a music entry's `to` hands over to the next cue with a 30-frame crossfade."
  ],
  "suno": {
   "mode": "Custom, Instrumental ON. Paste the Styles text as written; paste the Exclude line into Exclude Styles.",
@@ -19,7 +20,8 @@
   "delivery": "MP3 (WAV if the plan has it), named as shown; drag into the chat or add to video/public/music/.",
   "ouija_cover_trick": "Make the theme first (simplest, clearest tune in the first 20 s), then make every other cue as a Cover of that take (Remix/Edit → Cover) with new Styles text, so one melody returns in several arrangements.",
   "ouija_lyrics_box": "[Intro] [Main Theme] [Variation] [Break] [Main Theme] [Outro] [End]",
-  "credit_line": "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History."
+  "credit_line": "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History.",
+  "exclude_styles_exact_spot": "vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat"
  },
  "cues": [
   {
@@ -68,6 +70,11 @@
     },
     {
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
+     "where": "Intro / title card",
+     "bed_volume": "0.45"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
      "where": "Intro / title card",
      "bed_volume": "0.45"
     }
@@ -158,6 +165,16 @@
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
      "where": "Ch01 Two Documents (cold open); Short 4",
      "bed_volume": "0.17 (Short: 0.15)"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch01 The Exact Spot (cold open)",
+     "bed_volume": "0.17, lifting ×1.5 under the last line, then out"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch07 The Spot (reprise, startFrom 30 s)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -262,6 +279,11 @@
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
      "where": "Ch03 On Paper",
      "bed_volume": "0.17"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch05 Polk Acts First (Polk's cabinet, until 'So in January')",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -452,6 +474,16 @@
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
      "where": "Ch05 Prince Hal; Short 2",
      "bed_volume": "0.22"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch06 Plot Twists (Santa Anna's deal and the cork leg, until 'Meanwhile')",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch08 The Man Who Was Fired (Trist, startFrom 40 s)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -868,6 +900,16 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch09 montage 'Grief' beat",
      "bed_volume": "0.16"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch06 Plot Twists (from 'That same morning': the San Patricios)",
+     "bed_volume": "0.11"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch10 Poison ('In 1846' to 'But the bigger')",
+     "bed_volume": "0.12"
     }
    ],
    "alias_names": [
@@ -920,6 +962,11 @@
      "video": "Good Luck (Ouija)",
      "where": "Ch06 Empty Chairs (until 'So picture')",
      "bed_volume": "0.12"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch04 Remember the Alamo (Alamo and Goliad, until 'April')",
+     "bed_volume": "0.14"
     }
    ],
    "alias_names": [
@@ -1095,6 +1142,16 @@
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
      "where": "Ch06 The Fix; Short 1",
      "bed_volume": "0.18 (Short: 0.16)"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch03 Come and Take It (grievances, until 'October')",
+     "bed_volume": "0.15"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch10 Poison (Wilmot, until 'In 1846')",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -1262,6 +1319,11 @@
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Copied in as r_abolition_b, unused",
      "bed_volume": "—"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch03 Come and Take It (from 'October 1835': Gonzales onward)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -1395,6 +1457,11 @@
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
      "where": "Ch08 One Last War",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch04 Remember the Alamo (from 'April 21st': San Jacinto, the Republic, annexation)",
+     "bed_volume": "0.15"
     }
    ],
    "alias_names": [
@@ -1477,6 +1544,11 @@
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
      "where": "Ch08 from 'It was never really gone' through the end screen",
      "bed_volume": "0.15"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch10 Poison (from 'But the bigger' through the end screen)",
+     "bed_volume": "0.16"
     }
    ],
    "alias_names": [
@@ -1485,6 +1557,89 @@
    ],
    "group": "Endings",
    "file": "cues/r_ending.mp3"
+  },
+  {
+   "canonical": "m_frontier",
+   "md5": "6a3232a63283ffa193b0621b114c6b6b",
+   "duration_s": 69.36,
+   "integrated_lufs": -15.31,
+   "true_peak_dbtp": -3.19,
+   "source_video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "1820s–1840s American and Mexican frontier, wide open plains at dawn, nylon-string guitar and solo fiddle trading a simple folk melody, soft guitarrón bass, light hand drum and shaker, open fifths, gentle walking pulse; hopeful and curious at first, then a slow undercurrent of unease creeps in with low strings in the second half; documentary, restrained, space for narrator, instrumental",
+   "mood": "Frontier theme: nylon guitar and solo fiddle trading a folk melody, guitarrón, hand drum; hopeful and open, then low strings bring unease in the second half.",
+   "good_part": "Hopeful opening for arrivals; the turn toward unease in the second half (The Exact Spot lands it on 'a little too well').",
+   "notes": "Written to be reused for westward expansion, the Oregon Trail, the Gold Rush, any 'new land' chapter in the 1800s.",
+   "used_in": [
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch02 Come On In (settlers arrive in Mexican Texas)",
+     "bed_volume": "0.12"
+    }
+   ],
+   "alias_names": [
+    "m_frontier.mp3"
+   ],
+   "group": "Warm, hopeful and dignified",
+   "file": "cues/m_frontier.mp3"
+  },
+  {
+   "canonical": "m_war_drums",
+   "md5": "6c786ceac9872be493edb3f66da81f4e",
+   "duration_s": 69.6,
+   "integrated_lufs": -17.89,
+   "true_peak_dbtp": -4.38,
+   "source_video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "1840s army on the march, steady field snare and bass drum cadence, low string ostinato, distant bugle-like brass call, building momentum and tension over two minutes, ominous and serious, never triumphant or heroic, no fanfare payoff, ends on a held low note; documentary, restrained, space for narrator, instrumental",
+   "mood": "War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note.",
+   "good_part": "Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push.",
+   "notes": "Quiet file (−17.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, Spanish-American War) or a battle montage.",
+   "used_in": [
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch05 Polk Acts First (from 'So in January 1846'; peak on the war declaration)",
+     "bed_volume": "0.17"
+    },
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch06 Plot Twists (startFrom 20 s, 'Meanwhile' to 'That same morning': the push on Mexico City)",
+     "bed_volume": "0.17"
+    }
+   ],
+   "alias_names": [
+    "m_war_drums.mp3"
+   ],
+   "group": "Action and war",
+   "file": "cues/m_war_drums.mp3"
+  },
+  {
+   "canonical": "m_lament",
+   "md5": "99f555fa4ba0a99a962b371d3c44ab4e",
+   "duration_s": 68.54,
+   "integrated_lufs": -16.32,
+   "true_peak_dbtp": -3.22,
+   "source_video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "grave borderlands lament, slow solo nylon-string guitar arpeggios and a low cello melody, sparse, one distant muted trumpet phrase near the middle, long silences between phrases, humane and dignified, no melodrama, no swell, ends quiet and unresolved; documentary, restrained, space for narrator, instrumental",
+   "mood": "Borderlands lament: slow nylon-guitar arpeggios and low cello, one distant muted trumpet phrase mid-cue, long silences; humane, no swell, ends unresolved.",
+   "good_part": null,
+   "notes": "Reuse for any heavy chapter about loss of land or home: Mexican American and Southwestern history, removal and displacement.",
+   "used_in": [
+    {
+     "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
+     "where": "Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Seguín)",
+     "bed_volume": "0.13"
+    }
+   ],
+   "alias_names": [
+    "m_lament.mp3"
+   ],
+   "group": "Grave (heavy chapters)",
+   "file": "cues/m_lament.mp3"
   }
  ]
 }

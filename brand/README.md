@@ -68,6 +68,7 @@ Every thumbnail made so far is in [`thumbnails/`](thumbnails/). The one marked �
 | Grip Tighter | [`A`](thumbnails/05_Grip_Tighter_A.png) · ★ [`B`](thumbnails/05_Grip_Tighter_B.png) | SLAVERY WAS SUPPOSED TO FADE… / "then came cotton." |
 | Good Luck (Ouija) | ★ [`06_Good_Luck_Ouija.png`](thumbnails/06_Good_Luck_Ouija.png) | WHO MADE IT / SCARY? (full-colour painting; breaks the usual rules) |
 | Say It Ain't So (Black Sox) | [`A`](thumbnails/07_Say_It_Aint_So_A.png) · [`B`](thumbnails/07_Say_It_Aint_So_B.png) · ★ [`C`](thumbnails/07_Say_It_Aint_So_C.png) | SAY IT / AIN'T SO (Jackson split) · EVERYBODY BET. · 1921 BANNED / 2026 PARTNER (Jackson waist-up beside a drawn phone) |
+| The Exact Spot (Mexican-American War) | [`A`](thumbnails/08_Exact_Spot_A.png) · [`B`](thumbnails/08_Exact_Spot_B.png) · [`C`](thumbnails/08_Exact_Spot_C.png) · [`D`](thumbnails/08_Exact_Spot_D.png) (choice not recorded; D was made last, on request) | WHERE WAS / THE SPOT? (3D map + Lincoln) · WHOSE SOIL? (Polk coral vs. Lincoln teal) · WHY IS IT IN / ILLINOIS? (cork leg) · MEXICAN-AMERICAN WAR: / WHO STARTED IT? (topic-led: Currier's Chapultepec, U.S. side washed coral, Mexican side teal, no single person) |
 
 **The formula** (full rules in
 [`thumbnail-and-youtube.md`](../.claude/skills/15-minute-history/references/thumbnail-and-youtube.md)):
@@ -77,3 +78,4 @@ Every thumbnail made so far is in [`thumbnails/`](thumbnails/). The one marked �
 - The headline is a question or a paradox: HERO OR KING?, WHERE DID HE GO?, WHO MADE IT SCARY?
 - The wordmark goes small in the top-left. Keep the bottom-right corner clear, because YouTube's duration badge covers it.
 - The whole head stays in frame, and text never covers a face.
+- **Topic-led variant** (*The Exact Spot* D, asked for by the user): when the search term is the topic ("Mexican-American War"), put the topic on the first strip and the question on the second, over a period print of the event itself rather than one person. With two sides, wash the picture in a horizontal gradient, coral for one side and teal for the other (`mix-blend-mode: color` at 0.75 plus `multiply` at 0.18, inside `isolation: isolate`), so the split reads without cutting anyone out.

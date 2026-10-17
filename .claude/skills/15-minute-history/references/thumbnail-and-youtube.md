@@ -7,8 +7,8 @@
 
 ## 1. Thumbnail
 
-`src/Thumbnail.tsx` holds two concepts drawn with the video's own kit; `node tools/thumbs.mjs` renders them to
-`renders/thumbnails/<SLUG>_{A,B}.png` at 1280×720. Offer the user two or three concepts, then refine the one they
+`src/Thumbnail.tsx` holds two concepts drawn with the video's own kit; `node tools/thumbs.mjs [A B C …]` renders them to
+`renders/thumbnails/<SLUG>_<key>.png` at 1280×720. Offer the user two or three concepts, then refine the one they
 pick. For *King Andrew* they chose **A, the split**:
 
 - **A · Split portrait.** One cut-out portrait on the dark desk, centred on the frame's middle line. The left half
@@ -16,6 +16,11 @@ pick. For *King Andrew* they chose **A, the split**:
   on the head. Two words in orange tape sit under the chin, one each side ("HERO" / "OR KING?").
 - **B · Title-led.** A tinted, traced portrait card on the right; a handwritten setup line plus a two-line
   highlighter title on the left over a dark gradient.
+- **Topic-led, no single person** (*The Exact Spot* D, asked for by the user): the search term on the first strip and
+  the question on the second ("MEXICAN-AMERICAN WAR:" / "WHO STARTED IT?") over a period print of the event itself. With
+  two sides, wash the print in a horizontal gradient, coral on one side and teal on the other (`mix-blend-mode: color`
+  at 0.75 plus `multiply` at 0.18, inside `isolation: isolate`), so the split reads without cutting anyone out. Code:
+  `techniques/components/exact_spot/Thumbnail.tsx` `ThumbD`; its `Cutout` helper does a masked, tinted, traced portrait.
 
 Rules the user enforced:
 

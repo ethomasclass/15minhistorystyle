@@ -28,7 +28,13 @@ def jobs():
     return ast.literal_eval(node.value)
 
 
+# LAYERS_FILL=paper for engravings and other line art (plain paper behind the subject, smaller hole)
+PAPER = os.environ.get("LAYERS_FILL") == "paper"
+
+
 def run(name, src, grow=3, hole_px=25):
+    if PAPER:
+        hole_px = 10
     pic = Image.open(os.path.join(PUB, src)).convert("RGB")
     if max(pic.size) > MAX:                  # layers only need to hold up at 1080p with a push; the scene stretches them
         pic.thumbnail((MAX, MAX), Image.LANCZOS)
@@ -37,6 +43,10 @@ def run(name, src, grow=3, hole_px=25):
     if m.shape != im.shape[:2]:
         m = cv2.resize(m, (im.shape[1], im.shape[0]), interpolation=cv2.INTER_NEAREST)
     m = (m > 128).astype(np.uint8) * 255
+    # fill holes inside the subject (white patches in an engraving would otherwise show the background through)
+    ff = m.copy()
+    cv2.floodFill(ff, np.zeros((m.shape[0] + 2, m.shape[1] + 2), np.uint8), (0, 0), 255)
+    m = m | cv2.bitwise_not(ff)
     h, w = m.shape
     k = max(3, int(round(min(w, h) / 1000 * grow)) * 2 + 1)         # scale the grow with the picture
     fg_a = cv2.GaussianBlur(cv2.dilate(m, np.ones((k, k), np.uint8)), (0, 0), max(1.5, k / 4))
@@ -48,9 +58,15 @@ def run(name, src, grow=3, hole_px=25):
     s = 2 if max(w, h) < 3000 else 4
     small = cv2.resize(im, (w // s, h // s), interpolation=cv2.INTER_AREA)
     hs = cv2.resize(hole, (w // s, h // s), interpolation=cv2.INTER_NEAREST)
-    fill = cv2.inpaint(cv2.cvtColor(small, cv2.COLOR_RGB2BGR), hs, 15, cv2.INPAINT_TELEA)
-    fill = cv2.cvtColor(cv2.resize(fill, (w, h), interpolation=cv2.INTER_CUBIC), cv2.COLOR_BGR2RGB).astype(np.float32)
-    fill = cv2.GaussianBlur(fill, (0, 0), 3) + np.random.default_rng(1).normal(0, 4, (h, w, 1))   # keep some grain
+    if PAPER:
+        # line art (engravings): fill behind the subject with plain paper, like a cut-out lifted off the page;
+        # a blurred inpaint shows as grey mush against crisp hatching
+        tone = np.percentile(im.reshape(-1, 3), 85, axis=0).astype(np.float32)
+        fill = np.ones((h, w, 3), np.float32) * tone + np.random.default_rng(1).normal(0, 3, (h, w, 1))
+    else:
+        fill = cv2.inpaint(cv2.cvtColor(small, cv2.COLOR_RGB2BGR), hs, 15, cv2.INPAINT_TELEA)
+        fill = cv2.cvtColor(cv2.resize(fill, (w, h), interpolation=cv2.INTER_CUBIC), cv2.COLOR_BGR2RGB).astype(np.float32)
+        fill = cv2.GaussianBlur(fill, (0, 0), 3) + np.random.default_rng(1).normal(0, 4, (h, w, 1))   # keep some grain
     a = (cv2.GaussianBlur(hole, (0, 0), 4).astype(np.float32) / 255)[..., None]
     bg = im * (1 - a) + fill * a
     Image.fromarray(np.clip(bg, 0, 255).astype(np.uint8)).save(os.path.join(OUT, name + "_bg.jpg"), quality=92)
