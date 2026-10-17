@@ -142,7 +142,7 @@ const Walk: React.FC<{t: TL}> = ({t}) => (
     <Note text="walked up the beach by hand" x={120} y={880} size={54} rot={-3} at={t.at('Soldiers walked')} color="#ffffff" />
     <Note text="(a very large, very flammable dog)" x={980} y={180} size={50} rot={-3} at={t.at('very flammable')} color={CORAL} />
     <Loop cx={1180} cy={880} rx={420} ry={210} at={t.at('men holding')} seed={24} width={7} />
-    <Note text="who held the cables?" x={120} y={980} size={46} rot={-3} at={t.at('weren\'t who')} />
+    <Note text="who held the cables?" x={120} y={970} size={46} rot={-3} at={t.at('weren\'t who')} />
   </P3>
 );
 

@@ -61,7 +61,7 @@ const Paste: React.FC<{t: TL}> = ({t}) => {
           <img src={staticFile('img/ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg')} style={{width: '100%', height: 700, objectFit: 'cover', filter: 'grayscale(1) contrast(1.15)', display: 'block'}} />
         </div>
       </div>
-      <Note text="thousands of small sheets of tough paper" x={1010} y={200} size={44} rot={-3} at={t.at('thousands')} color="#ffffff" />
+      <Note text="thousands of small sheets of tough paper" x={920} y={200} size={42} rot={-3} at={t.at('thousands')} color="#ffffff" />
       <Note text="glued with paste from a root vegetable" x={1010} y={300} size={42} rot={-3} at={t.at('glued')} color="#ffffff" />
       <Note text="the paste was EDIBLE" x={1030} y={460} size={64} rot={-3} at={t.at('edible')} color={ORANGE} />
       <Note text="(wartime food shortage)" x={1050} y={570} size={46} rot={-3} at={t.at('food shortage')} />
@@ -102,7 +102,7 @@ const JetStream: React.FC<{t: TL}> = ({t}) => {
       <Note text="a fast river of air, about 30,000 feet up" x={420} y={180} size={46} rot={-2} at={t.at('About 30,000')} color={TEAL} />
       <Highlight text="THE JET STREAM" x={520} y={880} size={90} at={t.at('jet stream')} seed={42} rot={-2} />
       <Note text="west → east" x={1100} y={720} size={52} rot={-3} at={t.at('west')} color="#ffffff" />
-      <Note text="(why your flight east is shorter)" x={1000} y={980} size={44} rot={-3} at={t.at('your flight')} color={ORANGE} />
+      <Note text="(why your flight east is shorter)" x={1000} y={965} size={44} rot={-3} at={t.at('your flight')} color={ORANGE} />
       <Tag text="Coastlines: Natural Earth (public domain); jet stream path illustrative" />
     </Map>
   );
@@ -144,7 +144,7 @@ const RiseSink: React.FC<{t: TL}> = ({t}) => {
       <Note text="night: it cools → it sinks" x={1180} y={150} size={40} rot={-2} at={t.at('At night')} color="#ffffff" />
       <Note text="too low? drop a sandbag" x={1100} y={yLow + 120} size={48} rot={-3} at={t.at('let go')} color={ORANGE} />
       {g >= t.at('Rise') && <Highlight text="RISE, SINK, DROP A BAG" x={360} y={880} size={84} at={t.at('Rise')} seed={43} rot={-2} />}
-      <Note text="for about three days" x={1300} y={990} size={46} rot={-3} at={t.at('For about')} />
+      <Note text="for about three days" x={1300} y={970} size={46} rot={-3} at={t.at('For about')} />
     </AbsoluteFill>
   );
 };
@@ -163,7 +163,7 @@ const Landings: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const a = t.at('Japan launched');
   const run0 = t.at('About 300'), run1 = t.at('So why') - 4;
-  const days = 290;
+  const days = INCIDENTS[INCIDENTS.length - 1].t;
   const day = interpolate(f, [run0, run1], [0, days], clamp);
   const shown = INCIDENTS.filter((x) => x.t <= day);
   const date = new Date(Date.UTC(1944, 10, 1) + day * 86400000);
@@ -182,8 +182,9 @@ const Landings: React.FC<{t: TL}> = ({t}) => {
       {f >= run0 && <div style={{position: 'absolute', left: 120, top: 900, fontFamily: JF.mono, fontSize: 44, color: '#f4efe6', textShadow: '0 2px 10px #000'}}>{label} · {shown.length} found</div>}
       <Note text="Alaska" x={620} y={250} size={48} rot={-3} at={t.at('Alaska')} color="#ffffff" />
       <Note text="Mexico" x={1300} y={760} size={48} rot={-3} at={t.at('Mexico')} color="#ffffff" />
-      <Note text="Michigan" x={1700} y={420} size={48} rot={-3} at={t.at('Michigan')} color="#ffffff" />
-      <Note text="so why didn't anyone hear about it?" x={420} y={480} size={66} rot={-3} at={t.at('So why')} color={pal.subject} />
+      <Note text="Michigan" x={1675} y={420} size={48} rot={-3} at={t.at('Michigan')} color="#ffffff" />
+      <Note text="so why didn't" x={180} y={400} size={74} rot={-3} at={t.at('So why')} color={pal.subject} />
+      <Note text="anyone hear about it?" x={200} y={500} size={74} rot={-3} at={t.at('So why') + 6} color={pal.subject} />
       <Tag text="Every dot is a recorded find · R. Mikesh, Japan's World War II Balloon Bomb Attacks on North America, Smithsonian, 1973" />
     </Map>
   );

@@ -44,7 +44,7 @@ const FrontPage: React.FC<{t: TL}> = ({t}) => {
       </div>
       <PhotoCard src="img/ch05_silence/office_of_censorship_pin.jpg" x={1380} y={180} w={400} h={400} rot={4} at={t.at('January')} fit="contain" filter="grayscale(0.2) contrast(1.05)" />
       {g >= t.at('January') && <Highlight text="JANUARY 1945" x={1330} y={640} size={74} at={t.at('January')} seed={51} rot={-3} />}
-      <Note text="the government asked papers" x={1320} y={760} size={40} rot={-3} at={a} color="#ffffff" />
+      <Note text="the government asked papers" x={1280} y={760} size={40} rot={-3} at={a} color="#ffffff" />
       <Note text="not to report the balloons" x={1330} y={830} size={40} rot={-3} at={a + 4} color="#ffffff" />
       <Note text="and they didn't." x={1360} y={920} size={58} rot={-3} at={t.at('they didn\'t')} color={CORAL} />
       <Tag text="Front page: an illustration. Pin: the US Office of Censorship" />

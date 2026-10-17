@@ -98,10 +98,10 @@ const Inflate: React.FC<{t: TL}> = ({t}) => {
           <img src={staticFile(`img/${cur[0]}`)} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 40%', filter: 'grayscale(1) contrast(1.15)', display: 'block'}} />
         </div>
       </div>
-      <Note text="rubber tanks" x={1600} y={300} size={52} rot={-4} at={t.at('rubber')} color={ORANGE} />
+      <Note text="rubber tanks" x={1540} y={300} size={52} rot={-4} at={t.at('rubber')} color={ORANGE} />
       <Note text="trucks" x={1640} y={400} size={52} rot={-4} at={t.at('trucks')} color={ORANGE} />
       <Note text="cannons" x={1620} y={500} size={52} rot={-4} at={t.at('cannons')} color={ORANGE} />
-      <Note text="real from the air" x={1560} y={760} size={46} rot={-4} at={t.at('from the')} color="#ffffff" />
+      <Note text="real from the air" x={1470} y={760} size={46} rot={-4} at={t.at('from the')} color="#ffffff" />
       <Tag text="A US Army rubber tank decoy being inflated, Anzio, Italy, 1944 · US Army Signal Corps" />
     </AbsoluteFill>
   );
@@ -142,7 +142,7 @@ const SoundTruck: React.FC<{t: TL}> = ({t}) => {
       <Note text="speakers blasting recordings of tanks" x={110} y={100} size={54} rot={-2} at={t.at('huge speakers')} color="#ffffff" />
       <Note text="fake radio messages" x={1120} y={180} size={50} rot={-3} at={t.at('fake radio')} color={ORANGE} />
       <Note text="fake patches" x={1160} y={270} size={50} rot={-3} at={t.at('patches')} color={ORANGE} />
-      <Note text="gossip in cafés (for any spies listening)" x={1000} y={360} size={44} rot={-3} at={t.at('gossiped')} color={ORANGE} />
+      <Note text="gossip in cafés (for any spies listening)" x={960} y={360} size={42} rot={-3} at={t.at('gossiped')} color={ORANGE} />
     </AbsoluteFill>
   );
 };
@@ -309,7 +309,7 @@ const Today: React.FC<{t: TL}> = ({t}) => {
         </svg>
       )}
       <Note text="pfft." x={1600} y={600} size={80} rot={-6} at={hitF + 2} color="#ffffff" />
-      <Note text="a missile that costs far more than the balloon" x={600} y={1000} size={44} rot={-2} at={t.at('missile')} />
+      <Note text="a missile that costs far more than the balloon" x={600} y={970} size={44} rot={-2} at={t.at('missile')} />
       {g >= sub && <AbsoluteFill style={{background: 'rgba(11,11,11,0.86)'}} />}
       <Note text="quick thing:" x={600} y={360} size={60} rot={-3} at={sub} color="#ffffff" />
       <Note text="subscribe ↓" x={640} y={480} size={96} rot={-3} at={t.at('hit subscribe')} />

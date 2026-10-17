@@ -41,7 +41,8 @@ const Cranes: React.FC<{t: TL}> = ({t}) => {
       {g >= t.at('1987') && <Highlight text="1987" x={110} y={90} size={100} at={t.at('1987')} seed={72} rot={-2} />}
       <Note text="a thousand paper cranes" x={110} y={240} size={60} rot={-3} at={t.at('thousand paper')} color="#ffffff" />
       <PhotoCard src="img/ch04_paper_balloon/schoolgirls_pasting_envelope_fig12.jpg" x={1300} y={150} w={500} h={400} rot={3} at={t.at('folded')} />
-      <Note text="folded by the women who, as girls, made the balloons" x={1000} y={620} size={42} rot={-3} at={t.at('teenage')} color="#ffffff" />
+      <Note text="folded by the women who," x={1240} y={600} size={42} rot={-3} at={t.at('teenage')} color="#ffffff" />
+      <Note text="as girls, made the balloons" x={1260} y={670} size={42} rot={-3} at={t.at('teenage') + 8} color="#ffffff" />
       <Note text="a wish for peace" x={120} y={820} size={60} rot={-3} at={t.at('wish')} color={ORANGE} />
       <Note text="to show their regret" x={120} y={920} size={60} rot={-3} at={t.at('regret')} color={pal.subject} />
     </P3>

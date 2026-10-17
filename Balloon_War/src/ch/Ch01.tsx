@@ -103,7 +103,7 @@ const ThreeJobs: React.FC<{t: TL}> = ({t}) => {
       <PhotoCard src="img/ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg" x={1310} y={270} w={500} h={540} rot={-2} at={t.at('And one crossed')} pos="50% 20%" />
       <Note text="one killed" x={1360} y={880} size={60} rot={-3} at={t.at('killed')} color={pal.subject} />
       <Redact x={1330} y={872} w={330} h={86} at={t.at('almost nobody')} rot={-3} />
-      <Note text="(almost nobody was told)" x={1180} y={990} size={44} rot={-3} at={t.at('nobody was')} />
+      <Note text="(almost nobody was told)" x={1160} y={970} size={44} rot={-3} at={t.at('nobody was')} />
     </AbsoluteFill>
   );
 };
