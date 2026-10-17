@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History so far: **46 cues, about 74 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History so far: **49 cues, about 81 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -12,6 +12,7 @@ prefix says which video the cue was made for:
 | `a_` | *The Man Who Couldn't Sit Still* (Ambrose Bierce) | Suno |
 | `g_` | *Grip Tighter: Slavery and the Cotton South* | Suno |
 | `m_` | *When Europe Ate Mummies* | Suno (prompts in [`SUNO_PROMPTS.md`](SUNO_PROMPTS.md)) |
+| `b_` | *The Balloon War* (WWII) | Suno (prompts and section tags in `Balloon_War/script/MUSIC.md`) |
 
 *Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
@@ -68,6 +69,7 @@ prefix says which video the cue was made for:
 | [`j_campaign`](cues/j_campaign.mp3) | 1:40 | -14.5 | Rowdy, energetic 1820s campaign march: fife + field drum, bright brass band, banjo, fiddle, hand claps, crowd feel; playful and a bit chaotic. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won |
 | [`m_apothecary`](cues/m_apothecary.mp3) | 1:08 | -16.2 | Dark whimsy: pizzicato, bassoon, harpsichord, celesta, tick-tock percussion; sneaky and macabre. | Mischievous all through; fullest 40–56 s; ends ~64 s. | When Europe Ate Mummies |
 | [`m_parlor`](cues/m_parlor.mp3) | 1:05 | -16.5 | Victorian parlor waltz: upright piano, music box, clarinet, pizzicato violin; quaint with an eerie edge. | Lively 8–52 s; fades 54 s on. | When Europe Ate Mummies |
+| [`b_caper_40s`](cues/b_caper_40s.mp3) | 1:59 | -16.0 | 1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous. | Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s. | The Balloon War |
 
 ### Warm, hopeful and dignified
 
@@ -115,6 +117,7 @@ prefix says which video the cue was made for:
 | [`w_dawn`](cues/w_dawn.mp3) | 1:06 | -11.6 | Night bombardment of Fort McHenry: rumbling timpani, anxious strings in the dark, then a slow sunrise swell into a warm noble hopeful brass/string chorale. | Dark first part, then the sunrise swell (the hopeful part) later in the cue. | The War Nobody Won, Good Luck |
 | [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still |
 | [`a_mexico_short`](cues/a_mexico_short.mp3) | 1:05 | -14.7 | Alternate take of a_mexico (65 s, low dynamic range). |  | The Man Who Couldn't Sit Still |
+| [`b_newsreel`](cues/b_newsreel.mp3) | 1:60 | -16.4 | 1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle. | Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s. | The Balloon War |
 
 ### Endings
 
@@ -122,6 +125,7 @@ prefix says which video the cue was made for:
 |---|---|---|---|---|---|
 | [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
 ## Recurring roles
+| [`b_paper_wind`](cues/b_paper_wind.mp3) | 2:35 | -17.2 | Fragile elegy carried by the wind: felt piano, muted strings, alto flute, harp, wind; floating, then sorrow, then a warm close. | Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s. | The Balloon War |
 
 These cues have become the channel's regulars:
 
@@ -130,6 +134,7 @@ These cues have become the channel's regulars:
 - **`r_ending`**: use its warm first ~30 s under a final answer, or the whole cue for an unresolved, darkening close.
 - **`r_dix`, `j_grief` and `w_aftermath`** are the grave set for heavy chapters.
 - **Eras the library was missing** (from *When Europe Ate Mummies*): `m_old_world` (Renaissance Europe), `m_alexandria` (Middle East / Egypt), `m_1924` (1920s), `m_parlor` (Victorian), `m_lament` (pre-1800 heavy chapter), `m_apothecary` (dark whimsy: frauds, quack cures), `m_tomb` (descent / discovery), and `m_reveal` (a ~70 s build for Shorts: trim the front so its last accent lands on the payoff).
+- **The 1940s** (from *The Balloon War*): `b_newsreel` (war years, newsreel orchestra), `b_caper_40s` (spies, hoaxes, cons) and `b_paper_wind` (journeys, memorials, fragile endings).
 - **Ouija's four feelings:** `j_good_feelings` (love), `j_grief` (grief), `r_schools` (fun) and `r_spirits_dark` (fear).
 
 ## Making a new cue
@@ -661,3 +666,33 @@ Lively 8–52 s; fades 54 s on.
 Hits by ~4 s and builds through; the last strong accent is near 64 s.
 
 - When Europe Ate Mummies: Shorts (not yet used) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_newsreel`
+
+1:60 · -16.4 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> 1940s wartime newsreel orchestral underscore, instrumental, brushed snare and military snare rolls, low brass chorale, warm strings, solo trumpet, timpani, distant radio-static texture, cinematic but restrained, 72 bpm, minor key turning major
+
+Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s.
+
+- The Balloon War: Ch01 cold open + Ch02 D-Day (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_caper_40s`
+
+1:59 · -16.0 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> 1940s spy caper underscore, instrumental, sneaky swing, walking upright bass, brushed snare, muted trumpet with wah, clarinet runs, pizzicato strings, vibraphone, finger snaps, playful and mischievous, 112 bpm, minor key
+
+Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s.
+
+- The Balloon War: Ch03 The Fake (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_paper_wind`
+
+2:35 · -17.2 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> quiet melancholic cinematic elegy, instrumental, solo felt piano, sparse and slow, soft muted strings, alto flute, harp, gentle wind and paper-rustle textures, fragile and haunting, restrained, no percussion, 60 bpm, minor key, a warm major resolution only at the very end
+
+Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.
+
+- The Balloon War: Ch04 The Paper Balloon + Ch07 ending (planned) · bed 0.18–0.22 (Suno masters quiet)

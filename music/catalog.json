@@ -1653,6 +1653,69 @@
      "bed_volume": "0.18–0.22 (Suno masters quiet)"
     }
    ]
+  },
+  {
+   "canonical": "b_newsreel",
+   "md5": "9c6ad267c5b060919381996284828aac",
+   "duration_s": 119.9,
+   "integrated_lufs": -16.4,
+   "true_peak_dbtp": -5.5,
+   "source_video": "The Balloon War",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "1940s wartime newsreel orchestral underscore, instrumental, brushed snare and military snare rolls, low brass chorale, warm strings, solo trumpet, timpani, distant radio-static texture, cinematic but restrained, 72 bpm, minor key turning major",
+   "mood": "1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle.",
+   "good_part": "Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s.",
+   "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
+   "used_in": [
+    {
+     "video": "The Balloon War",
+     "where": "Ch01 cold open + Ch02 D-Day (planned)",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "b_caper_40s",
+   "md5": "437e47de5e8b40f17fa9f748c4accdaf",
+   "duration_s": 119.35,
+   "integrated_lufs": -16.0,
+   "true_peak_dbtp": -2.3,
+   "source_video": "The Balloon War",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "1940s spy caper underscore, instrumental, sneaky swing, walking upright bass, brushed snare, muted trumpet with wah, clarinet runs, pizzicato strings, vibraphone, finger snaps, playful and mischievous, 112 bpm, minor key",
+   "mood": "1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous.",
+   "good_part": "Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s.",
+   "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
+   "used_in": [
+    {
+     "video": "The Balloon War",
+     "where": "Ch03 The Fake (planned)",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
+  },
+  {
+   "canonical": "b_paper_wind",
+   "md5": "f82e970b1d85ca1ee44f2bdc570f3834",
+   "duration_s": 154.63,
+   "integrated_lufs": -17.2,
+   "true_peak_dbtp": -5.2,
+   "source_video": "The Balloon War",
+   "generator": "Suno",
+   "model": null,
+   "prompt": "quiet melancholic cinematic elegy, instrumental, solo felt piano, sparse and slow, soft muted strings, alto flute, harp, gentle wind and paper-rustle textures, fragile and haunting, restrained, no percussion, 60 bpm, minor key, a warm major resolution only at the very end",
+   "mood": "Fragile elegy carried by the wind: felt piano, muted strings, alto flute, harp, wind; floating, then sorrow, then a warm close.",
+   "good_part": "Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.",
+   "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
+   "used_in": [
+    {
+     "video": "The Balloon War",
+     "where": "Ch04 The Paper Balloon + Ch07 ending (planned)",
+     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+    }
+   ]
   }
  ]
 }
