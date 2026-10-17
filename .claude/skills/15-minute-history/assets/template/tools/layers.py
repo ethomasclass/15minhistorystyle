@@ -43,15 +43,18 @@ def run(name, src, grow=3, hole_px=25):
     os.makedirs(OUT, exist_ok=True)
     rgb = im * (fg_a[..., None] > 0)          # blank the hidden pixels so the PNG compresses
     Image.fromarray(np.dstack([rgb.astype(np.uint8), fg_a])).save(os.path.join(OUT, name + "_fg.webp"), quality=90, method=5)
+    small_pic = max(w, h) < 2000          # paintings and small scans: a tight hole, filled at full size, so no smeared halo
+    if small_pic:
+        hole_px = 6
     hk = max(9, int(round(min(w, h) / 1000 * hole_px)) * 2 + 1)
     hole = cv2.dilate(m, np.ones((hk, hk), np.uint8))
-    s = 2 if max(w, h) < 3000 else 4
+    s = 1 if small_pic else (2 if max(w, h) < 3000 else 4)
     small = cv2.resize(im, (w // s, h // s), interpolation=cv2.INTER_AREA)
     hs = cv2.resize(hole, (w // s, h // s), interpolation=cv2.INTER_NEAREST)
-    fill = cv2.inpaint(cv2.cvtColor(small, cv2.COLOR_RGB2BGR), hs, 15, cv2.INPAINT_TELEA)
+    fill = cv2.inpaint(cv2.cvtColor(small, cv2.COLOR_RGB2BGR), hs, 6 if small_pic else 15, cv2.INPAINT_TELEA)
     fill = cv2.cvtColor(cv2.resize(fill, (w, h), interpolation=cv2.INTER_CUBIC), cv2.COLOR_BGR2RGB).astype(np.float32)
-    fill = cv2.GaussianBlur(fill, (0, 0), 3) + np.random.default_rng(1).normal(0, 4, (h, w, 1))   # keep some grain
-    a = (cv2.GaussianBlur(hole, (0, 0), 4).astype(np.float32) / 255)[..., None]
+    fill = cv2.GaussianBlur(fill, (0, 0), 1.5 if small_pic else 3) + np.random.default_rng(1).normal(0, 4, (h, w, 1))   # keep some grain
+    a = (cv2.GaussianBlur(hole, (0, 0), 2 if small_pic else 4).astype(np.float32) / 255)[..., None]
     bg = im * (1 - a) + fill * a
     Image.fromarray(np.clip(bg, 0, 255).astype(np.uint8)).save(os.path.join(OUT, name + "_bg.jpg"), quality=92)
     print("layers", name, f"{w}x{h}")

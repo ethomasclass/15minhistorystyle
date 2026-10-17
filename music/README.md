@@ -12,7 +12,7 @@ prefix says which video the cue was made for:
 | `a_` | *The Man Who Couldn't Sit Still* (Ambrose Bierce) | Suno |
 | `g_` | *Grip Tighter: Slavery and the Cotton South* | Suno |
 
-*Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. Keep the prefixes when you copy a cue into a video
+*Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *Dressed to Kill* made none; it reused 12. Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
 
 **Reuse first.** Before generating anything, find a cue below for each chapter and write the video's `script/MUSIC.md`
@@ -39,16 +39,16 @@ prefix says which video the cue was made for:
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_title_sting`](cues/r_title_sting.mp3) | 0:30 | -11.3 | Channel title sting: one warm, bold orchestral + piano hit with a low boom and rising string swell that rings out. | Only the first ~10 s are used (the file is 29.6 s); the intro fades it out by frame 74 (~2.5 s after the hit). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
+| [`r_title_sting`](cues/r_title_sting.mp3) | 0:30 | -11.3 | Channel title sting: one warm, bold orchestral + piano hit with a low boom and rising string swell that rings out. | Only the first ~10 s are used (the file is 29.6 s); the intro fades it out by frame 74 (~2.5 s after the hit). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, Dressed to Kill |
 | [`w_title_fanfare`](cues/w_title_fanfare.mp3) | 0:29 | -10.8 | Short theatrical overture flourish: bright brass fanfare, fife + field drums, martial 1812 march phrase, cymbal crash, big ringing final chord. |  | The War Nobody Won |
 
 ### Cold opens and mystery
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_cold_open`](cues/r_cold_open.mp3) | 1:16 | -12.4 | Mystery / 'investigators' cue: felt-piano ostinato, muted pizzicato bass, ticking clock; dark accent ~28 s; then restless montage energy; ends on a held questioning chord. | Dark accent at ~28 s (Grip Tighter lands it on 'Between 55 and 60 white people were killed'); the closing questioning chord sits under the video's big question. | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
-| [`j_cold_open`](cues/j_cold_open.mp3) | 1:02 | -17.8 | Tense, restrained: low solo cello, string drones, sparse pizzicato, soft ticking pulse, distant frame-drum heartbeat, lonely fiddle; slow suspense build to a held unresolved chord. | Written for the 1806 duel: King Andrew MUSIC.md says start it at 'Then came the Revolution' so the swell lands on the duel. | Jackson Video 1 / Part One, King Andrew, Good Luck, Grip Tighter, Say It Ain't So |
-| [`j_intrigue`](cues/j_intrigue.mp3) | 2:05 | -15.4 | Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail. | Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Fix Everything, Good Luck, Say It Ain't So |
+| [`r_cold_open`](cues/r_cold_open.mp3) | 1:16 | -12.4 | Mystery / 'investigators' cue: felt-piano ostinato, muted pizzicato bass, ticking clock; dark accent ~28 s; then restless montage energy; ends on a held questioning chord. | Dark accent at ~28 s (Grip Tighter lands it on 'Between 55 and 60 white people were killed'); the closing questioning chord sits under the video's big question. | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, Dressed to Kill |
+| [`j_cold_open`](cues/j_cold_open.mp3) | 1:02 | -17.8 | Tense, restrained: low solo cello, string drones, sparse pizzicato, soft ticking pulse, distant frame-drum heartbeat, lonely fiddle; slow suspense build to a held unresolved chord. | Written for the 1806 duel: King Andrew MUSIC.md says start it at 'Then came the Revolution' so the swell lands on the duel. | Jackson Video 1 / Part One, King Andrew, Good Luck, Grip Tighter, Say It Ain't So, Dressed to Kill |
+| [`j_intrigue`](cues/j_intrigue.mp3) | 2:05 | -15.4 | Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail. | Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Fix Everything, Good Luck, Say It Ain't So, Dressed to Kill |
 | [`r_spirits`](cues/r_spirits.mp3) | 1:42 | -10.7 | Playful and eerie: music box, detuned piano, tremolo strings, soft knocks; second half turns earnest and wide (pioneers trekking west). | First ~50 s (music box, detuned piano, soft knocks) is the Fox-sisters part; the second half turns earnest/wide. | Fix Everything, Good Luck |
 | [`w_calm_sea`](cues/w_calm_sea.mp3) | 1:07 | -12.5 | Calm, open, slightly uneasy morning at sea: rocking 6/8 low strings, solo wooden flute shanty phrase, harp, col legno rope creaks; darkens after ~30 s with a low cello ostinato; held unresolved minor chord. | First ~30 s calm; the threat (cello ostinato) creeps in after ~30 s. | The War Nobody Won, Good Luck |
 
@@ -59,9 +59,9 @@ prefix says which video the cue was made for:
 | [`r_schools`](cues/r_schools.mp3) | 1:02 | -12.4 | Light, bright, curious: pizzicato, glockenspiel, clarinet, bouncy piano; knowing comic final button (Ouija's 'fun' theme). | The comic final button (Ouija lands it on "It's the point."). | Fix Everything, The Man Who Couldn't Sit Still, Good Luck |
 | [`j_gossip`](cues/j_gossip.mp3) | 2:00 | -12.8 | Playful, gossipy, mischievous: tiptoeing pizzicato, fussy harpsichord, sly clarinet, teacup percussion, 'gasp' string swells, dramatic finish. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck |
 | [`a_price`](cues/a_price.mp3) | 1:05 | -17.3 | Caper underscore, Gilded Age confidence: walking upright bass, staccato clarinet, pizzicato, piano stabs, brushed snare, sneaky tension, cheeky triumphant brass button at the end. | The cheeky brass button at the end. | The Man Who Couldn't Sit Still, Good Luck, Say It Ain't So |
-| [`a_newsroom`](cues/a_newsroom.mp3) | 1:05 | -15.1 | Sly sardonic 1890s newsroom: ragtime-tinged piano, pizzicato, staccato bassoon, muted trumpet, typewriter ticks, witty swagger. |  | The Man Who Couldn't Sit Still, Say It Ain't So |
+| [`a_newsroom`](cues/a_newsroom.mp3) | 1:05 | -15.1 | Sly sardonic 1890s newsroom: ragtime-tinged piano, pizzicato, staccato bassoon, muted trumpet, typewriter ticks, witty swagger. |  | The Man Who Couldn't Sit Still, Say It Ain't So, Dressed to Kill |
 | [`r_temperance`](cues/r_temperance.mp3) | 1:01 | -12.6 | Comic, bouncy, tipsy honky-tonk piano + fiddle + tuba; halfway turns hopeful/determined, ends warm and upbeat. |  | Fix Everything, The Man Who Couldn't Sit Still, Say It Ain't So |
-| [`j_good_feelings`](cues/j_good_feelings.mp3) | 1:30 | -19.6 | Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme). | Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck |
+| [`j_good_feelings`](cues/j_good_feelings.mp3) | 1:30 | -19.6 | Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme). | Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck, Dressed to Kill |
 | [`j_campaign`](cues/j_campaign.mp3) | 1:40 | -14.5 | Rowdy, energetic 1820s campaign march: fife + field drum, bright brass band, banjo, fiddle, hand claps, crowd feel; playful and a bit chaotic. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won |
 
 ### Warm, hopeful and dignified
@@ -78,8 +78,8 @@ prefix says which video the cue was made for:
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_dix`](cues/r_dix.mp3) | 1:02 | -11.9 | Grave, quiet, humane: sparse solo piano + low cello, cold and restrained, no melodrama; slow hopeful string rise in the last ~15 s. | First ~45 s before its hopeful rise = grave bed; the last ~15 s is the hopeful rise. | Fix Everything, The Man Who Couldn't Sit Still, Grip Tighter, Good Luck |
-| [`j_grief`](cues/j_grief.mp3) | 0:40 | -14.0 | Quiet grieving solo cello over a soft sustained string pad, slow and simple (Ouija's 'grief' theme). |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Grip Tighter, Good Luck |
+| [`r_dix`](cues/r_dix.mp3) | 1:02 | -11.9 | Grave, quiet, humane: sparse solo piano + low cello, cold and restrained, no melodrama; slow hopeful string rise in the last ~15 s. | First ~45 s before its hopeful rise = grave bed; the last ~15 s is the hopeful rise. | Fix Everything, The Man Who Couldn't Sit Still, Grip Tighter, Good Luck, Dressed to Kill |
+| [`j_grief`](cues/j_grief.mp3) | 0:40 | -14.0 | Quiet grieving solo cello over a soft sustained string pad, slow and simple (Ouija's 'grief' theme). |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Grip Tighter, Good Luck, Dressed to Kill |
 | [`w_aftermath`](cues/w_aftermath.mp3) | 0:59 | -12.8 | Aftermath of an attack: low sustained strings, distant muffled field drum like a heartbeat, mournful solo fiddle, sparse and grave; second half questioning, slow crescendo + soft snare roll. | First half is the grave part; second half builds tension. | The War Nobody Won, King Andrew, Grip Tighter, Good Luck |
 | [`r_abolition_a`](cues/r_abolition_a.mp3) | 1:38 | -13.1 | Serious, resolute, dignified: low strings, slow deep heartbeat drum, solemn piano theme; tension rise mid-cue; falls to grieving quiet. | Tension rise in the middle (Grip Tighter: coffles / ships to New Orleans), grieving quiet at the end. | Fix Everything, Grip Tighter |
 | [`a_civil_war`](cues/a_civil_war.mp3) | 1:25 | -15.4 | Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello. | Somber second half is the reusable grave part. | The Man Who Couldn't Sit Still, Grip Tighter |
@@ -89,10 +89,10 @@ prefix says which video the cue was made for:
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_spirits_dark`](cues/r_spirits_dark.mp3) | 1:40 | -12.1 | Dark, low and eerie (Ouija's 'fear' theme); the darker Suno replacement for r_spirits. |  | Fix Everything, The Man Who Couldn't Sit Still, Good Luck |
-| [`g_grip`](cues/g_grip.mp3) | 1:10 | -16.3 | Tense political: slow tightening low-string ostinato, ticking clock, sparse piano stabs, restrained brass swells, ominous, ends on a sustained dark chord. | First ~70 s used; starting 13 s into the chapter puts its closing chord under the restated question. | Grip Tighter, Say It Ain't So |
+| [`r_spirits_dark`](cues/r_spirits_dark.mp3) | 1:40 | -12.1 | Dark, low and eerie (Ouija's 'fear' theme); the darker Suno replacement for r_spirits. |  | Fix Everything, The Man Who Couldn't Sit Still, Good Luck, Dressed to Kill |
+| [`g_grip`](cues/g_grip.mp3) | 1:10 | -16.3 | Tense political: slow tightening low-string ostinato, ticking clock, sparse piano stabs, restrained brass swells, ominous, ends on a sustained dark chord. | First ~70 s used; starting 13 s into the chapter puts its closing chord under the restated question. | Grip Tighter, Say It Ain't So, Dressed to Kill |
 | [`g_southampton`](cues/g_southampton.mp3) | 1:50 | -15.9 | Grave prophetic suspense: low drones, slow heartbeat drum, eerie high strings (eclipse), rising dread, sudden dark swell, hollow silence, grieving cello aftermath. |  | Grip Tighter |
-| [`g_pyramid`](cues/g_pyramid.mp3) | 1:40 | -15.8 | Antebellum parlor elegance turned uneasy: stately piano + string quartet, cold and polished, low drone, harp; last third darkens with a low fear pulse. |  | Grip Tighter, Good Luck |
+| [`g_pyramid`](cues/g_pyramid.mp3) | 1:40 | -15.8 | Antebellum parlor elegance turned uneasy: stately piano + string quartet, cold and polished, low drone, harp; last third darkens with a low fear pulse. |  | Grip Tighter, Good Luck, Dressed to Kill |
 | [`g_cotton_engine`](cues/g_cotton_engine.mp3) | 1:45 | -14.9 | Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier. |  | Grip Tighter |
 | [`r_nativism`](cues/r_nativism.mp3) | 1:48 | -12.3 | Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march. | Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories. | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
 | [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
@@ -111,7 +111,7 @@ prefix says which video the cue was made for:
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
-| [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So |
+| [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, Dressed to Kill |
 ## Recurring roles
 
 These cues have become the channel's regulars:
@@ -159,6 +159,7 @@ Channel identity. Also ships in the 15-minute-history skill template on the King
 - King Andrew: Intro / title card (music/v3/title_sting.mp3) · bed 0.45
 - Grip Tighter: Intro / title card · bed 0.45
 - Good Luck: Intro / title card (music/title_sting.mp3; r_title_sting.mp3 is an identical copy) · bed 0.45
+- Dressed to Kill: Intro / title card · bed 0.45
 
 ### `w_title_fanfare`
 
@@ -185,6 +186,7 @@ The channel's cold-open identity cue.
 - King Andrew: Ch01 King Andrew the First (music/v3/r_cold_open.mp3) · bed 0.17, fading to 0 at the end
 - Grip Tighter: Ch01 The Proclamation · bed 0.17 → 0.12 over the last 60 frames
 - Good Luck: Ch09 Who Moves It? (Faraday / blindfold study, before the four-feeling montage) · bed 0.13
+- Dressed to Kill: Ch05 Witch Fever, the three reasons · bed 0.14
 
 ### `j_cold_open`
 
@@ -198,6 +200,7 @@ Quiet file (−17.8 LUFS) — needs a higher bed than Lyria cues (Ouija uses 0.2
 - King Andrew: Ch02 Dirty Boots · bed 0.14
 - Good Luck: Ch05 Patience Worth · bed 0.27
 - Grip Tighter: Fallback for Ch03/Ch05; copied in as j_cold_open, unused · bed —
+- Dressed to Kill: Ch06 from 'Two years later' (Kedzie, Emma) · bed 0.26
 
 ### `j_intrigue`
 
@@ -213,6 +216,7 @@ Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3
 - The War Nobody Won: Lowell (until 'home') · bed 0.13
 - Fix Everything: jh/MapTest (a map-motion test, not a chapter; file is music/intrigue.mp3 in Reform-Era) · bed 0.16
 - Good Luck: Ch02 Knock Once for Yes (as r_intrigue) · bed 0.26
+- Dressed to Kill: Ch05 from 'William Morris' · bed 0.17
 
 ### `r_spirits`
 
@@ -281,6 +285,7 @@ Quietest Suno cue (−17.3 LUFS).
 Tied to Bierce (Ouija MUSIC.md). Very low dynamic range (LRA 2.2).
 
 - The Man Who Couldn't Sit Still: Ch05 Bitter Bierce, first half (until 'And in his', then r_spirits_dark) · bed 0.15
+- Dressed to Kill: Ch07 Arsenic-Free (ads, shoppers) · bed 0.17
 
 ### `r_temperance`
 
@@ -308,6 +313,7 @@ Quietest file in the library (−19.6 LUFS, ~7 dB under the Lyria cues): beds 0.
 - Good Luck: Ch01 Two Pictures (Rockwell half, hard cut to r_spirits_dark) · bed 0.3
 - Good Luck: Ch04 Knees Touching (startFrom 240 f = 8 s) · bed 0.28
 - Good Luck: Ch09 montage 'Love' beat (startFrom 240) and end screen · bed 0.3
+- Dressed to Kill: Ch03 Dressed to Kill (the ball, the BMJ joke) · bed 0.27
 
 ### `j_campaign`
 
@@ -375,6 +381,7 @@ Grip Tighter's one warm cue.
 - Grip Tighter: Ch06 Sunup to Sundown (first ~45 s, then j_grief) · bed 0.12
 - Grip Tighter: Fallback for Ch08 (its hopeful last 15 s, extended) · bed —
 - Good Luck: Alternate in the folder (backup for ch06) · bed —
+- Dressed to Kill: Ch04 The Walls (heavy): cut 4–6 frames before 'natural death' (music drop) · bed 0.12
 
 ### `j_grief`
 
@@ -390,6 +397,7 @@ Short (40 s). Requested length 40000 ms.
 - Grip Tighter: Ch06 Sunup to Sundown (from 'Some enslaved people', Douglass beat) · bed 0.12
 - Good Luck: Ch06 Empty Chairs (from 'So picture one house') · bed 0.15
 - Good Luck: Ch09 montage 'Grief' beat · bed 0.16
+- Dressed to Kill: Ch04 from 'And that was the pattern' · bed 0.14
 
 ### `w_aftermath`
 
@@ -446,6 +454,7 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 - Good Luck: Ch01 Two Pictures (the 1973 half, hard cut from j_good_feelings) · bed 0.15 → 0.12
 - Good Luck: Ch08 Captain Howdy (until 'But here's the twist') · bed 0.13
 - Good Luck: Ch09 four-feeling montage, 'Fear' beat (startFrom 960 f = 32 s) · bed 0.14
+- Dressed to Kill: Ch01 cold open (the Arsenic Waltz) · bed 0.14, dipping to 0 by the intro
 
 ### `g_grip`
 
@@ -454,6 +463,7 @@ Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.
 > tense political documentary underscore, slow tightening ostinato in low strings, ticking clock pulse, cold and deliberate, sparse piano stabs, each phrase a little heavier and closer, restrained brass swells, ominous and inevitable, ends on a sustained dark chord, space for narrator, instrumental
 
 - Grip Tighter: Ch10 Grip Tighter (enters at chapter frame 390 = 13 s, until 'Then the cotton', then r_ending) · bed 0.15
+- Dressed to Kill: Ch06 Draper and laissez-faire · bed 0.2
 
 ### `g_southampton`
 
@@ -473,6 +483,7 @@ Embedded Suno title tag says 'World Outside' (id 0a2e74c2…), but it was upload
 
 - Grip Tighter: Ch05 The Pyramid (from the top; fades just before '…one more reason. Fear.') · bed 0.17
 - Good Luck: Copied in as g_pyramid; was option A for ch02/C for ch05 (review/music_options), not used · bed —
+- Dressed to Kill: Ch02 The Perfect Green (the craze) · bed ~0.22
 
 ### `g_cotton_engine`
 
@@ -571,3 +582,5 @@ Tied to Bierce (Ouija MUSIC.md).
 - Grip Tighter: Ch10 Grip Tighter (takes over from grip at 'Then the cotton') · bed 0.12
 - Grip Tighter: Fallback for Ch02 (first 50 s) if founding.mp3 missing · bed —
 - Good Luck: Ch09 Who Moves It?, last lines (warm first ~30 s only) · bed 0.13
+- Dressed to Kill: Ch08 + end screen: started so its unresolved chord (~55 s) lands on 'the witch was real' · bed 0.16
+

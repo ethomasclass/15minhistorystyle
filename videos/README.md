@@ -14,6 +14,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 4 | ***Grip Tighter:** Slavery and the Cotton South*, 1790–1860 | 17:24 | 10 | 2,760 | `Slaveryvideo` · `ccr-ec669e6a-l5w6ai` | "…the closer the whole country came to tearing apart." |
 | 5 | ***Good Luck:** How the Ouija board went from romantic to scary*, 1886–1973 | 9:48 | 9 | 1,600 | `Ouija` · `ccr-6addf590-j2w0xz` | "…that was up to whoever was holding it." + a 15 s end screen |
 | 6 | ***Say It Ain't So:** Baseball's Gambling Problem Before the Black Sox*, 1865–1921 (+ today) | 10:23 | 8 | 1,709 | this repo · `black-sox-video` (`projects/Black_Sox/`) | "…It's who's watching when they do." + subscribe line and a 12 s end screen. Plus 4 vertical Shorts |
+| 7 | ***Dressed to Kill:** How Arsenic Green Took Over the 1800s*, 1775–1900 | 9:40 | 8 | 1,654 | this repo · `claude/laughing-gates-j5en30` (`projects/Arsenic_Green/`) | "…The green never changed. What changed was who had to prove it was safe. William Morris called it witch fever. But this time, the witch was real." + subscribe line and a 13 s end screen |
 
 ## What each one added
 
@@ -42,6 +43,23 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   reminders** (now a standing rule); a readable **script PDF** for review; and **native vertical Shorts** that splice hook-first lines
   out of the chapter narration (no new voice) with word-by-word captions. No AI images (your call); 9 reused music cues, none new.
   Thumbnail: BANNED 1921 / PARTNER 2026 with Shoeless Joe (C).
+- **Dressed to Kill (arsenic green)** was the Halloween video and the first built after a look at the channel's own **retention
+  graphs**, so it opens **hook-first** (the thumbnail's skeletons at frame 0, the hook line before any date). It added:
+  - **A one-time colour exception.** Arsenic green is the only true green on screen and only on the pigment itself (real wallpaper
+    samples, the Kedzie cover, surviving gowns, the silhouettes); never on text, titles, notes, arrows or charts; teal kept away from it.
+  - **Victorian cut-paper silhouettes** as the AI illustration style (cream paper, black figures, one spot colour), chosen over oil
+    paintings and a graphic-novel test: period-true, plainly illustration, and they never pass for a real archival image.
+  - **A recurring motif card** (`Swatch`): fills a green square as the pigment turns up somewhere new, drains to grey on
+    "arsenic-free", is stamped SEALED at the end.
+  - **The document highlighter swipe**: a coral wash running along a quote's lines in step with the narration, drawn in the scan's own pixels.
+  - **A hand-traced colour region** for a subject the mask can't catch (the Waltz lady's gown), shared by every shot of that picture.
+  - **Cleaner silhouette layers**: tight, sharp background fill (no smeared halo) and cut rects for figures fused to props; figures
+    that still separate badly get a flat camera move instead of parallax.
+  - **A music drop** (a cue cut 4–6 frames before the reveal word, then silence) in the heavy chapter.
+  - Built by **four scene agents in parallel** from one `script/SCENES.md` brief, with shared pieces made first (`src/kit/dk.tsx`).
+  - The script borrowed what Vox explainers do well (pointing words, numbers in pairs, "translation:" after a quote, a confusion
+    pass) without their look. 190 archival images, 9 AI silhouettes, 12 reused music cues, none new.
+  Thumbnails for Test & Compare: DRESSED TO KILL (Waltz), DEADLY GREEN (ballroom), DO NOT TOUCH (Kedzie's book).
 
 ## Your standing preferences (from your notes across the videos)
 
@@ -76,6 +94,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Images**
 - **AI images are a per-video call.** Black Sox used none ("roll with what is available"); Grip Tighter used none; Ouija used many.
+- **Try a style before committing** (from *Dressed to Kill*): you A/B'd oil painting vs. graphic novel vs. Victorian silhouette on one
+  scene and picked the silhouettes. Spell out the period in every prompt ("no modern buildings, clothing or objects"); image models
+  drift to the present (the graphic-novel test came back with tower blocks and a parka). Paint out any AI text that slips in.
+- **Masks must look clean on AI images too.** Check the subject and background layers on a contact sheet before building scenes;
+  a smudge halo or a straight cut edge shows when the figure slides.
   Ask before writing prompts. When a gap has no photo, prefer an engraving detail, a period document or a drawn diagram.
 
 **Shorts**

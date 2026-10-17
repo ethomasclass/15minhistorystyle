@@ -68,6 +68,7 @@ Every thumbnail made so far is in [`thumbnails/`](thumbnails/). The one marked �
 | Grip Tighter | [`A`](thumbnails/05_Grip_Tighter_A.png) · ★ [`B`](thumbnails/05_Grip_Tighter_B.png) | SLAVERY WAS SUPPOSED TO FADE… / "then came cotton." |
 | Good Luck (Ouija) | ★ [`06_Good_Luck_Ouija.png`](thumbnails/06_Good_Luck_Ouija.png) | WHO MADE IT / SCARY? (full-colour painting; breaks the usual rules) |
 | Say It Ain't So (Black Sox) | [`A`](thumbnails/07_Say_It_Aint_So_A.png) · [`B`](thumbnails/07_Say_It_Aint_So_B.png) · ★ [`C`](thumbnails/07_Say_It_Aint_So_C.png) | SAY IT / AIN'T SO (Jackson split) · EVERYBODY BET. · 1921 BANNED / 2026 PARTNER (Jackson waist-up beside a drawn phone) |
+| Dressed to Kill | [`A`](thumbnails/08_Dressed_To_Kill_A.png) · [`B`](thumbnails/08_Dressed_To_Kill_B.png) · [`C`](thumbnails/08_Dressed_To_Kill_C.png) (for Test & Compare) | DRESSED / TO KILL (Arsenic Waltz, gown in arsenic green) · DEADLY GREEN (silhouette ballroom) · DO NOT TOUCH (Kedzie's poison-green book). The video's colour exception replaces coral on the subject |
 
 **The formula** (full rules in
 [`thumbnail-and-youtube.md`](../.claude/skills/15-minute-history/references/thumbnail-and-youtube.md)):

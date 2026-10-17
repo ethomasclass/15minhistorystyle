@@ -20,7 +20,9 @@ from trace import clean, save  # noqa: E402
 
 PUB = os.path.join(HERE, "..", "public")
 JOBS = {
-    # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model)
+    # name: (source in public/, crop box (x0, y0, x1, y1) in source pixels or None for the whole image, rembg model[, cut rects])
+    # A figure fused to a prop (hands on a table, a tray in front): add cut rects, and if it still separates badly,
+    # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
@@ -28,7 +30,7 @@ JOBS = {
 }
 
 
-def run(name, src, box, model, sessions={}):
+def run(name, src, box, model, cut=None, sessions={}):
     im = Image.open(os.path.join(PUB, src)).convert("RGB")
     crop = im.crop(box) if box else im
     small = crop.copy()
@@ -39,6 +41,8 @@ def run(name, src, box, model, sessions={}):
     full = np.zeros((im.height, im.width), np.uint8)
     x0, y0 = (box[0], box[1]) if box else (0, 0)
     full[y0:y0 + crop.height, x0:x0 + crop.width] = (a > 128).astype(np.uint8) * 255
+    for x0c, y0c, x1c, y1c in cut or []:   # optional rectangles to remove (a tray, a table, a book merged with the figure)
+        full[y0c:y1c, x0c:x1c] = 0
     m = clean(full, close=9, min_area=20000)
     n, lab, stats, _ = cv2.connectedComponentsWithStats(m)
     if n > 2:                        # keep only the biggest piece (the subject)

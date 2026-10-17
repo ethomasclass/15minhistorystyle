@@ -163,3 +163,8 @@ Do all of these before sending the user anything. Each one caught real problems 
 - **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
 - **The bundle copies public/ into /tmp** (~500 MB for a full video) on every render; the tools delete theirs.
   If the disk fills, remove `/tmp/remotion-webpack-bundle-*` and `out/` scratch files.
+- **Build chapters in parallel from one brief** (*Dressed to Kill*): once the voice exists, write `script/SCENES.md` (rules for every
+  chapter plus a shot plan per chapter: images, anchor words, music), build the shared pieces first (a `src/kit/<video>.tsx`,
+  masks, layers, chapter stubs registered in `chapters.ts`), smoke-test them with a few stills, then give 2 chapters each to 4
+  agents that may only edit their own `ChNN.tsx`. Review every agent's stills sheet; when two chapters show the same picture,
+  move that shot into a shared component so they match (the Waltz went into `src/kit/waltz.tsx`).
