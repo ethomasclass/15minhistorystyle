@@ -25,6 +25,7 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   a document. Describe it in short sentences. Then pose the **driving question** the whole video answers:
   "So here's the question I want to answer today: How did the People's President end up being called a king?"
   End with a hook into chapter 2 ("And it starts with a teenager, a British officer, and a pair of dirty boots.").
+  Also plant the video's long loop here (see "Story loops" below).
 - **The last chapter answers the question out loud** ("So let's go back to the question."), pulls the threads
   together through callbacks, and ends on a short line for a general audience that lands the title. *King
   Andrew* ended on one word: "King." *Fix Everything* ended on a one-line tease of what comes next ("It split
@@ -113,6 +114,28 @@ background, no memory of earlier chapters and no reason to stay. Three habits, c
 one ask: does the viewer need it to follow the story? If not, cut it or move it to a source tag. Then mark the one
 line in the chapter that connects to today. If there isn't one, write it.
 
+### Story loops (the user's standing direction, Oct 2026)
+
+Keep the viewer holding at least one unanswered question at every moment. A loop is **open** (a question the viewer
+now needs answered), **build** (context and rising stakes while they wait), **close** (the payoff, ideally with a turn).
+Open the next loop *before or as* the current one closes, so there is never a natural place to leave.
+
+- **The driving question is the outer loop**: opened in the cold open, closed in the last chapter.
+- **Plant one long loop in the cold open** that pays off two-thirds of the way through (the strongest mystery in the
+  video, teased honestly). It carries the middle, where viewers usually drop.
+- **Every chapter ends by opening the next loop, never by summarizing.** "And while those balloons protected an army,
+  another unit was using balloons to invent one." Not: "So that's how barrage balloons worked."
+- **Mid-chapter mini-loops**: a question the viewer is already asking, asked out loud and answered a beat later
+  ("But could a rubber tank actually fool anyone?").
+- **But / therefore, not and then.** Beats connect by cause or contradiction. If two beats join with "and then", cut one
+  or find the "but".
+- **Honest teases only.** The payoff must be at least as big as the promise. "Almost nobody was told" is fine if true;
+  "a cover-up" is not unless the evidence says so. Bait the payoff can't support costs more viewers than it gains.
+- **Map the loops in SCRIPT.md** (a table: loop, where it opens, where it closes) and check that no stretch longer than
+  about 45 seconds has every loop closed.
+- **Shorts**: one loop. Open on the question in the first second, close it on the payoff line, and loop the last frame
+  to the first.
+
 ## 3. Objectivity rules
 
 These came from the user directly; follow them in every video.
@@ -174,7 +197,7 @@ Layout used for *King Andrew*:
 ---
 ## 0:58 | <Chapter 2 name>
 ...
-## Production notes      (heavy chapter, callbacks, vocab cards, quote cards, key concepts, emphasis graphics, ending)
+## Production notes      (heavy chapter, callbacks, loop map, vocab cards, quote cards, key concepts, emphasis graphics, ending)
 ## Pronunciation (for ElevenLabs)   (table: Word | Say it)
 ## Fact-check flags      (each claim that could be challenged, with the evidence and how the script hedges)
 ## Sources
