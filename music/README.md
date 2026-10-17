@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History so far: **49 cues, about 81 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History so far: **49 cues, about 88 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -117,7 +117,7 @@ prefix says which video the cue was made for:
 | [`w_dawn`](cues/w_dawn.mp3) | 1:06 | -11.6 | Night bombardment of Fort McHenry: rumbling timpani, anxious strings in the dark, then a slow sunrise swell into a warm noble hopeful brass/string chorale. | Dark first part, then the sunrise swell (the hopeful part) later in the cue. | The War Nobody Won, Good Luck |
 | [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still |
 | [`a_mexico_short`](cues/a_mexico_short.mp3) | 1:05 | -14.7 | Alternate take of a_mexico (65 s, low dynamic range). |  | The Man Who Couldn't Sit Still |
-| [`b_newsreel`](cues/b_newsreel.mp3) | 1:60 | -16.4 | 1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle. | Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s. | The Balloon War |
+| [`b_newsreel`](cues/b_newsreel.mp3) | 2:00 | -16.4 | 1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle. | Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s. | The Balloon War |
 
 ### Endings
 
@@ -669,7 +669,7 @@ Hits by ~4 s and builds through; the last strong accent is near 64 s.
 
 ### `b_newsreel`
 
-1:60 · -16.4 LUFS · Suno (`Suno`) · made for *The Balloon War*
+2:00 · -16.4 LUFS · Suno (`Suno`) · made for *The Balloon War*
 
 > 1940s wartime newsreel orchestral underscore, instrumental, brushed snare and military snare rolls, low brass chorale, warm strings, solo trumpet, timpani, distant radio-static texture, cinematic but restrained, 72 bpm, minor key turning major
 
