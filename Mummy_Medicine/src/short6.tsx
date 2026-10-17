@@ -576,3 +576,21 @@ export const Short6: React.FC = () => (
     </StepCtx.Provider>
   </PaletteCtx.Provider>
 );
+
+/** The Short 6 thumbnail (1080x1920): a Flow close-up of cracked brown paint, "LOOK CLOSELY.", the face-like hollow circled. */
+export const Cover6Still: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <StepCtx.Provider value={2.5}>
+      <AbsoluteFill style={{background: '#120e0b'}}>
+        <Img src={staticFile('img/ai/short6_cover_look_closely.jpg')} style={{position: 'absolute', left: 0, top: -8, width: 1080, height: 1935}} />
+        <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(10,8,6,0.85) 0%, rgba(10,8,6,0.55) 18%, rgba(10,8,6,0) 34%)'}} />
+        <Highlight text="LOOK" x={60} y={150} size={200} at={-40} seed={220} rot={-3} />
+        <Highlight text="CLOSELY." x={90} y={370} size={170} at={-40} seed={221} rot={-2} />
+        <Note text="artists once painted with real mummies" x={90} y={585} size={44} rot={-3} at={-40} color="#ffffff" />
+        <Loop cx={565} cy={1050} rx={290} ry={370} at={-40} seed={95} color={CORAL} width={10} />
+        <Mark />
+        <Finish vignette={0.25} />
+      </AbsoluteFill>
+    </StepCtx.Provider>
+  </PaletteCtx.Provider>
+);
