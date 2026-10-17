@@ -44,18 +44,26 @@ Structure: 0:00–0:10 tiptoe intro (pizzicato + bass) · 0:10–1:00 the sneaky
 button (one muted-trumpet "wah-wah" and a bass note).
 *The button matters: it's the gag hit for "Which, to be fair, was the whole point."*
 
-### 3. `b_paper_wind`: "carried by the wind" (about 2:30)
-Reusable for: journeys and crossings (migration, voyages, flights, letters, messages), memorials and endings,
-anything fragile and beautiful that carries something heavy.
+### 3. `b_paper_wind`: "carried by the wind" (about 2:30) · revised: darker, so it doesn't come out upbeat
+Reusable for: journeys and crossings, memorials and endings, anything fragile that carries something heavy.
 ```
-Styles: airy cinematic elegy, instrumental, solo felt piano, soft string ensemble, alto flute, harp, celesta, gentle
-wind and paper-rustle textures, slow, floating, wonder turning to sorrow turning to warmth, 66 bpm, major key with
-minor turns
+Styles: quiet melancholic cinematic elegy, instrumental, solo felt piano, sparse and slow, soft muted strings, alto
+flute, harp, gentle wind and paper-rustle textures, fragile and haunting, restrained, no percussion, 60 bpm, minor key,
+a warm major resolution only at the very end
+Exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit, upbeat,
+uplifting, epic, triumphant
 ```
-Structure: 0:00–0:50 floating and curious (piano, harp, celesta, wind) · 0:50–1:30 darker: low strings, the melody
-falls, sparse · 1:30–1:45 near silence · 1:45–2:30 warm and hopeful: the piano melody returns over full strings,
-ending on a long, open, unresolved-then-resolved chord.
-*The ending third is the closing-line bed ("ended with paper birds"); the opening is ch04.*
+Lyrics box (Instrumental OFF, section tags only):
+```
+[Intro: wind and paper rustle, solo felt piano, slow and fragile]
+[Verse: alto flute melody, sparse piano, uneasy and haunting]
+[Instrumental]
+[Bridge: low muted strings, the melody falls, sorrowful]
+[Break: near silence, a single piano note, wind]
+[Outro: the piano melody returns, gentle and warm, resolves to one soft major chord]
+[End]
+```
+*The last few seconds' major turn is the cranes moment; the opening is ch04.*
 
 **Send back** MP3s named `b_newsreel.mp3`, `b_caper_40s.mp3` and `b_paper_wind.mp3`. I'll add them to the library
 (`music/cues/`, `catalog.json`, the README's `b_` row) and note each cue's good part and accents.

@@ -117,13 +117,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Normandy6.jpg"
   },
-  "ch02_protector/320th_preparing_balloon_dday_small.jpg": {
-    "title": "File:320th Barrage Balloon Battalion soldiers preparing a barrage balloon during D-Day.jpg",
-    "artist": "Unnamed US Army photographer",
-    "date": "1944-06-06",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:320th_Barrage_Balloon_Battalion_soldiers_preparing_a_barrage_balloon_during_D-Day.jpg"
-  },
   "ch03_fake/rubber_tank_beside_real_tank_anzio_1944.jpg": {
     "title": "Dummy tank designed by British - United States Fifth Army, Anzio Area, Italy",
     "artist": "Photographs of American Military Activities",
@@ -330,5 +323,138 @@
     "licence": "Public Domain Mark 1.0 (Internet Archive item)",
     "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n29",
     "source": "ia:japanese-balloon-bombs-1943 page n29"
+  },
+  "ch04_paper_balloon/balloons_shot_down_near_attu_1945.jpg": {
+    "title": "Japanese balloons with bombs are shot down sixty miles southwest of Attu Island, Aleutian Islands, 25 February 1945. (U.S. Air Force Number 59928AC)",
+    "artist": "Photographs of Activities, Facilities and Personnel",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/204948385",
+    "source": "nara:204948385 342-FH-3A29772-59928AC"
+  },
+  "ch04_paper_balloon/japanese_war_balloon_nara_1800692.jpg": {
+    "title": "Photograph of a Japanese War Balloon",
+    "artist": "Photographs",
+    "date": "1945-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/1800692",
+    "source": "nara:1800692 "
+  },
+  "ch04_paper_balloon/japanese_war_balloon_nara_285260.jpg": {
+    "title": "Japanese war balloon",
+    "artist": "Photographs",
+    "date": "1945-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/285260",
+    "source": "nara:285260 "
+  },
+  "ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg": {
+    "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326352; photo cropped from its caption card, rotated upright)",
+    "artist": "General Photographic Files",
+    "date": "1945-05-24",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/404794460",
+    "source": "nara:404794460 80-G-326352"
+  },
+  "ch04_paper_balloon/moffett_balloon_inflated_hangar_alt_1945.jpg": {
+    "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326353; photo cropped from its caption card, rotated upright)",
+    "artist": "General Photographic Files",
+    "date": "1945-05-24",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/404794462",
+    "source": "nara:404794462 80-G-326353"
+  },
+  "ch04_paper_balloon/moffett_officers_inspect_ballast_ring_1945.jpg": {
+    "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326354; photo cropped from its caption card, rotated upright)",
+    "artist": "General Photographic Files",
+    "date": "1945-05-24",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/404794464",
+    "source": "nara:404794464 80-G-326354"
+  },
+  "ch04_paper_balloon/moffett_crew_hold_ballast_ring_1945.jpg": {
+    "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326355; photo cropped from its caption card)",
+    "artist": "General Photographic Files",
+    "date": "1945-05-24",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/404794466",
+    "source": "nara:404794466 80-G-326355"
+  },
+  "ch05_silence/richland_headlines_hanford_1945.jpg": {
+    "title": "Richland, Washington newspaper headlines about Hanford Plant",
+    "artist": "MED Sites - Hanford",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/617584015",
+    "source": "nara:617584015 434-OR-41-MED-389"
+  },
+  "ch07_answer/tule_lake_birds_eye_view_wra.jpg": {
+    "title": "Tule Lake Relocation Center, Newell, California. Bird's-eye view of the Tule Lake Relocation Center.",
+    "artist": "Central Photographic File of the War Relocation Authority",
+    "date": "1942-04-23",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/536200",
+    "source": "nara:536200 210-G-A259"
+  },
+  "ch06_bly/gearhart_mountain_ponderosa_pine_1964.jpg": {
+    "title": "Timber Stand Improvement - General (photo cropped from its mount)",
+    "artist": "Photographs Relating to National Forests, Resource Management Practices, Personnel, and Cultural and Economic History",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/7054423",
+    "source": "nara:7054423 95-GP-5713-510943"
+  },
+  "ch06_bly/gearhart_mountain_ponderosa_pine_alt_1964.jpg": {
+    "title": "Timber Stand Improvement - General (photo cropped from its mount)",
+    "artist": "Photographs Relating to National Forests, Resource Management Practices, Personnel, and Cultural and Economic History",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/7054424",
+    "source": "nara:7054424 95-GP-5713-510944"
+  },
+  "ch05_silence/hanford_b_reactor_100b_area_1944.jpg": {
+    "title": "B Reactor, Hanford (photo cropped from its mount)",
+    "artist": "MED Sites - Hanford",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/617583975",
+    "source": "nara:617583975 434-OR-41-MED-388"
+  },
+  "ch05_silence/hanford_b_reactor_face_sept1944.jpg": {
+    "title": "B Reactor Face - Hanford (photo cropped from its mount)",
+    "artist": "MED Sites - Hanford",
+    "date": "1944-09-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/617583724",
+    "source": "nara:617583724 434-OR-41-MED-382"
+  },
+  "ch05_silence/hanford_b_reactor_face_workers.jpg": {
+    "title": "B-Reactor",
+    "artist": "The Dupont Company",
+    "date": "1944-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/7260602",
+    "source": "nara:7260602 "
+  },
+  "ch02_protector/waverly_woodson_portrait_1940s.jpg": {
+    "title": "File:WaverlyWoodson.jpg",
+    "artist": "U.S. Army soldier or employee",
+    "date": "1940sdate QS:P,+1940-00-00T00:00:00Z/8",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:WaverlyWoodson.jpg"
+  },
+  "ch02_protector/woodson_dsc_omaha_2024.jpg": {
+    "title": "File:Waverly B. Woodson Jr. Distinguished Service Cross.jpg",
+    "artist": "Staff Sgt. Justin McClarran, 188th Infantry Brigade",
+    "date": "2024-06-03",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Waverly_B._Woodson_Jr._Distinguished_Service_Cross.jpg"
+  },
+  "ch03_fake/ghost_army_congressional_gold_medal.jpg": {
+    "title": "File:Ghost Army Medal.jpg",
+    "artist": "Bedelstein",
+    "date": "2024-03-21",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Ghost_Army_Medal.jpg"
   }
 }
