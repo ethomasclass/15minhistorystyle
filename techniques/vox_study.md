@@ -361,7 +361,7 @@ const wordFrames = (t: TL, phrase: string, nth = 1) => {
 
 ## 7. *Dressed to Kill* (the arsenic-green video): concrete proposals
 
-The outline is in `projects/Arsenic_Green/OUTLINE.md`. Working title: **Dressed to Kill**.
+The outline is in `projects/Dressed_To_Kill/OUTLINE.md`. Working title: **Dressed to Kill**.
 
 ### 7.1 The green swatch, and the coral rule: three options for the user
 

@@ -1,14 +1,14 @@
 # Handoff: Dressed to Kill
 
 A 9:40 YouTube history video, *Dressed to Kill: How Arsenic Green Took Over the 1800s* (1775–1900), made for Halloween.
-The project lives in `projects/Arsenic_Green/` on branch `claude/laughing-gates-j5en30` of `ethomasclass/15minhistorystyle`.
+The project lives in `projects/Dressed_To_Kill/` on branch `claude/laughing-gates-j5en30` of `ethomasclass/15minhistorystyle`.
 
 ## Keys
 
-Narration uses ElevenLabs (`ELEVENLABS_API_KEY`, `VOICE_ID=mI4rIAStSQeKeqsz4FwM`, "Ellis") in `projects/Arsenic_Green/.env`,
+Narration uses ElevenLabs (`ELEVENLABS_API_KEY`, `VOICE_ID=mI4rIAStSQeKeqsz4FwM`, "Ellis") in `projects/Dressed_To_Kill/.env`,
 which git ignores. Rendering needs no keys. The key was pasted into a chat once: rotate it in the ElevenLabs dashboard.
 
-## Where things are (in `projects/Arsenic_Green/`)
+## Where things are (in `projects/Dressed_To_Kill/`)
 
 | What | Where |
 |---|---|

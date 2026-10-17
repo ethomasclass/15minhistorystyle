@@ -14,7 +14,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 4 | ***Grip Tighter:** Slavery and the Cotton South*, 1790–1860 | 17:24 | 10 | 2,760 | `Slaveryvideo` · `ccr-ec669e6a-l5w6ai` | "…the closer the whole country came to tearing apart." |
 | 5 | ***Good Luck:** How the Ouija board went from romantic to scary*, 1886–1973 | 9:48 | 9 | 1,600 | `Ouija` · `ccr-6addf590-j2w0xz` | "…that was up to whoever was holding it." + a 15 s end screen |
 | 6 | ***Say It Ain't So:** Baseball's Gambling Problem Before the Black Sox*, 1865–1921 (+ today) | 10:23 | 8 | 1,709 | this repo · `black-sox-video` (`projects/Black_Sox/`) | "…It's who's watching when they do." + subscribe line and a 12 s end screen. Plus 4 vertical Shorts |
-| 7 | ***Dressed to Kill:** How Arsenic Green Took Over the 1800s*, 1775–1900 | 9:40 | 8 | 1,654 | this repo · `claude/laughing-gates-j5en30` (`projects/Arsenic_Green/`) | "…The green never changed. What changed was who had to prove it was safe. William Morris called it witch fever. But this time, the witch was real." + subscribe line and a 13 s end screen |
+| 7 | ***Dressed to Kill:** How Arsenic Green Took Over the 1800s*, 1775–1900 | 9:40 | 8 | 1,654 | this repo · `claude/laughing-gates-j5en30` (`projects/Dressed_To_Kill/`) | "…The green never changed. What changed was who had to prove it was safe. William Morris called it witch fever. But this time, the witch was real." + subscribe line and a 13 s end screen |
 
 ## What each one added
 
