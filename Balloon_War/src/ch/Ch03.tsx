@@ -238,10 +238,11 @@ const Scale: React.FC<{t: TL}> = ({t}) => {
 
 /** "more than 20 fake operations"; the colonel who was fooled. */
 const Colonel: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch03_fake/rubber_tank_side_view_anzio_1944.jpg" fx={1400} fy={1150} a={t.at('The Ghost Army pulled') - 1} b={t.at('So why')} z0={1.1} z1={1.24} band={null}>
+  <Ph p="ch03_fake/rubber_tank_side_view_anzio_1944.jpg" fx={1400} fy={1150} a={t.at('The Ghost Army pulled') - 1} b={t.at('So why')} z0={1.1} z1={1.24} band={null}
+    m="rubber_tank" traceAt={t.at('fooled')} depth={1.08}>
     {() => (
       <>
-        <AbsoluteFill style={{background: 'rgba(8,8,8,0.55)'}} />
+        <AbsoluteFill style={{background: 'rgba(8,8,8,0.45)'}} />
         <Stamp text="20+ FAKE OPERATIONS" x={110} y={90} at={t.at('more than')} size={110} rot={-4} />
         <Note text="sometimes they fooled their own side" x={120} y={260} size={54} rot={-3} at={t.at('Sometimes')} color="#ffffff" />
         <Quote text="Well, son, you certainly could have fooled me." at={t.at('Well, son')} x={200} y={480} w={1500} size={78} who="a colonel who missed the briefing" />

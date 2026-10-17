@@ -1,11 +1,13 @@
 // The Balloon War's own scene pieces: 3D photos by name, plain photos by path, cards, the then/now wipe and the
 // censor bar. Archival photos show in black and white; the 2023 photos stay in color (now vs then).
 import React from 'react';
-import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {clamp} from './lib/anim';
-import {Tag, useGFrame} from './kit/Kit';
+import {Tag, Tint, Traced, useGFrame, type Place} from './kit/Kit';
 import {Photo} from './kit/shell';
 import {Photo3D} from './kit/photo3d';
+import {Parallax} from './kit/parallax';
+import {MASKS} from './masks';
 import {L3D} from './layers3d';
 import {im} from './images';
 
@@ -34,13 +36,30 @@ export const P3: React.FC<{name: string; a: number; b: number; dolly?: number; y
   );
 };
 
-/** A plain photo by path with a slow push toward (fx, fy). */
+/**
+ * A plain photo by path with a slow push toward (fx, fy). With `m` (a mask in src/masks.ts) the subject is tinted
+ * coral, its teal outline draws on at `traceAt`, and (once tools/layers.py has run) it lifts off the background.
+ */
 export const Ph: React.FC<{p: string; fx: number; fy: number; a: number; b: number; z0?: number; z1?: number; color?: boolean; tag?: string;
-  band?: 'top' | 'bottom' | 'left' | null; children?: (S: (x: number, y: number) => number[]) => React.ReactNode}> = ({p, fx, fy, a, b, z0 = 1.04, z1 = 1.14, color, tag, band = 'bottom', children}) => {
+  band?: 'top' | 'bottom' | 'left' | null; m?: keyof typeof MASKS; traceAt?: number; depth?: number;
+  children?: (S: (x: number, y: number) => number[]) => React.ReactNode}> = ({p, fx, fy, a, b, z0 = 1.04, z1 = 1.14, color, tag, band = 'bottom', m, traceAt, depth = 1.06, children}) => {
   const {src, size} = im(p);
   const grad = band === 'top' ? 'linear-gradient(180deg, rgba(0,0,0,0.7), transparent 38%)'
     : band === 'left' ? 'linear-gradient(90deg, rgba(0,0,0,0.75), transparent 48%)'
     : band === 'bottom' ? 'linear-gradient(transparent 55%, rgba(0,0,0,0.78) 88%)' : 'none';
+  if (m) {
+    return (
+      <Parallax name={m} src={src} size={size} a={a} b={b} tag={tag ?? ''} fx={fx / size[0]} fy={fy / size[1]} cam={{z: [z0, z1]}} depth={depth}
+        mask={MASKS[m]} traceAt={traceAt ?? a + 6} filter={color ? COLOR : BW} vignette={0.5}>
+        {(place) => (
+          <>
+            <AbsoluteFill style={{background: grad}} />
+            {children?.((x, y) => [place.left + x * place.scale, place.top + y * place.scale])}
+          </>
+        )}
+      </Parallax>
+    );
+  }
   return (
     <Photo src={src} size={size} fx={fx} fy={fy} z0={z0} z1={z1} a={a} b={b} bw={color ? COLOR : BW} vignette={0.5}>
       {(place) => (
@@ -76,4 +95,31 @@ export const Redact: React.FC<{x: number; y: number; w: number; h: number; at: n
   const up = interpolate(g, [lift, lift + 8], [0, 1], clamp);
   return <div style={{position: 'absolute', left: x, top: y - up * 40, width: w * u, height: h, background: '#0b0b0b', opacity: 1 - up,
     transform: `rotate(${rot}deg)`, boxShadow: '0 6px 18px rgba(0,0,0,0.6)'}} />;
+};
+
+/**
+ * A masked subject placed by hand (no full-bleed camera): the cut-out alone from tools/layers.py, or with `whole` the
+ * full picture (`src`, for a photo inside a card). Tinted coral; the teal outline draws on at `traceAt`; springs up at `at`.
+ */
+export const Cutout: React.FC<{name: keyof typeof MASKS; size: [number, number]; place: Place; at: number; traceAt: number; whole?: boolean; src?: string}> = ({
+  name, size, place, at, traceAt, whole, src,
+}) => {
+  const g = useGFrame();
+  const {fps} = useVideoConfig();
+  const mask = MASKS[name];
+  const k = whole ? 1 : spring({frame: g - at, fps, config: {damping: 14, mass: 0.8}});
+  if (!whole && g < at) return null;
+  const file = whole ? (src ?? `img/layers/${name}_bg.jpg`) : `img/layers/${name}_fg.webp`;
+  const p: Place = {left: place.left, top: place.top + (1 - k) * 160, scale: place.scale};
+  const img = (extra?: React.CSSProperties) => (
+    <Img src={staticFile(file)} style={{position: 'absolute', left: p.left, top: p.top, width: size[0] * p.scale, height: size[1] * p.scale, filter: BW, ...extra}} />
+  );
+  return (
+    <div style={{position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', opacity: Math.min(1, k * 1.5)}}>
+      {!whole && img({filter: 'brightness(0) blur(14px)', opacity: 0.45, transform: 'translate(10px, 14px)'})}
+      {img()}
+      <Tint mask={mask.alpha} place={p} size={size} />
+      <Traced paths={mask.data.shapes.subject} place={p} at={traceAt} dur={12} width={5} part={0.92} />
+    </div>
+  );
 };

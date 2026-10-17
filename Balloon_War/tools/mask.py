@@ -25,6 +25,11 @@ JOBS = {
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
+    "rubber_tank": ("img/ch03_fake/rubber_tank_side_view_anzio_1944.jpg", None, "isnet-general-use"),
+    "alturas": ("img/ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg", None, "isnet-general-use"),
+    "collapsed": ("img/ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg", None, "isnet-general-use"),
+    "woodson": ("img/ch02_protector/waverly_woodson_portrait_1940s.jpg", None, "u2net_human_seg"),
+    "lst388_balloon": ("img/ch02_protector/lst388_beached_under_balloon_80g252794.jpg", (1300, 420, 2100, 1000), "isnet-general-use"),
 }
 
 

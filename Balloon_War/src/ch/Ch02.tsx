@@ -9,7 +9,7 @@ import {Highlight, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {along, Bed, Sketch, type P} from '../draw';
-import {CORAL, ORANGE, P3, Ph} from '../bw';
+import {CORAL, Cutout, ORANGE, P3, Ph} from '../bw';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
@@ -120,14 +120,13 @@ const Cable: React.FC<{t: TL}> = ({t}) => {
 
 /** "These were small ones, about 35 feet long" */
 const Beached: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/lst388_beached_under_balloon_80g252794.jpg" fx={2000} fy={1300} a={t.at('These were') - 1} b={t.at('Soldiers walked')} z0={1.15} z1={1.24} band="bottom"
-    tag="A landing ship beached at low tide under its balloon, Normandy, June 1944 · US Navy">
-    {() => {
-      const bx = 730, by = 250;
+  <Ph p="ch02_protector/lst388_beached_under_balloon_80g252794.jpg" fx={1900} fy={1650} a={t.at('These were') - 1} b={t.at('Soldiers walked')} z0={1.0} z1={1.03} band="bottom"
+    tag="A landing ship beached at low tide under its balloon, Normandy, June 1944 · US Navy" m="lst388_balloon" traceAt={t.at('small ones')}>
+    {(S) => {
+      const [bx, by] = S(1850, 850);
       return (
         <>
-          <Loop cx={bx} cy={by} rx={200} ry={110} at={t.at('small ones')} seed={23} color={CORAL} width={7} />
-          <Note text="about 35 feet long" x={bx + 230} y={by - 40} size={56} rot={-3} at={t.at('35')} color="#ffffff" />
+          <Note text="about 35 feet long" x={bx + 60} y={by - 30} size={56} rot={-3} at={t.at('35')} color="#ffffff" />
           <Note text="they came ashore with the troops" x={120} y={900} size={52} rot={-3} at={t.at('come ashore')} />
         </>
       );
@@ -215,8 +214,8 @@ const Woodson: React.FC<{t: TL}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${k})`, transformOrigin: '1400px 520px'}}>
-        <PhotoCard src="img/ch02_protector/waverly_woodson_portrait_1940s.jpg" x={1080} y={110} w={640} h={820} rot={2} at={t.at('And one of')} pos="50% 30%" />
+      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${k})`, transformOrigin: '1400px 1080px'}}>
+        <Cutout name="woodson" size={[1280, 1850]} place={{left: 1270, top: 120, scale: 0.52}} at={t.at('And one of')} traceAt={t.at('Waverly')} />
       </div>
       <Note text="one of them, a medic," x={120} y={220} size={62} rot={-3} at={t.at('a medic')} color="#ffffff" />
       <Note text="would wait EIGHTY years" x={130} y={340} size={60} rot={-3} at={t.at('would wait')} />

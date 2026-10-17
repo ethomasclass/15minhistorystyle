@@ -9,7 +9,7 @@ import {Highlight, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {along, Bed, resample, Sketch, smoothPath, type P} from '../draw';
-import {CORAL, ORANGE, P3, Ph, Redact} from '../bw';
+import {CORAL, Cutout, ORANGE, P3, Ph, Redact} from '../bw';
 import {Map, Wind} from '../pacmap';
 import {INCIDENTS} from '../fugo';
 
@@ -58,7 +58,9 @@ const Paste: React.FC<{t: TL}> = ({t}) => {
       <DarkPaper />
       <div style={{position: 'absolute', left: 100, top: 160, width: 820, transform: 'rotate(-2deg)', WebkitMaskImage: bites.length ? mask : undefined, WebkitMaskComposite: 'source-in' as never, maskComposite: 'intersect' as never}}>
         <div style={{background: '#f4efe6', padding: 18, boxShadow: '0 24px 44px rgba(0,0,0,0.7)'}}>
-          <img src={staticFile('img/ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg')} style={{width: '100%', height: 700, objectFit: 'cover', filter: 'grayscale(1) contrast(1.15)', display: 'block'}} />
+          <div style={{position: 'relative', width: 784, height: 700, overflow: 'hidden'}}>
+            <Cutout name="collapsed" size={[1920, 1488]} place={{left: -59.6, top: 0, scale: 700 / 1488}} at={-999} traceAt={t.at('thousands')} whole src="img/ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg" />
+          </div>
         </div>
       </div>
       <Note text="thousands of small sheets of tough paper" x={920} y={200} size={42} rot={-3} at={t.at('thousands')} color="#ffffff" />
@@ -149,13 +151,27 @@ const RiseSink: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** "Then, over North America, it dropped its bombs." */
-const Drop: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg" fx={700} fy={700} a={t.at('Then, over') - 1} b={t.at('Japan launched')} z0={1.1} z1={1.2} band="bottom"
-    tag="A balloon recovered near Alturas, California, 1945 · US Army Signal Corps">
-    {() => <Note text="over North America: the bombs" x={120} y={880} size={60} rot={-3} at={t.at('dropped')} color={CORAL} />}
-  </Ph>
-);
+/** "Then, over North America, it dropped its bombs." A tall photo, so it sits on a card: balloon in coral, traced. */
+const Drop: React.FC<{t: TL}> = ({t}) => {
+  const g = useGFrame();
+  const a = t.at('Then, over');
+  const k = interpolate(g, [a - 1, a + 90], [1, 1.05], clamp);
+  return (
+    <AbsoluteFill>
+      <DarkPaper />
+      <div style={{position: 'absolute', left: 1020, top: 70, transform: `rotate(2deg) scale(${k})`, transformOrigin: '50% 30%'}}>
+        <div style={{background: '#f4efe6', padding: 18, boxShadow: '0 24px 44px rgba(0,0,0,0.7)'}}>
+          <div style={{position: 'relative', width: 749, height: 900, overflow: 'hidden'}}>
+            <Cutout name="alturas" size={[1390, 1670]} place={{left: 0, top: 0, scale: 900 / 1670}} at={-999} traceAt={a + 4} whole src="img/ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg" />
+          </div>
+        </div>
+      </div>
+      <Note text="over North America:" x={120} y={420} size={64} rot={-3} at={a} color="#ffffff" />
+      <Note text="the bombs" x={160} y={540} size={80} rot={-3} at={t.at('dropped')} color={CORAL} />
+      <Tag text="A balloon recovered and re-inflated near Alturas, California, 1945 · US Army Signal Corps" />
+    </AbsoluteFill>
+  );
+};
 
 /** The landing map: about 9,300 launched; every recorded find pops up on its date. */
 const Landings: React.FC<{t: TL}> = ({t}) => {
