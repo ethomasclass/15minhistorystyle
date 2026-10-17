@@ -230,7 +230,7 @@ paper_rustle (ch7).
 | 23rd | Twenty-Third |
 | Bly | Bligh (rhymes with "fly") |
 | Takeshita | Tah-keh-shee-tah |
-| barrage | buh-RAHZH |
+| barrage | (no respelling: the voice says "buh-RAHZH" correctly on its own; a respelling made it say "Baraz") |
 | cafés | ca-FAYS |
 | Hanford | HAN-ferd |
 

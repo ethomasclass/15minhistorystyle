@@ -99,6 +99,9 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
   "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
+- **Don't respell a common word the voice already knows.** A respelling can make it worse (*The Balloon War*:
+  "barrage" → "buh-rahzh" came out "Baraz"; unrespelled, it was right). Keys are case-sensitive, so a respelling
+  hits "barrage" but not "Barrage": test every casing the script uses.
 
 ## 5. Re-voicing one chapter
 

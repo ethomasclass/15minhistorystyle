@@ -42,7 +42,6 @@ CACHE = os.path.join(OUT, "cache")
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
 PRONOUNCE = {
     "320th": "Three-Twentieth", "23rd": "Twenty-Third", "Takeshita": "Tah-keh-shee-tah", "Bly": "Bligh",
-    "barrage": "buh-rahzh",
 }
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
