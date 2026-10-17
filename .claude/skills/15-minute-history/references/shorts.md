@@ -4,6 +4,11 @@ Make 3–4 Shorts per video once the main cut is approved. They use only the vid
 the archival images, masks and layers, and the music library. No new voice credits. *Say It Ain't So* (Black Sox) is the
 worked example: `techniques/components/black_sox/vshorts.tsx` in the style repo.
 
+**Or write one for the Short.** When the spliced lines carry too much context from the long video, write a fresh
+~110-word narration for the Short (about 40 s at the heavy pace), following "Write for someone who knows nothing" in
+script-writing.md, and voice it (~620 credits). *When Europe Ate Mummies* Short 6 (`src/short6.tsx`) is the model:
+its own words.json, a 3D gallery-corridor open and close (CSS 3D planes), and a loop back to frame 0.
+
 ## The rules (from the user)
 
 - **Native vertical, never letterboxed.** A 16:9 scene in a band across a 9:16 frame wastes two-thirds of the screen and

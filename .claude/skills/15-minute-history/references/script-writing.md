@@ -58,13 +58,60 @@ Plain, quick and a little wry: a smart friend explaining history, not a textbook
   - "Translation: I'm the people. You're just Congress."
   - "Not a great start." (his father died weeks before he was born)
   - "So, basically, the skirt scandal."
-  A modern comparison is allowed when it is instantly clear, and rarely.
+  Modern comparisons are welcome when they are instantly clear and true (see "Write for someone who knows
+  nothing" below); the rule is one clear connection per chapter, not a stream of them.
 - **Humanize the people.** Loyal? Absolutely. Stubborn? Also absolutely. Grief, temper and friendship explain
   choices; use them.
 - **Heavy material gets no jokes.** Slavery, removal, deaths: plain statements, numbers, a primary source, and
   space. The heavy chapter is voiced slower (see voice-and-audio.md).
 - **Numbers as people say them**: "about 23 million acres", "about one in ten", "perhaps as many as one in four".
   The voice tool spells out years and numbers itself, so write digits.
+
+### Write for someone who knows nothing (the user's standing direction, Oct 2026)
+
+The viewer may have arrived from a Short, half-watching on a phone. Every line has to work for someone with no
+background, no memory of earlier chapters and no reason to stay. Three habits, checked on every script:
+
+**1. No context burden.** Nothing the viewer has to already know.
+- **Names only when they matter.** If the story works with "one English painter", use that and put the name in the
+  source tag. Name someone when the viewer will meet them again, or when the name *is* the point. Never introduce
+  two new names in one sentence.
+- **One date per idea, at most.** Keep the date that makes the point (often the one closest to today: "into the
+  1960s"); drop the rest. Prefer "eighty years ago" or "your great-grandparents' war" when the exact year isn't the point.
+- **No jargon without the plain word first.** "Paint", not "pigment". "A unit whose weapons were inflatable tanks",
+  then the official name if needed. The appositive rule above still applies.
+- **No "as we saw" and no callbacks that require memory** in Shorts. In long videos a callback must re-state what it
+  calls back to in a few words ("that fake tank from earlier").
+- **Every chapter opens like a cold open**: one concrete image or fact that makes sense on its own.
+
+**2. Connect to today.** Each chapter gets one bridge from then to the viewer's life now.
+- **Put it near them**: "a museum near you", "the sky over your town", "the same air your flight rides home on".
+- **Make the time short**: "your grandparents could have bought it", "a few of them were still alive when you were born".
+- **Give them something to do or notice**: "next time you're in a museum, look at the shadows."
+- **Modern echoes must be real and sourced** (an inflatable decoy in a current war, a balloon found in 2014). A
+  present-day event involving governments is described in neutral, factual terms, with no politicians named
+  (objectivity rules below).
+
+**3. Sound like a person talking.**
+- **Write it the way you'd say it out loud to one person.** Contractions ("it's", "they'd"), "you", plain verbs.
+- **Read every line aloud before voicing.** If you'd never say it at a dinner table, rewrite it. Cut "notably",
+  "indeed", "it is worth noting", "in fact", "furthermore", "a testament to".
+- **Vary rhythm**: a long sentence, then a short one. Then a fragment.
+- **Let the punchline be the last word** of its sentence ("Then they ran out of mummies.").
+- **Questions the viewer is already asking** are good transitions ("So why didn't anyone warn them?").
+
+**Before → after** (Short 6, *When Europe Ate Mummies*):
+- Before: "In 1881, the British painter Edward Burne-Jones found out what was in the tube." (a name, a date, an assumed
+  "the tube") → After: "One English painter found out over Sunday lunch."
+- Before: "In 1888, a Philadelphia art supply catalog still listed it, right there with the other browns."
+  → After: "One London shop kept making it into the 1960s. Then they ran out of mummies."
+- Before: "…somewhere, on a gallery wall, in a gilded frame, there may be a person." → After: "There may be a painting
+  in a museum near you with a person in it. Not painted on it. In it." … "So next time you're in a museum, look
+  closely at the shadows. And maybe say hi."
+
+**Checklist pass** (do it on every chapter before the user sees it): circle every name, date and term. For each
+one ask: does the viewer need it to follow the story? If not, cut it or move it to a source tag. Then mark the one
+line in the chapter that connects to today. If there isn't one, write it.
 
 ## 3. Objectivity rules
 
