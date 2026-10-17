@@ -68,3 +68,17 @@ Full story on the channel: When Europe Ate Mummies.
 ```
 **Pinned comment:** `If you found out a painting you owned had mummy brown in it, would you keep it? 👇`
 (The paintings shown are illustrations only; none is known to contain mummy brown.)
+
+## Short 6 (replaces Short 5 on Wed Oct 29) · Look closely at the shadows
+File: `renders/shorts/When_Europe_Ate_Mummies_Short6.mp4` (42.6 s). New narration written for the Short (`script/shorts/short6_mummy_brown.txt`); opens and closes in a 3D gallery corridor.
+**Title:** `There Might Be a Person in a Painting Near You`  (alternates: `Next Time You're in a Museum, Look at the Shadows` · `This Paint Was Made From Mummies`)
+**Description:**
+```
+For centuries, artists bought a paint called mummy brown, made from exactly what it sounds like. One London shop kept making it into the 1960s, until they ran out of mummies.
+
+Full story on the channel: When Europe Ate Mummies.
+🛍️ Stickers: https://www.teepublic.com/user/minutehistory
+#History #Art #WeirdHistory
+```
+**Pinned comment:** `Fun fact: you can still buy a paint called "mummy brown" today. (It's iron oxide now. We checked.) Would you use it? 👇`
+(The paintings shown are illustrations only; none is known to contain mummy brown.)
