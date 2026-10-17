@@ -332,14 +332,6 @@
     "page": "https://catalog.archives.gov/id/204948385",
     "source": "nara:204948385 342-FH-3A29772-59928AC"
   },
-  "ch04_paper_balloon/japanese_war_balloon_nara_1800692.jpg": {
-    "title": "Photograph of a Japanese War Balloon",
-    "artist": "Photographs",
-    "date": "1945-01-01",
-    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
-    "page": "https://catalog.archives.gov/id/1800692",
-    "source": "nara:1800692 "
-  },
   "ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg": {
     "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326352; photo cropped from its caption card, rotated upright)",
     "artist": "General Photographic Files",
@@ -507,13 +499,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:342-FH-3B23422_(18161219731).jpg"
   },
-  "ch04_paper_balloon/balloon_in_hangar_with_man_for_scale_342fh3b23429.jpg": {
-    "title": "File:342-FH-3B23429c (17972344110).jpg",
-    "artist": "National Museum of the U.S. Navy",
-    "date": "2015-05-26 10:16",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:342-FH-3B23429c_(17972344110).jpg"
-  },
   "ch04_paper_balloon/balloon_night_glow_342fh3b23430.jpg": {
     "title": "File:342-FH-3B23430 (17972341910).jpg",
     "artist": "National Museum of the U.S. Navy",
@@ -653,5 +638,33 @@
     "date": "2012-08-29 09:03",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Flickr_-_Official_U.S._Navy_Imagery_-_Navy_officers_accept_paper_cranes_and_paper_flower_balls..jpg"
+  },
+  "ch03_fake/inflatable_sherman_decoy_iwm_h42531.jpg": {
+    "title": "File:Dummy Vehicles and Equipment USED For Deception during the Second World War H42531.jpg",
+    "artist": "War Office official photographer",
+    "date": "between 1939 and 1945date QS:P571,+1950-00-00T00:00:00Z/7,P1319,+1939-00-00T00:00:00Z/9,P1326,+1945-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Dummy_Vehicles_and_Equipment_USED_For_Deception_during_the_Second_World_War_H42531.jpg"
+  },
+  "ch03_fake/inflatable_scud_decoy_usaf_2009.jpg": {
+    "title": "File:Inflatable Scud missile in the USA.jpg",
+    "artist": "Airman 1st Class Laura Goodgame, U.S. Air Force",
+    "date": "Taken on\u00a06 October 2009",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Inflatable_Scud_missile_in_the_USA.jpg"
+  },
+  "ch03_fake/inflatable_m47_tank_decoy_1950s_nara292565.jpg": {
+    "title": "File:Inflatable dummy weapons - NARA - 292565.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "between circa 1944 and circa 1959date QS:P571,+1950-00-00T00:00:00Z/7,P1319,+1944-00-00T00:00:00Z/9,P1326,+1959-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Inflatable_dummy_weapons_-_NARA_-_292565.jpg"
+  },
+  "ch04_paper_balloon/rubberized_btype_balloon_in_hangar_342fh3b23429.jpg": {
+    "title": "File:342-FH-3B23429c (17972344110).jpg",
+    "artist": "National Museum of the U.S. Navy",
+    "date": "2015-05-26 10:16",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:342-FH-3B23429c_(17972344110).jpg"
   }
 }
