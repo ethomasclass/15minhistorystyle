@@ -1,0 +1,6 @@
+node_modules/
+out/
+.env
+public/audio/cache/
+__pycache__/
+node_modules
