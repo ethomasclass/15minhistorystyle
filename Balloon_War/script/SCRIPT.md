@@ -9,19 +9,19 @@ Timestamps are estimates at 185 words a minute; re-time after voicing.
 
 ## 0:00 | Look up
 
-In February 2023, people all over America looked up and saw something strange. A giant white balloon from China, about the size of three school buses, drifting across the country.
+In February 2023, people all over America looked up and saw something strange. [curious] A giant white balloon from China, about the size of three school buses... drifting across the country.
 
 For about a week, it was all anyone could talk about. Then a fighter jet shot it down off the coast of South Carolina.
 
-But here's the thing. Eighty years earlier, the sky was full of balloons. And in World War Two, they had three very different jobs.
+[thoughtful] But here's the thing. Eighty years earlier, the sky was FULL of balloons. And in World War Two, they had three very different jobs.
 
-One protected soldiers. One lied to an entire army.
+One protected soldiers. [mischievously] One lied to an entire army.
 
-And one crossed the Pacific Ocean and killed six people in Oregon. *And almost nobody was told.*
+[serious] And one crossed the Pacific Ocean... and killed six people in Oregon. [quietly] *And almost nobody was told.*
 
 So here's the question I want to answer today. *How do you fight a war with air?*
 
-It starts on a beach in France, with a balloon on a leash.
+[curious] It starts on a beach in France... with a balloon on a leash.
 
 ---
 
@@ -31,25 +31,25 @@ June 6, 1944. D-Day. Thousands of ships are crossing the English Channel to land
 
 They're called {barrage balloons}: balloons tied down with long steel cables. The idea is simple. If an enemy plane dives low to attack, it could hit the cable. So pilots stay up high, where it's a lot harder to aim.
 
-Basically, a fence you can't see, hanging from the sky.
+[curious] Basically, a fence you can't see... hanging from the sky.
 
-These were small ones, about 35 feet long, and they had to come ashore with the troops. Soldiers walked them up the beach by hand, like a very large, very flammable dog.
+These were small ones, about 35 feet long, and they had to come ashore with the troops. [mischievously] Soldiers walked them up the beach by hand, like a very large, very flammable dog.
 
-And the men holding those cables weren't who most people picture when they think of D-Day.
+[thoughtful] And the men holding those cables weren't who most people picture when they think of D-Day.
 
 They were the 320th Barrage Balloon Battalion. About 600 men, and every one of them was Black. They were *the only Black combat unit on the beaches that day.*
 
-That's worth stopping on. In 1944, the US Army was {segregated}: Black and white soldiers trained apart, ate apart and served apart. While the 320th trained in Tennessee, its men watched German prisoners of war eat in restaurants that wouldn't serve them.
+[serious] That's worth stopping on. In 1944, the US Army was {segregated}: Black and white soldiers trained apart, ate apart and served apart. While the 320th trained in Tennessee, its men watched German prisoners of war eat in restaurants that wouldn't serve them.
 
 So they were fighting for a country that didn't treat them as equals. Black newspapers had a name for that fight: {Double V}. Victory over the enemy overseas, and victory over racism at home.
 
-And one of those men, a medic, would wait eighty years for his medal.
+[quietly] And one of those men, a medic, would wait EIGHTY years for his medal.
 
 His name was Waverly Woodson. His landing craft was hit before it reached the beach, and he was wounded. He patched himself up, set up an aid station on the sand, and kept going for about 30 hours. He's credited with treating about 200 men.
 
 He was recommended for the Medal of Honor. Then, somewhere along the way, his paperwork disappeared.
 
-In June 2024, eighty years after D-Day, an Army general placed a medal in the sand on that same beach for him. The Distinguished Service Cross. He still has never received the Medal of Honor.
+In June 2024, eighty years after D-Day, an Army general placed a medal in the sand on that same beach for him. The Distinguished Service Cross. [quietly] He still has never received the Medal of Honor.
 
 Those balloons protected an army. A few weeks later, not far from those same beaches, another unit started using air to invent one.
 
@@ -57,23 +57,23 @@ Those balloons protected an army. A few weeks later, not far from those same bea
 
 ## 3:03 | The fake
 
-The US Army had a unit whose main weapons were inflatable tanks.
+[mischievously] The US Army had a unit whose main weapons were... inflatable tanks.
 
 Officially, it was the 23rd Headquarters Special Troops. Everyone just calls it the {Ghost Army}. About 1,100 men, and a lot of them were artists, recruited from art schools and ad agencies.
 
 Their job was to pretend to be somebody else. They pumped up rubber tanks, trucks and cannons that looked real from the air. At night they drove around with huge speakers, blasting recordings of tanks and soldiers. They sent fake radio messages. They even sewed on fake patches and gossiped in cafés, in case spies were listening.
 
-Basically, the most dangerous theater group in history.
+[sarcastic] Basically, the most dangerous theater group in history.
 
-But could a rubber tank actually fool anyone?
+[curious] But could a rubber tank actually fool anyone?
 
 One of the artists remembered two Frenchmen on bicycles who slipped past the guards, just in time to see four American soldiers pick up a tank. A real one weighs about 30 tons. This one weighed 93 pounds.
 
-The Frenchmen stared at him, waiting for an explanation. He told them, "The Americans are very strong."
+The Frenchmen stared at him, waiting for an explanation. [mischievously] He told them, "The Americans are very strong."
 
 The Ghost Army pulled off more than 20 fake operations across Europe. Sometimes they even fooled their own side. One colonel, who'd missed the briefing, walked right up to their fake tanks. When a lieutenant explained, the colonel said, "Well, son, you certainly could have fooled me."
 
-Which, to be fair, was the whole point.
+[sarcastic] Which, to be fair, was the whole point.
 
 So why have you probably never heard of them? Because it all stayed secret for more than forty years. Their Congressional Gold Medal, one of the highest honors Congress gives, was finally presented in 2024. By then, only seven of them were still alive.
 
@@ -81,21 +81,21 @@ And the idea never went away. Companies still build inflatable tanks and rocket 
 
 Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike the Ghost Army, this channel is real.
 
-On the other side of the world, Japan had balloons too. Theirs weren't fake.
+[serious] On the other side of the world, Japan had balloons too. Theirs weren't fake.
 
 ---
 
 ## 5:00 | The paper balloon
 
-In late 1944, Japan started launching balloons across the Pacific Ocean. Not spy balloons. Bombs.
+In late 1944, Japan started launching balloons across the Pacific Ocean. Not spy balloons... [serious] Bombs.
 
 Each one was about 33 feet wide. And they were made of paper: thousands of small sheets of tough Japanese paper, glued together with a paste made from a root vegetable.
 
-That paste was edible. So, during a wartime food shortage, workers got caught eating it.
+[curious] That paste was edible. So, during a wartime food shortage, workers got caught eating it.
 
 And most of the people building them were teenage girls. Schools sent them to work in giant theaters and a sumo hall in Tokyo, some of the only rooms big enough to fill a balloon. They worked without hairpins and with their nails cut short, so nothing would tear the paper. Officially, they were never told what they were making.
 
-But how do you get a paper balloon across the biggest ocean on Earth?
+[curious] But how do you get a paper balloon across the biggest ocean on Earth?
 
 You use the wind. About 30,000 feet up, there's a fast river of air that blows from west to east. It's called the {jet stream}. It's the same wind that makes your flight from California to New York shorter than the flight home.
 
@@ -113,13 +113,13 @@ Balloons were landing all over North America. So why didn't anyone hear about it
 
 Because the newspapers stayed quiet. In January 1945, the government asked them not to report the balloons. And they didn't.
 
-The reason was actually smart. If Japan never heard about a balloon landing, it would think they weren't working.
+[thoughtful] The reason was actually smart. If Japan never heard about a balloon landing, it would think they weren't working.
 
 And it worked. Japan heard almost nothing, and by April 1945, it gave up.
 
 Some of the balloons did real damage. One hit a power line in Washington State and knocked out Hanford, a secret plant making material for the atomic bomb. It took about three days to get back to full power.
 
-But silence has a cost. Nobody warned the people who lived where the balloons came down. Today, your phone would buzz with a warning in seconds. In 1945, the choice was to say nothing.
+[serious] But silence has a cost. Nobody warned the people who lived where the balloons came down. Today, your phone would buzz with a warning in seconds. In 1945, the choice was to say nothing.
 
 Which brings us to a spring day in Oregon.
 
@@ -133,7 +133,7 @@ A pastor named Archie Mitchell drove his wife, Elsie, and five children from the
 
 While Archie parked the car, the others walked ahead. The children found something strange in the trees, and they called him over.
 
-He shouted a warning. It was too late.
+[quietly] He shouted a warning... It was too late.
 
 It was one of the balloons. Elsie and all five children were killed. The children were between about 11 and 14 years old.
 
@@ -151,7 +151,7 @@ About forty years after the picnic, a man arrived in Bly carrying a gift from Ja
 
 His name was John Takeshita. When he was a boy, the US government held him and his family in a camp for Japanese Americans, about 50 miles from Bly.
 
-In 1987, he brought a thousand paper cranes. They'd been folded by Japanese women who, as teenage girls, had glued together those balloons. In Japan, a thousand cranes is a wish for peace. The women sent them to show their regret.
+[warmly] In 1987, he brought a thousand paper cranes. They'd been folded by Japanese women who, as teenage girls, had glued together those balloons. In Japan, a thousand cranes is a wish for peace. The women sent them to show their regret.
 
 So let's go back to the question. *How do you fight a war with air?*
 
@@ -159,13 +159,20 @@ You tie it to a cable, and protect an army, with men their own country wouldn't 
 
 Three balloons. One protected, one lied and one killed.
 
-And for one small town, a war that arrived on paper balloons ended with paper birds.
+[quietly] And for one small town, a war that arrived on paper balloons... ended with paper birds.
 
 Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 
 ---
 
 ## Production notes
+
+**Delivery (locked, the user's pick from the voice test):** one take per chapter, Creative stability (0.0), with v3
+audio tags in square brackets ([curious], [serious], [quietly]...), ellipses for held pauses and one CAPS word for
+stress. Tags are performed, never shown or captioned.
+
+**The beat after the cold open:** about one second of near-silence after "with a balloon on a leash" (the last image
+held, only the music's tail, no graphic) before ch02 starts. Built as ch02's lead.
 
 **Heavy chapter:** ch06 (Bly). No jokes, no music hits, the heavy voice pace (STRETCH 1.08 / MAX_PAUSE 0.35 /
 SENT_GAP 0.05 / PARA_GAP 0.55). Birdsong bed that cuts to silence on "It was too late." Nothing graphic on screen:

@@ -26,6 +26,9 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   "So here's the question I want to answer today: How did the People's President end up being called a king?"
   End with a hook into chapter 2 ("And it starts with a teenager, a British officer, and a pair of dirty boots.").
   Also plant the video's long loop here (see "Story loops" below).
+  **After the cold open's last line, hold a one-second beat** (the user's standing direction, Oct 2026): about 30
+  frames of near-silence, the last image held, only the music's tail, no graphic, before the next chapter starts.
+  It lets the hook land. Build it as the next chapter's lead, not as script text.
 - **The last chapter answers the question out loud** ("So let's go back to the question."), pulls the threads
   together through callbacks, and ends on a short line for a general audience that lands the title. *King
   Andrew* ended on one word: "King." *Fix Everything* ended on a one-line tease of what comes next ("It split

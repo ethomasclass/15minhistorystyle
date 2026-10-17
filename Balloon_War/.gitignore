@@ -4,3 +4,5 @@ out/
 public/audio/cache/
 __pycache__/
 node_modules
+public/img/_scratch/
+public/img/layers/_scratch*/

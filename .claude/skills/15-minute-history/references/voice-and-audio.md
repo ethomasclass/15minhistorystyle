@@ -67,6 +67,29 @@ Matched to the channel's earlier videos; don't change them without the user aski
 `STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
 The result is about 185 words a minute for normal chapters.
 
+### Delivery: whole takes, Creative, audio tags (the user's choice, Oct 2026)
+
+Chosen by ear from an A/B/C test of *The Balloon War*'s cold open (paragraph takes vs one take vs one take at Creative
+with tags). Use it for every video from now on:
+
+- **One take per chapter** (`VOICE_WHOLE=1`, the default for v3). v3 takes no neighbouring-paragraph context, so
+  paragraph-by-paragraph takes reset the delivery at every paragraph. A whole take keeps the arc; the tool still
+  inserts `PARA_GAP` at each paragraph end and `SENT_GAP` after sentences.
+- **`VOICE_STABILITY=0.0` (Creative).** The most expressive setting, and the only one that really follows tags. It can
+  occasionally add, drop or repeat a word: the forced-alignment word count check catches most of it, and the
+  pronunciation-test listen catches the rest. Retake a chapter that drifts.
+- **Audio tags in the script**, in square brackets, performed and never shown or captioned: `[curious]`,
+  `[thoughtful]`, `[serious]`, `[quietly]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
+  at most one per paragraph, before the sentence it colors; none on facts that need a neutral read; the heavy chapter
+  gets only `[quietly]` or `[serious]`. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
+  (once or twice a chapter at most).
+- **Clean endings.** Every splice (shortened pauses, sentence and paragraph gaps) is cut at the quietest 10 ms between
+  words, keeps two thirds of each kept pause after the last sound so endings ring out, and fades for 12 ms, so no word
+  is clipped. A take that ends while still loud prints a WARNING: retake it (change the last punctuation to get a new take).
+
+Command for a normal chapter:
+`VOICE_STABILITY=0.0 VOICE_STRETCH=1.15 VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 python3 tools/voice.py script/ch02_x.txt ch02_x`
+
 ## 4. Pronunciation
 
 Before voicing a whole video, run the pronunciation check in `script-writing.md` §8: put respellings in

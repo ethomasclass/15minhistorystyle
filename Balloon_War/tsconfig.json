@@ -10,5 +10,11 @@
     "esModuleInterop": true,
     "noEmit": true
   },
-  "include": ["src", "remotion.config.ts"]
+  "include": [
+    "src",
+    "remotion.config.ts"
+  ],
+  "exclude": [
+    "src/ch_examples"
+  ]
 }
