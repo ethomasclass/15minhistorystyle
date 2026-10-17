@@ -164,27 +164,37 @@ const Battalion: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** Segregation: the definition, "apart" three times, the Tennessee training camp, and the restaurant door. */
+/** Segregation: the definition, "apart" three times (a café's two doors), the Tennessee training camp, and the two dining rooms. */
 const Apart: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
+  const ger = t.at('German');
+  const tag = g >= ger ? 'Left: German POWs served in their mess hall, Camp Perry, Ohio, 1944 · US Army  |  Right: a bus rest stop, Kentucky–Tennessee, 1943 · Esther Bubley, OWI'
+    : g >= t.at('While the') ? 'Barrage balloon trainees, Camp Tyson, Tennessee · Office of War Information (Library of Congress)'
+    : g >= t.at('segregated') ? 'A café with a door for "White" and a door for "Colored", Durham, North Carolina, 1940 · Jack Delano, FSA (Library of Congress)' : '';
   return (
     <AbsoluteFill>
       <DarkPaper />
+      <AbsoluteFill style={{opacity: interpolate(g, [ger, ger + 6], [1, 0], clamp)}}>
       <Highlight text="1944" x={120} y={90} size={90} at={t.at('In 1944')} seed={27} rot={-2} />
       <Definition term="segregated" def="kept apart by race, by law and by custom" at={t.at('segregated')} x={120} y={230} w={760} />
       {(['trained apart', 'ate apart', 'served apart'] as const).map((s, i) => (
         <Note key={s} text={`✕  ${s}`} x={150} y={400 + i * 100} size={62} rot={-3} at={t.at(s.split(' ')[0])} color={i === 2 ? pal.subject : '#ffffff'} />
       ))}
+      <PhotoCard src="img/ch02_protector/jim_crow_white_colored_doors_cafe_durham_1940.jpg" x={1000} y={160} w={800} h={560} rot={-2} at={t.at('segregated')} out={t.at('While the')} pos="50% 45%" />
+      {g < t.at('While the') && <Note text="two doors: “White” and “Colored”" x={1040} y={780} size={46} rot={-3} at={t.at('segregated') + 8} color="#ffffff" />}
       <PhotoCard src="img/ch02_protector/camp_tyson_trainees_under_balloons_owi.jpg" x={1000} y={160} w={800} h={560} rot={2} at={t.at('While the')} pos="50% 50%" />
-      <Note text="training in Tennessee, 1943" x={1060} y={780} size={46} rot={-3} at={t.at('Tennessee')} color="#ffffff" />
-      {/* the restaurant: two lists, side by side */}
-      {g >= t.at('German') && <AbsoluteFill style={{background: 'rgba(11,11,11,0.86)', opacity: interpolate(g, [t.at('German'), t.at('German') + 6], [0, 1], clamp)}} />}
-      <Note text="in town, at the same restaurant:" x={220} y={220} size={56} rot={-3} at={t.at('German')} color="#ffffff" />
-      <Note text="German prisoners of war" x={240} y={420} size={70} rot={-3} at={t.at('prisoners')} color="#ffffff" />
-      <Note text="✓ served" x={300} y={530} size={80} rot={-3} at={t.at('eat in')} color="#2FE0C4" />
-      <Note text="the 320th's own men" x={1060} y={420} size={70} rot={-3} at={t.at("wouldn't serve")} color="#ffffff" />
-      <Note text="✕ not served" x={1110} y={530} size={80} rot={-3} at={t.at('serve them')} color={CORAL} />
+      {g >= t.at('Tennessee') && <Note text="training in Tennessee, 1943" x={1060} y={780} size={46} rot={-3} at={t.at('Tennessee')} color="#ffffff" />}
+      </AbsoluteFill>
+      {/* the restaurants: who got served */}
+      <Note text="in the restaurants near camp:" x={140} y={70} size={50} rot={-2} at={ger} color="#ffffff" />
+      <Note text="German prisoners of war" x={150} y={190} size={58} rot={-3} at={t.at('prisoners')} color="#ffffff" />
+      <PhotoCard src="img/ch02_protector/pow_camp_perry_mess_hall_1944.jpg" x={140} y={300} w={760} h={470} rot={-2} at={t.at('prisoners')} pos="50% 55%" />
+      <Note text="✓ served" x={260} y={830} size={84} rot={-3} at={t.at('eat in')} color="#2FE0C4" />
+      <Note text="the 320th's own men" x={1030} y={190} size={58} rot={-3} at={t.at("wouldn't serve")} color="#ffffff" />
+      <PhotoCard src="img/ch02_protector/jim_crow_colored_dining_room_rest_stop_ky_tn_1943.jpg" x={1020} y={300} w={760} h={470} rot={2} at={t.at("wouldn't serve")} pos="50% 40%" />
+      <Note text="✕ not served" x={1130} y={830} size={84} rot={-3} at={t.at('serve them')} color={CORAL} />
+      {tag && <Tag text={tag} />}
     </AbsoluteFill>
   );
 };
@@ -228,10 +238,11 @@ const Woodson: React.FC<{t: TL}> = ({t}) => {
 
 /** "His landing craft was hit … kept going for about 30 hours … about 200 men." */
 const AidStation: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/landing_craft_beach_balloons_80g285223.jpg" fx={1900} fy={1500} a={t.at('His landing') - 1} b={t.at('He was recommended')} z0={1.2} z1={1.3} band="top"
-    tag="Landing craft on the Normandy beaches under balloons, June 1944 · US Navy">
+  <Ph p="ch02_protector/medics_first_aid_utah_beach_1944.jpg" fx={1990} fy={1500} a={t.at('His landing') - 1} b={t.at('He was recommended')} z0={1.0} z1={1.08} band="top"
+    tag="Army medics give first aid on Utah Beach, June 6, 1944 (not Woodson) · US Army Signal Corps">
     {() => (
       <>
+        <AbsoluteFill style={{background: 'linear-gradient(transparent 62%, rgba(0,0,0,0.72) 100%)'}} />
         <Note text="his landing craft was hit. He was wounded." x={110} y={110} size={52} rot={-3} at={t.at('was hit')} color="#ffffff" />
         <Note text="an aid station on the sand" x={140} y={210} size={52} rot={-3} at={t.at('aid station')} />
         <Stamp text="30 HOURS" x={110} y={780} at={t.at('30 hours')} size={130} rot={-4} />

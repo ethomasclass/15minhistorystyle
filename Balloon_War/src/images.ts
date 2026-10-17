@@ -32,6 +32,30 @@ export const SIZES: Record<string, [number, number]> = {
   1920,
   2387
  ],
+ "ch02_protector/black_artillerymen_333rd_fa_1944.jpg": [
+  2401,
+  3074
+ ],
+ "ch02_protector/black_engineers_923rd_chow_england_1943.jpg": [
+  2872,
+  2109
+ ],
+ "ch02_protector/black_engineers_923rd_rest_maneuvers_england_1943.jpg": [
+  2903,
+  2282
+ ],
+ "ch02_protector/black_platoon_near_vierville_omaha_1944.jpg": [
+  3894,
+  3173
+ ],
+ "ch02_protector/black_soldiers_93rd_div_smoke_screen_training_1942.jpg": [
+  3150,
+  2647
+ ],
+ "ch02_protector/black_soldiers_93rd_div_wall_training_1942.jpg": [
+  2958,
+  2412
+ ],
  "ch02_protector/camp_tyson_balloon_tail_owi.jpg": [
   4000,
   3351
@@ -51,6 +75,26 @@ export const SIZES: Record<string, [number, number]> = {
  "ch02_protector/invasion_fleet_balloon_barrage_1944.jpg": [
   4540,
   3567
+ ],
+ "ch02_protector/jim_crow_colored_dining_room_rest_stop_ky_tn_1943.jpg": [
+  1536,
+  1502
+ ],
+ "ch02_protector/jim_crow_colored_passengers_bus_ky_tn_1943.jpg": [
+  4858,
+  5201
+ ],
+ "ch02_protector/jim_crow_colored_waiting_room_bus_station_durham_1940.jpg": [
+  1890,
+  1272
+ ],
+ "ch02_protector/jim_crow_colored_waiting_room_sign_rome_ga_1943.jpg": [
+  1485,
+  1536
+ ],
+ "ch02_protector/jim_crow_white_colored_doors_cafe_durham_1940.jpg": [
+  4336,
+  3048
  ],
  "ch02_protector/landing_craft_beach_balloons_80g285223.jpg": [
   1920,
@@ -76,13 +120,69 @@ export const SIZES: Record<string, [number, number]> = {
   2920,
   2324
  ],
+ "ch02_protector/medic_along_omaha_beach_cliff_1944.jpg": [
+  3888,
+  3128
+ ],
+ "ch02_protector/medics_first_aid_utah_beach_1944.jpg": [
+  3984,
+  3264
+ ],
+ "ch02_protector/medics_plasma_omaha_beach_1944.jpg": [
+  3933,
+  3139
+ ],
  "ch02_protector/omaha_beachhead_panorama_balloons_1944.jpg": [
   3840,
   3046
  ],
+ "ch02_protector/omaha_bluff_beachhead_balloon_barrage_1944.jpg": [
+  4528,
+  3517
+ ],
  "ch02_protector/omaha_lsts_unload_under_balloons_1944.jpg": [
   3933,
   1584
+ ],
+ "ch02_protector/pow_camp_perry_group_by_barracks_1944.jpg": [
+  2989,
+  2430
+ ],
+ "ch02_protector/pow_camp_perry_mess_hall_1944.jpg": [
+  3109,
+  2523
+ ],
+ "ch02_protector/pow_camp_perry_street_1944.jpg": [
+  2999,
+  2400
+ ],
+ "ch02_protector/pow_camp_polk_barracks_1943.jpg": [
+  2052,
+  1673
+ ],
+ "ch02_protector/pow_camp_polk_piano_1943.jpg": [
+  2028,
+  1664
+ ],
+ "ch02_protector/pow_camp_polk_rice_field_1943.jpg": [
+  1452,
+  1820
+ ],
+ "ch02_protector/pow_camp_polk_workshop_pw_1943.jpg": [
+  2060,
+  1728
+ ],
+ "ch02_protector/pow_greenville_ms_levee_project.jpg": [
+  2980,
+  2409
+ ],
+ "ch02_protector/pow_greenville_ms_river_work.jpg": [
+  3005,
+  2460
+ ],
+ "ch02_protector/pow_greenville_ms_tent_camp.jpg": [
+  2980,
+  2434
  ],
  "ch02_protector/waverly_woodson_portrait_1940s.jpg": [
   1280,
@@ -92,9 +192,17 @@ export const SIZES: Record<string, [number, number]> = {
   960,
   540
  ],
+ "ch03_fake/french_civilians_with_paratroopers_normandy_1944.jpg": [
+  3888,
+  3134
+ ],
  "ch03_fake/ghost_army_congressional_gold_medal.jpg": [
   3840,
   2880
+ ],
+ "ch03_fake/gi_and_french_civilians_village_road_1944.jpg": [
+  3911,
+  3202
  ],
  "ch03_fake/inflatable_m47_tank_decoy_1950s_nara292565.jpg": [
   1920,
@@ -112,13 +220,25 @@ export const SIZES: Record<string, [number, number]> = {
   2763,
   2262
  ],
+ "ch03_fake/m4_sherman_rolls_off_lst_utah_beach_1944.jpg": [
+  3922,
+  3213
+ ],
  "ch03_fake/replica_dummy_tank_spy_museum_cc0.jpg": [
   3840,
   2880
  ],
+ "ch03_fake/rubber_tank_assembling_anzio_1944.jpg": [
+  2974,
+  2349
+ ],
  "ch03_fake/rubber_tank_beside_real_tank_anzio_1944.jpg": [
   3720,
   2964
+ ],
+ "ch03_fake/rubber_tank_front_view_anzio_1944.jpg": [
+  2796,
+  2280
  ],
  "ch03_fake/rubber_tank_laid_out_anzio_1944.jpg": [
   2772,
@@ -132,9 +252,17 @@ export const SIZES: Record<string, [number, number]> = {
   2817,
   2310
  ],
+ "ch03_fake/rubber_tank_turret_view_anzio_1944.jpg": [
+  2974,
+  2387
+ ],
  "ch03_fake/soldiers_place_rubber_tank_anzio_1944.jpg": [
   2772,
   2283
+ ],
+ "ch04_paper_balloon/airliner_contrail_over_mont_blanc_pd.jpg": [
+  3840,
+  2880
  ],
  "ch04_paper_balloon/altitude_control_device_fig70.jpg": [
   1970,
@@ -172,6 +300,10 @@ export const SIZES: Record<string, [number, number]> = {
   1280,
   1832
  ],
+ "ch04_paper_balloon/balloons_shot_down_attu_apr1945.jpg": [
+  4484,
+  3505
+ ],
  "ch04_paper_balloon/balloons_shot_down_near_attu_1945.jpg": [
   3138,
   4000
@@ -188,17 +320,45 @@ export const SIZES: Record<string, [number, number]> = {
   1990,
   525
  ],
+ "ch04_paper_balloon/fugo_aerial_over_reno_fig29.jpg": [
+  912,
+  820
+ ],
+ "ch04_paper_balloon/fugo_gun_camera_fig38.jpg": [
+  920,
+  1428
+ ],
  "ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg": [
   1390,
   1670
+ ],
+ "ch04_paper_balloon/fugo_landed_tremonton_utah_fig4.jpg": [
+  1880,
+  2072
  ],
  "ch04_paper_balloon/fugo_moffett_classic_a37180c.jpg": [
   1280,
   1673
  ],
+ "ch04_paper_balloon/fugo_officials_inspect_burns_oregon_fig2.jpg": [
+  1904,
+  824
+ ],
+ "ch04_paper_balloon/fugo_treed_balloon_pyramid_lake_fig28.jpg": [
+  1440,
+  1104
+ ],
+ "ch04_paper_balloon/fugo_wind_catches_recovered_balloon_fig27.jpg": [
+  1440,
+  952
+ ],
  "ch04_paper_balloon/gondola_sandbags_closeup_fig68.jpg": [
   1050,
   695
+ ],
+ "ch04_paper_balloon/half_deflated_balloon_on_hill_nara285258.jpg": [
+  3000,
+  2312
  ],
  "ch04_paper_balloon/incident_map_canada_fig88.jpg": [
   2400,
@@ -252,6 +412,14 @@ export const SIZES: Record<string, [number, number]> = {
   1470,
   1115
  ],
+ "ch04_paper_balloon/paper_envelope_gores_closeup_nara285259.jpg": [
+  1920,
+  1485
+ ],
+ "ch04_paper_balloon/radiosonde_stations_japan_fig6.jpg": [
+  1500,
+  1600
+ ],
  "ch04_paper_balloon/recovery_photos_sandbags_fig68.jpg": [
   2085,
   2640
@@ -263,6 +431,18 @@ export const SIZES: Record<string, [number, number]> = {
  "ch04_paper_balloon/schoolgirls_pasting_envelope_fig12.jpg": [
   970,
   1000
+ ],
+ "ch04_paper_balloon/weather_balloon_radar_eniwetok_1948.jpg": [
+  800,
+  622
+ ],
+ "ch05_silence/bonneville_transmission_lines_1941.jpg": [
+  6000,
+  4910
+ ],
+ "ch05_silence/bonneville_transmission_tower_1941.jpg": [
+  4590,
+  6000
  ],
  "ch05_silence/hanford_b_reactor_100b_area_1944.jpg": [
   3605,
@@ -276,6 +456,26 @@ export const SIZES: Record<string, [number, number]> = {
   1411,
   1106
  ],
+ "ch05_silence/nyt_linotype_operators_1942.jpg": [
+  4838,
+  5049
+ ],
+ "ch05_silence/nyt_making_up_page_one_1942.jpg": [
+  4777,
+  5030
+ ],
+ "ch05_silence/nyt_newsroom_1942.jpg": [
+  6000,
+  4578
+ ],
+ "ch05_silence/nyt_presses_start_rolling_1942.jpg": [
+  4808,
+  4769
+ ],
+ "ch05_silence/nyt_wire_room_teletype_1942.jpg": [
+  4096,
+  3297
+ ],
  "ch05_silence/office_of_censorship_pin.jpg": [
   960,
   962
@@ -283,6 +483,10 @@ export const SIZES: Record<string, [number, number]> = {
  "ch05_silence/richland_headlines_hanford_1945.jpg": [
   3200,
   4000
+ ],
+ "ch06_bly/bly_district_fremont_nf_1947.jpg": [
+  3126,
+  2119
  ],
  "ch06_bly/fog_over_forest_fremont_winema_usfs.jpg": [
   3840,
@@ -304,6 +508,18 @@ export const SIZES: Record<string, [number, number]> = {
   3840,
   2560
  ],
+ "ch06_bly/klamath_falls_cars_parked_in_pines_1942.jpg": [
+  4848,
+  5076
+ ],
+ "ch06_bly/klamath_falls_picnickers_in_pines_1942.jpg": [
+  4824,
+  5004
+ ],
+ "ch06_bly/klamath_falls_town_view_1941.jpg": [
+  6000,
+  4584
+ ],
  "ch06_bly/mitchell_monument_alt_mccullough_cc_by.jpg": [
   1920,
   1441
@@ -324,6 +540,10 @@ export const SIZES: Record<string, [number, number]> = {
   1920,
   1744
  ],
+ "ch07_answer/crane_strings_fushimi_inari_kyoto_cc0.jpg": [
+  1920,
+  2888
+ ],
  "ch07_answer/hiden_senbazuru_orikata_1797.jpg": [
   1280,
   1865
@@ -340,13 +560,37 @@ export const SIZES: Record<string, [number, number]> = {
   3000,
   2384
  ],
+ "ch07_answer/tule_lake_boys_at_recess_wra.jpg": [
+  1974,
+  3000
+ ],
+ "ch07_answer/tule_lake_children_see_first_calf_1944.jpg": [
+  3000,
+  2067
+ ],
+ "ch07_answer/tule_lake_grade_school_recess_wra.jpg": [
+  3000,
+  1971
+ ],
  "ch07_answer/tule_lake_segregation_center_northern_half_nps.jpg": [
   3840,
   3030
  ],
+ "ch07_answer/tule_lake_seventh_grade_class_1942.jpg": [
+  3000,
+  2474
+ ],
  "ch07_answer/tule_lake_war_relocation_center_russell_lee_1942.jpg": [
   3840,
   2971
+ ],
+ "ch07_answer/tule_lake_wash_day_wra.jpg": [
+  1973,
+  3000
+ ],
+ "ch07_answer/two_paper_cranes_closeup_pd.jpg": [
+  3000,
+  1834
  ]
 };
 /** An image under public/img by its path, e.g. im('ch02_protector/x.jpg'). */
