@@ -340,14 +340,6 @@
     "page": "https://catalog.archives.gov/id/1800692",
     "source": "nara:1800692 "
   },
-  "ch04_paper_balloon/japanese_war_balloon_nara_285260.jpg": {
-    "title": "Japanese war balloon",
-    "artist": "Photographs",
-    "date": "1945-01-01",
-    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
-    "page": "https://catalog.archives.gov/id/285260",
-    "source": "nara:285260 "
-  },
   "ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg": {
     "title": "Japanese free balloon at NAS Moffett Field, Calif., 24 May 1945 (80-G-326352; photo cropped from its caption card, rotated upright)",
     "artist": "General Photographic Files",
@@ -549,5 +541,33 @@
     "date": "1945-01-10",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Japanese_fire_balloon_Moffett.jpg"
+  },
+  "ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg": {
+    "title": "File:Japanese war balloon - NARA - 285257.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "1945date QS:P571,+1945-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Japanese_war_balloon_-_NARA_-_285257.jpg"
+  },
+  "ch04_paper_balloon/ballast_ring_on_ground_nara285260.jpg": {
+    "title": "File:Japanese war balloon - NARA - 285260.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "1945date QS:P571,+1945-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Japanese_war_balloon_-_NARA_-_285260.jpg"
+  },
+  "ch04_paper_balloon/ballast_ring_on_stool_nara285261.jpg": {
+    "title": "File:Japanese war balloon - NARA - 285261.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "1945date QS:P571,+1945-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Japanese_war_balloon_-_NARA_-_285261.jpg"
+  },
+  "ch05_silence/office_of_censorship_pin.jpg": {
+    "title": "File:WWII US Office Of Censorship-Pin.jpg",
+    "artist": "Jgm1953 at en.wikipedia",
+    "date": "9 June 2007 (original upload date)  (Pin from 1941-1945)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:WWII_US_Office_Of_Censorship-Pin.jpg"
   }
 }
