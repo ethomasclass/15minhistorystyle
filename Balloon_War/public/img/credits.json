@@ -171,5 +171,164 @@
     "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
     "page": "https://catalog.archives.gov/id/100310474",
     "source": "nara:100310474 111-SC-217857"
+  },
+  "ch03_fake/replica_dummy_tank_spy_museum_cc0.jpg": {
+    "title": "File:Ghost Army dummy tank, International Spy Museum.jpg",
+    "artist": "ArtemisiaGentileschiFan",
+    "date": "2025-10-29",
+    "licence": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ghost_Army_dummy_tank,_International_Spy_Museum.jpg"
+  },
+  "ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 5: recovered balloon re-inflated for inspection, retrieved near Alturas, Calif., 10 Jan 1945 (U.S. Army photograph SC-226135)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n12",
+    "source": "ia:japanese-balloon-bombs-1943 page n12"
+  },
+  "ch04_paper_balloon/japanese_crew_experimental_launch_1944.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 8: Japanese technicians with an experimental balloon, Sagami Arsenal, spring 1944",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n19",
+    "source": "ia:japanese-balloon-bombs-1943 page n19"
+  },
+  "ch04_paper_balloon/japanese_crew_filling_balloon_wind.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 9: surface wind while filling the balloons and releasing them for flight",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n19",
+    "source": "ia:japanese-balloon-bombs-1943 page n19"
+  },
+  "ch04_paper_balloon/schoolgirls_pasting_envelope_fig12.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 12: Japanese high-school girls pasting and stitching the balloon envelope",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n22",
+    "source": "ia:japanese-balloon-bombs-1943 page n22"
+  },
+  "ch04_paper_balloon/nichigeki_music_hall_fig13.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 13: the Nichigeki Music Hall, Tokyo, one of the large halls used for balloon production (later photo)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n22",
+    "source": "ia:japanese-balloon-bombs-1943 page n22"
+  },
+  "ch04_paper_balloon/launch_sites_map_fig16.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 16: balloon launching sites and flight-following stations, Honshu",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n24",
+    "source": "ia:japanese-balloon-bombs-1943 page n24"
+  },
+  "ch04_paper_balloon/otsu_launch_site_sc284816.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 17: balloon launching complex at Otsu after the war (U.S. Army photograph SC 284816)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n25",
+    "source": "ia:japanese-balloon-bombs-1943 page n25"
+  },
+  "ch04_paper_balloon/otsu_launch_site_cavalry_sc283906.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 18: US 1st Cavalry Division at former launch sites, Otsu, 22 Apr 1947 (U.S. Army photograph SC 283906-S)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n25",
+    "source": "ia:japanese-balloon-bombs-1943 page n25"
+  },
+  "ch04_paper_balloon/flight_profile_and_jet_stream_fig25.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 25: a typical balloon flight profile (above) and a typical winter jet stream (below)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n29",
+    "source": "ia:japanese-balloon-bombs-1943 page n29"
+  },
+  "ch04_paper_balloon/balloon_general_arrangement_fig39.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 39: general arrangement of the Japanese paper bombing balloon",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n46",
+    "source": "ia:japanese-balloon-bombs-1943 page n46"
+  },
+  "ch04_paper_balloon/recovery_photos_sandbags_fig68.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 68: on-scene balloon-recovery pictures, 13 March 1945 (US Army Air Forces 30772 AC)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n58",
+    "source": "ia:japanese-balloon-bombs-1943 page n58"
+  },
+  "ch04_paper_balloon/gondola_sandbags_closeup_fig68.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 68 (detail): close-up of the gondola with sandbags attached, 13 March 1945",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n58",
+    "source": "ia:japanese-balloon-bombs-1943 page n58"
+  },
+  "ch04_paper_balloon/ballast_control_drawing_caltech_fig69.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 69: exploded-view drawing of the ballast and bomb-dropping mechanism, California Institute of Technology, 1945 (A 37180D)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n59",
+    "source": "ia:japanese-balloon-bombs-1943 page n59"
+  },
+  "ch04_paper_balloon/altitude_control_device_fig70.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 70: automatic altitude-control device (the sandbag ring)",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n60",
+    "source": "ia:japanese-balloon-bombs-1943 page n60"
+  },
+  "ch06_bly/mitchell_recreation_area_fig85.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 85: the Mitchell Recreation Area near Bly, established 20 August 1950",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n75",
+    "source": "ia:japanese-balloon-bombs-1943 page n75"
+  },
+  "ch04_paper_balloon/incident_map_us_mexico_fig87.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 87: balloon-bomb incident locations, United States and Mexico",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n85",
+    "source": "ia:japanese-balloon-bombs-1943 page n85"
+  },
+  "ch04_paper_balloon/incident_map_canada_fig88.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 88: balloon-bomb incident locations, Canada",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n86",
+    "source": "ia:japanese-balloon-bombs-1943 page n86"
+  },
+  "ch04_paper_balloon/flight_profile_rise_sink_fig25top.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 25 (top): a typical balloon flight profile, day and night, dropping sandbags",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n29",
+    "source": "ia:japanese-balloon-bombs-1943 page n29"
+  },
+  "ch04_paper_balloon/jet_stream_winter_map_fig25bottom.jpg": {
+    "title": "Mikesh, Japan's World War II Balloon Bomb Attacks on North America (Smithsonian Annals of Flight 9, 1973), Fig. 25 (bottom): a typical jet stream in winter months, across the Pacific",
+    "artist": "Robert C. Mikesh / Smithsonian Institution Press",
+    "date": "1973",
+    "licence": "Public Domain Mark 1.0 (Internet Archive item)",
+    "page": "https://archive.org/details/japanese-balloon-bombs-1943/page/n29",
+    "source": "ia:japanese-balloon-bombs-1943 page n29"
   }
 }
