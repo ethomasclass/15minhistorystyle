@@ -1,21 +1,18 @@
-// YouTube thumbnail concepts, drawn at 1920x1080 with the video's own kit and exported at 1280x720
-// (tools/thumbs.mjs renders frame 140 so every write-on has finished).
-//   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
-//   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+// YouTube thumbnail concepts for The Balloon War, drawn at 1920x1080 with the video's own kit and exported at 1280x720
+// (tools/thumbs.mjs renders frame 140 so every write-on has finished). Same recipe as Europe Ate Mummies' winner:
+// one dark real photo, the subject in coral with the teal trace, two orange torn labels, the logo top-left.
+//   A · PAPER BOMBS: the recovered Japanese balloon (Alturas, 1945) against black.
+//   B · FAKE TANKS: the Anzio rubber tank, full-bleed.
+//   C · JAPAN BOMBED OREGON: the same balloon, the claim that makes people click.
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
-import {DarkPaper} from './kit/common';
+import {fill} from './kit/shell';
+import {im} from './images';
 import {MASKS} from './masks';
-import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
 export const THUMB_FRAMES = 150;
-const TEAL = '#2FE0C4';
-const CORAL = '#FF6F61';
-const GOLD = '#FF9F1C';
-const MASK = MASKS.sully; // the mask that matches THUMB_PORTRAIT.src
 
 /** Channel logo, top-left (YouTube covers the bottom-right with the running time). */
 const Logo: React.FC = () => {
@@ -29,73 +26,69 @@ const Logo: React.FC = () => {
   );
 };
 
-const cut = (alpha: string): React.CSSProperties =>
-  ({WebkitMaskImage: `url(${staticFile(alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(alpha)})`, maskSize: '100% 100%'}) as React.CSSProperties;
+const Frame: React.FC<{children: React.ReactNode}> = ({children}) => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+      {children}
+      <Finish vignette={0.35} />
+      <Logo />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
 
-/**
- * The subject tint on one side of the line x = `mid`. The clip sits on each blended layer itself: a clip-path on a
- * wrapper would isolate the blend and the tint would come out flat.
- */
-const SideTint: React.FC<{place: Place; color: string; mid: number; side: 'left' | 'right'}> = ({place, color, mid, side}) => {
-  const w = P.size[0] * place.scale;
-  const m0 = mid - place.left;
-  const m: React.CSSProperties = {
-    position: 'absolute', left: place.left, top: place.top, width: w, height: P.size[1] * place.scale, ...cut(MASK.alpha),
-    clipPath: side === 'left' ? `inset(0 ${w - m0}px 0 0)` : `inset(0 0 0 ${m0}px)`,
-  };
+/** A masked photo: dark, the subject coral, the outline teal. */
+const Subject: React.FC<{p: string; m: keyof typeof MASKS; place: Place; bright?: number; pop?: number}> = ({p, m, place, bright = 0.62, pop = 1}) => {
+  const {src, size} = im(p);
   return (
     <>
-      <div style={{...m, background: color, mixBlendMode: 'color'}} />
-      <div style={{...m, background: color, mixBlendMode: 'multiply', opacity: 0.3}} />
-      <div style={{...m, background: color, mixBlendMode: 'screen', opacity: 0.28}} />
+      <Picture src={src} place={place} size={size} bw={`grayscale(1) contrast(1.3) brightness(${bright})`} />
+      {/* a dark subject (the balloon) needs lifting before the coral can read */}
+      {pop > 1 && <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * place.scale, height: size[1] * place.scale, background: '#FF6F61',
+        mixBlendMode: 'screen', opacity: 0.5 * (pop - 1),
+        WebkitMaskImage: `url(${staticFile(MASKS[m].alpha)})`, WebkitMaskSize: '100% 100%'} as React.CSSProperties} />}
+      <Tint mask={MASKS[m].alpha} place={place} size={size} strength={pop} />
+      <Traced paths={MASKS[m].data.shapes.subject} place={place} at={0} dur={1} width={9} />
     </>
   );
 };
 
-export const ThumbA: React.FC = () => {
-  const place: Place = {left: 960 - P.faceX * P.scale, top: P.top, scale: P.scale};
-  const S = (x: number, y: number) => [place.left + x * place.scale, place.top + y * place.scale];
-  const [x0, y] = S(P.crownLeft, P.crownY);
-  const [x1] = S(P.crownRight, P.crownY);
+/** The balloon on the right, faded into black on the left where the words go. */
+const Balloon: React.FC = () => (
+  <>
+    <Subject p="ch04_paper_balloon/fugo_inflated_alturas_sc226135.jpg" m="alturas" place={{left: 700, top: -40, scale: 0.88}} bright={0.5} pop={1.8} />
+    <AbsoluteFill style={{background: 'linear-gradient(90deg, #000 38%, rgba(0,0,0,0.6) 50%, transparent 62%)'}} />
+    <AbsoluteFill style={{background: 'linear-gradient(transparent 70%, rgba(0,0,0,0.7) 100%)'}} />
+  </>
+);
+
+export const ThumbA: React.FC = () => (
+  <Frame>
+    <Balloon />
+    <Note text="Japan, 1945:" x={130} y={300} size={80} rot={-3} at={0} color="#ffffff" />
+    <Highlight text="PAPER" x={110} y={440} size={200} at={0} seed={81} rot={-3} />
+    <Highlight text="BOMBS" x={210} y={690} size={200} at={0} seed={82} rot={-2} />
+  </Frame>
+);
+
+export const ThumbB: React.FC = () => {
+  const p = 'ch03_fake/rubber_tank_side_view_anzio_1944.jpg';
+  const place = fill(im(p).size, 1450, 1400, 1.0);
   return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)'}} />
-        <div style={{position: 'absolute', left: place.left, top: place.top, width: P.size[0] * place.scale, height: P.size[1] * place.scale, ...cut(MASK.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
-          <Picture src={P.src} place={{left: 0, top: 0, scale: place.scale}} size={P.size} bw="grayscale(1) contrast(1.25) brightness(0.9)" />
-        </div>
-        <SideTint place={place} color={TEAL} mid={960} side="left" />
-        <SideTint place={place} color={CORAL} mid={960} side="right" />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
-        <div style={{position: 'absolute', left: 956, top: 0, width: 8, height: 1080, background: '#f4efe6'}} />
-        <AbsoluteFill style={{filter: 'drop-shadow(0 0 3px #0d0c09) drop-shadow(0 6px 10px rgba(0,0,0,0.8))'}}>
-          <DrawnCrown x0={x0} x1={x1} y={y} h={125} at={0} dur={1} width={15} color={GOLD} />
-        </AbsoluteFill>
-        <Highlight text={THUMB_WORDS.left} x={170} y={855} size={150} at={0} seed={71} rot={-3} />
-        <Highlight text={THUMB_WORDS.right} x={1010} y={855} size={150} at={0} seed={73} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
+    <Frame>
+      <Subject p={p} m="rubber_tank" place={place} bright={0.6} />
+      <AbsoluteFill style={{background: 'linear-gradient(transparent 55%, rgba(0,0,0,0.8) 82%)'}} />
+      <Highlight text="FAKE" x={110} y={740} size={170} at={0} seed={83} rot={-3} />
+      <Highlight text="TANKS" x={720} y={760} size={170} at={0} seed={84} rot={-2} />
+      <Note text="(93 pounds)" x={1400} y={790} size={70} rot={-4} at={0} color="#ffffff" />
+    </Frame>
   );
 };
 
-export const ThumbB: React.FC = () => {
-  const place: Place = {left: 1080, top: 60, scale: 0.42};
-  return (
-    <PaletteCtx.Provider value={PALETTES.locked}>
-      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
-        <DarkPaper />
-        <Picture src={P.src} place={place} size={P.size} bw="grayscale(1) contrast(1.3)" />
-        <Tint mask={MASK.alpha} place={place} size={P.size} />
-        <Traced paths={MASK.data.shapes.subject} place={place} at={0} dur={1} width={8} />
-        <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,7,5,0.95) 0%, rgba(8,7,5,0.85) 45%, rgba(8,7,5,0) 62%)'}} />
-        <Note text="the People's President..." x={90} y={330} size={70} rot={-3} color={TEAL} />
-        <Highlight text={TITLE.split(' ')[0]} x={80} y={440} size={230} at={0} seed={75} rot={-3} />
-        <Highlight text={`${TITLE.split(' ').slice(1).join(' ')}?`} x={120} y={700} size={170} at={0} seed={77} rot={-2} />
-        <Logo />
-        <Finish vignette={0.3} />
-      </AbsoluteFill>
-    </PaletteCtx.Provider>
-  );
-};
+export const ThumbC: React.FC = () => (
+  <Frame>
+    <Balloon />
+    <Highlight text="JAPAN" x={110} y={300} size={180} at={0} seed={85} rot={-3} />
+    <Highlight text="BOMBED" x={150} y={520} size={180} at={0} seed={86} rot={-2} />
+    <Highlight text="OREGON" x={110} y={740} size={180} at={0} seed={87} rot={-3} />
+  </Frame>
+);
