@@ -7,7 +7,8 @@ import json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 
 API = "https://commons.wikimedia.org/w/api.php"
 UA = "FifteenMinuteHistory/0.1 (educational explainer videos for a history class)"
-CREDITS = os.path.join(os.path.dirname(__file__), "..", "public", "img", "credits.json")
+# CREDITS_FILE lets parallel image searches write separate files (merge them into credits.json afterwards)
+CREDITS = os.environ.get("CREDITS_FILE") or os.path.join(os.path.dirname(__file__), "..", "public", "img", "credits.json")
 
 
 def api(**params):

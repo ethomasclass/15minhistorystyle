@@ -9,7 +9,9 @@ FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
 SLUG=$(sed -n "s/^export const SLUG = '\(.*\)';/\1/p" src/project.ts)
 ALL=$(grep -o "id: 'Ch[0-9]*'" src/chapters.ts | grep -o '[0-9][0-9]*')
 mkdir -p out/ch renders
+[ -n "$JOIN_ONLY" ] && set -- none
 for n in ${*:-$ALL}; do
+  [ "$n" = none ] && continue
   npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER --log=error || exit 1
   echo "rendered ch$n"
   rm -rf /tmp/remotion-webpack-bundle-*   # each render leaves a ~500 MB copy of public/ behind
