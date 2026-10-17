@@ -70,7 +70,7 @@ Full story on the channel: When Europe Ate Mummies.
 (The paintings shown are illustrations only; none is known to contain mummy brown.)
 
 ## Short 6 (replaces Short 5 on Wed Oct 29) · Look closely at the shadows
-File: `renders/shorts/When_Europe_Ate_Mummies_Short6.mp4` (42.6 s). New narration written for the Short (`script/shorts/short6_mummy_brown.txt`); opens and closes in a 3D gallery corridor.
+File: `renders/shorts/When_Europe_Ate_Mummies_Short6.mp4` (42.6 s). New narration written for the Short (`script/shorts/short6_mummy_brown.txt`); opens and closes in a 3D gallery corridor. Music: m_parlor (drops out under "Then they ran out of mummies").
 **Title:** `There Might Be a Person in a Painting Near You`  (alternates: `Next Time You're in a Museum, Look at the Shadows` · `This Paint Was Made From Mummies`)
 **Description:**
 ```

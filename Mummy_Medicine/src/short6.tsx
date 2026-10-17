@@ -1,5 +1,5 @@
 // Short 6 · There May Be a Person in This Painting: mummy brown, with its own 40 s narration (script/shorts/short6_mummy_brown.txt).
-// Opens (and closes) in a 3D gallery corridor built from CSS 3D planes: paintings on both walls, the portrait at the far end.
+// Music: m_parlor. Opens (and closes) in a 3D gallery corridor built from CSS 3D planes: paintings on both walls, the portrait at the far end.
 // The new paint tube is a proper drawn tube (crimped end, label, screw cap) that unscrews, squeezes a ribbon of brown onto a
 // palette, and then morphs into a mummy case.
 //
@@ -18,7 +18,7 @@ import words from '../public/audio/short6_mummy_brown.words.json';
 const N = words as Narration;
 const FPS = 30;
 const OUTRO = 75;
-const ACCENT = 61.6; // seconds into m_reveal.mp3: its last strong hit
+const PARLOR_FROM = 6; // seconds into m_parlor.mp3 where the Short's music starts
 const CORAL = '#FF6F61';
 const GOLD = '#c9a34a';
 const BROWN = '#6b3f24';
@@ -510,7 +510,6 @@ const Body: React.FC = () => {
     )],
   ];
   const scene = useScene(cuts.map(([fr, node], i): [number, React.ReactNode] => [fr, <React.Fragment key={i}>{node}</React.Fragment>]));
-  const payoff = at('say hi') / FPS;
   const total = t.frames + OUTRO;
   return (
     <>
@@ -521,8 +520,10 @@ const Body: React.FC = () => {
       <Mark />
       <Finish vignette={0.25} />
       <Audio src={staticFile('audio/short6_mummy_brown.wav')} />
-      <Audio src={staticFile('music/m_reveal.mp3')} startFrom={Math.max(0, Math.round((ACCENT - payoff) * FPS))}
-        volume={(fr) => interpolate(fr, [0, 8, total - 50, total - 10], [0, 0.2, 0.2, 0], clamp)} />
+      {/* m_parlor from 6 s in (its lively stretch is 8–52 s); it drops out under "Then they ran out of mummies" */}
+      <Audio src={staticFile('music/m_parlor.mp3')} startFrom={PARLOR_FROM * FPS}
+        volume={(fr) => interpolate(fr, [0, 8, at('Then they') - 8, at('Then they'), at('of mummies') + 10, at('And artists') + 4, total - 50, total - 10],
+          [0, 0.18, 0.18, 0.04, 0.04, 0.18, 0.18, 0], clamp)} />
       {cuts.slice(1).map(([fr], i) => <Sfx key={i} at={fr} src="sfx/whoosh.wav" volume={0.28} />)}
       {['One English', 'Sunday', 'One London', 'which brown', 'rarely', 'Most never', 'groundup', 'say hi'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
       {[at('mummy brown'), at('1960s'), at('of mummies'), at('shadows')].map((fr, i) => <Sfx key={`s${i}`} at={fr} src="sfx/stamp.wav" volume={0.28} />)}
