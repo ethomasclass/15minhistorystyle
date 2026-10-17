@@ -113,5 +113,9 @@ The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker
 `tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
-`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. Volumes are in `building-scenes.md` §6. Keep
+`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**
+`python3 tools/sfx_openverse.py --list "<what>"` shows openly licensed candidates from Openverse (mostly Freesound),
+and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <name>` fetches, trims and normalises it
+and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
+CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
 effects quiet; they should be felt more than heard.
