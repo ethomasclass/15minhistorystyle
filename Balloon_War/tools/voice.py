@@ -286,11 +286,35 @@ def drop_tags(chars):
     return out
 
 
+def loud_end(pcm):
+    """True if the last 40 ms of a take are still speech-loud (the model stopped mid-sound)."""
+    np, a = _np(pcm)
+    tail = a[-int(RATE * 0.04):]
+    return bool(len(tail)) and float(np.sqrt((tail ** 2).mean())) > 500
+
+
+def take(text, prev="", nxt=""):
+    """One ElevenLabs take. If it stops while the last word is still sounding, take it again with a breath after the
+    last line ("[exhales]") and keep everything up to the quietest point between the last word and that breath, so
+    the ending rings out naturally."""
+    audio, chars = eleven(text, prev, nxt)
+    chars = drop_tags(chars)
+    if not loud_end(audio):
+        return audio, chars
+    print("  the take stopped mid-sound; retaking with room after the last word", flush=True)
+    audio, chars = eleven(text + " [exhales]", prev, nxt)
+    chars = drop_tags(chars)
+    np, a = _np(audio)
+    last = max(e for c, s, e in chars if not c.isspace())
+    cut = quiet_point(np, a, last + 0.05, min(len(a) / RATE, last + 0.8))
+    return a[:cut].astype(np.int16).tobytes(), chars
+
+
 def finish_take(pcm, label):
     """Fade the very end of a take and warn if it was still loud there (a clipped last word: retake that one)."""
     np, a = _np(pcm)
     tail = a[-int(RATE * 0.04):]
-    if len(tail) and float(np.sqrt((tail ** 2).mean())) > 900:
+    if len(tail) and float(np.sqrt((tail ** 2).mean())) > 500:
         print(f"  WARNING {label}: the take ends while still loud; the last word may be cut off. Retake it "
               f"(add a word or change punctuation at the end to get a new take).", flush=True)
     return np.clip(_fade(a.copy(), out=True), -32768, 32767).astype(np.int16).tobytes()
@@ -373,8 +397,7 @@ def main():
     words = []
     v3 = os.environ.get("ELEVEN_MODEL", "eleven_v3").startswith("eleven_v3")
     if not use_piper and v3 and WHOLE:
-        audio, chars = eleven("\n\n".join(tts), "", "")
-        chars = drop_tags(chars)
+        audio, chars = take("\n\n".join(tts))
         if MAX_PAUSE > 0:
             audio, chars = tighten(audio, chars, MAX_PAUSE)
         # paragraph ends: the last sound before a newline
@@ -399,8 +422,7 @@ def main():
             if use_piper:
                 audio, chars = piper(spoken(p))
             else:
-                audio, chars = eleven(tts[i], tts[i - 1] if i else "", tts[i + 1] if i + 1 < len(paras) else "")
-                chars = drop_tags(chars)
+                audio, chars = take(tts[i], tts[i - 1] if i else "", tts[i + 1] if i + 1 < len(paras) else "")
                 if MAX_PAUSE > 0:
                     audio, chars = tighten(audio, chars, MAX_PAUSE)
                 audio, chars = add_pauses(audio, chars, SENT_GAP)
