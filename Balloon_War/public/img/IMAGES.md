@@ -48,6 +48,31 @@ Notes for scenes:
 | `camp_tyson_balloon_tail_owi.jpg` | "Aerial octopus": tail view of a barrage balloon, Camp Tyson | LoC FSA/OWI [2017696220](https://www.loc.gov/item/2017696220/) | PD | 4000x3351 | alt, Camp Tyson / what a barrage balloon is |
 | ★ `waverly_woodson_portrait_1940s.jpg` | Official US Army portrait of Sgt. Waverly B. Woodson Jr. | Commons: [File:WaverlyWoodson.jpg](https://commons.wikimedia.org/wiki/File:WaverlyWoodson.jpg) | PD (US Army, per Commons; the Commons source link is an AP/NPR copy, so check this provenance before the final cut) | 1280x1850 | "His name was Waverly Woodson." |
 | ★ `woodson_dsc_omaha_2024.jpg` | Woodson's Distinguished Service Cross lying on the sand of Omaha Beach, 3 June 2024 (SSgt Justin McClarran, 188th Inf. Bde.) | Commons, US Army | PD (US Army) | 960x540 (native 1200, small) | "an Army general placed a medal in the sand on that same beach" |
+| ★ `pow_camp_perry_group_by_barracks_1944.jpg` | German POWs stand in a group by their barracks watching visiting reporters, Camp Perry, Ohio, 1944 | NARA 111-SC-340157, NAID [280956164](https://catalog.archives.gov/id/280956164) | PD (US Army) | 2989x2430 | German prisoners of war in the US (strong foreground figures, barracks behind) |
+| `pow_camp_perry_mess_hall_1944.jpg` | Press tour in the Camp Perry POW mess hall: reporters interview the men in charge, prisoners serving behind | NARA 111-SC-340156, NAID [280956161](https://catalog.archives.gov/id/280956161) | PD (US Army) | 3109x2523 | "…watched German prisoners of war eat…" (closest PD mess-hall shot) |
+| `pow_camp_perry_street_1944.jpg` | POWs walking down the camp street between barracks, Camp Perry, 1944 | NARA 111-SC-340158, NAID [280956167](https://catalog.archives.gov/id/280956167) | PD (US Army) | 2999x2400 | alt, deep perspective |
+| ★ `pow_camp_polk_barracks_1943.jpg` | German POWs reading, carving and painting in their barracks, Camp Polk, Louisiana, 30 Oct 1943 (Pfc. W. K. Kennedy) | NARA 111-SC-186051, NAID [100310350](https://catalog.archives.gov/id/100310350) | PD (US Army) | 2052x1673 | POWs in the South, comfortable; good interior depth |
+| `pow_camp_polk_workshop_pw_1943.jpg` | POWs in the camp woodshop, "PW" painted on a shirt, Camp Polk, 1943 | NARA 111-SC-186064, NAID [100310362](https://catalog.archives.gov/id/100310362) | PD (US Army) | 2060x1728 | alt (the PW letters read clearly) |
+| `pow_camp_polk_rice_field_1943.jpg` | Two POWs ("P" on their trousers) turning rice shocks, Camp Polk, Nov 1943 | NARA 111-SC-186071, NAID [100310364](https://catalog.archives.gov/id/100310364) | PD (US Army) | 1452x1820 | POWs working |
+| `pow_camp_polk_piano_1943.jpg` | Two POWs tune a $50 piano bought with pooled money, others watching, Camp Polk, 1943 | NARA 111-SC-186053, NAID [100310352](https://catalog.archives.gov/id/100310352) | PD (US Army) | 2028x1664 | alt |
+| `pow_greenville_ms_tent_camp.jpg` | Side camp at Greenville, Mississippi: rows of POW tents, laundry hanging | NARA 208-AA-310E-1, NAID [505633752](https://catalog.archives.gov/id/505633752) | PD (OWI/USAAF, NARA Unrestricted) | 2980x2434 | POWs in the South (Mississippi); long perspective |
+| `pow_greenville_ms_river_work.jpg` | German POWs at work on the Mississippi River project, Greenville, Mississippi | NARA 208-AA-310E-2, NAID [505633755](https://catalog.archives.gov/id/505633755) | PD (OWI/USAAF) | 3005x2460 | POWs working |
+| `pow_greenville_ms_levee_project.jpg` | Wider view of the river project; most manual labour by German POWs | NARA 208-AA-310E-3, NAID [505633758](https://catalog.archives.gov/id/505633758) | PD (OWI/USAAF) | 2980x2409 | alt |
+| ★ `jim_crow_colored_dining_room_rest_stop_ky_tn_1943.jpg` | Bus rest stop between Louisville KY and Nashville TN: a shed signed "COLORED DINING ROOM IN REAR" (Esther Bubley, Sept 1943) | LoC FSA/OWI [2017862090](https://www.loc.gov/item/2017862090/) | PD (LoC FSA/OWI) | 1536x1502 | "…restaurants that wouldn't serve them" (Tennessee route, 1943; small: copy-negative scan) |
+| ★ `jim_crow_white_colored_doors_cafe_durham_1940.jpg` | Café near the tobacco market, Durham NC: separate "White" and "Colored" doors, 1930s cars in front (Jack Delano, May 1940) | LoC [fsa.8a33793](https://hdl.loc.gov/loc.pnp/fsa.8a33793) | PD (LoC FSA) | 4336x3048 | segregated restaurant; street depth |
+| `jim_crow_colored_waiting_room_bus_station_durham_1940.jpg` | "COLORED WAITING ROOM" sign over a man at the Durham bus station, a bus beside him (Delano, May 1940). Cropped from the mounted print | LoC [ppmsc.00199](https://hdl.loc.gov/loc.pnp/ppmsc.00199) | PD (LoC FSA) | 1890x1272 | "segregated" vocab card; strong depth |
+| `jim_crow_colored_waiting_room_sign_rome_ga_1943.jpg` | "COLORED WAITING ROOM" arrow sign, Greyhound terminal, Rome, Georgia (Bubley, Sept 1943) | LoC [cph.3b22541](https://hdl.loc.gov/loc.pnp/cph.3b22541) | PD (OWI) | 1485x1536 | graphic insert |
+| `jim_crow_colored_passengers_bus_ky_tn_1943.jpg` | Black passengers on the Louisville–Nashville bus (Bubley, Sept 1943) | LoC FSA/OWI [2017862155](https://www.loc.gov/item/2017862155/) | PD (LoC FSA/OWI) | 4858x5201 | alt, dignified portrait |
+| ★ `black_engineers_923rd_chow_england_1943.jpg` | Three Black engineers of the 923rd Engineer Regiment eat chow on maneuvers in England, 15 Sept 1943 | NARA 111-SC-181890, NAID [178140806](https://catalog.archives.gov/id/178140806) | PD (US Army) | 2872x2109 | "Black and white soldiers trained apart, ate apart and served apart" |
+| `black_engineers_923rd_rest_maneuvers_england_1943.jpg` | 923rd Engineers rest among pines after a mock charge, England, 1943 | NARA 111-SC-181891, NAID [178140808](https://catalog.archives.gov/id/178140808) | PD (US Army) | 2903x2282 | alt; forest depth |
+| `black_soldiers_93rd_div_wall_training_1942.jpg` | 93rd Infantry Division (the first all-Black division of WWII) scaling a wall, Fort Huachuca, Arizona, 1942 | NARA 111-SC-148122, NAID [266694412](https://catalog.archives.gov/id/266694412) | PD (US Army) | 2958x2412 | "trained apart" |
+| `black_soldiers_93rd_div_smoke_screen_training_1942.jpg` | 93rd Division soldiers advance through a smoke screen, Fort Huachuca, 1942 | NARA 111-SC-148132, NAID [266694418](https://catalog.archives.gov/id/266694418) | PD (US Army) | 3150x2647 | alt |
+| ★ `black_platoon_near_vierville_omaha_1944.jpg` | A platoon of Black soldiers surrounds a farmhouse near Vierville-sur-Mer, Omaha beachhead, 10 June 1944 (Todd) | NARA 111-SC-190120-S, NAID [176887822](https://catalog.archives.gov/id/176887822) | PD (US Army) | 3894x3173 | "They were the only Black combat unit on the beaches" (not the 320th: label it generally) |
+| `black_artillerymen_333rd_fa_1944.jpg` | 333rd Field Artillery Bn (first Black unit to fire into Germany) set fuses on 155 mm shells, Oct 1944 | NARA 111-SC-257053, NAID [276537205](https://catalog.archives.gov/id/276537205) | PD (US Army) | 2401x3074 | alt, segregated units in combat |
+| ★ `medics_first_aid_utah_beach_1944.jpg` | Medics give first aid to men wounded in the first landings on Utah Beach, others digging in behind (Shelton, 6 June 1944). No gore | NARA 111-SC-320886, NAID [176888664](https://catalog.archives.gov/id/176888664) | PD (US Army) | 3984x3264 | Woodson: "set up an aid station on the sand" (gap 1, partly) |
+| `medic_along_omaha_beach_cliff_1944.jpg` | A 16th Infantry medic moves along the narrow strip under the chalk cliff at Omaha, the sea behind (Taylor, 6 June 1944) | NARA 111-SC-189925-S, NAID [176887764](https://catalog.archives.gov/id/176887764) | PD (US Army) | 3888x3128 | "kept going for about 30 hours" |
+| `medics_plasma_omaha_beach_1944.jpg` | Medics give blood plasma to a wounded soldier against the cliff, Omaha Beach (Taylor) | NARA 111-SC-189916-S, NAID [176887746](https://catalog.archives.gov/id/176887746) | PD (US Army) | 3933x3139 | "treating about 200 men" (check the wound isn't visible at the chosen crop) |
+| `omaha_bluff_beachhead_balloon_barrage_1944.jpg` | View from the bluff over Easy Green, St Laurent: troops on the path, the fleet and balloons offshore. On its mount | NARA 342-FH-3A17149-51676AC, NAID [204891307](https://catalog.archives.gov/id/204891307) | PD (USAAF) | 4528x3517 | strong 3D depth (hillside / beach / sea); "a fence… hanging from the sky" |
 
 ## ch03_fake: inflatable decoys
 
@@ -64,6 +89,12 @@ Notes for scenes:
 | `ghost_army_congressional_gold_medal.jpg` | Obverse and reverse of the Ghost Army Congressional Gold Medal on easels at the ceremony, 21 Mar 2024 | Commons: [File:Ghost Army Medal.jpg](https://commons.wikimedia.org/wiki/File:Ghost_Army_Medal.jpg) (Bedelstein) | PD (per Commons; medal design US Mint) | 3840x2880 | "Their Congressional Gold Medal… was finally presented in 2024." |
 | `inflatable_m47_tank_decoy_1950s_nara292565.jpg` | Pneumatic M47 tank decoy, Project "LOIS", Army equipment file, 1950s | Commons, NARA 292565 | PD (US Army) | 1920x1539 (native 3000) | "the idea never went away" |
 | `inflatable_scud_decoy_usaf_2009.jpg` | A US airman adjusts an inflatable Scud missile decoy, RED FLAG-Alaska, 6 Oct 2009 | Commons, USAF 091006-F-5951G-011 | PD (USAF) | 1280x1927 | "Companies still build inflatable tanks and rocket launchers for today's wars." |
+| `rubber_tank_front_view_anzio_1944.jpg` | Fully inflated dummy tank, head-on, a soldier standing beside it for scale (Anzio, 20 May 1944) | NARA 111-SC-217854, NAID [100310468](https://catalog.archives.gov/id/100310468) | PD (US Army) | 2796x2280 | "This one weighed 93 pounds" (not Ghost Army: tag as Anzio) |
+| `rubber_tank_turret_view_anzio_1944.jpg` | Dummy tank seen side-on with its turret and gun, two soldiers at the ends | NARA 111-SC-217853, NAID [100310466](https://catalog.archives.gov/id/100310466) | PD (US Army) | 2974x2387 | alt |
+| `rubber_tank_assembling_anzio_1944.jpg` | Soldiers assemble the rubber body, turret lying on the grass | NARA 111-SC-216203, NAID [100310452](https://catalog.archives.gov/id/100310452) | PD (US Army) | 2974x2349 | "They pumped up rubber tanks" |
+| ★ `m4_sherman_rolls_off_lst_utah_beach_1944.jpg` | A real M4 Sherman rolls off an LST's ramp onto Utah Beach, crew in the hatch, Aug 1944 | NARA 111-SC-199796-S, NAID [176888250](https://catalog.archives.gov/id/176888250) | PD (US Army) | 3922x3213 | "A real one weighs about 30 tons." (clean side view) |
+| ★ `french_civilians_with_paratroopers_normandy_1944.jpg` | Two Frenchmen in flat caps talk with American paratroopers, Normandy, 8 June 1944 | NARA 111-SC-189927-S, NAID [176887768](https://catalog.archives.gov/id/176887768) | PD (US Army) | 3888x3134 | the two Frenchmen (no bicycles; the bicycle moment stays a drawn gap) |
+| `gi_and_french_civilians_village_road_1944.jpg` | A French woman, a boy and a GI carrying a trunk walk down a Normandy village road, June 1944 | NARA 111-SC-190287, NAID [176887912](https://catalog.archives.gov/id/176887912) | PD (US Army) | 3911x3202 | French countryside with US troops; long road depth |
 
 ## ch04_paper_balloon: Fu-Go
 
@@ -101,6 +132,18 @@ Notes for scenes:
 | ★ `schoolgirls_pasting_envelope_fig12.jpg` | Mikesh Fig. 12: Japanese high-school girls pasting and stitching the balloon envelope | Mikesh p.15 (n22) | PD Mark | 970x1000 (small; use half-frame) | "most of the people building them were teenage girls" |
 | `nichigeki_music_hall_fig13.jpg` | Mikesh Fig. 13: the Nichigeki Music Hall, Tokyo, one of the halls used to make and test balloons (a later photo, about 1970) | Mikesh p.15 (n22) | PD Mark | 1950x1540 | "giant theaters and a sumo hall in Tokyo" (it's a later photo: label it so) |
 | `balloons_shot_down_near_attu_1945.jpg` | Four P-38 gun-camera frames of a balloon shot down 60 miles SW of Attu, Aleutians, 25 Feb 1945 | NARA 342-FH-3A29772-59928AC, NAID [204948385](https://catalog.archives.gov/id/204948385) | PD (USAAF) | 3138x4000 | "from Alaska…" |
+| ★ `fugo_treed_balloon_pyramid_lake_fig28.jpg` | Mikesh Fig. 28: Paiute men chop down a tree to recover a balloon, Pyramid Lake, Nevada, 29 Mar 1945 (AAF 29906 AC) | Mikesh p.26 (n33) | PD Mark | 1440x1104 | recovery crews / "About 300 were found" |
+| `fugo_officials_inspect_burns_oregon_fig2.jpg` | Mikesh Fig. 2: military and government officials stand over a recovered envelope near Burns, Oregon, 23 Feb 1945 (USAF 30776AC) | Mikesh p.2 (n9) | PD Mark | 1904x824 | recovery / Oregon (wide strip) |
+| `fugo_wind_catches_recovered_balloon_fig27.jpg` | Mikesh Fig. 27: wind fills a recovered balloon like a parachute, men holding it in snow, 23 Feb 1945 (29907 AC) | Mikesh p.26 (n33) | PD Mark | 1440x952 | "made of paper" (gores visible) |
+| `fugo_landed_tremonton_utah_fig4.jpg` | Mikesh Fig. 4: four views of a balloon that landed near Tremonton, Utah, without dropping its bombs, 23 Feb 1945 | Mikesh p.4 (n11) | PD Mark | 1880x2072 | "Balloons were landing all over North America" (crop one panel) |
+| `fugo_aerial_over_reno_fig29.jpg` | Mikesh Fig. 29: a balloon in flight over Reno, photographed from a pursuing P-63, 22 Mar 1945 | Mikesh p.28 (n35) | PD Mark | 912x820 | in flight (small) |
+| `fugo_gun_camera_fig38.jpg` | Mikesh Fig. 38: gun-camera frame of a balloon in flight, shroud lines hanging (30771 AC) | Mikesh p.36 (n43) | PD Mark | 920x1428 | "About 30,000 feet up" (small) |
+| `balloons_shot_down_attu_apr1945.jpg` | Gun-camera frames: balloons shot down by 11th AF fighters near Attu at 30,000–37,000 ft, 11 Apr 1945. On its mount | NARA 342-FH-3A29771-58267AC, NAID [204948382](https://catalog.archives.gov/id/204948382) | PD (USAAF) | 4484x3505 | "from Alaska…" / jet-stream altitude |
+| `radiosonde_stations_japan_fig6.jpg` | Mikesh Fig. 6: map of the radiosonde stations Japan used to study upper winds, 1945 | Mikesh p.8 (n15) | PD Mark | 1500x1600 | the jet stream research (line drawing, masks well) |
+| `weather_balloon_radar_eniwetok_1948.jpg` | A weather balloon is released beside a tracking-radar truck, Eniwetok, 1948 | NARA 59-1611-07 (Truman Library), NAID [348261551](https://catalog.archives.gov/id/348261551) | PD (US government) | 800x622 | weather balloon / radiosonde (small, 1948) |
+| ★ `airliner_contrail_over_mont_blanc_pd.jpg` | A modern airliner's contrail across blue sky above the snow of Mont Blanc, 2012 | Commons: [File:Mont-Blanc and airliner.jpg](https://commons.wikimedia.org/wiki/File:Mont-Blanc_and_airliner.jpg) (Tangopaso) | PD (released by author) | 3840x2880 | "…shorter than the flight home" (native 4416) |
+| `half_deflated_balloon_on_hill_nara285258.jpg` | Half-deflated recovered envelope on a grassy rise, shroud lines and ring at its foot (BIA records, 1945) | Commons, NARA [285258](https://catalog.archives.gov/id/285258) | PD | 3000x2312 | "About 300 were found" (clean subject on sky; masks well) |
+| `paper_envelope_gores_closeup_nara285259.jpg` | Close-up of the collapsed envelope: the paper gores radiating from the crown | Commons, NARA [285259](https://catalog.archives.gov/id/285259) | PD | 1920x1485 (native 3000) | "And they were made of paper" |
 
 ## ch05_silence: censorship and Hanford
 
@@ -111,6 +154,13 @@ Notes for scenes:
 | `hanford_b_reactor_face_sept1944.jpg` | B Reactor face, Sept 1944: "the first large-scale reactor ever built" | NARA 434-OR-41-MED-382, NAID [617583724](https://catalog.archives.gov/id/617583724) | PD (DOE/MED) | 3730x2880 | same line |
 | `hanford_b_reactor_face_workers.jpg` | Workers at the B Reactor face (DuPont photo D 3044) | NARA, NAID [7260602](https://catalog.archives.gov/id/7260602) | PD (DOE) | 1411x1106 | alt |
 | `richland_headlines_hanford_1945.jpg` | Richland *Villager* extra, Aug 1945: "IT'S ATOMIC BOMBS… Truman Releases Secret of Hanford Product" | NARA 434-OR-41-MED-389, NAID [617584015](https://catalog.archives.gov/id/617584015) | NARA "Unrestricted", DOE/MED record photo of the paper; the 1945 newspaper's own copyright status is unverified, so use it briefly or as a fallback | 3200x4000 | "a secret plant" (the secret, revealed later) / newspapers theme |
+| ★ `nyt_newsroom_1942.jpg` | The New York Times news room: city editor and assistants in front, copy desks and spiral stair behind (Marjory Collins, 1942) | LoC FSA/OWI [2017837867](https://www.loc.gov/item/2017837867/) | PD (LoC FSA/OWI) | 6000x4578 | "the newspapers stayed quiet" (native 12860 px, downsized; deep room) |
+| `nyt_making_up_page_one_1942.jpg` | Make-up men assemble page one in metal type as deadline approaches, NYT composing room | LoC FSA/OWI [2017837946](https://www.loc.gov/item/2017837946/) | PD (LoC FSA/OWI) | 4777x5030 | "asked them not to report the balloons" (a page being made) |
+| `nyt_wire_room_teletype_1942.jpg` | A copy boy tears a dispatch off the Associated Press teletype, NYT wire room | LoC FSA/OWI [2017837885](https://www.loc.gov/item/2017837885/) | PD (LoC FSA/OWI) | 4096x3297 | news that never ran / typewriter-machine close-up |
+| `nyt_presses_start_rolling_1942.jpg` | NYT pressroom: the presses start rolling, pressmen watching | LoC FSA/OWI [2017837899](https://www.loc.gov/item/2017837899/) | PD (LoC FSA/OWI) | 4808x4769 | "And they didn't." |
+| `nyt_linotype_operators_1942.jpg` | Rows of Linotype operators setting type, NYT composing room | LoC FSA/OWI [2017837923](https://www.loc.gov/item/2017837923/) | PD (LoC FSA/OWI) | 4838x5049 | alt, typing |
+| ★ `bonneville_transmission_lines_1941.jpg` | Cross-country power lines from Bonneville Dam over a wooded Oregon ridge (Russell Lee, 1941) | LoC FSA/OWI [2017816204](https://www.loc.gov/item/2017816204/) | PD (LoC FSA) | 6000x4910 | "One hit a power line in Washington State" (Bonneville power fed Hanford; not the actual line hit) |
+| `bonneville_transmission_tower_1941.jpg` | A Bonneville transmission tower and lines among firs (Lee, 1941) | LoC FSA/OWI [2017816154](https://www.loc.gov/item/2017816154/) | PD (LoC FSA) | 4590x6000 | alt; tower against the sky masks well |
 
 ## ch06_bly: Bly, Oregon (no victim photos used)
 
@@ -126,6 +176,10 @@ Notes for scenes:
 | `mitchell_monument_alt_mccullough_cc_by.jpg` | The monument's plaque face, close | Commons, McCullough (Flickr 6150421596) | **CC BY 2.0** | 1920x1441 | "the names written by hand" (production note) |
 | `shrapnel_tree_mitchell_monument_cc_by.jpg` | The ponderosa still scarred by the bomb's shrapnel, at the monument | Commons, McCullough (Flickr 6149872687) | **CC BY 2.0** | 1920x1744 | "It was one of the balloons." (shows the place, nothing graphic) |
 | `mitchell_recreation_area_fig85.jpg` | Mikesh Fig. 85: the Mitchell Recreation Area, established 1950: fence and monument in the pines | Mikesh p.68 (n75) | PD Mark | 1470x1000 | period alt for the monument |
+| ★ `klamath_falls_cars_parked_in_pines_1942.jpg` | 1930s–40s sedans parked under tall ponderosa pines at the Klamath Falls city park (Russell Lee, 1942) | LoC FSA/OWI [2017818910](https://www.loc.gov/item/2017818910/) | PD (LoC FSA/OWI) | 4848x5076 | "While Archie parked the car…" (Klamath County, the right years, the right trees; a city park, not the Bly site) |
+| `klamath_falls_picnickers_in_pines_1942.jpg` | Families picnicking at tables under ponderosa pines, Klamath Falls, 1942 (Lee) | LoC FSA/OWI [2017818908](https://www.loc.gov/item/2017818908/) | PD (LoC FSA/OWI) | 4824x5004 | "up into the mountains for a picnic" (strangers, not the Mitchells; keep it brief and at a distance) |
+| `bly_district_fremont_nf_1947.jpg` | Dry prairie on the Bly District of Fremont National Forest, timbered ridges behind, 11 July 1947 (J. F. Pechanec, USFS). Cropped inside the mounted print | NARA 95-GP-642-448341, NAID [7008102](https://catalog.archives.gov/id/7008102) | PD (USFS) | 3126x2119 | "a small town called Bly, Oregon" (the country around Bly in the 1940s) |
+| `klamath_falls_town_view_1941.jpg` | Klamath Falls from the hill: houses, streets and the dry hills beyond (Russell Lee, 1941) | LoC FSA [2017816802](https://www.loc.gov/item/2017816802/) | PD (LoC FSA) | 6000x4584 (native 14025) | the county seat near Bly; "a small town" stand-in (it is Klamath Falls, not Bly) |
 
 ## ch07_answer: Takeshita, Tule Lake, cranes
 
@@ -137,38 +191,63 @@ Notes for scenes:
 | ★ `origami_cranes_nagasaki_cc0.jpg` | Strings of thousands of colorful paper cranes, Nagasaki, 2012 | Commons: [File:Origami cranes in Nagasaki.jpg](https://commons.wikimedia.org/wiki/File:Origami_cranes_in_Nagasaki.jpg) (TimMilesWright) | CC0 | 3840x2560 (native 5184) | "In Japan, a thousand cranes is a wish for peace." |
 | `hiden_senbazuru_orikata_1797.jpg` | *Hiden Senbazuru Orikata* (1797), the oldest book on folding cranes: woodblock crane diagram | Commons | PD (1797) | 1280x1865 | "a thousand paper cranes" (B&W, masks well) / final "paper birds" |
 | `navy_officers_accept_paper_cranes_2012.jpg` | Japanese women give strings of paper cranes to US Navy officers at NAF Atsugi, 2012 | Commons, US Navy | PD (USN) | 3840x2560 | the gift moment (stand-in; not the 1987 Bly gift) |
+| ★ `tule_lake_boys_at_recess_wra.jpg` | Small boys at recess outside a barracks schoolroom, Tule Lake (WRA) | NARA 210-G-G43, NAID [539420](https://catalog.archives.gov/id/539420) | PD (WRA) | 1974x3000 | "When he was a boy, the US government held him and his family in a camp" |
+| `tule_lake_grade_school_recess_wra.jpg` | Children playing at recess between tar-paper school barracks, Tule Lake | NARA 210-G-G44, NAID [539421](https://catalog.archives.gov/id/539421) | PD (WRA) | 3000x1971 | alt, wider |
+| `tule_lake_seventh_grade_class_1942.jpg` | Seventh-grade pupils at their desks in a barracks classroom, Tule Lake, 4 Nov 1942 | NARA 210-G-A638, NAID [536524](https://catalog.archives.gov/id/536524) | PD (WRA) | 3000x2474 | dignified; good room depth |
+| `tule_lake_children_see_first_calf_1944.jpg` | Elementary pupils gather to see their first calf, Tule Lake Segregation Center, Oct 1944 | NARA 210-G-G746, NAID [539575](https://catalog.archives.gov/id/539575) | PD (WRA) | 3000x2067 | alt (Tule Lake during Takeshita's time) |
+| `tule_lake_wash_day_wra.jpg` | A woman hangs laundry beside the barracks on wash day, Tule Lake | NARA 210-G-G64, NAID [539440](https://catalog.archives.gov/id/539440) | PD (WRA) | 1973x3000 | family life in the camp |
+| ★ `crane_strings_fushimi_inari_kyoto_cc0.jpg` | Long rows of hanging strings of paper cranes in every colour, Fushimi Inari shrine, Kyoto, 2016 | Commons (DimiTalen) | CC0 | 1920x2888 (native 3722) | "a thousand paper cranes" (deep receding rows) |
+| `two_paper_cranes_closeup_pd.jpg` | Two folded paper cranes (orizuru) on a plain background | Commons (Laitche) | PD (released by author) | 3000x1834 | "paper birds" / the crane fold set piece |
 
-## Gaps (no good free image: use AI silhouette illustrations)
+## Gaps (no real public-domain / CC0 / CC BY image found)
 
-1. **ch02, Woodson at work**: wounded, patching himself up, the aid station on the sand, about 30 hours. No free photo of
-   him at Omaha. (The portrait and the 2024 DSC photo cover the before and after.)
-2. **ch02, German POWs eating in a restaurant that wouldn't serve the 320th** (Tennessee). No image.
+The video now uses real images only, so each gap below needs a drawn graphic or set piece (no AI imagery), or a
+looser real image, or a cut. Second-pass results (Oct 2026) are noted in brackets.
+
+1. **ch02, Woodson at work**: no photo of Woodson himself at Omaha. [Now covered loosely by real D-Day medic photos:
+   `medics_first_aid_utah_beach_1944.jpg`, `medic_along_omaha_beach_cliff_1944.jpg`, `medics_plasma_omaha_beach_1944.jpg`.
+   None shows Woodson or the 320th, so don't caption them as him.]
+2. **ch02, German POWs eating in a restaurant that wouldn't serve the 320th** (Tennessee). [Now built from two real
+   halves: the POWs (`pow_camp_perry_*`, `pow_camp_polk_*`, `pow_greenville_ms_*`) and the segregated restaurant
+   (`jim_crow_colored_dining_room_rest_stop_ky_tn_1943.jpg`, Louisville–Nashville road 1943; `jim_crow_white_colored_doors_cafe_durham_1940.jpg`).
+   Still no photo of POWs inside a Southern restaurant. NARA's OWI set 208-AA-309/208-AAN-121 has exactly the right
+   pictures ("German POWs Eat in the Dining Hall of a Prison Camp in the Southern U.S.", NAID 404792357; "Three German
+   POWs Cook in the Mess Kitchen…", 404792392), but NARA marks them **"Restricted - Possibly"**, so they were skipped.]
 3. **ch02, Double V**: the Pittsburgh Courier emblem and pages are still under copyright (1942). Draw the "VV" mark as a
    graphic, not a copy of the Courier logo.
-4. **ch02, the cable-and-plane diagram**: a set piece to draw.
-5. **ch03, Ghost Army people and gear**: no verifiable public-domain photos of the 23rd's own men, its sound trucks
-   (sonic half-tracks) or fake patches. The ghostarmy.com press-kit photos say "Courtesy National Archives", but no NARA
-   ID turned up, so they were skipped. Veterans' paintings and sketches are copyrighted. Needed: artists at work, the
-   sound truck at night with speakers, the cafés and fake patches, the colonel walking up to the fake tanks.
+4. **ch02, the cable-and-plane diagram**: a set piece to draw. [No real WWII photo of a fighter flying low past a
+   barrage balloon or its cable turned up on NARA, LoC or Commons (IWM Balloon Command sets have balloons only).
+   Nearest real image: `omaha_bluff_beachhead_balloon_barrage_1944.jpg`.]
+5. **ch03, Ghost Army people and gear**: still no verifiable public-domain photo of the 23rd's own men, sound trucks or
+   fake patches. NARA searches for "603rd Camouflage", "23rd Headquarters Special Troops", "3132nd Signal Service",
+   "sonic deception", "dummy tank", "decoy", "camouflage training" found only the Anzio/British rubber tanks and enemy
+   dummies. Commons' "Ghost Army.jpg" is FUSAG (Operation Fortitude) patches from a 2011 book, not the 23rd's, so it was
+   not used. [Added more Anzio rubber-tank views and a real Sherman for the 30-ton line.]
 6. **ch03, the two Frenchmen on bicycles watching four soldiers lift a tank**: Shilstone's painting is copyrighted.
-   Illustration, must-have.
+   [Real stand-ins: `french_civilians_with_paratroopers_normandy_1944.jpg` (two Frenchmen in caps) and
+   `gi_and_french_civilians_village_road_1944.jpg`. No PD photo of French cyclists with US troops found.]
 7. **ch04, workers eating the konnyaku paste / girls with nails cut short and no hairpins**: no image beyond Fig. 12.
+   [Japanese schoolgirl-mobilization photos: none with clear PD status found; skipped as instructed.]
 8. **ch04, the sumo hall (Kokugikan) interior full of balloons**: no free wartime photo (Fig. 13 is the Nichigeki
    exterior only).
-9. **ch04, the jet stream as a modern diagram**: Mikesh Fig. 25 covers it in period style. If a clean modern version is
-   wanted, draw it (NOAA/NASA jet-stream graphics weren't searched in depth).
-10. **ch05, newspapers keeping quiet**: no PD copy of the Office of Censorship's January 1945 request, and the May 1945
-    War/Navy Department balloon warning notice wasn't found online (NARA's BIA balloon files are not digitized or are
-    restricted). Use the planned set piece: a newspaper with a blank column.
-11. **ch05, the Hanford power line**: no photo of the line or the outage.
-12. **ch05, "your phone would buzz with a warning"**: modern phone alert, illustration.
-13. **ch06, the picnic itself**: Archie at the car, Elsie and the children walking ahead into the trees, his shout. No
-    photos of the victims were used (by design). Illustration from behind / at a distance only.
+9. **ch04, the jet stream as a modern diagram**: Mikesh Fig. 25 covers it in period style; Fig. 6 (radiosonde stations)
+   added. No 1940s US radiosonde launch photo found (NARA only has a 1948 Eniwetok weather balloon, 800 px).
+10. **ch05, newspapers keeping quiet**: no PD copy of the Office of Censorship's 4 Jan 1945 request or the 22 May 1945
+    War/Navy warning. Mikesh doesn't reproduce either as a figure (checked the full figure list, Figs. 1–88), but his
+    text (p.26, scan n33–34, PD Mark) quotes the Office of Censorship's "strictly confidential note to editors and
+    broadcasters", which can be typeset on screen. No Office of Censorship building/staff photo found on NARA or LoC
+    (the only Byron Price portrait, Harris & Ewing 1946, is NARA "Undetermined"). [Real 1942 newsroom photos added:
+    `nyt_*` (Marjory Collins, OWI).]
+11. **ch05, the Hanford power line**: no photo of the actual line or outage. [Stand-in: Bonneville Power transmission
+    lines, Russell Lee 1941 (`bonneville_transmission_*`), the grid that fed Hanford.]
+12. **ch05, "your phone would buzz with a warning"**: modern phone alert, illustration / screen graphic.
+13. **ch06, the picnic itself**: Archie at the car, Elsie and the children walking ahead, his shout. No photos of the
+    victims (by design). [Real period stand-ins at a distance: `klamath_falls_cars_parked_in_pines_1942.jpg`,
+    `klamath_falls_picnickers_in_pines_1942.jpg` (a Klamath Falls city park, strangers).]
 14. **ch06, the 2014 British Columbia find** (forestry workers, military bomb team): news photos are copyrighted.
-    Illustration.
-15. **ch07, John Takeshita and the 1987 crane gift in Bly**: no free photo of him or the ceremony. Illustration
-    (anonymous man from behind carrying strings of cranes).
-16. **ch07, the paper balloon folding into a crane**: animation set piece.
+15. **ch06, Mitchell Monument in the 1980s**: no PD photo found (Mikesh Fig. 85, 1973, is the closest period view).
+16. **ch07, John Takeshita and the 1987 crane gift in Bly**: no free photo of him or the ceremony.
+17. **ch07, the paper balloon folding into a crane**: animation set piece.
 
 ## Tool notes (for whoever runs `find_images.py` next)
 
@@ -180,3 +259,9 @@ Notes for scenes:
   checked by hand, and none is BY-SA.
 - NARA isn't a `find_images.py` source, but its catalog API (`catalog.archives.gov/proxy/records/search?naId=…`) works
   from here. NARA files above were fetched from their `digitalObjects` and credited with the NAID.
+- Second pass (Oct 2026): NARA full-text search works at `catalog.archives.gov/proxy/records/search?q=…&rows=100&page=N`
+  (the `/api/v2` path returns the web app, not JSON). Check `record.useRestriction.status`; several OWI 208-AA sets are
+  "Restricted - Possibly" and were skipped. Multi-scan records list the print front first (`_001`) and the back second.
+- Second pass: loc.gov JSON and Commons API/upload were heavily rate-limited (HTTP 429, Cloudflare challenge), but
+  `tile.loc.gov/storage-services/master/pnp/...` TIFFs downloaded freely when the digital ID was known.
+
