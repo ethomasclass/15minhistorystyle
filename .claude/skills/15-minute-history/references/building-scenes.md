@@ -82,10 +82,14 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `DrawnCrown` (shell) | Hand-drawn crown | `x0 x1 y h at` |
 | `DarkPaper` (common) | The desk background | |
 | `MapScene`, `Pin`, `Route`, `Region`, `PLACES` (map) | 1836 map, camera, pins, routes | `keys: Cam[]`, `children(S, cam)` |
+| `Map3D` + `Slab`, `Fill`, `Border`, `Glow`, `Route`, `Flow`, `MovingBorder`, `Stand` (`Pin3`, `Stake`, `Flag3`, `PlaceTag`, `RegionName`, `Hand`), `StateTiles`, `Count` (map3d) | The tilted 3D map (from *The Exact Spot*): regions rise as slabs, borders draw on with their names, labels stand up | `data keys: Cam3[] ({f x y z tilt rot})`, `children(api)`; data from `tools/build_map.py` (example map: `techniques/components/exact_spot/maps/`) |
+| `Engraving` (engraving) | A wood engraving full frame: 16:9 crop only, slow push, soft fade in/out | `src px fx fy a b z0 z1 fade quiet mask tint traceAt tag children(place)` |
+| `Parallax` (parallax) | 2.5D archival layers (subject over background) | `name src size a b tag fx fy cam depth crop frame mask tint tintStrength traceAt effects filter` |
 | `Tiles`, `STATES` (tiles) | State tile grid for elections | `state(code) => {fill,label,at}` |
 | `Person` (figures) | Drawn voter or crowd figure | `x y h at dashed hat dress` |
 | `Pie`, `Bars`, `SplitBar`, `HBars`, `CountUp` (charts) | Charts: one coral subject, bone greys, labels on the marks | see `charts.tsx`; keep every number and its source in `src/data/charts.ts` |
 | `Sfx` (common) | One sound effect at a frame | `at src volume` |
+| `ChapterShell` music entries (shell) | Cues per chapter; the bed lifts ×`TAIL_LIFT` (1.6) after the last word | `{src, volume, startFrom, from, to}`: `to: TM.at('word') + 6` on one cue and `from: TM.at('word') - 6` on the next hands over on a phrase |
 | `hasFile(path)` (shell) | True once an image exists in public/ | use to fall back gracefully |
 
 More components that aren't in the template yet (documents marked in their own pixels, word-synced quotes,
@@ -157,9 +161,16 @@ Do all of these before sending the user anything. Each one caught real problems 
   and the user disliked it ("the whole table illustration isn't great"). It was replaced by three teal line-drawn
   index cards, one per policy, each knocked out with a coral X as Jackson kills it. Labels in nowrap at a size
   that fits the card.
+- **If a picture can be misread, draw the event instead** (*The Exact Spot*): an engraving of dragoons inside a fence
+  read as a pen, not an ambush ("Why are they inside a fence?"). A drawn diagram (a ring of chaparral, one gap, riders
+  in, cavalry closing the gap, ✕ killed, rings captured) set beside the map fixed it.
+- **Spell out an allusion.** A free/slave map turning into the 1861 split was too quiet until it carried labels: UNION,
+  CONFEDERACY, "border states", a key, "← Fort Sumter, April 1861" and a THE CIVIL WAR strip.
 - **Every image gets a source tag**, generated ones too ("Illustration · ...").
 - **One subject in color per image.** If two people matter, use two scenes or trace the second without tint.
-- **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end.
+- **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end (and `Engraving`'s soft
+  fade, which keeps the illustrations from slamming in). Chapters end gently: ~2 s hold after the last word (`TAIL` 54),
+  the music lifting, an 18-frame dip to black.
 - **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
 - **The bundle copies public/ into /tmp** (~500 MB for a full video) on every render; the tools delete theirs.
   If the disk fills, remove `/tmp/remotion-webpack-bundle-*` and `out/` scratch files.

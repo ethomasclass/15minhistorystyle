@@ -1,4 +1,4 @@
-// Render the thumbnail concepts:  node tools/thumbs.mjs  -> renders/thumbnails/<SLUG>_{A,B}.png (1280x720)
+// Render the thumbnail concepts:  node tools/thumbs.mjs [A B C …]  -> renders/thumbnails/<SLUG>_<key>.png (1280x720; default A and B)
 // Bundles into out/thumb_bundle (not /tmp) so a chapter render running at the same time can't delete it.
 import {bundle} from '@remotion/bundler';
 import {renderStill, selectComposition} from '@remotion/renderer';
@@ -11,7 +11,7 @@ const outDir = path.resolve('out/thumb_bundle');
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), outDir});
 const browserExecutable = process.env.REMOTION_CHROME || null;
 fs.mkdirSync('renders/thumbnails', {recursive: true});
-for (const k of ['A', 'B']) {
+for (const k of (process.argv.slice(2).length ? process.argv.slice(2) : ['A', 'B'])) {
   const composition = await selectComposition({serveUrl, id: `Thumb-${k}`, browserExecutable});
   const big = path.resolve(`out/thumb_${k}.png`);
   await renderStill({composition, serveUrl, frame: 140, output: big, imageFormat: 'png', browserExecutable});

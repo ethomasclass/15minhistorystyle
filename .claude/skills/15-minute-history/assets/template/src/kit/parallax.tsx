@@ -73,8 +73,8 @@ type Cam = {z?: [number, number]; x?: [number, number]; y?: [number, number]; ea
  * `tint` colours the subject coral (null for none: Flow cards are already coral); `traceAt` draws the teal outline.
  */
 export const Parallax: React.FC<{name: string; src: string; size: [number, number]; a: number; b: number; tag: string; fx?: number; fy?: number; cam?: Cam;
-  depth?: number; crop?: [number, number, number, number]; frame?: [number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
-  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, frame = [1920, 1080], mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
+  depth?: number; crop?: [number, number, number, number]; frame?: [number, number]; mask?: MaskRef; tint?: string | null; tintStrength?: number; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
+  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, frame = [1920, 1080], mask, tint, tintStrength = 1, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
 }) => {
   const f = useCurrentFrame();
   const layered = hasFile(`img/layers/${name}_fg.webp`) && hasFile(`img/layers/${name}_bg.jpg`);
@@ -111,7 +111,7 @@ export const Parallax: React.FC<{name: string; src: string; size: [number, numbe
             {img(`img/layers/${name}_fg.webp`, fg)}
           </>
         ) : img(src, place(1))}
-        {mask && tint !== null && <Tint mask={mask.alpha} place={fg} size={size} color={tint ?? undefined} />}
+        {mask && tint !== null && <Tint mask={mask.alpha} place={fg} size={size} color={tint ?? undefined} strength={tintStrength} />}
         {mask && traceAt !== undefined && <Traced paths={mask.data.shapes.subject} place={fg} at={traceAt} dur={12} width={5} part={0.92} />}
         {effects.filter((e) => e.kind !== 'film').map((e, i) => <Effect key={i} fx={e} />)}
         {children?.(fg)}

@@ -4,7 +4,7 @@
 
 Everything that makes a 15 Minute History video look and sound like one: the logo, colours and fonts, every music cue and
 sound effect, the on-screen techniques, the writing and packaging conventions, and a tested starter project. It was collected from
-all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck* and *Say It Ain't So*.
+all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck*, *Say It Ain't So* and *The Exact Spot*.
 
 **The look in one paragraph.** A researcher's desk at night. Black-and-white archival engravings and photographs sit on dark, faintly
 ruled paper. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
@@ -23,7 +23,7 @@ little wry, and it gets quieter and slower when the subject is suffering.
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |
 | [`.claude/skills/15-minute-history/`](.claude/skills/15-minute-history/) | The Claude skill that makes a video end to end, its reference guides, and the starter project |
-| [`projects/`](projects/) | Video projects built inside this repo (*Say It Ain't So*: `projects/Black_Sox/` on the `black-sox-video` branch; big renders via Git LFS) |
+| [`projects/`](projects/) | Video projects built inside this repo (*Say It Ain't So*: `projects/Black_Sox/` on the `black-sox-video` branch; *The Exact Spot*: `projects/Mexican_American_War/` on `claude/relaxed-lamport-62biq7`; big renders via Git LFS) |
 
 ## The guides
 

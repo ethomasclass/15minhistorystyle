@@ -105,6 +105,10 @@ shifts. Re-check stills for that chapter after re-voicing.
   0.17, dipping at the end. Title sting 0.45 (already wired into the intro). The heavy chapter gets a grave cue or
   near-silence. Generators master differently (Lyria about −12 LUFS, Suno about −15, ElevenLabs down to −19.6), so
   check the library's LUFS column: a cue 6 dB quieter needs roughly double the bed.
+- **Tail lift and hand-overs** (from *The Exact Spot*): `ChapterShell` lifts the bed ×1.6 (`TAIL_LIFT`) for the ~2 s
+  after the last word, then fades with the picture, so pick cues whose tail still sounds good louder. To change cue on a
+  phrase, give the first `to: TM.at('word') + 6` and the next `from: TM.at('word') - 6` (`TM = makeTimeline(N, 30)`); the
+  first fades over 30 frames.
 - Credit music as AI-generated in the description.
 
 ## 7. Sound effects
