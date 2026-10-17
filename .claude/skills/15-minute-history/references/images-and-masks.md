@@ -112,3 +112,16 @@ mask version in place of the original; compare the two files before using either
   `LAYERS_MAX=4000` so they stay sharp). Say on screen whose photo doesn't survive.
 - **Tight portraits don't fit a full-bleed frame**: a close-up (a face that fills the source) zoomed to cover 16:9 puts
   every note on the face. Use the "subject left, notes right" `CropCard` layout instead.
+
+## 6. Masks on real-photo videos (from *The Balloon War*)
+- **The object can be the subject.** A balloon, a decoy tank or a crumpled envelope takes the coral tint and teal trace as
+  well as a person does, and it ties the look to the story ("this is the thing"). Draw the trace on the word that names it,
+  in place of a hand-drawn loop.
+- **Tiny subjects work**: crop the mask job tightly around a small object in a big photo (the barrage balloon over LST-388 was
+  380 × 250 px of a 3840 px negative) and the trace still reads. Frame the shot so the subject and its context (the ship) both fit.
+- **Tall photos don't go full-bleed.** A portrait-shaped picture covered to 16:9 crops the subject. Put it on a card on the desk
+  with the tint and trace inside the card (`Cutout ... whole`), and the notes beside it.
+- **A cut-out figure on the desk**: show the `_fg.webp` layer alone, tinted and traced, on dark paper, with any edge the source
+  cut off (a shoulder, the waist) placed off-frame so no straight cut shows. It springs up from below on its cue.
+- **Expect some misses**: busy crowd scenes and soft, pale shapes against sky (a half-filled paper balloon, a deflated barrage
+  balloon among seated soldiers) came back wrong twice. Two tries, then drop it and pick another photo.
