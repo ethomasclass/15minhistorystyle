@@ -16,6 +16,14 @@ import {proj} from '../pacific';
 const N = words as Narration;
 export const CH05_FRAMES = chapterFrames(N, LEAD);
 
+/** "Because the newspapers stayed quiet." A real newsroom first. */
+const Newsroom: React.FC<{t: TL}> = ({t}) => (
+  <Ph p="ch05_silence/nyt_newsroom_1942.jpg" fx={2600} fy={2700} a={0} b={t.at('In January')} z0={1.14} z1={1.2} band="bottom"
+    tag="The New York Times newsroom, 1942 · Marjory Collins, Office of War Information (Library of Congress)">
+    {() => <Note text="the newspapers stayed quiet" x={120} y={880} size={64} rot={-3} at={t.at('newspapers')} color="#ffffff" />}
+  </Ph>
+);
+
 /** A drawn front page (illustration, no real masthead): balloon stories blacked out one by one. */
 const FrontPage: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
@@ -148,7 +156,8 @@ const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
   const cuts: [number, React.ReactNode][] = [
-    [0, <FrontPage t={t} />],
+    [0, <Newsroom t={t} />],
+    [at('In January') - 1, <FrontPage t={t} />],
     [at('The reason') - 1, <NoNews t={t} />],
     [at('Some of') - 1, <Hanford t={t} />],
     [at('But silence') - 1, <Cost t={t} />],

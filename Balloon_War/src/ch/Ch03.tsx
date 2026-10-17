@@ -217,7 +217,7 @@ const Scale: React.FC<{t: TL}> = ({t}) => {
       {g >= real && (
         <div style={{position: 'absolute', left: left[0] - 190, top: left[1] + 40 + drop(real), width: 380}}>
           <div style={{background: '#f4efe6', padding: 10, boxShadow: '0 14px 28px rgba(0,0,0,0.7)'}}>
-            <img src={staticFile('img/ch03_fake/rubber_tank_beside_real_tank_anzio_1944.jpg')} style={{width: '100%', height: 200, objectFit: 'cover', objectPosition: '8% 45%', filter: 'grayscale(1) contrast(1.15)', display: 'block'}} />
+            <img src={staticFile('img/ch03_fake/m4_sherman_rolls_off_lst_utah_beach_1944.jpg')} style={{width: '100%', height: 200, objectFit: 'cover', objectPosition: '40% 32%', filter: 'grayscale(1) contrast(1.15)', display: 'block'}} />
           </div>
         </div>
       )}

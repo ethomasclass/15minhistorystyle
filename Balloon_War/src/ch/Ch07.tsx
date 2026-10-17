@@ -20,12 +20,15 @@ const Takeshita: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
     <Ph p="ch07_answer/tule_lake_war_relocation_center_russell_lee_1942.jpg" fx={1920} fy={1500} a={0} b={t.at('In 1987')} z0={1.04} z1={1.12} band="top"
-      tag="The Tule Lake camp, California, 1942 · Russell Lee, Farm Security Administration (Library of Congress)">
+      tag="Tule Lake camp, California, 1942 · Russell Lee, FSA  |  Card: boys at recess · War Relocation Authority">
       {() => (
         <>
           {g >= t.at('John') && <Highlight text="JOHN TAKESHITA" x={110} y={90} size={96} at={t.at('John')} seed={71} rot={-2} />}
-          <Note text="as a boy: held with his family in a camp for Japanese Americans" x={120} y={240} size={46} rot={-3} at={t.at('held')} color="#ffffff" />
-          <Note text="about 50 miles from Bly" x={140} y={330} size={50} rot={-3} at={t.at('50 miles')} color={ORANGE} />
+          <Note text="as a boy: held with his family" x={120} y={240} size={50} rot={-3} at={t.at('held')} color="#ffffff" />
+          <Note text="in a camp for Japanese Americans" x={140} y={325} size={50} rot={-3} at={t.at('camp for')} color="#ffffff" />
+          <Note text="about 50 miles from Bly" x={160} y={420} size={50} rot={-3} at={t.at('50 miles')} color={ORANGE} />
+          <PhotoCard src="img/ch07_answer/tule_lake_boys_at_recess_wra.jpg" x={1240} y={300} w={560} h={600} rot={3} at={t.at('boy')} pos="50% 70%" />
+          <Note text="boys at recess, Tule Lake" x={1260} y={940} size={42} rot={-3} at={t.at('boy') + 6} color="#ffffff" />
         </>
       )}
     </Ph>

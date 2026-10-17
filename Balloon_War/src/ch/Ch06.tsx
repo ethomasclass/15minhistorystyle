@@ -52,10 +52,22 @@ const Ahead: React.FC<{t: TL}> = ({t}) => {
   return (
     <AbsoluteFill style={{background: '#000'}}>
       <AbsoluteFill style={{opacity: o}}>
-        <Ph p="ch06_bly/fog_over_forest_fremont_winema_usfs.jpg" fx={1920} fy={1300} a={t.at('While Archie') - 1} b={late} z0={1.04} z1={1.12} band="bottom"
-          tag="The Fremont-Winema National Forest · US Forest Service">
-          {() => <Note text="the others walked ahead" x={120} y={900} size={54} rot={-3} at={t.at('walked')} color={BONE} />}
-        </Ph>
+        {g < t.at('The children') ? (
+          <Ph p="ch06_bly/klamath_falls_cars_parked_in_pines_1942.jpg" fx={2500} fy={2900} a={t.at('While Archie') - 1} b={t.at('The children')} z0={1.12} z1={1.16} band="bottom"
+            tag="Cars parked under ponderosa pines, Klamath Falls, Oregon, 1942 · Russell Lee, FSA (Library of Congress)">
+            {() => (
+              <>
+                <Note text="Archie parked the car" x={120} y={800} size={54} rot={-3} at={t.at('parked')} color={BONE} />
+                <Note text="the others walked ahead" x={140} y={900} size={54} rot={-3} at={t.at('walked')} color={BONE} />
+              </>
+            )}
+          </Ph>
+        ) : (
+          <Ph p="ch06_bly/fog_over_forest_fremont_winema_usfs.jpg" fx={1920} fy={1300} a={t.at('The children') - 1} b={late} z0={1.04} z1={1.1} band="bottom"
+            tag="The Fremont-Winema National Forest · US Forest Service">
+            {() => <Note text="something strange in the trees" x={120} y={900} size={54} rot={-3} at={t.at('strange')} color={BONE} />}
+          </Ph>
+        )}
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -132,7 +144,7 @@ const Body: React.FC = () => {
       <Bed src="sfx/forest_birds.wav" from={at('mountains')} to={at('too late') + 2} volume={0.12} startFrom={30 * 5} fadeIn={20} fadeOut={6} />
       <Bed src="music/m_lament.mp3" from={at('Elsie and') - 20} to={t.frames + 20} volume={0.12} startFrom={0} fadeIn={60} />
       {[at('A pastor'), at('While Archie'), at('They were the'), at('And some'), at('About forty')].map((f, i) => <Sfx key={i} at={f - 1} src="sfx/page_turn.wav" volume={0.15} />)}
-      {['May', 'pastor', 'five children', 'pregnant', 'walked', 'only people', 'still out', 'gift'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={0.12} />)}
+      {['May', 'pastor', 'five children', 'pregnant', 'parked', 'walked', 'strange', 'only people', 'still out', 'gift'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={0.12} />)}
     </>
   );
 };
