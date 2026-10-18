@@ -241,7 +241,7 @@ const Scale: React.FC<{t: TL}> = ({t}) => {
 const Colonel: React.FC<{t: TL}> = ({t}) => (
   <Cut p="ch03_fake/rubber_tank_side_view_anzio_1944.jpg" m="rubber_tank" box={[960, 330, 920, 560]} at={t.at('The Ghost Army pulled') - 1} traceAt={t.at('fooled')}
     tag="A US Army rubber tank decoy, Anzio, Italy, 1944 · US Army Signal Corps">
-    <Stamp text="20+ FAKE OPERATIONS" x={110} y={80} at={t.at('more than')} size={110} rot={-4} />
+    <Stamp text="20+ FAKE OPERATIONS" x={110} y={100} at={t.at('more than')} size={110} rot={-4} />
     <Note text="sometimes they fooled their own side" x={120} y={240} size={54} rot={-3} at={t.at('Sometimes')} color="#ffffff" />
     <Quote text="Well, son, you certainly could have fooled me." at={t.at('Well, son')} x={110} y={400} w={800} size={66} who="a colonel who missed the briefing" />
     <Note text="(which was the whole point)" x={1000} y={940} size={54} rot={-3} at={t.at('Which, to')} color={CORAL} />
