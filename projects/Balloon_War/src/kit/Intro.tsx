@@ -1,13 +1,15 @@
 // Channel intro: "15 Minute History", then the video's title. A pull-back from one taped-down photo to the notebook
 // page with the logo, then the title on orange tape. Graphics step at 12 fps like the rest of the video.
 import React from 'react';
-import {AbsoluteFill, Audio, Easing, Img, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Easing, getInputProps, Img, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {boxOf, Finish, Highlight, INK, JF, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from './Kit';
 import {DarkPaper, Sfx} from './common';
 import {DATES, INTRO_CARDS, SUBTITLE, TITLE} from '../project';
 
 export const INTRO_FRAMES = 186;
+/** A jingle mockup to audition (render with --props='{"jingle":"music/jingle_A.mp3"}'). */
+const JINGLE = (getInputProps() as {jingle?: string}).jingle;
 
 const CARDS = INTRO_CARDS;
 
@@ -132,7 +134,9 @@ const Body: React.FC = () => {
       <Finish vignette={0.45} />
       <Sfx at={2} src="sfx/paper_rustle.wav" volume={0.22} />
       <Sfx at={tape - 2} src="sfx/tape_pull.wav" volume={0.42} />
-      <Sequence from={40} layout="none"><Audio src={staticFile('music/title_sting.mp3')} volume={(x) => interpolate(x, [0, 4, 60, 100], [0, 0.32, 0.32, 0], clamp)} /></Sequence>
+      {/* the jingle (whole intro, timed to its beats) or, until one is chosen, the title sting */}
+      {JINGLE ? <Audio src={staticFile(JINGLE)} volume={0.55} />
+        : <Sequence from={40} layout="none"><Audio src={staticFile('music/title_sting.mp3')} volume={(x) => interpolate(x, [0, 4, 60, 100], [0, 0.32, 0.32, 0], clamp)} /></Sequence>}
     </AbsoluteFill>
   );
 };
