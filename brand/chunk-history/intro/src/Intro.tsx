@@ -153,7 +153,7 @@ export const Intro: React.FC = () => {
       </Sequence>
       {WM_LAND.map((f, i) => (
         <Sequence key={`w${i}`} from={f - 1}>
-          <Audio src={staticFile('sfx/stamp.wav')} volume={0.4} />
+          <Audio src={staticFile('sfx/knock.wav')} volume={0.3} />
         </Sequence>
       ))}
     </AbsoluteFill>
