@@ -93,6 +93,88 @@ def concept_c():
     return [(TEAL, chamfer(top, 4)), (CORAL, chamfer(bottom, 4))]
 
 
+# ---------- Tablet family: a black C carved through a broken stone tablet ----------
+def carved_c(x0, y0, x1, y1, t, mouth):
+    """A C as a hole: a square ring with a mouth narrower than its counter, so the tablet inside the C
+    hangs on a neck and reads as the C's inside, not as the middle bar of an E or G."""
+    cy = (y0 + y1) / 2
+    ring = box(x0, y0, x1, y1).difference(box(x0 + t, y0 + t, x1 - t, y1 - t))
+    return chamfer(ring.difference(box(x1 - t - 1, cy - mouth / 2, x1 + 1, cy + mouth / 2)), 6)
+
+
+def tablet(x0, y0, x1, y1, c=30):
+    return chamfer(box(x0, y0, x1, y1), c)
+
+
+def by_side(geom, cut, side):
+    """Break geom along cut; side(piece) -> True puts a fragment in the first group."""
+    pieces = parts(geom.difference(cut))
+    a = unary_union([p for p in pieces if side(p.centroid)])
+    b = unary_union([p for p in pieces if not side(p.centroid)])
+    return a, b
+
+
+SQ_C = (56, 56, 200, 200, 38, 34)          # carved C for the square tablet
+DIAG = seam((-10, 266), (266, -10), 10)    # 45-degree break, corner to corner
+above_diag = lambda c: c.x + c.y < 256
+
+
+def t1_split():
+    """Square tablet, diagonal break, carved C."""
+    a, b = by_side(tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)), DIAG, above_diag)
+    return [(TEAL, chamfer(a, 3)), (CORAL, chamfer(b, 3))]
+
+
+def t2_quarter():
+    """The top-right quarter cracks off in coral, like a quarter-hour on a clock: one short chunk of the whole."""
+    g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C))
+    cx, cy = 128, 128
+    cut = unary_union([seam((cx, 0), (cx, cy + 5), 10), seam((cx - 5, cy), (256, cy), 10)])
+    q, rest = by_side(g, cut, lambda c: c.x > cx and c.y < cy)
+    return [(TEAL, chamfer(rest, 3)), (CORAL, chamfer(q, 3))]
+
+
+SH_W = 140
+SH_X = (256 - SH_W) / 2
+SH_TAB = lambda: tablet(SH_X, 8, SH_X + SH_W, 248, 22).difference(carved_c(SH_X + 22, 74, SH_X + SH_W - 22, 182, 30, 28))
+
+
+def t3_shorts():
+    """The tablet in the tall Shorts frame, broken on a 45-degree diagonal."""
+    k = SH_X + SH_W / 2 + 128
+    a, b = by_side(SH_TAB(), seam((k - 200, 200), (k, 0), 10), lambda c: c.x + c.y < k)
+    return [(TEAL, chamfer(a, 3)), (CORAL, chamfer(b, 3))]
+
+
+def t4_swipe():
+    """A Shorts-shaped tablet in three short chunks, like clips in a feed; the one with the C slides in."""
+    cut = unary_union([seam((0, 58), (256, 58), 10), seam((0, 198), (256, 198), 10)])
+    pieces = parts(SH_TAB().difference(cut))
+    grp = lambda lo, hi: unary_union([p for p in pieces if lo <= p.centroid.y < hi])
+    return [(TEAL, chamfer(grp(0, 58), 3)), (CORAL, chamfer(affinity.translate(grp(58, 198), 12, 0), 3)),
+            (TEAL, chamfer(grp(198, 256), 3))]
+
+
+def t5_chip():
+    """One small chip knocked off the corner: the chunk is short, the tablet is all of history."""
+    g = tablet(16, 24, 232, 240).difference(carved_c(52, 60, 196, 204, 38, 34))
+    chip, rest = by_side(g, seam((150, 250), (250, 150), 10), lambda c: c.x + c.y > 400)
+    return [(TEAL, chamfer(rest, 3)), (CORAL, chamfer(affinity.translate(chip, 10, 4), 3))]
+
+
+def t6_ticks():
+    """Split tablet with four quarter-hour notches cut in its edges: a short, timed piece of history."""
+    n = 12
+    notches = unary_union([box(128 - n / 2, 8, 128 + n / 2, 34), box(128 - n / 2, 222, 128 + n / 2, 248),
+                           box(8, 128 - n / 2, 34, 128 + n / 2)])
+    g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)).difference(notches)
+    a, b = by_side(g, DIAG, above_diag)
+    return [(TEAL, chamfer(a, 3)), (CORAL, chamfer(b, 3))]
+
+
+TABLETS = [("t1", t1_split), ("t2", t2_quarter), ("t3", t3_shorts), ("t4", t4_swipe), ("t5", t5_chip), ("t6", t6_ticks)]
+
+
 # ---------- Wordmark: chunky chamfered caps, cap height 100, stroke 24 ----------
 S = 24
 
@@ -169,6 +251,10 @@ if __name__ == "__main__":
         write(f"concept-{key}-symbol.svg", 256, 256, layers, "Chunk History symbol")
         write(f"concept-{key}-symbol-black.svg", 256, 256, mono(layers, "#000000"), "Chunk History symbol")
         lockup(layers, f"concept-{key}-lockup.svg")
+    for key, fn in TABLETS:
+        layers = fn()
+        write(f"tablet-{key}-symbol.svg", 256, 256, layers, "Chunk History symbol")
+        lockup(layers, f"tablet-{key}-lockup.svg")
     wm, ww = wordmark(x0=4, y0=4)
     write("wordmark.svg", int(ww + 16), 112, wm, "Chunk History wordmark")
     print("ok")
