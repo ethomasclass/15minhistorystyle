@@ -321,24 +321,26 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 
 ## 9. Channel identity
 
-### 9.1 "15 MINUTE HISTORY" wordmark (channel intro, 132 frames = 4.4 s)
-Background: `#0d0c09` with `DarkPaper`, vignette 0.45.
+### 9.1 Channel intro and title (186 frames = 6.2 s; from *The Balloon War*)
+One piece now does both jobs (the old card-flip intro and the separate title card are retired: the ticks were grating).
+Built in `src/kit/Intro.tsx` from `INTRO_CARDS` (6 of the video's photos), `TITLE`, `SUBTITLE` and `DATES` in `src/project.ts`.
 
-| Element | Spec | Enters (frame) |
+| Element | Spec | Frames |
 |---|---|---|
-| Card flip | 5 archival B&W cards (660px, cream border, teal 5px outline offset 10), random ±7° and scatter, one every 6 frames, tick each | 0–30. All clear at 32 with a whoosh. |
-| Clock ring | centre **(440, 540)**, r **250**. Hand-drawn teal polyline **10px** (overshoots, ±1% wobble, grows 2.5%). Draws over 8 frames. | 34 |
-| Quarter ticks | 4 teal strokes, **8px**, from 0.78r to 0.95r, at 12/3/6/9 | when the ring completes |
-| Quarter wedge | coral, opacity **0.9**, radius 0.92r, sweeps from 12 to 3 o'clock over 16 frames (ease in-out quad). Ticks at +8, +14, +20. | 40 |
-| Hand + hub | cream `#f4efe6`: hand 9px long to 0.82r, hub r 12 | with the ticks |
-| "15" | Abril 250, cream, centred on the clock (box 400 wide at x 240, y 390), shadow `0 6px 24px rgba(0,0,0,0.7)`, stamp 1.35 → 0.95 → 1. Title sting starts 4 frames earlier. | 58 |
-| "MINUTE" | Highlight 128px at **(760, 350)**, −2°: orange box, ink type. Stamp sfx. | 64 |
-| "HISTORY" | Abril **196**, teal, at **(770, 520)**, shadow `0 6px 26px rgba(0,0,0,0.7)`, stamp 1.3 → 0.97 → 1 from the left. Boom. | 71 |
-| Underline | orange bar **8px** tall at **(780, 760)**, grows 0 → **820px** over 10 frames | 77 |
-| Push | whole mark scales 1 → 1.04 | 58 → 132 |
-| Out | fade to black over the last 8 frames | 124–132 |
+| Notebook page | `DarkPaper` (oversized so the zoom never shows an edge), six B&W photos on cream cards (340–400 wide, ±4°), two translucent tape strips on each card's top corners | always |
+| Pull back | the camera starts at scale 3.1 on the first photo and eases (in-out cubic) back to the whole page | 0–72 |
+| Logo | the full wordmark, already drawn, at 0.6 scale in the middle of the page | 0 → |
+| Hold | about a second on the page and logo | 72–104 |
+| Logo up | it eases to 0.36 scale near the top (y ≈ 210); the photos dim to 45%; the photo under it fades out | 104–122 |
+| Title tape | a full-width torn orange strip (190 tall, −2°) is pulled across the middle from the left, the title in Abril 132 ink | 108–122 |
+| Subtitle, dates | subtitle in teal Abril 60 under the tape (fades in); dates on a small orange Highlight lower right | 126, 136 |
+| Sound | a paper rustle at the start, the title sting at 0.32 from frame 40, a quiet masking-tape pull with the strip. **No ticks, no stamps, no boom.** | |
+| Out | fade to black over the last 10 frames | 176–186 |
 
-### 9.2 Title card (150 frames = 5 s; follows the cold open and the channel intro)
+The `Wordmark` itself (clock ring, coral quarter, "15", MINUTE on orange, HISTORY in teal, orange underline; clock centre
+(440, 540), r 250) is unchanged and still used fully drawn on thumbnails and logo files.
+
+### 9.2 Title card (retired: the title now rides the intro's tape strip, §9.1; kept for reference)
 
 Built in `src/ch/Ch01.tsx` (`Title`) from `TITLE`, `SUBTITLE` and `DATES` in `src/project.ts`. *Fix Everything* values:
 - **Background:** the 1836 map, whole country (centre 2600, 2320), scale 0.26 creeping +0.0003 per frame, dim 0.5, with the title-card overlay `radial-gradient(rgba(8,6,4,0.2) 30% → rgba(8,6,4,0.85) 100%)`.

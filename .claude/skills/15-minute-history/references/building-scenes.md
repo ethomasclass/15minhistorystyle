@@ -41,7 +41,7 @@ export const Ch06 = () => (
 - `ChapterShell` handles the logo-break lead-in, the fade up and down, the narration audio, music beds, the
   palette (`quiet` for heavy chapters), the 12 fps graphics step and the grain and vignette (`Finish`).
   Everything inside it runs in **narration time**: frame 0 is the first sample of the narration.
-- Chapter 1 is different (cold open → `ChannelIntro` → title card); copy the template's `Ch01.tsx` shape.
+- Chapter 1 is different (cold open → a one-second beat → `ChannelIntro`, which ends on the title tape); copy the template's `Ch01.tsx` shape.
 - Register every chapter in `src/chapters.ts`; the composition id is `ChNN`.
 - Each scene is a small component taking `t`. Keep scenes to 4–12 seconds; cut on the word that starts a new idea.
 

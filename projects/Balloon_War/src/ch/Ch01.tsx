@@ -14,11 +14,11 @@ import {CORAL, Cut, Desk, Redact} from '../bw';
 import {DATES, SUBTITLE, TITLE} from '../project';
 
 const N = words as Narration;
-const TITLE_FRAMES = 150;
+
 /** The beat after the cold open: the last image holds for a second, only the music's tail (the user's rule). */
 const BEAT = 30;
 const END = Math.ceil(N.duration * 30) + BEAT;
-export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
+export const CH01_FRAMES = END + INTRO_FRAMES;
 
 /** A small drawn school bus (local 0..300 x 0..120). */
 const BUS: P[] = [[0, 100], [0, 30], [20, 10], [280, 10], [300, 30], [300, 100], [0, 100]];
@@ -127,20 +127,6 @@ const Leash: React.FC<{t: TL}> = ({t}) => (
   </Cut>
 );
 
-/** Title card after the channel intro. */
-const Title: React.FC = () => {
-  const g = useGFrame();
-  const pal = usePal();
-  return (
-    <AbsoluteFill style={{background: '#0b0b0b'}}>
-      <Cut p="ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg" m="moffett" box={[1240, 60, 620, 960]} at={0} traceAt={2} tint={false} />
-      <Highlight text={TITLE} x={170} y={380} size={150} at={4} seed={61} rot={-2} />
-      {g >= 14 && <div style={{position: 'absolute', left: 220, top: 630, fontFamily: JF.display, fontSize: 64, color: pal.mark, textShadow: '0 3px 16px rgba(0,0,0,0.8)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
-      <Note text={DATES} x={1360} y={790} size={54} rot={-5} at={26} />
-    </AbsoluteFill>
-  );
-};
-
 const Body: React.FC = () => {
   const frame = useCurrentFrame();
   const t = makeTimeline(N, 30);
@@ -155,8 +141,7 @@ const Body: React.FC = () => {
     [at('It starts') - 1, <Leash t={t} />],
   ];
   let scene = useScene(cuts.map(([f, n], i): [number, React.ReactNode] => [f, <React.Fragment key={i}>{n}</React.Fragment>]));
-  if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><Title /></Sequence>;
-  else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
+  if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
   return (
     <AbsoluteFill style={{background: '#000'}}>
       {scene}
@@ -172,7 +157,6 @@ const Body: React.FC = () => {
       {['One protected', 'One lied', 'And one crossed'].map((c) => <Sfx key={c} at={at(c)} src="sfx/page_turn.wav" volume={0.4} />)}
       <Sfx at={at('almost nobody')} src="sfx/boom.wav" volume={0.42} />
       <Sfx at={at('shot it')} src="sfx/plane_flyby.wav" volume={0.18} />
-      <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.4} />
     </AbsoluteFill>
   );
 };

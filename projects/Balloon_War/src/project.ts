@@ -15,6 +15,7 @@ export const INTRO_CARDS = [
   'img/ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg',
   'img/ch02_protector/lst388_beached_under_balloon_80g252794.jpg',
   'img/ch04_paper_balloon/balloon_above_clouds_342fh3b23432.jpg',
+  'img/ch06_bly/gearhart_mountain_ponderosa_pine_1964.jpg',
 ];
 
 /** Thumbnail portrait (template default, unused here). */
