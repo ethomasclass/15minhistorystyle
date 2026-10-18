@@ -25,6 +25,9 @@ UA = {"User-Agent": "15MinuteHistory-sfx/1.0 (educational YouTube channel)"}
 
 # name: (search, min s, max s of the source, seconds to keep (None = all), pick = n-th acceptable result)
 SFX = {
+    # gentler channel-intro candidates
+    "lamp_click": ("lamp switch click", 0.25, 3, None, 0),
+    "tape_pull": ("masking tape", 0.8, 4, None, 0),
     # The Balloon War starter pack
     "balloon_inflate": ("balloon inflate", 1, 8, None, 0),
     "gas_hiss": ("gas hiss", 1, 10, 4, 0),
