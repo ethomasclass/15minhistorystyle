@@ -247,50 +247,52 @@ TABLETS = [("t1", t1_split), ("t2", t2_quarter), ("t3", t3_shorts), ("t4", t4_sw
 S = 24
 
 
-def diag(p, q, clip):
-    return LineString([p, q]).buffer(S * 0.62, cap_style=FLAT).intersection(clip)
+def diag(p, q, clip, s=S):
+    return LineString([p, q]).buffer(s * 0.62, cap_style=FLAT).intersection(clip)
 
 
-def letter(ch):
+def letter(ch, s=S, cham=8):
+    """Block capital on a 100-unit cap height with stroke s; returns (shape, advance width)."""
     W = 76
+    m = (100 - s) / 2  # top of the middle bar
     B = lambda x, y, w, h: box(x, y, x + w, y + h)
     if ch == "C":
-        g = unary_union([B(0, 0, W, S), B(0, 0, S, 100), B(0, 100 - S, W, S)])
+        g = unary_union([B(0, 0, W, s), B(0, 0, s, 100), B(0, 100 - s, W, s)])
     elif ch == "H":
-        g = unary_union([B(0, 0, S, 100), B(W - S, 0, S, 100), B(0, 38, W, S)])
+        g = unary_union([B(0, 0, s, 100), B(W - s, 0, s, 100), B(0, m, W, s)])
     elif ch == "U":
-        g = unary_union([B(0, 0, S, 100), B(W - S, 0, S, 100), B(0, 100 - S, W, S)])
+        g = unary_union([B(0, 0, s, 100), B(W - s, 0, s, 100), B(0, 100 - s, W, s)])
     elif ch == "N":
         W = 82
-        g = unary_union([B(0, 0, S, 100), B(W - S, 0, S, 100),
-                         diag((W / 2 - 34.64, -10), (W / 2 + 34.64, 110), box(0, 0, W, 100))])
+        g = unary_union([B(0, 0, s, 100), B(W - s, 0, s, 100),
+                         diag((W / 2 - 34.64, -10), (W / 2 + 34.64, 110), box(0, 0, W, 100), s)])
     elif ch == "K":
         clip = box(0, 0, W, 100)
-        g = unary_union([B(0, 0, S, 100), diag((S, 58), (S + 64, -6), clip), diag((S + 10, 40), (S + 70, 104), clip)])
+        g = unary_union([B(0, 0, s, 100), diag((s, 58), (s + 64, -6), clip, s), diag((s + 10, 40), (s + 70, 104), clip, s)])
     elif ch == "I":
-        W = S
-        g = B(0, 0, S, 100)
+        W = s
+        g = B(0, 0, s, 100)
     elif ch == "S":
-        g = unary_union([B(0, 0, W, S), B(0, 0, S, 62), B(0, 38, W, S), B(W - S, 38, S, 62), B(0, 100 - S, W, S)])
+        g = unary_union([B(0, 0, W, s), B(0, 0, s, m + s), B(0, m, W, s), B(W - s, m, s, 100 - m), B(0, 100 - s, W, s)])
     elif ch == "T":
-        g = unary_union([B(0, 0, W, S), B((W - S) / 2, 0, S, 100)])
+        g = unary_union([B(0, 0, W, s), B((W - s) / 2, 0, s, 100)])
     elif ch == "O":
-        g = B(0, 0, W, 100).difference(B(S, S, W - 2 * S, 100 - 2 * S))
+        g = B(0, 0, W, 100).difference(B(s, s, W - 2 * s, 100 - 2 * s))
     elif ch == "R":
         clip = box(0, 0, W, 100)
-        g = unary_union([B(0, 0, S, 100), B(0, 0, W, S), B(W - S, 0, S, 62), B(0, 38, W, S),
-                         diag((30, 50), (W + 10, 112), clip)])
+        g = unary_union([B(0, 0, s, 100), B(0, 0, W, s), B(W - s, 0, s, m + s), B(0, m, W, s),
+                         diag((s + 6, 50), (W + 10, 112), clip, s)])
     elif ch == "Y":
-        clip = box(0, 0, W, 62)
-        g = unary_union([diag((-6, -6), (W / 2 + 4, 62), clip), diag((W + 6, -6), (W / 2 - 4, 62), clip),
-                         B((W - S) / 2, 52, S, 48)])
-    return chamfer(g, 8), W
+        clip = box(0, 0, W, m + s)
+        g = unary_union([diag((-6, -6), (W / 2 + 4, m + s), clip, s), diag((W + 6, -6), (W / 2 - 4, m + s), clip, s),
+                         B((W - s) / 2, m + s - 10, s, 100 - m - s + 10)])
+    return chamfer(g, cham), W
 
 
-def word(text, x=0, track=18):
+def word(text, x=0, track=18, s=S, cham=8):
     shapes = []
     for ch in text:
-        g, w = letter(ch)
+        g, w = letter(ch, s, cham)
         shapes.append(affinity.translate(g, x, 0))
         x += w + track
     return unary_union(shapes), x - track
