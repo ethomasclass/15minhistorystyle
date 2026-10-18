@@ -7,9 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/Intro';
 import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB, ThumbC} from './Thumbnail';
-import {PARALLAX_TEST_FRAMES, ParallaxTest} from './test/ParallaxTest';
 import {IntroDesk, IntroLamp, IntroTape, LAB_FRAMES} from './test/IntroLab';
-import {PHOTO3D_TEST_FRAMES, Photo3DTest} from './test/Photo3DTest';
 
 export const Root: React.FC = () => (
   <>
@@ -19,8 +17,6 @@ export const Root: React.FC = () => (
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
     <Composition id="Thumb-C" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbC /></JFonts>} />
-    <Composition id="ParallaxTest" width={W} height={H} fps={FPS} durationInFrames={PARALLAX_TEST_FRAMES} component={ParallaxTest} />
-    <Composition id="Photo3DTest" width={W} height={H} fps={FPS} durationInFrames={PHOTO3D_TEST_FRAMES} component={Photo3DTest} />
     <Composition id="IntroLamp" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.lamp} component={() => <JFonts><IntroLamp /></JFonts>} />
     <Composition id="IntroDesk" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.desk} component={() => <JFonts><IntroDesk /></JFonts>} />
     <Composition id="IntroTape" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.tape} component={() => <JFonts><IntroTape /></JFonts>} />
