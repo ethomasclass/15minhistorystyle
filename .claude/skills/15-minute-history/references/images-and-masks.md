@@ -1,5 +1,11 @@
 # Images and masks
 
+> **House rule (the user's, after *The Balloon War*): cut-outs on the notebook first.** Every photo goes on the dark ruled
+> paper (`DarkPaper`): its subject cut out (`Cut`: B&W, teal trace, coral on the one key subject), or, when the picture has
+> no single subject or the mask fails (landscapes, crowds, rooms, a speck in the sky), as a cream card on the desk (`Desk`).
+> **No full-screen photos with slow pushes (no "Ken Burns"), no 3D depth fly-throughs, and no color photos**, modern ones
+> included: everything is black and white. Cut masks for every photo while sourcing, not after the scenes are built.
+
 ## Contents
 1. Archival first: finding and crediting images
 2. AI paintings for gaps (Gemini prompts)

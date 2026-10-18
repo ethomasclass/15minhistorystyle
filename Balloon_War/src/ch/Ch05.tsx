@@ -9,7 +9,7 @@ import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {Bed, Sketch, type P} from '../draw';
-import {CORAL, ORANGE, P3, Ph, Redact} from '../bw';
+import {CORAL, Desk, ORANGE, Redact} from '../bw';
 import {Map} from '../pacmap';
 import {proj} from '../pacific';
 
@@ -18,10 +18,10 @@ export const CH05_FRAMES = chapterFrames(N, LEAD);
 
 /** "Because the newspapers stayed quiet." A real newsroom first. */
 const Newsroom: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch05_silence/nyt_newsroom_1942.jpg" fx={2600} fy={2700} a={0} b={t.at('In January')} z0={1.14} z1={1.2} band="bottom"
+  <Desk p="ch05_silence/nyt_newsroom_1942.jpg" box={[380, 70, 1160, 700]} at={0} rot={-2}
     tag="The New York Times newsroom, 1942 · Marjory Collins, Office of War Information (Library of Congress)">
     {() => <Note text="the newspapers stayed quiet" x={120} y={880} size={64} rot={-3} at={t.at('newspapers')} color="#ffffff" />}
-  </Ph>
+  </Desk>
 );
 
 /** A drawn front page (illustration, no real masthead): balloon stories blacked out one by one. */
@@ -89,7 +89,7 @@ const Hanford: React.FC<{t: TL}> = ({t}) => {
   const hit = t.at('power line');
   const spark = g >= hit + 6 && g < hit + 40 && Math.floor(f / 3) % 2 === 0;
   return (
-    <Ph p="ch05_silence/hanford_b_reactor_100b_area_1944.jpg" fx={1800} fy={1300} a={t.at('Some of') - 1} b={t.at('But silence')} z0={1.06} z1={1.16} band="top"
+    <Desk p="ch05_silence/hanford_b_reactor_100b_area_1944.jpg" box={[100, 330, 880, 600]} at={t.at('Some of') - 1} rot={-2}
       tag="The Hanford B Reactor area, Washington State, 1944 · US Department of Energy / Manhattan Project">
       {() => (
         <>
@@ -102,13 +102,13 @@ const Hanford: React.FC<{t: TL}> = ({t}) => {
             <path d="M1440,370 L1490,405 M1560,370 L1510,405" stroke="#EDE7DC" strokeWidth={3} />
             {spark && <path d="M1500,405 l-30,40 l25,-6 l-20,46 l48,-58 l-26,6 l18,-28 Z" fill={ORANGE} />}
           </svg>}
-          <Note text="a power line in Washington State" x={1000} y={500} size={44} rot={-3} at={hit} color="#ffffff" />
+          <Note text="a power line in Washington State" x={1120} y={520} size={44} rot={-3} at={hit} color="#ffffff" />
           <Note text="→ the secret plant making material for the atomic bomb" x={110} y={200} size={44} rot={-3} at={t.at('secret plant')} color={ORANGE} />
           <Stamp text="3 DAYS" x={1280} y={760} at={t.at('three days')} size={150} rot={-5} />
           <Note text="to get back to full power" x={1260} y={930} size={46} rot={-3} at={t.at('full power')} color="#ffffff" />
         </>
       )}
-    </Ph>
+    </Desk>
   );
 };
 
@@ -144,12 +144,12 @@ const Cost: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** "Which brings us to a spring day in Oregon." The woods near Bly, in 3D. */
+/** "Which brings us to a spring day in Oregon." The woods near Bly on a card. */
 const Oregon: React.FC<{t: TL}> = ({t}) => (
-  <P3 name="ch06_forest" a={t.at('Which brings') - 1} b={t.frames + 24} dolly={140} yaw={[-1, 1]} band="bottom"
+  <Desk p="ch06_bly/forest_fog_fremont_winema_usfs.jpg" box={[380, 70, 1160, 700]} at={t.at('Which brings') - 1} rot={2}
     tag="The Fremont-Winema National Forest, southern Oregon · US Forest Service">
     <Note text="a spring day in Oregon" x={120} y={890} size={60} rot={-3} at={t.at('spring')} color="#ffffff" />
-  </P3>
+  </Desk>
 );
 
 const Body: React.FC = () => {

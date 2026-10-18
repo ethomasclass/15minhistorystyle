@@ -303,7 +303,7 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 
 **Common compositions**
 1. **Subject left, notes right:** a cut-out portrait or card at x ≈ 60–220 (height 900–960), with the title and a stack of notes or an arrow chain at x ≈ 780–1400.
-2. **Full-bleed image, title top-left** (or lower-left), with the source tag at the other corner. The subject is tinted and traced, and a slow push-in runs throughout.
+2. **(Avoid: the user prefers cut-outs on the desk.) Full-bleed image, title top-left** (or lower-left), with the source tag at the other corner. The subject is tinted and traced, and a slow push-in runs throughout.
 3. **Map with pins:** the dimmed 1836 map, a vignette, teal route and pins, orange-box place names by the pins, the title top-left, and the tag bottom-left.
 4. **Desk of cards:** `DarkPaper` with 2–3 cards across the upper two-thirds (y 60–470), a title and notes along the bottom.
 5. **Two-column comparison:** two cards at x ≈ 200 and 1080, a title each at y 600, and notes at y 760 and 850.

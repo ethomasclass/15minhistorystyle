@@ -30,6 +30,17 @@ JOBS = {
     "collapsed": ("img/ch04_paper_balloon/collapsed_balloon_on_ground_nara285257.jpg", None, "isnet-general-use"),
     "woodson": ("img/ch02_protector/waverly_woodson_portrait_1940s.jpg", None, "u2net_human_seg"),
     "lst388_balloon": ("img/ch02_protector/lst388_beached_under_balloon_80g252794.jpg", (1300, 420, 2100, 1000), "isnet-general-use"),
+    "u2_balloon": ("img/ch01_look_up/balloon_from_u2_cockpit_2023.jpg", (1150, 1150, 1850, 1850), "isnet-general-use"),
+    "f22": ("img/ch01_look_up/f22_takeoff_2023.jpg", None, "isnet-general-use"),
+    "navy_envelope": ("img/ch01_look_up/navy_recovers_balloon_envelope_2023.jpg", None, "isnet-general-use"),
+    "walk320": ("img/ch02_protector/320th_walk_balloon_to_winch_1944.jpg", None, "isnet-general-use"),
+    "moffett": ("img/ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg", None, "isnet-general-use"),
+    "medics": ("img/ch02_protector/medics_first_aid_utah_beach_1944.jpg", None, "isnet-general-use"),
+    "dsc_medal": ("img/ch02_protector/woodson_dsc_omaha_2024.jpg", None, "isnet-general-use"),
+    "two_tanks": ("img/ch03_fake/rubber_tank_beside_real_tank_anzio_1944.jpg", None, "isnet-general-use"),
+    "place_tank": ("img/ch03_fake/soldiers_place_rubber_tank_anzio_1944.jpg", None, "isnet-general-use"),
+    "gold_medal": ("img/ch03_fake/ghost_army_congressional_gold_medal.jpg", None, "isnet-general-use"),
+    "sherman_lst": ("img/ch03_fake/m4_sherman_rolls_off_lst_utah_beach_1944.jpg", None, "isnet-general-use"),
 }
 
 

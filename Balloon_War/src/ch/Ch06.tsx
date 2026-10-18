@@ -8,7 +8,7 @@ import {Note, Tag, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {Bed, Sketch, type P} from '../draw';
-import {Ph} from '../bw';
+import {Desk} from '../bw';
 
 const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
@@ -18,7 +18,7 @@ const BONE = '#EDE7DC';
 export const CRANE: P[] = [[20, 40], [95, 118], [150, 0], [182, 112], [292, 50], [205, 142], [120, 146], [20, 40]];
 
 const Woods: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch06_bly/hills_around_gearhart_mountain_usfs.jpg" fx={1920} fy={1280} a={0} b={t.at('A pastor')} z0={1.02} z1={1.1} band="bottom"
+  <Desk p="ch06_bly/hills_around_gearhart_mountain_usfs.jpg" box={[380, 70, 1160, 700]} at={0} rot={2}
     tag="The hills around Gearhart Mountain, near Bly, Oregon · US Forest Service">
     {() => (
       <>
@@ -26,11 +26,11 @@ const Woods: React.FC<{t: TL}> = ({t}) => (
         <Note text="the woods near Bly, Oregon" x={140} y={930} size={54} rot={-3} at={t.at('woods')} color={BONE} />
       </>
     )}
-  </Ph>
+  </Desk>
 );
 
 const Picnic: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch06_bly/gearhart_mountain_ponderosa_pine_1964.jpg" fx={700} fy={900} a={t.at('A pastor') - 1} b={t.at('While Archie')} z0={1.0} z1={1.06} band="left"
+  <Desk p="ch06_bly/gearhart_mountain_ponderosa_pine_1964.jpg" box={[860, 110, 1000, 820]} at={t.at('A pastor') - 1} rot={-2}
     tag="Ponderosa pines on Gearhart Mountain, 1964 · US Forest Service">
     {() => (
       <>
@@ -41,7 +41,7 @@ const Picnic: React.FC<{t: TL}> = ({t}) => (
         <Note text="Elsie was pregnant" x={130} y={660} size={50} rot={-2} at={t.at('pregnant')} color={BONE} />
       </>
     )}
-  </Ph>
+  </Desk>
 );
 
 /** The walk ahead; the warning; then black. */
@@ -53,7 +53,7 @@ const Ahead: React.FC<{t: TL}> = ({t}) => {
     <AbsoluteFill style={{background: '#000'}}>
       <AbsoluteFill style={{opacity: o}}>
         {g < t.at('The children') ? (
-          <Ph p="ch06_bly/klamath_falls_cars_parked_in_pines_1942.jpg" fx={2500} fy={2900} a={t.at('While Archie') - 1} b={t.at('The children')} z0={1.12} z1={1.16} band="bottom"
+          <Desk p="ch06_bly/klamath_falls_cars_parked_in_pines_1942.jpg" box={[380, 70, 1160, 700]} at={t.at('While Archie') - 1} rot={-2}
             tag="Cars parked under ponderosa pines, Klamath Falls, Oregon, 1942 · Russell Lee, FSA (Library of Congress)">
             {() => (
               <>
@@ -61,12 +61,12 @@ const Ahead: React.FC<{t: TL}> = ({t}) => {
                 <Note text="the others walked ahead" x={140} y={900} size={54} rot={-3} at={t.at('walked')} color={BONE} />
               </>
             )}
-          </Ph>
+          </Desk>
         ) : (
-          <Ph p="ch06_bly/fog_over_forest_fremont_winema_usfs.jpg" fx={1920} fy={1300} a={t.at('The children') - 1} b={late} z0={1.04} z1={1.1} band="bottom"
+          <Desk p="ch06_bly/fog_over_forest_fremont_winema_usfs.jpg" box={[380, 70, 1160, 700]} at={t.at('The children') - 1} rot={-2}
             tag="The Fremont-Winema National Forest · US Forest Service">
             {() => <Note text="something strange in the trees" x={120} y={900} size={54} rot={-3} at={t.at('strange')} color={BONE} />}
-          </Ph>
+          </Desk>
         )}
       </AbsoluteFill>
     </AbsoluteFill>
@@ -89,7 +89,7 @@ const Names: React.FC<{t: TL}> = ({t}) => {
 };
 
 const Monument: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch06_bly/mitchell_monument_usfs_2007.jpg" fx={960} fy={700} a={t.at('They were the') - 1} b={t.at('And some')} z0={1.02} z1={1.1} band="bottom"
+  <Desk p="ch06_bly/mitchell_monument_usfs_2007.jpg" box={[380, 70, 1160, 700]} at={t.at('They were the') - 1} rot={-2}
     tag="The Mitchell Monument, Fremont-Winema National Forest · US Forest Service">
     {() => (
       <>
@@ -98,11 +98,11 @@ const Monument: React.FC<{t: TL}> = ({t}) => (
         <Note text="a few weeks later: the warning" x={900} y={120} size={46} rot={-2} at={t.at('A few weeks')} color="#9CC9C4" />
       </>
     )}
-  </Ph>
+  </Desk>
 );
 
 const StillThere: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch06_bly/forest_fog_fremont_winema_usfs.jpg" fx={1920} fy={1200} a={t.at('And some') - 1} b={t.at('About forty')} z0={1.04} z1={1.12} band="bottom"
+  <Desk p="ch06_bly/forest_fog_fremont_winema_usfs.jpg" box={[380, 70, 1160, 700]} at={t.at('And some') - 1} rot={-2}
     tag="Southern Oregon's forests · US Forest Service">
     {() => (
       <>
@@ -110,7 +110,7 @@ const StillThere: React.FC<{t: TL}> = ({t}) => (
         <Note text="2014, British Columbia: one found half buried; a bomb team blew it up" x={120} y={920} size={42} rot={-3} at={t.at('In 2014')} color="#9CC9C4" />
       </>
     )}
-  </Ph>
+  </Desk>
 );
 
 /** "About forty years after the picnic, a man arrived in Bly carrying a gift... from Japan." One crane, drawn on. */

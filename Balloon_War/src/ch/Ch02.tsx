@@ -5,11 +5,11 @@ import React from 'react';
 import {AbsoluteFill, interpolate} from 'remotion';
 import words from '../../public/audio/ch02_the_protector.words.json';
 import {clamp} from '../lib/anim';
-import {Highlight, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
+import {Arrow, Highlight, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {along, Bed, Sketch, type P} from '../draw';
-import {CORAL, Cutout, ORANGE, P3, Ph} from '../bw';
+import {CORAL, Cut, Cutout, Desk, ORANGE} from '../bw';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
@@ -29,29 +29,24 @@ const DrawnBalloon: React.FC<{x: number; y: number; s: number; at: number; fill?
 const PLANE: P[] = [[0, 18], [20, 8], [120, 6], [148, 0], [162, 8], [200, 12], [206, 18], [200, 24], [160, 26], [120, 30], [24, 28]];
 const WING: P[] = [[70, 18], [140, 18], [104, 46]];
 
-/** "June 6, 1944. D-Day." */
+/** "June 6, 1944. D-Day." The fleet photo as a card on the desk. */
 const Fleet: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/invasion_fleet_balloon_barrage_1944.jpg" fx={2000} fy={1500} a={0} b={t.at('And floating')} z0={1.3} z1={1.4} band="top"
+  <Desk p="ch02_protector/invasion_fleet_balloon_barrage_1944.jpg" box={[780, 260, 1080, 700]} at={0} rot={2}
     tag="The invasion fleet off Normandy under a barrage of balloons, June 1944 · US Army Air Forces">
-    {() => (
-      <>
-        <Highlight text="JUNE 6, 1944" x={110} y={90} size={100} at={t.at('June')} seed={21} rot={-2} />
-        <Stamp text="D-DAY" x={1300} y={70} at={t.at('D-Day')} size={160} rot={-5} />
-        <Note text="thousands of ships" x={120} y={260} size={56} rot={-3} at={t.at('Thousands')} color="#ffffff" />
-      </>
-    )}
-  </Ph>
+    <Highlight text="JUNE 6, 1944" x={110} y={90} size={100} at={t.at('June')} seed={21} rot={-2} />
+    <Stamp text="D-DAY" x={1380} y={70} at={t.at('D-Day')} size={150} rot={-5} />
+    <Note text="thousands of ships" x={120} y={400} size={60} rot={-3} at={t.at('Thousands')} color="#ffffff" />
+  </Desk>
 );
 
 /** "And floating over a lot of those ships are balloons." */
 const Umbrella: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/lst_rhino_under_balloon_umbrella_1944.jpg" fx={2830} fy={2000} a={t.at('And floating') - 1} b={t.at("They're called")} z0={1.25} z1={1.33}
+  <Desk p="ch02_protector/lst_rhino_under_balloon_umbrella_1944.jpg" box={[640, 150, 1200, 800]} at={t.at('And floating') - 1} rot={-2} pos={[0.5, 0.45]}
     tag="Landing ships unload under a balloon umbrella, Normandy, June 1944 · US Navy">
-    {(S) => {
-      const [bx, by] = S(2830, 1250);
-      return <Loop cx={bx} cy={by} rx={330} ry={150} at={t.at('balloons.')} seed={22} color={CORAL} width={7} />;
-    }}
-  </Ph>
+    <Note text="and floating" x={110} y={380} size={60} rot={-3} at={t.at('And floating')} color="#ffffff" />
+    <Note text="over the ships:" x={130} y={480} size={60} rot={-3} at={t.at('those ships')} color="#ffffff" />
+    <Note text="balloons" x={150} y={590} size={84} rot={-3} at={t.at('balloons.')} color={CORAL} />
+  </Desk>
 );
 
 /** The cable diagram: a balloon on a cable over a ship; a plane dives, the cable twangs, the plane climbs away. */
@@ -118,49 +113,43 @@ const Cable: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** "These were small ones, about 35 feet long" */
+/** "These were small ones, about 35 feet long": the ship on a card, its balloon in coral. */
 const Beached: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/lst388_beached_under_balloon_80g252794.jpg" fx={1900} fy={1650} a={t.at('These were') - 1} b={t.at('Soldiers walked')} z0={1.0} z1={1.03} band="bottom"
-    tag="A landing ship beached at low tide under its balloon, Normandy, June 1944 · US Navy" m="lst388_balloon" traceAt={t.at('small ones')}>
-    {(S) => {
-      const [bx, by] = S(1850, 850);
-      return (
-        <>
-          <Note text="about 35 feet long" x={bx + 60} y={by - 30} size={56} rot={-3} at={t.at('35')} color="#ffffff" />
-          <Note text="they came ashore with the troops" x={120} y={900} size={52} rot={-3} at={t.at('come ashore')} />
-        </>
-      );
-    }}
-  </Ph>
+  <Desk p="ch02_protector/lst388_beached_under_balloon_80g252794.jpg" box={[760, 100, 1080, 860]} at={t.at('These were') - 1} rot={1} m="lst388_balloon" traceAt={t.at('small ones')}
+    tag="A landing ship beached at low tide under its balloon, Normandy, June 1944 · US Navy">
+    <Note text="small ones:" x={110} y={260} size={60} rot={-3} at={t.at('small ones')} color="#ffffff" />
+    <Note text="about 35 feet long" x={120} y={360} size={60} rot={-3} at={t.at('35')} color={CORAL} />
+    <Arrow x1={680} y1={400} x2={1150} y2={360} bow={-40} width={7} at={t.at('35') + 4} />
+    <Note text="they came ashore" x={110} y={720} size={56} rot={-3} at={t.at('come ashore')} />
+    <Note text="with the troops" x={130} y={810} size={56} rot={-3} at={t.at('come ashore') + 6} />
+  </Desk>
 );
 
-/** The 320th walk a balloon up the beach (3D). */
+/** The 320th walk a balloon up the beach: the balloon and its handler, cut out. */
 const Walk: React.FC<{t: TL}> = ({t}) => (
-  <P3 name="ch02_320th" a={t.at('Soldiers walked') - 1} b={t.at('They were the')} dolly={-160} yaw={[2.5, -2.5]} pan={[-30, 30]} band="bottom"
+  <Cut p="ch02_protector/320th_walk_balloon_to_winch_1944.jpg" m="walk320" box={[1000, -70, 900, 1130]} at={t.at('Soldiers walked') - 1} tint={false} traceAt={t.at('Soldiers walked') + 6}
     tag="Men of the 320th Barrage Balloon Battalion, Normandy, 1944 · US Army Signal Corps (NARA 111-SC-191713)">
-    <Note text="walked up the beach by hand" x={120} y={880} size={54} rot={-3} at={t.at('Soldiers walked')} color="#ffffff" />
-    <Note text="(a very large, very flammable dog)" x={980} y={180} size={50} rot={-3} at={t.at('very flammable')} color={CORAL} />
-    <Loop cx={1180} cy={880} rx={420} ry={210} at={t.at('men holding')} seed={24} width={7} />
-    <Note text="who held the cables?" x={120} y={970} size={46} rot={-3} at={t.at('weren\'t who')} />
-  </P3>
+    <Note text="walked up the beach by hand" x={110} y={260} size={56} rot={-3} at={t.at('Soldiers walked')} color="#ffffff" />
+    <Note text="like walking a very large," x={120} y={400} size={52} rot={-3} at={t.at('very large')} color={CORAL} />
+    <Note text="very flammable dog" x={140} y={480} size={52} rot={-3} at={t.at('very flammable')} color={CORAL} />
+    <Note text="who held the cables?" x={120} y={800} size={60} rot={-3} at={t.at('weren\'t who')} />
+  </Cut>
 );
 
 /** "They were the 320th Barrage Balloon Battalion." */
 const Battalion: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Ph p="ch02_protector/omaha_beachhead_panorama_balloons_1944.jpg" fx={1920} fy={1500} a={t.at('They were the') - 1} b={t.at("That's worth")} z0={1.3} z1={1.4} band="bottom"
+    <Desk p="ch02_protector/omaha_beachhead_panorama_balloons_1944.jpg" box={[1080, 330, 780, 500]} at={t.at('They were the') - 1} rot={2}
       tag="The Omaha Beach beachhead under barrage balloons, June 1944 · US Army Signal Corps">
-      {() => (
         <>
           {g >= t.at('320th') && <Highlight text="THE 320TH BARRAGE" x={110} y={90} size={96} at={t.at('320th')} seed={25} rot={-2} />}
           {g >= t.at('320th') + 6 && <Highlight text="BALLOON BATTALION" x={150} y={230} size={96} at={t.at('320th') + 6} seed={26} rot={-3} />}
-          <Note text="about 600 men" x={120} y={760} size={58} rot={-3} at={t.at('About 600')} color="#ffffff" />
-          <Note text="every one of them Black" x={140} y={850} size={58} rot={-3} at={t.at('every one')} color="#ffffff" />
-          <Note text="the only Black combat unit on the beaches" x={160} y={950} size={50} rot={-3} at={t.at('only Black')} color={CORAL} />
+          <Note text="about 600 men" x={120} y={640} size={58} rot={-3} at={t.at('About 600')} color="#ffffff" />
+          <Note text="every one of them Black" x={140} y={740} size={58} rot={-3} at={t.at('every one')} color="#ffffff" />
+          <Note text="the only Black combat unit on the beaches" x={160} y={890} size={54} rot={-3} at={t.at('only Black')} color={CORAL} />
         </>
-      )}
-    </Ph>
+    </Desk>
   );
 };
 
@@ -236,21 +225,17 @@ const Woodson: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** "His landing craft was hit … kept going for about 30 hours … about 200 men." */
+/** "His landing craft was hit … kept going for about 30 hours … about 200 men." Medics at work, cut out (not Woodson). */
 const AidStation: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch02_protector/medics_first_aid_utah_beach_1944.jpg" fx={1990} fy={1500} a={t.at('His landing') - 1} b={t.at('He was recommended')} z0={1.0} z1={1.08} band="top"
+  <Cut p="ch02_protector/medics_first_aid_utah_beach_1944.jpg" m="medics" box={[960, 200, 920, 780]} at={t.at('His landing') - 1} tint={false} traceAt={t.at('aid station')}
     tag="Army medics give first aid on Utah Beach, June 6, 1944 (not Woodson) · US Army Signal Corps">
-    {() => (
-      <>
-        <AbsoluteFill style={{background: 'linear-gradient(transparent 62%, rgba(0,0,0,0.72) 100%)'}} />
-        <Note text="his landing craft was hit. He was wounded." x={110} y={110} size={52} rot={-3} at={t.at('was hit')} color="#ffffff" />
-        <Note text="an aid station on the sand" x={140} y={210} size={52} rot={-3} at={t.at('aid station')} />
-        <Stamp text="30 HOURS" x={110} y={780} at={t.at('30 hours')} size={130} rot={-4} />
-        <Stamp text="~200 MEN" x={1100} y={780} at={t.at('200')} size={130} rot={-3} color={CORAL} />
-        <Note text="(credited with treating)" x={1110} y={940} size={44} rot={-3} at={t.at('credited')} />
-      </>
-    )}
-  </Ph>
+    <Note text="his landing craft was hit" x={110} y={110} size={54} rot={-3} at={t.at('was hit')} color="#ffffff" />
+    <Note text="he was wounded" x={130} y={200} size={54} rot={-3} at={t.at('wounded')} color="#ffffff" />
+    <Note text="an aid station on the sand" x={140} y={310} size={54} rot={-3} at={t.at('aid station')} />
+    <Stamp text="30 HOURS" x={110} y={560} at={t.at('30 hours')} size={130} rot={-4} />
+    <Stamp text="~200 MEN" x={110} y={760} at={t.at('200')} size={130} rot={-3} color={CORAL} />
+    <Note text="(credited with treating)" x={130} y={920} size={44} rot={-3} at={t.at('credited')} />
+  </Cut>
 );
 
 /** The recommendation, and the paperwork that disappeared. */
@@ -279,9 +264,8 @@ const Sand: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <Ph p="ch02_protector/woodson_dsc_omaha_2024.jpg" fx={480} fy={300} a={t.at('In June') - 1} b={t.at('Those balloons')} z0={1.02} z1={1.12} color band="top"
+    <Cut p="ch02_protector/woodson_dsc_omaha_2024.jpg" m="dsc_medal" box={[1060, 380, 760, 420]} valign="center" at={t.at('In June') - 1} traceAt={t.at('Distinguished')}
       tag="Woodson's Distinguished Service Cross on Omaha Beach, June 3, 2024 · US Army">
-      {() => (
         <>
           {g >= t.at('June 2024') && <Highlight text="JUNE 2024" x={110} y={90} size={96} at={t.at('June 2024')} seed={29} rot={-2} />}
           <Note text="eighty years after D-Day" x={120} y={240} size={56} rot={-3} at={t.at('eighty years')} color="#ffffff" />
@@ -289,8 +273,7 @@ const Sand: React.FC<{t: TL}> = ({t}) => {
           <Note text="the Distinguished Service Cross" x={1000} y={800} size={54} rot={-3} at={t.at('Distinguished')} color="#ffffff" />
           <Note text="still no Medal of Honor" x={1050} y={900} size={58} rot={-3} at={t.at('still has')} color={pal.subject} />
         </>
-      )}
-    </Ph>
+    </Cut>
   );
 };
 
@@ -302,9 +285,7 @@ const Invent: React.FC<{t: TL}> = ({t}) => {
   const tank: P[] = [[0, 80], [20, 50], [90, 48], [110, 20], [190, 20], [210, 48], [280, 50], [300, 80], [280, 112], [200, 118], [100, 118], [20, 112], [0, 80]];
   return (
     <AbsoluteFill>
-      <Ph p="ch02_protector/camp_tyson_trainees_under_balloons_owi.jpg" fx={2000} fy={1200} a={t.at('Those balloons') - 1} b={t.at('another unit')} z0={1.1} z1={1.16} band={null}>
-        {() => null}
-      </Ph>
+      <Desk p="ch02_protector/camp_tyson_trainees_under_balloons_owi.jpg" box={[760, 200, 1040, 700]} at={t.at('Those balloons') - 1} rot={-2} />
       {g >= a - 6 && <AbsoluteFill style={{background: 'rgba(11,11,11,0.82)', opacity: interpolate(g, [a - 6, a + 4], [0, 1], clamp)}} />}
       <Note text="protected an army" x={120} y={110} size={60} rot={-3} at={t.at('protected')} color="#ffffff" />
       <Sketch pts={flat} x={660} y={420} s={2} at={a} dur={8} width={7} closed to={tank} ma={t.at('using air')} mb={t.at('using air') + 20} fill="#24676B" fillOpacity={0.5} />

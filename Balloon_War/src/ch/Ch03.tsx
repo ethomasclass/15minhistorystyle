@@ -10,7 +10,7 @@ import {Highlight, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, PhotoCard, Quote, Stamp, type TL, useScene} from '../kit/shell';
 import {Bed, Sketch, type P} from '../draw';
-import {CORAL, ORANGE, P3, Ph} from '../bw';
+import {CORAL, Cut, Desk, ORANGE} from '../bw';
 
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
@@ -45,15 +45,15 @@ const Cyclist: React.FC<{x: number; y: number; at: number}> = ({x, y, at}) => (
   </>
 );
 
-/** "a unit whose main weapons were... inflatable tanks." (3D; tagged honestly: this decoy is in Italy.) */
+/** "a unit whose main weapons were... inflatable tanks." Cut out on the desk (tagged honestly: this decoy is in Italy). */
 const TwoTanks: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <P3 name="ch03_two_tanks" a={0} b={t.at('Officially')} dolly={200} yaw={[-2.5, 2]} band="top"
+    <Cut p="ch03_fake/rubber_tank_beside_real_tank_anzio_1944.jpg" m="two_tanks" box={[560, 300, 1280, 700]} at={0} traceAt={t.at('tanks.')}
       tag="A US Army inflatable decoy beside a real Sherman, Anzio, Italy, 1944 (not the Ghost Army's own) · US Army Signal Corps">
       {g >= t.at('inflatable') && <Highlight text="INFLATABLE TANKS" x={110} y={90} size={100} at={t.at('inflatable')} seed={31} rot={-2} />}
-      <Loop cx={1180} cy={640} rx={520} ry={280} at={t.at('tanks.')} seed={32} color={CORAL} width={7} />
-    </P3>
+      <Note text="its main weapons:" x={120} y={250} size={56} rot={-3} at={t.at('main weapons')} color="#ffffff" />
+    </Cut>
   );
 };
 
@@ -68,7 +68,7 @@ const Name: React.FC<{t: TL}> = ({t}) => {
       <Note text="about 1,100 men" x={140} y={480} size={64} rot={-3} at={t.at('About')} color="#ffffff" />
       <Note text="lots of them artists" x={160} y={590} size={64} rot={-3} at={t.at('artists')} color={pal.subject} />
       <Note text="from art schools and ad agencies" x={180} y={700} size={50} rot={-3} at={t.at('recruited')} />
-      <PhotoCard src="img/ch03_fake/replica_dummy_tank_spy_museum_cc0.jpg" x={1060} y={430} w={760} h={520} rot={2} at={t.at('About')} filter="contrast(1.05) saturate(0.85)" />
+      <PhotoCard src="img/ch03_fake/replica_dummy_tank_spy_museum_cc0.jpg" x={1060} y={430} w={760} h={520} rot={2} at={t.at('About')} />
       <Tag text="A replica of a Ghost Army inflatable Sherman, International Spy Museum · CC0" />
     </AbsoluteFill>
   );
@@ -151,12 +151,13 @@ const SoundTruck: React.FC<{t: TL}> = ({t}) => {
 const Theater: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <P3 name="ch03_place_tank" a={t.at('Basically') - 1} b={t.at('One of')} dolly={220} yaw={[2, -2]} band="top"
+    <Cut p="ch03_fake/soldiers_place_rubber_tank_anzio_1944.jpg" m="place_tank" box={[620, 340, 1220, 640]} at={t.at('Basically') - 1} tint={false}
       tag="Soldiers place a rubber tank decoy under netting, Anzio, Italy, 1944 · US Army Signal Corps">
       {g >= t.at('most dangerous') && <Highlight text="THE MOST DANGEROUS" x={110} y={80} size={84} at={t.at('most dangerous')} seed={33} rot={-2} />}
       {g >= t.at('theater') && <Highlight text="THEATER GROUP IN HISTORY" x={140} y={200} size={84} at={t.at('theater')} seed={34} rot={-3} />}
-      <Note text="but could it fool anyone?" x={1100} y={860} size={60} rot={-3} at={t.at('But could')} color={CORAL} />
-    </P3>
+      <Note text="but could it" x={110} y={560} size={60} rot={-3} at={t.at('But could')} color={CORAL} />
+      <Note text="fool anyone?" x={130} y={660} size={60} rot={-3} at={t.at('But could') + 6} color={CORAL} />
+    </Cut>
   );
 };
 
@@ -238,19 +239,13 @@ const Scale: React.FC<{t: TL}> = ({t}) => {
 
 /** "more than 20 fake operations"; the colonel who was fooled. */
 const Colonel: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch03_fake/rubber_tank_side_view_anzio_1944.jpg" fx={1400} fy={1150} a={t.at('The Ghost Army pulled') - 1} b={t.at('So why')} z0={1.1} z1={1.24} band={null}
-    m="rubber_tank" traceAt={t.at('fooled')} depth={1.08}>
-    {() => (
-      <>
-        <AbsoluteFill style={{background: 'rgba(8,8,8,0.45)'}} />
-        <Stamp text="20+ FAKE OPERATIONS" x={110} y={90} at={t.at('more than')} size={110} rot={-4} />
-        <Note text="sometimes they fooled their own side" x={120} y={260} size={54} rot={-3} at={t.at('Sometimes')} color="#ffffff" />
-        <Quote text="Well, son, you certainly could have fooled me." at={t.at('Well, son')} x={200} y={480} w={1500} size={78} who="a colonel who missed the briefing" />
-        <Note text="(which was the whole point)" x={960} y={900} size={54} rot={-3} at={t.at('Which, to')} color={CORAL} />
-        <Tag text="A US Army rubber tank decoy, Anzio, Italy, 1944 · US Army Signal Corps" />
-      </>
-    )}
-  </Ph>
+  <Cut p="ch03_fake/rubber_tank_side_view_anzio_1944.jpg" m="rubber_tank" box={[960, 330, 920, 560]} at={t.at('The Ghost Army pulled') - 1} traceAt={t.at('fooled')}
+    tag="A US Army rubber tank decoy, Anzio, Italy, 1944 · US Army Signal Corps">
+    <Stamp text="20+ FAKE OPERATIONS" x={110} y={80} at={t.at('more than')} size={110} rot={-4} />
+    <Note text="sometimes they fooled their own side" x={120} y={240} size={54} rot={-3} at={t.at('Sometimes')} color="#ffffff" />
+    <Quote text="Well, son, you certainly could have fooled me." at={t.at('Well, son')} x={110} y={400} w={800} size={66} who="a colonel who missed the briefing" />
+    <Note text="(which was the whole point)" x={1000} y={940} size={54} rot={-3} at={t.at('Which, to')} color={CORAL} />
+  </Cut>
 );
 
 /** Secret for forty years, then the Gold Medal (color: now). */
@@ -269,16 +264,14 @@ const Secret: React.FC<{t: TL}> = ({t}) => {
           <Note text="for more than forty years" x={620} y={900} size={58} rot={-3} at={t.at('forty')} color="#ffffff" />
         </AbsoluteFill>
       ) : (
-        <Ph p="ch03_fake/ghost_army_congressional_gold_medal.jpg" fx={1920} fy={1440} a={medal} b={t.at('And the idea')} z0={1.04} z1={1.14} color band="top"
+        <Cut p="ch03_fake/ghost_army_congressional_gold_medal.jpg" m="gold_medal" box={[760, 300, 1100, 560]} valign="center" at={medal} tint={false}
           tag="The Ghost Army Congressional Gold Medal, presented at the US Capitol, March 2024 · US Mint">
-          {() => (
             <>
               {g >= t.at('2024') && <Highlight text="2024" x={110} y={90} size={100} at={t.at('2024')} seed={35} rot={-2} />}
               <Note text="the Congressional Gold Medal" x={110} y={240} size={56} rot={-3} at={medal} color="#ffffff" />
-              <Note text="only seven of them still alive" x={900} y={900} size={56} rot={-3} at={t.at('only seven')} color={pal.subject} />
+              <Note text="only seven of them still alive" x={900} y={920} size={56} rot={-3} at={t.at('only seven')} color={pal.subject} />
             </>
-          )}
-        </Ph>
+        </Cut>
       )}
     </AbsoluteFill>
   );
@@ -300,7 +293,7 @@ const Today: React.FC<{t: TL}> = ({t}) => {
       <PhotoCard src="img/ch03_fake/inflatable_m47_tank_decoy_1950s_nara292565.jpg" x={110} y={260} w={640} h={460} rot={-3} at={t.at('never went')} />
       <Note text="1950s" x={150} y={770} size={50} rot={-3} at={t.at('never went')} />
       <div style={{position: 'absolute', left: 980, top: 230, width: 560, transform: `scaleY(${1 - 0.7 * flat})`, transformOrigin: '50% 100%'}}>
-        <PhotoCard src="img/ch03_fake/inflatable_scud_decoy_usaf_2009.jpg" x={0} y={0} w={500} h={600} rot={2} at={t.at('Companies')} filter="contrast(1.05) saturate(0.85)" />
+        <PhotoCard src="img/ch03_fake/inflatable_scud_decoy_usaf_2009.jpg" x={0} y={0} w={500} h={600} rot={2} at={t.at('Companies')} />
       </div>
       <Note text="still built for today's wars" x={1000} y={900} size={52} rot={-3} at={t.at('Companies')} color={ORANGE} />
       {f >= fire && f < hitF + 2 && (
@@ -322,15 +315,13 @@ const Today: React.FC<{t: TL}> = ({t}) => {
 
 /** "On the other side of the world, Japan had balloons too. Theirs weren't fake." */
 const Japan: React.FC<{t: TL}> = ({t}) => (
-  <Ph p="ch04_paper_balloon/balloon_above_clouds_342fh3b23432.jpg" fx={1300} fy={600} a={t.at('On the other') - 1} b={t.frames + 20} z0={1.05} z1={1.15} band="bottom"
+  <Desk p="ch04_paper_balloon/balloon_above_clouds_342fh3b23432.jpg" box={[900, 120, 960, 720]} at={t.at("On the other") - 1} rot={2}
     tag="A Japanese balloon high above the clouds, 1945 · US Army (NARA 342-FH)">
-    {() => (
-      <>
-        <Note text="Japan had balloons too" x={120} y={860} size={60} rot={-3} at={t.at('Japan')} color="#ffffff" />
-        <Note text="theirs weren't fake" x={1150} y={860} size={64} rot={-3} at={t.at("Theirs")} color={CORAL} />
-      </>
-    )}
-  </Ph>
+    <Note text="on the other side" x={110} y={300} size={58} rot={-3} at={t.at('other side')} color="#ffffff" />
+    <Note text="of the world…" x={130} y={390} size={58} rot={-3} at={t.at('of the world')} color="#ffffff" />
+    <Note text="Japan had balloons too" x={110} y={760} size={60} rot={-3} at={t.at('Japan')} color="#ffffff" />
+    <Note text="theirs weren't fake" x={130} y={870} size={64} rot={-3} at={t.at('Theirs')} color={CORAL} />
+  </Desk>
 );
 
 const Body: React.FC = () => {

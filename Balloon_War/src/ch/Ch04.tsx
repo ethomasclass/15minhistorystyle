@@ -9,7 +9,7 @@ import {Highlight, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {along, Bed, resample, Sketch, smoothPath, type P} from '../draw';
-import {CORAL, Cutout, ORANGE, P3, Ph, Redact} from '../bw';
+import {CORAL, Cut, Cutout, Desk, ORANGE, Redact} from '../bw';
 import {Map, Wind} from '../pacmap';
 import {INCIDENTS} from '../fugo';
 
@@ -21,30 +21,29 @@ const TEAL = '#2FE0C4';
 const Launch: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Ph p="ch04_paper_balloon/japanese_crew_filling_balloon_wind.jpg" fx={1300} fy={600} a={0} b={t.at('Each one')} z0={1.04} z1={1.14} band="top"
+    <Desk p="ch04_paper_balloon/japanese_crew_filling_balloon_wind.jpg" box={[420, 360, 1000, 660]} at={0} rot={-2}
       tag="A Japanese crew launches a balloon, 1944–45 · from R. Mikesh, Smithsonian, 1973 (public domain)">
-      {() => (
         <>
           {g >= t.at('late 1944') && <Highlight text="LATE 1944" x={110} y={90} size={100} at={t.at('late 1944')} seed={41} rot={-2} />}
           <Note text="across the Pacific" x={120} y={240} size={56} rot={-3} at={t.at('across')} color="#ffffff" />
           <Note text="not spy balloons…" x={1100} y={160} size={58} rot={-3} at={t.at('Not spy')} color="#ffffff" />
-          <Stamp text="BOMBS" x={1180} y={260} at={t.at('Bombs')} size={170} rot={-6} color={CORAL} />
+          <Stamp text="BOMBS" x={1180} y={230} at={t.at('Bombs')} size={150} rot={-6} color={CORAL} />
         </>
-      )}
-    </Ph>
+    </Desk>
   );
 };
 
-/** "Each one was about 33 feet wide. And they were made of paper." (3D) */
+/** "Each one was about 33 feet wide. And they were made of paper." The captured balloon, cut out, measured. */
 const Wide: React.FC<{t: TL}> = ({t}) => (
-  <P3 name="ch04_moffett" a={t.at('Each one') - 1} b={t.at('thousands')} dolly={200} yaw={[-2, 2]} band="bottom"
+  <Cut p="ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg" m="moffett" box={[640, 160, 820, 820]} at={t.at('Each one') - 1} tint={false} traceAt={t.at('Each one') + 6}
     tag="A captured balloon inflated for testing, Moffett Field, California, 1945 · US Navy">
-    <Sketch pts={[[700, 520], [1220, 520]]} x={0} y={0} at={t.at('33')} dur={8} width={6} color={ORANGE} />
-    <Sketch pts={[[700, 500], [700, 540]]} x={0} y={0} at={t.at('33')} dur={3} width={6} color={ORANGE} smooth={false} />
-    <Sketch pts={[[1220, 500], [1220, 540]]} x={0} y={0} at={t.at('33') + 6} dur={3} width={6} color={ORANGE} smooth={false} />
-    <Note text="about 33 feet wide" x={760} y={420} size={56} rot={-3} at={t.at('33')} color="#ffffff" />
-    <Note text="made of PAPER" x={120} y={880} size={72} rot={-3} at={t.at('paper:')} color={CORAL} />
-  </P3>
+    <Sketch pts={[[670, 530], [1430, 530]]} x={0} y={0} at={t.at('33')} dur={8} width={6} color={ORANGE} />
+    <Sketch pts={[[670, 505], [670, 555]]} x={0} y={0} at={t.at('33')} dur={3} width={6} color={ORANGE} smooth={false} />
+    <Sketch pts={[[1430, 505], [1430, 555]]} x={0} y={0} at={t.at('33') + 6} dur={3} width={6} color={ORANGE} smooth={false} />
+    <Note text="about 33 feet wide" x={1180} y={600} size={56} rot={-3} at={t.at('33')} color="#ffffff" />
+    <Note text="made of" x={120} y={760} size={64} rot={-3} at={t.at('paper:')} color="#ffffff" />
+    <Note text="PAPER" x={140} y={860} size={96} rot={-3} at={t.at('paper:')} color={CORAL} />
+  </Cut>
 );
 
 /** "thousands of small sheets … glued together with a paste … edible … workers got caught eating it." A bite out of the photo. */

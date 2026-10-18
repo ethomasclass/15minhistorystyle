@@ -8,7 +8,7 @@ import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, PhotoCard, Stamp, type TL, useScene} from '../kit/shell';
 import {Bed, Sketch, type P} from '../draw';
-import {CORAL, ORANGE, P3, Ph, Redact} from '../bw';
+import {CORAL, Desk, ORANGE, Redact} from '../bw';
 import {CRANE} from './Ch06';
 
 const N = words as Narration;
@@ -19,7 +19,7 @@ export const CH07_FRAMES = chapterFrames(N, LEAD) + EXTRA;
 const Takeshita: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   return (
-    <Ph p="ch07_answer/tule_lake_war_relocation_center_russell_lee_1942.jpg" fx={1920} fy={1500} a={0} b={t.at('In 1987')} z0={1.04} z1={1.12} band="top"
+    <Desk p="ch07_answer/tule_lake_war_relocation_center_russell_lee_1942.jpg" box={[200, 500, 900, 520]} at={0} rot={-2}
       tag="Tule Lake camp, California, 1942 · Russell Lee, FSA  |  Card: boys at recess · War Relocation Authority">
       {() => (
         <>
@@ -31,7 +31,7 @@ const Takeshita: React.FC<{t: TL}> = ({t}) => {
           <Note text="boys at recess, Tule Lake" x={1260} y={940} size={42} rot={-3} at={t.at('boy') + 6} color="#ffffff" />
         </>
       )}
-    </Ph>
+    </Desk>
   );
 };
 
@@ -39,16 +39,16 @@ const Cranes: React.FC<{t: TL}> = ({t}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
-    <P3 name="ch07_cranes" a={t.at('In 1987') - 1} b={t.at('So let\'s')} dolly={220} yaw={[-2, 2]} color band="bottom"
-      tag="Strings of a thousand paper cranes (illustrative), Nagasaki · CC0">
+    <Desk p="ch07_answer/origami_cranes_nagasaki_cc0.jpg" box={[300, 220, 880, 560]} at={t.at('In 1987') - 1} rot={-2}
+      tag="Strings of a thousand paper cranes (illustrative), Nagasaki · CC0  |  Schoolgirls pasting balloon paper · R. Mikesh, 1973">
       {g >= t.at('1987') && <Highlight text="1987" x={110} y={90} size={100} at={t.at('1987')} seed={72} rot={-2} />}
-      <Note text="a thousand paper cranes" x={110} y={240} size={60} rot={-3} at={t.at('thousand paper')} color="#ffffff" />
+      <Note text="a thousand paper cranes" x={500} y={110} size={60} rot={-3} at={t.at('thousand paper')} color="#ffffff" />
       <PhotoCard src="img/ch04_paper_balloon/schoolgirls_pasting_envelope_fig12.jpg" x={1300} y={150} w={500} h={400} rot={3} at={t.at('folded')} />
       <Note text="folded by the women who," x={1240} y={600} size={42} rot={-3} at={t.at('teenage')} color="#ffffff" />
       <Note text="as girls, made the balloons" x={1260} y={670} size={42} rot={-3} at={t.at('teenage') + 8} color="#ffffff" />
       <Note text="a wish for peace" x={120} y={820} size={60} rot={-3} at={t.at('wish')} color={ORANGE} />
       <Note text="to show their regret" x={120} y={920} size={60} rot={-3} at={t.at('regret')} color={pal.subject} />
-    </P3>
+    </Desk>
   );
 };
 
