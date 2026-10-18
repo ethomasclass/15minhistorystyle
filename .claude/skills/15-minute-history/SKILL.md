@@ -99,6 +99,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - **Archival first.** Real people only from period images. AI paintings only for gaps, never showing a
   recognizable real person, all sharing one style paragraph. **Ask before writing AI prompts**: some videos use none
   (*Grip Tighter*, *Say It Ain't So*); an engraving detail, a period document or a drawn diagram can fill a gap.
+- **Cut-outs on the notebook.** Every photo sits on the dark ruled paper, its subject cut out (`Cut`) or, with no
+  single subject, as a card (`Desk`). Never full-screen slow pushes, 3D photo fly-throughs or color photos.
 - **One subject in color per image, a source tag on every image, text never off the frame edge.** Run the text
   probe on every chapter before each render the user will see.
 - **Check your own work visually before the user does**: contact sheets of stills, the text-edge probe, the

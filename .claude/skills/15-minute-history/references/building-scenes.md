@@ -73,7 +73,9 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `Loop` (Kit) | Hand-drawn circle around something | `cx cy rx ry at seed tilt` |
 | `Tag` (Kit) | Source credit, mono caps, bottom-left | `text` (put one on every image) |
 | `Picture` + `Tint` + `Traced` (Kit) | B&W image, coral subject, teal outline | `place size mask paths` |
-| `Photo` (shell) | Full-bleed image with slow push | `src size fx fy z0 z1 a b mask tint traceAt children(place)` |
+| **`Cut` (desk)** | **The default for a photo**: its subject cut out, on the notebook paper | `name mask size box at traceAt tint valign bare` |
+| **`Desk` (desk)** | Photo with no single subject (landscape, crowd, room) as a cream card on the paper | `src size box at rot pos mask traceAt children(S)` |
+| `Photo` (shell) | Full-bleed image (rarely: maps and documents only; the user dislikes slow-push photo scenes) | `src size fx fy z0 z1 a b mask tint traceAt children(place)` |
 | `CropCard` (shell) | Image on a cream card, cropped window | `src size x y w h fx fy scale rot at mask tint children(S)` |
 | `PhotoCard` / `Card` | Whole image on a card | `src x y w h rot at` |
 | `Definition` (shell) | Vocab bar: term · definition | `term def at x y w` |
@@ -97,8 +99,13 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
 
 ## 4. Scene recipes
 
-- **Full-bleed archival image**: `Photo` with a mask on the subject, title top-left (x 100–140, y 90–120), notes
-  on the empty side, `Tag` at the bottom-left. Push 1.02 → 1.1 across the scene.
+- **Cut-out on the paper (the default)**: `Cut` with the subject in a box on one side (e.g. x 900–1860), title
+  top-left (x 100–140, y 90–120), notes stacked on the empty side, `Tag` bottom-left. Coral on the one key subject;
+  `tint={false}` for supporting cut-outs. Several cut-outs side by side: `bare` on each over one `DarkPaper`.
+- **Card on the desk**: `Desk` for a landscape, crowd or room (or a failed mask), about 1000–1160 wide, rotated ±1–2°,
+  notes in the space beside or below it. With `mask` the subject inside the card is tinted and traced.
+- **Not house style**: full-screen photos with slow pushes ("Ken Burns"), 3D depth fly-throughs of photos, and color
+  photos (modern ones too). *The Balloon War* tried them and the user rejected them.
 - **Subject left, notes right**: `CropCard` at x 140–220 (about 520×700), titles and notes stacked at x 860+.
 - **Desk of cards**: `DarkPaper`, 2–3 cards across the top two-thirds, alternating rotation ±2–4°, title and notes
   along the bottom.

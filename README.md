@@ -4,10 +4,11 @@
 
 Everything that makes a 15 Minute History video look and sound like one: the logo, colours and fonts, every music cue and
 sound effect, the on-screen techniques, the writing and packaging conventions, and a tested starter project. It was collected from
-all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck* and *Say It Ain't So*.
+all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck*,
+*Say It Ain't So*, *When Europe Ate Mummies* and *The Balloon War*.
 
 **The look in one paragraph.** A researcher's desk at night. Black-and-white archival engravings and photographs sit on dark, faintly
-ruled paper. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
+ruled paper: subjects cut out of their photos, or photos dropped on the desk as cream cards, never full-screen slow pushes. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
 stamped onto torn strips of orange tape. Lowercase handwritten teal notes and bowed arrows explain the picture. Drawn marks move at a
 choppy 12 drawings a second while the camera glides. Every cut is hard and lands on a spoken word. The voice is plain, quick and a
 little wry, and it gets quieter and slower when the subject is suffering.
@@ -17,13 +18,13 @@ little wry, and it gets quieter and slower when the subject is suffering.
 | Folder | What's in it |
 |---|---|
 | [`brand/`](brand/) | Logo files (wordmark, profile picture, banner, watermark, the intro and logo-break videos), colours, fonts, and every thumbnail so far |
-| [`music/`](music/) | **38 music cues**, one copy each, grouped by feeling, with length, loudness, the prompt that made each, and where it was used |
-| [`sfx/`](sfx/) | 18 sound effects with what each is for and its volume |
+| [`music/`](music/) | **49 music cues**, one copy each, grouped by feeling, with length, loudness, the prompt that made each, and where it was used |
+| [`sfx/`](sfx/) | 35 sound effects with what each is for and its volume |
 | [`techniques/`](techniques/) | Every on-screen technique by purpose, 20-frame look books of each video, and component code not yet in the template |
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |
 | [`.claude/skills/15-minute-history/`](.claude/skills/15-minute-history/) | The Claude skill that makes a video end to end, its reference guides, and the starter project |
-| [`projects/`](projects/) | Video projects built inside this repo (*Say It Ain't So*: `projects/Black_Sox/` on the `black-sox-video` branch; big renders via Git LFS) |
+| [`projects/`](projects/) | Video projects built inside this repo, each a complete Remotion project (script, audio, images, masks, scenes, renders): *When Europe Ate Mummies* (`projects/Mummy_Medicine/`), *The Balloon War* (`projects/Balloon_War/`), standalone Shorts, and *Say It Ain't So* (`projects/Black_Sox/`, on the `black-sox-video` branch). Big renders via Git LFS |
 
 ## The guides
 
