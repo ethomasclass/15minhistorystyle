@@ -93,8 +93,20 @@ TABLETS = (["t1", "t2", "t3", "t4", "t5", "t6"],
             "One small chip knocks off the corner: the chunk is short, the tablet is all of history.",
             "Quarter-hour notches cut in the edges, like a clock dial: a short, timed piece of history."])
 
+CLOCKS = (["q1", "q2", "q3", "q4", "q5", "q6"],
+          ["1  The dial", "2  Quarter past", "3  Twelve hours", "4  Rim quarter", "5  Rim + twelve hours",
+           "6  Five-minute chunks"],
+          ["Option 6 completed: notches at 12, 3, 6 and 9, and the diagonal break.",
+           "Options 2 and 6 together: cracks run from the 12 and 3 notches to the centre; that quarter is coral.",
+           "Quarter past, with all twelve hours notched and the quarter-hours larger.",
+           "Only the rim from 12 to 3 is coral, so the carved C stays whole and teal.",
+           "The rim quarter on a full twelve-hour dial.",
+           "The rim quarter breaks into three five-minute chunks at exact 30-degree steps."])
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "tablets":
+    if len(sys.argv) > 1 and sys.argv[1] == "clocks":
+        board(*CLOCKS, os.path.join(HERE, "clocks.png"), prefix="tablet")
+    elif len(sys.argv) > 1 and sys.argv[1] == "tablets":
         board(*TABLETS, os.path.join(HERE, "tablets.png"), prefix="tablet")
     else:
         board(*CONCEPTS, os.path.join(HERE, "concepts.png"), recommend=1)

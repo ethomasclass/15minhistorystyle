@@ -3,6 +3,7 @@
 Run: python3 build.py   (needs shapely). Writes concepts/*.svg.
 Colours are the channel palette (brand/palette.json): teal #2FE0C4, coral #FF6F61.
 """
+import math
 import os
 from shapely.geometry import Polygon, LineString, MultiPolygon, box
 from shapely.ops import unary_union
@@ -109,8 +110,8 @@ def tablet(x0, y0, x1, y1, c=30):
 def by_side(geom, cut, side):
     """Break geom along cut; side(piece) -> True puts a fragment in the first group."""
     pieces = parts(geom.difference(cut))
-    a = unary_union([p for p in pieces if side(p.centroid)])
-    b = unary_union([p for p in pieces if not side(p.centroid)])
+    a = unary_union([p for p in pieces if side(p.representative_point())])
+    b = unary_union([p for p in pieces if not side(p.representative_point())])
     return a, b
 
 
@@ -170,6 +171,73 @@ def t6_ticks():
     g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)).difference(notches)
     a, b = by_side(g, DIAG, above_diag)
     return [(TEAL, chamfer(a, 3)), (CORAL, chamfer(b, 3))]
+
+
+# ---------- Clock tablets: option 6's dial notches + option 2's quarter-hour ----------
+def dial_notches(minor=False, major=(12, 24), small=(8, 14)):
+    """Notches where the clock hours meet the tablet's edge (16..240): 12/3/6/9 always, the other eight if minor."""
+    out = []
+    for h in range(12):
+        if h % 3 and not minor:
+            continue
+        w, dep = major if h % 3 == 0 else small
+        a = math.radians(h * 30)
+        dx, dy = math.sin(a), -math.cos(a)
+        k = 112 / max(abs(dx), abs(dy))           # ray from the centre to the square's edge
+        x, y = 128 + dx * k, 128 + dy * k
+        if abs(dx) >= abs(dy):                     # left or right edge
+            out.append(box(x - dep if dx > 0 else x - 8, y - w / 2, x + 8 if dx > 0 else x + dep, y + w / 2))
+        else:                                      # top or bottom edge
+            out.append(box(x - w / 2, y - dep if dy > 0 else y - 8, x + w / 2, y + 8 if dy > 0 else y + dep))
+    return unary_union(out)
+
+
+def clock(minor=False, lift=0, five=False, seam_w=10, pivot=False, flip=False):
+    g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)).difference(dial_notches(minor))
+    if pivot:
+        g = g.difference(chamfer(box(116, 116, 140, 140), 6))
+    cuts = [seam((128, 0), (128, 128 + seam_w / 2), seam_w), seam((128 - seam_w / 2, 128), (256, 128), seam_w)]
+    if five:  # the quarter in three five-minute chunks: cracks at 30 and 60 degrees past twelve
+        for deg in (30, 60):
+            a = math.radians(deg)
+            cuts.append(seam((128, 128), (128 + 200 * math.sin(a), 128 - 200 * math.cos(a)), 8))
+    q, rest = by_side(g, unary_union(cuts), lambda c: c.x > 128 and c.y < 128)
+    if lift:
+        q = affinity.translate(q, lift, -lift)
+    a, b = (TEAL, CORAL) if not flip else (CORAL, TEAL)
+    return [(a, chamfer(rest, 3))] + [(b, chamfer(p, 3)) for p in parts(q)]
+
+
+def q1_dial():
+    """Option 6 completed: all four quarter notches, diagonal break."""
+    g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)).difference(dial_notches())
+    a, b = by_side(g, DIAG, above_diag)
+    return [(TEAL, chamfer(a, 3)), (CORAL, chamfer(b, 3))]
+
+
+def bezel(minor=False, five=False):
+    """The coral quarter is only the rim between the edge and the carved C, from 12 to 3; the C stays whole."""
+    g = tablet(16, 16, 240, 240).difference(carved_c(*SQ_C)).difference(dial_notches(minor))
+    x0, y0, x1, y1 = SQ_C[:4]
+    cuts = [seam((128, 0), (128, y0 + 4), 10), seam((x1 - 4, 128), (256, 128), 10),
+            seam((x1 + 1, 100), (x1 + 1, 128), 8)]         # free the rim from the upper half of the C's neck
+    if five:  # the rim quarter in three five-minute chunks, cracks at exactly 30 and 60 degrees past twelve
+        for deg in (30, 60):
+            a = math.radians(deg)
+            cuts.append(seam((128 + 100 * math.sin(a), 128 - 100 * math.cos(a)),
+                             (128 + 200 * math.sin(a), 128 - 200 * math.cos(a)), 8))
+    inside = box(x0 - 2, y0 - 2, x1 + 5, y1 + 2)
+    q, rest = by_side(g, unary_union(cuts),
+                      lambda c: c.x > 128 and c.y < 128 and not inside.contains(c))
+    return [(TEAL, chamfer(rest, 3))] + [(CORAL, chamfer(p, 3)) for p in parts(q)]
+
+
+CLOCKS = [("q1", q1_dial),
+          ("q2", lambda: clock()),
+          ("q3", lambda: clock(minor=True)),
+          ("q4", lambda: bezel()),
+          ("q5", lambda: bezel(minor=True)),
+          ("q6", lambda: bezel(minor=True, five=True))]
 
 
 TABLETS = [("t1", t1_split), ("t2", t2_quarter), ("t3", t3_shorts), ("t4", t4_swipe), ("t5", t5_chip), ("t6", t6_ticks)]
@@ -251,7 +319,7 @@ if __name__ == "__main__":
         write(f"concept-{key}-symbol.svg", 256, 256, layers, "Chunk History symbol")
         write(f"concept-{key}-symbol-black.svg", 256, 256, mono(layers, "#000000"), "Chunk History symbol")
         lockup(layers, f"concept-{key}-lockup.svg")
-    for key, fn in TABLETS:
+    for key, fn in TABLETS + CLOCKS:
         layers = fn()
         write(f"tablet-{key}-symbol.svg", 256, 256, layers, "Chunk History symbol")
         lockup(layers, f"tablet-{key}-lockup.svg")
