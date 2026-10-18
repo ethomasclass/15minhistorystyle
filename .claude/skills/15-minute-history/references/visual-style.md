@@ -359,8 +359,9 @@ Built in `src/ch/Ch01.tsx` (`Title`) from `TITLE`, `SUBTITLE` and `DATES` in `sr
 ## 11. Chapter breaks (built for *King Andrew*, now standard)
 
 Chapters 2 onward open on a 44-frame logo break (`LEAD` in `src/kit/shell.tsx`, drawn by `LogoBreak`): the last
-shot has already faded to black, the wordmark fades up at 62% scale, its clock wedge ticks round a quarter hour in
-three soft ticks (`sfx/tick_soft.wav` at 0.18), it fades out, and the chapter fades up over 10 frames. No chapter
+shot fades to the notebook paper (`DarkPaper`), the wordmark (clock already at a quarter hour) fades up at 50% scale while
+drifting up 20 px, with one quiet page turn (`sfx/page_turn.wav` at 0.14), it fades out, and the chapter fades up over
+10 frames. No ticks (since *The Balloon War*: the user found them grating). No chapter
 title cards between chapters: the logo is the break. Chapter 1 has no break; it runs cold open, channel intro,
 title card.
 

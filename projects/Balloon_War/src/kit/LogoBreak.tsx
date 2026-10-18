@@ -1,16 +1,16 @@
-// Chapter break: just the channel logo, kept quiet. The last shot fades to black, the "15 Minute History"
-// wordmark fades up small, its clock ticks softly round a quarter hour, and the next chapter fades up.
+// Chapter break: just the channel logo, kept subtle (from The Balloon War: the ticks were grating). The last shot
+// fades to the notebook paper, the small wordmark (clock already at a quarter hour) drifts up into view with one
+// quiet page turn, and the next chapter fades up.
 // The wordmark is the one from the channel intro (Fix Everything, src/ch/Intro.tsx), same layout.
 import React from 'react';
 import {AbsoluteFill, Audio, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp, FONT, Highlight, PAL} from './look';
+import {DarkPaper} from './common';
 
 /** Frames to fade the old shot to black, and to fade the next one up from black. */
 export const FADE = 10;
 /** Whole break. It overlaps the last FADE frames of one chapter and the first FADE of the next. */
 export const BREAK_FRAMES = 60;
-/** Frames where the clock ticks. */
-const TICKS = [22, 30, 38];
 
 const Sfx: React.FC<{at: number; src: string; volume: number}> = ({at, src, volume}) => (
   <Sequence from={at} durationInFrames={60} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
@@ -58,17 +58,16 @@ const Wordmark: React.FC<{sweep: number}> = ({sweep}) => {
 /** Lay this over the end of one chapter and the start of the next (see BreakDemo for the overlap). */
 export const LogoBreak: React.FC = () => {
   const f = useCurrentFrame();
-  // Fade to black, fade the logo up, tick the wedge round a quarter hour, fade out, fade up the next chapter.
-  const black = interpolate(f, [0, FADE, BREAK_FRAMES - FADE, BREAK_FRAMES], [0, 1, 1, 0], clamp);
-  const logo = interpolate(f, [FADE - 2, FADE + 8, BREAK_FRAMES - FADE - 8, BREAK_FRAMES - FADE], [0, 1, 1, 0], clamp);
-  // Three soft ticks, a third of a quarter hour each, the hand settling over 2 frames per tick.
-  const sweep = TICKS.reduce((acc, t) => acc + interpolate(f, [t, t + 2], [0, 1 / TICKS.length], clamp), 0);
+  const paper = interpolate(f, [0, FADE, BREAK_FRAMES - FADE, BREAK_FRAMES], [0, 1, 1, 0], clamp);
+  const logo = interpolate(f, [FADE - 2, FADE + 12, BREAK_FRAMES - FADE - 10, BREAK_FRAMES - FADE], [0, 1, 1, 0], clamp);
+  const rise = interpolate(f, [FADE - 2, BREAK_FRAMES - FADE], [14, -6], clamp);
   return (
-    <AbsoluteFill style={{background: '#000', opacity: black}}>
-      <AbsoluteFill style={{opacity: logo, transform: 'scale(0.62)', transformOrigin: '945px 540px'}}>
-        <Wordmark sweep={sweep} />
+    <AbsoluteFill style={{opacity: paper}}>
+      <DarkPaper />
+      <AbsoluteFill style={{opacity: logo, transform: `translateY(${rise}px) scale(0.5)`, transformOrigin: '945px 540px'}}>
+        <Wordmark sweep={1} />
       </AbsoluteFill>
-      {TICKS.map((t) => <Sfx key={t} at={t} src="sfx/tick_soft.wav" volume={0.18} />)}
+      <Sfx at={FADE - 4} src="sfx/page_turn.wav" volume={0.14} />
     </AbsoluteFill>
   );
 };
