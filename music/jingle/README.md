@@ -23,6 +23,12 @@ down the melody, rhythm and timing, to be remade properly in Suno.
 | **C · Turning the page** | E – A – C … B – A (a climb and a step back down) | A minor into F major | wistful, storybook |
 | **D · The locked box** | D – F – A … C♯ on a music box, over a low D drone | D minor with the C♯ left in (never quite resolves) | mysterious, curious, a secret |
 | **E · The clue** | E – G – B♭ … A, over a creeping low pizzicato under the pull-back | E minor with an added F♯, celesta B on top | something's off; detective |
+| **G · Open fifths** | D – A – E … D, cello under the piano | D with A and E, no third (neither major nor minor) | stately, timeless, neutral |
+| **H · The reflective chord** | C – G – A … E | F major 7 | warm but wistful, looking back |
+| **I · A shadow before home** | G – E – F … D, then a moment of F minor | C (add 9) | honest, a little bittersweet, then steady |
+| **J · Grounded** (CHUNK · his-to-ry rhythm) | firm low D, then A – B – A | D sus2 | steady; neither bright nor dark |
+| **K · Looking back** (CHUNK · his-to-ry rhythm) | firm low A, then C – B – G | F major 7 | warm, a little wistful |
+| **L · Steady, with a shadow** (CHUNK · his-to-ry rhythm) | firm low G, then D – E – D, a moment of C minor | G (add 9) | grounded, bittersweet, resolved |
 | **F · The dusty archive** | A – C – D – F♯ … E (A Dorian: the raised F♯ glows) | A minor 6/9 with a shimmering tremolo, left hanging | old, quiet, a question nobody answered |
 
 Files: `mockups/jingle_{A,B,C}.mp3` (audio alone) and `mockups/intro_with_jingle_{A,B,C}.mp4` (with the intro picture).

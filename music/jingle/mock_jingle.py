@@ -188,3 +188,14 @@ make("H", [(L, "C4", 0.85), (L + 0.28, "G4", 0.85), (L + 0.56, "A4", 0.9), (L + 
 #     honest, a little bittersweet, then steady. The most "earned" ending.
 make("I", [(L, "G4", 0.85), (L + 0.28, "E4", 0.8), (L + 0.56, "F4", 0.85), (L + 0.94, "D4", 0.85)],
      ["C2", "G2", "E3", "D4", "G4"], [hz("C3"), hz("G3"), hz("E4")], "C2", voice="cello", pre=["F2", "C3", "G#3", "C4"], shimmer=False)
+
+# --- "CHUNK · HIS-to-ry": one firm low note, then three quick ones (the rhythm of the name; works as a signature either way) ---
+# J · "Grounded": a firm low D, then A-B-A; ends on D with A and E (sus2): steady, neither bright nor dark.
+make("J", [(L, "D3", 1.0), (L + 0.34, "A4", 0.8), (L + 0.48, "B4", 0.8), (L + 0.62, "A4", 0.9)],
+     ["D2", "A2", "D3", "A3", "E4"], [hz("D3"), hz("A3"), hz("E4")], "D2", voice="cello", shimmer=False)
+# K · "Looking back": a firm low A, then C-B-G; ends on F major 7: warm, a little wistful.
+make("K", [(L, "A2", 1.0), (L + 0.34, "C5", 0.8), (L + 0.48, "B4", 0.8), (L + 0.62, "G4", 0.9)],
+     ["F2", "C3", "A3", "E4", "A4"], [hz("A2"), hz("E3"), hz("C4")], "A2", voice="cello", shimmer=False)
+# L · "Steady, with a shadow": a firm low G, then D-E-D; a moment of C minor, then home on G (add 9).
+make("L", [(L, "G2", 1.0), (L + 0.34, "D4", 0.8), (L + 0.48, "E4", 0.8), (L + 0.62, "D4", 0.9)],
+     ["G2", "D3", "B3", "A4", "D5"], [hz("G2"), hz("D3"), hz("B3")], "G2", voice="cello", pre=["C3", "G3", "D#4", "G4"], shimmer=False)
