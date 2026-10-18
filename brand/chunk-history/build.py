@@ -251,9 +251,8 @@ def diag(p, q, clip, s=S):
     return LineString([p, q]).buffer(s * 0.62, cap_style=FLAT).intersection(clip)
 
 
-def letter(ch, s=S, cham=8):
-    """Block capital on a 100-unit cap height with stroke s; returns (shape, advance width)."""
-    W = 76
+def letter(ch, s=S, cham=8, W=76):
+    """Block capital on a 100-unit cap height, stroke s, width W; returns (shape, advance width)."""
     m = (100 - s) / 2  # top of the middle bar
     B = lambda x, y, w, h: box(x, y, x + w, y + h)
     if ch == "C":
@@ -263,12 +262,16 @@ def letter(ch, s=S, cham=8):
     elif ch == "U":
         g = unary_union([B(0, 0, s, 100), B(W - s, 0, s, 100), B(0, 100 - s, W, s)])
     elif ch == "N":
-        W = 82
+        W = W + 6
         g = unary_union([B(0, 0, s, 100), B(W - s, 0, s, 100),
                          diag((W / 2 - 34.64, -10), (W / 2 + 34.64, 110), box(0, 0, W, 100), s)])
     elif ch == "K":
         clip = box(0, 0, W, 100)
-        g = unary_union([B(0, 0, s, 100), diag((s, 58), (s + 64, -6), clip, s), diag((s + 10, 40), (s + 70, 104), clip, s)])
+        if W >= 70:   # 45-degree arms
+            arms = [diag((s, 58), (s + 64, -6), clip, s), diag((s + 10, 40), (s + 70, 104), clip, s)]
+        else:         # narrow letters: arms aimed at the corners
+            arms = [diag((s - 2, 60), (W + 6, -6), clip, s), diag((s + 4, 44), (W + 6, 106), clip, s)]
+        g = unary_union([B(0, 0, s, 100)] + arms)
     elif ch == "I":
         W = s
         g = B(0, 0, s, 100)
@@ -289,10 +292,13 @@ def letter(ch, s=S, cham=8):
     return chamfer(g, cham), W
 
 
-def word(text, x=0, track=18, s=S, cham=8):
+def word(text, x=0, track=18, s=S, cham=8, W=76, style=None):
+    """Set text from block capitals; style(shape, ch, width) can reshape each letter."""
     shapes = []
     for ch in text:
-        g, w = letter(ch, s, cham)
+        g, w = letter(ch, s, cham, W)
+        if style:
+            g = style(g, ch, w)
         shapes.append(affinity.translate(g, x, 0))
         x += w + track
     return unary_union(shapes), x - track

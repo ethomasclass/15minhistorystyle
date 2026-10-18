@@ -118,9 +118,9 @@ OPTIONS = [
 ]
 
 
-def build():
+def build(options=None):
     mark = clock()
-    for key, fn, _, _ in OPTIONS:
+    for key, fn, _, _ in options or OPTIONS:
         wm = fn()
         x0, y0, x1, y1 = bounds(wm)
         pad = 8
@@ -141,11 +141,12 @@ def png(svg, w):
     return Image.open(io.BytesIO(cairosvg.svg2png(url=svg, output_width=w))).convert("RGBA")
 
 
-def board(out):
-    rowh, W = 330, 1900
-    im = Image.new("RGB", (W, rowh * len(OPTIONS) + 20), INK)
+def board(out, options=None, rowh=330):
+    options = options or OPTIONS
+    W = 1900
+    im = Image.new("RGB", (W, rowh * len(options) + 20), INK)
     dr = ImageDraw.Draw(im)
-    for i, (key, _, name, note) in enumerate(OPTIONS):
+    for i, (key, _, name, note) in enumerate(options):
         y = 20 + i * rowh
         dr.text((30, y + 10), name, font=font(28, True), fill="#F4EFE6")
         for j, line in enumerate(wrap(note, 30)):
