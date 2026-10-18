@@ -21,6 +21,9 @@ down the melody, rhythm and timing, to be remade properly in Suno.
 | **A · The question** | G – C – E … D (the last note held, leaning forward) | C major with an added D (C add 9) | curious, rising, a question asked |
 | **B · Fif-teen Min-ute** | C – A … F – E (two long-short pairs, the rhythm of the name) | F major with an added G | friendly, says the name; the most "jingle" |
 | **C · Turning the page** | E – A – C … B – A (a climb and a step back down) | A minor into F major | wistful, storybook |
+| **D · The locked box** | D – F – A … C♯ on a music box, over a low D drone | D minor with the C♯ left in (never quite resolves) | mysterious, curious, a secret |
+| **E · The clue** | E – G – B♭ … A, over a creeping low pizzicato under the pull-back | E minor with an added F♯, celesta B on top | something's off; detective |
+| **F · The dusty archive** | A – C – D – F♯ … E (A Dorian: the raised F♯ glows) | A minor 6/9 with a shimmering tremolo, left hanging | old, quiet, a question nobody answered |
 
 Files: `mockups/jingle_{A,B,C}.mp3` (audio alone) and `mockups/intro_with_jingle_{A,B,C}.mp4` (with the intro picture).
 To audition one in a project: `npx remotion render src/index.ts Intro out/intro.mp4 --props='{"jingle":"music/jingle_A.mp3"}'`.
@@ -36,6 +39,14 @@ To audition one in a project: `npx remotion render src/index.ts Intro out/intro.
    intimate, not epic, no brass, no drums beyond the brush, 6 seconds, ends on a sustained chord
    ```
    Exclude: `vocals, choir, brass fanfare, trap, EDM, rock drums, synth lead, epic trailer`
+
+   For the **mysterious** ones (D, E, F):
+   ```
+   Short mysterious documentary channel ident, instrumental, music box and felt piano melody in a minor key, low
+   cello drone, quiet creeping pizzicato, soft string pad, a brushed swish into an unresolved suspended final chord,
+   celesta and vibraphone shimmer, curious and intriguing like opening an old archive box, intimate, not scary,
+   not epic, no brass, 6 seconds
+   ```
 3. Suno makes longer pieces: generate, then send me the take; I'll cut the best 6.2 seconds and line its motif up with
    the logo (2.4 s) and its chord with the title tape (3.6 s).
 4. Ask for a **short tail version** too (the motif and chord only, about 2.5 s) for the end screen and Shorts end cards:

@@ -77,14 +77,33 @@ def place(mix, sig, at):
     i = int(at * SR); j = min(len(mix), i + len(sig)); mix[i:j] += sig[:j - i]
 
 
-def make(name, motif, chord, pad_chord, bass):
+def drone(f, dur, level=0.09):
+    n = int(SR * dur); t = np.arange(n) / SR
+    x = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * f * 2.003 * t) + 0.25 * np.sin(2 * np.pi * f * 3 * t)
+    x *= 1 + 0.15 * np.sin(2 * np.pi * 0.35 * t)                     # a slow breathing swell
+    return level * x * np.minimum(1, t / 1.2) * np.minimum(1, (dur - t) / 1.0)
+
+
+def make(name, motif, chord, pad_chord, bass, voice="piano", drone_note=None, ostinato=None, tremolo=False):
     mix = np.zeros_like(t_all)
     s, p = pad(pad_chord, 0.0, 3.9, rise=2.2, level=0.10); place(mix, p, s)          # the pull-back: strings rise
-    for at, n in [(0.35, bass), (1.35, bass)]: place(mix, piano(hz(n), 1.6, 0.55), at)  # low piano heartbeat, two soft notes
+    if drone_note: place(mix, drone(hz(drone_note), LEN), 0.0)                       # a low drone under everything
+    if ostinato:                                                                         # quiet low pizzicato, creeping
+        for i, n in enumerate(ostinato * 8):
+            at = 0.3 + i * 0.3
+            if at < 2.3: place(mix, pizz(hz(n), 0.4, 0.35 + 0.25 * at / 2.3), at)
+    else:
+        for at, n in [(0.35, bass), (1.35, bass)]: place(mix, piano(hz(n), 1.6, 0.55), at)  # low piano heartbeat
     for at, n, v in motif:                                                               # the hook, on the logo
-        place(mix, piano(hz(n), 2.0, v), at); place(mix, pizz(hz(n) / 2, 0.5, 0.6 * v), at)
+        if voice == "musicbox":
+            place(mix, celesta(hz(n), 2.2, 2.2 * v), at); place(mix, piano(hz(n) / 2, 1.6, 0.35 * v), at)
+        else:
+            place(mix, piano(hz(n), 2.0, v), at); place(mix, pizz(hz(n) / 2, 0.5, 0.6 * v), at)
     place(mix, swish(), 3.30)                                                            # into the title tape
     for n in chord: place(mix, piano(hz(n), 2.8, 0.55), 3.60)                            # the final open chord
+    if tremolo:                                                                          # a vibraphone-like shimmer on top
+        tr = celesta(hz(chord[-1]), 2.6, 1.0) * (0.6 + 0.4 * np.sin(2 * np.pi * 5.5 * np.arange(int(SR * 2.6)) / SR))
+        place(mix, tr, 3.65)
     s, p = pad([hz(n) for n in chord[:3]], 3.55, 2.65, rise=0.25, level=0.09); place(mix, p, s)
     for k, n in enumerate(chord[-2:]): place(mix, celesta(hz(n) * 2, 2.4, 0.9), 3.62 + 0.09 * k)
     mix *= np.minimum(1, (LEN - t_all) / 0.5)                                            # fade out with the picture
@@ -110,6 +129,12 @@ def make(name, motif, chord, pad_chord, bass):
 
 L = 2.40  # the logo lands
 # A · "The question": rises, a small lift on the last note, then resolves on the tape (C major, add 9).
+import sys
+WHICH = sys.argv[1:] or list('ABCDEF')
+_make = make
+def make(name, *a, **k):
+    if name in WHICH: _make(name, *a, **k)
+
 make("A", [(L, "G4", 0.9), (L + 0.24, "C5", 0.8), (L + 0.48, "E5", 0.95), (L + 0.86, "D5", 0.85)],
      ["C3", "G3", "E4", "D5", "G5"], [hz("C3"), hz("G3"), hz("E4")], "C3")
 # B · "Fif-teen min-ute": two long-short pairs in the rhythm of the name, answered by the chord (F major).
@@ -118,3 +143,17 @@ make("B", [(L, "C5", 0.95), (L + 0.30, "A4", 0.7), (L + 0.52, "F5", 0.95), (L + 
 # C · "Turning the page": a gentle three-note climb and a step back down, the chord a little wistful (A minor to F).
 make("C", [(L, "E4", 0.85), (L + 0.22, "A4", 0.85), (L + 0.44, "C5", 0.9), (L + 0.80, "B4", 0.8), (L + 1.0, "A4", 0.7)],
      ["F2", "C3", "A3", "E4", "C5"], [hz("A2"), hz("E3"), hz("C4")], "A2")
+
+# --- more mysterious ---
+# D · "The locked box": a music-box motif in D minor that climbs to C# (the harmonic-minor leading tone) and stops,
+#     over a low D drone; the last chord is D minor with that C# still in it, so it never quite resolves.
+make("D", [(L, "D5", 0.8), (L + 0.26, "F5", 0.8), (L + 0.52, "A5", 0.85), (L + 0.90, "C#6", 0.9)],
+     ["D3", "A3", "F4", "C#5", "E5"], [hz("D3"), hz("A3"), hz("F4")], "D2", voice="musicbox", drone_note="D2")
+# E · "The clue": a quiet low pizzicato creeping under the pull-back; the motif in E minor reaches a flattened
+#     fifth (B-flat, the "something's off" note) and slides to A; ends on E minor with an added F#, a celesta B on top.
+make("E", [(L, "E4", 0.85), (L + 0.24, "G4", 0.8), (L + 0.48, "A#4", 0.95), (L + 0.86, "A4", 0.85)],
+     ["E2", "B2", "G3", "F#4", "B4"], [hz("E3"), hz("B3"), hz("G4")], "E2", ostinato=["E2", "B2", "G2", "B2"])
+# F · "The dusty archive": A Dorian (minor with a raised sixth, F#, which glows), a five-note phrase, and a final
+#     A minor 6/9 chord with a shimmering tremolo, hanging open like a question nobody has answered yet.
+make("F", [(L, "A4", 0.8), (L + 0.22, "C5", 0.8), (L + 0.44, "D5", 0.85), (L + 0.70, "F#5", 0.95), (L + 1.0, "E5", 0.8)],
+     ["A2", "E3", "C4", "F#4", "B4"], [hz("A2"), hz("E3"), hz("C4")], "A2", drone_note="A1", tremolo=True)
