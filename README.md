@@ -19,7 +19,7 @@ little wry, and it gets quieter and slower when the subject is suffering.
 |---|---|
 | [`brand/`](brand/) | Logo files (wordmark, profile picture, banner, watermark, the intro and logo-break videos), colours, fonts, and every thumbnail so far |
 | [`music/`](music/) | **49 music cues**, one copy each, grouped by feeling, with length, loudness, the prompt that made each, and where it was used |
-| [`sfx/`](sfx/) | 35 sound effects with what each is for and its volume |
+| [`sfx/`](sfx/) | 37 sound effects with what each is for and its volume |
 | [`techniques/`](techniques/) | Every on-screen technique by purpose, 20-frame look books of each video, and component code not yet in the template |
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |

@@ -34,6 +34,8 @@ The prompts for the ElevenLabs-made sounds are in the template's
 lands exactly on its frame, and normalizes the peak to −2 dBFS. Writing-sound candidates that lost the test (chalk tap, pen flick, short
 quill) aren't kept here; they're in `Reform-Era/video/public/sfx/` if you ever want them.
 | `balloon_inflate.wav` | 3.3 s | | A balloon filling (rubber balloon, close). Openverse/Freesound, "Balloon-Inflate-28.wav" by Gniffelbaf, CC0 | — | |
+| `lamp_click.wav` | 0.3 s | | A desk-lamp switch (the "lamp on" intro option). Openverse/Freesound, "StandardLamp-Switch.flac" by Mindloop, CC0 | 0.5 | |
+| `tape_pull.wav` | 1–2 s | | Masking tape pulled off the roll (the "tape pull" intro option). Openverse/Freesound, "masking_tape_2.wav" by jaguarrrr, CC0 | 0.4 | |
 | `gas_hiss.wav` | 3.5 s | | Gas escaping / hydrogen filling (steam hiss). Openverse/Freesound, "Steam.wav" by SukritSen, CC0 | — | |
 | `wind_high.wav` | 11.0 s | | Strong wind bed (high altitude, the jet stream). Openverse/Freesound, "Strong Wind Sound Scape" by rentless, CC0 | — | |
 | `waves_beach.wav` | 20.0 s | | Surf on a beach (D-Day landing bed). Openverse/Freesound, "Waves of Hawaii" by florianreichelt, CC0 | — | |
