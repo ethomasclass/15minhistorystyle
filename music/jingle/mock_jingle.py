@@ -77,6 +77,15 @@ def place(mix, sig, at):
     i = int(at * SR); j = min(len(mix), i + len(sig)); mix[i:j] += sig[:j - i]
 
 
+def cello(f, dur=1.6, vel=1.0):
+    n = int(SR * dur); t = np.arange(n) / SR
+    vib = 1 + 0.004 * np.sin(2 * np.pi * 5.2 * t) * np.minimum(1, t / 0.4)
+    ph = 2 * np.pi * f * np.cumsum(vib) / SR
+    x = sum(np.sin(ph * k) / k ** 1.3 for k in range(1, 9))
+    x = lowpass(x, 1600)
+    return vel * 0.16 * x * np.minimum(1, t / 0.12) * np.minimum(1, (dur - t) / 0.35)
+
+
 def drone(f, dur, level=0.09):
     n = int(SR * dur); t = np.arange(n) / SR
     x = np.sin(2 * np.pi * f * t) + 0.5 * np.sin(2 * np.pi * f * 2.003 * t) + 0.25 * np.sin(2 * np.pi * f * 3 * t)
@@ -84,7 +93,7 @@ def drone(f, dur, level=0.09):
     return level * x * np.minimum(1, t / 1.2) * np.minimum(1, (dur - t) / 1.0)
 
 
-def make(name, motif, chord, pad_chord, bass, voice="piano", drone_note=None, ostinato=None, tremolo=False):
+def make(name, motif, chord, pad_chord, bass, voice="piano", drone_note=None, ostinato=None, tremolo=False, pre=None, shimmer=True):
     mix = np.zeros_like(t_all)
     s, p = pad(pad_chord, 0.0, 3.9, rise=2.2, level=0.10); place(mix, p, s)          # the pull-back: strings rise
     if drone_note: place(mix, drone(hz(drone_note), LEN), 0.0)                       # a low drone under everything
@@ -95,17 +104,26 @@ def make(name, motif, chord, pad_chord, bass, voice="piano", drone_note=None, os
     else:
         for at, n in [(0.35, bass), (1.35, bass)]: place(mix, piano(hz(n), 1.6, 0.55), at)  # low piano heartbeat
     for at, n, v in motif:                                                               # the hook, on the logo
-        if voice == "musicbox":
+        if voice == "cello":
+            place(mix, piano(hz(n), 2.0, v), at); place(mix, cello(hz(n) / 2, 1.4, 0.8 * v), at)
+        elif voice == "musicbox":
             place(mix, celesta(hz(n), 2.2, 2.2 * v), at); place(mix, piano(hz(n) / 2, 1.6, 0.35 * v), at)
         else:
             place(mix, piano(hz(n), 2.0, v), at); place(mix, pizz(hz(n) / 2, 0.5, 0.6 * v), at)
     place(mix, swish(), 3.30)                                                            # into the title tape
-    for n in chord: place(mix, piano(hz(n), 2.8, 0.55), 3.60)                            # the final open chord
+    end = 3.60
+    if pre:                                                                              # a passing chord first (the shadow)
+        for n in pre: place(mix, piano(hz(n), 1.2, 0.5), 3.60)
+        place(mix, cello(hz(pre[0]), 0.75, 0.9), 3.60)
+        end = 4.20
+    for n in chord: place(mix, piano(hz(n), 2.8 if not pre else 2.2, 0.55), end)          # the final chord
+    if voice == "cello": place(mix, cello(hz(chord[0]), 6.2 - end, 0.9), end)
     if tremolo:                                                                          # a vibraphone-like shimmer on top
         tr = celesta(hz(chord[-1]), 2.6, 1.0) * (0.6 + 0.4 * np.sin(2 * np.pi * 5.5 * np.arange(int(SR * 2.6)) / SR))
         place(mix, tr, 3.65)
     s, p = pad([hz(n) for n in chord[:3]], 3.55, 2.65, rise=0.25, level=0.09); place(mix, p, s)
-    for k, n in enumerate(chord[-2:]): place(mix, celesta(hz(n) * 2, 2.4, 0.9), 3.62 + 0.09 * k)
+    if shimmer:
+        for k, n in enumerate(chord[-2:]): place(mix, celesta(hz(n) * 2, 2.4, 0.9), 3.62 + 0.09 * k)
     mix *= np.minimum(1, (LEN - t_all) / 0.5)                                            # fade out with the picture
     mix /= np.max(np.abs(mix)) / 0.7
     # small room: a few quiet early reflections
@@ -157,3 +175,16 @@ make("E", [(L, "E4", 0.85), (L + 0.24, "G4", 0.8), (L + 0.48, "A#4", 0.95), (L +
 #     A minor 6/9 chord with a shimmering tremolo, hanging open like a question nobody has answered yet.
 make("F", [(L, "A4", 0.8), (L + 0.22, "C5", 0.8), (L + 0.44, "D5", 0.85), (L + 0.70, "F#5", 0.95), (L + 1.0, "E5", 0.8)],
      ["A2", "E3", "C4", "F#4", "B4"], [hz("A2"), hz("E3"), hz("C4")], "A2", drone_note="A1", tremolo=True)
+
+# --- thoughtful: neither mysterious nor upbeat ---
+# G · "Open fifths": no third anywhere, so it is neither major nor minor; stately and timeless, like an old hymn
+#     tune half-remembered. D-A-E … D, cello under the piano; the last chord is D-A-E (an open fifth with a ninth).
+make("G", [(L, "D4", 0.85), (L + 0.30, "A4", 0.85), (L + 0.60, "E5", 0.9), (L + 1.0, "D5", 0.85)],
+     ["D2", "A2", "D3", "A3", "E4"], [hz("D3"), hz("A3"), hz("E4")], "D2", voice="cello", drone_note="D2", shimmer=False)
+# H · "The reflective chord": C-G-A … E, landing on F major 7 (warm but wistful: the sound of looking back).
+make("H", [(L, "C4", 0.85), (L + 0.28, "G4", 0.85), (L + 0.56, "A4", 0.9), (L + 0.94, "E5", 0.85)],
+     ["F2", "C3", "A3", "E4", "A4"], [hz("A2"), hz("E3"), hz("C4")], "A2", voice="cello", shimmer=False)
+# I · "A shadow before home": G-E-F … D, then the cadence borrows F minor for a moment before settling on C (add 9):
+#     honest, a little bittersweet, then steady. The most "earned" ending.
+make("I", [(L, "G4", 0.85), (L + 0.28, "E4", 0.8), (L + 0.56, "F4", 0.85), (L + 0.94, "D4", 0.85)],
+     ["C2", "G2", "E3", "D4", "G4"], [hz("C3"), hz("G3"), hz("E4")], "C2", voice="cello", pre=["F2", "C3", "G#3", "C4"], shimmer=False)
