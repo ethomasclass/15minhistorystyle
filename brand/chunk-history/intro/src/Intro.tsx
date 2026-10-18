@@ -1,7 +1,7 @@
 // Chunk History intro: the Quarter past mark assembles from chunks in 3D, the coral quarter swings in
 // last like a minute hand landing on a quarter past, then the Two slabs wordmark slides in beside it.
 import React, {useMemo} from 'react';
-import {AbsoluteFill, Audio, Easing, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
@@ -14,8 +14,9 @@ const DEPTH = 0.09;
 const FLIGHT = 22; // frames from launch to landing
 
 // Landing frames: teal chunks first (big rim pieces, then the inner pieces), the coral quarter last.
-const MARK_LAND = [26, 36, 46, 54, 60, 82];
-const WM_LAND = [116, 122];
+// Timed to public/jingle.mp3: the coral quarter lands on its big hit (2.80 s), the slabs on 3.60 s and 3.95 s.
+const MARK_LAND = [36, 50, 60, 68, 74, 84];
+const WM_LAND = [108, 119];
 
 // Final lockup: mark (tablet spans 224/256 of its box) at 1.5x the wordmark's height, gap a quarter of the mark.
 const TABLET = 224 / 256;
@@ -56,7 +57,7 @@ const Camera: React.FC<{frame: number}> = ({frame}) => {
   const camera = useThree((s) => s.camera);
   const ease = Easing.bezier(0.22, 1, 0.36, 1);
   const settle = interpolate(frame, [0, 84], [0, 1], {extrapolateRight: 'clamp', easing: ease});
-  const pull = interpolate(frame, [92, 116], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: ease});
+  const pull = interpolate(frame, [86, 106], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: ease});
   const yaw = interpolate(settle, [0, 1], [0.55, 0]);
   const pitch = interpolate(settle, [0, 1], [-0.32, 0]);
   const dist = interpolate(settle, [0, 1], [3.6, 2.7]) + pull * (TOTAL / 0.66 / 0.953 - 2.7);
@@ -76,7 +77,7 @@ const Scene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const go = (land: number) => spring({frame: frame - (land - FLIGHT), fps, config: {damping: 15, stiffness: 110, mass: 0.9}});
-  const slide = interpolate(frame, [92, 116], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.22, 1, 0.36, 1)});
+  const slide = interpolate(frame, [86, 106], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.22, 1, 0.36, 1)});
   const markX = slide * MARK_X;
   const mark = shapes.mark as Piece[];
 
@@ -120,16 +121,11 @@ const Scene: React.FC = () => {
   );
 };
 
-const thunk = (land: number, i: number, vol = 0.55) => (
-  <Sequence key={`t${i}`} from={land - 1}>
-    <Audio src={staticFile('sfx/knock.wav')} volume={vol} />
-  </Sequence>
-);
-
 export const Intro: React.FC = () => {
   const {width, height} = useVideoConfig();
   const frame = useCurrentFrame();
-  const fadeIn = interpolate(frame, [0, 8], [0, 1], {extrapolateRight: 'clamp'});
+  const {durationInFrames} = useVideoConfig();
+  const fadeIn = interpolate(frame, [0, 8, durationInFrames - 15, durationInFrames - 1], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return (
     <AbsoluteFill style={{background: INK}}>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #1b1b1b 0%, #111111 60%, #0a0a0a 100%)'}} />
@@ -138,24 +134,7 @@ export const Intro: React.FC = () => {
           <Scene />
         </ThreeCanvas>
       </AbsoluteFill>
-      <Sequence from={0}>
-        <Audio src={staticFile('sfx/whoosh.wav')} volume={0.35} />
-      </Sequence>
-      {MARK_LAND.slice(0, 5).map((f, i) => thunk(f, i, 0.35 + i * 0.05))}
-      <Sequence from={MARK_LAND[5] - 12}>
-        <Audio src={staticFile('sfx/scrape.wav')} volume={0.3} />
-      </Sequence>
-      <Sequence from={MARK_LAND[5] - 1}>
-        <Audio src={staticFile('sfx/boom.wav')} volume={0.55} />
-      </Sequence>
-      <Sequence from={90}>
-        <Audio src={staticFile('sfx/whoosh.wav')} volume={0.3} />
-      </Sequence>
-      {WM_LAND.map((f, i) => (
-        <Sequence key={`w${i}`} from={f - 1}>
-          <Audio src={staticFile('sfx/knock.wav')} volume={0.3} />
-        </Sequence>
-      ))}
+      <Audio src={staticFile('jingle.mp3')} />
     </AbsoluteFill>
   );
 };
