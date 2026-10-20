@@ -26,7 +26,7 @@ def main(title, subtitle, dest):
     chapters = []
     for (ts, name), f in zip(heads, sorted(glob.glob(os.path.join(ROOT, "script", "ch*.txt")))):
         paras = [p.strip() for p in open(f).read().split("\n\n") if p.strip()]
-        chapters.append(f'<section><h2><span class="ts">{ts}</span>{html.escape(name)}</h2>{"".join(para_html(p) for p in paras)}</section>')
+        chapters.append(f'<section><h2><span class="ts">{ts}</span>{html.escape(name.replace("*", ""))}</h2>{"".join(para_html(p) for p in paras)}</section>')
     fonts = os.path.abspath(os.path.join(ROOT, "public", "fonts"))
     page = f"""<!doctype html><meta charset="utf-8"><style>
 @font-face {{font-family: Abril; src: url(file://{fonts}/AbrilFatface.woff2);}}

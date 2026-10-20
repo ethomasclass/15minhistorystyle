@@ -24,10 +24,14 @@ SPEED = float(os.environ.get("VOICE_SPEED", "0.9"))  # ElevenLabs speed, 0.7-1.2
 STRETCH = float(os.environ.get("VOICE_STRETCH", "1.0"))  # local pitch-preserving tempo; <1 is slower (v2 ignores SPEED; try 0.93)
 MAX_PAUSE = float(os.environ.get("VOICE_MAX_PAUSE", "0"))  # >0: shorten the voice's own pauses to at most this (s)
 CACHE = os.path.join(OUT, "cache")
+# v3 ends its audio on the last character, which can clip the final word. Send a short throwaway sentence
+# after the paragraph so the real last word finishes and decays, then cut it away in the gap (tail_trim).
+TAIL_PAD = os.environ.get("VOICE_TAIL_PAD", " Okay.")
+TAIL_KEEP = float(os.environ.get("VOICE_TAIL_KEEP", "0.2"))
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill"}
+PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "Taney": "Tawney", "Stephens": "Stevens", "Minié": "Minnie"}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
@@ -206,6 +210,40 @@ def add_pauses(pcm, chars, gap):
     return out + pcm[prev_cut:], shifted
 
 
+def tail_trim(pcm, chars, n_real):
+    """Keep the audio up to TAIL_KEEP s after the last real character (dropping the padded pause) and fade out."""
+    import numpy as np
+    real = [c for c in chars[:n_real]]
+    end = max(e for c, s, e in real if not c.isspace())
+    a = np.frombuffer(pcm, np.int16).astype(np.float32)
+    nxt = next((s for c, s, e in chars[n_real:] if not c.isspace()), None)   # where the throwaway sentence starts
+    if nxt is None or nxt - end < 0.05:
+        print(f"  WARNING: no clean gap before the padding (gap {0 if nxt is None else nxt - end:.2f}s); listen to this ending", flush=True)
+    cut = end + TAIL_KEEP if nxt is None else min(end + TAIL_KEEP, end + (nxt - end) * 0.6)
+    keep = min(len(a), int(cut * RATE))
+    a = a[:keep]
+    f = min(len(a), int(RATE * 0.06))
+    a[-f:] *= np.linspace(1, 0, f)
+    return a.astype(np.int16).tobytes(), real
+
+
+def tail_check(pcm, label):
+    """Flag a paragraph whose audio ends while the voice is still sounding (a clipped last word), then fade the
+    last 15 ms so nothing ends on a click. Returns (pcm, clipped?)."""
+    import numpy as np
+    a = np.frombuffer(pcm, np.int16).astype(np.float32)
+    if len(a) < RATE // 4:
+        return pcm, False
+    tail = a[-int(RATE * 0.06):]
+    peak = np.sqrt((a ** 2).mean()) + 1e-6
+    clipped = bool(np.sqrt((tail ** 2).mean()) > 0.35 * peak)
+    if clipped:
+        print(f"  WARNING {label}: audio ends while the voice is still sounding (possible clipped last word)", flush=True)
+    f = int(RATE * 0.015)
+    a[-f:] *= np.linspace(1, 0, f)
+    return a.astype(np.int16).tobytes(), clipped
+
+
 def words_from_chars(display, chars, offset):
     """Map timings of the spoken text back onto the words of the display text.
     Words are compared by index, so PRONOUNCE substitutions must keep a 1:1 word count or be
@@ -278,17 +316,24 @@ def main():
     marked = [parse_marks(p.strip()) for p in open(src).read().split("\n\n") if p.strip()]
     paras = [m[0] for m in marked]
     pcm = b"\0\0" * int(RATE * LEAD_IN)
+    global CLIPPED
+    CLIPPED = []
     words = []
     for i, p in enumerate(paras):
         offset = len(pcm) / 2 / RATE
         if use_piper:
             audio, chars = piper(spoken(p))
         else:
-            audio, chars = eleven(spoken(p), spoken(paras[i - 1]) if i else "",
+            sp = spoken(p)
+            audio, chars = eleven(sp + TAIL_PAD, spoken(paras[i - 1]) if i else "",
                                   spoken(paras[i + 1]) if i + 1 < len(paras) else "")
+            if TAIL_PAD:
+                audio, chars = tail_trim(audio, chars, len(sp))
             if MAX_PAUSE > 0:
                 audio, chars = tighten(audio, chars, MAX_PAUSE)
             audio, chars = add_pauses(audio, chars, SENT_GAP)
+            audio, clipped = tail_check(audio, f"{name} paragraph {i + 1}")
+            if clipped: CLIPPED.append(i + 1)
         ws = words_from_chars(p, chars, offset)
         for w, k in zip(ws, marked[i][1]):
             if k: w["k"] = k
@@ -313,7 +358,7 @@ def main():
     json.dump({"voice": "piper-placeholder" if use_piper else os.environ.get("VOICE_ID"),
                "duration": round(len(pcm) / 2 / RATE, 3), "words": words},
               open(os.path.join(OUT, name + ".words.json"), "w"), indent=0)
-    print(f"wrote {wav} ({len(pcm) / 2 / RATE:.1f}s, {len(words)} words)")
+    print(f"wrote {wav} ({len(pcm) / 2 / RATE:.1f}s, {len(words)} words)" + (f"; CHECK paragraphs {CLIPPED} for clipped endings" if CLIPPED else "; endings clean"))
 
 
 if __name__ == "__main__":

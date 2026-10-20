@@ -1,6 +1,6 @@
 # Except: How the Civil War Was Decided, and What It Left Open
 
-**15 Minute History** · narration script · 1,417 words · about 8:43 finished (draft 1)
+**15 Minute History** · narration script · 1,540 words · about 9:24 finished (draft 1)
 
 **Driving question (cold open, answered in the last chapter):** How was the Civil War finally decided? And when it was over, what had it settled for good, and what had it left open?
 
@@ -14,11 +14,11 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates; re-time after vo
 
 ## 0:00 | Cold Open
 
-`ch01_cold_open.txt` · 133 words
+`ch01_cold_open.txt` · 145 words
 
 The amendment that ended slavery in the United States has an exception in its very first sentence.
 
-Here it is. The 13th Amendment. Neither slavery nor forced labor shall exist in the United States, it says, "*except as a punishment for crime*."
+Here it is. The 13th Amendment. An amendment is a change added to the Constitution, the country's rulebook. Neither slavery nor forced labor shall exist in the United States, it says, "*except as a punishment for crime*."
 
 Except as a punishment for crime. Six words. Hold onto them. We'll come back to them.
 
@@ -30,9 +30,9 @@ It starts with two battles in the same week, hundreds of miles apart.
 
 ---
 
-## 0:56 | One Week in July
+## 1:00 | One Week in July
 
-`ch02_one_week.txt` · 181 words
+`ch02_one_week.txt` · 208 words
 
 July 1st, 1863. Lee's army collides with the Union army at a small crossroads town in Pennsylvania called Gettysburg.
 
@@ -40,19 +40,19 @@ They fight for three days. On the third day, Lee orders a huge attack straight a
 
 Lee retreats to Virginia. He will never invade the North again. In three days, the two armies lose about 50,000 men killed, wounded, captured or missing.
 
-The very next day, July 4th, far to the west, the city of Vicksburg, Mississippi, surrenders to General Ulysses S. Grant after a 47-day siege. Soon the Union controls the whole Mississippi River. Remember the Anaconda Plan? The Confederacy is cut in two.
+The very next day, July 4th, far to the west, the city of Vicksburg, Mississippi, surrenders to General Ulysses S. Grant after a 47-day siege. Grant's army surrounded the city and starved it out, while families dug caves into the hillsides to hide from the shelling. Soon the Union controls the whole Mississippi River. Remember the Anaconda Plan? The Confederacy is cut in two.
 
-So which win mattered more? Gettysburg ended Lee's invasion. Vicksburg split the South. People still argue about it. But Lincoln had noticed who won at Vicksburg. In March 1864, he put Grant in charge of all the Union armies.
+So which win mattered more? Gettysburg ended Lee's invasion. Vicksburg split the South. People still argue about it. But Lincoln had noticed who won at Vicksburg. Grant, unlike McClellan, actually liked attacking. In March 1864, Lincoln put him in charge of all the Union armies.
 
 ---
 
-## 1:58 | A New Birth of Freedom
+## 2:10 | A New Birth of Freedom
 
-`ch03_new_birth.txt` · 152 words
+`ch03_new_birth.txt` · 158 words
 
 That November, Lincoln traveled to Gettysburg to help dedicate a cemetery for the Union dead.
 
-The main speaker talked for about two hours. Lincoln spoke for about two minutes. Around 270 words.
+The main speaker talked for about two hours. Lincoln spoke for about two minutes. Around 270 words. Guess which one students still memorize.
 
 He started with a date. "Four score and seven years ago." A score is 20. So, 87 years before 1863. That's 1776. Not the Constitution. The Declaration of Independence, and its promise that "all men are created equal."
 
@@ -64,35 +64,35 @@ Five copies of the speech in Lincoln's handwriting survive, and no two are exact
 
 ---
 
-## 2:50 | Who Carried the War? *(quiet chapter: no jokes, slower voice)*
+## 3:05 | Who Carried the War? *(quiet chapter: no jokes, slower voice)*
 
-`ch04_who_carried.txt` · 216 words
+`ch04_who_carried.txt` · 241 words
 
 Meanwhile, both sides were running out of volunteers.
 
 In 1862, the Confederacy started a {draft}, a law requiring men to serve. It was the first in American history. The Union started one in 1863.
 
-But the Union's draft had a catch. A drafted man could pay 300 dollars to get out of it, roughly a year's pay for a laborer. Or he could hire a substitute. In the South, one white man on any plantation with 20 or more enslaved people could be excused too. People called it "a rich man's war and a poor man's fight."
+But the Union's draft had a catch. A drafted man could pay 300 dollars to get out of it, roughly a year's pay for a laborer. Or he could hire a substitute, someone paid to go in his place. In the South, one white man on any plantation with 20 or more enslaved people could be excused too. People called it "a rich man's war and a poor man's fight."
 
 In July 1863, just days after Gettysburg, the draft began in New York City, and the city exploded. Rioters, many of them poor Irish immigrant workers, attacked draft offices. Then they turned on Black New Yorkers. They resented the draft, and they feared that freed people would compete for their jobs. Rioters burned an orphanage for Black children. The children escaped. But at least 119 people were killed in four days.
 
-The South was suffering too. The blockade choked off supplies. The Confederate government printed money to pay for the war, and prices soared. In April 1863, hungry women in Richmond broke into shops, demanding bread.
+The South was suffering too. The blockade choked off supplies. The Confederate government printed money to pay for the war. But printing money doesn't grow more food. More dollars chasing the same bread meant each dollar bought less, and prices soared. In April 1863, hungry women in Richmond broke into shops, demanding bread.
 
 Who carried the war? Often, the people with the least say in it.
 
 ---
 
-## 4:10 | Hard War
+## 4:34 | Hard War
 
-`ch05_hard_war.txt` · 192 words
+`ch05_hard_war.txt` · 213 words
 
-In 1864, Grant went after Lee in Virginia, battle after battle, and wouldn't let up. The losses were enormous, and many Northerners were sick of the war. That summer, Lincoln expected to lose the election.
+In 1864, Grant went after Lee in Virginia, battle after battle, and wouldn't let up. The losses were enormous, and many Northerners were sick of the war. That summer, Lincoln expected to lose the election. He even wrote a private note preparing for it.
 
-His opponent was a familiar face. George McClellan. The general Lincoln had fired.
+His opponent was a familiar face. George McClellan. The general Lincoln had fired. Awkward.
 
 Then, in September, General William Tecumseh Sherman captured Atlanta. The news changed everything. In November, Lincoln won a second term.
 
-Then Sherman marched from Atlanta to the sea at Savannah, about 300 miles. His army lived off the land. It tore up railroads, burned barns and supplies, and took what it needed. Sherman wanted Southerners, not just Southern armies, to feel "the hard hand of war."
+Then Sherman marched from Atlanta to the sea at Savannah, about 300 miles. His army lived off the land, taking food from the farms it passed instead of carrying it. It tore up railroads, burned barns and supplies, and took what it needed. Sherman wanted Southerners, not just Southern armies, to feel "the hard hand of war."
 
 Was that {total war}, a war against a whole society? Or {hard war}, aimed mostly at property and supplies, not at civilians' lives? Historians still argue. To the North, Sherman broke the Confederacy's will to fight. To Georgians in his path, it felt like destruction for its own sake.
 
@@ -100,9 +100,9 @@ Quick thing before the surrender. If you're enjoying this, hit subscribe. It's f
 
 ---
 
-## 5:16 | Appomattox
+## 5:46 | Appomattox
 
-`ch06_appomattox.txt` · 158 words
+`ch06_appomattox.txt` · 167 words
 
 By April 1865, Lee's army is starving and nearly surrounded. On April 9th, at a village in Virginia called Appomattox Court House, Lee surrenders to Grant.
 
@@ -112,17 +112,17 @@ That was on purpose. Grant and Lincoln wanted the country put back together, not
 
 Five days later, Lincoln is shot at Ford's Theatre in Washington by John Wilkes Booth, an actor who supported the Confederacy. He dies the next morning. The other Confederate armies surrender over the next two and a half months.
 
-But in Texas, freedom still hadn't been enforced. On June 19th, 1865, Union soldiers arrived in Galveston and announced that all enslaved people in Texas were free. That day became {Juneteenth}.
+But in Texas, freedom still hadn't been enforced, two and a half years after the Emancipation Proclamation. On June 19th, 1865, Union soldiers arrived in Galveston and announced that all enslaved people in Texas were free. That day became {Juneteenth}.
 
 ---
 
-## 6:10 | Except *(quiet chapter: no jokes, slower voice)*
+## 6:43 | Except *(quiet chapter: no jokes, slower voice)*
 
-`ch07_except.txt` · 213 words
+`ch07_except.txt` · 220 words
 
-Now the amendment. Remember, the Emancipation Proclamation was a war measure. It didn't reach the border states, and once the war ended, a court might throw it out. To end slavery for good, it had to go into the Constitution.
+Now the amendment. Remember, the Emancipation Proclamation was a war measure. It didn't reach the border states, and once the war ended, a court might decide that a war measure ended with the war. To end slavery for good, it had to go into the Constitution.
 
-The Senate passed the {13th Amendment} in April 1864, 38 to 6. The House took longer. It finally passed on January 31st, 1865, 119 to 56, and people in the gallery cheered.
+The Senate passed the {13th Amendment} in April 1864, 38 to 6. The House took longer. It finally passed on January 31st, 1865, 119 to 56, and people in the visitors' gallery cheered.
 
 Then three-fourths of the states had to ratify it, or approve it. The state that put it over the top, on December 6th, 1865, was Georgia.
 
@@ -136,9 +136,9 @@ Freedom was in the Constitution. What freedom would mean was another fight.
 
 ---
 
-## 7:29 | What It Settled
+## 8:05 | What It Settled
 
-`ch08_what_it_settled.txt` · 172 words
+`ch08_what_it_settled.txt` · 188 words
 
 So let's go back to the question. How was the war decided?
 
@@ -150,7 +150,7 @@ What did it leave open? Almost everything else. Were freed people citizens? Coul
 
 The war answered whether the country would stay together. It didn't answer what kind of country it would be.
 
-That fight is called Reconstruction. And it started with six words. Except as a punishment for crime.
+That fight is called Reconstruction, the years when the country tried to rebuild the South and decide what freedom would mean. And it started with six words. Except as a punishment for crime.
 
 Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 

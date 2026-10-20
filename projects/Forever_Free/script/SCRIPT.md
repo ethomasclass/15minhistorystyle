@@ -1,6 +1,6 @@
 # Forever Free: How a War for the Union Became a War for Freedom
 
-**15 Minute History** · narration script · 1,467 words · about 9:01 finished (draft 1)
+**15 Minute History** · narration script · 1,589 words · about 9:41 finished (draft 1)
 
 **Driving question (cold open, answered in the last chapter):** Who freed the enslaved people in the Civil War? President Lincoln? Or people like Robert Smalls, who didn't wait to be freed?
 
@@ -14,7 +14,7 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates; re-time after vo
 
 ## 0:00 | Cold Open
 
-`ch01_cold_open.txt` · 197 words
+`ch01_cold_open.txt` · 203 words
 
 An enslaved man once stole a Confederate ship and sailed it right past Fort Sumter.
 
@@ -22,7 +22,7 @@ His name was Robert Smalls. He was 23. He'd grown up enslaved in South Carolina,
 
 One night in May 1862, the ship's white officers went ashore. Smalls and the crew stayed aboard. They picked up their families. And just before dawn, Smalls steered the *Planter* out of the harbor. The story goes that he wore the captain's straw hat and stood the way the captain stood, so the guards wouldn't look twice.
 
-He gave the right signals. He passed Fort Sumter. Then he raised a white sheet and steered straight for the Union ships waiting outside.
+He gave the right whistle signals, the codes the guards expected. He passed Fort Sumter. Then he raised a white sheet and steered straight for the Union ships waiting outside.
 
 So here's the question I want to answer today: Who freed the enslaved people in the Civil War? President Lincoln? Or people like Robert Smalls, who didn't wait to be freed?
 
@@ -30,15 +30,15 @@ We'll come back to Smalls. And to a letter Lincoln wrote that seems to say he di
 
 ---
 
-## 1:17 | Contraband *(quiet chapter: no jokes, slower voice)*
+## 1:19 | Contraband *(quiet chapter: no jokes, slower voice)*
 
-`ch02_contraband.txt` · 155 words
+`ch02_contraband.txt` · 165 words
 
 When the war started, Lincoln's goal was to save the Union, not to end slavery. He needed the border states, the slave states that stayed loyal. Push too hard on slavery, and they might leave too.
 
 But enslaved people didn't wait for Washington.
 
-May 1861, just weeks into the war. Three enslaved men slip away to Fort Monroe, a Union fort in Virginia. Their owner wants them back. The fort's commander, General Benjamin Butler, says no. These men had been put to work on Confederate defenses. So, he says, they are {contraband of war}: enemy property that the army can keep.
+May 1861, just weeks into the war. Three enslaved men slip away to Fort Monroe, a Union fort in Virginia. Their owner wants them back. The fort's commander, General Benjamin Butler, says no. These men had been put to work on Confederate defenses. So, he says, they are {contraband of war}: enemy property that the army can keep, the same way it would keep captured horses or wagons.
 
 It was a cold word for human beings. But it worked. By summer, hundreds more had come to the fort. Over the course of the war, the Union army ran more than 100 {contraband camps}.
 
@@ -46,51 +46,51 @@ Every person who escaped was one less worker for the Confederacy, and one more q
 
 ---
 
-## 2:15 | Lincoln's Problems
+## 2:21 | Lincoln's Problems
 
-`ch03_lincolns_problems.txt` · 203 words
+`ch03_lincolns_problems.txt` · 242 words
 
 Meanwhile, Lincoln had other problems. Starting with his generals.
 
-General George McClellan built the Union's biggest army. He trained it well, and his soldiers loved him. But he was painfully slow to attack. He always believed the enemy was bigger than it was. Lincoln reportedly said that if McClellan wasn't using the army, he'd like to borrow it.
+General George McClellan built the Union's biggest army. He trained it well, and his soldiers loved him. But he was painfully slow to attack. He always believed the enemy was bigger than it was, sometimes twice as big. Lincoln reportedly said that if McClellan wasn't using the army, he'd like to borrow it.
 
 In March 1862, Lincoln took away McClellan's job as commander of all the Union armies and started directing them himself. That spring, McClellan finally moved toward Richmond. By early summer, the Confederacy's new commander in Virginia, Robert E. Lee, had driven him back.
 
-Lincoln was also finding out how far a president's power went in wartime. Back in 1861, a mob in Baltimore had attacked Union troops. Then railroad bridges north of the city were burned to keep soldiers from reaching Washington. So Lincoln suspended {habeas corpus} there. That's the right to go before a judge, who decides whether you're being held legally. Without it, the army could hold people without a hearing.
+Lincoln was also finding out how far a president's power went in wartime. Back in 1861, a mob in Baltimore had attacked Union troops. Then railroad bridges north of the city were burned to keep soldiers from reaching Washington. So Lincoln suspended {habeas corpus} there. That's the right to go before a judge, who decides whether you're being held legally. Think of it as a show-your-work rule for jailers: lock someone up, and you have to explain why to a judge. Without it, the army could hold people without a hearing.
 
-Chief Justice Roger Taney said only Congress had that power. Lincoln kept doing it anyway. The Constitution allows it "in cases of rebellion or invasion." It just doesn't say clearly *who decides.*
+Roger Taney, the head of the Supreme Court, said only Congress had that power. Yes, the same Taney who wrote the Dred Scott decision. Lincoln kept doing it anyway. The Constitution allows it "in cases of rebellion or invasion." It just doesn't say clearly *who decides.*
 
 ---
 
-## 3:24 | Waiting for a Victory
+## 3:42 | Waiting for a Victory
 
-`ch04_waiting.txt` · 249 words
+`ch04_waiting.txt` · 280 words
 
-Now that letter. August 1862. Horace Greeley, a famous New York newspaper editor, publishes an open letter scolding Lincoln for moving too slowly on slavery.
+Now that letter. August 1862. Horace Greeley, editor of one of the biggest newspapers in the country, publishes an open letter scolding Lincoln for moving too slowly on slavery. Basically, a public callout of the president.
 
 Lincoln answers him in public. "If I could save the Union without freeing any slave I would do it," he writes, "and if I could save it by freeing all the slaves I would do it."
 
 Translation: the Union comes first.
 
-But here's what readers didn't know. A month earlier, Lincoln had already written a draft of an order freeing enslaved people in the rebel states. His secretary of state told him to wait. Announce it after all these defeats, and it would look desperate. He needed a victory.
+But here's what readers didn't know. A month earlier, Lincoln had already written a draft of an order freeing enslaved people in the rebel states. His secretary of state told him to wait. Announce it after all these defeats, and it would look desperate, like a last-second shot from half court. He needed a victory.
 
 He got one, sort of. September 17th, 1862. Antietam Creek, Maryland. Lee has invaded the North. In one day, about 22,700 men are killed, wounded, captured or missing. It's still the bloodiest single day of fighting in American history.
 
 On that field, a former government clerk named Clara Barton hauled in supplies and nursed the wounded under fire. She was one of thousands of women who went to war as nurses. Dorothea Dix ran the Union's army nurses. About 600 Catholic sisters cared for soldiers from both sides. Other women ran farms and businesses back home, and some worked as spies.
 
-Lee retreats. McClellan lets him get away, and Lincoln fires him that November. But it's enough. Five days after the battle, Lincoln announces a preliminary {Emancipation Proclamation}. It will take effect on January 1st.
+Lee retreats. McClellan lets him get away, and Lincoln fires him that November. But it's enough. Five days after the battle, Lincoln announces a preliminary {Emancipation Proclamation}, an advance warning: rejoin the Union by January 1st, or the enslaved people in your state will be declared free.
 
 ---
 
-## 4:48 | Forever Free *(quiet chapter: no jokes, slower voice)*
+## 5:16 | Forever Free *(quiet chapter: no jokes, slower voice)*
 
-`ch05_forever_free.txt` · 145 words
+`ch05_forever_free.txt` · 168 words
 
 January 1st, 1863. The Proclamation takes effect. It declares that enslaved people in the areas still in rebellion "are, and henceforward shall be free."
 
 Now look at what it leaves out. It doesn't apply to the border states. Remember them? And it doesn't apply to parts of the South the Union army already held.
 
-Why do it that way? Lincoln issued it under his {war powers}, as commander in chief. A war measure could reach the enemy. It couldn't reach loyal states. And trying might have cost him those states.
+Why do it that way? Lincoln issued it under his {war powers}, as commander in chief. Here's the logic. The law treated enslaved people as property, and a commander in chief can take enemy property to win a war. So the order could reach the enemy, but not the loyal states. And trying might have cost him those states.
 
 So on the first day, it freed relatively few people. Most of the places it covered were still under Confederate control.
 
@@ -98,15 +98,15 @@ But it changed what the war was for. From now on, wherever the Union army marche
 
 ---
 
-## 5:43 | King Cotton Fails
+## 6:19 | King Cotton Fails
 
-`ch06_king_cotton.txt` · 141 words
+`ch06_king_cotton.txt` · 154 words
 
 Remember the South's bet? {King Cotton}. Britain needed Southern cotton so badly, the thinking went, that it would have to step in.
 
-It didn't. Britain had stored up extra cotton before the war. Then it bought more from Egypt and India. And in the fall of 1862, just as British leaders were talking about stepping in, Antietam made them back off.
+It didn't. Britain had stored up extra cotton before the war. Then it bought more from Egypt and India. Basically, Britain found a new supplier. And in the fall of 1862, just as British leaders were talking about stepping in, Antietam made them back off.
 
-Britain had ended slavery in most of its empire back in 1833. Over time, the Proclamation made it harder for British leaders to side with a nation fighting for slavery. Britain never recognized the Confederacy as a country.
+Britain had ended slavery in most of its empire back in 1833. Over time, the Proclamation made it harder for British leaders to side with a nation fighting for slavery. Britain never officially recognized the Confederacy, meaning it never treated it as a real country.
 
 King Cotton, it turned out, was not king.
 
@@ -114,7 +114,7 @@ Quick thing before we get to the soldiers. If you're enjoying this, hit subscrib
 
 ---
 
-## 6:31 | The 54th *(quiet chapter: no jokes, slower voice)*
+## 7:12 | The 54th *(quiet chapter: no jokes, slower voice)*
 
 `ch07_the_54th.txt` · 183 words
 
@@ -130,7 +130,7 @@ And Robert Smalls? He went on to pilot ships for the Union navy. After the war, 
 
 ---
 
-## 7:40 | Who Freed Them?
+## 8:20 | Who Freed Them?
 
 `ch08_who_freed_them.txt` · 194 words
 

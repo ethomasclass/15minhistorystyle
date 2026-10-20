@@ -1,6 +1,6 @@
 # In Their Own Words: Secession, Fort Sumter, and the Picnic at Bull Run
 
-**15 Minute History** · narration script · 1,589 words · about 9:45 finished (draft 1)
+**15 Minute History** · narration script · 1,635 words · about 10:01 finished (draft 1)
 
 **Driving question (cold open, answered in the last chapter):** Why did eleven states leave the Union in 1860 and 1861? And when they did, why did almost everyone think the war would be over by summer?
 
@@ -14,15 +14,15 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates; re-time after vo
 
 ## 0:00 | Cold Open
 
-`ch01_cold_open.txt` · 149 words
+`ch01_cold_open.txt` · 174 words
 
 The vice president of the Confederacy once explained, in plain words, why his new country existed. After the war, he told a different story.
 
-His name was Alexander Stephens. In March 1861, in Savannah, Georgia, he said the new government had a {cornerstone}, the stone everything else rests on. That cornerstone, he said, was slavery.
+His name was Alexander Stephens. The Confederacy was the new country Southern states formed when they left the United States. In March 1861, Stephens said it had a {cornerstone}, the stone at the bottom of a building that holds everything else up. That cornerstone, he said, was slavery.
 
-Seven years later, with the war lost, Stephens published a two-volume history of it. In that version, slavery was just the spark. The real cause, he said, was the rights of the states.
+Seven years later, with the war lost, Stephens wrote a history of it. In that version, slavery was just the spark. The real cause, he said, was the rights of the states.
 
-Same man. Two different stories.
+Same man. Two different stories. Funny how losing a war can change your memory.
 
 So here's the question I want to answer today: Why did eleven states leave the Union in 1860 and 1861? And when they did, why did almost everyone think the war would be over by summer?
 
@@ -30,153 +30,151 @@ We'll come back to Stephens. And to a crowd of people who packed a picnic to go 
 
 ---
 
-## 1:01 | One Election
+## 1:09 | One Election
 
-`ch02_one_election.txt` · 155 words
+`ch02_one_election.txt` · 172 words
 
 It starts with an election. November 1860. Abraham Lincoln wins the presidency.
 
-Lincoln's party, the Republicans, had one big promise: keep slavery out of the western territories. Lincoln said again and again that he had no plan to touch slavery in the states. Just stop it from spreading.
+Lincoln's party, the Republicans, had one big promise: keep slavery out of the western territories, the land out west that wasn't a state yet. Not end slavery where it already existed. Just stop it from spreading.
 
-For much of the South, that was enough. Lincoln wasn't even on the ballot in ten Southern states. He won without a single electoral vote from a slave state.
+For much of the South, that was enough. Many Southern leaders believed slavery that couldn't grow would slowly die. And Lincoln won without them: he wasn't even on the ballot in ten Southern states.
+
+Imagine winning class president without one vote from half the school. To much of the South, that's what had just happened.
 
 Six weeks later, on December 20th, South Carolina votes to leave the Union. That's {secession}: a state declaring it is no longer part of the United States.
 
-By February 1861, seven states are gone. They form the Confederate States of America, with Jefferson Davis as president.
+By February, seven states are gone. They form the Confederate States of America, with Jefferson Davis as president.
 
-And here's the strange part. Lincoln isn't president yet. He won't take office until March. So whatever caused secession, it wasn't anything Lincoln had done as president. *He hadn't done anything yet.*
-
----
-
-## 1:55 | In Their Own Words *(quiet chapter: no jokes, slower voice)*
-
-`ch03_in_their_own_words.txt` · 241 words
-
-So why did they go? We don't have to guess. Several states wrote out their reasons, in documents called declarations of causes.
-
-Look at Georgia's. It opens by saying that for ten years the state has had "numerous and serious causes of complaint" against the free states, "with reference to the subject of African slavery."
-
-Mississippi's is even more direct: "Our position is thoroughly identified with the institution of slavery."
-
-And South Carolina's complains that Northern states were passing their own laws to avoid returning people who had escaped slavery. In other words, South Carolina was angry that Northern states were using *their own* states' rights.
-
-Then, in March, Stephens gives his speech in Savannah. The new government, he says, rests on the idea that Black people were not equal to white people, and that slavery was their "natural and normal condition." It's known as the {Cornerstone Speech}.
-
-After the war, the story changed. Davis and Stephens both wrote long books saying the South had fought for states' rights and self-government. Over the next decades, that version spread through monuments, schoolbooks and veterans' groups. It's called the {Lost Cause}: the idea that the Confederacy fought a noble fight for states' rights, and that slavery had little to do with it.
-
-So which do you believe? A good rule for history: *evidence from the moment usually beats stories told afterward.* In 1860 and 1861, the people leaving the Union told us why.
+And notice: Lincoln won't take office until March. So whatever caused secession, it wasn't anything he did as president. *He hadn't done anything yet.*
 
 ---
 
-## 3:24 | Which Georgians? *(quiet chapter: no jokes, slower voice)*
+## 2:08 | In Their Own Words *(quiet chapter: no jokes, slower voice)*
 
-`ch04_which_georgians.txt` · 65 words
+`ch03_in_their_own_words.txt` · 258 words
 
-One more thing about how they left. In January 1861, Georgia holds a convention to decide. The vote is 208 to 89 for secession.
+So why did they go? We don't have to guess. Several states wrote out their reasons in declarations of causes. Think of them as official breakup letters: here's why we're leaving.
 
-Now look at who chose those delegates. White men. No women. And no one who was enslaved, which in Georgia was about 44 percent of the people in the state.
+Georgia's opens with ten years of "numerous and serious causes of complaint" against the free states, "with reference to the subject of African slavery." Translation: the complaint is slavery.
+
+Mississippi's is even more direct: "Our position is thoroughly identified with the institution of slavery." Translation: our whole way of life is built on it.
+
+You'll often hear the war was about {states' rights}: the idea that states, not the national government, should make their own big decisions. But South Carolina's declaration complains that Northern states were passing their own laws to avoid returning people who had escaped slavery. In other words, South Carolina was angry that Northern states were using *their own* states' rights.
+
+Then Stephens gives his speech in Savannah. The new government, he says, rests on the idea that Black people were not equal to white people, and that slavery was their "natural and normal condition." It's known as the {Cornerstone Speech}.
+
+After the war, the story changed. Davis and Stephens both wrote books saying the South had fought for states' rights. That version spread through monuments and schoolbooks for decades. It's called the {Lost Cause}: the idea that the Confederacy fought a noble fight, and slavery had little to do with it.
+
+A good rule for history: *evidence from the moment usually beats stories told afterward.* In 1861, the people leaving told us why.
+
+---
+
+## 3:43 | Which Georgians? *(quiet chapter: no jokes, slower voice)*
+
+`ch04_which_georgians.txt` · 68 words
+
+In January 1861, Georgia holds a convention, a special meeting of delegates elected to make the decision. The vote is 208 to 89 for secession.
+
+Now look at who chose those delegates. White men. No women. And no one who was enslaved, which in Georgia was about 44 percent of the people in the state. Almost half.
 
 So when we say "Georgia decided," it's worth asking: *which Georgians?*
 
 ---
 
-## 3:50 | Fort Sumter
+## 4:11 | Fort Sumter
 
-`ch05_fort_sumter.txt` · 226 words
+`ch05_fort_sumter.txt` · 228 words
 
-March 4th, 1861. Lincoln takes office. And he has a problem. In Charleston Harbor sits Fort Sumter, a U.S. Army fort, and its soldiers are running out of food.
+March 1861. Lincoln takes office, and he has a problem. In Charleston Harbor sits Fort Sumter, a U.S. Army fort, and its soldiers are running out of food.
 
 If he sends warships, he looks like the one who started a war. If he does nothing, he gives up the fort.
 
-So he tells South Carolina's governor he's sending food. Only food. No new troops, no guns, unless the fort is attacked.
+So he tells South Carolina's governor he's sending food. Only food. No new troops, no guns, unless the fort is attacked. It's basically handing the Confederacy a match and asking: do you really want to be the one who lights it?
 
-Now the choice belongs to the Confederacy. And on April 12th, 1861, Confederate cannons open fire. After about a day and a half of shelling, the fort surrenders. No one is killed in the bombardment.
+They did. On April 12th, 1861, Confederate cannons open fire. After about a day and a half of shelling, the fort surrenders. No one is killed in the bombardment.
 
-But the war has started. Lincoln calls for 75,000 volunteers to put down the rebellion. He orders a {blockade}, warships closing off Southern ports. And he does both before Congress meets. He calls it back, but not until July 4th.
+But the war has started. Lincoln calls for 75,000 volunteers to put down the rebellion. He orders a {blockade}, warships closing off Southern ports. Normally, that's Congress's call. Lincoln does both before Congress even meets, then calls it back for July 4th.
 
-That call for troops tips four more states. Virginia, North Carolina, Tennessee and Arkansas leave rather than help fight other Southern states. That makes eleven.
+That call for troops tips four more states: Virginia, North Carolina, Tennessee and Arkansas. They won't fight other Southern states. That makes eleven.
 
 But four slave states stay in the Union: Delaware, Maryland, Kentucky and Missouri. They're called the {border states}. Lincoln badly needs to keep them. Hold onto that.
 
-So who decided on war? The first shots came from the Confederacy. The answer came from the president, who chose to act first and call Congress later.
+So who decided on war? The Confederacy fired first. The president answered, and asked Congress later.
 
 ---
 
-## 5:06 | Sizing Up the Sides
+## 5:28 | Sizing Up the Sides
 
-`ch06_sizing_up.txt` · 230 words
+`ch06_sizing_up.txt` · 233 words
 
-So it's war. Who should win?
+So who should win?
 
-On paper, the North. More than 22 million people, against about 9 million in the South. And more than a third of the South's people were enslaved. The North had about 90 percent of the country's factory output, and about 70 percent of its railroad miles.
+On paper, the North. More than 22 million people against about 9 million, and more than a third of the South's people were enslaved. The North made about 90 percent of everything the country's factories produced, and had about 70 percent of its railroad track.
 
 So why did the South think it could win? Three reasons.
 
-One: it didn't have to conquer anybody. It only had to survive. The North had to invade and take the whole thing back.
+One: it didn't have to conquer anybody. It only had to survive. Think of a game where a tie goes to the South. The North had to invade and take the whole thing back.
 
 Two: it fought on its own ground, close to home.
 
-Three: leaders. Many of the army's best officers were Southern. Robert E. Lee said he was offered a top command in the Union army. He turned it down to go with Virginia.
+Three: leaders. Many of the army's best officers were Southern. Robert E. Lee said he was offered a top Union command. He turned it down to go with Virginia.
 
-And the South had a bet, called {King Cotton}. Britain's mills ran on Southern cotton. Cut it off, the thinking went, and Britain would have to step in. Hold that thought, too.
+And the South had a bet, called {King Cotton}. Britain's textile mills, the factories that turned cotton into cloth, ran on Southern cotton. Cut it off, the thinking went, and Britain would have to step in. Hold that thought, too.
 
-The Union's plan was slower. General Winfield Scott wanted to squeeze. Blockade the coast. Take the Mississippi River and cut the Confederacy in two. Newspapers called it the {Anaconda Plan}, after the snake that crushes its prey.
+The Union's plan was slower: squeeze. Blockade the coast. Take the Mississippi River and cut the Confederacy in two. Newspapers called it the {Anaconda Plan}, after the snake that crushes its prey. People wanted something faster.
 
-People wanted something faster.
-
-Quick thing before the first big battle. If you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike the Anaconda Plan, it works right away.
+Quick thing. If you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike the Anaconda Plan, it works right away.
 
 ---
 
-## 6:24 | A Picnic at Bull Run
+## 6:46 | A Picnic at Bull Run
 
 `ch07_bull_run.txt` · 136 words
 
-Summer 1861. Northern newspapers are shouting "Forward to Richmond!" The Confederate capital is only about 100 miles from Washington. One big battle, people think, and it's over.
+Summer 1861. Northern newspapers shout "Forward to Richmond!" The Confederate capital is only about 100 miles from Washington. One big battle, people think, and it's over.
 
-On July 21st, a Union army meets the Confederates near a creek in Virginia called Bull Run. And they have company. Congressmen, reporters and curious people ride out from Washington in carriages to watch. Some reportedly bring picnic baskets.
+On July 21st, the armies meet near a creek in Virginia called Bull Run. And they have company. Congressmen, reporters and curious people ride out from Washington to watch. Some reportedly bring picnic baskets.
 
-Look at this. War, as a day out.
+Look at this. War, as a day out. Basically a tailgate, except the game has cannons.
 
-For a while, the Union seems to be winning. Then Confederate reinforcements arrive by train. The Union line breaks. Soldiers run, and they run right into the spectators. Carriages, wagons and soldiers jam the road back to Washington.
+For a while, the Union seems to be winning. Then Confederate reinforcements arrive by train, and the Union line breaks. Soldiers run right into the spectators. Carriages, wagons and soldiers jam the road back to Washington.
 
 Nearly 5,000 men are killed, wounded, captured or missing. Both sides learn the same thing that day. *This is not going to be quick.*
 
 ---
 
-## 7:11 | What They Walked Into *(quiet chapter: no jokes, slower voice)*
+## 7:33 | What They Walked Into *(quiet chapter: no jokes, slower voice)*
 
-`ch08_walked_into.txt` · 229 words
+`ch08_walked_into.txt` · 242 words
 
 The biggest group of soldiers on both sides were young farmers.
 
-And they carried a new weapon. The old smoothbore musket was accurate to maybe 100 yards. The new {rifled musket} had grooves inside the barrel that spun a soft lead bullet, the {Minié ball}. It could hit a target several times farther away.
+And they carried a new weapon. The old smoothbore musket was a smooth metal tube, and its bullet wobbled. The new {rifled musket} had spiral grooves inside the barrel. They made the soft lead bullet, the {Minié ball}, spin as it flew, like a football thrown in a tight spiral. It hit targets several times farther away.
 
 But generals still used the old tactics: long lines of men, shoulder to shoulder, marching straight at the enemy. New weapons, old tactics. That's a big part of why the battles became so deadly.
 
-And bullets weren't even the biggest killer. Disease was. Camps were crowded and dirty. Doctors didn't know germs existed.
+Bullets weren't even the biggest killer. Disease was. Camps were filthy. Doctors didn't know germs existed, so they used the same unwashed tools on one patient after another.
 
-When a Minié ball shattered an arm or a leg, the most common surgery was {amputation}. It wasn't carelessness. Before antibiotics, it was often the surest way to stop a deadly infection.
+When a Minié ball shattered an arm or a leg, the most common surgery was {amputation}, removing the limb. It wasn't carelessness. Before antibiotics, it was often the surest way to stop a deadly infection.
 
 By the end, an estimated 750,000 soldiers would die. About two out of every three died of disease, not battle.
 
-Their letters home show why they kept going. Union soldiers wrote about saving the Union, and over time, more of them wrote about ending slavery. Confederate soldiers wrote about defending their homes and their independence, and many wrote about slavery. The Confederates had it harder, too, always short of food, shoes and uniforms.
+Their letters home show why they kept going. Union soldiers wrote about saving the Union, and later, more wrote about ending slavery. Confederates wrote about home, independence, and often slavery. And they were always short of food, shoes and uniforms.
 
 And prison camps were worse than anything. At Andersonville, in southwest Georgia, about 13,000 Union prisoners died.
 
 ---
 
-## 8:36 | Back to Stephens
+## 9:03 | Back to Stephens
 
-`ch09_back_to_stephens.txt` · 158 words
+`ch09_back_to_stephens.txt` · 124 words
 
-So let's go back to the question. Why did eleven states leave?
+So, why did eleven states leave? The people who left told us: slavery. Lincoln's election meant it would not spread west. Seven states left before he took office, four more when he called for troops.
 
-The people who left told us. Lincoln's election meant slavery would not spread west. Seven states left before he took office. Four more left when he called for troops. And the vice president of the Confederacy called slavery its cornerstone.
+And why did everyone expect a quick war? Each side counted its own strengths: the North its people and factories, the South its generals, its home ground and King Cotton. Then came Bull Run.
 
-And why did everyone think it would be quick? Because each side counted its own strengths. The North counted people and factories. The South counted its generals, its home ground, and King Cotton. Then they met at Bull Run, and the spectators ran for Washington with everybody else.
-
-After the war, Stephens told a different story. But in March 1861, he told us exactly what he thought his new country was for.
+After the war, Stephens told a different story. But in 1861, he told us exactly what his new country was for.
 
 The war had started. Nobody knew yet what it would end.
 
