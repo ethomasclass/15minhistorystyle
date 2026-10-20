@@ -211,21 +211,29 @@ def add_pauses(pcm, chars, gap):
 
 
 def tail_trim(pcm, chars, n_real):
-    """Keep the audio up to TAIL_KEEP s after the last real character (dropping the padded pause) and fade out."""
+    """Cut at the quietest 10 ms between the last real character and the padding sentence (so no sliver of the
+    padding survives and the last word keeps its natural decay), then fade out over 40 ms."""
     import numpy as np
-    real = [c for c in chars[:n_real]]
+    real = list(chars[:n_real])
     end = max(e for c, s, e in real if not c.isspace())
+    nxt = next((s for c, s, e in chars[n_real:] if not c.isspace()), None)
     a = np.frombuffer(pcm, np.int16).astype(np.float32)
-    nxt = next((s for c, s, e in chars[n_real:] if not c.isspace()), None)   # where the throwaway sentence starts
-    if nxt is None or nxt - end < 0.05:
-        print(f"  WARNING: no clean gap before the padding (gap {0 if nxt is None else nxt - end:.2f}s); listen to this ending", flush=True)
-    cut = end + TAIL_KEEP if nxt is None else min(end + TAIL_KEEP, end + (nxt - end) * 0.6)
-    keep = min(len(a), int(cut * RATE))
-    a = a[:keep]
-    f = min(len(a), int(RATE * 0.06))
+    lo = int(max(0.0, end - 0.03) * RATE)
+    hi = int(min(len(a) / RATE, (nxt if nxt is not None else end + TAIL_KEEP) + 0.12) * RATE)
+    win = int(RATE * 0.01)
+    if hi - lo > win * 3:
+        env = np.array([np.sqrt((a[i:i + win] ** 2).mean()) for i in range(lo, hi - win, win // 2)])
+        k = int(env.argmin()); cut = lo + k * (win // 2) + win // 2
+        peak = np.sqrt((a ** 2).mean()) + 1e-6
+        if env[k] > 0.08 * peak:
+            print(f"  WARNING: no silent point before the padding (level {env[k] / peak:.2f}); listen to this ending", flush=True)
+    else:
+        cut = min(len(a), int((end + TAIL_KEEP) * RATE))
+    a = a[:cut]
+    f = min(len(a), int(RATE * 0.04))
     a[-f:] *= np.linspace(1, 0, f)
+    a = np.concatenate([a, np.zeros(int(RATE * 0.05), np.float32)])
     return a.astype(np.int16).tobytes(), real
-
 
 def tail_check(pcm, label):
     """Flag a paragraph whose audio ends while the voice is still sounding (a clipped last word), then fade the

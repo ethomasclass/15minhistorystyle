@@ -26,6 +26,17 @@ JOBS = {
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
+    # In Their Own Words (Civil War series, Video 1)
+    "stephens": ("img/ch01/stephens_portrait_vannerson_1859.jpg", None, "u2net_human_seg"),  # refined: --keep tools/traces/stephens_keep.json; do not re-run
+    # stephens_old (ch01 brady c1870): shown as a plain card; the chair fuses with the figure
+    "lincoln": ("img/ch02/lincoln_campaign_portrait_grozelier_1860.jpg", None, "u2net_human_seg"),  # refined: --keep tools/traces/lincoln_keep.json; do not re-run
+    "davis": ("img/ch02/davis_portrait_brady_1859.jpg", None, "u2net_human_seg"),
+    "anderson": ("img/ch05/anderson_portrait_engraving_1861.jpg", None, "u2net_human_seg"),
+    "lee": ("img/ch06/lee_full_length_vannerson_c1864.jpg", None, "u2net_human_seg"),
+    # scott (ch06 brady c1861): shown as a plain card; the vignetted coat gave no clean edge
+    "union_soldier": ("img/ch08/union_soldier_with_rifle_musket_portrait_c1861.jpg", None, "u2net_human_seg"),
+    "confed_soldier": ("img/ch08/confederate_soldier_with_musket_portrait_c1861.jpg", None, "u2net_human_seg"),
+    "spectator": ("img/gen/v1_ch07_spectators.jpg", (500, 205, 625, 595), "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

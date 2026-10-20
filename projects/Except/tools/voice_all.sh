@@ -13,5 +13,5 @@ for f in script/ch*.txt; do
     export VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.15
   fi
   echo "== $n (stretch $VOICE_STRETCH)"
-  python3 tools/voice.py "$f" "$n" 2>&1 | tail -1 || exit 1
+  python3 tools/voice.py "$f" "$n" 2>&1 | grep -E "WARNING|wrote|Error" || exit 1
 done
