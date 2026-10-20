@@ -322,8 +322,8 @@ const Border: React.FC<{t: TL}> = ({t}) => {
         <Highlight text="BORDER STATES" x={100} y={780} size={96} at={t.at('border states.')} seed={67} rot={-2} />
         <Definition term="bor·der states" def="slave states that stayed in the Union" at={t.at('border states.') + 9} x={120} y={930} w={1100} />
         <Note text="4 slave states stay in the Union" x={110} y={90} size={54} rot={-2} at={t.at('stay') - 3} color={WHITE} />
-        <Note text="Lincoln badly needs them" x={1060} y={230} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
-        <Note text="hold onto that." x={1250} y={340} size={58} rot={-3} at={t.at('Hold onto') - 3} color={WHITE} />
+        <Note text="Lincoln badly needs them" x={1200} y={790} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
+        <Note text="hold onto that." x={1300} y={900} size={58} rot={-3} at={t.at('Hold onto') - 3} color={WHITE} />
       </AbsoluteFill>
     </>
   );

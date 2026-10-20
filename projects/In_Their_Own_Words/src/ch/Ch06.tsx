@@ -243,10 +243,10 @@ const Snake: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 42%)'}} />
-          <Note text="newspapers called it" x={1180} y={600} size={54} rot={-3} at={a + 2} color={WHITE} />
+          <Note text="newspapers called it" x={1180} y={500} size={54} rot={-3} at={a + 2} color={WHITE} />
           <Highlight text="ANACONDA PLAN" x={100} y={740} size={100} at={t.at('Anaconda Plan,')} seed={81} rot={-2} />
           <Definition term="An·a·con·da Plan" def="named after the snake that crushes its prey" at={t.at('Anaconda Plan,') + 9} x={110} y={900} w={1400} />
-          <Note text="people wanted something faster" x={1060} y={740} size={56} rot={-3} at={t.at('People wanted') - 3} color={WHITE} />
+          <Note text="people wanted something faster" x={1000} y={630} size={50} rot={-3} at={t.at('People wanted') - 3} color={WHITE} />
           <Tag text="J. B. Elliott, Scott's Great Snake, 1861 · Library of Congress" x={44} y={40} />
         </>
       )}
