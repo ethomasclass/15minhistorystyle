@@ -180,6 +180,12 @@ const GownGreenV: React.FC<{place: Place; at: number}> = ({place, at}) => {
   return <>{layer('color', 1, 'c')}{layer('multiply', 0.35, 'm')}{layer('screen', 0.12, 's')}</>;
 };
 
+/** Show children only from frame `from` until frame `to` (for notes that must clear before the next beat). */
+const Win: React.FC<{from?: number; to: number; children: React.ReactNode}> = ({from = 0, to, children}) => {
+  const f = useCurrentFrame();
+  return f >= from && f < to ? <>{children}</> : null;
+};
+
 type WKey = {f: number; fx: number; fy: number; z: number};
 /** The Arsenic Waltz full height in a 9:16 window; the camera glides through the keys (centre in source px, zoom). */
 const WaltzV: React.FC<{keys: WKey[]; greenAt?: number; children?: (p: Place) => React.ReactNode}> = ({keys, greenAt, children}) => {
@@ -235,28 +241,34 @@ const WaltzScenes: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   const lookAt = at('Now look') - 4;
   const bothAt = at('skeletons') + 4;
-  const dressAt = at('her green dress') - 2;
+  const dressAt = at('The joke') - 6;
   const keys: WKey[] = [
     {f: 0, fx: 1560, fy: 1179, z: 1.0},
     {f: lookAt, fx: 1560, fy: 1179, z: 1.0},
     {f: bothAt, fx: 1560, fy: 738, z: 1.6},
     {f: dressAt, fx: 1560, fy: 738, z: 1.6},
-    {f: dressAt + 26, fx: 1200, fy: 1179, z: 1.0},
-    {f: at('The British') - 1, fx: 1100, fy: 1179, z: 1.0},
+    {f: dressAt + 22, fx: 1230, fy: 1179, z: 1.0},
+    {f: at('The British') - 1, fx: 1200, fy: 1179, z: 1.0},
   ];
   const cuts: [number, React.ReactNode][] = [
     [0, (
-      <WaltzV keys={keys} greenAt={at('her green dress') + 2}>
+      <WaltzV keys={keys} greenAt={at('green dress')}>
         {(p) => {
           const sx = (x: number) => p.left + x * p.scale, sy = (y: number) => p.top + y * p.scale;
           return (<>
-            <Note text="the most fashionable colour" x={70} y={190} size={54} rot={-3} at={at('most fashionable') - 3} color="#ffffff" />
-            <Highlight text="ARSENIC" x={70} y={870} size={140} at={at('arsenic.')} seed={71} rot={-3} />
-            <Note text="and people knew it." x={90} y={1040} size={58} rot={-3} at={at('people knew') - 3} color={pal.subject} />
-            <Note text="Punch, London, 1862" x={70} y={190} size={54} rot={-3} at={at('London magazine') - 3} out={lookAt + 20} color="#ffffff" />
-            <Loop cx={sx(1335)} cy={sy(660)} rx={140 * p.scale} ry={150 * p.scale} at={at('Now look')} seed={72} tilt={-6} />
-            <Loop cx={sx(1775)} cy={sy(400)} rx={170 * p.scale} ry={185 * p.scale} at={at('closer') + 2} seed={73} tilt={5} />
-            <Stamp text="SKELETONS." x={60} y={920} at={at('skeletons')} size={130} color={pal.subject} />
+            <Note text="the most fashionable colour" x={70} y={190} size={54} rot={-3} at={at('most fashionable') - 3} out={at('London magazine') - 6} color="#ffffff" />
+            <Win to={lookAt}>
+              <Highlight text="ARSENIC" x={70} y={870} size={140} at={at('arsenic.')} seed={71} rot={-3} />
+              <Note text="and people knew it." x={90} y={1040} size={58} rot={-3} at={at('people knew') - 3} color={pal.subject} />
+            </Win>
+            <Note text="Punch, London, 1862" x={70} y={190} size={54} rot={-3} at={at('London magazine') - 3} out={lookAt + 24} color="#ffffff" />
+            <Win to={dressAt}>
+              <Loop cx={sx(1335)} cy={sy(660)} rx={140 * p.scale} ry={150 * p.scale} at={at('Now look')} seed={72} tilt={-6} />
+              <Loop cx={sx(1775)} cy={sy(400)} rx={170 * p.scale} ry={185 * p.scale} at={at('closer') + 2} seed={73} tilt={5} />
+              <Stamp text="SKELETONS." x={60} y={920} at={at('skeletons')} size={130} color={pal.subject} />
+            </Win>
+            <Note text="the joke:" x={70} y={190} size={58} rot={-3} at={at('The joke') - 2} color="#ffffff" />
+            <Note text="her dress." x={110} y={270} size={72} rot={-3} at={at('her green dress') - 2} color={pal.subject} />
           </>);
         }}
       </WaltzV>
@@ -274,27 +286,27 @@ const WaltzScenes: React.FC<{t: TL}> = ({t}) => {
       </Desk>
     )],
     [at('Which is one way') - 1, (
-      <SilV name="g_ballroom" file="ch03_ballroom_1862.jpg" label="a London ball, 1862" crop={[599, 0, 1031, 768]} a={at('Which is one way')} b={at("But here's") + 6}>
-        {() => (<>
-          <Note text="a ball, 1862" x={70} y={190} size={58} rot={-3} at={at('Which is one way') - 2} color="#000000" />
-          <Note text="admirers: keep your distance" x={70} y={820} size={54} rot={-3} at={at('admirers') - 3} color="#000000" />
-        </>)}
-      </SilV>
+      <Desk a={at('Which is one way')}>
+        <DropCard src="img/ch03/met_green_silk_dress_1868.jpg" x={250} y={250} w={580} rot={2} at={at('Which is one way') - 1} filter={COLOUR} />
+        <Note text="a green silk gown, 1868" x={70} y={170} size={54} rot={-3} at={at('Which is one way') - 2} color="#ffffff" />
+        <Note text="keep your distance." x={90} y={1040} size={64} rot={-3} at={at('admirers') - 3} color={pal.subject} />
+        <Tag text="Dress, 1868 (probably arsenic green) · The Metropolitan Museum of Art" y={TAG_Y} />
+      </Desk>
     )],
     [at("But here's") - 1, (
       <SilV name="g_workshop" file="ch04_flower_workshop.jpg" label="an artificial-flower workshop" crop={[114, 0, 546, 768]} a={at("But here's")} b={at('The people in') + 4} z={[1.02, 1.12]}>
         {() => (<>
           <Highlight text="THE TWIST" x={70} y={190} size={120} at={at('twist')} seed={75} rot={-3} />
-          <Note text="most wearers: fine." x={80} y={380} size={62} rot={-3} at={at('were fine') - 3} color="#000000" />
+          <Note text="most wearers: fine." x={80} y={380} size={62} rot={-3} at={at('were fine') - 3} color="#ffffff" />
         </>)}
       </SilV>
     )],
     [at('The people in') - 1, (
-      <SilV name="g_matilda" file="ch04_matilda_workbench.jpg" label="an artificial-flower maker, London, 1861" crop={[130, 0, 562, 768]} a={at('The people in')} b={t.frames} z={[1.03, 1.12]}>
+      <SilV name="g_matilda" file="ch04_matilda_workbench.jpg" label="an artificial-flower maker, London, 1861" crop={[190, 0, 622, 768]} a={at('The people in')} b={t.frames} z={[1.03, 1.12]}>
         {() => (<>
-          <Note text="the people in danger:" x={70} y={190} size={58} rot={-3} at={at('The people in') - 2} color="#000000" />
+          <Note text="the people in danger:" x={70} y={190} size={58} rot={-3} at={at('The people in') - 2} out={at('who made') - 2} color="#ffffff" />
           <Highlight text="THE MAKERS" x={70} y={300} size={120} at={at('who made')} seed={76} rot={-3} />
-          <Note text="breathing the dust, all day" x={70} y={850} size={54} rot={-3} at={at('breathing') - 3} color="#000000" />
+          <Note text="breathing the dust, all day" x={70} y={850} size={54} rot={-3} at={at('breathing') - 3} color="#ffffff" />
         </>)}
       </SilV>
     )],
@@ -318,19 +330,19 @@ const BookScenes: React.FC<{t: TL}> = ({t}) => {
     [0, (
       <Desk a={0}>
         <Highlight text="MICHIGAN, 1874" x={60} y={170} size={104} at={at('Michigan')} seed={81} rot={-3} />
-        <DropCard src={COVER} x={110} y={330} w={780} rot={-3} at={2} filter={COLOUR} />
-        <Stamp text="100 LIBRARIES" x={70} y={1040} at={at('100')} size={96} color={pal.subject} />
+        <DropCard src={COVER} x={90} y={310} w={680} rot={-3} at={2} filter={COLOUR} />
+        <Win to={at('Every page') - 2}><Stamp text="100 LIBRARIES" x={70} y={1050} at={at('100')} size={96} color={pal.subject} /></Win>
         {(['n110', 'n126', 'n048'] as const).map((n, i) => (
-          <DropCard key={n} src={`img/ch01/kedzie_specimen_${n}.jpg`} x={[640, 700, 600][i]} y={[250, 470, 690][i]} w={330} rot={[8, 13, 4][i]} at={at('Every page') - 1 + i * 5} filter={COLOUR} />
+          <DropCard key={n} src={`img/ch01/kedzie_specimen_${n}.jpg`} x={[680, 740, 660][i]} y={[360, 560, 760][i]} w={290} rot={[8, 13, 4][i]} at={at('Every page') - 1 + i * 5} filter={COLOUR} />
         ))}
-        <Note text="every page: real wallpaper" x={60} y={920} size={50} rot={-3} at={at('real wallpaper') - 3} color="#ffffff" />
-        <Note text="every page: arsenic" x={70} y={990} size={50} rot={-3} at={at('arsenic in it') - 3} color={pal.subject} />
+        <Note text="every page: real wallpaper" x={60} y={1005} size={50} rot={-3} at={at('real wallpaper') - 3} color="#ffffff" />
+        <Note text="every page: arsenic" x={70} y={1090} size={50} rot={-3} at={at('arsenic in it') - 3} color={pal.subject} />
         <Tag text={`R. C. Kedzie, Shadows from the Walls of Death, 1874 · ${NLM}`} y={TAG_Y} />
       </Desk>
     )],
     [at('The letter in') - 1, (
       <Desk a={at('The letter in')}>
-        <Doc src={LETTER} x={185} y={-252} w={1900} at={at('The letter in') - 1} push={[at('The letter in'), first]} fx={1040} fy={2500} zoom={1.9}
+        <Doc src={LETTER} x={-135} y={-973} w={1380} at={at('The letter in') - 1} fx={1040} fy={2500}
           marks={[{at: at('asks') - 2, to: t.end('handle it'), swipe: [[325, 2385, 1845, 2450], [240, 2480, 1845, 2545], [240, 2570, 445, 2620]]}]} />
         <Note text="the cover letter, 1874" x={70} y={170} size={54} rot={-3} at={at('The letter in') - 2} color="#ffffff" />
         <Note text="not for children." x={80} y={1060} size={60} rot={-3} at={at('children') - 3} color={pal.subject} />
@@ -339,33 +351,33 @@ const BookScenes: React.FC<{t: TL}> = ({t}) => {
     )],
     [first, (
       <Desk a={first}>
-        <DropCard src={FIRST} x={230} y={290} w={600} rot={-3} at={first} filter={COLOUR} />
+        <DropCard src={FIRST} x={270} y={250} w={520} rot={-3} at={first} filter={COLOUR} />
         <Note text="page one" x={70} y={170} size={64} rot={-3} at={first + 2} color="#ffffff" />
-        <Note text="a girl, about ten," x={80} y={990} size={58} rot={-3} at={at('a girl') - 3} color={pal.subject} />
-        <Note text="had died that year" x={110} y={1070} size={58} rot={-3} at={at('had died') - 3} color={pal.subject} />
+        <Note text="a girl, about ten," x={80} y={1010} size={58} rot={-3} at={at('a girl') - 3} color={pal.subject} />
+        <Note text="had died that year" x={110} y={1085} size={58} rot={-3} at={at('had died') - 3} color={pal.subject} />
         <Tag text={`Kedzie, Shadows from the Walls of Death, 1874: first specimen · ${NLM}`} y={TAG_Y} />
       </Desk>
     )],
     [at('So Kedzie') - 1, (
       <SilV name="g_chemist" file="ch06_chemist_testing.jpg" label="Robert Kedzie tests the wallpapers" crop={[700, 0, 1132, 768]} a={at('So Kedzie')} b={at('Then he bound') + 6}>
         {() => (<>
-          <Note text="Robert Kedzie, chemist" x={70} y={190} size={54} rot={-3} at={at('So Kedzie') - 2} color="#000000" />
-          <Note text="tested every sheet himself" x={70} y={850} size={50} rot={-3} at={at('tested every') - 3} color="#000000" />
+          <Note text="Robert Kedzie, chemist" x={70} y={190} size={54} rot={-3} at={at('So Kedzie') - 2} out={at('tested every') - 4} color="#ffffff" />
+          <Note text="tested every sheet." x={70} y={190} size={58} rot={-3} at={at('tested every') - 3} color="#ffffff" />
           <Stamp text="ALL 86" x={70} y={940} at={at('All 86')} size={150} color={pal.subject} />
         </>)}
       </SilV>
     )],
     [at('Then he bound') - 1, (
       <Desk a={at('Then he bound')}>
-        <DropCard src={COVER} x={110} y={330} w={780} rot={2} at={at('Then he bound') - 1} filter={COLOUR} />
+        <DropCard src={COVER} x={150} y={310} w={720} rot={2} at={at('Then he bound') - 1} filter={COLOUR} />
         <Highlight text="THIS BOOK." x={80} y={170} size={130} at={at('This book')} seed={82} rot={-3} />
-        <Note text="mailed to the libraries" x={90} y={1040} size={56} rot={-3} at={at('mailed') - 3} color="#ffffff" />
+        <Note text="mailed to the libraries" x={90} y={1065} size={56} rot={-3} at={at('mailed') - 3} color="#ffffff" />
         <Tag text={`R. C. Kedzie, Shadows from the Walls of Death, 1874 · ${NLM}`} y={TAG_Y} />
       </Desk>
     )],
     [at('His headline') - 1, (
       <Desk a={at('His headline')}>
-        <Doc src="img/ch06/kedzie_essay_p1_shall_we_poison_crop_1874.jpg" x={-531} y={-311} w={2096} at={at('His headline') - 1} fx={1190} fy={1123}
+        <Doc src="img/ch06/kedzie_essay_p1_shall_we_poison_crop_1874.jpg" x={-226} y={-23} w={1500} at={at('His headline') - 1} fx={1190} fy={1123}
           marks={[{at: at('Shall we poison'), to: t.end('homes'), swipe: [[700, 1098, 1680, 1148]]}]} />
         <Note text="his headline was a question:" x={70} y={170} size={54} rot={-3} at={at('His headline') - 2} color="#ffffff" />
         <Tag text={`R. C. Kedzie, "Arsenical Wall Paper," 1874, p. 1 · ${NLM}`} y={TAG_Y} />
