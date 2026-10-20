@@ -1,0 +1,623 @@
+{
+ "demo/sully_jackson_1845.jpg": {
+  "title": "Thomas Sully, Andrew Jackson, 1845 (NGA 1128)",
+  "artist": "Thomas Sully",
+  "date": "1845",
+  "licence": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Thomas_Sully,_Andrew_Jackson,_1845,_NGA_1128.jpg"
+ },
+ "maps/mitchell_1836.jpg": {
+  "title": "Mitchell's Map of the United States",
+  "artist": "Samuel Augustus Mitchell",
+  "date": "1836",
+  "licence": "public domain (Library of Congress, Geography and Map Division)",
+  "page": "https://www.loc.gov/item/87692342/"
+ },
+ "ch01/lee_seated_brady_1865.jpg": {
+  "title": "[Robert E. Lee, seated] / Brady & Co.",
+  "artist": "Brady's National Photographic Portrait Galleries, photographer",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015645637/",
+  "source": "loc:2015645637"
+ },
+ "ch02/gettysburg_battle_july3_currier_1863.jpg": {
+  "title": "The battle of Gettysburg, Pa. July 3d. 1863",
+  "artist": "Currier & Ives.",
+  "date": "1863",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90709061/",
+  "source": "loc:90709061"
+ },
+ "ch02/gettysburg_town_from_cemetery_hill_1863.jpg": {
+  "title": "View of Gettysburg from Cemetery Hill",
+  "artist": "O'Sullivan, Timothy H., 1840-1882, photographer",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2014646001/",
+  "source": "loc:2014646001"
+ },
+ "ch02/gettysburg_town_from_northwest_1863.jpg": {
+  "title": "View of Gettysburg from the Northwest",
+  "artist": "",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2014646002/",
+  "source": "loc:2014646002"
+ },
+ "ch02/vicksburg_cave_life_volck_1864.jpg": {
+  "title": "Cave life in Vicksburg",
+  "artist": "Volck, Adalbert John, 1828-1912, artist",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90710021/",
+  "source": "loc:90710021"
+ },
+ "ch02/vicksburg_siege_grant_lithograph_1863.jpg": {
+  "title": "The siege of Vicksburg - Major General U.S. Grant, commanding / sketched by A.E. Mathews, 31st O.V.I. ; Middleton Strobridge, & Co. Lith. Cin. O.",
+  "artist": "Middleton, Strobridge & Co., lithographer, Mathews, Alfred Edward, 1831-1874, artist",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013645287/",
+  "source": "loc:2013645287"
+ },
+ "ch02/grant_city_point_1864.jpg": {
+  "title": "General U. S. Grant, City Point, Va., August, 1864",
+  "artist": "Fowx, Egbert Guy, photographer",
+  "date": "1864",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013648726/",
+  "source": "loc:2013648726"
+ },
+ "ch02/grant_portrait_brady.jpg": {
+  "title": "[General Ulysses S. Grant] / Brady, New York ; Brady's National Photographic Portrait Galleries, Broadway & Tenth Street, New York & No. 352 Pennsylvania Av., Washington, D.C.",
+  "artist": "Brady, Mathew B., approximately 1823-1896, photographer, Brady's National Photographic Portrait Galleries.",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2020635975/",
+  "source": "loc:2020635975"
+ },
+ "ch01/lee_portrait_vannerson_1864.jpg": {
+  "title": "[General Robert E. Lee, full-length portrait, standing, facing front, with left hand at waist, on sword, wearing military uniform]",
+  "artist": "Vannerson, Julian, 1827-, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013646567/",
+  "source": "loc:2013646567"
+ },
+ "ch02/gettysburg_little_round_top_forbes_1863.jpg": {
+  "title": "The battle of Gettysburg. View from the summit of Little Round Top. The advance of Genl. Longstreet's Corps on the Union position (5th Corps) on Little Round Top, Thursday evening and Friday afternoon / E.F.",
+  "artist": "Forbes, Edwin, 1839-1895, artist",
+  "date": "1863-07-02",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004661929/",
+  "source": "loc:2004661929"
+ },
+ "ch02/meade_portrait_1865.jpg": {
+  "title": "[Portrait of Maj. Gen. George G. Meade, officer of the Federal Army, and corps commanders, vicinity of Washington, D.C., June 1865: Horatio G. Wright, John A. Logan, Meade, John G. Parke, Andrew A. Humphreys]",
+  "artist": "Smith, William Morris, photographer",
+  "date": "1865",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018666459/",
+  "source": "loc:2018666459"
+ },
+ "ch02/meade_portrait_hicks.jpg": {
+  "title": "[George Gordon Meade in uniform, full length portrait]",
+  "artist": "Hicks, Thomas, 1823-1890, artist, Detroit Publishing Co., copyright claimant, Detroit Publishing Co., publisher",
+  "date": "1900-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2016800576/",
+  "source": "loc:2016800576"
+ },
+ "ch02/meade_at_gettysburg_currier_1863.jpg": {
+  "title": "Majr. Genl. George G. Meade, at the battle of Gettysburg, July 3d. 1863",
+  "artist": "Currier & Ives.",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90715658/",
+  "source": "loc:90715658"
+ },
+ "ch01/thirteenth_amendment_enrolled_1865.jpg": {
+  "title": "File:13th Amendment Pg1of1 AC.jpg",
+  "artist": "Nationalbdgf Archives of the Unites States",
+  "date": "",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:13th_Amendment_Pg1of1_AC.jpg"
+ },
+ "ch06/mclean_house_appomattox_1865.jpg": {
+  "title": "McLean's House, Appomattox, Va., scene of General Lee's surrender",
+  "artist": "O'Sullivan, Timothy H., 1840-1882, photographer",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2014646169/",
+  "source": "loc:2014646169"
+ },
+ "ch06/mclean_house_appomattox_alt_1865.jpg": {
+  "title": "McLean's House, Appomattox Court-House, Virginia where the capitulation was signed between Generals Grant and Lee / negative by T.H. O'Sullivan, positive by A. Gardner.",
+  "artist": "O'Sullivan, Timothy H., 1840-1882, photographer, Gardner, Alexander, 1821-1882, photographer",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2007685834/",
+  "source": "loc:2007685834"
+ },
+ "ch06/surrender_lee_currier_1865.jpg": {
+  "title": "Surrender of Genl. Lee, at Appomattox C.H. Va. April 9th. 1865",
+  "artist": "Currier & Ives.",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2002695773/",
+  "source": "loc:2002695773"
+ },
+ "ch06/lee_after_surrender_brady_1865.jpg": {
+  "title": "Robert E. Lee. April 1865",
+  "artist": "Brady, Mathew B., approximately 1823-1896, photographer",
+  "date": "1865",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018667428/",
+  "source": "loc:2018667428"
+ },
+ "ch06/lincoln_assassination_currier_1865.jpg": {
+  "title": "The assassination of President Lincoln: at Ford's Theatre, Washington, D.C., April 14th, 1865",
+  "artist": "Currier & Ives.",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90708801/",
+  "source": "loc:90708801"
+ },
+ "ch06/lincoln_assassination_lloyd_1865.jpg": {
+  "title": "Assassination of President Lincoln, at Ford's Theatre, Apl. 14th 1865",
+  "artist": "H.H. Lloyd & Co.",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003671408/",
+  "source": "loc:2003671408"
+ },
+ "ch06/lincoln_funeral_pennsylvania_ave_1865.jpg": {
+  "title": "Lincoln's funeral on Pennsylvania Ave.",
+  "artist": "",
+  "date": "1865",
+  "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+  "page": "https://www.loc.gov/item/2017897828/",
+  "source": "loc:2017897828"
+ },
+ "ch03/lincoln_gettysburg_crowd_1863.jpg": {
+  "title": "[Lincoln's Gettysburg Address, Gettysburg]",
+  "artist": "",
+  "date": "1900-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2012648250/",
+  "source": "loc:2012648250"
+ },
+ "ch03/edward_everett_sartain_1861.jpg": {
+  "title": "Edward Everett / on steel by John Sartain, Phila. ; after a photog[ra]ph from life [by] Root.",
+  "artist": "Sartain, John, 1808-1897, engraver, Root, M. A. (Marcus Aurelius), 1808-1888, photographer",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003663973/",
+  "source": "loc:2003663973"
+ },
+ "ch03/edward_everett_portrait_1860.jpg": {
+  "title": "Edward Everett / painted by T. Hicks N.A. ; engraved by H. Wright Smith.",
+  "artist": "Smith, Henry Wright, 1828-, engraver, Hicks, Thomas, 1823-1890, artist",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2006677495/",
+  "source": "loc:2006677495"
+ },
+ "ch03/soldiers_national_cemetery_1882.jpg": {
+  "title": "Soldiers National Cemetery / photographed by W.H. Tipton.",
+  "artist": "Tipton, W. H. (William H.), 1850-1929, photographer",
+  "date": "1882",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90712399/",
+  "source": "loc:90712399"
+ },
+ "ch03/declaration_independence_facsimile_1903.jpg": {
+  "title": "Official facsimile of the Declaration of Independence",
+  "artist": "",
+  "date": "1903-01-01",
+  "licence": "No known restrictions on publication. For information see: \"Popular Graphic Arts,\" https://hdl.loc.gov/loc.pnp/res.248.pga",
+  "page": "https://www.loc.gov/item/2018757141/",
+  "source": "loc:2018757141"
+ },
+ "ch07/house_scene_passage_amendment_1865.jpg": {
+  "title": "Scene in the House on the passage of the proposition to amend the Constitution, January 31, 1865",
+  "artist": "",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/00652833/",
+  "source": "loc:00652833"
+ },
+ "ch03/cemetery_dedication_gardner_1863.jpg": {
+  "title": "[Dedication ceremonies at the Soldiers' National cemetery, Gettysburg, Pennsylvania]",
+  "artist": "Gardner, Alexander, 1821-1882, photographer",
+  "date": "1863",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018671678/",
+  "source": "loc:2018671678"
+ },
+ "ch03/cemetery_dedication_gardner_alt_1863.jpg": {
+  "title": "[Dedication ceremonies at the Soldiers' National Cemetery, Gettysburg, Pennsylvania]",
+  "artist": "Gardner, Alexander, 1821-1882, photographer",
+  "date": "1863",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018666317/",
+  "source": "loc:2018666317"
+ },
+ "ch04/draft_riots_orphan_asylum_burning_1863.jpg": {
+  "title": "The Riots at New York--the rioters burning and sacking the colored orphan asylum",
+  "artist": "",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/92522163/",
+  "source": "loc:92522163"
+ },
+ "ch04/draft_riots_orphan_asylum_later_print.jpg": {
+  "title": "[New York (City) - Draft riot, 1863: \"The rioters burning the Colored Orphan Asylum...5th Ave. & 46th St.\"]",
+  "artist": "",
+  "date": "1866-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2006688447/",
+  "source": "loc:2006688447"
+ },
+ "ch04/draft_lottery_provost_marshal_1863.jpg": {
+  "title": "Resumption of the draft - inside the Provost Marshal's office, Sixth District - the wheel goes round",
+  "artist": "",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2002718196/",
+  "source": "loc:2002718196"
+ },
+ "ch04/bounty_brokers_substitutes_1864.jpg": {
+  "title": "War views. No. 2041, Bounty brokers looking out for substitutes",
+  "artist": "E. & H.T. Anthony (Firm)",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2012649702/",
+  "source": "loc:2012649702"
+ },
+ "ch04/wanted_a_substitute_sheet_music_1863.jpg": {
+  "title": "Wanted a substitute",
+  "artist": "Oliver Ditson & Co.",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2008661656/",
+  "source": "loc:2008661656"
+ },
+ "ch05/sherman_portrait_brady_1865.jpg": {
+  "title": "[General William T. Sherman of 13th Regular Army Infantry Regiment in uniform with mourning ribbon for President Lincoln and Society of the Cumberland badge] / Brady's National Photographic Portrait Galleries, No. 352 Pennsylvania Av., Washington, D.C. & Broadway & Tenth St. New York.",
+  "artist": "Brady's National Photographic Portrait Galleries, photographer",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2018652913/",
+  "source": "loc:2018652913"
+ },
+ "ch05/sherman_atlanta_barnard_1864.jpg": {
+  "title": "[Atlanta, Ga. Gen. William T. Sherman, leaning on breach of gun, and staff at Federal Fort No. 7]",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018666969/",
+  "source": "loc:2018666969"
+ },
+ "ch05/atlanta_car_shed_barnard_1864.jpg": {
+  "title": "Car shed - Atlanta during last days of occupation by Gen'l. Sherman's Army, destroyed",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2005681125/",
+  "source": "loc:2005681125"
+ },
+ "ch05/atlanta_car_shed_ruins_barnard_1864.jpg": {
+  "title": "Ruins of the passenger station, (car shed), Atlanta, Ga. - Nov. 1864",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2005681127/",
+  "source": "loc:2005681127"
+ },
+ "ch05/atlanta_after_capture_barnard_1864.jpg": {
+  "title": "Atlanta, Georgia, just after its capture",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004682784/",
+  "source": "loc:2004682784"
+ },
+ "ch05/sherman_men_destroying_railroad_barnard_1864.jpg": {
+  "title": "Gen. Sherman's men destroying the railroad before the evacuation of Atlanta, Ga.",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003653363/",
+  "source": "loc:2003653363"
+ },
+ "ch05/sherman_march_destroying_track_waud_1864.jpg": {
+  "title": "Shermans march destroying the track--1864",
+  "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+  "date": "1864-11-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004660905/",
+  "source": "loc:2004660905"
+ },
+ "ch05/sherman_reviewing_army_savannah_waud_1864.jpg": {
+  "title": "Gen Sherman reviewing his army in Savannah before starting on his new campaign",
+  "artist": "Waud, William, -1878, artist",
+  "date": "1864-12",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004661239/",
+  "source": "loc:2004661239"
+ },
+ "ch05/mcclellan_meeting_1864.jpg": {
+  "title": "The Presidential campaign in America. Great M'Clellan meeting in Union Square, New York",
+  "artist": "",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90708967/",
+  "source": "loc:90708967"
+ },
+ "ch05/mcclellan_campaign_button_1864.jpg": {
+  "title": "[Gen. George McClellan campaign button for 1864 presidential election]",
+  "artist": "",
+  "date": "1868-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2011661491/",
+  "source": "loc:2011661491"
+ },
+ "ch08/first_vote_waud_1867.jpg": {
+  "title": "\"The first vote\" / AW ; drawn by A.R. Waud.",
+  "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+  "date": "1867-11-16",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2011648984/",
+  "source": "loc:2011648984"
+ },
+ "ch08/first_vote_harpers_1867.jpg": {
+  "title": "\"The first vote\" / AW [monogram] ; drawn by A.R. Waud.",
+  "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+  "date": "1867-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/00651117/",
+  "source": "loc:00651117"
+ },
+ "ch08/freedmen_school_vicksburg_waud_1866.jpg": {
+  "title": "Primary school for freedmen in charge of Mrs. Green at Vicksburg, Mississippi / A. R. W.",
+  "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+  "date": "1866",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2023632559/",
+  "source": "loc:2023632559"
+ },
+ "ch08/freedmen_school_edisto_island.jpg": {
+  "title": "[Freedmen's school, Edisto Island, S.C.] / Samuel A. Cooley, photographer, Savannah, Ga., Hilton Head, S.C., Beaufort, S.C.",
+  "artist": "Cooley, Sam A. (Samuel A.), photographer",
+  "date": "1862-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2010647918/",
+  "source": "loc:2010647918"
+ },
+ "ch05/sherman_march_to_the_sea_darley_1883.jpg": {
+  "title": "Sherman's march to the sea / drawn by F.O.C. Darley.",
+  "artist": "Darley, Felix Octavius Carr, 1822-1888, artist",
+  "date": "1883-01-01",
+  "licence": "No known restrictions on publication. For information see: \"Popular Graphic Arts,\" https://hdl.loc.gov/loc.pnp/res.248.pga",
+  "page": "https://www.loc.gov/item/96512373/",
+  "source": "loc:96512373"
+ },
+ "ch05/sherman_horseback_atlanta_barnard_1864.jpg": {
+  "title": "[Atlanta, Ga. Gen. William T. Sherman on horseback at Federal Fort No. 7]",
+  "artist": "Barnard, George N., 1819-1902, photographer",
+  "date": "1864",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018666106/",
+  "source": "loc:2018666106"
+ },
+ "ch05/lincoln_union_banner_currier_1864.jpg": {
+  "title": "Grand national union banner for 1864. Liberty, union and victory",
+  "artist": "Currier & Ives.",
+  "date": "1864",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003674567/",
+  "source": "loc:2003674567"
+ },
+ "ch05/mcclellan_democratic_banner_currier_1864.jpg": {
+  "title": "Grand National Democratic banner. Peace! Union! and victory!",
+  "artist": "Currier & Ives.",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003656577/",
+  "source": "loc:2003656577"
+ },
+ "ch05/mcclellan_pendleton_poster_1864.jpg": {
+  "title": "McClellan and Pendleton / Oakley & Tompson lith., Boston.",
+  "artist": "Oakley & Thompson, lithographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/95505794/",
+  "source": "loc:95505794"
+ },
+ "ch05/lincoln_johnson_ticket_lloyd_1864.jpg": {
+  "title": "Abraham Lincoln of Illinois. Andrew Johnson of Tennessee. No. 37 / G. Kaehrle [Gabriel Kaehrle].",
+  "artist": "H.H. Lloyd & Co., lithographer, Kaehrle, Gabriel, artist",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003689259/",
+  "source": "loc:2003689259"
+ },
+ "ch04/conscription_in_new_york_ILN_1863.jpg": {
+  "title": "The war in America: the conscription in New York",
+  "artist": "",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2007678618/",
+  "source": "loc:2007678618"
+ },
+ "ch06/fords_theatre_april_1865.jpg": {
+  "title": "Ford's Theatre as it was in April 1865",
+  "artist": "Bell & Bro. (Washington, D.C.), publisher",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2024722981/",
+  "source": "loc:2024722981"
+ },
+ "ch06/fords_theatre_as_it_was_1865.jpg": {
+  "title": "[D.C. - Wash. - \"Ford's Theatre as it was in 1865\"]",
+  "artist": "",
+  "date": "1868-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2006688688/",
+  "source": "loc:2006688688"
+ },
+ "ch07/chain_gang_thomasville_georgia_c1890.jpg": {
+  "title": "The chain gang, Thomasville, Georgia",
+  "artist": "Kirkbride, Joseph John, 1842-1899, photographer",
+  "date": "1884-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/00652806/",
+  "source": "loc:00652806"
+ },
+ "ch07/chain_gang_convicts_road_work_nc_1910.jpg": {
+  "title": "Chain gang of convicts engaged in road work. Pitt County, North Carolina. Autumn 1910. The inmates were quartered in the wagons shown in the picture. Wagons were equipped with bunks and move from place to place as labor is utilized. The central figure in the picture is J.Z. McLawhon, who was at that time county superintendent of chain gangs. The dogs are bloodhounds used for running down any attempted escapes",
+  "artist": "",
+  "date": "1910-01-01",
+  "licence": "No known restrictions on images made by the U.S. government; images copied from other sources may be restricted. For information, see U.S. Farm Security Administration/Office of War Information Black & White Photographs https://www.loc.gov/rr/print/res/071_fsab.html",
+  "page": "https://www.loc.gov/item/2017761945/",
+  "source": "loc:2017761945"
+ },
+ "ch07/southern_chain_gang_detroit_c1903.jpg": {
+  "title": "A Southern chain gang",
+  "artist": "Detroit Publishing Co., publisher",
+  "date": "1900-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2016803065/",
+  "source": "loc:2016803065"
+ },
+ "ch02/grant_lieutenant_general_buttre_1864.jpg": {
+  "title": "Lieut. Genl. Ulysses S. Grant, U.S.A. / border designed by W. Momberger ; photograph by Barr & Young ; engraved by J.C. Buttre, N.Y.",
+  "artist": "Buttre, John Chester, 1821-1893, engraver, Momberger, William, 1829-1895, artist, Barr & Young, photographer",
+  "date": "1864",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2017648260/",
+  "source": "loc:2017648260"
+ },
+ "ch02/grant_lieutenant_general_donaldson_1864.jpg": {
+  "title": "Lieut. Gen. U.S. Grant. / J.L.(?), 1864.",
+  "artist": "Donaldson & Elmes.",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90712161/",
+  "source": "loc:90712161"
+ },
+ "ch04/draft_office_burning_headley_1873.jpg": {
+  "title": "The great riots of New York, 1712 to 1873. Including a full and complete account of the four days' draft riot of 1863 (page 7)",
+  "artist": "Headley, J. T., 1813-1897",
+  "date": "1873",
+  "licence": "public domain by age (1873)",
+  "page": "https://archive.org/details/greatriotsofnewy00head_1/page/n7",
+  "source": "iabook:greatriotsofnewy00head_1:7"
+ },
+ "ch04/confederate_currency_plate_1875.jpg": {
+  "title": "Currency of the Confederate States of America (page 38)",
+  "artist": "William Lee",
+  "date": "1875",
+  "licence": "public domain by age (1875)",
+  "page": "https://archive.org/details/currencyofconfed1875will/page/n38",
+  "source": "iabook:currencyofconfed1875will:38"
+ },
+ "ch04/confederate_currency_plate_alt_1875.jpg": {
+  "title": "Currency of the Confederate States of America (page 36)",
+  "artist": "William Lee",
+  "date": "1875",
+  "licence": "public domain by age (1875)",
+  "page": "https://archive.org/details/currencyofconfed1875will/page/n36",
+  "source": "iabook:currencyofconfed1875will:36"
+ },
+ "ch03/gettysburg_address_bliss_copy_p1_facsimile_1909.jpg": {
+  "title": "The Gettysburg address : when written, how received, its true form (page 12)",
+  "artist": "Lambert, William H. (William Harrison), 1842-1912",
+  "date": "1909",
+  "licence": "public domain by age (1909)",
+  "page": "https://archive.org/details/gettysburgaddre00lamb/page/n12",
+  "source": "iabook:gettysburgaddre00lamb:12"
+ },
+ "ch03/gettysburg_address_bliss_copy_p2_facsimile_1909.jpg": {
+  "title": "The Gettysburg address : when written, how received, its true form (page 13)",
+  "artist": "Lambert, William H. (William Harrison), 1842-1912",
+  "date": "1909",
+  "licence": "public domain by age (1909)",
+  "page": "https://archive.org/details/gettysburgaddre00lamb/page/n13",
+  "source": "iabook:gettysburgaddre00lamb:13"
+ },
+ "ch03/gettysburg_address_hay_copy_p1_facsimile_1909.jpg": {
+  "title": "The Gettysburg address : when written, how received, its true form (page 22)",
+  "artist": "Lambert, William H. (William Harrison), 1842-1912",
+  "date": "1909",
+  "licence": "public domain by age (1909)",
+  "page": "https://archive.org/details/gettysburgaddre00lamb/page/n22",
+  "source": "iabook:gettysburgaddre00lamb:22"
+ },
+ "ch03/gettysburg_address_hay_copy_p2_facsimile_1909.jpg": {
+  "title": "The Gettysburg address : when written, how received, its true form (page 23)",
+  "artist": "Lambert, William H. (William Harrison), 1842-1912",
+  "date": "1909",
+  "licence": "public domain by age (1909)",
+  "page": "https://archive.org/details/gettysburgaddre00lamb/page/n23",
+  "source": "iabook:gettysburgaddre00lamb:23"
+ },
+ "ch06/gordon_granger_portrait_brady.jpg": {
+  "title": "[Portrait of Maj. Gen. Gordon Granger, officer of the Federal Army]",
+  "artist": "Brady's National Photographic Portrait Galleries, photographer",
+  "date": "1860",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018666427/",
+  "source": "loc:2018666427"
+ },
+ "ch06/general_order_no3_juneteenth_page2_1865.jpg": {
+  "title": "General Order 3 Juneteenth",
+  "artist": "United States. Government",
+  "date": "1865-06-19",
+  "licence": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "page": "https://archive.org/details/general-order-3-juneteenth-details",
+  "source": "ia:general-order-3-juneteenth-details"
+ },
+ "ch06/emancipation_celebration_dc_1866.jpg": {
+  "title": "Celebration of the abolition of slavery in the District of Columbia by the colored people, in Washington, April 19, 1866 Henry A. Smythe, Esq. / / Sketched by F. Dielman.",
+  "artist": "Dielman, Frederick, 1847-1935, artist",
+  "date": "1866",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015647679/",
+  "source": "loc:2015647679"
+ },
+ "ch07/milledgeville_old_capitol_habs.jpg": {
+  "title": "Old State Capitol, Milledgeville, Baldwin County, GA",
+  "artist": "Historic American Buildings Survey, creator, Thomas, Jett",
+  "date": "",
+  "licence": "No known restrictions on images made by the U.S. Government; images     copied from other sources may be restricted.    https://www.loc.gov/rr/print/res/114_habs.html",
+  "page": "https://www.loc.gov/item/ga0306/",
+  "source": "loc:ga0306"
+ },
+ "ch07/mississippi_vagrant_law_1865_fleming_1906_p1.jpg": {
+  "title": "Documentary history of Reconstruction : political, military, social, religious, educational & industrial, 1865 to the present time (page 316)",
+  "artist": "Fleming, Walter L. (Walter Lynwood), 1874-1932",
+  "date": "1906",
+  "licence": "public domain by age (1906)",
+  "page": "https://archive.org/details/documentaryhisto01inflem/page/n316",
+  "source": "iabook:documentaryhisto01inflem:316"
+ },
+ "ch07/mississippi_vagrant_law_1865_fleming_1906_p2.jpg": {
+  "title": "Documentary history of Reconstruction : political, military, social, religious, educational & industrial, 1865 to the present time (page 317)",
+  "artist": "Fleming, Walter L. (Walter Lynwood), 1874-1932",
+  "date": "1906",
+  "licence": "public domain by age (1906)",
+  "page": "https://archive.org/details/documentaryhisto01inflem/page/n317",
+  "source": "iabook:documentaryhisto01inflem:317"
+ },
+ "ch07/mississippi_civil_rights_of_freedmen_1865_fleming_1906.jpg": {
+  "title": "Documentary history of Reconstruction : political, military, social, religious, educational & industrial, 1865 to the present time (page 319)",
+  "artist": "Fleming, Walter L. (Walter Lynwood), 1874-1932",
+  "date": "1906",
+  "licence": "public domain by age (1906)",
+  "page": "https://archive.org/details/documentaryhisto01inflem/page/n319",
+  "source": "iabook:documentaryhisto01inflem:319"
+ }
+}
