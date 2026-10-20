@@ -165,7 +165,7 @@ const OnlyFood: React.FC<{t: TL}> = ({t}) => {
       <Note text="no new troops" x={1060} y={570} size={60} rot={-3} at={t.at('No new troops,') - 3} color={WHITE} />
       <Note text="no guns" x={1080} y={680} size={60} rot={-3} at={t.at('no guns,') - 3} color={WHITE} />
       <Note text="unless the fort is attacked" x={900} y={820} size={60} rot={-3} at={t.at('unless') - 3} />
-      <Tag text="Lincoln to Gov. Francis Pickens, delivered by Robert S. Chew, April 1861 · Papers of Abraham Lincoln, Library of Congress" />
+      <Tag text="Transcription of Lincoln to Gov. Francis Pickens, delivered by Robert S. Chew, April 1861 · Papers of Abraham Lincoln, Library of Congress" />
     </AbsoluteFill>
   );
 };
@@ -322,8 +322,8 @@ const Border: React.FC<{t: TL}> = ({t}) => {
         <Highlight text="BORDER STATES" x={100} y={780} size={96} at={t.at('border states.')} seed={67} rot={-2} />
         <Definition term="bor·der states" def="slave states that stayed in the Union" at={t.at('border states.') + 9} x={120} y={930} w={1100} />
         <Note text="4 slave states stay in the Union" x={110} y={90} size={54} rot={-2} at={t.at('stay') - 3} color={WHITE} />
-        <Note text="Lincoln badly needs them" x={1200} y={790} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
-        <Note text="hold onto that." x={1300} y={900} size={58} rot={-3} at={t.at('Hold onto') - 3} color={WHITE} />
+        <Note text="Lincoln badly needs them" x={1020} y={790} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
+        <Note text="hold onto that." x={1240} y={900} size={58} rot={-3} at={t.at('Hold onto') - 3} color={WHITE} />
       </AbsoluteFill>
     </>
   );
