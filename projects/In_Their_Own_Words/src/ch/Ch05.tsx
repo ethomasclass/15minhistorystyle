@@ -73,7 +73,7 @@ const Harbor: React.FC<{t: TL}> = ({t}) => {
             <StateTiles api={api} names={UNION_FREE_1861} at={-20} stagger={0} h={14} color={MAP3D.free} />
             <StateTiles api={api} names={FIRST_SEVEN} at={-20} stagger={0} h={40} color={CORAL} />
             <Stand api={api} at={pl.washingtonDC} z={14} show={t.at('Lincoln') - 2}><Pin3 color={MAP3D.free} /></Stand>
-            <Stand api={api} at={[pl.washingtonDC[0] + 60, pl.washingtonDC[1] + 70]} z={70} show={t.at('Lincoln')} out={glide + 20}><PlaceTag text="Washington · Lincoln takes office" size={30} /></Stand>
+            <Stand api={api} at={[pl.washingtonDC[0] + 60, pl.washingtonDC[1] + 70]} z={70} show={t.at("Lincoln")} out={glide - 6}><PlaceTag text="Washington · Lincoln takes office" size={30} /></Stand>
             <Stand api={api} at={pl.fortSumter} z={40} show={t.at('Fort Sumter') - 2}><Pin3 /></Stand>
             <Stand api={api} at={[pl.fortSumter[0] - 40, pl.fortSumter[1] + 46]} z={90} show={t.at('Fort Sumter')}><PlaceTag text="Fort Sumter" size={32} /></Stand>
             <Stand api={api} at={[pl.charleston[0] - 260, pl.charleston[1] - 90]} z={60} show={t.at('Charleston') + 2}><PlaceTag text="Charleston" size={26} /></Stand>
@@ -322,7 +322,7 @@ const Border: React.FC<{t: TL}> = ({t}) => {
         <Highlight text="BORDER STATES" x={100} y={780} size={96} at={t.at('border states.')} seed={67} rot={-2} />
         <Definition term="bor·der states" def="slave states that stayed in the Union" at={t.at('border states.') + 9} x={120} y={930} w={1100} />
         <Note text="4 slave states stay in the Union" x={110} y={90} size={54} rot={-2} at={t.at('stay') - 3} color={WHITE} />
-        <Note text="Lincoln badly needs them" x={1150} y={230} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
+        <Note text="Lincoln badly needs them" x={1060} y={230} size={58} rot={-3} at={t.at('Lincoln badly') - 3} />
         <Note text="hold onto that." x={1250} y={340} size={58} rot={-3} at={t.at('Hold onto') - 3} color={WHITE} />
       </AbsoluteFill>
     </>
