@@ -396,18 +396,6 @@ export const IMG: Record<string, [number, number]> = {
 1920,
 2288
 ],
-"img/gen/tests/v1_ch05_last_rations_original.jpg": [
-1376,
-768
-],
-"img/gen/tests/v1_ch07_retreat_original.jpg": [
-1376,
-768
-],
-"img/gen/tests/v1_ch07_spectators_original.jpg": [
-1376,
-768
-],
 "img/gen/v1_ch01_savannah_speech.jpg": [
 1376,
 768
