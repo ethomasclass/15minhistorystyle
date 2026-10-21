@@ -438,3 +438,38 @@ export const VSHORTS = DEFS.map((d) => {
   const b = build(d.segs);
   return {id: d.id, frames: Math.ceil(b.n.duration * FPS) + OUTRO, C: () => <Shell d={d} b={b} />};
 });
+
+// ---------------------------------------------------------------------------------------------
+// Shorts cover (1080x1920): the Arsenic Waltz skeletons, gown in arsenic green, headline in the top quarter. Subject stays in the
+// middle half so the feed (9:16) and channel-grid (3:4 / square) crops both keep it; the bottom fifth is clear for YouTube's UI.
+
+export const THUMBV_FRAMES = 60;
+const COVERS: Record<string, [string, string]> = {A: ['DRESSED', 'TO KILL'], B: ['LOOK', 'CLOSELY']};
+
+export const ThumbV: React.FC<{k: string}> = ({k}) => {
+  const [l1, l2] = COVERS[k];
+  const s = 0.46;
+  const cx = 1560;
+  const place: Place = {left: 540 - cx * s, top: 500, scale: s};
+  const fade = 'linear-gradient(180deg, #0d0c09 0px, #0d0c09 480px, rgba(13,12,9,0) 660px, rgba(13,12,9,0) 1420px, #0d0c09 1600px, #0d0c09 1920px)';
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
+        <Picture src={WALTZ} place={place} size={WALTZ_SIZE} bw="grayscale(1) contrast(1.28) brightness(0.98)" />
+        <GownGreenV place={place} at={0} />
+        <AbsoluteFill style={{background: fade, zIndex: 5}} />
+        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.55) 100%)'}} />
+        <AbsoluteFill style={{zIndex: 10}}>
+        <div style={{position: 'absolute', left: 60, top: 60, width: 1440 * 0.27, height: 530 * 0.27, overflow: 'hidden', borderRadius: 14, background: 'rgba(13,12,9,0.78)'}}>
+          <div style={{position: 'absolute', left: -170 * 0.27, top: -275 * 0.27, width: 1920, height: 1080, transform: 'scale(0.27)', transformOrigin: '0 0'}}>
+            <Wordmark clockAt={0} numAt={0} minAt={0} hisAt={0} />
+          </div>
+        </div>
+        <Highlight text={l1} x={90} y={190} size={160} at={0} seed={901} rot={-3} />
+        <Highlight text={l2} x={150} y={370} size={150} at={0} seed={903} rot={-2} />
+        </AbsoluteFill>
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};

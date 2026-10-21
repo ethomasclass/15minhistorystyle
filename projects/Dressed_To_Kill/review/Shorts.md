@@ -56,3 +56,10 @@ Full story on the channel: Dressed to Kill: How Arsenic Green Took Over the 1800
 | Halloween | Re-post whichever Short got the best swipe-away rate, with a Halloween end card |
 
 Watch Short 1's "stayed to watch" rate first; if the skeleton hook beats the book, lead with it again.
+
+## Shorts covers (vertical, 1080×1920)
+
+`renders/shorts/Dressed_To_Kill_Short1_cover_A.png` (DRESSED / TO KILL) and `..._cover_B.png` (LOOK / CLOSELY), built from the
+Arsenic Waltz skeletons with the gown in arsenic green (`ThumbV` in `src/vshorts.tsx`, compositions `ThumbV-A` / `ThumbV-B`).
+Both skulls sit in the middle half, the headline in the top quarter and the bottom fifth is clear, so the 9:16 feed crop and the
+3:4 / square channel-grid crops both keep the subject. Upload from the YouTube mobile app (Edit → Select cover → Upload image).
