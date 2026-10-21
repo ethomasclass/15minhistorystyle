@@ -101,6 +101,17 @@ A mask of the subject is filled with the subject colour three times, stacked ove
 - The `color` blend keeps the engraving's line shading. The figure reads as a coral-tinted print, not a flat fill.
 - **Colour reveal** (the alternative): the original colour image is revealed through `linear-gradient(90deg, transparent F%, #000 T%)`. F = 50–58% and T = 82–92% in use, so colour creeps in from the right edge. Optional `saturate(1.3–1.5)`.
 
+### 2.4a The colour exception: when the subject is a colour (*Dressed to Kill*)
+
+When a video is *about* a colour, that colour may appear, and only on the thing itself. *Dressed to Kill* let arsenic green
+(`GREEN = #74BA6C`, sampled from the real pigment in its images; a yellow-leaning emerald) show on the real wallpaper samples, the
+book cover, surviving gowns and the silhouette paintings. Rules the user approved:
+- Never on text, titles, notes, arrows, charts or the UI; coral stays the subject colour for people.
+- Keep the teal (`#2FE0C4`) well away from the colour; don't trace a teal line straight around a green patch. Write notes white there.
+- Small and still in the heavy chapter; let a recurring motif (the `Swatch` card) carry it, draining to grey when the story turns.
+- When a mask can't isolate the coloured area (an engraving's gown), hand-trace a polygon in source pixels and fill it with the
+  colour blend (colour 1.0, multiply 0.35, screen 0.12, 14 px blur), so the hatching shows through.
+
 ### 2.5 Palette in heavy chapters
 
 In heavy chapters (asylums, slavery, Indian Removal and the Trail of Tears) pass `quiet` to `ChapterShell`. That switches to `PALETTES.quiet`: teal lines only, titles on bone paper (`#EDE7DC`) instead of orange, no coral subject tint. No jokes and no punch-ins; the narration is voiced slower too (`HEAVY=` in `tools/voice_all.sh`). *King Andrew* chapter 10 (Indian Removal) is the reference: it kept highlighter titles only on the chapter card, then let the images and teal notes carry it. The final chapter comes back to normal colour, gently.

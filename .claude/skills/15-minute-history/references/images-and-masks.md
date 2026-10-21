@@ -57,6 +57,24 @@ and uploads the PNGs. Write the prompts into `script/GEMINI_PROMPTS.md`:
   fingers, modern objects or wrong details, and the scene still works if they skip an image.
 - In scenes: read the real size (it won't be exactly 16:9), tag it `Illustration · <what it shows>`, and treat it
   like any archival image (B&W, one coral subject).
+- **Offer a style test before writing all the prompts.** Give the user one scene in two or three styles (*Dressed to Kill*:
+  oil painting, graphic novel, Victorian silhouette) and let them pick. The **silhouette** paragraph that won:
+
+> Style: a Victorian cut-paper silhouette, like the black profile portraits and silhouette scenes popular in the 1800s. Every
+> figure, object and piece of furniture is a solid, flat black shape with crisp, finely cut edges and delicate details in the
+> outlines (curls of hair, lace, leaf tips, the folds of a skirt). Background in warm cream paper with a faint paper texture,
+> and soft grey tones only for distance and haze. The only colour in the entire image is a flat, bright, [colour], used only
+> on the [things] named in the scene; everything else is black, cream and grey. Period details must be accurate for the
+> stated year and place: no modern buildings, clothing or objects. No text of any kind: no letters, words, captions, signs,
+> labels, signatures or watermarks. No frame or border. No recognizable real historical person; every figure is an anonymous
+> silhouette.
+
+  Silhouettes stay in their own colours on screen (no grayscale, no coral; `Sil` in `techniques/components/dressed_to_kill/dk.tsx`).
+  The user can paste all prompts as one Flow upload (style once, then numbered scenes, each labelled with its file name);
+  if Flow merges scenes, run them one at a time.
+- **Check every AI image for text** at full size before use: one silhouette came back with "SCHEELE'S GREEN" on a farmer's tin
+  (wrong, and AI text). Paint it out (`cv2.inpaint` on the letter strokes inside a tight polygon, then flatten to the label's
+  median tone) and keep the original in `public/img/gen/tests/`.
 - **Pre-photography videos: use the wood-engraving style instead** (section 6). It sits beside real period prints,
   looks less "AI", and masks cleanly.
 
@@ -114,6 +132,11 @@ mask version in place of the original; compare the two files before using either
 - **A figure from an engraving can stand in for a person with no photo**: give `mask.py` a tight crop box around one small
   figure in a big print, then show that detail (`CropCard`, or `Parallax` with a small `crop`; build its layers with
   `LAYERS_MAX=4000` so they stay sharp). Say on screen whose photo doesn't survive.
+- **AI paintings and silhouettes** (*Dressed to Kill*): crop each mask job to one figure, and when the figure is fused to a prop
+  (hands on a table, a tray in front) add **cut rects** (a list of rectangles among `mask.py` JOBS' optional fields, beside `min_area`) to remove the prop. If arms or the prop
+  still split between layers, delete that picture's layers so `Parallax` falls back to a flat camera move. `layers.py` now fills
+  small pictures (under 2000 px) with a tight, sharp hole (no smeared halo); check `fg` on magenta and `bg` side by side, plus a
+  composite with the figure shifted ~20 px, before building scenes. Keep parallax depth gentle (1.05) on paintings.
 - **Tight portraits don't fit a full-bleed frame**: a close-up (a face that fills the source) zoomed to cover 16:9 puts
   every note on the face. Use the "subject left, notes right" `CropCard` layout instead.
 

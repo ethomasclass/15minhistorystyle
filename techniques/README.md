@@ -19,7 +19,8 @@ to see how the style has developed:
 [Bierce](lookbook/03_Bierce.jpg) · [King Andrew](lookbook/04_King_Andrew.jpg) ·
 [Grip Tighter](lookbook/05_Grip_Tighter.jpg) · [Good Luck (Ouija)](lookbook/06_Good_Luck_Ouija.jpg) ·
 [Say It Ain't So (Black Sox)](lookbook/07_Say_It_Aint_So.jpg) ·
-[The Exact Spot (Mexican-American War)](lookbook/08_Exact_Spot.jpg)
+[The Exact Spot (Mexican-American War)](lookbook/08_Exact_Spot.jpg) ·
+[Dressed to Kill](lookbook/09_Dressed_To_Kill.jpg)
 
 ---
 
@@ -87,12 +88,23 @@ to see how the style has developed:
 | **Layered (2.5D)** | The painting split into background and subject layers (`tools/gen_layers.py`), with parallax, a contact shadow and handheld drift, plus **one living detail**: lamp flicker, dust, snow, steam, a flashlight beam, halftone dots or film weave. | Every painting in Ouija. It's the biggest quality jump since the template. | Ouija (21×) | `components/ouija/oj.tsx`, `components/ouija/tools/gen_layers.py` |
 | **Same frame, different hands** | One locked-off composition repeated across eras (same board and camera; only hands, light and props change), so cuts become match cuts. | Showing "the object stayed the same, the people changed" | Ouija | Prompt pattern in `examples/06_Good_Luck_Ouija/PROMPTS.md` |
 | **Flow wood engravings** | Instead of oil paintings, every gap is a black-and-white 1840s illustrated-newspaper wood engraving (Google Flow), all from one master prompt so they read as a series. Shown full frame with `Engraving` (slow push, soft fade, light vignette) or `Parallax`. They look less "AI", match the period prints beside them, and mask cleanly. Archival documents and portraits stay cards on the desk, so an illustration never passes for a source. | Every AI image in a pre-photography video | The Exact Spot (17 scenes) | `components/exact_spot/engraving.tsx` (template); prompt in `examples/08_Exact_Spot/FLOW_PROMPT.md` |
+| **Sil (silhouette parallax)** | A Victorian cut-paper silhouette painting as a parallax scene, kept in its own cream/black/spot colour, with drifting dust. | AI illustrations when the period style should never pass for a real archival image | Dressed to Kill (9×) | `components/dressed_to_kill/dk.tsx` |
 | **PlateScene** | A period engraving cut into 7 parallax layers, with one camera path and a whip-out. | Bringing a single famous engraving to life | Ouija (the Fox sisters plate) | `components/ouija/plate.tsx`, `tools/plate_layers.py` (written for one plate; generalise before reuse) |
 
 Every painting prompt ends with the shared **style paragraph**, which is in
 [`images-and-masks.md`](../.claude/skills/15-minute-history/references/images-and-masks.md). There are era versions for the
 1820s–50s (Bingham/Mount), the late 1800s (Homer/Remington) and the early 1900s (magazine illustration); see each video's prompts in
 [`examples/`](../examples/). Never show a recognizable real person. Paintings are tagged `Illustration · …` on screen.
+
+## Recurring motifs and colour
+
+| Technique | What it does | Use it for | From | Code |
+|---|---|---|---|---|
+| **Swatch** | A small cream card, always top right, that collects a coloured square with a mono label each time the subject turns up somewhere new; drains to grey and gets stamped SEALED at the end. | Tracking one thing through a whole video (a pigment, a product) | Dressed to Kill | `components/dressed_to_kill/dk.tsx` |
+| **Colour exception** | The video's subject colour shown only on the real thing (pigment samples, objects), never on text or marks. | A video about a colour | Dressed to Kill | see `visual-style.md` §2.4a |
+| **Hand-traced colour fill** | A polygon in source pixels filled with a colour blend (keeps the hatching) when rembg can't isolate an area, shared by every shot of that picture. | A gown in an engraving, a flag, a stain | Dressed to Kill (`GownGreen`) | `components/dressed_to_kill/waltz.tsx` |
+| **Highlighter swipe** | `DocMark` `swipe`: a coral wash runs along a quote's lines on the scan itself, from `at` to `to`, spread by line width. | Any document the narrator quotes | Dressed to Kill (from the Vox study) | `components/dressed_to_kill/dk.tsx` |
+| **Music drop** | `ChapterShell` music `to` + `fadeOut` (4–6 frames): the bed cuts out just before a reveal word and holds silence. | The heaviest line in a heavy chapter | Dressed to Kill ("natural death") | template `shell.tsx` |
 
 ## Maps
 
