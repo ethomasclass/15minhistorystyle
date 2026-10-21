@@ -19,7 +19,7 @@ export const Root: React.FC = () => (
     <Composition id="Thumb-C" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbC /></JFonts>} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
-    {['A', 'B'].map((k) => <Composition key={k} id={`ThumbV-${k}`} width={1080} height={1920} fps={FPS} durationInFrames={THUMBV_FRAMES} component={() => <JFonts><ThumbV k={k} /></JFonts>} />)}
+    {['A', 'B', 'C'].map((k) => <Composition key={k} id={`ThumbV-${k}`} width={1080} height={1920} fps={FPS} durationInFrames={THUMBV_FRAMES} component={() => <JFonts><ThumbV k={k} /></JFonts>} />)}
     {VSHORTS.map((s) => <Composition key={s.id} id={s.id} width={1080} height={1920} fps={FPS} durationInFrames={s.frames} component={() => <JFonts><s.C /></JFonts>} />)}
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
   </>

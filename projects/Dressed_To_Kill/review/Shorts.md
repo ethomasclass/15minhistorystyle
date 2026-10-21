@@ -59,7 +59,10 @@ Watch Short 1's "stayed to watch" rate first; if the skeleton hook beats the boo
 
 ## Shorts covers (vertical, 1080×1920)
 
-`renders/shorts/Dressed_To_Kill_Short1_cover_A.png` (DRESSED / TO KILL) and `..._cover_B.png` (LOOK / CLOSELY), built from the
-Arsenic Waltz skeletons with the gown in arsenic green (`ThumbV` in `src/vshorts.tsx`, compositions `ThumbV-A` / `ThumbV-B`).
-Both skulls sit in the middle half, the headline in the top quarter and the bottom fifth is clear, so the 9:16 feed crop and the
-3:4 / square channel-grid crops both keep the subject. Upload from the YouTube mobile app (Edit → Select cover → Upload image).
+Built from the Arsenic Waltz skeletons with the gown in arsenic green (`ThumbV`, compositions `ThumbV-A/B/C`). Subject in the middle
+half, headline in the top quarter, bottom fifth clear. Upload from the YouTube mobile app (Edit → Select cover → Upload image).
+Headlines are claims, not the brand title, because a cold Shorts viewer needs a reason to stop:
+
+- `..._cover_A.png` · **HER DRESS / WAS POISON** (lead with this one)
+- `..._cover_B.png` · **LOOK AT / THE HEM**, teal loop on the tiny skulls drawn on the hem, so "look" has a payoff
+- `..._cover_C.png` · DRESSED / TO KILL (brand title, weakest for strangers)

@@ -444,7 +444,7 @@ export const VSHORTS = DEFS.map((d) => {
 // middle half so the feed (9:16) and channel-grid (3:4 / square) crops both keep it; the bottom fifth is clear for YouTube's UI.
 
 export const THUMBV_FRAMES = 60;
-const COVERS: Record<string, [string, string]> = {A: ['DRESSED', 'TO KILL'], B: ['LOOK', 'CLOSELY']};
+const COVERS: Record<string, [string, string]> = {A: ['HER DRESS', 'WAS POISON'], B: ['LOOK AT', 'THE HEM'], C: ['DRESSED', 'TO KILL']};
 
 export const ThumbV: React.FC<{k: string}> = ({k}) => {
   const [l1, l2] = COVERS[k];
@@ -465,9 +465,15 @@ export const ThumbV: React.FC<{k: string}> = ({k}) => {
             <Wordmark clockAt={0} numAt={0} minAt={0} hisAt={0} />
           </div>
         </div>
-        <Highlight text={l1} x={90} y={190} size={160} at={0} seed={901} rot={-3} />
-        <Highlight text={l2} x={150} y={370} size={150} at={0} seed={903} rot={-2} />
+        <Highlight text={l1} x={80} y={190} size={k === 'A' ? 140 : 160} at={0} seed={901} rot={-3} />
+        <Highlight text={l2} x={k === 'A' ? 90 : 150} y={370} size={k === 'A' ? 125 : 150} at={0} seed={903} rot={-2} />
         </AbsoluteFill>
+        {k === 'B' && (
+          <AbsoluteFill style={{zIndex: 10}}>
+            <Loop cx={380} cy={1420} rx={330} ry={62} at={0} seed={74} tilt={-3} width={7} />
+            <Note text="tiny skulls, on a ball gown" x={200} y={1495} size={60} rot={-3} at={0} color="#ffffff" />
+          </AbsoluteFill>
+        )}
         <Finish vignette={0.3} />
       </AbsoluteFill>
     </PaletteCtx.Provider>
