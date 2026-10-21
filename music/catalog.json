@@ -20,7 +20,7 @@
   "delivery": "MP3 (WAV if the plan has it), named as shown; drag into the chat or add to video/public/music/.",
   "ouija_cover_trick": "Make the theme first (simplest, clearest tune in the first 20 s), then make every other cue as a Cover of that take (Remix/Edit → Cover) with new Styles text, so one melody returns in several arrangements.",
   "ouija_lyrics_box": "[Intro] [Main Theme] [Variation] [Break] [Main Theme] [Outro] [End]",
-  "credit_line": "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History.",
+  "credit_line": null, "credit_note": "No music credit in descriptions: they never mention AI music, AI images or the AI voice (user rule).",
   "exclude_styles_exact_spot": "vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat"
  },
  "cues": [

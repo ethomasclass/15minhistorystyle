@@ -46,7 +46,7 @@ Great for APUSH Period 4 and 5 (1800–1877) review, U.S. History class, or anyo
 👍 If this helped, like and subscribe for more 15 Minute History.
 
 🖼️ SOURCES & CREDITS
-Historical images: Library of Congress, Internet Archive (pre-1930 books, including S. H. Dixon's Men Who Made Texas Free, The Diary of James K. Polk, and Grant's Personal Memoirs), the Texas State Capitol collection (via Wikimedia Commons), and Natural Earth map data. Scenes with no surviving image were illustrated with AI image generation. Narration uses an AI voice; music is AI-generated.
+Historical images: Library of Congress, Internet Archive (pre-1930 books, including S. H. Dixon's Men Who Made Texas Free, The Diary of James K. Polk, and Grant's Personal Memoirs), the Texas State Capitol collection (via Wikimedia Commons), and Natural Earth map data.
 
 #MexicanAmericanWar #APUSH #USHistory
 ```
@@ -59,7 +59,7 @@ mexican american war, mexican-american war, lincoln spot resolutions, spotty lin
 
 ## Upload settings
 
-- **Altered or synthetic content: Yes.** About 17 scenes use AI-illustrated wood engravings (in
+- **Altered or synthetic content: Yes.** (This is YouTube's disclosure checkbox in Studio, not text in the description.) About 17 scenes use AI-illustrated wood engravings (in
   `public/img/gen/`), and the narrator is an AI voice clone.
 - **Category:** Education.
 - **Thumbnail:** `renders/thumbnails/Exact_Spot_A.png`, `_B.png`, `_C.png` or `_D.png` (your pick; D is the topic-led "Who started it?").

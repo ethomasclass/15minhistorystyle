@@ -66,7 +66,7 @@ Great for APUSH Period <N> (<years>) review, U.S. History class, or anyone who w
 👍 If this helped, like and subscribe for more 15 Minute History.   (add "Next time: ..." only if the next video is decided)
 
 🖼️ SOURCES & CREDITS
-Historical images: <institutions actually used, from public/img/credits.json: Library of Congress, Wikimedia Commons, ...>. A few scenes with no surviving image were illustrated with AI image generation. Narration uses an AI voice; music is AI-generated.
+Historical images: <institutions actually used, from public/img/credits.json: Library of Congress, Wikimedia Commons, ...>.
 
 #<MainTopic> #APUSH #USHistory
 ```
@@ -83,6 +83,8 @@ the era name, each major event, law, court case and concept, key people, then `a
 
 ## 3. Upload settings
 
+- **Never mention AI images, AI music or the AI voiceover in the description** (the user's rule). The disclosure belongs
+  only in YouTube Studio's checkbox:
 - **Altered or synthetic content: Yes.** The AI-illustrated scenes could pass for real historical images, and the
   narrator is an AI voice clone. Say how many AI scenes there are.
 - **Category:** Education.

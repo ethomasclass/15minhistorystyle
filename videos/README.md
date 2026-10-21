@@ -108,6 +108,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Packaging**
 - Short YouTube titles. Tags within the 500-character limit.
+- **Descriptions never mention AI images, AI music or the AI voiceover.** Credit only the archival sources. (YouTube's altered-content checkbox in Studio is still ticked.)
 - Master READMEs include Windows PowerShell join commands.
 
 **Classroom handouts**

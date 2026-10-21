@@ -57,4 +57,4 @@ march (ch 5–6), `r_dix` (ch 9).
 
 ## Credit line (description)
 
-"Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History."
+None. Descriptions don't mention AI images, AI music or the AI voice (the user's rule).

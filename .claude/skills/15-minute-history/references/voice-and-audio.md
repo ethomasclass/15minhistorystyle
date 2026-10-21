@@ -109,7 +109,8 @@ shifts. Re-check stills for that chapter after re-voicing.
   after the last word, then fades with the picture, so pick cues whose tail still sounds good louder. To change cue on a
   phrase, give the first `to: TM.at('word') + 6` and the next `from: TM.at('word') - 6` (`TM = makeTimeline(N, 30)`); the
   first fades over 30 frames.
-- Credit music as AI-generated in the description.
+- Don't mention AI music (or the AI voice or AI images) in the description; the user's rule. YouTube's altered-content
+  checkbox in Studio covers the disclosure.
 
 ## 7. Sound effects
 

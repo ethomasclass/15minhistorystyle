@@ -32,7 +32,7 @@ prefix says which video the cue was made for:
 - `tools/master.py` normalizes the final mix to −14 LUFS, so cues only need to balance against each other and the voice.
 - **Tail lift and hand-overs** (*The Exact Spot*): every chapter's music lifts to ×1.6 for the ~2 s after the last word, then fades with the picture (`TAIL_LIFT` in `kit/shell.tsx`), so pick cues whose tail still sounds good louder. A music entry's `to:` ends one cue with a 30-frame fade as the next one's `from:` starts (`{src, volume, startFrom, from, to}`), so a chapter can change cue on a phrase: `to: TM.at('October') + 6` / `from: TM.at('October') - 6`.
 
-**Credit line for the description:** "Music: original cues generated with Suno, ElevenLabs and Google Lyria for 15 Minute History."
+**No credit line in the description.** Descriptions don't mention AI music, AI images or the AI voice (the user's rule, from *The Exact Spot*).
 
 ## Pick by feeling
 
