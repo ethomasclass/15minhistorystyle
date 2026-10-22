@@ -64,3 +64,49 @@ melody faithfully, and an original tune can't be mistaken for (or flagged as) so
 
 **Must-have:** 3 (Bull Run), 5 (the *Planter*), 7 (Gettysburg), 10 (Juneteenth). The rest have reuse fallbacks: `j_campaign` for 1 and 2,
 `a_civil_war` for 4, `g_world_outside` for 6, `r_dix`'s hopeful rise for 8, `g_cotton_engine` for 9.
+
+## Revised plan, library only (after Video 1's first cut)
+
+The first cut of Video 1 borrowed cues from other eras (an 1820s banjo campaign march, a comic glockenspiel cue, the Mexican-American War drums) and sat too loud. The user chose **library cues only**: nothing comic, nothing from another era or place (no `j_campaign`, `r_schools`, `m_*`, `a_mexico`, `r_cold_open`), and **quieter beds**.
+
+**Levels.** Bed volume = `0.09 × 10^((−16 − cue LUFS) / 20)`, so every cue sits at the same loudness under the voice (about 2 dB under the first cut's quietest bed). Lift only in a chapter's music-only tail, through the shell's existing tail lift. Drop music completely (fadeOut 4–6) on the hardest lines and let a beat of silence land.
+
+### In_Their_Own_Words
+
+| Chapter | Cue | Volume | Why |
+|---|---|---|---|
+| ch01 cold open | `j_cold_open` | 0.111 | tense low cello, ticking pulse; replaces r_cold_open (modern montage feel) |
+| ch02 one election / secession | `g_grip` | 0.093 | tightening low-string ostinato, ticking clock; replaces j_campaign (1820s banjo march) |
+| ch03 declarations, Cornerstone | `g_pyramid` | 0.088 | parlor elegance turning cold (kept, quieter) |
+| ch04 which Georgians | `r_dix` | 0.056 | first ~45 s only: grave, sparse piano + cello (kept, quieter) |
+| ch05 Fort Sumter | `g_southampton` | 0.089 | rising dread, dark swell, hollow silence; replaces m_war_drums (Mexican-American War) |
+| ch06 sizing up the sides | `a_civil_war` | 0.084 | first half: lone field snare + fife, young eager march (period); replaces r_schools (comic glockenspiel) |
+| ch07 Bull Run | `r_abolition_b` | 0.059 | driving low strings, timpani, dissonant chaos for the rout; replaces j_campaign + m_war_drums |
+| ch08 what they walked into | `w_aftermath` | 0.062 | low strings, muffled heartbeat drum, mournful fiddle; replaces a_civil_war second half |
+| ch09 back to Stephens + end screen | `r_abolition_a` | 0.064 | serious, dignified, falls to grieving quiet; replaces r_ending (saved for Video 3) |
+
+### Forever_Free
+
+| Chapter | Cue | Volume | Why |
+|---|---|---|---|
+| ch01 cold open (Robert Smalls, the Planter) | `w_dawn` | 0.054 | anxious night strings, then a sunrise swell into a warm, hopeful chorale |
+| ch02 contraband | `g_world_outside` | 0.077 | dignified, spiritual-like cello |
+| ch03 Lincoln's problems | `j_intrigue` | 0.084 | sly backroom tension (keep it low) |
+| ch04 waiting (Antietam) | `g_grip` | 0.093 | tense political ostinato |
+| ch05 forever free | `r_curtain` | 0.062 | quiet resolve, building to a proud, restrained peak |
+| ch06 King Cotton | `g_cotton_engine` | 0.079 | mechanical ostinato, darker and heavier |
+| ch07 the 54th | `r_abolition_b` | 0.059 | defiant and building, timpani; chaos for Fort Wagner |
+| ch08 who freed them + end screen | `r_dix` | 0.056 | grave piano + cello, then the slow hopeful string rise in its last ~15 s |
+
+### Except
+
+| Chapter | Cue | Volume | Why |
+|---|---|---|---|
+| ch01 cold open | `j_cold_open` | 0.111 | tense low cello |
+| ch02 one week in July (Gettysburg) | `g_southampton` | 0.089 | rising dread, dark swell, hollow silence, grieving cello |
+| ch03 a new birth (Gettysburg Address) | `g_world_outside` | 0.077 | hymn-like, dignified |
+| ch04 who carried it | `r_dix` | 0.056 | first ~45 s: grave and humane |
+| ch05 hard war (Sherman) | `w_fire` | 0.051 | anxious tremolo, then dark and heavy, low brass, timpani |
+| ch06 Appomattox to Juneteenth | `w_dawn` | 0.054 | dark, then a warm, noble sunrise chorale |
+| ch07 except (13th Amendment, Black Codes) | `j_grief` | 0.071 | quiet grieving solo cello |
+| ch08 what it settled + end screen | `r_ending` | 0.057 | warm, then unresolved |

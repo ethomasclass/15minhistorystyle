@@ -213,9 +213,9 @@ const TM = makeTimeline(N, 30);
 
 export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_bull_run.wav" lead={LEAD} music={[
-    {src: 'music/j_campaign.mp3', volume: 0.12, to: TM.at('Then Confederate') + 6},
-    // war drums from ~40 s in; a music drop just before "This is not going to be quick."
-    {src: 'music/m_war_drums.mp3', volume: 0.15, startFrom: 1200, from: TM.at('Then Confederate') - 6, to: TM.at('This is not') - 5, fadeOut: 4},
+    // r_abolition_b turns to dissonant chaos about 69 s in: start it so that lands on the Confederate counterattack;
+    // a music drop just before "This is not going to be quick."
+    {src: 'music/r_abolition_b.mp3', volume: 0.059, startFrom: Math.max(0, 69 * 30 - TM.at('Then Confederate')), to: TM.at('This is not') - 5, fadeOut: 4},
   ]}>
     <Body />
   </ChapterShell>

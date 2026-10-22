@@ -317,11 +317,10 @@ const Body: React.FC = () => {
 };
 
 const TM = makeTimeline(N, 30);
-// r_schools runs 62 s and the chapter about 79 s with its tail: hand over to a second pass of the cue on the Union's plan.
+// a_civil_war (85 s): the young fife-and-snare march under the tallies, turning somber on its own around the Union's plan.
 export const Ch06: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch06_sizing_up.wav" lead={LEAD} music={[
-    {src: 'music/r_schools.mp3', volume: 0.15, to: TM.at("The Union's") + 6},
-    {src: 'music/r_schools.mp3', volume: 0.15, from: TM.at("The Union's") - 6},
+    {src: 'music/a_civil_war.mp3', volume: 0.084},
   ]}>
     <Body />
   </ChapterShell>

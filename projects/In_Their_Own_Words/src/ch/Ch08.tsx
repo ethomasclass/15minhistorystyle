@@ -328,7 +328,11 @@ const Body: React.FC = () => {
 };
 
 export const Ch08: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch08_walked_into.wav" lead={LEAD} quiet music={[{src: 'music/a_civil_war.mp3', volume: 0.17, startFrom: 1200}]}>
+  <ChapterShell n={N} audio="audio/ch08_walked_into.wav" lead={LEAD} quiet music={[
+    // w_aftermath runs 59 s; a grieving solo cello takes over for the rest of the chapter
+    {src: 'music/w_aftermath.mp3', volume: 0.062, to: 56 * 30},
+    {src: 'music/j_grief.mp3', volume: 0.071, from: 54 * 30},
+  ]}>
     <Body />
   </ChapterShell>
 );

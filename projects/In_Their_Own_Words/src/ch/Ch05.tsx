@@ -383,15 +383,15 @@ const Body: React.FC = () => {
 };
 
 const TM = makeTimeline(N, 30);
-// m_war_drums (69 s): its peak sits around 50 s into the cue, so start 50 s before "They did." lands. The cue runs out about
-// 47 s into the chapter, so a second copy (from its build, 8 s in) picks up under "Normally" and carries to the end.
-const PEAK = 50 * 30;
-const DRUMS_START = PEAK - TM.at('They did.');
+// g_southampton (110 s): its dark swell builds to about 84 s into the cue, so start it so the swell lands on "They did."
+// It hands over at "July"; a second copy from the cue's quiet opening picks up under "Normally" and carries to the end.
+const PEAK = 84 * 30;
+const DRUMS_START = Math.max(0, PEAK - TM.at('They did.'));
 
 export const Ch05: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch05_fort_sumter.wav" lead={LEAD} music={[
-    {src: 'music/m_war_drums.mp3', volume: 0.17, startFrom: DRUMS_START, to: TM.at('July') + 10, fadeOut: 60},
-    {src: 'music/m_war_drums.mp3', volume: 0.15, startFrom: 240, from: TM.at('Normally,') - 20},
+    {src: 'music/g_southampton.mp3', volume: 0.089, startFrom: DRUMS_START, to: TM.at('July') + 10, fadeOut: 60},
+    {src: 'music/g_southampton.mp3', volume: 0.08, startFrom: 120, from: TM.at('Normally,') - 20},
   ]}>
     <Body />
   </ChapterShell>

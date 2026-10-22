@@ -31,6 +31,6 @@ for (const h of hits.filter((h) => h.r > 0 && h.l < 1920 && h.b > 0 && h.t < 108
 }
 const rows = [...seen.values()].sort((a, b) => a.id.localeCompare(b.id) || a.f0 - b.f0);
 for (const r of rows) console.log(`${r.id}  ${(r.f0 / 30).toFixed(1)}–${(r.f1 / 30).toFixed(1)}s  over ${r.maxOver}px  box ${r.l},${r.t} → ${r.r},${r.b}  "${r.text}"`);
-console.log(rows.length ? `${rows.length} overflowing text items` : 'no text crosses the frame edge');
+console.log(rows.length ? `${rows.length} text items inside the safe margin` : 'no text inside the safe margin');
 fs.writeFileSync('out/probe_report.json', JSON.stringify(rows, null, 1));
 fs.rmSync(serveUrl, {recursive: true, force: true});

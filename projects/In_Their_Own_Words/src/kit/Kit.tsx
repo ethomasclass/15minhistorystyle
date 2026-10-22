@@ -90,7 +90,12 @@ const TextProbe: React.FC = () => {
         const r = el.getBoundingClientRect();
         if (!r.width || !r.height) return;
         n++;
-        const over = Math.max(-r.left, -r.top, r.right - width, r.bottom - height);
+        if (el.closest('[data-noprobe]')) return;
+        let op = 1;
+        for (let e: Element | null = el; e; e = e.parentElement) op *= Number(getComputedStyle(e).opacity);
+        if (op < 0.05) return;
+        // flag anything inside the safe margin, not just past the edge: text that hugs the side reads as cut off
+        const over = Math.max(SAFE_X - r.left, SAFE_Y - r.top, r.right - (width - SAFE_X), r.bottom - (height - SAFE_Y));
         if (over > 0) out.push(JSON.stringify({f: frame, over: Math.round(over), l: Math.round(r.left), t: Math.round(r.top), r: Math.round(r.right), b: Math.round(r.bottom), text: own.slice(0, 70)}));
       });
       out.forEach((o) => console.log('PROBE ' + o));
@@ -237,8 +242,12 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; bo
   );
 };
 
+/** Safe margins (px at 1920x1080) that on-screen text stays inside; the text probe flags anything closer to the edge. */
+export const SAFE_X = 96;
+export const SAFE_Y = 54;
+
 export const Tag: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 44, y = 1030}) => (
-  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
+  <div data-noprobe style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
     textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div>
 );
 

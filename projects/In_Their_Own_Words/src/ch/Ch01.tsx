@@ -296,7 +296,7 @@ const Body: React.FC = () => {
       {scene}
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
-      <Audio src={staticFile('music/r_cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 70, END - 10], [0, 0.15, 0.15, 0], clamp)} />
+      <Audio src={staticFile('music/j_cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 70, END - 10], [0, 0.111, 0.111, 0], clamp)} />
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
       {['Alexander', 'cornerstone', 'slavery'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}
       {notes.map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
