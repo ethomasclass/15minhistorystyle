@@ -28,13 +28,14 @@ It fills, gets crossed out, and gets stamped across the series. *(Your pick; see
 | | Episode 1 | Episode 2 | Episode 3 |
 |---|---|---|---|
 | **Title** | *Landless, Homeless, Voteless* | *Bottom Rail on Top* (working) | *Redeemed* (working) |
-| **Years** | 1865–1866 | 1867–1872 | 1866–1877 |
+| **Years** | 1865–1866 | 1867–1873 | 1866–1877 |
 | **Covers** | The **law** | The **land** (and the vote) | **Protection** |
 | **Ground-level character** | The Edisto Island freedpeople | Charles Caldwell (Hiram Revels as the hook) | Charles Caldwell |
 | **Goal / obstacle** | Keep the land, be citizens / Johnson | Build a new Mississippi / no land, armed enemies | Survive and keep governing / will anyone protect him? |
 | **Shape** | Man in a hole (down, then up) | Icarus (up, then down) | Oedipus (down, up, down) + a small lift at the end |
-| **Hook** | The Edisto petition | Revels, a Black minister, sworn in as senator from Jefferson Davis's state | Caldwell's Christmas toast, 1875 |
-| **Ends on** | Congress takes control; the land is still gone | They can vote, but don't own the ground they stand on | The amendments survive on paper; the Edisto callback |
+| **Hook** | The Edisto petition | Revels, a Black minister, sworn in as senator from Jefferson Davis's state | Caldwell's Christmas drink, Dec 30, 1875 |
+| **Draft length** | about 14:45 (draft 3) | about 13:05 (draft 1) | about 12:35 (draft 1) |
+| **Ends on** | Congress takes control; the land is still gone | They can vote, but don't own the ground they stand on; Caldwell made a militia colonel | The amendments survive on paper; the Edisto callback |
 
 ### 8.1 coverage
 
@@ -118,6 +119,7 @@ Guo et al. 2014 on video length ([summary](https://teach.ucmerced.edu/sites/crte
 - Reconstruction sent **2** Black senators (Revels, Bruce) and about **14–16** representatives to Congress, not 7 in total.
 - The Radicals were a faction, not a majority of Congress. The 1866 election gave Republicans the votes to override vetoes.
 - The 1867 Act barred the Confederacy's leaders from voting and office, not every ex-Confederate.
-- Charles Caldwell: most accounts say he was lured into a store for a Christmas drink, not dinner at a friend's home. Check details.
+- Charles Caldwell was killed on Thursday, Dec 30, 1875 ("in the Christmas"), after being talked into a Christmas drink in a store's cellar, not at dinner in a friend's home (his widow's Senate testimony).
+- Revels did not take Jefferson Davis's Senate seat (a common claim). He took Albert Brown's; Davis's old seat went to Adelbert Ames.
 - "60,000 kept from voting in Mississippi, 1875" needs a source or a hedge.
 - Hayes pulled troops from the Southern statehouses, not from the whole South. "Secret deal" needs a hedge ("no proof of a written deal").
