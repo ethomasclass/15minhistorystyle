@@ -50,7 +50,7 @@ const Forward: React.FC<{t: TL}> = ({t}) => {
       <AbsoluteFill>
         <Highlight text="FORWARD TO RICHMOND!" x={90} y={80} size={92} at={t.at('"Forward to')} seed={71} rot={-2} />
         <Note text="northern newspapers, summer 1861" x={110} y={220} size={44} rot={-2} at={t.at('Northern') - 3} color="#ffffff" />
-        <Note text="one big battle and it's over?" x={110} y={900} size={54} rot={-3} at={t.at('One big') - 3} />
+        <Note text="one big battle and it's over?" x={118} y={890} size={54} rot={-3} at={t.at('One big') - 3} />
       </AbsoluteFill>
     </>
   );

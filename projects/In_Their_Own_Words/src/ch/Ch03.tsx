@@ -159,7 +159,7 @@ const Books: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('Davis and') - 1;
   return (
     <Desk a={a}>
-      <Note text="after the war, the story changed" x={110} y={87} size={52} rot={-2} at={a + 2} color={BONE} />
+      <Note text="after the war, the story changed" x={124} y={87} size={52} rot={-2} at={a + 2} color={BONE} />
       <DropCard src={DAVIS_BOOK} x={240} y={190} w={400} rot={-3} at={a} />
       <DropCard src={STEPHENS_BOOK} x={760} y={200} w={400} rot={2} at={t.at('Stephens both') - 1} />
       <Note text="Davis, 1881" x={290} y={880} size={46} rot={-3} at={a + 6} />
