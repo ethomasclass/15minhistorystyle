@@ -125,8 +125,8 @@ export const TwoSides: React.FC<{at: number; lincolnAt: number; smallsAt: number
         traceAt={smallsAt + 4} />
       {g >= lincolnAt - 2 && <div style={{position: 'absolute', left: 150, top: 860, width: 640, textAlign: 'center', fontFamily: JF.mono, fontSize: 34, letterSpacing: 3, color: pal.mark}}>{leftLabel}</div>}
       {g >= smallsAt - 2 && <div style={{position: 'absolute', left: 1130, top: 860, width: 660, textAlign: 'center', fontFamily: JF.mono, fontSize: 34, letterSpacing: 3, color: CORAL}}>{rightLabel}</div>}
-      {leftNote && <Note text={leftNote} x={190} y={930} size={40} rot={-2} at={lincolnAt + 6} color={WHITE} />}
-      {rightNote && <Note text={rightNote} x={1170} y={930} size={40} rot={-2} at={smallsAt + 6} color={WHITE} />}
+      {leftNote && <Note text={leftNote} x={190} y={905} size={40} rot={-2} at={lincolnAt + 6} color={WHITE} />}
+      {rightNote && <Note text={rightNote} x={1170} y={905} size={40} rot={-2} at={smallsAt + 6} color={WHITE} />}
     </>
   );
 };

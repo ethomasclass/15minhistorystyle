@@ -57,11 +57,11 @@ const Decided: React.FC<{t: TL}> = ({t}) => {
       </Map3D>
       <AbsoluteFill>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.82) 0%, rgba(0,0,0,0) 36%)'}} />
-        <Note text="so: how was the war decided?" x={124} y={70} size={52} rot={-3} at={t.at('How was') - 2} color={WHITE} />
-        <Note text="mostly on the battlefield" x={140} y={180} size={62} rot={-3} at={t.at('Mostly') - 2} />
-        <Note text="Gettysburg: ended Lee's invasions" x={1060} y={70} size={42} rot={-3} at={gb} color={WHITE} />
-        <Note text="Vicksburg: cut it in two" x={1080} y={160} size={42} rot={-3} at={vb} color={WHITE} />
-        <Note text="Atlanta: saved Lincoln's presidency" x={1080} y={250} size={42} rot={-3} at={at} color={WHITE} />
+        <Note text="so: how was the war decided?" x={140} y={100} size={52} rot={-3} at={t.at('How was') - 2} color={WHITE} />
+        <Note text="mostly on the battlefield" x={160} y={210} size={62} rot={-3} at={t.at('Mostly') - 2} />
+        <Note text="Gettysburg: ended Lee's invasions" x={1000} y={100} size={40} rot={-3} at={gb} color={WHITE} />
+        <Note text="Vicksburg: cut it in two" x={1010} y={190} size={40} rot={-3} at={vb} color={WHITE} />
+        <Note text="Atlanta: saved Lincoln's presidency" x={1000} y={280} size={40} rot={-3} at={at} color={WHITE} />
         <Tag text="Map · Gettysburg, Vicksburg and Atlanta" />
       </AbsoluteFill>
     </>
@@ -73,7 +73,7 @@ const Carried: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('And the people') - 1;
   return (
     <Desk a={a} push={0.02}>
-      <Note text="who carried the war? often, the ones with the least say:" x={124} y={70} size={46} rot={-2} at={a + 2} color={WHITE} />
+      <Note text="who carried the war? often, the ones with the least say:" x={150} y={100} size={42} rot={-2} at={a + 2} color={WHITE} />
       <DropCard src={SUBST} x={150} y={220} w={430} rot={-3} at={t.at('poor men') - 2} filter={DOC} />
       <DropCard src={USCT} x={700} y={260} w={560} rot={2} at={t.at('Black soldiers') - 2} />
       <DropCard src={FARM} x={1340} y={240} w={440} rot={-2} at={t.at('civilians') - 2} />
@@ -190,7 +190,7 @@ const EndScreen: React.FC<{t: TL}> = ({t}) => {
       <div style={{position: 'absolute', left: 1240, top: 200, width: 330, height: 330, borderRadius: '50%', border: `5px solid ${pal.mark}`, background: 'rgba(10,10,10,0.55)',
         opacity: interpolate(g, [a + 18, a + 28], [0, 1], clamp)}} />
       <Note text="thanks for watching" x={1060} y={600} size={62} rot={-3} at={a + 4} color={WHITE} />
-      <Note text="the whole series: parts 1 and 2" x={1000} y={720} size={50} rot={-3} at={t.at('more stories') - 2} color={CORAL} />
+      <Note text="the whole series: parts 1 and 2" x={950} y={720} size={50} rot={-3} at={t.at('more stories') - 2} color={CORAL} />
       <Note text="subscribe ↑" x={1270} y={840} size={54} rot={-3} at={t.at('subscribe') - 2} />
       <Tag text="Map · the United States, 1865" />
     </AbsoluteFill>

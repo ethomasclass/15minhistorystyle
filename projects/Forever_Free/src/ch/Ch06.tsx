@@ -42,7 +42,7 @@ const Didnt: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={COTTON} size={sizeOf(COTTON)} a={a} dim={0.24} side="left" />
       <DropCard src={MILL} x={1330} y={70} w={450} rot={3} at={a + 2} />
-      <Stamp text="IT DIDN'T." x={130} y={100} at={t.at("It didn't")} size={140} color={CORAL} rot={-2} />
+      <Stamp text="IT DIDN'T." x={130} y={130} at={t.at("It didn't")} size={140} color={CORAL} rot={-2} />
       <Checklist x={130} y={340} gap={130} size={50} items={[
         {text: 'stored up extra cotton before the war', at: t.at('stored up') - 3},
         {text: 'bought more from Egypt and India', at: t.at('Egypt') - 6},
