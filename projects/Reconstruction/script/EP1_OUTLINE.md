@@ -1,6 +1,6 @@
 # Reconstruction, Episode 1: A Few Acres
 
-> **Superseded by [`SCRIPT.md`](SCRIPT.md).** Changes since this outline: the title is *Landless, Homeless, Voteless*, the hook is version B, Frazier and the Savannah meeting open ch02, and ch04 is now the full Ford's Theatre story (the plot, Seward, Atzerodt, Johnson's drunken swearing-in).
+> **Superseded by [`SCRIPT.md`](SCRIPT.md).** Changes since this outline: the title is *Landless, Homeless, Voteless*, the hook is version B, Frazier and the Savannah meeting open ch02, and ch04 is now the full Ford's Theatre story (the plot, Seward, Johnson's drunken swearing-in).
 
 **15 Minute History** · beat outline (phase 2, step 1) · target **about 13:00 finished** (range 12:00–14:00)
 About 2,300 words of narration at the locked pace (~185 wpm), plus about 35 s of intro, title card and logo breaks and a 15–20 s end

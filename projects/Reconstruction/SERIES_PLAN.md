@@ -58,6 +58,7 @@ It fills, gets crossed out, and gets stamped across the series. *(Your pick; see
 | "except as a punishment for crime" (13th Amendment) | Ep 1 ch06 | Ep 1 (vagrancy laws); Ep 2 (prisoners leased out as labor) |
 | Charles Caldwell | Ep 2 | Ep 3 cold open and ch "Mississippi, 1875" |
 | Thaddeus Stevens' land plan | Ep 1 | Ep 2 (it fails; his grave) |
+| The Bureau's harder side (it pushed freedpeople into year-long contracts with planters) | moved out of Ep 1 | Ep 2's sharecropping chapter |
 
 ---
 
