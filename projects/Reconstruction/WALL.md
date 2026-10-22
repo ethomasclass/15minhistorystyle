@@ -1,5 +1,9 @@
 # The wall: one evidence board for the whole series
 
+> **Look chosen:** the chunk wall, where every chunk is a block *in* the wall (mockups `review/wall_mockups/E*`).
+> It's now a channel-wide device: see [`../../techniques/chunk_wall.md`](../../techniques/chunk_wall.md). The card
+> descriptions below still hold; read "card" as "block".
+
 Every chapter adds one **chunk** to a single evidence wall. Each episode ends by pulling back to show its chunks in
 place, and the last minute of the series pulls all the way back to the whole wall. That's the *Chunk History* idea on
 screen: small pieces you can hold, adding up to the big picture.
