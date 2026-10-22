@@ -10,6 +10,7 @@ import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {STEREO_FRAMES, StereoTest} from './tests/StereoTest';
 import {ACRES_FRAMES, AcresTest} from './tests/AcresTest';
 import {FORDS_FRAMES, FordsTest} from './tests/FordsTest';
+import {WallA, WallB, WallC, WallD} from './tests/WallMocks';
 
 export const Root: React.FC = () => (
   <>
@@ -21,6 +22,7 @@ export const Root: React.FC = () => (
     <Composition id="Test-Stereo" width={W} height={H} fps={FPS} durationInFrames={STEREO_FRAMES} component={StereoTest} />
     <Composition id="Test-Acres" width={W} height={H} fps={FPS} durationInFrames={ACRES_FRAMES} component={AcresTest} />
     <Composition id="Test-Fords" width={W} height={H} fps={FPS} durationInFrames={FORDS_FRAMES} component={FordsTest} />
+    {([['Wall-A', WallA], ['Wall-B', WallB], ['Wall-C', WallC], ['Wall-D', WallD]] as const).map(([id, C]) => <Composition key={id} id={id} width={W} height={H} fps={FPS} durationInFrames={1} component={C} />)}
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
