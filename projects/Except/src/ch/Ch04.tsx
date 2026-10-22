@@ -144,7 +144,7 @@ const Offices: React.FC<{t: TL}> = ({t}) => (
 
 /** Then they turned on Black New Yorkers. */
 const Turned: React.FC<{t: TL}> = ({t}) => (
-  <Photo src={ASYLUM} size={sizeOf(ASYLUM)} fx={1500} fy={1700} z0={1.12} z1={1.18} a={t.at('Then they') - 1} b={t.at('Rioters burned')} bw={QUIET} vignette={0.75}>
+  <Photo src={ASYLUM} size={sizeOf(ASYLUM)} fx={1500} fy={1450} z0={1.3} z1={1.36} a={t.at('Then they') - 1} b={t.at('Rioters burned')} bw={QUIET} vignette={0.75}>
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.5) 24%, rgba(0,0,0,0) 40%)'}} />

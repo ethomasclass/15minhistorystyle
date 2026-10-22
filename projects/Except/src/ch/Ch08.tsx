@@ -58,7 +58,7 @@ const Decided: React.FC<{t: TL}> = ({t}) => {
       <AbsoluteFill>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.82) 0%, rgba(0,0,0,0) 36%)'}} />
         <Note text="so: how was the war decided?" x={140} y={100} size={52} rot={-3} at={t.at('How was') - 2} color={WHITE} />
-        <Note text="mostly on the battlefield" x={160} y={210} size={62} rot={-3} at={t.at('Mostly') - 2} />
+        <Note text="mostly on the battlefield" x={160} y={210} size={54} rot={-3} at={t.at('Mostly') - 2} />
         <Note text="Gettysburg: ended Lee's invasions" x={1000} y={100} size={40} rot={-3} at={gb} color={WHITE} />
         <Note text="Vicksburg: cut it in two" x={1010} y={190} size={40} rot={-3} at={vb} color={WHITE} />
         <Note text="Atlanta: saved Lincoln's presidency" x={1000} y={280} size={40} rot={-3} at={at} color={WHITE} />
@@ -106,7 +106,7 @@ const LeftOpen: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('What did it leave') - 1;
   return (
     <Desk a={a} push={0.02}>
-      <Doc src={VOTE} x={1220} y={70} w={580} rot={2} at={a + 2} push={[a, t.at('The war answered')]} fx={1000} fy={1500} zoom={1.08} />
+      <Doc src={VOTE} x={1220} y={70} w={580} rot={2} at={a} push={[a, t.at('The war answered')]} fx={1000} fy={1500} zoom={1.08} />
       <Highlight text="WHAT IT LEFT OPEN" x={124} y={80} size={80} at={t.at('leave open') - 1} seed={84} rot={-2} />
       <Note text="almost everything else" x={140} y={240} size={56} rot={-3} at={t.at('Almost') - 2} color={WHITE} />
       <Note text="were freed people citizens?" x={150} y={400} size={56} rot={-3} at={t.at('Were freed') - 2} />

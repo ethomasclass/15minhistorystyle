@@ -146,7 +146,7 @@ const BlackCodes: React.FC<{t: TL}> = ({t}) => {
   const w = 600;
   return (
     <Desk a={a} push={0.02}>
-      <Doc src={VAGRANT1} x={1180} y={-260} w={w} rot={2} at={t.at('Black Codes') - 2} push={[a, t.at('In Mississippi')]} fx={920} fy={2948} zoom={1.08}
+      <Doc src={VAGRANT1} x={1180} y={-260} w={w} rot={2} at={a + 2} push={[a, t.at('In Mississippi')]} fx={920} fy={2948} zoom={1.08}
         marks={[{at: t.at('aimed') , box: [520, 2915, 1310, 2980], seed: 7}]} />
       <Note text="even before the amendment was ratified" x={150} y={110} size={48} rot={-3} at={a + 2} color={WHITE} />
       <Note text="Southern states began passing" x={130} y={220} size={48} rot={-3} at={t.at('Southern states') - 2} color={WHITE} />

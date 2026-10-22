@@ -62,7 +62,7 @@ const Separate: React.FC<{t: TL}> = ({t}) => {
 const Wagner: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('July 1863') - 1;
   const w = t.at('Fort Wagner');
-  const keys: Cam3[] = [{f: a, x: 3400, y: 3040, z: 2.4, tilt: 40, rot: -4}, {f: t.at("They don't"), x: 3405, y: 3045, z: 2.6, tilt: 44, rot: -6}];
+  const keys: Cam3[] = [{f: a, x: 3250, y: 3050, z: 2.4, tilt: 40, rot: -4}, {f: t.at("They don't"), x: 3255, y: 3055, z: 2.55, tilt: 44, rot: -6}];
   return (
     <>
       <Map3D data={D} keys={keys} states={0.7} rivers={0.8}>
@@ -70,11 +70,9 @@ const Wagner: React.FC<{t: TL}> = ({t}) => {
           <>
             <StateTiles api={api} names={CONFEDERACY_1861} at={-99} stagger={0} h={20} color={CORAL} />
             <Stand api={api} at={pl.charleston} z={20} show={a + 4}><Pin3 color={MAP3D.grey} h={50} /></Stand>
-            <Stand api={api} at={[pl.charleston[0] - 80, pl.charleston[1] - 30]} z={50} show={a + 6}><PlaceTag text="Charleston" size={30} /></Stand>
-            <Stand api={api} at={pl.fortSumter} z={20} show={a + 6}><Pin3 color={MAP3D.grey} h={40} /></Stand>
-            <Stand api={api} at={[pl.fortSumter[0] + 14, pl.fortSumter[1] - 30]} z={60} show={a + 8}><PlaceTag text="Fort Sumter" size={26} /></Stand>
+            <Stand api={api} at={[pl.charleston[0] - 75, pl.charleston[1] - 22]} z={70} show={a + 6}><PlaceTag text="Charleston" size={30} /></Stand>
             <Stand api={api} at={pl.fortWagner} show={w - 2}><Stake color={MAP3D.us} /></Stand>
-            <Stand api={api} at={[pl.fortWagner[0] + 16, pl.fortWagner[1] + 14]} z={60} show={w}><PlaceTag text="Fort Wagner" size={36} /></Stand>
+            <Stand api={api} at={[pl.fortWagner[0] + 12, pl.fortWagner[1] + 22]} z={40} show={w}><PlaceTag text="Fort Wagner" size={36} /></Stand>
           </>
         )}
       </Map3D>

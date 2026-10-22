@@ -141,7 +141,8 @@ const Copies: React.FC<{t: TL}> = ({t}) => {
       <Note text="5 copies in Lincoln's handwriting survive" x={150} y={100} size={48} rot={-2} at={a + 2} color={WHITE} />
       <Note text="no two" x={830} y={330} size={56} rot={-4} at={t.at('no two') - 2} color={CORAL} />
       <Note text="exactly alike" x={780} y={430} size={50} rot={-4} at={t.at('exactly') - 2} color={CORAL} />
-      <Note text="which one is the real speech?" x={740} y={600} size={40} rot={-4} at={t.at('So which') - 2} />
+      <Note text="which one is" x={790} y={560} size={42} rot={-4} at={t.at('So which') - 2} />
+      <Note text="the real speech?" x={770} y={640} size={42} rot={-4} at={t.at('the real') - 2} />
       <Note text="no recording, and the reporters wrote it down differently" x={220} y={870} size={40} rot={-1} at={t.at('There was no') - 2} color={WHITE} />
       <Tag text="Two of Lincoln's handwritten copies, facsimiles in Lambert, The Gettysburg Address, 1909 · Internet Archive" x={44} y={30} />
     </Desk>

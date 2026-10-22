@@ -184,7 +184,7 @@ const Galveston: React.FC<{t: TL}> = ({t}) => (
     mask={MASKS.galveston_officer} traceAt={t.at('announced') - 1} tag="Illustration · General Order No. 3 read in Galveston, Texas, June 19, 1865">
     {() => (
       <>
-        <AbsoluteFill style={{background: 'linear-gradient(to left, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.5) 30%, rgba(0,0,0,0) 46%)'}} />
+        <AbsoluteFill style={{background: 'linear-gradient(to left, rgba(10,9,7,0.92) 0%, rgba(10,9,7,0.78) 32%, rgba(0,0,0,0) 52%)'}} />
         <Highlight text="JUNE 19, 1865" x={1060} y={90} size={70} at={t.at('19th') - 1} seed={65} rot={-2} />
         <Note text="Union soldiers arrive" x={1080} y={240} size={46} rot={-3} at={t.at('Union soldiers') - 2} color={WHITE} />
         <Note text="in Galveston" x={1100} y={330} size={46} rot={-3} at={t.at('Galveston') - 2} color={WHITE} />

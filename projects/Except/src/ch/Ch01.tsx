@@ -151,7 +151,7 @@ const TwoBattles: React.FC<{t: TL}> = ({t}) => {
       <Note text="Gettysburg" x={240} y={810} size={60} rot={-3} at={a + 4} />
       <Note text="Vicksburg" x={1180} y={830} size={60} rot={-3} at={a + 8} />
       <Arrow x1={880} y1={520} x2={1040} y2={520} bow={-30} at={t.at('hundreds') - 2} dur={6} />
-      <Note text="hundreds of miles apart" x={620} y={880} size={50} rot={-2} at={t.at('hundreds') - 2} color={CORAL} />
+      <Note text="hundreds of miles apart" x={980} y={150} size={46} rot={-2} at={t.at('hundreds') - 2} color={CORAL} />
       <Tag text="Gettysburg from Cemetery Hill, 1863 · The Siege of Vicksburg, lithograph, 1863 · Library of Congress" />
     </Desk>
   );

@@ -178,7 +178,7 @@ const Week: React.FC<{t: TL}> = ({t}) => {
             <StateTiles api={api} names={BORDER_1861} at={-20} stagger={0} h={18} color={MAP3D.grey} />
             <StateTiles api={api} names={CONFEDERACY_1861} at={-20} stagger={0} h={36} color={CORAL} />
             <Stand api={api} at={pl.gettysburg} show={-20}><Stake color={MAP3D.us} /></Stand>
-            <Stand api={api} at={[pl.gettysburg[0] - 380, pl.gettysburg[1] + 60]} z={80} show={-20}><PlaceTag text="Gettysburg · July 1 to 3" size={34} /></Stand>
+            <Stand api={api} at={[pl.gettysburg[0] - 380, pl.gettysburg[1] + 300]} z={80} show={-20}><PlaceTag text="Gettysburg · July 1 to 3" size={34} /></Stand>
             <Stand api={api} at={pl.vicksburg} show={vb - 2}><Stake color={MAP3D.us} /></Stand>
             <Stand api={api} at={[pl.vicksburg[0] - 360, pl.vicksburg[1] + 120]} z={80} show={vb}><PlaceTag text="Vicksburg · July 4" size={34} /></Stand>
             <Stand api={api} at={[pl.vicksburg[0] - 300, pl.vicksburg[1] + 330]} z={60} show={t.at('surrenders') - 2}><Hand text="surrenders to Grant" size={64} color={MAP3D.us} bg /></Stand>
@@ -188,7 +188,7 @@ const Week: React.FC<{t: TL}> = ({t}) => {
       <AbsoluteFill>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.75) 0%, rgba(0,0,0,0) 30%)'}} />
         <Highlight text="JULY 4, 1863" x={110} y={90} size={86} at={t.at('July 4th') - 1} seed={23} rot={-2} />
-        <Note text="the very next day, far to the west" x={130} y={870} size={50} rot={-3} at={t.at('far to') - 2} color={WHITE} />
+        <Note text="the very next day, far to the west" x={130} y={200} size={44} rot={-3} at={t.at('far to') - 2} color={WHITE} />
         {g >= t.at('47day') - 2 && <div style={{position: 'absolute', left: 1300, top: 110}}><Count to={47} at={t.at('47day') - 2} dur={18} suffix="-day siege" size={70} color={WHITE} /></div>}
         <Tag text="Map · Gettysburg and Vicksburg, July 1863" />
       </AbsoluteFill>
