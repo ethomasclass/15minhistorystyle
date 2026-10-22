@@ -4,7 +4,7 @@
 (Presidential and Congressional plans, Freedmen's Bureau, tenant farming/sharecropping, 13th–15th Amendments, Black Codes, KKK,
 military districts).
 
-Source notes: [`reference/`](reference/) (Lesson 1 Political Reconstruction, 10.2 Realities of Reconstruction, 10.3 End of
+Scripts: [`ep1/script/SCRIPT.md`](ep1/script/SCRIPT.md), [`ep2/script/SCRIPT.md`](ep2/script/SCRIPT.md), [`ep3/script/SCRIPT.md`](ep3/script/SCRIPT.md). Source notes: [`reference/`](reference/) (Lesson 1 Political Reconstruction, 10.2 Realities of Reconstruction, 10.3 End of
 Reconstruction).
 
 ---
@@ -27,13 +27,13 @@ It fills, gets crossed out, and gets stamped across the series. *(Your pick; see
 
 | | Episode 1 | Episode 2 | Episode 3 |
 |---|---|---|---|
-| **Working title** | *A Few Acres* | *Bottom Rail on Top* | *Redeemed* |
+| **Title** | *Landless, Homeless, Voteless* | *Bottom Rail on Top* (working) | *Redeemed* (working) |
 | **Years** | 1865–1866 | 1867–1872 | 1866–1877 |
 | **Covers** | The **law** | The **land** (and the vote) | **Protection** |
 | **Ground-level character** | The Edisto Island freedpeople | Charles Caldwell (Hiram Revels as the hook) | Charles Caldwell |
 | **Goal / obstacle** | Keep the land, be citizens / Johnson | Build a new Mississippi / no land, armed enemies | Survive and keep governing / will anyone protect him? |
 | **Shape** | Man in a hole (down, then up) | Icarus (up, then down) | Oedipus (down, up, down) + a small lift at the end |
-| **Hook** | The Edisto petition | Revels takes a seat Jefferson Davis once held | Caldwell's Christmas toast, 1875 |
+| **Hook** | The Edisto petition | Revels, a Black minister, sworn in as senator from Jefferson Davis's state | Caldwell's Christmas toast, 1875 |
 | **Ends on** | Congress takes control; the land is still gone | They can vote, but don't own the ground they stand on | The amendments survive on paper; the Edisto callback |
 
 ### 8.1 coverage

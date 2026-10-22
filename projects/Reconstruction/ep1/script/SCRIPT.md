@@ -9,7 +9,7 @@ leaders, pardoning them and returning their land. The South used that freedom to
 back with the Civil Rights Act of 1866 and the 14th Amendment. When Johnson fought that, voters handed Congress control. By the end of
 1866 freedpeople had the **law** on their side, but not the **land**.
 
-**Frame:** Episode 1 of 3 ([`../SERIES_PLAN.md`](../SERIES_PLAN.md)). Ground-level protagonists: the Edisto Island freedpeople. Shape:
+**Frame:** Episode 1 of 3 ([`../SERIES_PLAN.md`](../../SERIES_PLAN.md)). Ground-level protagonists: the Edisto Island freedpeople. Shape:
 man in a hole. Title card dates: *1865 – 1866*. Heavy chapter: ch06 (and the Memphis/New Orleans paragraph in ch09).
 
 Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates (185 wpm, ch06 at 168 wpm, intro and title after ch01); re-time after
@@ -281,7 +281,7 @@ What they still didn't have was the land.
 
 But one of those three words was about to change.
 
-Next time: Congress sends the army back into the South. And a Black minister from Mississippi takes a seat in the U.S. Senate that Jefferson Davis once held.
+Next time: Congress sends the army back into the South. And Mississippi, Jefferson Davis's home state, sends a Black senator to Washington.
 
 Thanks for watching. If you want the rest of this story, subscribe, and I'll see you in part two.
 
@@ -289,7 +289,7 @@ Thanks for watching. If you want the rest of this story, subscribe, and I'll see
 
 ## Writing for everyone: what this draft assumes nobody knows
 
-Per the "curse of knowledge" rule (see the script rules in `../SERIES_PLAN.md`), every term below is explained in plain words the
+Per the "curse of knowledge" rule (see the script rules in `../../SERIES_PLAN.md`), every term below is explained in plain words the
 first time it's said, so a viewer who has never taken a history class can follow, and one who has isn't talked down to.
 
 | Term | Where | How it's explained |
@@ -411,7 +411,7 @@ small step. But it was the first one." (ch04). Keep the 1866 election itself.
 | 24 | ch09: Cleveland, "why not hang Thad Stevens?" | Sept 3, 1866, answering a heckler who shouted to hang Jefferson Davis | Confirm the wording from a newspaper account. |
 | 25 | ch09: Republicans won more than two-thirds of both houses | 1866 midterms | Safe. |
 | 26 | ch10: most Edisto families lost the land | Restorations through 1866 (e.g., Bleak Hall, Feb 1866) | Confirm for Edisto specifically before voicing. |
-| 27 | ch10: Revels took a Senate seat Jefferson Davis once held | Revels filled the Mississippi seat Davis had held in 1847–1851 | Commonly said; confirm the seat. |
+| 27 | ch10: Mississippi, Davis's home state, sends a Black senator | Revels took the seat Albert Brown left in 1861; Davis's old seat went to Adelbert Ames (NPS) | Fixed: the common "Davis's seat" claim is a myth, so the tease no longer makes it. |
 
 ## Sources
 

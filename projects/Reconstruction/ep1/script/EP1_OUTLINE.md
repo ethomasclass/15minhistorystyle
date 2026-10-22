@@ -6,7 +6,7 @@
 About 2,300 words of narration at the locked pace (~185 wpm), plus about 35 s of intro, title card and logo breaks and a 15–20 s end
 screen. The Black Codes chapter (6) is voiced slower and has no jokes.
 
-Series plan: [`../SERIES_PLAN.md`](../SERIES_PLAN.md). Source notes: [`../reference/Lesson_1_Political_Reconstruction.txt`](../reference/Lesson_1_Political_Reconstruction.txt).
+Series plan: [`../SERIES_PLAN.md`](../../SERIES_PLAN.md). Source notes: [`../reference/Lesson_1_Political_Reconstruction.txt`](../../reference/Lesson_1_Political_Reconstruction.txt).
 
 **Years on the title card:** 1865 – 1866.
 
