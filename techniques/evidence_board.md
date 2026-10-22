@@ -18,8 +18,10 @@ approved). The block-in-the-wall "chunk wall" was tried and set aside.
 
 - **The board** is the channel's dark desk paper, with the brand's *cracks* pattern very faint. It lives on the desk,
   so the camera can tilt from the board down onto the desk and the 3D maps (mockup D).
-- **A piece** is a cream photo card: an archival picture or a document crop, with a two-to-five-word label in Abril
-  underneath, at a slight angle, with a drop shadow. The chapter's subject piece gets the coral tint (coral pin, coral
+- **A piece** is a photo with **no frame**: cropped out of its mount and run through `tools/crease.py` so it looks like a
+  creased, worn old print (folds, fine cracks, chipped and torn edges). Documents are torn paper scraps. Labels are torn,
+  typewritten strips; questions go on sticky notes in the handwriting; verdicts are rubber stamps (the collage look,
+  mockups `F*`). The chapter's subject piece gets the coral tint (coral pin, coral
   label); everything else stays black and white.
 - **Pins** are teal (coral for the subject piece).
 - **Yarn** is teal and runs pin to pin with a little sag. Where it says something, a small cream paper tag reads *but*

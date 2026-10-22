@@ -37,15 +37,10 @@ const Flat: React.FC<{x: number; y: number; r?: number; children: React.ReactNod
   <div style={{position: 'absolute', left: x, top: y, transform: `rotate(${r}deg)`, zIndex: z, filter: 'drop-shadow(5px 6px 0 rgba(0,0,0,0.55))'}}>{children}</div>
 );
 
-/** A photo print: halftone picture on paper with a white border. */
-const Photo: React.FC<{src: string; w: number; h: number; fit?: string; pad?: number}> = ({src, w, h, fit = '50% 30%', pad = 12}) => {
-  const p = usePal();
-  return (
-    <div style={{background: p.paper, padding: pad}}>
-      <Img src={staticFile(`img/wall/${src}`)} style={{width: w, height: h, objectFit: 'cover', objectPosition: fit, display: 'block'}} />
-    </div>
-  );
-};
+/** A photo: a worn, creased print with no border (tools/crease.py), straight on the board. */
+const Photo: React.FC<{src: string; w: number; h?: number}> = ({src, w, h}) => (
+  <Img src={staticFile(`img/wall/${src}`)} style={{width: w, height: h, display: 'block', objectFit: 'contain'}} />
+);
 
 /** A torn label strip, typewritten. */
 const Strip: React.FC<{text: string; size?: number; bg?: string; color?: string; seed?: string; font?: string}> = ({text, size = 26, bg, color = '#1a1a1a', seed = 's', font = MONO}) => {
@@ -154,18 +149,18 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       <Defs />
       <Splats seed="b1" />
       {/* the forty acres map, taped */}
-      <Flat x={70} y={210} r={-4}><Photo src="acres.jpg" w={300} h={170} fit="62% 45%" pad={10} /></Flat>
+      <Flat x={70} y={210} r={-4}><Photo src="cr_acres.png" w={330} /></Flat>
       <Flat x={110} y={190} r={-14} z={5}><TapeBit w={120} seed="a" /></Flat>
       <Flat x={64} y={420} r={-3}><Strip text="evidence #1 · Jan 1865" seed="e1" size={22} /></Flat>
       <Flat x={80} y={480} r={-6}><Sticky text="whose land?" w={170} size={50} /></Flat>
       {/* Lincoln */}
-      <Flat x={470} y={170} r={3}><Photo src="ht_lincoln.png" w={170} h={210} fit="50% 35%" /></Flat>
+      <Flat x={470} y={170} r={3}><Photo src="cr_lincoln.png" w={205} /></Flat>
       <Flat x={440} y={420} r={-2}><Strip text="TEN PERCENT" seed="tp" size={28} font={SANS} /></Flat>
       <Flat x={380} y={80} r={-5}><Stamp text="1863" size={34} /></Flat>
       {/* the centre: who decides? */}
       <div style={{position: 'absolute', left: 830, top: 330}}><Silhouette label="WHO DECIDES?" /></div>
       {/* Johnson */}
-      <Flat x={1200} y={160} r={-3}><Photo src="ht_johnson.png" w={180} h={220} fit="50% 25%" /></Flat>
+      <Flat x={1200} y={160} r={-3}><Photo src="cr_johnson.png" w={235} /></Flat>
       <Flat x={1160} y={390} r={6} z={6}><Stamp text="PARDONED" size={40} /></Flat>
       <Flat x={1420} y={120} r={4}><Strip text="president · Apr 1865" seed="pj" size={20} /></Flat>
       {/* the 13th Amendment */}
@@ -173,7 +168,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       <Flat x={1650} y={640} r={-8}><Sticky text="loophole?" w={170} size={48} /></Flat>
       <Flat x={1500} y={385} r={-3}><Strip text="evidence #6 · 13th Amendment" seed="e6" size={20} /></Flat>
       {/* Congress */}
-      <Flat x={1240} y={600} r={-2}><Photo src="ht_stevens.png" w={160} h={190} fit="50% 55%" /></Flat>
+      <Flat x={1240} y={600} r={-2}><Photo src="cr_stevens.png" w={200} /></Flat>
       <Flat x={1170} y={830} r={-7} z={6}><Stamp text="OVERRIDDEN" size={36} /></Flat>
       {/* the petition */}
       <Flat x={300} y={590} r={-2}><Scrap text="“we wish to have A home if It be but A few acres.”" w={330} seed="pt" size={30} italic /></Flat>
@@ -213,17 +208,17 @@ export const Collage3: React.FC = () => {
           <Defs />
           <Splats seed="c3" />
           {/* Booth at the centre */}
-          <Flat x={840} y={210} r={-2}><Photo src="ht_booth.png" w={230} h={280} fit="50% 20%" /></Flat>
+          <Flat x={840} y={210} r={-2}><Photo src="cr_booth.png" w={240} /></Flat>
           <Flat x={820} y={540} r={2}><Strip text="J. WILKES BOOTH · actor" seed="jb" size={26} font={SANS} /></Flat>
           <Flat x={1130} y={600} r={7}><Sticky text="three targets, one night" w={200} size={46} /></Flat>
           {/* the targets */}
-          <Flat x={300} y={190} r={3}><Photo src="ht_lincoln.png" w={190} h={230} fit="50% 35%" /></Flat>
+          <Flat x={300} y={190} r={3}><Photo src="cr_lincoln.png" w={215} /></Flat>
           <Flat x={270} y={460} r={-3}><Strip text="the President · Ford's Theatre" seed="t1" size={22} /></Flat>
           <Flat x={250} y={540} r={-8} z={6}><Stamp text="SHOT · AFTER 10 P.M." size={36} /></Flat>
-          <Flat x={1390} y={190} r={-3}><Photo src="ht_johnson.png" w={190} h={230} fit="50% 25%" /></Flat>
+          <Flat x={1390} y={190} r={-3}><Photo src="cr_johnson.png" w={240} /></Flat>
           <Flat x={1370} y={460} r={2}><Strip text="the vice president · his hotel" seed="t3" size={22} /></Flat>
           <Flat x={1400} y={540} r={6} z={6}><Stamp text="NEVER ATTACKED" size={36} /></Flat>
-          <Flat x={860} y={660} r={1}><Photo src="ht_seward.png" w={180} h={210} fit="50% 25%" /></Flat>
+          <Flat x={860} y={660} r={1}><Photo src="cr_seward.png" w={205} /></Flat>
           <Flat x={800} y={910} r={-2}><Strip text="the Secretary of State · his home" seed="t2" size={22} /></Flat>
           <Flat x={1090} y={850} r={-6} z={6}><Stamp text="STABBED · SURVIVED" size={34} /></Flat>
           <Flat x={140} y={760} r={-4}><Sticky text="why the vice president?" w={210} size={44} /></Flat>
@@ -253,7 +248,7 @@ export const Collage4: React.FC = () => {
               <div style={{background: i === 2 ? p.accent : p.paper, clipPath: torn(`w${i}`, 'lrtb', 8), padding: '10px 34px 4px', fontFamily: DISPLAY, fontSize: 150, lineHeight: 1, color: '#151515'}}>{w}</div>
             </Flat>
           ))}
-          <Flat x={1340} y={210} r={4}><Photo src="ht_firstvote.png" w={330} h={430} fit="50% 40%" pad={14} /></Flat>
+          <Flat x={1340} y={210} r={4}><Photo src="cr_firstvote.png" w={330} /></Flat>
           <Flat x={1380} y={180} r={-12} z={5}><TapeBit w={160} seed="k2" /></Flat>
           <Flat x={1290} y={690} r={-6} z={6}><Stamp text="1865 – 1866" size={48} /></Flat>
           <Flat x={1450} y={800} r={5}><Sticky text="who decides?" w={210} size={52} /></Flat>
