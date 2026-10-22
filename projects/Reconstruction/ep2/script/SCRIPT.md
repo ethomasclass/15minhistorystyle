@@ -1,6 +1,6 @@
 # Bottom Rail on Top: Reconstruction, Part 2
 
-**15 Minute History** · narration script · 2,242 words · about 13:05 finished (draft 1)
+**15 Minute History** · narration script · 2,253 words · about 13:08 finished (draft 2)
 
 **Driving question (cold open, answered in ch10):** Five years after slavery ended, a Black minister from Mississippi was in the U.S. Senate. How did that change so fast? And what was all of it resting on?
 
@@ -38,9 +38,9 @@ But first, a quick catch-up.
 
 ## 1:28 | The Army Goes Back In
 
-`ch02_the_army.txt` · 204 words
+`ch02_the_army.txt` · 208 words
 
-Last time: the Civil War ended, and slavery ended with it. President Andrew Johnson pardoned the Confederacy's leaders and gave them back their land. The South answered with the Black Codes. And Congress fought back with the 14th Amendment. When the freed families of Edisto Island lost their land, they described themselves in three words. *Landless. Homeless. Voteless.*
+Here's where we left the wall. The Civil War ended, and slavery ended with it. President Andrew Johnson pardoned the Confederacy's leaders and gave them back their land. The South answered with the Black Codes. And Congress fought back with the 14th Amendment. When the freed families of Edisto Island lost their land, they described themselves in three words. *Landless. Homeless. Voteless.*
 
 By 1867, Congress was in charge. And it was done asking nicely.
 
@@ -58,7 +58,7 @@ To many white Southerners, it was a military occupation. They called it rule by 
 
 ---
 
-## 2:36 | The Blacksmith
+## 2:38 | The Blacksmith
 
 `ch03_the_blacksmith.txt` · 184 words
 
@@ -78,7 +78,7 @@ Remember Edisto's three words? One of them was about to be crossed out. But firs
 
 ---
 
-## 3:38 | One Vote Short
+## 3:39 | One Vote Short
 
 `ch04_impeachment.txt` · 258 words
 
@@ -104,7 +104,7 @@ His plan to give freedpeople land died with him.
 
 ---
 
-## 5:04 | The 15th Amendment
+## 5:05 | The 15th Amendment
 
 `ch05_fifteenth.txt` · 216 words
 
@@ -126,7 +126,7 @@ Still. Five years after the war, freedmen could vote across the whole country. I
 
 ---
 
-## 6:16 | Bottom Rail on Top
+## 6:17 | Bottom Rail on Top
 
 `ch06_bottom_rail.txt` · 236 words
 
@@ -148,7 +148,7 @@ But corruption wasn't a Southern thing in the 1870s. It was everywhere. In New Y
 
 ---
 
-## 7:34 | Carpetbaggers and Scalawags
+## 7:36 | Carpetbaggers and Scalawags
 
 `ch07_carpetbaggers.txt` · 240 words
 
@@ -170,7 +170,7 @@ Quick thing before the story turns. If you're enjoying this series, hit subscrib
 
 ---
 
-## 8:54 | No Land
+## 8:56 | No Land
 
 `ch08_no_land.txt` · 226 words
 
@@ -192,7 +192,7 @@ But that word, partly, is where the trouble started.
 
 ---
 
-## 10:10 | The Debt
+## 10:11 | The Debt
 
 `ch09_the_debt.txt` · 248 words
 
@@ -218,11 +218,11 @@ It's called {convict leasing}. And it was legal.
 
 ---
 
-## 11:40 | The Ground They Stood On
+## 11:41 | The Ground They Stood On
 
-`ch10_ground.txt` · 255 words
+`ch10_ground.txt` · 262 words
 
-So let's go back to the question. Five years after slavery ended, a Black minister from Mississippi was in the U.S. Senate. How did it change so fast?
+So let's step back, look at the wall, and go back to the question. Five years after slavery ended, a Black minister from Mississippi was in the U.S. Senate. How did it change so fast?
 
 Because Congress forced it. The army held the South while new state governments were written. Black men got the vote, and they used it, sending about 2,000 of their own to office. And the 15th Amendment wrote the vote into the Constitution.
 
@@ -265,6 +265,8 @@ Thanks for watching. If you want the last part of this story, subscribe, and I'l
 | Militia | ch10 | "the state's own part-time army" |
 
 ## Production notes
+
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
 
 **Motif card.** *LANDLESS · HOMELESS · VOTELESS* returns in ch02 (recap), ch03 ("one of them was about to be crossed out"), ch05
 (VOTELESS struck through in teal on "Voteless"), ch10 (LANDLESS circled). Same place, same size as Episode 1.

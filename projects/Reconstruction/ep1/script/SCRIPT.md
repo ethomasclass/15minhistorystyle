@@ -1,6 +1,6 @@
 # Landless, Homeless, Voteless: Reconstruction, Part 1
 
-**15 Minute History** · narration script · 2,525 words · about 14:47 finished (draft 3, trimmed)
+**15 Minute History** · narration script · 2,532 words · about 14:50 finished (draft 4: the wall pass)
 
 **Driving question (cold open, answered in ch10):** The war was over. Slavery was over. Who got to decide what freedom would actually look like? And why was the land going back?
 
@@ -43,7 +43,7 @@ We'll come back to this island. And to those three words.
 
 ## 1:34 | Forty Acres
 
-`ch02_forty_acres.txt` · 239 words
+`ch02_forty_acres.txt` · 244 words
 
 To see how they got that land, go back to January 1865.
 
@@ -57,7 +57,7 @@ Their spokesman was Garrison Frazier, a 67-year-old minister who had bought his 
 
 Translation: don't give us charity. Give us land.
 
-Four days later, Sherman signed {Special Field Order No. 15}. A strip of coast from South Carolina to Florida, islands included, was set aside for freed families. Up to 40 acres each. The Army lent some of them mules. That's where the phrase comes from: {forty acres and a mule}.
+Four days later, Sherman signed {Special Field Order No. 15}. A strip of coast from South Carolina to Florida, islands included, was set aside for freed families. Up to 40 acres each. That's about 30 football fields. The Army lent some of them mules. That's where the phrase comes from: {forty acres and a mule}.
 
 By summer, about 40,000 people were farming that land. Edisto Island was part of it.
 
@@ -65,7 +65,7 @@ But here's the catch. It was a military order, written in wartime. It let them u
 
 ---
 
-## 2:54 | Ten Percent
+## 2:55 | Ten Percent
 
 `ch03_ten_percent.txt` · 279 words
 
@@ -89,7 +89,7 @@ So the President had one plan. Congress had another. And when the war ended, nei
 
 ---
 
-## 4:26 | Ford's Theatre
+## 4:28 | Ford's Theatre
 
 `ch04_fords_theatre.txt` · 334 words
 
@@ -119,7 +119,7 @@ Now Andy was in charge. And he wasn't even a Republican. He was a Democrat from 
 
 ---
 
-## 6:27 | Treason Must Be Made Odious
+## 6:29 | Treason Must Be Made Odious
 
 `ch05_treason_odious.txt` · 318 words
 
@@ -153,7 +153,7 @@ But first, the South was back in charge of itself. What was it going to do?
 
 ---
 
-## 8:13 | Except as a Punishment for Crime
+## 8:14 | Except as a Punishment for Crime
 
 `ch06_except_crime.txt` · 247 words
 
@@ -185,7 +185,7 @@ Because of six words. *Except as a punishment for crime.*
 
 ---
 
-## 9:43 | The Bureau
+## 9:44 | The Bureau
 
 `ch07_the_bureau.txt` · 242 words
 
@@ -207,7 +207,7 @@ The Civil Rights Act became law. That summer, so did a new Freedmen's Bureau bil
 
 ---
 
-## 11:03 | Equal Protection
+## 11:05 | Equal Protection
 
 `ch08_equal_protection.txt` · 226 words
 
@@ -235,7 +235,7 @@ Quick thing before we go on. If this is helping, hit subscribe. It's free, and u
 
 ---
 
-## 12:19 | Swing Around the Circle
+## 12:20 | Swing Around the Circle
 
 `ch09_swing_circle.txt` · 198 words
 
@@ -259,11 +259,11 @@ And Congress's plan included sending the army back into the South.
 
 ---
 
-## 13:25 | Landless, Homeless, Voteless
+## 13:26 | Landless, Homeless, Voteless
 
-`ch10_landless.txt` · 249 words
+`ch10_landless.txt` · 251 words
 
-So let's go back to the question. The war was over. Slavery was over. Who got to decide what freedom would look like?
+So let's step back, look at the whole wall, and go back to the question. The war was over. Slavery was over. Who got to decide what freedom would look like?
 
 At first, the President. Lincoln planned to be generous, to win the South back fast. Johnson was even more generous to the men who had led it. He pardoned them and gave back their land.
 
@@ -312,6 +312,8 @@ first time it's said, so a viewer who has never taken a history class can follow
 | Jefferson Davis | ch09 | "the Confederacy's president" |
 
 ## Production notes
+
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings. ch02 gets the powers-of-ten zoom (the South → the strip → Edisto → one 40-acre plot); ch04 is a close-up of the wall (Booth's three targets strung together); ch07–ch09 are one big canvas (no cuts, the camera travels the wall as the fight escalates); ch10 pulls back to the whole Episode 1 wall.
 
 **Motif card: the three words.** The title is the motif: *LANDLESS · HOMELESS · VOTELESS* on a torn-paper card in the same place each
 time it returns (ch01, ch10). In ch10 a second line appears under it: *LAW ✔ · LAND ✘*. Episode 2 crosses out VOTELESS.
@@ -386,6 +388,7 @@ small step. But it was the first one." (ch04). Keep the 1866 election itself.
 | 5 | ch01/ch10: "Landless. Homeless. Voteless." | Committee letter to Howard, Oct 20 or 21, 1865 (FSSP) | Check exact spelling and punctuation on the scan. |
 | 6 | ch02: Frazier, 67, bought his own freedom; "The way we can best take care of ourselves is to have land, and turn it and till it by our own labor." | Savannah meeting, Jan 12, 1865, with Sherman and Secretary of War Stanton; transcript in the *New-York Daily Tribune*, Feb 13, 1865 | Safe; he bought his and his wife's freedom in 1856. |
 | 7 | ch02: Field Order 15, up to 40 acres; mules lent; about 40,000 people by summer | The order says "not more than 40 acres"; mules were lent by the Army, not in the order; 40,000 is the common figure | Safe as worded ("about"). |
+| 7a | ch02: 40 acres is "about 30 football fields" | An American football field with end zones is 360 × 160 ft = 57,600 sq ft ≈ 1.32 acres; 40 ÷ 1.32 ≈ 30 | Safe. |
 | 8 | ch03: Ten Percent Plan (1863); Wade-Davis (1864), pocket veto | Proclamation of Amnesty and Reconstruction, Dec 8, 1863; Wade-Davis Bill, July 1864 | Safe. |
 | 9 | ch04: Lincoln the first president to say in public some Black men should vote | Speech of April 11, 1865: "I would myself prefer that it were now conferred on the very intelligent, and on those who serve our cause as soldiers." | Widely stated; script quotes only "very intelligent." |
 | 10 | ch04: Booth in the crowd, furious | Rests on later accounts (Townsend, via Frederick Stone) | Hedged: "according to later accounts." No words quoted. |

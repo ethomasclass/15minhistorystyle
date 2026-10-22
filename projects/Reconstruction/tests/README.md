@@ -6,8 +6,8 @@ is a finished scene; each one answers "does this look good enough to use, and wh
 | Clip | Composition | What it tests | Render (this container, no GPU) |
 |---|---|---|---|
 | 1 | `Test-Stereo` | An 1865 stereograph: the card on the desk, a flick between its two photos (real parallax), then a camera move *into* the photo | about 14 min |
-| 2 | `Test-Fords` | Ford's Theatre as a cream-card architect's model: the box, Lincoln's chair, the 12-foot drop, the landing. No people | see `out/render2.log` |
-| 3 | `Test-Acres` | Special Field Order No. 15 on the 3D map, the flight to Edisto Island, 1,085 forty-acre plots popping up, then sinking back and the island going grey | see `out/render3.log` |
+| 2 | `Test-Fords` | Ford's Theatre as a cream-card architect's model: the box, Lincoln's chair, the 12-foot drop, the landing. No people | about 12 min |
+| 3 | `Test-Acres` | Special Field Order No. 15 on the 3D map, the flight to Edisto Island, 1,085 forty-acre plots popping up, then sinking back and the island going grey | about 15 min (no WebGL, but a thousand SVG plots) |
 
 Renders: `renders/` (720p review reel). The 1080p files are in `out/` and not committed.
 

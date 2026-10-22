@@ -1,6 +1,6 @@
 # Redemption: Reconstruction, Part 3
 
-**15 Minute History** · narration script · 2,107 words · about 12:34 finished (draft 1)
+**15 Minute History** · narration script · 2,153 words · about 12:50 finished (draft 2)
 
 **Driving question (cold open, answered in ch07 and ch10):** Five years after he was elected, a Black state senator was shot in the street and nobody stopped it. How does a country go from that to this? And why did nobody stop it?
 
@@ -23,13 +23,13 @@ Markup: `*emphasis*`, `{vocab term}`. Timestamps are estimates (185 wpm; ch01, c
 
 ## 0:00 | A Christmas Drink
 
-`ch01_cold_open.txt` · 196 words
+`ch01_cold_open.txt` · 217 words
 
 A man talked a state senator into a Christmas drink. As their glasses touched, someone fired through the window.
 
 It was the Christmas holidays of 1875, in Clinton, Mississippi. The senator was Charles Caldwell. The blacksmith from the last episode. Born enslaved. Then a lawmaker.
 
-His wife, Margaret Ann Caldwell, told a committee of the U.S. Senate what happened next.
+Months later, his wife, Margaret Ann Caldwell, testified under oath to a committee of the U.S. Senate. "When did he die?" they asked. "Thursday night," she said, "in the Christmas." Then she told them what happened.
 
 He was shot in a store's cellar. He called for help. Nobody came. He asked to be carried outside, because, in her words, he "wanted to die in the open air, and did not want to die like a dog closed up."
 
@@ -43,11 +43,11 @@ We'll come back to Clinton. And to the question his wife kept asking: why did th
 
 ---
 
-## 1:42 | The Night
+## 1:49 | The Night
 
-`ch02_the_klan.txt` · 193 words
+`ch02_the_klan.txt` · 196 words
 
-Last time: Congress sent the army back into the South. Black men voted, and about 2,000 of them held office. The 15th Amendment wrote the vote into the Constitution. But most freedpeople still didn't own land. And the whole thing rested on two things: votes, and the soldiers who protected them.
+Here's the wall so far. Congress sent the army back into the South. Black men voted, and about 2,000 of them held office. The 15th Amendment wrote the vote into the Constitution. But most freedpeople still didn't own land. And the whole thing rested on two things: votes, and the soldiers who protected them.
 
 Somebody had already figured out how to attack both.
 
@@ -63,7 +63,7 @@ This was terrorism. Violence meant to frighten a whole group of people into givi
 
 ---
 
-## 2:46 | Protection
+## 2:55 | Protection
 
 `ch03_protection.txt` · 167 words
 
@@ -85,7 +85,7 @@ The question was whether the government would keep deciding that.
 
 ---
 
-## 3:42 | Colfax
+## 3:51 | Colfax
 
 `ch04_colfax.txt` · 170 words
 
@@ -107,7 +107,7 @@ Nobody was ever punished for Colfax.
 
 ---
 
-## 4:45 | Tired
+## 4:53 | Tired
 
 `ch05_tired.txt` · 223 words
 
@@ -131,7 +131,7 @@ Quick thing before we go on. If you're getting something out of this series, hit
 
 ---
 
-## 5:59 | The Bank
+## 6:08 | The Bank
 
 `ch06_the_bank.txt` · 169 words
 
@@ -153,9 +153,9 @@ For a lot of families, that was their savings, and their trust, gone at once.
 
 ---
 
-## 6:56 | Mississippi, 1875
+## 7:05 | Mississippi, 1875
 
-`ch07_mississippi.txt` · 295 words
+`ch07_mississippi.txt` · 300 words
 
 Which brings us back to Mississippi, in 1875.
 
@@ -165,9 +165,9 @@ In September, about 2,000 Black Mississippians and their families gathered for a
 
 Over the next few days, armed white men hunted Black people across the county. Somewhere between 30 and 50 were killed.
 
-The governor of Mississippi was Adelbert Ames. The carpetbagger from Maine, the one who got Jefferson Davis's old Senate seat. He asked President Grant to send troops.
+The governor of Mississippi was Adelbert Ames. The carpetbagger from Maine, the one who got Jefferson Davis's old Senate seat. He telegraphed President Grant for troops.
 
-Grant's attorney general wrote back. The whole public, he said, was "tired out with these annual autumnal outbreaks in the South."
+The answer came back from Grant's attorney general, quoting the President. The whole public, it said, was "tired out with these annual autumnal outbreaks in the South."
 
 Translation: the North was done.
 
@@ -183,7 +183,7 @@ The white Democrats who took over called themselves {Redeemers}, and what they h
 
 ---
 
-## 8:41 | Two Sets of Results
+## 8:54 | Two Sets of Results
 
 `ch08_1876.txt` · 219 words
 
@@ -207,7 +207,7 @@ And that's usually where the history books say it: Reconstruction was over.
 
 ---
 
-## 9:54 | Voteless
+## 10:07 | Voteless
 
 `ch09_voteless.txt` · 193 words
 
@@ -231,11 +231,11 @@ So go back to the three words from Edisto Island. *Landless.* Still. *Homeless.*
 
 ---
 
-## 10:59 | A Few Acres
+## 11:11 | A Few Acres
 
-`ch10_a_few_acres.txt` · 288 words
+`ch10_a_few_acres.txt` · 299 words
 
-So, the question from the very start of this series. What does it take to make freedom real?
+So step all the way back and look at the whole wall. Three episodes. And the question from the very start: what does it take to make freedom real?
 
 Here's what Reconstruction suggests. Three things. The law. The land. And someone willing to protect both.
 
@@ -275,22 +275,26 @@ Thanks for watching this series. If you want more stories like this one, subscri
 | Whiskey Ring | ch05 | "tax officials let whiskey makers skip their taxes, in exchange for a cut" |
 | Freedman's Savings Bank | ch06 | "a bank for freedpeople" |
 | Militia | ch07 | carried from Ep 2 ("the state's own part-time army") |
-| Redeemers, Redemption (the title) | ch07 | "To redeem means to save. In their story, they had saved the South." |
+| Redeemers | ch07 | "To redeem means to save. In their story, they had saved the South." |
 | Electoral votes, the commission | ch08 | "The winner needed 185. Tilden had 184." |
 | Poll tax, literacy test, grandfather clause, Jim Crow | ch09 | one line each |
 
 ## Production notes
 
-**Heavy chapters.** ch01 (Caldwell's death), ch04 (Colfax), ch07 (Clinton, Caldwell). **Your call: keep every detail of the death; it should be grim.** Nothing softened for age. Plain statements, numbers, the primary source,
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
+
+**Heavy chapters.** ch01 (Caldwell's death), ch04 (Colfax), ch07 (Clinton, Caldwell): plain statements, numbers, the primary source,
 space. No asides. Sparse music; a held beat after "Never say you killed a coward." (ch01), "Nobody was ever punished for Colfax." (ch04)
 and "From people like Charles Caldwell." (ch07). Voiced slower; A/B the pace.
 
-**The primary source carries ch01 and ch07.** Margaret Ann Caldwell's testimony, *Mississippi in 1875* (Senate report, 1876). Show the
+**The primary source carries ch01 and ch07 (testimony as a transcript).** Margaret Ann Caldwell's testimony, *Mississippi in 1875* (Senate report, 1876). Show the
 printed page and swipe the lines as they're quoted. No AI image of the killing: the cellar and the street are told, not shown. A drawn
 plan of the Clinton street (store, cellar window, the street) is an option if the scene needs a picture.
 
 **Motif card.** ch03 (PROTECTION ✔), ch09 (VOTELESS written back in, in coral handwriting over the strike), ch10 (the full answer:
 LAW ✔ · LAND ✘ · PROTECTION ✘, the LAW line stamped *on paper*).
+
+**Telegrams as texts (ch07).** Ames's telegrams and the reply as real telegram slips stacking like a message thread.
 
 **Diagrams.** ch08: the electoral count as a drawn tally, 184 vs 165 with the 20 disputed votes as a separate pile, then sliding to Hayes
 8–7. ch09: Louisiana's registered Black voters, 130,344 (1896) → 1,342 (1904), as two bars (StepBars with a scale shock).
@@ -306,7 +310,7 @@ line: "no Whiskey Ring involved."
 End: the last line of ch10, written as the end of the series.
 
 **Vocab cards.** Ku Klux Klan · Enforcement Acts · habeas corpus · Colfax Massacre · Panic of 1873 · Whiskey Ring · Civil Rights Act of
-1875 · Freedman's Savings Bank · Mississippi Plan · Redeemers · Redemption · Compromise of 1877 · poll tax · literacy test · grandfather clause ·
+1875 · Freedman's Savings Bank · Mississippi Plan · Redeemers · Compromise of 1877 · poll tax · literacy test · grandfather clause ·
 Jim Crow
 
 ## Pronunciation (for ElevenLabs)
@@ -341,7 +345,8 @@ Jim Crow
 | 14 | ch05: Civil Rights Act of 1875 banned discrimination in hotels, theaters and trains; struck down eight years later | *Civil Rights Cases*, 1883 | Safe. |
 | 15 | ch06: Freedman's Bank created 1865; Douglass president in 1874 with $10,000 of his own; more than 60,000 depositors owed almost $3 million; about half eventually repaid | Blackpast: $2,993,790 due to 61,144 depositors; closed June–July 1874 | Safe. |
 | 16 | ch07: Clinton rally, September 1875, about 2,000 people; at least 8 died, including three white men; 30–50 killed over the next days | Library of America headnote to the testimony | Safe. |
-| 17 | ch07: Grant's attorney general: the public was "tired out with these annual autumnal outbreaks in the South" | Attorney General Edwards Pierrepont to Gov. Ames, September 1875, relaying Grant | **Verify the wording against the letter** (it is widely quoted; the search did not reach the primary text). |
+| 17 | ch07: Ames telegraphed Grant; the attorney general's answer quoted the President: the public was "tired out with these annual autumnal outbreaks in the South" | Ames's telegrams, September 1875; Attorney General Edwards Pierrepont's letter to Ames, quoting Grant | **Verify both against the documents** (widely quoted; the search did not reach the primary text). |
+| 17a | ch01: "When did he die?" "Thursday night, in the Christmas." | Margaret Ann Caldwell's testimony, June 20, 1876 ("Q. When did he die? —A. Thursday night, in the Christmas.") | Safe; quoted exactly. |
 | 18 | ch07: Caldwell led militia to deliver guns; Ames's peace deal disbanded the militia; Democrats swept the November election | LOA headnote; peace conference Oct 13, 1875 | Safe. |
 | 19 | ch07: "for obeying Governor Ames; and that was all they had against him" | Margaret Ann Caldwell's testimony | Safe; quoted exactly. |
 | 20 | ch07: in some Black-majority counties the Republican vote fell to almost nothing | Five counties reported 12, 7, 4, 2 and 0 Republican votes (needs a citation) | Safe as worded; find the source before putting numbers on screen. |
