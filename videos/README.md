@@ -89,7 +89,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
-- **The chunk wall in every video** (from the Reconstruction series, Oct 2026): each chapter is a block that slides into a wall, the ending pulls back to the whole wall, and the end screen drops it into the channel wall. You chose the version where each chunk is a block *in* the wall, not a card on it. Spec: [`../techniques/chunk_wall.md`](../techniques/chunk_wall.md).
+- **The evidence board in every video** (from the Reconstruction series, Oct 2026): each chapter pins one piece to a board on the desk, teal yarn with *but* / *therefore* tags ties causes to effects, and the ending pulls back to the whole board. You chose the evidence board (with the tilted desk for moving to the maps) over the block-in-the-wall "chunk wall". Spec: [`../techniques/evidence_board.md`](../techniques/evidence_board.md).
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
 - Big titles stay on screen for at least 2 seconds.
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.

@@ -1,8 +1,8 @@
 # The wall: one evidence board for the whole series
 
-> **Look chosen:** the chunk wall, where every chunk is a block *in* the wall (mockups `review/wall_mockups/E*`).
-> It's now a channel-wide device: see [`../../techniques/chunk_wall.md`](../../techniques/chunk_wall.md). The card
-> descriptions below still hold; read "card" as "block".
+> **Look chosen:** the evidence board (mockup `review/wall_mockups/A_evidence_board.jpg`), with the tilted desk of
+> mockup D for moving to the maps. Channel-wide spec: [`../../techniques/evidence_board.md`](../../techniques/evidence_board.md).
+> Below, read "wall" as "board" and "card" as a pinned piece; the chunk-wall details (slab shapes, mortar) no longer apply.
 
 Every chapter adds one **chunk** to a single evidence wall. Each episode ends by pulling back to show its chunks in
 place, and the last minute of the series pulls all the way back to the whole wall. That's the *Chunk History* idea on
@@ -23,8 +23,8 @@ This page is the plan for building it. Chapter scripts point at it in their prod
   The column names are the series answer, so the viewer watches the answer get built instead of being told it.
 - **Top centre: the Edisto petition**, pinned first, in the first minute of the series. Its three words (*Landless.
   Homeless. Voteless.*) change over the series: VOTELESS is crossed out in Ep 2 and written back in in Ep 3.
-- **Cards are chunks.** Each card is a cream slab with the Chunk History brand's notched corners, holding one
-  archival image or document crop and a two-to-four-word label in Abril. The chunk for the chapter's subject gets the
+- **Cards are pinned pieces.** Each card is a cream photo card holding one archival image or document crop and a
+  two-to-five-word label in Abril. The chunk for the chapter's subject gets the
   coral tint; everything else stays black and white.
 - **Strings are causes.** A teal string with a small handwritten label ("therefore", "but") joins a cause to its effect,
   drawn on as the narration says the link. Dashed string = suspected, not proven (the 1877 deal).
@@ -118,5 +118,4 @@ Everything else is shown, not said: cards land on the lines in the tables above.
 The *Chunk History* assets live on the style repo's branch `ccr-7a3e82c2-jvydrp`, in `brand/chunk-history/`: the
 brand sheet, the "Quarter past" mark and "Two slabs" wordmark (SVG, teal / coral / ink / cream), an 8.7 s 3D intro set to
 the channel jingle (`final/chunk-intro.mp4`, source in `intro/`), and three patterns (`pattern-chunks.svg`,
-`pattern-cracks.svg`, `pattern-dials.svg`). The wall's cards take the slab shape and notched corners from that mark, so
-the wall and the logo read as one system. Not merged into this branch yet.
+`pattern-cracks.svg`, `pattern-dials.svg`). They're now on this branch.

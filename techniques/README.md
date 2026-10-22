@@ -174,6 +174,7 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 
 ## Things tried and set aside
 
+- **The chunk wall (Reconstruction mockups, Oct 2026).** Every chapter as a notched block set *into* a staggered wall of brand chunks, with links along the mortar; also a channel wall of videos. You preferred the evidence board. Mockups `projects/Reconstruction/review/wall_mockups/E*`, code `WallBricks.tsx`.
 - **Ford's Theatre as a 3D card model (Reconstruction tests).** An empty, measured architect's model of the box and the 12-foot drop, rendered in three.js. You didn't think it earned the time it took; told-not-shown with archival images is enough. Code kept in `projects/Reconstruction/tests/src/tests/FordsTest.tsx`.
 - **The stereo "flick" (Reconstruction tests).** Alternating the two photos of a stereograph to show real parallax read as blinking. Keep the camera move into the depth-layered photo instead (`StereoTest.tsx`, second half).
 - **Rejected looks (Fix Everything style test):** yellow highlighter outlines (`harris` palette), the Anton collage, the Fraunces cinematic look. The palette sheets are in `Reform-Era/review/palettes/`, and `TCO_*.jpg` panel A is the one you chose.
