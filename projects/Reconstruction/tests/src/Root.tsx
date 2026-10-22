@@ -13,6 +13,7 @@ import {FORDS_FRAMES, FordsTest} from './tests/FordsTest';
 import {WallA, WallB, WallC, WallD} from './tests/WallMocks';
 import {BrickChannel, BrickE1, BrickEnd, BrickLand} from './tests/WallBricks';
 import {BOARD_FRAMES, BoardAnim} from './tests/BoardAnim';
+import {Collage1, Collage2, Collage3, Collage4} from './tests/CollageMocks';
 
 export const Root: React.FC = () => (
   <>
@@ -24,7 +25,7 @@ export const Root: React.FC = () => (
     <Composition id="Test-Stereo" width={W} height={H} fps={FPS} durationInFrames={STEREO_FRAMES} component={StereoTest} />
     <Composition id="Test-Acres" width={W} height={H} fps={FPS} durationInFrames={ACRES_FRAMES} component={AcresTest} />
     <Composition id="Test-Fords" width={W} height={H} fps={FPS} durationInFrames={FORDS_FRAMES} component={FordsTest} />
-    {([['Wall-A', WallA], ['Wall-B', WallB], ['Wall-C', WallC], ['Wall-D', WallD], ['Brick-E1', BrickE1], ['Brick-Land', BrickLand], ['Brick-End', BrickEnd], ['Brick-Channel', BrickChannel]] as const).map(([id, C]) => <Composition key={id} id={id} width={W} height={H} fps={FPS} durationInFrames={1} component={C} />)}
+    {([['Wall-A', WallA], ['Wall-B', WallB], ['Wall-C', WallC], ['Wall-D', WallD], ['Brick-E1', BrickE1], ['Brick-Land', BrickLand], ['Brick-End', BrickEnd], ['Brick-Channel', BrickChannel], ['Collage-1', Collage1], ['Collage-2', Collage2], ['Collage-3', Collage3], ['Collage-4', Collage4]] as const).map(([id, C]) => <Composition key={id} id={id} width={W} height={H} fps={FPS} durationInFrames={1} component={C} />)}
     <Composition id="Board-Anim" width={W} height={H} fps={FPS} durationInFrames={BOARD_FRAMES} component={BoardAnim} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
