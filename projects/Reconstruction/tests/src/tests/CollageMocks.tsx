@@ -119,6 +119,19 @@ const Scrap: React.FC<{text: string; w: number; size?: number; seed?: string; ma
   );
 };
 
+/** The channel logo as a worn, faded sticker: the brand's horizontal lockup under a wear mask (tools/distress.py). */
+const WornLogo: React.FC<{w: number; mark?: boolean; fade?: number}> = ({w, mark, fade = 0.78}) => {
+  const src = mark ? 'img/brand/chunk-history-mark.svg' : 'img/brand/chunk-history-horizontal.svg';
+  const wear = mark ? 'img/brand/wear_square.png' : 'img/brand/wear_wide.png';
+  const h = mark ? w : (w * 210) / 1404;
+  return (
+    <div style={{width: w, height: h, opacity: fade, filter: 'saturate(0.75) brightness(0.92)',
+      WebkitMaskImage: `url(${staticFile(wear)})`, maskImage: `url(${staticFile(wear)})`, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}}>
+      <Img src={staticFile(src)} style={{width: w, height: h, display: 'block'}} />
+    </div>
+  );
+};
+
 const Defs: React.FC = () => (
   <svg width={0} height={0} style={{position: 'absolute'}}>
     <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" /><feDisplacementMap in="SourceGraphic" scale="3" />
@@ -183,6 +196,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       </Flat>
       <Flat x={600} y={700} r={-20} z={5}><TapeBit w={110} seed="h" /></Flat>
       <Flat x={1000} y={980} r={0}><Strip text="CASE: RECONSTRUCTION · PART 1" seed="cs" size={22} bg={p.paper} /></Flat>
+      {p === BRAND && <div style={{position: 'absolute', left: 1490, top: 940, transform: 'rotate(-3deg)'}}><WornLogo w={360} /></div>}
       <Threads lines={[T('who', 'lincoln'), T('who', 'johnson'), T('who', 'congress'), T('lincoln', 'forty'), T('johnson', 'except'), T('petition', 'who'), T('herald', 'who'), T('forty', 'petition')]} />
       {Object.values(pin).map(([x, y], i) => <Pin key={i} x={x} y={y} />)}
       <Tag text={caption} />
@@ -191,7 +205,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
 };
 
 export const Collage1: React.FC = () => (
-  <TestFrame vignette={0.35}><Ctx.Provider value={HOT}><Board1 caption="Mockup · collage board, one hot accent · end of Episode 1" /></Ctx.Provider></TestFrame>
+  <TestFrame vignette={0.35}><Ctx.Provider value={HOT}><Board1 caption="Mockup · collage board, one hot accent (set aside: you chose the channel colours)" /></Ctx.Provider></TestFrame>
 );
 export const Collage2: React.FC = () => (
   <TestFrame vignette={0.35}><Ctx.Provider value={BRAND}><Board1 caption="Mockup · collage board in the channel's colours (coral subject, teal thread) · end of Episode 1" /></Ctx.Provider></TestFrame>
@@ -226,6 +240,7 @@ export const Collage3: React.FC = () => {
           <Threads lines={[[960, 300, 420, 260], [960, 300, 1500, 260], [960, 300, 962, 690]]} />
           {Object.values(pin).map(([x, y], i) => <Pin key={i} x={x} y={y} />)}
           <div style={{position: 'absolute', left: 60, top: 40}}><Strip text="CASE FILE · APRIL 14, 1865" seed="cf" size={34} bg={p.paper} font={SANS} /></div>
+          <div style={{position: 'absolute', left: 1560, top: 40, transform: 'rotate(4deg)'}}><WornLogo w={300} /></div>
           <Tag text="Mockup · a close-up case (Episode 1, chapter 4)" />
         </AbsoluteFill>
       </Ctx.Provider>
@@ -252,6 +267,7 @@ export const Collage4: React.FC = () => {
           <Flat x={1380} y={180} r={-12} z={5}><TapeBit w={160} seed="k2" /></Flat>
           <Flat x={1290} y={690} r={-6} z={6}><Stamp text="1865 – 1866" size={48} /></Flat>
           <Flat x={1450} y={800} r={5}><Sticky text="who decides?" w={210} size={52} /></Flat>
+          <div style={{position: 'absolute', left: 260, top: 860, transform: 'rotate(-2deg)'}}><WornLogo w={420} /></div>
           <Tag text="Mockup · the title card in the collage language" />
         </AbsoluteFill>
       </Ctx.Provider>

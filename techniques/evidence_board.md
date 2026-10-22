@@ -16,6 +16,10 @@ approved). The block-in-the-wall "chunk wall" was tried and set aside.
 
 ## The look
 
+- **Colours: the channel's** (your pick over the reference's single hot orange): coral sticky notes, stamps and pins;
+  teal thread and handwriting; orange only for titles. The **Chunk History logo** sits on the board as a faded, worn sticker
+  (the horizontal lockup under a wear mask from `tools/distress.py`), small, in a corner.
+
 - **The board** is the channel's dark desk paper, with the brand's *cracks* pattern very faint. It lives on the desk,
   so the camera can tilt from the board down onto the desk and the 3D maps (mockup D).
 - **A piece** is a photo with **no frame**: cropped out of its mount and run through `tools/crease.py` so it looks like a
