@@ -26,6 +26,15 @@ JOBS = {
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
+    # Except (Civil War series, Video 3)
+    "lee": ("img/ch01/lee_portrait_vannerson_1864.jpg", None, "u2net_human_seg"),
+    "grant": ("img/ch02/grant_portrait_brady.jpg", None, "u2net_human_seg"),
+    "everett": ("img/ch03/edward_everett_sartain_1861.jpg", (560, 420, 2100, 2180), "u2net_human_seg"),
+    "sherman": ("img/ch05/sherman_portrait_brady_1865.jpg", None, "u2net_human_seg"),
+    "granger": ("img/ch06/gordon_granger_portrait_brady.jpg", None, "u2net_human_seg"),
+    "lee_1865": ("img/ch06/lee_after_surrender_brady_1865.jpg", None, "u2net_human_seg"),
+    "galveston_officer": ("img/gen/v3_ch06_galveston.jpg", (330, 10, 580, 330), "isnet-general-use", 4000),
+    "hired_man": ("img/gen/v3_ch07_hired_out.jpg", (570, 50, 760, 650), "isnet-general-use", 4000),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

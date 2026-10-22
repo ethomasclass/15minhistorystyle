@@ -4,7 +4,8 @@ import React from 'react';
 import {AbsoluteFill, Audio, getStaticFiles, Img, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {makeTimeline, type Narration} from '../lib/timing';
-import {Finish, INK, JF, PALETTES, PaletteCtx, Picture, Place, StepCtx, Tint, Traced, useGFrame, usePal} from './Kit';
+import {Finish, INK, JF, PALETTES, PaletteCtx, Picture, Place, StepCtx, Tag, Tint, Traced, useGFrame, usePal} from './Kit';
+import {DarkPaper} from './common';
 import type {MaskRef} from './maskref';
 import {LogoBreak} from './LogoBreak';
 
@@ -34,6 +35,30 @@ export const fill = (size: [number, number], fx: number, fy: number, z: number):
 export const useScene = (cuts: [number, React.ReactNode][]) => {
   const frame = useCurrentFrame();
   return cuts.reduce((acc, [f, node]) => (frame >= f ? node : acc), cuts[0][1]);
+};
+
+/**
+ * The desk with a relevant archival picture sunk into it: dark, soft and slowly pushing in between frames a and b.
+ * Use it in place of a bare DarkPaper behind text, charts and counters, so no beat is an empty dark page.
+ * `dim` is how much of the picture shows (0.3-0.5); `side` darkens one half further so text there stays crisp.
+ */
+export const Backdrop: React.FC<{src: string; size: [number, number]; fx?: number; fy?: number; a: number; b?: number; z0?: number; z1?: number;
+  dim?: number; side?: 'left' | 'right' | 'none'; tag?: string}> = ({src, size, fx = size[0] / 2, fy = size[1] / 2, a, b = a + 420, z0 = 1.04, z1 = 1.12, dim = 0.38, side = 'none', tag}) => {
+  const frame = useCurrentFrame();
+  const place = fill(size, fx, fy, interpolate(frame, [a, b], [z0, z1], clamp));
+  const k = interpolate(frame, [a, a + 10], [0, 1], clamp);
+  const shade = side === 'none' ? 'transparent' : `linear-gradient(to ${side === 'left' ? 'right' : 'left'}, rgba(13,12,9,0.85) 0%, rgba(13,12,9,0.35) 55%, rgba(13,12,9,0) 100%)`;
+  return (
+    <AbsoluteFill style={{overflow: 'hidden'}}>
+      <DarkPaper />
+      <AbsoluteFill style={{opacity: dim * k, mixBlendMode: 'screen'}}>
+        <Picture src={src} place={place} size={size} bw="grayscale(1) contrast(1.15) brightness(0.8) sepia(0.15) blur(1px)" />
+      </AbsoluteFill>
+      <AbsoluteFill style={{background: shade}} />
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.6) 100%)'}} />
+      {tag && <Tag text={tag} />}
+    </AbsoluteFill>
+  );
 };
 
 /** Full-bleed B&W archival picture with a slow push from z0 to z1 between frames a and b. */

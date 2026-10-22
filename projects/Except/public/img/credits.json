@@ -619,5 +619,22 @@
   "licence": "public domain by age (1906)",
   "page": "https://archive.org/details/documentaryhisto01inflem/page/n319",
   "source": "iabook:documentaryhisto01inflem:319"
+ },
+ "ch08/company_e_4th_usct_fort_lincoln_c1864.jpg": {
+  "title": "[District of Columbia. Company E, 4th U.S. Colored Infantry, at Fort Lincoln]",
+  "artist": "Smith, William Morris, photographer",
+  "date": "1863",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018667050/",
+  "source": "loc:2018667050"
+ },
+ "ch04/draft_office_burning_headley_1873_rot.jpg": {
+  "title": "The great riots of New York, 1712 to 1873. Including a full and complete account of the four days' draft riot of 1863 (page 7)",
+  "artist": "Headley, J. T., 1813-1897",
+  "date": "1873",
+  "licence": "public domain by age (1873)",
+  "page": "https://archive.org/details/greatriotsofnewy00head_1/page/n7",
+  "source": "iabook:greatriotsofnewy00head_1:7",
+  "note": "rotated 90 degrees clockwise to read upright"
  }
 }

@@ -25,6 +25,18 @@ JOBS = {
     # A figure fused to a prop (hands on a table, a tray in front): add cut rects, and if it still separates badly,
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
+    # Forever Free (Civil War series, Video 2)
+    "smalls": ("img/ch01/smalls_congressman_portrait_c1870s.jpg", None, "u2net_human_seg"),
+    "smalls_1862": ("img/ch01/smalls_harpers_planter_page_1862.jpg", (300, 720, 1240, 1900), "isnet-general-use"),
+    "butler": ("img/ch02/butler_portrait_later_c1870s.jpg", None, "u2net_human_seg", [(1300, 2050, 2219, 3000), (0, 2450, 420, 3000), (1550, 1700, 2219, 2100)]),
+    "mcclellan": ("img/ch03/mcclellan_portrait_gutekunst_c1863.jpg", None, "u2net_human_seg"),
+    "taney": ("img/ch03/taney_portrait_c1855.jpg", None, "u2net_human_seg"),
+    "lincoln_tent": ("img/ch03/lincoln_mcclellan_antietam_tent_1862.jpg", (1470, 1040, 1680, 1700), "u2net_human_seg"),
+    "greeley": ("img/ch04/greeley_portrait_hat_c1860s.jpg", None, "u2net_human_seg"),
+    "lincoln_reading": ("img/ch04/first_reading_emancipation_ritchie_1866.jpg", (860, 740, 1380, 1740), "u2net_human_seg"),
+    "barton": ("img/ch04/clara_barton_portrait_c1870.jpg", None, "u2net_human_seg"),
+    "dix": ("img/ch04/dorothea_dix_portrait_c1861.jpg", None, "u2net_human_seg"),
+    "douglass": ("img/ch07/douglass_portrait_seated_1864.jpg", None, "u2net_human_seg"),
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
