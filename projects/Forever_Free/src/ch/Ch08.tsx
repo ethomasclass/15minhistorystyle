@@ -98,10 +98,10 @@ const Argue: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={READING} size={sizeOf(READING)} a={a} dim={0.26} />
-      <Highlight text="HISTORIANS STILL ARGUE" x={110} y={100} size={80} at={t.at('Historians') + 2} seed={807} rot={-2} />
-      <Box x={130} y={390} w={460} h={200} at={t.at('Some say Lincoln') - 2} label="LINCOLN" size={60} seed={31} />
+      <Highlight text="HISTORIANS STILL ARGUE" x={130} y={100} size={80} at={t.at('Historians') + 2} seed={807} rot={-2} />
+      <Box x={150} y={390} w={440} h={200} at={t.at('Some say Lincoln') - 2} label="LINCOLN" size={60} seed={31} />
       <Box x={690} y={390} w={540} h={200} at={t.at('Some say the') - 2} label="THE PEOPLE WHO FREED THEMSELVES" size={40} seed={33} color={CORAL} />
-      <Box x={1330} y={390} w={460} h={200} at={t.at('Many say both') - 2} label="BOTH" size={72} seed={35} color="#f4efe6" />
+      <Box x={1320} y={390} w={440} h={200} at={t.at('Many say both') - 2} label="BOTH" size={72} seed={35} color="#f4efe6" />
       <Note text="the evidence gives each side something to hold onto" x={130} y={720} size={50} rot={-2} at={t.at('The evidence') - 3} color={WHITE} />
       <Tag text={READING_TAG} />
     </Desk>
@@ -146,7 +146,7 @@ const NotLaw: React.FC<{t: TL}> = ({t}) => {
       <Backdrop src={STORMING} size={sizeOf(STORMING)} a={a} dim={0.3} side="left" />
       <DropCard src={NARA(1)} x={1360} y={110} w={400} rot={3} at={a + 2} />
       <Note text="but a proclamation" x={130} y={180} size={60} rot={-3} at={t.at('But a proclamation') + 2} color={WHITE} />
-      <Highlight text="IS NOT A LAW" x={120} y={290} size={110} at={t.at('not a law')} seed={809} rot={-2} />
+      <Highlight text="IS NOT A LAW" x={130} y={290} size={110} at={t.at('not a law')} seed={809} rot={-2} />
       <Note text="and the war still had to be won" x={130} y={560} size={62} rot={-3} at={t.at('And the war') - 3} color={CORAL} />
       <Tag text={`${NARA_TAG} · Kurz & Allison, Storming Fort Wagner, 1890 · Library of Congress`} />
     </Desk>

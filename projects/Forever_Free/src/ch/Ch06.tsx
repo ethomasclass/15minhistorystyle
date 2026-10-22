@@ -27,8 +27,8 @@ const Bet: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.6) 40%, rgba(0,0,0,0) 56%)'}} />
-        <Note text="remember the South's bet?" x={120} y={80} size={54} rot={-3} at={t.at('Remember') - 2} color={WHITE} />
-        <Highlight text="KING COTTON" x={110} y={180} size={110} at={t.at('King Cotton')} seed={601} rot={-2} />
+        <Note text="remember the South's bet?" x={130} y={80} size={54} rot={-3} at={t.at('Remember') - 2} color={WHITE} />
+        <Highlight text="KING COTTON" x={130} y={180} size={110} at={t.at('King Cotton')} seed={601} rot={-2} />
         <Definition term="King Cot·ton" def="the bet that Britain needed Southern cotton so badly it would have to step in" at={t.at('Britain needed') - 2} x={130} y={380} w={1300} />
       </>
     )}
@@ -42,8 +42,8 @@ const Didnt: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={COTTON} size={sizeOf(COTTON)} a={a} dim={0.24} side="left" />
       <DropCard src={MILL} x={1330} y={70} w={450} rot={3} at={a + 2} />
-      <Stamp text="IT DIDN'T." x={120} y={100} at={t.at("It didn't")} size={140} color={CORAL} rot={-2} />
-      <Checklist x={120} y={340} gap={130} size={50} items={[
+      <Stamp text="IT DIDN'T." x={130} y={100} at={t.at("It didn't")} size={140} color={CORAL} rot={-2} />
+      <Checklist x={130} y={340} gap={130} size={50} items={[
         {text: 'stored up extra cotton before the war', at: t.at('stored up') - 3},
         {text: 'bought more from Egypt and India', at: t.at('Egypt') - 6},
       ]} />
@@ -76,10 +76,10 @@ const Empire: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={MILL} size={sizeOf(MILL)} a={a} dim={0.22} side="left" />
       <DropCard src={COVER} x={1440} y={80} w={390} rot={3} at={a + 2} />
-      <Stamp text="1833" x={120} y={110} at={t.at('1833') - 2} size={220} color="#f4efe6" rot={-2} />
-      <Note text="Britain ends slavery in most of its empire" x={120} y={400} size={52} rot={-2} at={t.at('Britain had ended') + 2} color={WHITE} />
-      <Note text="over time, the Proclamation:" x={120} y={580} size={50} rot={-2} at={t.at('Over time') - 3} />
-      <Note text="harder to side with a nation fighting for slavery" x={120} y={700} size={50} rot={-2} at={t.at('harder') - 3} color={CORAL} />
+      <Stamp text="1833" x={130} y={110} at={t.at('1833') - 2} size={220} color="#f4efe6" rot={-2} />
+      <Note text="Britain ends slavery in most of its empire" x={130} y={400} size={52} rot={-2} at={t.at('Britain had ended') + 2} color={WHITE} />
+      <Note text="over time, the Proclamation:" x={130} y={580} size={50} rot={-2} at={t.at('Over time') - 3} />
+      <Note text="harder to side with a nation fighting for slavery" x={130} y={700} size={50} rot={-2} at={t.at('harder') - 3} color={CORAL} />
       <Tag text="Illustrated London News, Nov. 22, 1862 · Internet Archive" />
     </Desk>
   );
@@ -92,7 +92,7 @@ const Never: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={COTTON} size={sizeOf(COTTON)} a={a} dim={0.22} side="left" />
       <DropCard src={RELIEF} x={1340} y={90} w={440} rot={3} at={a + 2} />
-      <Highlight text="NEVER RECOGNIZED" x={110} y={110} size={96} at={t.at('recognized')} seed={605} rot={-2} />
+      <Highlight text="NEVER RECOGNIZED" x={130} y={110} size={96} at={t.at('recognized')} seed={605} rot={-2} />
       <Definition term="rec·og·nize" def="to treat a country as a real country" at={t.at('meaning') - 2} x={130} y={290} w={1000} />
       <Box x={200} y={470} w={760} h={220} at={t.at('the Confederacy') - 2} label="THE CONFEDERACY" size={64} seed={27} color="#f4efe6" />
       <Cross x={430} y={450} at={t.at('never treated') - 2} s={3.6} />
@@ -127,7 +127,7 @@ const Subscribe: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={COVER} size={sizeOf(COVER)} a={a} dim={0.22} side="left" />
-      <Note text="quick thing, before the soldiers:" x={120} y={90} size={54} rot={-3} at={t.at('Quick thing') + 2} color={WHITE} />
+      <Note text="quick thing, before the soldiers:" x={130} y={90} size={54} rot={-3} at={t.at('Quick thing') + 2} color={WHITE} />
       <Box x={140} y={270} w={560} h={170} at={t.at('subscribe') - 2} label="SUBSCRIBE" size={84} seed={29} color={CORAL} fill="rgba(255,111,97,0.18)" />
       <Note text="it's free, and it really helps" x={140} y={500} size={54} rot={-3} at={t.at("It's free") - 3} />
       <Note text="unlike the British cabinet," x={140} y={660} size={54} rot={-3} at={u} color={WHITE} />

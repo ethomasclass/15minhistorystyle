@@ -19,7 +19,7 @@ export const LOOK = {
 export type Look = keyof typeof LOOK;
 
 /** The dark desk with a slow handheld drift and push; children ride on it. */
-export const Desk: React.FC<{a?: number; push?: number; children?: React.ReactNode}> = ({a = 0, push = 0.04, children}) => {
+export const Desk: React.FC<{a?: number; push?: number; children?: React.ReactNode}> = ({a = 0, push = 0.015, children}) => {
   const f = useCurrentFrame();
   const z = 1 + Math.max(0, f - a) * (push / 240);
   const d = {x: noise2D('dkx', f * 0.018, 0) * 3, y: noise2D('dky', 0, f * 0.018) * 3, r: noise2D('dkr', f * 0.012, 3) * 0.18};

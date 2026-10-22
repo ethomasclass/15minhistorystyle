@@ -37,10 +37,10 @@ const Problems: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={IN_TENT} size={sizeOf(IN_TENT)} a={a} dim={0.24} side="left" />
       <DropCard src={ON_HORSE} x={1200} y={70} w={560} rot={3} at={t.at('Starting') - 2} />
-      <Note text="meanwhile:" x={120} y={150} size={56} rot={-3} at={t.at('Meanwhile') - 2} color={WHITE} />
-      <Note text="Lincoln had other problems" x={120} y={260} size={58} rot={-3} at={t.at('other problems') - 3} />
+      <Note text="meanwhile:" x={130} y={150} size={56} rot={-3} at={t.at('Meanwhile') - 2} color={WHITE} />
+      <Note text="Lincoln had other problems" x={130} y={260} size={58} rot={-3} at={t.at('other problems') - 3} />
       <Note text="starting with..." x={130} y={480} size={54} rot={-3} at={t.at('Starting') - 2} color={WHITE} />
-      <Highlight text="HIS GENERALS" x={120} y={580} size={110} at={t.at('his generals')} seed={301} rot={-2} />
+      <Highlight text="HIS GENERALS" x={130} y={580} size={110} at={t.at('his generals')} seed={301} rot={-2} />
       <Tag text="General McClellan and staff before Yorktown, Currier & Ives, 1862 · Gardner, Lincoln and McClellan, Antietam, 1862 · Library of Congress" />
     </Desk>
   );
@@ -70,7 +70,7 @@ const Twice: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={ON_HORSE} size={sizeOf(ON_HORSE)} a={a} dim={0.22} side="left" />
       <DropCard src={BATTERY} x={1220} y={130} w={580} rot={2} at={a + 2} />
-      <Note text="he always saw a bigger enemy" x={120} y={100} size={56} rot={-3} at={t.at('He always') + 2} color={WHITE} />
+      <Note text="he always saw a bigger enemy" x={130} y={100} size={56} rot={-3} at={t.at('He always') + 2} color={WHITE} />
       <Box x={170} y={470} w={260} h={190} at={t.at('than it was') - 4} label="real" size={50} seed={3} color="#f4efe6" />
       <Box x={540} y={330} w={520} h={380} at={t.at('sometimes twice') - 2} label="what he saw" size={56} seed={5} color={CORAL} />
       <Note text="the enemy" x={180} y={690} size={46} rot={-3} at={t.at('than it was') - 2} color={WHITE} />
@@ -86,7 +86,7 @@ const Borrow: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.6) 30%, rgba(0,0,0,0) 46%)'}} />
-        <Note text="Lincoln, reportedly:" x={120} y={80} size={52} rot={-3} at={t.at('Lincoln reportedly') + 2} color="#FF9F1C" />
+        <Note text="Lincoln, reportedly:" x={130} y={80} size={52} rot={-3} at={t.at('Lincoln reportedly') + 2} color="#FF9F1C" />
         <Note text="if McClellan isn't using the army..." x={140} y={180} size={52} rot={-3} at={t.at("wasn't using") - 3} color={WHITE} />
         <Note text="he'd like to borrow it" x={160} y={280} size={60} rot={-3} at={t.at('borrow it') - 3} />
         <Tag text="Alexander Gardner, The President and General McClellan on the battlefield of Antietam, Oct. 1862 · Library of Congress" />
@@ -102,7 +102,7 @@ const Demoted: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={TENT} size={sizeOf(TENT)} a={a} dim={0.26} side="left" />
       <DropCard src={BUTTRE} x={1300} y={110} w={460} rot={3} at={a + 2} />
-      <Highlight text="MARCH 1862" x={110} y={100} size={100} at={t.at('March 1862')} seed={305} rot={-2} />
+      <Highlight text="MARCH 1862" x={130} y={100} size={100} at={t.at('March 1862')} seed={305} rot={-2} />
       <Box x={110} y={300} w={1060} h={150} at={t.at('commander of all') - 2} label="COMMANDER OF ALL UNION ARMIES" size={46} seed={7} />
       <Note text="McClellan" x={190} y={500} size={66} rot={-3} at={t.at('took away') - 3} color={WHITE} />
       <Strike x1={180} x2={500} y={545} at={t.at('commander of all') + 6} />
@@ -134,9 +134,9 @@ const Peninsula: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="spring 1862: McClellan moves on Richmond" x={110} y={90} size={52} rot={-2} at={t.at('That spring') + 2} color={WHITE} />
-        <Note text="by early summer:" x={110} y={760} size={50} rot={-2} at={t.at('By early') - 2} color={WHITE} />
-        <Highlight text="ROBERT E. LEE" x={110} y={840} size={84} at={lee} seed={307} rot={-2} />
+        <Note text="spring 1862: McClellan moves on Richmond" x={130} y={90} size={52} rot={-2} at={t.at('That spring') + 2} color={WHITE} />
+        <Note text="by early summer:" x={130} y={760} size={50} rot={-2} at={t.at('By early') - 2} color={WHITE} />
+        <Highlight text="ROBERT E. LEE" x={130} y={840} size={84} at={lee} seed={307} rot={-2} />
         <Note text="drives him back" x={760} y={860} size={60} rot={-3} at={t.at('driven him') - 3} color={CORAL} />
         <Tag text="Map · Virginia, 1862" />
       </AbsoluteFill>
@@ -151,7 +151,7 @@ const Wartime: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.55) 28%, rgba(0,0,0,0) 42%)'}} />
-        <Note text="how far does a president's power go" x={120} y={90} size={58} rot={-2} at={t.at('how far') - 3} color={WHITE} />
+        <Note text="how far does a president's power go" x={130} y={90} size={58} rot={-2} at={t.at('how far') - 3} color={WHITE} />
         <Note text="in wartime?" x={140} y={200} size={64} rot={-2} at={t.at('in wartime') - 3} />
       </>
     )}
@@ -165,8 +165,8 @@ const Riot: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.5) 26%, rgba(0,0,0,0) 40%)'}} />
-        <Highlight text="BALTIMORE, 1861" x={110} y={90} size={90} at={t.at('Baltimore')} seed={309} rot={-2} />
-        <Note text="a mob attacks Union troops" x={1000} y={110} size={56} rot={-3} at={t.at('a mob') - 3} color={WHITE} />
+        <Highlight text="BALTIMORE, 1861" x={130} y={90} size={90} at={t.at('Baltimore')} seed={309} rot={-2} />
+        <Note text="a mob attacks Union troops" x={940} y={120} size={52} rot={-3} at={t.at('a mob') - 3} color={WHITE} />
       </>
     )}
   </Engraving>
@@ -194,9 +194,9 @@ const Habeas: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={MCHENRY} size={sizeOf(MCHENRY)} a={a} dim={0.26} tag="E. Sachse, Fort McHenry, Baltimore, 1861 · Library of Congress" />
-      <Note text="so Lincoln suspends" x={120} y={90} size={54} rot={-3} at={t.at('So Lincoln') + 2} color={WHITE} />
-      <Highlight text="HABEAS CORPUS" x={780} y={70} size={96} at={t.at('habeas corpus')} seed={311} rot={-2} />
-      <Definition term="ha·be·as cor·pus" def="the right to go before a judge, who decides whether you're being held legally" at={t.at("That's the right") - 2} x={120} y={250} w={1500} />
+      <Note text="so Lincoln suspends" x={130} y={100} size={54} rot={-3} at={t.at('So Lincoln') + 2} color={WHITE} />
+      <Highlight text="HABEAS CORPUS" x={780} y={90} size={96} at={t.at('habeas corpus')} seed={311} rot={-2} />
+      <Definition term="ha·be·as cor·pus" def="the right to go before a judge, who decides whether you're being held legally" at={t.at("That's the right") - 2} x={130} y={250} w={1500} />
       <Note text="a show-your-work rule for jailers:" x={130} y={430} size={54} rot={-2} at={t.at('show-your-work') - 3} />
       <Box x={200} y={580} w={420} h={170} at={t.at('lock someone') - 2} label="JAILER" size={60} seed={9} color="#f4efe6" />
       <Arrow x1={660} y1={665} x2={1080} y2={665} bow={-30} at={t.at('explain why') - 2} />

@@ -151,9 +151,10 @@ const SmallsAfter: React.FC<{t: TL}> = ({t}) => {
         traceAt={a + 6} />
       <Note text="and Robert Smalls?" x={880} y={120} size={60} rot={-3} at={t.at('And Robert Smalls') + 2} color={WHITE} />
       <Note text="piloted ships for the Union navy" x={880} y={260} size={50} rot={-3} at={t.at('pilot ships') - 3} />
-      <Note text="after the war, South Carolina's voters" x={880} y={430} size={46} rot={-3} at={t.at('After the war') - 3} color={WHITE} />
-      <Note text="sent him to" x={900} y={520} size={52} rot={-3} at={t.at('sent him') - 3} color={WHITE} />
-      <Highlight text="CONGRESS" x={880} y={610} size={120} at={t.at('to Congress') + 4} seed={705} rot={-2} />
+      <Note text="after the war," x={880} y={400} size={50} rot={-3} at={t.at('After the war') - 3} color={WHITE} />
+      <Note text="South Carolina's voters" x={900} y={480} size={50} rot={-3} at={t.at('the voters') - 3} color={WHITE} />
+      <Note text="sent him to" x={900} y={570} size={52} rot={-3} at={t.at('sent him') - 3} color={WHITE} />
+      <Highlight text="CONGRESS" x={880} y={660} size={120} at={t.at('to Congress') + 4} seed={705} rot={-2} />
       <Tag text={SMALLS_TAG} />
     </Desk>
   );

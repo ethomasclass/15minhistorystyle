@@ -45,7 +45,7 @@ const Stole: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.8) 0%, rgba(10,9,7,0.45) 30%, rgba(0,0,0,0) 46%)'}} />
-        <Note text="an enslaved man" x={120} y={80} size={56} rot={-3} at={t.at('An enslaved') - 2} color={WHITE} />
+        <Note text="an enslaved man" x={130} y={80} size={56} rot={-3} at={t.at('An enslaved') - 2} color={WHITE} />
         <Note text="stole a Confederate ship" x={140} y={180} size={56} rot={-3} at={t.at('stole') - 2} />
         <Highlight text="PAST FORT SUMTER" x={1000} y={110} size={78} at={t.at('Fort Sumter')} seed={101} rot={-2} />
       </>
@@ -77,11 +77,11 @@ const Planter: React.FC<{t: TL}> = ({t}) => {
       {() => (
         <>
           <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.82) 0%, rgba(10,9,7,0.5) 32%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 62%, rgba(10,9,7,0.85) 100%)'}} />
-          <Highlight text="THE PLANTER" x={110} y={90} size={96} at={t.at('the Planter')} seed={105} rot={-2} />
-          <Note text="carried guns + supplies for the Confederate army" x={120} y={250} size={50} rot={-2} at={t.at('which carried') - 3} color={WHITE} />
+          <Highlight text="THE PLANTER" x={130} y={90} size={96} at={t.at('the Planter')} seed={105} rot={-2} />
+          <Note text="carried guns + supplies for the Confederate army" x={130} y={250} size={50} rot={-2} at={t.at('which carried') - 3} color={WHITE} />
           <Note text="in Charleston Harbor" x={130} y={360} size={50} rot={-2} at={t.at('Charleston Harbor') - 3} />
-          <Note text="Smalls did a pilot's job" x={120} y={780} size={54} rot={-2} at={t.at("He did") - 3} color={WHITE} />
-          <Note text="but the law gave a Black man no title" x={120} y={880} size={54} rot={-2} at={t.at('though the law') - 3} color={CORAL} />
+          <Note text="Smalls did a pilot's job" x={130} y={780} size={54} rot={-2} at={t.at("He did") - 3} color={WHITE} />
+          <Note text="but the law gave a Black man no title" x={130} y={880} size={54} rot={-2} at={t.at('though the law') - 3} color={CORAL} />
           <Tag text="Steamer Planter at a Charleston wharf, stereograph, 1860s · Library of Congress" />
         </>
       )}
@@ -96,11 +96,11 @@ const Night: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Backdrop src={NIGHT} size={sizeOf(NIGHT)} a={a} dim={0.26} side="left" />
       <DropCard src={CREW} x={1230} y={80} w={560} rot={2} at={a + 2} />
-      <Note text="one night in" x={120} y={100} size={54} rot={-3} at={t.at('One night') - 2} color={WHITE} />
-      <Highlight text="MAY 1862" x={110} y={190} size={110} at={t.at('May 1862')} seed={107} rot={-2} />
-      <Note text="the white officers go ashore" x={120} y={420} size={56} rot={-3} at={t.at('white officers') - 3} color={WHITE} />
-      <Note text="Smalls and the crew stay aboard" x={120} y={540} size={56} rot={-3} at={t.at('Smalls and the crew') - 3} />
-      <Note text="they pick up their families" x={120} y={660} size={56} rot={-3} at={t.at('picked up') - 3} color={CORAL} />
+      <Note text="one night in" x={130} y={100} size={54} rot={-3} at={t.at('One night') - 2} color={WHITE} />
+      <Highlight text="MAY 1862" x={130} y={190} size={110} at={t.at('May 1862')} seed={107} rot={-2} />
+      <Note text="the white officers go ashore" x={130} y={420} size={56} rot={-3} at={t.at('white officers') - 3} color={WHITE} />
+      <Note text="Smalls and the crew stay aboard" x={130} y={540} size={56} rot={-3} at={t.at('Smalls and the crew') - 3} />
+      <Note text="they pick up their families" x={130} y={660} size={56} rot={-3} at={t.at('picked up') - 3} color={CORAL} />
       <Tag text="Heroes in Ebony: the captors of the rebel steamer Planter (Robert Smalls top centre), 1862 · Library of Congress" />
     </Desk>
   );
@@ -133,9 +133,9 @@ const Escape: React.FC<{t: TL}> = ({t}) => {
       </Doc>
       <Note text="just before dawn" x={1150} y={120} size={50} rot={-3} at={t.at('just before dawn') - 3} color={WHITE} />
       <Note text="so the story goes:" x={1150} y={240} size={46} rot={-3} at={t.at('The story goes') - 3} color="#FF9F1C" />
-      <Note text="the captain's straw hat" x={1150} y={330} size={50} rot={-3} at={t.at("captain's straw") - 3} />
-      <Note text="+ the captain's stance" x={1150} y={420} size={50} rot={-3} at={t.at('stood the way') - 3} />
-      <Note text="the right whistle signals" x={1150} y={560} size={50} rot={-3} at={t.at('whistle') - 3} color={WHITE} />
+      <Note text="the captain's straw hat" x={1150} y={330} size={46} rot={-3} at={t.at("captain's straw") - 3} />
+      <Note text="+ the captain's stance" x={1150} y={420} size={46} rot={-3} at={t.at('stood the way') - 3} />
+      <Note text="the right whistle signals" x={1150} y={560} size={44} rot={-3} at={t.at('whistle') - 3} color={WHITE} />
       <Note text="past Fort Sumter" x={1150} y={700} size={58} rot={-3} at={t.at('He passed') - 2} color={CORAL} />
       <Tag text="Plan of operations in Charleston Harbour, Frank Leslie's Illustrated Newspaper, April 27, 1861 · Library of Congress · route drawn" />
     </Desk>
@@ -149,7 +149,7 @@ const Sheet: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.75) 0%, rgba(10,9,7,0.35) 26%, rgba(0,0,0,0) 40%)'}} />
-        <Note text="then: a white sheet" x={120} y={80} size={58} rot={-3} at={t.at('white sheet') - 3} color={WHITE} />
+        <Note text="then: a white sheet" x={130} y={80} size={58} rot={-3} at={t.at('white sheet') - 3} color={WHITE} />
         <Note text="straight for the Union ships" x={140} y={180} size={58} rot={-3} at={t.at('Union ships') - 3} />
       </>
     )}
@@ -162,7 +162,7 @@ const Question: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={'img/ch02/stampede_slaves_hampton_fortress_monroe_1861.jpg'} size={sizeOf('img/ch02/stampede_slaves_hampton_fortress_monroe_1861.jpg')} a={a} dim={0.2} side="none" />
-      <Note text="today's question:" x={120} y={100} size={54} rot={-3} at={t.at("So here's") + 2} color={WHITE} />
+      <Note text="today's question:" x={130} y={100} size={54} rot={-3} at={t.at("So here's") + 2} color={WHITE} />
       <Highlight text="WHO FREED THEM?" x={720} y={90} size={100} at={t.at('Who freed')} seed={109} rot={-2} />
       <TwoSides at={a} lincolnAt={t.at('President Lincoln')} smallsAt={t.at('Or people')} rightNote="who didn't wait to be freed" />
       <Tag text="Ritchie after Carpenter, The First Reading of the Emancipation Proclamation, 1866 · Harper's Weekly, June 14, 1862 · Library of Congress" />
@@ -177,10 +177,10 @@ const Letter: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <DropCard src={SMALLS} x={120} y={110} w={360} rot={-3} at={a + 2} />
-      <Note text="we'll come back" x={110} y={660} size={52} rot={-3} at={t.at("We'll come") + 2} color={WHITE} />
+      <Note text="we'll come back" x={130} y={660} size={52} rot={-3} at={t.at("We'll come") + 2} color={WHITE} />
       <Note text="to Smalls" x={130} y={750} size={52} rot={-3} at={t.at('back to Smalls') - 2} color={WHITE} />
       <Doc src={LETTER} x={620} y={70} w={520} rot={2} at={l} marks={[{at: t.at('seems to say'), to: END - 30, swipe: LETTER_QUOTE}]} />
-      <Note text="a letter Lincoln wrote" x={1240} y={300} size={48} rot={-3} at={t.at('a letter Lincoln') - 2} color={WHITE} />
+      <Note text="a letter Lincoln wrote" x={1240} y={300} size={44} rot={-3} at={t.at('a letter Lincoln') - 2} color={WHITE} />
       <Note text="he didn't care" x={1240} y={430} size={56} rot={-3} at={t.at('seems to say') - 2} color="#FF9F1C" />
       <Note text="either way?" x={1260} y={520} size={56} rot={-3} at={t.at('either way') - 3} color="#FF9F1C" />
       <Tag text={`${LETTER_TAG} · Robert Smalls, c. 1870s · Library of Congress`} />

@@ -51,9 +51,9 @@ const Reply: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a}>
       <Doc src={LETTER} x={110} y={70} w={590} rot={-1.5} at={a + 1}
         marks={[{at: t.at('If I could') - 2, to: t.at('the slaves I would') + 30, swipe: LETTER_QUOTE}]} />
-      <Note text="Lincoln answers, in public:" x={820} y={80} size={48} rot={-3} at={t.at('Lincoln answers') + 2} color={WHITE} />
-      <SyncQuote t={t} phrase="If I could save the Union without freeing any slave I would do it" x={820} y={180} w={1000} size={46} />
-      <SyncQuote t={t} phrase="and if I could save it by freeing all the slaves I would do it" x={820} y={430} w={1000} size={46} />
+      <Note text="Lincoln answers, in public:" x={820} y={100} size={48} rot={-3} at={t.at('Lincoln answers') + 2} color={WHITE} />
+      <SyncQuote t={t} phrase="If I could save the Union without freeing any slave I would do it" x={820} y={190} w={930} size={46} />
+      <SyncQuote t={t} phrase="and if I could save it by freeing all the slaves I would do it" x={820} y={440} w={930} size={46} />
       <Note text="translation:" x={830} y={700} size={48} rot={-3} at={t.at('Translation') - 2} color={WHITE} />
       <Highlight text="THE UNION COMES FIRST" x={820} y={790} size={66} at={t.at('the Union comes')} seed={403} rot={-2} />
       <Tag text={LETTER_TAG} />
@@ -68,9 +68,9 @@ const Drawer: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.55) 30%, rgba(0,0,0,0) 44%)'}} />
-        <Note text="what readers didn't know:" x={120} y={80} size={54} rot={-3} at={t.at("But here's") + 2} color={WHITE} />
+        <Note text="what readers didn't know:" x={130} y={80} size={54} rot={-3} at={t.at("But here's") + 2} color={WHITE} />
         <Note text="a month earlier" x={1000} y={80} size={54} rot={-3} at={t.at('A month earlier') - 3} color={WHITE} />
-        <Note text="a draft order freeing enslaved people" x={120} y={190} size={54} rot={-3} at={t.at('a draft') - 3} />
+        <Note text="a draft order freeing enslaved people" x={130} y={190} size={54} rot={-3} at={t.at('a draft') - 3} />
         <Note text="in the rebel states" x={1180} y={190} size={54} rot={-3} at={t.at('rebel states') - 3} />
       </>
     )}
@@ -84,9 +84,9 @@ const Wait: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.4) 20%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 62%, rgba(10,9,7,0.88) 82%)'}} />
-        <Note text="his secretary of state:" x={120} y={80} size={54} rot={-3} at={t.at('His secretary') + 2} color={WHITE} />
+        <Note text="his secretary of state:" x={130} y={80} size={54} rot={-3} at={t.at('His secretary') + 2} color={WHITE} />
         <Highlight text="WAIT." x={920} y={60} size={100} at={t.at('wait')} seed={405} rot={-2} />
-        <Note text="announce it after all these defeats? desperate" x={120} y={760} size={50} rot={-2} at={t.at('Announce') - 2} color={WHITE} />
+        <Note text="announce it after all these defeats? desperate" x={130} y={760} size={50} rot={-2} at={t.at('Announce') - 2} color={WHITE} />
         <Note text="a last-second shot from half court" x={140} y={860} size={50} rot={-2} at={t.at('last-second') - 3} />
         <Note text="he needed a victory" x={1150} y={880} size={58} rot={-3} at={t.at('He needed') - 3} color={CORAL} />
       </>
@@ -113,9 +113,9 @@ const Antietam: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="he got one... sort of" x={110} y={90} size={54} rot={-2} at={t.at('He got one') + 2} color={WHITE} />
-        <Highlight text="SEPT. 17, 1862" x={110} y={190} size={90} at={t.at('September 17th')} seed={407} rot={-2} />
-        <Note text="Lee has invaded the North" x={120} y={850} size={58} rot={-2} at={t.at('Lee has') - 3} color={CORAL} />
+        <Note text="he got one... sort of" x={130} y={90} size={54} rot={-2} at={t.at('He got one') + 2} color={WHITE} />
+        <Highlight text="SEPT. 17, 1862" x={130} y={190} size={90} at={t.at('September 17th')} seed={407} rot={-2} />
+        <Note text="Lee has invaded the North" x={130} y={850} size={58} rot={-2} at={t.at('Lee has') - 3} color={CORAL} />
         <Tag text="Map · Maryland and Virginia, September 1862" />
       </AbsoluteFill>
     </>
@@ -129,7 +129,7 @@ const Toll: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.55) 34%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 70%, rgba(10,9,7,0.85) 90%)'}} />
-        <Note text="in one day:" x={120} y={80} size={54} rot={-3} at={t.at('In one day') + 2} color={WHITE} />
+        <Note text="in one day:" x={130} y={80} size={54} rot={-3} at={t.at('In one day') + 2} color={WHITE} />
         <div style={{position: 'absolute', left: 130, top: 170}}><Count to={22700} at={t.at('22,700') - 2} dur={30} prefix="about " size={110} color={CORAL} /></div>
         <Note text="killed, wounded, captured or missing" x={130} y={330} size={52} rot={-2} at={t.at('killed') - 3} color={WHITE} />
         <Note text="still the bloodiest single day in American history" x={130} y={880} size={54} rot={-2} at={t.at('bloodiest') - 3} />
@@ -145,9 +145,9 @@ const Barton: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.5) 26%, rgba(0,0,0,0) 40%)'}} />
-        <Note text="a former government clerk" x={120} y={80} size={52} rot={-3} at={t.at('former government') - 3} color={WHITE} />
+        <Note text="a former government clerk" x={130} y={80} size={52} rot={-3} at={t.at('former government') - 3} color={WHITE} />
         <Highlight text="CLARA BARTON" x={900} y={70} size={96} at={t.at('Clara Barton')} seed={409} rot={-2} />
-        <Note text="hauled in supplies, nursed the wounded under fire" x={120} y={190} size={52} rot={-2} at={t.at('hauled in') - 3} />
+        <Note text="hauled in supplies, nursed the wounded under fire" x={130} y={190} size={52} rot={-2} at={t.at('hauled in') - 3} />
       </>
     )}
   </Engraving>
@@ -165,7 +165,7 @@ const Women: React.FC<{t: TL}> = ({t}) => {
       <CropCard src={DIX} size={sizeOf(DIX)} x={560} y={130} w={360} h={470} fx={1050} fy={1500} scale={0.22} rot={2} at={d} mask={MASKS.dix} traceAt={d + 5} />
       <CropCard src={SISTER} size={sizeOf(SISTER)} x={1010} y={110} w={360} h={470} fx={940} fy={1550} scale={0.17} rot={-1.5} at={s} />
       <CropCard src={HOMER} size={sizeOf(HOMER)} x={1450} y={130} w={360} h={470} fx={1300} fy={4000} scale={0.2} rot={2} at={o} />
-      <Note text="thousands of" x={120} y={660} size={44} rot={-3} at={t.at('thousands of women') - 3} color={WHITE} />
+      <Note text="thousands of" x={130} y={660} size={44} rot={-3} at={t.at('thousands of women') - 3} color={WHITE} />
       <Note text="women nurses" x={130} y={740} size={44} rot={-3} at={t.at('as nurses') - 3} color={WHITE} />
       <Note text="Dorothea Dix ran" x={560} y={660} size={44} rot={-3} at={d + 2} />
       <Note text="the army nurses" x={570} y={740} size={44} rot={-3} at={d + 8} />
@@ -199,11 +199,11 @@ const Preliminary: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={FORBES} size={sizeOf(FORBES)} a={a} dim={0.24} side="left" />
-      <Note text="but it's enough" x={120} y={80} size={54} rot={-3} at={t.at("But it's enough") + 2} color={WHITE} />
-      <Note text="Lincoln announces a preliminary" x={120} y={180} size={52} rot={-3} at={t.at('Lincoln announces') - 3} />
-      <Highlight text="EMANCIPATION PROCLAMATION" x={110} y={280} size={70} at={t.at('Emancipation Proclamation')} seed={413} rot={-2} />
+      <Note text="but it's enough" x={130} y={80} size={54} rot={-3} at={t.at("But it's enough") + 2} color={WHITE} />
+      <Note text="Lincoln announces a preliminary" x={130} y={180} size={52} rot={-3} at={t.at('Lincoln announces') - 3} />
+      <Highlight text="EMANCIPATION PROCLAMATION" x={130} y={280} size={70} at={t.at('Emancipation Proclamation')} seed={413} rot={-2} />
       <Definition term="pre·lim·i·nar·y" def="an advance warning" at={t.at('an advance') - 2} x={130} y={430} w={900} />
-      <Note text="rejoin the Union by January 1st..." x={120} y={600} size={54} rot={-3} at={t.at('rejoin') - 3} color={WHITE} />
+      <Note text="rejoin the Union by January 1st..." x={130} y={600} size={54} rot={-3} at={t.at('rejoin') - 3} color={WHITE} />
       <Note text="or the enslaved people in your state" x={130} y={710} size={52} rot={-3} at={t.at('or the enslaved') - 3} color={CORAL} />
       <Note text="will be declared free" x={150} y={810} size={62} rot={-3} at={t.at('declared free') - 3} color={CORAL} />
       <Box x={1360} y={130} w={360} h={200} at={t.at('Five days') - 2} label="+5 DAYS" size={64} seed={13} color="#f4efe6" />

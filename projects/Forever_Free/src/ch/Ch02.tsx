@@ -34,10 +34,10 @@ const Goal: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to right, rgba(10,9,7,0.9) 0%, rgba(10,9,7,0.75) 30%, rgba(0,0,0,0) 46%)'}} />
-        <Note text="when the war started" x={110} y={110} size={52} rot={-3} at={t.at('When the') - 2} color={WHITE} />
-        <Note text="Lincoln's goal:" x={110} y={220} size={56} rot={-3} at={t.at("Lincoln's goal") - 3} />
+        <Note text="when the war started" x={130} y={110} size={52} rot={-3} at={t.at('When the') - 2} color={WHITE} />
+        <Note text="Lincoln's goal:" x={130} y={220} size={56} rot={-3} at={t.at("Lincoln's goal") - 3} />
         <Highlight text="SAVE THE UNION" x={100} y={330} size={80} at={t.at('save the Union')} seed={201} rot={-2} />
-        <Note text="not end slavery" x={120} y={500} size={60} rot={-3} at={t.at('not to end') - 3} color={WHITE} />
+        <Note text="not end slavery" x={130} y={500} size={60} rot={-3} at={t.at('not to end') - 3} color={WHITE} />
         <Tag text="Alexander Gardner, Lincoln with McClellan and officers at Antietam, Oct. 1862 · Library of Congress" />
       </>
     )}
@@ -62,9 +62,9 @@ const Border: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="he needed the border states" x={110} y={90} size={54} rot={-2} at={b - 3} color={WHITE} />
-        <Note text="slave states that stayed loyal" x={110} y={190} size={54} rot={-2} at={t.at('the slave') - 3} />
-        <Note text="push too hard on slavery →" x={110} y={790} size={54} rot={-2} at={t.at('Push too') - 3} color={WHITE} />
+        <Note text="he needed the border states" x={130} y={90} size={54} rot={-2} at={b - 3} color={WHITE} />
+        <Note text="slave states that stayed loyal" x={130} y={190} size={54} rot={-2} at={t.at('the slave') - 3} />
+        <Note text="push too hard on slavery →" x={130} y={790} size={54} rot={-2} at={t.at('Push too') - 3} color={WHITE} />
         <Note text="they might leave too" x={150} y={890} size={54} rot={-2} at={t.at('might leave') - 3} color={CORAL} />
         <Tag text="Map · the United States in 1861: Union, border states, Confederacy" />
       </AbsoluteFill>
@@ -91,11 +91,11 @@ const Monroe: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to right, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.6) 28%, rgba(0,0,0,0) 46%)'}} />
-        <Highlight text="MAY 1861" x={110} y={100} size={100} at={t.at('May 1861')} seed={203} rot={-2} />
-        <Note text="weeks into the war" x={120} y={270} size={52} rot={-3} at={t.at('just weeks') - 3} color={WHITE} />
-        <Note text="three enslaved men" x={120} y={380} size={56} rot={-3} at={t.at('Three enslaved') - 3} />
-        <Note text="slip away to Fort Monroe" x={120} y={480} size={56} rot={-3} at={t.at('slip away') - 3} />
-        <Note text="a Union fort in Virginia" x={120} y={580} size={50} rot={-3} at={t.at('a Union fort') - 3} color={WHITE} />
+        <Highlight text="MAY 1861" x={130} y={100} size={100} at={t.at('May 1861')} seed={203} rot={-2} />
+        <Note text="weeks into the war" x={130} y={270} size={52} rot={-3} at={t.at('just weeks') - 3} color={WHITE} />
+        <Note text="three enslaved men" x={130} y={380} size={56} rot={-3} at={t.at('Three enslaved') - 3} />
+        <Note text="slip away to Fort Monroe" x={130} y={480} size={56} rot={-3} at={t.at('slip away') - 3} />
+        <Note text="a Union fort in Virginia" x={130} y={580} size={50} rot={-3} at={t.at('a Union fort') - 3} color={WHITE} />
       </>
     )}
   </Engraving>
@@ -138,7 +138,7 @@ const Contraband: React.FC<{t: TL}> = ({t}) => {
       <Backdrop src={FORT} size={sizeOf(FORT)} a={a} dim={0.3} side="right" />
       <Doc src={SKETCH} x={110} y={180} w={640} rot={-2} at={a + 1} />
       <Highlight text="CONTRABAND OF WAR" x={830} y={110} size={80} at={t.at('contraband of war')} seed={207} rot={-2} />
-      <Definition term="con·tra·band of war" def="enemy property that an army can keep" at={t.at('contraband of war') + 9} x={850} y={290} w={950} />
+      <Definition term="con·tra·band of war" def="enemy property that an army can keep" at={t.at('contraband of war') + 9} x={850} y={290} w={860} />
       <Note text="like captured horses or wagons" x={870} y={440} size={50} rot={-3} at={t.at('captured horses') - 3} color={WHITE} />
       <Note text="a cold word for human beings" x={850} y={640} size={54} rot={-3} at={t.at('cold word') - 3} />
       <Note text="but it worked" x={870} y={790} size={64} rot={-3} at={t.at('But it worked') - 2} color={WHITE} />
@@ -166,8 +166,8 @@ const Camps: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.55) 26%, rgba(0,0,0,0) 40%)'}} />
-        <Note text="over the whole war:" x={120} y={90} size={52} rot={-3} at={t.at('Over the course') + 2} color={WHITE} />
-        <Highlight text="100+ CONTRABAND CAMPS" x={110} y={180} size={80} at={t.at('contraband camps')} seed={209} rot={-2} />
+        <Note text="over the whole war:" x={130} y={90} size={52} rot={-3} at={t.at('Over the course') + 2} color={WHITE} />
+        <Highlight text="100+ CONTRABAND CAMPS" x={130} y={180} size={80} at={t.at('contraband camps')} seed={209} rot={-2} />
         <Definition term="con·tra·band camps" def="Union army camps for people who escaped slavery" at={t.at('contraband camps') + 9} x={130} y={340} w={1100} />
         <Tag text="James Gibson, contrabands at Foller's house, Cumberland Landing, Va., May 1862 · Library of Congress" />
       </>

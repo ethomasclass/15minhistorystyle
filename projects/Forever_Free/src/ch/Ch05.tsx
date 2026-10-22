@@ -93,9 +93,9 @@ const LeftOut: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="now: what it leaves out" x={110} y={80} size={54} rot={-2} at={t.at('Now look') + 2} color={WHITE} />
-        <Note text="✗ the border states (remember them?)" x={110} y={180} size={50} rot={-2} at={b - 3} color={WHITE} />
-        <Note text="✗ parts of the South the Union army already held" x={110} y={860} size={50} rot={-2} at={h} color={WHITE} />
+        <Note text="now: what it leaves out" x={130} y={80} size={54} rot={-2} at={t.at('Now look') + 2} color={WHITE} />
+        <Note text="✗ the border states (remember them?)" x={130} y={180} size={50} rot={-2} at={b - 3} color={WHITE} />
+        <Note text="✗ parts of the South the Union army already held" x={130} y={860} size={50} rot={-2} at={h} color={WHITE} />
         <Tag text="Map · what the Emancipation Proclamation covered, January 1, 1863 (grey: not covered)" />
       </AbsoluteFill>
     </>
@@ -109,7 +109,7 @@ const WarPowers: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.55) 34%, rgba(0,0,0,0) 48%)'}} />
-        <Note text="why do it that way?" x={120} y={80} size={54} rot={-3} at={t.at('Why do') + 2} color={WHITE} />
+        <Note text="why do it that way?" x={130} y={80} size={54} rot={-3} at={t.at('Why do') + 2} color={WHITE} />
         <Highlight text="WAR POWERS" x={700} y={70} size={96} at={t.at('war powers')} seed={503} rot={-2} />
         <Definition term="war pow·ers" def="what a president can do as commander in chief to win a war" at={t.at('as commander') - 2} x={130} y={230} w={1300} />
       </>
@@ -123,14 +123,14 @@ const Logic: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a}>
       <Backdrop src={NARA(2)} size={sizeOf(NARA(2))} a={a} dim={0.26} fy={1500} tag={`${NARA_TAG}, page 2`} />
-      <Note text="here's the logic:" x={120} y={90} size={56} rot={-3} at={t.at("Here's the logic") + 2} color={WHITE} />
-      <Box x={110} y={250} w={500} h={240} at={t.at('The law treated') - 2} label="the law: enslaved people as “property”" size={42} seed={21} color="#f4efe6" />
-      <Arrow x1={620} y1={370} x2={700} y2={370} bow={10} at={t.at('and a commander') - 2} />
-      <Box x={710} y={250} w={500} h={240} at={t.at('and a commander') - 2} label="a commander in chief can take enemy property" size={42} seed={23} />
-      <Arrow x1={1220} y1={370} x2={1300} y2={370} bow={10} at={t.at('So the order') - 2} />
-      <Box x={1310} y={250} w={500} h={240} at={t.at('So the order') - 2} label="so it can reach the enemy" size={42} seed={25} />
+      <Note text="here's the logic:" x={130} y={90} size={56} rot={-3} at={t.at("Here's the logic") + 2} color={WHITE} />
+      <Box x={140} y={250} w={460} h={240} at={t.at('The law treated') - 2} label="the law: enslaved people as “property”" size={42} seed={21} color="#f4efe6" />
+      <Arrow x1={610} y1={370} x2={700} y2={370} bow={10} at={t.at('and a commander') - 2} />
+      <Box x={720} y={250} w={460} h={240} at={t.at('and a commander') - 2} label="a commander in chief can take enemy property" size={42} seed={23} />
+      <Arrow x1={1190} y1={370} x2={1290} y2={370} bow={10} at={t.at('So the order') - 2} />
+      <Box x={1300} y={250} w={460} h={240} at={t.at('So the order') - 2} label="so it can reach the enemy" size={42} seed={25} />
       <Note text="but not the loyal states" x={1060} y={540} size={52} rot={-3} at={t.at('but not the loyal') - 3} color={CORAL} />
-      <Note text="and trying might have cost him those states" x={120} y={780} size={58} rot={-2} at={t.at('And trying') - 3} color={WHITE} />
+      <Note text="and trying might have cost him those states" x={130} y={780} size={58} rot={-2} at={t.at('And trying') - 3} color={WHITE} />
     </Desk>
   );
 };
@@ -140,12 +140,12 @@ const FewFreed: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('So on the first') - 1;
   return (
     <Desk a={a}>
-      <Doc src={POP_MAP} x={110} y={110} w={1000} rot={-1} at={a + 1} />
-      <Note text="day one:" x={1210} y={140} size={56} rot={-3} at={t.at('So on the first') + 2} color={WHITE} />
-      <Note text="relatively few freed" x={1210} y={240} size={58} rot={-3} at={t.at('relatively few') - 3} color={CORAL} />
-      <Note text="most of the places it covered:" x={1210} y={430} size={46} rot={-3} at={t.at('Most of the') - 3} color={WHITE} />
-      <Note text="still under" x={1220} y={530} size={56} rot={-3} at={t.at('still under') - 3} />
-      <Note text="Confederate control" x={1220} y={620} size={56} rot={-3} at={t.at('Confederate control') - 3} />
+      <Doc src={POP_MAP} x={130} y={130} w={900} rot={-1} at={a + 1} />
+      <Note text="day one:" x={1120} y={150} size={54} rot={-3} at={t.at('So on the first') + 2} color={WHITE} />
+      <Note text="relatively few freed" x={1120} y={250} size={52} rot={-3} at={t.at('relatively few') - 3} color={CORAL} />
+      <Note text="most of the places it covered:" x={1120} y={430} size={42} rot={-3} at={t.at('Most of the') - 3} color={WHITE} />
+      <Note text="still under" x={1130} y={530} size={52} rot={-3} at={t.at('still under') - 3} />
+      <Note text="Confederate control" x={1130} y={620} size={52} rot={-3} at={t.at('Confederate control') - 3} />
       <Tag text="Map showing the distribution of the slave population of the Southern states, U.S. Coast Survey, 1861 · Library of Congress" />
     </Desk>
   );
@@ -159,8 +159,8 @@ const Changed: React.FC<{t: TL}> = ({t}) => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.4) 22%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 66%, rgba(10,9,7,0.88) 86%)'}} />
         <Note text="but it changed what the war was for" x={130} y={80} size={62} rot={-2} at={t.at('But it changed') + 2} color={WHITE} />
-        <Note text="wherever the Union army marched," x={130} y={800} size={56} rot={-2} at={t.at('wherever') - 3} color={WHITE} />
-        <Note text="freedom marched with it" x={160} y={900} size={60} rot={-2} at={t.at('freedom marched') - 3} />
+        <Note text="wherever the Union army marched," x={130} y={780} size={56} rot={-2} at={t.at('wherever') - 3} color={WHITE} />
+        <Note text="freedom marched with it" x={160} y={880} size={60} rot={-2} at={t.at('freedom marched') - 3} />
       </>
     )}
   </Engraving>
