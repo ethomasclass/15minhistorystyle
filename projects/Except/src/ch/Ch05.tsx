@@ -74,7 +74,7 @@ const McClellan: React.FC<{t: TL}> = ({t}) => {
       <DropCard src={BUTTON} x={700} y={640} w={240} rot={6} at={t.at('McClellan') - 2} filter="contrast(1.05)" />
       <Note text="his opponent: a familiar face" x={1020} y={130} size={50} rot={-3} at={t.at('familiar') - 3} color={WHITE} />
       <Highlight text="GEORGE McCLELLAN" x={1010} y={290} size={70} at={t.at('McClellan') - 1} seed={52} rot={-2} />
-      <Note text="the general Lincoln had fired" x={1040} y={480} size={54} rot={-3} at={t.at('The general') - 2} />
+      <Note text="the general Lincoln had fired" x={1040} y={480} size={46} rot={-3} at={t.at('The general') - 2} />
       <Note text="awkward." x={1100} y={640} size={88} rot={-5} at={t.at('Awkward') - 2} color={CORAL} />
       <Tag text="Currier & Ives, Grand National Democratic Banner, 1864 · McClellan campaign button, 1864 · Library of Congress" />
     </Desk>
@@ -166,7 +166,7 @@ const Rails: React.FC<{t: TL}> = ({t}) => (
         <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(10,9,7,0.9) 0%, rgba(10,9,7,0.6) 28%, rgba(0,0,0,0) 46%)'}} />
         <Note text="it tears up railroads" x={110} y={700} size={60} rot={-3} at={t.at('tore') - 2} />
         <Note text="burns barns and supplies" x={130} y={820} size={56} rot={-3} at={t.at('burned') - 2} color={WHITE} />
-        <Note text="and takes what it needs" x={1100} y={820} size={56} rot={-3} at={t.at('took what') - 2} color={CORAL} />
+        <Note text="and takes what it needs" x={1040} y={820} size={56} rot={-3} at={t.at('took what') - 2} color={CORAL} />
         <Tag text="George Barnard, Gen. Sherman's men destroying the railroad, Atlanta, 1864 · Library of Congress" x={44} y={40} />
       </>
     )}
@@ -200,7 +200,7 @@ const Debate: React.FC<{t: TL}> = ({t}) => {
       <Definition term="hard war" def="aimed mostly at property and supplies, not at civilians' lives" at={t.at('aimed') - 1} x={1050} y={340} w={720} />
       <CropCard src={DARLEY} size={sizeOf(DARLEY)} x={190} y={560} w={600} h={300} fx={1500} fy={1000} scale={0.36} rot={-2} at={a + 3} />
       <CropCard src={RUINS} size={sizeOf(RUINS)} x={1100} y={560} w={600} h={300} fx={740} fy={800} scale={0.6} rot={2} at={t.at('Or hard') - 1} />
-      <Note text="historians still argue" x={680} y={940} size={52} rot={-2} at={t.at('Historians') - 2} color={WHITE} />
+      <Note text="historians still argue" x={680} y={890} size={52} rot={-2} at={t.at('Historians') - 2} color={WHITE} />
       <Tag text="F. O. C. Darley, Sherman's March to the Sea, engraving, c. 1883 (later depiction) · Barnard, ruins of the Atlanta car shed, 1864 · Library of Congress" x={44} y={30} />
     </AbsoluteFill>
   );
@@ -232,7 +232,7 @@ const Subscribe: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a} push={0.02}>
       <DropCard src={BLISS1} x={1290} y={160} w={430} rot={3} at={t.at('shorter') - 4} filter={DOC} />
-      <Note text="quick thing before the surrender" x={110} y={110} size={52} rot={-3} at={a + 2} color={WHITE} />
+      <Note text="quick thing before the surrender" x={150} y={110} size={52} rot={-3} at={a + 2} color={WHITE} />
       <Box x={150} y={300} w={560} h={150} at={sub - 2} label="SUBSCRIBE" seed={57} size={70} fillBg="rgba(255,111,97,0.25)" color={CORAL} />
       {g >= sub + 6 && <Loop cx={430} cy={375} rx={330} ry={120} at={sub + 6} seed={58} tilt={-3} />}
       <Note text="it's free, and it really helps the channel" x={130} y={560} size={52} rot={-3} at={t.at("It's free") - 2} />

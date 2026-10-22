@@ -43,8 +43,8 @@ const Town: React.FC<{t: TL}> = ({t}) => (
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.75) 0%, rgba(10,9,7,0.3) 34%, rgba(0,0,0,0) 50%)'}} />
         <Highlight text="JULY 1, 1863" x={110} y={90} size={96} at={t.at('July') - 1} seed={21} rot={-2} />
         <Note text="Lee's army collides with the Union army" x={130} y={260} size={50} rot={-3} at={t.at('collides') - 2} color={WHITE} />
-        <Note text="a small crossroads town" x={1080} y={690} size={56} rot={-3} at={t.at('crossroads') - 2} />
-        <Note text="Gettysburg, Pennsylvania" x={1120} y={810} size={64} rot={-3} at={t.at('Gettysburg') - 2} color={CORAL} />
+        <Note text="a small crossroads town" x={980} y={690} size={56} rot={-3} at={t.at('crossroads') - 2} />
+        <Note text="Gettysburg, Pennsylvania" x={960} y={810} size={60} rot={-3} at={t.at('Gettysburg') - 2} color={CORAL} />
         <Tag text="Timothy O'Sullivan, Gettysburg from Cemetery Hill, 1863 · Library of Congress" />
       </>
     )}
@@ -188,7 +188,7 @@ const Week: React.FC<{t: TL}> = ({t}) => {
       <AbsoluteFill>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.75) 0%, rgba(0,0,0,0) 30%)'}} />
         <Highlight text="JULY 4, 1863" x={110} y={90} size={86} at={t.at('July 4th') - 1} seed={23} rot={-2} />
-        <Note text="the very next day, far to the west" x={110} y={920} size={50} rot={-3} at={t.at('far to') - 2} color={WHITE} />
+        <Note text="the very next day, far to the west" x={130} y={870} size={50} rot={-3} at={t.at('far to') - 2} color={WHITE} />
         {g >= t.at('47day') - 2 && <div style={{position: 'absolute', left: 1300, top: 110}}><Count to={47} at={t.at('47day') - 2} dur={18} suffix="-day siege" size={70} color={WHITE} /></div>}
         <Tag text="Map · Gettysburg and Vicksburg, July 1863" />
       </AbsoluteFill>
@@ -204,9 +204,9 @@ const Siege: React.FC<{t: TL}> = ({t}) => {
       <CropCard src={SIEGE} size={sizeOf(SIEGE)} x={120} y={150} w={860} h={520} fx={1500} fy={1220} scale={0.4} rot={-2} at={a} />
       <CropCard src={CAVES} size={sizeOf(CAVES)} x={1180} y={200} w={560} h={520} fx={1500} fy={1180} scale={0.42} rot={3} at={t.at('families') - 2} />
       <Note text="Grant's army surrounds the city" x={150} y={760} size={52} rot={-3} at={t.at('surrounded') - 2} color={WHITE} />
-      <Note text="and starves it out" x={170} y={870} size={58} rot={-3} at={t.at('starved') - 2} color={CORAL} />
-      <Note text="families dug caves" x={1180} y={780} size={56} rot={-3} at={t.at('caves') - 2} />
-      <Note text="to hide from the shelling" x={1200} y={890} size={48} rot={-3} at={t.at('shelling') - 2} color={WHITE} />
+      <Note text="and starves it out" x={170} y={860} size={58} rot={-3} at={t.at('starved') - 2} color={CORAL} />
+      <Note text="families dug caves" x={1180} y={760} size={56} rot={-3} at={t.at('caves') - 2} />
+      <Note text="to hide from the shelling" x={1140} y={870} size={44} rot={-3} at={t.at('shelling') - 2} color={WHITE} />
       <Tag text="The Siege of Vicksburg, lithograph, 1863 · Adalbert Volck, Cave life in Vicksburg, etching, 1864 · Library of Congress" />
     </Desk>
   );
@@ -248,7 +248,7 @@ const WhichWin: React.FC<{t: TL}> = ({t}) => {
   return (
     <AbsoluteFill>
       <Backdrop src={FIELD} size={sizeOf(FIELD)} a={a} dim={0.3} />
-      <Note text="which win mattered more?" x={110} y={50} size={56} rot={-2} at={a + 2} color={WHITE} />
+      <Note text="which win mattered more?" x={130} y={74} size={56} rot={-2} at={a + 2} color={WHITE} />
       <TwoViews a={a} left="GETTYSBURG" right="VICKSBURG" top={200} leftAt={a + 2} rightAt={a + 2} />
       <CropCard src={BATTLE} size={sizeOf(BATTLE)} x={180} y={290} w={600} h={380} fx={1500} fy={1000} scale={0.3} rot={-2} at={a + 3} />
       <CropCard src={SIEGE} size={sizeOf(SIEGE)} x={1100} y={290} w={600} h={380} fx={1500} fy={1220} scale={0.3} rot={2} at={a + 5} />
@@ -266,7 +266,7 @@ const Grant: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a} push={0.03}>
       <CropCard src={GRANT} size={sizeOf(GRANT)} x={170} y={120} w={520} h={800} fx={930} fy={1300} scale={0.36} rot={-2} at={a} mask={MASKS.grant} tintStrength={0.6} traceAt={t.at('Grant unlike') + 2} />
-      <Note text="Lincoln noticed who won at Vicksburg" x={820} y={110} size={48} rot={-3} at={t.at('noticed') - 2} color={WHITE} />
+      <Note text="Lincoln noticed who won at Vicksburg" x={820} y={110} size={44} rot={-3} at={t.at('noticed') - 2} color={WHITE} />
       <Highlight text="ULYSSES S. GRANT" x={830} y={240} size={80} at={t.at('Grant unlike') - 1} seed={24} rot={-2} />
       <Note text="unlike McClellan..." x={850} y={420} size={56} rot={-3} at={t.at('unlike') - 2} color={WHITE} />
       <Note text="he liked attacking" x={880} y={530} size={70} rot={-3} at={t.at('liked attacking') - 2} color={CORAL} />

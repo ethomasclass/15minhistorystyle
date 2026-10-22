@@ -34,8 +34,8 @@ const SIEGE = 'img/ch02/vicksburg_siege_grant_lithograph_1863.jpg';
 const Amendment: React.FC<{t: TL}> = ({t}) => (
   <Desk a={0} push={0.03}>
     <Doc src={AMEND} x={1180} y={120} w={620} rot={2} at={-10} />
-    <Note text="the amendment that ended slavery" x={110} y={210} size={52} rot={-3} at={-6} color={WHITE} />
-    <Note text="has an exception" x={140} y={360} size={70} rot={-3} at={t.at('exception') - 2} color={CORAL} />
+    <Note text="the amendment that ended slavery" x={140} y={210} size={52} rot={-3} at={-6} color={WHITE} />
+    <Note text="has an exception" x={160} y={360} size={70} rot={-3} at={t.at('exception') - 2} color={CORAL} />
     <Note text="in its very first sentence" x={160} y={500} size={52} rot={-3} at={t.at('first sentence') - 2} />
     <Tag text={AMEND_TAG} />
   </Desk>
@@ -65,10 +65,10 @@ const SixWordsScene: React.FC<{t: TL}> = ({t}) => {
       <Doc src={AMEND} x={110} y={540 - 1530 * sc} w={w} rot={-1} at={a} push={[a, t.at('But first')]} fx={720} fy={1560} zoom={1.08}
         marks={[{at: t.at('Neither'), to: t.at('exist') , swipe: [AMEND_NEITHER]}, exceptSwipe(t.at('except as'), t.end('crime'))]} />
       <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(10,9,7,0.95) 0%, rgba(10,9,7,0.85) 26%, rgba(0,0,0,0) 44%)'}} />
-      <SixWords x={110} y={790} at={t.at('Except as', 2)} size={70} />
-      <Note text="six words" x={130} y={940} size={52} rot={-3} at={t.at('Six words') - 2} color={WHITE} />
-      <Note text="hold onto them" x={520} y={940} size={52} rot={-3} at={t.at('Hold onto') - 2} color={CORAL} />
-      <Note text="we'll come back to them" x={1020} y={940} size={52} rot={-3} at={t.at("We'll come") - 2} />
+      <SixWords x={130} y={740} at={t.at('Except as', 2)} size={70} />
+      <Note text="six words" x={150} y={870} size={52} rot={-3} at={t.at('Six words') - 2} color={WHITE} />
+      <Note text="hold onto them" x={540} y={870} size={52} rot={-3} at={t.at('Hold onto') - 2} color={CORAL} />
+      <Note text="we'll come back to them" x={1020} y={870} size={52} rot={-3} at={t.at("We'll come") - 2} />
       <Tag text={AMEND_TAG} x={44} y={40} />
     </Desk>
   );
@@ -82,7 +82,7 @@ const Lee: React.FC<{t: TL}> = ({t}) => {
       <CropCard src={LEE} size={sizeOf(LEE)} x={180} y={130} w={520} h={760} fx={930} fy={1300} scale={0.36} rot={-2} at={a} mask={MASKS.lee} tintStrength={0.6} traceAt={t.at('Robert') + 2} />
       <Note text="but first:" x={860} y={150} size={52} rot={-3} at={a + 2} color={WHITE} />
       <Note text="the Union had to win a war" x={880} y={270} size={56} rot={-3} at={t.at('the Union had') - 2} />
-      <Note text="it still wasn't sure it could win" x={900} y={390} size={56} rot={-3} at={t.at("wasn't sure") - 2} color={CORAL} />
+      <Note text="it still wasn't sure it could win" x={880} y={390} size={48} rot={-3} at={t.at("wasn't sure") - 2} color={CORAL} />
       <Highlight text="ROBERT E. LEE" x={880} y={600} size={84} at={t.at('Robert')} seed={14} rot={-2} />
       <Tag text="Julian Vannerson, Robert E. Lee, 1864 · Library of Congress" />
     </Desk>
@@ -147,11 +147,11 @@ const TwoBattles: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a} push={0.03}>
       <CropCard src={TOWN} size={sizeOf(TOWN)} x={150} y={250} w={700} h={480} fx={1500} fy={1150} scale={0.3} rot={-3} at={a + 2} />
       <CropCard src={SIEGE} size={sizeOf(SIEGE)} x={1070} y={280} w={700} h={480} fx={1500} fy={1200} scale={0.3} rot={2} at={a + 6} />
-      <Note text="two battles, the same week" x={150} y={70} size={60} rot={-3} at={t.at('two battles') - 2} color={WHITE} />
+      <Note text="two battles, the same week" x={160} y={100} size={60} rot={-3} at={t.at('two battles') - 2} color={WHITE} />
       <Note text="Gettysburg" x={240} y={810} size={60} rot={-3} at={a + 4} />
       <Note text="Vicksburg" x={1180} y={830} size={60} rot={-3} at={a + 8} />
       <Arrow x1={880} y1={520} x2={1040} y2={520} bow={-30} at={t.at('hundreds') - 2} dur={6} />
-      <Note text="hundreds of miles apart" x={620} y={940} size={50} rot={-2} at={t.at('hundreds') - 2} color={CORAL} />
+      <Note text="hundreds of miles apart" x={620} y={880} size={50} rot={-2} at={t.at('hundreds') - 2} color={CORAL} />
       <Tag text="Gettysburg from Cemetery Hill, 1863 · The Siege of Vicksburg, lithograph, 1863 · Library of Congress" />
     </Desk>
   );

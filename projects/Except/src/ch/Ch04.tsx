@@ -66,8 +66,8 @@ const Catch: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a} push={0.02}>
       <DropCard src={SUBST} x={1180} y={130} w={600} rot={3} at={t.at('substitute') - 3} filter={DOC} />
-      <Note text="the Union's draft had a catch" x={110} y={100} size={52} rot={-3} at={a + 2} color={WHITE} />
-      <Stamp text="$300" x={110} y={230} at={t.at('300') - 1} size={200} color={BONE} rot={-3} />
+      <Note text="the Union's draft had a catch" x={140} y={100} size={52} rot={-3} at={a + 2} color={WHITE} />
+      <Stamp text="$300" x={140} y={230} at={t.at('300') - 1} size={200} color={BONE} rot={-3} />
       <Note text="to get out of it" x={720} y={300} size={52} rot={-3} at={t.at('to get out') - 2} />
       <Note text="roughly a year's pay for a laborer" x={130} y={490} size={52} rot={-3} at={t.at("a year's") - 2} color={WHITE} />
       <Note text="or hire a substitute:" x={130} y={660} size={58} rot={-3} at={t.at('Or he could') - 2} />
@@ -121,7 +121,7 @@ const NewYork: React.FC<{t: TL}> = ({t}) => (
         <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(10,9,7,0.92) 0%, rgba(10,9,7,0.7) 30%, rgba(0,0,0,0) 48%)'}} />
         <Highlight text="JULY 1863" x={110} y={700} size={80} at={t.at('In July')} seed={43} rot={-2} />
         <Note text="days after Gettysburg, the draft begins in New York City" x={130} y={850} size={46} rot={-2} at={t.at('just days') - 2} color={BONE} />
-        <Note text="the city explodes" x={1300} y={720} size={58} rot={-3} at={t.at('exploded') - 2} />
+        <Note text="the city explodes" x={1200} y={720} size={58} rot={-3} at={t.at('exploded') - 2} />
         <Tag text="Resumption of the draft, the wheel being turned, New York, 1863 · Library of Congress" x={44} y={40} />
       </>
     )}
@@ -165,7 +165,7 @@ const Orphanage: React.FC<{t: TL}> = ({t}) => (
         <Note text="an orphanage for Black children, burned" x={110} y={640} size={52} rot={-2} at={t.at('Rioters burned') + 1} color={BONE} />
         <Note text="the children escaped" x={130} y={760} size={58} rot={-2} at={t.at('The children') - 2} />
         <Stamp text="119" x={1280} y={640} at={t.at('119') - 1} size={180} color={BONE} rot={-3} />
-        <Note text="at least, killed in four days" x={1150} y={860} size={48} rot={-2} at={t.at('four days') - 2} color={WHITE} />
+        <Note text="at least, killed in four days" x={1080} y={850} size={44} rot={-2} at={t.at('four days') - 2} color={WHITE} />
         <Tag text={ASYLUM_TAG} x={44} y={40} />
       </>
     )}
@@ -182,9 +182,10 @@ const Money: React.FC<{t: TL}> = ({t}) => {
       <Note text="the South was suffering too" x={980} y={100} size={50} rot={-3} at={a + 2} color={WHITE} />
       <Note text="the blockade chokes off supplies" x={1000} y={210} size={46} rot={-3} at={t.at('blockade') - 2} />
       <Note text="the government prints money" x={1000} y={330} size={46} rot={-3} at={t.at('printed') - 2} />
-      <Note text="printing money doesn't grow more food" x={1000} y={450} size={42} rot={-3} at={t.at('But printing') - 2} color={WHITE} />
-      <Note text="more dollars, the same bread" x={1000} y={600} size={52} rot={-3} at={t.at('More dollars') - 2} />
-      <Note text="each dollar buys less" x={1000} y={710} size={52} rot={-3} at={t.at('each dollar') - 2} color={WHITE} />
+      <Note text="but printing money" x={1000} y={430} size={44} rot={-3} at={t.at('But printing') - 2} color={WHITE} />
+      <Note text="doesn't grow more food" x={1020} y={510} size={44} rot={-3} at={t.at('grow') - 2} color={WHITE} />
+      <Note text="more dollars, the same bread" x={1000} y={620} size={52} rot={-3} at={t.at('More dollars') - 2} />
+      <Note text="each dollar buys less" x={1000} y={720} size={52} rot={-3} at={t.at('each dollar') - 2} color={WHITE} />
       <Highlight text="PRICES SOAR" x={1000} y={830} size={78} at={t.at('soared') - 1} seed={44} rot={-2} />
       <Tag text="Confederate notes, plates in Currency of the Confederate States, 1875 · Internet Archive" />
     </Desk>

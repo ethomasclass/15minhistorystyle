@@ -66,7 +66,7 @@ const Votes: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a} push={0.02}>
       <Doc src={AMEND} x={1300} y={110} w={480} rot={2} at={a + 1} out={house} />
       <Doc src={HOUSE} x={1180} y={90} w={620} rot={2} at={house - 1} push={[house, t.at('Then threefourths')]} fx={1200} fy={1700} zoom={1.1} />
-      <Note text="to end slavery for good: into the Constitution" x={110} y={90} size={46} rot={-3} at={a + 2} out={house} color={WHITE} />
+      <Note text="to end slavery for good: into the Constitution" x={150} y={100} size={46} rot={-3} at={a + 2} out={house} color={WHITE} />
       <Note text="the Senate, April 1864" x={130} y={240} size={50} rot={-3} at={t.at('The Senate') - 2} />
       <Stamp text="38 to 6" x={130} y={330} at={t.at('38') - 1} size={130} color={BONE} rot={-3} />
       <Note text="the House took longer: January 31, 1865" x={130} y={560} size={46} rot={-3} at={t.at('It finally') - 2} />
@@ -102,8 +102,8 @@ const Ratify: React.FC<{t: TL}> = ({t}) => {
         <Note text="then three-fourths of the states had to" x={110} y={80} size={44} rot={-3} at={a + 2} color={WHITE} />
         <Highlight text="RATIFY" x={120} y={190} size={84} at={t.at('ratify')} seed={71} rot={-2} />
         <Definition term="rat·i·fy" def="approve" at={t.at('or approve') - 1} x={560} y={210} w={420} />
-        <Note text="the state that put it over the top:" x={1060} y={330} size={44} rot={-3} at={t.at('The state') - 2} color={WHITE} />
-        <Highlight text="GEORGIA" x={1080} y={430} size={84} at={ga} seed={74} rot={-2} />
+        <Note text="the state that put it over the top:" x={960} y={330} size={40} rot={-3} at={t.at('The state') - 2} color={WHITE} />
+        <Highlight text="GEORGIA" x={980} y={430} size={84} at={ga} seed={74} rot={-2} />
         <Tag text="Map · the states, December 1865" x={44} y={1030} />
       </AbsoluteFill>
     </>
@@ -116,8 +116,8 @@ const Over: React.FC<{t: TL}> = ({t}) => (
     {() => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.85) 0%, rgba(10,9,7,0.5) 28%, rgba(0,0,0,0) 44%)'}} />
-        <Note text="slavery was over in the United States" x={110} y={80} size={56} rot={-3} at={t.at('Slavery was') + 1} color={WHITE} />
-        <Note text="nearly 4 million people once enslaved: legally free" x={130} y={210} size={48} rot={-3} at={t.at('nearly 4') - 2} />
+        <Note text="slavery was over in the United States" x={130} y={100} size={56} rot={-3} at={t.at('Slavery was') + 1} color={WHITE} />
+        <Note text="nearly 4 million people once enslaved: legally free" x={150} y={220} size={48} rot={-3} at={t.at('nearly 4') - 2} />
         <Tag text="Celebration of the abolition of slavery in the District of Columbia, April 19, 1866, Harper's Weekly · Library of Congress" />
       </>
     )}
@@ -148,7 +148,7 @@ const BlackCodes: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a} push={0.02}>
       <Doc src={VAGRANT1} x={1180} y={-260} w={w} rot={2} at={t.at('Black Codes') - 2} push={[a, t.at('In Mississippi')]} fx={920} fy={2948} zoom={1.08}
         marks={[{at: t.at('aimed') , box: [520, 2915, 1310, 2980], seed: 7}]} />
-      <Note text="even before the amendment was ratified" x={110} y={110} size={48} rot={-3} at={a + 2} color={WHITE} />
+      <Note text="even before the amendment was ratified" x={150} y={110} size={48} rot={-3} at={a + 2} color={WHITE} />
       <Note text="Southern states began passing" x={130} y={220} size={48} rot={-3} at={t.at('Southern states') - 2} color={WHITE} />
       <Highlight text="BLACK CODES" x={130} y={350} size={110} at={t.at('Black Codes')} seed={72} rot={-2} />
       <Definition term="Black Codes" def="laws aimed only at Black Americans" at={t.at('laws aimed') - 1} x={140} y={560} w={820} />
@@ -175,8 +175,8 @@ const Vagrancy: React.FC<{t: TL}> = ({t}) => {
       <Doc src={SEC7} x={1040} y={360} w={720} rot={2} at={hire - 3}
         marks={[{at: hire, to: t.end('the fine'), swipe: [[1295, 1040, 2205, 1104], [451, 1114, 2205, 1178]]}]} />
       <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(10,9,7,0.95) 0%, rgba(10,9,7,0.75) 14%, rgba(0,0,0,0) 26%)'}} />
-      <Note text="Mississippi, 1865" x={180} y={950} size={46} rot={-2} at={a + 2} color={WHITE} />
-      <Note text="to work for whoever paid the fine" x={1050} y={950} size={46} rot={-2} at={t.at('whoever') - 2} />
+      <Note text="Mississippi, 1865" x={200} y={870} size={46} rot={-2} at={a + 2} color={WHITE} />
+      <Note text="to work for whoever paid the fine" x={1000} y={870} size={40} rot={-2} at={t.at('whoever') - 2} />
       <Tag text={FLEMING_TAG} x={44} y={30} />
     </Desk>
   );
@@ -216,7 +216,7 @@ const AnotherFight: React.FC<{t: TL}> = ({t}) => {
   return (
     <Desk a={a} push={0.03}>
       <Doc src={AMEND} x={1160} y={120} w={620} rot={2} at={a + 1} marks={[exceptSwipe(a + 4, a + 20)]} />
-      <Note text="freedom was in the Constitution" x={110} y={260} size={58} rot={-3} at={a + 2} color={WHITE} />
+      <Note text="freedom was in the Constitution" x={150} y={260} size={58} rot={-3} at={a + 2} color={WHITE} />
       <Note text="what freedom would mean" x={130} y={480} size={62} rot={-3} at={t.at('What freedom') - 2} />
       <Note text="was another fight" x={150} y={600} size={70} rot={-3} at={t.at('another fight') - 2} color={BONE} />
       <Tag text={AMEND_TAG} />

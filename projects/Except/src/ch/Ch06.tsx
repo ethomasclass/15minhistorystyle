@@ -67,7 +67,7 @@ const Appomattox: React.FC<{t: TL}> = ({t}) => (
         <AbsoluteFill style={{background: 'linear-gradient(to bottom, rgba(10,9,7,0.8) 0%, rgba(10,9,7,0.4) 26%, rgba(0,0,0,0) 40%)'}} />
         <Highlight text="APRIL 9, 1865" x={110} y={90} size={90} at={t.at('9th') - 1} seed={62} rot={-2} />
         <Note text="a village in Virginia: Appomattox Court House" x={130} y={250} size={50} rot={-3} at={t.at('Appomattox') - 2} color={WHITE} />
-        <Note text="Lee surrenders to Grant" x={1060} y={880} size={66} rot={-3} at={t.at('Lee surrenders') - 2} color={CORAL} />
+        <Note text="Lee surrenders to Grant" x={980} y={850} size={58} rot={-3} at={t.at('Lee surrenders') - 2} color={CORAL} />
         <Tag text="Timothy O'Sullivan, the McLean House, Appomattox Court House, April 1865 · Library of Congress" />
       </>
     )}
