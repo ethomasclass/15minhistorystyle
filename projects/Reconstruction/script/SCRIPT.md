@@ -1,6 +1,6 @@
 # Landless, Homeless, Voteless: Reconstruction, Part 1
 
-**15 Minute History** · narration script · 2,524 words · about 14:35 finished (draft 1, before cuts; target 13:00, cut list below)
+**15 Minute History** · narration script · 2,755 words · about 16:05 finished (draft 2, before cuts; target 13:00, cut list below)
 
 **Driving question (cold open, answered in ch10):** The war was over. Slavery was over. Who got to decide what freedom would actually look like? And why was the land going back?
 
@@ -65,7 +65,7 @@ But here's the catch. It was a military order, written in wartime. It let them u
 
 ---
 
-## 2:53 | Ten Percent
+## 2:55 | Ten Percent
 
 `ch03_ten_percent.txt` · 296 words
 
@@ -89,31 +89,39 @@ So the President had one plan. Congress had another. And when the war ended, nei
 
 ---
 
-## 4:31 | The Last Speech
+## 4:33 | Ford's Theatre
 
-`ch04_last_speech.txt` · 186 words
+`ch04_fords_theatre.txt` · 417 words
 
 April 1865. The main Confederate army surrenders. The war is all but over.
 
-Two days later, a crowd gathers outside the White House, and Lincoln speaks to them from a window. Most of the speech is about Louisiana, one of the states rebuilding under his plan. But near the end, he says something no president had said in public before.
-
-Some Black men, he says, should be able to vote. Men who were "very intelligent," and men who had served as Union soldiers.
+Two days later, a crowd gathers outside the White House, and Lincoln speaks to them from a window. Near the end, he says something no president had said in public before. Some Black men, he says, should be able to vote. Men who were "very intelligent," and men who had served as Union soldiers.
 
 It was a small step. But it was the first one.
 
-Standing in that crowd, according to later accounts, was an actor named John Wilkes Booth. He supported the Confederacy, and he was furious.
+Standing in that crowd, according to later accounts, was an actor named John Wilkes Booth. He supported the Confederacy. And he was furious.
 
-Three days later, at Ford's Theatre in Washington, Booth shot Lincoln. Lincoln died the next morning.
+Booth and a few friends had been plotting for months. Within days, the plot became murder. And not just Lincoln. On the same night, one man would kill the Secretary of State, William Seward. Another would kill the vice president, Andrew Johnson. Kill the top three, and the government falls into chaos.
 
-Whatever his plan would have become, it died with him.
+April 14. Lincoln and his wife go to see a comedy at Ford's Theatre in Washington. A little after 10, Booth slips into the box behind the President and fires one shot into the back of his head.
 
-The man who took his place wasn't even a Republican. He was a Democrat from Tennessee, picked as Lincoln's vice president to show the country could come together. Same name as today's Democrats, but a very different party.
+Then he jumps down to the stage, breaking his leg, shouts "Sic semper tyrannis," Latin for "thus always to tyrants," and escapes out the back.
 
-His name was Andrew Johnson.
+Lincoln is carried across the street to a boarding house. He dies the next morning.
+
+Across town, the man sent for Seward forces his way into his house and stabs him. Seward survives.
+
+And the man sent for the vice president? George Atzerodt had rented a room in Johnson's hotel. He spent the evening in the hotel bar. He got drunk, lost his nerve, and wandered off into the night. He never even knocked on the door.
+
+Johnson slept through it. A friend pounded on his door with the news. By the next morning, the man who was supposed to die that night was the President of the United States.
+
+And in Washington, people mostly knew him for one thing. Six weeks earlier, at his swearing-in as vice president, Johnson had been drunk. He was sick, he'd been taking whiskey for it, and he gave a rambling speech in front of the whole Senate. Lincoln reportedly told worried friends, "Andy ain't a drunkard."
+
+Now Andy was in charge. And he wasn't even a Republican. He was a Democrat from Tennessee, put on the ticket to show the country could come together. Same name as today's Democrats, but a very different party.
 
 ---
 
-## 5:34 | Treason Must Be Made Odious
+## 7:04 | Treason Must Be Made Odious
 
 `ch05_treason_odious.txt` · 340 words
 
@@ -149,7 +157,7 @@ But first, the South was back in charge of itself. What was it going to do?
 
 ---
 
-## 7:26 | Except as a Punishment for Crime
+## 8:56 | Except as a Punishment for Crime
 
 `ch06_except_crime.txt` · 259 words
 
@@ -181,7 +189,7 @@ Because of six words. *Except as a punishment for crime.*
 
 ---
 
-## 9:00 | The Bureau
+## 10:31 | The Bureau
 
 `ch07_the_bureau.txt` · 284 words
 
@@ -205,7 +213,7 @@ The Civil Rights Act became law. That summer, so did a new Freedmen's Bureau bil
 
 ---
 
-## 10:34 | Equal Protection
+## 12:05 | Equal Protection
 
 `ch08_equal_protection.txt` · 248 words
 
@@ -233,7 +241,7 @@ Quick thing before we go on. If this is helping, hit subscribe. It's free, and u
 
 ---
 
-## 11:57 | Swing Around the Circle
+## 13:27 | Swing Around the Circle
 
 `ch09_swing_circle.txt` · 210 words
 
@@ -257,7 +265,7 @@ And Congress's plan included sending the army back into the South.
 
 ---
 
-## 13:07 | Landless, Homeless, Voteless
+## 14:37 | Landless, Homeless, Voteless
 
 `ch10_landless.txt` · 265 words
 
@@ -321,7 +329,7 @@ Amendment's Section 1 (ch08). The "Information Wanted" ad (ch07).
 
 **Count on screen.** ch06 (three steps of the Mississippi code) and ch08 (three things the 14th Amendment does) get a 1/3 counter.
 
-**Heavy chapter.** ch06: no jokes, voiced slower, sparse music, a held beat after "And it was legal." The Memphis/New Orleans paragraph
+**Heavy chapters.** ch04 (the assassination: plain, no asides; the Atzerodt beat is told straight and lets the irony land on its own) and ch06: no jokes, voiced slower, sparse music, a held beat after "And it was legal." The Memphis/New Orleans paragraph
 in ch09 is also plain; the music shifts before "Johnson's answer was to hit the road."
 
 **Map.** One 3D map of the South Atlantic coast for ch02 (the Field Order 15 strip, Savannah, Edisto Island), reused in ch05 and ch10.
@@ -342,27 +350,33 @@ decision · due process · equal protection · Swing Around the Circle
 
 ## Cut list (to reach 13:00)
 
-The draft runs about 14:35. Explaining every term costs time, so the cuts below come from story detail, not definitions.
+Draft 2 runs about 16:05: the Ford's Theatre story added about 230 words. Explaining every term costs time, so these cuts come from
+story detail, never from definitions. A finished 13:00 is about 2,250 words, so it takes Tier 1 *and* one Tier 2 option.
+
+**Tier 1: trims (about 200 words)**
 
 | # | Chapter | Cut | Words |
 |---|---|---|---|
 | 1 | ch08 | "Congress had already drawn a line… refused to seat them." (keep the moderates sentence) | 24 |
-| 2 | ch04 | "Most of the speech is about Louisiana, one of the states rebuilding under his plan." | 15 |
+| 2 | ch04 | "Lincoln is carried across the street to a boarding house." | 10 |
 | 3 | ch05 | "When the South broke away, Johnson was the only senator… refused to leave." (start at "In April 1865…") | 17 |
 | 4 | ch06 | "Georgia even chose the Confederacy's own vice president for the U.S. Senate." | 13 |
 | 5 | ch07 | Shorten the ad beat to: "Look at this one, from 1866. A mother, looking for her children. Very few of these ads ever worked." | 25 |
-| 6 | ch09 | "Presidents back then almost never campaigned in person." | 8 |
-| 7 | ch09 | "Northern newspapers covered both. Northern voters read them." | 8 |
-| 8 | ch02 | "Thousands of enslaved people left the plantations and followed it. Sherman had no plan for them." → "Thousands of freedpeople followed it." | 11 |
-| | | **Cuts 1–8** | **~120 → about 13:55** |
-| 9 | ch07 | The Bureau's "harder side" paragraph (moves to Episode 2's sharecropping chapter) | 33 |
-| 10 | ch03 | The Wade-Davis paragraph down to: "Congress passed a tougher plan. Lincoln let it die without signing it. A pocket veto. A very polite way of saying no." | 25 |
-| 11 | ch05 | "Translation: the planters started this war, and they're going to pay." | 12 |
-| 12 | ch10 | "Many stayed and worked the same fields, now for the men who used to own them." (said already in ch01) | 16 |
-| | | **Cuts 1–12** | **~205 → about 13:25** |
+| 6 | ch09 | "Presidents back then almost never campaigned in person." and "Northern newspapers covered both. Northern voters read them." | 16 |
+| 7 | ch02 | "Thousands of enslaved people left the plantations and followed it. Sherman had no plan for them." → "Thousands of freedpeople followed it." | 11 |
+| 8 | ch07 | The Bureau's "harder side" paragraph (moves to Episode 2's sharecropping chapter) | 33 |
+| 9 | ch03 | The Wade-Davis paragraph down to: "Congress passed a tougher plan. Lincoln let it die without signing it. A pocket veto. A very polite way of saying no." | 25 |
+| 10 | ch05 | "Translation: the planters started this war, and they're going to pay." | 12 |
+| 11 | ch10 | "Many stayed and worked the same fields, now for the men who used to own them." | 16 |
+| | | **Tier 1 total** | **~200 → about 14:55** |
 
-A finished length of 13:00 would mean about 2,250 words. My recommendation: take cuts 1–12 and accept about 13:25, because the
-rest is definitions and the cause-and-effect students need.
+**Tier 2: pick one (structural)**
+
+| Option | What moves | Saves | Result with Tier 1 |
+|---|---|---|---|
+| **A. Move the 1866 election to Episode 2** (recommended) | ch09 (Memphis, New Orleans, the Swing Around the Circle, the midterms) becomes Episode 2's opening chapter, where it explains *why* Congress could take over. Episode 1 ends on Johnson telling the South to reject the 14th Amendment, a cliffhanger. ch10 is rewritten to match. Stevens stays as a setup for Episode 2. | ~230 + rewrite | about 13:35 |
+| **B. Drop Stevens and shrink the tour** | Cut Stevens from ch05 and ch09; the tour becomes one line ("His speaking tour turned into shouting matches with hecklers"). | ~100 | about 14:20 |
+| **C. Shorten the Johnson set-up** | Cut ch05's childhood lines and the pardon aside; fold the inauguration story into one sentence. | ~70 | about 14:30 |
 
 ## Pronunciation (for ElevenLabs)
 
@@ -378,6 +392,9 @@ rest is definitions and the cause-and-effect students need.
 | No. 15 | "Number 15" (write it out for the voice) |
 | Dred Scott | (check) |
 | Freedmen's | FREED-menz |
+| Atzerodt | AT-zuh-rot |
+| Sic semper tyrannis | sick SEM-per tih-RAN-iss |
+| Seward | SOO-erd |
 
 ## Fact-check flags
 
@@ -393,6 +410,14 @@ rest is definitions and the cause-and-effect students need.
 | 8 | ch03: Ten Percent Plan (1863); Wade-Davis (1864), pocket veto | Proclamation of Amnesty and Reconstruction, Dec 8, 1863; Wade-Davis Bill, July 1864 | Safe. |
 | 9 | ch04: Lincoln the first president to say in public some Black men should vote | Speech of April 11, 1865: "I would myself prefer that it were now conferred on the very intelligent, and on those who serve our cause as soldiers." | Widely stated; script quotes only "very intelligent." |
 | 10 | ch04: Booth in the crowd, furious | Rests on later accounts (Townsend, via Frederick Stone) | Hedged: "according to later accounts." No words quoted. |
+| 10a | ch04: "plotting for months… Within days, the plot became murder" | Booth's group planned to kidnap Lincoln from late 1864; the decision to kill came in mid-April | Safe as worded. |
+| 10b | ch04: three targets the same night (Lincoln, Seward, Johnson) | Powell (with Herold) sent for Seward, Atzerodt for Johnson | Safe. |
+| 10c | ch04: shot "a little after 10"; jumped to the stage, broke his leg, "Sic semper tyrannis" | Shot about 10:15 p.m.; leg broken in the jump; most witnesses report the Latin phrase | Safe. |
+| 10d | ch04: Seward stabbed, survived | Powell stabbed Seward in his bed; Seward survived | Safe. |
+| 10e | ch04: Atzerodt rented a room in Johnson's hotel, got drunk in the bar, lost his nerve, wandered off, never knocked | Kirkwood House, room 126; drank at the bar; never attempted the attack (his own statement and trial testimony) | Safe. |
+| 10f | ch04: "Johnson slept through it. A friend pounded on his door" | Former Wisconsin governor Leonard Farwell woke Johnson at the Kirkwood House | Safe; name him on screen if wanted. |
+| 10g | ch04: drunk at his vice-presidential swearing-in; sick, taking whiskey; rambling speech; Lincoln: "Andy ain't a drunkard" | March 4, 1865; recovering from typhoid fever and drinking whiskey for it; the Lincoln quote varies by source | Hedged: "reportedly." |
+| 10h | Not in the script: "Johnson drunk on the night of the assassination, jumping out a window and disappearing" | No record supports it. It seems to blend three true stories: Johnson drunk at his **inauguration** (March 4), **Atzerodt** drunk the night of the assassination and wandering off, and **Booth** jumping from the box | Kept out; the true versions are in ch04. |
 | 11 | ch05: "treason must be made odious" | Johnson, April 1865 (several speeches) | Safe. |
 | 12 | ch05: pardons "by the thousands" | Johnson issued thousands of individual pardons by 1866 (figures vary, roughly 7,000 to over 13,000 overall) | Safe as worded. |
 | 13 | ch05: Howard "dreaded the trip"; his reply "right in wanting homesteads… Congress must meet" | FSSP, Howard to the committee, Oct 22, 1865; accounts describe him as reluctant | Hedged: "By most accounts." |
