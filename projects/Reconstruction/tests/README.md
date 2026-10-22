@@ -1,5 +1,10 @@
 # Reconstruction: visual test clips
 
+> **Your verdict (Oct 2026).** Keep the **stereograph** (the camera move *into* the photo, the second half, is the
+> part that works: smooth, and the depth reads) and the **forty acres** map (the strongest of the three); use both kinds of
+> animation in future videos. Drop the **flick** between the two photos (it reads as blinking) and the **Ford's Theatre
+> model** (not worth the time for what it adds). The Ford's code stays here for reference only.
+
 Three 15-second tests of new techniques for the Reconstruction series, built from the channel template. None of them
 is a finished scene; each one answers "does this look good enough to use, and what does it cost?"
 
