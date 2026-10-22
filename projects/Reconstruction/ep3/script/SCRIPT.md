@@ -47,7 +47,7 @@ We'll come back to Clinton. And to the question his wife kept asking: why did th
 
 `ch02_the_klan.txt` · 196 words
 
-Here's the wall so far. Congress sent the army back into the South. Black men voted, and about 2,000 of them held office. The 15th Amendment wrote the vote into the Constitution. But most freedpeople still didn't own land. And the whole thing rested on two things: votes, and the soldiers who protected them.
+Last time: Congress sent the army back into the South. Black men voted, and about 2,000 of them held office. The 15th Amendment wrote the vote into the Constitution. But most freedpeople still didn't own land. And the whole thing rested on two things: votes, and the soldiers who protected them.
 
 Somebody had already figured out how to attack both.
 
@@ -235,7 +235,7 @@ So go back to the three words from Edisto Island. *Landless.* Still. *Homeless.*
 
 `ch10_a_few_acres.txt` · 299 words
 
-So step all the way back and look at the whole wall. Three episodes. And the question from the very start: what does it take to make freedom real?
+So, the question from the very start of this series. What does it take to make freedom real?
 
 Here's what Reconstruction suggests. Three things. The law. The land. And someone willing to protect both.
 

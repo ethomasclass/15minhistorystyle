@@ -263,7 +263,7 @@ And Congress's plan included sending the army back into the South.
 
 `ch10_landless.txt` · 251 words
 
-So let's step back, look at the whole wall, and go back to the question. The war was over. Slavery was over. Who got to decide what freedom would look like?
+So let's go back to the question. The war was over. Slavery was over. Who got to decide what freedom would look like?
 
 At first, the President. Lincoln planned to be generous, to win the South back fast. Johnson was even more generous to the men who had led it. He pardoned them and gave back their land.
 

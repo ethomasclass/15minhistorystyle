@@ -54,8 +54,7 @@ approved). The block-in-the-wall "chunk wall" was tried and set aside.
   - *Dressed to Kill*: BEAUTIFUL · DEADLY · WHO HAS TO PROVE IT
   - *The Exact Spot*: THE LAND · THE WAR · THE QUESTION IT REOPENED
   - *Say It Ain't So*: THE BETS · THE GAME · THE RULES
-- Say "the board" out loud only at recaps and endings ("Step back and look at the whole board."); everything else is
-  shown.
+- **Never name it.** No "board" or "wall" in the narration: recaps and endings simply play over it.
 
 ## What it costs
 

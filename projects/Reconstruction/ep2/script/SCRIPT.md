@@ -40,7 +40,7 @@ But first, a quick catch-up.
 
 `ch02_the_army.txt` · 208 words
 
-Here's where we left the wall. The Civil War ended, and slavery ended with it. President Andrew Johnson pardoned the Confederacy's leaders and gave them back their land. The South answered with the Black Codes. And Congress fought back with the 14th Amendment. When the freed families of Edisto Island lost their land, they described themselves in three words. *Landless. Homeless. Voteless.*
+Last time: the Civil War ended, and slavery ended with it. President Andrew Johnson pardoned the Confederacy's leaders and gave them back their land. The South answered with the Black Codes. And Congress fought back with the 14th Amendment. When the freed families of Edisto Island lost their land, they described themselves in three words. *Landless. Homeless. Voteless.*
 
 By 1867, Congress was in charge. And it was done asking nicely.
 
@@ -222,7 +222,7 @@ It's called {convict leasing}. And it was legal.
 
 `ch10_ground.txt` · 262 words
 
-So let's step back, look at the wall, and go back to the question. Five years after slavery ended, a Black minister from Mississippi was in the U.S. Senate. How did it change so fast?
+So let's go back to the question. Five years after slavery ended, a Black minister from Mississippi was in the U.S. Senate. How did it change so fast?
 
 Because Congress forced it. The army held the South while new state governments were written. Black men got the vote, and they used it, sending about 2,000 of their own to office. And the 15th Amendment wrote the vote into the Constitution.
 

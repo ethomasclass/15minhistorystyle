@@ -90,19 +90,10 @@ This page is the plan for building it. Chapter scripts point at it in their prod
 | 09 | VOTELESS | Louisiana voter dots | top centre: VOTELESS written back on the petition | "Written back in." | 15th —but→ poll tax / literacy test / grandfather clause |
 | 10 | (zoom all the way out) | the whole series wall: LAW full, LAND struck through, PROTECTION torn down; the petition last | — | "look at the whole wall" | — |
 
-## Where the narration says "wall"
+## The narration never names it
 
-Only five places, so it stays a picture, not a gimmick:
-
-1. Ep 1 ch10: "So let's step back, look at the whole wall, and go back to the question."
-2. Ep 2 ch02: "Here's where we left the wall."
-3. Ep 2 ch10: "So let's step back, look at the wall, and go back to the question."
-4. Ep 3 ch02: "Here's the wall so far."
-5. Ep 3 ch10: "So step all the way back and look at the whole wall."
-
-Ep 1 has no recap: its wall starts empty, with the petition.
-
-Everything else is shown, not said: cards land on the lines in the tables above.
+The board is shown, never mentioned: no "wall", no "board". Pieces land on their lines, the yarn draws as the cause is
+said, and the recaps and endings ("Last time…", "So let's go back to the question.") are simply played over the board.
 
 ## Other script changes in this pass
 
