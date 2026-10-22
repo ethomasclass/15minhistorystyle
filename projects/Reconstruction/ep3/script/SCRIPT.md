@@ -281,7 +281,7 @@ Thanks for watching this series. If you want more stories like this one, subscri
 
 ## Production notes
 
-**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series board on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
 
 **Heavy chapters.** ch01 (Caldwell's death), ch04 (Colfax), ch07 (Clinton, Caldwell): plain statements, numbers, the primary source,
 space. No asides. Sparse music; a held beat after "Never say you killed a coward." (ch01), "Nobody was ever punished for Colfax." (ch04)

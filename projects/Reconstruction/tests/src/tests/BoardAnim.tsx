@@ -1,4 +1,4 @@
-// The evidence board in motion (end of Episode 1): pieces drop onto the board on their lines and are pinned, yarn draws
+// The board in motion (end of Episode 1): pieces drop onto the board on their lines and are pinned, yarn draws
 // from cause to effect with its tag, the camera moves along the board, and the ending pulls back to show all of it.
 import React from 'react';
 import {AbsoluteFill, Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
@@ -21,7 +21,7 @@ const PIECES: Piece[] = [
   {id: 'petition', label: 'A FEW ACRES', doc: '“we wish to have A home if It be but A few acres.”', x: 790, y: 110, w: 320, h: 150, r: -1.5, at: -1, coral: true},
   {id: 'forty', label: 'FORTY ACRES', img: 'acres.jpg', fit: '62% 45%', x: 110, y: 360, w: 340, h: 180, r: -2, at: -1},
   {id: 'ten', label: 'TEN PERCENT', img: 'lincoln.jpg', fit: '50% 30%', x: 700, y: 420, w: 180, h: 190, r: 2, at: -1},
-  {id: 'targets', label: 'THREE TARGETS, ONE NIGHT', img: 'johnson.jpg', fit: '50% 25%', x: 960, y: 440, w: 180, h: 190, r: -3, at: -1},
+  {id: 'targets', label: 'ONE NIGHT, THREE MEN', img: 'johnson.jpg', fit: '50% 25%', x: 960, y: 440, w: 180, h: 190, r: -3, at: -1},
   {id: 'back', label: 'THE LAND GOES BACK', img: 'pardons.jpg', fit: '50% 40%', x: 170, y: 680, w: 250, h: 220, r: 2.5, at: 24},
   {id: 'except', label: 'EXCEPT AS A PUNISHMENT FOR CRIME', doc: '“Neither slavery nor involuntary servitude, except as a punishment for crime…”', x: 1430, y: 330, w: 320, h: 160, r: 2, at: 172, coral: true},
   {id: 'equal', label: 'EQUAL PROTECTION', doc: '“nor deny to any person within its jurisdiction the equal protection of the laws.”', x: 1450, y: 640, w: 320, h: 160, r: -2, at: 214},

@@ -1,9 +1,9 @@
-// The case-file collage: a flat, cut-paper evidence board (reference: the user's two "kidnapper" boards). Halftone photos,
-// torn label strips, sticky notes with handwritten questions, rubber stamps, tape, a silhouette with a question mark,
+// The collage board: flat, cut-paper pieces on black (reference: the user's two "kidnapper" boards). Halftone photos,
+// torn label strips, sticky notes with handwritten questions, rubber stamps, tape, a cut-paper silhouette with a question mark,
 // straight thread pin to pin. No soft shadows: flat paper on black.
 //   Collage-1  Episode 1's board, one hot accent for everything (closest to the reference)
 //   Collage-2  the same board in the channel's colour jobs (coral = subject, teal = thread and handwriting, orange = titles)
-//   Collage-3  a close-up "case": the night of April 14, 1865
+//   Collage-3  a close-up: the night of April 14, 1865
 import React from 'react';
 import {AbsoluteFill, Img, random, staticFile} from 'remotion';
 import {Tag} from '../kit/Kit';
@@ -93,17 +93,23 @@ const Threads: React.FC<{lines: [number, number, number, number][]}> = ({lines})
   );
 };
 
-/** The unknown at the centre: a head-and-shoulders outline with a question mark. */
-const Silhouette: React.FC<{label: string; size?: number}> = ({label, size = 260}) => {
+/** The open question at the centre: a cut-paper silhouette traced from a real portrait (tools/silhouette.py), mounted on a
+ *  torn cream card like a parlour silhouette, with a coral question mark. profile = Saint-Mémin engraving (LOC pga 13330),
+ *  front = an unidentified man, 1860 (LOC ppmsca 32242). */
+const SIL = {profile: {w: 509, h: 728}, front: {w: 361, h: 415}} as const;
+const Silhouette: React.FC<{label: string; size?: number; kind?: keyof typeof SIL; seed?: string}> = ({label, size = 260, kind = 'profile', seed = 'sl'}) => {
   const p = usePal();
+  const {w, h} = SIL[kind];
+  const sw = size * 0.78, sh = (sw * h) / w;
+  const src = staticFile(`img/wall/sil/${kind}.png`);
   return (
     <div style={{width: size, textAlign: 'center'}}>
-      <svg width={size} height={size} viewBox="0 0 200 200">
-        <path d="M100 22 C70 22 58 46 60 72 C61 92 72 108 84 116 C58 122 30 138 22 170 L22 186 L178 186 L178 170 C170 138 142 122 116 116 C128 108 139 92 140 72 C142 46 130 22 100 22 Z"
-          fill="none" stroke={p.accent} strokeWidth={6} strokeLinejoin="round" />
-        <text x="100" y="98" textAnchor="middle" fontFamily="Abril Fatface" fontSize="72" fill={p.accent}>?</text>
-      </svg>
-      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: size * 0.13, letterSpacing: 2, color: p.accent, marginTop: -6, whiteSpace: 'nowrap', marginLeft: -100, marginRight: -100}}>{label}</div>
+      <div style={{position: 'relative', width: size, padding: `${size * 0.09}px 0 0`, background: p.paper, clipPath: torn(seed, 'lrtb', 7), boxSizing: 'border-box'}}>
+        <div style={{width: sw, height: sh, margin: '0 auto', background: '#161514',
+          WebkitMaskImage: `url(${src})`, maskImage: `url(${src})`, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}} />
+        <div style={{position: 'absolute', left: 0, right: 0, top: size * (kind === 'profile' ? 0.13 : 0.1), fontFamily: DISPLAY, fontSize: size * 0.42, color: p.accent, lineHeight: 1}}>?</div>
+      </div>
+      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: size * 0.13, letterSpacing: 2, color: p.accent, marginTop: 10, whiteSpace: 'nowrap', marginLeft: -100, marginRight: -100}}>{label}</div>
     </div>
   );
 };
@@ -164,7 +170,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       {/* the forty acres map, taped */}
       <Flat x={70} y={210} r={-4}><Photo src="cr_acres.png" w={330} /></Flat>
       <Flat x={110} y={190} r={-14} z={5}><TapeBit w={120} seed="a" /></Flat>
-      <Flat x={64} y={420} r={-3}><Strip text="evidence #1 · Jan 1865" seed="e1" size={22} /></Flat>
+      <Flat x={64} y={420} r={-3}><Strip text="Field Order 15 · Jan 1865" seed="e1" size={22} /></Flat>
       <Flat x={80} y={480} r={-6}><Sticky text="whose land?" w={170} size={50} /></Flat>
       {/* Lincoln */}
       <Flat x={470} y={170} r={3}><Photo src="cr_lincoln.png" w={205} /></Flat>
@@ -179,7 +185,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       {/* the 13th Amendment */}
       <Flat x={1480} y={430} r={2}><Scrap text="Neither slavery nor involuntary servitude, except as a punishment for crime…" mark="except as a punishment for crime" w={380} seed="13" size={25} /></Flat>
       <Flat x={1650} y={640} r={-8}><Sticky text="loophole?" w={170} size={48} /></Flat>
-      <Flat x={1500} y={385} r={-3}><Strip text="evidence #6 · 13th Amendment" seed="e6" size={20} /></Flat>
+      <Flat x={1500} y={385} r={-3}><Strip text="13th Amendment · 1865" seed="e6" size={20} /></Flat>
       {/* Congress */}
       <Flat x={1240} y={600} r={-2}><Photo src="cr_stevens.png" w={200} /></Flat>
       <Flat x={1170} y={830} r={-7} z={6}><Stamp text="OVERRIDDEN" size={36} /></Flat>
@@ -195,7 +201,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
         </div>
       </Flat>
       <Flat x={600} y={700} r={-20} z={5}><TapeBit w={110} seed="h" /></Flat>
-      <Flat x={1000} y={980} r={0}><Strip text="CASE: RECONSTRUCTION · PART 1" seed="cs" size={22} bg={p.paper} /></Flat>
+      <Flat x={1000} y={980} r={0}><Strip text="RECONSTRUCTION · PART 1" seed="cs" size={22} bg={p.paper} /></Flat>
       {p === BRAND && <div style={{position: 'absolute', left: 1490, top: 940, transform: 'rotate(-3deg)'}}><WornLogo w={360} /></div>}
       <Threads lines={[T('who', 'lincoln'), T('who', 'johnson'), T('who', 'congress'), T('lincoln', 'forty'), T('johnson', 'except'), T('petition', 'who'), T('herald', 'who'), T('forty', 'petition')]} />
       {Object.values(pin).map(([x, y], i) => <Pin key={i} x={x} y={y} />)}
@@ -211,7 +217,7 @@ export const Collage2: React.FC = () => (
   <TestFrame vignette={0.35}><Ctx.Provider value={BRAND}><Board1 caption="Mockup · collage board in the channel's colours (coral subject, teal thread) · end of Episode 1" /></Ctx.Provider></TestFrame>
 );
 
-// ------------------------------------------------------------------- a close-up case ----------------------------------------
+// ------------------------------------------------------------------- a close-up: one night -------------------------------
 export const Collage3: React.FC = () => {
   const p = BRAND;
   const pin = {booth: [960, 300], lincoln: [420, 260], seward: [962, 690], johnson: [1500, 260]} as const;
@@ -224,8 +230,8 @@ export const Collage3: React.FC = () => {
           {/* Booth at the centre */}
           <Flat x={840} y={210} r={-2}><Photo src="cr_booth.png" w={240} /></Flat>
           <Flat x={820} y={540} r={2}><Strip text="J. WILKES BOOTH · actor" seed="jb" size={26} font={SANS} /></Flat>
-          <Flat x={1130} y={600} r={7}><Sticky text="three targets, one night" w={200} size={46} /></Flat>
-          {/* the targets */}
+          <Flat x={1130} y={600} r={7}><Sticky text="one night, three men" w={200} size={46} /></Flat>
+          {/* the three men */}
           <Flat x={300} y={190} r={3}><Photo src="cr_lincoln.png" w={215} /></Flat>
           <Flat x={270} y={460} r={-3}><Strip text="the President · Ford's Theatre" seed="t1" size={22} /></Flat>
           <Flat x={250} y={540} r={-8} z={6}><Stamp text="SHOT · AFTER 10 P.M." size={36} /></Flat>
@@ -236,12 +242,12 @@ export const Collage3: React.FC = () => {
           <Flat x={800} y={910} r={-2}><Strip text="the Secretary of State · his home" seed="t2" size={22} /></Flat>
           <Flat x={1090} y={850} r={-6} z={6}><Stamp text="STABBED · SURVIVED" size={34} /></Flat>
           <Flat x={140} y={760} r={-4}><Sticky text="why the vice president?" w={210} size={44} /></Flat>
-          <Flat x={1620} y={720} r={5}><Sticky text="who else knew?" w={200} size={46} /></Flat>
+          <Flat x={1620} y={720} r={5}><Sticky text="what if all three died?" w={210} size={44} /></Flat>
           <Threads lines={[[960, 300, 420, 260], [960, 300, 1500, 260], [960, 300, 962, 690]]} />
           {Object.values(pin).map(([x, y], i) => <Pin key={i} x={x} y={y} />)}
-          <div style={{position: 'absolute', left: 60, top: 40}}><Strip text="CASE FILE · APRIL 14, 1865" seed="cf" size={34} bg={p.paper} font={SANS} /></div>
+          <div style={{position: 'absolute', left: 60, top: 40}}><Strip text="APRIL 14, 1865" seed="cf" size={34} bg={p.paper} font={SANS} /></div>
           <div style={{position: 'absolute', left: 1560, top: 40, transform: 'rotate(4deg)'}}><WornLogo w={300} /></div>
-          <Tag text="Mockup · a close-up case (Episode 1, chapter 4)" />
+          <Tag text="Mockup · a close-up: one night (Episode 1, chapter 4)" />
         </AbsoluteFill>
       </Ctx.Provider>
     </TestFrame>
@@ -257,7 +263,7 @@ export const Collage4: React.FC = () => {
         <AbsoluteFill style={{background: p.bg}}>
           <Defs />
           <Splats seed="c4" />
-          <Flat x={250} y={170} r={-3}><Strip text="CASE FILE · RECONSTRUCTION · PART 1 OF 3" seed="k1" size={30} bg={p.paper} font={SANS} /></Flat>
+          <Flat x={250} y={170} r={-3}><Strip text="RECONSTRUCTION · PART 1 OF 3" seed="k1" size={30} bg={p.paper} font={SANS} /></Flat>
           {['LANDLESS.', 'HOMELESS.', 'VOTELESS.'].map((w, i) => (
             <Flat key={w} x={250 + i * 70} y={290 + i * 170} r={[-2, 1.5, -1][i]}>
               <div style={{background: i === 2 ? p.accent : p.paper, clipPath: torn(`w${i}`, 'lrtb', 8), padding: '10px 34px 4px', fontFamily: DISPLAY, fontSize: 150, lineHeight: 1, color: '#151515'}}>{w}</div>

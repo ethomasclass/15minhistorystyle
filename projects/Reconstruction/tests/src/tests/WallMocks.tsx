@@ -1,5 +1,5 @@
-// Wall mockups: four looks for the series evidence wall, each showing the wall at the end of Episode 1.
-// A  Evidence board   pinned cards, teal yarn, paper tags
+// Wall mockups: four looks for the series board, each showing the wall at the end of Episode 1.
+// A  Pinboard         pinned cards, teal yarn, paper tags
 // B  Chunk grid       brand slabs snapped into a staggered wall, orthogonal teal connectors, empty chunks waiting
 // C  Timeline rail    three lanes (LAW / LAND / PROTECTION) over a year axis, cards hung at their dates
 // D  Map table        the wall laid flat as a huge table in 3D, the forty-acres map as part of it
@@ -25,7 +25,7 @@ const CARDS: Card[] = [
   {id: 'petition', label: 'A FEW ACRES', doc: '“we wish to have A home if It be but A few acres.”', col: 'TOP', year: 1865.82, coral: true},
   {id: 'forty', label: 'FORTY ACRES', img: 'acres.jpg', col: 'LAND', year: 1865.05, fit: '62% 40%'},
   {id: 'ten', label: 'TEN PERCENT', img: 'lincoln.jpg', col: 'WHO', year: 1863.9, fit: '50% 30%'},
-  {id: 'targets', label: 'THREE TARGETS, ONE NIGHT', img: 'johnson.jpg', col: 'WHO', year: 1865.3, fit: '50% 25%'},
+  {id: 'targets', label: 'ONE NIGHT, THREE MEN', img: 'johnson.jpg', col: 'WHO', year: 1865.3, fit: '50% 25%'},
   {id: 'back', label: 'THE LAND GOES BACK', img: 'pardons.jpg', col: 'LAND', year: 1865.42, fit: '50% 40%'},
   {id: 'except', label: 'EXCEPT AS A PUNISHMENT FOR CRIME', doc: '“Neither slavery nor involuntary servitude, except as a punishment for crime…”', col: 'LAW', year: 1865.95, coral: true},
   {id: 'bureau', label: 'THE BUREAU', img: 'firstvote.jpg', col: 'PROT', year: 1866.2, dim: true, fit: '50% 45%'},
@@ -67,7 +67,7 @@ const Caption: React.FC<{name: string; note: string}> = ({name, note}) => (
   </>
 );
 
-// ---------------------------------------------------------------- A: evidence board --------------------------------------------
+// ---------------------------------------------------------------- A: pinboard ------------------------------------------------
 const POS_A: Record<string, [number, number, number, number, number]> = {
   // x, y, w (image), h, rotation
   petition: [790, 110, 320, 150, -1.5],
@@ -144,7 +144,7 @@ export const WallA: React.FC = () => (
       const c = CARDS.find((k) => k.id === id)!;
       return <Pin key={id} x={x} y={y} color={c.coral ? CORAL : TEAL} />;
     })}
-    <Caption name="A · EVIDENCE BOARD" note="pinned cards, teal yarn, handwritten tags" />
+    <Caption name="A · PINBOARD" note="pinned cards, teal yarn, handwritten tags" />
   </TestFrame>
 );
 

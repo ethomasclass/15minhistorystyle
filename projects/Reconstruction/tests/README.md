@@ -91,3 +91,14 @@ lumpier than a 30-mile band. Fine for a test; for the episode, draw it from the 
 
 Python needs `opencv-python-headless numpy scipy onnxruntime pyshp shapely`. The depth model (99 MB, Apache-2.0) is
 `onnx-community/depth-anything-v2-small` on Hugging Face; it isn't committed.
+
+## Silhouette traced from a real portrait (Oct 2026)
+
+`tools/silhouette.py photo mask out_stem --cut --depth --thresh [--fill-shoulders]` turns a portrait and a person mask
+(rembg `u2net_human_seg`) into a solid head-and-shoulders silhouette with a curved bust line: `out_stem.png` (white on
+transparent, used as a CSS mask) and `out_stem.json` (an SVG path). In `public/img/wall/sil/`:
+
+- `profile` from Saint-Mémin's engraved profile of an unidentified man, about 1798 (LOC pga 13330), the one on the board
+- `front` from an unidentified man's portrait, 1860 (LOC ppmsca 32242), for a front-facing version
+
+Comparison: `review/wall_mockups/F5_silhouette_traced.jpg`.

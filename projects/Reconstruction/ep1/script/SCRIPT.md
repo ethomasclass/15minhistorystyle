@@ -313,7 +313,7 @@ first time it's said, so a viewer who has never taken a history class can follow
 
 ## Production notes
 
-**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings. ch02 gets the powers-of-ten zoom (the South → the strip → Edisto → one 40-acre plot); ch04 is a close-up of the wall (Booth's three targets strung together); ch07–ch09 are one big canvas (no cuts, the camera travels the wall as the fight escalates); ch10 pulls back to the whole Episode 1 wall.
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series board on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings. ch02 gets the powers-of-ten zoom (the South → the strip → Edisto → one 40-acre plot); ch04 is a close-up of the wall (Booth's three targets strung together); ch07–ch09 are one big canvas (no cuts, the camera travels the wall as the fight escalates); ch10 pulls back to the whole Episode 1 wall.
 
 **Motif card: the three words.** The title is the motif: *LANDLESS · HOMELESS · VOTELESS* on a torn-paper card in the same place each
 time it returns (ch01, ch10). In ch10 a second line appears under it: *LAW ✔ · LAND ✘*. Episode 2 crosses out VOTELESS.

@@ -1,10 +1,11 @@
-# The wall: one evidence board for the whole series
+# The wall: one collage board for the whole series
 
-> **Look chosen:** the evidence board (mockup `review/wall_mockups/A_evidence_board.jpg`), with the tilted desk of
-> mockup D for moving to the maps. Channel-wide spec: [`../../techniques/evidence_board.md`](../../techniques/evidence_board.md).
+> **Look:** the cut-paper collage board in the channel's colours (mockups `review/wall_mockups/F2`–`F4`), with the
+> tilted desk of mockup D for moving to the maps. No case-file or crime language anywhere on it. Channel-wide spec:
+> [`../../techniques/collage_board.md`](../../techniques/collage_board.md).
 > Below, read "wall" as "board" and "card" as a pinned piece; the chunk-wall details (slab shapes, mortar) no longer apply.
 
-Every chapter adds one **chunk** to a single evidence wall. Each episode ends by pulling back to show its chunks in
+Every chapter adds one **chunk** to a single board. Each episode ends by pulling back to show its chunks in
 place, and the last minute of the series pulls all the way back to the whole wall. That's the *Chunk History* idea on
 screen: small pieces you can hold, adding up to the big picture.
 
@@ -27,15 +28,15 @@ This page is the plan for building it. Chapter scripts point at it in their prod
   two-to-five-word label in Abril. The chunk for the chapter's subject gets the
   coral tint; everything else stays black and white.
 - **Strings are causes.** A teal string with a small handwritten label ("therefore", "but") joins a cause to its effect,
-  drawn on as the narration says the link. Dashed string = suspected, not proven (the 1877 deal).
+  drawn on as the narration says the link. Dashed string = claimed, not proven (the 1877 deal).
 - **Pins land on the chapter's last line**, with a soft knock (the brand intro's knock, not a stamp).
 
 ## The five new techniques, and where each one lives
 
 | Technique | Where | What it shows |
 |---|---|---|
-| **Evidence wall** | All three episodes; zoom-outs at every episode's end | The chunks adding up |
-| **Evidence wall, close-up investigation** | Ep 1 ch04 (the Booth plot), Ep 3 ch08 (1877) | Portraits strung together: three targets, one night; the dashed string to "the deal" with a "no proof" tag |
+| **The board** | All three episodes; zoom-outs at every episode's end | The chunks adding up |
+| **Board close-up** | Ep 1 ch04 (the Booth plot), Ep 3 ch08 (1877) | Portraits strung together: one night, three men; the dashed string to "the deal" with a "no proof" tag |
 | **Powers-of-ten zoom** | Ep 1 ch02 (the South → the coast strip → Edisto → one 40-acre plot, "about 30 football fields"); reused in Ep 2 ch08 (the same plot, now with a planter's name on it) | Scale made physical |
 | **Testimony as a transcript** | Ep 3 ch01 and ch07 | Margaret Ann Caldwell's Q-and-A on the printed Senate page, lines highlighted as they're read |
 | **Telegrams as texts** | Ep 3 ch07 (Ames → Grant; the attorney general's reply quoting the President) | Real telegram slips, stacking like a message thread |
@@ -52,7 +53,7 @@ This page is the plan for building it. Chapter scripts point at it in their prod
 | 01 | ★ A FEW ACRES | The Edisto petition | top centre | "And to those three words." | — |
 | 02 | FORTY ACRES | Field Order No. 15 | LAND | "whether it would last." | — |
 | 03 | TEN PERCENT | Lincoln portrait + proclamation | (centre, "who decides?") | "neither had won." | — |
-| 04 | THREE TARGETS, ONE NIGHT | Lincoln, Seward, Johnson; a Ford's Theatre playbill | centre | "a very different party." | Booth → three targets (close-up investigation) |
+| 04 | ONE NIGHT, THREE MEN | Lincoln, Seward, Johnson; a Ford's Theatre playbill | centre | "a very different party." | Booth → the three men (close-up) |
 | 05 | THE LAND GOES BACK | Johnson portrait + pardon document | LAND, on top of FORTY ACRES | "What was it going to do?" | Johnson —therefore→ LAND |
 | 06 | ★ EXCEPT AS A PUNISHMENT FOR CRIME | 13th Amendment + Mississippi code | LAW | "*Except as a punishment for crime.*" | 13th —but→ Black Codes |
 | 07 | THE BUREAU | Freedmen's Bureau engraving | PROTECTION area (dimmed until Ep 2) | "so did a new Freedmen's Bureau bill." | Black Codes —therefore→ Civil Rights Act |

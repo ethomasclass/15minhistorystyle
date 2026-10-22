@@ -266,7 +266,7 @@ Thanks for watching. If you want the last part of this story, subscribe, and I'l
 
 ## Production notes
 
-**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series evidence wall on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
+**The wall ([`../../WALL.md`](../../WALL.md)).** Every chapter pins one chunk to the series board on its last line; the tables there give each card, its column (LAW / LAND / PROTECTION), its anchor phrase and its strings.
 
 **Motif card.** *LANDLESS · HOMELESS · VOTELESS* returns in ch02 (recap), ch03 ("one of them was about to be crossed out"), ch05
 (VOTELESS struck through in teal on "Voteless"), ch10 (LANDLESS circled). Same place, same size as Episode 1.
