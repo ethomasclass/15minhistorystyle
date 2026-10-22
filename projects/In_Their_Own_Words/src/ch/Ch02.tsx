@@ -121,7 +121,7 @@ const Ballot: React.FC<{t: TL}> = ({t}) => {
         <Note text="for much of the South: enough" x={90} y={70} size={50} rot={-2} at={t.at('enough') - 3} color="#ffffff" out={b} />
         <Note text="slavery that can't grow → slowly dies" x={90} y={170} size={50} rot={-2} at={t.at('slowly die') - 6} out={b} />
         <Note text="and Lincoln won without them" x={90} y={270} size={50} rot={-2} at={t.at('won without') - 3} color="#ffffff" out={b} />
-        <div style={{position: 'absolute', left: 90, top: 70}}><Count to={10} at={t.at('ten Southern')} dur={14} suffix=" states" size={96} color="#f4efe6" /></div>
+        <div style={{position: 'absolute', left: 124, top: 70}}><Count to={10} at={t.at('ten Southern')} dur={14} suffix=" states" size={96} color="#f4efe6" /></div>
         <Note text="not even on the ballot" x={100} y={190} size={54} rot={-2} at={t.at('ten Southern') + 4} />
       </AbsoluteFill>
     </>
@@ -217,7 +217,7 @@ const Seven: React.FC<{t: TL}> = ({t}) => {
       </Map3D>
       <AbsoluteFill>
         <Note text="by February" x={92} y={60} size={50} rot={-2} at={t.at('By February') + 2} color="#ffffff" />
-        <div style={{position: 'absolute', left: 90, top: 150}}><Count to={7} at={s7} dur={20} suffix=" states gone" size={84} color={CORAL} /></div>
+        <div style={{position: 'absolute', left: 124, top: 150}}><Count to={7} at={s7} dur={20} suffix=" states gone" size={84} color={CORAL} /></div>
         <Note text="the Confederate States of America" x={92} y={260} size={50} rot={-2} at={t.at('Confederate States') - 3} />
         <CropCard src={DAVIS} size={sizeOf(DAVIS)} x={1430} y={170} w={380} h={500} fx={1190} fy={1000} scale={0.3} rot={2} at={dv} mask={MASKS.davis} tintStrength={0.6} traceAt={dv + 4} />
         <Note text="president: Jefferson Davis" x={1230} y={730} size={42} rot={-3} at={dv + 4} color="#ffffff" />

@@ -10,7 +10,7 @@ import {GREYS} from '../kit/charts';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {sizeOf} from '../kit/dk';
 import {type Cam3, CONFEDERACY_1861, Border, Dot, Hand, MAP3D, Map3D, type MapData, PlaceTag, Slab, Stand, StateTiles} from '../kit/map3d';
-import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, PhotoCard, type TL, useScene} from '../kit/shell';
+import {Backdrop, ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, PhotoCard, type TL, useScene} from '../kit/shell';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -80,7 +80,7 @@ const OnPaper: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/union_camp_2nd_vermont_camp_griffin_1861.jpg" size={sizeOf('img/ch08/union_camp_2nd_vermont_camp_griffin_1861.jpg')} a={t.at('So who should') - 1} side="left" dim={0.32} tag="Camp of the 2nd Vermont, Camp Griffin, 1861 · Library of Congress" />
       <Note text="so who should win?" x={130} y={80} size={58} rot={-3} at={t.at('So who should') - 3} color={WHITE} />
       <Highlight text="ON PAPER: THE NORTH" x={120} y={190} size={84} at={t.at('On paper,')} seed={71} rot={-2} />
       <Pair x={1100} y={900} h={520} bw={230} gap={90} label="people" {...PEOPLE(t)} size={76} hatch={{frac: 0.39, at: t.at('a third') - 1}} seed={1} />
@@ -97,7 +97,7 @@ const Industry: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('The North made') - 1;
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/union_camp_2nd_vermont_camp_griffin_1861.jpg" size={sizeOf('img/ch08/union_camp_2nd_vermont_camp_griffin_1861.jpg')} a={t.at('The North made') - 1} side="left" dim={0.28} tag="Camp of the 2nd Vermont, Camp Griffin, 1861 · Library of Congress" />
       <Highlight text="ON PAPER: THE NORTH" x={120} y={80} size={72} at={a - 10} seed={71} rot={-2} />
       <Pair x={170} y={860} h={460} bw={170} gap={50} label="people" {...PEOPLE(t)} size={58} seed={2} />
       <Pair x={790} y={860} h={460} bw={170} gap={50} label="factory output" north={{value: 90, show: '90%', at: t.at('90 percent') - 1}}
@@ -116,7 +116,7 @@ const ReasonOne: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/confederate_camp_photo.jpg" size={sizeOf('img/ch08/confederate_camp_photo.jpg')} a={t.at('So why') - 1} side="none" dim={0.32} tag="Confederate camp, c. 1861 · Library of Congress" />
       <Note text="so why did the South think it could win?" x={130} y={90} size={56} rot={-2} at={t.at('So why') - 3} color={WHITE} />
       <Highlight text="3 REASONS" x={130} y={240} size={120} at={t.at('Three reasons.')} seed={73} rot={-2} />
       <Counter n={1} at={t.at('One:') - 2} />
@@ -138,7 +138,7 @@ const Scoreboard: React.FC<{t: TL}> = ({t}) => {
   const k = interpolate(g, [a + 8, a + 12], [0, 1], clamp);
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/confederate_camp_photo.jpg" size={sizeOf('img/ch08/confederate_camp_photo.jpg')} a={t.at('Think of') - 1} side="none" dim={0.28} tag="Confederate camp, c. 1861 · Library of Congress" />
       <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
         <path d={d} fill="rgba(0,0,0,0.3)" stroke={pal.mark} strokeWidth={6} strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />
         <path d={`M960,${y0 + 30} L962,${y1 - 30}`} stroke={pal.mark} strokeWidth={5} strokeLinecap="round" opacity={k} />
@@ -265,7 +265,7 @@ const Subscribe: React.FC<{t: TL}> = ({t}) => {
   const d = [[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0 + 8, y0 - 4]].map(([px, py], i) => `${i ? 'L' : 'M'}${px + j(`x${i}`)},${py + j(`y${i}`)}`).join(' ');
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch06/scotts_great_snake_alt_1861.jpg" size={sizeOf('img/ch06/scotts_great_snake_alt_1861.jpg')} a={t.at('Quick thing.') - 1} side="none" dim={0.22} />
       <PhotoCard src={SNAKE} x={1380} y={110} w={420} rot={3} at={t.at('Quick thing.') - 1} />
       <Note text="quick thing." x={150} y={110} size={64} rot={-3} at={t.at('Quick thing.') - 3} color={WHITE} />
       <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>

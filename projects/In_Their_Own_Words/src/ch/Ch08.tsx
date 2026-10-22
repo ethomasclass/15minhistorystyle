@@ -10,7 +10,7 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {Desk, DropCard} from '../kit/bs';
 import {sizeOf} from '../kit/dk';
 import {Person} from '../kit/figures';
-import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, Stamp, type TL, useScene, Backdrop} from '../kit/shell';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -240,7 +240,7 @@ const Toll: React.FC<{t: TL}> = ({t}) => {
   const two = t.at('two out');
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/savage_station_field_hospital_gibson_1862.jpg" size={sizeOf('img/ch08/savage_station_field_hospital_gibson_1862.jpg')} a={t.at('750,000') - 1} side="none" dim={0.3} tag="James F. Gibson, Union field hospital at Savage Station, Va., 1862 · Library of Congress" />
       <Stamp text="750,000" x={560} y={140} at={t.at('750,000') - 1} size={200} color={BONE} rot={-1} />
       <Note text="soldiers died" x={640} y={360} size={56} rot={-2} at={t.at('would die.') - 4} color={BONE} />
       <Person x={700} y={860} h={280} color={pal.mark} at={two - 2} />

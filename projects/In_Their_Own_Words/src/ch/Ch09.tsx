@@ -11,7 +11,7 @@ import {DropCard} from '../kit/bs';
 import {sizeOf} from '../kit/dk';
 import {Engraving} from '../kit/engraving';
 import {BORDER_1861, type Cam3, CONFEDERACY_1861, Count, MAP3D, Map3D, type MapData, StateTiles, UNION_FREE_1861} from '../kit/map3d';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene, Backdrop} from '../kit/shell';
 import {Split, StephensPortrait} from './Ch01';
 
 const N = words as Narration;
@@ -66,9 +66,9 @@ const Secession: React.FC<{t: TL}> = ({t}) => {
       </Map3D>
       <AbsoluteFill>
         <AbsoluteFill style={{background: 'linear-gradient(to right, rgba(10,9,7,0.8) 0%, rgba(10,9,7,0.5) 30%, rgba(0,0,0,0) 48%)'}} />
-        <div style={{position: 'absolute', left: 90, top: 70}}><Count to={7} at={a + 4} dur={20} suffix=" states" size={84} color={CORAL} /></div>
+        <div style={{position: 'absolute', left: 124, top: 70}}><Count to={7} at={a + 4} dur={20} suffix=" states" size={84} color={CORAL} /></div>
         <Note text="before Lincoln took office" x={100} y={180} size={46} rot={-3} at={t.at('before') - 2} color="#ffffff" />
-        {g >= more - 2 && <div style={{position: 'absolute', left: 90, top: 290}}><Count from={7} to={11} at={more - 2} dur={16} prefix="then " size={64} color={CORAL} /></div>}
+        {g >= more - 2 && <div style={{position: 'absolute', left: 124, top: 290}}><Count from={7} to={11} at={more - 2} dur={16} prefix="then " size={64} color={CORAL} /></div>}
         <Note text="when he called for troops" x={100} y={380} size={46} rot={-3} at={t.at('called') - 2} color="#ffffff" />
         <Note text="border states (grey): stay" x={100} y={900} size={46} rot={-2} at={t.at('troops')} color="#ffffff" />
       </AbsoluteFill>
@@ -86,7 +86,7 @@ const Strengths: React.FC<{t: TL}> = ({t}) => {
   );
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch07/first_bull_run_sunday_afternoon.jpg" size={sizeOf('img/ch07/first_bull_run_sunday_afternoon.jpg')} a={t.at('And why') - 1} side="none" dim={0.3} tag="The First Battle of Bull Run, Sunday afternoon, July 21, 1861 · Library of Congress" />
       <Note text="why did everyone expect a quick war?" x={110} y={80} size={58} rot={-2} at={t.at('everyone') - 2} color="#ffffff" />
       <Note text="each side counted its own strengths" x={150} y={200} size={46} rot={-2} at={t.at('counted') - 2} />
       <div style={{position: 'absolute', left: 958, top: 330, width: 4, height: 640, background: '#f4efe6', opacity: interpolate(g, [a, a + 4], [0, 0.8], clamp)}} />

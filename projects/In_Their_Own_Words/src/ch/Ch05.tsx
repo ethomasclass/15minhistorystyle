@@ -12,7 +12,7 @@ import {Engraving} from '../kit/engraving';
 import {
   type Cam3, CONFEDERACY_1861, centreOf, Count, MAP3D, Map3D, type MapData, PlaceTag, Pin3, Stand, StateTiles, UNION_FREE_1861,
 } from '../kit/map3d';
-import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, Stamp, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, CropCard, Definition, LEAD, makeTimeline, type Narration, Photo, Stamp, type TL, useScene, Backdrop} from '../kit/shell';
 import {MASKS} from '../masks';
 
 const N = words as Narration;
@@ -149,7 +149,7 @@ const OnlyFood: React.FC<{t: TL}> = ({t}) => {
   const k = interpolate(g, [a, a + 6], [0, 1], clamp);
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch05/fort_sumter_interior_osborn_durbec_apr1861.jpg" size={sizeOf('img/ch05/fort_sumter_interior_osborn_durbec_apr1861.jpg')} a={t.at('So he tells') - 1} side="right" dim={0.34} tag="Osborn & Durbec, interior of Fort Sumter, April 1861 · Library of Congress" />
       <div style={{position: 'absolute', left: 140, top: 100, width: 1640, opacity: k}}>
         <div style={{fontFamily: JF.heavy, fontWeight: 900, fontSize: 50, lineHeight: 1.32, color: '#f4efe6', textShadow: '0 3px 14px #000'}}>
           “{MESSAGE.map((s, i) => {
@@ -179,7 +179,7 @@ const Match: React.FC<{t: TL}> = ({t}) => {
   const head = interpolate(g, [at + 8, at + 12], [0, 1], clamp);
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch05/hw_charleston_harbor_forts_map_dec29_1860.jpg" size={sizeOf('img/ch05/hw_charleston_harbor_forts_map_dec29_1860.jpg')} a={t.at("It's basically") - 4} dim={0.26} tag="Charleston Harbor and its forts, Harper's Weekly, Dec. 29, 1860 · Library of Congress" />
       <Note text="basically handing the Confederacy..." x={140} y={120} size={56} rot={-2} at={t.at("It's basically") - 3} color={WHITE} />
       <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
         <path d="M520,760 L1180,430" stroke={pal.mark} strokeWidth={22} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} fill="none" />
@@ -218,12 +218,12 @@ const Surrender: React.FC<{t: TL}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <CropCard src={ANDERSON} size={sizeOf(ANDERSON)} x={130} y={110} w={520} h={680} fx={1240} fy={1920} scale={0.43} rot={-2} at={a}
+      <CropCard src={ANDERSON} size={sizeOf(ANDERSON)} x={140} y={100} w={500} h={640} fx={1240} fy={1920} scale={0.41} rot={-2} at={a}
         mask={MASKS.anderson} tintStrength={0.5} traceAt={a + 6} />
-      <Note text="Maj. Robert Anderson" x={140} y={860} size={52} rot={-3} at={a + 6} color={WHITE} />
-      <Note text="in command of the fort" x={160} y={950} size={44} rot={-3} at={a + 10} color={WHITE} />
-      <CropCard src={INTERIOR} size={sizeOf(INTERIOR)} x={790} y={150} w={1000} h={520} fx={1500} fy={1350} scale={0.4} rot={1.5} at={a + 5} />
-      <Highlight text="SURRENDER" x={800} y={50} size={70} at={t.at('surrenders.')} seed={61} rot={-1} />
+      <Note text="Maj. Robert Anderson" x={150} y={790} size={52} rot={-3} at={a + 6} color={WHITE} />
+      <Note text="in command of the fort" x={170} y={870} size={44} rot={-3} at={a + 10} color={WHITE} />
+      <CropCard src={INTERIOR} size={sizeOf(INTERIOR)} x={790} y={176} w={1000} h={520} fx={1500} fy={1350} scale={0.4} rot={1.5} at={a + 5} />
+      <Highlight text="SURRENDER" x={800} y={78} size={70} at={t.at('surrenders.')} seed={61} rot={-1} />
       <Note text="no one killed in the bombardment" x={800} y={730} size={56} rot={-2} at={t.at('No one is') - 3} />
       <Note text="but the war has started" x={830} y={850} size={62} rot={-2} at={t.at('But the war') - 3} color={CORAL} />
       <Tag text="Major Robert Anderson, Frank Leslie's, 1861 · Interior of Fort Sumter after its surrender, April 1861 · Library of Congress" />
@@ -236,7 +236,7 @@ const Volunteers: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch08/union_camp_cameron_georgetown_may1861.jpg" size={sizeOf('img/ch08/union_camp_cameron_georgetown_may1861.jpg')} a={t.at('Lincoln calls') - 1} side="left" dim={0.36} tag="Camp Cameron, Georgetown, D.C., Harper's Weekly, May 25, 1861 · Library of Congress" />
       <Note text="Lincoln calls for" x={150} y={90} size={56} rot={-3} at={t.at('Lincoln calls') - 3} color={WHITE} />
       <Stamp text="75,000" x={140} y={190} at={t.at('75,000')} size={210} color={pal.subject} rot={-2} />
       <Note text="volunteers" x={860} y={250} size={72} rot={-3} at={t.at('volunteers') - 3} />
@@ -252,7 +252,7 @@ const Whose: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch05/bombardment_fort_sumter_engraving_apr1861.jpg" size={sizeOf('img/ch05/bombardment_fort_sumter_engraving_apr1861.jpg')} a={t.at('Normally,') - 1} side="none" dim={0.26} tag="Bombardment of Fort Sumter, April 1861 · Library of Congress" />
       <Note text="normally, that's Congress's call" x={140} y={90} size={60} rot={-2} at={t.at('Normally,') - 3} color={WHITE} />
       <Box x={170} y={300} w={640} h={220} at={t.at('Lincoln does') - 2} label="PRESIDENT" seed={3} />
       <Box x={1110} y={300} w={640} h={220} at={t.at('Normally,') + 4} label="CONGRESS" seed={5} />
@@ -288,8 +288,8 @@ const Eleven: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <div style={{position: 'absolute', left: 90, top: 70}}><Count from={7} to={7} at={a} dur={1} suffix=" states" size={84} color={CORAL} /></div>
-        <div style={{position: 'absolute', left: 90, top: 175}}><Count from={7} to={11} at={t.at('That makes') - 2} dur={14} prefix="now " size={84} color={CORAL} /></div>
+        <div style={{position: 'absolute', left: 124, top: 70}}><Count from={7} to={7} at={a} dur={1} suffix=" states" size={84} color={CORAL} /></div>
+        <div style={{position: 'absolute', left: 124, top: 175}}><Count from={7} to={11} at={t.at('That makes') - 2} dur={14} prefix="now " size={84} color={CORAL} /></div>
         <Note text="+4 after the call for troops" x={980} y={90} size={50} rot={-2} at={t.at('tips') - 3} color={WHITE} />
         <Note text="they won't fight other Southern states" x={560} y={900} size={54} rot={-2} at={t.at("They won't") - 3} color={WHITE} />
       </AbsoluteFill>
@@ -334,7 +334,7 @@ const Who: React.FC<{t: TL}> = ({t}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
+      <Backdrop src="img/ch05/bombardment_fort_sumter_currier_ives_1861.jpg" size={sizeOf('img/ch05/bombardment_fort_sumter_currier_ives_1861.jpg')} a={t.at('who decided') - 1} side="left" dim={0.36} tag="Currier & Ives, Bombardment of Fort Sumter, 1861 · Library of Congress" />
       <Highlight text="WHO DECIDED ON WAR?" x={130} y={110} size={96} at={t.at('who decided')} seed={69} rot={-2} />
       <div style={{position: 'absolute', left: 170, top: 350, fontFamily: JF.mono, fontSize: 36, letterSpacing: 3, color: pal.mark, opacity: useGFrame() >= t.at('The Confederacy fired') ? 1 : 0}}>FIRED FIRST</div>
       <Note text="the Confederacy" x={170} y={410} size={80} rot={-2} at={t.at('The Confederacy fired') - 3} color={pal.subject} />
