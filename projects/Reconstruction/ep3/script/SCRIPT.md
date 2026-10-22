@@ -1,4 +1,4 @@
-# Redeemed: Reconstruction, Part 3
+# Redemption: Reconstruction, Part 3
 
 **15 Minute History** · narration script · 2,107 words · about 12:34 finished (draft 1)
 
@@ -155,7 +155,7 @@ For a lot of families, that was their savings, and their trust, gone at once.
 
 ## 6:56 | Mississippi, 1875
 
-`ch07_mississippi.txt` · 289 words
+`ch07_mississippi.txt` · 295 words
 
 Which brings us back to Mississippi, in 1875.
 
@@ -179,7 +179,7 @@ And at the end of December, Charles Caldwell was talked into a Christmas drink.
 
 His wife told the Senate why she believed they killed him: "for obeying Governor Ames; and that was all they had against him."
 
-The white Democrats who took over called themselves {Redeemers}. To redeem means to save. In their story, they had saved the South. From people like Charles Caldwell.
+The white Democrats who took over called themselves {Redeemers}, and what they had done, {Redemption}. To redeem means to save. In their story, they had saved the South. From people like Charles Caldwell.
 
 ---
 
@@ -275,13 +275,13 @@ Thanks for watching this series. If you want more stories like this one, subscri
 | Whiskey Ring | ch05 | "tax officials let whiskey makers skip their taxes, in exchange for a cut" |
 | Freedman's Savings Bank | ch06 | "a bank for freedpeople" |
 | Militia | ch07 | carried from Ep 2 ("the state's own part-time army") |
-| Redeemers | ch07 | "To redeem means to save. In their story, they had saved the South." |
+| Redeemers, Redemption (the title) | ch07 | "To redeem means to save. In their story, they had saved the South." |
 | Electoral votes, the commission | ch08 | "The winner needed 185. Tilden had 184." |
 | Poll tax, literacy test, grandfather clause, Jim Crow | ch09 | one line each |
 
 ## Production notes
 
-**Heavy chapters.** ch01 (Caldwell's death), ch04 (Colfax), ch07 (Clinton, Caldwell): plain statements, numbers, the primary source,
+**Heavy chapters.** ch01 (Caldwell's death), ch04 (Colfax), ch07 (Clinton, Caldwell). **Your call: keep every detail of the death; it should be grim.** Nothing softened for age. Plain statements, numbers, the primary source,
 space. No asides. Sparse music; a held beat after "Never say you killed a coward." (ch01), "Nobody was ever punished for Colfax." (ch04)
 and "From people like Charles Caldwell." (ch07). Voiced slower; A/B the pace.
 
@@ -306,7 +306,7 @@ line: "no Whiskey Ring involved."
 End: the last line of ch10, written as the end of the series.
 
 **Vocab cards.** Ku Klux Klan · Enforcement Acts · habeas corpus · Colfax Massacre · Panic of 1873 · Whiskey Ring · Civil Rights Act of
-1875 · Freedman's Savings Bank · Mississippi Plan · Redeemers · Compromise of 1877 · poll tax · literacy test · grandfather clause ·
+1875 · Freedman's Savings Bank · Mississippi Plan · Redeemers · Redemption · Compromise of 1877 · poll tax · literacy test · grandfather clause ·
 Jim Crow
 
 ## Pronunciation (for ElevenLabs)

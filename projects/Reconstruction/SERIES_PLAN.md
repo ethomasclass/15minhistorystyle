@@ -27,7 +27,7 @@ It fills, gets crossed out, and gets stamped across the series. *(Your pick; see
 
 | | Episode 1 | Episode 2 | Episode 3 |
 |---|---|---|---|
-| **Title** | *Landless, Homeless, Voteless* | *Bottom Rail on Top* (working) | *Redeemed* (working) |
+| **Title** | *Landless, Homeless, Voteless* | *Bottom Rail on Top* (working) | *Redemption* |
 | **Years** | 1865–1866 | 1867–1873 | 1866–1877 |
 | **Covers** | The **law** | The **land** (and the vote) | **Protection** |
 | **Ground-level character** | The Edisto Island freedpeople | Charles Caldwell (Hiram Revels as the hook) | Charles Caldwell |
