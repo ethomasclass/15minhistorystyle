@@ -246,7 +246,7 @@ const Snake: React.FC<{t: TL}> = ({t}) => {
           <Note text="newspapers called it" x={1180} y={500} size={54} rot={-3} at={a + 2} color={WHITE} />
           <Highlight text="ANACONDA PLAN" x={100} y={740} size={100} at={t.at('Anaconda Plan,')} seed={81} rot={-2} />
           <Definition term="An·a·con·da Plan" def="named after the snake that crushes its prey" at={t.at('Anaconda Plan,') + 9} x={110} y={900} w={1400} />
-          <Note text="people wanted something faster" x={1000} y={630} size={50} rot={-3} at={t.at('People wanted') - 3} color={WHITE} />
+          <Note text="people wanted something faster" x={953} y={630} size={50} rot={-3} at={t.at('People wanted') - 3} color={WHITE} />
           <Tag text="J. B. Elliott, Scott's Great Snake, 1861 · Library of Congress" x={44} y={40} />
         </>
       )}
@@ -277,7 +277,7 @@ const Subscribe: React.FC<{t: TL}> = ({t}) => {
       <Note text="it really helps the channel" x={660} y={620} size={60} rot={-3} at={t.at('really helps') - 3} color={WHITE} />
       <Note text="(unlike the Anaconda Plan)" x={300} y={760} size={64} rot={-3} at={t.at('unlike the') - 3} color={pal.subject} />
       <Note text="it works right away" x={380} y={880} size={60} rot={-3} at={t.at('it works') - 3} />
-      <Note text="subscribe ↓" x={1320} y={930} size={58} rot={-2} at={t.at('hit subscribe.') - 3} />
+      <Note text="subscribe ↓" x={1320} y={900} size={58} rot={-2} at={t.at('hit subscribe.') - 3} />
       <Tag text="J. B. Elliott, Scott's Great Snake, 1861 · Library of Congress" />
     </AbsoluteFill>
   );

@@ -73,7 +73,7 @@ const Name: React.FC<{t: TL}> = ({t}) => {
         mask={MASKS.stephens} tintStrength={0.5} traceAt={a + 6} />
       <Highlight text="ALEXANDER STEPHENS" x={800} y={200} size={78} at={t.at('Alexander')} seed={11} rot={-2} />
       <Note text="the Confederacy =" x={830} y={420} size={54} rot={-3} at={t.at('The Confederacy was') - 2} color="#ffffff" />
-      <Note text="the new country Southern states formed" x={860} y={530} size={46} rot={-3} at={t.at('Southern') - 2} />
+      <Note text="the new country Southern states formed" x={779} y={530} size={46} rot={-3} at={t.at('Southern') - 2} />
       <Note text="after they left the United States" x={880} y={640} size={46} rot={-3} at={t.at('left') - 2} />
       <Tag text={YOUNG_TAG} />
     </AbsoluteFill>
@@ -157,7 +157,7 @@ const Book: React.FC<{t: TL}> = ({t}) => {
       <CropCard src={OLD} size={sizeOf(OLD)} x={140} y={150} w={400} h={520} fx={1090} fy={1300} scale={0.36} rot={-2} at={a} />
       <DropCard src={BOOK} x={640} y={110} w={400} rot={2} at={t.at('Stephens wrote') - 2} filter="grayscale(1) sepia(0.3) contrast(1.12)" />
       <Note text="1868" x={1160} y={110} size={90} rot={-4} at={t.at('Seven years') - 2} />
-      <Note text="the war lost, he writes its history" x={1110} y={280} size={42} rot={-3} at={t.at('history') - 2} color="#ffffff" />
+      <Note text="the war lost, he writes its history" x={1012} y={280} size={42} rot={-3} at={t.at('history') - 2} color="#ffffff" />
       <Note text="slavery? just the spark" x={1120} y={460} size={52} rot={-3} at={t.at('spark') - 3} />
       <Note text="the real cause:" x={1120} y={620} size={46} rot={-3} at={t.at('The real') - 2} color="#ffffff" />
       <Note text="states' rights" x={1160} y={710} size={84} rot={-4} at={t.at('rights') - 2} color={ORANGE} />
@@ -197,7 +197,7 @@ export const Split: React.FC<{a: number; label1: number; label2: number; loopAt?
 
 const SameMan: React.FC<{t: TL}> = ({t}) => (
   <Split a={t.at('Same man') - 1} label1={t.at('Two') - 2} label2={t.at('stories') - 2}>
-    <Note text="funny how that works" x={1060} y={920} size={50} rot={-3} at={t.at('Funny') - 2} color={CORAL} />
+    <Note text="funny how that works" x={1060} y={905} size={50} rot={-3} at={t.at('Funny') - 2} color={CORAL} />
   </Split>
 );
 

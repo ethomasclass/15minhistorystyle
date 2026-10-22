@@ -45,9 +45,9 @@ const Vote: React.FC<{t: TL}> = ({t}) => {
     <Desk a={a} push={0.02}>
       <Doc src={VOTE} x={740} y={560 - 3392 * sc} w={w} rot={1} at={a} push={[a, t.at('White men')]} fx={760} fy={3392} zoom={1.1}
         marks={[{at: t.at('208') - 2, ellipse: [770, 3392, 330, 66], seed: 4, width: 6}]} />
-      <Stamp text="208 to 89" x={90} y={330} at={t.at('89') - 1} size={110} color={BONE} rot={-3} />
+      <Stamp text="208 to 89" x={118} y={330} at={t.at('89') - 1} size={110} color={BONE} rot={-3} />
       <Note text="for secession" x={110} y={500} size={52} rot={-3} at={t.at('for secession') - 2} color={BONE} />
-      <Note text="who chose the delegates?" x={80} y={700} size={44} rot={-3} at={t.at('who chose') - 3} />
+      <Note text="who chose the delegates?" x={118} y={700} size={44} rot={-3} at={t.at('who chose') - 3} />
       <Tag text="Journal of the Convention of the People of Georgia, Jan. 19, 1861 · Internet Archive" />
     </Desk>
   );
@@ -78,11 +78,11 @@ const WhichGeorgians: React.FC<{t: TL}> = ({t}) => {
       <Note text="white men" x={110} y={110} size={56} rot={-3} at={t.at('White men') - 2} />
       <Note text="no women" x={110} y={210} size={56} rot={-3} at={t.at('No women') - 2} color={BONE} />
       <Note text="no one enslaved" x={110} y={310} size={56} rot={-3} at={t.at('no one who') - 2} color={BONE} />
-      <Note text="enslaved: no say" x={1240} y={950} size={44} rot={-2} at={en + 4} color={BONE} />
+      <Note text="enslaved: no say" x={1240} y={925} size={44} rot={-2} at={en + 4} color={BONE} />
       <Stamp text="44%" x={110} y={470} at={t.at('44')} size={220} color={BONE} rot={-3} />
       <Note text="of the people in the state" x={120} y={700} size={46} rot={-3} at={t.at('percent') + 2} color={BONE} />
       <Note text="almost half" x={120} y={790} size={56} rot={-3} at={t.at('Almost half') - 2} />
-      <Note text="which Georgians?" x={110} y={900} size={70} rot={-3} at={t.at('which Georgians') - 2} color="#ffffff" />
+      <Note text="which Georgians?" x={110} y={865} size={70} rot={-3} at={t.at('which Georgians') - 2} color="#ffffff" />
       <Tag text="Map showing the distribution of the slave population, U.S. Coast Survey, 1861 · Library of Congress" x={44} y={40} />
     </AbsoluteFill>
   );

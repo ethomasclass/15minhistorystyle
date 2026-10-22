@@ -31,7 +31,7 @@ const UCV = 'img/ch03/ucv_reunion_veterans_1900.jpg';
 /** "Several states wrote out their reasons": the three declarations land on the desk. */
 const Letters: React.FC<{t: TL}> = ({t}) => (
   <Desk a={0}>
-    <Note text="so why did they go?" x={110} y={70} size={54} rot={-2} at={t.at('why did') - 2} color={BONE} out={t.at('Several states') - 1} />
+    <Note text="so why did they go?" x={110} y={80} size={54} rot={-2} at={t.at('why did') - 2} color={BONE} out={t.at('Several states') - 1} />
     <DropCard src={GA} x={200} y={60} w={340} rot={-3} at={t.at('Several states') - 1} />
     <DropCard src={MS_COVER} x={790} y={80} w={340} rot={2} at={t.at('wrote out') - 1} />
     <DropCard src={SC_COVER} x={1380} y={100} w={340} rot={-2} at={t.at('their reasons') - 1} />
@@ -61,11 +61,11 @@ const Georgia: React.FC<{t: TL}> = ({t}) => (
   <DeclarationPage src={GA} a={t.at("Georgia's opens") - 1} b={t.at("Mississippi's")} fy={3480}
     marks={[{at: t.at('numerous') - 2, to: t.end('African slavery'), swipe: [[650, 3404, 1897, 3449], [210, 3487, 1897, 3539], [210, 3573, 1350, 3626]]}]}
     tag="Georgia declaration of causes, in the convention's Journal, 1861 · Internet Archive">
-    <Note text="Georgia" x={80} y={90} size={64} rot={-3} at={t.at("Georgia's opens") + 2} color={BONE} />
-    <Note text="January 1861" x={90} y={200} size={46} rot={-3} at={t.at('ten years') - 3} color={BONE} />
-    <Note text="translation:" x={80} y={560} size={50} rot={-3} at={t.at('Translation') - 2} color={BONE} />
-    <Note text="the complaint" x={80} y={650} size={50} rot={-3} at={t.at('the complaint is') - 2} />
-    <Note text="is slavery" x={90} y={740} size={50} rot={-3} at={t.at('is slavery') - 2} />
+    <Note text="Georgia" x={128} y={90} size={64} rot={-3} at={t.at("Georgia's opens") + 2} color={BONE} />
+    <Note text="January 1861" x={128} y={200} size={46} rot={-3} at={t.at('ten years') - 3} color={BONE} />
+    <Note text="translation:" x={128} y={560} size={50} rot={-3} at={t.at('Translation') - 2} color={BONE} />
+    <Note text="the complaint" x={126} y={650} size={50} rot={-3} at={t.at('the complaint is') - 2} />
+    <Note text="is slavery" x={126} y={740} size={50} rot={-3} at={t.at('is slavery') - 2} />
   </DeclarationPage>
 );
 
@@ -74,11 +74,11 @@ const Mississippi: React.FC<{t: TL}> = ({t}) => (
   <DeclarationPage src={MS} a={t.at("Mississippi's") - 1} b={t.at("You'll often")} fy={2470}
     marks={[{at: t.at('Our position') - 2, to: t.end('institution of slavery'), swipe: [[297, 2405, 2000, 2449], [230, 2498, 520, 2541]]}]}
     tag="A Declaration of the Immediate Causes, Mississippi convention, 1861 · Internet Archive">
-    <Note text="Mississippi" x={80} y={90} size={64} rot={-3} at={t.at("Mississippi's") + 2} color={BONE} />
-    <Note text="January 1861" x={90} y={200} size={46} rot={-3} at={t.at('even more') - 3} color={BONE} />
-    <Note text="translation:" x={80} y={560} size={50} rot={-3} at={t.at('Translation', 2) - 2} color={BONE} />
-    <Note text="our whole way of life" x={70} y={650} size={42} rot={-3} at={t.at('our whole') - 2} />
-    <Note text="is built on it" x={80} y={740} size={50} rot={-3} at={t.at('built on') - 2} />
+    <Note text="Mississippi" x={126} y={90} size={64} rot={-3} at={t.at("Mississippi's") + 2} color={BONE} />
+    <Note text="January 1861" x={128} y={200} size={46} rot={-3} at={t.at('even more') - 3} color={BONE} />
+    <Note text="translation:" x={128} y={560} size={50} rot={-3} at={t.at('Translation', 2) - 2} color={BONE} />
+    <Note text="our whole way of life" x={126} y={650} size={38} rot={-3} at={t.at('our whole') - 2} />
+    <Note text="is built on it" x={126} y={740} size={50} rot={-3} at={t.at('built on') - 2} />
   </DeclarationPage>
 );
 
@@ -102,14 +102,14 @@ const Carolina: React.FC<{t: TL}> = ({t}) => {
     <DeclarationPage src={SC} a={t.at('But South') - 1} b={t.at('Then Stephens')} fy={640} w={1150}
       marks={[{at: t.at('passing') - 2, to: t.end('escaped slavery'), swipe: [[1360, 569, 1682, 612], [190, 648, 1400, 689]]}]}
       tag="Declaration of the Immediate Causes, South Carolina convention, Dec. 1860, p. 8 · Internet Archive">
-      <Note text="South Carolina" x={70} y={90} size={54} rot={-3} at={t.at('But South') + 2} color={BONE} />
-      <Note text="December 1860" x={80} y={200} size={46} rot={-3} at={t.at('complains') - 3} color={BONE} />
-      <Note text="Northern laws" x={80} y={400} size={50} rot={-3} at={t.at('passing') - 2} />
-      <Note text="protecting people" x={80} y={480} size={42} rot={-3} at={t.at('to avoid') - 2} />
-      <Note text="who escaped slavery" x={80} y={555} size={42} rot={-3} at={t.at('escaped') - 2} />
+      <Note text="South Carolina" x={128} y={90} size={52} rot={-3} at={t.at('But South') + 2} color={BONE} />
+      <Note text="December 1860" x={126} y={200} size={46} rot={-3} at={t.at('complains') - 3} color={BONE} />
+      <Note text="Northern laws" x={126} y={400} size={50} rot={-3} at={t.at('passing') - 2} />
+      <Note text="protecting people" x={125} y={480} size={42} rot={-3} at={t.at('to avoid') - 2} />
+      <Note text="who escaped slavery" x={125} y={555} size={42} rot={-3} at={t.at('escaped') - 2} />
       <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(10,9,7,0.94) 0%, rgba(10,9,7,0.86) 26%, rgba(0,0,0,0) 44%)',
         opacity: interpolate(g, [o - 4, o + 6], [0, 1], clamp)}} />
-      <Line text="South Carolina objected to Northern states using their own states' rights." x={110} y={770} at={o} size={56} w={1680} />
+      <Line text="South Carolina objected to Northern states using their own states' rights." x={122} y={770} at={o} size={56} w={1680} />
     </DeclarationPage>
   );
 };
@@ -159,13 +159,13 @@ const Books: React.FC<{t: TL}> = ({t}) => {
   const a = t.at('Davis and') - 1;
   return (
     <Desk a={a}>
-      <Note text="after the war, the story changed" x={110} y={60} size={52} rot={-2} at={a + 2} color={BONE} />
+      <Note text="after the war, the story changed" x={110} y={87} size={52} rot={-2} at={a + 2} color={BONE} />
       <DropCard src={DAVIS_BOOK} x={240} y={190} w={400} rot={-3} at={a} />
       <DropCard src={STEPHENS_BOOK} x={760} y={200} w={400} rot={2} at={t.at('Stephens both') - 1} />
       <Note text="Davis, 1881" x={290} y={880} size={46} rot={-3} at={a + 6} />
       <Note text="Stephens, 1868" x={800} y={890} size={46} rot={-3} at={t.at('Stephens both') + 4} />
       <Note text="the South fought" x={1270} y={400} size={56} rot={-3} at={t.at('saying') - 3} color={BONE} />
-      <Note text="for states' rights" x={1280} y={500} size={56} rot={-3} at={t.at('fought for') - 2} color={BONE} />
+      <Note text="for states' rights" x={1254} y={500} size={56} rot={-3} at={t.at('fought for') - 2} color={BONE} />
       <Tag text="Davis, The Rise and Fall of the Confederate Government, 1881 · Stephens, A Constitutional View of the Late War, 1868 · Internet Archive" x={44} y={1030} />
     </Desk>
   );
@@ -181,7 +181,7 @@ const LostCause: React.FC<{t: TL}> = ({t}) => {
       <DropCard src={UCV} x={1000} y={90} w={720} rot={2} at={t.at('for decades') - 1} />
       <Note text="veterans' reunion, 1900" x={1030} y={700} size={44} rot={-3} at={t.at('for decades') + 6} color={BONE} />
       <Highlight text="THE LOST CAUSE" x={130} y={740} size={96} at={t.at('Lost Cause')} seed={305} rot={-2} />
-      <Definition term="Lost Cause" def="the idea that the Confederacy fought a noble fight, and slavery had little to do with it" at={t.at('Lost Cause') + 9} x={150} y={880} w={1640} />
+      <Definition term="Lost Cause" def="the idea that the Confederacy fought a noble fight, and slavery had little to do with it" at={t.at('Lost Cause') + 9} x={150} y={860} w={1620} />
       <Tag text="Unveiling of Confederate monument, Arlington, June 4, 1914 · United Confederate Veterans reunion, Louisville, 1900 · Library of Congress" x={44} y={40} />
     </Desk>
   );
@@ -225,7 +225,7 @@ const Rule: React.FC<{t: TL}> = ({t}) => {
       {g >= ul && <div style={{position: 'absolute', left: 210, top: 520, height: 8, borderRadius: 4, background: pal.mark, width: 540 * u}} />}
       <Note text="slavery" x={220} y={560} size={58} rot={-2} at={ul + 6} />
       <Note text="states' rights" x={1080} y={560} size={58} rot={-2} at={t.at('stories told') - 2} color="rgba(237,231,220,0.75)" />
-      <Line text="Evidence from the moment usually beats stories told afterward." x={150} y={740} w={1700} size={48} at={t.at('evidence from')} />
+      <Line text="Evidence from the moment usually beats stories told afterward." x={116} y={740} w={1700} size={48} at={t.at('evidence from')} />
       <Note text="in 1861, the people leaving told us why" x={160} y={850} size={54} rot={-2} at={t.at('In 1861') - 2} color={BONE} />
     </AbsoluteFill>
   );

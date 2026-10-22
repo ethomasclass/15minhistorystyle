@@ -41,7 +41,7 @@ const Answer: React.FC<{t: TL}> = ({t}) => {
       ))}
       <Note text="they told us:" x={1080} y={640} size={46} rot={-3} at={t.at('told us') - 2} color="#ffffff" />
       {g >= t.at('slavery') && <Highlight text="SLAVERY" x={1120} y={730} size={100} at={t.at('slavery')} seed={91} rot={-2} />}
-      <Note text="Lincoln: it would not spread west" x={1040} y={910} size={44} rot={-2} at={t.at("Lincoln's") - 2} />
+      <Note text="Lincoln: it would not spread west" x={1007} y={910} size={44} rot={-2} at={t.at("Lincoln's") - 2} />
     </StephensPortrait>
   );
 };
@@ -113,7 +113,7 @@ const BullRun: React.FC<{t: TL}> = ({t}) => (
 /** Stephens's two stories again; the 1861 side gets the loop. */
 const TwoStories: React.FC<{t: TL}> = ({t}) => (
   <Split a={t.at('Stephens told') - 1} label1={t.at('Stephens told') + 4} label2={t.at('different') - 2} loopAt={t.at('exactly') - 2}>
-    <Note text="what his country was for" x={200} y={935} size={46} rot={-3} at={t.at('what his') - 2} color={CORAL} />
+    <Note text="what his country was for" x={200} y={912} size={46} rot={-3} at={t.at('what his') - 2} color={CORAL} />
   </Split>
 );
 

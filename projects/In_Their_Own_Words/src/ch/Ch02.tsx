@@ -90,8 +90,8 @@ const Promise: React.FC<{t: TL}> = ({t}) => {
       <DropCard src={CARTOON} x={100} y={110} w={800} rot={-2} at={a} />
       <Highlight text="THE REPUBLICANS" x={1010} y={110} size={74} at={t.at('the Republicans')} seed={203} rot={-2} />
       <Note text="one big promise:" x={1030} y={250} size={50} rot={-3} at={t.at('one big promise') - 3} color="#ffffff" />
-      <Note text="keep slavery out of the west" x={1030} y={350} size={52} rot={-3} at={t.at('keep slavery') - 3} />
-      <Note text="territories = land out west, not yet states" x={110} y={800} size={50} rot={-2} at={t.at('the land out') - 3} color="#ffffff" />
+      <Note text="keep slavery out of the west" x={958} y={350} size={52} rot={-3} at={t.at('keep slavery') - 3} />
+      <Note text="territories = land out west, not yet states" x={141} y={800} size={50} rot={-2} at={t.at('the land out') - 3} color="#ffffff" />
       <Note text="end it" x={1060} y={500} size={56} rot={-3} at={t.at('Not end') - 3} color="#ffffff" />
       <Strike x1={1050} x2={1250} y={555} at={t.at('where it already') - 2} />
       <Note text="stop it spreading" x={1060} y={620} size={56} rot={-3} at={t.at('Just stop') - 3} />
@@ -118,9 +118,9 @@ const Ballot: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="for much of the South: enough" x={90} y={70} size={50} rot={-2} at={t.at('enough') - 3} color="#ffffff" out={b} />
-        <Note text="slavery that can't grow → slowly dies" x={90} y={170} size={50} rot={-2} at={t.at('slowly die') - 6} out={b} />
-        <Note text="and Lincoln won without them" x={90} y={270} size={50} rot={-2} at={t.at('won without') - 3} color="#ffffff" out={b} />
+        <Note text="for much of the South: enough" x={105} y={70} size={50} rot={-2} at={t.at('enough') - 3} color="#ffffff" out={b} />
+        <Note text="slavery that can't grow → slowly dies" x={105} y={170} size={50} rot={-2} at={t.at('slowly die') - 6} out={b} />
+        <Note text="and Lincoln won without them" x={105} y={270} size={50} rot={-2} at={t.at('won without') - 3} color="#ffffff" out={b} />
         <div style={{position: 'absolute', left: 124, top: 70}}><Count to={10} at={t.at('ten Southern')} dur={14} suffix=" states" size={96} color="#f4efe6" /></div>
         <Note text="not even on the ballot" x={100} y={190} size={54} rot={-2} at={t.at('ten Southern') + 4} />
       </AbsoluteFill>
@@ -190,7 +190,7 @@ const Secession: React.FC<{t: TL}> = ({t}) => {
       <Highlight text="DECEMBER 20, 1860" x={860} y={210} size={80} at={t.at('December 20th')} seed={207} rot={-2} />
       <Note text="South Carolina votes to leave" x={880} y={360} size={52} rot={-3} at={t.at('votes to leave') - 3} />
       <Highlight text="SECESSION" x={860} y={560} size={110} at={t.at('secession')} seed={209} rot={-2} />
-      <Definition term="se·ces·sion" def="a state declaring it is no longer part of the United States" at={t.at('secession') + 9} x={870} y={730} w={960} />
+      <Definition term="se·ces·sion" def="a state declaring it is no longer part of the United States" at={t.at('secession') + 9} x={815} y={730} w={960} />
       <Tag text="An Ordinance to Dissolve the Union, South Carolina convention, printed Dec. 1860 · Internet Archive" />
     </Desk>
   );
@@ -216,9 +216,9 @@ const Seven: React.FC<{t: TL}> = ({t}) => {
         )}
       </Map3D>
       <AbsoluteFill>
-        <Note text="by February" x={92} y={60} size={50} rot={-2} at={t.at('By February') + 2} color="#ffffff" />
+        <Note text="by February" x={106} y={60} size={50} rot={-2} at={t.at('By February') + 2} color="#ffffff" />
         <div style={{position: 'absolute', left: 124, top: 150}}><Count to={7} at={s7} dur={20} suffix=" states gone" size={84} color={CORAL} /></div>
-        <Note text="the Confederate States of America" x={92} y={260} size={50} rot={-2} at={t.at('Confederate States') - 3} />
+        <Note text="the Confederate States of America" x={105} y={260} size={50} rot={-2} at={t.at('Confederate States') - 3} />
         <CropCard src={DAVIS} size={sizeOf(DAVIS)} x={1430} y={170} w={380} h={500} fx={1190} fy={1000} scale={0.3} rot={2} at={dv} mask={MASKS.davis} tintStrength={0.6} traceAt={dv + 4} />
         <Note text="president: Jefferson Davis" x={1230} y={730} size={42} rot={-3} at={dv + 4} color="#ffffff" />
         {g >= dv && <Tag text="Mathew Brady, Jefferson Davis, photograph, 1859 · Library of Congress" />}

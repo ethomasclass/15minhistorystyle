@@ -91,7 +91,7 @@ const Spectators: React.FC<{t: TL}> = ({t}) => {
       {(p) => (
         <>
           <Note text="and they have company" x={110} y={70} size={52} rot={-2} at={t.at('company.') - 3} color="#ffffff" />
-          <Note text="congressmen, reporters, the curious" x={1040} y={70} size={44} rot={-2} at={t.at('Congressmen,') - 3} />
+          <Note text="congressmen, reporters, the curious" x={953} y={70} size={44} rot={-2} at={t.at('Congressmen,') - 3} />
           <Loop cx={p.left + 512 * p.scale} cy={p.top + 662 * p.scale} rx={80 * p.scale} ry={62 * p.scale} at={t.at('picnic') - 2} seed={73} tilt={-6} width={6} />
           <Note text="picnic baskets" x={p.left + 620 * p.scale} y={p.top + 640 * p.scale} size={50} rot={-4} at={t.at('picnic') - 3} />
         </>
@@ -114,7 +114,7 @@ const DayOut: React.FC<{t: TL}> = ({t}) => {
             <Note text="war, as a day out" x={1000} y={80} size={60} rot={-3} at={t.at('War,') - 3} color="#ffffff" />
             <Note text="basically a tailgate" x={1120} y={780} size={66} rot={-4} at={t.at('Basically') - 3} color={CORAL} />
             <Arrow x1={1500} y1={760} x2={sx(1060)} y2={sy(325)} bow={-40} at={t.at('cannons.') - 4} />
-            <Note text="the game" x={sx(1060) + 50} y={sy(325) - 140} size={46} rot={-4} at={t.at('the game') - 3} />
+            <Note text="the game" x={sx(1060)} y={sy(325) - 140} size={46} rot={-4} at={t.at('the game') - 3} />
           </>
         );
       }}
@@ -174,7 +174,7 @@ const Stampede: React.FC<{t: TL}> = ({t}) => (
       <>
         <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 32%)'}} />
         <Note text="both sides learn the same thing" x={110} y={80} size={50} rot={-2} at={t.at('Both sides') - 3} color="#ffffff" />
-        <Note text="this is not going to be quick." x={110} y={860} size={72} rot={-3} at={t.at('This is not') - 3} dur={16} />
+        <Note text="this is not going to be quick." x={110} y={849} size={72} rot={-3} at={t.at('This is not') - 3} dur={16} />
         <Tag text="The stampede from Bull Run, Illustrated London News, Aug 17, 1861 · Internet Archive" />
       </>
     )}

@@ -162,7 +162,7 @@ const Rifled: React.FC<{t: TL}> = ({t}) => {
       {g >= mb && g < hit && <Definition term="Min·ié ball" def="a soft lead bullet whose hollow base spreads into the grooves" at={mb + 9} x={120} y={220} w={1300} />}
       <Barrel at={t.at('spiral grooves') - 2} rifled y={500} />
       <Spin at={t.at('spin') - 2} to={t.at('tight spiral.')} y={500} />
-      <Note text="it spins, like a football's tight spiral" x={960} y={590} size={44} rot={-2} at={t.at('like a football') - 3} color="#ffffff" />
+      <Note text="it spins, like a football's tight spiral" x={939} y={590} size={44} rot={-2} at={t.at('like a football') - 3} color="#ffffff" />
       {bar > 0 && (
         <>
           <div style={{position: 'absolute', left: 160, top: 770, fontFamily: JF.sans, fontWeight: 600, fontSize: 32, color: '#ffffff'}}>smoothbore</div>
@@ -172,7 +172,7 @@ const Rifled: React.FC<{t: TL}> = ({t}) => {
           <div style={{position: 'absolute', left: 160, top: 930, fontFamily: JF.mono, fontSize: 20, letterSpacing: 2, color: BONE, opacity: 0.8}}>HOW FAR IT HITS · NOT TO SCALE</div>
         </>
       )}
-      <Note text="several times farther" x={1150} y={920} size={50} rot={-3} at={t.at('several times') - 3} color={BONE} />
+      <Note text="several times farther" x={1150} y={906} size={50} rot={-3} at={t.at('several times') - 3} color={BONE} />
       <Tag text="Diagram · a smoothbore barrel and a rifled barrel, not to scale" x={44} y={40} />
     </AbsoluteFill>
   );
@@ -215,7 +215,7 @@ const Tools: React.FC<{t: TL}> = ({t}) => (
     <DarkPaper />
     <CropCard src={COOK} size={sizeOf(COOK)} x={150} y={130} w={860} h={760} fx={860} fy={720} scale={0.68} rot={-2} at={t.at('so they used') - 2} />
     <Note text="the same unwashed tools" x={1110} y={300} size={52} rot={-2} at={t.at('the same unwashed') - 3} color={BONE} />
-    <Note text="one patient after another" x={1110} y={410} size={52} rot={-2} at={t.at('one patient') - 3} color={BONE} />
+    <Note text="one patient after another" x={1076} y={410} size={52} rot={-2} at={t.at('one patient') - 3} color={BONE} />
     <Tag text="Camp cooking, Army of the Potomac, near City Point, Va., 1865 · Library of Congress" />
   </AbsoluteFill>
 );
@@ -259,7 +259,7 @@ const LettersU: React.FC<{t: TL}> = ({t}) => (
     <DropCard src={LETTER_U} x={300} y={70} w={470} rot={-3} at={t.at('Their letters') - 2} />
     <Note text="their letters home" x={900} y={150} size={56} rot={-2} at={t.at('Their letters') + 2} color={BONE} />
     <Note text="Union soldiers: saving the Union" x={900} y={330} size={48} rot={-2} at={t.at('saving the') - 3} color={BONE} />
-    <Note text="later, more of them: ending slavery" x={900} y={440} size={48} rot={-2} at={t.at('ending slavery.') - 3} />
+    <Note text="later, more of them: ending slavery" x={857} y={440} size={48} rot={-2} at={t.at('ending slavery.') - 3} />
     <Tag text="Letter from a Union soldier, Washington, D.C., Sept. 1861 · Library of Congress" />
   </Desk>
 );
