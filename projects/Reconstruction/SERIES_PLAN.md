@@ -77,7 +77,33 @@ Run it on every episode outline and draft.
 6. **Every required term rides on a story beat**, defined where it appears.
 7. **Segments.** One idea per chapter, 1–2 minutes each; the logo breaks are pause points for class.
 
-Sources: Willingham, ["The Privileged Status of Story"](https://www.aft.org/periodical/american-educator/summer-2004/ask-cognitive-scientist);
+### Script rules: written for people who don't know history (and people who do)
+
+From the scriptwriting research. These sit on top of the skill's `explainer-craft.md` checklist.
+
+1. **Keep a "what they don't know" list for every episode.** The "curse of knowledge": once you know something, you assume
+   everyone does, and trying harder to imagine the reader doesn't fix it. A written list does. Before drafting, list every name,
+   term and event a viewer would need (Union, Confederacy, veto, amendment, ratify, pardon, Dred Scott…). Each gets a plain
+   explanation the first time it's said. The list goes in SCRIPT.md. (Pinker)
+2. **Define in passing, not in a lecture.** One clause, right where the word appears: "a pardon: an official 'you're
+   forgiven.'" History viewers barely notice it; new viewers need it.
+3. **Write for the ear.** Listeners can't rewind. One idea per sentence; most sentences about 8–12 words; fragments are fine;
+   lead with the point; read every chapter aloud and rewrite anywhere you stumble or run out of breath.
+4. **And, But, Therefore at every scale.** Each paragraph sets something up (*and*), turns it (*but*), and lands a consequence
+   (*therefore*). If two paragraphs only join with "and then," one of them is a list. (Olson's ABT, from the South Park rule)
+5. **Move up and down the "ladder of abstraction."** Alternate scene (one person, one place, one moment: Frazier in Savannah,
+   Howard on Edisto) with summary (the rule, the law, the numbers), and always come back down to a person. This is how long-form
+   explanatory narratives work. (Hart, *Storycraft*)
+6. **Narration says what the picture can't.** Don't describe what's on screen; point at it ("Look at the handwriting") and add the
+   meaning.
+7. **Never "today's party."** Every time Republican or Democrat comes up for the first time, say it was a very different party.
+
+Sources: Pinker on the [curse of knowledge](https://news.harvard.edu/gazette/story/2012/11/exorcising-the-curse-of-knowledge);
+[writing for broadcast](https://us.humankinetics.com/blogs/excerpt/tips-for-writing-for-broadcast);
+Olson's [And, But, Therefore](https://ncse.ngo/and-therefore-randy-olson-and-art-science-storytelling-part-1);
+Hart on [narrative nonfiction](https://niemanstoryboard.org/2011/10/20/jack-hart-storycraft-narrative-nonfiction-interview/).
+
+Story sources: Willingham, ["The Privileged Status of Story"](https://www.aft.org/periodical/american-educator/summer-2004/ask-cognitive-scientist);
 the [but/therefore rule](https://perell.com/note/but-therefore-rule/);
 Reagan et al., ["The emotional arcs of stories"](https://epjds.epj.org/articles/epjdata/abs/2016/01/13688_2016_Article_93/13688_2016_Article_93.html);
 Loewenstein's information gap ([PBS NOVA](https://www.pbs.org/wgbh/nova/article/how-to-stimulate-curiosity/));
