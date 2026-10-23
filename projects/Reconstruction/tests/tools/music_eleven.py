@@ -16,15 +16,25 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public", "
 # reuse them across chapters. Every prompt: instrumental only, no vocals, leaves room for a narrator,
 # period-flavoured instruments without pastiche, and the length in milliseconds.
 CUES = {
-    "cold_open": ("Tense, restrained documentary underscore for a history explainer about an 1806 pistol duel "
-                  "in Tennessee. Low solo cello and string drones, sparse plucked pizzicato, a soft ticking "
-                  "pulse, distant frame drum heartbeat, a lonely fiddle line. Slow build of suspense, then a "
-                  "held, unresolved chord. Instrumental only, no vocals, leaves room for a narrator.", 62000),
-    "good_feelings": ("Light, warm, slightly wry documentary underscore for a history explainer about the calm "
-                      "'Era of Good Feelings' in 1820s America. Gentle plucked strings, a lilting parlor "
-                      "fiddle melody, soft fife, piano-forte, a relaxed walking pulse; pleasant and a little "
-                      "too cozy, with a faint hint of mischief near the end. Instrumental only, no vocals, "
-                      "leaves room for a narrator.", 90000),
+    # Reconstruction (1865-1877), prefix rc_. Period instruments: fretless banjo, fiddle, saxhorn brass band, reed
+    # harmonium, upright parlor piano, field drum. No named tunes (the real period recordings are in ../music/period).
+    "rc_jubilo": ("Hopeful but fragile underscore for 1865, the first months of freedom after the American Civil War: a gently "
+                  "picked fretless banjo and a warm, plain fiddle trade a simple folk melody in the spirit of an 1860s jubilee "
+                  "song, soft hand-drum pulse, upright bass; quietly joyful at first, then the second half thins to the fiddle "
+                  "alone with a hint of doubt, ending on an open, unresolved chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.", 80000),
+    "rc_brass_dirge": ("A distant 1860s brass band of saxhorns and a muffled field drum playing a slow, solemn funeral march in "
+                       "April 1865, heard from far away, a single cornet line over low horns; one restrained swell in the middle, "
+                       "then it fades into near-silence. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.", 70000),
+    "rc_codes": ("Grave, cold, legalistic underscore for laws written to keep freed people working without pay (1865): a slow "
+                 "ticking pocket-watch pulse, a walking pizzicato bass, a solemn reed harmonium chord progression, and a single "
+                 "fiddle line that sounds trapped, circling the same few notes; tension tightens slowly, never melodramatic, "
+                 "ends on a held dark chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.", 70000),
+    "rc_night_riders": ("Dread for night violence in the rural South around 1870: a low droning fiddle with slow scraping bows, "
+                        "a muffled, irregular hoofbeat rhythm on a frame drum that comes closer and passes, distant low brass, "
+                        "creaking wood; cold and quiet rather than loud, ends on a single low unresolved drone. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.", 75000),
+    "rc_parlor": ("Gilded Age parlor in the 1870s North: an upright piano and a reed harmonium play a polite, slightly out-of-tune "
+                  "waltz, comfortable and complacent; gradually the harmony sours, a low cello note of unease creeps in under the "
+                  "waltz, which carries on as if nothing is wrong; ends politely on a wrong-sounding chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.", 70000),
 }
 
 

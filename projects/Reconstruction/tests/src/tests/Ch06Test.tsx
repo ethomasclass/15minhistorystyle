@@ -7,7 +7,7 @@
 // Sources: the joint resolution signed by Lincoln (LOC, Lincoln Papers mal4361100); the Mississippi acts as printed in
 // the American Citizen (Canton, Miss.), Nov. 28, 1865, and the Weekly Copiahan (Hazlehurst, Miss.), Dec. 30, 1865.
 import React from 'react';
-import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch06_except_crime.words.json';
 import FA from '../../public/img/ch06/ms_freedmen_act.json';
 import VA from '../../public/img/ch06/ms_vagrant_act.json';
@@ -298,6 +298,25 @@ const Board: React.FC = () => (
   </Ctx.Provider>
 );
 
+/** Two period-instrument beds (MUSIC.md): hopeful banjo and fiddle for "the good news", handing over to the trapped
+ *  harmonium-and-fiddle cue at "Then those governments", which lifts after the last word and fades with the board. */
+const clampX = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
+const Music: React.FC = () => {
+  const hand = c('Then those');
+  return (
+    <>
+      <Audio src={staticFile('music/rc_jubilo.mp3')} volume={(f) => interpolate(f, [0, 20, hand - 24, hand + 6], [0, 0.24, 0.24, 0], clampX)} />
+      <Sequence from={hand - 12} layout="none">
+        <Audio src={staticFile('music/rc_codes.mp3')} volume={(f) => {
+          const end = CH06_FRAMES - (hand - 12);
+          const said = t.end('crime', 3) - (hand - 12);
+          return interpolate(f, [0, 18, said, said + 18, end - 30, end], [0, 0.17, 0.17, 0.26, 0.26, 0], clampX);
+        }} />
+      </Sequence>
+    </>
+  );
+};
+
 export const Ch06Test: React.FC = () => {
   const scene = useScene([
     [0, <Amend key="a" />],
@@ -321,6 +340,7 @@ export const Ch06Test: React.FC = () => {
     <TestFrame vignette={0.4}>
       {scene}
       <Audio src={staticFile('audio/ch06_except_crime.wav')} />
+      <Music />
       <Cuts />
     </TestFrame>
   );
