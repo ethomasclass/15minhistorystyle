@@ -1,5 +1,5 @@
 // Episode 1, chapter 6 ("except as a punishment for crime"), built as a test of the Vox motion study's techniques on
-// real primary sources, timed to a SCRATCH voice (tools/scratch_voice.py; not the channel voice):
+// real primary sources, voiced by the channel narrator (Ellis, tools/voice.py at the locked pace):
 //   the tilted page with depth of field  -> the 13th Amendment, the Mississippi acts
 //   the word match cut                   -> "vagrant" in 1865-66 newspapers across the South (tools/word_hunt.py)
 //   the torn-paper reveal                -> the 13th Amendment tears to reveal the Black Code
@@ -8,7 +8,7 @@
 // the American Citizen (Canton, Miss.), Nov. 28, 1865, and the Weekly Copiahan (Hazlehurst, Miss.), Dec. 30, 1865.
 import React from 'react';
 import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import words from '../../public/audio/ch06_scratch.words.json';
+import words from '../../public/audio/ch06_except_crime.words.json';
 import FA from '../../public/img/ch06/ms_freedmen_act.json';
 import VA from '../../public/img/ch06/ms_vagrant_act.json';
 import RUN from '../../public/img/ch06/run/run.json';
@@ -320,9 +320,8 @@ export const Ch06Test: React.FC = () => {
   return (
     <TestFrame vignette={0.4}>
       {scene}
-      <Audio src={staticFile('audio/ch06_scratch.wav')} />
+      <Audio src={staticFile('audio/ch06_except_crime.wav')} />
       <Cuts />
-      <div style={{position: 'absolute', right: 44, bottom: 30, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1, color: 'rgba(255,255,255,0.6)'}}>TEST · SCRATCH VOICE, NOT THE CHANNEL VOICE</div>
     </TestFrame>
   );
 };

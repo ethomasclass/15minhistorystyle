@@ -106,8 +106,9 @@ Comparison: `review/wall_mockups/F5_silhouette_traced.jpg`.
 ## Ep 1 ch06 test: the Vox motion study on a real chapter (Oct 2026)
 
 `Ch06-Test` (`src/tests/Ch06Test.tsx`, techniques in `src/tests/voxkit.tsx`) builds the whole of Episode 1, chapter 6
-from primary sources, timed to a **scratch voice** (a local Piper voice via `tools/scratch_voice.py`, not the channel's
-ElevenLabs voice: every `t.at()` anchor re-times itself when the real voice replaces `public/audio/ch06_scratch.*`).
+from primary sources, voiced by the channel narrator (Ellis, `tools/voice.py` at the locked normal pace:
+`public/audio/ch06_except_crime.*`). It was first built against a scratch voice (`tools/scratch_voice.py`, a local
+Piper voice with real word timings), and every `t.at()` anchor re-timed itself when Ellis replaced it.
 Render: `renders/Ch06_vox_test_720p.mp4`.
 
 Techniques: the page laid back in 3D with a depth-of-field band (`Sheet`), the coral swipe at reading speed (`Swipe`),
@@ -119,7 +120,8 @@ New tools:
   16:9 crop with the word dead centre, for the word match cut. Filters to blocks that read like a statute and mention
   freedmen.
 - `tools/phrase_find.py`: finds phrases on one newspaper page and writes the crop plus a box per printed line, for swipes.
-- `tools/scratch_voice.py`: scratch narration with real word timings (Piper phoneme alignments).
+- `tools/scratch_voice.py`: scratch narration with real word timings (Piper phoneme alignments), for building scenes
+  before the ElevenLabs voice exists. Never ship it.
 
 Sources (all Library of Congress):
 - Joint resolution submitting the 13th Amendment, signed by Lincoln, Feb. 1, 1865 (Lincoln Papers, mal4361100)
