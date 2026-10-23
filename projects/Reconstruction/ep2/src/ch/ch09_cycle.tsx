@@ -2,7 +2,7 @@
 // kept families poor). Five steps around an ellipse, joined by teal arrows that draw on as they're said; a coral dot runs
 // the loop again on "Then another", and "poorer every year" lands in the middle.
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {DarkPaper, Sfx} from '../kit/common';
 import {Tag, useGFrame} from '../kit/Kit';
 import {Slip} from '../kit/rc';
@@ -10,20 +10,32 @@ import {Slip} from '../kit/rc';
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
-const CX = 960, CY = 560, RX = 590, RY = 320;
+const CX = 960, CY = 590, RX = 600, RY = 300;
 const pt = (deg: number) => [CX + RX * Math.cos((deg * Math.PI) / 180), CY + RY * Math.sin((deg * Math.PI) / 180)];
 
 /** The steps, clockwise from the top. */
 const STEPS = [
-  {deg: -90, text: 'credit from the store (a crop lien)'},
-  {deg: -18, text: 'grow the crop'},
-  {deg: 54, text: 'crop sold: the store is paid first'},
-  {deg: 126, text: 'still owes', coral: true},
-  {deg: 205, text: "can't leave: another year"},
+  {deg: -90, text: 'credit from the store (a crop lien)', img: 'img/ch09/cr_commissary.png', size: [900, 709]},
+  {deg: -18, text: 'grow the crop', img: 'img/ch08/cr_cotton_1896.png', size: [900, 918]},
+  {deg: 54, text: 'crop sold: the store is paid first', img: 'img/ch09/cr_weighing.png', size: [900, 818]},
+  {deg: 126, text: 'still owes', coral: true, img: 'img/ch09/promissory_note_cut.png', size: [1775, 1290]},
+  {deg: 205, text: "can't leave: another year", img: 'img/ch09/cr_cabin.png', size: [900, 708]},
 ];
 const SIZE = 52;
 /** Rough width of a Slip at SIZE, so a step can be centred on its point. */
 const slipW = (s: string) => s.length * SIZE * 0.4 + SIZE * 0.76;
+
+/** A small faded picture over a step: the store, the crop, the weighing, the note, the cabin. */
+const Pic: React.FC<{src: string; size: number[]; x: number; y: number; at: number; rot: number}> = ({src, size, x, y, at, rot}) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const w = 210, h = (w * size[1]) / size[0];
+  const k = interpolate(f, [at, at + 6], [0, 1], clamp);
+  return (
+    <Img src={staticFile(src)} style={{position: 'absolute', left: x - w / 2, top: y - h - 18 + 10 * (1 - k), width: w, height: h, opacity: 0.78 * k,
+      transform: `rotate(${rot}deg)`, filter: 'grayscale(1) brightness(0.82) contrast(1.1) drop-shadow(0 10px 16px rgba(0,0,0,0.6))'}} />
+  );
+};
 
 /** An arrow along the ellipse from one step to the next, drawn on from `at`. */
 const Arc: React.FC<{a: number; b: number; at: number; dur?: number}> = ({a, b, at, dur = 9}) => {
@@ -61,7 +73,12 @@ export const DebtCycle: React.FC<{c: CycleCues}> = ({c}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Slip text="sharecroppers and tenants: the debt cycle" x={120} y={100} size={48} rot={-1.5} at={c.a + 2} />
+      <Slip text="the debt cycle" x={120} y={100} size={52} rot={-1.5} at={c.a + 2} />
+      <Slip text="sharecroppers and tenants" x={150} y={190} size={42} rot={1} at={c.a + 6} />
+      {STEPS.map((s, i) => {
+        const [x, y] = pt(s.deg);
+        return <Pic key={s.img} src={s.img} size={s.size} x={x} y={y} at={steps[i] - 2} rot={i % 2 ? -2 : 2} />;
+      })}
       <Arc a={-90} b={-18} at={c.a + 8} />
       <Arc a={-18} b={54} at={c.a + 16} />
       <Arc a={54} b={126} at={c.a + 24} />
@@ -75,7 +92,7 @@ export const DebtCycle: React.FC<{c: CycleCues}> = ({c}) => {
       <Runner at={c.another} dur={34} />
       <Slip text="poorer every year" x={CX - ('poorer every year'.length * 70 * 0.4 + 70 * 0.76) / 2} y={CY - 46} size={70} rot={-2} at={c.another + 8} coral seed="pev" />
       <Sfx at={c.another + 8} src="sfx/stamp.wav" volume={0.26} />
-      <Tag text="Drawn: the crop-lien cycle" />
+      <Tag text="Drawn: the crop-lien cycle · pictures: plantation store 1937, cotton 1896, weighing 1904, note 1867, cabin c.1906 (LOC, IA)" />
     </AbsoluteFill>
   );
 };
