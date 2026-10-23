@@ -34,6 +34,8 @@ view it isn't.
 - Template kit too: `Photo` (full-bleed with tint and trace), `CropCard`, `Definition` (vocab bar), `Quote`, `Stamp`,
   `Highlight`, `Arrow`, `Loop`, `Map3D` (see the skill's `references/building-scenes.md` cheat sheet).
 
+**Tint strength.** On photographs the coral tint runs at 0.6 (`Photo` defaults to it; pass `strength={0.6}` to a bare `Tint`, or `tintStrength` to `CropCard`): full strength turns a portrait solid coral. Engravings can take 1.
+
 **Vocab.** Every `{term}` in the script gets a `Highlight` on the word and a `Definition` bar 8–10 frames later (or, when
 the picture is busy, a `Slip`). Terms per chapter are listed below.
 

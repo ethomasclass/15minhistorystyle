@@ -61,7 +61,7 @@ export const PIECES: Piece[] = [
   // ch09 Congress decides
   {id: 'stevens', ch: 9, dt: 0, kind: 'drop', x: 1180, y: 700, r: 2, el: () => <Photo src={W + 'cr_stevens.png'} w={180} />},
   {id: 'stevensStrip', ch: 9, dt: 12, kind: 'slide', x: 1150, y: 940, r: -2, el: () => <Strip text="Congress · Nov 1866" seed="cg" size={20} />},
-  {id: 'congress', ch: 9, dt: 34, kind: 'stamp', x: 790, y: 648, r: -4, z: 60, el: () => <Stamp text="CONGRESS DECIDES" size={30} />},
+  {id: 'congress', ch: 9, dt: 34, kind: 'stamp', x: 800, y: 702, r: -4, z: 60, el: () => <Stamp text="CONGRESS DECIDES" size={30} />},
 ];
 
 export const PINS: BPin[] = [
@@ -123,10 +123,10 @@ const THREAD_DUR = 14;
 /**
  * The board as it stands at the end of chapter `ch`. Pieces of earlier chapters are already there; this chapter's land
  * from frame `at` (narration time). `from` is the cut onto the board (the camera starts close on the new piece).
- * `cam` replaces the default camera; `upTo` shows the board through a later chapter without animating it (ch10's pull-back
+ * `cam` replaces the default camera; `whoosh={false}` drops the entry whoosh (a chapter that opens on the board); `upTo` shows the board through a later chapter without animating it (ch10's pull-back
  * passes ch=10). `children` are drawn in board pixels on top (ch10's motif card, notes).
  */
-export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: BoardKey[]; children?: React.ReactNode; overlay?: React.ReactNode}> = ({ch, from, at, cam, children, overlay}) => {
+export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: BoardKey[]; whoosh?: boolean; children?: React.ReactNode; overlay?: React.ReactNode}> = ({ch, from, at, cam, whoosh = true, children, overlay}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   // earlier chapters: landed long ago (not -1e7: spring() would simulate every frame since)
@@ -135,8 +135,8 @@ export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: Boar
   const lastDt = Math.max(0, ...[...PIECES, ...PINS, ...THREADS].filter((p) => p.ch === ch).map((p) => p.dt));
   const keys: BoardKey[] = cam ?? [
     [from, fx + 30, fy + 10, fz * 1.12],
-    [Math.max(from + 20, at + lastDt + 18), (fx + 960) / 2, (fy + 540) / 2, Math.max(1, fz * 0.72)],
-    [Math.max(from + 21, at + lastDt + 260), (fx + 960) / 2, (fy + 540) / 2, Math.max(1, fz * 0.7)],
+    [Math.max(from + 20, at + lastDt + 18), (fx + 1920) / 3, (fy + 1080) / 3, Math.min(1.25, Math.max(0.92, fz * 0.7))],
+    [Math.max(from + 21, at + lastDt + 260), (fx + 1920) / 3, (fy + 1080) / 3, Math.min(1.22, Math.max(0.9, fz * 0.68))],
   ];
   // the 13th Amendment's highlighter runs on arrival in ch06; the silhouette's question mark and label in ch03
   const hlAt = when(6, 70);
@@ -179,7 +179,7 @@ export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: Boar
           {children}
         </BoardStage>
         {overlay}
-        <Sfx at={from} src="sfx/whoosh.wav" volume={0.2} />
+        {whoosh && <Sfx at={from} src="sfx/whoosh.wav" volume={0.2} />}
         <BoardSounds drops={mine('drop')} slaps={[...mine('slap'), ...mine('tape')]} slides={mine('slide')}
           pins={PINS.filter((p) => p.ch === ch).map((p) => at + p.dt)} threads={THREADS.filter((t) => t.ch === ch).map((t) => at + t.dt)} />
       </AbsoluteFill>

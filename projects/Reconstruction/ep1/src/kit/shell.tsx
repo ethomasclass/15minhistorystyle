@@ -38,15 +38,16 @@ export const useScene = (cuts: [number, React.ReactNode][]) => {
 
 /** Full-bleed B&W archival picture with a slow push from z0 to z1 between frames a and b. */
 export const Photo: React.FC<{src: string; size: [number, number]; fx: number; fy: number; z0?: number; z1?: number; a: number; b: number; bw?: string; vignette?: number;
-  mask?: MaskRef; tint?: string | null; traceAt?: number; children?: (p: Place) => React.ReactNode}> = ({
-  src, size, fx, fy, z0 = 1.02, z1 = 1.1, a, b, bw = 'grayscale(1) contrast(1.2)', vignette = 0.65, mask, tint, traceAt, children,
+  mask?: MaskRef; tint?: string | null; tintStrength?: number; traceAt?: number; children?: (p: Place) => React.ReactNode}> = ({
+  src, size, fx, fy, z0 = 1.02, z1 = 1.1, a, b, bw = 'grayscale(1) contrast(1.2)', vignette = 0.65, mask, tint, tintStrength = 0.6, traceAt, children,
 }) => {
   const frame = useCurrentFrame();
   const place = fill(size, fx, fy, interpolate(frame, [a, b], [z0, z1], clamp));
   return (
     <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
       <Picture src={src} place={place} size={size} bw={bw} />
-      {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint} />}
+      {/* photographs read best at about 0.6 (full strength turns a portrait solid coral); engravings can take 1 */}
+      {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint} strength={tintStrength} />}
       {mask && <Traced paths={mask.data.shapes.subject} place={place} at={traceAt ?? a + 4} dur={12} width={5} />}
       {children?.(place)}
       <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,${vignette}) 100%)`}} />
