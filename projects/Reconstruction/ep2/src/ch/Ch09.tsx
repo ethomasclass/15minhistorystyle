@@ -12,6 +12,7 @@ import words from '../../public/audio/ch09_the_debt.words.json';
 import VA from '../../public/img/ep1/ms_vagrant_act.json';
 import {DarkPaper, Sfx} from '../kit/common';
 import {Highlight, Tag} from '../kit/Kit';
+import {DebtCycle} from './ch09_cycle';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, useScene} from '../kit/shell';
 import {SeriesBoard} from '../kit/ep2board';
 import {type Box, camAt, carry, cut, DOC_F, FocusIn, PhotoShot, Sheet, type SheetCam, Slip, Spot, Swipe, Win} from '../kit/rc';
@@ -113,8 +114,8 @@ const Settle: React.FC = () => (
   </AbsoluteFill>
 );
 
-/** Can't leave: another year, already behind. Then another. */
-const Behind: React.FC = () => (
+/** Can't leave: another year, already behind. Then another. (Replaced by the debt cycle, ch09_cycle.tsx.) */
+export const Behind: React.FC = () => (
   <AbsoluteFill>
     <DarkPaper />
     <Ledger c={LEDGER} at={S6} from={S7} x={110} y={170} s={0.42} rot={-3} />
@@ -221,7 +222,7 @@ const Body: React.FC = () => {
       <Slip text="end of the year: settling up" x={1040} y={780} rot={-2} size={56} at={t.at('settling up') - 2} dur={14} />
     </PhotoShot>],
     [S6, <Settle key="se" />],
-    [S7, <Behind key="bh" />],
+    [S7, <DebtCycle key="dc" c={{a: S7, arrest: t.at('leaving with') - 2, sign: t.at('So they sign'), behind: t.at('already behind'), another: t.at('Then another')}} />],
     [S8, <NotSlavery key="ns" />],
     [S9, <PhotoShot key="cb" src="img/ch09/cr_cabin.png" size={[900, 708]} a={S9} b={S10} w={900} x={760} y={500} rot={-1} tag={SRC.cabin}>
       <Slip text="a trap with no way out" x={1080} y={850} rot={-1.5} size={64} at={t.at('a trap') - 2} dur={14} />
