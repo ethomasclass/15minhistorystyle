@@ -36,8 +36,8 @@ const SRC = {
 const DEADLOCK = I + 'south_carolina_deadlock_state_legislature_columbia_leslies_1876.jpg';
 const DEADLOCK_LINE: Box[] = [[985, 2764, 615, 32]];        // "THE DEAD-LOCK IN THE STATE LEGISLATURE AT COLUMBIA."
 const TROOPS = I + 'louisiana_withdrawal_federal_troops_state_house_april_1877.jpg';
-const T_WITHDRAW: Box[] = [[345, 1752, 1340, 38]];          // "LOUISIANA.—THE WITHDRAWAL OF THE FEDERAL TROOPS FROM THE STATE HOUSE"
-const T_DATE: Box[] = [[1690, 1752, 740, 38]];              // "IN NEW ORLEANS, AT NOON, ON APRIL 24TH."
+const T_WITHDRAW: Box[] = [[345, 1752, 965, 38]];          // "LOUISIANA.—THE WITHDRAWAL OF THE FEDERAL TROOPS FROM THE STATE HOUSE"
+const T_DATE: Box[] = [[1310, 1752, 745, 38]];              // "IN NEW ORLEANS, AT NOON, ON APRIL 24TH."
 
 // ------------------------------------------------------------------------------------------------------ the cuts
 const S_BAN = c('And then came');

@@ -2,10 +2,10 @@
 //   FarAway      the one dry aside: the Colfax print shrinks to a tiny card on a big desk beside "your paycheck"
 //   Priorities   the reformers' list: new causes drop in on top and "Black rights" slides down it
 import React from 'react';
-import {AbsoluteFill, Easing, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {DarkPaper, Sfx} from '../kit/common';
 import {Tag, useGFrame} from '../kit/Kit';
-import {CORAL, Slip, TEAL, tornPoly} from '../kit/vox';
+import {Slip, TEAL, tornPoly} from '../kit/vox';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const HAND = '"Nanum Pen Script", cursive';
@@ -39,7 +39,7 @@ const CARD = {x: 820, y: 130, w: 760, h: 800};
 const ROW0 = 330, ROW = 130;
 
 /** One line on the list; its row eases between integer rows as items are inserted above it. */
-const Item: React.FC<{text: string; at: number; row: (g: number) => number; color?: string; strike?: number}> = ({text, at, row, color = '#0f3e37'}) => {
+const Item: React.FC<{text: string; at: number; row: (f: number) => number; color?: string}> = ({text, at, row, color = '#0f3e37'}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   if (g < at) return null;
@@ -59,10 +59,10 @@ export const Priorities: React.FC<{c: ListCues}> = ({c}) => {
   const step = (at: number) => interpolate(f, [at, at + 8], [0, 1], {...clamp, easing: Easing.inOut(Easing.cubic)});
   const rise = interpolate(f, [c.a, c.a + 8], [0, 1], clamp);
   // Black rights: row 0, pushed to 1 by "clean government", to 2 by "the economy", then slides to 3 on "slid"
-  const br = (fr: number) => step(c.gov) + step(c.econ) + step(c.slid) * 1.15 + 0 * fr;
+  const br = () => step(c.gov) + step(c.econ) + step(c.slid) * 1.15;
   const gov = () => step(c.econ);
   const arrow = interpolate(g, [c.slid + 4, c.slid + 12], [0, 1], clamp);
-  const yBR = ROW0 + br(f) * ROW;
+  const yBR = ROW0 + br() * ROW;
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -94,5 +94,3 @@ export const Priorities: React.FC<{c: ListCues}> = ({c}) => {
   );
 };
 
-/** keep `random`/CORAL imports meaningful for future tweaks */
-export const _unused = [random, CORAL];
