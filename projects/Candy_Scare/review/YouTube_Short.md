@@ -57,4 +57,4 @@ A dad said a hand reached out of a dark house with a poisoned Pixy Stix. The tru
 
 **Pinned comment:** `Did your parents check your Halloween candy? What were they looking for?`
 
-**Vertical thumbnails** (`renders/thumbnails/`): A `POISONED CANDY?` over the door and hand · B `THE CANDY MAN` with the father in coral · C `KIDS KILLED BY POISONED CANDY from strangers, since 1958: 0`. Suggested: **C** for curiosity (it matches the title's question); **B** if you'd rather lead with the person. Set it in the YouTube mobile app (Shorts thumbnails can't be uploaded from desktop Studio), or pick the cover frame.
+**Vertical thumbnails** (`renders/thumbnails/`): A `POISONED CANDY?` over the door and hand · B `THE CANDY MAN` with the father in coral · C `KIDS KILLED BY POISONED CANDY from strangers, since 1958: 0`. Suggested: **C** for curiosity (it matches the title's question); **B** if you'd rather lead with the person. Upload it as the Short's thumbnail if your account offers that option; otherwise pick the cover frame from the first second.
