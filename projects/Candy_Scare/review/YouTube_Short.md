@@ -39,7 +39,9 @@ Photo: Othell O. Owensby Jr., Houston Chronicle (1975). AP story in The Hour (No
 
 ## Picked (final)
 
-**Title / caption:** `Has Anyone Ever Poisoned Halloween Candy?` (41 characters)
+**Title / caption, with tags:** `Has Anyone Ever Poisoned Halloween Candy? #Halloween #History #Shorts` (69 of 100 characters)
+
+Longer option: `Has Anyone Ever Poisoned Halloween Candy? #Halloween #TrueCrime #History #Shorts` (80)
 
 **Description:**
 ```
