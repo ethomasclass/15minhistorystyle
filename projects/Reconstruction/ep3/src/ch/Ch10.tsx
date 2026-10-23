@@ -180,7 +180,7 @@ const Lasted: React.FC = () => {
   const f = useCurrentFrame();
   const fam = t.at('Families'), lead = t.at('A generation');
   const push = interpolate(f, [S_LAST, S_FOUND], [1, 1.03], clamp);
-  const cy = interpolate(f, [fam, lead + 20], [560, 740], clamp);
+  const cy = interpolate(f, [fam, lead + 20], [660, 760], clamp);
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -281,7 +281,7 @@ const Petition: React.FC = () => {
 
 // ------------------------------------------------------------------------------------------ 11 · the whole board
 /** ON PAPER lands at LAW, LAND is struck 24 frames later, PROTECTION's torn half falls at 40 (ep3board's ch10 table). */
-const MARKS = t.at('almost a hundred') + 16;
+const MARKS = t.at('a hundred years') + 22;
 const PULL = t.at('subscribe') - 40;
 const WHOLE: [number, number, number] = [1680, 1198, 0.41];   // the whole series board, inside the title-safe margin
 const PUSH0 = ROLL + 720, PUSH1 = ROLL + 940;
@@ -291,7 +291,7 @@ const END_CAM: BoardKey[] = [
   [t.at('about citizens') + 2, 300, 830, 1.32],
   [t.at('about the vote') - 6, 300, 860, 1.36],
   [t.at('about the vote') + 10, 300, 1440, 1.32],
-  [MARKS - 22, 320, 1460, 1.36],
+  [MARKS - 40, 320, 1460, 1.36],
   [MARKS - 2, 1000, 420, 0.8],
   [MARKS + 60, 1330, 430, 0.75],
   [PULL, 1360, 440, 0.74],
