@@ -44,9 +44,10 @@ def run(name, src, grow=3, hole_px=25):
         m = cv2.resize(m, (im.shape[1], im.shape[0]), interpolation=cv2.INTER_NEAREST)
     m = (m > 128).astype(np.uint8) * 255
     # fill holes inside the subject (white patches in an engraving would otherwise show the background through)
-    ff = m.copy()
-    cv2.floodFill(ff, np.zeros((m.shape[0] + 2, m.shape[1] + 2), np.uint8), (0, 0), 255)
-    m = m | cv2.bitwise_not(ff)
+    # (pad first, so background cut off from the corner by a subject touching two edges isn't taken for a hole)
+    ff = np.pad(m, 1)
+    cv2.floodFill(ff, np.zeros((ff.shape[0] + 2, ff.shape[1] + 2), np.uint8), (0, 0), 255)
+    m = m | cv2.bitwise_not(ff[1:-1, 1:-1])
     h, w = m.shape
     k = max(3, int(round(min(w, h) / 1000 * grow)) * 2 + 1)         # scale the grow with the picture
     fg_a = cv2.GaussianBlur(cv2.dilate(m, np.ones((k, k), np.uint8)), (0, 0), max(1.5, k / 4))
