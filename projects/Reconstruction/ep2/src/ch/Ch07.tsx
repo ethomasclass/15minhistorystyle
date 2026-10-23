@@ -44,7 +44,7 @@ const R_AMES: Box = [1480, 1214, 244, 40];              // "Adelbert Ames"
 const SRC = {
   bag: 'Carpet bag, USA, 1860–69 · Cooper Hewitt, Smithsonian Design Museum',
   nast: 'Thomas Nast, "The Man with the (Carpet) Bags," 1872 · Library of Congress',
-  pyramid: 'Carpetbaggers in Southern offices, 1867–77 (not to scale) · E. Foner, Reconstruction (1988)',
+  pyramid: 'Carpetbaggers in Southern offices, 1867–77 (not to scale) · drawn from historians\' counts',
   alcorn: 'James L. Alcorn, Brady-Handy studio, c. 1870 · Library of Congress',
   general: 'Maj. Gen. Adelbert Ames, Brady studio, 1860s · Library of Congress',
   ames: 'Adelbert Ames, Brady-Handy studio, c. 1870 · Library of Congress',

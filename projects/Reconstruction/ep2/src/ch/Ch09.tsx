@@ -194,8 +194,8 @@ const Body: React.FC = () => {
   const scene = useScene([
     [0, <Year key="yr" />],
     [S2, <Doc key="nt" src={NOTE} size={NOTE_S} a={S2} b={S3} tag={SRC.note} filter={HAND_F}
-      keys={[[S2, {x: 887, y: 600, z: 0.92}], [t.at('on credit') - 6, {x: 887, y: 560, z: 0.95}], [t.at('on credit') + 14, {x: 870, y: 470, z: 0.98, tilt: 20, dof: 2, band: 130, dofY: 440}],
-        [S3, {x: 910, y: 470, z: 1.02, tilt: 20, dof: 2, band: 130, dofY: 440}]]}
+      keys={[[S2, {x: 887, y: 600, z: 0.92}], [t.at('on credit') - 6, {x: 887, y: 560, z: 0.95}], [t.at('on credit') + 14, {x: 880, y: 500, z: 0.86, tilt: 18, dof: 2, band: 140, dofY: 440}],
+        [S3, {x: 900, y: 500, z: 0.9, tilt: 18, dof: 2, band: 140, dofY: 440}]]}
       over={<Slip text="due after the harvest" x={1180} y={830} rot={-2} at={t.end('tools') - 4} />}>
       <Swipe lines={DUE} from={t.at('on credit')} to={t.end('tools')} seed="due" />
     </Doc>],
@@ -217,8 +217,8 @@ const Body: React.FC = () => {
       </>}>
       <Swipe lines={[ADVANCE]} from={t.at('gets paid first')} to={t.end('of the crop')} seed="adv" />
     </Doc>],
-    [S5, <PhotoShot key="wg" src="img/ch09/cr_weighing.png" size={[900, 818]} a={S5} b={S6} w={760} x={700} y={520} rot={1} tag={SRC.weigh}>
-      <Slip text="end of the year: settling up" x={1110} y={760} rot={-2} size={60} at={t.at('settling up') - 2} dur={14} />
+    [S5, <PhotoShot key="wg" src="img/ch09/cr_weighing.png" size={[900, 818]} a={S5} b={S6} w={720} x={620} y={520} rot={1} tag={SRC.weigh}>
+      <Slip text="end of the year: settling up" x={1040} y={780} rot={-2} size={56} at={t.at('settling up') - 2} dur={14} />
     </PhotoShot>],
     [S6, <Settle key="se" />],
     [S7, <Behind key="bh" />],

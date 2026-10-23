@@ -36,7 +36,7 @@ const TWEED_S: [number, number] = [3000, 2228];
 const SRC = {
   print: 'Currier & Ives, The First Colored Senator and Representatives, 1872 · Library of Congress',
   revels: 'Hiram R. Revels, Brady-Handy studio, c. 1870 · Library of Congress',
-  count: 'Black officeholders, 1867–77: about 2,000 (1,510 documented) · E. Foner, Freedom\'s Lawmakers',
+  count: 'Black officeholders, 1867–77: about 2,000 (1,510 documented by name) · historians\' counts',
   roll: 'Journal of the Mississippi Constitutional Convention of 1868 · Internet Archive',
   seats: 'John R. Lynch (print, 1884) · Robert Smalls, Brady-Handy studio · Library of Congress',
   vomit: '"The Black Vomit; or, the Bottom Rail on Top," broadside, Virginia, c. 1867 · Library of Congress',
