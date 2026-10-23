@@ -62,6 +62,9 @@ the narrator.
 
 ## More beds, made locally (ACE-Step 1.5)
 
+> **Not used.** You listened (Oct 2026): most of these don't sound good enough. The series uses the channel library and the
+> ElevenLabs `rc_` cues only; if a gap turns up, new cues come from Suno or ElevenLabs.
+
 Free text-to-music, run in this session on CPU (`tests/tools/music_acestep.py --all`, captions in that file); about
 3 minutes per 60 s cue. They're quieter than the ElevenLabs beds (−16 to −22 LUFS), so they sit about twice as high
 in the mix. All are in the channel library (`music/cues/`) and on one sampler, `music/Reconstruction_acestep_cues_sampler.mp3`
