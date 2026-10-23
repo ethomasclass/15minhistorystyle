@@ -61,8 +61,8 @@ const TALLY: TallyCues = {need: t.at('needed'), tilden: t.at('Tilden had'), haye
 const Map1: React.FC = () => (
   <AbsoluteFill>
     <SouthMap keys={[ucam(0, 3500, 2960, 0.56), ucam(S_BAN, 3580, 2960, 0.63)]} ink={t.at('only three')} rise={[t.at('South Carolina'), t.at('Louisiana'), t.at('Florida')]} />
-    <Slip text="1876" x={150} y={110} rot={-3} size={70} at={6} />
-    <Slip text="still Republican: three states" x={1120} y={120} rot={2} size={58} at={t.at('Republican governments')} coral />
+    <Slip text="1876" x={150} y={130} rot={-3} size={70} at={6} />
+    <Slip text="still Republican: three states" x={1120} y={130} rot={2} size={58} at={t.at('Republican governments')} coral />
     <Slip text="the rest: back under Democrats" x={150} y={880} rot={-1.5} size={54} at={t.at('only three') + 8} />
     <Tag text={MAP_TAG} />
   </AbsoluteFill>
@@ -130,7 +130,7 @@ const Nast: React.FC = () => (
   <DocShot src={I + 'nast_a_truce_not_a_compromise_1877.jpg'} size={[3000, 2122]} tag={SRC.nast} filter={PRINT_F} focusAt={S_NAST}
     keys={[[S_NAST, {x: 1500, y: 1080, z: 0.56}], [S_COM, {x: 950, y: 1180, z: 0.74}]]}
     over={<>
-      <Slip text="for months, nobody knew" x={130} y={120} rot={-2} size={60} at={t.at('nobody knew')} />
+      <Slip text="for months, nobody knew" x={130} y={130} rot={-2} size={60} at={t.at('nobody knew')} />
       <Slip text="“Tilden or Blood”: talk of war" x={1130} y={880} rot={1.5} size={54} at={t.at('next president') - 2} />
     </>} />
 );
@@ -140,7 +140,7 @@ const Commission: React.FC = () => (
   <DocShot src={I + 'electoral_commission_secret_session_candlelight_leslies_1877.jpg'} size={[1536, 942]} tag={SRC.commission} filter={PRINT_F} focusAt={S_COM}
     keys={[[S_COM, {x: 768, y: 450, z: 1.2}], [S_TAL2, {x: 760, y: 430, z: 1.3}]]}
     over={<>
-      <Slip text="a commission of 15 men" x={130} y={120} rot={-2} size={58} at={t.at('15 men') - 2} />
+      <Slip text="a commission of 15 men" x={130} y={130} rot={-2} size={58} at={t.at('15 men') - 2} />
       <Slip text="8 – 7, along party lines" x={1080} y={890} rot={1.5} size={60} at={t.at('party lines')} coral />
     </>} />
 );
@@ -172,8 +172,8 @@ const Deal: React.FC = () => {
       <Slip text="Hayes becomes president" x={200} y={300} rot={-2} size={60} at={t.at('Hayes becomes')} />
       <Slip text="the troops stop propping up" x={200} y={640} rot={1.5} size={58} at={t.at('stops propping')} />
       <Slip text="the last Republican governments" x={280} y={740} rot={-1} size={54} at={t.at('the last Republican')} coral />
-      <Definition term="Compromise of 1877" def="the unwritten understanding that settled the election: Hayes became president, and federal troops stopped protecting the last Republican governments in the South"
-        at={cmp + 9} x={120} y={850} w={1660} />
+      <Definition term="Compromise of 1877" def="the unwritten understanding: Hayes became president, and the troops stopped protecting the last Republican governments"
+        at={cmp + 9} x={120} y={836} w={1660} />
       <Stamps at={[cmp]} />
       <Sfx at={t.at('and the federal')} src="sfx/marker_tick.wav" volume={0.25} />
       <Tag text="" />
@@ -187,8 +187,8 @@ const Troops: React.FC = () => (
     keys={[[S_TROOPS, {x: 1450, y: 1300, z: 0.6}], [t.at('South Carolina', 2), {x: 1430, y: 1330, z: 0.63}], [t.at('to leave') - 4, {x: 1420, y: 1340, z: 0.64}],
       [t.at('Soon after') + 10, {x: 1900, y: 1260, z: 0.86}], [S_END, {x: 1960, y: 1250, z: 0.9}]]}
     over={<>
-      <Slip text="April 1877" x={140} y={110} rot={-3} size={64} at={t.at('April')} />
-      <Slip text="South Carolina: April 10" x={1180} y={110} rot={2} size={54} at={t.at('South Carolina', 2)} />
+      <Slip text="April 1877" x={140} y={130} rot={-3} size={64} at={t.at('April')} />
+      <Slip text="South Carolina: April 10" x={1180} y={130} rot={2} size={54} at={t.at('South Carolina', 2)} />
       <Slip text="Louisiana: April 24" x={1220} y={220} rot={-1.5} size={54} at={t.at('Louisiana', 2)} />
       <Slip text="both Republican governments collapsed" x={420} y={870} rot={-1.5} size={58} at={t.at('collapsed')} coral />
     </>}>
@@ -201,7 +201,7 @@ const Troops: React.FC = () => (
 const Map2: React.FC = () => (
   <AbsoluteFill>
     <SouthMap keys={[ucam(S_END, 3580, 2960, 0.63), ucam(S_BOARD, 3540, 2970, 0.6)]} from={S_END} ink={0} rise={[0, 0, 0]} fall={t.at('was now')} />
-    <Slip text="1877" x={150} y={110} rot={-3} size={70} at={S_END + 4} />
+    <Slip text="1877" x={150} y={130} rot={-3} size={70} at={S_END + 4} />
     <Slip text="all in the hands of the Redeemers" x={480} y={880} rot={-1.5} size={60} at={t.at('Redeemers')} coral />
     <Tag text={MAP_TAG} />
   </AbsoluteFill>

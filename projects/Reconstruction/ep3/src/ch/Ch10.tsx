@@ -77,8 +77,8 @@ const Law: React.FC = () => (
   <Amendments a={S_LAW} b={S_LAND} t13={t.at('The 13th')} t14={t.at('The 14th')} t15={t.at('The 15th')}
     h13={[t.at('ended slavery'), t.end('ended slavery') + 4]} h14={[t.at('equal protection'), t.end('of the laws') + 2]} h15={[t.at('protected the vote'), t.end('protected the vote') + 6]}
     head={<>
-      <Slip text="the law" x={140} y={80} size={76} rot={-2} at={S_LAW + 4} />
-      <Mark kind="yes" x={420} y={70} at={t.at('delivered the law') + 12} s={64} />
+      <Slip text="the law" x={140} y={118} size={70} rot={-2} at={S_LAW + 4} />
+      <Mark kind="yes" x={410} y={104} at={t.at('delivered the law') + 12} s={64} />
       <Slip text="citizens" x={1420} y={400} size={50} rot={3} at={t.at('citizens') - 2} />
     </>} />
 );
@@ -122,11 +122,11 @@ const PROT_CAM: BoardKey[] = [
   [t.at('enforced') + 10, 3180, 1130, 2.0],
   [t.at('When the army left') - 8, 3180, 1130, 2.1],
   [t.at('When the army left') + 4, 2500, 1700, 1.0],
-  [t.at('army left') + 16, 1880, 2190, 2.45],
-  [S_FAIL + 1, 1880, 2190, 2.55],
+  [t.at('army left') + 16, 1480, 2190, 1.95],
+  [S_FAIL + 1, 1490, 2195, 2.0],
 ];
 const ProtOverlay: React.FC = () => (
-  <Slip text="the law: on paper" x={1080} y={820} size={70} rot={-2} at={t.at('stayed on paper') - 2} coral />
+  <Slip text="the law: on paper" x={1000} y={790} size={70} rot={-2} at={t.at('stayed on paper') - 2} coral />
 );
 
 // ------------------------------------------------------------------------------------------ 6 · a failure?
@@ -143,8 +143,8 @@ const Failure: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Highlight text="A FAILURE?" x={620} y={90} size={108} at={t.at('failure') - 2} seed={73} rot={-2} />
-      <Slip text="argued about ever since" x={680} y={250} size={56} rot={2} at={t.at('People have argued') + 4} />
+      <Highlight text="A FAILURE?" x={620} y={104} size={108} at={t.at('failure') - 2} seed={73} rot={-2} />
+      <Slip text="argued about ever since" x={680} y={262} size={56} rot={2} at={t.at('People have argued') + 4} />
       {line > 0 && <div style={{position: 'absolute', left: 958, top: 360, width: 4, height: 630 * line, background: TEAL, opacity: 0.7}} />}
       <AbsoluteFill style={{opacity: dimL}}>
         <Header text="ONE ANSWER: YES" x={130} y={370} color="#f4efe6" at={t.at('One answer')} />
@@ -183,18 +183,18 @@ const Lasted: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Header text="IT BUILT THINGS THAT LASTED" x={130} y={70} color={TEAL} at={S_LAST} />
+      <Header text="IT BUILT THINGS THAT LASTED" x={130} y={104} color={TEAL} at={S_LAST} />
       <AbsoluteFill style={{transform: `scale(${push})`, transformOrigin: '50% 55%'}}>
-        <CropCard src={SCHOOL} size={[3000, 2337]} x={140} y={190} w={590} h={390} fx={1530} fy={1260} scale={0.27} rot={-1.5} at={t.at('Schools')} />
+        <CropCard src={SCHOOL} size={[3000, 2337]} x={140} y={215} w={590} h={390} fx={1530} fy={1260} scale={0.27} rot={-1.5} at={t.at('Schools')} />
         <Slip text="schools" x={160} y={620} size={64} rot={-2} at={t.at('Schools') + 2} />
         <Slip text="churches" x={430} y={720} size={64} rot={2} at={t.at('Churches') - 2} />
         <Gate at={fam - 2}>
-          <DocWin src={WANTED} size={WANTED_S} cx={525} cy={cy} s={0.5} w={460} h={660} x={780} y={170} r={1}>
+          <DocWin src={WANTED} size={WANTED_S} cx={525} cy={cy} s={0.5} w={460} h={640} x={780} y={200} r={1}>
             <Swipe lines={[HANNAH]} from={t.at('found each other')} to={t.end('found each other') + 6} seed="hb" />
           </DocWin>
         </Gate>
         <Slip text="families that found each other" x={760} y={870} size={50} rot={-1} at={fam + 2} />
-        <CropCard src={HEROES} size={[3000, 2210]} x={1310} y={190} w={500} h={400} fx={1500} fy={1080} scale={0.3} rot={1.5} at={lead - 2} />
+        <CropCard src={HEROES} size={[3000, 2210]} x={1310} y={215} w={500} h={400} fx={1500} fy={1080} scale={0.3} rot={1.5} at={lead - 2} />
         <Slip text="Black leaders" x={1320} y={640} size={64} rot={-2} at={lead + 4} />
         <Slip text="Bruce · Douglass · Revels" x={1320} y={740} size={44} rot={1} at={lead + 12} />
       </AbsoluteFill>
@@ -208,10 +208,10 @@ const Lasted: React.FC = () => {
 // ------------------------------------------------------------------------------------------ 8 · a second founding
 const Founding: React.FC = () => (
   <Amendments a={S_FOUND} b={S_1954} t13={S_FOUND - 30} t14={S_FOUND - 30} t15={S_FOUND - 30} h13={[-20, -19]} h14={[-20, -19]} h15={[-20, -19]}
-    head={<Slip text="three amendments" x={140} y={80} size={66} rot={-2} at={S_FOUND + 4} />}
+    head={<Slip text="three amendments" x={140} y={115} size={66} rot={-2} at={S_FOUND + 4} />}
     over={<>
-      <Slip text="never went away" x={150} y={915} size={58} rot={2} at={t.at('never went away') - 2} />
-      <Slip text="a second founding" x={800} y={905} size={68} rot={-2} at={t.at('second founding') - 2} coral />
+      <Slip text="never went away" x={150} y={898} size={58} rot={2} at={t.at('never went away') - 2} />
+      <Slip text="a second founding" x={800} y={890} size={68} rot={-2} at={t.at('second founding') - 2} coral />
     </>} />
 );
 
@@ -241,7 +241,7 @@ const V_ENFORCE: Box = [202, 718, 648, 32];
 const Vra: React.FC = () => (
   <DocShot src={VRA} size={VRA_S} seed="vra" focusAt={S_1965} tag="Voting Rights Act of 1965, Public Law 89-110, 79 Stat. 437 · govinfo.gov (U.S. Statutes at Large)"
     keys={[[S_1965, {x: 900, y: 650, z: 0.82}], [t.at('real force') - 10, {x: 640, y: 735, z: 1.25}], [S_WORDS, {x: 620, y: 735, z: 1.3}]]}
-    over={<Slip text="the Voting Rights Act · 1965" x={130} y={90} size={52} rot={-2} at={S_1965 + 6} />}>
+    over={<Slip text="the Voting Rights Act · 1965" x={130} y={112} size={52} rot={-2} at={S_1965 + 6} />}>
     <Swipe lines={[V_ENFORCE]} from={t.at('real force')} to={t.end('behind the 15th') + 4} seed="ve" />
   </DocShot>
 );
@@ -252,7 +252,7 @@ const Waiting: React.FC = () => (
   <DocShot src={T15} size={[1920, 2690]} seed="t15" focusAt={S_WORDS} tag="Joint resolution proposing the 15th Amendment, Feb. 1869 · National Archives"
     keys={[[S_WORDS, {x: 900, y: 1330, z: 0.78}], [t.at('still there'), {x: 900, y: 1400, z: 0.92, tilt: 18, dof: 2, band: 120, dofY: 1400}], [S_EDISTO, {x: 920, y: 1410, z: 0.97, tilt: 22, dof: 2.2, band: 110, dofY: 1410}]]}
     over={<>
-      <Slip text="written down in 1869" x={130} y={90} size={52} rot={-2} at={S_WORDS + 6} />
+      <Slip text="written down in 1869" x={130} y={112} size={52} rot={-2} at={S_WORDS + 6} />
       <Slip text="still there, waiting" x={1080} y={800} size={72} rot={2} at={t.at('still there') - 2} coral />
     </>}>
     <Swipe lines={[T15_LINE]} from={t.at('written down')} to={t.end('the 1860s') + 8} seed="tw" />
@@ -268,7 +268,7 @@ const Petition: React.FC = () => {
         [t.at('A home') - 8, {x: 1050, y: 290, z: 0.9, tilt: 26, dof: 2.4, band: 120, dofY: 290}],
         [t.at('It be'), {x: 560, y: 365, z: 0.95, tilt: 26, dof: 2.4, band: 120, dofY: 365}],
         [t.at('acres') + 4, {x: 760, y: 330, z: 0.9, tilt: 26, dof: 2.4, band: 140, dofY: 330}], [S_END, {x: 780, y: 330, z: 0.93, tilt: 26, dof: 2.4, band: 140, dofY: 330}]]}
-      over={<Slip text="Edisto Island · Oct. 28, 1865" x={130} y={90} size={52} rot={-2} at={S_EDISTO + 6} out={asked + 10} />}>
+      over={<Slip text="Edisto Island · Oct. 28, 1865" x={130} y={112} size={52} rot={-2} at={S_EDISTO + 6} out={asked + 10} />}>
       <Spot size={EDISTO.p3Size} boxes={[EDISTO.bram, EDISTO.moultrie, EDISTO.sampson]} at={men} out={asked + 10} id="p3names" dark={0.45} />
       <Swipe lines={[EDISTO.bram]} from={men} to={men + 12} seed="m1" out={asked + 10} />
       <Swipe lines={[EDISTO.moultrie]} from={men + 12} to={men + 24} seed="m2" out={asked + 10} />

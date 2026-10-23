@@ -63,6 +63,9 @@ const placed = (size: [number, number], h: number, sx: number, a: number, b: num
 
 // ------------------------------------------------------------------------------------------------------ the cuts
 const S_AD = c('Many depositors'), S_BEAU = c('Tens of thousands'), S_ACRES = c('Forty acres'), S_LOANS = c('But the men'), S_DOUG = c('its trustees');
+/** The pieces land on "gone at once". The check sits between the sharecropping papers and Colfax, so the only end shot
+ *  that slices nothing is this close one (boardfit: view x 1387..2323). */
+const GONE = t.at('gone at once');
 const S_LATE = c('It was too late'), S_NUM = c('More than'), S_CHECK = c('The government', 2), B = c('For a lot');
 
 // ------------------------------------------------------------------------------------------------------ shots
@@ -82,7 +85,7 @@ const Building: React.FC = () => {
 /** The 1866 ad: "one among the best institutions in the United States". */
 const Ad: React.FC = () => (
   <DocShot src={AD} size={AD_S} tag={SRC.ad} filter={NEWS_F} focusAt={S_AD}
-    keys={[[S_AD, {x: 520, y: 280, z: 1.25}], [t.at('stood behind'), {x: 540, y: 250, z: 1.34}], [S_BEAU, {x: 545, y: 250, z: 1.36}]]}
+    keys={[[S_AD, {x: 530, y: 330, z: 1.1}], [t.at('stood behind'), {x: 540, y: 300, z: 1.18}], [S_BEAU, {x: 545, y: 300, z: 1.2}]]}
     over={<Slip text="It didn't." x={1180} y={820} rot={-3} size={84} at={t.at("It didn't")} coral />}>
     <Swipe lines={BEST} from={t.at('believed')} to={t.end('stood behind it')} seed="best" />
   </DocShot>
@@ -206,7 +209,7 @@ const Body: React.FC = () => {
     [S_LATE, <Letter key="lt" />],
     [S_NUM, <Owed key="ow" />],
     [S_CHECK, <Check key="ck" />],
-    [B, <SeriesBoard key="b" ch={6} from={B} at={t.at('gone at once')} />],
+    [B, <SeriesBoard key="b" ch={6} from={B} at={GONE} cam={[[B, 2125, 1440, 1.6], [GONE + 50, 1855, 1400, 2.05], [GONE + 300, 1855, 1400, 2.05]]} />],
   ]);
   return <>{scene}<Whooshes at={[S_AD, S_BEAU, S_ACRES, S_LOANS, S_DOUG, S_LATE, S_NUM, S_CHECK]} /></>;
 };

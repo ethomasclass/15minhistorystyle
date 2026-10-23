@@ -55,7 +55,7 @@ const SRC = {
 const S_PLAN = c('Easter'), S_RANGE = c('How many'), S_ENG = c("It's called"), S_CASE = c('The case'), S_READ = c('Its reasoning');
 const S_STATE = c('That means'), B = c('Nobody was ever');
 const TEAR = t.end('cover') + 2;
-/** The board's pieces land on "punished"; its end shot sits below the night's strip so nothing is sliced (boardfit). */
+/** The board's pieces land on "punished"; its end shot keeps the night and the proclamation above it, nothing sliced (boardfit). */
 const PUN = t.at('punished');
 
 // ------------------------------------------------------------------------------------------------------ shots
@@ -171,7 +171,7 @@ const Body: React.FC = () => {
     [S_CASE, <Case key="cs" />],
     [S_READ, <Read key="rd" />],
     [S_STATE, <SameState key="ss" />],
-    [B, <SeriesBoard key="b" ch={4} from={B} at={PUN} cam={[[B, 2560, 1580, 1.6], [PUN + 64, 2750, 1712, 1.5], [PUN + 400, 2750, 1712, 1.5]]} />],
+    [B, <SeriesBoard key="b" ch={4} from={B} at={PUN} cam={[[B, 2560, 1580, 1.6], [PUN + 64, 2930, 1420, 1.15], [PUN + 400, 2930, 1420, 1.15]]} />],
   ]);
   return <>{scene}<Whooshes at={[S_PLAN, S_RANGE, S_ENG, S_CASE, S_READ, S_STATE]} /></>;
 };

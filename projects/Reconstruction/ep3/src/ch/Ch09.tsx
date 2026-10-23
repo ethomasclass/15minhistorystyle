@@ -100,7 +100,7 @@ const Protect: React.FC = () => (
     filter="grayscale(1) contrast(1.3) brightness(0.8)" focusAt={S_PROT}
     keys={[[S_PROT, {x: 1900, y: 1260, z: 0.86}], [S_YEARS, {x: 2000, y: 1250, z: 0.92}]]}
     over={<>
-      <Slip text="what changed: who protected them" x={140} y={120} rot={-2} size={60} at={t.at('protecting')} />
+      <Slip text="what changed: who protected them" x={140} y={130} rot={-2} size={60} at={t.at('protecting')} />
       <Slip text="now, nobody was" x={600} y={860} rot={1.5} size={72} at={t.at('nobody was')} coral />
     </>} />
 );
@@ -217,7 +217,7 @@ const Grandfather: React.FC = () => {
         [S_USED, {...TINY, x: 1150, y: 640, z: 0.98}]]}
       over={<>
         <Highlight text="GRANDFATHER CLAUSE" x={110} y={106} size={84} at={gc} seed={93} rot={-2} />
-        <Definition term="grandfather clause" def="an escape hatch: a man could skip the new rules if his father or grandfather could vote on Jan. 1, 1867" at={gc + 9} x={120} y={850} w={1640} />
+        <Definition term="grandfather clause" def="an escape hatch: a man could skip the new rules if his father or grandfather could vote on Jan. 1, 1867" at={gc + 9} x={120} y={836} w={1640} />
         <Counter n={3} at={gc} label="GAP" />
         <Slip text="skip the tax and the test" x={1100} y={250} rot={2} size={56} at={t.at('skip those rules')} />
         <Slip text="Jan. 1, 1867: before Black men could vote there" x={460} y={720} rot={-1.5} size={52} at={t.at('able to vote')} coral />
@@ -237,7 +237,7 @@ const Used: React.FC = () => {
       keys={[[S_USED, {x: 1000, y: 1300, z: 0.38}], [wm - 4, {x: 1260, y: 2380, z: 0.78}], [S_1896, {x: 1270, y: 2400, z: 0.82}]]}
       over={<>
         <Counter n={3} at={0} label="GAP" />
-        <Slip text="who signed up under §5, 1898" x={140} y={120} rot={-2} size={56} at={S_USED + 6} />
+        <Slip text="who signed up under §5, 1898" x={140} y={130} rot={-2} size={56} at={S_USED + 6} />
         <Slip text="white: 37,877" x={260} y={820} rot={-1.5} size={64} at={wm} />
         <Slip text="Black: 111" x={1180} y={820} rot={2} size={64} at={t.at('white men')} coral />
       </>}>
@@ -271,7 +271,7 @@ const Bars: React.FC = () => (
 /** Jim Crow: a waiting-room sign (1943). */
 const Sign: React.FC = () => (
   <PhotoShot src={I + 'bubley_colored_waiting_room_sign_1943.jpg'} size={[1433, 1503]} a={S_SIGN} b={S_LEE} w={620} x={560} y={540} rot={-1.5} tag={SRC.bubley}>
-    <Slip text="laws that split almost everything by race" x={300} y={110} rot={-1.5} size={56} at={t.at('split')} />
+    <Slip text="laws that split almost everything by race" x={300} y={130} rot={-1.5} size={56} at={t.at('split')} />
     <Slip text="schools" x={1020} y={330} rot={2} size={64} at={t.at('schools')} />
     <Slip text="trains" x={1060} y={460} rot={-2} size={64} at={t.at('trains')} />
     <Slip text="waiting rooms" x={1020} y={590} rot={1.5} size={64} at={t.at('waiting rooms')} coral />
