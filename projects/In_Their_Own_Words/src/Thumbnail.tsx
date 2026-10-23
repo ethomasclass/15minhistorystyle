@@ -2,12 +2,16 @@
 // (tools/thumbs.mjs renders frame 140 so every write-on has finished).
 //   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
 //   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+//   C · the picnic: the Bull Run spectators full frame, the man with the field glasses in coral, the basket circled.
+//   D · topic-led: Fort Sumter burning, washed coral to teal, "THE CIVIL WAR: / WHY THEY LEFT".
+//   E · two presidents: Lincoln (teal) and Davis (coral) cut out either side of a cream line.
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
-import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
+import {DrawnCrown, fill} from './kit/shell';
+import {Finish, Highlight, Loop, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
+import type {MaskRef} from './kit/maskref';
 import {MASKS} from './masks';
 import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
@@ -93,6 +97,90 @@ export const ThumbB: React.FC = () => {
         <Note text="the People's President..." x={90} y={330} size={70} rot={-3} color={TEAL} />
         <Highlight text={TITLE.split(' ')[0]} x={80} y={440} size={230} at={0} seed={75} rot={-3} />
         <Highlight text={`${TITLE.split(' ').slice(1).join(' ')}?`} x={120} y={700} size={170} at={0} seed={77} rot={-2} />
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+/** A masked, tinted, traced cut-out of one figure. */
+const Cutout: React.FC<{src: string; size: [number, number]; mask: MaskRef; place: Place; color: string}> = ({src, size, mask, place, color}) => (
+  <>
+    <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * place.scale, height: size[1] * place.scale, ...cut(mask.alpha), filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+      <Picture src={src} place={{left: 0, top: 0, scale: place.scale}} size={size} bw="grayscale(1) contrast(1.25) brightness(0.92)" />
+    </div>
+    <Tint mask={mask.alpha} place={place} size={size} color={color} />
+    <Traced paths={mask.data.shapes.subject} place={place} at={0} dur={1} width={7} color="#f4efe6" />
+  </>
+);
+
+/** C · the picnic at Bull Run. */
+export const ThumbC: React.FC = () => {
+  const size: [number, number] = [1376, 768];
+  const p = fill(size, 700, 400, 1.18);
+  const S = (x: number, y: number) => [p.left + x * p.scale, p.top + y * p.scale];
+  const [bx, by] = S(512, 662);
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <Picture src="img/gen/v1_ch07_spectators.jpg" place={p} size={size} bw="grayscale(1) contrast(1.3) brightness(0.95)" />
+        <Tint mask={MASKS.spectator.alpha} place={p} size={size} color={CORAL} />
+        <Traced paths={MASKS.spectator.data.shapes.subject} place={p} at={0} dur={1} width={7} color={TEAL} />
+        <AbsoluteFill style={{background: 'linear-gradient(270deg, rgba(8,7,5,0.9) 0%, rgba(8,7,5,0.6) 30%, rgba(8,7,5,0) 52%)'}} />
+        <Loop cx={bx} cy={by} rx={95 * p.scale} ry={70 * p.scale} at={0} dur={1} seed={73} tilt={-6} width={9} />
+        <Note text="to watch a battle" x={1180} y={760} size={70} rot={-4} color="#ffffff" />
+        <Note text="Bull Run, 1861" x={1250} y={300} size={62} rot={-4} color={TEAL} />
+        <Highlight text="THEY BROUGHT" x={1110} y={420} size={92} at={0} seed={261} rot={-3} />
+        <Highlight text="A PICNIC" x={1120} y={540} size={150} at={0} seed={263} rot={-2} />
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+/** D · topic-led over Fort Sumter, washed coral (South) to teal (North). */
+export const ThumbD: React.FC = () => {
+  const size: [number, number] = [3000, 2137];
+  const p = fill(size, 1500, 900, 1.22);
+  const wash = (blend: React.CSSProperties['mixBlendMode'], o: number) => (
+    <AbsoluteFill style={{mixBlendMode: blend, opacity: o, background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL} 40%, ${TEAL} 66%, ${TEAL} 100%)`}} />
+  );
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <AbsoluteFill style={{isolation: 'isolate'}}>
+          <Picture src="img/ch05/bombardment_fort_sumter_currier_ives_1861.jpg" place={p} size={size} bw="grayscale(1) contrast(1.4) brightness(0.95)" />
+          {wash('color', 0.75)}
+          {wash('multiply', 0.18)}
+        </AbsoluteFill>
+        <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,7,5,0.92) 0%, rgba(8,7,5,0.65) 28%, rgba(8,7,5,0) 48%)'}} />
+        <Highlight text="THE CIVIL WAR:" x={90} y={700} size={100} at={0} seed={271} rot={-2} />
+        <Highlight text="WHY THEY LEFT" x={80} y={835} size={175} at={0} seed={273} rot={-2} />
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+/** E · two presidents, one country splitting. */
+export const ThumbE: React.FC = () => {
+  const LS: [number, number] = [2249, 3000];
+  const DS: [number, number] = [2341, 3000];
+  const pl: Place = {left: 480 - 1140 * 0.47, top: -170, scale: 0.47};
+  const pd: Place = {left: 1440 - 1210 * 0.62, top: -190, scale: 0.62};
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <DarkPaper />
+        <Cutout src="img/ch02/lincoln_campaign_portrait_grozelier_1860.jpg" size={LS} mask={MASKS.lincoln} place={pl} color={TEAL} />
+        <Cutout src="img/ch02/davis_portrait_brady_1859.jpg" size={DS} mask={MASKS.davis} place={pd} color={CORAL} />
+        <div style={{position: 'absolute', left: 956, top: 0, width: 8, height: 1080, background: '#f4efe6'}} />
+        <AbsoluteFill style={{background: 'linear-gradient(0deg, rgba(8,7,5,0.9) 0%, rgba(8,7,5,0.55) 24%, rgba(8,7,5,0) 40%)'}} />
+        <Highlight text="ONE COUNTRY" x={110} y={850} size={104} at={0} seed={281} rot={-3} />
+        <Highlight text="TWO PRESIDENTS" x={1010} y={850} size={86} at={0} seed={283} rot={-2} />
         <Logo />
         <Finish vignette={0.3} />
       </AbsoluteFill>

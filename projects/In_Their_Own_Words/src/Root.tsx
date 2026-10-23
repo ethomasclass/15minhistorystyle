@@ -7,7 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/Intro';
 import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {MAPTEST_FRAMES, MapTest} from './MapTest';
-import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
+import {THUMB_FRAMES, ThumbA, ThumbB, ThumbC, ThumbD, ThumbE} from './Thumbnail';
 
 export const Root: React.FC = () => (
   <>
@@ -16,6 +16,9 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
+    <Composition id="Thumb-C" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbC /></JFonts>} />
+    <Composition id="Thumb-D" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbD /></JFonts>} />
+    <Composition id="Thumb-E" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbE /></JFonts>} />
     <Composition id="MapTest" width={W} height={H} fps={FPS} durationInFrames={MAPTEST_FRAMES} component={() => <JFonts><MapTest /></JFonts>} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
