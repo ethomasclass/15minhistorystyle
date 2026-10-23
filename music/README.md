@@ -152,6 +152,8 @@ gets this suffix:
 
 **ElevenLabs** (`tools/music_eleven.py <name>`, in the template; about 850 credits a minute). Instrumental is forced, and its cues come out quiet (−16 to −19.5 LUFS), so measure the LUFS and run the bed higher. The prompt recipe that made the `rc_` cues (the moment and period in plain words, period instruments by name and no named songs, how it moves, how it ends, the standard suffix, the length) is in the tool's docstring and in the skill's `voice-and-audio.md` §6; the `rc_` prompts below are worked examples.
 
+**ACE-Step 1.5** (`tools/music_acestep.py`, in the template; free, runs locally): open-source text-to-music, MIT licensed, outputs allowed commercially. Seconds per cue on a GPU or Apple silicon, about 4 minutes per 60 s cue on a CPU. Setup, the CPU fix and the caption style are in the tool's docstring; the first test is in `projects/Reconstruction/music/acestep_test/`.
+
 **Real period recordings** (`tools/jukebox.py search|get`, in the template): Library of Congress National Jukebox records, public domain if published before 1926, with credits written to `public/music/credits.json`. Sung records only where there's no narration. Reconstruction's ten are in `projects/Reconstruction/music/period/` with sources and rights in `projects/Reconstruction/MUSIC.md`.
 
 **Adding a cue to this library:** give it the new video's prefix, copy it to `cues/`, measure it

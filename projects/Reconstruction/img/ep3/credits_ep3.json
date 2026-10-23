@@ -460,26 +460,55 @@
     "source": "loc:2012586608"
   },
   "ch07/asher_adams_louisiana_mississippi_map_1874.jpg": {
-    "title": "Asher & Adams' Louisiana and Mississippi. Entered according to Act of Congress in the year 1874 by Asher & Adams ... at Washington. (New York, 1874)",
-    "artist": "['Asher & Adams', 'Franklin Type Foundry']",
-    "date": "1874",
-    "licence": "public domain by age (1874)",
-    "page": "https://archive.org/details/dr_asher--adams-louisiana-and-mississippi-entered-according-to-act-of-congr-00604013",
-    "source": "ia:dr_asher--adams-louisiana-and-mississippi-entered-according-to-act-of-congr-00604013"
-  },
-  "ch03/asher_adams_north_south_carolina_map_1874.jpg": {
-    "title": "Asher & Adams' North Carolina and South Carolina. Entered according to Act of Congress in the year 1874 by Asher & Adams ... at Washington. (New York, 1874)",
-    "artist": "['Asher & Adams', 'Franklin Type Foundry']",
-    "date": "1874",
-    "licence": "public domain by age (1874)",
-    "page": "https://archive.org/details/dr_asher--adams-north-carolina-and-south-carolina-entered-according-to-act-00604009",
-    "source": "ia:dr_asher--adams-north-carolina-and-south-carolina-entered-according-to-act-00604009"
-  },
-  "../../../../../../../tmp/claude-0/-home-user-15minhistorystyle/189155d9-00a4-5f05-b275-68bddd21d67c/scratchpad/ep3w/aa_lm.jpg": {
-    "title": "File:Asher and Adams\u2019 Louisiana and Mississippi. (9472769945).jpg",
+    "title": "File:Asher and Adams\u2019 Louisiana and Mississippi. (9472769945).jpg (Asher & Adams' Louisiana and Mississippi, 1874; Mississippi Dept. of Archives and History copy; 3840 px Commons thumbnail)",
     "artist": "Mississippi Department of Archives and History",
     "date": "2010-09-24 14:18:19",
     "licence": "No restrictions",
     "page": "https://commons.wikimedia.org/wiki/File:Asher_and_Adams%E2%80%99_Louisiana_and_Mississippi._(9472769945).jpg"
+  },
+  "ch07/asher_adams_1874_hinds_county_clinton_jackson_crop.jpg": {
+    "title": "File:Asher and Adams\u2019 Louisiana and Mississippi. (9472769945).jpg (Asher & Adams' Louisiana and Mississippi, 1874; Mississippi Dept. of Archives and History copy; 3840 px Commons thumbnail) [crop: Hinds County, Clinton, Jackson, Vicksburg]",
+    "artist": "Mississippi Department of Archives and History",
+    "date": "2010-09-24 14:18:19",
+    "licence": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:Asher_and_Adams%E2%80%99_Louisiana_and_Mississippi._(9472769945).jpg"
+  },
+  "ch04/asher_adams_1874_grant_parish_colfax_crop.jpg": {
+    "title": "File:Asher and Adams\u2019 Louisiana and Mississippi. (9472769945).jpg (Asher & Adams' Louisiana and Mississippi, 1874; Mississippi Dept. of Archives and History copy; 3840 px Commons thumbnail) [crop: Grant Parish, Colfax, Alexandria, Louisiana]",
+    "artist": "Mississippi Department of Archives and History",
+    "date": "2010-09-24 14:18:19",
+    "licence": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:Asher_and_Adams%E2%80%99_Louisiana_and_Mississippi._(9472769945).jpg"
+  },
+  "ch03/asher_adams_1874_south_carolina_counties_crop.jpg": {
+    "title": "File:Asher & Adams' New Commercial And Topographical Rail-Road Map And Guide Of North Carolina And South Carolina. Comprising A New (IA dr asher-adams-new-commercial-and-topographical-rail-road-map-and-guide-of-3214002).jpg [crop: South Carolina, incl. the nine upstate counties of the Oct 1871 proclamation; 3840 px Commons thumbnail of the David Rumsey Collection scan; the scan's copyright line is cropped out]",
+    "artist": "Asher &amp; Adams",
+    "date": "1874",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Asher_%26_Adams%27_New_Commercial_And_Topographical_Rail-Road_Map_And_Guide_Of_North_Carolina_And_South_Carolina._Comprising_A_New_(IA_dr_asher-adams-new-commercial-and-topographical-rail-road-map-and-guide-of-3214002).jpg"
+  },
+  "ch09/louisiana_grandfather_clause_registrations_by_race_1902.jpg": {
+    "title": "Report of the secretary of state to His Excellency W. W. Heard, governor of the state of Louisiana. May 12th, 1902 (page 565)",
+    "artist": "Louisiana. Dept. of State",
+    "date": "1902",
+    "licence": "public domain by age (1902)",
+    "page": "https://archive.org/details/reportofsecretar00loui/page/n565",
+    "source": "iabook:reportofsecretar00loui:565"
+  },
+  "ch09/louisiana_registered_voters_by_race_1896_1902report.jpg": {
+    "title": "Report of the secretary of state to His Excellency W. W. Heard, governor of the state of Louisiana. May 12th, 1902 (page 561)",
+    "artist": "Louisiana. Dept. of State",
+    "date": "1902",
+    "licence": "public domain by age (1902)",
+    "page": "https://archive.org/details/reportofsecretar00loui/page/n561",
+    "source": "iabook:reportofsecretar00loui:561"
+  },
+  "ch09/louisiana_registered_voters_by_race_jan1898_1902report.jpg": {
+    "title": "Report of the secretary of state to His Excellency W. W. Heard, governor of the state of Louisiana. May 12th, 1902 (page 562)",
+    "artist": "Louisiana. Dept. of State",
+    "date": "1902",
+    "licence": "public domain by age (1902)",
+    "page": "https://archive.org/details/reportofsecretar00loui/page/n562",
+    "source": "iabook:reportofsecretar00loui:562"
   }
 }

@@ -524,14 +524,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Joint_Resolution_Proposing_the_Fifteenth_Amendment_to_the_United_States_Constitution_-_NARA_-_299797.jpg"
   },
-  "ch08/LATER_sharecropper_home_merigold_ms_1939.jpg": {
-    "title": "Home of share-cropper living near Merigold, Mississippi. Background photo, Sunflower Plantation",
-    "artist": "Lee, Russell, 1903-1986, photographer",
-    "date": "1939-01-01",
-    "licence": "No known restrictions. For information, see U.S. Farm Security Administration/Office of War Information Black & White Photographs https://www.loc.gov/rr/print/res/071_fsab.html",
-    "page": "https://www.loc.gov/item/2017782057/",
-    "source": "loc:2017782057"
-  },
   "ch03/LATER_blacksmithing_am_college_greensboro_1899.jpg": {
     "title": "Blacksmithing at Agricultural and Mechanical College, Greensboro, N.C.",
     "artist": "",
@@ -602,13 +594,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Agreement_of_Labor_for_a_Mr._Montgomery_and_Others_-_NARA_-_595058.jpg"
   },
-  "ch09/five_thousand_black_convicts_weekly_state_chronicle_1888.jpg": {
-    "title": "File:5000 Black Convicts.jpg",
-    "artist": "Weekly State Chronicle",
-    "date": "1888-11-02",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:5000_Black_Convicts.jpg"
-  },
   "ch01/ny_tribune_1870-02-26_revels_sworn_in_48_8.jpg": {
     "title": "New-York Tribune, February 26, 1870, p.4: Senate report, 'Mr. Revels sworn in' (vote to refer credentials Yeas 8, Nays 48; oath vote Yeas 48, Nays 8)",
     "artist": "New-York Tribune",
@@ -642,7 +627,8 @@
     "date": "1860-01-01",
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2012648057/",
-    "source": "loc:2012648057"
+    "source": "loc:2012648057",
+    "note": "stereograph card; date uncertain (LOC: 1860s); crop one half for use"
   },
   "ch08/LATER_cotton_picking_mississippi_1896.jpg": {
     "title": "Cotton picking, Mississippi",

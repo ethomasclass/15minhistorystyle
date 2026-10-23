@@ -115,6 +115,13 @@ shifts. Re-check stills for that chapter after re-voicing.
      cue runs at 0.13. Listen to the first 30–40 s, which is what most chapters use.
   4. Add the cue to the music library (`music/cues/`, a row in `music/README.md`, an entry in `music/catalog.json` with
      its prompt) under the video's prefix. Commit the `.mp3`; the `.wav` copy is git-ignored.
+- **Generate locally with ACE-Step 1.5** (`tools/music_acestep.py`; free and unlimited, the user's pick for
+  text-to-music after the Reconstruction test): an open-source model run on your own machine (MIT; outputs allowed
+  commercially). Setup, the CPU fix and the prompt style are in the tool's docstring. Captions are comma-separated:
+  period and instruments first, then mood and how it moves, then "documentary underscore, restrained, instrumental";
+  give `bpm`, key and time signature explicitly. On a GPU or Apple silicon a cue takes seconds; on a CPU-only cloud
+  session about 4 minutes per 60 s cue. Its "cover" mode did not keep a melody in the CPU test, so use it for
+  text-to-music, not for turning a recording into a new arrangement (yet).
 - **Real period recordings** (`tools/jukebox.py`; how Reconstruction got its spirituals, band medleys and Foster):
   `search "roll jordan roll"` lists Library of Congress National Jukebox records (1900–1925) with dates and performers;
   `get <jukebox-id> public/music/period/<name>.mp3` downloads one and writes its credit to `public/music/credits.json`.
