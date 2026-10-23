@@ -1,2 +1,4 @@
 projects/Dressed_To_Kill/renders/Dressed_To_Kill_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Reconstruction/ep1/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep2/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep3/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
