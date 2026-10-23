@@ -13,7 +13,7 @@ import {Sfx} from './kit/common';
 import {Stamp, type TL, useScene} from './kit/shell';
 import {Desk, DropCard, LOOK} from './kit/bs';
 import {Cut} from './kit/desk';
-import {Captions, EndCard, FPS, Mark, TAG_Y, TopicStrip, withBeat} from './kit/vshort';
+import {Captions, EndCard, FPS, Mark, TAG_Y, TopicStrip} from './kit/vshort';
 import {Bag, Chip, CORAL, CREAM, DoorShot, Loupe, ORANGE, Policy, Street, XRay, YearFlip} from './candy';
 import {Cover} from './cover';
 import {MASKS} from './masks';
@@ -21,13 +21,23 @@ import {IMG, type Pic} from './images';
 import words from '../public/audio/short_candy_scare.words.json';
 
 const WAV = 'audio/short_candy_scare.wav';
-const BEAT = 0.7;
-const HOLD = 30;
+const BEAT = 0.6;
+const HOLD = 24;
 export const COVER = {frames: 45, fade: 6};
 // m_reveal: a Shorts engine (ticking clock, pizzicato, low piano) whose last strong accent (~64 s) lands on "Not one child."
 const MUSIC = {src: 'music/m_reveal.mp3', vol: 0.2, accent: 64, landOn: 'Not one child.'};
 
-const {narr: NARR, cut: CUT, lastWordEnd} = withBeat(words as Narration, 'Thanks', BEAT);
+// The take says "Thanks for watching." before the subscribe line; the house end line (shorts.md) starts at "If you want",
+// so that phrase is cut out of the audio: play up to CUT_A, open a beat, then resume from CUT_B.
+const RAW = words as Narration;
+const iThanks = RAW.words.findIndex((w) => w.w === 'Thanks');
+const iIf = RAW.words.findIndex((w, i) => i > iThanks && w.w === 'If');
+const CUT_A = (RAW.words[iThanks - 1].e + RAW.words[iThanks].s) / 2;
+const CUT_B = (RAW.words[iIf - 1].e + RAW.words[iIf].s) / 2;
+const SHIFT = CUT_B - CUT_A - BEAT;
+const NARR: Narration = {voice: RAW.voice, duration: RAW.duration - SHIFT,
+  words: [...RAW.words.slice(0, iThanks), ...RAW.words.slice(iIf).map((w) => ({...w, s: w.s - SHIFT, e: w.e - SHIFT}))]};
+const lastWordEnd = NARR.words[NARR.words.length - 1].e;
 export const SHORT_FRAMES = Math.ceil(lastWordEnd * FPS) + HOLD;
 
 const tagOf = (p: Pic) => (p.tag ? <Tag text={p.tag} x={44} y={TAG_Y} /> : null);
@@ -202,8 +212,7 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
 export const CandyShort: React.FC = () => {
   const frame = useCurrentFrame();
   const t = makeTimeline(NARR, FPS);
-  const endAt = t.at('Thanks') - 10;
-  const cut = Math.round(CUT * FPS);
+  const endAt = t.at('If you want') - 10;
   const drop = t.at('the dad.');
   const music0 = Math.max(0, Math.round(MUSIC.accent * FPS) - t.at(MUSIC.landOn));
   const cutsAt = ['That hand is', 'So whose hand', 'Four more Pixy', 'And the dark house?', 'The poisoner was', "He'd just bought", 'He was caught.', "The fear wasn't.", 'In 1982,', 'That Halloween,',
@@ -213,7 +222,7 @@ export const CandyShort: React.FC = () => {
       <StepCtx.Provider value={2.5}>
         <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
           <Scenes t={t} />
-          <EndCard t={t} start="Thanks" />
+          <EndCard t={t} start="If you want" thanks={false} />
           {frame >= COVER.frames && <Captions n={NARR} until={endAt} />}
           <TopicStrip text="THE HALLOWEEN CANDY SCARE" until={endAt} />
           {frame < COVER.frames + COVER.fade && (
@@ -222,9 +231,9 @@ export const CandyShort: React.FC = () => {
             </AbsoluteFill>
           )}
           <Mark />
-          <Audio src={staticFile(WAV)} endAt={cut} />
-          <Sequence from={cut + Math.round(BEAT * FPS)} layout="none">
-            <Audio src={staticFile(WAV)} startFrom={cut} />
+          <Audio src={staticFile(WAV)} endAt={Math.round(CUT_A * FPS)} />
+          <Sequence from={Math.round((CUT_A + BEAT) * FPS)} layout="none">
+            <Audio src={staticFile(WAV)} startFrom={Math.round(CUT_B * FPS)} />
           </Sequence>
           {/* the bed drops out just before "the dad" and comes back after a held beat */}
           <Audio src={staticFile(MUSIC.src)} startFrom={music0}
