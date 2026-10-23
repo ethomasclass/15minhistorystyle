@@ -1,33 +1,48 @@
 # The Candy Man: The Halloween Poison Scare (Short)
 
-**15 Minute History** · standalone vertical Short (1080×1920) · draft 2 · 162 words · about 52 s at the locked pace (188 wpm), built to loop
+**15 Minute History** · standalone vertical Short (1080×1920) · draft 3 · 162 story words + like/subscribe line · about 58 s, built to loop
 
 **Driving question:** How many kids has a stranger's Halloween candy actually killed?
 **Answer:** None that anyone can find. The one real poisoned-candy murder (1974) was a father killing his own son, and the 1982 Tylenol murders turned that story into a national panic.
 
-**Tone:** heavy (a child's death): plain statements, no jokes, no wry asides, no subscribe plug in the narration.
+**Tone:** heavy (a child's death): plain statements, no jokes, no wry asides. The like/subscribe line comes after the payoff, never on it.
 **Timing:** posting window closes Oct 31.
 
 ---
 
 ## 0:00 | The Candy Man
 
-`ch01_candy_scare.txt` · 162 words. Beat times are estimates at 188 wpm.
+`ch01_candy_scare.txt` · 162 story words + the 17-word like/subscribe line · about 58 s with the standalone-Short voice
+settings (`VOICE_STRETCH=1.15`, one file, a 0.6–0.9 s beat before "Thanks" via `withBeat()`). Beat times are estimates.
 
 | ~Time | Beat | Narration |
 |---|---|---|
-| 0:00 | **Hook**: a death + a mystery in one breath | An 8-year-old eats a Pixy Stix on Halloween night. Within an hour, he's dead. |
-| 0:04 | **The claim** (the image everyone remembers) | His dad says it came from a dark house. The door opened a crack, and a hand reached out. |
-| 0:10 | **Why you care + open loop 1** | That hand is a big reason parents still check Halloween candy. So whose hand was it? |
-| 0:15 | **But** (stakes up: four more) | Outside Houston, 1974. Police find four more Pixy Stix in four other kids' bags. All full of cyanide. And the man at the dark house? He was at work. |
-| 0:24 | **Twist** (loop 1 closes) | The poisoner was *the dad*. He'd just bought life insurance on his kids. |
-| 0:28 | **Therefore** (re-hook, loop 2 opens) | He was caught. The fear wasn't. In 1982, someone in Chicago put cyanide in Tylenol. Seven people died. That Halloween, some towns banned trick-or-treating. Hospitals offered to X-ray candy. |
-| 0:39 | **The question, said out loud** | So how many kids has a stranger's candy actually killed? A sociologist checked newspapers back to 1958. Hoaxes. A few pins. *Not one child.* |
-| 0:47 | **Reversal = loop** (last line reframes the first) | There was never a hand at the door. Just a dad, walking his kids from house to house. |
+| 0:00 | **Hook**: a scene with a person + a death | An 8-year-old eats a Pixy Stix on Halloween night. Within an hour, he's dead. |
+| 0:05 | **The claim** (the image everyone remembers) | His dad says it came from a dark house. Just a hand, reaching out the door. |
+| 0:10 | **Why it's worth watching + the question** | That hand is a big reason parents still check Halloween candy. So whose hand was it? |
+| 0:16 | **But** (stakes up) | Four more Pixy Stix turn up in other kids' bags. All laced with cyanide. And the dark house? The owner was at work. |
+| 0:24 | **Twist** | The poisoner was *the dad*. He'd just bought life insurance on his kids. |
+| 0:28 | **Therefore** (the loop stays open: the fear) | He was caught. The fear wasn't. In 1982, someone poisoned Tylenol in Chicago. Seven people died. That Halloween, some towns banned trick-or-treating. |
+| 0:37 | **Today** | Forty years later, it was rainbow fentanyl: pills that looked like candy. Clinics still X-ray candy. |
+| 0:43 | **The question, said out loud → payoff** | So how many kids has a stranger's candy killed? A sociologist has tracked the reports since 1958. Hoaxes. A few pins. *Not one child.* |
+| 0:51 | **Reversal = loop** (last line reframes the first) | There was never a hand at the door. Just a dad, walking his kids from house to house. |
+| 0:56 | beat, then **end card** | Thanks for watching. If you want more history like this, tap like, and subscribe. They're right there. |
 
-Then straight back to frame 0 (no end card; see "Open questions for you").
+**Loop map** (the story-loops rule: never a stretch with every question closed)
+
+| Loop | Opens | Closes |
+|---|---|---|
+| The hand: who gave him the candy? | 0:05 (asked out loud at 0:13) | 0:24 "the dad" |
+| The fear: is a stranger's candy really dangerous? | 0:10 "parents still check" (said again at 0:28 "The fear wasn't") | 0:50 "Not one child" |
+| Rewatch | 0:55 "There was never a hand at the door" | frame 0 (the cover is the same door) |
+
+**Draft history.** Draft 2 restructured for retention (death first, loops, but/therefore, loop ending). Draft 3 added
+today (2022 fentanyl warning, candy X-rays; "has tracked the reports since 1958" so "Not one child" covers today) and
+moved to the standalone-Short format from the latest style branch (story words to 162, the channel's like/subscribe line
+and end card; names and extra dates cut: "Outside Houston, 1974" lives on screen).
 
 ---
+
 
 ## Why draft 2 is built this way (story-arc research)
 
@@ -77,39 +92,77 @@ points below are the ones several sources agree on, plus YouTube's own statement
 | Ended on a closing line + 3 s end card | Ends on the line that loops back to frame 0 | Loop (point 6) |
 | 160 words | 162 words | Same length, tighter turns |
 
-## Possible trim (to ~45 s, about 142 words)
+## If the voice runs over 59 s
 
 | Cut | Words |
 |---|---|
-| "All full of cyanide." (move "cyanide" on screen as a label) | −4 |
-| "Hospitals offered to X-ray candy." (keep the X-ray as a picture under "banned trick-or-treating") | −5 |
-| "Outside Houston, 1974." (date and place go on screen as a tape title) | −3 |
-| "A sociologist checked newspapers back to 1958." → "One study checked back to 1958." | −2 |
-| Total | −14 → 148 words, about 47 s |
+| "All laced with cyanide." (the Loupe says it on screen) | −4 |
+| "He was caught." (keep "The fear wasn't.") | −3 |
+| "A sociologist has tracked the reports since 1958." → "One study has tracked them since 1958." | −2 |
 
-## Open questions for you
+## Visual plan (draft 3)
 
-- **End card.** Your Shorts rule ends on a 3 s card pointing to the full video. This Short has no full video, and a card
-  breaks the loop. Recommendation: no card; link *Dressed to Kill* as the "Related video" when uploading (it shows as a
-  tappable link under the Short) and put "Another Halloween poison story: Dressed to Kill" in the description.
-- **Trim** to ~47 s, or keep the full 52 s.
+Follows the newest house rules (style branch `ccr-76f2028e-9z2soe`: `references/shorts.md` checklist, *The Balloon War*
+cut-outs rule) plus the Vox-study pieces. **House rules this plan keeps:** every photo is a cut-out on the dark ruled
+notebook (`Cut`) or a cream card on the desk (`Desk`); no full-screen photo pushes, no 3D photo fly-throughs, no
+silhouettes, everything black and white (the rainbow pills too, with coral as the one colour). Nothing to read in the
+first 15 s. A new picture every 3–5 s. Safe zone x 60–930, y 150–1150; captions at y ~1185; tags at y ~1490.
 
-## Production notes (first pass; scenes after the script locks)
+### The big idea: door to door
 
-- **Frame 0 and the last frame are the same shot:** a dark front door opened a crack, a hand holding out a giant Pixy
-  Stix. No photo of the night exists, so this is a drawn scene (teal line drawing) or one AI image, your call.
-- **Visual change every 2–3 s**, matching the beat table; captions three words at a time (Inter 800, 88 px).
-- **On-screen question cards** at the two loops: "WHOSE HAND?" (0:13) and "HOW MANY?" (0:39), so a viewer with the sound
-  off still gets the questions.
-- **The dad:** O'Bryan's 1975 court photo (coral tint, teal trace) on "The poisoner was *the dad*." A music drop 4–6
-  frames before "the dad" (the *Dressed to Kill* technique). Check the photo's rights; a news-photo crop may need a
-  fair-use judgement.
-- **Insurance:** a drawn policy card stamped $10,000 … $20,000 … $20,000 per child.
-- **1982:** Tylenol bottle + cancellation headlines (clipping crops), "7" in orange tape, a small pin on Chicago.
-- **The number:** a teal tally board, 1958 → today, filling with "hoax" and "pin" marks, then a big orange **0** stamped
-  over "children killed by a stranger's candy".
-- **Last line:** the door again; the hand pulls back and the dad's silhouette walks the kids down the street. The music
-  bed keeps going through the cut to frame 0.
+The Short is a trick-or-treat route. A **street of front doors in CSS 3D**, built like the *Mummies* Short 6 gallery corridor
+(`short6.tsx`: CSS 3D planes, not a photo), drawn in teal line on the dark paper with porch lights. Each beat, the camera glides
+to the next door and the door opens on that beat's evidence. Walking "from house to house" is literally the last line, so
+the device pays off the ending, and it's a running device ("what's behind the next door?") that keeps people swiping *in*
+rather than away.
+
+The first door is the **hand at the door**: the door open a crack, a drawn hand holding out a Pixy Stix (coral). It comes back
+as a **match cut** each time the fear returns, with a new thing in the same hand (*Ouija*'s "same frame, different hands"):
+
+| Door | When | What's in the hand |
+|---|---|---|
+| 1 | 0:00 · 0:10 | a giant Pixy Stix |
+| 1 | 0:28 "The fear wasn't" | a Tylenol capsule |
+| 1 | 0:37 "Forty years later" | a rainbow pill |
+| 1 | 0:51 "never a hand at the door" | nothing: the hand pulls back and the door swings open on an empty hall |
+
+### Beat by beat
+
+| ~Time | Picture | Kit (from) |
+|---|---|---|
+| 0:00 | **Cover frame, fully drawn on frame 0:** door 1 with the hand and coral Pixy Stix, big type **WHO POISONED THE HALLOWEEN CANDY?** (Abril, 130 px). Topic strip **THE HALLOWEEN CANDY SCARE** stays up all the way through. Wordmark top-left. | `cover.tsx`, `TopicStrip`, `Mark` (`vshort.tsx`) |
+| 0:02 | "Within an hour": a soft porch-light flicker, the music falls away under "he's dead". | music drop (*Dressed to Kill*) |
+| 0:05 | The hand reaches a little further out; the stick gets a teal `Loop`. | `Loop` |
+| 0:13 | "So whose hand was it?" A teal **?** handwritten beside the hand. | `Note` |
+| 0:16 | Camera glides down the street; **door 2** opens on four trick-or-treat bags (drawn), a real **Pixy Stix** cut-out dropping into each. Four teal checks: "uneaten". | street, `Cut`, `Note` |
+| 0:19 | **Look closer** on "cyanide": a teal ring zooms 3× on the stick's stapled top: "refilled · stapled shut". (Past 15 s, so a short label is fine.) | `Loupe` (Vox study §6.4) |
+| 0:21 | Back to door 1; the hand gets an orange strike-through; teal note "owner at work · 200+ witnesses". | `StrikeLine` |
+| 0:24 | **"the dad"**: door 3 opens and the dad's **cut-out** rises from below, coral, teal trace (his 1975 photo, if you're OK with fair use). The bed drops 4–6 frames before "the dad". | `Cut` (template `desk.tsx`), music drop |
+| 0:26 | A policy card drops on the desk; three stamps: **$10,000 JAN · $20,000 SEPT · $20,000 OCT** (per child). | `Desk`, `Stamp` |
+| 0:28 | "The fear wasn't." **Match cut** to door 1: the hand now holds a **capsule**. | motif |
+| 0:31 | A small drawn map with one pin on Chicago, an orange **7**. | `Stamp`, map pin |
+| 0:34 | A 1982 clipping about cancelled trick-or-treating as a desk card; a coral highlighter sweeps along the headline as it's read. | `Desk` + `DocMark swipe` (*Dressed to Kill*) |
+| 0:37 | **Match cut** to door 1: the hand holds a **rainbow pill**. Stacked tape **1982 / 2022**. | motif, then/now |
+| 0:39 | The DEA's 2022 warning (public-domain U.S. government page) as a card; its line about brightly colored fentanyl lifts off the page. Beside it, the DEA's photo of the pills as a cut-out, B&W with the pills in coral. | `DocLift` (Vox study §6.3), `Cut` |
+| 0:41 | **The X-ray:** door 4 opens on a drawn candy bag; a teal scan line sweeps down and turns it into an X-ray negative behind the line. Just candy inside. A faint beep. | `Wipe` (Vox study §5), small new build |
+| 0:43 | **The counter that won't move.** Years flip 1958 → 2026 across the top; grey tags pop in ("hoax", "pin", "hoax"); below, **KIDS KILLED BY A STRANGER'S CANDY** stays at **0**. | `Counter` (`vshort.tsx`), `Note` |
+| 0:50 | "Not one child." Orange **0** stamped; the picture holds with nothing new. | `Stamp`, held anchor (Vox study §5) |
+| 0:51 | Door 1 one last time: the hand pulls back, the door swings open on an empty hall. The camera turns to the street: a drawn teal dad walking two drawn kids from porch to porch (drawn, not his photo, so it never reads as a record of that night). | street |
+| 0:55 | The camera settles back on door 1, on the exact cover framing (the loop frame). | loop |
+| 0:56 | Beat, then the **end card** with arrows to YouTube's like and Subscribe buttons. | `EndCard` (`vshort.tsx`) |
+
+**Images.** Real, used as cut-outs or cards: a Pixy Stix product photo (B&W), the DEA warning page and pill photo (U.S.
+government, public domain), a 1982 clipping crop, and the dad's 1975 photo (fair use; your call). Everything else is drawn in
+teal on the notebook: the street and doors, the hand, the bags, the policy, the map pin, the X-ray, the counter. **No AI
+images needed.**
+
+**Sound.** Calm, curious bed (per *The Balloon War* note: felt piano or pizzicato, nothing military) from `music/`, its
+ending accent timed to "Not one child"; a door creak at 0:00 and 0:51; footsteps on the street glides; the music drop before
+"the dad"; a stamp on the **0**; a whoosh per cut.
+
+**Post.** Title under 60 characters, a claim or a question ("The Only Real Poisoned Halloween Candy Case"); the description's
+first line repeats the hook; three hashtags; pinned comment, a question anyone can answer ("Did your parents check your
+candy?"); "Related video": *Dressed to Kill*; altered content: Yes; not made for kids.
 
 ## Pronunciation (for ElevenLabs)
 
@@ -123,18 +176,19 @@ points below are the ones several sources agree on, plus YouTube's own statement
 
 | Script says | Record | Why the wording is safe |
 |---|---|---|
-| "The door opened a crack, and a hand reached out." | O'Bryan told police a person cracked the door of a dark house and handed him five Pixy Stix; he saw only a "hairy" arm. The sticks were 21 inches long, refilled with potassium cyanide and resealed with staples. | His own story, told as his story ("His dad says"). |
+| "Just a hand, reaching out the door." | O'Bryan told police a person cracked the door of a dark house and handed him five Pixy Stix; he saw only a "hairy" arm. The sticks were 21 inches long, refilled with potassium cyanide and resealed with staples. | His own story, told as his story ("His dad says"). |
 | "An 8-year-old eats a Pixy Stix on Halloween night. Within an hour, he's dead." | Timothy O'Bryan, 8, died on the way to the hospital less than an hour after eating it, Oct 31, 1974. | Matches. |
-| "outside Houston" | The family lived in Deer Park; they trick-or-treated in Pasadena, Texas. Sources split on which town to name. | Both are Houston suburbs, so "outside Houston" is true either way. |
-| "Police find four more Pixy Stix in four other kids' bags. All full of cyanide." | He gave the other four to his daughter (about 5) and three other children; all four were recovered uneaten (one boy fell asleep holding his, unable to open the staples). | Matches. |
-| "And the man at the dark house? He was at work." | The homeowner, Courtney Melvin, was ruled out: more than 200 people confirmed he was at work at Hobby Airport that night. | Matches. |
+| "OUTSIDE HOUSTON · 1974" (on screen only) | The family lived in Deer Park; they trick-or-treated in Pasadena, Texas. Sources split on which town to name. | Both are Houston suburbs, so "outside Houston" is true either way. |
+| "Four more Pixy Stix turn up in other kids' bags. All laced with cyanide." | He gave the other four to his daughter (about 5) and three other children; all four were recovered uneaten (one boy fell asleep holding his, unable to open the staples). | Matches. |
+| "And the dark house? The owner was at work." | The homeowner, Courtney Melvin, was ruled out: more than 200 people confirmed he was at work at Hobby Airport that night. | Matches. |
 | "He'd just bought life insurance on his kids." | $10,000 each in Jan 1974, $20,000 each about a month before, and more in the days before Halloween. He was about $100,000 in debt. | "Just" fits the last policies; the card shows the build-up. |
 | (not in narration) | Convicted of capital murder June 3, 1975; executed by lethal injection March 31, 1984, at Huntsville. Often misreported as executed on Halloween. | Kept out of the Short for time; worth a pinned comment. |
-| "In 1982, someone in Chicago put cyanide in Tylenol … seven people died." | Seven deaths in the Chicago area, late Sept to early Oct 1982. No one was ever charged with the murders. | Matches; "someone" because it's unsolved. |
+| "In 1982, someone poisoned Tylenol in Chicago. Seven people died." | Seven deaths in the Chicago area, late Sept to early Oct 1982. No one was ever charged with the murders. | Matches; "someone" because it's unsolved. |
 | "That hand is a big reason parents still check Halloween candy." | Fears of tainted treats began in the late 1960s, before this case; the 1974 case is the one real death the warnings point to, and 1982 made the checks routine. | "A big reason," not "the reason." |
 | "some towns banned trick-or-treating" | Vineland, NJ cancelled it outright; suburbs in OH, PA, IL and MA followed; candy sales fell 20–50% in many stores. | "Some towns." |
-| "Hospitals offered to X-ray candy." | Communities urged hospitals to make X-ray machines available, and many did through the 1980s. | "Offered," not "all hospitals." |
-| "A sociologist checked newspapers back to 1958. Hoaxes. A few pins. Not one child." | Joel Best (with Gerald Horiuchi, 1985) searched coverage 1958–1983: 76 reported incidents, a handful of minor injuries, many hoaxes, no child killed or seriously hurt by a treat from trick-or-treating. Best still says so (2023). The O'Bryan death is the one exception, and it wasn't a stranger. | Named as "a sociologist" (no scholar names on screen); "not one child killed" is his finding about strangers' treats, framed by the question. |
+| "Forty years later, it was rainbow fentanyl: pills that looked like candy." | On Aug 30, 2022 the DEA warned of brightly colored fentanyl pills ("rainbow fentanyl") that it said were made to appeal to young people. The DEA did not mention Halloween; the Halloween warnings followed that fall. Drug experts and Best said there was no evidence of a Halloween threat, and none turned up. | "Pills that looked like candy" is the DEA's own description; the script doesn't say the warning was right or wrong, and "Not one child" covers it. 1982 → 2022 is exactly 40 years. |
+| "Clinics still X-ray candy." | Urgent-care chains and ERs in several states run free candy X-ray nights each Halloween (Patient First in the Mid-Atlantic; ERs in Central Texas). X-rays find metal, not drugs. | "Clinics" (no company named); "offer." Re-check before posting that it's still running this year. |
+| "A sociologist has tracked the reports since 1958. Hoaxes. A few pins. Not one child." | Joel Best (with Gerald Horiuchi, 1985) searched coverage 1958–1983 and has kept tracking it every year since (2022 and 2023 interviews: still no case): 76 reported incidents, a handful of minor injuries, many hoaxes, no child killed or seriously hurt by a treat from trick-or-treating. Best still says so (2023). The O'Bryan death is the one exception, and it wasn't a stranger. | Named as "a sociologist" (no scholar names on screen); "not one child killed" is his finding about strangers' treats, framed by the question. |
 
 ## Sources
 
@@ -145,6 +199,11 @@ points below are the ones several sources agree on, plus YouTube's own statement
 - [Best & Horiuchi, "The Razor Blade in the Apple," *Social Problems* 1985](https://www.gwern.net/doc/sociology/1985-best.pdf)
 - [Joel Best, "My Seasonal Job," University of Delaware Research](https://www1.udel.edu/researchmagazine/issue/vol4_no1/my_seasonal_job.html)
 - [NPR/WNYC 2023: Why the urban legend of contaminated Halloween candy won't disappear](https://wnyc.org/story/why-the-urban-legend-of-contaminated-halloween-candy-wont-disappear/)
+
+- [NPR: Unfounded fears about rainbow fentanyl become the latest Halloween boogeyman (2022)](https://www.npr.org/2022/10/31/1132737831/rainbow-fentanyl-halloween-candy)
+- [Today: Rainbow fentanyl is the latest Halloween candy scare (2022)](https://www.today.com/today/amp/rcna51880)
+- [Axios: Halloween candy doesn't need to be X-rayed (2023)](https://www.axios.com/local/tampa-bay/2023/10/29/halloween-candy-safe-danger-avoid)
+- [KXXV: Central Texas ERs X-raying Halloween candy](https://www.kxxv.com/hometown/bell-county/ctx-emergency-rooms-x-raying-halloween-candy-for-sharp-objects)
 
 **Story-arc and Shorts retention research** (mostly practitioner blogs; used where several agree)
 
