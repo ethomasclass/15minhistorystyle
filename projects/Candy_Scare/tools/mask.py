@@ -25,7 +25,7 @@ JOBS = {
     # A figure fused to a prop (hands on a table, a tray in front): add cut rects, and if it still separates badly,
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
-    "dad": ("img/fairuse/FAIRUSE_houstonchronicle_1975-06-03_obryan_leaving_court.jpg", (430, 0, 960, 934), "isnet-general-use"),
+    "dad": ("img/fairuse/FAIRUSE_houstonchronicle_1975-06-03_obryan_leaving_court.jpg", (667, 0, 1488, 1448), "isnet-general-use"),
     "pail": ("img/candy/pumpkin_pail_full.jpg", None, "isnet-general-use"),
     "kid79": ("img/halloween/skeleton_kid_porch_1979.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),

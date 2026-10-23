@@ -2,7 +2,7 @@
 export type Pic = {src: string; size: [number, number]; tag?: string};
 
 export const IMG = {
-  dad: {src: 'img/fairuse/FAIRUSE_houstonchronicle_1975-06-03_obryan_leaving_court.jpg', size: [960, 934], tag: 'Houston Chronicle, June 3, 1975 · Othell O. Owensby Jr.'},
+  dad: {src: 'img/fairuse/FAIRUSE_houstonchronicle_1975-06-03_obryan_leaving_court.jpg', size: [1488, 1448], tag: 'Houston Chronicle, June 3, 1975 · Othell O. Owensby Jr.'},
   pail: {src: 'img/candy/pumpkin_pail_full.jpg', size: [1600, 1200], tag: 'Photo: Petey21 · CC0'},
   kid79: {src: 'img/halloween/skeleton_kid_porch_1979.jpg', size: [981, 974], tag: 'Halloween 1979 · Don Scarborough · CC BY-SA 2.5'},
   fda: {src: 'img/gov/fr_1982-11-05_p50442_tamper_resistant_rule.jpg', size: [2430, 3271], tag: 'Federal Register, Nov. 5, 1982 · FDA'},
