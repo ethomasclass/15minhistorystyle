@@ -99,10 +99,10 @@ export const EDISTO = {
   bram: [970, 1650, 470, 70] as Box,
   moultrie: [970, 1720, 560, 80] as Box,
   sampson: [970, 1800, 540, 90] as Box,
-  /** the three words on the letter's detail crop */
-  landless: [176, 382, 250, 76] as Box,
-  homeless: [432, 382, 262, 76] as Box,
-  voteless: [700, 382, 262, 76] as Box,
+  /** the three words on the letter's detail crop (measured from the ink, Oct 2026) */
+  landless: [168, 382, 282, 76] as Box,
+  homeless: [494, 382, 288, 76] as Box,
+  voteless: [818, 382, 232, 76] as Box,
 };
 export const SRC = {
   petition: 'Edisto Island committee to the President, Oct. 28, 1865 · National Archives (M752)',

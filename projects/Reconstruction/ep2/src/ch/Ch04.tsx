@@ -98,7 +98,7 @@ const Tenure: React.FC = () => (
       ]}
       over={<>
         <Highlight text="TENURE OF OFFICE ACT" x={110} y={106} size={76} at={t.at('Tenure')} seed={41} rot={-2} />
-        <Definition term="Tenure of Office Act" def="a law (1867): the President couldn't fire certain top officials without the Senate's permission" at={t.at('Tenure') + 9} x={120} y={850} w={1340} />
+        <Definition term="Tenure of Office Act" def="a law (1867): the President couldn't fire certain top officials without the Senate's permission" at={t.at('Tenure') + 9} x={120} y={836} w={1340} />
       </>}>
       <Swipe lines={TOA_TITLE} from={t.at('Tenure')} to={t.end('Tenure of Office Act')} seed="t1" />
       <Swipe lines={TOA_SEC} from={t.at('fire')} to={t.end('top officials')} seed="t2" />
@@ -138,7 +138,7 @@ const Fired: React.FC = () => {
           {g >= t.at('fired') && g < d && <Stamp text="FIRED" x={620} y={700} size={170} color={CORAL} rot={-8} at={t.at('fired')} />}
           <Slip text="3 days later: Feb. 24" x={1260} y={150} rot={2} size={54} at={d + 4} />
           <Highlight text="IMPEACH" x={110} y={106} size={92} at={t.at('impeach')} seed={43} rot={-2} />
-          <Definition term="impeach" def="to formally charge an official with wrongdoing: like filing charges" at={t.at('impeach') + 9} x={120} y={850} w={1300} />
+          <Definition term="impeach" def="to formally charge an official with wrongdoing: like filing charges" at={t.at('impeach') + 9} x={120} y={836} w={1300} />
         </>}>
         <Swipe lines={AOI_DATE} from={t.at('February')} to={t.end('February 1868')} seed="a1" />
         <Swipe lines={AOI_FIRED} from={t.at('Johnson fired')} to={t.end('anyway')} seed="a2" />
@@ -292,8 +292,8 @@ const Acquit: React.FC = () => {
 
 /** Stevens lying in state, guarded by Black soldiers. */
 const State: React.FC = () => (
-  <DocShot src={I + 'stevens_lying_in_state_harpers_1868-08-29_cover.jpg'} size={[2113, 3000]} tag={SRC.state} filter={PRINT_F} focusAt={S_STATE}
-    keys={[[S_STATE, {x: 1080, y: 1880, z: 1.0}], [S_GRAVE, {x: 1060, y: 1920, z: 1.08}]]}
+  <DocShot src={I + 'stevens_lying_in_state_harpers_1868-08-29_cover.jpg'} size={[2113, 3000]} tag={SRC.state} filter="grayscale(1) contrast(1.15) brightness(1.3)" focusAt={S_STATE}
+    keys={[[S_STATE, {x: 1030, y: 1860, z: 1.1}], [S_GRAVE, {x: 1030, y: 1900, z: 1.16}]]}
     over={<>
       <Slip text="Aug. 1868" x={130} y={130} rot={-2} at={t.at('summer')} />
       <Slip text="lying in state at the Capitol" x={1210} y={300} rot={2} size={50} at={t.at('He asked')} />

@@ -90,8 +90,8 @@ const Bag: React.FC = () => (
   <AbsoluteFill>
     <DarkPaper />
     <Print src={BAG} size={BAG_S} x={1340} y={560} w={600} rot={2} at={S_BAG} />
-    <Highlight text="CARPETBAGGERS" x={100} y={96} size={84} at={t.at('Carpetbaggers')} seed={71} rot={-2} />
-    <Definition term="carpetbagger" def="an insult for a Northerner who moved south after the war" at={t.at('Carpetbaggers') + 9} x={120} y={232} w={820} />
+    <Highlight text="CARPETBAGGERS" x={100} y={112} size={84} at={t.at('Carpetbaggers')} seed={71} rot={-2} />
+    <Definition term="carpetbagger" def="an insult for a Northerner who moved south after the war" at={t.at('Carpetbaggers') + 9} x={120} y={244} w={820} />
     <Slip text="everything they owned…" x={150} y={560} size={58} at={t.at('everything they owned')} />
     <Slip text="…in a cheap bag made of carpet" x={180} y={680} size={58} rot={2} at={t.at('cheap bag')} coral />
     <Sfx at={S_BAG} src="sfx/tick.wav" volume={0.4} />
@@ -162,7 +162,7 @@ const Offices: React.FC = () => {
         return <div key={i} style={{position: 'absolute', right: 1920 - (AX - hw(ym)) + 30, top: ym - 18, fontFamily: JF.mono, fontSize: 26, letterSpacing: 2, color: 'rgba(244,239,230,0.8)',
           whiteSpace: 'nowrap', opacity: interpolate(g, [S_OFFICES + 6 + i * 3, S_OFFICES + 11 + i * 3], [0, 1], clamp)}}>{s.label}</div>;
       })}
-      <Slip text="only a small share" x={1180} y={930} size={56} rot={-2} at={t.at('small share')} />
+      <Slip text="only a small share" x={1180} y={905} size={56} rot={-2} at={t.at('small share')} />
       <Slip text="some of the highest" x={1140} y={250} size={60} rot={2} at={t.at('highest')} coral />
       <Tag text={SRC.pyramid} />
     </AbsoluteFill>
@@ -174,8 +174,8 @@ const Scalawags: React.FC = () => (
   <AbsoluteFill>
     <DarkPaper />
     <Print src={ALCORN} size={ALCORN_S} x={1430} y={570} w={500} rot={2} at={S_SCAL} />
-    <Highlight text="SCALAWAGS" x={100} y={96} size={84} at={t.at('Scalawags')} seed={72} rot={-2} />
-    <Definition term="scalawag" def="an insult for a white Southerner who voted Republican" at={t.at('Scalawags') + 9} x={120} y={232} w={820} />
+    <Highlight text="SCALAWAGS" x={100} y={112} size={84} at={t.at('Scalawags')} seed={72} rot={-2} />
+    <Definition term="scalawag" def="an insult for a white Southerner who voted Republican" at={t.at('Scalawags') + 9} x={120} y={244} w={820} />
     <Slip text="slang: a worthless farm animal" x={150} y={520} size={58} rot={-2} at={t.at('slang')} />
     <Slip text="one of them: James Alcorn, governor of Mississippi, 1870" x={140} y={860} size={42} rot={1} at={t.at('worthless farm')} />
     <Sfx at={S_SCAL} src="sfx/tick.wav" volume={0.4} />
@@ -269,9 +269,9 @@ const Body: React.FC = () => {
     [S_TWIST, <Twist key="tw" />],
     [S_ROSTER, <Roster key="r" />],
     [S_BOARD, <SeriesBoard key="b" ch={7} from={S_BOARD} at={t.at('asking for help')}
-      cam={[[S_BOARD, 2130, 710, 1.5], [t.at('asking for help') + 50, 1760, 560, 1.1], [t.at('asking for help') + 420, 1760, 560, 1.085]]} overlay={<>
+      cam={[[S_BOARD, 2130, 710, 1.5], [t.at('asking for help') + 8, 2110, 700, 1.42], [t.at('asking for help') + 60, 1700, 525, 0.96], [t.at('asking for help') + 420, 1700, 525, 0.95]]} overlay={<>
       <Slip text="he'll be the one asking for help" x={160} y={880} size={56} rot={-2} at={t.at('He\'s going')} out={t.at('Quick thing')} coral />
-      <Slip text="subscribe ↓" x={1500} y={900} size={54} rot={3} at={t.at('hit subscribe')} />
+      <Slip text="subscribe ↓" x={1150} y={890} size={54} rot={3} at={t.at('hit subscribe')} />
     </>} />],
   ]);
   return (

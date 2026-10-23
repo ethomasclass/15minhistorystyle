@@ -79,7 +79,7 @@ const Grant: React.FC = () => (
 /** The Republican convention: the camera reads "Grant and Colfax", then drops to the convention. */
 const Convention: React.FC = () => (
   <DocShot src={CONV} size={[2032, 3000]} tag={SRC.conv} filter={PRINT_F} focusAt={S_CONV}
-    keys={[[S_CONV, {x: 560, y: 820, z: 1.05}], [t.at('And in the South') - 4, {x: 600, y: 860, z: 1.1}], [t.at('And in the South') + 14, {x: 1040, y: 2060, z: 0.95}], [S_CHART, {x: 1040, y: 2080, z: 1.0}]]}
+    keys={[[S_CONV, {x: 560, y: 820, z: 1.05}], [t.at('And in the South') - 4, {x: 600, y: 860, z: 1.1}], [t.at('And in the South') + 14, {x: 1000, y: 2060, z: 1.0}], [S_CHART, {x: 1000, y: 2080, z: 1.04}]]}
     over={<>
       <Slip text="Republican" x={1240} y={170} rot={2} at={t.at('Republican')} />
       <Slip text="Black voters helped elect him" x={1000} y={820} rot={-2} at={t.at('Black voters')} coral />
@@ -107,7 +107,7 @@ const Fifteenth: React.FC = () => (
       over={<>
         <Slip text="Feb. 1869" x={1480} y={150} rot={2} at={t.at('1869')} />
         <Highlight text="15TH AMENDMENT" x={110} y={106} size={84} at={t.at('15th')} seed={51} rot={-2} />
-        <Definition term="15th Amendment" def="the right to vote can't be denied because of race, color, or having been enslaved" at={t.at('15th') + 9} x={120} y={850} w={1320} />
+        <Definition term="15th Amendment" def="the right to vote can't be denied because of race, color, or having been enslaved" at={t.at('15th') + 9} x={120} y={836} w={1320} />
       </>} />
     <Stamps at={[t.at('15th')]} />
   </>
@@ -281,7 +281,7 @@ const Split: React.FC = () => {
       </FocusIn>
       <Slip text="opposed it" x={330} y={810} rot={-3} size={56} at={sp + 6} />
       <Slip text="backed it" x={1300} y={800} rot={2} size={56} at={sp + 10} />
-      {g >= sp && <Highlight text="SPLIT IN TWO" x={640} y={890} size={84} at={sp} seed={55} rot={-2} />}
+      {g >= sp && <Highlight text="SPLIT IN TWO" x={640} y={866} size={84} at={sp} seed={55} rot={-2} />}
       <Stamps at={[sp]} />
       <Sfx at={S_SPLIT + 1} src="sfx/tick.wav" volume={0.35} />
       <Tag text={SRC.split} />

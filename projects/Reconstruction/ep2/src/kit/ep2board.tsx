@@ -150,7 +150,7 @@ export const SeriesBoard: React.FC<{ch: number; from: number; at: number; cam?: 
   let box = [1e9, 1e9, -1e9, -1e9];
   const grow = (r: number[]) => { box = [Math.min(box[0], r[0]), Math.min(box[1], r[1]), Math.max(box[2], r[2]), Math.max(box[3], r[3])]; };
   mineP.forEach((p) => grow(rect(p)));
-  T2.filter((t) => t.ch === ch && !t.under).forEach((t) => grow([Math.min(t.a[0], t.b[0]), Math.min(t.a[1], t.b[1]), Math.max(t.a[0], t.b[0]), Math.max(t.a[1], t.b[1])]));
+  T2.filter((t) => t.ch === ch && (!t.under || t.cut)).forEach((t) => grow([Math.min(t.a[0], t.b[0]), Math.min(t.a[1], t.b[1]), Math.max(t.a[0], t.b[0]), Math.max(t.a[1], t.b[1])]));
   const others = PIECES.filter((p) => p.ch <= ch).map(rect);
   const fits = (cx: number, cy: number, z: number) => {
     const hw = 960 / z, hh = 540 / z, m = 70 / z;   // keep the chapter's pieces 70 px inside the edge

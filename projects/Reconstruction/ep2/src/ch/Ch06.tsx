@@ -158,8 +158,8 @@ const Rail: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <Slip text="a phrase from the time" x={150} y={420} size={60} at={t.at('phrase') - 2} out={pic} />
-      <Highlight text="BOTTOM RAIL ON TOP" x={100} y={96} size={84} at={hl} seed={61} rot={-2} />
-      <Definition term="bottom rail on top" def="freedpeople's phrase: the bottom of society, now in charge" at={hl + 9} x={120} y={232} w={1300} />
+      <Highlight text="BOTTOM RAIL ON TOP" x={100} y={112} size={84} at={hl} seed={61} rot={-2} />
+      <Definition term="bottom rail on top" def="freedpeople's phrase: the bottom of society, now in charge" at={hl + 9} x={120} y={244} w={1300} />
       {g >= pic && (
         <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
           {/* the ground, and the mud under the bottom rail */}
@@ -272,8 +272,8 @@ const Body: React.FC = () => {
     [S_CRITICS, <Critics key="cr" />],
     [S_TWEED, <Tweed key="tw" />],
     [S_BOARD, <SeriesBoard key="b" ch={6} from={S_BOARD} at={t.at('fit to govern')}
-      cam={[[S_BOARD, 1170, 1570, 1.6], [t.at('fit to govern') + 40, 1000, 1360, 1.2], [t.at('fit to govern') + 300, 1000, 1360, 1.185]]}
-      overlay={<Slip text="nobody said New Yorkers weren't fit to govern" x={720} y={880} size={52} rot={-2} at={t.at('Nobody said') + 4} coral />} />],
+      cam={[[S_BOARD, 1170, 1760, 1.5], [t.at('fit to govern') + 40, 880, 1620, 1.15], [t.at('fit to govern') + 300, 880, 1620, 1.14]]}
+      overlay={<Slip text="nobody said New Yorkers weren't fit to govern" x={700} y={905} size={52} rot={-2} at={t.at('Nobody said') + 4} coral />} />],
   ]);
   return (
     <>

@@ -74,7 +74,7 @@ export const DistrictMap: React.FC<{keys: Cam3[]; rise: number; stagger?: number
         <Stand api={api} at={[3470, 2920]} z={40} show={ord} out={ordOut}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10}}>
             <Img src={staticFile('img/ch02/cr_ord.png')} style={{width: 190, filter: 'drop-shadow(0 14px 18px rgba(0,0,0,0.7))'}} />
-            <PlaceTag text="Gen. E. O. C. Ord" size={24} />
+            <PlaceTag text="Gen. Ord · 4th District" size={24} />
           </div>
         </Stand>
       </>
@@ -91,16 +91,16 @@ const Town: React.FC<{name: string; color: string}> = ({name, color}) => (
 );
 
 /** Mississippi, then Clinton (coral: his town) and Jackson (the capital), 12 miles apart. */
-export const MsLocator: React.FC<{keys: Cam3[]; at: number; clinton: number; miles: number; jackson: number; nameOut: number}> = ({keys, at, clinton, miles, jackson, nameOut}) => {
+export const MsLocator: React.FC<{keys: Cam3[]; at: number; clinton: number; miles: number; jackson: number; nameOut: number; fillOut?: number}> = ({keys, at, clinton, miles, jackson, nameOut, fillOut = 1e7}) => {
   const [cx, cy] = TOWN.Clinton, [jx, jy] = TOWN.Jackson;
   return (
     <UsMap keys={keys}>
       {(api) => (
         <>
-          <Fill api={api} d={S('Mississippi')} at={at} color={CORAL} opacity={0.18} outline={CORAL} />
+          <Fill api={api} d={S('Mississippi')} at={at} out={fillOut} color={CORAL} opacity={0.18} outline={CORAL} />
           <Stand api={api} at={[3468, 2860]} z={4} show={at + 4} out={nameOut}><RegionName text="Mississippi" size={72} /></Stand>
           <Route api={api} pts={[[cx, cy], [jx, jy]]} at={miles} dur={14} color={TEAL} width={6} bow={0} dashed />
-          <Stand api={api} at={[(cx + jx) / 2, (cy + jy) / 2 + 2.2]} z={2} show={miles + 10}><Hand text="12 miles" size={64} bg /></Stand>
+          <Stand api={api} at={[(cx + jx) / 2, (cy + jy) / 2 - 0.5]} z={2} show={miles + 10}><Hand text="12 miles" size={64} bg /></Stand>
           <Stand api={api} at={[cx, cy]} show={clinton}><Town name="Clinton" color={CORAL} /></Stand>
           <Stand api={api} at={[jx, jy]} show={jackson}><Town name="Jackson" color={TEAL} /></Stand>
         </>

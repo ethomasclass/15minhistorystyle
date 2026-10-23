@@ -207,7 +207,6 @@ const Districts: React.FC = () => {
         <Highlight text="MILITARY DISTRICTS" x={110} y={106} size={84} at={md} seed={32} rot={-2} />
         <Definition term="military districts" def="the five parts of the South the army ran, each under a general" at={md + 9} x={120} y={850} w={1500} />
       </>}
-      <Slip text="Gen. Ord: the 4th District" x={1160} y={640} rot={2} size={56} at={t.at('Union general') - 2} out={tn} />
       <Slip text="left out" x={170} y={190} rot={-2} at={t.at('left out') - 2} />
       <Slip text="it had ratified the 14th, 1866" x={170} y={320} rot={2} size={58} at={t.at('It had already') - 2} />
       <Step n={1} at={S11} />

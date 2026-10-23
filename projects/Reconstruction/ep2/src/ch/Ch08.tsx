@@ -161,7 +161,7 @@ const Deal: React.FC = () => {
       <Slip text="one half of the crop" x={1240} y={260} rot={-2} at={t.at('a deal') + 8} />
       <Slip text="Elias Daniel, freedman: his mark" x={1000} y={760} rot={-2} size={54} at={t.at('one family') + 4} />
       <Highlight text="SHARECROPPING" x={110} y={106} size={84} at={sc} seed={81} rot={-2} />
-      <Definition term="sharecropping" def="farming someone else's land for a share of the crop" at={sc + 9} x={120} y={880} />
+      <Definition term="sharecropping" def="farming someone else's land for a share of the crop" at={sc + 9} x={120} y={840} w={1640} />
       <Tag text={SRC.deal} />
     </AbsoluteFill>
   );
@@ -184,8 +184,8 @@ const Tenant: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <Farm c={TENANT} from={S8} />
-      <Highlight text="TENANT FARMING" x={110} y={100} size={80} at={tf} seed={82} rot={-2} />
-      <Definition term="tenant farming" def="renting the land for cash or a fixed amount of crop, with your own tools" at={tf + 9} x={120} y={880} w={1400} />
+      <Highlight text="TENANT FARMING" x={110} y={112} size={80} at={tf} seed={82} rot={-2} />
+      <Definition term="tenant farming" def="renting the land for cash or a fixed amount of crop, with your own tools" at={tf + 9} x={120} y={840} w={1640} />
       <Slip text="rent: cash, or a fixed amount of crop" x={1000} y={140} rot={2} size={54} at={t.at('paid in cash') - 2} out={t.at('More freedom') - 2} />
       <Slip text="more freedom" x={1080} y={126} rot={-2} at={t.at('More freedom') - 2} />
       <Slip text="more risk" x={1460} y={170} rot={2} coral at={t.at('More risk') - 2} />
