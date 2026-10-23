@@ -133,11 +133,20 @@ export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: Boar
   const when = (pch: number, dt: number) => (pch < ch ? from - 400 : pch === ch ? at + dt : 1e7);
   const [fx, fy, fz] = FOCUS[ch];
   const lastDt = Math.max(0, ...[...PIECES, ...PINS, ...THREADS].filter((p) => p.ch === ch).map((p) => p.dt));
+  // the end shot frames what's pinned so far (rough piece sizes by kind), inside the safe margin
+  const SIZE: Record<LandKind, [number, number]> = {drop: [340, 300], slap: [175, 165], stamp: [330, 60], tape: [120, 40], slide: [330, 40], fade: [300, 60]};
+  const shown = PIECES.filter((p) => p.ch <= ch);
+  const bx0 = Math.min(...shown.map((p) => p.x), ...COLUMNS.filter((k) => k.ch <= ch).map((k) => k.x));
+  const by0 = Math.min(...shown.map((p) => p.y), ...COLUMNS.filter((k) => k.ch <= ch).map((k) => k.y));
+  const bx1 = Math.max(...shown.map((p) => p.x + SIZE[p.kind][0]));
+  const by1 = Math.max(...shown.map((p) => p.y + SIZE[p.kind][1]));
+  const endZ = Math.min(1.5, Math.max(0.86, Math.min(1640 / (bx1 - bx0), 860 / (by1 - by0))));
+  const ex = (bx0 + bx1) / 2, ey = (by0 + by1) / 2;
   const keys: BoardKey[] = cam ?? [
-    // start close on the new piece, settle on the whole board (everything inside the safe margin at 0.86)
+    // start close on the new piece, settle on everything pinned so far
     [from, fx + 20, fy + 10, fz],
-    [Math.max(from + 20, at + lastDt + 18), 960, 530, 0.87],
-    [Math.max(from + 21, at + lastDt + 260), 960, 530, 0.86],
+    [Math.max(from + 20, at + lastDt + 18), ex, ey, endZ],
+    [Math.max(from + 21, at + lastDt + 260), ex, ey, endZ * 0.985],
   ];
   // the 13th Amendment's highlighter runs on arrival in ch06; the silhouette's question mark and label in ch03
   const hlAt = when(6, 70);
