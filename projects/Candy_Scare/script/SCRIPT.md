@@ -7,6 +7,7 @@
 
 **Tone:** heavy (a child's death): plain statements, no jokes, no wry asides. The like/subscribe line comes after the payoff, never on it.
 **Timing:** posting window closes Oct 31.
+**Decided:** 15 Minute History wordmark (top-left, small); the dad's real photo as the coral cut-out; built on the merged style branch (standalone-Short kit, notebook cut-outs).
 
 ---
 
@@ -137,7 +138,7 @@ as a **match cut** each time the fear returns, with a new thing in the same hand
 | 0:16 | Camera glides down the street; **door 2** opens on four trick-or-treat bags (drawn), a real **Pixy Stix** cut-out dropping into each. Four teal checks: "uneaten". | street, `Cut`, `Note` |
 | 0:19 | **Look closer** on "cyanide": a teal ring zooms 3× on the stick's stapled top: "refilled · stapled shut". (Past 15 s, so a short label is fine.) | `Loupe` (Vox study §6.4) |
 | 0:21 | Back to door 1; the hand gets an orange strike-through; teal note "owner at work · 200+ witnesses". | `StrikeLine` |
-| 0:24 | **"the dad"**: door 3 opens and the dad's **cut-out** rises from below, coral, teal trace (his 1975 photo, if you're OK with fair use). The bed drops 4–6 frames before "the dad". | `Cut` (template `desk.tsx`), music drop |
+| 0:24 | **"the dad"**: door 3 opens and the dad's **cut-out** rises from below, coral, teal trace (his real photo, approved; fair use, credited in the source tag). The bed drops 4–6 frames before "the dad". | `Cut` (template `desk.tsx`), music drop |
 | 0:26 | A policy card drops on the desk; three stamps: **$10,000 JAN · $20,000 SEPT · $20,000 OCT** (per child). | `Desk`, `Stamp` |
 | 0:28 | "The fear wasn't." **Match cut** to door 1: the hand now holds a **capsule**. | motif |
 | 0:31 | A small drawn map with one pin on Chicago, an orange **7**. | `Stamp`, map pin |
@@ -152,7 +153,7 @@ as a **match cut** each time the fear returns, with a new thing in the same hand
 | 0:56 | Beat, then the **end card** with arrows to YouTube's like and Subscribe buttons. | `EndCard` (`vshort.tsx`) |
 
 **Images.** Real, used as cut-outs or cards: a Pixy Stix product photo (B&W), the DEA warning page and pill photo (U.S.
-government, public domain), a 1982 clipping crop, and the dad's 1975 photo (fair use; your call). Everything else is drawn in
+government, public domain), a 1982 clipping crop, and the dad's photo (approved by you; fair use). Everything else is drawn in
 teal on the notebook: the street and doors, the hand, the bags, the policy, the map pin, the X-ray, the counter. **No AI
 images needed.**
 
