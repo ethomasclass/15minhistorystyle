@@ -156,23 +156,38 @@ export const SeriesBoard: React.FC<{ch: number; from: number; at: number; cam?: 
     const hw = 960 / z, hh = 540 / z, m = 70 / z;   // keep the chapter's pieces 70 px inside the edge
     const v = [cx - hw, cy - hh, cx + hw, cy + hh];
     if (box[0] < v[0] + m || box[2] > v[2] - m || box[1] < v[1] + m || box[3] > v[3] - m) return false;
-    return others.every((r) => r[2] <= v[0] || r[0] >= v[2] || r[3] <= v[1] || r[1] >= v[3] || (r[0] >= v[0] && r[2] <= v[2] && r[1] >= v[1] && r[3] <= v[3]));
+    // every other piece is either off screen or wholly inside the safe margin (100 px)
+    const sm = 100 / z;
+    return others.every((r) => r[2] <= v[0] || r[0] >= v[2] || r[3] <= v[1] || r[1] >= v[3] ||
+      (r[0] >= v[0] + sm && r[2] <= v[2] - sm && r[1] >= v[1] + sm && r[3] <= v[3] - sm));
   };
-  let end: [number, number, number] = [fx, fy, 0.9];
-  if (mineP.length) {
+  const end = React.useMemo((): [number, number, number] => {
+    if (!mineP.length) return [fx, fy, 0.9];
     const cx0 = (box[0] + box[2]) / 2, cy0 = (box[1] + box[3]) / 2;
     const z0 = Math.min(1.25, Math.min(1760 / (box[2] - box[0] + 140), 940 / (box[3] - box[1] + 140)));
-    let found = false;
-    for (let z = z0; z >= 0.55 && !found; z *= 0.96) {
-      for (let r = 0; r <= 400 && !found; r += 40) {
-        for (let k = 0; k < (r ? 8 : 1) && !found; k++) {
-          const cx = cx0 + r * Math.cos((k * Math.PI) / 4), cy = cy0 + r * Math.sin((k * Math.PI) / 4) * 0.6;
-          if (fits(cx, cy, z)) { end = [cx, cy, z]; found = true; }
+    for (let z = z0; z >= 0.45; z *= 0.96) {
+      for (let r = 0; r <= 900; r += 50) {
+        for (let k = 0; k < (r ? 16 : 1); k++) {
+          let cx = cx0 + r * Math.cos((k * Math.PI) / 8), cy = cy0 + r * Math.sin((k * Math.PI) / 8);
+          if (!fits(cx, cy, z)) continue;
+          // re-centre on everything this frame shows, if that still fits (so the shot isn't lopsided)
+          const hw = 960 / z, hh = 540 / z;
+          const inView = others.filter((q) => q[0] >= cx - hw && q[2] <= cx + hw && q[1] >= cy - hh && q[3] <= cy + hh);
+          if (inView.length) {
+            const mx = (Math.min(box[0], ...inView.map((q) => q[0])) + Math.max(box[2], ...inView.map((q) => q[2]))) / 2;
+            const my = (Math.min(box[1], ...inView.map((q) => q[1])) + Math.max(box[3], ...inView.map((q) => q[3]))) / 2;
+            for (const f of [1, 0.75, 0.5, 0.25]) {
+              const nx = cx + (mx - cx) * f, ny = cy + (my - cy) * f;
+              if (fits(nx, ny, z)) { cx = nx; cy = ny; break; }
+            }
+          }
+          return [cx, cy, z];
         }
       }
     }
-    if (!found) end = [cx0, cy0, Math.max(0.55, z0 * 0.7)];
-  }
+    return [cx0, cy0, Math.max(0.45, z0 * 0.6)];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ch]);
   const [ex, ey, endZ] = end;
   const keys: BoardKey[] = cam ?? [
     [from, fx + 20, fy + 10, fz],
