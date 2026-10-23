@@ -628,5 +628,100 @@
     "date": "1888-11-02",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:5000_Black_Convicts.jpg"
+  },
+  "ch01/ny_tribune_1870-02-26_revels_sworn_in_48_8.jpg": {
+    "title": "New-York Tribune, February 26, 1870, p.4: Senate report, 'Mr. Revels sworn in' (vote to refer credentials Yeas 8, Nays 48; oath vote Yeas 48, Nays 8)",
+    "artist": "New-York Tribune",
+    "date": "1870-02-26",
+    "licence": "public domain by age (1870); Library of Congress, Chronicling America",
+    "page": "https://www.loc.gov/resource/sn83030214/1870-02-26/ed-1/?sp=4",
+    "source": "chroniclingamerica:sn83030214/1870-02-26/ed-1/seq-4",
+    "note": "column crop via phrase_find.py"
+  },
+  "ch04/evening_star_1868-05-16_acquittal_extra.jpg": {
+    "title": "Evening Star (Washington, D.C.), May 16, 1868, p.1: '2d Extra. Impeachment. The Vote on the Eleventh Article. Acquittal of the President. The vote in detail' ('The vote resulted 35 to 19'); also 'Mr. Stevens was carried out in his arm-chair'",
+    "artist": "Evening Star",
+    "date": "1868-05-16",
+    "licence": "public domain by age (1868); Library of Congress, Chronicling America",
+    "page": "https://www.loc.gov/resource/sn83045462/1868-05-16/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn83045462/1868-05-16/ed-1/seq-1",
+    "note": "page region via phrase_find.py"
+  },
+  "ch04/evening_star_1868-05-16_acquittal_headline_35_19.jpg": {
+    "title": "Evening Star (Washington, D.C.), May 16, 1868, p.1: '2d Extra. Impeachment. The Vote on the Eleventh Article. Acquittal of the President. The vote in detail' ('The vote resulted 35 to 19'); also 'Mr. Stevens was carried out in his arm-chair'",
+    "artist": "Evening Star",
+    "date": "1868-05-16",
+    "licence": "public domain by age (1868); Library of Congress, Chronicling America",
+    "page": "https://www.loc.gov/resource/sn83045462/1868-05-16/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn83045462/1868-05-16/ed-1/seq-1",
+    "note": "left column crop: headline stack and '35 to 19'"
+  },
+  "ch08/picking_cotton_near_montgomery_alabama_stereo.jpg": {
+    "title": "Picking cotton near Montgomery, Alabama",
+    "artist": "Lakin, J. H. (Josephus Holtzclaw), 1838-1909, photographer",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012648057/",
+    "source": "loc:2012648057"
+  },
+  "ch08/LATER_cotton_picking_mississippi_1896.jpg": {
+    "title": "Cotton picking, Mississippi",
+    "artist": "",
+    "date": "1896-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2006686821/",
+    "source": "loc:2006686821"
+  },
+  "ch09/LATER_weighing_cotton_texas_1904.jpg": {
+    "title": "Weighing cotton--in one of the large cotton fields in Texas, U.S.A.",
+    "artist": "Keystone View Company.",
+    "date": "1904-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/93500568/",
+    "source": "loc:93500568"
+  },
+  "ch08/freedmens_bureau_labor_agreement_truss_hall_1865_nara.jpg": {
+    "title": "File:Agreement of Labor for Truss B. Hall - NARA - 595055.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "28 August 1865date QS:P571,+1865-08-28T00:00:00Z/11",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Agreement_of_Labor_for_Truss_B._Hall_-_NARA_-_595055.jpg"
+  },
+  "ch04/stevens_grave_shreiner_concord_2014_ccby.jpg": {
+    "title": "File:Thaddeus Stevens Grave.jpg",
+    "artist": "JamesPFisherIII",
+    "date": "2014-11-26 09:49:40",
+    "licence": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Thaddeus_Stevens_Grave.jpg"
+  },
+  "ch05/grant_brady_nara_526674.jpg": {
+    "title": "File:Gen. Ulysses S. Grant - NARA - 526674.jpg",
+    "artist": "Mathew Benjamin Brady",
+    "date": "between circa 1860 and circa 1865date QS:P571,+1860-00-00T00:00:00Z/8,P1319,+1860-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Gen._Ulysses_S._Grant_-_NARA_-_526674.jpg"
+  },
+  "ch09/LATER_convict_system_of_alabama_dawson_1892_cover.jpg": {
+    "title": "The convict system of Alabama, as it was and as it is (page 0)",
+    "artist": "Dawson, R. H",
+    "date": "1892",
+    "licence": "public domain by age (1892)",
+    "page": "https://archive.org/details/convictsystemofa00daws/page/n0",
+    "source": "iabook:convictsystemofa00daws:0"
+  },
+  "ch07/carpetbag_met_c1860_bw.jpg": {
+    "title": "File:Carpetbag MET 63.32.46 bw.jpeg",
+    "artist": "",
+    "date": "circa 1860date QS:P571,+1860-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Carpetbag_MET_63.32.46_bw.jpeg"
+  },
+  "ch06/LATER_heroes_of_the_colored_race_1881.jpg": {
+    "title": "Heroes of the colored race",
+    "artist": "Hoover, Joseph, 1830-1913, publisher",
+    "date": "1881",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/00651114/",
+    "source": "loc:00651114"
   }
 }
