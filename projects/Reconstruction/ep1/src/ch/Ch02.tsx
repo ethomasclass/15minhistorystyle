@@ -113,12 +113,12 @@ const Sides: React.FC = () => {
       <TopShade />
       <Slip text="the Civil War, 1861–65" x={1250} y={150} rot={-2} at={t.at('Civil War') - 2} out={u1} />
       <Until out={c1}>
-        <Highlight text="UNION" x={110} y={100} size={84} at={u1} seed={21} rot={-2} />
-        <Definition term="Union" def="the United States: the North in the Civil War" at={u1 + 9} x={120} y={860} />
+        <Highlight text="UNION" x={110} y={112} size={84} at={u1} seed={21} rot={-2} />
+        <Definition term="Union" def="the United States: the North in the Civil War" at={u1 + 9} x={120} y={830} />
       </Until>
       <Slip text="11 states" x={1330} y={300} size={66} rot={3} at={t.at('11 states') - 2} />
-      <Highlight text="CONFEDERACY" x={110} y={100} size={84} at={c1} seed={22} rot={-2} />
-      <Definition term="Confederacy" def="the 11 Southern states that broke away, 1861–65" at={c1 + 9} x={120} y={860} />
+      <Highlight text="CONFEDERACY" x={110} y={112} size={84} at={c1} seed={22} rot={-2} />
+      <Definition term="Confederacy" def="the 11 Southern states that broke away, 1861–65" at={c1 + 9} x={120} y={830} />
       <Slip text="to protect slavery" x={1250} y={420} coral at={t.at('protect slavery') - 2} />
       <Sfx at={t.at('The North')} src="sfx/tick.wav" volume={0.35} />
       <Tag text={MAP_TAG} />
@@ -239,8 +239,8 @@ const Translation: React.FC = () => {
 const OUT1 = S11 + 12;
 const OrderTitle: React.FC = () => (
   <Until out={OUT1}>
-    <Highlight text="SPECIAL FIELD ORDER NO. 15" x={110} y={96} size={70} at={t.at('Special Field')} seed={24} rot={-2} />
-    <Definition term="Special Field Order No. 15" def="Sherman's order setting aside coast land for freed families" at={t.at('Special Field') + 9} x={120} y={860} />
+    <Highlight text="SPECIAL FIELD ORDER NO. 15" x={110} y={112} size={70} at={t.at('Special Field')} seed={24} rot={-2} />
+    <Definition term="Special Field Order No. 15" def="Sherman's order setting aside coast land for freed families" at={t.at('Special Field') + 9} x={120} y={830} />
   </Until>
 );
 
@@ -264,12 +264,12 @@ const Order: React.FC = () => {
 
 /** The forty acres: the strip rises from Charleston to the St. Johns, the camera dives to Edisto, the plots pop up. */
 const Acres: React.FC = () => {
-  const keys = [acam(S11, -1100, 2454, 0.115, 46, -24), acam(t.at('islands included'), -800, 1554, 0.14, 46, -18), acam(t.at('Up to'), -30, 14, 2.0, 54, -8),
+  const keys = [acam(S11, -1000, 3000, 0.082, 44, -22), acam(t.at('islands included'), -800, 2000, 0.1, 46, -18), acam(t.at('Up to'), -30, 14, 2.0, 54, -8),
     acam(S12, -18, 10, 2.3, 56, -5)];
   const sc = t.at('South Carolina');
   return (
     <AbsoluteFill>
-      <AcresMap keys={keys} strip={t.at('strip')} settle={t.at('freed families')} labels={[sc, sc + 8, t.at('Florida')]} labelsOut={t.at('freed families') - 2}
+      <AcresMap keys={keys} strip={t.at('strip')} settle={t.at('freed families')} labels={[sc, sc + 8, t.at('Florida')]} labelsOut={t.at('islands included') + 8}
         edisto={t.at('set aside')} rise={t.at('Up to') + 2} />
       <TopShade />
       <OrderTitle />
@@ -292,8 +292,8 @@ const Mule: React.FC = () => {
         return <Loop cx={x} cy={y} rx={300} ry={230} at={t.at('mules')} seed={7} tilt={-6} />;
       }}>
       <Slip text="Army mules" x={1380} y={250} rot={2} at={t.at('mules') + 2} />
-      <Highlight text="FORTY ACRES AND A MULE" x={110} y={96} size={74} at={m} seed={25} rot={-2} />
-      <Definition term="forty acres and a mule" def="land for freed families, from Sherman's order" at={m + 9} x={120} y={860} />
+      <Highlight text="FORTY ACRES AND A MULE" x={110} y={112} size={74} at={m} seed={25} rot={-2} />
+      <Definition term="forty acres and a mule" def="land for freed families, from Sherman's order" at={m + 9} x={120} y={830} />
     </Bleed>
   );
 };

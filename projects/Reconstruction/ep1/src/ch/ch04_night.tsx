@@ -27,7 +27,7 @@ export const NightBoard: React.FC<{from: number; t: NightTimes; cam: BoardKey[]}
       <AbsoluteFill>
         <Defs />
         <BoardStage cam={cam} splats="c3">
-          <Land at={t.date} kind="slide" x={120} y={72}><Strip text="APRIL 14, 1865" seed="cf" size={34} bg={BRAND.paper} font={SANS} /></Land>
+          <Land at={t.date} kind="slide" x={140} y={112}><Strip text="APRIL 14, 1865" seed="cf" size={34} bg={BRAND.paper} font={SANS} /></Land>
           <Land at={t.booth} kind="drop" x={840} y={200} r={-2}><Photo src={W + 'cr_booth.png'} w={240} /></Land>
           <Land at={t.booth + 12} kind="slide" x={826} y={604} r={2}><Strip text="J. WILKES BOOTH · actor" seed="jb" size={24} font={SANS} /></Land>
           <Land at={t.lincoln} kind="drop" x={300} y={190} r={3}><Photo src={W + 'cr_lincoln.png'} w={215} /></Land>

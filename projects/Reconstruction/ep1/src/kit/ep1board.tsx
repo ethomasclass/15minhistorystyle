@@ -96,8 +96,8 @@ export const FOCUS: Record<number, [number, number, number]> = {
 
 /** Chalked column names, once the story has earned them. */
 const COLUMNS: {ch: number; text: string; x: number; y: number}[] = [
-  {ch: 2, text: 'LAND', x: 1520, y: 4},
-  {ch: 6, text: 'LAW', x: 300, y: 4},
+  {ch: 2, text: 'LAND', x: 1520, y: 36},
+  {ch: 6, text: 'LAW', x: 470, y: 30},
 ];
 
 const ThreadTag: React.FC<{text: string; x: number; y: number; show: number}> = ({text, x, y, show}) => (
@@ -134,9 +134,10 @@ export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: Boar
   const [fx, fy, fz] = FOCUS[ch];
   const lastDt = Math.max(0, ...[...PIECES, ...PINS, ...THREADS].filter((p) => p.ch === ch).map((p) => p.dt));
   const keys: BoardKey[] = cam ?? [
-    [from, fx + 30, fy + 10, fz * 1.12],
-    [Math.max(from + 20, at + lastDt + 18), (fx + 1920) / 3, (fy + 1080) / 3, Math.min(1.25, Math.max(0.92, fz * 0.7))],
-    [Math.max(from + 21, at + lastDt + 260), (fx + 1920) / 3, (fy + 1080) / 3, Math.min(1.22, Math.max(0.9, fz * 0.68))],
+    // start close on the new piece, settle on the whole board (everything inside the safe margin at 0.86)
+    [from, fx + 20, fy + 10, fz],
+    [Math.max(from + 20, at + lastDt + 18), 960, 530, 0.87],
+    [Math.max(from + 21, at + lastDt + 260), 960, 530, 0.86],
   ];
   // the 13th Amendment's highlighter runs on arrival in ch06; the silhouette's question mark and label in ch03
   const hlAt = when(6, 70);

@@ -81,40 +81,40 @@ const Body: React.FC = () => {
     // April 1865: into the burnt district of Richmond (music only for the first four seconds)
     [0, <AbsoluteFill key="st">
       <StereoInto dur={S1 + 10} />
-      <Slip text="Richmond, Va. · April 1865" x={130} y={120} at={t.at('April') - 2} />
+      <Slip text="Richmond, Va. · April 1865" x={130} y={140} at={t.at('April') - 2} />
       <Tag text={SRC.stereo} />
     </AbsoluteFill>],
     [S1, <Full key="mc" src={I + 'mclean_house_appomattox_april1865.jpg'} size={[3000, 2524]} rect={[420, 650, 2480, 2000]} f0={[1400, 1300]} a={S1} b={S2}
       bw="grayscale(1) contrast(1.2) brightness(0.85)">
-      {() => <><Slip text="Appomattox, Va. · April 9" x={1180} y={120} at={t.at('surrenders')} /><Tag text={SRC.mclean} /></>}
+      {() => <><Slip text="Appomattox, Va. · April 9" x={1180} y={140} at={t.at('surrenders')} /><Tag text={SRC.mclean} /></>}
     </Full>],
     // the window speech
-    [S2, <Full key="li" src={I + 'lincoln_gardner_feb1865.jpg'} size={[2133, 2999]} rect={[160, 200, 1850, 2800]} f0={[1000, 1300]} z1={1.05} a={S2} b={S3}
+    [S2, <Full key="li" src={I + 'lincoln_gardner_feb1865.jpg'} size={[2133, 2999]} rect={[160, 200, 1850, 2800]} f0={[1000, 1150]} z1={1.05} a={S2} b={S3}
       mask={MASKS.lincoln} traceAt={S2 + 8}>
-      {() => <><Slip text="April 11 · the White House" x={130} y={120} at={S2 + 6} /><Tag text={SRC.lincoln} /></>}
+      {() => <><Slip text="April 11 · the White House" x={130} y={140} at={S2 + 6} /><Tag text={SRC.lincoln} /></>}
     </Full>],
     [S3, <DocShot key="es" src={I + 'lincoln_last_speech_evening_star_12apr1865.jpg'} size={ESS} tag={SRC.star} focusAt={S3}
       keys={[[S3, {x: 624, y: 381, z: 1.28}], [t.at('Some Black men'), {x: 620, y: 345, z: 1.5}], [t.at('very intelligent'), {x: 640, y: 420, z: 1.6}], [S4, {x: 650, y: 425, z: 1.68}]]}
-      over={<Slip text="a first, for a president" x={130} y={110} at={t.at('no president')} />}>
+      over={<Slip text="a first, for a president" x={130} y={140} at={t.at('no president')} />}>
       <Swipe lines={ES_LINES} from={t.at('very intelligent')} to={t.end('Union soldiers')} seed="es" />
       <Spot size={ESS} boxes={ES_LINES} at={t.at('It was a small step')} id="es1" />
     </DocShot>],
     // Booth (traced, not tinted: he is not the subject)
     [S4, <Full key="bo" src={I + 'booth_carte_de_visite_1865.jpg'} size={[1836, 3000]} rect={[140, 170, 1690, 2600]} f0={[760, 1100]} a={S4} b={S5}
       mask={MASKS.booth} tint={null} traceAt={S4 + 10}>
-      {() => <><Slip text="according to later accounts" x={1150} y={110} size={50} at={t.at('according')} /><Tag text={SRC.booth} /></>}
+      {() => <><Slip text="according to later accounts" x={1150} y={140} size={50} at={t.at('according')} /><Tag text={SRC.booth} /></>}
     </Full>],
     // the plan: one night, three men
     [S5, <NightBoard key="n1" from={S5}
       t={{booth: S5 + 4, lincoln: t.at('The President'), johnson: t.at('vice president'), seward: t.at('Secretary of State'), date: t.at('same night'), died: 1e7, survived: 1e7, never: 1e7}}
-      cam={[[S5, 960, 420, 2.0], [t.at('became murder'), 960, 420, 1.92], [t.at('The President'), 960, 540, 1.0], [S6, 960, 540, 0.985]]} />],
+      cam={[[S5, 960, 440, 1.9], [t.at('became murder'), 960, 440, 1.84], [t.at('The President'), 960, 540, 1.0], [S6, 960, 540, 0.985]]} />],
     // April 14
     [S6, <DocShot key="pb" src={I + 'our_american_cousin_playbill_fords_theatre_14apr1865.jpg'} size={[905, 3000]} tag={SRC.playbill}
       keys={[[S6, {x: 452, y: 500, z: 1.2}], [t.at('Lincoln and his wife') + 10, {x: 452, y: 520, z: 1.2}], [t.at('comedy') + 4, {x: 452, y: 1560, z: 1.0}], [S7, {x: 452, y: 1580, z: 1.0}]]}>
       <Swipe lines={[PLAYBILL_LINCOLN]} from={t.at('Lincoln and his wife')} to={t.at('Lincoln and his wife') + 14} seed="pb" />
     </DocShot>],
     [S7, <Full key="ft" src={I + 'fords_theatre_exterior_april1865.jpg'} size={[3000, 2271]} rect={[100, 80, 2880, 2200]} f0={[1300, 1150]} f1={[1360, 1150]} z1={1.05} a={S7} b={S8}>
-      {() => <><Slip text="a little after 10 p.m." x={1250} y={110} at={t.at('A little after')} /><Tag text={SRC.fords} /></>}
+      {() => <><Slip text="a little after 10 p.m." x={1250} y={140} at={t.at('A little after')} /><Tag text={SRC.fords} /></>}
     </Full>],
     [S8, <Full key="bx" src={I + 'fords_theatre_presidents_box_april1865.jpg'} size={[2949, 3000]} rect={[160, 160, 2800, 2800]} f0={[1250, 1650]} z1={1.1} a={S8} b={S9}>
       {() => <Tag text={SRC.box} />}
@@ -140,15 +140,15 @@ const Body: React.FC = () => {
     // the board again: the outcomes
     [S14, <NightBoard key="n2" from={S14}
       t={{booth: long, lincoln: long, johnson: long, seward: long, date: long, died: long, survived: long, never: t.at('never goes')}}
-      cam={[[S14, 960, 540, 1.0], [S14 + 30, 960, 540, 1.0], [t.at('never goes') - 6, 1480, 420, 1.25], [S15, 1490, 420, 1.28]]} />],
+      cam={[[S14, 960, 540, 0.985], [S15, 960, 540, 0.97]]} />],
     // by morning, the President
     [S15, <Full key="ok" src={I + 'johnson_oath_kirkwood_house_15apr1865.jpg'} size={[3000, 2370]} rect={[120, 200, 2880, 2200]} f0={[1250, 1150]} a={S15} b={S16} bw={PF}>
-      {() => <><Slip text="sworn in · April 15, 1865" x={130} y={120} at={t.at('the President of the United States')} /><Tag text={SRC.oath} /></>}
+      {() => <><Slip text="sworn in · April 15, 1865" x={130} y={140} at={t.at('the President of the United States')} /><Tag text={SRC.oath} /></>}
     </Full>],
     [S16, <AbsoluteFill key="jp"><DarkPaper /><QuietPrint src="img/wall/cr_johnson.png" size={[900, 1101]} w={560} a={S16} b={S17} /><Tag text={SRC.johnson} /></AbsoluteFill>],
     // the drunk swearing-in
     [S17, <Full key="in" src={I + 'lincoln_second_inauguration_4mar1865_gardner.jpg'} size={[3000, 2184]} rect={[750, 415, 2245, 1490]} f0={[1500, 900]} z1={1.05} a={S17} b={S18}>
-      {() => <><Slip text="March 4, 1865 · inauguration day" x={130} y={120} at={t.at('Six weeks earlier') + 4} /><Tag text={SRC.inaug} /></>}
+      {() => <><Slip text="March 4, 1865 · inauguration day" x={130} y={140} at={t.at('Six weeks earlier') + 4} /><Tag text={SRC.inaug} /></>}
     </Full>],
     [S18, <DocShot key="cl" src={I + 'johnson_inauguration_drunk_editorial_cleveland_leader_13mar1865.jpg'} size={[805, 3000]} tag={SRC.leader}
       keys={[[S18, {x: 430, y: 170, z: 1.55}], [t.at('rambling'), {x: 440, y: 240, z: 1.7}], [S19, {x: 445, y: 255, z: 1.75}]]}>

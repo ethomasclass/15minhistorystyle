@@ -87,8 +87,8 @@ const PutBack: React.FC = () => {
         )}
       </UsMap>
       <TopShade />
-      <Highlight text="RECONSTRUCTION" x={110} y={100} size={84} at={r} seed={31} rot={-2} />
-      <Definition term="Reconstruction" def="bringing the South back into the Union, and deciding what freedom would mean" at={r + 9} x={120} y={860} w={1300} />
+      <Highlight text="RECONSTRUCTION" x={110} y={112} size={84} at={r} seed={31} rot={-2} />
+      <Definition term="Reconstruction" def="bringing the South back into the Union, and deciding what freedom would mean" at={r + 9} x={120} y={830} w={1300} />
       <Stamp text="4 million" x={1060} y={330} size={130} at={t.at('4 million')} rot={-3} />
       <Slip text="people just freed" x={1150} y={490} rot={2} at={t.at('just been freed') - 2} />
       <Tag text={MAP_TAG} />
@@ -114,7 +114,7 @@ const Who: React.FC = () => {
       <Slip text="or refuses" x={1330} y={690} rot={-2} at={t.at('refuses') - 2} />
       <Until out={gap - 2}>
         <Highlight text="VETO" x={830} y={170} size={96} at={v} seed={32} rot={-3} />
-        <Definition term="veto" def="the President refusing to sign a bill into law" at={v + 9} x={120} y={860} />
+        <Definition term="veto" def="the President refusing to sign a bill into law" at={v + 9} x={120} y={830} />
       </Until>
       <Slip text="the Constitution: says nothing" x={560} y={720} coral rot={-2} at={t.at('says nothing') - 2} />
       <BranchCard name="A STATE THAT LEFT" sub="HOW DOES IT COME BACK IN?" x={520} y={810} w={880} h={200} at={gap} dashed color="#f4efe6" />
@@ -197,16 +197,16 @@ const Radicals: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <AbsoluteFill style={{transform: `translateX(${dx}px)`}}>
-        {card('img/ch03/cr_stevens_bh.png', 500, 150, 250, -2.5, S10)}
-        {card('img/ch03/cr_wade.png', 430, 745, 200, 1.5, S10 + 6)}
-        {card('img/ch03/cr_davis.png', 330, 1330, 175, -1.5, S10 + 12)}
+        {card('img/ch03/cr_stevens_bh.png', 470, 150, 265, -2.5, S10)}
+        {card('img/ch03/cr_wade.png', 390, 760, 250, 1.5, S10 + 6)}
+        {card('img/ch03/cr_davis.png', 300, 1380, 225, -1.5, S10 + 12)}
       </AbsoluteFill>
-      <Slip text="Thaddeus Stevens" x={230} y={720} rot={-2} size={52} at={S10 + 4} />
-      <Slip text="Benjamin Wade" x={800} y={740} rot={2} size={52} at={S10 + 10} />
-      <Slip text="Henry Winter Davis" x={1320} y={810} rot={-2} size={52} at={S10 + 16} />
-      <Highlight text="RADICAL REPUBLICANS" x={110} y={70} size={70} at={r} seed={33} rot={-2} />
-      <Definition term="Radical Republicans" def="the party's most determined members against slavery" at={r + 9} x={120} y={900} />
-      <Slip text="remake the South" x={1330} y={70} coral rot={2} size={56} at={t.at('remake') - 2} />
+      <Slip text="Thaddeus Stevens" x={210} y={700} rot={-2} size={52} at={S10 + 4} />
+      <Slip text="Benjamin Wade" x={800} y={700} rot={2} size={52} at={S10 + 10} />
+      <Slip text="Henry Winter Davis" x={1300} y={760} rot={-2} size={52} at={S10 + 16} />
+      <Highlight text="RADICAL REPUBLICANS" x={110} y={112} size={70} at={r} seed={33} rot={-2} />
+      <Definition term="Radical Republicans" def="the party's most determined members against slavery" at={r + 9} x={120} y={830} />
+      <Slip text="remake the South" x={1300} y={118} coral rot={2} size={56} at={t.at('remake') - 2} />
       <Sfx at={S10} src="sfx/tick.wav" volume={0.35} />
       <Tag text={SRC.radicals} />
     </AbsoluteFill>
@@ -229,8 +229,8 @@ const Party: React.FC = () => {
       </UsMap>
       <TopShade />
       <Slip text="his own party hated it" x={1180} y={150} coral rot={-2} at={t.at('hated it') - 2} />
-      <Highlight text="REPUBLICAN" x={110} y={100} size={84} at={r} seed={34} rot={-2} />
-      <Definition term="Republican Party" def="founded in 1854 to stop slavery spreading into the West" at={r + 9} x={120} y={860} />
+      <Highlight text="REPUBLICAN" x={110} y={112} size={84} at={r} seed={34} rot={-2} />
+      <Definition term="Republican Party" def="founded in 1854 to stop slavery spreading into the West" at={r + 9} x={120} y={830} />
       <Slip text="same name, very different party" x={1050} y={270} rot={2} size={56} at={t.at('Same name') - 2} />
       <Slip text="mostly Northern" x={1200} y={390} rot={-2} at={t.at('mostly Northern') - 2} />
       <Slip text="stop it spreading" x={400} y={640} coral rot={-3} at={t.at('stop slavery') + 4} />
@@ -262,7 +262,7 @@ const Body: React.FC = () => {
     [S1, <Who key="w" />],
     [S3, <AbsoluteFill key="l">
       <Photo src="img/ch04/lincoln_gardner_feb1865.jpg" size={[2133, 2999]} fx={1070} fy={1180} z0={1.3} z1={1.38} a={S3} b={S4} mask={MASKS.lincoln} traceAt={S3 + 6} />
-      <Slip text="Abraham Lincoln, Republican" x={1180} y={820} rot={-2} size={56} at={S3 + 8} />
+      <Slip text="Abraham Lincoln, Republican" x={1100} y={800} rot={-2} size={54} at={S3 + 8} />
       <Tag text={SRC.lincoln} />
     </AbsoluteFill>],
     [S4, <Doc key="p1" src={P1} size={P1_S} a={S4} b={S5} tag={SRC.amnesty} filter={MS_F}
@@ -275,16 +275,16 @@ const Body: React.FC = () => {
       keys={[[S6, {x: 1150, y: 640, z: 0.95, tilt: 26, dof: 2.2, band: 80}], [S7, {x: 1300, y: 650, z: 1.02, tilt: 26, dof: 2.2, band: 80}]]}
       over={<>
         <Slip text="most Confederates" x={1240} y={170} rot={2} at={t.at('most Confederates') - 2} />
-        <Highlight text="PARDON" x={110} y={100} size={90} at={pd} seed={35} rot={-2} />
-        <Definition term="pardon" def="an official “you're forgiven”, with their rights given back" at={pd + 9} x={120} y={860} />
+        <Highlight text="PARDON" x={110} y={112} size={90} at={pd} seed={35} rot={-2} />
+        <Definition term="pardon" def="an official “you're forgiven”, with their rights given back" at={pd + 9} x={120} y={830} />
       </>}>
       <Swipe lines={[PARDONS]} from={pd} to={pd + 16} seed="pd" />
     </Doc>],
     [S7, <Doc key="p7" src={P7} size={P7_S} a={S7} b={S8} tag={SRC.amnesty} filter={MS_F}
       keys={[[S7, {x: 1250, y: 560, z: 0.95}], [S8, {x: 1300, y: 600, z: 1.05}]]}
       over={<>
-        <Highlight text="TEN PERCENT PLAN" x={110} y={100} size={84} at={tp} seed={36} rot={-2} />
-        <Definition term="Ten Percent Plan" def="Lincoln's plan: once 10% of a state's voters swore loyalty, it could return" at={tp + 9} x={120} y={860} w={1400} />
+        <Highlight text="TEN PERCENT PLAN" x={110} y={112} size={84} at={tp} seed={36} rot={-2} />
+        <Definition term="Ten Percent Plan" def="Lincoln's plan: once 10% of a state's voters swore loyalty, it could return" at={tp + 9} x={120} y={830} w={1400} />
         <Slip text="generous on purpose" x={1220} y={680} coral rot={-2} at={t.at('generous') - 2} />
       </>} />],
     [S8, <PhotoShot key="lf" src="img/ch03/cr_lincoln_g.png" size={[900, 968]} a={S8} b={S9} w={600} x={560} y={540} rot={-2} tag={SRC.lincoln}>
@@ -295,8 +295,8 @@ const Body: React.FC = () => {
     [S10, <Radicals key="ra" />],
     [S11, <AbsoluteFill key="fr">
       <Photo src="img/ch01/edisto_sweet_potato_planting_hopkinson_1862_moore.jpg" size={[3000, 2286]} fx={1500} fy={1350} z0={1.12} z1={1.2} a={S11} b={S12} />
-      <Highlight text="FREEDPEOPLE" x={110} y={100} size={84} at={fp} seed={37} rot={-2} />
-      <Definition term="freedpeople" def="the people who had just been freed from slavery" at={fp + 9} x={120} y={860} />
+      <Highlight text="FREEDPEOPLE" x={110} y={112} size={84} at={fp} seed={37} rot={-2} />
+      <Definition term="freedpeople" def="the people who had just been freed from slavery" at={fp + 9} x={120} y={830} />
       <Tag text={SRC.freed} />
     </AbsoluteFill>],
     [S12, <Ten key="ten" />],
@@ -305,8 +305,8 @@ const Body: React.FC = () => {
         [S14, {x: 1000, y: 1700, z: 1.26, tilt: 26, dof: 2, band: 70}]]}
       over={<>
         <Slip text="a tougher plan" x={1250} y={170} rot={2} at={t.at('tougher plan') - 2} />
-        <Highlight text="WADE-DAVIS BILL" x={110} y={100} size={84} at={wd} seed={38} rot={-2} />
-        <Definition term="Wade-Davis Bill" def="Congress's 1864 plan: a majority had to swear loyalty first" at={wd + 9} x={120} y={860} />
+        <Highlight text="WADE-DAVIS BILL" x={110} y={112} size={84} at={wd} seed={38} rot={-2} />
+        <Definition term="Wade-Davis Bill" def="Congress's 1864 plan: a majority had to swear loyalty first" at={wd + 9} x={120} y={830} />
       </>}>
       <Swipe lines={[MAJ]} from={t.at('a majority')} to={t.end('a majority') + 12} seed="mj" />
     </Doc>],

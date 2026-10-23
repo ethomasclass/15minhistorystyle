@@ -62,6 +62,13 @@ def run(name, src, box, model, *opts, sessions={}):
     if n > 2:                        # keep only the biggest piece (the subject)
         big = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
         m = ((lab == big) * 255).astype(np.uint8)
+    # fill holes inside the figure (a white shirt front, a gap at the elbow), or the trace draws little inner loops
+    inv = cv2.bitwise_not(m)
+    nh, labh, statsh, _ = cv2.connectedComponentsWithStats(inv)
+    for k in range(1, nh):
+        x, y, w, h = statsh[k, :4]
+        if x > 0 and y > 0 and x + w < m.shape[1] and y + h < m.shape[0]:   # touches no edge: a hole, not background
+            m[labh == k] = 255
     save(name, im.size, {"subject": m})
 
 

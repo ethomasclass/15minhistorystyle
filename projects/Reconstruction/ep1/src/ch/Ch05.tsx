@@ -125,7 +125,7 @@ const Body: React.FC = () => {
       <QuietPrint src="img/wall/cr_johnson.png" size={[900, 1101]} w={400} x={1530} y={580} rot={2} a={S7} b={S8} />
       <Slip text="summer 1865 · alone" x={140} y={420} at={t.at('alone')} />
       <Highlight text="PRESIDENTIAL RECONSTRUCTION" x={110} y={120} size={70} at={t.at('Presidential Reconstruction')} seed={52} rot={-2} />
-      <Definition term="Presidential Reconstruction" def="Johnson's plan to bring the South back, made without Congress" at={t.at('Presidential Reconstruction') + 9} x={120} y={860} />
+      <Definition term="Presidential Reconstruction" def="Johnson's plan to bring the South back, made without Congress" at={t.at('Presidential Reconstruction') + 9} x={120} y={820} />
       <Tag text={SRC.johnson} />
     </AbsoluteFill>],
     // the oath, and who had to ask in person
@@ -144,7 +144,7 @@ const Body: React.FC = () => {
       </>} />],
     // one of them: an Edisto planter
     [S10, <DocShot key="mk" src={I + 'pardon_application_mikell_edisto_planter_aug1865_p1.jpg'} size={[1952, 3000]} tag={SRC.mikell}
-      keys={[[S10, {x: 920, y: 300, z: 0.95}], [t.at('A pardon gave'), {x: 920, y: 330, z: 0.97}], [t.at('your property'), {x: 1000, y: 1690, z: 0.95}], [S11, {x: 1000, y: 1700, z: 0.98}]]}
+      keys={[[S10, {x: 920, y: 300, z: 0.95}], [t.at('A pardon gave'), {x: 920, y: 330, z: 0.97}], [t.at('your property'), {x: 1060, y: 1690, z: 0.95}], [S11, {x: 1060, y: 1700, z: 0.98}]]}
       over={<Slip text="J. Jenkins Mikell, Edisto Island planter" x={130} y={820} size={54} at={S10 + 6} />}>
       <Swipe lines={MK_EDISTO} from={t.at('your property') + 6} to={t.at('like Edisto')} seed="mk" />
     </DocShot>],
@@ -164,7 +164,7 @@ const Body: React.FC = () => {
     </AbsoluteFill>],
     // the committee's letter: homesteads
     [S13, <DocShot key="lt" src={LETTER_P1} size={EDISTO.letterSize} tag={SRC.letter}
-      keys={[[S13, {x: 860, y: 620, z: 0.78}], [t.at('They wrote to Howard'), {x: 860, y: 660, z: 0.8}], [t.at('we were promised'), {x: 830, y: 1730, z: 0.98}], [S14, {x: 840, y: 1760, z: 1.04}]]}
+      keys={[[S13, {x: 860, y: 740, z: 0.8}], [t.at('They wrote to Howard'), {x: 860, y: 770, z: 0.82}], [t.at('we were promised'), {x: 830, y: 1730, z: 0.98}], [S14, {x: 840, y: 1760, z: 1.04}]]}
       over={<>
         <Slip text="Bram, Moultrie, Sampson" x={1180} y={140} at={t.at('committee of three')} />
         <Highlight text="HOMESTEAD" x={110} y={110} size={92} at={t.at('homestead')} seed={53} rot={-2} />
@@ -184,13 +184,13 @@ const Body: React.FC = () => {
     // Stevens
     [S15, <Full key="st" src={I + 'thaddeus_stevens_brady_handy.jpg'} size={[2323, 3000]} rect={[250, 600, 2100, 2950]} f0={[1180, 1450]} z1={1.05} a={S15} b={S16}
       mask={MASKS.stevens} traceAt={S15 + 10}>
-      {() => <><Slip text="Thaddeus Stevens · a Radical leader" x={130} y={130} at={t.at('Thaddeus Stevens')} /><Tag text={SRC.stevens} /></>}
+      {() => <><Slip text="Thaddeus Stevens" x={1360} y={150} at={t.at('Thaddeus Stevens')} /><Slip text="a Radical leader" x={1360} y={270} at={t.at('Radical leader')} /><Tag text={SRC.stevens} /></>}
     </Full>],
     [S16, <DocShot key="sp" src={I + 'stevens_lancaster_speech_reconstruction_1865_title.jpg'} size={[1975, 3000]} tag={SRC.speech}
       keys={[[S16, {x: 990, y: 1200, z: 0.62}], [S17, {x: 990, y: 1260, z: 0.7}]]}
       over={<>
         <Slip text="40 acres for every freed family" x={1080} y={300} at={t.at('40 acres')} />
-        <Slip text="too far, said most Republicans" x={1080} y={720} at={t.at('most Republicans')} />
+        <Slip text="too far, said most Republicans" x={1080} y={640} at={t.at('most Republicans')} />
       </>} />],
     [S17, <AbsoluteFill key="sr">
       <DarkPaper />
