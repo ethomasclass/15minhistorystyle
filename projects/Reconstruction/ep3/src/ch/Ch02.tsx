@@ -144,7 +144,7 @@ const Founded: React.FC = () => {
       <Slip text="a club" x={1320} y={510} rot={1.5} size={64} at={t.at('club')} out={within} />
       <Slip text="spreads across the South" x={1150} y={720} rot={-1.5} size={58} at={t.at('spread')} />
       <Highlight text="KU KLUX KLAN" x={110} y={106} size={88} at={KKK} seed={21} rot={-2} />
-      <Definition term="Ku Klux Klan" def="a secret society started in 1866 to keep Black Southerners from using their freedom, by terror" at={KKK + 9} x={120} y={860} w={1640} />
+      <Definition term="Ku Klux Klan" def="a secret society started in 1866 to keep Black Southerners from using their freedom, by terror" at={KKK + 9} x={120} y={830} w={1640} />
       <Tag text={MAP_TAG} />
     </AbsoluteFill>
   );
@@ -230,14 +230,14 @@ const Terror: React.FC = () => (
       <Slip text="Congress investigated" x={1320} y={270} rot={2} size={54} at={S_TERR + 10} />
       <Slip text="13 volumes, 1872" x={1360} y={390} rot={-2} size={54} at={S_TERR + 22} />
       <Highlight text="TERRORISM" x={110} y={106} size={96} at={TERROR} seed={23} rot={-2} />
-      <Definition term="terrorism" def="violence meant to frighten a whole group of people into giving up their rights" at={TERROR + 9} x={120} y={850} w={1640} />
+      <Definition term="terrorism" def="violence meant to frighten a whole group of people into giving up their rights" at={TERROR + 9} x={120} y={830} w={1640} />
     </>} />
 );
 
 // The board: the default end shot slices Episode 1–2 pieces on the left, so frame the night piece (and Ep 2's "part 3 →"
-// string ending on it) with nothing cut (tools/boardfit.mjs 2 2600 1240 1.5).
+// string ending on it) with nothing cut (tools/boardfit.mjs 2 2560 1180 1.85; close enough that the Ames strip above stays out and the "part 3 →" tag inside the margin).
 const AT = t.at('at first');
-const BOARD_CAM: [number, number, number, number][] = [[S_BOARD, 2560, 1220, 1.7], [AT + 40, 2600, 1240, 1.5], [AT + 300, 2600, 1240, 1.48]];
+const BOARD_CAM: [number, number, number, number][] = [[S_BOARD, 2545, 1175, 2.0], [AT + 40, 2560, 1180, 1.85], [AT + 300, 2560, 1182, 1.83]];
 
 const Body: React.FC = () => {
   const scene = useScene([

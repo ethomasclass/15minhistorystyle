@@ -194,7 +194,7 @@ export const Range: React.FC<{lo: string; hi: string; at: number; label: string;
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <div style={{position: 'absolute', left: 0, right: 0, top: 300, textAlign: 'center', fontFamily: JF.mono, fontSize: 32, letterSpacing: 4, color: 'rgba(244,239,230,0.8)',
+      <div style={{position: 'absolute', left: 360, width: 1200, top: 300, textAlign: 'center', fontFamily: JF.mono, fontSize: 32, letterSpacing: 4, color: 'rgba(244,239,230,0.8)',
         opacity: interpolate(g, [at, at + 5], [0, 1], clamp)}}>{label}</div>
       <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
         <line x1={x0} y1={y} x2={x0 + (x1 - x0) * p} y2={y} stroke={TEAL} strokeWidth={10} strokeLinecap="round" />
@@ -202,7 +202,7 @@ export const Range: React.FC<{lo: string; hi: string; at: number; label: string;
       </svg>
       {g >= at + 4 && <div style={{position: 'absolute', left: x0 - 160, top: y + 50, width: 320, textAlign: 'center', fontFamily: JF.display, fontSize: 150, lineHeight: 1, color: '#f4efe6'}}>{lo}</div>}
       {g >= at + 16 && <div style={{position: 'absolute', left: x1 - 160, top: y + 50, width: 320, textAlign: 'center', fontFamily: JF.display, fontSize: 150, lineHeight: 1, color: '#f4efe6'}}>{hi}</div>}
-      <div style={{position: 'absolute', left: 0, right: 0, top: 860, textAlign: 'center', fontFamily: JF.mono, fontSize: 26, letterSpacing: 3, color: 'rgba(244,239,230,0.65)',
+      <div style={{position: 'absolute', left: 260, width: 1400, top: 860, textAlign: 'center', fontFamily: JF.mono, fontSize: 26, letterSpacing: 3, color: 'rgba(244,239,230,0.65)',
         opacity: interpolate(g, [at + 18, at + 24], [0, 1], clamp)}}>{note}</div>
       <Sfx at={at + 4} src="sfx/tick_soft.wav" volume={0.3} />
     </AbsoluteFill>

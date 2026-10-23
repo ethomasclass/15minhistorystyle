@@ -183,7 +183,7 @@ const Rally: React.FC = () => (
   <DocShot src={STATEMENT} size={STATEMENT_S} tag={SRC.statement} focusAt={S_RALLY} seed="stmt"
     keys={[[S_RALLY, {x: 420, y: 150, z: 1.9}], [S_CLINTON, {x: 420, y: 160, z: 2.0}]]}
     over={<>
-      <Slip text="Charles Caldwell's own account" x={150} y={110} size={56} rot={-2} at={S_RALLY + 4} coral />
+      <Slip text="Charles Caldwell's own account" x={150} y={130} size={56} rot={-2} at={S_RALLY + 4} coral />
       <Slip text="a Republican rally and barbecue" x={300} y={860} size={60} rot={1.5} at={t.at('rally')} />
     </>}>
     <Swipe lines={AUDIENCE} from={t.at('about 2,000')} to={t.end('Black Mississippians')} seed="aud" />
@@ -396,9 +396,9 @@ const Roll: React.FC = () => {
 /** On the board: close on the pieces as they land on "Charles Caldwell", drifting along them (no framing of just these
  *  pieces slices nothing but a far one that leaves them in the top third, so the camera keeps moving), then up the
  *  PROTECTION column to its header, torn, and the cut string from Ames to the army; held there through the silence.
- *  The held framing slices nothing (tools/boardfit.mjs 7 2792 425 1.13). */
+ *  The held framing slices nothing (tools/boardfit.mjs 7 2858 432 1.05; its left edge sits just past the LAND column, so the header is 60 px in). */
 const BOARD_CAM: [number, number, number, number][] = [
-  [S_BOARD, 2540, 1885, 1.5], [AT + 34, 2760, 1900, 1.36], [AT + 64, 2792, 425, 1.13], [AT + 260, 2792, 425, 1.12],
+  [S_BOARD, 2540, 1885, 1.5], [AT + 34, 2760, 1900, 1.36], [AT + 64, 2858, 432, 1.05], [AT + 260, 2858, 432, 1.04],
 ];
 
 const Body: React.FC = () => {

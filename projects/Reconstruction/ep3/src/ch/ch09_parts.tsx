@@ -63,7 +63,7 @@ export const RegBars: React.FC<{c: BarCues}> = ({c}) => {
         {/* the ghost of the first bar's height over the second */}
         {g >= c.later && <Ink d={wob(B2, BASE - h(V1), B2 + BW, BASE - h(V1), 'ghost', 1.5)} at={c.later} dur={6} width={3} color={CREAM} dash="10 10" opacity={0.5} />}
       </svg>
-      <Loop cx={B2 + BW / 2} cy={BASE - 4} rx={200} ry={46} at={c.second + 6} dur={10} width={6} color={CORAL} seed={9} tilt={-3} />
+      <Loop cx={B2 + BW / 2} cy={BASE - 14} rx={200} ry={30} at={c.second + 6} dur={10} width={6} color={CORAL} seed={9} tilt={-3} />
       <Pop at={c.first - 4} x={960} y={92} center style={{fontFamily: JF.mono, fontSize: 32, letterSpacing: 3, color: CREAM}}>BLACK MEN REGISTERED TO VOTE · LOUISIANA</Pop>
       <Pop at={c.first} x={B1 + BW / 2} y={BASE + 20} center style={{fontFamily: JF.display, fontSize: 60, color: CREAM}}>1896</Pop>
       <Pop at={c.later} x={B2 + BW / 2} y={BASE + 20} center style={{fontFamily: JF.display, fontSize: 60, color: CREAM}}>1904</Pop>

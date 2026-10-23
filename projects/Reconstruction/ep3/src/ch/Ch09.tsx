@@ -135,7 +135,7 @@ const Gaps: React.FC = () => {
   const g = useGFrame();
   const at = t.at('gaps');
   const items: [string, number, number, number][] = [['a tax to vote', 160, 420, -3], ['a reading test', 820, 420, 2], ['an exemption if your grandfather could vote', 220, 640, -1]];
-  const qx = [600, 1220, 1130];
+  const qx = [600, 1220, 1290];
   return (
     <AbsoluteFill>
       <DarkPaper />

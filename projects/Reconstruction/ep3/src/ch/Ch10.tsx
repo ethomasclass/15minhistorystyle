@@ -68,8 +68,8 @@ const COLS_CAM: BoardKey[] = [
   [t.at('The land') - 6, 600, 205, 1.42],
   [t.at('The land') + 6, 1620, 200, 1.4],
   [t.at('And someone') - 4, 1650, 205, 1.42],
-  [t.at('protect both'), 2230, 220, 1.38],
-  [S_LAW + 1, 2250, 230, 1.42],
+  [t.at('protect both') - 2, 2280, 180, 2.3],
+  [S_LAW + 1, 2280, 180, 2.4],
 ];
 
 // ------------------------------------------------------------------------------------------ 3 · the law
@@ -116,18 +116,17 @@ const Crop: React.FC = () => (
 // ------------------------------------------------------------------------------------------ 5 · protection, on the board
 // PROTECTION's torn header (2000, 34), the proclamation and "Klan broken" (2780–3320, 990–1292), TROOPS OUT (1600, 2220)
 const PROT_CAM: BoardKey[] = [
-  [S_PROT, 2150, 240, 1.32],
-  [t.at('only while') + 10, 2220, 270, 1.4],
-  [t.at('When the army enforced') - 14, 2240, 280, 1.4],
-  [t.at('When the army enforced') + 6, 2700, 700, 0.95],
-  [t.at('enforced') + 10, 3030, 1140, 1.36],
-  [t.at('When the army left') - 8, 3060, 1150, 1.44],
-  [t.at('When the army left') + 4, 2500, 1700, 0.95],
-  [t.at('army left') + 16, 1760, 2160, 1.42],
-  [S_FAIL + 1, 1780, 2170, 1.5],
+  [S_PROT, 2270, 185, 2.3],
+  [t.at('When the army enforced') - 14, 2280, 180, 2.4],
+  [t.at('When the army enforced') + 6, 2700, 700, 1.0],
+  [t.at('enforced') + 10, 3180, 1130, 2.0],
+  [t.at('When the army left') - 8, 3180, 1130, 2.1],
+  [t.at('When the army left') + 4, 2500, 1700, 1.0],
+  [t.at('army left') + 16, 1880, 2190, 2.45],
+  [S_FAIL + 1, 1880, 2190, 2.55],
 ];
 const ProtOverlay: React.FC = () => (
-  <Slip text="the law: on paper" x={1100} y={150} size={70} rot={-2} at={t.at('stayed on paper') - 2} coral />
+  <Slip text="the law: on paper" x={1080} y={820} size={70} rot={-2} at={t.at('stayed on paper') - 2} coral />
 );
 
 // ------------------------------------------------------------------------------------------ 6 · a failure?
@@ -190,18 +189,18 @@ const Lasted: React.FC = () => {
         <Slip text="schools" x={160} y={620} size={64} rot={-2} at={t.at('Schools') + 2} />
         <Slip text="churches" x={430} y={720} size={64} rot={2} at={t.at('Churches') - 2} />
         <Gate at={fam - 2}>
-          <DocWin src={WANTED} size={WANTED_S} cx={525} cy={cy} s={0.5} w={420} h={660} x={790} y={170} r={1}>
+          <DocWin src={WANTED} size={WANTED_S} cx={525} cy={cy} s={0.5} w={460} h={660} x={780} y={170} r={1}>
             <Swipe lines={[HANNAH]} from={t.at('found each other')} to={t.end('found each other') + 6} seed="hb" />
           </DocWin>
         </Gate>
         <Slip text="families that found each other" x={760} y={870} size={50} rot={-1} at={fam + 2} />
-        <CropCard src={HEROES} size={[3000, 2210]} x={1280} y={190} w={520} h={400} fx={1500} fy={1080} scale={0.3} rot={1.5} at={lead - 2} />
-        <Slip text="Black leaders" x={1300} y={640} size={64} rot={-2} at={lead + 4} />
-        <Slip text="Bruce · Douglass · Revels" x={1300} y={740} size={44} rot={1} at={lead + 12} />
+        <CropCard src={HEROES} size={[3000, 2210]} x={1310} y={190} w={500} h={400} fx={1500} fy={1080} scale={0.3} rot={1.5} at={lead - 2} />
+        <Slip text="Black leaders" x={1320} y={640} size={64} rot={-2} at={lead + 4} />
+        <Slip text="Bruce · Douglass · Revels" x={1320} y={740} size={44} rot={1} at={lead + 12} />
       </AbsoluteFill>
       {[t.at('Schools'), fam - 2, lead - 2].map((x) => <Sfx key={x} at={x} src="sfx/tick.wav" volume={0.38} />)}
       <Sfx at={t.at('found each other')} src="sfx/marker_tick.wav" volume={0.22} />
-      <Tag text="Primary school for freedmen, Vicksburg, Harper's Weekly, 1866 · The Colored Tennessean, Mar. 24, 1866 · Heroes of the Colored Race, 1881 · Library of Congress" />
+      <Tag text="Freedmen's school, Vicksburg, Harper's, 1866 · Colored Tennessean, Mar. 24, 1866 · Heroes of the Colored Race, 1881 · LOC" />
     </AbsoluteFill>
   );
 };
@@ -228,7 +227,7 @@ const Brown: React.FC = () => (
   <DocShot src={BROWN} size={BROWN_S} seed="brown" focusAt={S_1954} tag="Brown v. Board of Education, 347 U.S. 483 (1954), p. 495 · Library of Congress"
     keys={[[S_1954, {x: 760, y: 330, z: 0.82}], [t.at('the 14th', 2) - 4, {x: 740, y: 760, z: 1.02}], [t.at('end segregated') - 6, {x: 740, y: 780, z: 1.05}],
       [t.at('end segregated') + 14, {x: 740, y: 560, z: 1.1}], [S_1965, {x: 740, y: 555, z: 1.14}]]}
-    over={<Slip text="Brown v. Board of Education · 1954" x={130} y={90} size={52} rot={-2} at={S_1954 + 6} />}>
+    over={<Slip text="Brown v. Board of Education · 1954" x={1040} y={900} size={52} rot={-2} at={S_1954 + 6} />}>
     <Swipe lines={B_EQUAL} from={t.at('the 14th', 2)} to={t.end('equal protection', 2) + 6} seed="be" />
     <Swipe lines={B_UNEQUAL} from={t.at('end segregated') + 12} to={t.end('end segregated schools') + 14} seed="bu" />
   </DocShot>
@@ -265,10 +264,10 @@ const Petition: React.FC = () => {
   const men = t.at('three men'), asked = t.at('They asked');
   return (
     <DocShot src={PETITION_P3} size={EDISTO.p3Size} seed="p3" tag={SRC.petition} focusAt={S_EDISTO}
-      keys={[[S_EDISTO, {x: 1290, y: 1690, z: 0.9}], [asked - 4, {x: 1320, y: 1720, z: 0.98}],
+      keys={[[S_EDISTO, {x: 1160, y: 1690, z: 1.05}], [asked - 4, {x: 1180, y: 1720, z: 1.12}],
         [t.at('A home') - 8, {x: 1050, y: 290, z: 0.9, tilt: 26, dof: 2.4, band: 120, dofY: 290}],
         [t.at('It be'), {x: 560, y: 365, z: 0.95, tilt: 26, dof: 2.4, band: 120, dofY: 365}],
-        [S_END, {x: 470, y: 365, z: 1.0, tilt: 26, dof: 2.4, band: 120, dofY: 365}]]}
+        [t.at('acres') + 4, {x: 760, y: 330, z: 0.9, tilt: 26, dof: 2.4, band: 140, dofY: 330}], [S_END, {x: 780, y: 330, z: 0.93, tilt: 26, dof: 2.4, band: 140, dofY: 330}]]}
       over={<Slip text="Edisto Island · Oct. 28, 1865" x={130} y={90} size={52} rot={-2} at={S_EDISTO + 6} out={asked + 10} />}>
       <Spot size={EDISTO.p3Size} boxes={[EDISTO.bram, EDISTO.moultrie, EDISTO.sampson]} at={men} out={asked + 10} id="p3names" dark={0.45} />
       <Swipe lines={[EDISTO.bram]} from={men} to={men + 12} seed="m1" out={asked + 10} />
@@ -285,16 +284,16 @@ const MARKS = t.at('a hundred years') + 22;
 const PULL = t.at('subscribe') - 40;
 const WHOLE: [number, number, number] = [1680, 1198, 0.41];   // the whole series board, inside the title-safe margin
 const PUSH0 = ROLL + 720, PUSH1 = ROLL + 940;
-const PET: [number, number, number] = [960, 150, 1.9];         // the petition, top centre
+const PET: [number, number, number] = [960, 125, 2.0];         // the petition, top centre
 const END_CAM: BoardKey[] = [
-  [S_END, 360, 320, 1.2],
-  [t.at('about citizens') + 2, 300, 830, 1.32],
-  [t.at('about the vote') - 6, 300, 860, 1.36],
-  [t.at('about the vote') + 10, 300, 1440, 1.32],
-  [MARKS - 40, 320, 1460, 1.36],
-  [MARKS - 2, 1000, 420, 0.8],
-  [MARKS + 60, 1330, 430, 0.75],
-  [PULL, 1360, 440, 0.74],
+  [S_END, 440, 330, 1.2],
+  [t.at('about citizens') + 2, 420, 830, 1.3],
+  [t.at('about the vote') - 6, 420, 850, 1.34],
+  [t.at('about the vote') + 10, 420, 1450, 1.3],
+  [MARKS - 40, 430, 1460, 1.34],
+  [MARKS - 2, 1000, 440, 0.8],
+  [MARKS + 40, 1230, 500, 0.69],
+  [PULL, 1260, 510, 0.67],
   [ROLL + 300, ...WHOLE],
   [PUSH0, WHOLE[0], WHOLE[1], 0.4],
   [PUSH1, ...PET],
@@ -306,7 +305,7 @@ const PET_LINES: Box[] = [[725, 28, 245, 42], [18, 72, 425, 42]];
 /** At the very end: the rest of the board falls into shadow and the coral runs along "A home if / It be but A few acres." */
 const PetitionLight: React.FC = () => {
   const g = useGFrame();
-  const dark = interpolate(g, [PUSH0 + 60, PUSH1], [0, 0.84], clamp);
+  const dark = interpolate(g, [PUSH0 + 60, PUSH1], [0, 0.93], clamp);
   return (
     <>
       {dark > 0 && (

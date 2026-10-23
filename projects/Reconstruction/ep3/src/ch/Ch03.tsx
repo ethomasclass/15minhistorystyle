@@ -231,11 +231,11 @@ const Titles: React.FC = () => (
   <>
     <Between a={ENF} b={t.at('They made')}>
       <Highlight text="ENFORCEMENT ACTS" x={110} y={106} size={84} at={ENF} seed={31} rot={-2} />
-      <Definition term="Enforcement Acts" def="federal laws, 1870–71, that made using force to stop a voter a federal crime" at={ENF + 9} x={120} y={850} w={1640} />
+      <Definition term="Enforcement Acts" def="federal laws, 1870–71, that made using force to stop a voter a federal crime" at={ENF + 9} x={120} y={830} w={1640} />
     </Between>
     <Between a={HC} b={S_ARR}>
       <Highlight text="HABEAS CORPUS" x={110} y={106} size={88} at={HC} seed={32} rot={-2} />
-      <Definition term="habeas corpus" def="the right not to be held in jail without being charged with a crime" at={HC + 9} x={120} y={850} w={1640} />
+      <Definition term="habeas corpus" def="the right not to be held in jail without being charged with a crime" at={HC + 9} x={120} y={830} w={1640} />
     </Between>
     <Between a={BROKEN} b={S_HOLD + 36}>
       <Highlight text="LARGELY BROKEN" x={110} y={106} size={84} at={BROKEN} seed={33} rot={-2} />
