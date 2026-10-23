@@ -19,7 +19,7 @@ const W = 'img/wall/';
 type Ctx_ = {hl: number; q: number; labelP: number};
 type Piece = {id: string; ch: number; dt: number; kind: LandKind; x: number; y: number; r?: number; z?: number; el: (c: Ctx_) => React.ReactNode};
 type BPin = {ch: number; dt: number; x: number; y: number; coral?: boolean};
-type Thread = {ch: number; dt: number; a: [number, number]; b: [number, number]; tag?: string; dashed?: boolean};
+type Thread = {ch: number; dt: number; a: [number, number]; b: [number, number]; tag?: string; tagT?: number; dashed?: boolean};
 
 const CORAL_LABEL = '#f3c6bf';
 
@@ -82,7 +82,7 @@ export const PINS: BPin[] = [
 export const THREADS: Thread[] = [
   {ch: 3, dt: 56, a: [600, 315], b: [960, 345]},
   {ch: 4, dt: 28, a: [960, 345], b: [1290, 305]},
-  {ch: 5, dt: 30, a: [1290, 305], b: [1680, 465], tag: 'therefore'},
+  {ch: 5, dt: 30, a: [1290, 305], b: [1680, 465], tag: 'therefore', tagT: 0.33},
   {ch: 6, dt: 50, a: [330, 250], b: [300, 372], tag: 'but'},
   {ch: 7, dt: 40, a: [222, 498], b: [46, 580], tag: 'therefore'},
   {ch: 8, dt: 28, a: [360, 430], b: [420, 735], tag: 'therefore'},
@@ -174,7 +174,8 @@ export const EpBoard: React.FC<{ch: number; from: number; at: number; cam?: Boar
           {threads.filter((t) => t.tag).map((t, i) => {
             const s = when(t.ch, t.dt) + THREAD_DUR;
             const show = interpolate(f, [s, s + 3, s + 6], [0, 1.15, 1], clamp);
-            return show > 0 ? <ThreadTag key={i} text={t.tag!} x={(t.a[0] + t.b[0]) / 2} y={(t.a[1] + t.b[1]) / 2} show={show} /> : null;
+            const k = t.tagT ?? 0.5;
+            return show > 0 ? <ThreadTag key={i} text={t.tag!} x={t.a[0] + (t.b[0] - t.a[0]) * k} y={t.a[1] + (t.b[1] - t.a[1]) * k} show={show} /> : null;
           })}
           {PINS.filter((p) => p.ch <= ch).map((p, i) => <BoardPin key={i} at={when(p.ch, p.dt)} x={p.x} y={p.y} coral={p.coral} />)}
           {children}
