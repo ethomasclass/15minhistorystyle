@@ -158,7 +158,7 @@ const Act: React.FC = () => {
       keys={[[S8, {x: 1320, y: 2560, z: 0.62}], [t.at("over Johnson's"), {x: 1330, y: 2640, z: 1.05, tilt: 24, dof: 2.2, band: 60, dofY: 2621}], [S9, {x: 1380, y: 2650, z: 1.1, tilt: 26, dof: 2.2, band: 60, dofY: 2621}]]}
       over={<>
         <Highlight text="RECONSTRUCTION ACT" x={110} y={106} size={84} at={ra} seed={31} rot={-2} />
-        <Definition term="Reconstruction Act" def="the 1867 law that put the South under the army until it met Congress's terms" at={ra + 9} x={120} y={850} w={1500} />
+        <Definition term="Reconstruction Act" def="the 1867 law that put the South under the army until it met Congress's terms" at={ra + 9} x={120} y={830} w={1500} />
         <Slip text="March 1867" x={1380} y={250} rot={2} at={t.at('In March')} />
         <Stamps at={[ra]} />
         <Marker at={t.at("over Johnson's")} />
@@ -205,7 +205,7 @@ const Districts: React.FC = () => {
       <TopShade />
       {useCurrentFrame() < tn + 12 && <>
         <Highlight text="MILITARY DISTRICTS" x={110} y={106} size={84} at={md} seed={32} rot={-2} />
-        <Definition term="military districts" def="the five parts of the South the army ran, each under a general" at={md + 9} x={120} y={850} w={1500} />
+        <Definition term="military districts" def="the five parts of the South the army ran, each under a general" at={md + 9} x={120} y={830} w={1500} />
       </>}
       <Slip text="left out" x={170} y={190} rot={-2} at={t.at('left out') - 2} />
       <Slip text="it had ratified the 14th, 1866" x={170} y={320} rot={2} size={58} at={t.at('It had already') - 2} />
@@ -269,8 +269,8 @@ const Congressional: React.FC = () => {
     <DocShot src={ALLEG} size={ALLEGS} seed="alleg" filter="grayscale(1) contrast(1.2) brightness(1.02)" tag={SRCS.alleg} focusAt={S14}
       keys={[[S14, {x: 768, y: 560, z: 0.8}], [S15, {x: 768, y: 600, z: 0.92}]]}
       over={<>
-        <Highlight text="CONGRESSIONAL RECONSTRUCTION" x={110} y={106} size={70} at={cr} seed={33} rot={-2} />
-        <Definition term="Congressional Reconstruction" def="Reconstruction run by Congress, not the President, from 1867" at={cr + 9} x={120} y={850} w={1500} />
+        <Highlight text="CONGRESSIONAL RECONSTRUCTION" x={110} y={118} size={70} at={cr} seed={33} rot={-2} />
+        <Definition term="Congressional Reconstruction" def="Reconstruction run by Congress, not the President, from 1867" at={cr + 9} x={120} y={830} w={1500} />
         <Slip text="some call it: Radical Reconstruction" x={1000} y={250} rot={2} size={56} at={t.at('Some people') - 2} />
         <Stamps at={[cr]} />
       </>} />
@@ -284,12 +284,12 @@ const Views: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <div style={{position: 'absolute', left: 958, top: 70, width: 4, height: 900, background: '#ece6d8', opacity: 0.8}} />
-      <div style={{position: 'absolute', left: 120, top: 90, width: 760, textAlign: 'center', fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: TEAL}}>MANY WHITE SOUTHERNERS</div>
+      <div style={{position: 'absolute', left: 120, top: 106, width: 760, textAlign: 'center', fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: TEAL}}>MANY WHITE SOUTHERNERS</div>
       <FocusIn at={S15}><Win src={MAP69} cx={1150} cy={640} s={0.62} w={760} h={560} x={120} y={170} r={-1.5} filter={`${MAP_F} brightness(0.8)`} /></FocusIn>
       <Slip text="a military occupation" x={170} y={700} size={62} rot={-2} at={t.at('military occupation') - 2} />
       <Slip text="“rule by bayonet”" x={250} y={830} size={66} rot={2} at={t.at('rule by') - 2} />
       {useCurrentFrame() >= fp - 2 && <>
-        <div style={{position: 'absolute', left: 1040, top: 90, width: 760, textAlign: 'center', fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: CORAL}}>FREEDPEOPLE</div>
+        <div style={{position: 'absolute', left: 1040, top: 106, width: 760, textAlign: 'center', fontFamily: JF.mono, fontSize: 30, letterSpacing: 3, color: CORAL}}>FREEDPEOPLE</div>
         <FocusIn at={fp - 2}><Win src={WAUD} cx={1560} cy={1050} s={0.4} w={760} h={600} x={1040} y={170} r={1.5} filter="grayscale(1) contrast(1.2)" /></FocusIn>
         <Slip text="something brand new" x={1120} y={820} size={62} rot={-2} coral at={t.at('brand new') - 2} />
       </>}

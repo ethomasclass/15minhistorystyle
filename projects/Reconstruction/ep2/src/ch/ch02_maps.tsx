@@ -46,7 +46,7 @@ export const DISTRICTS = [
   {n: 2, states: ['North Carolina', 'South Carolina'], color: ORANGE, label: [4190, 2600]},
   {n: 3, states: ['Georgia', 'Alabama', 'Florida'], color: SAND, label: [3860, 2930]},
   {n: 4, states: ['Mississippi', 'Arkansas'], color: CORAL, label: [3300, 2760]},
-  {n: 5, states: ['Louisiana', 'Texas'], color: BRICK, label: [2860, 3030]},
+  {n: 5, states: ['Louisiana', 'Texas'], color: BRICK, label: [3230, 3080]},
 ];
 
 /** A district number standing on the map. */
