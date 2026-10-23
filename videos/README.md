@@ -137,6 +137,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
 - A/B the pace when the subject is heavy.
+- **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.
 
 **Packaging**

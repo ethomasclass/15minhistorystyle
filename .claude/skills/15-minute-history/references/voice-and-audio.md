@@ -61,15 +61,18 @@ After voicing:
 
 ## 3. Pace settings (locked)
 
-Matched to the channel's earlier videos; don't change them without the user asking.
+**No speed-up** (the user, Oct 2026, Reconstruction): the voice plays at its own speed. The earlier `VOICE_STRETCH`
+1.15 (and 1.08 for heavy chapters) changed the tempo and the user heard the pitch change too, so every chapter now runs at
+`VOICE_STRETCH=1.0`, even if the video runs longer. Only the pauses are trimmed.
 
 | Chapters | VOICE_STRETCH | VOICE_MAX_PAUSE | VOICE_SENT_GAP | VOICE_PARA_GAP |
 |---|---|---|---|---|
-| Normal | 1.15 | 0.25 | 0 | 0.35 |
-| Heavy chapter and the ending (`HEAVY=`) | 1.08 | 0.35 | 0.05 | 0.55 |
+| Normal | 1.0 | 0.25 | 0 | 0.35 |
+| Heavy chapter and the ending (`HEAVY=`) | 1.0 | 0.35 | 0.05 | 0.55 |
 
-`STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
-The result is about 185 words a minute for normal chapters.
+`STRETCH` is a local tempo change (>1 is faster): leave it at 1.0. `MAX_PAUSE` shortens the voice's own pauses.
+Re-voicing at a new stretch costs nothing: the ElevenLabs responses are cached by text and voice settings, and the
+stretch is applied afterwards.
 
 ## 4. Pronunciation
 
@@ -84,7 +87,7 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 ## 5. Re-voicing one chapter
 
 ```sh
-VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.15 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
+VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.0 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
 python3 tools/anchors.py ch04_corrupt_bargain --src src/ch/Ch04.tsx
 ```
 
