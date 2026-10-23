@@ -6,6 +6,12 @@
 Paragraphs are voiced one at a time (ElevenLabs gets the neighbouring paragraphs as context so the
 delivery stays continuous) and joined with a short pause. The scenes are timed off the words.json,
 so swapping the voice re-times the whole video without touching the animation code.
+
+With eleven_v3 the whole chapter is voiced in one take by default (VOICE_WHOLE=0 for paragraph takes). The script may
+carry v3 audio tags in square brackets, e.g. "[curious] But could a rubber tank actually fool anyone?" or "[sighs]";
+they are performed, never shown or captioned. VOICE_STABILITY: 0.0 Creative (most expressive), 0.5 Natural (default),
+1.0 Robust. Every splice lands at the quietest point between words, with short fades; a take that ends while still
+loud is flagged so it can be retaken.
 """
 import base64, hashlib, json, os, re, subprocess, sys, tempfile, urllib.request, wave
 
@@ -23,6 +29,13 @@ LEAD_IN = 0.4     # silence before the first word
 SPEED = float(os.environ.get("VOICE_SPEED", "0.9"))  # ElevenLabs speed, 0.7-1.2
 STRETCH = float(os.environ.get("VOICE_STRETCH", "1.0"))  # local pitch-preserving tempo; <1 is slower (v2 ignores SPEED; try 0.93)
 MAX_PAUSE = float(os.environ.get("VOICE_MAX_PAUSE", "0"))  # >0: shorten the voice's own pauses to at most this (s)
+STABILITY = float(os.environ.get("VOICE_STABILITY", "0.5"))  # v3: 0.0 Creative (most expressive, follows [tags]) / 0.5 Natural / 1.0 Robust
+# v3 takes no neighbouring-paragraph context, so voicing paragraph by paragraph resets the delivery at every paragraph.
+# By default v3 voices the whole chapter in one take (natural flow, fewer joins) and inserts the paragraph gaps itself.
+WHOLE = os.environ.get("VOICE_WHOLE", "1") != "0"
+FADE = 0.012      # seconds of fade at every splice and at the end of the take, so nothing ends on a click or mid-sound
+QUIET = 120       # RMS (int16) below which a 20 ms window counts as silence (about -49 dBFS; soft word endings sit above it)
+TAG = re.compile(r"\[[^\]]*\]\s*")   # ElevenLabs v3 audio tags: [curious], [sighs], [whispers], [sarcastic] ...
 CACHE = os.path.join(OUT, "cache")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
@@ -101,7 +114,7 @@ def eleven(text, prev, nxt):
         # v3: most expressive model; stability is one of 0.0 creative / 0.5 natural / 1.0 robust,
         # and it does not accept neighbouring-paragraph context yet.
         body = {"text": text, "model_id": model,
-                "voice_settings": {"stability": 0.5, "similarity_boost": 0.85, "speed": SPEED}}
+                "voice_settings": {"stability": STABILITY, "similarity_boost": 0.85, "speed": SPEED}}
     else:
         body = {"text": text, "model_id": model, "previous_text": prev, "next_text": nxt,
                 "voice_settings": {"stability": 0.45, "similarity_boost": 0.85, "style": 0.15,
@@ -155,55 +168,153 @@ def piper(text):
     return pcm, chars
 
 
-def tighten(pcm, chars, max_pause):
-    """Shorten every silence in the voice's own delivery that is longer than `max_pause` seconds
-    (cutting the middle out of it) and shift the character timings to match."""
+def _np(pcm):
     import numpy as np
-    a = np.frombuffer(pcm, np.int16)
+    return np, np.frombuffer(pcm, np.int16).astype(np.float32)
+
+
+def _fade(x, out):
+    """Short linear fade on a float array, in place: the end of x (out) or its start (in)."""
+    import numpy as np
+    n = min(len(x), int(RATE * FADE))
+    if n:
+        r = np.linspace(1, 0, n, dtype=np.float32) if out else np.linspace(0, 1, n, dtype=np.float32)
+        if out: x[-n:] *= r
+        else: x[:n] *= r
+    return x
+
+
+def _join(np, pieces, gaps):
+    """Concatenate float pieces with a fade at every inner edge and `gaps[i]` seconds of silence after piece i."""
+    out = []
+    for i, x in enumerate(pieces):
+        x = x.copy()
+        if i > 0: _fade(x, out=False)
+        if i < len(pieces) - 1: _fade(x, out=True)
+        out.append(x)
+        if i < len(gaps) and gaps[i] > 0: out.append(np.zeros(int(RATE * gaps[i]), np.float32))
+    return np.clip(np.concatenate(out), -32768, 32767).astype(np.int16).tobytes()
+
+
+def quiet_point(np, a, t0, t1):
+    """Sample index of the quietest 10 ms between t0 and t1 seconds (the gap between two words), so a splice never
+    lands inside a sound. Falls back to the midpoint when the gap is too short to search."""
+    i0, i1 = max(0, int(t0 * RATE)), min(len(a), int(t1 * RATE))
+    w = int(RATE * 0.01)
+    if i1 - i0 < 3 * w:
+        return (i0 + i1) // 2
+    best, at = None, (i0 + i1) // 2
+    for k in range(i0, i1 - w, w // 2):
+        r = float((a[k:k + w] ** 2).mean())
+        if best is None or r < best:
+            best, at = r, k + w // 2
+    return at
+
+
+def tighten(pcm, chars, max_pause):
+    """Shorten every silence in the voice's own delivery that is longer than `max_pause` seconds, cutting from its
+    middle-to-late part (two thirds of what's kept stays after the last sound, so word endings ring out), with a short
+    fade at each splice, and shift the character timings to match."""
+    np, a = _np(pcm)
     win = int(RATE * 0.02)
     n = len(a) // win
-    quiet = np.sqrt((a[:n * win].astype(float).reshape(n, win) ** 2).mean(1)) < 250
+    quiet = np.sqrt((a[:n * win].reshape(n, win) ** 2).mean(1)) < QUIET
     cuts, i = [], 0                      # (start_sample, n_samples_removed)
+    keep = int(max_pause * RATE)
     while i < n:
         if quiet[i]:
             j = i
             while j < n and quiet[j]: j += 1
             run = (j - i) * win
-            keep = int(max_pause * RATE)
             if run > keep and i > 0 and j < n:
-                cuts.append((i * win + keep // 2, run - keep))
+                cuts.append((i * win + (keep * 2) // 3, run - keep))
             i = j
         else:
             i += 1
-    out, prev = [], 0
+    pieces, prev = [], 0
     for st, k in cuts:
-        out.append(a[prev:st]); prev = st + k
-    out.append(a[prev:])
+        pieces.append(a[prev:st]); prev = st + k
+    pieces.append(a[prev:])
 
     def shift(t):
         smp = t * RATE
         return (smp - sum(min(k, max(0, smp - st)) for st, k in cuts)) / RATE
-    return np.concatenate(out).tobytes(), [(c, shift(s), shift(e)) for c, s, e in chars]
+    return _join(np, pieces, []), [(c, shift(s), shift(e)) for c, s, e in chars]
 
 
-def add_pauses(pcm, chars, gap):
-    """Insert `gap` seconds of silence after every sentence that is followed by more speech,
-    cutting halfway between the sentence's last sound and the next word, and shift timings."""
-    out, shifted, prev_cut, shift = b"", [], 0, 0.0
-    cuts = []
+def add_pauses(pcm, chars, gap, para_after=(), para_gap=0.0):
+    """Insert `gap` seconds of silence after every sentence followed by more speech, and `para_gap` after each char
+    index in `para_after` (paragraph ends in a whole-chapter take). Each cut goes at the quietest point between the
+    sentence's last sound and the next word, with short fades, and the timings after it shift."""
+    np, a = _np(pcm)
+    para_after = set(para_after)
+    cuts = []                                    # (char index, seconds to insert)
     for i, (c, s, e) in enumerate(chars):
-        if c in ".?!" and i + 1 < len(chars) and chars[i + 1][0].isspace():
-            nxt = next((cs for cc, cs, ce in chars[i + 1:] if not cc.isspace()), None)
-            if nxt is not None:
-                cuts.append((i, (e + nxt) / 2))
-    ci = 0
-    for i, (c, s, e) in enumerate(chars):
-        shifted.append((c, s + shift, e + shift))
-        if ci < len(cuts) and cuts[ci][0] == i:
-            cut = int(cuts[ci][1] * RATE) * 2
-            out += pcm[prev_cut:cut] + b"\0\0" * int(RATE * gap)
-            prev_cut, shift, ci = cut, shift + int(RATE * gap) / RATE, ci + 1
-    return out + pcm[prev_cut:], shifted
+        if c.isspace():
+            continue
+        nxt = next((k for k in range(i + 1, len(chars)) if not chars[k][0].isspace()), None)
+        if nxt is None:
+            continue
+        if i in para_after:
+            cuts.append((i, para_gap))
+        elif gap > 0 and c in ".?!" and chars[i + 1][0].isspace():
+            cuts.append((i, gap))
+    if not cuts:
+        return pcm, chars
+    pieces, gaps, prev, times = [], [], 0, []
+    for i, g in cuts:
+        nxt = next(k for k in range(i + 1, len(chars)) if not chars[k][0].isspace())
+        at = quiet_point(np, a, chars[i][2], chars[nxt][1])
+        pieces.append(a[prev:at]); gaps.append(g); times.append((at / RATE, g)); prev = at
+    pieces.append(a[prev:])
+
+    def shift(t):
+        return t + sum(g for at, g in times if t >= at)
+    return _join(np, pieces, gaps), [(c, shift(s), shift(e)) for c, s, e in chars]
+
+
+def drop_tags(chars):
+    """Remove the characters of [audio tags] from a v3 alignment (they are performed, not spoken)."""
+    out, inside = [], False
+    for c in chars:
+        if c[0] == "[": inside = True
+        elif c[0] == "]": inside = False
+        elif not inside: out.append(c)
+    return out
+
+
+def loud_end(pcm):
+    """True if the last 40 ms of a take are still speech-loud (the model stopped mid-sound)."""
+    np, a = _np(pcm)
+    tail = a[-int(RATE * 0.04):]
+    return bool(len(tail)) and float(np.sqrt((tail ** 2).mean())) > 500
+
+
+def take(text, prev="", nxt=""):
+    """One ElevenLabs take. If it stops while the last word is still sounding, take it again with a breath after the
+    last line ("[exhales]") and keep everything up to the quietest point between the last word and that breath, so
+    the ending rings out naturally."""
+    audio, chars = eleven(text, prev, nxt)
+    chars = drop_tags(chars)
+    if not loud_end(audio):
+        return audio, chars
+    print("  the take stopped mid-sound; retaking with room after the last word", flush=True)
+    audio, chars = eleven(text + " [exhales]", prev, nxt)
+    chars = drop_tags(chars)
+    np, a = _np(audio)
+    last = max(e for c, s, e in chars if not c.isspace())
+    cut = quiet_point(np, a, last + 0.05, min(len(a) / RATE, last + 0.8))
+    return a[:cut].astype(np.int16).tobytes(), chars
+
+
+def finish_take(pcm, label):
+    """Fade the very end of a take and warn if it was still loud there (a clipped last word: retake that one)."""
+    np, a = _np(pcm)
+    tail = a[-int(RATE * 0.04):]
+    if len(tail) and float(np.sqrt((tail ** 2).mean())) > 500:
+        print(f"  WARNING {label}: the take ends while still loud; the last word may be cut off. Retake it "
+              f"(add a word or change punctuation at the end to get a new take).", flush=True)
+    return np.clip(_fade(a.copy(), out=True), -32768, 32767).astype(np.int16).tobytes()
 
 
 def words_from_chars(display, chars, offset):
@@ -275,27 +386,51 @@ def main():
     env()
     src, name = sys.argv[1], sys.argv[2]
     use_piper = "--piper" in sys.argv
-    marked = [parse_marks(p.strip()) for p in open(src).read().split("\n\n") if p.strip()]
+    raws = [p.strip() for p in open(src).read().split("\n\n") if p.strip()]
+    marked = [parse_marks(TAG.sub("", r).strip()) for r in raws]       # display text: no tags, no marks
     paras = [m[0] for m in marked]
+    tts = [spoken(r.replace("*", "").replace("{", "").replace("}", "")) for r in raws]   # tags kept for the voice
     pcm = b"\0\0" * int(RATE * LEAD_IN)
     words = []
-    for i, p in enumerate(paras):
-        offset = len(pcm) / 2 / RATE
-        if use_piper:
-            audio, chars = piper(spoken(p))
-        else:
-            audio, chars = eleven(spoken(p), spoken(paras[i - 1]) if i else "",
-                                  spoken(paras[i + 1]) if i + 1 < len(paras) else "")
-            if MAX_PAUSE > 0:
-                audio, chars = tighten(audio, chars, MAX_PAUSE)
-            audio, chars = add_pauses(audio, chars, SENT_GAP)
-        ws = words_from_chars(p, chars, offset)
-        for w, k in zip(ws, marked[i][1]):
-            if k: w["k"] = k
-        words += ws
-        words[-1]["para_end"] = True
+    v3 = os.environ.get("ELEVEN_MODEL", "eleven_v3").startswith("eleven_v3")
+    if not use_piper and v3 and WHOLE:
+        audio, chars = take("\n\n".join(tts))
+        if MAX_PAUSE > 0:
+            audio, chars = tighten(audio, chars, MAX_PAUSE)
+        # paragraph ends: the last sound before a newline
+        ends = [i for i, (c, s, e) in enumerate(chars) if not c.isspace() and
+                any(cc == "\n" for cc, _, _ in chars[i + 1:next((k for k in range(i + 1, len(chars)) if not chars[k][0].isspace()), len(chars))])]
+        audio, chars = add_pauses(audio, chars, SENT_GAP, ends, PARA_GAP)
+        audio = finish_take(audio, "chapter")
+        ws = words_from_chars(" ".join(paras), chars, len(pcm) / 2 / RATE)
+        k = 0
+        for i, p in enumerate(paras):
+            n = len(p.split())
+            for w, kind in zip(ws[k:k + n], marked[i][1]):
+                if kind: w["k"] = kind
+            ws[k + n - 1]["para_end"] = True
+            k += n
+        words = ws
         pcm += audio + b"\0\0" * int(RATE * PARA_GAP)
-        print(f"  paragraph {i + 1}/{len(paras)}: {len(audio) / 2 / RATE:.1f}s", flush=True)
+        print(f"  whole chapter in one take: {len(audio) / 2 / RATE:.1f}s, {len(paras)} paragraphs", flush=True)
+    else:
+        for i, p in enumerate(paras):
+            offset = len(pcm) / 2 / RATE
+            if use_piper:
+                audio, chars = piper(spoken(p))
+            else:
+                audio, chars = take(tts[i], tts[i - 1] if i else "", tts[i + 1] if i + 1 < len(paras) else "")
+                if MAX_PAUSE > 0:
+                    audio, chars = tighten(audio, chars, MAX_PAUSE)
+                audio, chars = add_pauses(audio, chars, SENT_GAP)
+                audio = finish_take(audio, f"paragraph {i + 1}")
+            ws = words_from_chars(p, chars, offset)
+            for w, k in zip(ws, marked[i][1]):
+                if k: w["k"] = k
+            words += ws
+            words[-1]["para_end"] = True
+            pcm += audio + b"\0\0" * int(RATE * PARA_GAP)
+            print(f"  paragraph {i + 1}/{len(paras)}: {len(audio) / 2 / RATE:.1f}s", flush=True)
     os.makedirs(OUT, exist_ok=True)
     wav = os.path.join(OUT, name + ".wav")
     with wave.open(wav, "wb") as w:
