@@ -246,6 +246,8 @@ for Jim Crow (tag it as later). **Board:** VOTELESS rewritten on the petition (n
 | `russell_lee_colored_water_cooler_oklahoma_city_1939.jpg` | Russell Lee (FSA), a man drinking at a "Colored" water cooler, streetcar terminal, Oklahoma City, July 1939 | commons, 1920 px thumbnail | 1920x1291 | "water fountains… Jim Crow laws". **Later photo (1939); tag it** |
 | `bubley_colored_waiting_room_sign_1943.jpg` | Esther Bubley (OWI), "Colored Waiting Room" sign, bus station, 1943 | commons | 1433x1503 | "waiting rooms". **Later photo (1943); tag it** |
 
+**Correction (found while building ch09):** "A uniform poll tax of two dollars" is printed at the foot of `mississippi_constitution_1890_article12_franchise_sec241.jpg` (p. 39), not on the `…sec243…` file; §244's reading test is on the `…sec243…` file as listed.
+
 **Gaps:** The **1904 figure (1,342)** isn't in a scan here (the 1902 report stops at 1898 and 1900); it needs the 1904 Louisiana
 Secretary of State report or a period compilation. No pre-1900 Jim Crow photographs. A "Jim Crow car" engraving wasn't found in
 copyright-safe sources. Pre-1930 poll-tax receipts from Mississippi or Louisiana weren't found; the Alabama 1920 one stands in.

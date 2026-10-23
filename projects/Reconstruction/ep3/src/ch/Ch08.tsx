@@ -221,7 +221,7 @@ const Body: React.FC = () => {
     [S_TROOPS, <Troops key="tr" />],
     [S_END, <Map2 key="m2" />],
     [S_BOARD, <SeriesBoard key="b" ch={8} from={S_BOARD} at={LAND}
-      cam={[[S_BOARD, 1320, 2130, 1.5], [LAND + 74, 940, 1900, 0.72], [LAND + 300, 940, 1900, 0.71]]} />],
+      cam={[[S_BOARD, 1320, 2130, 1.5], [LAND + 74, 1000, 2284, 0.86], [LAND + 300, 1000, 2284, 0.855]]} />],
   ]);
   return <>{scene}<Whooshes at={[S_BAN, S_POR, S_SC, S_TAL, S_NAST, S_COM, S_TAL2, S_DEAL, S_TROOPS, S_END]} /></>;
 };

@@ -55,7 +55,8 @@ const SRC = {
 const S_PLAN = c('Easter'), S_RANGE = c('How many'), S_ENG = c("It's called"), S_CASE = c('The case'), S_READ = c('Its reasoning');
 const S_STATE = c('That means'), B = c('Nobody was ever');
 const TEAR = t.end('cover') + 2;
-/** The board's pieces land on "punished"; its end shot keeps the night and the proclamation above it, nothing sliced (boardfit). */
+/** The board's pieces land on "punished"; its end shot sits below the night's strip and the string tags above it, so nothing is sliced
+ *  (boardfit, text probe). */
 const PUN = t.at('punished');
 
 // ------------------------------------------------------------------------------------------------------ shots
@@ -101,7 +102,7 @@ const Engraving: React.FC = () => {
       keys={[[S_ENG, {x: 285, y: 664, z: 0.6}], [S_CASE, {x: 292, y: 664, z: 0.625}]]}
       over={<>
         <Between b={t.at('Federal')}>
-          <Highlight text="COLFAX MASSACRE" x={110} y={100} size={80} at={ca} seed={41} rot={-2} />
+          <Highlight text="COLFAX MASSACRE" x={110} y={108} size={80} at={ca} seed={41} rot={-2} />
           <Definition term="Colfax Massacre" def="the mass killing of Black men at Colfax, Louisiana, on Easter Sunday, 1873" at={ca + 9} x={120} y={250} w={600} />
         </Between>
         <Slip text="federal charges" x={140} y={560} rot={-2} size={56} at={t.at('charged')} />
@@ -127,7 +128,7 @@ const Case: React.FC = () => (
 const L: SheetCam = {x: 0, y: 0, z: 1, tilt: 26, dof: 2.2, band: 70};
 const Read: React.FC = () => (
   <Tear at={TEAR} seed="ck" top={
-    <DocShot src={P554} size={PAGE} tag={SRC.p554} focusAt={S_READ}
+    <DocShot src={P554} size={PAGE} tag="" focusAt={S_READ} over={<Between b={TEAR}><Tag text={SRC.p554} /></Between>}
       keys={[
         [S_READ, {...L, x: 880, y: 2085, dofY: 2085, z: 0.92}],
         [t.at('stops'), {...L, x: 1000, y: 2085, dofY: 2085, z: 1.0}],
@@ -171,7 +172,7 @@ const Body: React.FC = () => {
     [S_CASE, <Case key="cs" />],
     [S_READ, <Read key="rd" />],
     [S_STATE, <SameState key="ss" />],
-    [B, <SeriesBoard key="b" ch={4} from={B} at={PUN} cam={[[B, 2560, 1580, 1.6], [PUN + 64, 2930, 1420, 1.15], [PUN + 400, 2930, 1420, 1.15]]} />],
+    [B, <SeriesBoard key="b" ch={4} from={B} at={PUN} cam={[[B, 2560, 1580, 1.6], [PUN + 64, 2750, 1705, 1.5], [PUN + 400, 2750, 1705, 1.5]]} />],
   ]);
   return <>{scene}<Whooshes at={[S_PLAN, S_RANGE, S_ENG, S_CASE, S_READ, S_STATE]} /></>;
 };

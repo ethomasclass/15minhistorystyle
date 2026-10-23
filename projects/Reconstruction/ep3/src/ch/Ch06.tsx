@@ -74,7 +74,7 @@ const Building: React.FC = () => {
   return (
     <DocShot src={BLDG} size={BLDG_S} tag={SRC.bldg} filter={PRINT_F} keys={placed(BLDG_S, 940, 1320, 0, S_AD)}
       over={<>
-        <Highlight text="FREEDMAN'S SAVINGS BANK" x={110} y={100} size={70} at={b} seed={61} rot={-2} />
+        <Highlight text="FREEDMAN'S SAVINGS BANK" x={110} y={108} size={70} at={b} seed={61} rot={-2} />
         <Definition term="Freedman's Savings Bank" def="a bank for freedpeople, chartered by Congress in 1865" at={b + 9} x={120} y={250} w={620} />
         <Slip text="Congress, 1865" x={150} y={560} rot={-2} at={t.at('Congress')} />
         <Stamps at={[b]} />
@@ -180,8 +180,8 @@ const Check: React.FC = () => {
   const box = interpolate(g, [h - 6, h], [0, 1], clamp);
   return (
     <AbsoluteFill>
-      <DocShot src={CHECK} size={CHECK_S} tag={SRC.check} filter="grayscale(1) contrast(1.2) brightness(1.05)" focusAt={S_CHECK} keys={placed(CHECK_S, 600, 960, S_CHECK, B, 0.04, 430)}
-        over={<Slip text="a dividend check, 1878: sixteen cents" x={150} y={66} rot={-1} size={48} at={t.at('Over the years')} />}>
+      <DocShot src={CHECK} size={CHECK_S} tag={SRC.check} filter="grayscale(1) contrast(1.2) brightness(1.05)" focusAt={S_CHECK} keys={placed(CHECK_S, 600, 960, S_CHECK, B, 0.04, 455)}
+        over={<Slip text="a dividend check, 1878: sixteen cents" x={150} y={108} rot={-1} size={48} at={t.at('Over the years')} />}>
         <Swipe lines={SIXTEEN} from={t.at('Over the years')} to={t.end('years')} seed="sx" />
       </DocShot>
       {box > 0 && (

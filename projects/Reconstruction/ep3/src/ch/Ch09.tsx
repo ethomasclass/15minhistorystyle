@@ -337,9 +337,9 @@ const Body: React.FC = () => {
     [S_SIGN, <Sign key="sg" />],
     [S_LEE, <Fountain key="ft" />],
     [S_WORDS, <Words key="wd" />],
-    // the coral VOTELESS writes itself over the strike; hold, then travel down the 15th's "but" string to the gaps scrap
+    // the coral VOTELESS writes itself over the strike; hold, then pull back to the whole board: VOTELESS at the top, the 15th's "but" string down to the gaps scrap (closer framings slice pieces)
     [S_BOARD, <SeriesBoard key="b" ch={9} from={S_BOARD} at={WRITTEN}
-      cam={[[S_BOARD, 1060, 240, 1.7], [WRITTEN + 30, 1080, 240, 1.75], [WRITTEN + 80, 920, 1836, 0.7], [WRITTEN + 400, 920, 1836, 0.69]]} />],
+      cam={[[S_BOARD, 1060, 240, 1.7], [WRITTEN + 30, 1080, 240, 1.75], [WRITTEN + 84, 1660, 1180, 0.44], [WRITTEN + 400, 1660, 1180, 0.435]]} />],
   ]);
   return <>{scene}<Whooshes at={[S_PROT, S_YEARS, S_15, S_GAPS, S_POLL, S_RCPT, S_LIT, S_GF, S_USED, S_1896, S_BARS, S_SIGN, S_LEE, S_WORDS]} /></>;
 };

@@ -11,7 +11,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch10_a_few_acres.words.json';
 import {clamp} from '../lib/anim';
 import {DarkPaper, Sfx} from '../kit/common';
-import type {BoardKey} from '../kit/board';
+import {type BoardKey, boardCamAt} from '../kit/board';
 import {BoardSignoff, SeriesBoard} from '../kit/ep3board';
 import {Highlight, Tag, useGFrame} from '../kit/Kit';
 import {type Box, cut, DocShot, EDISTO, Motif, PETITION_P3, PhotoShot, Slip, Spot, SRC, Swipe, TEAL} from '../kit/rc';
@@ -302,35 +302,36 @@ const END_CAM: BoardKey[] = [
 
 /** The petition's line on the board (cr_petition.png, 1000 x 128, pinned at (660, 60), w 600, r -1). */
 const PET_LINES: Box[] = [[725, 28, 245, 42], [18, 72, 425, 42]];
-/** At the very end: the rest of the board falls into shadow and the coral runs along "A home if / It be but A few acres." */
-const PetitionLight: React.FC = () => {
+/** At the very end the coral runs along "A home if / It be but A few acres." (on the board, over the petition). */
+const PetitionSwipe: React.FC = () => (
+  <div style={{position: 'absolute', left: 660, top: 60, width: 600, height: 76.8, transform: 'rotate(-1deg)', transformOrigin: '50% 50%', zIndex: 81}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: 1000, height: 128, transform: 'scale(0.6)', transformOrigin: '0 0'}}>
+      <Swipe lines={PET_LINES} from={PUSH1 + 20} to={PUSH1 + 110} seed="pet" />
+    </div>
+  </div>
+);
+
+/** ...and the rest of the board falls into shadow: a soft ellipse of light on the petition and its label (board centre
+ *  960, 122), drawn in screen space over the board so nothing on it shows through. */
+const PetitionShadow: React.FC = () => {
+  const f = useCurrentFrame();
   const g = useGFrame();
-  const dark = interpolate(g, [PUSH0 + 60, PUSH1], [0, 0.93], clamp);
+  const dark = interpolate(g, [PUSH1 - 40, PUSH1 + 30], [0, 0.95], clamp);
+  if (dark <= 0) return null;
+  const c = boardCamAt(END_CAM, f);
+  // the lit rectangle: the petition and its label, board (650, 48)-(1270, 194)
+  const x0 = 960 + (650 - c.x) * c.z, y0 = 540 + (48 - c.y) * c.z, x1 = 960 + (1270 - c.x) * c.z, y1 = 540 + (194 - c.y) * c.z;
   return (
-    <>
-      {dark > 0 && (
-        <svg width={6400} height={4400} style={{position: 'absolute', left: -1600, top: -1200, zIndex: 80, overflow: 'visible'}}>
-          <defs>
-            <filter id="c10blur"><feGaussianBlur stdDeviation={26} /></filter>
-            <mask id="c10hole">
-              <rect width={6400} height={4400} fill="#fff" />
-              <rect x={1600 + 640} y={1200 + 36} width={640} height={165} rx={20} fill="#000" filter="url(#c10blur)" />
-            </mask>
-          </defs>
-          <rect width={6400} height={4400} fill={`rgba(9,8,6,${dark})`} mask="url(#c10hole)" />
-        </svg>
-      )}
-      <div style={{position: 'absolute', left: 660, top: 60, width: 600, height: 76.8, transform: 'rotate(-1deg)', transformOrigin: '50% 50%', zIndex: 81}}>
-        <div style={{position: 'absolute', left: 0, top: 0, width: 1000, height: 128, transform: 'scale(0.6)', transformOrigin: '0 0'}}>
-          <Swipe lines={PET_LINES} from={PUSH1 + 20} to={PUSH1 + 110} seed="pet" />
-        </div>
-      </div>
-    </>
+    <AbsoluteFill style={{pointerEvents: 'none', overflow: 'hidden'}}>
+      <div style={{position: 'absolute', left: x0, top: y0, width: x1 - x0, height: y1 - y0, borderRadius: 24 * c.z,
+        boxShadow: `0 0 ${60 * c.z}px 3000px rgba(9,8,6,${dark})`}} />
+    </AbsoluteFill>
   );
 };
 
 const EndOverlay: React.FC = () => (
   <>
+    <PetitionShadow />
     <Slip text="thanks for watching" x={140} y={880} size={60} rot={-2} at={t.at('Thanks for watching')} out={ROLL + 40} />
     <Slip text="subscribe ↓" x={1400} y={880} size={64} rot={2} at={t.at('subscribe') - 2} out={ROLL + 40} coral />
   </>
@@ -355,7 +356,7 @@ const Body: React.FC = () => {
     [S_END, (
       <SeriesBoard key="end" ch={10} from={S_END} at={MARKS} cam={END_CAM} overlay={<EndOverlay />}>
         <BoardSignoff at={ROLL + 150} />
-        <PetitionLight />
+        <PetitionSwipe />
       </SeriesBoard>
     )],
   ]);

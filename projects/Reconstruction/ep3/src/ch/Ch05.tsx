@@ -85,7 +85,7 @@ const Exchange: React.FC = () => {
   return (
     <DocShot src={EXCH} size={[1150, 1536]} tag={SRC.exch} filter={PRINT_F} focusAt={S_EXCH} keys={placed([1150, 1536], 920, 1280, S_EXCH, S_RUN)}
       over={<>
-        <Highlight text="PANIC OF 1873" x={110} y={100} size={84} at={p} seed={51} rot={-2} />
+        <Highlight text="PANIC OF 1873" x={110} y={108} size={84} at={p} seed={51} rot={-2} />
         <Definition term="Panic of 1873" def="a financial crash, then a depression that lasted for years" at={p + 9} x={120} y={250} w={640} />
         <Slip text="a depression: 1873 to about 1879" x={140} y={560} rot={-1.5} size={52} at={t.at('lasted for years')} />
         <Stamps at={[p]} />
@@ -120,7 +120,7 @@ const Probe: React.FC = () => {
   return (
     <DocShot src={PROBE} size={[1590, 1660]} tag={SRC.probe} filter={PRINT_F} focusAt={S_PROBE} keys={placed([1590, 1660], 930, 1300, S_PROBE, S_BAB)}
       over={<>
-        <Highlight text="WHISKEY RING" x={110} y={100} size={84} at={w} seed={52} rot={-2} />
+        <Highlight text="WHISKEY RING" x={110} y={108} size={84} at={w} seed={52} rot={-2} />
         <Definition term="Whiskey Ring" def="tax officials let whiskey makers skip their taxes, in exchange for a cut" at={w + 9} x={120} y={250} w={640} />
         <Slip text="Nast, 1876: “probe away!”" x={140} y={700} rot={-1.5} size={54} at={t.at('in exchange')} />
         <Stamps at={[w]} />
@@ -167,7 +167,7 @@ const Act: React.FC = () => {
         [t.end('trains'), {...R, x: 1260, y: 688, dofY: 688, z: 1.32}], [S_CASES, {...R, x: 1280, y: 690, dofY: 690, z: 1.34}]]}
       over={<>
         <Between b={t.at('hotels') - 6}>
-          <Highlight text="CIVIL RIGHTS ACT OF 1875" x={110} y={100} size={76} at={a} seed={53} rot={-2} />
+          <Highlight text="CIVIL RIGHTS ACT OF 1875" x={110} y={108} size={76} at={a} seed={53} rot={-2} />
           <Definition term="Civil Rights Act of 1875" def="a federal law that banned discrimination in hotels, theaters and trains" at={a + 9} x={120} y={830} w={1100} />
         </Between>
         <Slip text="almost nobody enforced it" x={300} y={820} rot={-1.5} size={64} at={t.at('Almost nobody')} />
@@ -202,7 +202,7 @@ const Body: React.FC = () => {
     [S_LAW, <Shackle key="sh" />],
     [S_ACT, <Act key="act" />],
     [S_CASES, <Cases key="cs" />],
-    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} cam={[[B, 2850, 310, 1.5], [TIRED + 50, 3000, 300, 1.6], [TIRED + 420, 3030, 305, 1.57]]} overlay={
+    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} cam={[[B, 3060, 290, 1.75], [TIRED + 50, 2982, 300, 1.7], [TIRED + 420, 2982, 300, 1.7]]} overlay={
       <Slip text="subscribe ↓" x={1300} y={880} rot={3} size={60} at={t.at('hit subscribe')} />
     } />],
   ]);

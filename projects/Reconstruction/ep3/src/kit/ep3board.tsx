@@ -59,7 +59,7 @@ const P3: Piece[] = [
   // ch06 the bank (LAND)
   {id: 'check', wh: [330, 146], ch: 6, dt: 0, kind: 'drop', x: 1940, y: 1345, r: 2, el: () => <Photo src={W + 'cr_check.png'} w={330} />},
   {id: 'checkStrip', wh: [310, 36], ch: 6, dt: 12, kind: 'slide', x: 1950, y: 1500, r: -2, el: () => <Strip text="Freedman's Bank · 1874" seed="fbk" size={20} />},
-  {id: 'cents', wh: [170, 44], ch: 6, dt: 30, kind: 'stamp', x: 2090, y: 1420, r: -8, z: 6, el: () => <Stamp text="16 CENTS" size={24} />},
+  {id: 'cents', wh: [250, 60], ch: 6, dt: 30, kind: 'stamp', x: 2090, y: 1420, r: -8, z: 6, el: () => <Stamp text="16 CENTS" size={24} />},
   // ch07 ★ Mississippi, 1875: "tired out", and why they killed him
   {id: 'herald', wh: [460, 86], ch: 7, dt: 0, kind: 'drop', x: 2300, y: 1830, r: -1, el: () => <Photo src={W + 'cr_herald.png'} w={460} />},
   {id: 'obeying', wh: [460, 48], ch: 7, dt: 16, kind: 'drop', x: 2800, y: 1850, r: 1.5, el: () => <Photo src={W + 'cr_obeying.png'} w={460} />},
