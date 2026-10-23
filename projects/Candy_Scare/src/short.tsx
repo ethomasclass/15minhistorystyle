@@ -63,10 +63,10 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:10 why it matters: a kid, a pail, the candy check
     [at('That hand is') - 1, (
       <Desk a={at('That hand is')}>
-        <Cut name="kid79" mask={MASKS.kid79} size={IMG.kid79.size as [number, number]} box={[40, 360, 520, 780]} at={at('That hand is')} tint={false} bare />
+        <Cut name="kid79" mask={MASKS.kid79} size={IMG.kid79.size as [number, number]} box={[40, 450, 520, 690]} at={at('That hand is')} tint={false} bare />
         <Cut name="pail" mask={MASKS.pail} size={IMG.pail.size as [number, number]} box={[520, 640, 500, 500]} at={at('That hand is') + 4} bare />
-        <Note text="every Halloween:" x={560} y={360} size={58} rot={-3} at={at('parents still')} color="#ffffff" />
-        <Note text="check the candy." x={560} y={440} size={66} rot={-3} at={at('check Halloween')} />
+        <Note text="every Halloween:" x={70} y={250} size={58} rot={-3} at={at('parents still')} color="#ffffff" />
+        <Note text="check the candy." x={90} y={335} size={66} rot={-3} at={at('check Halloween')} />
         {tagOf(IMG.kid79)}
       </Desk>
     )],
@@ -132,7 +132,7 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
         <DropCard src={IMG.fda.src} x={60} y={330} w={560} rot={-3} at={at('In 1982,')} filter={LOOK.doc} />
         <Stamp text="7" x={700} y={330} at={at('Seven people')} size={330} color={CORAL} rot={-4} />
         <Note text="dead" x={720} y={690} size={70} rot={-4} at={at('died.')} color="#ffffff" />
-        <Note text="Chicago area, 1982" x={640} y={790} size={50} rot={-4} at={at('died.') + 4} />
+        <Note text="Chicago area, 1982" x={600} y={790} size={44} rot={-4} at={at('died.') + 4} />
         <Note text="poisoned Tylenol" x={650} y={860} size={46} rot={-4} at={at('poisoned Tylenol')} color="#ffffff" />
         {tagOf(IMG.fda)}
       </Desk>
@@ -140,9 +140,9 @@ const Scenes: React.FC<{t: TL}> = ({t}) => {
     // 0:34 that Halloween: the AP story, swiped
     [at('That Halloween,') - 1, (
       <Desk a={at('That Halloween,')}>
-        <DropCard src={IMG.ap.src} x={40} y={330} w={1000} rot={1} at={at('That Halloween,')} filter={LOOK.doc}>
-          <Swipe card={{w: 1000, img: IMG.ap.size as [number, number]}} box={[8, 14, 1030, 146]} at={at('That Halloween,') + 6} dur={12} />
-          <Swipe card={{w: 1000, img: IMG.ap.size as [number, number]}} box={[26, 606, 340, 662]} at={at('banned')} dur={8} />
+        <DropCard src={IMG.ap.src} x={50} y={330} w={970} rot={1} at={at('That Halloween,')} filter={LOOK.doc}>
+          <Swipe card={{w: 970, img: IMG.ap.size as [number, number]}} box={[8, 14, 1030, 146]} at={at('That Halloween,') + 6} dur={12} />
+          <Swipe card={{w: 970, img: IMG.ap.size as [number, number]}} box={[26, 606, 340, 662]} at={at('banned')} dur={8} />
         </DropCard>
         {tagOf(IMG.ap)}
       </Desk>
