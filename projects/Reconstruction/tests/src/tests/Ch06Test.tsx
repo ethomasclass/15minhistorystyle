@@ -53,7 +53,7 @@ export const CH06_FRAMES = END + 120;
 const Counter: React.FC<{n: number; at: number}> = ({n, at}) => {
   const g = useGFrame();
   if (g < at) return null;
-  return <div style={{position: 'absolute', right: 60, top: 50, fontFamily: JF.mono, fontSize: 34, letterSpacing: 2, color: '#f4efe6', textShadow: '0 2px 10px #000'}}>STEP {n}/3</div>;
+  return <div style={{position: 'absolute', right: 100, top: 100, fontFamily: JF.mono, fontSize: 34, letterSpacing: 2, color: '#f4efe6', textShadow: '0 2px 10px #000'}}>STEP {n}/3</div>;
 };
 
 /** A hard cut lands with a whoosh. */
@@ -68,9 +68,9 @@ const Amend: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <FocusIn at={2}><Sheet src={T13} size={T13S} cam={cam} seed="t13" filter={T13F} /></FocusIn>
-      <Highlight text="13TH AMENDMENT" x={50} y={70} size={70} at={t.at('13th')} seed={4} rot={-2} />
-      <Note text="Dec. 1865" x={70} y={190} size={44} at={t.at('December')} />
-      <Note text="3 of 4 states say yes" x={1440} y={330} size={40} rot={-3} at={t.at('three out of four')} dur={14} />
+      <Highlight text="13TH AMENDMENT" x={100} y={106} size={70} at={t.at('13th')} seed={4} rot={-2} />
+      <Note text="Dec. 1865" x={110} y={215} size={44} at={t.at('December')} />
+      <Note text="3 of 4 states say yes" x={1360} y={330} size={38} rot={-3} at={t.at('three out of four')} dur={14} />
       <Note text="slavery: over" x={1460} y={450} size={40} rot={-3} at={t.at('ended slavery')} color={CORAL} />
       <Sfx at={2} src="sfx/tick.wav" volume={0.4} />
       <Tag text={SRC_T13} />
@@ -138,9 +138,9 @@ const Codes: React.FC = () => {
       <Sheet src="img/ch06/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa">
         <Swipe lines={F_ENACT} from={t.at('Mississippi went')} to={t.end('November 1865')} seed="fa1" />
       </Sheet>
-      <Highlight text="BLACK CODES" x={50} y={70} size={84} at={t.at('Black Codes') + 8} seed={6} rot={-2} />
+      <Highlight text="BLACK CODES" x={100} y={106} size={84} at={t.at('Black Codes') + 8} seed={6} rot={-2} />
       <Definition term="Black Codes" def="laws that applied only to Black Southerners" at={t.at('laws that')} x={120} y={860} />
-      <Note text="Nov. 1865" x={1500} y={70} size={50} at={t.at('November')} />
+      <Note text="Nov. 1865" x={1500} y={120} size={50} at={t.at('November')} />
       <Tag text={SRC_FA} />
     </Tear>
   );
@@ -249,7 +249,7 @@ const ThreeUp: React.FC = () => {
         <FocusIn at={t.at('free under')}><Win src={T13} cx={1150} cy={958} s={0.66} filter={T13F} w={560} h={190} x={70} y={330} r={-2} seed="w1" /></FocusIn>
         <FocusIn at={t.at('arrested for')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={330} cy={4250} s={1.05} w={560} h={190} x={680} y={360} r={1.5} seed="w2" /></FocusIn>
         <FocusIn at={t.at('put to work')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={1120} cy={300} s={0.82} w={560} h={190} x={1290} y={330} r={-1.5} seed="w3" /></FocusIn>
-        <Note text="free" x={250} y={560} size={60} at={t.at('free under')} />
+        <Note text="free" x={300} y={560} size={60} at={t.at('free under')} />
         <Note text="arrested" x={840} y={590} size={60} at={t.at('arrested for')} />
         <Note text="put to work" x={1400} y={560} size={60} at={t.at('put to work')} />
       </AbsoluteFill>
@@ -322,7 +322,7 @@ export const Ch06Test: React.FC = () => {
     [0, <Amend key="a" />],
     [S2, <Middle key="m" />],
     [S3, <PhotoShot key="j" src="img/wall/cr_johnson.png" size={[900, 1101]} a={S3} b={S4} w={560} tag="Andrew Johnson · Library of Congress">
-      <Note text="new state governments" x={1290} y={300} size={46} rot={-3} at={t.at('elected')} />
+      <Note text="new state governments" x={1240} y={300} size={40} rot={-3} at={t.at('elected')} />
     </PhotoShot>],
     [S4, <PhotoShot key="p" src="img/wall/cr_pardons.png" size={[900, 1114]} a={S4} b={S5} w={560} tag="Pardon applications · Library of Congress">
       <Note text="the same men" x={1290} y={330} size={50} rot={-3} at={t.at('same men')} color={CORAL} />

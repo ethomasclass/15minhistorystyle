@@ -15,6 +15,7 @@ import {BrickChannel, BrickE1, BrickEnd, BrickLand} from './tests/WallBricks';
 import {BOARD_FRAMES, BoardAnim} from './tests/BoardAnim';
 import {Collage1, Collage2, Collage3, Collage4} from './tests/CollageMocks';
 import {CH06_FRAMES, Ch06Test} from './tests/Ch06Test';
+import {NoteA, NoteB, NoteC, NoteD} from './tests/NoteOptions';
 import {COLLAGE_ANIM_FRAMES, COLLAGE_NIGHT_FRAMES, CollageAnim, CollageNight} from './tests/CollageAnim';
 
 export const Root: React.FC = () => (
@@ -27,7 +28,7 @@ export const Root: React.FC = () => (
     <Composition id="Test-Stereo" width={W} height={H} fps={FPS} durationInFrames={STEREO_FRAMES} component={StereoTest} />
     <Composition id="Test-Acres" width={W} height={H} fps={FPS} durationInFrames={ACRES_FRAMES} component={AcresTest} />
     <Composition id="Test-Fords" width={W} height={H} fps={FPS} durationInFrames={FORDS_FRAMES} component={FordsTest} />
-    {([['Wall-A', WallA], ['Wall-B', WallB], ['Wall-C', WallC], ['Wall-D', WallD], ['Brick-E1', BrickE1], ['Brick-Land', BrickLand], ['Brick-End', BrickEnd], ['Brick-Channel', BrickChannel], ['Collage-1', Collage1], ['Collage-2', Collage2], ['Collage-3', Collage3], ['Collage-4', Collage4]] as const).map(([id, C]) => <Composition key={id} id={id} width={W} height={H} fps={FPS} durationInFrames={1} component={C} />)}
+    {([['Wall-A', WallA], ['Wall-B', WallB], ['Wall-C', WallC], ['Wall-D', WallD], ['Brick-E1', BrickE1], ['Brick-Land', BrickLand], ['Brick-End', BrickEnd], ['Brick-Channel', BrickChannel], ['Collage-1', Collage1], ['Collage-2', Collage2], ['Collage-3', Collage3], ['Collage-4', Collage4], ['Note-A', NoteA], ['Note-B', NoteB], ['Note-C', NoteC], ['Note-D', NoteD]] as const).map(([id, C]) => <Composition key={id} id={id} width={W} height={H} fps={FPS} durationInFrames={1} component={C} />)}
     <Composition id="Ch06-Test" width={W} height={H} fps={FPS} durationInFrames={CH06_FRAMES} component={Ch06Test} />
     <Composition id="Collage-Anim" width={W} height={H} fps={FPS} durationInFrames={COLLAGE_ANIM_FRAMES} component={CollageAnim} />
     <Composition id="Collage-Night" width={W} height={H} fps={FPS} durationInFrames={COLLAGE_NIGHT_FRAMES} component={CollageNight} />

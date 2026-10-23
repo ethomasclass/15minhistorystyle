@@ -34,7 +34,7 @@ have, eleven techniques we don't, and where each would land in *Reconstruction*)
 2. **One job per colour.** Teal draws and explains. Orange is for titles. Coral is the subject.
 3. **Marks step, cameras glide.** Drawn marks animate at 12 drawings a second. Camera moves are smooth.
 4. **Cut hard, on the word.** Scenes cut 1–2 frames before the word they belong to, with a whoosh. No dissolves. Every mark is keyed to a spoken word (`t.at('phrase')`), never to a number of seconds.
-5. **Credit every picture, keep every word on screen.** Every image gets a mono source tag, and no text runs off the frame (run `tools/probe_text.mjs` before every render).
+5. **Credit every picture, keep every word on screen.** Every image gets a mono source tag, and no text runs off the frame. Titles and notes also stay out of the outer 5% (96 px): run `SAFE=96 node tools/probe_text.mjs <ids>` before every render (the `SAFE` mode is in the Reconstruction tests project's copy).
 
 ---
 
