@@ -26,7 +26,7 @@ JOBS = {
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     # Episode 2 portraits
-    "revels": ("img/ch01/revels_brady_handy_1870.jpg", (980, 250, 2545, 3000), "isnet-general-use"),
+    "revels": ("img/ch01/revels_brady_handy_1870.jpg", (600, 700, 2545, 2950), "isnet-general-use"),
     "davis1859": ("img/ch01/jefferson_davis_1859_brady.jpg", None, "isnet-general-use"),
     "grant": ("img/ch05/grant_brady_nara_526674.jpg", None, "isnet-general-use"),
     "ames": ("img/ch07/ames_senator_brady_handy.jpg", (250, 300, 1560, 3000), "isnet-general-use"),
