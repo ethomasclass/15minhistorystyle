@@ -241,8 +241,9 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; bo
 };
 
 export const Tag: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 44, y = 1030}) => (
-  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
-    textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div>
+  // a soft dark backing keeps the tag readable over bright pages and newspapers (Reconstruction, Oct 2026)
+  text ? <div style={{position: 'absolute', left: x - 8, top: y - 4, padding: '3px 8px', background: 'rgba(10,9,7,0.6)', borderRadius: 2, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1,
+    color: 'rgba(255,255,255,0.88)', textTransform: 'uppercase', textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div> : null
 );
 
 /** Paper/film texture and a soft vignette over everything. */

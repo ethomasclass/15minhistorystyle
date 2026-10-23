@@ -69,7 +69,7 @@ const Sounds: React.FC = () => (
 );
 
 // ---------------------------------------------------------------------------------------------------------- shots
-const AWAY = {dx: 60, dy: 75};   // where ch02 left the South: broken away
+const AWAY = {dx: 95, dy: 115};   // where ch02 left the South: broken away
 
 /** Reconstruction: the South, broken away at the end of ch02, slides back into the Union. */
 const PutBack: React.FC = () => {

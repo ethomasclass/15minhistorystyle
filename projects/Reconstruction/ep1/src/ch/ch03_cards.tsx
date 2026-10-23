@@ -27,8 +27,9 @@ export const BranchCard: React.FC<{name: string; sub: string; x: number; y: numb
     <div style={{position: 'absolute', left: x, top: y, width: w, height: h, transform: `rotate(${rot}deg)`}}>
       <div style={{position: 'absolute', inset: 0, background: 'rgba(12,14,13,0.55)'}} />
       <svg width={w} height={h} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
-        <path d={rough(w, h, name)} fill="none" stroke={color} strokeWidth={5} strokeLinejoin="round" strokeLinecap="round"
-          pathLength={1} strokeDasharray={dashed ? undefined : 1} strokeDashoffset={dashed ? undefined : 1 - p} style={dashed ? {strokeDasharray: '18 12', opacity: p} : undefined} />
+        {dashed
+          ? <path d={rough(w, h, name)} fill="none" stroke={color} strokeWidth={5} strokeLinejoin="round" strokeDasharray="18 12" opacity={p} />
+          : <path d={rough(w, h, name)} fill="none" stroke={color} strokeWidth={5} strokeLinejoin="round" strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} />}
       </svg>
       <div style={{position: 'absolute', left: 0, right: 0, top: h * 0.2, textAlign: 'center', fontFamily: JF.display, fontSize: 72, lineHeight: 1, color, opacity: o, whiteSpace: 'nowrap'}}>{name}</div>
       <div style={{position: 'absolute', left: 0, right: 0, top: h * 0.62, textAlign: 'center', fontFamily: JF.mono, fontSize: 26, letterSpacing: 2, color: '#f4efe6', opacity: o, whiteSpace: 'nowrap'}}>{sub}</div>

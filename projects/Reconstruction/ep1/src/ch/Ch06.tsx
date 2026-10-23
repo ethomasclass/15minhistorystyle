@@ -134,7 +134,7 @@ const Codes: React.FC = () => {
   return (
     <Tear at={t.at('Black Codes') - 3} top={top} seed="tear">
       <DarkPaper />
-      <Sheet src="img/ch06/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa">
+      <Sheet src="img/ch06/vox/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa">
         <Swipe lines={F_ENACT} from={t.at('Mississippi went')} to={t.end('November 1865')} seed="fa1" />
       </Sheet>
       <Highlight text="BLACK CODES" x={100} y={106} size={84} at={t.at('Black Codes') + 8} seed={6} rot={-2} />
@@ -153,7 +153,7 @@ const StepOne: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sheet src="img/ch06/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa" offset={[carry(f, S7, S8), 0]}>
+      <Sheet src="img/ch06/vox/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa" offset={[carry(f, S7, S8), 0]}>
         <Swipe lines={F_JAN} from={t.at('Every January')} to={t.end('January')} seed="fa2" />
         <Swipe lines={F_HOME} from={t.at('written proof')} to={t.end('ahead')} seed="fa3" />
       </Sheet>
@@ -183,7 +183,7 @@ const StepTwo: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sheet src="img/ch06/ms_vagrant_act.jpg" size={VAS} cam={cam} seed="va" offset={[carry(f, S8, WR + 8), 0]}>
+      <Sheet src="img/ch06/vox/ms_vagrant_act.jpg" size={VAS} cam={cam} seed="va" offset={[carry(f, S8, WR + 8), 0]}>
         <Swipe lines={V_TITLE} from={t.at('Without')} to={t.at('vagrant') - 2} seed="va1" />
       </Sheet>
       <Counter n={2} at={S8} />
@@ -200,7 +200,7 @@ const StepThree: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sheet src="img/ch06/ms_vagrant_act.jpg" size={VAS} cam={cam} seed="va" offset={[carry(f, S9, S10), 0]}>
+      <Sheet src="img/ch06/vox/ms_vagrant_act.jpg" size={VAS} cam={cam} seed="va" offset={[carry(f, S9, S10), 0]}>
         <Swipe lines={V_SHERIFF} from={t.at('the sheriff')} to={t.end('paid it')} seed="va2" />
       </Sheet>
       <Slip text="often, a planter" x={1180} y={820} at={t.at('Often')} coral />
@@ -217,7 +217,7 @@ const Land_: React.FC = () => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sheet src="img/ch06/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa" offset={[carry(f, S10, S11), 0]}>
+      <Sheet src="img/ch06/vox/ms_freedmen_act.jpg" size={FAS} cam={cam} seed="fa" offset={[carry(f, S10, S11), 0]}>
         <Swipe lines={F_RENT} from={t.at('Freedpeople')} to={t.end('towns')} seed="fa4" />
         <Spot size={FAS} boxes={F_RENT} at={t.at('locked away')} id="sp2" />
       </Sheet>
@@ -237,8 +237,8 @@ const ThreeUp: React.FC = () => {
       <DarkPaper />
       <AbsoluteFill style={{transform: `translateX(${dx}px)`}}>
         <FocusIn at={t.at('free under')}><Win src={T13} cx={1000} cy={966} s={0.8} filter={T13F} w={560} h={190} x={70} y={330} r={-2} seed="w1" /></FocusIn>
-        <FocusIn at={t.at('arrested for')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={330} cy={4250} s={1.05} w={560} h={190} x={680} y={360} r={1.5} seed="w2" /></FocusIn>
-        <FocusIn at={t.at('put to work')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={1120} cy={300} s={0.82} w={560} h={190} x={1290} y={330} r={-1.5} seed="w3" /></FocusIn>
+        <FocusIn at={t.at('arrested for')}><Win src="img/ch06/vox/ms_vagrant_act.jpg" cx={330} cy={4250} s={1.05} w={560} h={190} x={680} y={360} r={1.5} seed="w2" /></FocusIn>
+        <FocusIn at={t.at('put to work')}><Win src="img/ch06/vox/ms_vagrant_act.jpg" cx={1120} cy={300} s={0.82} w={560} h={190} x={1290} y={330} r={-1.5} seed="w3" /></FocusIn>
         <Slip text="free" x={280} y={570} rot={-2} at={t.at('free under')} />
         <Slip text="arrested" x={830} y={600} rot={2} at={t.at('arrested for')} />
         <Slip text="put to work" x={1390} y={570} rot={-2} at={t.at('put to work')} />

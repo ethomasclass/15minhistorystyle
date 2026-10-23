@@ -91,7 +91,7 @@ const Open: React.FC<{shift?: number}> = ({shift = 0}) => {
 
 const OHIO = centreOf(US.states['USA:Ohio']);
 const BAMA = centreOf(US.states['USA:Alabama']);
-const AWAY = {dx: 60, dy: 75};
+const AWAY = {dx: 95, dy: 115};
 
 /** The Union rises teal, state by state; the South rises brick and breaks away. */
 const Sides: React.FC = () => {
