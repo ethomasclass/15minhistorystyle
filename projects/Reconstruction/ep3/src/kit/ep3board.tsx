@@ -196,7 +196,12 @@ export const SeriesBoard: React.FC<{ch: number; from: number; at: number; cam?: 
   // the end shot frames the pieces, and a chapter that shows the mark passes its own `cam`
   (mineP.some((p) => p.kind !== 'fade') ? mineP.filter((p) => p.kind !== 'fade') : mineP).forEach((p) => grow(rect(p)));
   T3.filter((t) => t.ch === ch && !t.under).forEach((t) => grow([Math.min(t.a[0], t.b[0]), Math.min(t.a[1], t.b[1]), Math.max(t.a[0], t.b[0]), Math.max(t.a[1], t.b[1])]));
-  const others = PIECES.filter((p) => p.ch <= ch && !(p.ch === ch && mineP.includes(p))).map(rect);
+  // the string labels count too ("therefore", "✕"): about 17 px a character plus padding, centred on their point
+  const tagRects = THREADS.filter((t) => t.ch <= ch && t.tag).map((t) => {
+    const k = t.tagT ?? 0.5, x = t.a[0] + (t.b[0] - t.a[0]) * k, y = t.a[1] + (t.b[1] - t.a[1]) * k, w = t.tag!.length * 17 + 30;
+    return [x - w / 2, y - 24, x + w / 2, y + 24];
+  });
+  const others = [...PIECES.filter((p) => p.ch <= ch && !(p.ch === ch && mineP.includes(p))).map(rect), ...tagRects];
   const fits = (cx: number, cy: number, z: number) => {
     const hw = 960 / z, hh = 540 / z, m = 70 / z;   // keep the chapter's pieces 70 px inside the edge
     const v = [cx - hw, cy - hh, cx + hw, cy + hh];

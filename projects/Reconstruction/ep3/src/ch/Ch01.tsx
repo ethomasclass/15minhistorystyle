@@ -247,6 +247,7 @@ const Body: React.FC = () => {
     [S_FIVE, <Five key="fv" />],
     [S_QUESTION, <Why key="wy" />],
     [S_BOARD, <SeriesBoard key="b" ch={1} from={S_BOARD} at={t.at('kept asking')}
+      cam={[[S_BOARD, 720, 2085, 1.6], [t.at('kept asking') + 24, 700, 2070, 1.45], [t.at('why did they') + 6, 700, 2070, 1.42], [t.at('why did they') + 40, 1065, 1765, 0.875], [END, 1065, 1765, 0.86]]}
       overlay={<Slip text="why did they kill him?" x={1120} y={850} size={56} rot={2} at={t.at('why did they')} />} />],
   ];
   let scene = useScene(shots);

@@ -2,13 +2,13 @@
 import {build} from 'esbuild';
 import path from 'node:path';
 const out = path.resolve('out/boardfit.cjs');
-await build({entryPoints: ['src/kit/ep2board.tsx'], bundle: true, platform: 'node', format: 'cjs', outfile: out, external: ['react', 'remotion', '@remotion/*', 'three', '@react-three/*'], loader: {'.png': 'empty', '.jpg': 'empty'}, logLevel: 'error'});
+await build({entryPoints: ['src/kit/ep3board.tsx'], bundle: true, platform: 'node', format: 'cjs', outfile: out, external: ['react', 'remotion', '@remotion/*', 'three', '@react-three/*'], loader: {'.png': 'empty', '.jpg': 'empty'}, logLevel: 'error'});
 const {createRequire} = await import('node:module');
 const req = createRequire(path.resolve('package.json'));
 const m = req(out);
 const SIZE = {drop: [380, 300], slap: [190, 175], stamp: [360, 60], tape: [120, 40], slide: [360, 40], fade: [160, 30]};
 const ch = Number(process.argv[2]);
-const rects = m.PIECES.filter((p) => p.ch <= ch).map((p) => ({id: p.id, r: [p.x, p.y, p.x + SIZE[p.kind][0], p.y + SIZE[p.kind][1]]}));
+const rects = m.PIECES.filter((p) => p.ch <= ch).map((p) => ({id: p.id, r: [p.x, p.y, p.x + (p.wh ?? SIZE[p.kind])[0], p.y + (p.wh ?? SIZE[p.kind])[1]]}));
 const [cx, cy, z] = process.argv[3] === 'search' ? [0, 0, 1] : process.argv.slice(3).map(Number);
 const hw = 960 / z, hh = 540 / z, v = [cx - hw, cy - hh, cx + hw, cy + hh];
 for (const {id, r} of rects) {
