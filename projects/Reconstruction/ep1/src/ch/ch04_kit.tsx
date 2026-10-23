@@ -114,7 +114,7 @@ export const DeskPrint: React.FC<{src: string; size: [number, number]; rect: Rec
         filter: 'drop-shadow(0 18px 26px rgba(0,0,0,0.7))'}}>
         <div style={{position: 'absolute', inset: 0, overflow: 'hidden', background: '#d9d2c2', clipPath: tornPoly(src, w, h, 9)}}>
           <Picture src={src} place={place} size={size} bw={bw} />
-          {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint} strength={0.55} />}
+          {mask && tint !== null && <Tint mask={mask.alpha} place={place} size={size} color={tint} strength={0.6} />}
         </div>
         {mask && <div style={{position: 'absolute', left: 0, top: 0}}><Traced paths={mask.data.shapes.subject} place={place} at={traceAt ?? a + 6} dur={12} width={5} part={0.92} /></div>}
       </div>
