@@ -119,8 +119,16 @@
     "page": "https://www.loc.gov/item/2006687376/",
     "source": "loc:2006687376"
   },
-  "ch03/yorkville_enquirer_1871-10-26_arrests_of_citizens_york_county.jpg": {
-    "title": "Yorkville Enquirer (Yorkville, York County, S.C.), October 26, 1871, p.2: President Grant's proclamation of Oct 17, 1871 suspending habeas corpus in nine S.C. counties, and the local report \"Arrests of Citizens\"",
+  "ch03/yorkville_enquirer_1871-10-26_arrests_of_citizens_york_county_part1.jpg": {
+    "title": "Yorkville Enquirer (Yorkville, York County, S.C.), October 26, 1871, p.2: President Grant's proclamation of Oct 17, 1871 suspending habeas corpus in nine S.C. counties, and the local report \"Arrests of Citizens\" [part 1: heading and report, \"The total number now in the jail at this place is 79\"]",
+    "artist": "Yorkville Enquirer",
+    "date": "1871-10-26",
+    "licence": "public domain (published 1871); Library of Congress Chronicling America",
+    "page": "https://www.loc.gov/resource/sn84026925/1871-10-26/ed-1/?sp=2",
+    "source": "chronam:sn84026925/1871-10-26/ed-1/sp2 (IIIF 60%)"
+  },
+  "ch03/yorkville_enquirer_1871-10-26_arrests_of_citizens_york_county_part2_names.jpg": {
+    "title": "Yorkville Enquirer (Yorkville, York County, S.C.), October 26, 1871, p.2: President Grant's proclamation of Oct 17, 1871 suspending habeas corpus in nine S.C. counties, and the local report \"Arrests of Citizens\" [part 2: the list of men held in the jail]",
     "artist": "Yorkville Enquirer",
     "date": "1871-10-26",
     "licence": "public domain (published 1871); Library of Congress Chronicling America",
