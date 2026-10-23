@@ -279,20 +279,28 @@
     "page": "https://www.loc.gov/item/scsm000581/",
     "source": "loc:scsm000581"
   },
-  "ch03/wade_davis_bill_text_printed_1864_p2.jpg": {
-    "title": "Same 1864 printing, page 2: 'Abraham Lincoln. By the President: William H. Seward' and the start of 'A Bill to guarantee to certain States whose governments have been usurped or overthrown, a republican form of government' (the Wade-Davis bill)",
+  "ch03/wade_davis_bill_text_printed_1864_p2_majority_clause.jpg": {
+    "title": "Same 1864 printing, page 2: 'Abraham Lincoln. By the President: William H. Seward' and the start of 'A Bill to guarantee to certain States whose governments have been usurped or overthrown, a republican form of government' (the Wade-Davis bill) Sec. 2 (bottom): convention only \"if the persons taking that oath shall amount to a majority of the persons enrolled in the State\"",
     "artist": "Lincoln, Abraham (Author)",
     "date": "1864-07-08",
     "licence": "The Library of Congress believes that many of the papers in The Alfred Whital Stern Collection of Lincolniana collection are in the public domain or have no known copyright restrictions and are free to use and reuse. For example, any songs published in the United States before 1923 are in the public",
     "page": "https://www.loc.gov/item/scsm000581/",
     "source": "loc:scsm000581"
   },
-  "ch03/wade_davis_bill_text_printed_1864_p3_majority.jpg": {
-    "title": "Same 1864 printing, page 3: Wade-Davis bill sections 3-5 (enrolment of white male citizens; convention called only when a majority take the oath)",
-    "artist": "Lincoln, Abraham (Author)",
-    "date": "1864-07-08",
-    "licence": "The Library of Congress believes that many of the papers in The Alfred Whital Stern Collection of Lincolniana collection are in the public domain or have no known copyright restrictions and are free to use and reuse. For example, any songs published in the United States before 1923 are in the public",
-    "page": "https://www.loc.gov/item/scsm000581/",
-    "source": "loc:scsm000581"
+  "ch04/fords_theatre_exterior_april1865.jpg": {
+    "title": "Ford's Theatre, scene of the assassination",
+    "artist": "",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2009633713/",
+    "source": "loc:2009633713"
+  },
+  "ch04/fords_theatre_presidents_box_april1865.jpg": {
+    "title": "Washington, District of Columbia. President's box at Ford's Theatre",
+    "artist": "",
+    "date": "1865",
+    "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+    "page": "https://www.loc.gov/item/2018671198/",
+    "source": "loc:2018671198"
   }
 }
