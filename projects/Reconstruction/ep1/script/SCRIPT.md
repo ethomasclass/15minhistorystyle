@@ -195,7 +195,7 @@ The {Freedmen's Bureau}. Congress created it in March 1865, and it was run by Ol
 
 It handed out food and medicine. It made marriages from slavery legal, because under slavery, they hadn't counted. It helped start thousands of schools. Grandparents sat beside their grandchildren, learning to read for the first time.
 
-And it helped families find each other. Under slavery, parents and children had been sold away from one another. Now people placed ads in newspapers. Look at this one, from 1866. It's searching for Hagar Outlaw's children. Hundreds of ads like this survive. Very few ended with a family together again.
+And it helped families find each other. Under slavery, parents and children had been sold away from one another. Now people placed ads in newspapers. Look at this one, from a Nashville paper in 1866. A mother, Hannah Barnett, is looking for her daughter, Martha. She hadn't seen her since Martha was sold, about nine years earlier. Hundreds of ads like this survive. Very few ended with a family together again.
 
 And it was supposed to be temporary. In early 1866, Congress voted to keep it going. Johnson vetoed it.
 
@@ -353,7 +353,7 @@ question and pays off Johnson's arc) and trim as needed. No definitions were cut
   (ch08); Alexander Stephens (ch06); the Bureau's "harder side" (moved to Episode 2's sharecropping chapter); "Translation: the planters
   started this war" (ch05); Howard dreading the trip (ch05); "presidents back then almost never campaigned" (ch09); the Edisto families
   working for their old owners (ch10, already said in ch01).
-- **Shortened:** the plot (ch04), the Seward attack (ch04), the Hagar Outlaw ad (ch07), Wade-Davis (ch03), Sherman's march (ch02), New
+- **Shortened:** the plot (ch04), the Seward attack (ch04), the Hannah Barnett ad (ch07), Wade-Davis (ch03), Sherman's march (ch02), New
   Orleans and the Stevens line (ch09).
 - **Added:** a callback in ch09 to the swearing-in in ch04: "Once again, the country watched Andrew Johnson lose control in public."
 
@@ -369,7 +369,6 @@ small step. But it was the first one." (ch04). Keep the 1866 election itself.
 | Tecumseh | tuh-KUM-suh |
 | odious | OH-dee-us |
 | Thaddeus | THAD-ee-us |
-| Hagar Outlaw | HAY-gar OUT-law |
 | Wade-Davis | (check it isn't run together) |
 | No. 15 | "Number 15" (write it out for the voice) |
 | Dred Scott | (check) |
@@ -406,7 +405,7 @@ small step. But it was the first one." (ch04). Keep the 1866 election itself.
 | 15 | ch06: 13th Amendment ratified Dec 1865; three-quarters of states | Ratified Dec 6, 1865 | Safe. |
 | 17 | ch06: Mississippi code, Nov 1865: yearly written proof of work; vagrancy arrests; hired out if the fine is unpaid; no renting farmland outside towns | *Laws of Mississippi, 1865* (vagrancy and civil-rights acts) | Confirm the land clause wording against the statute. |
 | 18 | ch07: "thousands of schools" | Bureau-backed schools numbered in the thousands by 1870 | Safe as worded. |
-| 19 | ch07: the Hagar Outlaw ad, 1866 | *Christian Recorder*, April 7, 1866 (Last Seen project, Villanova) | **Confirm against the Last Seen scan** and decide what to read aloud. |
+| 19 | ch07: Hannah Barnett's ad for her daughter Martha, 1866 | *The Colored Tennessean* (Nashville), March 24, 1866, p.4 (Chronicling America): "was sold to Mr. John James, Nashville, Tenn., about nine years ago, since which time she has not been seen by me" | Safe. Replaced the Hagar Outlaw ad (no public-domain scan). |
 | 20 | ch07: "We know of very few that ended with a family together again" | Last Seen: of about 900 ads studied, only a handful of reunions have been identified | Safe. |
 | 21 | ch07: Civil Rights Act the first major law passed over a veto | Override April 9, 1866; usually described as the first major law passed over a veto | Safe as worded ("a major law"). The act excluded "Indians not taxed"; the script says "people born in the United States." |
 | 22 | ch08: 14th Amendment sent to states June 1866; all Southern states but Tennessee rejected it | Passed Congress June 13, 1866; Tennessee ratified July 1866; the other ten rejected it by early 1867 | Safe. |
