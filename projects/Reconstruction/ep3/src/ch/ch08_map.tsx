@@ -3,12 +3,12 @@
 // they're named (the last Republican governments, 1876). In the last shot the three sink and take the same ink.
 import React from 'react';
 import usData from '../../public/maps/us1861.json';
-import {type Cam3, Fill, Map3D, type MapData, PlaceTag, Slab, Stand} from '../kit/map3d';
+import {type Cam3, Map3D, type MapData, PlaceTag, Slab, Stand} from '../kit/map3d';
 import {CORAL} from '../kit/rc';
 
 const US = usData as unknown as MapData;
 export const MAP_TAG = 'Drawn map: Southern state governments, 1876 · state lines U.S. Census Bureau, coast Natural Earth';
-const INKC = '#4a443b';
+const INKC = '#5a5349';
 
 const S = (n: string) => US.states[`USA:${n}`];
 const REDEEMED = ['Virginia', 'North Carolina', 'Georgia', 'Alabama', 'Mississippi', 'Texas', 'Arkansas', 'Tennessee'];
@@ -31,11 +31,11 @@ export const SouthMap: React.FC<{keys: Cam3[]; ink: number; rise: [number, numbe
     <Map3D data={US} keys={keys} states={0.9} rivers={0.4}>
       {(api) => (
         <>
-          {REDEEMED.map((n) => <Fill key={n} api={api} d={S(n)} at={pre(ink)} color={INKC} opacity={0.62} />)}
+          {REDEEMED.map((n, i) => <Slab key={n} api={api} d={S(n)} at={pre(ink) + i} h={6} dur={8} color={INKC} layers={2} clipLand={false} />)}
           {LAST3.map((s, i) => (
             <React.Fragment key={s.name}>
               <Slab api={api} d={S(s.name)} at={pre(rise[i])} h={34} dur={12} color={CORAL} layers={6} clipLand={false} fall={fall + i * 4} />
-              <Fill api={api} d={S(s.name)} at={fall + i * 4 + 6} color={INKC} opacity={0.62} />
+              <Slab api={api} d={S(s.name)} at={fall + i * 4 + 10} h={6} dur={8} color={INKC} layers={2} clipLand={false} />
               <Stand api={api} at={s.at} z={50} show={pre(rise[i]) + 4} out={fall + i * 4}><PlaceTag text={s.name} size={28} /></Stand>
             </React.Fragment>
           ))}

@@ -393,11 +393,12 @@ const Roll: React.FC = () => {
 };
 
 // ------------------------------------------------------------------------------------------------------- the chapter
-/** On the board: close on the pieces as they land on "Charles Caldwell", settle, then (in the silence) up the
- *  PROTECTION column to its header, torn, and the cut string from Ames to the army. Neither framing slices a piece
- *  (tools/boardfit.mjs 7 2780 2100 1.58 / 2792 425 1.13). */
+/** On the board: close on the pieces as they land on "Charles Caldwell", drifting along them (no framing of just these
+ *  pieces slices nothing but a far one that leaves them in the top third, so the camera keeps moving), then up the
+ *  PROTECTION column to its header, torn, and the cut string from Ames to the army; held there through the silence.
+ *  The held framing slices nothing (tools/boardfit.mjs 7 2792 425 1.13). */
 const BOARD_CAM: [number, number, number, number][] = [
-  [S_BOARD, 2550, 1890, 1.5], [AT + 24, 2780, 2100, 1.58], [AT + 40, 2780, 2096, 1.57], [AT + 70, 2792, 425, 1.13], [AT + 260, 2792, 425, 1.12],
+  [S_BOARD, 2540, 1885, 1.5], [AT + 34, 2760, 1900, 1.36], [AT + 64, 2792, 425, 1.13], [AT + 260, 2792, 425, 1.12],
 ];
 
 const Body: React.FC = () => {

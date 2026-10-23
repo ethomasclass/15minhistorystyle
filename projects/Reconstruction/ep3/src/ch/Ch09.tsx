@@ -135,7 +135,7 @@ const Gaps: React.FC = () => {
   const g = useGFrame();
   const at = t.at('gaps');
   const items: [string, number, number, number][] = [['a tax to vote', 160, 420, -3], ['a reading test', 820, 420, 2], ['an exemption if your grandfather could vote', 220, 640, -1]];
-  const qx = [600, 1220, 1530];
+  const qx = [600, 1220, 1130];
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -255,7 +255,7 @@ const Page1896: React.FC = () => (
       <Slip text="Louisiana's own count, 1896" x={140} y={860} rot={-1.5} size={58} at={t.at('1896')} />
       <Slip text="colored voters, parish by parish" x={1100} y={860} rot={1.5} size={52} at={t.at('Louisiana') + 6} />
     </>}>
-    <Spot size={LA_S} boxes={COLORED_COL} at={t.at('Louisiana') + 6} id="col" dark={0.5} />
+    <Spot size={LA_S} boxes={COLORED_COL} at={t.at('Louisiana') + 6} id="col" dark={0.38} />
   </DocShot>
 );
 

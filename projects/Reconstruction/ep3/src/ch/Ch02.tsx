@@ -234,6 +234,11 @@ const Terror: React.FC = () => (
     </>} />
 );
 
+// The board: the default end shot slices Episode 1–2 pieces on the left, so frame the night piece (and Ep 2's "part 3 →"
+// string ending on it) with nothing cut (tools/boardfit.mjs 2 2600 1240 1.5).
+const AT = t.at('at first');
+const BOARD_CAM: [number, number, number, number][] = [[S_BOARD, 2560, 1220, 1.7], [AT + 40, 2600, 1240, 1.5], [AT + 300, 2600, 1240, 1.48]];
+
 const Body: React.FC = () => {
   const scene = useScene([
     [0, <Army key="ar" />],
@@ -250,7 +255,7 @@ const Body: React.FC = () => {
     [S_BACK, <Back key="bk" />],
     [S_GOAL, <Goal key="go" />],
     [S_TERR, <Terror key="te" />],
-    [S_BOARD, <SeriesBoard key="b" ch={2} from={S_BOARD} at={t.at('at first')} />],
+    [S_BOARD, <SeriesBoard key="b" ch={2} from={S_BOARD} at={AT} cam={BOARD_CAM} />],
   ]);
   return (
     <>

@@ -45,11 +45,11 @@ const SRC = {
   map: "Asher & Adams' North Carolina and South Carolina, 1874 · David Rumsey Map Collection via Wikimedia Commons",
   arr: `“Arrests of Citizens,” ${YE}`,
   trials: 'Proceedings in the Ku Klux Trials at Columbia, S.C., Nov. term 1871 (pub. 1872) · Internet Archive',
-  captured: 'Captured Klansmen, Mississippi (not South Carolina): “Mississippi Ku-Klux in the disguises in which they were captured,” Harper\'s Weekly, Jan. 27, 1872 · Library of Congress',
+  captured: 'Captured Klansmen, Mississippi (not South Carolina), Harper\'s Weekly, Jan. 27, 1872 · Library of Congress',
 };
 
 // line boxes (source px), each drawn on its page and checked
-const EA_RACE: Box[] = [[108, 450, 506, 30], [24, 481, 470, 30]];          // "without distinction of race, col- / or, or previous condition of servitude"
+const EA_RACE: Box[] = [[212, 450, 402, 30], [24, 481, 470, 30]];          // "without distinction of race, col- / or, or previous condition of servitude"
 const KKA_TITLE: Box[] = [[256, 466, 1015, 32], [444, 496, 668, 28]];      // "CHAP. XXII.—An Act to enforce the Provisions of the Fourteenth Amendment …"
 const KKA_FORCE: Box[] = [[764, 1284, 336, 30], [800, 1394, 300, 30]];     // §2 "by force, intimidation, or threat" (twice)
 const PRO_SUSPEND: Box[] = [[25, 374, 594, 30], [28, 410, 80, 28]];        // "suspend the privileges of the writ of habeas / corpus"
@@ -109,7 +109,7 @@ const KlanAct: React.FC = () => {
   const made = t.at('They made');
   return (
     <DocShot src={KKA} size={KKA_S} tag={SRC.kka} filter={DOC_F} focusAt={S_KKA}
-      keys={[[S_KKA, {x: 860, y: 560, z: 0.88}], [t.end('Ku Klux Klan Act'), {x: 820, y: 520, z: 0.95}], [made + 8, {...L, x: 900, y: 1300, dofY: 1290}],
+      keys={[[S_KKA, {x: 880, y: 660, z: 1.08}], [t.end('Ku Klux Klan Act'), {x: 860, y: 640, z: 1.12}], [made + 8, {...L, x: 900, y: 1300, dofY: 1290}],
         [t.end('voting'), {...L, x: 980, y: 1360, dofY: 1350}], [S_SIGN, {...L, x: 960, y: 1370, z: 0.99, dofY: 1360}]]}
       over={<>
         <Slip text="the Ku Klux Klan Act, 1871" x={1180} y={140} rot={2} size={54} at={t.at('Ku Klux Klan Act')} out={made} />
@@ -153,12 +153,16 @@ const Counties: React.FC = () => {
 
 /** He suspended habeas corpus there: the proclamation's own words, swiped as they're said. */
 const Habeas: React.FC = () => {
-  const L: SheetCam = {x: 330, y: 0, z: 1.5, tilt: 26, dof: 2, band: 60};
+  // the page sits right of the title (cam x left of the page's centre)
+  const L: SheetCam = {x: 110, y: 0, z: 1.5, tilt: 26, dof: 2, band: 60};
   return (
     <DocShot src={PRO} size={PRO_S} tag={SRC.pro} filter={NEWS_F} focusAt={S_HC}
       keys={[[S_HC, {...L, y: 385, dofY: 385}], [t.end('corpus') + 6, {...L, y: 410, dofY: 400, z: 1.55}], [t.at('Suspending'), {...L, y: 430, dofY: 420, z: 1.3, tilt: 18}],
         [S_ARR, {...L, y: 440, dofY: 430, z: 1.34, tilt: 18}]]}
-      over={<Slip text="suspended: the army can arrest and hold" x={880} y={660} rot={-1.5} size={54} at={t.at('Suspending')} dur={16} coral />}>
+      over={<>
+        <Slip text="suspended:" x={200} y={470} rot={-2} size={58} at={t.at('Suspending')} />
+        <Slip text="the army can arrest and hold" x={130} y={600} rot={1.5} size={54} at={t.at('meant')} dur={16} coral />
+      </>}>
       <Swipe lines={PRO_SUSPEND} from={t.at('suspended')} to={t.end('habeas corpus')} seed="ps" />
       <Spot size={PRO_S} boxes={PRO_SUSPEND} at={t.at("That's the right")} id="hc" dark={0.5} />
     </DocShot>
@@ -210,7 +214,7 @@ const Hold: React.FC = () => (
   <AbsoluteFill>
     <DarkPaper />
     <FocusIn at={S_HOLD}>
-      <PageWin src={PRO} cx={320} cy={405} s={1.45} w={940} h={140} x={490} y={250} r={-1} filter={NEWS_F}>
+      <PageWin src={PRO} cx={320} cy={404} s={1.45} w={940} h={104} x={490} y={262} r={-1} filter={NEWS_F}>
         <Ink lines={PRO_SUSPEND} seed="hd" />
       </PageWin>
     </FocusIn>
@@ -242,7 +246,7 @@ const Titles: React.FC = () => (
 // The board: open on the ✔ by PROTECTION (the header and the check; framed so nothing is sliced: tools/boardfit.mjs), then
 // down to the proclamation and "Klan broken".
 const BOARD_CAM: [number, number, number, number][] = [
-  [S_BOARD, 2790, 70, 1.15], [CHECK + 10, 2780, 60, 1.15], [CHECK + 44, 2990, 1340, 1.2], [CHECK + 300, 2990, 1340, 1.185],
+  [S_BOARD, 2430, 210, 2.0], [CHECK + 12, 2420, 200, 2.0], [CHECK + 46, 2840, 1240, 1.55], [CHECK + 300, 2840, 1240, 1.53],
 ];
 
 const Body: React.FC = () => {
