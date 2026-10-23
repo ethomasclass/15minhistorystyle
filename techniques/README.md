@@ -22,6 +22,10 @@ to see how the style has developed:
 [The Exact Spot (Mexican-American War)](lookbook/08_Exact_Spot.jpg) ·
 [Dressed to Kill](lookbook/09_Dressed_To_Kill.jpg)
 
+**Studies.** [`vox_study.md`](vox_study.md) (Vox's writing and a first pass at visuals) and
+[`vox_motion_study.md`](vox_motion_study.md) (Vox-style motion graphics from 18 tutorials and staff talks: what we
+have, eleven techniques we don't, and where each would land in *Reconstruction*).
+
 ---
 
 ## The five rules every scene follows
