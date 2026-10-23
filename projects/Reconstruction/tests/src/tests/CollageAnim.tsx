@@ -22,7 +22,7 @@ const p = BRAND;
 type Kind = 'drop' | 'slap' | 'stamp' | 'tape' | 'slide' | 'fade';
 
 /** One piece arriving at frame `at`. */
-const Land: React.FC<{at: number; kind: Kind; x: number; y: number; r?: number; z?: number; children: React.ReactNode}> = ({at, kind, x, y, r = 0, z, children}) => {
+export const Land: React.FC<{at: number; kind: Kind; x: number; y: number; r?: number; z?: number; children: React.ReactNode}> = ({at, kind, x, y, r = 0, z, children}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const {fps} = useVideoConfig();
@@ -68,7 +68,7 @@ const Land: React.FC<{at: number; kind: Kind; x: number; y: number; r?: number; 
 };
 
 /** A pushpin that pops in. */
-const APin: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
+export const APin: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   if (f < at) return null;

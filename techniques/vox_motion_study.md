@@ -4,6 +4,10 @@ October 2026. A follow-up to [`vox_study.md`](vox_study.md), which covered Vox's
 (the highlighter swipe that came out of it is now in the kit). This one is only about **motion graphics**: how the
 look is built, frame by frame, according to Vox's own people and the most-watched tutorials that reverse-engineer it.
 
+**Built and tested** (Oct 2026): §3.1–3.6 and §3.9 on Episode 1, chapter 6 of *Reconstruction*, from primary sources —
+`projects/Reconstruction/tests/src/tests/voxkit.tsx` (the components) and `Ch06Test.tsx` (the chapter); see that
+project's tests README.
+
 **How it was researched.** Captions of 18 YouTube videos were downloaded and read in full (list in §6), plus Vox
 staff interviews already cited in the first study. Where a claim comes only from a tutorial maker, it says so: those
 are observed recipes, not Vox's documented method.
