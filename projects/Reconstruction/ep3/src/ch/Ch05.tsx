@@ -202,7 +202,7 @@ const Body: React.FC = () => {
     [S_LAW, <Shackle key="sh" />],
     [S_ACT, <Act key="act" />],
     [S_CASES, <Cases key="cs" />],
-    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} cam={[[B, 3060, 290, 1.75], [TIRED + 50, 2982, 300, 1.7], [TIRED + 420, 2982, 300, 1.7]]} overlay={
+    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} cam={[[B, 3060, 290, 1.75], [TIRED + 50, 2963, 300, 1.7], [TIRED + 420, 2963, 300, 1.7]]} overlay={
       <Slip text="subscribe ↓" x={1300} y={880} rot={3} size={60} at={t.at('hit subscribe')} />
     } />],
   ]);

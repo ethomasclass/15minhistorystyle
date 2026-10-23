@@ -38,7 +38,7 @@ const P3: Piece[] = [
   {id: 'nightStrip', wh: [300, 38], ch: 2, dt: 12, kind: 'slide', x: 2340, y: 1296, r: -2, el: () => <Strip text="THE NIGHT · 1866–71" seed="nt" size={22} />},
   // ch03 protection works: the check mark by PROTECTION ("On the card, protection gets its check mark"; land `at` on
   // "check"), then Grant's proclamation and the Klan broken. The check falls off when the header tears (ch07).
-  {id: 'check', wh: [90, 90], ch: 3, dt: 0, kind: 'fade', x: 2450, y: 4, z: 9, el: (c) => (
+  {id: 'tick', wh: [90, 90], ch: 3, dt: 0, kind: 'fade', x: 2450, y: 4, z: 9, el: (c) => (
     <div style={{fontFamily: HAND, fontSize: 96, color: BRAND.thread, lineHeight: 1, opacity: 1 - 0.75 * c.tear, transform: `rotate(${18 * c.tear}deg) translateY(${40 * c.tear}px)`}}>✔</div>
   )},
   {id: 'proclamation', wh: [300, 250], ch: 3, dt: 30, kind: 'drop', x: 2800, y: 990, r: -2, el: () => <Photo src={W + 'cr_proclamation.png'} w={300} />},
@@ -158,12 +158,15 @@ const tearPath = (left: boolean) => {
 /** PROTECTION, torn in two (`tear` 0..1) and then hanging down (`down` 0..1). */
 const TornHeader: React.FC<{text: string; x: number; y: number; tear: number; down: number}> = ({text, x, y, tear, down}) => {
   if (tear <= 0) return <div style={{...COL_STYLE, left: x, top: y, transform: 'rotate(-2deg)'}}>{text}</div>;
-  const gap = 10 * tear;
+  const gap = 26 * tear;
   return (
-    <div style={{position: 'absolute', left: x, top: y}}>
+    // above the pieces once it starts to fall, so the torn half hangs over the prints instead of slipping behind them
+    <div style={{position: 'absolute', left: x, top: y, zIndex: down > 0 ? 30 : undefined}}>
       <div style={{...COL_STYLE, position: 'relative', clipPath: tearPath(true), transformOrigin: '0% 50%', transform: `rotate(${-2 - 4 * down}deg) translateY(${30 * down}px)`}}>{text}</div>
       <div style={{...COL_STYLE, left: 0, top: 0, clipPath: tearPath(false), transformOrigin: '100% 0%',
-        transform: `translateX(${gap}px) rotate(${-2 + 7 * tear + 28 * down}deg) translateY(${8 * tear + 140 * down}px)`, opacity: 1 - 0.35 * down}}>{text}</div>
+        transform: `translateX(${gap}px) rotate(${-2 + 10 * tear + 16 * down}deg) translateY(${16 * tear + 60 * down}px)`,
+        // once it falls it hangs over the prints: opaque, with a shadow, so it still reads on a light page
+        ...(down > 0 ? {color: 'rgba(244,239,230,0.92)', textShadow: '0 3px 10px rgba(0,0,0,0.95)'} : {})}}>{text}</div>
     </div>
   );
 };

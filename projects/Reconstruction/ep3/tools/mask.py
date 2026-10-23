@@ -31,7 +31,7 @@ JOBS = {
     "ames_miss": ("img/ch07/ames_hon_adelbert_ames_of_miss_brady_handy.jpg", None, "isnet-general-use", [(1600, 900, 2343, 2050)]),
     "ames_gen": ("img/ch07/ames_maj_gen_brady_1860s.jpg", None, "isnet-general-use"),
     "pierrepont": ("img/ch07/pierrepont_attorney_general_brady_handy.jpg", None, "isnet-general-use"),
-    "douglass": ("img/ch06/douglass_brady_1877.jpg", None, "isnet-general-use"),
+    "douglass": ("img/ch06/douglass_brady_1877.jpg", None, "u2net_human_seg"),
     "babcock": ("img/ch05/babcock_orville_portrait.jpg", None, "isnet-general-use"),
     "hayes": ("img/ch08/hayes_president_brady.jpg", None, "isnet-general-use"),
     # Episode 2 portraits
