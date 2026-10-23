@@ -50,15 +50,41 @@ and its date ("Field Order 15 · Jan 1865", "APRIL 14, 1865"), never "case", "ca
 | Struck | a teal (or orange, for a disputed claim) line through the label | it failed or was undone |
 | Torn down | the card hangs from one pin, or lies on the desk under the board | it was taken away |
 
+## How often it's on screen
+
+The board is a punctuation mark, not the video. Most of every chapter is the normal full-frame shots (photos,
+documents, maps, 3D, transcripts). The board shows up only for:
+
+| Moment | Length | What happens |
+|---|---|---|
+| Each chapter's last line | 4–6 s | out to the board, the chapter's piece lands, back into the next chapter |
+| The recap (Part 2 and 3 openings) | ~20 s | the earlier parts' board, a quick pass over it |
+| Close-ups (two or three a series) | 10–15 s | push in on a few pieces, thread drawn between them |
+| The ending | ~30 s | the last pieces land, then the pull back to the whole board |
+
+About 2 minutes of a 13–14 minute video. The way in: the chapter's last full-frame image shrinks into its creased
+print and drops onto the board, so the cut never feels like a change of set.
+
 ## Motion
 
-- **A piece lands** on its chapter's last line: it drops onto the board (the `DropCard` spring) and the pin goes in
-  with a soft knock.
-- **Yarn draws** pin to pin as the narration says the link, stepped at 12 fps like every other mark; its tag pops on
-  at the end.
-- **Close-ups**: the camera pushes in on two or three pieces and draws yarn between them while the rest of the board
-  goes dark (one night, three men: Lincoln, Seward, Johnson; the 1877 deal).
-- **The ending** pulls back to the whole board over the closing lines.
+Prototype: `Collage-Anim` (Episode 1's board built from nothing) and `Collage-Night` (the close-up) in
+`projects/Reconstruction/tests/src/tests/CollageAnim.tsx`. Every piece has one way of arriving:
+
+| Piece | Arrives by | Sound |
+|---|---|---|
+| Photo, document scrap, silhouette card | **drop**: falls flat from slightly above, the hard shadow shrinking to the flat 5 px one | paper |
+| Sticky note | **slap**: smacks down with a small overshoot and twist | paper, louder |
+| Rubber stamp | **stamp**: thunks in from 1.8x, the camera jolts | stamp |
+| Tape | **wipe** on, left to right | paper |
+| Label strip | **reveal** left to right, stepped at 12 fps | soft tick |
+| The question mark | stamps onto the silhouette, then the label writes on | stamp |
+| Logo sticker | **settles** in last, faded | none |
+| Pin | pops in once its piece has landed | knock |
+| Thread | draws pin to pin, stepped at 12 fps, as the narration says the link | marker tick |
+| Highlighter | runs along the key words of a document (the 13th Amendment's loophole) | soft tick |
+
+The camera moves piece to piece (ease in-out, ~0.6 s) and pulls back to the whole board at the end. In an episode each
+arrival lands on its chapter's last line; the prototypes run them back to back so the motion can be judged.
 
 ## Writing for the board
 

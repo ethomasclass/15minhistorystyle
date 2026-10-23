@@ -9,20 +9,20 @@ import {AbsoluteFill, Img, random, staticFile} from 'remotion';
 import {Tag} from '../kit/Kit';
 import {TestFrame} from './common';
 
-const HAND = '"Nanum Pen Script", cursive';
-const DISPLAY = '"Abril Fatface", serif';
-const MONO = '"IBM Plex Mono", monospace';
-const SERIF = '"Playfair Display", serif';
-const SANS = '"Inter", sans-serif';
+export const HAND = '"Nanum Pen Script", cursive';
+export const DISPLAY = '"Abril Fatface", serif';
+export const MONO = '"IBM Plex Mono", monospace';
+export const SERIF = '"Playfair Display", serif';
+export const SANS = '"Inter", sans-serif';
 
 type Pal = {bg: string; paper: string; accent: string; thread: string; note: string; noteInk: string; hand: string; stamp: string; tape: string; label: string};
 const HOT: Pal = {bg: '#0f0f0f', paper: '#ece6d8', accent: '#FF6A2B', thread: '#FF6A2B', note: '#FF6A2B', noteInk: '#1a1a1a', hand: '#1a1a1a', stamp: '#FF6A2B', tape: '#8b97a3', label: '#c9d3dc'};
-const BRAND: Pal = {bg: '#0f0f0f', paper: '#ece6d8', accent: '#FF6F61', thread: '#2FE0C4', note: '#FF6F61', noteInk: '#1a1a1a', hand: '#2FE0C4', stamp: '#FF6F61', tape: '#8b97a3', label: '#c9d3dc'};
-const Ctx = React.createContext<Pal>(HOT);
-const usePal = () => React.useContext(Ctx);
+export const BRAND: Pal = {bg: '#0f0f0f', paper: '#ece6d8', accent: '#FF6F61', thread: '#2FE0C4', note: '#FF6F61', noteInk: '#1a1a1a', hand: '#2FE0C4', stamp: '#FF6F61', tape: '#8b97a3', label: '#c9d3dc'};
+export const Ctx = React.createContext<Pal>(HOT);
+export const usePal = () => React.useContext(Ctx);
 
 /** A ragged-edged polygon (torn paper), as a CSS clip-path. `edges` picks which sides are torn: t r b l. */
-const torn = (seed: string, edges = 'lr', amp = 6) => {
+export const torn = (seed: string, edges = 'lr', amp = 6) => {
   const pts: string[] = [];
   const n = 18;
   const j = (k: string) => (random(`${seed}${k}`) * amp).toFixed(1);
@@ -33,23 +33,23 @@ const torn = (seed: string, edges = 'lr', amp = 6) => {
   return `polygon(${pts.join(',')})`;
 };
 
-const Flat: React.FC<{x: number; y: number; r?: number; children: React.ReactNode; z?: number}> = ({x, y, r = 0, children, z}) => (
+export const Flat: React.FC<{x: number; y: number; r?: number; children: React.ReactNode; z?: number}> = ({x, y, r = 0, children, z}) => (
   <div style={{position: 'absolute', left: x, top: y, transform: `rotate(${r}deg)`, zIndex: z, filter: 'drop-shadow(5px 6px 0 rgba(0,0,0,0.55))'}}>{children}</div>
 );
 
 /** A photo: a worn, creased print with no border (tools/crease.py), straight on the board. */
-const Photo: React.FC<{src: string; w: number; h?: number}> = ({src, w, h}) => (
+export const Photo: React.FC<{src: string; w: number; h?: number}> = ({src, w, h}) => (
   <Img src={staticFile(`img/wall/${src}`)} style={{width: w, height: h, display: 'block', objectFit: 'contain'}} />
 );
 
 /** A torn label strip, typewritten. */
-const Strip: React.FC<{text: string; size?: number; bg?: string; color?: string; seed?: string; font?: string}> = ({text, size = 26, bg, color = '#1a1a1a', seed = 's', font = MONO}) => {
+export const Strip: React.FC<{text: string; size?: number; bg?: string; color?: string; seed?: string; font?: string}> = ({text, size = 26, bg, color = '#1a1a1a', seed = 's', font = MONO}) => {
   const p = usePal();
   return <div style={{background: bg ?? p.label, clipPath: torn(seed), padding: `${size * 0.25}px ${size * 0.7}px`, fontFamily: font, fontSize: size, color, whiteSpace: 'nowrap', letterSpacing: 1}}>{text}</div>;
 };
 
 /** A sticky note with a handwritten question. */
-const Sticky: React.FC<{text: string; w?: number; size?: number}> = ({text, w = 190, size = 54}) => {
+export const Sticky: React.FC<{text: string; w?: number; size?: number}> = ({text, w = 190, size = 54}) => {
   const p = usePal();
   return (
     <div style={{width: w, height: w * 0.92, background: p.note, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 14, boxSizing: 'border-box'}}>
@@ -59,7 +59,7 @@ const Sticky: React.FC<{text: string; w?: number; size?: number}> = ({text, w = 
 };
 
 /** A rubber stamp: an outlined box, slightly rough. */
-const Stamp: React.FC<{text: string; size?: number; color?: string}> = ({text, size = 44, color}) => {
+export const Stamp: React.FC<{text: string; size?: number; color?: string}> = ({text, size = 44, color}) => {
   const p = usePal();
   const c = color ?? p.stamp;
   return (
@@ -69,12 +69,12 @@ const Stamp: React.FC<{text: string; size?: number; color?: string}> = ({text, s
 };
 
 /** A strip of tape across something. */
-const TapeBit: React.FC<{w?: number; seed?: string}> = ({w = 150, seed = 't'}) => {
+export const TapeBit: React.FC<{w?: number; seed?: string}> = ({w = 150, seed = 't'}) => {
   const p = usePal();
   return <div style={{width: w, height: 38, background: p.tape, opacity: 0.88, clipPath: torn(seed, 'lr', 7)}} />;
 };
 
-const Pin: React.FC<{x: number; y: number}> = ({x, y}) => {
+export const Pin: React.FC<{x: number; y: number}> = ({x, y}) => {
   const p = usePal();
   return (
     <div style={{position: 'absolute', left: x - 10, top: y - 10, width: 20, height: 20, borderRadius: 10, background: p.accent, zIndex: 50, boxShadow: '2px 3px 0 rgba(0,0,0,0.5)'}}>
@@ -97,7 +97,8 @@ const Threads: React.FC<{lines: [number, number, number, number][]}> = ({lines})
  *  torn cream card like a parlour silhouette, with a coral question mark. profile = Saint-Mémin engraving (LOC pga 13330),
  *  front = an unidentified man, 1860 (LOC ppmsca 32242). */
 const SIL = {profile: {w: 509, h: 728}, front: {w: 361, h: 415}} as const;
-const Silhouette: React.FC<{label: string; size?: number; kind?: keyof typeof SIL; seed?: string}> = ({label, size = 260, kind = 'profile', seed = 'sl'}) => {
+/** q = the question mark's stamp-in (0..1, it lands from 1.8x), labelP = how much of the label is written (0..1). */
+export const Silhouette: React.FC<{label: string; size?: number; kind?: keyof typeof SIL; seed?: string; q?: number; labelP?: number}> = ({label, size = 260, kind = 'profile', seed = 'sl', q = 1, labelP = 1}) => {
   const p = usePal();
   const {w, h} = SIL[kind];
   const sw = size * 0.78, sh = (sw * h) / w;
@@ -107,26 +108,38 @@ const Silhouette: React.FC<{label: string; size?: number; kind?: keyof typeof SI
       <div style={{position: 'relative', width: size, padding: `${size * 0.09}px 0 0`, background: p.paper, clipPath: torn(seed, 'lrtb', 7), boxSizing: 'border-box'}}>
         <div style={{width: sw, height: sh, margin: '0 auto', background: '#161514',
           WebkitMaskImage: `url(${src})`, maskImage: `url(${src})`, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}} />
-        <div style={{position: 'absolute', left: 0, right: 0, top: size * (kind === 'profile' ? 0.13 : 0.1), fontFamily: DISPLAY, fontSize: size * 0.42, color: p.accent, lineHeight: 1}}>?</div>
+        <div style={{position: 'absolute', left: 0, right: 0, top: size * (kind === 'profile' ? 0.13 : 0.1), fontFamily: DISPLAY, fontSize: size * 0.42, color: p.accent, lineHeight: 1, opacity: Math.min(1, q * 3), transform: `scale(${q >= 1 ? 1 : 1.8 - 0.8 * q})`}}>?</div>
       </div>
-      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: size * 0.13, letterSpacing: 2, color: p.accent, marginTop: 10, whiteSpace: 'nowrap', marginLeft: -100, marginRight: -100}}>{label}</div>
+      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: size * 0.13, letterSpacing: 2, color: p.accent, marginTop: 10, whiteSpace: 'nowrap', marginLeft: -100, marginRight: -100, clipPath: `inset(-20% ${(1 - labelP) * 100}% -20% 0)`}}>{label}</div>
     </div>
   );
 };
 
-/** A torn scrap of document text. */
-const Scrap: React.FC<{text: string; w: number; size?: number; seed?: string; mark?: string; italic?: boolean}> = ({text, w, size = 24, seed = 'd', mark, italic}) => {
+/** A torn scrap of document text. hl = how far the coral highlighter has run along `mark` (0..1). */
+export const Scrap: React.FC<{text: string; w: number; size?: number; seed?: string; mark?: string; italic?: boolean; hl?: number}> = ({text, w, size = 24, seed = 'd', mark, italic, hl = 1}) => {
   const p = usePal();
   const parts = mark ? text.split(mark) : [text];
   return (
     <div style={{width: w, background: p.paper, clipPath: torn(seed, 'tb', 7), padding: '22px 22px', boxSizing: 'border-box', fontFamily: SERIF, fontWeight: 900, fontSize: size, lineHeight: 1.3, color: '#262320', fontStyle: italic ? 'italic' : 'normal'}}>
-      {parts.length > 1 ? <>{parts[0]}<span style={{background: p.accent, color: '#111', padding: '0 4px'}}>{mark}</span>{parts[1]}</> : text}
+      {parts.length > 1 ? <>{parts[0]}<span style={{backgroundImage: `linear-gradient(${p.accent}, ${p.accent})`, backgroundRepeat: 'no-repeat', backgroundSize: `${hl * 100}% 100%`, color: '#111', padding: '0 4px'}}>{mark}</span>{parts[1]}</> : text}
+    </div>
+  );
+};
+
+/** A torn newspaper masthead and headline. */
+export const Herald: React.FC = () => {
+  const p = usePal();
+  return (
+    <div style={{width: 380, background: p.paper, clipPath: torn('hd', 'br', 8), padding: '14px 18px 22px', boxSizing: 'border-box'}}>
+      <div style={{fontFamily: SERIF, fontWeight: 900, fontSize: 34, color: '#1a1a1a', borderBottom: '3px double #1a1a1a', paddingBottom: 4}}>NEW YORK HERALD</div>
+      <div style={{fontFamily: SERIF, fontWeight: 900, fontSize: 30, color: '#1a1a1a', lineHeight: 1.05, marginTop: 8}}>ASSASSINATION OF PRESIDENT LINCOLN.</div>
+      <div style={{fontFamily: MONO, fontSize: 13, color: '#444', marginTop: 8}}>April 15, 1865</div>
     </div>
   );
 };
 
 /** The channel logo as a worn, faded sticker: the brand's horizontal lockup under a wear mask (tools/distress.py). */
-const WornLogo: React.FC<{w: number; mark?: boolean; fade?: number}> = ({w, mark, fade = 0.78}) => {
+export const WornLogo: React.FC<{w: number; mark?: boolean; fade?: number}> = ({w, mark, fade = 0.78}) => {
   const src = mark ? 'img/brand/chunk-history-mark.svg' : 'img/brand/chunk-history-horizontal.svg';
   const wear = mark ? 'img/brand/wear_square.png' : 'img/brand/wear_wide.png';
   const h = mark ? w : (w * 210) / 1404;
@@ -138,14 +151,14 @@ const WornLogo: React.FC<{w: number; mark?: boolean; fade?: number}> = ({w, mark
   );
 };
 
-const Defs: React.FC = () => (
+export const Defs: React.FC = () => (
   <svg width={0} height={0} style={{position: 'absolute'}}>
     <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" /><feDisplacementMap in="SourceGraphic" scale="3" />
       <feComponentTransfer><feFuncA type="discrete" tableValues="0 1 1 1 0.85 1" /></feComponentTransfer></filter>
   </svg>
 );
 
-const Splats: React.FC<{seed: string}> = ({seed}) => {
+export const Splats: React.FC<{seed: string}> = ({seed}) => {
   const p = usePal();
   return (
     <>
@@ -194,11 +207,7 @@ const Board1: React.FC<{caption: string}> = ({caption}) => {
       <Flat x={330} y={555} r={3}><Strip text="Edisto Island · Oct 1865" seed="ed" size={20} /></Flat>
       {/* the Herald */}
       <Flat x={640} y={730} r={1.5}>
-        <div style={{width: 380, background: p.paper, clipPath: torn('hd', 'br', 8), padding: '14px 18px 22px', boxSizing: 'border-box'}}>
-          <div style={{fontFamily: SERIF, fontWeight: 900, fontSize: 34, color: '#1a1a1a', borderBottom: '3px double #1a1a1a', paddingBottom: 4}}>NEW YORK HERALD</div>
-          <div style={{fontFamily: SERIF, fontWeight: 900, fontSize: 30, color: '#1a1a1a', lineHeight: 1.05, marginTop: 8}}>ASSASSINATION OF PRESIDENT LINCOLN.</div>
-          <div style={{fontFamily: MONO, fontSize: 13, color: '#444', marginTop: 8}}>April 15, 1865</div>
-        </div>
+        <Herald />
       </Flat>
       <Flat x={600} y={700} r={-20} z={5}><TapeBit w={110} seed="h" /></Flat>
       <Flat x={1000} y={980} r={0}><Strip text="RECONSTRUCTION · PART 1" seed="cs" size={22} bg={p.paper} /></Flat>
