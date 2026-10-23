@@ -1,6 +1,6 @@
 [
  {
-  "src": "img/ch06/run/virginia_0.jpg",
+  "src": "img/ch06/vox/run/virginia_0.jpg",
   "box": [
    853.3,
    521.4,
@@ -13,7 +13,7 @@
   "sp": "1"
  },
  {
-  "src": "img/ch06/run/south_carolina_2.jpg",
+  "src": "img/ch06/vox/run/south_carolina_2.jpg",
   "box": [
    853.3,
    502.7,
@@ -26,7 +26,7 @@
   "sp": "1"
  },
  {
-  "src": "img/ch06/run/louisiana_1.jpg",
+  "src": "img/ch06/vox/run/louisiana_1.jpg",
   "box": [
    853.3,
    506.0,
@@ -39,7 +39,7 @@
   "sp": "4"
  },
  {
-  "src": "img/ch06/run/north_carolina_0.jpg",
+  "src": "img/ch06/vox/run/north_carolina_0.jpg",
   "box": [
    853.3,
    509.3,
@@ -52,7 +52,7 @@
   "sp": "4"
  },
  {
-  "src": "img/ch06/run/tennessee_2.jpg",
+  "src": "img/ch06/vox/run/tennessee_2.jpg",
   "box": [
    853.3,
    512.9,
@@ -65,7 +65,7 @@
   "sp": "1"
  },
  {
-  "src": "img/ch06/run/louisiana_0.jpg",
+  "src": "img/ch06/vox/run/louisiana_0.jpg",
   "box": [
    853.3,
    514.2,
@@ -78,7 +78,7 @@
   "sp": "3"
  },
  {
-  "src": "img/ch06/run/south_carolina_1.jpg",
+  "src": "img/ch06/vox/run/south_carolina_1.jpg",
   "box": [
    853.3,
    506.9,
@@ -91,7 +91,7 @@
   "sp": "2"
  },
  {
-  "src": "img/ch06/run/tennessee_0.jpg",
+  "src": "img/ch06/vox/run/tennessee_0.jpg",
   "box": [
    853.3,
    510.5,
@@ -104,7 +104,7 @@
   "sp": "4"
  },
  {
-  "src": "img/ch06/run/mississippi_1.jpg",
+  "src": "img/ch06/vox/run/mississippi_1.jpg",
   "box": [
    853.3,
    513.8,
@@ -117,7 +117,7 @@
   "sp": "1"
  },
  {
-  "src": "img/ch06/run/mississippi_2.jpg",
+  "src": "img/ch06/vox/run/mississippi_2.jpg",
   "box": [
    853.3,
    517.4,
@@ -130,7 +130,7 @@
   "sp": "1"
  },
  {
-  "src": "img/ch06/run/mississippi_0.jpg",
+  "src": "img/ch06/vox/run/mississippi_0.jpg",
   "box": [
    853.3,
    511.3,
