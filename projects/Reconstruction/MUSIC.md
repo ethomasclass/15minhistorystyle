@@ -60,6 +60,24 @@ the narrator.
 | `rc_night_riders` | Low fiddle drone, a hoofbeat rhythm that comes close and passes, distant brass; cold rather than loud | Ep 3 ch01, ch02 (the Klan), ch07 (Mississippi 1875) |
 | `rc_parlor` | A polite, slightly out-of-tune parlor waltz on piano and harmonium that sours while it carries on | Ep 3 ch05 (the North gets tired), ch06 (the bank) |
 
+## More beds, made locally (ACE-Step 1.5)
+
+Free text-to-music, run in this session on CPU (`tests/tools/music_acestep.py --all`, captions in that file); about
+3 minutes per 60 s cue. They're quieter than the ElevenLabs beds (−16 to −22 LUFS), so they sit about twice as high
+in the mix. All are in the channel library (`music/cues/`) and on one sampler, `music/Reconstruction_acestep_cues_sampler.mp3`
+(20 s of each, levelled, in this order). Nothing in the chapter plan below uses them yet: swap one in where it fits better.
+
+| Cue | What it is | Could go |
+|---|---|---|
+| `cw_fife_dread` | Distant fife and muffled snare over a low drone, a slow march that builds in waves (music from ~0:15) | Any Civil War opening; Ep 1 ch01 if the cold open starts in the war |
+| `cw_camp_night` | A lonely fiddle playing a homesick waltz over guitar and harmonica | Soldiers coming home, Ep 1 ch02 before Sherman |
+| `cw_aftermath` | Low cello and a muted brass chorale over a heartbeat drum (music from ~0:08) | Memphis and New Orleans in Ep 1 ch09 (instead of `w_aftermath`), Colfax in Ep 3 ch04 |
+| `cw_telegraph` | Urgent telegraph-like tick, tense strings, then a hush (tick from ~0:10) | News arriving: Ep 1 ch04 after the shot, Ep 3 ch07 (Ames's telegram), Ep 3 ch08 (the 1876 count) |
+| `rc_jubilee` | Banjo, fiddle, claps and stomps: open joy (no doubt in it, unlike `rc_jubilo`) | Ep 2 ch05 (the 15th), Ep 2 ch06 (Revels) |
+| `rc_resolve` | Harmonium hymn and cello, a restrained proud swell | Ep 1 ch08 (equal protection), Ep 2 ch03 (registering) |
+| `rc_backroom` | Pizzicato, fussy parlor piano, low clarinet: sly | Ep 2 ch04 (one vote short), Ep 3 ch08 (1876) instead of `j_intrigue` |
+| `rc_reckoning` | A distant brass band whose march falters; unresolved end | Ep 3 ch09 or ch10, before "Roll, Jordan, Roll" |
+
 ## Chapter by chapter
 
 Beds at 0.13–0.17 under narration (quiet ElevenLabs cues higher: check LUFS). "Open" = the first seconds before
