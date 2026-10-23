@@ -75,7 +75,7 @@ export const JFonts: React.FC<{children: React.ReactNode}> = ({children}) => {
   return <>{children}{getInputProps().probe ? <TextProbe /> : null}</>;
 };
 
-/** Render-time check (tools/probe_text.mjs): logs every piece of text whose box crosses the frame edge. */
+/** Render-time check (tools/probe_text.mjs): logs every piece of text whose box crosses the frame edge (or the safe margin). */
 const TextProbe: React.FC = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
@@ -90,7 +90,10 @@ const TextProbe: React.FC = () => {
         const r = el.getBoundingClientRect();
         if (!r.width || !r.height) return;
         n++;
-        const over = Math.max(-r.left, -r.top, r.right - width, r.bottom - height);
+        // with `safe` (px), big text (titles, notes: 24 px and up) must also stay out of the outer margin; small
+        // source tags and labels are allowed in it
+        const m = Number(getInputProps().safe || 0) && parseFloat(getComputedStyle(el).fontSize) >= 24 ? Number(getInputProps().safe) : 0;
+        const over = Math.max(m - r.left, m - r.top, r.right - (width - m), r.bottom - (height - m));
         if (over > 0) out.push(JSON.stringify({f: frame, over: Math.round(over), l: Math.round(r.left), t: Math.round(r.top), r: Math.round(r.right), b: Math.round(r.bottom), text: own.slice(0, 70)}));
       });
       out.forEach((o) => console.log('PROBE ' + o));

@@ -392,5 +392,22 @@
     "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n3",
     "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:3",
     "note": "engraving cropped from p.468"
+  },
+  "ch02/military_map_of_the_united_states_1869_districts_in_red.jpg": {
+    "title": "Military map of the United States (War Department, Office of the Chief of Engineers; compiled and drawn by E. Freyhold), 1869. Military districts outlined and labeled in red",
+    "artist": "Freyhold, Edward; United States. War Department. Office of the Chief of Engineers",
+    "date": "1869",
+    "licence": "Library of Congress Geography and Map Division: free to use and reuse (no rights advisory)",
+    "page": "https://www.loc.gov/item/98685167/",
+    "source": "loc:98685167"
+  },
+  "ch02/military_map_1869_south_detail.jpg": {
+    "title": "Military map of the United States (War Department, Office of the Chief of Engineers; compiled and drawn by E. Freyhold), 1869. Military districts outlined and labeled in red",
+    "artist": "Freyhold, Edward; United States. War Department. Office of the Chief of Engineers",
+    "date": "1869",
+    "licence": "Library of Congress Geography and Map Division: free to use and reuse (no rights advisory)",
+    "page": "https://www.loc.gov/item/98685167/",
+    "source": "loc:98685167",
+    "note": "IIIF region crop of the South (pct:30,40,62,34)"
   }
 }

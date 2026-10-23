@@ -49,6 +49,10 @@ tools/voice_all.sh 04 07               # only these chapters
 Each chapter becomes `public/audio/chNN_slug.wav` + `chNN_slug.words.json` (word-level timings from ElevenLabs
 forced alignment). Voice model: `eleven_v3` (the default in `tools/voice.py`).
 
+Before the real voice exists, `tools/scratch_voice.py script.txt NAME --model <piper .onnx>` makes a scratch narration
+with real word timings (a local Piper voice), so scenes can be built and timed; every anchor re-times itself when the
+ElevenLabs voice replaces it. Never ship it.
+
 After voicing:
 1. Make a narration preview the user can listen to straight through (join the WAVs with ffmpeg into one MP3,
    e.g. `script/<Slug>_narration_preview.mp3`) and send it.
