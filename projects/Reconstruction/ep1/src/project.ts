@@ -12,7 +12,7 @@ export const DATES = '1865 – 1866';
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg'];
+export const INTRO_CARDS = ['img/ch01/edisto_petition_to_president_28oct1865_p1.jpg', 'img/ch02/field_order_15_printed_jan1865_p1.jpg', 'img/ch04/lincoln_gardner_feb1865.jpg', 'img/ch07/freedmens_bureau_waud_harpers_1868.jpg', 'img/ch01/edisto_freedpeople_hopkinson_plantation_1862_moore.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {

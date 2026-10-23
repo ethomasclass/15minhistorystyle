@@ -82,22 +82,23 @@ export const DocShot: React.FC<{src: string; size: [number, number]; keys: [numb
 };
 
 // ------------------------------------------------------------------------------------------------ the Edisto documents
-export const PETITION_P1 = 'img/ch01/edisto_petition_to_president_28oct1865_p1.jpg';
-export const PETITION_P3 = 'img/ch01/edisto_petition_to_president_28oct1865_p3.jpg';
+/** The petition's pages, cropped out of the microfilm's black border (boxes below are in these crops' pixels). */
+export const PETITION_P1 = 'img/ch01/edisto_petition_to_president_28oct1865_p1_page.jpg';
+export const PETITION_P3 = 'img/ch01/edisto_petition_to_president_28oct1865_p3_page.jpg';
 export const LETTER_P1 = 'img/ch01/edisto_letter_to_howard_oct1865_p1.jpg';
 export const THREE_WORDS = 'img/ch01/edisto_letter_landless_homeless_voteless_detail.jpg';
 export const EDISTO = {
-  p1Size: [2027, 3000] as [number, number],
-  p3Size: [1992, 3000] as [number, number],
+  p1Size: [1775, 2640] as [number, number],
+  p3Size: [1780, 2635] as [number, number],
   letterSize: [1970, 2672] as [number, number],
   wordsSize: [1700, 961] as [number, number],
   /** p3: "We wish to have A home If / It be but A few acres." */
-  fewAcres: [[905, 425, 810, 80], [205, 505, 720, 80]] as Box[],
+  fewAcres: [[755, 245, 810, 80], [55, 325, 720, 80]] as Box[],
   /** p3: "In behalf of the Freedmen" and the committee's three names */
-  signatures: [700, 1720, 980, 370] as Box,
-  bram: [1120, 1830, 470, 70] as Box,
-  moultrie: [1120, 1900, 560, 80] as Box,
-  sampson: [1120, 1980, 540, 90] as Box,
+  signatures: [550, 1540, 980, 370] as Box,
+  bram: [970, 1650, 470, 70] as Box,
+  moultrie: [970, 1720, 560, 80] as Box,
+  sampson: [970, 1800, 540, 90] as Box,
   /** the three words on the letter's detail crop */
   landless: [176, 382, 250, 76] as Box,
   homeless: [432, 382, 262, 76] as Box,

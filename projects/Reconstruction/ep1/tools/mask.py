@@ -25,6 +25,17 @@ JOBS = {
     # A figure fused to a prop (hands on a table, a tray in front): add cut rects, and if it still separates badly,
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
+    # Episode 1 portraits (one subject each)
+    "sherman": ("img/ch02/sherman_brady_1865.jpg", None, "isnet-general-use"),
+    "stanton": ("img/ch02/stanton_brady_handy.jpg", (300, 600, 2248, 3000), "isnet-general-use", [(900, 600, 1000, 900), (1340, 600, 1440, 900)]),
+    "lincoln": ("img/ch04/lincoln_gardner_feb1865.jpg", None, "isnet-general-use"),
+    "booth": ("img/ch04/booth_carte_de_visite_1865.jpg", None, "isnet-general-use"),
+    "seward": ("img/ch04/seward_brady.jpg", None, "isnet-general-use"),
+    "johnson": ("img/ch05/andrew_johnson_portrait_1865.jpg", (40, 40, 900, 1322), "isnet-general-use"),
+    "howard": ("img/ch05/oliver_otis_howard_portrait.jpg", None, "isnet-general-use"),
+    "stevens": ("img/ch05/thaddeus_stevens_brady_handy.jpg", None, "isnet-general-use"),
+    "dred_scott": ("img/ch08/dred_scott_photograph_c1857.jpg", None, "isnet-general-use"),
+    "jdavis": ("img/ch09/jefferson_davis_brady_c1860.jpg", None, "isnet-general-use"),
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),

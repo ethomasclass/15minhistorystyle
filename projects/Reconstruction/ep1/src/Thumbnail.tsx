@@ -15,7 +15,7 @@ export const THUMB_FRAMES = 150;
 const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
 const GOLD = '#FF9F1C';
-const MASK = MASKS.sully; // the mask that matches THUMB_PORTRAIT.src
+const MASK = MASKS.johnson; // placeholder until the thumbnails are made // the mask that matches THUMB_PORTRAIT.src
 
 /** Channel logo, top-left (YouTube covers the bottom-right with the running time). */
 const Logo: React.FC = () => {
