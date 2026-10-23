@@ -269,7 +269,7 @@ const Body: React.FC = () => {
     [S_TWIST, <Twist key="tw" />],
     [S_ROSTER, <Roster key="r" />],
     [S_BOARD, <SeriesBoard key="b" ch={7} from={S_BOARD} at={t.at('asking for help')}
-      cam={[[S_BOARD, 2130, 710, 1.5], [t.at('asking for help') + 8, 2110, 700, 1.42], [t.at('asking for help') + 60, 1700, 525, 0.96], [t.at('asking for help') + 420, 1700, 525, 0.95]]} overlay={<>
+      cam={[[S_BOARD, 2130, 710, 1.5], [t.at('asking for help') + 8, 2110, 700, 1.42], [t.at('asking for help') + 60, 1260, 485, 0.725], [t.at('asking for help') + 420, 1260, 485, 0.71]]} overlay={<>
       <Slip text="he'll be the one asking for help" x={160} y={880} size={56} rot={-2} at={t.at('He\'s going')} out={t.at('Quick thing')} coral />
       <Slip text="subscribe ↓" x={1150} y={890} size={54} rot={3} at={t.at('hit subscribe')} />
     </>} />],

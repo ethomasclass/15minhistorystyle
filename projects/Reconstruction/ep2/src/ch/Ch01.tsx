@@ -44,7 +44,7 @@ const Davis: React.FC = () => (
   <Photo src="img/ch01/jefferson_davis_1859_brady.jpg" size={[2341, 3000]} fx={1157} fy={790} z0={1.56} z1={1.64} a={0} b={S_REVELS} mask={MASKS.davis1859} tint={null} traceAt={t.at('Jefferson Davis') + 2}>
     {() => (
       <>
-        <Slip text="Sen. Jefferson Davis, Mississippi" x={1160} y={250} size={54} at={t.at('Jefferson Davis')} />
+        <Slip text="Sen. Jefferson Davis, Mississippi" x={1090} y={250} size={54} at={t.at('Jefferson Davis')} />
         <Slip text="Jan. 1861: walks out" x={1160} y={380} size={54} rot={2} at={t.at('walked out')} />
         <Slip text="to lead the Confederacy" x={1200} y={500} size={54} at={t.at('to lead')} />
         <Tag text="Jefferson Davis, c. 1859 (Brady studio) · Library of Congress" />
@@ -137,8 +137,8 @@ const Question: React.FC = () => (
 const Smith: React.FC = () => (
   <PhotoShot src="img/ch03/LATER_blacksmithing_am_college_greensboro_1899.jpg" size={[640, 473]} a={S_SMITH} b={S_BOARD} w={760} x={760} y={520}
     tag="Blacksmithing, Agricultural and Mechanical College, Greensboro, N.C., 1899 · Library of Congress">
-    <Slip text="a blacksmith, Clinton, Mississippi" x={1180} y={300} size={54} at={t.at('blacksmith')} />
-    <Slip text="(not him: no photo of him is known)" x={1220} y={420} size={46} rot={2} at={t.at('small town') + 6} />
+    <Slip text="a blacksmith, Clinton, Mississippi" x={1120} y={300} size={54} at={t.at('blacksmith')} />
+    <Slip text="(not him: no photo of him is known)" x={1160} y={420} size={46} rot={2} at={t.at('small town') + 6} />
   </PhotoShot>
 );
 
