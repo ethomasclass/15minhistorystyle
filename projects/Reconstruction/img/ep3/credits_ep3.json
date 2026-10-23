@@ -135,14 +135,6 @@
     "page": "https://www.loc.gov/item/96522531/",
     "source": "loc:96522531"
   },
-  "ch03/grant_president_brady_handy.jpg": {
-    "title": "Grant, President U.S.",
-    "artist": "",
-    "date": "1865",
-    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
-    "page": "https://www.loc.gov/item/2017895361/",
-    "source": "loc:2017895361"
-  },
   "ch08/tilden_portrait_1876.jpg": {
     "title": "Samuel J. Tilden",
     "artist": "",
@@ -152,7 +144,7 @@
     "source": "loc:2018697211"
   },
   "ch06/douglass_brady_1877.jpg": {
-    "title": "Frederick Douglass",
+    "title": "Frederick Douglass [crop: right half of the stereo negative]",
     "artist": "",
     "date": "1877",
     "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
@@ -239,13 +231,6 @@
     "page": "https://www.loc.gov/item/94507783/",
     "source": "loc:94507783"
   },
-  "ch05/nast_probe_away_whiskey_ring_1875.jpg": {
-    "title": "File:\"Probe Away!\" (Whiskey Ring). - DPLA - e6610ce6a50dbc3d8c559b0dbba379bd.jpg",
-    "artist": "Nast, Thomas, 1840-1902",
-    "date": "",
-    "licence": "No restrictions",
-    "page": "https://commons.wikimedia.org/wiki/File:%22Probe_Away!%22_(Whiskey_Ring)._-_DPLA_-_e6610ce6a50dbc3d8c559b0dbba379bd.jpg"
-  },
   "ch05/bellew_panic_sweeping_wall_street_1873.jpg": {
     "title": "File:Panic, as a health officer, sweeping the garbage out of Wall Street LCCN2013650090.jpg",
     "artist": "Bellew, Frank, 1828-1888",
@@ -316,5 +301,52 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/90707110/",
     "source": "loc:90707110"
+  },
+  "ch05/panic_1873_run_on_fourth_national_bank.jpg": {
+    "title": "The Panic - Run on the Fourth National Bank, No. 20 Nassau Street [New York City, 1873]",
+    "artist": "",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002723398/",
+    "source": "loc:2002723398"
+  },
+  "ch06/freedmans_savings_bank_building_washington_c1890.jpg": {
+    "title": "Freedman's Savings Bank, Pennsylvania Ave. and Madison Pl., N.W.",
+    "artist": "",
+    "date": "1890",
+    "licence": "No known restrictions on publication. For information see \"James Goode Collection (LOTS 11800 and 12013),\" https://hdl.loc.gov/loc.pnp/res.403.good",
+    "page": "https://www.loc.gov/item/2011648663/",
+    "source": "loc:2011648663"
+  },
+  "ch06/freedmans_bank_commissioners_dividend_check_1878.jpg": {
+    "title": "Office Commissioners of the Freedman's Savings and Trust Company. Pay to the order of Arthur A. Baker. Sixteen Cents.",
+    "artist": "",
+    "date": "1878-03-20",
+    "licence": "public domain by age (1878 document); LOC Rare Book and Special Collections, Alfred Whital Stern Collection",
+    "page": "https://www.loc.gov/item/scsm000519/",
+    "source": "loc:scsm000519"
+  },
+  "ch04/nast_union_as_it_was_white_league_kkk_1874.jpg": {
+    "title": "The Union as it was The lost cause, worse than slavery / / Th. Nast.",
+    "artist": "Nast, Thomas, 1840-1902, artist",
+    "date": "1874-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001696840/",
+    "source": "loc:2001696840"
+  },
+  "ch05/nast_probe_away_whiskey_ring_harpers_1876.jpg": {
+    "title": "File:\"Probe Away!\" (Whiskey Ring). - DPLA - e6610ce6a50dbc3d8c559b0dbba379bd.jpg [crop: the cartoon only; Harper's Weekly, March 18, 1876, p.236]",
+    "artist": "Nast, Thomas, 1840-1902",
+    "date": "",
+    "licence": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Probe_Away!%22_(Whiskey_Ring)._-_DPLA_-_e6610ce6a50dbc3d8c559b0dbba379bd.jpg"
+  },
+  "ch03/grant_president_1873.jpg": {
+    "title": "Grant, U.S. [President]",
+    "artist": "C.M. Bell (Firm : Washington, D.C.), photographer",
+    "date": "1873",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016688109/",
+    "source": "loc:2016688109"
   }
 }

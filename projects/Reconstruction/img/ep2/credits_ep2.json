@@ -582,5 +582,37 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2019635491/",
     "source": "loc:2019635491"
+  },
+  "ch02/waud_the_freedmens_bureau_harpers_1868-07-25.jpg": {
+    "title": "Harper's Weekly  1868-07-25: Vol 12 Iss 604 (page 8)",
+    "artist": "",
+    "date": "1868-07-25",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n8",
+    "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:8"
+  },
+  "ch06/nast_two_great_questions_tweed_harpers_1871-08-19_page.jpg": {
+    "title": "Harper's Weekly  1871-08-19: Vol 15 Iss 764 (page 3)",
+    "artist": "",
+    "date": "1871-08-19",
+    "licence": "public domain by age (1871)",
+    "page": "https://archive.org/details/sim_harpers-weekly_1871-08-19_15_764/page/n3",
+    "source": "iabook:sim_harpers-weekly_1871-08-19_15_764:3"
+  },
+  "ch06/nast_who_stole_the_peoples_money_tweed_ring_1871.jpg": {
+    "title": "Harper's Weekly  1871-08-19: Vol 15 Iss 764 (page 3)",
+    "artist": "",
+    "date": "1871-08-19",
+    "licence": "public domain by age (1871)",
+    "page": "https://archive.org/details/sim_harpers-weekly_1871-08-19_15_764/page/n3",
+    "source": "iabook:sim_harpers-weekly_1871-08-19_15_764:3",
+    "note": "lower panel cropped from p.764"
+  },
+  "ch07/carpet_bag_usa_1860s_cooper_hewitt.jpg": {
+    "title": "File:Carpet Bag (USA), 1860\u201369 (CH 18408269).jpg",
+    "artist": "Unknown artistUnknown artist",
+    "date": "1860\u201369",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Carpet_Bag_(USA),_1860%E2%80%9369_(CH_18408269).jpg"
   }
 }
