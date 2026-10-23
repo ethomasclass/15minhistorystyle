@@ -150,5 +150,101 @@
     "licence": "No known restrictions on publication. For information see: \"Popular Graphic Arts,\" https://hdl.loc.gov/loc.pnp/res.248.pga",
     "page": "https://www.loc.gov/item/2018697211/",
     "source": "loc:2018697211"
+  },
+  "ch06/douglass_brady_1877.jpg": {
+    "title": "Frederick Douglass",
+    "artist": "",
+    "date": "1877",
+    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+    "page": "https://www.loc.gov/item/2017895330/",
+    "source": "loc:2017895330"
+  },
+  "ch06/douglass_leads_sumner_mourners_capitol_1874.jpg": {
+    "title": "The late Senator Sumner. Ceremonies in the Capitol -- colored people of Washington, headed by Frederick Douglass, viewing the remains / Sketched by Joseph Becker.",
+    "artist": "Becker, Joseph, 1841-1910, artist",
+    "date": "1874",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012646118/",
+    "source": "loc:2012646118"
+  },
+  "ch08/nast_a_truce_not_a_compromise_1877.jpg": {
+    "title": "A truce - not a compromise, but a chance for high-toned gentlemen to retire gracefully from their very civil declarations of war / Th. Nast.",
+    "artist": "Nast, Thomas, 1840-1902, artist",
+    "date": "1877-01-01",
+    "licence": "Reference copy in LOT 4405 (1877).\nNo known restrictions on publication.",
+    "page": "https://www.loc.gov/item/93510088/",
+    "source": "loc:93510088"
+  },
+  "ch08/political_farce_of_1876.jpg": {
+    "title": "The political farce of 1876",
+    "artist": "",
+    "date": "1877-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2006677483/",
+    "source": "loc:2006677483"
+  },
+  "ch08/grand_national_democratic_banner_tilden_1876.jpg": {
+    "title": "Grand National Democratic banner",
+    "artist": "Currier & Ives.",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003656575/",
+    "source": "loc:2003656575"
+  },
+  "ch05/babcock_orville_portrait.jpg": {
+    "title": "Babcock, Orville, Elias, 1835-1884",
+    "artist": "",
+    "date": "[no date recorded on caption card]",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004668266/",
+    "source": "loc:2004668266"
+  },
+  "ch02/visit_of_the_ku_klux_harpers_1872.jpg": {
+    "title": "Visit of the Ku-Klux / drawn by Frank Bellew.",
+    "artist": "Bellew, Frank, 1828-1888, artist",
+    "date": "1872-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001695506/",
+    "source": "loc:2001695506"
+  },
+  "ch03/mississippi_ku_klux_captured_disguises_harpers_1872.jpg": {
+    "title": "Mississippi Ku-Klux in the disguises in which they were captured",
+    "artist": "",
+    "date": "1872-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2006687376/",
+    "source": "loc:2006687376"
+  },
+  "ch02/two_members_ku_klux_klan_disguises_harpers_1868.jpg": {
+    "title": "Two members of the Ku-Klux Klan in their disguises The riots at the election in Blackburn, England.",
+    "artist": "",
+    "date": "1868-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/97516403/",
+    "source": "loc:97516403"
+  },
+  "ch04/louisiana_rule_of_terror_harpers_1874.jpg": {
+    "title": "[Illus. of story \"Louisiana and the rule of terror: portr. of Julia Hayden, \"the colored school teacher, one of the latest (murder) victims of the White Man's League\" & (mob) \"attack upon the police in the streets of New Orleans]",
+    "artist": "",
+    "date": "1874-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004678773/",
+    "source": "loc:2004678773"
+  },
+  "ch04/louisiana_murders_gathering_the_dead_colfax_harpers_1873.jpg": {
+    "title": "The Louisiana murders - gathering the dead and wounded The disputed prize / / C.H. Weigall.",
+    "artist": "Weigall, Charles Harvey, 1794-1877, artist",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/94507783/",
+    "source": "loc:94507783"
+  },
+  "ch04/louisiana_murders_gathering_the_dead_colfax_harpers_1873_crop.jpg": {
+    "title": "The Louisiana murders - gathering the dead and wounded The disputed prize / / C.H. Weigall. [crop: top engraving with Harper's header and caption]",
+    "artist": "Weigall, Charles Harvey, 1794-1877, artist",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/94507783/",
+    "source": "loc:94507783"
   }
 }
