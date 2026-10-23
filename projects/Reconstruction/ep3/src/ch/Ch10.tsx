@@ -208,7 +208,7 @@ const Lasted: React.FC = () => {
 // ------------------------------------------------------------------------------------------ 8 · a second founding
 const Founding: React.FC = () => (
   <Amendments a={S_FOUND} b={S_1954} t13={S_FOUND - 30} t14={S_FOUND - 30} t15={S_FOUND - 30} h13={[-20, -19]} h14={[-20, -19]} h15={[-20, -19]}
-    head={<Slip text="three amendments" x={140} y={115} size={66} rot={-2} at={S_FOUND + 4} />}
+    head={<Slip text="three amendments" x={140} y={128} size={66} rot={-2} at={S_FOUND + 4} />}
     over={<>
       <Slip text="never went away" x={150} y={898} size={58} rot={2} at={t.at('never went away') - 2} />
       <Slip text="a second founding" x={800} y={890} size={68} rot={-2} at={t.at('second founding') - 2} coral />
