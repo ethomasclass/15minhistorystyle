@@ -247,9 +247,9 @@ Northern newspapers covered both. Northern voters read them.
 
 Johnson's answer was to hit the road. He went on a speaking tour across the North, nicknamed the {Swing Around the Circle}.
 
-It did not go well. Crowds heckled him. He heckled them back. Once again, the country watched Andrew Johnson lose control in public. In Cleveland, someone shouted that they should hang Jefferson Davis, the Confederacy's president. Johnson shot back: why not hang Thad Stevens?
+It did not go well. Crowds heckled him. He heckled them back. Once again, the country watched Andrew Johnson lose control in public. In Cleveland, the crowd started shouting about hanging people. Newspapers printed different versions of who said what, but in several of them, Johnson shot back: why not hang Thad Stevens?
 
-That's Thaddeus Stevens, the Radical with the land plan. A sitting president, asking a crowd why nobody had hanged a congressman.
+That's Thaddeus Stevens, the Radical with the land plan. Even in the kindest version, a sitting president was trading hanging talk with a heckler.
 
 In November, voters answered. Republicans won more than two-thirds of both the House and the Senate. Enough to override anything Johnson vetoed.
 
@@ -334,7 +334,7 @@ in ch09 is also plain; the music shifts before "Johnson's answer was to hit the 
 pays off in Episode 2). Stevens (ch05 → ch09). Johnson's drunken swearing-in (ch04 → ch09: "Once again… lose control in public"). Howard (ch05 → ch07: "Yes, the general from Edisto").
 
 **Dry asides (one a minute at most, none in ch06).** "A very polite way of saying no" (ch03). "Lining up outside his office to say
-please" (ch05). "An awkward trip home" (ch08). "Why nobody had hanged a congressman" (ch09).
+please" (ch05). "An awkward trip home" (ch08). "Trading hanging talk with a heckler" (ch09).
 
 **Subscribe reminders.** Mid-video at the end of ch08 (two-thirds in, after the 14th Amendment build), with a small teal
 Note "subscribe ↓". End: the last line of ch10, over the end screen.
@@ -411,7 +411,7 @@ small step. But it was the first one." (ch04). Keep the 1866 election itself.
 | 21 | ch07: Civil Rights Act the first major law passed over a veto | Override April 9, 1866; usually described as the first major law passed over a veto | Safe as worded ("a major law"). The act excluded "Indians not taxed"; the script says "people born in the United States." |
 | 22 | ch08: 14th Amendment sent to states June 1866; all Southern states but Tennessee rejected it | Passed Congress June 13, 1866; Tennessee ratified July 1866; the other ten rejected it by early 1867 | Safe. |
 | 23 | ch09: Memphis, 46 Black people killed in three days | May 1–3, 1866; congressional report counted 46 Black and 2 white deaths | Safe. New Orleans "dozens" (about 34 Black and 3 white). |
-| 24 | ch09: Cleveland, "why not hang Thad Stevens?" | Sept 3, 1866, answering a heckler who shouted to hang Jefferson Davis | Confirm the wording from a newspaper account. |
+| 24 | ch09: Cleveland, "why not hang Thad Stevens?" | Sept 3, 1866. Accounts differ: the verbatim transcripts (New-York Tribune, Worcester Daily Spy, Sept 5) give "Hang Thad Stevens and Wendell Phillips" to a heckler and Johnson "Hang Jeff. Davis! Why don't you hang him?"; the Philadelphia Evening Telegraph (Sept 10) and an 1866 cartoon give "Why not hang Thad. Stevens and Wendell Phillips?" to Johnson. | Hedged in the narration ("different versions… in several of them"). Clippings in img/ep1/ch09. |
 | 25 | ch09: Republicans won more than two-thirds of both houses | 1866 midterms | Safe. |
 | 26 | ch10: most Edisto families lost the land | Restorations through 1866 (e.g., Bleak Hall, Feb 1866) | Confirm for Edisto specifically before voicing. |
 | 27 | ch10: Mississippi, Davis's home state, sends a Black senator | Revels took the seat Albert Brown left in 1861; Davis's old seat went to Adelbert Ames (NPS) | Fixed: the common "Davis's seat" claim is a myth, so the tease no longer makes it. |

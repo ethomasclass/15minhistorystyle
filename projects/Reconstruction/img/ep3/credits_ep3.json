@@ -310,14 +310,6 @@
     "page": "https://www.loc.gov/item/2002723398/",
     "source": "loc:2002723398"
   },
-  "ch06/freedmans_savings_bank_building_washington_c1890.jpg": {
-    "title": "Freedman's Savings Bank, Pennsylvania Ave. and Madison Pl., N.W.",
-    "artist": "",
-    "date": "1890",
-    "licence": "No known restrictions on publication. For information see \"James Goode Collection (LOTS 11800 and 12013),\" https://hdl.loc.gov/loc.pnp/res.403.good",
-    "page": "https://www.loc.gov/item/2011648663/",
-    "source": "loc:2011648663"
-  },
   "ch06/freedmans_bank_commissioners_dividend_check_1878.jpg": {
     "title": "Office Commissioners of the Freedman's Savings and Trust Company. Pay to the order of Arthur A. Baker. Sixteen Cents.",
     "artist": "",
@@ -526,5 +518,169 @@
     "licence": "public domain by age (1891)",
     "page": "https://archive.org/details/cu31924005756956/page/n43",
     "source": "iabook:cu31924005756956:43"
+  },
+  "ch09/louisiana_constitution_1898_p78_written_application_literacy_test.jpg": {
+    "title": "Constitution of the state of Louisiana (page 80)",
+    "artist": "Louisiana. Constitution. [from old catalog]",
+    "date": "1898",
+    "licence": "public domain by age (1898)",
+    "page": "https://archive.org/details/constitutionsta02louigoog/page/n80",
+    "source": "iabook:constitutionsta02louigoog:80"
+  },
+  "ch09/louisiana_constitution_1898_p77_art197_suffrage.jpg": {
+    "title": "Constitution of the state of Louisiana (page 79)",
+    "artist": "Louisiana. Constitution. [from old catalog]",
+    "date": "1898",
+    "licence": "public domain by age (1898)",
+    "page": "https://archive.org/details/constitutionsta02louigoog/page/n79",
+    "source": "iabook:constitutionsta02louigoog:79"
+  },
+  "ch09/louisiana_constitution_1898_p79_sec5_grandfather_clause.jpg": {
+    "title": "Constitution of the state of Louisiana (page 81)",
+    "artist": "Louisiana. Constitution. [from old catalog]",
+    "date": "1898",
+    "licence": "public domain by age (1898)",
+    "page": "https://archive.org/details/constitutionsta02louigoog/page/n81",
+    "source": "iabook:constitutionsta02louigoog:81"
+  },
+  "ch10/brown_v_board_347us495_inherently_unequal_1954.jpg": {
+    "title": "Brown v. Board of Education, 347 U.S. 483 (1954), U.S. Reports vol. 347, page 495 (\"Separate educational facilities are inherently unequal\" ... \"the equal protection of the laws guaranteed by the Fourteenth Amendment\")",
+    "artist": "U.S. Supreme Court (opinion by Chief Justice Earl Warren)",
+    "date": "1954",
+    "licence": "public domain (U.S. government work); Library of Congress U.S. Reports collection",
+    "page": "https://www.loc.gov/item/usrep347483/",
+    "source": "loc:usrep347483 (PDF page 13 rendered at 300 dpi)"
+  },
+  "ch10/voting_rights_act_1965_79stat437_enforce_fifteenth.jpg": {
+    "title": "Voting Rights Act of 1965, Public Law 89-110, 79 Stat. 437: \"An Act to enforce the fifteenth amendment to the Constitution of the United States\"",
+    "artist": "U.S. Congress",
+    "date": "1965-08-06",
+    "licence": "public domain (U.S. government work); U.S. Statutes at Large via govinfo.gov",
+    "page": "https://www.govinfo.gov/app/details/STATUTE-79/STATUTE-79-Pg437",
+    "source": "govinfo:STATUTE-79-Pg437 (PDF page 1 rendered at 300 dpi)"
+  },
+  "ch10/johnson_king_voting_rights_act_signing_1965.jpg": {
+    "title": "File:Lyndon Johnson and Martin Luther King, Jr. - Voting Rights Act.jpg",
+    "artist": "Yoichi Okamoto",
+    "date": "1965-08-06",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Lyndon_Johnson_and_Martin_Luther_King,_Jr._-_Voting_Rights_Act.jpg"
+  },
+  "ch09/russell_lee_colored_water_cooler_oklahoma_city_1939.jpg": {
+    "title": "File:Negro drinking at \"Colored\" water cooler in streetcar terminal, Oklahoma City, Oklahoma by Russell Lee.jpg",
+    "artist": "Russell Lee / Adam Cuerden",
+    "date": "1939-07",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Negro_drinking_at_%22Colored%22_water_cooler_in_streetcar_terminal,_Oklahoma_City,_Oklahoma_by_Russell_Lee.jpg"
+  },
+  "ch09/bubley_colored_waiting_room_sign_1943.jpg": {
+    "title": "File:1943 Colored Waiting Room Sign.jpg",
+    "artist": "Esther Bubley",
+    "date": "1943-09",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1943_Colored_Waiting_Room_Sign.jpg"
+  },
+  "ch10/primary_school_freedmen_vicksburg_harpers_1866.jpg": {
+    "title": "Primary school for freedmen in charge of Mrs. Green at Vicksburg, Mississippi / A. R. W.",
+    "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+    "date": "1866",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2023632559/",
+    "source": "loc:2023632559"
+  },
+  "ch10/heroes_of_the_colored_race_1881.jpg": {
+    "title": "Heroes of the colored race",
+    "artist": "Hoover, Joseph, 1830-1913, publisher",
+    "date": "1881",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/00651114/",
+    "source": "loc:00651114"
+  },
+  "ch10/misses_cookes_school_room_freedmens_bureau_richmond_1866.jpg": {
+    "title": "The Misses Cooke's school room, Freedman's Bureau, Richmond, Va. / from a sketch by Jas. E. Taylor.",
+    "artist": "Taylor, James E., 1839-1901, artist",
+    "date": "1866-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/98510871/",
+    "source": "loc:98510871"
+  },
+  "ch10/colored_tennessean_1866-03-24_information_wanted_column.jpg": {
+    "title": "The Colored Tennessean (Nashville, Tenn.), March 24, 1866, p.3: \"Information Wanted\" notices from parents seeking children sold in slavery; advertisement \"Freedman's Saving Bank. Come one, come all!\"",
+    "artist": "The Colored Tennessean",
+    "date": "1866-03-24",
+    "licence": "public domain (published 1866); Library of Congress Chronicling America",
+    "page": "https://www.loc.gov/resource/sn83025745/1866-03-24/ed-1/?sp=3",
+    "source": "chronam:sn83025745/1866-03-24/ed-1/sp3"
+  },
+  "ch06/colored_tennessean_1866-03-24_freedmans_saving_bank_ad.jpg": {
+    "title": "The Colored Tennessean (Nashville, Tenn.), March 24, 1866, p.3: \"Information Wanted\" notices from parents seeking children sold in slavery; advertisement \"Freedman's Saving Bank. Come one, come all!\"",
+    "artist": "The Colored Tennessean",
+    "date": "1866-03-24",
+    "licence": "public domain (published 1866); Library of Congress Chronicling America",
+    "page": "https://www.loc.gov/resource/sn83025745/1866-03-24/ed-1/?sp=3",
+    "source": "chronam:sn83025745/1866-03-24/ed-1/sp3"
+  },
+  "ch06/douglass_letter_freedmans_savings_bank_letterhead_3jul1874_nmaahc.jpg": {
+    "title": "Letter signed by Frederick Douglass to Hon. J.A.J. Creswell on the letterhead of the Principal Office of the Freedman's Savings and Trust Company, Washington, D.C., July 3, 1874 (NMAAHC 2021.58.2)",
+    "artist": "Frederick Douglass",
+    "date": "1874-07-03",
+    "licence": "CC0 (Smithsonian Open Access; Collection of the Smithsonian National Museum of African American History and Culture)",
+    "page": "https://nmaahc.si.edu/object/nmaahc_2021.58.2",
+    "source": "si:NMAAHC-2021_58_2_001"
+  },
+  "ch06/freedmans_bank_dividend_check_1880s_nmaahc.jpg": {
+    "title": "Dividend check from the Freedman's Savings and Trust Company (commissioners' payment to a depositor), 1880s (NMAAHC 2021.9)",
+    "artist": "Freedman's Savings and Trust Company (commissioners)",
+    "date": "1880s",
+    "licence": "CC0 (Smithsonian Open Access; Collection of the Smithsonian National Museum of African American History and Culture)",
+    "page": "https://nmaahc.si.edu/object/nmaahc_2021.9",
+    "source": "si:NMAAHC-2021_9_001"
+  },
+  "ch06/freedmans_savings_bank_exterior_1880s_sia.jpg": {
+    "title": "Exterior view of Freedman's Savings Bank, Pennsylvania Avenue, Washington, D.C., with the Arlington Fire Insurance Co. building (USNM No. 2502), 1880s",
+    "artist": "Smithsonian Institution Archives",
+    "date": "1880s",
+    "licence": "CC0 (Smithsonian Open Access; Smithsonian Institution Archives)",
+    "page": "https://siarchives.si.edu/collections/siris_arc_385263",
+    "source": "si:SIA-MAH-2502-000004"
+  },
+  "ch02/scenes_in_memphis_riot_school_house_burning_harpers_1866.jpg": {
+    "title": "Scenes in Memphis, Tennessee, during the riot",
+    "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+    "date": "1866-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/94507780/",
+    "source": "loc:94507780"
+  },
+  "ch05/nast_third_term_panic_harpers_1874.jpg": {
+    "title": "The Third-term Panic. \"An ass, having put on the lion's skin, turned about in the forest, and amused himself by frightening all the foolish animals he met in his wanderings\" - Shakespeare or Bacon / Th. Nast.",
+    "artist": "Nast, Thomas, 1840-1902.",
+    "date": "1874",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004682001/",
+    "source": "loc:2004682001"
+  },
+  "ch08/south_carolina_deadlock_state_legislature_columbia_leslies_1876.jpg": {
+    "title": "South Carolina--The November election--The dead-lock in the state legislature at Columbia / from sketches by Harry Ogden.",
+    "artist": "Ogden, Harry, artist",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/98518306/",
+    "source": "loc:98518306"
+  },
+  "ch08/grand_national_republican_banner_hayes_1876.jpg": {
+    "title": "Grand National Republican banner",
+    "artist": "Currier & Ives.",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003656594/",
+    "source": "loc:2003656594"
+  },
+  "ch09/poll_tax_receipt_jefferson_county_alabama_1920.jpg": {
+    "title": "File:Poll Tax receipt for Rosa Boyles of Jefferson County, Alabama, October 22, 1920.png",
+    "artist": "Unknown authorUnknown author",
+    "date": "1920-10-22",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Poll_Tax_receipt_for_Rosa_Boyles_of_Jefferson_County,_Alabama,_October_22,_1920.png"
   }
 }
