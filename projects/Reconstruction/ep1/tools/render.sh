@@ -1,6 +1,7 @@
 #!/bin/sh
 # Render chapters, join all of them, master once:   tools/render.sh            (every chapter)
 #                                                     tools/render.sh 03 07      (re-render only these, then rejoin)
+# SWANGLE="04" renders those chapters with --gl=swangle (three.js scenes; the default GL fails in a container).
 # Writes out/<SLUG>_1080p.mp4 (the YouTube master, -14 LUFS) and renders/<SLUG>_720p.mp4.
 cd "$(dirname "$0")/.."
 export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
@@ -12,7 +13,8 @@ mkdir -p out/ch renders
 [ -n "$JOIN_ONLY" ] && set -- none
 for n in ${*:-$ALL}; do
   [ "$n" = none ] && continue
-  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER --log=error || exit 1
+  GL=""; echo " $SWANGLE " | grep -q " $n " && GL=--gl=swangle
+  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER $GL --log=error || exit 1
   echo "rendered ch$n"
   rm -rf /tmp/remotion-webpack-bundle-*   # each render leaves a ~500 MB copy of public/ behind
 done
