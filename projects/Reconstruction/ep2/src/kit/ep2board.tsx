@@ -55,7 +55,7 @@ const P2: Piece[] = [
     <Scrap text="The right of citizens … to vote shall not be denied … on account of race, color, or previous condition of servitude." mark="on account of race, color, or previous condition of servitude" w={390} seed="15" size={23} />
   )},
   {id: 'fifteenthStrip', ch: 5, dt: 12, kind: 'slide', x: 70, y: 1316, r: -2, el: () => <Strip text="15th Amendment · 1870" seed="e15" size={20} bg={CORAL_LABEL} />},
-  {id: 'strike', ch: 5, dt: 30, kind: 'fade', x: 1000, y: 232, z: 8, el: (c) => (
+  {id: 'strike', ch: 5, dt: 30, kind: 'fade', x: 1060, y: 232, z: 8, el: (c) => (
     <svg width={160} height={24} style={{overflow: 'visible'}}><path d={`M 4 14 Q 70 4 ${4 + 150 * c.strike} 12`} stroke={TEAL} strokeWidth={8} fill="none" strokeLinecap="round" /></svg>
   )},
   // ch06 bottom rail on top
