@@ -213,36 +213,12 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Reconstruction_LCCN2004665356.jpg"
   },
-  "ch03/the_new_era_1867.jpg": {
-    "title": "The new era / V.F.",
-    "artist": "",
-    "date": "1867-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2002713108/",
-    "source": "loc:2002713108"
-  },
-  "ch03/the_colored_voter_1867.jpg": {
-    "title": "Home incidents, accidents, &c. The colored voter ; Pursuit of a breakfast under difficulties ; Nearest the fire ; Gypsies in Texas ; A floating grocer's raft ; Accident to a danseuse ; Accident on an inclined railway ; A sagacious dog ; Oiling a ventriloquist ; Explosion at the Wisconsin paper mill, Milwaukie ; A business proposal ; A sad story.",
-    "artist": "",
-    "date": "1800-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2018650461/",
-    "source": "loc:2018650461"
-  },
   "ch05/republican_chart_1868_grant_colfax.jpg": {
     "title": "File:Republican chart for the presidential campaign, 1868 - E. Baldwin eng. LCCN2012648821.jpg",
     "artist": "H.H. Lloyd &amp; Co.; Baldwin, Enos, engraver",
     "date": "1868",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Republican_chart_for_the_presidential_campaign,_1868_-_E._Baldwin_eng._LCCN2012648821.jpg"
-  },
-  "ch02/gen_ord_fourth_district.jpg": {
-    "title": "[Major General Edward Otho Cresap Ord of 3rd Regular Army Light Artillery Regiment and 4th Regular Army Light Artillery Regiment in uniform, his wife, Mary Mercer Thompson Ord, and daughter, probably Lucy Maud Ord Mason] / From photographic negative in Brady's National Portrait Gallery.",
-    "artist": "Brady's National Photographic Portrait Galleries, photographer",
-    "date": "1865",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2019635491/",
-    "source": "loc:2019635491"
   },
   "ch06/PROPAGANDA_nast_colored_rule_1874.jpg": {
     "title": "Colored rule in a reconstructed(?) state (The members call each other thieves, liars, rascals, and cowards) / Th. Nast.",
@@ -251,14 +227,6 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/91705051/",
     "source": "loc:91705051"
-  },
-  "ch06/nast_tweed_thats_whats_the_matter_1871.jpg": {
-    "title": "\"That's what's the matter\" Boss Tweed. \"As long as I count the votes, what are you going to do about it? Say?\" / / Th. Nast.",
-    "artist": "Nast, Thomas, 1840-1902, artist",
-    "date": "1871-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2018663035/",
-    "source": "loc:2018663035"
   },
   "ch06/nast_tweed_ring_vultures_1871.jpg": {
     "title": "A group of vultures waiting for the storm to \"Blow Over\" - \"Let Us Prey\" / Th Nast.",
@@ -606,5 +574,13 @@
     "date": "1861 \u2013 1876",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Headquarters,_Second_Military_District_label_-_NARA_-_70653080.jpg"
+  },
+  "ch02/gen_ord_with_family_1865.jpg": {
+    "title": "[Major General Edward Otho Cresap Ord of 3rd Regular Army Light Artillery Regiment and 4th Regular Army Light Artillery Regiment in uniform, his wife, Mary Mercer Thompson Ord, and daughter, probably Lucy Maud Ord Mason] / From photographic negative in Brady's National Portrait Gallery.",
+    "artist": "Brady's National Photographic Portrait Galleries, photographer",
+    "date": "1865",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2019635491/",
+    "source": "loc:2019635491"
   }
 }
