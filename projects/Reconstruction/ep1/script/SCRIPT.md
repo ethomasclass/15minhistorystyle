@@ -159,7 +159,7 @@ But first, the South was back in charge of itself. What was it going to do?
 
 First, the good news. In December 1865, the {13th Amendment} became part of the Constitution.
 
-An amendment is a change to the Constitution itself, and three out of four states have to approve it. This one ended slavery everywhere in the United States.
+An amendment is a change to the Constitution itself, and three-quarters of the states have to approve it. This one ended slavery everywhere in the United States.
 
 But look at the middle of it. "Neither slavery nor involuntary servitude, except as a punishment for crime."
 
@@ -305,7 +305,7 @@ first time it's said, so a viewer who has never taken a history class can follow
 | Lincoln's assassination | ch04 | told as events, not assumed |
 | Planters | ch05 | "the rich plantation owners who ran the South" |
 | Homestead | ch05 | "a farm of your own" |
-| Amendment, ratify | ch06 | "a change to the Constitution itself, and three out of four states have to approve it" |
+| Amendment, ratify | ch06 | "a change to the Constitution itself, and three-quarters of the states have to approve it" |
 | Vagrant | ch06 | "someone with no job and no home" |
 | Override | ch07 | "two-thirds of the House and two-thirds of the Senate, and the bill becomes law without him" |
 | Dred Scott, due process, equal protection | ch08 | each in one sentence, then "Translation:" |

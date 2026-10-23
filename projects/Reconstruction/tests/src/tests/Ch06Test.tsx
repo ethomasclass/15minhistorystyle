@@ -13,13 +13,13 @@ import FA from '../../public/img/ch06/ms_freedmen_act.json';
 import VA from '../../public/img/ch06/ms_vagrant_act.json';
 import RUN from '../../public/img/ch06/run/run.json';
 import {DarkPaper, Sfx} from '../kit/common';
-import {Highlight, JF, Note, Tag, useGFrame} from '../kit/Kit';
+import {Highlight, JF, Tag, useGFrame} from '../kit/Kit';
 import {Definition, Stamp, useScene} from '../kit/shell';
 import {makeTimeline, type Narration} from '../lib/timing';
 import {TestFrame} from './common';
 import {APin, Land} from './CollageAnim';
 import {BRAND, Ctx, Defs, Scrap, Splats, Strip} from './CollageMocks';
-import {type Box, camAt, carry, CORAL, FocusIn, type RunItem, Sheet, type SheetCam, Spot, Swipe, TEAL, Tear, WordRun} from './voxkit';
+import {type Box, camAt, carry, CORAL, FocusIn, type RunItem, Sheet, type SheetCam, Slip, Spot, Swipe, TEAL, Tear, WordRun} from './voxkit';
 
 const N = words as Narration;
 const t = makeTimeline(N, 30);
@@ -69,9 +69,9 @@ const Amend: React.FC = () => {
       <DarkPaper />
       <FocusIn at={2}><Sheet src={T13} size={T13S} cam={cam} seed="t13" filter={T13F} /></FocusIn>
       <Highlight text="13TH AMENDMENT" x={100} y={106} size={70} at={t.at('13th')} seed={4} rot={-2} />
-      <Note text="Dec. 1865" x={110} y={215} size={44} at={t.at('December')} />
-      <Note text="3 of 4 states say yes" x={1360} y={330} size={38} rot={-3} at={t.at('three out of four')} dur={14} />
-      <Note text="slavery: over" x={1460} y={450} size={40} rot={-3} at={t.at('ended slavery')} color={CORAL} />
+      <Slip text="Dec. 1865" x={110} y={225} rot={-2} at={t.at('December')} />
+      <Slip text="¾ of the states say yes" x={1250} y={330} size={54} at={t.at('three-quarters')} dur={14} />
+      <Slip text="slavery: over" x={1400} y={460} size={58} at={t.at('ended slavery')} coral />
       <Sfx at={2} src="sfx/tick.wav" volume={0.4} />
       <Tag text={SRC_T13} />
     </AbsoluteFill>
@@ -140,7 +140,7 @@ const Codes: React.FC = () => {
       </Sheet>
       <Highlight text="BLACK CODES" x={100} y={106} size={84} at={t.at('Black Codes') + 8} seed={6} rot={-2} />
       <Definition term="Black Codes" def="laws that applied only to Black Southerners" at={t.at('laws that')} x={120} y={860} />
-      <Note text="Nov. 1865" x={1500} y={120} size={50} at={t.at('November')} />
+      <Slip text="Nov. 1865" x={1480} y={120} at={t.at('November')} />
       <Tag text={SRC_FA} />
     </Tear>
   );
@@ -204,7 +204,7 @@ const StepThree: React.FC = () => {
       <Sheet src="img/ch06/ms_vagrant_act.jpg" size={VAS} cam={cam} seed="va" offset={[carry(f, S9, S10), 0]}>
         <Swipe lines={V_SHERIFF} from={t.at('the sheriff')} to={t.end('paid it')} seed="va2" />
       </Sheet>
-      <Note text="often, a planter" x={1180} y={820} size={54} rot={-3} at={t.at('Often')} color={CORAL} />
+      <Slip text="often, a planter" x={1180} y={820} at={t.at('Often')} coral />
       <Counter n={3} at={S9} />
       <Tag text={SRC_VA} />
     </AbsoluteFill>
@@ -246,12 +246,12 @@ const ThreeUp: React.FC = () => {
     <AbsoluteFill>
       <DarkPaper />
       <AbsoluteFill style={{transform: `translateX(${dx}px)`}}>
-        <FocusIn at={t.at('free under')}><Win src={T13} cx={1150} cy={958} s={0.66} filter={T13F} w={560} h={190} x={70} y={330} r={-2} seed="w1" /></FocusIn>
+        <FocusIn at={t.at('free under')}><Win src={T13} cx={1000} cy={966} s={0.8} filter={T13F} w={560} h={190} x={70} y={330} r={-2} seed="w1" /></FocusIn>
         <FocusIn at={t.at('arrested for')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={330} cy={4250} s={1.05} w={560} h={190} x={680} y={360} r={1.5} seed="w2" /></FocusIn>
         <FocusIn at={t.at('put to work')}><Win src="img/ch06/ms_vagrant_act.jpg" cx={1120} cy={300} s={0.82} w={560} h={190} x={1290} y={330} r={-1.5} seed="w3" /></FocusIn>
-        <Note text="free" x={300} y={560} size={60} at={t.at('free under')} />
-        <Note text="arrested" x={840} y={590} size={60} at={t.at('arrested for')} />
-        <Note text="put to work" x={1400} y={560} size={60} at={t.at('put to work')} />
+        <Slip text="free" x={280} y={570} rot={-2} at={t.at('free under')} />
+        <Slip text="arrested" x={830} y={600} rot={2} at={t.at('arrested for')} />
+        <Slip text="put to work" x={1390} y={570} rot={-2} at={t.at('put to work')} />
       </AbsoluteFill>
       <Highlight text="AND IT WAS LEGAL." x={520} y={780} size={84} at={t.at('And it was legal')} seed={8} rot={-2} />
       {['free under', 'arrested for', 'put to work'].map((p) => <Sfx key={p} at={t.at(p)} src="sfx/tick.wav" volume={0.35} />)}
@@ -322,10 +322,10 @@ export const Ch06Test: React.FC = () => {
     [0, <Amend key="a" />],
     [S2, <Middle key="m" />],
     [S3, <PhotoShot key="j" src="img/wall/cr_johnson.png" size={[900, 1101]} a={S3} b={S4} w={560} tag="Andrew Johnson · Library of Congress">
-      <Note text="new state governments" x={1240} y={300} size={40} rot={-3} at={t.at('elected')} />
+      <Slip text="new state governments" x={1230} y={300} size={54} at={t.at('elected')} />
     </PhotoShot>],
     [S4, <PhotoShot key="p" src="img/wall/cr_pardons.png" size={[900, 1114]} a={S4} b={S5} w={560} tag="Pardon applications · Library of Congress">
-      <Note text="the same men" x={1290} y={330} size={50} rot={-3} at={t.at('same men')} color={CORAL} />
+      <Slip text="the same men" x={1290} y={330} at={t.at('same men')} coral />
     </PhotoShot>],
     [S5, <Codes key="c" />],
     [S7, <StepOne key="1" />],

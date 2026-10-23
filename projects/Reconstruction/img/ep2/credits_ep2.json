@@ -333,5 +333,64 @@
     "page": "https://archive.org/details/sim_harpers-weekly_1867-09-28_11_561/page/n12",
     "source": "iabook:sim_harpers-weekly_1867-09-28_11_561:12",
     "note": "engraving cropped from the page"
+  },
+  "ch05/grant_nominee_portrait_leslies_1868-06-06.jpg": {
+    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 7)",
+    "artist": "",
+    "date": "1868-06-06",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n7",
+    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:7"
+  },
+  "ch03/electioneering_at_the_south_harpers_1868-07-25_page.jpg": {
+    "title": "Harper's Weekly  1868-07-25: Vol 12 Iss 604 (page 3)",
+    "artist": "",
+    "date": "1868-07-25",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n3",
+    "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:3"
+  },
+  "ch05/republican_convention_chicago_1868_leslies_cover.jpg": {
+    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 0)",
+    "artist": "",
+    "date": "1868-06-06",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n0",
+    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:0"
+  },
+  "ch04/impeachment_vote_leslies_1868-06-06_p188_page.jpg": {
+    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 11)",
+    "artist": "",
+    "date": "1868-06-06",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n11",
+    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:11"
+  },
+  "ch04/impeachment_vote_may16_ross_not_guilty_leslies_1868.jpg": {
+    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 11)",
+    "artist": "",
+    "date": "1868-06-06",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n11",
+    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:11",
+    "note": "top engraving cropped from p.188"
+  },
+  "ch04/johnson_congratulated_on_acquittal_leslies_1868.jpg": {
+    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 11)",
+    "artist": "",
+    "date": "1868-06-06",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n11",
+    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:11",
+    "note": "bottom engraving cropped from p.188"
+  },
+  "ch03/electioneering_at_the_south_harpers_1868.jpg": {
+    "title": "Harper's Weekly  1868-07-25: Vol 12 Iss 604 (page 3)",
+    "artist": "",
+    "date": "1868-07-25",
+    "licence": "public domain by age (1868)",
+    "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n3",
+    "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:3",
+    "note": "engraving cropped from p.468"
   }
 }

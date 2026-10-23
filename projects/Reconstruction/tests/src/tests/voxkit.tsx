@@ -193,3 +193,30 @@ export const WordRun: React.FC<{items: RunItem[]; at: number; durs: number[]; ho
     </AbsoluteFill>
   );
 };
+
+/**
+ * A note on a torn paper slip (the user's pick over bare handwriting, Oct 2026): the slip slaps on, then the words write
+ * on in dark ink. Cream with deep-teal ink by default; `coral` for the subject or punchline. `size` is the hand's px.
+ */
+export const Slip: React.FC<{text: string; x: number; y: number; at: number; rot?: number; size?: number; coral?: boolean; dur?: number; seed?: string}> = ({
+  text, x, y, at, rot = -3, size = 62, coral, dur = 10, seed = text,
+}) => {
+  const f = useCurrentFrame();
+  const g = useGFrame();
+  if (f < at) return null;
+  const k = interpolate(f, [at, at + 3, at + 6], [1.25, 0.97, 1], clamp);
+  const w = interpolate(g, [at + 3, at + 3 + dur], [0, 1], clamp);
+  const pts: string[] = [];
+  for (let i = 0; i <= 16; i++) pts.push(`${(i / 16) * 100}% ${random(`${seed}t${i}`) * 9}%`);
+  for (let i = 16; i >= 0; i--) pts.push(`${(i / 16) * 100}% ${100 - random(`${seed}b${i}`) * 9}%`);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: 'left center', opacity: interpolate(f, [at, at + 2], [0, 1], clamp),
+      filter: 'drop-shadow(4px 5px 0 rgba(0,0,0,0.55))'}}>
+      <div style={{background: coral ? '#f3c6bf' : '#ece6d8', clipPath: `polygon(${pts.join(',')})`, padding: `${size * 0.1}px ${size * 0.38}px ${size * 0.16}px`,
+        fontFamily: '"Nanum Pen Script", cursive', fontSize: size, lineHeight: 1, color: coral ? '#5a1d17' : '#0f3e37', whiteSpace: 'nowrap'}}>
+        <span style={{clipPath: `inset(-20% ${(1 - w) * 100}% -20% -5%)`, display: 'inline-block'}}>{text}</span>
+      </div>
+      <Sfx at={at} src="sfx/tick_soft.wav" volume={0.3} />
+    </div>
+  );
+};

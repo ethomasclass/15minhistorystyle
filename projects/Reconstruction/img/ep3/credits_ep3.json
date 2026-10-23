@@ -223,14 +223,6 @@
     "page": "https://www.loc.gov/item/97516403/",
     "source": "loc:97516403"
   },
-  "ch04/louisiana_rule_of_terror_harpers_1874.jpg": {
-    "title": "[Illus. of story \"Louisiana and the rule of terror: portr. of Julia Hayden, \"the colored school teacher, one of the latest (murder) victims of the White Man's League\" & (mob) \"attack upon the police in the streets of New Orleans]",
-    "artist": "",
-    "date": "1874-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2004678773/",
-    "source": "loc:2004678773"
-  },
   "ch04/louisiana_murders_gathering_the_dead_colfax_harpers_1873.jpg": {
     "title": "The Louisiana murders - gathering the dead and wounded The disputed prize / / C.H. Weigall.",
     "artist": "Weigall, Charles Harvey, 1794-1877, artist",
@@ -246,5 +238,19 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/94507783/",
     "source": "loc:94507783"
+  },
+  "ch05/nast_probe_away_whiskey_ring_1875.jpg": {
+    "title": "File:\"Probe Away!\" (Whiskey Ring). - DPLA - e6610ce6a50dbc3d8c559b0dbba379bd.jpg",
+    "artist": "Nast, Thomas, 1840-1902",
+    "date": "",
+    "licence": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Probe_Away!%22_(Whiskey_Ring)._-_DPLA_-_e6610ce6a50dbc3d8c559b0dbba379bd.jpg"
+  },
+  "ch05/bellew_panic_sweeping_wall_street_1873.jpg": {
+    "title": "File:Panic, as a health officer, sweeping the garbage out of Wall Street LCCN2013650090.jpg",
+    "artist": "Bellew, Frank, 1828-1888",
+    "date": "1873",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Panic,_as_a_health_officer,_sweeping_the_garbage_out_of_Wall_Street_LCCN2013650090.jpg"
   }
 }
