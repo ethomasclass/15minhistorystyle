@@ -150,7 +150,9 @@ These cues have become the channel's regulars:
 gets this suffix:
 > Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.
 
-**ElevenLabs** (`tools/music_eleven.py <name>`, in the template; about 850 credits a minute). Instrumental is forced, and its cues come out quiet, so measure the LUFS.
+**ElevenLabs** (`tools/music_eleven.py <name>`, in the template; about 850 credits a minute). Instrumental is forced, and its cues come out quiet (−16 to −19.5 LUFS), so measure the LUFS and run the bed higher. The prompt recipe that made the `rc_` cues (the moment and period in plain words, period instruments by name and no named songs, how it moves, how it ends, the standard suffix, the length) is in the tool's docstring and in the skill's `voice-and-audio.md` §6; the `rc_` prompts below are worked examples.
+
+**Real period recordings** (`tools/jukebox.py search|get`, in the template): Library of Congress National Jukebox records, public domain if published before 1926, with credits written to `public/music/credits.json`. Sung records only where there's no narration. Reconstruction's ten are in `projects/Reconstruction/music/period/` with sources and rights in `projects/Reconstruction/MUSIC.md`.
 
 **Adding a cue to this library:** give it the new video's prefix, copy it to `cues/`, measure it
 (`ffmpeg -i cues/x.mp3 -af loudnorm=print_format=summary -f null -`), and add a row above and an entry in `catalog.json` with its prompt.

@@ -86,7 +86,8 @@ public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for A
 tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
              sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, script_pdf.py, music_eleven.py,
              sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py,
-             phrase_find.py + word_hunt.py (LOC newspapers), crease.py, halftone.py, silhouette.py, distress.py, scratch_voice.py,
+             phrase_find.py + word_hunt.py (LOC newspapers), jukebox.py (LOC period recordings), crease.py, halftone.py,
+             silhouette.py, distress.py, scratch_voice.py,
              mono_depth.py + stereo_depth.py + prep_stereo.py (stereograph move)
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master

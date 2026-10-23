@@ -93,7 +93,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 6. Music
 
-- **Reuse first.** Every cue the channel has made (38, deduplicated, with prompts, lengths, loudness and where each
+- **Reuse first.** Every cue the channel has made (46, deduplicated, with prompts, lengths, loudness and where each
   was used) is in the style repo's music library: `music/README.md` and `music/cues/` at the root of the
   `15minhistorystyle` repo (this skill's `../../../music/`). Copy cues into `public/music/` keeping their prefix
   (`r_dix.mp3`). Write a `script/MUSIC.md` table for the new video: chapter, cue, why it fits, and a "gaps" list.
@@ -102,9 +102,28 @@ shifts. Re-check stills for that chapter after re-voicing.
   library with a new prefix.
 - **Suno** gives the best new cues (the user runs it by hand): Custom mode, Instrumental on, and the Styles and
   Exclude lines in the library's README.
-- **Generate** with `tools/music_eleven.py <name>` after adding a prompt to `CUES` (see the examples there:
-  instrumental, no vocals, room for a narrator, period instruments, length in ms). Music costs roughly 850 credits
-  a minute, so keep cues short and reuse them.
+- **Generate with ElevenLabs** (`tools/music_eleven.py <name>`; how Reconstruction's `rc_` cues were made):
+  1. The key is the narration key, in `.env`. Check the budget first (`GET /v1/user/subscription`); music costs
+     roughly 850 credits a minute, so make 60–80 s cues and reuse them across chapters.
+  2. Add a prompt to `CUES`: the moment and its period in plain words; period instruments by name (fretless banjo,
+     fiddle, saxhorn brass band, reed harmonium, parlor piano, field drum), never a named song or artist; how it moves
+     over its length; how it ends (the tail gets lifted, so ask for an ending worth hearing); then the `TAIL` suffix
+     (instrumental, no choir, restrained, room for a narrator); and the length in ms. The docstring has the recipe and
+     the `rc_` prompts are worked examples.
+  3. Run it, measure the loudness (`ffmpeg -i public/music/x.mp3 -af loudnorm=print_format=summary -f null -`) and set
+     the bed from it: ElevenLabs cues come out at −16 to −19.5 LUFS, so they run at about 0.17–0.24 where a −12 LUFS
+     cue runs at 0.13. Listen to the first 30–40 s, which is what most chapters use.
+  4. Add the cue to the music library (`music/cues/`, a row in `music/README.md`, an entry in `music/catalog.json` with
+     its prompt) under the video's prefix. Commit the `.mp3`; the `.wav` copy is git-ignored.
+- **Real period recordings** (`tools/jukebox.py`; how Reconstruction got its spirituals, band medleys and Foster):
+  `search "roll jordan roll"` lists Library of Congress National Jukebox records (1900–1925) with dates and performers;
+  `get <jukebox-id> public/music/period/<name>.mp3` downloads one and writes its credit to `public/music/credits.json`.
+  Records published before 1926 are US public domain (the tool refuses later ones). Sung records never go under the
+  narration: use them in a chapter's open, its tail and the ending; instrumentals can sit low under it. Normalise each
+  to about −16 LUFS first (they range −15 to −31). Leave out "Dixie" and minstrel-era records (mock dialect), and listen
+  to any "Southern melodies" medley before using it. Credit the performers in the description ("Swing Low, Sweet
+  Chariot: Fisk University Jubilee Singers, 1909, Library of Congress"); a reissue label's Content ID claim is disputed
+  with the LOC link and the recording date. Worked example: `projects/Reconstruction/MUSIC.md` in the style repo.
 - **Levels:** music beds 0.13–0.17 under narration, with 15–20-frame fades (`ChapterShell` does this). Cold open
   0.17, dipping at the end. Title sting 0.45 (already wired into the intro). The heavy chapter gets a grave cue or
   near-silence. Generators master differently (Lyria about −12 LUFS, Suno about −15, ElevenLabs down to −19.6), so
