@@ -13,7 +13,8 @@
     "date": "1870",
     "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
     "page": "https://www.loc.gov/item/2017892963/",
-    "source": "loc:2017892963"
+    "source": "loc:2017892963",
+    "note": "left half of the stereo/double negative"
   },
   "ch06/revels_seated_brady_handy_1870.jpg": {
     "title": "[Hiram Rhoades Revels, Afro-American senator, three-quarter length portrait, seated by small table, facing right]",
@@ -310,14 +311,6 @@
     "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n7",
     "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:7"
   },
-  "ch03/electioneering_at_the_south_harpers_1868-07-25_page.jpg": {
-    "title": "Harper's Weekly  1868-07-25: Vol 12 Iss 604 (page 3)",
-    "artist": "",
-    "date": "1868-07-25",
-    "licence": "public domain by age (1868)",
-    "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n3",
-    "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:3"
-  },
   "ch05/republican_convention_chicago_1868_leslies_cover.jpg": {
     "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 0)",
     "artist": "",
@@ -325,14 +318,6 @@
     "licence": "public domain by age (1868)",
     "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n0",
     "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:0"
-  },
-  "ch04/impeachment_vote_leslies_1868-06-06_p188_page.jpg": {
-    "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 11)",
-    "artist": "",
-    "date": "1868-06-06",
-    "licence": "public domain by age (1868)",
-    "page": "https://archive.org/details/sim_leslies-weekly_1868-06-06_26_662/page/n11",
-    "source": "iabook:sim_leslies-weekly_1868-06-06_26_662:11"
   },
   "ch04/impeachment_vote_may16_ross_not_guilty_leslies_1868.jpg": {
     "title": "Frank Leslie's Illustrated Newspaper  1868-06-06: Vol 26 Iss 662 (page 11)",
@@ -384,7 +369,8 @@
     "date": "1870",
     "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
     "page": "https://www.loc.gov/item/2017893312/",
-    "source": "loc:2017893312"
+    "source": "loc:2017893312",
+    "note": "left half of the stereo/double negative"
   },
   "ch06/john_r_lynch_mississippi_eminent_colored_men_1884.jpg": {
     "title": "Eminent colored men. Hon. John R. Lynch, of Mississippi / F.F. ; Moss Eng. Co. N.Y.",
@@ -590,14 +576,6 @@
     "licence": "public domain by age (1868)",
     "page": "https://archive.org/details/sim_harpers-weekly_1868-07-25_12_604/page/n8",
     "source": "iabook:sim_harpers-weekly_1868-07-25_12_604:8"
-  },
-  "ch06/nast_two_great_questions_tweed_harpers_1871-08-19_page.jpg": {
-    "title": "Harper's Weekly  1871-08-19: Vol 15 Iss 764 (page 3)",
-    "artist": "",
-    "date": "1871-08-19",
-    "licence": "public domain by age (1871)",
-    "page": "https://archive.org/details/sim_harpers-weekly_1871-08-19_15_764/page/n3",
-    "source": "iabook:sim_harpers-weekly_1871-08-19_15_764:3"
   },
   "ch06/nast_who_stole_the_peoples_money_tweed_ring_1871.jpg": {
     "title": "Harper's Weekly  1871-08-19: Vol 15 Iss 764 (page 3)",
