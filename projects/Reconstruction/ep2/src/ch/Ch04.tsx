@@ -189,7 +189,7 @@ const Steps: React.FC = () => {
 /** Stevens and Bingham before the Senate: the camera comes down to the caption and finds his name. */
 const Cover: React.FC = () => (
   <DocShot src={COVER} size={[2400, 3000]} tag={SRC.cover} filter={PRINT_F} focusAt={S_COVER}
-    keys={[[S_COVER, {x: 1150, y: 1650, z: 0.42}], [t.at('Thaddeus') - 4, {x: 1150, y: 2150, z: 0.62}], [S_STEVENS, {x: 1150, y: 2165, z: 0.65}]]}
+    keys={[[S_COVER, {x: 1120, y: 1700, z: 0.5}], [t.at('Thaddeus') - 4, {x: 1080, y: 2180, z: 0.7}], [S_STEVENS, {x: 1080, y: 2190, z: 0.73}]]}
     over={<Slip text="one of the House's prosecutors" x={1170} y={140} rot={2} size={54} at={t.at('argued')} />}>
     <Swipe lines={COVER_NAME} from={t.at('Thaddeus')} to={t.end('Thaddeus Stevens')} seed="cv" />
   </DocShot>
@@ -293,7 +293,7 @@ const Acquit: React.FC = () => {
 /** Stevens lying in state, guarded by Black soldiers. */
 const State: React.FC = () => (
   <DocShot src={I + 'stevens_lying_in_state_harpers_1868-08-29_cover.jpg'} size={[2113, 3000]} tag={SRC.state} filter={PRINT_F} focusAt={S_STATE}
-    keys={[[S_STATE, {x: 1060, y: 1720, z: 0.56}], [S_GRAVE, {x: 1000, y: 1860, z: 0.66}]]}
+    keys={[[S_STATE, {x: 1080, y: 1880, z: 1.0}], [S_GRAVE, {x: 1060, y: 1920, z: 1.08}]]}
     over={<>
       <Slip text="Aug. 1868" x={130} y={130} rot={-2} at={t.at('summer')} />
       <Slip text="lying in state at the Capitol" x={1210} y={300} rot={2} size={50} at={t.at('He asked')} />

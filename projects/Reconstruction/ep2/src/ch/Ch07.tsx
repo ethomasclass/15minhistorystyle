@@ -233,7 +233,7 @@ const Twist: React.FC = () => {
         <Slip text="a cartoon, April 1870" x={140} y={300} size={56} rot={-2} at={S_TWIST + 4} out={hear + 6} />
         <Slip text="Davis as Iago · Revels as Othello" x={140} y={150} size={54} at={hear + 12} />
         <Slip text="where the story comes from" x={160} y={760} size={56} rot={2} at={t.at('took Jefferson')} />
-        <Slip text="he didn't." x={1180} y={760} size={72} rot={-3} at={t.at('He didn\'t')} coral />
+        <Slip text="he didn't." x={1300} y={150} size={72} rot={-3} at={t.at('He didn\'t')} coral />
       </>}>
       <Swipe lines={TWW_MOOR} from={t.at('took Jefferson')} to={t.end('Davis\'s old seat')} seed="tw" />
     </DocShot>
@@ -244,6 +244,7 @@ const Roster: React.FC = () => (
   <DocShot src={ROSTER} size={ROSTER_S} seed="ros" tag={SRC.roster} focusAt={S_ROSTER}
     keys={[[S_ROSTER, {x: 1330, y: 1240, z: 0.78}], [S_ROSTER + 16, {x: 1330, y: 1236, z: 1.3}], [S_BOARD, {x: 1340, y: 1236, z: 1.38}]]}
     over={<>
+      <Slip text="he didn't." x={1300} y={150} size={72} rot={-3} at={S_ROSTER} out={t.at('the other one')} coral />
       <Slip text="Mississippi: two Senate seats" x={140} y={150} size={58} at={t.at('two Senate seats')} />
       <Slip text="Revels: Albert Brown's old seat" x={150} y={700} size={56} rot={-2} at={t.at('the other one')} />
       <Slip text="Ames: Jefferson Davis's old seat" x={640} y={830} size={60} rot={2} at={t.at('Davis\'s old seat', 2)} coral />
@@ -267,7 +268,8 @@ const Body: React.FC = () => {
     [S_SEN, <Senator key="sen" />],
     [S_TWIST, <Twist key="tw" />],
     [S_ROSTER, <Roster key="r" />],
-    [S_BOARD, <SeriesBoard key="b" ch={7} from={S_BOARD} at={t.at('asking for help')} overlay={<>
+    [S_BOARD, <SeriesBoard key="b" ch={7} from={S_BOARD} at={t.at('asking for help')}
+      cam={[[S_BOARD, 2130, 710, 1.5], [t.at('asking for help') + 50, 1760, 560, 1.1], [t.at('asking for help') + 420, 1760, 560, 1.085]]} overlay={<>
       <Slip text="he'll be the one asking for help" x={160} y={880} size={56} rot={-2} at={t.at('He\'s going')} out={t.at('Quick thing')} coral />
       <Slip text="subscribe ↓" x={1500} y={900} size={54} rot={3} at={t.at('hit subscribe')} />
     </>} />],

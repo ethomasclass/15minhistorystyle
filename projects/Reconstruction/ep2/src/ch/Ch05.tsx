@@ -79,7 +79,7 @@ const Grant: React.FC = () => (
 /** The Republican convention: the camera reads "Grant and Colfax", then drops to the convention. */
 const Convention: React.FC = () => (
   <DocShot src={CONV} size={[2032, 3000]} tag={SRC.conv} filter={PRINT_F} focusAt={S_CONV}
-    keys={[[S_CONV, {x: 560, y: 820, z: 1.05}], [t.at('And in the South') - 4, {x: 600, y: 860, z: 1.1}], [t.at('And in the South') + 14, {x: 1010, y: 2050, z: 0.66}], [S_CHART, {x: 1010, y: 2080, z: 0.7}]]}
+    keys={[[S_CONV, {x: 560, y: 820, z: 1.05}], [t.at('And in the South') - 4, {x: 600, y: 860, z: 1.1}], [t.at('And in the South') + 14, {x: 1040, y: 2060, z: 0.95}], [S_CHART, {x: 1040, y: 2080, z: 1.0}]]}
     over={<>
       <Slip text="Republican" x={1240} y={170} rot={2} at={t.at('Republican')} />
       <Slip text="Black voters helped elect him" x={1000} y={820} rot={-2} at={t.at('Black voters')} coral />

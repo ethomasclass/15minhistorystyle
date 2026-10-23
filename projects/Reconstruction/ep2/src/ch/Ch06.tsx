@@ -272,6 +272,7 @@ const Body: React.FC = () => {
     [S_CRITICS, <Critics key="cr" />],
     [S_TWEED, <Tweed key="tw" />],
     [S_BOARD, <SeriesBoard key="b" ch={6} from={S_BOARD} at={t.at('fit to govern')}
+      cam={[[S_BOARD, 1170, 1570, 1.6], [t.at('fit to govern') + 40, 1000, 1360, 1.2], [t.at('fit to govern') + 300, 1000, 1360, 1.185]]}
       overlay={<Slip text="nobody said New Yorkers weren't fit to govern" x={720} y={880} size={52} rot={-2} at={t.at('Nobody said') + 4} coral />} />],
   ]);
   return (

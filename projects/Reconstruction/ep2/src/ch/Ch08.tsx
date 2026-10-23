@@ -198,7 +198,7 @@ const Tenant: React.FC = () => {
 const Partly: React.FC = () => (
   <PhotoShot src="img/ch08/cr_arkansas_1906.png" size={[900, 918]} a={S10} b={B} w={700} x={620} y={540} rot={-1.5} tag={SRC.ark}>
     <Slip text="a crop that was partly theirs" x={1030} y={470} rot={-2} size={62} at={t.at('growing a crop') - 2} dur={22} />
-    <Loop cx={1235} cy={505} rx={102} ry={46} at={t.at('But that word')} dur={12} width={7} color="#FF6F61" seed={83} tilt={-2} />
+    <Loop cx={1486} cy={488} rx={92} ry={44} at={t.at('But that word')} dur={12} width={7} color="#FF6F61" seed={83} tilt={-2} />
     <Sfx at={t.at('But that word')} src="sfx/marker_tick.wav" volume={0.3} />
   </PhotoShot>
 );

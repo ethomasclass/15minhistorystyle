@@ -149,7 +149,7 @@ export type FarmCues = {
   tenant?: number; rent?: number; rentSplit?: number; own?: number;
 };
 
-const COL_A = 860, COL_B = 1350, BAR = {x: 860, y: 640, w: 870, h: 78};
+const COL_A = 860, COL_B = 1350, BAR = {x: 860, y: 676, w: 870, h: 78};
 
 /** One family's farm, step by step. Everything before frame `from` is already drawn (for the cut into tenant farming). */
 export const Farm: React.FC<{c: FarmCues; from: number}> = ({c, from}) => {
