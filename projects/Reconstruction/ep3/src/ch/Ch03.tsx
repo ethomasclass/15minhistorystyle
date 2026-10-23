@@ -246,7 +246,7 @@ const Titles: React.FC = () => (
 // The board: open on the ✔ by PROTECTION (the header and the check; framed so nothing is sliced: tools/boardfit.mjs), then
 // down to the proclamation and "Klan broken".
 const BOARD_CAM: [number, number, number, number][] = [
-  [S_BOARD, 2430, 210, 2.0], [CHECK + 12, 2420, 200, 2.0], [CHECK + 46, 2840, 1240, 1.55], [CHECK + 300, 2840, 1240, 1.53],
+  [S_BOARD, 2430, 210, 2.0], [CHECK + 12, 2420, 200, 2.0], [CHECK + 46, 2823, 1196, 1.75], [CHECK + 300, 2823, 1198, 1.73],
 ];
 
 const Body: React.FC = () => {

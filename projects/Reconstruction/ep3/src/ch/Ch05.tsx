@@ -65,6 +65,7 @@ const placed = (size: [number, number], h: number, sx: number, a: number, b: num
 const S_EXCH = c("It's called"), S_RUN = c('Businesses'), S_FAR = c("When you're"), S_GRANT = c('Then there were'), S_PROBE = c('The worst');
 const S_BAB = c('One of the men'), S_LIST = c('Reformers'), S_1874 = c('In 1874'), S_LAW = c('Republicans managed'), S_ACT = c('the Civil Rights');
 const S_CASES = c('The Supreme Court'), B = c('More and more');
+/** The pieces land on "tired of solving"; the end shot sits right of Ames's card so nothing is sliced (boardfit). */
 const TIRED = t.at('tired of solving');
 const SONG = t.end('involved') + 6;
 
@@ -201,7 +202,7 @@ const Body: React.FC = () => {
     [S_LAW, <Shackle key="sh" />],
     [S_ACT, <Act key="act" />],
     [S_CASES, <Cases key="cs" />],
-    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} overlay={
+    [B, <SeriesBoard key="b" ch={5} from={B} at={TIRED} cam={[[B, 2850, 310, 1.5], [TIRED + 50, 3000, 300, 1.6], [TIRED + 420, 3030, 305, 1.57]]} overlay={
       <Slip text="subscribe ↓" x={1300} y={880} rot={3} size={60} at={t.at('hit subscribe')} />
     } />],
   ]);

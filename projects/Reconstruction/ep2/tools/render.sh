@@ -1,6 +1,7 @@
 #!/bin/sh
 # Render chapters, join all of them, master once:   tools/render.sh            (every chapter)
 #                                                     tools/render.sh 03 07      (re-render only these, then rejoin)
+# CONC=2 limits the parallel browser tabs (a crowded machine can crash a page).
 # SWANGLE="04" renders those chapters with --gl=swangle (three.js scenes; the default GL fails in a container).
 # Writes out/<SLUG>_1080p.mp4 (the YouTube master, -14 LUFS) and renders/<SLUG>_720p.mp4.
 cd "$(dirname "$0")/.."
@@ -14,7 +15,7 @@ mkdir -p out/ch renders
 for n in ${*:-$ALL}; do
   [ "$n" = none ] && continue
   GL=""; echo " $SWANGLE " | grep -q " $n " && GL=--gl=swangle
-  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER $GL --log=error || exit 1
+  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 $BROWSER $GL ${CONC:+--concurrency=$CONC} --log=error || exit 1
   echo "rendered ch$n"
   rm -rf /tmp/remotion-webpack-bundle-*   # each render leaves a ~500 MB copy of public/ behind
 done

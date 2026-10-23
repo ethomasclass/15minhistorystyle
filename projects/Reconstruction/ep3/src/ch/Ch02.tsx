@@ -234,8 +234,8 @@ const Terror: React.FC = () => (
     </>} />
 );
 
-// The board: the default end shot slices Episode 1–2 pieces on the left, so frame the night piece (and Ep 2's "part 3 →"
-// string ending on it) with nothing cut (tools/boardfit.mjs 2 2560 1180 1.85; close enough that the Ames strip above stays out and the "part 3 →" tag inside the margin).
+// The board: the default end shot slices Episode 1–2 pieces on the left, so frame the night piece and the end of Ep 2's
+// "part 3 →" string close (tools/boardfit.mjs 2 2560 1180 1.85): Ames's strip above stays out, the tag stays inside the margin.
 const AT = t.at('at first');
 const BOARD_CAM: [number, number, number, number][] = [[S_BOARD, 2545, 1175, 2.0], [AT + 40, 2560, 1180, 1.85], [AT + 300, 2560, 1182, 1.83]];
 
