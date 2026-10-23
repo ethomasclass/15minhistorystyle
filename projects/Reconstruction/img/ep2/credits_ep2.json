@@ -409,5 +409,13 @@
     "page": "https://www.loc.gov/item/98685167/",
     "source": "loc:98685167",
     "note": "IIIF region crop of the South (pct:30,40,62,34)"
+  },
+  "ch07/alcorn_scalawag_governor_brady_handy_1870.jpg": {
+    "title": "Alcorn, Hon. James Lusk of Miss.",
+    "artist": "",
+    "date": "1870",
+    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+    "page": "https://www.loc.gov/item/2017893312/",
+    "source": "loc:2017893312"
   }
 }

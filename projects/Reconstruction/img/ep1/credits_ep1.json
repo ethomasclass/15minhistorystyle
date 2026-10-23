@@ -262,5 +262,37 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2010649330/",
     "source": "loc:2010649330"
+  },
+  "ch03/henry_winter_davis_brady_handy.jpg": {
+    "title": "Hon. Henry Winter [?] Davis of Md.",
+    "artist": "",
+    "date": "1855",
+    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+    "page": "https://www.loc.gov/item/2017896176/",
+    "source": "loc:2017896176"
+  },
+  "ch03/lincoln_proclamation_wade_davis_pocket_veto_8jul1864.jpg": {
+    "title": "Plan of restoration of states in rebellion. By the President of the United States of America: a proclamation, July 8, 1864 (Lincoln's proclamation on the Wade-Davis bill he pocket-vetoed; printed broadside)",
+    "artist": "Lincoln, Abraham (Author)",
+    "date": "1864-07-08",
+    "licence": "The Library of Congress believes that many of the papers in The Alfred Whital Stern Collection of Lincolniana collection are in the public domain or have no known copyright restrictions and are free to use and reuse. For example, any songs published in the United States before 1923 are in the public",
+    "page": "https://www.loc.gov/item/scsm000581/",
+    "source": "loc:scsm000581"
+  },
+  "ch03/wade_davis_bill_text_printed_1864_p2.jpg": {
+    "title": "Same 1864 printing, page 2: 'Abraham Lincoln. By the President: William H. Seward' and the start of 'A Bill to guarantee to certain States whose governments have been usurped or overthrown, a republican form of government' (the Wade-Davis bill)",
+    "artist": "Lincoln, Abraham (Author)",
+    "date": "1864-07-08",
+    "licence": "The Library of Congress believes that many of the papers in The Alfred Whital Stern Collection of Lincolniana collection are in the public domain or have no known copyright restrictions and are free to use and reuse. For example, any songs published in the United States before 1923 are in the public",
+    "page": "https://www.loc.gov/item/scsm000581/",
+    "source": "loc:scsm000581"
+  },
+  "ch03/wade_davis_bill_text_printed_1864_p3_majority.jpg": {
+    "title": "Same 1864 printing, page 3: Wade-Davis bill sections 3-5 (enrolment of white male citizens; convention called only when a majority take the oath)",
+    "artist": "Lincoln, Abraham (Author)",
+    "date": "1864-07-08",
+    "licence": "The Library of Congress believes that many of the papers in The Alfred Whital Stern Collection of Lincolniana collection are in the public domain or have no known copyright restrictions and are free to use and reuse. For example, any songs published in the United States before 1923 are in the public",
+    "page": "https://www.loc.gov/item/scsm000581/",
+    "source": "loc:scsm000581"
   }
 }
