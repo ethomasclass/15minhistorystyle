@@ -818,5 +818,12 @@
   "licence": "No known restrictions, Library of Congress",
   "page": "https://www.loc.gov/item/2001705881/",
   "source": "loc:2001705881"
+ },
+ "ch01/old_capitol_jackson_habs_1936.jpg": {
+  "title": "Old State Capitol, Jackson, Mississippi: front (west), Historic American Buildings Survey MS-56, photo 1 (James Butters, May 12, 1936)",
+  "date": "1936-05-12",
+  "source": "loc:ms0214 (HABS MS-56)",
+  "url": "https://www.loc.gov/item/ms0214/",
+  "license": "No known restrictions (U.S. Government work)"
  }
 }

@@ -9,6 +9,11 @@ const m = req(out);
 const SIZE = {drop: [380, 300], slap: [190, 175], stamp: [360, 60], tape: [120, 40], slide: [360, 40], fade: [160, 30]};
 const ch = Number(process.argv[2]);
 const rects = m.PIECES.filter((p) => p.ch <= ch).map((p) => ({id: p.id, r: [p.x, p.y, p.x + (p.wh ?? SIZE[p.kind])[0], p.y + (p.wh ?? SIZE[p.kind])[1]]}));
+// string labels ("therefore", "✕") count as pieces too: about 17 px a character plus padding, centred on their point
+for (const t of m.THREADS.filter((t) => t.ch <= ch && t.tag)) {
+  const k = t.tagT ?? 0.5, x = t.a[0] + (t.b[0] - t.a[0]) * k, y = t.a[1] + (t.b[1] - t.a[1]) * k, w = t.tag.length * 17 + 30;
+  rects.push({id: 'tag:' + t.tag, r: [x - w / 2, y - 24, x + w / 2, y + 24]});
+}
 const [cx, cy, z] = process.argv[3] === 'search' ? [0, 0, 1] : process.argv.slice(3).map(Number);
 const hw = 960 / z, hh = 540 / z, v = [cx - hw, cy - hh, cx + hw, cy + hh];
 for (const {id, r} of rects) {

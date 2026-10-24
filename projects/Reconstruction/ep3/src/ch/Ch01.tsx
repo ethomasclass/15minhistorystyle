@@ -6,7 +6,7 @@
 // and Mississippi (1874); the Journal of the Mississippi Constitutional Convention (1868), p. 5; McPherson, Political
 // History (1871), p. 558; Dinwiddie Colored Quartet, "Steal Away" (Victor, 1902, LOC National Jukebox).
 import React from 'react';
-import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch01_cold_open.words.json';
 import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
@@ -15,6 +15,7 @@ import {SeriesBoard} from '../kit/ep3board';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
 import {type Box, DocShot, PhotoShot, PRINT_F, Slip, Spot, Swipe} from '../kit/rc';
 import {makeTimeline, type Narration, useScene} from '../kit/shell';
+import {Lamplight, LampFigure, ScenePlan} from './ch01_scene';
 import {DATES, SUBTITLE} from '../project';
 
 const N = words as Narration;
@@ -59,13 +60,14 @@ const SRC = {
   title: 'Mississippi in 1875: Report of the Select Committee, with the Testimony (1876), title page · Internet Archive',
   map: "Asher & Adams' Louisiana and Mississippi, 1874 (detail: Hinds County) · Mississippi Dept. of Archives and History, via Wikimedia Commons",
   roll: 'Journal of the Mississippi Constitutional Convention, 1868, p. 5 · Internet Archive',
+  capitol: 'Old State Capitol, Jackson, where the legislature met (photographed 1936, HABS MS-56) · Library of Congress',
   smith: 'Blacksmithing, Agricultural and Mechanical College, Greensboro, N.C., 1899 · Library of Congress',
   p558: 'Mississippi Senate, Jan. 15, 1870, in McPherson, Political History of … Reconstruction (1871), p. 558 · Internet Archive',
   troops: "The withdrawal of the federal troops from the State House, New Orleans, April 24, 1877, Frank Leslie's · Library of Congress",
 };
 
 // ---------------------------------------------------------------------------------------------------- the cuts
-const S_SHOT = cut('someone fired'), S_PLACE = cut('It was the'), S_NAME = cut('The senator was'), S_SMITH = cut('The blacksmith');
+const S_SHOT = cut('As their glasses'), S_PLACE = cut('It was the'), S_NAME = cut('The senator was'), S_SMITH = cut('The blacksmith'), S_CAP = cut('Then a lawmaker');
 const S_WIFE = cut('Months later'), S_SENATE = cut('testified under'), S_Q = cut('When did he'), S_TOLD = cut('He was shot');
 const S_AIR = cut('because in her'), S_STREET = cut('They carried'), S_MIN = cut('Before they did'), S_FIVE = cut('Five years earlier');
 const S_QUESTION = cut('So how does'), S_BOARD = cut("We'll come back");
@@ -73,19 +75,16 @@ const S_QUESTION = cut('So how does'), S_BOARD = cut("We'll come back");
 /** "A man talked a state senator into a Christmas drink": the page, the line about the Christmas treat. */
 const Treat: React.FC = () => (
   <DocShot src={P437} size={PAGE_S} seed="p437" tag={SRC.report(437)}
-    keys={[[0, {x: 860, y: 2240, z: 0.92}], [S_SHOT, {x: 850, y: 2290, z: 1.02}]]}>
+    keys={[[0, {x: 860, y: 2240, z: 0.92}], [S_SHOT, {x: 850, y: 2290, z: 1.02}]]} over={<Lamplight x={82} y={70} />}>
     <Spot size={PAGE_S} boxes={[TREAT]} at={t.at('Christmas') - 4} id="trt" dark={0.55} />
     <Swipe lines={[TREAT]} from={t.at('into a')} to={t.end('drink')} seed="trt" />
   </DocShot>
 );
 
-/** "someone fired through the window": nothing shown but the words. */
+/** "As their glasses touched, someone fired through the window": the store drawn in section, told, never shown. */
 const Shot: React.FC = () => (
-  <AbsoluteFill>
-    <DarkPaper />
-    <Slip text="as their glasses touched:" x={300} y={360} size={58} at={S_SHOT + 2} />
-    <Slip text="a shot, through the window" x={360} y={490} size={64} rot={2} at={t.at('fired')} />
-  </AbsoluteFill>
+  <ScenePlan mode="shot" c={{a: S_SHOT, out: S_PLACE, glasses: t.at('glasses'), touch: t.end('touched'), fired: t.at('fired'),
+    cam: [[S_SHOT, 960, 560, 1.0], [t.at('glasses'), 950, 610, 1.12], [t.at('fired'), 960, 620, 1.18], [S_PLACE, 965, 630, 1.24]]}} />
 );
 
 /** Christmas, 1875, Clinton: the town on the railroad west of Jackson. */
@@ -111,11 +110,18 @@ const Name: React.FC = () => (
 
 /** "The blacksmith from the last episode": the labelled stand-in, never him. */
 const Smith: React.FC = () => (
-  <PhotoShot src="img/ep2/cr_blacksmiths.png" size={[640, 473]} a={S_SMITH} b={S_WIFE} w={720} x={700} y={540} tag={SRC.smith}>
+  <PhotoShot src="img/ep2/cr_blacksmiths.png" size={[640, 473]} a={S_SMITH} b={S_CAP} w={720} x={700} y={540} tag={SRC.smith}>
     <Slip text="the blacksmith (Episode 2)" x={1130} y={250} size={52} at={t.at('The blacksmith')} />
     <Slip text="born enslaved" x={1170} y={380} size={56} rot={2} at={t.at('Born enslaved')} />
-    <Slip text="then a lawmaker" x={1150} y={510} size={56} at={t.at('Then a lawmaker')} />
     <Slip text="(not him: no photograph of him is known)" x={1000} y={840} size={40} rot={1} at={t.at('blacksmith') + 10} />
+  </PhotoShot>
+);
+
+/** "Then a lawmaker": the Old Capitol in Jackson, where the legislature met. */
+const Capitol: React.FC = () => (
+  <PhotoShot src="img/wall/cr_capitol.png" size={[1100, 977]} a={S_CAP} b={S_WIFE} w={900} x={760} y={540} rot={-1.5} tag={SRC.capitol}>
+    <Slip text="then a lawmaker" x={1260} y={300} size={60} at={t.at('Then a lawmaker')} coral />
+    <Slip text="the state senate, Jackson" x={1280} y={430} size={50} rot={2} at={t.at('Then a lawmaker') + 8} />
   </PhotoShot>
 );
 
@@ -123,7 +129,7 @@ const Smith: React.FC = () => (
 const Wife: React.FC = () => (
   <DocShot src={P435} size={PAGE_S} seed="p435" tag={SRC.report(435)}
     keys={[[S_WIFE, {x: 830, y: 1120, z: 0.98}], [S_SENATE, {x: 820, y: 1170, z: 1.05}]]}
-    over={<Slip text="June 20, 1876" x={150} y={150} size={56} at={t.at('Months later')} />}>
+    over={<><Lamplight x={85} y={20} /><Slip text="June 20, 1876" x={150} y={150} size={56} at={t.at('Months later')} /></>}>
     <Swipe lines={[NAME]} from={t.at('Margaret')} to={t.end('Caldwell', 2)} seed="nm" />
     <Swipe lines={[SWORN]} from={t.end('Caldwell', 2) + 2} to={t.at('testified') + 2} seed="sw" />
   </DocShot>
@@ -139,49 +145,46 @@ const Senate: React.FC = () => (
 /** The transcript: "When did he die?" "Thursday night, in the Christmas." */
 const Question: React.FC = () => (
   <DocShot src={P435} size={PAGE_S} seed="p435" tag={SRC.report(435)}
-    keys={[[S_Q, {x: 850, y: 1520, z: 1.04}], [S_TOLD, {x: 850, y: 1560, z: 1.1}]]}>
+    keys={[[S_Q, {x: 850, y: 1520, z: 1.04}], [S_TOLD, {x: 850, y: 1560, z: 1.1}]]} over={<Lamplight x={88} y={35} />}>
     <Spot size={PAGE_S} boxes={[WHEN, THURSDAY]} at={S_Q} id="q" dark={0.6} />
     <Swipe lines={[WHEN]} from={t.at('When did')} to={t.end('die')} seed="wh" />
     <Swipe lines={[THURSDAY]} from={t.at('Thursday')} to={t.end('Christmas', 3)} seed="th" />
   </DocShot>
 );
 
-/** What she told them, set down plainly: no picture. */
+/** What she told them, on the plan: where he fell, the call nobody answered, the way out. */
 const Told: React.FC = () => (
-  <AbsoluteFill>
-    <DarkPaper />
-    <Slip text="shot in a store's cellar" x={250} y={200} size={58} at={t.at('He was shot')} />
-    <Slip text="he called for help" x={300} y={330} size={58} rot={2} at={t.at('He called')} />
-    <Slip text="nobody came" x={260} y={460} size={58} at={t.at('Nobody came')} />
-    <Slip text="he asked to be carried outside" x={320} y={590} size={58} rot={2} at={t.at('He asked')} />
-  </AbsoluteFill>
+  <ScenePlan mode="cellar" c={{a: S_TOLD, out: S_AIR, shot: t.at('He was shot'), called: t.at('He called'), nobody: t.at('Nobody came'), asked: t.at('He asked'),
+    cam: [[S_TOLD, 810, 700, 1.3], [t.at('He called'), 800, 700, 1.24], [t.at('He asked'), 800, 640, 1.08], [S_AIR, 840, 620, 1.04]]}} />
 );
 
 /** "…in her words, he 'wanted to die in the open air…'" */
 const Air: React.FC = () => (
   <DocShot src={P438} size={PAGE_S} seed="p438" tag={SRC.report(438)}
     keys={[[S_AIR, {x: 900, y: 290, z: 0.98}], [S_STREET, {x: 900, y: 300, z: 1.05}]]}
-    over={<Slip text="in her words" x={150} y={150} size={54} at={t.at('in her words')} />}>
+    over={<><Lamplight x={85} y={25} /><Slip text="in her words" x={150} y={150} size={54} at={t.at('in her words')} /></>}>
     <Spot size={PAGE_S} boxes={AIR} at={t.at('wanted') - 4} id="air" dark={0.6} />
     <Swipe lines={AIR} from={t.at('wanted')} to={t.end('closed up')} seed="air" />
   </DocShot>
 );
 
-/** "They carried him into the street…": words only. */
+/** "They carried him into the street…": the plan again, the path out into the street, the crowd closing in. */
 const Street: React.FC = () => (
-  <AbsoluteFill>
-    <DarkPaper />
-    <Slip text="carried into the street" x={300} y={300} size={58} at={t.at('They carried')} />
-    <Slip text="a crowd of armed men" x={340} y={430} size={58} rot={2} at={t.at('a crowd')} />
-    <Slip text="shot him again, many times" x={300} y={560} size={58} at={t.at('shot him again')} />
-  </AbsoluteFill>
+  <ScenePlan mode="street" c={{a: S_STREET, out: S_MIN, street: t.at('They carried'), crowd: t.at('a crowd'), again: t.at('shot him again'),
+    cam: [[S_STREET, 1000, 600, 1.0], [t.at('a crowd'), 1200, 610, 1.06], [S_MIN, 1260, 620, 1.14]]}} />
 );
 
-/** His last words, as a minister who was there told them to her, then the held beat. */
+/** His last words, as a minister who was there told them to her: the page to the right, an anonymous figure in lamplight
+ *  to the left (no likeness: he has no known photograph), then the held beat. */
+const mx = (z: number) => 900 - 290 / z;   // keeps the quoted lines in the right two thirds of the frame
 const Minister: React.FC = () => (
   <DocShot src={P438} size={PAGE_S} seed="p438" tag={SRC.report(438)}
-    keys={[[S_MIN, {x: 900, y: 1280, z: 0.95}], [t.at('Remember'), {x: 900, y: 1310, z: 1.04}], [SPLIT, {x: 870, y: 1330, z: 1.1}], [S_FIVE, {x: 860, y: 1335, z: 1.2}]]}
-    over={<Slip text="according to a minister who was there" x={150} y={150} size={52} at={t.at('according to')} />}>
+    keys={[[S_MIN, {x: mx(0.66), y: 1290, z: 0.66}], [t.at('Remember'), {x: mx(0.7), y: 1310, z: 0.7}], [SPLIT, {x: mx(0.74), y: 1320, z: 0.74}], [S_FIVE, {x: mx(0.8), y: 1325, z: 0.8}]]}
+    over={<>
+      <Lamplight x={70} y={45} />
+      <LampFigure at={S_MIN + 4} x={330} y={330} h={600} />
+      <Slip text="according to a minister who was there" x={130} y={130} size={46} at={t.at('according to')} />
+    </>}>
     <Spot size={PAGE_S} boxes={[...REMEMBER, COWARD]} at={t.at('Remember') - 4} id="rm" dark={0.72} />
     <Swipe lines={REMEMBER} from={t.at('Remember')} to={t.end('brave man')} seed="rm" color="#2FE0C4" />
     <Swipe lines={[COWARD]} from={t.at('Never say')} to={t.end('a coward')} seed="cw" />
@@ -198,13 +201,23 @@ const Five: React.FC = () => (
   </DocShot>
 );
 
-/** The question. */
+/** The question: from that (the capitol, 1870) to this (the street, 1875). */
+const Card: React.FC<{src: string; x: number; y: number; w: number; rot: number; at: number; dim?: boolean}> = ({src, x, y, w, rot, at, dim}) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const k = interpolate(f, [at, at + 8], [0, 1], clamp);
+  return <Img src={staticFile(src)} style={{position: 'absolute', left: x, top: y + 20 * (1 - k), width: w, opacity: k, transform: `rotate(${rot}deg)`,
+    filter: `grayscale(1) ${dim ? 'brightness(0.7)' : ''} drop-shadow(0 14px 22px rgba(0,0,0,0.7))`}} />;
+};
 const Why: React.FC = () => (
   <AbsoluteFill>
     <DarkPaper />
-    <Slip text="1870: elected to the state senate" x={220} y={190} size={58} at={t.at('So how')} />
-    <Slip text="1875: shot in the street" x={300} y={320} size={58} rot={2} at={t.at('to this')} />
-    <Highlight text="WHY DID NOBODY STOP IT?" x={250} y={560} size={96} at={t.at('why did nobody')} seed={41} rot={-2} />
+    <Card src="img/wall/cr_capitol.png" x={150} y={150} w={620} rot={-2} at={t.at('So how')} />
+    <Slip text="1870: elected to the state senate" x={170} y={720} size={46} at={t.at('So how') + 4} />
+    <Card src="img/wall/cr_coward.png" x={1000} y={300} w={760} rot={1.5} at={t.at('to this')} />
+    <Slip text="1875: shot in the street" x={1080} y={520} size={46} rot={2} at={t.at('to this') + 4} />
+    <Highlight text="WHY DID NOBODY STOP IT?" x={330} y={840} size={84} at={t.at('why did nobody')} seed={41} rot={-2} />
+    <Tag text="Old State Capitol, Jackson (HABS, 1936) · Mississippi in 1875 (Senate report, 1876), p. 438 · Library of Congress, Internet Archive" />
   </AbsoluteFill>
 );
 
@@ -237,6 +250,7 @@ const Body: React.FC = () => {
     [S_PLACE, <Place key="pl" />],
     [S_NAME, <Name key="nm" />],
     [S_SMITH, <Smith key="sm" />],
+    [S_CAP, <Capitol key="cp" />],
     [S_WIFE, <Wife key="wf" />],
     [S_SENATE, <Senate key="se" />],
     [S_Q, <Question key="q" />],
@@ -247,7 +261,7 @@ const Body: React.FC = () => {
     [S_FIVE, <Five key="fv" />],
     [S_QUESTION, <Why key="wy" />],
     [S_BOARD, <SeriesBoard key="b" ch={1} from={S_BOARD} at={t.at('kept asking')}
-      cam={[[S_BOARD, 720, 2085, 1.6], [t.at('kept asking') + 24, 700, 2070, 1.45], [t.at('why did they') + 6, 700, 2070, 1.42], [t.at('why did they') + 40, 1065, 1765, 0.875], [END, 1065, 1765, 0.86]]}
+      cam={[[S_BOARD, 720, 2085, 1.6], [t.at('kept asking') + 24, 700, 2070, 1.45], [t.at('why did they') + 6, 700, 2070, 1.42], [t.at('why did they') + 40, 1040, 1765, 0.85], [END, 1040, 1765, 0.845]]}
       overlay={<Slip text="why did they kill him?" x={1120} y={850} size={56} rot={2} at={t.at('why did they')} />} />],
   ];
   let scene = useScene(shots);
@@ -258,7 +272,7 @@ const Body: React.FC = () => {
   return (
     <AbsoluteFill style={{background: '#000'}}>
       <AbsoluteFill style={{opacity: frame < END ? fadeOut : 1}}>{scene}</AbsoluteFill>
-      {frame < END && <Finish vignette={0.3} />}
+      {frame < END && <Finish vignette={0.42} />}
       {/* the narration, paused for the held beat after "…killed a coward." */}
       <Sequence from={0} durationInFrames={SPLIT} layout="none"><Audio src={staticFile('audio/ch01_cold_open.wav')} /></Sequence>
       <Sequence from={SPLIT + GAP} layout="none"><Audio src={staticFile('audio/ch01_cold_open.wav')} startFrom={SPLIT} /></Sequence>
