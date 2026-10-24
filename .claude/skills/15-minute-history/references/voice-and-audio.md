@@ -49,6 +49,10 @@ tools/voice_all.sh 04 07               # only these chapters
 Each chapter becomes `public/audio/chNN_slug.wav` + `chNN_slug.words.json` (word-level timings from ElevenLabs
 forced alignment). Voice model: `eleven_v3` (the default in `tools/voice.py`).
 
+Before the real voice exists, `tools/scratch_voice.py script.txt NAME --model <piper .onnx>` makes a scratch narration
+with real word timings (a local Piper voice), so scenes can be built and timed; every anchor re-times itself when the
+ElevenLabs voice replaces it. Never ship it.
+
 After voicing:
 1. Make a narration preview the user can listen to straight through (join the WAVs with ffmpeg into one MP3,
    e.g. `script/<Slug>_narration_preview.mp3`) and send it.
@@ -57,15 +61,18 @@ After voicing:
 
 ## 3. Pace settings (locked)
 
-Matched to the channel's earlier videos; don't change them without the user asking.
+**No speed-up** (the user, Oct 2026, Reconstruction): the voice plays at its own speed. The earlier `VOICE_STRETCH`
+1.15 (and 1.08 for heavy chapters) changed the tempo and the user heard the pitch change too, so every chapter now runs at
+`VOICE_STRETCH=1.0`, even if the video runs longer. Only the pauses are trimmed.
 
 | Chapters | VOICE_STRETCH | VOICE_MAX_PAUSE | VOICE_SENT_GAP | VOICE_PARA_GAP |
 |---|---|---|---|---|
-| Normal | 1.15 | 0.25 | 0 | 0.35 |
-| Heavy chapter and the ending (`HEAVY=`) | 1.08 | 0.35 | 0.05 | 0.55 |
+| Normal | 1.0 | 0.25 | 0 | 0.35 |
+| Heavy chapter and the ending (`HEAVY=`) | 1.0 | 0.35 | 0.05 | 0.55 |
 
-`STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
-The result is about 185 words a minute for normal chapters.
+`STRETCH` is a local tempo change (>1 is faster): leave it at 1.0. `MAX_PAUSE` shortens the voice's own pauses.
+Re-voicing at a new stretch costs nothing: the ElevenLabs responses are cached by text and voice settings, and the
+stretch is applied afterwards.
 
 ## 4. Pronunciation
 
@@ -80,7 +87,7 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 ## 5. Re-voicing one chapter
 
 ```sh
-VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.15 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
+VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.0 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
 python3 tools/anchors.py ch04_corrupt_bargain --src src/ch/Ch04.tsx
 ```
 
@@ -89,7 +96,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 6. Music
 
-- **Reuse first.** Every cue the channel has made (38, deduplicated, with prompts, lengths, loudness and where each
+- **Reuse first.** Every cue the channel has made (46, deduplicated, with prompts, lengths, loudness and where each
   was used) is in the style repo's music library: `music/README.md` and `music/cues/` at the root of the
   `15minhistorystyle` repo (this skill's `../../../music/`). Copy cues into `public/music/` keeping their prefix
   (`r_dix.mp3`). Write a `script/MUSIC.md` table for the new video: chapter, cue, why it fits, and a "gaps" list.
@@ -98,9 +105,35 @@ shifts. Re-check stills for that chapter after re-voicing.
   library with a new prefix.
 - **Suno** gives the best new cues (the user runs it by hand): Custom mode, Instrumental on, and the Styles and
   Exclude lines in the library's README.
-- **Generate** with `tools/music_eleven.py <name>` after adding a prompt to `CUES` (see the examples there:
-  instrumental, no vocals, room for a narrator, period instruments, length in ms). Music costs roughly 850 credits
-  a minute, so keep cues short and reuse them.
+- **Generate with ElevenLabs** (`tools/music_eleven.py <name>`; how Reconstruction's `rc_` cues were made):
+  1. The key is the narration key, in `.env`. Check the budget first (`GET /v1/user/subscription`); music costs
+     roughly 850 credits a minute, so make 60–80 s cues and reuse them across chapters.
+  2. Add a prompt to `CUES`: the moment and its period in plain words; period instruments by name (fretless banjo,
+     fiddle, saxhorn brass band, reed harmonium, parlor piano, field drum), never a named song or artist; how it moves
+     over its length; how it ends (the tail gets lifted, so ask for an ending worth hearing); then the `TAIL` suffix
+     (instrumental, no choir, restrained, room for a narrator); and the length in ms. The docstring has the recipe and
+     the `rc_` prompts are worked examples.
+  3. Run it, measure the loudness (`ffmpeg -i public/music/x.mp3 -af loudnorm=print_format=summary -f null -`) and set
+     the bed from it: ElevenLabs cues come out at −16 to −19.5 LUFS, so they run at about 0.17–0.24 where a −12 LUFS
+     cue runs at 0.13. Listen to the first 30–40 s, which is what most chapters use.
+  4. Add the cue to the music library (`music/cues/`, a row in `music/README.md`, an entry in `music/catalog.json` with
+     its prompt) under the video's prefix. Commit the `.mp3`; the `.wav` copy is git-ignored.
+- **Generate locally with ACE-Step 1.5** (`tools/music_acestep.py`; free and unlimited, the user's pick for
+  text-to-music after the Reconstruction test): an open-source model run on your own machine (MIT; outputs allowed
+  commercially). Setup, the CPU fix and the prompt style are in the tool's docstring. Captions are comma-separated:
+  period and instruments first, then mood and how it moves, then "documentary underscore, restrained, instrumental";
+  give `bpm`, key and time signature explicitly. On a GPU or Apple silicon a cue takes seconds; on a CPU-only cloud
+  session about 4 minutes per 60 s cue. Its "cover" mode did not keep a melody in the CPU test, so use it for
+  text-to-music, not for turning a recording into a new arrangement (yet).
+- **Real period recordings** (`tools/jukebox.py`; how Reconstruction got its spirituals, band medleys and Foster):
+  `search "roll jordan roll"` lists Library of Congress National Jukebox records (1900–1925) with dates and performers;
+  `get <jukebox-id> public/music/period/<name>.mp3` downloads one and writes its credit to `public/music/credits.json`.
+  Records published before 1926 are US public domain (the tool refuses later ones). Sung records never go under the
+  narration: use them in a chapter's open, its tail and the ending; instrumentals can sit low under it. Normalise each
+  to about −16 LUFS first (they range −15 to −31). Leave out "Dixie" and minstrel-era records (mock dialect), and listen
+  to any "Southern melodies" medley before using it. Credit the performers in the description ("Swing Low, Sweet
+  Chariot: Fisk University Jubilee Singers, 1909, Library of Congress"); a reissue label's Content ID claim is disputed
+  with the LOC link and the recording date. Worked example: `projects/Reconstruction/MUSIC.md` in the style repo.
 - **Levels:** music beds 0.13–0.17 under narration, with 15–20-frame fades (`ChapterShell` does this). Cold open
   0.17, dipping at the end. Title sting 0.45 (already wired into the intro). The heavy chapter gets a grave cue or
   near-silence. Generators master differently (Lyria about −12 LUFS, Suno about −15, ElevenLabs down to −19.6), so

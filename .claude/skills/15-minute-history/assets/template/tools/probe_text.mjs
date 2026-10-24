@@ -1,5 +1,6 @@
 // Text-fit check: renders every Nth frame of each composition with the probe on and prints any text
 // that crosses the frame edge.   node tools/probe_text.mjs Ch01,Ch02 [everyNth=10]
+// SAFE=96 also flags titles and notes (24 px and up) inside the outer 96 px (5% of the width): title-safe.
 import {bundle} from '@remotion/bundler';
 import {renderFrames, selectComposition} from '@remotion/renderer';
 import fs from 'node:fs';
@@ -8,7 +9,7 @@ const ids = process.argv[2].split(',');
 const nth = Number(process.argv[3] || 10);
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts')});
 const browserExecutable = process.env.REMOTION_CHROME || null;
-const inputProps = {probe: true};
+const inputProps = {probe: true, safe: Number(process.env.SAFE || 0)};
 const hits = [];
 const counts = {};
 for (const id of ids) {
@@ -23,7 +24,7 @@ for (const id of ids) {
 // Collapse repeats of the same text into one line with its frame range.
 // Text wholly outside the frame is never seen (e.g. a map label the camera has panned past); only partial cuts count.
 const seen = new Map();
-for (const h of hits.filter((h) => h.r > 0 && h.l < 1920 && h.b > 0 && h.t < 1080)) {
+for (const h of hits.filter((h) => h.r > 0 && h.l < 1920 && h.b > 0 && h.t < 1080)) {  // (with SAFE, 'over' is past the margin)
   const k = h.id + '|' + h.text;
   const s = seen.get(k);
   if (!s) seen.set(k, {...h, f0: h.f, f1: h.f, maxOver: h.over});

@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History so far: **41 cues, about 75 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History so far: **54 cues, about 88 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -12,9 +12,13 @@ prefix says which video the cue was made for:
 | `a_` | *The Man Who Couldn't Sit Still* (Ambrose Bierce) | Suno |
 | `g_` | *Grip Tighter: Slavery and the Cotton South* | Suno |
 | `m_` | *The Exact Spot* (Texas and the Mexican-American War) | Suno |
+| `rc_` | *Reconstruction* (three-part series) | ElevenLabs Music (`music_eleven.py`); `rc_jubilee`, `rc_resolve`, `rc_backroom`, `rc_reckoning` from ACE-Step 1.5 (`music_acestep.py`) |
+| `cw_` | Any Civil War video (made alongside *Reconstruction*) | ACE-Step 1.5 (`music_acestep.py`) |
 
 *Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *The Exact Spot* reused 10 and added three Suno cues (`m_`). *Dressed to Kill* made none; it reused 12. Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
+
+**Real period recordings.** For songs people actually sang in the 1850s–60s, public-domain records of 1902–1916 from the LOC National Jukebox are in `projects/Reconstruction/music/period/` (spirituals by the Fisk Jubilee Singers, Civil War band and fife-and-drum medleys, Foster). See `projects/Reconstruction/MUSIC.md` for sources, rights and what to leave out.
 
 **Reuse first.** Before generating anything, find a cue below for each chapter and write the video's `script/MUSIC.md`
 (chapter, cue, why it fits, gaps). Generate only for real gaps, then add the new cue here with a new prefix (see the end of this page).
@@ -64,6 +68,8 @@ prefix says which video the cue was made for:
 | [`r_temperance`](cues/r_temperance.mp3) | 1:01 | -12.6 | Comic, bouncy, tipsy honky-tonk piano + fiddle + tuba; halfway turns hopeful/determined, ends warm and upbeat. |  | Fix Everything, The Man Who Couldn't Sit Still, Say It Ain't So |
 | [`j_good_feelings`](cues/j_good_feelings.mp3) | 1:30 | -19.6 | Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme). | Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck, Dressed to Kill |
 | [`j_campaign`](cues/j_campaign.mp3) | 1:40 | -14.5 | Rowdy, energetic 1820s campaign march: fife + field drum, bright brass band, banjo, fiddle, hand claps, crowd feel; playful and a bit chaotic. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won |
+| [`rc_parlor`](cues/rc_parlor.mp3) | 1:10 | -16.7 | 1870s Northern parlor: polite, slightly out-of-tune piano and harmonium waltz that sours under a low cello note while carrying on; ends on a wrong chord. | The souring in the second half. | Reconstruction |
+| [`rc_backroom`](cues/rc_backroom.mp3) ⚠ | 1:00 | -20.1 | 1860s Washington backroom deal: plucked pizzicato, a fussy upright parlor piano and low clarinet; sly and wry, a little tension. | Lively all the way through; the bright piano bursts around 0:18 and 0:50. | — |
 
 ### Warm, hopeful and dignified
 
@@ -75,6 +81,10 @@ prefix says which video the cue was made for:
 | [`r_revival`](cues/r_revival.mp3) | 1:31 | -12.1 | 1820s camp-meeting revival: stomping/clapping 3/4, droning fiddle, shape-note open fifths, building fervor, settles to a warm glow. |  | Fix Everything |
 | [`g_founding`](cues/g_founding.mp3) | 0:55 | -15.5 | Early American chamber (1790s): harpsichord + string quartet, slow minuet, stately, quietly uncertain; darkens into a held low cello note. |  | Grip Tighter, Good Luck |
 | [`m_frontier`](cues/m_frontier.mp3) | 1:09 | -15.3 | Frontier theme: nylon guitar and solo fiddle trading a folk melody, guitarrón, hand drum; hopeful and open, then low strings bring unease in the second half. | Hopeful opening for arrivals; the turn toward unease in the second half (The Exact Spot lands it on 'a little too well'). | The Exact Spot |
+| [`rc_jubilo`](cues/rc_jubilo.mp3) | 1:20 | -19.4 | Hopeful but fragile: fretless banjo and fiddle trade a plain folk tune; second half thins to fiddle with a hint of doubt; open unresolved end. | Quietly joyful first half; the doubt in the second half. | Reconstruction |
+| [`cw_camp_night`](cues/cw_camp_night.mp3) ⚠ | 1:00 | -18.1 | Soldiers' camp at night: a lonely fiddle playing a slow homesick waltz (3/4) over soft guitar and harmonica; tender and weary. | Steady all the way through; good under a long passage. | — |
+| [`rc_jubilee`](cues/rc_jubilee.mp3) ⚠ | 1:00 | -21.9 | Freedom celebration, 1865: fretless banjo and fiddle with hand claps and stomps over upright bass; warm, hopeful, plain folk tune. | Even all the way through, more open joy than rc_jubilo (which turns doubtful). | — |
+| [`rc_resolve`](cues/rc_resolve.mp3) ⚠ | 1:00 | -20.1 | Dignified slow hymn on reed harmonium and solo cello: quiet determination rising to a restrained proud swell, then settling. | The swell around 0:20–0:45. | — |
 
 ### Grave (heavy chapters)
 
@@ -87,6 +97,8 @@ prefix says which video the cue was made for:
 | [`a_civil_war`](cues/a_civil_war.mp3) | 1:25 | -15.4 | Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello. | Somber second half is the reusable grave part. | The Man Who Couldn't Sit Still, Grip Tighter |
 | [`w_frontier`](cues/w_frontier.mp3) | 1:36 | -12.0 | Tecumseh / Tenskwatawa: dignified, slow solo cello + low wooden flute, heartbeat drum; urgency/alarm mid-cue (dawn battle); grieving burnt-out quiet. |  | The War Nobody Won, King Andrew |
 | [`m_lament`](cues/m_lament.mp3) | 1:09 | -16.3 | Borderlands lament: slow nylon-guitar arpeggios and low cello, one distant muted trumpet phrase mid-cue, long silences; humane, no swell, ends unresolved. |  | The Exact Spot |
+| [`rc_brass_dirge`](cues/rc_brass_dirge.mp3) | 1:10 | -11.0 | Distant 1860s saxhorn band and muffled drum, slow funeral march, one restrained swell, fades to near-silence. | The one swell in the middle; the near-silence at the end. | Reconstruction |
+| [`cw_aftermath`](cues/cw_aftermath.mp3) ⚠ | 1:00 | -18.3 | After a battle: slow mournful low cello and a distant muted brass chorale over a soft heartbeat drum; grave and humane. | Starts from near-silence; the music comes in at ~0:08, so start it there or under a pause. | — |
 
 ### Tension, dread and dark
 
@@ -99,6 +111,9 @@ prefix says which video the cue was made for:
 | [`g_cotton_engine`](cues/g_cotton_engine.mp3) | 1:45 | -14.9 | Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier. |  | Grip Tighter |
 | [`r_nativism`](cues/r_nativism.mp3) | 1:48 | -12.3 | Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march. | Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories. | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
 | [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter, The Exact Spot |
+| [`rc_codes`](cues/rc_codes.mp3) | 1:10 | -16.0 | Grave, cold, legalistic: pocket-watch tick, walking pizzicato, reed harmonium, a trapped fiddle line circling the same notes; held dark chord. | The slow tightening; the held dark chord at the end. | Reconstruction |
+| [`rc_night_riders`](cues/rc_night_riders.mp3) | 1:15 | -18.7 | Night violence in the rural South: low droning fiddle, slow scraping bows, a hoofbeat rhythm that approaches and passes, distant low brass, creaking wood; ends on a low drone. | The hoofbeats passing. | Reconstruction |
+| [`cw_telegraph`](cues/cw_telegraph.mp3) ⚠ | 1:00 | -19.1 | Breaking news in the 1860s: an urgent telegraph-like pizzicato tick, tense low strings and snare rolls; shock and hurry, then a hush. | The tick starts at ~0:10 (start the cue there); the busiest stretch is 0:35–0:50. | — |
 
 ### Action and war
 
@@ -110,12 +125,14 @@ prefix says which video the cue was made for:
 | [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still, The Exact Spot |
 | [`a_mexico_short`](cues/a_mexico_short.mp3) | 1:05 | -14.7 | Alternate take of a_mexico (65 s, low dynamic range). |  | The Man Who Couldn't Sit Still |
 | [`m_war_drums`](cues/m_war_drums.mp3) | 1:10 | -17.9 | War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note. | Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push. | The Exact Spot |
+| [`cw_fife_dread`](cues/cw_fife_dread.mp3) ⚠ | 1:00 | -16.2 | Ominous Civil War march: distant fife and muffled field snare over a low string drone; builds in waves, never heroic. | From ~0:15, when the march comes in; the first 10 s are a quiet drone. | — |
 
 ### Endings
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
 | [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot, Dressed to Kill |
+| [`rc_reckoning`](cues/rc_reckoning.mp3) ⚠ | 1:00 | -18.3 | End of Reconstruction: a slow solemn brass band and low strings at a distance, a broken march that slows and falters; ends unresolved. | The faltering in the second half and the low unresolved chord at the end. | — |
 ## Recurring roles
 
 These cues have become the channel's regulars:
@@ -142,7 +159,11 @@ These cues have become the channel's regulars:
 gets this suffix:
 > Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.
 
-**ElevenLabs** (`tools/music_eleven.py <name>`, in the template; about 850 credits a minute). Instrumental is forced, and its cues come out quiet, so measure the LUFS.
+**ElevenLabs** (`tools/music_eleven.py <name>`, in the template; about 850 credits a minute). Instrumental is forced, and its cues come out quiet (−16 to −19.5 LUFS), so measure the LUFS and run the bed higher. The prompt recipe that made the `rc_` cues (the moment and period in plain words, period instruments by name and no named songs, how it moves, how it ends, the standard suffix, the length) is in the tool's docstring and in the skill's `voice-and-audio.md` §6; the `rc_` prompts below are worked examples.
+
+**ACE-Step 1.5** (`tools/music_acestep.py`, in the template; free, runs locally): open-source text-to-music, MIT licensed, outputs allowed commercially. Seconds per cue on a GPU or Apple silicon, about 4 minutes per 60 s cue on a CPU. Setup, the CPU fix and the caption style are in the tool's docstring; the first test is in `projects/Reconstruction/music/acestep_test/`. **⚠ Not approved:** the user listened and found most of them unusable (Oct 2026), so ask before using one; for new cues prefer ElevenLabs or Suno. The eight ACE-Step cues here (`cw_` and four `rc_`, marked ⚠ in the tables) were made with it: their captions are in the tool's `CUES` and below. They come out quiet (−16 to −22 LUFS), so run the bed about twice as high as a Lyria cue, and listen before use: they were checked by loudness and spectrum only.
+
+**Real period recordings** (`tools/jukebox.py search|get`, in the template): Library of Congress National Jukebox records, public domain if published before 1926, with credits written to `public/music/credits.json`. Sung records only where there's no narration. Reconstruction's ten are in `projects/Reconstruction/music/period/` with sources and rights in `projects/Reconstruction/MUSIC.md`.
 
 **Adding a cue to this library:** give it the new video's prefix, copy it to `cues/`, measure it
 (`ffmpeg -i cues/x.mp3 -af loudnorm=print_format=summary -f null -`), and add a row above and an entry in `catalog.json` with its prompt.
@@ -631,3 +652,107 @@ Quiet file (−17.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, 
 Reuse for any heavy chapter about loss of land or home: Mexican American and Southwestern history, removal and displacement.
 
 - The Exact Spot: Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Seguín) · bed 0.13
+
+### `rc_jubilo`
+
+1:20 · -19.4 LUFS · ElevenLabs Music (`ElevenLabs /v1/music`) · made for *Reconstruction*
+
+> Hopeful but fragile underscore for 1865, the first months of freedom after the American Civil War: a gently picked fretless banjo and a warm, plain fiddle trade a simple folk melody in the spirit of an 1860s jubilee song, soft hand-drum pulse, upright bass; quietly joyful at first, then the second half thins to the fiddle alone with a hint of doubt, ending on an open, unresolved chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.
+
+Period instruments for 1865–1877. Planned: Ep 1 ch02 forty acres; Ep 2 ch03, ch06.
+
+### `rc_brass_dirge`
+
+1:10 · -11.0 LUFS · ElevenLabs Music (`ElevenLabs /v1/music`) · made for *Reconstruction*
+
+> A distant 1860s brass band of saxhorns and a muffled field drum playing a slow, solemn funeral march in April 1865, heard from far away, a single cornet line over low horns; one restrained swell in the middle, then it fades into near-silence. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.
+
+Period instruments for 1865–1877. Planned: Ep 1 ch04 after Lincoln is shot; Ep 3 ch07.
+
+### `rc_codes`
+
+1:10 · -16.0 LUFS · ElevenLabs Music (`ElevenLabs /v1/music`) · made for *Reconstruction*
+
+> Grave, cold, legalistic underscore for laws written to keep freed people working without pay (1865): a slow ticking pocket-watch pulse, a walking pizzicato bass, a solemn reed harmonium chord progression, and a single fiddle line that sounds trapped, circling the same few notes; tension tightens slowly, never melodramatic, ends on a held dark chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.
+
+Period instruments for 1865–1877. Planned: Ep 1 ch06 Black Codes; Ep 2 ch09 debt; Ep 3 ch09.
+
+### `rc_night_riders`
+
+1:15 · -18.7 LUFS · ElevenLabs Music (`ElevenLabs /v1/music`) · made for *Reconstruction*
+
+> Dread for night violence in the rural South around 1870: a low droning fiddle with slow scraping bows, a muffled, irregular hoofbeat rhythm on a frame drum that comes closer and passes, distant low brass, creaking wood; cold and quiet rather than loud, ends on a single low unresolved drone. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.
+
+Period instruments for 1865–1877. Planned: Ep 3 ch01, ch02 (the Klan), ch07.
+
+### `rc_parlor`
+
+1:10 · -16.7 LUFS · ElevenLabs Music (`ElevenLabs /v1/music`) · made for *Reconstruction*
+
+> Gilded Age parlor in the 1870s North: an upright piano and a reed harmonium play a polite, slightly out-of-tune waltz, comfortable and complacent; gradually the harmony sours, a low cello note of unease creeps in under the waltz, which carries on as if nothing is wrong; ends politely on a wrong-sounding chord. Instrumental only, no vocals, no choir. Documentary underscore, restrained and textured, period instruments without pastiche, leaves clear space in the midrange for a narrator.
+
+Period instruments for 1865–1877. Planned: Ep 3 ch05 Tired, ch06 the bank.
+
+### `cw_fife_dread`
+
+1:00 · -16.2 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 72, E minor, 4/4 time, 60 s) · made for Civil War videos
+
+> 1860s Civil War, distant fife and muffled field snare drum playing a slow march, low string drone underneath, ominous, the war is coming, builds slowly, never heroic, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: War coming: secession, Sumter, the first call-ups.
+
+### `cw_camp_night`
+
+1:00 · -18.1 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 84, G major, 3/4 time, 60 s) · made for Civil War videos
+
+> 1860s soldiers' camp at night, a lonely solo fiddle playing a slow homesick waltz, soft acoustic guitar, distant harmonica, crackling quiet, tender and weary, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Letters home, camp life, the human side of the war.
+
+### `cw_aftermath`
+
+1:00 · -18.3 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 56, C minor, 4/4 time, 60 s) · made for Civil War videos
+
+> aftermath of a Civil War battle, slow mournful low cello and distant muted brass chorale, a soft muffled drum like a heartbeat, grave, humane, no melodrama, fades to quiet, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Casualties, field hospitals, Antietam, Gettysburg, a massacre.
+
+### `cw_telegraph`
+
+1:00 · -19.1 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 100, D minor, 4/4 time, 60 s) · made for Civil War videos
+
+> 1860s breaking news, urgent ticking telegraph-like pizzicato rhythm, tense low strings, field snare rolls, a sense of shock and hurry, then a sudden hush at the end, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: News arriving: Sumter, Lincoln shot, a battle result, an election.
+
+### `rc_jubilee`
+
+1:00 · -21.9 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 108, D major, 4/4 time, 60 s) · made for *Reconstruction*
+
+> 1865 freedom celebration, joyful fretless banjo and fiddle, hand claps and foot stomps, upright bass, warm and hopeful, a plain folk melody, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Jubilee, Juneteenth, the first schools and churches, a vote won.
+
+### `rc_resolve`
+
+1:00 · -20.1 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 64, F major, 4/4 time, 60 s) · made for *Reconstruction*
+
+> dignified slow hymn on reed harmonium and solo cello, 1860s church, quiet determination rising to a restrained proud swell, then settles, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Organising, conventions, the first Black officeholders, a hard-won amendment.
+
+### `rc_backroom`
+
+1:00 · -20.1 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 92, A minor, 4/4 time, 60 s) · made for *Reconstruction*
+
+> 1860s Washington politics, sly backroom deal, plucked pizzicato strings, a fussy upright parlor piano, low clarinet, sneaky and wry, a little tension, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Deals and schemes: impeachment votes, the Compromise of 1877, Tammany, railroads.
+
+### `rc_reckoning`
+
+1:00 · -18.3 LUFS · ACE-Step 1.5 (local, `music_acestep.py`; bpm 60, B minor, 4/4 time, 60 s) · made for *Reconstruction*
+
+> the end of Reconstruction, slow solemn brass band and low strings in the distance, a broken march that slows and falters, regret and loss, ends on an unresolved low chord, documentary underscore, restrained, cinematic, space for a narrator, instrumental
+
+Fits: Troops withdrawn, rights rolled back, the end of an era; a series ending.

@@ -1,0 +1,71 @@
+{
+ "size": [
+  1756,
+  3000
+ ],
+ "source": "mississippiin18701unit hOCR page 555 (scan page n555 minus 1)",
+ "phrases": {
+  "MRS. CALDWELL HINDS COUNTY": [
+   [
+    382.2,
+    979.8,
+    928.3,
+    36.2
+   ]
+  ],
+  "Mrs. Margaret Ann Caldwell (colored) sworn and examined": [
+   [
+    99.6,
+    1173.6,
+    1439.0,
+    48.0
+   ]
+  ],
+  "THE WIDOW OF SENATOR CALDWELL": [
+   [
+    438.3,
+    1304.9,
+    858.5,
+    28.1
+   ]
+  ],
+  "Was Mr. Caldwell, formerly senator, your husband? Yes, sir.": [
+   [
+    100.5,
+    1451.6,
+    1535.0,
+    46.2
+   ]
+  ],
+  "What was his first name? Charles.": [
+   [
+    100.5,
+    1501.4,
+    951.8,
+    39.8
+   ]
+  ],
+  "When did he die?": [
+   [
+    100.5,
+    1548.4,
+    1533.2,
+    47.1
+   ]
+  ],
+  "Thursday night, in the Christmas. Him and his brother was killed.": [
+   [
+    100.5,
+    1548.4,
+    1533.2,
+    47.1
+   ],
+   [
+    52.5,
+    1597.3,
+    588.7,
+    35.3
+   ]
+  ]
+ }
+}

@@ -80,11 +80,15 @@ Project layout:
 ```
 script/      chNN_slug.txt per chapter, SCRIPT.md, GEMINI_PROMPTS.md, MUSIC.md
 src/         project.ts (per-video settings), chapters.ts, masks.ts, Thumbnail.tsx, Brand.tsx (logo stills), ch/ChNN.tsx,
-             kit/ (shared look, maps incl. the 3D map map3d.tsx, engraving.tsx, parallax.tsx, charts), lib/
+             kit/ (shared look, maps incl. the 3D map map3d.tsx, engraving.tsx, parallax.tsx, charts, vox.tsx (tilted page,
+             swipe, spotlight, tear, word match cut, paper-slip notes), board.tsx (the collage board)), lib/
 public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for AI, masks/, maps/), music/, sfx/, fonts/
 tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
              sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, script_pdf.py, music_eleven.py,
-             sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py
+             sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py,
+             phrase_find.py + word_hunt.py (LOC newspapers), jukebox.py (LOC period recordings), music_acestep.py (local text-to-music), crease.py, halftone.py,
+             silhouette.py, distress.py, scratch_voice.py,
+             mono_depth.py + stereo_depth.py + prep_stereo.py (stereograph move)
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master
 ```

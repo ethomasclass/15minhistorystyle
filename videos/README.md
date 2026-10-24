@@ -89,7 +89,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
+- **Photos have no frames and always look worn** (Oct 2026): no white borders or card mounts; every archival photo is cropped out of its mount and shown as a creased old print (fold lines, a web of fine cracks, chipped and torn edges with white paper fibres, faint stains) with `tools/crease.py` (in `projects/Reconstruction/tests/tools/` until it moves into the template).
+- **The collage board in every video** (from the Reconstruction series, Oct 2026): each chapter pins one piece to a board on the desk, teal yarn with *but* / *therefore* tags ties causes to effects, and the ending pulls back to the whole board. You chose the board (cut-paper collage in the channel's colours, with the tilted desk for moving to the maps) over the block-in-the-wall "chunk wall". No case-file or crime language on it. Spec: [`../techniques/collage_board.md`](../techniques/collage_board.md).
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
+- **Notes on paper slips, inside the safe margin** (Reconstruction, Oct 2026): handwriting over a busy picture was hard to read, so notes sit on torn paper slips (dark ink on cream; pink for the subject). Keep titles and notes out of the outer 5% too (`SAFE=96` in the text probe).
+- **Say fractions so they can't be misheard** (Reconstruction ch06): "three-quarters of the states", not "three out of four states", which sounds like there were four.
 - Big titles stay on screen for at least 2 seconds.
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
@@ -133,6 +137,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
 - A/B the pace when the subject is heavy.
+- **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.
 
 **Packaging**

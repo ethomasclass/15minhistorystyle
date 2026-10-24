@@ -22,6 +22,10 @@ to see how the style has developed:
 [The Exact Spot (Mexican-American War)](lookbook/08_Exact_Spot.jpg) ·
 [Dressed to Kill](lookbook/09_Dressed_To_Kill.jpg)
 
+**Studies.** [`vox_study.md`](vox_study.md) (Vox's writing and a first pass at visuals) and
+[`vox_motion_study.md`](vox_motion_study.md) (Vox-style motion graphics from 18 tutorials and staff talks: what we
+have, eleven techniques we don't, and where each would land in *Reconstruction*).
+
 ---
 
 ## The five rules every scene follows
@@ -30,7 +34,7 @@ to see how the style has developed:
 2. **One job per colour.** Teal draws and explains. Orange is for titles. Coral is the subject.
 3. **Marks step, cameras glide.** Drawn marks animate at 12 drawings a second. Camera moves are smooth.
 4. **Cut hard, on the word.** Scenes cut 1–2 frames before the word they belong to, with a whoosh. No dissolves. Every mark is keyed to a spoken word (`t.at('phrase')`), never to a number of seconds.
-5. **Credit every picture, keep every word on screen.** Every image gets a mono source tag, and no text runs off the frame (run `tools/probe_text.mjs` before every render).
+5. **Credit every picture, keep every word on screen.** Every image gets a mono source tag, and no text runs off the frame. Titles and notes also stay out of the outer 5% (96 px): run `SAFE=96 node tools/probe_text.mjs <ids>` before every render (the `SAFE` mode is in the Reconstruction tests project's copy).
 
 ---
 
@@ -40,6 +44,7 @@ to see how the style has developed:
 |---|---|---|---|---|
 | **Highlight** | Abril caps on a torn orange strip that wipes on from the left in 8 frames, tilted −2°. Optional `after` words in orange outside the strip. | Every title; vocab terms; a place name by its pin | Fix Everything | template `Kit.tsx` |
 | **Note** | Lowercase Nanum Pen handwriting (×1.55) with a hard ink outline, written on left to right. Teal by default, white for neutral asides, orange for disputed claims, coral for a punchline. | Asides, labels, the wry line | Fix Everything | template `Kit.tsx` |
+| **Slip** | A note on a torn paper slip: cream with deep-teal ink, or pink with dark-red ink for the subject or punchline; it slaps on, then the words write on. Readable on any picture. | **Every note over a picture** (the user's pick over bare handwriting, Oct 2026); bare Note only on a dark, quiet area | Reconstruction | template `vox.tsx` `Slip`; mockups `projects/Reconstruction/review/note_legibility_options.jpg` |
 | **Definition** | Dark bar under a title: the term in teal with syllable dots, then a plain definition in Inter. | Every vocab word (10–20 a video) | Fix Everything → King Andrew | template `shell.tsx` |
 | **Stamp** | A big Abril word or number that slams in (1.35 → 0.95 → 1). | Onomatopoeia (KNOCK), big numbers, the climax word | Fix Everything | template `shell.tsx`; louder variant in `components/ambrose/bits.tsx` |
 | **Quote** | Playfair 900 primary-source quote, cream, with a mono attribution. | Short quotes shown whole | Fix Everything | template `shell.tsx` |
@@ -74,6 +79,11 @@ to see how the style has developed:
 | **TabCard / Wall** | Cards with an orange Abril label tab hanging off the bottom, popping in 3 frames apart. | A "wall of causes", lists of people | Fix Everything | `components/ambrose/bits.tsx` `TabCard` |
 | **Desk** | DarkPaper with a slow push and a tiny handheld drift; everything on it rides along. | Any desk scene. It makes the desk feel filmed rather than flat. | Ouija | `components/ouija/oj.tsx` |
 | **DropCard** | A card falls onto the desk with a spring, a little air rotation, motion blur and a contact shadow that tightens. | Instead of the pop, when a card should feel like it has weight | Ouija | `components/ouija/oj.tsx` (needs `@remotion/motion-blur`) |
+| **Sheet (tilted page, depth of field)** | A document laid back in 3D on the desk; the camera reads along a line and only a band around it is sharp. Swipe and Spot draw in page pixels inside it. | Any statute or letter the narrator reads aloud | Reconstruction | template `vox.tsx` `Sheet`, `camAt` |
+| **FocusIn** | A picture rises a few pixels into place while coming into focus (blur 22 → 0, 9 frames), with a tick. | Photos arriving, instead of a cut to a static frame | Reconstruction | template `vox.tsx` |
+| **Spot (spotlight cut)** | A hard two-frame cut to the same picture with everything darkened except the boxes, with a tick. | "Hold onto those words"; one face in a crowd | Reconstruction | template `vox.tsx` |
+| **Collage board** | Flat cut-paper pieces on black in the channel's colours: creased photos, torn typed strips, stickies, stamps, tape, pins, teal thread, a cut-paper silhouette, the worn logo. Pieces drop, slap, stamp, wipe or type on; the camera moves piece to piece. | The series/video board: a few seconds at each chapter's end, recaps, close-ups, the ending (`techniques/collage_board.md`) | Reconstruction | template `board.tsx`; examples in `components/reconstruction/` |
+| **Stereograph camera move** | A camera pushes into a period stereograph made 3D from a depth map. | One or two wow moments a video | Reconstruction tests | `components/reconstruction/StereoTest.tsx`; template tools `mono_depth.py`, `prep_stereo.py` |
 | **Photo** | A full-bleed B&W image with a slow push (1.02 → 1.10), optional tint and trace. | Most archival beats | King Andrew | template `shell.tsx` |
 | **Parallax (archival 2.5D)** | Any masked photo split into subject and background layers (`tools/layers.py`, from the rembg mask, no Gemini pass), with parallax, contact shadow, drift, optional living detail. `crop` keeps the camera inside a glass negative's black border; `frame` makes it work in 9:16. | Every Bain portrait in Black Sox, and the vertical Shorts. | Black Sox | `components/black_sox/parallax.tsx`, `tools/layers.py`, `tools/mask_preview.py` |
 | **Parallax on engravings** | Parallax with `LAYERS_FILL=paper`: the hole behind the subject is filled with plain paper tone instead of a blurred inpaint (grey mush against crisp hatching), and holes inside the subject are filled. | Wood engravings and other line art | The Exact Spot | template `tools/layers.py` |
@@ -142,6 +152,9 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 
 | Technique | What it does | From | Code |
 |---|---|---|---|
+| **carry (motion through the cut)** | The outgoing shot speeds up into the cut and the next starts already moving the same way, then settles: a hard cut that reads as one move. | Montage chapters; any run of cuts | Reconstruction | template `vox.tsx` `carry` |
+| **Tear** | The top layer tears top-to-bottom with a white fibre edge and both halves fall away, revealing what's underneath. | "This was hiding under that": the 13th Amendment tears to reveal the Black Code | Reconstruction | template `vox.tsx` |
+| **WordRun (word match cut)** | Page after page flashes past with the same word dead centre, 9 frames down to 3, a tick on each; the last holds and gets the swipe. | "It was everywhere": "vagrant" across eleven Southern papers | Reconstruction | template `vox.tsx`; crops from `tools/word_hunt.py` |
 | **Cold open → channel intro → title card** | The cold open asks the question, then the 4.4 s wordmark intro (cards flip, the clock fills a quarter hour, the title sting) and a 5 s title card (orange TITLE, teal subtitle, handwritten dates). Never narrated. | Fix Everything | template `Intro.tsx`, `Ch01.tsx`; [`brand/logo/channel_intro.mp4`](../brand/logo/channel_intro.mp4) |
 | **Logo break** | Chapters 2+ open on a quiet 44-frame break: fade to black, the wordmark at 62%, three soft clock ticks, fade up. No chapter title cards. | King Andrew (the standard since) | template `LogoBreak.tsx`, `shell.tsx`; [`brand/logo/chapter_logo_break.mp4`](../brand/logo/chapter_logo_break.mp4) |
 | **ChapterShell + `quiet`** | Wraps a chapter: logo break, narration, music cues with fades, palette, step, finish. `quiet` switches to teal-only with bone titles for heavy chapters. | King Andrew | template `shell.tsx` (Ouija's version adds per-cue `to`, `fadeIn` and `fadeOut`, and an `extra` tail for an end screen) |
@@ -174,6 +187,9 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 
 ## Things tried and set aside
 
+- **The chunk wall (Reconstruction mockups, Oct 2026).** Every chapter as a notched block set *into* a staggered wall of brand chunks, with links along the mortar; also a channel wall of videos. You preferred the evidence board. Mockups `projects/Reconstruction/review/wall_mockups/E*`, code `WallBricks.tsx`.
+- **Ford's Theatre as a 3D card model (Reconstruction tests).** An empty, measured architect's model of the box and the 12-foot drop, rendered in three.js. You didn't think it earned the time it took; told-not-shown with archival images is enough. Code kept in `projects/Reconstruction/tests/src/tests/FordsTest.tsx`.
+- **The stereo "flick" (Reconstruction tests).** Alternating the two photos of a stereograph to show real parallax read as blinking. Keep the camera move into the depth-layered photo instead (`StereoTest.tsx`, second half).
 - **Rejected looks (Fix Everything style test):** yellow highlighter outlines (`harris` palette), the Anton collage, the Fraunces cinematic look. The palette sheets are in `Reform-Era/review/palettes/`, and `TCO_*.jpg` panel A is the one you chose.
 - **Toy theater** (*The War Nobody Won*) and **broadside** (*Age of Jackson Part One*) came before the channel look. They're not part of it, but the toy theater is a complete style if a one-off ever wants it (see its look book and HANDOFF).
 - **Props you rejected:** fussy illustrated props like King Andrew's stool. Drawn diagrams and cards read better.
