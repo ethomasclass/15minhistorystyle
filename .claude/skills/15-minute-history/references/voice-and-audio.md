@@ -23,7 +23,8 @@ GEMINI_API_KEY=...    # only if tools/trace.py paint is used
 - **The channel's narrator is the user's own clone: `VOICE_ID=mI4rIAStSQeKeqsz4FwM` ("Ellis", an ElevenLabs cloned
   voice).** Use it for every video. The voice ID is not secret; the API key is. Check that the key reaches that voice
   before voicing (`GET /v1/voices/<id>` should return name "Ellis").
-- **Quality:** model `eleven_v3`, `similarity_boost` 0.85, the locked pace below, 44.1 kHz. The account is on the
+- **Quality:** model **`eleven_v4`**, the whole chapter in **one take**, speed 1.0, `similarity_boost` 0.85, 44.1 kHz
+  (the user's pick in the West series, Oct 2026, over v3 and over v4 voiced paragraph by paragraph). The account is on the
   **Starter** plan, so the API's best output is `mp3_44100_128` (192 kbps needs Creator, PCM needs Pro). That is fine:
   the WAVs are mixed and mastered to −14 LUFS, and the preview MP3s are exported at 192 kbps.
 - **Check the credit budget first** (`GET /v1/user/subscription`: `character_count` of `character_limit`). Starter is
@@ -47,7 +48,7 @@ tools/voice_all.sh 04 07               # only these chapters
 ```
 
 Each chapter becomes `public/audio/chNN_slug.wav` + `chNN_slug.words.json` (word-level timings from ElevenLabs
-forced alignment). Voice model: `eleven_v3` (the default in `tools/voice.py`).
+forced alignment). Voice model: `eleven_v4`, one take per chapter (the defaults in `tools/voice.py`).
 
 After voicing:
 1. Make a narration preview the user can listen to straight through (join the WAVs with ffmpeg into one MP3,
@@ -55,9 +56,16 @@ After voicing:
 2. Run `python3 tools/anchors.py <stem> --src src/ch/ChNN.tsx` for any chapter whose scenes already exist.
 3. Commit the WAVs and words.json files (they are what the render uses).
 
-## 3. Pace settings (locked)
+## 3. Pace settings
 
-Matched to the channel's earlier videos; don't change them without the user asking.
+**Default since the West series: one take.** The whole chapter goes to ElevenLabs in a single request
+(`VOICE_ONE_TAKE=1`, the default), so `eleven_v4` paces the paragraphs itself and nothing is cut or spliced. Normal
+chapters run at `VOICE_SPEED=1.0` (about 165–170 words a minute including pauses); heavy chapters (`HEAVY=`) at 0.92.
+The user heard clicks and odd breaks in the older spliced method; one take fixed them. If a pause needs to be longer,
+mark it in the script rather than splicing.
+
+**Older method (videos before the West series), `VOICE_ONE_TAKE=0`:** paragraph by paragraph on `eleven_v3`, with
+these settings. `tools/voice.py` now cuts at the quietest point with short fades and room tone, so it no longer clicks.
 
 | Chapters | VOICE_STRETCH | VOICE_MAX_PAUSE | VOICE_SENT_GAP | VOICE_PARA_GAP |
 |---|---|---|---|---|
@@ -80,7 +88,7 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 ## 5. Re-voicing one chapter
 
 ```sh
-VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.15 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
+python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain      # one take, eleven_v4 (default)
 python3 tools/anchors.py ch04_corrupt_bargain --src src/ch/Ch04.tsx
 ```
 

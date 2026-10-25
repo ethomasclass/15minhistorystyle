@@ -132,6 +132,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
+- **Narration on ElevenLabs `eleven_v4`, one take per chapter, speed 1.0** (from the West series, Oct 2026): it sounded better
+  than v3, and voicing the whole chapter in one request removed the clicks and breaks the paragraph-by-paragraph splicing made.
 - A/B the pace when the subject is heavy.
 - Give music options and let you pick.
 

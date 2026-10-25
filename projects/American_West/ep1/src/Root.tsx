@@ -8,6 +8,7 @@ import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {SAMPLE_FRAMES, SAMPLES} from './samples';
+import {PREVIEWS} from './previews';
 
 export const Root: React.FC = () => (
   <>
@@ -20,6 +21,8 @@ export const Root: React.FC = () => (
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     {/* West style samples (stills for review; src/samples) */}
     {SAMPLES.map((s) => <Composition key={s.id} id={s.id} width={W} height={H} fps={FPS} durationInFrames={SAMPLE_FRAMES} component={() => <JFonts><s.C /></JFonts>} />)}
+    {/* West motion previews (src/previews) */}
+    {PREVIEWS.map((p) => <Composition key={p.id} id={p.id} width={W} height={H} fps={FPS} durationInFrames={p.frames} component={() => <JFonts><p.C /></JFonts>} />)}
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
   </>
 );

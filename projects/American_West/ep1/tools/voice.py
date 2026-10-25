@@ -1,4 +1,4 @@
-"""Narration: script text -> public/audio/<name>.mp3 + <name>.words.json (word-level timing).
+"""Narration (ElevenLabs eleven_v4, one take per chapter, speed 1.0 by default): script text -> public/audio/<name>.mp3 + <name>.words.json (word-level timing).
 
   python3 tools/voice.py script/v1_cold_open.txt v1_cold_open            # ElevenLabs (needs ELEVENLABS_API_KEY, VOICE_ID)
   python3 tools/voice.py script/v1_cold_open.txt v1_cold_open --piper    # offline stand-in voice
@@ -18,12 +18,15 @@ except ImportError:
     FFMPEG = "ffmpeg"
 RATE = 44100
 PARA_GAP = float(os.environ.get("VOICE_PARA_GAP", "0.9"))    # seconds of silence between paragraphs
-SENT_GAP = float(os.environ.get("VOICE_SENT_GAP", "0.45"))   # extra breath added after each sentence inside a paragraph
+SENT_GAP = float(os.environ.get("VOICE_SENT_GAP", "0"))   # extra breath added after each sentence inside a paragraph
 LEAD_IN = 0.4     # silence before the first word
-SPEED = float(os.environ.get("VOICE_SPEED", "0.9"))  # ElevenLabs speed, 0.7-1.2
+SPEED = float(os.environ.get("VOICE_SPEED", "1.0"))  # ElevenLabs speed, 0.7-1.2
 STRETCH = float(os.environ.get("VOICE_STRETCH", "1.0"))  # local pitch-preserving tempo; <1 is slower (v2 ignores SPEED; try 0.93)
 MAX_PAUSE = float(os.environ.get("VOICE_MAX_PAUSE", "0"))  # >0: shorten the voice's own pauses to at most this (s)
 CACHE = os.path.join(OUT, "cache")
+# Default since the West series (user's pick): the whole chapter in ONE ElevenLabs request on eleven_v4, so the model
+# paces the paragraphs itself and nothing is spliced. VOICE_ONE_TAKE=0 goes back to paragraph-by-paragraph.
+ONE_TAKE = os.environ.get("VOICE_ONE_TAKE", "1") not in ("0", "", "false")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
@@ -96,7 +99,7 @@ def env():
 def eleven(text, prev, nxt):
     """Returns (pcm16 mono bytes at RATE, [(char, start, end)])."""
     voice = os.environ["VOICE_ID"]
-    model = os.environ.get("ELEVEN_MODEL", "eleven_v3")
+    model = os.environ.get("ELEVEN_MODEL", "eleven_v4")
     if model.startswith("eleven_v3"):
         # v3: most expressive model; stability is one of 0.0 creative / 0.5 natural / 1.0 robust,
         # and it does not accept neighbouring-paragraph context yet.
@@ -324,7 +327,7 @@ def main():
     use_piper = "--piper" in sys.argv
     marked = [parse_marks(p.strip()) for p in open(src).read().split("\n\n") if p.strip()]
     paras = [m[0] for m in marked]
-    if os.environ.get("VOICE_ONE_TAKE") and not use_piper:
+    if ONE_TAKE and not use_piper:
         # the whole chapter in one request: the model paces paragraphs itself, so there are no splices at all
         para_lens = [len(m[1]) for m in marked]
         marked = [("\n\n".join(m[0] for m in marked), [k for m in marked for k in m[1]])]
@@ -346,7 +349,7 @@ def main():
             if k: w["k"] = k
         words += ws
         words[-1]["para_end"] = True
-        if os.environ.get("VOICE_ONE_TAKE") and not use_piper:
+        if ONE_TAKE and not use_piper:
             n = 0
             for L in para_lens:
                 n += L
