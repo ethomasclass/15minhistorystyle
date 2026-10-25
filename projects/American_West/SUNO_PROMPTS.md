@@ -13,47 +13,55 @@ vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubs
 ```
 
 - Make **2–4 takes**; keep the one whose **first 30–40 seconds** already sound right.
+- **Length:** Suno songs usually run 2–4 minutes, which is plenty. If a take is too short, use **Extend** from its last good
+  section. Longer is always fine: I trim and fade, so only the minimums below matter.
 - **Download as MP3** and name it exactly as shown (e.g. `aw_iron_horse.mp3`). Send them back and I'll level and place them.
 
 ## Episode 1 cues (make these first, in this order)
 
 ### 1. `aw_promise_theme.mp3`: the series theme (and the ledger)
-*Used in:* Ep 1 ch 9 ending, and every episode's last chapter
+*Used in:* Ep 1 ch 9 ending, and every episode's last chapter  
+*Length:* **at least 2:00** (Ep 1 needs ~1:48: the last 1:28 of ch 9 plus the 20 s end screen)
 
 ```
 a reflective main theme for a documentary series about promises, a simple memorable four-note motif first on solo piano, then taken up by warm strings and a single French horn, earnest and thoughtful with a thread of doubt, builds gently to one restrained peak at about forty-five seconds, then returns to the solo piano motif, ends on an unresolved chord that leaves a question hanging; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 2. `aw_iron_horse.mp3`: the machine age
-*Used in:* Ep 1 ch 3 (the race) + ch 5 reprise
+*Used in:* Ep 1 ch 3 (the race) + ch 5 reprise  
+*Length:* **at least 2:00** (ch 3 runs 1:47; the ch 5 reprise reuses ~30 s from later in the cue)
 
 ```
 1860s railroad construction, driving rhythmic pulse like hammers on spikes and iron wheels on rails, col legno strings and low string ostinato, anvil-like metallic percussion, a steady locomotive chug that slowly gathers speed, low brass entering in the second half, determined and relentless, impressive but not triumphant, ends on a held low chord; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 3. `aw_long_grief.mp3`: the long quiet
-*Used in:* Ep 1 ch 4 (the strike); later Ep 4
+*Used in:* Ep 1 ch 4 (the strike); later Ep 4  
+*Length:* **3:00** (Ep 1 only needs ~40 s, but Sand Creek and Wounded Knee in Ep 4 need the full length)
 
 ```
 a long, very quiet grieving bed for the heaviest moments, three minutes, a soft sustained string pad barely moving, a few slow solo cello phrases with long silences between, one low piano note now and then, no swell, no build, no melodrama, the same calm level from start to finish, ends in silence; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 4. `aw_legend_sours.mp3`: the myth beat
-*Used in:* Ep 1 ch 5 (the golden-spike myth); later Ep 2, Ep 4
+*Used in:* Ep 1 ch 5 (the golden-spike myth); later Ep 2, Ep 4  
+*Length:* **any length over 0:45.** Ep 1 uses ~20 s, and the fanfare has to collapse right on "Sort of." (4.5 s in); I start the cue partway so the collapse lands there, so just make sure the fanfare clearly falls apart
 
 ```
 a grand heroic frontier fanfare in the style of an old Hollywood epic, bold horns and soaring strings for about twenty seconds, then it falters, the horns go out of tune, the strings slide down, the tempo drags, and it deflates into a sparse doubtful pizzicato and a single low questioning note; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 5. `aw_robber_barons.mp3`: the swagger
-*Used in:* Ep 1 ch 7 (Crédit Mobilier, Whiskey Ring)
+*Used in:* Ep 1 ch 7 (Crédit Mobilier, Whiskey Ring)  
+*Length:* **at least 2:00** (ch 7 runs 1:48)
 
 ```
 Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass oom-pah under a sly muted trumpet melody, parlor piano chords, pizzicato strings, a cigar-smoke lazy confidence with a hint of menace underneath, two short cheeky brass stings, ends on a knowing unresolved chord; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 6. `aw_panic.mp3`: the crash
-*Used in:* Ep 1 ch 8 (the Panic of 1873)
+*Used in:* Ep 1 ch 8 (the Panic of 1873)  
+*Length:* **at least 1:50** (ch 8 runs 1:39)
 
 ```
 1870s financial panic, a crowd rushing a bank, anxious ticking stock-ticker pulse, rapid nervous string tremolo, piano repeating a falling figure, rising tension for forty seconds, then a sudden drop to a hollow low drone and a slow descending cello line, the aftermath bleak and quiet, ends unresolved; documentary, restrained, space for narrator, instrumental
