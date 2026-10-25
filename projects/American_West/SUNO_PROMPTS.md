@@ -143,21 +143,24 @@ Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass 
 *Length:* **at least 1:50** (ch 8 runs 1:39)
 
 ```
-1870s financial panic, a crowd rushing a bank, anxious ticking stock-ticker pulse, rapid nervous string tremolo, piano repeating a falling figure, rising tension for forty seconds, then a sudden drop to a hollow low drone and a slow descending cello line, the aftermath bleak and quiet, ends unresolved, 132 BPM, 4/4, half time after the drop; documentary, restrained, space for narrator, instrumental
+1870s Wall Street panic, a busy anxious bustle of a crowd rushing the banks, hurried upright piano with a ragtime edge, clacking stock-ticker woodblock rhythm, scurrying pizzicato strings, nervous clarinet runs, brushed snare, energy rising as things spin out of control, then the bustle stops and a sober, plain aftermath on piano and low strings, sad and reflective like a long hard time ahead, period chamber orchestra, 126 BPM then half time; documentary, restrained, space for narrator, instrumental
 ```
 
 *Lyrics box (structure tags only):*
 
 ```
 [Instrumental]
-[Intro: anxious ticking pulse]
-[Build: nervous string tremolo, falling piano figure]
-[Build: rising tension, faster, louder]
-[Drop: sudden hollow low drone]
-[Aftermath: slow descending cello line, bleak and quiet]
-[Outro: unresolved, fading]
+[Intro: ticker-tape woodblock, hurried piano figure]
+[Verse: scurrying pizzicato, nervous clarinet, busy and anxious]
+[Build: faster, the crowd rushes the banks, brushed snare]
+[Break: everything stops on one piano chord]
+[Verse: half time, plain sober piano, low strings, reflective]
+[Outro: piano alone, unresolved]
 [End]
 ```
+
+*Exclude for this one:* the normal list plus `horror, suspense thriller, eerie, dissonant, drone, string tremolo, jump scare, dark ambient, cinematic trailer`.
+
 
 ## Later episodes (whenever you like)
 
