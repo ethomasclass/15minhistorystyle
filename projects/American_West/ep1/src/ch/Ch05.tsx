@@ -554,7 +554,7 @@ const Body: React.FC = () => (
 
 /** Where the golden-spike cue turns (seconds into aw_legend_sours.mp3); the cue is started so that moment lands on "Sort of.".
  *  null = no turn marked yet: the cue plays from its top. */
-const LEGEND_TURN: number | null = null;
+const LEGEND_TURN: number | null = 25; // the user: "probably sours at 25 seconds or so"
 const LEGEND_START = LEGEND_TURN === null ? 0 : Math.max(0, Math.round(LEGEND_TURN * 30 - (at('Sort of', 2) - (at('You may') - 6))));
 
 export const Ch05: React.FC = () => (
