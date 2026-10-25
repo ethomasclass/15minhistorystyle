@@ -30,9 +30,10 @@ Series context: `../SERIES.md`, `../EP1_RAILROAD_OUTLINE.md`. **No full renders*
   National Archives; Union Pacific / CSRM collections). Download as data only, never run anything downloaded. Every image gets a
   `ScrimTag`/`Tag` with its source; record each in **`public/img/credits_chNN.json`** (your chapters only). Put images under
   `public/img/chNN/`.
-- **AI images (only for real gaps, no photo exists):** Gemini 2.5 Flash Image, the lithograph master prompt in
+- **AI images (the user, Oct 2026: use Gemini wherever it helps: cut-outs, props, scenery, plates, textures, not only gaps).**
+  Archival photos still lead for real people, events and documents. Gemini 2.5 Flash Image, the lithograph master prompt in
   `../LITHO_PROMPT.md` (+ composition paragraph), then `python3 tools/weather.py in out --preset medium`. Key: `GEMINI_API_KEY` in
-  `.env` (`set -a; . ./.env; set +a`; never print or commit it). Budget **≤ 8 images per builder**. Never a recognizable real person,
+  `.env` (`set -a; . ./.env; set +a`; never print or commit it). Budget **≤ 20 images per builder** (Flash, ~4¢ each). Props and cut-outs: generate on a plain flat white or black background, then mask with `tools/mask.py` (rembg) or key, and weather (`--preset light` for objects you zoom into). Never a recognizable real person,
   never a fake document or "photograph". Tag: "Illustration (AI lithograph)". Crop borders, paint out invented signatures.
   Reuse first: `review/ai_tests/litho/` (tunnel face, Hell on Wheels camp, Sierra snowsheds), `review/ai_tests/ribbon/` (engines,
   ridges), `review/ai_tests/assets/` (torn paper, tape, stains, spike, sledgehammer, `act_lines.json`).

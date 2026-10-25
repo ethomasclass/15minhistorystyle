@@ -148,6 +148,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Weathering in post: `tools/weather.py --preset medium`** (your pick): halftone, slight misregistration, paper fibre, foxing,
   stains, one crease, light edge wear. `light` for long push-ins, `heavy` only for handled objects. Halftone is a texture choice,
   not a period claim.
+- **Use Gemini freely for assets where it helps** (the user, Oct 2026): cut-outs, props, scenery and background plates, textures,
+  not only for gaps. Archival still leads for real people, events and documents.
 - **Gemini for more than illustrations:** texture packs (torn paper, tape, stains), props shot on plain backgrounds for cut-outs,
   finding exact line positions on scanned documents, transcribing handwriting, describing photos. Never fake documents, never AI
   "photographs" passed off as archival, never a recognizable real person.

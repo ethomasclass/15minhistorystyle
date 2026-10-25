@@ -48,7 +48,7 @@ const TAG = {
   cooke: 'Jay Cooke, c. 1865, Wenderoth & Taylor · via Wikimedia Commons',
   closing: "The great financial panic of 1873: closing the door of the Stock Exchange, Frank Leslie's · Library of Congress",
   broad: "The great financial panic: Broad Street near the Stock Exchange, Sept. 20, 1873, Frank Leslie's · Library of Congress",
-  louisiana: "Louisiana: the withdrawal of the federal troops from the State House, New Orleans, April 1877, Frank Leslie's · LOC",
+  louisiana: "Federal troops leave the State House, New Orleans, April 1877, Frank Leslie's · LOC",
   baltimore: "The great strike: the Sixth Maryland Regiment fighting its way through Baltimore, Harper's Weekly, Aug. 11, 1877 · LOC",
   depot: "Destruction of the Union Depot, Pittsburgh, Harper's Weekly, Aug. 11, 1877 · via Wikimedia Commons",
   tunnel: 'Chapter 4: the tunnels, 1867 · Illustration (AI lithograph)',
@@ -480,7 +480,7 @@ const Callback: React.FC = () => {
       over={<>
         <Note text="1867: the strike in the mountains" x={150} y={760} size={46} rot={-3} at={a + 4} />
         <Note text="(almost no one heard)" x={190} y={850} size={40} rot={-3} color="#f4efe6" at={a + 12} />
-        <ScrimTag text={`${TAG.tunnel}  ·  ${TAG.depot}`} x={34} y={24} />
+        <ScrimTag text="Ch. 4 tunnels: Illustration (AI lithograph)  ·  Union Depot, Pittsburgh, Harper's, 1877" x={34} y={24} />
       </>}>
       <Print src={I8.depot} size={Z8.depot} x={960} y={160} w={900} at={-99} rot={2} seed={25} blur={0.6} h={4} />
       <Print src={I8.tunnel} size={Z8.tunnel} x={420} y={250} w={520} at={a + 1} rot={-4} seed={26} h={20} />

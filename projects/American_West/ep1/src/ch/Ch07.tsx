@@ -143,12 +143,12 @@ const LoopPush: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('And it paid') - 1;
   return <MoneyLoop z={zkeys(f, [[a, 1.05], [at('government'), 1.22], [at('The same men') - 1, 1.12]])} cx={keys(f, [[a, 960], [at('government'), 980], [at('The same men'), 900]])}
-    cy={keys(f, [[a, 470], [at('government') - 4, 470], [at('The same men'), 360]])} />;
+    cy={keys(f, [[a, 470], [at('government') - 4, 470], [at('The same men'), 420]])} />;
 };
 const LoopSame: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('The same men') - 1;
-  return <MoneyLoop z={zkeys(f, [[a, 1.1], [at('That means'), 0.9]])} cx={960} cy={keys(f, [[a, 650], [at('That means'), 520]])} />;
+  return <MoneyLoop z={zkeys(f, [[a, 1.06], [at('That means'), 0.9]])} cx={960} cy={keys(f, [[a, 560], [at('That means'), 520]])} />;
 };
 const LoopStack: React.FC = () => (
   <AbsoluteFill>
@@ -456,7 +456,7 @@ const ViewsLeft: React.FC = () => {
 const ViewsRight: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('To his critics') - 1;
-  return <TwoViews z={1.18} cx={keys(f, [[a, 1140], [at('Quick thing'), 1360]])} cy={520} />;
+  return <TwoViews z={zkeys(f, [[a, 1.12], [at('Quick thing'), 1.06]])} cx={keys(f, [[a, 960], [at('Quick thing'), 1000]])} cy={520} />;
 };
 
 // ---------------------------------------------------------------- U · the plug: only a small teal note
@@ -477,7 +477,7 @@ const PlugDesk: React.FC = () => {
   const e = T.frames + 60;
   return (
     <DeskShot tilt={keys(f, [[a, 16], [e, 22]])} z={zkeys(f, [[a, 0.98], [e, 0.9]])} x={keys(f, [[a, 20], [e, -20]])}
-      over={<><PlugNote /><ScrimTag text={`${TAG.ames}  ·  ${TAG.sun.split(' · ')[0]}`} x={34} y={24} /></>}>
+      over={<><PlugNote /><ScrimTag text="Oakes Ames, Brady-Handy · LOC  ·  The Sun, Sept. 4, 1872 · LOC" x={34} y={24} /></>}>
       <Print src={I7.sun} size={Z7.sun} x={980} y={60} w={680} crop={[0, 0, 3134, 2700]} at={-99} rot={4} seed={12} blur={0.8} h={4} />
       <Print src={I7.ames} size={Z7.ames} x={300} y={140} w={640} crop={[350, 550, 2350, 2350]} at={-99} rot={-3} seed={9} h={12} />
     </DeskShot>

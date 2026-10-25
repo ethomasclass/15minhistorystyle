@@ -75,13 +75,13 @@ const inside = (size: [number, number], cx: number, cy: number, s: number) => {
 const MovedOn: React.FC = () => {
   const f = useCurrentFrame();
   const b = at('To farms');
-  const c = inside(SZ.tunnel8, keys(f, [[0, 760], [b, 980]]), keys(f, [[0, 1350], [b, 1150]]), zkeys(f, [[0, 1.5], [b, 0.98]]));
+  const c = inside(SZ.tunnel8, keys(f, [[0, 760], [b, 980]]), keys(f, [[0, 1450], [b, 1350]]), zkeys(f, [[0, 1.5], [b, 0.98]]));
   return (
     <AbsoluteFill>
       <PhotoCam src={IMG.tunnel8} size={SZ.tunnel8} cx={c.cx} cy={c.cy} s={c.s} mask={SM.worker} tintAt={4} traceAt={8} />
       <Note text="the men who built it" x={1180} y={760} size={54} rot={-3} at={at('Chinese workers') - 3} />
       <Note text="moved on" x={1260} y={860} size={60} rot={-3} color="#f4efe6" at={at('moved on') - 3} />
-      <ScrimTag text={TAG.tunnel8} />
+      <ScrimTag text={TAG.tunnel8} x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -250,7 +250,7 @@ const ActDesk: React.FC = () => {
   return (
     <DeskShot tilt={keys(f, [[a, 26], [b, 16]])} z={zkeys(f, [[a, 0.88], [b, 0.97]])} hits={[a + 4]}
       over={<>
-        <SlapTitle text="CHINESE EXCLUSION ACT" x={90} y={840} size={84} at={at('Chinese Exclusion') - 1} seed={63} />
+        <SlapTitle text="CHINESE EXCLUSION ACT" x={150} y={840} size={84} at={at('Chinese Exclusion') - 1} seed={63} />
         <SlapTitle text="1882" x={1430} y={160} size={110} at={a + 2} seed={65} />
         <ScrimTag text={TAG.act} x={34} y={24} />
       </>}>
@@ -387,8 +387,8 @@ const TiedWeek: React.FC = () => {
   return (
     <DeskShot tilt={keys(f, [[a, 14], [at('And it built'), 20]])} z={zkeys(f, [[a, 1.0], [at('And it built'), 0.94]])} lamp={[600, 480]}
       over={<>
-        <Hand parts={[['it did tie the country together']]} x={1000} y={260} size={58} at={a + 2} />
-        <Mono text="COAST TO COAST: MONTHS → A WEEK" x={1000} y={420} size={30} at={at('Months') - 1} color="#FF6F61" />
+        <Hand parts={[['it did tie the country together']]} x={760} y={60} size={54} at={a + 2} />
+        <Mono text="COAST TO COAST: MONTHS → A WEEK" x={1180} y={190} size={30} at={at('Months') - 1} color="#FF6F61" />
         <ScrimTag text={TAG.spike} x={34} y={24} />
       </>}>
       <SpikePrint t0={-99} />
@@ -403,10 +403,10 @@ const NextEps: React.FC = () => {
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <DarkPaper />
       <AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: '40% 50%'}}>
-        <MapCard x={140} y={170} w={1050} h={700} src={IMG.warren} size={SZ.warren} fx={2000} fy={1200} scale={0.42} rot={-2} at={a + 1}
+        <MapCard x={120} y={190} w={900} h={620} src={IMG.warren} size={SZ.warren} fx={2000} fy={1200} scale={0.42} rot={-2} at={a + 1}
           loop={{sx: 2050, sy: 1250, rx: 1100, ry: 650}} caption="THE WEST · 1868" bright />
-        <Hand parts={[['it built the West']]} x={1260} y={320} size={70} at={at('built') - 2} />
-        <Note text="of the next three episodes" x={1270} y={460} size={48} rot={-3} at={at('three episodes') - 3} />
+        <Hand parts={[['it built the West']]} x={1110} y={320} size={70} at={at('built') - 2} />
+        <Note text="of the next three episodes" x={1110} y={460} size={46} rot={-3} at={at('three episodes') - 3} />
       </AbsoluteFill>
       <Tag text={TAG.warren} />
     </AbsoluteFill>
@@ -439,7 +439,7 @@ const Crossers: React.FC = () => {
         {[['travelers', 'Travelers'], ['shippers', 'shippers'], ['settlers', 'settlers'], ['railroad owners', 'the men who owned']].map(([t, w], i) => (
           <Hand key={t} parts={[[t]]} x={1220 + (i % 2) * 40} y={190 + i * 120} size={74} at={at(w) - 3} />
         ))}
-        <Note text="got a country they could cross" x={1100} y={720} size={52} rot={-3} color="#f4efe6" at={at('could cross') - 3} />
+        <Note text="got a country they could cross" x={960} y={760} size={48} rot={-3} color="#f4efe6" at={at('could cross') - 3} />
         <ScrimTag text="J. Carbutt, Union Pacific excursion at the 100th meridian, Oct. 1866 · Library of Congress" x={34} y={24} />
       </>}>
       <Print src={IMG.carbutt} size={SZ.carbutt} x={80} y={200} w={1040} crop={[0, 520, 2012, 1450]} at={a + 1} rot={-2} seed={4} />
@@ -476,7 +476,7 @@ const Shaken: React.FC = () => (
 );
 const Freedmen: React.FC = () => (
   <CallCard src={I9.louisiana} size={Z9.louisiana} crop={[150, 760, 2850, 1650]} a={at('The railroad bust') - 1} b={at('And the men who did')} w={1080}
-    tag="Federal troops leave the New Orleans State House, April 1877, Frank Leslie's · Library of Congress">
+    tag="Federal troops leave the New Orleans State House, 1877, Frank Leslie's · LOC">
     <Note text="the bust helped end Reconstruction" x={260} y={700} size={52} rot={-2} at={at('bust') - 2} />
     <Hand parts={[['freedmen in the South', true]]} x={330} y={820} size={74} at={at('freedmen') - 3} />
   </CallCard>
@@ -485,14 +485,14 @@ const ShutOut: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('And the men who did') - 1;
   const b = at('This is our');
-  const c = inside(SZ.tunnel8, keys(f, [[a, 1150], [b, 900]]), keys(f, [[a, 1200], [b, 1250]]), zkeys(f, [[a, 1.0], [b, 1.12]]));
+  const c = inside(SZ.tunnel8, keys(f, [[a, 1150], [b, 900]]), keys(f, [[a, 1420], [b, 1450]]), zkeys(f, [[a, 1.0], [b, 1.12]]));
   return (
     <AbsoluteFill>
       <PhotoCam src={IMG.tunnel8} size={SZ.tunnel8} cx={c.cx} cy={c.cy} s={c.s} mask={SM.worker} tintAt={a + 3} traceAt={a + 5} />
       <Note text="the hardest work" x={1160} y={150} size={56} rot={-3} at={at('hardest') - 3} />
       <Note text="in the mountains, in the snow" x={1060} y={250} size={50} rot={-3} at={at('mountains') - 3} />
       <Hand parts={[['shut out ', true], ['by name']]} x={1080} y={820} size={88} at={at('shut out') - 3} />
-      <ScrimTag text={TAG.tunnel8} />
+      <ScrimTag text={TAG.tunnel8} x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -569,7 +569,7 @@ const LedgerPush: React.FC = () => {
 const LedgerPan: React.FC = () => {
   const f = useCurrentFrame();
   const a = at("Who didn't") - 1;
-  return <LedgerCam z={1.3} cx={keys(f, [[a, 1040], [at('The railroad tied') - 1, 1360]])} cy={keys(f, [[a, 430], [at('The railroad tied') - 1, 470]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.18], [at('The railroad tied') - 1, 1.1]])} cx={keys(f, [[a, 900], [at('The railroad tied') - 1, 1000]])} cy={keys(f, [[a, 440], [at('The railroad tied') - 1, 480]])} />;
 };
 
 // ---------------------------------------------------------------- S · the closing line on Russell's photo
@@ -628,7 +628,7 @@ const Cows: React.FC = () => {
       over={<>
         <Mono text="ABOUT 5,000,000 COWS" x={1200} y={760} size={36} at={at('million') + 2} color="#FF6F61" />
         <Note text="→ Episode 2" x={1240} y={850} size={54} rot={-3} at={at('cows') + 2} />
-        <ScrimTag text={`${TAG.warren}  ·  ${TAG.cattle}`} x={34} y={24} />
+        <ScrimTag text="Map: Warren & Freyhold, 1868 · LOC  ·  Longhorn: Frenzeny & Tavernier, Harper's, 1874 · LOC" x={34} y={24} />
       </>}>
       <Lift x={330} y={180} w={980} hgt={640} h={8} at={-99} rot={-2} seed={41} blur={1.2}>
         <MapCard x={0} y={0} w={980} h={640} src={IMG.warren} size={SZ.warren} fx={2550} fy={1500} scale={0.85} at={-99}
@@ -659,7 +659,7 @@ const EndScreen: React.FC = () => {
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <DeskShot tilt={keys(f, [[a, 16], [END, 10]])} z={zkeys(f, [[a, 0.84], [END, 0.8]])} lamp={[960, 420]}>
-        <div style={{filter: 'blur(4px) brightness(0.35)'}}><SpikePrint t0={-99} worker={-99} /></div>
+        <div style={{filter: 'blur(4px) brightness(0.35)'}}><SpikePrint t0={-99} /></div>
       </DeskShot>
       <SlapTitle text="NOT IN THE PICTURE" x={110} y={80} size={64} at={a + 2} seed={21} />
       <Note text="thanks for watching" x={1220} y={90} size={52} rot={-3} at={at('watching') - 3} />
