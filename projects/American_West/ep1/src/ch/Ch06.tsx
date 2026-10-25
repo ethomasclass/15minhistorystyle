@@ -27,13 +27,14 @@ const END = Math.ceil(N.duration * 30) + 60;
  *  - critical: cartoon_keppler_trying_it_on_1875.jpg [3840, 5326] (Keppler, "Trying it on", Frank Leslie's, Jan. 2, 1875: Grant tries on a crown)
  *  - admiring: cartoon_nast_usg_1868.jpg [960, 682] (Nast, "Unconditional Surrender Grant", Harper's Weekly, Nov. 21, 1868; small scan)
  */
-type Cartoon = {src: string; size: [number, number]; grant: [number, number, number, number]; cam: [[number, number, number], [number, number, number]]; note: string; tag: string};
+type Cartoon = {src: string; size: [number, number]; grant: [number, number, number, number]; cam: [[number, number, number], [number, number, number]]; note: string[]; noteXY: [number, number]; tag: string};
 const CARTOON_A: Cartoon = {
   src: 'img/ch06/cartoon_nast_grant_1872.png',
   size: [1920, 2228],
-  grant: [590, 1150, 240, 640],
+  grant: [530, 1150, 200, 640],
   cam: [[760, 1000, 1.0], [640, 900, 1.25]],
-  note: 'the general who saved the Union, guarding its new citizens',
+  note: ['the general who saved the Union,', 'guarding its new citizens'],
+  noteXY: [960, 110],
   tag: "Thomas Nast, Harper's Weekly, April 13, 1872 · Wikimedia Commons",
 };
 const CARTOON_B: Cartoon = {
@@ -41,7 +42,8 @@ const CARTOON_B: Cartoon = {
   size: [2839, 1858],
   grant: [1220, 950, 250, 680],
   cam: [[1300, 900, 0.75], [1220, 820, 0.95]],
-  note: 'a soldier out of his depth',
+  note: ['a soldier out of his depth'],
+  noteXY: [110, 900],
   tag: "Matt Morgan, Grant's civil service exam, Frank Leslie's, Jan. 13, 1872 · Wikimedia Commons",
 };
 
@@ -75,12 +77,12 @@ const TAG = {
 
 /** 1 · Grant in 1868 (coral), a slow push. */
 const Grant1868: React.FC = () => (
-  <Pic src={I.grant} size={Z.grant} tag={TAG.grant} mask={M6.grant} tintAt={6} tint={0.6} traceAt={10} k={[[0, 1312, 1360, 0.74], [at('Let us'), 1330, 1330, 0.82]]}>
+  <Pic src={I.grant} size={Z.grant} tag={TAG.grant} mask={M6.grant} tintAt={6} tint={0.5} traceAt={10} k={[[0, 1312, 1360, 0.74], [at('Let us'), 1330, 1330, 0.82]]}>
     {() => (
       <>
         <SlapTitle text="1868" x={100} y={120} size={130} at={at('1868')} seed={71} />
         <Note text="four words" x={110} y={360} size={62} rot={-4} at={at('four') - 2} />
-        <Label text="from his letter accepting the nomination" x={112} y={480} size={22} at={at('letter') - 2} />
+        <Label text="from his acceptance letter" x={112} y={470} size={22} at={at('letter') - 2} />
       </>
     )}
   </Pic>
@@ -155,7 +157,7 @@ const Galena: React.FC = () => {
 
 /** 6 · the war changed everything: Grant again, pulled back. */
 const Famous: React.FC = () => (
-  <Pic src={I.grant} size={Z.grant} tag={TAG.grant} mask={M6.grant} tintAt={-99} tint={0.6} k={[[at('The war changed') - 1, 1330, 1500, 0.95], [at('And for a lot'), 1330, 1500, 0.77]]}>
+  <Pic src={I.grant} size={Z.grant} tag={TAG.grant} mask={M6.grant} tintAt={-99} tint={0.5} k={[[at('The war changed') - 1, 1330, 1500, 0.95], [at('And for a lot'), 1330, 1500, 0.77]]}>
     {() => <Lines x={110} y={160} size={56} gap={84} rows={[{text: 'the most famous man', at: at('famous') - 3}, {text: 'in the country', at: at('country') - 3}]} />}
   </Pic>
 );
@@ -224,7 +226,7 @@ const Vote: React.FC = () => (
 /** 10 · the Klan's terror (Harper's Weekly, 1872), wide. */
 const Klan: React.FC = () => (
   <Pic src={I.klan} size={Z.klan} tag={TAG.klan} k={[[at('and when') - 1, 1950, 1500, 0.5], [at('he sent'), 1700, 1450, 0.56]]}>
-    {() => <Note text="terror against Black voters" x={1130} y={900} size={56} rot={-3} at={at('terrorized') - 2} />}
+    {() => <Note text="terror against Black voters" x={860} y={900} size={52} rot={-3} at={at('terrorized') - 2} />}
   </Pic>
 );
 
@@ -308,14 +310,14 @@ const BothWays: React.FC = () => {
 };
 
 /** 16–17 · one cartoon full frame, a push to Grant with a loop. */
-const CartoonDetail: React.FC<{c: Cartoon; a: number; b: number; noteAt: number; noteX: number}> = ({c, a, b, noteAt, noteX}) => (
+const CartoonDetail: React.FC<{c: Cartoon; a: number; b: number; noteAt: number}> = ({c, a, b, noteAt}) => (
   <Pic src={c.src} size={c.size} tag={c.tag} filter="grayscale(1) contrast(1.15)" k={[[a, ...c.cam[0]], [b, ...c.cam[1]]]}>
     {(S, s) => {
       const [gx, gy] = S(c.grant[0], c.grant[1]);
       return (
         <>
           <Loop cx={gx} cy={gy} rx={c.grant[2] * s} ry={c.grant[3] * s} at={a + 8} seed={23} tilt={-4} width={6} />
-          <Lines x={noteX} y={880} size={52} rows={[{text: c.note, at: noteAt}]} />
+          <Lines x={c.noteXY[0]} y={c.noteXY[1]} size={44} gap={76} rows={c.note.map((t, i) => ({text: t, at: noteAt + i * 8}))} />
         </>
       );
     }}
@@ -361,7 +363,7 @@ const Scandal: React.FC = () => {
           <TwoViews left={[-99, -99, -99, -99]} leftHead={-99} rightHead={-99} right={[{text: 'loyal', at: -99}, {text: 'trusted his friends', at: -99}]} />
         </Lift>
       </DeskCam>
-      <Lines x={980} y={720} size={56} gap={84} rows={[{text: '+ the biggest scandal of all…', at: at('scandal') - 3, color: '#ffffff'}, {text: 'started before he took office', at: at('started') - 2}]} />
+      <Lines x={880} y={720} size={52} gap={84} rows={[{text: '+ the biggest scandal of all…', at: at('scandal') - 3, color: '#ffffff'}, {text: 'started before he took office', at: at('started') - 2}]} />
     </AbsoluteFill>
   );
 };
@@ -385,8 +387,8 @@ const SHOTS: [number, React.ReactNode, ('whip' | 'cut')?][] = [
   [c('His Peace'), <Policy />, 'cut'],
   [c('Remember'), <Remember />, 'cut'],
   [c('Cartoonists'), <BothWays />, 'whip'],
-  [c('To some'), <CartoonDetail c={CARTOON_A} a={c('To some')} b={c('To others')} noteAt={at('saved') - 3} noteX={110} />, 'cut'],
-  [c('To others'), <CartoonDetail c={CARTOON_B} a={c('To others')} b={c('Because his')} noteAt={at('depth') - 6} noteX={110} />, 'whip'],
+  [c('To some'), <CartoonDetail c={CARTOON_A} a={c('To some')} b={c('To others')} noteAt={at('saved') - 3} />, 'cut'],
+  [c('To others'), <CartoonDetail c={CARTOON_B} a={c('To others')} b={c('Because his')} noteAt={at('depth') - 6} />, 'whip'],
   [c('Because his'), <Critics />, 'cut'],
   [c('And some'), <Friends />, 'cut'],
   [c('And the biggest'), <Scandal />, 'cut'],

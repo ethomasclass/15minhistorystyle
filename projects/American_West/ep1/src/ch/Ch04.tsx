@@ -363,13 +363,13 @@ const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const a = detail ? at('It kept') - 1 : at('The company') - 1;
   const b = detail ? at('Most of') : at('It kept');
   const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 1]];
-  const cam = detail ? {z: keys(f, [[a, 1.3], [b, 1.42]]), x: -60, y: -300} : {z: keys(f, [[a, 0.84], [b, 0.88]]), x: 0, y: -20};
+  const cam = detail ? {z: keys(f, [[a, 1.12], [b, 1.2]]), x: -40, y: -170} : {z: keys(f, [[a, 0.84], [b, 0.88]]), x: 0, y: -20};
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 12, cam.z, cam.x, cam.y, -1], [b, 12, cam.z, cam.x, cam.y, -1]]}>
         <Lift x={330} y={110} w={1260} hgt={700} h={8} at={detail ? -99 : at('company')} rot={-1} seed={4}>
           <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 40% 30%, #36312a 0%, #26231d 75%, #1d1a15 100%)', boxShadow: `14px 18px 0 #050403`}}>
-            <div style={{position: 'absolute', left: 50, top: 40, fontFamily: JF.mono, fontSize: 28, letterSpacing: 4, color: pal.mark}}>THE COMPANY KEPT</div>
+            {!detail && <div style={{position: 'absolute', left: 50, top: 40, fontFamily: JF.mono, fontSize: 28, letterSpacing: 4, color: pal.mark}}>THE COMPANY KEPT</div>}
             {rows.map(([t, on, n], i) => (
               <React.Fragment key={t}>
                 <div style={{position: 'absolute', left: 30, right: 30, top: 140 + i * 170, height: 2, background: pal.mark, opacity: 0.5}} />

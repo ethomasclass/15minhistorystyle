@@ -10,7 +10,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration} from '.
 import {CircleMount, CutOut, MapCard, Pin, TornPrint} from '../samples/kit';
 import {IMG, SM, SZ, WARREN} from '../samples/masks';
 import {keys, Lift, PhotoCam, ScrimTag, shake, Shots, SlapTitle, zkeys} from '../previews/fx';
-import {Big, BWX, Counter, DeskCam, Float, HBar, Label, Line, LITHO, Lines, Pic, Prop, Sounds, type SfxRow, Stage, Upright} from '../kit/ch04_extra';
+import {Big, BWX, Counter, DeskCam, Float, Print, HBar, Label, Line, LITHO, Lines, Pic, Prop, Sounds, type SfxRow, Stage, Upright} from '../kit/ch04_extra';
 import {M5} from '../masks_ch05';
 import {M6} from '../masks_ch06';
 
@@ -72,8 +72,8 @@ const MapDesk: React.FC<{a: number; b: number; prog: [number, number]; pinAt: nu
           <Pin x={px} y={py + 10} at={pinAt} size={26} />
         </Lift>
       </DeskCam>
-      <Label text="central pacific →" x={300} y={900} size={26} />
-      <Label text="← union pacific" x={1330} y={900} size={26} />
+      <Label text="central pacific →" x={200} y={990} size={26} />
+      <Label text="← union pacific" x={1380} y={990} size={26} />
       {title}
       <ScrimTag text={TAG.map} />
     </AbsoluteFill>
@@ -194,8 +194,8 @@ const Crew: React.FC = () => {
         return (
           <>
             <Loop cx={cx} cy={cy} rx={300} ry={260} at={at('Chinese') - 2} seed={17} tilt={-6} width={6} />
-            <Note text="Chinese crews: most of it" x={Math.min(1180, cx + 320)} y={150} size={58} rot={-3} at={at('most') - 2} />
-            <Note text="+ eight Irish rail lifters" x={Math.min(1220, cx + 360)} y={260} size={50} rot={-3} at={at('eight') - 2} color="#ffffff" />
+            <Note text="Chinese crews: most of it" x={Math.min(1060, cx + 320)} y={150} size={58} rot={-3} at={at('most') - 2} />
+            <Note text="+ eight Irish rail lifters" x={Math.min(1100, cx + 360)} y={260} size={50} rot={-3} at={at('eight') - 2} color="#ffffff" />
           </>
         );
       }}
@@ -247,7 +247,7 @@ const Wire: React.FC = () => {
             <Prop src={I.key} m={M5.telegraphkey} x={80} y={640} w={420} at={at('telegraph') - 1} />
             <Note text="wired to the last spike" x={110} y={130} size={54} rot={-3} at={at('last spike') - 2} />
             <Note text="(sort of)" x={Math.min(1500, hx + 40)} y={Math.max(80, hy - 160)} size={52} rot={-4} at={at('sort') - 1} color="#ffffff" />
-            <Label text="→ the rest of the country" x={Math.min(1350, hx + 20)} y={hy + 40} size={24} at={at('across') - 2} />
+            <Label text="→ the rest of the country" x={Math.min(1350, hx + 20)} y={hy - 70} size={24} at={at('across') - 2} />
           </>
         );
       }}
@@ -280,9 +280,14 @@ const Golden: React.FC = () => {
   const a = at('golden') - 1;
   return (
     <AbsoluteFill>
-      <Pic src={I.spike} size={Z.spike} tag={TAG.spike} mask={M5.spike} tintAt={a + 3} tint={0.68} traceAt={a + 5} k={[[a, 520, 560, 1.25], [at('The gold spike'), 520, 1000, 1.25]]} />
-      <Note text="the golden spike" x={1300} y={180} size={60} rot={-4} at={a + 6} />
-      <Note text="Sort of." x={1330} y={760} size={70} rot={-3} at={at('Sort', 2) - 1} color="#ffffff" />
+      <DeskCam k={[[a, 16, 1.0, 0, 0, -2], [at('The gold spike'), 10, 1.1, 40, 20, 0]]}>
+        <Lift x={560} y={40} w={560} hgt={840} h={10} at={-99} rot={-2} seed={27}>
+          <Print src={I.spike} size={Z.spike} x={0} y={0} w={560} at={-99} seed={27} mask={M5.spike} tint={0.68} traceAt={a + 5} />
+        </Lift>
+      </DeskCam>
+      <Note text="the golden spike" x={1260} y={260} size={60} rot={-4} at={a + 6} />
+      <Note text="Sort of." x={1300} y={720} size={70} rot={-3} at={at('Sort', 2) - 1} color="#ffffff" />
+      <ScrimTag text={TAG.spike} />
     </AbsoluteFill>
   );
 };
@@ -318,7 +323,7 @@ const InAndOut: React.FC = () => {
   const down = interpolate(g, [at('went into') , at('went into') + 6], [0, 1], {...clamp, easing: (t) => t * t});
   const up = interpolate(g, [at('came right'), at('came right') + 10], [0, 1], {...clamp, easing: (t) => 1 - (1 - t) * (1 - t)});
   const tap = g >= at('tap') - 2 && g < at('tap') + 4 ? 8 : 0;
-  const tipY = TIE.y + 70 - 330 * (1 - down) - 360 * up + tap;
+  const tipY = TIE.y + 70 - 240 * (1 - down) - 230 * up + tap;
   const sh = shake(f, [at('tap')], 3);
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
@@ -352,7 +357,7 @@ const Iron: React.FC = () => {
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <DeskCam k={[[a, 4, 1.04, 0, 0, 0], [at('And the man'), 4, 1.08, 0, 0, 0]]}><></></DeskCam>
       <Tie holeAt={-99} />
-      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${cx}px ${cy}px`, transform: `rotate(-90deg)`}}>
+      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${cx}px ${cy}px`, transform: `rotate(-86deg)`}}>
         <CutOut src={I.iron} size={[1920, 1920]} mask={M5.ironspike} place={{left: cx - len / 2 - bx0 * sc, top: cy - thick / 2 - by0 * sc, scale: sc}} at={-99} filter="saturate(0.4) contrast(1.1)" />
       </div>
       <Note text="an ordinary iron spike" x={1080} y={300} size={58} rot={-4} at={at('ordinary') - 1} />
@@ -366,12 +371,12 @@ const Miss: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('And the man') - 1;
   const hit = at('missed') - 3;
-  const rot = interpolate(g, [a, at('swinging'), hit - 5, hit], [-8, -18, -24, -123], {...clamp, easing: (t) => t * t});
+  const rot = interpolate(g, [a, at('swinging'), hit - 5, hit], [-8, -18, -24, -126], {...clamp, easing: (t) => t * t});
   const sh = shake(f, [hit + 1], 12);
   const [bx0, , bx1] = M5.sledgehammer.data.boxes.subject;
-  const w = 480;
+  const w = 400;
   const sc = w / (bx1 - bx0);
-  const pivot: [number, number] = [1500, 760];
+  const pivot: [number, number] = [1650, 760];
   const len = 420;
   const sscale = len / (M5.ironspike.data.boxes.subject[2] - M5.ironspike.data.boxes.subject[0]);
   const ib = M5.ironspike.data.boxes.subject;
@@ -380,7 +385,7 @@ const Miss: React.FC = () => {
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <DeskCam k={[[a, 4, 1.08, 0, 0, 0], [at('So go back'), 4, 1.14, 0, 20, 0]]}><></></DeskCam>
       <Tie holeAt={-99} />
-      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${TIE.hole}px ${icy}px`, transform: 'rotate(-90deg)'}}>
+      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${TIE.hole}px ${icy}px`, transform: 'rotate(-86deg)'}}>
         <CutOut src={I.iron} size={[1920, 1920]} mask={M5.ironspike} place={{left: TIE.hole - len / 2 - ib[0] * sscale, top: icy - ((ib[3] - ib[1]) * sscale) / 2 - ib[1] * sscale, scale: sscale}} at={-99} filter="saturate(0.4) contrast(1.1)" />
       </div>
       <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${pivot[0]}px ${pivot[1]}px`, transform: `rotate(${rot}deg)`}}>
@@ -419,8 +424,8 @@ const Back: React.FC = () => {
       <DeskCam k={[[a, 26, 0.86, 0, 0, -2], [at('By some'), 15, 0.92, 0, 10, 0]]}>
         <DeskPieces worker={w} />
       </DeskCam>
-      <Note text="laid some of the last rails" x={1290} y={140} size={52} rot={-3} at={at('laid') - 2} />
-      <ScrimTag text={`${TAG.russell}  ·  worker: A. A. Hart, Tunnel No. 8 · LOC`} x={34} y={1026} />
+      <Lines x={1300} y={130} size={50} gap={78} rows={[{text: 'laid some of', at: at('laid') - 2}, {text: 'the last rails', at: at('last rails') - 2}]} />
+      <ScrimTag text="A. J. Russell, May 10, 1869 · Wikimedia Commons  ·  worker: A. A. Hart, Tunnel No. 8 · LOC" x={34} y={1026} />
     </AbsoluteFill>
   );
 };
@@ -463,7 +468,7 @@ const Bars: React.FC<{detail: boolean}> = ({detail}) => {
     <AbsoluteFill>
       <DeskCam k={cam as [number, number, number, number, number, number][]}>
         <div style={{position: 'absolute', left: 400, top: 300, width: 1920, height: 1080}}>
-          <div style={{position: 'absolute', left: 140, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.mark}}>NEW YORK → SAN FRANCISCO · TRAVEL TIME (APPROX.)</div>
+          {!detail && <div style={{position: 'absolute', left: 140, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.mark}}>NEW YORK → SAN FRANCISCO · TRAVEL TIME (APPROX.)</div>}
           <HBar x={140} y={380} w={1380} h={90} at={detail ? -99 : at('months')} color="rgba(237,231,220,0.7)" label="BEFORE · BY WAGON, OR BY SHIP AROUND SOUTH AMERICA" value="" />
           <Lines x={150} y={490} size={56} rows={[{text: 'months', at: detail ? -99 : at('months') + 4, color: '#f4efe6'}]} />
           <HBar x={140} y={720} w={80} h={90} at={detail ? at('About a') - 1 : 1e7} color={pal.subject} label="1869 · BY RAIL" value="about a week" />

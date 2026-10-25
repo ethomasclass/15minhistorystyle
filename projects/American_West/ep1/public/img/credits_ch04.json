@@ -5,5 +5,117 @@
     "date": "circa 1865\u20131875",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Charles_Crocker_Silas_Selleck_Portrait_Crop.jpg"
+  },
+  "ch04/hart_summit_tunnel_portal.jpg": {
+    "title": "East portal of summit tunnel. Western summit. Length 1,660 feet",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/94505498/",
+    "source": "loc:94505498",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch04/hart_summit_tunnel_inside.jpg": {
+    "title": "Summit tunnel, before completion. Western summit, altitude 7,042 feet",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005682943/",
+    "source": "loc:2005682943",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch04/hart_donner_snow_bank.jpg": {
+    "title": "Bluff and snow bank in Donner Pass. Western summit, altitude 1,092 feet",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005682945/",
+    "source": "loc:2005682945",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch04/hart_camp_near_summit.jpg": {
+    "title": "Camp near Summit Tunnel, Mount King in the distance",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005682911/",
+    "source": "loc:2005682911",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch04/hart_chinese_camp_browns.jpg": {
+    "title": "Chinese camp, Brown's Station",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005683008/",
+    "source": "loc:2005683008",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch04/placer_herald_1867_07_06.jpg": {
+    "title": "The Placer Herald (Auburn, Placer County, Calif.), July 6, 1867, p. 1 (letter on the Chinese strike)",
+    "artist": "",
+    "date": "1867-07-06",
+    "licence": "public domain (Library of Congress, Chronicling America)",
+    "page": "https://www.loc.gov/resource/sn82014998/1867-07-06/ed-1/?sp=1",
+    "notes": "column crop (page px 3050,1550 to 4060,3900); swipe lines from the page's ALTO OCR, scaled 0.25"
+  },
+  "ch04/ai_tunnel_face.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#l1_tunnel_face",
+    "notes": "reused from review/ai_tests/litho/L1_tunnel_face__medium.jpg; signature and border cropped"
+  },
+  "ch04/ai_snow_tunnel.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#c4_snow_tunnel",
+    "notes": ""
+  },
+  "ch04/ai_stacked_tools.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#c4_stacked_tools",
+    "notes": "signature cropped"
+  },
+  "ch04/ai_plate_sierra_snow.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#plate_sierra_snow",
+    "notes": "invented inscription painted out; border cropped"
+  },
+  "ch04/ai_prop_drill_sledge.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#prop_drill_sledge",
+    "notes": ""
+  },
+  "ch04/ai_prop_powder_keg.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#prop_powder_keg",
+    "notes": ""
+  },
+  "ch04/ai_prop_nitro_can.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch04.md#prop_nitro_can",
+    "notes": ""
+  },
+  "samples/hart_tunnel8_worker.jpg (reused)": {
+    "title": "A. A. Hart, Heading of east portal Tunnel No. 8",
+    "licence": "no known restrictions (LOC)",
+    "page": "https://www.loc.gov/pictures/item/2005682948/"
+  },
+  "samples/map_warren_1868.jpg (reused)": {
+    "title": "G. K. Warren / E. Freyhold, Territory of the United States from the Mississippi River to the Pacific Ocean, 1868",
+    "licence": "LOC, public domain",
+    "page": "https://www.loc.gov/item/gm71000836/"
   }
 }
