@@ -152,8 +152,8 @@ export const ThumbD: React.FC = () => (
 
 /** E · Lee (orange) over the Currier print of Gettysburg, July 3. */
 export const ThumbE: React.FC = () => (
-  <Headshot bg="img/ch02/gettysburg_battle_july3_currier_1863.jpg" bgSize={[3000, 2335]} bfx={1300} bfy={1150} bz={1.15}
-    src="img/ch01/lee_portrait_vannerson_1864.jpg" size={[1899, 2993]} mask={MASKS.lee} face={[990, 650]} at={[1580, 390]} scale={1.4}
+  <Headshot bg="img/ch02/gettysburg_battle_july3_currier_1863.jpg" bgSize={[3000, 2335]} bfx={1500} bfy={1150} bz={1.4}
+    src="img/ch01/lee_portrait_vannerson_1864.jpg" size={[1899, 2993]} mask={MASKS.lee} face={[990, 650]} at={[1550, 500]} scale={1.75}
     color={GOLD} textSide="left">
     <Note text="Gettysburg + Vicksburg, July 1863" x={100} y={320} size={60} rot={-4} color="#ffffff" />
     <Highlight text="THE WEEK THAT" x={90} y={430} size={104} at={0} seed={309} rot={-3} />
