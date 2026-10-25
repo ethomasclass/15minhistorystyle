@@ -188,3 +188,21 @@ for the `Loop`'s `cy` and `rx` inside a `CropCard`'s `S()` mapping, then check a
 small (`z` 1.0 → 1.05) with no vertical drift, and look at the first and last frame. Grant and Lee's heads left the shot on
 the first try.
 
+
+
+## 7. Google AI Studio (Gemini) and the lithograph style (from the West series)
+
+- **Key:** `GEMINI_API_KEY` in the project's `.env` (the user's paid AI Studio project). Never print or commit it.
+- **Model:** `gemini-2.5-flash-image` (about 4 cents an image), `generationConfig: {responseModalities: ["IMAGE"], imageConfig:
+  {aspectRatio: "16:9"}}`. The user preferred it to `gemini-3-pro-image` (about 13 cents), which looked "more AI".
+- **West-series style:** tinted 1860s lithograph with muted colour; the master prompt and rules are in
+  `projects/American_West/LITHO_PROMPT.md`. Flash habits to fix every time: invented signatures (paint out), borders and rounded
+  vignettes (crop), figures lined up in a row (the prompt's composition paragraph).
+- **Post:** `python3 tools/weather.py in.png out.jpg --preset medium` (the user's pick).
+- **Other uses that worked** (`projects/American_West/ep1/review/ai_tests/`): texture packs on pure black for keying (torn paper,
+  translucent tape) and stains on white (multiply); props shot on a white seamless background for cut-outs (mask them with
+  `tools/mask.py`, not a white key, or a grey shadow fringe stays); **finding exact line positions on a scanned document** with
+  `gemini-flash-latest` and `responseMimeType: application/json` (boxes `[ymin, xmin, ymax, xmax]` normalised 0–1000), which places
+  swipes and zooms exactly; transcribing handwriting; describing archival photos.
+- **Free routes tested and dropped (Oct 2026):** Pollinations (watermarked, swapped model, ignores style), Hugging Face Inference
+  (no free image credit; Flux removed from the free tier), local SDXL-Turbo on CPU (fine for background plates, wrong on people).

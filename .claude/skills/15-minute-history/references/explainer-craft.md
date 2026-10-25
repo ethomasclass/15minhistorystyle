@@ -14,6 +14,7 @@ Read with `script-writing.md` (phase 2–3) and `building-scenes.md` (phase 7).
 3. Visual menu: Vox → our version
 4. Build notes for the new pieces
 5. A colour exception, when the subject is a colour
+6. Depth, texture and 3D (from the West series)
 
 ## 1. Script checklist
 
@@ -148,3 +149,28 @@ real scan and keep it yellow-leaning, away from teal `#2FE0C4`; don't trace a te
 In `quiet` chapters the green stays small and still (it's evidence). Let the motif close the video (e.g. the swatch
 sealed in a sleeve beside the sealed book). Full proposal, with the dust-vs-gas diagram, document swipes, output
 chart and the London–Boston–Michigan map: `techniques/vox_study.md` §7.
+
+
+## 6. Depth, texture and 3D (from the West series)
+
+The user's note on the first West-series samples: "it all feels a little flat… not a lot of depth variation or texture. Zooming in
+might help." Studying three Vox-collage pipelines (`techniques/vox_repos_study.md`) showed why: the pure collage look is *meant* to be
+flat (one plane, scanner light). The channel gets depth from camera grammar, texture and drawn 3D instead. Working examples:
+`projects/American_West/ep1/src/previews/` (P1 cold open, P2 race ribbon, P3 township) and its `review/previews/README.md`.
+
+- **Shot grammar.** Every beat is a **wide** shot then a **detail** cut-in. A cut every 3–6 s; one composition never more than ~7 s.
+  One camera move per shot (push, pull, pan, tilt, parallax; static on the payoff), never the same move twice in a row. A timeline
+  story pans the same direction beat to beat, pushes in on the turning point, pulls out on the takeaway.
+- **Zooms need resolution.** Pull the largest scan (LOC TIFF masters) before planning a 6–8× push into a face or object.
+- **A desk with depth.** Cards at different heights (CSS 3D is enough; `@remotion/three` if needed), a lamp pool over the centre,
+  slight focus fall-off on near/far layers, contact shadows that grow with height, parallax inside photos (`tools/layers.py`).
+- **Weight.** A *slap* (a piece starts ~130 % and snaps down), a slight overshoot settle, a small exponentially decaying camera shake
+  on hard landings, a faint "breathing" sway on settled pieces, whip cuts between beats. Marks still step at 12 fps; the camera
+  stays smooth.
+- **Texture.** Torn edges from real torn-paper shapes, translucent tape, stains multiplied in, halftone and slight misregistration
+  on cut-outs (`tools/weather.py`), grain over everything. Still no cream or white surfaces on the black desk.
+- **3D where it explains.** Tilted township grids with slabs rising, elevation ribbons, cut-away diagrams. Teal contour lines on
+  black, one coral element, real data where possible (or labelled control points, "heights exaggerated" on screen).
+- **Hook alignment** (Kallaway). In the first ~2 s the visual, the first spoken line and a short written hook say one thing.
+  After the hook, the three tracks do different jobs: the type states the point, the voice explains why, the picture shows it.
+- **Design the end frame first**, then animate toward it, so pieces resolve into a composed frame rather than drifting in.

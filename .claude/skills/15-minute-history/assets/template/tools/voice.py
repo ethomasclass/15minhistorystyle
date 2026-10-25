@@ -1,4 +1,4 @@
-"""Narration: script text -> public/audio/<name>.mp3 + <name>.words.json (word-level timing).
+"""Narration (ElevenLabs eleven_v4, one take per chapter, speed 1.0 by default): script text -> public/audio/<name>.mp3 + <name>.words.json (word-level timing).
 
   python3 tools/voice.py script/v1_cold_open.txt v1_cold_open            # ElevenLabs (needs ELEVENLABS_API_KEY, VOICE_ID)
   python3 tools/voice.py script/v1_cold_open.txt v1_cold_open --piper    # offline stand-in voice
@@ -18,12 +18,15 @@ except ImportError:
     FFMPEG = "ffmpeg"
 RATE = 44100
 PARA_GAP = float(os.environ.get("VOICE_PARA_GAP", "0.9"))    # seconds of silence between paragraphs
-SENT_GAP = float(os.environ.get("VOICE_SENT_GAP", "0.45"))   # extra breath added after each sentence inside a paragraph
+SENT_GAP = float(os.environ.get("VOICE_SENT_GAP", "0"))   # extra breath added after each sentence inside a paragraph
 LEAD_IN = 0.4     # silence before the first word
-SPEED = float(os.environ.get("VOICE_SPEED", "0.9"))  # ElevenLabs speed, 0.7-1.2
+SPEED = float(os.environ.get("VOICE_SPEED", "1.0"))  # ElevenLabs speed, 0.7-1.2
 STRETCH = float(os.environ.get("VOICE_STRETCH", "1.0"))  # local pitch-preserving tempo; <1 is slower (v2 ignores SPEED; try 0.93)
 MAX_PAUSE = float(os.environ.get("VOICE_MAX_PAUSE", "0"))  # >0: shorten the voice's own pauses to at most this (s)
 CACHE = os.path.join(OUT, "cache")
+# Default since the West series (user's pick): the whole chapter in ONE ElevenLabs request on eleven_v4, so the model
+# paces the paragraphs itself and nothing is spliced. VOICE_ONE_TAKE=0 goes back to paragraph-by-paragraph.
+ONE_TAKE = os.environ.get("VOICE_ONE_TAKE", "1") not in ("0", "", "false")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
@@ -96,7 +99,7 @@ def env():
 def eleven(text, prev, nxt):
     """Returns (pcm16 mono bytes at RATE, [(char, start, end)])."""
     voice = os.environ["VOICE_ID"]
-    model = os.environ.get("ELEVEN_MODEL", "eleven_v3")
+    model = os.environ.get("ELEVEN_MODEL", "eleven_v4")
     if model.startswith("eleven_v3"):
         # v3: most expressive model; stability is one of 0.0 creative / 0.5 natural / 1.0 robust,
         # and it does not accept neighbouring-paragraph context yet.
@@ -186,24 +189,71 @@ def tighten(pcm, chars, max_pause):
     return np.concatenate(out).tobytes(), [(c, shift(s), shift(e)) for c, s, e in chars]
 
 
+FADE = 0.012     # seconds of fade at every splice, so cuts never click
+
+
+def _quietest(a, lo, hi):
+    """Sample index of the quietest 10 ms window between samples lo and hi (falls back to the middle)."""
+    win = int(RATE * 0.01)
+    if hi - lo < 2 * win:
+        return (lo + hi) // 2
+    seg = a[lo:hi].astype(float)
+    n = len(seg) // win
+    e = (seg[:n * win].reshape(n, win) ** 2).mean(1)
+    return lo + int(e.argmin()) * win + win // 2
+
+
+def room_tone(pcm, seconds):
+    """`seconds` of the clip's own quietest background, looped and faded, instead of digital zero."""
+    import numpy as np
+    a = np.frombuffer(pcm, np.int16)
+    n = int(RATE * seconds)
+    if n <= 0:
+        return b""
+    win = int(RATE * 0.2)
+    if len(a) < win * 2:
+        return b"\0\0" * n
+    k = len(a) // win
+    e = (a[:k * win].astype(float).reshape(k, win) ** 2).mean(1)
+    bed = a[int(e.argmin()) * win:(int(e.argmin()) + 1) * win].astype(float) * 0.7
+    out = np.resize(bed, n)
+    f = min(int(RATE * 0.03), n // 2)
+    if f:
+        out[:f] *= np.linspace(0, 1, f); out[-f:] *= np.linspace(1, 0, f)
+    return out.astype(np.int16).tobytes()
+
+
+def fade_edges(pcm, head=True, tail=True):
+    import numpy as np
+    a = np.frombuffer(pcm, np.int16).astype(float)
+    f = min(int(RATE * FADE), len(a) // 2)
+    if f:
+        if head: a[:f] *= np.linspace(0, 1, f)
+        if tail: a[-f:] *= np.linspace(1, 0, f)
+    return a.astype(np.int16).tobytes()
+
+
 def add_pauses(pcm, chars, gap):
-    """Insert `gap` seconds of silence after every sentence that is followed by more speech,
-    cutting halfway between the sentence's last sound and the next word, and shift timings."""
-    out, shifted, prev_cut, shift = b"", [], 0, 0.0
+    """Insert `gap` seconds of room tone after every sentence that is followed by more speech. The cut goes at the
+    quietest point between the sentence's last sound and the next word, with short fades either side (no clicks)."""
+    import numpy as np
+    a = np.frombuffer(pcm, np.int16)
     cuts = []
     for i, (c, s, e) in enumerate(chars):
         if c in ".?!" and i + 1 < len(chars) and chars[i + 1][0].isspace():
             nxt = next((cs for cc, cs, ce in chars[i + 1:] if not cc.isspace()), None)
             if nxt is not None:
-                cuts.append((i, (e + nxt) / 2))
-    ci = 0
+                cuts.append((i, _quietest(a, int(e * RATE), int(nxt * RATE)) / RATE))
+    if gap <= 0 or not cuts:
+        return pcm, chars
+    out, shifted, prev_cut, shift, ci = b"", [], 0, 0.0, 0
     for i, (c, s, e) in enumerate(chars):
         shifted.append((c, s + shift, e + shift))
         if ci < len(cuts) and cuts[ci][0] == i:
             cut = int(cuts[ci][1] * RATE) * 2
-            out += pcm[prev_cut:cut] + b"\0\0" * int(RATE * gap)
+            out += fade_edges(pcm[prev_cut:cut], head=prev_cut > 0) + room_tone(pcm, gap)
             prev_cut, shift, ci = cut, shift + int(RATE * gap) / RATE, ci + 1
-    return out + pcm[prev_cut:], shifted
+    return out + fade_edges(pcm[prev_cut:], tail=False), shifted
 
 
 def words_from_chars(display, chars, offset):
@@ -277,6 +327,11 @@ def main():
     use_piper = "--piper" in sys.argv
     marked = [parse_marks(p.strip()) for p in open(src).read().split("\n\n") if p.strip()]
     paras = [m[0] for m in marked]
+    if ONE_TAKE and not use_piper:
+        # the whole chapter in one request: the model paces paragraphs itself, so there are no splices at all
+        para_lens = [len(m[1]) for m in marked]
+        marked = [("\n\n".join(m[0] for m in marked), [k for m in marked for k in m[1]])]
+        paras = [marked[0][0]]
     pcm = b"\0\0" * int(RATE * LEAD_IN)
     words = []
     for i, p in enumerate(paras):
@@ -294,7 +349,12 @@ def main():
             if k: w["k"] = k
         words += ws
         words[-1]["para_end"] = True
-        pcm += audio + b"\0\0" * int(RATE * PARA_GAP)
+        if ONE_TAKE and not use_piper:
+            n = 0
+            for L in para_lens:
+                n += L
+                words[n - 1]["para_end"] = True
+        pcm += fade_edges(audio) + (room_tone(audio, PARA_GAP) if not use_piper else b"\0\0" * int(RATE * PARA_GAP))
         print(f"  paragraph {i + 1}/{len(paras)}: {len(audio) / 2 / RATE:.1f}s", flush=True)
     os.makedirs(OUT, exist_ok=True)
     wav = os.path.join(OUT, name + ".wav")
