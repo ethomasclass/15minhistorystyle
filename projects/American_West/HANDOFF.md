@@ -39,6 +39,13 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 4. ~~ch02 "Black families" circle~~ Checked: the crop is now tighter (woman in white, mother in the wagon, children); the one
    stylised face at the right edge is out of the circle.
 
+### Branding and transitions (Oct 2026)
+Chunk History replaces 15 Minute History: `src/kit/ChunkIntro.tsx` (from `brand/chunk-history/intro` on the Reconstruction branch)
+gives the 5.5 s 3D intro after the cold open (jingle `public/music/chunk_jingle.mp3`) and the 2 s chapter-break mark snap
+(`LogoBreak`). In-chapter transitions are gentle (`Shots` in `src/previews/fx.tsx`: drift instead of whip, 6-frame dissolve
+instead of a hard cut; whip sound at half level). **Still on the old brand:** the thumbnail and `Brand.tsx` use the old
+15 Minute History `Wordmark` (`src/kit/Intro.tsx`); the end screen has no logo.
+
 ### Mix levels (matched to Black Sox, Oct 2026)
 Narration levelled from ~-24 to -18 LUFS (`tools/level_voice.py`, now run by `voice.py` on every take; zero timing shift). Music
 volumes come from `bed(cue, gap)` in `src/kit/levels.ts` (13 LU under the voice; ch04's grief cue 14). Check: the ch08 mix

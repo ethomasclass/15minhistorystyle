@@ -9,8 +9,10 @@ export const MAP = {w: 4986, h: 4608};
 /** The sound under every handwritten note (one place to change it) and its level. */
 export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
 
+/** The whip sound now sits under a soft drift, not a whip pan (gentle transitions, Oct 2026): play it at half level. */
+const WHIP_GAIN = 0.5;
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
+  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={src.includes('whip') ? volume * WHIP_GAIN : volume} /></Sequence>
 );
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */

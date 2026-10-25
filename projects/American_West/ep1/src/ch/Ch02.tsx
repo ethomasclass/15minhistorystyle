@@ -51,7 +51,7 @@ const Washington: React.FC = () => {
   const b = at('The Civil War') - 1;
   return (
     <AbsoluteFill>
-      <PhotoCam src="img/ch02/capitol_dome_1861.jpg" size={DOME} cx={keys(f, [[0, 1210], [b, 1210]])} cy={keys(f, [[0, 1000], [b, 820]])} s={zkeys(f, [[0, 0.62], [b, 0.7]])} />
+      <PhotoCam src="img/ch02/capitol_dome_1861.jpg" size={DOME} cx={keys(f, [[0, 1210], [b, 1210]])} cy={keys(f, [[0, 1000], [b, 820]])} s={zkeys(f, [[0, 0.8], [b, 0.86]])} />
       <SlapTitle text="WASHINGTON, 1862" x={110} y={850} size={100} at={at('Washington') + 2} seed={12} />
       <ScrimTag text="John Wood, the Capitol dome under construction, May 9, 1861 · Library of Congress" x={34} y={24} />
     </AbsoluteFill>

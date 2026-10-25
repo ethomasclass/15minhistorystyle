@@ -91,6 +91,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 **Picture**
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
 - Big titles stay on screen for at least 2 seconds.
+- **Gentle transitions** (American West Ep 1, Oct 2026): no whip pans. A "whip" shot change is a soft drift (a ~half-second
+  crossfade with a 70 px slide and light blur), a "cut" is a 6-frame dissolve (`Shots` in `src/previews/fx.tsx`); the whip sound
+  plays at half level.
+- **Chunk History branding** (Oct 2026): the 3D Chunk intro after the cold open (5.5 s, with its jingle) and a 2 s mark snap
+  between chapters (the coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`).
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.

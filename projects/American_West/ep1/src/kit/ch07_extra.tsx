@@ -6,7 +6,7 @@ import {clamp} from '../lib/anim';
 import {JF, useGFrame, useHand, usePal} from './Kit';
 import {Sfx} from './common';
 import {SHADOW, TornPrint} from '../samples/kit';
-import {Desk3D, Lift, shake, useSlap} from '../previews/fx';
+import {Desk3D, Lift, shake, Shots, useSlap} from '../previews/fx';
 import type {MaskRef} from './maskref';
 
 /** A list of gentle sound effects: [frame, name in public/sfx, volume]. */
@@ -134,28 +134,6 @@ export const Marks: React.FC<{n: number; hot: number; x: number; y: number; cols
   );
 };
 
-/**
- * The kit's whip-pan shot switcher (previews/fx Shots), with one difference: under tools/probe_text.mjs (inputProps.probe)
- * the 8-frame whips render as plain cuts, so the probe measures the layout of each shot rather than the deliberate
- * 900 px whip offset (which always pushes edge text past the frame for a frame or two, blurred).
- */
-export const WShots: React.FC<{shots: [number, React.ReactNode, ('whip' | 'cut')?][]}> = ({shots}) => {
-  const f = useCurrentFrame();
-  const probe = Boolean(getInputProps().probe);
-  let i = 0;
-  shots.forEach(([s], k) => {
-    if (f >= s) i = k;
-  });
-  const W = 8;
-  const next = shots[i + 1];
-  if (!probe && next && next[2] === 'whip' && f >= next[0] - W / 2) {
-    const k = (f - (next[0] - W / 2)) / (W / 2);
-    return <AbsoluteFill style={{transform: `translateX(${-k * k * 900}px)`, filter: `blur(${k * 26}px)`}}>{shots[i][1]}</AbsoluteFill>;
-  }
-  const cur = shots[i];
-  if (!probe && cur[2] === 'whip' && f < cur[0] + W / 2) {
-    const k = 1 - (f - cur[0]) / (W / 2);
-    return <AbsoluteFill style={{transform: `translateX(${k * k * 900}px)`, filter: `blur(${k * 26}px)`}}>{cur[1]}</AbsoluteFill>;
-  }
-  return <>{cur[1]}</>;
-};
+/** The kit's shot switcher (previews/fx Shots, gentle transitions); under tools/probe_text.mjs (inputProps.probe) it
+ *  renders plain cuts, so the probe measures each shot's own layout. */
+export const WShots: React.FC<{shots: [number, React.ReactNode, ('whip' | 'cut')?][]}> = ({shots}) => <Shots shots={shots} plain={Boolean(getInputProps().probe)} />;
