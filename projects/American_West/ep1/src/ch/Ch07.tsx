@@ -17,6 +17,7 @@
 //  T "So, to his supporters…let it happen"  the two-views card: supporters left (from ch06), critics right writes in
 //  U "Quick thing…helps the channel."       the plug: one small teal note "subscribe ↓", nothing louder
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch07_where_it_will_do_most_good.words.json';
 import {clamp} from '../lib/anim';
@@ -561,9 +562,9 @@ export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_where_it_will_do_most_good.wav" lead={LEAD}
     music={[
       // SUNO: aw_robber_barons replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/a_price.mp3', volume: 0.15, to: at('In 1872') + 6, fadeOut: 30},
+      {src: 'music/a_price.mp3', volume: bed('a_price'), to: at('In 1872') + 6, fadeOut: 30},
       // SUNO: aw_robber_barons replaces this (a_price is only 65 s, so the fallback restarts at "In 1872")
-      {src: 'music/a_price.mp3', volume: 0.15, from: at('In 1872') - 6},
+      {src: 'music/a_price.mp3', volume: bed('a_price'), from: at('In 1872') - 6},
     ]}>
     <Body />
   </ChapterShell>

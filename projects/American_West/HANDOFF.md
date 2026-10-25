@@ -38,6 +38,11 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 4. ~~ch02 "Black families" circle~~ Checked: the crop is now tighter (woman in white, mother in the wagon, children); the one
    stylised face at the right edge is out of the circle.
 
+### Mix levels (matched to Black Sox, Oct 2026)
+Narration levelled from ~-24 to -18 LUFS (`tools/level_voice.py`, now run by `voice.py` on every take; zero timing shift). Music
+volumes come from `bed(cue, gap)` in `src/kit/levels.ts` (13 LU under the voice; ch04's grief cue 14). Check: the ch08 mix
+measures -18.0 LUFS against the voice's -18.2. New Suno cues: measure (`ffmpeg -af ebur128`) and add to `CUE_LUFS`.
+
 ### Polish list (do before the render)
 1. ~~ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".~~ Done.
 2. ~~ch02: a few dark, sparse map shots (pre-war deadlock) and a near-empty frame before the four portraits.~~ Done (coral-hatched West + label on

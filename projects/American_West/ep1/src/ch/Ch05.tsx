@@ -2,6 +2,7 @@
 // spike in its place; Stanford reportedly missed), back to Russell's photograph and the crew that isn't in it (the torn print
 // and the coral worker from the cold open), months to a week, and the hand-off to Grant.
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch05_done.words.json';
 import {clamp} from '../lib/anim';
@@ -554,11 +555,11 @@ const Body: React.FC = () => (
 export const Ch05: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch05_done.wav" lead={LEAD} music={[
     // SUNO: aw_iron_horse replaces this (ten miles in a day)
-    {src: 'music/g_cotton_engine.mp3', volume: 0.15, to: at('You may') + 4, fadeOut: 24},
+    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine'), to: at('You may') + 4, fadeOut: 24},
     // SUNO: aw_legend_sours replaces this (the golden-spike myth)
-    {src: 'music/a_price.mp3', volume: 0.15, from: at('You may') - 6, to: at('So go back') + 6, fadeOut: 30},
+    {src: 'music/a_price.mp3', volume: bed('a_price'), from: at('You may') - 6, to: at('So go back') + 6, fadeOut: 30},
     // SUNO: aw_iron_horse reprise replaces this
-    {src: 'music/g_cotton_engine.mp3', volume: 0.14, from: at('So go back') - 6, startFrom: 30 * 40},
+    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine'), from: at('So go back') - 6, startFrom: 30 * 40},
   ]}>
     <Body />
   </ChapterShell>

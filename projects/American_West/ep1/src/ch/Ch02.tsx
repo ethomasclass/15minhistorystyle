@@ -2,6 +2,7 @@
 // Reconstruction, then the deal: two companies, land grants (the 3D township and the Act), loans by the mile (the ribbon),
 // "That means…", and the race.
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch02_1862.words.json';
 import {clamp} from '../lib/anim';
@@ -600,8 +601,8 @@ const Body: React.FC = () => {
 const DEAL = at("Here's the deal");
 export const Ch02: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch02_1862.wav" lead={LEAD} music={[
-    {src: 'music/g_founding.mp3', volume: 0.15, to: DEAL + 6},
-    {src: 'music/g_grip.mp3', volume: 0.15, from: DEAL - 6},
+    {src: 'music/g_founding.mp3', volume: bed('g_founding'), to: DEAL + 6},
+    {src: 'music/g_grip.mp3', volume: bed('g_grip'), from: DEAL - 6},
   ]}>
     <Body />
   </ChapterShell>

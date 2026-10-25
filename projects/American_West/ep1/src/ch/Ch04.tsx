@@ -3,6 +3,7 @@
 // "The pay didn't change." Sources: Hart stereographs (LOC TIFF masters), the Placer Herald of July 6, 1867 (LOC,
 // Chronicling America; line positions from its ALTO OCR), Crocker by Silas Selleck (Commons), lithograph plates and props.
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch04_the_mountain.words.json';
 import {clamp} from '../lib/anim';
@@ -671,9 +672,9 @@ const Body: React.FC = () => (
 export const Ch04: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch04_the_mountain.wav" lead={LEAD} music={[
     // SUNO: none planned for the first half (w_aftermath is the library cue)
-    {src: 'music/w_aftermath.mp3', volume: 0.14, to: at('In June') + 4, fadeOut: 20},
+    {src: 'music/w_aftermath.mp3', volume: bed('w_aftermath'), to: at('In June') + 4, fadeOut: 20},
     // SUNO: aw_long_grief replaces this (j_grief is only 40 s, so it enters after a short silence on "About 3,000")
-    {src: 'music/j_grief.mp3', volume: 0.12, from: at('About 3,000') - 12},
+    {src: 'music/j_grief.mp3', volume: bed('j_grief', 14), from: at('About 3,000') - 12},
   ]}>
     <Body />
   </ChapterShell>

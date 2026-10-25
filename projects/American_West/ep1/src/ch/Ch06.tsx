@@ -3,6 +3,7 @@
 // Policy (→ Episode 4), the two cartoons (a swappable slot: CARTOON_A admiring, CARTOON_B critical) and the two-views card
 // (supporters filled here; critics' side starts here and fills in ch07).
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch06_let_us_have_peace.words.json';
 import {clamp} from '../lib/anim';
@@ -451,7 +452,7 @@ const Body: React.FC = () => (
 export const Ch06: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch06_let_us_have_peace.wav" lead={LEAD} music={[
     // library cue (r_curtain); fallback g_world_outside. No aw_ cue planned here.
-    {src: 'music/r_curtain.mp3', volume: 0.15},
+    {src: 'music/r_curtain.mp3', volume: bed('r_curtain')},
   ]}>
     <Body />
   </ChapterShell>

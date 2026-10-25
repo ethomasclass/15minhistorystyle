@@ -180,6 +180,10 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Narration on ElevenLabs `eleven_v4`, one take per chapter, speed 1.0** (from the West series, Oct 2026): it sounded better
   than v3, and voicing the whole chapter in one request removed the clicks and breaks the paragraph-by-paragraph splicing made.
 - A/B the pace when the subject is heavy.
+- **Mix levels = Black Sox** (measured Oct 2026): narration at **-18 LUFS** (`tools/level_voice.py`; eleven_v4 comes out ~6 dB
+  quieter, so every take is levelled), music bed **~13 LU under the voice** (set per cue from its measured loudness, `src/kit/levels.ts`
+  `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (marker tick
+  0.2 as in Black Sox, whooshes and stamps a few dB softer). Master to -14 LUFS.
 - Give music options and let you pick.
 
 **Packaging**

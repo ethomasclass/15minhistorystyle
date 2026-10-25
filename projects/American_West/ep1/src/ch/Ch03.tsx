@@ -1,6 +1,7 @@
 // Chapter 3 · The Race. The Central Pacific's wall (the Sierra), the workers who walked off, Crocker's 50, the Chinese crews,
 // the pay gap and the tea; the Union Pacific on the Plains, Hell on Wheels, the hunting grounds; "a mountain".
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch03_the_race.words.json';
 import {clamp} from '../lib/anim';
@@ -465,7 +466,7 @@ const Body: React.FC = () => {
 
 export const Ch03: React.FC = () => (
   // SUNO: aw_iron_horse replaces this (g_cotton_engine is the library fallback)
-  <ChapterShell n={N} audio="audio/ch03_the_race.wav" lead={LEAD} music={[{src: 'music/g_cotton_engine.mp3', volume: 0.15}]}>
+  <ChapterShell n={N} audio="audio/ch03_the_race.wav" lead={LEAD} music={[{src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine')}]}>
     <Body />
   </ChapterShell>
 );

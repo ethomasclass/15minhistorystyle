@@ -20,6 +20,7 @@
 //  T "This time, everyone heard about it."   Harper's masthead (pull back)
 //  U "And out West…someone to blame."        Harper's: Chinese immigrants at the San Francisco custom house (hand-off)
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch08_panic.words.json';
 import {clamp} from '../lib/anim';
@@ -601,9 +602,9 @@ export const Ch08: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch08_panic.wav" lead={LEAD}
     music={[
       // SUNO: aw_panic replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/w_fire.mp3', volume: 0.15, to: at('By 1877') + 6, fadeOut: 30},
+      {src: 'music/w_fire.mp3', volume: bed('w_fire'), to: at('By 1877') + 6, fadeOut: 30},
       // SUNO: aw_panic replaces this (w_fire is 88 s, so the fallback restarts at "By 1877")
-      {src: 'music/w_fire.mp3', volume: 0.15, from: at('By 1877') - 6},
+      {src: 'music/w_fire.mp3', volume: bed('w_fire'), from: at('By 1877') - 6},
     ]}>
     <Body />
   </ChapterShell>

@@ -23,6 +23,7 @@
 //  T "Meanwhile…Kansas…five million cows."           map card (Kansas) and a small longhorn cut-out drops in
 //  U "Thanks for watching…" + 20 s music only        end screen with clean slots for YouTube's elements
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch09_the_picture.words.json';
 import {clamp} from '../lib/anim';
@@ -755,11 +756,11 @@ const Body: React.FC = () => {
 export const Ch09: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch09_the_picture.wav" lead={LEAD} extra={EXTRA}
     music={[
-      {src: 'music/r_nativism.mp3', volume: 0.15, to: at("So let's") + 6, fadeOut: 24},
+      {src: 'music/r_nativism.mp3', volume: bed('r_nativism'), to: at("So let's") + 6, fadeOut: 24},
       // SUNO: aw_promise_theme replaces this (from "So let's go back to the question" to the end, end screen music-only)
-      {src: 'music/r_ending.mp3', volume: 0.16, from: at("So let's") - 6, to: at("Let's write") + 6, fadeOut: 30},
+      {src: 'music/r_ending.mp3', volume: bed('r_ending'), from: at("So let's") - 6, to: at("Let's write") + 6, fadeOut: 30},
       // SUNO: aw_promise_theme replaces this (r_ending is 61 s, so the fallback restarts under the ledger and carries the end screen)
-      {src: 'music/r_ending.mp3', volume: 0.16, from: at("Let's write") - 6},
+      {src: 'music/r_ending.mp3', volume: bed('r_ending'), from: at("Let's write") - 6},
     ]}>
     <Body />
   </ChapterShell>
