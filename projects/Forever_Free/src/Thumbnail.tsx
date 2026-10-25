@@ -5,9 +5,10 @@
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
+import {DrawnCrown, fill} from './kit/shell';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
+import type {MaskRef} from './kit/maskref';
 import {MASKS} from './masks';
 import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
@@ -99,3 +100,53 @@ export const ThumbB: React.FC = () => {
     </PaletteCtx.Provider>
   );
 };
+
+/**
+ * Headshot over a landscape: a black-and-white scene full frame, darkened toward the text side, and one cut-out
+ * figure large in the foreground, tinted and traced.
+ */
+const Headshot: React.FC<{bg: string; bgSize: [number, number]; bfx: number; bfy: number; bz?: number;
+  src: string; size: [number, number]; mask: MaskRef; face: [number, number]; at: [number, number]; scale: number; color: string; textSide: 'left' | 'right';
+  children: React.ReactNode}> = ({bg, bgSize, bfx, bfy, bz = 1.05, src, size, mask, face, at, scale, color, textSide, children}) => {
+  const bp = fill(bgSize, bfx, bfy, bz);
+  const place: Place = {left: at[0] - face[0] * scale, top: at[1] - face[1] * scale, scale};
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <Picture src={bg} place={bp} size={bgSize} bw="grayscale(1) contrast(1.3) brightness(0.92)" />
+        <AbsoluteFill style={{background: `linear-gradient(${textSide === 'left' ? 90 : 270}deg, rgba(8,7,5,0.88) 0%, rgba(8,7,5,0.55) 40%, rgba(8,7,5,0.1) 70%)`}} />
+        <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * scale, height: size[1] * scale, ...cut(mask.alpha), filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.85))'}}>
+          <Picture src={src} place={{left: 0, top: 0, scale}} size={size} bw="grayscale(1) contrast(1.3) brightness(0.95)" />
+        </div>
+        <Tint mask={mask.alpha} place={place} size={size} color={color} />
+        <Traced paths={mask.data.shapes.subject} place={place} at={0} dur={1} width={8} color="#f4efe6" />
+        {children}
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+/** C · Robert Smalls (teal) over the Planter slipping out of Charleston Harbor. */
+export const ThumbC: React.FC = () => (
+  <Headshot bg="img/gen/v2_ch01_planter_night.jpg" bgSize={[1376, 768]} bfx={560} bfy={400} bz={1.05}
+    src="img/ch01/smalls_congressman_portrait_c1870s.jpg" size={[2263, 3000]} mask={MASKS.smalls} face={[1030, 960]} at={[1480, 410]} scale={0.92}
+    color={TEAL} textSide="left">
+    <Note text="1862: an enslaved pilot" x={100} y={330} size={66} rot={-4} color="#ffffff" />
+    <Highlight text="HE STOLE A" x={90} y={440} size={140} at={0} seed={291} rot={-3} />
+    <Highlight text="CONFEDERATE SHIP" x={90} y={630} size={90} at={0} seed={293} rot={-2} />
+  </Headshot>
+);
+
+/** D · Frederick Douglass (orange) over the stampede of enslaved people to Fortress Monroe. */
+export const ThumbD: React.FC = () => (
+  <Headshot bg="img/ch02/stampede_slaves_hampton_fortress_monroe_1861.jpg" bgSize={[3000, 2156]} bfx={1350} bfy={1050} bz={1.3}
+    src="img/ch07/douglass_portrait_seated_1864.jpg" size={[1863, 3000]} mask={MASKS.douglass} face={[740, 820]} at={[1540, 420]} scale={0.98}
+    color={GOLD} textSide="left">
+    <Note text="the Emancipation Proclamation..." x={100} y={320} size={60} rot={-4} color="#ffffff" />
+    <Highlight text="WHO REALLY" x={90} y={440} size={124} at={0} seed={295} rot={-3} />
+    <Highlight text="FREED THE" x={100} y={612} size={124} at={0} seed={297} rot={-2} />
+    <Highlight text="ENSLAVED?" x={110} y={784} size={124} at={0} seed={299} rot={-2} />
+  </Headshot>
+);
