@@ -1,12 +1,17 @@
-"""Build the Chunk History jingle (the "Aha" motif on marimba) and the chapter-break sting.
+"""Build the Chunk History jingle (the "Aha" motif) and the chapter-break sting.
 
-  python3 tools/make_jingle.py            # writes public/music/chunk_jingle.mp3 and public/sfx/chunk_snap.wav
+  python3 tools/make_jingle.py            # felt piano + a low plucked cello (default), from two ElevenLabs one-note samples
+  python3 tools/make_jingle.py marimba    # the synthesised marimba version
+  -> writes public/music/chunk_jingle.mp3 and public/sfx/chunk_snap.wav
+
+Piano version: ONE felt-piano note (C5) and ONE plucked-cello note (C3), made with ElevenLabs sound generation (checked in tune:
+within 0.05 and 0.21 semitone) and kept in public/sfx/raw/. The tune's other notes are that sample resampled up or down (at most
+5 semitones). Text-to-music takes (tools/jingle_takes.py) came back as a single struck chord, so the melody is played here instead.
 
 The motif is four notes, G4 - E5 - D5 - C5 (a leap up, then a step down home: a question and its answer). In the intro the
-last note lands on the coral quarter's lock (2.80 s); two low marimba hits ride under CHUNK (3.60 s) and HISTORY (3.95 s);
-soft wood knocks sit under the blocks as they land. The chapter-break sting is the last two notes (D5 - C5) with the low C.
-This is a synthesised marimba (sine fundamental + the marimba's 4x overtone, fast decay, mallet click), good enough to fix the
-tune and timing; swap in a real marimba recording or a Suno take later, keeping the lock note on 2.80 s.
+last note lands on the coral quarter's lock (2.80 s) with the low plucked C under it; soft wood knocks sit under the blocks as they
+land; nothing else (no hits for the word slabs: "not too much"). The chapter-break sting is the last two notes (D5 - C5) with the
+low C. The marimba version (`marimba` argument) is a synthesised sketch of the same tune that also hits the slabs.
 """
 import os, subprocess, wave
 import numpy as np
@@ -27,6 +32,30 @@ def marimba(freq, dur=1.6, vel=1.0, seed=0):
     click = np.random.RandomState(seed).randn(len(t)) * np.exp(-t * 260) * 0.12  # mallet
     s = (body + over + click) * (1 - np.exp(-t * 900))
     return vel * s
+
+
+def sample(name):
+    """A one-note sample from public/sfx/raw as float mono at R."""
+    path = os.path.join(HERE, "..", "public", "sfx", "raw", name)
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-f", "f32le", "-ac", "1", "-ar", str(R), "-"], capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, np.float32).copy()
+    k = int(0.004 * R)
+    x[:k] *= np.linspace(0, 1, k)  # no click at the head
+    m = int(0.25 * R)
+    x[-m:] *= np.linspace(1, 0, m)
+    return x
+
+
+def shifted(x, semitones, vel=1.0, dur=None):
+    """Resample by `semitones` (a decaying plucked/struck note, so the changed length doesn't matter)."""
+    f = 2 ** (semitones / 12)
+    idx = np.arange(0, len(x) - 1, f)
+    y = np.interp(idx, np.arange(len(x)), x)
+    if dur:
+        y = y[:int(dur * R)]
+        n = int(0.15 * R)
+        y[-n:] *= np.linspace(1, 0, n)
+    return vel * y
 
 
 def knock(freq=420, vel=0.5, seed=0):
@@ -59,6 +88,19 @@ def write(path, x):
         os.replace(tmp, path)
 
 
+def main_piano():
+    P, Z = sample("jingle_piano_C5.mp3"), sample("jingle_pizz_C3.mp3")
+    # the sample is C5; G4 = -5, E5 = +4, D5 = +2, C5 = 0 semitones
+    knocks = [(f / 30 - 0.02, knock(430 + 40 * i, 0.4, i)) for i, f in enumerate([36, 50, 60, 68, 74])]
+    motif = [(2.00, -5, 0.8, 0.9), (2.25, 4, 0.85, 0.9), (2.50, 2, 0.85, 0.9), (2.80, 0, 1.1, 2.6)]
+    notes = [(a, shifted(P, st, v, d)) for a, st, v, d in motif]
+    lock = [(2.80, shifted(Z, 0, 0.9, 1.6))]  # the low plucked cello C3 lands with the last note
+    write(os.path.join(HERE, "..", "public", "music", "chunk_jingle.mp3"), mix(knocks + notes + lock, 5.5))
+    snap = [(0.62, shifted(P, 2, 0.8, 1.0)), (1.0, shifted(P, 0, 1.0, 1.8)), (1.0, shifted(Z, 0, 0.7, 1.4))]
+    write(os.path.join(HERE, "..", "public", "sfx", "chunk_snap.wav"), mix(snap, 2.2))
+    print("wrote felt piano + pizzicato jingle and snap")
+
+
 def main():
     # block landings in the intro (frames 36, 50, 60, 68, 74 at 30 fps): soft wood knocks
     knocks = [(f / 30 - 0.02, knock(430 + 40 * i, 0.5, i)) for i, f in enumerate([36, 50, 60, 68, 74])]
@@ -75,4 +117,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    (main if sys.argv[1:] == ["marimba"] else main_piano)()

@@ -47,12 +47,18 @@ instead of a hard cut; whip sound at half level). **Still on the old brand:** th
 15 Minute History `Wordmark` (`src/kit/Intro.tsx`); the end screen has no logo.
 
 ### The jingle (Oct 2026)
-The brand's original jingle was dropped (the user didn't like it). The new one is the "Aha" motif on marimba: G4 - E5 - D5 - C5
-(a leap up, then a step down home), the last note on the coral quarter's lock at 2.80 s, soft wood knocks under the blocks, two low
-hits under CHUNK and HISTORY. `ep1/tools/make_jingle.py` synthesises it (`public/music/chunk_jingle.mp3`) and the chapter-break
-sting (`public/sfx/chunk_snap.wav`, D5 - C5). It's a synthesised marimba, good for fixing the tune and timing; replace with a real
-marimba or Suno take later (keep the lock note on 2.80 s). The original is still in `brand/chunk-history/intro/public/jingle.mp3`
-on the Reconstruction branch.
+The brand's original jingle was dropped (the user didn't like it), and the marimba sketch was set aside ("not sure I want marimba"):
+the channel already sounds like felt piano, pizzicato, a clock tick and wood knocks, so the jingle is kept to that and small.
+**Now:** the "Aha" motif G4 - E5 - D5 - C5 (a leap up, then a step down home) on a **felt piano**, the last note on the coral
+quarter's lock at 2.80 s with one low **plucked cello** C under it, soft wood knocks under the blocks, no hits for the word slabs.
+The chapter-break sting is its last two notes (D5 - C5 + the low C). `ep1/tools/make_jingle.py` builds both
+(`public/music/chunk_jingle.mp3`, `public/sfx/chunk_snap.wav`; `make_jingle.py marimba` rebuilds the marimba sketch).
+How it was made: ElevenLabs Music (`tools/jingle_takes.py`, 6 five-second takes) returned a single struck chord every time, so no
+usable tune; ElevenLabs sound generation gave two **single notes** that measure in tune (felt piano C5 within 0.05 semitone, plucked
+cello C3 within 0.21), kept in `public/sfx/raw/jingle_*.mp3`; the other notes are the C5 sample resampled (at most 5 semitones).
+The original brand jingle is on the Reconstruction branch (`brand/chunk-history/intro/public/jingle.mp3`).
+**Keys:** `ep1/.env` (git-ignored) now holds an ElevenLabs key the user pasted in chat: **ask them to rotate it** (Starter plan,
+~43,000 credits left on 2026-10-25). No VOICE_ID or Gemini key there yet.
 
 ### Mix levels (matched to Black Sox, Oct 2026)
 Narration levelled from ~-24 to -18 LUFS (`tools/level_voice.py`, now run by `voice.py` on every take; zero timing shift). Music
