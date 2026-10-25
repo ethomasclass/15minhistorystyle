@@ -5,7 +5,7 @@ These answer the feedback on the stills ("flat, not much depth or texture; zoomi
 
 | Clip | Length | Sheet |
 |---|---|---|
-| `P1-ColdOpen.mp4`: cold open, timed to `audio/ch01_v4_onetake.mp3` (first 20 s, cut after "May 10th, 1869.") | ~20 s, with narration | `sheet_P1.jpg` |
+| `P1-ColdOpen.mp4`: cold open, timed to `audio/ch01_v4_onetake.mp3` (first 20.1 s, cut after "May 10th, 1869.") | 20.1 s, with narration | `sheet_P1.jpg` |
 | `P2-Race.mp4`: the race as a 3D elevation ribbon | 15 s, silent | `sheet_P2.jpg` |
 | `P3-Checker.mp4`: 3D land-grant township, then the Act with a focus pull and swipe | 12 s, silent | `sheet_P3.jpg` |
 
@@ -50,8 +50,8 @@ needs no new packages, and renders fast.
 - The two AI litho plates (Sierra snow sheds, Wyoming "Hell on Wheels", `weather.py` medium) are the backdrops of P2's mountain sections.
 - Rules kept: no cream/white cards or sticker borders, coral = one subject per frame, teal marks, orange torn-tape titles.
 
-**5 · Hook alignment (P1)**: the photo is up at frame 0, "This is the most famous photograph…" starts at 0.5 s and NOT IN THE PICTURE
-slaps on at 0.4 s, so all three land inside the first second. The thumbnail idea (S1-C: the Chinese worker in the torn gap) is the
+**5 · Hook alignment (P1)**: the photo is up at frame 0, "This is the most famous photograph…" starts at 0.5 s, and the NOT IN THE PICTURE
+tape slaps on at 0.4 s with its words readable by about 0.65 s, so all three land inside the first second. The thumbnail idea (S1-C: the Chinese worker in the torn gap) is the
 payoff on "aren't in it" (7.2 s) and the final frame.
 
 **6 · 3D where it explains**
@@ -79,10 +79,19 @@ payoff on "aren't in it" (7.2 s) and the final frame.
 - **The Russell photo is the 3840 px Commons restoration.** The LOC only holds a small copy (no TIFF), Commons' full-size original was
   rate-limited (HTTP 429), and Yale's master wasn't tried. At this preview size the 6× push holds; at 1080p the bottle shot is about 1.5× upscaled
   and soft. Ask Yale/Beinecke or retry Commons before the real render.
-- P2's labels are small at 960×540 and some overlap when the camera is wide (Donner Summit/Reno); the engines are tiny in the wide shot.
+- P2's labels are small at 960×540 and crowd each other in the wide shot (Donner Summit/Reno); the engines are tiny there. Labels are part
+  of the 3D model, so they fade out before the camera move would cut them at the frame edge (the text probe still lists them because it
+  measures transparent boxes too). Donner Summit grazes the top edge for about half a second during the push.
   The ribbon's 230× exaggeration should be stated on screen ("heights exaggerated") in the real video.
 - P3: the coral line runs along a row boundary, so it's drawn floating just above the slabs to stay visible. The section numbers on the
   far slabs are unreadable at 540p.
 - The desk shots in P1 are darker than the photo shots; the lamp pool could be warmer or wider.
 - Silent P2/P3 (no sfx yet: slap/stamp/whoosh cues are where the shakes are).
 - No new Gemini images were generated (the existing litho plates covered P2), so the AI spend for this round was zero.
+
+## Files added for this round
+- `src/previews/` (fx.tsx, P1ColdOpen.tsx, P2Race.tsx, P3Checker.tsx, index.ts, render.mjs); `src/Root.tsx` registers them.
+- `src/samples/kit.tsx`: `tornPoly(..., real)` uses `src/samples/torn_profiles.json`; `Tape` has a `grey` variant; `TornPrint` takes `real`/`grey`.
+- `public/img/previews/`: weathered cut-out sources (`*_w.jpg`, `weather.py light`), the two litho plates (medium), grey tape strips and
+  stains from the AI asset pack, and the spike photo's parallax layers (`spike_fg.webp`, `spike_bg.jpg`: sky found by brightness and
+  low texture, the crowd kept whole, the sky inpainted).

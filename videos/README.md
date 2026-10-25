@@ -101,6 +101,24 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Make an allusion explicit.** When a map points to a later event (the 1861 split), label it on screen: sides, a key, a dated pin, the event's name.
 - No caricatured engravings in a serious chapter.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
+- **Everything new stays on the black desk** (from the West series): no cream or white cards, mounts, tags or sticker borders. The
+  only light tones on screen are the archival scans themselves. New devices (ledger cards, circle mounts, map cards, year stamps) are
+  dark paper with teal rules and coral/orange accents.
+- **Cut-outs** (people and objects, collage-style): no white sticker edge; a hard ink-black offset shadow, grain over; the teal
+  trace is the edge when it's the subject; one coral subject per frame. **In chapters about Native nations, people stay in their
+  own photographs** (full frame or a circle mount), never cut out and arranged as collage pieces; objects only.
+- **Depth, not flat paper** (your West-series note: "feels a little flat… no depth variation or texture"): wide shot then a detail
+  cut-in for every beat, a cut every 3–6 s, never one composition for more than ~7 s; one camera move per shot and never the same
+  move twice in a row (push, pull, pan, tilt, parallax, static on the payoff); deep zooms only on high-resolution scans; a desk with
+  real depth (cards at different heights, a lamp pool, slight focus fall-off, contact shadows); pieces land with weight (slap,
+  slight overshoot, a small decaying shake) and settled pieces breathe; texture on everything (torn-paper fibre edges, translucent
+  tape, stains, halftone).
+- **3D where it explains something** (you loved the tilted 3D township): the land-grant checkerboard rising as slabs, the race as an
+  elevation ribbon. Drawn teal 3D, never photoreal. Say "heights exaggerated" on screen when they are.
+- **Trace and source, don't eyeball:** diagrams traced from real drawings, maps from real data, document swipes placed from the
+  scan's actual line positions (Gemini's line finder, `review/ai_tests/assets/act_lines.json` in the West Ep 1 project).
+- **Hook alignment in the cold open** (Kallaway): the picture, the first spoken line and a short written hook (orange tape matching
+  the thumbnail) all say the same thing within the first ~2 seconds.
 
 **Neutral on today's companies and people**
 - When a modern company or a living person comes up (Polymarket, players under indictment), describe the company in its own and
@@ -118,6 +136,26 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   Ask before writing prompts. When a gap has no photo, prefer an engraving detail, a period document or a drawn diagram.
 - When AI images are used for a pre-photography era, **period wood engravings** (Flow, one master prompt) fit best beside real prints.
 - **Search anywhere for images** (from *The Exact Spot*): Library of Congress, Internet Archive books, state collections, museums, not just Wikimedia. Credit every one in `credits.json`.
+- **AI images now come from Google AI Studio (Gemini), on your paid key** (West series). Free routes were tested and dropped
+  (Pollinations: watermarked, wrong model; Hugging Face: no free image credit; a local SDXL-Turbo: fine for plates, wrong on people).
+  You preferred **Gemini 2.5 Flash Image** to 3 Pro: Pro looked "more AI" (too clean, uniform lines, figures in a row).
+- **The West series style is a tinted 1860s lithograph with some muted colour** (buff, slate blue-grey, faded brick red), a series
+  exception like *Dressed to Kill*'s green; coral stays the one subject colour. Master prompt: `projects/American_West/LITHO_PROMPT.md`.
+  Composition line in every prompt (casual, figures at different distances, never a neat row). Crop off the borders and rounded
+  vignettes Flash adds; paint out the signatures it invents.
+- **Weathering in post: `tools/weather.py --preset medium`** (your pick): halftone, slight misregistration, paper fibre, foxing,
+  stains, one crease, light edge wear. `light` for long push-ins, `heavy` only for handled objects. Halftone is a texture choice,
+  not a period claim.
+- **Gemini for more than illustrations:** texture packs (torn paper, tape, stains), props shot on plain backgrounds for cut-outs,
+  finding exact line positions on scanned documents, transcribing handwriting, describing photos. Never fake documents, never AI
+  "photographs" passed off as archival, never a recognizable real person.
+
+**Music**
+- **ElevenLabs Music stays the in-project generator** (`tools/music_eleven.py`); **Suno** cues are made by you from written prompts
+  (West series: `projects/American_West/MUSIC.md`, prefix `aw_`). Reuse the library first; every new cue is written for reuse beyond
+  its video. Mureka was looked at and set aside (licensing questions).
+- **No AI imitation of Native music** ("Native flute", "tribal drums", chanting come out as Hollywood stereotype). Grave cues for
+  Native history use the channel's own strings and piano; dignity through restraint.
 
 **Shorts**
 - **Native vertical, not letterboxed.** Rebuild each scene for 9:16 (full-screen subject, big captions), open on the strongest
