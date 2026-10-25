@@ -100,7 +100,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Heads stay in frame** through every push and drift. Check the first and last frame of each push into a group.
 - **Make an allusion explicit.** When a map points to a later event (the 1861 split), label it on screen: sides, a key, a dated pin, the event's name.
 - No caricatured engravings in a serious chapter.
+- **No on-screen tag on AI images, and never "AI" on screen** (West series, Oct 2026). Archival images keep their source tags; AI
+  images are recorded only in the credits file and prompt log.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
+- **Notes are bare teal handwriting, no tape or strip behind them** (from the West series, Oct 2026; replaces the backed
+  notes used in the Reconstruction videos). Orange tape is for titles only.
 - **Everything new stays on the black desk** (from the West series): no cream or white cards, mounts, tags or sticker borders. The
   only light tones on screen are the archival scans themselves. New devices (ledger cards, circle mounts, map cards, year stamps) are
   dark paper with teal rules and coral/orange accents.
@@ -146,6 +150,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Weathering in post: `tools/weather.py --preset medium`** (your pick): halftone, slight misregistration, paper fibre, foxing,
   stains, one crease, light edge wear. `light` for long push-ins, `heavy` only for handled objects. Halftone is a texture choice,
   not a period claim.
+- **Use Gemini freely for assets where it helps** (the user, Oct 2026): cut-outs, props, scenery and background plates, textures,
+  not only for gaps. Archival still leads for real people, events and documents.
 - **Gemini for more than illustrations:** texture packs (torn paper, tape, stains), props shot on plain backgrounds for cut-outs,
   finding exact line positions on scanned documents, transcribing handwriting, describing photos. Never fake documents, never AI
   "photographs" passed off as archival, never a recognizable real person.
@@ -170,6 +176,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
+- **v4 emotion cues in every script** (`[wry]`, `[serious]`, `[quietly]`, `[pause]` …), sparing and consistent (West series).
 - **Narration on ElevenLabs `eleven_v4`, one take per chapter, speed 1.0** (from the West series, Oct 2026): it sounded better
   than v3, and voicing the whole chapter in one request removed the clicks and breaks the paragraph-by-paragraph splicing made.
 - A/B the pace when the subject is heavy.

@@ -28,6 +28,13 @@ needs them. To make a new one, add a prompt to `SFX` in the template's `tools/sf
 | `rowdy_crowd.wav` | 5.0 s | | A big rowdy crowd indoors, boots on wooden floors (made for the Jackson videos) | — | bed |
 | `sea_ambience.wav` | 12.0 s | | Sea-voyage bed (Fix Everything's map) | 0.12 | fades in and out over 10–30 frames |
 | `scrape.wav` | 0.6 s | | Planchette felt on wood (Ouija). **Synthesized**: a real recording would be better. | 0.12–0.22 | on each move |
+| `paper_slap_soft.wav` | 0.6 s | | A print dropped flat on the desk: the gentle "slap" landing (West series) | start ~0.25 | on the landing frame |
+| `tape_press.wav` | 0.6 s | | Masking tape pressed down: tape strips, torn-print corners (West series) | start ~0.2 | on the press |
+| `card_slide_soft.wav` | 0.6 s | | A card sliding briefly on felt: small cards, map cards (West series) | start ~0.2 | as it moves |
+| `whip_soft.wav` | 0.5 s | | A soft airy swish for whip transitions, no impact (West series) | start ~0.25 | centred on the whip |
+| `block_tap_soft.wav` | 0.5 s | | One soft hollow wooden tap: slabs rising on a 3D grid, counters (West series) | start ~0.15, stagger | on each slab |
+| `spike_tap_distant.wav` | 1.2 s | | A far-off hammer on a railroad spike (West series). Made very quiet and normalized up, so check it for hiss. | start ~0.15 | on a cut |
+| `train_distant.wav` | 6.0 s | | A distant 1860s locomotive chugging, faint: a bed under rail maps and the race (West series) | 0.08–0.12 | bed, fade in/out |
 
 The prompts for the ElevenLabs-made sounds are in the template's
 [`tools/sfx_eleven.py`](../.claude/skills/15-minute-history/assets/template/tools/sfx_eleven.py). That script trims leading silence so a hit

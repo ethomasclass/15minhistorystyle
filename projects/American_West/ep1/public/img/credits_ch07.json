@@ -1,0 +1,80 @@
+{
+  "ch07/oakes_ames_brady.jpg": {
+    "title": "Hon. Oakes Ames of Mass.",
+    "artist": "",
+    "date": "1860",
+    "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+    "page": "https://www.loc.gov/item/2017894158/",
+    "source": "loc:2017894158"
+  },
+  "ch07/colfax_brady.jpg": {
+    "title": "[Schuyler Colfax, head-and-shoulders portrait, facing left]",
+    "artist": "",
+    "date": "1860-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2011645238/",
+    "source": "loc:2011645238"
+  },
+  "ch07/grant_brady_1870s.jpg": {
+    "title": "File:Ulysses S. Grant 1870-1880.jpg",
+    "artist": "Brady-Handy Photograph Collection, Library of Congress",
+    "date": "between 1870 and 1880date QS:P,+1850-00-00T00:00:00Z/7,P1319,+1870-00-00T00:00:00Z/9,P1326,+1880-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Ulysses_S._Grant_1870-1880.jpg"
+  },
+  "ch07/babcock_brady.jpg": {
+    "title": "File:Orville E. Babcock - Brady-Handy.jpg",
+    "artist": "Mathew Brady or Levin Handy",
+    "date": "between 1860 and 1875date QS:P,+1850-00-00T00:00:00Z/7,P1319,+1860-00-00T00:00:00Z/9,P1326,+1875-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Orville_E._Babcock_-_Brady-Handy.jpg"
+  },
+  "ch07/whiskey_ring_trial_1876.jpg": {
+    "title": "Missouri--The great Whisky Ring trial--Scene in the United States District Court, St. Louis, Monday, February 7th, at the opening of the case of the United States vs. O.E. Babcock, President Grant's private secretary. Mr. E.A. Storrs, one of General Babcock's counsel, asking that the trial be deferred until Tuesday, February 8th / from sketches by E. Jump and Harry Ogden.",
+    "artist": "",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/90711830/",
+    "source": "loc:90711830"
+  },
+  "ch07/sun_1872_09_04_p1.jpg": {
+    "title": "The Sun (New York), September 4, 1872, page 1: \"The King of Frauds. How the Credit Mobilier Bought its Way Through Congress\"",
+    "artist": "The Sun",
+    "date": "1872-09-04",
+    "licence": "Public domain (published 1872); Chronicling America, no known restrictions",
+    "page": "https://www.loc.gov/resource/sn83030272/1872-09-04/ed-1/?sp=1",
+    "source": "loc:sn83030272/1872-09-04/ed-1/seq-1 (IIIF full, resized to 3134 px)"
+  },
+  "ch07/poland_report_1873_p_most_good.jpg": {
+    "title": "Report of the Select Committee to Investigate the Alleged Credit Mobilier Bribery (Poland Committee), 1873, page iv",
+    "artist": "U.S. House of Representatives",
+    "date": "1873",
+    "licence": "Public domain (U.S. government work, 1873)",
+    "page": "https://archive.org/details/cu31924062620236/page/n7",
+    "source": "iabook:cu31924062620236:7"
+  },
+  "ch07/ai_stock_certificate.jpg": {
+    "title": "Prop: stock certificate",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_stock_certificate.png"
+  },
+  "ch07/ai_coins_notes.jpg": {
+    "title": "Prop: coins notes",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_coins_notes.png"
+  },
+  "ch07/ai_whiskey_barrels.jpg": {
+    "title": "Prop: whiskey barrels",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_whiskey_barrels.png"
+  }
+}

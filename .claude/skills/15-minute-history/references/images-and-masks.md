@@ -199,6 +199,7 @@ the first try.
   `projects/American_West/LITHO_PROMPT.md`. Flash habits to fix every time: invented signatures (paint out), borders and rounded
   vignettes (crop), figures lined up in a row (the prompt's composition paragraph).
 - **Post:** `python3 tools/weather.py in.png out.jpg --preset medium` (the user's pick).
+- **No on-screen tag for AI images and never "AI" on screen** (the user's rule); keep the record in `credits.json` and the prompt log.
 - **Other uses that worked** (`projects/American_West/ep1/review/ai_tests/`): texture packs on pure black for keying (torn paper,
   translucent tape) and stains on white (multiply); props shot on a white seamless background for cut-outs (mask them with
   `tools/mask.py`, not a white key, or a grey shadow fringe stays); **finding exact line positions on a scanned document** with

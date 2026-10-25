@@ -4,15 +4,15 @@
 export const SLUG = 'Not_In_The_Picture';
 
 /** Title card after the channel intro: a highlighter title, a teal subtitle and a handwritten date range. */
-export const TITLE = 'KING ANDREW';
-export const SUBTITLE = "How the People's President Got a Crown";
-export const DATES = '1767 – 1845';
+export const TITLE = 'NOT IN THE PICTURE';
+export const SUBTITLE = 'Grant, the Railroad, and Who Built It';
+export const DATES = '1862 – 1882';
 
 /**
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg', 'img/maps/mitchell_1836.jpg', 'img/demo/sully_jackson_1845.jpg'];
+export const INTRO_CARDS = ['img/samples/spike_russell_1869.jpg', 'img/samples/hart_tunnel8_worker.jpg', 'img/samples/pacific_railway_act_1862_p1.jpg', 'img/samples/carbutt_up_100th_1866.jpg', 'img/samples/map_up_dodge_1869.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {

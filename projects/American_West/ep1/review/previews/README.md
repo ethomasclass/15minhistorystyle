@@ -1,13 +1,38 @@
 # West series: low-res motion previews (960×540, 30 fps)
 
+## Revision 2 (after the first review)
+- **P1:** the coral tint on the worker and Montague is now a soft tint (`SoftTint`: colour blend at 0.6–0.65 plus a light multiply, no
+  screen layer), so the photo detail shows through. The map card is lifted (`bright`), so the land and the Promontory pin read. Source tags
+  sit on a dark scrim (`ScrimTag`). The bottle push is capped at 2.0 screen px per source px (4× the wide). The desk shots are lit warmer
+  and brighter (desk gradient, lamp pool and falloff), but still a black desk.
+- **P2:** the AI-lithograph engines (CP `engine_cp_east_b`, facing east; UP `engine_up_west_b`, facing west, tender desaturated) replace
+  the mirrored Hart and Carbutt photos. The cut-out ridgelines (`ridge_sierra_a`, `ridge_wyoming_a`) stand behind the ribbon in place of the
+  rectangular backdrops. The engines ride low on the ribbon, and the labels sit higher, flat and fully inside their 3D plane, so nothing
+  covers them. The tag now reads "Elevations approx., heights exaggerated · ridges and engines: illustration (AI lithograph)".
+- **P3:** the coral line is its own layer above the slabs. The swipe's second line stops after "odd numbers,". The title stays off until
+  the page has landed, and its letters only appear behind the tape as it wipes on (all titles now use one `SlapTitle` in `fx.tsx`).
+- **Sound** (gentle, felt more than heard; no boom):
+  - P1: under the narration, `whip_soft` on cuts and whips, `paper_slap_soft` + `tape_press` as the print and the worker land,
+    `card_slide_soft` for the map card, `marker_tick` 0.2 before loops and notes, and `stamp` 0.22 on the title tapes.
+  - P2: the same set, plus `block_tap_soft` as each bond zone lights, `spike_tap_distant` 0.15 under PROMONTORY, 1869, and
+    `train_distant` looped at 0.1 with fades as a bed.
+  - P3: a staggered `block_tap_soft` (0.10–0.14) per column of rising slabs, `whip_soft`, `paper_slap_soft` + a quiet `page_turn` as the page lands.
+- Still rough after this pass:
+  - The P2 labels in the wide shot are small at 540p.
+  - The UP engine just touches the "Reno" label for a moment around 3 s in the wide shot.
+  - P2's off-screen labels are faded out rather than repositioned, so `probe_text` still lists them (they're invisible).
+  - The Russell photo is still the 3840 px Commons restoration.
+  - `spike_tap_distant` has a soft tail but no audible hiss at 0.15.
+
+
 These answer the feedback on the stills ("flat, not much depth or texture; zooming in might help; loved the 3D tilted grid;
 3D where it makes sense, even the race"). Three short clips, each with a frame contact sheet:
 
 | Clip | Length | Sheet |
 |---|---|---|
 | `P1-ColdOpen.mp4`: cold open, timed to `audio/ch01_v4_onetake.mp3` (first 20.1 s, cut after "May 10th, 1869.") | 20.1 s, with narration | `sheet_P1.jpg` |
-| `P2-Race.mp4`: the race as a 3D elevation ribbon | 15 s, silent | `sheet_P2.jpg` |
-| `P3-Checker.mp4`: 3D land-grant township, then the Act with a focus pull and swipe | 12 s, silent | `sheet_P3.jpg` |
+| `P2-Race.mp4`: the race as a 3D elevation ribbon | 15 s, sfx + faint train bed | `sheet_P2.jpg` |
+| `P3-Checker.mp4`: 3D land-grant township, then the Act with a focus pull and swipe | 12 s, sfx | `sheet_P3.jpg` |
 
 Code: `src/previews/` (`fx.tsx` = the motion/depth kit, one file per clip), registered in `src/Root.tsx` as `P1-ColdOpen`,
 `P2-Race`, `P3-Checker`. Re-render: `node src/previews/render.mjs video review/previews P1-ColdOpen P2-Race P3-Checker`
@@ -41,13 +66,13 @@ needs no new packages, and renders fast.
 - Marks (loops, notes, traces, tape) still step at 12 fps; cameras are smooth.
 
 **4 · Texture**
-- Cut-outs (worker, both engines) run through `tools/weather.py --preset light --no-crease` first: halftone dots and slight
+- Cut-outs (the worker; in the first pass also both photo engines) run through `tools/weather.py --preset light --no-crease` first: halftone dots and slight
   misregistration show inside the cut-outs (light rather than medium, because medium's crease and edge wear look wrong on a cut-out).
 - Torn edges use the **real bite profiles** of the AI torn-paper pack (extracted from its alpha into `src/samples/torn_profiles.json`)
   instead of random jitter. Only the edge *shape* is used: the pack's white fibre would be a white border.
 - **Grey translucent tape** from the AI tape pack (the orange cloth tapes looked like stickers).
 - AI **stains** multiplied into the desk; grain + vignette (`Finish`) over everything.
-- The two AI litho plates (Sierra snow sheds, Wyoming "Hell on Wheels", `weather.py` medium) are the backdrops of P2's mountain sections.
+- P2's mountain sections are backed by AI-lithograph ridge cut-outs (revision 2; the first pass used the rectangular Sierra and Wyoming plates).
 - Rules kept: no cream/white cards or sticker borders, coral = one subject per frame, teal marks, orange torn-tape titles.
 
 **5 · Hook alignment (P1)**: the photo is up at frame 0, "This is the most famous photograph…" starts at 0.5 s, and the NOT IN THE PICTURE
@@ -74,8 +99,6 @@ payoff on "aren't in it" (7.2 s) and the final frame.
 - P2 makes the bond-rate argument visible (coral mountains = treble pay) with no chart.
 
 ## Still rough
-- **The mirrored CP engine** (*Goliah*) is still used in P2, as in the stills (number plate un-flipped, tagged). The CP's first miles are in
-  the mountains on the left, so the direction matters even more in 3D.
 - **The Russell photo is the 3840 px Commons restoration.** The LOC only holds a small copy (no TIFF), Commons' full-size original was
   rate-limited (HTTP 429), and Yale's master wasn't tried. At this preview size the 6× push holds; at 1080p the bottle shot is about 1.5× upscaled
   and soft. Ask Yale/Beinecke or retry Commons before the real render.
@@ -85,8 +108,6 @@ payoff on "aren't in it" (7.2 s) and the final frame.
   The ribbon's 230× exaggeration should be stated on screen ("heights exaggerated") in the real video.
 - P3: the coral line runs along a row boundary, so it's drawn floating just above the slabs to stay visible. The section numbers on the
   far slabs are unreadable at 540p.
-- The desk shots in P1 are darker than the photo shots; the lamp pool could be warmer or wider.
-- Silent P2/P3 (no sfx yet: slap/stamp/whoosh cues are where the shakes are).
 - No new Gemini images were generated (the existing litho plates covered P2), so the AI spend for this round was zero.
 
 ## Files added for this round

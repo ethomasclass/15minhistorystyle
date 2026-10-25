@@ -41,6 +41,16 @@ SFX = {
               "party, loud and close.", 2.0),
     "rowdy_crowd": ("A big rowdy crowd inside a house: cheering, laughing, boots stomping on wooden floors, "
                     "no music, 1800s.", 5.0),
+    # West series: gentle desk and railroad sounds (the user: "nothing jarring or crazy")
+    "paper_slap_soft": ("A single photograph print dropped flat onto a wooden desk, a soft muted paper slap, gentle and close, "
+                        "no reverb.", 0.6),
+    "tape_press": ("A short strip of paper masking tape pressed down onto paper with a thumb, a soft brief crinkle, close up.", 0.6),
+    "card_slide_soft": ("A small stiff card sliding briefly across a felt desk mat, very soft and short.", 0.7),
+    "whip_soft": ("A soft quick airy swish, like a sheet of paper swept past a microphone, gentle, no impact, no whistle.", 0.5),
+    "block_tap_soft": ("A small wooden block set down gently on a wooden table, one soft hollow tap.", 0.5),
+    "spike_tap_distant": ("A single hammer striking an iron railroad spike, far away outdoors, a soft distant metallic ring.", 1.2),
+    "train_distant": ("A distant 1860s steam locomotive chugging slowly far away across open land, faint and soft, "
+                      "steady rhythm, no whistle, no music.", 6.0),
 }
 
 

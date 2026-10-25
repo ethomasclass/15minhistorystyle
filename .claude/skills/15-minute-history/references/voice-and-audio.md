@@ -56,6 +56,8 @@ After voicing:
 2. Run `python3 tools/anchors.py <stem> --src src/ch/ChNN.tsx` for any chapter whose scenes already exist.
 3. Commit the WAVs and words.json files (they are what the render uses).
 
+**Delivery cues:** `[tags]` in the script (see `script-writing.md` §5) steer v4's delivery; they are never spoken or shown.
+
 ## 3. Pace settings
 
 **Default since the West series: one take.** The whole chapter goes to ElevenLabs in a single request

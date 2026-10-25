@@ -6,7 +6,8 @@ Model: **Gemini 2.5 Flash Image** (the user preferred its looser, printed feel t
 Post: **`tools/weather.py`** (halftone, slight misregistration, paper fibre, foxing, stains, a crease, worn edges).
 
 ## Rules that still hold
-- AI only for real gaps (no photo exists); never a recognizable real person; a source tag on every image ("illustration").
+- Use it wherever it helps (props, cut-outs, scenery, plates, gaps); never a recognizable real person. **No on-screen tag for AI
+  images and never the word "AI" on screen**; record them in the credits file and the prompt log only.
 - Coral is still the one subject colour on screen. The litho tints stay muted (buff, slate blue-grey, faded brick red) so
   coral and teal marks still pop. If a tint competes with the coral subject, desaturate that plate.
 - Check every image for invented text, signatures and monograms (Flash adds them) and paint them out or crop.

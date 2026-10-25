@@ -1,0 +1,76 @@
+{
+  "ch05/golden_spike_cantor.jpg": {
+    "title": "File:The-Golden-Spike-7Oct2012.jpg",
+    "artist": "Wjenning",
+    "date": "2012-10-07 16:15:44",
+    "licence": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:The-Golden-Spike-7Oct2012.jpg"
+  },
+  "ch05/hart_end_of_track_humboldt.jpg": {
+    "title": "End of track, on Humboldt Plains",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005683011/",
+    "source": "loc:2005683011",
+    "notes": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch05/ai_plate_promontory_flats.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch05.md#plate_promontory_flats",
+    "notes": "border and signature cropped"
+  },
+  "ch05/ai_prop_telegraph_key.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch05.md#prop_telegraph_key",
+    "notes": ""
+  },
+  "ch05/ai_prop_rail_tie.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch05.md#prop_rail_tie",
+    "notes": ""
+  },
+  "ch05/ai_prop_iron_spike.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch05.md#prop_spike",
+    "notes": "reused from review/ai_tests/assets/prop_spike.png, weathered light"
+  },
+  "ch05/ai_prop_sledgehammer.jpg": {
+    "title": "Illustration (AI lithograph, Gemini 2.5 Flash Image)",
+    "artist": "generated",
+    "licence": "AI image (no on-screen tag, per series rule)",
+    "prompt": "review/ai_images_ch05.md#prop_sledgehammer",
+    "notes": "reused from review/ai_tests/assets/prop_sledgehammer.png, weathered light"
+  },
+  "samples/spike_russell_1869.jpg (reused)": {
+    "title": "A. J. Russell, East and West Shaking Hands at Laying Last Rail, May 10, 1869",
+    "licence": "public domain (Commons restoration by Adam Cuerden)",
+    "page": "https://commons.wikimedia.org/wiki/File:East_and_West_Shaking_hands_at_the_laying_of_last_rail_Union_Pacific_Railroad_-_Restoration.jpg"
+  },
+  "previews/hart_tunnel8_worker_w.jpg (reused)": {
+    "title": "A. A. Hart, Heading of east portal Tunnel No. 8 (worker cut-out)",
+    "licence": "no known restrictions (LOC)",
+    "page": "https://www.loc.gov/pictures/item/2005682948/"
+  },
+  "samples/map_warren_1868.jpg (reused)": {
+    "title": "G. K. Warren / E. Freyhold, Territory of the United States from the Mississippi River to the Pacific Ocean, 1868",
+    "licence": "LOC, public domain",
+    "page": "https://www.loc.gov/item/gm71000836/"
+  },
+  "ch06/grant_brady.jpg (shared)": {
+    "title": "[Portrait of Maj. Gen. Ulysses S. Grant, officer of the Federal Army]",
+    "artist": "Brady's National Photographic Portrait Galleries, photographer",
+    "date": "1860",
+    "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+    "page": "https://www.loc.gov/item/2018666428/",
+    "source": "loc:2018666428"
+  }
+}

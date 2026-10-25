@@ -1,0 +1,96 @@
+{
+  "ch03/hart_cape_horn.jpg": {
+    "title": "Cape Horn and railroad. View from near Colfax",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005682874/",
+    "source": "loc:2005682874",
+    "note": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch03/russell_sierra_snowsheds_1868.jpg": {
+    "title": "Summit of Sierra Nevada - snow sheds in foreground, Donner Lake in the distance, Central Pacific R.R.",
+    "artist": "Russell, Andrew J., photographer",
+    "date": "1868-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003668259/",
+    "source": "loc:2003668259",
+    "note": "cropped to the print, from the TIFF master"
+  },
+  "ch03/hart_laborers_summit_tunnel.jpg": {
+    "title": "Laborers and rocks, near opening of Summit Tunnel",
+    "artist": "Hart, Alfred A., 1816-1908, photographer",
+    "date": "1865",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005682913/",
+    "source": "loc:2005682913",
+    "note": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "ch03/crocker_selleck.jpg": {
+    "title": "File:Charles Crocker Silas Selleck Portrait Crop.jpg",
+    "artist": "Silas Selleck",
+    "date": "circa 1865\u20131875",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_Crocker_Silas_Selleck_Portrait_Crop.jpg"
+  },
+  "ch03/miners_long_tom.jpg": {
+    "title": "File:California gold miners with long tom.jpg",
+    "artist": "George H. Johnson",
+    "date": "between circa 1850 and circa 1852date QS:P,+1850-00-00T00:00:00Z/8,P1319,+1850-00-00T00:00:00Z/9,P1326,+1852-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:California_gold_miners_with_long_tom.jpg",
+    "note": "cropped inside the daguerreotype mat"
+  },
+  "ch03/russell_casement_outfit.jpg": {
+    "title": "File:Captain Andrew Joseph Russell - General John S. Casement and His Outfit - Google Art Project.jpg",
+    "artist": "Andrew J. Russell",
+    "date": "between 1867 and 1868date QS:P571,+1867-00-00T00:00:00Z/8,P1319,+1867-00-00T00:00:00Z/9,P1326,+1868-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Captain_Andrew_Joseph_Russell_-_General_John_S._Casement_and_His_Outfit_-_Google_Art_Project.jpg"
+  },
+  "ch03/ai_tea_barrel_w.jpg": {
+    "title": "Camp tea barrel, dipper, cups and kettle (prop)",
+    "artist": "Illustration (AI lithograph), Gemini 2.5 Flash Image; weather.py light; masked (ch03_tea_barrel)",
+    "licence": "generated for this video",
+    "page": "review/ai_images_ch03.md",
+    "ai": true
+  },
+  "ch03/ai_tea_barrel_src.png": {
+    "title": "mask source for ai_tea_barrel_w.jpg",
+    "ai": true
+  },
+  "ch03/ai_sierra_stream.jpg": {
+    "title": "A Sierra stream beside the grade, workmen drinking (plate)",
+    "artist": "Illustration (AI lithograph), Gemini 2.5 Flash Image; vignette and signature cropped; weather.py medium",
+    "licence": "generated for this video",
+    "page": "review/ai_images_ch03.md",
+    "ai": true
+  },
+  "ch03/litho_hell_on_wheels.jpg": {
+    "title": "A rolling tent town on the Union Pacific line (plate)",
+    "artist": "Illustration (AI lithograph), reused from review/ai_tests/litho/L2_hell_on_wheels__medium.jpg",
+    "licence": "generated for this video",
+    "page": "review/ai_tests/litho_test.py",
+    "ai": true
+  },
+  "samples/hart_tunnel8_worker.jpg": {
+    "title": "A. A. Hart, Heading of east portal Tunnel No. 8, 1865\u201369 \u00b7 LOC LC-DIG-stereo-1s00553, no known restrictions \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/ridge_sierra_a_cut.png": {
+    "title": "AI lithograph (Gemini 2.5 Flash Image), ribbon backdrop, reused from review/ai_tests/ribbon; not tagged on screen",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/ridge_wyoming_a_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/engine_cp_east_b_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/engine_up_west_b_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
+  }
+}

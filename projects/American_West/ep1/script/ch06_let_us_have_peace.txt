@@ -1,6 +1,6 @@
 In 1868, Ulysses S. Grant ran for president on four words, from his letter accepting the nomination. "Let us have peace."
 
-Translation: the war is over. Let's finish the job.
+[wry] Translation: the war is over. Let's finish the job.
 
 This was a man who, ten years earlier, was out of the Army and selling firewood on the streets of St. Louis. Then clerking in his father's leather goods store. The war changed everything for him. Now he was the most famous man in the country.
 
@@ -10,6 +10,6 @@ Out West, he tried something different too. His {Peace Policy} promised to deal 
 
 Cartoonists drew Grant both ways. To some, he was the general who saved the Union and was now protecting its new citizens. To others, he was a soldier out of his depth in politics.
 
-Because his critics had a point too. Grant was loyal. He trusted his friends. And some of his friends did not deserve it.
+[thoughtful] Because his critics had a point too. Grant was loyal. He trusted his friends. [dry] And some of his friends did not deserve it.
 
 And the biggest scandal of all had started before he even took office.

@@ -117,7 +117,7 @@ export const TornPrint: React.FC<{src: string; size: [number, number]; x: number
  * or coral, which then replaces tint + trace as the frame's one coral subject). Grain comes from Finish.
  */
 export const CutOut: React.FC<{src: string; size: [number, number]; mask: MaskRef; place: Place; at?: number; shadow?: 'ink' | 'coral' | 'none'; off?: [number, number];
-  tint?: number; traceAt?: number; filter?: string}> = ({src, size, mask, place, at = 0, shadow = 'ink', off = [12, 14], tint = 0, traceAt, filter = BW}) => {
+  tint?: number; traceAt?: number; filter?: string; soft?: boolean}> = ({src, size, mask, place, at = 0, shadow = 'ink', off = [12, 14], tint = 0, traceAt, filter = BW, soft = false}) => {
   const d = useDrop(at);
   const pal = usePal();
   if (!d.on) return null;
@@ -132,10 +132,23 @@ export const CutOut: React.FC<{src: string; size: [number, number]; mask: MaskRe
       {shadow === 'coral' && <div style={{position: 'absolute', left: place.left + off[0], top: place.top + off[1], width: W, height: H, background: pal.subject, ...m}} />}
       <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, filter: shadow === 'ink' ? `drop-shadow(${off[0]}px ${off[1]}px 0 ${SHADOW})` : undefined}}>
         <Img src={staticFile(src)} style={{position: 'absolute', left: place.left, top: place.top, width: W, height: H, filter, ...m}} />
-        {tint > 0 && <Tint mask={mask.alpha} place={place} size={size} strength={tint} />}
+        {tint > 0 && (soft ? <SoftTint mask={mask.alpha} place={place} size={size} strength={tint} /> : <Tint mask={mask.alpha} place={place} size={size} strength={tint} />)}
       </div>
       {traceAt !== undefined && <Traced paths={mask.data.shapes.subject} place={place} at={traceAt} dur={12} width={5} part={0.93} />}
     </AbsoluteFill>
+  );
+};
+
+/** A lighter coral tint (colour blend + a little multiply, no screen layer) so the photo's own detail stays visible. */
+export const SoftTint: React.FC<{mask: string; place: Place; size: [number, number]; strength?: number}> = ({mask, place, size, strength = 0.6}) => {
+  const pal = usePal();
+  const m: React.CSSProperties = {position: 'absolute', left: place.left, top: place.top, width: size[0] * place.scale, height: size[1] * place.scale,
+    WebkitMaskImage: `url(${staticFile(mask)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(mask)})`, maskSize: '100% 100%'} as React.CSSProperties;
+  return (
+    <>
+      <div style={{...m, background: pal.subject, mixBlendMode: 'color', opacity: strength}} />
+      <div style={{...m, background: pal.subject, mixBlendMode: 'multiply', opacity: 0.18 * strength}} />
+    </>
   );
 };
 
@@ -163,8 +176,8 @@ export const Pin: React.FC<{x: number; y: number; at: number; size?: number}> = 
  * Locator map card: a dark card, thin teal rule, a flat crop of a period map around (fx, fy), a pin or a loop.
  */
 export const MapCard: React.FC<{x: number; y: number; w: number; h: number; src: string; size: [number, number]; fx: number; fy: number; scale: number; rot?: number; at: number;
-  pin?: [number, number]; loop?: {sx: number; sy: number; rx: number; ry: number}; label?: string; labelAt?: [number, number]; caption?: string}> = ({
-  x, y, w, h, src, size, fx, fy, scale, rot = 0, at, pin, loop, label, labelAt, caption,
+  pin?: [number, number]; loop?: {sx: number; sy: number; rx: number; ry: number}; label?: string; labelAt?: [number, number]; caption?: string; bright?: boolean}> = ({
+  x, y, w, h, src, size, fx, fy, scale, rot = 0, at, pin, loop, label, labelAt, caption, bright = false,
 }) => {
   const d = useDrop(at);
   const pal = usePal();
@@ -180,8 +193,8 @@ export const MapCard: React.FC<{x: number; y: number; w: number; h: number; src:
     <div style={{position: 'absolute', left: x, top: y - d.air * 40, width: w, height: h, transform: `rotate(${rot + d.air * 4}deg)`, opacity: Math.min(1, d.k * 3),
       background: '#16140f', boxShadow: `12px 14px 0 ${SHADOW}`}}>
       <div style={{position: 'absolute', left: pad, top: pad, width: iw, height: ih, overflow: 'hidden'}}>
-        <Img src={staticFile(src)} style={{position: 'absolute', left, top, width: size[0] * scale, height: size[1] * scale, filter: MAPLOOK}} />
-        <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(8,6,4,0.7) 100%)'}} />
+        <Img src={staticFile(src)} style={{position: 'absolute', left, top, width: size[0] * scale, height: size[1] * scale, filter: bright ? 'grayscale(1) sepia(0.3) contrast(1.15) brightness(0.95)' : MAPLOOK}} />
+        <div style={{position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(8,6,4,${bright ? 0.4 : 0.7}) 100%)`}} />
       </div>
       <div style={{position: 'absolute', inset: 5, border: `2px solid ${pal.mark}`, opacity: 0.85}} />
       {loop && (() => {
