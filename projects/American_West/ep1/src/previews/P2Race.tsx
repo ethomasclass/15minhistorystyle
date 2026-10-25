@@ -67,7 +67,9 @@ const Engine: React.FC<{src: string; size: [number, number]; mask: MaskRef; scal
 };
 
 /** The whole 3D model; `lit` = frames at which each bond zone lights (or 1e7), engines' progress 0..1. */
-const World: React.FC<{lit: number[]; prog: number}> = ({lit, prog}) => {
+const World: React.FC<{lit: number[]; prog: number; fx: number; z: number}> = ({lit, prog, fx, z}) => {
+  // labels fade out before the camera would cut them at the frame edge (rough: ignores perspective)
+  const labelOp = (x: number) => interpolate(Math.abs(x - fx) * z, [560, 700], [1, 0], clamp);
   const g = useGFrame();
   const hand = useHand();
   const cpMi = 690 * prog;
@@ -110,16 +112,18 @@ const World: React.FC<{lit: number[]; prog: number}> = ({lit, prog}) => {
           })}
           <path d={LINE} fill="none" stroke={PAL.mark} strokeWidth={5} strokeLinejoin="round" />
         </svg>
+      </Upright>
+      <Upright y={22}>
         {PTS.filter((p) => p[2]).map(([mi, ft, name]) => (
-          <div key={name} style={{position: 'absolute', left: X(mi) - 10, top: Y(mi) - 92, whiteSpace: 'nowrap', textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>
+          <div key={name} style={{position: 'absolute', left: X(mi) - 10, top: Y(mi) - 92, whiteSpace: 'nowrap', opacity: labelOp(X(mi) + 120), textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>
             <div style={{fontFamily: hand.family, fontSize: 30 * hand.scale, color: PAL.mark, transform: 'rotate(-4deg)'}}>{name}</div>
             <div style={{fontFamily: JF.mono, fontSize: 16, letterSpacing: 2, color: '#fff'}}>{ft.toLocaleString('en-US')} FT</div>
           </div>
         ))}
       </Upright>
       <Upright y={30}>
-        <Engine src="img/previews/hart_goliah_mirrored_w.jpg" size={SZ.goliah} mask={SM.goliah} scale={0.12} mi={cpMi} />
-        <Engine src="img/previews/carbutt_up_100th_1866_w.jpg" size={SZ.carbutt} mask={SM.up} scale={0.15} mi={upMi} />
+        <Engine src="img/previews/hart_goliah_mirrored_w.jpg" size={SZ.goliah} mask={SM.goliah} scale={0.15} mi={cpMi} />
+        <Engine src="img/previews/carbutt_up_100th_1866_w.jpg" size={SZ.carbutt} mask={SM.up} scale={0.19} mi={upMi} />
       </Upright>
     </>
   );
@@ -130,7 +134,7 @@ const Stage: React.FC<{fx: number; tilt: number; spin: number; z: number; dy?: n
   <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #211e18 0%, #12100c 65%, #070605 100%)', perspective: 1500, perspectiveOrigin: '50% 35%', overflow: 'hidden'}}>
     <div style={{position: 'absolute', left: 960 - fx, top: 640 + dy, width: X(MI), height: 0, transformStyle: 'preserve-3d', transformOrigin: `${fx}px 0px`,
       transform: `scale(${z}) rotateX(${tilt}deg) rotateZ(${spin}deg)`}}>
-      <World lit={lit} prog={prog} />
+      <World lit={lit} prog={prog} fx={fx} z={z} />
     </div>
   </AbsoluteFill>
 );

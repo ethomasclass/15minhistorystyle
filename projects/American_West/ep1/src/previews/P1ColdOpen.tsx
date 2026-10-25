@@ -51,7 +51,7 @@ const DeskPieces: React.FC<{t0: number; worker: number; map: number}> = ({t0, wo
     </Lift>
     <Lift x={1360} y={640} w={440} hgt={300} h={4} at={map} rot={3} blur={1.4} seed={5}>
       <MapCard x={0} y={0} w={440} h={300} src={IMG.warren} size={SZ.warren} fx={WARREN.promontory[0] + 20} fy={WARREN.promontory[1] + 40} scale={0.62} at={-99}
-        pin={WARREN.promontory} label="Promontory" labelAt={[250, 40]} caption="UTAH TERR. · 1869" />
+        pin={WARREN.promontory} label="Promontory" labelAt={[228, 40]} caption="UTAH TERR. · 1869" />
     </Lift>
     <Lift x={900} y={440} w={330} hgt={520} h={46} at={worker} seed={7}>
       <CutOut src={WORKER} size={SZ.tunnel8} mask={SM.worker} place={{left: 10 - 519 * 0.95, top: 18 - 1291 * 0.95, scale: 0.95}} at={-99} tint={0.6} traceAt={worker + 6}
@@ -71,7 +71,7 @@ const DeskReveal: React.FC = () => {
       <Desk3D tilt={keys(f, [[a, 26], [T.at('Look at it') - 1, 15]])} rotZ={keys(f, [[a, -2], [T.at('Look at it'), 0]])} z={0.9} y={10}>
         <DeskPieces t0={a} worker={w} map={a + 10} />
       </Desk3D>
-      <Note text="the men who built it" x={1310} y={130} size={50} rot={-3} at={w + 10} />
+      <Note text="the men who built it" x={1270} y={130} size={50} rot={-3} at={w + 10} />
       <Tag text="A. J. Russell, 1869 · Commons  ·  A. A. Hart, Heading of Tunnel No. 8, 1865–69 · LOC" x={44} y={30} />
     </AbsoluteFill>
   );
@@ -131,7 +131,7 @@ const DeskWide: React.FC = () => {
   const sh = shake(f, [a + 2], 7);
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
-      <Desk3D tilt={keys(f, [[a - 2, 12], [P1_FRAMES, 18]])} z={zkeys(f, [[a - 2, 1.1], [P1_FRAMES, 0.88]])} y={keys(f, [[a - 2, 40], [P1_FRAMES, 0]])}>
+      <Desk3D tilt={keys(f, [[a - 2, 12], [P1_FRAMES, 18]])} z={zkeys(f, [[a - 2, 1.03], [P1_FRAMES, 0.88]])} y={keys(f, [[a - 2, 40], [P1_FRAMES, 0]])}>
         <DeskPieces t0={-99} worker={-99} map={-99} />
       </Desk3D>
       <SlapTitle text="MAY 10, 1869" x={1290} y={110} size={84} at={a} seed={11} rot={-3} />
