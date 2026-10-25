@@ -2,7 +2,7 @@
 // Chapter 1 has no logo break in front; it ends on the intro + title instead. Replace the scenes, keep the shape.
 import React from 'react';
 import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
-import words from '../../public/audio/ch01_cold_open.words.json';
+import words from '../../public/audio/ch01_not_in_the_picture.words.json';
 import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, MapView, Sfx, WRITE} from '../kit/common';
@@ -103,7 +103,7 @@ const Body: React.FC = () => {
     <AbsoluteFill style={{background: '#000'}}>
       {scene}
       {frame < END && <Finish vignette={0.3} />}
-      <Audio src={staticFile('audio/ch01_cold_open.wav')} />
+      <Audio src={staticFile('audio/ch01_not_in_the_picture.wav')} />
       {/* cold-open music bed, e.g. <Audio src={staticFile('music/cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, 0.17, 0.17, 0], clamp)} /> */}
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
       {['1845.', "People's", 'King'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}

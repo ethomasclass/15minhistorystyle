@@ -101,6 +101,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Make an allusion explicit.** When a map points to a later event (the 1861 split), label it on screen: sides, a key, a dated pin, the event's name.
 - No caricatured engravings in a serious chapter.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
+- **Notes are bare teal handwriting, no tape or strip behind them** (from the West series, Oct 2026; replaces the backed
+  notes used in the Reconstruction videos). Orange tape is for titles only.
 - **Everything new stays on the black desk** (from the West series): no cream or white cards, mounts, tags or sticker borders. The
   only light tones on screen are the archival scans themselves. New devices (ledger cards, circle mounts, map cards, year stamps) are
   dark paper with teal rules and coral/orange accents.

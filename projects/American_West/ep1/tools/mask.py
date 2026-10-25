@@ -30,6 +30,14 @@ JOBS = {
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }
 
+# Per-chapter jobs (parallel scene builds): tools/mask_jobs/chNN.py each defines a JOBS dict that is merged in here,
+# so chapter builders never edit this shared file.
+import glob as _glob, importlib.util as _ilu
+for _p in sorted(_glob.glob(os.path.join(HERE, "mask_jobs", "*.py"))):
+    _spec = _ilu.spec_from_file_location(os.path.basename(_p)[:-3], _p)
+    _mod = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_mod)
+    JOBS.update(getattr(_mod, "JOBS", {}))
+
 
 def run(name, src, box, model, *opts, sessions={}):
     min_area = next((o for o in opts if isinstance(o, int)), 20000)
