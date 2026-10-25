@@ -757,10 +757,8 @@ export const Ch09: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch09_the_picture.wav" lead={LEAD} extra={EXTRA}
     music={[
       {src: 'music/r_nativism.mp3', volume: bed('r_nativism'), to: at("So let's") + 6, fadeOut: 24},
-      // SUNO: aw_promise_theme replaces this (from "So let's go back to the question" to the end, end screen music-only)
-      {src: 'music/r_ending.mp3', volume: bed('r_ending'), from: at("So let's") - 6, to: at("Let's write") + 6, fadeOut: 30},
-      // SUNO: aw_promise_theme replaces this (r_ending is 61 s, so the fallback restarts under the ledger and carries the end screen)
-      {src: 'music/r_ending.mp3', volume: bed('r_ending'), from: at("Let's write") - 6},
+      // aw_promise_theme (Suno, 2:05), the series theme: from "So let's go back to the question" through the end screen (~1:48)
+      {src: 'music/aw_promise_theme.mp3', volume: bed('aw_promise_theme'), from: at("So let's") - 6},
     ]}>
     <Body />
   </ChapterShell>

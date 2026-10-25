@@ -465,8 +465,8 @@ const Body: React.FC = () => {
 };
 
 export const Ch03: React.FC = () => (
-  // SUNO: aw_iron_horse replaces this (g_cotton_engine is the library fallback)
-  <ChapterShell n={N} audio="audio/ch03_the_race.wav" lead={LEAD} music={[{src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine')}]}>
+  // aw_iron_horse (Suno, 2:05) covers the whole chapter (1:47)
+  <ChapterShell n={N} audio="audio/ch03_the_race.wav" lead={LEAD} music={[{src: 'music/aw_iron_horse.mp3', volume: bed('aw_iron_horse')}]}>
     <Body />
   </ChapterShell>
 );

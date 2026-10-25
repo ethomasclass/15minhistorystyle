@@ -601,10 +601,9 @@ const Body: React.FC = () => {
 export const Ch08: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch08_panic.wav" lead={LEAD}
     music={[
-      // SUNO: aw_panic replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/w_fire.mp3', volume: bed('w_fire'), to: at('By 1877') + 6, fadeOut: 30},
-      // SUNO: aw_panic replaces this (w_fire is 88 s, so the fallback restarts at "By 1877")
-      {src: 'music/w_fire.mp3', volume: bed('w_fire'), from: at('By 1877') - 6},
+      // aw_panic (Suno, 1:55), one cue for the chapter: its bustle stops dead at 101.9 s into the file; starting it 10.95 s in
+      // lands that stop just before the last line ("And out West, when times got hard…"), so the sober piano carries it
+      {src: 'music/aw_panic.mp3', volume: bed('aw_panic'), startFrom: Math.round(30 * 101.9) - (at('And out West') - 2)},
     ]}>
     <Body />
   </ChapterShell>

@@ -64,6 +64,8 @@ prefix says which video the cue was made for:
 | [`r_temperance`](cues/r_temperance.mp3) | 1:01 | -12.6 | Comic, bouncy, tipsy honky-tonk piano + fiddle + tuba; halfway turns hopeful/determined, ends warm and upbeat. |  | Fix Everything, The Man Who Couldn't Sit Still, Say It Ain't So |
 | [`j_good_feelings`](cues/j_good_feelings.mp3) | 1:30 | -19.6 | Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme). | Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Good Luck, Dressed to Kill |
 | [`j_campaign`](cues/j_campaign.mp3) | 1:40 | -14.5 | Rowdy, energetic 1820s campaign march: fife + field drum, bright brass band, banjo, fiddle, hand claps, crowd feel; playful and a bit chaotic. |  | Jackson Video 1 / Part One, King Andrew, The War Nobody Won |
+| [`aw_legend_sours`](cues/aw_legend_sours.mp3) | 0:52 | -17.0 | The myth beat: a heroic Hollywood-western fanfare meant to sour into a deadpan letdown (the turn is subtle in this take). | Mark the turn with LEGEND_TURN in Ep 1 Ch05. | Not in the Picture |
+| [`aw_robber_barons`](cues/aw_robber_barons.mp3) | 2:08 | -16.7 | Gilded Age swagger: tuba oom-pah, parlor piano, sly muted trumpet, pizzicato, two cheeky brass stings; smug with a hint of menace. | Even all the way through (2:08 covers a long chapter in one take). | Not in the Picture |
 
 ### Warm, hopeful and dignified
 
@@ -87,6 +89,7 @@ prefix says which video the cue was made for:
 | [`a_civil_war`](cues/a_civil_war.mp3) | 1:25 | -15.4 | Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello. | Somber second half is the reusable grave part. | The Man Who Couldn't Sit Still, Grip Tighter |
 | [`w_frontier`](cues/w_frontier.mp3) | 1:36 | -12.0 | Tecumseh / Tenskwatawa: dignified, slow solo cello + low wooden flute, heartbeat drum; urgency/alarm mid-cue (dawn battle); grieving burnt-out quiet. |  | The War Nobody Won, King Andrew |
 | [`m_lament`](cues/m_lament.mp3) | 1:09 | -16.3 | Borderlands lament: slow nylon-guitar arpeggios and low cello, one distant muted trumpet phrase mid-cue, long silences; humane, no swell, ends unresolved. |  | The Exact Spot |
+| [`aw_long_grief`](cues/aw_long_grief.mp3) | 3:04 | -22.0 | A long, very quiet grieving bed: sustained string pad, slow solo cello phrases with long silences, an occasional low piano note; no swell, no build. Trimmed to 3:04. | Even all the way through; start anywhere. | Not in the Picture |
 
 ### Tension, dread and dark
 
@@ -99,6 +102,7 @@ prefix says which video the cue was made for:
 | [`g_cotton_engine`](cues/g_cotton_engine.mp3) | 1:45 | -14.9 | Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier. |  | Grip Tighter |
 | [`r_nativism`](cues/r_nativism.mp3) | 1:48 | -12.3 | Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march. | Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories. | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
 | [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter, The Exact Spot |
+| [`aw_panic`](cues/aw_panic.mp3) | 1:55 | -15.9 | 1870s Wall Street panic: hurried ragtime-edged piano, ticker woodblock, scurrying pizzicato, nervous clarinet, brushed snare, rising; stops dead at 1:41.9 into a sober piano-and-strings aftermath. | The stop at 101.9 s; Ep 1 starts the cue 10.95 s in so the stop lands on the chapter's last line. | Not in the Picture |
 
 ### Action and war
 
@@ -110,12 +114,15 @@ prefix says which video the cue was made for:
 | [`a_mexico`](cues/a_mexico.mp3) | 1:30 | -15.7 | Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet. |  | The Man Who Couldn't Sit Still, The Exact Spot |
 | [`a_mexico_short`](cues/a_mexico_short.mp3) | 1:05 | -14.7 | Alternate take of a_mexico (65 s, low dynamic range). |  | The Man Who Couldn't Sit Still |
 | [`m_war_drums`](cues/m_war_drums.mp3) | 1:10 | -17.9 | War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note. | Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push. | The Exact Spot |
+| [`aw_iron_horse`](cues/aw_iron_horse.mp3) | 2:05 | -16.6 | 1860s railroad building: col legno and low-string ostinato, anvil percussion, a locomotive chug gathering speed, low brass in the second half; relentless, impressive, not triumphant. | Quiet ostinato intro (0–8 s) works as a reflective reprise; full drive from ~30 s. | Not in the Picture |
 
 ### Endings
 
 | Cue | Length | LUFS | What it sounds like | Best part | Used in |
 |---|---|---|---|---|---|
 | [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot, Dressed to Kill |
+| [`aw_promise_theme`](cues/aw_promise_theme.mp3) | 2:05 | -16.9 | The American West series theme: a four-note motif on solo piano, taken up by warm strings and a French horn, one restrained peak, back to piano, unresolved. | Full piece; the solo-piano opening sits well under a closing question. | Not in the Picture |
+
 ## Recurring roles
 
 These cues have become the channel's regulars:
@@ -631,3 +638,64 @@ Quiet file (−17.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, 
 Reuse for any heavy chapter about loss of land or home: Mexican American and Southwestern history, removal and displacement.
 
 - The Exact Spot: Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Seguín) · bed 0.13
+
+### `aw_iron_horse`
+
+2:05 · -16.6 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> a reflective main theme for a documentary series about promises, a simple memorable four-note motif first on solo piano, then taken up by warm strings and a single French horn, earnest and thoughtful with a thread of doubt, builds gently to one restrained peak at about forty-five seconds, then returns to the solo piano motif, ends on an unresolved chord that leaves a question hanging, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
+
+Reuse for any building or industry montage: canals, steel, bridges, the assembly line.
+
+- Not in the Picture: Ch03 The Race (whole chapter) · bed 0.191
+- Not in the Picture: Ch05 Done (ten miles in a day, from 30 s; and the reprise from the top on "So go back to the photograph") · bed 0.191
+
+### `aw_legend_sours`
+
+0:52 · -17.0 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> two-part cue: a short heroic Hollywood-western fanfare that falls apart into a deflated, deadpan letdown, bold French horns and trumpets with timpani for the opening, then the brass sags out of tune, the tempo drags to a halt, and only sparse doubtful pizzicato, a lone dry bassoon and soft upright bass remain, wry and sheepish rather than sad, 100 BPM slowing to 70 BPM; documentary, restrained, space for narrator, instrumental
+
+Reuse for any "you may have heard…" myth beat.
+
+- Not in the Picture: Ch05 Done (the golden-spike myth, "You may have heard" to "So go back") · bed 0.200
+
+### `aw_long_grief`
+
+3:04 · -22.0 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> a long, very quiet grieving bed for the heaviest moments, three minutes, a soft sustained string pad barely moving, a few slow solo cello phrases with long silences between, one low piano note now and then, no swell, no build, no melodrama, the same calm level from start to finish, ends in silence, free time, about 56 BPM; documentary, restrained, space for narrator, instrumental
+
+Reuse for the heaviest chapter of any video (Sand Creek, Wounded Knee in Ep 4). Quiet file (−22 LUFS).
+
+- Not in the Picture: Ch04 The Mountain (the strike, from "About 3,000") · bed 0.316
+
+### `aw_panic`
+
+1:55 · -15.9 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> 1870s Wall Street panic, a busy anxious bustle of a crowd rushing the banks, hurried upright piano with a ragtime edge, clacking stock-ticker woodblock rhythm, scurrying pizzicato strings, nervous clarinet runs, brushed snare, energy rising as things spin out of control, then the bustle stops and a sober, plain aftermath on piano and low strings, sad and reflective like a long hard time ahead, period chamber orchestra, 126 BPM then half time; documentary, restrained, space for narrator, instrumental
+
+Reuse for the Panics of 1837 and 1893, the 1929 crash, bank runs.
+
+- Not in the Picture: Ch08 Panic (whole chapter, startFrom ~10.9 s) · bed 0.176
+
+### `aw_promise_theme`
+
+2:05 · -16.9 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> a reflective main theme for a documentary series about promises, a simple memorable four-note motif first on solo piano, then taken up by warm strings and a single French horn, earnest and thoughtful with a thread of doubt, builds gently to one restrained peak at about forty-five seconds, then returns to the solo piano motif, ends on an unresolved chord that leaves a question hanging, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
+
+Every episode's last chapter in the series; any closing reflection.
+
+- Not in the Picture: Ch09 The Picture (from "So let's go back to the question" through the end screen) · bed 0.197
+
+### `aw_robber_barons`
+
+2:08 · -16.7 LUFS · Suno (`Suno`) · made for *Not in the Picture*
+
+> Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass oom-pah under a sly muted trumpet melody, parlor piano chords, pizzicato strings, a cigar-smoke lazy confidence with a hint of menace underneath, two short cheeky brass stings, ends on a knowing unresolved chord, 84 BPM, 4/4, a slow strut; documentary, restrained, space for narrator, instrumental
+
+Reuse for the Gilded Age, Tammany Hall, trusts, Teapot Dome.
+
+- Not in the Picture: Ch07 Where It Will Do Most Good (whole chapter) · bed 0.193

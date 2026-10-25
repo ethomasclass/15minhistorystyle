@@ -552,14 +552,19 @@ const Body: React.FC = () => (
   </AbsoluteFill>
 );
 
+/** Where the golden-spike cue turns (seconds into aw_legend_sours.mp3); the cue is started so that moment lands on "Sort of.".
+ *  null = no turn marked yet: the cue plays from its top. */
+const LEGEND_TURN: number | null = null;
+const LEGEND_START = LEGEND_TURN === null ? 0 : Math.max(0, Math.round(LEGEND_TURN * 30 - (at('Sort of', 2) - (at('You may') - 6))));
+
 export const Ch05: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch05_done.wav" lead={LEAD} music={[
-    // SUNO: aw_iron_horse replaces this (ten miles in a day)
-    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine'), to: at('You may') + 4, fadeOut: 24},
-    // SUNO: aw_legend_sours replaces this (the golden-spike myth)
-    {src: 'music/a_price.mp3', volume: bed('a_price'), from: at('You may') - 6, to: at('So go back') + 6, fadeOut: 30},
-    // SUNO: aw_iron_horse reprise replaces this
-    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine'), from: at('So go back') - 6, startFrom: 30 * 40},
+    // aw_iron_horse, from its driving middle (ten miles in a day)
+    {src: 'music/aw_iron_horse.mp3', volume: bed('aw_iron_horse'), startFrom: 30 * 30, to: at('You may') + 4, fadeOut: 24},
+    // aw_legend_sours (the golden-spike myth): LEGEND_TURN puts the cue's turn on "Sort of."
+    {src: 'music/aw_legend_sours.mp3', volume: bed('aw_legend_sours'), from: at('You may') - 6, startFrom: LEGEND_START, to: at('So go back') + 6, fadeOut: 30},
+    // aw_iron_horse reprise from its quiet opening ostinato ("So go back to the photograph")
+    {src: 'music/aw_iron_horse.mp3', volume: bed('aw_iron_horse'), from: at('So go back') - 6},
   ]}>
     <Body />
   </ChapterShell>

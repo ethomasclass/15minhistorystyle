@@ -28,9 +28,10 @@ fulfill its promises of freedom and opportunity after the Civil War?"
   labels are known false positives).
 
 ### Waiting on the user
-1. **Suno cues** (`../MUSIC.md`; priority `aw_promise_theme`, `aw_iron_horse`, `aw_long_grief`, `aw_legend_sours`). Each chapter
-   has `// SUNO: aw_xxx replaces this` where the cue swaps in; library fallbacks play now. Put new cues in `public/music/` and in
-   the style repo `music/cues/` + `music/README.md` + `catalog.json` (prefix `aw_`).
+1. ~~Suno cues~~ In (Oct 2026): `aw_iron_horse` (ch03, ch05), `aw_long_grief` (ch04, trimmed to 3:04), `aw_legend_sours` (ch05),
+   `aw_robber_barons` (ch07), `aw_panic` (ch08, its stop lands on the last line), `aw_promise_theme` (ch09 to the end screen); all in
+   `music/cues/`, README and catalog. **Open:** the legend cue's turn isn't audible in the data; set `LEGEND_TURN` (seconds) in
+   `Ch05.tsx` once the user names it.
 2. ~~The Grant cartoon~~ Done: the user's test cartoon is Currier & Ives, *A Nice Family Party* (1872, LOC pga-09549):
    ch06 "some of his friends did not deserve it" (tight on "Let us have peace." as its box fills teal, pull out, the three "Let us have
    a piece." boxes fill see-through coral, the user's idea). The both-ways pair stays Nast 1872 + Morgan 1872 (they match the narration's words).

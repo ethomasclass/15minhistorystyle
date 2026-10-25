@@ -561,10 +561,8 @@ const Body: React.FC = () => {
 export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_where_it_will_do_most_good.wav" lead={LEAD}
     music={[
-      // SUNO: aw_robber_barons replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/a_price.mp3', volume: bed('a_price'), to: at('In 1872') + 6, fadeOut: 30},
-      // SUNO: aw_robber_barons replaces this (a_price is only 65 s, so the fallback restarts at "In 1872")
-      {src: 'music/a_price.mp3', volume: bed('a_price'), from: at('In 1872') - 6},
+      // aw_robber_barons (Suno, 2:08): one cue for the whole chapter (1:48)
+      {src: 'music/aw_robber_barons.mp3', volume: bed('aw_robber_barons')},
     ]}>
     <Body />
   </ChapterShell>
