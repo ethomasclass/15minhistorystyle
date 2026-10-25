@@ -1,0 +1,63 @@
+# Handoff: the American West series (start here in a new conversation)
+
+Repo: `ethomasclass/15minhistorystyle` (style repo + this series). Everything below is on the default branch.
+Skill: `.claude/skills/15-minute-history/` (read `SKILL.md`). Standing preferences: `videos/README.md` → *Your standing preferences*
+(updated heavily in this series; they are the law).
+
+## The series
+
+`projects/American_West/SERIES.md` (4 episodes, the story arc every episode follows, Promise Ledger, hinge years, callbacks, test
+items), four outlines `EP1_…`–`EP4_…_OUTLINE.md`, `GRAPHICS_BRAINSTORM.md`, `LITHO_PROMPT.md` (AI image style), `MUSIC.md`
+(12 Suno cue prompts `aw_*` + per-episode maps with library fallbacks). Unit question: "To what extent did the United States
+fulfill its promises of freedom and opportunity after the Civil War?"
+
+## Ep 1 · Not in the Picture (`projects/American_West/ep1/`) — STATUS: all nine chapters built, NOT rendered
+
+- Script: `script/SCRIPT.md` (+ `chNN_*.txt`), with v4 delivery cues `[wry]`, `[serious]`, `[firmly]` … (never `[quietly]`: v4 whispers).
+- Narration: voiced, ElevenLabs `eleven_v4`, one take per chapter, 14:53 (`public/audio/chNN_*.wav` + `.words.json`;
+  `script/Not_In_The_Picture_narration_preview.mp3`). Re-voice one chapter: `python3 tools/voice.py script/chNN_x.txt chNN_x`.
+- Scenes: `src/ch/Ch01.tsx`–`Ch09.tsx` on real word timings; brief `SCENES.md`; per-chapter notes `review/build_ch01-03.md`,
+  `build_ch04-06.md`, `build_ch07-09.md`; contact sheets `review/stills/chNN_sheet.jpg`. Kit: `src/kit/west.ts` (re-exports
+  `src/samples/kit.tsx` + `src/previews/fx.tsx`), `src/kit/ch01_extra.tsx` (drawn West map, ribbon, township, Act page),
+  `ch04_extra.tsx`, `ch07_extra.tsx`, `house_litho.tsx`.
+- House chamber (ch01 end, ch02 start): lithograph chamber with the empty wedge traced by Gemini (`review/ai_house_chamber/`),
+  switch `HOUSE_LOOK` ('litho' | 'diagram') at the top of `Ch01.tsx`/`Ch02.tsx`. **User hasn't picked yet** (litho is on).
+- ch04 snow scene: lithograph bunkhouse + teal-hatched snow (user's suggestion, done).
+- Approved look references: `review/previews/P1-ColdOpen.mp4`, `P2-Race.mp4`, `P3-Checker.mp4` ("These are awesome!").
+- Checks pass for all chapters: `npx tsc --noEmit -p .`, `tools/anchors.py`, `tools/probe_text.mjs` (whip frames and faded P2
+  labels are known false positives).
+
+### Waiting on the user
+1. **Suno cues** (`../MUSIC.md`; priority `aw_promise_theme`, `aw_iron_horse`, `aw_long_grief`, `aw_legend_sours`). Each chapter
+   has `// SUNO: aw_xxx replaces this` where the cue swaps in; library fallbacks play now. Put new cues in `public/music/` and in
+   the style repo `music/cues/` + `music/README.md` + `catalog.json` (prefix `aw_`).
+2. **The Grant cartoon** from their test (ch06 has a swappable slot: `CARTOON_A/B` at the top of `Ch06.tsx`; currently Nast 1872
+   admiring + Morgan/Leslie's 1872 critical). A look-again line about it would mean re-voicing ch06.
+3. **House chamber**: litho or diagram.
+4. **ch02 "Black families" circle** uses a cropped Leslie's 1879 Exodus engraving: user to check for caricature.
+
+### Polish list (do before the render)
+1. ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".
+2. ch02: a few dark, sparse map shots (pre-war deadlock) and a near-empty frame before the four portraits.
+3. ch07's two-views card: match ch06's supporters' wording.
+4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): confirm or drop.
+5. Fact checks: 1874 House seat counts, the price fall, "89 of 364" railroads (labelled approx. on screen); plus
+   `script/SCRIPT.md` → Fact-check flags.
+6. ch04 strike camp image is Brown's Station (Nevada, 1868–69), tagged with its real date.
+
+### Then
+Swap music → polish → render (`tools/render.sh`, `references/render-and-deliver.md`) → master −14 LUFS → 720p + <30 MB preview →
+thumbnail (S1-C torn print with the coral worker) → YouTube text → viewing guide. Then Ep 2 (outline ready).
+
+## Rules learned in this series (all in `videos/README.md` and the skill)
+Black desk only (no cream/white cards or sticker borders) · notes are bare teal handwriting, no tape behind · one see-through coral
+subject · depth: wide → detail, a cut every 3–6 s, varied camera moves, slap/overshoot/shake/breathing, texture · 3D where it explains
+· hook alignment in the first 2 s · trace and source, don't eyeball (Gemini line/region finder) · AI images (Gemini 2.5 Flash Image,
+tinted lithograph, `tools/weather.py --preset medium`) used freely for props/scenery/plates, **never tagged on screen, never "AI"
+on screen**, never real people or fake documents · no AI imitation of Native music · gentle sounds only (new `*_soft` set) ·
+narration on `eleven_v4`, one take, speed 1.0, with sparing `[cues]`.
+
+## Keys
+`ep1/.env` (git-ignored, never commit or print): `GEMINI_API_KEY` (paid AI Studio project), `ELEVENLABS_API_KEY`, `VOICE_ID`
+(Ellis), `HF_TOKEN` (no credit). All were pasted in chat in this conversation: **ask the user to rotate them**, and a new session
+will need them re-supplied (the container's `.env` won't carry over).
