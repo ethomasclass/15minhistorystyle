@@ -1,7 +1,8 @@
 # Not in the Picture: Grant, the Railroad, and Who Built It
 
-**15 Minute History** · narration script · draft 1 · 2,450 words · about 16:00 finished (eleven_v4 one take at speed 1.0 runs
-~167 wpm; ch01 voiced at 60.7 s. The user is fine with it running a little long: no trims for pace. Re-time after voicing.)
+**15 Minute History** · narration script · draft 1 (voiced) · 2,450 words · 14:53 of narration, about 16:00 finished
+(ElevenLabs `eleven_v4`, one take per chapter, speed 1.0; ch04 at the heavy pace). `[tags]` are v4 delivery cues: sent to the voice, never spoken
+or shown on screen.
 
 Series: *The American West after the Civil War*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_RAILROAD_OUTLINE.md`](../../EP1_RAILROAD_OUTLINE.md)
@@ -43,75 +44,75 @@ Markup: `*emphasis*`, `{vocab term}`.
 
 ## 0:00 | Not in the Picture
 
-`ch01_not_in_the_picture.txt` · 169 words
+`ch01_not_in_the_picture.txt` · 169 words · voiced 57.5 s
 
-This is the most famous photograph of the railroad that tied America together. And most of the people who built it aren't in it.
+[matter-of-fact] This is the most famous photograph of the railroad that tied America together. And most of the people who built it aren't in it.
 
 Look at it. Two locomotives, nose to nose. Men climbing on the engines, holding up bottles. Two engineers shaking hands in the middle. May 10th, 1869. The first railroad across the continent is finished.
 
 Now look at the faces. The Central Pacific Railroad built the western half of this line. And most of its workers, most estimates say around four out of five, were Chinese.
 
-Look again. You can't find them.
+[pause] Look again. [quietly] You can't find them.
 
-So here's the question I want to answer today. The railroad was supposed to tie a country that had just fought a civil war back together, and open the West to anyone. So who did it actually open it for?
+[curious] So here's the question I want to answer today. The railroad was supposed to tie a country that had just fought a civil war back together, and open the West to anyone. So who did it actually open it for?
 
-The answer isn't really about trains. It's about who counted as part of the country.
+[thoughtful] The answer isn't really about trains. It's about who counted as part of the country.
 
-We'll come back to the men who aren't in this picture. But first, a room full of empty chairs.
+We'll come back to the men who aren't in this picture. [wry] But first, a room full of empty chairs.
 
 ---
 
-## 1:19 | 1862
+## 1:22 | 1862
 
-`ch02_1862.txt` · 312 words
+`ch02_1862.txt` · 312 words · voiced 112.1 s
 
 Washington, 1862. The Civil War is in its second year, and a lot of seats in Congress are empty. The Southern states have left the Union, and their members went with them.
 
 For years before the war, North and South had blocked each other on the West. Where would a railroad to the Pacific run? Who would get the new land? Slave states or free?
 
-With the South gone, Congress stops arguing and starts passing laws. In one year, it passes three that remake the West. The Homestead Act, which gives away farmland. The Morrill Act, which pays for colleges. And the {Pacific Railway Act}, which builds a railroad to the Pacific. Remember that year, 1862. All three laws come back in this series.
+[wry] With the South gone, Congress stops arguing and starts passing laws. In one year, it passes three that remake the West. The Homestead Act, which gives away farmland. The Morrill Act, which pays for colleges. And the {Pacific Railway Act}, which builds a railroad to the Pacific. Remember that year, 1862. All three laws come back in this series.
 
-And here's the bigger idea behind this whole series. When people hear the word Reconstruction, they picture the South after the war. But out West, the same question was being asked: *what does freedom mean now, and who gets it?* Only out there, more people were in the room. Native nations. Chinese immigrants. Mexican Americans. Black families looking for land. Historians call this the {Greater Reconstruction}.
+[thoughtful] And here's the bigger idea behind this whole series. When people hear the word Reconstruction, they picture the South after the war. But out West, the same question was being asked: *what does freedom mean now, and who gets it?* Only out there, more people were in the room. Native nations. Chinese immigrants. Mexican Americans. Black families looking for land. Historians call this the {Greater Reconstruction}.
 
-Okay. Back to the railroad. Here's the deal Congress made.
+[light] Okay. Back to the railroad. Here's the deal Congress made.
 
 Two companies would build it. The Union Pacific would start in Omaha, Nebraska, and build west. The Central Pacific would start in Sacramento, California, and build east.
 
 For every mile of track, the government gave each company a {land grant}: land on both sides of the track, in a checkerboard of squares. Plus loans, in government bonds. And the harder the mile, the bigger the loan. Mountains paid three times as much as flat ground.
 
-Land per mile. Money per mile. More money for hard miles. *That means* the companies weren't really paid to build a good railroad. They were paid to build a long one, fast.
+[deliberate] Land per mile. Money per mile. More money for hard miles. *That means* the companies weren't really paid to build a good railroad. They were paid to build a long one, fast.
 
-So it became a race.
+[pause] So it became a race.
 
 ---
 
-## 3:04 | The Race
+## 3:17 | The Race
 
-`ch03_the_race.txt` · 294 words
+`ch03_the_race.txt` · 294 words · voiced 104.3 s
 
 The Central Pacific had the harder start. Just past Sacramento was a wall: the Sierra Nevada mountains. And the company couldn't keep workers. Men signed on, rode the train to the end of the track, and walked off to look for gold and silver.
 
 So in 1865, a Central Pacific boss named Charles Crocker tried something new. He hired about 50 Chinese workers, men who had come to California for the gold rush.
 
-His construction foreman thought they were too small for the work. Crocker reportedly answered that their ancestors built the Great Wall of China.
+His construction foreman thought they were too small for the work. [wry] Crocker reportedly answered that their ancestors built the Great Wall of China.
 
 The 50 worked out. Within a couple of years, Chinese crews were most of the Central Pacific's workforce. Thousands of men, many recruited straight from southern China.
 
-They were not paid the same. Chinese workers earned less than white workers, and they had to buy their own food. White workers' meals came with the job.
+[serious] They were not paid the same. Chinese workers earned less than white workers, and they had to buy their own food. White workers' meals came with the job.
 
-They did have one advantage. Chinese crews drank tea, made with boiled water, carried up to them in barrels. White crews mostly drank water straight from the streams. Guess which crews got sick less often.
+They did have one advantage. Chinese crews drank tea, made with boiled water, carried up to them in barrels. White crews mostly drank water straight from the streams. [wry] Guess which crews got sick less often.
 
-Meanwhile, the Union Pacific was racing across the flat Great Plains. Its crews were Irish immigrants, Civil War veterans from both armies, and formerly enslaved men. Behind them rolled tent towns full of saloons and gambling halls, packed up and moved every few weeks to keep up with the track. People called them "Hell on Wheels." Which tells you most of what you need to know.
+Meanwhile, the Union Pacific was racing across the flat Great Plains. Its crews were Irish immigrants, Civil War veterans from both armies, and formerly enslaved men. Behind them rolled tent towns full of saloons and gambling halls, packed up and moved every few weeks to keep up with the track. People called them "Hell on Wheels." [dry] Which tells you most of what you need to know.
 
-And the Union Pacific's track ran straight through the hunting grounds of the Lakota, the Cheyenne and the Arapaho. Hold that thought. It's the last episode of this series.
+And the Union Pacific's track ran straight through the hunting grounds of the Lakota, the Cheyenne and the Arapaho. [serious] Hold that thought. It's the last episode of this series.
 
 So the Union Pacific had the Plains. The Central Pacific had a mountain.
 
 ---
 
-## 4:42 | The Mountain
+## 5:04 | The Mountain
 
-`ch04_the_mountain.txt` · 230 words
+`ch04_the_mountain.txt` · 230 words · voiced 89.6 s
 
 To get through the Sierra Nevada, the Central Pacific had to dig tunnels through solid granite. Fifteen of them.
 
@@ -119,51 +120,51 @@ The biggest, the Summit Tunnel, was dug mostly by hand. Hammers, drills and blac
 
 Then came the winter of 1866. More than 40 snowstorms. Snow deeper than the buildings. Crews dug tunnels through the snow just to reach the tunnels in the rock. Avalanches carried away whole work camps.
 
-How many Chinese workers died building this railroad? *We don't know.* The company kept careful records of track and money. It kept very few records of Chinese deaths. Most of what we know comes from newspaper reports and letters.
+[serious] How many Chinese workers died building this railroad? *We don't know.* The company kept careful records of track and money. It kept very few records of Chinese deaths. Most of what we know comes from newspaper reports and letters.
 
-In June 1867, the Chinese crews did something almost nobody expected.
+[quietly] In June 1867, the Chinese crews did something almost nobody expected.
 
 About 3,000 of them put down their tools. They had three demands. The same pay as white workers. Shorter shifts inside the tunnels. And an end to overseers whipping them, or stopping them from leaving.
 
-Charles Crocker cut off their food. No supplies reached the camps.
+[quietly] Charles Crocker cut off their food. No supplies reached the camps.
 
-After about a week, the strike was over. The pay didn't change.
+[somber] After about a week, the strike was over. [pause] The pay didn't change.
 
-It was one of the largest strikes in the country up to that time. Almost no one outside the camps heard about it.
+[quietly] It was one of the largest strikes in the country up to that time. Almost no one outside the camps heard about it.
 
 The work went on. And two years later, the two lines met.
 
 ---
 
-## 6:05 | Done
+## 6:37 | Done
 
-`ch05_done.txt` · 270 words
+`ch05_done.txt` · 270 words · voiced 97.1 s
 
 By the spring of 1869, the two companies could see each other coming. And the Central Pacific made a bet with the Union Pacific that its crews could lay ten miles of track in a single day.
 
-On April 28th, they did it. Ten miles and 56 feet. That's about 25,000 wooden ties and 3,500 iron rails, set by hand, in one day. The Chinese crews did most of it, with eight Irishmen lifting the rails.
+[proud] On April 28th, they did it. Ten miles and 56 feet. That's about 25,000 wooden ties and 3,500 iron rails, set by hand, in one day. The Chinese crews did most of it, with eight Irishmen lifting the rails.
 
 Two weeks later, the lines met at a place in Utah Territory called Promontory Summit.
 
 May 10th, 1869. A telegraph wire was hooked up to the last spike, so the hammer blows could be heard, sort of, across the country. And when it was over, the message went out in one word. *Done.*
 
-You may have heard they finished the railroad with a golden spike. They did. Sort of. The gold spike went into a hole that was drilled ahead of time, got a gentle tap, and came right back out. An ordinary iron spike went in its place. And the man swinging the hammer, the Central Pacific's president, Leland Stanford, reportedly missed.
+[playful] You may have heard they finished the railroad with a golden spike. They did. Sort of. The gold spike went into a hole that was drilled ahead of time, got a gentle tap, and came right back out. An ordinary iron spike went in its place. And the man swinging the hammer, the Central Pacific's president, Leland Stanford, [amused] reportedly missed.
 
-So go back to the photograph. A Chinese crew laid some of the last rails that day. By some accounts, the crowd cheered them. But they're not in the famous picture.
+[serious] So go back to the photograph. A Chinese crew laid some of the last rails that day. By some accounts, the crowd cheered them. But they're not in the famous picture.
 
-What the railroad changed, though, was enormous. Before, getting from New York to San Francisco took months, by wagon or by ship around South America. Now? About a week.
+What the railroad changed, though, was enormous. Before, getting from New York to San Francisco took months, by wagon or by ship around South America. [impressed] Now? About a week.
 
 And the man who had won the Civil War was about to become president. He had promised the country something too.
 
 ---
 
-## 7:36 | Let Us Have Peace
+## 8:17 | Let Us Have Peace
 
-`ch06_let_us_have_peace.txt` · 239 words
+`ch06_let_us_have_peace.txt` · 239 words · voiced 85.5 s
 
 In 1868, Ulysses S. Grant ran for president on four words, from his letter accepting the nomination. "Let us have peace."
 
-Translation: the war is over. Let's finish the job.
+[wry] Translation: the war is over. Let's finish the job.
 
 This was a man who, ten years earlier, was out of the Army and selling firewood on the streets of St. Louis. Then clerking in his father's leather goods store. The war changed everything for him. Now he was the most famous man in the country.
 
@@ -173,17 +174,17 @@ Out West, he tried something different too. His {Peace Policy} promised to deal 
 
 Cartoonists drew Grant both ways. To some, he was the general who saved the Union and was now protecting its new citizens. To others, he was a soldier out of his depth in politics.
 
-Because his critics had a point too. Grant was loyal. He trusted his friends. And some of his friends did not deserve it.
+[thoughtful] Because his critics had a point too. Grant was loyal. He trusted his friends. [dry] And some of his friends did not deserve it.
 
 And the biggest scandal of all had started before he even took office.
 
 ---
 
-## 8:56 | Where It Will Do Most Good
+## 9:46 | Where It Will Do Most Good
 
-`ch07_where_it_will_do_most_good.txt` · 292 words
+`ch07_where_it_will_do_most_good.txt` · 292 words · voiced 105.7 s
 
-Remember how the railroad companies were paid by the mile? Some of the men running the Union Pacific found a way to get paid twice.
+Remember how the railroad companies were paid by the mile? [conspiratorial] Some of the men running the Union Pacific found a way to get paid twice.
 
 They set up their own construction company, with a fancy French name: {Credit Mobilier}. Then the Union Pacific hired Credit Mobilier to build the railroad. And it paid Credit Mobilier far more than the work cost, with the help of those government loans.
 
@@ -191,65 +192,65 @@ The same men ran the railroad. The same men owned the builder. And the same men 
 
 To keep Congress friendly, a congressman named Oakes Ames handed out shares in Credit Mobilier to other members of Congress, cheap. He wrote that he'd put them "where they will do most good to us."
 
-Subtle.
+[deadpan] Subtle.
 
 In 1872, in the middle of Grant's campaign for a second term, a New York newspaper broke the story. Grant's own vice president, Schuyler Colfax, was caught up in it. To be fair, the deal began before Grant was president, and Grant himself was never accused of taking any shares.
 
-Then, in 1875, came the {Whiskey Ring}. Whiskey makers and Treasury officials were keeping the government's whiskey tax for themselves. Grant said, "Let no guilty man escape." Then one of the men charged turned out to be his own private secretary, Orville Babcock. Grant spoke up for him, and Babcock was found not guilty.
+Then, in 1875, came the {Whiskey Ring}. Whiskey makers and Treasury officials were keeping the government's whiskey tax for themselves. Grant said, "Let no guilty man escape." [dry] Then one of the men charged turned out to be his own private secretary, Orville Babcock. Grant spoke up for him, and Babcock was found not guilty.
 
 So, to his supporters, Grant was an honest man with bad friends. To his critics, he was a president who let it happen.
 
-Quick thing before the money runs out. If you're enjoying this series, hit subscribe. Unlike Oakes Ames, I'm not handing out shares. But it's free, and it really helps the channel.
+[warmly] Quick thing before the money runs out. If you're enjoying this series, hit subscribe. Unlike Oakes Ames, I'm not handing out shares. But it's free, and it really helps the channel.
 
 ---
 
-## 10:34 | Panic
+## 11:34 | Panic
 
-`ch08_panic.txt` · 255 words
+`ch08_panic.txt` · 255 words · voiced 96.3 s
 
 September 18th, 1873. Jay Cooke and Company, maybe the most famous bank in America, closes its doors.
 
-Cooke had bet his bank on another railroad, the Northern Pacific. The money ran out before the track did.
+Cooke had bet his bank on another railroad, the Northern Pacific. [dry] The money ran out before the track did.
 
 What came next is called a {panic}: when people rush to pull their money out all at once, and the banks can't pay. The New York Stock Exchange shut down for ten days. Then came a long, hard {depression}, years of falling prices and lost jobs. Railroads went bankrupt. Workers were laid off by the thousands.
 
-Here's why that matters for our question. Hard times changed what Northern voters cared about. Jobs and wages, not the South. In 1874, Grant's opponents, the Democrats, won the House of Representatives. Same name as today's Democrats, but a very different party, and in the 1870s it was the party of the white South.
+[serious] Here's why that matters for our question. Hard times changed what Northern voters cared about. Jobs and wages, not the South. In 1874, Grant's opponents, the Democrats, won the House of Representatives. Same name as today's Democrats, but a very different party, and in the 1870s it was the party of the white South.
 
 A railroad boom. A railroad bust. A tired North. *That means* the railroad didn't only change the West. It was one of the reasons Reconstruction in the South came to an end. By 1877, the last federal troops were pulled out of the Southern statehouses.
 
-That same year, 1877, after another round of pay cuts, railroad workers walked off the job across the country. Trains stopped from Baltimore to St. Louis. Federal troops were sent in, and around a hundred people were killed. Remember the strike in the mountains? This time, everyone heard about it.
+That same year, 1877, after another round of pay cuts, railroad workers walked off the job across the country. Trains stopped from Baltimore to St. Louis. Federal troops were sent in, and around a hundred people were killed. Remember the strike in the mountains? [pointed] This time, everyone heard about it.
 
 And out West, when times got hard, people went looking for someone to blame.
 
 ---
 
-## 12:00 | The Picture
+## 13:14 | The Picture
 
-`ch09_the_picture.txt` · 389 words
+`ch09_the_picture.txt` · 389 words · voiced 145.3 s
 
 When the railroad was finished, the Chinese workers who built it moved on. To farms, mines, laundries, factories and the growing Chinatown in San Francisco.
 
-Then the depression hit. Wages fell. And in California, a lot of white workers blamed the Chinese for working for less. In 1877, a speaker named Denis Kearney started the Workingmen's Party. Its slogan was four words. "The Chinese must go!"
+Then the depression hit. Wages fell. And in California, a lot of white workers blamed the Chinese for working for less. In 1877, a speaker named Denis Kearney started the Workingmen's Party. Its slogan was four words. [grim] "The Chinese must go!"
 
 Newspapers and even some doctors warned that Chinese immigrants were a danger to white workers, and to white health. Some of it was dressed up as science.
 
 In 1882, Congress passed the {Chinese Exclusion Act}. No Chinese workers could come into the United States for ten years. Then it was renewed. Then it was made permanent. It wasn't repealed until 1943.
 
-It was the first major law in American history to ban immigrants because of their nationality.
+[serious] It was the first major law in American history to ban immigrants because of their nationality.
 
-So let's go back to the question. The railroad was supposed to tie a reunited country together and open the West to anyone. Who did it open it for?
+[thoughtful] So let's go back to the question. The railroad was supposed to tie a reunited country together and open the West to anyone. Who did it open it for?
 
 It did tie the country together. Months became a week. And it built the West of the next three episodes. The railroads got land in a checkerboard across half a continent. Travelers, shippers, settlers and the men who owned the railroads got a country they could cross.
 
 But the companies were paid to build fast, and some of the men running them got rich billing the public. The president who promised peace saw his government shaken by the people around him. The railroad bust helped end Reconstruction for freedmen in the South. And the men who did the hardest work, in the mountains, in the snow, were shut out by name.
 
-This is our first promise of the series. Let's write it down. Progress for a reunited nation. Who got it? Travelers, settlers and railroad owners. Who didn't? The Chinese workers who built it, freedmen in the South, and the nations whose land the track ran through.
+[warmly] This is our first promise of the series. Let's write it down. Progress for a reunited nation. Who got it? Travelers, settlers and railroad owners. Who didn't? The Chinese workers who built it, freedmen in the South, and the nations whose land the track ran through.
 
-The railroad tied the country together. Then the country decided who was allowed to be in the picture.
+[slowly] The railroad tied the country together. [pause] Then the country decided who was allowed to be in the picture.
 
-Meanwhile, at the end of one of those new rail lines in Kansas, a man had an idea. It involved about five million cows.
+[light] Meanwhile, at the end of one of those new rail lines in Kansas, a man had an idea. It involved about five million cows.
 
-Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
+[warmly] Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 
 ---
 

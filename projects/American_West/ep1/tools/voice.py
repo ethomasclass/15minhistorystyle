@@ -283,9 +283,18 @@ def words_from_chars(display, chars, offset):
     return out
 
 
+TAG = re.compile(r"\[[^\]]+\]")     # ElevenLabs v3/v4 audio tags: [dry], [curious], [quietly] … spoken? no: directions
+
+
+def tts_text(para):
+    """The text sent to ElevenLabs: emphasis/vocab markup removed, audio tags KEPT (they steer the delivery)."""
+    return re.sub(r"[ \t]+", " ", para.replace("*", "").replace("{", "").replace("}", "")).strip()
+
+
 def parse_marks(para):
-    """Strip emphasis markup. *key idea* and {vocab term} may span several words.
-    Returns (plain text, [None|'key'|'vocab'] per word)."""
+    """Strip emphasis markup and audio tags. *key idea* and {vocab term} may span several words.
+    Returns (plain text, [None|'key'|'vocab'] per word). Tags never reach the word timings or the screen."""
+    para = TAG.sub(" ", para)
     words, kinds, state = [], [], None
     for tok in para.split():
         kind = state
@@ -325,13 +334,16 @@ def main():
     env()
     src, name = sys.argv[1], sys.argv[2]
     use_piper = "--piper" in sys.argv
-    marked = [parse_marks(p.strip()) for p in open(src).read().split("\n\n") if p.strip()]
+    raw = [p.strip() for p in open(src).read().split("\n\n") if p.strip()]
+    marked = [parse_marks(p) for p in raw]
     paras = [m[0] for m in marked]
+    tts = [tts_text(p) for p in raw]          # same paragraphs, with the audio tags left in
     if ONE_TAKE and not use_piper:
         # the whole chapter in one request: the model paces paragraphs itself, so there are no splices at all
         para_lens = [len(m[1]) for m in marked]
         marked = [("\n\n".join(m[0] for m in marked), [k for m in marked for k in m[1]])]
         paras = [marked[0][0]]
+        tts = ["\n\n".join(tts)]
     pcm = b"\0\0" * int(RATE * LEAD_IN)
     words = []
     for i, p in enumerate(paras):
@@ -339,8 +351,16 @@ def main():
         if use_piper:
             audio, chars = piper(spoken(p))
         else:
-            audio, chars = eleven(spoken(p), spoken(paras[i - 1]) if i else "",
-                                  spoken(paras[i + 1]) if i + 1 < len(paras) else "")
+            audio, chars = eleven(spoken(tts[i]), spoken(tts[i - 1]) if i else "",
+                                  spoken(tts[i + 1]) if i + 1 < len(tts) else "")
+            if TAG.search(tts[i]):
+                # drop the tags' own characters from the TTS timestamps so words map 1:1 (forced alignment fixes timing anyway)
+                txt = "".join(c for c, _, _ in chars)
+                keep = [True] * len(chars)
+                for m in TAG.finditer(txt):
+                    for k in range(m.start(), m.end()):
+                        keep[k] = False
+                chars = [c for c, k in zip(chars, keep) if k]
             if MAX_PAUSE > 0:
                 audio, chars = tighten(audio, chars, MAX_PAUSE)
             audio, chars = add_pauses(audio, chars, SENT_GAP)
