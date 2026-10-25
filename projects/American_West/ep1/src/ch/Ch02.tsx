@@ -11,6 +11,10 @@ import {ChapterShell, chapterFrames, Definition, hasFile, LEAD, makeTimeline, ty
 import {CircleMount, CutOut, Desk3D, HingeYear, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
 import {IMG, SZ} from '../samples/masks';
 import {M2} from '../masks_ch02';
+import {HouseDetailLitho, HouseWideLitho, SouthGoneLitho} from '../kit/house_litho';
+
+/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
 import {ACT_H, ACT_LINE_Y, ACT_W, ActPage, BondKey, Hand, House, HOUSE_EMPTY, HOUSE_SEATS, LINES, MCross, MPin, MRoute, PL, Ribbon, RMI, RX, subLine, Township, townshipTaps, TownLegend, WestMap} from '../kit/ch01_extra';
 
 const N = words as Narration;
@@ -46,6 +50,7 @@ const HouseWide: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('The Civil War') - 1;
   const b = at('The Southern') - 1;
+  if (HOUSE_LOOK === 'litho') return <HouseWideLitho a={a} b={b} emptyAt={at('empty')} secondAt={at('second year')} />;
   return (
     <AbsoluteFill>
       <Desk3D tilt={keys(f, [[a, 4], [b, 10]])} z={1} lamp={[960, 640]}><div /></Desk3D>
@@ -64,6 +69,7 @@ const HouseDetail: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('The Southern') - 1;
   const b = at('For years') - 1;
+  if (HOUSE_LOOK === 'litho') return <HouseDetailLitho a={a} b={b} wentAt={at('members went')} label={`SEATS OF THE STATES THAT LEFT · ≈ ${HOUSE_EMPTY} OF ${HOUSE_SEATS}`} />;
   return (
     <AbsoluteFill>
       <Desk3D tilt={keys(f, [[a, 10], [b, 6]])} z={1} lamp={[1300, 600]}><div /></Desk3D>
@@ -126,6 +132,12 @@ const SouthGone: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('With the South') - 1;
   const b = at('In one year') - 1;
+  if (HOUSE_LOOK === 'litho') return (
+    <SouthGoneLitho a={a} b={b} goneAt={at('gone') - 2}>
+      <Hand parts={[['stops arguing', '#ffffff']]} x={130} y={110} size={70} at={at('stops arguing') - 2} />
+      <Hand parts={[['starts passing laws']]} x={170} y={230} size={70} at={at('starts passing') - 2} />
+    </SouthGoneLitho>
+  );
   return (
     <AbsoluteFill>
       <Desk3D tilt={keys(f, [[a, 14], [b, 6]])} z={1} lamp={[960, 640]}><div /></Desk3D>

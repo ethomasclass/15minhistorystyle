@@ -13,6 +13,10 @@ import {CutOut, Desk3D, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, Slap
 import {IMG, SM, SZ} from '../samples/masks';
 import {Hand, House, LINES, MPin, MRoute, PL, WestCard, WestMap} from '../kit/ch01_extra';
 import {SUBTITLE, TITLE, DATES} from '../project';
+import {ChairsLitho} from '../kit/house_litho';
+
+/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
 
 const N = words as Narration;
 const T = makeTimeline(N, 30);
@@ -351,6 +355,7 @@ const BackToGap: React.FC = () => {
 const Chairs: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('But first') - 1;
+  if (HOUSE_LOOK === 'litho') return <ChairsLitho a={a} end={END} emptyAt={at('empty')} />;
   return (
     <AbsoluteFill>
       <Desk3D tilt={keys(f, [[a, 6], [END, 10]])} z={zkeys(f, [[a, 1.0], [END, 0.95]])} lamp={[960, 620]}><div /></Desk3D>
