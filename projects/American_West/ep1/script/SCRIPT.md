@@ -190,7 +190,7 @@ They set up their own construction company, with a fancy French name: {Credit Mo
 
 The same men ran the railroad. The same men owned the builder. And the same men set the price. *That means* they were billing themselves, and the public was paying.
 
-To keep Congress friendly, a congressman named Oakes Ames handed out shares in Credit Mobilier to other members of Congress, cheap. He wrote that he'd put the stock "where it will do most good to us."
+To keep Congress friendly, a congressman named Oakes Ames handed out shares in Credit Mobilier to other members of Congress, cheap. He wrote that he'd put them "where they will do most good to us."
 
 [deadpan] Subtle.
 
@@ -310,7 +310,7 @@ But the companies were paid to build fast, and some of the men running them got 
 | 14 | NY to SF: months before, "about a week" after | ~7 days by rail after 1869 | Safe |
 | 15 | Grant sold firewood in St. Louis and clerked in his father's leather goods store | Both documented (1850s; Galena store, 1860) | "Ten years earlier" is approximate (1858–60) |
 | 16 | 15th Amendment ratified 1870; Grant sent troops and prosecutors against the Klan | Ratified Feb 1870; Enforcement Acts 1870–71, KKK Act 1871 | Safe |
-| 17 | Ames: "where it will do most good to us" | Poland Committee report (1873), the page shown in ch07: "He says he intends to place the stock \"where it will do most good to us.\"" | **Checked.** The card is right; the voiced take says "they" (old wording): re-voice ch07 line 7 when the keys are back |
+| 17 | Ames: "where it will do most good to us" | Poland Committee report (1873), the page shown in ch07: "He says he intends to place the stock \"where it will do most good to us.\"" | **Checked.** The card on screen quotes the report exactly ("it"); the narration says "they" as a paraphrase. User: no re-voice (kept). |
 | 18 | NY newspaper broke the story in 1872; Colfax caught up; Grant not accused of taking shares | *New York Sun*, Sept 1872 | Safe |
 | 19 | Whiskey Ring 1875; "Let no guilty man escape"; Babcock charged, Grant spoke up for him, acquitted | Grant's endorsement July 1875; deposition 1876; acquitted Feb 1876 | Safe |
 | 20 | Jay Cooke & Co. closed Sept 18, 1873; NYSE closed ten days | NYSE closed Sept 20–30, 1873 | Safe |

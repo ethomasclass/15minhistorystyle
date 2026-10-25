@@ -32,8 +32,8 @@ fulfill its promises of freedom and opportunity after the Civil War?"
    has `// SUNO: aw_xxx replaces this` where the cue swaps in; library fallbacks play now. Put new cues in `public/music/` and in
    the style repo `music/cues/` + `music/README.md` + `catalog.json` (prefix `aw_`).
 2. ~~The Grant cartoon~~ Done: the user's test cartoon is Currier & Ives, *A Nice Family Party* (1872, LOC pga-09549):
-   ch06 "some of his friends did not deserve it" (tight on "Let us have peace.", pull out, coral loops on the three "Let us have
-   a piece." balloons). The both-ways pair stays Nast 1872 + Morgan 1872 (they match the narration's words).
+   ch06 "some of his friends did not deserve it" (tight on "Let us have peace." as its box fills teal, pull out, the three "Let us have
+   a piece." boxes fill see-through coral, the user's idea). The both-ways pair stays Nast 1872 + Morgan 1872 (they match the narration's words).
 3. ~~House chamber~~ litho (user's pick).
 4. ~~ch02 "Black families" circle~~ Checked: the crop is now tighter (woman in white, mother in the wagon, children); the one
    stylised face at the right edge is out of the circle.
@@ -45,8 +45,8 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 3. ~~ch07's two-views card: match ch06's supporters' wording.~~ Done (same four lines + headers as ch06).
 4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): historically right (both portals + the central shaft dug both ways), kept unless the user wants it gone.
 5. ~~Fact checks~~ Done (`script/SCRIPT.md` → *Fact-check pass*): House counts, prices and "89 of 364" confirmed and sourced on screen;
-   flags 2, 8, 9, 17 checked. **One fix left: ch07 says "where *they* will do most good"; the report says "*it*".** The script text is
-   corrected; re-voice ch07 (`python3 tools/voice.py script/ch07_where_it_will_do_most_good.txt ch07_where_it_will_do_most_good`) and re-check anchors.
+   flags 2, 8, 9, 17 checked. The Ames line: narration says "where *they*", the report (on screen) says "*it*"; the user chose
+   not to re-voice (the card carries the exact words).
 6. ch04 strike camp image is Brown's Station (Nevada, 1868–69), tagged with its real date.
 
 ### Then

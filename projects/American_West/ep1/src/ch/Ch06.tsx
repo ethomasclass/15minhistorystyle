@@ -346,27 +346,32 @@ const Critics: React.FC = () => {
 
 /**
  * 19 · "some of his friends did not deserve it": Currier & Ives, A Nice Family Party (1872). Tight on Grant and his own slogan
- * ("Let us have peace."), then the pull-out finds everyone around him saying "Let us have a piece." (coral loops). Balloon
- * centres in source px (2000 x 1414): peace 1305,60 · pieces 250,195 / 625,190 / 1620,195.
+ * ("Let us have peace." fills teal), then the pull-out finds everyone around him saying "Let us have a piece." (the three boxes
+ * fill coral, left to right). Box borders measured in source px (2000 x 1414): peace 1136–1448 × 22–97 · pieces 105–403 × 174–231,
+ * 481–771 × 167–229, 1471–1767 × 158–234.
  */
 const Friends: React.FC = () => {
   const a = at('And some') - 1;
   const w = at('friends', 2) - 4;
   const pal = usePal();
+  const g = useGFrame();
   return (
     <Pic src={I.party} size={Z.party} tag={TAG.party} tagY={1036} filter="grayscale(1) contrast(1.12)" vignette={0.45}
       k={[[a, 1180, 330, 1.45], [w, 1150, 340, 1.5], [w + 16, 1000, 560, 0.96], [at('And the biggest'), 1000, 560, 0.98]]}>
-      {(S, s) => {
-        const L = (x: number, y: number, rx: number, ry: number, t: number, color: string, seed: number) => {
-          const [cx, cy] = S(x, y);
-          return <Loop key={seed} cx={cx} cy={cy} rx={rx * s} ry={ry * s} at={t} seed={seed} tilt={-3} width={6} color={color} />;
+      {(S) => {
+        const B = (x0: number, x1: number, y0: number, y1: number, t: number, color: string) => {
+          const [l, tp] = S(x0, y0);
+          const [r, bt] = S(x1, y1);
+          const p = interpolate(g, [t, t + 7], [0, 1], clamp);
+          return <div key={x0} style={{position: 'absolute', left: l, top: tp, width: r - l, height: bt - tp, background: color, opacity: 0.55, mixBlendMode: 'multiply',
+            clipPath: `inset(0 ${(1 - p) * 100}% 0 0)`}} />;
         };
         return (
           <>
-            {L(1305, 60, 175, 52, a + 6, pal.mark, 51)}
-            {L(250, 195, 165, 50, w + 14, pal.subject, 52)}
-            {L(625, 190, 165, 50, w + 18, pal.subject, 53)}
-            {L(1620, 195, 165, 50, w + 22, pal.subject, 54)}
+            {B(1136, 1448, 22, 97, a + 6, pal.mark)}
+            {B(105, 403, 174, 231, w + 14, pal.subject)}
+            {B(481, 771, 167, 229, w + 18, pal.subject)}
+            {B(1471, 1767, 158, 234, w + 22, pal.subject)}
             <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(8,7,5,0.92) 0%, rgba(8,7,5,0.75) 16%, rgba(8,7,5,0) 38%)'}} />
             <Lines x={110} y={830} size={54} gap={84} rows={[{text: 'some of his friends', at: w + 10}, {text: 'did not deserve it', at: at('deserve') - 3, color: '#ffffff'}]} />
           </>
