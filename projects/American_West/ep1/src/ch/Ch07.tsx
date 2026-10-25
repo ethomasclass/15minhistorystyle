@@ -441,18 +441,19 @@ const TwoViews: React.FC<{z: number; cx: number; cy: number}> = ({z, cx, cy}) =>
           <div style={{position: 'absolute', inset: 10, border: `2px solid ${pal.mark}`, opacity: 0.6}} />
           <div style={{position: 'absolute', left: 868, top: 40, bottom: 40, width: 3, background: pal.mark, opacity: 0.7}} />
         </div>
-        <Mono text="HIS SUPPORTERS SAW" x={L} y={140} size={30} />
-        <Mono text="HIS CRITICS SAW" x={R} y={140} size={30} color={pal.subject} />
-        {/* left: what ch06 filled in */}
-        <Note text="· won the war" x={L} y={250} size={46} rot={-1} />
-        <Note text="· the 15th Amendment" x={L} y={330} size={46} rot={-1} />
-        <Note text="· troops against the Klan" x={L} y={410} size={46} rot={-1} />
+        <Mono text="HIS SUPPORTERS" x={L} y={140} size={30} />
+        <Mono text="HIS CRITICS" x={R} y={140} size={30} color={pal.subject} />
+        {/* left: what ch06 filled in (same wording as ch06's card) */}
+        <Note text="· the 15th Amendment (1870)" x={L} y={230} size={38} rot={-1} />
+        <Note text="· laws to enforce it" x={L} y={300} size={38} rot={-1} />
+        <Note text="· troops + prosecutors vs. the Klan" x={L} y={370} size={38} rot={-1} />
+        <Note text="· a Peace Policy out West" x={L} y={440} size={38} rot={-1} />
         <Hand parts={[['an honest man']]} x={L} y={590} size={80} at={at('honest') - 3} />
         <Hand parts={[['with '], ['bad friends', true]]} x={L} y={700} size={80} at={at('bad friends') - 3} />
         {/* right: writes in now */}
-        <Note text="· Crédit Mobilier" x={R} y={250} size={46} rot={-1} at={at('critics') - 2} />
-        <Note text="· the Whiskey Ring" x={R} y={330} size={46} rot={-1} at={at('critics') + 4} />
-        <Note text="· Babcock let off" x={R} y={410} size={46} rot={-1} at={at('critics') + 10} />
+        <Note text="· Crédit Mobilier" x={R} y={230} size={38} rot={-1} at={at('critics') - 2} />
+        <Note text="· the Whiskey Ring" x={R} y={300} size={38} rot={-1} at={at('critics') + 4} />
+        <Note text="· Babcock let off" x={R} y={370} size={38} rot={-1} at={at('critics') + 10} />
         <Hand parts={[['a president who']]} x={R} y={590} size={80} at={at('president who') - 3} />
         <Hand parts={[['let it '], ['happen', true]]} x={R} y={700} size={80} at={at('let it happen') - 3} />
       </AbsoluteFill>

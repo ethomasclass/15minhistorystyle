@@ -25,7 +25,7 @@ ch06 85.5 s). Checks: tsc clean for these files, `anchors.py` passes (repeats ch
 | 10 | Crews dug tunnels | lithograph: a tunnel through the snow, push in |
 | 11 | Avalanches | Hart, snow bank in Donner Pass, tilt down to the road |
 | 12 | How many … We don't know | the question as bare handwriting; "We don't know." in white, held |
-| 13 | The company kept | records card (track ✓, money ✓, Chinese deaths: one tick, then "?"), wide then detail |
+| 13 | The company kept | records card (track ✓, money ✓, Chinese deaths: no tick, just "?"), wide then detail |
 | 14 | Most of what we know | the *Placer Herald*, July 6, 1867 (LOC Chronicling America) lifts onto the desk |
 | 15 | In June 1867 | (quiet) Hart, camp near Summit Tunnel, JUNE 1867 bone tape; music drops out |
 | 16 | About 3,000 | lithograph: shovels and picks stacked at a tunnel mouth (the paper's own words), "≈ 3,000", loop |

@@ -375,7 +375,7 @@ const Question: React.FC = () => {
   );
 };
 
-/** 13 · the company's records: track and money ticked off, the deaths row nearly empty. */
+/** 13 · the company's records: track and money ticked off, the deaths row empty but for a "?". */
 const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const g = useGFrame();
   const pal = usePal();
@@ -383,7 +383,7 @@ const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const f = useCurrentFrame();
   const a = detail ? at('It kept') - 1 : at('The company') - 1;
   const b = detail ? at('Most of') : at('It kept');
-  const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 1]];
+  const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 0]];
   const cam = detail ? {z: keys(f, [[a, 1.12], [b, 1.2]]), x: -40, y: -170} : {z: keys(f, [[a, 0.84], [b, 0.88]]), x: 0, y: -20};
   return (
     <AbsoluteFill>

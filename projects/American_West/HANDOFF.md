@@ -37,10 +37,10 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 4. **ch02 "Black families" circle** uses a cropped Leslie's 1879 Exodus engraving: user to check for caricature.
 
 ### Polish list (do before the render)
-1. ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".
+1. ~~ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".~~ Done.
 2. ch02: a few dark, sparse map shots (pre-war deadlock) and a near-empty frame before the four portraits.
-3. ch07's two-views card: match ch06's supporters' wording.
-4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): confirm or drop.
+3. ~~ch07's two-views card: match ch06's supporters' wording.~~ Done (same four lines + headers as ch06).
+4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): historically right (both portals + the central shaft dug both ways), kept unless the user wants it gone.
 5. Fact checks: 1874 House seat counts, the price fall, "89 of 364" railroads (labelled approx. on screen); plus
    `script/SCRIPT.md` → Fact-check flags.
 6. ch04 strike camp image is Brown's Station (Nevada, 1868–69), tagged with its real date.
