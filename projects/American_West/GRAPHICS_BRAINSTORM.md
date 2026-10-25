@@ -17,6 +17,10 @@ anachronistic and a bit stock-template; use the period's own viewing devices ins
 people, and especially for Native people in Ep 4. Smooth 3D parallax collages and glow halos read as After Effects template packs; keep
 everything stepped at 12 fps, with hard cuts and grain.
 
+**No new cream or white surfaces** (your call). Every new card, mount, tag and strip below sits in the desk palette: `DarkPaper`
+or ink black, teal lines and handwriting, coral for the one subject, orange for labels. The only light tones on screen are the
+archival scans themselves.
+
 ---
 
 ## Ideas
@@ -49,7 +53,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 
 ### 4. Torn print with tape (card variant)
 - **From:** R4 (torn photo prints on a dark desk), R6 (torn-paper edges).
-- **Channel version:** a `Card` variant, `torn`: one or two deckled edges (Highlight's seeded jitter, applied to the cream border) and
+- **Channel version:** a `Card` variant, `torn`: one or two deckled edges (Highlight's seeded jitter, applied to the print's own edge, no added border) and
   a short strip of **orange** tape across a corner (the same orange as the titles, so the desk feels like one notebook). Drops with
   `DropCard` weight. It is closer to the brand than R4's purple vignette, which we drop.
 - **West series:** Ep 1 ch 1, the golden-spike photo as a torn print, with a corner torn away where the missing crews would be
@@ -59,7 +63,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 ### 5. Stereoview frame (instead of the TV set)
 - **From:** R2 (photo inside a vintage TV), R4 (film projector).
 - **Channel version (new):** a period viewing device. Alfred A. Hart's Central Pacific photos were sold as **stereoviews**, so show
-  them that way: a cream card mount with curved top corners, the two near-identical halves side by side, the publisher's line in mono.
+  them that way: a dark mount (`DarkPaper`, thin teal rule) with curved top corners, the two near-identical halves side by side, the publisher's line in mono.
   A push-in drops one half and lands on the other, full-bleed. Optional subtle stereo "wobble" (alternate halves on 2 steps) as the
   only effect.
 - **West series:** Ep 1 ch 3–4 (Hart's views of Chinese crews at the Summit Tunnel and the snowsheds). Ep 2 (mining-camp
@@ -70,7 +74,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 - **From:** R5 (Booth with an orange offset silhouette).
 - **Channel version (new, variant of the subject tint):** a hard, unblurred **coral** copy of the subject's mask, offset about
   (10, 8) px, behind a B&W cut-out on the desk. It *replaces* tint plus trace for that shot, so there is still one coral subject;
-  never both on one figure. Not in quiet chapters (no coral); there, use a bone offset or none.
+  never both on one figure. Not in quiet chapters (no coral); there, use a teal offset or none.
 - **West series:** cut-out portraits of the decision-makers: Grant, Crocker, Oakes Ames (Ep 1), Glidden and his wire (Ep 2). Not for
   Native leaders in Ep 4 (it reads as a "villain" pose in R5's source).
 - **Effort:** S (it reuses the mask we already make).
@@ -86,7 +90,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 
 ### 8. Map card on the desk (locator)
 - **From:** R4 (map card with a route), R3 (period map with a red circle).
-- **Channel version:** a small cream `Card` showing a **flat crop of the series map**, with a teal `MapLoop` (not R3's red filled
+- **Channel version:** a small `DarkPaper` card with a thin teal rule showing a **flat crop of the series map**, with a teal `MapLoop` (not R3's red filled
   circle) and a teal route, sitting beside an archive photo. It keeps the place in view without cutting to the full 3D map.
 - **West series:** every "where are we?" line, so viewers can place the scene without a full map cut: Promontory, Abilene, Deadwood,
   Nicodemus, Little Bighorn. Its crop matches the 3D map's state for that episode, so the two always agree.
@@ -102,8 +106,8 @@ everything stepped at 12 fps, with hard cuts and grain.
 
 ### 10. Label tags on a portrait circle
 - **From:** R5 ("John Wilkes Booth" tag, "ASSASSINATED / 1865" stacked tags, Lincoln in a circle).
-- **Channel version:** an engraving inside a cream **circle** mount (new, a round `Card`), with a stacked pair of tags: an orange
-  `Highlight` for the event word, and under it a small ink-on-cream mono tag for the year. That pair becomes the **hinge-year stamp**
+- **Channel version:** an engraving inside a dark **circle** mount with a teal ring (new, a round `Card`), with a stacked pair of tags: an orange
+  `Highlight` for the event word, and under it a small teal-on-ink mono tag for the year. That pair becomes the **hinge-year stamp**
   (below).
 - **Effort:** S.
 
@@ -111,7 +115,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 
 ## Serving the recurring devices
 
-- **Promise Ledger:** a cream card on the desk, **torn top edge with orange tape** (#4), mono column heads. Each episode writes a row in
+- **Promise Ledger:** a `DarkPaper` ledger card with teal ruled lines, **torn top edge with orange tape** (#4), mono column heads. Each episode writes a row in
   teal handwriting. Ep 4: the "Who didn't" column takes a coral `swipe` down its length, then the stamp lands. In quiet endings, teal only.
 - **The 3D map:** pair it with the **map card** (#8), so the big map appears once or twice an episode and the small card handles every
   other "where." In Ep 3, the homestead region's slab surface becomes the **plat grid** (#1). In Ep 4, treaty land shrinking can use the
@@ -119,7 +123,7 @@ everything stepped at 12 fps, with hard cuts and grain.
 - **Resistance cards:** R5's layout on our desk. Left: the leader's real photograph in a **circle mount** (#10), B&W, teal trace only (no
   offset shadow, no tint gimmick). Right: five stacked mono field tags, *WHO · WHERE · WHEN · WHY · HOW IT ENDED*, answers in teal
   handwriting, plus a **map card** (#8) corner with the place pinned. The layout is identical on every card, so students learn to read it.
-- **Hinge-year stamps:** the year in Abril on an orange torn box, with a cream mono strip under it listing that year's events
+- **Hinge-year stamps:** the year in Abril on an orange torn box, with a dark mono strip under it in teal listing that year's events
   (e.g. "1874 · BLACK HILLS GOLD · BARBED WIRE · RED RIVER WAR"), same screen position every time, stamp sound. Repeats across episodes
   so "1862" and "1874" become recognisable objects.
 

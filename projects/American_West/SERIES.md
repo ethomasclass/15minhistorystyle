@@ -47,7 +47,7 @@ tests the promises made to the people already there, then asks the series questi
 
 ## Recurring devices
 
-- **The Promise Ledger** (the series' visual anchor). A cream ledger card with three columns: *The promise · Who got it · Who
+- **The Promise Ledger** (the series' visual anchor). A dark ledger card (`DarkPaper`, teal ruled lines, coral and orange accents; no cream or white) with three columns: *The promise · Who got it · Who
   didn't.* Same place and size every time. Each episode's last chapter writes one row; Ep 4 shows all four and stamps it. It doubles
   as the students' graphic organizer for the unit question (put a blank copy on each viewing guide).
 - **One drawn 3D map that fills in** (our tilted-slab map style): Ep 1 the rail lines; Ep 2 the cattle trails and railheads; Ep 3
