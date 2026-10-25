@@ -91,24 +91,46 @@ a long, very quiet grieving bed for the heaviest moments, three minutes, a soft 
 [End]
 ```
 
-### 4. `aw_legend_sours.mp3`: the myth beat
+### 4. `aw_legend_sours`: the myth beat, made from **two** takes
 *Used in:* Ep 1 ch 5 (the golden-spike myth); later Ep 2, Ep 4  
-*Length:* **any length over 0:45.** Ep 1 uses ~20 s, and the fanfare has to collapse right on "Sort of." (4.5 s in); I start the cue partway so the collapse lands there, so just make sure the fanfare clearly falls apart
+*Why two:* Suno won't turn a fanfare sour inside one song; it stays a fanfare. So make the two halves separately and I join them:
+the fanfare grinds to a halt (a tape-stop with a sour wobble, `ep1/tools/collapse.py`) right on "Sort of.", then the deflated take
+comes in. **A fanfare take you already have works for 4a.**
+
+**4a. `aw_legend_fanfare.mp3`:** *Length:* any (only the first ~6 s are used)
 
 ```
-a grand heroic frontier fanfare in the style of an old Hollywood epic, bold horns and soaring strings for about twenty seconds, then it falters, the horns go out of tune, the strings slide down, the tempo drags, and it deflates into a sparse doubtful pizzicato and a single low questioning note, 96 BPM, 4/4 at first, then dragging; documentary, restrained, space for narrator, instrumental
+a grand heroic frontier fanfare in the style of an old Hollywood epic, bold French horns and trumpets, soaring strings, timpani rolls, big and confident from the very first note, 100 BPM, 4/4; documentary, instrumental
 ```
 
 *Lyrics box (structure tags only):*
 
 ```
 [Instrumental]
-[Fanfare: bold heroic horns and soaring strings, short]
-[Collapse: horns go out of tune, strings slide down, tempo drags]
-[Deflated: sparse doubtful pizzicato]
+[Intro: full heroic fanfare from the first bar]
+[Fanfare: horns and soaring strings]
+[End]
+```
+
+**4b. `aw_legend_deflated.mp3`:** *Length:* at least 0:45
+
+```
+deadpan and deflated after a big letdown, sparse doubtful pizzicato strings, a lone bassoon with a few dry, slightly sheepish notes, soft upright bass, long pauses, quiet and wry rather than sad, no brass, no fanfare, no build, ends on a single low questioning note, 80 BPM, 4/4; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: a few sparse pizzicato plucks, silence between]
+[Verse: lone bassoon, dry and doubtful, pizzicato]
+[Break: almost nothing]
+[Verse: bassoon and upright bass, still sparse]
 [Outro: a single low questioning note]
 [End]
 ```
+
+*For 4b, add to Exclude:* `fanfare, heroic, epic, brass section, trumpet, timpani, triumphant`
 
 ### 5. `aw_robber_barons.mp3`: the swagger
 *Used in:* Ep 1 ch 7 (Crédit Mobilier, Whiskey Ring)  
