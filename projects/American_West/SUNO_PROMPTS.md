@@ -213,3 +213,40 @@ a solemn treaty council, grave and dignified, slow sustained low strings, a simp
 ```
 a single short dramatic stinger for a date appearing on screen, one deep low drum hit with a low string and piano stab, a short ringing tail, three seconds long; documentary, restrained, instrumental
 ```
+
+## Channel jingle (Chunk History), for the intro and the chapter breaks
+
+What the intro does, so the music can land on it: six teal blocks fly in and knock into place (0.5–2.5 s), the **coral quarter
+swings in like a minute hand and locks at 2.80 s**, then the two word-slabs **CHUNK** (3.60 s) and **HISTORY** (3.95 s) slam in;
+the logo holds until 5.5 s. The idea for the sound: blocks knocking together into a rhythm, a clock tick, one bright "lock" hit,
+two slab hits, a short warm ring-out. Same instruments as the channel (piano, strings, low brass, timpani), not EDM.
+
+### J1. `chunk_jingle.mp3`: the intro (about 5 seconds)
+
+```
+short channel logo jingle for a history documentary series, five seconds, a few crisp wooden block knocks and a soft clock tick building a quick rhythm, then one bright satisfying lock hit with piano and a low timpani at almost three seconds, two bold low brass and timpani slab hits right after, a short warm string and piano chord ringing out, confident and clever, not epic, 120 BPM; instrumental, logo sting
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: wooden block knocks and a clock tick, quick and light]
+[Hit: one bright lock hit, piano and timpani]
+[Hit: two bold slab hits, low brass and timpani]
+[Outro: short warm chord rings out]
+[End]
+```
+
+*Exclude:* the normal list plus `epic trailer, braam, whoosh, riser, EDM drop, synth`.  
+*Length:* Suno won't make a 5-second song; any length is fine. I find the best 5 seconds in the take and line its lock hit up
+with the coral quarter (2.80 s), so pick the take with the clearest **knock-knock-LOCK, BOOM-BOOM** shape near the start.
+
+### J2. `chunk_snap.mp3`: the chapter-break sting (about 1.5 seconds)
+
+Easiest made from J1 (I cut its lock hit and ring-out into the 2-second break, so the breaks echo the intro). If you'd rather
+have its own sound, a separate take:
+
+```
+a single short logo sting, one soft wooden block knock then one bright warm lock hit with piano and soft timpani, a short gentle ring-out, one and a half seconds, quiet and tidy; instrumental, logo sting
+```
