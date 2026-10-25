@@ -25,7 +25,7 @@ import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, Quote, type Narration} from '../kit/shell';
 import {DocFocus, keys, Mono, PhotoCam, ScrimTag, Shots, SlapTitle, useSlap, zkeys} from '../kit/west';
 import {IMG, SZ} from '../samples/masks';
-import {DeskShot, Hand, Node, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
+import {WShots, DeskShot, Hand, Node, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
 import {M7} from '../masks_ch07';
 import {CutOut} from '../kit/west';
 
@@ -101,7 +101,7 @@ const Twice: React.FC = () => {
 };
 
 // ---------------------------------------------------------------- C–F · the money loop (one drawn diagram, four framings)
-const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number}> = ({z, cx, cy, dim = 0}) => {
+const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number; coins?: boolean}> = ({z, cx, cy, dim = 0, coins = true}) => {
   const pal = usePal();
   const coral = pal.subject;
   return (
@@ -114,7 +114,7 @@ const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number}> = (
         <Note text="hired to build it" x={830} y={330} size={42} rot={-2} at={at('hired')} />
         <Wire pts={[[1220, 510], [700, 510]]} at={at('far more') - 2} width={8} />
         <Note text="$$$ far more than it cost" x={780} y={525} size={42} rot={-2} at={at('far more')} />
-        <CutOut src={AI.coins} size={PROP} mask={M7.coins} place={{left: 1020, top: 560, scale: 0.13}} at={at('far more') + 4} filter={LITHO} />
+        {coins && <CutOut src={AI.coins} size={PROP} mask={M7.coins} place={{left: 1020, top: 560, scale: 0.13}} at={at('far more') + 4} filter={LITHO} />}
         <Node x={690} y={80} w={540} h={150} label="U.S. GOV'T LOANS" sub="the public's money" at={at('government') - 1} size={32} />
         <Wire pts={[[760, 240], [500, 370]]} at={at('government') + 3} />
         <Node x={690} y={780} w={540} h={160} label="THE SAME MEN" at={at('The same men') - 1} coral size={38} />
@@ -126,7 +126,6 @@ const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number}> = (
         <Note text="set the price" x={990} y={615} size={40} rot={-3} color={coral} at={at('set the price')} />
         <Loop cx={960} cy={560} rx={880} ry={420} at={at('set the price') + 6} seed={7} tilt={-2} width={6} color={coral} />
       </AbsoluteFill>
-      {useGFrame() >= at('far more') + 4 && <Tag text="Coins and notes: Illustration (AI lithograph)" />}
     </AbsoluteFill>
   );
 };
@@ -156,11 +155,11 @@ const LoopPush: React.FC = () => {
 const LoopSame: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('The same men') - 1;
-  return <MoneyLoop z={zkeys(f, [[a, 1.06], [at('That means'), 0.9]])} cx={960} cy={keys(f, [[a, 560], [at('That means'), 520]])} />;
+  return <MoneyLoop coins={false} z={zkeys(f, [[a, 1.06], [at('That means'), 0.9]])} cx={960} cy={keys(f, [[a, 560], [at('That means'), 520]])} />;
 };
 const LoopStack: React.FC = () => (
   <AbsoluteFill>
-    <MoneyLoop z={0.9} cx={960} cy={520} dim={0.72} />
+    <MoneyLoop z={0.9} cx={960} cy={520} dim={0.72} coins={false} />
     <Hand parts={[['that means…']]} x={180} y={230} size={70} at={at('That means') - 2} white />
     <Hand parts={[['they were billing '], ['themselves', true]]} x={180} y={380} size={96} at={at('billing') - 6} />
     <Hand parts={[['and the public was paying.']]} x={180} y={560} size={84} at={at('public') - 4} />
@@ -197,8 +196,8 @@ const AmesPush: React.FC = () => {
       {[0, 1, 2].map((i) => <div key={i} style={{position: 'absolute', inset: 0, transform: `rotate(${-8 + i * 7}deg)`, transformOrigin: `${1420 + i * 60}px ${640 + i * 30}px`}}>
         <CutOut src={AI.certificate} size={PROP} mask={M7.certificate} place={{left: 1150 + i * 60, top: 420 + i * 40, scale: 0.27}} at={at('shares') + 2 + i * 4} filter={LITHO} />
       </div>)}
-      <Hand parts={[['cheap.', true]]} x={1480} y={880} size={100} at={at('cheap') - 3} />
-      <ScrimTag text={`${TAG.ames}  ·  certificates: Illustration (AI lithograph)`} x={34} y={24} />
+      <Hand parts={[['cheap.', true]]} x={1360} y={880} size={100} at={at('cheap') - 3} />
+      <ScrimTag text={TAG.ames} x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -366,7 +365,6 @@ const RingDiagram: React.FC = () => {
         <Wire pts={[[900, 400], [960, 680]]} at={at('keeping') + 4} color={pal.subject} width={8} />
         <Note text="kept it for themselves" x={1250} y={740} size={50} rot={-3} color={pal.subject} at={at('for themselves') - 3} />
       </AbsoluteFill>
-      <Tag text="Barrels: Illustration (AI lithograph)" />
     </AbsoluteFill>
   );
 };
@@ -552,7 +550,7 @@ const Body: React.FC = () => {
   ];
   return (
     <>
-      <Shots shots={shots} />
+      <WShots shots={shots} />
       <Sounds list={SFX} />
     </>
   );

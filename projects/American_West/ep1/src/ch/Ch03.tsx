@@ -103,7 +103,7 @@ const Mines: React.FC = () => {
 const CrockerPrint: React.FC<{t0: number; tint: number}> = ({t0, tint}) => (
   <Lift x={160} y={40} w={700} hgt={933} h={12} at={t0} rot={-3} seed={9}>
     <TornPrint src="img/ch03/crocker_selleck.jpg" size={CROCKER} x={0} y={0} w={700} crop={[0, 0, 1920, 2560]} at={-99} seed={10} real grey shadow={6}
-      mask={M3.crocker} tint={0.55} traceAt={tint} tapes={[{x: 270, y: -14, w: 170, rot: -3}]} />
+      mask={M3.crocker} tint={0.4} traceAt={tint} tapes={[{x: 270, y: -14, w: 170, rot: -3}]} />
   </Lift>
 );
 
@@ -112,11 +112,11 @@ const Crocker: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('So in 1865') - 1;
   const b = at('He hired') - 1;
-  const sh = shake(f, [at('Charles') + 3], 8);
+  const sh = shake(f, [at('1865') + 11], 8);
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={keys(f, [[a, 18], [b, 10]])} z={zkeys(f, [[a, 0.92], [b, 1.0]])}>
-        <CrockerPrint t0={at('Charles')} tint={at('Crocker') + 2} />
+        <CrockerPrint t0={at('1865') + 8} tint={at('Crocker') + 2} />
       </Desk3D>
       <SlapTitle text="1865" x={1150} y={120} size={130} at={at('1865') + 1} seed={47} />
       <SlapTitle text="CHARLES CROCKER" x={1050} y={380} size={78} at={at('Crocker') + 2} seed={49} rot={-3} />
@@ -319,10 +319,10 @@ const Crews: React.FC = () => {
   return (
     <AbsoluteFill>
       <PhotoCam src="img/ch03/russell_casement_outfit.jpg" size={OUTFIT} cx={keys(f, [[a, 1150], [b, 1000]])} cy={keys(f, [[a, 760], [b, 720]])} s={zkeys(f, [[a, 1.0], [b, 1.12]])} />
-      <Mono text="UNION PACIFIC CREWS" x={110} y={90} size={28} at={a + 3} />
-      <Note text="Irish immigrants" x={120} y={160} size={56} rot={-3} at={at('Irish') - 2} />
-      <Note text="Civil War veterans (both armies)" x={140} y={250} size={56} rot={-3} at={at('Civil War veterans') - 2} />
-      <Note text="formerly enslaved men" x={160} y={340} size={56} rot={-3} at={at('formerly enslaved') - 2} color="#ffffff" />
+      <Mono text="UNION PACIFIC CREWS" x={1060} y={600} size={28} at={a + 3} />
+      <Note text="Irish immigrants" x={1070} y={670} size={56} rot={-3} at={at('Irish') - 2} />
+      <Note text="Civil War veterans (both armies)" x={1000} y={760} size={56} rot={-3} at={at('Civil War veterans') - 2} />
+      <Note text="formerly enslaved men" x={1090} y={850} size={56} rot={-3} at={at('formerly enslaved') - 2} color="#ffffff" />
       <ScrimTag text="A. J. Russell, General John S. Casement and his outfit (Union Pacific), 1867–68 · Wikimedia Commons" x={34} y={1026} />
     </AbsoluteFill>
   );
@@ -365,8 +365,8 @@ const Hunting: React.FC<{hold?: boolean}> = ({hold}) => {
           <MRegion api={api} pts={hunt} at={hold ? -99 : at('hunting grounds') - 2} />
           <MRoute api={api} pts={LINES.up} at={hold ? -99 : a} dur={24} color={CORAL} width={8} />
           <MPin api={api} at={[hunt[1][0] + 80, hunt[1][1] + 140]} show={hold ? -99 : at('Lakota') - 1} label="Lakota" size={56} color="#ffffff" />
-          <MPin api={api} at={[hunt[6][0] + 110, hunt[6][1] - 30]} show={hold ? -99 : at('Cheyenne') - 1} label="Cheyenne" size={56} color="#ffffff" />
-          <MPin api={api} at={[hunt[8][0] + 120, hunt[8][1] - 120]} show={hold ? -99 : at('Arapaho') - 1} label="Arapaho" size={56} color="#ffffff" />
+          <MPin api={api} at={[hunt[6][0] + 140, hunt[6][1] - 160]} show={hold ? -99 : at('Cheyenne') - 1} label="Cheyenne" side="l" size={56} color="#ffffff" />
+          <MPin api={api} at={[hunt[8][0] + 40, hunt[8][1] - 170]} show={hold ? -99 : at('Arapaho') - 1} label="Arapaho" size={56} color="#ffffff" />
         </>}
       </WestMap>
       {!hold && <Note text="hunting grounds" x={120} y={110} size={64} rot={-3} at={at('hunting grounds') - 2} />}
@@ -405,7 +405,7 @@ const Sounds: React.FC = () => {
     [c('Just past') - 4, 'whip_soft', 0.22], [W('wall'), 'marker_tick', 0.2], [at('Sierra') + 1, 'stamp', 0.22],
     [c('And the company'), 'whoosh', 0.2], [W("couldn't keep"), 'marker_tick', 0.2], [W('signed on'), 'marker_tick', 0.2],
     [c('and walked off'), 'whoosh', 0.2], [at('and walked off') + 1, 'paper_slap_soft', 0.25], [at('and walked off') + 4, 'tape_press', 0.18], [W('walked off'), 'marker_tick', 0.2], [W('gold and silver'), 'marker_tick', 0.2],
-    [c('So in 1865') - 4, 'whip_soft', 0.22], [at('1865') + 1, 'stamp', 0.22], [at('Charles'), 'paper_slap_soft', 0.25], [at('Charles') + 3, 'tape_press', 0.18], [at('Crocker') + 2, 'stamp', 0.2],
+    [c('So in 1865') - 4, 'whip_soft', 0.22], [at('1865') + 1, 'stamp', 0.22], [at('1865') + 8, 'paper_slap_soft', 0.25], [at('1865') + 11, 'tape_press', 0.18], [at('Crocker') + 2, 'stamp', 0.2],
     [W('boss'), 'marker_tick', 0.2], [W('something new'), 'marker_tick', 0.2],
     [c('He hired'), 'whoosh', 0.2], [at('50') + 1, 'stamp', 0.22], ...[0, 1, 2, 3, 4].map((i) => [at('50') + 4 + i * 6, 'block_tap_soft', 0.1] as [number, string, number]), [W('gold rush') + 1, 'marker_tick', 0.2],
     [c('His construction'), 'whoosh', 0.2], [W('foreman'), 'marker_tick', 0.2],

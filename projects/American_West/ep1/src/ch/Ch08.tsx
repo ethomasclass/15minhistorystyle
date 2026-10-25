@@ -27,7 +27,7 @@ import {JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {CircleMount, keys, Mono, PhotoCam, Pin, ScrimTag, Shots, SlapTitle, zkeys} from '../kit/west';
-import {DeskShot, Hand, Marks, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
+import {WShots, DeskShot, Hand, Marks, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
 import {CutOut} from '../kit/west';
 import {M8} from '../masks_ch08';
 
@@ -57,7 +57,6 @@ const TAG = {
   louisiana: "Federal troops leave the State House, New Orleans, April 1877, Frank Leslie's · LOC",
   baltimore: "The great strike: the Sixth Maryland Regiment fighting its way through Baltimore, Harper's Weekly, Aug. 11, 1877 · LOC",
   depot: "Destruction of the Union Depot, Pittsburgh, Harper's Weekly, Aug. 11, 1877 · via Wikimedia Commons",
-  tunnel: 'Chapter 4: the tunnels, 1867 · Illustration (AI lithograph)',
   custom: "Chinese immigrants at the San Francisco custom-house, Harper's Weekly, Feb. 3, 1877 · Library of Congress",
 };
 
@@ -103,9 +102,8 @@ const Doors: React.FC = () => {
   const b = at('Cooke had');
   return (
     <AbsoluteFill>
-      <PhotoCam src={AI8.doors} size={PROP} cx={960} cy={keys(f, [[a, 1000], [b, 1060]])} s={zkeys(f, [[a, 1.6], [b, 1.78]])} bw="grayscale(0.4) contrast(1.1) brightness(0.85)" />
+      <PhotoCam src={AI8.doors} size={PROP} cx={960} cy={keys(f, [[a, 940], [b, 975]])} s={zkeys(f, [[a, 2.1], [b, 2.25]])} bw="grayscale(0.4) contrast(1.1) brightness(0.85)" />
       <Hand parts={[['closes its doors', true]]} x={1080} y={860} size={84} at={a + 1} />
-      <ScrimTag text="Bank doors: Illustration (AI lithograph)" />
     </AbsoluteFill>
   );
 };
@@ -346,7 +344,7 @@ const House: React.FC = () => {
         <Note text="Democrats" x={1150} y={190} size={56} rot={-3} color="#FF6F61" at={at('Democrats') - 2} />
         <Note text="win the House" x={1200} y={280} size={50} rot={-3} at={at('won') + 4} />
       </AbsoluteFill>
-      <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral · ballot box: Illustration (AI lithograph)" />
+      <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral" />
     </AbsoluteFill>
   );
 };
@@ -501,7 +499,7 @@ const Callback: React.FC = () => {
       over={<>
         <Note text="1867: the strike in the mountains" x={150} y={760} size={46} rot={-3} at={a + 4} />
         <Note text="(almost no one heard)" x={190} y={850} size={40} rot={-3} color="#f4efe6" at={a + 12} />
-        <ScrimTag text="Ch. 4 tunnels: Illustration (AI lithograph)  ·  Union Depot, Pittsburgh, Harper's, 1877" x={34} y={24} />
+        <ScrimTag text="Union Depot, Pittsburgh, Harper's, 1877" x={34} y={24} />
       </>}>
       <Print src={I8.depot} size={Z8.depot} x={960} y={160} w={900} at={-99} rot={2} seed={25} blur={0.6} h={4} />
       <Print src={I8.tunnel} size={Z8.tunnel} x={420} y={250} w={520} at={a + 1} rot={-4} seed={26} h={20} />
@@ -593,7 +591,7 @@ const Body: React.FC = () => {
   ];
   return (
     <>
-      <Shots shots={shots} />
+      <WShots shots={shots} />
       <Sounds list={SFX} />
     </>
   );

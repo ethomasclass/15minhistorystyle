@@ -1,7 +1,7 @@
 // Helpers shared by chapters 7–9 (Ep 1): sound lists, a shaking desk shot, a print lifted on the desk, drawn diagram
 // nodes and lines, a big bare-handwriting line and a counting grid. Everything stays on the black desk, teal marks, one coral subject.
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, getInputProps, interpolate, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {JF, useGFrame, useHand, usePal} from './Kit';
 import {Sfx} from './common';
@@ -132,4 +132,30 @@ export const Marks: React.FC<{n: number; hot: number; x: number; y: number; cols
       })}
     </svg>
   );
+};
+
+/**
+ * The kit's whip-pan shot switcher (previews/fx Shots), with one difference: under tools/probe_text.mjs (inputProps.probe)
+ * the 8-frame whips render as plain cuts, so the probe measures the layout of each shot rather than the deliberate
+ * 900 px whip offset (which always pushes edge text past the frame for a frame or two, blurred).
+ */
+export const WShots: React.FC<{shots: [number, React.ReactNode, ('whip' | 'cut')?][]}> = ({shots}) => {
+  const f = useCurrentFrame();
+  const probe = Boolean(getInputProps().probe);
+  let i = 0;
+  shots.forEach(([s], k) => {
+    if (f >= s) i = k;
+  });
+  const W = 8;
+  const next = shots[i + 1];
+  if (!probe && next && next[2] === 'whip' && f >= next[0] - W / 2) {
+    const k = (f - (next[0] - W / 2)) / (W / 2);
+    return <AbsoluteFill style={{transform: `translateX(${-k * k * 900}px)`, filter: `blur(${k * 26}px)`}}>{shots[i][1]}</AbsoluteFill>;
+  }
+  const cur = shots[i];
+  if (!probe && cur[2] === 'whip' && f < cur[0] + W / 2) {
+    const k = 1 - (f - cur[0]) / (W / 2);
+    return <AbsoluteFill style={{transform: `translateX(${k * k * 900}px)`, filter: `blur(${k * 26}px)`}}>{cur[1]}</AbsoluteFill>;
+  }
+  return <>{cur[1]}</>;
 };

@@ -42,5 +42,19 @@
     "date": "between circa 1860 and circa 1865date QS:P571,+1860-00-00T00:00:00Z/8,P1319,+1860-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9,P1480,Q5727902",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Ruins_of_Richmond,_Va.,_April_1865_-_NARA_-_529221.jpg"
+  },
+  "ch02/boronda_family.jpg": {
+    "title": "File:Boronda family of Monterey County.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "Unknown date",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Boronda_family_of_Monterey_County.jpg"
+  },
+  "ch02/leslies_exodus_1879.jpg": {
+    "title": "File:\"Missouri-Remarkable Exodus of Negroes from Louisiana and Mississippi-Incidents of the Arrival. Support and Departure of the Refugees from St. Louis.\".jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "19 August 1879date QS:P571,+1879-08-19T00:00:00Z/11",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Missouri-Remarkable_Exodus_of_Negroes_from_Louisiana_and_Mississippi-Incidents_of_the_Arrival._Support_and_Departure_of_the_Refugees_from_St._Louis.%22.jpg"
   }
 }

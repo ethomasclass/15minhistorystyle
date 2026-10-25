@@ -24,8 +24,8 @@ const RUINS: [number, number] = [1752, 1440];
 const SOULE: [number, number] = [1890, 1314];
 const HOME: [number, number] = [3840, 5239];
 const MORRILL: [number, number] = [1920, 2680];
-const BORONDA: [number, number] = [538, 800];
-const EXODUS: [number, number] = [3840, 2829];
+const BORONDA: [number, number] = [500, 743];
+const EXODUS: [number, number] = [3840, 2828];
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference); routes simplified, approx.';
 
 /** 1 · "Washington, 1862." The Capitol with its dome half built. */
@@ -67,11 +67,11 @@ const HouseDetail: React.FC = () => {
   return (
     <AbsoluteFill>
       <Desk3D tilt={keys(f, [[a, 10], [b, 6]])} z={1} lamp={[1300, 600]}><div /></Desk3D>
-      <div style={{position: 'absolute', inset: 0, transform: `scale(${zkeys(f, [[a, 1.75], [b, 1.95]])})`, transformOrigin: `${keys(f, [[a, 1420], [b, 1480]])}px 760px`}}>
+      <div style={{position: 'absolute', inset: 0, transform: `scale(${zkeys(f, [[a, 1.5], [b, 1.62]])})`, transformOrigin: `${keys(f, [[a, 1560], [b, 1600]])}px 880px`}}>
         <House cx={960} cy={930} s={1.1} at={-99} emptyAt={-99} />
       </div>
-      <Mono text={`SEATS OF THE STATES THAT LEFT · ≈ ${HOUSE_EMPTY} OF ${HOUSE_SEATS}`} x={110} y={90} size={26} at={a + 6} color="#FF6F61" />
-      <Note text="they went with them" x={120} y={170} size={58} rot={-3} at={at('members went') - 2} />
+      <Mono text={`SEATS OF THE STATES THAT LEFT · ≈ ${HOUSE_EMPTY} OF ${HOUSE_SEATS}`} x={110} y={60} size={26} at={a + 6} color="#FF6F61" />
+      <Note text="they went with them" x={120} y={130} size={58} rot={-3} at={at('members went') - 2} />
       <ScrimTag text="Diagram · seats by the 1850 apportionment, approx." />
     </AbsoluteFill>
   );
@@ -247,8 +247,8 @@ const OutWest: React.FC = () => {
 const ROOM = [
   {w: 'Native nations', src: 'img/ch02/soule_arapaho_camp_1870.jpg', size: SOULE, fx: 1000, fy: 960, s: 0.42, tag: 'W. S. Soule, Arapaho camp near Fort Dodge, Kan., 1870 · National Archives'},
   {w: 'Chinese immigrants', src: IMG.tunnel8, size: SZ.tunnel8, fx: 690, fy: 1480, s: 0.48, tag: 'A. A. Hart, Tunnel No. 8, 1865–69 · LOC'},
-  {w: 'Mexican Americans', src: 'img/ch02/boronda_family.jpg', size: BORONDA, fx: 269, fy: 380, s: 0.62, tag: 'The Boronda family of Monterey County, Calif., 19th c. · Wikimedia Commons'},
-  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1250, fy: 1500, s: 0.2, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
+  {w: 'Mexican Americans', src: 'img/ch02/boronda_family.jpg', size: BORONDA, fx: 250, fy: 360, s: 0.8, tag: 'The Boronda family of Monterey County, Calif., undated · Wikimedia Commons'},
+  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1780, fy: 900, s: 0.36, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
 ];
 const Room: React.FC<{close?: boolean}> = ({close}) => {
   const f = useCurrentFrame();
@@ -256,20 +256,20 @@ const Room: React.FC<{close?: boolean}> = ({close}) => {
   const m = at('Mexican') - 1;
   const b = at('Historians') - 1;
   const ats = [at('Native') - 1, at('Chinese immigrants') - 1, at('Mexican') - 1, at('Black families') - 1];
-  const z = close ? zkeys(f, [[m, 1.18], [b, 1.26]]) : zkeys(f, [[a, 1.06], [m, 1.0]]);
-  const ox = close ? keys(f, [[m, 1100], [b, 1250]]) : 960;
+  const z = close ? zkeys(f, [[m, 1.12], [b, 1.2]]) : zkeys(f, [[a, 0.94], [m, 1.0]]);
+  const ox = close ? keys(f, [[m, 1500], [b, 1640]]) : 960;
   return (
     <AbsoluteFill>
       <Desk3D tilt={close ? 8 : 14} z={1} lamp={[960, 560]}><div /></Desk3D>
       <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: `${ox}px 560px`}}>
         {ROOM.map((r, i) => {
-          const cx = 300 + i * 440;
+          const cx = 330 + i * 420;
           const ok = !r.src.startsWith('img/ch02/') || hasFile(r.src);
           return (
             <React.Fragment key={r.w}>
-              {ok ? <CircleMount src={r.src} size={r.size} cx={cx} cy={520} r={170} fx={r.fx} fy={r.fy} scale={r.s} at={ats[i]} />
-                : <CircleMount src={IMG.redcloud} size={SZ.redcloud} cx={cx} cy={520} r={170} fx={1080} fy={1300} scale={0.2} at={ats[i]} />}
-              <Note text={r.w} x={cx - 150} y={730} size={50} rot={-3} at={ats[i] + 3} />
+              {ok ? <CircleMount src={r.src} size={r.size} cx={cx} cy={520} r={160} fx={r.fx} fy={r.fy} scale={r.s} at={ats[i]} />
+                : <CircleMount src={IMG.redcloud} size={SZ.redcloud} cx={cx} cy={520} r={160} fx={1080} fy={1300} scale={0.2} at={ats[i]} />}
+              <Mono text={r.w} x={cx - 7 * r.w.length - 14} y={720} size={24} at={ats[i] + 3} />
             </React.Fragment>
           );
         })}
@@ -422,7 +422,7 @@ const Mountains: React.FC = () => {
       <Ribbon fx={keys(f, [[a, RX(420)], [b, RX(130)]])} tilt={keys(f, [[a, 60], [b, 54]])} spin={keys(f, [[a, -14], [b, -18]])} z={zkeys(f, [[a, 1.2], [b, 1.7]])} dy={150} lit={lit}
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <BondKey ats={[-99, -99, -99]} y={60} />
-      <Hand parts={[['mountain miles paid '], ['3×', '#FF6F61']]} x={1080} y={850} size={70} at={at('three times') - 2} />
+      <Hand parts={[['mountain miles paid '], ['3×', '#FF6F61']]} x={880} y={860} size={66} at={at('three times') - 2} />
       <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11" />
     </AbsoluteFill>
   );
@@ -446,9 +446,9 @@ const Stack: React.FC<{means?: boolean}> = ({means}) => {
           <Hand parts={[['that means:', '#ffffff']]} x={160} y={340} size={64} at={at('That means') - 2} />
           <Hand parts={[['not paid for a '], ['good', '#ffffff'], [' railroad']]} x={220} y={460} size={78} at={at('weren\'t really') - 2} dur={14} />
           <Hand parts={[['paid for a '], ['long', '#FF6F61'], [' one, '], ['fast', '#ffffff']]} x={260} y={620} size={96} at={at('They were paid') - 2} dur={16} />
+          <StrikeGood at={at('good railroad') + 8} />
         </>}
       </div>
-      {means && <StrikeGood at={at('good railroad') + 8} />}
     </AbsoluteFill>
   );
 };
@@ -456,7 +456,7 @@ const StrikeGood: React.FC<{at: number}> = ({at: s}) => {
   const g = useGFrame();
   if (g < s) return null;
   const p = interpolate(g, [s, s + 5], [0, 1], clamp);
-  return <svg style={{position: 'absolute', left: 0, top: 0}} width={1920} height={1080}><line x1={520} y1={548} x2={520 + 300 * p} y2={530} stroke="#FF6F61" strokeWidth={8} strokeLinecap="round" /></svg>;
+  return <svg style={{position: 'absolute', left: 0, top: 0}} width={1920} height={1080}><line x1={845} y1={534} x2={845 + 290 * p} y2={518} stroke="#FF6F61" strokeWidth={8} strokeLinecap="round" /></svg>;
 };
 
 /** 27 · "So it became a race." The ribbon, both engines moving; the title. */

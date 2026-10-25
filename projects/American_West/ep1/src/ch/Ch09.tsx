@@ -31,7 +31,7 @@ import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, TAIL, FADE, type Narration} from '../kit/shell';
 import {CircleMount, CutOut, DocFocus, keys, Lift, MapCard, Mono, PhotoCam, PlatGrid, ScrimTag, SHADOW, Shots, SlapTitle, Tape, tornPoly, TornPrint, useDrop, zkeys} from '../kit/west';
 import {IMG, SM, SZ, WARREN} from '../samples/masks';
-import {DeskShot, Hand, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
+import {WShots, DeskShot, Hand, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
 import {M7} from '../masks_ch07';
 import {M9} from '../masks_ch09';
 
@@ -746,7 +746,7 @@ const Body: React.FC = () => {
   ];
   return (
     <>
-      <Shots shots={shots} />
+      <WShots shots={shots} />
       <Sounds list={SFX} />
     </>
   );

@@ -23,14 +23,6 @@
     "page": "https://www.loc.gov/item/90707120/",
     "source": "loc:90707120"
   },
-  "ch08/strike_pittsburgh_burning_1877.jpg": {
-    "title": "The Great [railroad] Strike [Pittsburgh, Pa. 1877]: Burning of offices and machine shops, PRR; Burning and sacking freight trains, PRR; and mob outside James Bown & Son gunworks [composite of 3 scenes on single page]",
-    "artist": "",
-    "date": "1877-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/99614205/",
-    "source": "loc:99614205"
-  },
   "ch08/strike_pittsburgh_depot_1877.jpg": {
     "title": "File:Harpers 8 11 1877 Destruction of the Union Depot.jpg",
     "artist": "M.B. Leiser, engraver",
@@ -53,14 +45,6 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Jay_Cooke_during_Civil_War.png"
   },
-  "ch08/panic_nassau_broad_1873.jpg": {
-    "title": "The great financial panic - intersection of Nassau and Broad Streets with Wall Street view of the Sub-Treasury, Jay Cooke & Co's Bank and the Western Union Telegraph Office from the Drexel Building on Sept. 19, 1873",
-    "artist": "",
-    "date": "1873-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2005694776/",
-    "source": "loc:2005694776"
-  },
   "ch08/panic_broad_st_1873.jpg": {
     "title": "The Great Financial Panic - View in Broad St., near the Stock Exchange, on Saturaday noon, Sept. 20th, after the closing of the Exchange doors",
     "artist": "",
@@ -68,5 +52,29 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2004678736/",
     "source": "loc:2004678736"
+  },
+  "ch08/ai_bank_doors.jpg": {
+    "title": "Prop: bank doors",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch08.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p8_bank_doors.png"
+  },
+  "ch08/ai_ballot_box.jpg": {
+    "title": "Prop: ballot box",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch08.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p8_ballot_box.png"
+  },
+  "ch08/litho_tunnel_face_medium.jpg": {
+    "title": "Tunnel face (reused from review/ai_tests/litho/L1_tunnel_face__medium.jpg)",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt)",
+    "date": "2026",
+    "licence": "AI illustration, reused (not a new image)",
+    "page": "",
+    "source": "review/ai_tests/litho/L1_tunnel_face__medium.jpg"
   }
 }

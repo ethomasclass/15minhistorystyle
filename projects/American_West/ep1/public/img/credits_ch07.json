@@ -52,5 +52,29 @@
     "licence": "Public domain (U.S. government work, 1873)",
     "page": "https://archive.org/details/cu31924062620236/page/n7",
     "source": "iabook:cu31924062620236:7"
+  },
+  "ch07/ai_stock_certificate.jpg": {
+    "title": "Prop: stock certificate",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_stock_certificate.png"
+  },
+  "ch07/ai_coins_notes.jpg": {
+    "title": "Prop: coins notes",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_coins_notes.png"
+  },
+  "ch07/ai_whiskey_barrels.jpg": {
+    "title": "Prop: whiskey barrels",
+    "artist": "Gemini 2.5 Flash Image (lithograph master prompt), weathered with tools/weather.py",
+    "date": "2026",
+    "licence": "AI illustration (no on-screen tag, per the user's rule); prompt in review/ai_images_ch07.md",
+    "page": "",
+    "source": "review/ai_ch07-09/p7_whiskey_barrels.png"
   }
 }
