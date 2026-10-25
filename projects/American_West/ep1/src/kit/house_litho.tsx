@@ -5,7 +5,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
-import {Loop, Note, useGFrame} from './Kit';
+import {Note, useGFrame} from './Kit';
 import {keys, Mono, PhotoCam, zkeys} from './west';
 
 export const SESSION = {src: 'img/ch02/ai_house_session.jpg', size: [1920, 1091] as [number, number]};
@@ -17,16 +17,33 @@ const n = (x: number, y: number): [number, number] => [(x * SESSION.size[0]) / 1
 export const EMPTY_POLY: [number, number][] = [n(492, 548), n(672, 535), n(960, 540), n(985, 775), n(985, 935), n(865, 998), n(477, 998), n(477, 845)];
 
 /** A see-through coral wash over the empty desks, fading in at `at` (colour blend, so the drawing shows through). */
-const EmptyWash: React.FC<{S: (x: number, y: number) => [number, number]; at: number; out?: number; k?: number}> = ({S, at, out = 1e7, k = 0.3}) => {
+const EmptyWash: React.FC<{S: (x: number, y: number) => [number, number]; at: number; out?: number; k?: number; outline?: boolean}> = ({S, at, out = 1e7, k = 1, outline = true}) => {
   const g = useGFrame();
   const o = Math.min(interpolate(g, [at, at + 6], [0, 1], clamp), interpolate(g, [out, out + 8], [1, 0], clamp));
   if (o <= 0) return null;
-  const d = 'M' + EMPTY_POLY.map(([x, y]) => S(x, y).map((v) => v.toFixed(1)).join(',')).join(' L') + ' Z';
+  const pts = EMPTY_POLY.map(([x, y]) => S(x, y));
+  const d = 'M' + pts.map((p) => p.map((v) => v.toFixed(1)).join(',')).join(' L') + ' Z';
+  const per = pts.reduce((acc, p, i) => { const q = pts[(i + 1) % pts.length]; return acc + Math.hypot(q[0] - p[0], q[1] - p[1]); }, 0);
+  const draw = interpolate(g, [at + 2, at + 14], [0, 1], clamp);
   return (
-    <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', mixBlendMode: 'multiply', opacity: k * o}} width={1920} height={1080}>
-      <defs><filter id="hlw"><feGaussianBlur stdDeviation={22} /></filter></defs>
-      <path d={d} fill="#FF6F61" filter="url(#hlw)" />
-    </svg>
+    <>
+      {/* 1 · everything else dims, so the eye goes to the empty desks */}
+      <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', opacity: o}} width={1920} height={1080}>
+        <defs><filter id="hlDim"><feGaussianBlur stdDeviation={16} /></filter></defs>
+        <path d={`M-400,-400 H2320 V1480 H-400 Z ${d}`} fillRule="evenodd" fill={`rgba(6,5,4,${0.55 * k})`} filter="url(#hlDim)" />
+      </svg>
+      {/* 2 · a see-through coral on the empty desks (colour blend keeps the drawing) */}
+      <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', mixBlendMode: 'color', opacity: 0.42 * k * o}} width={1920} height={1080}>
+        <defs><filter id="hlCo"><feGaussianBlur stdDeviation={8} /></filter></defs>
+        <path d={d} fill="#FF6F61" filter="url(#hlCo)" />
+      </svg>
+      {/* 3 · a teal line traced around them (12 fps, draws on) */}
+      {outline && (
+        <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', opacity: o}} width={1920} height={1080}>
+          <path d={d} fill="none" stroke="#2FE0C4" strokeWidth={5} strokeLinejoin="round" strokeDasharray={`${per * draw} ${per}`} />
+        </svg>
+      )}
+    </>
   );
 };
 
@@ -36,15 +53,7 @@ export const HouseWideLitho: React.FC<{a: number; b: number; emptyAt: number; se
   return (
     <AbsoluteFill>
       <PhotoCam src={SESSION.src} size={SESSION.size} bw={LITHO_LOOK} cx={keys(f, [[a, 960], [b, 1010]])} cy={keys(f, [[a, 560], [b, 600]])} s={zkeys(f, [[a, 1.0], [b, 1.08]])} vignette={0.55}>
-        {(S) => {
-          const [lx, ly] = S(1400, 840);
-          return (
-            <>
-              <EmptyWash S={S} at={emptyAt} />
-              <Loop cx={lx} cy={ly} rx={520} ry={240} at={emptyAt + 2} seed={23} tilt={-4} />
-            </>
-          );
-        }}
+        {(S) => <EmptyWash S={S} at={emptyAt} />}
       </PhotoCam>
       <Mono text="U.S. HOUSE OF REPRESENTATIVES · 1862" x={110} y={80} size={26} at={a + 4} />
       <Note text="the war's second year" x={110} y={150} size={52} rot={-3} at={secondAt - 2} color="#ffffff" />
@@ -58,8 +67,8 @@ export const HouseDetailLitho: React.FC<{a: number; b: number; wentAt: number; l
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
-      <PhotoCam src={SESSION.src} size={SESSION.size} bw={LITHO_LOOK} cx={keys(f, [[a, 1300], [b, 1420]])} cy={keys(f, [[a, 820], [b, 840]])} s={zkeys(f, [[a, 1.9], [b, 2.1]])} vignette={0.6}>
-        {(S) => <EmptyWash S={S} at={a} k={0.18} />}
+      <PhotoCam src={SESSION.src} size={SESSION.size} bw={LITHO_LOOK} cx={keys(f, [[a, 980], [b, 1060]])} cy={keys(f, [[a, 800], [b, 820]])} s={zkeys(f, [[a, 1.55], [b, 1.7]])} vignette={0.6}>
+        {(S) => <EmptyWash S={S} at={a - 30} k={0.9} />}
       </PhotoCam>
       <Mono text={label} x={110} y={60} size={26} at={a + 6} color="#FF6F61" />
       <Note text="they went with them" x={120} y={130} size={58} rot={-3} at={wentAt - 2} />
@@ -73,7 +82,7 @@ export const SouthGoneLitho: React.FC<{a: number; b: number; goneAt: number; chi
   return (
     <AbsoluteFill>
       <PhotoCam src={SESSION.src} size={SESSION.size} bw={LITHO_LOOK} cx={keys(f, [[a, 1000], [b, 960]])} cy={keys(f, [[a, 640], [b, 560]])} s={zkeys(f, [[a, 1.18], [b, 1.0]])} vignette={0.7}>
-        {(S) => <EmptyWash S={S} at={a - 20} out={goneAt} />}
+        {(S) => <EmptyWash S={S} at={a - 30} out={goneAt} />}
       </PhotoCam>
       <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(8,7,5,0.72) 0%, rgba(8,7,5,0.35) 45%, rgba(8,7,5,0) 70%)'}} />
       {children}
