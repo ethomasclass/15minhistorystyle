@@ -38,7 +38,8 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 
 ### Polish list (do before the render)
 1. ~~ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".~~ Done.
-2. ch02: a few dark, sparse map shots (pre-war deadlock) and a near-empty frame before the four portraits.
+2. ~~ch02: a few dark, sparse map shots (pre-war deadlock) and a near-empty frame before the four portraits.~~ Done (coral-hatched West + label on
+   the four map shots; empty sockets wait for the four portraits).
 3. ~~ch07's two-views card: match ch06's supporters' wording.~~ Done (same four lines + headers as ch06).
 4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): historically right (both portals + the central shaft dug both ways), kept unless the user wants it gone.
 5. Fact checks: 1874 House seat counts, the price fall, "89 of 364" railroads (labelled approx. on screen); plus

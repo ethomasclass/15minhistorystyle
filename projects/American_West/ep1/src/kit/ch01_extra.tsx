@@ -160,6 +160,33 @@ export const MRegion: React.FC<{api: WApi; pts: number[][]; at: number; color?: 
   );
 };
 
+/** The West the 1850s Congress argued over (California to Kansas, by today's state shapes): one see-through coral hatch, no inner borders. */
+export const WEST_STATES = ['California', 'Oregon', 'Washington', 'Nevada', 'Idaho', 'Montana', 'Wyoming', 'Utah', 'Colorado', 'Arizona', 'New Mexico',
+  'North Dakota', 'South Dakota', 'Nebraska', 'Kansas', 'Oklahoma'];
+export const MWest: React.FC<{api: WApi; at: number; color?: string; k?: number; out?: number}> = ({api, at, color, k: kMax = 1, out = 1e7}) => {
+  const g = useGFrame();
+  if (g < at || g > out + 10) return null;
+  const k = kMax * Math.min(interpolate(g, [at, at + 10], [0, 1], clamp), interpolate(g, [out, out + 10], [1, 0], clamp));
+  const c = color ?? PAL.subject;
+  const [W, H] = W_MAP.size;
+  const gap = api.px(18);
+  const d = WEST_STATES.map((s) => W_MAP.states[`USA:${s}`]).filter(Boolean).join(' ');
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(1px)', opacity: k}}>
+      <defs>
+        <pattern id="wm-west-hatch" width={gap} height={gap} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1={0} y1={0} x2={0} y2={gap} stroke={c} strokeWidth={api.px(2.5)} />
+        </pattern>
+        <clipPath id="wm-west-land"><path d={W_MAP.land} /></clipPath>
+      </defs>
+      <g clipPath="url(#wm-west-land)">
+        <path d={d} fill={c} opacity={0.1} />
+        <path d={d} fill="url(#wm-west-hatch)" opacity={0.45} />
+      </g>
+    </svg>
+  );
+};
+
 /**
  * Something standing up off the map at map point (x, y), facing the camera and kept at a constant screen size:
  * a pin with a handwritten label, a mono tag, a note.
