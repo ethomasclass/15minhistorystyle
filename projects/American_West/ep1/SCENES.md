@@ -34,7 +34,7 @@ Series context: `../SERIES.md`, `../EP1_RAILROAD_OUTLINE.md`. **No full renders*
   Archival photos still lead for real people, events and documents. Gemini 2.5 Flash Image, the lithograph master prompt in
   `../LITHO_PROMPT.md` (+ composition paragraph), then `python3 tools/weather.py in out --preset medium`. Key: `GEMINI_API_KEY` in
   `.env` (`set -a; . ./.env; set +a`; never print or commit it). Budget **≤ 20 images per builder** (Flash, ~4¢ each). Props and cut-outs: generate on a plain flat white or black background, then mask with `tools/mask.py` (rembg) or key, and weather (`--preset light` for objects you zoom into). Never a recognizable real person,
-  never a fake document or "photograph". Tag: "Illustration (AI lithograph)". Crop borders, paint out invented signatures.
+  never a fake document or "photograph". **No on-screen tag for AI images, and never the word "AI" on screen** (the user, Oct 2026): AI images get no source tag at all; record them only in `credits_chNN.json` and `review/ai_images_chNN.md`. Crop borders, paint out invented signatures.
   Reuse first: `review/ai_tests/litho/` (tunnel face, Hell on Wheels camp, Sierra snowsheds), `review/ai_tests/ribbon/` (engines,
   ridges), `review/ai_tests/assets/` (torn paper, tape, stains, spike, sledgehammer, `act_lines.json`).
 - **Document swipes:** place them from real line positions (Gemini line finder, as in `review/ai_tests/asset_tests.py` →

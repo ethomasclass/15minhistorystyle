@@ -100,6 +100,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Heads stay in frame** through every push and drift. Check the first and last frame of each push into a group.
 - **Make an allusion explicit.** When a map points to a later event (the 1861 split), label it on screen: sides, a key, a dated pin, the event's name.
 - No caricatured engravings in a serious chapter.
+- **No on-screen tag on AI images, and never "AI" on screen** (West series, Oct 2026). Archival images keep their source tags; AI
+  images are recorded only in the credits file and prompt log.
 - No "drawn for this video" tags, no end credits, no mention of ElevenLabs on screen, and no "presents" line on the title.
 - **Notes are bare teal handwriting, no tape or strip behind them** (from the West series, Oct 2026; replaces the backed
   notes used in the Reconstruction videos). Orange tape is for titles only.

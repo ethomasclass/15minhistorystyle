@@ -28,6 +28,12 @@ import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {CircleMount, keys, Mono, PhotoCam, Pin, ScrimTag, Shots, SlapTitle, zkeys} from '../kit/west';
 import {DeskShot, Hand, Marks, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
+import {CutOut} from '../kit/west';
+import {M8} from '../masks_ch08';
+
+// AI lithograph plates and props (review/ai_images_ch08.md), 1920 x 1920
+const AI8 = {doors: 'img/ch08/ai_bank_doors.jpg', ballot: 'img/ch08/ai_ballot_box.jpg'};
+const PROP: [number, number] = [1920, 1920];
 
 const N = words as Narration;
 export const CH08_FRAMES = chapterFrames(N, LEAD);
@@ -84,8 +90,22 @@ const CookeOffice: React.FC = () => {
       <PhotoCam src={I8.run} size={Z8.run} cx={c.cx} cy={c.cy} s={c.s} bw="grayscale(1) contrast(1.2) brightness(0.92)" />
       <Note text="Jay Cooke & Co." x={110} y={110} size={60} rot={-3} at={at('Jay Cooke') + 4} />
       <Note text="“the most famous bank in America”" x={120} y={220} size={42} rot={-2} color="#f4efe6" at={at('famous') - 3} />
-      <Hand parts={[['closes its doors', true]]} x={1080} y={860} size={84} at={at('closes') - 3} />
+
       <ScrimTag text={TAG.run} />
+    </AbsoluteFill>
+  );
+};
+
+/** B2 · cut-in: a bank's doors shut (illustration). */
+const Doors: React.FC = () => {
+  const f = useCurrentFrame();
+  const a = at('closes') - 1;
+  const b = at('Cooke had');
+  return (
+    <AbsoluteFill>
+      <PhotoCam src={AI8.doors} size={PROP} cx={960} cy={keys(f, [[a, 1000], [b, 1060]])} s={zkeys(f, [[a, 1.6], [b, 1.78]])} bw="grayscale(0.4) contrast(1.1) brightness(0.85)" />
+      <Hand parts={[['closes its doors', true]]} x={1080} y={860} size={84} at={a + 1} />
+      <ScrimTag text="Bank doors: Illustration (AI lithograph)" />
     </AbsoluteFill>
   );
 };
@@ -320,12 +340,13 @@ const House: React.FC = () => {
         <Mono text="THE HOUSE · BEFORE" x={250} y={820} size={26} at={a + 4} />
         <Seats cx={480} cy={760} R={330} {...HOUSE.before} at={a + 4} />
         <Wire pts={[[860, 620], [1060, 620]]} at={at('won') - 4} />
+        <CutOut src={AI8.ballot} size={PROP} mask={M8.ballot} place={{left: 845, top: 690, scale: 0.12}} at={at('won') - 4} filter="grayscale(0.35) contrast(1.05)" />
         <Mono text="AFTER THE 1874 ELECTION" x={1190} y={820} size={26} at={at('won') - 2} />
         <Seats cx={1440} cy={760} R={330} {...HOUSE.after} at={at('won') - 2} />
         <Note text="Democrats" x={1150} y={290} size={56} rot={-3} color="#FF6F61" at={at('Democrats') - 2} />
         <Note text="win the House" x={1200} y={380} size={50} rot={-3} at={at('won') + 4} />
       </AbsoluteFill>
-      <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral" />
+      <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral · ballot box: Illustration (AI lithograph)" />
     </AbsoluteFill>
   );
 };
@@ -548,6 +569,7 @@ const Body: React.FC = () => {
   const shots: [number, React.ReactNode, ('whip' | 'cut')?][] = [
     [0, <DateDesk />],
     [at('Jay Cooke') - 1, <CookeOffice />, 'cut'],
+    [at('closes') - 1, <Doors />, 'cut'],
     [at('Cooke had') - 1, <CookeBet />, 'whip'],
     [at('The money ran') - 1, <RanOut />, 'cut'],
     [at('What came next') - 1, <Panic />, 'whip'],

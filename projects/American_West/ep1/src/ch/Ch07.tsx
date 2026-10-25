@@ -27,6 +27,12 @@ import {DocFocus, keys, Mono, PhotoCam, ScrimTag, Shots, SlapTitle, useSlap, zke
 import {IMG, SZ} from '../samples/masks';
 import {DeskShot, Hand, Node, Print, Sounds, Strike, Wire} from '../kit/ch07_extra';
 import {M7} from '../masks_ch07';
+import {CutOut} from '../kit/west';
+
+// AI lithograph props (review/ai_images_ch07.md), 1920 x 1920, masked c7_certificate / c7_coins / c7_barrels
+const PROP: [number, number] = [1920, 1920];
+const AI = {certificate: 'img/ch07/ai_stock_certificate.jpg', coins: 'img/ch07/ai_coins_notes.jpg', barrels: 'img/ch07/ai_whiskey_barrels.jpg'};
+const LITHO = 'grayscale(0.35) contrast(1.05) brightness(0.95)';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -108,6 +114,7 @@ const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number}> = (
         <Note text="hired to build it" x={830} y={330} size={42} rot={-2} at={at('hired')} />
         <Wire pts={[[1220, 510], [700, 510]]} at={at('far more') - 2} width={8} />
         <Note text="$$$ far more than it cost" x={780} y={525} size={42} rot={-2} at={at('far more')} />
+        <CutOut src={AI.coins} size={PROP} mask={M7.coins} place={{left: 1020, top: 560, scale: 0.13}} at={at('far more') + 4} filter={LITHO} />
         <Node x={690} y={80} w={540} h={150} label="U.S. GOV'T LOANS" sub="the public's money" at={at('government') - 1} size={32} />
         <Wire pts={[[760, 240], [500, 370]]} at={at('government') + 3} />
         <Node x={690} y={780} w={540} h={160} label="THE SAME MEN" at={at('The same men') - 1} coral size={38} />
@@ -119,6 +126,7 @@ const MoneyLoop: React.FC<{z: number; cx: number; cy: number; dim?: number}> = (
         <Note text="set the price" x={990} y={615} size={40} rot={-3} color={coral} at={at('set the price')} />
         <Loop cx={960} cy={560} rx={880} ry={420} at={at('set the price') + 6} seed={7} tilt={-2} width={6} color={coral} />
       </AbsoluteFill>
+      {useGFrame() >= at('far more') + 4 && <Tag text="Coins and notes: Illustration (AI lithograph)" />}
     </AbsoluteFill>
   );
 };
@@ -184,10 +192,13 @@ const AmesPush: React.FC = () => {
   return (
     <AbsoluteFill>
       <PhotoCam src={I7.ames} size={Z7.ames} cx={c.cx} cy={c.cy} s={c.s} mask={M7.ames} tintAt={a + 2} traceAt={a + 4} />
-      <Note text="shares in Crédit Mobilier" x={1080} y={260} size={48} rot={-3} at={at('shares') - 2} />
-      <Note text="→ other congressmen" x={1110} y={370} size={46} rot={-3} at={at('other members') - 2} />
-      <Hand parts={[['cheap.', true]]} x={1300} y={500} size={100} at={at('cheap') - 3} />
-      <ScrimTag text={TAG.ames} />
+      <Note text="shares in Crédit Mobilier" x={1080} y={150} size={48} rot={-3} at={at('shares') - 2} />
+      <Note text="→ other congressmen" x={1110} y={250} size={46} rot={-3} at={at('other members') - 2} />
+      {[0, 1, 2].map((i) => <div key={i} style={{position: 'absolute', inset: 0, transform: `rotate(${-8 + i * 7}deg)`, transformOrigin: `${1420 + i * 60}px ${640 + i * 30}px`}}>
+        <CutOut src={AI.certificate} size={PROP} mask={M7.certificate} place={{left: 1150 + i * 60, top: 420 + i * 40, scale: 0.27}} at={at('shares') + 2 + i * 4} filter={LITHO} />
+      </div>)}
+      <Hand parts={[['cheap.', true]]} x={1480} y={880} size={100} at={at('cheap') - 3} />
+      <ScrimTag text={`${TAG.ames}  ·  certificates: Illustration (AI lithograph)`} x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -346,6 +357,7 @@ const RingDiagram: React.FC = () => {
       <DarkPaper />
       <AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: '50% 45%'}}>
         <Node x={140} y={300} w={500} h={160} label="WHISKEY MAKERS" sub="distillers" at={a + 2} />
+        <CutOut src={AI.barrels} size={PROP} mask={M7.barrels} place={{left: 150, top: 470, scale: 0.19}} at={a + 6} filter={LITHO} />
         <Node x={1280} y={300} w={500} h={160} label="U.S. TREASURY" sub="the tax should go here" at={at('Treasury') - 1} />
         <Wire pts={[[650, 380], [1270, 380]]} at={at('Treasury') + 2} dash head />
         <Note text="whiskey tax" x={860} y={300} size={44} rot={-2} at={at('Treasury') + 4} />
@@ -354,6 +366,7 @@ const RingDiagram: React.FC = () => {
         <Wire pts={[[900, 400], [960, 680]]} at={at('keeping') + 4} color={pal.subject} width={8} />
         <Note text="kept it for themselves" x={1250} y={740} size={50} rot={-3} color={pal.subject} at={at('for themselves') - 3} />
       </AbsoluteFill>
+      <Tag text="Barrels: Illustration (AI lithograph)" />
     </AbsoluteFill>
   );
 };

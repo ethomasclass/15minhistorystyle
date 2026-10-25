@@ -206,7 +206,7 @@ export const P2Race: React.FC = () => {
           <SlapTitle text="PROMONTORY, 1869" x={1180} y={870} size={70} at={418} seed={57} />
           <Audio src={staticFile('sfx/train_distant.wav')} loop volume={(fr) => interpolate(fr, [0, 30, P2_FRAMES - 40, P2_FRAMES - 1], [0, 0.1, 0.1, 0], clamp)} />
           {SOUNDS.map(([at, n, v], i) => <Sfx key={i} at={at} src={`sfx/${n}.wav`} volume={v} />)}
-          <ScrimTag text="Elevations approx., heights exaggerated · ridges and engines: illustration (AI lithograph)" />
+          <ScrimTag text="Elevations approx., heights exaggerated" />
           <Finish vignette={0.3} />
         </AbsoluteFill>
       </StepCtx.Provider>

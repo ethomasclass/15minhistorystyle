@@ -6,3 +6,10 @@ JOBS = {
     "c7_babcock": ("img/ch07/babcock_brady.jpg", None, "u2net_human_seg"),
     "c7_grant": ("img/ch07/grant_brady_1870s.jpg", None, "u2net_human_seg"),
 }
+JOBS.update({
+    # AI lithograph props (review/ai_images_ch07.md), weathered light, on white
+    # c7_certificate: replaced by its bounding rectangle (tools/traces/c7_certificate_rect.json, refine --only)
+    "c7_certificate": ("img/ch07/ai_stock_certificate.jpg", None, "isnet-general-use"),
+    "c7_coins": ("img/ch07/ai_coins_notes.jpg", None, "isnet-general-use"),
+    "c7_barrels": ("img/ch07/ai_whiskey_barrels.jpg", None, "isnet-general-use"),
+})
