@@ -21,7 +21,7 @@ fulfill its promises of freedom and opportunity after the Civil War?"
   `src/samples/kit.tsx` + `src/previews/fx.tsx`), `src/kit/ch01_extra.tsx` (drawn West map, ribbon, township, Act page),
   `ch04_extra.tsx`, `ch07_extra.tsx`, `house_litho.tsx`.
 - House chamber (ch01 end, ch02 start): lithograph chamber with the empty wedge traced by Gemini (`review/ai_house_chamber/`),
-  switch `HOUSE_LOOK` ('litho' | 'diagram') at the top of `Ch01.tsx`/`Ch02.tsx`. **User hasn't picked yet** (litho is on).
+  switch `HOUSE_LOOK` ('litho' | 'diagram') at the top of `Ch01.tsx`/`Ch02.tsx`. **User picked litho.**
 - ch04 snow scene: lithograph bunkhouse + teal-hatched snow (user's suggestion, done).
 - Approved look references: `review/previews/P1-ColdOpen.mp4`, `P2-Race.mp4`, `P3-Checker.mp4` ("These are awesome!").
 - Checks pass for all chapters: `npx tsc --noEmit -p .`, `tools/anchors.py`, `tools/probe_text.mjs` (whip frames and faded P2
@@ -31,10 +31,12 @@ fulfill its promises of freedom and opportunity after the Civil War?"
 1. **Suno cues** (`../MUSIC.md`; priority `aw_promise_theme`, `aw_iron_horse`, `aw_long_grief`, `aw_legend_sours`). Each chapter
    has `// SUNO: aw_xxx replaces this` where the cue swaps in; library fallbacks play now. Put new cues in `public/music/` and in
    the style repo `music/cues/` + `music/README.md` + `catalog.json` (prefix `aw_`).
-2. **The Grant cartoon** from their test (ch06 has a swappable slot: `CARTOON_A/B` at the top of `Ch06.tsx`; currently Nast 1872
-   admiring + Morgan/Leslie's 1872 critical). A look-again line about it would mean re-voicing ch06.
-3. **House chamber**: litho or diagram.
-4. **ch02 "Black families" circle** uses a cropped Leslie's 1879 Exodus engraving: user to check for caricature.
+2. ~~The Grant cartoon~~ Done: the user's test cartoon is Currier & Ives, *A Nice Family Party* (1872, LOC pga-09549):
+   ch06 "some of his friends did not deserve it" (tight on "Let us have peace.", pull out, coral loops on the three "Let us have
+   a piece." balloons). The both-ways pair stays Nast 1872 + Morgan 1872 (they match the narration's words).
+3. ~~House chamber~~ litho (user's pick).
+4. ~~ch02 "Black families" circle~~ Checked: the crop is now tighter (woman in white, mother in the wagon, children); the one
+   stylised face at the right edge is out of the circle.
 
 ### Polish list (do before the render)
 1. ~~ch04 records card: "Chinese deaths" shows a ✓ next to "?" → just "?".~~ Done.

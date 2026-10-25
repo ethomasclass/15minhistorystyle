@@ -8,7 +8,7 @@ import words from '../../public/audio/ch06_let_us_have_peace.words.json';
 import {clamp} from '../lib/anim';
 import {JF, Loop, Note, useGFrame, useHand, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
-import {CircleMount, MapCard} from '../samples/kit';
+import {MapCard} from '../samples/kit';
 import {IMG, SZ} from '../samples/masks';
 import {Lift, ScrimTag, shake, Shots, SlapTitle} from '../previews/fx';
 import {DeskCam, Label, Line, Lines, Pic, Print, Sounds, type SfxRow} from '../kit/ch04_extra';
@@ -21,7 +21,8 @@ const at = T.at;
 const END = Math.ceil(N.duration * 30) + 60;
 
 /**
- * THE CARTOON SLOT (swap when the user names the cartoon from their test). Each entry: the scan, its pixel size, where Grant is
+ * THE CARTOON SLOT (the user's pick, 2026-10-25: keep Nast 1872 + Morgan 1872 here; their test cartoon, Currier & Ives's
+ * A Nice Family Party, 1872, plays at "some of his friends" in Friends below). Keppler 1875 is off-message and caricatures Black legislators. Each entry: the scan, its pixel size, where Grant is
  * (source px: loop centre and radii), the detail camera ([cx, cy, s] at the start and end of the shot), a note and the source tag.
  * Alternatives already downloaded to public/img/ch06/ (credits in credits_ch06.json):
  *  - critical: cartoon_keppler_trying_it_on_1875.jpg [3840, 5326] (Keppler, "Trying it on", Frank Leslie's, Jan. 2, 1875: Grant tries on a crown)
@@ -50,6 +51,7 @@ const CARTOON_B: Cartoon = {
 const I = {
   grant: 'img/ch06/grant_brady.jpg',
   matched: 'img/ch06/cartoon_nast_matched_1868.jpg',
+  party: 'img/ch06/cartoon_family_party_1872.jpg',
   stl: 'img/ch06/st_louis_locust_st_1857.jpg',
   galena: 'img/ch06/galena_grant_perkins_store.jpg',
   fifteenth: 'img/ch06/fifteenth_amendment_kelly.jpg',
@@ -58,6 +60,7 @@ const I = {
 const Z = {
   grant: [2625, 4000] as [number, number],
   matched: [960, 861] as [number, number],
+  party: [2000, 1414] as [number, number],
   stl: [3840, 2316] as [number, number],
   galena: [325, 364] as [number, number],
   fifteenth: [4000, 3181] as [number, number],
@@ -66,6 +69,7 @@ const Z = {
 const TAG = {
   grant: 'Ulysses S. Grant · Brady National Photographic Art Gallery · Library of Congress',
   matched: "Thomas Nast, Matched (detail), Harper's Weekly, Oct. 31, 1868 · Wikimedia Commons",
+  party: 'J. Cameron, A Nice Family Party, Currier & Ives, 1872 · Library of Congress',
   stl: 'View in Locust Street, St. Louis, Missouri, 1857 · Wikimedia Commons',
   galena: 'Grant & Perkins leather store, Galena, Ill., c. 1865 · J. E. James · Wikimedia Commons',
   fifteenth: 'Thomas Kelly, The Fifteenth Amendment, c. 1870 · Library of Congress',
@@ -340,16 +344,35 @@ const Critics: React.FC = () => {
   );
 };
 
-/** 19 · Grant, close: some of his friends did not deserve it. */
+/**
+ * 19 · "some of his friends did not deserve it": Currier & Ives, A Nice Family Party (1872). Tight on Grant and his own slogan
+ * ("Let us have peace."), then the pull-out finds everyone around him saying "Let us have a piece." (coral loops). Balloon
+ * centres in source px (2000 x 1414): peace 1305,60 · pieces 250,195 / 625,190 / 1620,195.
+ */
 const Friends: React.FC = () => {
   const a = at('And some') - 1;
+  const w = at('friends', 2) - 4;
+  const pal = usePal();
   return (
-    <AbsoluteFill>
-      <DeskCam k={[[a, 12, 1.0, 0, 0, 0], [at('And the biggest'), 12, 1.05, 0, 0, 0]]}><></></DeskCam>
-      <CircleMount src={I.grant} size={Z.grant} cx={1340} cy={520} r={360} fx={1330} fy={1350} scale={0.55} at={a + 1} mask={M6.grant} traceAt={a + 4} />
-      <Lines x={120} y={380} size={62} gap={100} rows={[{text: 'some of his friends', at: at('friends', 2) - 3}, {text: 'did not deserve it', at: at('deserve') - 3, color: '#ffffff'}]} />
-      <ScrimTag text={TAG.grant} />
-    </AbsoluteFill>
+    <Pic src={I.party} size={Z.party} tag={TAG.party} tagY={1036} filter="grayscale(1) contrast(1.12)" vignette={0.45}
+      k={[[a, 1180, 330, 1.45], [w, 1150, 340, 1.5], [w + 16, 1000, 560, 0.96], [at('And the biggest'), 1000, 560, 0.98]]}>
+      {(S, s) => {
+        const L = (x: number, y: number, rx: number, ry: number, t: number, color: string, seed: number) => {
+          const [cx, cy] = S(x, y);
+          return <Loop key={seed} cx={cx} cy={cy} rx={rx * s} ry={ry * s} at={t} seed={seed} tilt={-3} width={6} color={color} />;
+        };
+        return (
+          <>
+            {L(1305, 60, 175, 52, a + 6, pal.mark, 51)}
+            {L(250, 195, 165, 50, w + 14, pal.subject, 52)}
+            {L(625, 190, 165, 50, w + 18, pal.subject, 53)}
+            {L(1620, 195, 165, 50, w + 22, pal.subject, 54)}
+            <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(8,7,5,0.92) 0%, rgba(8,7,5,0.75) 16%, rgba(8,7,5,0) 38%)'}} />
+            <Lines x={110} y={830} size={54} gap={84} rows={[{text: 'some of his friends', at: w + 10}, {text: 'did not deserve it', at: at('deserve') - 3, color: '#ffffff'}]} />
+          </>
+        );
+      }}
+    </Pic>
   );
 };
 
@@ -410,7 +433,7 @@ const SFX: SfxRow[] = [
   [at('Cartoonists') + 1, 'paper_slap_soft', 0.22], [at('both') - 1, 'paper_slap_soft', 0.22], tick('both', 3),
   tick('saved', 5), tick('depth', 8),
   tick('critics', 4), tick('loyal', 4), tick('trusted', 4), tick('point', 5, 2),
-  tick('friends', 5, 2), tick('deserve', 5), tick('scandal', 5), tick('started', 4),
+  tick('friends', 5, 2), tick('deserve', 5), [at('friends', 2) - 4 + 14, 'marker_tick', 0.16], [at('friends', 2) - 4 + 22, 'marker_tick', 0.16], tick('scandal', 5), tick('started', 4),
 ];
 
 const Body: React.FC = () => (

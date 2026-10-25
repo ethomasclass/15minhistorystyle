@@ -13,7 +13,7 @@ import {IMG, SZ} from '../samples/masks';
 import {M2} from '../masks_ch02';
 import {HouseDetailLitho, HouseWideLitho, SouthGoneLitho} from '../kit/house_litho';
 
-/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+/** The House chamber: 'litho' (generated 1860s chamber; the user's pick) or 'diagram' (the drawn seats, kept as a fallback). */
 const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
 import {type WApi, ACT_H, ACT_LINE_Y, ACT_W, ActPage, BondKey, Hand, House, HOUSE_EMPTY, HOUSE_SEATS, LINES, MCross, MPin, MRoute, MStand, MWest, PL, Ribbon, RMI, RX, subLine, Township, townshipTaps, TownLegend, WestMap} from '../kit/ch01_extra';
 
@@ -280,7 +280,7 @@ const ROOM = [
   {w: 'Native nations', src: 'img/ch02/soule_arapaho_camp_1870.jpg', size: SOULE, fx: 1000, fy: 960, s: 0.42, tag: 'W. S. Soule, Arapaho camp near Fort Dodge, Kan., 1870 · National Archives'},
   {w: 'Chinese immigrants', src: IMG.tunnel8, size: SZ.tunnel8, fx: 690, fy: 1480, s: 0.48, tag: 'A. A. Hart, Tunnel No. 8, 1865–69 · LOC'},
   {w: 'Mexican Americans', src: 'img/ch02/boronda_family.jpg', size: BORONDA, fx: 250, fy: 360, s: 0.8, tag: 'The Boronda family of Monterey County, Calif., undated · Wikimedia Commons'},
-  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1780, fy: 900, s: 0.36, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
+  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1790, fy: 900, s: 0.48, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
 ];
 /** An empty mount waiting for its photograph: a dark disc with a faint dashed teal rim (drops in with a small bounce). */
 const Socket: React.FC<{cx: number; cy: number; r: number; at: number}> = ({cx, cy, r, at: s}) => {

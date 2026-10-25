@@ -15,7 +15,7 @@ import {Hand, House, LINES, MPin, MRoute, PL, WestCard, WestMap} from '../kit/ch
 import {SUBTITLE, TITLE, DATES} from '../project';
 import {ChairsLitho} from '../kit/house_litho';
 
-/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+/** The House chamber: 'litho' (generated 1860s chamber; the user's pick) or 'diagram' (the drawn seats, kept as a fallback). */
 const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
 
 const N = words as Narration;
