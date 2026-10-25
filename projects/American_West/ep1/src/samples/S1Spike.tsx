@@ -17,8 +17,8 @@ export const S1A: React.FC = () => (
         const [l2x, l2y] = S(3020, 800);
         return (
           <>
-            <Loop cx={l1x} cy={l1y} rx={290} ry={150} at={24} seed={5} tilt={-4} />
-            <Loop cx={l2x} cy={l2y} rx={360} ry={140} at={30} seed={9} tilt={3} />
+            <Loop cx={l1x + 50} cy={l1y} rx={240} ry={150} at={24} seed={5} tilt={-4} />
+            <Loop cx={l2x - 40} cy={l2y} rx={300} ry={140} at={30} seed={9} tilt={3} />
             <Highlight text="MAY 10, 1869" x={640} y={60} size={84} at={6} seed={11} rot={-2} />
             <Note text="look at the faces." x={690} y={185} size={50} rot={-3} at={36} />
             <Tag text={SPIKE_TAG} />
@@ -59,6 +59,6 @@ export const S1C: React.FC = () => (
     <Note text="(left out of the frame)" x={1350} y={250} size={38} rot={-3} at={42} color="#ffffff" />
     <Arrow x1={1400} y1={350} x2={1180} y2={560} bow={-30} at={48} />
     <Highlight text="NOT IN THE PICTURE" x={120} y={952} size={70} at={6} seed={21} rot={-2} />
-    <Tag text="A. J. Russell, 1869 · Commons  ·  A. A. Hart, Heading of Tunnel No. 8, c. 1867 · LOC" x={44} y={24} />
+    <Tag text="A. J. Russell, 1869 · Commons  ·  A. A. Hart, Heading of Tunnel No. 8, 1865–69 · LOC" x={44} y={24} />
   </Sample>
 );

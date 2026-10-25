@@ -1,8 +1,7 @@
 // Masks for the style-sample scenes (public/img/masks/s_*). Made with rembg via ep1/tools/mask.py's run(), then
-// hand-traced where rembg failed (s_up, s_montague, s_crew, s_worker: polygon-only; s_goliah: rembg + pilot polygon).
+// hand-traced where rembg failed (s_up, s_montague, s_worker: polygon-only; s_goliah: rembg + pilot polygon).
 // Do not re-run rembg over these; the traces and commands are listed in review/samples/README.md.
 import {maskRef} from '../kit/maskref';
-import crew from '../../public/img/masks/s_crew.json';
 import goliah from '../../public/img/masks/s_goliah.json';
 import montague from '../../public/img/masks/s_montague.json';
 import redcloud from '../../public/img/masks/s_redcloud.json';
@@ -10,7 +9,6 @@ import up from '../../public/img/masks/s_up.json';
 import worker from '../../public/img/masks/s_worker.json';
 
 export const SM = {
-  crew: maskRef('s_crew', crew),
   goliah: maskRef('s_goliah', goliah),
   montague: maskRef('s_montague', montague),
   redcloud: maskRef('s_redcloud', redcloud),
@@ -21,7 +19,6 @@ export const SM = {
 /** Source pixel sizes of the sample images (public/img/samples). */
 export const SZ = {
   spike: [3840, 2922] as [number, number],
-  laborers: [2128, 2020] as [number, number],
   tunnel8: [2090, 2000] as [number, number],
   goliah: [2104, 2040] as [number, number],
   carbutt: [2012, 2087] as [number, number],
@@ -33,7 +30,6 @@ export const SZ = {
 
 export const IMG = {
   spike: 'img/samples/spike_russell_1869.jpg',
-  laborers: 'img/samples/hart_summit_laborers.jpg',
   tunnel8: 'img/samples/hart_tunnel8_worker.jpg',
   goliah: 'img/samples/hart_goliah_mirrored.jpg',
   carbutt: 'img/samples/carbutt_up_100th_1866.jpg',
