@@ -111,6 +111,32 @@ archival scans themselves.
   (below).
 - **Effort:** S.
 
+### 11. Cut-outs: people and objects on the dark desk
+- **From:** every reference (R1 man, R2 bio head and factory, R3 factory and portrait, R4 projector, R5 Booth, R6 ship).
+- **What we already have:** the pipeline makes cut-outs for every masked image (`mask.py` → `layers.py` writes `<name>_fg.webp`),
+  and *Grip Tighter* used a cut-out portrait on the desk (Finney, tint strength 0.5). What's new is using them as **collage pieces**:
+  more of them, objects as well as people, layered with maps, documents and cards.
+- **Channel version, in the desk palette:**
+  - **No white sticker edge.** The references cut figures out with a white or cream border; ours sit straight on `DarkPaper`. To lift
+    them off the desk: a hard, slightly offset **ink-black drop shadow** (no blur glow), and grain over the cut-out like everything else.
+  - **Edge = the teal trace** when the cut-out is the subject (the existing 7 px offset outline already reads as a scissor line).
+    Non-subject cut-outs get no outline, just the shadow.
+  - **One coral subject still.** In a collage of four cut-outs, one takes the coral tint (or the coral offset, #6), the rest stay B&W.
+  - **Objects count.** Period objects cut from real photos, engravings, catalogs and patent drawings: a locomotive, a longhorn, a
+    coil of Glidden wire, a steel plow, a windmill, a gold pan, a stock certificate, a bison skull. Patent drawings and catalog
+    engravings mask very cleanly (line art on plain paper).
+  - **Pieces arrive with weight:** `DropCard` timing, a tick or paper-slide sound, 12 fps steps. No smooth floating.
+  - **Masks checked at full resolution** (`mask_closeup.py`), hand-traced where rembg fails. A rough cut-out edge is far more visible
+    on a collage than in a tinted photo.
+- **West series:**
+  - **Ep 1:** CP and UP locomotives facing each other across the frame (Promontory as collage); Oakes Ames with stock certificates (#7).
+  - **Ep 2:** a longhorn, Glidden's wire and the patent drawing as an "1874" collage beside the Black Hills expedition photo.
+  - **Ep 3:** the machine card (plow, windmill, reaper, binder) built from catalog cut-outs on the desk, each landing on its word.
+  - **Ep 4:** objects only (the treaty, a bison skull, a Hotchkiss gun from a period catalog). **People in Ep 4 stay in their own
+    photographs** (full frame or the portrait circle, teal trace only): cutting Native people out of their photos and arranging them
+    in a collage would turn real people into props, in exactly the episode about who controlled their image (ch 6, *Two Pictures*).
+- **Effort:** S per piece (the tools exist); M for a whole collage scene.
+
 ---
 
 ## Serving the recurring devices
