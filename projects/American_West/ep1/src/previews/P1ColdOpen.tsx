@@ -5,11 +5,12 @@ import React from 'react';
 import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch01_v4_onetake.words.json';
 import {clamp} from '../lib/anim';
-import {Finish, Highlight, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame} from '../kit/Kit';
+import {Finish, Loop, Note, PALETTES, PaletteCtx, StepCtx} from '../kit/Kit';
+import {Sfx, WRITE} from '../kit/common';
 import {makeTimeline, type Narration} from '../kit/shell';
 import {CutOut, MapCard, TornPrint} from '../samples/kit';
 import {IMG, SM, SZ, WARREN} from '../samples/masks';
-import {Desk3D, keys, Lift, PhotoCam, shake, Shots, useSlap, zkeys} from './fx';
+import {Desk3D, keys, Lift, PhotoCam, ScrimTag, shake, Shots, SlapTitle, zkeys} from './fx';
 
 const N = words as Narration;
 const T = makeTimeline(N, 30);
@@ -17,17 +18,6 @@ export const P1_FRAMES = T.at('The first') + 2;
 
 const SPIKE_TAG = 'A. J. Russell, East and West Shaking Hands at Laying Last Rail, May 10, 1869 · Wikimedia Commons';
 const WORKER = 'img/previews/hart_tunnel8_worker_w.jpg';
-
-/** A title that slaps down (scale 1.3 -> 1 with overshoot) as its tape wipes on. */
-const SlapTitle: React.FC<{text: string; x: number; y: number; size: number; at: number; seed?: number; rot?: number}> = ({text, x, y, size, at, seed = 21, rot = -2}) => {
-  const s = useSlap(at, 1.35);
-  if (!s.on) return null;
-  return (
-    <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${s.scale})`, transformOrigin: `${x + 200}px ${y + 50}px`}}>
-      <Highlight text={text} x={x} y={y} size={size} at={at} seed={seed} rot={rot} />
-    </div>
-  );
-};
 
 /** 1 · WIDE: the photo full-bleed, sky and crowd on separate layers so the push has depth. Hook tape at once. */
 const Wide: React.FC = () => {
@@ -37,7 +27,7 @@ const Wide: React.FC = () => {
     <AbsoluteFill>
       <PhotoCam src={IMG.spike} size={SZ.spike} cx={1920} cy={keys(f, [[0, 1330], [175, 1300]])} s={s} fg="img/previews/spike_fg.webp" bg="img/previews/spike_bg.jpg" fgK={keys(f, [[0, 0], [175, 0.06]])} />
       <SlapTitle text="NOT IN THE PICTURE" x={100} y={890} size={100} at={12} />
-      <Tag text={SPIKE_TAG} x={44} y={30} />
+      <ScrimTag text={SPIKE_TAG} x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -49,12 +39,12 @@ const DeskPieces: React.FC<{t0: number; worker: number; map: number}> = ({t0, wo
       <TornPrint src={IMG.spike} size={SZ.spike} x={0} y={0} w={1150} at={-99} seed={3} corner={{at: 'br', x: 0.7, y: 0.58}} real grey shadow={5}
         tapes={[{x: -50, y: 30, w: 190, rot: -38}, {x: 1010, y: -6, w: 190, rot: 30}]} />
     </Lift>
-    <Lift x={1360} y={640} w={440} hgt={300} h={4} at={map} rot={3} blur={1.4} seed={5}>
+    <Lift x={1360} y={640} w={440} hgt={300} h={4} at={map} rot={3} blur={0.7} seed={5}>
       <MapCard x={0} y={0} w={440} h={300} src={IMG.warren} size={SZ.warren} fx={WARREN.promontory[0] + 20} fy={WARREN.promontory[1] + 40} scale={0.62} at={-99}
-        pin={WARREN.promontory} label="Promontory" labelAt={[228, 40]} caption="UTAH TERR. · 1869" />
+        pin={WARREN.promontory} label="Promontory" labelAt={[228, 40]} caption="UTAH TERR. · 1869" bright />
     </Lift>
     <Lift x={900} y={440} w={330} hgt={520} h={46} at={worker} seed={7}>
-      <CutOut src={WORKER} size={SZ.tunnel8} mask={SM.worker} place={{left: 10 - 519 * 0.95, top: 18 - 1291 * 0.95, scale: 0.95}} at={-99} tint={0.6} traceAt={worker + 6}
+      <CutOut src={WORKER} size={SZ.tunnel8} mask={SM.worker} place={{left: 10 - 519 * 0.95, top: 18 - 1291 * 0.95, scale: 0.95}} at={-99} tint={0.6} soft traceAt={worker + 6}
         filter="grayscale(1) contrast(1.15) brightness(1.2)" />
     </Lift>
   </>
@@ -72,7 +62,7 @@ const DeskReveal: React.FC = () => {
         <DeskPieces t0={a} worker={w} map={a + 10} />
       </Desk3D>
       <Note text="the men who built it" x={1270} y={130} size={50} rot={-3} at={w + 10} />
-      <Tag text="A. J. Russell, 1869 · Commons  ·  A. A. Hart, Heading of Tunnel No. 8, 1865–69 · LOC" x={44} y={30} />
+      <ScrimTag text="A. J. Russell, 1869 · Commons  ·  A. A. Hart, Heading of Tunnel No. 8, 1865–69 · LOC" x={34} y={24} />
     </AbsoluteFill>
   );
 };
@@ -104,7 +94,7 @@ const Bottles: React.FC = () => {
   const f = useCurrentFrame();
   const a = T.at('Men') - 1;
   return (
-    <PhotoCam src={IMG.spike} size={SZ.spike} cx={keys(f, [[a, 1850], [a + 85, 1680]])} cy={keys(f, [[a, 900], [a + 85, 940]])} s={zkeys(f, [[a, 1.1], [a + 85, 3.0]])}>
+    <PhotoCam src={IMG.spike} size={SZ.spike} cx={keys(f, [[a, 1850], [a + 85, 1680]])} cy={keys(f, [[a, 900], [a + 85, 940]])} s={zkeys(f, [[a, 1.0], [a + 85, 2.0]])}>
       {(S) => {
         const [bx, by] = S(1612, 925);
         return <Loop cx={bx} cy={by} rx={130} ry={190} at={T.at('bottles') - 2} seed={13} tilt={-8} width={6} />;
@@ -140,6 +130,22 @@ const DeskWide: React.FC = () => {
   );
 };
 
+/** Sound effects under the narration: whoosh on cuts and whips, stamp on title tapes and slap-ins, page turn as the print
+ * lands, marker ticks before every loop and note, a tick for the map card. */
+const Sounds: React.FC = () => {
+  const cut = (w: string, d = 1) => T.at(w) - d;
+  const sfx: [number, string, number][] = [
+    [12, 'stamp', 0.3],
+    [cut('And most'), 'whoosh', 0.3], [cut('And most') + 2, 'page_turn', 0.45], [cut('And most') + 10, 'tick', 0.4],
+    [T.at("aren't") - 2, 'stamp', 0.26], [T.at("aren't") + 8, WRITE.src.replace('sfx/', '').replace('.wav', ''), WRITE.volume],
+    [cut('Look at it') - 4, 'whoosh', 0.42], [T.at('Two locomotives') + 1, 'marker_tick', 0.2], [T.at('nose to nose') + 4, 'marker_tick', 0.2],
+    [cut('Men'), 'whoosh', 0.28], [T.at('bottles') - 4, 'marker_tick', 0.2],
+    [cut('Two engineers'), 'whoosh', 0.28], [T.at('Two engineers') + 2, 'marker_tick', 0.2],
+    [T.at('May') - 6, 'whoosh', 0.42], [T.at('May'), 'stamp', 0.3],
+  ];
+  return <>{sfx.map(([at, n, v], i) => <Sfx key={i} at={at} src={`sfx/${n}.wav`} volume={v} />)}</>;
+};
+
 const Body: React.FC = () => {
   const shots: [number, React.ReactNode, ('whip' | 'cut')?][] = [
     [0, <Wide />],
@@ -153,6 +159,7 @@ const Body: React.FC = () => {
     <AbsoluteFill style={{background: '#000'}}>
       <Shots shots={shots} />
       <Finish vignette={0.3} />
+      <Sounds />
       <Audio src={staticFile('audio/ch01_v4_onetake.mp3')} volume={(fr) => interpolate(fr, [P1_FRAMES - 14, P1_FRAMES - 1], [1, 0], clamp)} />
     </AbsoluteFill>
   );

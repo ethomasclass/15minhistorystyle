@@ -4,7 +4,8 @@
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
-import {type Place, Tint, Traced, useGFrame} from '../kit/Kit';
+import {Highlight, JF, type Place, Traced, useGFrame} from '../kit/Kit';
+import {SoftTint} from '../samples/kit';
 import type {MaskRef} from '../kit/maskref';
 
 export const ease = (t: number) => (t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t));
@@ -84,7 +85,7 @@ export const PhotoCam: React.FC<{src: string; size: [number, number]; cx: number
   return (
     <AbsoluteFill style={{background: '#0b0a08', overflow: 'hidden'}}>
       {fg && bg ? <>{img(bg, place)}{img(fg, fplace)}</> : img(src, place)}
-      {mask && tintAt !== undefined && g >= tintAt && <Tint mask={mask.alpha} place={place} size={size} strength={interpolate(g, [tintAt, tintAt + 5], [0, 1], clamp)} />}
+      {mask && tintAt !== undefined && g >= tintAt && <SoftTint mask={mask.alpha} place={place} size={size} strength={0.65 * interpolate(g, [tintAt, tintAt + 5], [0, 1], clamp)} />}
       {mask && traceAt !== undefined && <Traced paths={mask.data.shapes.subject} place={place} at={traceAt} dur={12} width={5} part={0.92} />}
       {children?.(S, place)}
       <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,${vignette}) 100%)`}} />
@@ -102,14 +103,14 @@ export const Desk3D: React.FC<{tilt: number; rotZ?: number; z?: number; x?: numb
   <AbsoluteFill style={{background: '#070605', overflow: 'hidden', perspective: 1700, perspectiveOrigin: '50% 30%'}}>
     <div style={{position: 'absolute', left: -DESK.ox, top: -DESK.oy, width: DESK.w, height: DESK.h, transformStyle: 'preserve-3d', transformOrigin: '50% 50%',
       transform: `translate(${x}px, ${y}px) scale(${z}) rotateX(${tilt}deg) rotateZ(${rotZ}deg)`}}>
-      <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 45%, #2b2721 0%, #17150f 60%, #0c0b08 100%)'}}>
+      <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 45%, #3a342b 0%, #221f19 60%, #13110d 100%)'}}>
         <div style={{position: 'absolute', inset: 0, opacity: 0.12, backgroundImage: 'linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)', backgroundSize: '100% 64px'}} />
         <Img src={staticFile('img/previews/tex_stains.png')} style={{position: 'absolute', left: 300, top: 150, width: 2100, height: 1200, mixBlendMode: 'multiply', opacity: 0.7}} />
       </div>
       {children}
     </div>
-    <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'soft-light', background: `radial-gradient(circle 760px at ${lamp[0]}px ${lamp[1]}px, rgba(255,214,160,0.75) 0%, rgba(255,200,140,0.25) 45%, transparent 100%)`}} />
-    <AbsoluteFill style={{pointerEvents: 'none', background: `radial-gradient(ellipse 1100px 760px at ${lamp[0]}px ${lamp[1]}px, transparent 40%, rgba(0,0,0,0.55) 100%)`}} />
+    <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'soft-light', background: `radial-gradient(circle 760px at ${lamp[0]}px ${lamp[1]}px, rgba(255,214,160,0.9) 0%, rgba(255,200,140,0.32) 45%, transparent 100%)`}} />
+    <AbsoluteFill style={{pointerEvents: 'none', background: `radial-gradient(ellipse 1100px 760px at ${lamp[0]}px ${lamp[1]}px, transparent 45%, rgba(0,0,0,0.4) 100%)`}} />
   </AbsoluteFill>
 );
 
@@ -134,5 +135,29 @@ export const Lift: React.FC<{x: number; y: number; w: number; hgt: number; h?: n
         {children}
       </div>
     </>
+  );
+};
+
+/** Source tag on a dark scrim so it stays readable over bright photos. */
+export const ScrimTag: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 34, y = 1026}) => (
+  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.9)', textTransform: 'uppercase',
+    background: 'rgba(8,7,5,0.72)', padding: '4px 10px', whiteSpace: 'nowrap'}}>{text}</div>
+);
+
+/**
+ * A torn-tape title that slaps down (130% -> 100% with overshoot) and is revealed only where its tape has wiped on,
+ * so the letters never float over a busy picture before the tape is under them.
+ */
+export const SlapTitle: React.FC<{text: string; x: number; y: number; size: number; at: number; seed?: number; rot?: number}> = ({text, x, y, size, at, seed = 21, rot = -2}) => {
+  const s = useSlap(at, 1.35);
+  const g = useGFrame();
+  if (!s.on) return null;
+  const wipe = interpolate(g, [at, at + 8], [0, 1], clamp);
+  const w = text.length * size * 0.62 + size * 0.44; // a little under the real box, so the tape stays ahead of the letters
+  return (
+    <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${s.scale})`, transformOrigin: `${x + w / 2}px ${y + size / 2}px`,
+      clipPath: wipe < 1 ? `polygon(0 0, ${x + w * wipe}px 0, ${x + w * wipe}px 1080px, 0 1080px)` : undefined}}>
+      <Highlight text={text} x={x} y={y} size={size} at={at} seed={seed} rot={rot} />
+    </div>
   );
 };
