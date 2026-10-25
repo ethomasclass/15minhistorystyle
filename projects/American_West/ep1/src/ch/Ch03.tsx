@@ -28,7 +28,6 @@ const HOW: [number, number] = [1920, 1097];
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference); lines from town control points, approx.';
 const CROCKER_TAG = 'Silas Selleck, Charles Crocker, c. 1865–75 · Wikimedia Commons';
 const LAB_TAG = 'A. A. Hart, Laborers and Rocks, near Summit Tunnel, c. 1866–67 (CPRR stereo no. 118) · Library of Congress';
-const HOW_TAG = 'Illustration (AI lithograph): a rolling tent town on the Union Pacific line, late 1860s';
 const CORAL = '#FF6F61';
 
 /** 1 · "The Central Pacific had the harder start": the map, Sacramento, the mountains just east. */
@@ -242,7 +241,6 @@ const Pay: React.FC<{close?: boolean}> = ({close}) => {
 };
 
 const STREAM: [number, number] = [1920, 1077];
-const STREAM_TAG = 'Illustration (AI lithograph): a Sierra stream beside the grade · barrel and kettle: illustration (AI lithograph)';
 /** The tea barrel (AI-lithograph prop, cut out): the one coral subject of the tea beat. */
 const Barrel: React.FC<{x: number; y: number; s: number; at: number; tint?: boolean}> = ({x, y, s, at: t0, tint = true}) => (
   <CutOut src="img/ch03/ai_tea_barrel_w.jpg" size={[1344, 768]} mask={M3.teaBarrel} place={{left: x, top: y, scale: s}} at={t0} tint={tint ? 0.5 : 0} soft traceAt={tint ? t0 + 6 : undefined}
@@ -262,7 +260,6 @@ const Tea: React.FC<{phase: 0 | 1 | 2}> = ({phase}) => {
         <PhotoCam src="img/ch03/ai_sierra_stream.jpg" size={STREAM} cx={keys(f, [[s, 900], [q, 1060]])} cy={600} s={zkeys(f, [[s, 1.05], [q, 1.18]])} bw="saturate(0.5) contrast(1.05) brightness(0.9)" />
         <Mono text="WHITE CREWS" x={110} y={100} size={28} at={s + 2} />
         <Note text="straight from the streams" x={120} y={170} size={60} rot={-3} at={at('streams') - 6} />
-        <ScrimTag text={STREAM_TAG} />
       </AbsoluteFill>
     );
   }
@@ -288,7 +285,6 @@ const Tea: React.FC<{phase: 0 | 1 | 2}> = ({phase}) => {
         <Hand parts={[['who got sick less often?', '#ffffff']]} x={480} y={90} size={74} at={at('Guess') - 2} dur={14} />
         <Loop cx={420} cy={560} rx={330} ry={250} at={at('less often') + 6} seed={71} tilt={-4} width={6} />
       </>}
-      <ScrimTag text={STREAM_TAG} />
     </AbsoluteFill>
   );
 };
@@ -350,7 +346,6 @@ const Hell: React.FC<{close?: boolean}> = ({close}) => {
         <SlapTitle text="“HELL ON WHEELS”" x={110} y={90} size={110} at={at('Hell') + 1} seed={59} />
         <Note text="(says it all)" x={140} y={260} size={56} rot={-3} at={at('tells you') - 2} color="#ffffff" />
       </>}
-      <ScrimTag text={HOW_TAG} x={34} y={1026} />
     </AbsoluteFill>
   );
 };
@@ -397,7 +392,7 @@ const Ending: React.FC<{mountain?: boolean}> = ({mountain}) => {
         : <Ribbon fx={keys(f, [[a, RX(1500)], [m, RX(1350)]])} tilt={keys(f, [[a, 62], [m, 58]])} spin={keys(f, [[a, 10], [m, 6]])} z={zkeys(f, [[a, 1.15], [m, 1.25]])} dy={110} lit={lit} cpMi={6} upMi={1300} />}
       {!mountain && <Note text="the Union Pacific: the Plains" x={110} y={110} size={60} rot={-3} at={at('had the Plains') - 2} />}
       {mountain && <Hand parts={[['the Central Pacific: '], ['a mountain', CORAL]]} x={110} y={100} size={80} at={at('a mountain') - 2} />}
-      <ScrimTag text="Elevations approx., heights exaggerated · ridges and engines: illustration (AI lithograph)" />
+      <ScrimTag text="Elevations approx., heights exaggerated" />
     </AbsoluteFill>
   );
 };

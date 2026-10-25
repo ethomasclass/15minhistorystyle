@@ -397,7 +397,7 @@ const LoansWide: React.FC = () => {
       <Hand parts={[['+ loans: '], ['government bonds', '#ffffff']]} x={110} y={80} size={66} at={at('loans') - 2} />
       <Bonds at={at('bonds') - 2} />
       <BondKey ats={[lit[0], lit[1], lit[2]]} y={230} />
-      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11 · ridges, engines, bonds: illustration (AI lithograph)" />
+      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11" />
     </AbsoluteFill>
   );
 };
@@ -423,7 +423,7 @@ const Mountains: React.FC = () => {
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <BondKey ats={[-99, -99, -99]} y={60} />
       <Hand parts={[['mountain miles paid '], ['3×', '#FF6F61']]} x={1080} y={850} size={70} at={at('three times') - 2} />
-      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11 · ridges and engines: illustration (AI lithograph)" />
+      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11" />
     </AbsoluteFill>
   );
 };
@@ -470,7 +470,7 @@ const Race: React.FC = () => {
       <Ribbon fx={keys(f, [[a, X2(820)], [END + 60, X2(760)]])} tilt={keys(f, [[a, 56], [END + 60, 60]])} spin={keys(f, [[a, 6], [END + 60, 2]])} z={zkeys(f, [[a, 1.15], [END + 60, 0.95]])} dy={60} lit={lit}
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <SlapTitle text="THE RACE" x={110} y={80} size={130} at={at('race')} seed={45} />
-      <ScrimTag text="Elevations approx., heights exaggerated · ridges and engines: illustration (AI lithograph)" />
+      <ScrimTag text="Elevations approx., heights exaggerated" />
     </AbsoluteFill>
   );
 };
