@@ -112,7 +112,9 @@ def poly_d(rs):
     for ring in rs:
         if not any(near(p) for p in ring):
             continue
-        pts = clip(dp([px(*p) for p in ring if near(p)], TOL))
+        raw = [px(*p) for p in ring if near(p)]
+        m = len(raw) // 2
+        pts = clip(dp(raw[:m + 1], TOL) + dp(raw[m:], TOL)[1:])  # a closed ring: simplify its two halves
         if len(pts) >= 3:
             out.append("M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) + " Z")
     return " ".join(out)

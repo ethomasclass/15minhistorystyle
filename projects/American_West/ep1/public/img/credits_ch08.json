@@ -52,5 +52,21 @@
     "date": "1865-01-01",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Jay_Cooke_during_Civil_War.png"
+  },
+  "ch08/panic_nassau_broad_1873.jpg": {
+    "title": "The great financial panic - intersection of Nassau and Broad Streets with Wall Street view of the Sub-Treasury, Jay Cooke & Co's Bank and the Western Union Telegraph Office from the Drexel Building on Sept. 19, 1873",
+    "artist": "",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005694776/",
+    "source": "loc:2005694776"
+  },
+  "ch08/panic_broad_st_1873.jpg": {
+    "title": "The Great Financial Panic - View in Broad St., near the Stock Exchange, on Saturaday noon, Sept. 20th, after the closing of the Exchange doors",
+    "artist": "",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004678736/",
+    "source": "loc:2004678736"
   }
 }

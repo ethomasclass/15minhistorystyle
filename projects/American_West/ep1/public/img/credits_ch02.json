@@ -21,5 +21,26 @@
     "date": "1862-05-20/1862-05-20",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Act_of_May_20,_1862_(Homestead_Act),_Public_Law_37-64_(12_STAT_392)._-_DPLA_-_59415c21d56256f5d118a7be2e4ea92b_(page_1).jpg"
+  },
+  "ch02/soule_arapaho_camp_1870.jpg": {
+    "title": "File:Arapaho camp with buffalo meat drying near Fort Dodge, Kansas, 1870 - NARA - 518892.jpg",
+    "artist": "William S. Soule",
+    "date": "1870date QS:P571,+1870-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Arapaho_camp_with_buffalo_meat_drying_near_Fort_Dodge,_Kansas,_1870_-_NARA_-_518892.jpg"
+  },
+  "ch02/morrill_act_p1.jpg": {
+    "title": "File:Morrill Act - First Page.jpg",
+    "artist": "37th Congress of the U.S.",
+    "date": "1862-07-02",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Morrill_Act_-_First_Page.jpg"
+  },
+  "ch02/richmond_ruins_1865.jpg": {
+    "title": "File:Ruins of Richmond, Va., April 1865 - NARA - 529221.jpg",
+    "artist": "Mathew Benjamin Brady",
+    "date": "between circa 1860 and circa 1865date QS:P571,+1860-00-00T00:00:00Z/8,P1319,+1860-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Ruins_of_Richmond,_Va.,_April_1865_-_NARA_-_529221.jpg"
   }
 }

@@ -28,5 +28,29 @@
     "date": "between 1860 and 1875date QS:P,+1850-00-00T00:00:00Z/7,P1319,+1860-00-00T00:00:00Z/9,P1326,+1875-00-00T00:00:00Z/9",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Orville_E._Babcock_-_Brady-Handy.jpg"
+  },
+  "ch07/whiskey_ring_trial_1876.jpg": {
+    "title": "Missouri--The great Whisky Ring trial--Scene in the United States District Court, St. Louis, Monday, February 7th, at the opening of the case of the United States vs. O.E. Babcock, President Grant's private secretary. Mr. E.A. Storrs, one of General Babcock's counsel, asking that the trial be deferred until Tuesday, February 8th / from sketches by E. Jump and Harry Ogden.",
+    "artist": "",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/90711830/",
+    "source": "loc:90711830"
+  },
+  "ch07/sun_1872_09_04_p1.jpg": {
+    "title": "The Sun (New York), September 4, 1872, page 1: \"The King of Frauds. How the Credit Mobilier Bought its Way Through Congress\"",
+    "artist": "The Sun",
+    "date": "1872-09-04",
+    "licence": "Public domain (published 1872); Chronicling America, no known restrictions",
+    "page": "https://www.loc.gov/resource/sn83030272/1872-09-04/ed-1/?sp=1",
+    "source": "loc:sn83030272/1872-09-04/ed-1/seq-1 (IIIF full, resized to 3134 px)"
+  },
+  "ch07/poland_report_1873_p_most_good.jpg": {
+    "title": "Report of the Select Committee to Investigate the Alleged Credit Mobilier Bribery (Poland Committee), 1873, page iv",
+    "artist": "U.S. House of Representatives",
+    "date": "1873",
+    "licence": "Public domain (U.S. government work, 1873)",
+    "page": "https://archive.org/details/cu31924062620236/page/n7",
+    "source": "iabook:cu31924062620236:7"
   }
 }
