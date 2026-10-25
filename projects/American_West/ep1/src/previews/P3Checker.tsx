@@ -4,10 +4,11 @@
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
-import {boxOf, Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame} from '../kit/Kit';
+import {boxOf, Finish, JF, Note, PALETTES, PaletteCtx, StepCtx, useGFrame} from '../kit/Kit';
 import {sectionNo, TornPrint} from '../samples/kit';
 import {IMG, SZ} from '../samples/masks';
-import {Desk3D, keys, Lift, shake, Shots, useSlap, zkeys} from './fx';
+import {Desk3D, keys, Lift, ScrimTag, shake, Shots, SlapTitle, useSlap, zkeys} from './fx';
+import {Sfx} from '../kit/common';
 
 export const P3_FRAMES = 360;
 const PAL = PALETTES.locked;
@@ -40,11 +41,27 @@ const Slab: React.FC<{r: number; c: number; at: number}> = ({r, c, at}) => {
   );
 };
 
-const Township: React.FC = () => {
+/** The coral line, drawn in its own 3D layer painted after the township so the rising slabs can never hide it. */
+const Rail: React.FC = () => {
   const g = useGFrame();
   const W = COLS * CELL;
   const Hh = ROWS * CELL;
   const railP = interpolate(g, [RAIL0, RAIL0 + COLS * PER], [0, 1], clamp);
+  return (
+      <svg width={W} height={Hh} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(34px)'}}>
+        {railP > 0 && <>
+          {Array.from({length: Math.floor((W * railP) / 22)}).map((_, i) => <line key={i} x1={10 + i * 22} y1={RAIL_ROW * CELL - 14} x2={10 + i * 22} y2={RAIL_ROW * CELL + 14} stroke={PAL.subject} strokeWidth={4} />)}
+          <line x1={0} y1={RAIL_ROW * CELL} x2={W * railP} y2={RAIL_ROW * CELL} stroke="#050403" strokeWidth={16} />
+          <line x1={0} y1={RAIL_ROW * CELL} x2={W * railP} y2={RAIL_ROW * CELL} stroke={PAL.subject} strokeWidth={9} strokeLinecap="round" />
+        </>}
+      </svg>
+  );
+};
+
+const Township: React.FC = () => {
+  const g = useGFrame();
+  const W = COLS * CELL;
+  const Hh = ROWS * CELL;
   const grid = interpolate(g, [0, 10], [0, 1], clamp);
   return (
     <>
@@ -59,13 +76,6 @@ const Township: React.FC = () => {
           return n % 2 === 0 ? <text key={i} x={c * CELL + CELL / 2} y={r * CELL + CELL / 2 + 8} textAnchor="middle" fontFamily={JF.mono} fontSize={22} fill="rgba(47,224,196,0.6)">{n}</text> : null;
         })}
       </svg>
-      <svg width={W} height={Hh} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(30px)'}}>
-        {railP > 0 && <>
-          {Array.from({length: Math.floor((W * railP) / 22)}).map((_, i) => <line key={i} x1={10 + i * 22} y1={RAIL_ROW * CELL - 14} x2={10 + i * 22} y2={RAIL_ROW * CELL + 14} stroke={PAL.subject} strokeWidth={4} />)}
-          <line x1={0} y1={RAIL_ROW * CELL} x2={W * railP} y2={RAIL_ROW * CELL} stroke="#050403" strokeWidth={16} />
-          <line x1={0} y1={RAIL_ROW * CELL} x2={W * railP} y2={RAIL_ROW * CELL} stroke={PAL.subject} strokeWidth={9} strokeLinecap="round" />
-        </>}
-      </svg>
       {Array.from({length: ROWS * COLS}).map((_, i) => {
         const r = Math.floor(i / COLS);
         const c = i % COLS;
@@ -73,16 +83,6 @@ const Township: React.FC = () => {
         return n % 2 === 1 ? <Slab key={i} r={r} c={c} at={RAIL0 + c * PER + 3 + Math.abs(r - RAIL_ROW + 0.5) * 2} /> : null;
       })}
     </>
-  );
-};
-
-const SlapTitle: React.FC<{text: string; x: number; y: number; size: number; at: number; seed: number}> = ({text, x, y, size, at, seed}) => {
-  const s = useSlap(at, 1.35);
-  if (!s.on) return null;
-  return (
-    <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${s.scale})`, transformOrigin: `${x + 300}px ${y + 50}px`}}>
-      <Highlight text={text} x={x} y={y} size={size} at={at} seed={seed} rot={-2} />
-    </div>
   );
 };
 
@@ -104,10 +104,12 @@ const ShotTownship: React.FC = () => {
   const Hh = ROWS * CELL;
   return (
     <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #2a2620 0%, #15130f 65%, #0a0907 100%)', perspective: 1500, perspectiveOrigin: '50% 30%', overflow: 'hidden'}}>
-      <div style={{position: 'absolute', left: 960 - W / 2, top: 500 - Hh / 2, width: W, height: Hh, transformStyle: 'preserve-3d', transformOrigin: '50% 50%',
-        transform: `scale(${zkeys(f, [[0, 0.86], [170, 1.0]])}) rotateX(${keys(f, [[0, 58], [170, 52]])}deg) rotateZ(${keys(f, [[0, -26], [170, -12]])}deg)`}}>
-        <Township />
-      </div>
+      {[<Township key="t" />, <Rail key="r" />].map((layer) => (
+        <div key={layer.key} style={{position: 'absolute', left: 960 - W / 2, top: 500 - Hh / 2, width: W, height: Hh, transformStyle: 'preserve-3d', transformOrigin: '50% 50%',
+          transform: `scale(${zkeys(f, [[0, 0.86], [170, 1.0]])}) rotateX(${keys(f, [[0, 58], [170, 52]])}deg) rotateZ(${keys(f, [[0, -26], [170, -12]])}deg)`}}>
+          {layer}
+        </div>
+      ))}
       <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'soft-light', background: 'radial-gradient(circle 800px at 960px 480px, rgba(255,214,160,0.6) 0%, transparent 100%)'}} />
       <SlapTitle text="LAND GRANT" x={110} y={70} size={100} at={8} seed={31} />
       <Note text="every odd section → the railroad" x={120} y={220} size={48} rot={-3} at={RAIL0 + 40} />
@@ -124,8 +126,9 @@ const LINES: Box[] = [
 ];
 const PAGE_W = 900;
 const PAGE_H = PAGE_W * (SZ.act[1] / SZ.act[0]);
-/** where "every" starts on line 1 (fraction of page width; measured on the scan) */
+/** where "every" starts on line 1, and where "odd numbers," ends on line 2 (fractions of page width; measured on the scan) */
 const EVERY_X = 0.388;
+const ODD_END_X = 0.39;
 
 /** The page lying on the desk: focus pull to the two lines, then the coral swipe along them. */
 const ActPage: React.FC<{pullAt: number; swipeAt: number}> = ({pullAt, swipeAt}) => {
@@ -137,7 +140,8 @@ const ActPage: React.FC<{pullAt: number; swipeAt: number}> = ({pullAt, swipeAt})
   const segs = LINES.map((l, i) => {
     const [ymin, xmin, ymax, xmax] = l.box_2d.map((v) => v / 1000);
     const x0 = i === 0 ? EVERY_X : xmin;
-    return {x: x0 * PAGE_W, y: ymin * PAGE_H, w: (xmax - x0) * PAGE_W, h: (ymax - ymin) * PAGE_H};
+    const x1 = i === 1 ? ODD_END_X : xmax;
+    return {x: x0 * PAGE_W, y: ymin * PAGE_H, w: (x1 - x0) * PAGE_W, h: (ymax - ymin) * PAGE_H};
   });
   const total = segs.reduce((a, s) => a + s.w, 0);
   const sp = interpolate(g, [swipeAt, swipeAt + 12], [0, 1], clamp) * total;
@@ -174,18 +178,27 @@ const ShotAct: React.FC = () => {
           <ActPage pullAt={a + 40} swipeAt={a + 62} />
         </Lift>
       </Desk3D>
-      <SlapTitle text="EVERY ALTERNATE SECTION" x={110} y={60} size={72} at={a + 20} seed={33} />
+      <SlapTitle text="EVERY ALTERNATE SECTION" x={110} y={60} size={72} at={a + 38} seed={33} />
       <Note text="odd numbers: the railroad's" x={1080} y={860} size={50} rot={-3} at={a + 90} />
-      <Tag text="Pacific Railway Act, 1862, Sec. 3 (Senate Mis. Doc. 108, p. 4) · Library of Congress" x={44} y={1036} />
+      <ScrimTag text="Pacific Railway Act, 1862, Sec. 3 (Senate Mis. Doc. 108, p. 4) · Library of Congress" />
     </AbsoluteFill>
   );
 };
+
+/** Gentle sfx: a quiet stamp on titles, a soft block tap per column of rising slabs, a soft whip, the page landing, marker ticks. */
+const SOUNDS: [number, string, number][] = [
+  [8, 'stamp', 0.22],
+  ...Array.from({length: COLS}).map((_, c) => [RAIL0 + c * PER + 3, 'block_tap_soft', c % 2 ? 0.1 : 0.14] as [number, string, number]),
+  [RAIL0 + 38, 'marker_tick', 0.2], [166, 'whip_soft', 0.25], [173, 'paper_slap_soft', 0.25], [176, 'page_turn', 0.25],
+  [208, 'stamp', 0.22], [232, 'marker_tick', 0.16], [258, 'marker_tick', 0.2],
+];
 
 export const P3Checker: React.FC = () => (
   <PaletteCtx.Provider value={PAL}>
     <StepCtx.Provider value={2.5}>
       <AbsoluteFill style={{background: '#000'}}>
         <Shots shots={[[0, <ShotTownship />], [170, <ShotAct />, 'whip']]} />
+        {SOUNDS.map(([at, n, v], i) => <Sfx key={i} at={at} src={`sfx/${n}.wav`} volume={v} />)}
         <Finish vignette={0.3} />
       </AbsoluteFill>
     </StepCtx.Provider>

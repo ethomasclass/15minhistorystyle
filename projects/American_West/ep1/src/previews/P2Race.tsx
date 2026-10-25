@@ -2,7 +2,7 @@
 // Elevations are approximate control points (not a DEM); the Pacific Railway Act's bond rates light up along the route
 // ($16,000 / $32,000 / $48,000 a mile, Sec. 11); two engine cut-outs crawl toward Promontory.
 import React from 'react';
-import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {Finish, JF, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, useHand} from '../kit/Kit';
 import {Sfx} from '../kit/common';
@@ -40,8 +40,11 @@ const ZONES: [number, number, number][] = [[0, 7, 16], [7, 157, 48], [157, 1110,
 const zoneColor = (k: number) => (k === 48 ? PAL.subject : k === 32 ? 'rgba(47,224,196,0.55)' : 'rgba(47,224,196,0.22)');
 
 /** A vertical plane standing on the route line at depth `y` (world px; + is nearer the camera). */
-const Upright: React.FC<{y: number; children: React.ReactNode; w?: number}> = ({y, children, w = MI * XS}) => (
-  <div style={{position: 'absolute', left: 0, top: y - H, width: w, height: H, transformOrigin: '50% 100%', transform: 'rotateX(-90deg)'}}>{children}</div>
+const Upright: React.FC<{y: number; children: React.ReactNode; w?: number; extra?: number}> = ({y, children, w = MI * XS, extra = 0}) => (
+  // `extra` makes the plane taller upward so content above the profile (labels) stays inside the layer's bounds
+  <div style={{position: 'absolute', left: 0, top: y - H - extra, width: w, height: H + extra, transformOrigin: '50% 100%', transform: 'rotateX(-90deg)'}}>
+    <div style={{position: 'absolute', left: 0, top: extra, width: w, height: H}}>{children}</div>
+  </div>
 );
 
 const profilePath = (close: boolean) => {
@@ -83,7 +86,7 @@ const World: React.FC<{lit: number[]; prog: number; fx: number; z: number}> = ({
           transform: `translateZ(${on * 2}px)`, borderLeft: '2px solid rgba(47,224,196,0.6)'}} />;
       })}
       {/* litho backdrops behind the two mountain sections */}
-      <Upright y={-70} w={X(MI)}>
+      <Upright y={-70} w={X(MI)} extra={200}>
         {/* cut-out ridgelines (AI lithograph, transparent sky, feathered base) standing just behind the ribbon */}
         <Img src={staticFile('img/previews/ridge_sierra_a_cut.png')} style={{position: 'absolute', left: X(-60), top: H - 300, width: 640, height: 640 * 646 / 1374, opacity: 0.9, filter: 'saturate(0.75) brightness(0.9)'}} />
         <Img src={staticFile('img/previews/ridge_wyoming_a_cut.png')} style={{position: 'absolute', left: X(1040), top: H - 250 - 40, width: 560, height: 560 * 646 / 1374, opacity: 0.9, filter: 'saturate(0.75) brightness(0.9)'}} />
@@ -109,10 +112,10 @@ const World: React.FC<{lit: number[]; prog: number; fx: number; z: number}> = ({
           <path d={LINE} fill="none" stroke={PAL.mark} strokeWidth={5} strokeLinejoin="round" />
         </svg>
       </Upright>
-      <Upright y={22}>
+      <Upright y={22} extra={240}>
         {PTS.filter((p) => p[2]).map(([mi, ft, name]) => (
-          <div key={name} style={{position: 'absolute', left: X(mi) - 10, top: Y(mi) - 150, whiteSpace: 'nowrap', opacity: labelOp(X(mi) + 120), textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>
-            <div style={{fontFamily: hand.family, fontSize: 30 * hand.scale, color: PAL.mark, transform: 'rotate(-4deg)'}}>{name}</div>
+          <div key={name} style={{position: 'absolute', left: Math.max(6, X(mi) - 10), top: Y(mi) - 150, whiteSpace: 'nowrap', opacity: labelOp(X(mi) + 120), textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>
+            <div style={{fontFamily: hand.family, fontSize: 30 * hand.scale, color: PAL.mark}}>{name}</div>
             <div style={{fontFamily: JF.mono, fontSize: 16, letterSpacing: 2, color: '#fff'}}>{ft.toLocaleString('en-US')} FT</div>
           </div>
         ))}
@@ -187,9 +190,9 @@ const ShotMeet: React.FC = () => {
 };
 
 const SOUNDS: [number, string, number][] = [
-  [6, 'stamp', 0.3], [28, 'marker_tick', 0.2], [146, 'whoosh', 0.4],
-  [168, 'tick', 0.4], [192, 'tick', 0.4], [216, 'stamp', 0.22], [234, 'marker_tick', 0.2],
-  [300, 'whoosh', 0.28], [328, 'marker_tick', 0.2], [418, 'stamp', 0.32],
+  [6, 'stamp', 0.22], [28, 'marker_tick', 0.2], [146, 'whip_soft', 0.25],
+  [168, 'block_tap_soft', 0.15], [192, 'block_tap_soft', 0.15], [216, 'block_tap_soft', 0.18], [234, 'marker_tick', 0.2],
+  [300, 'whip_soft', 0.14], [328, 'marker_tick', 0.2], [418, 'stamp', 0.22], [421, 'spike_tap_distant', 0.15],
 ];
 
 export const P2Race: React.FC = () => {
@@ -201,6 +204,7 @@ export const P2Race: React.FC = () => {
           <Shots shots={[[0, <ShotWide />], [150, <ShotBonds />, 'whip'], [300, <ShotMeet />, 'cut']]} />
           {f < 150 && <SlapTitle text="THE RACE" x={110} y={80} size={110} at={6} seed={45} />}
           <SlapTitle text="PROMONTORY, 1869" x={1180} y={870} size={70} at={418} seed={57} />
+          <Audio src={staticFile('sfx/train_distant.wav')} loop volume={(fr) => interpolate(fr, [0, 30, P2_FRAMES - 40, P2_FRAMES - 1], [0, 0.1, 0.1, 0], clamp)} />
           {SOUNDS.map(([at, n, v], i) => <Sfx key={i} at={at} src={`sfx/${n}.wav`} volume={v} />)}
           <ScrimTag text="Elevations approx., heights exaggerated · ridges and engines: illustration (AI lithograph)" />
           <Finish vignette={0.3} />

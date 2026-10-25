@@ -130,18 +130,19 @@ const DeskWide: React.FC = () => {
   );
 };
 
-/** Sound effects under the narration: whoosh on cuts and whips, stamp on title tapes and slap-ins, page turn as the print
- * lands, marker ticks before every loop and note, a tick for the map card. */
+/** Gentle sound effects under the narration (felt more than heard): soft whips on cuts, a soft paper slap and tape press as
+ * the print and the worker land, a card slide for the map card, marker ticks before loops and notes, a quiet stamp on titles. */
 const Sounds: React.FC = () => {
   const cut = (w: string, d = 1) => T.at(w) - d;
   const sfx: [number, string, number][] = [
-    [12, 'stamp', 0.3],
-    [cut('And most'), 'whoosh', 0.3], [cut('And most') + 2, 'page_turn', 0.45], [cut('And most') + 10, 'tick', 0.4],
-    [T.at("aren't") - 2, 'stamp', 0.26], [T.at("aren't") + 8, WRITE.src.replace('sfx/', '').replace('.wav', ''), WRITE.volume],
-    [cut('Look at it') - 4, 'whoosh', 0.42], [T.at('Two locomotives') + 1, 'marker_tick', 0.2], [T.at('nose to nose') + 4, 'marker_tick', 0.2],
-    [cut('Men'), 'whoosh', 0.28], [T.at('bottles') - 4, 'marker_tick', 0.2],
-    [cut('Two engineers'), 'whoosh', 0.28], [T.at('Two engineers') + 2, 'marker_tick', 0.2],
-    [T.at('May') - 6, 'whoosh', 0.42], [T.at('May'), 'stamp', 0.3],
+    [12, 'stamp', 0.22],
+    [cut('And most'), 'whip_soft', 0.16], [cut('And most') + 3, 'paper_slap_soft', 0.25], [cut('And most') + 6, 'tape_press', 0.18],
+    [cut('And most') + 11, 'card_slide_soft', 0.2],
+    [T.at("aren't") + 1, 'paper_slap_soft', 0.25], [T.at("aren't") + 8, 'marker_tick', 0.2],
+    [cut('Look at it') - 4, 'whip_soft', 0.25], [T.at('Two locomotives') + 1, 'marker_tick', 0.2], [T.at('nose to nose') + 4, 'marker_tick', 0.2],
+    [cut('Men'), 'whip_soft', 0.12], [T.at('bottles') - 4, 'marker_tick', 0.2],
+    [cut('Two engineers'), 'whip_soft', 0.12], [T.at('Two engineers') + 2, 'marker_tick', 0.2],
+    [T.at('May') - 6, 'whip_soft', 0.25], [T.at('May'), 'stamp', 0.22],
   ];
   return <>{sfx.map(([at, n, v], i) => <Sfx key={i} at={at} src={`sfx/${n}.wav`} volume={v} />)}</>;
 };
