@@ -69,3 +69,9 @@ From `review/ai_tests/litho/L1_tunnel_face__medium.jpg` (prompt in `review/ai_te
 `prop_lantern` (came out looking like a later kerosene lantern):
 
 > Object study: an 1860s railroad worker's hand lantern, tin frame with a wire guard and a glass globe, a carrying ring on top, unlit.
+
+## ai_house.png (added by the coordinator, on the user's suggestion)
+`review/ai_ch04_house/gen.py` → `house_cut_a` (Gemini 2.5 Flash Image, lithograph style, white background), cut out with rembg,
+weathered `--preset light`. Replaces the drawn outline house in scene 9 ("Snow deeper than the buildings"); the snow is now teal
+hatching rising past the roof. Alternates kept in `review/ai_ch04_house/`: `house_cut_b` (log section house), `house_buried`
+(a camp buried to the roofs, 16:9 plate).

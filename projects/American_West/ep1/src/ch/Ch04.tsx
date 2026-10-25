@@ -3,7 +3,7 @@
 // "The pay didn't change." Sources: Hart stereographs (LOC TIFF masters), the Placer Herald of July 6, 1867 (LOC,
 // Chronicling America; line positions from its ALTO OCR), Crocker by Silas Selleck (Commons), lithograph plates and props.
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch04_the_mountain.words.json';
 import {clamp} from '../lib/anim';
 import {JF, Loop, Note, PALETTES, PaletteCtx, useGFrame, useHand, usePal} from '../kit/Kit';
@@ -276,29 +276,50 @@ const Storms: React.FC = () => {
   );
 };
 
-/** 9 · "Snow deeper than the buildings": a drawn camp building and the snow rising past its roof. */
+/** 9 · "Snow deeper than the buildings": a camp bunkhouse (lithograph cut-out) and the snow rising past its roof,
+ *  until only the stovepipe shows. */
+const HOUSE = {src: 'img/ch04/ai_house.png', w: 879, h: 641};
 const SnowDepth: React.FC = () => {
   const g = useGFrame();
   const pal = usePal();
   const a = at('Snow deeper') - 1;
   const rise = interpolate(g, [a + 6, at('buildings') + 10], [0, 1], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 2)});
   const ground = 860;
-  const top = ground - rise * 480;
-  const wave = Array.from({length: 33}).map((_, i) => `${i * 60},${(top + Math.sin(i * 0.9) * 10).toFixed(1)}`).join(' L');
+  const hw = 760, hh = Math.round((hw * HOUSE.h) / HOUSE.w);
+  const top = ground - rise * (hh - 40);
+  const wave = Array.from({length: 33}).map((_, i) => `${i * 60},${(top + Math.sin(i * 0.9) * 10 + Math.sin(i * 2.3) * 4).toFixed(1)}`).join(' L');
   return (
     <DeskCam k={[[a, 6, 1.0, 0, 0, 0], [at('Crews dug'), 6, 1.06, 0, 30, 0]]}>
-      <svg style={{position: 'absolute', left: 400, top: 300, overflow: 'visible'}} width={1920} height={1080}>
-        {/* the building: plank walls, roof, stovepipe */}
-        <g stroke={pal.mark} strokeWidth={6} fill="rgba(0,0,0,0.3)" strokeLinejoin="round">
-          <path d={`M640,${ground} L640,${ground - 260} L960,${ground - 420} L1280,${ground - 260} L1280,${ground} Z`} />
-          <path d={`M1120,${ground - 340} L1120,${ground - 450} L1160,${ground - 450} L1160,${ground - 320}`} fill="none" />
-          <rect x={760} y={ground - 200} width={120} height={200} fill="none" />
-          <rect x={1040} y={ground - 210} width={120} height={90} fill="none" />
-        </g>
-        {rise > 0 && <path d={`M0,${ground + 20} L0,${top} L${wave} L1920,${top} L1920,${ground + 20} Z`} fill="rgba(237,231,220,0.55)" stroke="#f4efe6" strokeWidth={4} />}
-        <line x1={0} y1={ground} x2={1920} y2={ground} stroke={pal.mark} strokeWidth={3} opacity={0.6} />
-      </svg>
-      <div style={{position: 'absolute', left: 400 + 1380, top: 300 + 330, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#f4efe6', whiteSpace: 'nowrap', opacity: rise > 0.9 ? 1 : 0,
+      <div style={{position: 'absolute', left: 400, top: 300, width: 1920, height: 1080}}>
+        {/* contact shadow, then the bunkhouse */}
+        <div style={{position: 'absolute', left: 580, top: ground - 18, width: hw + 40, height: 36, borderRadius: '50%',
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.6), rgba(0,0,0,0) 70%)'}} />
+        <img src={staticFile(HOUSE.src)} style={{position: 'absolute', left: 600, top: ground - hh, width: hw, height: hh, filter: 'saturate(0.7) brightness(0.92)'}} />
+        <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
+          <defs>
+            {/* snow as a drawn diagram: teal hatching over a dark wash, so the house stays faintly visible under it */}
+            <pattern id="c4hatch" patternUnits="userSpaceOnUse" width={22} height={22} patternTransform="rotate(-35)">
+              <line x1={0} y1={0} x2={0} y2={22} stroke={pal.mark} strokeWidth={2.4} strokeOpacity={0.55} />
+            </pattern>
+            <linearGradient id="c4fade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stopColor="#fff" stopOpacity={0} />
+              <stop offset="0.12" stopColor="#fff" stopOpacity={1} />
+              <stop offset="0.88" stopColor="#fff" stopOpacity={1} />
+              <stop offset="1" stopColor="#fff" stopOpacity={0} />
+            </linearGradient>
+            <mask id="c4mask"><rect x={0} y={0} width={1920} height={1200} fill="url(#c4fade)" /></mask>
+          </defs>
+          {rise > 0 && (
+            <g mask="url(#c4mask)">
+              <path d={`M0,${ground + 6} L0,${top} L${wave} L1920,${top} L1920,${ground + 6} Z`} fill="rgba(12,11,9,0.62)" />
+              <path d={`M0,${ground + 6} L0,${top} L${wave} L1920,${top} L1920,${ground + 6} Z`} fill="url(#c4hatch)" />
+              <path d={`M0,${top} L${wave} L1920,${top}`} fill="none" stroke={pal.mark} strokeWidth={5} strokeLinejoin="round" />
+            </g>
+          )}
+          <line x1={0} y1={ground} x2={1920} y2={ground} stroke={pal.mark} strokeWidth={3} opacity={rise > 0.05 ? 0 : 0.6} />
+        </svg>
+      </div>
+      <div style={{position: 'absolute', left: 400 + 1420, top: 300 + 300, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#f4efe6', whiteSpace: 'nowrap', opacity: rise > 0.9 ? 1 : 0,
         textShadow: '0 0 2px #111, 2px 2px 0 #111'}}>DRIFTS OVER THE ROOFS</div>
     </DeskCam>
   );
