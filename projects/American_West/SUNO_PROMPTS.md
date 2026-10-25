@@ -1,11 +1,18 @@
 # Suno prompts: The American West series
 
-Copy each **Style** box into Suno. Everything else on this page is just labels.
+Copy each **Style** box (and, for Episode 1, the **Lyrics** tags box) into Suno. Everything else on this page is just labels.
+
+**Why these tempos:** the narration runs about 150 words a minute, so slow-to-mid tempos sit under it without fighting it. The
+busy cues (the race, the panic) are quick but sparse, and the grave ones barely have a pulse. I hand cues over on a musical phrase,
+so the exact BPM doesn't need to match anything; it just sets the feel.
 
 ## Settings (same for every cue)
 
-- **Custom** mode, **Instrumental ON**.
-- **Style:** paste the box for the cue.
+- **Custom** mode.
+- **Style:** paste the box for the cue (for the Episode 1 cues the tempo is already in it).
+- **Lyrics:** for the Episode 1 cues, paste the *structure tags* box. Suno hides the Lyrics box when Instrumental is on, so turn
+  **Instrumental OFF** and paste only the tags: they're all in [brackets] and start with [Instrumental], so there are no words to sing. If a take hums or
+  sings anyway, throw it out (or switch Instrumental back on and use the Style box alone; it still works).
 - **Exclude styles:** paste this every time:
 
 ```
@@ -24,7 +31,20 @@ vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubs
 *Length:* **at least 2:00** (Ep 1 needs ~1:48: the last 1:28 of ch 9 plus the 20 s end screen)
 
 ```
-a reflective main theme for a documentary series about promises, a simple memorable four-note motif first on solo piano, then taken up by warm strings and a single French horn, earnest and thoughtful with a thread of doubt, builds gently to one restrained peak at about forty-five seconds, then returns to the solo piano motif, ends on an unresolved chord that leaves a question hanging; documentary, restrained, space for narrator, instrumental
+a reflective main theme for a documentary series about promises, a simple memorable four-note motif first on solo piano, then taken up by warm strings and a single French horn, earnest and thoughtful with a thread of doubt, builds gently to one restrained peak at about forty-five seconds, then returns to the solo piano motif, ends on an unresolved chord that leaves a question hanging, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: solo piano, the four-note motif, alone]
+[Verse: warm strings take up the motif, piano underneath]
+[Build: slow and gentle, French horn enters]
+[Peak: one restrained swell, horn and strings]
+[Break: back to solo piano, the motif once more]
+[Outro: soft strings hold, unresolved chord]
+[End]
 ```
 
 ### 2. `aw_iron_horse.mp3`: the machine age
@@ -32,7 +52,21 @@ a reflective main theme for a documentary series about promises, a simple memora
 *Length:* **at least 2:00** (ch 3 runs 1:47; the ch 5 reprise reuses ~30 s from later in the cue)
 
 ```
-1860s railroad construction, driving rhythmic pulse like hammers on spikes and iron wheels on rails, col legno strings and low string ostinato, anvil-like metallic percussion, a steady locomotive chug that slowly gathers speed, low brass entering in the second half, determined and relentless, impressive but not triumphant, ends on a held low chord; documentary, restrained, space for narrator, instrumental
+1860s railroad construction, driving rhythmic pulse like hammers on spikes and iron wheels on rails, col legno strings and low string ostinato, anvil-like metallic percussion, a steady locomotive chug that slowly gathers speed, low brass entering in the second half, determined and relentless, impressive but not triumphant, ends on a held low chord, 112 BPM, 4/4; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: low string ostinato, col legno taps]
+[Build: anvil percussion joins, locomotive chug]
+[Main: driving, relentless, steady pulse]
+[Break: drop back to the bare ostinato]
+[Build: low brass enters, heavier]
+[Main: full, determined, not triumphant]
+[Outro: held low chord]
+[End]
 ```
 
 ### 3. `aw_long_grief.mp3`: the long quiet
@@ -40,7 +74,21 @@ a reflective main theme for a documentary series about promises, a simple memora
 *Length:* **3:00** (Ep 1 only needs ~40 s, but Sand Creek and Wounded Knee in Ep 4 need the full length)
 
 ```
-a long, very quiet grieving bed for the heaviest moments, three minutes, a soft sustained string pad barely moving, a few slow solo cello phrases with long silences between, one low piano note now and then, no swell, no build, no melodrama, the same calm level from start to finish, ends in silence; documentary, restrained, space for narrator, instrumental
+a long, very quiet grieving bed for the heaviest moments, three minutes, a soft sustained string pad barely moving, a few slow solo cello phrases with long silences between, one low piano note now and then, no swell, no build, no melodrama, the same calm level from start to finish, ends in silence, free time, about 56 BPM; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: soft sustained string pad]
+[Section: slow solo cello phrase, long silence]
+[Section: one low piano note, string pad]
+[Section: slow solo cello phrase, long silence]
+[Section: string pad alone, barely moving]
+[Section: slow solo cello phrase]
+[Outro: string pad fades to silence]
+[End]
 ```
 
 ### 4. `aw_legend_sours.mp3`: the myth beat
@@ -48,7 +96,18 @@ a long, very quiet grieving bed for the heaviest moments, three minutes, a soft 
 *Length:* **any length over 0:45.** Ep 1 uses ~20 s, and the fanfare has to collapse right on "Sort of." (4.5 s in); I start the cue partway so the collapse lands there, so just make sure the fanfare clearly falls apart
 
 ```
-a grand heroic frontier fanfare in the style of an old Hollywood epic, bold horns and soaring strings for about twenty seconds, then it falters, the horns go out of tune, the strings slide down, the tempo drags, and it deflates into a sparse doubtful pizzicato and a single low questioning note; documentary, restrained, space for narrator, instrumental
+a grand heroic frontier fanfare in the style of an old Hollywood epic, bold horns and soaring strings for about twenty seconds, then it falters, the horns go out of tune, the strings slide down, the tempo drags, and it deflates into a sparse doubtful pizzicato and a single low questioning note, 96 BPM, 4/4 at first, then dragging; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Fanfare: bold heroic horns and soaring strings, short]
+[Collapse: horns go out of tune, strings slide down, tempo drags]
+[Deflated: sparse doubtful pizzicato]
+[Outro: a single low questioning note]
+[End]
 ```
 
 ### 5. `aw_robber_barons.mp3`: the swagger
@@ -56,7 +115,20 @@ a grand heroic frontier fanfare in the style of an old Hollywood epic, bold horn
 *Length:* **at least 2:00** (ch 7 runs 1:48)
 
 ```
-Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass oom-pah under a sly muted trumpet melody, parlor piano chords, pizzicato strings, a cigar-smoke lazy confidence with a hint of menace underneath, two short cheeky brass stings, ends on a knowing unresolved chord; documentary, restrained, space for narrator, instrumental
+Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass oom-pah under a sly muted trumpet melody, parlor piano chords, pizzicato strings, a cigar-smoke lazy confidence with a hint of menace underneath, two short cheeky brass stings, ends on a knowing unresolved chord, 84 BPM, 4/4, a slow strut; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: tuba oom-pah, parlor piano chords]
+[Verse: sly muted trumpet melody, pizzicato]
+[Sting: short cheeky brass hit]
+[Verse: the strut continues, a little menace underneath]
+[Sting: short cheeky brass hit]
+[Outro: knowing unresolved chord]
+[End]
 ```
 
 ### 6. `aw_panic.mp3`: the crash
@@ -64,7 +136,20 @@ Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass 
 *Length:* **at least 1:50** (ch 8 runs 1:39)
 
 ```
-1870s financial panic, a crowd rushing a bank, anxious ticking stock-ticker pulse, rapid nervous string tremolo, piano repeating a falling figure, rising tension for forty seconds, then a sudden drop to a hollow low drone and a slow descending cello line, the aftermath bleak and quiet, ends unresolved; documentary, restrained, space for narrator, instrumental
+1870s financial panic, a crowd rushing a bank, anxious ticking stock-ticker pulse, rapid nervous string tremolo, piano repeating a falling figure, rising tension for forty seconds, then a sudden drop to a hollow low drone and a slow descending cello line, the aftermath bleak and quiet, ends unresolved, 132 BPM, 4/4, half time after the drop; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: anxious ticking pulse]
+[Build: nervous string tremolo, falling piano figure]
+[Build: rising tension, faster, louder]
+[Drop: sudden hollow low drone]
+[Aftermath: slow descending cello line, bleak and quiet]
+[Outro: unresolved, fading]
+[End]
 ```
 
 ## Later episodes (whenever you like)
