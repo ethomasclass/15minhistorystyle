@@ -15,7 +15,7 @@ const PAL = PALETTES.locked;
 /** [miles from Sacramento along the line, feet above sea level, label]. Approximate; see review/previews/README.md. */
 const PTS: [number, number, string?][] = [
   [0, 30, 'Sacramento'], [7, 60], [54, 2420], [105, 7017, 'Donner Summit'], [120, 5850], [154, 4500, 'Reno'], [325, 4300], [480, 5060],
-  [690, 4900, 'Promontory'], [744, 4300], [821, 6750], [930, 6100], [1067, 6800], [1203, 7160], [1227, 8250, 'Sherman Summit'], [1260, 6060, 'Cheyenne'],
+  [690, 4900, 'Promontory'], [744, 4300], [821, 6750], [930, 6100], [1067, 6800], [1203, 7160], [1227, 8250, 'Sherman Summit'], [1260, 6060],
   [1485, 2800, 'North Platte'], [1776, 1000, 'Omaha'],
 ];
 const MI = 1776;
@@ -143,7 +143,7 @@ const Legend: React.FC<{at: number}> = ({at}) => {
   if (g < at) return null;
   const rows: [string, string, number][] = [['$16,000 A MILE', 'flat ground', 168], ['$32,000', 'between the ranges', 192], ['$48,000', 'mountains (150 mi each)', 216]];
   return (
-    <div style={{position: 'absolute', left: 1240, top: 70, display: 'flex', flexDirection: 'column', gap: 14}}>
+    <div style={{position: 'absolute', left: 110, top: 60, display: 'flex', flexDirection: 'column', gap: 14}}>
       {rows.map(([a, b, t], i) => g >= t && (
         <div key={a} style={{display: 'flex', alignItems: 'center', gap: 16}}>
           <div style={{width: 34, height: 22, background: zoneColor([16, 32, 48][i])}} />
@@ -158,7 +158,7 @@ const ShotWide: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
-      <Stage fx={X(MI) / 2} tilt={keys(f, [[0, 64], [150, 58]])} spin={keys(f, [[0, -12], [150, -5]])} z={zkeys(f, [[0, 0.98], [150, 1.04]])} dy={40} lit={[1e7, 1e7, 1e7, 1e7, 1e7]} prog={progAt(f)} />
+      <Stage fx={X(MI) / 2 - 80} tilt={keys(f, [[0, 64], [150, 58]])} spin={keys(f, [[0, -12], [150, -5]])} z={zkeys(f, [[0, 0.9], [150, 0.97]])} dy={110} lit={[1e7, 1e7, 1e7, 1e7, 1e7]} prog={progAt(f)} />
       <Note text="Sacramento → Omaha, 1,776 miles" x={110} y={210} size={46} rot={-3} at={30} />
     </AbsoluteFill>
   );
@@ -170,7 +170,7 @@ const ShotBonds: React.FC = () => {
     <AbsoluteFill>
       <Stage fx={keys(f, [[150, X(420)], [300, X(110)]])} tilt={keys(f, [[150, 60], [300, 54]])} spin={keys(f, [[150, -14], [300, -18]])} z={zkeys(f, [[150, 1.25], [300, 2.1]])} dy={60} lit={LIT} prog={progAt(f)} />
       <Legend at={160} />
-      <Note text="mountain miles paid 3×" x={1250} y={300} size={54} rot={-3} at={236} />
+      <Note text="mountain miles paid 3×" x={1180} y={860} size={54} rot={-3} at={236} />
     </AbsoluteFill>
   );
 };
@@ -181,7 +181,7 @@ const ShotMeet: React.FC = () => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Stage fx={keys(f, [[300, X(560)], [450, X(760)]])} tilt={keys(f, [[300, 56], [450, 60]])} spin={keys(f, [[300, 8], [450, 2]])} z={zkeys(f, [[300, 1.6], [450, 1.0]])} dy={50} lit={LIT} prog={progAt(f)} />
-      <Note text="paid by the mile: build fast, build long" x={110} y={210} size={46} rot={-3} at={330} />
+      <Note text="paid by the mile: build fast, build long" x={110} y={60} size={46} rot={-3} at={330} />
     </AbsoluteFill>
   );
 };

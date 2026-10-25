@@ -1,7 +1,7 @@
 # Not in the Picture: Grant, the Railroad, and Who Built It
 
-**15 Minute History** · narration script · draft 1 · 2,450 words · about 14:30 finished (estimate at ~185 wpm, chapter 4 at ~172; plus
-intro, title card, logo breaks and a 20-second end screen. Re-time after voicing.)
+**15 Minute History** · narration script · draft 1 · 2,450 words · about 16:00 finished (eleven_v4 one take at speed 1.0 runs
+~167 wpm; ch01 voiced at 60.7 s. The user is fine with it running a little long: no trims for pace. Re-time after voicing.)
 
 Series: *The American West after the Civil War*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_RAILROAD_OUTLINE.md`](../../EP1_RAILROAD_OUTLINE.md)
