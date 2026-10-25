@@ -20,11 +20,13 @@ const ease = Easing.bezier(0.22, 1, 0.36, 1);
 
 /** Intro length: the brand intro runs 260 frames; the lockup is complete at 119, so 165 leaves ~1.5 s on it. */
 export const INTRO_FRAMES = 165;
-/** Jingle level: the old title sting sat at 0.45 on a -11.2 LUFS file (~-18 LUFS in the mix); the jingle is -16.5 LUFS. */
-const JINGLE_VOL = 0.83;
+/** Jingle level: the old title sting sat at 0.45 on a -11.2 LUFS file (~-18 LUFS in the mix, the narration's level); the marimba jingle
+ *  (tools/make_jingle.py) measures -18.3 LUFS, so full volume. */
+const JINGLE_VOL = 1;
 
 const FLIGHT = 22; // frames from launch to landing
-// Landing frames, timed to the jingle: the coral quarter lands on its big hit (2.80 s), the slabs on 3.60 s and 3.95 s.
+// Landing frames, timed to the marimba jingle (tools/make_jingle.py): the coral quarter locks on its last note, C5 (2.80 s), the
+// slabs land on the low hits at 3.60 s and 3.95 s.
 const MARK_LAND = [36, 50, 60, 68, 74, 84];
 const WM_LAND = [108, 119];
 
@@ -185,7 +187,8 @@ export const LogoBreak: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: black}}>
       <Stage opacity={logo}><SnapScene /></Stage>
-      <Sequence from={SNAP_LAND - 1} durationInFrames={40} layout="none"><Audio src={staticFile('sfx/block_tap_soft.wav')} volume={0.28} /></Sequence>
+      {/* chunk_snap.wav: D5 - C5 on marimba, its C lands 1.0 s in = SNAP_LAND, at a quiet level */}
+      <Sequence from={0} durationInFrames={66} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
     </AbsoluteFill>
   );
 };

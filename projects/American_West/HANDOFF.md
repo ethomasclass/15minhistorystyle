@@ -46,6 +46,14 @@ gives the 5.5 s 3D intro after the cold open (jingle `public/music/chunk_jingle.
 instead of a hard cut; whip sound at half level). **Still on the old brand:** the thumbnail and `Brand.tsx` use the old
 15 Minute History `Wordmark` (`src/kit/Intro.tsx`); the end screen has no logo.
 
+### The jingle (Oct 2026)
+The brand's original jingle was dropped (the user didn't like it). The new one is the "Aha" motif on marimba: G4 - E5 - D5 - C5
+(a leap up, then a step down home), the last note on the coral quarter's lock at 2.80 s, soft wood knocks under the blocks, two low
+hits under CHUNK and HISTORY. `ep1/tools/make_jingle.py` synthesises it (`public/music/chunk_jingle.mp3`) and the chapter-break
+sting (`public/sfx/chunk_snap.wav`, D5 - C5). It's a synthesised marimba, good for fixing the tune and timing; replace with a real
+marimba or Suno take later (keep the lock note on 2.80 s). The original is still in `brand/chunk-history/intro/public/jingle.mp3`
+on the Reconstruction branch.
+
 ### Mix levels (matched to Black Sox, Oct 2026)
 Narration levelled from ~-24 to -18 LUFS (`tools/level_voice.py`, now run by `voice.py` on every take; zero timing shift). Music
 volumes come from `bed(cue, gap)` in `src/kit/levels.ts` (13 LU under the voice; ch04's grief cue 14). Check: the ch08 mix
