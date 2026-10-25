@@ -7,6 +7,7 @@ import {clamp} from '../lib/anim';
 import {boxOf, Finish, JF, Loop, PALETTES, PaletteCtx, type Place, StepCtx, Tint, Traced, useGFrame, useHand, usePal} from '../kit/Kit';
 import {DarkPaper} from '../kit/common';
 import type {MaskRef} from '../kit/maskref';
+import PROFILES from './torn_profiles.json';
 
 export const SHADOW = '#050403';
 export const BW = 'grayscale(1) contrast(1.25) brightness(0.97)';
@@ -34,13 +35,17 @@ export const useDrop = (at: number) => {
 
 /** A clip-path polygon (px) for a w x h rectangle with deckled edges and an optional torn-away corner. */
 export const tornPoly = (w: number, h: number, seed: number, torn: {t?: boolean; r?: boolean; b?: boolean; l?: boolean}, amp = 9,
-  corner?: {at: 'br' | 'bl' | 'tr'; x: number; y: number}) => {
+  corner?: {at: 'br' | 'bl' | 'tr'; x: number; y: number}, real = false) => {
   const pts: [number, number][] = [];
   const run = (x0: number, y0: number, x1: number, y1: number, rough: boolean, nx: number, ny: number, key: string, a = amp) => {
-    const n = Math.max(2, Math.round(Math.hypot(x1 - x0, y1 - y0) / 14));
+    // `real`: the bite profile of an actual torn paper edge (from the AI texture pack's alpha), sampled along the edge
+    const prof = (PROFILES as number[][])[Math.floor(random(`${seed}${key}p`) * PROFILES.length)];
+    const off = random(`${seed}${key}o`) * 0.5;
+    const n = Math.max(2, Math.round(Math.hypot(x1 - x0, y1 - y0) / (real ? 5 : 14)));
     for (let i = 0; i < n; i++) {
       const t = i / n;
-      const j = rough ? a * (0.25 + 0.75 * random(`${seed}${key}${i}`)) * (i % 3 === 0 ? 1 : 0.55) : 0;
+      const j = !rough ? 0 : real ? a * 1.6 * (1 - prof[Math.floor(((off + t * 0.5) % 1) * (prof.length - 1))])
+        : a * (0.25 + 0.75 * random(`${seed}${key}${i}`)) * (i % 3 === 0 ? 1 : 0.55);
       pts.push([x0 + (x1 - x0) * t + nx * j, y0 + (y1 - y0) * t + ny * j]);
     }
   };
@@ -56,8 +61,13 @@ export const tornPoly = (w: number, h: number, seed: number, torn: {t?: boolean;
 };
 
 /** A strip of orange tape with torn ends, in the parent's coordinates. */
-export const Tape: React.FC<{x: number; y: number; w?: number; h?: number; rot?: number; seed?: number}> = ({x, y, w = 150, h = 42, rot = -8, seed = 1}) => {
+export const Tape: React.FC<{x: number; y: number; w?: number; h?: number; rot?: number; seed?: number; grey?: boolean}> = ({x, y, w = 150, h = 42, rot = -8, seed = 1, grey = false}) => {
   const pal = usePal();
+  if (grey) {
+    // translucent grey tape scanned from the AI texture pack
+    return <Img src={staticFile(`img/previews/tape_grey_${(seed % 2) + 1}.png`)} style={{position: 'absolute', left: x, top: y, width: w, height: w * 0.21,
+      transform: `rotate(${rot}deg)`, opacity: 0.82, filter: 'grayscale(0.6) brightness(1.05)'}} />;
+  }
   const pts: string[] = [];
   const n = 7;
   for (let i = 0; i <= n; i++) pts.push(`${(random(`tl${seed}${i}`) * 8).toFixed(1)}px ${((i / n) * h).toFixed(1)}px`);
@@ -76,8 +86,8 @@ type Crop = [number, number, number, number];
  */
 export const TornPrint: React.FC<{src: string; size: [number, number]; x: number; y: number; w: number; crop?: Crop; rot?: number; at?: number; seed?: number;
   torn?: {t?: boolean; r?: boolean; b?: boolean; l?: boolean}; corner?: {at: 'br' | 'bl' | 'tr'; x: number; y: number}; tapes?: {x: number; y: number; w?: number; rot?: number}[];
-  filter?: string; mask?: MaskRef; tint?: number; traceAt?: number; shadow?: number; children?: (S: (sx: number, sy: number) => [number, number], w: number, h: number) => React.ReactNode}> = ({
-  src, size, x, y, w, crop, rot = 0, at = 0, seed = 1, torn = {t: true, r: true, b: true, l: true}, corner, tapes = [], filter = BW, mask, tint = 0, traceAt, shadow = 14, children,
+  filter?: string; mask?: MaskRef; tint?: number; traceAt?: number; shadow?: number; real?: boolean; grey?: boolean; children?: (S: (sx: number, sy: number) => [number, number], w: number, h: number) => React.ReactNode}> = ({
+  src, size, x, y, w, crop, rot = 0, at = 0, seed = 1, torn = {t: true, r: true, b: true, l: true}, corner, tapes = [], filter = BW, mask, tint = 0, traceAt, shadow = 14, real = false, grey = false, children,
 }) => {
   const d = useDrop(at);
   if (!d.on) return null;
@@ -86,7 +96,7 @@ export const TornPrint: React.FC<{src: string; size: [number, number]; x: number
   const h = (sy1 - sy0) * sc;
   const place: Place = {left: -sx0 * sc, top: -sy0 * sc, scale: sc};
   const S = (sx: number, sy: number): [number, number] => [place.left + sx * sc, place.top + sy * sc];
-  const clip = tornPoly(w, h, seed, torn, 9, corner);
+  const clip = tornPoly(w, h, seed, torn, 9, corner, real);
   return (
     <div style={{position: 'absolute', left: x, top: y - d.air * 50, width: w, height: h, transform: `rotate(${rot + d.air * 5}deg) scale(${1 + d.air * 0.25})`, opacity: Math.min(1, d.k * 3)}}>
       <div style={{position: 'absolute', inset: 0, filter: `drop-shadow(${shadow}px ${shadow + 4}px 0 ${SHADOW})`}}>
@@ -96,7 +106,7 @@ export const TornPrint: React.FC<{src: string; size: [number, number]; x: number
         </div>
       </div>
       {mask && traceAt !== undefined && <Traced paths={mask.data.shapes.subject} place={place} at={traceAt} dur={12} width={5} part={0.92} />}
-      {tapes.map((t, i) => <Tape key={i} x={t.x} y={t.y} w={t.w} rot={t.rot} seed={seed * 10 + i} />)}
+      {tapes.map((t, i) => <Tape key={i} x={t.x} y={t.y} w={t.w} rot={t.rot} seed={seed * 10 + i} grey={grey} />)}
       {children?.(S, w, h)}
     </div>
   );
