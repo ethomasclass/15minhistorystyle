@@ -3,6 +3,7 @@
   python3 tools/make_jingle.py            # felt piano + a low plucked cello (default), from two ElevenLabs one-note samples
   python3 tools/make_jingle.py marimba    # the synthesised marimba version
   python3 tools/make_jingle.py chop       # chopped old-record horn + hip-hop kick/snare + bass (ElevenLabs one-shots)
+  python3 tools/make_jingle.py chop 8 out.mp3   # just the chopped jingle, 8 s, ringing out (Suno wants 6 s+ to upload)
   python3 tools/make_jingle.py lofi       # a lo-fi ElevenLabs Music take (L2), lined up so its hit lands on the lock
   -> writes public/music/chunk_jingle.mp3 and public/sfx/chunk_snap.wav
 
@@ -141,7 +142,7 @@ def lowpass(x, hz=5200):
     return y
 
 
-def main_chop():
+def main_chop(total=5.5, out_path=None):
     horn, kick, snare, bass = (raw_sample(f"jingle_{n}.mp3") for n in ("horn_old", "kick", "snare2", "bass"))
     # old-record horn phrase, measured: A#4 D#5 C#5 D#5 F#4 D#5 F4 D#5, each 0.17-0.32 semitone flat. Down 2 semitones and
     # retuned = G#4 C#5 B4 C#5 E4 C#5 D#4 C#5: all in E major / C# minor, the bass note C#2.
@@ -161,15 +162,26 @@ def main_chop():
         (3.95, kick * 0.8), (3.95, slice_(horn, 1.74, 1.90, up("F4"), 0.8)),                     # HISTORY
     ]
     rng = np.random.RandomState(3)
-    out = np.zeros(int(R * 5.5))
+    out = np.zeros(int(R * total))
     for at, sig in ev:
         i = int(at * R)
         out[i:i + len(sig)] += sig[:max(0, len(out) - i)]
     out = lowpass(out)
+    if total > 5.5:  # a longer file (for uploading as a reference, e.g. Suno wants 6 s or more): let it ring out in a small room
+        wet = np.zeros_like(out)
+        for d, g in [(0.19, 0.32), (0.37, 0.2), (0.61, 0.12), (0.93, 0.07)]:
+            k = int(d * R)
+            wet[k:] += out[:-k] * g
+        out = out + wet
     crackle = (rng.rand(len(out)) < 0.0009) * rng.randn(len(out)) * 0.05  # a little vinyl
     out = out + crackle
-    out[int(4.6 * R):] *= np.linspace(1, 0, len(out) - int(4.6 * R))
+    fade = int((total - 0.9 if total <= 5.5 else total - 1.5) * R)
+    out[fade:] *= np.linspace(1, 0, len(out) - fade)
     out = to_lufs(out)
+    if out_path:
+        write(out_path, out)
+        print(f"wrote {out_path} ({total:.1f} s)")
+        return
     write(os.path.join(HERE, "..", "public", "music", "chunk_jingle.mp3"), out)
     # chapter-break sting: kick + the C#5 chop + bass at 1.0 s (quiet)
     snap = [(0.62, slice_(horn, 0.82, 1.02, up("C#5"), 0.7)), (1.0, kick * 0.9), (1.0, slice_(horn, 1.90, 3.44, up("D#5"), 0.9, dur=0.9)), (1.0, bass_c * 0.7)]
@@ -207,4 +219,7 @@ def main():
 
 if __name__ == "__main__":
     import sys
-    {"marimba": main, "chop": main_chop, "lofi": main_lofi}.get(sys.argv[1] if sys.argv[1:] else "", main_piano)()
+    if sys.argv[1:2] == ["chop"] and len(sys.argv) > 3:  # chop TOTAL_SECONDS OUT.mp3: just the jingle, longer, to a given file
+        main_chop(float(sys.argv[2]), sys.argv[3])
+    else:
+        {"marimba": main, "chop": main_chop, "lofi": main_lofi}.get(sys.argv[1] if sys.argv[1:] else "", main_piano)()
