@@ -5,9 +5,10 @@
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
-import {DrawnCrown} from './kit/shell';
+import {DrawnCrown, fill} from './kit/shell';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
+import type {MaskRef} from './kit/maskref';
 import {MASKS} from './masks';
 import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
@@ -99,3 +100,74 @@ export const ThumbB: React.FC = () => {
     </PaletteCtx.Provider>
   );
 };
+
+/**
+ * Headshot over a landscape: a black-and-white scene full frame, darkened toward the text side, and one cut-out
+ * figure large in the foreground, tinted and traced.
+ */
+const Headshot: React.FC<{bg: string; bgSize: [number, number]; bfx: number; bfy: number; bz?: number;
+  src: string; size: [number, number]; mask: MaskRef; face: [number, number]; at: [number, number]; scale: number; color: string; textSide: 'left' | 'right';
+  children: React.ReactNode}> = ({bg, bgSize, bfx, bfy, bz = 1.05, src, size, mask, face, at, scale, color, textSide, children}) => {
+  const bp = fill(bgSize, bfx, bfy, bz);
+  const place: Place = {left: at[0] - face[0] * scale, top: at[1] - face[1] * scale, scale};
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#15130f', overflow: 'hidden'}}>
+        <Picture src={bg} place={bp} size={bgSize} bw="grayscale(1) contrast(1.3) brightness(0.92)" />
+        <AbsoluteFill style={{background: `linear-gradient(${textSide === 'left' ? 90 : 270}deg, rgba(8,7,5,0.88) 0%, rgba(8,7,5,0.55) 40%, rgba(8,7,5,0.1) 70%)`}} />
+        <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * scale, height: size[1] * scale, ...cut(mask.alpha), filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.85))'}}>
+          <Picture src={src} place={{left: 0, top: 0, scale}} size={size} bw="grayscale(1) contrast(1.3) brightness(0.95)" />
+        </div>
+        <Tint mask={mask.alpha} place={place} size={size} color={color} />
+        <Traced paths={mask.data.shapes.subject} place={place} at={0} dur={1} width={8} color="#f4efe6" />
+        {children}
+        <Logo />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+/** C · Grant (teal) over the siege of Vicksburg. */
+export const ThumbC: React.FC = () => (
+  <Headshot bg="img/ch02/vicksburg_siege_grant_lithograph_1863.jpg" bgSize={[3000, 2390]} bfx={1400} bfy={1100} bz={1.2}
+    src="img/ch02/grant_portrait_brady.jpg" size={[1859, 3000]} mask={MASKS.grant} face={[915, 610]} at={[1490, 380]} scale={1.25}
+    color={TEAL} textSide="left">
+    <Note text="Gettysburg, Vicksburg, Atlanta..." x={100} y={320} size={60} rot={-4} color="#ffffff" />
+    <Highlight text="HOW THE WAR" x={90} y={430} size={128} at={0} seed={301} rot={-3} />
+    <Highlight text="WAS DECIDED" x={100} y={600} size={128} at={0} seed={303} rot={-2} />
+  </Headshot>
+);
+
+/** D · Sherman (orange) over Darley's engraving of the March to the Sea. */
+export const ThumbD: React.FC = () => (
+  <Headshot bg="img/ch05/sherman_march_to_the_sea_darley_1883.jpg" bgSize={[3000, 2080]} bfx={1400} bfy={1000} bz={1.12}
+    src="img/ch05/sherman_portrait_brady_1865.jpg" size={[1916, 3000]} mask={MASKS.sherman} face={[825, 1050]} at={[1470, 400]} scale={0.8}
+    color={GOLD} textSide="left">
+    <Note text="1864: the March to the Sea" x={100} y={320} size={60} rot={-4} color="#ffffff" />
+    <Highlight text="HARD" x={90} y={420} size={200} at={0} seed={305} rot={-3} />
+    <Highlight text="WAR" x={110} y={660} size={200} at={0} seed={307} rot={-2} />
+  </Headshot>
+);
+
+/** E · Lee (orange) over the Currier print of Gettysburg, July 3. */
+export const ThumbE: React.FC = () => (
+  <Headshot bg="img/ch02/gettysburg_battle_july3_currier_1863.jpg" bgSize={[3000, 2335]} bfx={1300} bfy={1150} bz={1.15}
+    src="img/ch01/lee_portrait_vannerson_1864.jpg" size={[1899, 2993]} mask={MASKS.lee} face={[990, 650]} at={[1580, 390]} scale={1.4}
+    color={GOLD} textSide="left">
+    <Note text="Gettysburg + Vicksburg, July 1863" x={100} y={320} size={60} rot={-4} color="#ffffff" />
+    <Highlight text="THE WEEK THAT" x={90} y={430} size={104} at={0} seed={309} rot={-3} />
+    <Highlight text="TURNED THE WAR" x={100} y={585} size={104} at={0} seed={311} rot={-2} />
+  </Headshot>
+);
+
+/** F · Granger (teal), who read the Juneteenth order in Galveston, over the celebration of 1866. */
+export const ThumbF: React.FC = () => (
+  <Headshot bg="img/gen/v3_ch06_galveston.jpg" bgSize={[1376, 698]} bfx={600} bfy={350} bz={1.05}
+    src="img/ch06/gordon_granger_portrait_brady.jpg" size={[2066, 3000]} mask={MASKS.granger} face={[975, 975]} at={[1590, 400]} scale={0.7}
+    color={TEAL} textSide="left">
+    <Note text="the 13th Amendment ended slavery..." x={100} y={320} size={54} rot={-4} color="#ffffff" />
+    <Highlight text="WITH ONE" x={90} y={430} size={140} at={0} seed={313} rot={-3} />
+    <Highlight text="EXCEPTION" x={100} y={620} size={140} at={0} seed={315} rot={-2} />
+  </Headshot>
+);
