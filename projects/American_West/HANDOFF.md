@@ -42,8 +42,9 @@ fulfill its promises of freedom and opportunity after the Civil War?"
    the four map shots; empty sockets wait for the four portraits).
 3. ~~ch07's two-views card: match ch06's supporters' wording.~~ Done (same four lines + headers as ch06).
 4. ch04 3D cut-away says "worked from 4 faces" (not in the narration): historically right (both portals + the central shaft dug both ways), kept unless the user wants it gone.
-5. Fact checks: 1874 House seat counts, the price fall, "89 of 364" railroads (labelled approx. on screen); plus
-   `script/SCRIPT.md` → Fact-check flags.
+5. ~~Fact checks~~ Done (`script/SCRIPT.md` → *Fact-check pass*): House counts, prices and "89 of 364" confirmed and sourced on screen;
+   flags 2, 8, 9, 17 checked. **One fix left: ch07 says "where *they* will do most good"; the report says "*it*".** The script text is
+   corrected; re-voice ch07 (`python3 tools/voice.py script/ch07_where_it_will_do_most_good.txt ch07_where_it_will_do_most_good`) and re-check anchors.
 6. ch04 strike camp image is Brown's Station (Nevada, 1868–69), tagged with its real date.
 
 ### Then

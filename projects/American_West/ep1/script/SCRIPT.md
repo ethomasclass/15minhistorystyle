@@ -190,7 +190,7 @@ They set up their own construction company, with a fancy French name: {Credit Mo
 
 The same men ran the railroad. The same men owned the builder. And the same men set the price. *That means* they were billing themselves, and the public was paying.
 
-To keep Congress friendly, a congressman named Oakes Ames handed out shares in Credit Mobilier to other members of Congress, cheap. He wrote that he'd put them "where they will do most good to us."
+To keep Congress friendly, a congressman named Oakes Ames handed out shares in Credit Mobilier to other members of Congress, cheap. He wrote that he'd put the stock "where it will do most good to us."
 
 [deadpan] Subtle.
 
@@ -271,7 +271,7 @@ But the companies were paid to build fast, and some of the men running them got 
   (ch 8 → ch 4); "So go back to the photograph" (ch 5 → ch 1).
 - **Vocab cards (11):** Pacific Railway Act, Greater Reconstruction, land grant, 15th Amendment, Peace Policy, Crédit Mobilier, Whiskey
   Ring, panic, depression, Chinese Exclusion Act. (Plus strike, defined in context in ch 4 without a card.)
-- **Primary-source cards:** "Let us have peace" (Grant, 1868); "DONE" (telegram, 1869); "where they will do most good to us" (Ames);
+- **Primary-source cards:** "Let us have peace" (Grant, 1868); "DONE" (telegram, 1869); "where it will do most good to us" (Ames);
   "Let no guilty man escape" (Grant, 1875); "The Chinese must go!" (Workingmen's Party); the Exclusion Act's first section.
 
 ## Pronunciation (for ElevenLabs; to test before voicing)
@@ -295,14 +295,14 @@ But the companies were paid to build fast, and some of the men running them got 
 | # | Script says | The record | Why the wording is safe / to check |
 |---|---|---|---|
 | 1 | Most CP workers, "most estimates say around four out of five," were Chinese | Common estimates: 80–90% at peak; 10,000–15,000 (some say 20,000) men | Hedged; avoids a headcount |
-| 2 | Three laws in 1862 (Homestead May 20, Pacific Railway July 1, Morrill July 2) | Correct dates | Check each date if shown on screen |
+| 2 | Three laws in 1862 (Homestead May 20, Pacific Railway July 1, Morrill July 2) | Correct dates | **Checked:** the dates on screen (ch02 credit line) match |
 | 3 | Land "in a checkerboard"; mountains paid "three times as much as flat ground" | 1862 Act: 5 alternate sections per side per mile (doubled in 1864); bonds $16,000 / $32,000 / $48,000 per mile | $48k vs $16k = 3×; correct |
 | 4 | Crocker hired "about 50" Chinese workers in 1865; foreman doubted; Great Wall reply "reportedly" | Accounts (Crocker's later testimony; Strobridge) | "Reportedly" covers it |
 | 5 | Chinese paid less and bought their own food; white workers' meals included | Commonly ~$26–35/month without board vs. ~$35 with board for whites | No figures given; safe |
 | 6 | Chinese crews drank boiled tea and "got sick less often" (asked as a question) | Widely reported at the time and since | Phrased as a nudge, not a statistic; confirm a source |
 | 7 | "Hell on Wheels" towns moved every few weeks | Standard | Safe |
-| 8 | Fifteen tunnels; Summit Tunnel; "about a foot" a day; nitroglycerin | CP built 15 tunnels in the Sierra; Summit Tunnel progress often ~1 ft/day; nitro used 1867 | Check "15" |
-| 9 | Winter 1866: "more than 40 snowstorms"; avalanches took camps | Winter 1866–67 had 44 storms (often cited) | Check; could say "dozens" |
+| 8 | Fifteen tunnels; Summit Tunnel; "about a foot" a day; nitroglycerin | CP built 15 tunnels in the Sierra; Summit Tunnel progress often ~1 ft/day; nitro used 1867 | **Checked:** NPS history: "15 tunnels totaling 6,213 feet" through the Sierra |
+| 9 | Winter 1866: "more than 40 snowstorms"; avalanches took camps | Winter 1866–67 had 44 storms (often cited) | **Checked:** 44 storms, winter 1866–67 (Linda Hall Library; Sierra College JSCNHM) |
 | 10 | Strike June 1867, "about 3,000," three demands, food cut off, "about a week," pay unchanged | Accounts: began June 25, 1867; 3,000–5,000; demanded ~$40/month, shorter tunnel shifts, end of whipping/right to leave; ended ~July 1 | "About" and "one of the largest" hedge it |
 | 11 | Ten miles and 56 feet on April 28, 1869; ~25,000 ties, ~3,500 rails; eight Irishmen | Standard figures (25,800 ties, 3,520 rails) | Rounded down with "about" |
 | 12 | Gold spike pre-drilled, tapped, removed; iron spike in its place; Stanford "reportedly" missed | Standard; the miss is anecdotal | Hedged |
@@ -310,7 +310,7 @@ But the companies were paid to build fast, and some of the men running them got 
 | 14 | NY to SF: months before, "about a week" after | ~7 days by rail after 1869 | Safe |
 | 15 | Grant sold firewood in St. Louis and clerked in his father's leather goods store | Both documented (1850s; Galena store, 1860) | "Ten years earlier" is approximate (1858–60) |
 | 16 | 15th Amendment ratified 1870; Grant sent troops and prosecutors against the Klan | Ratified Feb 1870; Enforcement Acts 1870–71, KKK Act 1871 | Safe |
-| 17 | Ames: "where they will do most good to us" | Ames letter to H. S. McComb, 1868, published in the 1873 investigation | Verify exact wording before the quote card |
+| 17 | Ames: "where it will do most good to us" | Poland Committee report (1873), the page shown in ch07: "He says he intends to place the stock \"where it will do most good to us.\"" | **Checked.** The card is right; the voiced take says "they" (old wording): re-voice ch07 line 7 when the keys are back |
 | 18 | NY newspaper broke the story in 1872; Colfax caught up; Grant not accused of taking shares | *New York Sun*, Sept 1872 | Safe |
 | 19 | Whiskey Ring 1875; "Let no guilty man escape"; Babcock charged, Grant spoke up for him, acquitted | Grant's endorsement July 1875; deposition 1876; acquitted Feb 1876 | Safe |
 | 20 | Jay Cooke & Co. closed Sept 18, 1873; NYSE closed ten days | NYSE closed Sept 20–30, 1873 | Safe |
@@ -335,3 +335,11 @@ But the companies were paid to build fast, and some of the men running them got 
 1. Your read of this draft, and the Grant cartoon.
 2. Confusion pass and any cuts or additions (the draft runs about 14:30; there's room for about 30 seconds).
 3. Pronunciation test, then voicing.
+
+### Fact-check pass (post-build)
+
+- **1874 House** (ch08 seat dots): 43rd Congress 199 R / 88 D / 5 other (292); 44th Congress 103 R / 182 D / 8 other (293), as elected.
+  Office of the House Historian, *Party Divisions*. The dots use exactly these; the on-screen credit now names the source (no "approx.").
+- **Price fall** (ch08 line): Warren & Pearson wholesale index (NBER Macrohistory, FRED M0448AUSM323NNBR), yearly means rebased
+  1873 = 100: 1874 94, 1875 89, 1876 83, 1877 80, 1878 68, 1879 67. The line now plots these.
+- **"89 of 364" railroads** (ch08 grid): PBS *American Experience*, "The Panic of 1873"; widely repeated, credit line names PBS.
