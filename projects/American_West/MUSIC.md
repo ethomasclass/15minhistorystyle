@@ -10,7 +10,8 @@ you'd rather make one on ElevenLabs.
 **Reuse first.** The library already covers a lot of this series (map below). The 12 new cues fill real gaps, and each one is written
 to be reused well past the West. The *Reuse* line under each says where.
 
-Levels follow the library: beds 0.13–0.17, cold open 0.17, heavy chapters ~0.12 or near-silence, tail lift ×1.6 after the last word.
+Levels match Black Sox: narration at -18 LUFS, each bed set ~13 LU under it from the cue's measured loudness (`ep1/src/kit/levels.ts`,
+`bed()`; 14–15 for a grave stretch), cold open as in Black Sox, tail lift ×1.6 after the last word. Measure each new cue and add it to `CUE_LUFS`.
 
 ---
 
