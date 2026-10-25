@@ -4,10 +4,10 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch03_the_race.words.json';
 import {clamp} from '../lib/anim';
-import {Arrow, JF, Loop, Note, useGFrame, usePal} from '../kit/Kit';
+import {JF, Loop, Note, useGFrame, usePal} from '../kit/Kit';
 import {Sfx} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration} from '../kit/shell';
-import {Desk3D, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
+import {CutOut, Desk3D, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
 import {IMG, SM, SZ} from '../samples/masks';
 import {M3} from '../masks_ch03';
 import {DarkCard, Hand, LINES, MPin, MRegion, MRoute, PL, Ribbon, RMI, RX, subLine, Tally, WestMap} from '../kit/ch01_extra';
@@ -221,7 +221,7 @@ const Thousands: React.FC = () => {
 const Pay: React.FC<{close?: boolean}> = ({close}) => {
   const f = useCurrentFrame();
   const a = at('They were not paid') - 1;
-  const m = at('White workers') - 1;
+  const m = at('White workers', 2) - 1;
   const b = at('They did have') - 1;
   const z = close ? zkeys(f, [[m, 1.0], [b, 1.06]]) : zkeys(f, [[a, 1.1], [m, 1.25]]);
   const ox = close ? 960 : keys(f, [[a, 960], [m, 640]]);
@@ -241,64 +241,54 @@ const Pay: React.FC<{close?: boolean}> = ({close}) => {
   );
 };
 
-/** The tea and the stream, drawn: a barrel and a kettle with steam (left), a stream and a tin cup (right). */
-const TeaStream: React.FC<{teaAt: number; streamAt: number; loopAt?: number}> = ({teaAt, streamAt, loopAt = 1e7}) => {
-  const g = useGFrame();
-  const pal = usePal();
-  const draw = (s: number, dur = 14) => interpolate(g, [s, s + dur], [0, 1], clamp);
-  const pt = draw(teaAt);
-  const ps = draw(streamAt);
-  const P = (p: number) => ({pathLength: 1, strokeDasharray: 1, strokeDashoffset: 1 - p});
-  const S = {fill: 'none', stroke: pal.mark, strokeWidth: 7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const};
-  const steam = (x: number, k: number) => `M${x},${380 - k * 4} q-20,-30 0,-60 q20,-30 0,-60`;
-  return (
-    <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
-      <g style={{filter: 'drop-shadow(4px 5px 0 #050403)'}}>
-        {g >= teaAt && <g>
-          {/* barrel */}
-          <path d="M220,500 q-20,130 0,260 h190 q20,-130 0,-260 z" {...S} {...P(pt)} />
-          <path d="M210,560 h210 M210,700 h210" {...S} strokeWidth={5} {...P(pt)} />
-          {/* kettle over a fire */}
-          <path d="M520,520 q0,-90 110,-90 q110,0 110,90 q0,60 -110,60 q-110,0 -110,-60 z M740,470 l70,-40" {...S} stroke={CORAL} {...P(pt)} />
-          <path d="M560,640 l30,-40 l30,40 l30,-40 l30,40" {...S} stroke="#FF9F1C" {...P(pt)} />
-          {[600, 650].map((x, i) => <path key={x} d={steam(x, i)} {...S} strokeWidth={5} opacity={0.8} {...P(draw(teaAt + 8, 10))} />)}
-        </g>}
-        {g >= streamAt && <g>
-          {[0, 1, 2, 3].map((i) => <path key={i} d={`M1080,${520 + i * 60} q60,-30 120,0 t120,0 t120,0 t120,0 t120,0`} {...S} strokeWidth={6} opacity={0.9 - i * 0.15} {...P(ps)} />)}
-          <path d="M1300,330 v110 q0,30 30,30 h80 q30,0 30,-30 v-110 z M1440,360 q50,0 50,40 q0,40 -50,40" {...S} stroke="#ffffff" {...P(draw(streamAt + 6, 10))} />
-        </g>}
-      </g>
-      {g >= loopAt && <path d="" />}
-    </svg>
-  );
-};
+const STREAM: [number, number] = [1920, 1077];
+const STREAM_TAG = 'Illustration (AI lithograph): a Sierra stream beside the grade · barrel and kettle: illustration (AI lithograph)';
+/** The tea barrel (AI-lithograph prop, cut out): the one coral subject of the tea beat. */
+const Barrel: React.FC<{x: number; y: number; s: number; at: number; tint?: boolean}> = ({x, y, s, at: t0, tint = true}) => (
+  <CutOut src="img/ch03/ai_tea_barrel_w.jpg" size={[1344, 768]} mask={M3.teaBarrel} place={{left: x, top: y, scale: s}} at={t0} tint={tint ? 0.5 : 0} soft traceAt={tint ? t0 + 6 : undefined}
+    filter="saturate(0.6) contrast(1.05)" />
+);
 
-/** 12-14 · The one advantage: tea (boiled water) vs. straight from the streams; then the question, held. */
+/** 12-14 · The one advantage: tea (boiled water, carried up in barrels) vs. straight from the streams; then the question, held. */
 const Tea: React.FC<{phase: 0 | 1 | 2}> = ({phase}) => {
   const f = useCurrentFrame();
   const a = at('They did have') - 1;
   const s = at('White crews mostly') - 1;
   const q = at('Guess') - 1;
   const b = at('Meanwhile') - 1;
-  const z = phase === 0 ? zkeys(f, [[a, 1.35], [s, 1.45]]) : phase === 1 ? zkeys(f, [[s, 1.3], [q, 1.4]]) : zkeys(f, [[q, 1.0], [b, 1.02]]);
-  const ox = phase === 0 ? 520 : phase === 1 ? 1380 : 960;
+  if (phase === 1) {
+    return (
+      <AbsoluteFill>
+        <PhotoCam src="img/ch03/ai_sierra_stream.jpg" size={STREAM} cx={keys(f, [[s, 900], [q, 1060]])} cy={600} s={zkeys(f, [[s, 1.05], [q, 1.18]])} bw="saturate(0.5) contrast(1.05) brightness(0.9)" />
+        <Mono text="WHITE CREWS" x={110} y={100} size={28} at={s + 2} />
+        <Note text="straight from the streams" x={120} y={170} size={60} rot={-3} at={at('streams') - 6} />
+        <ScrimTag text={STREAM_TAG} />
+      </AbsoluteFill>
+    );
+  }
+  const z = phase === 0 ? zkeys(f, [[a, 1.0], [s, 1.08]]) : zkeys(f, [[q, 1.02], [b, 1.0]]);
   return (
     <AbsoluteFill>
-      <Desk3D tilt={phase === 2 ? 10 : 16} z={1} lamp={[ox, 560]}><div /></Desk3D>
-      <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: `${ox}px 600px`}}>
-        <TeaStream teaAt={phase === 0 ? at('tea') - 2 : -99} streamAt={phase === 1 ? at('streams') - 8 : phase === 2 ? -99 : 1e7} />
-        <Note text="tea: boiled water" x={200} y={790} size={54} rot={-3} at={phase === 0 ? at('boiled') - 2 : -99} />
-        <Note text="carried up in barrels" x={210} y={880} size={46} rot={-3} at={phase === 0 ? at('barrels') - 4 : -99} color="#ffffff" />
-        {phase > 0 && <Note text="straight from the streams" x={1080} y={790} size={54} rot={-3} at={phase === 1 ? at('streams') - 6 : -99} />}
+      <Desk3D tilt={phase === 2 ? 10 : 16} z={1} lamp={[phase === 0 ? 700 : 960, 560]}>
+        {phase === 2 && <Lift x={1000} y={260} w={760} hgt={426} h={6} at={-99} rot={2} seed={5}>
+          <TornPrint src="img/ch03/ai_sierra_stream.jpg" size={STREAM} x={0} y={0} w={760} at={-99} seed={6} real grey shadow={5} filter="grayscale(0.6) contrast(1.05) brightness(0.85)" />
+        </Lift>}
+      </Desk3D>
+      <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: phase === 0 ? '700px 600px' : '960px 600px'}}>
+        <Barrel x={phase === 0 ? 260 : 20} y={phase === 0 ? 200 : 300} s={phase === 0 ? 0.9 : 0.62} at={phase === 0 ? at('tea') - 2 : -99} tint={phase === 0} />
+        {phase === 0 && <>
+          <Hand parts={[['tea: '], ['boiled', '#ffffff'], [' water']]} x={1150} y={300} size={70} at={at('boiled') - 4} />
+          <Note text="carried up in barrels" x={1180} y={440} size={54} rot={-3} at={at('barrels') - 4} color="#ffffff" />
+        </>}
       </div>
-      {phase === 0 && <Mono text="CHINESE CREWS" x={170} y={110} size={28} at={a + 2} color={CORAL} />}
-      {phase === 1 && <Mono text="WHITE CREWS" x={1180} y={110} size={28} at={s + 2} />}
+      {phase === 0 && <Mono text="CHINESE CREWS" x={110} y={100} size={28} at={a + 2} color={CORAL} />}
       {phase === 2 && <>
-        <Mono text="CHINESE CREWS" x={210} y={240} size={26} at={-99} color={CORAL} />
-        <Mono text="WHITE CREWS" x={1100} y={240} size={26} at={-99} />
+        <Mono text="CHINESE CREWS · TEA" x={200} y={820} size={26} at={-99} color={CORAL} />
+        <Mono text="WHITE CREWS · STREAM WATER" x={1060} y={820} size={26} at={-99} />
         <Hand parts={[['who got sick less often?', '#ffffff']]} x={480} y={90} size={74} at={at('Guess') - 2} dur={14} />
+        <Loop cx={420} cy={560} rx={330} ry={250} at={at('less often') + 6} seed={71} tilt={-4} width={6} />
       </>}
-      {phase === 2 && <Loop cx={500} cy={560} rx={360} ry={230} at={at('less often') + 6} seed={71} tilt={-4} width={6} />}
+      <ScrimTag text={STREAM_TAG} />
     </AbsoluteFill>
   );
 };
@@ -428,9 +418,9 @@ const Sounds: React.FC = () => {
     [c('The 50'), 'whoosh', 0.2], [W('worked out'), 'marker_tick', 0.2], [at('most of the Central') - 2, 'card_slide_soft', 0.2], [at('workforce') + 4, 'marker_tick', 0.2],
     [c('Thousands'), 'whoosh', 0.2], [at('Thousands') + 1, 'stamp', 0.22], [W('southern China') + 1, 'marker_tick', 0.2],
     [c('They were not paid') - 4, 'whip_soft', 0.22], [at('not paid') + 2, 'stamp', 0.22], [at('Chinese workers earned') - 1, 'paper_slap_soft', 0.25], [W('less than') + 2, 'marker_tick', 0.2], [W('buy their own') + 2, 'marker_tick', 0.2],
-    [c('White workers'), 'whoosh', 0.2], [at('White workers'), 'paper_slap_soft', 0.25], [at('White workers') + 4, 'marker_tick', 0.2], [W('meals') + 2, 'marker_tick', 0.2],
+    [c('White workers'), 'whoosh', 0.2], [at('White workers', 2), 'paper_slap_soft', 0.25], [at('White workers', 2) + 4, 'marker_tick', 0.2], [W('meals') + 2, 'marker_tick', 0.2],
     [c('They did have') - 4, 'whip_soft', 0.22], [W('tea') + 2, 'marker_tick', 0.2], [W('boiled') + 2, 'marker_tick', 0.2], [W('barrels'), 'marker_tick', 0.2],
-    [c('White crews mostly') - 4, 'whip_soft', 0.22], [W('streams') - 4, 'marker_tick', 0.2],
+    [c('White crews mostly') - 4, 'whip_soft', 0.22], [W('streams') - 4, 'marker_tick', 0.2], [at('tea') - 2, 'paper_slap_soft', 0.22],
     [c('Guess'), 'whoosh', 0.18], [W('Guess') + 2, 'marker_tick', 0.2], [at('less often') + 4, 'marker_tick', 0.2],
     [c('Meanwhile') - 4, 'whip_soft', 0.25], [at('Union Pacific') + 2, 'stamp', 0.22], [W('flat Great Plains') + 2, 'marker_tick', 0.2],
     [c('Its crews'), 'whoosh', 0.2], [W('Irish') + 2, 'marker_tick', 0.2], [W('Civil War veterans') + 2, 'marker_tick', 0.2], [W('formerly enslaved') + 2, 'marker_tick', 0.2],
@@ -457,7 +447,7 @@ const Body: React.FC = () => {
     [at('The 50') - 1, <Workforce />, 'cut'],
     [at('Thousands') - 1, <Thousands />, 'cut'],
     [at('They were not paid') - 1, <Pay />, 'whip'],
-    [at('White workers') - 1, <Pay close />, 'cut'],
+    [at('White workers', 2) - 1, <Pay close />, 'cut'],
     [at('They did have') - 1, <Tea phase={0} />, 'whip'],
     [at('White crews mostly') - 1, <Tea phase={1} />, 'whip'],
     [at('Guess') - 1, <Tea phase={2} />, 'cut'],
@@ -484,4 +474,3 @@ export const Ch03: React.FC = () => (
     <Body />
   </ChapterShell>
 );
-void Arrow;

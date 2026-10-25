@@ -343,8 +343,8 @@ const House: React.FC = () => {
         <CutOut src={AI8.ballot} size={PROP} mask={M8.ballot} place={{left: 845, top: 690, scale: 0.12}} at={at('won') - 4} filter="grayscale(0.35) contrast(1.05)" />
         <Mono text="AFTER THE 1874 ELECTION" x={1190} y={820} size={26} at={at('won') - 2} />
         <Seats cx={1440} cy={760} R={330} {...HOUSE.after} at={at('won') - 2} />
-        <Note text="Democrats" x={1150} y={290} size={56} rot={-3} color="#FF6F61" at={at('Democrats') - 2} />
-        <Note text="win the House" x={1200} y={380} size={50} rot={-3} at={at('won') + 4} />
+        <Note text="Democrats" x={1150} y={190} size={56} rot={-3} color="#FF6F61" at={at('Democrats') - 2} />
+        <Note text="win the House" x={1200} y={280} size={50} rot={-3} at={at('won') + 4} />
       </AbsoluteFill>
       <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral · ballot box: Illustration (AI lithograph)" />
     </AbsoluteFill>

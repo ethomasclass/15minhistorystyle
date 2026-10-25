@@ -8,8 +8,9 @@ import {clamp} from '../lib/anim';
 import {Note, useGFrame} from '../kit/Kit';
 import {Sfx} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, hasFile, LEAD, makeTimeline, type Narration} from '../kit/shell';
-import {CircleMount, Desk3D, HingeYear, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
+import {CircleMount, CutOut, Desk3D, HingeYear, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
 import {IMG, SZ} from '../samples/masks';
+import {M2} from '../masks_ch02';
 import {ACT_H, ACT_LINE_Y, ACT_W, ActPage, BondKey, Hand, House, HOUSE_EMPTY, HOUSE_SEATS, LINES, MCross, MPin, MRoute, PL, Ribbon, RMI, RX, subLine, Township, townshipTaps, TownLegend, WestMap} from '../kit/ch01_extra';
 
 const N = words as Narration;
@@ -394,9 +395,20 @@ const LoansWide: React.FC = () => {
       <Ribbon fx={RX(RMI) / 2 - 80} tilt={keys(f, [[a, 64], [b, 58]])} spin={keys(f, [[a, -12], [b, -5]])} z={zkeys(f, [[a, 0.9], [b, 0.97]])} dy={110} lit={lit}
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <Hand parts={[['+ loans: '], ['government bonds', '#ffffff']]} x={110} y={80} size={66} at={at('loans') - 2} />
+      <Bonds at={at('bonds') - 2} />
       <BondKey ats={[lit[0], lit[1], lit[2]]} y={230} />
-      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11 · ridges and engines: illustration (AI lithograph)" />
+      <ScrimTag text="Elevations approx., heights exaggerated · bond rates: Pacific Railway Act, Sec. 11 · ridges, engines, bonds: illustration (AI lithograph)" />
     </AbsoluteFill>
+  );
+};
+/** A stack of bonds (AI-lithograph prop, cut out) slapping onto the bottom right of the frame. */
+const Bonds: React.FC<{at: number}> = ({at: s}) => {
+  const f = useCurrentFrame();
+  const sh = shake(f, [s + 4], 6);
+  return (
+    <div style={{position: 'absolute', inset: 0, transform: `translate(${sh.x}px, ${sh.y}px) rotate(-6deg)`, transformOrigin: '1500px 860px'}}>
+      <CutOut src="img/ch02/ai_bonds_w.jpg" size={[1344, 768]} mask={M2.bonds} place={{left: 1150, top: 640, scale: 0.55}} at={s} filter="saturate(0.7) contrast(1.05)" />
+    </div>
   );
 };
 const Mountains: React.FC = () => {
@@ -489,7 +501,7 @@ const Sounds: React.FC = () => {
     [c('The Central Pacific') - 4, 'whip_soft', 0.25], [at('Central Pacific') + 2, 'stamp', 0.2], [at('Sacramento') - 2, 'block_tap_soft', 0.15],
     [c('For every mile'), 'whoosh', 0.2], [at('land grant') + 1, 'stamp', 0.22], ...townshipTaps(at('every mile')).map((x, i) => [x, 'block_tap_soft', i % 2 ? 0.1 : 0.14] as [number, string, number]),
     [c('land on both') - 4, 'whip_soft', 0.22], [at('land on both') + 2, 'paper_slap_soft', 0.25], [at('land on both') + 4, 'page_turn', 0.3], [W('checkerboard') + 8, 'marker_tick', 0.2],
-    [c('Plus loans'), 'whoosh', 0.2], [W('loans'), 'marker_tick', 0.2], [at('harder the mile') - 2, 'block_tap_soft', 0.15], [at('harder the mile') + 10, 'block_tap_soft', 0.15], [at('bigger the loan') - 2, 'block_tap_soft', 0.18],
+    [c('Plus loans'), 'whoosh', 0.2], [W('loans'), 'marker_tick', 0.2], [at('bonds') - 2, 'paper_slap_soft', 0.25], [at('harder the mile') - 2, 'block_tap_soft', 0.15], [at('harder the mile') + 10, 'block_tap_soft', 0.15], [at('bigger the loan') - 2, 'block_tap_soft', 0.18],
     [c('Mountains paid') - 4, 'whip_soft', 0.22], [W('three times'), 'marker_tick', 0.2],
     [c('Land per mile'), 'whoosh', 0.2], [W('Land per'), 'marker_tick', 0.2], [W('Money per'), 'marker_tick', 0.2], [W('More money'), 'marker_tick', 0.2],
     [W('That means'), 'marker_tick', 0.2], [W("weren't really"), 'marker_tick', 0.2], [W('They were paid'), 'marker_tick', 0.2],
