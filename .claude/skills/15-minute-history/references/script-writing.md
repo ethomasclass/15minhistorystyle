@@ -124,8 +124,9 @@ scene import use the same stem.
   it colours. `tools/voice.py` sends tags to ElevenLabs (`eleven_v4` follows them and does not speak them; checked with
   speech-to-text) and strips them from the word timings and the screen. Keep them sparing, one every few paragraphs, from a small
   consistent set: `[curious]` (the driving question), `[wry]` / `[dry]` / `[deadpan]` (asides), `[thoughtful]` (the bigger promise,
-  "So let's go back to the question"), `[serious]` / `[quietly]` / `[somber]` / `[grim]` (heavy material), `[warmly]` (the plug, the
-  thank-you), `[light]` (hand-offs), `[pause]` (a beat before a turn). A tag never carries a joke the words don't already make.
+  "So let's go back to the question"), `[serious]` / `[somber]` / `[grim]` (heavy material), `[warmly]` (the plug, the
+  thank-you), `[light]` (hand-offs), `[pause]` (a beat before a turn). A tag never carries a joke the words don't already make. **Avoid `[quietly]`**: v4 drops to a near-whisper that the user
+  found creepy (Ep 1's "You can't find them"); `[firmly]` or `[plainly]` keeps a quiet line at speaking level.
 - Quotes in straight or curly double quotes are fine.
 
 ## 6. SCRIPT.md: the master document

@@ -44,7 +44,7 @@ Markup: `*emphasis*`, `{vocab term}`.
 
 ## 0:00 | Not in the Picture
 
-`ch01_not_in_the_picture.txt` · 169 words · voiced 57.5 s
+`ch01_not_in_the_picture.txt` · 169 words · voiced 58.0 s
 
 [matter-of-fact] This is the most famous photograph of the railroad that tied America together. And most of the people who built it aren't in it.
 
@@ -52,7 +52,7 @@ Look at it. Two locomotives, nose to nose. Men climbing on the engines, holding 
 
 Now look at the faces. The Central Pacific Railroad built the western half of this line. And most of its workers, most estimates say around four out of five, were Chinese.
 
-[pause] Look again. [quietly] You can't find them.
+Look again. [firmly] You can't find them.
 
 [curious] So here's the question I want to answer today. The railroad was supposed to tie a country that had just fought a civil war back together, and open the West to anyone. So who did it actually open it for?
 
@@ -112,7 +112,7 @@ So the Union Pacific had the Plains. The Central Pacific had a mountain.
 
 ## 5:04 | The Mountain
 
-`ch04_the_mountain.txt` · 230 words · voiced 89.6 s
+`ch04_the_mountain.txt` · 230 words · voiced 92.1 s
 
 To get through the Sierra Nevada, the Central Pacific had to dig tunnels through solid granite. Fifteen of them.
 
@@ -122,15 +122,15 @@ Then came the winter of 1866. More than 40 snowstorms. Snow deeper than the buil
 
 [serious] How many Chinese workers died building this railroad? *We don't know.* The company kept careful records of track and money. It kept very few records of Chinese deaths. Most of what we know comes from newspaper reports and letters.
 
-[quietly] In June 1867, the Chinese crews did something almost nobody expected.
+[serious] In June 1867, the Chinese crews did something almost nobody expected.
 
 About 3,000 of them put down their tools. They had three demands. The same pay as white workers. Shorter shifts inside the tunnels. And an end to overseers whipping them, or stopping them from leaving.
 
-[quietly] Charles Crocker cut off their food. No supplies reached the camps.
+[somber] Charles Crocker cut off their food. No supplies reached the camps.
 
 [somber] After about a week, the strike was over. [pause] The pay didn't change.
 
-[quietly] It was one of the largest strikes in the country up to that time. Almost no one outside the camps heard about it.
+[serious] It was one of the largest strikes in the country up to that time. Almost no one outside the camps heard about it.
 
 The work went on. And two years later, the two lines met.
 
