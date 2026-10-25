@@ -283,7 +283,7 @@ const Engine: React.FC<{src: string; size: [number, number]; w: number; mi: numb
   );
 };
 
-const RibbonWorld: React.FC<{lit: number[]; cpMi: number; upMi: number; fx: number; z: number; labels: boolean; engines: boolean}> = ({lit, cpMi, upMi, fx, z, labels, engines}) => {
+const RibbonWorld: React.FC<{lit: number[]; cpMi: number; upMi: number; fx: number; z: number; labels: boolean; engines: boolean; hide: string[]}> = ({lit, cpMi, upMi, fx, z, labels, engines, hide}) => {
   const labelOp = (x: number) => interpolate(Math.abs(x - fx) * z, [560, 700], [1, 0], clamp);
   const g = useGFrame();
   const hand = useHand();
@@ -319,7 +319,7 @@ const RibbonWorld: React.FC<{lit: number[]; cpMi: number; upMi: number; fx: numb
         </svg>
       </Upright>
       {labels && <Upright y={22} extra={240}>
-        {PTS.filter((p) => p[2]).map(([mi, ft, name]) => (
+        {PTS.filter((p) => p[2] && !hide.includes(p[2])).map(([mi, ft, name]) => (
           <div key={name} style={{position: 'absolute', left: Math.max(6, RX(mi) - 10), top: RY(mi) - 150, whiteSpace: 'nowrap', opacity: labelOp(RX(mi) + 120), textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>
             <div style={{fontFamily: hand.family, fontSize: 30 * hand.scale, color: PAL.mark}}>{name}</div>
             <div style={{fontFamily: JF.mono, fontSize: 16, letterSpacing: 2, color: '#fff'}}>{ft.toLocaleString('en-US')} FT</div>
@@ -335,13 +335,13 @@ const RibbonWorld: React.FC<{lit: number[]; cpMi: number; upMi: number; fx: numb
 };
 
 /** The 3D ribbon stage: camera focus fx (world px along the line), tilt, spin, zoom; engines at cpMi / upMi. */
-export const Ribbon: React.FC<{fx: number; tilt: number; spin: number; z: number; dy?: number; lit?: number[]; cpMi?: number; upMi?: number; labels?: boolean; engines?: boolean}> = ({
-  fx, tilt, spin, z, dy = 0, lit = [1e7, 1e7, 1e7, 1e7, 1e7], cpMi = 0, upMi = RMI, labels = true, engines = true,
+export const Ribbon: React.FC<{fx: number; tilt: number; spin: number; z: number; dy?: number; lit?: number[]; cpMi?: number; upMi?: number; labels?: boolean; engines?: boolean; hide?: string[]}> = ({
+  fx, tilt, spin, z, dy = 0, lit = [1e7, 1e7, 1e7, 1e7, 1e7], cpMi = 0, upMi = RMI, labels = true, engines = true, hide = [],
 }) => (
   <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #211e18 0%, #12100c 65%, #070605 100%)', perspective: 1500, perspectiveOrigin: '50% 35%', overflow: 'hidden'}}>
     <div style={{position: 'absolute', left: 960 - fx, top: 640 + dy, width: RX(RMI), height: 0, transformStyle: 'preserve-3d', transformOrigin: `${fx}px 0px`,
       transform: `scale(${z}) rotateX(${tilt}deg) rotateZ(${spin}deg)`}}>
-      <RibbonWorld lit={lit} cpMi={cpMi} upMi={upMi} fx={fx} z={z} labels={labels} engines={engines} />
+      <RibbonWorld lit={lit} cpMi={cpMi} upMi={upMi} fx={fx} z={z} labels={labels} engines={engines} hide={hide} />
     </div>
   </AbsoluteFill>
 );

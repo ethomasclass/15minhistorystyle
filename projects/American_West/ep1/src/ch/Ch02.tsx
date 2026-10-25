@@ -256,8 +256,8 @@ const Room: React.FC<{close?: boolean}> = ({close}) => {
   const m = at('Mexican') - 1;
   const b = at('Historians') - 1;
   const ats = [at('Native') - 1, at('Chinese immigrants') - 1, at('Mexican') - 1, at('Black families') - 1];
-  const z = close ? zkeys(f, [[m, 1.12], [b, 1.2]]) : zkeys(f, [[a, 0.94], [m, 1.0]]);
-  const ox = close ? keys(f, [[m, 1500], [b, 1640]]) : 960;
+  const z = close ? zkeys(f, [[m, 1.05], [b, 1.1]]) : zkeys(f, [[a, 0.94], [m, 1.0]]);
+  const ox = close ? keys(f, [[m, 1640], [b, 1700]]) : 960;
   return (
     <AbsoluteFill>
       <Desk3D tilt={close ? 8 : 14} z={1} lamp={[960, 560]}><div /></Desk3D>
@@ -392,7 +392,7 @@ const LoansWide: React.FC = () => {
   const p = progAt(f, a, b, 0.0, 0.06);
   return (
     <AbsoluteFill>
-      <Ribbon fx={RX(RMI) / 2 - 80} tilt={keys(f, [[a, 64], [b, 58]])} spin={keys(f, [[a, -12], [b, -5]])} z={zkeys(f, [[a, 0.9], [b, 0.97]])} dy={110} lit={lit}
+      <Ribbon fx={RX(RMI) / 2 - 80} tilt={keys(f, [[a, 64], [b, 58]])} spin={keys(f, [[a, -12], [b, -5]])} z={zkeys(f, [[a, 0.9], [b, 0.97]])} dy={110} lit={lit} hide={['Sherman Summit', 'North Platte', 'Omaha']}
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <Hand parts={[['+ loans: '], ['government bonds', '#ffffff']]} x={110} y={80} size={66} at={at('loans') - 2} />
       <Bonds at={at('bonds') - 2} />
@@ -419,7 +419,7 @@ const Mountains: React.FC = () => {
   const p = progAt(f, a, b, 0.06, 0.1);
   return (
     <AbsoluteFill>
-      <Ribbon fx={keys(f, [[a, RX(420)], [b, RX(130)]])} tilt={keys(f, [[a, 60], [b, 54]])} spin={keys(f, [[a, -14], [b, -18]])} z={zkeys(f, [[a, 1.2], [b, 1.7]])} dy={150} lit={lit}
+      <Ribbon fx={keys(f, [[a, RX(420)], [b, RX(130)]])} tilt={keys(f, [[a, 60], [b, 54]])} spin={keys(f, [[a, -14], [b, -18]])} z={zkeys(f, [[a, 1.2], [b, 1.7]])} dy={150} lit={lit} hide={['Promontory', 'Sherman Summit']}
         cpMi={690 * p} upMi={RMI - (RMI - 690) * p} />
       <BondKey ats={[-99, -99, -99]} y={60} />
       <Hand parts={[['mountain miles paid '], ['3×', '#FF6F61']]} x={880} y={860} size={66} at={at('three times') - 2} />

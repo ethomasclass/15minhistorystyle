@@ -5,15 +5,8 @@
     "date": "1861",
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2009631449/",
-    "source": "loc:2009631449"
-  },
-  "ch02/capitol_russell_1863.jpg": {
-    "title": "Capitol, Washington, D.C., north-east view. Dome and front unfinished, June 28, 1863.",
-    "artist": "Russell, Andrew J., photographer",
-    "date": "1863-01-01",
-    "licence": "No known restrictions on publication.",
-    "page": "https://www.loc.gov/item/2004680121/",
-    "source": "loc:2004680121"
+    "source": "loc:2009631449",
+    "note": "cropped to the print"
   },
   "ch02/homestead_act_p1.jpg": {
     "title": "File:Act of May 20, 1862 (Homestead Act), Public Law 37-64 (12 STAT 392). - DPLA - 59415c21d56256f5d118a7be2e4ea92b (page 1).jpg",
@@ -27,7 +20,8 @@
     "artist": "William S. Soule",
     "date": "1870date QS:P571,+1870-00-00T00:00:00Z/9",
     "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Arapaho_camp_with_buffalo_meat_drying_near_Fort_Dodge,_Kansas,_1870_-_NARA_-_518892.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Arapaho_camp_with_buffalo_meat_drying_near_Fort_Dodge,_Kansas,_1870_-_NARA_-_518892.jpg",
+    "note": "border cropped"
   },
   "ch02/morrill_act_p1.jpg": {
     "title": "File:Morrill Act - First Page.jpg",
@@ -41,7 +35,8 @@
     "artist": "Mathew Benjamin Brady",
     "date": "between circa 1860 and circa 1865date QS:P571,+1860-00-00T00:00:00Z/8,P1319,+1860-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9,P1480,Q5727902",
     "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Ruins_of_Richmond,_Va.,_April_1865_-_NARA_-_529221.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Ruins_of_Richmond,_Va.,_April_1865_-_NARA_-_529221.jpg",
+    "note": "plate border cropped"
   },
   "ch02/boronda_family.jpg": {
     "title": "File:Boronda family of Monterey County.jpg",
@@ -56,5 +51,48 @@
     "date": "19 August 1879date QS:P571,+1879-08-19T00:00:00Z/11",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:%22Missouri-Remarkable_Exodus_of_Negroes_from_Louisiana_and_Mississippi-Incidents_of_the_Arrival._Support_and_Departure_of_the_Refugees_from_St._Louis.%22.jpg"
+  },
+  "ch02/ai_bonds_w.jpg": {
+    "title": "Stack of 1860s government bonds (prop)",
+    "artist": "Illustration (AI lithograph), Gemini 2.5 Flash Image; weather.py light; masked (ch02_bonds)",
+    "licence": "generated for this video",
+    "page": "review/ai_images_ch02.md",
+    "ai": true
+  },
+  "ch02/ai_bonds_src.png": {
+    "title": "mask source for ai_bonds_w.jpg",
+    "ai": true
+  },
+  "samples/pacific_railway_act_1862_p1.jpg": {
+    "title": "Pacific Railway Act, Senate Mis. Doc. 108, 1862, p. 1 \u00b7 LOC Serial Set \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "samples/pacific_railway_act_1862_p4.jpg": {
+    "title": "Pacific Railway Act, Senate Mis. Doc. 108, 1862, p. 4 \u00b7 LOC Serial Set \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "samples/hart_tunnel8_worker.jpg": {
+    "title": "A. A. Hart, Heading of east portal Tunnel No. 8, 1865\u201369 \u00b7 LOC LC-DIG-stereo-1s00553, no known restrictions \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "samples/red_cloud_trager_kuhn_1891.jpg": {
+    "title": "(fallback only) Trager & Kuhn, Red Cloud, c. 1891 \u00b7 LOC \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/ridge_sierra_a_cut.png": {
+    "title": "AI lithograph (Gemini 2.5 Flash Image), ribbon backdrop, reused from review/ai_tests/ribbon; not tagged on screen",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/ridge_wyoming_a_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/engine_cp_east_b_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/engine_up_west_b_cut.png": {
+    "title": "AI lithograph, reused",
+    "note": "shared sample/preview asset, used in this chapter"
   }
 }

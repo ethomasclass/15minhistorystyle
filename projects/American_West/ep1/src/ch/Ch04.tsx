@@ -11,7 +11,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration} from '.
 import {CircleMount, MapCard, Pin} from '../samples/kit';
 import {IMG, SM, SZ, WARREN} from '../samples/masks';
 import {keys, Lift, ScrimTag, shake, Shots, SlapTitle} from '../previews/fx';
-import {Big, BWX, Clip, DeskCam, Label, Line, LITHO, LITHO_QUIET, Lines, Pic, Prop, Sounds, type SfxRow, Stage, Tally, Upright} from '../kit/ch04_extra';
+import {Big, BWX, Clip, DeskCam, Float, Label, Line, LITHO, LITHO_QUIET, Lines, Pic, Prop, Sounds, type SfxRow, Stage, Tally, Upright} from '../kit/ch04_extra';
 import {M4} from '../masks_ch04';
 
 const N = words as Narration;
@@ -73,13 +73,11 @@ const Quiet: React.FC<{children: React.ReactNode}> = ({children}) => <PaletteCtx
 /** 1 · WIDE: the east portal of the Summit Tunnel; push toward the mouth. */
 const Portal: React.FC = () => (
   <Pic src={I.portal} size={Z.portal} tag={TAG.portal} k={[[0, 1046, 1000, 0.95], [at('Fifteen'), 910, 1080, 1.3]]}>
-    {(S) => {
-      const [mx, my] = S(905, 1060);
+    {() => {
       return (
         <>
           <SlapTitle text="THE MOUNTAIN" x={100} y={860} size={104} at={8} seed={41} />
-          <Loop cx={mx} cy={my} rx={210} ry={200} at={at('solid') - 2} seed={7} tilt={-6} width={6} />
-          <Note text="solid granite" x={Math.min(1500, mx + 240)} y={my - 300} size={54} rot={-4} at={at('solid')} />
+          <Note text="solid granite" x={1240} y={170} size={60} rot={-4} at={at('solid') - 2} />
         </>
       );
     }}
@@ -190,7 +188,7 @@ const Summit: React.FC = () => {
       <SlapTitle text="SUMMIT TUNNEL" x={100} y={80} size={96} at={at('Summit')} seed={43} />
       <Label text="worked from 4 faces: both ends + a shaft" x={104} y={226} size={24} at={at('mostly')} />
       <Note text="by hand" x={1300} y={880} size={58} rot={-3} at={at('hand') - 2} />
-      <ScrimTag text="Diagram · heights approx." />
+      <ScrimTag text="Heights approx." />
     </AbsoluteFill>
   );
 };
@@ -203,12 +201,12 @@ const Tools: React.FC = () => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <DeskCam k={[[a, 22, 1.0, 0, 20, -2], [at('and later'), 16, 1.06, -20, 0, 0]]}>
-        <Lift x={160} y={140} w={760} hgt={760} h={20} at={at('Hammers')} rot={-6} seed={3}>
+        <Float x={160} y={140} w={760} hgt={760} h={20} at={at('Hammers')} rot={-6} seed={3}>
           <Prop src={I.drill} m={M4.drillsledge} x={0} y={0} w={700} at={-99} />
-        </Lift>
-        <Lift x={1050} y={250} w={520} hgt={640} h={14} at={at('black')} rot={4} seed={6}>
+        </Float>
+        <Float x={1050} y={250} w={520} hgt={640} h={14} at={at('black')} rot={4} seed={6}>
           <Prop src={I.keg} m={M4.powderkeg} x={60} y={0} w={380} at={-99} />
-        </Lift>
+        </Float>
       </DeskCam>
       <Lines x={140} y={940} size={50} rows={[{text: 'hammers + drills', at: at('Hammers') + 4}]} />
       <Lines x={1150} y={940} size={50} rows={[{text: 'black powder', at: at('black') + 2}]} />
@@ -235,7 +233,7 @@ const Foot: React.FC = () => {
   const pal = usePal();
   const a = at('On a good') - 1;
   return (
-    <Pic src={I.face} size={Z.face} filter={LITHO} mask={M4.driller} tintAt={a + 4} traceAt={a + 6} k={[[a, 760, 560, 1.12], [at('Then came'), 900, 520, 1.2]]}>
+    <Pic src={I.face} size={Z.face} filter="grayscale(1) contrast(1.12) brightness(1.02)" mask={M4.driller} tintAt={a + 4} traceAt={a + 6} k={[[a, 760, 560, 1.12], [at('Then came'), 900, 520, 1.2]]}>
       {(S, s) => {
         const [x0, y0] = S(330, 330);
         const len = 300 * s;
@@ -285,7 +283,7 @@ const SnowDepth: React.FC = () => {
   const a = at('Snow deeper') - 1;
   const rise = interpolate(g, [a + 6, at('buildings') + 10], [0, 1], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 2)});
   const ground = 860;
-  const top = ground - rise * 560;
+  const top = ground - rise * 480;
   const wave = Array.from({length: 33}).map((_, i) => `${i * 60},${(top + Math.sin(i * 0.9) * 10).toFixed(1)}`).join(' L');
   return (
     <DeskCam k={[[a, 6, 1.0, 0, 0, 0], [at('Crews dug'), 6, 1.06, 0, 30, 0]]}>
@@ -300,7 +298,7 @@ const SnowDepth: React.FC = () => {
         {rise > 0 && <path d={`M0,${ground + 20} L0,${top} L${wave} L1920,${top} L1920,${ground + 20} Z`} fill="rgba(237,231,220,0.55)" stroke="#f4efe6" strokeWidth={4} />}
         <line x1={0} y1={ground} x2={1920} y2={ground} stroke={pal.mark} strokeWidth={3} opacity={0.6} />
       </svg>
-      <div style={{position: 'absolute', left: 400 + 1400, top: 300 + 260, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#f4efe6', whiteSpace: 'nowrap', opacity: rise > 0.9 ? 1 : 0,
+      <div style={{position: 'absolute', left: 400 + 1380, top: 300 + 330, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#f4efe6', whiteSpace: 'nowrap', opacity: rise > 0.9 ? 1 : 0,
         textShadow: '0 0 2px #111, 2px 2px 0 #111'}}>DRIFTS OVER THE ROOFS</div>
     </DeskCam>
   );
@@ -316,7 +314,7 @@ const SnowTunnel: React.FC = () => {
         return (
           <>
             <Arrow2 x1={tx + 520} y1={ty - 330} x2={tx + 110} y2={ty - 60} at={at('the snow') - 2} />
-            <Note text="a tunnel through the snow" x={Math.min(1240, tx + 260)} y={Math.max(60, ty - 430)} size={50} rot={-4} at={at('the snow')} />
+            <Note text="a tunnel through the snow" x={Math.min(1080, tx + 200)} y={Math.max(60, ty - 430)} size={50} rot={-4} at={at('the snow')} />
             <Note text="…to reach the rock" x={Math.min(1300, tx + 300)} y={Math.min(930, ty + 240)} size={46} rot={-3} at={at('reach') - 2} />
           </>
         );
@@ -365,11 +363,11 @@ const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const a = detail ? at('It kept') - 1 : at('The company') - 1;
   const b = detail ? at('Most of') : at('It kept');
   const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 1]];
-  const cam = detail ? {z: keys(f, [[a, 1.35], [b, 1.5]]), x: -260, y: -230} : {z: keys(f, [[a, 0.98], [b, 1.04]]), x: 0, y: 0};
+  const cam = detail ? {z: keys(f, [[a, 1.3], [b, 1.42]]), x: -60, y: -300} : {z: keys(f, [[a, 0.84], [b, 0.88]]), x: 0, y: -20};
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 12, cam.z, cam.x, cam.y, -1], [b, 12, cam.z, cam.x, cam.y, -1]]}>
-        <Lift x={330} y={170} w={1260} hgt={700} h={8} at={detail ? -99 : at('company')} rot={-1} seed={4}>
+        <Lift x={330} y={110} w={1260} hgt={700} h={8} at={detail ? -99 : at('company')} rot={-1} seed={4}>
           <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 40% 30%, #36312a 0%, #26231d 75%, #1d1a15 100%)', boxShadow: `14px 18px 0 #050403`}}>
             <div style={{position: 'absolute', left: 50, top: 40, fontFamily: JF.mono, fontSize: 28, letterSpacing: 4, color: pal.mark}}>THE COMPANY KEPT</div>
             {rows.map(([t, on, n], i) => (
@@ -402,7 +400,7 @@ const Newspaper: React.FC = () => {
           <Clip src={I.paper} size={Z.paper} x={0} y={0} w={900} h={940} sx0={60} sy0={560} scale={0.95} at={-99} />
         </Lift>
       </DeskCam>
-      <Lines x={1240} y={360} size={56} rows={[{text: 'newspaper reports', at: at('newspaper') + 2}, {text: '+ letters', at: at('letters') - 2}]} />
+      <Lines x={1200} y={360} size={50} rows={[{text: 'newspaper reports', at: at('newspaper') + 2}, {text: '+ letters', at: at('letters') - 2}]} />
       <ScrimTag text={TAG.paper} x={34} y={24} />
     </AbsoluteFill>
   );
@@ -450,8 +448,8 @@ const Demands: React.FC = () => {
               swipes={PH.demand} swipeAt={at('demands') - 2} dur={12} lineH={44} color={teal} />
           </Lift>
         </DeskCam>
-        <Note text="“They demand more wages" x={1240} y={420} size={48} rot={-3} at={at('demands') + 4} />
-        <Note text="and less hours work.”" x={1270} y={500} size={48} rot={-3} at={at('demands') + 10} />
+        <Note text="“They demand more wages" x={1200} y={420} size={44} rot={-3} at={at('demands') + 4} />
+        <Note text="and less hours work.”" x={1230} y={500} size={44} rot={-3} at={at('demands') + 10} />
         <Note text="three demands" x={1240} y={250} size={60} rot={-4} at={at('three') - 2} />
         <ScrimTag text={TAG.paper} x={34} y={24} />
       </AbsoluteFill>
@@ -530,7 +528,7 @@ const Held: React.FC = () => {
   const a = at('The pay') - 1;
   return (
     <Quiet>
-      <Pic src={IMG.tunnel8} size={SZ.tunnel8} tag={TAG.worker} vignette={0.7} k={[[a, 960, 1320, 0.95], [at('Almost'), 900, 1300, 1.0]]} traceAt={at('country')} mask={SM.worker}>
+      <Pic src={IMG.tunnel8} size={SZ.tunnel8} tag={TAG.worker} vignette={0.7} k={[[a, 960, 1320, 0.95], [at('Almost no'), 900, 1300, 1.0]]} traceAt={at('country')} mask={SM.worker}>
         {() => <Lines x={1000} y={240} size={46} gap={80} rows={[{text: 'one of the largest strikes', at: at('country') + 2}, {text: 'in the country so far', at: at('country') + 10}]} />}
       </Pic>
     </Quiet>
@@ -539,7 +537,7 @@ const Held: React.FC = () => {
 
 /** 23 · almost no one heard: the desk pulls away from one small clipping. */
 const Unheard: React.FC = () => {
-  const a = at('Almost') - 1;
+  const a = at('Almost no') - 1;
   return (
     <Quiet>
       <AbsoluteFill>
@@ -614,7 +612,7 @@ const SHOTS: [number, React.ReactNode, ('whip' | 'cut')?][] = [
   [c('No supplies'), <Camps />, 'cut'],
   [c('After about'), <Starving />, 'cut'],
   [c('The pay'), <Held />, 'cut'],
-  [c('Almost'), <Unheard />, 'cut'],
+  [c('Almost no'), <Unheard />, 'cut'],
   [c('The work'), <Onward />, 'cut'],
 ];
 

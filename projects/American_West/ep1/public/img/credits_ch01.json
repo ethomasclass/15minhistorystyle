@@ -5,6 +5,21 @@
     "date": "1865-01-01",
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2005683008/",
-    "source": "loc:2005683008"
+    "source": "loc:2005683008",
+    "note": "left half of the stereo pair, cropped from the TIFF master"
+  },
+  "samples/spike_russell_1869.jpg": {
+    "title": "A. J. Russell, East and West Shaking Hands at Laying Last Rail, May 10, 1869 \u00b7 Wikimedia Commons (Cuerden restoration), public domain \u00b7 see img/samples/CREDITS.md",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "previews/hart_tunnel8_worker_w.jpg": {
+    "title": "Hart Tunnel No. 8 worker, weathered (light) for the cut-out \u00b7 LOC",
+    "note": "shared sample/preview asset, used in this chapter"
+  },
+  "ch01/west_map.json": {
+    "title": "Series map of the West (drawn for this video)",
+    "artist": "Natural Earth 1:50m outlines (public domain); routes from town control points; 1851 Fort Laramie territories merged and simplified, approx.",
+    "licence": "public domain data",
+    "page": "https://www.naturalearthdata.com/ \u00b7 built by review/build_ch01-03_westmap.py"
   }
 }

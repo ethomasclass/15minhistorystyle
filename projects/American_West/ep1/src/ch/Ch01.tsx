@@ -99,7 +99,7 @@ const Engines: React.FC = () => {
           <>
             <Loop cx={jx} cy={jy} rx={330} ry={250} at={at('Two locomotives') + 3} seed={5} tilt={-6} width={6} />
             <Loop cx={ux} cy={uy} rx={320} ry={260} at={at('nose to nose') + 6} seed={9} tilt={4} width={6} />
-            <Note text="Central Pacific" x={jx - 240} y={Math.min(880, jy + 260)} size={50} rot={-3} at={at('Two locomotives') + 8} />
+            <Note text="Central Pacific" x={jx - 240} y={Math.min(880, jy + 260)} size={50} rot={-3} at={at('Two locomotives') + 8} out={at('Two locomotives') + 24} />
             <Note text="Union Pacific" x={ux - 200} y={Math.min(880, uy + 270)} size={50} rot={-3} at={at('nose to nose') + 10} />
             <ScrimTag text={SPIKE_TAG} x={34} y={24} />
           </>
@@ -193,7 +193,7 @@ const Faces: React.FC = () => {
 /** 8 · The Central Pacific built the western half: the series map, both lines, the CP's half in coral. */
 const WestHalf: React.FC = () => {
   const a = at('The Central') - 1;
-  const ks = [{f: a, x: 1700, y: 1250, z: 0.5, tilt: 34, rot: -4}, {f: at('And most of its') - 1, x: 1420, y: 1260, z: 0.62, tilt: 40, rot: -1}];
+  const ks = [{f: a, x: 1700, y: 1250, z: 0.5, tilt: 34, rot: -4}, {f: at('And most of its') - 1, x: 1480, y: 1260, z: 0.62, tilt: 40, rot: -1}];
   return (
     <AbsoluteFill>
       <WestMap keys={ks}>
@@ -370,7 +370,7 @@ const Title: React.FC = () => {
   return (
     <AbsoluteFill style={{background: '#0b0a08'}}>
       <PhotoCam src={IMG.spike} size={SZ.spike} cx={1920} cy={1350} s={zkeys(f, [[0, 0.52], [TITLE_FRAMES, 0.56]])} bw="grayscale(1) contrast(1.15) brightness(0.42)" vignette={0.8} />
-      <SlapTitle text={TITLE} x={300} y={360} size={150} at={4} seed={61} />
+      <SlapTitle text={TITLE} x={280} y={370} size={130} at={4} seed={61} />
       {g >= 14 && <div style={{position: 'absolute', left: 340, top: 600, fontFamily: JF.display, fontSize: 60, color: pal.mark, whiteSpace: 'nowrap', textShadow: '0 3px 16px rgba(0,0,0,0.9)',
         opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
       <Note text={DATES} x={1300} y={730} size={56} rot={-5} at={24} />

@@ -281,3 +281,20 @@ export const Lines: React.FC<{x: number; y: number; rows: {text: string; at: num
 
 /** Orange-tape colour for small accents (the palette's title box). */
 export const useBox = () => boxOf(usePal());
+
+/** Like fx's Lift but without the rectangular contact shadow (for cut-out props that carry their own ink shadow). */
+export const Float: React.FC<{x: number; y: number; w: number; hgt: number; h?: number; at: number; rot?: number; blur?: number; seed?: number; children: React.ReactNode}> = ({
+  x, y, w, hgt, h = 6, at, rot = 0, blur = 0, seed = 1, children,
+}) => {
+  const f = useCurrentFrame();
+  const sl = useSlap(at);
+  if (!sl.on) return null;
+  const z = h + sl.lift * 600;
+  const b = Math.sin(f / 38 + seed) * 0.25;
+  return (
+    <div style={{position: 'absolute', left: x + 400, top: y + 300, width: w, height: hgt, opacity: sl.opacity, transformOrigin: '50% 50%',
+      transform: `translateZ(${z}px) rotate(${rot + b}deg) scale(${sl.scale})`, filter: blur ? `blur(${blur}px)` : undefined}}>
+      {children}
+    </div>
+  );
+};

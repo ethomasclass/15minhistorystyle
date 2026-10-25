@@ -210,7 +210,7 @@ const Thousands: React.FC = () => {
     <AbsoluteFill>
       <PhotoCam src={IMG.tunnel8} size={SZ.tunnel8} cx={keys(f, [[a, 900], [b, 800]])} cy={keys(f, [[a, 1300], [b, 1450]])} s={zkeys(f, [[a, 0.6], [b, 0.82]])} mask={SM.worker} tintAt={a + 3} traceAt={a + 5} />
       <SlapTitle text="THOUSANDS" x={1150} y={110} size={100} at={at('Thousands') + 1} seed={53} />
-      <Note text="many from southern China" x={1170} y={260} size={56} rot={-3} at={at('southern China') - 3} />
+      <Note text="many from southern China" x={1040} y={260} size={54} rot={-3} at={at('southern China') - 3} />
       <ScrimTag text="A. A. Hart, Heading of east portal, Tunnel No. 8, 1865–69 · Library of Congress" x={34} y={1026} />
     </AbsoluteFill>
   );
@@ -321,7 +321,7 @@ const Crews: React.FC = () => {
       <PhotoCam src="img/ch03/russell_casement_outfit.jpg" size={OUTFIT} cx={keys(f, [[a, 1150], [b, 1000]])} cy={keys(f, [[a, 760], [b, 720]])} s={zkeys(f, [[a, 1.0], [b, 1.12]])} />
       <Mono text="UNION PACIFIC CREWS" x={1060} y={600} size={28} at={a + 3} />
       <Note text="Irish immigrants" x={1070} y={670} size={56} rot={-3} at={at('Irish') - 2} />
-      <Note text="Civil War veterans (both armies)" x={1000} y={760} size={56} rot={-3} at={at('Civil War veterans') - 2} />
+      <Note text="Civil War veterans (both armies)" x={900} y={760} size={56} rot={-3} at={at('Civil War veterans') - 2} />
       <Note text="formerly enslaved men" x={1090} y={850} size={56} rot={-3} at={at('formerly enslaved') - 2} color="#ffffff" />
       <ScrimTag text="A. J. Russell, General John S. Casement and his outfit (Union Pacific), 1867–68 · Wikimedia Commons" x={34} y={1026} />
     </AbsoluteFill>
@@ -365,8 +365,8 @@ const Hunting: React.FC<{hold?: boolean}> = ({hold}) => {
           <MRegion api={api} pts={hunt} at={hold ? -99 : at('hunting grounds') - 2} />
           <MRoute api={api} pts={LINES.up} at={hold ? -99 : a} dur={24} color={CORAL} width={8} />
           <MPin api={api} at={[hunt[1][0] + 80, hunt[1][1] + 140]} show={hold ? -99 : at('Lakota') - 1} label="Lakota" size={56} color="#ffffff" />
-          <MPin api={api} at={[hunt[6][0] + 140, hunt[6][1] - 160]} show={hold ? -99 : at('Cheyenne') - 1} label="Cheyenne" side="l" size={56} color="#ffffff" />
-          <MPin api={api} at={[hunt[8][0] + 40, hunt[8][1] - 170]} show={hold ? -99 : at('Arapaho') - 1} label="Arapaho" size={56} color="#ffffff" />
+          <MPin api={api} at={[hunt[6][0] + 150, hunt[6][1] + 10]} show={hold ? -99 : at('Cheyenne') - 1} label="Cheyenne" size={56} color="#ffffff" />
+          <MPin api={api} at={[hunt[8][0] + 30, hunt[8][1] - 30]} show={hold ? -99 : at('Arapaho') - 1} label="Arapaho" side="l" size={56} color="#ffffff" />
         </>}
       </WestMap>
       {!hold && <Note text="hunting grounds" x={120} y={110} size={64} rot={-3} at={at('hunting grounds') - 2} />}
@@ -388,7 +388,7 @@ const Ending: React.FC<{mountain?: boolean}> = ({mountain}) => {
   return (
     <AbsoluteFill>
       {mountain ? <Ribbon fx={keys(f, [[m, RX(260)], [END + 60, RX(110)]])} tilt={keys(f, [[m, 58], [END + 60, 52]])} spin={keys(f, [[m, -10], [END + 60, -16]])} z={zkeys(f, [[m, 1.3], [END + 60, 1.75]])} dy={160}
-        lit={lit} cpMi={6} upMi={1300} />
+        lit={lit} cpMi={6} upMi={1300} hide={['Promontory']} />
         : <Ribbon fx={keys(f, [[a, RX(1500)], [m, RX(1350)]])} tilt={keys(f, [[a, 62], [m, 58]])} spin={keys(f, [[a, 10], [m, 6]])} z={zkeys(f, [[a, 1.15], [m, 1.25]])} dy={110} lit={lit} cpMi={6} upMi={1300} />}
       {!mountain && <Note text="the Union Pacific: the Plains" x={110} y={110} size={60} rot={-3} at={at('had the Plains') - 2} />}
       {mountain && <Hand parts={[['the Central Pacific: '], ['a mountain', CORAL]]} x={110} y={100} size={80} at={at('a mountain') - 2} />}
