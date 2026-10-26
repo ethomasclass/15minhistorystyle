@@ -101,7 +101,7 @@ const Treaty: React.FC = () => {
   const a = at('In 1868') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 12, 1.25, 260, 180, 0], [at('It set'), 12, 1.4, 300, 120, 0]]}>
+      <DeskCam k={[[a, 12, 1.08, -160, 120, 0], [at('It set'), 12, 1.18, -240, 200, 0]]}>
         <Lift x={1150} y={20} w={640} hgt={980} h={8} at={-99} rot={4} seed={61}>
           <Print src={I.treaty1} size={Z.treaty1} x={0} y={0} w={640} at={-99} seed={61} filter="grayscale(1) sepia(0.25) contrast(1.15) brightness(0.92)" />
         </Lift>
@@ -149,7 +149,7 @@ const Article: React.FC = () => {
         </Lift>
       </DeskCam>
       <Label text="Article II" x={1620} y={160} size={28} at={a + 4} color={WHITE} />
-      <Lines x={1180} y={940} size={52} rows={[{text: '“absolute and undisturbed use and occupation”', at: at('undisturbed') - 2, color: WHITE}]} />
+      <Lines x={140} y={960} size={50} rows={[{text: '“absolute and undisturbed use and occupation”', at: at('undisturbed') - 2, color: WHITE}]} />
       <ScrimTag text={TAG.treaty} x={34} y={24} />
     </AbsoluteFill>
   );
@@ -189,7 +189,7 @@ const Column: React.FC = () => {
       </DeskCam>
       <SlapTitle text="SUMMER 1874" x={110} y={60} size={100} at={at('summer')} seed={103} />
       <Big text="≈ 1,000 men" x={1180} y={70} size={110} at={at('thousand') - 1} color={WHITE} />
-      <Note2 text="into the Black Hills" x={1220} y={220} at={at('Black Hills', 2) - 2} />
+      <Note2 text="into the Black Hills" x={1180} y={220} size={54} at={at('Black Hills', 2) - 2} />
       <ScrimTag text={TAG.column} />
     </AbsoluteFill>
   );
@@ -313,12 +313,12 @@ const Headline: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 10, 1.04, 0, 0, 2], [at('Prospectors'), 10, 1.12, 0, 20, 0]]}>
-        <Lift x={330} y={20} w={1100} hgt={1000} h={8} at={a + 2} rot={2} seed={68}>
+        <Lift x={640} y={20} w={1100} hgt={1000} h={8} at={a + 2} rot={2} seed={68}>
           <Clip src={I.headline} size={Z.headline} x={0} y={0} w={1100} h={1000} sx0={560} sy0={700} scale={0.78} at={-99} band={[740, 1740]} pullAt={a + 4}
             swipes={GOLD_LINES} swipeAt={at('rest') - 6} dur={14} lineH={84} color={CORAL} />
         </Lift>
       </DeskCam>
-      <Lines x={1480} y={160} size={58} gap={88} rows={[{text: 'newspapers', at: at('Newspapers') - 2}, {text: 'did the rest', at: at('rest') - 4, color: WHITE}]} />
+      <Lines x={110} y={300} size={62} gap={96} rows={[{text: 'newspapers', at: at('Newspapers') - 2}, {text: 'did the rest', at: at('rest') - 4, color: WHITE}]} />
       <ScrimTag text={TAG.headline} />
     </AbsoluteFill>
   );
@@ -361,7 +361,7 @@ const Offer: React.FC<{detail: boolean}> = ({detail}) => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <DeskCam k={detail ? [[a, 14, 1.1, -60, 20, 0], [b, 14, 1.16, -80, 20, 0]] : [[a, 22, 0.98, 0, 0, -2], [b, 18, 1.04, 0, 0, 0]]}>
-        <Float x={1240} y={300} w={560} hgt={640} h={14} at={detail ? -99 : at('buy') - 1} rot={-3} seed={14}>
+        <Float x={1240} y={300} w={560} hgt={640} h={14} at={detail ? -99 : at('offered') - 1} rot={-3} seed={14}>
           <Prop src={I.coins} m={M6.coins} x={0} y={0} w={500} at={-99} />
         </Float>
       </DeskCam>
@@ -401,7 +401,7 @@ const NoCard: React.FC = () => {
         <Field tag="WHY" text="treaty land: the 1868 promise" x={40} y={410} at={f0 + 9} size={48} />
         <Field tag="HOW IT ENDED" text="→ Episode 4" x={40} y={500} at={f0 + 12} size={48} color={WHITE} />
       </div>}
-      <Hand parts={[['The Lakota ', WHITE], ['said no.', CORAL]]} x={1180} y={130} size={90} at={at('said no') - 2} />
+      <Hand parts={[['The Lakota ', WHITE], ['said no.', CORAL]]} x={130} y={90} size={90} at={at('said no') - 2} />
       {g >= at("didn't") - 2 && <Lines x={1380} y={960} size={52} rows={[{text: "It didn't matter.", at: at("didn't") - 2, color: WHITE}]} />}
     </AbsoluteFill>
   );
@@ -417,8 +417,8 @@ const Deadwood: React.FC<{detail: boolean}> = ({detail}) => {
     <AbsoluteFill>
       <DeskCam k={detail ? [[a, 10, 1.08, 120, 20, 0], [b, 10, 1.16, 140, 30, 0]] : [[a, 18, 0.98, 0, 0, -1], [b, 14, 1.06, 0, 10, 0]]}>
         {!detail ? (
-          <Lift x={80} y={110} w={1300} hgt={941} h={8} at={-99} rot={-1.5} seed={69}>
-            <Print src={I.deadwood} size={Z.deadwood} x={0} y={0} w={1300} at={-99} seed={69} filter="grayscale(1) contrast(1.15)" />
+          <Lift x={80} y={190} w={1240} hgt={898} h={8} at={-99} rot={-1.5} seed={69}>
+            <Print src={I.deadwood} size={Z.deadwood} x={0} y={0} w={1240} at={-99} seed={69} filter="grayscale(1) contrast(1.15)" />
           </Lift>
         ) : (
           <Lift x={60} y={80} w={1080} hgt={1311} h={8} at={-99} rot={1.5} seed={70}>
@@ -427,7 +427,7 @@ const Deadwood: React.FC<{detail: boolean}> = ({detail}) => {
         )}
       </DeskCam>
       {!detail && <>
-        <SlapTitle text="DEADWOOD · 1876" x={1000} y={80} size={84} at={at('Deadwood') } seed={111} />
+        <SlapTitle text="DEADWOOD · 1876" x={110} y={60} size={90} at={at('Deadwood') } seed={111} />
         <Lines x={1420} y={260} size={58} gap={90} rows={[{text: 'a mining camp', at: at('mining camp') - 2}, {text: 'on treaty land', at: at('treaty land') - 2, color: CORAL}]} />
       </>}
       {detail && <>
@@ -445,10 +445,10 @@ const Deadwood: React.FC<{detail: boolean}> = ({detail}) => {
 const Stack: React.FC = () => {
   const a = at('So stack') - 1;
   const items: {src: string; size: [number, number]; crop?: [number, number, number, number]; w: number; x: number; y: number; rot: number; word: string; n?: number; label: string}[] = [
-    {src: I.treaty1, size: Z.treaty1, crop: [0, 0, 3347, 2600], w: 520, x: 180, y: 260, rot: -6, word: 'A treaty', n: 2, label: 'a treaty'},
-    {src: I.column, size: Z.column, crop: [0, 0, 3000, 1500], w: 600, x: 560, y: 340, rot: 4, word: 'An expedition', label: 'an expedition'},
-    {src: I.headline, size: Z.headline, crop: [560, 700, 1900, 1800], w: 520, x: 1000, y: 260, rot: -3, word: 'A rumor', label: 'a rumor'},
-    {src: I.deadwood, size: Z.deadwood, w: 600, x: 1300, y: 380, rot: 5, word: 'A rush', label: 'a rush'},
+    {src: I.treaty1, size: Z.treaty1, crop: [0, 0, 3347, 2600], w: 480, x: 120, y: 260, rot: -6, word: 'A treaty', n: 2, label: 'a treaty'},
+    {src: I.column, size: Z.column, crop: [0, 0, 3000, 1500], w: 560, x: 470, y: 340, rot: 4, word: 'An expedition', label: 'an expedition'},
+    {src: I.headline, size: Z.headline, crop: [560, 700, 1900, 1800], w: 480, x: 860, y: 250, rot: -3, word: 'A rumor', label: 'a rumor'},
+    {src: I.deadwood, size: Z.deadwood, w: 540, x: 1180, y: 380, rot: 5, word: 'A rush', label: 'a rush'},
   ];
   return (
     <AbsoluteFill>
@@ -460,7 +460,7 @@ const Stack: React.FC = () => {
         ))}
       </DeskCam>
       <Label text="stack it up" x={130} y={90} size={30} at={at('stack')} color={WHITE} />
-      {items.map((it, i) => <Lines key={i} x={170 + i * 420} y={900} size={58} rows={[{text: it.label, at: at(it.word, it.n ?? 1) - 1, color: i === 3 ? CORAL : undefined}]} />)}
+      {items.map((it, i) => <Lines key={i} x={[130, 520, 1000, 1420][i]} y={900} size={54} rows={[{text: it.label, at: at(it.word, it.n ?? 1) - 1, color: i === 3 ? CORAL : undefined}]} />)}
     </AbsoluteFill>
   );
 };

@@ -46,3 +46,14 @@ the card. Gentle SFX as in Ep 1 (whoosh/whip_soft on shots, marker_tick 4 frames
   suggested Ep 2 set: the Chinook painting, McCoy's Abilene 1867 plate, the 1878 longhorn herd, Gardner's 1867 stock yard, the
   midnight-stampede plate.
 - The 1886 date: narration says "the winter of 1886" (the Big Die-Up winter is 1886–87); the title tape follows the narration.
+
+## Checks (after the container restart)
+`npx tsc --noEmit -p .` clean for these files; `tools/anchors.py --src` exit 0 (and every phrase in the sound lists checked too);
+`tools/probe_text.mjs` every 10th frame (shots use `WShots`, so the probe sees hard cuts): fixed the three hits it found (Ch01
+"come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
+re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
+
+## One more rough spot
+- The steer's coral tint reads quite red because the steer is nearly black in B&W; its fur and ribs stay visible (see-through),
+  but if it reads as a red silhouette on a big screen, lower `tint` in `LookSteer`/`LastOf`/`BackToSteer` (now 0.42) or lift
+  the steer's brightness under the mask.

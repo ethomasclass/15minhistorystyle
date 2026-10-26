@@ -45,3 +45,9 @@ p2_longhorn, p3_saddle, p3_lariat, p4_chuck_wagon.
 - The image agent also found an 1891 Matador Ranch chuck-wagon photo and an 1870s Kansas Pacific trail map after this build;
   either could replace the prop wagon or add a period-map beat.
 - Trails are approximate polylines from `ep2_trails.json` (tagged "trails approx.").
+
+## Checks (after the container restart)
+`npx tsc --noEmit -p .` clean for these files; `tools/anchors.py --src` exit 0 (and every phrase in the sound lists checked too);
+`tools/probe_text.mjs` every 10th frame (shots use `WShots`, so the probe sees hard cuts): fixed the three hits it found (Ch01
+"come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
+re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.

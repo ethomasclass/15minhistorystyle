@@ -43,3 +43,9 @@ background hatching): `review/ch02_mask_mccoy_poly.py`; job stub in `tools/mask_
 - Scene 4 (no money) is only a coin and handwriting; a period photo of returning Confederate soldiers would be stronger.
 - The Leslie's herd (1536 px) and cattle-shoot (1536 px) scans are soft at full frame; usable, not crisp.
 - The callback (scene 1) is an empty desk until the longhorn lands at 4.7 s.
+
+## Checks (after the container restart)
+`npx tsc --noEmit -p .` clean for these files; `tools/anchors.py --src` exit 0 (and every phrase in the sound lists checked too);
+`tools/probe_text.mjs` every 10th frame (shots use `WShots`, so the probe sees hard cuts): fixed the three hits it found (Ch01
+"come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
+re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.

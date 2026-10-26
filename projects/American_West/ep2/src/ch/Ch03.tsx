@@ -374,7 +374,7 @@ const Toll: React.FC<{close?: boolean}> = ({close}) => {
           <Trails api={api} focus="it" noSA={close} />
           <MLabel api={api} at={[2560, 1760]} text="INDIAN TERRITORY" show={close ? -99 : at('whose land') + 2} size={28} />
           {close && <>
-            <MLabel api={api} at={[2880, 1590]} text="CHEROKEE NATION" sub="and other nations" show={at('Cherokee') - 1} size={28} color="#FF9F1C" />
+            <MLabel api={api} at={[2920, 1800]} text="CHEROKEE NATION" sub="and other nations" show={at('Cherokee') - 1} size={28} color="#FF9F1C" />
             <MPin api={api} at={IT_POINT} show={at('toll') - 2} label="a toll for every herd" side="r" size={44} color="#FF9F1C" />
             <MCattle api={api} at={at('paid in cattle') - 4} center={[2730, 1730]} n={5} spread={50} w={58} seed="toll" />
           </>}

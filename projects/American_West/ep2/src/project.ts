@@ -9,10 +9,11 @@ export const SUBTITLE = 'Cattle, Gold, and the End of the Open Range';
 export const DATES = '1866 – 1887';
 
 /**
+ * (Only the old 15 Minute History intro, src/kit/Intro.tsx, reads these; the Chunk History intro doesn't.)
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
  * Use strong, recognisable images from this video; they show in black and white.
  */
-export const INTRO_CARDS = ['img/samples/spike_russell_1869.jpg', 'img/samples/hart_tunnel8_worker.jpg', 'img/samples/pacific_railway_act_1862_p1.jpg', 'img/samples/carbutt_up_100th_1866.jpg', 'img/samples/map_up_dodge_1869.jpg'];
+export const INTRO_CARDS = ['img/ch02/mccoy_abilene_first_cattle_train_1867_plate.jpg', 'img/ch02/texas_longhorns_herd_kansas_1878.jpg', 'img/ch03/huffman_trail_herd_breaking_camp_powder_river_1887.jpg', 'img/ch06/illingworth_custer_column_wagon_train_1874.jpg', 'img/ch06/deadwood_1876.jpg'];
 
 /** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
 export const THUMB_PORTRAIT = {
