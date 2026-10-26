@@ -20,13 +20,13 @@ const ease = Easing.bezier(0.22, 1, 0.36, 1);
 
 /** Intro length: the brand intro runs 260 frames; the lockup is complete at 119, so 165 leaves ~1.5 s on it. */
 export const INTRO_FRAMES = 165;
-/** Jingle level: the old title sting sat at 0.45 on a -11.2 LUFS file (~-18 LUFS in the mix, the narration's level); the marimba jingle
- *  (tools/make_jingle.py) measures -18.3 LUFS, so full volume. */
+/** The branding sound is clicks and a page turn only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py.
+ *  The file already carries its level (peak -8 dBFS), so full volume. */
 const JINGLE_VOL = 1;
 
 const FLIGHT = 22; // frames from launch to landing
-// Landing frames, timed to the marimba jingle (tools/make_jingle.py): the coral quarter locks on its last note, C5 (2.80 s), the
-// slabs land on the low hits at 3.60 s and 3.95 s.
+// Landing frames, timed to the click track (tools/make_jingle.py): five clicks for the five blocks, the coral quarter locks on a
+// click-clack (2.80 s), CHUNK is one firm click (3.60 s), HIS-TO-RY three tiny clicks from 3.95 s, then a page turn.
 const MARK_LAND = [36, 50, 60, 68, 74, 84];
 const WM_LAND = [108, 119];
 
@@ -187,7 +187,7 @@ export const LogoBreak: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: black}}>
       <Stage opacity={logo}><SnapScene /></Stage>
-      {/* chunk_snap.wav: D5 - C5 on marimba, its C lands 1.0 s in = SNAP_LAND, at a quiet level */}
+      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND) and a page turn as the next chapter fades up, quiet */}
       <Sequence from={0} durationInFrames={66} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
     </AbsoluteFill>
   );

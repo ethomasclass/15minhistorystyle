@@ -1,6 +1,7 @@
-"""Build the Chunk History jingle (the "Aha" motif) and the chapter-break sting.
+"""Build the Chunk History branding sound (intro + chapter-break sting).
 
-  python3 tools/make_jingle.py            # felt piano + a low plucked cello (default), from two ElevenLabs one-note samples
+  python3 tools/make_jingle.py            # DEFAULT (the user's call, Oct 2026): clicks and a page turn only, no tones, no music
+  python3 tools/make_jingle.py piano      # felt piano + a low plucked cello, from two ElevenLabs one-note samples
   python3 tools/make_jingle.py marimba    # the synthesised marimba version
   python3 tools/make_jingle.py chop       # chopped old-record horn + hip-hop kick/snare + bass (ElevenLabs one-shots)
   python3 tools/make_jingle.py chop 8 out.mp3   # just the chopped jingle, 8 s, ringing out (Suno wants 6 s+ to upload)
@@ -142,6 +143,58 @@ def lowpass(x, hz=5200):
     return y
 
 
+def sfx_sample(name, keep=0.22):
+    """A short sound from the channel's sound-effect set (public/sfx/<name>.wav): first `keep` seconds, faded out."""
+    path = os.path.join(HERE, "..", "public", "sfx", name + ".wav")
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-f", "f32le", "-ac", "1", "-ar", str(R), "-"], capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, np.float32).copy()
+    x = x[:int(keep * R)]
+    n = min(int(0.03 * R), len(x) // 2)
+    x[-n:] *= np.linspace(1, 0, n)
+    return x / max(np.abs(x).max(), 1e-6)
+
+
+def click(name):
+    """One single click from the bank cut out of the ElevenLabs pen / key / mouse takes (public/sfx/raw/jingle_click_*.wav)."""
+    with wave.open(os.path.join(HERE, "..", "public", "sfx", "raw", f"jingle_click_{name}.wav")) as w:
+        x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32767
+    x = x[:int(0.05 * R)].copy()  # the first 50 ms: some takes have a faint release bump ~70 ms later
+    n = int(0.012 * R)
+    x[-n:] *= np.linspace(1, 0, n)
+    return x
+
+
+def main_foley():
+    """Clicks and a page turn only, no tones and no music (the user's call). Each click is a single transient cut from a pen, a
+    keyboard key or a mouse (they die away in 9-20 ms; the old tick files rang at ~2.6 kHz, so they're not used). Timed to the
+    intro: five blocks landing faster and faster, the coral lock as a layered click-clack, CHUNK as one firm click, HIS-TO-RY as
+    three tiny clicks (one per syllable), then a page turn into the title card."""
+    page = sfx_sample("page_turn", 0.7)
+    out = np.zeros(int(R * 5.5))
+    def put(buf, at, sig):
+        i = int(at * R)
+        buf[i:i + len(sig)] += sig[:max(0, len(buf) - i)]
+    for at, name, st, v in [(1.20, "mouse1", 0, 0.7), (1.67, "pen0", -2, 0.65), (2.00, "key0", 1, 0.7), (2.27, "pen1", 2, 0.65), (2.47, "mouse2", 3, 0.7)]:
+        put(out, at, shifted(click(name), st, v))
+    put(out, 2.79, shifted(click("pen2"), -2, 1.0))       # the lock: a click-clack, two clicks 14 ms apart, the second heavier
+    put(out, 2.80 + 0.014, shifted(click("key2"), -3, 1.0))
+    put(out, 3.60, shifted(click("key0"), -4, 1.0))       # CHUNK: one firm click
+    put(out, 3.60, shifted(click("mouse0"), -2, 0.5))
+    for at, name, st in [(3.95, "pen0", 1), (4.04, "pen1", 2), (4.13, "pen0", 3)]:   # HIS - TO - RY
+        put(out, at, shifted(click(name), st, 0.75))
+    put(out, 4.45, shifted(page, 0, 0.5))                  # a page turn into the title card
+    out *= 10 ** (-8 / 20) / np.abs(out).max()
+    write(os.path.join(HERE, "..", "public", "music", "chunk_jingle.mp3"), out)
+    # chapter-break sting (2.2 s): the lock click-clack at 1.0 s (the coral quarter), a page turn as the next chapter fades up
+    sn = np.zeros(int(R * 2.2))
+    put(sn, 0.99, shifted(click("pen2"), -2, 0.8))
+    put(sn, 1.014, shifted(click("key2"), -3, 0.8))
+    put(sn, 1.2, shifted(page, 0, 0.55))
+    sn *= 10 ** (-3 / 20) / np.abs(sn).max()
+    write(os.path.join(HERE, "..", "public", "sfx", "chunk_snap.wav"), sn)
+    print("wrote clicks-and-page-turn branding sound and snap")
+
+
 def main_chop(total=5.5, out_path=None):
     horn, kick, snare, bass = (raw_sample(f"jingle_{n}.mp3") for n in ("horn_old", "kick", "snare2", "bass"))
     # old-record horn phrase, measured: A#4 D#5 C#5 D#5 F#4 D#5 F4 D#5, each 0.17-0.32 semitone flat. Down 2 semitones and
@@ -222,4 +275,4 @@ if __name__ == "__main__":
     if sys.argv[1:2] == ["chop"] and len(sys.argv) > 3:  # chop TOTAL_SECONDS OUT.mp3: just the jingle, longer, to a given file
         main_chop(float(sys.argv[2]), sys.argv[3])
     else:
-        {"marimba": main, "chop": main_chop, "lofi": main_lofi}.get(sys.argv[1] if sys.argv[1:] else "", main_piano)()
+        {"marimba": main, "chop": main_chop, "lofi": main_lofi, "piano": main_piano}.get(sys.argv[1] if sys.argv[1:] else "", main_foley)()

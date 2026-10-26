@@ -46,26 +46,19 @@ gives the 5.5 s 3D intro after the cold open (jingle `public/music/chunk_jingle.
 instead of a hard cut; whip sound at half level). **Still on the old brand:** the thumbnail and `Brand.tsx` use the old
 15 Minute History `Wordmark` (`src/kit/Intro.tsx`); the end screen has no logo.
 
-### The jingle (Oct 2026)
-The brand's original jingle was dropped (the user didn't like it), and the marimba sketch was set aside ("not sure I want marimba"):
-the channel already sounds like felt piano, pizzicato, a clock tick and wood knocks, so the jingle is kept to that and small.
-**Now:** the "Aha" motif G4 - E5 - D5 - C5 (a leap up, then a step down home) on a **felt piano**, the last note on the coral
-quarter's lock at 2.80 s with one low **plucked cello** C under it, soft wood knocks under the blocks, no hits for the word slabs.
-The chapter-break sting is its last two notes (D5 - C5 + the low C). `ep1/tools/make_jingle.py` builds both
-(`public/music/chunk_jingle.mp3`, `public/sfx/chunk_snap.wav`; `make_jingle.py marimba` rebuilds the marimba sketch).
-How it was made: ElevenLabs Music (`tools/jingle_takes.py`, 6 five-second takes) returned a single struck chord every time, so no
-usable tune; ElevenLabs sound generation gave two **single notes** that measure in tune (felt piano C5 within 0.05 semitone, plucked
-cello C3 within 0.21), kept in `public/sfx/raw/jingle_*.mp3`; the other notes are the C5 sample resampled (at most 5 semitones).
-The original brand jingle is on the Reconstruction branch (`brand/chunk-history/intro/public/jingle.mp3`).
-**Round 2 (user: "not a fan of the piano jingle", wants something not sci-fi, not super old, for young learners; tried lo-fi and
-chopped sample):** `make_jingle.py chop` = an old-record horn phrase (ElevenLabs sound generation, 8 notes, ~0.2 semitone flat)
-chopped into slices, retuned to E major / C# minor, laid on the animation's beats with a hip-hop kick/snare and a low C# bass
-(`public/sfx/raw/jingle_horn_old|kick|snare2|bass.mp3`); `make_jingle.py lofi` = ElevenLabs Music take L2 (the only one of three
-with a real beat) lined up so its hit lands on the lock. Previews `review/previews/P6-ChopJingle.mp4`, `P6-LofiJingle.mp4`.
-`public/music/chunk_jingle.mp3` currently holds the **chop** version. Earlier ideas: tone codes (Simon / Close Encounters / Morse
-"CH"), staccato strings (col legno blocks; "CHUNK" + "HIS-TO-RY" as four notes), funk-pop.
-**Keys:** `ep1/.env` (git-ignored) now holds an ElevenLabs key the user pasted in chat: **ask them to rotate it** (Starter plan,
-~43,000 credits left on 2026-10-25). No VOICE_ID or Gemini key there yet.
+### The branding sound (Oct 2026): clicks and page turns only
+The user's call after trying a marimba tune, a felt-piano tune, a chopped old-record horn and a lo-fi beat: **no tones and no music
+in the branding, only clicks and page turns.** `ep1/tools/make_jingle.py` (default mode) builds it from a bank of single clicks cut
+out of ElevenLabs pen / keyboard / mouse takes (`public/sfx/raw/jingle_click_*.wav`; they die away in 9-20 ms, unlike the library
+`tick`/`tick_soft`, which ring at ~2.6 kHz and are not used) plus `page_turn`. Intro (`public/music/chunk_jingle.mp3`, 5.5 s, peak
+-8 dBFS): five clicks that speed up with the five blocks (1.20 to 2.47 s), a click-clack for the coral lock (2.80 s), one firm click
+on CHUNK (3.60 s), three tiny clicks on HIS-TO-RY (3.95 / 4.04 / 4.13 s), a page turn at 4.45 s into the title card. Chapter break
+(`public/sfx/chunk_snap.wav`): the lock click-clack at 1.0 s, a page turn as the next chapter fades up. Other modes still work
+(`piano`, `marimba`, `chop`, `lofi`); the music takes and ingredients are in `review/jingle_takes/` and `public/sfx/raw/jingle_*`.
+Preview: `review/previews/P7-ClicksOnly.mp4`. ElevenLabs Music can't write a short tune (it returns one struck chord); its sound
+generation makes good one-shots. The original brand jingle is on the Reconstruction branch.
+**Keys:** `ep1/.env` (git-ignored) holds an ElevenLabs key the user pasted in chat (Starter plan, ~42,000 credits left on
+2026-10-26): **ask them to rotate it.** No VOICE_ID or Gemini key there yet.
 
 ### Mix levels (matched to Black Sox, Oct 2026)
 Narration levelled from ~-24 to -18 LUFS (`tools/level_voice.py`, now run by `voice.py` on every take; zero timing shift). Music
