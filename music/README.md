@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History so far: **54 cues, about 88 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History (now Chunk History) so far: **71 cues, about 131 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -14,6 +14,9 @@ prefix says which video the cue was made for:
 | `m_` | *The Exact Spot* (Texas and the Mexican-American War) | Suno |
 | `rc_` | *Reconstruction* (three-part series) | ElevenLabs Music (`music_eleven.py`); `rc_jubilee`, `rc_resolve`, `rc_backroom`, `rc_reckoning` from ACE-Step 1.5 (`music_acestep.py`) |
 | `cw_` | Any Civil War video (made alongside *Reconstruction*) | ACE-Step 1.5 (`music_acestep.py`) |
+| `m_` (also) | *When Europe Ate Mummies* (`m_1924`, `m_alexandria`, `m_apothecary`, `m_lament_baroque`, `m_old_world`, `m_parlor`, `m_reveal`, `m_tomb`; the other `m_` cues are *The Exact Spot*'s) | Suno (prompts in [`SUNO_PROMPTS.md`](SUNO_PROMPTS.md)) |
+| `b_` | *The Balloon War* (WWII) | Suno (prompts and section tags in `Balloon_War/script/MUSIC.md`) |
+| `aw_` | *The American West after the Civil War* (four-part series; Ep 1 *Not in the Picture*) | Suno (prompts in `projects/American_West/SUNO_PROMPTS.md`) |
 
 *Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *The Exact Spot* reused 10 and added three Suno cues (`m_`). *Dressed to Kill* made none; it reused 12. Keep the prefixes when you copy a cue into a video
 (`video/public/music/r_dix.mp3`) so anyone can trace it back here.
@@ -56,6 +59,8 @@ prefix says which video the cue was made for:
 | [`j_intrigue`](cues/j_intrigue.mp3) | 2:05 | -15.4 | Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail. | Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter. | Jackson Video 1 / Part One, King Andrew, The War Nobody Won, Fix Everything, Good Luck, Say It Ain't So, The Exact Spot, Dressed to Kill |
 | [`r_spirits`](cues/r_spirits.mp3) | 1:42 | -10.7 | Playful and eerie: music box, detuned piano, tremolo strings, soft knocks; second half turns earnest and wide (pioneers trekking west). | First ~50 s (music box, detuned piano, soft knocks) is the Fox-sisters part; the second half turns earnest/wide. | Fix Everything, Good Luck |
 | [`w_calm_sea`](cues/w_calm_sea.mp3) | 1:07 | -12.5 | Calm, open, slightly uneasy morning at sea: rocking 6/8 low strings, solo wooden flute shanty phrase, harp, col legno rope creaks; darkens after ~30 s with a low cello ostinato; held unresolved minor chord. | First ~30 s calm; the threat (cello ostinato) creeps in after ~30 s. | The War Nobody Won, Good Luck |
+| [`m_1924`](cues/m_1924.mp3) | 1:18 | -15.9 | Wry 1920s foxtrot band: muted trumpet, clarinet, tuba, banjo, stride piano, brushed snare, shellac warmth. | Bouncy throughout; strong from the top, so it works as a cold-open bed. | When Europe Ate Mummies |
+| [`m_tomb`](cues/m_tomb.mp3) | 0:54 | -16.5 | Dark ambient tension: low cello drone, frame-drum heartbeat, metallic scrapes, breathy flute. | Near-silent first 2 s; steady tension from ~4 s on. | When Europe Ate Mummies |
 
 ### Light, wry and comic
 
@@ -72,6 +77,9 @@ prefix says which video the cue was made for:
 | [`aw_robber_barons`](cues/aw_robber_barons.mp3) | 2:08 | -16.7 | Gilded Age swagger: tuba oom-pah, parlor piano, sly muted trumpet, pizzicato, two cheeky brass stings; smug with a hint of menace. | Even all the way through (2:08 covers a long chapter in one take). | Not in the Picture |
 | [`rc_parlor`](cues/rc_parlor.mp3) | 1:10 | -16.7 | 1870s Northern parlor: polite, slightly out-of-tune piano and harmonium waltz that sours under a low cello note while carrying on; ends on a wrong chord. | The souring in the second half. | Reconstruction |
 | [`rc_backroom`](cues/rc_backroom.mp3) ⚠ | 1:00 | -20.1 | 1860s Washington backroom deal: plucked pizzicato, a fussy upright parlor piano and low clarinet; sly and wry, a little tension. | Lively all the way through; the bright piano bursts around 0:18 and 0:50. | — |
+| [`m_apothecary`](cues/m_apothecary.mp3) | 1:08 | -16.2 | Dark whimsy: pizzicato, bassoon, harpsichord, celesta, tick-tock percussion; sneaky and macabre. | Mischievous all through; fullest 40–56 s; ends ~64 s. | When Europe Ate Mummies |
+| [`m_parlor`](cues/m_parlor.mp3) | 1:05 | -16.5 | Victorian parlor waltz: upright piano, music box, clarinet, pizzicato violin; quaint with an eerie edge. | Lively 8–52 s; fades 54 s on. | When Europe Ate Mummies |
+| [`b_caper_40s`](cues/b_caper_40s.mp3) | 1:59 | -16.0 | 1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous. | Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s. | The Balloon War |
 
 ### Warm, hopeful and dignified
 
@@ -87,6 +95,8 @@ prefix says which video the cue was made for:
 | [`cw_camp_night`](cues/cw_camp_night.mp3) ⚠ | 1:00 | -18.1 | Soldiers' camp at night: a lonely fiddle playing a slow homesick waltz (3/4) over soft guitar and harmonica; tender and weary. | Steady all the way through; good under a long passage. | — |
 | [`rc_jubilee`](cues/rc_jubilee.mp3) ⚠ | 1:00 | -21.9 | Freedom celebration, 1865: fretless banjo and fiddle with hand claps and stomps over upright bass; warm, hopeful, plain folk tune. | Even all the way through, more open joy than rc_jubilo (which turns doubtful). | — |
 | [`rc_resolve`](cues/rc_resolve.mp3) ⚠ | 1:00 | -20.1 | Dignified slow hymn on reed harmonium and solo cello: quiet determination rising to a restrained proud swell, then settling. | The swell around 0:20–0:45. | — |
+| [`m_old_world`](cues/m_old_world.mp3) | 1:08 | -15.4 | Renaissance early music: lute, viola da gamba, recorder, soft frame drum; curious, candlelit. | Fullest 14–50 s; thins out in the last 6 s (a natural tail). | When Europe Ate Mummies |
+| [`m_alexandria`](cues/m_alexandria.mp3) | 1:15 | -17.7 | Middle Eastern night-market underscore: oud, ney, qanun, riq/darbuka, string drone, maqam hijaz. | Quiet first ~8 s, then builds; densest 38–60 s. | When Europe Ate Mummies |
 
 ### Grave (heavy chapters)
 
@@ -102,6 +112,7 @@ prefix says which video the cue was made for:
 | [`aw_long_grief`](cues/aw_long_grief.mp3) | 3:04 | -22.0 | A long, very quiet grieving bed: sustained string pad, slow solo cello phrases with long silences, an occasional low piano note; no swell, no build. Trimmed to 3:04. | Even all the way through; start anywhere. | Not in the Picture |
 | [`rc_brass_dirge`](cues/rc_brass_dirge.mp3) | 1:10 | -11.0 | Distant 1860s saxhorn band and muffled drum, slow funeral march, one restrained swell, fades to near-silence. | The one swell in the middle; the near-silence at the end. | Reconstruction |
 | [`cw_aftermath`](cues/cw_aftermath.mp3) ⚠ | 1:00 | -18.3 | After a battle: slow mournful low cello and a distant muted brass chorale over a soft heartbeat drum; grave and humane. | Starts from near-silence; the music comes in at ~0:08, so start it there or under a pause. | — |
+| [`m_lament_baroque`](cues/m_lament_baroque.mp3) | 1:22 | -15.8 | Baroque lament: viola da gamba and cello, soft chamber organ, descending bass; grave and spare. | Gentle opening, swells 8–16 s and 40–46 s; long quiet tail. | When Europe Ate Mummies |
 
 ### Tension, dread and dark
 
@@ -118,6 +129,8 @@ prefix says which video the cue was made for:
 | [`rc_codes`](cues/rc_codes.mp3) | 1:10 | -16.0 | Grave, cold, legalistic: pocket-watch tick, walking pizzicato, reed harmonium, a trapped fiddle line circling the same notes; held dark chord. | The slow tightening; the held dark chord at the end. | Reconstruction |
 | [`rc_night_riders`](cues/rc_night_riders.mp3) | 1:15 | -18.7 | Night violence in the rural South: low droning fiddle, slow scraping bows, a hoofbeat rhythm that approaches and passes, distant low brass, creaking wood; ends on a low drone. | The hoofbeats passing. | Reconstruction |
 | [`cw_telegraph`](cues/cw_telegraph.mp3) ⚠ | 1:00 | -19.1 | Breaking news in the 1860s: an urgent telegraph-like pizzicato tick, tense low strings and snare rolls; shock and hurry, then a hush. | The tick starts at ~0:10 (start the cue there); the busiest stretch is 0:35–0:50. | — |
+| [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
+| [`m_reveal`](cues/m_reveal.mp3) | 1:10 | -17.4 | Shorts engine: ticking clock, pizzicato, low piano ostinato, layers stacking toward a hit. | Hits by ~4 s and builds through; the last strong accent is near 64 s. | When Europe Ate Mummies |
 
 ### Action and war
 
@@ -131,6 +144,7 @@ prefix says which video the cue was made for:
 | [`m_war_drums`](cues/m_war_drums.mp3) | 1:10 | -17.9 | War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note. | Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push. | The Exact Spot |
 | [`aw_iron_horse`](cues/aw_iron_horse.mp3) | 2:05 | -16.6 | 1860s railroad building: col legno and low-string ostinato, anvil percussion, a locomotive chug gathering speed, low brass in the second half; relentless, impressive, not triumphant. | Quiet ostinato intro (0–8 s) works as a reflective reprise; full drive from ~30 s. | Not in the Picture |
 | [`cw_fife_dread`](cues/cw_fife_dread.mp3) ⚠ | 1:00 | -16.2 | Ominous Civil War march: distant fife and muffled field snare over a low string drone; builds in waves, never heroic. | From ~0:15, when the march comes in; the first 10 s are a quiet drone. | — |
+| [`b_newsreel`](cues/b_newsreel.mp3) | 2:00 | -16.4 | 1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle. | Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s. | The Balloon War |
 
 ### Endings
 
@@ -141,6 +155,7 @@ prefix says which video the cue was made for:
 
 | [`rc_reckoning`](cues/rc_reckoning.mp3) ⚠ | 1:00 | -18.3 | End of Reconstruction: a slow solemn brass band and low strings at a distance, a broken march that slows and falters; ends unresolved. | The faltering in the second half and the low unresolved chord at the end. | — |
 ## Recurring roles
+| [`b_paper_wind`](cues/b_paper_wind.mp3) | 2:35 | -17.2 | Fragile elegy carried by the wind: felt piano, muted strings, alto flute, harp, wind; floating, then sorrow, then a warm close. | Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s. | The Balloon War |
 
 These cues have become the channel's regulars:
 
@@ -148,6 +163,8 @@ These cues have become the channel's regulars:
 - **`r_cold_open`** is the "investigators" cue (felt piano, ticking clock). It's the cold-open identity and works under any evidence or science section.
 - **`r_ending`**: use its warm first ~30 s under a final answer, or the whole cue for an unresolved, darkening close.
 - **`r_dix`, `j_grief` and `w_aftermath`** are the grave set for heavy chapters.
+- **Eras the library was missing** (from *When Europe Ate Mummies*): `m_old_world` (Renaissance Europe), `m_alexandria` (Middle East / Egypt), `m_1924` (1920s), `m_parlor` (Victorian), `m_lament_baroque` (pre-1800 heavy chapter), `m_apothecary` (dark whimsy: frauds, quack cures), `m_tomb` (descent / discovery), and `m_reveal` (a ~70 s build for Shorts: trim the front so its last accent lands on the payoff).
+- **The 1940s** (from *The Balloon War*): `b_newsreel` (war years, newsreel orchestra), `b_caper_40s` (spies, hoaxes, cons) and `b_paper_wind` (journeys, memorials, fragile endings).
 - **Ouija's four feelings:** `j_good_feelings` (love), `j_grief` (grief), `r_schools` (fun) and `r_spirits_dark` (fear).
 
 ## Making a new cue
@@ -823,3 +840,112 @@ Fits: Deals and schemes: impeachment votes, the Compromise of 1877, Tammany, rai
 > the end of Reconstruction, slow solemn brass band and low strings in the distance, a broken march that slows and falters, regret and loss, ends on an unresolved low chord, documentary underscore, restrained, cinematic, space for a narrator, instrumental
 
 Fits: Troops withdrawn, rights rolled back, the end of an era; a series ending.
+### `m_1924`
+
+1:18 · -15.9 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> 1920s foxtrot dance band, muted trumpet, clarinet, tuba bass, banjo, stride piano, brushed snare, vintage shellac record warmth, wry and jaunty, light, mid-tempo, instrumental
+
+Bouncy throughout; strong from the top, so it works as a cold-open bed.
+
+- When Europe Ate Mummies: Ch01 cold open (0.15) + Ch09 ending · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_old_world`
+
+1:08 · -15.4 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Renaissance early music, lute, viola da gamba, recorder, soft frame drum, curious and contemplative, candlelit study, gentle mid-tempo, modal melody, warm and intimate, sparse, instrumental
+
+Fullest 14–50 s; thins out in the last 6 s (a natural tail).
+
+- When Europe Ate Mummies: Ch02 The Typo + Ch07 opening · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_alexandria`
+
+1:15 · -17.7 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Middle Eastern cinematic underscore, oud, ney flute, qanun, riq and darbuka, low string drone, maqam hijaz, mysterious night market, slow steady groove, restrained, documentary, instrumental
+
+Quiet first ~8 s, then builds; densest 38–60 s.
+
+- When Europe Ate Mummies: Ch03 The Trade · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_tomb`
+
+0:54 · -16.5 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Dark ambient cinematic tension, low cello drone, deep frame drum heartbeat, distant metallic scrapes, breathy low flute, slow build, suspenseful and patient, no melody hook, minimal, instrumental
+
+Near-silent first 2 s; steady tension from ~4 s on.
+
+- When Europe Ate Mummies: Ch03 tomb raid + Ch04 storeroom · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_apothecary`
+
+1:08 · -16.2 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar
+
+Mischievous all through; fullest 40–56 s; ends ~64 s.
+
+- When Europe Ate Mummies: Ch04 The Fakes + Ch05 Fresh Is Best · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_lament_baroque`
+
+1:22 · -15.8 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Baroque lament, solo viola da gamba and cello, soft chamber organ, slow descending bass line, grave and respectful, very sparse, long held notes, no percussion, quiet, instrumental
+
+Gentle opening, swells 8–16 s and 40–46 s; long quiet tail.
+
+- When Europe Ate Mummies: Ch06 Beyond Mummies (heavy) · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_parlor`
+
+1:05 · -16.5 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Victorian parlor music, upright piano, music box, clarinet, pizzicato violin, waltz time, quaint and curious with a slightly eerie undertone, gaslight atmosphere, gentle, sparse, instrumental
+
+Lively 8–52 s; fades 54 s on.
+
+- When Europe Ate Mummies: Ch07 The Party + Ch08 The Tube · bed 0.18–0.22 (Suno masters quiet)
+
+### `m_reveal`
+
+1:10 · -17.4 LUFS · Suno (`Suno`) · made for *When Europe Ate Mummies*
+
+> Cinematic documentary build, ticking clock percussion, pizzicato strings, low piano ostinato, rising tension, layers added every few bars, punchy, ends with one hard orchestral hit and silence, 60 seconds, instrumental
+
+Hits by ~4 s and builds through; the last strong accent is near 64 s.
+
+- When Europe Ate Mummies: Shorts (not yet used) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_newsreel`
+
+2:00 · -16.4 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> 1940s wartime newsreel orchestral underscore, instrumental, brushed snare and military snare rolls, low brass chorale, warm strings, solo trumpet, timpani, distant radio-static texture, cinematic but restrained, 72 bpm, minor key turning major
+
+Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s.
+
+- The Balloon War: Ch01 cold open + Ch02 D-Day (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_caper_40s`
+
+1:59 · -16.0 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> 1940s spy caper underscore, instrumental, sneaky swing, walking upright bass, brushed snare, muted trumpet with wah, clarinet runs, pizzicato strings, vibraphone, finger snaps, playful and mischievous, 112 bpm, minor key
+
+Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s.
+
+- The Balloon War: Ch03 The Fake (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### `b_paper_wind`
+
+2:35 · -17.2 LUFS · Suno (`Suno`) · made for *The Balloon War*
+
+> quiet melancholic cinematic elegy, instrumental, solo felt piano, sparse and slow, soft muted strings, alto flute, harp, gentle wind and paper-rustle textures, fragile and haunting, restrained, no percussion, 60 bpm, minor key, a warm major resolution only at the very end
+
+Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.
+
+- The Balloon War: Ch04 The Paper Balloon + Ch07 ending (planned) · bed 0.18–0.22 (Suno masters quiet)

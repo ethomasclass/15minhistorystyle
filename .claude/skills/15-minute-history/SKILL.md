@@ -69,7 +69,7 @@ cd video
 This copies the template, writes placeholder narration for the example chapters, and runs `npm install`. Then
 edit `src/project.ts` (title, subtitle, dates, intro cards, thumbnail portrait), and preview with
 `npx remotion studio` or `node tools/stills.mjs Ch01 out/stills 3 9`. The two example chapters show the
-patterns (cold open + intro + title card; map, vocab, quote and two-views scenes); replace their scripts and
+patterns (cold open + the channel intro, which carries the title; map, vocab, quote and two-views scenes); replace their scripts and
 scenes with the real ones, and delete `public/img/demo/` once the video has its own images.
 
 Python tools need `pip install pillow numpy imageio-ffmpeg` (and `rembg onnxruntime opencv-python-headless` for
@@ -111,6 +111,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
   for archival images (LOC, Internet Archive books, museums), not just Wikimedia.
 - **Check every mask at full resolution** (`tools/mask_closeup.py`) and fix rough ones with `tools/refine_mask.py` and
   hand traces (images-and-masks.md §6). If a picture can be misread, draw the event instead.
+- **Cut-outs on the notebook.** Every photo sits on the dark ruled paper, its subject cut out (`Cut`) or, with no
+  single subject, as a card (`Desk`). Never full-screen slow pushes, 3D photo fly-throughs or color photos.
 - **One subject in color per image, a source tag on every image, text never off the frame edge.** Run the text
   probe on every chapter before each render the user will see.
 - **Check your own work visually before the user does**: contact sheets of stills, the text-edge probe, the

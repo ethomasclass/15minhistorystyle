@@ -85,6 +85,29 @@ these settings. `tools/voice.py` now cuts at the quietest point with short fades
 Re-voicing at a new stretch costs nothing: the ElevenLabs responses are cached by text and voice settings, and the
 stretch is applied afterwards.
 
+### Delivery: whole takes, Creative, audio tags (the user's choice, Oct 2026)
+
+Chosen by ear from an A/B/C test of *The Balloon War*'s cold open (paragraph takes vs one take vs one take at Creative
+with tags). Use it for every video from now on:
+
+- **One take per chapter** (`VOICE_WHOLE=1`, the default for v3). v3 takes no neighbouring-paragraph context, so
+  paragraph-by-paragraph takes reset the delivery at every paragraph. A whole take keeps the arc; the tool still
+  inserts `PARA_GAP` at each paragraph end and `SENT_GAP` after sentences.
+- **`VOICE_STABILITY=0.0` (Creative).** The most expressive setting, and the only one that really follows tags. It can
+  occasionally add, drop or repeat a word: the forced-alignment word count check catches most of it, and the
+  pronunciation-test listen catches the rest. Retake a chapter that drifts.
+- **Audio tags in the script**, in square brackets, performed and never shown or captioned: `[curious]`,
+  `[thoughtful]`, `[serious]`, `[quietly]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
+  at most one per paragraph, before the sentence it colors; none on facts that need a neutral read; the heavy chapter
+  gets only `[quietly]` or `[serious]`. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
+  (once or twice a chapter at most).
+- **Clean endings.** Every splice (shortened pauses, sentence and paragraph gaps) is cut at the quietest 10 ms between
+  words, keeps two thirds of each kept pause after the last sound so endings ring out, and fades for 12 ms, so no word
+  is clipped. A take that ends while still loud prints a WARNING: retake it (change the last punctuation to get a new take).
+
+Command for a normal chapter:
+`VOICE_STABILITY=0.0 VOICE_STRETCH=1.15 VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 python3 tools/voice.py script/ch02_x.txt ch02_x`
+
 ## 4. Pronunciation
 
 Before voicing a whole video, run the pronunciation check in `script-writing.md` §8: put respellings in
@@ -94,6 +117,9 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
   "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
+- **Don't respell a common word the voice already knows.** A respelling can make it worse (*The Balloon War*:
+  "barrage" → "buh-rahzh" came out "Baraz"; unrespelled, it was right). Keys are case-sensitive, so a respelling
+  hits "barrage" but not "Barrage": test every casing the script uses.
 
 ## 5. Re-voicing one chapter
 
@@ -164,5 +190,9 @@ The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker
 `tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
-`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. Volumes are in `building-scenes.md` §6. Keep
+`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**
+`python3 tools/sfx_openverse.py --list "<what>"` shows openly licensed candidates from Openverse (mostly Freesound),
+and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <name>` fetches, trims and normalises it
+and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
+CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
 effects quiet; they should be felt more than heard.

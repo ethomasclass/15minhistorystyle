@@ -1,0 +1,28 @@
+{
+  "lamp_click.wav": {
+    "title": "StandardLamp-Switch.flac",
+    "creator": "Mindloop",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/Mindloop/sounds/253659",
+    "openverse_id": "97e34a23-3c7d-4b0b-94f5-db728a7ace68",
+    "attribution": "\"StandardLamp-Switch.flac\" by Mindloop is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "search": "lamp switch click",
+    "kept_seconds": null
+  },
+  "tape_pull.wav": {
+    "title": "masking_tape_2.wav",
+    "creator": "jaguarrrr",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "freesound",
+    "page": "https://freesound.org/people/jaguarrrr/sounds/405386",
+    "openverse_id": "c896d196-f854-49a7-929d-074e2f5b83f8",
+    "attribution": "\"masking_tape_2.wav\" by jaguarrrr is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.",
+    "search": "masking tape",
+    "kept_seconds": null
+  }
+}

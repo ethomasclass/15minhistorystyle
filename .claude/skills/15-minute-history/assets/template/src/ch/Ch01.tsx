@@ -12,11 +12,9 @@ import {MASKS} from '../masks';
 import {DATES, SUBTITLE, TITLE} from '../project';
 
 const N = words as Narration;
-/** Title card length (frames) after the channel intro. */
-const TITLE_FRAMES = 150;
 /** Narration ends; the channel intro starts 20 frames later. */
 const END = Math.ceil(N.duration * 30) + 20;
-export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
+export const CH01_FRAMES = END + INTRO_FRAMES;
 
 const SULLY: [number, number] = [1920, 2288];
 
@@ -71,20 +69,6 @@ const Question: React.FC<{t: TL}> = ({t}) => {
   );
 };
 
-/** Title card after the channel intro: the map dimmed, the title on orange, the subtitle in teal. */
-const Title: React.FC = () => {
-  const g = useGFrame();
-  const pal = usePal();
-  return (
-    <AbsoluteFill style={{background: '#15130f'}}>
-      <MapView cx={2600} cy={2320} s={0.26 + g * 0.0003} rot={0} dim={0.5} />
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, rgba(8,6,4,0.2) 30%, rgba(8,6,4,0.85) 100%)'}} />
-      <Highlight text={TITLE} x={330} y={360} size={180} at={4} seed={61} rot={-2} />
-      {g >= 14 && <div style={{position: 'absolute', left: 380, top: 640, fontFamily: JF.display, fontSize: 64, color: pal.mark, textShadow: '0 3px 16px rgba(0,0,0,0.8)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
-      <Note text={DATES} x={1340} y={760} size={52} rot={-5} at={24} />
-    </AbsoluteFill>
-  );
-};
 
 const Body: React.FC = () => {
   const frame = useCurrentFrame();
@@ -97,8 +81,7 @@ const Body: React.FC = () => {
     [at("So here's") - 1, <Question t={t} />],
   ];
   let scene = useScene(cuts);
-  if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><Title /></Sequence>;
-  else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
+  if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
   return (
     <AbsoluteFill style={{background: '#000'}}>
       {scene}
@@ -108,7 +91,6 @@ const Body: React.FC = () => {
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
       {['1845.', "People's", 'King'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}
       {['wild', 'fought', 'fans', 'enemies', 'question', 'How', 'both', 'evidence'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
-      <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.4} />
     </AbsoluteFill>
   );
 };

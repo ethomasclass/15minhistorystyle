@@ -40,3 +40,29 @@ The prompts for the ElevenLabs-made sounds are in the template's
 [`tools/sfx_eleven.py`](../.claude/skills/15-minute-history/assets/template/tools/sfx_eleven.py). That script trims leading silence so a hit
 lands exactly on its frame, and normalizes the peak to −2 dBFS. Writing-sound candidates that lost the test (chalk tap, pen flick, short
 quill) aren't kept here; they're in `Reform-Era/video/public/sfx/` if you ever want them.
+| `balloon_inflate.wav` | 3.3 s | | A balloon filling (rubber balloon, close). Openverse/Freesound, "Balloon-Inflate-28.wav" by Gniffelbaf, CC0 | — | |
+| `lamp_click.wav` | 0.3 s | | A desk-lamp switch (the "lamp on" intro option). Openverse/Freesound, "StandardLamp-Switch.flac" by Mindloop, CC0 | 0.5 | |
+| `tape_pull.wav` | 1–2 s | | Masking tape pulled off the roll (the "tape pull" intro option). Openverse/Freesound, "masking_tape_2.wav" by jaguarrrr, CC0 | 0.4 | |
+| `gas_hiss.wav` | 3.5 s | | Gas escaping / hydrogen filling (steam hiss). Openverse/Freesound, "Steam.wav" by SukritSen, CC0 | — | |
+| `wind_high.wav` | 11.0 s | | Strong wind bed (high altitude, the jet stream). Openverse/Freesound, "Strong Wind Sound Scape" by rentless, CC0 | — | |
+| `waves_beach.wav` | 20.0 s | | Surf on a beach (D-Day landing bed). Openverse/Freesound, "Waves of Hawaii" by florianreichelt, CC0 | — | |
+| `plane_flyby.wav` | 10.0 s | | A propeller plane passing overhead. Openverse/Freesound, "Bi-plane flyby.wav" by itinerantmonk108, CC0 | — | |
+| `plane_drone.wav` | 15.0 s | | Steady propeller drone (bomber bed). Openverse/Freesound, "Propeller Plane" by cliftonmcarlson, CC0 | — | |
+| `air_raid_siren.wav` | 15.0 s | | Air raid sirens. Openverse/Freesound, "air raid sirens" by nsstudios, CC0 | — | |
+| `tank_engine.wav` | 10.0 s | | Big diesel engine idling (tank, sound trucks). Openverse/Freesound, "truck large diesel or military tank APC armored personnel carrier accelerate big rev and pull away then other distant engine rev and another one close pass by Saravena, Colombia 2016.flac" by kyles, CC0 | — | |
+| `radio_static.wav` | 6.7 s | | FM radio static (spoof radio, broadcasts). Openverse/Freesound, "FM Radio Static" by caculo, CC0 | — | |
+| `morse_code.wav` | 6.0 s | | Morse code beeps. Openverse/Freesound, "Morse code" by SamsterBirdies, CC0 | — | |
+| `paper_rustle.wav` | 4.0 s | | Papers rustling (paper balloons, documents). Openverse/Freesound, "Papers Rustling" by f4ngy, CC BY 4.0 (**credit required**) | — | |
+| `typewriter.wav` | 6.0 s | | A typewriter (censorship, telegrams). Openverse/Freesound, "Long Sound Typewriter" by fellwell5, CC0 | — | |
+| `explosion_distant.wav` | 6.0 s | | A distant explosion. Openverse/Freesound, "distant explosion" by Kostrava, CC0 | — | |
+| `artillery_distant.wav` | 12.0 s | | Distant explosions and gunfire (battle bed). Openverse/Freesound, "Real explosions Real gunshots.wav" by The_Sound_Side, CC0 | — | |
+| `rope_creak.wav` | 6.0 s | | Rope creaking (balloon cables, rigging). Openverse/Freesound, "hamp rope creaks" by 6polnic, CC0 | — | |
+| `forest_birds.wav` | 20.0 s | | Forest birdsong bed (Bly picnic). Openverse/Freesound, "South Africa - St. Lucia Forest & Bird Ambience" by EpicWizard, CC0 | — | |
+| `camera_shutter.wav` | 2.3 s | | Vintage flash powder and shutter (press photos). Openverse/Freesound, "Vintage Camera Flash Powder and Shutter" by Werra, CC0 | — | |
+
+### Openverse sounds (free, openly licensed)
+The rows above from `balloon_inflate` down were fetched with `tools/sfx_openverse.py` (in the template) from
+[Openverse](https://openverse.org), mostly Freesound recordings. `credits.json` here keeps title, creator, licence and
+source page for each. CC0 needs no credit; **CC BY needs the line from `credits.json` in the video description**.
+Downloads are kept in `raw/` locally only (gitignored; re-fetch with the tool). Check the source page before using a
+featured sound: Openverse does not verify licences. The Freesound files are the site's high-quality MP3 previews.

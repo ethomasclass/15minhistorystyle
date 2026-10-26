@@ -1,5 +1,11 @@
 # Images and masks
 
+> **House rule (the user's, after *The Balloon War*): cut-outs on the notebook first.** Every photo goes on the dark ruled
+> paper (`DarkPaper`): its subject cut out (`Cut` in `src/kit/desk.tsx`: B&W, teal trace, coral on the one key subject), or, when the picture has
+> no single subject or the mask fails (landscapes, crowds, rooms, a speck in the sky), as a cream card on the desk (`Desk`).
+> **No full-screen photos with slow pushes (no "Ken Burns"), no 3D depth fly-throughs, and no color photos**, modern ones
+> included: everything is black and white. Cut masks for every photo while sourcing, not after the scenes are built.
+
 ## Contents
 1. Archival first: finding and crediting images
 2. AI paintings for gaps (Gemini prompts)
@@ -7,6 +13,7 @@
 4. Getting files from the user
 5. Archival parallax and checking masks
 6. Wood engravings, clean masks and marked-up pages (from *The Exact Spot*)
+7. Masks on real-photo videos (from *The Balloon War*)
 
 ## 1. Archival first
 
@@ -214,3 +221,16 @@ the first try.
   swipes and zooms exactly; transcribing handwriting; describing archival photos.
 - **Free routes tested and dropped (Oct 2026):** Pollinations (watermarked, swapped model, ignores style), Hugging Face Inference
   (no free image credit; Flux removed from the free tier), local SDXL-Turbo on CPU (fine for background plates, wrong on people).
+
+## 8. Masks on real-photo videos (from *The Balloon War*)
+- **The object can be the subject.** A balloon, a decoy tank or a crumpled envelope takes the coral tint and teal trace as
+  well as a person does, and it ties the look to the story ("this is the thing"). Draw the trace on the word that names it,
+  in place of a hand-drawn loop.
+- **Tiny subjects work**: crop the mask job tightly around a small object in a big photo (the barrage balloon over LST-388 was
+  380 × 250 px of a 3840 px negative) and the trace still reads. Frame the shot so the subject and its context (the ship) both fit.
+- **Tall photos don't go full-bleed.** A portrait-shaped picture covered to 16:9 crops the subject. Put it on a card on the desk
+  with the tint and trace inside the card (`Cutout ... whole`), and the notes beside it.
+- **A cut-out figure on the desk**: show the `_fg.webp` layer alone, tinted and traced, on dark paper, with any edge the source
+  cut off (a shoulder, the waist) placed off-frame so no straight cut shows. It springs up from below on its cue.
+- **Expect some misses**: busy crowd scenes and soft, pale shapes against sky (a half-filled paper balloon, a deflated barrage
+  balloon among seated soldiers) came back wrong twice. Two tries, then drop it and pick another photo.
