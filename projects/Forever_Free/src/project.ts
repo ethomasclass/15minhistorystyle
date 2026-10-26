@@ -1,0 +1,33 @@
+// Everything that changes from one video to the next, in one place.
+
+/** File-name stem for renders: out/<SLUG>_1080p.mp4, renders/<SLUG>_720p.mp4, renders/thumbnails/<SLUG>_A.png. */
+export const SLUG = 'Forever_Free';
+
+/** Title card after the channel intro: a highlighter title, a teal subtitle and a handwritten date range. */
+export const TITLE = 'FOREVER FREE';
+export const SUBTITLE = 'How a War for the Union Became a War for Freedom';
+export const DATES = '1861 to 1863';
+
+/**
+ * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.
+ * Use strong, recognisable images from this video; they show in black and white.
+ */
+export const INTRO_CARDS = ['img/ch01/smalls_congressman_portrait_c1870s.jpg', 'img/ch02/stampede_slaves_hampton_fortress_monroe_1861.jpg', 'img/ch04/first_reading_emancipation_ritchie_1866.jpg', 'img/ch05/effects_of_proclamation_freed_people_entering_lines_1863.jpg', 'img/ch07/gallant_charge_54th_currier_ives_1863.jpg'];
+
+/** Thumbnail portrait (split concept): source file, its pixel size, and where the head sits in source pixels. */
+export const THUMB_PORTRAIT = {
+  src: 'img/demo/sully_jackson_1845.jpg',
+  size: [1920, 2288] as [number, number],
+  /** horizontal centre of the face, the top of the hair, and the mouth (source pixels) */
+  faceX: 972,
+  hairTop: 206,
+  mouthY: 1250,
+  /** crown base, left and right edge, in source pixels: the width of the head just below the hair top */
+  crownLeft: 660,
+  crownRight: 1200,
+  crownY: 275,
+  /** how big the portrait sits: the whole head plus room above for the crown, the chin above y 840 */
+  scale: 0.55,
+  top: 80,
+};
+export const THUMB_WORDS = {left: 'HERO', right: 'OR KING?'};
