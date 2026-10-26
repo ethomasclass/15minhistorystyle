@@ -1,0 +1,58 @@
+p1_letter
+Downloading data from 'https://github.com/danielgatis/rembg/releases/download/v0.0.0/isnet-general-use.onnx' to file '/root/.rembg/models/isnet-general-use/isnet-general-use.onnx'.
+  0%|                                               | 0.00/179M [00:00<?, ?B/s]  2%|▊                                     | 3.66M/179M [00:00<00:04, 36.6MB/s]  8%|███                                   | 14.2M/179M [00:00<00:02, 76.9MB/s] 12%|████▋                                 | 22.1M/179M [00:00<00:02, 77.7MB/s] 17%|██████▎                               | 29.8M/179M [00:00<00:02, 72.7MB/s] 21%|███████▉                              | 37.4M/179M [00:00<00:01, 73.8MB/s] 25%|█████████▌                            | 44.8M/179M [00:00<00:01, 68.2MB/s] 29%|███████████                           | 51.9M/179M [00:00<00:01, 69.1MB/s] 36%|█████████████▋                        | 64.5M/179M [00:00<00:01, 86.3MB/s] 41%|███████████████▌                      | 73.3M/179M [00:00<00:01, 84.4MB/s] 46%|█████████████████▍                    | 81.8M/179M [00:01<00:01, 78.0MB/s] 50%|███████████████████                   | 89.8M/179M [00:01<00:01, 73.8MB/s] 57%|██████████████████████▎                | 102M/179M [00:01<00:00, 87.2MB/s] 62%|████████████████████████▏              | 111M/179M [00:01<00:00, 82.6MB/s] 67%|██████████████████████████             | 119M/179M [00:01<00:00, 76.0MB/s] 71%|███████████████████████████▊           | 127M/179M [00:01<00:00, 70.8MB/s] 75%|█████████████████████████████▎         | 135M/179M [00:01<00:00, 67.3MB/s] 79%|██████████████████████████████▊        | 141M/179M [00:01<00:00, 67.3MB/s] 85%|████████████████████████████████▉      | 151M/179M [00:02<00:00, 75.3MB/s] 89%|██████████████████████████████████▋    | 159M/179M [00:02<00:00, 74.4MB/s] 93%|████████████████████████████████████▎  | 166M/179M [00:02<00:00, 68.6MB/s] 97%|█████████████████████████████████████▊ | 173M/179M [00:02<00:00, 67.3MB/s]  0%|                                               | 0.00/179M [00:00<?, ?B/s]100%|████████████████████████████████████████| 179M/179M [00:00<00:00, 722GB/s]
+  subject: 1 outline(s), 876067 px
+p2_coin_one
+  subject: 1 outline(s), 584909 px
+p2_coin_stack
+  subject: 1 outline(s), 1229436 px
+p2_longhorn
+  subject: 1 outline(s), 498959 px
+p2_stock_car
+  subject: 1 outline(s), 569957 px
+p3_branding_iron
+  subject: 1 outline(s), 230890 px
+p3_lariat
+  subject: 1 outline(s), 1035478 px
+p3_saddle
+  subject: 1 outline(s), 962407 px
+p4_chuck_wagon
+  subject: 1 outline(s), 962217 px
+p5_bronco
+  subject: 1 outline(s), 663277 px
+p5_chaps
+  subject: 1 outline(s), 1049812 px
+p5_corral
+  subject: 1 outline(s), 577035 px
+p5_sombrero
+  subject: 1 outline(s), 789556 px
+p5_spurs
+  subject: 1 outline(s), 439780 px
+p6_gold_pan
+  subject: 1 outline(s), 1451825 px
+p6_nugget
+  subject: 1 outline(s), 876877 px
+p6_pick_shovel
+  subject: 1 outline(s), 582399 px
+p7_headframe
+  subject: 1 outline(s), 865708 px
+p7_ore_cart
+  subject: 1 outline(s), 1665304 px
+p7_sluice
+  subject: 1 outline(s), 1264949 px
+p7_stamp_mill
+  subject: 1 outline(s), 1394977 px
+p8_barb
+  subject: 1 outline(s), 335476 px
+p8_fence
+  subject: 1 outline(s), 120419 px
+p8_nippers
+  subject: 1 outline(s), 257999 px
+p8_wire_spool
+  subject: 1 outline(s), 1809865 px
+p9_hay_rake
+  subject: 1 outline(s), 235575 px
+p9_haystack
+  subject: 1 outline(s), 626875 px
+p9_post_drift
+  subject: 1 outline(s), 384397 px

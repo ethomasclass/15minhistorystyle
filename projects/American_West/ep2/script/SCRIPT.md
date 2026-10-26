@@ -1,6 +1,6 @@
 # Cheap as Dirt: Cattle, Gold, and the End of the Open Range
 
-**Chunk History** · narration script · draft 1 (not voiced) · 2,337 words · about 15:15 finished (scaled from Ep 1: 2,450 words → 16:00)
+**Chunk History** · narration script · draft 2 (voiced, Oct 26 2026: 14:37 of narration) · 2,337 words · about 15:15 finished (scaled from Ep 1: 2,450 words → 16:00)
 ElevenLabs `eleven_v4`, Ellis, one take per chapter, speed 1.0; ch09 at 0.92. `[tags]` are v4 delivery cues, sent to the voice, never
 spoken or shown. **No quiet-type cues** (`[quietly]`, `[softly]`, `[whispers]`, `[hushed]` …): on v4 they whisper. The quiet chapter
 gets its weight from the slower speed, short sentences, pauses in the edit and the teal-only look.
