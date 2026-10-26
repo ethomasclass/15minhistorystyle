@@ -336,7 +336,7 @@ const Hearst: React.FC = () => {
         <Note text="led by George Hearst" x={130} y={430} size={62} rot={-3} color="#FF6F61" at={at('George') - 2} />
         <ScrimTag text={TAG.hearst} />
       </>}>
-      <Print src={I.hearst} size={Z.hearst} x={1080} y={60} w={760} crop={[120, 120, 1920, 2400]} at={a + 2} rot={2} seed={71} mask={M7.b_hearst} tint={0.32} traceAt={at('George') - 1} />
+      <Print src={I.hearst} size={Z.hearst} x={1080} y={60} w={760} crop={[120, 120, 1920, 2400]} at={a + 2} rot={2} seed={71} mask={M7.b_hearst} tint={0.2} traceAt={at('George') - 1} />
     </DeskShot>
   );
 };
@@ -438,7 +438,7 @@ const Underground: React.FC = () => {
   const a = at('Working') - 1;
   const b = at('Quick thing') - 1;
   return (
-    <HillShot k={[[a, 760, 56, -10, 1.45], [b, 730, 50, -16, 1.9]]}
+    <HillShot k={[[a, 760, 56, -10, 1.35], [b, 730, 52, -16, 1.62]]}
       hill={{s1: 0.2, s2: 1, s3: 1, hot: 0, shaft: 1, drift: 1, at1: -99, at2: -99, at3: -99, labels: false, cart: a + 4}}>
       <Hand parts={[['working for wages.']]} x={150} y={130} size={84} at={at('Working') - 2} />
       <Hand parts={[['just ', false], ['underground.', true]]} x={200} y={260} size={96} at={at('Just') - 3} />

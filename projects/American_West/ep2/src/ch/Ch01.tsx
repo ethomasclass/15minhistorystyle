@@ -116,7 +116,7 @@ const Letter: React.FC<{noWords?: boolean}> = ({noWords}) => {
       </div>
       {!noWords && <>
         <Note text="to the foreman" x={1150} y={300} size={54} rot={-3} at={at('foreman') - 2} />
-        <Hand parts={[['how had the herd '], ['come through?', '#ffffff']]} x={760} y={760} size={74} at={at('How had') - 2} dur={14} />
+        <Hand parts={[['how had the herd '], ['come through?', '#ffffff']]} x={200} y={860} size={72} at={at('How had') - 2} dur={14} />
       </>}
       {noWords && <Hand parts={[['no words for it', '#ffffff']]} x={1130} y={480} size={76} at={at('words') - 6} />}
     </AbsoluteFill>
@@ -264,7 +264,7 @@ const LastOf: React.FC = () => {
     <Pic src={PAINT} size={PSZ} k={[[a, 2000, 1150, 0.58], [b, 2000, 1300, 0.5]]} filter={PBW} tag={PTAG} tagY={24} mask={M1.steer} tintAt={a} tint={0.42} traceAt={a + 4}>
       {() => <>
         <Note text="its other name" x={1300} y={150} size={56} rot={-3} at={at('another name') - 2} />
-        <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={110} y={930} size={72} at={at('Last')} seed={19} />
+        <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={170} y={920} size={70} at={at('Last')} seed={19} />
       </>}
     </Pic>
   );

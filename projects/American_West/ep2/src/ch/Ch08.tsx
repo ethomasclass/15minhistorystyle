@@ -42,7 +42,7 @@ import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narrat
 import {DocFocus, keys, Mono, PhotoCam, ScrimTag, shake, SlapTitle, zkeys} from '../kit/west';
 import {DeskCam, Float, Label, LITHO, Lines, Pic, Prop} from '../kit/ch04_extra';
 import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
-import {MCross, MPin, MRegion, W_MAP, WestMap} from '../kit/ch01_extra';
+import {MPin, MRegion, MStand, W_MAP, WestMap, type WApi} from '../kit/ch01_extra';
 import {TPL, TREGIONS} from '../kit/trails';
 import {PROP, Snow} from '../kit/ch07_10_extra';
 import {M8} from '../masks_ch08';
@@ -461,17 +461,17 @@ const TwoViews: React.FC<{z: number; cx: number; cy: number; dimL?: number; dimR
         <Mono text="WHO FENCED? · TWO WAYS TO SEE IT" x={560} y={50} size={28} at={at('So who') + 2} />
         <div style={{position: 'absolute', inset: 0, opacity: 1 - dimL * 0.7}}>
           <Mono text="FARMERS FENCED" x={L} y={150} size={34} at={at('two ways') - 1} />
-          <Note text="· to keep cattle out" x={L} y={270} size={54} rot={-1} at={at('keep') - 2} />
-          <Note text="  of their crops" x={L} y={355} size={54} rot={-1} at={at('crops') - 3} />
-          <Hand parts={[['and they had a point']]} x={L} y={560} size={76} at={at('had a point') - 3} />
+          <Note text="· to keep cattle out" x={L} y={270} size={48} rot={-1} at={at('keep') - 2} />
+          <Note text="  of their crops" x={L} y={350} size={48} rot={-1} at={at('crops') - 3} />
+          <Hand parts={[['and they had a point']]} x={L} y={560} size={58} at={at('had a point') - 3} />
         </div>
         <div style={{position: 'absolute', inset: 0, opacity: 1 - dimR * 0.7}}>
           <Mono text="BIG RANCHERS FENCED, TOO" x={R} y={150} size={34} at={at('two ways') + 3} />
-          <Note text="· sometimes around public land" x={R} y={270} size={50} rot={-1} at={at('public land') - 3} />
-          <Note text="  they didn't own" x={R} y={355} size={50} rot={-1} at={at("didn't own") - 2} />
-          <Hand parts={[['and around the '], ['water', true]]} x={R} y={560} size={76} at={at('water') - 4} />
+          <Note text="· sometimes around public land" x={R} y={270} size={44} rot={-1} at={at('public land') - 3} />
+          <Note text="  they didn't own" x={R} y={350} size={44} rot={-1} at={at("didn't own") - 2} />
+          <Hand parts={[['and around the '], ['water', true]]} x={R} y={560} size={58} at={at('water') - 4} />
         </div>
-        <Note text="→ small ranchers + cowboys: the open range, closed" x={L} y={820} size={50} rot={-1} color="#f4efe6" at={at('found it') - 3} />
+        <Note text="→ small ranchers + cowboys: the open range, closed" x={L} y={820} size={44} rot={-1} color="#f4efe6" at={at('found it') - 3} />
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -533,6 +533,27 @@ const Cutters: React.FC = () => {
   );
 };
 
+/** A small coral cut mark standing on the map (an X held wholly above the map plane so none of it sinks under). */
+const Cut: React.FC<{api: WApi; at: number[]; show: number}> = ({api, at: p, show}) => {
+  const g = useGFrame();
+  if (g < show) return null;
+  const k1 = interpolate(g, [show, show + 3], [0, 1], clamp);
+  const k2 = interpolate(g, [show + 3, show + 6], [0, 1], clamp);
+  const r = 22;
+  return (
+    <MStand api={api} at={p}>
+      <svg width={2 * r + 20} height={2 * r + 20} style={{position: 'absolute', left: -r - 10, top: -2 * r - 24, overflow: 'visible'}}>
+        {[[10, 10, 2 * r + 10, 2 * r + 10, k1], [2 * r + 10, 10, 10, 2 * r + 10, k2]].map(([x1, y1, x2, y2, k], i) => (
+          <g key={i}>
+            <line x1={x1} y1={y1} x2={x1 + (x2 - x1) * k} y2={y1 + (y2 - y1) * k} stroke="#111" strokeWidth={14} strokeLinecap="round" />
+            <line x1={x1} y1={y1} x2={x1 + (x2 - x1) * k} y2={y1 + (y2 - y1) * k} stroke="#FF6F61" strokeWidth={8} strokeLinecap="round" />
+          </g>
+        ))}
+      </svg>
+    </MStand>
+  );
+};
+
 // S · 1883, a drought year: fence cutting spreads across Texas, mostly at night
 const TX_CUTS: [number, number][] = [[2690, 2368], [2752, 2273], [2766, 2008], [2644, 1975], [2560, 2120], [2470, 2050], [2820, 2150], [2716, 1895], [2600, 2260], [2380, 2180], [2900, 2050], [2500, 1900]];
 const Night: React.FC = () => {
@@ -549,7 +570,7 @@ const Night: React.FC = () => {
           <svg width={W_MAP.size[0]} height={W_MAP.size[1]} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(1px)'}}>
             <path d={tx} fill="rgba(47,224,196,0.08)" stroke="#2FE0C4" strokeWidth={api.px(3)} opacity={interpolate(g, [a, a + 8], [0, 1], clamp)} />
           </svg>
-          {TX_CUTS.map((p, i) => <MCross key={i} api={api} at={p} show={at('fence cutting') - 2 + i * 4} r={26} />)}
+          {TX_CUTS.map((p, i) => <Cut key={i} api={api} at={p} show={at('fence cutting') - 2 + i * 4} />)}
         </>}
       </WestMap>
       <AbsoluteFill style={{background: `rgba(4,6,14,${dark})`}} />

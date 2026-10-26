@@ -140,7 +140,7 @@ const Goodnight: React.FC = () => (
   <Card src={I.goodnight} size={Z.goodnight} crop={[60, 20, 780, 800]} a={at('Goodnight') - 1} b={at('The Homestake') - 1} tag={TAG.goodnight} w={660}>
     <Note text="Charles Goodnight" x={130} y={230} size={64} rot={-3} at={at('Goodnight') + 2} />
     <Note text="+ money from a British investor" x={130} y={340} size={54} rot={-3} color="#f4efe6" at={at('British') - 3} />
-    <Hand parts={[['one of the '], ['biggest ranches', true]]} x={150} y={480} size={80} at={at('biggest') - 3} />
+    <Hand parts={[['one of the '], ['biggest ranches', true]]} x={150} y={480} size={66} at={at('biggest') - 3} />
     <Note text="in Texas" x={170} y={600} size={60} rot={-3} at={at('Texas') - 2} />
   </Card>
 );
@@ -248,7 +248,7 @@ const ROWS = (): Cell[][] => [
   ],
   [
     {text: 'Anyone with nerve\ncan get rich', at: at('anyone') - 2},
-    {text: 'herd owners,\ninvestors,\nthe Homestake\'s owners;\nsome cowboys,\nfor a while', at: at('Herd') - 2},
+    {text: 'herd owners,\ninvestors, the\nHomestake\'s owners;\nsome cowboys,\nfor a while', at: at('Herd') - 2},
     {text: 'most cowboys and miners,\nsmall ranchers\nfenced out,\nthe Lakota, whose\nland was mined', at: at('Most') - 2, coral: true},
   ],
 ];

@@ -78,7 +78,7 @@ const MLabel: React.FC<{api: WApi; at: number[]; text: string; show: number; col
  * Every trail draws on its own word; later shots pass at=-99 to show them settled.
  */
 type Focus = 'chisholm' | 'western' | 'gl' | 'all' | 'it';
-const Trails: React.FC<{api: WApi; focus: Focus}> = ({api, focus}) => {
+const Trails: React.FC<{api: WApi; focus: Focus; noSA?: boolean}> = ({api, focus, noSA}) => {
   const chis = at('Chisholm Trail') - 2;
   const west = at('Western Trail') - 2;
   const gl = at('ran west') - 4;
@@ -92,7 +92,7 @@ const Trails: React.FC<{api: WApi; focus: Focus}> = ({api, focus}) => {
     <MTrail api={api} pts={GL} at={gl} dur={110} color={focus === 'gl' ? coral : teal} width={focus === 'gl' ? 11 : 9} />
     <MPin api={api} at={TPL.abilene} show={at('to Abilene') - 2} label="Abilene" size={40} color={focus === 'chisholm' ? coral : teal} />
     <MPin api={api} at={TPL.dodgeCity} show={at('Dodge City') - 2} label="Dodge City" side="l" size={40} />
-    <MPin api={api} at={TPL.sanAntonio} show={at('from south Texas') - 2} label="San Antonio" side="l" size={36} color="#ffffff" />
+    {!noSA && <MPin api={api} at={TPL.sanAntonio} show={at('from south Texas') - 2} label="San Antonio" side="l" size={36} color="#ffffff" />}
   </>;
 };
 
@@ -150,7 +150,7 @@ const IndianTerritory: React.FC = () => {
       <WestMap keys={ks}>
         {(api) => <>
           <MState api={api} name="Oklahoma" at={a + 1} color="#2FE0C4" k={0.8} />
-          <Trails api={api} focus="chisholm" />
+          <Trails api={api} focus="chisholm" noSA />
           <MHerd api={api} pts={TLINES.chisholm} at={at('Chisholm Trail') - 2} dur={150} w={84} />
           <MLabel api={api} at={[2560, 1760]} text="INDIAN TERRITORY" sub="today's Oklahoma" show={a + 4} size={30} />
         </>}
@@ -371,7 +371,7 @@ const Toll: React.FC<{close?: boolean}> = ({close}) => {
       <WestMap keys={ks}>
         {(api) => <>
           <MState api={api} name="Oklahoma" at={close ? -99 : at('whose land') - 2} color="#FF6F61" k={0.8} />
-          <Trails api={api} focus="it" />
+          <Trails api={api} focus="it" noSA={close} />
           <MLabel api={api} at={[2560, 1760]} text="INDIAN TERRITORY" show={close ? -99 : at('whose land') + 2} size={28} />
           {close && <>
             <MLabel api={api} at={[2880, 1590]} text="CHEROKEE NATION" sub="and other nations" show={at('Cherokee') - 1} size={28} color="#FF9F1C" />

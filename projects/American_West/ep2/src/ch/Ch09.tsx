@@ -100,7 +100,7 @@ const Plains: React.FC = () => {
         </>}
       </WestMap>
       <SlapTitle text="THE 1880s" x={110} y={100} size={100} at={at('1880s')} seed={91} />
-      <Note text="the northern plains: crowded" x={1140} y={900} size={56} rot={-3} at={at('crowded') - 3} />
+      <Note text="the northern plains: crowded" x={760} y={910} size={50} rot={-3} at={at('crowded') - 3} />
       <ScrimTag text={TAG.map} />
     </AbsoluteFill>
   );
@@ -254,9 +254,11 @@ const Hoof: React.FC<{press: number}> = ({press}) => {
   const y = CRUST - 4 - press;
   return (
     <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'scale(1.7)', transformOrigin: `572px ${CRUST}px`}}>
-      <path d={`M560,${y - 300} L566,${y - 70} L548,${y - 40} L540,${y} L604,${y} L612,${y - 44} L598,${y - 72} L606,${y - 300}`} fill="rgba(20,26,26,0.9)" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
-      <line x1={572} y1={y - 40} x2={572} y2={y} stroke={pal.mark} strokeWidth={3} />
-      <path d={`M540,${y} L604,${y}`} stroke="#c9d3d4" strokeWidth={6} strokeLinecap="round" />
+      {/* a cow's foreleg in side view, the cloven hoof flat on the crust */}
+      <path d={`M552,${y - 330} L552,${y - 120} Q544,${y - 92} 552,${y - 62} L596,${y - 56} Q606,${y - 92} 590,${y - 120} L590,${y - 330} Z`} fill="rgba(20,26,26,0.92)" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
+      <path d={`M552,${y - 62} L536,${y} L610,${y} L596,${y - 56} Z`} fill="#4c5658" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
+      <line x1={574} y1={y - 58} x2={572} y2={y} stroke={pal.mark} strokeWidth={3} />
+      <path d={`M536,${y} L610,${y}`} stroke="#c9d3d4" strokeWidth={5} strokeLinecap="round" />
     </svg>
   );
 };
@@ -498,7 +500,7 @@ const Painted: React.FC = () => {
   const a = at("That's the winter") - 1;
   return (
     <Pic src={I.paint} size={Z.paint} filter={PBW} k={[[a, 1700, 1200, 0.52], [at('What came after') - 1, 1600, 1180, 0.56]]} tag={TAG.paint}>
-      {() => <Note text="the winter Charlie Russell painted" x={760} y={900} size={52} rot={-2} at={at('Charlie') - 3} />}
+      {() => <Note text="the winter Charlie Russell painted" x={980} y={110} size={52} rot={-2} at={at('Charlie') - 3} />}
     </Pic>
   );
 };
