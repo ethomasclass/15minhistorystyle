@@ -1,5 +1,13 @@
-// Chapter 3 masks: import public/img/masks/<name>.json here and add it to M3 (pattern: src/masks.ts).
+// Chapter 3 masks: the AI lithograph props (tools/mask_jobs/props.py).
 import {maskRef} from './kit/maskref';
+import longhorn from '../public/img/masks/p2_longhorn.json';
+import saddle from '../public/img/masks/p3_saddle.json';
+import lariat from '../public/img/masks/p3_lariat.json';
+import wagon from '../public/img/masks/p4_chuck_wagon.json';
 
-void maskRef;
-export const M3 = {};
+export const M3 = {
+  longhorn: maskRef('p2_longhorn', longhorn),
+  saddle: maskRef('p3_saddle', saddle),
+  lariat: maskRef('p3_lariat', lariat),
+  wagon: maskRef('p4_chuck_wagon', wagon),
+};

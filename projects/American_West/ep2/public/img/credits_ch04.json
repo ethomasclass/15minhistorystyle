@@ -1,0 +1,40 @@
+{
+  "ch04/ja_ranch_chuck_wagon_dinner_1907.jpg": {
+    "title": "J.A. chuck-wagon, getting dinner",
+    "artist": "Smith, Erwin E. (Erwin Evans), 1886-1947, photographer",
+    "date": "1907-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004679069/",
+    "source": "loc:2004679069"
+  },
+  "ch04/navajo_captives_fort_sumner_1860s.jpg": {
+    "title": "File:Long Walk of the Navajos, Navajo captives at Fort Sumner, c. 1860s,.jpg",
+    "artist": "U.S. Army Signal Corps",
+    "date": "1860",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Long_Walk_of_the_Navajos,_Navajo_captives_at_Fort_Sumner,_c._1860s,.jpg"
+  },
+  "ch04/canyon_de_chelly_camp_beauty_osullivan_1873.jpg": {
+    "title": "Camp Beauty, Ca\u00f1on de Chelle; walls 1,200 feet high, width of Ca\u00f1on at this point about one fourth of a mile.",
+    "artist": "O'Sullivan, Timothy H., 1840-1882, photographer",
+    "date": "1873-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005694497/",
+    "source": "loc:2005694497"
+  },
+  "ch04/kit_carson_c1863.jpg": {
+    "title": "File:Kit Carson by Charles DeForest Fredricks, c. 1863, albumen silver print, from the National Portrait Gallery - NPG-NPG 2005 115Carson-000002.jpg",
+    "artist": "Charles DeForest Fredricks",
+    "date": "circa 1863date QS:P,+1863-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Kit_Carson_by_Charles_DeForest_Fredricks,_c._1863,_albumen_silver_print,_from_the_National_Portrait_Gallery_-_NPG-NPG_2005_115Carson-000002.jpg"
+  },
+  "ch04/fort_sumner_counting_navajo_c1864.jpg": {
+    "title": "Photograph of Fort Sumner. Original caption: \"Fort Sumner, New Mexico ... at the Bosque Redondo on Pecos River. Counting Indians.\" (U.S. Army Signal Corps, 111-SC-87964)",
+    "artist": "U.S. Army Signal Corps (RG 111)",
+    "date": "c. 1864-1868 (undated in catalog)",
+    "licence": "public domain (U.S. federal record, National Archives)",
+    "page": "https://catalog.archives.gov/id/148727588",
+    "source": "nara:148727588"
+  }
+}

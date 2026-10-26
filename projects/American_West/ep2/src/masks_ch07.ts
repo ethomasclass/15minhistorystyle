@@ -1,5 +1,6 @@
 // Chapter 07 masks (pattern: src/masks.ts). AI lithograph props: masks from tools/mask_jobs/props.py (pre-made).
 import {maskRef} from './kit/maskref';
+import b_hearst from '../public/img/masks/b_hearst.json';
 import p6_gold_pan from '../public/img/masks/p6_gold_pan.json';
 import p6_nugget from '../public/img/masks/p6_nugget.json';
 import p7_sluice from '../public/img/masks/p7_sluice.json';
@@ -10,6 +11,7 @@ import p2_coin_stack from '../public/img/masks/p2_coin_stack.json';
 import p8_wire_spool from '../public/img/masks/p8_wire_spool.json';
 
 export const M7 = {
+  b_hearst: maskRef('b_hearst', b_hearst),
   p6_gold_pan: maskRef('p6_gold_pan', p6_gold_pan),
   p6_nugget: maskRef('p6_nugget', p6_nugget),
   p7_sluice: maskRef('p7_sluice', p7_sluice),

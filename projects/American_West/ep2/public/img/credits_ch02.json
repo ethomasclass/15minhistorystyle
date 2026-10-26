@@ -6,5 +6,68 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2005684526/",
     "source": "loc:2005684526"
+  },
+  "ch02/abilene_drovers_hotel_1867.jpg": {
+    "title": "Drover's Cottage at MacCoy's Stock Yard, Abilene, Kansas, 447 miles west of St. Louis, Mo.",
+    "artist": "Gardner, Alexander, 1821-1882, photographer",
+    "date": "1867-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004682071/",
+    "source": "loc:2004682071"
+  },
+  "ch02/texas_cattle_trade_cutting_out_1874.jpg": {
+    "title": "The Texas cattle trade. Cutting out / drawn by Frenzeny and Tavernier.",
+    "artist": "Frenzeny & Tavernier.",
+    "date": "1874-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/90710853/",
+    "source": "loc:90710853"
+  },
+  "ch02/kansas_pacific_texas_beef_transport_1871.jpg": {
+    "title": "[Kansas.--Transport of Texas beef on the Kansas-Pacific Railway--Scene at a cattle-shoot in Abilene, Kansas]",
+    "artist": "",
+    "date": "[1871]",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/pictures/item/2021651104/",
+    "source": "loc:2021651104"
+  },
+  "ch02/texas_longhorns_herd_kansas_1878.jpg": {
+    "title": "[Kansas. Raising supplies of meat for foreign markets. A herd of Texas 'long-horns' being driven to a cattle rendezvous, Dodge City]",
+    "artist": "",
+    "date": "[July 27, 1878]",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/pictures/item/2021647129/",
+    "source": "loc:2021647129"
+  },
+  "ch02/mccoy_portrait.jpg": {
+    "title": "File:Joseph McCoy.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1880",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Joseph_McCoy.jpg"
+  },
+  "ch02/mccoy_portrait_engraving_1874.jpg": {
+    "title": "Historic sketches of the cattle trade of the West and Southwest (page 11)",
+    "artist": "['McCoy, Joseph G. (Joseph Geiting), 1837-1915,', 'Worrall, Henry,']",
+    "date": "1874",
+    "licence": "public domain by age (1874)",
+    "page": "https://archive.org/details/GR_2594/page/n11",
+    "source": "iabook:GR_2594:11"
+  },
+  "ch02/mccoy_historic_sketches_title_page_1874.jpg": {
+    "title": "Historic sketches of the cattle trade of the West and Southwest (page 12)",
+    "artist": "['McCoy, Joseph G. (Joseph Geiting), 1837-1915,', 'Worrall, Henry,']",
+    "date": "1874",
+    "licence": "public domain by age (1874)",
+    "page": "https://archive.org/details/GR_2594/page/n12",
+    "source": "iabook:GR_2594:12"
+  },
+  "ch02/mccoy_abilene_first_cattle_train_1867_plate.jpg": {
+    "title": "Historic sketches of the cattle trade of the West and Southwest (page 62)",
+    "artist": "['McCoy, Joseph G. (Joseph Geiting), 1837-1915,', 'Worrall, Henry,']",
+    "date": "1874",
+    "licence": "public domain by age (1874)",
+    "page": "https://archive.org/details/GR_2594/page/n62",
+    "source": "iabook:GR_2594:62"
   }
 }

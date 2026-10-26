@@ -19,6 +19,15 @@ export const inside = (size: [number, number], cx: number, cy: number, s: number
   return {cx: Math.min(size[0] - hw, Math.max(hw, cx)), cy: Math.min(size[1] - hh, Math.max(hh, cy)), s: sm};
 };
 
+/** Like inside(), but keeps the camera inside a crop box [x0, y0, x1, y1] of the source (a scan with a mount or border). */
+export const insideBox = (box: [number, number, number, number], cx: number, cy: number, s: number) => {
+  const [x0, y0, x1, y1] = box;
+  const sm = Math.max(s, 1920 / (x1 - x0), 1080 / (y1 - y0));
+  const hw = 960 / sm;
+  const hh = 540 / sm;
+  return {cx: Math.min(x1 - hw, Math.max(x0 + hw, cx)), cy: Math.min(y1 - hh, Math.max(y0 + hh, cy)), s: sm};
+};
+
 /** AI lithograph prop image / pre-cut copy. */
 export const PROP = (name: string) => `img/props/${name}.jpg`;
 export const CUT = (name: string) => `img/props/cut/${name}.webp`;

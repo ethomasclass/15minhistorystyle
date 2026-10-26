@@ -1,0 +1,88 @@
+{
+  "ch06/custer_portrait_brady_1865.jpg": {
+    "title": "[Portrait of Maj. Gen. (as of Apr. 15, 1865) George A. Custer, officer of the Federal Army]",
+    "artist": "Brady's National Photographic Portrait Galleries, photographer",
+    "date": "1865",
+    "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+    "page": "https://www.loc.gov/item/2018666410/",
+    "source": "loc:2018666410"
+  },
+  "ch06/deadwood_from_south_morrow_1876.jpg": {
+    "title": "City of Deadwood, from south.",
+    "artist": "Morrow, Stanley J., photographer",
+    "date": "1876-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005695685/",
+    "source": "loc:2005695685"
+  },
+  "ch06/deadwood_1876.jpg": {
+    "title": "[Deadwood, South Dakota]",
+    "artist": "",
+    "date": "[1876]",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/pictures/item/2021654313/",
+    "source": "loc:2021654313"
+  },
+  "ch06/bismarck_tribune_gold_page_1874.jpg": {
+    "title": "The Bismarck tribune (Bismarck, D.T.), August 12, 1874, page 1: \"GOLD! Expedition heard from. Custer at the Black Hills\"",
+    "artist": "The Bismarck Tribune Co.",
+    "date": "1874-08-12",
+    "licence": "public domain (published 1874; Library of Congress, Chronicling America)",
+    "page": "https://www.loc.gov/resource/sn84022127/1874-08-12/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn84022127/1874-08-12/ed-1/sp1"
+  },
+  "ch06/bismarck_tribune_gold_headline_1874.jpg": {
+    "title": "The Bismarck tribune (Bismarck, D.T.), August 12, 1874, page 1: \"GOLD! Expedition heard from. Custer at the Black Hills\" (crop: masthead and headline columns)",
+    "artist": "The Bismarck Tribune Co.",
+    "date": "1874-08-12",
+    "licence": "public domain (published 1874; Library of Congress, Chronicling America)",
+    "page": "https://www.loc.gov/resource/sn84022127/1874-08-12/ed-1/?sp=1",
+    "source": "chroniclingamerica:sn84022127/1874-08-12/ed-1/sp1"
+  },
+  "ch06/washing_panning_gold_rockerville_grabill_1889.jpg": {
+    "title": "We have it rich.\" Washing and panning gold, Rockerville, Dak. Old timers, Spriggs, Lamb and Dillon at work",
+    "artist": "Grabill, John C. H., photographer",
+    "date": "1889-01-01",
+    "licence": "No known restrictions on reproduction.",
+    "page": "https://www.loc.gov/item/99613951/",
+    "source": "loc:99613951"
+  },
+  "ch06/illingworth_castle_creek_camp_1874.jpg": {
+    "title": "File:Camp in Castle Creek valley, by Illingworth, W. H. (William H.), 1842-1893 2.jpg",
+    "artist": "Illingworth, W. H. (William H.), 1842-1893 -- Photographer",
+    "date": "Coverage: 1874.\nSource Imprint: St. Paul, Minn.\u00a0: W.H. Illingworth, 1874..\n\nDigital item published 3-9-2006; updated 2-13-2009.",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Camp_in_Castle_Creek_valley,_by_Illingworth,_W._H._(William_H.),_1842-1893_2.jpg"
+  },
+  "ch06/fort_laramie_treaty_1868_p1.jpg": {
+    "title": "Treaty between the United States and the Sioux ... and Arapaho, signed at Fort Laramie, 1868 \u2014 page 1 (opening and Article I)",
+    "artist": "U.S. Government (General Records, RG 11)",
+    "date": "1868-04-29",
+    "licence": "public domain (U.S. federal record, National Archives)",
+    "page": "https://catalog.archives.gov/id/299803",
+    "source": "nara:299803-001"
+  },
+  "ch06/fort_laramie_treaty_1868_p2_article2.jpg": {
+    "title": "Treaty between the United States and the Sioux ... and Arapaho, signed at Fort Laramie, 1868 \u2014 page 2 (Article II, ending \"absolute and undisturbed use and occupation\")",
+    "artist": "U.S. Government (General Records, RG 11)",
+    "date": "1868-04-29",
+    "licence": "public domain (U.S. federal record, National Archives)",
+    "page": "https://catalog.archives.gov/id/299803",
+    "source": "nara:299803-002"
+  },
+  "ch06/illingworth_custer_column_wagon_train_1874.jpg": {
+    "title": "Column of cavalry, artillery, and wagons, commanded by Gen. George A. Custer, crossing the plains of Dakota Territory. By W. H. Illingworth, 1874 Black Hills expedition",
+    "artist": "",
+    "date": "",
+    "licence": "public domain (U.S. federal record, National Archives)",
+    "page": "https://catalog.archives.gov/id/519427",
+    "source": "nara:519427"
+  },
+  "ch06/illingworth_hidden_wood_creek_camp_1874.jpg": {
+    "title": "File:A panoramic view of the camp at Hidden Wood Creek. By Illingworth, 1874, during Custer's Black Hills expedition - NARA - 519425.jpg",
+    "artist": "Unknown authorUnknown author or not provided",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:A_panoramic_view_of_the_camp_at_Hidden_Wood_Creek._By_Illingworth,_1874,_during_Custer%27s_Black_Hills_expedition_-_NARA_-_519425.jpg"
+  }
+}
