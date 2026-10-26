@@ -1,4 +1,4 @@
-// Chapter 1 · the cold open (driving question), then the channel intro and the title card.
+// Chapter 1 · the cold open (driving question), then the Chunk History intro (kit/ChunkIntro.tsx) and the title card.
 // Chapter 1 has no logo break in front; it ends on the intro + title instead. Replace the scenes, keep the shape.
 import React from 'react';
 import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
@@ -6,7 +6,7 @@ import words from '../../public/audio/ch01_cold_open.words.json';
 import {clamp} from '../lib/anim';
 import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, MapView, Sfx, WRITE} from '../kit/common';
-import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
+import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
 import {CropCard, DrawnCrown, makeTimeline, type Narration, Photo, type TL, useScene} from '../kit/shell';
 import {MASKS} from '../masks';
 import {DATES, SUBTITLE, TITLE} from '../project';
@@ -14,7 +14,25 @@ import {DATES, SUBTITLE, TITLE} from '../project';
 const N = words as Narration;
 /** Narration ends; the channel intro starts 20 frames later. */
 const END = Math.ceil(N.duration * 30) + 20;
-export const CH01_FRAMES = END + INTRO_FRAMES;
+/** Title card after the Chunk History intro (the intro carries no title). */
+const TITLE_FRAMES = 150;
+export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
+
+/** The title card (as in *Not in the Picture*): the cold open's picture dimmed (or the notebook page), the title on an
+ *  orange tape, the subtitle in teal, the dates as a note. Swap the background for the video's own opening image. */
+const TitleCard: React.FC = () => {
+  const g = useGFrame();
+  const pal = usePal();
+  return (
+    <AbsoluteFill style={{background: '#0b0a08'}}>
+      <DarkPaper />
+      <Highlight text={TITLE} x={280} y={370} size={130} at={4} seed={61} />
+      {g >= 14 && <div style={{position: 'absolute', left: 340, top: 600, fontFamily: JF.display, fontSize: 60, color: pal.mark, whiteSpace: 'nowrap',
+        textShadow: '0 3px 16px rgba(0,0,0,0.9)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
+      <Note text={DATES} x={1300} y={730} size={56} rot={-5} at={24} />
+    </AbsoluteFill>
+  );
+};
 
 const SULLY: [number, number] = [1920, 2288];
 
@@ -81,7 +99,8 @@ const Body: React.FC = () => {
     [at("So here's") - 1, <Question t={t} />],
   ];
   let scene = useScene(cuts);
-  if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
+  if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><TitleCard /><Finish vignette={0.3} /></Sequence>;
+  else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
   return (
     <AbsoluteFill style={{background: '#000'}}>
       {scene}
@@ -89,6 +108,7 @@ const Body: React.FC = () => {
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
       {/* cold-open music bed, e.g. <Audio src={staticFile('music/cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, 0.17, 0.17, 0], clamp)} /> */}
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
+      <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.3} />
       {['1845.', "People's", 'King'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}
       {['wild', 'fought', 'fans', 'enemies', 'question', 'How', 'both', 'evidence'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}
     </AbsoluteFill>

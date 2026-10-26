@@ -7,6 +7,7 @@
 4. Delivering the 1080p master (over 100 MB)
 5. Feedback rounds
 6. Disk space
+7. Rendering on the user's own machine
 
 ## 1. Setup
 
@@ -31,7 +32,14 @@ tools/render.sh 03 07        # re-render only these chapters, then rejoin and ma
   broadly compatible H.264, giving `out/<SLUG>_1080p.mp4`. A 720p copy goes to `renders/<SLUG>_720p.mp4`.
 - The script prints each chapter's start time in the finished video. Use those for the YouTube chapter list and
   to re-time the headings in SCRIPT.md.
-- A full 15-minute video takes a while; run it in the background and keep working.
+- A full 15-minute video takes a while; run it in the background and keep working. **How long, in a cloud session**
+  (4 CPU cores, no GPU, so Chrome draws in software): *Not in the Picture* (15:59) rendered at 1.2–2.6 frames a second,
+  about 3 h 40 min of chapter renders (the tilted 3D desk, blur and blend modes are the slow part), plus ~25 min to join,
+  master and make the 720p. `--concurrency=4` was used.
+- **Background commands stop after 2 hours.** Render chapter by chapter with a resumable loop that writes a `chNN.done`
+  marker after each chapter and skips finished ones, run the chapters in batches that fit (West Ep 1: 01–04, then 05–08,
+  then 09, the longest, on its own), then `JOIN_ONLY=1 tools/render.sh` to join and master. When a batch hits the limit,
+  ask the user before starting another one.
 - Verify the output before telling the user it's done: duration, 1920×1080 at 30 fps, and loudness
   (`ffmpeg -i out/<SLUG>_1080p.mp4 -af ebur128 -f null -` should report about −14 LUFS integrated). Then pull
   frames at a few spots with `tools/frames_sheet.py` and look at them.
@@ -51,8 +59,9 @@ Commit the 720p to the branch too (about 80 MB; GitHub warns above 50 MB but acc
 
 ## 4. Delivering the 1080p master
 
-The master is about 360 MB: too big for a chat attachment (30 MB) and for a normal git file (100 MB). Use
-**Git LFS** for that one file, then confirm it round-trips:
+The master is about 360–520 MB (*Not in the Picture*: 522 MB), too big for a chat attachment (30 MB) and for a normal git file
+(100 MB). The 720p can pass 100 MB too (140 MB for a 16-minute video), so track it the same way. Use **Git LFS** for those
+files (ask the user first: it counts against their GitHub LFS storage, 1 GB on the free plan), then confirm it round-trips:
 
 ```sh
 git lfs install --local                         # apt-get install -y git-lfs first if `git lfs` is missing
@@ -61,8 +70,9 @@ cp out/<SLUG>_1080p.mp4 renders/
 git add .gitattributes renders/<SLUG>_1080p.mp4 && git commit -m "<Title> 1080p master (Git LFS)" && git push
 ```
 
-Then prove it uploaded: clone the branch fresh into a scratch folder (sparse checkout of just that file is enough)
-and compare `sha256sum` with the local file. Tell the user to download it from GitHub's web page (the download
+Then prove it uploaded: `git lfs ls-files -l` gives each file's sha256 (the LFS object id, which the server checks on upload);
+compare it with `sha256sum` of the local file. A fresh clone and `git lfs pull --include=<path>` also works but can pull far
+more than the one file from a big repo. Tell the user to download it from GitHub's web page (the download
 button on the file), and that a local clone needs Git LFS installed to get the real file.
 
 If LFS isn't available, split the master into parts under 95 MB with ffmpeg's segment muxer (stream copy) and
@@ -83,3 +93,13 @@ Each render bundles a copy of `public/` into `/tmp/remotion-webpack-bundle-*` (a
 the tools delete theirs, but a crashed run leaves one behind. If a write fails with "no space left", delete
 those bundles and old files in `out/`. The thumbnail tool bundles into `out/thumb_bundle` so it can run while a
 chapter render is going.
+
+## 7. Rendering on the user's own machine
+
+Rendering costs no tokens, but in a cloud session it takes hours. On a desktop it's much faster: Remotion renders frames in
+parallel on the CPU, and a GPU speeds up the 3D desk, blur and blend modes. Rough expectation (untested): a recent 8–12-core
+CPU with a modern GPU is 4–8 times faster than the cloud session (*Not in the Picture* in about 40–70 minutes). Settings:
+`--gl=angle` so Chrome uses the GPU (`--gl=egl` or `--gl=vulkan` if that errors on Linux), `--concurrency` about half the CPU
+threads (each browser worker needs about 1 GB of RAM), the project on an SSD. Test one short chapter first and compare.
+Rendering needs only the committed audio and images (no keys): Node, the repo, `npm install`, `pip install imageio-ffmpeg`.
+

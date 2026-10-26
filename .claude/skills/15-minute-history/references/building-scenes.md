@@ -148,7 +148,9 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
 
 Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
 the marker sound 2 frames before every `Note` (`WRITE`, 0.2), a tick on pins and card flips (0.45). Music beds go
-in `ChapterShell`'s `music` at 0.13–0.17. Keep the lists of cue words next to the scenes so they stay in sync.
+in `ChapterShell`'s `music` with `volume: bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; see
+`voice-and-audio.md` §6). A `whip_soft` under a gentle drift plays at half level (the West series' `Sfx` halves any `whip`
+sound). Keep the lists of cue words next to the scenes so they stay in sync.
 
 ## 7. Checking your work
 
@@ -181,9 +183,10 @@ Do all of these before sending the user anything. Each one caught real problems 
   CONFEDERACY, "border states", a key, "← Fort Sumter, April 1861" and a THE CIVIL WAR strip.
 - **Every image gets a source tag**, generated ones too ("Illustration · ...").
 - **One subject in color per image.** If two people matter, use two scenes or trace the second without tint.
-- **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end (and `Engraving`'s soft
-  fade, which keeps the illustrations from slamming in). Chapters end gently: ~2 s hold after the last word (`TAIL` 54),
-  the music lifting, an 18-frame dip to black.
+- **Gentle transitions** (American West Ep 1, Oct 2026; replaces the older "cut, don't dissolve" rule): switch shots with
+  `Shots` from `src/kit/shots.tsx`. A `'whip'` shot comes in as a soft drift (a ~half-second crossfade with a 70 px slide and
+  light blur), a `'cut'` as a 6-frame dissolve; no whip pans, no hard cuts. Chapters end gently: ~2 s hold after the last word
+  (`TAIL` 54), the music lifting, an 18-frame dip to black, then the 2 s Chunk mark snap (`LogoBreak` in `ChunkIntro.tsx`).
 - **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
 - **The bundle copies public/ into /tmp** (~500 MB for a full video) on every render; the tools delete theirs.
   If the disk fills, remove `/tmp/remotion-webpack-bundle-*` and `out/` scratch files.
@@ -192,3 +195,14 @@ Do all of these before sending the user anything. Each one caught real problems 
   masks, layers, chapter stubs registered in `chapters.ts`), smoke-test them with a few stills, then give 2 chapters each to 4
   agents that may only edit their own `ChNN.tsx`. Review every agent's stills sheet; when two chapters show the same picture,
   move that shot into a shared component so they match (the Waltz went into `src/kit/waltz.tsx`).
+- **Patterns from *Not in the Picture*** (American West Ep 1, `projects/American_West/ep1/`):
+  - **Hatch a region on the drawn map** (`MWest` in `src/kit/ch01_extra.tsx`): the subject area as one see-through coral hatch
+    built from state outlines clipped to the land, with a label standing up off the map. It made sparse, dark map shots read.
+  - **Empty sockets before portraits**: when people are named one by one, put dashed empty circle mounts on the desk from the
+    cut, and drop each photo into its socket on its word, so the frame is never empty while the list builds.
+  - **Fill the words, not a loop**: on a cartoon with speech boxes, fill each box with see-through colour (multiply, wiping
+    left to right; teal for the one that matters, coral for the others) instead of drawing a loop around it (the user's idea).
+  - **Photos must fill the frame**: a full-bleed photo needs a zoom of at least `max(1920 / width, 1080 / height)`, or it
+    shows black bars (ch02's Capitol did, below that).
+  - **One series recurring card** (the two-views card filled across ch06–07) keeps its wording identical wherever it returns.
+

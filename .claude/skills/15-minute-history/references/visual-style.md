@@ -25,14 +25,14 @@ A researcher's desk at night. Black-and-white archival engravings, daguerreotype
 - Put a mono uppercase source tag on every image.
 - Keep dark, warm, near-black backgrounds (desk paper or dimmed map).
 - Animate marks on a stepped 12 fps. Move the camera smoothly.
-- Cut hard, and sync every mark to a spoken word.
+- Change shots gently (a soft drift or a 6-frame dissolve, `src/kit/shots.tsx`; since the West series), and sync every mark to a spoken word.
 
 **Don't**
 - Don't show full-colour photos or colour grades. The only colour is the palette, plus the occasional "colour creeping in" reveal.
 - Don't colour more than one subject per image.
 - Don't use teal or coral for a title box. Don't use orange for outlines.
 - Don't use drop-shadowed sans-serif headlines, gradients, glows on type, or neon.
-- Don't use dissolves or crossfades between scenes. Don't use smooth, tweened graphic motion.
+- Don't use whip pans or hard cuts between shots (the user asked for gentler transitions, Oct 2026). Don't use smooth, tweened graphic motion.
 - Don't use invented portraits or AI faces of real people.
 - Don't clean up the hand-drawn wobble. Don't close every outline perfectly.
 - Don't use the earlier rejected looks (yellow highlighter, Anton collage, Fraunces cinematic).
@@ -332,6 +332,21 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 
 ## 9. Channel identity
 
+### 9.0 Chunk History (the channel's new name and brand, Oct 2026; current)
+The channel is now **Chunk History**: the *Quarter past* mark (teal chunks with a coral quarter, like a minute hand at a quarter
+past) and the *Two slabs* wordmark (CHUNK on teal, HISTORY on coral, custom block capitals; never retype it in a font). Brand
+sheet, logo files (horizontal, stacked, mark, wordmark; teal, white and black one-colour versions), avatar, banner, watermark,
+patterns and the 3D intro's source are in `brand/chunk-history/` (`brand-sheet.png` has the rules: teal #2FE0C4, coral #FF6F61,
+ink #111111, cream #F4EFE6; don't recolour, swap teal and coral, stretch, outline or shadow the slabs).
+- **Intro** (`src/kit/ChunkIntro.tsx`, 165 frames = 5.5 s, after the cold open): the mark assembles from chunks in 3D, the coral
+  quarter swings in last and locks at 2.80 s, the two slabs slide in beside it; then the **title card** (`TitleCard` in
+  `src/ch/Ch01.tsx`, 5 s: title on orange tape, subtitle in teal, dates as a note).
+- **Chapter breaks:** the 2-second **mark snap** (`LogoBreak` in `ChunkIntro.tsx`, §11).
+- **Sound:** clicks and page turns only, no tones and no music (`voice-and-audio.md` §7).
+- **Still on the old brand:** thumbnails and `Brand.tsx` still draw the 15 Minute History `Wordmark` (`src/kit/Intro.tsx`);
+  switch them to the Chunk files in `brand/chunk-history/final/` when you next make a thumbnail. The intro in §9.1 below is
+  the previous one (from *The Balloon War*), kept for reference.
+
 ### 9.1 Channel intro and title (186 frames = 6.2 s; from *The Balloon War*)
 One piece now does both jobs (the old card-flip intro and the separate title card are retired: the ticks were grating).
 Built in `src/kit/Intro.tsx` from `INTRO_CARDS` (6 of the video's photos), `TITLE`, `SUBTITLE` and `DATES` in `src/project.ts`.
@@ -367,7 +382,14 @@ Built in `src/ch/Ch01.tsx` (`Title`) from `TITLE`, `SUBTITLE` and `DATES` in `sr
 
 ---
 
-## 11. Chapter breaks (built for *King Andrew*, now standard)
+## 11. Chapter breaks
+
+**Now (Chunk History, since American West Ep 1): the mark snap.** `LogoBreak` in `src/kit/ChunkIntro.tsx` (60 frames, overlapping
+the end of one chapter and the start of the next, same `LEAD` contract): dip to black, the teal mark is already there, the coral
+quarter swings in and locks with a click-clack at frame 30, a page turn as the next chapter fades up. The mark is about 170 px
+tall, drifting slightly in 3D. The older wordmark break below is kept for reference.
+
+**Before (built for *King Andrew*):**
 
 Chapters 2 onward open on a 44-frame logo break (`LEAD` in `src/kit/shell.tsx`, drawn by `LogoBreak`): the last
 shot fades to the notebook paper (`DarkPaper`), the wordmark (clock already at a quarter hour) fades up at 50% scale while

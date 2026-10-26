@@ -380,6 +380,9 @@ def main():
     wav = os.path.join(OUT, name + ".wav")
     with wave.open(wav, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(RATE); w.writeframes(pcm)
+    if not use_piper:
+        # the channel's voice level (-18 LUFS, as in Black Sox): v4 comes out ~6 dB quieter; see tools/level_voice.py
+        subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "level_voice.py"), wav], check=True)
     if not use_piper and not os.environ.get("VOICE_NO_ALIGN"):
         # replace the TTS timestamps with forced-alignment timings, word for word
         aligned = forced_align(wav, " ".join(spoken(p) for p in paras))

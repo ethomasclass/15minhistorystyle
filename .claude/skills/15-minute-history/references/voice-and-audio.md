@@ -135,7 +135,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 6. Music
 
-- **Reuse first.** Every cue the channel has made (46, deduplicated, with prompts, lengths, loudness and where each
+- **Reuse first.** Every cue the channel has made (71 as of Oct 2026, deduplicated, with prompts, lengths, loudness and where each
   was used) is in the style repo's music library: `music/README.md` and `music/cues/` at the root of the
   `15minhistorystyle` repo (this skill's `../../../music/`). Copy cues into `public/music/` keeping their prefix
   (`r_dix.mp3`). Write a `script/MUSIC.md` table for the new video: chapter, cue, why it fits, and a "gaps" list.
@@ -143,7 +143,15 @@ shifts. Re-check stills for that chapter after re-voicing.
   narration mixed over each option) and let them pick. Only generate cues for real gaps, then add them to the
   library with a new prefix.
 - **Suno** gives the best new cues (the user runs it by hand): Custom mode, Instrumental on, and the Styles and
-  Exclude lines in the library's README.
+  Exclude lines in the library's README. **Give the user a copy-paste prompt doc** like
+  `projects/American_West/SUNO_PROMPTS.md` (the West series' format, which the user liked): one entry per cue in priority order,
+  each with *Used in*, a **minimum length measured from the chapters** (the span the cue must cover, plus about 10 s), a
+  Style box that already ends with a tempo and key (e.g. `112 BPM, 4/4`), and a **Lyrics box of structure tags only**
+  (`[Instrumental]`, `[Intro: …]`, `[Build: …]`, `[Break: …]`, `[Outro: …]`, `[End]`), which needs Instrumental switched off.
+  Lessons from the West cues: **Suno won't change mood inside one short song** (a fanfare that should sour stays a fanfare;
+  write the turn into the section tags, or make two takes and join them with `ep1/tools/collapse.py`, a tape-stop); words
+  like *tremolo*, *drone* and *bleak* make a cue sound like horror (the first `aw_panic`); put `horror, eerie, drone, string
+  tremolo` in its Exclude. Suno files may run long with silence at the end: trim them (`aw_long_grief` was cut to 3:04).
 - **Generate with ElevenLabs** (`tools/music_eleven.py <name>`; how Reconstruction's `rc_` cues were made):
   1. The key is the narration key, in `.env`. Check the budget first (`GET /v1/user/subscription`); music costs
      roughly 850 credits a minute, so make 60–80 s cues and reuse them across chapters.
@@ -173,10 +181,19 @@ shifts. Re-check stills for that chapter after re-voicing.
   to any "Southern melodies" medley before using it. Credit the performers in the description ("Swing Low, Sweet
   Chariot: Fisk University Jubilee Singers, 1909, Library of Congress"); a reissue label's Content ID claim is disputed
   with the LOC link and the recording date. Worked example: `projects/Reconstruction/MUSIC.md` in the style repo.
-- **Levels:** music beds 0.13–0.17 under narration, with 15–20-frame fades (`ChapterShell` does this). Cold open
-  0.17, dipping at the end. Title sting 0.45 (already wired into the intro). The heavy chapter gets a grave cue or
-  near-silence. Generators master differently (Lyria about −12 LUFS, Suno about −15, ElevenLabs down to −19.6), so
-  check the library's LUFS column: a cue 6 dB quieter needs roughly double the bed.
+- **Levels = the Black Sox mix** (measured in the West series, Oct 2026; the user asked to keep sound levels like Black Sox):
+  - **Narration at −18 LUFS.** `eleven_v4` comes out about 6 dB quieter (≈ −24), so `tools/voice.py` runs
+    `tools/level_voice.py` on every take (gain plus a delay-compensated limiter at −1 dBTP; word timings don't move).
+    Level older takes with `python3 tools/level_voice.py public/audio/*.wav`.
+  - **Music bed about 13 LU under the voice**, set per cue from its measured loudness with `bed()` in `src/kit/levels.ts`
+    (`volume: bed('g_grip')`; a grave stretch `bed('j_grief', 14)`). Library cues range −11 to −22 LUFS, so one flat volume
+    puts some beds 9 dB louder than others; `CUE_LUFS` there comes from `music/catalog.json`, and a new cue gets measured
+    (`ffmpeg -i x.mp3 -af ebur128 -f null -`) and added.
+  - **Cold open** 0.17 (as Black Sox), dipping at the end. **Sound effects** at the soft-set levels (`building-scenes.md` §6).
+  - **Check:** render one chapter's audio (`npx remotion render src/index.ts Ch08 out.wav --codec=wav`); with the voice at
+    −18.2 the mix measured −18.0, i.e. music and effects add about 0.2 dB. Master to −14 LUFS (`tools/master.py`).
+  - The heavy chapter gets a grave cue or near-silence. Use cue features on purpose: start a cue partway (`startFrom`) so its
+    turn lands on a line (the West's `aw_panic` stops dead 1:41.9 in, started 10.95 s in so the stop lands on the last line).
 - **Tail lift and hand-overs** (from *The Exact Spot*): `ChapterShell` lifts the bed ×1.6 (`TAIL_LIFT`) for the ~2 s
   after the last word, then fades with the picture, so pick cues whose tail still sounds good louder. To change cue on a
   phrase, give the first `to: TM.at('word') + 6` and the next `from: TM.at('word') - 6` (`TM = makeTimeline(N, 30)`); the
@@ -184,7 +201,22 @@ shifts. Re-check stills for that chapter after re-voicing.
 - Don't mention AI music (or the AI voice or AI images) in the description; the user's rule. YouTube's altered-content
   checkbox in Studio covers the disclosure.
 
+- **What ElevenLabs can and can't do for music** (tested for the jingle, Oct 2026): Music (`/v1/music`) makes good beds but
+  **can't write a short tune**: six 5-second takes asking for four notes each came back as one struck chord. **Sound
+  generation** (`/v1/sound-generation`) makes clean one-shots that come back **in tune** (a felt-piano C5 within 0.05
+  semitone): to get an exact short melody, generate one note and resample it to the other pitches
+  (`projects/American_West/ep1/tools/make_jingle.py`). Generated "single" clicks often hold several: cut them apart and
+  keep the ones that die away fast. A 5 s music take costs about 70 credits.
+
 ## 7. Sound effects
+
+**The branding sound is clicks and page turns only: no tones, no music** (the user's call after trying marimba, felt-piano,
+chopped-sample and lo-fi jingles). The template's `public/music/chunk_jingle.mp3` (the 5.5 s intro: five clicks speeding up
+with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny clicks on HIS-TO-RY, a page turn) and
+`public/sfx/chunk_snap.wav` (the chapter break: the click-clack, then a page turn) are built by
+`projects/American_West/ep1/tools/make_jingle.py` from single clicks cut out of ElevenLabs pen / key / mouse takes. The old
+`tick` / `tick_soft` ring faintly (≈2.6 kHz), which counts as a tone, so they're not used there.
+
 
 The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker_tick` (notes, via `WRITE`),
 `tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,

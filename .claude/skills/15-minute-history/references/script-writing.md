@@ -13,6 +13,7 @@ after voicing means re-voicing that chapter and re-checking its anchors.
 7. Fact-check flags
 8. Pronunciation check (before voicing)
 9. The review loop with the user
+10. Writing a series (one arc every episode follows)
 
 ## 1. Length and shape
 
@@ -54,6 +55,11 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   rest of the story land.
 - When the user asks for something to be cut "to get to 15 minutes", give a cut list with word counts per cut and
   the new total, then apply it.
+
+- **Pace since the West series (eleven_v4, one take):** about **165 words a minute including pauses**, slower than the old locked
+  pace. *Not in the Picture* (American West Ep 1) had 2,450 words: 14:56 of narration and **15:59 finished** (the Chunk intro, the
+  title card, eight 2-second mark-snap breaks, short chapter tails and a 20-second end screen add about a minute). **For 15:00
+  finished, write about 2,300 words.**
 
 ## 2. The voice
 
@@ -258,3 +264,41 @@ The user steers content in short messages. Expect, and invite, these passes:
 5. **Confusion pass** (`explainer-craft.md` rule 14): read each chapter as someone new to the story; fix every
    "wait, what?", every quote left untranslated, every callback that isn't said out loud. List the fixes in SCRIPT.md.
 6. **Fact-check flags and pronunciation check**, then voice.
+
+## 10. Writing a series (one arc every episode follows)
+
+From the American West series (`projects/American_West/SERIES.md`, four episodes); the Reconstruction series (`projects/Reconstruction/`)
+works the same way with its collage board. Plan the whole series first (one `SERIES.md` + one outline per episode), then write
+each episode on the same skeleton, so the parts feel like one thing.
+
+**Frame the series with two questions.** A **unit question** every episode answers one piece of out loud (West: *"To what extent
+did the United States fulfill its promises of freedom and opportunity after the Civil War?"*) and a **series closer** the last
+episode asks and stops on. Give each episode **one promise being tested** (Ep 1: progress ties the nation together; Ep 2: anyone
+with nerve can get rich; Ep 3: free land; Ep 4: the promises made *to* Native nations). Order the episodes by cause.
+
+**The arc every episode follows** (the channel's methods, applied identically):
+
+| Beat | What it does |
+|---|---|
+| 1. Look again (0:00–0:20) | Open on a real artifact already on screen at frame 0 (and in the thumbnail); describe what anyone sees, then turn on one detail. The first sentence is the hook, never a date. |
+| 2. Question + bigger promise (by ~0:40) | A one-breath driving question, then a promise about what it reveals; one or two "we'll come back to…" promises. |
+| 3. Start in the action (ch 2) | No backstory before the question; background enters just in time as a short flashback. |
+| 4. One example carries each chapter | Person or object → the general point → why → result → back to the person. |
+| 5. Stack, then "That means" | A one-sentence recap before each payoff. |
+| 6. Myth beat | One myth per episode, named and corrected kindly (West Ep 1: the golden spike). |
+| 7. Both readings | Supporters and critics each get their evidence; no verdict (a two-views card that fills across chapters). |
+| 8. Plug at about two-thirds | After the big build, never in a heavy chapter. |
+| 9. The quiet chapter | One heavy chapter per episode: slower voice, no jokes, teal-only quiet mode, a primary source and space. |
+| 10. "So let's go back to the question." | Answer the driving question through callbacks, fill this episode's row of the series' recurring card, end on a short reversal over the opening image. |
+| 11. The handoff | One line that tees up the next episode, then the end-screen thank-you. |
+
+**Recurring devices that hold a series together:**
+- **One recurring card** that each episode adds to and the last one completes: the West's **Promise Ledger** (*The promise · Who
+  got it · Who didn't*, one row per episode, stamped in Ep 4; it doubles as the students' graphic organizer), Reconstruction's
+  collage **board** (`techniques/collage_board.md`).
+- **One drawn map that fills in** across episodes (same base map and camera clamp in all of them).
+- **Hinge years**, each a dated stamp the first time and a callback after (West: 1862, 1868, 1874, 1890), and numbers that
+  return (160 acres → the Dawes allotment).
+- **A cross-episode callback table** in `SERIES.md` (planted in · paid off in · what), checked when each episode is written.
+- **Required test content**: if the series serves a unit, list where every tested item lives so none is missed.
+

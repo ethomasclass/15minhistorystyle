@@ -1,9 +1,11 @@
-// Chunk History branding (Oct 2026), from brand/chunk-history/intro on the Reconstruction branch.
+// Chunk History branding (Oct 2026), from brand/chunk-history/intro (the brand's source; its original 8.7 s jingle is there too).
 //  - ChunkIntro: the channel intro after the cold open. The Quarter past mark assembles from chunks in 3D, the coral
 //    quarter swings in last like a minute hand landing on a quarter past, then the Two slabs wordmark slides in beside it.
 //    Trimmed from the brand's 8.7 s to 5.5 s (the user's pick): it ends soon after the full lockup lands.
-//  - ChunkSnap: the chapter break. Dip to black, the teal mark is already there, the coral quarter swings in and locks
-//    with a soft tap, then the next chapter fades up (2 s, same overlap contract as the old LogoBreak).
+//  - LogoBreak (the mark snap): the chapter break. Dip to black, the teal mark is already there, the coral quarter swings in
+//    and locks on a click-clack, then a page turn as the next chapter fades up (2 s, same overlap contract as the old break).
+// Sound: clicks and page turns only, no tones and no music (the user's call); public/music/chunk_jingle.mp3 and
+// public/sfx/chunk_snap.wav, built by projects/American_West/ep1/tools/make_jingle.py.
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Easing, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
