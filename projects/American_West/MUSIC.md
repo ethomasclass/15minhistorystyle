@@ -125,18 +125,18 @@ Fallbacks are library cues, so any episode can be finished before the new cues c
 | 8 Panic | **`aw_panic`** | `w_fire` | 0.15 |
 | 9 The Picture | `r_nativism` (uneasy part) → **`aw_promise_theme`** at "So let's go back to the question" | `r_ending` | 0.15 → 0.16 |
 
-### Ep 2 · Cheaper Than Dirt
+### Ep 2 · Cheap as Dirt
 
 | Ch | Cue | Fallback | Bed |
 |---|---|---|---|
 | 1 Cold open (Russell's steer) | **`aw_white_cold`** (opening) | `r_cold_open` | 0.17 |
-| 2 Four-Dollar Cows | `m_frontier` | — | 0.15 |
+| 2 Four-Dollar Cows | `m_frontier` → **`aw_iron_horse`** at "That's where the railroad comes in" (callback) | — | 0.15 |
 | 3 The Long Drive | **`aw_long_drive`** | `m_frontier` | 0.15 |
 | 4 Beef for Bosque Redondo | `m_lament` | `r_dix` | 0.13 |
 | 5 Who the Cowboys Were | **`aw_legend_sours`** (myth) → **`aw_long_drive`** reprise | `a_mexico` | 0.15 |
-| 6 1874 | `j_intrigue` → **`aw_boomtown`** at "Prospectors pour in" | `r_temperance` | 0.15 |
-| 7 Who Got the Gold (+ plug) | **`aw_boomtown`** (hollow end) | `g_cotton_engine` | 0.15 |
-| 8 Cheaper Than Dirt | `g_grip` | `r_nativism` | 0.15 |
+| 6 1874 | `j_intrigue` → **`aw_boomtown`** at "Newspapers did the rest" | `r_temperance` | 0.15 |
+| 7 Who Got the Gold (+ plug) | **`aw_boomtown`** (hollow turn on "Just underground.") | `g_cotton_engine` | 0.15 |
+| 8 Cheap as Dirt | `g_grip` | `r_nativism` | 0.15 |
 | 9 Big Die-Up | **`aw_white_cold`** | `j_grief` | 0.12 |
 | 10 Answer | **`aw_promise_theme`** | `r_ending` | 0.16 |
 
