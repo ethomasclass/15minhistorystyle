@@ -186,13 +186,17 @@ Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass 
 [End]
 ```
 
-### 8. `aw_boomtown.mp3`: the rush (and the hollow after it)
-*Used in:* Ep 2 ch 6 from "Newspapers did the rest" through ch 7. The hollow turn should land on ch 7's "working for wages. Just
+### 8. `aw_boomtown.mp3`: the rush, then the hollow (two takes; I join them)
+*Used in:* Ep 2 ch 6 from "Newspapers did the rest" through ch 7. The fall-off lands on ch 7's "Working for wages. Just
 underground."  
-*Length:* **at least 2:30**, with the turn **at about 1:45** (if it lands elsewhere, tell me the time and I'll line it up)
+**Why two takes:** Suno won't fall off at a set time inside one song (it keeps the energy up, like the legend cue did). So make the
+rush and the hollow as **two separate songs**; I join them with `tools/collapse.py` (the rush slows and stops, a beat of silence, then
+the hollow), placed so the stop lands exactly on "Just underground." Same method as `aw_legend_sours`.
+
+**8a. `aw_boomtown_rush.mp3`** · *Length:* **at least 2:15**, no ending needed (I cut it)
 
 ```
-1870s mining boomtown rush, restless excited energy, an upright piano with a slightly out-of-tune saloon edge playing a busy figure, pizzicato strings scurrying, clattering wooden percussion, quick fiddle runs, a feverish build like a crowd arriving, then at about 1:45 the energy drains away: the piano stops, low sustained strings, one hollow sour chord, uneasy and empty to the end, 126 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental
+1870s mining boomtown gold rush, restless excited crowded energy that never lets up, an upright saloon piano slightly out of tune playing a busy repeating figure, pizzicato strings scurrying, clattering wooden percussion like wagons and boots on boardwalks, quick fiddle runs, the feeling of a crowd pouring into a camp, building and building, no slow section, no ending, 126 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental
 ```
 
 *Lyrics box (structure tags only):*
@@ -201,13 +205,35 @@ underground."
 [Instrumental]
 [Intro: busy saloon piano figure, alone]
 [Verse: pizzicato strings scurry in, wooden percussion]
-[Build: fiddle runs, more and more crowded]
+[Build: fiddle runs, more crowded]
 [Main: feverish, crowded, restless]
-[Build: one last push, everything at once]
-[Break: sudden stop]
-[Outro: hollow low strings, one sour chord, uneasy, empty]
+[Build: everything at once, still rising]
+[Main: feverish, crowded, restless]
+[Build: still rising, no letup]
+```
+
+*Exclude styles (add to the usual list):* `slow, ballad, calm, ambient, fade out`
+
+**8b. `aw_boomtown_hollow.mp3`** · *Length:* **at least 1:00**
+
+```
+the empty aftermath of a gold rush, hollow and uneasy, no rhythm, no percussion, low sustained strings and a dark cello drone, one sour unresolved piano chord that rings and decays, a lonely detuned saloon piano note now and then, the feeling of a played-out mining camp and men going underground for wages, slow and bleak, free time, about 56 BPM, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: one sour piano chord, ringing out]
+[Verse: low sustained strings, cello drone]
+[Verse: a single detuned piano note, far apart]
+[Outro: drone thins out, unresolved]
 [End]
 ```
+
+*Exclude styles (add to the usual list):* `drums, percussion, upbeat, fast, hopeful, major key`
+
+If a take of 8a happens to drop out on its own somewhere, tell me the time; it may save the join.
 
 ### 9. `aw_white_cold.mp3`: winter as the enemy
 *Used in:* Ep 2 ch 1 (under Russell's steer, ~1:15) and ch 9 (the Big Die-Up, ~1:40, the quiet chapter); later Ep 3 (the
