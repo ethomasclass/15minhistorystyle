@@ -30,7 +30,13 @@ ONE_TAKE = os.environ.get("VOICE_ONE_TAKE", "1") not in ("0", "", "false")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "Mobilier": "Mo-beel-yay", "Schuyler": "Sky-ler", "Kearney": "Kar-nee"}
+PRONOUNCE = {
+    # Ep 2. Spanish words said the Spanish way (like Ep 1's "Mo-beel-yay"); keys are case-sensitive, so the English
+    # "Rodeo" / "Bronco" stay English and the italic lowercase *rodeo* / *bronco* that follow are said in Spanish.
+    "Diné": "Dih-NEH", "Bosque": "BOHS-keh", "Redondo": "reh-DOHN-doh", "Mescalero": "mess-kah-LEH-roh",
+    "vaqueros": "bah-KEH-rohs", "reata": "reh-AH-tah", "chaparreras": "chah-pah-RREH-rahs", "rancho": "RAHN-choh",
+    "rodeo": "roh-DEH-oh", "bronco": "BROHN-koh", "Pecos": "PAY-kohs", "Ikard": "EYE-kurd", "chinook": "shih-NOOK", "Chinook": "Shih-NOOK",
+}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \

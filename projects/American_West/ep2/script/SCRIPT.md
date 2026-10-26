@@ -1,6 +1,6 @@
 # Cheap as Dirt: Cattle, Gold, and the End of the Open Range
 
-**Chunk History** · narration script · draft 1 (not voiced) · 2,327 words · about 15:11 finished (scaled from Ep 1: 2,450 words → 16:00)
+**Chunk History** · narration script · draft 1 (not voiced) · 2,337 words · about 15:15 finished (scaled from Ep 1: 2,450 words → 16:00)
 ElevenLabs `eleven_v4`, Ellis, one take per chapter, speed 1.0; ch09 at 0.92. `[tags]` are v4 delivery cues, sent to the voice, never
 spoken or shown. **No quiet-type cues** (`[quietly]`, `[softly]`, `[whispers]`, `[hushed]` …): on v4 they whisper. The quiet chapter
 gets its weight from the slower speed, short sentences, pauses in the edit and the teal-only look.
@@ -53,14 +53,14 @@ words); Wild Bill cut; closing line B. Also cut for length: the Shawnee Trail, t
 | 02 | 1:24 | Four-Dollar Cows | 238 | 87 s |
 | 03 | 2:52 | The Long Drive | 213 | 77 s |
 | 04 | 4:12 | Beef for Bosque Redondo | 285 | 104 s |
-| 05 | 5:57 | Who the Cowboys Were | 322 | 117 s |
-| 06 | 7:57 | 1874 | 212 | 77 s |
-| 07 | 9:16 | Who Got the Gold (+ plug) | 175 | 64 s |
-| 08 | 10:21 | Cheap as Dirt | 243 | 88 s |
-| 09 | 11:52 | The Big Die-Up (slower: speed 0.92) | 232 | 93 s |
-| 10 | 13:26 | The Last of the Five Thousand (the answer) | 204 | 74 s |
+| 05 | 5:57 | Who the Cowboys Were | 332 | 121 s |
+| 06 | 8:00 | 1874 | 212 | 77 s |
+| 07 | 9:19 | Who Got the Gold (+ plug) | 175 | 64 s |
+| 08 | 10:25 | Cheap as Dirt | 243 | 88 s |
+| 09 | 11:55 | The Big Die-Up (slower: speed 0.92) | 232 | 93 s |
+| 10 | 13:30 | The Last of the Five Thousand (the answer) | 204 | 74 s |
 
-**2,327 words · about 15:11 finished** (scaled from Ep 1: 2,450 words → 16:00)
+**2,337 words · about 15:15 finished** (scaled from Ep 1: 2,450 words → 16:00)
 
 ---
 
@@ -154,7 +154,7 @@ So who were the men actually riding these trails?
 
 ## 5:57 | Who the Cowboys Were
 
-`ch05_who_the_cowboys_were.txt` · 322 words · about 117 s
+`ch05_who_the_cowboys_were.txt` · 332 words · about 121 s
 
 [playful] You probably picture a cowboy from the movies. Tall, white, older, and doing pretty well. [wry] The real thing was usually none of those.
 
@@ -170,13 +170,13 @@ And here's a strange turn. Before the war, this same Texas country was a place e
 
 One man, enslaved in Texas, ran north instead, into Indian Territory, and learned the land and its languages. His name was Bass Reeves. In 1875, he became one of the first Black deputy U.S. marshals in the West, riding the same country the cattle trails crossed.
 
-And then there were the vaqueros, Mexican cowboys, who were working cattle in Texas long before it was part of the United States. They taught the trade. You can hear it in the words. Lariat, from *la reata*. Chaps, from *chaparreras*. Ranch, from *rancho*. Rodeo. Bronco.
+And then there were the vaqueros, Mexican cowboys, who were working cattle in Texas long before it was part of the United States. They taught the trade, and you can still hear it in the words. Lariat, from *la reata*. Chaps, from *chaparreras*. Ranch, from *rancho*. Rodeo, from *rodeo*. And bronco, from *bronco*. It means rough.
 
 [serious] In 1874, two things happened that would help end all of this. The first was in the Black Hills.
 
 ---
 
-## 7:57 | 1874
+## 8:00 | 1874
 
 `ch06_1874.txt` · 212 words · about 77 s
 
@@ -200,7 +200,7 @@ So who actually got the gold?
 
 ---
 
-## 9:16 | Who Got the Gold (+ plug)
+## 9:19 | Who Got the Gold (+ plug)
 
 `ch07_who_got_the_gold.txt` · 175 words · about 64 s
 
@@ -220,7 +220,7 @@ So, stack it up. A free-for-all, then hard rock, then a company. That means most
 
 ---
 
-## 10:21 | Cheap as Dirt
+## 10:25 | Cheap as Dirt
 
 `ch08_cheap_as_dirt.txt` · 243 words · about 88 s
 
@@ -240,7 +240,7 @@ That means the open range didn't end with one battle. It ended one fence post at
 
 ---
 
-## 11:52 | The Big Die-Up (slower: speed 0.92)
+## 11:55 | The Big Die-Up (slower: speed 0.92)
 
 `ch09_the_big_die_up.txt` · 232 words · about 93 s
 
@@ -268,7 +268,7 @@ So, let's go back to the question.
 
 ---
 
-## 13:26 | The Last of the Five Thousand (the answer)
+## 13:30 | The Last of the Five Thousand (the answer)
 
 `ch10_the_last_of_the_5000.txt` · 204 words · about 74 s
 
@@ -330,5 +330,22 @@ So look at the steer again.
 | 32 | Goodnight's big Texas ranch with a British investor | ✓ | The JA Ranch (1877) with John Adair, an Irish-born investor living in Britain. |
 
 **Still to verify before voicing:** #31's exact date and wording (Roosevelt Center letter); a public-domain scan of Russell's painting
-with its lettering (Montana Historical Society). Pronunciations to test: *Diné* (dih-NEH), *Bosque Redondo* (BOHS-kay reh-DOHN-doh),
-*chaparreras* (chah-pah-REH-rahs), *la reata*, *Mescalero*, *Glidden*, *DeKalb*, *Ikard* (EYE-kurd).
+with its lettering (Montana Historical Society). Pronunciation (in `tools/voice.py` PRONOUNCE; test: `review/voice_tests/pronunciation_test.mp3`, B with v4 `[Spanish accent]` tags: `pronunciation_b_test.mp3`).
+Spanish words are said the Spanish way, like Ep 1's "Mo-beel-yay"; ch 5 sets it up ("you can still hear it in the words") and pairs each
+English word with its Spanish source. Keys are case-sensitive: English *Rodeo* / *Bronco*, then Spanish *rodeo* / *bronco*.
+
+| Word | Said as |
+|---|---|
+| Diné | Dih-NEH |
+| Bosque Redondo | BOHS-keh reh-DOHN-doh |
+| Mescalero | mess-kah-LEH-roh |
+| vaqueros | bah-KEH-rohs |
+| la reata | la reh-AH-tah |
+| chaparreras | chah-pah-RREH-rahs |
+| rancho | RAHN-choh |
+| rodeo (Spanish) / Rodeo (English) | roh-DEH-oh / unchanged |
+| bronco (Spanish) / Bronco (English) | BROHN-koh / unchanged |
+| Pecos | PAY-kohs |
+| Ikard | EYE-kurd |
+| Chinook / chinook | shih-NOOK |
+| Rio Grande, Chisholm, DeKalb, Glidden, Lakota, Deadwood, Homestake | unrespelled (check by ear) |
