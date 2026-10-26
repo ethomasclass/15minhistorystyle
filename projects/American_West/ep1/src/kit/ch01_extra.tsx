@@ -213,9 +213,10 @@ export const MPin: React.FC<{api: WApi; at: number[]; show: number; label?: stri
   const c = color ?? PAL.mark;
   return (
     <MStand api={api} at={at} show={show} out={out}>
-      <div style={{position: 'absolute', left: -13, top: -13, width: 26, height: 26, borderRadius: '50%', background: c, border: '4px solid #111', boxSizing: 'border-box', transform: `scale(${k})`}} />
-      {label && <div style={{position: 'absolute', top: -size * hand.scale * 0.66, ...(side === 'r' ? {left: 24} : {right: 24}), whiteSpace: 'nowrap', fontFamily: hand.family,
-        fontSize: size * hand.scale, color: c, textShadow: TEXT_SHADOW, clipPath: `inset(-20% ${(1 - lp) * 100}% -20% -5%)`, textAlign: side === 'r' ? 'left' : 'right'}}>
+      <div style={{position: 'absolute', left: -13, top: -26, width: 26, height: 26, borderRadius: '50%', background: c, border: '4px solid #111', boxSizing: 'border-box', transform: `scale(${k})`, transformOrigin: '50% 100%'}} />
+      {/* the label stands wholly above the pin's foot: anything below it would sink under the tilted map and be hidden */}
+      {label && <div style={{position: 'absolute', bottom: 2, ...(side === 'r' ? {left: 24} : {right: 24}), whiteSpace: 'nowrap', fontFamily: hand.family, lineHeight: 1.15,
+        fontSize: size * hand.scale, color: c, textShadow: TEXT_SHADOW, clipPath: `inset(-60% ${(1 - lp) * 100}% -60% -5%)`, textAlign: side === 'r' ? 'left' : 'right'}}>
         {label}
         {sub && <div style={{fontFamily: JF.mono, fontSize: 18, letterSpacing: 2, color: '#fff', marginTop: -6, textShadow: TEXT_SHADOW}}>{sub}</div>}
       </div>}
@@ -605,7 +606,7 @@ export const Hand: React.FC<{parts: [string, string?][]; x: number; y: number; s
   const p = interpolate(g, [at, at + dur], [0, 1], clamp);
   return (
     <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: size * hand.scale, color: pal.mark, whiteSpace: 'nowrap',
-      transform: `rotate(${rot}deg)`, textShadow: TEXT_SHADOW, clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`}}>
+      transform: `rotate(${rot}deg)`, textShadow: TEXT_SHADOW, clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`}}>
       {parts.map(([t, c], i) => <span key={i} style={{color: c ?? pal.mark}}>{t}</span>)}
     </div>
   );
@@ -656,7 +657,7 @@ export const DarkCard: React.FC<{x: number; y: number; w: number; h: number; at:
         if (g < l.at) return null;
         const p = interpolate(g, [l.at, l.at + 10], [0, 1], clamp);
         return <div key={i} style={{position: 'absolute', left: 32, top: 92 + i * size * 1.7 + size * 0.35, fontFamily: hand.family, fontSize: size * hand.scale, color: l.color ?? pal.mark, whiteSpace: 'nowrap',
-          clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`, textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>{l.text}</div>;
+          clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`, textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>{l.text}</div>;
       })}
     </div>
   );

@@ -272,7 +272,7 @@ export const Lines: React.FC<{x: number; y: number; rows: {text: string; at: num
         if (g < r.at) return null;
         const p = interpolate(g, [r.at, r.at + 12], [0, 1], clamp);
         return <div key={i} style={{position: 'absolute', left: x, top: y + i * gap, fontFamily: hand.family, fontSize: (r.size ?? size) * hand.scale, color: r.color ?? pal.accent ?? pal.mark,
-          whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`, clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`,
+          whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`, clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`,
           textShadow: '0 0 2px #111, 0 0 4px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)'}}>{r.text}</div>;
       })}
     </>

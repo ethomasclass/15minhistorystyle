@@ -216,7 +216,7 @@ export const Slip: React.FC<{text: string; x: number; y: number; at: number; rot
       filter: 'drop-shadow(4px 5px 0 rgba(0,0,0,0.55))'}}>
       <div style={{background: coral ? '#f3c6bf' : '#ece6d8', clipPath: `polygon(${pts.join(',')})`, padding: `${size * 0.1}px ${size * 0.38}px ${size * 0.16}px`,
         fontFamily: '"Nanum Pen Script", cursive', fontSize: size, lineHeight: 1, color: coral ? '#5a1d17' : '#0f3e37', whiteSpace: 'nowrap'}}>
-        <span style={{clipPath: `inset(-20% ${(1 - w) * 100}% -20% -5%)`, display: 'inline-block'}}>{text}</span>
+        <span style={{clipPath: `inset(-60% ${(1 - w) * 100}% -60% -5%)`, display: 'inline-block'}}>{text}</span>
       </div>
       <Sfx at={at} src="sfx/tick_soft.wav" volume={0.3} />
     </div>

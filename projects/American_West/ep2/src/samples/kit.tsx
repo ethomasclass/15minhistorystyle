@@ -341,7 +341,7 @@ export const Ledger: React.FC<{x: number; y: number; w: number; cols: number[]; 
         if (g < a) return null;
         const p = interpolate(g, [a, a + 10], [0, 1], clamp);
         return <div key={`${ri}-${ci}`} style={{position: 'absolute', left: colX[ci], top: headY + 62 + ri * rowH + (t.includes('\n') ? 10 : rowH / 2 - size * hand.scale * 0.62), fontFamily: hand.family,
-          fontSize: size * hand.scale, lineHeight: 0.98, color: row.colors?.[ci] ?? pal.mark, whiteSpace: 'pre', clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`,
+          fontSize: size * hand.scale, lineHeight: 0.98, color: row.colors?.[ci] ?? pal.mark, whiteSpace: 'pre', clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`,
           textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>{t}</div>;
       }))}
       <Tape x={w * 0.12} y={-18} w={170} rot={-6} seed={71} />
@@ -411,7 +411,7 @@ export const Field: React.FC<{tag: string; text: string; x: number; y: number; a
     <div style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: 22}}>
       <div style={{width: tagW, flex: 'none', fontFamily: JF.mono, fontSize: 22, letterSpacing: 3, color: '#111', background: boxOf(pal), padding: '6px 12px', whiteSpace: 'nowrap', boxSizing: 'border-box',
         boxShadow: `6px 7px 0 ${SHADOW}`}}>{tag}</div>
-      <div style={{fontFamily: hand.family, fontSize: size * hand.scale, color: color ?? pal.mark, whiteSpace: 'nowrap', clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`,
+      <div style={{fontFamily: hand.family, fontSize: size * hand.scale, color: color ?? pal.mark, whiteSpace: 'nowrap', clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`,
         textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)'}}>{text}</div>
     </div>
   );

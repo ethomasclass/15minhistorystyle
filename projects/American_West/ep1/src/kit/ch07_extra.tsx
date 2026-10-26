@@ -97,7 +97,7 @@ export const Hand: React.FC<{parts: [string, boolean?][]; x: number; y: number; 
   const p = interpolate(g, [at, at + dur], [0, 1], clamp);
   return (
     <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontSize: size * hand.scale, lineHeight: 1, whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`,
-      clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`, textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 4px 14px rgba(0,0,0,0.7)'}}>
+      clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`, textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 4px 14px rgba(0,0,0,0.7)'}}>
       {parts.map(([t, c], i) => <span key={i} style={{color: c ? pal.subject : white ? '#f4efe6' : pal.mark}}>{t}</span>)}
     </div>
   );
