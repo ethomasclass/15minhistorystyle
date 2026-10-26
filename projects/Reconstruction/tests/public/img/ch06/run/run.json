@@ -1,0 +1,145 @@
+[
+ {
+  "src": "img/ch06/run/virginia_0.jpg",
+  "box": [
+   853.3,
+   521.4,
+   213.3,
+   37.3
+  ],
+  "tag": "The Norfolk post (Norfolk, Va.), 1866-01-27 \u00b7 Library of Congress",
+  "state": "virginia",
+  "page": "http://www.loc.gov/resource/sn85038624/1866-01-27/ed-1/",
+  "sp": "1"
+ },
+ {
+  "src": "img/ch06/run/south_carolina_2.jpg",
+  "box": [
+   853.3,
+   502.7,
+   213.3,
+   74.6
+  ],
+  "tag": "Edgefield advertiser (Edgefield, S.C.), 1866-01-03 \u00b7 Library of Congress",
+  "state": "south carolina",
+  "page": "http://www.loc.gov/resource/sn84026897/1866-01-03/ed-1/",
+  "sp": "1"
+ },
+ {
+  "src": "img/ch06/run/louisiana_1.jpg",
+  "box": [
+   853.3,
+   506.0,
+   213.3,
+   68.0
+  ],
+  "tag": "New Orleans daily crescent (New Orleans, La.), 1866-06-08 \u00b7 Library of Congress",
+  "state": "louisiana",
+  "page": "http://www.loc.gov/resource/sn82015753/1866-06-08/ed-1/",
+  "sp": "4"
+ },
+ {
+  "src": "img/ch06/run/north_carolina_0.jpg",
+  "box": [
+   853.3,
+   509.3,
+   213.3,
+   61.5
+  ],
+  "tag": "The weekly North-Carolina standard (Raleigh, N.C.), 1866-01-03 \u00b7 Library of Congress",
+  "state": "north carolina",
+  "page": "http://www.loc.gov/resource/sn85042148/1866-01-03/ed-1/",
+  "sp": "4"
+ },
+ {
+  "src": "img/ch06/run/tennessee_2.jpg",
+  "box": [
+   853.3,
+   512.9,
+   213.3,
+   54.3
+  ],
+  "tag": "The Nashville daily union (Nashville, Tenn.), 1866-01-31 \u00b7 Library of Congress",
+  "state": "tennessee",
+  "page": "http://www.loc.gov/resource/sn83025718/1866-01-31/ed-1/",
+  "sp": "1"
+ },
+ {
+  "src": "img/ch06/run/louisiana_0.jpg",
+  "box": [
+   853.3,
+   514.2,
+   213.3,
+   51.6
+  ],
+  "tag": "New Orleans tribune (New Orleans [La.]), 1865-12-19 \u00b7 Library of Congress",
+  "state": "louisiana",
+  "page": "http://www.loc.gov/resource/sn83016710/1865-12-19/ed-1/",
+  "sp": "3"
+ },
+ {
+  "src": "img/ch06/run/south_carolina_1.jpg",
+  "box": [
+   853.3,
+   506.9,
+   213.3,
+   66.3
+  ],
+  "tag": "Edgefield advertiser (Edgefield, S.C.), 1866-07-11 \u00b7 Library of Congress",
+  "state": "south carolina",
+  "page": "http://www.loc.gov/resource/sn84026897/1866-07-11/ed-1/",
+  "sp": "2"
+ },
+ {
+  "src": "img/ch06/run/tennessee_0.jpg",
+  "box": [
+   853.3,
+   510.5,
+   213.3,
+   58.9
+  ],
+  "tag": "Fayetteville observer (Fayetteville, Tenn.), 1866-01-04 \u00b7 Library of Congress",
+  "state": "tennessee",
+  "page": "http://www.loc.gov/resource/sn85033395/1866-01-04/ed-1/",
+  "sp": "4"
+ },
+ {
+  "src": "img/ch06/run/mississippi_1.jpg",
+  "box": [
+   853.3,
+   513.8,
+   213.3,
+   52.4
+  ],
+  "tag": "The daily clarion (Meridian, Miss.), 1865-12-09 \u00b7 Library of Congress",
+  "state": "mississippi",
+  "page": "http://www.loc.gov/resource/sn83016892/1865-12-09/ed-1/",
+  "sp": "1"
+ },
+ {
+  "src": "img/ch06/run/mississippi_2.jpg",
+  "box": [
+   853.3,
+   517.4,
+   213.3,
+   45.1
+  ],
+  "tag": "The daily clarion (Meridian, Miss.), 1865-11-19 \u00b7 Library of Congress",
+  "state": "mississippi",
+  "page": "http://www.loc.gov/resource/sn83016892/1865-11-19/ed-1/",
+  "sp": "1"
+ },
+ {
+  "src": "img/ch06/run/mississippi_0.jpg",
+  "box": [
+   853.3,
+   511.3,
+   213.3,
+   57.4
+  ],
+  "tag": "The weekly Copiahan (Hazlehurst, Miss.), 1865-12-30 \u00b7 Library of Congress",
+  "state": "mississippi",
+  "page": "http://www.loc.gov/resource/sn87090153/1865-12-30/ed-1/",
+  "sp": "4"
+ }
+]

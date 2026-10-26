@@ -41,7 +41,7 @@ export const Ch06 = () => (
 - `ChapterShell` handles the logo-break lead-in, the fade up and down, the narration audio, music beds, the
   palette (`quiet` for heavy chapters), the 12 fps graphics step and the grain and vignette (`Finish`).
   Everything inside it runs in **narration time**: frame 0 is the first sample of the narration.
-- Chapter 1 is different (cold open → `ChannelIntro` → title card); copy the template's `Ch01.tsx` shape.
+- Chapter 1 is different (cold open → a one-second beat → `ChannelIntro`, which ends on the title tape); copy the template's `Ch01.tsx` shape.
 - Register every chapter in `src/chapters.ts`; the composition id is `ChNN`.
 - Each scene is a small component taking `t`. Keep scenes to 4–12 seconds; cut on the word that starts a new idea.
 
@@ -68,12 +68,15 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | Component | Use | Key props |
 |---|---|---|
 | `Highlight` (Kit) | Orange torn-tape title, Abril caps | `text x y size(96) at seed rot(-2) after` |
-| `Note` (Kit) | Handwritten teal aside, writes on | `text x y size(46) rot(-4) color at dur out` |
+| `Note` (Kit) | Handwritten teal aside, writes on. Only on dark, quiet areas; over a picture use `Slip` | `text x y size(46) rot(-4) color at dur out` |
+| `Slip` (vox) | **The default note over pictures**: torn paper slip, dark ink, slaps on then writes on; `coral` for the subject | `text x y at rot(-3) size(62) coral dur` |
 | `Arrow` (Kit) | Bowed hand-drawn arrow | `x1 y1 x2 y2 bow(40) at` |
 | `Loop` (Kit) | Hand-drawn circle around something | `cx cy rx ry at seed tilt` |
 | `Tag` (Kit) | Source credit, mono caps, bottom-left | `text` (put one on every image) |
 | `Picture` + `Tint` + `Traced` (Kit) | B&W image, coral subject, teal outline | `place size mask paths` |
-| `Photo` (shell) | Full-bleed image with slow push | `src size fx fy z0 z1 a b mask tint traceAt children(place)` |
+| **`Cut` (desk)** | **The default for a photo**: its subject cut out, on the notebook paper | `name mask size box at traceAt tint valign bare` |
+| **`Desk` (desk)** | Photo with no single subject (landscape, crowd, room) as a cream card on the paper | `src size box at rot pos mask traceAt children(S)` |
+| `Photo` (shell) | Full-bleed image (rarely: maps and documents only; the user dislikes slow-push photo scenes) | `src size fx fy z0 z1 a b mask tint traceAt children(place)` |
 | `CropCard` (shell) | Image on a cream card, cropped window | `src size x y w h fx fy scale rot at mask tint children(S)` |
 | `PhotoCard` / `Card` | Whole image on a card | `src x y w h rot at` |
 | `Definition` (shell) | Vocab bar: term · definition | `term def at x y w` |
@@ -91,6 +94,10 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `Sfx` (common) | One sound effect at a frame | `at src volume` |
 | `ChapterShell` music entries (shell) | Cues per chapter; the bed lifts ×`TAIL_LIFT` (1.6) after the last word | `{src, volume, startFrom, from, to}`: `to: TM.at('word') + 6` on one cue and `from: TM.at('word') - 6` on the next hands over on a phrase |
 | `hasFile(path)` (shell) | True once an image exists in public/ | use to fall back gracefully |
+| `Sheet` + `camAt` (vox) | A document on the desk, optionally tilted back with a depth-of-field band; children in page px | `src size cam:{x y z tilt dofY dof band} offset`; keys `[frame, cam][]` |
+| `Swipe` / `Spot` (vox) | Coral highlighter along printed lines at reading speed / everything darker except the boxes (inside a `Sheet`) | `lines from to` / `size boxes at id` (boxes from `tools/phrase_find.py`) |
+| `FocusIn`, `carry`, `Tear`, `WordRun` (vox) | Rise into focus; motion carried through a cut; tear-away reveal; word match cut | `at` · `carry(f, a, b)` → x offset · `at top` · `items durs` (from `tools/word_hunt.py`) |
+| Collage board (board) | `Flat`, `Photo`, `Strip`, `Sticky`, `Stamp`, `TapeBit`, `Pin`, `Threads`, `Silhouette`, `Scrap`, `WornLogo`; motion: `Land` (drop/slap/stamp/tape/slide/fade), `APin`, `AThreads`, `BoardStage` | wrap in `<Ctx.Provider value={BRAND}>` + `<Defs />`; spec in the style repo's `techniques/collage_board.md` |
 
 More components that aren't in the template yet (documents marked in their own pixels, word-synced quotes,
 2.5D layered paintings, falling cards, a drifting desk, a 3D object, a journey map) are in the style repo's
@@ -101,8 +108,13 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
 
 ## 4. Scene recipes
 
-- **Full-bleed archival image**: `Photo` with a mask on the subject, title top-left (x 100–140, y 90–120), notes
-  on the empty side, `Tag` at the bottom-left. Push 1.02 → 1.1 across the scene.
+- **Cut-out on the paper (the default)**: `Cut` with the subject in a box on one side (e.g. x 900–1860), title
+  top-left (x 100–140, y 90–120), notes stacked on the empty side, `Tag` bottom-left. Coral on the one key subject;
+  `tint={false}` for supporting cut-outs. Several cut-outs side by side: `bare` on each over one `DarkPaper`.
+- **Card on the desk**: `Desk` for a landscape, crowd or room (or a failed mask), about 1000–1160 wide, rotated ±1–2°,
+  notes in the space beside or below it. With `mask` the subject inside the card is tinted and traced.
+- **Not house style**: full-screen photos with slow pushes ("Ken Burns"), 3D depth fly-throughs of photos, and color
+  photos (modern ones too). *The Balloon War* tried them and the user rejected them.
 - **Subject left, notes right**: `CropCard` at x 140–220 (about 520×700), titles and notes stacked at x 860+.
 - **Desk of cards**: `DarkPaper`, 2–3 cards across the top two-thirds, alternating rotation ±2–4°, title and notes
   along the bottom.
@@ -136,7 +148,9 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
 
 Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
 the marker sound 2 frames before every `Note` (`WRITE`, 0.2), a tick on pins and card flips (0.45). Music beds go
-in `ChapterShell`'s `music` at 0.13–0.17. Keep the lists of cue words next to the scenes so they stay in sync.
+in `ChapterShell`'s `music` with `volume: bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; see
+`voice-and-audio.md` §6). A `whip_soft` under a gentle drift plays at half level (the West series' `Sfx` halves any `whip`
+sound). Keep the lists of cue words next to the scenes so they stay in sync.
 
 ## 7. Checking your work
 
@@ -148,8 +162,9 @@ Do all of these before sending the user anything. Each one caught real problems 
    `python3 tools/sheet.py out/sheet.jpg out/stills/ChNN_*.jpg` and look at the sheet. Pick seconds a little
    after each anchor so every write-on has finished. Look for: text over faces or other text, text running into a
    divider, arrows crossing words, titles on busy image areas, empty scenes, a tint gone flat.
-4. **Text-edge probe:** `node tools/probe_text.mjs Ch01,Ch02,... 10 2>&1 | grep -v "PROBECOUNT\|emory"`.
-   It renders every 10th frame and lists any text whose box crosses the frame edge. Fix every hit (shorter line,
+4. **Text-edge probe:** `SAFE=96 node tools/probe_text.mjs Ch01,Ch02,... 10 2>&1 | grep -v "PROBECOUNT\|emory"`.
+   It renders every 10th frame and lists any text whose box crosses the frame edge, and (with `SAFE=96`) any title or
+   note inside the outer 5%. Fix every hit (shorter line,
    smaller size, move left, `whiteSpace: 'nowrap'` plus a width check). The user noticed right-edge cut-offs in a
    480p preview, so treat any hit as a bug.
 5. **After rendering:** `python3 tools/frames_sheet.py out/ch/chNN.mp4 out/check.jpg 12 18.5 40` to look at the
@@ -168,9 +183,10 @@ Do all of these before sending the user anything. Each one caught real problems 
   CONFEDERACY, "border states", a key, "← Fort Sumter, April 1861" and a THE CIVIL WAR strip.
 - **Every image gets a source tag**, generated ones too ("Illustration · ...").
 - **One subject in color per image.** If two people matter, use two scenes or trace the second without tint.
-- **Cut, don't dissolve.** The only fades are the chapter fade up and down and the intro's end (and `Engraving`'s soft
-  fade, which keeps the illustrations from slamming in). Chapters end gently: ~2 s hold after the last word (`TAIL` 54),
-  the music lifting, an 18-frame dip to black.
+- **Gentle transitions** (American West Ep 1, Oct 2026; replaces the older "cut, don't dissolve" rule): switch shots with
+  `Shots` from `src/kit/shots.tsx`. A `'whip'` shot comes in as a soft drift (a ~half-second crossfade with a 70 px slide and
+  light blur), a `'cut'` as a 6-frame dissolve; no whip pans, no hard cuts. Chapters end gently: ~2 s hold after the last word
+  (`TAIL` 54), the music lifting, an 18-frame dip to black, then the 2 s Chunk mark snap (`LogoBreak` in `ChunkIntro.tsx`).
 - **Heavy chapter = quiet chapter.** Fewer marks, longer holds, no jokes, slower voice, respectful images.
 - **The bundle copies public/ into /tmp** (~500 MB for a full video) on every render; the tools delete theirs.
   If the disk fills, remove `/tmp/remotion-webpack-bundle-*` and `out/` scratch files.
@@ -179,3 +195,14 @@ Do all of these before sending the user anything. Each one caught real problems 
   masks, layers, chapter stubs registered in `chapters.ts`), smoke-test them with a few stills, then give 2 chapters each to 4
   agents that may only edit their own `ChNN.tsx`. Review every agent's stills sheet; when two chapters show the same picture,
   move that shot into a shared component so they match (the Waltz went into `src/kit/waltz.tsx`).
+- **Patterns from *Not in the Picture*** (American West Ep 1, `projects/American_West/ep1/`):
+  - **Hatch a region on the drawn map** (`MWest` in `src/kit/ch01_extra.tsx`): the subject area as one see-through coral hatch
+    built from state outlines clipped to the land, with a label standing up off the map. It made sparse, dark map shots read.
+  - **Empty sockets before portraits**: when people are named one by one, put dashed empty circle mounts on the desk from the
+    cut, and drop each photo into its socket on its word, so the frame is never empty while the list builds.
+  - **Fill the words, not a loop**: on a cartoon with speech boxes, fill each box with see-through colour (multiply, wiping
+    left to right; teal for the one that matters, coral for the others) instead of drawing a loop around it (the user's idea).
+  - **Photos must fill the frame**: a full-bleed photo needs a zoom of at least `max(1920 / width, 1080 / height)`, or it
+    shows black bars (ch02's Capitol did, below that).
+  - **One series recurring card** (the two-views card filled across ch06–07) keeps its wording identical wherever it returns.
+

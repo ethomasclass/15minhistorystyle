@@ -1,0 +1,27 @@
+{
+ "size": [
+  1085,
+  560
+ ],
+ "paper": "New-York daily tribune (New-York [N.Y.]), April 17, 1865",
+ "url": "https://www.loc.gov/resource/sn83030213/1865-04-17/ed-1/",
+ "sp": "8",
+ "phrases": {
+  "treason must be made odious": [
+   [
+    342.0,
+    266.0,
+    595.0,
+    29.0
+   ]
+  ],
+  "made odious": [
+   [
+    664.0,
+    266.0,
+    273.0,
+    29.0
+   ]
+  ]
+ }
+}

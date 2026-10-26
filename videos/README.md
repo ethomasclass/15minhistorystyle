@@ -16,6 +16,25 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 6 | ***Say It Ain't So:** Baseball's Gambling Problem Before the Black Sox*, 1865–1921 (+ today) | 10:23 | 8 | 1,709 | this repo · `black-sox-video` (`projects/Black_Sox/`) | "…It's who's watching when they do." + subscribe line and a 12 s end screen. Plus 4 vertical Shorts |
 | 7 | ***The Exact Spot:** Texas, the Mexican-American War, and the Question It Reopened*, 1821–1848 | 14:45 | 10 | 2,485 | this repo · `claude/relaxed-lamport-62biq7` (`projects/Mexican_American_War/`) | "It took about 13 years to work." + thank-you/subscribe line and a 15 s end screen |
 | 8 | ***Dressed to Kill:** How Arsenic Green Took Over the 1800s*, 1775–1900 | 9:40 | 8 | 1,654 | this repo · `claude/laughing-gates-j5en30` (`projects/Dressed_To_Kill/`) | "…The green never changed. What changed was who had to prove it was safe. William Morris called it witch fever. But this time, the witch was real." + subscribe line and a 13 s end screen |
+| 9 | ***When Europe Ate Mummies:** The Strange & Spooky History of Mummy Medicine* (spooky season) | 8:53 | 9 | 1,433 | this repo · `ccr-76f2028e-9z2soe` (`projects/Mummy_Medicine/`) | Thanks and subscribe over the end screen. Plus 6 vertical Shorts |
+| 10 | ***The Balloon War:** Fake Tanks, Paper Bombs, and D-Day*, 1944–1945 (+ 2023) | 9:29 | 7 | 1,599 | this repo · `ccr-76f2028e-9z2soe` (`projects/Balloon_War/`) | "…a war that arrived on paper balloons… ended with paper birds." + subscribe line and a 10 s end screen |
+| 11 | ***Log Cabin:** How an Insult Won the White House* (1840) | 7:45 | 7 | 1,324 | this repo · `projects/Log_Cabin/` (made Oct 11, alongside the Mummies video) | "…For 31 days." |
+| 12 | ***In Their Own Words:** Secession, Fort Sumter, and the Picnic at Bull Run* (Civil War series 1) | 10:01 | 9 | 1,635 | this repo · `projects/In_Their_Own_Words/` | "…Nobody knew yet what it would end." |
+| 13 | ***Landless, Homeless, Voteless*** (Reconstruction, Part 1) | 13:08 | 10 | 2,555 | this repo · `projects/Reconstruction/ep1/` | "…sends a Black senator to Washington." |
+| 14 | ***Bottom Rail on Top*** (Reconstruction, Part 2) | 12:50 | 10 | 2,242 | this repo · `projects/Reconstruction/ep2/` | "Next time: the Klan, a crash, a bank, and a deal that ended it all." |
+| 15 | ***Redemption*** (Reconstruction, Part 3) | 13:00 | 10 | 2,139 | this repo · `projects/Reconstruction/ep3/` | "…to start living up to it." |
+| 16 | ***Forever Free:** How a War for the Union Became a War for Freedom* (Civil War series 2) | 9:41 | 8 | 1,589 | this repo · `projects/Forever_Free/` | "…And the war still had to be won." |
+| 17 | ***Except:** How the Civil War Was Decided, and What It Left Open* (Civil War series 3) | 9:24 | 8 | 1,540 | this repo · `projects/Except/` | "…Except as a punishment for crime." |
+| 18 | ***Not in the Picture:** Grant, the Railroad, and Who Built It* (American West, Ep 1 of 4; the first video as **Chunk History**) | 15:59 | 9 | 2,450 | this repo · `projects/American_West/ep1/` | "…It involved about five million cows." (tees up Ep 2) |
+
+**Shorts made as their own projects** (in `projects/`): *The Last Public Execution* (`Last_Public_Hanging`), *Rumpelstiltskin*,
+*World Series*, *Pledge Salute*, *Candy Scare*, and two scripted but not built (`Last_Time_Debt_Free_Short`,
+`Recession_Indicators_Short`). Their `src/project.ts` still carries the Black Sox title they were copied from; the Short's own
+title is in its `review/` YouTube text.
+
+**Everything is on one branch now** (Oct 26, 2026): every project folder above, the Chunk History brand (`brand/chunk-history/`),
+the merged music library (71 cues) and the skill were merged from their working branches into the main line; the "Repo · branch"
+column says where each was made.
 
 ## What each one added
 
@@ -71,6 +90,44 @@ The two Jackson videos before it used other looks. Each video's key documents ar
     pass) without their look. 190 archival images, 9 AI silhouettes, 12 reused music cues, none new.
   Thumbnails for Test & Compare: DRESSED TO KILL (Waltz), DEADLY GREEN (ballroom), DO NOT TOUCH (Kedzie's book).
 
+- **When Europe Ate Mummies** was a spooky-season video in the established look, with Gemini paintings for the tomb scenes and a
+  coral-traced mummy bundle. It added the **Openverse-era sound pack**, a mummy-brown paint-tube animation and a **3D gallery-corridor
+  open** for the Shorts, and its Short 6 was the first Short with **its own narration** written for the Short. The thumbnail
+  (C: EUROPE ATE MUMMIES, the bundle in coral on the dark tomb painting, two orange labels) earned steady browse traffic, so it is
+  the thumbnail recipe to copy.
+- **The Balloon War** (three balloons: one protected, one lied, one killed) was written with **story loops** and the **"write for
+  someone who knows nothing"** rule, voiced in **whole-chapter takes** on ElevenLabs v3 (Creative, audio tags) with clean endings, and
+  used **real images only**. It added `Cut` and `Desk` (the cut-out-on-the-notebook kit, now in the template), the **Openverse sound
+  tool**, a landing map drawn from Mikesh's 285 recorded incidents, a censor bar that lifts, and a paper balloon folding into a crane.
+  **A mistake to avoid:** its first cut leaned on full-screen photos with slow pushes, 3D depth fly-throughs and color modern photos.
+  You said it looked "way too Ken Burns", so every photo was rebuilt as a cut-out or a desk card, and those tools were removed.
+
+- **Log Cabin** (1840; Harrison's "log cabin and hard cider" campaign, the insult that became a slogan): a 7:45 one-off in the
+  established look.
+- **The Civil War series** (*In Their Own Words* → *Forever Free* → *Except*, about 9–10 minutes each, for Unit 4): one shared
+  **3D map base** (`civwar1861.json`, built with `map3d.tsx` as in *The Exact Spot*; its `MapTest` composition is the proof for all
+  three), one **series image-prompt file** (`script/FLOW_PROMPT.md`), each video's image list and shot list in `research/`, and a
+  "Next time: …" handoff line from one part to the next.
+- **The Reconstruction series** (*Landless, Homeless, Voteless* → *Bottom Rail on Top* → *Redemption*, ~13 minutes each) added the
+  **collage board** (`techniques/collage_board.md`; one piece pinned per chapter, *but* / *therefore* yarn), **worn, creased photos
+  with no frames**, **notes on paper slips**, **period music** (the `rc_` cues, LOC National Jukebox recordings via
+  `tools/jukebox.py`, local ACE-Step cues), the **Chunk History brand** (`brand/chunk-history/`), the Vox motion study
+  (`techniques/vox_motion_study.md`) and the **never-speed-up-the-voice** rule.
+- **The American West series** (four parts, planned in `projects/American_West/SERIES.md`; Ep 1 *Not in the Picture* finished
+  Oct 26) added the **series story arc** every episode follows (11 beats, a unit question, the Promise Ledger, hinge years and a
+  callback table; the skill's `script-writing.md` §10), **eleven_v4 one-take narration** with `[delivery cues]`, the **tinted
+  lithograph AI style** (`LITHO_PROMPT.md`), **depth and 3D** (wide → detail, a cut every 3–6 s, the tilted drawn map, 3D
+  cut-aways), the first **Chunk History intro** and **mark-snap chapter breaks** (with a clicks-and-page-turn sound, no tones),
+  **gentle shot transitions**, the **Black Sox mix levels** (narration −18 LUFS, music 13 LU under, `level_voice.py`, `bed()`),
+  **Suno prompt docs** with tempo, structure tags and minimum lengths, a **fact-check pass** sourced on screen, and the six `aw_` cues.
+
+## Shorts results (log each one 48 hours after posting)
+
+| Short | Stayed to watch | Avg viewed | Views | Note |
+|---|---|---|---|---|
+| Say It Ain't So · Banned → Partner (vertical) | 12.2% | 0:18 of 0:43 (42%) | 81 | The opening was two small cards and an early quote; lost two-thirds of viewers in the first 13 s |
+| The Last Public Execution | 55.3% | 0:50 of ~1:10 | 1.1k | Cover frame, a scene with people first, no early text |
+
 ## Your standing preferences (from your notes across the videos)
 
 **Script**
@@ -80,6 +137,8 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **Hook-first cold opens** (from *Dressed to Kill*, after the retention graphs): the first sentence is the hook, never a date; the
   thumbnail's image is on screen at frame 0; the question by about 0:40; one or two promises that pay off later. The channel intro
   at about 1:00 is fine (no cliff there in *King Andrew*'s graph). Promoted views skip fast, so judge retention on organic traffic.
+- **Write for someone who knows nothing** (from *The Balloon War*): no assumed background, connect to something today, sound like
+  talking. Build the script on **story loops** (open a question, close it later), and leave a one-second beat after the cold open.
 - No historian names in the narration ("historians still argue" is fine). No modern politicians. No implied link to today's parties.
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").
@@ -89,8 +148,21 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
+- **Photos have no frames and always look worn** (Oct 2026): no white borders or card mounts; every archival photo is cropped out of its mount and shown as a creased old print (fold lines, a web of fine cracks, chipped and torn edges with white paper fibres, faint stains) with `tools/crease.py` (in `projects/Reconstruction/tests/tools/` until it moves into the template).
+- **The collage board in every video** (from the Reconstruction series, Oct 2026): each chapter pins one piece to a board on the desk, teal yarn with *but* / *therefore* tags ties causes to effects, and the ending pulls back to the whole board. You chose the board (cut-paper collage in the channel's colours, with the tilted desk for moving to the maps) over the block-in-the-wall "chunk wall". No case-file or crime language on it. Spec: [`../techniques/collage_board.md`](../techniques/collage_board.md).
+- **Cut-outs on the notebook, as many photos as possible** (*The Balloon War*). Each photo's subject is cut out and placed on the
+  dark ruled paper, or the photo lands as a cream card on the desk. **No full-screen photos with slow pushes ("Ken Burns"), no 3D
+  photo fly-throughs, no color photos** (modern ones go black and white too).
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
+- **Notes on paper slips, inside the safe margin** (Reconstruction, Oct 2026): handwriting over a busy picture was hard to read, so notes sit on torn paper slips (dark ink on cream; pink for the subject). Keep titles and notes out of the outer 5% too (`SAFE=96` in the text probe).
+- **Say fractions so they can't be misheard** (Reconstruction ch06): "three-quarters of the states", not "three out of four states", which sounds like there were four.
 - Big titles stay on screen for at least 2 seconds.
+- **Gentle transitions** (American West Ep 1, Oct 2026): no whip pans. A "whip" shot change is a soft drift (a ~half-second
+  crossfade with a 70 px slide and light blur), a "cut" is a 6-frame dissolve (`Shots` in `src/previews/fx.tsx`); the whip sound
+  plays at half level.
+- **Chunk History branding** (Oct 2026): the 3D Chunk intro after the cold open (5.5 s) and a 2 s mark snap between chapters (the
+  coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`). **Its sound is clicks and page
+  turns only: no tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this).
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.
@@ -179,7 +251,16 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 - **v4 emotion cues in every script** (`[wry]`, `[serious]`, `[quietly]`, `[pause]` …), sparing and consistent (West series).
 - **Narration on ElevenLabs `eleven_v4`, one take per chapter, speed 1.0** (from the West series, Oct 2026): it sounded better
   than v3, and voicing the whole chapter in one request removed the clicks and breaks the paragraph-by-paragraph splicing made.
+- The same voice clone every time, with a pronunciation test MP3 before voicing. Whole-chapter takes, Creative stability, v3 audio
+  tags for emotion; never respell a common word the voice already says right ("barrage" came out "baraz").
+- **Keep the opening calm.** The newsreel snare-and-brass opener on *The Balloon War* felt too military; open on curiosity
+  (felt piano, pizzicato) instead.
 - A/B the pace when the subject is heavy.
+- **Mix levels = Black Sox** (measured Oct 2026): narration at **-18 LUFS** (`tools/level_voice.py`; eleven_v4 comes out ~6 dB
+  quieter, so every take is levelled), music bed **~13 LU under the voice** (set per cue from its measured loudness, `src/kit/levels.ts`
+  `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (marker tick
+  0.2 as in Black Sox, whooshes and stamps a few dB softer). Master to -14 LUFS.
+- **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.
 
 **Packaging**

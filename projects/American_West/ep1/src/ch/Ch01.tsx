@@ -7,7 +7,7 @@ import words from '../../public/audio/ch01_not_in_the_picture.words.json';
 import {clamp} from '../lib/anim';
 import {Finish, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from '../kit/Kit';
 import {Sfx} from '../kit/common';
-import {ChannelIntro, INTRO_FRAMES} from '../kit/Intro';
+import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
 import {makeTimeline, type Narration} from '../kit/shell';
 import {CutOut, Desk3D, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
 import {IMG, SM, SZ} from '../samples/masks';
@@ -15,7 +15,7 @@ import {Hand, House, LINES, MPin, MRoute, PL, WestCard, WestMap} from '../kit/ch
 import {SUBTITLE, TITLE, DATES} from '../project';
 import {ChairsLitho} from '../kit/house_litho';
 
-/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+/** The House chamber: 'litho' (generated 1860s chamber; the user's pick) or 'diagram' (the drawn seats, kept as a fallback). */
 const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
 
 const N = words as Narration;

@@ -3,6 +3,7 @@
 // "The pay didn't change." Sources: Hart stereographs (LOC TIFF masters), the Placer Herald of July 6, 1867 (LOC,
 // Chronicling America; line positions from its ALTO OCR), Crocker by Silas Selleck (Commons), lithograph plates and props.
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch04_the_mountain.words.json';
 import {clamp} from '../lib/anim';
@@ -375,7 +376,7 @@ const Question: React.FC = () => {
   );
 };
 
-/** 13 · the company's records: track and money ticked off, the deaths row nearly empty. */
+/** 13 · the company's records: track and money ticked off, the deaths row empty but for a "?". */
 const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const g = useGFrame();
   const pal = usePal();
@@ -383,7 +384,7 @@ const Records: React.FC<{detail: boolean}> = ({detail}) => {
   const f = useCurrentFrame();
   const a = detail ? at('It kept') - 1 : at('The company') - 1;
   const b = detail ? at('Most of') : at('It kept');
-  const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 1]];
+  const rows: [string, number, number][] = [['MILES OF TRACK', at('track'), 7], ['MONEY', at('money'), 7], ['CHINESE DEATHS', at('Chinese', 2), 0]];
   const cam = detail ? {z: keys(f, [[a, 1.12], [b, 1.2]]), x: -40, y: -170} : {z: keys(f, [[a, 0.84], [b, 0.88]]), x: 0, y: -20};
   return (
     <AbsoluteFill>
@@ -671,9 +672,9 @@ const Body: React.FC = () => (
 export const Ch04: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch04_the_mountain.wav" lead={LEAD} music={[
     // SUNO: none planned for the first half (w_aftermath is the library cue)
-    {src: 'music/w_aftermath.mp3', volume: 0.14, to: at('In June') + 4, fadeOut: 20},
-    // SUNO: aw_long_grief replaces this (j_grief is only 40 s, so it enters after a short silence on "About 3,000")
-    {src: 'music/j_grief.mp3', volume: 0.12, from: at('About 3,000') - 12},
+    {src: 'music/w_aftermath.mp3', volume: bed('w_aftermath'), to: at('In June') + 4, fadeOut: 20},
+    // aw_long_grief (Suno, 3:04): enters after the deliberate short silence from "In June", on "About 3,000"; 14 LU under the voice
+    {src: 'music/aw_long_grief.mp3', volume: bed('aw_long_grief', 14), from: at('About 3,000') - 12},
   ]}>
     <Body />
   </ChapterShell>

@@ -50,6 +50,10 @@ tools/voice_all.sh 04 07               # only these chapters
 Each chapter becomes `public/audio/chNN_slug.wav` + `chNN_slug.words.json` (word-level timings from ElevenLabs
 forced alignment). Voice model: `eleven_v4`, one take per chapter (the defaults in `tools/voice.py`).
 
+Before the real voice exists, `tools/scratch_voice.py script.txt NAME --model <piper .onnx>` makes a scratch narration
+with real word timings (a local Piper voice), so scenes can be built and timed; every anchor re-times itself when the
+ElevenLabs voice replaces it. Never ship it.
+
 After voicing:
 1. Make a narration preview the user can listen to straight through (join the WAVs with ffmpeg into one MP3,
    e.g. `script/<Slug>_narration_preview.mp3`) and send it.
@@ -68,14 +72,41 @@ mark it in the script rather than splicing.
 
 **Older method (videos before the West series), `VOICE_ONE_TAKE=0`:** paragraph by paragraph on `eleven_v3`, with
 these settings. `tools/voice.py` now cuts at the quietest point with short fades and room tone, so it no longer clicks.
+**No speed-up** (the user, Oct 2026, Reconstruction): the voice plays at its own speed. The earlier `VOICE_STRETCH`
+1.15 (and 1.08 for heavy chapters) changed the tempo and the user heard the pitch change too, so every chapter now runs at
+`VOICE_STRETCH=1.0`, even if the video runs longer. Only the pauses are trimmed.
 
 | Chapters | VOICE_STRETCH | VOICE_MAX_PAUSE | VOICE_SENT_GAP | VOICE_PARA_GAP |
 |---|---|---|---|---|
-| Normal | 1.15 | 0.25 | 0 | 0.35 |
-| Heavy chapter and the ending (`HEAVY=`) | 1.08 | 0.35 | 0.05 | 0.55 |
+| Normal | 1.0 | 0.25 | 0 | 0.35 |
+| Heavy chapter and the ending (`HEAVY=`) | 1.0 | 0.35 | 0.05 | 0.55 |
 
-`STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
-The result is about 185 words a minute for normal chapters.
+`STRETCH` is a local tempo change (>1 is faster): leave it at 1.0. `MAX_PAUSE` shortens the voice's own pauses.
+Re-voicing at a new stretch costs nothing: the ElevenLabs responses are cached by text and voice settings, and the
+stretch is applied afterwards.
+
+### Delivery: whole takes, Creative, audio tags (the user's choice, Oct 2026)
+
+Chosen by ear from an A/B/C test of *The Balloon War*'s cold open (paragraph takes vs one take vs one take at Creative
+with tags). Use it for every video from now on:
+
+- **One take per chapter** (`VOICE_WHOLE=1`, the default for v3). v3 takes no neighbouring-paragraph context, so
+  paragraph-by-paragraph takes reset the delivery at every paragraph. A whole take keeps the arc; the tool still
+  inserts `PARA_GAP` at each paragraph end and `SENT_GAP` after sentences.
+- **`VOICE_STABILITY=0.0` (Creative).** The most expressive setting, and the only one that really follows tags. It can
+  occasionally add, drop or repeat a word: the forced-alignment word count check catches most of it, and the
+  pronunciation-test listen catches the rest. Retake a chapter that drifts.
+- **Audio tags in the script**, in square brackets, performed and never shown or captioned: `[curious]`,
+  `[thoughtful]`, `[serious]`, `[quietly]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
+  at most one per paragraph, before the sentence it colors; none on facts that need a neutral read; the heavy chapter
+  gets only `[quietly]` or `[serious]`. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
+  (once or twice a chapter at most).
+- **Clean endings.** Every splice (shortened pauses, sentence and paragraph gaps) is cut at the quietest 10 ms between
+  words, keeps two thirds of each kept pause after the last sound so endings ring out, and fades for 12 ms, so no word
+  is clipped. A take that ends while still loud prints a WARNING: retake it (change the last punctuation to get a new take).
+
+Command for a normal chapter:
+`VOICE_STABILITY=0.0 VOICE_STRETCH=1.15 VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 python3 tools/voice.py script/ch02_x.txt ch02_x`
 
 ## 4. Pronunciation
 
@@ -86,11 +117,16 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
   "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
+- **Don't respell a common word the voice already knows.** A respelling can make it worse (*The Balloon War*:
+  "barrage" → "buh-rahzh" came out "Baraz"; unrespelled, it was right). Keys are case-sensitive, so a respelling
+  hits "barrage" but not "Barrage": test every casing the script uses.
 
 ## 5. Re-voicing one chapter
 
 ```sh
 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain      # one take, eleven_v4 (default)
+# older paragraph-by-paragraph method:
+# VOICE_ONE_TAKE=0 VOICE_MAX_PAUSE=0.25 VOICE_SENT_GAP=0 VOICE_PARA_GAP=0.35 VOICE_STRETCH=1.0 python3 tools/voice.py script/ch04_corrupt_bargain.txt ch04_corrupt_bargain
 python3 tools/anchors.py ch04_corrupt_bargain --src src/ch/Ch04.tsx
 ```
 
@@ -99,7 +135,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 6. Music
 
-- **Reuse first.** Every cue the channel has made (38, deduplicated, with prompts, lengths, loudness and where each
+- **Reuse first.** Every cue the channel has made (71 as of Oct 2026, deduplicated, with prompts, lengths, loudness and where each
   was used) is in the style repo's music library: `music/README.md` and `music/cues/` at the root of the
   `15minhistorystyle` repo (this skill's `../../../music/`). Copy cues into `public/music/` keeping their prefix
   (`r_dix.mp3`). Write a `script/MUSIC.md` table for the new video: chapter, cue, why it fits, and a "gaps" list.
@@ -107,14 +143,57 @@ shifts. Re-check stills for that chapter after re-voicing.
   narration mixed over each option) and let them pick. Only generate cues for real gaps, then add them to the
   library with a new prefix.
 - **Suno** gives the best new cues (the user runs it by hand): Custom mode, Instrumental on, and the Styles and
-  Exclude lines in the library's README.
-- **Generate** with `tools/music_eleven.py <name>` after adding a prompt to `CUES` (see the examples there:
-  instrumental, no vocals, room for a narrator, period instruments, length in ms). Music costs roughly 850 credits
-  a minute, so keep cues short and reuse them.
-- **Levels:** music beds 0.13–0.17 under narration, with 15–20-frame fades (`ChapterShell` does this). Cold open
-  0.17, dipping at the end. Title sting 0.45 (already wired into the intro). The heavy chapter gets a grave cue or
-  near-silence. Generators master differently (Lyria about −12 LUFS, Suno about −15, ElevenLabs down to −19.6), so
-  check the library's LUFS column: a cue 6 dB quieter needs roughly double the bed.
+  Exclude lines in the library's README. **Give the user a copy-paste prompt doc** like
+  `projects/American_West/SUNO_PROMPTS.md` (the West series' format, which the user liked): one entry per cue in priority order,
+  each with *Used in*, a **minimum length measured from the chapters** (the span the cue must cover, plus about 10 s), a
+  Style box that already ends with a tempo and key (e.g. `112 BPM, 4/4`), and a **Lyrics box of structure tags only**
+  (`[Instrumental]`, `[Intro: …]`, `[Build: …]`, `[Break: …]`, `[Outro: …]`, `[End]`), which needs Instrumental switched off.
+  Lessons from the West cues: **Suno won't change mood inside one short song** (a fanfare that should sour stays a fanfare;
+  write the turn into the section tags, or make two takes and join them with `ep1/tools/collapse.py`, a tape-stop); words
+  like *tremolo*, *drone* and *bleak* make a cue sound like horror (the first `aw_panic`); put `horror, eerie, drone, string
+  tremolo` in its Exclude. Suno files may run long with silence at the end: trim them (`aw_long_grief` was cut to 3:04).
+- **Generate with ElevenLabs** (`tools/music_eleven.py <name>`; how Reconstruction's `rc_` cues were made):
+  1. The key is the narration key, in `.env`. Check the budget first (`GET /v1/user/subscription`); music costs
+     roughly 850 credits a minute, so make 60–80 s cues and reuse them across chapters.
+  2. Add a prompt to `CUES`: the moment and its period in plain words; period instruments by name (fretless banjo,
+     fiddle, saxhorn brass band, reed harmonium, parlor piano, field drum), never a named song or artist; how it moves
+     over its length; how it ends (the tail gets lifted, so ask for an ending worth hearing); then the `TAIL` suffix
+     (instrumental, no choir, restrained, room for a narrator); and the length in ms. The docstring has the recipe and
+     the `rc_` prompts are worked examples.
+  3. Run it, measure the loudness (`ffmpeg -i public/music/x.mp3 -af loudnorm=print_format=summary -f null -`) and set
+     the bed from it: ElevenLabs cues come out at −16 to −19.5 LUFS, so they run at about 0.17–0.24 where a −12 LUFS
+     cue runs at 0.13. Listen to the first 30–40 s, which is what most chapters use.
+  4. Add the cue to the music library (`music/cues/`, a row in `music/README.md`, an entry in `music/catalog.json` with
+     its prompt) under the video's prefix. Commit the `.mp3`; the `.wav` copy is git-ignored.
+- **Generate locally with ACE-Step 1.5** (`tools/music_acestep.py`; free and unlimited, the user's pick for
+  text-to-music after the Reconstruction test): an open-source model run on your own machine (MIT; outputs allowed
+  commercially). Setup, the CPU fix and the prompt style are in the tool's docstring. Captions are comma-separated:
+  period and instruments first, then mood and how it moves, then "documentary underscore, restrained, instrumental";
+  give `bpm`, key and time signature explicitly. On a GPU or Apple silicon a cue takes seconds; on a CPU-only cloud
+  session about 4 minutes per 60 s cue. Its "cover" mode did not keep a melody in the CPU test, so use it for
+  text-to-music, not for turning a recording into a new arrangement (yet).
+- **Real period recordings** (`tools/jukebox.py`; how Reconstruction got its spirituals, band medleys and Foster):
+  `search "roll jordan roll"` lists Library of Congress National Jukebox records (1900–1925) with dates and performers;
+  `get <jukebox-id> public/music/period/<name>.mp3` downloads one and writes its credit to `public/music/credits.json`.
+  Records published before 1926 are US public domain (the tool refuses later ones). Sung records never go under the
+  narration: use them in a chapter's open, its tail and the ending; instrumentals can sit low under it. Normalise each
+  to about −16 LUFS first (they range −15 to −31). Leave out "Dixie" and minstrel-era records (mock dialect), and listen
+  to any "Southern melodies" medley before using it. Credit the performers in the description ("Swing Low, Sweet
+  Chariot: Fisk University Jubilee Singers, 1909, Library of Congress"); a reissue label's Content ID claim is disputed
+  with the LOC link and the recording date. Worked example: `projects/Reconstruction/MUSIC.md` in the style repo.
+- **Levels = the Black Sox mix** (measured in the West series, Oct 2026; the user asked to keep sound levels like Black Sox):
+  - **Narration at −18 LUFS.** `eleven_v4` comes out about 6 dB quieter (≈ −24), so `tools/voice.py` runs
+    `tools/level_voice.py` on every take (gain plus a delay-compensated limiter at −1 dBTP; word timings don't move).
+    Level older takes with `python3 tools/level_voice.py public/audio/*.wav`.
+  - **Music bed about 13 LU under the voice**, set per cue from its measured loudness with `bed()` in `src/kit/levels.ts`
+    (`volume: bed('g_grip')`; a grave stretch `bed('j_grief', 14)`). Library cues range −11 to −22 LUFS, so one flat volume
+    puts some beds 9 dB louder than others; `CUE_LUFS` there comes from `music/catalog.json`, and a new cue gets measured
+    (`ffmpeg -i x.mp3 -af ebur128 -f null -`) and added.
+  - **Cold open** 0.17 (as Black Sox), dipping at the end. **Sound effects** at the soft-set levels (`building-scenes.md` §6).
+  - **Check:** render one chapter's audio (`npx remotion render src/index.ts Ch08 out.wav --codec=wav`); with the voice at
+    −18.2 the mix measured −18.0, i.e. music and effects add about 0.2 dB. Master to −14 LUFS (`tools/master.py`).
+  - The heavy chapter gets a grave cue or near-silence. Use cue features on purpose: start a cue partway (`startFrom`) so its
+    turn lands on a line (the West's `aw_panic` stops dead 1:41.9 in, started 10.95 s in so the stop lands on the last line).
 - **Tail lift and hand-overs** (from *The Exact Spot*): `ChapterShell` lifts the bed ×1.6 (`TAIL_LIFT`) for the ~2 s
   after the last word, then fades with the picture, so pick cues whose tail still sounds good louder. To change cue on a
   phrase, give the first `to: TM.at('word') + 6` and the next `from: TM.at('word') - 6` (`TM = makeTimeline(N, 30)`); the
@@ -122,11 +201,30 @@ shifts. Re-check stills for that chapter after re-voicing.
 - Don't mention AI music (or the AI voice or AI images) in the description; the user's rule. YouTube's altered-content
   checkbox in Studio covers the disclosure.
 
+- **What ElevenLabs can and can't do for music** (tested for the jingle, Oct 2026): Music (`/v1/music`) makes good beds but
+  **can't write a short tune**: six 5-second takes asking for four notes each came back as one struck chord. **Sound
+  generation** (`/v1/sound-generation`) makes clean one-shots that come back **in tune** (a felt-piano C5 within 0.05
+  semitone): to get an exact short melody, generate one note and resample it to the other pitches
+  (`projects/American_West/ep1/tools/make_jingle.py`). Generated "single" clicks often hold several: cut them apart and
+  keep the ones that die away fast. A 5 s music take costs about 70 credits.
+
 ## 7. Sound effects
+
+**The branding sound is clicks and page turns only: no tones, no music** (the user's call after trying marimba, felt-piano,
+chopped-sample and lo-fi jingles). The template's `public/music/chunk_jingle.mp3` (the 5.5 s intro: five clicks speeding up
+with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny clicks on HIS-TO-RY, a page turn) and
+`public/sfx/chunk_snap.wav` (the chapter break: the click-clack, then a page turn) are built by
+`projects/American_West/ep1/tools/make_jingle.py` from single clicks cut out of ElevenLabs pen / key / mouse takes. The old
+`tick` / `tick_soft` ring faintly (≈2.6 kHz), which counts as a tone, so they're not used there.
+
 
 The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker_tick` (notes, via `WRITE`),
 `tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
-`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. Volumes are in `building-scenes.md` §6. Keep
+`python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**
+`python3 tools/sfx_openverse.py --list "<what>"` shows openly licensed candidates from Openverse (mostly Freesound),
+and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <name>` fetches, trims and normalises it
+and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
+CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
 effects quiet; they should be felt more than heard.

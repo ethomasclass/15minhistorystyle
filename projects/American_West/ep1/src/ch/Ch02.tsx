@@ -2,10 +2,11 @@
 // Reconstruction, then the deal: two companies, land grants (the 3D township and the Act), loans by the mile (the ribbon),
 // "That means…", and the race.
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch02_1862.words.json';
 import {clamp} from '../lib/anim';
-import {Note, useGFrame} from '../kit/Kit';
+import {JF, Note, useGFrame} from '../kit/Kit';
 import {Sfx} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, hasFile, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {CircleMount, CutOut, Desk3D, HingeYear, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
@@ -13,9 +14,9 @@ import {IMG, SZ} from '../samples/masks';
 import {M2} from '../masks_ch02';
 import {HouseDetailLitho, HouseWideLitho, SouthGoneLitho} from '../kit/house_litho';
 
-/** The House chamber: 'litho' (generated 1860s chamber, the user's ask) or 'diagram' (the drawn seats). */
+/** The House chamber: 'litho' (generated 1860s chamber; the user's pick) or 'diagram' (the drawn seats, kept as a fallback). */
 const HOUSE_LOOK: 'litho' | 'diagram' = 'litho';
-import {ACT_H, ACT_LINE_Y, ACT_W, ActPage, BondKey, Hand, House, HOUSE_EMPTY, HOUSE_SEATS, LINES, MCross, MPin, MRoute, PL, Ribbon, RMI, RX, subLine, Township, townshipTaps, TownLegend, WestMap} from '../kit/ch01_extra';
+import {type WApi, ACT_H, ACT_LINE_Y, ACT_W, ActPage, BondKey, Hand, House, HOUSE_EMPTY, HOUSE_SEATS, LINES, MCross, MPin, MRoute, MStand, MWest, PL, Ribbon, RMI, RX, subLine, Township, townshipTaps, TownLegend, WestMap} from '../kit/ch01_extra';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
@@ -32,13 +33,25 @@ const BORONDA: [number, number] = [500, 743];
 const EXODUS: [number, number] = [3840, 2828];
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference); routes simplified, approx.';
 
+/** "THE WEST" standing up off the map, over the hatched region (Utah/Nevada). */
+const WestLabel: React.FC<{api: WApi; show: number; size?: number}> = ({api, show, size = 42}) => {
+  const g = useGFrame();
+  const k = interpolate(g, [show, show + 8], [0, 1], clamp);
+  return (
+    <MStand api={api} at={[1450, 1330]} show={show}>
+      <div style={{position: 'absolute', left: -200, top: -size, width: 400, textAlign: 'center', fontFamily: JF.mono, fontSize: size, letterSpacing: 6, color: '#FF6F61', opacity: k,
+        textShadow: '0 0 2px #111, 0 0 6px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>THE WEST</div>
+    </MStand>
+  );
+};
+
 /** 1 · "Washington, 1862." The Capitol with its dome half built. */
 const Washington: React.FC = () => {
   const f = useCurrentFrame();
   const b = at('The Civil War') - 1;
   return (
     <AbsoluteFill>
-      <PhotoCam src="img/ch02/capitol_dome_1861.jpg" size={DOME} cx={keys(f, [[0, 1210], [b, 1210]])} cy={keys(f, [[0, 1000], [b, 820]])} s={zkeys(f, [[0, 0.62], [b, 0.7]])} />
+      <PhotoCam src="img/ch02/capitol_dome_1861.jpg" size={DOME} cx={keys(f, [[0, 1210], [b, 1210]])} cy={keys(f, [[0, 1000], [b, 820]])} s={zkeys(f, [[0, 0.8], [b, 0.86]])} />
       <SlapTitle text="WASHINGTON, 1862" x={110} y={850} size={100} at={at('Washington') + 2} seed={12} />
       <ScrimTag text="John Wood, the Capitol dome under construction, May 9, 1861 · Library of Congress" x={34} y={24} />
     </AbsoluteFill>
@@ -93,6 +106,8 @@ const Deadlock: React.FC = () => {
     <AbsoluteFill>
       <WestMap keys={ks}>
         {(api) => <>
+          <MWest api={api} at={a + 2} />
+          <WestLabel api={api} show={at('the West') - 2} />
           <MRoute api={api} pts={LINES.north} at={n} dur={16} color="#2FE0C4" dashed width={7} />
           <MRoute api={api} pts={LINES.south} at={s} dur={16} color="#ffffff" dashed width={7} />
           <MPin api={api} at={LINES.north[0]} show={n} label="a northern route" side="l" size={48} color="#2FE0C4" />
@@ -102,7 +117,7 @@ const Deadlock: React.FC = () => {
         </>}
       </WestMap>
       <SlapTitle text="DEADLOCK" x={110} y={80} size={100} at={at('blocked')} seed={17} />
-      <Note text="North vs. South, 1850s" x={120} y={230} size={50} rot={-3} at={at('before the war') - 2} color="#ffffff" />
+      <Note text="North vs. South, 1850s" x={120} y={230} size={50} rot={-3} at={a + 6} color="#ffffff" />
       <ScrimTag text={MAPTAG} />
     </AbsoluteFill>
   );
@@ -115,6 +130,7 @@ const Questions: React.FC = () => {
     <AbsoluteFill>
       <WestMap keys={ks}>
         {(api) => <>
+          <MWest api={api} at={-99} />
           <MRoute api={api} pts={LINES.north} at={-99} color="#2FE0C4" dashed width={6} opacity={0.6} />
           <MRoute api={api} pts={LINES.south} at={-99} color="#ffffff" dashed width={6} opacity={0.6} />
         </>}
@@ -217,8 +233,13 @@ const BigIdea: React.FC = () => {
   const ks = [{f: a, x: 1900, y: 1350, z: 0.42, tilt: 34, rot: 0}, {f: at('When people') - 1, x: 1950, y: 1350, z: 0.34, tilt: 40, rot: 3}];
   return (
     <AbsoluteFill>
-      <WestMap keys={ks} />
-      <SlapTitle text="THE BIGGER IDEA" x={110} y={80} size={96} at={at('bigger idea') + 2} seed={25} />
+      <WestMap keys={ks}>
+        {(api) => <>
+          <MWest api={api} at={a + 2} />
+          <WestLabel api={api} show={a + 4} />
+        </>}
+      </WestMap>
+      <SlapTitle text="THE BIGGER IDEA" x={110} y={80} size={96} at={Math.min(at('bigger idea') + 2, a + 6)} seed={25} />
       <Note text="the whole series" x={120} y={220} size={54} rot={-3} at={at('whole series') - 2} />
       <ScrimTag text={MAPTAG} />
     </AbsoluteFill>
@@ -246,8 +267,8 @@ const OutWest: React.FC = () => {
   const ks = [{f: a, x: 1500, y: 1250, z: 0.5, tilt: 50, rot: 4}, {f: at('Only out there') - 1, x: 1750, y: 1250, z: 0.56, tilt: 46, rot: 0}];
   return (
     <AbsoluteFill>
-      <WestMap keys={ks} />
-      <Mono text="OUT WEST: THE SAME QUESTION" x={150} y={110} size={26} at={at('same question') - 2} />
+      <WestMap keys={ks}>{(api) => <><MWest api={api} at={-99} /><WestLabel api={api} show={a + 4} /></>}</WestMap>
+      <Mono text="OUT WEST: THE SAME QUESTION" x={150} y={110} size={26} at={Math.min(at('same question') - 2, a + 6)} />
       <Hand parts={[['what does '], ['freedom', '#ffffff'], [' mean now,']]} x={150} y={190} size={84} at={at('what does') - 2} dur={14} />
       <Hand parts={[['and '], ['who gets it?', '#FF6F61']]} x={230} y={330} size={84} at={at('and who gets') - 2} dur={10} />
       <ScrimTag text={MAPTAG} />
@@ -260,8 +281,25 @@ const ROOM = [
   {w: 'Native nations', src: 'img/ch02/soule_arapaho_camp_1870.jpg', size: SOULE, fx: 1000, fy: 960, s: 0.42, tag: 'W. S. Soule, Arapaho camp near Fort Dodge, Kan., 1870 · National Archives'},
   {w: 'Chinese immigrants', src: IMG.tunnel8, size: SZ.tunnel8, fx: 690, fy: 1480, s: 0.48, tag: 'A. A. Hart, Tunnel No. 8, 1865–69 · LOC'},
   {w: 'Mexican Americans', src: 'img/ch02/boronda_family.jpg', size: BORONDA, fx: 250, fy: 360, s: 0.8, tag: 'The Boronda family of Monterey County, Calif., undated · Wikimedia Commons'},
-  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1780, fy: 900, s: 0.36, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
+  {w: 'Black families', src: 'img/ch02/leslies_exodus_1879.jpg', size: EXODUS, fx: 1790, fy: 900, s: 0.48, tag: "Frank Leslie's Illustrated Newspaper, Exodus to Kansas via St. Louis, 1879 · Commons"},
 ];
+/** An empty mount waiting for its photograph: a dark disc with a faint dashed teal rim (drops in with a small bounce). */
+const Socket: React.FC<{cx: number; cy: number; r: number; at: number}> = ({cx, cy, r, at: s}) => {
+  const g = useGFrame();
+  if (g < s) return null;
+  const k = interpolate(g, [s, s + 4, s + 7], [0.6, 1.06, 1], clamp);
+  const o = interpolate(g, [s, s + 4], [0, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: cx - r - 16, top: cy - r - 16, width: r * 2 + 32, height: r * 2 + 32, transform: `scale(${k})`, opacity: o}}>
+      <div style={{position: 'absolute', inset: 0, borderRadius: '50%', background: 'radial-gradient(circle, #1d1a15 0%, #12100c 100%)', boxShadow: 'inset 0 0 40px rgba(0,0,0,0.8), 10px 12px 0 #050403'}} />
+      <svg style={{position: 'absolute', left: 0, top: 0}} width={r * 2 + 32} height={r * 2 + 32}>
+        <circle cx={r + 16} cy={r + 16} r={r + 8} fill="none" stroke="#2FE0C4" strokeOpacity={0.45} strokeWidth={4} strokeDasharray="14 12" />
+      </svg>
+      <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: JF.mono, fontSize: 64, color: '#2FE0C4', opacity: 0.35}}>?</div>
+    </div>
+  );
+};
+
 const Room: React.FC<{close?: boolean}> = ({close}) => {
   const f = useCurrentFrame();
   const a = at('Only out there') - 1;
@@ -279,6 +317,7 @@ const Room: React.FC<{close?: boolean}> = ({close}) => {
           const ok = !r.src.startsWith('img/ch02/') || hasFile(r.src);
           return (
             <React.Fragment key={r.w}>
+              <Socket cx={cx} cy={520} r={160} at={close ? -99 : a + 3 + i * 3} />
               {ok ? <CircleMount src={r.src} size={r.size} cx={cx} cy={520} r={160} fx={r.fx} fy={r.fy} scale={r.s} at={ats[i]} />
                 : <CircleMount src={IMG.redcloud} size={SZ.redcloud} cx={cx} cy={520} r={160} fx={1080} fy={1300} scale={0.2} at={ats[i]} />}
               <Mono text={r.w} x={cx - 7 * r.w.length - 14} y={720} size={24} at={ats[i] + 3} />
@@ -286,7 +325,7 @@ const Room: React.FC<{close?: boolean}> = ({close}) => {
           );
         })}
       </div>
-      <Note text="more people in the room" x={600} y={100} size={64} rot={-3} at={close ? -99 : at('more people') - 2} color="#ffffff" />
+      <Note text="more people in the room" x={600} y={100} size={64} rot={-3} at={close ? -99 : Math.min(at('more people') - 2, a + 4)} color="#ffffff" />
       <ScrimTag text={ROOM.map((r) => r.tag.split(' · ')[0].split(',')[0]).join(' · ') + ' · sources: NARA, LOC, Commons'} />
     </AbsoluteFill>
   );
@@ -495,17 +534,18 @@ const Sounds: React.FC = () => {
     [at('Washington') + 2, 'stamp', 0.22],
     [c('The Civil War'), 'whoosh', 0.22], [c('The Civil War') + 4, 'block_tap_soft', 0.12], [W('second year'), 'marker_tick', 0.2], [W('empty'), 'marker_tick', 0.2],
     [c('The Southern'), 'whoosh', 0.2], [W('members went'), 'marker_tick', 0.2],
-    [c('For years') - 4, 'whip_soft', 0.25], [W('before the war'), 'marker_tick', 0.2], [at('blocked'), 'stamp', 0.22], [at('blocked') + 3, 'marker_tick', 0.18],
+    [c('For years') - 4, 'whip_soft', 0.25], [c('For years') + 5, 'marker_tick', 0.2], [at('blocked'), 'stamp', 0.22], [at('blocked') + 3, 'marker_tick', 0.18],
     [c('Where would'), 'whoosh', 0.2], [W('Where would'), 'marker_tick', 0.2], [W('Who would get'), 'marker_tick', 0.2], [W('Slave'), 'marker_tick', 0.2],
     [c('With the South'), 'whoosh', 0.2], [at('gone'), 'block_tap_soft', 0.12], [at('gone') + 5, 'block_tap_soft', 0.1], [W('stops arguing'), 'marker_tick', 0.2], [W('starts passing'), 'marker_tick', 0.2],
     [c('In one year'), 'whoosh', 0.2], [at('one year'), 'stamp', 0.22], [W('remake'), 'marker_tick', 0.2],
     [c('The Homestead') - 4, 'whip_soft', 0.22], [at('Homestead'), 'paper_slap_soft', 0.25], [at('Homestead') + 3, 'stamp', 0.18], [at('Morrill'), 'paper_slap_soft', 0.25], [at('Morrill') + 3, 'stamp', 0.18],
     [at('Pacific Railway Act'), 'paper_slap_soft', 0.25], [at('Pacific Railway Act') + 3, 'stamp', 0.2], [W('farmland'), 'marker_tick', 0.2], [W('colleges'), 'marker_tick', 0.2], [W('builds a railroad'), 'marker_tick', 0.2],
     [c('Remember that year'), 'whoosh', 0.2], [at('Remember that year'), 'stamp', 0.2], [at('Remember') - 2, 'marker_tick', 0.2], [W('All three'), 'marker_tick', 0.2],
-    [c("And here's the bigger") - 4, 'whip_soft', 0.22], [at('bigger idea') + 2, 'stamp', 0.2], [W('whole series'), 'marker_tick', 0.2],
+    [c("And here's the bigger") - 4, 'whip_soft', 0.22], [Math.min(at('bigger idea') + 2, c("And here's the bigger") + 6), 'stamp', 0.2], [W('whole series'), 'marker_tick', 0.2],
     [c('When people'), 'whoosh', 0.2], [at('Reconstruction') + 1, 'stamp', 0.22], [W('South after'), 'marker_tick', 0.2],
     [c('But out West') - 4, 'whip_soft', 0.22], [W('what does'), 'marker_tick', 0.2], [W('and who gets'), 'marker_tick', 0.2],
-    [c('Only out there'), 'whoosh', 0.2], [W('more people'), 'marker_tick', 0.2],
+    [c('Only out there'), 'whoosh', 0.2], [Math.min(W('more people'), c('Only out there') + 3), 'marker_tick', 0.2],
+    ...[0, 1, 2, 3].map((i) => [c('Only out there') + 3 + i * 3, 'block_tap_soft', 0.1] as [number, string, number]),
     [at('Native') - 1, 'card_slide_soft', 0.2], [at('Chinese immigrants') - 1, 'card_slide_soft', 0.2], [at('Mexican') - 1, 'card_slide_soft', 0.2], [at('Black families') - 1, 'card_slide_soft', 0.2],
     [c('Historians'), 'whoosh', 0.2], [at('Greater') + 1, 'stamp', 0.22],
     [c('Okay') - 4, 'whip_soft', 0.22], [at('Okay') + 2, 'paper_slap_soft', 0.25], [at('Okay') + 5, 'page_turn', 0.3], [at('deal'), 'stamp', 0.22],
@@ -561,8 +601,8 @@ const Body: React.FC = () => {
 const DEAL = at("Here's the deal");
 export const Ch02: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch02_1862.wav" lead={LEAD} music={[
-    {src: 'music/g_founding.mp3', volume: 0.15, to: DEAL + 6},
-    {src: 'music/g_grip.mp3', volume: 0.15, from: DEAL - 6},
+    {src: 'music/g_founding.mp3', volume: bed('g_founding'), to: DEAL + 6},
+    {src: 'music/g_grip.mp3', volume: bed('g_grip'), from: DEAL - 6},
   ]}>
     <Body />
   </ChapterShell>

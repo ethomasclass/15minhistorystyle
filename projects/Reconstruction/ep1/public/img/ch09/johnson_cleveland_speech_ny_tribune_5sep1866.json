@@ -1,0 +1,35 @@
+{
+ "size": [
+  1789,
+  3000
+ ],
+ "paper": "New-York tribune (New York [N.Y.]), September 5, 1866",
+ "url": "https://www.loc.gov/resource/sn83030214/1866-09-05/ed-1/",
+ "sp": "5",
+ "phrases": {
+  "hang Thad": [
+   [
+    501.2,
+    2561.7,
+    142.7,
+    27.2
+   ]
+  ],
+  "Jeff. Davis": [
+   [
+    501.9,
+    2506.6,
+    126.5,
+    34.1
+   ]
+  ],
+  "Cleveland": [
+   [
+    375.5,
+    413.5,
+    363.9,
+    40.3
+   ]
+  ]
+ }
+}

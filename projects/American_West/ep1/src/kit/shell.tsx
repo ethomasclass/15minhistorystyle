@@ -6,7 +6,7 @@ import {clamp} from '../lib/anim';
 import {makeTimeline, type Narration} from '../lib/timing';
 import {Finish, INK, JF, PALETTES, PaletteCtx, Picture, Place, StepCtx, Tint, Traced, useGFrame, usePal} from './Kit';
 import type {MaskRef} from './maskref';
-import {LogoBreak} from './LogoBreak';
+import {LogoBreak} from './ChunkIntro';
 
 export type TL = ReturnType<typeof makeTimeline>;
 export {makeTimeline};

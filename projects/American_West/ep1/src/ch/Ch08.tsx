@@ -20,6 +20,7 @@
 //  T "This time, everyone heard about it."   Harper's masthead (pull back)
 //  U "And out West…someone to blame."        Harper's: Chinese immigrants at the San Francisco custom house (hand-off)
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch08_panic.words.json';
 import {clamp} from '../lib/anim';
@@ -214,13 +215,13 @@ const Closed: React.FC = () => {
   );
 };
 
-// ---------------------------------------------------------------- G · depression (prices: approximate, wholesale index 1873 = 100 → about 70 by 1879)
+// ---------------------------------------------------------------- G · depression (Warren–Pearson wholesale index, yearly means of the NBER monthly series, rebased 1873 = 100 → 67 by 1879)
 const Depression: React.FC = () => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const pal = usePal();
   const a = at('Then came a') - 1;
-  const pts: [number, number][] = [[1873, 100], [1874, 93], [1875, 87], [1876, 81], [1877, 78], [1878, 69], [1879, 68]];
+  const pts: [number, number][] = [[1873, 100], [1874, 94], [1875, 89], [1876, 83], [1877, 80], [1878, 68], [1879, 67]];
   const X = (y: number) => 1020 + (y - 1873) * 130;
   const Y = (v: number) => 860 - (v - 60) * 9;
   const p = interpolate(g, [at('falling') - 2, at('falling') + 22], [0, 1], clamp);
@@ -240,7 +241,7 @@ const Depression: React.FC = () => {
         </svg>}
         <Note text="prices" x={1000} y={Y(100) - 90} size={44} rot={-3} at={at('falling') - 2} />
       </AbsoluteFill>
-      <Tag text="Wholesale prices, 1873 = 100 (approx., after the Warren–Pearson index)" />
+      <Tag text="Wholesale prices, 1873 = 100 · Warren & Pearson index (NBER Macrohistory Database)" />
     </AbsoluteFill>
   );
 };
@@ -260,7 +261,7 @@ const Bankrupt: React.FC = () => {
         <Note text="workers laid off" x={1240} y={540} size={52} rot={-3} at={at('Workers') - 2} />
         <Note text="by the thousands" x={1260} y={630} size={52} rot={-3} at={at('thousands') - 2} />
       </AbsoluteFill>
-      <Tag text="Railroad failures by 1876, as commonly cited (89 of 364)" />
+      <Tag text="Railroads that went bankrupt in the depression: 89 of 364 (PBS American Experience, The Panic of 1873)" />
     </AbsoluteFill>
   );
 };
@@ -297,7 +298,7 @@ const JobsWages: React.FC = () => {
   );
 };
 
-// ---------------------------------------------------------------- K–L · the House flips in 1874 (seat counts approx.)
+// ---------------------------------------------------------------- K–L · the House flips in 1874 (seat counts as elected: Office of the House Historian, Party Divisions)
 const HOUSE = {before: {r: 199, d: 88, o: 5}, after: {r: 103, d: 182, o: 8}};
 const Seats: React.FC<{cx: number; cy: number; R: number; d: number; r: number; o: number; at: number}> = ({cx, cy, R, d, r, o, at: a}) => {
   const g = useGFrame();
@@ -344,7 +345,7 @@ const House: React.FC = () => {
         <Note text="Democrats" x={1150} y={190} size={56} rot={-3} color="#FF6F61" at={at('Democrats') - 2} />
         <Note text="win the House" x={1200} y={280} size={50} rot={-3} at={at('won') + 4} />
       </AbsoluteFill>
-      <Tag text="House seats, 43rd vs 44th Congress (approx.): Republicans teal, Democrats coral" />
+      <Tag text="House seats as elected, 43rd vs 44th Congress (Office of the House Historian): Republicans teal, Democrats coral" />
     </AbsoluteFill>
   );
 };
@@ -600,10 +601,9 @@ const Body: React.FC = () => {
 export const Ch08: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch08_panic.wav" lead={LEAD}
     music={[
-      // SUNO: aw_panic replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/w_fire.mp3', volume: 0.15, to: at('By 1877') + 6, fadeOut: 30},
-      // SUNO: aw_panic replaces this (w_fire is 88 s, so the fallback restarts at "By 1877")
-      {src: 'music/w_fire.mp3', volume: 0.15, from: at('By 1877') - 6},
+      // aw_panic (Suno, 1:55), one cue for the chapter: its bustle stops dead at 101.9 s into the file; starting it 10.95 s in
+      // lands that stop just before the last line ("And out West, when times got hard…"), so the sober piano carries it
+      {src: 'music/aw_panic.mp3', volume: bed('aw_panic'), startFrom: Math.round(30 * 101.9) - (at('And out West') - 2)},
     ]}>
     <Body />
   </ChapterShell>

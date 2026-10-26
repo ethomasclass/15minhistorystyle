@@ -1,0 +1,802 @@
+{
+ "demo/sully_jackson_1845.jpg": {
+  "title": "Thomas Sully, Andrew Jackson, 1845 (NGA 1128)",
+  "artist": "Thomas Sully",
+  "date": "1845",
+  "licence": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Thomas_Sully,_Andrew_Jackson,_1845,_NGA_1128.jpg"
+ },
+ "maps/mitchell_1836.jpg": {
+  "title": "Mitchell's Map of the United States",
+  "artist": "Samuel Augustus Mitchell",
+  "date": "1836",
+  "licence": "public domain (Library of Congress, Geography and Map Division)",
+  "page": "https://www.loc.gov/item/87692342/"
+ },
+ "ch01/stephens_portrait_vannerson_1859.jpg": {
+  "title": "[Alexander H. Stephens, Representative from Georgia, Thirty-fifth Congress, half-length portrait]",
+  "artist": "Vannerson, Julian, 1827-, photographer",
+  "date": "1859-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2010649306/",
+  "source": "loc:2010649306"
+ },
+ "ch01/stephens_portrait_brady_c1870.jpg": {
+  "title": "Stephens, Hon. Alexander H. of GA",
+  "artist": "",
+  "date": "1870",
+  "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+  "page": "https://www.loc.gov/item/2017893532/",
+  "source": "loc:2017893532"
+ },
+ "ch03/stephens_portrait_brady_c1865.jpg": {
+  "title": "Stephens, Hon. Alexander H. of Ga.",
+  "artist": "",
+  "date": "1865",
+  "licence": "No known restrictions on publication. For information, see \"Brady-Handy photograph collection,\" https://www.loc.gov/rr/print/res/389_bhan.html",
+  "page": "https://www.loc.gov/item/2017894308/",
+  "source": "loc:2017894308"
+ },
+ "ch02/secession_meeting_mills_house_charleston_1860.jpg": {
+  "title": "Secession meeting in front of the Mills House, Meeting Street, Charleston, S.C. [with portraits of Hon. James Chesnut, Jr., seceding Senator from South Carolina; Hon.Robert Toombs, Senator from Georgia; and Hon. Alexander H. Stephens, Ex-Senator of Georgia]",
+  "artist": "",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/99614055/",
+  "source": "loc:99614055"
+ },
+ "ch02/davis_inauguration_engraving_1861.jpg": {
+  "title": "Inauguration of President Jefferson Davis of the Southern confederacy, at Montgomery, Alabama, February 18, 1861",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2021645631/",
+  "source": "loc:2021645631"
+ },
+ "ch02/davis_portrait_brady_1859.jpg": {
+  "title": "[Jefferson Davis, three-quarter length portrait, facing right]",
+  "artist": "Brady, Mathew B., approximately 1823-1896, photographer",
+  "date": "1859-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004673617/",
+  "source": "loc:2004673617"
+ },
+ "ch02/secession_hall_circular_church_c1860.jpg": {
+  "title": "Circular Church and Secession Hall, Charleston",
+  "artist": "Osborn & Durbec, photographer",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015646726/",
+  "source": "loc:2015646726"
+ },
+ "ch02/lincoln_campaign_portrait_grozelier_1860.jpg": {
+  "title": "Hon. Abraham Lincoln, Republican candidate for the presidency, 1860 / Grozelier ; painted by Hicks ; lith. by L. Grozelier, Boston.",
+  "artist": "Grozelier, Leopold, 1830-1865, lithographer, Hicks, Thomas, 1823-1890, artist, Schaus, W. William, publisher, J.H. Bufford's Lith.",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/99405224/",
+  "source": "loc:99405224"
+ },
+ "ch02/lincoln_union_must_be_preserved_poster_1860.jpg": {
+  "title": "The Union must and shall be preserved. For President Abraham Lincoln of Illinois. For Vice President Hannibal Hamlin of Maine / lith. by W[illiam] H. Rease, cor. 4th & Chestnut Sts., Philada.",
+  "artist": "Rease, W. H., lithographer",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003690790/",
+  "source": "loc:2003690790"
+ },
+ "ch02/montgomery_state_house_davis_inaugurated_1879.jpg": {
+  "title": "Jeff Davis was inaugurated in this State House, Montgomery Ala. head of Commercial Street Ar. at M. April 28th left 30th 1879.",
+  "artist": "Payne, C. I., photographer",
+  "date": "1879",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2011647809/",
+  "source": "loc:2011647809"
+ },
+ "ch01/stephens_constitutional_view_title_page_1868.jpg": {
+  "title": "A constitutional view of the late war between the states : its causes, character, conduct and results : presented in a series of colloquies at Liberty Hall (page 12)",
+  "artist": "Stephens, Alexander Hamilton, 1812-1883",
+  "date": "1868-1870",
+  "licence": "public domain by age (1868)",
+  "page": "https://archive.org/details/constitutionalview01steprich/page/n12",
+  "source": "iabook:constitutionalview01steprich:12"
+ },
+ "ch01/stephens_constitutional_view_frontispiece_liberty_hall_1868.jpg": {
+  "title": "A constitutional view of the late war between the states : its causes, character, conduct and results : presented in a series of colloquies at Liberty Hall (page 11)",
+  "artist": "Stephens, Alexander Hamilton, 1812-1883",
+  "date": "1868-1870",
+  "licence": "public domain by age (1868)",
+  "page": "https://archive.org/details/constitutionalview01steprich/page/n11",
+  "source": "iabook:constitutionalview01steprich:11"
+ },
+ "ch01/stephens_constitutional_view_title_page_1868_alt.jpg": {
+  "title": "A constitutional view of the late war between the states : its causes, character, conduct and results ; presented in a series of colloquies at Liberty Hall (page 6)",
+  "artist": "Stephens, Alexander Hamilton, 1812-1883",
+  "date": "1868",
+  "licence": "public domain by age (1868)",
+  "page": "https://archive.org/details/constitutionalvi00lcstep/page/n6",
+  "source": "iabook:constitutionalvi00lcstep:6"
+ },
+ "ch01/stephens_constitutional_view_introduction_page_1868.jpg": {
+  "title": "A constitutional view of the late war between the states : its causes, character, conduct and results ; presented in a series of colloquies at Liberty Hall (page 16)",
+  "artist": "Stephens, Alexander Hamilton, 1812-1883",
+  "date": "1868",
+  "licence": "public domain by age (1868)",
+  "page": "https://archive.org/details/constitutionalvi00lcstep/page/n16",
+  "source": "iabook:constitutionalvi00lcstep:16"
+ },
+ "ch03/davis_rise_and_fall_title_page_1881.jpg": {
+  "title": "The rise and fall of the Confederate government (page 10)",
+  "artist": "Davis, Jefferson, 1808-1889",
+  "date": "1881",
+  "licence": "public domain by age (1881)",
+  "page": "https://archive.org/details/risefallofconfed01daviuoft/page/n10",
+  "source": "iabook:risefallofconfed01daviuoft:10"
+ },
+ "ch03/davis_rise_and_fall_frontispiece_1881.jpg": {
+  "title": "The rise and fall of the Confederate government (page 7)",
+  "artist": "Davis, Jefferson, 1808-1889",
+  "date": "1881",
+  "licence": "public domain by age (1881)",
+  "page": "https://archive.org/details/risefallofconfed01daviuoft/page/n7",
+  "source": "iabook:risefallofconfed01daviuoft:7"
+ },
+ "ch02/lincoln_hamlin_campaign_banner_1860.jpg": {
+  "title": "For president, Abram Lincoln. For vice president, Hannibal Hamlin",
+  "artist": "Howard, H. C.",
+  "date": "1860",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003656570/",
+  "source": "loc:2003656570"
+ },
+ "ch06/scotts_great_snake_elliott_1861.jpg": {
+  "title": "File:Scott's great snake. Entered according to Act of Congress in the year 1861 LOC 99447020.jpg",
+  "artist": "Elliott, J.",
+  "date": "1861",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Scott%27s_great_snake._Entered_according_to_Act_of_Congress_in_the_year_1861_LOC_99447020.jpg",
+  "source": "commons:File:Scott's great snake. Entered according to Act of Congress in the year 1861 LOC 99447020.jpg"
+ },
+ "ch06/scotts_great_snake_alt_1861.jpg": {
+  "title": "File:Scott-anaconda.jpg",
+  "artist": "J.B. Elliott",
+  "date": "1861-12",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Scott-anaconda.jpg",
+  "source": "commons:File:Scott-anaconda.jpg"
+ },
+ "ch04/slave_population_map_coast_survey_1861.jpg": {
+  "title": "File:Map Showing the Distribution of the Slave Population of the Southern States of the United States - DPLA - 3b4a31c2df25c7746ca6010f663e7a0c.jpg",
+  "artist": "War Department. Office of the Chief of Engineers. 1818-9/18/1947",
+  "date": "1861date QS:P571,+1861-00-00T00:00:00Z/9",
+  "licence": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Map_Showing_the_Distribution_of_the_Slave_Population_of_the_Southern_States_of_the_United_States_-_DPLA_-_3b4a31c2df25c7746ca6010f663e7a0c.jpg",
+  "source": "commons:File:Map Showing the Distribution of the Slave Population of the Southern States of the United States - DPLA - 3b4a31c2df25c7746ca6010f663e7a0c.jpg"
+ },
+ "ch04/slave_population_map_coast_survey_1861_alt.jpg": {
+  "title": "File:Map showing the distribution of the Slave Population of the Southern States of the United States, compiled from the census of 1860. Series No. 3033. - Cgs05194.jpg",
+  "artist": "NOAA Photo Library",
+  "date": "2013-09-10",
+  "licence": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Map_showing_the_distribution_of_the_Slave_Population_of_the_Southern_States_of_the_United_States,_compiled_from_the_census_of_1860._Series_No._3033._-_Cgs05194.jpg",
+  "source": "commons:File:Map showing the distribution of the Slave Population of the Southern States of the United States, compiled from the census of 1860. Series No. 3033. - Cgs05194.jpg"
+ },
+ "ch03/sc_declaration_immediate_causes_cover_1860.jpg": {
+  "title": "Declaration of the immediate causes which induce and justify the secession of South Carolina from the federal union ; and, The ordinance of secession. (page 0)",
+  "artist": "South Carolina. Convention (1860-1862)",
+  "date": "1860",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/declarationofimm00sout/page/n0",
+  "source": "iabook:declarationofimm00sout:0"
+ },
+ "ch03/sc_declaration_immediate_causes_title_1860.jpg": {
+  "title": "Declaration of the immediate causes which induce and justify the secession of South Carolina from the federal union ; and, The ordinance of secession. (page 2)",
+  "artist": "South Carolina. Convention (1860-1862)",
+  "date": "1860",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/declarationofimm00sout/page/n2",
+  "source": "iabook:declarationofimm00sout:2"
+ },
+ "ch03/sc_declaration_immediate_causes_p1_1860.jpg": {
+  "title": "Declaration of the immediate causes which induce and justify the secession of South Carolina from the federal union ; and, The ordinance of secession. (page 4)",
+  "artist": "South Carolina. Convention (1860-1862)",
+  "date": "1860",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/declarationofimm00sout/page/n4",
+  "source": "iabook:declarationofimm00sout:4"
+ },
+ "ch03/sc_declaration_immediate_causes_p8_nullify_laws_1860.jpg": {
+  "title": "Declaration of the immediate causes which induce and justify the secession of South Carolina from the federal union ; and, The ordinance of secession. (page 9)",
+  "artist": "South Carolina. Convention (1860-1862)",
+  "date": "1860",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/declarationofimm00sout/page/n9",
+  "source": "iabook:declarationofimm00sout:9"
+ },
+ "ch02/sc_ordinance_of_secession_printed_1860.jpg": {
+  "title": "Declaration of the immediate causes which induce and justify the secession of South Carolina from the federal union ; and, The ordinance of secession. (page 12)",
+  "artist": "South Carolina. Convention (1860-1862)",
+  "date": "1860",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/declarationofimm00sout/page/n12",
+  "source": "iabook:declarationofimm00sout:12"
+ },
+ "ch03/mississippi_declaration_cover_1861.jpg": {
+  "title": "An address : setting forth the declaration of the immediate causes which induce and justify the secession of Mississippi from the Federal Union and the ordinance of secession (page 0)",
+  "artist": "Mississippi. Convention (1861)",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/addresssettingfo01miss/page/n0",
+  "source": "iabook:addresssettingfo01miss:0"
+ },
+ "ch03/mississippi_declaration_p1_slavery_line_1861.jpg": {
+  "title": "An address : setting forth the declaration of the immediate causes which induce and justify the secession of Mississippi from the Federal Union and the ordinance of secession (page 4)",
+  "artist": "Mississippi. Convention (1861)",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/addresssettingfo01miss/page/n4",
+  "source": "iabook:addresssettingfo01miss:4"
+ },
+ "ch03/georgia_declaration_of_causes_journal_p1_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 111)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n111",
+  "source": "iabook:journalofpublics00geor:111"
+ },
+ "ch03/georgia_declaration_of_causes_journal_p2_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 112)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n112",
+  "source": "iabook:journalofpublics00geor:112"
+ },
+ "ch04/georgia_ordinance_of_secession_journal_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 38)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n38",
+  "source": "iabook:journalofpublics00geor:38"
+ },
+ "ch04/georgia_convention_vote_208_89_journal_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 42)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n42",
+  "source": "iabook:journalofpublics00geor:42"
+ },
+ "ch04/georgia_convention_journal_title_page_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 6)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n6",
+  "source": "iabook:journalofpublics00geor:6"
+ },
+ "ch04/georgia_convention_opens_milledgeville_jan16_1861.jpg": {
+  "title": "Journal of the public and secret proceedings of the Convention of the people of Georgia : held in Milledgeville and Savannah in 1861 : together with the ordinances adopted (page 8)",
+  "artist": "['Georgia. Convention (1861 : Milledgeville and Savannah, Ga.). 4n', 'Crawford, George W. (George Washington), 1798-1872. 4n', 'Confederate States of America. Constitution']",
+  "date": "1861",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/journalofpublics00geor/page/n8",
+  "source": "iabook:journalofpublics00geor:8"
+ },
+ "ch04/milledgeville_state_house_engraving_white_1854.jpg": {
+  "title": "Historical collections of Georgia : containing the most interesting facts, traditions, biographical sketches, anecdotes, etc. relating to its history and antiquities, from its first settlement to the present time ; compiled from original records and official documents ; illustrated by nearly one hundred engravings of public buildings, relics of antiquity, historic localities, natural scenery, portraits of distinguished men, etc., etc. / by the Rev. George White (page 302)",
+  "artist": "['White, George, 1802-1887', 'Dutton, Alpha Christian']",
+  "date": "1855",
+  "licence": "public domain by age (1855)",
+  "page": "https://archive.org/details/historicalcollec00whit/page/n302",
+  "source": "iabook:historicalcollec00whit:302"
+ },
+ "ch05/bombardment_fort_sumter_currier_ives_1861.jpg": {
+  "title": "Bombardment of Fort Sumter, Charleston Harbor: 12th & 13th of April, 1861",
+  "artist": "Currier & Ives.",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90711987/",
+  "source": "loc:90711987"
+ },
+ "ch05/bombardment_fort_sumter_engraving_apr1861.jpg": {
+  "title": "Bombardment of Fort Sumter by the batteries of the Confederate states, April 13, 1861",
+  "artist": "",
+  "date": "1861-04-27",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013646579/",
+  "source": "loc:2013646579"
+ },
+ "ch05/fort_sumter_interior_osborn_durbec_apr1861.jpg": {
+  "title": "Interior view of Fort Sumter, taken April, 1861, Charleston, S.C.",
+  "artist": "Osborn & Durbec, photographer",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015650212/",
+  "source": "loc:2015650212"
+ },
+ "ch05/fort_sumter_interior_after_surrender_apr1861.jpg": {
+  "title": "Interior of Fort Sumter in April 1861 after its surrender by U.S. garrison",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013651621/",
+  "source": "loc:2013651621"
+ },
+ "ch05/fort_sumter_interior_day_after_anderson_left_1861.jpg": {
+  "title": "Interior  Sumter the day after Gen. Anderson left, April 1861",
+  "artist": "Osborn & Durbec, photographer",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015645339/",
+  "source": "loc:2015645339"
+ },
+ "ch05/anderson_portrait_engraving_1861.jpg": {
+  "title": "Major Robert Anderson, U.S.A., in command of Fort Sumpter, Charleston Harbor, S.C. / photographed by Webster & Bros.",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2001699896/",
+  "source": "loc:2001699896"
+ },
+ "ch05/anderson_portrait_gurney_c1861.jpg": {
+  "title": "[Major General Robert Anderson of General Staff Regular Army Infantry in uniform with telescope] / J. Gurney & Son, 707 Broadway, N.Y.",
+  "artist": "J. Gurney & Son, photographer",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2018648132/",
+  "source": "loc:2018648132"
+ },
+ "ch05/hw_bombardment_fort_sumter_p3_apr27_1861.jpg": {
+  "title": "Harper's Weekly  1861-04-27: Vol 5 Iss 226 (page 3)",
+  "artist": "",
+  "date": "1861-04-27",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-04-27_5_226/page/n3",
+  "source": "iabook:sim_harpers-weekly_1861-04-27_5_226:3"
+ },
+ "ch07/hw_cover_bull_run_aug3_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-03: Vol 5 Iss 240 (page 0)",
+  "artist": "",
+  "date": "1861-08-03",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-03_5_240/page/n0",
+  "source": "iabook:sim_harpers-weekly_1861-08-03_5_240:0"
+ },
+ "ch07/hw_bull_run_spread_left_aug3_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-03: Vol 5 Iss 240 (page 7)",
+  "artist": "",
+  "date": "1861-08-03",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-03_5_240/page/n7",
+  "source": "iabook:sim_harpers-weekly_1861-08-03_5_240:7"
+ },
+ "ch07/hw_bull_run_map_aug10_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-10: Vol 5 Iss 241 (page 9)",
+  "artist": "",
+  "date": "1861-08-10",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-10_5_241/page/n9",
+  "source": "iabook:sim_harpers-weekly_1861-08-10_5_241:9"
+ },
+ "ch07/hw_bull_run_spread_left_aug10_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-10: Vol 5 Iss 241 (page 7)",
+  "artist": "",
+  "date": "1861-08-10",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-10_5_241/page/n7",
+  "source": "iabook:sim_harpers-weekly_1861-08-10_5_241:7"
+ },
+ "ch07/hw_charge_69th_ny_bull_run_aug10_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-10: Vol 5 Iss 241 (page 11)",
+  "artist": "",
+  "date": "1861-08-10",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-10_5_241/page/n11",
+  "source": "iabook:sim_harpers-weekly_1861-08-10_5_241:11",
+  "note": "rotated 90 degrees clockwise to upright"
+ },
+ "ch07/battle_of_bull_run_currier_ives_1861.jpg": {
+  "title": "Battle of Bull Run, Va. July 21st 1861",
+  "artist": "Currier & Ives.",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/90709041/",
+  "source": "loc:90709041"
+ },
+ "ch07/battle_of_bull_run_2pm_lithograph_1861.jpg": {
+  "title": "The battle of Bull Run, 2 P.M., July 21, 1861",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/99614256/",
+  "source": "loc:99614256"
+ },
+ "ch07/battle_of_bull_run_kurz_allison_c1889.jpg": {
+  "title": "Battle of Bull Run--July 21st 1861--Federal (Gen. McDowell) ... Confederate (Gen. Beauregard) ...",
+  "artist": "Kurz & Allison.",
+  "date": "1889-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/91481737/",
+  "source": "loc:91481737"
+ },
+ "ch07/waud_burnside_brigade_bull_run_jul21_1861.jpg": {
+  "title": "Colonel Burnsides brigade at Bull Run, First and Second Rhode Island, and Seventy-First New York Regiments, with their Artillery, Attacking the Rebel Batteries at Bull Run. Sketched on the spot by A. Waud",
+  "artist": "Waud, Alfred R. (Alfred Rudolph), 1828-1891, artist",
+  "date": "1861-07-21",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004660449/",
+  "source": "loc:2004660449"
+ },
+ "ch07/blenker_brigade_covering_retreat_centreville_1861.jpg": {
+  "title": "Blenker's Brigade Covering the Retreat Near Centreville",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2004679639/",
+  "source": "loc:2004679639"
+ },
+ "ch07/battle_of_bulls_run_cartoon_pfott_1861.jpg": {
+  "title": "The Battle of Bull's Run / lith. Fr[...] A. Pfott.",
+  "artist": "Pfott, A., lithographer",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2008661781/",
+  "source": "loc:2008661781"
+ },
+ "ch07/first_bull_run_sunday_afternoon.jpg": {
+  "title": "The first Battle of Bull Run, Va., Sunday afternoon, July 21, 1861",
+  "artist": "",
+  "date": "[no date recorded on shelflist card]",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003681590/",
+  "source": "loc:2003681590"
+ },
+ "ch07/iln_stampede_from_bull_run_aug17_1861.jpg": {
+  "title": "The Illustrated London News  1861-08-17: Vol 39 Iss 1103 (page 16)",
+  "artist": "",
+  "date": "1861-08-17",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_illustrated-london-news_1861-08-17_39_1103/page/n16",
+  "source": "iabook:sim_illustrated-london-news_1861-08-17_39_1103:16"
+ },
+ "ch07/hw_retreat_of_our_troops_bull_run_aug10_1861.jpg": {
+  "title": "Harper's Weekly  1861-08-10: Vol 5 Iss 241 (page 3)",
+  "artist": "",
+  "date": "1861-08-10",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-08-10_5_241/page/n3",
+  "source": "iabook:sim_harpers-weekly_1861-08-10_5_241:3",
+  "note": "rotated to upright"
+ },
+ "ch06/lee_full_length_vannerson_c1864.jpg": {
+  "title": "[General Robert E. Lee, full-length portrait, standing, facing front, with left hand at waist, on sword, wearing military uniform]",
+  "artist": "Vannerson, Julian, 1827-, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013646567/",
+  "source": "loc:2013646567"
+ },
+ "ch06/lee_seated_brady_1865.jpg": {
+  "title": "[Robert E. Lee, seated] / Brady & Co.",
+  "artist": "Brady's National Photographic Portrait Galleries, photographer",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2015645637/",
+  "source": "loc:2015645637"
+ },
+ "ch06/tredegar_works_richmond_c1865.jpg": {
+  "title": "Tredegar Works, Richmond, Va",
+  "artist": "",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003656678/",
+  "source": "loc:2003656678"
+ },
+ "ch06/tredegar_iron_works_view_1865.jpg": {
+  "title": "Richmond, Virginia. View of Tredegar Iron Works",
+  "artist": "",
+  "date": "1865",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018671177/",
+  "source": "loc:2018671177"
+ },
+ "ch06/cotton_shipment_savannah_1865.jpg": {
+  "title": "Shipment of cotton at Savannah, for New York, on account of the U.S. Government / from a sketch by our special artist, W.T. Crane.",
+  "artist": "Crane, W. T., artist",
+  "date": "1865-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/96509619/",
+  "source": "loc:96509619"
+ },
+ "ch06/cotton_on_levee_new_orleans_jackson_c1880s.jpg": {
+  "title": "Cotton on the levee, New Orleans",
+  "artist": "Jackson, William Henry, 1843-1942, photographer, Detroit Publishing Co., publisher",
+  "date": "1880-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2016817562/",
+  "source": "loc:2016817562"
+ },
+ "ch06/scott_portrait_brady_c1861.jpg": {
+  "title": "[General Winfield Scott, Commander in Chief of the U.S. Army, in uniform] / Brady, New York.",
+  "artist": "Brady, Mathew B., approximately 1823-1896, photographer",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2016651681/",
+  "source": "loc:2016651681"
+ },
+ "ch08/andersonville_southeast_view_riddle_aug1864.jpg": {
+  "title": "Andersonville Prison, Georgia. South-east view, taken from the stockade Thirty three thousand prisoners in bastile / / Photographed by A.J. Riddle.",
+  "artist": "Riddle, A. J. (Andrew Jackson), 1828-1897, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2017650848/",
+  "source": "loc:2017650848"
+ },
+ "ch08/andersonville_birds_eye_riddle_aug1864.jpg": {
+  "title": "Andersonville Prison, Georgia. Bird's eye view - gathering roots to boil coffee Thirty-three thousand prisoners in bastile / / Photographed by A.J. Riddle.",
+  "artist": "Riddle, A. J. (Andrew Jackson), 1828-1897, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2017650851/",
+  "source": "loc:2017650851"
+ },
+ "ch08/andersonville_south_end_stockade_riddle_aug1864.jpg": {
+  "title": "Andersonville Prison, Georgia. South end view of the stockade Showing the sentry stands in the distance / / Photographed by A.J. Riddle.",
+  "artist": "Riddle, A. J. (Andrew Jackson), 1828-1897, photographer",
+  "date": "1864-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2017650849/",
+  "source": "loc:2017650849"
+ },
+ "ch08/confederate_prisoners_fairfax_courthouse_1863.jpg": {
+  "title": "Group of Confederate prisoners at Fairfax court-house / negative by T.H. O'Sullivan ; positive by A. Gardner.",
+  "artist": "O'Sullivan, Timothy H., 1840-1882, photographer, Gardner, Alexander, 1821-1882, photographer",
+  "date": "1863-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2002713087/",
+  "source": "loc:2002713087"
+ },
+ "ch08/confederate_camp_photo.jpg": {
+  "title": "Confederate camp",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2013651856/",
+  "source": "loc:2013651856"
+ },
+ "ch08/union_camp_2nd_vermont_camp_griffin_1861.jpg": {
+  "title": "Camp Second Vt. Camp Griffin 1861",
+  "artist": "Houghton, G. H. (George Harper), approximately 1824-1870, photographer, Mead, Larkin G. (Larkin Goldsmith), 1835-1910, collector",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2014646383/",
+  "source": "loc:2014646383"
+ },
+ "ch08/union_camp_cameron_georgetown_may1861.jpg": {
+  "title": "Camp Cameron, Georgetown, D.C., the encampment of the Seventh Regiment New York State Militia ; Service by Rev. Dr. Weston, chaplain of the Seventh Regiment, at Camp Cameron, on Sunday, May 5th, 1861 / / Sketched by our special artist.",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2012646085/",
+  "source": "loc:2012646085"
+ },
+ "ch08/savage_station_field_hospital_gibson_1862.jpg": {
+  "title": "Savage Station, Virginia. Union field hospital after the battle of June 27",
+  "artist": "Gibson, James F., 1828-, photographer",
+  "date": "1862",
+  "licence": "No known restrictions on publication. For information, see \"Civil war photographs, 1861-1865,\" https://www.loc.gov/rr/print/res/120_cwar.html",
+  "page": "https://www.loc.gov/item/2018671740/",
+  "source": "loc:2018671740"
+ },
+ "ch08/camp_cooking_army_potomac_1865.jpg": {
+  "title": "Camp cooking, Army of the Potomac, near City Point, Va.",
+  "artist": "E. & H.T. Anthony (Firm), copyright claimant",
+  "date": "1865",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2025169737/",
+  "source": "loc:2025169737"
+ },
+ "ch08/union_soldiers_with_bayonet_muskets_c1861.jpg": {
+  "title": "[Two unidentified soldiers in Union uniforms posing with bayoneted Springfield Model 1861 rifled musket with attached bayonet,  knife, and Colt Model 1851 Navy revolver in front of painted backdrop showing landscape with camp]",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2010650759/",
+  "source": "loc:2010650759"
+ },
+ "ch08/springfield_rifle_musket_m1863_plate_1863.jpg": {
+  "title": "Rules for the management and cleaning of the rifle musket, model 1863, for the use of soldiers : with descriptive plates (page 12)",
+  "artist": "United States. War Dept",
+  "date": "1863",
+  "licence": "public domain by age (1863)",
+  "page": "https://archive.org/details/rulesformanageme00unit/page/n12",
+  "source": "iabook:rulesformanageme00unit:12"
+ },
+ "ch08/springfield_rifle_musket_appendages_m1863_plate_1863.jpg": {
+  "title": "Rules for the management and cleaning of the rifle musket, model 1863, for the use of soldiers : with descriptive plates (page 18)",
+  "artist": "United States. War Dept",
+  "date": "1863",
+  "licence": "public domain by age (1863)",
+  "page": "https://archive.org/details/rulesformanageme00unit/page/n18",
+  "source": "iabook:rulesformanageme00unit:18"
+ },
+ "ch08/springfield_rifle_musket_rules_title_1863.jpg": {
+  "title": "Rules for the management and cleaning of the rifle musket, model 1863, for the use of soldiers : with descriptive plates (page 2)",
+  "artist": "United States. War Dept",
+  "date": "1863",
+  "licence": "public domain by age (1863)",
+  "page": "https://archive.org/details/rulesformanageme00unit/page/n2",
+  "source": "iabook:rulesformanageme00unit:2"
+ },
+ "ch08/ordnance_manual_small_arms_plate_1862.jpg": {
+  "title": "The ordnance manual for the use of the officers of the United States army (page 614)",
+  "artist": "['United States. Army. Ordnance Dept', 'Laidley, Theodore Thaddeus Sobieski, 1822-1886, ed']",
+  "date": "1862",
+  "licence": "public domain by age (1862)",
+  "page": "https://archive.org/details/ordnancemanualfo00unitrich/page/n614",
+  "source": "iabook:ordnancemanualfo00unitrich:614"
+ },
+ "ch08/minie_ball_larkin_c1860s.jpg": {
+  "title": "[Mini\u00e9 ball that wounded Captain William W. Larkin of Co. A, 49th Virginia Infantry Regiment]",
+  "artist": "",
+  "date": "1860",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2023638929/",
+  "source": "loc:2023638929"
+ },
+ "ch08/minie_ball_white_c1860s.jpg": {
+  "title": "[Mini\u00e9 ball that wounded Captain Levi B. White of Co. K, 45th Tennessee Infantry]",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2026161785/",
+  "source": "loc:2026161785"
+ },
+ "ch08/union_soldier_with_rifle_musket_portrait_c1861.jpg": {
+  "title": "[Unidentified soldier in Union uniform with bayoneted musket, cartridge box, and cap box]",
+  "artist": "",
+  "date": "1861-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2010648891/",
+  "source": "loc:2010648891"
+ },
+ "ch08/confederate_soldier_with_musket_portrait_c1861.jpg": {
+  "title": "[Unidentified soldier in Confederate uniform with musket, cartridge box, and canteen]",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions.",
+  "page": "https://www.loc.gov/item/2017645645/",
+  "source": "loc:2017645645"
+ },
+ "ch08/heth_target_practice_soldiers_aiming_plate_1858.jpg": {
+  "title": "A system of target practice. For the use of troops when armed with the musket, rifle-musket, rifle, or carbine (page 18)",
+  "artist": "United States. War Dept",
+  "date": "1858",
+  "licence": "public domain by age (1858)",
+  "page": "https://archive.org/details/systemoftargetpr00henr/page/n18",
+  "source": "iabook:systemoftargetpr00henr:18"
+ },
+ "ch08/heth_target_practice_bullet_trajectory_1858.jpg": {
+  "title": "A system of target practice. For the use of troops when armed with the musket, rifle-musket, rifle, or carbine (page 17)",
+  "artist": "United States. War Dept",
+  "date": "1858",
+  "licence": "public domain by age (1858)",
+  "page": "https://archive.org/details/systemoftargetpr00henr/page/n17",
+  "source": "iabook:systemoftargetpr00henr:17"
+ },
+ "ch08/soldier_letter_washington_sept29_1861.jpg": {
+  "title": "[Letter from an unidentified soldier, Washington, D.C., to his friend, Cylas Merrill, Hopkinton, New York].",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2023637800/",
+  "source": "loc:2023637800"
+ },
+ "ch08/mother_letter_to_confederate_sons_c1861.jpg": {
+  "title": "[Letter from a mother to her Confederate soldier sons].",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2023637833/",
+  "source": "loc:2023637833"
+ },
+ "ch08/soldiers_letter_envelope_c1861.jpg": {
+  "title": "[Civil War envelope printed with \"Soldier's letter\" and \"U.S. Christian Commission\" inside banner]",
+  "artist": "",
+  "date": "1861",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2022632899/",
+  "source": "loc:2022632899"
+ },
+ "ch03/ucv_reunion_alabama_c1924.jpg": {
+  "title": "[United Confederate Veterans reunion, Alabama] / Landrum, Ford City, Ala.",
+  "artist": "Landrum, G. W. (George Washington), 1880-1955, photographer",
+  "date": "1924",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2020634823/",
+  "source": "loc:2020634823"
+ },
+ "ch03/confederate_monument_dedication_wade_hampton_kilburn.jpg": {
+  "title": "Gen. Wade Hampton, making address at dedication of confederate monument, Oakwood Cemetery, Chicago, 1895",
+  "artist": "B.W. Kilburn, publisher",
+  "date": "1895-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2022650531/",
+  "source": "loc:2022650531"
+ },
+ "ch03/confederate_monument_unveiling_arlington_1914.jpg": {
+  "title": "Unveiling of Confederate monument, Arlington Cemetery, Va., June 4, 1914",
+  "artist": "",
+  "date": "1914-01-01",
+  "licence": "No known restrictions on publication. For more information, see National Photo Company Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/275_npco.html",
+  "page": "https://www.loc.gov/item/2016851142/",
+  "source": "loc:2016851142"
+ },
+ "ch03/ucv_reunion_veterans_1900.jpg": {
+  "title": "[Civil War veterans at a United Confederate Veterans reunion, Louisville, Kentucky]",
+  "artist": "",
+  "date": "1900",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2018651897/",
+  "source": "loc:2018651897"
+ },
+ "ch03/confederate_monument_oakwood_chicago_kilburn_1895.jpg": {
+  "title": "The Confederate Monument, dedicated at Oakwood Cemetery, Chicago,1895",
+  "artist": "Kilburn, B. W. (Benjamin West), 1827-1909, photographer",
+  "date": "1895-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2010645712/",
+  "source": "loc:2010645712"
+ },
+ "ch02/dividing_the_national_map_cartoon_1860.jpg": {
+  "title": "[Dividing the] national [map]",
+  "artist": "",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2008661606/",
+  "source": "loc:2008661606"
+ },
+ "ch02/national_game_lincoln_wins_cartoon_1860.jpg": {
+  "title": "The national game. Three \"outs\" and one \"run\"",
+  "artist": "Currier & Ives., Maurer, Louis, 1832-1932, artist",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/2003674584/",
+  "source": "loc:2003674584"
+ },
+ "ch02/wide_awakes_procession_ny_1860.jpg": {
+  "title": "Grand procession of Wide-Awakes at New York on the evening of October 3, 1860.  Republican Wide Awakes in N.Y. - Lincoln-Hamlin Campaign [Printing-House Square (Park Row and Nassau St.)]",
+  "artist": "",
+  "date": "1860-01-01",
+  "licence": "No known restrictions on publication.",
+  "page": "https://www.loc.gov/item/99614201/",
+  "source": "loc:99614201"
+ },
+ "ch05/hw_charleston_harbor_forts_map_dec29_1860.jpg": {
+  "title": "Harper's Weekly  1860-12-29: Vol 4 Iss 209 (page 3)",
+  "artist": "",
+  "date": "1860-12-29",
+  "licence": "public domain by age (1860)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1860-12-29_4_209/page/n3",
+  "source": "iabook:sim_harpers-weekly_1860-12-29_4_209:3"
+ },
+ "ch04/hw_georgia_delegation_in_congress_jan5_1861.jpg": {
+  "title": "Harper's Weekly  1861-01-05: Vol 5 Iss 210 (page 0)",
+  "artist": "",
+  "date": "1861-01-05",
+  "licence": "public domain by age (1861)",
+  "page": "https://archive.org/details/sim_harpers-weekly_1861-01-05_5_210/page/n0",
+  "source": "iabook:sim_harpers-weekly_1861-01-05_5_210:0"
+ },
+ "ch01/savannah_pulaski_house_engraving_white_1854.jpg": {
+  "title": "Historical collections of Georgia : containing the most interesting facts, traditions, biographical sketches, anecdotes, etc. relating to its history and antiquities, from its first settlement to the present time ; compiled from original records and official documents ; illustrated by nearly one hundred engravings of public buildings, relics of antiquity, historic localities, natural scenery, portraits of distinguished men, etc., etc. / by the Rev. George White (page 353)",
+  "artist": "['White, George, 1802-1887', 'Dutton, Alpha Christian']",
+  "date": "1855",
+  "licence": "public domain by age (1855)",
+  "page": "https://archive.org/details/historicalcollec00whit/page/n353",
+  "source": "iabook:historicalcollec00whit:353"
+ }
+}

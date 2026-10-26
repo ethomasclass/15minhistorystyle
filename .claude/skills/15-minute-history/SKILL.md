@@ -5,7 +5,8 @@ description: Produce a "15 Minute History" YouTube explainer video in the channe
 
 # 15 Minute History videos
 
-The user makes ~15-minute U.S. history explainers for a general audience and for their own students (APUSH and
+The channel is now called **Chunk History** (Oct 2026; brand files in the style repo's `brand/chunk-history/`, the intro and
+chapter breaks in the template's `src/kit/ChunkIntro.tsx`). The user makes ~15-minute U.S. history explainers for a general audience and for their own students (APUSH and
 U.S. History). Earlier videos, oldest first: *Fix Everything: America's Reform Era*, the Ambrose Bierce video, *King
 Andrew: How the People's President Got a Crown* (the source of this skill's template), *Grip Tighter: Slavery and
 the Cotton South*, and *Good Luck* (the Ouija board). The look:
@@ -69,7 +70,7 @@ cd video
 This copies the template, writes placeholder narration for the example chapters, and runs `npm install`. Then
 edit `src/project.ts` (title, subtitle, dates, intro cards, thumbnail portrait), and preview with
 `npx remotion studio` or `node tools/stills.mjs Ch01 out/stills 3 9`. The two example chapters show the
-patterns (cold open + intro + title card; map, vocab, quote and two-views scenes); replace their scripts and
+patterns (cold open + the channel intro, which carries the title; map, vocab, quote and two-views scenes); replace their scripts and
 scenes with the real ones, and delete `public/img/demo/` once the video has its own images.
 
 Python tools need `pip install pillow numpy imageio-ffmpeg` (and `rembg onnxruntime opencv-python-headless` for
@@ -80,11 +81,18 @@ Project layout:
 ```
 script/      chNN_slug.txt per chapter, SCRIPT.md, GEMINI_PROMPTS.md, MUSIC.md
 src/         project.ts (per-video settings), chapters.ts, masks.ts, Thumbnail.tsx, Brand.tsx (logo stills), ch/ChNN.tsx,
-             kit/ (shared look, maps incl. the 3D map map3d.tsx, engraving.tsx, parallax.tsx, charts), lib/
+             kit/ (shared look, maps incl. the 3D map map3d.tsx, engraving.tsx, parallax.tsx, charts, vox.tsx (tilted page,
+             swipe, spotlight, tear, word match cut, paper-slip notes), board.tsx (the collage board), ChunkIntro.tsx (the Chunk
+             History intro + the mark-snap chapter break), shots.tsx (gentle shot transitions), levels.ts (bed(): music 13 LU
+             under the voice)), lib/
 public/      audio/ (narration + timings), img/ (archival by chapter, gen/ for AI, masks/, maps/), music/, sfx/, fonts/
-tools/       voice.py, voice_all.sh, fake_voice.py, anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
+tools/       voice.py (runs level_voice.py: narration to -18 LUFS), voice_all.sh, level_voice.py, fake_voice.py, beatcheck.py (do the
+             payoff lines get a breath?), pause.py (a dramatic pause before a phrase), anchors.py, mask.py, mask_preview.py, layers.py, trace.py, find_images.py, stills.mjs,
              sheet.py, probe_text.mjs, render.sh, master.py, frames_sheet.py, thumbs.mjs, youtube_check.py, script_pdf.py, music_eleven.py,
-             sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py, weather.py (halftone + paper ageing)
+             sfx_eleven.py, brand.mjs, refine_mask.py + traces/ (hand-traced masks), mask_closeup.py, trace_grid.py, text_lines.py,
+             weather.py (halftone + paper ageing), phrase_find.py + word_hunt.py (LOC newspapers), jukebox.py (LOC period recordings),
+             music_acestep.py (local text-to-music), crease.py, halftone.py, silhouette.py, distress.py, scratch_voice.py,
+             mono_depth.py + stereo_depth.py + prep_stereo.py (stereograph move)
 review/      YouTube_description.md and anything else for the user
 renders/     720p video, thumbnails, (LFS) 1080p master
 ```
@@ -107,6 +115,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
   for archival images (LOC, Internet Archive books, museums), not just Wikimedia.
 - **Check every mask at full resolution** (`tools/mask_closeup.py`) and fix rough ones with `tools/refine_mask.py` and
   hand traces (images-and-masks.md §6). If a picture can be misread, draw the event instead.
+- **Cut-outs on the notebook.** Every photo sits on the dark ruled paper, its subject cut out (`Cut`) or, with no
+  single subject, as a card (`Desk`). Never full-screen slow pushes, 3D photo fly-throughs or color photos.
 - **One subject in color per image, a source tag on every image, text never off the frame edge.** Run the text
   probe on every chapter before each render the user will see.
 - **Check your own work visually before the user does**: contact sheets of stills, the text-edge probe, the
@@ -129,6 +139,11 @@ renders/     720p video, thumbnails, (LFS) 1080p master
   `python3 tools/youtube_check.py`.
 - "Handout / viewing guide / questions for the video": `references/classroom-handout.md`. Keep it simple.
 - "Make Shorts": `references/shorts.md`. Native vertical, hook first, only the video's own assets.
+- "Plan a series" / "a multi-part video": `references/script-writing.md` §10 (one arc every episode follows, a unit question,
+  a recurring card, hinge years, a callback table). Worked example: `projects/American_West/SERIES.md` and its episode outlines
+  in the style repo; `projects/Reconstruction/` for a series built around the collage board.
+- "Music for a new video": reuse the library first; for new cues give the user a copy-paste Suno doc like
+  `projects/American_West/SUNO_PROMPTS.md` (style + tempo, structure tags, minimum lengths); levels with `bed()`.
 - "Send me the script" / "a readable file": `python3 tools/script_pdf.py "<Title>" "<Subtitle>" review/<Slug>_script.pdf`.
 - Working inside an existing video project (not the template): the same kit lives under `src/v3/` or `src/jh/`
   there; read that project's `HANDOFF.md` or `README.md` first and follow its paths.

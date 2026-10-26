@@ -1,13 +1,13 @@
-// Channel intro: "15 Minute History". Archival cards flip past, a hand-drawn clock fills a quarter
-// hour, and the wordmark stamps in. Graphics step at 12 fps like the rest of the video.
+// Channel intro: "15 Minute History", then the video's title. A pull-back from one taped-down photo to the notebook
+// page with the logo, then the title on orange tape. Graphics step at 12 fps like the rest of the video.
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {boxOf, Finish, Highlight, INK, JF, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from './Kit';
 import {DarkPaper, Sfx} from './common';
-import {INTRO_CARDS} from '../project';
+import {DATES, INTRO_CARDS, SUBTITLE, TITLE} from '../project';
 
-export const INTRO_FRAMES = 132;
+export const INTRO_FRAMES = 186;
 
 const CARDS = INTRO_CARDS;
 
@@ -63,48 +63,76 @@ export const Wordmark: React.FC<{clockAt: number; numAt: number; minAt: number; 
   );
 };
 
+/** Where the six taped-down photos sit on the page (the camera starts close on the first). */
+const PAGE: {x: number; y: number; w: number; rot: number}[] = [
+  {x: 70, y: 60, w: 400, rot: -4}, {x: 1460, y: 70, w: 400, rot: 3}, {x: 80, y: 740, w: 380, rot: 2},
+  {x: 1470, y: 750, w: 390, rot: -3}, {x: 760, y: 40, w: 360, rot: 1.5}, {x: 790, y: 830, w: 340, rot: -2},
+];
+const TORN = (seed: string, n = 40) => {
+  // a strip with ragged top and bottom edges, as a CSS polygon
+  const top = [...Array(n + 1)].map((_, i) => `${(i / n) * 100}% ${random(`${seed}t${i}`) * 9}%`);
+  const bot = [...Array(n + 1)].map((_, i) => `${100 - (i / n) * 100}% ${91 + random(`${seed}b${i}`) * 9}%`);
+  return `polygon(${[...top, ...bot].join(', ')})`;
+};
+
+/**
+ * The channel intro (from The Balloon War): the camera starts close on one photo taped into the notebook and drifts
+ * back to the whole page, the logo in the middle among the video's photos. The logo holds for a second, eases up, and
+ * an orange tape strip with the video's title is pulled across the middle. No ticks: paper, tape, and the sting.
+ */
 const Body: React.FC = () => {
-  const frame = useCurrentFrame();
+  const f = useCurrentFrame();
   const g = useGFrame();
   const pal = usePal();
-  const clearAt = 32;
-  const clockAt = 34;
-  const numAt = 58;
-  const minAt = 64;
-  const hisAt = 71;
-  const push = interpolate(frame, [numAt, INTRO_FRAMES], [1, 1.04], clamp);
-  const fade = interpolate(frame, [INTRO_FRAMES - 8, INTRO_FRAMES], [1, 0], clamp);
+  const back = 72, up = 104, tape = 108, sub = 126;
+  const u = interpolate(f, [0, back], [0, 1], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const s = 3.1 + (1 - 3.1) * u;
+  const c0 = [PAGE[0].x + PAGE[0].w / 2, PAGE[0].y + PAGE[0].w * 0.34];
+  const cx = c0[0] + (960 - c0[0]) * u, cy = c0[1] + (540 - c0[1]) * u;
+  const k = interpolate(f, [up, up + 18], [0, 1], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const logo = 0.6 - 0.24 * k;
+  const ly = 540 - 330 * k;
+  const pull = interpolate(f, [tape, tape + 14], [0, 1], {...clamp, easing: Easing.out(Easing.quad)});
+  const dim = interpolate(f, [up, up + 14], [1, 0.45], clamp);
+  const fade = interpolate(f, [INTRO_FRAMES - 10, INTRO_FRAMES], [1, 0], clamp);
   return (
-    <AbsoluteFill style={{background: '#0d0c09', opacity: fade}}>
-      <DarkPaper />
-      {/* flip through the past */}
-      {g < clearAt && CARDS.map((src, i) => {
-        const st = i * 6;
-        if (g < st) return null;
-        const r = (random(`cr${i}`) - 0.5) * 14;
-        const dx = (random(`cx${i}`) - 0.5) * 260;
-        const dy = (random(`cy${i}`) - 0.5) * 140;
-        return (
-          <div key={i} style={{position: 'absolute', left: 960 - 330 + dx, top: 540 - 230 + dy, width: 660, transform: `rotate(${r}deg)`}}>
-            <div style={{background: '#f4efe6', padding: 12, boxShadow: '0 20px 40px rgba(0,0,0,0.7)', outline: `5px solid ${pal.mark}`, outlineOffset: 10}}>
-              <Img src={staticFile(src)} style={{width: 636, height: 430, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.25)'}} />
+    <AbsoluteFill style={{background: '#050403', opacity: fade}}>
+      <AbsoluteFill style={{transform: `translate(${960 - cx * s}px, ${540 - cy * s}px) scale(${s})`, transformOrigin: '0 0'}}>
+        <div style={{position: 'absolute', left: -700, top: -500, width: 3320, height: 2080}}><DarkPaper /></div>
+        <AbsoluteFill style={{opacity: dim}}>
+          {PAGE.map((c, i) => (
+            <div key={i} style={{position: 'absolute', left: c.x, top: c.y, width: c.w, transform: `rotate(${c.rot}deg)`, opacity: i === 4 ? 1 - k : 1}}>
+              <div style={{background: '#f4efe6', padding: 10, boxShadow: '0 14px 28px rgba(0,0,0,0.65)'}}>
+                <Img src={staticFile(CARDS[i % CARDS.length])} style={{width: c.w - 20, height: (c.w - 20) * 0.66, objectFit: 'cover', display: 'block', filter: 'grayscale(1) contrast(1.2)'}} />
+              </div>
+              {[[-18, -14, -8], [c.w - 70, -12, 9]].map(([tx, ty, tr], q) => (
+                <div key={q} style={{position: 'absolute', left: tx, top: ty, width: 90, height: 30, background: 'rgba(236,222,190,0.62)', transform: `rotate(${tr + (random(`tp${i}${q}`) - 0.5) * 8}deg)`}} />
+              ))}
             </div>
-          </div>
-        );
-      })}
-      {/* the wordmark */}
-      <AbsoluteFill style={{transform: `scale(${push})`}}>
-        <Wordmark clockAt={clockAt} numAt={numAt} minAt={minAt} hisAt={hisAt} />
+          ))}
+        </AbsoluteFill>
+        <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${960 - 895 * logo}px, ${ly - 540 * logo}px) scale(${logo})`, transformOrigin: '0 0'}}>
+          <Wordmark clockAt={-200} numAt={-200} minAt={-200} hisAt={-200} />
+        </div>
       </AbsoluteFill>
+      {/* the title on a strip of orange tape, pulled across the middle */}
+      {f >= tape && (
+        <div style={{position: 'absolute', left: -40, top: 440, width: 2000, height: 190, transform: 'rotate(-2deg)',
+          clipPath: `inset(0 ${(1 - pull) * 100}% 0 0)`, filter: 'drop-shadow(0 10px 18px rgba(0,0,0,0.55))'}}>
+          <div style={{position: 'absolute', inset: 0, background: boxOf(pal), clipPath: TORN('title')}} />
+          <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: JF.display, fontSize: 132,
+            color: INK, letterSpacing: 1, whiteSpace: 'nowrap'}}>{TITLE}</div>
+        </div>
+      )}
+      {g >= sub && (
+        <div style={{position: 'absolute', left: 0, width: 1920, top: 680, textAlign: 'center', fontFamily: JF.display, fontSize: 60, color: pal.mark,
+          textShadow: '0 3px 16px rgba(0,0,0,0.85)', opacity: interpolate(g, [sub, sub + 8], [0, 1], clamp)}}>{SUBTITLE}</div>
+      )}
+      {g >= sub + 10 && <Highlight text={DATES} x={1500} y={800} size={54} at={sub + 10} seed={9} rot={-3} />}
       <Finish vignette={0.45} />
-      {CARDS.map((_, i) => <Sfx key={i} at={i * 6} src="sfx/tick.wav" volume={0.45} />)}
-      <Sfx at={clearAt} src="sfx/whoosh.wav" volume={0.5} />
-      <Sfx at={clockAt + 8} src="sfx/tick.wav" volume={0.5} />
-      <Sfx at={clockAt + 14} src="sfx/tick.wav" volume={0.5} />
-      <Sfx at={clockAt + 20} src="sfx/tick.wav" volume={0.5} />
-      <Sfx at={minAt} src="sfx/stamp.wav" volume={0.45} />
-      <Sfx at={hisAt} src="sfx/boom.wav" volume={0.5} />
-      <Sequence from={numAt - 4} layout="none"><Audio src={staticFile('music/title_sting.mp3')} volume={(f) => interpolate(f, [0, 3, 50, 74], [0, 0.45, 0.45, 0], clamp)} /></Sequence>
+      <Sfx at={2} src="sfx/paper_rustle.wav" volume={0.22} />
+      <Sfx at={tape - 2} src="sfx/tape_pull.wav" volume={0.42} />
+      <Sequence from={40} layout="none"><Audio src={staticFile('music/title_sting.mp3')} volume={(x) => interpolate(x, [0, 4, 60, 100], [0, 0.32, 0.32, 0], clamp)} /></Sequence>
     </AbsoluteFill>
   );
 };

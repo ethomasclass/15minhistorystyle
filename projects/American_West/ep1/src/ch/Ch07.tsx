@@ -17,6 +17,7 @@
 //  T "So, to his supporters…let it happen"  the two-views card: supporters left (from ch06), critics right writes in
 //  U "Quick thing…helps the channel."       the plug: one small teal note "subscribe ↓", nothing louder
 import React from 'react';
+import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch07_where_it_will_do_most_good.words.json';
 import {clamp} from '../lib/anim';
@@ -441,18 +442,19 @@ const TwoViews: React.FC<{z: number; cx: number; cy: number}> = ({z, cx, cy}) =>
           <div style={{position: 'absolute', inset: 10, border: `2px solid ${pal.mark}`, opacity: 0.6}} />
           <div style={{position: 'absolute', left: 868, top: 40, bottom: 40, width: 3, background: pal.mark, opacity: 0.7}} />
         </div>
-        <Mono text="HIS SUPPORTERS SAW" x={L} y={140} size={30} />
-        <Mono text="HIS CRITICS SAW" x={R} y={140} size={30} color={pal.subject} />
-        {/* left: what ch06 filled in */}
-        <Note text="· won the war" x={L} y={250} size={46} rot={-1} />
-        <Note text="· the 15th Amendment" x={L} y={330} size={46} rot={-1} />
-        <Note text="· troops against the Klan" x={L} y={410} size={46} rot={-1} />
+        <Mono text="HIS SUPPORTERS" x={L} y={140} size={30} />
+        <Mono text="HIS CRITICS" x={R} y={140} size={30} color={pal.subject} />
+        {/* left: what ch06 filled in (same wording as ch06's card) */}
+        <Note text="· the 15th Amendment (1870)" x={L} y={230} size={38} rot={-1} />
+        <Note text="· laws to enforce it" x={L} y={300} size={38} rot={-1} />
+        <Note text="· troops + prosecutors vs. the Klan" x={L} y={370} size={38} rot={-1} />
+        <Note text="· a Peace Policy out West" x={L} y={440} size={38} rot={-1} />
         <Hand parts={[['an honest man']]} x={L} y={590} size={80} at={at('honest') - 3} />
         <Hand parts={[['with '], ['bad friends', true]]} x={L} y={700} size={80} at={at('bad friends') - 3} />
         {/* right: writes in now */}
-        <Note text="· Crédit Mobilier" x={R} y={250} size={46} rot={-1} at={at('critics') - 2} />
-        <Note text="· the Whiskey Ring" x={R} y={330} size={46} rot={-1} at={at('critics') + 4} />
-        <Note text="· Babcock let off" x={R} y={410} size={46} rot={-1} at={at('critics') + 10} />
+        <Note text="· Crédit Mobilier" x={R} y={230} size={38} rot={-1} at={at('critics') - 2} />
+        <Note text="· the Whiskey Ring" x={R} y={300} size={38} rot={-1} at={at('critics') + 4} />
+        <Note text="· Babcock let off" x={R} y={370} size={38} rot={-1} at={at('critics') + 10} />
         <Hand parts={[['a president who']]} x={R} y={590} size={80} at={at('president who') - 3} />
         <Hand parts={[['let it '], ['happen', true]]} x={R} y={700} size={80} at={at('let it happen') - 3} />
       </AbsoluteFill>
@@ -559,10 +561,8 @@ const Body: React.FC = () => {
 export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_where_it_will_do_most_good.wav" lead={LEAD}
     music={[
-      // SUNO: aw_robber_barons replaces this (one cue for the whole chapter; drop the second entry then)
-      {src: 'music/a_price.mp3', volume: 0.15, to: at('In 1872') + 6, fadeOut: 30},
-      // SUNO: aw_robber_barons replaces this (a_price is only 65 s, so the fallback restarts at "In 1872")
-      {src: 'music/a_price.mp3', volume: 0.15, from: at('In 1872') - 6},
+      // aw_robber_barons (Suno, 2:08): one cue for the whole chapter (1:48)
+      {src: 'music/aw_robber_barons.mp3', volume: bed('aw_robber_barons')},
     ]}>
     <Body />
   </ChapterShell>

@@ -1,1 +1,10 @@
 projects/Dressed_To_Kill/renders/Dressed_To_Kill_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/American_West/ep1/renders/Not_In_The_Picture_720p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/American_West/ep1/renders/Not_In_The_Picture_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Dressed_To_Kill/renders/shorts/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/In_Their_Own_Words/renders/In_Their_Own_Words_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Forever_Free/renders/Forever_Free_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Except/renders/Except_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep1/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep2/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep3/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text

@@ -1,15 +1,23 @@
-# 15 Minute History: style
+# Chunk History (formerly 15 Minute History): style
 
-![15 Minute History](brand/logo/wordmark.jpg)
+![Chunk History](brand/chunk-history/final/avatar-800.png)
+
+The channel was renamed **Chunk History** in October 2026: the brand (the *Quarter past* mark and the *Two slabs* wordmark), its
+brand sheet and the 3D intro are in [`brand/chunk-history/`](brand/chunk-history/). The old 15 Minute History logo files stay in
+[`brand/logo/`](brand/logo/) for the earlier videos and thumbnails.
 
 Everything that makes a 15 Minute History video look and sound like one: the logo, colours and fonts, every music cue and
 sound effect, the on-screen techniques, the writing and packaging conventions, and a tested starter project. It was collected from
-all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck*, *Say It Ain't So* and *The Exact Spot*.
+all the videos so far: *Fix Everything*, *The War Nobody Won*, the Ambrose Bierce video, *King Andrew*, *Grip Tighter*, *Good Luck*,
+*Say It Ain't So*, *The Exact Spot*, *Dressed to Kill*, *When Europe Ate Mummies*, *The Balloon War*, *Log Cabin*, the Civil War
+series (*In Their Own Words*, *Forever Free*, *Except*), the Reconstruction series (*Landless, Homeless, Voteless*, *Bottom Rail on
+Top*, *Redemption*) and the American West series (Ep 1 *Not in the Picture*, the first video as Chunk History).
 
 **The look in one paragraph.** A researcher's desk at night. Black-and-white archival engravings and photographs sit on dark, faintly
-ruled paper. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
+ruled paper (the black desk; no cream cards or white borders since the Reconstruction series): photos shown worn and unframed,
+subjects cut out of them, and wide-to-detail camera moves with depth. One figure per image is tinted coral and circled with a loose, hand-traced teal outline. Titles are heavy serif caps
 stamped onto torn strips of orange tape. Lowercase handwritten teal notes and bowed arrows explain the picture. Drawn marks move at a
-choppy 12 drawings a second while the camera glides. Every cut is hard and lands on a spoken word. The voice is plain, quick and a
+choppy 12 drawings a second while the camera glides. Shots change gently (a soft drift or a short dissolve) and every mark lands on a spoken word. The voice is plain, quick and a
 little wry, and it gets quieter and slower when the subject is suffering.
 
 ## What's here
@@ -17,21 +25,21 @@ little wry, and it gets quieter and slower when the subject is suffering.
 | Folder | What's in it |
 |---|---|
 | [`brand/`](brand/) | Logo files (wordmark, profile picture, banner, watermark, the intro and logo-break videos), colours, fonts, and every thumbnail so far |
-| [`music/`](music/) | **38 music cues**, one copy each, grouped by feeling, with length, loudness, the prompt that made each, and where it was used |
-| [`sfx/`](sfx/) | 18 sound effects with what each is for and its volume |
+| [`music/`](music/) | **71 music cues**, one copy each, grouped by feeling, with length, loudness, the prompt that made each, and where it was used |
+| [`sfx/`](sfx/) | 44 sound effects with what each is for and its volume |
 | [`techniques/`](techniques/) | Every on-screen technique by purpose, 20-frame look books of each video, and component code not yet in the template |
 | [`videos/`](videos/) | The catalog of past videos, what each added, and **your standing preferences** gathered from your notes |
 | [`examples/`](examples/) | Each video's working documents: script, fact-check, image and music prompts, YouTube text, handoff |
 | [`.claude/skills/15-minute-history/`](.claude/skills/15-minute-history/) | The Claude skill that makes a video end to end, its reference guides, and the starter project |
-| [`projects/`](projects/) | Video projects built inside this repo (*Say It Ain't So*: `projects/Black_Sox/` on the `black-sox-video` branch; *The Exact Spot*: `projects/Mexican_American_War/` on `claude/relaxed-lamport-62biq7`; big renders via Git LFS) |
+| [`projects/`](projects/) | Video projects built inside this repo, each a complete Remotion project (script, audio, images, masks, scenes, renders): *The Exact Spot* (`projects/Mexican_American_War/`), *Dressed to Kill* (`projects/Dressed_To_Kill/`), *When Europe Ate Mummies* (`projects/Mummy_Medicine/`), *The Balloon War* (`projects/Balloon_War/`), *Say It Ain't So* (`projects/Black_Sox/`), *Log Cabin* (`projects/Log_Cabin/`), the Civil War series (`projects/In_Their_Own_Words/`, `projects/Forever_Free/`, `projects/Except/`), the Reconstruction series (`projects/Reconstruction/ep1`–`ep3`), the American West series (`projects/American_West/`, Ep 1 in `ep1/`), and standalone Shorts (`projects/Candy_Scare/`, `Last_Public_Hanging/`, `Rumpelstiltskin_Short/`, `World_Series_Short/`, `Pledge_Salute_Short/`, plus two scripts). All merged onto one branch on Oct 26, 2026. Big renders via Git LFS |
 
 ## The guides
 
 The detailed guides live inside the skill, so Claude reads them while it works, and you can read them too:
 
 - [Visual style guide](.claude/skills/15-minute-history/references/visual-style.md): the palette, type, every component with exact values, motion, layout, and the logo
-- [Writing the script](.claude/skills/15-minute-history/references/script-writing.md): shape, voice, objectivity rules, fact-check flags, pronunciation
-- [Voice, music and sound](.claude/skills/15-minute-history/references/voice-and-audio.md): the voice clone, the locked pace, music levels
+- [Writing the script](.claude/skills/15-minute-history/references/script-writing.md): shape, voice, objectivity rules, fact-check flags, pronunciation, and writing a series (one story arc every episode follows)
+- [Voice, music and sound](.claude/skills/15-minute-history/references/voice-and-audio.md): the voice clone, one-take eleven_v4 narration, the Black Sox mix levels, Suno prompt docs, the clicks-only branding sound
 - [Images and masks](.claude/skills/15-minute-history/references/images-and-masks.md): archival sources, the AI painting style paragraph, coral/teal masks
 - [Building the scenes](.claude/skills/15-minute-history/references/building-scenes.md): timing to words, the component cheat sheet, scene recipes
 - [Render and deliver](.claude/skills/15-minute-history/references/render-and-deliver.md): render, master to −14 LUFS, previews, the 1080p master

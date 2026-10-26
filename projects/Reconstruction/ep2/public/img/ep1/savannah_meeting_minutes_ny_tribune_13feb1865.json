@@ -1,0 +1,27 @@
+{
+ "size": [
+  1764,
+  3000
+ ],
+ "paper": "New-York daily tribune (New-York [N.Y.]), February 13, 1865",
+ "url": "https://www.loc.gov/resource/sn83030213/1865-02-13/ed-1/",
+ "sp": "5",
+ "phrases": {
+  "Garrison Frazier": [
+   [
+    145.1,
+    407.3,
+    206.2,
+    20.6
+   ]
+  ],
+  "by our own labor": [
+   [
+    508.2,
+    2566.1,
+    211.4,
+    28.0
+   ]
+  ]
+ }
+}

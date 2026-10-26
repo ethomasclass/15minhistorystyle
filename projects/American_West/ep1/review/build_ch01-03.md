@@ -75,7 +75,10 @@ Remaining hits are single frames inside whip transitions (the outgoing/incoming 
 invisible (faded) ribbon labels; no static text crosses the frame.
 
 ## Still rough
-- Ch02's map shots (deadlock, questions) are dark and quiet; the proposed routes are simplified corridors (labelled approx.).
+- Ch02's map shots (deadlock, questions, the bigger idea, out West) now carry the West as one see-through coral hatch (`MWest`:
+  California to Kansas by today's state shapes, Texas left out) with a THE WEST label from the first frame; the proposed routes are
+  simplified corridors (labelled approx.). The four "more people in the room" mounts sit on the desk as empty dashed sockets from
+  the cut, and each photo drops into its socket on its word.
 - The Boronda family photo is undated and small (500 px); fine in a 160 px circle, not for a push. The Leslie's 1879 engraving is a
   St. Louis scene of Exodusters (families heading for Kansas), cropped tight to a family on a wagon.
 - The Crocker print shows the cream of the original carte de visite (scan tone), and its coral is on from the slap, not on the name.
