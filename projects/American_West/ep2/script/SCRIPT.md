@@ -1,6 +1,6 @@
 # Cheap as Dirt: Cattle, Gold, and the End of the Open Range
 
-**Chunk History** · narration script · draft 1 (not voiced) · 2,290 words · about 15:00 finished (scaled from Ep 1: 2,450 words → 16:00)
+**Chunk History** · narration script · draft 1 (not voiced) · 2,327 words · about 15:11 finished (scaled from Ep 1: 2,450 words → 16:00)
 ElevenLabs `eleven_v4`, Ellis, one take per chapter, speed 1.0; ch09 at 0.92. `[tags]` are v4 delivery cues, sent to the voice, never
 spoken or shown. **No quiet-type cues** (`[quietly]`, `[softly]`, `[whispers]`, `[hushed]` …): on v4 they whisper. The quiet chapter
 gets its weight from the slower speed, short sentences, pauses in the edit and the teal-only look.
@@ -43,22 +43,24 @@ Markup: `*emphasis*`, `{vocab term}`.
 | Seeds for Ep 4 | Ch 4 (Bosque Redondo), ch 6 ("Hold onto that treaty"); ch 5's southward escape → Ep 4's Black Seminole scouts |
 
 **Decisions taken (the user can change any):** title *Cheap as Dirt*; Theodore Roosevelt named in ch 9 (as a rancher, with his own
-words); Wild Bill cut; closing line B. Also cut for length: the Shawnee Trail, the wrangler, Deadwood's Chinatown, the 1890s range wars.
+words); Wild Bill cut; closing line B. Also cut for length: the Shawnee Trail, the wrangler, Deadwood's Chinatown, the 1890s range wars, Abilene's first-season count and its farmers, Loving's death. Added (the user's asks): why the Diné were at Bosque Redondo (ch 4); Bose Ikard and Bass Reeves in place of Nat Love (ch 5).
 
 ## Chapters at a glance
 
+| # | Starts | Chapter | Words | Est. |
+|---|---|---|---|---|
 | 01 | 0:00 | The Last of the Five Thousand (cold open) | 203 | 74 s |
-| 02 | 1:24 | Four-Dollar Cows | 249 | 91 s |
-| 03 | 2:56 | The Long Drive | 257 | 93 s |
-| 04 | 4:32 | Beef for Bosque Redondo | 233 | 85 s |
-| 05 | 5:59 | Who the Cowboys Were | 262 | 95 s |
-| 06 | 7:36 | 1874 | 212 | 77 s |
-| 07 | 8:55 | Who Got the Gold (+ plug) | 175 | 64 s |
-| 08 | 10:01 | Cheap as Dirt | 253 | 92 s |
-| 09 | 11:35 | The Big Die-Up (slower: speed 0.92) | 237 | 95 s |
-| 10 | 13:11 | The Last of the Five Thousand (the answer) | 209 | 76 s |
+| 02 | 1:24 | Four-Dollar Cows | 238 | 87 s |
+| 03 | 2:52 | The Long Drive | 213 | 77 s |
+| 04 | 4:12 | Beef for Bosque Redondo | 285 | 104 s |
+| 05 | 5:57 | Who the Cowboys Were | 322 | 117 s |
+| 06 | 7:57 | 1874 | 212 | 77 s |
+| 07 | 9:16 | Who Got the Gold (+ plug) | 175 | 64 s |
+| 08 | 10:21 | Cheap as Dirt | 243 | 88 s |
+| 09 | 11:52 | The Big Die-Up (slower: speed 0.92) | 232 | 93 s |
+| 10 | 13:26 | The Last of the Five Thousand (the answer) | 204 | 74 s |
 
-**2290 words · finished about 14:41** (narration at Ep 1's measured 165 wpm, ch09 at 150; + intro, title card, 2 s breaks, 12 s end screen)
+**2,327 words · about 15:11 finished** (scaled from Ep 1: 2,450 words → 16:00)
 
 ---
 
@@ -86,7 +88,7 @@ It starts in Texas, with too many cows and no money at all.
 
 ## 1:24 | Four-Dollar Cows
 
-`ch02_four_dollar_cows.txt` · 249 words · about 91 s
+`ch02_four_dollar_cows.txt` · 238 words · about 87 s
 
 Last time, I promised you a man with an idea and about five million cows. Here are the cows.
 
@@ -98,8 +100,6 @@ Northern cities were hungry for beef. So, why not just take the cattle north? [m
 
 Remember the rail lines from last time? One of them was pushing west across Kansas. In 1867, a cattle dealer from Illinois named Joseph McCoy picked a tiny stop on that line called Abilene. He later described it as about a dozen log huts. McCoy built pens, a hotel and a shipping yard, and sent word to Texas. Bring your cattle here.
 
-That first season, about thirty-five thousand head came up the trail.
-
 So, stack it up. Cheap cows in Texas. Hungry cities in the North. A railroad in between. [firmly] That means a cow became a ticket.
 
 And you didn't even need to own land to feed them. Most of the Plains was {open range}: public land with no fences, where anyone's cattle could graze for free.
@@ -108,9 +108,9 @@ All you had to do was walk them to the railroad. About a thousand miles.
 
 ---
 
-## 2:56 | The Long Drive
+## 2:52 | The Long Drive
 
-`ch03_the_long_drive.txt` · 257 words · about 93 s
+`ch03_the_long_drive.txt` · 213 words · about 77 s
 
 The routes they walked became some of the most famous roads in America. And none of them were roads.
 
@@ -122,29 +122,29 @@ Up front, the trail boss. Then the cook, with his wagon. And at the very back, t
 
 Three things could end a drive. One: a stampede. A clap of thunder at night, and the whole herd runs. Two: rivers. Cattle and men drowned at the crossings. Three: the people whose land you were crossing. In Indian Territory, nations like the Cherokee charged a toll for every herd, sometimes paid in cattle.
 
-Between the late 1860s and the mid-1880s, millions of cattle went north this way. Estimates run from five to ten million.
-
-The towns at the end of the trail boomed for a season, then the trade moved west with the railroad. [wry] In Abilene, after just a few years, the farmers asked the Texans to take their cattle somewhere else.
+Over about twenty years, somewhere between five and ten million cattle went north this way.
 
 But one pair of ranchers went the other way. And their best customer was the United States Army.
 
 ---
 
-## 4:32 | Beef for Bosque Redondo
+## 4:12 | Beef for Bosque Redondo
 
-`ch04_beef_for_bosque_redondo.txt` · 233 words · about 85 s
+`ch04_beef_for_bosque_redondo.txt` · 285 words · about 104 s
 
 In 1866, two Texas ranchers, Charles Goodnight and Oliver Loving, gathered about two thousand cattle and drove them west, along the Pecos River, to a fort in New Mexico called Fort Sumner.
 
-[serious] Why there? Because next to the fort, the Army was holding about eight thousand Diné, or Navajo, people, along with hundreds of Mescalero Apache. Soldiers had forced the Diné to walk there, hundreds of miles, a march they call the Long Walk. The camp was called {Bosque Redondo}. The land couldn't grow enough food. People were going hungry, and the Army needed beef.
+[serious] Why there? Because next to the fort, the Army was holding about eight thousand Diné, or Navajo, people, along with hundreds of Mescalero Apache.
+
+How did they get there? For generations, Diné raiders and New Mexican settlers had raided each other, for sheep, for horses and for captives. In 1863, the Army's commander in New Mexico decided to end it his way. He wanted the Diné off their land, which he believed held gold, and turned into farmers on a reservation far from home. Troops led by Kit Carson burned their fields, cut down their orchards and killed their sheep, until, that winter, starving families surrendered. Then soldiers marched them about three hundred miles to the Pecos. The Diné call it the Long Walk. Hundreds died on the way.
+
+The camp was called {Bosque Redondo}. The water was bad, and the crops failed. People were going hungry, and the Army needed beef.
 
 So let's say it plainly. One of the most famous cattle trails in America began as a way to feed a prison camp.
 
 Goodnight and Loving sold their steers there for about twelve thousand dollars in gold.
 
-Goodnight is also usually credited with inventing the {chuck wagon}: an old Army wagon with a box of shelves and drawers built onto the back, so a cook could feed a crew on the trail. The lid folded down into a table. Before long, nearly every drive had one.
-
-The next year, Loving was badly wounded in a fight with Comanche warriors, and he died at Fort Sumner. Goodnight later carried his body home to Texas, hundreds of miles.
+Goodnight is also usually credited with inventing the {chuck wagon}: an old Army wagon with a box of shelves and drawers built onto the back, so a cook could feed a crew on the trail. The lid folded down into a table.
 
 Hold onto Bosque Redondo. We'll come back to it in the last episode.
 
@@ -152,21 +152,23 @@ So who were the men actually riding these trails?
 
 ---
 
-## 5:59 | Who the Cowboys Were
+## 5:57 | Who the Cowboys Were
 
-`ch05_who_the_cowboys_were.txt` · 262 words · about 95 s
+`ch05_who_the_cowboys_were.txt` · 322 words · about 117 s
 
 [playful] You probably picture a cowboy from the movies. Tall, white, older, and doing pretty well. [wry] The real thing was usually none of those.
 
-Most cowboys were teenagers or young men. They were paid about twenty-five to forty dollars a month. About a dollar a day.
+Most were teenagers or young men, paid about twenty-five to forty dollars a month. About a dollar a day.
 
 And a lot of them weren't white. Historians estimate that about one in four cowboys on the Texas trails was Black. Many had been enslaved on Texas ranches before the war. Now they did the same work for wages.
 
-And here's a strange turn. Before the war, this same Texas country was a place enslaved people ran from. Not north. South. Across the Rio Grande, to Mexico, where slavery was illegal. Somewhere between three and ten thousand made it. Twenty years later, in some of that same country, free Black men rode for pay.
+Remember Goodnight and Loving? One of their riders was a young Black man named Bose Ikard. He had been born enslaved. On the trail, he fought off Comanche raids and rode out stampedes. Goodnight said he trusted him "farther than any living man." He was, Goodnight said, "my detective, banker, and everything else."
 
-On the trail, a Black cowboy often ate, slept and worked the same as everyone else. In town, at the end of it, he ran into the same color line he had left. Both things were true.
+On the trail, a Black cowboy often ate, slept and worked the same as everyone else. In town, at the end of it, he ran into the same color line he had left. [firmly] Both things were true.
 
-One of them, Nat Love, wrote a memoir. He called himself "Deadwood Dick." [amused] Some of his stories are probably tall tales.
+And here's a strange turn. Before the war, this same Texas country was a place enslaved people ran from. Not north. South. Across the Rio Grande, to Mexico, where slavery was illegal. Somewhere between three and ten thousand made it.
+
+One man, enslaved in Texas, ran north instead, into Indian Territory, and learned the land and its languages. His name was Bass Reeves. In 1875, he became one of the first Black deputy U.S. marshals in the West, riding the same country the cattle trails crossed.
 
 And then there were the vaqueros, Mexican cowboys, who were working cattle in Texas long before it was part of the United States. They taught the trade. You can hear it in the words. Lariat, from *la reata*. Chaps, from *chaparreras*. Ranch, from *rancho*. Rodeo. Bronco.
 
@@ -174,7 +176,7 @@ And then there were the vaqueros, Mexican cowboys, who were working cattle in Te
 
 ---
 
-## 7:36 | 1874
+## 7:57 | 1874
 
 `ch06_1874.txt` · 212 words · about 77 s
 
@@ -198,7 +200,7 @@ So who actually got the gold?
 
 ---
 
-## 8:55 | Who Got the Gold (+ plug)
+## 9:16 | Who Got the Gold (+ plug)
 
 `ch07_who_got_the_gold.txt` · 175 words · about 64 s
 
@@ -218,13 +220,13 @@ So, stack it up. A free-for-all, then hard rock, then a company. That means most
 
 ---
 
-## 10:01 | Cheap as Dirt
+## 10:21 | Cheap as Dirt
 
-`ch08_cheap_as_dirt.txt` · 253 words · about 92 s
+`ch08_cheap_as_dirt.txt` · 243 words · about 88 s
 
 In 1874, the same year as the gold, a farmer in DeKalb, Illinois, named Joseph Glidden got a patent for a new kind of fence. Look at the drawing. Two wires twisted together. And every few inches, a short, sharp barb, wrapped on tight so it couldn't slide. {barbed wire}.
 
-That mattered, because the Plains had almost no trees. A wooden fence meant hauling lumber for hundreds of miles. Wire was cheap, light and fast to put up.
+The Plains had almost no trees for wooden fences. Wire was cheap, light and fast to put up.
 
 A young salesman named John Gates built a corral of barbed wire in the middle of San Antonio, filled it with longhorns, and let them try to break out. They couldn't. And the way the story's told, his pitch was this. [playful] "Light as air, stronger than whiskey, and cheap as dirt."
 
@@ -238,9 +240,9 @@ That means the open range didn't end with one battle. It ended one fence post at
 
 ---
 
-## 11:35 | The Big Die-Up (slower: speed 0.92)
+## 11:52 | The Big Die-Up (slower: speed 0.92)
 
-`ch09_the_big_die_up.txt` · 237 words · about 95 s
+`ch09_the_big_die_up.txt` · 232 words · about 93 s
 
 [serious] By the 1880s, the northern plains were crowded.
 
@@ -248,7 +250,7 @@ Count the reasons. One: too many cattle. Investors from the East, and even from 
 
 Two: the summer of 1886 was hot and dry. The grass came in thin. The cattle went into the fall already weak.
 
-Three: the winter. Storm after storm. Then, in January 1887, a blizzard that lasted for days. Temperatures fell far below zero. The snow froze into a hard crust, and the cattle couldn't dig through it to the grass underneath.
+Three: the winter. Storm after storm. Then, in January 1887, a blizzard that lasted for days. The snow froze into a hard crust, and the cattle couldn't dig through it to the grass underneath.
 
 They drifted with the wind, until they hit a fence, or a ravine. And they stopped.
 
@@ -266,17 +268,15 @@ So, let's go back to the question.
 
 ---
 
-## 13:11 | The Last of the Five Thousand (the answer)
+## 13:26 | The Last of the Five Thousand (the answer)
 
-`ch10_the_last_of_the_5000.txt` · 209 words · about 76 s
+`ch10_the_last_of_the_5000.txt` · 204 words · about 74 s
 
 So who actually got rich?
 
 The men with herds, and the men with money behind them. McCoy's cattle trade made fortunes in Kansas. Goodnight, with money from a British investor, built one of the biggest ranches in Texas. The Homestake made its owners rich for more than a century.
 
 The cowboys got wages. Some, especially Black and Mexican cowboys, found more freedom on the trail than they'd had anywhere else, until they rode into town.
-
-The miners got wages too.
 
 And the Lakota got a treaty that lasted until someone found gold under it.
 
@@ -300,20 +300,20 @@ So look at the steer again.
 | 2 | Title *Waiting for a Chinook*; also *The Last of the 5000* | ✓ | Montana Historical Society; Gilcrease transcription. On screen: "LAST OF 5000" as Russell lettered it, if the scan shows it. |
 | 3 | About 5 million longhorns in Texas after the war | ✓ ("by most estimates") | Common estimate (Texas State Historical Association range 3.5–6 million). |
 | 4 | $4 in Texas, about $40 up north | ✓ | HistoryNet; Encyclopedia.com (some sources give $1–4 Texas, $30–40 north). |
-| 5 | McCoy, Abilene, 1867; "about a dozen log huts"; ~35,000 head the first season | ✓ | McCoy, *Historic Sketches of the Cattle Trade* (1874): "a very small, dead place, consisting of about one dozen log huts." Kansas Historical Society. The line was then the Union Pacific Eastern Division (Kansas Pacific from 1869), so narration says "one of the rail lines." |
+| 5 | McCoy, Abilene, 1867; "about a dozen log huts" | ✓ | McCoy, *Historic Sketches of the Cattle Trade* (1874): "a very small, dead place, consisting of about one dozen log huts." Kansas Historical Society. The line was then the Union Pacific Eastern Division (Kansas Pacific from 1869), so narration says "one of the rail lines." |
 | 6 | Trails: Chisholm to Abilene; Western to Dodge City; Goodnight-Loving west then north up the Pecos | ✓ | Standard; map shows Shawnee too, unspoken. |
 | 7 | Drive: ~2,500 head, 10–12 men, 10–15 mi/day, 2–3 months | ✓ (typical) | TSHA "Trail Drives of Texas Cattle." |
 | 8 | Cherokee and other nations charged tolls, sometimes in cattle | ✓ | Cherokee Nation grazing/transit fees on the Chisholm Trail (TSHA; Oklahoma Historical Society). |
 | 9 | 5 to 10 million cattle north, late 1860s–mid-1880s | ✓ (range given) | Estimates vary by source. |
-| 10 | Abilene's farmers asked the Texans to go elsewhere | ✓ | 1872 notice from Dickinson County farmers asking drovers not to return. |
 | 11 | Goodnight and Loving, 1866, ~2,000 cattle, Fort Sumner; sold for about $12,000 in gold | ✓ | Legends of America; True West ("150 years on the Goodnight-Loving Trail"). |
 | 12 | ~8,000 Diné and hundreds of Mescalero Apache held at Bosque Redondo; the Long Walk | ✓ | Bosque Redondo Memorial / NPS (peak about 8,500–9,000 Diné; ~500 Mescalero). |
 | 13 | Goodnight "usually credited with" the chuck wagon | ✓ hedged | TSHA "Chuck Wagon." |
-| 14 | Loving wounded by Comanches 1867, died at Fort Sumner; Goodnight carried his body home | ✓ | TSHA "Loving, Oliver"; reburied at Weatherford, Texas, 1868. |
+| 14 | Why the Diné were there: generations of raiding both ways (livestock and captives); in 1863 the Army's commander in New Mexico (Gen. James Carleton, not named) wanted them off land he believed held gold and made into farmers on a far reservation; Kit Carson's troops burned fields, cut orchards, killed sheep until starving families surrendered (winter 1863–64); the Long Walk, about 300 miles; hundreds died on the way | ✓ | NM History ("Navajo Long Walk to Bosque Redondo"); NM History Museum blog; Long Walk accounts give 250–350 miles (300 most common). Deaths on the walk: ~200 to several hundred; 2,500–3,500 over the whole internment (1864–68), so "hundreds died on the way" is the safe line. Carleton's gold belief is in his own letters. The 1868 treaty that sent them home is Ep 4's. |
 | 15 | Cowboys $25–40 a month | ✓ | Typical trail wages (cooks and bosses more). |
 | 16 | About one in four Texas trail cowboys Black | ✓ ("historians estimate") | Smithsonian; the estimate is soft and is said as one. |
 | 17 | 3,000 to 10,000 enslaved people escaped south to Mexico | ✓ (range) | Low end: the best-known published estimate (3,000–5,000); high end: other researchers (5,000–10,000). |
-| 18 | Nat Love, "Deadwood Dick," memoir with tall tales | ✓ | *The Life and Adventures of Nat Love* (1907). |
+| 18a | Bose Ikard: born enslaved; rode with Loving, then Goodnight; fought Comanches, rode out stampedes; Goodnight: "farther than any living man… my detective, banker, and everything else" | ✓ | National Cowboy Museum (Great Westerners); Legends of America; BlackPast. The epitaph Goodnight wrote: "…participated in three engagements with Comanches. Splendid behavior." Birth year 1843–47 in sources (not said). |
+| 18b | Bass Reeves: enslaved in Texas, escaped to Indian Territory, learned its languages (Creek, Seminole); 1875 deputy U.S. marshal, one of the first Black deputies west of the Mississippi | ✓ hedged ("one of the first") | NPS Fort Smith; True West. His escape story and the "3,000 arrests" come from popular accounts, so neither is narrated as fact (the arrests aren't used). Nat Love cut (the user's call). |
 | 19 | Vaquero words: lariat/la reata, chaps/chaparreras, ranch/rancho, rodeo, bronco | ✓ | Standard etymologies. |
 | 20 | 1868 Fort Laramie Treaty: Black Hills; "absolute and undisturbed use and occupation" | ✓ | Treaty text, Article 2 (National Archives). On screen: DocLift on the real page. |
 | 21 | 1874 Custer expedition, about 1,000 men, officially scouting a fort site; two miners | ✓ | ~1,000 men incl. two practical miners (Horatio Ross, William McKay); ND/SD history pages. |
@@ -331,4 +331,4 @@ So look at the steer again.
 
 **Still to verify before voicing:** #31's exact date and wording (Roosevelt Center letter); a public-domain scan of Russell's painting
 with its lettering (Montana Historical Society). Pronunciations to test: *Diné* (dih-NEH), *Bosque Redondo* (BOHS-kay reh-DOHN-doh),
-*chaparreras* (chah-pah-REH-rahs), *la reata*, *Mescalero*, *Glidden*, *DeKalb*.
+*chaparreras* (chah-pah-REH-rahs), *la reata*, *Mescalero*, *Glidden*, *DeKalb*, *Ikard* (EYE-kurd).
