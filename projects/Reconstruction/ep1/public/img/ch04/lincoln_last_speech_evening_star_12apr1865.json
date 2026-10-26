@@ -1,0 +1,47 @@
+{
+ "size": [
+  1249,
+  763
+ ],
+ "paper": "Evening star (Washington, D.C.), April 12, 1865",
+ "url": "https://www.loc.gov/resource/sn83045462/1865-04-12/ed-1/",
+ "sp": "1",
+ "phrases": {
+  "very intelligent": [
+   [
+    287.0,
+    390.0,
+    331.5,
+    56.2
+   ]
+  ],
+  "serve our cause as soldiers": [
+   [
+    856.2,
+    394.2,
+    239.0,
+    45.8
+   ],
+   [
+    154.8,
+    428.2,
+    437.8,
+    47.0
+   ]
+  ],
+  "elective franchise": [
+   [
+    851.0,
+    288.8,
+    249.2,
+    47.2
+   ],
+   [
+    159.5,
+    322.2,
+    205.5,
+    45.8
+   ]
+  ]
+ }
+}

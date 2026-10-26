@@ -28,6 +28,13 @@ python3 tools/find_images.py get loc:2003656574 public/img/ch10/ross.jpg   # dow
   `Tag` and the description's "Sources & credits" line.
 - Folder per chapter: `public/img/chNN/`. Name files for what they show (`ross_lithograph_1843.jpg`).
 - Get more than you need: an alternate per key moment and a strong image for each person named.
+- **Newspapers and printed laws** (Library of Congress, Chronicling America, with word-level OCR boxes):
+  `tools/phrase_find.py <page-url> --sp N --phrase "..." --out public/img/chNN/x` cuts the page region and writes a box per
+  printed line of each phrase (for `Swipe` / `Spot`); `tools/word_hunt.py --word vagrant --states ... --out DIR` finds one
+  word across many papers and crops it dead centre (for `WordRun`). loc.gov rate-limits: keep 5 s between requests.
+- **Treatments:** `tools/crease.py` turns a photo into a frameless, creased old print (the board's look);
+  `tools/halftone.py` a newsprint halftone; `tools/silhouette.py` a cut-paper silhouette traced from a real portrait
+  (an unknown sitter stands in for "who?"); `tools/distress.py` a wear mask for the worn logo.
 - The 1836 Mitchell map ships with the template (`public/img/maps/`). For other eras, find a period wall map of
   the right decade, at least 4000 px wide, and read new `PLACES` pixel positions off it.
 

@@ -1,0 +1,41 @@
+{
+ "size": [
+  1756,
+  3000
+ ],
+ "source": "mississippiin18701unit hOCR page 27 (scan page n27 minus 1)",
+ "phrases": {
+  "ASSASSINATION OF SENATOR CALDWELL": [
+   [
+    385.8,
+    460.0,
+    927.4,
+    29.0
+   ]
+  ],
+  "An equally horrid crime was the murder of Senator Caldwell": [
+   [
+    101.4,
+    510.7,
+    1545.9,
+    45.3
+   ]
+  ],
+  "When did he die?": [
+   [
+    91.5,
+    980.7,
+    1555.9,
+    38.0
+   ]
+  ],
+  "Thursday night, in the Christmas.": [
+   [
+    91.5,
+    980.7,
+    1555.9,
+    38.0
+   ]
+  ]
+ }
+}

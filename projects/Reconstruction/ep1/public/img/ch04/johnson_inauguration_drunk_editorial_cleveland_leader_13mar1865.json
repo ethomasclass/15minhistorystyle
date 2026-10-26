@@ -1,0 +1,27 @@
+{
+ "size": [
+  805,
+  3000
+ ],
+ "paper": "Cleveland morning leader (Cleveland [Ohio]), March 13, 1865",
+ "url": "https://www.loc.gov/resource/sn83035143/1865-03-13/ed-1/",
+ "sp": "2",
+ "phrases": {
+  "intoxicated": [
+   [
+    313.4,
+    2789.0,
+    190.8,
+    24.5
+   ]
+  ],
+  "Vice President": [
+   [
+    310.8,
+    186.6,
+    194.3,
+    24.5
+   ]
+  ]
+ }
+}

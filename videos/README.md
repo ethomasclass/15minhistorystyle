@@ -89,7 +89,11 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
 **Picture**
+- **Photos have no frames and always look worn** (Oct 2026): no white borders or card mounts; every archival photo is cropped out of its mount and shown as a creased old print (fold lines, a web of fine cracks, chipped and torn edges with white paper fibres, faint stains) with `tools/crease.py` (in `projects/Reconstruction/tests/tools/` until it moves into the template).
+- **The collage board in every video** (from the Reconstruction series, Oct 2026): each chapter pins one piece to a board on the desk, teal yarn with *but* / *therefore* tags ties causes to effects, and the ending pulls back to the whole board. You chose the board (cut-paper collage in the channel's colours, with the tilted desk for moving to the maps) over the block-in-the-wall "chunk wall". No case-file or crime language on it. Spec: [`../techniques/collage_board.md`](../techniques/collage_board.md).
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
+- **Notes on paper slips, inside the safe margin** (Reconstruction, Oct 2026): handwriting over a busy picture was hard to read, so notes sit on torn paper slips (dark ink on cream; pink for the subject). Keep titles and notes out of the outer 5% too (`SAFE=96` in the text probe).
+- **Say fractions so they can't be misheard** (Reconstruction ch06): "three-quarters of the states", not "three out of four states", which sounds like there were four.
 - Big titles stay on screen for at least 2 seconds.
 - **Gentle transitions** (American West Ep 1, Oct 2026): no whip pans. A "whip" shot change is a soft drift (a ~half-second
   crossfade with a 70 px slide and light blur), a "cut" is a 6-frame dissolve (`Shots` in `src/previews/fx.tsx`); the whip sound
@@ -190,6 +194,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   quieter, so every take is levelled), music bed **~13 LU under the voice** (set per cue from its measured loudness, `src/kit/levels.ts`
   `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (marker tick
   0.2 as in Black Sox, whooshes and stamps a few dB softer). Master to -14 LUFS.
+- **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.
 
 **Packaging**

@@ -1,0 +1,45 @@
+{
+ "size": [
+  1756,
+  3000
+ ],
+ "source": "mississippiin18701unit hOCR page 558 (scan page n558 minus 1)",
+ "phrases": {
+  "wanted to die in the open air, and did not want to die like a dog closed up": [
+   [
+    108.7,
+    270.8,
+    1576.7,
+    45.3
+   ],
+   [
+    109.6,
+    318.7,
+    707.3,
+    43.5
+   ]
+  ],
+  "Remember when you kill me you kill a gentleman and a brave man": [
+   [
+    113.2,
+    1283.1,
+    1575.8,
+    45.3
+   ],
+   [
+    113.2,
+    1330.2,
+    1575.8,
+    45.3
+   ]
+  ],
+  "Never say you killed a coward": [
+   [
+    113.2,
+    1330.2,
+    1575.8,
+    45.3
+   ]
+  ]
+ }
+}

@@ -68,7 +68,8 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | Component | Use | Key props |
 |---|---|---|
 | `Highlight` (Kit) | Orange torn-tape title, Abril caps | `text x y size(96) at seed rot(-2) after` |
-| `Note` (Kit) | Handwritten teal aside, writes on | `text x y size(46) rot(-4) color at dur out` |
+| `Note` (Kit) | Handwritten teal aside, writes on. Only on dark, quiet areas; over a picture use `Slip` | `text x y size(46) rot(-4) color at dur out` |
+| `Slip` (vox) | **The default note over pictures**: torn paper slip, dark ink, slaps on then writes on; `coral` for the subject | `text x y at rot(-3) size(62) coral dur` |
 | `Arrow` (Kit) | Bowed hand-drawn arrow | `x1 y1 x2 y2 bow(40) at` |
 | `Loop` (Kit) | Hand-drawn circle around something | `cx cy rx ry at seed tilt` |
 | `Tag` (Kit) | Source credit, mono caps, bottom-left | `text` (put one on every image) |
@@ -91,6 +92,10 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `Sfx` (common) | One sound effect at a frame | `at src volume` |
 | `ChapterShell` music entries (shell) | Cues per chapter; the bed lifts ×`TAIL_LIFT` (1.6) after the last word | `{src, volume, startFrom, from, to}`: `to: TM.at('word') + 6` on one cue and `from: TM.at('word') - 6` on the next hands over on a phrase |
 | `hasFile(path)` (shell) | True once an image exists in public/ | use to fall back gracefully |
+| `Sheet` + `camAt` (vox) | A document on the desk, optionally tilted back with a depth-of-field band; children in page px | `src size cam:{x y z tilt dofY dof band} offset`; keys `[frame, cam][]` |
+| `Swipe` / `Spot` (vox) | Coral highlighter along printed lines at reading speed / everything darker except the boxes (inside a `Sheet`) | `lines from to` / `size boxes at id` (boxes from `tools/phrase_find.py`) |
+| `FocusIn`, `carry`, `Tear`, `WordRun` (vox) | Rise into focus; motion carried through a cut; tear-away reveal; word match cut | `at` · `carry(f, a, b)` → x offset · `at top` · `items durs` (from `tools/word_hunt.py`) |
+| Collage board (board) | `Flat`, `Photo`, `Strip`, `Sticky`, `Stamp`, `TapeBit`, `Pin`, `Threads`, `Silhouette`, `Scrap`, `WornLogo`; motion: `Land` (drop/slap/stamp/tape/slide/fade), `APin`, `AThreads`, `BoardStage` | wrap in `<Ctx.Provider value={BRAND}>` + `<Defs />`; spec in the style repo's `techniques/collage_board.md` |
 
 More components that aren't in the template yet (documents marked in their own pixels, word-synced quotes,
 2.5D layered paintings, falling cards, a drifting desk, a 3D object, a journey map) are in the style repo's
@@ -148,8 +153,9 @@ Do all of these before sending the user anything. Each one caught real problems 
    `python3 tools/sheet.py out/sheet.jpg out/stills/ChNN_*.jpg` and look at the sheet. Pick seconds a little
    after each anchor so every write-on has finished. Look for: text over faces or other text, text running into a
    divider, arrows crossing words, titles on busy image areas, empty scenes, a tint gone flat.
-4. **Text-edge probe:** `node tools/probe_text.mjs Ch01,Ch02,... 10 2>&1 | grep -v "PROBECOUNT\|emory"`.
-   It renders every 10th frame and lists any text whose box crosses the frame edge. Fix every hit (shorter line,
+4. **Text-edge probe:** `SAFE=96 node tools/probe_text.mjs Ch01,Ch02,... 10 2>&1 | grep -v "PROBECOUNT\|emory"`.
+   It renders every 10th frame and lists any text whose box crosses the frame edge, and (with `SAFE=96`) any title or
+   note inside the outer 5%. Fix every hit (shorter line,
    smaller size, move left, `whiteSpace: 'nowrap'` plus a width check). The user noticed right-edge cut-offs in a
    480p preview, so treat any hit as a bug.
 5. **After rendering:** `python3 tools/frames_sheet.py out/ch/chNN.mp4 out/check.jpg 12 18.5 40` to look at the

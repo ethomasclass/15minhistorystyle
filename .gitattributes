@@ -5,3 +5,6 @@ projects/Dressed_To_Kill/renders/shorts/*.mp4 filter=lfs diff=lfs merge=lfs -tex
 projects/In_Their_Own_Words/renders/In_Their_Own_Words_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Forever_Free/renders/Forever_Free_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Except/renders/Except_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep1/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep2/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Reconstruction/ep3/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text

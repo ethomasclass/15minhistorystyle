@@ -1,0 +1,49 @@
+{
+ "size": [
+  2455,
+  2570
+ ],
+ "paper": "The New York herald (New York [N.Y.]), September 17, 1875",
+ "url": "https://www.loc.gov/resource/sn83030313/1875-09-17/ed-1/",
+ "sp": "3",
+ "phrases": {
+  "annual autumnal outbreaks": [
+   [
+    1900.7,
+    1038.3,
+    268.0,
+    33.7
+   ],
+   [
+    1249.3,
+    1066.0,
+    163.7,
+    35.3
+   ]
+  ],
+  "tired out": [
+   [
+    1537.0,
+    1038.3,
+    205.0,
+    33.7
+   ]
+  ],
+  "domestic violence": [
+   [
+    1246.3,
+    1927.3,
+    355.0,
+    39.7
+   ]
+  ],
+  "Pierrepont": [
+   [
+    1863.0,
+    605.7,
+    304.7,
+    51.0
+   ]
+  ]
+ }
+}

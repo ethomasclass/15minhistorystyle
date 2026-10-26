@@ -1,0 +1,55 @@
+{
+ "size": [
+  1344,
+  1647
+ ],
+ "paper": "American citizen (Canton, Miss.), November 28, 1865",
+ "url": "https://www.loc.gov/resource/sn83016736/1865-11-28/ed-1/",
+ "sp": "2",
+ "phrases": {
+  "to rent or lease any lands or tenements, except in incorporated towns or cities": [
+   [
+    403.0,
+    314.0,
+    877.0,
+    33.0
+   ],
+   [
+    70.0,
+    349.0,
+    308.0,
+    26.0
+   ]
+  ],
+  "have a lawful home or employment, and shall have written evidence thereof": [
+   [
+    420.0,
+    1483.0,
+    856.0,
+    34.0
+   ],
+   [
+    54.0,
+    1518.0,
+    242.0,
+    30.0
+   ]
+  ],
+  "second Monday of January": [
+   [
+    203.0,
+    1448.0,
+    441.0,
+    33.0
+   ]
+  ],
+  "Be it enacted by the Legislature of the State of Mississippi": [
+   [
+    298.0,
+    100.0,
+    907.0,
+    36.0
+   ]
+  ]
+ }
+}
