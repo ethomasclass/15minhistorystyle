@@ -25,7 +25,7 @@ import {bed} from '../kit/levels';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch07_who_got_the_gold.words.json';
 import {clamp} from '../lib/anim';
-import {JF, Note, useGFrame, useHand, usePal} from '../kit/Kit';
+import {JF, Loop, Note, useGFrame, useHand, usePal} from '../kit/Kit';
 import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {keys, PhotoCam, ScrimTag, shake, SlapTitle, zkeys} from '../previews/fx';
@@ -43,21 +43,22 @@ const at = T.at;
 const END = T.frames + 60;
 
 const I = {
-  placer: 'img/ch07/placer_miners_sluice_jackson_c1872.jpg',
+  placer: 'img/ch07/remington_miners_prospecting_1880s.jpg',
   mills: 'img/ch07/homestake_mines_mills_lead_grabill_1889.jpg',
   hearst: 'img/ch07/b_hearst_1891.jpg',
   homestake: 'img/ch07/b_homestake_open_cut_1888.jpg',
 };
+const PLACER_CROP: [number, number, number, number] = [190, 90, 1380, 990];
 /** The print inside Grabill's cabinet-card mount. */
 const HS_BOX: [number, number, number, number] = [70, 130, 1860, 2440];
 const Z = {
-  placer: [1280, 1016] as [number, number],
+  placer: [1454, 1150] as [number, number],
   mills: [3000, 2457] as [number, number],
   hearst: [1920, 2593] as [number, number],
   homestake: [1920, 2738] as [number, number],
 };
 const TAG = {
-  placer: 'W. H. Jackson, placer mining with a sluice, c. 1872 (U.S. Geological Survey of the Territories) · Library of Congress',
+  placer: 'Frederic Remington, Miners prospecting, 1880s · Library of Congress',
   mills: 'J. C. H. Grabill, Lead City: the great Homestake mines and mills, 1889 · Library of Congress',
   hearst: 'George Hearst, Edouart & Cobb, 1891 · Wikimedia Commons',
   homestake: 'J. C. H. Grabill, Open cut in the great Homestake mine, at Lead City, Dakota, 1888 · Library of Congress (via Commons)',
@@ -205,22 +206,24 @@ const Open: React.FC = () => {
   );
 };
 
-// B · step one: Jackson's placer miners at their sluice (print on the desk) and the gold pan (coral)
+// B · step one: Remington's miners prospecting: a man with a pan at the creek (print on the desk, the pan looped)
 const Pan: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('Step one') - 1;
   const b = at('The gold is') - 1;
   return (
-    <DeskShot tilt={keys(f, [[a, 22], [b, 14]])} z={zkeys(f, [[a, 0.92], [b, 1.02]])} x={keys(f, [[a, -20], [b, 20]])} hits={[a + 5, at('pan') + 1]}
+    <DeskShot tilt={keys(f, [[a, 22], [b, 14]])} z={zkeys(f, [[a, 0.92], [b, 1.04]])} x={keys(f, [[a, -20], [b, 20]])} hits={[a + 5]}
       over={<>
         <StepBadge n={1} of={3} x={110} y={90} at={at('one') - 1} />
-        <Lines x={1180} y={140} size={60} rows={[{text: 'a man with a pan', at: at('man') - 2}, {text: 'in a creek', at: at('creek') - 3}]} />
+        <Lines x={120} y={330} size={66} rows={[{text: 'a man with a pan', at: at('man') - 2}, {text: 'in a creek', at: at('creek') - 3}]} />
         <ScrimTag text={TAG.placer} />
       </>}>
-      <Print src={I.placer} size={Z.placer} x={300} y={300} w={1000} crop={[105, 175, 1175, 825]} at={a + 2} rot={-2} seed={72} />
-      <Float x={1240} y={560} w={560} hgt={420} h={22} at={at('pan') - 1} rot={-8} seed={71}>
-        <Prop src={PROP('p6_gold_pan')} m={M7.p6_gold_pan} x={0} y={0} w={540} at={-99} tint={0.3} traceAt={at('pan') + 2} />
-      </Float>
+      <Print src={I.placer} size={Z.placer} x={820} y={140} w={1100} crop={PLACER_CROP} at={a + 2} rot={2} seed={72}>
+        {(S) => {
+          const [px, py] = S(480, 640);
+          return <div style={{position: 'absolute', inset: 0}}><Loop cx={px} cy={py} rx={120} ry={80} at={at('pan') - 2} seed={72} tilt={-8} width={6} /></div>;
+        }}
+      </Print>
     </DeskShot>
   );
 };

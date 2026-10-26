@@ -55,6 +55,7 @@ const I = {
   harpers: 'img/ch09/cattle_in_a_blizzard_harpers_1886.jpg',
   hay: 'img/ch09/derrick_fork_stacking_hay_watkins_1880s.jpg',
   blizzard: 'img/props/L9_blizzard.jpg',
+  drift: 'img/ch09/remington_drifting_before_the_storm_c1904.jpg',
   range: 'img/props/L8_fenced_range.jpg',
 };
 const Z = {
@@ -63,12 +64,14 @@ const Z = {
   harpers: [3000, 2425] as [number, number],
   hay: [1536, 1190] as [number, number],
   plate: [1920, 1080] as [number, number],
+  drift: [3000, 2409] as [number, number],
 };
 const TAG = {
   paint: 'C. M. Russell, Waiting for a Chinook, 1886 (1907 postcard) · Internet Archive',
   roosevelt: 'Theodore Roosevelt in hunting dress, 1885, G. G. Bain · Library of Congress (via Wikimedia Commons)',
   harpers: "Cattle in a blizzard on the plains, C. Graham after H. Worrall, Harper's Weekly, 1886 · Library of Congress",
   hay: 'C. E. Watkins, Derrick fork stacking hay, Kerr Ranch, 1880s · Library of Congress',
+  drift: 'Frederic Remington, Drifting before the storm, c. 1904 · Library of Congress',
   map: 'Map: drawn for the series; state lines today\'s, for reference',
 };
 /** The painting in black and white, a little warm (as ch01). */
@@ -340,9 +343,22 @@ const Crust: React.FC = () => {
 
 // ───────────────────────── J · drifted into a fence, and stopped ─────────────────────────
 
-const Drift: React.FC = () => {
+const DRIFT_BOX: [number, number, number, number] = [140, 330, 2920, 2140];
+const DriftPainting: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('They drifted') - 1;
+  const b = at('until') - 1;
+  const c = insideBox(DRIFT_BOX, keys(f, [[a, 1300], [b, 1050]]), keys(f, [[a, 1200], [b, 1150]]), zkeys(f, [[a, 0.75], [b, 0.82]]));
+  return (
+    <AbsoluteFill>
+      <PhotoCam src={I.drift} size={Z.drift} cx={c.cx} cy={c.cy} s={c.s} bw="grayscale(1) contrast(1.2) brightness(0.92)" />
+      <Note text="they drifted with the wind" x={1080} y={880} size={56} rot={-3} at={at('drifted') - 2} />
+      <ScrimTag text={TAG.drift} x={34} y={24} />
+    </AbsoluteFill>
+  );
+};
+const Drift: React.FC = () => {
+  const a = at('until') - 1;
   const b = at('In the spring') - 1;
   return (
     <AbsoluteFill>
@@ -351,8 +367,7 @@ const Drift: React.FC = () => {
           <Prop src={PROP('p9_post_drift')} m={M9.p9_post_drift} x={0} y={0} w={880} at={-99} filter={PROPF_QUIET} />
         </Float>
       </DeskCam>
-      {[0, 1, 2, 3].map((i) => <Wire key={i} pts={[[150, 300 + i * 120], [520 + i * 30, 330 + i * 120]]} at={at('wind') - 4 + i * 2} width={4} />)}
-      <Note text="they drifted with the wind" x={130} y={160} size={56} rot={-3} at={at('drifted') - 2} />
+      {[0, 1, 2, 3].map((i) => <Wire key={i} pts={[[150, 300 + i * 120], [520 + i * 30, 330 + i * 120]]} at={a + 2 + i * 2} width={4} />)}
       <Lines x={150} y={790} size={56} gap={84} rows={[{text: 'until they hit a fence,', at: at('fence') - 3}, {text: 'or a ravine.', at: at('ravine') - 3}]} />
     </AbsoluteFill>
   );
@@ -579,7 +594,8 @@ const SHOTS: [number, React.ReactNode, ('whip' | 'cut')?][] = [
   [c('Three'), <Reasons upto={3} a={c('Three')} b={c('Then in January')} snow />, 'whip'],
   [c('Then in January'), <Blizzard />, 'cut'],
   [c('The snow froze'), <Crust />, 'whip'],
-  [c('They drifted'), <Drift />, 'cut'],
+  [c('They drifted'), <DriftPainting />, 'cut'],
+  [c('until'), <Drift />, 'cut'],
   [c('In the spring'), <Dead />, 'whip'],
   [c('Cowboys called'), <DieUp />, 'cut'],
   [c('Nobody'), <Nobody />, 'cut'],

@@ -19,7 +19,7 @@ import {Big, Counter, DeskCam, Float, Label, Lines, Print, Prop, Sounds, type Sf
 import {Hand, MPin, MRoute, WestMap} from '../kit/ch01_extra';
 import {MTrail, TLINES, TPL} from '../kit/trails';
 import {WShots} from '../kit/ch07_extra';
-import {CheckList, Four, MRiver, MStandLabel, MState, TornTag} from '../kit/ch456_extra';
+import {CheckList, Four, MLine, MStandLabel, MState, TornTag} from '../kit/ch456_extra';
 import {M5} from '../masks_ch05';
 
 const N = words as Narration;
@@ -330,8 +330,8 @@ const South: React.FC<{stage: 0 | 1 | 2}> = ({stage}) => {
         {(api) => <>
           <MState api={api} name="Texas" at={stage === 0 ? a + 4 : -99} k={stage === 0 ? 1 : 0.5} />
           <MStandLabel api={api} at={[2560, 2180]} show={stage === 0 ? a + 8 : -99} text="Texas" color="#bfe3ea" size={30} />
-          {stage >= 1 && <MRoute api={api} pts={north} at={at('Not north') - 4} dur={8} color="rgba(244,239,230,0.55)" width={6} dashed />}
-          {stage >= 1 && <MTrail api={api} pts={TLINES.southToMexico} at={stage === 1 ? at('South') - 2 : -99} dur={at('Rio') - at('South') + 8} color={CORAL} width={11} />}
+          {stage >= 1 && <MLine api={api} pts={north} at={at('Not north') - 4} dur={8} color="rgba(244,239,230,0.55)" width={6} />}
+          {stage >= 1 && <MLine api={api} pts={TLINES.southToMexico} at={stage === 1 ? at('South') - 2 : -99} dur={at('Rio') - at('South') + 8} color={CORAL} width={11} />}
           {stage >= 1 && <MStandLabel api={api} at={[2470, 2400]} show={stage === 1 ? at('Rio') - 2 : -99} text="Rio Grande" />}
           {stage >= 1 && <MStandLabel api={api} at={[2360, 2560]} show={stage === 1 ? at('Mexico') - 2 : -99} text="Mexico" color={WHITE} size={34} />}
           {stage >= 1 && <MPin api={api} at={TPL.piedrasNegras} show={stage === 1 ? at('Mexico') : -99} label="" color={CORAL} />}
@@ -369,7 +369,7 @@ const North: React.FC = () => {
           <MState api={api} name="Texas" at={-99} k={0.35} />
           <MState api={api} name="Oklahoma" at={at('Indian') - 4} />
           <MStandLabel api={api} at={[2620, 1700]} show={at('Indian') - 2} text="Indian Territory" color={WHITE} size={28} />
-          <MTrail api={api} pts={[[2752.8, 2272.9], [2800, 2050], [2880, 1820], [2930, 1720]]} at={at('ran north') - 2} dur={at('Indian') - at('ran north') + 10} color={CORAL} width={10} />
+          <MLine api={api} pts={[[2752.8, 2272.9], [2800, 2050], [2880, 1820], [2930, 1720]]} at={at('ran north') - 2} dur={at('Indian') - at('ran north') + 10} color={CORAL} width={10} />
           <MPin api={api} at={TPL.fortSmith} show={at('learned') - 2} label="Fort Smith" side="r" size={44} color={WHITE} />
         </>}
       </WestMap>

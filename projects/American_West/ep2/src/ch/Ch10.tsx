@@ -158,7 +158,7 @@ const Wages: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 20, 1.02, 0, 0, 2], [b, 26, 0.94, 0, 0, 0]]}>
-        <Float x={1000} y={240} w={700} hgt={760} h={14} at={a + 2} rot={-4} seed={105}>
+        <Float x={1250} y={240} w={700} hgt={760} h={14} at={a + 2} rot={-4} seed={105}>
           <Prop src={PROP('p3_saddle')} m={M10.p3_saddle} x={0} y={0} w={640} at={-99} />
         </Float>
       </DeskCam>
@@ -168,10 +168,10 @@ const Wages: React.FC = () => {
   );
 };
 const Ikard: React.FC = () => (
-  <Card src={I.ikard} size={Z.ikard} crop={[60, 40, 760, 900]} a={at('Some') - 1} b={at('And the Lakota') - 1} tag={TAG.ikard} w={600}>
+  <Card src={I.ikard} size={Z.ikard} crop={[60, 40, 760, 900]} a={at('Some') - 1} b={at('And the Lakota') - 1} tag={TAG.ikard} w={540} x={1260}>
     <Label text="Bose Ikard, trail hand for Goodnight and Loving" x={130} y={170} size={24} at={at('Some') + 4} />
     <Note text="especially Black and Mexican cowboys" x={130} y={250} size={50} rot={-3} at={at('Black') - 3} />
-    <Hand parts={[['more '], ['freedom', true], [' on the trail']]} x={150} y={390} size={80} at={at('freedom') - 4} />
+    <Hand parts={[['more '], ['freedom', true], [' on the trail']]} x={150} y={390} size={68} at={at('freedom') - 4} />
     <Note text="…until they rode into town" x={170} y={560} size={56} rot={-3} color="#f4efe6" at={at('until') - 2} />
   </Card>
 );
@@ -188,8 +188,8 @@ const Treaty: React.FC = () => {
         <Hand parts={[['someone found '], ['gold', true], [' under it.']]} x={130} y={860} size={84} at={at('someone') - 2} />
         <ScrimTag text={TAG.treaty} />
       </>}>
-      <Print src={I.treaty} size={Z.treaty} x={900} y={-120} w={760} crop={[200, 1700, 3200, 4400]} at={a + 2} rot={-2} seed={106} />
-      <Float x={1160} y={400} w={300} hgt={330} h={30} at={d} rot={-12} seed={107}>
+      <Print src={I.treaty} size={Z.treaty} x={1000} y={20} w={680} crop={[200, 1700, 3200, 4400]} at={a + 2} rot={-2} seed={106} />
+      <Float x={1220} y={460} w={300} hgt={330} h={30} at={d} rot={-12} seed={107}>
         <Prop src={PROP('p6_nugget')} m={M10.p6_nugget} x={0} y={0} w={280} at={-99} tint={0.3} traceAt={d + 5} />
       </Float>
     </DeskShot>
@@ -205,11 +205,11 @@ const LedgerCard: React.FC<{x: number; y: number; w: number; at: number; rows: C
   const hand = useHand();
   if (!d.on) return null;
   const heads = ['THE PROMISE', 'WHO GOT IT', "WHO DIDN'T"];
-  const cols = [0, 0.31, 0.57];
+  const cols = [0, 0.27, 0.53];
   const mx = 130;
   const colX = cols.map((c) => mx + c * (w - mx - 30));
   const headY = 118;
-  const rowH = 230;
+  const rowH = 262;
   const empty = 2;
   const emptyH = 56;
   const h = headY + 62 + rowH * 2 + empty * emptyH + 30;
@@ -231,7 +231,7 @@ const LedgerCard: React.FC<{x: number; y: number; w: number; at: number; rows: C
       {rows.map((cells, ri) => cells.map((c, ci) => {
         if (g < c.at) return null;
         const p = interpolate(g, [c.at, c.at + 14], [0, 1], clamp);
-        return <div key={`${ri}${ci}`} style={{position: 'absolute', left: colX[ci], top: lineY(ri) + 18, fontFamily: hand.family, fontSize: 34 * hand.scale, lineHeight: 1.04,
+        return <div key={`${ri}${ci}`} style={{position: 'absolute', left: colX[ci], top: lineY(ri) + 18, fontFamily: hand.family, fontSize: 29 * hand.scale, lineHeight: 1.05,
           color: c.coral ? pal.subject : pal.mark, opacity: c.dim ? 0.62 : 1, whiteSpace: 'pre', clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`,
           textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>{c.text}</div>;
       }))}
@@ -252,7 +252,7 @@ const ROWS = (): Cell[][] => [
     {text: 'most cowboys and miners,\nsmall ranchers\nfenced out,\nthe Lakota, whose\nland was mined', at: at('Most') - 2, coral: true},
   ],
 ];
-const LEDGER = {x: 110, y: 120, w: 1700};
+const LEDGER = {x: 110, y: 110, w: 1700};
 const LedgerCam: React.FC<{z: number; cx: number; cy: number}> = ({z, cx, cy}) => (
   <AbsoluteFill style={{overflow: 'hidden'}}>
     <DarkPaper />
@@ -272,25 +272,25 @@ const LedgerPromise: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('The promise') - 1;
   const b = at('Who got') - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 1.25]])} cx={keys(f, [[a, 760], [b, 700]])} cy={keys(f, [[a, 580], [b, 620]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.0], [b, 1.08]])} cx={keys(f, [[a, 960], [b, 920]])} cy={keys(f, [[a, 540], [b, 600]])} />;
 };
 const LedgerGot: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('Who got') - 1;
   const b = at("Who didn't") - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.25], [b, 1.3]])} cx={keys(f, [[a, 900], [b, 1040]])} cy={keys(f, [[a, 640], [b, 660]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.08], [b, 1.1]])} cx={keys(f, [[a, 920], [b, 980]])} cy={keys(f, [[a, 600], [b, 620]])} />;
 };
 const LedgerDidnt: React.FC = () => {
   const f = useCurrentFrame();
   const a = at("Who didn't") - 1;
   const b = at('and the Lakota', 2) - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.3], [b, 1.32]])} cx={keys(f, [[a, 1260], [b, 1360]])} cy={keys(f, [[a, 650], [b, 680]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 1.12]])} cx={keys(f, [[a, 980], [b, 1000]])} cy={keys(f, [[a, 620], [b, 640]])} />;
 };
 const LedgerAll: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('and the Lakota', 2) - 1;
   const b = at('So look') - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.14], [b, 0.96]])} cx={keys(f, [[a, 1200], [b, 960]])} cy={keys(f, [[a, 640], [b, 560]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 0.95]])} cx={keys(f, [[a, 990], [b, 960]])} cy={keys(f, [[a, 620], [b, 540]])} />;
 };
 
 // N · look at the steer again

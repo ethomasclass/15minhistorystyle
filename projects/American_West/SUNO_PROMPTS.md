@@ -194,25 +194,31 @@ rush and the hollow as **two separate songs**; I join them with `tools/collapse.
 the hollow), placed so the stop lands exactly on "Just underground." Same method as `aw_legend_sours`.
 
 **8a. `aw_boomtown_rush.mp3`** · *Length:* **at least 2:15**, no ending needed (I cut it)
+(v2: the first take came out modern, with a drum kit and beats. This version is acoustic chamber music with period instruments only, and
+the rhythm comes from the strings and piano, not drums.)
 
 ```
-1870s mining boomtown gold rush, restless excited crowded energy that never lets up, an upright saloon piano slightly out of tune playing a busy repeating figure, pizzicato strings scurrying, clattering wooden percussion like wagons and boots on boardwalks, quick fiddle runs, the feeling of a crowd pouring into a camp, building and building, no slow section, no ending, 126 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental
+acoustic period film score for a documentary about an 1876 gold rush, played by a small chamber ensemble on 19th-century instruments only: a slightly out-of-tune upright parlor piano playing a busy restless figure, string quartet playing fast scurrying pizzicato and short spiccato, a solo fiddle with quick folk runs, a concertina, light wooden taps and spoons for rhythm, no drum kit, acoustic and dry, crowded and feverish like a camp filling with prospectors, keeps building, no slow section, 120 BPM, 2/4 feel, A minor; documentary, restrained, space for narrator, instrumental
 ```
 
 *Lyrics box (structure tags only):*
 
 ```
 [Instrumental]
-[Intro: busy saloon piano figure, alone]
-[Verse: pizzicato strings scurry in, wooden percussion]
-[Build: fiddle runs, more crowded]
-[Main: feverish, crowded, restless]
-[Build: everything at once, still rising]
+[Intro: busy parlor piano figure, alone, acoustic]
+[Verse: string pizzicato scurries in, wooden taps]
+[Build: fiddle runs, concertina, more crowded]
+[Main: feverish chamber ensemble, restless]
+[Build: all the acoustic instruments at once, still rising]
 [Main: feverish, crowded, restless]
 [Build: still rising, no letup]
 ```
 
-*Exclude styles (add to the usual list):* `slow, ballad, calm, ambient, fade out`
+*Exclude styles (paste this instead of the usual list for 8a):*
+
+```
+drum kit, drums, snare, kick drum, hi-hat, drum machine, 808, beat, trap, hip hop, EDM, electronic, synth, pad, bass guitar, electric guitar, distortion, modern production, cinematic trailer, epic, braam, lo-fi, pop, rock, vocals, choir, humming, whistling, banjo, slow, ballad, fade out
+```
 
 **8b. `aw_boomtown_hollow.mp3`** · *Length:* **at least 1:00**
 

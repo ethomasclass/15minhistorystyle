@@ -17,10 +17,10 @@ import {bed} from '../kit/levels';
 import {CircleMount} from '../samples/kit';
 import {keys, Lift, ScrimTag, shake, SlapTitle, zkeys} from '../previews/fx';
 import {Big, Counter, DeskCam, Float, Label, Lines, Print, Prop, Sounds, type SfxRow, Stage, Upright} from '../kit/ch04_extra';
-import {Hand, MPin, MRegion, MRoute, WestMap} from '../kit/ch01_extra';
+import {Hand, MPin, MRegion, WestMap} from '../kit/ch01_extra';
 import {MHerd, MTrail, TLINES, TPL} from '../kit/trails';
 import {M4} from '../masks_ch04';
-import {MRiver, MStandLabel, Quiet} from '../kit/ch456_extra';
+import {MLine, MRiver, MStandLabel, Quiet} from '../kit/ch456_extra';
 import {WShots} from '../kit/ch07_extra';
 
 const N = words as Narration;
@@ -262,7 +262,7 @@ const Plan: React.FC<{far: boolean}> = ({far}) => {
             <MRegion api={api} pts={DINE} at={far ? -99 : a + 4} />
             <MStandLabel api={api} at={[1640, 1700]} show={far ? -99 : a + 8} text="Diné homeland" color={BONE} />
             {far && <>
-              <MRoute api={api} pts={[[1760, 1720], [1960, 1800], [2152.2, 1858.6]]} at={at('reservation') - 4} dur={14} color={BONE} width={5} dashed opacity={0.85} />
+              <MLine api={api} pts={[[1760, 1720], [1960, 1800], [2152.2, 1858.6]]} at={at('reservation') - 4} dur={14} color={BONE} width={5} opacity={0.85} />
               <MPin api={api} at={TPL.fortSumner} show={at('reservation') + 6} label="a reservation" sub="BESIDE FORT SUMNER" side="r" size={50} />
             </>}
           </>}

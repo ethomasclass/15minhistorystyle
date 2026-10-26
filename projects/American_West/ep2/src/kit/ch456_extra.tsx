@@ -20,7 +20,7 @@ export const MStandLabel: React.FC<{api: WApi; at: number[]; show: number; text:
   return (
     <div style={{position: 'absolute', left: p[0], top: p[1], width: 0, height: 0, transformStyle: 'preserve-3d', transformOrigin: '0 0',
       transform: `translateZ(3px) rotateZ(${-api.cam.rot}deg) rotateX(${-api.cam.tilt}deg) scale(${1 / api.cam.z})`}}>
-      <div style={{position: 'absolute', left: 0, top: -size * 0.6, fontFamily: JF.mono, fontSize: size, letterSpacing: 3, color: color ?? '#bfe3ea', whiteSpace: 'nowrap', textTransform: 'uppercase',
+      <div style={{position: 'absolute', left: 0, top: -size * 1.6, fontFamily: JF.mono, fontSize: size, letterSpacing: 3, color: color ?? '#bfe3ea', whiteSpace: 'nowrap', textTransform: 'uppercase',
         opacity: interpolate(g, [show, show + 6], [0, 1], clamp), textShadow: OUTLINE}}>{text}</div>
     </div>
   );
@@ -139,5 +139,44 @@ export const CheckList: React.FC<{x: number; y: number; rows: {text: string; at:
         );
       })}
     </>
+  );
+};
+
+const polyD = (pts: number[][]) => 'M' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' L');
+/**
+ * A trail or route on the series map, like trails.tsx's MTrail (dusty dash, soft glow) but drawn at translateZ(1px): in some
+ * camera set-ups Chrome drops the 2px layers MTrail/MRoute use (seen in ch04/ch05 stills), while 1px layers always show.
+ * `solid` gives a plain line (a direction arrow's shaft); `dash` false keeps the glow but no dash.
+ */
+export const MLine: React.FC<{api: WApi; pts: number[][]; at: number; dur?: number; prog?: number; color?: string; width?: number; opacity?: number; dash?: boolean}> = ({
+  api, pts, at: a, dur = 30, prog, color, width = 9, opacity = 1, dash = true,
+}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  const p = prog ?? interpolate(g, [a, a + dur], [0, 1], clamp);
+  if (p <= 0.001) return null;
+  const c = color ?? pal.mark;
+  const [W, H] = W_MAP.size;
+  // the part of the line up to p (by length)
+  const seg = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]));
+  const total = seg.reduce((s, v) => s + v, 0);
+  const out: number[][] = [pts[0]];
+  let acc = 0;
+  for (let i = 0; i < seg.length; i++) {
+    if (acc + seg[i] >= p * total) {
+      const k = seg[i] ? (p * total - acc) / seg[i] : 0;
+      out.push([pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]);
+      break;
+    }
+    acc += seg[i];
+    out.push(pts[i + 1]);
+  }
+  const d = polyD(out);
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(1px)', opacity}}>
+      <path d={d} fill="none" stroke={SHADOW} strokeWidth={api.px(width + 8)} strokeLinecap="round" strokeLinejoin="round" opacity={0.8} />
+      <path d={d} fill="none" stroke={c} strokeWidth={api.px(width * 2.4)} strokeLinecap="round" strokeLinejoin="round" opacity={0.18} />
+      <path d={d} fill="none" stroke={c} strokeWidth={api.px(width)} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={dash ? `${api.px(22)} ${api.px(12)}` : undefined} />
+    </svg>
   );
 };
