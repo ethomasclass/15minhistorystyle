@@ -467,7 +467,7 @@ const Sounds: React.FC = () => {
   return <>{sfx.map(([fr, n, v], i) => <Sfx key={i} at={fr} src={`sfx/${n}.wav`} volume={v} />)}</>;
 };
 
-const COLD = bed('r_cold_open', 12);
+const COLD = bed('aw_white_cold');
 const Body: React.FC = () => {
   const frame = useCurrentFrame();
   const shots: [number, React.ReactNode, ('whip' | 'cut')?][] = [
@@ -501,11 +501,11 @@ const Body: React.FC = () => {
       {frame < END && <Finish vignette={0.3} />}
       {frame >= END + INTRO_FRAMES && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_last_of_the_5000.wav')} />
-      {/* cold-open bed (SUNO: aw_white_cold replaces this), dipping out under the hand-off into the channel intro (clicks only) */}
-      <Audio src={staticFile('music/r_cold_open.mp3')} volume={(fr) => interpolate(fr, [0, 15, at('It starts'), END - 10, END + 6], [0, COLD, COLD, COLD * 0.6, 0], clamp)} />
+      {/* cold-open bed: aw_white_cold, dipping out under the hand-off into the channel intro (clicks only) */}
+      <Audio src={staticFile('music/aw_white_cold.mp3')} volume={(fr) => interpolate(fr, [0, 15, at('It starts'), END - 10, END + 6], [0, COLD, COLD, COLD * 0.6, 0], clamp)} />
       {/* the title card is not silent: the cold-open cue comes back under it, picking up where it left off, then fades with the card */}
       <Sequence from={END + INTRO_FRAMES} layout="none">
-        <Audio src={staticFile('music/r_cold_open.mp3')} startFrom={30 * 56} volume={(fr) => interpolate(fr, [0, 12, TITLE_FRAMES - 30, TITLE_FRAMES], [0, COLD * 1.2, COLD * 1.2, 0], clamp)} />
+        <Audio src={staticFile('music/aw_white_cold.mp3')} startFrom={END + INTRO_FRAMES} volume={(fr) => interpolate(fr, [0, 12, TITLE_FRAMES - 30, TITLE_FRAMES], [0, COLD * 1.2, COLD * 1.2, 0], clamp)} />
       </Sequence>
       {frame < END && <Sounds />}
       <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.3} />

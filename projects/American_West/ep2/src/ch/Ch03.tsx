@@ -537,11 +537,9 @@ const Body: React.FC = () => {
 };
 
 export const Ch03: React.FC = () => (
-  // SUNO: aw_long_drive replaces this
   <ChapterShell n={N} audio="audio/ch03_the_long_drive.wav" lead={LEAD} music={[
-    // m_frontier runs 69 s: a second pass picks up from 12 s in, crossfading under the toll beat
-    {src: 'music/m_frontier.mp3', volume: bed('m_frontier'), to: 30 * 67, fadeOut: 60},
-    {src: 'music/m_frontier.mp3', volume: bed('m_frontier'), from: 30 * 65, startFrom: 30 * 12},
+    // aw_long_drive from its start; this chapter uses only its first ~85 s (ch05 picks the cue up from 85 s)
+    {src: 'music/aw_long_drive.mp3', volume: bed('aw_long_drive')},
   ]}>
     <Body />
   </ChapterShell>
