@@ -73,8 +73,8 @@ type Cam = {z?: [number, number]; x?: [number, number]; y?: [number, number]; ea
  * `tint` colours the subject coral (null for none: Flow cards are already coral); `traceAt` draws the teal outline.
  */
 export const Parallax: React.FC<{name: string; src: string; size: [number, number]; a: number; b: number; tag: string; fx?: number; fy?: number; cam?: Cam;
-  depth?: number; crop?: [number, number, number, number]; frame?: [number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
-  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, frame = [1920, 1080], mask, tint, traceAt, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
+  depth?: number; crop?: [number, number, number, number]; frame?: [number, number]; mask?: MaskRef; tint?: string | null; traceAt?: number; tagY?: number; filter?: string; effects?: Fx[]; vignette?: number; children?: (p: Place) => React.ReactNode}> = ({
+  name, src, size, a, b, tag, fx = 0.5, fy = 0.5, cam = {}, depth = 1.06, crop, frame = [1920, 1080], mask, tint, traceAt, tagY, filter = 'grayscale(1) contrast(1.2) brightness(0.97)', effects = [], vignette = 0.6, children,
 }) => {
   const f = useCurrentFrame();
   const layered = hasFile(`img/layers/${name}_fg.webp`) && hasFile(`img/layers/${name}_bg.jpg`);
@@ -118,7 +118,7 @@ export const Parallax: React.FC<{name: string; src: string; size: [number, numbe
         <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,${vignette}) 100%)`}} />
         {film && <Effect fx={{kind: 'film'}} />}
       </AbsoluteFill>
-      <Tag text={tag} y={FH - 50} />
+      <Tag text={tag} y={tagY ?? FH - 50} />
     </AbsoluteFill>
   );
 };
