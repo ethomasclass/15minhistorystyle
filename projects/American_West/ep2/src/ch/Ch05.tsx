@@ -159,9 +159,9 @@ const OneInFour: React.FC = () => {
     <AbsoluteFill>
       <DeskCam k={[[a, 12, 1.0, 0, 0, 0], [at('Many'), 12, 1.05, 0, 10, 0]]}><></></DeskCam>
       <Label text="historians' estimate · cowboys on the Texas trails" x={130} y={110} size={26} at={at('estimate') - 2} color={WHITE} />
-      <Four x={420} y={720} h={330} at={at('one in four') - 4} hotAt={at('Black') - 1} gap={330} />
-      <Big text="≈ 1 in 4" x={1460} y={330} size={130} at={at('four') - 1} color={WHITE} />
-      <Hand parts={[['was Black', CORAL]]} x={1480} y={500} size={84} at={at('Black') - 2} />
+      <Four x={300} y={720} h={330} at={at('one in four') - 4} hotAt={at('Black') - 1} gap={270} />
+      <Big text="≈ 1 in 4" x={1360} y={330} size={130} at={at('four') - 1} color={WHITE} />
+      <Hand parts={[['was Black', CORAL]]} x={1380} y={500} size={84} at={at('Black') - 2} />
     </AbsoluteFill>
   );
 };
@@ -197,18 +197,18 @@ const Ikard: React.FC = () => {
   const lands = at('Bose') - 3;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 18, 1.12, -380, 20, -2], [lands, 18, 1.0, -60, 10, 0], [b, 16, 1.06, 40, 0, 0]]}>
+      <DeskCam k={[[a, 18, 1.12, 560, 20, -2], [lands, 18, 1.0, 40, 10, 0], [b, 16, 1.06, 80, 0, 0]]}>
         <Lift x={150} y={330} w={420} hgt={410} h={4} at={-99} rot={-4} blur={interpolate(f, [lands - 6, lands + 6], [0, 2.2], clamp)} seed={53}>
           <Print src={I.goodnight} size={Z.goodnight} x={0} y={0} w={420} at={-99} seed={53} />
         </Lift>
-        <Lift x={760} y={110} w={600} hgt={732} h={14} at={lands} rot={2} seed={54}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.5} traceAt={at('Ikard') + 2} filter="grayscale(1) contrast(1.15)" />
+        <Lift x={620} y={110} w={600} hgt={732} h={14} at={lands} rot={2} seed={54}>
+          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} traceAt={at('Ikard') + 2} filter="grayscale(1) contrast(1.15)" />
         </Lift>
       </DeskCam>
       <Hand parts={[['remember Goodnight & Loving?', WHITE]]} x={120} y={90} size={64} at={at('Remember') - 2} out={lands} />
-      <SlapTitle text="BOSE IKARD" x={1240} y={150} size={96} at={at('Bose')} seed={81} />
-      <Label text="one of their riders" x={1250} y={300} size={26} at={at('riders') - 2} color={WHITE} />
-      <Lines x={1250} y={380} size={60} rows={[{text: 'born enslaved', at: at('born') - 2}]} />
+      <SlapTitle text="BOSE IKARD" x={1300} y={150} size={90} at={at('Bose')} seed={81} />
+      <Label text="one of their riders" x={1310} y={300} size={26} at={at('riders') - 2} color={WHITE} />
+      <Lines x={1310} y={380} size={60} rows={[{text: 'born enslaved', at: at('born') - 2}]} />
       <ScrimTag text={TAG.ikardPair} />
     </AbsoluteFill>
   );
@@ -219,13 +219,13 @@ const Trail: React.FC = () => {
   const a = at('On the trail') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 10, 1.36, -340, -40, 0], [at('Goodnight said'), 10, 1.44, -380, -60, 0]]}>
-        <Lift x={760} y={110} w={600} hgt={732} h={14} at={-99} rot={2} seed={54}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.5} filter="grayscale(1) contrast(1.15)" />
+      <DeskCam k={[[a, 10, 1.36, -180, -40, 0], [at('Goodnight said'), 10, 1.44, -220, -60, 0]]}>
+        <Lift x={620} y={110} w={600} hgt={732} h={14} at={-99} rot={2} seed={54}>
+          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} filter="grayscale(1) contrast(1.15)" />
         </Lift>
       </DeskCam>
-      <Label text="on the trail" x={1250} y={250} size={28} at={a + 2} color={WHITE} />
-      <Lines x={1250} y={320} size={60} gap={96} rows={[{text: 'fought off Comanche raids', at: at('fought') - 2}, {text: 'rode out stampedes', at: at('rode') - 2}]} />
+      <Label text="on the trail" x={1180} y={250} size={28} at={a + 2} color={WHITE} />
+      <Lines x={1180} y={320} size={54} gap={90} rows={[{text: 'fought off Comanche raids', at: at('fought') - 2}, {text: 'rode out stampedes', at: at('rode') - 2}]} />
       <ScrimTag text={TAG.ikard} />
     </AbsoluteFill>
   );
@@ -248,7 +248,7 @@ const Words: React.FC<{second: boolean}> = ({second}) => {
     <AbsoluteFill>
       <DeskCam k={second ? [[a, 14, 1.06, 30, 0, 1], [b, 14, 1.0, 0, 0, 0]] : [[a, 12, 0.98, 0, 0, -1], [b, 12, 1.04, 0, 0, 0]]}>
         <Lift x={1420} y={300} w={380} hgt={464} h={6} at={-99} rot={3} seed={55}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={380} at={-99} seed={55} mask={M5.ikard} tint={0.45} filter="grayscale(1) contrast(1.15)" />
+          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={380} at={-99} seed={55} mask={M5.ikard} tint={0.35} filter="grayscale(1) contrast(1.15)" />
         </Lift>
       </DeskCam>
       <Label text="Charles Goodnight, on Bose Ikard" x={130} y={150} size={28} at={a + 2} color={WHITE} />
@@ -388,7 +388,7 @@ const Reeves: React.FC<{detail: boolean}> = ({detail}) => {
     <AbsoluteFill>
       <DeskCam k={detail ? [[a, 10, 1.0, 0, 0, 0], [b, 10, 1.06, -20, 10, 0]] : [[a, 18, 0.94, 0, 0, -2], [b, 16, 1.0, 0, 0, 0]]}>
         <Lift x={1140} y={60} w={640} hgt={955} h={10} at={detail ? -99 : a + 2} rot={2} seed={56}>
-          <Print src={I.reeves} size={Z.reeves} x={0} y={0} w={640} at={-99} seed={56} mask={M5.reeves} tint={0.45} traceAt={detail ? undefined : at('Reeves') + 2} />
+          <Print src={I.reeves} size={Z.reeves} x={0} y={0} w={640} at={-99} seed={56} mask={M5.reeves} tint={0.32} traceAt={detail ? undefined : at('Reeves') + 2} />
         </Lift>
       </DeskCam>
       {!detail && <SlapTitle text="BASS REEVES" x={110} y={360} size={110} at={at('Bass')} seed={83} />}
