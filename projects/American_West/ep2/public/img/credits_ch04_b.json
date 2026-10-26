@@ -41,5 +41,28 @@
     "date": "circa 1863date QS:P,+1863-00-00T00:00:00Z/9,P1480,Q5727902",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Kit_Carson_by_Charles_DeForest_Fredricks,_c._1863,_albumen_silver_print,_from_the_National_Portrait_Gallery_-_NPG-NPG_2005_115Carson-000002.jpg"
+  },
+  "ch04/b_goodnight_1905.jpg": {
+    "title": "Charles Goodnight (portrait crop from p. 58 of Prose and poetry of the live stock industry of the United States, 1905)",
+    "artist": "Smiley, Jerome",
+    "date": "1905",
+    "licence": "public domain by age (1905)",
+    "page": "https://archive.org/details/GR_1412/page/n65",
+    "source": "iabook:GR_1412:65"
+  },
+  "ch04/b_carleton_crop.jpg": {
+    "title": "File:James Henry Carleton.jpg (cropped above the archive's credit line)",
+    "artist": "Unknown 19th century photographer",
+    "date": "2007-07-02 06:58:58",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:James_Henry_Carleton.jpg"
+  },
+  "ch04/b_ja_chuck_wagon_print.jpg": {
+    "title": "J.A. chuck-wagon, getting dinner (cropped out of its mount)",
+    "artist": "Smith, Erwin E. (Erwin Evans), 1886-1947, photographer",
+    "date": "1907",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004679069/",
+    "source": "loc:2004679069 (via credits_ch04.json)"
   }
 }

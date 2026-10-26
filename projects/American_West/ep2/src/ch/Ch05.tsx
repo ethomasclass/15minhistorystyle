@@ -38,6 +38,7 @@ const I = {
   reeves: 'img/ch05/bass_reeves_c1907.jpg',
   remington: 'img/ch05/remington_mexican_vaquero_1890.jpg',
   vaqueros: 'img/ch05/vaqueros_1877.jpg',
+  blackCowboys: 'img/ch05/black_cowboys_bonham_texas_c1913.jpg',
   bbPoster: 'img/ch05/buffalo_bill_wild_west_vaqueros_poster_1899.jpg',
   coin: 'img/props/p2_coin_one.jpg',
   iron: 'img/props/p3_branding_iron.jpg',
@@ -56,6 +57,7 @@ const Z = {
   reeves: [1920, 2866] as [number, number],
   remington: [1520, 2250] as [number, number],
   vaqueros: [1334, 976] as [number, number],
+  blackCowboys: [1350, 934] as [number, number],
   bbPoster: [2042, 3000] as [number, number],
 };
 const TAG = {
@@ -65,6 +67,7 @@ const TAG = {
   reeves: 'Bass Reeves, c. 1907 · Wikimedia Commons',
   remington: 'Frederic Remington, A Mexican Vaquero, 1890 · Art Institute of Chicago',
   vaqueros: 'Vaqueros (lassoing), 1877 · Wikimedia Commons',
+  blackCowboys: 'Black cowboys, Texas, c. 1913 · Wikimedia Commons',
   bbPoster: "Buffalo Bill's Wild West: Mexican vaqueros and lariat experts, 1899 · Library of Congress",
   map: "Map: Natural Earth outlines (today's state lines for reference); routes approx.",
 };
@@ -85,7 +88,7 @@ const Movies: React.FC = () => {
           <Print src={I.cody} size={Z.cody} x={0} y={0} w={860} at={-99} seed={52} filter="grayscale(1) contrast(1.15) brightness(1.02)" />
         </Lift>
       </DeskCam>
-      <Hand parts={[['the cowboy from the movies', WHITE]]} x={560} y={930} size={70} at={at('picture') - 2} />
+      <Hand parts={[['the cowboy from the movies', WHITE]]} x={560} y={860} size={70} at={at('picture') - 2} />
       <ScrimTag text={TAG.myth} x={34} y={24} />
     </AbsoluteFill>
   );
@@ -136,18 +139,19 @@ const Pay: React.FC = () => {
   );
 };
 
-/** 5 · "a lot of them weren't white": the handwriting, the myth prints pushed aside and out of focus. */
+/** 5 · "a lot of them weren't white": a photograph of Black cowboys (Texas, c. 1913) lands beside the handwriting. */
 const NotWhite: React.FC = () => {
   const a = at('And a lot') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 26, 1.1, 300, 0, -3], [at('Historians'), 22, 1.18, 340, 0, -4]]}>
-        <Lift x={1240} y={160} w={860} hgt={704} h={4} at={-99} rot={6} blur={4} seed={52}>
-          <Print src={I.cody} size={Z.cody} x={0} y={0} w={860} at={-99} seed={52} filter="grayscale(1) contrast(1.1) brightness(0.7)" />
+      <DeskCam k={[[a, 18, 1.0, 0, 0, -1], [at('Historians'), 14, 1.06, -20, 10, 0]]}>
+        <Lift x={1000} y={220} w={860} hgt={595} h={8} at={a + 2} rot={2} seed={58}>
+          <Print src={I.blackCowboys} size={Z.blackCowboys} x={0} y={0} w={860} at={-99} seed={58} filter="grayscale(1) contrast(1.12)" />
         </Lift>
       </DeskCam>
-      <Hand parts={[['and a lot of them', WHITE]]} x={130} y={330} size={84} at={at('And a lot') - 2} />
-      <Hand parts={[["weren't white."]]} x={170} y={470} size={96} at={at("weren't") - 2} />
+      <Hand parts={[['and a lot of them', WHITE]]} x={110} y={330} size={72} at={at('And a lot') - 2} />
+      <Hand parts={[["weren't white."]]} x={150} y={460} size={80} at={at("weren't") - 2} />
+      <ScrimTag text={TAG.blackCowboys} />
     </AbsoluteFill>
   );
 };
@@ -219,13 +223,13 @@ const Trail: React.FC = () => {
   const a = at('On the trail') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 10, 1.36, -180, -40, 0], [at('Goodnight said'), 10, 1.44, -220, -60, 0]]}>
+      <DeskCam k={[[a, 10, 1.36, -320, -40, 0], [at('Goodnight said'), 10, 1.44, -360, -60, 0]]}>
         <Lift x={620} y={110} w={600} hgt={732} h={14} at={-99} rot={2} seed={54}>
           <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} filter="grayscale(1) contrast(1.15)" />
         </Lift>
       </DeskCam>
-      <Label text="on the trail" x={1180} y={250} size={28} at={a + 2} color={WHITE} />
-      <Lines x={1180} y={320} size={54} gap={90} rows={[{text: 'fought off Comanche raids', at: at('fought') - 2}, {text: 'rode out stampedes', at: at('rode') - 2}]} />
+      <Label text="on the trail" x={1080} y={250} size={28} at={a + 2} color={WHITE} />
+      <Lines x={1080} y={320} size={50} gap={86} rows={[{text: 'fought off Comanche raids', at: at('fought') - 2}, {text: 'rode out stampedes', at: at('rode') - 2}]} />
       <ScrimTag text={TAG.ikard} />
     </AbsoluteFill>
   );
@@ -290,9 +294,9 @@ const TwoViews: React.FC<{stage: 0 | 1 | 2}> = ({stage}) => {
         <div style={{position: 'absolute', left: 400 + 160, top: 300 + 140, width: 1600, height: 700, background: 'radial-gradient(ellipse at 40% 30%, #36312a 0%, #26231d 75%, #1d1a15 100%)',
           boxShadow: '16px 20px 0 #050403'}}>
           <div style={{position: 'absolute', left: 798, top: 40, bottom: 40, width: 4, background: pal.mark, opacity: 0.8}} />
-          <div style={{position: 'absolute', left: 60, top: 50, fontFamily: JF.mono, fontSize: 34, letterSpacing: 5, color: pal.mark, ...dim(leftOn)}}>ON THE TRAIL</div>
+          {stage !== 1 && <div style={{position: 'absolute', left: 60, top: 50, fontFamily: JF.mono, fontSize: 34, letterSpacing: 5, color: pal.mark, ...dim(leftOn)}}>ON THE TRAIL</div>}
           <div style={{position: 'absolute', left: 860, top: 50, fontFamily: JF.mono, fontSize: 34, letterSpacing: 5, color: pal.subject, ...dim(rightOn)}}>IN TOWN</div>
-          <div style={{...dim(leftOn)}}>
+          <div style={{...dim(leftOn), display: stage === 1 ? 'none' : undefined}}>
             <Lines x={60} y={170} size={58} gap={110} rows={[
               {text: 'ate the same', at: stage === 0 ? at('ate') - 2 : -99},
               {text: 'slept the same', at: stage === 0 ? at('slept') - 2 : -99},
@@ -388,7 +392,7 @@ const Reeves: React.FC<{detail: boolean}> = ({detail}) => {
     <AbsoluteFill>
       <DeskCam k={detail ? [[a, 10, 1.0, 0, 0, 0], [b, 10, 1.06, -20, 10, 0]] : [[a, 18, 0.94, 0, 0, -2], [b, 16, 1.0, 0, 0, 0]]}>
         <Lift x={1140} y={60} w={640} hgt={955} h={10} at={detail ? -99 : a + 2} rot={2} seed={56}>
-          <Print src={I.reeves} size={Z.reeves} x={0} y={0} w={640} at={-99} seed={56} mask={M5.reeves} tint={0.32} traceAt={detail ? undefined : at('Reeves') + 2} />
+          <Print src={I.reeves} size={Z.reeves} x={0} y={0} w={640} at={-99} seed={56} mask={M5.reeves} tint={0.25} traceAt={detail ? undefined : at('Reeves') + 2} />
         </Lift>
       </DeskCam>
       {!detail && <SlapTitle text="BASS REEVES" x={110} y={360} size={110} at={at('Bass')} seed={83} />}
@@ -452,12 +456,12 @@ const LongBefore: React.FC = () => {
   const a = at('working cattle') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 8, 1.24, 160, 40, 0], [at('They taught'), 8, 1.12, 60, 20, 0]]}>
-        <Lift x={80} y={90} w={1300} hgt={951} h={8} at={-99} rot={-1} seed={58}>
-          <Print src={I.vaqueros} size={Z.vaqueros} x={0} y={0} w={1300} at={-99} seed={58} filter="grayscale(1) contrast(1.15) brightness(0.98)" />
+      <DeskCam k={[[a, 8, 1.1, 60, 20, 0], [at('They taught'), 8, 1.02, 20, 10, 0]]}>
+        <Lift x={60} y={120} w={1080} hgt={790} h={8} at={-99} rot={-1} seed={58}>
+          <Print src={I.vaqueros} size={Z.vaqueros} x={0} y={0} w={1080} at={-99} seed={58} filter="grayscale(1) contrast(1.15) brightness(0.98)" />
         </Lift>
       </DeskCam>
-      <Lines x={1180} y={120} size={56} gap={86} rows={[{text: 'working cattle in Texas', at: at('working cattle') - 2}, {text: 'long before it was', at: at('long before') - 2}, {text: 'part of the U.S.', at: at('United') - 2}]} />
+      <Lines x={1260} y={160} size={50} gap={80} rows={[{text: 'working cattle in Texas', at: at('working cattle') - 2}, {text: 'long before it was', at: at('long before') - 2}, {text: 'part of the U.S.', at: at('United') - 2}]} />
       <ScrimTag text={TAG.vaqueros} />
     </AbsoluteFill>
   );

@@ -414,7 +414,7 @@ const Corral: React.FC<{phase: 0 | 1}> = ({phase}) => {
       {phase === 0 && <Label text="San Antonio, Texas" x={140} y={130} size={30} at={at('San Antonio') - 2} />}
       {phase === 0 && <Note text="a corral of barbed wire" x={130} y={200} size={56} rot={-3} at={at('corral') - 2} />}
       {phase === 1 && <Note text="let them try to break out" x={110} y={110} size={56} rot={-3} at={a + 2} />}
-      {phase === 1 && <Hand parts={[['they '], ["couldn't.", true]]} x={1180} y={860} size={100} at={at("They couldn't") - 3} />}
+      {phase === 1 && <Hand parts={[['they '], ["couldn't.", true]]} x={1060} y={860} size={88} at={at("They couldn't") - 3} />}
       <ScrimTag text="Drawn · as the story is told (San Antonio, c. 1876)" />
     </AbsoluteFill>
   );

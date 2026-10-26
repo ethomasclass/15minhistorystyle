@@ -21,6 +21,7 @@ const T = makeTimeline(N, 30);
 const at = T.at;
 const END = T.frames;
 
+const SPIKE = 'img/samples/spike_russell_1869.jpg';
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference); routes approx.';
 const HERD = 'img/ch02/texas_longhorns_herd_kansas_1878.jpg';
 const HERD_SZ: [number, number] = [1536, 979];
@@ -57,8 +58,15 @@ const LastTime: React.FC = () => {
   const sh = shake(f, [at('cows') + 3], 9);
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
-      <Desk3D tilt={keys(f, [[0, 22], [b, 14]])} z={zkeys(f, [[0, 0.95], [b, 1.02]])} lamp={[1100, 560]}><div /></Desk3D>
+      <Desk3D tilt={keys(f, [[0, 22], [b, 14]])} z={zkeys(f, [[0, 0.95], [b, 1.02]])} rotZ={keys(f, [[0, 3], [b, 0]])} lamp={[1100, 560]}>
+        <Lift x={1080} y={40} w={700} hgt={700 * (2922 / 3840)} h={6} at={2} rot={4} seed={5}>
+          <TornPrint src={SPIKE} size={[3840, 2922]} x={0} y={0} w={700} at={-99} seed={6} real grey shadow={5} filter={ENGR} corner={{at: 'br', x: 0.7, y: 0.58}}
+            tapes={[{x: 270, y: -14, w: 150, rot: -3}]} />
+        </Lift>
+      </Desk3D>
       <Mono text="LAST TIME · EPISODE 1" x={130} y={110} size={30} at={4} />
+      <Note text="the railroad, done" x={1250} y={70} size={48} rot={-3} at={10} color="#ffffff" />
+      <ScrimTag text="A. J. Russell, East and West Shaking Hands at Laying Last Rail, 1869 · Wikimedia Commons" />
       <Hand parts={[['a man with an idea']]} x={140} y={210} size={74} at={at('a man with') - 2} />
       <Hand parts={[['+ about '], ['5 million cows', '#ffffff']]} x={180} y={330} size={74} at={at('five million') - 2} />
       <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={760} y={430} w={900} at={at('cows') + 1} tint={0.5} traceAt={at('cows') + 6} />
@@ -93,11 +101,17 @@ const NoMoney: React.FC = () => {
   const b = at('But their cattle') - 1;
   return (
     <AbsoluteFill>
-      <Desk3D tilt={keys(f, [[a, 12], [b, 20]])} z={zkeys(f, [[a, 1.12], [b, 1.0]])} lamp={[1180, 560]}><div /></Desk3D>
-      <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={1250} y={470} w={190} at={a + 4} rot={-8} />
-      <Hand parts={[['soldiers home from the war']]} x={150} y={240} size={70} at={at('soldiers') - 2} />
+      <WestMap keys={[{f: a, x: 2560, y: 2150, z: 0.62, tilt: 48, rot: -4}, {f: b, x: 2640, y: 2200, z: 0.56, tilt: 44, rot: 2}]}>
+        {(api) => <>
+          <MState api={api} name="Texas" at={-99} />
+          <MPin api={api} at={TPL.austin} show={a + 4} label="Austin" sub="TEXAS, 1865" size={42} color="#ffffff" />
+        </>}
+      </WestMap>
+      <Mono text="1865 · CONFEDERATE VETERANS COME HOME" x={150} y={150} size={28} at={a + 3} />
+      <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={1250} y={560} w={260} at={at('almost no money') - 1} rot={-8} />
+      <Hand parts={[['soldiers home from the war']]} x={150} y={240} size={70} at={at('Confederate') + 4} />
       <Hand parts={[['almost no money', '#ffffff']]} x={190} y={380} size={84} at={at('almost no money') - 2} />
-      <Loop cx={1345} cy={565} rx={160} ry={140} at={at('money') + 4} seed={41} tilt={-6} width={6} />
+      <Loop cx={1380} cy={690} rx={190} ry={170} at={at('money') + 4} seed={41} tilt={-6} width={6} />
     </AbsoluteFill>
   );
 };
@@ -151,7 +165,8 @@ const Gap: React.FC<{chicago?: boolean}> = ({chicago}) => {
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={chicago ? 12 : 18} z={1} lamp={[960, 560]}><div /></Desk3D>
       <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: `${ox}px 600px`}}>
-        <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={330} y={470} w={220} at={chicago ? -99 : at('In Texas a steer') + 1} rot={-6} />
+        <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={120} y={250} w={560} at={chicago ? -99 : at("Here's the problem") + 6} />
+        <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={560} y={520} w={200} at={chicago ? -99 : at('In Texas a steer') + 1} rot={-6} />
         <PriceTag x={170} y={720} head="TEXAS · A STEER" value="≈ $4" at={chicago ? -99 : at('four dollars') + 1} rot={-3} />
         {chicago && <>
           <Prop src="img/props/p2_coin_stack.jpg" m={M2.coinStack} x={1300} y={300} w={380} at={at('In Chicago') + 4} rot={3} tint={0.45} traceAt={at('forty') + 2} />
@@ -343,7 +358,7 @@ const Stack: React.FC<{means?: boolean}> = ({means}) => {
     <AbsoluteFill>
       <Desk3D tilt={means ? 8 : 14} z={1} lamp={[900, 480]}><div /></Desk3D>
       <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: means ? '900px 700px' : '600px 300px'}}>
-        <Lines x={160} y={means ? 60 : 160} gap={means ? 70 : 110} size={means ? 46 : 66} rows={[
+        <Lines x={160} y={means ? 60 : 200} gap={means ? 70 : 100} size={means ? 46 : 66} rows={[
           {text: 'cheap cows in Texas', at: means ? -99 : at('Cheap cows') - 2},
           {text: 'hungry cities in the North', at: means ? -99 : at('Hungry cities') - 2},
           {text: 'a railroad in between', at: means ? -99 : at('A railroad in') - 2, color: '#ffffff'},
@@ -356,7 +371,16 @@ const Stack: React.FC<{means?: boolean}> = ({means}) => {
           </div>
         </>}
       </div>
-      {!means && <Mono text="STACK IT UP" x={160} y={70} size={30} at={a + 3} />}
+      {!means && <>
+        <SlapTitle text="STACK IT UP" x={150} y={50} size={84} at={a + 2} seed={53} />
+        <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={160} y={600} w={440} at={at('Cheap cows') - 1} />
+        <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={520} y={800} w={120} at={at('Cheap cows') + 3} rot={-8} />
+        <Prop src="img/props/p2_coin_stack.jpg" m={M2.coinStack} x={800} y={560} w={230} at={at('Hungry cities') - 1} rot={3} />
+        <Label text="$40 IN CHICAGO" x={780} y={920} size={26} at={at('Hungry cities') + 2} />
+        <div style={{position: 'absolute', left: 1180, top: 560, width: 600, height: 300}}>
+          <TornPrint src={YARD} size={STEREO_SZ} x={0} y={0} w={560} crop={[220, 130, 1440, 1320]} at={at('A railroad in') - 1} seed={57} real grey shadow={6} filter={ENGR} rot={3} />
+        </div>
+      </>}
     </AbsoluteFill>
   );
 };

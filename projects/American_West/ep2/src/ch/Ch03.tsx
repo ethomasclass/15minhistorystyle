@@ -6,7 +6,7 @@ import React from 'react';
 import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch03_the_long_drive.words.json';
 import {clamp} from '../lib/anim';
-import {JF, Note, useGFrame} from '../kit/Kit';
+import {JF, Loop, Note, useGFrame} from '../kit/Kit';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {bed} from '../kit/levels';
 import {Big, Label, LITHO, Pic, Prop, Sounds, type SfxRow} from '../kit/ch04_extra';
@@ -37,6 +37,10 @@ const FORD_SZ: [number, number] = [3000, 1465];
 const GUARD = 'img/ch03/texas_cattle_trade_guarding_herd_1874.jpg';
 const GUARD_SZ: [number, number] = [1536, 1131];
 const RIVER = 'img/props/L3_river_crossing.jpg';
+const KPMAP = 'img/ch03/kansas_pacific_best_shortest_cattle_trail_map_1870s.jpg';
+const KPMAP_SZ: [number, number] = [1920, 2259];
+const MATADOR = 'img/ch03/matador_ranch_chuck_wagon_1891.jpg';
+const MATADOR_SZ: [number, number] = [1536, 1055];
 
 /** The Goodnight-Loving Trail as far as this chapter's narration takes it: west across Texas, up the Pecos to Fort Sumner. */
 const GL = TLINES.goodnightLoving.slice(0, 7);
@@ -79,7 +83,7 @@ const MLabel: React.FC<{api: WApi; at: number[]; text: string; show: number; col
  */
 type Focus = 'chisholm' | 'western' | 'gl' | 'all' | 'it';
 const Trails: React.FC<{api: WApi; focus: Focus; noSA?: boolean}> = ({api, focus, noSA}) => {
-  const chis = at('Chisholm Trail') - 2;
+  const chis = at('Chisholm Trail') - 8;
   const west = at('Western Trail') - 2;
   const gl = at('ran west') - 4;
   const coral = '#FF6F61';
@@ -87,12 +91,12 @@ const Trails: React.FC<{api: WApi; focus: Focus; noSA?: boolean}> = ({api, focus
   return <>
     <MRoute api={api} pts={[...TLINES.kansasPacific].reverse()} at={-99} width={6} color="#d9d2c3" ties={false} opacity={0.55} />
     <MTrail api={api} pts={TLINES.shawnee} at={-99} color="#9fb3b8" width={6} opacity={0.35} />
-    <MTrail api={api} pts={TLINES.chisholm} at={chis} dur={150} color={focus === 'chisholm' ? coral : teal} opacity={focus === 'gl' ? 0.55 : 1} />
+    <MTrail api={api} pts={TLINES.chisholm} at={chis} dur={156} color={focus === 'chisholm' ? coral : teal} opacity={focus === 'gl' ? 0.55 : 1} />
     <MTrail api={api} pts={TLINES.western} at={west} dur={70} color={focus === 'western' ? coral : teal} opacity={focus === 'gl' ? 0.55 : 1} />
     <MTrail api={api} pts={GL} at={gl} dur={110} color={focus === 'gl' ? coral : teal} width={focus === 'gl' ? 11 : 9} />
     <MPin api={api} at={TPL.abilene} show={at('to Abilene') - 2} label="Abilene" size={40} color={focus === 'chisholm' ? coral : teal} />
     <MPin api={api} at={TPL.dodgeCity} show={at('Dodge City') - 2} label="Dodge City" side="l" size={40} />
-    {!noSA && <MPin api={api} at={TPL.sanAntonio} show={at('from south Texas') - 2} label="San Antonio" side="l" size={36} color="#ffffff" />}
+    {!noSA && <MPin api={api} at={TPL.sanAntonio} show={chis} label="San Antonio" side="l" size={36} color="#ffffff" />}
   </>;
 };
 
@@ -122,19 +126,40 @@ const NotRoads: React.FC = () => {
   );
 };
 
+/** 3a · "Watch the map": the Kansas Pacific's own 1870s trail map lands on the desk, then we cross to our map. */
+const PeriodMap: React.FC = () => {
+  const f = useCurrentFrame();
+  const a = at('Watch the map') - 1;
+  const b = at('The first big one') + 20;
+  const sh = shake(f, [a + 5], 8);
+  return (
+    <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
+      <Desk3D tilt={keys(f, [[a, 28], [b, 18]])} z={zkeys(f, [[a, 0.82], [b, 1.0]])} rotZ={keys(f, [[a, -4], [b, -1]])} y={keys(f, [[a, 60], [b, 140]])} lamp={[960, 460]}>
+        <Lift x={660} y={-40} w={760} hgt={760 * (2180 / 1860)} h={10} at={a + 2} rot={-2} seed={91}>
+          <TornPrint src={KPMAP} size={KPMAP_SZ} x={0} y={0} w={760} crop={[20, 60, 1880, 2240]} at={-99} seed={92} real grey shadow={6}
+            filter="grayscale(0.55) sepia(0.2) contrast(1.15) brightness(0.92)" tapes={[{x: 300, y: -14, w: 160, rot: 3}]} />
+        </Lift>
+      </Desk3D>
+      <Note text="the railroad's own trail map, 1870s" x={110} y={120} size={54} rot={-3} at={a + 6} />
+      <ScrimTag text="Kansas Pacific Railway, The Best and Shortest Cattle Trail from Texas, c. 1873–75 · Harry Ransom Center (photo Daderot), Commons" />
+    </AbsoluteFill>
+  );
+};
+
 /** 3 · "Watch the map. The first big one was the Chisholm Trail, from south Texas …" (wide, the trail drawing on in coral). */
 const Chisholm: React.FC = () => {
-  const a = at('Watch the map') - 1;
-  const ks = [{f: a, x: 2600, y: 1900, z: 0.34, tilt: 30, rot: 3}, {f: at('Indian Territory') + 2, x: 2680, y: 1880, z: 0.42, tilt: 42, rot: 0}];
+  const a = at('The first big one') + 20;
+  const ks = [{f: a, x: 2600, y: 1900, z: 0.38, tilt: 32, rot: 3}, {f: at('Indian Territory') + 2, x: 2680, y: 1880, z: 0.42, tilt: 42, rot: 0}];
   return (
     <AbsoluteFill>
       <WestMap keys={ks}>
         {(api) => <>
           <Trails api={api} focus="chisholm" />
-          <MHerd api={api} pts={TLINES.chisholm} at={at('Chisholm Trail') - 2} dur={150} w={84} />
+          <MHerd api={api} pts={TLINES.chisholm} at={at('Chisholm Trail') - 8} dur={156} w={84} />
+          <MPin api={api} at={TPL.abilene} show={a + 2} label="" size={40} color="#FF6F61" />
         </>}
       </WestMap>
-      <Mono text="THE CATTLE TRAILS" x={130} y={90} size={30} at={a + 3} />
+      <Mono text="THE CATTLE TRAILS" x={130} y={90} size={30} at={-99} />
       <SlapTitle text="THE CHISHOLM TRAIL" x={120} y={160} size={92} at={at('Chisholm') + 2} seed={43} />
       <ScrimTag text={MAPTAG} />
     </AbsoluteFill>
@@ -151,7 +176,7 @@ const IndianTerritory: React.FC = () => {
         {(api) => <>
           <MState api={api} name="Oklahoma" at={a + 1} color="#2FE0C4" k={0.8} />
           <Trails api={api} focus="chisholm" noSA />
-          <MHerd api={api} pts={TLINES.chisholm} at={at('Chisholm Trail') - 2} dur={150} w={84} />
+          <MHerd api={api} pts={TLINES.chisholm} at={at('Chisholm Trail') - 8} dur={156} w={84} />
           <MLabel api={api} at={[2560, 1760]} text="INDIAN TERRITORY" sub="today's Oklahoma" show={a + 4} size={30} />
         </>}
       </WestMap>
@@ -294,6 +319,25 @@ const Formation: React.FC<{back?: boolean}> = ({back}) => {
 };
 
 // ---------------------------------------------------------------------------------------------------------------- 3 · three things
+
+/** 11b · "Then the cook, with his wagon": the Matador outfit eating at the chuck wagon, Texas, 1891. */
+const Cook: React.FC = () => {
+  const a = at('Then the cook') - 1;
+  const b = at('And at the very back') - 1;
+  return (
+    <CropCam src={MATADOR} size={MATADOR_SZ} win={[40, 40, 1500, 1010]} k={[[a, 900, 520, 1.42], [b, 1080, 420, 1.62]]} filter="grayscale(1) contrast(1.15) brightness(1.02)"
+      tag="The Matador Ranch outfit at the chuck wagon, Texas, 1891 · Library of Congress" tagY={1026}>
+      {(S, sc) => {
+        const [wx, wy] = S(1400, 330);
+        return <>
+          <Loop cx={wx} cy={wy} rx={170 * sc} ry={130 * sc} at={at('his wagon') - 2} seed={95} tilt={-5} width={6} />
+          <Label text="THE COOK + HIS WAGON" x={110} y={110} size={32} at={a + 3} color="#FF9F1C" />
+          <Note text="the chuck wagon: the drive's kitchen" x={110} y={170} size={52} rot={-3} at={at('his wagon') + 2} />
+        </>;
+      }}
+    </CropCam>
+  );
+};
 
 /** 10 · "Three things could end a drive." */
 const ThreeThings: React.FC = () => {
@@ -462,7 +506,8 @@ const Body: React.FC = () => {
   const shots: [number, React.ReactNode, ('whip' | 'cut')?][] = [
     [0, <Roads />],
     [at('And none') - 1, <NotRoads />, 'cut'],
-    [at('Watch the map') - 1, <Chisholm />, 'whip'],
+    [at('Watch the map') - 1, <PeriodMap />, 'whip'],
+    [at('The first big one') + 20, <Chisholm />, 'cut'],
     [at('Indian Territory') - 1, <IndianTerritory />, 'cut'],
     [at('Later the Western') - 1, <Western />, 'cut'],
     [at('And one went') - 1, <Goodnight />, 'cut'],
@@ -471,6 +516,7 @@ const Body: React.FC = () => {
     [at('Picture one drive') - 1, <Numbers />, 'whip'],
     [at('Ten to fifteen') - 1, <Numbers desk />, 'cut'],
     [at('Up front') - 1, <Formation />, 'whip'],
+    [at('Then the cook') - 1, <Cook />, 'cut'],
     [at('And at the very back') - 1, <Formation back />, 'cut'],
     [at('Three things') - 1, <ThreeThings />, 'whip'],
     [at('One a stampede') - 1, <Stampede />, 'cut'],

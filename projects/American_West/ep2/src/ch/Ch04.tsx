@@ -140,7 +140,7 @@ const Pecos: React.FC = () => {
           <MRiver api={api} pts={PECOS} at={at('Pecos') - 6} />
           <MTrail api={api} pts={GL_SUMNER} at={t0} dur={dur} color={CORAL} width={10} />
           <MHerd api={api} pts={GL_SUMNER} at={t0} dur={dur} w={110} />
-          <MPin api={api} at={TPL.fortBelknap} show={a + 2} label="Texas ranges" side="r" size={44} color={WHITE} />
+          <MPin api={api} at={TPL.fortBelknap} show={a + 2} label="Texas" side="l" size={44} color={WHITE} />
           <MPin api={api} at={TPL.fortSumner} show={at('Fort Sumner') - 1} label="Fort Sumner" sub="NEW MEXICO TERRITORY" side="l" size={58} color={CORAL} />
           <MStandLabel api={api} at={[2252, 2120]} show={at('Pecos')} text="Pecos River" />
         </>}
@@ -163,7 +163,7 @@ const Captives: React.FC<{detail: boolean}> = ({detail}) => {
           <Print src={I.hweeldi} size={Z.hweeldi} x={0} y={0} w={1560} crop={[0, 0, 3840, 2040]} at={-99} seed={42} />
         </Lift>
       </DeskCam>
-      {!detail && <Note text="held by the Army, beside the fort" x={1060} y={70} size={52} rot={-2} at={at('holding') - 2} />}
+      {!detail && <Note text="held by the Army, beside the fort" x={800} y={70} size={52} rot={-2} at={at('holding') - 2} />}
       {detail && <>
         <Big text="≈ 8,000" x={1220} y={600} size={120} at={at('eight') + 2} color={WHITE} />
         <Lines x={1230} y={750} size={54} gap={74} rows={[{text: 'Diné (Navajo) people', at: at('Din') - 2}, {text: '+ hundreds of', at: at('hundreds') - 2}, {text: 'Mescalero Apache', at: at('Mescalero') - 2}]} />
@@ -347,7 +347,7 @@ const LongWalk: React.FC<{part: 0 | 1 | 2}> = ({part}) => {
             </>}
           </>}
         </WestMap>
-        {part === 0 && <Big text="≈ 300 miles" x={1180} y={100} size={110} at={at('three hundred')} color={BONE} />}
+        {part === 0 && <Big text="≈ 300 miles" x={1080} y={100} size={110} at={at('three hundred')} color={BONE} />}
         {part === 0 && <Note text="marched, 1864" x={1200} y={250} size={52} rot={-3} at={at('miles') + 2} />}
         {part === 1 && <>
           <SlapTitle text="THE LONG WALK" x={110} y={90} size={104} at={at('Long Walk')} seed={75} />
@@ -373,7 +373,7 @@ const Camp: React.FC<{detail: boolean}> = ({detail}) => {
             <Print src={I.captives} size={Z.captives} x={0} y={0} w={1600} at={-99} seed={44} filter="grayscale(1) contrast(1.1) brightness(0.95)" />
           </Lift>
         </DeskCam>
-        {!detail && <SlapTitle text="BOSQUE REDONDO" x={110} y={80} size={100} at={at('Bosque')} seed={77} />}
+        {!detail && <SlapTitle text="BOSQUE REDONDO" x={140} y={80} size={92} at={at('Bosque')} seed={77} />}
         <Definition term="Bosque Redondo" def="Spanish for “round grove”: the reservation camp beside Fort Sumner, 1863–68" at={detail ? -99 : at('Redondo') + 8} x={120} y={830} w={1500} />
         {detail && <Lines x={130} y={90} size={62} gap={96} rows={[{text: 'the water was bad', at: at('bad') - 4}, {text: 'the crops failed', at: at('crops') - 2}]} />}
         <ScrimTag text={TAG.captives} />
@@ -596,7 +596,7 @@ const Wagon: React.FC<{close: boolean}> = ({close}) => {
   const lid = close ? interpolate(f, [at('folded') - 2, at('table') + 4], [0, 1], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 2) * (1 + 1.6 * t * (1 - t))}) : 0;
   const parts = close ? 1 : interpolate(g, [at('shelves') - 4, at('shelves') + 6], [0, 1], clamp);
   const fx = close ? keys(f, [[a, 760], [b, 820]]) : keys(f, [[a, 470], [b, 600]]);
-  const spin = close ? keys(f, [[a, 64], [b, 78]]) : keys(f, [[a, 44], [b, 62]]);
+  const spin = close ? keys(f, [[a, 70], [b, 84]]) : keys(f, [[a, 56], [b, 70]]);
   const tilt = close ? keys(f, [[a, 64], [b, 60]]) : keys(f, [[a, 66], [b, 62]]);
   const z = close ? zkeys(f, [[a, 1.18], [b, 1.26]]) : zkeys(f, [[a, 0.92], [b, 1.02]]);
   return (

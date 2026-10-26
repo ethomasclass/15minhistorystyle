@@ -278,19 +278,19 @@ const LedgerGot: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('Who got') - 1;
   const b = at("Who didn't") - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.08], [b, 1.1]])} cx={keys(f, [[a, 920], [b, 980]])} cy={keys(f, [[a, 600], [b, 620]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.08], [b, 1.1]])} cx={keys(f, [[a, 920], [b, 950]])} cy={keys(f, [[a, 600], [b, 620]])} />;
 };
 const LedgerDidnt: React.FC = () => {
   const f = useCurrentFrame();
   const a = at("Who didn't") - 1;
   const b = at('and the Lakota', 2) - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 1.12]])} cx={keys(f, [[a, 980], [b, 1000]])} cy={keys(f, [[a, 620], [b, 640]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 1.1]])} cx={keys(f, [[a, 950], [b, 950]])} cy={keys(f, [[a, 600], [b, 600]])} />;
 };
 const LedgerAll: React.FC = () => {
   const f = useCurrentFrame();
   const a = at('and the Lakota', 2) - 1;
   const b = at('So look') - 1;
-  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 0.95]])} cx={keys(f, [[a, 990], [b, 960]])} cy={keys(f, [[a, 620], [b, 540]])} />;
+  return <LedgerCam z={zkeys(f, [[a, 1.1], [b, 0.95]])} cx={keys(f, [[a, 950], [b, 960]])} cy={keys(f, [[a, 620], [b, 540]])} />;
 };
 
 // N · look at the steer again
@@ -325,7 +325,7 @@ const Closing: React.FC<{two: boolean}> = ({two}) => {
       {two && <>
         <Hand parts={[['one winter']]} x={140} y={190} size={86} at={a + 2} white />
         <Hand parts={[['→ '], ['a painting.', true]]} x={180} y={330} size={110} at={at('painting') - 6} />
-        <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={120} y={860} size={78} at={at('painting') + 2} seed={108} />
+        <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={200} y={860} size={74} at={at('painting') + 2} seed={108} />
         <Note text="the cowboys moved on" x={1260} y={190} size={48} rot={-3} color="#f4efe6" at={at('moved on') - 3} />
       </>}
       <ScrimTag text={TAG.paint} x={34} y={24} />

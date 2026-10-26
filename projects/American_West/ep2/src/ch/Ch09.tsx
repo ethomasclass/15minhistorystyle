@@ -204,8 +204,8 @@ const Grass: React.FC = () => {
           return <Img key={i} src={staticFile(CUT('p2_longhorn'))} style={{position: 'absolute', left: box.x + 30 + col * 150 + (row % 2) * 40, top: box.y + 70 + row * 92, width: 120,
             filter: `${PROPF_QUIET} drop-shadow(4px 5px 0 #050403)`}} />;
         })}
-        <Hand parts={[['the herds grew faster']]} x={1100} y={160} size={70} at={at('herds') - 2} />
-        <Hand parts={[['than the grass.']]} x={1160} y={270} size={70} at={at('grass') - 3} />
+        <Hand parts={[['the herds grew faster']]} x={1060} y={160} size={62} at={at('herds') - 2} />
+        <Hand parts={[['than the grass.']]} x={1110} y={260} size={62} at={at('grass') - 3} />
       </AbsoluteFill>
       <ScrimTag text="Drawn · not to scale" />
     </AbsoluteFill>
@@ -253,12 +253,12 @@ const Hoof: React.FC<{press: number}> = ({press}) => {
   // the hoof's sole sits `press` px above the crust top (0 = touching); the leg rises out of frame
   const y = CRUST - 4 - press;
   return (
-    <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'scale(1.7)', transformOrigin: `572px ${CRUST}px`}}>
+    <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'scale(1.3)', transformOrigin: `852px ${CRUST}px`}}>
       {/* a cow's foreleg in side view, the cloven hoof flat on the crust */}
-      <path d={`M552,${y - 330} L552,${y - 120} Q544,${y - 92} 552,${y - 62} L596,${y - 56} Q606,${y - 92} 590,${y - 120} L590,${y - 330} Z`} fill="rgba(20,26,26,0.92)" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
-      <path d={`M552,${y - 62} L536,${y} L610,${y} L596,${y - 56} Z`} fill="#4c5658" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
-      <line x1={574} y1={y - 58} x2={572} y2={y} stroke={pal.mark} strokeWidth={3} />
-      <path d={`M536,${y} L610,${y}`} stroke="#c9d3d4" strokeWidth={5} strokeLinecap="round" />
+      <path d={`M832,${y - 170} L832,${y - 120} Q824,${y - 92} 832,${y - 62} L876,${y - 56} Q886,${y - 92} 870,${y - 120} L870,${y - 170}`} fill="rgba(20,26,26,0.92)" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
+      <path d={`M832,${y - 62} L816,${y} L890,${y} L876,${y - 56} Z`} fill="#4c5658" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
+      <line x1={854} y1={y - 58} x2={852} y2={y} stroke={pal.mark} strokeWidth={3} />
+      <path d={`M816,${y} L890,${y}`} stroke="#c9d3d4" strokeWidth={5} strokeLinecap="round" />
     </svg>
   );
 };
@@ -301,21 +301,21 @@ const Slice: React.FC<{press: number; hit: number; grassAt: number; labels: numb
         </svg>
       </div>
       {/* the hoof, halfway back */}
-      <Upright y={-70} w={SL} h={SH}><Hoof press={press} /></Upright>
+      <Upright y={-70} w={SL} h={SH + 600}><div style={{position: 'absolute', left: 0, top: 600, width: SL, height: SH}}><Hoof press={press} /></div></Upright>
       <Upright y={0} w={SL} h={SH}>
         {face(false)}
         <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
           {g >= hit && [[-30, -12], [-12, -22], [10, -24], [30, -14]].map(([dx, dy], i) => (
-            <path key={i} d={`M${572 + dx * 0.4},${CRUST} l${dx},${dy}`} stroke={pal.mark} strokeWidth={3} opacity={interpolate(g, [hit, hit + 3, hit + 14], [0, 1, 0.5], clamp)} />
+            <path key={i} d={`M${852 + dx * 0.4},${CRUST} l${dx},${dy}`} stroke={pal.mark} strokeWidth={3} opacity={interpolate(g, [hit, hit + 3, hit + 14], [0, 1, 0.5], clamp)} />
           ))}
-          {g >= grassAt && <path d={`M572,${CRUST_B + 16} L572,${GRASS - 18}`} stroke={pal.mark} strokeWidth={4} strokeDasharray="12 10" opacity={0.8} />}
-          {g >= grassAt + 8 && <path d={`M556,${GRASS - 40} l32,26 M588,${GRASS - 40} l-32,26`} stroke="#c9d3d4" strokeWidth={5} strokeLinecap="round" />}
+          {g >= grassAt && <path d={`M852,${CRUST_B + 16} L852,${GRASS - 18}`} stroke={pal.mark} strokeWidth={4} strokeDasharray="12 10" opacity={0.8} />}
+          {g >= grassAt + 8 && <path d={`M836,${GRASS - 40} l32,26 M868,${GRASS - 40} l-32,26`} stroke="#c9d3d4" strokeWidth={5} strokeLinecap="round" />}
         </svg>
         <div style={{position: 'absolute', left: 30, top: CRUST - 52, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#e6ecec', whiteSpace: 'nowrap', opacity: labels,
           textShadow: '0 0 2px #111, 2px 2px 0 #111'}}>HARD CRUST</div>
         <div style={{position: 'absolute', left: 30, top: CRUST_B + 70, fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: '#e6ecec', whiteSpace: 'nowrap', opacity: labels,
           textShadow: '0 0 2px #111, 2px 2px 0 #111'}}>DEEP SNOW</div>
-        {g >= grassAt && <div style={{position: 'absolute', left: 820, top: GRASS - 6, fontFamily: hand.family, fontSize: 56 * hand.scale, color: pal.mark, whiteSpace: 'nowrap',
+        {g >= grassAt && <div style={{position: 'absolute', left: 360, top: GRASS - 6, fontFamily: hand.family, fontSize: 56 * hand.scale, color: pal.mark, whiteSpace: 'nowrap',
           clipPath: `inset(-60% ${(1 - interpolate(g, [grassAt, grassAt + 10], [0, 1], clamp)) * 100}% -60% -5%)`, textShadow: '0 0 2px #111, 2px 2px 0 #111, -2px 2px 0 #111'}}>grass</div>}
       </Upright>
     </div>
@@ -332,7 +332,7 @@ const Crust: React.FC = () => {
   const press = interpolate(g, [a, d0, d0 + 8, d0 + 18, d0 + 26, d0 + 34], [180, 120, 0, 40, 0, 0], clamp);
   return (
     <AbsoluteFill>
-      <Stage w={SL} fx={keys(f, [[a, 520], [b, 640]])} fy={-DEPTH / 2} tilt={keys(f, [[a, 64], [b, 58]])} spin={keys(f, [[a, -26], [b, -12]])} z={zkeys(f, [[a, 1.0], [b, 1.16]])} dy={190}>
+      <Stage w={SL} fx={keys(f, [[a, 520], [b, 640]])} fy={-DEPTH / 2} tilt={keys(f, [[a, 64], [b, 58]])} spin={keys(f, [[a, -26], [b, -12]])} z={zkeys(f, [[a, 0.96], [b, 1.06]])} dy={120}>
         <Slice press={press} hit={d0 + 8} grassAt={at('grass underneath') - 2} labels={interpolate(g, [at('crust') - 4, at('crust') + 6], [0, 1], clamp)} />
       </Stage>
       <Snow k={0.35} n={60} wind={2.5} seed="c9" />
@@ -500,7 +500,7 @@ const Painted: React.FC = () => {
   const a = at("That's the winter") - 1;
   return (
     <Pic src={I.paint} size={Z.paint} filter={PBW} k={[[a, 1700, 1200, 0.52], [at('What came after') - 1, 1600, 1180, 0.56]]} tag={TAG.paint}>
-      {() => <Note text="the winter Charlie Russell painted" x={980} y={110} size={52} rot={-2} at={at('Charlie') - 3} />}
+      {() => <Note text="the winter Charlie Russell painted" x={840} y={110} size={48} rot={-2} at={at('Charlie') - 3} />}
     </Pic>
   );
 };

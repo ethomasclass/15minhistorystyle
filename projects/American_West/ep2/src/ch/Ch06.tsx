@@ -361,7 +361,7 @@ const Offer: React.FC<{detail: boolean}> = ({detail}) => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <DeskCam k={detail ? [[a, 14, 1.1, -60, 20, 0], [b, 14, 1.16, -80, 20, 0]] : [[a, 22, 0.98, 0, 0, -2], [b, 18, 1.04, 0, 0, 0]]}>
-        <Float x={1240} y={300} w={560} hgt={640} h={14} at={detail ? -99 : at('offered') - 1} rot={-3} seed={14}>
+        <Float x={1240} y={300} w={560} hgt={640} h={14} at={detail ? -99 : a + 4} rot={-3} seed={14}>
           <Prop src={I.coins} m={M6.coins} x={0} y={0} w={500} at={-99} />
         </Float>
       </DeskCam>

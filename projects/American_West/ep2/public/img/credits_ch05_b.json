@@ -1,10 +1,26 @@
 {
-  "ch05/b_cody_poster_94508280.jpg": {
-    "title": "Buffalo Bill's wild west and congress of rough riders",
+  "ch05/b_cody_poster_1890s.jpg": {
+    "title": "Buffalo Bill's wild west and congress of rough riders (pennant poster; downsized from the LOC master)",
     "artist": "",
     "date": "1890-01-01",
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/94508280/",
     "source": "loc:94508280"
+  },
+  "ch05/b_cody_poster_top.jpg": {
+    "title": "Buffalo Bill's wild west and congress of rough riders (top panel: W. F. Cody on horseback)",
+    "artist": "",
+    "date": "1890-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/94508280/",
+    "source": "loc:94508280"
+  },
+  "ch05/b_ikard_up.jpg": {
+    "title": "Bose Ikard (enlarged 4x from the 200 px Commons scan, Lanczos + light unsharp mask)",
+    "artist": "Unknown",
+    "date": "c. 1920",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bose_Ikard.jpg",
+    "source": "credits_ch05.json: ch05/bose_ikard_portrait.jpg"
   }
 }

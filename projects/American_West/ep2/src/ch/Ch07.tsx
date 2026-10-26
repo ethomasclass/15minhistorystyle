@@ -154,7 +154,7 @@ const Hill: React.FC<HillProps> = ({s1, s2, s3, hot, washed = 0, shaft = s2, dri
           <polyline points={RIDGE.join(' ')} fill="none" stroke={pal.mark} strokeWidth={5} strokeLinejoin="round" />
           <line x1={-60} y1={H} x2={L + 60} y2={H} stroke={pal.mark} strokeWidth={2} opacity={0.5} />
           {labels && <>
-            {txt(70, surf(80) + 90, 'CREEK GRAVEL', s1)}
+            {txt(70, surf(80) + 90, 'CREEK GRAVEL', hot === 1 ? s1 : 0)}
             {txt(980, 560 - 24, 'SOLID ROCK', s2)}
             {txt(SHAFT + 30, DRIFT_Y - 120, 'SHAFT', s2, pal.mark, 20)}
             {txt(MILL - 110, surf(MILL) + 50, 'STAMP MILL', s3)}

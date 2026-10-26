@@ -10,6 +10,8 @@ export const CUE_LUFS: Record<string, number> = {
   aw_iron_horse: -16.6, aw_legend_sours: -17.0, aw_long_grief: -22.0, aw_panic: -15.9, aw_promise_theme: -16.9, aw_robber_barons: -16.7,
   // Ep 2's library fallbacks (measured Oct 2026)
   m_frontier: -15.2, m_lament: -16.3, a_mexico: -15.7, j_intrigue: -15.4, r_temperance: -12.6,
+  // Ep 2 Suno cues (Oct 2026)
+  aw_long_drive: -21.2, aw_white_cold: -21.1, aw_boomtown: -22.4, aw_boomtown_rush: -21.9, aw_boomtown_hollow: -23.0,
 };
 /** Volume for a cue so its bed sits `gap` LU under the voice (13 = the Black Sox norm; 14-15 for a quiet, grave stretch). */
 export const bed = (cue: string, gap = 13) => {

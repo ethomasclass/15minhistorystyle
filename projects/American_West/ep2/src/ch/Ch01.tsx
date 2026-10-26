@@ -18,6 +18,7 @@ import {MProp, TPL} from '../kit/trails';
 import {MCattle, MState} from '../kit/ch02_extra';
 import {WShots} from '../kit/ch07_extra';
 import {M1} from '../masks_ch01';
+import type {MaskRef} from '../kit/maskref';
 import {DATES, SUBTITLE, TITLE} from '../project';
 
 const N = words as Narration;
@@ -29,9 +30,35 @@ const TITLE_FRAMES = 150;
 const END = Math.ceil(N.duration * 30) + 40;
 export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 
-const PAINT = 'img/ch01/b_chinook_painting.jpg';
-const PSZ: [number, number] = [4000, 2468];
-const PTAG = 'C. M. Russell, Waiting for a Chinook, 1886 (1907 postcard) · Internet Archive';
+/**
+ * THE PAINTING, in one place so it can be swapped. Every painting shot reads from P: its file, size, tag, steer mask, and the
+ * steer / head / hip / wolves / sky as fractions of the picture (x, y in 0..1), so the cameras follow the composition.
+ * Now: Russell's 1907 repainting (from a postcard; one coyote, no lettering). Planned: the 1886–87 original (several wolves at
+ * upper left, right and lower right; Russell's lettering), once a usable scan is in; set P = ORIGINAL_1887 and give it a mask.
+ */
+type Painting = {src: string; size: [number, number]; tag: string; mask?: MaskRef; steer: Pt; head: Pt; hip: Pt; wolves: Pt[]; sky: Pt};
+type Pt = [number, number];
+const REPAINT_1907: Painting = {
+  src: 'img/ch01/b_chinook_painting.jpg', size: [4000, 2468], tag: 'C. M. Russell, Waiting for a Chinook (his 1907 version, on a postcard) · Internet Archive',
+  mask: M1.steer, steer: [0.42, 0.5], head: [0.7, 0.62], hip: [0.118, 0.29], wolves: [[0.86, 0.668], [0.99, 0.656]], sky: [0.66, 0.36],
+};
+export const ORIGINAL_1887: Painting = {
+  src: 'img/ch01/waiting_for_a_chinook_original_lowres.jpg', size: [406, 289], tag: 'C. M. Russell, Waiting for a Chinook, 1886–87, watercolor · Montana Historical Society via Wikimedia Commons',
+  steer: [0.47, 0.42], head: [0.61, 0.4], hip: [0.34, 0.35], wolves: [[0.11, 0.43], [0.17, 0.43], [0.73, 0.47], [0.815, 0.47], [0.78, 0.71]], sky: [0.5, 0.14],
+};
+const P: Painting = REPAINT_1907;
+const PAINT = P.src;
+const PSZ = P.size;
+const PTAG = P.tag;
+/** A painting point (fractions) in source px. */
+const px = (p: Pt): Pt => [p[0] * PSZ[0], p[1] * PSZ[1]];
+/** The zoom that shows `frac` of the painting's width. */
+const zw = (frac: number) => 1920 / (PSZ[0] * frac);
+/** Camera key on the painting: [frame, point, fraction of the width shown]. */
+const pk = (f: number, p: Pt, frac: number): [number, number, number, number] => [f, ...px(p), zw(frac)];
+const MID: Pt = [0.5, 0.5];
+/** The coral on the steer stays light (it is nearly black in B&W): the trace carries the subject. */
+const STEER_TINT = 0.26;
 const RUSS = 'img/ch01/b_russell_c1900.jpg';
 const RSZ: [number, number] = [1920, 2673];
 const RTAG = 'Charles M. Russell, c. 1900, photographer unknown · Wikimedia Commons';
@@ -40,15 +67,24 @@ const LSZ: [number, number] = [1920, 1080];
 /** The painting in black and white, a little warm (the series' archive look). */
 const PBW = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)';
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference)';
-// points in the painting (source px)
-const HIP: [number, number] = [470, 720];
-const WOLF: [number, number] = [3440, 1650];
-const WOLF2: [number, number] = [3960, 1620];
+
+/**
+ * Lifts the steer's own levels under its mask (it is nearly black in B&W), so the light coral tint reads as see-through paint
+ * on visible fur and ribs rather than a dark red silhouette. Drawn as a child of Pic (S maps source -> screen).
+ */
+const SteerLift: React.FC<{S: (x: number, y: number) => [number, number]; s: number; at: number}> = ({S, s, at: a}) => {
+  const g = useGFrame();
+  if (!P.mask || g < a) return null;
+  const [l, t] = S(0, 0);
+  const m = P.mask.alpha;
+  return <div style={{position: 'absolute', left: l, top: t, width: PSZ[0] * s, height: PSZ[1] * s, background: '#8a8a8a', mixBlendMode: 'screen',
+    opacity: 0.55 * interpolate(g, [a, a + 5], [0, 1], clamp), WebkitMaskImage: `url(${staticFile(m)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m)})`, maskSize: '100% 100%'} as React.CSSProperties} />;
+};
 
 /** The painting on the desk as a torn print. */
 const PaintPrint: React.FC<{x: number; y: number; w: number; at: number; rot?: number; h?: number; blur?: number; seed?: number; tint?: number; traceAt?: number}> = ({x, y, w, at: a, rot = -2, h = 8, blur = 0, seed = 2, tint = 0, traceAt}) => (
   <Lift x={x} y={y} w={w} hgt={w * (PSZ[1] / PSZ[0])} h={h} at={a} rot={rot} blur={blur} seed={seed}>
-    <TornPrint src={PAINT} size={PSZ} x={0} y={0} w={w} at={-99} seed={seed + 1} real grey shadow={5} filter={PBW} mask={M1.steer} tint={tint} traceAt={traceAt}
+    <TornPrint src={PAINT} size={PSZ} x={0} y={0} w={w} at={-99} seed={seed + 1} real grey shadow={5} filter={PBW} mask={P.mask} tint={tint} traceAt={traceAt}
       tapes={[{x: -40, y: 20, w: 160, rot: -36}, {x: w - 120, y: -8, w: 160, rot: 28}]} />
   </Lift>
 );
@@ -57,7 +93,7 @@ const PaintPrint: React.FC<{x: number; y: number; w: number; at: number; rot?: n
 
 /** 1 · Frame 0: the watercolor full-bleed, already drifting in; the hook tape at once. */
 const Open: React.FC = () => (
-  <Pic src={PAINT} size={PSZ} k={[[0, 2000, 1250, 0.5], [at('Montana') + 6, 1720, 1180, 0.57]]} filter={PBW} tag={PTAG} tagY={1026}>
+  <Pic src={PAINT} size={PSZ} k={[pk(0, MID, 0.96), pk(at('Montana') + 6, [P.steer[0] + 0.01, P.steer[1] - 0.02], 0.84)]} filter={PBW} tag={PTAG} tagY={1026}>
     {() => <>
       <SlapTitle text="A MESSAGE TO THE BOSS" x={820} y={70} size={72} at={12} seed={14} />
       <Note text="his cattle were dead" x={1220} y={210} size={54} rot={-3} at={at('dead') - 2} />
@@ -155,7 +191,8 @@ const Russell: React.FC = () => {
             tapes={[{x: 190, y: -14, w: 150, rot: -3}]} />
         </Lift>
       </Desk3D>
-      <Mono text="CHARLIE RUSSELL · 22 IN 1886" x={250} y={60} size={30} at={at('Charlie') - 1} color="#FF6F61" />
+      <Mono text="CHARLIE RUSSELL · PHOTOGRAPHED C. 1900" x={250} y={60} size={30} at={at('Charlie') - 1} color="#FF6F61" />
+      <Note text="(in 1886 he was 22)" x={130} y={930} size={46} rot={-2} at={at('young cowhand') + 2} color="#ffffff" />
       <Note text="painted this instead" x={1120} y={170} size={58} rot={-3} at={at('painted') - 2} />
       <Arrow x1={1360} y1={260} x2={1450} y2={400} bow={-30} at={at('painted') + 4} />
       <Note text="and the foreman sent it" x={1120} y={850} size={54} rot={-3} at={at('sent it') - 2} color="#ffffff" />
@@ -171,8 +208,8 @@ const LookSteer: React.FC = () => {
   const a = at('Look at it') - 1;
   const b = at('Look at the hip') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[[a, 2000, 1250, 0.5], [b, 1650, 1260, 0.6]]} filter={PBW} tag={PTAG} tagY={1026} mask={M1.steer} tintAt={at('One steer')} tint={0.42} traceAt={at('One steer') + 2}>
-    {() => <Note text="one steer, alone" x={1240} y={180} size={60} rot={-3} at={at('alone') - 2} />}
+    <Pic src={PAINT} size={PSZ} k={[pk(a, MID, 0.96), pk(b, P.steer, 0.8)]} filter={PBW} tag={PTAG} tagY={1026} mask={P.mask} tintAt={at('One steer')} tint={STEER_TINT} traceAt={at('One steer') + 2}>
+    {(S, sc) => <><SteerLift S={S} s={sc} at={at('One steer')} /><Note text="one steer, alone" x={1240} y={180} size={60} rot={-3} at={at('alone') - 2} /></>}
     </Pic>
   );
 };
@@ -182,11 +219,13 @@ const Hips: React.FC = () => {
   const a = at('Look at the hip') - 1;
   const b = at('Now look behind') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[[a, 900, 950, 0.95], [b, 760, 900, 1.45]]} filter={PBW} mask={M1.steer} tintAt={-99} tint={0.36}>
-      {(S) => {
-        const [hx, hy] = S(...HIP);
+    <Pic src={PAINT} size={PSZ} k={[pk(a, [P.hip[0] + 0.1, P.hip[1] + 0.08], 0.5), pk(b, P.hip, 0.33)]} filter={PBW} mask={P.mask} tintAt={-99} tint={STEER_TINT * 0.8}>
+      {(S, sc) => {
+        const [hx, hy] = S(...px(P.hip));
+        const r = PSZ[0] * sc * 0.045;
         return <>
-          <Loop cx={hx} cy={hy} rx={260} ry={190} at={at('hip bones') - 2} seed={7} tilt={-8} width={7} />
+          <SteerLift S={S} s={sc} at={-99} />
+          <Loop cx={hx} cy={hy} rx={r} ry={r * 0.73} at={at('hip bones') - 2} seed={7} tilt={-8} width={7} />
           <Note text="the hip bones" x={Math.min(1400, hx + 300)} y={Math.max(120, hy - 280)} size={58} rot={-3} at={at('bones') - 2} />
         </>;
       }}
@@ -194,23 +233,28 @@ const Hips: React.FC = () => {
   );
 };
 
+/** Where the wolves are, together: the camera ends framing all of them (works for one coyote or a ring of wolves). */
+const WOLF_X = P.wolves.map((p) => p[0]);
+const WOLF_Y = P.wolves.map((p) => p[1]);
+const WOLF_C: Pt = [(Math.min(...WOLF_X) + Math.max(...WOLF_X)) / 2, (Math.min(...WOLF_Y) + Math.max(...WOLF_Y)) / 2];
+const WOLF_FRAC = Math.min(0.96, Math.max(0.5, Math.max(...WOLF_X) - Math.min(...WOLF_X) + 0.28, (Math.max(...WOLF_Y) - Math.min(...WOLF_Y) + 0.25) * (PSZ[1] / PSZ[0]) * (16 / 9)));
+
 /** 9 · "Now look behind him. Those are wolves. They're waiting." Pan to the wolves; the beat lands on "wolves". */
 const Wolves: React.FC = () => {
   const a = at('Now look behind') - 1;
   const w = at('wolves');
   const b = at('Russell called') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[[a, 1700, 1300, 0.9], [w - 4, 3100, 1500, 1.1], [b, 3180, 1540, 1.16]]} filter={PBW} tag={PTAG} tagY={1026}>
-      {(S) => {
-        const [wx, wy] = S(...WOLF);
-        const [vx, vy] = S(...WOLF2);
-        return <>
-          <Loop cx={wx} cy={wy} rx={240} ry={170} at={w - 2} seed={11} tilt={-6} width={7} />
-          <Loop cx={Math.min(1840, vx)} cy={vy} rx={110} ry={140} at={w + 4} seed={12} tilt={6} width={6} />
-          <Note text="wolves" x={wx - 160} y={Math.max(110, wy - 330)} size={72} rot={-4} at={w} />
-          <Note text="waiting" x={wx - 100} y={Math.min(880, wy + 220)} size={60} rot={-3} at={at('waiting') - 2} color="#ffffff" />
-        </>;
-      }}
+    <Pic src={PAINT} size={PSZ} k={[pk(a, P.head, 0.6), pk(w - 4, WOLF_C, WOLF_FRAC), pk(b, WOLF_C, WOLF_FRAC * 0.96)]} filter={PBW} tag={PTAG} tagY={1026}>
+      {(S, sc) => <>
+        {P.wolves.map((p, i) => {
+          const [x, y] = S(...px(p));
+          const r = PSZ[0] * sc * 0.05;
+          return <Loop key={i} cx={Math.min(1850, Math.max(70, x))} cy={y} rx={r} ry={r * 0.75} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />;
+        })}
+        <Note text="wolves" x={1240} y={120} size={78} rot={-4} at={w} />
+        <Note text="waiting" x={1300} y={880} size={62} rot={-3} at={at('waiting') - 2} color="#ffffff" />
+      </>}
     </Pic>
   );
 };
@@ -224,7 +268,7 @@ const ChinookTitle: React.FC = () => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={keys(f, [[a, 14], [b, 22]])} z={zkeys(f, [[a, 1.08], [b, 0.96]])} rotZ={keys(f, [[a, 2], [b, -1]])}>
-        <PaintPrint x={420} y={160} w={1180} at={-99} rot={-1} tint={0.32} />
+        <PaintPrint x={420} y={160} w={1180} at={-99} rot={-1} tint={STEER_TINT * 0.7} />
       </Desk3D>
       <SlapTitle text="WAITING FOR A CHINOOK" x={140} y={820} size={92} at={at('Waiting for')} seed={18} />
       <ScrimTag text={PTAG} x={34} y={24} />
@@ -243,7 +287,7 @@ const Chinook: React.FC = () => {
   const fade = interpolate(g, [never - 2, never + 10], [1, 0.15], clamp);
   return (
     <AbsoluteFill>
-      <Pic src={PAINT} size={PSZ} k={[[a, 2629, 900, 0.7], [b, 2500, 1000, 0.64]]} filter={PBW} />
+      <Pic src={PAINT} size={PSZ} k={[pk(a, P.sky, 0.7), pk(b, [P.sky[0] - 0.03, P.sky[1] + 0.04], 0.76)]} filter={PBW} />
       <div style={{position: 'absolute', inset: 0, opacity: fade}}>
         {[0, 1, 2].map((i) => (
           <Arrow key={i} x1={560 + i * 40} y1={130 + i * 90} x2={1180 + i * 60} y2={110 + i * 95} bow={-40 + i * 20} at={at('warm wind') - 4 + i * 3} dur={14} width={6} />
@@ -261,8 +305,9 @@ const LastOf: React.FC = () => {
   const a = at('The picture has') - 1;
   const b = at('Twenty years') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[[a, 2000, 1150, 0.58], [b, 2000, 1300, 0.5]]} filter={PBW} tag={PTAG} tagY={24} mask={M1.steer} tintAt={a} tint={0.42} traceAt={a + 4}>
-      {() => <>
+    <Pic src={PAINT} size={PSZ} k={[pk(a, [0.5, 0.46], 0.84), pk(b, [0.5, 0.53], 0.96)]} filter={PBW} tag={PTAG} tagY={24} mask={P.mask} tintAt={a} tint={STEER_TINT} traceAt={a + 4}>
+      {(S, sc) => <>
+        <SteerLift S={S} s={sc} at={a} />
         <Note text="its other name" x={1300} y={150} size={56} rot={-3} at={at('another name') - 2} />
         <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={170} y={920} size={70} at={at('Last')} seed={19} />
       </>}
@@ -349,8 +394,8 @@ const QuestionDesk: React.FC<{second?: boolean}> = ({second}) => {
 const BackToSteer: React.FC = () => {
   const a = at("And we'll") - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[[a, 1700, 1250, 0.62], [a + 60, 1690, 1250, 0.625]]} filter={PBW} tag={PTAG} tagY={24} mask={M1.steer} tintAt={a} tint={0.42} traceAt={a + 3}>
-      {() => <Note text="we'll come back to him" x={1180} y={860} size={58} rot={-3} at={at('come back') - 2} />}
+    <Pic src={PAINT} size={PSZ} k={[pk(a, P.steer, 0.8), pk(a + 60, [P.steer[0] - 0.002, P.steer[1]], 0.795)]} filter={PBW} tag={PTAG} tagY={24} mask={P.mask} tintAt={a} tint={STEER_TINT} traceAt={a + 3}>
+      {(S, sc) => <><SteerLift S={S} s={sc} at={a} /><Note text="we'll come back to him" x={1180} y={860} size={58} rot={-3} at={at('come back') - 2} /></>}
     </Pic>
   );
 };
@@ -383,7 +428,7 @@ const Title: React.FC = () => {
   const pal = usePal();
   return (
     <AbsoluteFill style={{background: '#0b0a08'}}>
-      <PhotoCam src={PAINT} size={PSZ} cx={2000} cy={1234} s={zkeys(f, [[0, 0.5], [TITLE_FRAMES, 0.53]])} bw="grayscale(1) sepia(0.12) contrast(1.15) brightness(0.4)" vignette={0.8} />
+      <PhotoCam src={PAINT} size={PSZ} cx={PSZ[0] / 2} cy={PSZ[1] / 2} s={zkeys(f, [[0, zw(0.96)], [TITLE_FRAMES, zw(0.9)]])} bw="grayscale(1) sepia(0.12) contrast(1.15) brightness(0.4)" vignette={0.8} />
       <SlapTitle text={TITLE} x={300} y={360} size={130} at={4} seed={61} />
       {g >= 14 && <div style={{position: 'absolute', left: 340, top: 590, fontFamily: JF.display, fontSize: 56, color: pal.mark, whiteSpace: 'nowrap', textShadow: '0 3px 16px rgba(0,0,0,0.9)',
         opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
