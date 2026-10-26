@@ -18,6 +18,23 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 8 | ***Dressed to Kill:** How Arsenic Green Took Over the 1800s*, 1775–1900 | 9:40 | 8 | 1,654 | this repo · `claude/laughing-gates-j5en30` (`projects/Dressed_To_Kill/`) | "…The green never changed. What changed was who had to prove it was safe. William Morris called it witch fever. But this time, the witch was real." + subscribe line and a 13 s end screen |
 | 9 | ***When Europe Ate Mummies:** The Strange & Spooky History of Mummy Medicine* (spooky season) | 8:53 | 9 | 1,433 | this repo · `ccr-76f2028e-9z2soe` (`projects/Mummy_Medicine/`) | Thanks and subscribe over the end screen. Plus 6 vertical Shorts |
 | 10 | ***The Balloon War:** Fake Tanks, Paper Bombs, and D-Day*, 1944–1945 (+ 2023) | 9:29 | 7 | 1,599 | this repo · `ccr-76f2028e-9z2soe` (`projects/Balloon_War/`) | "…a war that arrived on paper balloons… ended with paper birds." + subscribe line and a 10 s end screen |
+| 11 | ***Log Cabin:** How an Insult Won the White House* (1840) | 7:45 | 7 | 1,324 | this repo · `projects/Log_Cabin/` (made Oct 11, alongside the Mummies video) | "…For 31 days." |
+| 12 | ***In Their Own Words:** Secession, Fort Sumter, and the Picnic at Bull Run* (Civil War series 1) | 10:01 | 9 | 1,635 | this repo · `projects/In_Their_Own_Words/` | "…Nobody knew yet what it would end." |
+| 13 | ***Landless, Homeless, Voteless*** (Reconstruction, Part 1) | 13:08 | 10 | 2,555 | this repo · `projects/Reconstruction/ep1/` | "…sends a Black senator to Washington." |
+| 14 | ***Bottom Rail on Top*** (Reconstruction, Part 2) | 12:50 | 10 | 2,242 | this repo · `projects/Reconstruction/ep2/` | "Next time: the Klan, a crash, a bank, and a deal that ended it all." |
+| 15 | ***Redemption*** (Reconstruction, Part 3) | 13:00 | 10 | 2,139 | this repo · `projects/Reconstruction/ep3/` | "…to start living up to it." |
+| 16 | ***Forever Free:** How a War for the Union Became a War for Freedom* (Civil War series 2) | 9:41 | 8 | 1,589 | this repo · `projects/Forever_Free/` | "…And the war still had to be won." |
+| 17 | ***Except:** How the Civil War Was Decided, and What It Left Open* (Civil War series 3) | 9:24 | 8 | 1,540 | this repo · `projects/Except/` | "…Except as a punishment for crime." |
+| 18 | ***Not in the Picture:** Grant, the Railroad, and Who Built It* (American West, Ep 1 of 4; the first video as **Chunk History**) | 15:59 | 9 | 2,450 | this repo · `projects/American_West/ep1/` | "…It involved about five million cows." (tees up Ep 2) |
+
+**Shorts made as their own projects** (in `projects/`): *The Last Public Execution* (`Last_Public_Hanging`), *Rumpelstiltskin*,
+*World Series*, *Pledge Salute*, *Candy Scare*, and two scripted but not built (`Last_Time_Debt_Free_Short`,
+`Recession_Indicators_Short`). Their `src/project.ts` still carries the Black Sox title they were copied from; the Short's own
+title is in its `review/` YouTube text.
+
+**Everything is on one branch now** (Oct 26, 2026): every project folder above, the Chunk History brand (`brand/chunk-history/`),
+the merged music library (71 cues) and the skill were merged from their working branches into the main line; the "Repo · branch"
+column says where each was made.
 
 ## What each one added
 
@@ -84,6 +101,25 @@ The two Jackson videos before it used other looks. Each video's key documents ar
   tool**, a landing map drawn from Mikesh's 285 recorded incidents, a censor bar that lifts, and a paper balloon folding into a crane.
   **A mistake to avoid:** its first cut leaned on full-screen photos with slow pushes, 3D depth fly-throughs and color modern photos.
   You said it looked "way too Ken Burns", so every photo was rebuilt as a cut-out or a desk card, and those tools were removed.
+
+- **Log Cabin** (1840; Harrison's "log cabin and hard cider" campaign, the insult that became a slogan): a 7:45 one-off in the
+  established look.
+- **The Civil War series** (*In Their Own Words* → *Forever Free* → *Except*, about 9–10 minutes each, for Unit 4): one shared
+  **3D map base** (`civwar1861.json`, built with `map3d.tsx` as in *The Exact Spot*; its `MapTest` composition is the proof for all
+  three), one **series image-prompt file** (`script/FLOW_PROMPT.md`), each video's image list and shot list in `research/`, and a
+  "Next time: …" handoff line from one part to the next.
+- **The Reconstruction series** (*Landless, Homeless, Voteless* → *Bottom Rail on Top* → *Redemption*, ~13 minutes each) added the
+  **collage board** (`techniques/collage_board.md`; one piece pinned per chapter, *but* / *therefore* yarn), **worn, creased photos
+  with no frames**, **notes on paper slips**, **period music** (the `rc_` cues, LOC National Jukebox recordings via
+  `tools/jukebox.py`, local ACE-Step cues), the **Chunk History brand** (`brand/chunk-history/`), the Vox motion study
+  (`techniques/vox_motion_study.md`) and the **never-speed-up-the-voice** rule.
+- **The American West series** (four parts, planned in `projects/American_West/SERIES.md`; Ep 1 *Not in the Picture* finished
+  Oct 26) added the **series story arc** every episode follows (11 beats, a unit question, the Promise Ledger, hinge years and a
+  callback table; the skill's `script-writing.md` §10), **eleven_v4 one-take narration** with `[delivery cues]`, the **tinted
+  lithograph AI style** (`LITHO_PROMPT.md`), **depth and 3D** (wide → detail, a cut every 3–6 s, the tilted drawn map, 3D
+  cut-aways), the first **Chunk History intro** and **mark-snap chapter breaks** (with a clicks-and-page-turn sound, no tones),
+  **gentle shot transitions**, the **Black Sox mix levels** (narration −18 LUFS, music 13 LU under, `level_voice.py`, `bed()`),
+  **Suno prompt docs** with tempo, structure tags and minimum lengths, a **fact-check pass** sourced on screen, and the six `aw_` cues.
 
 ## Shorts results (log each one 48 hours after posting)
 
