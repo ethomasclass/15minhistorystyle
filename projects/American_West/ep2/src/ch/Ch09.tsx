@@ -37,7 +37,7 @@ import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, Quote, type Narration} from '../kit/shell';
 import {keys, Lift, PhotoCam, ScrimTag, SlapTitle, TornPrint, useSlap, zkeys} from '../kit/west';
 import {DeskCam, Float, Label, LITHO_QUIET, Lines, Pic, Prop, Stage, Upright} from '../kit/ch04_extra';
-import {DeskShot, Hand, Marks, Node, Print, Sounds, Wire, WShots} from '../kit/ch07_extra';
+import {DeskShot, Hand, Node, Print, Sounds, Wire, WShots} from '../kit/ch07_extra';
 import {MPin, W_MAP, WestMap} from '../kit/ch01_extra';
 import {MProp, TPL} from '../kit/trails';
 import {CUT, insideBox, PROP, PROPF_QUIET, Quiet, Snow} from '../kit/ch07_10_extra';
@@ -132,7 +132,7 @@ const Reasons: React.FC<{upto: number; a: number; b: number; snow?: boolean}> = 
               <div style={{position: 'absolute', left: 40, top: 22, fontFamily: JF.display, fontSize: 130, lineHeight: 1, color: pal.mark}}>{r.n}</div>
               {g >= t && <div style={{position: 'absolute', left: 170, top: 30, fontFamily: hand.family, fontSize: 80 * hand.scale, color: pal.mark, whiteSpace: 'nowrap',
                 clipPath: `inset(-60% ${(1 - interpolate(g, [t, t + 12], [0, 1], clamp)) * 100}% -60% -5%)`}}>{r.text}</div>}
-              {g >= t + 10 && <div style={{position: 'absolute', left: 176, top: 136, fontFamily: JF.mono, fontSize: 24, letterSpacing: 2, color: 'rgba(237,231,220,0.8)', whiteSpace: 'nowrap'}}>{r.sub.toUpperCase()}</div>}
+              {g >= t + 10 && <div style={{position: 'absolute', left: 176, top: 152, fontFamily: JF.mono, fontSize: 24, letterSpacing: 2, color: 'rgba(237,231,220,0.8)', whiteSpace: 'nowrap'}}>{r.sub.toUpperCase()}</div>}
             </Slot>
           );
         })}
@@ -250,7 +250,7 @@ const Hoof: React.FC<{press: number}> = ({press}) => {
   // the hoof's sole sits `press` px above the crust top (0 = touching); the leg rises out of frame
   const y = CRUST - 4 - press;
   return (
-    <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
+    <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'scale(1.7)', transformOrigin: `572px ${CRUST}px`}}>
       <path d={`M560,${y - 300} L566,${y - 70} L548,${y - 40} L540,${y} L604,${y} L612,${y - 44} L598,${y - 72} L606,${y - 300}`} fill="rgba(20,26,26,0.9)" stroke={pal.mark} strokeWidth={4} strokeLinejoin="round" />
       <line x1={572} y1={y - 40} x2={572} y2={y} stroke={pal.mark} strokeWidth={3} />
       <path d={`M540,${y} L604,${y}`} stroke="#c9d3d4" strokeWidth={6} strokeLinecap="round" />
@@ -296,7 +296,7 @@ const Slice: React.FC<{press: number; hit: number; grassAt: number; labels: numb
         </svg>
       </div>
       {/* the hoof, halfway back */}
-      <Upright y={-DEPTH / 2} w={SL} h={SH}><Hoof press={press} /></Upright>
+      <Upright y={-70} w={SL} h={SH}><Hoof press={press} /></Upright>
       <Upright y={0} w={SL} h={SH}>
         {face(false)}
         <svg width={SL} height={SH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
@@ -332,7 +332,7 @@ const Crust: React.FC = () => {
       </Stage>
       <Snow k={0.35} n={60} wind={2.5} seed="c9" />
       <Note text="the snow froze into a hard crust" x={110} y={110} size={56} rot={-2} at={at('froze') - 2} />
-      <Note text="they couldn't dig through it" x={1120} y={880} size={52} rot={-3} at={at("couldn't dig") - 2} />
+      <Note text="they couldn't dig through it" x={130} y={210} size={52} rot={-3} at={at("couldn't dig") - 2} />
       <ScrimTag text="Drawn · not to scale" />
     </AbsoluteFill>
   );
@@ -407,17 +407,31 @@ const Nobody: React.FC = () => {
 };
 const Half: React.FC = () => {
   const f = useCurrentFrame();
+  const g = useGFrame();
+  const pal = usePal();
   const a = at('In Montana') - 1;
   const b = at('One of the ranchers') - 1;
+  const h0 = at('more than half') - 2;
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <DarkPaper />
       <AbsoluteFill style={{transform: `scale(${zkeys(f, [[a, 0.98], [b, 1.05]])})`, transformOrigin: '45% 50%'}}>
-        <Label text="Montana · cattle on the open range, 1886–87" x={300} y={170} size={30} at={a + 2} />
-        <Marks n={20} hot={11} x={300} y={300} cols={10} cell={130} at={a + 4} hotAt={at('more than half') - 2} />
-        <Hand parts={[['some estimates: '], ['more than half', true]]} x={300} y={700} size={84} at={at('some estimates') - 2} />
+        <Label text="Montana · cattle on the open range, winter 1886–87" x={280} y={150} size={30} at={a + 2} />
+        {Array.from({length: 20}).map((_, i) => {
+          const col = i % 10;
+          const row = Math.floor(i / 10);
+          if (g < a + 4 + i * 0.6) return null;
+          const gone = i < 11 && g >= h0 + i;
+          return (
+            <div key={i} style={{position: 'absolute', left: 280 + col * 140, top: 250 + row * 160, width: 130, height: 110}}>
+              <Img src={staticFile(CUT('p2_longhorn'))} style={{width: 130, opacity: gone ? 0.16 : 1, filter: `${PROPF_QUIET} drop-shadow(4px 5px 0 #050403)`}} />
+              {gone && <div style={{position: 'absolute', left: 6, right: 6, top: 96, height: 3, background: pal.mark, opacity: 0.8}} />}
+            </div>
+          );
+        })}
+        <Hand parts={[['some estimates: '], ['more than half', true]]} x={280} y={660} size={84} at={at('some estimates') - 2} />
       </AbsoluteFill>
-      <ScrimTag text="Estimates vary widely; one mark = one in twenty, illustrative" />
+      <ScrimTag text="Estimates vary widely; one figure = one in twenty, illustrative" />
     </AbsoluteFill>
   );
 };
@@ -469,7 +483,7 @@ const Painted: React.FC = () => {
   const a = at("That's the winter") - 1;
   return (
     <Pic src={I.paint} size={Z.paint} filter={PBW} k={[[a, 1700, 1200, 0.52], [at('What came after') - 1, 1600, 1180, 0.56]]} tag={TAG.paint}>
-      {() => <Note text="the winter Charlie Russell painted" x={1080} y={900} size={52} rot={-2} at={at('Charlie') - 3} />}
+      {() => <Note text="the winter Charlie Russell painted" x={760} y={900} size={52} rot={-2} at={at('Charlie') - 3} />}
     </Pic>
   );
 };
