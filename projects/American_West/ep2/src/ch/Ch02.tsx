@@ -68,8 +68,8 @@ const LastTime: React.FC = () => {
       <Note text="the railroad, done" x={1250} y={70} size={48} rot={-3} at={10} color="#ffffff" />
       <ScrimTag text="A. J. Russell, East and West Shaking Hands at Laying Last Rail, 1869 · Wikimedia Commons" />
       <Hand parts={[['a man with an idea']]} x={140} y={210} size={74} at={at('a man with') - 2} />
-      <Hand parts={[['+ about '], ['5 million cows', '#ffffff']]} x={180} y={330} size={74} at={at('five million') - 2} />
-      <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={760} y={430} w={900} at={at('cows') + 1} tint={0.5} traceAt={at('cows') + 6} />
+      <Hand parts={[['+ about '], ['5 million cows', '#ffffff']]} x={170} y={330} size={66} at={at('five million') - 2} />
+      <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={480} y={440} w={760} at={at('cows') + 1} tint={0.5} traceAt={at('cows') + 6} />
     </AbsoluteFill>
   );
 };
@@ -373,12 +373,12 @@ const Stack: React.FC<{means?: boolean}> = ({means}) => {
       </div>
       {!means && <>
         <SlapTitle text="STACK IT UP" x={150} y={50} size={84} at={a + 2} seed={53} />
-        <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={160} y={600} w={440} at={at('Cheap cows') - 1} />
+        <Prop src="img/props/p2_longhorn.jpg" m={M2.longhorn} x={160} y={600} w={440} at={a + 8} />
         <Prop src="img/props/p2_coin_one.jpg" m={M2.coinOne} x={520} y={800} w={120} at={at('Cheap cows') + 3} rot={-8} />
         <Prop src="img/props/p2_coin_stack.jpg" m={M2.coinStack} x={800} y={560} w={230} at={at('Hungry cities') - 1} rot={3} />
         <Label text="$40 IN CHICAGO" x={780} y={920} size={26} at={at('Hungry cities') + 2} />
-        <div style={{position: 'absolute', left: 1180, top: 560, width: 600, height: 300}}>
-          <TornPrint src={YARD} size={STEREO_SZ} x={0} y={0} w={560} crop={[220, 130, 1440, 1320]} at={at('A railroad in') - 1} seed={57} real grey shadow={6} filter={ENGR} rot={3} />
+        <div style={{position: 'absolute', left: 1160, top: 520, width: 520, height: 300}}>
+          <TornPrint src={YARD} size={STEREO_SZ} x={0} y={0} w={480} crop={[220, 130, 1440, 1320]} at={at('A railroad in') - 1} seed={57} real grey shadow={6} filter={ENGR} rot={3} />
         </div>
       </>}
     </AbsoluteFill>

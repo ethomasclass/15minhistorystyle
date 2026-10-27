@@ -646,8 +646,8 @@ const Body: React.FC = () => (
 
 export const Ch09: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch09_the_big_die_up.wav" lead={LEAD} quiet music={[
-    // SUNO: aw_white_cold replaces this; library fallback j_grief at the grave bed gap (14 LU under the voice)
-    {src: 'music/j_grief.mp3', volume: bed('j_grief', 14)},
+    // aw_white_cold (Suno) from 80 s in (ch01 uses its first ~75 s), at the grave bed gap (14 LU under the voice)
+    {src: 'music/aw_white_cold.mp3', volume: bed('aw_white_cold', 14), startFrom: 30 * 80},
   ]}>
     <Quiet>
       <Body />

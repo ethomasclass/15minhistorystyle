@@ -31,7 +31,7 @@ After "Hold onto that one" the Goodnight-Loving stays coral and the others dim.
     "best customer: the U.S. Army"; held into the tail.
 
 ## Music
-`m_frontier` (`// SUNO: aw_long_drive replaces this`). The cue is only 69 s, so a second pass from 12 s in crossfades under the
+(superseded: see the Oct 27 section below) `m_frontier` (`// SUNO: aw_long_drive replaces this`). The cue is only 69 s, so a second pass from 12 s in crossfades under the
 toll beat (≈ 65–67 s).
 
 ## Images
@@ -51,3 +51,9 @@ p2_longhorn, p3_saddle, p3_lariat, p4_chuck_wagon.
 `tools/probe_text.mjs` every 10th frame (shots use `WShots`, so the probe sees hard cuts): fixed the three hits it found (Ch01
 "come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
 re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
+
+## Coordinator review fixes (Oct 27)
+- New first map beat: the Kansas Pacific's own 1870s cattle-trail map (Harry Ransom Center photo, Commons) lands on the desk on
+  "Watch the map", then a cut to our map, where the Chisholm starts drawing ~0.3 s earlier and Abilene/San Antonio pins are up at once.
+- The cook beat cuts to the 1891 Matador Ranch outfit at the chuck wagon (LOC), wagon looped.
+- Music: ONE `aw_long_drive` at `bed('aw_long_drive')` from the start; the chapter uses only its first ~85 s (ch05 takes it from 85 s).

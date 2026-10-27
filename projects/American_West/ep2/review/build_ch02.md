@@ -49,3 +49,11 @@ background hatching): `review/ch02_mask_mccoy_poly.py`; job stub in `tools/mask_
 `tools/probe_text.mjs` every 10th frame (shots use `WShots`, so the probe sees hard cuts): fixed the three hits it found (Ch01
 "come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
 re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
+
+## Coordinator review fixes (Oct 27)
+- Callback: Ep 1's Promontory print is on the desk from the first frames ("the railroad, done"), the longhorn drops in on "cows".
+- "soldiers home from the war" is now on the Texas map (Austin pin, "1865 · CONFEDERATE VETERANS COME HOME") with the coin prop.
+  (No PD photo/engraving of returning Texas veterans turned up in a quick LOC/Commons search.)
+- THE PROBLEM: the longhorn prop stands beside the $4 coin.
+- STACK IT UP is a tape title; the longhorn lands right away, then coin, the $40 coin stack, and a torn print of McCoy's yard with
+  stock cars, one per line.

@@ -28,6 +28,7 @@ const polyD = (pts: number[][]) => 'M' + pts.map(([x, y]) => `${x.toFixed(1)},${
 /**
  * A cattle trail: a dusty dashed path (no rail ties, so it never reads as a railroad), drawn on from its south end.
  * Coral for the trail the beat is about, teal for the rest. `prog` overrides the draw-on.
+ * Lifted 1px, not 2px: at some map camera angles Chrome dropped the 2px layer (ch04/ch05 builds, MLine in ch456_extra).
  */
 export const MTrail: React.FC<{api: WApi; pts: number[][]; at: number; dur?: number; prog?: number; color?: string; width?: number; opacity?: number}> = ({
   api, pts, at, dur = 30, prog, color, width = 9, opacity = 1,
@@ -39,7 +40,7 @@ export const MTrail: React.FC<{api: WApi; pts: number[][]; at: number; dur?: num
   const [W, H] = W_MAP.size;
   const d = polyD(subLine(pts, p));
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(2px)', opacity}}>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', transform: 'translateZ(1px)', opacity}}>
       <path d={d} fill="none" stroke={SHADOW} strokeWidth={api.px(width + 8)} strokeLinecap="round" strokeLinejoin="round" opacity={0.8} />
       <path d={d} fill="none" stroke={c} strokeWidth={api.px(width * 2.4)} strokeLinecap="round" strokeLinejoin="round" opacity={0.18} />
       <path d={d} fill="none" stroke={c} strokeWidth={api.px(width)} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={`${api.px(22)} ${api.px(12)}`} />

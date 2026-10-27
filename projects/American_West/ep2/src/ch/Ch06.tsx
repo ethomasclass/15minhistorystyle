@@ -573,8 +573,8 @@ export const Ch06: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch06_1874.wav" lead={LEAD} music={[
     // the promise and the expedition (j_intrigue, picking up from ch05's tease)
     {src: 'music/j_intrigue.mp3', volume: bed('j_intrigue'), startFrom: 8 * 30, to: at('Newspapers') + 6, fadeOut: 24},
-    // the rush, from "Newspapers did the rest" (SUNO: aw_boomtown replaces r_temperance)
-    {src: 'music/r_temperance.mp3', volume: bed('r_temperance'), from: at('Newspapers') - 6},
+    // the rush, from "Newspapers did the rest": aw_boomtown, cue time 0 at "Newspapers" (ch07 continues the same file from 42.65 s)
+    {src: 'music/aw_boomtown.mp3', volume: bed('aw_boomtown'), from: Math.round(30 * 43.72) - 2},
   ]}>
     <Body />
   </ChapterShell>

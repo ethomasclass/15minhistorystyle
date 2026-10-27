@@ -17,7 +17,7 @@
 //  L "Over forty million ounces…until 2002."   ≈ 40,000,000 OZ counter + the 1877 → 2002 bar
 //  M "So, stack it up…then a company."         cut-away wide, all three lit, labelled free-for-all / hard rock / a company (coral)
 //  N "That means most miners…started."         handwriting over the dimmed cut-away
-//  O "Working for wages. Just underground."    cut-away push into the drift: the ore cart deep in the rock
+//  O "Working for wages. Just underground."    cut-away push into the drift (ore cart); both lines written by "Just", then a hold as the music stops
 //  P "Quick thing…subscribe. It's free."       desk of props pulling out; one small teal note "subscribe ↓"
 //  Q "Cheap as dirt, even. Hold onto that phrase." the wire spool edges in from the right; "cheap as dirt" in small handwriting
 import React from 'react';
@@ -434,14 +434,15 @@ const Means: React.FC = () => {
 };
 
 // O · working for wages, just underground
+/** On "Just underground." the music stops (aw_boomtown's rush ends at 101.2 s into the file) and the picture holds: no new marks. */
 const Underground: React.FC = () => {
   const a = at('Working') - 1;
   const b = at('Quick thing') - 1;
   return (
-    <HillShot k={[[a, 760, 56, -10, 1.35], [b, 730, 52, -16, 1.62]]}
+    <HillShot k={[[a, 760, 56, -10, 1.35], [at('Just') - 2, 730, 52, -16, 1.62], [b, 730, 52, -16, 1.62]]}
       hill={{s1: 0.2, s2: 1, s3: 1, hot: 0, shaft: 1, drift: 1, at1: -99, at2: -99, at3: -99, labels: false, cart: a + 4}}>
       <Hand parts={[['working for wages.']]} x={150} y={130} size={84} at={at('Working') - 2} />
-      <Hand parts={[['just ', false], ['underground.', true]]} x={200} y={260} size={96} at={at('Just') - 3} />
+      <Hand parts={[['just ', false], ['underground.', true]]} x={200} y={260} size={96} at={at('wages') + 8} />
     </HillShot>
   );
 };
@@ -530,7 +531,7 @@ const SFX: [number, string, number][] = [
   [at('forty') - 2, 'block_tap_soft', 0.12], tick('until', 4), [at('2002') - 1, 'block_tap_soft', 0.15],
   tick('stack', 5), tick('freeforall'), tick('hard rock'), tick('company'),
   tick('That means', 0), tick('most', 5), tick("where they'd", 5),
-  [at('Working') + 3, 'paper_slap_soft', 0.15], tick('Working', 4), tick('Just', 5),
+  [at('Working') + 3, 'paper_slap_soft', 0.15], tick('Working', 4), tick('wages', -6),
   tick('subscribe', 4), tick('Cheap', 4), [at('Cheap') + 2, 'card_slide_soft', 0.15], tick('Hold', 4),
 ];
 
@@ -543,10 +544,9 @@ const Body: React.FC = () => (
 
 export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_who_got_the_gold.wav" lead={LEAD} music={[
-    // SUNO: aw_boomtown replaces this (with its hollow turn on "Just underground."); library fallback g_cotton_engine
-    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine'), to: at('Just') + 4, fadeOut: 10},
-    // the hollow turn: the bed drops on "Just underground." and comes back lighter under the plug
-    {src: 'music/g_cotton_engine.mp3', volume: bed('g_cotton_engine', 16), from: at('Quick thing') - 10, startFrom: 30 * 20},
+    // aw_boomtown (Suno): the rush joined to a hollow. From 42.67 s in, the rush slows to a stop at 101.2 s in the file, just
+    // before "Just" (ch07 58.68 s); the hollow comes in under "Just underground." and carries the plug. Don't move it.
+    {src: 'music/aw_boomtown.mp3', volume: bed('aw_boomtown'), startFrom: 1280},
   ]}>
     <Body />
   </ChapterShell>

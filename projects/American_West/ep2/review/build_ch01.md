@@ -26,7 +26,7 @@ Contact sheet: `review/stills/ch01_sheet.jpg` (30 frames).
 Then `ChannelIntro` (clicks only) and the title card (CHEAP AS DIRT / subtitle / 1866 – 1887) over the dimmed painting.
 
 ## Sound and music
-`r_cold_open` at `bed('r_cold_open', 12)` (`// SUNO: aw_white_cold replaces this`), dipping out into the channel intro. **The title card
+(superseded: see the Oct 27 section below) `r_cold_open` at `bed('r_cold_open', 12)` (`// SUNO: aw_white_cold replaces this`), dipping out into the channel intro. **The title card
 is not silent:** the same cue comes back under it (from 56 s into the cue) at a little above the bed, with Ep 1's stamp; it fades with
 the card. Gentle SFX as in Ep 1 (whoosh/whip_soft on shots, marker_tick 4 frames before each note, stamp on tapes, paper slaps).
 
@@ -57,3 +57,15 @@ re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
 - The steer's coral tint reads quite red because the steer is nearly black in B&W; its fur and ribs stay visible (see-through),
   but if it reads as a red silhouette on a big screen, lower `tint` in `LookSteer`/`LastOf`/`BackToSteer` (now 0.42) or lift
   the steer's brightness under the mask.
+
+## Coordinator review fixes (Oct 27)
+- Steer tint lowered to 0.26 (`STEER_TINT`), and the steer's own levels are lifted under its mask (`SteerLift`, a masked screen layer), so the
+  coral sits on visible fur and ribs; the trace carries the subject. The WAITING FOR A CHINOOK desk print is plain B&W.
+- Russell's tag now reads "CHARLIE RUSSELL · PHOTOGRAPHED C. 1900"; "(in 1886 he was 22)" is a separate handwritten note off the photo.
+- **The painting is one constant `P`** (file, size, tag, mask, and steer / head / hip / wolves / sky as fractions of the picture). Every
+  painting shot's camera is computed from it (`pk`, `zw`); the wolves shot ends framing all wolves together and loops each one, so it
+  works for the 1907 repainting (one coyote, right) and the 1886–87 original (wolves upper left, right, lower right). `ORIGINAL_1887`
+  is defined with its points (from the 406 px Commons copy); to swap, set `P = ORIGINAL_1887` and give it a steer mask. Not swapped yet;
+  the tag now says the current image is Russell's 1907 version.
+- Music: `aw_white_cold` at `bed('aw_white_cold')` from frame 0, out under the channel intro; on the title card the same cue continues
+  (from where it would be) at 1.2× the bed, fading in over 12 frames, so the stamp lands on a rising bed rather than under a loud one.

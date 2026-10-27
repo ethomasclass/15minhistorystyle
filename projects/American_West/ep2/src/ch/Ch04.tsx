@@ -749,12 +749,10 @@ const Body: React.FC = () => (
 
 export const Ch04: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch04_beef_for_bosque_redondo.wav" lead={LEAD} music={[
-    // ch03's trail cue carries the drive (SUNO: aw_long_drive replaces it)
-    {src: 'music/m_frontier.mp3', volume: bed('m_frontier'), startFrom: 20 * 30, to: QUIET_FROM + 4, fadeOut: 24},
-    // the quiet section: m_lament at a lower bed (15 LU under the voice), through the plain statement and the $12,000
-    {src: 'music/m_lament.mp3', volume: bed('m_lament', 15), from: QUIET_FROM - 8, to: at('Goodnight is') + 6, fadeOut: 36},
-    // the chuck wagon and the hand-off: the trail cue back, from its top (SUNO: aw_long_drive)
-    {src: 'music/m_frontier.mp3', volume: bed('m_frontier'), from: at('Goodnight is') - 6},
+    // the drive and the reason: m_lament, handed off as the quiet section begins
+    {src: 'music/m_lament.mp3', volume: bed('m_lament'), to: at('How did they get there') - 4, fadeOut: 30},
+    // the quiet section to the end of the chapter: aw_long_grief, 14 LU under the voice
+    {src: 'music/aw_long_grief.mp3', volume: bed('aw_long_grief', 14), from: at('How did they get there') - 4},
   ]}>
     <Body />
   </ChapterShell>

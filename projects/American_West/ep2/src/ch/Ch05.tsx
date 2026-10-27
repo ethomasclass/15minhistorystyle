@@ -223,7 +223,7 @@ const Trail: React.FC = () => {
   const a = at('On the trail') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 10, 1.36, -320, -40, 0], [at('Goodnight said'), 10, 1.44, -360, -60, 0]]}>
+      <DeskCam k={[[a, 10, 1.36, -320, 90, 0], [at('Goodnight said'), 10, 1.44, -360, 80, 0]]}>
         <Lift x={620} y={110} w={600} hgt={732} h={14} at={-99} rot={2} seed={54}>
           <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} filter="grayscale(1) contrast(1.15)" />
         </Lift>
@@ -594,8 +594,8 @@ export const Ch05: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch05_who_the_cowboys_were.wav" lead={LEAD} music={[
     // the myth: aw_legend_sours, started so its turn lands on "none of those"; it runs out under the real cowboys
     {src: 'music/aw_legend_sours.mp3', volume: bed('aw_legend_sours'), startFrom: LEGEND_START, to: at('Remember') + 6, fadeOut: 30},
-    // the riders, the escape south, Reeves and the vaqueros (SUNO: aw_long_drive replaces a_mexico)
-    {src: 'music/a_mexico.mp3', volume: bed('a_mexico'), from: at('Remember') - 6, to: at('In 1874') + 6, fadeOut: 30},
+    // the riders, the escape south, Reeves and the vaqueros: aw_long_drive from 85 s (ch03 uses its first 85 s)
+    {src: 'music/aw_long_drive.mp3', volume: bed('aw_long_drive'), startFrom: 30 * 85, from: at('Remember') - 6, to: at('In 1874') + 6, fadeOut: 30},
     // the 1874 tease: ch06's opening cue comes in under it
     {src: 'music/j_intrigue.mp3', volume: bed('j_intrigue'), from: at('In 1874') - 6},
   ]}>

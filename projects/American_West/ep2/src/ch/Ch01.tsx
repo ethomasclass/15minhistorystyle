@@ -268,7 +268,7 @@ const ChinookTitle: React.FC = () => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={keys(f, [[a, 14], [b, 22]])} z={zkeys(f, [[a, 1.08], [b, 0.96]])} rotZ={keys(f, [[a, 2], [b, -1]])}>
-        <PaintPrint x={420} y={160} w={1180} at={-99} rot={-1} tint={STEER_TINT * 0.7} />
+        <PaintPrint x={420} y={160} w={1180} at={-99} rot={-1} />
       </Desk3D>
       <SlapTitle text="WAITING FOR A CHINOOK" x={140} y={820} size={92} at={at('Waiting for')} seed={18} />
       <ScrimTag text={PTAG} x={34} y={24} />
