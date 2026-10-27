@@ -11,7 +11,7 @@ const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
 /** YouTube end-screen element slots (1080p px). Video elements are 16:9; the subscribe element is a circle. */
-export const SLOTS = {videoA: {x: 1150, y: 150, w: 640, h: 360}, videoB: {x: 1150, y: 620, w: 640, h: 360}, subscribe: {cx: 330, cy: 700, r: 150}};
+export const SLOTS = {videoA: {x: 1180, y: 175, w: 604, h: 340}, videoB: {x: 1180, y: 610, w: 604, h: 340}, subscribe: {cx: 330, cy: 700, r: 150}};
 export const END_FRAMES = 20 * 30;
 
 /** A hand-drawn frame that draws on (teal), with a handwritten label above it. */
@@ -65,7 +65,7 @@ export const EndScreen: React.FC<{start: number; subscribe: number; more: number
         </>
       )}
       <Prop name="candy_bowl" x={560} y={690} w={360} at={s(more) + 14} coral from="bottom" />
-      <Note text="(take one)" x={640} y={950} size={46} rot={-3} at={s(more) + 24} color="#ffffff" />
+      <Note text="(take one)" x={900} y={850} size={46} rot={-3} at={s(more) + 24} color="#ffffff" />
       <Slot {...SLOTS.videoA} at={10} label="watch next" />
       <Slot {...SLOTS.videoB} at={18} label="more spooky history" />
       <Tag text="Music made for Chunk History · Image credits in the description" />

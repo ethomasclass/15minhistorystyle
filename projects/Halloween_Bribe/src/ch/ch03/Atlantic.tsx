@@ -146,9 +146,9 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
   ] : [
     {f: 0, x: 4560, y: 880, z: 1.15, tilt: 26, rot: 0},
     {f: Math.max(1, R - 22), x: 4520, y: 900, z: 1.0, tilt: 30, rot: 1},
-    {f: R + 110, x: 2500, y: 860, z: 0.35, tilt: 46, rot: 9},
-    {f: Math.max(R + 111, T - 10), x: 2480, y: 865, z: 0.36, tilt: 47, rot: 10},
-    {f: Math.max(R + 112, land + 90), x: 2440, y: 880, z: 0.375, tilt: 48, rot: 10.5},
+    {f: R + 96, x: 2500, y: 940, z: 0.35, tilt: 46, rot: 9},
+    {f: Math.max(R + 97, T - 10), x: 2480, y: 945, z: 0.36, tilt: 47, rot: 10},
+    {f: Math.max(R + 98, land + 90), x: 2440, y: 880, z: 0.375, tilt: 48, rot: 10.5},
   ];
 
   const turnipHome = lift(PL.ireland, 10, 50);
