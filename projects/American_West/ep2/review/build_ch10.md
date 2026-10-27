@@ -40,3 +40,8 @@ McCoy, Goodnight and Bose Ikard are now bust cut-outs (coral see-through tint + 
 - `fixmask.py b10_mccoy "+700,640 800,540 900,505 1010,540 1100,620 1150,720 1160,840 1120,960 1080,1060 1060,1150 960,1250 800,1300 730,1200 715,1000 700,850 690,720" "-380,1080 720,1080 720,1290 600,1340 470,1420 380,1480"` then `"-950,480 1120,480 1120,640 1090,640 1040,580 1000,545"` (fills holes in the face, drops the hatched cloud and a paper sliver).
 - `fixmask.py b10_goodnight "+360,480 450,480 450,575 360,575"` (a hole by the collar).
 The Homestake and the treaty stay prints (not portraits).
+
+## Update, Oct 27 (painting swap)
+The painting is the restored 1887 original everywhere in ch10 (question, steer push, closing line, end screen) with ch01's mask
+`c1_steer_1887` (registered in `src/masks_ch10.ts`). "So look at the steer again" pushes to the steer with the teal trace and a light coral
+see-through tint (0.3); the closing-line handwriting moved up onto the sky; the camera stays clear of the small lettering under the title.

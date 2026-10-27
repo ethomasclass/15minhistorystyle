@@ -33,3 +33,5 @@ AI: L9_blizzard, L8_fenced_range, p9_post_drift, p9_haystack, p9_hay_rake, p2_lo
 - Roosevelt is a plain B&W bust cut-out (new mask `b9_roosevelt`, job in `tools/mask_jobs/ch09.py`, u2net_human_seg on the upper body,
   cut at y 1150), no coral, no trace (quiet chapter); dimmed behind the quote.
 - The remade p9_post_drift prop is taller: placed at 430 px wide so the post and its mound sit in frame beside the wind lines (re-taken).
+- Painting swap: Russell's painting is now the restored 1887 original (`img/ch01/chinook_1887_restored.jpg`, 4000 × 2847, tag "Montana
+  Historical Society · enhanced from a small scan"), as in ch01. Camera keys redone for the new composition; no zoom on the lettering; no coral (quiet).

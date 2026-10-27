@@ -242,8 +242,19 @@ const Hips: React.FC = () => {
 /** Where the wolves are, together: the camera ends framing all of them (works for one coyote or a ring of wolves). */
 const WOLF_X = P.wolves.map((p) => p[0]);
 const WOLF_Y = P.wolves.map((p) => p[1]);
+/** Loops: wolves closer than 0.08 of the width share one loop (the far-left pair); [centre, half-width] as fractions. */
+const WOLF_LOOPS: [Pt, number][] = P.wolves.slice().sort((p, q) => p[0] - q[0]).reduce((acc: Pt[][], p) => {
+  const last = acc[acc.length - 1];
+  if (last && p[0] - last[last.length - 1][0] < 0.08 && Math.abs(p[1] - last[last.length - 1][1]) < 0.05) last.push(p);
+  else acc.push([p]);
+  return acc;
+}, []).map((g) => {
+  const xs = g.map((p) => p[0]);
+  const ys = g.map((p) => p[1]);
+  return [[(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2] as Pt, 0.025 + (Math.max(...xs) - Math.min(...xs)) / 2];
+});
 const WOLF_C: Pt = [(Math.min(...WOLF_X) + Math.max(...WOLF_X)) / 2, (Math.min(...WOLF_Y) + Math.max(...WOLF_Y)) / 2];
-const WOLF_FRAC = Math.min(0.96, Math.max(0.5, Math.max(...WOLF_X) - Math.min(...WOLF_X) + 0.28, (Math.max(...WOLF_Y) - Math.min(...WOLF_Y) + 0.25) * (PSZ[1] / PSZ[0]) * (16 / 9)));
+const WOLF_FRAC = Math.min(1.0, Math.max(0.5, Math.max(...WOLF_X) - Math.min(...WOLF_X) + 0.28, (Math.max(...WOLF_Y) - Math.min(...WOLF_Y) + 0.25) * (PSZ[1] / PSZ[0]) * (16 / 9)));
 
 /** 9 · "Now look behind him. Those are wolves. They're waiting." Pan to the wolves; the beat lands on "wolves". */
 const Wolves: React.FC = () => {
@@ -253,14 +264,14 @@ const Wolves: React.FC = () => {
   return (
     <Pic src={PAINT} size={PSZ} k={[pk(a, P.head, 0.6), pk(w - 4, WOLF_C, WOLF_FRAC), pk(at('waiting') - 4, WOLF_C, WOLF_FRAC * 0.97), pk(b, P.wolves[P.heroWolf], 0.4)]} filter={PBW} tag={PTAG} tagY={1026}>
       {(S, sc) => <>
-        {P.wolves.map((p, i) => {
+        {WOLF_LOOPS.map(([p, hw], i) => {
           const [x, y] = S(...px(p));
-          const r = PSZ[0] * sc * 0.05;
+          const r = PSZ[0] * sc * hw;
           // a loop is only drawn while it sits wholly inside the frame (x 60…1860); it fades out as the push carries it to the edge
-          const margin = Math.min(x - r * 1.1 - 60, 1860 - x - r * 1.1, y - r * 0.85 - 60, 1020 - y - r * 0.85);
-          const op = Math.max(0, Math.min(1, 1 + margin / 30));
+          const margin = Math.min(x - r * 1.12 - 60, 1860 - x - r * 1.12, y - r * 0.9 - 60, 1020 - y - r * 0.9);
+          const op = Math.max(0, Math.min(1, margin / 16));
           return op > 0 ? <div key={i} style={{position: 'absolute', inset: 0, opacity: op}}>
-            <Loop cx={x} cy={y} rx={r} ry={r * 0.75} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />
+            <Loop cx={x} cy={y} rx={r} ry={Math.max(r * 0.6, PSZ[0] * sc * 0.028)} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />
           </div> : null;
         })}
         <Note text="wolves" x={820} y={90} size={78} rot={-4} at={w} />
