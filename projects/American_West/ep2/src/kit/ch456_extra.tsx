@@ -2,10 +2,11 @@
 // (a named river, a hatched state, a label standing off the map), the quiet palette wrapper, a dark torn tag (Spanish source words,
 // the resistance card's paper) and the four-figure "one in four" count. Everything stays on the black desk.
 import React from 'react';
-import {interpolate, random} from 'remotion';
+import {AbsoluteFill, interpolate, random} from 'remotion';
 import {clamp} from '../lib/anim';
 import {JF, PALETTES, PaletteCtx, useGFrame, useHand, usePal} from './Kit';
-import {SHADOW, tornPoly} from '../samples/kit';
+import {CutOut, SHADOW, tornPoly} from '../samples/kit';
+import type {MaskRef} from './maskref';
 import {useSlap} from '../previews/fx';
 import {W_MAP, type WApi} from './ch01_extra';
 
@@ -178,5 +179,30 @@ export const MLine: React.FC<{api: WApi; pts: number[][]; at: number; dur?: numb
       <path d={d} fill="none" stroke={c} strokeWidth={api.px(width * 2.4)} strokeLinecap="round" strokeLinejoin="round" opacity={0.18} />
       <path d={d} fill="none" stroke={c} strokeWidth={api.px(width)} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={dash ? `${api.px(22)} ${api.px(12)}` : undefined} />
     </svg>
+  );
+};
+
+/**
+ * A portrait bust cut out of its photograph (the Oct 27 rule: no print, no mount, no oval; head and shoulders on the desk with a
+ * soft contact shadow). (x, y) is the top-left of the mask's subject box, `w` its width. `tint` > 0 + `traceAt` for the beat's
+ * coral subject; tint 0 and no trace for everyone else (and always in quiet sections). Slaps down at `at`.
+ */
+export const Bust: React.FC<{src: string; m: MaskRef; x: number; y: number; w: number; at: number; tint?: number; traceAt?: number; rot?: number; filter?: string}> = ({
+  src, m, x, y, w, at, tint = 0, traceAt, rot = 0, filter = 'grayscale(1) contrast(1.15) brightness(1.02)',
+}) => {
+  const sl = useSlap(at, 1.18);
+  if (!sl.on) return null;
+  const [x0, y0, x1, y1] = m.data.boxes.subject;
+  const sc = w / (x1 - x0);
+  const h = (y1 - y0) * sc;
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  return (
+    <AbsoluteFill style={{opacity: sl.opacity, transform: `rotate(${rot}deg) scale(${sl.scale})`, transformOrigin: `${cx}px ${cy}px`}}>
+      {/* soft contact shadow under the cut-out, offset down-right as if the bust lies a little above the desk */}
+      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, filter: 'drop-shadow(10px 20px 18px rgba(0,0,0,0.7)) drop-shadow(2px 4px 3px rgba(0,0,0,0.5))'}}>
+        <CutOut src={src} size={m.data.size} mask={m} place={{left: x - x0 * sc, top: y - y0 * sc, scale: sc}} at={-99} shadow="none" tint={tint} soft traceAt={traceAt} filter={filter} />
+      </div>
+    </AbsoluteFill>
   );
 };

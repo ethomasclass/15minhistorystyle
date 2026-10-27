@@ -69,3 +69,6 @@ re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
   the tag now says the current image is Russell's 1907 version.
 - Music: `aw_white_cold` at `bed('aw_white_cold')` from frame 0, out under the channel intro; on the title card the same cue continues
   (from where it would be) at 1.2× the bed, fading in over 12 frames, so the stamp lands on a rising bed rather than under a loud one.
+- Portrait rule (Oct 27): Russell is now a full bust cut-out on the desk (`Bust` in `src/kit/ch02_extra.tsx`: no print, no
+  photo background, soft contact shadow, coral see-through tint + teal trace as the beat's subject). Hat outline re-traced on a
+  brightened grid of the scan (`review/ch01_mask_russell_fix.py`); check: `review/ch01-03_mask_closeup.jpg`.

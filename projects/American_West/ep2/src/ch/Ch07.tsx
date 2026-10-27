@@ -33,7 +33,7 @@ import {Big, Counter, DeskCam, Float, Label, Lines, Prop, Stage, Upright} from '
 import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
 import {MPin, MRegion, WestMap} from '../kit/ch01_extra';
 import {TPL, TREGIONS} from '../kit/trails';
-import {insideBox, PROP, StandProp, StepBadge} from '../kit/ch07_10_extra';
+import {Bust, insideBox, PROP, StandProp, StepBadge} from '../kit/ch07_10_extra';
 import {M7} from '../masks_ch07';
 
 const N = words as Narration;
@@ -336,7 +336,7 @@ const Hearst: React.FC = () => {
         <Note text="led by George Hearst" x={130} y={430} size={62} rot={-3} color="#FF6F61" at={at('George') - 2} />
         <ScrimTag text={TAG.hearst} />
       </>}>
-      <Print src={I.hearst} size={Z.hearst} x={1080} y={60} w={760} crop={[120, 120, 1920, 2400]} at={a + 2} rot={2} seed={71} mask={M7.b_hearst} tint={0.2} traceAt={at('George') - 1} />
+      <Bust src={I.hearst} size={Z.hearst} mask={M7.b_hearst} x={1100} y={90} w={720} cutY={2250} at={a + 2} rot={2} seed={71} tint={0.3} traceAt={at('George') - 1} />
     </DeskShot>
   );
 };

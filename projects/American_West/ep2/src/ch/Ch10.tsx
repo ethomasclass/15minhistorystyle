@@ -33,7 +33,8 @@ import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, TAIL, type Narrat
 import {keys, Lift, Mono, PhotoCam, ScrimTag, SHADOW, SlapTitle, Tape, tornPoly, TornPrint, useDrop, zkeys} from '../kit/west';
 import {DeskCam, Float, Label, Prop} from '../kit/ch04_extra';
 import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
-import {PROP} from '../kit/ch07_10_extra';
+import {Bust, PROP} from '../kit/ch07_10_extra';
+import type {MaskRef} from '../kit/maskref';
 import {M10} from '../masks_ch10';
 import {M1} from '../masks_ch01';
 
@@ -119,25 +120,26 @@ const Herds: React.FC = () => {
 
 // C–H · callback cards: a print on the desk, notes beside it
 const Card: React.FC<{src: string; size: [number, number]; crop: [number, number, number, number]; a: number; b: number; tag: string; w?: number; rot?: number; x?: number; y?: number;
-  children?: React.ReactNode; under?: React.ReactNode}> = ({src, size, crop, a, b, tag, w = 640, rot = 2, x = 1140, y = 60, children, under}) => {
+  bust?: {mask: MaskRef; cutY?: number; traceAt?: number}; children?: React.ReactNode; under?: React.ReactNode}> = ({src, size, crop, a, b, tag, w = 640, rot = 2, x = 1140, y = 60, bust, children, under}) => {
   const f = useCurrentFrame();
   return (
     <DeskShot tilt={keys(f, [[a, 18], [b, 13]])} z={zkeys(f, [[a, 0.94], [b, 1.02]])} x={keys(f, [[a, 30], [b, -30]])} hits={[a + 5]} lamp={[1300, 460]}
       over={<>{children}<ScrimTag text={tag} /></>}>
-      <Print src={src} size={size} x={x} y={y} w={w} crop={crop} at={a + 2} rot={rot} seed={(a % 40) + 3} />
+      {bust ? <Bust src={src} size={size} mask={bust.mask} x={x} y={y} w={w} cutY={bust.cutY} at={a + 2} rot={rot} seed={(a % 40) + 3} tint={0.3} traceAt={bust.traceAt ?? a + 8} />
+        : <Print src={src} size={size} x={x} y={y} w={w} crop={crop} at={a + 2} rot={rot} seed={(a % 40) + 3} />}
       {under}
     </DeskShot>
   );
 };
 const McCoy: React.FC = () => (
-  <Card src={I.mccoy} size={Z.mccoy} crop={[280, 300, 1520, 1880]} a={at("McCoy's") - 1} b={at('Goodnight') - 1} tag={TAG.mccoy}>
+  <Card src={I.mccoy} size={Z.mccoy} crop={[280, 300, 1520, 1880]} a={at("McCoy's") - 1} b={at('Goodnight') - 1} tag={TAG.mccoy} x={1180} y={120} w={600} bust={{mask: M10.b10_mccoy, cutY: 1800}}>
     <Mono text="ABILENE, KANSAS · FROM 1867" x={130} y={250} size={30} at={at("McCoy's") + 4} />
     <Note text="McCoy's cattle trade" x={130} y={340} size={62} rot={-3} at={at('cattle trade') - 2} />
     <Hand parts={[['made '], ['fortunes', true]]} x={150} y={480} size={96} at={at('fortunes') - 3} />
   </Card>
 );
 const Goodnight: React.FC = () => (
-  <Card src={I.goodnight} size={Z.goodnight} crop={[60, 20, 780, 800]} a={at('Goodnight') - 1} b={at('The Homestake') - 1} tag={TAG.goodnight} w={660}>
+  <Card src={I.goodnight} size={Z.goodnight} crop={[60, 20, 780, 800]} a={at('Goodnight') - 1} b={at('The Homestake') - 1} tag={TAG.goodnight} x={1160} y={160} w={620} bust={{mask: M10.b10_goodnight, cutY: 760}}>
     <Note text="Charles Goodnight" x={130} y={230} size={64} rot={-3} at={at('Goodnight') + 2} />
     <Note text="+ money from a British investor" x={130} y={340} size={54} rot={-3} color="#f4efe6" at={at('British') - 3} />
     <Hand parts={[['one of the '], ['biggest ranches', true]]} x={150} y={480} size={66} at={at('biggest') - 3} />
@@ -168,7 +170,7 @@ const Wages: React.FC = () => {
   );
 };
 const Ikard: React.FC = () => (
-  <Card src={I.ikard} size={Z.ikard} crop={[60, 40, 760, 900]} a={at('Some') - 1} b={at('And the Lakota') - 1} tag={TAG.ikard} w={540} x={1260}>
+  <Card src={I.ikard} size={Z.ikard} crop={[60, 40, 760, 900]} a={at('Some') - 1} b={at('And the Lakota') - 1} tag={TAG.ikard} w={500} x={1260} y={200} bust={{mask: M10.b10_ikard}}>
     <Label text="Bose Ikard, trail hand for Goodnight and Loving" x={130} y={170} size={24} at={at('Some') + 4} />
     <Note text="especially Black and Mexican cowboys" x={130} y={250} size={50} rot={-3} at={at('Black') - 3} />
     <Hand parts={[['more '], ['freedom', true], [' on the trail']]} x={150} y={390} size={68} at={at('freedom') - 4} />

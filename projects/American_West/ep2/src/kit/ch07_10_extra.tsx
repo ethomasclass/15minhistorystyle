@@ -5,7 +5,8 @@ import React from 'react';
 import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {JF, PALETTES, PaletteCtx, useGFrame, usePal} from './Kit';
-import {SHADOW} from '../samples/kit';
+import {CutOut, SHADOW} from '../samples/kit';
+import type {MaskRef} from './maskref';
 import {useSlap} from '../previews/fx';
 
 /** Quiet sections (all of ch09): teal lines, bone titles, no coral. */
@@ -88,3 +89,31 @@ export const useFade = (a: number, d = 8) => interpolate(useGFrame(), [a, a + d]
 
 /** Camera frame helper for shots that want the real (unstepped) frame. */
 export const useF = () => useCurrentFrame();
+
+/**
+ * A portrait as a bust cut-out lying on the desk (the user's rule, Oct 27): only the head and shoulders, cut from the page with its
+ * mask, a straight cut at `cutY` (source px) below the shoulders, a soft contact shadow, slapped down at `at`. Desk coordinates (like
+ * fx's Lift). The beat's subject gets the coral see-through tint (`tint`) and the teal trace (`traceAt`); anyone else is plain B&W.
+ */
+export const Bust: React.FC<{src: string; size: [number, number]; mask: MaskRef; x: number; y: number; w: number; cutY?: number; at: number; rot?: number;
+  tint?: number; traceAt?: number; h?: number; seed?: number; filter?: string}> = ({src, size, mask, x, y, w, cutY, at, rot = 0, tint = 0, traceAt, h = 14, seed = 1,
+  filter = 'grayscale(1) contrast(1.18) brightness(0.98)'}) => {
+  const f = useCurrentFrame();
+  const sl = useSlap(at, 1.25);
+  if (!sl.on) return null;
+  const [bx0, by0, bx1, by1] = mask.data.boxes.subject;
+  const bottom = Math.min(by1, cutY ?? by1);
+  const sc = w / (bx1 - bx0);
+  const pad = 14;
+  const hgt = (bottom - by0) * sc;
+  const z = h + sl.lift * 600;
+  const sway = Math.sin(f / 38 + seed) * 0.25;
+  return (
+    <div style={{position: 'absolute', left: x + 400 - pad, top: y + 300 - pad, width: w + pad * 2, height: hgt + pad, opacity: sl.opacity, transformOrigin: '50% 100%',
+      transform: `translateZ(${z}px) rotate(${rot + sway}deg) scale(${sl.scale})`, filter: `drop-shadow(10px 16px 12px rgba(0,0,0,${0.7 - Math.min(0.3, sl.lift)}))`}}>
+      <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}>
+        <CutOut src={src} size={size} mask={mask} place={{left: pad - bx0 * sc, top: pad - by0 * sc, scale: sc}} at={-99} shadow="none" tint={tint} soft traceAt={traceAt} filter={filter} />
+      </div>
+    </div>
+  );
+};

@@ -44,7 +44,7 @@ import {DeskCam, Float, Label, LITHO, Lines, Pic, Prop} from '../kit/ch04_extra'
 import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
 import {MPin, MRegion, MStand, W_MAP, WestMap, type WApi} from '../kit/ch01_extra';
 import {TPL, TREGIONS} from '../kit/trails';
-import {PROP, Snow} from '../kit/ch07_10_extra';
+import {Bust, PROP, Snow} from '../kit/ch07_10_extra';
 import {M8} from '../masks_ch08';
 
 const N = words as Narration;
@@ -241,7 +241,7 @@ const Glidden: React.FC = () => {
         <Note text="for a new kind of fence" x={130} y={520} size={58} rot={-3} at={at('new kind') - 2} />
         <ScrimTag text={TAG.poster} />
       </>}>
-      <Print src={I.poster} size={Z.poster} x={1000} y={-20} w={760} crop={[200, 230, 990, 1180]} at={a + 2} rot={2} seed={81} mask={M8.b_glidden_poster} tint={0.22} traceAt={at('Glidden') - 1} />
+      <Bust src={I.poster} size={Z.poster} mask={M8.b_glidden_poster} x={1120} y={180} w={600} cutY={975} at={a + 2} rot={2} seed={81} tint={0.3} traceAt={at('Glidden') - 1} />
     </DeskShot>
   );
 };
@@ -348,7 +348,7 @@ const GatesDesk: React.FC<{late?: boolean}> = ({late}) => {
         {late && <Note text="(the way the story's told)" x={130} y={380} size={50} rot={-3} color="#f4efe6" at={at("story's") - 2} />}
         <ScrimTag text={TAG.gates} />
       </>}>
-      <Print src={I.gates} size={Z.gates} x={1060} y={40} w={720} crop={[200, 150, 1720, 2200]} at={late ? -99 : a + 2} rot={3} seed={83} mask={M8.b_gates} tint={late ? 0 : 0.2} traceAt={late ? undefined : at('John') - 1} />
+      <Bust src={I.gates} size={Z.gates} mask={M8.b_gates} x={1080} y={110} w={700} cutY={2250} at={late ? -99 : a + 2} rot={3} seed={83} tint={late ? 0 : 0.3} traceAt={late ? undefined : at('John') - 1} />
     </DeskShot>
   );
 };

@@ -187,7 +187,7 @@ const Russell: React.FC = () => {
       <Desk3D tilt={keys(f, [[a, 16], [b, 22]])} z={zkeys(f, [[a, 1.0], [b, 0.92]])} x={keys(f, [[a, 40], [b, -20]])} lamp={[640, 520]}>
         <PaintPrint x={1130} y={260} w={820} at={-99} rot={3} h={4} blur={1.5} seed={4} />
       </Desk3D>
-      <Bust src={RUSS} size={RSZ} m={M1.russell} x={190} y={120} w={560} at={a + 3} tint={0.4} tintAt={at('Charlie')} traceAt={at('Charlie') + 2} rot={-2} />
+      <Bust src={RUSS} size={RSZ} m={M1.russell} x={200} y={165} w={540} at={a + 3} tint={0.4} tintAt={at('Charlie')} traceAt={at('Charlie') + 2} rot={-2} />
       <Mono text="CHARLIE RUSSELL · PHOTOGRAPHED C. 1900" x={250} y={60} size={30} at={at('Charlie') - 1} color="#FF6F61" />
       <Note text="(in 1886 he was 22)" x={130} y={930} size={46} rot={-2} at={at('young cowhand') + 2} color="#ffffff" />
       <Note text="painted this instead" x={1120} y={170} size={58} rot={-3} at={at('painted') - 2} />

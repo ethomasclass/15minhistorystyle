@@ -57,3 +57,6 @@ re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
 - THE PROBLEM: the longhorn prop stands beside the $4 coin.
 - STACK IT UP is a tape title; the longhorn lands right away, then coin, the $40 coin stack, and a torn print of McCoy's yard with
   stock cars, one per line.
+- Portrait rule (Oct 27): McCoy (his only portrait appearance) is now a bust cut-out (`Bust`), coral + trace; the hand polygon was
+  trimmed above the "Courteously yours" signature and the engraver's mark (`review/ch02_mask_mccoy_poly.py`). Check:
+  `review/ch01-03_mask_closeup.jpg`. Ch03 has no portraits.
