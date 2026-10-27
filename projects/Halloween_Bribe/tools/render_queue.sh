@@ -13,7 +13,7 @@ while :; do
   [ -z "$n" ] && break
   sed -i '1d' $Q
   # wait for any render started outside the queue
-  while pgrep -f "remotion render src/index.ts Ch" >/dev/null; do sleep 15; done
+  while pgrep -f "node.*remotion render src/index.ts Ch" >/dev/null; do sleep 15; done   # node only: a shell whose command line merely mentions this would match itself
   echo "$(date +%H:%M) start ch$n" >> out/render_queue.log
   tools/render_ch.sh $n >> out/render_queue.log 2>&1 && echo "$(date +%H:%M) done ch$n" >> out/render_queue.log || echo "$(date +%H:%M) FAILED ch$n" >> out/render_queue.log
 done
