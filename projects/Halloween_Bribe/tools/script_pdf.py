@@ -7,7 +7,7 @@ import glob, html, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
-CHROME = os.environ.get("CHROME", "/opt/pw-browsers/chromium-1194/chrome-linux/chrome")
+CHROME = os.environ.get("CHROME") or next(iter(sorted(__import__("glob").glob("/opt/pw-browsers/chromium-*/chrome-linux*/chrome"), reverse=True)), "chrome")
 
 
 def para_html(p):
