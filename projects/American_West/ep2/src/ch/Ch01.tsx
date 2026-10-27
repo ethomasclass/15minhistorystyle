@@ -31,22 +31,31 @@ const END = Math.ceil(N.duration * 30) + 40;
 export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 
 /**
- * THE PAINTING, in one place so it can be swapped. Every painting shot reads from P: its file, size, tag, steer mask, and the
+ * THE PAINTING, in one place so it can be swapped. Every painting shot reads from P: its file, size, tag, steer mask, look, and the
  * steer / head / hip / wolves / sky as fractions of the picture (x, y in 0..1), so the cameras follow the composition.
- * Now: Russell's 1907 repainting (from a postcard; one coyote, no lettering). Planned: the 1886–87 original (several wolves at
- * upper left, right and lower right; Russell's lettering), once a usable scan is in; set P = ORIGINAL_1887 and give it a mask.
+ * Now: Russell's 1887 original (Montana Historical Society), enlarged from a small scan (user-approved). Its small caption lettering
+ * under the title was guessed by the enlargement, so no shot zooms on the bottom strip (y > 0.88). The 1907 repainting is kept below.
  */
-type Painting = {src: string; size: [number, number]; tag: string; mask?: MaskRef; steer: Pt; head: Pt; hip: Pt; wolves: Pt[]; sky: Pt};
 type Pt = [number, number];
+type Painting = {src: string; size: [number, number]; tag: string; mask?: MaskRef; steer: Pt; head: Pt; hip: Pt; wolves: Pt[]; sky: Pt;
+  /** B&W treatment, coral strength, how much the steer is lifted under its mask, the steer close-up (fraction of the width shown),
+   *  the hip push (from, to) and loop radius (fraction of the width), and the wolf for the cut-in. */
+  bw: string; tint: number; lift: number; steerFrac: number; hipFrac: [number, number]; hipR: number; heroWolf: number};
 const REPAINT_1907: Painting = {
   src: 'img/ch01/b_chinook_painting.jpg', size: [4000, 2468], tag: 'C. M. Russell, Waiting for a Chinook (his 1907 version, on a postcard) · Internet Archive',
   mask: M1.steer, steer: [0.42, 0.5], head: [0.7, 0.62], hip: [0.118, 0.29], wolves: [[0.86, 0.668], [0.99, 0.656]], sky: [0.66, 0.36],
+  bw: 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)', tint: 0.26, lift: 0.55, steerFrac: 0.8, hipFrac: [0.5, 0.33], hipR: 0.045, heroWolf: 0,
 };
 export const ORIGINAL_1887: Painting = {
-  src: 'img/ch01/waiting_for_a_chinook_original_lowres.jpg', size: [406, 289], tag: 'C. M. Russell, Waiting for a Chinook, 1886–87, watercolor · Montana Historical Society via Wikimedia Commons',
-  steer: [0.47, 0.42], head: [0.61, 0.4], hip: [0.34, 0.35], wolves: [[0.11, 0.43], [0.17, 0.43], [0.73, 0.47], [0.815, 0.47], [0.78, 0.71]], sky: [0.5, 0.14],
+  src: 'img/ch01/chinook_1887_restored.jpg', size: [4000, 2847],
+  tag: 'C. M. Russell, Waiting for a Chinook, 1887, watercolor · Montana Historical Society · enhanced from a small scan',
+  mask: M1.steer1887, steer: [0.46, 0.43], head: [0.62, 0.43], hip: [0.32, 0.37],
+  // two far upper left, two right of the steer's head, one lower right trotting toward us
+  wolves: [[0.075, 0.43], [0.145, 0.43], [0.74, 0.47], [0.835, 0.47], [0.79, 0.7]], sky: [0.5, 0.13],
+  bw: 'grayscale(1) sepia(0.12) contrast(1.32) brightness(0.92)', tint: 0.34, lift: 0.18, steerFrac: 0.6, hipFrac: [0.42, 0.24], hipR: 0.034, heroWolf: 4,
 };
-const P: Painting = REPAINT_1907;
+const P: Painting = ORIGINAL_1887;
+void REPAINT_1907;
 const PAINT = P.src;
 const PSZ = P.size;
 const PTAG = P.tag;
@@ -57,15 +66,15 @@ const zw = (frac: number) => 1920 / (PSZ[0] * frac);
 /** Camera key on the painting: [frame, point, fraction of the width shown]. */
 const pk = (f: number, p: Pt, frac: number): [number, number, number, number] => [f, ...px(p), zw(frac)];
 const MID: Pt = [0.5, 0.5];
-/** The coral on the steer stays light (it is nearly black in B&W): the trace carries the subject. */
-const STEER_TINT = 0.26;
+/** The coral on the steer stays light: the trace carries the subject. */
+const STEER_TINT = P.tint;
 const RUSS = 'img/ch01/b_russell_c1900.jpg';
 const RSZ: [number, number] = [1920, 2673];
 const RTAG = 'Charles M. Russell, c. 1900, photographer unknown · Wikimedia Commons';
 const COWTOWN = 'img/props/L2_cowtown.jpg';
 const LSZ: [number, number] = [1920, 1080];
 /** The painting in black and white, a little warm (the series' archive look). */
-const PBW = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)';
+const PBW = P.bw;
 const MAPTAG = 'Map: Natural Earth outlines (today\'s state lines for reference)';
 
 /**
@@ -78,7 +87,7 @@ const SteerLift: React.FC<{S: (x: number, y: number) => [number, number]; s: num
   const [l, t] = S(0, 0);
   const m = P.mask.alpha;
   return <div style={{position: 'absolute', left: l, top: t, width: PSZ[0] * s, height: PSZ[1] * s, background: '#8a8a8a', mixBlendMode: 'screen',
-    opacity: 0.55 * interpolate(g, [a, a + 5], [0, 1], clamp), WebkitMaskImage: `url(${staticFile(m)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m)})`, maskSize: '100% 100%'} as React.CSSProperties} />;
+    opacity: P.lift * interpolate(g, [a, a + 5], [0, 1], clamp), WebkitMaskImage: `url(${staticFile(m)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m)})`, maskSize: '100% 100%'} as React.CSSProperties} />;
 };
 
 /** The painting on the desk as a torn print. */
@@ -205,7 +214,7 @@ const LookSteer: React.FC = () => {
   const a = at('Look at it') - 1;
   const b = at('Look at the hip') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[pk(a, MID, 0.96), pk(b, P.steer, 0.8)]} filter={PBW} tag={PTAG} tagY={1026} mask={P.mask} tintAt={at('One steer')} tint={STEER_TINT} traceAt={at('One steer') + 2}>
+    <Pic src={PAINT} size={PSZ} k={[pk(a, MID, 0.96), pk(b, P.steer, P.steerFrac)]} filter={PBW} tag={PTAG} tagY={1026} mask={P.mask} tintAt={at('One steer')} tint={STEER_TINT} traceAt={at('One steer') + 2}>
     {(S, sc) => <><SteerLift S={S} s={sc} at={at('One steer')} /><Note text="one steer, alone" x={1240} y={180} size={60} rot={-3} at={at('alone') - 2} /></>}
     </Pic>
   );
@@ -216,10 +225,10 @@ const Hips: React.FC = () => {
   const a = at('Look at the hip') - 1;
   const b = at('Now look behind') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[pk(a, [P.hip[0] + 0.1, P.hip[1] + 0.08], 0.5), pk(b, P.hip, 0.33)]} filter={PBW} mask={P.mask} tintAt={-99} tint={STEER_TINT * 0.8}>
+    <Pic src={PAINT} size={PSZ} k={[pk(a, [P.hip[0] + 0.1, P.hip[1] + 0.06], P.hipFrac[0]), pk(b, P.hip, P.hipFrac[1])]} filter={PBW} mask={P.mask} tintAt={-99} tint={STEER_TINT * 0.8}>
       {(S, sc) => {
         const [hx, hy] = S(...px(P.hip));
-        const r = PSZ[0] * sc * 0.045;
+        const r = PSZ[0] * sc * P.hipR;
         return <>
           <SteerLift S={S} s={sc} at={-99} />
           <Loop cx={hx} cy={hy} rx={r} ry={r * 0.73} at={at('hip bones') - 2} seed={7} tilt={-8} width={7} />
@@ -242,15 +251,15 @@ const Wolves: React.FC = () => {
   const w = at('wolves');
   const b = at('Russell called') - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[pk(a, P.head, 0.6), pk(w - 4, WOLF_C, WOLF_FRAC), pk(b, WOLF_C, WOLF_FRAC * 0.96)]} filter={PBW} tag={PTAG} tagY={1026}>
+    <Pic src={PAINT} size={PSZ} k={[pk(a, P.head, 0.6), pk(w - 4, WOLF_C, WOLF_FRAC), pk(at('waiting') - 4, WOLF_C, WOLF_FRAC * 0.97), pk(b, P.wolves[P.heroWolf], 0.4)]} filter={PBW} tag={PTAG} tagY={1026}>
       {(S, sc) => <>
         {P.wolves.map((p, i) => {
           const [x, y] = S(...px(p));
           const r = PSZ[0] * sc * 0.05;
           return <Loop key={i} cx={Math.min(1850, Math.max(70, x))} cy={y} rx={r} ry={r * 0.75} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />;
         })}
-        <Note text="wolves" x={1240} y={120} size={78} rot={-4} at={w} />
-        <Note text="waiting" x={1300} y={880} size={62} rot={-3} at={at('waiting') - 2} color="#ffffff" />
+        <Note text="wolves" x={820} y={90} size={78} rot={-4} at={w} />
+        <Note text="waiting" x={140} y={860} size={66} rot={-3} at={at('waiting') - 2} color="#ffffff" />
       </>}
     </Pic>
   );
@@ -391,7 +400,7 @@ const QuestionDesk: React.FC<{second?: boolean}> = ({second}) => {
 const BackToSteer: React.FC = () => {
   const a = at("And we'll") - 1;
   return (
-    <Pic src={PAINT} size={PSZ} k={[pk(a, P.steer, 0.8), pk(a + 60, [P.steer[0] - 0.002, P.steer[1]], 0.795)]} filter={PBW} tag={PTAG} tagY={24} mask={P.mask} tintAt={a} tint={STEER_TINT} traceAt={a + 3}>
+    <Pic src={PAINT} size={PSZ} k={[pk(a, P.steer, P.steerFrac), pk(a + 60, [P.steer[0] - 0.002, P.steer[1]], P.steerFrac * 0.99)]} filter={PBW} tag={PTAG} tagY={24} mask={P.mask} tintAt={a} tint={STEER_TINT} traceAt={a + 3}>
       {(S, sc) => <><SteerLift S={S} s={sc} at={a} /><Note text="we'll come back to him" x={1180} y={860} size={58} rot={-3} at={at('come back') - 2} /></>}
     </Pic>
   );

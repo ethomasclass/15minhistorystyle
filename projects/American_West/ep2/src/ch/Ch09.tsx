@@ -572,9 +572,9 @@ const BackToQ: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 24, 0.86, 0, 0, -2], [END, 18, 0.92, 0, 20, 0]]}>
-        <Lift x={260} y={170} w={1350} hgt={1350 * (Z.paint[1] / Z.paint[0])} h={8} at={a + 2} rot={-2} seed={97}>
-          <TornPrint src={I.paint} size={Z.paint} x={0} y={0} w={1350} at={-99} seed={98} real grey shadow={5} filter={PBW}
-            tapes={[{x: -40, y: 20, w: 160, rot: -36}, {x: 1230, y: -8, w: 160, rot: 28}]} />
+        <Lift x={330} y={110} w={1250} hgt={1250 * (Z.paint[1] / Z.paint[0])} h={8} at={a + 2} rot={-2} seed={97}>
+          <TornPrint src={I.paint} size={Z.paint} x={0} y={0} w={1250} at={-99} seed={98} real grey shadow={5} filter={PBW}
+            tapes={[{x: -40, y: 20, w: 160, rot: -36}, {x: 1130, y: -8, w: 160, rot: 28}]} />
         </Lift>
       </DeskCam>
       <Note text="back to the question" x={1260} y={110} size={54} rot={-3} at={at('question') - 4} />

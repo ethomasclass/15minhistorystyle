@@ -30,7 +30,7 @@ import {clamp} from '../lib/anim';
 import {boxOf, JF, Note, Tag, useGFrame, useHand, usePal} from '../kit/Kit';
 import {DarkPaper} from '../kit/common';
 import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, TAIL, type Narration} from '../kit/shell';
-import {keys, Lift, Mono, PhotoCam, ScrimTag, SHADOW, SlapTitle, Tape, tornPoly, TornPrint, useDrop, zkeys} from '../kit/west';
+import {keys, Lift, Mono, PhotoCam, ScrimTag, SHADOW, SlapTitle, SoftTint, Tape, tornPoly, TornPrint, useDrop, zkeys} from '../kit/west';
 import {DeskCam, Float, Label, Prop} from '../kit/ch04_extra';
 import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
 import {Bust, PROP} from '../kit/ch07_10_extra';
@@ -302,7 +302,9 @@ const Steer: React.FC = () => {
   return (
     <AbsoluteFill>
       <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, 1960], [b, 1950]])} cy={keys(f, [[a, 1320], [b, 1200]])} s={zkeys(f, [[a, 0.5], [b, 0.7]])} bw={PBW}
-        mask={M10.c1_steer_1887} traceAt={a + 6} />
+        mask={M10.c1_steer_1887} traceAt={a + 6}>
+        {(_S, p) => <SoftTint mask={M10.c1_steer_1887.alpha} place={p} size={Z.paint} strength={0.4 * interpolate(f, [a + 4, a + 12], [0, 1], clamp)} />}
+      </PhotoCam>
       <ScrimTag text={TAG.paint} />
     </AbsoluteFill>
   );

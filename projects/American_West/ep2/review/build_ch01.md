@@ -53,10 +53,8 @@ the card. Gentle SFX as in Ep 1 (whoosh/whip_soft on shots, marker_tick 4 frames
 "come through?" and the LAST OF THE FIVE THOUSAND tape's overshoot, Ch03 the San Antonio label in the Indian Territory shot); stills
 re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
 
-## One more rough spot
-- The steer's coral tint reads quite red because the steer is nearly black in B&W; its fur and ribs stay visible (see-through),
-  but if it reads as a red silhouette on a big screen, lower `tint` in `LookSteer`/`LastOf`/`BackToSteer` (now 0.42) or lift
-  the steer's brightness under the mask.
+## One more rough spot (resolved)
+- The early red-silhouette tint is fixed: see the Oct 27 sections (tint and lift now live in `P`).
 
 ## Coordinator review fixes (Oct 27)
 - Steer tint lowered to 0.26 (`STEER_TINT`), and the steer's own levels are lifted under its mask (`SteerLift`, a masked screen layer), so the
@@ -72,3 +70,14 @@ re-rendered after the kit's handwriting/MPin-label fixes and the sheet rebuilt.
 - Portrait rule (Oct 27): Russell is now a full bust cut-out on the desk (`Bust` in `src/kit/ch02_extra.tsx`: no print, no
   photo background, soft contact shadow, coral see-through tint + teal trace as the beat's subject). Hat outline re-traced on a
   brightened grid of the scan (`review/ch01_mask_russell_fix.py`); check: `review/ch01-03_mask_closeup.jpg`.
+
+## Painting swap (Oct 27): the 1887 original
+`P = ORIGINAL_1887`: `img/ch01/chinook_1887_restored.jpg` (4000 × 2847, enlarged from the small scan, user-approved), mask
+`c1_steer_1887` (registered as `M1.steer1887`; checked: clean edge, horns and legs in). Points re-measured on the new file on a 10 %
+grid: steer (0.46, 0.43), head (0.62, 0.43), hip (0.32, 0.37), wolves (0.075, 0.43), (0.145, 0.43), (0.74, 0.47), (0.835, 0.47),
+and the trotting one (0.79, 0.70). Per-painting look is now in `P` too: a harder B&W (the watercolour is pale), coral 0.34 with a
+small level lift (0.18), steer close-up at 60 % of the width, the hip push 42 % → 24 % with a smaller loop.
+"Those are wolves": the camera pulls back to the whole picture as the loops land on all five on "wolves", then pushes into the
+trotting wolf (the cut-in) on "They're waiting". No shot zooms on the bottom strip (the small caption under the title was guessed by
+the enlargement); it is only ever seen whole-picture or on the desk print, and the LAST OF THE FIVE THOUSAND tape covers it there.
+The 1907 repainting stays defined as `REPAINT_1907` (unused).
