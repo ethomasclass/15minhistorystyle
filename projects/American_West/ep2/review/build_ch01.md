@@ -81,3 +81,6 @@ small level lift (0.18), steer close-up at 60 % of the width, the hip push 42 % 
 trotting wolf (the cut-in) on "They're waiting". No shot zooms on the bottom strip (the small caption under the title was guessed by
 the enlargement); it is only ever seen whole-picture or on the desk print, and the LAST OF THE FIVE THOUSAND tape covers it there.
 The 1907 repainting stays defined as `REPAINT_1907` (unused).
+- Wolves loops (Oct 27): the two far-left wolves share one loop; each wolf has its own loop size (`wolfR` in `P`), the pull-back
+  shows the whole picture, and a loop is drawn only while it sits wholly inside x 60…1860 (it fades out as the push to the
+  trotting wolf carries it toward the edge), so no loop is ever cut by the frame.

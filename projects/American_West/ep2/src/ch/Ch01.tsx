@@ -40,19 +40,21 @@ type Pt = [number, number];
 type Painting = {src: string; size: [number, number]; tag: string; mask?: MaskRef; steer: Pt; head: Pt; hip: Pt; wolves: Pt[]; sky: Pt;
   /** B&W treatment, coral strength, how much the steer is lifted under its mask, the steer close-up (fraction of the width shown),
    *  the hip push (from, to) and loop radius (fraction of the width), and the wolf for the cut-in. */
-  bw: string; tint: number; lift: number; steerFrac: number; hipFrac: [number, number]; hipR: number; heroWolf: number};
+  bw: string; tint: number; lift: number; steerFrac: number; hipFrac: [number, number]; hipR: number; heroWolf: number;
+  /** each wolf's loop half-width (fraction of the width) */
+  wolfR: number[]};
 const REPAINT_1907: Painting = {
   src: 'img/ch01/b_chinook_painting.jpg', size: [4000, 2468], tag: 'C. M. Russell, Waiting for a Chinook (his 1907 version, on a postcard) · Internet Archive',
   mask: M1.steer, steer: [0.42, 0.5], head: [0.7, 0.62], hip: [0.118, 0.29], wolves: [[0.86, 0.668], [0.99, 0.656]], sky: [0.66, 0.36],
-  bw: 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)', tint: 0.26, lift: 0.55, steerFrac: 0.8, hipFrac: [0.5, 0.33], hipR: 0.045, heroWolf: 0,
+  bw: 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)', tint: 0.26, lift: 0.55, steerFrac: 0.8, hipFrac: [0.5, 0.33], hipR: 0.045, heroWolf: 0, wolfR: [0.05, 0.04],
 };
 export const ORIGINAL_1887: Painting = {
   src: 'img/ch01/chinook_1887_restored.jpg', size: [4000, 2847],
   tag: 'C. M. Russell, Waiting for a Chinook, 1887, watercolor · Montana Historical Society · enhanced from a small scan',
   mask: M1.steer1887, steer: [0.46, 0.43], head: [0.62, 0.43], hip: [0.32, 0.37],
   // two far upper left, two right of the steer's head, one lower right trotting toward us
-  wolves: [[0.075, 0.43], [0.145, 0.43], [0.74, 0.47], [0.835, 0.47], [0.79, 0.7]], sky: [0.5, 0.13],
-  bw: 'grayscale(1) sepia(0.12) contrast(1.32) brightness(0.92)', tint: 0.34, lift: 0.18, steerFrac: 0.6, hipFrac: [0.42, 0.24], hipR: 0.034, heroWolf: 4,
+  wolves: [[0.075, 0.43], [0.145, 0.43], [0.745, 0.47], [0.85, 0.46], [0.8, 0.71]], sky: [0.5, 0.13],
+  bw: 'grayscale(1) sepia(0.12) contrast(1.32) brightness(0.92)', tint: 0.34, lift: 0.18, steerFrac: 0.6, hipFrac: [0.42, 0.24], hipR: 0.034, heroWolf: 4, wolfR: [0.024, 0.024, 0.045, 0.04, 0.065],
 };
 const P: Painting = ORIGINAL_1887;
 void REPAINT_1907;
@@ -243,15 +245,16 @@ const Hips: React.FC = () => {
 const WOLF_X = P.wolves.map((p) => p[0]);
 const WOLF_Y = P.wolves.map((p) => p[1]);
 /** Loops: wolves closer than 0.08 of the width share one loop (the far-left pair); [centre, half-width] as fractions. */
-const WOLF_LOOPS: [Pt, number][] = P.wolves.slice().sort((p, q) => p[0] - q[0]).reduce((acc: Pt[][], p) => {
+const WOLF_LOOPS: [Pt, number][] = P.wolves.map((p, i) => ({p, r: P.wolfR[i] ?? 0.04})).sort((u, v) => u.p[0] - v.p[0]).reduce((acc: {p: Pt; r: number}[][], u) => {
   const last = acc[acc.length - 1];
-  if (last && p[0] - last[last.length - 1][0] < 0.08 && Math.abs(p[1] - last[last.length - 1][1]) < 0.05) last.push(p);
-  else acc.push([p]);
+  const prev = last?.[last.length - 1];
+  if (prev && u.p[0] - prev.p[0] < 0.08 && Math.abs(u.p[1] - prev.p[1]) < 0.05 && u.r < 0.035 && prev.r < 0.035) last.push(u);
+  else acc.push([u]);
   return acc;
 }, []).map((g) => {
-  const xs = g.map((p) => p[0]);
-  const ys = g.map((p) => p[1]);
-  return [[(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2] as Pt, 0.025 + (Math.max(...xs) - Math.min(...xs)) / 2];
+  const xs = g.map((u) => u.p[0]);
+  const ys = g.map((u) => u.p[1]);
+  return [[(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2] as Pt, Math.max(...g.map((u) => u.r)) + (Math.max(...xs) - Math.min(...xs)) / 2];
 });
 const WOLF_C: Pt = [(Math.min(...WOLF_X) + Math.max(...WOLF_X)) / 2, (Math.min(...WOLF_Y) + Math.max(...WOLF_Y)) / 2];
 const WOLF_FRAC = Math.min(1.0, Math.max(0.5, Math.max(...WOLF_X) - Math.min(...WOLF_X) + 0.28, (Math.max(...WOLF_Y) - Math.min(...WOLF_Y) + 0.25) * (PSZ[1] / PSZ[0]) * (16 / 9)));
