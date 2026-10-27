@@ -303,7 +303,7 @@ export const HalloweenCorridor: React.FC<{at: (key: string) => number}> = ({at})
       {/* the room's light falls off toward the edges of the frame (lifts as we step outside) */}
       <AbsoluteFill style={{background: 'radial-gradient(ellipse 70% 60% at 50% 48%, transparent 40%, rgba(4,3,2,0.6) 100%)', opacity: 1 - paintFull * 0.7}} />
       {/* source tags */}
-      {f < K.end - 20 && current && <Tag text={current.tag} />}
+      {f < K.scare + 90 && current && <Tag text={current.tag} />}
       {f >= K.end && f < K.door && <Tag text="The Bismarck Tribune, Nov 1, 1933 · Library of Congress" />}
       {f >= K.payup - 10 && <Tag text="Illustration · Halloween night, a front door" />}
       {g >= K.payup + 20 && <Highlight text="PAY UP." x={150} y={790} size={120} at={K.payup + 20} rot={-2} seed={8} />}
