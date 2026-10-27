@@ -156,3 +156,33 @@ export const ThreeCount: React.FC<{x: number; y: number; n: number; at: number; 
     </div>
   );
 };
+
+/**
+ * A portrait as a full cut-out of the bust (the series rule, Oct 27): no paper, no photo background, no mount; head and shoulders
+ * on the desk with a soft contact shadow. The beat's subject takes the coral see-through tint (`tint`) and the teal trace (`traceAt`);
+ * anyone else is plain B&W (tint 0), with or without a trace. Placed in screen px: the mask's subject box at (x, y), `w` wide.
+ */
+export const Bust: React.FC<{src: string; size: [number, number]; m: MaskRef; x: number; y: number; w: number; at: number; tint?: number; tintAt?: number; traceAt?: number;
+  filter?: string; rot?: number}> = ({src, size, m, x, y, w, at, tint = 0, tintAt, traceAt, filter = 'grayscale(1) contrast(1.18) brightness(1.0)', rot = 0}) => {
+  const sl = useSlap(at, 1.18);
+  const g = useGFrame();
+  if (!sl.on) return null;
+  const [x0, y0, x1, y1] = m.data.boxes.subject;
+  const sc = w / (x1 - x0);
+  const place: Place = {left: x - x0 * sc, top: y - y0 * sc, scale: sc};
+  const W = size[0] * sc;
+  const H = size[1] * sc;
+  const mk: React.CSSProperties = {WebkitMaskImage: `url(${staticFile(m.alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m.alpha)})`, maskSize: '100% 100%'} as React.CSSProperties;
+  const cx = x + w / 2;
+  const cy = y + ((y1 - y0) * sc) / 2;
+  const k = tintAt === undefined ? 1 : interpolate(g, [tintAt, tintAt + 5], [0, 1], clamp);
+  return (
+    <AbsoluteFill style={{opacity: sl.opacity, transform: `rotate(${rot}deg) scale(${sl.scale})`, transformOrigin: `${cx}px ${cy}px`}}>
+      <div style={{position: 'absolute', inset: 0, filter: `drop-shadow(10px 22px 16px rgba(0,0,0,0.78))`}}>
+        <Img src={staticFile(src)} style={{position: 'absolute', left: place.left, top: place.top, width: W, height: H, filter, ...mk}} />
+        {tint > 0 && (tintAt === undefined || g >= tintAt) && <SoftTint mask={m.alpha} place={place} size={size} strength={tint * k} />}
+      </div>
+      {traceAt !== undefined && <Traced paths={m.data.shapes.subject} place={place} at={traceAt} dur={12} width={5} part={0.93} />}
+    </AbsoluteFill>
+  );
+};
