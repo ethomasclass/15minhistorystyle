@@ -269,7 +269,7 @@ If the video publishes after 31 Oct 2026, change "This Saturday" (ch01, ch07) to
 
 | Word | Say it |
 |---|---|
-| Samhain | Sow-in |
+| Samhain | Sau-win (rhymes with cow; picked from a 4-way test) |
 | barmbrack | barm-brack |
 | County Cork | (default) |
 | Hallows' | Hal-lows |
