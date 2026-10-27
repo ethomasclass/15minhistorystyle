@@ -18,6 +18,7 @@ export const CUE_LUFS: Record<string, number> = {
   r_title_sting: -11.33, r_utopia: -12.12, rc_backroom: -20.1, rc_brass_dirge: -11.02, rc_codes: -16.02, rc_jubilee: -21.9,
   rc_jubilo: -19.45, rc_night_riders: -18.74, rc_parlor: -16.67, rc_reckoning: -18.3, rc_resolve: -20.1, w_aftermath: -12.78,
   w_calm_sea: -12.48, w_dawn: -11.6, w_fire: -11.08, w_frontier: -11.97, w_sea_battle: -11.26, w_title_fanfare: -10.79,
+  hb_black_halloween: -22.1, hb_coffin_ships: -22.1, hb_mischief_rag: -22.6, hb_oiche_shamhna: -20.7, hb_suburbs_swing: -21.9,
 };
 /** Volume for a cue so its bed sits `gap` LU under the voice (13 = the Black Sox norm; 14-15 for a quiet, grave stretch). */
 export const bed = (cue: string, gap = 13) => {
