@@ -36,7 +36,6 @@ import {DeskShot, Hand, Print, Sounds, WShots} from '../kit/ch07_extra';
 import {Bust, PROP} from '../kit/ch07_10_extra';
 import type {MaskRef} from '../kit/maskref';
 import {M10} from '../masks_ch10';
-import {M1} from '../masks_ch01';
 
 const N = words as Narration;
 /** The music-only end screen after the narration (about 20 s), added to the chapter's length. */
@@ -47,7 +46,7 @@ const at = T.at;
 const END = T.frames + TAIL + FADE + EXTRA;
 
 const I = {
-  paint: 'img/ch01/b_chinook_painting.jpg',
+  paint: 'img/ch01/chinook_1887_restored.jpg',
   mccoy: 'img/ch02/mccoy_portrait_engraving_1874.jpg',
   goodnight: 'img/ch04/b_goodnight_1905.jpg',
   homestake: 'img/ch07/b_homestake_open_cut_1888.jpg',
@@ -56,7 +55,7 @@ const I = {
   sod: 'img/ch10/b_sod_house_rawding_1886.jpg',
 };
 const Z = {
-  paint: [4000, 2468] as [number, number],
+  paint: [4000, 2847] as [number, number],
   mccoy: [1800, 2709] as [number, number],
   goodnight: [820, 800] as [number, number],
   homestake: [1920, 2738] as [number, number],
@@ -65,7 +64,7 @@ const Z = {
   sod: [3000, 2243] as [number, number],
 };
 const TAG = {
-  paint: 'C. M. Russell, Waiting for a Chinook, 1886 (1907 postcard) · Internet Archive',
+  paint: 'C. M. Russell, Waiting for a Chinook, 1887, watercolor · Montana Historical Society · enhanced from a small scan',
   mccoy: 'Joseph G. McCoy, Historic Sketches of the Cattle Trade, 1874 · Internet Archive',
   goodnight: 'Charles Goodnight · via Wikimedia Commons',
   homestake: 'J. C. H. Grabill, Open cut in the great Homestake mine, 1888 · Library of Congress',
@@ -80,7 +79,7 @@ const PBW = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.98)';
 
 const PaintPrint: React.FC<{at: number; blur?: number; dim?: number; tint?: number; traceAt?: number}> = ({at: a, blur = 0, dim = 1, tint = 0, traceAt}) => (
   <Lift x={240} y={160} w={1400} hgt={1400 * (Z.paint[1] / Z.paint[0])} h={8} at={a} rot={-2} seed={101} blur={blur}>
-    <TornPrint src={I.paint} size={Z.paint} x={0} y={0} w={1400} at={-99} seed={102} real grey shadow={5} filter={`${PBW} brightness(${dim})`} mask={M1.steer} tint={tint} traceAt={traceAt}
+    <TornPrint src={I.paint} size={Z.paint} x={0} y={0} w={1400} at={-99} seed={102} real grey shadow={5} filter={`${PBW} brightness(${dim})`} mask={M10.c1_steer_1887} tint={tint} traceAt={traceAt}
       tapes={[{x: -40, y: 20, w: 160, rot: -36}, {x: 1280, y: -8, w: 160, rot: 28}]} />
   </Lift>
 );
@@ -302,8 +301,8 @@ const Steer: React.FC = () => {
   const b = at('It took') - 1;
   return (
     <AbsoluteFill>
-      <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, 1700], [b, 1500]])} cy={keys(f, [[a, 1250], [b, 1250]])} s={zkeys(f, [[a, 0.5], [b, 0.62]])} bw={PBW}
-        mask={M1.steer} traceAt={a + 6} />
+      <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, 1960], [b, 1950]])} cy={keys(f, [[a, 1320], [b, 1200]])} s={zkeys(f, [[a, 0.5], [b, 0.7]])} bw={PBW}
+        mask={M10.c1_steer_1887} traceAt={a + 6} />
       <ScrimTag text={TAG.paint} />
     </AbsoluteFill>
   );
@@ -318,17 +317,17 @@ const Closing: React.FC<{two: boolean}> = ({two}) => {
   const dim = two ? interpolate(g, [a, a + 10], [0.55, 0.38], clamp) : 0.55;
   return (
     <AbsoluteFill>
-      <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, two ? 2100 : 1650], [b, two ? 2000 : 1800]])} cy={1234} s={zkeys(f, [[a, two ? 0.48 : 0.56], [b, two ? 0.5 : 0.52]])}
+      <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, two ? 2080 : 1980], [b, two ? 2000 : 2040]])} cy={keys(f, [[a, 1300], [b, two ? 1280 : 1320]])} s={zkeys(f, [[a, two ? 0.49 : 0.53], [b, two ? 0.5 : 0.5]])}
         bw={`${PBW} brightness(${dim})`} />
       {!two && <>
-        <Hand parts={[['about twenty years']]} x={140} y={190} size={86} at={at('about') - 2} white />
-        <Hand parts={[['four-dollar cows → '], ['a fortune.', true]]} x={180} y={330} size={96} at={at('fourdollar') - 3} />
+        <Hand parts={[['about twenty years']]} x={140} y={80} size={80} at={at('about') - 2} white />
+        <Hand parts={[['four-dollar cows → '], ['a fortune.', true]]} x={180} y={190} size={90} at={at('fourdollar') - 3} />
       </>}
       {two && <>
-        <Hand parts={[['one winter']]} x={140} y={190} size={86} at={a + 2} white />
-        <Hand parts={[['→ '], ['a painting.', true]]} x={180} y={330} size={110} at={at('painting') - 6} />
+        <Hand parts={[['one winter']]} x={140} y={80} size={80} at={a + 2} white />
+        <Hand parts={[['→ '], ['a painting.', true]]} x={180} y={190} size={104} at={at('painting') - 6} />
         <SlapTitle text="THE LAST OF THE FIVE THOUSAND" x={200} y={860} size={74} at={at('painting') + 2} seed={108} />
-        <Note text="the cowboys moved on" x={1260} y={190} size={48} rot={-3} color="#f4efe6" at={at('moved on') - 3} />
+        <Note text="the cowboys moved on" x={1260} y={120} size={48} rot={-3} color="#f4efe6" at={at('moved on') - 3} />
       </>}
       <ScrimTag text={TAG.paint} x={34} y={24} />
     </AbsoluteFill>

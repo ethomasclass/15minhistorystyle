@@ -1,5 +1,6 @@
 // Chapter 10 masks (pattern: src/masks.ts). AI lithograph props: masks from tools/mask_jobs/props.py (pre-made).
 import {maskRef} from './kit/maskref';
+import c1_steer_1887 from '../public/img/masks/c1_steer_1887.json';
 import b10_ikard from '../public/img/masks/b10_ikard.json';
 import b10_goodnight from '../public/img/masks/b10_goodnight.json';
 import b10_mccoy from '../public/img/masks/b10_mccoy.json';
@@ -10,6 +11,8 @@ import p6_nugget from '../public/img/masks/p6_nugget.json';
 import p1_letter from '../public/img/masks/p1_letter.json';
 
 export const M10 = {
+  /** ch01's steer mask on the restored 1887 painting. */
+  c1_steer_1887: maskRef('c1_steer_1887', c1_steer_1887),
   b10_ikard: maskRef('b10_ikard', b10_ikard),
   b10_goodnight: maskRef('b10_goodnight', b10_goodnight),
   b10_mccoy: maskRef('b10_mccoy', b10_mccoy),

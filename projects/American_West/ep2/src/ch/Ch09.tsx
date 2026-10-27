@@ -50,7 +50,7 @@ const at = T.at;
 const END = T.frames + 60;
 
 const I = {
-  paint: 'img/ch01/b_chinook_painting.jpg',
+  paint: 'img/ch01/chinook_1887_restored.jpg',
   roosevelt: 'img/ch09/roosevelt_buckskin_1885.jpg',
   harpers: 'img/ch09/cattle_in_a_blizzard_harpers_1886.jpg',
   hay: 'img/ch09/derrick_fork_stacking_hay_watkins_1880s.jpg',
@@ -59,7 +59,7 @@ const I = {
   range: 'img/props/L8_fenced_range.jpg',
 };
 const Z = {
-  paint: [4000, 2468] as [number, number],
+  paint: [4000, 2847] as [number, number],
   roosevelt: [1920, 2819] as [number, number],
   harpers: [3000, 2425] as [number, number],
   hay: [1536, 1190] as [number, number],
@@ -67,7 +67,7 @@ const Z = {
   drift: [3000, 2409] as [number, number],
 };
 const TAG = {
-  paint: 'C. M. Russell, Waiting for a Chinook, 1886 (1907 postcard) · Internet Archive',
+  paint: 'C. M. Russell, Waiting for a Chinook, 1887, watercolor · Montana Historical Society · enhanced from a small scan',
   roosevelt: 'Theodore Roosevelt in hunting dress, 1885, G. G. Bain · Library of Congress (via Wikimedia Commons)',
   harpers: "Cattle in a blizzard on the plains, C. Graham after H. Worrall, Harper's Weekly, 1886 · Library of Congress",
   hay: 'C. E. Watkins, Derrick fork stacking hay, Kerr Ranch, 1880s · Library of Congress',
@@ -75,7 +75,7 @@ const TAG = {
   map: 'Map: drawn for the series; state lines today\'s, for reference',
 };
 /** The painting in black and white, a little warm (as ch01). */
-const PBW = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(0.92)';
+const PBW = 'grayscale(1) sepia(0.12) contrast(1.12) brightness(0.88)';
 /** Harper's picture area inside the page scan. */
 const HARP_BOX: [number, number, number, number] = [330, 395, 2670, 1975];
 
@@ -499,7 +499,7 @@ const RooseveltDesk: React.FC<{quote: boolean}> = ({quote}) => {
 const Painted: React.FC = () => {
   const a = at("That's the winter") - 1;
   return (
-    <Pic src={I.paint} size={Z.paint} filter={PBW} k={[[a, 1700, 1200, 0.52], [at('What came after') - 1, 1600, 1180, 0.56]]} tag={TAG.paint}>
+    <Pic src={I.paint} size={Z.paint} filter={PBW} k={[[a, 1950, 1350, 0.5], [at('What came after') - 1, 2000, 1260, 0.56]]} tag={TAG.paint}>
       {() => <Note text="the winter Charlie Russell painted" x={840} y={110} size={48} rot={-2} at={at('Charlie') - 3} />}
     </Pic>
   );
