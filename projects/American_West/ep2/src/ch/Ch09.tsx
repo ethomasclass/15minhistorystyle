@@ -488,7 +488,7 @@ const RooseveltDesk: React.FC<{quote: boolean}> = ({quote}) => {
         {quote && <Note text="that spring, he wrote to a friend" x={110} y={200} size={50} rot={-2} at={a + 3} />}
         <ScrimTag text={TAG.roosevelt} />
       </>}>
-      <Bust src={I.roosevelt} size={Z.roosevelt} mask={M9.b9_roosevelt} x={1160} y={160} w={640} cutY={1150} at={quote ? -99 : a + 2} rot={2} seed={93}
+      <Bust src={I.roosevelt} size={Z.roosevelt} mask={M9.b9_roosevelt} x={1100} y={110} w={780} cutY={1150} at={quote ? -99 : a + 2} rot={2} seed={93}
         filter={quote ? 'grayscale(1) contrast(1.15) brightness(0.75)' : undefined} />
     </DeskShot>
   );

@@ -34,3 +34,7 @@ L8_fenced_range (no tags).
 - Gates's only good portrait is from his later years; the beat says "a young salesman" (a Note, not a claim about the picture).
 - The corral is a drawn diagram; the San Antonio demonstration (c. 1876) is flagged "as the story is told" on screen, as the script says.
 - Texas cut marks are illustrative, labelled so. The 1884 law line (felony, 1–5 years) is worth a fact check against your preferred source.
+
+## Update, Oct 27 (portrait rule)
+Glidden is cut out of the poster's oval completely (bust only, cut at y 975, coral + trace); Gates is a bust cut-out (coral + trace on his
+beat, plain B&W when he returns for "his pitch"). The patent drawing and the poster's other parts are no longer shown as prints of him.

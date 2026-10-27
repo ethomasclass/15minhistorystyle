@@ -28,3 +28,8 @@ AI: L9_blizzard, L8_fenced_range, p9_post_drift, p9_haystack, p9_hay_rake, p2_lo
 - The Harper's engraving is from 1886 (a storm before the Big Die-Up); its tag says so. A spring 1887 photograph of dead cattle would be a better fit for "the creeks" if one turns up.
 - The foreleg in the 3D slice is drawn simply (a teal outline, cloven hoof); read it in motion before deciding on a muzzle instead.
 - "more than half" is the script's "some estimates" (labelled illustrative).
+
+## Update, Oct 27
+- Roosevelt is a plain B&W bust cut-out (new mask `b9_roosevelt`, job in `tools/mask_jobs/ch09.py`, u2net_human_seg on the upper body,
+  cut at y 1150), no coral, no trace (quiet chapter); dimmed behind the quote.
+- The remade p9_post_drift prop is taller: placed at 430 px wide so the post and its mound sit in frame beside the wind lines (re-taken).

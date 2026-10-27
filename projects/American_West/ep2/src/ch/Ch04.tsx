@@ -236,7 +236,7 @@ const Carleton: React.FC = () => {
     <Quiet>
       <AbsoluteFill>
         <DeskCam k={[[a, 12, 1.0, 0, 0, 0], [at('He wanted'), 12, 1.05, 0, 10, 0]]}><></></DeskCam>
-        <Bust src={I.carleton} m={M4.carleton} x={1180} y={280} w={460} at={a + 2} rot={1} />
+        <Bust src={I.carleton} m={M4.carleton} x={1120} y={250} w={560} at={a + 2} rot={1} />
         <SlapTitle text="1863" x={110} y={90} size={110} at={at('1863')} seed={73} />
         <Label text="Gen. James H. Carleton" x={120} y={330} size={30} at={at('commander') - 2} color={BONE} />
         <Label text="the Army's commander in New Mexico" x={120} y={380} size={24} at={at('commander')} />

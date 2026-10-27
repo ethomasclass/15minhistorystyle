@@ -39,3 +39,7 @@ script `review/ch07-10_tools/fixmask.py`, it calls `tools/trace.save`; mask clos
 - The open cut photo appears in ch07 twice (ounces backdrop, dimmed) and again in ch10; fine as a callback, swap one if it feels repetitive.
 - Remington's drawing is 1880s art, not a photo; W. H. Jackson's c.1872 placer photo (image agent) is the alternative if you prefer a photograph.
 - "≈ 40–41 million oz" labelled "commonly cited".
+
+## Update, Oct 27 (portrait rule)
+Hearst is now a bust cut-out on the desk (`Bust` in `src/kit/ch07_10_extra.tsx`: mask cut-out, straight cut below the shoulders at
+source y 2050, soft contact shadow, coral see-through tint + teal trace as the beat's subject). No print, no photo background.

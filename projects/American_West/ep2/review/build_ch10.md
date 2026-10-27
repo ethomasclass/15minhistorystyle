@@ -31,3 +31,12 @@ open cut, ch01 painting); new: the sod house (`b_sod_house_rawding_1886.jpg`, cr
 - Callback cards use those chapters' current files; if a builder renames an image, update `I` at the top of Ch10.
 - Row 1's wording is copied from Ep 1 Ch09's ledger; row 2's from the script.
 - The ledger's cells are 29-pt handwriting so five lines fit a row; legible at 1080p, small on a phone.
+
+## Update, Oct 27 (portrait rule)
+McCoy, Goodnight and Bose Ikard are now bust cut-outs (coral see-through tint + teal trace on their beats), from my own masks
+`b10_mccoy`, `b10_goodnight`, `b10_ikard` (`tools/mask_jobs/ch10.py`). Hand fixes after rembg (re-apply if `tools/mask.py` is re-run):
+- `review/ch07-10_tools/fixmask.py b10_ikard "-0,0 800,0 800,976 0,976" "+350,78 400,70 450,78 468,110 472,160 462,210 450,250 448,290 480,300 540,320 580,350 595,400 598,560 138,560 142,400 160,350 220,320 300,300 335,285 332,250 318,200 318,150 326,110"`
+  (rembg lost his face against the dark leaves, so the bust is hand-traced; the source is only 800 px, so it is a little soft).
+- `fixmask.py b10_mccoy "+700,640 800,540 900,505 1010,540 1100,620 1150,720 1160,840 1120,960 1080,1060 1060,1150 960,1250 800,1300 730,1200 715,1000 700,850 690,720" "-380,1080 720,1080 720,1290 600,1340 470,1420 380,1480"` then `"-950,480 1120,480 1120,640 1090,640 1040,580 1000,545"` (fills holes in the face, drops the hatched cloud and a paper sliver).
+- `fixmask.py b10_goodnight "+360,480 450,480 450,575 360,575"` (a hole by the collar).
+The Homestake and the treaty stay prints (not portraits).

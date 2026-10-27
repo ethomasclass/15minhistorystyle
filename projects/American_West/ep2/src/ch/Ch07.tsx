@@ -336,7 +336,7 @@ const Hearst: React.FC = () => {
         <Note text="led by George Hearst" x={130} y={430} size={62} rot={-3} color="#FF6F61" at={at('George') - 2} />
         <ScrimTag text={TAG.hearst} />
       </>}>
-      <Bust src={I.hearst} size={Z.hearst} mask={M7.b_hearst} x={1100} y={90} w={720} cutY={2250} at={a + 2} rot={2} seed={71} tint={0.3} traceAt={at('George') - 1} />
+      <Bust src={I.hearst} size={Z.hearst} mask={M7.b_hearst} x={1120} y={70} w={680} cutY={2050} at={a + 2} rot={2} seed={71} tint={0.3} traceAt={at('George') - 1} />
     </DeskShot>
   );
 };

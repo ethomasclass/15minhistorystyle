@@ -19,7 +19,7 @@ import {Big, Counter, DeskCam, Float, Label, Lines, Print, Prop, Sounds, type Sf
 import {Hand, MPin, MRoute, WestMap} from '../kit/ch01_extra';
 import {MTrail, TLINES, TPL} from '../kit/trails';
 import {WShots} from '../kit/ch07_extra';
-import {CheckList, Four, MLine, MStandLabel, MState, TornTag} from '../kit/ch456_extra';
+import {Bust, CheckList, Four, MLine, MStandLabel, MState, TornTag} from '../kit/ch456_extra';
 import {M5} from '../masks_ch05';
 
 const N = words as Narration;
@@ -202,12 +202,12 @@ const Ikard: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 18, 1.12, 560, 20, -2], [lands, 18, 1.0, 40, 10, 0], [b, 16, 1.06, 80, 0, 0]]}>
-        <Lift x={150} y={330} w={420} hgt={410} h={4} at={-99} rot={-4} blur={interpolate(f, [lands - 6, lands + 6], [0, 2.2], clamp)} seed={53}>
-          <Print src={I.goodnight} size={Z.goodnight} x={0} y={0} w={420} at={-99} seed={53} />
-        </Lift>
-        <Lift x={620} y={110} w={600} hgt={732} h={14} at={lands} rot={2} seed={54}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} traceAt={at('Ikard') + 2} filter="grayscale(1) contrast(1.15)" />
-        </Lift>
+        <Float x={150} y={330} w={420} hgt={480} h={4} at={-99} rot={-3} blur={interpolate(f, [lands - 6, lands + 6], [0, 2.2], clamp)} seed={53}>
+          <Bust src={I.goodnight} m={M5.goodnight} x={0} y={0} w={400} at={-99} />
+        </Float>
+        <Float x={640} y={170} w={620} hgt={560} h={14} at={lands} rot={1} seed={54}>
+          <Bust src={I.ikard} m={M5.ikardBust} x={0} y={0} w={600} at={-99} tint={0.38} traceAt={at('Ikard') + 2} />
+        </Float>
       </DeskCam>
       <Hand parts={[['remember Goodnight & Loving?', WHITE]]} x={120} y={90} size={64} at={at('Remember') - 2} out={lands} />
       <SlapTitle text="BOSE IKARD" x={1300} y={150} size={90} at={at('Bose')} seed={81} />
@@ -223,10 +223,10 @@ const Trail: React.FC = () => {
   const a = at('On the trail') - 1;
   return (
     <AbsoluteFill>
-      <DeskCam k={[[a, 10, 1.36, -320, 90, 0], [at('Goodnight said'), 10, 1.44, -360, 80, 0]]}>
-        <Lift x={620} y={110} w={600} hgt={732} h={14} at={-99} rot={2} seed={54}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={600} at={-99} seed={54} mask={M5.ikard} tint={0.38} filter="grayscale(1) contrast(1.15)" />
-        </Lift>
+      <DeskCam k={[[a, 12, 1.0, 0, 0, 0], [at('Goodnight said'), 12, 1.06, 10, 10, 0]]}>
+        <Float x={120} y={150} w={840} hgt={760} h={10} at={-99} rot={-1} seed={54}>
+          <Bust src={I.ikard} m={M5.ikardBust} x={0} y={0} w={820} at={-99} tint={0.38} />
+        </Float>
       </DeskCam>
       <Label text="on the trail" x={1080} y={250} size={28} at={a + 2} color={WHITE} />
       <Lines x={1080} y={320} size={50} gap={86} rows={[{text: 'fought off Comanche raids', at: at('fought') - 2}, {text: 'rode out stampedes', at: at('rode') - 2}]} />
@@ -251,9 +251,9 @@ const Words: React.FC<{second: boolean}> = ({second}) => {
   return (
     <AbsoluteFill>
       <DeskCam k={second ? [[a, 14, 1.06, 30, 0, 1], [b, 14, 1.0, 0, 0, 0]] : [[a, 12, 0.98, 0, 0, -1], [b, 12, 1.04, 0, 0, 0]]}>
-        <Lift x={1420} y={300} w={380} hgt={464} h={6} at={-99} rot={3} seed={55}>
-          <Print src={I.ikard} size={Z.ikard} x={0} y={0} w={380} at={-99} seed={55} mask={M5.ikard} tint={0.35} filter="grayscale(1) contrast(1.15)" />
-        </Lift>
+        <Float x={1420} y={330} w={400} hgt={360} h={6} at={-99} rot={2} seed={55}>
+          <Bust src={I.ikard} m={M5.ikardBust} x={0} y={0} w={380} at={-99} tint={0.35} />
+        </Float>
       </DeskCam>
       <Label text="Charles Goodnight, on Bose Ikard" x={130} y={150} size={28} at={a + 2} color={WHITE} />
       {!second && <>
@@ -391,9 +391,9 @@ const Reeves: React.FC<{detail: boolean}> = ({detail}) => {
   return (
     <AbsoluteFill>
       <DeskCam k={detail ? [[a, 10, 1.0, 0, 0, 0], [b, 10, 1.06, -20, 10, 0]] : [[a, 18, 0.94, 0, 0, -2], [b, 16, 1.0, 0, 0, 0]]}>
-        <Lift x={1140} y={60} w={640} hgt={955} h={10} at={detail ? -99 : a + 2} rot={2} seed={56}>
-          <Print src={I.reeves} size={Z.reeves} x={0} y={0} w={640} at={-99} seed={56} mask={M5.reeves} tint={0.25} traceAt={detail ? undefined : at('Reeves') + 2} />
-        </Lift>
+        <Float x={1180} y={100} w={580} hgt={900} h={10} at={detail ? -99 : a + 2} rot={1} seed={56}>
+          <Bust src={I.reeves} m={M5.reevesBust} x={0} y={0} w={560} at={-99} tint={0.25} traceAt={detail ? undefined : at('Reeves') + 2} />
+        </Float>
       </DeskCam>
       {!detail && <SlapTitle text="BASS REEVES" x={110} y={360} size={110} at={at('Bass')} seed={83} />}
       {detail && <>

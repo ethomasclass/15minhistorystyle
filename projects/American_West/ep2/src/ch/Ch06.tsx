@@ -19,7 +19,7 @@ import {Big, Clip, Counter, DeskCam, Float, Label, Lines, Print, Prop, Sounds, t
 import {Hand, MPin, MRegion, WestMap} from '../kit/ch01_extra';
 import {TLINES, TPL, TREGIONS} from '../kit/trails';
 import {WShots} from '../kit/ch07_extra';
-import {MLine, MStandLabel} from '../kit/ch456_extra';
+import {Bust, MLine, MStandLabel} from '../kit/ch456_extra';
 import {M6} from '../masks_ch06';
 
 const N = words as Narration;
@@ -206,12 +206,12 @@ const Custer: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 18, 1.0, 0, 0, 2], [at('Officially'), 14, 1.06, 0, 20, 0]]}>
-        <Lift x={1080} y={30} w={660} hgt={1036} h={10} at={a + 2} rot={2} seed={66}>
-          <Print src={I.custer} size={Z.custer} x={0} y={0} w={660} crop={[200, 300, 1700, 2654]} at={-99} seed={66} mask={M6.custer} tint={0.38} traceAt={at('Custer') + 2} />
-        </Lift>
+        <Float x={1100} y={110} w={680} hgt={680} h={10} at={a + 2} rot={1} seed={66}>
+          <Bust src={I.custer} m={M6.custerBust} x={0} y={0} w={640} at={-99} tint={0.38} traceAt={at('Custer') + 2} />
+        </Float>
       </DeskCam>
       <Label text="led by" x={130} y={330} size={30} at={at('led by')} color={WHITE} />
-      <SlapTitle text="GEORGE ARMSTRONG CUSTER" x={110} y={400} size={74} at={at('George')} seed={105} />
+      <SlapTitle text="GEORGE ARMSTRONG CUSTER" x={110} y={400} size={64} at={at('George')} seed={105} />
       <ScrimTag text={TAG.custer} />
     </AbsoluteFill>
   );
