@@ -163,3 +163,100 @@ DVIDS/af.mil/army.mil). Use the 1982 text clippings above (fair use) + a drawn X
    use a drawn bowl.
 7. **Hospital X-raying a trick-or-treat bag, 1980s**: copyrighted wire photos only (see ch6).
 8. **The "two views" card (ch7)**: a designed card, not an archive image.
+
+## Draft 2 additions
+
+Sourced 2026-10-27 for draft 2 (8 chapters: ch02 Ireland, ch03 famine/crossing/1800s America, ch04 1933 riots, ch05 the deal,
+ch06 WWII/suburbs). **Folder note:** draft-2 numbers. The older files above still sit in their draft-1 folders (e.g. the deal clippings
+in `ch04/`), so go by the beat column, not the folder. Wikimedia (API and upload server) returned HTTP 429 for almost the whole
+session. Famine and emigration plates therefore come from the Internet Archive's full-page ILN scans (about 4200×6100 per page),
+cropped by hand. Contact sheet: `review/archival_sheet_draft2.jpg`.
+
+ILN rights: published in London 1847–51, all artists long dead, so public domain everywhere. The crops keep the printed caption
+under each plate (useful as on-screen text; crop it off in the scene if you don't want it). A few have a library stamp in a corner
+(Clonakilty, Scalpeen).
+
+### Ch 2: The Night the Dead Came Home
+
+| File | Shows | Date | Source | Licence / PD reason | Tag | Beat |
+|---|---|---|---|---|---|---|
+| `ch02/maclise_snap_apple_night_1833_lowres.png` | **The painting itself**: Maclise's *Snap-Apple Night*, the Blarney Halloween party (apple bobbing, snap-apple, fortune games, fireside). **800×539 only** | 1833 | [Commons](https://commons.wikimedia.org/wiki/File:Snap-Apple_Night_globalphilosophy.PNG) (also `Maclise.snap.apple.night.jpg`, same size) | PD (Maclise d. 1870; faithful 2D reproduction) | Daniel Maclise, *Snap-Apple Night*, 1833 | "Look at this painting… County Cork." Use as a small card on the desk, then cut to the 2125 px `ch02/kelley_1919_frontis_halloween_festivities.jpg` engraving of the same picture for close-ups and masks |
+
+**No high-res PD scan of the painting exists online** (it's in a private collection). Commons says "no higher resolution available".
+Bridgeman and Photo12 sell 3500 px scans (licensed, not free). The Met holds the 1845 James Scott mezzotint (DP 644100) and the 1853
+Currier lithograph (420715), but neither is on Open Access with an image. Not tried because Wikimedia was blocked: Commons
+`File:James_Scott_-_scott_snap.jpg` (the 1845 engraving, size unknown). **Irish cottage hearth scenes:** none found in time. Lead: Mr & Mrs
+S. C. Hall, *Ireland: its scenery, character* (1841–43), many cabin and fireside wood engravings, on IA as `ireland02halluoft`,
+`ireland03halluoft` and `b22012709_0001`–`0003`. Run `tools/find_images.py pages` on them.
+
+### Ch 3: Coffin Ships and Pumpkins
+
+| File | Shows | Date | Source | Licence / PD reason | Tag | Beat |
+|---|---|---|---|---|---|---|
+| `ch03/iln_searching_potatoes_stubble_field_1849.jpg` | A woman and a child digging a stubble field for leftover potatoes (1405×1450) | 22 Dec 1849 | [IA ILN 1849-12-22, n4](https://archive.org/details/sim_illustrated-london-news_1849-12-22_15_404/page/n4) | PD (ILN 1849) | *Illustrated London News*, 1849 | "the potatoes rotted in the ground" (no blighted-potato plate found; this is the closest) |
+| `ch03/iln_bridget_odonnel_and_children_1849.jpg` | **"Bridget O'Donnel and Children"**, the famous famine figure (1307×1962) | 22 Dec 1849 | same, n3 | PD | *Illustrated London News*, 1849 | "About a million people died" (key image; coral on Bridget) |
+| `ch03/iln_woman_begging_clonakilty_1847.jpg` | **"Woman begging at Clonakilty"**, holding a dead baby (1108×1623) | 13 Feb 1847 | [IA ILN 1847-02-13, n3](https://archive.org/details/sim_illustrated-london-news_1847-02-13_10_250/page/n3) | PD | James Mahony, *ILN*, 1847 | Great Famine (heavy: hold it briefly) |
+| `ch03/iln_mahony_old_chapel_lane_skibbereen_1847.jpg` | "Old Chapel-Lane, Skibbereen": a street of starving families (2626×1885) | 13 Feb 1847 | same, n3 | PD | James Mahony, *ILN*, 1847 | famine establishing shot |
+| `ch03/iln_mahony_funeral_skibbereen_1847.jpg` | Funeral cart with mourners on a mountain road (Mahony's Skibbereen sketches) (2299×1186) | 13 Feb 1847 | same, n3 | PD | James Mahony, *ILN*, 1847 | "About a million people died" |
+| `ch03/iln_mahony_hut_old_chapel_yard_1847.jpg` | "The hut or watch-house in the old chapel yard", dark and stormy (2268×2006) | 13 Feb 1847 | same, n4 | PD | James Mahony, *ILN*, 1847 | mood/alt |
+| `ch03/iln_kilrush_distributing_clothing_1849.jpg` | "Miss Kennedy distributing clothing at Kilrush": a crowd of ragged children around a cart (4006×2066; keeps the page header, crop it) | 22 Dec 1849 | IA ILN 1849-12-22, n3 | PD | *ILN*, 1849 | famine (crowd card) |
+| `ch03/iln_scalpeen_dunmore_evicted_1849.jpg` | "Scalpeen of Tim Downs, at Dunmore": an evicted family's lean-to in a ruined cabin (2488×2251) | 22 Dec 1849 | same, n3 | PD | *ILN*, 1849 | famine/evictions (alt) |
+| `ch03/iln_village_of_moveen_1849.jpg` | "Village of Moveen": a village of unroofed cottages (4087×1480) | 22 Dec 1849 | same, n4 | PD | *ILN*, 1849 | "Around two million left Ireland" (the empty village) |
+| `ch03/iln_emigrants_leaving_home_priests_blessing_1851.jpg` | **"Irish emigrants leaving home: the priest's blessing"** (3585×2097) | 10 May 1851 | [IA ILN 1851-05-10, n11](https://archive.org/details/sim_illustrated-london-news_1851-05-10_18_483/page/n11) | PD | *ILN*, 1851 | "Around two million left Ireland" (key) |
+| `ch03/iln_emigrants_arrival_at_cork_quay_1851.jpg` | "Emigrants' arrival at Cork: a scene on the quay", with placards **BOSTON / NEW YORK / QUEBEC** and ships behind (3543×2433) | 10 May 1851 | same, n11 | PD | *ILN*, 1851 | "crossed the ocean to America" (the BOSTON sign can take a Spot) |
+| `ch03/iln_emigration_agents_office_passage_money_1851.jpg` | "The emigration agents' office: the passage money paid" (G. O'Neil, Cork; crates "To Quebec") (3824×1622) | 10 May 1851 | same, n12 | PD | *ILN*, 1851 | crossing (alt) |
+| `ch03/iln_emigration_vessel_between_decks_1851.jpg` | **"Emigration vessel: between decks"**: steerage bunks, crowded and dark (3824×1382) | 10 May 1851 | same, n12 | PD | *ILN*, 1851 | **"coffin ships"**, crowded and sick (key) |
+| `ch03/iln_departure_emigrant_steamers_cork_1851.jpg` | Emigrant steamers *Nimrod* and *Athlone* leaving Cork for Liverpool, crowds on the quay (3739×1634) | 10 May 1851 | same, n12 | PD | *ILN*, 1851 | ships leaving |
+
+Also on hand from draft 1: `ch02/emigrants_farewell_doyle_cusack_1868.jpg`, `ch02/postcard_boys_carry_jackolantern_c1910.jpg` (pumpkin),
+`ch02/puck_uncle_sams_halloween_1904.jpg` (party games). **Still missing for ch03:** emigrants landing in New York/Boston (Castle Garden).
+Lead: Commons `Castle Garden Landing for Emigrants, Barge Office, Battery MET DR175.jpg` (Met drawing, 1,700 px, CC0), blocked by 429.
+Also missing: 1880s–1910s American Halloween-party photos/engravings (the 1904 Puck and the 1919 Kelley frontispiece cover it for now)
+and a blighted-potato image. Leads (blocked by 429): Commons `An Irish Peasant Family Discovering the Blight of their Store by Daniel
+MacDonald.jpg` (1847 painting, PD; it also works as a **cottage-interior image**), `The discovery of the potato blight.jpg`,
+`A food riot in Dungarvan… Pictorial Times (1846) - BL.jpg`. Anti-Irish cartoons: not sourced.
+
+### Ch 4: The Worst Halloween (Bismarck)
+
+| File | Shows | Date | Source | Licence / PD reason | Tag | Beat |
+|---|---|---|---|---|---|---|
+| `ch04/bismarck_tribune_1933-11-01_about_300_boys.jpg` (+ `.json`) | "…near the high school building, where it is estimated about 300 boys had assembled, members of the Burleigh county sheriff's force exploded two tear gas bombs and fired several tear gas cartridges in an attempt to disperse the mob." (1345×1097) | 1 Nov 1933 | [LOC](https://www.loc.gov/resource/sn85042243/1933-11-01/ed-1/?sp=1) | Chronicling America | *Bismarck Tribune*, Nov. 1, 1933 | Hook/ch4: "about 300 boys… tear gas". Swipe the two lines in the `.json` |
+
+**What the 1 Nov 1933 story says (OCR, checked):** "SIX POLICE CLASH WITH GANG OF BOYS NEAR HIGH SCHOOL". One boy wounded: George
+Manning, 17, hit in the legs by shot from a .410 that he said "an irate woman" fired (she said she aimed at the sidewalk). "Police authorities
+used tear gas bombs and cartridges to disperse a large crowd of pranksters… one of the wildest Halloween nights in the history of
+Bismarck." **About 300 boys at the high school**, who had piled "several old automobiles… garbage cans, old boats and… rubbish onto the
+steps of the high school building". Police were called just after 10 p.m.: three patrolmen, Sheriff Joseph L. Kelley and two deputies. The
+mob tried to turn over the sheriff's car and broke a window; James Wolfer, 24, a capitol construction worker, was charged. A 150-ft picket fence
+was torn down; "the usual tipping over of out-houses, soaping of windows". Pranks went on until about 1:30 a.m. Same story, other
+cities: Fargo (a house set afire), Minot, Valley City (a girl hurt when wagon wheels tied to a car by pranksters ran wild), **St. Paul: "the
+most destructive Halloween in 20 years", $3,000–4,000 damage to street lights, 166 calls in seven hours, 300 officers on foot, 30 boys
+held, 22 false alarms.** Follow-up, *Bismarck Tribune* 2 Nov 1933 p. 1, "Prankster Fined by Police Magistrate": Wolfer fined $5 for the
+window, "as the sheriff assisted city patrolmen in dispersing a crowd of 300 Halloween pranksters. Tear gas bombs were used to bring
+the boys to order." It confirms the 300 figure. Not cropped (LOC Cloudflare challenge): `--phrase "crowd of 300 Halloween pranksters"`.
+
+### Ch 5: The Deal (the leads from draft 1, now cropped)
+
+| File | Shows | Date | Source | Licence / PD reason | Tag | Beat |
+|---|---|---|---|---|---|---|
+| `ch05/daily_alaska_empire_1941-11-01_juneau_treated.jpg` (+ `.json`) | "…the kids carried away paper bags full of loot—candy, apples, popcorn. It was a case of trick or treat, so Juneau treated and the youngsters largely forgot the tricks." (791×466, small) | 1 Nov 1941 | [LOC](https://www.loc.gov/resource/sn83045499/1941-11-01/ed-1/?sp=2) | Chronicling America | *Daily Alaska Empire*, Nov. 1, 1941 | **"It's a deal" payoff** / ch8 callback |
+| `ch05/harlem_news_1941-11-07_no_mischief.jpg` (+ `.json`) | "Perhaps all those parties accounts for no mischief being done in town on Halloween. 'Trick or Treat.'" (1003×811) | 7 Nov 1941 | [LOC](https://www.loc.gov/resource/sn86075250/1941-11-07/ed-1/?sp=5) | Chronicling America | *Harlem News* (Mont.), Nov. 7, 1941 | parties work |
+| `ch05/tacoma_times_1940-11-02_trick_or_treat_ghosts_abroad.jpg` (+ `.json`) | Police captain thanks the town for "the lack of vandalism… The battalions of 'trick or treat' ghosts and witches were abroad in force… indoor parties proved helpful in keeping the sprites within legal bounds." (920×715) | 2 Nov 1940 | [LOC](https://www.loc.gov/resource/sn88085187/1940-11-02/ed-1/?sp=10) | Chronicling America | *Tacoma Times*, Nov. 2, 1940 | police endorse the deal |
+| `ch05/waterbury_democrat_1934-10-30_no_vandalism_now.jpg` (+ `.json`) | Editorial "No Vandalism Now": "For several years there was considerable property damage in Waterbury by wandering gangs of youths…" (1385×1080) | 30 Oct 1934 | [LOC](https://www.loc.gov/resource/sn82014085/1934-10-30/ed-1/?sp=6) | Chronicling America | *Waterbury Democrat*, Oct. 30, 1934 | the turn, early 1930s |
+| `ch05/hagerstown_globe_1939-10-27_halloween_grows_up.jpg` (+ `.json`) | **"Hallowe'en Grows Up; It's Noisy But Safe!"**: "police chiefs write 'No depredations'… Even **greased trolley tracks**, flat tires, and shattered street lamps, faint echoes from 'the good old days'" (1375×1074) | 27 Oct 1939 | [LOC](https://www.loc.gov/resource/sn89060186/1939-10-27/ed-1/?sp=5) | Chronicling America (AP-style feature) | *Hagerstown Globe*, Oct. 27, 1939 | parties replace pranks; also the **greased-tracks** line for ch3/ch4 |
+
+**Not done:** *Harlem News* 31 Oct 1941 p. 4 (the OCR doesn't match "destructive nature"; read the page by eye); NARA 513838 poster, War
+Ration Book One (NMAH), Conrad Poirier BAnQ photos, BPL c.1910 postcards (all on Commons, all blocked by 429; retry
+`tools/find_images.py get` when Wikimedia lets up).
+
+**Lethbridge Herald, 4 Nov 1927, p. 5, "'Trick or Treat' Is Demand":** no free scan found. The page is on NewspaperArchive.com
+(paywalled). The text is quoted in DCHP-2 ([dchp.arts.ubc.ca "trick or treat"](https://dchp.arts.ubc.ca/entries/trick%20or%20treat)) and in
+the Galt Museum's material. Note: Lethbridge historian Belinda Crowson says it is **not the first**. A *Calgary Daily Herald* item of 3 Nov 1927
+is earlier, and the dateline is Blackie, Alta. Peel's Prairie Provinces wasn't checked (no time). Use a typeset quote card, not a scan.
+
+### Remaining gaps (draft 2)
+
+- **Teen pranksters 1900–1930 at work:** nothing new. Hagerstown 1939 gives the words "greased trolley tracks" for a highlight.
+- **Greased streetcar tracks at night:** no photo. Commons `Streetcar-Minneapolis-1939.jpg` (FSA) is still the best streetcar lead;
+  otherwise use a painting.
+- **Irish hearth/cottage interior:** see the Hall's *Ireland* and MacDonald leads above.
