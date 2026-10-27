@@ -1,6 +1,6 @@
 # Trick-or-Treating Was a Bribe: The Real History of Halloween
 
-**Chunk History** · narration script · 1547 words · about 10:00 finished · draft 1 (about 9:25 of narration)
+**Chunk History** · narration script · 1822 words · about 11:47 finished · draft 2 (about 11:02 of narration)
 (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, six 2-second mark-snap breaks and a 20-second end screen)
 
 **Driving question:** How did the most destructive night of the year turn into a candy holiday for little kids?
@@ -31,20 +31,41 @@ But first, we need a vegetable. And it's not a pumpkin.
 
 ---
 
-## 0:58 | Turnips and Tipped Outhouses
-*`ch02_turnips_and_outhouses.txt`*
+## 0:59 | The Night the Dead Came Home
+*`ch02_the_night_the_dead_came_home.txt`*
 
-Ireland, about two hundred years ago. It's Halloween night, and kids are carrying lanterns. They've hollowed out turnips, carved faces into them, and put a candle inside.
+Ireland, about two hundred years ago. It's the last night of October, and it's one of the biggest nights of the year. The harvest is in. Winter starts tomorrow. And the dead, people believed, are coming home.
 
-[wry] Look at this one. It's in a museum in Ireland. Honestly? Way creepier than a pumpkin.
+So families kept the fire going and left food out. The seats closest to the fire were saved for the family's dead. [dry] Which is a very polite way to be haunted.
 
-There were bonfires, and people in disguises. And there was mischief.
+But mostly, it was a party. Look at this painting. It's a real Halloween party in County Cork, painted by an Irish artist who was there. People ducking for apples in a tub of water. Games, food, and fortune-telling.
 
-You may have heard that Halloween is a two-thousand-year-old Celtic festival called Samhain. Historians actually argue about that. The name comes from a Christian holiday: {All Hallows' Eve}, the night before All Saints' Day. The line back to anything ancient is a lot messier than the internet says.
+The big fortune of the night was who you'd marry. There was a fruit bread called {barmbrack} with a ring baked inside. Find the ring in your slice, and you'd be married within the year. [wry] Find it with your teeth, and you'd be seeing a dentist.
 
-What we know is how it got to America. In the 1840s, a famine drove more than a million Irish people across the ocean, and they brought their Halloween customs with them. But America had something Ireland didn't. Pumpkins. Big, cheap, and a lot easier to carve than a turnip. So over time, the {jack-o'-lantern} switched vegetables. If you carve a pumpkin this week, you're doing the American upgrade.
+Kids carried lanterns made from turnips, with a face carved in and a candle inside. Look at this one. It's in a museum in Ireland. Honestly? Way creepier than a pumpkin.
 
-The mischief came over too. Gates lifted off their hinges. Windows soaped. Outhouses tipped over. Sometimes, the stories go, with somebody still inside.
+People went out in disguise, faces blacked with soot, using fake voices so nobody knew who they were. Which came in handy, because there was mischief. Gates lifted off their hinges. Cabbages thrown at doors. Chimneys stuffed up so the house filled with smoke.
+
+[light] Hold onto that list. It's about to cross an ocean.
+
+You may have heard that all this goes back two thousand years, to a Celtic festival called Samhain. Historians argue about that. The name comes from a Christian holiday, {All Hallows' Eve}, and the line back to anything ancient is messier than the internet says.
+
+---
+
+## 2:44 | Coffin Ships and Pumpkins
+*`ch03_coffin_ships_and_pumpkins.txt`*
+
+Then, in 1845, a disease hit Ireland's potatoes. The plants turned black, and the potatoes rotted in the ground. And for millions of poor Irish families, potatoes were most of what they ate.
+
+[serious] That's the {Great Famine}. About a million people died. Around two million left Ireland, and more than a million of them crossed the ocean to America, many on ships so crowded and sick that people called them coffin ships.
+
+They landed in cities like Boston and New York, poor, and often not welcome. And they brought their Halloween with them.
+
+Other Americans loved the apple games and the fortunes, and by the end of the 1800s, everybody was throwing Halloween parties. But two things changed along the way.
+
+First, America had pumpkins. Big, cheap, and a lot easier to carve than a turnip. So over time, the {jack-o'-lantern} switched vegetables. If you carve a pumpkin this week, you're doing the American upgrade.
+
+Second, remember those gates off their hinges? The mischief came over too, and in America, it got bigger. Windows soaped. Outhouses tipped over. Sometimes, the stories go, with somebody still inside.
 
 And wagons. Somehow, it was always wagons. One Halloween in Newton, Kansas, people woke up to find a wagon on the roof of the lumberyard. For decades, wagons kept turning up on roofs every November first.
 
@@ -54,8 +75,8 @@ Then came the Great Depression. And the pranks stopped being funny.
 
 ---
 
-## 2:33 | The Worst Halloween
-*`ch03_the_worst_halloween.txt`*
+## 4:17 | The Worst Halloween
+*`ch04_the_worst_halloween.txt`*
 
 Fargo, North Dakota. Halloween night, 1933. Somebody keeps pulling false fire alarms. Porch lights and streetlamps get shot out. The paper made a point of saying the six boys charged were all from "prominent families."
 
@@ -73,8 +94,8 @@ Some towns came up with a better idea. They decided to pay.
 
 ---
 
-## 3:46 | The Deal
-*`ch04_the_deal.txt`*
+## 5:31 | The Deal
+*`ch05_the_deal.txt`*
 
 Here's the plan. If teenagers are going to roam the streets anyway, give them somewhere better to be.
 
@@ -94,8 +115,8 @@ Then, right as the deal was catching on, America ran out of sugar.
 
 ---
 
-## 4:59 | Sugar Goes to War
-*`ch05_sugar_goes_to_war.txt`*
+## 6:44 | Sugar Goes to War
+*`ch06_sugar_goes_to_war.txt`*
 
 This is a ration book from World War Two. In the spring of 1942, sugar became the first food America {rationed}, meaning each family could only buy a set amount. And it was the last food to come off the list, in 1947. That's five Halloweens with hardly any candy.
 
@@ -113,8 +134,8 @@ Halloween had never been safer. Which is exactly when parents got scared.
 
 ---
 
-## 6:26 | The Night in Texas (quiet chapter)
-*`ch06_the_night_in_texas.txt`*
+## 8:12 | The Night in Texas (quiet chapter)
+*`ch07_the_night_in_texas.txt`*
 
 [serious] Halloween, 1974. A suburb outside Houston, Texas. An eight-year-old boy goes trick-or-treating with his sister and some friends.
 
@@ -140,8 +161,8 @@ So was any of this a good idea? It depends who you ask.
 
 ---
 
-## 8:09 | Treat or Shakedown?
-*`ch07_treat_or_shakedown.txt`*
+## 9:55 | Treat or Shakedown?
+*`ch08_treat_or_shakedown.txt`*
 
 Not everybody liked the deal, even back then. In 1948, a letter to the Washington Post said trick-or-treating was "making gangsters of children." The writer wanted the city to fine parents who sent their kids out to beg.
 
@@ -179,12 +200,15 @@ The thumbnail, the first frame and the first line all say the same thing within 
 **After the test:** if a bribe thumbnail (X3/H3) wins Test & Compare, re-voice only the cold open as version B. The rest of the video is unchanged.
 
 ### Loop map (no stretch over ~45 s with every loop closed)
+*Draft 2: times after ch01 are from draft 1; add about 1:45 from ch04 on (Texas now closes at ~8:50, 75% in; the plug lands ~7:58, 68% in).*
 
 | # | Question the viewer is holding | Opens | Closes |
 |---|---|---|---|
 | A | How did a riot become candy for little kids? (driving question) | ch01, ~0:27 | ch07, ~8:45 |
 | B | **What happened in Texas?** (long loop) | ch01, ~0:45 | ch06, ~7:05 |
-| C | "We need a vegetable. And it's not a pumpkin." | ch01, ~0:50 | ch02, ~1:05 |
+| C | "We need a vegetable. And it's not a pumpkin." | ch01, ~0:50 | ch02, ~1:50 (the turnip) |
+| C2 | "Hold onto that list. It's about to cross an ocean." (the Irish pranks) | ch02, ~2:20 | ch03, ~3:40 ("remember those gates off their hinges?") |
+| C3 | The famine: what happens to the people who leave? | ch03, ~2:45 | ch03, ~3:10 |
 | D | "The pranks stopped being funny." How bad did it get? | ch02 end, ~2:30 | ch03, ~2:50 |
 | E | "If you can't stop Halloween, what do you do?" (asked aloud) | ch03, ~3:35 | ch04, ~3:50 |
 | F | "They decided to pay." What's the deal? | ch03 end, ~3:44 | ch04, ~4:35 ("It's a deal.") |
@@ -196,12 +220,13 @@ The thumbnail, the first frame and the first line all say the same thing within 
 Every chapter ends by opening the next loop (no summaries). Beats are joined by *but* / *so* (therefore), not *and then*.
 
 ### Humor map (about one dry aside a minute; none in ch06)
-- ch02: the turnip "Way creepier than a pumpkin" · outhouses "with somebody still inside" (hedged as a story) · "Which is not, it turns out, a legal defense."
+- ch02: "Which is a very polite way to be haunted." · barmbrack "Find it with your teeth, and you'd be seeing a dentist." · the turnip "Way creepier than a pumpkin"
+- ch03: no jokes in the famine paragraphs · "the American upgrade" · outhouses "with somebody still inside" (hedged) · "Which is not, it turns out, a legal defense."
 - ch03: "prominent families" (the paper's own phrase, delivered straight) · "a riot in costume"
 - ch04: "Edible plunder." · "a protection racket, with better costumes" · "A kid busy filling a bag isn't busy tipping over your outhouse."
 - ch05: "Whether anybody actually told the kids…" · "That's not a neighborhood. That's a buffet." · the plug: "unlike 1943, I'm not asking for your sugar."
-- ch06: **none** (quiet chapter: slower voice, teal-only quiet mode, no jokes)
-- ch07: "She had a point. We did just spend this whole video calling it a protection racket." · closer: "you might want to pay up."
+- ch07: **none** (quiet chapter: slower voice, teal-only quiet mode, no jokes)
+- ch08: "She had a point. We did just spend this whole video calling it a protection racket." · closer: "you might want to pay up."
 
 ### Retention checklist (script-writing.md §1–2, explainer-craft.md §1)
 - First sentence is the hook, not a date ✓ · the thumbnail's image at frame 0 ✓ · the question by ~0:27 ✓ · bigger promise ✓ · one long loop + one short promise ✓
@@ -228,7 +253,7 @@ Every chapter ends by opening the next loop (no summaries). Beats are joined by 
 1927 *Lethbridge Herald* "TRICK OR TREAT IS DEMAND" (to source) · War Ration Book One · 1950 Beaumont trick-or-treaters · 1982 X-ray clippings · the 1948 letter (two-views card).
 
 ### Vocab cards
-All Hallows' Eve · jack-o'-lantern · protection racket · rationed (rationing) · baby boom
+barmbrack · Great Famine · All Hallows' Eve · jack-o'-lantern · protection racket · rationed (rationing) · baby boom
 
 ### Heavy chapter
 ch06: [serious] delivery, slower, teal-only quiet mode, no music hits, no jokes. The boy is not named on screen or in narration; the father is not named.
@@ -245,12 +270,34 @@ If the video publishes after 31 Oct 2026, change "This Saturday" (ch01, ch07) to
 | Word | Say it |
 |---|---|
 | Samhain | Sow-in |
+| barmbrack | barm-brack |
+| County Cork | (default) |
 | Hallows' | Hal-lows |
 | jack-o'-lantern | (default; check) |
 | Bismarck | (default) |
 
 ## Fact-check flags
 (Full evidence and sources: `../research/FACT_CHECK.md`, flag numbers in brackets.)
+
+**New in draft 2 (Irish chapters):**
+- **Irish Halloween customs** (the dead returning, seats by the fire, food left out; barmbrack with a ring meaning marriage; soot-blackened faces,
+  false names and voices; gates off hinges, cabbages thrown at doors, chimneys blocked; bonfires): Marion McGarry, "How Halloween was celebrated in
+  Ireland", RTÉ Brainstorm, 20 Oct 2021 (originally Irish Humanities Alliance), https://www.rte.ie/brainstorm/2021/1020/1254854-halloween-ireland-history-traditions-folklore .
+  The National Museum of Ireland (folklife) confirms Samhain / Oíche Shamhna as the start of winter with feasting and games.
+  "About two hundred years ago" = the 1820s–40s, the period of the painting and of the earliest written folklore. **Add a second source for the
+  pranks list** (e.g. the Irish Folklore Commission's Schools' Collection, dúchas.ie, 1937–39).
+- **The painting:** Daniel Maclise, *Snap-Apple Night*, exhibited 1833, from a Halloween party in Blarney, Co. Cork, in Oct 1832 that he attended
+  (Library Ireland; Blarney history society; the Met's 1845/1853 prints after it). It shows apple-ducking and the snap-apple game. Public domain by age.
+  **Image to download** from Wikimedia Commons (rate-limited on 27 Oct).
+- **Turnip lanterns:** the museum lantern is in the National Museum of Ireland, Country Life (Castlebar), early 20th century. Carved-vegetable lanterns
+  are attested in Ireland and Britain in the 1800s; the word "jack-o'-lantern" for a carved lantern is recorded from 1837 (OED, via Wikipedia).
+- **The famine:** potato blight from 1845; about 1 million died; about 2 to 2.1 million left in 1845–55, about 1.5 million overseas, mostly to the US
+  (flag [4]). "Coffin ships": the common contemporary name for overcrowded, disease-ridden emigrant ships (period usage; see Irish famine histories).
+  "Often not welcome": anti-Irish prejudice in Boston and New York is well documented (avoid "No Irish Need Apply", which is disputed).
+- **"For a while … by the end of the 1800s, everybody was throwing Halloween parties":** Nicholas Rogers (*Halloween*, 2002): an ethnic holiday in the
+  mid-1800s, a continental one by the end of the century; turn-of-the-century party guides. "Everybody" is loose on purpose (not a statistic).
+
+**From draft 1:**
 
 1. **1933 Bismarck** [2]: the *Bismarck Tribune*, 1 Nov 1933, front page, "Tear Gas Used to Halt Pranks" (we hold the LOC scan). About 300 boys,
    junk cars and garbage at the high school: from the Grand Forks Herald retelling (29 Oct 2025), which cites the *Forum*. **Read the Tribune
