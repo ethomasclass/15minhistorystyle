@@ -11,7 +11,7 @@ import {Big, Clip, Counter, Label, Lines, Pic, Prop, Sounds, type SfxRow} from '
 import {Desk3D, keys, Lift, Mono, ScrimTag, shake, Shots, SlapTitle, TornPrint, zkeys} from '../kit/west';
 import {Hand, LINES, MPin, MRoute, PL, WestMap} from '../kit/ch01_extra';
 import {MHerd, MTrail, TLINES, TPL} from '../kit/trails';
-import {CropCam, MCattle, MState, PriceTag} from '../kit/ch02_extra';
+import {Bust, CropCam, MCattle, MState, PriceTag} from '../kit/ch02_extra';
 import {WShots} from '../kit/ch07_extra';
 import {M2} from '../masks_ch02';
 
@@ -256,11 +256,9 @@ const McCoy: React.FC = () => {
   return (
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={keys(f, [[a, 20], [b, 12]])} z={zkeys(f, [[a, 0.98], [b, 1.08]])} x={keys(f, [[a, -60], [b, -140]])} lamp={[760, 520]}>
-        <Lift x={420} y={40} w={620} hgt={620 * (1900 / 1400)} h={10} at={a + 3} rot={-2} seed={61}>
-          <TornPrint src={MCCOY} size={MCCOY_SZ} x={0} y={0} w={620} crop={[200, 250, 1600, 2150]} at={-99} seed={62} real grey shadow={6} filter={ENGR}
-            mask={M2.mccoy} tint={0.4} traceAt={at('Joseph McCoy') + 2} tapes={[{x: 230, y: -14, w: 150, rot: 3}]} />
-        </Lift>
+        <div />
       </Desk3D>
+      <Bust src={MCCOY} size={MCCOY_SZ} m={M2.mccoy} x={380} y={110} w={540} at={a + 3} tint={0.4} tintAt={at('Joseph McCoy')} traceAt={at('Joseph McCoy') + 2} rot={-2} />
       <Big text="1867" x={1180} y={140} size={170} at={at('In 1867') + 2} color="#FF9F1C" />
       <Mono text="JOSEPH McCOY" x={1190} y={380} size={40} at={at('Joseph McCoy') - 1} color="#FF6F61" />
       <Note text="a cattle dealer from Illinois" x={1060} y={470} size={48} rot={-3} at={at('cattle dealer') - 2} />

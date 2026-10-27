@@ -15,7 +15,7 @@ import {Desk3D, keys, Lift, Mono, PhotoCam, ScrimTag, shake, Shots, SlapTitle, T
 import {Hand, MPin, WestMap} from '../kit/ch01_extra';
 import {LITHO, Pic, Prop} from '../kit/ch04_extra';
 import {MProp, TPL} from '../kit/trails';
-import {MCattle, MState} from '../kit/ch02_extra';
+import {Bust, MCattle, MState} from '../kit/ch02_extra';
 import {WShots} from '../kit/ch07_extra';
 import {M1} from '../masks_ch01';
 import type {MaskRef} from '../kit/maskref';
@@ -186,11 +186,8 @@ const Russell: React.FC = () => {
     <AbsoluteFill style={{transform: `translate(${sh.x}px, ${sh.y}px)`}}>
       <Desk3D tilt={keys(f, [[a, 16], [b, 22]])} z={zkeys(f, [[a, 1.0], [b, 0.92]])} x={keys(f, [[a, 40], [b, -20]])} lamp={[640, 520]}>
         <PaintPrint x={1130} y={260} w={820} at={-99} rot={3} h={4} blur={1.5} seed={4} />
-        <Lift x={300} y={120} w={540} hgt={540 * (2400 / 1800)} h={14} at={a + 3} rot={-3} seed={8}>
-          <TornPrint src={RUSS} size={RSZ} x={0} y={0} w={540} crop={[60, 140, 1860, 2540]} at={-99} seed={9} real grey shadow={6} mask={M1.russell} tint={0.4} traceAt={at('Charlie') + 2}
-            tapes={[{x: 190, y: -14, w: 150, rot: -3}]} />
-        </Lift>
       </Desk3D>
+      <Bust src={RUSS} size={RSZ} m={M1.russell} x={190} y={120} w={560} at={a + 3} tint={0.4} tintAt={at('Charlie')} traceAt={at('Charlie') + 2} rot={-2} />
       <Mono text="CHARLIE RUSSELL · PHOTOGRAPHED C. 1900" x={250} y={60} size={30} at={at('Charlie') - 1} color="#FF6F61" />
       <Note text="(in 1886 he was 22)" x={130} y={930} size={46} rot={-2} at={at('young cowhand') + 2} color="#ffffff" />
       <Note text="painted this instead" x={1120} y={170} size={58} rot={-3} at={at('painted') - 2} />
