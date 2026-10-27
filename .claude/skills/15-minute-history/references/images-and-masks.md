@@ -234,3 +234,14 @@ the first try.
   cut off (a shoulder, the waist) placed off-frame so no straight cut shows. It springs up from below on its cue.
 - **Expect some misses**: busy crowd scenes and soft, pale shapes against sky (a half-filled paper balloon, a deflated barrage
   balloon among seated soldiers) came back wrong twice. Two tries, then drop it and pick another photo.
+
+## Portraits are bust cut-outs; white props on black (West Ep 2, Oct 2026)
+
+- **Every portrait of one person is a full bust cut-out**: head and shoulders only, cut out of the page (no print border, no photo
+  background, no circle mount, no oval or poster frame), on the desk with a soft contact shadow. `tools/mask.py` with
+  `u2net_human_seg` (or `isnet-general-use`), crop to the bust, hand-fix the edge, check with `tools/mask_closeup.py`. The beat's
+  subject gets the coral tint and teal trace; anyone else is plain black and white; quiet sections have no coral. Group photos and
+  scenes stay as prints; photos of Native people stay plain prints, never cut out.
+- **AI props on white** mask well with `tools/mask_white.py` (anything not paper-white in the clean original, small holes filled,
+  real openings kept). **White props (snow, paper, bone) go on black instead** (`tools/props.py` `ON_BLACK`, then
+  `tools/mask_white.py --bg=black`): snow drawn on white gave a ragged edge the user caught.

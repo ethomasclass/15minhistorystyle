@@ -153,6 +153,12 @@ column says where each was made.
 - **Cut-outs on the notebook, as many photos as possible** (*The Balloon War*). Each photo's subject is cut out and placed on the
   dark ruled paper, or the photo lands as a cream card on the desk. **No full-screen photos with slow pushes ("Ken Burns"), no 3D
   photo fly-throughs, no color photos** (modern ones go black and white too).
+- **Every portrait is a full bust cut-out** (West Ep 2, Oct 2026): any picture of one person shows just the head and shoulders, cut out of
+  the page onto the desk with a soft contact shadow: no paper print, no photo background, no circle mount, no oval or poster frame.
+  The beat's subject gets the see-through coral tint and teal trace; anyone else stays plain black and white; quiet sections, no
+  coral. Group photos and scenes stay as prints (and photos of Native people stay plain prints, never cut out).
+- **White things are cut out against black** (West Ep 2): a snow drift drawn on white came out ragged; make white props (snow,
+  paper, bone) on a black background and mask against it (`tools/mask_white.py --bg=black`).
 - **Text never runs off the frame.** You caught this in Fix Everything, King Andrew, Grip Tighter and Ouija. Run the probe every time.
 - **Notes on paper slips, inside the safe margin** (Reconstruction, Oct 2026): handwriting over a busy picture was hard to read, so notes sit on torn paper slips (dark ink on cream; pink for the subject). Keep titles and notes out of the outer 5% too (`SAFE=96` in the text probe).
 - **Say fractions so they can't be misheard** (Reconstruction ch06): "three-quarters of the states", not "three out of four states", which sounds like there were four.

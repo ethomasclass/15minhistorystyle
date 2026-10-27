@@ -4,6 +4,7 @@ of two objects.
   python3 tools/mask_white.py <name> ...            # white-paper mask: anything not paper-white in the clean original
   python3 tools/mask_white.py --fill <name> ...     # keep the rembg mask from tools/mask.py, only fill its small holes
   python3 tools/mask_white.py --fill --hole=60000 p6_nugget   # a bigger limit for one prop
+  python3 tools/mask_white.py --bg=black p9_post_drift          # a white prop drawn on black (snow)
 
 Both fill holes smaller than MAX_HOLE px only, so real openings (a spur's loop, the gaps between corral rails, the sky
 between fence posts) stay open. The white-paper mask keeps every piece above MIN_AREA (both spurs, every post).
@@ -20,6 +21,7 @@ from trace import save  # noqa: E402
 
 PUB = os.path.join(HERE, "..", "public")
 THR, MAX_HOLE, MIN_AREA = 20, 6000, 1500
+BG = "white"
 
 
 def fill_small(m):
@@ -37,7 +39,8 @@ def white(name):
     im = Image.open(os.path.join(PUB, "img", "props", name + ".jpg")).convert("RGB")
     raw = Image.open(os.path.join(HERE, "..", "review", "ai_props", name + ".png")).convert("RGB").resize(im.size, Image.LANCZOS)
     a = cv2.GaussianBlur(np.asarray(raw, np.float32), (0, 0), 1.5)
-    m = ((np.linalg.norm(a - [255, 255, 255], axis=2) > THR) * 255).astype(np.uint8)
+    bg = [0, 0, 0] if BG == "black" else [255, 255, 255]   # white props (snow) are drawn on black: tools/props.py ON_BLACK
+    m = ((np.linalg.norm(a - bg, axis=2) > THR) * 255).astype(np.uint8)
     m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)))
     m = fill_small(m)
     n, lab, stats, _ = cv2.connectedComponentsWithStats(m)
@@ -55,6 +58,8 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     mode = fill if "--fill" in args else white
     for a in args:
+        if a == "--bg=black":
+            BG = "black"
         if a.startswith("--hole="):
             MAX_HOLE = int(a.split("=")[1])  # a bigger hole to close (the nugget's quartz)
     for n in [a for a in args if not a.startswith("--")]:

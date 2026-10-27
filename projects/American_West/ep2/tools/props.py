@@ -54,7 +54,7 @@ JOBS = {
     "p8_barb": ("ch08 hero shot (cheap as dirt)", "An extreme close-up of a single barb of 1870s barbed wire: two twisted iron strands with one short sharp two-pointed barb coiled around them, the strands running off left and right.", "prop"),
     "p8_fence": ("ch08 the fence", "Three short cedar fence posts in a row with four strands of barbed wire stretched between them, three-quarter view.", "prop"),
     "p8_nippers": ("ch08 fence cutters", "A pair of heavy iron fence-cutting nippers with long handles, slightly open.", "prop"),
-    "p9_post_drift": ("ch09 quiet", "A single weathered wooden fence post half buried in a deep wind-sculpted snow drift, a strand of wire running into the snow.", "prop"),
+    "p9_post_drift": ("ch09 quiet", "A single weathered wooden fence post standing in a compact, smooth, rounded drift of white snow piled against one side of it by the wind, a short strand of wire running from the post into the snow; the drift is one simple solid mound with a clean outline.", "prop"),
     "p9_hay_rake": ("ch09 hay for winter", "An 1880s horse-drawn hay rake with two tall iron wheels and a row of curved steel tines, no horse, three-quarter view.", "prop"),
     "p9_haystack": ("ch09 hay for winter", "A large rounded haystack with a crude pole fence around it, three-quarter view.", "prop"),
     # 16:9 plates (scenery, a cut-out's background)
@@ -65,9 +65,14 @@ JOBS = {
 }
 
 
+# white things (snow) are drawn on black instead, so the mask can find their edge (tools/mask_white.py --bg black)
+ON_BLACK = {"p9_post_drift"}
+
+
 def prompt(name):
     _, subject, kind = JOBS[name]
-    return " ".join([subject, STYLE, SHEET, RULES_PROP] if kind == "prop" else [subject, STYLE, COMP, RULES_PLATE])
+    sheet = SHEET.replace("plain flat pure white background", "plain flat pure black background") if name in ON_BLACK else SHEET
+    return " ".join([subject, STYLE, sheet, RULES_PROP] if kind == "prop" else [subject, STYLE, COMP, RULES_PLATE])
 
 
 def make(name):
