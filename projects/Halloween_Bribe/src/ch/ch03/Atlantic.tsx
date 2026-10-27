@@ -12,7 +12,7 @@
 //             'turnip', whichever is later). Tie it to the word "pumpkins".
 // Ch03's local copy of src/fx/AtlanticMap.tsx (builders may not edit src/fx). Changes: the ATLANTIC OCEAN label moved south
 // of every route (in fx it ran along y≈1765 and crossed Cork→New York and Cork→Boston); `title` replaces the fixed COFFIN SHIPS
-// tape; `counter={false}` hides the counter and dates; `wide` starts the camera already pulled back (the second visit).
+// tape; `counter={false}` hides the counter and dates; `wide` starts the camera already pulled back (the second visit; it also drops the ocean label there, which the jack-o'-lantern definition covers).
 // Missing keys fall back to DEFAULT_AT. Keep the famine part clean: the turnip only appears from 'turnip'.
 import React from 'react';
 import {AbsoluteFill, Easing, Img, interpolate, staticFile} from 'remotion';
@@ -153,7 +153,7 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
 
   const turnipHome = lift(PL.ireland, 10, 50);
   const pumpkinHome: [number, number] = [1130, 1400]; // Maine / New Brunswick, between Quebec and Boston
-  const ocean = [3150, 2270]; // south of every route (was PL.atlantic - 360, +40: on top of the Cork routes)
+  const ocean = [3500, 2110]; // south of every route (was PL.atlantic - 360, +40: on top of the Cork routes)
 
   return (
     <AbsoluteFill>
@@ -166,8 +166,8 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
             <>
               {/* the US–Canada line, faint */}
               <Border api={api} d={D.lines.border} at={-99} dur={1} color="rgba(42,39,35,0.55)" width={2} dashed ticks={false} z={1} />
-              <PathText api={api} d={`M${ocean[0] - 700},${ocean[1]} L${ocean[0] + 700},${ocean[1]}`} text="ATLANTIC OCEAN" at={wide ? -99 : R + 84} size={40}
-                color="rgba(244,239,230,0.75)" dy={0} />
+              {!wide && <PathText api={api} d={`M${ocean[0] - 480},${ocean[1]} L${ocean[0] + 480},${ocean[1]}`} text="ATLANTIC OCEAN" at={R + 84} size={30}
+                color="rgba(244,239,230,0.75)" dy={0} />}
 
               {/* routes and their ports */}
               {ROUTES.map((r) => (
@@ -197,7 +197,7 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
               <Stand api={api} at={lift(PL.cork, -40, 0)} z={14} show={18} out={R + 22}><PlaceTag text="CORK" size={24} /></Stand>
               <Stand api={api} at={lift(PL.dublin, 50, -10)} z={14} show={22} out={R + 22}><PlaceTag text="DUBLIN" size={24} /></Stand>
               <Stand api={api} at={lift(PL.liverpool, 60, -10)} z={14} show={26} out={R + 22}><PlaceTag text="LIVERPOOL" size={24} /></Stand>
-              <Stand api={api} at={lift(PL.boston, 340, 40)} z={12} show={R + DRAW - 4}><PlaceTag text="BOSTON" size={28} color={CREAM} /></Stand>
+              <Stand api={api} at={lift(PL.boston, 340, 40)} z={12} show={R + 84}><PlaceTag text="BOSTON" size={28} color={CREAM} /></Stand>
               <Stand api={api} at={lift(PL.newYork, 230, 250)} z={0} show={R + 106}><PlaceTag text="NEW YORK" size={28} /></Stand>
               <Stand api={api} at={lift(PL.quebec, -120, -40)} z={12} show={R + 24 + DRAW - 4} out={land - 6}><PlaceTag text="QUEBEC" size={28} /></Stand>
 
@@ -225,7 +225,7 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
       </Map3D>
 
       {/* screen-space titles */}
-      {title && <Highlight text={title.text} x={110} y={102} size={84} at={title.at} rot={-2} />}
+      {title && <Highlight text={title.text} x={110} y={114} size={84} at={title.at} rot={-2} />}
       {counter && g >= 16 && (
         <div style={{position: 'absolute', left: 124, top: 220, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: CREAM, textShadow: '0 2px 10px rgba(0,0,0,0.9)',
           opacity: interpolate(g, [16, 22], [0, 1], clamp)}}>1845–1855</div>
@@ -240,7 +240,7 @@ export const AtlanticCrossing: React.FC<{at?: (key: string) => number; title?: {
       )}
       {counter && <Note text="crossed to america" x={1340} y={214} size={44} rot={-3} at={C + 30} dur={12} color="#ffffff" />}
 
-      <Note text="the turnip lantern..." x={1240} y={420} size={44} rot={-3} at={T + 4} dur={12} out={land + 40} />
+      <Note text="the turnip lantern..." x={1040} y={370} size={44} rot={-3} at={T + 4} dur={12} out={land + 40} />
       <Note text="...becomes a pumpkin" x={240} y={300} size={48} rot={-3} at={land + 6} dur={12} color={CORAL} />
 
       <Tag text={`Map drawn from Natural Earth data · routes simplified${g >= T ? ' · turnip lantern: illustration' : ''}`} />

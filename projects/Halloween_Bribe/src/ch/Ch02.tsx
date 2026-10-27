@@ -49,11 +49,11 @@ const Hearth: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch02_hearth" size={hearth.size as [number, number]} glowLayer={hearth.glowLayer} a={0} b={b - a} cam={{z: [1.03, 1.08], x: [-10, 10]}} fade={4} flicker={0.8} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 30%)'}} />
-    <Highlight text="THE DEAD COME HOME" x={110} y={70} size={92} at={t.at('coming home') - a} seed={202} rot={-2} />
-    <Slip text="fire kept going · food left out" x={130} y={230} at={t.at('kept the fire') - a} size={50} rot={-2} />
+    <Highlight text="THE DEAD COME HOME" x={110} y={108} size={92} at={t.at('coming home') - a} seed={202} rot={-2} />
+    <Slip text="fire kept going · food left out" x={130} y={262} at={t.at('kept the fire') - a} size={50} rot={-2} />
     <Loop cx={1530} cy={905} rx={200} ry={95} at={t.at('seats') - a + 2} width={6} seed={203} tilt={-4} />
     <Slip text="saved for the family's dead" x={1080} y={720} at={t.at('saved') - a} size={48} rot={-3} />
-    <Slip text="a very polite way to be haunted" x={140} y={930} at={t.at('very polite') - a} size={54} rot={-2} coral />
+    <Slip text="a very polite way to be haunted" x={140} y={900} at={t.at('very polite') - a} size={54} rot={-2} coral />
   </AbsoluteFill>
 );
 
@@ -61,14 +61,14 @@ const Hearth: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
 const Party: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Highlight text="MOSTLY, A PARTY" x={110} y={100} size={100} at={t.at('party') - a} seed={204} rot={-2} />
+    <Highlight text="MOSTLY, A PARTY" x={110} y={115} size={100} at={t.at('party') - a} seed={204} rot={-2} />
     <PhotoCard src="img/ch02/maclise_snap_apple_night_1833_lowres.png" x={680} y={330} w={560} rot={-2} at={t.at('Look at this painting') - a - 2} fit="contain"
       filter="grayscale(1) contrast(1.25) brightness(1.08)" />
     <Loop cx={960} cy={535} rx={410} ry={300} at={t.at('painting') - a + 2} width={6} seed={205} tilt={-3} />
-    <Note text="a real Halloween party" x={600} y={870} size={54} rot={-3} at={t.at('real Halloween party') - a - 3} color="#ffffff" />
+    <Note text="a real Halloween party" x={600} y={845} size={50} rot={-3} at={t.at('real Halloween party') - a - 3} color="#ffffff" />
     <Note text="County Cork" x={1420} y={420} size={60} rot={-4} at={t.at('County Cork') - a - 3} />
-    <Note text="Daniel Maclise" x={90} y={430} size={52} rot={-4} at={t.at('painted by') - a - 3} />
-    <Note text="1833 · he was there" x={100} y={530} size={44} rot={-3} at={t.at('who was there') - a - 3} color="#ffffff" />
+    <Note text="Daniel Maclise" x={115} y={430} size={52} rot={-4} at={t.at('painted by') - a - 3} />
+    <Note text="1833 · he was there" x={110} y={530} size={38} rot={-3} at={t.at('who was there') - a - 3} color="#ffffff" />
     <Tag text="Daniel Maclise, Snap-Apple Night, 1833 (oil, private collection)" />
   </AbsoluteFill>
 );
@@ -136,7 +136,7 @@ const Brack: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <Prop name="hazelnuts" x={1470} y={60} w={300} at={2} from="top" />
       <Barmbrack x={bx} y={by} w={bw} at={t.at('fruit bread') - a - 2} glint={glint} />
-      <Highlight text="WHO YOU'D MARRY" x={100} y={100} size={84} at={t.at("who you'd marry") - a} seed={209} rot={-2} />
+      <Highlight text="WHO YOU'D MARRY" x={110} y={112} size={84} at={t.at("who you'd marry") - a} seed={209} rot={-2} />
       <Highlight text="BARMBRACK" x={110} y={270} size={100} at={t.at('barmbrack') - a} seed={210} rot={-3} />
       <Definition term="barmbrack" def="a fruit bread, baked with a ring inside" at={t.at('barmbrack') - a + 9} x={110} y={430} w={680} />
       <Note text="find the ring in your slice" x={110} y={630} size={46} rot={-3} at={t.at('Find the ring') - a - 3} />
@@ -171,7 +171,7 @@ const Museum: React.FC<{t: TL; a: number}> = ({t, a}) => (
         <>
           <Loop cx={cx} cy={cy} rx={290} ry={250} at={t.at('this one') - a} width={6} seed={214} tilt={-5} />
           <Note text="a real one" x={1000} y={170} size={70} rot={-4} at={t.at('this one') - a - 3} />
-          <Note text="Museum of Country Life, Co. Mayo" x={1000} y={300} size={46} rot={-3} at={t.at('museum') - a - 3} color="#ffffff" />
+          <Note text="Museum of Country Life, Co. Mayo" x={990} y={300} size={40} rot={-3} at={t.at('museum') - a - 3} color="#ffffff" />
           <Note text="(a cast of an old carved turnip)" x={1010} y={390} size={40} rot={-3} at={t.at('museum') - a + 8} color="#ffffff" />
           <Highlight text="WAY CREEPIER" x={990} y={560} size={100} at={t.at('Way creepier') - a} seed={215} rot={-3} />
           <Note text="than a pumpkin." x={1020} y={740} size={70} rot={-4} at={t.at('than a pumpkin') - a - 3} color={CORAL} />
@@ -186,9 +186,9 @@ const Guisers: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch02_guisers" size={guisers.size as [number, number]} glowLayer={guisers.glowLayer} a={0} b={b - a} cam={{z: [1.04, 1.1], x: [30, -30]}} fade={4} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 28%)'}} />
-    <Highlight text="IN DISGUISE" x={110} y={80} size={100} at={t.at('disguise') - a} seed={216} rot={-2} />
-    <Slip text="faces blacked with soot" x={130} y={240} at={t.at('faces blacked') - a} size={52} rot={-2} />
-    <Slip text="fake voices" x={170} y={340} at={t.at('fake voices') - a} size={52} rot={-3} />
+    <Highlight text="IN DISGUISE" x={110} y={102} size={100} at={t.at('disguise') - a} seed={216} rot={-2} />
+    <Slip text="faces blacked with soot" x={130} y={262} at={t.at('faces blacked') - a} size={52} rot={-2} />
+    <Slip text="fake voices" x={170} y={362} at={t.at('fake voices') - a} size={52} rot={-3} />
   </AbsoluteFill>
 );
 
@@ -206,7 +206,7 @@ const Mischief: React.FC<{t: TL; a: number}> = ({t, a}) => {
         lines={MISCHIEF.map((text, i) => ({text, at: t.at(['Gates', 'Cabbages', 'Chimneys'][i]) - a - 2}))} pinAt={hold} loopAt={t.at('that list') - a} />
       <Prop name="iron_gate" x={1080} y={120} w={760} rot={-8} at={t.at('Gates') - a - 2} out={t.at('cross an ocean') - a - 4} from="top" />
       <Prop name="cabbage" x={1260} y={540} w={360} at={t.at('Cabbages') - a - 2} out={t.at('cross an ocean') - a - 4} />
-      <Note text="it's about to cross an ocean" x={1110} y={500} size={56} rot={-4} at={t.at('cross an ocean') - a - 3} />
+      <Note text="it's about to cross an ocean" x={1080} y={500} size={46} rot={-4} at={t.at('cross an ocean') - a - 3} />
       <Arrow x1={1300} y1={640} x2={1760} y2={700} bow={-50} at={t.at('cross an ocean') - a + 8} color={TEAL} width={7} />
     </AbsoluteFill>
   );
@@ -228,14 +228,15 @@ const Samhain: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="historians argue about that" x={800} y={270} size={54} rot={-4} at={t.at('Historians argue') - a - 3} color={ORANGE} />
       <Note text="the name: a Christian holiday" x={830} y={500} size={50} rot={-3} at={t.at('Christian holiday') - a - 3} />
       <Highlight text="ALL HALLOWS' EVE" x={810} y={600} size={84} at={t.at("All Hallows' Eve") - a} seed={218} rot={-2} />
-      <Definition term="All Hallows' Eve" def="the night before All Saints' Day (Nov. 1). Shortened, it became “Halloween”" at={t.at("All Hallows' Eve") - a + 9} x={810} y={760} w={980} />
+      <Definition term="All Hallows' Eve" def="the night before All Saints' Day (Nov. 1). Shortened, it became “Halloween”" at={t.at("All Hallows' Eve") - a + 9} x={810} y={745} w={980} />
       {g >= line && (
         <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
           <path d={d} fill="none" stroke={pal.mark} strokeWidth={6} strokeDasharray="1" pathLength={1} strokeDashoffset={1 - p} strokeLinecap="round" />
         </svg>
       )}
       <Note text="?" x={600} y={300} size={110} rot={-8} at={t.at('anything ancient') - a} color={CORAL} />
-      <Note text="messier than the internet says" x={110} y={900} size={58} rot={-3} at={t.at('messier') - a - 3} color="#ffffff" />
+      <Note text="messier than" x={120} y={700} size={56} rot={-3} at={t.at('messier') - a - 3} color="#ffffff" />
+      <Note text="the internet says" x={140} y={800} size={56} rot={-3} at={t.at('messier') - a + 4} color="#ffffff" />
     </AbsoluteFill>
   );
 };

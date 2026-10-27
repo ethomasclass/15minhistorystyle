@@ -123,7 +123,7 @@ const Callback: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <Loop cx={900 + 900 * 0.0225 + (LHEAD[0][0] + LHEAD[0][2] / 2) * hs} cy={640 + 20 + (LHEAD[0][1] + LHEAD[0][3] / 2) * hs + 4} rx={LHEAD[0][2] * hs * 0.55} ry={LHEAD[0][3] * hs * 1.25}
           at={t.at('headline') - a + 6} color={CORAL} width={6} seed={44} tilt={2} />
       )}
-      <Note text="the headline from the start" x={980} y={480} size={56} rot={-3} at={t.at('from the start') - a - 3} color="#ffffff" />
+      <Note text="the headline from the start" x={800} y={480} size={52} rot={-3} at={t.at('from the start') - a - 3} color="#ffffff" />
       <Arrow x1={1180} y1={560} x2={1260} y2={650} bow={-30} at={t.at('from the start') - a + 4} color={TEAL} width={6} />
       <Tag text="The Bismarck Tribune, 1 Nov 1933 · Library of Congress" />
     </AbsoluteFill>
@@ -136,12 +136,12 @@ const Country: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Highlight text="ACROSS THE COUNTRY" x={110} y={80} size={96} at={t.at('Across the country') - a} seed={45} rot={-2} />
+      <Highlight text="ACROSS THE COUNTRY" x={110} y={110} size={96} at={t.at('Across the country') - a} seed={45} rot={-2} />
       <Clip src={IMG.indy} crop={C_INDY} x={90} y={300} w={560} rot={-3} at={i1}><Swipe lines={LINDY} from={i1 + 6} to={i1 + 20} seed="in" /></Clip>
       <Clip src={IMG.ivp} crop={C_IVP} x={690} y={350} w={540} rot={2} at={i2}><Swipe lines={LIVP} from={i2 + 6} to={i2 + 16} seed="iv" /></Clip>
       <Clip src={IMG.wdn} crop={C_WDN} x={1290} y={310} w={520} rot={-2} at={i3}><Swipe lines={LWDN} from={i3 + 6} to={i3 + 16} seed="wd" /></Clip>
       <Note text="1931 · 1936 · 1939" x={760} y={240} size={52} rot={-2} at={i2 + 4} color="#ffffff" />
-      <Note text="smashed windows" x={640} y={890} size={78} rot={-3} at={t.at('smashed') - a - 3} color={CORAL} />
+      <Note text="smashed windows" x={640} y={790} size={78} rot={-3} at={t.at('smashed') - a - 3} color={CORAL} />
       <Tag text="Indianapolis Times, 2 Nov 1931 · Imperial Valley Press, 2 Nov 1936 · Washington Daily News, 1 Nov 1939 · LOC" />
     </AbsoluteFill>
   );
@@ -151,14 +151,14 @@ const Country: React.FC<{t: TL; a: number}> = ({t, a}) => {
 const Streetcars: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PhotoCard src={IMG.pole} x={90} y={110} w={880} h={600} rot={-2} at={0} pos="50% 50%" />
-    <Note text="trolley wires: pulled down" x={130} y={790} size={64} rot={-3} at={t.at('trolley wires') - a - 3} color="#ffffff" />
+    <PhotoCard src={IMG.pole} x={110} y={110} w={860} h={560} rot={-2} at={0} pos="50% 50%" />
+    <Note text="trolley wires: pulled down" x={130} y={720} size={64} rot={-3} at={t.at('trolley wires') - a - 3} color="#ffffff" />
     <Clip src={IMG.wdn} crop={C_WDN} x={1100} y={100} w={560} rot={2} at={t.at('trolley wires') - a + 4}>
       <Swipe lines={LWDN} from={t.at('trolley wires') - a + 10} to={t.at('trolley wires') - a + 20} seed="wd2" />
     </Clip>
-    <Prop name="grease_can" x={1280} y={430} w={370} at={t.at('smeared') - a - 3} coral trace rot={-4} />
-    <Note text="grease on the tracks" x={1170} y={900} size={58} rot={-3} at={t.at('grease') - a - 3} color={CORAL} />
-    <Note text="→ cars slide past their stops" x={170} y={895} size={52} rot={-3} at={t.at('slid') - a - 3} />
+    <Prop name="grease_can" x={1280} y={400} w={370} at={t.at('smeared') - a - 3} coral trace rot={-4} />
+    <Note text="grease on the tracks" x={1170} y={830} size={58} rot={-3} at={t.at('grease') - a - 3} color={CORAL} />
+    <Note text="→ cars slide past their stops" x={170} y={830} size={52} rot={-3} at={t.at('slid') - a - 3} />
     <Tag text="FSA, Oklahoma City, 1939 · Washington Daily News, 1 Nov 1939 · LOC" />
   </AbsoluteFill>
 );
@@ -193,7 +193,7 @@ const Stack: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Highlight text="STACK IT UP" x={110} y={80} size={100} at={t.at('stack') - a} seed={47} rot={-2} />
+      <Highlight text="STACK IT UP" x={110} y={105} size={100} at={t.at('stack') - a} seed={47} rot={-2} />
       <div style={{position: 'absolute', inset: 0, opacity: dimL}}>
         {STACK.map((s, i) => {
           const at = t.at(s.k) - a - 2;
@@ -219,7 +219,7 @@ const Stack: React.FC<{t: TL; a: number}> = ({t, a}) => {
         );
       })}
       <Smoke density={interpolate(f, [riot, riot + 20], [0, 0.45], clamp)} seed="riot" y={760} spread={200} />
-      <Note text="Halloween ≠ a kids' holiday anymore" x={140} y={270} size={66} rot={-3} at={t.at('kids') - a - 3} color="#ffffff" />
+      <Note text="Halloween ≠ a kids' holiday anymore" x={120} y={270} size={56} rot={-3} at={t.at('kids') - a - 3} color="#ffffff" />
       <Highlight text="A RIOT IN COSTUME" x={110} y={560} size={98} at={riot} seed={48} rot={-3} />
     </AbsoluteFill>
   );

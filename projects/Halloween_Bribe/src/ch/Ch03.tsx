@@ -32,11 +32,11 @@ const I = (f: string) => `img/ch03/${f}.jpg`;
 const Blight: React.FC<{t: TL}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <CropCard src={I('iln_searching_potatoes_stubble_field_1849')} size={[1405, 1450]} x={1100} y={100} w={660} h={800} fx={660} fy={760} scale={0.58} rot={2} at={2} bw={BW} />
+    <CropCard src={I('iln_searching_potatoes_stubble_field_1849')} size={[1405, 1450]} x={1200} y={100} w={600} h={780} fx={660} fy={760} scale={0.56} rot={2} at={2} bw={BW} />
     <Highlight text="1845" x={130} y={140} size={150} at={t.at('in 1845')} seed={31} rot={-2} />
-    <Note text="a disease hits the potatoes" x={150} y={400} size={60} rot={-3} at={t.at('disease') - 3} color={WHITE} />
-    <Note text="the plants turn black" x={170} y={530} size={60} rot={-3} at={t.at('turned black') - 3} color={WHITE} />
-    <Note text="the potatoes rot in the ground" x={150} y={660} size={60} rot={-3} at={t.at('rotted') - 3} color={WHITE} />
+    <Note text="a disease hits the potatoes" x={150} y={400} size={54} rot={-3} at={t.at('disease') - 3} color={WHITE} />
+    <Note text="the plants turn black" x={170} y={520} size={54} rot={-3} at={t.at('turned black') - 3} color={WHITE} />
+    <Note text="the potatoes rot in the ground" x={150} y={640} size={54} rot={-3} at={t.at('rotted') - 3} color={WHITE} />
     <Tag text="Searching for potatoes in a stubble field · Illustrated London News, 1849" />
   </AbsoluteFill>
 );
@@ -46,8 +46,8 @@ const Families: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <CropCard src={I('iln_mahony_old_chapel_lane_skibbereen_1847')} size={[2626, 1885]} x={130} y={110} w={980} h={660} fx={1350} fy={900} scale={0.41} rot={-2} at={1} bw={BW} />
-    <CropCard src={I('iln_woman_begging_clonakilty_1847')} size={[1108, 1623]} x={1280} y={130} w={500} h={700} fx={560} fy={690} scale={0.54} rot={2} at={t.at('poor Irish') - a - 1} bw={BW} />
-    <Note text="potatoes: most of what they ate" x={150} y={860} size={62} rot={-2} at={t.at('potatoes were most') - a - 3} color={WHITE} />
+    <CropCard src={I('iln_woman_begging_clonakilty_1847')} size={[1108, 1623]} x={1280} y={130} w={500} h={700} fx={560} fy={620} scale={0.62} rot={2} at={t.at('poor Irish') - a - 1} bw={BW} />
+    <Note text="potatoes: most of what they ate" x={150} y={820} size={62} rot={-2} at={t.at('potatoes were most') - a - 3} color={WHITE} />
     <Tag text="James Mahony · Old Chapel Lane, Skibbereen; Woman begging at Clonakilty · Illustrated London News, 1847" />
   </AbsoluteFill>
 );
@@ -57,7 +57,7 @@ const Famine: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <CropCard src={I('iln_bridget_odonnel_and_children_1849')} size={[1307, 1962]} x={1230} y={90} w={540} h={820} fx={650} fy={940} scale={0.5} rot={1.5} at={1} bw={BW} />
-    <Highlight text="THE GREAT FAMINE" x={110} y={96} size={92} at={t.at('Great Famine') - a} seed={32} rot={-2} />
+    <Highlight text="THE GREAT FAMINE" x={110} y={112} size={92} at={t.at('Great Famine') - a} seed={32} rot={-2} />
     <Definition term="Great Famine" def="Ireland, 1845–1852: the potato crop failed year after year, and people starved." at={t.at('Great Famine') - a + 9} x={120} y={262} w={980} />
     <Note text="about 1,000,000 died" x={140} y={448} size={64} rot={-2} at={t.at('About a million') - a - 3} color={WHITE} />
     <CropCard src={I('iln_mahony_funeral_skibbereen_1847')} size={[2299, 1186]} x={150} y={600} w={900} h={340} fx={1220} fy={640} scale={0.42} rot={-1.5} at={t.at('died') - a - 2} bw={BW} />
@@ -88,7 +88,7 @@ const Crossing: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Ships: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch03_coffin_ship" size={ship.size as [number, number]} glowLayer={ship.glowLayer} a={0} b={b - a + 8} cam={{z: [1.04, 1.12], x: [30, -30]}} fade={4} flicker={0.3} />
-    <CropCard src={I('iln_emigration_vessel_between_decks_1851')} size={[3824, 1382]} x={1040} y={650} w={760} h={280} fx={1800} fy={690} scale={0.23} rot={-1.5} at={2} bw={BW} />
+    <CropCard src={I('iln_emigration_vessel_between_decks_1851')} size={[3824, 1382]} x={1040} y={650} w={760} h={280} fx={1800} fy={690} scale={0.23} rot={-1.5} at={2} bw="grayscale(1) contrast(1.05) brightness(1.35)" />
     <Slip text="crowded and sick" x={1060} y={540} size={56} at={t.at('crowded') - a} rot={-2} />
     <Highlight text="COFFIN SHIPS" x={110} y={100} size={100} at={t.at('coffin ships') - a} seed={33} rot={-2} />
     <Tag text="Emigration vessel: between decks · Illustrated London News, 1851" />
@@ -99,9 +99,9 @@ const Ships: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
 const Landing: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch03_landing" size={landing.size as [number, number]} glowLayer={landing.glowLayer} a={-6} b={b - a + 8} cam={{z: [1.03, 1.12], x: [-30, 30]}} fade={4} />
-    <Slip text="boston · new york" x={120} y={110} size={62} at={t.at('Boston') - a - 2} />
-    <Slip text="poor, and often not welcome" x={150} y={220} size={56} at={t.at('poor, and often') - a - 2} rot={-2} />
-    <Slip text="...and they brought halloween" x={130} y={320} size={56} at={t.at('brought their Halloween') - a - 2} rot={-3} />
+    <Slip text="boston · new york" x={120} y={130} size={62} at={t.at('Boston') - a - 2} />
+    <Slip text="poor, and often not welcome" x={150} y={240} size={56} at={t.at('poor, and often') - a - 2} rot={-2} />
+    <Slip text="...and they brought halloween" x={130} y={340} size={56} at={t.at('brought their Halloween') - a - 2} rot={-3} />
   </AbsoluteFill>
 );
 
@@ -115,10 +115,10 @@ const Parties: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <DarkPaper />
     <PhotoCard src={PUCK} x={110} y={120} w={860} rot={-2} at={1} filter={BW} />
     <CropCard src={PUCK} size={[4000, 2529]} x={1040} y={110} w={760} h={420} fx={800} fy={540} scale={0.66} rot={2} at={t.at('apple games') - a - 1} bw={BW} />
-    <CropCard src={PUCK} size={[4000, 2529]} x={1070} y={590} w={740} h={330} fx={3040} fy={1960} scale={0.5} rot={-1.5} at={t.at('everybody') - a - 1} bw={BW} />
+    <CropCard src={PUCK} size={[4000, 2529]} x={1070} y={590} w={740} h={280} fx={3040} fy={1960} scale={0.5} rot={-1.5} at={t.at('everybody') - a - 1} bw={BW} />
     <Note text="apple games + fortunes" x={140} y={700} size={56} rot={-3} at={t.at('apple games') - a - 3} />
     <Highlight text="HALLOWEEN PARTIES" x={120} y={800} size={78} at={t.at('parties') - a} seed={34} rot={-2} />
-    <Note text="...two things changed" x={1180} y={960} size={50} rot={-3} at={t.at('two things') - a - 3} color={WHITE} />
+    <Note text="...two things changed" x={1200} y={880} size={46} rot={-3} at={t.at('two things') - a - 3} color={WHITE} />
     <Tag text="S. D. Ehrhart, Uncle Sam's Hallowe'en · Puck, 1904 · LOC" />
   </AbsoluteFill>
 );
@@ -130,7 +130,7 @@ const Pumpkins: React.FC<{t: TL; a: number}> = ({t, a}) => (
       at={(k) => ({routes: -400, counter: 1e6, turnip: t.at('than a turnip') - a + 2, pumpkin: t.at('vegetables') - a + 4} as Record<string, number>)[k]}
       title={{text: 'AMERICA HAD PUMPKINS', at: t.at('pumpkins') - a}} />
     <Note text="big. cheap. easy to carve." x={1120} y={150} size={50} rot={-3} at={t.at('Big') - a - 3} color={WHITE} />
-    <Definition term="jack-o'-lantern" def="a carved vegetable lantern with a candle inside: first a turnip, then a pumpkin" at={t.at("jack-o'-lantern") - a} x={120} y={880} w={1300} />
+    <Definition term="jack-o'-lantern" def="a carved vegetable lantern with a candle inside: first a turnip, then a pumpkin" at={t.at("jack-o'-lantern") - a} x={120} y={840} w={1300} />
   </AbsoluteFill>
 );
 
@@ -174,7 +174,7 @@ const Gates: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <Prop name="iron_gate" x={1000} y={170} w={780} at={t.at('gates') - a - 1} rot={-14} coral trace />
     <Prop name="cabbage" x={1560} y={560} w={240} at={t.at('remember') - a + 4} rot={8} />
     <Highlight text="THE MISCHIEF CAME TOO" x={140} y={760} size={84} at={t.at('mischief came') - a} seed={38} rot={-2} />
-    <Note text="...and got bigger" x={1080} y={900} size={64} rot={-3} at={t.at('got bigger') - a - 3} color={CORAL} />
+    <Note text="...and got bigger" x={1300} y={830} size={58} rot={-3} at={t.at('got bigger') - a - 3} color={CORAL} />
   </AbsoluteFill>
 );
 
@@ -188,12 +188,12 @@ const Outhouse: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <Prop name="soap_bar" x={170} y={330} w={440} at={1} rot={-6} />
       <Note text="windows soaped" x={170} y={170} size={66} rot={-3} at={t.at('soaped') - a - 3} />
-      <div style={{position: 'absolute', left: 960, top: 300, width: 760, height: 480, transform: `rotate(${rot}deg)`, transformOrigin: '100% 100%'}}>
+      <div style={{position: 'absolute', left: 960, top: 300, width: 760, height: 480, transform: `rotate(${rot}deg)`, transformOrigin: '50% 50%'}}>
         <Prop name="outhouse" x={0} y={0} w={760} at={t.at('Outhouses') - a - 1} coral trace from="none" />
       </div>
       <Note text="outhouses tipped over" x={940} y={130} size={66} rot={-3} at={t.at('tipped') - a - 3} />
-      <Note text="(so the stories go)" x={170} y={780} size={56} rot={-3} at={t.at('the stories go') - a - 3} color={ORANGE} />
-      <Note text="...with somebody still inside" x={170} y={880} size={64} rot={-3} at={t.at('somebody') - a - 3} color={CORAL} />
+      <Note text="(so the stories go)" x={170} y={720} size={56} rot={-3} at={t.at('the stories go') - a - 3} color={ORANGE} />
+      <Note text="...with somebody still inside" x={170} y={820} size={64} rot={-3} at={t.at('somebody') - a - 3} color={CORAL} />
     </AbsoluteFill>
   );
 };
@@ -239,11 +239,11 @@ const Depression: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PhotoCard src="img/ch03/bismarck_tribune_1933-11-01_tear_gas_headline.jpg" x={260} y={440} w={1400} h={330} rot={-2} at={head - 1} fit="cover" pos="50% 50%"
+      <PhotoCard src="img/ch03/bismarck_tribune_1933-11-01_tear_gas_headline.jpg" x={260} y={400} w={1400} h={330} rot={-2} at={head - 1} fit="cover" pos="50% 50%"
         filter="grayscale(1) contrast(1.35) brightness(0.7)" />
       <AbsoluteFill style={{background: `rgba(0,0,0,${dark})`}} />
       <Highlight text="THE GREAT DEPRESSION" x={120} y={110} size={96} at={t.at('Great Depression') - a} seed={42} rot={-2} />
-      <Note text="...and the pranks stopped being funny." x={300} y={860} size={64} rot={-2} at={t.at('stopped being funny') - a - 3} dur={16} color={WHITE} />
+      <Note text="...and the pranks stopped being funny." x={300} y={810} size={64} rot={-2} at={t.at('stopped being funny') - a - 3} dur={16} color={WHITE} />
       {f >= head && <Tag text="The Bismarck Tribune, 1 Nov 1933 · Library of Congress" />}
     </AbsoluteFill>
   );

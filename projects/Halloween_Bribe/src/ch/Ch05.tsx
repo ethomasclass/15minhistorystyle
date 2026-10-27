@@ -35,10 +35,10 @@ const Plan: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
 const Parties: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PhotoCard src="img/ch04/fsa_osage_farms_halloween_party_1939.jpg" x={90} y={250} w={900} h={640} rot={-2} at={2} pos="50% 40%" />
-    <PhotoCard src="img/ch04/fsa_shafter_halloween_party_waiting_1938.jpg" x={1060} y={300} w={760} h={560} rot={3} at={t.at('Parades') - a - 2} pos="50% 55%" />
-    <Highlight text="HALLOWEEN PARTIES" x={110} y={70} size={100} at={t.at('parties') - a} seed={52} rot={-2} />
-    <Note text="parades." x={1240} y={905} size={52} rot={-4} at={t.at('Parades') - a} color="#ffffff" />
+    <PhotoCard src="img/ch04/fsa_osage_farms_halloween_party_1939.jpg" x={90} y={270} w={900} h={620} rot={-2} at={2} pos="50% 40%" />
+    <PhotoCard src="img/ch04/fsa_shafter_halloween_party_waiting_1938.jpg" x={1060} y={290} w={760} h={520} rot={3} at={t.at('Parades') - a - 2} pos="50% 55%" />
+    <Highlight text="HALLOWEEN PARTIES" x={110} y={110} size={100} at={t.at('parties') - a} seed={52} rot={-2} />
+    <Note text="parades." x={1300} y={860} size={52} rot={-4} at={t.at('Parades') - a} color="#ffffff" />
     <Tag text="FSA: Osage Farms, Mo., 1939 · Shafter camp, Calif., 1938 · LOC" />
   </AbsoluteFill>
 );
@@ -47,13 +47,13 @@ const Parties: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Contests: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PhotoCard src="img/ch04/wpa_halloween_skating_carnival_poster_1936.jpg" x={140} y={110} w={540} rot={-2} at={2} fit="contain" />
-    <Loop cx={350} cy={722} rx={180} ry={58} at={t.at('with prizes') - a} seed={53} tilt={-2} />
-    <PhotoCard src="img/ch04/girl_scouts_halloween_party_dc_1938.jpg" x={820} y={130} w={960} h={640} rot={2} at={t.at('Haunted') - a - 2} pos="50% 45%" />
-    <Note text="costume contests" x={130} y={830} size={50} rot={-3} at={t.at('Costume') - a} color="#ffffff" />
-    <Note text="(with prizes)" x={190} y={915} size={46} rot={-3} at={t.at('with prizes') - a} color="#ffffff" />
-    <Note text="haunted houses" x={880} y={820} size={50} rot={-3} at={t.at('Haunted') - a} />
-    <Note text="in gyms + church basements" x={930} y={905} size={44} rot={-3} at={t.at('school gyms') - a} />
+    <PhotoCard src="img/ch04/wpa_halloween_skating_carnival_poster_1936.jpg" x={140} y={110} w={500} rot={-2} at={2} fit="contain" />
+    <Loop cx={339} cy={682} rx={168} ry={54} at={t.at('with prizes') - a} seed={53} tilt={-2} />
+    <PhotoCard src="img/ch04/girl_scouts_halloween_party_dc_1938.jpg" x={820} y={120} w={960} h={580} rot={2} at={t.at('Haunted') - a - 2} pos="50% 45%" />
+    <Note text="costume contests" x={130} y={785} size={50} rot={-3} at={t.at('Costume') - a} color="#ffffff" />
+    <Note text="(with prizes)" x={190} y={865} size={46} rot={-3} at={t.at('with prizes') - a} color="#ffffff" />
+    <Note text="haunted houses" x={880} y={785} size={50} rot={-3} at={t.at('Haunted') - a} />
+    <Note text="in gyms + church basements" x={930} y={865} size={44} rot={-3} at={t.at('school gyms') - a} />
     <Tag text="WPA poster, 1936 · Harris & Ewing, 1938 · LOC" />
   </AbsoluteFill>
 );
@@ -83,7 +83,7 @@ const Puyallup: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => {
 const Bowl: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Prop name="candy_bowl" x={1060} y={330} w={760} at={t.at('bowl') - a - 6} coral trace />
+    <Prop name="candy_bowl" x={1060} y={330} w={760} at={t.at('home') - a} coral trace />
     <Note text="and at home:" x={130} y={200} size={60} rot={-4} at={t.at('home') - a} color="#ffffff" />
     <Highlight text="A BOWL OF TREATS" x={110} y={360} size={84} at={t.at('bowl') - a} seed={54} rot={-2} />
     <Note text="by the front door" x={150} y={560} size={64} rot={-4} at={t.at('by the front') - a} />
@@ -109,7 +109,7 @@ const Alberta: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <Note text="kids at the back door and the front" x={170} y={230} size={52} rot={-2} at={t.at('back door') - a} color="#ffffff" />
     <Quote text="demanding edible plunder by the word ‘trick or treat.’" at={t.at('demanding') - a - 1} x={160} y={400} w={1560} size={80}
       who="Lethbridge Herald, Alberta, 4 Nov 1927" />
-    <Note text="edible plunder." x={1080} y={810} size={78} rot={-5} at={t.at('Edible plunder', 2) - a} color={CORAL} />
+    <Note text="edible plunder." x={1080} y={770} size={78} rot={-5} at={t.at('Edible plunder', 2) - a} color={CORAL} />
   </AbsoluteFill>
 );
 
@@ -117,8 +117,8 @@ const Alberta: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Wagons: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch03_wagon_roof" size={wagon.size as [number, number]} glowLayer={wagon.glowLayer} a={0} b={b - a + 6} cam={{z: [1.06, 1.15], x: [20, -30]}} fade={4} />
-    <Slip text="the next morning:" x={120} y={110} size={58} at={t.at('next morning') - a} rot={-3} />
-    <Slip text="the town hunting for its wagons" x={120} y={220} size={58} at={t.at('hunting') - a} rot={-2} />
+    <Slip text="the next morning:" x={120} y={125} size={58} at={t.at('next morning') - a} rot={-3} />
+    <Slip text="the town hunting for its wagons" x={120} y={235} size={58} at={t.at('hunting') - a} rot={-2} />
     <Highlight text="WAGONS" x={120} y={800} size={120} at={t.at('wagons') - a} seed={56} rot={-3} />
     <Highlight text="AGAIN." x={720} y={790} size={120} at={t.at('again') - a} seed={57} rot={-2} />
   </AbsoluteFill>
@@ -130,10 +130,10 @@ const CLIPS: Clip[] = [
   {src: 'img/ch05/waterbury_democrat_1934-10-30_no_vandalism_now.jpg', size: [1385, 1080], x: 90, y: 70, w: 470, rot: -5, tag: 'Waterbury Democrat, Conn. · 1934'},
   {src: 'img/ch04/imperial_valley_press_1935-10-31_trick_or_treat_stunt.jpg', size: [1090, 926], x: 720, y: 50, w: 440, rot: 3, tag: 'Imperial Valley Press, Calif. · 1935'},
   {src: 'img/ch05/hagerstown_globe_1939-10-27_halloween_grows_up.jpg', size: [1375, 1074], x: 1330, y: 80, w: 470, rot: -3, tag: 'Hagerstown Globe, Md. · 1939'},
-  {src: 'img/ch05/tacoma_times_1940-11-02_trick_or_treat_ghosts_abroad.jpg', size: [920, 715], x: 130, y: 470, w: 460, rot: 4, tag: 'Tacoma Times, Wash. · 1940'},
-  {src: 'img/ch05/daily_alaska_empire_1941-11-01_juneau_treated.jpg', size: [791, 466], x: 1340, y: 500, w: 480, rot: 3, tag: 'Daily Alaska Empire, Juneau · 1941'},
-  {src: 'img/ch05/harlem_news_1941-11-07_no_mischief.jpg', size: [1003, 811], x: 1000, y: 330, w: 400, rot: -4, tag: 'Harlem News, Mont. · 1941'},
-  {src: 'img/ch04/browning_chief_1941-10-31_trick_or_treat_refrain_from_tricks.jpg', size: [824, 663], x: 560, y: 360, w: 460, rot: -6, tag: 'Browning Chief, Mont. · 1941'},
+  {src: 'img/ch05/tacoma_times_1940-11-02_trick_or_treat_ghosts_abroad.jpg', size: [920, 715], x: 130, y: 430, w: 460, rot: 4, tag: 'Tacoma Times, Wash. · 1940'},
+  {src: 'img/ch05/daily_alaska_empire_1941-11-01_juneau_treated.jpg', size: [791, 466], x: 1340, y: 450, w: 480, rot: 3, tag: 'Daily Alaska Empire, Juneau · 1941'},
+  {src: 'img/ch05/harlem_news_1941-11-07_no_mischief.jpg', size: [1003, 811], x: 1000, y: 300, w: 400, rot: -4, tag: 'Harlem News, Mont. · 1941'},
+  {src: 'img/ch04/browning_chief_1941-10-31_trick_or_treat_refrain_from_tricks.jpg', size: [824, 663], x: 560, y: 320, w: 460, rot: -6, tag: 'Browning Chief, Mont. · 1941'},
 ];
 const FallingClip: React.FC<{c: Clip; at: number}> = ({c, at}) => {
   const g = useGFrame();
@@ -156,8 +156,8 @@ const Spreading: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     {CLIPS.map((c, i) => <FallingClip key={c.src} c={c} at={2 + i * CLIP_STEP} />)}
-    <Highlight text="ACROSS THE U.S." x={110} y={890} size={92} at={t.at('spreading') - a} seed={58} rot={-2} />
-    <Note text="1930s" x={1460} y={900} size={70} rot={-4} at={t.at('By the 1930s') - a} />
+    <Highlight text="ACROSS THE U.S." x={110} y={850} size={92} at={t.at('spreading') - a} seed={58} rot={-2} />
+    <Note text="1930s" x={1400} y={830} size={70} rot={-4} at={t.at('By the 1930s') - a} />
     <Tag text="Chronicling America · Library of Congress" x={1020} y={1030} />
   </AbsoluteFill>
 );
@@ -166,11 +166,11 @@ const Spreading: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Deal: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Note text="listen to the words again:" x={140} y={90} size={56} rot={-3} at={t.at('listen') - a} color="#ffffff" />
-    <Stamp text="“Trick or treat”" x={150} y={210} size={130} at={t.at('Trick or treat', 3) - a} rot={-2} />
-    <Note text="isn't a greeting." x={1080} y={250} size={64} rot={-5} at={t.at('greeting') - a} />
-    <Highlight text="IT'S A DEAL" x={150} y={440} size={180} at={t.at("It's a deal") - a} seed={59} rot={-3} />
-    <Note text="give me something…" x={190} y={780} size={66} rot={-3} at={t.at('Give me') - a} />
+    <Note text="listen to the words again:" x={140} y={125} size={56} rot={-3} at={t.at('listen') - a} color="#ffffff" />
+    <Stamp text="“Trick or treat”" x={150} y={235} size={130} at={t.at('Trick or treat', 3) - a} rot={-2} />
+    <Note text="isn't a greeting." x={1080} y={275} size={64} rot={-5} at={t.at('greeting') - a} />
+    <Highlight text="IT'S A DEAL" x={150} y={455} size={180} at={t.at("It's a deal") - a} seed={59} rot={-3} />
+    <Note text="give me something…" x={190} y={790} size={66} rot={-3} at={t.at('Give me') - a} />
     <Note text="…or else." x={960} y={810} size={78} rot={-4} at={t.at('or else') - a} color={CORAL} />
   </AbsoluteFill>
 );
@@ -189,12 +189,12 @@ const Racket: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Outhouse: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Highlight text="MOSTLY, IT WORKED" x={110} y={80} size={96} at={t.at('it worked') - a} seed={61} rot={-2} />
-    <Prop name="treat_bag" x={170} y={330} w={500} at={t.at('filling a bag') - a - 2} coral trace />
-    <Note text="busy filling a bag" x={170} y={880} size={60} rot={-3} at={t.at('filling a bag') - a} />
+    <Highlight text="MOSTLY, IT WORKED" x={110} y={110} size={96} at={t.at('it worked') - a} seed={61} rot={-2} />
+    <Prop name="treat_bag" x={180} y={300} w={480} at={t.at('filling a bag') - a - 2} coral trace />
+    <Note text="busy filling a bag" x={170} y={845} size={60} rot={-3} at={t.at('filling a bag') - a} />
     <Note text="≠" x={845} y={540} size={120} rot={0} at={t.at("isn't busy") - a} color="#ffffff" />
     <Prop name="outhouse" x={1060} y={400} w={720} at={t.at('tipping') - a - 2} from="top" rot={4} />
-    <Note text="not tipping your outhouse" x={1030} y={880} size={60} rot={-3} at={t.at('outhouse') - a} color="#ffffff" />
+    <Note text="not tipping your outhouse" x={1010} y={845} size={54} rot={-3} at={t.at('outhouse') - a} color="#ffffff" />
   </AbsoluteFill>
 );
 

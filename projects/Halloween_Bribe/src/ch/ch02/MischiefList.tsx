@@ -47,7 +47,7 @@ export const MischiefList: React.FC<{x: number; y: number; w?: number; rot?: num
             boxShadow: '0 8px 10px rgba(0,0,0,0.6)', transform: `scale(${interpolate(pin, [0, 1], [1.8, 1])})`, opacity: pin}} />
         )}
       </div>
-      {g >= loopAt && <Loop cx={x + w / 2} cy={y + h / 2} rx={w / 2 + 70} ry={h / 2 + 60} at={loopAt} width={6} seed={72} tilt={-3} />}
+      {g >= loopAt && <Loop cx={x + w / 2} cy={y + h / 2} rx={w / 2 + 70} ry={h / 2 + 90} at={loopAt} width={6} seed={72} tilt={-3} />}
     </>
   );
 };

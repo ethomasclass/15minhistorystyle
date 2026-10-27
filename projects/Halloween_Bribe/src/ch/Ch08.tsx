@@ -32,12 +32,12 @@ const CREAM = '#f4efe6';
 const Letter: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Note text="not everybody liked the deal" x={130} y={110} size={62} rot={-3} at={t.at('Not everybody') - a - 3} color="#ffffff" />
-    <Highlight text="A LETTER, 1948" x={120} y={220} size={96} at={t.at('In 1948') - a} seed={81} rot={-2} />
+    <Note text="not everybody liked the deal" x={130} y={126} size={62} rot={-3} at={t.at('Not everybody') - a - 3} color="#ffffff" />
+    <Highlight text="A LETTER, 1948" x={120} y={234} size={96} at={t.at('In 1948') - a} seed={81} rot={-2} />
     <Quote text="making gangsters of children." at={t.at('making gangsters') - a - 2} x={150} y={420} w={1080} size={80}
       who="Letter to The Washington Post · 11 Nov 1948" />
-    <Note text="fine the parents" x={170} y={760} size={76} rot={-3} at={t.at('fine parents') - a - 3} />
-    <Note text="who send kids out “to beg”" x={210} y={870} size={60} rot={-3} at={t.at('sent their kids') - a - 3} color="#ffffff" />
+    <Note text="fine the parents" x={170} y={735} size={76} rot={-3} at={t.at('fine parents') - a - 3} />
+    <Note text="who send kids out “to beg”" x={210} y={835} size={60} rot={-3} at={t.at('sent their kids') - a - 3} color="#ffffff" />
     <Prop name="pillowcase_sack" x={1320} y={300} w={460} at={t.at('sent their kids') - a + 6} coral trace />
     <Tag text="Letter to the editor · The Washington Post, 11 Nov 1948, p. 12" />
   </AbsoluteFill>
@@ -92,7 +92,7 @@ const TwoViews: React.FC<{t: TL; a: number}> = ({t, a}) => {
         {text: 'quieter streets,', at: t.at('streets got quieter') - a - 1},
         {text: 'a safe night out', at: t.at('safe night out') - a - 1},
       ])}
-      <Highlight text="BOTH TRUE." x={700} y={850} size={110} at={t.at('true at once') - a} seed={43} rot={-2} />
+      <Highlight text="BOTH TRUE." x={700} y={836} size={110} at={t.at('true at once') - a} seed={43} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -120,12 +120,12 @@ const Recap: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <HalloweenCorridor at={corridorKeys(t, a)} />
-      <Note text="the most destructive night…" x={140} y={110} size={64} rot={-3} at={at('most destructive') - 3} out={at('The turnip') - 4} color="#ffffff" />
-      <Note text="…a candy holiday for little kids?" x={200} y={210} size={64} rot={-3} at={at('candy holiday') - 3} out={at('The turnip') - 4} />
-      <Note text="every scare → a fix" x={150} y={770} size={72} rot={-3} at={at('invented a fix') - 3} out={at("isn't the opposite") - 4} color="#ffffff" />
-      {f < at("isn't the opposite") - 4 && <Highlight text="THE TRADITION" x={220} y={870} size={100} at={at('the tradition')} seed={44} rot={-3} />}
-      <Note text="not the opposite…" x={140} y={790} size={68} rot={-3} at={at("isn't the opposite") - 3} out={at('So when a kid') - 1} color="#ffffff" />
-      {f < at('So when a kid') - 1 && <Highlight text="THE REASON FOR IT" x={220} y={880} size={90} at={at("It's the reason")} seed={45} rot={-2} />}
+      <Note text="the most destructive night…" x={140} y={126} size={64} rot={-3} at={at('most destructive') - 3} out={at('The turnip') - 4} color="#ffffff" />
+      <Note text="…a candy holiday for little kids?" x={200} y={226} size={64} rot={-3} at={at('candy holiday') - 3} out={at('The turnip') - 4} />
+      <Note text="every scare → a fix" x={150} y={740} size={72} rot={-3} at={at('invented a fix') - 3} out={at("isn't the opposite") - 4} color="#ffffff" />
+      {f < at("isn't the opposite") - 4 && <Highlight text="THE TRADITION" x={220} y={840} size={100} at={at('the tradition')} seed={44} rot={-3} />}
+      <Note text="not the opposite…" x={140} y={765} size={68} rot={-3} at={at("isn't the opposite") - 3} out={at('So when a kid') - 1} color="#ffffff" />
+      {f < at('So when a kid') - 1 && <Highlight text="THE REASON FOR IT" x={220} y={858} size={90} at={at("It's the reason")} seed={45} rot={-2} />}
     </AbsoluteFill>
   );
 };

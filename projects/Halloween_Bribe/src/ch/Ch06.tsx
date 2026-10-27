@@ -29,11 +29,11 @@ const BOOK_TAG = 'OWI, 1942 · Library of Congress';
 const Ration: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PhotoCard src={BOOK} x={110} y={100} w={820} rot={-2} at={0} filter="grayscale(1) contrast(1.25)" />
+    <PhotoCard src={BOOK} x={110} y={90} w={780} rot={-2} at={0} filter="grayscale(1) contrast(1.25)" />
     <PhotoCard src="img/ch05/sugar_ration_coupons_1942.jpg" x={1010} y={140} w={800} h={560} rot={3} at={t.at('sugar became') - a - 2} pos="62% 55%" />
-    <Note text="spring 1942" x={1080} y={790} size={58} rot={-4} at={t.at('spring of 1942') - a - 3} color={WHITE} />
-    <Highlight text="RATIONED" x={120} y={780} size={100} at={t.at('rationed') - a} seed={61} rot={-2} />
-    <Definition term="rationed" def="each family could only buy a set amount" at={t.at('meaning each') - a} x={120} y={930} w={1500} />
+    <Note text="spring 1942" x={1080} y={760} size={58} rot={-4} at={t.at('spring of 1942') - a - 3} color={WHITE} />
+    <Highlight text="RATIONED" x={120} y={740} size={92} at={t.at('rationed') - a} seed={61} rot={-2} />
+    <Definition term="rationed" def="each family could only buy a set amount" at={t.at('meaning each') - a} x={120} y={868} w={1500} />
     <Tag text={BOOK_TAG} />
   </AbsoluteFill>
 );
@@ -69,7 +69,7 @@ const FiveHalloweens: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Highlight text="SUGAR" after="1942 – 1947" x={120} y={90} size={100} at={2} seed={62} rot={-2} />
+      <Highlight text="SUGAR" after="1942 – 1947" x={120} y={112} size={100} at={2} seed={62} rot={-2} />
       <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
         <rect x={span0} y={LINE_Y - 14} width={Math.max(0, span1 - span0)} height={28} fill="#f4efe6" opacity={0.22} />
         <line x1={X0 - 80} y1={LINE_Y} x2={X0 - 80 + (yx(1947) + 140 - X0) * draw} y2={LINE_Y} stroke={pal.mark} strokeWidth={6} strokeLinecap="round" />
@@ -86,7 +86,7 @@ const FiveHalloweens: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Arrow x1={yx(1947.3)} y1={420} x2={yx(1947.45)} y2={LINE_Y - 30} bow={20} at={t.at('in 1947') - a + 6} />
       {[0, 1, 2, 3, 4].map((i) => <Pumpkin key={i} x={yx(1942.83 + i)} y={LINE_Y - 110} n={i + 1} at={five + 2 + i * 5} />)}
       <Highlight text="FIVE HALLOWEENS" x={120} y={800} size={100} at={five + 2} seed={63} rot={-2} />
-      <Note text="...with hardly any candy" x={1150} y={830} size={58} rot={-4} at={t.at('hardly any candy') - a - 3} color={WHITE} />
+      <Note text="...hardly any candy" x={1150} y={820} size={58} rot={-4} at={t.at('hardly any candy') - a - 3} color={WHITE} />
     </AbsoluteFill>
   );
 };
@@ -97,13 +97,13 @@ const Enemy: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Note text="halloween, pulled way back" x={120} y={90} size={56} rot={-3} at={t.at('pulled way back') - a - 3} color={WHITE} />
-      <Highlight text="PRANKS" after="HELP THE ENEMY" x={120} y={220} size={96} at={t.at('pranks helped') - a} seed={64} rot={-2} />
-      <Prop name="soap_bar" x={150} y={470} w={520} at={soap} rot={-6} />
-      <Prop name="soap_bar" x={150} y={470} w={520} at={soap} out={grease} rot={-6} coral trace />
-      <Note text="windows" x={250} y={900} size={58} rot={-4} at={t.at('smear') - a - 3} />
-      <Prop name="grease_can" x={1300} y={420} w={430} at={grease} rot={4} coral trace />
-      <Note text="streetcar tracks" x={1250} y={920} size={58} rot={-4} at={t.at('tracks') - a - 3} />
+      <Note text="halloween, pulled way back" x={120} y={118} size={56} rot={-3} at={t.at('pulled way back') - a - 3} color={WHITE} />
+      <Highlight text="PRANKS" after="HELP THE ENEMY" x={120} y={235} size={96} at={t.at('pranks helped') - a} seed={64} rot={-2} />
+      <Prop name="soap_bar" x={150} y={420} w={520} at={soap} rot={-6} />
+      <Prop name="soap_bar" x={150} y={420} w={520} at={soap} out={grease} rot={-6} coral trace />
+      <Note text="windows" x={250} y={840} size={58} rot={-4} at={t.at('smear') - a - 3} />
+      <Prop name="grease_can" x={1320} y={390} w={400} at={grease} rot={4} coral trace />
+      <Note text="streetcar tracks" x={1250} y={840} size={58} rot={-4} at={t.at('tracks') - a - 3} />
       <Note text="the war" x={800} y={560} size={68} rot={-4} at={war - 3} color={WHITE} />
       <Note text="needed those." x={760} y={660} size={68} rot={-4} at={war + 6} color={WHITE} />
       <Arrow x1={690} y1={640} x2={770} y2={630} bow={-14} at={war + 4} />
@@ -116,10 +116,10 @@ const Enemy: React.FC<{t: TL; a: number}> = ({t, a}) => {
 const Scrap: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Highlight text="SCRAP-METAL DRIVES" x={120} y={90} size={96} at={t.at('scrapmetal') - a} seed={65} rot={-2} />
+    <Highlight text="SCRAP-METAL DRIVES" x={120} y={112} size={96} at={t.at('scrapmetal') - a} seed={65} rot={-2} />
     <Prop name="junk_car" x={900} y={300} w={860} at={2} from="top" />
-    <Prop name="iron_gate" x={300} y={470} w={760} rot={-7} at={t.at('drives') - a} from="top" coral trace />
-    <Note text="on halloween night, instead" x={140} y={890} size={60} rot={-3} at={t.at('Halloween night') - a - 3} color={WHITE} />
+    <Prop name="iron_gate" x={300} y={430} w={760} rot={-7} at={t.at('drives') - a} from="top" coral trace />
+    <Note text="on halloween night, instead" x={140} y={830} size={60} rot={-3} at={t.at('Halloween night') - a - 3} color={WHITE} />
   </AbsoluteFill>
 );
 
@@ -164,12 +164,12 @@ const WarEnds: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${away * 260}px, ${away * 40}px) rotate(${away * 6}deg)`, opacity: 1 - away * 0.55}}>
-        <PhotoCard src={BOOK} x={580} y={250} w={760} rot={-2} at={0} filter="grayscale(1) contrast(1.25)" />
+      <div style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${away * 300}px, ${away * -20}px) rotate(${away * 6}deg)`, opacity: 1 - away * 0.55}}>
+        <PhotoCard src={BOOK} x={600} y={230} w={700} rot={-2} at={0} filter="grayscale(1) contrast(1.25)" />
       </div>
-      <Highlight text="THE WAR ENDS" x={120} y={80} size={110} at={t.at('war ended') - a} seed={67} rot={-2} />
-      <Note text="sugar: back" x={140} y={860} size={68} rot={-4} at={t.at('Sugar came back') - a - 3} />
-      <Note text="soldiers: back" x={700} y={880} size={68} rot={-4} at={t.at('soldiers') - a - 3} color={WHITE} />
+      <Highlight text="THE WAR ENDS" x={120} y={112} size={110} at={t.at('war ended') - a} seed={67} rot={-2} />
+      <Note text="sugar: back" x={140} y={800} size={68} rot={-4} at={t.at('Sugar came back') - a - 3} />
+      <Note text="soldiers: back" x={760} y={810} size={68} rot={-4} at={t.at('soldiers') - a - 3} color={WHITE} />
       <Tag text={BOOK_TAG} />
     </AbsoluteFill>
   );
@@ -191,8 +191,8 @@ const Suburbs: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="ch06_suburbs" size={sub.size as [number, number]} glowLayer={sub.glowLayer} a={0} b={b - a + 8} cam={{z: [1.04, 1.12], x: [30, -30]}} fade={4} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 34%)'}} />
-    <Note text="houses close together" x={120} y={70} size={62} rot={-3} at={t.at('houses sat') - a - 3} color={WHITE} />
-    <Note text="every door: a few steps from the next" x={140} y={180} size={62} rot={-3} at={t.at('every front door') - a - 3} />
+    <Note text="houses close together" x={120} y={118} size={62} rot={-3} at={t.at('houses sat') - a - 3} color={WHITE} />
+    <Note text="every door: a few steps from the next" x={140} y={222} size={62} rot={-3} at={t.at('every front door') - a - 3} />
   </AbsoluteFill>
 );
 
@@ -210,7 +210,7 @@ const Buffet: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Noticed: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <Desk src="img/ch05/kids_halloween_masks_nywts_1964.jpg" size={[3000, 2028]} box={[960, 330, 880, 600]} at={0} rot={2} name="kids" mask={MASKS.kids}
     traceAt={t.at('noticed') - a} tag="Angelo Rizzuto, 1964 · Library of Congress">
-    <Highlight text="CANDY COMPANIES NOTICED" x={100} y={90} size={84} at={t.at('Candy companies') - a} seed={69} rot={-2} />
+    <Highlight text="CANDY COMPANIES NOTICED" x={110} y={112} size={84} at={t.at('Candy companies') - a} seed={69} rot={-2} />
     <Note text="kids' magazines:" x={110} y={360} size={56} rot={-3} at={t.at('magazines') - a - 3} color={WHITE} />
     <Note text="trick-or-treat stories" x={130} y={450} size={56} rot={-3} at={t.at('ran trickortreat') - a - 3} />
     <Note text="even donald duck" x={110} y={620} size={56} rot={-3} at={t.at('Donald Duck') - a - 3} color={WHITE} />
@@ -250,8 +250,8 @@ const Safer: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => {
       <SilScene name="ch06_suburbs" size={sub.size as [number, number]} glowLayer={sub.glowLayer} a={0} b={b - a + 30} cam={{z: [1.12, 1.2], x: [-30, -60]}} fade={4} flicker={0.2} />
       <AbsoluteFill style={{background: `rgba(4,8,10,${dark})`}} />
       <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 36%)'}} />
-      <Note text="never safer." x={140} y={90} size={70} rot={-3} at={t.at('never been safer') - a - 3} />
-      <Note text="...which is exactly when parents got scared." x={150} y={210} size={60} rot={-3} at={t.at('when parents') - a - 3} color={WHITE} dur={16} />
+      <Note text="never safer." x={140} y={118} size={70} rot={-3} at={t.at('never been safer') - a - 3} />
+      <Note text="...which is exactly when parents got scared." x={150} y={240} size={60} rot={-3} at={t.at('when parents') - a - 3} color={WHITE} dur={16} />
     </AbsoluteFill>
   );
 };
