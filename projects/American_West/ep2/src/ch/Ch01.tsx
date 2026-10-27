@@ -256,7 +256,12 @@ const Wolves: React.FC = () => {
         {P.wolves.map((p, i) => {
           const [x, y] = S(...px(p));
           const r = PSZ[0] * sc * 0.05;
-          return <Loop key={i} cx={Math.min(1850, Math.max(70, x))} cy={y} rx={r} ry={r * 0.75} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />;
+          // a loop is only drawn while it sits wholly inside the frame (x 60…1860); it fades out as the push carries it to the edge
+          const margin = Math.min(x - r * 1.1 - 60, 1860 - x - r * 1.1, y - r * 0.85 - 60, 1020 - y - r * 0.85);
+          const op = Math.max(0, Math.min(1, 1 + margin / 30));
+          return op > 0 ? <div key={i} style={{position: 'absolute', inset: 0, opacity: op}}>
+            <Loop cx={x} cy={y} rx={r} ry={r * 0.75} at={w - 2 + i * 3} seed={11 + i} tilt={i % 2 ? 6 : -6} width={7} />
+          </div> : null;
         })}
         <Note text="wolves" x={820} y={90} size={78} rot={-4} at={w} />
         <Note text="waiting" x={140} y={860} size={66} rot={-3} at={at('waiting') - 2} color="#ffffff" />

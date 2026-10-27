@@ -303,7 +303,7 @@ const Steer: React.FC = () => {
     <AbsoluteFill>
       <PhotoCam src={I.paint} size={Z.paint} cx={keys(f, [[a, 1960], [b, 1950]])} cy={keys(f, [[a, 1320], [b, 1200]])} s={zkeys(f, [[a, 0.5], [b, 0.7]])} bw={PBW}
         mask={M10.c1_steer_1887} traceAt={a + 6}>
-        {(_S, p) => <SoftTint mask={M10.c1_steer_1887.alpha} place={p} size={Z.paint} strength={0.4 * interpolate(f, [a + 4, a + 12], [0, 1], clamp)} />}
+        {(_S, p) => <SoftTint mask={M10.c1_steer_1887.alpha} place={p} size={Z.paint} strength={0.3 * interpolate(f, [a + 4, a + 12], [0, 1], clamp)} />}
       </PhotoCam>
       <ScrimTag text={TAG.paint} />
     </AbsoluteFill>
