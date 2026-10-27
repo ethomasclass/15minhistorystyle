@@ -4,6 +4,7 @@
 // on the Depression and a dim callback to the 1933 tear-gas headline.
 import React from 'react';
 import {AbsoluteFill, interpolate, Sequence, useCurrentFrame} from 'remotion';
+import {MISCHIEF, MischiefList} from './ch02/MischiefList';
 import words from '../../public/audio/ch03_coffin_ships_and_pumpkins.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, Loop, Note, Tag, useGFrame} from '../kit/Kit';
@@ -146,31 +147,13 @@ const Upgrade: React.FC<{t: TL; a: number}> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** The Irish prank list from chapter 2, pinned to the desk (cream index card, handwritten). */
-const PrankList: React.FC<{x: number; y: number; at: number}> = ({x, y, at}) => {
-  const g = useGFrame();
-  if (g < at) return null;
-  const k = interpolate(g, [at, at + 5], [0, 1], clamp);
-  const line = {fontFamily: '"Nanum Pen Script", cursive', fontSize: 72, lineHeight: 1.15, color: '#1d1a16', whiteSpace: 'nowrap'} as React.CSSProperties;
-  return (
-    <div style={{position: 'absolute', left: x, top: y, width: 640, transform: `rotate(-3deg) scale(${0.8 + 0.2 * k})`, opacity: Math.min(1, k * 2),
-      background: '#ece6d8', padding: '34px 40px 40px', boxShadow: '0 18px 34px rgba(0,0,0,0.6)',
-      backgroundImage: 'repeating-linear-gradient(transparent 0 82px, rgba(47,120,196,0.25) 82px 84px)'}}>
-      <div style={{position: 'absolute', left: 290, top: -16, width: 70, height: 34, background: 'rgba(242,140,40,0.85)', transform: 'rotate(4deg)'}} />
-      <div style={{...line, fontSize: 52, color: '#6b6258'}}>ireland, halloween night:</div>
-      <div style={line}>gates off their hinges</div>
-      <div style={line}>cabbages at doors</div>
-      <div style={line}>chimneys stuffed up</div>
-    </div>
-  );
-};
-
 /** 0:58 · "remember those gates off their hinges?" The list, the gate (coral), the mischief crosses over. */
 const Gates: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PrankList x={150} y={160} at={1} />
-    <Loop cx={470} cy={330} rx={330} ry={62} at={t.at('gates') - a + 1} seed={37} />
+    {/* the very card pinned at the end of chapter 2 */}
+    <MischiefList x={130} y={160} w={860} at={1} lines={MISCHIEF.map((text) => ({text, at: -999}))} pinAt={-999} />
+    <Loop cx={540} cy={392} rx={340} ry={52} at={t.at('gates') - a + 1} seed={37} />
     <Prop name="iron_gate" x={1000} y={170} w={780} at={t.at('gates') - a - 1} rot={-14} coral trace />
     <Prop name="cabbage" x={1560} y={560} w={240} at={t.at('remember') - a + 4} rot={8} />
     <Highlight text="THE MISCHIEF CAME TOO" x={140} y={760} size={84} at={t.at('mischief came') - a} seed={38} rot={-2} />
