@@ -93,4 +93,44 @@ export const ThumbF: React.FC = () => {
   );
 };
 
-export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF};
+
+
+/** G · hybrid: the real 1933 headline in two torn strips + the 1964 monster mask cut out in coral. No logo (unreadable in the feed). */
+const Strip: React.FC<{crop: [number, number, number, number]; x: number; y: number; w: number; rot: number}> = ({crop, x, y, w, rot}) => {
+  const [x0, y0, x1, y1] = crop;
+  const s = w / (x1 - x0);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, width: w + 40, height: (y1 - y0) * s + 30, padding: '15px 20px', background: '#efe8da', transform: `rotate(${rot}deg)`, boxShadow: '0 18px 34px rgba(0,0,0,0.7)', overflow: 'hidden'}}>
+      <div style={{position: 'relative', width: w, height: (y1 - y0) * s, overflow: 'hidden'}}>
+        <Picture src="img/ch03/bismarck_tribune_1933-11-01_tear_gas_headline.jpg" place={{left: -x0 * s, top: -y0 * s, scale: s}} size={[2600, 607]} bw="grayscale(1) contrast(1.4) sepia(0.15)" />
+      </div>
+    </div>
+  );
+};
+
+export const ThumbG: React.FC = () => {
+  const size: [number, number] = [3000, 2028];
+  const m = MASKS.kids;
+  const sc = 1.45;
+  const place = {left: 1240 - 569 * sc, top: 170 - 178 * sc, scale: sc};
+  const cutStyle = {WebkitMaskImage: `url(${staticFile(m.alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m.alpha)})`, maskSize: '100% 100%'} as React.CSSProperties;
+  return (
+    <PaletteCtx.Provider value={PALETTES.locked}>
+      <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+        <DarkPaper />
+        <Strip crop={[50, 228, 1195, 392]} x={60} y={170} w={1120} rot={-3} />
+        <Strip crop={[1215, 228, 2405, 392]} x={140} y={420} w={1050} rot={-1.5} />
+        <Loop cx={420} cy={265} rx={360} ry={120} at={0} seed={91} color={CORAL} width={14} tilt={-3} />
+        <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * sc, height: size[1] * sc, ...cutStyle, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+          <Picture src="img/ch05/kids_halloween_masks_nywts_1964.jpg" place={{left: 0, top: 0, scale: sc}} size={size} bw="grayscale(1) contrast(1.3)" />
+        </div>
+        <Tint mask={m.alpha} place={place} size={size} />
+        <Traced paths={m.data.shapes.subject} place={place} at={0} dur={1} width={10} />
+        <Highlight text="ON HALLOWEEN?" x={110} y={760} size={150} at={0} seed={92} rot={-2} />
+        <Finish vignette={0.35} />
+      </AbsoluteFill>
+    </PaletteCtx.Provider>
+  );
+};
+
+export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG};

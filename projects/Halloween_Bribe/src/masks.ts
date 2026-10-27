@@ -2,7 +2,9 @@
 // import it here and add a line to MASKS. The demo portrait's mask ships with the template.
 import {maskRef} from './kit/maskref';
 import sully from '../public/img/masks/sully.json';
+import kids from '../public/img/masks/kids.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
+  kids: maskRef('kids', kids),
 };

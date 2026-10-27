@@ -26,6 +26,7 @@ JOBS = {
     # delete its layers so Parallax falls back to a flat camera move (Dressed to Kill: library, Matilda, workshop).
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
+    "kids": ("img/ch05/kids_halloween_masks_nywts_1964.jpg", (560, 0, 1400, 1500), "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }

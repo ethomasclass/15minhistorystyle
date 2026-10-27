@@ -24,3 +24,13 @@ Source quality is mixed: YouTube's own pages are solid; most "CTR lift" numbers 
 6. **Test set should differ in style:** e.g. F (B&W photo, faces) vs E (real headline) vs C or D (silhouette painting). Drop C2 (a word swap).
 7. **Logo.** The top-left logo uses about 6% of the frame. Most large channels skip it, since the channel name shows under the video. Worth one test; the channel rule keeps it for now.
 8. **After Halloween:** plan a November thumbnail and title that drop the seasonal hook, then a September refresh (Paddy: updating an old video's thumbnail can revive it).
+
+## Feed mock-up results (`review/feed_dark.jpg`, `review/feed_light.jpg`; `python3 tools/feed_mock.py`)
+
+- C and D (orange silhouette paintings) disappear among Fire of Learning, Mr. DeMaio and The History Guy.
+- E and F stand out: the only B&W and newsprint thumbnails in the grid.
+- F looks a lot like HISTORY's "Trick or Treating's Tricky History" (masked vintage kids), the one competitor on our angle.
+- The Chunk History logo is unreadable at feed size.
+- **G (headline in two strips + coral 1964 monster mask, no logo) is the clear standout**: the largest readable text in the grid and the only coral.
+- Watch out: a channel called "Crunchy History" posts Halloween prank videos (its name is close to Chunk History).
+- Honesty note for G: the mask is from 1964 and the headline from 1933. The mask stands in for "Halloween"; the video must not imply that kid was gassed.
