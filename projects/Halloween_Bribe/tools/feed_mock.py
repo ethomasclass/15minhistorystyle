@@ -8,7 +8,7 @@ for l in rows:
 # Our concepts and their paired titles; pass keys on the command line to choose (default: H1 H2 H3 G)
 TITLES={'C':'Trick-or-Treating Was a Bribe','D':'Why Halloween Used to Be a Crime Spree','E':'Trick-or-Treating Was a Bribe','F':'The Real History of Trick-or-Treating','G':'Why Halloween Used to Be a Crime Spree','H1':'Trick-or-Treating Was a Bribe','H2':'Why Halloween Used to Be a Crime Spree','H3':'The Real History of Trick-or-Treating','H4':'The Real History of Trick-or-Treating'}
 keys=sys.argv[1:] or ['H1','H2','H3','G']
-ours={k:TITLES[k] for k in keys}
+ours={k:TITLES.get(k,'Trick-or-Treating Was a Bribe') for k in keys}
 items=list(comp)
 for i,k in zip([1,6,9,14],keys):
     items.insert(i,(f'renders/thumbnails/Halloween_Bribe_{k}.png',f'[{k}] '+ours[k],'Chunk History · new'))

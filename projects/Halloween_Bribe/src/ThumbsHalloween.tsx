@@ -209,4 +209,54 @@ export const ThumbH4: React.FC = () => (
   </Clean>
 );
 
-export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG, H1: ThumbH1, H2: ThumbH2, H3: ThumbH3, H4: ThumbH4};
+// X1–X5 · thumbnail-only Gemini images (B&W, one coral accent), clean type on the empty left.
+const XImg: React.FC<{n: number; children: React.ReactNode}> = ({n, children}) => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+      <Img src={staticFile(`img/gen/thumb/x${n}.png`)} style={{position: 'absolute', inset: 0, width: 1920, height: 1080, objectFit: 'cover'}} />
+      <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 50%)'}} />
+      {children}
+      <Finish vignette={0.3} />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
+export const ThumbX1: React.FC = () => (
+  <XImg n={1}>
+    <Word t="TRICK OR" x={80} y={230} size={170} color={CREAM} />
+    <Word t="TREAT?" x={80} y={420} size={170} color={CORAL} />
+    <Highlight text="(PAY UP)" x={80} y={650} size={120} at={0} seed={97} rot={-3} />
+  </XImg>
+);
+export const ThumbX2: React.FC = () => (
+  <XImg n={2}>
+    <Word t="TEAR" x={90} y={230} size={250} color={CREAM} />
+    <Word t="GAS" x={90} y={450} size={250} color={CORAL} />
+    <Highlight text="ON HALLOWEEN?" x={90} y={740} size={130} at={0} seed={98} rot={-2} />
+  </XImg>
+);
+export const ThumbX3: React.FC = () => (
+  <XImg n={3}>
+    <Word t="CANDY" x={80} y={130} size={210} color={CREAM} />
+    <Word t="was a" x={100} y={350} size={110} color={TEALC} font='"Nanum Pen Script", cursive' weight={400} rot={-4} spacing={0} />
+    <Highlight text="BRIBE" x={80} y={460} size={200} at={0} seed={99} rot={-3} />
+  </XImg>
+);
+export const ThumbX4: React.FC = () => (
+  <XImg n={4}>
+    <Word t="HALLOWEEN" x={80} y={220} size={170} color={CREAM} />
+    <Word t="WAS A" x={80} y={400} size={120} color={CREAM} />
+    <Highlight text="RIOT" x={80} y={550} size={250} at={0} seed={100} rot={-3} />
+  </XImg>
+);
+export const ThumbX5: React.FC = () => (
+  <XImg n={5}>
+    <Word t="TRICK OR" x={60} y={200} size={150} color={CREAM} />
+    <div style={{position: 'absolute', left: 60, top: 370}}>
+      <Word t="TREAT" x={0} y={0} size={150} color="rgba(244,239,230,0.55)" />
+      <div style={{position: 'absolute', left: -12, top: 58, width: 500, height: 18, background: CORAL, transform: 'rotate(-4deg)', borderRadius: 9}} />
+    </div>
+    <Highlight text="BRIBE" x={100} y={560} size={170} at={0} seed={101} rot={-4} />
+  </XImg>
+);
+
+export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG, H1: ThumbH1, H2: ThumbH2, H3: ThumbH3, H4: ThumbH4, X1: ThumbX1, X2: ThumbX2, X3: ThumbX3, X4: ThumbX4, X5: ThumbX5};
