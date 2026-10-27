@@ -9,6 +9,7 @@ import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {HALLOWEEN_THUMBS} from './ThumbsHalloween';
 import {SIL_TEST_FRAMES, SilTest} from './SilTest';
+import {END_FRAMES, EndScreenTest} from './fx/EndScreen';
 import {AtlanticMap_TEST_FRAMES, AtlanticMapTest} from './fx/AtlanticMap';
 import {XRayScan_TEST_FRAMES, XRayScanTest} from './fx/XRayScan';
 import {CandyPile_TEST_FRAMES, CandyPileTest} from './fx/CandyPile';
@@ -26,6 +27,7 @@ export const Root: React.FC = () => (
     <Composition id="XRayScanTest" width={W} height={H} fps={FPS} durationInFrames={XRayScan_TEST_FRAMES} component={() => <JFonts><XRayScanTest /></JFonts>} />
     <Composition id="CandyPileTest" width={W} height={H} fps={FPS} durationInFrames={CandyPile_TEST_FRAMES} component={() => <JFonts><CandyPileTest /></JFonts>} />
     <Composition id="CorridorTest" width={W} height={H} fps={FPS} durationInFrames={Corridor_TEST_FRAMES} component={() => <JFonts><CorridorTest /></JFonts>} />
+    <Composition id="EndScreenTest" width={W} height={H} fps={FPS} durationInFrames={END_FRAMES} component={() => <JFonts><EndScreenTest /></JFonts>} />
     <Composition id="SilTest" width={W} height={H} fps={FPS} durationInFrames={SIL_TEST_FRAMES} component={SilTest} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
