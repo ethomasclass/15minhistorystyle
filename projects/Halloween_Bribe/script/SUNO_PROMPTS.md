@@ -46,24 +46,52 @@ vocals, choir, lyrics, humming, spoken word, EDM, trap, pop, rock, synth lead, d
 [End]
 ```
 
-### 2. `hb_oiche_shamhna.mp3`: Halloween night in Ireland (the video's theme)
-*Used in:* ch 2 (Ireland, the night the dead came home), and a reprise of its tune under the ch 8 ending
+### 2. `hb_oiche_shamhna.mp3`: Halloween night in Ireland (the video's theme), **revised: darker**
+*Used in:* ch 2 (Ireland, the night the dead came home), and a reprise under the ch 8 ending
 *Length:* **at least 2:30**
+*Note:* the first version ("eerie but playful slip jig") came out too cheerful. Try **2A** first; if it's too slow and gloomy
+under the party and the barmbrack joke, try **2B**. Add these to the usual excludes for this cue:
 
 ```
-1830s rural Ireland on Halloween night, an eerie but playful slip jig in a minor mode, tin whistle and fiddle trading a simple memorable tune, bodhrán frame drum keeping a soft heartbeat, plucked harp, a low drone underneath, candlelit and mischievous with a shiver of the supernatural, warm like a cottage party with the dark outside, a quieter middle section with harp and low whistle alone, the tune returns fuller, ends on the whistle holding the last note over the drone, 96 BPM, 6/8, E dorian; traditional Irish folk, acoustic, space for narrator, instrumental
+upbeat, happy, cheerful, festive, celtic pub, irish pub, drinking song, reel, major key, bright, uplifting, new age, enya, riverdance
+```
+
+**2A · haunted slow air (try first)**
+
+```
+haunted Irish folk music for Halloween night in 1830s rural Ireland when the dead were believed to come home, dark and uneasy, a slow eerie air in a minor mode on low whistle, ghostly uilleann pipe drones underneath, a fiddle playing thin high harmonics and slow sliding notes like a cold draft, bodhrán frame drum beating a slow heartbeat, soft wind, sparse plucked harp notes that ring and decay, candlelight in a dark cottage with something outside the window, tension and dread, a slightly faster middle section where the bodhrán quickens and the fiddle turns sinister, then back to the lonely whistle, ends on a held drone with a single dissonant fiddle note fading out, 70 BPM, 6/8, D minor; dark folk, haunting, cinematic horror underscore, space for narrator, instrumental
 ```
 
 *Lyrics box (structure tags only):*
 
 ```
 [Instrumental]
-[Intro: low drone, soft bodhrán heartbeat]
-[Verse: tin whistle states the tune, fiddle answers]
-[Verse 2: fiddle and whistle together, plucked harp]
-[Break: quiet, harp and low whistle alone, eerie]
-[Verse 3: the tune returns fuller, playful]
-[Outro: whistle holds the last note over the drone]
+[Intro: wind, ghostly pipe drone, slow bodhrán heartbeat]
+[Verse: low whistle plays a slow eerie minor air]
+[Verse 2: fiddle harmonics creep in, sparse plucked harp]
+[Bridge: bodhrán quickens, fiddle turns sinister, tension rises]
+[Break: everything drops to the drone and one whistle note]
+[Outro: drone holds, one dissonant fiddle note fades]
+[End]
+```
+
+**2B · sinister jig (if 2A is too slow)**
+
+```
+sinister dark Irish slip jig for a haunted Halloween night in 1830s Ireland, minor mode, menacing and mischievous rather than cheerful, fiddle and low whistle playing a twisting tune with ominous bent notes, a droning uilleann pipe underneath, bodhrán with a hard driving pulse, deep plucked harp bass notes, creaking and shadowy like masked figures creeping down a dark lane, short eerie pauses where only the drone remains, builds tension each time the tune returns, ends abruptly on a dark minor chord, 92 BPM, 6/8, E minor; dark folk, gothic, Halloween, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: drone and hard bodhrán pulse]
+[Verse: fiddle and low whistle play the twisting minor tune]
+[Break: sudden pause, only the drone]
+[Verse 2: the tune returns darker, deep harp bass]
+[Break: eerie pause, one bent fiddle note]
+[Verse 3: tension builds, driving bodhrán]
+[Outro: ends abruptly on a dark minor chord]
 [End]
 ```
 
@@ -136,7 +164,7 @@ cheerful late 1940s American postwar optimism with a spooky wink, a small swing 
 |---|---|---|
 | 1 | Tear-gas headline → the question → "it's not a pumpkin" | **hb_black_halloween** (first ~50 s; the hush lands under "So how did *that* turn into *this*?") |
 | — | Chunk intro / title sting | existing intro kit |
-| 2 | Ireland, the dead come home, the party, turnips, the mischief | **hb_oiche_shamhna** |
+| 2 | Ireland, the dead come home, the party, turnips, the mischief | **hb_oiche_shamhna** (2A under the dead and the turnips; the quickened bridge under the mischief) |
 | 3 | Famine, coffin ships, landing in America | **hb_coffin_ships** (no music hits; grave) |
 | 3 | Pumpkins, the pranks get bigger, wagons | **hb_mischief_rag** (enters on "Second, remember those gates…") |
 | 4 | Fargo and Bismarck 1933, the riot | **hb_black_halloween** (later, busier section) |
