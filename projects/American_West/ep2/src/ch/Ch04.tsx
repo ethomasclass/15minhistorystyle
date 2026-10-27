@@ -14,13 +14,12 @@ import {clamp} from '../lib/anim';
 import {Note, useGFrame, useHand, usePal} from '../kit/Kit';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration} from '../kit/shell';
 import {bed} from '../kit/levels';
-import {CircleMount} from '../samples/kit';
 import {keys, Lift, ScrimTag, shake, SlapTitle, zkeys} from '../previews/fx';
 import {Big, Counter, DeskCam, Float, Label, Lines, Print, Prop, Sounds, type SfxRow, Stage, Upright} from '../kit/ch04_extra';
 import {Hand, MPin, MRegion, WestMap} from '../kit/ch01_extra';
 import {MHerd, MTrail, TLINES, TPL} from '../kit/trails';
 import {M4} from '../masks_ch04';
-import {MLine, MRiver, MStandLabel, Quiet} from '../kit/ch456_extra';
+import {Bust, MLine, MRiver, MStandLabel, Quiet} from '../kit/ch456_extra';
 import {WShots} from '../kit/ch07_extra';
 
 const N = words as Narration;
@@ -88,12 +87,12 @@ const Ranchers: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[0, 20, 0.96, 0, 0, -2], [b, 14, 1.05, -20, 10, 0]]}>
-        <Lift x={250} y={160} w={640} hgt={624} h={10} at={-99} rot={-3} seed={41}>
-          <Print src={I.goodnight} size={Z.goodnight} x={0} y={0} w={640} at={-99} seed={41} mask={M4.goodnight} tint={0.45 * interpolate(f, [at('Goodnight') - 2, at('Goodnight') + 6], [0, 1], clamp)}
+        <Float x={250} y={150} w={600} hgt={680} h={10} at={-99} rot={-2} seed={41}>
+          <Bust src={I.goodnight} m={M4.goodnight} x={0} y={0} w={580} at={-99} tint={0.45 * interpolate(f, [at('Goodnight') - 2, at('Goodnight') + 6], [0, 1], clamp)}
             traceAt={at('Goodnight') + 2} />
-        </Lift>
+        </Float>
       </DeskCam>
-      <CircleMount src={I.loving} size={Z.loving} cx={1440} cy={560} r={230} fx={241} fy={290} scale={0.92} at={at('Oliver') - 2} />
+      <Bust src={I.loving} m={M4.loving} x={1250} y={260} w={380} at={at('Oliver') - 2} rot={2} />
       <SlapTitle text="1866" x={110} y={80} size={110} at={at('1866')} seed={71} />
       <Label text="Charles Goodnight" x={300} y={900} size={28} at={at('Charles') - 2} color={CORAL} />
       <Label text="Oliver Loving" x={1310} y={850} size={28} at={at('Oliver')} color={WHITE} />
@@ -237,7 +236,7 @@ const Carleton: React.FC = () => {
     <Quiet>
       <AbsoluteFill>
         <DeskCam k={[[a, 12, 1.0, 0, 0, 0], [at('He wanted'), 12, 1.05, 0, 10, 0]]}><></></DeskCam>
-        <CircleMount src={I.carleton} size={Z.carleton} cx={1380} cy={540} r={300} fx={215} fy={230} scale={1.3} at={a + 2} />
+        <Bust src={I.carleton} m={M4.carleton} x={1180} y={280} w={460} at={a + 2} rot={1} />
         <SlapTitle text="1863" x={110} y={90} size={110} at={at('1863')} seed={73} />
         <Label text="Gen. James H. Carleton" x={120} y={330} size={30} at={at('commander') - 2} color={BONE} />
         <Label text="the Army's commander in New Mexico" x={120} y={380} size={24} at={at('commander')} />
@@ -287,7 +286,7 @@ const Carson: React.FC = () => {
     <Quiet>
       <AbsoluteFill>
         <DeskCam k={[[a, 14, 1.06, 0, 0, 1], [at('until'), 14, 0.98, -20, 0, 0]]}><></></DeskCam>
-        <CircleMount src={I.carson} size={Z.carson} cx={1420} cy={520} r={320} fx={640} fy={780} scale={0.6} at={a + 2} />
+        <Bust src={I.carson} m={M4.carson} x={1150} y={250} w={580} at={a + 2} rot={-1} />
         <Label text="troops led by Kit Carson" x={120} y={190} size={30} at={at('Kit') - 2} color={BONE} />
         <Lines x={120} y={300} size={66} gap={120} rows={[
           {text: 'burned their fields', at: at('burned') - 2},
@@ -453,9 +452,9 @@ const Credited: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 18, 1.0, 0, 0, 2], [at('an old Army'), 14, 1.06, 20, 0, 0]]}>
-        <Lift x={170} y={330} w={420} hgt={410} h={6} at={-99} rot={-4} blur={1.2} seed={45}>
-          <Print src={I.goodnight} size={Z.goodnight} x={0} y={0} w={420} at={-99} seed={45} mask={M4.goodnight} tint={0.45} />
-        </Lift>
+        <Float x={170} y={330} w={420} hgt={480} h={6} at={-99} rot={-3} blur={1.2} seed={45}>
+          <Bust src={I.goodnight} m={M4.goodnight} x={0} y={0} w={400} at={-99} tint={0.45} />
+        </Float>
         <Float x={760} y={260} w={1100} hgt={900} h={20} at={at('chuck') - 2} rot={2} seed={6}>
           <Prop src={I.wagon} m={M4.wagon} x={0} y={0} w={1040} at={-99} />
         </Float>

@@ -365,8 +365,8 @@ const Drift: React.FC = () => {
   return (
     <AbsoluteFill>
       <DeskCam k={[[a, 18, 0.96, 30, 0, -1], [b, 14, 1.06, 0, 0, 0]]}>
-        <Float x={760} y={260} w={900} hgt={660} h={8} at={-99} rot={-2} seed={92}>
-          <Prop src={PROP('p9_post_drift')} m={M9.p9_post_drift} x={0} y={0} w={880} at={-99} filter={PROPF_QUIET} />
+        <Float x={1020} y={150} w={440} hgt={820} h={8} at={-99} rot={-2} seed={92}>
+          <Prop src={PROP('p9_post_drift')} m={M9.p9_post_drift} x={0} y={0} w={430} at={-99} filter={PROPF_QUIET} />
         </Float>
       </DeskCam>
       {[0, 1, 2, 3].map((i) => <Wire key={i} pts={[[150, 300 + i * 120], [520 + i * 30, 330 + i * 120]]} at={a + 2 + i * 2} width={4} />)}
