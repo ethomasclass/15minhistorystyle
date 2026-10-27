@@ -5,3 +5,4 @@ public/audio/cache/
 __pycache__/
 public/music/*.wav
 .cache/
+review/previews/
