@@ -5,9 +5,12 @@ comp=[]
 for l in rows:
     c=[x.strip() for x in l.replace('\\|','/').split('|')]
     comp.append((f'research/competitors/{c[6]}.jpg', c[2].replace('\\',''), f'{c[3]} · {c[4]} views'))
-ours={'C':'Trick-or-Treating Was a Bribe','G':'Why Halloween Used to Be a Crime Spree','E':'Trick-or-Treating Was a Bribe','F':'The Real History of Trick-or-Treating'}
+# Our concepts and their paired titles; pass keys on the command line to choose (default: H1 H2 H3 G)
+TITLES={'C':'Trick-or-Treating Was a Bribe','D':'Why Halloween Used to Be a Crime Spree','E':'Trick-or-Treating Was a Bribe','F':'The Real History of Trick-or-Treating','G':'Why Halloween Used to Be a Crime Spree','H1':'Trick-or-Treating Was a Bribe','H2':'Why Halloween Used to Be a Crime Spree','H3':'The Real History of Trick-or-Treating','H4':'The Real History of Trick-or-Treating'}
+keys=sys.argv[1:] or ['H1','H2','H3','G']
+ours={k:TITLES[k] for k in keys}
 items=list(comp)
-for i,k in zip([1,6,9,14],'CGEF'):
+for i,k in zip([1,6,9,14],keys):
     items.insert(i,(f'renders/thumbnails/Halloween_Bribe_{k}.png',f'[{k}] '+ours[k],'Chunk History · new'))
 F='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 fb=ImageFont.truetype(F.replace('Sans','Sans-Bold'),15); fs=ImageFont.truetype(F,13)

@@ -6,7 +6,7 @@
 //   F  · masked kids, 1964 (Angelo Rizzuto, LOC), one mask in coral.
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
-import {Finish, Highlight, Loop, Note, PALETTES, PaletteCtx, Picture, Tint, Traced} from './kit/Kit';
+import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, Picture, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
 import {fill} from './kit/shell';
 import {MASKS} from './masks';
@@ -133,4 +133,80 @@ export const ThumbG: React.FC = () => {
   );
 };
 
-export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG};
+
+// H1–H4 · clean type instead of newsprint (user note): big bold words in mixed faces and colours, the coral mask on the right.
+const CREAM = '#f4efe6';
+const TEALC = '#2FE0C4';
+const ORANGE_T = '#FF9F1C';
+const MaskHead: React.FC<{x?: number; y?: number; sc?: number}> = ({x = 1240, y = 170, sc = 1.45}) => {
+  const size: [number, number] = [3000, 2028];
+  const m = MASKS.kids;
+  const place = {left: x - 569 * sc, top: y - 178 * sc, scale: sc};
+  const cutStyle = {WebkitMaskImage: `url(${staticFile(m.alpha)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(m.alpha)})`, maskSize: '100% 100%'} as React.CSSProperties;
+  return (
+    <>
+      <div style={{position: 'absolute', left: place.left, top: place.top, width: size[0] * sc, height: size[1] * sc, ...cutStyle, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+        <Picture src="img/ch05/kids_halloween_masks_nywts_1964.jpg" place={{left: 0, top: 0, scale: sc}} size={size} bw="grayscale(1) contrast(1.3)" />
+      </div>
+      <Tint mask={m.alpha} place={place} size={size} />
+      <Traced paths={m.data.shapes.subject} place={place} at={0} dur={1} width={10} />
+    </>
+  );
+};
+const Word: React.FC<{t: string; x: number; y: number; size: number; color: string; font?: string; weight?: number; rot?: number; spacing?: number}> = ({t, x, y, size, color, font = JF.sans, weight = 800, rot = 0, spacing = -0.02}) => (
+  <div style={{position: 'absolute', left: x, top: y, fontFamily: font, fontWeight: weight, fontSize: size, lineHeight: 0.9, color, letterSpacing: `${spacing}em`, whiteSpace: 'nowrap', transform: `rotate(${rot}deg)`, transformOrigin: 'left center',
+    textShadow: '0 6px 0 rgba(0,0,0,0.35), 0 10px 30px rgba(0,0,0,0.8)'}}>{t}</div>
+);
+const Clean: React.FC<{children: React.ReactNode}> = ({children}) => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+      <DarkPaper />
+      <MaskHead />
+      {children}
+      <Finish vignette={0.35} />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
+
+/** H1 · TEAR GAS / ON HALLOWEEN? */
+export const ThumbH1: React.FC = () => (
+  <Clean>
+    <Note text="North Dakota, 1933:" x={100} y={120} size={80} rot={-3} at={0} color={TEALC} />
+    <Word t="TEAR" x={90} y={250} size={250} color={CREAM} />
+    <Word t="GAS" x={90} y={470} size={250} color={CORAL} />
+    <Highlight text="ON HALLOWEEN?" x={90} y={750} size={130} at={0} seed={93} rot={-2} />
+  </Clean>
+);
+
+/** H2 · CANDY WAS A BRIBE */
+export const ThumbH2: React.FC = () => (
+  <Clean>
+    <Word t="CANDY" x={90} y={170} size={260} color={CREAM} />
+    <Word t="was a" x={110} y={440} size={120} color={TEALC} font='"Nanum Pen Script", cursive' weight={400} rot={-4} spacing={0} />
+    <Highlight text="BRIBE" x={90} y={560} size={230} at={0} seed={94} rot={-3} />
+  </Clean>
+);
+
+/** H3 · TRICK OR TREAT, with TREAT struck out and BRIBE written in */
+export const ThumbH3: React.FC = () => (
+  <Clean>
+    <Word t="TRICK OR" x={90} y={170} size={190} color={CREAM} />
+    <div style={{position: 'absolute', left: 90, top: 380}}>
+      <Word t="TREAT" x={0} y={0} size={190} color="rgba(244,239,230,0.55)" />
+      <div style={{position: 'absolute', left: -15, top: 75, width: 640, height: 22, background: CORAL, transform: 'rotate(-4deg)', borderRadius: 11, boxShadow: '0 4px 12px rgba(0,0,0,0.6)'}} />
+    </div>
+    <Highlight text="BRIBE" x={150} y={640} size={200} at={0} seed={95} rot={-4} />
+  </Clean>
+);
+
+/** H4 · HALLOWEEN WAS A RIOT */
+export const ThumbH4: React.FC = () => (
+  <Clean>
+    <Note text="before candy..." x={100} y={130} size={80} rot={-3} at={0} color={TEALC} />
+    <Word t="HALLOWEEN" x={90} y={270} size={170} color={CREAM} />
+    <Word t="WAS A" x={90} y={450} size={120} color={CREAM} />
+    <Highlight text="RIOT" x={90} y={600} size={260} at={0} seed={96} rot={-3} />
+  </Clean>
+);
+
+export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG, H1: ThumbH1, H2: ThumbH2, H3: ThumbH3, H4: ThumbH4};
