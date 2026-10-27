@@ -13,7 +13,7 @@ File `src/ch/Ch06.tsx`; masks `src/masks_ch06.ts` (job `tools/mask_jobs/ch06.py`
 | 5 | for their | **the treaty's own Article II lines**: focus pull and a coral swipe on "abso-/lute and undisturbed use and occupation" (line positions read off the scan) |
 | 6 | Hold onto | both treaty pages on the desk; "hold onto that treaty", "→ Episode 4" |
 | 7 | Six years | Illingworth's photograph of Custer's column (1874, NARA); SUMMER 1874; ≈ 1,000 men; into the Black Hills |
-| 8 | led by | Custer (Brady studio, 1865) print, coral tint + trace; GEORGE ARMSTRONG CUSTER |
+| 8 | led by | Custer (Brady studio, 1865) bust cut-out, coral tint + trace; GEORGE ARMSTRONG CUSTER |
 | 9 | Officially | map: Custer's 1874 route from Fort Abraham Lincoln into the Hills; "officially: looking for a place to build a fort" |
 | 10 | They also | Illingworth, Camp in Castle Creek Valley (stereo half); pick & shovel prop; "+ two miners" |
 | 11 | The miners | gold pan prop slaps; GOLD. |
@@ -37,3 +37,7 @@ the same file from 42.65 s).
 - The prospector arrows from the east are illustrative, not traced routes (the map tag says "routes approx.").
 - Custer's photo is 1865 (Civil War); the tag gives its date.
 - Unused from the image agent: Hidden Wood Creek camp panorama, Rockerville panning photo (1889, too late), the full Bismarck Tribune page.
+
+**Portraits (Oct 27 rule):** Custer is a bust cut-out (`c6_custer_bust`: the mask cut below the shoulder straps, no plate edges) with the coral
+tint + trace and a soft contact shadow; the title was shrunk to clear it. Everything else in ch06 is documents, group photos or scenes, so it
+stays as prints.
