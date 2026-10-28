@@ -7,7 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/ChunkIntro';
 import {BREAK_FRAMES, LogoBreak} from './kit/ChunkIntro';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
-import {HALLOWEEN_THUMBS} from './ThumbsHalloween';
+import {HALLOWEEN_THUMBS, VERTICAL_THUMBS} from './ThumbsHalloween';
 import {SIL_TEST_FRAMES, SilTest} from './SilTest';
 import {END_FRAMES, EndScreenTest} from './fx/EndScreen';
 import {AtlanticMap_TEST_FRAMES, AtlanticMapTest} from './fx/AtlanticMap';
@@ -23,6 +23,7 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
+    {Object.entries(VERTICAL_THUMBS).map(([k, T]) => <Composition key={k} id={`Thumb-${k}`} width={1080} height={1920} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />)}
     {Object.entries(HALLOWEEN_THUMBS).map(([k, T]) => <Composition key={k} id={`Thumb-${k}`} width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />)}
     <Composition id="AtlanticMapTest" width={W} height={H} fps={FPS} durationInFrames={AtlanticMap_TEST_FRAMES} component={() => <JFonts><AtlanticMapTest /></JFonts>} />
     <Composition id="XRayScanTest" width={W} height={H} fps={FPS} durationInFrames={XRayScan_TEST_FRAMES} component={() => <JFonts><XRayScanTest /></JFonts>} />
