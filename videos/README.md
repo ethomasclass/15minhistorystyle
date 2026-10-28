@@ -129,6 +129,9 @@ column says where each was made.
 | The Last Public Execution | 55.3% | 0:50 of ~1:10 | 1.1k | Cover frame, a scene with people first, no early text |
 
 ## Your standing preferences (from your notes across the videos)
+- **Parallax layers must be clean** (*Trick-or-Treating Was a Bribe*, Oct 2026): you spotted faint outlines of foreground shapes on the
+  planes behind them in the silhouette paintings. `tools/sil_layers.py` now paints out a 6 px rim around each nearer shape; check each back
+  plate at full size before building scenes on it.
 
 **Script**
 - **Written for a general audience, easy to follow** (from *Dressed to Kill*). Learn from what Vox explainers do well, don't copy

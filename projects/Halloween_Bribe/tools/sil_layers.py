@@ -18,6 +18,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "public", "img", "layers", "sil")
 EXTEND = 60          # px at full size
+EDGE = 6             # px painted out beyond each nearer shape (its soft rim), so no ghost outlines
 MAXW = 2752
 MODEL = os.environ.get("DEPTH_MODEL", os.path.expanduser("~/models/da2_small.onnx"))  # Depth Anything V2 small ONNX (huggingface onnx-community/depth-anything-v2-small)
 
@@ -59,19 +60,25 @@ def split(path, bands=4):
 
     k = np.ones((3, 3), np.uint8)
     small = 0.5
+    # The soft, anti-aliased rim of every nearer shape sits on the far side of the band boundary, so painting out only the
+    # nearer pixels left a faint ghost outline of each shape baked into the planes behind it, visible once they slide
+    # (Halloween, Oct 2026). Paint out an EDGE-px wider area, and let the rim take the fill colour, not its own pixels.
+    edge_k = np.ones((2 * EDGE + 1, 2 * EDGE + 1), np.uint8)
     for b in range(bands):
         nearer = (label < b).astype(np.uint8)
+        wide = cv2.dilate(nearer, edge_k) if nearer.any() else nearer
         if b == bands - 1:
-            # back plate: everything nearer painted out, fully opaque
-            fill = inpaint(im, nearer, small)
+            # back plate: everything nearer (plus its rim) painted out, fully opaque
+            fill = inpaint(im, wide, small)
             cv2.imwrite(os.path.join(d, f"L{b}.jpg"), fill, [cv2.IMWRITE_JPEG_QUALITY, 92])
             continue
         own = (label == b).astype(np.uint8)
         reach = cv2.dilate(own, np.ones((2 * EXTEND + 1, 2 * EXTEND + 1), np.uint8)) & nearer
-        fill = inpaint(im, nearer, small) if reach.any() else im
+        fill = inpaint(im, wide, small) if reach.any() else im
         alpha = np.clip(own + reach, 0, 1) * 255
         alpha = cv2.GaussianBlur(alpha.astype(np.uint8), (0, 0), 0.8)
-        rgba = np.dstack([np.where(own[..., None] > 0, im, fill), alpha])
+        keep = (own > 0) & (wide == 0)               # own pixels away from the rim keep the painting; the rim takes the fill
+        rgba = np.dstack([np.where(keep[..., None], im, fill), alpha])
         cv2.imwrite(os.path.join(d, f"L{b}.webp"), rgba, [cv2.IMWRITE_WEBP_QUALITY, 90])
     g = np.dstack([im, (cv2.GaussianBlur(glow.astype(np.float32), (0, 0), 2) * 255).astype(np.uint8)])
     cv2.imwrite(os.path.join(d, "glow.webp"), g, [cv2.IMWRITE_WEBP_QUALITY, 90])

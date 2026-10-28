@@ -234,3 +234,20 @@ the first try.
   cut off (a shoulder, the waist) placed off-frame so no straight cut shows. It springs up from below on its cue.
 - **Expect some misses**: busy crowd scenes and soft, pale shapes against sky (a half-filled paper balloon, a deflated barrage
   balloon among seated soldiers) came back wrong twice. Two tries, then drop it and pick another photo.
+
+## 9. Silhouette paintings in multi-plane parallax, and AI props (from *Trick-or-Treating Was a Bribe*)
+
+- **Layered-silhouette paintings** (black foreground, ochre haze bands, big moon, one orange light; style paragraph in that project's
+  `script/GEMINI_PROMPTS.md`) on `gemini-3-pro-image` at 2K (`tools/gemini_image.py`, `SIZE=2K`). Name anything that must not be
+  orange ("a pale turnip, NOT a pumpkin"); reject any take with painted lettering on signs; crop baked-in letterbox bars.
+- **Split into depth planes:** `DEPTH_MODEL=~/models/da2_small.onnx python3 tools/sil_layers.py <painting.jpg>` (Depth Anything V2
+  small, from huggingface `onnx-community/depth-anything-v2-small`). Luminance alone split the sky into patches; depth keeps lanterns
+  with the hands holding them. Show it with `SilScene` (`src/kit/silparallax.tsx`): camera push, each plane at its own speed, fog
+  between the back planes, flickering lights.
+- **The user's note (Oct 2026): faint ghost outlines of foreground shapes showed on the planes behind them** as the planes slid.
+  Cause: each nearer shape's soft, anti-aliased rim lay outside the area that was painted out. Fixed in `sil_layers.py` with
+  `EDGE = 6` (paint out 6 px beyond every nearer shape and let the rim take the fill). Before using a new set of layers, look at each
+  back plate (`L{n}.jpg`) at full size for traces of the shapes in front of it; raise `EDGE` if any remain.
+- **AI props** (photoreal period objects on white, `gemini-3-pro-image`, 1:1): `tools/prop_cut.py` cuts them out to WebP; `Prop`
+  (`src/kit/prop.tsx`) shows them B&W on the desk with an optional coral tint and teal outline. No source tag, never presented as a
+  specific real artifact.
