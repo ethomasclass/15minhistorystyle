@@ -26,6 +26,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 16 | ***Forever Free:** How a War for the Union Became a War for Freedom* (Civil War series 2) | 9:41 | 8 | 1,589 | this repo · `projects/Forever_Free/` | "…And the war still had to be won." |
 | 17 | ***Except:** How the Civil War Was Decided, and What It Left Open* (Civil War series 3) | 9:24 | 8 | 1,540 | this repo · `projects/Except/` | "…Except as a punishment for crime." |
 | 18 | ***Not in the Picture:** Grant, the Railroad, and Who Built It* (American West, Ep 1 of 4; the first video as **Chunk History**) | 15:59 | 9 | 2,450 | this repo · `projects/American_West/ep1/` | "…It involved about five million cows." (tees up Ep 2) |
+| 19 | ***Trick-or-Treating Was a Bribe:** The Real History of Halloween* (Halloween, Ireland 1830s → today) | 11:57 | 8 | 1,822 | this repo · `ccr-5f9195b0-0cknf0` (`projects/Halloween_Bribe/`) | "…you might want to pay up." + thank-you over a 20 s end screen. Plus 2 vertical Shorts |
 
 **Shorts made as their own projects** (in `projects/`): *The Last Public Execution* (`Last_Public_Hanging`), *Rumpelstiltskin*,
 *World Series*, *Pledge Salute*, *Candy Scare*, and two scripted but not built (`Last_Time_Debt_Free_Short`,
@@ -120,6 +121,19 @@ column says where each was made.
   cut-aways), the first **Chunk History intro** and **mark-snap chapter breaks** (with a clicks-and-page-turn sound, no tones),
   **gentle shot transitions**, the **Black Sox mix levels** (narration −18 LUFS, music 13 LU under, `level_voice.py`, `bed()`),
   **Suno prompt docs** with tempo, structure tags and minimum lengths, a **fact-check pass** sourced on screen, and the six `aw_` cues.
+
+- **Trick-or-Treating Was a Bribe** (Halloween, Oct 27–28, 2026; the user called it **the best-quality video so far**) was planned
+  **packaging-first**: thumbnail research, a 16-video competitor scan and a **mock YouTube feed** (`tools/feed_mock.py`) before the script;
+  the lesson was B&W + one coral accent with **clean bold type** (not newspaper scans) stands out in an orange Halloween feed, and the
+  cold open puts the thumbnail's claim on screen at frame 0. It added: **two Irish chapters** at the user's request; **thumbnail-only AI
+  art** (B&W ink, one coral accent: the gas-mask pumpkin); **layered-silhouette AI paintings** in **multi-plane depth parallax**
+  (`tools/sil_layers.py` + `SilScene`; mind the rim fix in the skill's images-and-masks.md §9); **19 photoreal AI props** cut out
+  (`tools/prop_cut.py`, `Prop`); **five 3D set pieces** (the 1933 front page with tear-gas smoke, a 3D Atlantic crossing map, an X-ray
+  scan + Joel Best's real per-year tally, deterministic candy physics, a candlelit corridor finale whose end wall becomes a door);
+  a **Chunk History end screen** with drawn YouTube slots; **parallel chapter builds** from a shared brief (`script/BUILD_BRIEF.md`,
+  one builder per chapter) and **rendering as chapters finish** (`tools/render_ch.sh`, `tools/render_queue.sh`, then `JOIN_ONLY=1
+  tools/render.sh`); Ellis (the user's ElevenLabs voice clone, `eleven_v4`) with "Samhain" → "Sau-win"; five `hb_` Suno cues; and
+  **vertical Short covers** as their own thumbnails.
 
 ## Shorts results (log each one 48 hours after posting)
 

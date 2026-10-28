@@ -2321,6 +2321,81 @@
      "bed_volume": "0.18–0.22 (Suno masters quiet)"
     }
    ]
+  },
+  {
+   "canonical": "hb_black_halloween",
+   "md5": "33fc0488c3933d2f251d3f8e24b2c90b",
+   "duration_s": 151.5,
+   "integrated_lufs": -22.12,
+   "true_peak_dbtp": -6.77,
+   "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
+   "generator": "Suno",
+   "prompt": "1930s Great Depression night of vandalism, tense and propulsive, low pulsing piano ostinato in the bass, tight muted snare and brushes, pizzicato strings like running footsteps, muted trumpet stabs, a distant fire-bell clang, tension builds in waves but stays restrained, a sudden hush at about fifty seconds that holds a questioning chord, then a busier second half with tremolo strings and urgent percussion, ends on a held dark unresolved chord, 104 BPM, 4/4, C minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Tense 1930s Depression riot: low piano ostinato, muted snare, pizzicato footsteps, muted trumpet stabs, a distant fire bell; restrained waves.",
+   "good_part": "Hush (questioning chord) at ~60 s; builds ~85 s and ~130 s. Cold open used it from 31 s so the hush landed under the driving question.",
+   "used_in": [
+    "Trick-or-Treating Was a Bribe"
+   ]
+  },
+  {
+   "canonical": "hb_coffin_ships",
+   "md5": "f3c268cecd95742bf6df815869bec988",
+   "duration_s": 120.1,
+   "integrated_lufs": -22.12,
+   "true_peak_dbtp": -9.4,
+   "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
+   "generator": "Suno",
+   "prompt": "Ireland's Great Famine and the Atlantic crossing of the 1840s, a slow Irish air, grave and humane, low whistle carrying a sorrowful melody over a cello drone, sparse harp notes, the sound of a long sea voyage in slow swaying strings, no melodrama, in the second half a cautious, hopeful lift as the ships reach America, a solo fiddle taking the melody, ends on an open chord that is neither sad nor happy, 64 BPM, 3/4, D minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Grave Irish air for the Great Famine and the Atlantic crossing: low whistle over a cello drone, sparse harp, swaying strings; a cautious hopeful lift with solo fiddle.",
+   "good_part": "Grave first ~60 s; the hopeful lift in the second half (the ships reach America).",
+   "used_in": [
+    "Trick-or-Treating Was a Bribe"
+   ]
+  },
+  {
+   "canonical": "hb_mischief_rag",
+   "md5": "897ae97146456d23ce4ed93947cc26c0",
+   "duration_s": 119.9,
+   "integrated_lufs": -22.63,
+   "true_peak_dbtp": -7.41,
+   "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
+   "generator": "Suno",
+   "prompt": "sly mischievous American prank night around 1900, a sneaky ragtime cakewalk on an upright saloon piano, staccato bassoon and plucked double bass tiptoeing, clarinet slides, wood block and a soft cymbal tap, playful and conspiratorial, like kids sneaking through a farmyard at night, a stop-time break where everything freezes for a beat, then the tune bounces back, ends with a cheeky final chord, 100 BPM, 2/4; documentary, restrained, space for narrator, instrumental",
+   "mood": "Sly ragtime cakewalk for the prank era (~1900): upright piano, staccato bassoon, plucked bass, clarinet slides, wood block; a stop-time break.",
+   "good_part": "Mischievous from the top; steady all through.",
+   "used_in": [
+    "Trick-or-Treating Was a Bribe"
+   ]
+  },
+  {
+   "canonical": "hb_oiche_shamhna",
+   "md5": "f4d5f64cff016154cb320e2dfbdeda5f",
+   "duration_s": 150.4,
+   "integrated_lufs": -20.67,
+   "true_peak_dbtp": -7.6,
+   "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
+   "generator": "Suno",
+   "prompt": "upbeat, happy, cheerful, festive, celtic pub, irish pub, drinking song, reel, major key, bright, uplifting, new age, enya, riverdance",
+   "mood": "Haunted Irish Halloween night (darker version 2A): slow eerie air on low whistle, ghostly pipe drones, fiddle harmonics, slow bodhrán heartbeat; a sinister faster middle.",
+   "good_part": "Builds steadily; fullest ~120–135 s (the finale reprise put it under \"every fix became the tradition… pay up\"); its own outro closed the end screen.",
+   "used_in": [
+    "Trick-or-Treating Was a Bribe"
+   ]
+  },
+  {
+   "canonical": "hb_suburbs_swing",
+   "md5": "fa8f3db96a5c15a8c82cc4deb047b246",
+   "duration_s": 96.4,
+   "integrated_lufs": -21.91,
+   "true_peak_dbtp": -6.89,
+   "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
+   "generator": "Suno",
+   "prompt": "cheerful late 1940s American postwar optimism with a spooky wink, a small swing combo, walking upright bass, brushed snare, muted trumpet and clarinet playing a bouncy tune, a celesta and vibraphone adding a Halloween sparkle, playful and bright like kids running door to door in brand new suburbs, a short spooky minor turn in the middle, then back to bright, ends with a cheerful button, 128 BPM, 4/4, F major; documentary, restrained, space for narrator, instrumental",
+   "mood": "Postwar 1950s swing with a spooky wink: walking bass, brushes, muted trumpet and clarinet, celesta and vibraphone sparkle; a short minor turn.",
+   "good_part": "Bright and steady; used ~45 s under the baby-boom suburbs.",
+   "used_in": [
+    "Trick-or-Treating Was a Bribe"
+   ]
   }
  ]
 }
