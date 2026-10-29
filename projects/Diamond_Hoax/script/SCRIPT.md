@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 9 · **2,480 words** · about **15:47 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 10 · **2,479 words** · about **15:47 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -24,8 +24,8 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 5:20 | The Long Way Around | 290 | Act II · escalation |
 | 7:07 | Diamond Fever | 170 | Act II · escalation |
 | 8:11 | The Anthills | 370 | Act III · climax |
-| 10:28 | The Dominoes (+ plug) | 437 | Act III · climax (plug after the climax) |
-| 13:09 | Where the Money Went | 375 | Act IV · fallout + takeaway |
+| 10:28 | The Dominoes (+ plug) | 436 | Act III · climax (plug after the climax) |
+| 13:08 | Where the Money Went | 375 | Act IV · fallout + takeaway |
 
 ---
 
@@ -185,7 +185,7 @@ So if you know a crash is coming, and nobody else does, you can get rich off it.
 ---
 
 ## 10:28 | The Dominoes (+ plug)
-*`ch08_not_enough_money.txt`* · 437 words · Act III · climax
+*`ch08_not_enough_money.txt`* · 436 words · Act III · climax
 
 King had a problem. And it was a lot bigger than one bad stock.
 
@@ -213,7 +213,7 @@ According to one of King's own men, a director suggested King might wait a littl
 
 "There is not enough money in the Bank of California to make me delay the publication a single hour."
 
-[pause] On November 26th, 1872, the story hit the papers. One San Francisco paper called it "the most gigantic and barefaced swindle of the age."
+[pause] On November 26th, 1872, the story hit the papers. One newspaper called it "one of the most gigantic and barefaced swindles ever perpetrated."
 
 The dominoes stayed standing. For now.
 
@@ -223,7 +223,7 @@ The dominoes stayed standing. For now.
 
 ---
 
-## 13:09 | Where the Money Went
+## 13:08 | Where the Money Went
 *`ch09_paid_for_dirt.txt`* · 375 words · Act IV · fallout + takeaway
 
 First, the money. Most of it went home with the cousins, and most of it never came back.
@@ -234,7 +234,7 @@ He settled one lawsuit for about four million dollars, then became a banker. [wr
 
 And John Slack? You may have heard that he vanished. He didn't. He moved to a small town in New Mexico and became the local undertaker. He died there in 1896, a small-town undertaker with a small-town bank account.
 
-[serious] And Ralston? He reportedly lost about seven million dollars on the diamond field. But remember those dominoes? Three years later, his bank got caught in other bad mining bets. Word spread, and people lined up to pull their money out. At two thirty-five in the afternoon, the Bank of California ran out of cash and closed its doors. The next day, Ralston went for his usual swim in San Francisco Bay, and drowned. To this day, nobody knows if it was an accident.
+[serious] And Ralston? He reportedly lost about seven million dollars on the diamond field. But remember those dominoes? Three years later, his bank got caught in other bad mining bets. Word spread, and people lined up to pull their money out. Just before three in the afternoon, the Bank of California ran out of cash and closed its doors. The next day, Ralston went for his usual swim in San Francisco Bay, and drowned. To this day, nobody knows if it was an accident.
 
 [thoughtful] So let's go back to the question. How do two cousins get the richest men in America to pay millions for dirt?
 
@@ -313,7 +313,7 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 - Tiffany, Oct 1871: "Gentlemen, these are beyond question precious stones of enormous value."
 - J. F. Berry, New York diamond dealer, Nov 1872: "What a chance to sell short on the stock."
 - Clarence King, Nov 1872 (as Samuel Emmons remembered it): "There is not enough money in the Bank of California to make me delay the publication a single hour."
-- *San Francisco Chronicle*, Nov 1872: "the most gigantic and barefaced swindle of the age."
+- *Evening Star* (Washington), Nov 26, 1872: "one of the most gigantic and barefaced swindles ever perpetrated." (page: `public/img/ch08/evening_star_1872-11-26_barefaced_swindle*`, swipe boxes in its JSON)
 - Philip Arnold (reportedly): "a good Henry rifle."
 
 **Callbacks:** the bag (ch 1 → ch 2 → ch 3); the anthills (ch 1 → ch 5 → ch 7); the Bank of California (ch 2 "too late for the bank" → ch 8 "not enough money in the Bank of California"); Janin paid in stock (ch 5 → the plug in ch 6 → the answer in ch 9); the H1 picture (frame 0 → the last line).
@@ -462,12 +462,12 @@ Still open (your call):
 | King rode 45 miles, San Francisco Nov 10, night at Janin's hotel, read report next morning | Smithsonian | |
 | "Not enough money" quote | Emmons's later account, via the Smithsonian | "According to one of King's own men" |
 | Company's own man (David Colton) agreed; papers Nov 26, 1872 | Smithsonian; EARTH Magazine | |
-| Chronicle quote | Smithsonian | |
+| Newspaper quote | The Smithsonian quotes the *Chronicle* as "the most gigantic and barefaced swindle of the age", but no surviving page with that wording was found. The *Evening Star*, Nov 26, 1872, has "one of the most gigantic and barefaced swindles ever perpetrated" (archival search, Oct 29) | Narration changed to the *Evening Star* wording ("One newspaper called it…"), so the page on screen matches the words |
 | Diamond fever: how-to articles, prospectors across AZ, NM, UT, WY, CO | EARTH Magazine / Wikipedia: by Oct 1872 papers including the *Laramie Independent* ran "Lessons in Diamond Mining"; a brief prospecting craze in those five places | "People called it diamond fever" (the Smithsonian uses the phrase) |
 | Dominoes scenario (insiders → crash → bank run → everyone) | A hypothetical, framed "Here's how it could have gone" | Grounded in the director's suggestion (Emmons via the Smithsonian), Ralston's role, and the real 1873 and 1875 crashes |
 | "One of the company's biggest backers was William Ralston… the biggest bank in the West" | Ralston was among the main backers and reportedly lost about $250,000; the Bank of California was the leading bank of the Pacific coast | "one of the biggest backers" |
 | 1873: "one big bank in New York went under after bad railroad bets… the Stock Exchange shut down for ten days" | Panic of 1873: Jay Cooke & Company failed Sept 18, 1873 (Northern Pacific bonds); the NYSE closed Sept 20 for ten days | No name in the narration (on screen: Jay Cooke & Co.) |
-| 1875: Bank of California run, closed at 2:35 pm; Ralston drowned the next day; accident or suicide unknown | Closed Aug 26, 1875 (one account: out of cash at 2:35 pm); Ralston drowned Aug 27 on his daily swim; cause still debated (HISTORY.com, FoundSF, Clio). Some dispatches said the same evening | "The next day"; "nobody knows if it was an accident". The bank reopened Oct 2, 1875 (not in the narration) |
+| 1875: Bank of California run, closed "just before three in the afternoon" (was "2:35"; the 1875 papers say 2:45, one 2:40); Ralston drowned the next day; accident or suicide unknown | Closed Aug 26, 1875 (one account: out of cash at 2:35 pm); Ralston drowned Aug 27 on his daily swim; cause still debated (HISTORY.com, FoundSF, Clio). Some dispatches said the same evening | "The next day"; "nobody knows if it was an accident". The bank reopened Oct 2, 1875 (not in the narration) |
 | Ralston "reportedly lost about $250,000" | Smithsonian ("widely reported") | "reportedly". One source says Ralston repaid investors $80,000 each: **not used** |
 | Arnold indicted, never tried; "Henry rifle" | WyoHistory, Smithsonian | "reportedly" |
 | Settled one lawsuit for $150,000; became a banker; shootout 1878; shoulder; pneumonia ~6 months later | Smithsonian (William Lent settlement) | Some sources give his death as 1879; script gives no year |
