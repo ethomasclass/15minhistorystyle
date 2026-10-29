@@ -14,7 +14,7 @@ Then a stranger rode up. A diamond dealer from New York, out hunting for the fie
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one and sell it right away: a thousand dollars in your pocket. Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one from somebody who owns it. Yes, you can borrow a share, like borrowing a cup of sugar, as long as you give one back later. You sell it right away: a thousand dollars in your pocket. Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference.
 
 So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 

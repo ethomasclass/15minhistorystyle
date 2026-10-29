@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 8 · **2,423 words** · about **15:26 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 8 · **2,448 words** · about **15:35 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -23,9 +23,9 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 4:10 | The Tiffany Test | 178 | Act II · escalation (ends on the midpoint twist) |
 | 5:17 | The Long Way Around | 290 | Act II · escalation |
 | 7:04 | Diamond Fever | 176 | Act II · escalation |
-| 8:10 | The Anthills | 337 | Act III · climax |
-| 10:15 | The Dominoes (+ plug) | 429 | Act III · climax (plug after the climax) |
-| 12:53 | Where the Money Went | 362 | Act IV · fallout + takeaway |
+| 8:10 | The Anthills | 362 | Act III · climax |
+| 10:24 | The Dominoes (+ plug) | 429 | Act III · climax (plug after the climax) |
+| 13:02 | Where the Money Went | 362 | Act IV · fallout + takeaway |
 
 ---
 
@@ -158,7 +158,7 @@ That's move five: *the rush*. Once everybody important is buying in, nobody want
 ---
 
 ## 8:10 | The Anthills
-*`ch07_the_anthills.txt`* · 337 words · Act III · climax
+*`ch07_the_anthills.txt`* · 362 words · Act III · climax
 
 A train in California, that fall. In one seat, Henry Janin is showing off his diamonds. And a few seats away are men from a government survey, geologists who'd spent five years mapping the West.
 
@@ -176,7 +176,7 @@ Then a stranger rode up. A diamond dealer from New York, out hunting for the fie
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one and sell it right away: a thousand dollars in your pocket. Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one from somebody who owns it. Yes, you can borrow a share, like borrowing a cup of sugar, as long as you give one back later. You sell it right away: a thousand dollars in your pocket. Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference.
 
 So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
@@ -184,7 +184,7 @@ So if you know a crash is coming, and nobody else does, you can get rich off it.
 
 ---
 
-## 10:15 | The Dominoes (+ plug)
+## 10:24 | The Dominoes (+ plug)
 *`ch08_not_enough_money.txt`* · 429 words · Act III · climax
 
 King had a problem. And it was a lot bigger than one bad stock.
@@ -223,7 +223,7 @@ The dominoes stayed standing. For now.
 
 ---
 
-## 12:53 | Where the Money Went
+## 13:02 | Where the Money Went
 *`ch09_paid_for_dirt.txt`* · 362 words · Act IV · fallout + takeaway
 
 First, the money. It didn't go back to the investors. Ralston alone reportedly lost about seven million dollars.
@@ -445,7 +445,7 @@ Still open (your call):
 | A dozen rubies per diamond; boot prints; "end of a stick"; 10-foot trench | Smithsonian | "One of King's men figured" |
 | The cut-mark diamond in the original pitch | Not in Smithsonian or Wikipedia; one popular source | **Left out** |
 | Berry quote | Smithsonian | |
-| Short-selling example ($1,000 → $20) | Illustrative numbers, not a record; short sales of mining stock were common in 1870s San Francisco and New York | Framed as "Say a share sells for $40" |
+| Short-selling example ($1,000 → $20), "you can borrow a share… as long as you give one back later" | Illustrative numbers, not a record; borrowing shares to sell short is how short selling works (then and now: you return an equal number of shares later, plus a fee today); short sales of mining stock were common in 1870s San Francisco and New York | Framed as "Say a share sells for $40" |
 | Staking a claim: stakes at the corners and a posted notice | Standard practice under U.S. mining law and custom (the 1872 law requires a claim's boundaries be marked on the ground) | Plain description |
 | King rode 45 miles, San Francisco Nov 10, night at Janin's hotel, read report next morning | Smithsonian | |
 | "Not enough money" quote | Emmons's later account, via the Smithsonian | "According to one of King's own men" |
