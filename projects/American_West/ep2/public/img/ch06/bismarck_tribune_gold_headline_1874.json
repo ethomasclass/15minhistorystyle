@@ -1,0 +1,53 @@
+{
+ "size": [
+  2600,
+  2765
+ ],
+ "paper": "The Bismarck tribune (Bismarck, D.T. [N.D.]), August 12, 1874",
+ "url": "https://www.loc.gov/resource/sn84022127/1874-08-12/ed-1/",
+ "sp": "1",
+ "phrases": {
+  "EXPEDITION HEARD FROM": [
+   [
+    1884.1,
+    657.5,
+    129.1,
+    57.8
+   ],
+   [
+    884.7,
+    941.3,
+    620.7,
+    96.3
+   ]
+  ],
+  "Gold and Silver in Immense Quantities": [
+   [
+    881.0,
+    1512.6,
+    625.1,
+    96.3
+   ],
+   [
+    977.3,
+    1593.1,
+    435.2,
+    96.3
+   ]
+  ],
+  "Custer at the Black Hills on the 2d inst": [
+   [
+    882.2,
+    1067.5,
+    622.1,
+    96.3
+   ],
+   [
+    1059.3,
+    1148.0,
+    277.1,
+    96.5
+   ]
+  ]
+ }
+}

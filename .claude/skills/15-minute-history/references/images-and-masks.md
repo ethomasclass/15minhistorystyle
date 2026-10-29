@@ -251,3 +251,14 @@ the first try.
 - **AI props** (photoreal period objects on white, `gemini-3-pro-image`, 1:1): `tools/prop_cut.py` cuts them out to WebP; `Prop`
   (`src/kit/prop.tsx`) shows them B&W on the desk with an optional coral tint and teal outline. No source tag, never presented as a
   specific real artifact.
+
+## 10. Portraits are bust cut-outs; white props on black (West Ep 2, Oct 2026)
+
+- **Every portrait of one person is a full bust cut-out**: head and shoulders only, cut out of the page (no print border, no photo
+  background, no circle mount, no oval or poster frame), on the desk with a soft contact shadow. `tools/mask.py` with
+  `u2net_human_seg` (or `isnet-general-use`), crop to the bust, hand-fix the edge, check with `tools/mask_closeup.py`. The beat's
+  subject gets the coral tint and teal trace; anyone else is plain black and white; quiet sections have no coral. Group photos and
+  scenes stay as prints; photos of Native people stay plain prints, never cut out.
+- **AI props on white** mask well with `tools/mask_white.py` (anything not paper-white in the clean original, small holes filled,
+  real openings kept). **White props (snow, paper, bone) go on black instead** (`tools/props.py` `ON_BLACK`, then
+  `tools/mask_white.py --bg=black`): snow drawn on white gave a ragged edge the user caught.

@@ -13,6 +13,14 @@ src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mask.py')).
 import ast
 node = next(n for n in ast.parse(src).body if isinstance(n, ast.Assign) and getattr(n.targets[0], 'id', '') == 'JOBS')
 JOBS = ast.literal_eval(node.value)
+# the per-chapter jobs too (tools/mask_jobs/*.py), which mask.py merges in at run time
+import glob as _glob
+for _p in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mask_jobs', '*.py'))):
+    for _n in ast.parse(open(_p).read()).body:
+        if isinstance(_n, ast.Assign) and getattr(_n.targets[0], 'id', '') == 'JOBS':
+            JOBS.update(ast.literal_eval(_n.value))
+        elif isinstance(_n, ast.Expr) and isinstance(_n.value, ast.Call) and getattr(_n.value.func, 'attr', '') == 'update' and _n.value.args:
+            JOBS.update(ast.literal_eval(_n.value.args[0]))
 tiles = []
 for n in names:
     im = Image.open(os.path.join(PUB, JOBS[n][0])).convert('RGB')

@@ -206,3 +206,8 @@ Do all of these before sending the user anything. Each one caught real problems 
     shows black bars (ch02's Capitol did, below that).
   - **One series recurring card** (the two-views card filled across ch06–07) keeps its wording identical wherever it returns.
 
+  - **Handwriting needs vertical room** (the user caught it on the West map, Oct 2026): the hand font's descenders (g, y, p)
+    reach far below the line, so a write-on `clipPath: inset(-20% … -20% …)` cut them off. The kit now uses `-60%` top and
+    bottom; keep that in any new write-on. And **anything standing upright on a tilted 3D plane must sit wholly above its foot**
+    (`bottom: 2`, not `top: -0.66em`): the part below the anchor sinks under the plane and the map hides it (`MPin` labels and
+    dots did this in Ep 1).

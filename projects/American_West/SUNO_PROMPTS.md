@@ -162,41 +162,125 @@ Gilded Age swagger, smug and well-fed, slow strutting tempo, tuba and low brass 
 *Exclude for this one:* the normal list plus `horror, suspense thriller, eerie, dissonant, drone, string tremolo, jump scare, dark ambient, cinematic trailer`.
 
 
-## Later episodes (whenever you like)
+## Episode 2 cues (*Cheap as Dirt*; make these three next)
 
 ### 7. `aw_long_drive.mp3`: the trail
-*Used in:* Ep 2 (the Long Drive)
+*Used in:* Ep 2 ch 3 (the Long Drive, ~1:35) and ch 5 after the myth beat (~1:05, from later in the cue)  
+*Length:* **at least 2:45** (I use two different stretches of it)
 
 ```
-1870s cattle drive across open Texas grassland, loping two-beat horse gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering in the distance, guitarrón bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme; documentary, restrained, space for narrator, instrumental
+1870s cattle drive across open Texas grassland, a loping two-beat horse-gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering far off, guitarrón bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme, 92 BPM, 2/4 feel, G major with a modal edge; documentary, restrained, space for narrator, instrumental
 ```
 
-### 8. `aw_boomtown.mp3`: the rush
-*Used in:* Ep 2 (Black Hills gold, Deadwood)
+*Lyrics box (structure tags only):*
 
 ```
-1870s mining boomtown rush, restless excited energy, upright piano with a slightly out-of-tune saloon edge playing a busy figure, pizzicato strings scurrying, clattering wooden percussion, fiddle runs, a feverish build like a crowd arriving, then in the last third the energy turns hollow and uneasy with low strings and a single sour chord; documentary, restrained, space for narrator, instrumental
+[Instrumental]
+[Intro: hand drum and upright bass, the loping gait, alone]
+[Verse: nylon guitar enters with the trail melody]
+[Verse: solo fiddle answers the guitar]
+[Break: harmonica far off, drum and bass only]
+[Verse: guitarrón bass joins, a little fuller, still steady]
+[Verse: fiddle and guitar together, the melody once more]
+[Outro: the gait slows, guitar alone, open chord]
+[End]
 ```
 
-### 9. `aw_prairie_hymn.mp3`: the homestead
+### 8. `aw_boomtown.mp3`: the rush, then the hollow (two takes; I join them)
+*Used in:* Ep 2 ch 6 from "Newspapers did the rest" through ch 7. The fall-off lands on ch 7's "Working for wages. Just
+underground."  
+**Why two takes:** Suno won't fall off at a set time inside one song (it keeps the energy up, like the legend cue did). So make the
+rush and the hollow as **two separate songs**; I join them with `tools/collapse.py` (the rush slows and stops, a beat of silence, then
+the hollow), placed so the stop lands exactly on "Just underground." Same method as `aw_legend_sours`.
+
+**8a. `aw_boomtown_rush.mp3`** · *Length:* **at least 2:15**, no ending needed (I cut it)
+(v2: the first take came out modern, with a drum kit and beats. This version is acoustic chamber music with period instruments only, and
+the rhythm comes from the strings and piano, not drums.)
+
+```
+acoustic period film score for a documentary about an 1876 gold rush, played by a small chamber ensemble on 19th-century instruments only: a slightly out-of-tune upright parlor piano playing a busy restless figure, string quartet playing fast scurrying pizzicato and short spiccato, a solo fiddle with quick folk runs, a concertina, light wooden taps and spoons for rhythm, no drum kit, acoustic and dry, crowded and feverish like a camp filling with prospectors, keeps building, no slow section, 120 BPM, 2/4 feel, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: busy parlor piano figure, alone, acoustic]
+[Verse: string pizzicato scurries in, wooden taps]
+[Build: fiddle runs, concertina, more crowded]
+[Main: feverish chamber ensemble, restless]
+[Build: all the acoustic instruments at once, still rising]
+[Main: feverish, crowded, restless]
+[Build: still rising, no letup]
+```
+
+*Exclude styles (paste this instead of the usual list for 8a):*
+
+```
+drum kit, drums, snare, kick drum, hi-hat, drum machine, 808, beat, trap, hip hop, EDM, electronic, synth, pad, bass guitar, electric guitar, distortion, modern production, cinematic trailer, epic, braam, lo-fi, pop, rock, vocals, choir, humming, whistling, banjo, slow, ballad, fade out
+```
+
+**8b. `aw_boomtown_hollow.mp3`** · *Length:* **at least 1:00**
+
+```
+the empty aftermath of a gold rush, hollow and uneasy, no rhythm, no percussion, low sustained strings and a dark cello drone, one sour unresolved piano chord that rings and decays, a lonely detuned saloon piano note now and then, the feeling of a played-out mining camp and men going underground for wages, slow and bleak, free time, about 56 BPM, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: one sour piano chord, ringing out]
+[Verse: low sustained strings, cello drone]
+[Verse: a single detuned piano note, far apart]
+[Outro: drone thins out, unresolved]
+[End]
+```
+
+*Exclude styles (add to the usual list):* `drums, percussion, upbeat, fast, hopeful, major key`
+
+If a take of 8a happens to drop out on its own somewhere, tell me the time; it may save the join.
+
+### 9. `aw_white_cold.mp3`: winter as the enemy
+*Used in:* Ep 2 ch 1 (under Russell's steer, ~1:15) and ch 9 (the Big Die-Up, ~1:40, the quiet chapter); later Ep 3 (the
+Children's Blizzard)  
+*Length:* **at least 3:00** (I use the opening for ch 1 and a different stretch for ch 9)
+
+```
+brutal Great Plains winter blizzard, cold glassy high string harmonics, a low sustained drone like wind across empty land, a few sparse frozen piano notes, slow and still, no melody to speak of, a slow swell of icy dissonance in the middle then emptiness again, bleak and still, no percussion, ends on near silence, free time, about 50 BPM; documentary, restrained, space for narrator, instrumental
+```
+
+*Lyrics box (structure tags only):*
+
+```
+[Instrumental]
+[Intro: wind-like low drone, alone]
+[Verse: glassy high string harmonics over the drone]
+[Verse: a few sparse piano notes, far apart]
+[Build: slow swell of icy dissonance]
+[Break: back to the bare drone]
+[Verse: harmonics and single piano notes, very still]
+[Outro: thinning to near silence]
+[End]
+```
+
+**Reused in Ep 2 (no new takes needed):** `aw_iron_horse` (ch 2, "That's where the railroad comes in"), `aw_legend_sours` (ch 5's
+myth beat: the turn lands on "none of those"), `aw_promise_theme` (ch 10, the ledger to the end screen).
+
+## Later episodes (whenever you like)
+
+### 10. `aw_prairie_hymn.mp3`: the homestead
 *Used in:* Ep 3 (homesteads)
 
 ```
 1870s Great Plains homestead, a plain hymn-like melody on pump organ and solo violin over wide open sustained strings, a feeling of endless flat land and big sky, hopeful but austere and hard-working, simple and dignified, a slow gentle pulse, in the last third the wind seems to rise with a low drone and the hope thins out; documentary, restrained, space for narrator, instrumental
 ```
 
-### 10. `aw_exodus.mp3`: the leaving
+### 11. `aw_exodus.mp3`: the leaving
 *Used in:* Ep 3 (the Exodusters)
 
 ```
 1879 a journey toward freedom, slow resolute walking pulse, warm upright piano and solo cello carrying a melody in the spirit of a spiritual, soft strings and a low pump organ joining, building steady conviction and hope without triumph, a moment of doubt in the middle with sparse low strings, then the walk resumes, ends warm but unresolved; documentary, restrained, space for narrator, instrumental
-```
-
-### 11. `aw_white_cold.mp3`: winter as the enemy
-*Used in:* Ep 2–3 (the blizzards)
-
-```
-brutal Great Plains winter blizzard, cold glassy high string harmonics, a low sustained drone like wind across empty land, sparse frozen piano notes, slow and still, no melody to speak of, a slow swell of icy dissonance in the middle then emptiness again, bleak and quiet, no percussion, ends on near silence; documentary, restrained, space for narrator, instrumental
 ```
 
 ### 12. `aw_treaty.mp3`: the council
@@ -215,6 +299,8 @@ a single short dramatic stinger for a date appearing on screen, one deep low dru
 ```
 
 ## Channel jingle (Chunk History), for the intro and the chapter breaks
+
+**Retired (Oct 2026):** the branding sound is clicks and page turns only, no music (the user's call); see `HANDOFF.md`. Kept for the record.
 
 What the intro does, so the music can land on it: six teal blocks fly in and knock into place (0.5–2.5 s), the **coral quarter
 swings in like a minute hand and locks at 2.80 s**, then the two word-slabs **CHUNK** (3.60 s) and **HISTORY** (3.95 s) slam in;

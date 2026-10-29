@@ -25,7 +25,7 @@ The repo root (`<this-skill>/../../..`) holds the channel's shared materials. Us
 
 | Folder | What's there | Use it when |
 |---|---|---|
-| `music/` | Every music cue made so far (38), with prompts, length, loudness and where each was used | Planning `MUSIC.md`: reuse first |
+| `music/` | Every music cue made so far (81), with prompts, length, loudness and where each was used | Planning `MUSIC.md`: reuse first |
 | `sfx/` | Every sound effect, with volumes | A scene needs a sound the template doesn't ship |
 | `brand/` | Logo files, palette, fonts, every past thumbnail (the chosen ones marked) | Thumbnails, channel art, anything outside a video |
 | `techniques/` | Every on-screen technique by purpose, look books of each video, and `components/` code not yet in the template | Planning scenes; reaching for something new |

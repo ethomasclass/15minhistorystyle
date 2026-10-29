@@ -213,7 +213,7 @@ export const Note: React.FC<{text: string; x: number; y: number; size?: number; 
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp);
   return (
     <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: size * hand.scale, color: color ?? accent, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap',
-      textShadow: '0 0 2px #111, 0 0 4px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)', clipPath: `inset(-20% ${(1 - p) * 100}% -20% -5%)`}}>{text}</div>
+      textShadow: '0 0 2px #111, 0 0 4px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)', clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`}}>{text}</div>
   );
 };
 

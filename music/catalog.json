@@ -2396,6 +2396,136 @@
    "used_in": [
     "Trick-or-Treating Was a Bribe"
    ]
+  },
+  {
+   "canonical": "aw_long_drive",
+   "md5": "c83977d52f385ff98c25fa0530490a93",
+   "duration_s": 189.62,
+   "integrated_lufs": -21.2,
+   "true_peak_dbtp": -7.3,
+   "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "1870s cattle drive across open Texas grassland, a loping two-beat horse-gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering far off, guitarrón bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme, 92 BPM, 2/4 feel, G major with a modal edge; documentary, restrained, space for narrator, instrumental",
+   "mood": "The cattle trail: loping two-beat gait on hand drum and upright bass, nylon guitar and fiddle trading a plain trail melody, harmonica far off; dusty, steady, a little lonely.",
+   "good_part": "Even all the way through; it thins in the last 15 s.",
+   "notes": "Reuse for any overland journey: the Oregon Trail, the Pony Express, a migration on foot.",
+   "used_in": [
+    {
+     "video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+     "where": "Ch03 The Long Drive; Ch05 after the myth beat",
+     "bed_volume": "bed(cue, 13)"
+    }
+   ],
+   "alias_names": [
+    "aw_long_drive.mp3"
+   ],
+   "group": "Journey, work and the land",
+   "file": "cues/aw_long_drive.mp3"
+  },
+  {
+   "canonical": "aw_white_cold",
+   "md5": "e33fb0a86edf1a62e329fd21c3ca647f",
+   "duration_s": 187.32,
+   "integrated_lufs": -21.1,
+   "true_peak_dbtp": -7.2,
+   "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "brutal Great Plains winter blizzard, cold glassy high string harmonics, a low sustained drone like wind across empty land, a few sparse frozen piano notes, slow and still, no melody to speak of, a slow swell of icy dissonance in the middle then emptiness again, bleak and still, no percussion, ends on near silence, free time, about 50 BPM; documentary, restrained, space for narrator, instrumental",
+   "mood": "Winter as the enemy: glassy string harmonics over a wind-like drone, sparse frozen piano notes; no melody, no percussion.",
+   "good_part": "Even from 0:05; the stillest stretch is about 2:15-2:35, then it swells again.",
+   "notes": "Reuse for the Donner Party, Valley Forge, the Children's Blizzard (Ep 3), any disaster where weather is the villain.",
+   "used_in": [
+    {
+     "video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+     "where": "Ch01 cold open (under Russell's steer); Ch09 The Big Die-Up",
+     "bed_volume": "bed(cue, 13)"
+    }
+   ],
+   "alias_names": [
+    "aw_white_cold.mp3"
+   ],
+   "group": "Grave, quiet and grieving",
+   "file": "cues/aw_white_cold.mp3"
+  },
+  {
+   "canonical": "aw_boomtown_rush",
+   "md5": "3a6355a05002dfdbba324938b1db471b",
+   "duration_s": 137.02,
+   "integrated_lufs": -21.9,
+   "true_peak_dbtp": -6.6,
+   "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "acoustic period film score for a documentary about an 1876 gold rush, played by a small chamber ensemble on 19th-century instruments only: a slightly out-of-tune upright parlor piano playing a busy restless figure, string quartet playing fast scurrying pizzicato and short spiccato, a solo fiddle with quick folk runs, a concertina, light wooden taps and spoons for rhythm, no drum kit, acoustic and dry, crowded and feverish like a camp filling with prospectors, keeps building, no slow section, 120 BPM, 2/4 feel, A minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "A gold rush on period instruments: busy parlor piano, scurrying pizzicato, fiddle runs, concertina, wooden taps; feverish and crowded, never lets up (acoustic, no drum kit).",
+   "good_part": "Even all the way through; no ending (made to be cut).",
+   "notes": "Half of aw_boomtown; on its own, any boom or rush: the Gold Rush, land runs, oil strikes, a speculation mania.",
+   "used_in": [
+    {
+     "video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+     "where": "(joined into aw_boomtown)",
+     "bed_volume": "bed(cue, 13)"
+    }
+   ],
+   "alias_names": [
+    "aw_boomtown_rush.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/aw_boomtown_rush.mp3"
+  },
+  {
+   "canonical": "aw_boomtown_hollow",
+   "md5": "ca51cb8f616e422318d78d766e330535",
+   "duration_s": 70.58,
+   "integrated_lufs": -23.0,
+   "true_peak_dbtp": -8.2,
+   "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "the empty aftermath of a gold rush, hollow and uneasy, no rhythm, no percussion, low sustained strings and a dark cello drone, one sour unresolved piano chord that rings and decays, a lonely detuned saloon piano note now and then, the feeling of a played-out mining camp and men going underground for wages, slow and bleak, free time, about 56 BPM, A minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "The empty aftermath: low strings and a cello drone, one sour piano chord, a lone detuned saloon note; no rhythm.",
+   "good_part": "From 0:00; fades out from about 1:00.",
+   "notes": "Half of aw_boomtown; on its own, any 'after the boom' moment: a ghost town, a bust, the morning after.",
+   "used_in": [
+    {
+     "video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+     "where": "(joined into aw_boomtown)",
+     "bed_volume": "bed(cue, 13)"
+    }
+   ],
+   "alias_names": [
+    "aw_boomtown_hollow.mp3"
+   ],
+   "group": "Grave, quiet and grieving",
+   "file": "cues/aw_boomtown_hollow.mp3"
+  },
+  {
+   "canonical": "aw_boomtown",
+   "md5": "fc6900d3ef43f7918fb1593dfed09422",
+   "duration_s": 172.04,
+   "integrated_lufs": -22.4,
+   "true_peak_dbtp": -6.5,
+   "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+   "generator": "Suno + collapse.py",
+   "model": "Suno",
+   "prompt": "Two Suno takes joined with tools/collapse.py: aw_boomtown_rush to 99.8 s, a 1.4 s tape stop, 0.25 s of silence, then aw_boomtown_hollow.",
+   "mood": "The rush that runs out: the acoustic boomtown rush slows and stops at 101.2 s, a beat of silence, then the hollow aftermath.",
+   "good_part": "The stop is at 101.2 s (tape stop from 99.8 s); place it so the stop lands on the line that deflates the boom.",
+   "notes": "The made-to-measure version for Ep 2 (the stop lands on 'Just underground.'). For another video, rejoin the two halves with collapse.py at a new cut.",
+   "used_in": [
+    {
+     "video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
+     "where": "Ch06 from 'Newspapers did the rest'; Ch07 to the plug (the stop lands on 'Just underground.')",
+     "bed_volume": "bed(cue, 13)"
+    }
+   ],
+   "alias_names": [
+    "aw_boomtown.mp3"
+   ],
+   "group": "Light, wry and comic",
+   "file": "cues/aw_boomtown.mp3"
   }
  ]
 }

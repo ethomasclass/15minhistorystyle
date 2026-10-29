@@ -1,0 +1,6 @@
+Video 1  Part A: 11. D, 12. F, 13. B, 14. H, 15. E, 16. A, 17. G, 18. C
+         Part B: 19. B, 20. C, 21. A, 22. B, 23. D, 24. C, 25. B
+Video 2  Part A: 11. C, 12. H, 13. F, 14. D, 15. A, 16. G, 17. B, 18. E
+         Part B: 19. A, 20. B, 21. C, 22. A, 23. C, 24. A, 25. B
+Video 3  Part A: 11. E, 12. C, 13. G, 14. A, 15. H, 16. D, 17. F, 18. B
+         Part B: 19. A, 20. D, 21. B, 22. B, 23. C, 24. B, 25. D

@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History (now Chunk History) so far: **76 cues**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History (now Chunk History) so far: **81 cues, about 148 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -81,6 +81,8 @@ prefix says which video the cue was made for:
 | [`m_apothecary`](cues/m_apothecary.mp3) | 1:08 | -16.2 | Dark whimsy: pizzicato, bassoon, harpsichord, celesta, tick-tock percussion; sneaky and macabre. | Mischievous all through; fullest 40–56 s; ends ~64 s. | When Europe Ate Mummies |
 | [`m_parlor`](cues/m_parlor.mp3) | 1:05 | -16.5 | Victorian parlor waltz: upright piano, music box, clarinet, pizzicato violin; quaint with an eerie edge. | Lively 8–52 s; fades 54 s on. | When Europe Ate Mummies |
 | [`b_caper_40s`](cues/b_caper_40s.mp3) | 1:59 | -16.0 | 1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous. | Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s. | The Balloon War |
+| [`aw_boomtown`](cues/aw_boomtown.mp3) | 2:52 | -22.4 | The rush that runs out: the acoustic boomtown rush slows and stops at 101.2 s, a beat of silence, then the hollow aftermath. | The stop is at 101.2 s (tape stop from 99.8 s); place it so the stop lands on the line that deflates the boom. | Cheap as Dirt |
+| [`aw_boomtown_rush`](cues/aw_boomtown_rush.mp3) | 2:17 | -21.9 | A gold rush on period instruments: busy parlor piano, scurrying pizzicato, fiddle runs, concertina, wooden taps; feverish and crowded, never lets up (acoustic, no drum kit). | Even all the way through; no ending (made to be cut). | Cheap as Dirt |
 
 ### Warm, hopeful and dignified
 
@@ -98,6 +100,7 @@ prefix says which video the cue was made for:
 | [`rc_resolve`](cues/rc_resolve.mp3) ⚠ | 1:00 | -20.1 | Dignified slow hymn on reed harmonium and solo cello: quiet determination rising to a restrained proud swell, then settling. | The swell around 0:20–0:45. | — |
 | [`m_old_world`](cues/m_old_world.mp3) | 1:08 | -15.4 | Renaissance early music: lute, viola da gamba, recorder, soft frame drum; curious, candlelit. | Fullest 14–50 s; thins out in the last 6 s (a natural tail). | When Europe Ate Mummies |
 | [`m_alexandria`](cues/m_alexandria.mp3) | 1:15 | -17.7 | Middle Eastern night-market underscore: oud, ney, qanun, riq/darbuka, string drone, maqam hijaz. | Quiet first ~8 s, then builds; densest 38–60 s. | When Europe Ate Mummies |
+| [`aw_long_drive`](cues/aw_long_drive.mp3) | 3:09 | -21.2 | The cattle trail: loping two-beat gait on hand drum and upright bass, nylon guitar and fiddle trading a plain trail melody, harmonica far off; dusty, steady, a little lonely. | Even all the way through; it thins in the last 15 s. | Cheap as Dirt |
 
 ### Grave (heavy chapters)
 
@@ -114,6 +117,8 @@ prefix says which video the cue was made for:
 | [`rc_brass_dirge`](cues/rc_brass_dirge.mp3) | 1:10 | -11.0 | Distant 1860s saxhorn band and muffled drum, slow funeral march, one restrained swell, fades to near-silence. | The one swell in the middle; the near-silence at the end. | Reconstruction |
 | [`cw_aftermath`](cues/cw_aftermath.mp3) ⚠ | 1:00 | -18.3 | After a battle: slow mournful low cello and a distant muted brass chorale over a soft heartbeat drum; grave and humane. | Starts from near-silence; the music comes in at ~0:08, so start it there or under a pause. | — |
 | [`m_lament_baroque`](cues/m_lament_baroque.mp3) | 1:22 | -15.8 | Baroque lament: viola da gamba and cello, soft chamber organ, descending bass; grave and spare. | Gentle opening, swells 8–16 s and 40–46 s; long quiet tail. | When Europe Ate Mummies |
+| [`aw_white_cold`](cues/aw_white_cold.mp3) | 3:07 | -21.1 | Winter as the enemy: glassy string harmonics over a wind-like drone, sparse frozen piano notes; no melody, no percussion. | Even from 0:05; the stillest stretch is about 2:15-2:35, then it swells again. | Cheap as Dirt |
+| [`aw_boomtown_hollow`](cues/aw_boomtown_hollow.mp3) | 1:10 | -23.0 | The empty aftermath: low strings and a cello drone, one sour piano chord, a lone detuned saloon note; no rhythm. | From 0:00; fades out from about 1:00. | Cheap as Dirt |
 
 ### Tension, dread and dark
 
@@ -962,3 +967,48 @@ Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 9
 | [`hb_suburbs_swing`](cues/hb_suburbs_swing.mp3) | 1:36 | -21.9 | Postwar 1950s swing with a spooky wink: walking bass, brushes, muted trumpet and clarinet, celesta and vibraphone sparkle; a short minor turn. | Bright and steady; used ~45 s under the baby-boom suburbs. | Trick-or-Treating Was a Bribe |
 
 This video also reused `m_1924`, `b_newsreel` and `r_dix`.
+
+### `aw_boomtown`
+
+The rush that runs out: the acoustic boomtown rush slows and stops at 101.2 s, a beat of silence, then the hollow aftermath. 2:52, -22.4 LUFS. Made for *Cheap as Dirt* (West Ep 2): Ch06 from 'Newspapers did the rest'; Ch07 to the plug (the stop lands on 'Just underground.').
+The made-to-measure version for Ep 2 (the stop lands on 'Just underground.'). For another video, rejoin the two halves with collapse.py at a new cut.
+
+```
+Two Suno takes joined with tools/collapse.py: aw_boomtown_rush to 99.8 s, a 1.4 s tape stop, 0.25 s of silence, then aw_boomtown_hollow.
+```
+
+### `aw_boomtown_hollow`
+
+The empty aftermath: low strings and a cello drone, one sour piano chord, a lone detuned saloon note; no rhythm. 1:10, -23.0 LUFS. Made for *Cheap as Dirt* (West Ep 2): (joined into aw_boomtown).
+Half of aw_boomtown; on its own, any 'after the boom' moment: a ghost town, a bust, the morning after.
+
+```
+the empty aftermath of a gold rush, hollow and uneasy, no rhythm, no percussion, low sustained strings and a dark cello drone, one sour unresolved piano chord that rings and decays, a lonely detuned saloon piano note now and then, the feeling of a played-out mining camp and men going underground for wages, slow and bleak, free time, about 56 BPM, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `aw_boomtown_rush`
+
+A gold rush on period instruments: busy parlor piano, scurrying pizzicato, fiddle runs, concertina, wooden taps; feverish and crowded, never lets up (acoustic, no drum kit). 2:17, -21.9 LUFS. Made for *Cheap as Dirt* (West Ep 2): (joined into aw_boomtown).
+Half of aw_boomtown; on its own, any boom or rush: the Gold Rush, land runs, oil strikes, a speculation mania.
+
+```
+acoustic period film score for a documentary about an 1876 gold rush, played by a small chamber ensemble on 19th-century instruments only: a slightly out-of-tune upright parlor piano playing a busy restless figure, string quartet playing fast scurrying pizzicato and short spiccato, a solo fiddle with quick folk runs, a concertina, light wooden taps and spoons for rhythm, no drum kit, acoustic and dry, crowded and feverish like a camp filling with prospectors, keeps building, no slow section, 120 BPM, 2/4 feel, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `aw_long_drive`
+
+The cattle trail: loping two-beat gait on hand drum and upright bass, nylon guitar and fiddle trading a plain trail melody, harmonica far off; dusty, steady, a little lonely. 3:09, -21.2 LUFS. Made for *Cheap as Dirt* (West Ep 2): Ch03 The Long Drive; Ch05 after the myth beat.
+Reuse for any overland journey: the Oregon Trail, the Pony Express, a migration on foot.
+
+```
+1870s cattle drive across open Texas grassland, a loping two-beat horse-gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering far off, guitarrón bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme, 92 BPM, 2/4 feel, G major with a modal edge; documentary, restrained, space for narrator, instrumental
+```
+
+### `aw_white_cold`
+
+Winter as the enemy: glassy string harmonics over a wind-like drone, sparse frozen piano notes; no melody, no percussion. 3:07, -21.1 LUFS. Made for *Cheap as Dirt* (West Ep 2): Ch01 cold open (under Russell's steer); Ch09 The Big Die-Up.
+Reuse for the Donner Party, Valley Forge, the Children's Blizzard (Ep 3), any disaster where weather is the villain.
+
+```
+brutal Great Plains winter blizzard, cold glassy high string harmonics, a low sustained drone like wind across empty land, a few sparse frozen piano notes, slow and still, no melody to speak of, a slow swell of icy dissonance in the middle then emptiness again, bleak and still, no percussion, ends on near silence, free time, about 50 BPM; documentary, restrained, space for narrator, instrumental
+```
