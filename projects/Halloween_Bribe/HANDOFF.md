@@ -1,60 +1,34 @@
-# Handoff: Halloween video (Chunk History)
+# Handoff: Halloween video (Chunk History) · FINISHED
 
-**Working title:** Trick-or-Treating Was a Bribe: The Real History of Halloween
+**Trick-or-Treating Was a Bribe: The Real History of Halloween** · 11:57 · 8 chapters · 1,822 words · Ellis (ElevenLabs voice clone)
 **Branch:** `ccr-5f9195b0-0cknf0` in `ethomasclass/15minhistorystyle` · **Project folder:** `projects/Halloween_Bribe/`
-**Skill:** `.claude/skills/15-minute-history/` (read `SKILL.md`; this project was made from its template)
-**Status (Oct 27, 2026):** packaging explored, script at draft 2, waiting on the user's call about length. Nothing voiced or rendered yet.
+**Status (Oct 28, 2026):** done and delivered. The user called it the best-quality video so far.
 
-## Where things are
-
+## Deliverables (all on the branch)
 | What | File |
 |---|---|
-| Original outline (user's, 10-minute cut) | `OUTLINE.md` |
-| Fact-check of all 10 outline flags, with sources and safe wording | `research/FACT_CHECK.md` |
-| Thumbnail research: competitor scan (16 videos), gaps, feed mock-up results | `research/THUMBNAIL_RESEARCH.md`, `research/THUMBNAIL_GAPS.md` |
-| **Script, draft 2** (8 chapters, 1,822 words, about 11:45 finished) | `script/SCRIPT.md` + `script/ch01…ch08_*.txt`; PDF in `review/Halloween_Bribe_script_draft2.pdf` |
-| Archival images by chapter, with credits | `public/img/ch01…ch06/`, `script/IMAGES.md`, `public/img/credits.json` |
-| Gemini prompts and style (layered silhouette) | `script/GEMINI_PROMPTS.md`, tests in `public/img/gen/tests/` |
-| Thumbnail concepts (code) | `src/ThumbsHalloween.tsx` (registered in `src/Root.tsx`); render with `node tools/thumbs.mjs X2 X3 H3` |
-| Thumbnail renders and sheets | `renders/thumbnails/`, `review/thumbnail_concepts.jpg`, `review/thumbnail_x_concepts.jpg` |
-| Feed mock-up tool (our thumbs among competitors, dark and light) | `python3 tools/feed_mock.py X2 X3 H3 G` → `review/feed_dark.jpg`, `review/feed_light.jpg` |
-| Monster-mask cut-out (1964 LOC photo) | `public/img/masks/kids*`, job `kids` in `tools/mask.py` |
+| 1080p master, −14 LUFS (Git LFS; verified byte-identical from GitHub) | `renders/Halloween_Bribe_1080p.mp4` |
+| 720p | `renders/Halloween_Bribe_720p.mp4` |
+| Two vertical Shorts, −14 LUFS (LFS) | `renders/shorts/Halloween_Bribe_Short1.mp4`, `…_Short2.mp4` |
+| Thumbnails: main X2 (lead, gas-mask pumpkin), X3, H3; Short covers | `renders/thumbnails/final/*.jpg` (+ PNG) |
+| YouTube text (title, description with show notes + sources + credits, tags, upload settings) | `review/YouTube_description.md` |
+| Shorts text (titles, descriptions, hashtags, pinned comments) | `review/Shorts.md` |
+| Script and research | `script/SCRIPT.md`, `research/FACT_CHECK.md`, `research/THUMBNAIL_*.md` |
 
-## Decisions so far
-- **AI image style:** layered silhouette (the user's reference: ochre haze, big moon, black foreground, one orange glow), on `gemini-3-pro-image`.
-  Thumbnail-only images use a different look: B&W ink illustration with one coral accent (`public/img/gen/thumb/x1–x5.png`, 2K).
-- **Thumbnail direction:** clean bold type, not newspaper scans (the user's note). Current pick for Test & Compare:
-  **X2** (gas-mask pumpkin, TEAR GAS / ON HALLOWEEN?) · **X3** (kid counting candy, CANDY was a BRIBE) · **H3** (TRICK OR ~~TREAT~~ BRIBE + coral 1964 mask).
-  The orange silhouette thumbnails (C, D) disappear in the feed; the logo is unreadable at feed size.
-- **Hook:** the cold open starts "Tear gas. On Halloween." over the real *Bismarck Tribune*, 1 Nov 1933 ("Tear Gas Used to Halt Pranks").
-  If a bribe thumbnail wins, re-voice only the cold open as hook B (in SCRIPT.md).
-- **Draft 2 added Ireland** (user request): ch02 "The Night the Dead Came Home" and ch03 "Coffin Ships and Pumpkins".
+## How it was built (for the next video)
+- Scenes: `src/ch/Ch01–Ch08.tsx` on the template's `ChapterShell`; 3D set pieces in `src/fx/` (Headline, AtlanticMap, XRayScan, CandyPile,
+  Corridor, EndScreen); props via `src/kit/prop.tsx`; silhouette parallax via `src/kit/silparallax.tsx`.
+- Assets: archival in `public/img/chNN/` (`script/IMAGES.md`), AI props `public/img/props/` (`script/PROPS.md`), scene paintings
+  `public/img/gen/scenes/` + depth layers `public/img/layers/sil/` (`script/GEMINI_PROMPTS.md`), music `public/music/` (`script/SUNO_PROMPTS.md`).
+- Process: `script/BUILD_BRIEF.md` (one builder per chapter), `tools/render_ch.sh` + `tools/render_queue.sh` (render as chapters finish),
+  `JOIN_ONLY=1 tools/render.sh` (join + master), `tools/feed_mock.py` (thumbnails in a mock feed).
+- Shared library updated: `music/` (+5 `hb_` cues, 76 total), `brand/thumbnails/19_*`, `examples/19_Halloween_Bribe/`, `videos/README.md`.
 
-## Open items (next steps, in order)
-1. **Length:** the user must choose: keep about 11:45, or apply the cut list (about 165 words, to about 10:45). The cut list is in the last chat message
-   and below:
-   ch02 dead-coming-home paragraph (~30) · ch03 Newton wagon paragraph + "Wagons again" in ch05 (~45) · ch04 "And North Dakota wasn't special…" (~35) ·
-   ch06 "Candy companies noticed…" (~25) · ch07 "Hospitals offered to X-ray…" (~30).
-2. **Pull originals before voicing:** the *Lethbridge Herald*, 4 Nov 1927, p. 5 (the "edible plunder" quote); the *Washington Post*, 11 Nov 1948, p. 12
-   (the "making gangsters of children" letter); the full *Bismarck Tribune* story (confirm "about 300 boys" and "the high school"); the NYT,
-   15 Oct 1942 (Chicago's vote). Add a second source for the Irish pranks list (dúchas.ie Schools' Collection).
-3. **Download** Maclise, *Snap-Apple Night* (1833, public domain) from Wikimedia Commons into `public/img/ch02/` and add it to `IMAGES.md`
-   (Commons was rate-limiting the cloud container).
-4. Pronunciation check (Samhain → "Sow-in", barmbrack), then voice (ElevenLabs), then scenes. The template's demo `src/ch/Ch01.tsx` / `Ch02.tsx`
-   are still the King Andrew examples; replace them when building scenes.
-5. Regenerate the chosen silhouette or thumbnail painting at 4K and fix the AI flaws (wagon wheels, ladder, ghost emblem); export the thumbnail at 1920×1080 or larger.
-6. If the video publishes after 31 Oct 2026, change "This Saturday" (ch01, ch08) to "Every Halloween".
-
-## Setup on a new machine
-```sh
-git clone https://github.com/ethomasclass/15minhistorystyle.git
-cd 15minhistorystyle
-git checkout ccr-5f9195b0-0cknf0
-cd projects/Halloween_Bribe
-npm install
-pip install pillow numpy imageio-ffmpeg rembg onnxruntime opencv-python-headless
-cp .env.example .env    # then add GEMINI_API_KEY=... (and the ElevenLabs key when voicing). Never commit .env.
-```
-Gemini images: `SIZE=2K python3 tools/gemini_image.py gemini-3-pro-image out.png prompt.txt`. It makes plain REST calls to
-`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image:generateContent` with
-`generationConfig: {responseModalities: ["IMAGE"], imageConfig: {aspectRatio: "16:9", imageSize: "2K"}}`; the prompts are saved next to each image (`*.txt`).
+## Notes for next time
+- **Parallax rim fix:** faint outlines of foreground shapes showed on the planes behind them (user's note). Fixed in `tools/sil_layers.py`
+  (`EDGE = 6`); the layers in this video predate the fix. See the skill's `references/images-and-masks.md` §9.
+- **Gemini billing:** the AI Studio key returned HTTP 402 (Payment Required) on Oct 28; fix billing before generating new images.
+- **Re-rendering a chapter:** `tools/render_ch.sh NN`, then `JOIN_ONLY=1 tools/render.sh`. The parallax layers need
+  `DEPTH_MODEL=<Depth Anything V2 small onnx>` only when re-splitting a painting.
+- Keys live in `.env` (git-ignored): `GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `VOICE_ID` (Ellis).
+- If posted after 31 Oct 2026: the narration says "this Saturday" in ch01 and ch08 (it's evergreen enough; re-voice only if wanted).

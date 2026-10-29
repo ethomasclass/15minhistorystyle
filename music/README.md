@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History (now Chunk History) so far: **71 cues, about 131 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History (now Chunk History) so far: **76 cues**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -16,6 +16,7 @@ prefix says which video the cue was made for:
 | `cw_` | Any Civil War video (made alongside *Reconstruction*) | ACE-Step 1.5 (`music_acestep.py`) |
 | `m_` (also) | *When Europe Ate Mummies* (`m_1924`, `m_alexandria`, `m_apothecary`, `m_lament_baroque`, `m_old_world`, `m_parlor`, `m_reveal`, `m_tomb`; the other `m_` cues are *The Exact Spot*'s) | Suno (prompts in [`SUNO_PROMPTS.md`](SUNO_PROMPTS.md)) |
 | `b_` | *The Balloon War* (WWII) | Suno (prompts and section tags in `Balloon_War/script/MUSIC.md`) |
+| `hb_` | *Trick-or-Treating Was a Bribe* (Halloween) | Suno (prompts in `projects/Halloween_Bribe/script/SUNO_PROMPTS.md`) |
 | `aw_` | *The American West after the Civil War* (four-part series; Ep 1 *Not in the Picture*) | Suno (prompts in `projects/American_West/SUNO_PROMPTS.md`) |
 
 *Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *The Exact Spot* reused 10 and added three Suno cues (`m_`). *Dressed to Kill* made none; it reused 12. Keep the prefixes when you copy a cue into a video
@@ -949,3 +950,15 @@ Groove from the first second (no quiet intro); stop-time break 70–79 s (hits a
 Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.
 
 - The Balloon War: Ch04 The Paper Balloon + Ch07 ending (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### Added by *Trick-or-Treating Was a Bribe* (Halloween, Oct 2026)
+
+| Cue | Length | LUFS | Mood | Good part | Used in |
+|---|---|---|---|---|---|
+| [`hb_black_halloween`](cues/hb_black_halloween.mp3) | 2:31 | -22.1 | Tense 1930s Depression riot: low piano ostinato, muted snare, pizzicato footsteps, muted trumpet stabs, a distant fire bell; restrained waves. | Hush (questioning chord) at ~60 s; builds ~85 s and ~130 s. Cold open used it from 31 s so the hush landed under the driving question. | Trick-or-Treating Was a Bribe |
+| [`hb_coffin_ships`](cues/hb_coffin_ships.mp3) | 2:00 | -22.1 | Grave Irish air for the Great Famine and the Atlantic crossing: low whistle over a cello drone, sparse harp, swaying strings; a cautious hopeful lift with solo fiddle. | Grave first ~60 s; the hopeful lift in the second half (the ships reach America). | Trick-or-Treating Was a Bribe |
+| [`hb_mischief_rag`](cues/hb_mischief_rag.mp3) | 1:59 | -22.6 | Sly ragtime cakewalk for the prank era (~1900): upright piano, staccato bassoon, plucked bass, clarinet slides, wood block; a stop-time break. | Mischievous from the top; steady all through. | Trick-or-Treating Was a Bribe |
+| [`hb_oiche_shamhna`](cues/hb_oiche_shamhna.mp3) | 2:30 | -20.7 | Haunted Irish Halloween night (darker version 2A): slow eerie air on low whistle, ghostly pipe drones, fiddle harmonics, slow bodhrán heartbeat; a sinister faster middle. | Builds steadily; fullest ~120–135 s (the finale reprise put it under "every fix became the tradition… pay up"); its own outro closed the end screen. | Trick-or-Treating Was a Bribe |
+| [`hb_suburbs_swing`](cues/hb_suburbs_swing.mp3) | 1:36 | -21.9 | Postwar 1950s swing with a spooky wink: walking bass, brushes, muted trumpet and clarinet, celesta and vibraphone sparkle; a short minor turn. | Bright and steady; used ~45 s under the baby-boom suburbs. | Trick-or-Treating Was a Bribe |
+
+This video also reused `m_1924`, `b_newsreel` and `r_dix`.

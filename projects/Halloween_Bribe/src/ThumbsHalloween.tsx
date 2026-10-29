@@ -260,3 +260,55 @@ export const ThumbX5: React.FC = () => (
 );
 
 export const HALLOWEEN_THUMBS: Record<string, React.FC> = {C: ThumbC, C2: ThumbC2, D: ThumbD, E: ThumbE, F: ThumbF, G: ThumbG, H1: ThumbH1, H2: ThumbH2, H3: ThumbH3, H4: ThumbH4, X1: ThumbX1, X2: ThumbX2, X3: ThumbX3, X4: ThumbX4, X5: ThumbX5};
+
+// Vertical covers for the two Shorts (1080×1920). Shorts UI covers the top ~150 px and the bottom ~400 px: the title sits
+// at y 170–640, the subject in the middle; nothing important below y 1500.
+const VCover: React.FC<{children: React.ReactNode}> = ({children}) => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <AbsoluteFill style={{background: '#0b0a08', overflow: 'hidden'}}>
+      {children}
+      <Finish vignette={0.3} />
+    </AbsoluteFill>
+  </PaletteCtx.Provider>
+);
+
+/** Short 1: the gas-mask pumpkin (the right part of x2, whole mask and pumpkin) low in the frame, over its own blurred dark. */
+export const VThumb1: React.FC = () => {
+  const src = staticFile('img/gen/thumb/x2.png');
+  // x2 is 2752×1536; the pumpkin and mask span about x 1100–2752. Shown 1080 wide → scale 0.654, 1004 px tall.
+  const s = 1080 / 1652;
+  return (
+    <VCover>
+      <Img src={src} style={{position: 'absolute', left: -1100 * s - 300, top: -200, width: 2752 * s * 1.5, height: 1536 * s * 1.5, filter: 'blur(40px) brightness(0.35)'}} />
+      <div style={{position: 'absolute', left: 0, top: 690, width: 1080, height: 1536 * s, overflow: 'hidden'}}>
+        <Img src={src} style={{position: 'absolute', left: -1100 * s, top: 0, width: 2752 * s, height: 1536 * s}} />
+        <AbsoluteFill style={{background: 'linear-gradient(180deg, #0b0a08 0%, rgba(11,10,8,0) 18%, rgba(11,10,8,0) 82%, #0b0a08 100%)'}} />
+      </div>
+      <Word t="TEAR" x={90} y={190} size={230} color={CREAM} />
+      <Word t="GAS" x={90} y={390} size={230} color={CORAL} />
+      <Highlight text="ON HALLOWEEN?" x={70} y={600} size={112} at={0} seed={110} rot={-2} />
+    </VCover>
+  );
+};
+
+/** Short 2: the real museum turnip, cut out, B&W with the turnip in coral, on the dark desk. */
+export const VThumb2: React.FC = () => {
+  const src = staticFile('img/gen/thumb/turnip_cut.png');
+  const mask = {WebkitMaskImage: `url(${src})`, WebkitMaskSize: '100% 100%', maskImage: `url(${src})`, maskSize: '100% 100%'} as React.CSSProperties;
+  const w = 980, h = (w * 1287) / 1000;
+  return (
+    <VCover>
+      <DarkPaper />
+      <div style={{position: 'absolute', left: 50, top: 600, width: w, height: h, filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(4px 0 0 #2FE0C4) drop-shadow(-4px 0 0 #2FE0C4) drop-shadow(0 4px 0 #2FE0C4) drop-shadow(0 -4px 0 #2FE0C4)'}}>
+        <Img src={src} style={{width: w, height: h, filter: 'grayscale(1) contrast(1.25)'}} />
+        <div style={{position: 'absolute', inset: 0, ...mask, background: CORAL, mixBlendMode: 'color'}} />
+        <div style={{position: 'absolute', inset: 0, ...mask, background: CORAL, mixBlendMode: 'multiply', opacity: 0.25}} />
+      </div>
+      <Word t="BEFORE" x={90} y={190} size={190} color={CREAM} />
+      <Word t="PUMPKINS" x={90} y={360} size={170} color={CREAM} />
+      <Highlight text="THIS." x={600} y={560} size={120} at={0} seed={111} rot={-4} />
+    </VCover>
+  );
+};
+
+export const VERTICAL_THUMBS: Record<string, React.FC> = {V1: VThumb1, V2: VThumb2};

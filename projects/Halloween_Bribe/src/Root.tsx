@@ -7,13 +7,14 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/ChunkIntro';
 import {BREAK_FRAMES, LogoBreak} from './kit/ChunkIntro';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
-import {HALLOWEEN_THUMBS} from './ThumbsHalloween';
+import {HALLOWEEN_THUMBS, VERTICAL_THUMBS} from './ThumbsHalloween';
 import {SIL_TEST_FRAMES, SilTest} from './SilTest';
 import {END_FRAMES, EndScreenTest} from './fx/EndScreen';
 import {AtlanticMap_TEST_FRAMES, AtlanticMapTest} from './fx/AtlanticMap';
 import {XRayScan_TEST_FRAMES, XRayScanTest} from './fx/XRayScan';
 import {CandyPile_TEST_FRAMES, CandyPileTest} from './fx/CandyPile';
 import {Corridor_TEST_FRAMES, CorridorTest} from './fx/Corridor';
+import {VSHORTS} from './vshorts';
 
 export const Root: React.FC = () => (
   <>
@@ -22,6 +23,7 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
+    {Object.entries(VERTICAL_THUMBS).map(([k, T]) => <Composition key={k} id={`Thumb-${k}`} width={1080} height={1920} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />)}
     {Object.entries(HALLOWEEN_THUMBS).map(([k, T]) => <Composition key={k} id={`Thumb-${k}`} width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />)}
     <Composition id="AtlanticMapTest" width={W} height={H} fps={FPS} durationInFrames={AtlanticMap_TEST_FRAMES} component={() => <JFonts><AtlanticMapTest /></JFonts>} />
     <Composition id="XRayScanTest" width={W} height={H} fps={FPS} durationInFrames={XRayScan_TEST_FRAMES} component={() => <JFonts><XRayScanTest /></JFonts>} />
@@ -31,6 +33,8 @@ export const Root: React.FC = () => (
     <Composition id="SilTest" width={W} height={H} fps={FPS} durationInFrames={SIL_TEST_FRAMES} component={SilTest} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
+    <Composition id="VShort1" width={1080} height={1920} fps={FPS} durationInFrames={VSHORTS[0].frames} component={() => <JFonts>{React.createElement(VSHORTS[0].C)}</JFonts>} />
+    <Composition id="VShort2" width={1080} height={1920} fps={FPS} durationInFrames={VSHORTS[1].frames} component={() => <JFonts>{React.createElement(VSHORTS[1].C)}</JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}
   </>
 );
