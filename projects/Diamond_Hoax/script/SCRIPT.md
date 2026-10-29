@@ -239,9 +239,15 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 ---
 ## Production notes
 
-**The Con Card** (the video's recurring device; your idea: explain how any scam works). A dark card, same place and size every
-time, with six rows that fill in as each move is named, a "1/6" counter, the move in orange tape and this story's example in teal
-handwriting. Ch 9 shows all six and checks them off on the recap. **Built to be reused**: if this becomes a scam series, every
+**The Con Card** (the video's recurring device; your idea: explain how any scam works). **Not on screen the whole time**
+(your direction): it makes a brief, subtle appearance only on the beat where a move is named, then gets out of the way.
+- **The pop-in** (ch 2, 4, 5, 6): a small dark slip slides in at a lower corner for about 3–4 seconds, anchored to the move's
+  words. The new row writes on in orange tape with a "3/6"-style counter. Earlier rows stay faint, so you see the list growing.
+  Then it slides out and the picture is back. Ch 2 adds moves 1 and 2 in one appearance; ch 6 adds 5, then 6 at "the exit".
+- **No card** in ch 3, 7 and 8 (no move named there).
+- **The tease** (cold open, at "six moves"): a one-second flash of the empty six-row card.
+- **The payoff** (ch 9 recap): the full card, larger, each move checked off as it's said (about 10 s), then gone before the
+  closing line so the last image is the opening picture. **Built to be reused**: if this becomes a scam series, every
 episode can fill in the same six rows with its own con (not mapped yet, on purpose).
 
 | # | Move | Named in | This story |
