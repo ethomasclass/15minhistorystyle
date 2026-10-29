@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 6 · **2,706 words** · about **17:09 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 7 · **2,712 words** · about **17:11 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -22,10 +22,10 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 2:53 | Everybody Wants a Diamond Mine | 272 | Act I · setup |
 | 4:34 | The Tiffany Test | 222 | Act II · escalation (ends on the midpoint twist) |
 | 5:56 | The Long Way Around | 353 | Act II · escalation |
-| 8:07 | Diamond Fever (+ plug) | 199 | Act II · escalation (plug) |
-| 9:21 | The Anthills | 373 | Act III · climax |
-| 11:39 | The Dominoes | 431 | Act III · climax |
-| 14:17 | Where the Money Went | 412 | Act IV · fallout + takeaway |
+| 8:07 | Diamond Fever | 181 | Act II · escalation |
+| 9:14 | The Anthills | 373 | Act III · climax |
+| 11:32 | The Dominoes (+ plug) | 455 | Act III · climax (plug after the climax) |
+| 14:20 | Where the Money Went | 412 | Act IV · fallout + takeaway |
 
 ---
 
@@ -144,8 +144,8 @@ But he'd seen it with his own eyes. And that's move four: *the proof*. Don't tel
 
 ---
 
-## 8:07 | Diamond Fever (+ plug)
-*`ch06_cash_out.txt`* · 199 words · Act II · escalation (plug)
+## 8:07 | Diamond Fever
+*`ch06_cash_out.txt`* · 181 words · Act II · escalation
 
 Now the real money moved. A new company was set up in New York with more than a quarter of a billion dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
 
@@ -155,13 +155,11 @@ That's move five: *the rush*. Once everybody important is buying in, nobody want
 
 [pause] And that's exactly when a smart con man leaves. Move six: *the exit*. Most crooks get greedy and stay one round too long. The cousins didn't. The investors bought them out completely: about 15 million dollars for Arnold, nearly three million for Slack. Arnold went home to Kentucky, a rich man. Slack just disappeared.
 
-[warmly] Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, and unlike Henry Janin, nobody's paying me in stock to say so.
-
-[light] Because a few months later, in California, a geologist got on the wrong train. Or the right one.
+[light] For a few months, it looked like they'd gotten away with it. Then, in California, a geologist got on the wrong train. Or the right one.
 
 ---
 
-## 9:21 | The Anthills
+## 9:14 | The Anthills
 *`ch07_the_anthills.txt`* · 373 words · Act III · climax
 
 A train in California, that fall. In one seat, Henry Janin is showing off his diamonds. And a few seats away are men from a government survey, geologists who'd spent five years mapping the West.
@@ -190,8 +188,8 @@ So if you know a crash is coming, and nobody else does, you can get rich off it.
 
 ---
 
-## 11:39 | The Dominoes
-*`ch08_not_enough_money.txt`* · 431 words · Act III · climax
+## 11:32 | The Dominoes (+ plug)
+*`ch08_not_enough_money.txt`* · 455 words · Act III · climax
 
 King had a problem. And it was a lot bigger than one bad stock.
 
@@ -223,11 +221,13 @@ According to one of King's own men, a director suggested King might wait a littl
 
 The dominoes stayed standing. For now.
 
+[warmly] Quick favor: hit subscribe. It's free, and I promise it's not a con. [pause] Which is exactly what a con man would say. Subscribe anyway.
+
 [light] So where did all that money go? And what happened to the two cousins?
 
 ---
 
-## 14:17 | Where the Money Went
+## 14:20 | Where the Money Went
 *`ch09_paid_for_dirt.txt`* · 412 words · Act IV · fallout + takeaway
 
 First, the money. It didn't go back to the investors. Ralston alone reportedly lost about seven million dollars.
@@ -329,6 +329,14 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 **Images to look for (archival first):** Ralston, Tiffany, Clarence King, Janin, Arnold (portrait exists; a photo said to show both cousins needs its caption checked), Timothy O'Sullivan's 40th Parallel Survey photographs (the empty country, King's camp), Madison Avenue/Barlow house, the Bank of California, Union Pacific at Rawlins, the Chronicle's Nov 26, 1872 "UNMASKED!" headlines, a period mining-claim notice, a map of the site on the Colorado–Wyoming line. AI gaps (ask first): salting the anthills at night, the four-day ride, King's trench.
 
 **Ending:** closing line over the H1 picture, then the thank-you over the end screen.
+
+## The subscribe plug (draft 7, your note)
+
+Moved later and made simpler and cheekier. It now sits right after the climax, between "The dominoes stayed standing. For
+now." and "So where did all that money go?" (about 80% in): two loops are open and the payoff is seconds away, so it's the
+safest place in the video to ask. Text: "Quick favor: hit subscribe. It's free, and I promise it's not a con. [pause] Which
+is exactly what a con man would say. Subscribe anyway." On screen: the small teal "subscribe ↓" note only. Ch 6 now ends
+"For a few months, it looked like they'd gotten away with it."
 
 ## The last third (draft 6, your note: ch 6–8 got dry; show how bad the crash could have been)
 

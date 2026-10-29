@@ -43,7 +43,9 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   together through callbacks, and ends on a short line for a general audience that lands the title. *King
   Andrew* ended on one word: "King." *Fix Everything* ended on a one-line tease of what comes next ("It split
   the country in two. But that's a story for next time."). Either works.
-- **Two subscribe reminders, every video** (the user's standing request). (1) **Mid-video**, about a third of the way
+- **Two subscribe reminders, every video** (the user's standing request). (1) **Late in the video, right after the climax** (the user's direction, Oct 2026, Diamond Hoax: about 80% in, between the climax and the
+  last chapter's question, while a loop is open; short and cheeky, tied to the topic: "Quick favor: hit subscribe. It's free, and I promise
+  it's not a con. Which is exactly what a con man would say. Subscribe anyway."). Older videos put it mid-video, about a third of the way
   in, at a chapter's end: two or three sentences, tied to the topic, with a wry turn. "Quick thing before we go on. If
   you're enjoying this, hit subscribe. It's free, it really helps the channel, and unlike William Wansley, nobody's
   paying me to say it." (Black Sox) / "the board would like you to subscribe... That's my hand on the pointer" (Ouija).
@@ -303,7 +305,7 @@ with nerve can get rich; Ep 3: free land; Ep 4: the promises made *to* Native na
 | 5. Stack, then "That means" | A one-sentence recap before each payoff. |
 | 6. Myth beat | One myth per episode, named and corrected kindly (West Ep 1: the golden spike). |
 | 7. Both readings | Supporters and critics each get their evidence; no verdict (a two-views card that fills across chapters). |
-| 8. Plug at about two-thirds | After the big build, never in a heavy chapter. |
+| 8. Plug after the climax (about 80%) | While a loop is open, never in a heavy chapter (was two-thirds before the Diamond Hoax). |
 | 9. The quiet chapter | One heavy chapter per episode: slower voice, no jokes, teal-only quiet mode, a primary source and space. |
 | 10. "So let's go back to the question." | Answer the driving question through callbacks, fill this episode's row of the series' recurring card, end on a short reversal over the opening image. |
 | 11. The handoff | One line that tees up the next episode, then the end-screen thank-you. |

@@ -143,7 +143,7 @@ column says where each was made.
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").
 - Open on a real document or artifact. Trim to time with a cut list.
-- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug (from *The Exact Spot* on: about **two-thirds** of the way in, after the story's big build, not a third in where it kills momentum), tied to the topic
+- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug (**from the Diamond Hoax on: right after the climax, about 80% in, while a loop is still open and the payoff is seconds away; short and cheeky**, e.g. "Quick favor: hit subscribe. It's free, and I promise it's not a con. Which is exactly what a con man would say. Subscribe anyway." Before that, from *The Exact Spot*: about two-thirds of the way in, after the story's big build, not a third in where it kills momentum), tied to the topic
   with a wry twist (Ouija: the board spells it; Black Sox: "unlike William Wansley, nobody's paying me to say it"), and a one-line
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
