@@ -33,7 +33,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 `Recession_Indicators_Short`). Their `src/project.ts` still carries the Black Sox title they were copied from; the Short's own
 title is in its `review/` YouTube text.
 
-**Everything is on one branch now** (Oct 26, 2026): every project folder above, the Chunk History brand (`brand/chunk-history/`),
+**Everything is on one branch** (the default branch, `ccr-fd9304cf-1jaldg`; consolidated again Oct 29, 2026: the Halloween wrap-up, American West Ep 2, the Reconstruction viewing guides and the Diamond Hoax project were merged in, and the music library is now 81 cues. The two oldest branches, `claude/shorts-skill` and `claude/vibrant-hamilton-7x33e4`, hold nothing that isn't already here or in `techniques/archive/`). Before that (Oct 26, 2026): every project folder above, the Chunk History brand (`brand/chunk-history/`),
 the merged music library (71 cues) and the skill were merged from their working branches into the main line; the "Repo · branch"
 column says where each was made.
 
