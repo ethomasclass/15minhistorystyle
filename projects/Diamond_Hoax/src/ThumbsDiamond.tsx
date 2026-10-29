@@ -5,6 +5,8 @@
 //   F3 · the loupe tycoon in coral: WHO PUT / IT THERE?
 //   G1/G2 · over the cousins' shoulders: the two of them from behind (fingers crossed, the pouch of stones), the loupe tycoon
 //           smaller between them in coral, admiring the stone. G1: IT'S REAL! · G2: WORTH MILLIONS!
+//   H1/H2 · the same picture, DIRT the big word. H1: small PAID FOR tape over a huge DIRT tape · H2: teal handwritten
+//           "they paid millions for..." over a huge DIRT.
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
@@ -90,16 +92,37 @@ const Cousin: React.FC<{mask: string; at: Place}> = ({mask, at}) => (
   </div>
 );
 
-const OverTheShoulder: React.FC<{words: string; size: number; x: number}> = ({words, size, x}) => (
+const Scene: React.FC<{tyc?: Place; children: React.ReactNode}> = ({tyc = TYC, children}) => (
   <Frame>
-    <Figure src="img/gen/thumb/tycoon_b_clean.png" mask={MASKS.tycoon_b.alpha} place={TYC} />
-    <Tint mask={MASKS.tycoon_b.alpha} place={TYC} size={SIZE} />
-    <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={TYC} at={0} dur={1} width={7} />
+    <Figure src="img/gen/thumb/tycoon_b_clean.png" mask={MASKS.tycoon_b.alpha} place={tyc} />
+    <Tint mask={MASKS.tycoon_b.alpha} place={tyc} size={SIZE} />
+    <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={tyc} at={0} dur={1} width={7} />
     <Cousin mask={MASKS.cousin_l.alpha} at={COUSIN_L} />
     <Cousin mask={MASKS.cousin_r.alpha} at={COUSIN_R} />
-    <Highlight text={words} x={x} y={150} size={size} at={0} seed={97} rot={-3} />
+    {children}
   </Frame>
+);
+
+const OverTheShoulder: React.FC<{words: string; size: number; x: number}> = ({words, size, x}) => (
+  <Scene><Highlight text={words} x={x} y={150} size={size} at={0} seed={97} rot={-3} /></Scene>
 );
 
 export const ThumbG1: React.FC = () => <OverTheShoulder words="IT'S REAL!" size={170} x={560} />;
 export const ThumbG2: React.FC = () => <OverTheShoulder words="WORTH MILLIONS!" size={140} x={470} />;
+
+// DIRT sits above the tycoon's head, so he drops a little and shrinks.
+const TYC_LOW: Place = {left: 520, top: 440, scale: 0.75};
+
+export const ThumbH1: React.FC = () => (
+  <Scene tyc={TYC_LOW}>
+    <Highlight text="PAID FOR" x={600} y={40} size={105} at={0} seed={98} rot={-4} />
+    <Highlight text="DIRT" x={640} y={150} size={250} at={0} seed={99} rot={-2} />
+  </Scene>
+);
+
+export const ThumbH2: React.FC = () => (
+  <Scene tyc={TYC_LOW}>
+    <Note text="they paid millions for..." x={560} y={70} size={66} rot={-3} color={TEAL} />
+    <Highlight text="DIRT." x={600} y={150} size={250} at={0} seed={100} rot={-2} />
+  </Scene>
+);
