@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 5 · **2,337 words** · about **14:55 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 6 · **2,706 words** · about **17:09 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -22,10 +22,10 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 2:53 | Everybody Wants a Diamond Mine | 272 | Act I · setup |
 | 4:34 | The Tiffany Test | 222 | Act II · escalation (ends on the midpoint twist) |
 | 5:56 | The Long Way Around | 353 | Act II · escalation |
-| 8:07 | Cash Out (+ plug) | 158 | Act II · escalation (plug) |
-| 9:06 | The Anthills | 360 | Act III · climax |
-| 11:19 | Not Enough Money | 186 | Act III · climax |
-| 12:29 | Where the Money Went | 342 | Act IV · fallout + takeaway |
+| 8:07 | Diamond Fever (+ plug) | 199 | Act II · escalation (plug) |
+| 9:21 | The Anthills | 373 | Act III · climax |
+| 11:39 | The Dominoes | 431 | Act III · climax |
+| 14:17 | Where the Money Went | 412 | Act IV · fallout + takeaway |
 
 ---
 
@@ -144,16 +144,16 @@ But he'd seen it with his own eyes. And that's move four: *the proof*. Don't tel
 
 ---
 
-## 8:07 | Cash Out (+ plug)
-*`ch06_cash_out.txt`* · 158 words · Act II · escalation (plug)
+## 8:07 | Diamond Fever (+ plug)
+*`ch06_cash_out.txt`* · 199 words · Act II · escalation (plug)
 
 Now the real money moved. A new company was set up in New York with more than a quarter of a billion dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
 
+And it spread. Newspapers printed how-to articles on diamond mining. Prospectors fanned out across Arizona, New Mexico, Utah, Wyoming and Colorado, hunting for diamond fields of their own. People called it *diamond fever*.
+
 That's move five: *the rush*. Once everybody important is buying in, nobody wants to be the one asking questions. They just want in before it's gone.
 
-And the cousins cashed out. The investors bought them out completely. Altogether, Arnold collected about 15 million dollars. Slack took nearly three million.
-
-Then they left. Arnold went home to Kentucky, a rich man. Slack just disappeared. Move six: *the exit*. Get out before it breaks.
+[pause] And that's exactly when a smart con man leaves. Move six: *the exit*. Most crooks get greedy and stay one round too long. The cousins didn't. The investors bought them out completely: about 15 million dollars for Arnold, nearly three million for Slack. Arnold went home to Kentucky, a rich man. Slack just disappeared.
 
 [warmly] Quick thing before we go on. If you're enjoying this, hit subscribe. It's free, and unlike Henry Janin, nobody's paying me in stock to say so.
 
@@ -161,8 +161,8 @@ Then they left. Arnold went home to Kentucky, a rich man. Slack just disappeared
 
 ---
 
-## 9:06 | The Anthills
-*`ch07_the_anthills.txt`* · 360 words · Act III · climax
+## 9:21 | The Anthills
+*`ch07_the_anthills.txt`* · 373 words · Act III · climax
 
 A train in California, that fall. In one seat, Henry Janin is showing off his diamonds. And a few seats away are men from a government survey, geologists who'd spent five years mapping the West.
 
@@ -186,31 +186,49 @@ To {sell short} is to bet that a price will crash. Here's how it works. Say a sh
 
 So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
-[light] Which meant King was in a race.
+[serious] Now two men on that mesa knew the truth. One wanted to warn everybody. The other wanted a head start.
 
 ---
 
-## 11:19 | Not Enough Money
-*`ch08_not_enough_money.txt`* · 186 words · Act III · climax
+## 11:39 | The Dominoes
+*`ch08_not_enough_money.txt`* · 431 words · Act III · climax
 
-King had a problem. If the wrong people heard first, they could quietly sell their stock, and everyone else would be left holding paper worth nothing.
+King had a problem. And it was a lot bigger than one bad stock.
 
-So King left before dawn. He rode about 45 miles to the nearest train station. He got to San Francisco on November 10th, went straight to Janin's hotel, and spent the whole night convincing him.
+Here's how it could have gone. Count the dominoes.
+
+Domino one: *the insiders*. Anyone who knows the truth sells their shares, fast, to people who don't. Some might sell short on top of it. Every share they unload ends up with somebody who has no idea.
+
+Domino two: *the crash*. The news breaks, the shares are worth nothing, and whoever bought last is left holding paper. The longer the secret lasts, the more people are holding it.
+
+Domino three: *the bank*. One of the company's biggest backers was William Ralston, and Ralston ran the biggest bank in the West. Now, a bank doesn't keep your money in a vault. It lends most of it out. That works fine, as long as everybody doesn't come for their money on the same day.
+
+But hear that the bank's boss just lost a fortune on a fake diamond field, and everybody comes on the same day. That's called a {bank run}. Almost no bank survives one.
+
+Domino four: *everyone else*. When the West's biggest bank goes down, it takes businesses, mines and smaller banks down with it. Paychecks stop. Savings disappear.
+
+[serious] Does that sound far-fetched? The very next year, one big bank in New York went under after bad railroad bets. The panic was so bad, the New York Stock Exchange shut down for ten days.
+
+So every day the secret held, the dominoes got taller. And King had to beat the man who wanted a head start.
+
+He left before dawn. He rode about 45 miles to the nearest train station. He got to San Francisco on November 10th, went straight to Janin's hotel, and spent the whole night convincing him.
 
 The next morning, he walked into Ralston's bank and read his report to the company's directors. The diamond field, he told them, was a fraud.
 
-According to one of King's own men, a director suggested King might wait a little before he went public. Long enough for a few people to sell. King's answer:
+According to one of King's own men, a director suggested King might wait a little before he went public. Long enough for a few people to sell. Domino one, right there in the room. King's answer:
 
 "There is not enough money in the Bank of California to make me delay the publication a single hour."
 
 [pause] The company sent its own man out to check. He came back and agreed. On November 26th, 1872, the story hit the papers. One San Francisco paper called it "the most gigantic and barefaced swindle of the age."
 
+The dominoes stayed standing. For now.
+
 [light] So where did all that money go? And what happened to the two cousins?
 
 ---
 
-## 12:29 | Where the Money Went
-*`ch09_paid_for_dirt.txt`* · 342 words · Act IV · fallout + takeaway
+## 14:17 | Where the Money Went
+*`ch09_paid_for_dirt.txt`* · 412 words · Act IV · fallout + takeaway
 
 First, the money. It didn't go back to the investors. Ralston alone reportedly lost about seven million dollars.
 
@@ -219,6 +237,8 @@ Philip Arnold was charged with fraud in California. But he was home in Kentucky 
 He did settle one investor's lawsuit, for about four million dollars. Then he took his money and became a banker. [wry] Of course he did. A few years later, an argument with a rival banker turned into a shootout. Arnold was hit in the shoulder. He died of pneumonia about six months later.
 
 And John Slack? You may have heard that he vanished. For a long time, that's what everyone thought. He didn't. He made coffins in St. Louis, then moved to a small town in New Mexico and became the local undertaker. He died there in 1896, a small-town undertaker with a small-town bank account.
+
+[serious] And Ralston? Remember those dominoes? Three years later, his bank got caught in other bad mining bets. Word spread, and people lined up to pull their money out. At 2:35 in the afternoon, the Bank of California ran out of cash and closed its doors. The next day, Ralston went for his usual swim in San Francisco Bay, and drowned. To this day, nobody knows if it was an accident.
 
 [thoughtful] So let's go back to the question. How do two cousins get the richest men in America to pay millions for dirt?
 
@@ -272,7 +292,7 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 | King's race against the insiders | ch 7 end | ch 8 |
 | Where did the money go? | ch 8 end | ch 9 |
 
-**Vocab cards:** the mark (ch 2) · rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · appraisal · salting · shares (ch 5) · sell short (ch 7, with a worked example).
+**Vocab cards:** bank run (ch 8) · the mark (ch 2) · rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · appraisal · salting · shares (ch 5) · sell short (ch 7, with a worked example).
 
 **For a general audience** (your note after the read-through): money and mining terms get a plain explanation the first time, with a concrete picture. Staking a claim = wooden stakes and a notice with your name. A share = a slice of ownership. Selling short = a worked $40-to-$1 example. On screen: a small step-by-step card for the short sale (borrow → sell for $1,000 → crash → buy back for $20 → keep $980).
 
@@ -309,6 +329,22 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 **Images to look for (archival first):** Ralston, Tiffany, Clarence King, Janin, Arnold (portrait exists; a photo said to show both cousins needs its caption checked), Timothy O'Sullivan's 40th Parallel Survey photographs (the empty country, King's camp), Madison Avenue/Barlow house, the Bank of California, Union Pacific at Rawlins, the Chronicle's Nov 26, 1872 "UNMASKED!" headlines, a period mining-claim notice, a map of the site on the Colorado–Wyoming line. AI gaps (ask first): salting the anthills at night, the four-day ride, King's trench.
 
 **Ending:** closing line over the H1 picture, then the thank-you over the end screen.
+
+## The last third (draft 6, your note: ch 6–8 got dry; show how bad the crash could have been)
+
+- **Ch 6, Diamond Fever:** the rush is shown, not stated: newspapers printing how-to articles on diamond mining, prospectors
+  fanning out over five territories and states. The exit gets a reason it's smart ("Most crooks get greedy and stay one round too long").
+- **Ch 7 ends on a two-man race:** "Now two men on that mesa knew the truth. One wanted to warn everybody. The other wanted a head start."
+- **Ch 8, The Dominoes:** before King's ride, the stakes are counted out loud as four dominoes: the insiders, the crash, the bank
+  (with a plain explanation of a bank run), everyone else. Backed by a real crash from the very next year (1873). Then the
+  ride is a ticking clock ("every day the secret held, the dominoes got taller"), the director's suggestion is called out as
+  "Domino one, right there in the room", and King's quote lands as the climax. Ends: "The dominoes stayed standing. For now."
+- **Ch 9 pays it off:** three years later the Bank of California really did run out of cash and close, and Ralston drowned the
+  next day. A late, true twist that keeps Act IV from being a list of fates. Told plainly, no jokes near it.
+- **On screen (ch 8):** four domino tiles in a row on the desk, each labelled as it's named (orange tape), each one tipping in turn
+  at 12 fps; at "For now." they're shown standing. In ch 9, at "Remember those dominoes?", they fall.
+- **Honesty line:** there's no record the company planned to sell shares to the general public, so the script says "could
+  have gone" and keeps the losses on insiders' buyers and Ralston's bank, which is where they really would have landed.
 
 ## Retention review (draft 5)
 
@@ -397,6 +433,11 @@ Still open (your call):
 | "Not enough money" quote | Emmons's later account, via the Smithsonian | "According to one of King's own men" |
 | Company's own man (David Colton) agreed; papers Nov 26, 1872 | Smithsonian; EARTH Magazine | |
 | Chronicle quote | Smithsonian | |
+| Diamond fever: how-to articles, prospectors across AZ, NM, UT, WY, CO | EARTH Magazine / Wikipedia: by Oct 1872 papers including the *Laramie Independent* ran "Lessons in Diamond Mining"; a brief prospecting craze in those five places | "People called it diamond fever" (the Smithsonian uses the phrase) |
+| Dominoes scenario (insiders → crash → bank run → everyone) | A hypothetical, framed "Here's how it could have gone" | Grounded in the director's suggestion (Emmons via the Smithsonian), Ralston's role, and the real 1873 and 1875 crashes |
+| "One of the company's biggest backers was William Ralston… the biggest bank in the West" | Ralston was among the main backers and reportedly lost about $250,000; the Bank of California was the leading bank of the Pacific coast | "one of the biggest backers" |
+| 1873: "one big bank in New York went under after bad railroad bets… the Stock Exchange shut down for ten days" | Panic of 1873: Jay Cooke & Company failed Sept 18, 1873 (Northern Pacific bonds); the NYSE closed Sept 20 for ten days | No name in the narration (on screen: Jay Cooke & Co.) |
+| 1875: Bank of California run, closed at 2:35 pm; Ralston drowned the next day; accident or suicide unknown | Closed Aug 26, 1875 (one account: out of cash at 2:35 pm); Ralston drowned Aug 27 on his daily swim; cause still debated (HISTORY.com, FoundSF, Clio). Some dispatches said the same evening | "The next day"; "nobody knows if it was an accident". The bank reopened Oct 2, 1875 (not in the narration) |
 | Ralston "reportedly lost about $250,000" | Smithsonian ("widely reported") | "reportedly". One source says Ralston repaid investors $80,000 each: **not used** |
 | Arnold indicted, never tried; "Henry rifle" | WyoHistory, Smithsonian | "reportedly" |
 | Settled one lawsuit for $150,000; became a banker; shootout 1878; shoulder; pneumonia ~6 months later | Smithsonian (William Lent settlement) | Some sources give his death as 1879; script gives no year |
@@ -419,6 +460,8 @@ Still open (your call):
 | **Total** | **about -225 → ~1,710 words, about 11:00** | |
 
 ## Sources
+
+- Ralston and the 1875 run: https://www.history.com/this-day-in-history/tycoon-william-ralston-drowns · https://foundsf.org/BANK_OF_CALIFORNIA_and_WILLIAM_RALSTON · https://www.theclio.com/entry/13117
 
 - Inflation (1872 → today): https://www.officialdata.org/us/inflation/1872?amount=20 · https://ryanoconnellfinance.com/inflation-calculator/1872/
 

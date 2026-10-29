@@ -1,13 +1,31 @@
-King had a problem. If the wrong people heard first, they could quietly sell their stock, and everyone else would be left holding paper worth nothing.
+King had a problem. And it was a lot bigger than one bad stock.
 
-So King left before dawn. He rode about 45 miles to the nearest train station. He got to San Francisco on November 10th, went straight to Janin's hotel, and spent the whole night convincing him.
+Here's how it could have gone. Count the dominoes.
+
+Domino one: *the insiders*. Anyone who knows the truth sells their shares, fast, to people who don't. Some might sell short on top of it. Every share they unload ends up with somebody who has no idea.
+
+Domino two: *the crash*. The news breaks, the shares are worth nothing, and whoever bought last is left holding paper. The longer the secret lasts, the more people are holding it.
+
+Domino three: *the bank*. One of the company's biggest backers was William Ralston, and Ralston ran the biggest bank in the West. Now, a bank doesn't keep your money in a vault. It lends most of it out. That works fine, as long as everybody doesn't come for their money on the same day.
+
+But hear that the bank's boss just lost a fortune on a fake diamond field, and everybody comes on the same day. That's called a {bank run}. Almost no bank survives one.
+
+Domino four: *everyone else*. When the West's biggest bank goes down, it takes businesses, mines and smaller banks down with it. Paychecks stop. Savings disappear.
+
+[serious] Does that sound far-fetched? The very next year, one big bank in New York went under after bad railroad bets. The panic was so bad, the New York Stock Exchange shut down for ten days.
+
+So every day the secret held, the dominoes got taller. And King had to beat the man who wanted a head start.
+
+He left before dawn. He rode about 45 miles to the nearest train station. He got to San Francisco on November 10th, went straight to Janin's hotel, and spent the whole night convincing him.
 
 The next morning, he walked into Ralston's bank and read his report to the company's directors. The diamond field, he told them, was a fraud.
 
-According to one of King's own men, a director suggested King might wait a little before he went public. Long enough for a few people to sell. King's answer:
+According to one of King's own men, a director suggested King might wait a little before he went public. Long enough for a few people to sell. Domino one, right there in the room. King's answer:
 
 "There is not enough money in the Bank of California to make me delay the publication a single hour."
 
 [pause] The company sent its own man out to check. He came back and agreed. On November 26th, 1872, the story hit the papers. One San Francisco paper called it "the most gigantic and barefaced swindle of the age."
+
+The dominoes stayed standing. For now.
 
 [light] So where did all that money go? And what happened to the two cousins?
