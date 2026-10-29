@@ -1,0 +1,48 @@
+{
+ "size": [
+  1030,
+  604
+ ],
+ "page_size": [
+  4474,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  -7,
+  3398,
+  688,
+  3805
+ ],
+ "paper": "Evening star (Washington, D.C.), November 26, 1872",
+ "url": "https://www.loc.gov/resource/sn83045462/1872-11-26/ed-1/?sp=2",
+ "phrases": {
+  "the most gigantic and barefaced swindles ever perpetrated": [
+   [
+    781.8,
+    419.2,
+    181.5,
+    45.8
+   ],
+   [
+    60.0,
+    456.5,
+    892.8,
+    57.0
+   ],
+   [
+    70.5,
+    500.8,
+    141.5,
+    42.8
+   ]
+  ],
+  "a new crop of gems has been planted": [
+   [
+    243.8,
+    286.8,
+    724.8,
+    55.2
+   ]
+  ]
+ }
+}

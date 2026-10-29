@@ -1,0 +1,44 @@
+{
+ "size": [
+  856,
+  1250
+ ],
+ "page_size": [
+  4433,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  1954,
+  3567,
+  2565,
+  4459
+ ],
+ "paper": "Los Angeles daily herald (Los Angeles [Calif.]), August 27, 1875",
+ "url": "https://www.loc.gov/resource/sn84038806/1875-08-27/ed-1/?sp=2",
+ "phrases": {
+  "Bank of California Suspended": [
+   [
+    63.8,
+    59.8,
+    731.0,
+    63.8
+   ]
+  ],
+  "literally black with human heads": [
+   [
+    62.5,
+    960.8,
+    731.2,
+    39.0
+   ]
+  ],
+  "closed its doors": [
+   [
+    509.0,
+    665.5,
+    287.0,
+    33.2
+   ]
+  ]
+ }
+}

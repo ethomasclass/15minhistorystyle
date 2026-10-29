@@ -1,0 +1,50 @@
+{
+ "size": [
+  786,
+  1014
+ ],
+ "page_size": [
+  4629,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  55,
+  477,
+  751,
+  1375
+ ],
+ "paper": "The sun (New York [N.Y.]), November 26, 1872",
+ "url": "https://www.loc.gov/resource/sn83030272/1872-11-26/ed-1/?sp=1",
+ "phrases": {
+  "THE SALTED JEWEL FIELDS": [
+   [
+    61.0,
+    60.0,
+    656.0,
+    51.0
+   ]
+  ],
+  "one of the most gigantic frauds ever perpetrated on the public": [
+   [
+    274.0,
+    504.0,
+    447.0,
+    24.0
+   ],
+   [
+    63.0,
+    537.0,
+    431.0,
+    28.0
+   ]
+  ],
+  "Arnold and Slack": [
+   [
+    84.0,
+    798.0,
+    248.0,
+    25.0
+   ]
+  ]
+ }
+}

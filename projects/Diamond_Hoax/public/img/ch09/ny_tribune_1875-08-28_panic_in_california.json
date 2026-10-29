@@ -1,0 +1,36 @@
+{
+ "size": [
+  1093,
+  1443
+ ],
+ "page_size": [
+  4302,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  56,
+  393,
+  816,
+  1397
+ ],
+ "paper": "New-York tribune (New York [N.Y.]), August 28, 1875",
+ "url": "https://www.loc.gov/resource/sn83030214/1875-08-28/ed-1/?sp=1",
+ "phrases": {
+  "THE PANIC IN CALIFORNIA": [
+   [
+    61.0,
+    60.0,
+    964.0,
+    59.0
+   ]
+  ],
+  "SUICIDE OF PRESIDENT RALSTON": [
+   [
+    61.0,
+    250.0,
+    725.0,
+    35.0
+   ]
+  ]
+ }
+}

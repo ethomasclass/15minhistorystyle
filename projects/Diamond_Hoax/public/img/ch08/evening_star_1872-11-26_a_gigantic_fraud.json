@@ -1,0 +1,56 @@
+{
+ "size": [
+  1031,
+  1723
+ ],
+ "page_size": [
+  4446,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  3141,
+  1619,
+  3836,
+  2781
+ ],
+ "paper": "Evening star (Washington, D.C.), November 26, 1872",
+ "url": "https://www.loc.gov/resource/sn83045462/1872-11-26/ed-1/?sp=1",
+ "phrases": {
+  "A GIGANTIC FRAUD": [
+   [
+    242.5,
+    59.8,
+    526.2,
+    54.2
+   ]
+  ],
+  "the whole pretended discovery as a gigantic fraud": [
+   [
+    85.8,
+    585.2,
+    877.2,
+    54.2
+   ],
+   [
+    85.8,
+    619.2,
+    118.2,
+    39.8
+   ]
+  ],
+  "the expected diamond fields have been salted": [
+   [
+    92.8,
+    1541.0,
+    878.5,
+    51.2
+   ],
+   [
+    86.2,
+    1574.8,
+    129.2,
+    42.8
+   ]
+  ]
+ }
+}

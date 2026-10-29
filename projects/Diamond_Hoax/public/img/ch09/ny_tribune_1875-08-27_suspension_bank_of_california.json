@@ -1,0 +1,42 @@
+{
+ "size": [
+  1075,
+  1427
+ ],
+ "page_size": [
+  4285,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  2805,
+  533,
+  3551,
+  1524
+ ],
+ "paper": "New-York tribune (New York [N.Y.]), August 27, 1875",
+ "url": "https://www.loc.gov/resource/sn83030214/1875-08-27/ed-1/?sp=1",
+ "phrases": {
+  "SUSPENSION OF THE BANK OF CALIFORNIA": [
+   [
+    65.0,
+    60.0,
+    940.0,
+    40.0
+   ],
+   [
+    438.0,
+    115.0,
+    203.0,
+    35.0
+   ]
+  ],
+  "stopped paying checks at 2:45 to-day": [
+   [
+    62.0,
+    484.0,
+    738.0,
+    39.0
+   ]
+  ]
+ }
+}

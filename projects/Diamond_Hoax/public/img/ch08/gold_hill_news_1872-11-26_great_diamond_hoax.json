@@ -1,0 +1,70 @@
+{
+ "size": [
+  770,
+  1648
+ ],
+ "page_size": [
+  4143,
+  6000
+ ],
+ "crop_box_in_page_px": [
+  330,
+  398,
+  922,
+  1665
+ ],
+ "paper": "Gold Hill daily news (Gold Hill, N.T. [Nev.]), November 26, 1872",
+ "url": "https://www.loc.gov/resource/sn84022046/1872-11-26/ed-1/?sp=2",
+ "phrases": {
+  "great diamond hoax": [
+   [
+    158.9,
+    316.8,
+    459.2,
+    39.2
+   ]
+  ],
+  "a humbug, a cruel fraud": [
+   [
+    264.9,
+    805.8,
+    435.2,
+    40.2
+   ]
+  ],
+  "the most gigantic fraud ever attempted": [
+   [
+    568.8,
+    1231.7,
+    136.2,
+    28.2
+   ],
+   [
+    85.9,
+    1265.7,
+    621.1,
+    43.2
+   ],
+   [
+    88.9,
+    1302.7,
+    529.2,
+    38.2
+   ]
+  ],
+  "Ralston, of the Bank of California": [
+   [
+    638.8,
+    1367.7,
+    55.2,
+    29.2
+   ],
+   [
+    88.9,
+    1404.6,
+    510.2,
+    33.2
+   ]
+  ]
+ }
+}
