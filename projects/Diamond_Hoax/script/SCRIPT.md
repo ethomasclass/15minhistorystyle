@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 2 · **2,104 words** · about **13:30 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 3 · **2,168 words** · about **13:54 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -19,20 +19,20 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 |---|---|---|---|
 | 0:00 | Paid for Dirt (cold open) | 156 | Hook |
 | 1:06 | Too Late for the Bank | 202 | Act I · setup |
-| 2:21 | Everybody Wants a Diamond Mine | 246 | Act I · setup |
-| 3:53 | The Tiffany Test | 225 | Act II · escalation (ends on the midpoint twist) |
-| 5:17 | The Long Way Around | 312 | Act II · escalation |
-| 7:12 | Cash Out (+ plug) | 170 | Act II · escalation (plug) |
-| 8:16 | The Anthills | 364 | Act III · climax |
-| 10:30 | Not Enough Money | 175 | Act III · climax |
-| 11:36 | Where the Money Went | 254 | Act IV · fallout + takeaway |
+| 2:21 | Everybody Wants a Diamond Mine | 283 | Act I · setup |
+| 4:06 | The Tiffany Test | 227 | Act II · escalation (ends on the midpoint twist) |
+| 5:31 | The Long Way Around | 322 | Act II · escalation |
+| 7:30 | Cash Out (+ plug) | 172 | Act II · escalation (plug) |
+| 8:34 | The Anthills | 367 | Act III · climax |
+| 10:50 | Not Enough Money | 175 | Act III · climax |
+| 11:56 | Where the Money Went | 264 | Act IV · fallout + takeaway |
 
 ---
 
 ## 0:00 | Paid for Dirt (cold open)
 *`ch01_cold_open.txt`* · 156 words · Hook
 
-Two cousins from Kentucky walked into a rich man's office with a bag of rocks. By the time they were done, they'd walked away with about eight million dollars in today's money.
+Two cousins from Kentucky walked into a rich man's office with a bag of rocks. By the time they were done, they'd walked away with about eighteen million dollars in today's money.
 
 Their customers were some of the richest men in America. Bankers. Generals. The most famous jeweler in the country. [wry] Not the kind of people who usually lose money to two guys in slouch hats.
 
@@ -70,28 +70,32 @@ That banker was William Ralston. He ran the Bank of California, the same bank th
 ---
 
 ## 2:21 | Everybody Wants a Diamond Mine
-*`ch03_everybody_wants_a_diamond_mine.txt`* · 246 words · Act I · setup
+*`ch03_everybody_wants_a_diamond_mine.txt`* · 283 words · Act I · setup
 
 Because he wanted to.
 
 Ralston had helped make a fortune from the silver mines of Nevada. But men like him were always hunting for the next big strike. And right then, the hottest thing in the world was diamonds. A few years earlier, diamonds had turned up in South Africa, and a rush had started there. *So why not here?*
 
-Then the cousins came back from another secret trip with a bigger bag. They said it was worth $600,000. A local jeweler reportedly took a look and said yes, these are real.
+Then the cousins came back from another secret trip with a bigger bag.
+
+Quick money note. A dollar back then was worth about 27 of today's dollars. So from here on, I'll give you every number in today's money.
+
+The cousins said that bag was worth about 16 million dollars. A local jeweler reportedly took a look and said yes, these are real.
 
 And they were. That's the trick. Arnold had worked as a bookkeeper at a company that made diamond drills, which use cheap, flawed diamonds as cutting tips. [wry] He knew exactly where to find a diamond nobody wanted.
 
-So Ralston and his partners bought in. They agreed to pay the cousins $100,000 for a piece of their {claim}, half of it up front.
+So Ralston and his partners bought in. They agreed to pay the cousins nearly three million dollars for a piece of their {claim}, half of it up front.
 
 In mining country, a claim is your legal right to dig in a patch of ground. You'd hammer wooden stakes into the corners and post a notice with your name on it. That's where the phrase "{staking a claim}" comes from. Whatever's under that ground is yours.
 
-And the cousins spent some of that money on a trip. To London. Under fake names, they bought about $20,000 worth of rough diamonds and rubies. Low-grade stuff. Rejects.
+And the cousins spent some of that money on a trip. To London. Under fake names, they bought about half a million dollars' worth of rough diamonds and rubies. Low-grade stuff. Rejects.
 
 [light] Now they had plenty of stones. What they needed was somebody famous to call them treasure.
 
 ---
 
-## 3:53 | The Tiffany Test
-*`ch04_the_tiffany_test.txt`* · 225 words · Act II · escalation (ends on the midpoint twist)
+## 4:06 | The Tiffany Test
+*`ch04_the_tiffany_test.txt`* · 227 words · Act II · escalation (ends on the midpoint twist)
 
 New York. A fancy house on Madison Avenue. In the room: two famous Civil War generals. The most famous newspaper editor in the country. A few nervous investors. And Charles Tiffany, of Tiffany and Company, the most famous jewelry store in America.
 
@@ -99,20 +103,20 @@ The stones go out on the table. Tiffany picks through them and holds them up to 
 
 "Gentlemen, these are beyond question precious stones of enormous value."
 
-Two days later, his number comes in. That sample, he says, is worth $150,000. And if that was just a sample? One of the investors did the math on the whole bag. *One and a half million dollars.*
+Two days later, his number comes in. That sample, he says, is worth about four million dollars. And if that was just a sample? One of the investors did the math on the whole bag. *Forty million dollars.*
 
 That's called an {appraisal}: an expert's estimate of what something is worth. And an appraisal is only as good as the expert.
 
 Here's what nobody asked. Tiffany sold diamonds that were cut and polished. He and his gem cutter had very little experience with rough stones straight out of the ground. [dry] Which is a bit like asking a chef to judge a cow.
 
-The cousins had paid about $20,000 for their London stones. [wry] Tiffany had just made them sound like a fortune.
+The cousins had paid about half a million for their London stones. [wry] Tiffany had just made them sound like a fortune.
 
 Now the money men were hooked. But they weren't stupid. Before they put in serious money, they wanted one more thing. *Somebody had to go stand on that diamond field.*
 
 ---
 
-## 5:17 | The Long Way Around
-*`ch05_the_long_way_around.txt`* · 312 words · Act II · escalation
+## 5:31 | The Long Way Around
+*`ch05_the_long_way_around.txt`* · 322 words · Act II · escalation
 
 And that was a problem. Because there was no diamond field. There was a bag.
 
@@ -128,22 +132,22 @@ Then they arrive. And almost right away, the men start finding stones. Diamonds.
 
 Janin was thrilled. He staked a claim on about 3,000 acres, stakes in the ground and all, and wrote a glowing report.
 
-By now the investors were turning the diamond field into a company, and selling {shares} in it. A share is a small slice of ownership. If the company strikes it rich, every slice is worth more. Janin's report said those shares were easily worth $40 each.
+By now the investors were turning the diamond field into a company, and selling {shares} in it. A share is a small slice of ownership. If the company strikes it rich, every slice is worth more. Janin's report said those shares were easily worth about a thousand dollars each.
 
-[dry] And Janin would know. He'd been allowed to buy 1,000 of those shares at $10 each. He sold them at $40. That's about $30,000 on top of his fee, for saying yes.
+[dry] And Janin would know. He'd been allowed to buy 1,000 of those shares at a quarter of that price. Then he sold them at the full price. That's about 800,000 dollars on top of his fee, for saying yes.
 
 But he'd seen it with his own eyes. What more could anyone ask for?
 
 ---
 
-## 7:12 | Cash Out (+ plug)
-*`ch06_cash_out.txt`* · 170 words · Act II · escalation (plug)
+## 7:30 | Cash Out (+ plug)
+*`ch06_cash_out.txt`* · 172 words · Act II · escalation (plug)
 
-Now the real money moved. A new company was set up in New York with ten million dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
+Now the real money moved. A new company was set up in New York with more than a quarter of a billion dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
 
 There was even a law to settle. Lawyers worried that America's new mining law didn't cover diamonds. So that summer, the U.S. Attorney General ruled that it did. [wry] The federal government officially agreed you could stake a claim on a diamond field. It just never asked to see one.
 
-And the cousins cashed out. The investors bought them out completely. Altogether, Arnold collected about $550,000. Slack took about $100,000. That's around eight million dollars today.
+And the cousins cashed out. The investors bought them out completely. Altogether, Arnold collected about 15 million dollars. Slack took nearly three million.
 
 Then they left. Arnold went home to Kentucky, a rich man. Slack just disappeared.
 
@@ -153,8 +157,8 @@ Then they left. Arnold went home to Kentucky, a rich man. Slack just disappeared
 
 ---
 
-## 8:16 | The Anthills
-*`ch07_the_anthills.txt`* · 364 words · Act III · climax
+## 8:34 | The Anthills
+*`ch07_the_anthills.txt`* · 367 words · Act III · climax
 
 October 1872. A train in California. On board are men from a government survey, geologists who'd spent five years mapping a long strip of the West, from California to the Rockies.
 
@@ -174,7 +178,7 @@ Then a stranger rode up. A diamond dealer from New York, out hunting for the fie
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for $40 today. You borrow one from somebody and sell it right away, so you've got $40 in your pocket. Next week, the news breaks, and that share is worth about nothing. You buy one back for a dollar, hand it back to the person you borrowed it from, and keep the difference.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one from somebody and sell it right away, so you've got a thousand dollars in your pocket. Next week, the news breaks, and that share is worth about nothing. You buy one back for twenty bucks, hand it back to the person you borrowed it from, and keep the difference.
 
 So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
@@ -182,7 +186,7 @@ So if you know a crash is coming, and nobody else does, you can get rich off it.
 
 ---
 
-## 10:30 | Not Enough Money
+## 10:50 | Not Enough Money
 *`ch08_not_enough_money.txt`* · 175 words · Act III · climax
 
 If the wrong people heard first, they could quietly sell their stock, and everyone else would be left holding paper worth nothing.
@@ -201,16 +205,16 @@ According to one of King's own men, a director suggested King might wait a littl
 
 ---
 
-## 11:36 | Where the Money Went
-*`ch09_paid_for_dirt.txt`* · 254 words · Act IV · fallout + takeaway
+## 11:56 | Where the Money Went
+*`ch09_paid_for_dirt.txt`* · 264 words · Act IV · fallout + takeaway
 
-Not back to the investors. Ralston alone reportedly lost about $250,000.
+Not back to the investors. Ralston alone reportedly lost about seven million dollars.
 
 Philip Arnold was charged with fraud in California. But he was home in Kentucky by then, and he never stood trial. He reportedly said he'd already hired a lawyer: "a good Henry rifle." [dry] A Henry rifle is not a lawyer.
 
-He did settle one investor's lawsuit, for $150,000. Then he took his money and became a banker. [wry] Of course he did. A few years later, an argument with a rival banker turned into a shootout. Arnold was hit in the shoulder. He died of pneumonia about six months later.
+He did settle one investor's lawsuit, for about four million dollars. Then he took his money and became a banker. [wry] Of course he did. A few years later, an argument with a rival banker turned into a shootout. Arnold was hit in the shoulder. He died of pneumonia about six months later.
 
-And John Slack? You may have heard that he vanished. For a long time, that's what everyone thought. He didn't. He made coffins in St. Louis, then moved to a small town in New Mexico and became the local undertaker. He died there in 1896, leaving about $1,600.
+And John Slack? You may have heard that he vanished. For a long time, that's what everyone thought. He didn't. He made coffins in St. Louis, then moved to a small town in New Mexico and became the local undertaker. He died there in 1896, a small-town undertaker with a small-town bank account.
 
 [thoughtful] So let's go back to the question. How do two cousins get the richest men in America to pay millions for dirt?
 
@@ -239,7 +243,26 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 
 **Vocab cards:** rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · appraisal · salting · shares (ch 5) · sell short (ch 7, with a worked example).
 
-**For a general audience** (your note after the read-through): money and mining terms get a plain explanation the first time, with a concrete picture. Staking a claim = wooden stakes and a notice with your name. A share = a slice of ownership. Selling short = a worked $40-to-$1 example. On screen: a small step-by-step card for the short sale (borrow → sell $40 → crash → buy back $1 → keep $39).
+**For a general audience** (your note after the read-through): money and mining terms get a plain explanation the first time, with a concrete picture. Staking a claim = wooden stakes and a notice with your name. A share = a slice of ownership. Selling short = a worked $40-to-$1 example. On screen: a small step-by-step card for the short sale (borrow → sell for $1,000 → crash → buy back for $20 → keep $980).
+
+**Money in today's dollars** (your note after the read-through): ch 3 says it once ("A dollar back then was worth about 27 of today's dollars. So from here on, I'll give you every number in today's money."), and every figure after that is converted at about ×27 and rounded. **On screen, every converted number also shows the 1872 figure** in small type under it (e.g. **$15 million** / *$550,000 in 1872*), so nothing is hidden.
+
+| Narration (today) | 1872 figure |
+|---|---|
+| about 18 million (cold open, the cousins' total) | about $660,000 |
+| about 16 million (the second bag, as claimed) | $600,000 |
+| nearly 3 million (the first buy-in) | $100,000 |
+| about half a million (the London stones) | about $20,000 |
+| about 4 million (Tiffany's sample) | $150,000 |
+| 40 million (the whole bag, extrapolated) | $1.5 million |
+| about a thousand dollars a share (Janin) | $40 |
+| a quarter of that price (Janin's buy-in) | $10 |
+| about 800,000 (Janin's profit) | about $30,000 |
+| more than a quarter of a billion (the company) | $10 million |
+| about 15 million (Arnold) | about $550,000 |
+| nearly 3 million (Slack) | $100,000 |
+| about 7 million (Ralston's loss) | about $250,000 |
+| about 4 million (Arnold's settlement) | $150,000 |
 
 **Quote cards** (word by word, attributed on screen):
 - Tiffany, Oct 1871: "Gentlemen, these are beyond question precious stones of enormous value."
@@ -271,7 +294,8 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 
 | Script says | The record | Why the wording is safe |
 |---|---|---|
-| "walked away with about eight million dollars in today's money" | About $660,000 total ($550,000 Arnold less expenses, $100,000 Slack); the Smithsonian puts it at about $8 million today | "about", "in today's money"; conversions vary by method |
+| "walked away with about eighteen million dollars in today's money" | About $660,000 total ($550,000 Arnold less expenses, $100,000 Slack). The Smithsonian's "about $8 million today" was for Arnold's share, on an older base year | Converted at our ×27 (below); "about" |
+| "A dollar back then was worth about 27 of today's dollars" | CPI estimates for 1872: about $26–$28 per 1872 dollar (officialdata.org: $27.37 in 2026; Minneapolis Fed series via ryanoconnellfinance.com: $27.87). No official CPI before 1913 | "about"; every converted figure rounded. 1871 prices were within a few percent of 1872 |
 | "some of the richest men in America… generals… the most famous jeweler" | Ralston, Roberts, Lent, Dodge, Harpending; Barlow, McClellan, Butler, Greeley at the appraisal; Rothschild and McClellan later invested | "some of"; generals are McClellan and Butler |
 | "Not the kind of people…two guys in slouch hats" | Thumbnail/frame 0 art is an anonymous illustration, not a portrait of the cousins | The art is labelled as an illustration (no source tag claiming it's archival) |
 | Roberts's office "about 150 years ago", too late for the Bank of California | Smithsonian: they came to Roberts's office at night, saying they'd have used the Bank of California had it not been so late; late 1870 (WyoHistory) | Matches the Smithsonian; no bank-counter scene (that's Harpending's and the pitch's colorful version) |
@@ -302,7 +326,7 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | A dozen rubies per diamond; boot prints; "end of a stick"; 10-foot trench | Smithsonian | "One of King's men figured" |
 | The cut-mark diamond in the original pitch | Not in Smithsonian or Wikipedia; one popular source | **Left out** |
 | Berry quote | Smithsonian | |
-| Short-selling example ($40 → $1) | Illustrative numbers, not a record; short sales of mining stock were common in 1870s San Francisco and New York | Framed as "Say a share sells for $40" |
+| Short-selling example ($1,000 → $20) | Illustrative numbers, not a record; short sales of mining stock were common in 1870s San Francisco and New York | Framed as "Say a share sells for $40" |
 | Staking a claim: stakes at the corners and a posted notice | Standard practice under U.S. mining law and custom (the 1872 law requires a claim's boundaries be marked on the ground) | Plain description |
 | King rode 45 miles, San Francisco Nov 10, night at Janin's hotel, read report next morning | Smithsonian | |
 | "Not enough money" quote | Emmons's later account, via the Smithsonian | "According to one of King's own men" |
@@ -311,7 +335,7 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | Ralston "reportedly lost about $250,000" | Smithsonian ("widely reported") | "reportedly". One source says Ralston repaid investors $80,000 each: **not used** |
 | Arnold indicted, never tried; "Henry rifle" | WyoHistory, Smithsonian | "reportedly" |
 | Settled one lawsuit for $150,000; became a banker; shootout 1878; shoulder; pneumonia ~6 months later | Smithsonian (William Lent settlement) | Some sources give his death as 1879; script gives no year |
-| Slack: coffins in St. Louis, undertaker in White Oaks, NM, died 1896, ~$1,600 | Smithsonian (Bruce Woodard's research), NMSU archive | "You may have heard that he vanished" = myth beat |
+| Slack: coffins in St. Louis, undertaker in White Oaks, NM, died 1896, estate about $1,600 (not given in the narration; "a small-town bank account") | Smithsonian (Bruce Woodard's research), NMSU archive | "You may have heard that he vanished" = myth beat |
 
 ## Cut list (if you want it shorter; written for draft 1, the new explanations are not on it)
 
@@ -330,6 +354,8 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | **Total** | **about -225 → ~1,710 words, about 11:00** | |
 
 ## Sources
+
+- Inflation (1872 → today): https://www.officialdata.org/us/inflation/1872?amount=20 · https://ryanoconnellfinance.com/inflation-calculator/1872/
 
 - Smithsonian Magazine, "The Great Diamond Hoax of 1872": https://www.smithsonianmag.com/history/the-great-diamond-hoax-of-1872-2630188/
 - WyoHistory.org, "The Diamond Hoax: a Bonanza That Never Was": https://www.wyohistory.org/encyclopedia/diamond-hoax-bonanza-never-was
