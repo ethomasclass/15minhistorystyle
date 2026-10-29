@@ -241,6 +241,7 @@ column says where each was made.
   ~150 px, bottom ~400 px, right ~150 px below y 900).
 
 **Thumbnail**
+- **Brainstorm the thumbnail and title first** (the Diamond Hoax, Oct 2026): right after the topic is chosen and fact-checked, before the full script, so the cold open can be built to match it.
 - The whole head is in frame, and any symbol sits on the head at the right size.
 - Text stays clear of the face.
 - The headline is big and the kicker smaller.

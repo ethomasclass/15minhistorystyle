@@ -7,6 +7,10 @@
 
 ## 1. Thumbnail
 
+**Do this first** (the user's rule, Oct 2026): brainstorm thumbnail concepts and the title right after the topic is fact-checked,
+before the full script. Check each concept against the archival images that actually exist. The chosen thumbnail decides the cold
+open's first image and first line; the final render happens at packaging.
+
 `src/Thumbnail.tsx` holds two concepts drawn with the video's own kit; `node tools/thumbs.mjs [A B C …]` renders them to
 `renders/thumbnails/<SLUG>_<key>.png` at 1280×720. Offer the user two or three concepts, then refine the one they
 pick. For *King Andrew* they chose **A, the split**:

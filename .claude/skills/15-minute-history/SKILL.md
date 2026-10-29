@@ -45,6 +45,7 @@ everywhere it applies.
 | # | Phase | You produce | Read |
 |---|---|---|---|
 | 1 | **Set up** | new project from the template | below |
+| 1b | **Thumbnail + title brainstorm** (before the script) | 4–6 thumbnail concepts and title pairs, checked against the archival images that exist; the user picks 2–3 to mock up. The winner sets the cold open: what the thumbnail shows is on screen at frame 0 | `references/thumbnail-and-youtube.md` |
 | 2 | **Script** | beat outline → full draft in `script/SCRIPT.md` + one `chNN_slug.txt` per chapter | `references/script-writing.md`, `references/explainer-craft.md` |
 | 3 | **Content review** | answers to "are we missing anything?", cuts to ~15 min, fact-check flags | `references/script-writing.md` |
 | 4 | **Pronunciation check** | respellings + a test MP3 for the user | `references/voice-and-audio.md` |
@@ -53,7 +54,7 @@ everywhere it applies.
 | 7 | **Scenes** | `src/ch/ChNN.tsx` per chapter, checked with stills, anchor and text probes | `references/building-scenes.md`, `references/visual-style.md`, `references/explainer-craft.md` §3–5 |
 | 8 | **Render** | 1080p master, 720p, a <30 MB preview for the user | `references/render-and-deliver.md` |
 | 9 | **Feedback rounds** | batched fixes, partial re-renders, new previews | `references/render-and-deliver.md` |
-| 10 | **Package** | thumbnail concepts, YouTube title/description/tags, 1080p via Git LFS | `references/thumbnail-and-youtube.md` |
+| 10 | **Package** | final thumbnail render (from the 1b concept), YouTube title/description/tags, 1080p via Git LFS | `references/thumbnail-and-youtube.md` |
 | 11 | **Classroom** (if asked) | a simple note-taking handout | `references/classroom-handout.md` |
 | 12 | **Shorts** | 3–4 native vertical Shorts from the video's own narration and assets, plus their text | `references/shorts.md` |
 
