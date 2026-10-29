@@ -45,8 +45,8 @@ everywhere it applies.
 | # | Phase | You produce | Read |
 |---|---|---|---|
 | 1 | **Set up** | new project from the template | below |
-| 1b | **Thumbnail + title brainstorm** (before the script) | 4–6 thumbnail concepts and title pairs, checked against the archival images that exist; the user picks 2–3 to mock up. The winner sets the cold open: what the thumbnail shows is on screen at frame 0 | `references/thumbnail-and-youtube.md` |
-| 2 | **Script** | beat outline → full draft in `script/SCRIPT.md` + one `chNN_slug.txt` per chapter | `references/script-writing.md`, `references/explainer-craft.md` |
+| 1b | **Packaging first** (before the script) | the core concept in one line; 4–6 thumbnail concepts and 3–5 titles ("would I click at 11 PM?"), checked against the archival images that exist; the user picks 2–3 to mock up. The winner sets the cold open: what the thumbnail shows is on screen at frame 0 | `references/thumbnail-and-youtube.md` |
+| 2 | **Script** | beat outline on the hook / four-act arc with a midpoint twist → full draft in `script/SCRIPT.md` + one `chNN_slug.txt` per chapter | `references/script-writing.md`, `references/explainer-craft.md` |
 | 3 | **Content review** | answers to "are we missing anything?", cuts to ~15 min, fact-check flags | `references/script-writing.md` |
 | 4 | **Pronunciation check** | respellings + a test MP3 for the user | `references/voice-and-audio.md` |
 | 5 | **Voice** | chapter WAVs + word timings, a narration preview MP3 | `references/voice-and-audio.md` |

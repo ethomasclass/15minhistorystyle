@@ -7,9 +7,26 @@
 
 ## 1. Thumbnail
 
-**Do this first** (the user's rule, Oct 2026): brainstorm thumbnail concepts and the title right after the topic is fact-checked,
-before the full script. Check each concept against the archival images that actually exist. The chosen thumbnail decides the cold
-open's first image and first line; the final render happens at packaging.
+**Do this first: packaging before the script** (the user's rule, Oct 2026, from their "Overcoming a Slow YouTube Start" notes).
+Right after the topic is fact-checked, and before the full script:
+
+1. **The core concept in one line.** What kind of hook is it: an underdog, a disaster averted, a con, an experiment gone wrong? If
+   the video can't be summed up in one image and a five-word title, the premise isn't sharp enough yet. Sharpen it before writing.
+2. **The packaging mockup.** Brainstorm 4–6 thumbnail concepts and **3–5 titles**, checked against the archival images that actually
+   exist. Test each pair with: *"Would I click on this if I saw it on my feed at 11 PM?"* The user picks 2–3 to mock up.
+3. **Build the video to the package.** The winning thumbnail decides the cold open's first image and line (it is on screen at frame 0),
+   and the script pays off its promise quickly. The final render happens at packaging (phase 10).
+4. **The post-launch check** (below, §3).
+
+What makes a thumbnail work:
+- **The rule of one.** One idea, readable on a phone in under half a second. Too many objects, text blocks or focal points and the
+  thumb scrolls past.
+- **A question, not a label.** The thumbnail is not a poster or title card for the topic. If it tells the whole story there's no
+  reason to click. It should make the viewer think *"wait, how did that happen?"* and leave the video to answer it.
+- **Title and thumbnail form one curiosity gap.** They work together and never repeat each other. Weak: a report ("How We
+  Broadcast Our Event"). Strong: a story with stakes ("We Broke Our Setup 10 Minutes Before Green Flag").
+- **Contrast.** A bright, clean focal point that stands out against YouTube's dark and light themes. A face with real emotion, or
+  one striking contrast, draws the eye.
 
 `src/Thumbnail.tsx` holds two concepts drawn with the video's own kit; `node tools/thumbs.mjs [A B C …]` renders them to
 `renders/thumbnails/<SLUG>_<key>.png` at 1280×720. Offer the user two or three concepts, then refine the one they
@@ -48,8 +65,14 @@ Write them into `review/YouTube_description.md` as four sections: Title (in a co
 listed below), Description (one code block, ready to paste), Tags (one code block), Upload settings. Then run
 `python3 tools/youtube_check.py`.
 
-**Title** (≤ 70 characters): the person or topic people search for first, then the hook.
-`Andrew Jackson: How the People's President Became "King Andrew"` / `Why America Tried to Fix Everything | The Reform Era Explained`
+**Title: the most important line of metadata.** The thumbnail stops the scroll; the title wins the click. YouTube reads it to know
+who to test the video on, and the viewer reads it with the thumbnail to decide whether it's worth 15 minutes.
+- **Under 50–60 characters**, so it isn't cut off on phones.
+- **The hook or curiosity gap first**: the most compelling words at the front.
+- **Read like a movie headline, not a textbook index**, for story and entertainment videos. Weak: "The History of the Great
+  Diamond Hoax of 1872". Strong: "The Scam That Fooled Wall Street" (but only claims that are true; see the objectivity rules).
+- **Classroom and APUSH videos** may still lead with the term students search for, then the hook:
+  `Andrew Jackson: How the People's President Became "King Andrew"`. Even then, keep it near 60 characters.
 
 **Description template:**
 
@@ -77,14 +100,26 @@ Historical images: <institutions actually used, from public/img/credits.json: Li
 ```
 
 SEO notes:
-- The first ~150 characters show in search and above "Show more": put the main keywords there.
+- **The first 2–3 lines are the important ones**: they show under the video in search and on phones. Make them a compelling
+  two-sentence summary that backs up the title's hook, with the main keywords in it.
+- **Write naturally.** Use the words viewers would actually type. Never a block of names or keywords at the bottom: it looks like
+  spam and can be flagged.
+- Timestamps help retention: they show the video's scope and let people jump around.
 - Chapter titles use the same searchable terms (they become Google "key moments").
 - Only the first three hashtags show above the title.
 - Pull terms from the script's vocab list and key concepts; don't promise topics the video doesn't cover.
 
-**Tags** (≤ 500 characters counted YouTube's way): 20–30 tags, most specific first: the person, the nickname,
-the era name, each major event, law, court case and concept, key people, then `apush`, `apush period N`,
-`us history`. Drop the broadest tags first if over the limit.
+**Tags: low weight, don't overthink them.** YouTube says tags play a very small role, mostly catching misspellings of the topic or
+channel name ("Diamond Hoax" vs. "Diamon Hoax"); it learns what the video is about from the transcript, title, description and what
+viewers do. Spend two minutes: **5–8 accurate tags** (e.g. `great diamond hoax`, `1872`, `gilded age scams`, `american history`),
+plus `apush` and `us history` for classroom videos. Put the time into the title, thumbnail and pacing instead.
+
+| Element | Weight | Goal |
+|---|---|---|
+| Thumbnail | Critical (stops the scroll) | A bold visual promise or a question |
+| Title | Critical (wins the click) | The story with emotional or narrative stakes |
+| Description | Moderate (context) | A hook in the first two lines, plus timestamps |
+| Tags | Low (minor correction) | A few accurate keywords, then move on |
 
 ## 3. Upload settings
 
@@ -95,3 +130,10 @@ the era name, each major event, law, court case and concept, key people, then `a
 - **Category:** Education.
 - **Thumbnail:** `renders/thumbnails/<SLUG>_A.png` (or the chosen concept).
 - **Video file:** `renders/<SLUG>_1080p.mp4` (the LFS master).
+
+## 4. After launch: the CTR check
+
+A couple of days after upload, open YouTube Studio → the video → Reach. If impressions are decent but **click-through rate is under
+3–4%**, the packaging isn't grabbing people yet. Swap the thumbnail or the title to test a new angle (Test & Compare, or a straight
+swap). Change one at a time so you know which one helped. For retention, look at where people drop off (judge organic traffic, not
+promoted views).

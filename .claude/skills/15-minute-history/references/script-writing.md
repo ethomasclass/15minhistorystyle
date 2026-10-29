@@ -61,6 +61,22 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   title card, eight 2-second mark-snap breaks, short chapter tails and a 20-second end screen add about a minute). **For 15:00
   finished, write about 2,300 words.**
 
+### The story arc (the channel's repeatable shape, from the user's notes, Oct 2026)
+
+A repeatable structure saves a blank page on script day, and viewers learn the rhythm. For a 10–15 minute story video:
+
+| Part | Time (15 min / 10 min) | Job | The YouTube reason |
+|---|---|---|---|
+| **Hook** | 0:00–0:45 | The most dramatic, bizarre or high-stakes moment, taken from the middle or end of the story. Drop the viewer into the action, name the core mystery, then pull back. Never "In the year 1872…" | Viewers decide in the first 15–30 seconds |
+| **Act I: the setup** | 1–3 / 1–2 | Who, where, when, fast. Introduce the people (heroes, scoundrels, ordinary people caught up in it). Tie the context to their motives | Retention dips if background drags |
+| **Act II: the escalation** | 3–7 / 2–5 | Stakes rise, the plan moves, the mystery deepens. **A midpoint twist or complication around the 4–5 minute mark** (about 25–35% in): just when the viewer thinks they know where it's going, throw a wrench in it | A fresh complication instead of a summary flattens the drop-off |
+| **Act III: the climax** | 7–11 / 5–8 | The con is exposed, the battle turns, the truth comes out. The highest-energy stretch: quicker cutting, the music shifts, the payoff lands | Peak attention |
+| **Act IV: the fallout** | 11–13 / 8–10 | What happened to everyone. End on a takeaway (why this odd story matters, what it says about people), never a fade to black or "and that's the story" | Session time; the ending decides the next click |
+
+It sits on top of the rules above: the cold open is the hook, chapter 2 starts Act I in the action, the long loop pays off in Act III,
+the mid-video plug goes after the escalation's big build, and the last chapter answers the driving question out loud. Mark the four acts
+and the midpoint twist in SCRIPT.md's beat table.
+
 ## 2. The voice
 
 Plain, quick and a little wry: a smart friend explaining history, not a textbook and not a comedian.

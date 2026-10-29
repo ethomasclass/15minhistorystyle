@@ -241,7 +241,7 @@ column says where each was made.
   ~150 px, bottom ~400 px, right ~150 px below y 900).
 
 **Thumbnail**
-- **Brainstorm the thumbnail and title first** (the Diamond Hoax, Oct 2026): right after the topic is chosen and fact-checked, before the full script, so the cold open can be built to match it.
+- **Brainstorm the thumbnail and title first** (the Diamond Hoax, Oct 2026): right after the topic is chosen and fact-checked, before the full script, so the cold open can be built to match it. A thumbnail is a **question, not a label**, with **one idea**; title and thumbnail make one curiosity gap together.
 - The whole head is in frame, and any symbol sits on the head at the right size.
 - Text stays clear of the face.
 - The headline is big and the kicker smaller.
@@ -265,7 +265,8 @@ column says where each was made.
 - Give music options and let you pick.
 
 **Packaging**
-- Short YouTube titles. Tags within the 500-character limit.
+- **Titles under 50–60 characters, hook first**, read like a headline, not a textbook index (classroom videos may lead with the search term). **5–8 accurate tags**; they carry little weight (from the user's "Slow YouTube Start" notes, Oct 2026).
+- **Check CTR a couple of days after launch**: decent impressions but under 3–4% means swap the thumbnail or the title.
 - **Descriptions never mention AI images, AI music or the AI voiceover.** Credit only the archival sources. (YouTube's altered-content checkbox in Studio is still ticked.)
 - Master READMEs include Windows PowerShell join commands.
 

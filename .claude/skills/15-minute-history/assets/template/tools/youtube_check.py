@@ -2,8 +2,8 @@
 
   python3 tools/youtube_check.py [review/YouTube_description.md]
 
-The file holds three fenced blocks in order: title, description, tags (comma-separated). Checks: title under 70
-(YouTube's limit is 100; past ~70 it gets cut off in search), description under 5,000, tags under 500 counted
+The file holds three fenced blocks in order: title, description, tags (comma-separated). Checks: title under 60
+(YouTube's limit is 100; past 50–60 it gets cut off on phones), description under 5,000, tags under 500 counted
 YouTube's way (a tag with a space counts 2 extra for the quotes YouTube adds, plus the commas), chapter list starts
 at 0:00 with 3+ entries at least 10 s apart, and at most 3 hashtags at the end (the first three show above the title).
 """
@@ -24,9 +24,10 @@ def check(cond, msg):
     print(("ok    " if cond else "FIX   ") + msg)
     ok &= cond
 
-check(len(title) <= 70, f"title {len(title)} characters (≤ 70)")
+check(len(title) <= 60, f"title {len(title)} characters (≤ 60, cut off on phones past that)")
 check(len(desc) <= 5000, f"description {len(desc)} characters (≤ 5,000)")
-check(tag_len <= 500, f"tags {tag_len} characters YouTube's way, {len(tag_list)} tags (≤ 500)")
+check(tag_len <= 500, f"tags {tag_len} characters YouTube's way (≤ 500)")
+check(len(tag_list) <= 12, f"tags: {len(tag_list)} (5–8 accurate ones are enough; tags carry little weight)")
 check(bool(secs) and secs[0] == 0 and len(secs) >= 3 and all(b - a >= 10 for a, b in zip(secs, secs[1:])),
       f"chapters: {len(secs)} timestamps, first at 0:00, each ≥ 10 s apart")
 check(len(hashtags) <= 3, f"hashtags: {len(hashtags)} (≤ 3 recommended)")
