@@ -29,6 +29,8 @@ JOBS = {
     "tycoon_a": ("img/gen/thumb/tycoon_a_pro.png", None, "isnet-general-use"),
     "tycoon_b": ("img/gen/thumb/tycoon_b_clean.png", None, "isnet-general-use"),
     "tycoon_c": ("img/gen/thumb/tycoon_c_clean.png", None, "isnet-general-use"),
+    "cousin_l": ("img/gen/thumb/cousins_a_pro.png", (0, 0, 688, 768), "isnet-general-use"),
+    "cousin_r": ("img/gen/thumb/cousins_a_pro.png", (688, 0, 1376, 768), "isnet-general-use"),
     "rock_c": ("img/gen/thumb/tycoon_c_clean.png", (770, 290, 1110, 650), "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),

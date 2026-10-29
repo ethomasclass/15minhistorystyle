@@ -5,10 +5,14 @@ import sully from '../public/img/masks/sully.json';
 import tycoon_b from '../public/img/masks/tycoon_b.json';
 import tycoon_c from '../public/img/masks/tycoon_c.json';
 import rock_c from '../public/img/masks/rock_c.json';
+import cousin_l from '../public/img/masks/cousin_l.json';
+import cousin_r from '../public/img/masks/cousin_r.json';
 
 export const MASKS = {
   sully: maskRef('sully', sully),
   tycoon_b: maskRef('tycoon_b', tycoon_b),
   tycoon_c: maskRef('tycoon_c', tycoon_c),
   rock_c: maskRef('rock_c', rock_c),
+  cousin_l: maskRef('cousin_l', cousin_l),
+  cousin_r: maskRef('cousin_r', cousin_r),
 };

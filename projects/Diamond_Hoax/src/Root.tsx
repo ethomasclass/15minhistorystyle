@@ -7,7 +7,7 @@ import {ChannelIntro, INTRO_FRAMES} from './kit/ChunkIntro';
 import {BREAK_FRAMES, LogoBreak} from './kit/ChunkIntro';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
-import {ThumbF1, ThumbF2, ThumbF3} from './ThumbsDiamond';
+import {ThumbF1, ThumbF2, ThumbF3, ThumbG1, ThumbG2} from './ThumbsDiamond';
 
 export const Root: React.FC = () => (
   <>
@@ -16,7 +16,7 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
-    {([['F1', ThumbF1], ['F2', ThumbF2], ['F3', ThumbF3]] as const).map(([k, T]) => (
+    {([['F1', ThumbF1], ['F2', ThumbF2], ['F3', ThumbF3], ['G1', ThumbG1], ['G2', ThumbG2]] as const).map(([k, T]) => (
       <Composition key={k} id={`Thumb-${k}`} width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />
     ))}
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />

@@ -3,6 +3,8 @@
 //   F1 · the shocked tycoon in coral, rough diamond in hand: WHO PUT / IT THERE?
 //   F2 · the same tycoon in black and white, only the diamond in coral: IT WAS IN / AN ANTHILL?
 //   F3 · the loupe tycoon in coral: WHO PUT / IT THERE?
+//   G1/G2 · over the cousins' shoulders: the two of them from behind (fingers crossed, the pouch of stones), the loupe tycoon
+//           smaller between them in coral, admiring the stone. G1: IT'S REAL! · G2: WORTH MILLIONS!
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
@@ -75,3 +77,29 @@ export const ThumbF3: React.FC = () => (
     <Highlight text="IT THERE?" x={90} y={740} size={150} at={0} seed={96} rot={-2} />
   </Frame>
 );
+
+const PAIR: [number, number] = [1376, 768];
+const COUSIN_L: Place = {left: -40, top: 250, scale: 1.3};
+const COUSIN_R: Place = {left: 250, top: 250, scale: 1.3};
+const TYC: Place = {left: 495, top: 370, scale: 0.8};
+
+/** One cousin cut out of the pair picture (both share the same placement; each mask keeps one man). */
+const Cousin: React.FC<{mask: string; at: Place}> = ({mask, at}) => (
+  <div style={{position: 'absolute', left: at.left, top: at.top, width: PAIR[0] * at.scale, height: PAIR[1] * at.scale, ...cut(mask), filter: 'drop-shadow(0 0 40px rgba(0,0,0,0.85))'}}>
+    <Picture src="img/gen/thumb/cousins_a_pro.png" place={{left: 0, top: 0, scale: at.scale}} size={PAIR} bw="grayscale(1) contrast(1.2) brightness(0.8)" />
+  </div>
+);
+
+const OverTheShoulder: React.FC<{words: string; size: number; x: number}> = ({words, size, x}) => (
+  <Frame>
+    <Figure src="img/gen/thumb/tycoon_b_clean.png" mask={MASKS.tycoon_b.alpha} place={TYC} />
+    <Tint mask={MASKS.tycoon_b.alpha} place={TYC} size={SIZE} />
+    <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={TYC} at={0} dur={1} width={7} />
+    <Cousin mask={MASKS.cousin_l.alpha} at={COUSIN_L} />
+    <Cousin mask={MASKS.cousin_r.alpha} at={COUSIN_R} />
+    <Highlight text={words} x={x} y={150} size={size} at={0} seed={97} rot={-3} />
+  </Frame>
+);
+
+export const ThumbG1: React.FC = () => <OverTheShoulder words="IT'S REAL!" size={170} x={560} />;
+export const ThumbG2: React.FC = () => <OverTheShoulder words="WORTH MILLIONS!" size={140} x={470} />;
