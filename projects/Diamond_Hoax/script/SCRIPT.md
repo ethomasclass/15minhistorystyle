@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 7 · **2,712 words** · about **17:11 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 8 · **2,423 words** · about **15:26 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -18,14 +18,14 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | Starts | Chapter | Words | Arc |
 |---|---|---|---|
 | 0:00 | Paid for Dirt (cold open) | 179 | Hook |
-| 1:14 | Too Late for the Bank | 265 | Act I · setup |
-| 2:53 | Everybody Wants a Diamond Mine | 272 | Act I · setup |
-| 4:34 | The Tiffany Test | 222 | Act II · escalation (ends on the midpoint twist) |
-| 5:56 | The Long Way Around | 353 | Act II · escalation |
-| 8:07 | Diamond Fever | 181 | Act II · escalation |
-| 9:14 | The Anthills | 373 | Act III · climax |
-| 11:32 | The Dominoes (+ plug) | 455 | Act III · climax (plug after the climax) |
-| 14:20 | Where the Money Went | 412 | Act IV · fallout + takeaway |
+| 1:14 | Too Late for the Bank | 232 | Act I · setup |
+| 2:41 | Everybody Wants a Diamond Mine | 240 | Act I · setup |
+| 4:10 | The Tiffany Test | 178 | Act II · escalation (ends on the midpoint twist) |
+| 5:17 | The Long Way Around | 290 | Act II · escalation |
+| 7:04 | Diamond Fever | 176 | Act II · escalation |
+| 8:10 | The Anthills | 337 | Act III · climax |
+| 10:15 | The Dominoes (+ plug) | 429 | Act III · climax (plug after the climax) |
+| 12:53 | Where the Money Went | 362 | Act IV · fallout + takeaway |
 
 ---
 
@@ -49,13 +49,13 @@ But first: a knock on an office door, late at night, and a bag nobody wanted to 
 ---
 
 ## 1:14 | Too Late for the Bank
-*`ch02_too_late_for_the_bank.txt`* · 265 words · Act I · setup
+*`ch02_too_late_for_the_bank.txt`* · 232 words · Act I · setup
 
-San Francisco, about 150 years ago. It's evening, and a mining promoter is still at his desk when two scruffy men show up at his door.
+San Francisco, about 150 years ago. Late one evening, two scruffy men show up at a mining promoter's office.
 
-They're cousins. Philip Arnold and John Slack. Arnold had been chasing gold out West since the Gold Rush. And he's holding a small leather bag like it might bite him.
+They're cousins. Philip Arnold and John Slack. And Arnold is holding a small leather bag like it might bite him.
 
-They explain, a little nervously, that they'd meant to leave it at the Bank of California. But it was too late in the day. Could he keep it safe for them?
+They'd meant to leave it at the Bank of California, they explain. But it was too late in the day. Could he keep it safe?
 
 [pause] Naturally, he asks what's in it.
 
@@ -63,7 +63,7 @@ The cousins hesitate. They look at each other. Finally, Arnold lets it slip. {Ro
 
 From where? They won't say. Somewhere out West. Somewhere secret. And he has to swear he won't tell a soul.
 
-That's how a con starts. In a con, the person being fooled is called the {mark}. Move one: *the bait*. Show the mark something he already wants. Move two: *play hard to get*. Don't sell it. Make him chase it. A secret, a nervous glance, a promise not to tell. [wry] Nothing makes a man want something like being told he can't have it.
+That's how a con starts. In a con, the person being fooled is called the {mark}. Move one: *the bait*. Show the mark something he already wants. Move two: *play hard to get*. Don't sell it. Make him chase it. [wry] Nothing makes a man want something like being told he can't have it.
 
 [dry] And our promoter kept his promise for about as long as it took to find a banker.
 
@@ -73,20 +73,20 @@ That banker was William Ralston. He ran the Bank of California, the same bank th
 
 ---
 
-## 2:53 | Everybody Wants a Diamond Mine
-*`ch03_everybody_wants_a_diamond_mine.txt`* · 272 words · Act I · setup
+## 2:41 | Everybody Wants a Diamond Mine
+*`ch03_everybody_wants_a_diamond_mine.txt`* · 240 words · Act I · setup
 
 Because he wanted to.
 
-Ralston had helped make a fortune from the silver mines of Nevada. But men like him were always hunting for the next big strike. And right then, the hottest thing in the world was diamonds. A few years earlier, diamonds had turned up in South Africa, and a rush had started there. *So why not here?*
+Ralston had helped make a fortune on Nevada silver, and men like him were always hunting for the next big strike. Diamonds had just turned up in South Africa. *So why not here?*
 
 Quick money note. A dollar back then was worth about 27 of today's dollars. So from here on, every number is in today's money.
 
-Then the cousins came back from another secret trip with a bigger bag. They said it was worth about 16 million dollars. A local jeweler reportedly took a look and said yes, these are real.
+Then the cousins came back with a bigger bag, which they said was worth about 16 million dollars. A local jeweler reportedly took a look and said yes, these are real.
 
 And they were. That's the trick. Arnold had worked as a bookkeeper at a company that made diamond drills, which use cheap, flawed diamonds as cutting tips. [wry] He knew exactly where to find a diamond nobody wanted.
 
-So Ralston and his partners bought in. They agreed to pay the cousins nearly three million dollars for a piece of their {claim}, half of it up front.
+So Ralston and his partners bought in. They agreed to pay the cousins nearly three million dollars for a piece of their {claim}.
 
 A claim is your legal right to dig in a patch of ground. You hammer wooden stakes into the corners and post your name. That's where "{staking a claim}" comes from.
 
@@ -96,47 +96,45 @@ But a couple of bags only go so far. So the cousins spent some of that money on 
 
 ---
 
-## 4:34 | The Tiffany Test
-*`ch04_the_tiffany_test.txt`* · 222 words · Act II · escalation (ends on the midpoint twist)
+## 4:10 | The Tiffany Test
+*`ch04_the_tiffany_test.txt`* · 178 words · Act II · escalation (ends on the midpoint twist)
 
-New York. A fancy house on Madison Avenue. In the room: two famous Civil War generals. The most famous newspaper editor in the country. A few nervous investors. And Charles Tiffany, the man behind Tiffany and Company.
+New York. A fancy house on Madison Avenue. In the room: two famous Civil War generals. The most famous newspaper editor in the country. And Charles Tiffany, the man behind Tiffany and Company.
 
 The stones go out on the table. Tiffany picks through them and holds them up to the light. And then he says this.
 
 "Gentlemen, these are beyond question precious stones of enormous value."
 
-Two days later, his number comes in. That sample, he says, is worth about four million dollars. And if that was just a sample? One of the investors did the math on the whole bag. *Forty million dollars.*
-
-That's called an {appraisal}: an expert's estimate of what something is worth. And an appraisal is only as good as the expert.
+Two days later, his number: that sample alone is worth about four million dollars. And if that was just a sample? One of the investors did the math on the whole bag. *Forty million dollars.*
 
 This is move three: *borrowed trust*. Nobody had to trust two scruffy cousins from Kentucky. They just had to trust Tiffany.
 
-Here's what nobody asked. Tiffany sold diamonds that were cut and polished. He and his gem cutter had very little experience with rough stones straight out of the ground. [dry] Which is a bit like asking a chef to judge a cow.
+Here's what nobody asked. Tiffany sold cut and polished diamonds. He and his gem cutter knew very little about rough stones straight out of the ground.
 
 Now the money men were hooked. But they weren't stupid. Before they put in serious money, they wanted one more thing. *Somebody had to go stand on that diamond field.*
 
 ---
 
-## 5:56 | The Long Way Around
-*`ch05_the_long_way_around.txt`* · 353 words · Act II · escalation
+## 5:17 | The Long Way Around
+*`ch05_the_long_way_around.txt`* · 290 words · Act II · escalation
 
 And that was a problem. Because there was no diamond field. There was a bag.
 
 [pause] So the cousins went out and made one.
 
-Picture a flat, empty mesa in the far corner of northwest Colorado, near the Wyoming line. Sandstone, sagebrush, a lot of wind. Before any experts showed up, someone walked that ground with a bag of cheap stones. Pressing them into the dirt. Tucking them into cracks in the rock. Poking them into anthills.
+Picture a flat, empty mesa in northwest Colorado. Sandstone, sagebrush, wind. Before any experts showed up, someone walked that ground with a bag of cheap stones. Pressing them into the dirt. Tucking them into cracks in the rock. Poking them into anthills.
 
-That's called {salting}: planting something valuable where a buyer is going to dig, so the ground looks richer than it is. Miners had salted gold claims for years. [wry] Nobody had ever salted a desert with diamonds.
+That's called {salting}: planting something valuable where a buyer is going to dig, so the ground looks richer than it is.
 
-June 1872. The investors' expert arrives. Henry Janin, one of the best-known mining engineers in the country. The group rides the train to Rawlins, Wyoming. Then four days on horseback, with Arnold leading the way. And Arnold keeps getting lost. Doubling back. Going in circles. By one account, Janin was blindfolded for part of the ride. Either way, nobody was finding that place again without the cousins.
+June 1872. The investors' expert arrives. Henry Janin, one of the best-known mining engineers in the country. Four days on horseback, with Arnold leading the way. And Arnold keeps getting lost. Doubling back. Going in circles. By one account, Janin was blindfolded for part of the ride.
 
 Then they arrive. And almost right away, the men start finding stones. Diamonds. Rubies. Right there in the dirt.
 
-Janin was thrilled. He staked a claim on about 3,000 acres, stakes in the ground and all, and wrote a glowing report.
+Janin was thrilled. He staked a claim on about 3,000 acres and wrote a glowing report.
 
 By now the investors were turning the diamond field into a company, and selling {shares} in it. A share is a small slice of ownership. If the company strikes it rich, every slice is worth more. Janin's report said those shares were easily worth about a thousand dollars each.
 
-[dry] And Janin would know. He'd been allowed to buy 1,000 of those shares at a quarter of that price. Then he sold them at the full price. That's about 800,000 dollars on top of his fee, for saying yes.
+[dry] And Janin would know. He'd bought 1,000 of those shares at a quarter of that price, and sold them at full price. About 800,000 dollars, for saying yes.
 
 But he'd seen it with his own eyes. And that's move four: *the proof*. Don't tell the mark it's real. Let him dig it up himself.
 
@@ -144,12 +142,12 @@ But he'd seen it with his own eyes. And that's move four: *the proof*. Don't tel
 
 ---
 
-## 8:07 | Diamond Fever
-*`ch06_cash_out.txt`* · 181 words · Act II · escalation
+## 7:04 | Diamond Fever
+*`ch06_cash_out.txt`* · 176 words · Act II · escalation
 
 Now the real money moved. A new company was set up in New York with more than a quarter of a billion dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
 
-And it spread. Newspapers printed how-to articles on diamond mining. Prospectors fanned out across Arizona, New Mexico, Utah, Wyoming and Colorado, hunting for diamond fields of their own. People called it *diamond fever*.
+And it spread. Newspapers printed how-to articles on diamond mining. Prospectors fanned out across the West, hunting for diamond fields of their own. People called it *diamond fever*.
 
 That's move five: *the rush*. Once everybody important is buying in, nobody wants to be the one asking questions. They just want in before it's gone.
 
@@ -159,8 +157,8 @@ That's move five: *the rush*. Once everybody important is buying in, nobody want
 
 ---
 
-## 9:14 | The Anthills
-*`ch07_the_anthills.txt`* · 373 words · Act III · climax
+## 8:10 | The Anthills
+*`ch07_the_anthills.txt`* · 337 words · Act III · climax
 
 A train in California, that fall. In one seat, Henry Janin is showing off his diamonds. And a few seats away are men from a government survey, geologists who'd spent five years mapping the West.
 
@@ -168,19 +166,17 @@ Their leader was Clarence King. Thirty years old, brilliant, and very sure of hi
 
 [curious] That bothered King's team. They'd mapped that part of Colorado. They hadn't seen any diamonds. And something else didn't fit. Diamonds, rubies and sapphires form in very different kinds of rock. In nature, you basically never find them lying around together.
 
-So King went to look for himself. Five days on horseback, in the cold. They found the mesa, and the claim notices Janin had posted there. And then they started finding stones.
+So King went to look for himself. Five days on horseback, in the cold. They found the mesa. And they started finding stones.
 
 Too many, in a way. Every time they found a diamond, there were about a dozen rubies near it. Every time. [dry] Nature is not that tidy.
 
 Then they looked at the anthills. Some had rubies in them. And around those anthills, the ground had boot prints. The anthills without boot prints? No rubies. One of King's men figured someone had pushed the stones in with the end of a stick.
 
-They dug a trench, ten feet long, down where real gems would be. Nothing.
-
 Then a stranger rode up. A diamond dealer from New York, out hunting for the field himself. One of King's men blurted out that the whole thing was a fraud. And the dealer said:
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one from somebody and sell it right away, so you've got a thousand dollars in your pocket. Next week, the news breaks, and that share is worth about nothing. You buy one back for twenty bucks, hand it back to the person you borrowed it from, and keep the difference.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for a thousand dollars. You borrow one and sell it right away: a thousand dollars in your pocket. Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference.
 
 So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
@@ -188,14 +184,14 @@ So if you know a crash is coming, and nobody else does, you can get rich off it.
 
 ---
 
-## 11:32 | The Dominoes (+ plug)
-*`ch08_not_enough_money.txt`* · 455 words · Act III · climax
+## 10:15 | The Dominoes (+ plug)
+*`ch08_not_enough_money.txt`* · 429 words · Act III · climax
 
 King had a problem. And it was a lot bigger than one bad stock.
 
 Here's how it could have gone. Count the dominoes.
 
-Domino one: *the insiders*. Anyone who knows the truth sells their shares, fast, to people who don't. Some might sell short on top of it. Every share they unload ends up with somebody who has no idea.
+Domino one: *the insiders*. Anyone who knows the truth sells their shares, fast, to people who don't. Every share they unload ends up with somebody who has no idea.
 
 Domino two: *the crash*. The news breaks, the shares are worth nothing, and whoever bought last is left holding paper. The longer the secret lasts, the more people are holding it.
 
@@ -209,7 +205,7 @@ Domino four: *everyone else*. When the West's biggest bank goes down, it takes b
 
 So every day the secret held, the dominoes got taller. And King had to beat the man who wanted a head start.
 
-He left before dawn. He rode about 45 miles to the nearest train station. He got to San Francisco on November 10th, went straight to Janin's hotel, and spent the whole night convincing him.
+He left before dawn, rode about 45 miles to a train station, and got to San Francisco on November 10th. He spent that whole night at Janin's hotel, convincing him.
 
 The next morning, he walked into Ralston's bank and read his report to the company's directors. The diamond field, he told them, was a fraud.
 
@@ -217,7 +213,7 @@ According to one of King's own men, a director suggested King might wait a littl
 
 "There is not enough money in the Bank of California to make me delay the publication a single hour."
 
-[pause] The company sent its own man out to check. He came back and agreed. On November 26th, 1872, the story hit the papers. One San Francisco paper called it "the most gigantic and barefaced swindle of the age."
+[pause] On November 26th, 1872, the story hit the papers. One San Francisco paper called it "the most gigantic and barefaced swindle of the age."
 
 The dominoes stayed standing. For now.
 
@@ -227,16 +223,16 @@ The dominoes stayed standing. For now.
 
 ---
 
-## 14:20 | Where the Money Went
-*`ch09_paid_for_dirt.txt`* · 412 words · Act IV · fallout + takeaway
+## 12:53 | Where the Money Went
+*`ch09_paid_for_dirt.txt`* · 362 words · Act IV · fallout + takeaway
 
 First, the money. It didn't go back to the investors. Ralston alone reportedly lost about seven million dollars.
 
-Philip Arnold was charged with fraud in California. But he was home in Kentucky by then, and he never stood trial. He reportedly said he'd already hired a lawyer: "a good Henry rifle." [dry] A Henry rifle is not a lawyer.
+Arnold was charged with fraud, but he was home in Kentucky, and he never stood trial. He reportedly said he'd already hired a lawyer: "a good Henry rifle." [dry] A Henry rifle is not a lawyer.
 
-He did settle one investor's lawsuit, for about four million dollars. Then he took his money and became a banker. [wry] Of course he did. A few years later, an argument with a rival banker turned into a shootout. Arnold was hit in the shoulder. He died of pneumonia about six months later.
+He settled one lawsuit for about four million dollars, then became a banker. [wry] Of course he did. A few years later, a feud with a rival banker turned into a shootout. Arnold was shot, and died of pneumonia about six months later.
 
-And John Slack? You may have heard that he vanished. For a long time, that's what everyone thought. He didn't. He made coffins in St. Louis, then moved to a small town in New Mexico and became the local undertaker. He died there in 1896, a small-town undertaker with a small-town bank account.
+And John Slack? You may have heard that he vanished. He didn't. He moved to a small town in New Mexico and became the local undertaker. He died there in 1896, a small-town undertaker with a small-town bank account.
 
 [serious] And Ralston? Remember those dominoes? Three years later, his bank got caught in other bad mining bets. Word spread, and people lined up to pull their money out. At 2:35 in the afternoon, the Bank of California ran out of cash and closed its doors. The next day, Ralston went for his usual swim in San Francisco Bay, and drowned. To this day, nobody knows if it was an accident.
 
@@ -244,9 +240,7 @@ And John Slack? You may have heard that he vanished. For a long time, that's wha
 
 They ran the six moves. The bait: a bag of diamonds. Hard to get: a secret field nobody could find. Borrowed trust: Tiffany. The proof: stones you could dig up yourself. The rush: generals, bankers, the Rothschilds. And the exit, right on time.
 
-But notice who did the convincing. Not the cousins. Tiffany and Janin did it for them. And investors who wanted a diamond field so badly that nobody wanted to be the one to say no.
-
-[thoughtful] That's the one part a con man can't build for himself. A mark who wants it to be true. So the next time a deal looks too good, and everyone you trust is already in, and there's no time to think? Check the list.
+[thoughtful] But the cousins didn't do the convincing. Tiffany and Janin did it for them. And there's one part a con man can't build for himself. A mark who wants it to be true. So the next time a deal looks too good, and everyone you trust is already in, and there's no time to think? Check the list.
 
 The diamonds were real. *The field was dirt.* And the richest men in America paid for it.
 
@@ -292,7 +286,7 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 | King's race against the insiders | ch 7 end | ch 8 |
 | Where did the money go? | ch 8 end | ch 9 |
 
-**Vocab cards:** bank run (ch 8) · the mark (ch 2) · rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · appraisal · salting · shares (ch 5) · sell short (ch 7, with a worked example).
+**Vocab cards:** bank run (ch 8) · the mark (ch 2) · rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · salting · shares (ch 5) · sell short (ch 7, with a worked example).
 
 **For a general audience** (your note after the read-through): money and mining terms get a plain explanation the first time, with a concrete picture. Staking a claim = wooden stakes and a notice with your name. A share = a slice of ownership. Selling short = a worked $40-to-$1 example. On screen: a small step-by-step card for the short sale (borrow → sell for $1,000 → crash → buy back for $20 → keep $980).
 
@@ -329,6 +323,22 @@ think? Check the list." The six moves are our own plain names, not a quoted syst
 **Images to look for (archival first):** Ralston, Tiffany, Clarence King, Janin, Arnold (portrait exists; a photo said to show both cousins needs its caption checked), Timothy O'Sullivan's 40th Parallel Survey photographs (the empty country, King's camp), Madison Avenue/Barlow house, the Bank of California, Union Pacific at Rawlins, the Chronicle's Nov 26, 1872 "UNMASKED!" headlines, a period mining-claim notice, a map of the site on the Colorado–Wyoming line. AI gaps (ask first): salting the anthills at night, the four-day ride, King's trench.
 
 **Ending:** closing line over the H1 picture, then the thank-you over the end screen.
+
+## Cuts to time (draft 8, your note: keep the new ending, get to about 15 minutes)
+
+2,712 → 2,423 words, about 17:10 → **15:26 finished**. The dominoes, the 1873 crash, the plug, the Ralston payoff, the six-move
+recap and the closing line are untouched. The midpoint twist now lands at **34%** (was 39%), inside the 25–35% target.
+
+| Cut | Chapter |
+|---|---|
+| Arnold "chasing gold since the Gold Rush" (also the one unverified line), "a nervous glance…" list, two scene-setting lines tightened | 2 |
+| Ralston's silver and the South African rush to one sentence each; the second bag in one sentence; "half of it up front" | 3 |
+| "A few nervous investors"; the appraisal definition; the chef-and-cow aside | 4 |
+| The mesa description trimmed; "Miners had salted gold claims"; the train to Rawlins; "Either way, nobody was finding that place"; Janin's profit in one sentence | 5 |
+| The five states → "across the West" | 6 |
+| The claim notices; the trench; the short-sale example tightened (every step kept) | 7 |
+| "Some might sell short on top of it"; the ride in one sentence; "The company sent its own man" | 8 |
+| Arnold's charge, lawsuit and shootout tightened; Slack's St. Louis coffins; "who did the convincing" folded into the takeaway | 9 |
 
 ## The subscribe plug (draft 7, your note)
 

@@ -1,8 +1,8 @@
-San Francisco, about 150 years ago. It's evening, and a mining promoter is still at his desk when two scruffy men show up at his door.
+San Francisco, about 150 years ago. Late one evening, two scruffy men show up at a mining promoter's office.
 
-They're cousins. Philip Arnold and John Slack. Arnold had been chasing gold out West since the Gold Rush. And he's holding a small leather bag like it might bite him.
+They're cousins. Philip Arnold and John Slack. And Arnold is holding a small leather bag like it might bite him.
 
-They explain, a little nervously, that they'd meant to leave it at the Bank of California. But it was too late in the day. Could he keep it safe for them?
+They'd meant to leave it at the Bank of California, they explain. But it was too late in the day. Could he keep it safe?
 
 [pause] Naturally, he asks what's in it.
 
@@ -10,7 +10,7 @@ The cousins hesitate. They look at each other. Finally, Arnold lets it slip. {Ro
 
 From where? They won't say. Somewhere out West. Somewhere secret. And he has to swear he won't tell a soul.
 
-That's how a con starts. In a con, the person being fooled is called the {mark}. Move one: *the bait*. Show the mark something he already wants. Move two: *play hard to get*. Don't sell it. Make him chase it. A secret, a nervous glance, a promise not to tell. [wry] Nothing makes a man want something like being told he can't have it.
+That's how a con starts. In a con, the person being fooled is called the {mark}. Move one: *the bait*. Show the mark something he already wants. Move two: *play hard to get*. Don't sell it. Make him chase it. [wry] Nothing makes a man want something like being told he can't have it.
 
 [dry] And our promoter kept his promise for about as long as it took to find a banker.
 
