@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 1 · **1933 words** · about **12:28 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 2 · **2,104 words** · about **13:30 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -19,13 +19,13 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 |---|---|---|---|
 | 0:00 | Paid for Dirt (cold open) | 156 | Hook |
 | 1:06 | Too Late for the Bank | 202 | Act I · setup |
-| 2:21 | Everybody Wants a Diamond Mine | 199 | Act I · setup |
-| 3:36 | The Tiffany Test | 225 | Act II · escalation (ends on the midpoint twist) |
-| 5:00 | The Long Way Around | 268 | Act II · escalation |
-| 6:39 | Cash Out (+ plug) | 170 | Act II · escalation (plug) |
-| 7:43 | The Anthills | 284 | Act III · climax |
-| 9:28 | Not Enough Money | 175 | Act III · climax |
-| 10:34 | Where the Money Went | 254 | Act IV · fallout + takeaway |
+| 2:21 | Everybody Wants a Diamond Mine | 246 | Act I · setup |
+| 3:53 | The Tiffany Test | 225 | Act II · escalation (ends on the midpoint twist) |
+| 5:17 | The Long Way Around | 312 | Act II · escalation |
+| 7:12 | Cash Out (+ plug) | 170 | Act II · escalation (plug) |
+| 8:16 | The Anthills | 364 | Act III · climax |
+| 10:30 | Not Enough Money | 175 | Act III · climax |
+| 11:36 | Where the Money Went | 254 | Act IV · fallout + takeaway |
 
 ---
 
@@ -70,7 +70,7 @@ That banker was William Ralston. He ran the Bank of California, the same bank th
 ---
 
 ## 2:21 | Everybody Wants a Diamond Mine
-*`ch03_everybody_wants_a_diamond_mine.txt`* · 199 words · Act I · setup
+*`ch03_everybody_wants_a_diamond_mine.txt`* · 246 words · Act I · setup
 
 Because he wanted to.
 
@@ -80,7 +80,9 @@ Then the cousins came back from another secret trip with a bigger bag. They said
 
 And they were. That's the trick. Arnold had worked as a bookkeeper at a company that made diamond drills, which use cheap, flawed diamonds as cutting tips. [wry] He knew exactly where to find a diamond nobody wanted.
 
-So Ralston and his partners bought in. They agreed to pay the cousins $100,000 for a piece of the claim, half of it up front.
+So Ralston and his partners bought in. They agreed to pay the cousins $100,000 for a piece of their {claim}, half of it up front.
+
+In mining country, a claim is your legal right to dig in a patch of ground. You'd hammer wooden stakes into the corners and post a notice with your name on it. That's where the phrase "{staking a claim}" comes from. Whatever's under that ground is yours.
 
 And the cousins spent some of that money on a trip. To London. Under fake names, they bought about $20,000 worth of rough diamonds and rubies. Low-grade stuff. Rejects.
 
@@ -88,7 +90,7 @@ And the cousins spent some of that money on a trip. To London. Under fake names,
 
 ---
 
-## 3:36 | The Tiffany Test
+## 3:53 | The Tiffany Test
 *`ch04_the_tiffany_test.txt`* · 225 words · Act II · escalation (ends on the midpoint twist)
 
 New York. A fancy house on Madison Avenue. In the room: two famous Civil War generals. The most famous newspaper editor in the country. A few nervous investors. And Charles Tiffany, of Tiffany and Company, the most famous jewelry store in America.
@@ -109,8 +111,8 @@ Now the money men were hooked. But they weren't stupid. Before they put in serio
 
 ---
 
-## 5:00 | The Long Way Around
-*`ch05_the_long_way_around.txt`* · 268 words · Act II · escalation
+## 5:17 | The Long Way Around
+*`ch05_the_long_way_around.txt`* · 312 words · Act II · escalation
 
 And that was a problem. Because there was no diamond field. There was a bag.
 
@@ -124,7 +126,9 @@ June 1872. The investors' expert arrives. Henry Janin, one of the best-known min
 
 Then they arrive. And almost right away, the men start finding stones. Diamonds. Rubies. Right there in the dirt.
 
-Janin was thrilled. He staked out about 3,000 acres and wrote a glowing report. The company's shares, he said, were easily worth $40 each.
+Janin was thrilled. He staked a claim on about 3,000 acres, stakes in the ground and all, and wrote a glowing report.
+
+By now the investors were turning the diamond field into a company, and selling {shares} in it. A share is a small slice of ownership. If the company strikes it rich, every slice is worth more. Janin's report said those shares were easily worth $40 each.
 
 [dry] And Janin would know. He'd been allowed to buy 1,000 of those shares at $10 each. He sold them at $40. That's about $30,000 on top of his fee, for saying yes.
 
@@ -132,7 +136,7 @@ But he'd seen it with his own eyes. What more could anyone ask for?
 
 ---
 
-## 6:39 | Cash Out (+ plug)
+## 7:12 | Cash Out (+ plug)
 *`ch06_cash_out.txt`* · 170 words · Act II · escalation (plug)
 
 Now the real money moved. A new company was set up in New York with ten million dollars in stock. The names on the list were huge. One of those generals. The Rothschild banking family. Tiffany himself.
@@ -149,8 +153,8 @@ Then they left. Arnold went home to Kentucky, a rich man. Slack just disappeared
 
 ---
 
-## 7:43 | The Anthills
-*`ch07_the_anthills.txt`* · 284 words · Act III · climax
+## 8:16 | The Anthills
+*`ch07_the_anthills.txt`* · 364 words · Act III · climax
 
 October 1872. A train in California. On board are men from a government survey, geologists who'd spent five years mapping a long strip of the West, from California to the Rockies.
 
@@ -158,7 +162,7 @@ Their leader was Clarence King. Thirty years old, brilliant, and very sure of hi
 
 [curious] That bothered King's team. They'd mapped that part of Colorado. They hadn't seen any diamonds. And something else didn't fit. Diamonds, rubies and sapphires form in very different kinds of rock. In nature, you basically never find them lying around together.
 
-So King went to look for himself. Five days on horseback, in the cold. They found the mesa, and Janin's claim notices posted on it. And then they started finding stones.
+So King went to look for himself. Five days on horseback, in the cold. They found the mesa, and the claim notices Janin had posted there. And then they started finding stones.
 
 Too many, in a way. Every time they found a diamond, there were about a dozen rubies near it. Every time. [dry] Nature is not that tidy.
 
@@ -170,13 +174,15 @@ Then a stranger rode up. A diamond dealer from New York, out hunting for the fie
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. [wry] He didn't want to warn anybody. He wanted to get paid.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for $40 today. You borrow one from somebody and sell it right away, so you've got $40 in your pocket. Next week, the news breaks, and that share is worth about nothing. You buy one back for a dollar, hand it back to the person you borrowed it from, and keep the difference.
+
+So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
 [light] Which meant King was in a race.
 
 ---
 
-## 9:28 | Not Enough Money
+## 10:30 | Not Enough Money
 *`ch08_not_enough_money.txt`* · 175 words · Act III · climax
 
 If the wrong people heard first, they could quietly sell their stock, and everyone else would be left holding paper worth nothing.
@@ -195,7 +201,7 @@ According to one of King's own men, a director suggested King might wait a littl
 
 ---
 
-## 10:34 | Where the Money Went
+## 11:36 | Where the Money Went
 *`ch09_paid_for_dirt.txt`* · 254 words · Act IV · fallout + takeaway
 
 Not back to the investors. Ralston alone reportedly lost about $250,000.
@@ -231,7 +237,9 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | King's race against the insiders | ch 7 end | ch 8 |
 | Where did the money go? | ch 8 end | ch 9 |
 
-**Vocab cards:** rough diamonds (uncut, as they come out of the ground) · appraisal · salting · sell short.
+**Vocab cards:** rough diamonds (uncut, as they come out of the ground) · claim / staking a claim (ch 3; called back in ch 5 and 7) · appraisal · salting · shares (ch 5) · sell short (ch 7, with a worked example).
+
+**For a general audience** (your note after the read-through): money and mining terms get a plain explanation the first time, with a concrete picture. Staking a claim = wooden stakes and a notice with your name. A share = a slice of ownership. Selling short = a worked $40-to-$1 example. On screen: a small step-by-step card for the short sale (borrow → sell $40 → crash → buy back $1 → keep $39).
 
 **Quote cards** (word by word, attributed on screen):
 - Tiffany, Oct 1871: "Gentlemen, these are beyond question precious stones of enormous value."
@@ -294,6 +302,8 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | A dozen rubies per diamond; boot prints; "end of a stick"; 10-foot trench | Smithsonian | "One of King's men figured" |
 | The cut-mark diamond in the original pitch | Not in Smithsonian or Wikipedia; one popular source | **Left out** |
 | Berry quote | Smithsonian | |
+| Short-selling example ($40 → $1) | Illustrative numbers, not a record; short sales of mining stock were common in 1870s San Francisco and New York | Framed as "Say a share sells for $40" |
+| Staking a claim: stakes at the corners and a posted notice | Standard practice under U.S. mining law and custom (the 1872 law requires a claim's boundaries be marked on the ground) | Plain description |
 | King rode 45 miles, San Francisco Nov 10, night at Janin's hotel, read report next morning | Smithsonian | |
 | "Not enough money" quote | Emmons's later account, via the Smithsonian | "According to one of King's own men" |
 | Company's own man (David Colton) agreed; papers Nov 26, 1872 | Smithsonian; EARTH Magazine | |
@@ -303,7 +313,7 @@ The diamonds were real. *The field was dirt.* And the richest men in America pai
 | Settled one lawsuit for $150,000; became a banker; shootout 1878; shoulder; pneumonia ~6 months later | Smithsonian (William Lent settlement) | Some sources give his death as 1879; script gives no year |
 | Slack: coffins in St. Louis, undertaker in White Oaks, NM, died 1896, ~$1,600 | Smithsonian (Bruce Woodard's research), NMSU archive | "You may have heard that he vanished" = myth beat |
 
-## Cut list (if you want ~10:30, about 1,650 words)
+## Cut list (if you want it shorter; written for draft 1, the new explanations are not on it)
 
 | Cut | Words | Cost |
 |---|---|---|

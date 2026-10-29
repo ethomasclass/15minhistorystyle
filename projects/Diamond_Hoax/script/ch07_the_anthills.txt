@@ -4,7 +4,7 @@ Their leader was Clarence King. Thirty years old, brilliant, and very sure of hi
 
 [curious] That bothered King's team. They'd mapped that part of Colorado. They hadn't seen any diamonds. And something else didn't fit. Diamonds, rubies and sapphires form in very different kinds of rock. In nature, you basically never find them lying around together.
 
-So King went to look for himself. Five days on horseback, in the cold. They found the mesa, and Janin's claim notices posted on it. And then they started finding stones.
+So King went to look for himself. Five days on horseback, in the cold. They found the mesa, and the claim notices Janin had posted there. And then they started finding stones.
 
 Too many, in a way. Every time they found a diamond, there were about a dozen rubies near it. Every time. [dry] Nature is not that tidy.
 
@@ -16,6 +16,8 @@ Then a stranger rode up. A diamond dealer from New York, out hunting for the fie
 
 "What a chance to sell short on the stock."
 
-To {sell short} is to bet that a price will crash. [wry] He didn't want to warn anybody. He wanted to get paid.
+To {sell short} is to bet that a price will crash. Here's how it works. Say a share sells for $40 today. You borrow one from somebody and sell it right away, so you've got $40 in your pocket. Next week, the news breaks, and that share is worth about nothing. You buy one back for a dollar, hand it back to the person you borrowed it from, and keep the difference.
+
+So if you know a crash is coming, and nobody else does, you can get rich off it. [wry] He didn't want to warn anybody. He wanted to get paid.
 
 [light] Which meant King was in a race.
