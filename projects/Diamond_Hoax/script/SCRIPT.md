@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 5 · **2,338 words** · about **14:55 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 5 · **2,337 words** · about **14:55 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -25,7 +25,7 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 8:07 | Cash Out (+ plug) | 158 | Act II · escalation (plug) |
 | 9:06 | The Anthills | 360 | Act III · climax |
 | 11:19 | Not Enough Money | 186 | Act III · climax |
-| 12:29 | Where the Money Went | 343 | Act IV · fallout + takeaway |
+| 12:29 | Where the Money Went | 342 | Act IV · fallout + takeaway |
 
 ---
 
@@ -210,9 +210,9 @@ According to one of King's own men, a director suggested King might wait a littl
 ---
 
 ## 12:29 | Where the Money Went
-*`ch09_paid_for_dirt.txt`* · 343 words · Act IV · fallout + takeaway
+*`ch09_paid_for_dirt.txt`* · 342 words · Act IV · fallout + takeaway
 
-So where did the money go? Not back to the investors. Ralston alone reportedly lost about seven million dollars.
+First, the money. It didn't go back to the investors. Ralston alone reportedly lost about seven million dollars.
 
 Philip Arnold was charged with fraud in California. But he was home in Kentucky by then, and he never stood trial. He reportedly said he'd already hired a lawyer: "a good Henry rifle." [dry] A Henry rifle is not a lawyer.
 
