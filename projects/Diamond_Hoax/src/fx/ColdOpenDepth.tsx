@@ -163,6 +163,46 @@ const MoneyTag: React.FC<{at: number; big: string; small: string; x: number; y: 
   );
 };
 
+
+// The office painting split into depth planes by tools/sil_layers.py (public/img/layers/sil/office/): L0 front chairs and floor,
+// L1 the desk and carpet, L2 the chandelier, the lamp, the ship painting and the side chairs, L3 the back wall and windows.
+// Every plane draws the whole painting box at the same place, so at d = 0 they line up exactly; the dolly makes them part.
+const OFFICE_LAYERS = [
+  {src: 'img/layers/sil/office/L3.jpg', z: -1100, blur: 2.2},
+  {src: 'img/layers/sil/office/L2.webp', z: -760, blur: 1.6},
+  {src: 'img/layers/sil/office/L1.webp', z: -480, blur: 1.2},
+  {src: 'img/layers/sil/office/L0.webp', z: -260, blur: 1.6},
+];
+const BLUE = '#5AA8FF';
+const WARM = '#FF8A5C';
+const glow = (cx: number, cy: number, rx: number, ry: number, color: string, a: number): React.CSSProperties => ({position: 'absolute', inset: 0,
+  background: `radial-gradient(ellipse ${rx}% ${ry}% at ${cx}% ${cy}%, ${color} 0%, transparent 100%)`, opacity: a, mixBlendMode: 'screen'});
+/** One office plane: the painting box (grayscale, dimmed) plus the coloured light that belongs at that depth. */
+const OfficeLayer: React.FC<{src: string; fade: number; f: number; accents: number}> = ({src, fade, f, accents}) => {
+  const flick = 0.85 + 0.15 * Math.sin(f * 0.37) * Math.sin(f * 0.11 + 1.3);
+  return (
+    <AbsoluteFill style={{transform: 'scale(1.22)', opacity: fade}}>
+      <div style={{position: 'absolute', left: -60, top: -40, width: 2040, height: 2040 * OFFICE[1] / OFFICE[0]}}>
+        <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', filter: 'grayscale(1) contrast(1.05) brightness(0.52)'}} />
+        {accents === 0 && <>
+          {/* daylight through the two windows: a blue tint on the glass and a cool spill into the room */}
+          <div style={{...glow(41.5, 42, 9, 26, BLUE, 0.55)}} />
+          <div style={{...glow(69, 42, 8, 26, BLUE, 0.55)}} />
+          <div style={{...glow(55, 55, 40, 45, BLUE, 0.12)}} />
+          <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 85% 80% at 55% 50%, transparent 45%, rgba(13,12,9,0.8) 100%)'}} />
+        </>}
+        {accents === 1 && <>
+          {/* the chandelier's bulbs and the desk lamp, warm, the lamp flickering a little */}
+          <div style={{...glow(54, 19, 9, 7, WARM, 0.6 * flick)}} />
+          <div style={{...glow(41.6, 50, 4.5, 6, WARM, 0.95 * flick)}} />
+          <div style={{...glow(42, 55, 16, 14, WARM, 0.32 * flick)}} />
+        </>}
+        {accents === 2 && <div style={{...glow(43, 62, 20, 9, WARM, 0.22 * flick)}} />}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 export const ColdOpenReveal: React.FC<ColdOpenRevealProps> = ({officeAt, pullAt, pullEnd, loopAt, fingersAt, moneyAt, drainAt = 1e9, out = 1e9}) => {
   const f = useCurrentFrame();
   const {d, x, y} = dollyAt([{f: 0, d: 560, x: 150, y: 190}, {f: pullAt, d: 500, x: 135, y: 170}, {f: pullEnd, d: 0, x: 0, y: 0}, {f: pullEnd + 240, d: 60, x: 10, y: 22}], f);
@@ -174,15 +214,17 @@ export const ColdOpenReveal: React.FC<ColdOpenRevealProps> = ({officeAt, pullAt,
     <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
       <AbsoluteFill style={{perspective: PERSP, perspectiveOrigin: '960px 540px'}}>
         <AbsoluteFill style={{transformStyle: 'preserve-3d'}}>
-          {/* the desk, and the banker's office fading in on "a rich man's office" */}
-          <Plane z={Z.desk} d={d} x={x} y={y} blur={1.8}>
-            <AbsoluteFill style={{transform: 'scale(1.22)'}}>
-              <DarkPaper />
-              <Img src={staticFile('img/fx/coldopen/office.jpg')} style={{position: 'absolute', left: -60, top: -40, width: 2040, height: 2040 * OFFICE[1] / OFFICE[0],
-                filter: 'grayscale(1) contrast(1.05) brightness(0.5)', opacity: office * 0.9}} />
-              <AbsoluteFill style={{background: 'radial-gradient(ellipse 70% 70% at 55% 55%, transparent 40%, rgba(13,12,9,0.85) 100%)', opacity: office}} />
-            </AbsoluteFill>
+          {/* the desk paper at the back; the banker's office fades in on "a rich man's office" as four depth planes (real parallax:
+              the front chairs and the desk slide past the chandelier, the lamp and the back wall), with cool blue window light and
+              warm coral-orange lamplight */}
+          <Plane z={-1250} d={d} x={x} y={y} blur={2}>
+            <AbsoluteFill style={{transform: 'scale(1.3)'}}><DarkPaper /></AbsoluteFill>
           </Plane>
+          {OFFICE_LAYERS.map((L, i) => (
+            <Plane key={L.src} z={L.z} d={d} x={x} y={y} blur={L.blur}>
+              <OfficeLayer src={L.src} fade={office} f={f} accents={i} />
+            </Plane>
+          ))}
           <Plane z={Z.tycoon} d={d} x={x} y={y}>
             <div style={{position: 'absolute', left: TYC.left, top: TYC.top, width: SIZE[0] * TYC.scale, height: SIZE[1] * TYC.scale, ...cut(MASKS.tycoon_b.alpha),
               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.7))'}}>
