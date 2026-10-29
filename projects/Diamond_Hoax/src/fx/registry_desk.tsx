@@ -5,7 +5,7 @@ import {BankVaultTest, BANKVAULT_TEST_FRAMES} from './BankVault';
 import {ShareSlicesTest, SHARESLICES_TEST_FRAMES} from './ShareSlices';
 import {ShortSaleTest, SHORTSALE_TEST_FRAMES} from './ShortSale';
 import {MoneyMapTest, MONEYMAP_TEST_FRAMES} from './MoneyMap';
-import {ColdOpenDepthTest, COLDOPEN_TEST_FRAMES} from './ColdOpenDepth';
+import {ColdOpenDepthTest, COLDOPEN_TEST_FRAMES, ColdOpenRevealTest, COLDOPEN_REVEAL_FRAMES} from './ColdOpenDepth';
 
 export const FX_DESK: {id: string; C: React.FC; frames: number}[] = [
   {id: 'Dominoes', C: DominoesTest, frames: DOMINOES_TEST_FRAMES},
@@ -14,4 +14,5 @@ export const FX_DESK: {id: string; C: React.FC; frames: number}[] = [
   {id: 'ShortSale', C: ShortSaleTest, frames: SHORTSALE_TEST_FRAMES},
   {id: 'MoneyMap', C: MoneyMapTest, frames: MONEYMAP_TEST_FRAMES},
   {id: 'ColdOpenDepth', C: ColdOpenDepthTest, frames: COLDOPEN_TEST_FRAMES},
+  {id: 'ColdOpenReveal', C: ColdOpenRevealTest, frames: COLDOPEN_REVEAL_FRAMES},
 ];

@@ -1,0 +1,36 @@
+{
+ "size": [
+  715,
+  863
+ ],
+ "page_size": [
+  4052,
+  5730
+ ],
+ "crop_box_in_page_px": [
+  1986,
+  1471,
+  2701,
+  2334
+ ],
+ "paper": "The Cheyenne daily leader (Cheyenne, Wyo.), September 19, 1872",
+ "url": "https://www.loc.gov/resource/sn84022149/1872-09-19/ed-1/?sp=1",
+ "phrases": {
+  "The diamond fever is increasing": [
+   [
+    92.8,
+    414.0,
+    558.8,
+    33.2
+   ]
+  ],
+  "Generals McClellan": [
+   [
+    334.8,
+    257.0,
+    314.2,
+    30.8
+   ]
+  ]
+ }
+}

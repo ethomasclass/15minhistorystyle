@@ -16,3 +16,6 @@ top_hat, undertaker_coffin.
 
 Rules: props are B&W on the desk (coral only on the bag and the diamond); silhouette scenes keep their own colours; no source tag;
 never present a prop as a specific real object ("Arnold's bag"); the certificate is a generic blank, not the company's.
+
+## 3D builds
+- `public/img/fx/coldopen/office.jpg` (Oct 29, `gemini-3-pro-image-preview`, 2K, 16:9; prompt beside it): an empty 1871 banker's office as an engraving, no people or text; the back plane of the cold-open reveal, shown grayscale, dimmed and soft.

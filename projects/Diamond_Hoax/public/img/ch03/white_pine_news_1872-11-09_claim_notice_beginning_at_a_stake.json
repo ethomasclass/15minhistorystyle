@@ -1,0 +1,44 @@
+{
+ "size": [
+  681,
+  899
+ ],
+ "page_size": [
+  3169,
+  5006
+ ],
+ "crop_box_in_page_px": [
+  113,
+  419,
+  794,
+  1318
+ ],
+ "paper": "The White Pine news (Treasure City, Nev.), November 9, 1872",
+ "url": "https://www.loc.gov/resource/sn84022047/1872-11-09/ed-1/?sp=4",
+ "phrases": {
+  "Application for Patent": [
+   [
+    94.9,
+    59.8,
+    493.1,
+    41.2
+   ]
+  ],
+  "beginning at a stake": [
+   [
+    352.9,
+    399.7,
+    266.2,
+    24.2
+   ]
+  ],
+  "beginning at a stake (Lot B)": [
+   [
+    153.9,
+    743.6,
+    230.2,
+    25.2
+   ]
+  ]
+ }
+}

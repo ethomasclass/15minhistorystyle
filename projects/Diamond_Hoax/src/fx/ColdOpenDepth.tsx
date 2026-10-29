@@ -14,8 +14,9 @@
 // At d = 0 the frame matches H1 exactly (minus the logo and the tape words): each plane is pre-scaled to undo its perspective.
 // Exports: ColdOpenDepth, ColdOpenDepthTest, COLDOPEN_TEST_FRAMES.
 import React from 'react';
-import {AbsoluteFill, Easing, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Finish, PALETTES, PaletteCtx, Picture, type Place, StepCtx, Traced} from '../kit/Kit';
+import {AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {Finish, JF, Loop, Note, PALETTES, PaletteCtx, Picture, type Place, StepCtx, Traced} from '../kit/Kit';
+import ch01 from '../../public/audio/ch01_cold_open.words.json';
 import {DarkPaper} from '../kit/common';
 import {MASKS} from '../masks';
 
@@ -128,6 +129,104 @@ export const ColdOpenDepthTest: React.FC = () => (
     <StepCtx.Provider value={2.5}>
       <AbsoluteFill style={{background: '#0d0c09'}}>
         <ColdOpenDepth dur={300} drainAt={230} />
+        <Finish vignette={0.3} />
+      </AbsoluteFill>
+    </StepCtx.Provider>
+  </PaletteCtx.Provider>
+);
+
+// ---------------------------------------------------------------- the reveal (ch 1, the first sentence)
+// "Two cousins from Kentucky walked into a rich man's office with a bag of rocks. By the time they were done, they'd walked
+// away with about eighteen million dollars in today's money."
+// Opens tight on the tycoon and his stone (the cousins are outside the frame on the near plane), the banker's office fades in
+// behind him on "a rich man's office", then the camera pulls back on "with a bag of rocks" and the cousins slide in from both
+// sides into the full H1 picture: the mark first, then the con behind his back. A teal loop on the pouch, "fingers crossed",
+// then the money tag where the thumbnail's tape words sat.
+//
+// Props (frames in the parent's time): officeAt, pullAt, pullEnd, loopAt, fingersAt, moneyAt, drainAt, out (fade the notes).
+// Camera: d = dolly depth, x/y = focus offset (px). Tight: d 520 centred on (1100, 720) (between his face and the stone);
+// wide: d 0 = the exact H1 frame, then a slow drift on.
+export type ColdOpenRevealProps = {officeAt: number; pullAt: number; pullEnd: number; loopAt: number; fingersAt: number; moneyAt: number;
+  drainAt?: number; out?: number};
+
+const OFFICE: [number, number] = [2752, 1536];
+const MoneyTag: React.FC<{at: number; big: string; small: string; x: number; y: number}> = ({at, big, small, x, y}) => {
+  const f = useCurrentFrame();
+  const g = Math.floor(f / 2.5) * 2.5;
+  if (g < at) return null;
+  const s = interpolate(g, [at, at + 5, at + 9], [1.35, 0.95, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, transform: `translateX(-50%) scale(${s})`, textAlign: 'center', transformOrigin: '50% 60%'}}>
+      <div style={{fontFamily: JF.display, fontSize: 150, lineHeight: 1, color: '#FF9F1C', textShadow: '0 6px 24px rgba(0,0,0,0.85)'}}>{big}</div>
+      <div style={{fontFamily: JF.mono, fontSize: 34, color: '#F4EFE6', opacity: 0.85, marginTop: 10, textShadow: '0 2px 10px rgba(0,0,0,0.9)'}}>{small}</div>
+    </div>
+  );
+};
+
+export const ColdOpenReveal: React.FC<ColdOpenRevealProps> = ({officeAt, pullAt, pullEnd, loopAt, fingersAt, moneyAt, drainAt = 1e9, out = 1e9}) => {
+  const f = useCurrentFrame();
+  const {d, x, y} = dollyAt([{f: 0, d: 560, x: 150, y: 190}, {f: pullAt, d: 500, x: 135, y: 170}, {f: pullEnd, d: 0, x: 0, y: 0}, {f: pullEnd + 240, d: 60, x: 10, y: 22}], f);
+  const g = Math.floor(f / 2.5) * 2.5;
+  const drain = interpolate(g, [drainAt, drainAt + 18], [0, 1], clamp);
+  const office = interpolate(f, [officeAt, officeAt + 24], [0, 1], {...clamp, easing: Easing.out(Easing.quad)});
+  const notes = interpolate(f, [out, out + 8], [1, 0], clamp);
+  return (
+    <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
+      <AbsoluteFill style={{perspective: PERSP, perspectiveOrigin: '960px 540px'}}>
+        <AbsoluteFill style={{transformStyle: 'preserve-3d'}}>
+          {/* the desk, and the banker's office fading in on "a rich man's office" */}
+          <Plane z={Z.desk} d={d} x={x} y={y} blur={1.8}>
+            <AbsoluteFill style={{transform: 'scale(1.22)'}}>
+              <DarkPaper />
+              <Img src={staticFile('img/fx/coldopen/office.jpg')} style={{position: 'absolute', left: -60, top: -40, width: 2040, height: 2040 * OFFICE[1] / OFFICE[0],
+                filter: 'grayscale(1) contrast(1.05) brightness(0.5)', opacity: office * 0.9}} />
+              <AbsoluteFill style={{background: 'radial-gradient(ellipse 70% 70% at 55% 55%, transparent 40%, rgba(13,12,9,0.85) 100%)', opacity: office}} />
+            </AbsoluteFill>
+          </Plane>
+          <Plane z={Z.tycoon} d={d} x={x} y={y}>
+            <div style={{position: 'absolute', left: TYC.left, top: TYC.top, width: SIZE[0] * TYC.scale, height: SIZE[1] * TYC.scale, ...cut(MASKS.tycoon_b.alpha),
+              filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.7))'}}>
+              <Picture src="img/gen/thumb/tycoon_b_clean.png" place={{left: 0, top: 0, scale: TYC.scale}} size={SIZE} bw="grayscale(1) contrast(1.15) brightness(1.02)" />
+            </div>
+            <TintLayer place={TYC} mask={stoneMask(MASKS.tycoon_b.alpha, false)} strength={1} />
+            <TintLayer place={TYC} mask={stoneMask(MASKS.tycoon_b.alpha, true)} strength={1 - drain} />
+            {drain > 0 && <div style={{position: 'absolute', left: TYC.left, top: TYC.top, width: SIZE[0] * TYC.scale, height: SIZE[1] * TYC.scale, ...stoneMask(MASKS.tycoon_b.alpha, true),
+              background: '#3a3530', mixBlendMode: 'multiply', opacity: 0.45 * drain}} />}
+            <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={TYC} at={-999} dur={1} width={7} />
+          </Plane>
+          <Plane z={Z.cousins} d={d} x={x} y={y} blur={0.8 + (d / 560) * 3}>
+            <Cousin mask={MASKS.cousin_l.alpha} at={COUSIN_L} />
+            <Cousin mask={MASKS.cousin_r.alpha} at={COUSIN_R} />
+          </Plane>
+        </AbsoluteFill>
+      </AbsoluteFill>
+      {/* marks, in screen space once the camera has settled on the H1 frame */}
+      <AbsoluteFill style={{opacity: notes}}>
+        <Loop cx={1712} cy={968} rx={95} ry={88} at={loopAt} dur={10} width={6} seed={7} />
+        <Note text="a bag of rocks" x={1330} y={735} size={58} rot={-5} at={loopAt + 4} />
+        <Loop cx={262} cy={1000} rx={92} ry={70} at={fingersAt} dur={10} width={6} seed={9} />
+        <Note text="fingers crossed" x={110} y={846} size={62} rot={-4} at={fingersAt + 4} />
+      </AbsoluteFill>
+      <MoneyTag at={moneyAt} big="$18 million" small="$660,000 in 1872" x={960} y={110} />
+    </AbsoluteFill>
+  );
+};
+
+type W = {w: string; s: number};
+const WORDS: W[] = ((ch01 as unknown as {words: W[]}).words ?? (ch01 as unknown as W[]));
+const wAt = (word: string, nth = 1) => {
+  let k = 0;
+  for (const x of WORDS) if (x.w.toLowerCase().replace(/[^a-z']/g, '') === word && ++k === nth) return Math.round(x.s * 30);
+  throw new Error('no word ' + word);
+};
+export const COLDOPEN_REVEAL_FRAMES = 345;
+export const ColdOpenRevealTest: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <StepCtx.Provider value={2.5}>
+      <AbsoluteFill style={{background: '#0d0c09'}}>
+        <Audio src={staticFile('audio/ch01_cold_open.wav')} />
+        <ColdOpenReveal officeAt={wAt('rich') - 6} pullAt={wAt('with') - 4} pullEnd={wAt('by') + 6} loopAt={wAt('by') + 2}
+          fingersAt={wAt('by') + 22} moneyAt={wAt('eighteen') - 2} out={wAt('their') - 4} />
         <Finish vignette={0.3} />
       </AbsoluteFill>
     </StepCtx.Provider>

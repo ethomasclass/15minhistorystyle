@@ -1,0 +1,28 @@
+{
+ "size": [
+  681,
+  658
+ ],
+ "page_size": [
+  4136,
+  5365
+ ],
+ "crop_box_in_page_px": [
+  716,
+  1966,
+  1397,
+  2624
+ ],
+ "paper": "The Cheyenne leader (Cheyenne, D.T. [i.e. Wyo.]), June 5, 1868",
+ "url": "https://www.loc.gov/resource/sn84022150/1868-06-05/ed-1/?sp=3",
+ "phrases": {
+  "One Case of Henry's Repeating Rifles": [
+   [
+    62.2,
+    384.5,
+    557.5,
+    32.8
+   ]
+  ]
+ }
+}
