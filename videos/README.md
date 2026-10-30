@@ -264,6 +264,11 @@ column says where each was made.
   ~150 px, bottom ~400 px, right ~150 px below y 900).
 
 **Thumbnail**
+- **The thumbnail opens the video as a reveal** (the Diamond Hoax, Oct 2026): not a still with a push. Tight on the coral subject, the
+  place fades in behind, pull back into the thumbnail frame on the line it illustrates; the background has real parallax and
+  coloured light (blue window light, warm lamps). Notes land after the camera settles.
+- **Silhouette scenes can use any palette that matches the mood**, one light source each; and **check every Gemini landscape** for the
+  wrong country (mesas behind San Francisco) and for painted lettering before keeping it.
 - **Brainstorm the thumbnail and title first** (the Diamond Hoax, Oct 2026): right after the topic is chosen and fact-checked, before the full script, so the cold open can be built to match it. A thumbnail is a **question, not a label**, with **one idea**; title and thumbnail make one curiosity gap together.
 - The whole head is in frame, and any symbol sits on the head at the right size.
 - Text stays clear of the face.

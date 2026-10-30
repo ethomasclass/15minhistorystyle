@@ -167,6 +167,21 @@ Every painting prompt ends with the shared **style paragraph**, which is in
 | **Native vertical Shorts** | 1080×1920 compositions that splice hook-first lines out of the chapter WAVs (`build()`), relay the scenes for 9:16 with the same assets, add 3-word captions that never cross a sentence end, a small wordmark top-left and a 3 s end card pointing to the full video. Text stays out of YouTube's UI zones. | 3–4 Shorts per video, 30–45 s each | Black Sox | `components/black_sox/vshorts.tsx` |
 | **Montage** | Seven hard cuts on the beat, with a counter and a tick on each. | Fix Everything | Fix Everything `Ch01.tsx` |
 
+## From the Diamond Hoax (*They Fooled America's Richest Men*, Oct 2026)
+
+Code: [`components/diamond_hoax/`](components/diamond_hoax/) (README lists every file and its props).
+
+| Technique | What it does | Use it for | Code |
+|---|---|---|---|
+| **Packaging first** | Thumbnail and title brainstormed right after the topic, before the script; the chosen thumbnail (H1, "PAID FOR / DIRT") decided the cold open | Every video | skill step 1b; `references/thumbnail-and-youtube.md` |
+| **The thumbnail reveal** (cold open) | The thumbnail picture as depth planes: tight on the coral subject, a background painting fades in on the line that names the place, pull back so the foreground figures slide in from the sides into the exact thumbnail frame, then the notes and a money tag where the tape words sat. Turns "frame 0 = the thumbnail" into the hook's punchline | The first 10 s of any video whose thumbnail tells a story | `fx/ColdOpenDepth.tsx` `ColdOpenReveal` |
+| **A painted background with real parallax and coloured light** | A Gemini engraving of the room (no people, no text), split into 4 depth planes with `tools/sil_layers.py` (it works on engravings, not just silhouettes), dimmed and soft behind the figures, with blue window light and a warm flickering lamp as `screen`-blended radial glows on the plane they belong to | Giving a cut-out scene a place | same file, `OfficeLayer` |
+| **Silhouette scenes, a palette per mood** | The Halloween silhouette style, but each scene named its own palette in the prompt (moonlit violet for the crime, steel blue before dawn for the race, blood orange for the threat, slate and lavender for grief); one light source each | Scenes nobody photographed | prompts in `projects/Diamond_Hoax/public/img/gen/scenes/*.txt` |
+| **The Con Card** | A recurring numbered checklist that fills in across the video (rows as they're named, a counter, ticks on the recap); never on screen for long | A video's explanatory spine; a future series | `kit/con.tsx` |
+| **Real-terrain slab** | Teal contours from real elevation data, "heights exaggerated" | A real place | `fx/Mesa.tsx` |
+| **Dominoes** | A chain reaction set up (tips that stop short), held ("For now."), and paid off chapters later | Cause-and-effect stakes | `fx/Dominoes.tsx` |
+| **Money in today's dollars** | Said once ("a dollar back then was worth about 27 of today's"), every figure converted, the period figure small under it on screen | Any video with money | `ColdOpenReveal` `MoneyTag` |
+
 ## Checks (run them, every time)
 
 | Tool | What it catches | Where |

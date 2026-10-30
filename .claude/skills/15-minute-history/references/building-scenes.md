@@ -129,6 +129,16 @@ Colors come from the palette context: `usePal().mark` (teal), `.subject` (coral)
   visible; one number per beat.
 - **Ending split**: the same portrait, teal half and coral half, a label each. The thumbnail can reuse it.
 
+### The thumbnail reveal (cold open, from *They Fooled America's Richest Men*)
+
+The rule is "what the thumbnail shows is on screen at frame 0", but a still thumbnail with a slow push read as nothing (the user).
+Make it act out the first sentence instead: open **tight on the coral subject** (the cut-outs nearest the camera sit outside the
+frame on their own depth plane), **fade in a background painting** on the words that name the place, then **pull back** so the
+foreground figures slide in from both sides and the camera settles on the exact thumbnail frame; land the loops and notes only
+after it settles (notes drawn during the move run off the edge), and put a money tag or the key number where the thumbnail's tape
+words sat. Give the background real parallax (split it with `tools/sil_layers.py`) and a little coloured light. Code:
+`techniques/components/diamond_hoax/fx/ColdOpenDepth.tsx` (`ColdOpenReveal`), timed with the chapter's word timings.
+
 ## 5. Images in scenes
 
 - **Always read an image's real pixel size** before placing it (`python3 -c "from PIL import Image;

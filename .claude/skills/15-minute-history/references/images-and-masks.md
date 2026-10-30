@@ -252,6 +252,19 @@ the first try.
   (`src/kit/prop.tsx`) shows them B&W on the desk with an optional coral tint and teal outline. No source tag, never presented as a
   specific real artifact.
 
+- **A palette per scene** (*They Fooled America's Richest Men*, the user: "other colours… whatever matches the vibe"): name the palette
+  and the mood in each prompt (e.g. "midnight blue to violet, lantern amber, one red ruby glint; a crime in progress"), keep one light
+  source per scene. Contact sheet: `projects/Diamond_Hoax/review/contact/scenes_v2.jpg`.
+- **Check the landscape, not just the figures.** Gemini put desert mesas behind San Francisco, the Bay and the California foothills;
+  name what the background must and must not be ("rounded oak hills, NO mesas, NO buttes, NO desert"). It also painted "BAN…" on a
+  bank: say "NO sign, NO lettering, NO name carved or painted anywhere".
+- **`sil_layers.py` works on any painting**, including a B&W engraving (the banker's office behind the cold-open reveal).
+- **Props whose inside is pale** (a blank certificate, a watch dial) come out of `prop_cut.py` with holes. Re-cut them by removing only
+  the white connected to the image border (flood fill), or fill the largest interior hole of the rembg mask with the source pixels;
+  never fill a hole without putting the original pixels back (it goes black). An engraving with hatched background shading cuts out
+  with ragged patches: strip the background first with `tools/gemini_edit.py` ("remove all background hatching… keep the man
+  exactly as he is").
+
 ## 10. Portraits are bust cut-outs; white props on black (West Ep 2, Oct 2026)
 
 - **Every portrait of one person is a full bust cut-out**: head and shoulders only, cut out of the page (no print border, no photo
