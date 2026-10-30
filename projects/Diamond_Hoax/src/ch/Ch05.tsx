@@ -223,7 +223,7 @@ const Proof: React.FC<{t: TL; a: number}> = ({t, a}) => {
 const Exit: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const f = useCurrentFrame();
   const cinch = interpolate(f, [t.at('hardest') - a, t.at('hardest') - a + 8], [0, 1], {...clamp, easing: Easing.out(Easing.back(2))});
-  const go = t.at('money') - a - 4;
+  const go = t.at('money') - a + 34; // leave as the chapter fades, not before (no empty desk)
   const slide = interpolate(f, [go, go + 22], [0, 1], {...clamp, easing: Easing.in(Easing.cubic)});
   return (
     <AbsoluteFill>

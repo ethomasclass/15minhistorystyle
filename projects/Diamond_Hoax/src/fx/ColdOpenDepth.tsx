@@ -157,8 +157,8 @@ export const MoneyTag: React.FC<{at: number; big: string; small: string; x: numb
   const s = interpolate(g, [at, at + 5, at + 9], [1.35, 0.95, 1], clamp);
   return (
     <div style={{position: 'absolute', left: x, top: y, transform: `translateX(-50%) scale(${s})`, textAlign: 'center', transformOrigin: '50% 60%'}}>
-      <div style={{fontFamily: JF.display, fontSize: 150, lineHeight: 1, color: '#FF9F1C', textShadow: '0 6px 24px rgba(0,0,0,0.85)'}}>{big}</div>
-      <div style={{fontFamily: JF.mono, fontSize: 34, color: '#F4EFE6', opacity: 0.85, marginTop: 10, textShadow: '0 2px 10px rgba(0,0,0,0.9)'}}>{small}</div>
+      <div style={{fontFamily: JF.display, fontSize: 150, lineHeight: 1, color: '#FF9F1C', whiteSpace: 'nowrap', textShadow: '0 6px 24px rgba(0,0,0,0.85)'}}>{big}</div>
+      <div style={{fontFamily: JF.mono, fontSize: 34, color: '#F4EFE6', opacity: 0.85, marginTop: 10, whiteSpace: 'nowrap', textShadow: '0 2px 10px rgba(0,0,0,0.9)'}}>{small}</div>
     </div>
   );
 };
