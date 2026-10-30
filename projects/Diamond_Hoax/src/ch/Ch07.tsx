@@ -92,11 +92,11 @@ const Janin: React.FC<{t: TL; a: number}> = ({t, a}) => {
 const Survey: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Print src="img/ch07/osullivan_kings_camp_salt_lake_city_1868.jpg" x={140} y={230} w={800} h={520} rot={-2} pos="50% 50%" at={1} tag={OSULLIVAN(1868)} />
-    <Print src="img/ch07/osullivan_washakie_badlands_wyoming_1872.jpg" x={1110} y={210} w={480} h={640} rot={3} pos="50% 40%" at={t.at('five years') - a - 1} tag={OSULLIVAN(1872)} />
-    <Highlight text="A GOVERNMENT SURVEY" x={120} y={70} size={84} at={t.at('government survey') - a} seed={72} rot={-2} />
-    <Note text="geologists" x={200} y={820} size={64} rot={-4} at={t.at('geologists') - a - 2} />
-    <Note text="5 years mapping the West" x={420} y={890} size={60} rot={-3} at={t.at('five years') - a + 2} />
+    <Print src="img/ch07/osullivan_kings_camp_salt_lake_city_1868.jpg" x={140} y={240} w={760} h={470} rot={-2} pos="50% 50%" at={1} tag={OSULLIVAN(1868)} />
+    <Print src="img/ch07/osullivan_washakie_badlands_wyoming_1872.jpg" x={1110} y={240} w={460} h={600} rot={3} pos="50% 40%" at={t.at('five years') - a - 1} tag={OSULLIVAN(1872)} />
+    <Highlight text="A GOVERNMENT SURVEY" x={120} y={112} size={84} at={t.at('government survey') - a} seed={72} rot={-2} />
+    <Note text="geologists" x={170} y={760} size={64} rot={-4} at={t.at('geologists') - a - 2} />
+    <Note text="5 years mapping the West" x={260} y={842} size={60} rot={-3} at={t.at('five years') - a + 2} />
   </AbsoluteFill>
 );
 
@@ -155,7 +155,7 @@ const Gems: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <GemOrigins at={-26} diamondAt={t.at('Diamonds rubies') - a + 1} rubyAt={t.at('rubies and sapphires') - a + 1} sapphireAt={t.at('sapphires') - a + 1}
       liftAt={t.at('In nature') - a + 2} xAt={t.at('never find') - a} />
     <Sequence from={t.at('form in') - a} durationInFrames={t.at('In nature') - t.at('form in') + 2} layout="none">
-      <Highlight text="DIFFERENT ROCKS" x={130} y={90} size={84} at={0} seed={75} rot={-2} />
+      <Highlight text="DIFFERENT ROCKS" x={130} y={114} size={84} at={0} seed={75} rot={-2} />
     </Sequence>
   </AbsoluteFill>
 );
@@ -164,8 +164,8 @@ const Gems: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Look: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Print src="img/ch07/osullivan_vermillion_creek_canon_1872.jpg" x={840} y={230} w={900} h={640} rot={2} pos="50% 50%" at={1} tag={OSULLIVAN(1872)} />
-    <Highlight text="KING GOES TO LOOK" x={110} y={90} size={84} at={t.at('King went') - a} seed={76} rot={-2} />
+    <Print src="img/ch07/osullivan_vermillion_creek_canon_1872.jpg" x={840} y={250} w={880} h={620} rot={2} pos="50% 50%" at={1} tag={OSULLIVAN(1872)} />
+    <Highlight text="KING GOES TO LOOK" x={110} y={114} size={84} at={t.at('King went') - a} seed={76} rot={-2} />
     <Note text="from what Janin" x={150} y={430} size={66} rot={-4} at={t.at('working from') - a - 2} />
     <Note text="let slip" x={230} y={530} size={66} rot={-3} at={t.at('let slip') - a - 2} />
   </AbsoluteFill>
@@ -269,14 +269,14 @@ const ShortA: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <ShortSale at={2} borrowAt={t.at('You borrow') - a} sugarAt={t.at('cup of sugar') - a - 2} sellAt={t.at('You sell it') - a} />
     <Money at={t.at('a thousand dollars') - a} big="$1,000 a share" small="about $40 in 1872" x={960} y={110} size={84} />
-    <Note text="borrowed, not bought" x={1180} y={830} size={56} rot={-4} at={t.at('you can borrow') - a} />
+    <Note text="borrowed, not bought" x={1150} y={830} size={52} rot={-4} at={t.at('you can borrow') - a} />
   </AbsoluteFill>
 );
 
 /** "Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference." */
 const SHORT_CLOSE = [
-  {f: 0, pos: [2.9, 8.2, 10.2] as [number, number, number], look: [2.7, 0.1, -0.2] as [number, number, number], fov: 30},
-  {f: 220, pos: [3.1, 7.6, 9.5] as [number, number, number], look: [2.8, 0.1, -0.2] as [number, number, number], fov: 30},
+  {f: 0, pos: [2.3, 8.6, 10.8] as [number, number, number], look: [2.2, 0.9, -0.2] as [number, number, number], fov: 30},
+  {f: 220, pos: [2.3, 8.1, 10.2] as [number, number, number], look: [2.2, 0.9, -0.2] as [number, number, number], fov: 30},
 ];
 const ShortB: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
@@ -314,18 +314,18 @@ const Split: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => {
     <AbsoluteFill>
       <DarkPaper />
       <Lamp x={480} y={560} rx={460} ry={460} a={0.12} />
-      <Print src={KING_SRC} x={230} y={240} w={500} h={640} rot={-2} at={0} tag={KING_TAG} size={KING_SIZE} fy={0.08} mask={KING} traceAt={4} />
+      <Print src={KING_SRC} x={230} y={270} w={490} h={620} rot={-2} at={0} tag={KING_TAG} size={KING_SIZE} fy={0.08} mask={KING} traceAt={4} />
       <div style={{position: 'absolute', left: 962, top: 0, width: 958, height: 1080, overflow: 'hidden', opacity: ro}}>
         <div style={{position: 'absolute', left: -560, top: 0, width: 1920, height: 1080}}>
           <SilScene name="sil_stranger" size={sz(strangerL)} glowLayer={(strangerL as L).glowLayer} a={right - 20} b={b - a + 20} cam={{z: [1.1, 1.16], x: [0, -20], y: [0, -10]}} fade={1} />
         </div>
       </div>
       <div style={{position: 'absolute', left: 958, top: 0, width: 4, height: 1080, background: 'rgba(244,239,230,0.75)'}} />
-      <div style={{position: 'absolute', left: 140, top: 200, fontFamily: JF.mono, fontSize: 26, letterSpacing: 6, color: pal.mark}}>KING</div>
-      <div style={{position: 'absolute', left: 1100, top: 200, fontFamily: JF.mono, fontSize: 26, letterSpacing: 6, color: pal.subject, opacity: ro,
+      <div style={{position: 'absolute', left: 140, top: 226, fontFamily: JF.mono, fontSize: 26, letterSpacing: 6, color: pal.mark}}>KING</div>
+      <div style={{position: 'absolute', left: 1100, top: 226, fontFamily: JF.mono, fontSize: 26, letterSpacing: 6, color: pal.subject, opacity: ro,
         textShadow: '0 2px 10px rgba(0,0,0,0.8)'}}>THE DEALER</div>
-      <Highlight text="WARN EVERYBODY" x={110} y={90} size={78} at={t.at('warn everybody') - a} seed={83} rot={-2} />
-      <Highlight text="A HEAD START" x={1080} y={90} size={78} at={t.at('head start') - a} seed={84} rot={-2} />
+      <Highlight text="WARN EVERYBODY" x={110} y={114} size={78} at={t.at('warn everybody') - a} seed={83} rot={-2} />
+      <Highlight text="A HEAD START" x={1080} y={114} size={78} at={t.at('head start') - a} seed={84} rot={-2} />
     </AbsoluteFill>
   );
 };

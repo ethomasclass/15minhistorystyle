@@ -240,7 +240,7 @@ const Panic: React.FC<S> = ({t, a}) => (
     <DarkPaper />
     <Print src="img/ch08/panic_1873_nassau_broad_wall_street_crowd.jpg" x={150} y={140} w={640} h={700} rot={-2} pos="50% 45%" at={1}
       tag="Wall Street, 1873 · Library of Congress" />
-    <Print src="img/ch08/panic_1873_jay_cooke_office_wall_street.jpg" x={1000} y={210} w={600} h={640} rot={2} pos="50% 40%" at={t.at('one big bank') - a - 1}
+    <Print src="img/ch08/panic_1873_jay_cooke_office_wall_street.jpg" x={1000} y={150} w={600} h={600} rot={2} pos="50% 40%" at={t.at('one big bank') - a - 1}
       tag="Wall Street, 1873 · Library of Congress" />
     <Highlight text="1873" x={830} y={100} size={110} at={t.at('next year') - a} seed={87} rot={-3} />
     <Note text="the very next year" x={820} y={835} size={58} rot={-3} at={t.at('very next') - a - 3} out={t.at('one big bank') - a + 2} />

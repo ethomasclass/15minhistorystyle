@@ -81,7 +81,7 @@ const Names: React.FC<{t: TL; a: number}> = ({t, a}) => {
       </AbsoluteFill>
       <Highlight text="THE LIST" x={120} y={100} size={96} at={t.at('list') - a} seed={62} rot={-3} />
       <Note text="a general" x={190} y={720} size={62} rot={-5} at={t.at('generals') - a + 3} />
-      <Note text="the Rothschild bank" x={700} y={850} size={62} rot={-3} at={t.at('Rothschild') - a + 3} />
+      <Note text="the Rothschild bank" x={700} y={838} size={62} rot={-3} at={t.at('Rothschild') - a + 3} />
       <Note text="Tiffany" x={1490} y={700} size={66} rot={-4} at={t.at('Tiffany') - a + 3} />
       <Tag text="McClellan: Brady, 1861 · Library of Congress  /  Rothschild: Harpending, 1913  /  Tiffany: engraving, 1893" />
     </AbsoluteFill>
@@ -177,7 +177,7 @@ const Leave: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <Figure who="arnold" x={540} y={900} h={640} at={2} />
         <Figure who="slack" x={1000} y={900} h={620} at={5} />
       </AbsoluteFill>
-      <Highlight text="KNOW WHEN TO LEAVE" x={120} y={90} size={84} at={t.at('leaves') - a} seed={64} rot={-2} />
+      <Highlight text="KNOW WHEN TO LEAVE" x={120} y={114} size={84} at={t.at('leaves') - a} seed={64} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -193,7 +193,7 @@ const Greedy: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Lamp x={860} y={640} rx={760} ry={520} a={0.14} />
       <Figure who="arnold" x={640} y={1010} h={800} at={-10} dx={k * 1100} fade={1 - k} label={k > 0 ? false : undefined} />
       <Figure who="slack" x={1080} y={1010} h={770} at={-10} dx={k * 1000} fade={1 - k} label={k > 0 ? false : undefined} />
-      <Note text="most crooks stay one round too long" x={130} y={110} size={60} rot={-3} at={t.at('stay one round') - a - 2} />
+      <Note text="most crooks stay one round too long" x={130} y={136} size={60} rot={-3} at={t.at('stay one round') - a - 2} />
       <Note text="not these two" x={180} y={520} size={74} rot={-5} at={t.at('The cousins') - a} />
     </AbsoluteFill>
   );
@@ -229,7 +229,7 @@ const Home: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <HomeMap goAt={t.at('went home') - a} arriveAt={t.at('rich man') - a} goneAt={t.at('disappeared') - a - 4} />
     <Note text="home, and rich" x={1250} y={330} size={64} rot={-4} at={t.at('rich man') - a} />
     <Note text="gone" x={330} y={300} size={70} rot={-5} at={t.at('disappeared') - a + 6} />
-    <Note text="got away with it?" x={640} y={850} size={70} rot={-3} at={t.at('gotten away') - a - 2} />
+    <Note text="got away with it?" x={640} y={815} size={70} rot={-3} at={t.at('gotten away') - a - 2} />
   </AbsoluteFill>
 );
 
@@ -239,7 +239,7 @@ const Train: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
     <SilScene name="sil_train" size={sz(train)} glowLayer={(train as L).glowLayer} a={0} b={b - a + 40} cam={{z: [1.04, 1.16], x: [-30, 10], y: [0, -12]}} />
     <Note text="a geologist" x={190} y={300} size={66} rot={-4} at={t.at('geologist') - a - 2} />
     <Highlight text="THE WRONG TRAIN" x={150} y={110} size={92} at={t.at('wrong train') - a} seed={65} rot={-2} />
-    <Note text="...or the right one" x={1180} y={780} size={68} rot={-4} at={t.at('right one') - a - 2} />
+    <Note text="...or the right one" x={1110} y={780} size={68} rot={-4} at={t.at('right one') - a - 2} />
   </AbsoluteFill>
 );
 
