@@ -121,7 +121,8 @@ const Real: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <AbsoluteFill style={{background: 'radial-gradient(circle 620px at 960px 560px, rgba(255,214,160,0.10) 0%, transparent 100%)'}} />
-    <Prop name="rough_diamond" x={720} y={290} w={480} at={t.at('diamonds', 2) - a - 2} coral trace from="top" />
+    <Prop name="rough_diamond" x={720} y={290} w={480} at={2} coral trace from="top" />
+    <Note text="one problem" x={300} y={240} size={64} rot={-4} at={t.at('problem') - a} />
     <Highlight text="REAL" x={1240} y={420} size={130} at={t.at('real') - a} seed={33} rot={-3} />
   </AbsoluteFill>
 );
