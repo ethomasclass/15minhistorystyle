@@ -173,8 +173,8 @@ const Trust: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <Lamp x={1040} y={500} r={560} a={0.09} />
       <Highlight text="BORROWED TRUST" x={140} y={110} size={84} at={t.at('borrowed') - a} seed={45} rot={-2} />
-      <SilFigure name="sil_arnold" x={150} y={330} h={480} at={t.at('Nobody') - a - 1} label="PHILIP ARNOLD" from="left" dim={0.9} />
-      <SilFigure name="sil_slack" x={470} y={330} h={480} at={t.at('Nobody') - a + 3} label="JOHN SLACK" from="left" dim={0.9} />
+      <SilFigure name="sil_arnold" x={150} y={330} h={480} at={2} label="PHILIP ARNOLD" from="left" dim={0.9} />
+      <SilFigure name="sil_slack" x={470} y={330} h={480} at={5} label="JOHN SLACK" from="left" dim={0.9} />
       <Note text="two scruffy cousins" x={170} y={238} size={56} rot={-4} at={t.at('scruffy') - a - 2} />
       <Print {...IMG.tiffany} crop={TIFF_CROP} x={830} y={250} w={420} h={460} rot={2} at={1} mask={TIFFANY} tintAt={t.at('trust Tiffany') - a}
         traceAt={t.at('trust Tiffany') - a + 4} tag={IMG.tiffany.tag} tagW={420} />
