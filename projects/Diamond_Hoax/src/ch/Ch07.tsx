@@ -274,9 +274,10 @@ const ShortA: React.FC<{t: TL; a: number}> = ({t, a}) => (
 );
 
 /** "Next week the news breaks, and the share is worth about nothing. You buy one back for twenty bucks, return it, and keep the difference." */
+// all four lane labels stay inside the frame (an earlier, tighter framing cut BORROW off the left edge)
 const SHORT_CLOSE = [
-  {f: 0, pos: [2.3, 8.6, 10.8] as [number, number, number], look: [2.2, 0.9, -0.2] as [number, number, number], fov: 30},
-  {f: 220, pos: [2.3, 8.1, 10.2] as [number, number, number], look: [2.2, 0.9, -0.2] as [number, number, number], fov: 30},
+  {f: 0, pos: [0.55, 8.8, 11.2] as [number, number, number], look: [0.55, 0.7, -0.3] as [number, number, number], fov: 30},
+  {f: 220, pos: [0.55, 8.4, 10.7] as [number, number, number], look: [0.55, 0.7, -0.3] as [number, number, number], fov: 30},
 ];
 const ShortB: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>

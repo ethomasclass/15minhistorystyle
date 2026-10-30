@@ -218,7 +218,8 @@ export const GemOrigins: React.FC<{at?: number; diamondAt?: number; rubyAt?: num
         <AbsoluteFill style={{opacity: fadeIn}}>
           {SPOTS.map((s, i) => {
             const p = S([s.lab[0], s.lab[1], 0.1]);
-            const on = interpolate(g, [named[i], named[i] + 6], [0, 1], clamp) * interpolate(g, [L - 4, L + 3], [1, 0], clamp);
+            // gone before the camera moves for the lift, and never drawn below the safe margin (it slid off the bottom while fading)
+            const on = interpolate(g, [named[i], named[i] + 6], [0, 1], clamp) * interpolate(g, [L - 10, L - 2], [1, 0], clamp) * (p.y > 984 ? 0 : 1);
             const hot = g >= named[i] && (i === 2 || g < named[i + 1]);
             return <Lab key={i} x={p.x} y={p.y} title={s.title} sub={s.sub} on={on} hot={hot} />;
           })}
