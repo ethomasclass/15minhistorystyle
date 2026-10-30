@@ -19,3 +19,13 @@ never present a prop as a specific real object ("Arnold's bag"); the certificate
 
 ## 3D builds
 - `public/img/fx/coldopen/office.jpg` (Oct 29, `gemini-3-pro-image-preview`, 2K, 16:9; prompt beside it): an empty 1871 banker's office as an engraving, no people or text; the back plane of the cold-open reveal, shown grayscale, dimmed and soft.
+
+## Silhouette figures (no reliable photo)
+Oct 30, 2026, `gemini-3-pro-image-preview`, 2K, 3:4, prompts beside each source (`public/img/props/src/sil_<name>.txt`, raw
+`.png` + `.jpg`), cut out with `tools/prop_cut.py` into `public/img/props/sil_<name>.webp` (1600 px tall, transparent; checked on a
+dark background at full size, clean edges). Solid black cut-paper figures, no face detail, no text. First takes kept, none rejected.
+- `sil_arnold`: stocky bearded frontiersman, slouch hat, rumpled coat and vest, boots, holding a small drawstring bag out in his right hand.
+- `sil_slack`: lean frontiersman, wide-brimmed hat, open duster, neckerchief, patched trousers, arms folded.
+- `sil_janin`: 1870s mining engineer, bowler, frock coat, watch chain, writing in an open surveyor's notebook.
+Use: always with a mono label ("PHILIP ARNOLD · no reliable photo"), never as a likeness. They are black: put them on a lit
+patch of the desk (a lamp pool or a pale backing) so they read on the dark desk.
