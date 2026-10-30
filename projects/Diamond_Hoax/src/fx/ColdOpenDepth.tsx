@@ -150,7 +150,7 @@ export type ColdOpenRevealProps = {officeAt: number; pullAt: number; pullEnd: nu
   drainAt?: number; out?: number};
 
 const OFFICE: [number, number] = [2752, 1536];
-const MoneyTag: React.FC<{at: number; big: string; small: string; x: number; y: number}> = ({at, big, small, x, y}) => {
+export const MoneyTag: React.FC<{at: number; big: string; small: string; x: number; y: number}> = ({at, big, small, x, y}) => {
   const f = useCurrentFrame();
   const g = Math.floor(f / 2.5) * 2.5;
   if (g < at) return null;
