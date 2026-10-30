@@ -1,6 +1,6 @@
 # They Fooled America's Richest Men: The Great Diamond Hoax
 
-**Chunk History** · narration script · draft 10 · **2,479 words** · about **15:47 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
+**Chunk History** · narration script · draft 10 · **2,492 words** · about **15:51 finished** (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 Stand-alone, entertainment video (no series ties, no classroom unit).
 
 **Packaging (chosen first):** thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`): the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them admiring a stone, tape: PAID FOR / **DIRT**. Title: **They Fooled America's Richest Men** (34 characters).
@@ -25,7 +25,7 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs v4 delivery cue (not spoke
 | 7:07 | Diamond Fever | 170 | Act II · escalation |
 | 8:11 | The Anthills | 370 | Act III · climax |
 | 10:28 | The Dominoes (+ plug) | 436 | Act III · climax (plug after the climax) |
-| 13:08 | Where the Money Went | 375 | Act IV · fallout + takeaway |
+| 13:08 | Where the Money Went | 388 | Act IV · fallout + takeaway |
 
 ---
 
@@ -224,7 +224,7 @@ The dominoes stayed standing. For now.
 ---
 
 ## 13:08 | Where the Money Went
-*`ch09_paid_for_dirt.txt`* · 375 words · Act IV · fallout + takeaway
+*`ch09_paid_for_dirt.txt`* · 388 words · Act IV · fallout + takeaway
 
 First, the money. Most of it went home with the cousins, and most of it never came back.
 
@@ -244,7 +244,7 @@ But the cousins didn't do the convincing. Tiffany and Janin did it for them. And
 
 The diamonds were real. *The field was dirt.* And the richest men in America paid for it.
 
-[warmly] Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
+[warmly] Thanks for watching. If you enjoyed this one, hit subscribe. And if you want more stories right now, there are two right here on the screen. I'll see you next time.
 
 ---
 ## Production notes

@@ -1,10 +1,11 @@
 // The end screen (20 s from the thank-you), copied from projects/Halloween_Bribe/src/fx/EndScreen.tsx and adapted for this video:
 // the Chunk History logo, THANKS FOR WATCHING, a drawn subscribe circle and two drawn "watch next" slots where YouTube's
-// end-screen elements sit (place them in Studio: subscribe over the circle, two videos over the frames), and the video's object,
+// end-screen elements sit (place them in Studio: subscribe over the circle, two videos over the frames; the narration points at them
+// and two teal arrows draw to the frames on "more stories"), and the video's object,
 // the rough diamond, on the desk instead of Halloween's candy bowl.
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Highlight, Note, Tag, useGFrame} from '../../kit/Kit';
+import {Arrow, Highlight, Note, Tag, useGFrame} from '../../kit/Kit';
 import {DarkPaper} from '../../kit/common';
 import {Prop} from '../../kit/prop';
 
@@ -50,7 +51,10 @@ export const EndScreen: React.FC<{start: number; subscribe: number; more: number
         <Img src={staticFile('img/brand/chunk-history-wordmark-white.svg')} style={{height: 56}} />
       </div>
       <Highlight text="THANKS FOR WATCHING" x={120} y={240} size={70} at={2} seed={81} rot={-2} />
-      <Note text="more stories like this one" x={140} y={380} size={54} rot={-3} at={s(more)} color="#ffffff" />
+      {/* "more stories right now, there are two right here on the screen": the note, and an arrow to each video slot */}
+      <Note text="two more, right here" x={140} y={380} size={54} rot={-3} at={s(more)} color="#ffffff" />
+      <Arrow x1={800} y1={395} x2={1085} y2={345} bow={-20} color={TEAL} at={s(more) + 8} />
+      <Arrow x1={800} y1={440} x2={1085} y2={760} bow={30} color={TEAL} at={s(more) + 14} />
       {/* subscribe: a drawn circle with the Chunk mark (YouTube's subscribe element covers it) */}
       {g >= s(subscribe) && (
         <>

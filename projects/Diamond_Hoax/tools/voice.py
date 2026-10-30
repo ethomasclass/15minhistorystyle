@@ -30,7 +30,9 @@ ONE_TAKE = os.environ.get("VOICE_ONE_TAKE", "1") not in ("0", "", "false")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "Mobilier": "Mo-beel-yay", "Schuyler": "Sky-ler", "Kearney": "Kar-nee"}
+PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "Mobilier": "Mo-beel-yay", "Schuyler": "Sky-ler", "Kearney": "Kar-nee",
+             # Janin = JAN-in (the user's pick); unspelled, the ch 8 and ch 9 takes said "Janine"
+             "Janin": "Jannin"}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
