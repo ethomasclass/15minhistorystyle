@@ -103,8 +103,22 @@ export const SyncCam: React.FC<{cam: THREE.PerspectiveCamera}> = ({cam}) => {
 // ───────────────────────── stage ─────────────────────────
 
 /** The dark desk, the 3D canvas (children) and a DOM overlay (`over`), then grain + vignette. */
+/** Set by a vertical Short: the Stage draws a clear 1920x1080 canvas on the Short's own desk, whatever the composition's size. */
+export const BareStageCtx = React.createContext(false);
+
 export const Stage: React.FC<{children: React.ReactNode; over?: React.ReactNode; lamp?: [number, number]}> = ({children, over, lamp = [960, 470]}) => {
   const {width, height} = useVideoConfig();
+  const bare = React.useContext(BareStageCtx);
+  if (bare) {
+    return (
+      <AbsoluteFill>
+        <ThreeCanvas width={W} height={H} camera={{fov: 30, near: 0.05, far: 400}} gl={{antialias: true, alpha: true}} flat linear={false}>
+          {children}
+        </ThreeCanvas>
+        {over}
+      </AbsoluteFill>
+    );
+  }
   return (
     <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
       <DarkPaper />
