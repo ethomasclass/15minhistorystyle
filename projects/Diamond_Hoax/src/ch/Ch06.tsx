@@ -23,7 +23,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {Sheet, Swipe, type SheetCam, camAt} from '../kit/vox';
 import {Tag} from '../kit/Kit';
 import fever from '../../public/img/layers/sil/sil_fever/layers.json';

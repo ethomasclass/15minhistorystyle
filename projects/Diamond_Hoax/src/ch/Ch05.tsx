@@ -27,7 +27,7 @@ import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narrat
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {Mesa, MESA_CAM} from '../fx/Mesa';
 import {LoopingRide} from '../fx/LoopingRide';
 import {ShareSlices} from '../fx/ShareSlices';

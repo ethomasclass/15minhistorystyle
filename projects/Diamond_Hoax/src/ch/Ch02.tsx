@@ -25,7 +25,7 @@ import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narrat
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import sfNight from '../../public/img/layers/sil/sil_sf_night/layers.json';
 import {DrawnQ, Figure, LampPool, Print, RalstonCut, RALSTON_TAG, WEST_ASPECT, WestMap, westPoint} from './ch02/parts';
 

@@ -34,7 +34,7 @@ import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
 import {Sheet, Slip, Swipe, type Box, TEAL} from '../kit/vox';
 import {maskRef} from '../kit/maskref';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {ColdOpenDepth, MoneyTag} from '../fx/ColdOpenDepth';
 import {Dominoes} from '../fx/Dominoes';
 import type {CamKey} from '../fx/desk/kit3d';

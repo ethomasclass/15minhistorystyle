@@ -25,7 +25,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {bed} from '../kit/levels';
 import {maskRef} from '../kit/maskref';
 import {Prop} from '../kit/prop';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {ColdOpenDepth} from '../fx/ColdOpenDepth';
 import {Mesa, MESA_CAM} from '../fx/Mesa';
 import {CutGem, Flare, Lamp, MoneyTag, Mono, Print, SilFigure, SyncQuote} from './ch04/bits';

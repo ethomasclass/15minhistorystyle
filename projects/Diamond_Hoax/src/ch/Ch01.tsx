@@ -23,7 +23,7 @@ import {makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {ColdOpenDepth, ColdOpenReveal} from '../fx/ColdOpenDepth';
 import {Mesa, MESA_CAM} from '../fx/Mesa';
 import {AnthillCutaway} from '../fx/AnthillCutaway';

@@ -29,7 +29,7 @@ Hoax, 1872). One builder per pair of chapters, working at the same time as three
   `src/kit/shell.tsx` (`ChapterShell`, `Definition` vocab card, `Quote`, `Stamp`, `Photo`), `src/kit/vox.tsx` (`Swipe`/`Spot` for
   document highlights, `Slip`), `src/kit/prop.tsx` (`Prop`: B&W cut-out props, optional `coral` + `trace`),
   `src/kit/silparallax.tsx` (`SilScene`, sizes and `glowLayer` from `public/img/layers/sil/<name>/layers.json`),
-  `src/kit/con.tsx` (**`ConCard`**), `src/kit/levels.ts` (`bed()` for music volume).
+  `src/kit/conCard.tsx` (**`ConCard`**), `src/kit/levels.ts` (`bed()` for music volume).
 - **3D pieces** (`src/fx/*.tsx`; each header lists its beat props): `Mesa` + `MESA_CAM`, `LoopingRide`, `AnthillCutaway`,
   `GemOrigins`, `Dominoes`, `BankVault`, `ShareSlices`, `ShortSale`, `MoneyMap`, `ColdOpenDepth` (the H1 picture, for callbacks),
   `MoneyTag` (in `ColdOpenDepth.tsx`).
