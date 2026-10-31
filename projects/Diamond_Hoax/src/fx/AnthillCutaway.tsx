@@ -206,7 +206,7 @@ const Lab: React.FC<{x: number; y: number; text: string; color?: string; size?: 
     letterSpacing: 3, color, whiteSpace: 'nowrap', background: 'rgba(7,9,8,0.62)', padding: `${size * 0.2}px ${size * 0.45}px`, borderRadius: 4, textShadow: '0 2px 8px #000'}}>{text}</div>
 );
 
-export const AnthillCutaway: React.FC<{at?: number; sliceAt?: number; rubyAt?: number; printsAt?: number; compareAt?: number}> = ({at = 0, sliceAt, rubyAt, printsAt, compareAt}) => {
+export const AnthillCutaway: React.FC<{at?: number; sliceAt?: number; rubyAt?: number; printsAt?: number; compareAt?: number; labels?: boolean}> = ({at = 0, sliceAt, rubyAt, printsAt, compareAt, labels = true}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const SL = sliceAt ?? at + 25;
@@ -269,7 +269,7 @@ export const AnthillCutaway: React.FC<{at?: number; sliceAt?: number; rubyAt?: n
     BX - 0.25, RUBY_Y, 0.05, BX + 0.25, RUBY_Y, 0.05,
   ]), []);
   const leaders = useMemo(() => new Float32Array([HOLE_TOP[0] + 0.3, HOLE_TOP[1], 0.05, BX - 0.3, HOLE_TOP[1], 0.05, HOLE_END[0] + 0.45, RUBY_Y, 0.05, BX - 0.3, RUBY_Y, 0.05]), []);
-  const bracketK = interpolate(g, [RB + 18, RB + 26], [0, 1], clamp);
+  const bracketK = labels ? interpolate(g, [RB + 18, RB + 26], [0, 1], clamp) : 0;
 
   const lab8 = S([BX + 0.45, (HOLE_TOP[1] + RUBY_Y) / 2, 0.05]);
   const labRuby = S([HOLE_END[0] - 0.7, RUBY_Y - 0.1, 0.1]);

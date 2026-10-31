@@ -160,14 +160,15 @@ const SixMoves: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
-/** "And we'll get to those anthills. That's where it all fell apart." */
+/** "And we'll get to those anthills. That's where it all fell apart. But first:" */
 const FellApart: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
-    <AnthillCutaway at={-10} sliceAt={t.at('fell') - a - 6} rubyAt={t.at('fell') - a + 14} printsAt={9999} compareAt={9999} />
+    {/* the hill opens on "those anthills" and the ruby stays lit up to the knock; ch 7 explains it, so no labels here */}
+    <AnthillCutaway at={-10} sliceAt={t.at('those anthills') - a} rubyAt={t.at('those anthills') - a + 26} printsAt={9999} compareAt={9999} labels={false} />
   </AbsoluteFill>
 );
 
-/** "But first: a knock on an office door, late at night, and a bag nobody wanted to talk about." */
+/** "A knock on an office door, late at night, and a bag nobody wanted to talk about." The cut lands with the knock. */
 const Knock: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="sil_sf_night" size={sz(sfNight)} glowLayer={(sfNight as L).glowLayer} a={0} b={b - a} cam={{z: [1.04, 1.16], x: [-30, 20], y: [0, -10]}} />
@@ -181,7 +182,7 @@ const Body: React.FC = () => {
   const at = t.at;
   const c = {
     cust: at('Their') - 1, hats: at('Not') - 1, field: at('And what') - 1, ants: at('Some of them') - 1, real: at('There was') - 1,
-    wasnt: at('The diamond field') - 1, q: at('So how') - 1, six: at('They used') - 1, apart: at("And we'll") - 1, knock: at('But first') - 1,
+    wasnt: at('The diamond field') - 1, q: at('So how') - 1, six: at('They used') - 1, apart: at("And we'll") - 1, knock: at('a knock') - 1,
   };
   const cuts: [number, React.ReactNode][] = [
     [0, <ColdOpenReveal officeAt={at('rich') - 6} pullAt={at('with') - 4} pullEnd={at('By') + 6} loopAt={at('By') + 2} fingersAt={at('By') + 22}
