@@ -212,8 +212,8 @@ If you only make three, make **1, 7 and 8** (the theme, the dominoes, the afterm
 |---|---|---|
 | 1 | `dh_salted_theme` from 0:00 | set in `Ch01.tsx` |
 | 2 | `dh_secret_bag` from 0:00 | |
-| 3 | `dh_secret_bag` from 1:23, then `dh_parlor_appraisal` from 0:00 | hands over on the jeweler's "yes" ("And they were") |
-| 4 | `dh_parlor_appraisal` from 0:48 | lands on the cue's own ending; about 7 s of ch 3's waltz repeats across the logo break |
+| 3 | `dh_secret_bag` from 1:23, then `dh_salted_theme` from about 1:03 | hands over on the jeweler's "yes" ("And they were"); the theme's last chord lands just after "treasure". The user heard the waltz here and moved it: it belongs to Tiffany, not the claims |
+| 4 | `dh_parlor_appraisal` from 0:48 | the waltz's only use; lands on the cue's own ending |
 | 5, 6, 7 | `dh_salting_night`, `dh_diamond_fever`, `dh_anthills` from 0:00 | |
 | 8 | `dh_dominoes`, in step with the narration | out 5 frames before "There is not enough", back at "On November 26th"; the cue's own stop lands between "Subscribe anyway." and "So where did all that money go?" |
 | 9 | `dh_aftermath` from 0:00 (14 LU under, a grave stretch), then `dh_salted_theme` from 0:44.5 | the reprise starts at "So let's go back" and its closing chord lands on the end screen's fade |

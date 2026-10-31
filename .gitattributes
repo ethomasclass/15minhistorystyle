@@ -12,3 +12,6 @@ projects/Halloween_Bribe/renders/Halloween_Bribe_1080p.mp4 filter=lfs diff=lfs m
 projects/Halloween_Bribe/renders/Halloween_Bribe_720p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Halloween_Bribe/renders/shorts/*.mp4 filter=lfs diff=lfs merge=lfs -text
 *.sh text eol=lf
+projects/Diamond_Hoax/renders/Diamond_Hoax_1080p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Diamond_Hoax/renders/Diamond_Hoax_720p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Diamond_Hoax/review/Diamond_Hoax_480p_preview.mp4 filter=lfs diff=lfs merge=lfs -text

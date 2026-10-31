@@ -33,8 +33,12 @@ import {CoinStack, Figure, LampPool, Print, RalstonCut, RALSTON_TAG, WEST_ASPECT
 import claimJson from '../../public/img/ch03/white_pine_news_1872-11-09_claim_notice_beginning_at_a_stake.json';
 
 const N = words as Narration;
-// the bag's cue picks up where ch 2 left it and hands to the parlor as the jeweler's "yes" lands
-const THEY_WERE = makeTimeline(N, 30).at('And they were');
+const TL3 = makeTimeline(N, 30);
+// the bag's cue picks up where ch 2 left it and hands to the con's theme as the jeweler's "yes" lands; the waltz is saved for Tiffany
+const THEY_WERE = TL3.at('And they were');
+/** The theme comes in here; startFrom lands its last chord (3450 frames into the cue) just after "treasure". */
+const THEME = THEY_WERE - 30;
+const THEME_START = 3450 - (TL3.at('treasure') + 28 - THEME);
 export const CH03_FRAMES = chapterFrames(N, LEAD);
 
 const CLAIM = 'img/ch03/white_pine_news_1872-11-09_claim_notice_beginning_at_a_stake.jpg';
@@ -412,7 +416,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch03: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch03_everybody_wants_a_diamond_mine.wav" lead={LEAD} music={[{src: 'music/dh_secret_bag.mp3', volume: bed('dh_secret_bag'), startFrom: 2490, to: THEY_WERE}, {src: 'music/dh_parlor_appraisal.mp3', volume: bed('dh_parlor_appraisal'), from: THEY_WERE - 30}]}>
+  <ChapterShell n={N} audio="audio/ch03_everybody_wants_a_diamond_mine.wav" lead={LEAD} music={[{src: 'music/dh_secret_bag.mp3', volume: bed('dh_secret_bag'), startFrom: 2490, to: THEY_WERE}, {src: 'music/dh_salted_theme.mp3', volume: bed('dh_salted_theme'), from: THEME, startFrom: THEME_START}]}>
     <Body />
   </ChapterShell>
 );
