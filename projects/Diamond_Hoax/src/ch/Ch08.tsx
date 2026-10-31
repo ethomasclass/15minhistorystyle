@@ -50,6 +50,11 @@ import ralstonMask from '../../public/img/masks/ch08_ralston.json';
 import swindle from '../../public/img/ch08/evening_star_1872-11-26_barefaced_swindle.json';
 
 const N = words as Narration;
+const TL8 = makeTimeline(N, 30);
+// the music drops out just before King's line and comes back with the papers, still in step with the narration, so the cue's
+// own stop lands between "Subscribe anyway." and "So where did all that money go?"
+const DROP = TL8.at('There is not enough') - 5;
+const BACK = TL8.at('On November 26th');
 export const CH08_FRAMES = chapterFrames(N, LEAD);
 
 type L = {size: number[]; glowLayer?: number};
@@ -508,7 +513,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch08: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch08_not_enough_money.wav" lead={LEAD} music={[{src: 'music/aw_panic.mp3', volume: bed('aw_panic')}]}>
+  <ChapterShell n={N} audio="audio/ch08_not_enough_money.wav" lead={LEAD} music={[{src: 'music/dh_dominoes.mp3', volume: bed('dh_dominoes'), to: DROP, fadeOut: 5}, {src: 'music/dh_dominoes.mp3', volume: bed('dh_dominoes'), from: BACK, startFrom: BACK}]}>
     <Body />
   </ChapterShell>
 );

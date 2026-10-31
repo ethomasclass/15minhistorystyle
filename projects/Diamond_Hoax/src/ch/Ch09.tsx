@@ -52,6 +52,8 @@ import herald from '../../public/img/ch09/la_herald_1875-08-27_bank_of_californi
 const N = words as Narration;
 const T = makeTimeline(N, 30);
 const THANKS = T.at('Thanks');
+/** The theme comes back here; startFrom lands the cue's closing chord on the end screen's fade. */
+const REPRISE = T.at("So let's go back");
 /** The end screen runs 20 s from "Thanks", past the narration: the chapter is that much longer. */
 const EXTRA = THANKS + END_FRAMES - Math.ceil(N.duration * 30);
 export const CH09_FRAMES = chapterFrames(N, LEAD) + EXTRA;
@@ -425,7 +427,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch09: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch09_paid_for_dirt.wav" lead={LEAD} extra={EXTRA} music={[{src: 'music/aw_boomtown_hollow.mp3', volume: bed('aw_boomtown_hollow')}]}>
+  <ChapterShell n={N} audio="audio/ch09_paid_for_dirt.wav" lead={LEAD} extra={EXTRA} music={[{src: 'music/dh_aftermath.mp3', volume: bed('dh_aftermath', 14), to: REPRISE}, {src: 'music/dh_salted_theme.mp3', volume: bed('dh_salted_theme'), from: REPRISE - 20, startFrom: 1335}]}>
     <Body />
   </ChapterShell>
 );

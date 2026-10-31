@@ -296,7 +296,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch06: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch06_cash_out.wav" lead={LEAD} music={[{src: 'music/aw_boomtown_rush.mp3', volume: bed('aw_boomtown_rush')}]}>
+  <ChapterShell n={N} audio="audio/ch06_cash_out.wav" lead={LEAD} music={[{src: 'music/dh_diamond_fever.mp3', volume: bed('dh_diamond_fever')}]}>
     <Body />
   </ChapterShell>
 );

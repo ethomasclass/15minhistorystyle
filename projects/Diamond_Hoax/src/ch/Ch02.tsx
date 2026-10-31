@@ -333,7 +333,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch02: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch02_too_late_for_the_bank.wav" lead={LEAD} music={[{src: 'music/rc_backroom.mp3', volume: bed('rc_backroom')}]}>
+  <ChapterShell n={N} audio="audio/ch02_too_late_for_the_bank.wav" lead={LEAD} music={[{src: 'music/dh_secret_bag.mp3', volume: bed('dh_secret_bag')}]}>
     <Body />
   </ChapterShell>
 );

@@ -205,3 +205,15 @@ the quiet aftermath of a famous fraud, solo upright piano, slow and reflective, 
 | 9 Where the Money Went | 2:17 + end screen | `dh_aftermath` → `dh_salted_theme` reprise | `aw_boomtown_hollow` → `aw_robber_barons` |
 
 If you only make three, make **1, 7 and 8** (the theme, the dominoes, the aftermath): those carry the hook, the climax and the ending.
+
+## As placed (Oct 31: all 8 delivered, 1:39 to 2:45)
+
+| Chapter | Cue, from where | Notes |
+|---|---|---|
+| 1 | `dh_salted_theme` from 0:00 | set in `Ch01.tsx` |
+| 2 | `dh_secret_bag` from 0:00 | |
+| 3 | `dh_secret_bag` from 1:23, then `dh_parlor_appraisal` from 0:00 | hands over on the jeweler's "yes" ("And they were") |
+| 4 | `dh_parlor_appraisal` from 0:48 | lands on the cue's own ending; about 7 s of ch 3's waltz repeats across the logo break |
+| 5, 6, 7 | `dh_salting_night`, `dh_diamond_fever`, `dh_anthills` from 0:00 | |
+| 8 | `dh_dominoes`, in step with the narration | out 5 frames before "There is not enough", back at "On November 26th"; the cue's own stop lands between "Subscribe anyway." and "So where did all that money go?" |
+| 9 | `dh_aftermath` from 0:00 (14 LU under, a grave stretch), then `dh_salted_theme` from 0:44.5 | the reprise starts at "So let's go back" and its closing chord lands on the end screen's fade |

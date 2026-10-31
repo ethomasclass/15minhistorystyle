@@ -200,14 +200,14 @@ const Body: React.FC = () => {
   let scene = useScene(cuts);
   if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><TitleCard /><Finish vignette={0.3} /></Sequence>;
   else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
-  const v = bed('aw_robber_barons');
+  const v = bed('dh_salted_theme');
   return (
     <AbsoluteFill style={{background: '#000'}}>
       {scene}
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
-      {/* placeholder bed until the user picks the music: smug Gilded Age swagger */}
-      <Audio src={staticFile('music/aw_robber_barons.mp3')} volume={(f) => interpolate(f, [0, 6, END - 40, END], [v, v, v, 0], clamp)} />
+      {/* the main theme: a con man smiling at his mark */}
+      <Audio src={staticFile('music/dh_salted_theme.mp3')} volume={(f) => interpolate(f, [0, 6, END - 40, END], [v, v, v, 0], clamp)} />
       {cuts.slice(2).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.3} />)}
       <Sfx at={c.cust} src="sfx/paper_rustle.wav" volume={0.3} />
       {['Bankers', 'Generals', 'jeweler'].map((p) => <Sfx key={p} at={at(p) - 1} src="sfx/stamp.wav" volume={0.22} />)}

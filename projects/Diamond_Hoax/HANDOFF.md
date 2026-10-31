@@ -17,14 +17,12 @@ Chunk History, stand-alone, entertainment (no series, no classroom unit). About 
 | Images | **Done.** 47 archival (`script/IMAGES.md`, `public/img/chNN/`, `credits.json`), 18 props + 3 silhouette figures + 11 silhouette scenes + the cold-open office (`script/AI_IMAGES.md`). Silhouette scenes split into 4 depth planes (`public/img/layers/sil/`). |
 | 3D pieces | **Done.** `src/fx/` (Mesa on real terrain, LoopingRide, AnthillCutaway, GemOrigins, Dominoes, BankVault, ShareSlices, ShortSale, MoneyMap, ColdOpenDepth/ColdOpenReveal, MoneyTag). Test comps `FX-<id>`. |
 | Chapters | **All 9 built** (`src/ch/Ch01.tsx`–`Ch09.tsx`, helpers in `src/ch/chNN/`). Anchors and the SAFE=96 text probe pass; reviewed on contact sheets `review/contact/chNN_v1.jpg`. **Only ch 1 has been rendered** (`review/Ch01_preview_720p.mp4`, before two small fixes). |
-| Music | **Placeholder library beds** in every chapter (see the table in `script/SUNO_PROMPTS.md`). **The user is making 8 new Suno cues** (`dh_salted_theme`, `dh_secret_bag`, `dh_parlor_appraisal`, `dh_salting_night`, `dh_diamond_fever`, `dh_anthills`, `dh_dominoes`, `dh_aftermath`). |
+| Music | **Placed (Oct 31).** All 8 Suno cues are in `public/music/`, measured in `CUE_LUFS`, and set in every chapter; the ch 8 drop and ch 9 reprise are in. Exact placement: "As placed" in `script/SUNO_PROMPTS.md`. Waiting on the user's ear: `review/Diamond_Hoax_music_mix.mp3`. |
 
 ## Next steps, in order
 
-1. **When the Suno MP3s arrive:** copy into `public/music/`, measure loudness (`ffmpeg -af ebur128`) and add each to `CUE_LUFS` in
-   `src/kit/levels.ts`, then set each chapter's `music` per the SUNO_PROMPTS table with `bed()`. ch 1's bed is set in `Ch01.tsx`'s
-   `<Audio>` (not ChapterShell). **Add the music drop** 4–6 frames before King's line "There is not enough money…" in ch 8 (cue `to`
-   + `fadeOut`), and the `dh_salted_theme` reprise from "So let's go back to the question" in ch 9.
+1. **Done (Oct 31): the Suno cues.** See the Music row. A cue change only needs its chapter's `music` prop and the mix check; ch 1's
+   bed is set in `Ch01.tsx`'s `<Audio>`, not ChapterShell.
 2. **One full render, only on the user's go-ahead** (they asked for no renders until then). `tools/render.sh`; check frames from the
    finished file, text probe, loudness (-14 LUFS master), then a <30 MB preview for chat and the 1080p master via Git LFS.
 3. **Packaging:** final thumbnail render (H1 at 1080p), `review/YouTube_description.md` (title, description with chapters from the real
@@ -37,6 +35,7 @@ Chunk History, stand-alone, entertainment (no series, no classroom unit). About 
 - ch 2/3: Ralston's mask clips his right shoulder; the claim notice is on screen ~4 s.
 - ch 4/5: the sheets predate the coral-prop fix (props are now a see-through coral, not flat red); the Mesa appears five times in ch 5.
 - ch 7: King's mask catches a bit of his chair arm; the stick prop half-covers the "STICK HOLE" label; Arnold's figure on the map is small.
+- ch 5: at about 1:27 into the chapter, teal "worth more" runs over the coral share card and "Janin's report" touches its corner.
 - ch 8/9: the "empty" pouch still looks full (an empty-pouch prop would fix it); the dominoes' fall finishes in ~1.5 s; the bay holds
   only ~1 s after "nobody knows if it was an accident"; the 1873 tape slightly overlaps a print corner.
 - Gaps with no archival picture: the 1875 run itself (silhouette `sil_bank_line` stands in), a younger Tiffany (the 1893 engraving is
@@ -72,3 +71,17 @@ see-through tint, never a flat block · no cream or white mounts on the desk. Th
 5. Start Claude Code in the repo folder and say: "Read projects/Diamond_Hoax/HANDOFF.md and continue."
 6. Renders: `tools/render.sh` finds Remotion's own browser when `/opt/pw-browsers` is absent. Concurrency is already automatic
    (`remotion.config.ts`); `npx remotion benchmark` shows whether a fixed value is faster on that machine.
+
+### The Windows PC (set up Oct 31)
+
+i5-12400F, 32 GB, RX 580; Node 24, Python 3.14, ffmpeg 9, Git LFS; no WSL and no `gh`, so `tools/*.sh` run in Git Bash. The repo is cloned
+straight into `Videos/Chunk Production/Diamond Hoax/`.
+
+- **Speed:** 600 frames of ch 5 take 22 s with the GPU (`--gl=angle`, now the Windows default in `remotion.config.ts`) against 85 s in
+  software, about 27 fps. Concurrency makes almost no difference at 3-8, so it stays automatic. `tools/stills.mjs` uses the API, which
+  doesn't read that config, so its stills still draw in software; the frames compared the same.
+- **Audio-only check:** `npx remotion render src/index.ts ChNN out/mix/chNN.wav --codec=wav` mixes a chapter without any video. It took
+  27 min for all 9 before the GPU default, far from instant.
+- **Windows fixes:** `kit/con.tsx` became `conCard.tsx` (CON is a reserved name, so the repo could not check out); `*.sh` are pinned to LF
+  in `.gitattributes`; `render.sh` and `voice_all.sh` fall back to `python` because `python3` is only a Store stub here, and
+  `render.sh` writes a Windows path to the join list. The join step was tested; a full `render.sh` has not been run here yet.
