@@ -1,18 +1,19 @@
 # Diamond Hoax: handoff (for a new conversation)
 
 **Video:** *They Fooled America's Richest Men* (YouTube title) · on-screen title **PAID FOR DIRT** · *The Great Diamond Hoax of 1872* ·
-Chunk History, stand-alone, entertainment (no series, no classroom unit). About **15:45 finished**, 9 chapters, 2,479 words.
+Chunk History, stand-alone, entertainment (no series, no classroom unit). About **15:51 finished**, 9 chapters, 2,492 words.
 
-**Repo:** `ethomasclass/15minhistorystyle`, project `projects/Diamond_Hoax/`. Everything is on the default branch
-`ccr-fd9304cf-1jaldg` (the session branch `claude/magical-davinci-aourfq` is identical). Use the `15-minute-history` skill.
+**Repo:** `ethomasclass/15minhistorystyle`, project `projects/Diamond_Hoax/`. Everything is on branch
+**`ccr-f5ce4d0d-w9hjm5`** (the default branch `ccr-fd9304cf-1jaldg` plus the Oct 31 Janin re-voice and end-screen commits). Use the
+`15-minute-history` skill.
 
-## Where it stands (Oct 30, 2026)
+## Where it stands (Oct 31, 2026)
 
 | Phase | Status |
 |---|---|
 | Packaging | **Done.** Thumbnail **H1** (`renders/thumbnails/Diamond_Hoax_H1.png`: the cousins from behind, fingers crossed and a pouch of stones, the tycoon in coral between them, tape PAID FOR / **DIRT**). Title "They Fooled America's Richest Men". Final full-res thumbnail render and YouTube text still to do. |
 | Script | **Locked** (draft 10). `script/SCRIPT.md` has the arc, loop map, Con Card, money table, fact-check flags, sources. |
-| Voice | **Done.** Ellis voice clone (`VOICE_ID` in `.env`), `eleven_v4`, one take per chapter, -18 LUFS; checked by speech-to-text (no cues spoken). "Janin" = JAN-in. ch 8 and 9 re-voiced after the archival fact fixes. |
+| Voice | **Done.** Ellis voice clone (`VOICE_ID` in `.env`), `eleven_v4`, one take per chapter, -18 LUFS; checked by speech-to-text (no cues spoken). "Janin" = JAN-in, now forced by `PRONOUNCE` in `tools/voice.py` ("Jannin"): the earlier ch 8/9 takes said "Janine", so **ch 8 and 9 were re-voiced on Oct 31** (Whisper and ElevenLabs STT both hear JAN-in; anchors pass). ch 9's closing line now points at the end screen: "…hit subscribe. And if you want more stories right now, there are two right here on the screen." Listening files: `review/janin_and_closing_check.mp3`, `review/ch08_ch09_revoiced.mp3`. `review/Diamond_Hoax_narration_preview.mp3` still has the old ch 8/9: rebuild it with the render. |
 | Images | **Done.** 47 archival (`script/IMAGES.md`, `public/img/chNN/`, `credits.json`), 18 props + 3 silhouette figures + 11 silhouette scenes + the cold-open office (`script/AI_IMAGES.md`). Silhouette scenes split into 4 depth planes (`public/img/layers/sil/`). |
 | 3D pieces | **Done.** `src/fx/` (Mesa on real terrain, LoopingRide, AnthillCutaway, GemOrigins, Dominoes, BankVault, ShareSlices, ShortSale, MoneyMap, ColdOpenDepth/ColdOpenReveal, MoneyTag). Test comps `FX-<id>`. |
 | Chapters | **All 9 built** (`src/ch/Ch01.tsx`–`Ch09.tsx`, helpers in `src/ch/chNN/`). Anchors and the SAFE=96 text probe pass; reviewed on contact sheets `review/contact/chNN_v1.jpg`. **Only ch 1 has been rendered** (`review/Ch01_preview_720p.mp4`, before two small fixes). |
@@ -58,4 +59,16 @@ see-through tint, never a flat block · no cream or white mounts on the desk. Th
 - The session's git connection can push commits but **cannot delete branches or push tags**. 14 old branches are fully merged and
   can be deleted by the user on GitHub (list in the conversation; `claude/shorts-skill` and `claude/vibrant-hamilton-7x33e4` hold only
   old history).
-- Background shell jobs stop after 30 minutes; a full chapter render with the 3D pieces takes ~20 min (ch 1 rendered in time).
+- Cloud sessions: background shell jobs stop after 30 minutes; a full chapter render with the 3D pieces takes ~20 min there (ch 1
+  rendered in time). On a local PC this limit doesn't apply.
+
+## Running on a local PC (Oct 31: the user is moving production to their own machine for faster renders)
+
+1. Install Node 20+, Python 3.10+, ffmpeg and Git LFS (`git lfs install`). On Windows, run the `tools/*.sh` scripts in WSL (best) or Git Bash.
+2. `git clone https://github.com/ethomasclass/15minhistorystyle && cd 15minhistorystyle && git checkout ccr-f5ce4d0d-w9hjm5`
+3. `cd projects/Diamond_Hoax && npm install` and `pip install pillow numpy imageio-ffmpeg` (add `faster-whisper` for the
+   speech-to-text checks; the image tools above only if images change).
+4. Create `projects/Diamond_Hoax/.env` with `ELEVENLABS_API_KEY=` and `VOICE_ID=mI4rIAStSQeKeqsz4FwM` (Ellis), plus `GEMINI_API_KEY=` if needed.
+5. Start Claude Code in the repo folder and say: "Read projects/Diamond_Hoax/HANDOFF.md and continue."
+6. Renders: `tools/render.sh` finds Remotion's own browser when `/opt/pw-browsers` is absent. Speed it up with
+   `--concurrency` (about half the CPU cores) on `npx remotion render`; check `npx remotion benchmark` once.
