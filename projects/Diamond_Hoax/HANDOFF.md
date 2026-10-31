@@ -70,5 +70,5 @@ see-through tint, never a flat block · no cream or white mounts on the desk. Th
    speech-to-text checks; the image tools above only if images change).
 4. Create `projects/Diamond_Hoax/.env` with `ELEVENLABS_API_KEY=` and `VOICE_ID=mI4rIAStSQeKeqsz4FwM` (Ellis), plus `GEMINI_API_KEY=` if needed.
 5. Start Claude Code in the repo folder and say: "Read projects/Diamond_Hoax/HANDOFF.md and continue."
-6. Renders: `tools/render.sh` finds Remotion's own browser when `/opt/pw-browsers` is absent. Speed it up with
-   `--concurrency` (about half the CPU cores) on `npx remotion render`; check `npx remotion benchmark` once.
+6. Renders: `tools/render.sh` finds Remotion's own browser when `/opt/pw-browsers` is absent. Concurrency is already automatic
+   (`remotion.config.ts`); `npx remotion benchmark` shows whether a fixed value is faster on that machine.
