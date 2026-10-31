@@ -18,6 +18,7 @@ Chunk History, stand-alone, entertainment (no series, no classroom unit). About 
 | 3D pieces | **Done.** `src/fx/` (Mesa on real terrain, LoopingRide, AnthillCutaway, GemOrigins, Dominoes, BankVault, ShareSlices, ShortSale, MoneyMap, ColdOpenDepth/ColdOpenReveal, MoneyTag). Test comps `FX-<id>`. |
 | Chapters | **All 9 built** (`src/ch/Ch01.tsx`–`Ch09.tsx`, helpers in `src/ch/chNN/`). Anchors and the SAFE=96 text probe pass; reviewed on contact sheets `review/contact/chNN_v1.jpg`. **Only ch 1 has been rendered** (`review/Ch01_preview_720p.mp4`, before two small fixes). |
 | Music | **Placed (Oct 31).** All 8 Suno cues are in `public/music/`, measured in `CUE_LUFS`, and set in every chapter; the ch 8 drop and ch 9 reprise are in. Exact placement: "As placed" in `script/SUNO_PROMPTS.md`. Waiting on the user's ear: `review/Diamond_Hoax_music_mix.mp3`. |
+| Sound effects | **Turned down (Oct 31, the user's note on the first mix).** All desk levels live in `SFX_TRIM` in `src/kit/common.tsx`: page turns and the paper sound on cuts (`whoosh`) are off, the logo sounds stop before their page turns (`ChunkIntro.tsx`), and pencil, highlight, tick and rustle sounds are 8-16 dB down. To hear the paper sounds faint instead of off, set both to 0.05: `review/ch02_paper_sounds_off.mp3` and `_faint.mp3` compare the two. Knocks and the title's tape pull are unchanged. |
 
 ## Next steps, in order
 
