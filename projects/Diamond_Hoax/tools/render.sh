@@ -5,7 +5,9 @@
 cd "$(dirname "$0")/.."
 export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
 BROWSER=${REMOTION_CHROME:+--browser-executable=$REMOTION_CHROME}
-FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
+PY=python3; $PY -c "" 2>/dev/null || PY=python   # on Windows python3 can be just the Store stub
+ROOT=$(pwd -W 2>/dev/null || pwd)        # Git Bash: a path ffmpeg can read
+FF=$($PY -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
 SLUG=$(sed -n "s/^export const SLUG = '\(.*\)';/\1/p" src/project.ts)
 ALL=$(grep -o "id: 'Ch[0-9]*'" src/chapters.ts | grep -o '[0-9][0-9]*')
 mkdir -p out/ch renders
@@ -17,12 +19,12 @@ for n in ${*:-$ALL}; do
   rm -rf /tmp/remotion-webpack-bundle-*   # each render leaves a ~500 MB copy of public/ behind
 done
 LIST=out/ch/list.txt; : > $LIST
-for n in $ALL; do echo "file '$(pwd)/out/ch/ch$n.mp4'" >> $LIST; done
+for n in $ALL; do echo "file '$ROOT/out/ch/ch$n.mp4'" >> $LIST; done
 $FF -v error -y -f concat -safe 0 -i $LIST -c:v copy -c:a pcm_s16le out/full_raw.mkv || exit 1
-python3 tools/master.py out/full_raw.mkv out/${SLUG}_1080p.mp4 || exit 1
+$PY tools/master.py out/full_raw.mkv out/${SLUG}_1080p.mp4 || exit 1
 $FF -v error -y -i out/${SLUG}_1080p.mp4 -vf scale=1280:720 -c:v libx264 -crf 24 -preset slow -c:a aac -b:a 160k -movflags +faststart renders/${SLUG}_720p.mp4 || exit 1
 # chapter start times for the YouTube description
-python3 - "$LIST" <<'PY'
+$PY - "$LIST" <<'PY'
 import re, subprocess, sys, imageio_ffmpeg
 t = 0.0
 for line in open(sys.argv[1]):
