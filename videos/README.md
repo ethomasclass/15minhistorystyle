@@ -169,6 +169,8 @@ column says where each was made.
 - **Chunk History branding** (Oct 2026): the 3D Chunk intro after the cold open (5.5 s) and a 2 s mark snap between chapters (the
   coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`). **Its sound is clicks and page
   turns only: no tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this).
+  **Nov 2026: no page turns anywhere** (branding or chapters), clicks only; and the handwriting/highlighter scratch
+  (`marker_tick`) plays at 40% of its old level. Both are enforced in `Sfx` (`src/kit/common.tsx`: `MUTED`, `MARKER_GAIN`).
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.
