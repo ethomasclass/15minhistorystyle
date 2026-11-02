@@ -1337,5 +1337,82 @@
     "date": "1945-05-08",
     "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
     "page": "https://catalog.archives.gov/id/354759844"
+  },
+  "v2/price/byron_price_portrait_harris_ewing.jpg": {
+    "title": "PRICE, BYRON (Harris & Ewing portrait series; title from unverified H&E caption data)",
+    "artist": "Harris & Ewing, photographer",
+    "date": "between 1905 and 1945 (likely 1930s)",
+    "licence": "No known restrictions on publication (Library of Congress, Harris & Ewing Collection)",
+    "page": "https://www.loc.gov/item/2016860056/"
+  },
+  "v2/price/code_of_wartime_practices_press_radio_may1945.jpg": {
+    "title": "Code of Wartime Practices for the American Press and Radio, edition of May 15, 1945 (cover)",
+    "artist": "United States. Office of Censorship (US Government Printing Office)",
+    "date": "1945-05-15",
+    "licence": "Public domain (US federal government publication; Internet Archive Public Domain Mark 1.0)",
+    "page": "https://archive.org/details/OWICode1945-05-15"
+  },
+  "v2/price/byron_price_letter_to_president_nov1945.jpg": {
+    "title": "A Report on the Office of Censorship (1945): transmittal letter to the President signed 'Byron Price, Director', 15 Nov 1945",
+    "artist": "United States. Office of Censorship",
+    "date": "1945-11-15",
+    "licence": "Public domain (US federal government publication; Internet Archive Public Domain Mark 1.0)",
+    "page": "https://archive.org/details/AReportOnTheOfficeOfCensorship1945"
+  },
+  "v2/sand/ichinomiya_beach_sand_samples_usgs.jpg": {
+    "title": "Two samples of beach sediment from Ichinomiya, Japan (the likely source of the balloon-bomb ballast sand; Julia Gardner and the USGS Military Geology Unit)",
+    "artist": "USGS; image courtesy of the Paleontological Research Institution, Ithaca, NY",
+    "date": "",
+    "licence": "Public Domain (per USGS Sources/Usage)",
+    "page": "https://www.usgs.gov/media/images/two-samples-beach-sediment-ichinomiya-japan"
+  },
+  "v2/sand/fossil_clams_and_snails_pri_usgs.jpg": {
+    "title": "Fossil clams and snails from the collection of the Paleontological Research Institution, Ithaca, NY (Julia Gardner feature)",
+    "artist": "USGS; image courtesy of the Paleontological Research Institution",
+    "date": "",
+    "licence": "Public Domain (per USGS Sources/Usage)",
+    "page": "https://www.usgs.gov/media/images/fossil-clams-and-snails"
+  },
+  "v2/sand/diatoms_50_species_micrograph_usgs.jpg": {
+    "title": "Photomicrograph of the siliceous frustules of fifty species of diatoms arranged in a circle",
+    "artist": "Randolph Femmer, USGS",
+    "date": "",
+    "licence": "Public Domain (USGS)",
+    "page": "https://www.usgs.gov/media/images/diatoms-50-species"
+  },
+  "v2/sand/planktic_foraminifera_sem_usgs.jpg": {
+    "title": "Ten species of planktic foraminifera from PETM sediments, southern Maryland; each specimen about the size of a sand grain (scale bars 150 microns)",
+    "artist": "Marci Robinson, USGS",
+    "date": "",
+    "licence": "Public Domain (USGS)",
+    "page": "https://www.usgs.gov/media/images/planktic-foraminifera-southern-maryland"
+  },
+  "v2/sand/foraminifera_shell_sem_usgs.jpg": {
+    "title": "SEM image of the calcareous estuarine foraminifera Cribroelphidium poeyanum, Grand Bay estuary",
+    "artist": "USGS (Estuarine and Marsh Geology project)",
+    "date": "",
+    "licence": "Public Domain (USGS)",
+    "page": "https://www.usgs.gov/media/images/calcareous-estuarine-foraminifera-cribroelphidium-poeyanum"
+  },
+  "v2/sand/live_foraminifera_microscope_usgs.jpg": {
+    "title": "Live single-celled foram Globorotalia truncatulinoides under a microscope (calcium-carbonate shell), collected on R/V Pelican",
+    "artist": "USGS",
+    "date": "",
+    "licence": "Public Domain (USGS)",
+    "page": "https://www.usgs.gov/media/images/live-foraminifera-globorotalia-truncatulinoides"
+  },
+  "v2/sand/julia_gardner_placard_reston_usgs.jpg": {
+    "title": "A placard featuring Julia Anna Gardner (1882-1960), Veterans Memorial, John Wesley Powell Federal Building, Reston, VA; text describes her identifying the Japanese beaches from the balloons' sand ballast",
+    "artist": "USGS",
+    "date": "2024",
+    "licence": "Public Domain (per USGS); NB the inset portrait on the placard is credited 'courtesy Geological Society of America': show the whole placard, don't crop out the portrait",
+    "page": "https://www.usgs.gov/media/images/a-placard-featuring-julia-anna-gardner"
+  },
+  "v2/parallax/tule_lake_five_young_women_color_fsa.jpg": {
+    "title": "Japanese-American camp, war emergency evacuation, [Tule Lake Relocation Center, Newell, Calif.] (five young women; FSA/OWI colour transparency, re-identified as Tule Lake by LoC)",
+    "artist": "Farm Security Administration / Office of War Information (attributed to Russell Lee)",
+    "date": "1942 or 1943",
+    "licence": "No known restrictions on publication; public domain (LoC FSA/OWI Color Photographs)",
+    "page": "https://www.loc.gov/item/2017878793/"
   }
 }

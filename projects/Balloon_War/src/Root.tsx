@@ -8,6 +8,7 @@ import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB, ThumbC} from './Thumbnail';
 import {IntroDesk, IntroLamp, IntroTape, LAB_FRAMES} from './test/IntroLab';
+import {PAPER_STAGE_FRAMES, PaperStageTest} from './test/PaperStage';
 
 export const Root: React.FC = () => (
   <>
@@ -20,6 +21,7 @@ export const Root: React.FC = () => (
     <Composition id="IntroLamp" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.lamp} component={() => <JFonts><IntroLamp /></JFonts>} />
     <Composition id="IntroDesk" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.desk} component={() => <JFonts><IntroDesk /></JFonts>} />
     <Composition id="IntroTape" width={W} height={H} fps={FPS} durationInFrames={LAB_FRAMES.tape} component={() => <JFonts><IntroTape /></JFonts>} />
+    <Composition id="PaperStageTest" width={W} height={H} fps={FPS} durationInFrames={PAPER_STAGE_FRAMES} component={() => <JFonts><PaperStageTest /></JFonts>} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
     {BRAND.map((b) => <Composition key={b.id} id={b.id} width={b.w} height={b.h} fps={FPS} durationInFrames={1} component={() => <JFonts><b.C /></JFonts>} />)}

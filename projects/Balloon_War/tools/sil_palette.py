@@ -28,17 +28,13 @@ def ramp(L, stops):
     xs = np.array([s for s, _ in stops]); cs = np.stack([hexrgb(c) for _, c in stops])
     return np.stack([np.interp(L, xs, cs[:, k]) for k in range(3)], -1)
 
-def main():
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    opts = [a for a in sys.argv[1:] if a.startswith('--')]
-    src, dst = args
-    accent = '--accent=none' not in opts
-    quiet = '--quiet' in opts
-    im = np.asarray(Image.open(src).convert('RGB')).astype(float) / 255
+def lock(im, lo=None, hi=None, accent=True, quiet=False):
+    """im: float RGB 0..1 (H, W, 3). lo/hi: the brightness range to stretch (pass the full painting's, when locking its
+    layers one by one, so every plane uses the same mapping). Returns uint8 RGB."""
     r, g, b = im[..., 0], im[..., 1], im[..., 2]
     L = 0.2126 * r + 0.7152 * g + 0.0722 * b
-    # stretch so the darkest 1% is ink and the brightest 0.5% is cream
-    lo, hi = np.percentile(L, 1), np.percentile(L, 99.5)
+    if lo is None:
+        lo, hi = np.percentile(L, 1), np.percentile(L, 99.5)
     Ln = np.clip((L - lo) / max(hi - lo, 1e-3), 0, 1)
     out = ramp(Ln, QUIET if quiet else PALETTE)
     if accent and not quiet:
@@ -55,7 +51,22 @@ def main():
         glow = (np.clip((Ln - 0.9) / 0.1, 0, 1) * 0.7)[..., None]
         acc = CORAL * (0.55 + 0.45 * np.clip(Ln, 0, 1))[..., None] * (1 - glow) + CREAM * glow
         out = out * (1 - w[..., None]) + acc * w[..., None]
-    Image.fromarray(np.clip(out, 0, 255).astype(np.uint8)).save(dst, quality=92)
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def brightness_range(im):
+    L = 0.2126 * im[..., 0] + 0.7152 * im[..., 1] + 0.0722 * im[..., 2]
+    return np.percentile(L, 1), np.percentile(L, 99.5)
+
+
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    opts = [a for a in sys.argv[1:] if a.startswith('--')]
+    src, dst = args
+    im = np.asarray(Image.open(src).convert('RGB')).astype(float) / 255
+    out = lock(im, accent='--accent=none' not in opts, quiet='--quiet' in opts)
+    Image.fromarray(out).save(dst, quality=92)
+
 
 if __name__ == '__main__':
     main()
