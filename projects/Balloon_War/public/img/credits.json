@@ -1414,5 +1414,62 @@
     "date": "1942 or 1943",
     "licence": "No known restrictions on publication; public domain (LoC FSA/OWI Color Photographs)",
     "page": "https://www.loc.gov/item/2017878793/"
+  },
+  "v2/parallax/555th_trooper_waits_c47_behind_1945.jpg": {
+    "title": "Photograph - Operation Fire Fly \u2014 Forest Fires - A trooper in full gear waits for the order to board ship. Photograph taken at Pendleton Air Base, Pendleton, Oregon, by Edgar W. Weinberger, Army Air Forces Photographer (342-FH-3B-42508-29999AC) [copy of v2/triple_nickles/555th_trooper_waits_c47_behind_1945.jpg]",
+    "artist": "US National Archives",
+    "date": "1945-08-25",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/148728216"
+  },
+  "v2/parallax/555th_jumpmaster_briefing_pendleton_1945.jpg": {
+    "title": "Photograph - Operation Fire Fly \u2014 Fully equipped for a fire jump, paratroopers at the Pendleton, Oregon AAF, are briefed by their jumpmaster before taking off in a Troop Carrier Command plane. Men of this unit may be dropped on fires anywhere in Washington, Oregon, Idaho and part of Montana. Their gear includes heavy clothing, plastic helmet, wire face guard, two parachutes, first  (342-FH-3B-42494-A30004AC) [copy of v2/triple_nickles/555th_jumpmaster_briefing_pendleton_1945.jpg]",
+    "artist": "US National Archives",
+    "date": "1945-08-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/148728214"
+  },
+  "v2/parallax/lt_clifford_allen_by_c47_555th_1945.jpg": {
+    "title": "Operation Fire Fly \u2014 Operation Firefly - Lt. Clifford Allen of Chicago, Ill. Is one of the fire fighters of the 555th Parachute Infantry Battalion. He wears his complete outfit just before taking off for a jump. Note the 150 ft. rope descending from tall trees; the plastic helmet and catcher's mask are protections against branches and brambles. (342-C-K-3746) [copy of v2/triple_nickles/lt_clifford_allen_by_c47_555th_1945.jpg]",
+    "artist": "US National Archives",
+    "date": "1945-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/148728164"
+  },
+  "v2/parallax/555th_parachutes_over_pines_1945.jpg": {
+    "title": "Operation Fire Fly \u2014 Operation Firefly - Paratrooper of the 555th Parachute Infantry drift toward the tree tops not far from a forest fire. Umatilla National Forest, Oregon. (342-C-K-3717) [copy of v2/triple_nickles/555th_parachutes_over_pines_1945.jpg]",
+    "artist": "US National Archives",
+    "date": "1945-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/148728122"
+  },
+  "v2/parallax/b25_takeoff_from_hornet_80g41196.jpg": {
+    "title": "Take off from the deck of the USS HORNET of an Army B-25 on its way to take part in first U.S. air raid on Japan. Doolittle Raid, April 1942. (80-G-41196) [copy of v2/raid1942/b25_takeoff_from_hornet_80g41196.jpg]",
+    "artist": "US National Archives",
+    "date": "1943-01-01",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/520603"
+  },
+  "v2/parallax/b25_on_hornet_deck_sailors_1942.jpg": {
+    "title": "Usaf - Tokyo Raid - On 18 April 1942, Airmen Of The Us Army Air Forces, Led By Lt. Colonel James H.(Jimmy) Doolittle, Carried The Battle Of The Pacific To The Heart Of The Japanese Empire With A Surprising And Daring Raid On Military Targets At Tokyo, Yok (U.S. Air Force Number 93009AC) (342-FH-3A03059-93009AC) [copy of v2/raid1942/b25_on_hornet_deck_sailors_1942.jpg]",
+    "artist": "US National Archives",
+    "date": "",
+    "licence": "Public domain (US federal government work; NARA use restriction: Unrestricted)",
+    "page": "https://catalog.archives.gov/id/204835693"
+  },
+  "v2/parallax/tule_lake_sagebrush_castle_rock_russell_lee_1942.jpg": {
+    "title": "File:Tule Lake War Relocation Center.jpg [copy of ch07_answer/tule_lake_war_relocation_center_russell_lee_1942.jpg]",
+    "artist": "Russell Lee",
+    "date": "1942",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Tule_Lake_War_Relocation_Center.jpg"
+  },
+  "v2/parallax/klamath_falls_road_cars_in_pines_1942.jpg": {
+    "title": "Klamath Falls, Oregon. Cars parked at city park [copy of ch06_bly/klamath_falls_cars_parked_in_pines_1942.jpg]",
+    "artist": "Russell Lee (FSA/OWI)",
+    "date": "1942",
+    "licence": "Public domain (Library of Congress FSA/OWI Black-and-White Negatives: \"in the public domain and free to use and reuse\")",
+    "page": "https://www.loc.gov/item/2017818910/",
+    "source": "loc:2017818910"
   }
 }
