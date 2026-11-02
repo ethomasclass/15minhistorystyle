@@ -6,6 +6,7 @@
 # VOICE_ONE_TAKE=0 tools/voice_all.sh  goes back to the older paragraph-by-paragraph method (eleven_v3 era settings).
 # No speed-up anywhere (Reconstruction): the user hears a stretched voice (tempo and pitch), so STRETCH stays 1.0.
 cd "$(dirname "$0")/.."
+PY=python3; $PY -c "" 2>/dev/null || PY=python   # on Windows python3 can be just the Store stub
 for f in script/ch*.txt; do
   num=$(basename "$f" | sed 's/^ch\([0-9]*\).*/\1/')
   [ -n "$*" ] && ! echo " $* " | grep -q " $num " && continue
@@ -21,5 +22,5 @@ for f in script/ch*.txt; do
     if echo " $HEAVY " | grep -q " $num "; then export VOICE_SPEED=0.92; else export VOICE_SPEED=1.0; fi
   fi
   echo "== $n (speed ${VOICE_SPEED:-default}, stretch $VOICE_STRETCH)"
-  python3 tools/voice.py "$f" "$n" 2>&1 | tail -1 || exit 1
+  $PY tools/voice.py "$f" "$n" 2>&1 | tail -1 || exit 1
 done

@@ -25,7 +25,7 @@ import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narrat
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import sfNight from '../../public/img/layers/sil/sil_sf_night/layers.json';
 import {DrawnQ, Figure, LampPool, Print, RalstonCut, RALSTON_TAG, WEST_ASPECT, WestMap, westPoint} from './ch02/parts';
 
@@ -333,7 +333,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch02: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch02_too_late_for_the_bank.wav" lead={LEAD} music={[{src: 'music/rc_backroom.mp3', volume: bed('rc_backroom')}]}>
+  <ChapterShell n={N} audio="audio/ch02_too_late_for_the_bank.wav" lead={LEAD} music={[{src: 'music/dh_secret_bag.mp3', volume: bed('dh_secret_bag')}]}>
     <Body />
   </ChapterShell>
 );
