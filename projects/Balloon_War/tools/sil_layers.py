@@ -57,6 +57,27 @@ def split(path, bands=4):
     for t in th:
         label += (depth < t).astype(np.uint8)                         # 0 = nearest
     label = cv2.medianBlur(label, 5)
+    if os.environ.get("SOLID"):
+        # Keep solid shapes whole (Balloon War, Nov 2026: BW03's trunks were cut in half, the depth model fading each trunk from
+        # near at the foot to far at the top). Every connected ink-black shape (plus the coral balloon touching it) beyond the
+        # nearest band goes on ONE plane: the majority plane of its pixels. The nearest band (ground, ferns) keeps its own.
+        L = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255
+        hsv2 = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
+        coral = (hsv2[..., 1] > 90) & ((hsv2[..., 0] <= 12) | (hsv2[..., 0] >= 170)) & (hsv2[..., 2] > 120)
+        solid = (((L < float(os.environ.get("SOLID_DARK", "0.13"))) | coral) & (label > 0)).astype(np.uint8)
+        n, comp = cv2.connectedComponents(solid, connectivity=8)
+        flat_c, flat_l = comp.ravel(), label.ravel()
+        counts = np.zeros((n, bands), np.int64)
+        np.add.at(counts, (flat_c, flat_l), 1)
+        mode = counts.argmax(1).astype(np.uint8)
+        # prefer a plane in front of the back plate when at least 10% of the shape is there, so trees stand clear of the hills
+        front = counts[:, :bands - 1]
+        use_front = front.sum(1) >= 0.10 * counts.sum(1)
+        mode = np.where(use_front, front.argmax(1), mode).astype(np.uint8)
+        big = counts.sum(1) > 400
+        fix = (comp > 0) & big[comp]
+        label = np.where(fix, mode[comp], label).astype(np.uint8)
+        print(name, "solid shapes:", int(big[1:].sum()))
 
     k = np.ones((3, 3), np.uint8)
     small = 0.5
