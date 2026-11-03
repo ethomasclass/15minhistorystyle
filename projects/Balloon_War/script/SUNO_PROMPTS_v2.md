@@ -181,3 +181,18 @@ very sparse grief for a quiet forest, solo felt piano, single notes with long si
 ## Reused from the library
 - `b_paper_wind` (v1, 2:35): a second option for ch 3 or ch 9, and for the Shorts.
 - Room tone and sound effects as planned in `SCRIPT_v2_story_arc.md` (waves, typewriter, forest birds then silence).
+
+## Received (Nov 3, 2026): all 8 in `public/music/` and the library (`music/cues/`, README, catalog)
+
+| Cue | Length | LUFS | Notes from the loudness chart (not listened to) |
+|---|---|---|---|
+| `bw_something_in_the_woods` | 1:45 | -15.4 | Sound from the first second; dip 88–92 s; fades out by 104 s |
+| `bw_revenge_on_the_wind` | 1:40 | -14.6 | Fullest 80–87 s; out by 98 s |
+| `bw_paper_and_paste` | 2:00 | -15.8 | Dips 22–25 s and 69–75 s; sparse ending 105–118 s |
+| `bw_dawn_launch` | 1:30 | -14.4 | Steady; out by 89 s |
+| `bw_paper_and_sand` | 2:38 | -14.4 | Trimmed silent tail; dips 89–92 s and 132–136 s; 2 s under its minimum (fine after the cut list) |
+| `bw_the_newspaperman` | 2:40 | -15.1 | Short quiet start; dip ~105 s; ends 157 s |
+| `bw_gearhart` | 2:08 | -16.0 | Trimmed silent tail; **fuller than asked** (no long silences in the chart): check by ear before using it in ch 8 |
+| `bw_a_thousand_cranes` | 3:40 | -14.8 | Quieter 185–205 s, last swell 205–212 s, out by 217 s |
+
+All eight are about 1–3 dB hotter than most library cues, so their beds sit a little lower (`bed()` from the LUFS above).

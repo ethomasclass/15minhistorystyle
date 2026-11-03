@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History (now Chunk History) so far: **81 cues, about 148 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History (now Chunk History) so far: **89 cues, about 174 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -16,6 +16,7 @@ prefix says which video the cue was made for:
 | `cw_` | Any Civil War video (made alongside *Reconstruction*) | ACE-Step 1.5 (`music_acestep.py`) |
 | `m_` (also) | *When Europe Ate Mummies* (`m_1924`, `m_alexandria`, `m_apothecary`, `m_lament_baroque`, `m_old_world`, `m_parlor`, `m_reveal`, `m_tomb`; the other `m_` cues are *The Exact Spot*'s) | Suno (prompts in [`SUNO_PROMPTS.md`](SUNO_PROMPTS.md)) |
 | `b_` | *The Balloon War* (WWII) | Suno (prompts and section tags in `Balloon_War/script/MUSIC.md`) |
+| `bw_` | *The Balloon War* v2 (the story-arc version, Nov 2026) | Suno (prompts in `projects/Balloon_War/script/SUNO_PROMPTS_v2.md`) |
 | `hb_` | *Trick-or-Treating Was a Bribe* (Halloween) | Suno (prompts in `projects/Halloween_Bribe/script/SUNO_PROMPTS.md`) |
 | `aw_` | *The American West after the Civil War* (four-part series; Ep 1 *Not in the Picture*) | Suno (prompts in `projects/American_West/SUNO_PROMPTS.md`) |
 
@@ -955,6 +956,85 @@ Groove from the first second (no quiet intro); stop-time break 70–79 s (hits a
 Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.
 
 - The Balloon War: Ch04 The Paper Balloon + Ch07 ending (planned) · bed 0.18–0.22 (Suno masters quiet)
+
+### Added by *The Balloon War* v2 (the story-arc version, Nov 2026)
+
+| Cue | Length | LUFS | Mood | Good part | Used in |
+|---|---|---|---|---|---|
+| [`bw_something_in_the_woods`](cues/bw_something_in_the_woods.mp3) | 1:45 | -15.4 | Quiet curious cold open: felt piano three-note question, low muted strings, alto flute, harp; a small dark swell; ends unresolved. | Sound from the first second (no silent lead); small swells ~15 s and ~40 s; dip 88–92 s; back 93–100 s; fades out by 104 s. | The Balloon War (v2) |
+| [`bw_revenge_on_the_wind`](cues/bw_revenge_on_the_wind.mp3) | 1:40 | -14.6 | Tense and distant (low strings, soft timpani heartbeat), turning to airy wonder (rising strings, alto flute, harp), then a cool determined close. | Steady from the top; lifts ~5 s and ~68 s; fullest 80–87 s; fades from 95 s, out by 98 s. | The Balloon War (v2) |
+| [`bw_paper_and_paste`](cues/bw_paper_and_paste.mp3) | 2:00 | -15.8 | Delicate, patient work in a dim theater: repeating felt-piano brush strokes, sparse koto, pizzicato, muted strings; a soft clockwork pulse in the middle. | Dips 22–25 s and 69–75 s (good landing spots for a line); fullest 55–60 s and 88–93 s; sparse ending 105–118 s. | The Balloon War (v2) |
+| [`bw_dawn_launch`](cues/bw_dawn_launch.mp3) | 1:30 | -14.4 | Cold winter dawn on a Pacific beach: harp swells like waves, low strings, felt piano, koto; quietly hopeful, a swell as the balloon is released, thinning into doubt. | Full from 2 s and steady; fades from 78 s, out by 89 s. | The Balloon War (v2) |
+| [`bw_paper_and_sand`](cues/bw_paper_and_sand.mp3) | 2:38 | -14.4 | Curious 1940s American investigation: pizzicato, upright bass, vibraphone, muted trumpet, brushes; a brief brave lift; microscope-quiet; ends on an unresolved question. | Steady; dip 89–92 s; lift 92–130 s; dip 132–136 s; last block 136–150 s; fades by 157 s (trimmed from 159.6 s, silent tail). | The Balloon War (v2) |
+| [`bw_the_newspaperman`](cues/bw_the_newspaperman.mp3) | 2:40 | -15.1 | Restrained 1940s Washington intrigue: walking upright bass, brushed cymbal, lonely muted trumpet, felt piano, low strings, a newsroom-clock pulse; tightens slowly. | Short quiet start 0–6 s; steady; dip ~105 s; choppier 125–145 s; ends 157 s. | The Balloon War (v2) |
+| [`bw_gearhart`](cues/bw_gearhart.mp3) | 2:08 | -16.0 | Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter. | Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail). | The Balloon War (v2) |
+| [`bw_a_thousand_cranes`](cues/bw_a_thousand_cranes.mp3) | 3:40 | -14.8 | Warm, quiet reconciliation for the ending: felt piano, soft strings, alto flute, a gentle koto line, harp; reflective, opening into warmth, a gentle lift, a ringing major close. | Steady from ~5 s; swells ~45 s and 150–180 s; quieter 185–205 s; last swell 205–212 s; out by 217 s. | The Balloon War (v2) |
+
+The same video reuses `b_paper_wind`.
+
+### `bw_something_in_the_woods`
+
+1:45 · -15.4 LUFS · Suno · made for *The Balloon War* (v2): ch 1 cold open
+
+```
+a quiet, curious cold open for a documentary about a forgotten mystery in a misty pine forest, a soft felt piano figure of three notes that keeps asking a question, low muted strings underneath, a breath of alto flute, faint harp like falling needles, calm but uneasy, a small dark swell when the secret is revealed, then it holds still and ends on an unresolved chord left hanging in the air, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `bw_revenge_on_the_wind`
+
+1:40 · -14.6 LUFS · Suno · made for *The Balloon War* (v2): ch 2 the raid and the wind
+
+```
+a piece that begins tense and low, with distant low strings and a soft timpani heartbeat for an air raid seen from far away, then turns to wonder as a high wind is discovered, airy strings rising, alto flute and harp drifting west to east, a sense of altitude and open sky, then a cool determined close as a plan takes shape, 76 BPM, 4/4, E minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `bw_paper_and_paste`
+
+2:00 · -15.8 LUFS · Suno · made for *The Balloon War* (v2): ch 3 the girl who glued
+
+```
+a delicate, patient piece for teenage girls working in silence in a vast dim 1940s theater, a repeating gentle felt piano pattern like careful brush strokes, a sparse koto answering now and then, soft pizzicato, muted strings, hushed and focused with a quiet sadness underneath, in the middle a soft clockwork pulse of plucked strings and harp like a small machine rising and falling, then back to the brush strokes, ending small and unfinished, 80 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `bw_dawn_launch`
+
+1:30 · -14.4 LUFS · Suno · made for *The Balloon War* (v2): ch 4 the boy on the beach
+
+```
+a cold winter dawn on a Pacific beach, waves implied by slow harp swells, low strings, felt piano, a koto figure like a question, quietly hopeful as a huge paper balloon fills, a gentle rising swell as it is released and drifts out over the sea, then the music thins into doubt, ending on two lonely notes, 74 BPM, 4/4, G minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `bw_paper_and_sand`
+
+2:38 · -14.4 LUFS · Suno · made for *The Balloon War* (v2): ch 5 "Paper" and ch 6 the sand
+
+```
+a curious 1940s American investigation, pizzicato strings and upright bass, vibraphone, muted trumpet, a light brushed rhythm, puzzled and searching like detectives laying out clues, a brief heroic lift for paratroopers jumping into a forest fire, then microscope-quiet and precise, building to a discovery, and ending on a sudden unresolved question, 96 BPM, 4/4, F minor; documentary, period instruments, restrained, space for narrator, instrumental
+```
+
+### `bw_the_newspaperman`
+
+2:40 · -15.1 LUFS · Suno · made for *The Balloon War* (v2): ch 7 the newspaperman
+
+```
+restrained 1940s Washington intrigue for a newspaperman keeping a secret, upright bass walking softly, brushed cymbal, muted trumpet with a lonely phrase, felt piano, low strings, a steady ticking pulse like a clock in a newsroom at night, measured and serious, a slow tightening as the dilemma grows, a quiet resolved landing near the end, then a held breath, 88 BPM, 4/4, C minor; documentary, period instruments, restrained, space for narrator, instrumental
+```
+
+### `bw_gearhart`
+
+2:08 · -16.0 LUFS · Suno · made for *The Balloon War* (v2): ch 8 Bly (optional; the plan is birdsong, then silence)
+
+```
+very sparse grief for a quiet forest, solo felt piano, single notes with long silences between them, a faint low string held underneath, no melody to speak of, still and respectful, almost nothing, ending in silence, 60 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
+```
+
+### `bw_a_thousand_cranes`
+
+3:40 · -14.8 LUFS · Suno · made for *The Balloon War* (v2): ch 9 a thousand cranes, closing line and end screen
+
+```
+a warm, quiet reconciliation for a documentary ending, felt piano and soft strings with alto flute, a gentle koto line woven in like folding paper, harp, it begins reflective and grave, slowly opens into warmth and grace in the second half, a hopeful lift that never becomes triumphant, the last minute simple and luminous with long held chords, ends gently on a major chord that rings out, 70 BPM, 4/4, D minor to D major; documentary, restrained, space for narrator, instrumental
+```
 
 ### Added by *Trick-or-Treating Was a Bribe* (Halloween, Oct 2026)
 
