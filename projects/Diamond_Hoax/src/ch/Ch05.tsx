@@ -27,7 +27,7 @@ import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narrat
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {Mesa, MESA_CAM} from '../fx/Mesa';
 import {LoopingRide} from '../fx/LoopingRide';
 import {ShareSlices} from '../fx/ShareSlices';
@@ -291,7 +291,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch05: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch05_the_long_way_around.wav" lead={LEAD} music={[{src: 'music/aw_long_drive.mp3', volume: bed('aw_long_drive')}]}>
+  <ChapterShell n={N} audio="audio/ch05_the_long_way_around.wav" lead={LEAD} music={[{src: 'music/dh_salting_night.mp3', volume: bed('dh_salting_night')}]}>
     <Body />
   </ChapterShell>
 );

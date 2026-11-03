@@ -228,3 +228,7 @@ and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <na
 and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
 CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
 effects quiet; they should be felt more than heard.
+
+**Update (Nov 2026): no page turns at all**, in the branding or in chapters (the user's call), and the handwriting/highlighter
+scratch (`marker_tick`) at 40% of its old level. `Sfx` in `src/kit/common.tsx` enforces both (`MUTED`, `MARKER_GAIN`), so old chapter
+code that still lists `page_turn` stays silent. The branding files are rebuilt clicks-only by `tools/make_jingle.py`.

@@ -1,0 +1,25 @@
+{
+ "description": "An American man about sixty, a famous New York jeweler in 1871, speaking to wealthy investors in a quiet parlor. Refined, unhurried and completely sure of himself; a warm, slightly gravelly baritone with precise, old-fashioned East Coast diction. Measured pauses, quiet authority, a hint of awe at what he's holding. Clean studio recording.",
+ "previews": [
+  {
+   "n": 1,
+   "generated_voice_id": "wX4dd0ceYzYhDrlIJgBx",
+   "secs": 10.76425
+  },
+  {
+   "n": 2,
+   "generated_voice_id": "qrzIhMa7KQAbG9lqJKGG",
+   "secs": 12.592833333333333
+  },
+  {
+   "n": 3,
+   "generated_voice_id": "lJfF1EYN7eJsSbKLKxth",
+   "secs": 14.682625
+  }
+ ],
+ "saved_voice": {
+  "name": "Tiffany (1871)",
+  "voice_id": "wX4dd0ceYzYhDrlIJgBx",
+  "from_preview": 1
+ }
+}
