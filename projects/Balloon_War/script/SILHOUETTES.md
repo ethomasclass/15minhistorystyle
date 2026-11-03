@@ -17,6 +17,12 @@ stage on the desk (`src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and
 Motion inside the parallax scenes (from the motion list): drifting mist bands between planes, particles (dust, spray, ash), light
 flicker and the dawn line brightening, and gentle sway on trees and the hanging balloon where a plane can be bent.
 
+## Figures are solid black (the user's rule, Nov 3, 2026)
+
+Every figure, animal and object is ONE solid, opaque black shape: no faces, no light or transparent lines for collars, folds,
+buttons or seams, no rim light or glow. Only the outer outline carries information. (The Diamond Hoax figures had white interior
+lines; not here.) The generation brief for all 16 scenes, in reference order, is `FLOW_PROMPT.md`.
+
 ## The palette
 
 Built from the channel's own colours (`visual-style.md`): the desk's warm ink black, a **teal-slate haze** (a dark, quiet cousin of
