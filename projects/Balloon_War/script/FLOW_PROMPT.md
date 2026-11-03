@@ -169,3 +169,12 @@ Redo:
 - **Still to do: BW01, BW02.** The round-2 beach (`rejects/BW02_release_r2_modern_kids.jpg`) has the right round balloon and ring, but
   the boys look about 8, in T-shirts and shorts, no caps: wrong age and period.
 - Contact: `review/contact/flow_scenes_v2.jpg`.
+
+## Round 3 (Nov 3, 2026): all 16 done
+- **BW01, BW02:** Flow got the boys right (teenagers, caps, work clothes, coiled ropes) but drew teardrop balloons again. Fixed here:
+  `tools/round_balloon.py` draws the round paper balloon (panels and seams in the sampled coral, nozzle, shroud lines; `rig='ring'`
+  adds the ring and sandbags). BW01: a round balloon over the teardrop, its lines meeting the boy's rope. BW02: the teardrop and its
+  rig inpainted out (OpenCV Telea), then the round balloon with its ring. Flow's versions: `rejects/*_r3_teardrop.jpg`.
+- Lesson for next time: Flow (this model) keeps turning "balloon" into a hot-air teardrop even when told not to; draw the balloon
+  as its own layer instead. That's better for animation anyway (it can bob and rise on its own plane).
+- Contact sheet of the final set: `review/contact/flow_scenes_final.jpg`. Every image is 1376×768.
