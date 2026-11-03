@@ -16,24 +16,38 @@ Tiffany voice previews: `tiffany_voice_previews.mp3` (three designed voices, in 
 - **It doesn't repeat Shorts 1–4.** Those are the anthill evidence, the six moves, the cousins' fates and Tiffany. This one is
   the story told as instructions.
 
-## Script (159 story words + 15-word outro, about 56 s at the Shorts pace)
+## Script (165 words with Tiffany's line, about 57 s at ElevenLabs speed 1.06)
+
+Voice files: `script/shorts/heist_ellis.txt` (Ellis) and `script/shorts/heist_tiffany.txt` (Tiffany, voice "Tiffany (1871)",
+`wX4dd0ceYzYhDrlIJgBx`). Ellis is one take; Tiffany's line is spliced in after "look at them." with ~0.35 s of air either side,
+and a 0.7 s beat opens before the outro.
 
 | # | Panel | Line |
 |---|---|---|
-| 0 | **Cover C (chosen):** $18 MILLION / FOR DIRT? over the tycoon's shocked face, coral | *(drawn on frame 0, voice starts immediately; the bottom tape is the caption until it lifts at ~1.2 s)* |
-| 1 | Cover, slow push in on the face | Here's how two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. |
-| 2 | STEP 1 · rubies + diamond (coral) | Step one: buy the bait. Cheap, flawed diamonds and rubies. Rejects nobody wanted. |
-| 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up late at night with the bag, and refuse to say where it came from. |
-| 4 | STEP 3 · Tiffany (coral); his words write on as he says them | Step three: borrow someone's trust. Get Charles Tiffany to look at them. **TIFFANY** *(designed voice)*: "Gentlemen, these are beyond question precious stones of enormous value." |
-| 5 | STEP 4 · salting at night | Step four: make a mine. On an empty mesa in Colorado, push the stones into the dirt. Even into anthills. |
+| 0 | **Cover C (chosen):** $18 MILLION / FOR DIRT? over the tycoon's shocked face, coral | *(drawn on frame 0; the voice starts at once; the bottom tape is the caption until it lifts at ~1.2 s)* |
+| 1 | Cover, slow push in. On "Theranos" and "Fyre Festival" two paper slips flick in at the sides in teal handwriting ("Theranos, 2018" · "Fyre Festival, 2017"), no logos; on "Two cousins" they're swept off | Before Theranos. Before Fyre Festival. Two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. Here's how. |
+| 2 | STEP 1 · rubies + diamond (coral), the reject pile | Step one: buy the bait. Cheap, flawed stones nobody wanted. |
+| 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up at night with the bag. Refuse to say where it's from. |
+| 4 | STEP 3 · Tiffany (coral); his words write on as he says them; tag "his words, 1871 · voice dramatized" | Step three: borrow someone's trust. Get Charles Tiffany to look at them. **TIFFANY:** "Gentlemen, these are beyond question precious stones of enormous value." |
+| 5 | STEP 4 · salting at night | Step four: make a mine. Push the stones into an empty Colorado mesa. Even into anthills. |
 | 6 | STEP 5 · banknotes, hat, $18 MILLION | Step five: get out in time. Let the experts dig them up, take the money, and leave. |
-| 7 | STEP 6? · Clarence King (coral) | It worked. Until a government geologist found the field, and noticed it was too perfect. |
-| 8 | Anthill cut-away + boot prints; NATURE IS NOT THAT TIDY. | A dozen rubies by every diamond. And rubies only in anthills with boot prints around them. Nature is not that tidy. |
-| 9 | **The loop frame:** the same close-up, his coral drains to grey on "dirt", and the tape answers the cover: FOR DIRT**.** | They hadn't sold a diamond mine. They'd sold dirt. |
-| 10 | End card | *(0.7 s beat)* Want more history like this? Tap like and subscribe. The full con's linked right there. |
+| 7 | STEP 6? · Clarence King (coral). **Music drops out** on "It worked." | It worked. Until a government geologist found the field. It was too perfect. |
+| 8 | Anthill cut-away + boot prints; NATURE IS NOT THAT TIDY. Music back in | A dozen rubies by every diamond. And rubies only in anthills with boot prints around them. Nature is not that tidy. |
+| 9 | **The loop frame:** the same close-up drains to grey on "dirt"; FOR DIRT**.** The cue's closing chord lands on "dirt" | They hadn't sold a diamond mine. They'd sold dirt. |
+| 10 | End card *(0.7 s beat first)* | More like this? Tap like and subscribe. The full story's linked right there. |
 
-Every fact is from the locked script (ch 1–7): the $18 million is the cousins' take in today's money (×27); "Tiffany… called them
-a fortune" became his own quote, in his voice; the rubies-by-boot-prints detail is ch 7's.
+Facts: the $18 million is the cousins' take in today's money (×27, as in the long video); Tiffany's line is his documented quote;
+the boot prints are ch 7's. Theranos (founder convicted of investor fraud, 2022) and Fyre Festival (founder pleaded guilty to wire
+fraud, 2018) are matters of public record; neither involves a politician. They're named, not shown (no logos).
+
+## Music: `dh_salted_theme` all the way through
+
+"A sly, smug main theme… like a con man smiling at his mark": a muted-cornet motif over parlor piano, pizzicato and tuba.
+- **From 0:00** under the hook and the steps: the sly intro, with its brass hits at 2.5 s and 5 s near the top.
+- **The twist:** the bed cuts out on "It worked." and stays out through "too perfect." (a 2–3 s hole the voice fills).
+- **The payoff:** the bed comes back from later in the cue, timed so its closing unresolved chord (at 1:55.0 in the file, fading
+  out by 1:57) hits on "dirt" in "They'd sold dirt." So segment 2's `startFrom` = 115.0 s − (the time of "dirt").
+- Level with `bed('dh_salted_theme')` (−16.0 LUFS file), a little louder in the gap and on the chord.
 
 ## The cover frame (frame 0, and the frame picked as the thumbnail)
 
@@ -59,7 +73,8 @@ face and the "?" snap back (`heist_loop_pair.jpg`).
 No recording of Charles Tiffany exists, so this is a designed voice from ElevenLabs Voice Design, not an imitation of a real
 voice: "an American man about sixty, a famous New York jeweler in 1871… refined, unhurried, a warm, slightly gravelly baritone,
 precise old-fashioned East Coast diction". Three previews in `tiffany_voice_previews.mp3` (1, 2, 3), each reading his real quote
-twice; the IDs are in `tiffany_voice_previews.json`. Pick one and it gets saved to your ElevenLabs voices as "Tiffany (1871)".
+twice; the IDs are in `tiffany_voice_previews.json`. **You picked 1**; it's saved in your ElevenLabs voices as "Tiffany (1871)"
+(voice ID `wX4dd0ceYzYhDrlIJgBx`).
 
 - Only his documented words go in his mouth: the one quote, nothing invented.
 - A voice change is a pattern interrupt, a natural retention beat at about 0:15.
@@ -105,12 +120,16 @@ twice; the IDs are in `tiffany_voice_previews.json`. Pick one and it gets saved 
 there"; the title is the cover's claim (under 60 characters); the pinned comment asks a question anyone can answer ("Would you
 have bought in?").
 
-## Next steps if you like it
+## Next steps
 
-1. Your notes on the script and the panels.
-2. Voice it in Ellis (one ElevenLabs request, about 1,000 characters).
-3. Build it as a real Short (motion, timing to the words, the `dh_` music cue's accent on "Nature is not that tidy"), render,
-   master to -14 LUFS, and post with the text.
+1. **Voice it** (blocked Nov 3: the ElevenLabs account had 48 credits left; this needs about 450, Ellis ~363 + Tiffany ~75):
+   `VOICE_SPEED=1.06 python3 tools/voice.py script/shorts/heist_ellis.txt vshort_heist_ellis`, then
+   `VOICE_ID=wX4dd0ceYzYhDrlIJgBx python3 tools/voice.py script/shorts/heist_tiffany.txt vshort_heist_tiffany`; splice Tiffany in
+   after "look at them." and open the 0.7 s beat before the outro; check both with speech-to-text ("Theranos", "Fyre" = fire).
+2. Build it as a real Short from the storyboard (motion, timing to the words, the slips, the music plan above), render, master to
+   -14 LUFS, check frames at phone size.
+3. Post it with the text (title "How to Sell Dirt for $18 Million", Related video = the full video, "Altered or synthetic
+   content" Yes).
 4. If it works, write the format into the skill's `references/shorts.md` so every video gets one or two of these.
 
 ## Research notes
