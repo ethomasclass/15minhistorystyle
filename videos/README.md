@@ -143,6 +143,11 @@ column says where each was made.
 | The Last Public Execution | 55.3% | 0:50 of ~1:10 | 1.1k | Cover frame, a scene with people first, no early text |
 
 ## Your standing preferences (from your notes across the videos)
+- **Silhouette scenes stay full-frame parallax, not in a container** (*The Balloon War* v2, Nov 2026): two prototypes were tried and
+  turned down: a kamishibai paper stage on the desk (`projects/Balloon_War/src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and a
+  shadowbox diorama framing the whole screen (`src/test/ShadowBox.tsx`, `review/shadow_box_test.mp4`). Keep the layered-painting parallax
+  (`SilScene`); what carries over is the **one locked silhouette palette per video** (`tools/sil_palette.py`) and in-scene motion
+  (mist, particles, flicker, sway).
 - **Parallax layers must be clean** (*Trick-or-Treating Was a Bribe*, Oct 2026): you spotted faint outlines of foreground shapes on the
   planes behind them in the silhouette paintings. `tools/sil_layers.py` now paints out a 6 px rim around each nearer shape; check each back
   plate at full size before building scenes on it.

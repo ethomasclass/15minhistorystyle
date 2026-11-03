@@ -265,3 +265,183 @@ looser real image, or a cut. Second-pass results (Oct 2026) are noted in bracket
 - Second pass: loc.gov JSON and Commons API/upload were heavily rate-limited (HTTP 429, Cloudflare challenge), but
   `tile.loc.gov/storage-services/master/pnp/...` TIFFs downloaded freely when the digital ID was known.
 
+
+## v2 (story-arc script) additions
+
+Sourced Nov 2026 for `script/SCRIPT_v2_story_arc.md`. Same licence rules as above: US federal government works, LoC
+"no known restrictions", PD Mark, or Japanese photos tagged PD-Japan-oldphoto / PD-1996 on Commons. Nothing here is CC BY-SA,
+NC or ND, AP/Acme/Getty, or NARA "Restricted - Possibly" / "Undetermined". Everything is recorded in `credits.json` under `v2/…`.
+Contact sheet: `review/contact/v2_images.jpg`.
+
+Notes for scenes:
+- The 342-FH Doolittle prints and the 342-FH-3B / 95-GP smokejumper prints were scanned on their mounts; the files here
+  are already **cropped inside the print** (no caption card). A few still carry a negative number in a corner
+  (e.g. `29999 A.C`, `NACA C-9904 5-8-45`); crop or scale past it in the scene.
+- The colour **Operation Firefly** frames (342-C-K) are 1945 Kodachromes with warm/magenta edge fringing on some frames.
+- `aug15/` Truman Library frames (Abbie Rowe, NPS) are only **800 px** wide (the library's only scan). Use small, framed
+  ("photo on the desk"), or as a quick cut.
+
+### v2/raid1942: the Doolittle Raid, 18 April 1942
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `b25_takeoff_from_hornet_80g41196.jpg` | A B-25 lifts off Hornet's bow into a grey sea, sailors watching from the island catwalk at right | NARA 80-G-41196, NAID [520603](https://catalog.archives.gov/id/520603) (12 MB TIFF) | PD (US Navy) | 3000x2339 | "a handful of American bombers took off from an aircraft carrier and bombed Tokyo." |
+| ★ `b25s_crowded_on_hornet_deck_1942.jpg` | Army B-25s parked wing to wing on Hornet's flight deck, seen from the island, open ocean beyond | NARA 342-FH-3A03051 (USAF 92989AC), NAID [204835723](https://catalog.archives.gov/id/204835723) | PD (USAAF/USN) | 3616x2760 | "In the spring of 1942, a handful of American bombers…" (bombers on a carrier) |
+| `b25_rolls_down_hornet_deck_1942.jpg` | A B-25 rolls down the wet deck on its take-off run, deck crew waving at right | NARA 342-FH-3A02966 (USAF 51233AC), NAID [204835436](https://catalog.archives.gov/id/204835436) | PD (USAAF/USN) | 3752x2968 | "took off from an aircraft carrier" |
+| `b25_on_hornet_deck_sailors_1942.jpg` | Looking down on a B-25 (tail number 02282) lashed on deck, sailors lined along the rail behind | NARA 342-FH-3A03059 (USAF 93009AC), NAID [204835693](https://catalog.archives.gov/id/204835693) | PD (USAAF/USN) | 2968x3627 | same line; portrait frame |
+| `doolittle_mitscher_crews_on_deck_1942.jpg` | Doolittle and Capt. Marc Mitscher with the raid crews on Hornet's deck, a 500-lb bomb and a B-25 behind | NARA 342-FH-3A03033 (USAF 92984AC), NAID [204835660](https://catalog.archives.gov/id/204835660) | PD (USAAF/USN) | 3723x2818 | "American planes had just flown right over Japan's capital" (the men who did it) |
+| `hornet_launches_b25_from_escort_1942.jpg` | Hornet seen from an escort ship, heavy sea, a B-25 just airborne off her bow (top right) | NARA 342-FH-3A02973 (USN photo, USAF B51233AC), NAID [204835447](https://catalog.archives.gov/id/204835447) | PD (USN) | 3753x3009 | establishing shot, "took off from an aircraft carrier" |
+
+### v2/japan: Japan side (Oishi, Tateno, Noborito, theaters, Kokugikan, students, Ichinomiya, 15 August)
+
+All Japanese photos below are Commons files tagged **PD-Japan-oldphoto + PD-1996** (photos taken in Japan before 1957,
+PD in Japan by 1996, so not restored in the US); each was checked by hand. Credit field: "PD (Japan pre-1957 photo; PD in
+US per URAA date)". Commons originals returned HTTP 429 the whole session, so these are the largest standard thumbnails
+(1920/960/500/330 px) below native size; native sizes are noted.
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `japanese_civilians_listen_surrender_broadcast_1945.jpg` | Japanese civilians kneeling and bowing, heads down, around a radio set amid salvaged belongings, hearing the Emperor's surrender broadcast, 15 Aug 1945 | Commons: [File:Japanese civilians listening to the surrender broadcast.jpg](https://commons.wikimedia.org/wiki/File:Japanese_civilians_listening_to_the_surrender_broadcast.jpg) | PD (Japan pre-1957 photo; PD in US per URAA date) | 1920x1351 (native 2463) | "Then he heard the Emperor announce the surrender… The grown-ups around him wept." |
+| ★ `ryogoku_kokugikan_second_building_early_showa.jpg` | The domed second Ryōgoku Kokugikan (rebuilt 1920, the hall used for balloon assembly in the war), street, tram and crowds; hand-tinted postcard | Commons: [File:Ryogoku Kokugikan Second Building.png](https://commons.wikimedia.org/wiki/File:Ryogoku_Kokugikan_Second_Building.png) | PD (Japan pre-1957 photo; PD in US per URAA date) | 1920x1175 (native 2421) | "Girls like Rei were sent into some of the biggest theaters in Tokyo." (the sumo hall, one of the big indoor halls; script says theaters) |
+| `kokugikan_sumo_hall_late_1920s.jpg` | Book page, 1930: a sumo bout under the Kokugikan dome (interior, packed stands), the hall's exterior, and an aerial of the dome | Commons: [File:Kokugikan.jpg](https://commons.wikimedia.org/wiki/File:Kokugikan.jpg), from *大東京寫眞帖* (1930) | PD (Japan pre-1957 photo; PD in US per URAA date) | 960x615 (native 1019) | same line; the interior shows how big the floor was |
+| `ryogoku_memorial_hall_postwar_1948.jpg` | Ryōgoku under the Occupation, 1948: the same dome, now signed "MEMORIAL HALL", over a burned-out, half-rebuilt street | Commons: [File:Postwar Ryogoku, 1948.jpg](https://commons.wikimedia.org/wiki/File:Postwar_Ryogoku,_1948.jpg) | PD (Japan pre-1957 photo; PD in US per URAA date) | 1920x1351 (native 4936) | ch 9 "both sides of this story started to disappear" (the hall renamed, no sign of what was made there) |
+| ★ `tokyo_takarazuka_theater_1930s.jpg` | Tokyo Takarazuka Theater (opened 1934), Hibiya, tinted postcard | Commons: [File:Tōkyō Takarazuka Gekijō.jpg](https://commons.wikimedia.org/wiki/File:T%C5%8Dky%C5%8D_Takarazuka_Gekij%C5%8D.jpg) | PD (Japan pre-1957 photo; PD in US per URAA date) | 500x302 (native 529, small) | "Girls like Rei were sent into some of the biggest theaters in Tokyo." (research 04 names the Takarazuka) |
+| `nichigeki_theater_1933.jpg` | The Nichigeki (Nippon Gekijō) when new, 1933: the curved, round-windowed façade | Commons: [File:Nichi Geki 1933 BW.jpg](https://commons.wikimedia.org/wiki/File:Nichi_Geki_1933_BW.jpg) | PD (Japan pre-1957 photo; PD in US per URAA date) | 500x319 (native 585, small) | same line (v1 also has Mikesh Fig. 13 of the Nichigeki, `ch04_paper_balloon/nichigeki_music_hall_fig13.jpg`) |
+| `ernie_pyle_theater_ex_takarazuka_1946.jpg` | The Takarazuka Theater renamed "ERNIE PYLE" Theater by the Occupation, Sept 1946 | Commons: [File:Ernie Pyle Theater.jpg](https://commons.wikimedia.org/wiki/File:Ernie_Pyle_Theater.jpg) | PD (Japan pre-1957 photo; PD in US per URAA date) | 330x226 (native 452, tiny) | ch 9 "started to disappear" (fallback only) |
+| `asahi_extra_15aug1945_clipping.jpg` | Asahi Shimbun extra, 15 Aug 1945: "けふ正午に重大放送 國民必ず嚴粛に聽取せよ" (Important broadcast at noon today; every citizen must listen solemnly) | Commons: [File:Asahi Shimbun Extra Edition newspaper clipping (15 August 1945 issue).jpg](https://commons.wikimedia.org/wiki/File:Asahi_Shimbun_Extra_Edition_newspaper_clipping_(15_August_1945_issue).jpg) | PD (Japanese organization work, 1945; PD-Japan-organization + PD-1996) | 500x1269 (native 540) | "That morning in Japan…" / the two-pages-for-15-August set piece |
+
+### v2/sand: the geologists and the beach
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `ichinomiya_beach_sand_samples_usgs.jpg` | Two glass vials of beach sand from Ichinomiya, Japan, "the likely source for the sand used in the balloon bombs" (colour, modern photo of the specimens) | USGS media: [two-samples-beach-sediment-ichinomiya-japan](https://www.usgs.gov/media/images/two-samples-beach-sediment-ichinomiya-japan), courtesy Paleontological Research Institution | Public Domain (USGS Sources/Usage) | 4032x3024 | "Piece by piece, they narrowed it down… The same beach where Tatsuo and his friends had hunted for holes." |
+| ★ `planktic_foraminifera_sem_usgs.jpg` | Ten planktic foraminifera under the SEM, "each specimen similar in size to a grain of sand" | USGS media (Marci Robinson): [planktic-foraminifera-southern-maryland](https://www.usgs.gov/media/images/planktic-foraminifera-southern-maryland) | PD (USGS) | 936x524 (small) | "tiny shells from creatures that live in the sea" |
+| `foraminifera_shell_sem_usgs.jpg` | One foraminifera shell (Cribroelphidium poeyanum), SEM, on white | USGS media: [calcareous-estuarine-foraminifera-cribroelphidium-poeyanum](https://www.usgs.gov/media/images/calcareous-estuarine-foraminifera-cribroelphidium-poeyanum) | PD (USGS) | 2560x1920 | same line; masks easily (white ground) |
+| `live_foraminifera_microscope_usgs.jpg` | A live foram (Globorotalia truncatulinoides) under the microscope, amber shell on black, spines radiating | USGS media: [live-foraminifera-globorotalia-truncatulinoides](https://www.usgs.gov/media/images/live-foraminifera-globorotalia-truncatulinoides) | PD (USGS) | 2194x1904 | "Under a microscope, it was beach sand." (the microscope look) |
+| `diatoms_50_species_micrograph_usgs.jpg` | Fifty species of diatom shells arranged in a circle, white on black (Randolph Femmer) | USGS media: [diatoms-50-species](https://www.usgs.gov/media/images/diatoms-50-species) | PD (USGS) | 1200x1137 | "tiny shells from creatures that live in the sea" (diatoms are algae, so keep it as texture, not as "the" clue) |
+| `fossil_clams_and_snails_pri_usgs.jpg` | Trays of fossil clam and snail shells from the PRI collection (Julia Gardner feature) | USGS media: [fossil-clams-and-snails](https://www.usgs.gov/media/images/fossil-clams-and-snails) | Public Domain (USGS) | 3024x4032 | "So the Army sent the sand to geologists" (a shell expert's collection) |
+| `julia_gardner_placard_reston_usgs.jpg` | Memorial placard for USGS paleontologist Julia Gardner, whose text says she identified the shells in the balloons' sand ballast and helped find the launch beaches | USGS media: [a-placard-featuring-julia-anna-gardner](https://www.usgs.gov/media/images/a-placard-featuring-julia-anna-gardner) | PD (USGS photo); the **inset portrait is credited "courtesy Geological Society of America"**, so show the whole placard, don't crop the portrait out | 5000x3333 | "scientists who study rocks and dirt" (the real geologist behind it; the script doesn't name her) |
+
+### v2/price: Byron Price and the Office of Censorship
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `byron_price_portrait_harris_ewing.jpg` | Head-and-shoulders studio portrait, glass negative, "PRICE, BYRON" (looks 1930s, i.e. his AP years) | LoC Harris & Ewing [2016860056](https://www.loc.gov/item/2016860056/) (master TIFF hec 18996u) | No known restrictions on publication (LoC H&E) | 3825x4689 | "That question landed on the desk of a man named Byron Price." Caveat: H&E title is from **unverified** caption data; compare with a known photo before captioning by name |
+| ★ `code_of_wartime_practices_press_radio_may1945.jpg` | Cover: *Code of Wartime Practices for the American Press and Radio*, Office of Censorship, edition of 15 May 1945 ("This is the guide by which you are expected to censor your own operations"); library stamp at bottom | Internet Archive [OWICode1945-05-15](https://archive.org/details/OWICode1945-05-15) (Indiana Univ.), page n0 | PD (US government publication; PD Mark 1.0) | 2523x3958 | "Newspapers and radio stations agreed, voluntarily, not to print things that could help the enemy." |
+| `byron_price_letter_to_president_nov1945.jpg` | Office of Censorship letterhead: transmittal letter to President Truman, 15 Nov 1945, signed "BYRON PRICE, Director" | Internet Archive [AReportOnTheOfficeOfCensorship1945](https://archive.org/details/AReportOnTheOfficeOfCensorship1945), page n1 (crop) | PD (US government publication; PD Mark 1.0) | 2067x1758 | "In Washington… Byron Price ended the censorship rules" (his office, his name in type; the letter is from November, so use as texture, not as the 15 Aug moment) |
+
+Also usable from v1: `ch05_silence/office_of_censorship_pin.jpg` (the lapel pin) and the `nyt_*` newsroom photos.
+
+### v2/triple_nickles: the 555th Parachute Infantry Battalion and the smokejumpers, 1945
+
+"Operation Firefly" was the Army's name for the 555th's 1945 fire-jumping mission (Pendleton Field, Oregon).
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `555th_parachutes_over_pines_1945.jpg` | Colour: a stick of parachutes coming down over a ridge of pines, deep blue sky | NARA 342-C-K-3717, NAID [148728122](https://catalog.archives.gov/id/148728122) | PD (USAAF) | 2701x1975 | "their job was to jump out of planes into burning forests." |
+| ★ `555th_trooper_waits_c47_behind_1945.jpg` | A 555th trooper in full fire-jump gear (helmet, mask, rope) sits on the apron; a C-47 takes off behind him. Pendleton, 25 Aug 1945 (Edgar W. Weinberger, AAF) | NARA 342-FH-3B-42508 (29999AC), NAID [148728216](https://catalog.archives.gov/id/148728216) | PD (USAAF) | 5629x3722 | "the 555th, the Triple Nickles. Every one of them was Black." |
+| ★ `555th_fighting_forest_fire_flames_1945.jpg` | Colour: paratroopers digging and beating out flames among ponderosa pines, smoke rising | NARA 342-C-K-3714, NAID [148728116](https://catalog.archives.gov/id/148728116) | PD (USAAF) | 2732x2075 | "into burning forests" / "The biggest danger, they decided, was forest fires." |
+| `lt_clifford_allen_by_c47_555th_1945.jpg` | Colour: Lt. Clifford Allen of Chicago, 555th, in his complete jump outfit in front of a "Troop Carrier Command" C-47 | NARA 342-C-K-3746, NAID [148728164](https://catalog.archives.gov/id/148728164) | PD (USAAF) | 2748x2075 | "So the Army sent paratroopers to the Pacific Northwest" (a named man) |
+| `555th_jumpmaster_briefing_pendleton_1945.jpg` | A jumpmaster briefs a line of fully kitted 555th troopers before a C-47, Pendleton AAF, Aug 1945 | NARA 342-FH-3B-42494 (A30004AC), NAID [148728214](https://catalog.archives.gov/id/148728214) | PD (USAAF) | 5556x3992 | same line |
+| `555th_harness_up_by_c47_1945.jpg` | Colour: troopers climb into parachute harness beside a C-47 (caption: Umatilla NF) | NARA 342-C-K-3711, NAID [148728114](https://catalog.archives.gov/id/148728114) | PD (USAAF) | 2746x2085 | same line |
+| `555th_paratroopers_inside_c47_1945.jpg` | Colour: smiling 555th troopers seated inside a C-47 on the way to a fire in Wallowa forest | NARA 342-C-K-3751, NAID [148728170](https://catalog.archives.gov/id/148728170) | PD (USAAF) | 2916x2114 | "jump out of planes" (faces; warm) |
+| `555th_parachute_caught_in_pine_1945.jpg` | Colour: a canopy snagged in the top of a tall pine against blue sky | NARA 342-C-K-3720, NAID [148728126](https://catalog.archives.gov/id/148728126) | PD (USAAF) | 2857x2154 | "into burning forests" (the danger of landing in trees) |
+| `555th_two_men_digging_fireline_1945.jpg` | Colour: two troopers in helmets digging a fire line, smoke behind | NARA 342-C-K-3722, NAID [148728130](https://catalog.archives.gov/id/148728130) | PD (USAAF) | 2757x2075 | alt |
+| `555th_stamp_out_fire_umatilla_1945.jpg` | "Negro paratroopers from the 555th… stamp out a fire in an inaccessible portion of the Umatilla National Forest", 29 Aug 1945 (Weinberger) | NARA 342-FH-3B-42512 (29986AC), NAID [148728218](https://catalog.archives.gov/id/148728218) | PD (USAAF) | 5602x3948 | the official caption says it outright; B&W alt |
+| ★ `usfs_smokejumpers_at_plane_door_1940s.jpg` | Two Forest Service smokejumpers in padded suits and wire-mask helmets crouch at the open door of a jump plane | NARA 95-GP-4908-431789, NAID [7107618](https://catalog.archives.gov/id/7107618) | PD (USFS) | 3777x2998 | "Smokejumpers still do it today." |
+| `usfs_smokejumper_descending_montana_1945.jpg` | A smokejumper under a round canopy, pines below, Lolo NF, Montana, Aug 1945 (Phil Stanley, USFS) | NARA 95-GP-4908-431640, NAID [7107583](https://catalog.archives.gov/id/7107583) | PD (USFS) | 2319x3104 | same line; a sliver of the mount label survives top right |
+| `usfs_smokejumper_landing_seeley_lake_1945.jpg` | A smokejumper landing from a training jump, Seeley Lake airport, July 1945 (Stanley) | NARA 95-GP-4908-431716, NAID [7107581](https://catalog.archives.gov/id/7107581) | PD (USFS) | 2311x3038 | alt |
+
+### v2/ve_day: V-E Day, 8 May 1945
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `war_over_in_europe_chalkboard_1945.jpg` | Pvt. Harold Snyder chalks "WAR OVER IN EUROPE" on a "Late War News Flashes" board just after the first AP flash, soldiers and sailors grinning around him (Hampton Roads, 7 May 1945) | NARA 336-H-29-E14231, NAID [138926903](https://catalog.archives.gov/id/138926903) | PD (US Army Signal Corps) | 3825x3064 | "Three days later, Germany surrendered. The country had bigger news." |
+| `nazi_surrender_headline_switchboard_1945.jpg` | Switchboard operators at Newport News on V-E Day; a supervisor holds up the *Richmond Times-Dispatch* headline "NAZI SURRENDER IS OFFICIAL" | NARA 336-H-30-E13998, NAID [138926913](https://catalog.archives.gov/id/138926913) | PD (US Army Signal Corps); the newspaper page is incidental | 3749x3080 | same line (the headline that buried Bly) |
+| `ve_day_crowd_naca_lab_ohio_1945.jpg` | V-E Day ceremony: staff crowd (heads in the foreground) before the NACA engine lab's Administration Building, Cleveland, 8 May 1945 | NARA 255-GRC-1945-C-09904, NAID [354759844](https://catalog.archives.gov/id/354759844) | PD (NACA, now NASA) | 6000x4688 | same line; negative number "NACA C-9904 5-8-45" lower right |
+
+### v2/aug15: 14/15 August 1945
+
+| File | Shows | Source / ID | Licence | Size | Covers |
+|---|---|---|---|---|---|
+| ★ `reporters_run_with_surrender_news_1945.jpg` | Reporters sprint out of the White House press room with the Japanese surrender statement, 14 Aug 1945 (Abbie Rowe) | Truman Library 73-2018, NAID [338955132](https://catalog.archives.gov/id/338955132) | PD (NPS) | 800x638 (small) | "In Washington, on the same date, Byron Price ended the censorship rules" (the news let loose) |
+| `lafayette_park_crowd_japan_surrender_1945.jpg` | Crowd in Lafayette Park facing the White House on the surrender announcement, servicemen saluting (Rowe) | Truman Library 73-2023, NAID [338955142](https://catalog.archives.gov/id/338955142) | PD (NPS) | 800x640 (small) | "Then the war ended." |
+| `white_house_crowd_japan_surrender_1945.jpg` | A packed crowd cheering in front of the White House North Portico (Rowe) | Truman Library 73-2022, NAID [338955140](https://catalog.archives.gov/id/338955140) | PD (NPS) | 800x641 (small) | same |
+| `times_square_vj_kiss_80g377094.jpg` | Victor Jorgensen's Navy photo of a sailor kissing a woman in Times Square, 14 Aug 1945 (the same moment as Eisenstaedt's copyrighted *Life* picture; this is the US Navy one) | NARA 80-G-377094, NAID [520697](https://catalog.archives.gov/id/520697) (cropped inside the print) | PD (US Navy) | 4433x4605 | "Then the war ended." (instantly readable; maybe too iconic for a quiet chapter) |
+
+Nothing PD shows the Office of Censorship closing or the "Out of Business" sign (draw it, as planned), or Japanese
+documents being burned (see gaps).
+
+### Parallax candidates
+
+New files are in `v2/parallax/` (copies of six v2 picks and two v1 files, plus two new Tule Lake downloads). The Fu-Go balloon
+photos are not duplicated; the best ones are listed at their v1 paths.
+
+| File | Foreground | Background | Why it separates | Res |
+|---|---|---|---|---|
+| ★ `v2/parallax/555th_trooper_waits_c47_behind_1945.jpg` | Seated trooper in jump gear, sharp | C-47 taking off, soft-focus, over a flat bright apron and pale sky | Shallow depth of field already: crisp dark figure against a blurred light ground; plane is a third, mid layer | 5629x3722 |
+| ★ `ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg` (v1, not copied) | Men holding the shroud lines at the bottom; the balloon itself as a sphere | Cloudy sky and the long Moffett hangar wall at right | Balloon is a clean round silhouette on sky; ground crew and cars are a separate low band; hangar a big diagonal plane | 3234x4000 |
+| ★ `v2/parallax/tule_lake_five_young_women_color_fsa.jpg` | Five young women, arm in arm, waist-up | Overcast sky only (barrack edge at right) | People against near-uniform sky: almost a free cut-out; colour | 5000x3873 |
+| `v2/parallax/lt_clifford_allen_by_c47_555th_1945.jpg` | Lt. Allen standing, full figure | C-47 fuselage with "TROOP CARRIER COMMAND", sky | Figure overlaps a mostly flat, evenly lit fuselage; colour contrast (dark uniform vs tan plane) | 2748x2075 |
+| `v2/parallax/555th_jumpmaster_briefing_pendleton_1945.jpg` | Jumpmaster at left, close | Line of troopers, then C-47 and sky | Three clear depth planes stepping back; bright sky behind the line | 5556x3992 |
+| `v2/parallax/b25_takeoff_from_hornet_80g41196.jpg` | Sailors and island structure on the right edge | B-25 in mid-air, then sea and horizon | Hard-edged dark island/catwalk against grey sea; plane is a small separate layer | 3000x2339 |
+| `v2/parallax/b25_on_hornet_deck_sailors_1942.jpg` | B-25 tail and fuselage, close, from above | Deck planking, sailors at the rail, sea | Big dark airframe on light deck; sea band at top is a distant plane | 2968x3627 |
+| `v2/parallax/555th_parachutes_over_pines_1945.jpg` | Black silhouette of pine tops | Blue sky with parachutes | Silhouette vs flat sky: colour-key cut; chutes can drift as a third layer | 2701x1975 |
+| `v2/parallax/tule_lake_sagebrush_mountain_russell_lee_1942.jpg` | Sagebrush and dry hillside | Camp on the plain, a flat-topped mountain (v1 notes call it Horse Mountain; LoC notes Abalone Mountain), sky | Classic landscape layering: near brush, mid plain, far mesa, sky; no guard tower in it (see gaps) | 3840x2971 |
+| `v2/parallax/tule_lake_barracks_castle_rock_owi_1943.jpg` | Dark tar-paper barracks left and right, power lines | Castle Rock's jagged butte on the horizon, bright sky | Dark near blocks vs pale far butte and sky; the only PD Tule Lake view found with Castle Rock (no guard tower). **Only 1536 px** (LoC's single scan): use small or with grain | 1536x1243 |
+| `v2/parallax/klamath_falls_road_cars_in_pines_1942.jpg` | Rock-lined path and parked sedans | Ponderosa trunks receding, sky gaps | Strong one-point perspective into the pines; the nearest 1940s Oregon "forest road" found | 4848x5076 |
+| `ch04_paper_balloon/moffett_crew_hold_ballast_ring_1945.jpg` (v1) | Three men lifting the ballast ring, close | Building wall and a car | Big dark figures fill the lower frame against a lighter, plain wall | 4000x3242 |
+
+Not recommended for parallax: the Otsu launch-site photos (`otsu_launch_site_*`, 1470 px, flat aerial-ish views with no
+foreground subject), `japanese_crew_*` (1930 px halftone scans) and the Gearhart pines (`gearhart_mountain_ponderosa_pine_*`,
+under 2000 px, dense with no figure). `ve_day_crowd_naca_lab_ohio_1945.jpg` (heads in front of a building, 6000 px) works
+as a two-layer fallback.
+
+### v2 gaps
+
+Searched and **not** found with a clear licence (or not reachable this session). Commons/Wikipedia returned HTTP 429 for
+almost the whole pass; after ~33 minutes of paced retries only the article image lists for 大石和三郎, 両国国技館,
+日本劇場, 玉音放送 and Tokyo Takarazuka Theater came back, so the Commons-dependent items below are "not checked", not "don't exist".
+
+1. **Wasaburo Oishi portrait**: neither the en nor ja Wikipedia article carries a photo; Commons category search not
+   reachable (429). NARA/LoC: nothing.
+2. **Tateno Aerological Observatory (高層気象台), old photo**: not reached on Commons (429); NARA/LoC: nothing.
+3. **Noborito research institute (登戸研究所), old photo**: not reached on Commons; NARA: nothing. (Modern museum photos
+   on Commons are usually CC BY-SA; skip.)
+4. **Yūrakuza** theater: not reached; no PD photo found.
+5. **Kokugikan interior full of balloons / girls at work in a theater**: still nothing (v1 gap 7–8 stands). The 1930 book
+   page shows the empty-of-balloons interior only.
+6. **Japanese students in wartime labour mobilization (学徒勤労動員)**: not reached on Commons; NARA "Japanese girls factory",
+   "school girls 1945": nothing. Mikesh Fig. 12 (`ch04_paper_balloon/schoolgirls_pasting_envelope_fig12.jpg`) remains the only image.
+7. **Ichinomiya / Kujūkuri beach, old photo**: not reached on Commons; NARA: nothing. The USGS sand vials stand in.
+8. **Japanese documents being burned, 15 Aug 1945**: nothing PD on NARA or LoC (and none expected: it was secret).
+9. **Office of Censorship closing / the "Out of Business" sign**: no photo anywhere; draw the sign (as planned).
+   No Office of Censorship staff or building photo either.
+10. **Byron Price, more photos**: LoC's three NYWT&S portraits (00651636/38/39, incl. 1941 at his desk and 1942 with the
+    Senate committee) are **AP photographs, "publication may be restricted"**, skipped. NARA's Truman Library frames of
+    Price (99-1042, 99-725) are "Undetermined" and 66-8575 (with Liaquat Ali Khan, 1950) is off-period, skipped. Only the
+    Harris & Ewing portrait (unverified caption) is clean.
+11. **V-E Day crowds in a US city** by a federal photographer: Truman Library's Kansas City V-E Day (62-330) is
+    "Undetermined"; "Truman announces the surrender of Germany" (64-1866) is "Restricted - Possibly"; 111-SC-377559
+    (29th Div. parade, Beckum) has a broken 1 KB scan. Used Signal Corps / NACA frames instead.
+12. **Tule Lake guard tower with Castle Rock**: no PD photo of a tower found (NARA WRA 210-G searches, LoC). The only
+    Castle Rock view is `parallax/tule_lake_barracks_castle_rock_owi_1943.jpg` (OWI, 1536 px). NARA has a Santa Anita
+    watch-tower (210-G-B388), wrong camp, skipped. Modern NPS photos of the reconstructed tower are likely on Commons
+    (PD-USGov-NPS); retry when Commons stops 429ing.
+13. **A 1940s Oregon forest road**: nothing on NARA (95-G searches) and LoC was rate-limited; stand-in is the Klamath Falls
+    park road in the pines (Russell Lee 1942).
+14. **Sand under a microscope** (actual grains, or the 1945 samples magnified): no USGS/NOAA PD micrograph of beach sand
+    found; the foraminifera and diatom micrographs stand in for "tiny shells".
+15. **Doolittle crew briefing on deck**: no clean "briefing" frame; `doolittle_mitscher_crews_on_deck_1942.jpg` (crews with
+    Doolittle and Mitscher) is the nearest. NARA also has 342-FH-3A02969 (Mitscher, Doolittle and crews pinning medals to a
+    bomb, NAID 204835542) if a second crew shot is wanted.
+
+### Tool notes (v2 pass)
+
+- Commons: when `upload.wikimedia.org` originals and the API return 429, **standard-width thumbnails** (`/thumb/.../1920px-...`,
+  and 960/500/330 for small files) still downloaded. Getting the file list via a single `generator=images&prop=imageinfo`
+  call per Wikipedia article (en or ja) uses one request instead of two. Even so, only about one request every 1–2 minutes got through.
+- NARA: the 342-FH and 95-GP prints are mount scans; crop fractions were measured on a gridded preview. NARA's Truman
+  Library photos are 800 px only. USGS media pages give the original at `d9-wret.s3.us-west-2.amazonaws.com/.../media/images/<file>`.
+- loc.gov JSON: a ~6 s gap still got 429s about half the time; `tile.loc.gov/storage-services/master/pnp/...u.tif`
+  downloaded every time.
