@@ -131,7 +131,7 @@ const Outro: React.FC<{at: number}> = ({at}) => {
 };
 
 /** Small wordmark, top-left (YouTube puts its own icons top-right). Fully drawn on frame 0. */
-const Mark: React.FC = () => (
+export const Mark: React.FC = () => (
   <div style={{position: 'absolute', left: 40, top: 44, padding: '10px 14px', borderRadius: 10, background: 'rgba(13,12,9,0.6)'}}>
     <Img src={staticFile('img/brand/chunk-history-wordmark-white.svg')} style={{width: 230, display: 'block'}} />
   </div>
@@ -188,7 +188,7 @@ const Shell: React.FC<{d: ShortDef; b: Built}> = ({d, b}) => {
  * SilScene (kit/silparallax.tsx) rebuilt for a 1080x1920 frame: the painting fills the height, and the 9:16 window slides
  * across it from `fx[0]` to `fx[1]` (0..1 of the painting's width) between frames a and b while the camera pushes in.
  */
-const VSil: React.FC<{name: string; size: number[]; bands?: number; glowLayer?: number; a: number; b: number; fx: [number, number];
+export const VSil: React.FC<{name: string; size: number[]; bands?: number; glowLayer?: number; a: number; b: number; fx: [number, number];
   z?: [number, number]; drift?: [number, number]; flicker?: number; fade?: number; dy?: number}> = ({
   name, size, bands = 4, glowLayer = 0, a, b, fx, z = [1.03, 1.12], drift = [20, -20], flicker = 0.5, fade = 4, dy = 0,
 }) => {
@@ -228,7 +228,7 @@ const VSil: React.FC<{name: string; size: number[]; bands?: number; glowLayer?: 
 };
 
 /** A 3D piece (drawn at 1920x1080) on the Short's desk: the canvas is clear, so the portrait crop has no edges. */
-const V3D: React.FC<{x: number; y: number; s?: number; children: React.ReactNode}> = ({x, y, s = 1, children}) => (
+export const V3D: React.FC<{x: number; y: number; s?: number; children: React.ReactNode}> = ({x, y, s = 1, children}) => (
   <AbsoluteFill style={{overflow: 'hidden'}}>
     <DarkPaper />
     <Lamp x={540} y={640} r={700} a={0.1} />
@@ -237,7 +237,7 @@ const V3D: React.FC<{x: number; y: number; s?: number; children: React.ReactNode
 );
 
 /** The H1 picture (ColdOpenDepth, drawn at 1920x1080), scaled so the cousins and the tycoon fill the portrait frame. */
-const VH1: React.FC<{cam?: {f: number; d: number; x?: number; y?: number}[]; drainAt?: number}> = ({cam, drainAt}) => (
+export const VH1: React.FC<{cam?: {f: number; d: number; x?: number; y?: number}[]; drainAt?: number}> = ({cam, drainAt}) => (
   <AbsoluteFill style={{overflow: 'hidden', background: '#0d0c09'}}>
     <DarkPaper />
     <div style={{position: 'absolute', left: -330, top: 260, width: 1920, height: 1080, transform: 'scale(0.9)', transformOrigin: '0 0', overflow: 'hidden'}}>
