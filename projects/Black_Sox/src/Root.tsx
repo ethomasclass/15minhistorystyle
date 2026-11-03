@@ -8,6 +8,7 @@ import {BREAK_FRAMES, LogoBreak} from './kit/LogoBreak';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB, ThumbC} from './Thumbnail';
 import {PARALLAX_TEST_FRAMES, ParallaxTest} from './ch/ParallaxTest';
+import {DEPTH_TEST_FRAMES, DepthTest} from './ch/DepthTest';
 import {SHORTS, ShortComp, shortFrames} from './shorts';
 import {VSHORTS} from './vshorts';
 
@@ -20,6 +21,7 @@ export const Root: React.FC = () => (
     <Composition id="Thumb-C" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbC /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
     <Composition id="ParallaxTest" width={W} height={H} fps={FPS} durationInFrames={PARALLAX_TEST_FRAMES} component={() => <JFonts><ParallaxTest /></JFonts>} />
+    <Composition id="DepthTest" width={W} height={H} fps={FPS} durationInFrames={DEPTH_TEST_FRAMES} component={() => <JFonts><DepthTest /></JFonts>} />
     {SHORTS.map((s) => <Composition key={s.id} id={s.id} width={1080} height={1920} fps={FPS} durationInFrames={shortFrames(s)} component={() => <JFonts><ShortComp s={s} /></JFonts>} />)}
     {VSHORTS.map((s) => <Composition key={s.id} id={s.id} width={1080} height={1920} fps={FPS} durationInFrames={s.frames} component={() => <JFonts><s.C /></JFonts>} />)}
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
