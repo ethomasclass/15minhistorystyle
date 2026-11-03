@@ -78,10 +78,13 @@ Ellis plus Tiffany's documented quote in a designed voice ("Tiffany (1871)"), mu
 (the tycoon's reaction, $18 MILLION / FOR DIRT?); the last second is frame 0 again, so it loops. Plan and checks:
 `review/shorts/Heist_Short_mockup.md`.
 
-**Title:** How to Sell Dirt for $18 Million
+**Title (the caption line in the Shorts player; it complements the cover instead of repeating it):** Before Theranos, This Scam Fooled Tiffany
+Alternates to test later: `The Original Theranos Was a Field of Dirt` · `Tiffany Fell for It. So Did Billionaires.`
 
 **Description:**
-Before Theranos, two cousins sold America's richest men a field of dirt for about $18 million in today's money. Five steps, one famous jeweler, and a geologist who noticed it was too perfect. Full story on the channel: They Fooled America's Richest Men
+The Great Diamond Hoax of 1872: two cousins sold America's richest men a field of dirt for about $18 million in today's money, and got Charles Tiffany to vouch for it. Before Theranos, this was the scam. Five steps, and the geologist who caught it.
+
+Full story: They Fooled America's Richest Men (linked above)
 
 **Hashtags:** #History #Scam #Theranos
 
