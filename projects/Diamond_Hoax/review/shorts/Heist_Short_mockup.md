@@ -20,8 +20,8 @@ Tiffany voice previews: `tiffany_voice_previews.mp3` (three designed voices, in 
 
 | # | Panel | Line |
 |---|---|---|
-| 0 | Cover C (recommended): $18 MILLION / FOR DIRT? over the tycoon's shocked face | *(drawn on frame 0, voice starts immediately)* |
-| 1 | Cover, push in | Here's how two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. |
+| 0 | **Cover C (chosen):** $18 MILLION / FOR DIRT? over the tycoon's shocked face, coral | *(drawn on frame 0, voice starts immediately; the bottom tape is the caption until it lifts at ~1.2 s)* |
+| 1 | Cover, slow push in on the face | Here's how two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. |
 | 2 | STEP 1 · rubies + diamond (coral) | Step one: buy the bait. Cheap, flawed diamonds and rubies. Rejects nobody wanted. |
 | 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up late at night with the bag, and refuse to say where it came from. |
 | 4 | STEP 3 · Tiffany (coral); his words write on as he says them | Step three: borrow someone's trust. Get Charles Tiffany to look at them. **TIFFANY** *(designed voice)*: "Gentlemen, these are beyond question precious stones of enormous value." |
@@ -29,7 +29,7 @@ Tiffany voice previews: `tiffany_voice_previews.mp3` (three designed voices, in 
 | 6 | STEP 5 · banknotes, hat, $18 MILLION | Step five: get out in time. Let the experts dig them up, take the money, and leave. |
 | 7 | STEP 6? · Clarence King (coral) | It worked. Until a government geologist found the field, and noticed it was too perfect. |
 | 8 | Anthill cut-away + boot prints; NATURE IS NOT THAT TIDY. | A dozen rubies by every diamond. And rubies only in anthills with boot prints around them. Nature is not that tidy. |
-| 9 | THEY SOLD **DIRT.**, the H1 picture again (loop) | They hadn't sold a diamond mine. They'd sold dirt. |
+| 9 | **The loop frame:** the same close-up, his coral drains to grey on "dirt", and the tape answers the cover: FOR DIRT**.** | They hadn't sold a diamond mine. They'd sold dirt. |
 | 10 | End card | *(0.7 s beat)* Want more history like this? Tap like and subscribe. The full con's linked right there. |
 
 Every fact is from the locked script (ch 1–7): the $18 million is the cousins' take in today's money (×27); "Tiffany… called them
@@ -41,7 +41,7 @@ The cover has to win the scroll at three sizes: full screen under YouTube's butt
 home page, and the tiny tile in search and the Shorts shelf. `heist_cover_feed_test.jpg` shows all three for each candidate, with
 YouTube's overlay mocked on top.
 
-- **C · The reaction (recommended):** the tycoon's shocked face fills the frame; "$18 MILLION" above, "FOR DIRT?" below. A face
+- **C · The reaction (chosen):** the tycoon's shocked face fills the frame; "$18 MILLION" above, "FOR DIRT?" below. A face
   with a strong emotion, two short phrases and one question: the only one that still reads at the tiny size.
 - **A · How to Sell Dirt:** the Short's title as the cover; reads well big, gets busy small (two cousins, three strips of tape).
 - **B · Real Diamonds. Fake Mine.:** the video's paradox in four words; striking, but a pale stone on a dark night is lower
@@ -51,7 +51,8 @@ Rules from the test: nothing to read under the button column (x > 930 from y 900
 four to five words at most, in two strips; one face or one object, big; it makes sense with the sound off. The cover is
 **baked into frame 0** of the video, so it's what plays first in the feed and what you pick in the app's thumbnail picker.
 Custom thumbnail uploads for Shorts are rolling out unevenly (reports conflict), so if Studio offers one, upload the same frame.
-The loop ending matches whichever cover wins (for C: the same close-up, the stone drained grey, "THEY SOLD DIRT.").
+The loop ending answers the cover: the same close-up drained to grey, "$18 MILLION / FOR DIRT." When the Short replays, the coral
+face and the "?" snap back (`heist_loop_pair.jpg`).
 
 ## Tiffany's voice
 

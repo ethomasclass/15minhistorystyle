@@ -84,59 +84,11 @@ const Desk: React.FC<{lamp?: number}> = ({lamp = 900}) => (
 const TIFFANY = maskRef('ch04_tiffany', tiffanyMask);
 const KING = maskRef('king', kingMask);
 
-// The H1 picture restacked for 9:16: the tycoon (coral, traced) across the middle, the two cousins large in the foreground,
-// cut off by the bottom edge. Same cut-outs as ColdOpenDepth; on `drain` the stone in his hand goes grey ("dirt").
-const TYC_V: Place = {left: -40, top: 560, scale: 0.97};
-const COUSIN_LV: Place = {left: -250, top: 930, scale: 1.45};
-const COUSIN_RV: Place = {left: -760, top: 930, scale: 1.45};
-const H1Tall: React.FC<{drain?: boolean}> = ({drain}) => {
-  const t = MASKS.tycoon_b.alpha;
-  return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <Lamp x={540} y={980} r={760} a={0.16} />
-      <div style={{position: 'absolute', left: TYC_V.left, top: TYC_V.top, width: SIZE[0] * TYC_V.scale, height: SIZE[1] * TYC_V.scale, ...cut(t),
-        filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
-        <Picture src="img/gen/thumb/tycoon_b_clean.png" place={{left: 0, top: 0, scale: TYC_V.scale}} size={SIZE} bw="grayscale(1) contrast(1.15) brightness(1.02)" />
-      </div>
-      <TintLayer place={TYC_V} mask={stoneMask(t, false)} strength={1} />
-      {drain ? (
-        <div style={{position: 'absolute', left: TYC_V.left, top: TYC_V.top, width: SIZE[0] * TYC_V.scale, height: SIZE[1] * TYC_V.scale, ...stoneMask(t, true),
-          background: '#3a3530', mixBlendMode: 'multiply', opacity: 0.45}} />
-      ) : <TintLayer place={TYC_V} mask={stoneMask(t, true)} strength={1} />}
-      <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={TYC_V} at={-999} dur={1} width={7} />
-      <div style={{position: 'absolute', inset: 0, filter: 'blur(1px)'}}>
-        <Cousin mask={MASKS.cousin_l.alpha} at={COUSIN_LV} />
-        <Cousin mask={MASKS.cousin_r.alpha} at={COUSIN_RV} />
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-/** Panel 0, the cover (frame 0 of the Short), and its answer at the end (the loop frame). */
-const Cover: React.FC<{end?: boolean}> = ({end}) => (
-  <AbsoluteFill>
-    <H1Tall drain={end} />
-    {end ? (
-      <>
-        <Highlight text="THEY SOLD" x={90} y={170} size={128} at={0} seed={131} rot={-3} />
-        <Highlight text="DIRT." x={230} y={330} size={250} at={2} seed={132} rot={-2} />
-      </>
-    ) : (
-      <>
-        <Highlight text="HOW TO SELL" x={70} y={160} size={124} at={-30} seed={121} rot={-3} />
-        <Highlight text="DIRT" x={250} y={320} size={250} at={-30} seed={122} rot={-2} />
-        <Highlight text="FOR $18 MILLION" x={60} y={1330} size={108} at={-30} seed={123} rot={-2} />
-      </>
-    )}
-  </AbsoluteFill>
-);
-
 // ---------------------------------------------------------------------------------------------
 // Cover candidates: frame 0 of the Short, and the frame picked as its thumbnail. Tested at feed size in review/shorts/.
 
-/** The tycoon alone, coral and traced, at any place and scale (his stone drains to grey with `drain`). */
-const Tycoon: React.FC<{at: Place}> = ({at}) => {
+/** The tycoon alone, traced, at any place and scale; `tint` 1 = coral, near 0 = drained to grey. */
+const Tycoon: React.FC<{at: Place; tint?: number}> = ({at, tint = 1}) => {
   const t = MASKS.tycoon_b.alpha;
   return (
     <>
@@ -144,8 +96,8 @@ const Tycoon: React.FC<{at: Place}> = ({at}) => {
         filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
         <Picture src="img/gen/thumb/tycoon_b_clean.png" place={{left: 0, top: 0, scale: at.scale}} size={SIZE} bw="grayscale(1) contrast(1.15) brightness(1.02)" />
       </div>
-      <TintLayer place={at} mask={stoneMask(t, false)} strength={1} />
-      <TintLayer place={at} mask={stoneMask(t, true)} strength={1} />
+      <TintLayer place={at} mask={stoneMask(t, false)} strength={tint} />
+      <TintLayer place={at} mask={stoneMask(t, true)} strength={tint} />
       <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={at} at={-999} dur={1} width={8} />
     </>
   );
@@ -179,14 +131,18 @@ const CoverB: React.FC = () => (
   </AbsoluteFill>
 );
 
-/** C · the reaction: the tycoon's shocked face filling the width, the price and the question above and below it. */
-const CoverC: React.FC = () => (
+/**
+ * C · the reaction (the chosen cover): the tycoon's shocked face filling the width, the price and the question above and below.
+ * `end` is the loop frame: the same close-up drained to grey, and the question answered ("FOR DIRT."), so a replay snaps
+ * straight back to the coral face and the "?". In the Short the bottom tape is the caption for those beats.
+ */
+const CoverC: React.FC<{end?: boolean}> = ({end}) => (
   <AbsoluteFill>
     <DarkPaper />
     <Lamp x={540} y={800} r={760} a={0.2} />
-    <Tycoon at={{left: -1000, top: 300, scale: 2.5}} />
+    <Tycoon at={{left: -1000, top: 300, scale: 2.5}} tint={end ? 0.12 : 1} />
     <Highlight text="$18 MILLION" x={70} y={160} size={150} at={-30} seed={171} rot={-3} />
-    <Highlight text="FOR DIRT?" x={60} y={1260} size={160} at={-30} seed={172} rot={-2} />
+    <Highlight text={end ? 'FOR DIRT.' : 'FOR DIRT?'} x={60} y={1260} size={160} at={-30} seed={172} rot={-2} />
   </AbsoluteFill>
 );
 
@@ -212,7 +168,7 @@ export const HeistCovers: React.FC = () => (
 
 type P = {words: string; hot: string; node: React.ReactNode};
 const PANELS: P[] = [
-  {words: '', hot: '', node: <Cover />},
+  {words: '', hot: '', node: <CoverC />},
   {words: 'cheap rejects nobody wanted', hot: 'rejects', node: (
     <AbsoluteFill>
       <Desk lamp={820} />
@@ -283,7 +239,7 @@ const PANELS: P[] = [
       <VTag text="Cut-away · ruby enlarged" y={TAG_Y} />
     </AbsoluteFill>
   )},
-  {words: "they'd sold dirt", hot: 'dirt', node: <Cover end />},
+  {words: '', hot: '', node: <CoverC end />},
   {words: '', hot: '', node: (
     <AbsoluteFill>
       <Desk lamp={900} />
