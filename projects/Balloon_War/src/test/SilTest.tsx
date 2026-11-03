@@ -43,3 +43,10 @@ export const SilTest: React.FC = () => (
     <Finish vignette={0.35} />
   </AbsoluteFill>
 );
+
+/** One scene with a standard move (for checking layers): props {name}. */
+export const SilOne: React.FC<{name: string}> = ({name}) => (
+  <AbsoluteFill style={{background: '#0d0c09'}}>
+    <SilScene name={name} size={SZ} a={0} b={SHOT} fade={1} cam={{z: [1.04, 1.12], x: [-30, 30], y: [0, -10]}} />
+  </AbsoluteFill>
+);
