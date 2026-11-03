@@ -4,7 +4,8 @@ Files: `renders/shorts/Diamond_Hoax_Short1.mp4` to `Short4.mp4`; cover stills be
 Source: `src/vshorts.tsx` (compositions `VShort1` to `VShort4`). Native 1080×1920, 30 fps, mastered to -14 LUFS. No new voice or music:
 every line and cue comes from the finished video.
 
-Post one a day, in this order: **Short 4** (the most famous name), **Short 1**, **Short 3**, **Short 2**.
+Post one a day, in this order: **Short 5** (the custom one, new voiceover), **Short 4** (the most famous name), **Short 1**,
+**Short 3**, **Short 2**.
 
 ---
 
@@ -67,3 +68,24 @@ When Philip Arnold was charged with fraud, he reportedly said he'd already hired
 - Related video: the full video, *They Fooled America's Richest Men*.
 - Cover: pick the first frame (the cover is fully drawn on frame 0, and the last story frames repeat it for the loop).
 - After 48 hours: "Stayed to watch" should be 50% or more. If it isn't, change the cover and first line.
+
+---
+
+## Short 5 · How to Sell Dirt for $18 Million (custom: its own voiceover)
+
+File: `renders/shorts/Diamond_Hoax_Short5.mp4` (composition `VShortHeist`, `src/vshort_heist.tsx`). Written and voiced for the feed:
+Ellis plus Tiffany's documented quote in a designed voice ("Tiffany (1871)"), music `dh_salted_theme`. Frame 0 is the cover
+(the tycoon's reaction, $18 MILLION / FOR DIRT?); the last second is frame 0 again, so it loops. Plan and checks:
+`review/shorts/Heist_Short_mockup.md`.
+
+**Title:** How to Sell Dirt for $18 Million
+
+**Description:**
+Before Theranos, two cousins sold America's richest men a field of dirt for about $18 million in today's money. Five steps, one famous jeweler, and a geologist who noticed it was too perfect. Full story on the channel: They Fooled America's Richest Men
+
+**Hashtags:** #History #Scam #Theranos
+
+**Pinned comment:** Which step would have fooled you: the secret, Tiffany, or digging the stones up yourself?
+
+**Upload:** Related video = *They Fooled America's Richest Men*; "Altered or synthetic content" = Yes (voice clone and a dramatized
+voice for Tiffany's quote, illustrated scenes); Not made for kids; pick the cover from the first frame.
