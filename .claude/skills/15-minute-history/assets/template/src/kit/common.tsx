@@ -9,8 +9,17 @@ export const MAP = {w: 4986, h: 4608};
 /** The sound under every handwritten note (one place to change it) and its level. */
 export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
 
+/** Whip sounds at half level (gentle transitions), the handwriting/highlighter scratch well under everything else. */
+const WHIP_GAIN = 0.5;
+const MARKER_GAIN = 0.4;
+/** Sounds the user has cut from the channel: page turns (Nov 2026). Anything listed here never plays. */
+const MUTED = ['page_turn'];
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
+  MUTED.some((m) => src.includes(m)) ? null : (
+    <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none">
+      <Audio src={staticFile(src)} volume={volume * (src.includes('whip') ? WHIP_GAIN : src.includes('marker') ? MARKER_GAIN : 1)} />
+    </Sequence>
+  )
 );
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */

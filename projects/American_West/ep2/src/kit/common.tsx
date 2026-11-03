@@ -11,8 +11,16 @@ export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
 
 /** The whip sound now sits under a soft drift, not a whip pan (gentle transitions, Oct 2026): play it at half level. */
 const WHIP_GAIN = 0.5;
+/** The handwriting/highlighter scratch sits well under everything else (the user, Nov 2026: "lessen the highlighter scratches"). */
+const MARKER_GAIN = 0.4;
+/** Sounds the user has cut from the channel: page turns (Nov 2026). Anything listed here never plays. */
+const MUTED = ['page_turn'];
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={src.includes('whip') ? volume * WHIP_GAIN : volume} /></Sequence>
+  MUTED.some((m) => src.includes(m)) ? null : (
+    <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none">
+      <Audio src={staticFile(src)} volume={volume * (src.includes('whip') ? WHIP_GAIN : src.includes('marker') ? MARKER_GAIN : 1)} />
+    </Sequence>
+  )
 );
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */
