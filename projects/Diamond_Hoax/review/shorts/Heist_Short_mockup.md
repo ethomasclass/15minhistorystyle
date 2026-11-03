@@ -2,7 +2,8 @@
 
 A Short written for the vertical feed, with its own voiceover, instead of lines spliced from the chapters.
 Storyboard: `heist_board.jpg` (ten panels, rendered in the real kit from `src/vshort_heist.tsx`, composition `Mock-HeistBoard`).
-Nothing is voiced yet.
+Cover candidates: `heist_cover_A/B/C.jpg` and `heist_cover_feed_test.jpg` (composition `Mock-HeistCovers`).
+Tiffany voice previews: `tiffany_voice_previews.mp3` (three designed voices, in order). Ellis's narration isn't voiced yet.
 
 ## Why this one
 
@@ -15,15 +16,15 @@ Nothing is voiced yet.
 - **It doesn't repeat Shorts 1–4.** Those are the anthill evidence, the six moves, the cousins' fates and Tiffany. This one is
   the story told as instructions.
 
-## Script (157 story words + 15-word outro, about 55 s at the Shorts pace)
+## Script (159 story words + 15-word outro, about 56 s at the Shorts pace)
 
 | # | Panel | Line |
 |---|---|---|
-| 0 | Cover: HOW TO SELL **DIRT** FOR $18 MILLION, the whole H1 picture | *(drawn on frame 0, voice starts immediately)* |
+| 0 | Cover C (recommended): $18 MILLION / FOR DIRT? over the tycoon's shocked face | *(drawn on frame 0, voice starts immediately)* |
 | 1 | Cover, push in | Here's how two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. |
 | 2 | STEP 1 · rubies + diamond (coral) | Step one: buy the bait. Cheap, flawed diamonds and rubies. Rejects nobody wanted. |
 | 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up late at night with the bag, and refuse to say where it came from. |
-| 4 | STEP 3 · Tiffany (coral) + his words | Step three: borrow someone's trust. Charles Tiffany himself held the stones up to the light and called them a fortune. |
+| 4 | STEP 3 · Tiffany (coral); his words write on as he says them | Step three: borrow someone's trust. Get Charles Tiffany to look at them. **TIFFANY** *(designed voice)*: "Gentlemen, these are beyond question precious stones of enormous value." |
 | 5 | STEP 4 · salting at night | Step four: make a mine. On an empty mesa in Colorado, push the stones into the dirt. Even into anthills. |
 | 6 | STEP 5 · banknotes, hat, $18 MILLION | Step five: get out in time. Let the experts dig them up, take the money, and leave. |
 | 7 | STEP 6? · Clarence King (coral) | It worked. Until a government geologist found the field, and noticed it was too perfect. |
@@ -32,7 +33,38 @@ Nothing is voiced yet.
 | 10 | End card | *(0.7 s beat)* Want more history like this? Tap like and subscribe. The full con's linked right there. |
 
 Every fact is from the locked script (ch 1–7): the $18 million is the cousins' take in today's money (×27); "Tiffany… called them
-a fortune" stands for his "precious stones of enormous value"; the rubies-by-boot-prints detail is ch 7's.
+a fortune" became his own quote, in his voice; the rubies-by-boot-prints detail is ch 7's.
+
+## The cover frame (frame 0, and the frame picked as the thumbnail)
+
+The cover has to win the scroll at three sizes: full screen under YouTube's buttons and title, the grid tile on the channel and
+home page, and the tiny tile in search and the Shorts shelf. `heist_cover_feed_test.jpg` shows all three for each candidate, with
+YouTube's overlay mocked on top.
+
+- **C · The reaction (recommended):** the tycoon's shocked face fills the frame; "$18 MILLION" above, "FOR DIRT?" below. A face
+  with a strong emotion, two short phrases and one question: the only one that still reads at the tiny size.
+- **A · How to Sell Dirt:** the Short's title as the cover; reads well big, gets busy small (two cousins, three strips of tape).
+- **B · Real Diamonds. Fake Mine.:** the video's paradox in four words; striking, but a pale stone on a dark night is lower
+  contrast than a face.
+
+Rules from the test: nothing to read under the button column (x > 930 from y 900 down) or under the title (bottom ~400 px);
+four to five words at most, in two strips; one face or one object, big; it makes sense with the sound off. The cover is
+**baked into frame 0** of the video, so it's what plays first in the feed and what you pick in the app's thumbnail picker.
+Custom thumbnail uploads for Shorts are rolling out unevenly (reports conflict), so if Studio offers one, upload the same frame.
+The loop ending matches whichever cover wins (for C: the same close-up, the stone drained grey, "THEY SOLD DIRT.").
+
+## Tiffany's voice
+
+No recording of Charles Tiffany exists, so this is a designed voice from ElevenLabs Voice Design, not an imitation of a real
+voice: "an American man about sixty, a famous New York jeweler in 1871… refined, unhurried, a warm, slightly gravelly baritone,
+precise old-fashioned East Coast diction". Three previews in `tiffany_voice_previews.mp3` (1, 2, 3), each reading his real quote
+twice; the IDs are in `tiffany_voice_previews.json`. Pick one and it gets saved to your ElevenLabs voices as "Tiffany (1871)".
+
+- Only his documented words go in his mouth: the one quote, nothing invented.
+- A voice change is a pattern interrupt, a natural retention beat at about 0:15.
+- On screen, his words write on in his handwriting-style quote as he speaks, with a small tag "his words, 1871 · voice
+  dramatized", so nobody takes it for a recording. The upload's "Altered or synthetic content" box covers it too.
+- The same idea could work in long videos for a period quote that matters (one or two per video, not every quote).
 
 ## The format, generalized: 1–2 custom Shorts per video
 

@@ -11,7 +11,7 @@ import {SIL_TEST_FRAMES, SilTest} from './SilTest';
 import {FX_TERRAIN} from './fx/registry_terrain';
 import {FX_DESK} from './fx/registry_desk';
 import {VSHORTS} from './vshorts';
-import {HEIST_BOARD_FRAMES, HeistBoard} from './vshort_heist';
+import {HEIST_BOARD_FRAMES, HEIST_COVER_FRAMES, HeistBoard, HeistCovers} from './vshort_heist';
 import {ThumbF1, ThumbF2, ThumbF3, ThumbG1, ThumbG2, ThumbH1, ThumbH2} from './ThumbsDiamond';
 
 export const Root: React.FC = () => (
@@ -25,6 +25,7 @@ export const Root: React.FC = () => (
       <Composition key={k} id={`Thumb-${k}`} width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><T /></JFonts>} />
     ))}
     {[...FX_TERRAIN, ...FX_DESK].map((x) => <Composition key={x.id} id={`FX-${x.id}`} width={W} height={H} fps={FPS} durationInFrames={x.frames} component={() => <JFonts><x.C /></JFonts>} />)}
+    <Composition id="Mock-HeistCovers" width={1080} height={1920} fps={FPS} durationInFrames={HEIST_COVER_FRAMES} component={() => <JFonts><HeistCovers /></JFonts>} />
     <Composition id="Mock-HeistBoard" width={1080} height={1920} fps={FPS} durationInFrames={HEIST_BOARD_FRAMES} component={() => <JFonts><HeistBoard /></JFonts>} />
     {VSHORTS.map((v) => <Composition key={v.id} id={v.id} width={1080} height={1920} fps={FPS} durationInFrames={v.frames} component={() => <JFonts><v.C /></JFonts>} />)}
     <Composition id="SilTest" width={W} height={H} fps={FPS} durationInFrames={SIL_TEST_FRAMES} component={SilTest} />

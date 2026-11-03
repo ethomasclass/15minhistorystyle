@@ -132,6 +132,84 @@ const Cover: React.FC<{end?: boolean}> = ({end}) => (
   </AbsoluteFill>
 );
 
+// ---------------------------------------------------------------------------------------------
+// Cover candidates: frame 0 of the Short, and the frame picked as its thumbnail. Tested at feed size in review/shorts/.
+
+/** The tycoon alone, coral and traced, at any place and scale (his stone drains to grey with `drain`). */
+const Tycoon: React.FC<{at: Place}> = ({at}) => {
+  const t = MASKS.tycoon_b.alpha;
+  return (
+    <>
+      <div style={{position: 'absolute', left: at.left, top: at.top, width: SIZE[0] * at.scale, height: SIZE[1] * at.scale, ...cut(t),
+        filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+        <Picture src="img/gen/thumb/tycoon_b_clean.png" place={{left: 0, top: 0, scale: at.scale}} size={SIZE} bw="grayscale(1) contrast(1.15) brightness(1.02)" />
+      </div>
+      <TintLayer place={at} mask={stoneMask(t, false)} strength={1} />
+      <TintLayer place={at} mask={stoneMask(t, true)} strength={1} />
+      <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={at} at={-999} dur={1} width={8} />
+    </>
+  );
+};
+
+/** A · HOW TO SELL DIRT: the face bigger than the first cover, the stone in his hand next to the price, the cousins in front. */
+const CoverA: React.FC = () => (
+  <AbsoluteFill>
+    <DarkPaper />
+    <Lamp x={560} y={900} r={760} a={0.18} />
+    <Tycoon at={{left: -200, top: 520, scale: 1.15}} />
+    <div style={{position: 'absolute', inset: 0, filter: 'blur(1px)'}}>
+      <Cousin mask={MASKS.cousin_l.alpha} at={{left: -300, top: 1050, scale: 1.4}} />
+      <Cousin mask={MASKS.cousin_r.alpha} at={{left: -700, top: 1050, scale: 1.4}} />
+    </div>
+    <Highlight text="HOW TO SELL" x={70} y={150} size={128} at={-30} seed={121} rot={-3} />
+    <Highlight text="DIRT" x={240} y={300} size={270} at={-30} seed={122} rot={-2} />
+    <Highlight text="$18 MILLION" x={60} y={1190} size={112} at={-30} seed={124} rot={-3} />
+  </AbsoluteFill>
+);
+
+/** B · REAL DIAMONDS. FAKE MINE.: the video's paradox in four words, one giant coral stone over the salted mesa at night. */
+const CoverB: React.FC = () => (
+  <AbsoluteFill>
+    <VSil name="sil_salting" size={saltL.size} glowLayer={saltL.glowLayer} a={-20} b={60} fx={[0.5, 0.5]} z={[1.06, 1.06]} />
+    <AbsoluteFill style={{background: 'rgba(8,7,5,0.6)'}} />
+    <Lamp x={540} y={930} r={560} a={0.22} />
+    <Prop name="rough_diamond" x={150} y={540} w={780} rot={-6} at={-30} coral trace from="none" />
+    <Highlight text="REAL DIAMONDS." x={50} y={170} size={104} at={-30} seed={161} rot={-3} />
+    <Highlight text="FAKE MINE." x={60} y={1260} size={150} at={-30} seed={162} rot={-2} />
+  </AbsoluteFill>
+);
+
+/** C · the reaction: the tycoon's shocked face filling the width, the price and the question above and below it. */
+const CoverC: React.FC = () => (
+  <AbsoluteFill>
+    <DarkPaper />
+    <Lamp x={540} y={800} r={760} a={0.2} />
+    <Tycoon at={{left: -1000, top: 300, scale: 2.5}} />
+    <Highlight text="$18 MILLION" x={70} y={160} size={150} at={-30} seed={171} rot={-3} />
+    <Highlight text="FOR DIRT?" x={60} y={1260} size={160} at={-30} seed={172} rot={-2} />
+  </AbsoluteFill>
+);
+
+const COVERS = [CoverA, CoverB, CoverC];
+export const HEIST_COVER_FRAMES = COVERS.length;
+
+/** One cover per frame (0 = A, 1 = B, 2 = C). */
+export const HeistCovers: React.FC = () => (
+  <PaletteCtx.Provider value={PALETTES.locked}>
+    <StepCtx.Provider value={2.5}>
+      <BareStageCtx.Provider value>
+        <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
+          {COVERS.map((C, i) => (
+            <Sequence key={i} from={i} durationInFrames={1} layout="none"><C /></Sequence>
+          ))}
+          <Mark />
+          <Finish vignette={0.35} />
+        </AbsoluteFill>
+      </BareStageCtx.Provider>
+    </StepCtx.Provider>
+  </PaletteCtx.Provider>
+);
+
 type P = {words: string; hot: string; node: React.ReactNode};
 const PANELS: P[] = [
   {words: '', hot: '', node: <Cover />},
