@@ -162,3 +162,10 @@ Redo:
   round balloon with its ropes and ring, in a sky.
 - Optional **07:** the mountain came out as a single Fuji-like cone; the prompt asked for a twin-peaked mountain (Mt. Tsukuba).
 - All: 1376×768 is small for a 1080p push; export at 2K or upscale in Flow if it offers it.
+
+## Round 2 (Nov 3, 2026)
+- **Installed:** BW08, BW09 (cropped inside a frame Flow baked into the picture), BW12 (solid black, desk black now; the swivel chair
+  has a modern five-star base, minor), BW16 (a photo of the round balloon with its ring). Round 1 versions are in `scenes/rejects/*_r1.jpg`.
+- **Still to do: BW01, BW02.** The round-2 beach (`rejects/BW02_release_r2_modern_kids.jpg`) has the right round balloon and ring, but
+  the boys look about 8, in T-shirts and shorts, no caps: wrong age and period.
+- Contact: `review/contact/flow_scenes_v2.jpg`.
