@@ -1,22 +1,24 @@
 // MOCKUP (storyboard stills, no voice yet): a custom Short written for the vertical feed, not spliced from the chapters.
 //   "How to Sell Dirt for $18 Million": a heist recipe in five steps, the twist (the step they couldn't control), the payoff line,
 //   and a loop back to the cover. Each panel below is one beat of the draft script in review/shorts/Heist_Short_mockup.md.
-// The look is the channel's (dark notebook, coral subject + teal trace, orange tape, teal handwriting, 12 fps steps), adapted for
-// a phone: the picture fills the frame top to bottom, a step rail at the top is the running device, the captions carry the
-// key word on orange tape, and type on the cover is big enough to read at thumbnail size.
-// Safe zones as in vshorts.tsx: YouTube's UI covers the top ~150 px, the bottom ~400 px and the right ~150 px below y 900.
+// The look is the channel's (dark notebook, coral subject + teal trace, orange tape, teal handwriting, 12 fps steps), composed for
+// a tall frame: every picture runs top to bottom, a step rail at the top is the running device, the captions carry the key word
+// on orange tape, and the cover restacks the H1 picture vertically (the tycoon in the middle, the cousins in the foreground).
+// YouTube's UI covers the top ~150 px, the bottom ~400 px and the right ~150 px below y 900: no TEXT there, but the pictures run
+// on underneath it to the frame's edge.
 import React from 'react';
 import {AbsoluteFill, Img, Sequence, staticFile} from 'remotion';
-import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, Tag} from './kit/Kit';
+import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx, Picture, type Place, StepCtx, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
 import {Stamp} from './kit/shell';
 import {Prop} from './kit/prop';
 import {maskRef} from './kit/maskref';
+import {MASKS} from './masks';
 import {BareStageCtx} from './fx/terrain/drawn3d';
 import {AnthillCutaway} from './fx/AnthillCutaway';
+import {Cousin, cut, SIZE, stoneMask, TintLayer} from './fx/ColdOpenDepth';
 import {Lamp, Print} from './ch/ch04/bits';
 import {Mark, V3D, VSil} from './vshorts';
-import {ColdOpenDepth} from './fx/ColdOpenDepth';
 import sfL from '../public/img/layers/sil/sil_sf_night/layers.json';
 import saltL from '../public/img/layers/sil/sil_salting/layers.json';
 import kingMask from '../public/img/masks/king.json';
@@ -26,7 +28,9 @@ const TEAL = '#2FE0C4';
 const ORANGE = '#FF9F1C';
 const CREAM = '#f4efe6';
 const WHITE = '#ffffff';
-const TAG_Y = 1490;
+/** Captions sit in the lower middle, the band behind them; source tags just above YouTube's bottom UI. */
+const CAP_Y = 1290;
+const TAG_Y = 1500;
 /** Frames per storyboard panel; stills are taken at PANEL - 4 so every write-on has finished. */
 export const PANEL = 40;
 
@@ -45,7 +49,7 @@ const Rail: React.FC<{n: number; name?: string; twist?: boolean}> = ({n, name, t
 );
 
 /** Captions for the feed: two to four words, cream, with the key word set on a strip of orange tape. */
-const TapeCaption: React.FC<{words: string; hot: string; y?: number}> = ({words, hot, y = 1200}) => (
+const TapeCaption: React.FC<{words: string; hot: string; y?: number}> = ({words, hot, y = CAP_Y}) => (
   <div style={{position: 'absolute', left: 50, width: 880, top: y, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '6px 22px'}}>
     {words.split(' ').map((w, k) => w === hot ? (
       <span key={k} style={{fontFamily: JF.sans, fontWeight: 800, fontSize: 96, lineHeight: 1.15, textTransform: 'uppercase', color: '#15120d',
@@ -58,34 +62,61 @@ const TapeCaption: React.FC<{words: string; hot: string; y?: number}> = ({words,
   </div>
 );
 
-/** The dark band the captions sit on, so they read over a full-height painting. */
+/** A soft dark band behind the captions, so they read over any picture without boxing it. */
 const Band: React.FC = () => (
-  <div style={{position: 'absolute', left: 0, top: 1110, width: 1080, height: 420,
-    background: 'linear-gradient(180deg, rgba(8,7,5,0) 0%, rgba(8,7,5,0.8) 28%, rgba(8,7,5,0.8) 78%, rgba(8,7,5,0) 100%)'}} />
+  <div style={{position: 'absolute', left: 0, top: CAP_Y - 90, width: 1080, height: 360,
+    background: 'linear-gradient(180deg, rgba(8,7,5,0) 0%, rgba(8,7,5,0.7) 30%, rgba(8,7,5,0.7) 70%, rgba(8,7,5,0) 100%)'}} />
 );
 
-const Desk: React.FC<{lamp?: number}> = ({lamp = 760}) => (
+/** Source tag on a small dark pill: on a full-height print the plain tag's cream text vanishes over the white paper. */
+const VTag: React.FC<{text: string; y?: number}> = ({text, y = TAG_Y}) => (
+  <div style={{position: 'absolute', left: 40, top: y, padding: '6px 12px', borderRadius: 6, background: 'rgba(13,12,9,0.78)', fontFamily: JF.mono, fontSize: 18,
+    letterSpacing: 1, color: 'rgba(255,255,255,0.88)', textTransform: 'uppercase'}}>{text}</div>
+);
+
+const Desk: React.FC<{lamp?: number}> = ({lamp = 900}) => (
   <>
     <DarkPaper />
-    <Lamp x={540} y={lamp} r={720} a={0.15} />
+    <Lamp x={540} y={lamp} r={900} a={0.15} />
   </>
 );
 
 const TIFFANY = maskRef('ch04_tiffany', tiffanyMask);
 const KING = maskRef('king', kingMask);
 
-/** The whole H1 picture (drawn at 1920x1080) across the frame's width: both cousins and the tycoon between them. */
-const H1Wide: React.FC<{top: number; drain?: boolean}> = ({top, drain}) => (
-  <div style={{position: 'absolute', left: 0, top, width: 1920, height: 1080, transform: 'scale(0.5625)', transformOrigin: '0 0', overflow: 'hidden'}}>
-    <ColdOpenDepth cam={[{f: 0, d: 0, x: 0, y: 0}, {f: 200, d: 30, x: 0, y: 8}]} drainAt={drain ? 0 : undefined} />
-  </div>
-);
+// The H1 picture restacked for 9:16: the tycoon (coral, traced) across the middle, the two cousins large in the foreground,
+// cut off by the bottom edge. Same cut-outs as ColdOpenDepth; on `drain` the stone in his hand goes grey ("dirt").
+const TYC_V: Place = {left: -40, top: 560, scale: 0.97};
+const COUSIN_LV: Place = {left: -250, top: 930, scale: 1.45};
+const COUSIN_RV: Place = {left: -760, top: 930, scale: 1.45};
+const H1Tall: React.FC<{drain?: boolean}> = ({drain}) => {
+  const t = MASKS.tycoon_b.alpha;
+  return (
+    <AbsoluteFill>
+      <DarkPaper />
+      <Lamp x={540} y={980} r={760} a={0.16} />
+      <div style={{position: 'absolute', left: TYC_V.left, top: TYC_V.top, width: SIZE[0] * TYC_V.scale, height: SIZE[1] * TYC_V.scale, ...cut(t),
+        filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))'}}>
+        <Picture src="img/gen/thumb/tycoon_b_clean.png" place={{left: 0, top: 0, scale: TYC_V.scale}} size={SIZE} bw="grayscale(1) contrast(1.15) brightness(1.02)" />
+      </div>
+      <TintLayer place={TYC_V} mask={stoneMask(t, false)} strength={1} />
+      {drain ? (
+        <div style={{position: 'absolute', left: TYC_V.left, top: TYC_V.top, width: SIZE[0] * TYC_V.scale, height: SIZE[1] * TYC_V.scale, ...stoneMask(t, true),
+          background: '#3a3530', mixBlendMode: 'multiply', opacity: 0.45}} />
+      ) : <TintLayer place={TYC_V} mask={stoneMask(t, true)} strength={1} />}
+      <Traced paths={MASKS.tycoon_b.data.shapes.subject} place={TYC_V} at={-999} dur={1} width={7} />
+      <div style={{position: 'absolute', inset: 0, filter: 'blur(1px)'}}>
+        <Cousin mask={MASKS.cousin_l.alpha} at={COUSIN_LV} />
+        <Cousin mask={MASKS.cousin_r.alpha} at={COUSIN_RV} />
+      </div>
+    </AbsoluteFill>
+  );
+};
 
-/** Panel 0, the cover (frame 0 of the Short): the H1 picture with the claim in big tape, readable with the sound off. */
+/** Panel 0, the cover (frame 0 of the Short), and its answer at the end (the loop frame). */
 const Cover: React.FC<{end?: boolean}> = ({end}) => (
   <AbsoluteFill>
-    <DarkPaper />
-    <H1Wide top={end ? 560 : 580} drain={end} />
+    <H1Tall drain={end} />
     {end ? (
       <>
         <Highlight text="THEY SOLD" x={90} y={170} size={128} at={0} seed={131} rot={-3} />
@@ -95,90 +126,101 @@ const Cover: React.FC<{end?: boolean}> = ({end}) => (
       <>
         <Highlight text="HOW TO SELL" x={70} y={160} size={124} at={-30} seed={121} rot={-3} />
         <Highlight text="DIRT" x={250} y={320} size={250} at={-30} seed={122} rot={-2} />
-        <Highlight text="FOR $18 MILLION" x={60} y={1215} size={108} at={-30} seed={123} rot={-2} />
-        <Note text="(it worked)" x={560} y={1370} size={72} rot={-4} at={-30} color={TEAL} />
+        <Highlight text="FOR $18 MILLION" x={60} y={1330} size={108} at={-30} seed={123} rot={-2} />
       </>
     )}
   </AbsoluteFill>
 );
 
-type P = {words: string; hot: string; band?: boolean; node: React.ReactNode};
+type P = {words: string; hot: string; node: React.ReactNode};
 const PANELS: P[] = [
   {words: '', hot: '', node: <Cover />},
   {words: 'cheap rejects nobody wanted', hot: 'rejects', node: (
     <AbsoluteFill>
-      <Desk lamp={700} />
-      <Prop name="rough_rubies" x={90} y={420} w={560} rot={-6} at={0} coral trace from="none" />
-      <Prop name="rough_diamond" x={520} y={560} w={420} rot={8} at={1} coral trace from="none" />
-      <Note text="bought in London," x={110} y={930} size={62} rot={-2} at={3} color={WHITE} />
-      <Note text="under fake names" x={300} y={1010} size={62} rot={-2} at={4} color={WHITE} />
+      <Desk lamp={820} />
+      <Prop name="rough_rubies" x={40} y={400} w={660} rot={-6} at={0} coral trace from="none" />
+      <Prop name="rough_diamond" x={540} y={600} w={500} rot={8} at={1} coral trace from="none" />
+      <Note text="bought in London," x={90} y={1040} size={60} rot={-2} at={3} color={WHITE} />
+      <Note text="under fake names" x={300} y={1115} size={60} rot={-2} at={4} color={WHITE} />
+      {/* the rest of the reject pile runs off the bottom of the frame, under YouTube's overlay */}
+      <Prop name="stone_pile" x={-60} y={1440} w={1200} rot={-3} at={0} from="none" />
       <Rail n={1} name="buy the bait" />
     </AbsoluteFill>
   )},
-  {words: 'refuse to say where', hot: 'where', band: true, node: (
+  {words: 'refuse to say where', hot: 'where', node: (
     <AbsoluteFill>
       <VSil name="sil_sf_night" size={sfL.size} glowLayer={sfL.glowLayer} a={-20} b={60} fx={[0.47, 0.5]} z={[1.06, 1.1]} />
-      <Prop name="leather_pouch" x={330} y={640} w={420} rot={-4} at={2} coral trace from="none" />
+      <Prop name="leather_pouch" x={300} y={620} w={480} rot={-4} at={2} coral trace from="none" />
       <Rail n={2} name="play hard to get" />
-      <Tag text="Illustration · San Francisco, late at night" y={TAG_Y} />
+      <VTag text="Illustration · San Francisco, late at night" y={TAG_Y} />
     </AbsoluteFill>
   )},
   {words: 'Tiffany called them a fortune', hot: 'Tiffany', node: (
     <AbsoluteFill>
       <Desk />
-      <Print src="img/ch04/tiffany_charles_engraving_1893.jpg" size={[1497, 2199]} crop={[80, 30, 1340, 1000]} x={90} y={360} w={900} h={620} rot={-1.5} at={0} mask={TIFFANY} traceAt={0} />
-      <Note text={'"precious stones of'} x={90} y={985} size={60} rot={-2} at={3} color={WHITE} />
-      <Note text={'enormous value"'} x={330} y={1050} size={60} rot={-2} at={4} color={WHITE} />
+      {/* the whole engraving, top of the head to the bottom of the frame */}
+      <Print src="img/ch04/tiffany_charles_engraving_1893.jpg" size={[1497, 2199]} crop={[60, 20, 1437, 2199]} x={20} y={350} w={1040} h={1645} rot={-1} at={0} mask={TIFFANY} traceAt={0} />
+      <Note text={'"precious stones of'} x={70} y={1040} size={58} rot={-2} at={3} color={WHITE} />
+      <Note text={'enormous value"'} x={330} y={1112} size={58} rot={-2} at={4} color={WHITE} />
       <Rail n={3} name="borrow someone's trust" />
-      <Tag text="Charles L. Tiffany and the House of Tiffany & Co., 1893" y={TAG_Y} />
+      <VTag text="Charles L. Tiffany and the House of Tiffany & Co., 1893" y={TAG_Y} />
     </AbsoluteFill>
   )},
-  {words: 'even into anthills', hot: 'anthills', band: true, node: (
+  {words: 'even into anthills', hot: 'anthills', node: (
     <AbsoluteFill>
       <VSil name="sil_salting" size={saltL.size} glowLayer={saltL.glowLayer} a={-20} b={60} fx={[0.46, 0.52]} z={[1.06, 1.12]} />
       <Rail n={4} name="make a mine" />
-      <Tag text="Illustration · salting the field" y={TAG_Y} />
+      <VTag text="Illustration · salting the field" y={TAG_Y} />
     </AbsoluteFill>
   )},
   {words: 'take the money and leave', hot: 'leave', node: (
     <AbsoluteFill>
-      <Desk />
-      <Prop name="banknotes_stack" x={120} y={560} w={600} rot={-5} at={0} coral trace from="none" />
-      <Prop name="slouch_hat" x={560} y={760} w={400} rot={10} at={1} from="none" />
-      <Stamp text="$18 MILLION" x={80} y={400} at={2} size={130} color={ORANGE} rot={-4} />
-      <Note text="today's money" x={560} y={1010} size={58} rot={-3} at={3} color={TEAL} />
+      <Desk lamp={860} />
+      <Stamp text="$18 MILLION" x={80} y={380} at={2} size={130} color={ORANGE} rot={-4} />
+      <Prop name="banknotes_stack" x={60} y={560} w={760} rot={-5} at={0} coral trace from="none" />
+      <Note text="in today's money" x={520} y={1100} size={58} rot={-3} at={3} color={TEAL} />
+      {/* the hat on its way out of frame, bottom right */}
+      <Prop name="slouch_hat" x={420} y={1430} w={760} rot={12} at={1} from="none" />
       <Rail n={5} name="get out in time" />
     </AbsoluteFill>
   )},
   {words: 'it was too perfect', hot: 'perfect', node: (
     <AbsoluteFill>
       <Desk />
-      <Print src="img/ch07/king_clarence_age27_c1869.jpg" size={[923, 1536]} crop={[0, 90, 923, 1055]} x={250} y={370} w={580} h={640} rot={1.5} at={0} mask={KING} traceAt={0} />
-      <Note text="a government geologist" x={170} y={1030} size={60} rot={-2} at={3} color={WHITE} />
+      {/* the whole seated portrait, filling the frame below the rail */}
+      <Print src="img/ch07/king_clarence_age27_c1869.jpg" size={[923, 1536]} crop={[0, 40, 923, 1536]} x={40} y={390} w={1000} h={1620} rot={1} at={0} mask={KING} traceAt={0} />
+      <Note text="a government geologist" x={90} y={1110} size={60} rot={-2} at={3} color={WHITE} />
       <Rail n={6} name="the one they couldn't plan" twist />
-      <Tag text="Clarence King, c. 1869 · Library of Congress" y={TAG_Y} />
+      <VTag text="Clarence King, c. 1869 · Library of Congress" y={TAG_Y} />
     </AbsoluteFill>
   )},
   {words: 'only next to boot prints', hot: 'boot', node: (
     <AbsoluteFill>
-      <V3D x={-692} y={-6} s={1.4}>
+      {/* the cut-away scaled up so the hill and the boot prints fill the frame top to bottom */}
+      <V3D x={-1180} y={-90} s={2.0}>
         <AnthillCutaway at={-400} sliceAt={-380} rubyAt={-330} printsAt={-300} compareAt={1e7} labels={false} />
       </V3D>
       <Highlight text="NATURE IS" x={70} y={170} size={116} at={0} seed={141} rot={-3} />
       <Highlight text="NOT THAT TIDY." x={60} y={320} size={116} at={2} seed={142} rot={-2} />
-      <Tag text="Cut-away · ruby enlarged" y={TAG_Y} />
+      <VTag text="Cut-away · ruby enlarged" y={TAG_Y} />
     </AbsoluteFill>
   )},
   {words: "they'd sold dirt", hot: 'dirt', node: <Cover end />},
   {words: '', hot: '', node: (
     <AbsoluteFill>
-      <Desk lamp={640} />
-      <Highlight text="MORE HISTORY" x={80} y={250} size={118} at={0} seed={151} rot={-3} />
-      <Highlight text="LIKE THIS?" x={150} y={410} size={118} at={2} seed={152} rot={-2} />
-      <Img src={staticFile('img/brand/chunk-history-mark.svg')} style={{position: 'absolute', left: 380, top: 640, width: 320, height: 320}} />
-      <Note text="like →" x={700} y={900} size={70} rot={-6} at={4} color={TEAL} />
-      <Note text="the full con, linked below ↓" x={90} y={1130} size={62} rot={-2} at={5} color={WHITE} />
-      <Note text="subscribe ↓" x={470} y={1330} size={70} rot={-4} at={6} color={ORANGE} />
+      <Desk lamp={900} />
+      <Highlight text="MORE HISTORY" x={80} y={200} size={118} at={0} seed={151} rot={-3} />
+      <Highlight text="LIKE THIS?" x={150} y={360} size={118} at={2} seed={152} rot={-2} />
+      {/* the full video, as a card on the desk: the thing the Related video link opens */}
+      <div style={{position: 'absolute', left: 60, top: 560, width: 680, height: 382, transform: 'rotate(-2deg)', border: `6px solid ${TEAL}`, borderRadius: 10,
+        overflow: 'hidden', boxShadow: '0 24px 40px rgba(0,0,0,0.7)'}}>
+        <Img src={staticFile('img/brand/diamond_hoax_h1.png')} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+      </div>
+      <Note text="the full con ↑ linked below" x={80} y={1050} size={62} rot={-2} at={5} color={WHITE} />
+      <Note text="like →" x={740} y={905} size={66} rot={-6} at={4} color={TEAL} />
+      <Note text="subscribe ↓" x={440} y={1330} size={70} rot={-4} at={6} color={ORANGE} />
+      <Prop name="rough_diamond" x={700} y={1480} w={420} rot={10} at={1} coral trace from="none" />
+      <Prop name="stone_pile" x={-80} y={1560} w={820} rot={-4} at={0} from="none" />
     </AbsoluteFill>
   )},
 ];

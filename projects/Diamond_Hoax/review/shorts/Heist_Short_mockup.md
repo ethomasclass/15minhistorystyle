@@ -54,8 +54,12 @@ a fortune" stands for his "precious stones of enormous value"; the rubies-by-boo
 - **One person, one decision:** the moment someone chose ("not enough money in the Bank of California…").
 
 **The visual style, adapted for the phone (what's new in the mockup):**
-- **Fill the frame.** Silhouette paintings run the full height and the subject fills the width, so the bottom half isn't empty
-  paper. Nothing to read sits in YouTube's UI zones (top ~150 px, bottom ~400 px, right ~150 px below y 900).
+- **Fill the whole 1080×1920 frame, top to bottom.** YouTube's UI zones (top ~150 px, bottom ~400 px, right ~150 px below
+  y 900) are only a no-*text* rule: the picture keeps going underneath them to the edge. Paintings and portraits run the full
+  height (Tiffany's engraving down to his signature, King's seated portrait to the chair), props spill off the bottom (the reject
+  pile, the hat leaving frame), and the cover restacks the H1 picture for a tall frame: the tycoon in the middle, the cousins
+  large in the foreground, cut by the bottom edge. Captions sit in the lower middle (y ~1290), over the picture.
+- **Source tags on a small dark pill,** so they stay readable over a white print.
 - **The step rail** at the top (STEP n on tape, five progress dots, the step's name in teal handwriting) is the running device,
   in the channel's own tape and handwriting.
 - **Tape captions:** two to four words, 96 px, cream, with the key word on a strip of orange tape. They're bigger and more on-brand
