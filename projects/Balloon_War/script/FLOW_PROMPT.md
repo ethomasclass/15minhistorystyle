@@ -147,3 +147,18 @@ or rim light around a figure; any text or lettering; orange, yellow, gold or pur
 named object; people in shots 3, 4, 5 or 14; modern objects.
 
 ---
+
+## Round 1 results (Nov 3, 2026; 16 images at 1376×768, `public/img/gen/scenes/BW*.jpg`, contact `review/contact/flow_scenes_v1.jpg`)
+
+Keepers: 03, 04, 05, 06, 07, 10, 11, 13, 14, 15. They're on palette already; `sil_palette.py` mutes their coral a little, so
+use the lock only on images that drift (it fixed BW12's brown desk). Comparison: `review/contact/flow_scenes_v1_locked.jpg`.
+
+Redo:
+- **01, 02:** the balloon is a teardrop hot-air-balloon shape; the real ones were round, a paper sphere.
+- **08, 09, 12:** light lines inside the figures (sleeves, folds, cushion edges; Price's lit rim along back and arm); BW12's desk
+  and chair are brown. Fallback if a redo still has lines: `tools/sil_solidify.py` (fills thin light lines inside black shapes;
+  check for specks in dark skies).
+- **16:** the "photo" in the window shows a paper lantern (and a coral disc in a white square can read as a flag); it must be a
+  round balloon with its ropes and ring, in a sky.
+- Optional **07:** the mountain came out as a single Fuji-like cone; the prompt asked for a twin-peaked mountain (Mt. Tsukuba).
+- All: 1376×768 is small for a 1080p push; export at 2K or upscale in Flow if it offers it.
