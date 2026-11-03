@@ -7,6 +7,16 @@ and next to the black desk, teal marks and coral subjects they read as eleven di
 Demo (no credits spent): `review/palette/palette_lock_demo.jpg`. It takes seven existing Diamond Hoax / Halloween paintings in seven
 different palettes and runs them through `tools/sil_palette.py`. They come out as one set.
 
+## Presentation (decided Nov 3, 2026)
+
+**Full-frame layered parallax, as in the Halloween and Diamond Hoax videos** (`SilScene`: the planes from `sil_layers.py`, a camera
+move, each plane at its own speed, fog between the back planes). Two containers were prototyped and turned down: a kamishibai paper
+stage on the desk (`src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and a shadowbox diorama around the whole screen
+(`src/test/ShadowBox.tsx`, `review/shadow_box_test.mp4`). The prototypes stay in `src/test/` as reference only.
+
+Motion inside the parallax scenes (from the motion list): drifting mist bands between planes, particles (dust, spray, ash), light
+flicker and the dawn line brightening, and gentle sway on trees and the hanging balloon where a plane can be bent.
+
 ## The palette
 
 Built from the channel's own colours (`visual-style.md`): the desk's warm ink black, a **teal-slate haze** (a dark, quiet cousin of
