@@ -16,37 +16,40 @@ Tiffany voice previews: `tiffany_voice_previews.mp3` (three designed voices, in 
 - **It doesn't repeat Shorts 1–4.** Those are the anthill evidence, the six moves, the cousins' fates and Tiffany. This one is
   the story told as instructions.
 
-## Script (165 words with Tiffany's line, about 57 s at ElevenLabs speed 1.06)
+## Script (voiced Nov 3: 63.2 s; the payoff "They'd sold dirt" lands at 0:57.6, then only the subscribe line)
 
-Voice files: `script/shorts/heist_ellis.txt` (Ellis) and `script/shorts/heist_tiffany.txt` (Tiffany, voice "Tiffany (1871)",
-`wX4dd0ceYzYhDrlIJgBx`). Ellis is one take; Tiffany's line is spliced in after "look at them." with ~0.35 s of air either side,
-and a 0.7 s beat opens before the outro.
+Voice: `public/audio/vshort_heist.wav` + `.words.json`, spliced by hand from one Ellis take (`vshort_heist_ellis`, eleven_v4, speed
+1.1, its own pauses capped at 0.3 s, no stretch) and Tiffany's line (`vshort_heist_tiffany`, voice "Tiffany (1871)"), with 0.35 s of
+air either side of Tiffany and a 0.7 s beat before the outro. Tiffany's words carry `"voice": "tiffany"` in the words file. Both
+speech-to-text checks (Whisper, ElevenLabs) match the script word for word, no cues spoken. Scripts: `script/shorts/heist_ellis.txt`,
+`script/shorts/heist_tiffany.txt`. Rough mix with the music: `heist_voice_music_mix.mp3`.
 
 | # | Panel | Line |
 |---|---|---|
-| 0 | **Cover C (chosen):** $18 MILLION / FOR DIRT? over the tycoon's shocked face, coral | *(drawn on frame 0; the voice starts at once; the bottom tape is the caption until it lifts at ~1.2 s)* |
-| 1 | Cover, slow push in. On "Theranos" and "Fyre Festival" two paper slips flick in at the sides in teal handwriting ("Theranos, 2018" · "Fyre Festival, 2017"), no logos; on "Two cousins" they're swept off | Before Theranos. Before Fyre Festival. Two cousins sold America's richest men a field of dirt, for about eighteen million dollars in today's money. Here's how. |
-| 2 | STEP 1 · rubies + diamond (coral), the reject pile | Step one: buy the bait. Cheap, flawed stones nobody wanted. |
-| 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up at night with the bag. Refuse to say where it's from. |
-| 4 | STEP 3 · Tiffany (coral); his words write on as he says them; tag "his words, 1871 · voice dramatized" | Step three: borrow someone's trust. Get Charles Tiffany to look at them. **TIFFANY:** "Gentlemen, these are beyond question precious stones of enormous value." |
+| 0 | **Cover C:** $18 MILLION / FOR DIRT? over the tycoon's shocked face, coral | *(drawn on frame 0; the voice starts at once; the bottom tape is the caption until it lifts at ~1.2 s)* |
+| 1 | Cover, slow push in. On "Theranos" a paper slip flicks in, teal handwriting: "Theranos, 2018: a blood test that didn't work" (no logo); on "two cousins" it's swept off. A small note under the price: "in today's money" | Before Theranos sold billionaires on a blood test that didn't work, two cousins sold America's richest men a field of dirt. For about eighteen million dollars. Here's how. |
+| 2 | STEP 1 · rubies + diamond (coral), the reject pile | Step one: buy the bait. Cheap rejects nobody wanted. |
+| 3 | STEP 2 · San Francisco at night, the pouch | Step two: play hard to get. Show up with the bag. Refuse to say where it's from. |
+| 4 | STEP 3 · the Theranos slip again, beside Tiffany (coral); his words write on as he says them; tag "his words, 1871 · voice dramatized" | Step three: borrow trust. Theranos had famous names on its board. The cousins had Charles Tiffany. **TIFFANY:** "Gentlemen, these are beyond question precious stones of enormous value." |
 | 5 | STEP 4 · salting at night | Step four: make a mine. Push the stones into an empty Colorado mesa. Even into anthills. |
-| 6 | STEP 5 · banknotes, hat, $18 MILLION | Step five: get out in time. Let the experts dig them up, take the money, and leave. |
-| 7 | STEP 6? · Clarence King (coral). **Music drops out** on "It worked." | It worked. Until a government geologist found the field. It was too perfect. |
-| 8 | Anthill cut-away + boot prints; NATURE IS NOT THAT TIDY. Music back in | A dozen rubies by every diamond. And rubies only in anthills with boot prints around them. Nature is not that tidy. |
-| 9 | **The loop frame:** the same close-up drains to grey on "dirt"; FOR DIRT**.** The cue's closing chord lands on "dirt" | They hadn't sold a diamond mine. They'd sold dirt. |
-| 10 | End card *(0.7 s beat first)* | More like this? Tap like and subscribe. The full story's linked right there. |
+| 6 | STEP 5 · banknotes, the hat leaving frame, $18 MILLION | Step five: let experts dig them up, then take the money and run. |
+| 7 | STEP 6? · Clarence King (coral). **Music out** on "It worked." (0:43.9) | It worked. Until a government geologist found the field. It was too perfect. |
+| 8 | Anthill cut-away + boot prints; NATURE IS NOT THAT TIDY. **Music back** at 0:48.5 | A dozen rubies by every diamond. Rubies only in anthills with boot prints. Nature is not that tidy. |
+| 9 | **The loop frame:** the close-up drains to grey on "dirt"; FOR DIRT**.** The cue's closing chord hits at 0:57.7 | They hadn't sold a diamond mine. They'd sold dirt. |
+| 10 | End card *(after the 0.7 s beat)* | Tap like and subscribe. The full story's linked right there. |
 
 Facts: the $18 million is the cousins' take in today's money (×27, as in the long video); Tiffany's line is his documented quote;
-the boot prints are ch 7's. Theranos (founder convicted of investor fraud, 2022) and Fyre Festival (founder pleaded guilty to wire
-fraud, 2018) are matters of public record; neither involves a politician. They're named, not shown (no logos).
+the boot prints are ch 7's. Theranos is a matter of public record (its founder was convicted of defrauding investors in 2022, and
+its board was full of famous names); it's named, not shown (no logo), and no politician is named.
 
 ## Music: `dh_salted_theme` all the way through
 
 "A sly, smug main theme… like a con man smiling at his mark": a muted-cornet motif over parlor piano, pizzicato and tuba.
 - **From 0:00** under the hook and the steps: the sly intro, with its brass hits at 2.5 s and 5 s near the top.
-- **The twist:** the bed cuts out on "It worked." and stays out through "too perfect." (a 2–3 s hole the voice fills).
+- **The twist:** the bed cuts out on "It worked." (0:43.9) and stays out through "too perfect." (back at 0:48.5).
 - **The payoff:** the bed comes back from later in the cue, timed so its closing unresolved chord (at 1:55.0 in the file, fading
-  out by 1:57) hits on "dirt" in "They'd sold dirt." So segment 2's `startFrom` = 115.0 s − (the time of "dirt").
+  out by 1:57) hits on "dirt" in "They'd sold dirt." Segment 2 starts at Short time 48.5 s from cue 105.9 s (offset 57.41 s);
+  measured: the chord lands at 0:57.7, on the word. Timings in `heist_music_timing.json`.
 - Level with `bed('dh_salted_theme')` (−16.0 LUFS file), a little louder in the gap and on the chord.
 
 ## The cover frame (frame 0, and the frame picked as the thumbnail)
@@ -122,10 +125,7 @@ have bought in?").
 
 ## Next steps
 
-1. **Voice it** (blocked Nov 3: the ElevenLabs account had 48 credits left; this needs about 450, Ellis ~363 + Tiffany ~75):
-   `VOICE_SPEED=1.06 python3 tools/voice.py script/shorts/heist_ellis.txt vshort_heist_ellis`, then
-   `VOICE_ID=wX4dd0ceYzYhDrlIJgBx python3 tools/voice.py script/shorts/heist_tiffany.txt vshort_heist_tiffany`; splice Tiffany in
-   after "look at them." and open the 0.7 s beat before the outro; check both with speech-to-text ("Theranos", "Fyre" = fire).
+1. ~~Voice it~~ Done Nov 3 (see the script section).
 2. Build it as a real Short from the storyboard (motion, timing to the words, the slips, the music plan above), render, master to
    -14 LUFS, check frames at phone size.
 3. Post it with the text (title "How to Sell Dirt for $18 Million", Related video = the full video, "Altered or synthetic
