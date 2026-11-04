@@ -4,11 +4,12 @@
 # review/previews/chNN_720p.mp4 (< 30 MB). CONC sets render concurrency (default 2, so other work keeps running).
 # No /tmp cleanup here: other renders may be using their bundles at the same time.
 cd "$(dirname "$0")/.."
-export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
+# three.js chapters need WebGL: the .real headless shell (the wrapper fails WebGL) with --gl=swangle
+export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/*/chrome-headless-shell.real 2>/dev/null | head -1)}
 BROWSER=${REMOTION_CHROME:+--browser-executable=$REMOTION_CHROME}
 mkdir -p out/ch review/previews
 for n in "$@"; do
-  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 --concurrency=${CONC:-2} $BROWSER --log=error || exit 1
+  npx remotion render src/index.ts Ch$n out/ch/ch$n.mp4 --crf=18 --concurrency=${CONC:-2} --gl=swangle $BROWSER --log=error || exit 1
   ffmpeg -v error -y -i out/ch/ch$n.mp4 -vf scale=1280:720 -c:v libx264 -crf 27 -preset medium -c:a aac -b:a 128k -movflags +faststart review/previews/ch${n}_720p.mp4 || exit 1
   echo "rendered ch$n: $(du -h review/previews/ch${n}_720p.mp4 | cut -f1) preview"
 done
