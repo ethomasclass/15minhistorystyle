@@ -9,6 +9,8 @@
 //   at          contours draw on; the camera starts its slow drift          default 0
 //   markerAt    the cream marker rises at the monument (slowly)            default at + 50
 //   pullBackAt  (variant) pull back to show Tule Lake + the dashed line     default off
+//   pullDur     frames for the pull-back (the line and labels follow it)    default 90
+//   markerLabel the marker's tab [text, sub]; null hides it (the marker stays)   default ['MITCHELL MONUMENT', '5 MAY 1945']
 //   labels      place labels                                               default true
 // Exports: GearhartTerrain, GearhartTerrainTest, GearhartTuleTest, GEARHART_TEST_FRAMES, GEARHART_TULE_TEST_FRAMES.
 import React, {useMemo} from 'react';
@@ -52,16 +54,17 @@ const LINE = drape(T, [MONUMENT, TULE], 0.04, 0.03);
 const STATE = drape(T, [W2(42, -121.5), W2(42, -120.7)], 0.05, 0.015);
 const MK_H = 0.32;
 
-export type GearhartTerrainProps = {at?: number; markerAt?: number; pullBackAt?: number; labels?: boolean};
+export type GearhartTerrainProps = {at?: number; markerAt?: number; pullBackAt?: number; pullDur?: number; markerLabel?: [string, string?] | null; labels?: boolean};
 
-export const GearhartTerrain: React.FC<GearhartTerrainProps> = ({at = 0, markerAt, pullBackAt = 1e9, labels = true}) => {
+export const GearhartTerrain: React.FC<GearhartTerrainProps> = ({at = 0, markerAt, pullBackAt = 1e9, pullDur = 90, markerLabel = ['MITCHELL MONUMENT', '5 MAY 1945'], labels = true}) => {
+  const q = pullDur / 90; // the line and labels keep their place in the pull-back
   const f = useCurrentFrame();
   const g = useGFrame();
   const mAt = markerAt ?? at + 50;
 
   // slow camera: a long gentle drift around the monument; the variant pulls back (one move) to take in Tule Lake
   const drift = interpolate(f, [at, at + 600], [0, 1], clamp);
-  const pk = ease(interpolate(f, [pullBackAt, pullBackAt + 90], [0, 1], clamp));
+  const pk = ease(interpolate(f, [pullBackAt, pullBackAt + pullDur], [0, 1], clamp));
   const close = {x: MONUMENT[0] - 0.25, z: MONUMENT[1] + 0.35};
   const wideT = {x: (MONUMENT[0] + TULE[0]) / 2 + 0.3, z: (MONUMENT[1] + TULE[1]) / 2 + 1.1};
   const c = useMemo(() => makeCam({
@@ -72,9 +75,9 @@ export const GearhartTerrain: React.FC<GearhartTerrainProps> = ({at = 0, markerA
 
   const reveal = ramp(g, at, at + 45);
   const mk = ease(ramp(f, mAt, mAt + 30));
-  const lineK = ramp(g, pullBackAt + 70, pullBackAt + 100);
+  const lineK = ramp(g, pullBackAt + 70 * q, pullBackAt + 100 * q);
   const linePart = useMemo(() => partOf(LINE, lineK), [lineK]);
-  const tuleK = ramp(g, pullBackAt + 96, pullBackAt + 104);
+  const tuleK = ramp(g, pullBackAt + 96 * q, pullBackAt + 104 * q);
 
   const mon = S2(g3(MONUMENT, MK_H * mk + 0.06));
   const peak = S2(g3(PEAK, 0.05)), bly = S2(g3(BLY, 0.02)), tule = S2(g3(TULE, 0.03));
@@ -88,9 +91,9 @@ export const GearhartTerrain: React.FC<GearhartTerrainProps> = ({at = 0, markerA
         {labels && <>
           <Label x={peak.x} y={peak.y - 16} text="GEARHART MOUNTAIN" opacity={ramp(g, at + 30, at + 40) * closeO * 0.9} size={20} bg={false} />
           <Label x={bly.x} y={bly.y - 12} text="BLY" opacity={ramp(g, at + 36, at + 46)} size={22} bg={false} />
-          <Label x={mon.x} y={mon.y - 16} text="MITCHELL MONUMENT" sub="5 MAY 1945" opacity={ramp(g, mAt + 30, mAt + 40) * (1 - 0.4 * pk)} size={22} />
+          {markerLabel && <Label x={mon.x} y={mon.y - 16} text={markerLabel[0]} sub={markerLabel[1]} opacity={ramp(g, mAt + 30, mAt + 40) * (1 - 0.4 * pk)} size={22} />}
           {tuleK > 0 && <Label x={tule.x} y={tule.y - 14} text="TULE LAKE CAMP" sub="NEWELL, CALIFORNIA" opacity={tuleK} size={22} />}
-          {lineK > 0.6 && <Label x={mid.x + 24} y={mid.y} anchor="l" text={`≈ ${MILES} MILES`} opacity={ramp(g, pullBackAt + 100, pullBackAt + 108)} size={24} />}
+          {lineK > 0.6 && <Label x={mid.x + 24} y={mid.y} anchor="l" text={`≈ ${MILES} MILES`} opacity={ramp(g, pullBackAt + 100 * q, pullBackAt + 108 * q)} size={24} />}
           {pk > 0.5 && <>
             <Label x={or.x + 120} y={or.y - 4} text="OREGON" opacity={(pk - 0.5) * 1.4} size={18} bg={false} />
             <Label x={ca.x + 120} y={ca.y + 26} text="CALIFORNIA" opacity={(pk - 0.5) * 1.4} size={18} bg={false} />

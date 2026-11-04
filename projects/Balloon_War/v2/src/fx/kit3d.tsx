@@ -298,8 +298,9 @@ export const Label: React.FC<{x: number; y: number; text: string; sub?: string; 
   x, y, text, sub, color = CREAM, opacity = 1, size = 24, anchor = 'c', bg = true,
 }) => {
   if (opacity <= 0.01) return null;
-  const estW = Math.max(text.length, (sub?.length ?? 0) * 0.62) * size * 0.66 + size;
-  const estH = size * (sub ? 2.2 : 1.5);
+  // mono glyph ≈ 0.6 em + the 0.16 em letter-spacing, plus the padding (measured against the text probe's boxes)
+  const estW = Math.max(text.length * size * 0.78, (sub?.length ?? 0) * (size * 0.375 + 1.5)) + size * 0.9;
+  const estH = size * (sub ? 2.5 : 1.8);
   const cx = anchor === 'c' ? x : anchor === 'l' ? x + estW / 2 : x - estW / 2;
   const [kx, ky] = keep(cx, y, estW, estH);
   return (
@@ -314,7 +315,8 @@ export const Label: React.FC<{x: number; y: number; text: string; sub?: string; 
 /** Small mono line (source / honesty notes), placed by its corner inside the safe frame. */
 export const Fine: React.FC<{text: string; x?: number; y?: number; right?: boolean; opacity?: number; size?: number}> = ({text, x = SAFE + 10, y = H - SAFE - 42, right = false, opacity = 0.75, size = 17}) => (
   <div style={{position: 'absolute', ...(right ? {right: W - x} : {left: x}), top: y, fontFamily: JF.mono, fontSize: size, letterSpacing: 1.5, color: `rgba(244,239,230,${opacity})`,
-    textTransform: 'uppercase', whiteSpace: 'nowrap', textShadow: '0 1px 6px rgba(0,0,0,0.95)', background: 'rgba(7,9,8,0.55)', padding: '3px 8px', borderRadius: 3}}>{text}</div>
+    textTransform: 'uppercase', whiteSpace: 'nowrap', textShadow: '0 1px 6px rgba(0,0,0,0.95)', background: `rgba(7,9,8,${(0.55 * Math.min(1, opacity / 0.7)).toFixed(3)})`, padding: '3px 8px', borderRadius: 3,
+    display: opacity < 0.01 ? 'none' : undefined}}>{text}</div>
 );
 
 /** Handwriting written on left to right over `dur` frames from `at` (`f` = the stepped frame). */

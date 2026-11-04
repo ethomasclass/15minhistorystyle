@@ -13,8 +13,9 @@
 //   blyLabel     the "BLY, OREGON · 5 MAY 1945" tab                                default true
 //   dimOthers    dim the other pins once Bly stands (focus)                       default false
 //   bars         the launches-per-month chart                                     default true
+//   barsScale    size of that chart (grows up and left from its bottom-right corner)  default 1
 //   cam          'wide' (whole continent) | 'west' (Pacific Northwest, closer) | CamKey[]   default 'wide'
-// Exports: LandingMap, LandingMapTest, LANDING_MAP_TEST_FRAMES, landingPoint(lon, lat).
+// Exports: LandingMap, LandingMapTest, LANDING_MAP_TEST_FRAMES, landingPoint(lon, lat), W3(lon, lat) (slab-centred, for cam keys).
 import React, {useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import * as THREE from 'three';
@@ -51,8 +52,8 @@ const CX = (RECT[0] + RECT[2]) / 2, CZ = (RECT[1] + RECT[3]) / 2;
 const ID: Proj = (x, z) => [x - CX, z - CZ];
 const RINGS = COAST.map((ring) => clipRect(ring.map(([lo, la]) => lcc(lo, la)), RECT)).filter((g) => g.length > 2);
 const BOX: BBox = RECT;
-/** world point centred on the slab */
-const W3 = (lon: number, lat: number, y = 0): [number, number, number] => {
+/** world point centred on the slab (the space the camera keys use) */
+export const W3 = (lon: number, lat: number, y = 0): [number, number, number] => {
   const [x, z] = lcc(lon, lat);
   return [x - CX, y, z - CZ];
 };
@@ -73,10 +74,10 @@ const HEAD = new THREE.SphereGeometry(1, 12, 9);
 const PIN_H = 0.34, HEAD_R = 0.05;
 
 /** The launches-per-month chart (DOM). `mi` = index of the current month in LAUNCH (Nov 1944 = 0), `mk` = fraction through it. */
-const LaunchChart: React.FC<{mi: number; mk: number; x: number; y: number; o: number; f: number; endAt: number}> = ({mi, mk, x, y, o, f, endAt}) => {
+const LaunchChart: React.FC<{mi: number; mk: number; x: number; y: number; o: number; f: number; endAt: number; scale?: number}> = ({mi, mk, x, y, o, f, endAt, scale = 1}) => {
   const bw = 40, gap = 14, hMax = 130;
   return (
-    <div style={{position: 'absolute', left: x, top: y, opacity: o, background: 'rgba(7,9,8,0.7)', padding: '16px 22px 12px', borderRadius: 6}}>
+    <div style={{position: 'absolute', left: x, top: y, opacity: o, background: 'rgba(7,9,8,0.7)', padding: '16px 22px 12px', borderRadius: 6, transform: `scale(${scale})`, transformOrigin: 'right bottom'}}>
       <div style={{fontFamily: JF.mono, fontSize: 18, letterSpacing: 2.5, color: CREAM}}>BALLOONS LAUNCHED</div>
       <div style={{fontFamily: JF.mono, fontSize: 14, letterSpacing: 1.5, color: 'rgba(244,239,230,0.6)', marginBottom: 10}}>PER MONTH · APPROX. (MIKESH)</div>
       <svg width={LAUNCH.length * (bw + gap) - gap} height={hMax + 48} style={{display: 'block', overflow: 'visible', marginTop: 26}}>
@@ -102,10 +103,10 @@ const LaunchChart: React.FC<{mi: number; mk: number; x: number; y: number; o: nu
   );
 };
 
-export type LandingMapProps = {at?: number; dur?: number; from?: string; to?: string; blyColor?: string; blyLabel?: boolean; dimOthers?: boolean; bars?: boolean;
+export type LandingMapProps = {at?: number; dur?: number; from?: string; to?: string; blyColor?: string; blyLabel?: boolean; dimOthers?: boolean; bars?: boolean; barsScale?: number;
   cam?: 'wide' | 'west' | CamKey[]};
 
-export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from = '1944-11-01', to = '1945-07-31', blyColor = CORAL, blyLabel = true, dimOthers = false, bars = true, cam = 'wide'}) => {
+export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from = '1944-11-01', to = '1945-07-31', blyColor = CORAL, blyLabel = true, dimOthers = false, bars = true, barsScale = 1, cam = 'wide'}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const d0 = day(from), d1 = day(to);
@@ -159,7 +160,7 @@ export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from =
             BALLOON INCIDENTS: {count}
           </div>
         </div>
-        {bars && mi >= 0 && <LaunchChart mi={Math.min(LAUNCH.length - 1, mi)} mk={mi > LAUNCH.length - 1 ? 1 : mk} x={1290} y={690} o={mapK} f={g} endAt={endAt} />}
+        {bars && mi >= 0 && <LaunchChart mi={Math.min(LAUNCH.length - 1, mi)} mk={mi > LAUNCH.length - 1 ? 1 : mk} x={1290} y={690} o={mapK} f={g} endAt={endAt} scale={barsScale} />}
         {blyLabel && blyK > 0 && <Label x={blyS.x} y={blyS.y - 10} text="BLY, OREGON" sub="5 MAY 1945" color={blyColor} opacity={ramp(g, blyF + 6, blyF + 12)} size={22} />}
         <Fine text="INCIDENTS: MIKESH (1973) FROM THE ARMY'S G-2 LIST · DATE FOUND OR REPORTED · MAP: NATURAL EARTH" opacity={0.7 * mapK} />
       </AbsoluteFill>}

@@ -3,10 +3,10 @@
 // t.at(...) - cut.
 //   0:00  "In the spring of 1942, a handful of American bombers took off from an aircraft carrier" B-25s on Hornet, then the take-off
 //   0:06  "and bombed Tokyo... furious." BW06, the raid over the rooftops
-//   0:18  "So Japan wanted to hit back... At America itself." the jet-stream map, wide (placeholder for PacificWinds)
-//   0:25  "There was just one problem... make it home." the map closer: the ocean, a dashed line, "too far"
+//   0:18  "So Japan wanted to hit back... At America itself." PacificWinds (3D): the North Pacific, no winds
+//   0:25  "There was just one problem... make it home." PacificWinds closer: dashed Tokyo -> Seattle, ≈ 4,800 MILES, "too far"
 //   0:34  "a secret army lab... What if the wind could do it?" the barometer on the dark desk
-//   0:43  "Way up high... a fast river of air" the map again, teal streams flowing west to east (placeholder for PacificWinds)
+//   0:43  "Way up high... a fast river of air" PacificWinds: the January 1945 winds switch on, flowing west to east
 //   0:51  "A Japanese weatherman had mapped it..." BW07, then the {jet stream} definition card
 //   0:57  "So the army made a plan." the Moffett balloon print, three notes for the three sentences
 //   1:05  "They just needed somebody to build thousands of them." a launch crew, "who would build them?"
@@ -21,7 +21,8 @@ import {bed} from '../kit/levels';
 import {Print} from '../kit/print';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {JAPAN, JetMap, MapLine, MapX, NoPhoto, OREGON} from './ch02/parts';
+import {NoPhoto} from './ch02/parts';
+import {PacificWinds} from '../fx/PacificWinds';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
@@ -55,52 +56,30 @@ const Raid: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   </AbsoluteFill>
 );
 
-// The jet-stream map placement for the wide shot and the closer one (map pixels -> screen inside the JetMap's own SVG).
-const MAP_X = 200;
-const MAP_Y = 200;
-const MAP_W = 1520;
+/** "So Japan wanted to hit back. Not at a ship, or an island. At America itself." The 3D Pacific, no winds yet. */
+const HitBack: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <PacificWinds at={1} />
+    <Highlight text="HIT BACK" x={170} y={116} size={96} at={t.at('hit') - a} seed={35} rot={-2} />
+    <Note text="not a ship, not an island" x={560} y={760} size={54} rot={-3} at={t.at('ship') - a} />
+    <Note text="America itself" x={1300} y={800} size={60} rot={-4} at={t.at('America itself') - a} />
+  </AbsoluteFill>
+);
 
-/** "So Japan wanted to hit back. Not at a ship, or an island. At America itself." */
-// TODO(3D): PacificWinds (the no-winds view: the ocean, Japan and America) drops in here when src/fx/PacificWinds.tsx is ready.
-const HitBack: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const z = interpolate(f, [0, 200], [1, 1.04], clamp);
-  return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <AbsoluteFill style={{transform: `scale(${z})`}}>
-        <JetMap x={MAP_X} y={MAP_Y} w={MAP_W} at={1} tag="Winter winds over the Pacific · Mikesh, Smithsonian, 1973" />
-      </AbsoluteFill>
-      <Highlight text="HIT BACK" x={170} y={116} size={96} at={t.at('hit') - a} seed={35} rot={-2} />
-      <Note text="not a ship, not an island" x={540} y={690} size={54} rot={-3} at={t.at('ship') - a} />
-      <Loop cx={1440} cy={545} rx={280} ry={190} at={t.at('America itself') - a} seed={7} />
-      <Note text="America itself" x={1290} y={840} size={60} rot={-4} at={t.at('America itself') - a} />
-    </AbsoluteFill>
-  );
-};
-
-/** "There was just one problem. America is on the other side of the biggest ocean on Earth. No Japanese bomber could fly that far..." */
-// TODO(3D): PacificWinds (the "too far" view, no winds) drops in here.
+/** "There was just one problem. America is on the other side of the biggest ocean on Earth. No Japanese bomber could fly that far..."
+ *  The same map, closer: the dashed Tokyo -> Seattle line, its length, and the piece's own "too far" on "far". */
 const TooFar: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const z = interpolate(f, [0, 280], [1.22, 1.28], clamp);
   const r = (p: string) => t.at(p) - a;
-  // a bomber's range: out from Japan about a third of the way, then an X
-  const reach: [number, number] = [640, 548];
+  const end = r('home') + 40;
   return (
     <AbsoluteFill>
-      <DarkPaper />
-      <AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: '42% 62%'}}>
-        <JetMap x={MAP_X} y={MAP_Y} w={MAP_W} at={-20}>
-          <MapLine pts={[JAPAN, [520, 500], [800, 470], [1080, 455], OREGON]} at={r('other side')} dur={22} dash />
-          <MapLine pts={[JAPAN, [430, 545], reach]} at={r('No Japanese')} dur={14} width={10} />
-          <MapX x={reach[0] + 30} y={reach[1]} at={r('far')} />
-        </JetMap>
-      </AbsoluteFill>
+      <PacificWinds at={-30} tooFarAt={r('far') - 34} cam={[
+        {f: 0, target: [0.5, 0, 0.3], dist: 19.5, yaw: 0, pitch: 0.95},
+        {f: end, target: [0.55, 0, 0.25], dist: 18.6, yaw: -0.03, pitch: 0.9},
+      ]} />
       <Highlight text="ONE PROBLEM" x={170} y={110} size={96} at={r('problem')} seed={37} rot={-2} />
-      <Note text="the biggest ocean on Earth" x={830} y={330} size={58} rot={-3} at={r('biggest')} />
-      <Note text="too far" x={560} y={820} size={72} rot={-5} at={r('far')} />
-      <Note text="no way home" x={1000} y={850} size={60} rot={-3} at={r('home')} />
+      <Note text="the biggest ocean on Earth" x={700} y={800} size={58} rot={-3} at={r('biggest')} />
+      <Note text="no way home" x={1180} y={590} size={60} rot={-3} at={r('home')} />
     </AbsoluteFill>
   );
 };
@@ -122,21 +101,15 @@ const Lab: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
-/** "Way up high, about 30,000 feet, there's a fast river of air that blows west to east, from Japan toward America." */
-// TODO(3D): PacificWinds (the winds flowing, real reanalysis data) drops in here; the drawn teal streams are its stand-in.
+/** "Way up high, about 30,000 feet, there's a fast river of air that blows west to east, from Japan toward America."
+ *  The winds switch on (real reanalysis data, January 1945); the piece's JET STREAM tab lands on "30,000 feet". */
 const River: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const z = interpolate(f, [0, 240], [1.02, 1.08], clamp);
   const r = (p: string) => t.at(p) - a;
   return (
     <AbsoluteFill>
-      <DarkPaper />
-      <AbsoluteFill style={{transform: `scale(${z})`}}>
-        <JetMap x={MAP_X} y={MAP_Y} w={MAP_W} at={1} flowAt={r('river')} tag="Winter winds over the Pacific · Mikesh, Smithsonian, 1973" />
-      </AbsoluteFill>
+      <PacificWinds at={-30} windsAt={r('high')} />
       <Highlight text="A RIVER OF AIR" x={170} y={116} size={92} at={r('river')} seed={41} rot={-2} />
-      <Note text="about 30,000 ft up" x={1180} y={126} size={58} rot={-3} at={r('30,000')} />
-      <Note text="west → east" x={820} y={840} size={66} rot={-3} at={r('west')} />
+      <Note text="west → east" x={820} y={800} size={66} rot={-3} at={r('west')} />
     </AbsoluteFill>
   );
 };
@@ -209,7 +182,7 @@ const Body: React.FC = () => {
       {useScene(cuts)}
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.22} />)}
       {['spring', 'furious', 'hit', 'problem', 'the wind could', 'river', 'plan', 'thousands'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.22} />)}
-      {['Tokyo', 'damage', 'flown', 'ship', 'America itself', 'biggest', 'far', 'home', 'secret', 'strange', 'plane', '30,000', 'west', 'mapped',
+      {['Tokyo', 'damage', 'flown', 'ship', 'America itself', 'biggest', 'far', 'home', 'secret', 'strange', 'plane', 'west', 'mapped',
         'Hang', 'Let the wind', 'Then let', 'grown', 'war'].map((p) => <Sfx key={p} at={at(p) - 2} src={WRITE.src} volume={WRITE.volume} />)}
       <Sfx at={2} src="sfx/paper_slap_soft.wav" volume={0.25} />
       <Sfx at={at('took')} src="sfx/paper_slap_soft.wav" volume={0.25} />

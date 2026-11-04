@@ -14,7 +14,8 @@
 //   1:16  "She went to the government"          the washi stack, records, other women, their stories
 //   1:22  "She called it"                        quote: "an act of resistance against being erased"
 //   1:26  "She wasn't the only one remembering"  JOHN TAKESHITA (no photo used)
-//   1:35  "When he was a boy"                    Tule Lake camp prints (tagged: not Takeshita), about fifty miles from Bly
+//   1:35  "When he was a boy"                    Tule Lake camp prints (tagged: not Takeshita)
+//   1:38  "in a camp ... about fifty miles from Bly" GearhartTerrain (3D): pull back from the monument to Tule Lake, ≈ 46 MILES
 //   1:42  "He started passing letters"           Japan <-> Bly, drawn
 //   1:46  "And in 1987"                          the Mitchell Monument, 1987
 //   1:51  "A thousand paper cranes"              BW05_cranes
@@ -36,6 +37,7 @@ import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
 import {NoPhoto, Plain, QuietPrint, Zoom} from './ch08/parts';
 import {DoorSign, CARD_PLANE} from './ch09/door';
+import {GearhartTerrain} from '../fx/GearhartTerrain';
 import {EndScreen, END_FRAMES} from './ch09/EndScreen';
 
 const N = words as Narration;
@@ -228,19 +230,27 @@ const Takeshita: React.FC<S> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** "When he was a boy, the US government had held him and his family in a camp for Japanese Americans, about fifty miles from Bly." */
+/** "When he was a boy, the US government had held him and his family" the Tule Lake camp prints (tagged: not Takeshita). */
 const Camp: React.FC<S> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    {/* TODO(3D): GearhartTerrain pullBack (Tule Lake and Gearhart Mountain, dashed "about 50 miles" line) on "about fifty miles from Bly"
-        (t.at('about fifty')); until it exists, the two camp prints and the note below carry the beat. */}
     <Print src="img/ch07_answer/tule_lake_birds_eye_view_wra.jpg" x={150} y={150} w={960} h={640} at={1} rot={-1} pos="50% 60%"
       tag="Tule Lake camp, California · War Relocation Authority / National Archives" />
-    <Print src="img/ch07_answer/tule_lake_boys_at_recess_wra.jpg" x={1230} y={120} w={460} h={600} at={t.at('held') - a} rot={2} pos="50% 70%"
+    <Print src="img/ch07_answer/tule_lake_boys_at_recess_wra.jpg" x={1230} y={120} w={460} h={600} at={t.at('boy') - a} rot={2} pos="50% 70%"
       tag="Tule Lake children · not John Takeshita · WRA" />
-    <Note text="about 50 miles from Bly" x={1080} y={820} size={52} rot={-3} at={t.at('fifty') - a} />
   </AbsoluteFill>
 );
+
+/** "...in a camp for Japanese Americans, about fifty miles from Bly." GearhartTerrain (3D): from the monument the camera pulls back south
+ *  to the Tule Lake camp; the dashed line and "≈ 46 MILES" (straight line; the narration's "about fifty") land on "about fifty". */
+const CampMap: React.FC<S> = ({t, a}) => {
+  const pull = 50;
+  return (
+    <AbsoluteFill>
+      <GearhartTerrain at={0} markerAt={-30} pullBackAt={t.at('fifty') - a - pull * 1.1} pullDur={pull} />
+    </AbsoluteFill>
+  );
+};
 
 /** "He started passing letters between women in Japan and the families in Bly." */
 const Letters: React.FC<S> = ({t, a}) => (
@@ -324,7 +334,7 @@ const Body: React.FC = () => {
   const c = {
     quote: at('Saving') - 1, call: at('Was the silence') - 1, aug: at('Then the war') - 1, lab: at('That morning') - 1, radio: at('Then he heard') - 1,
     wept: at('The grown-ups') - 1, dc: at('In Washington') - 1, rei: at('And Rei') - 1, book: at('Until one day') - 1, records: at('She went to') - 1,
-    erased: at('She called it') - 1, tak: at("She wasn't the only") - 1, camp: at('When he was a boy') - 1, letters: at('He started passing') - 1,
+    erased: at('She called it') - 1, tak: at("She wasn't the only") - 1, camp: at('When he was a boy') - 1, campMap: at('in a camp') - 1, letters: at('He started passing') - 1,
     memorial: at('And in 1987') - 1, cranes: at('A thousand paper cranes') - 1, peace: at('In Japan, a thousand') - 1, q: at("So let's go back") - 1,
     r1: at('A country wanted') - 1, r2: at('A girl glued') - 1, r3: at('A boy filled') - 1, why: at('And why did') - 1, six: at('And it left') - 1,
     closing: at('A war that came') - 1,
@@ -344,7 +354,8 @@ const Body: React.FC = () => {
     seq(c.records, <Records t={t} a={c.records} b={c.erased} />),
     seq(c.erased, <Erased t={t} a={c.erased} b={c.tak} />),
     seq(c.tak, <Takeshita t={t} a={c.tak} b={c.camp} />),
-    seq(c.camp, <Camp t={t} a={c.camp} b={c.letters} />),
+    seq(c.camp, <Camp t={t} a={c.camp} b={c.campMap} />),
+    seq(c.campMap, <CampMap t={t} a={c.campMap} b={c.letters} />),
     seq(c.letters, <Letters t={t} a={c.letters} b={c.memorial} />),
     seq(c.memorial, <Memorial t={t} a={c.memorial} b={c.cranes} />),
     seq(c.cranes, <Cranes t={t} a={c.cranes} b={c.peace} />),
@@ -369,7 +380,7 @@ const Body: React.FC = () => {
   const out = interpolate(frame, [THANKS, THANKS + XF], [1, 0], clamp);
   const notes: [string, number?][] = [['Seventeen'], ['if you find'], ["don't touch"], ['kept'], ['helped'], ['six'], ['never got'], ['argue'], ['both sides'],
     ['destroy'], ['burn'], ['Emperor'], ['vegetable'], ["He wasn't"], ['Byron'], ['ended the censorship'], ['grew'], ["still didn't"], ['decades'], ['records'], ['other women'], ['wrote'],
-    ['wife'], ['made those'], ['fifty'], ['letters'], ['women in Japan'], ['families in Bly'], ['1987'], ['memorial'], ['thousand'], ['folded'], ['wish'], ['regret'], ['revenge'], ['glued it'], ['sure'],
+    ['wife'], ['made those'], ['letters'], ['women in Japan'], ['families in Bly'], ['1987'], ['memorial'], ['thousand'], ['folded'], ['wish'], ['regret'], ['revenge'], ['glued it'], ['sure'],
     ['Because'], ['six', 2]];
   const titles: [string, number?][] = [['broke'], ['right call'], ['August'], ['realized'], ['John'], ['How does'], ['why did']];
   return (

@@ -3,8 +3,7 @@
 // t.at(...) - cut.
 //   0:00  "Just after sunset on a December evening, near a small town in Wyoming..." BW10, the flash and the parachute
 //   0:13  "Wyoming is about as far from the war as you can get. So what was that?" the incident map, pushing in on Wyoming
-//   0:18  "Five days later... Montana... Alaska... Christmas Eve... Oregon." prints of balloons found + a handwritten log
-//         (placeholder for the 3D LandingMap's first pins)
+//   0:18  "Five days later... Montana... Alaska... Christmas Eve... Oregon." LandingMap (3D, the west): the first pins, one by one
 //   0:27  "The Army was baffled." officials over a recovered envelope near Burns, Oregon
 //   0:35  "Where were they coming from? ... germs." the questions, written beside the collapsed balloon (coral)
 //   0:43  "In their reports... the word 'balloon.' The code word was 'paper.'" a typed line, struck out, PAPER stamped
@@ -22,6 +21,7 @@ import {maskRef} from '../kit/maskref';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
 import {CropPrint, RubberStamp, Typed, TypeSfx} from './ch05/parts';
+import {LandingMap, W3} from '../fx/LandingMap';
 
 const N = words as Narration;
 export const CH05_FRAMES = chapterFrames(N, LEAD);
@@ -73,24 +73,27 @@ const Far: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   </AbsoluteFill>
 );
 
-/** "Five days later, a paper balloon turned up in Montana. Then two in Alaska... Christmas Eve. Then Oregon." */
-const Landings: React.FC<{t: TL; a: number}> = ({t, a}) => (
-  <AbsoluteFill>
-    <DarkPaper />
-    {/* TODO(3D): LandingMap — the first pins one by one (Wyoming, Montana, Alaska x2, Oregon) replace these prints and the log */}
-    <CropPrint src="img/ch04_paper_balloon/fugo_landed_tremonton_utah_fig4.jpg" size={[1880, 2072]} x={130} y={140} w={470} h={380} fx={415} fy={570} z={[2.3, 2.3]}
-      at={t.at('balloon') - a} rot={-3} tag={`A balloon down near Tremonton, Utah, 1945 · ${MIKESH}`} />
-    <CropPrint src="img/ch04_paper_balloon/fugo_treed_balloon_pyramid_lake_fig28.jpg" size={[1440, 1104]} x={650} y={190} w={420} h={322} fx={720} fy={552}
-      at={t.at('Alaska') - a} rot={2} tag={`Recovering a balloon, Nevada, 1945 · ${MIKESH}`} />
-    <CropPrint src="img/ch04_paper_balloon/fugo_landed_tremonton_utah_fig4.jpg" size={[1880, 2072]} x={420} y={590} w={340} h={390} fx={1520} fy={1640} z={[2.45, 2.45]}
-      at={t.at('Oregon') - a} rot={-1} tag={`The same balloon, close up · ${MIKESH}`} />
-    <Note text="Wyoming" x={1200} y={200} size={58} rot={-2} at={2} />
-    <Note text="+5 days: Montana" x={1200} y={320} size={58} rot={-2} at={t.at('Montana') - a} />
-    <Note text="Alaska ×2" x={1200} y={440} size={58} rot={-2} at={t.at('Alaska') - a} />
-    <Note text="(one on Christmas Eve)" x={1240} y={540} size={46} rot={-2} at={t.at('Christmas') - a} />
-    <Note text="Oregon" x={1200} y={650} size={58} rot={-2} at={t.at('Oregon') - a} />
-  </AbsoluteFill>
-);
+/** "Five days later, a paper balloon turned up in Montana. Then two in Alaska... Christmas Eve. Then Oregon." LandingMap (3D), the
+ *  west: the first pins stand up in date order (Wyoming 6 Dec, Montana 11 Dec, Alaska 23 + 24 Dec, Oregon 31 Dec), the date window
+ *  timed so Montana lands on "Montana" and Oregon on "Oregon" (one day = DAY frames). */
+const Landings: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const r = (p: string) => t.at(p) - a;
+  const DAY = (r('Oregon') - r('Montana')) / 20; // 11 Dec -> 31 Dec
+  const start = r('Montana') - 8 * DAY; // 3 Dec
+  return (
+    <AbsoluteFill>
+      <LandingMap at={start} dur={28 * DAY} from="1944-12-03" to="1944-12-31" bars={false} cam={[
+        {f: 0, target: [W3(-134, 59)[0], 0, W3(-134, 59)[2]], dist: 18, yaw: 0.04, pitch: 1.0},
+        {f: start + 28 * DAY + 30, target: [W3(-132, 58)[0], 0, W3(-132, 58)[2]], dist: 17, yaw: 0, pitch: 0.96},
+      ]} />
+      <Note text="Wyoming" x={1490} y={860} size={52} rot={-2} at={start + 3 * DAY} />
+      <Note text="+5 days: Montana" x={1250} y={690} size={56} rot={-2} at={r('Montana')} />
+      <Note text="Alaska ×2" x={290} y={430} size={58} rot={-2} at={r('Alaska')} />
+      <Note text="one on Christmas Eve" x={290} y={530} size={46} rot={-2} at={r('Christmas')} />
+      <Note text="Oregon" x={850} y={760} size={58} rot={-2} at={r('Oregon')} />
+    </AbsoluteFill>
+  );
+};
 
 /** "The Army was baffled. Giant paper balloons, with Japanese writing on them, coming down in the middle of the country." */
 const Baffled: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
@@ -175,11 +178,10 @@ const Body: React.FC = () => {
       {useScene(cuts)}
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.22} />)}
       {['Wyoming', 'So what', 'baffled', 'germs', 'sand'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.22} />)}
+      <Sfx at={at('Montana') - Math.round(((at('Oregon') - at('Montana')) * 5) / 20) - 2} src={WRITE.src} volume={WRITE.volume} />{/* "Wyoming" */}
       {['December', 'flame', 'war', 'Montana', 'Alaska', 'Christmas', 'Oregon', 'Japanese', 'Where', 'what were', 'Fire', 'something worse', 'Not the', 'okay', 'know where']
         .map((p) => <Sfx key={p} at={at(p) - 2} src={WRITE.src} volume={WRITE.volume} />)}
-      <Sfx at={c.five + 2} src={WRITE.src} volume={WRITE.volume} />
       <Sfx at={at('explosion')} src="sfx/explosion_distant.wav" volume={0.3} />
-      {['balloon', 'Alaska', 'Oregon'].map((p) => <Sfx key={p} at={at(p) - 1} src="sfx/paper_slap_soft.wav" volume={0.25} />)}
       <Sfx at={c.army + 1} src="sfx/paper_slap_soft.wav" volume={0.25} />
       <Sfx at={c.where + 1} src="sfx/paper_slap_soft.wav" volume={0.25} />
       <Sfx at={c.code + 1} src="sfx/page_turn.wav" volume={0.25} />

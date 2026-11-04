@@ -5,18 +5,17 @@
 //   0:09  "What can you learn from a bag of sand? A lot" the sand jar, A LOT
 //   0:14  "Under a microscope..." the microscope + a round micrograph view: diatoms, then the tiny shells (forams)
 //   0:21  "And one thing was missing: coral." one foram shell; CORAL? written, crossed out; SOMEWHERE COLDER
-//   0:29  "Piece by piece... a few stretches of coastline... in Japan... a real launch site" Mikesh's launch-site map,
-//         Ichinomiya circled, the Ichinomiya sand vials (placeholder for the 3D SandToBeach)
+//   0:29  "Piece by piece... a few stretches of coastline... in Japan... a real launch site" SandToBeach (3D): the grains pull out
+//         to the Boso coast, Ichinomiya lights coral; the Ichinomiya sand vials
 //   0:38  "The same beach where Tatsuo and his friends had hunted for holes." BW01
 //   0:42  "Basically, CSI. About fifty years early." back on the microscope
-//   0:46  "...nobody had wanted to believe... They'd crossed the whole Pacific. On their own." Mikesh's winter winds map, a coral
-//         balloon riding the arrow across (placeholder for the 3D PacificWinds)
+//   0:46  "...nobody had wanted to believe... They'd crossed the whole Pacific. On their own." PacificWinds (3D): the January 1945
+//         winds, the coral balloon riding them from Ichinomiya to the Oregon coast
 //   0:58  "So now there was a harder question... What do you tell people?" the woods, dim; the big held tape (the midpoint)
 import React from 'react';
-import {AbsoluteFill, interpolate, Sequence, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Sequence} from 'remotion';
 import words from '../../public/audio/v2_ch06_the_sand.words.json';
-import {clamp} from '../lib/anim';
-import {Arrow, Highlight, Loop, Note, useGFrame, usePal} from '../kit/Kit';
+import {Highlight, Note} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {bed} from '../kit/levels';
@@ -25,6 +24,8 @@ import {Print} from '../kit/print';
 import {SilScene} from '../kit/silparallax';
 import {CH05_FRAMES} from './Ch05';
 import {CropPrint, NoPhoto, Scope, Strike} from './ch05/parts';
+import {PacificWinds} from '../fx/PacificWinds';
+import {SandToBeach} from '../fx/SandToBeach';
 
 const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
@@ -92,29 +93,16 @@ const NoCoral: React.FC<{t: TL; a: number}> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** "Piece by piece, they narrowed it down to a few stretches of coastline... in Japan. And one of the beaches they picked was a real launch site." */
-const Coast: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
+/** "Piece by piece, they narrowed it down to a few stretches of coastline... in Japan. And one of the beaches they picked was a real
+ *  launch site." SandToBeach (3D): back under the microscope (the empty CORAL? slot), one pull-out to the Boso peninsula on
+ *  "narrowed", and the Ichinomiya stretch lights coral on "real launch site"; the USGS vials of its sand beside it. */
+const Coast: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
-    <DarkPaper />
-    {/* TODO(3D): SandToBeach — sand grains pulling out to Japan's Pacific coast, the Ichinomiya stretch lighting coral, replaces this map */}
-    <CropPrint src="img/ch04_paper_balloon/launch_sites_map_fig16.jpg" size={[1720, 1885]} x={560} y={110} w={720} h={800} fx={860} fy={1150}
-      z={[1.15, 1.3]} a={0} b={b - a} at={1} rot={-1} tag={`Launch sites on Honshu · ${MIKESH}`}>
-      {(S) => {
-        const [sx, sy] = S(943, 1481);
-        const [ix, iy] = S(910, 1676);
-        return (
-          <>
-            <Loop cx={sx} cy={sy} rx={50} ry={150} at={t.at('stretches') - a} seed={64} tilt={-4} />
-            <Loop cx={ix} cy={iy} rx={60} ry={50} at={t.at('launch') - a} seed={65} />
-          </>
-        );
-      }}
-    </CropPrint>
-    <Note text="a few stretches of coast" x={150} y={250} size={56} rot={-4} at={t.at('stretches') - a} />
-    <Highlight text="IN JAPAN" x={170} y={400} size={96} at={t.at('Japan') - a} seed={66} rot={-3} />
-    <Print src="img/v2/sand/ichinomiya_beach_sand_samples_usgs.jpg" x={1340} y={430} w={440} h={330} at={t.at('real') - a} rot={3}
+    <SandToBeach at={0} slotAt={4} pullAt={t.at('narrowed') - a} pullDur={120} beachAt={t.at('real') - a} />
+    <Note text="a few stretches of coast" x={980} y={130} size={56} rot={-4} at={t.at('stretches') - a} />
+    <Highlight text="IN JAPAN" x={1180} y={230} size={92} at={t.at('Japan') - a} seed={66} rot={-3} />
+    <Print src="img/v2/sand/ichinomiya_beach_sand_samples_usgs.jpg" x={150} y={560} w={420} h={315} at={t.at('launch') - a} rot={-3}
       tag="Ichinomiya beach sand · USGS / PRI" />
-    <Note text="Ichinomiya" x={1370} y={280} size={64} rot={-4} at={t.at('launch') - a} />
   </AbsoluteFill>
 );
 
@@ -138,42 +126,17 @@ const CSI: React.FC<{t: TL; a: number}> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** A coral balloon riding a straight line from p to q between frames f0 and f1 (scene frames). */
-const Rider: React.FC<{p: [number, number]; q: [number, number]; f0: number; f1: number}> = ({p, q, f0, f1}) => {
-  const f = useCurrentFrame();
-  const g = useGFrame();
-  const pal = usePal();
-  if (g < f0) return null;
-  const u = interpolate(f, [f0, f1], [0, 1], clamp);
-  const x = p[0] + (q[0] - p[0]) * u;
-  const y = p[1] + (q[1] - p[1]) * u - Math.sin(u * Math.PI) * 60 - 34;
-  return (
-    <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>
-      <line x1={x} y1={y + 20} x2={x} y2={y + 46} stroke="#1a1814" strokeWidth={3} />
-      <rect x={x - 7} y={y + 44} width={14} height={9} fill="#1a1814" />
-      <circle cx={x} cy={y} r={24} fill={pal.subject} stroke="#1a1814" strokeWidth={3} />
-    </svg>
-  );
-};
-
-/** "But that answer meant something nobody had wanted to believe... They'd crossed the whole Pacific. On their own. And nothing could stop the next one." */
-const Crossed: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => {
-  const box = {x: 260, y: 300, w: 1400, h: 603};
-  const sc = box.w / 1990;
-  const P = (sx: number, sy: number): [number, number] => [box.x + sx * sc, box.y + sy * sc];
-  const [j, us] = [P(300, 560), P(1290, 520)];
+/** "But that answer meant something nobody had wanted to believe... They'd crossed the whole Pacific. On their own. And nothing could stop
+ *  the next one." PacificWinds (3D): the winds come on, the coral balloon rises off Ichinomiya and rides them to the Oregon coast. */
+const Crossed: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const r = (p: string) => t.at(p) - a;
   return (
     <AbsoluteFill>
-      <DarkPaper />
-      {/* TODO(3D): PacificWinds — the jet-stream particles with the coral balloon riding them replace this map and its arrow */}
-      <Print src="img/ch04_paper_balloon/jet_stream_winter_map_fig25bottom.jpg" x={box.x} y={box.y} w={box.w} h={box.h} at={1} fit="contain"
-        tag={`Winter winds over the Pacific · ${MIKESH}`} />
-      <Note text="nobody wanted to believe it" x={160} y={130} size={56} rot={-3} at={t.at('nobody') - a} />
-      <Note text="not from anywhere nearby" x={1000} y={200} size={56} rot={-3} at={t.at('nearby') - a} />
-      <Arrow x1={j[0]} y1={j[1]} x2={us[0]} y2={us[1]} bow={40} width={7} at={t.at('crossed') - a} dur={30} />
-      <Rider p={j} q={us} f0={t.at('crossed') - a} f1={t.at('own') - a + 6} />
-      <Note text="on their own" x={760} y={700} size={60} rot={-3} at={t.at('own') - a} />
-      <Highlight text="NOTHING COULD STOP IT" x={300} y={790} size={70} at={t.at('nothing') - a} seed={68} rot={-2} />
+      <PacificWinds at={1} windsAt={r('nobody')} balloonAt={r('nearby')} routeAt={r('crossed')} routeDur={r('nothing') - r('crossed')} />
+      <Note text="nobody wanted to believe it" x={140} y={124} size={52} rot={-3} at={r('nobody')} />
+      <Note text="not from anywhere nearby" x={1000} y={740} size={54} rot={-3} at={r('nearby')} />
+      <Note text="on their own" x={250} y={740} size={58} rot={-3} at={r('own')} />
+      <Highlight text="NOTHING COULD STOP IT" x={990} y={116} size={60} at={r('nothing')} seed={68} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -203,10 +166,10 @@ const Body: React.FC = () => {
     [c.lot, <Sequence from={c.lot} layout="none"><ALot t={t} a={c.lot} /></Sequence>],
     [c.micro, <Sequence from={c.micro} layout="none"><Micro t={t} a={c.micro} /></Sequence>],
     [c.coral, <Sequence from={c.coral} layout="none"><NoCoral t={t} a={c.coral} /></Sequence>],
-    [c.coast, <Sequence from={c.coast} layout="none"><Coast t={t} a={c.coast} b={c.beach} /></Sequence>],
+    [c.coast, <Sequence from={c.coast} layout="none"><Coast t={t} a={c.coast} /></Sequence>],
     [c.beach, <Sequence from={c.beach} layout="none"><Beach t={t} a={c.beach} b={c.csi} /></Sequence>],
     [c.csi, <Sequence from={c.csi} layout="none"><CSI t={t} a={c.csi} /></Sequence>],
-    [c.crossed, <Sequence from={c.crossed} layout="none"><Crossed t={t} a={c.crossed} b={c.tell} /></Sequence>],
+    [c.crossed, <Sequence from={c.crossed} layout="none"><Crossed t={t} a={c.crossed} /></Sequence>],
     [c.tell, <Sequence from={c.tell} layout="none"><Tell t={t} a={c.tell} b={END} /></Sequence>],
   ];
   return (
@@ -223,6 +186,7 @@ const Body: React.FC = () => {
       <Sfx at={1} src="sfx/paper_slap_soft.wav" volume={0.25} />
       {['sand', 'microscope', 'real'].map((p) => <Sfx key={p} at={at(p) - 1} src="sfx/paper_slap_soft.wav" volume={0.25} />)}
       <Sfx at={c.beach + 2} src="sfx/waves_beach.wav" volume={0.12} />
+      <Sfx at={at('nobody')} src="sfx/wind_high.wav" volume={0.08} />
       <Sfx at={at('crossed')} src="sfx/wind_high.wav" volume={0.1} />
     </>
   );

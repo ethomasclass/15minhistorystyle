@@ -10,8 +10,8 @@
 //   0:45  "The rules were strict. No hairpins..." BW08 dimmed, the rules as notes
 //   0:52  "military police... top military secret" the girls' photo, a TOP SECRET stamp
 //   0:58  "What they were making, nobody explained. Rei just glued." BW09, the lamp beam
-//   1:04  "About 600 pieces made one balloon, 33 feet across..." the Moffett balloon (coral, existing mask), a three-story house drawn to scale
-//   1:11  "A metal ring of sandbags..." the ballast ring + sandbag + a drawn rise-and-sink line (placeholder for AltitudeRibbon)
+//   1:04  "About 600 pieces made one balloon, 33 feet across..." BalloonAssembly (3D): 600 panels, then the house and 33 FT
+//   1:11  "A metal ring of sandbags..." AltitudeRibbon (3D, wide): three days of rise and sink, 32 sandbags to 0, the bombs
 //   1:18  "Rei didn't know any of that... decades." BW09 again, quieter
 import React from 'react';
 import {AbsoluteFill, interpolate, Sequence, useCurrentFrame} from 'remotion';
@@ -24,7 +24,9 @@ import {bed} from '../kit/levels';
 import {Print} from '../kit/print';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {CropPrint, DrawPath, NoPhoto, RubberStamp, TintPrint} from './ch02/parts';
+import {CropPrint, DrawPath, NoPhoto, RubberStamp} from './ch02/parts';
+import {AltitudeRibbon} from '../fx/AltitudeRibbon';
+import {BalloonAssembly} from '../fx/BalloonAssembly';
 
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
@@ -179,64 +181,22 @@ const Glued: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   </AbsoluteFill>
 );
 
-// The Moffett print: 3234 x 4000, the balloon's box in the mask is (564, 183)-(2635, 2418) source px.
-const MOF = {x: 300, y: 100, w: 660};
-const MS = MOF.w / 3234;
-const bx = (sx: number) => MOF.x + sx * MS;
-const by = (sy: number) => MOF.y + sy * MS;
+/** "About 600 pieces made one balloon, 33 feet across. As tall as a three-story house." BalloonAssembly (3D): 600 panels fill in
+ *  with the counter, then the camera eases back for the house and the 33-ft dimensions (the piece's own labels carry the numbers). */
+const Size: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <BalloonAssembly at={2} fillDur={t.at('balloon') - a} houseAt={t.at('across') - a - 20} />
+  </AbsoluteFill>
+);
 
-/** "About 600 pieces made one balloon, 33 feet across. As tall as a three-story house." */
-// TODO(3D): BalloonAssembly (a drawn balloon filling in panel by panel, a counter to 600, then the house for scale) drops in here
-// when src/fx/BalloonAssembly.tsx is ready; the coral Moffett print and the drawn house below are its stand-in.
-const Size: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const r = (p: string) => t.at(p) - a;
-  const [l, rr, top] = [bx(564), bx(2635), by(183)];
-  const bottom = top + (rr - l); // the sphere is as tall as it is wide
-  const mid = (top + bottom) / 2;
-  const hx = 1360;
-  const hw = 280;
-  const roof = (bottom - top) * 0.26;
-  const fl = (bottom - top - roof) / 3;
-  const house = `M${hx},${bottom} L${hx},${top + roof} L${hx + hw / 2},${top} L${hx + hw},${top + roof} L${hx + hw},${bottom} Z ` +
-    `M${hx},${top + roof + fl} L${hx + hw},${top + roof + fl} M${hx},${top + roof + 2 * fl} L${hx + hw},${top + roof + 2 * fl} ` +
-    `M${hx + hw / 2 - 26},${bottom} L${hx + hw / 2 - 26},${bottom - 70} L${hx + hw / 2 + 26},${bottom - 70} L${hx + hw / 2 + 26},${bottom}`;
-  return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <TintPrint src="img/ch04_paper_balloon/moffett_balloon_inflated_hangar_1945.jpg" size={[3234, 4000]} mask="img/masks/moffett_subject_a.png"
-        x={MOF.x} y={MOF.y} w={MOF.w} at={1} tintAt={6} tag="A recovered balloon at Moffett Field, 1945 · US Navy" />
-      <Note text="about 600 pieces of paper" x={1040} y={760} size={54} rot={-3} at={r('600')} />
-      <DrawPath d={`M${l},${mid - 22} L${l},${mid + 22} M${l},${mid} L${rr},${mid} M${rr},${mid - 22} L${rr},${mid + 22}`} at={r('33')} dur={8} width={6} />
-      <Note text="33 feet across" x={l + 70} y={mid - 100} size={58} rot={-3} at={r('33')} />
-      <DrawPath d={`M${rr + 20},${top} L${hx + hw / 2},${top} M${rr + 20},${bottom} L${hx},${bottom}`} at={r('tall')} dur={10} width={4} dash="14 14" />
-      <DrawPath d={house} at={r('three-story')} dur={14} width={7} />
-      <Note text="a three-story house" x={1250} y={bottom + 30} size={52} rot={-3} at={r('house')} />
-    </AbsoluteFill>
-  );
-};
-
-/** "A metal ring of sandbags kept it at the right height for three days. Then it dropped its bombs and blew itself up." */
-// TODO(3D): AltitudeRibbon (rise, sink, drop two bags, three days) drops in here when src/fx/AltitudeRibbon.tsx is ready; the
-// drawn sawtooth below is its stand-in.
-const Ring: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const r = (p: string) => t.at(p) - a;
-  const saw: [number, number][] = [[1100, 830], [1170, 660]];
-  for (let i = 0; i < 6; i++) saw.push([1170 + i * 100 + 80, 735], [1170 + i * 100 + 100, 660]);
-  const d = saw.map(([x, y], i) => `${i ? 'L' : 'M'}${x},${y}`).join(' ');
-  return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <Print src="img/ch04_paper_balloon/ballast_ring_on_ground_nara285260.jpg" x={160} y={150} w={860} h={664} at={1} rot={-1}
-        tag="The ballast ring of a recovered balloon · National Archives" />
-      <Prop name="sandbag" x={1320} y={150} w={250} at={r('sandbags')} from="top" />
-      <Note text="a ring of sandbags" x={1100} y={480} size={54} rot={-3} at={r('sandbags')} />
-      <DrawPath d={d} at={r('right height')} dur={30} width={6} />
-      <Note text="3 days" x={1600} y={760} size={60} rot={-4} at={r('three days')} />
-      <Note text="then it dropped its bombs" x={190} y={860} size={54} rot={-2} at={r('dropped')} />
-      <Note text="and blew itself up" x={1050} y={860} size={54} rot={-3} at={r('blew')} />
-    </AbsoluteFill>
-  );
-};
+/** "A metal ring of sandbags kept it at the right height for three days. Then it dropped its bombs and blew itself up."
+ *  AltitudeRibbon (3D): the three-day sawtooth, two sandbags at every low point, 32 -> 0, the bombs on "bombs". */
+const Ring: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <AltitudeRibbon at={2} bombsAt={t.at('bombs') - a} cam="wide" />
+    <Note text="and blew itself up" x={1180} y={700} size={54} rot={-3} at={t.at('blew') - a} />
+  </AbsoluteFill>
+);
 
 /** "Rei didn't know any of that. She wouldn't find out for decades." */
 const Decades: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
@@ -277,7 +237,7 @@ const Body: React.FC = () => {
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.22} />)}
       {['kids', 'biggest', 'normal', 'eating', 'strict'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.22} />)}
       {['1944', 'young', 'cushions', 'gluing', 'door', 'bark', 'light', 'glue', 'root', 'blue', 'show', 'edible', 'food', 'tells', 'hairpins', 'Fingernails',
-        'Nothing', 'police', 'never', 'nobody', 'Panel', '600', '33', 'house', 'sandbags', 'three days', 'dropped', 'blew', 'decades'].map((p) =>
+        'Nothing', 'police', 'never', 'nobody', 'Panel', 'blew', 'decades'].map((p) =>
         <Sfx key={p} at={at(p) - 2} src={WRITE.src} volume={WRITE.volume} />)}
       <Sfx at={at('secret')} src="sfx/stamp.wav" volume={0.32} />
       <Sfx at={c.theaters + 2} src="sfx/paper_slap_soft.wav" volume={0.25} />
@@ -288,7 +248,6 @@ const Body: React.FC = () => {
       <Sfx at={at('tinted')} src="sfx/paper_slap_soft.wav" volume={0.3} />
       <Sfx at={c.size + 1} src="sfx/paper_slap_soft.wav" volume={0.25} />
       <Sfx at={c.ring + 1} src="sfx/paper_slap_soft.wav" volume={0.25} />
-      <Sfx at={at('sandbags')} src="sfx/paper_slap_soft.wav" volume={0.3} />
       <Sfx at={c.glued + 4} src="sfx/paper_rustle.wav" volume={0.18} />
     </>
   );

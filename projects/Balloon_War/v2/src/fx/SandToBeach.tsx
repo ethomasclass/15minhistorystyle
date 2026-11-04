@@ -222,7 +222,7 @@ export const SandToBeach: React.FC<SandToBeachProps> = ({at = 0, slotAt, pullAt,
       <SyncCam cam={cam} />
       <ambientLight intensity={0.85} />
       <directionalLight position={[-4, 9, 5]} intensity={1.7} />
-      <TerrainSlab T={T} lines={ramp(f, pAt + pullDur * 0.25, pAt + pullDur * 0.7)} />
+      <TerrainSlab T={T} lines={ramp(f, pAt + pullDur * 0.08, pAt + pullDur * 0.45)} />
       <Field o={fieldO} g={g} at={at} />
       {slotK > 0 && fieldO > 0.01 && (
         <group position={[C0[0] + SLOT[0], C0[1] + 0.0004, C0[2] + SLOT[1]]}>

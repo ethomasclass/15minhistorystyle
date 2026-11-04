@@ -18,20 +18,21 @@
 //   1:35  "As the weeks went by and nobody got hurt" tally marks
 //   1:39  "At some point, Price asked to warn the public... The Navy said no." BW12, slower (no date implied)
 //   1:45  "Back in Japan... the plants making the gas" the Otsu launch site
-//   1:51  "five months of silence... in April 1945, they gave up." launches per month to zero (placeholder for the 3D LandingMap)
+//   1:51  "five months of silence... in April 1945, they gave up." LandingMap (3D): pins Jan -> May, launches per month to zero
 //   1:59  "The silence had worked." BW12;  2:02 the plug over BW13, a small "subscribe ↓" only
 //   2:11  "one more balloon in this story. And it had already landed." BW03, dim
 import React from 'react';
 import {AbsoluteFill, Sequence} from 'remotion';
 import words from '../../public/audio/v2_ch07_the_newspaperman.words.json';
 import collapsedMask from '../../public/img/masks/collapsed.json';
-import {Arrow, Highlight, JF, Loop, Note} from '../kit/Kit';
+import {Arrow, Highlight, Loop, Note} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
 import {bed} from '../kit/levels';
 import {maskRef} from '../kit/maskref';
 import {SilScene} from '../kit/silparallax';
-import {CropPrint, FrontPage, LaunchBars, NoPhoto, Tally, Typed, TypeSfx} from './ch05/parts';
+import {CropPrint, FrontPage, NoPhoto, Tally, Typed, TypeSfx} from './ch05/parts';
+import {LandingMap} from '../fx/LandingMap';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -246,20 +247,22 @@ const Otsu: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   </AbsoluteFill>
 );
 
-/** "And after five months of silence, the generals had no proof... So in April 1945, they gave up." */
+/** "And after five months of silence, the generals had no proof... So in April 1945, they gave up." LandingMap (3D): the incidents
+ *  keep standing up month by month while the launches-per-month chart grows, then drops to zero in April ("launches stop"). The date
+ *  window is timed so 1 April lands on "April" and 1 May on "up". */
 const GaveUp: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const b0 = t.at('after five') - a;
+  const r = (p: string) => t.at(p) - a;
+  const DAY = (r('up') - r('April')) / 30; // 1 Apr -> 1 May
+  const start = r('April') - 90 * DAY; // 1 Jan
   return (
     <AbsoluteFill>
-      <DarkPaper />
-      {/* TODO(3D): LandingMap — its launches-per-month counter dropping to zero in April replaces these drawn bars */}
-      <LaunchBars x={330} base={830} ats={[b0, b0 + 14, b0 + 28, b0 + 42, b0 + 56, t.at('April') - a, t.at('gave') - a]} />
-      <div style={{position: 'absolute', left: 330, top: 900, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase'}}>
-        Balloons launched per month, 1944–45 · {MIKESH}
-      </div>
-      <Note text="5 months of silence" x={250} y={130} size={58} rot={-3} at={t.at('silence', 3) - a} />
-      <Note text="no proof it worked" x={290} y={240} size={58} rot={-3} at={t.at('no proof') - a} />
-      <Highlight text="THEY GAVE UP" x={1060} y={130} size={84} at={t.at('gave') - a} seed={86} rot={-3} />
+      <LandingMap at={start} dur={123 * DAY} from="1945-01-01" to="1945-05-04" barsScale={1.4} cam={[
+        {f: 0, target: [1.3, 0, 1.9], dist: 24, yaw: 0, pitch: 0.98},
+        {f: start + 123 * DAY + 30, target: [1.5, 0, 1.75], dist: 22.6, yaw: -0.04, pitch: 0.92},
+      ]} />
+      <Note text="5 months of silence" x={160} y={330} size={54} rot={-3} at={t.at('silence', 3) - a} />
+      <Note text="no proof it worked" x={190} y={430} size={54} rot={-3} at={r('no proof')} />
+      <Highlight text="THEY GAVE UP" x={1120} y={120} size={84} at={r('gave')} seed={86} rot={-3} />
     </AbsoluteFill>
   );
 };

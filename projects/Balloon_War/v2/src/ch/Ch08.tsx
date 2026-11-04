@@ -5,7 +5,8 @@
 //   0:00  "May 5, 1945. A Saturday."              Gearhart Mountain pines (1964), the date
 //   0:07  "The night before, in ... Bly, Oregon"  the Bly District, 1947; the chocolate cake
 //   0:14  "She was 26, and pregnant"              a quiet page for Elsie (no photo used): 26, first child, almost stayed home
-//   0:20  "But in the morning ... five kids"      period stand-in: picnickers in the pines, Klamath Falls 1942 (tagged: strangers)
+//   0:20  "But in the morning ... Archie Mitchell" period stand-in: picnickers in the pines, Klamath Falls 1942 (tagged: strangers)
+//   0:24  "drove five kids ... up into the mountains" GearhartTerrain (3D, quiet): Bly and Gearhart Mountain, one small cream marker
 //   0:28  "Two of them ... Dick and Joan Patzke"  their names in plain type over the forest; ten kids; a brother lost in the war
 //   0:37  "While Archie parked the car"           BW04_bly_road (the car, no people)
 //   0:41  "They found something"                  the hills around Gearhart Mountain, slow push; Archie's words in plain type
@@ -15,7 +16,7 @@
 //   1:06  "When Dick and Joan's sister Dottie"    the slip fades; Dottie's question in plain type on black
 //   1:13  "the only people killed"                the Mitchell Monument
 //   1:19  "here's the hardest part"               the pines, the balloon "hadn't just arrived"
-//   1:22  "lying in those woods for about a month" launches by month (stand-in for the LandingMap), the Bly pin in cream
+//   1:22  "lying in those woods for about a month" LandingMap (3D, the west): April into May, launches to zero, Bly pin in cream
 //   1:28  "The silence beat the balloons"         the 1945 press code
 //   1:33  "almost nobody in Bly knew"             the pines, closer
 //   1:40  "an unidentified object"                typed on black
@@ -30,7 +31,9 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {SilScene} from '../kit/silparallax';
 import {FullPhoto, NoPhoto, Plain, QuietPrint, Typed, Zoom} from './ch08/parts';
 import {NameSlip} from './ch08/names';
-import {Launches} from './ch08/launches';
+import {GearhartTerrain} from '../fx/GearhartTerrain';
+import {LandingMap} from '../fx/LandingMap';
+import {CREAM} from '../fx/kit3d';
 
 const N = words as Narration;
 export const CH08_FRAMES = chapterFrames(N, LEAD);
@@ -78,19 +81,25 @@ const Elsie: React.FC<S> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** "But in the morning, she and her husband, a pastor named Archie Mitchell, drove five kids... to fish and have lunch." */
+/** "But in the morning, she and her husband, a pastor named Archie Mitchell," a period stand-in print of picnickers in the pines. */
 const Morning: React.FC<S> = ({t, a, b}) => (
   <AbsoluteFill>
     <DarkPaper />
-    {/* TODO(3D): GearhartTerrain (the Gearhart Mountain area as a quiet teal-contour slab, one small cream marker, no figures) for
-        "up into the mountains": a beat from "up into the mountains" (t.at('up into')) on the slab, then this stand-in print. */}
     <Zoom a={0} b={b - a} s={1.05} ox={760} oy={480}>
       <QuietPrint src={`${IMG}klamath_falls_picnickers_in_pines_1942.jpg`} x={220} y={120} w={880} h={720} at={0} rot={1} pos="50% 55%" crop={1.14}
         tag="Klamath Falls, 1942 · not the Mitchell party · Russell Lee, Library of Congress" />
     </Zoom>
-    <Note text="Archie, a pastor" x={1170} y={230} size={52} rot={-3} at={t.at('pastor') - a} />
-    <Note text="five kids from church" x={1150} y={420} size={54} rot={-3} at={t.at('five') - a} />
-    <Note text="to fish, and have lunch" x={1170} y={610} size={52} rot={-3} at={t.at('fish') - a} />
+    <Note text="Archie, a pastor" x={1170} y={300} size={52} rot={-3} at={t.at('pastor') - a} />
+  </AbsoluteFill>
+);
+
+/** "...drove five kids from their church up into the mountains to fish and have lunch." GearhartTerrain (3D), quiet: the real ground
+ *  between Bly and Gearhart Mountain, a slow drift, one small cream marker rising (no tab: nothing has happened yet). */
+const Mountains: React.FC<S> = ({t, a}) => (
+  <AbsoluteFill>
+    <GearhartTerrain at={0} markerAt={t.at('up into') - a} markerLabel={null} />
+    <Note text="five kids from church" x={1120} y={150} size={52} rot={-3} at={t.at('five') - a} />
+    <Note text="to fish, and have lunch" x={1120} y={250} size={52} rot={-3} at={t.at('fish') - a} />
   </AbsoluteFill>
 );
 
@@ -173,14 +182,19 @@ const Hardest: React.FC<S> = ({t, a, b}) => (
   </AbsoluteFill>
 );
 
-/** "It had probably been lying in those woods for about a month. Since around the time Japan gave up." */
-const Month: React.FC<S> = ({t, a}) => (
-  <AbsoluteFill>
-    <DarkPaper />
-    {/* TODO(3D): LandingMap (pins in date order, launches dropping to zero in April, one cream pin at Bly on 5 May) */}
-    <Launches at={2} pin={t.at('lying') - a} month={t.at('month') - a} gaveUp={t.at('gave up') - a} />
-  </AbsoluteFill>
-);
+/** "It had probably been lying in those woods for about a month. Since around the time Japan gave up." LandingMap (3D), the west:
+ *  April into May, the launches chart dropping to zero ("launches stop"), the Bly pin on 5 May in CREAM (no coral in ch08), the
+ *  others dimmed; the date window lands 5 May on "month". */
+const Month: React.FC<S> = ({t, a}) => {
+  const DAY = (t.at('month') - a - 2) / 30; // 5 Apr -> 5 May
+  return (
+    <AbsoluteFill>
+      <LandingMap at={2} dur={33 * DAY} from="1945-04-05" to="1945-05-08" blyColor={CREAM} dimOthers cam="west" />
+      <Note text="about a month" x={300} y={560} size={56} rot={-3} at={t.at('month') - a} />
+      <Note text="since Japan gave up" x={1120} y={420} size={52} rot={-3} at={t.at('gave up') - a} />
+    </AbsoluteFill>
+  );
+};
 
 /** "The silence beat the balloons. Japan never learned they worked, so it stopped." */
 const SilenceWon: React.FC<S> = ({t, a, b}) => (
@@ -232,7 +246,7 @@ const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
   const c = {
-    night: at('The night before') - 1, elsie: at('She was 26') - 1, morning: at('But in the morning') - 1, patzke: at('Two of them') - 1,
+    night: at('The night before') - 1, elsie: at('She was 26') - 1, morning: at('But in the morning') - 1, mountains: at('drove') - 1, patzke: at('Two of them') - 1,
     parked: at('While Archie') - 1, found: at('They found') - 1, later: at('He later said') - 1, black: t.end('too late') + 2,
     only: at('They were the only') - 1, hardest: at("And here's the hardest") - 1, month: at('It had probably') - 1,
     silence: at('The silence beat') - 1, nobody: at('But the same silence') - 1, papers: at('Even then') - 1, germany: at('Three days later') - 1,
@@ -243,7 +257,8 @@ const Body: React.FC = () => {
     seq(0, <DateCard t={t} a={0} b={c.night} />),
     seq(c.night, <Bly t={t} a={c.night} b={c.elsie} />),
     seq(c.elsie, <Elsie t={t} a={c.elsie} b={c.morning} />),
-    seq(c.morning, <Morning t={t} a={c.morning} b={c.patzke} />),
+    seq(c.morning, <Morning t={t} a={c.morning} b={c.mountains} />),
+    seq(c.mountains, <Mountains t={t} a={c.mountains} b={c.patzke} />),
     seq(c.patzke, <Patzke t={t} a={c.patzke} b={c.parked} />),
     seq(c.parked, <Parked t={t} a={c.parked} b={c.found} />),
     seq(c.found, <Found t={t} a={c.found} b={c.later} />),
@@ -258,7 +273,7 @@ const Body: React.FC = () => {
     seq(c.germany, <Germany t={t} a={c.germany} b={end} />),
   ];
   // soft cuts only before the silence; none into the black, the names or Dottie
-  const soft = [c.night, c.elsie, c.morning, c.patzke, c.parked, c.found, c.later, c.only, c.hardest, c.month, c.silence, c.nobody, c.germany];
+  const soft = [c.night, c.elsie, c.morning, c.mountains, c.patzke, c.parked, c.found, c.later, c.only, c.hardest, c.month, c.silence, c.nobody, c.germany];
   const notes = ['Saturday', 'About two', 'Bly', 'chocolate', '26', 'pregnant', 'almost stayed', 'pastor', 'five kids', 'fish', 'ten', 'One of their', 'forty', 'rumors',
     'only', 'mainland', "hadn't just", 'month', 'gave up', 'silence beat', 'never learned', 'stopped', 'almost nobody', 'Nobody had', 'Germany', 'bigger'];
   const names: [string, number][] = [['Joan', 2], ['Dick', 2], ['Jay', 1], ['Eddie', 1], ['Sherman', 1]];

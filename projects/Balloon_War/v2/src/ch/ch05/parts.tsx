@@ -9,7 +9,6 @@
 //   RubberStamp an inked rubber stamp slammed on a sheet
 //   Strike      a hand-drawn scratch line through a note
 //   Tally       weeks as hand-drawn tally marks
-//   LaunchBars  launches per month (Mikesh), a drawn bar chart: the placeholder for the 3D LandingMap's launch counter
 import React from 'react';
 import {Audio, Img, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../../lib/anim';
@@ -228,36 +227,4 @@ export const Tally: React.FC<{x: number; y: number; n: number; at: number; every
     else marks.push(<path key={i} d={`M${gx - h * 0.1},${y + h * 0.8} L${gx + h * 0.62},${y + h * 0.15}`} stroke={pal.mark} strokeWidth={7} strokeLinecap="round" />);
   }
   return <svg style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}} width={1920} height={1080}>{marks}</svg>;
-};
-
-/**
- * Balloons launched per month (Mikesh 1973: Nov 700, Dec 1,200, Jan 2,000, Feb 2,500, Mar 2,500, early Apr 400), then 0.
- * `ats` = the frame each bar rises (7 entries: Nov..Apr and the zero month).
- */
-export const LaunchBars: React.FC<{x: number; base: number; ats: number[]; maxH?: number}> = ({x, base, ats, maxH = 480}) => {
-  const g = useGFrame();
-  const f = useCurrentFrame();
-  const pal = usePal();
-  const data: [string, number][] = [['NOV', 700], ['DEC', 1200], ['JAN', 2000], ['FEB', 2500], ['MAR', 2500], ['APR', 400], ['MAY', 0]];
-  const bw = 130;
-  const gap = 56;
-  return (
-    <>
-      <div style={{position: 'absolute', left: x - 20, top: base, width: data.length * (bw + gap) + 10, height: 4, background: 'rgba(244,239,230,0.7)'}} />
-      {data.map(([m, v], i) => {
-        if (g < ats[i]) return null;
-        const p = interpolate(f, [ats[i], ats[i] + 10], [0, 1], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 3)});
-        const hgt = (v / 2500) * maxH * p;
-        const bx = x + i * (bw + gap);
-        return (
-          <React.Fragment key={m}>
-            <div style={{position: 'absolute', left: bx, top: base - hgt, width: bw, height: hgt, background: 'rgba(244,239,230,0.85)', boxShadow: `inset 0 0 0 4px ${pal.mark}`}} />
-            <div style={{position: 'absolute', left: bx, top: base + 16, width: bw, textAlign: 'center', fontFamily: JF.mono, fontSize: 28, letterSpacing: 2, color: 'rgba(244,239,230,0.85)'}}>{m}</div>
-            <div style={{position: 'absolute', left: bx - 20, top: base - hgt - 46, width: bw + 40, textAlign: 'center', fontFamily: JF.mono, fontWeight: 700, fontSize: v ? 30 : 44,
-              color: v ? '#f4efe6' : pal.mark, opacity: p}}>{v.toLocaleString('en-US')}</div>
-          </React.Fragment>
-        );
-      })}
-    </>
-  );
 };
