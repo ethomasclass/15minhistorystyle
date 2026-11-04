@@ -14,8 +14,13 @@ For a plane k the recipe gives a mask (bool, painting px). build():
     rim) and up to EXTEND px beyond, the plane continues with a smooth fill grown from its own pixels, so a slide shows this
     plane's colours, never a hole or the nearer object's outline.
   * L3: the painting with everything nearer (plus EDGE px) filled from the back plate's own pixels (push-pull fill: smooth,
-    no streaks), except `keep` areas (smooth gradients a soft-edged nearer plane fades into).
-  * `alpha`: an optional float alpha for a plane (a feathered edge into a smooth gradient, e.g. BW14's ceiling into the glow).
+    no streaks; or row by row for banded skies and beaches), except `keep` areas.
+  * `alpha`: an optional float alpha for a plane (a soft matte, e.g. BW15's chimney smoke fading into the sky).
+  * `shadow`: the paper-cut style paints a soft drop shadow beside each shape; it travels with the shape (black + alpha) and is
+    filled out of the planes behind, so no shadow outline is left there.
+Helpers for recipes: front_ink (ink connected to the ground), tiers (flat tones by brightness, rims kept with the nearer
+shape), snap (a rough polygon moved onto the painting's real edge), below_top (a ground plane's extension stays below its
+top edge), touching / big / close.
 """
 import json
 import os
@@ -165,7 +170,7 @@ def rowfill(im, known, scale=0.5):
             continue
         for c in range(3):
             out[y, ~k, c] = np.interp(xs[~k], xs[k], s_im[y, k, c])
-    sm = cv2.GaussianBlur(out, (0, 0), sigmaX=1.5, sigmaY=4)
+    sm = cv2.GaussianBlur(out, (0, 0), sigmaX=2, sigmaY=9)
     out = np.where(s_kn[..., None], out, sm)
     f = cv2.resize(out, (W, H), interpolation=cv2.INTER_CUBIC)
     return np.where(known[..., None], im, np.clip(f, 0, 255).astype(np.uint8))
@@ -205,11 +210,13 @@ def snap(pic, mask, band=14, ref=16, scale=0.5):
 
 
 # ───────────────────────── build ─────────────────────────
-def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='', fill_scale=0.5, shadow=0, back_fill='smooth'):
+def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='', fill_scale=0.5, shadow=0, back_fill='smooth', paint=None):
     """masks: [m0, m1, m2] bool or None (nearer wins). alpha: optional per-plane float alpha overriding the soft mask.
     keep: bool areas where the back plate keeps the painting even though a nearer plane covers it. ext: optional per-plane
     bool masks where that plane continues under nearer planes (default: EXTEND px around its own pixels).
-    back_fill: 'rows' fills the back plate row by row (for horizontal bands of sky, mountains and mist).
+    back_fill: 'rows' fills the back plate row by row (for horizontal bands of sky, mountains and mist); 'mixed' fills
+    narrow gaps (behind a trunk) row by row and wide ones smoothly.
+    paint: optional per-plane (mask, rgb image): those pixels of the plane take that colour (an un-mixed soft matte).
     shadow: px of the soft drop shadow the paper-cut style paints beside each shape. It travels with the shape (as black with
     alpha = how much it darkens what is behind) and is filled out of the planes behind, so no shadow ghost is left there."""
     im, H, W = pic.im, pic.H, pic.W
@@ -246,6 +253,8 @@ def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='
             sa = cv2.GaussianBlur(sa, (0, 0), 1.0) * z
             rgb = np.where(z[..., None] & (sa[..., None] > a[..., None]), np.uint8(8), rgb)
             a = np.maximum(a, sa)
+        if paint and paint[k] is not None:
+            rgb = np.where(paint[k][0][..., None], paint[k][1], rgb)
         rgba = np.dstack([rgb, (np.clip(a, 0, 1) * 255).astype(np.uint8)])
         Image.fromarray(rgba).save(out + f'L{k}.webp', quality=92)
         nearer |= m
@@ -253,7 +262,24 @@ def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='
     unknown = dil(nearer, reach)
     if keep is not None:
         unknown &= ~keep
-    back = rowfill(im, ~unknown, fill_scale) if back_fill == 'rows' else fill(im, ~unknown, fill_scale)
+    if back_fill == 'rows':
+        back = rowfill(im, ~unknown, fill_scale)
+    elif back_fill == 'mixed':
+        # row fill across narrow gaps (a trunk, a post), the smooth fill across wide ones (a crown, a figure)
+        run = np.zeros((H, W), np.float32)
+        for y in range(H):
+            u = unknown[y]
+            if not u.any():
+                continue
+            d = np.diff(np.concatenate([[0], u.view(np.int8), [0]]))
+            st, en = np.flatnonzero(d == 1), np.flatnonzero(d == -1)
+            for a0, b0 in zip(st, en):
+                run[y, a0:b0] = b0 - a0
+        w = np.clip((160 - run) / 60, 0, 1).astype(np.float32)
+        w = cv2.GaussianBlur(w, (0, 0), 3)[..., None]
+        back = (rowfill(im, ~unknown, fill_scale) * w + fill(im, ~unknown, fill_scale) * (1 - w)).astype(np.uint8)
+    else:
+        back = fill(im, ~unknown, fill_scale)
     fa = np.maximum(unknown, cv2.GaussianBlur(unknown.astype(np.float32), (0, 0), 1.5))[..., None]
     back = (im * (1 - fa) + back * fa).astype(np.uint8)
     Image.fromarray(back).save(out + 'L3.jpg', quality=92)
@@ -475,15 +501,32 @@ def r_BW15():
     seed[-4:] = True
     lim = np.where(p.xx > 2 * 548, p.yy > 2 * 388, p.yy > 2 * 300)    # below the hill line (right of the house: below the mist)
     v = touching((p.lum < 125) & (p.g >= p.r) & ~f0 & lim, seed | dil(f0, 3)) | house | beans
-    # the smoke: how far it differs from the sky filled across it row by row (it is darker than the glow, lighter up in the dark)
+    # the smoke: one grey-teal column (core ~ #64797 7) laid semi-transparently over the sky, the mist and the hill, down to the
+    # chimney. It goes on L1 with the village and its chimney, un-mixed: pure smoke colour + alpha, where alpha comes from how
+    # much darker each pixel is than the background beside it (the lower of the brightest pixels to its left and to its right,
+    # so a slanting hill edge is not taken for smoke). The back plate gets the background filled row by row.
     zone = p.poly([(872, 0), (995, 0), (995, 392), (950, 392), (950, 470), (910, 470), (910, 392), (872, 392)])
-    sky = rowfill(p.im, ~zone, 0.5).astype(np.float32)
-    d = np.abs(p.im.astype(np.float32) - sky).sum(-1)
-    sa = np.clip((d - 6) / 24, 0, 1) * cv2.GaussianBlur(zone.astype(np.float32), (0, 0), 4)
-    sa = cv2.GaussianBlur(sa.astype(np.float32), (0, 0), 1.5)
-    smoke = sa > 0.06
+    d = np.abs(p.im.astype(np.float32) - rowfill(p.im, ~zone, 0.5).astype(np.float32)).sum(-1) * zone
+    wgt = np.clip(d - 20, 0, None)
+    cx = (wgt * p.xx).sum(1) / np.maximum(wgt.sum(1), 1e-3)
+    ok = wgt.sum(1) > 50
+    rows = np.arange(p.H)
+    cx = ndi.uniform_filter1d(np.interp(rows, rows[ok], cx[ok]), 41)
+    zone = (np.abs(p.xx - cx[:, None]) < 2 * 24) & (p.yy < 2 * 446)          # down to the chimney top
+    L = p.lum.astype(np.float32)
+    win = 2 * 26
+    mx_l = ndi.maximum_filter1d(L, win, axis=1, origin=win // 2 - 1)          # brightest in [x - win, x)
+    mx_r = ndi.maximum_filter1d(L, win, axis=1, origin=-(win // 2))          # brightest in (x, x + win]
+    bgl = np.minimum(mx_l, mx_r)
+    S = np.array([100, 121, 119], np.float32)
+    Sl = float(S @ np.array([0.299, 0.587, 0.114], np.float32))
+    sa = np.clip((bgl - L - 3) / np.maximum(bgl - Sl, 8), 0, 1)
+    sa = cv2.GaussianBlur(sa, (0, 0), 1.0) * cv2.GaussianBlur(ero(zone, 4).astype(np.float32), (0, 0), 3)
+    sa[v & ~f0] = 0
+    smoke = sa > 0.04
     a1 = np.maximum(soft(v & ~f0), np.where(f0, 0, sa))
-    build(p, [f0, v | smoke, None], alpha=[None, a1, None], shadow=14,
+    paint = (smoke & ~v, np.broadcast_to(S.astype(np.uint8), p.im.shape))
+    build(p, [f0, v | smoke, None], alpha=[None, a1, None], paint=[None, paint, None], shadow=14, back_fill='rows',
           note='ink + boy + corn on L0, house + village + smoke on L1, sky/mist/hills on L3')
 
 
@@ -549,7 +592,27 @@ def r_BW04():
     p = Pic('BW04_bly_road')
     lab = tiers(p, [22, 52, 100])
     ms = [big(close(lab == k, 1), 300) for k in range(3)]
-    build(p, ms, shadow=12, note='tone tiers: near trees + car + road L0, second row L1, forest band L2, hills + sky L3')
+    build(p, ms, shadow=12, back_fill='mixed', note='tone tiers: near trees + car + road L0, second row L1, forest band L2, hills + sky L3')
+
+
+@recipe
+def r_BW05():
+    """BW05 (the cranes in the woods). The depth split left bits of the near bushes on a plane of their own (torn from the
+    bushes) and dark specks of branches behind the trees. Now: L0 = all the near ink (trees, branches, ground, bushes, the stone)
+    with the four strings of coral cranes whole (strings, cranes and their shading: what differs from the forest filled across
+    each string's strip); L3 = the forest behind, the hills and the sky. L1, L2 empty. (The second-row forest has the dark sky's
+    tone, so it is not split from it.)"""
+    p = Pic('BW05_cranes')
+    lab = tiers(p, [22])
+    f = big(lab == 0, 300)
+    strips = np.zeros_like(f)
+    for x, y0, y1 in [(323, 300, 500), (422, 300, 500), (451, 300, 560), (481, 330, 510)]:
+        strips |= p.poly([(x - 26, y0), (x + 26, y0), (x + 26, y1), (x - 26, y1)])
+    bg = rowfill(p.im, ~strips, 0.5).astype(np.float32)
+    d = np.abs(p.im.astype(np.float32) - bg).sum(-1)
+    cranes = big(close(strips & (d > 30), 2), 150) | (strips & p.coral())
+    f |= dil(cranes, 1) & strips
+    build(p, [f, None, None], shadow=12, back_fill='mixed', note='near ink + the crane strings on L0, the forest/hills/sky on L3')
 
 
 if __name__ == '__main__':

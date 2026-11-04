@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.790784478187561, 0.515233039855957, 0.20487530529499054], "glowLayer": 2, "share": [0.08553178181019865, 0.000899913699127907, 0.45540956009265987, 0.4581587443980136]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 2, "share": [0.500957400299782, 0.0, 0.0, 0.499042599700218], "method": "colour/region split (tools/sil_regions.py BW05_cranes), not depth", "note": "near ink + the crane strings on L0, the forest/hills/sky on L3"}
