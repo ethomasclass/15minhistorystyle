@@ -155,7 +155,7 @@ def pushpull(img, known):
     return up
 
 
-def rowfill(im, known, scale=0.5):
+def rowfill(im, known, scale=0.5, sy=3):
     """Fill row by row between the nearest known pixels left and right, then smooth vertically a little: seamless for a
     back plate painted in horizontal bands (sky, mountains, mist, sea), where a 2-D fill smears one band into the next."""
     H, W = known.shape
@@ -170,7 +170,7 @@ def rowfill(im, known, scale=0.5):
             continue
         for c in range(3):
             out[y, ~k, c] = np.interp(xs[~k], xs[k], s_im[y, k, c])
-    sm = cv2.GaussianBlur(out, (0, 0), sigmaX=2, sigmaY=9)
+    sm = cv2.GaussianBlur(out, (0, 0), sigmaX=1.5, sigmaY=sy)
     out = np.where(s_kn[..., None], out, sm)
     f = cv2.resize(out, (W, H), interpolation=cv2.INTER_CUBIC)
     return np.where(known[..., None], im, np.clip(f, 0, 255).astype(np.uint8))
@@ -277,7 +277,7 @@ def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='
                 run[y, a0:b0] = b0 - a0
         w = np.clip((160 - run) / 60, 0, 1).astype(np.float32)
         w = cv2.GaussianBlur(w, (0, 0), 3)[..., None]
-        back = (rowfill(im, ~unknown, fill_scale) * w + fill(im, ~unknown, fill_scale) * (1 - w)).astype(np.uint8)
+        back = (rowfill(im, ~unknown, fill_scale, sy=9) * w + fill(im, ~unknown, fill_scale) * (1 - w)).astype(np.uint8)
     else:
         back = fill(im, ~unknown, fill_scale)
     fa = np.maximum(unknown, cv2.GaussianBlur(unknown.astype(np.float32), (0, 0), 1.5))[..., None]
@@ -489,45 +489,17 @@ def r_BW06():
 def r_BW15():
     """BW15 (the boy outside the house, Aug 15 in Japan). The depth split left dashed ghost lines of the house's edges on the
     plane behind, specks around the corn, and the chimney smoke on another plane than its chimney. Now: L0 = the warm ink (the
-    ground, the bean poles, the boy, the corn); L1 = the house whole (with its window and radio), the village, the garden and
-    the dark hill at left, plus the chimney smoke (a soft matte: it fades into the sky); L3 = the sky, the mist and the pale
-    hills. L2 empty."""
+    ground, the boy, the corn); L1 = the house whole (with its window and radio) and the bean poles standing against it;
+    L3 = everything in the fog: the sky, the hills, the village with its chimney AND its smoke (one plane: the smoke can't leave
+    its chimney), the far fence and the pale garden. L2 empty. (Putting the misty village on its own plane cut hard edges into
+    the fog and tore the soft smoke from the chimney, so the fog stays whole on the back plate.)"""
     p = Pic('BW15_aug15_japan')
     f0 = front_ink(p, (p.mx < 40) & (p.r >= p.b - 3))
     beans = f0 & (p.yy < 2 * 640) & (p.xx < 2 * 430)     # the bean poles stand against the house: they go with it (they cross
     f0 &= ~beans                                         # its window, whose bars are the same ink)
     house = snap(p, p.poly([(330, 145), (590, 326), (548, 336), (548, 598), (120, 598), (120, 336), (75, 328)]), band=16, ref=18)
-    seed = np.zeros_like(f0)
-    seed[-4:] = True
-    lim = np.where(p.xx > 2 * 548, p.yy > 2 * 388, p.yy > 2 * 300)    # below the hill line (right of the house: below the mist)
-    v = touching((p.lum < 125) & (p.g >= p.r) & ~f0 & lim, seed | dil(f0, 3)) | house | beans
-    # the smoke: one grey-teal column (core ~ #64797 7) laid semi-transparently over the sky, the mist and the hill, down to the
-    # chimney. It goes on L1 with the village and its chimney, un-mixed: pure smoke colour + alpha, where alpha comes from how
-    # much darker each pixel is than the background beside it (the lower of the brightest pixels to its left and to its right,
-    # so a slanting hill edge is not taken for smoke). The back plate gets the background filled row by row.
-    zone = p.poly([(872, 0), (995, 0), (995, 392), (950, 392), (950, 470), (910, 470), (910, 392), (872, 392)])
-    d = np.abs(p.im.astype(np.float32) - rowfill(p.im, ~zone, 0.5).astype(np.float32)).sum(-1) * zone
-    wgt = np.clip(d - 20, 0, None)
-    cx = (wgt * p.xx).sum(1) / np.maximum(wgt.sum(1), 1e-3)
-    ok = wgt.sum(1) > 50
-    rows = np.arange(p.H)
-    cx = ndi.uniform_filter1d(np.interp(rows, rows[ok], cx[ok]), 41)
-    zone = (np.abs(p.xx - cx[:, None]) < 2 * 24) & (p.yy < 2 * 446)          # down to the chimney top
-    L = p.lum.astype(np.float32)
-    win = 2 * 26
-    mx_l = ndi.maximum_filter1d(L, win, axis=1, origin=win // 2 - 1)          # brightest in [x - win, x)
-    mx_r = ndi.maximum_filter1d(L, win, axis=1, origin=-(win // 2))          # brightest in (x, x + win]
-    bgl = np.minimum(mx_l, mx_r)
-    S = np.array([100, 121, 119], np.float32)
-    Sl = float(S @ np.array([0.299, 0.587, 0.114], np.float32))
-    sa = np.clip((bgl - L - 3) / np.maximum(bgl - Sl, 8), 0, 1)
-    sa = cv2.GaussianBlur(sa, (0, 0), 1.0) * cv2.GaussianBlur(ero(zone, 4).astype(np.float32), (0, 0), 3)
-    sa[v & ~f0] = 0
-    smoke = sa > 0.04
-    a1 = np.maximum(soft(v & ~f0), np.where(f0, 0, sa))
-    paint = (smoke & ~v, np.broadcast_to(S.astype(np.uint8), p.im.shape))
-    build(p, [f0, v | smoke, None], alpha=[None, a1, None], paint=[None, paint, None], shadow=14, back_fill='rows',
-          note='ink + boy + corn on L0, house + village + smoke on L1, sky/mist/hills on L3')
+    build(p, [f0, house | beans, None], shadow=14, back_fill='mixed',
+          note='ink + boy + corn on L0, the house + bean poles on L1, the fog (village, chimney + smoke, sky) on L3')
 
 
 @recipe
