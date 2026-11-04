@@ -27,6 +27,7 @@ The two Jackson videos before it used other looks. Each video's key documents ar
 | 17 | ***Except:** How the Civil War Was Decided, and What It Left Open* (Civil War series 3) | 9:24 | 8 | 1,540 | this repo · `projects/Except/` | "…Except as a punishment for crime." |
 | 18 | ***Not in the Picture:** Grant, the Railroad, and Who Built It* (American West, Ep 1 of 4; the first video as **Chunk History**) | 15:59 | 9 | 2,450 | this repo · `projects/American_West/ep1/` | "…It involved about five million cows." (tees up Ep 2) |
 | 19 | ***Trick-or-Treating Was a Bribe:** The Real History of Halloween* (Halloween, Ireland 1830s → today) | 11:57 | 8 | 1,822 | this repo · `ccr-5f9195b0-0cknf0` (`projects/Halloween_Bribe/`) | "…you might want to pay up." + thank-you over a 20 s end screen. Plus 2 vertical Shorts |
+| 20 | ***The Balloon War* v2** (on screen ***Paper Bombs:** The Secret Attack on America*; the story-arc remake of #10), 1942–1945 (+ 1987) | 14:53 | 9 | 2,324 | this repo · `ccr-a7396ec0-4orihz` (`projects/Balloon_War/v2/`, sharing `projects/Balloon_War/public/`) | "A war that came to Bly on paper balloons... ended there with paper birds." + thank-you and subscribe over the end screen |
 
 **Shorts made as their own projects** (in `projects/`): *The Last Public Execution* (`Last_Public_Hanging`), *Rumpelstiltskin*,
 *World Series*, *Pledge Salute*, *Candy Scare*, and two scripted but not built (`Last_Time_Debt_Free_Short`,
@@ -135,6 +136,37 @@ column says where each was made.
   tools/render.sh`); Ellis (the user's ElevenLabs voice clone, `eleven_v4`) with "Samhain" → "Sau-win"; five `hb_` Suno cues; and
   **vertical Short covers** as their own thumbnails.
 
+- **The Balloon War v2** (Nov 2026; on screen *Paper Bombs: The Secret Attack on America*, 14:53, mastered at −14 LUFS, 1080p via
+  LFS) remade the 9:29 v1 as **one story with an arc** instead of "three balloons, three jobs". Nine chapters: *Something in the
+  Woods* (cold open), *Revenge on the Wind*, *The Girl Who Glued*, *The Boy on the Beach*, *"Paper"*, *The Sand* (midpoint twist),
+  *The Newspaperman* (the plug), *Gearhart Mountain* (the heavy climax), *A Thousand Cranes*. It added:
+  - **The story-arc script in three drafts** (`script/SCRIPT_v2_story_arc.md`): the arc, then **four real people braided through it
+    on both sides** (a schoolgirl who glued the balloons, a boy on the launch crew, the newspaperman who kept them out of the news,
+    the picnic party at Bly) who all meet in the ending, then a cut list. A driving question by 0:40, two long loops, a midpoint
+    and a climax twist, an ending device (on 15 August both sides erase the story). **The cold open names the danger** ("Hanging
+    underneath it... was a bomb"): without it, you said, they were "rando balloons".
+  - **Silhouette scenes, the new look** (`script/SILHOUETTES.md`, `FLOW_PROMPT.md`): **one palette for the whole video, locked to the
+    channel** (`tools/sil_palette.py`: ink, teal-slate haze, cream light, coral only on the balloon; QUIET ramp for Bly), figures as
+    one solid black shape, 16 scenes from **one ordered Google Flow prompt**, fixes (`tools/round_balloon.py` redrew teardrop
+    balloons round), a **2× Real-ESRGAN upscale**, and **planes split by colour and region, not depth** (`tools/sil_regions.py`, one
+    recipe per scene; the depth split tore window bars, a man's head from his body and tree trunks in half), checked with a **stress
+    test** that shifts the planes 12/24/36 px both ways. Shown full frame in `SilScene` with mist, dust in lamp beams and a balloon
+    riding its own plane; a kamishibai stage and a shadowbox were tried and turned down.
+  - **Prints and props on the black desk**: `Print` (no mount, source tag under it), 11 Gemini props shot as white objects on black
+    (`tools/prop_cut_black.py`; `prop_cut.py FILL_HOLES=1` for the barometer's dial), and `NoPhoto` labels for people with no photo.
+  - **Six drawn 3D pieces** in three.js (`v2/src/fx/`): the jet stream from **real January 1945 NOAA reanalysis winds**, the 285
+    landings as pins in date order, sand pulling out to the real Chiba coast, the flight as an altitude ribbon, the balloon's
+    assembly, and the real terrain of Gearhart Mountain; data baked and sourced in `public/data/` (`fx_data.md`). WebGL renders use
+    the `.real` headless shell with no `--gl` flag (4× faster than swangle).
+  - **Process:** chapter 1 built first as the pattern, then three chapter builders and a 3D builder in parallel from
+    `script/BUILD_BRIEF_v2.md`; `tools/beatscope.py` (caught two beats anchored to the wrong repeat of a word); a contact sheet per
+    chapter; chapter renders through a queue, joined with `JOIN_ONLY=1 tools/render.sh`.
+  - **Sound and voice rules from your notes:** silent cuts and no page-turn or paper sounds, the writing sound almost silent, no
+    whispering (`voice.py` strips hush tags, `quiet_check.py`), dates said as ordinals. Eight new `bw_` Suno cues.
+  - **Thumbnails** (`v2/src/ThumbsBW.tsx`, seven concepts): faces work; thumbnail-only Gemini ink art (B&W + one coral accent) with
+    big clean white type, one tape word and a teal kicker; no victim's face, and an invented face for a real person isn't named.
+  Everything reusable went into the template and the skill (Nov 4, 2026).
+
 ## Shorts results (log each one 48 hours after posting)
 
 | Short | Stayed to watch | Avg viewed | Views | Note |
@@ -143,16 +175,14 @@ column says where each was made.
 | The Last Public Execution | 55.3% | 0:50 of ~1:10 | 1.1k | Cover frame, a scene with people first, no early text |
 
 ## Your standing preferences (from your notes across the videos)
-- **Silhouette scenes stay full-frame parallax, not in a container** (*The Balloon War* v2, Nov 2026): two prototypes were tried and
-  turned down: a kamishibai paper stage on the desk (`projects/Balloon_War/src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and a
-  shadowbox diorama framing the whole screen (`src/test/ShadowBox.tsx`, `review/shadow_box_test.mp4`). Keep the layered-painting parallax
-  (`SilScene`); what carries over is the **one locked silhouette palette per video** (`tools/sil_palette.py`) and in-scene motion
-  (mist, particles, flicker, sway).
-- **Parallax layers must be clean** (*Trick-or-Treating Was a Bribe*, Oct 2026): you spotted faint outlines of foreground shapes on the
-  planes behind them in the silhouette paintings. `tools/sil_layers.py` now paints out a 6 px rim around each nearer shape; check each back
-  plate at full size before building scenes on it.
 
 **Script**
+- **One story with an arc, braided through real people on both sides** (*The Balloon War* v2, Nov 2026, the remake of a topic-in-parts
+  v1): draft 1 the arc, draft 2 three to five real main characters with their own arcs who meet in the ending, draft 3 a cut list.
+  The script's header states the core concept, the driving question and its answer, the long loops, the midpoint and climax twists
+  and the ending device. Model: the skill's `script-writing.md` §1 and `projects/Balloon_War/script/SCRIPT_v2_story_arc.md`.
+- **Name the danger in the cold open** (*The Balloon War* v2): without "it was a bomb" the balloons were "rando balloons". Say what
+  makes the hook matter in words, early.
 - **Written for a general audience, easy to follow** (from *Dressed to Kill*). Learn from what Vox explainers do well, don't copy
   their look: see the skill's `references/explainer-craft.md`. One name per thing, terms defined where they appear, a confusion pass
   before voicing.
@@ -165,7 +195,7 @@ column says where each was made.
 - Present what supporters and critics each saw, and let the ending explain both readings rather than deliver a verdict.
 - Required concepts get named and defined, and the cause gets said plainly (e.g. "expanded suffrage is why he won").
 - Open on a real document or artifact. Trim to time with a cut list.
-- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug (**from the Diamond Hoax on: right after the climax, about 80% in, while a loop is still open and the payoff is seconds away; short and cheeky**, e.g. "Quick favor: hit subscribe. It's free, and I promise it's not a con. Which is exactly what a con man would say. Subscribe anyway." Before that, from *The Exact Spot*: about two-thirds of the way in, after the story's big build, not a third in where it kills momentum), tied to the topic
+- **Every video has two narrated subscribe reminders** (from *Say It Ain't So* on): one short plug (**from the Diamond Hoax on: right after the climax, about 80% in, while a loop is still open and the payoff is seconds away; short and cheeky**; never inside a heavy chapter, so when the climax is the heavy one the plug goes just before it, as in *The Balloon War* v2 at about 65%, e.g. "Quick favor: hit subscribe. It's free, and I promise it's not a con. Which is exactly what a con man would say. Subscribe anyway." Before that, from *The Exact Spot*: about two-thirds of the way in, after the story's big build, not a third in where it kills momentum), tied to the topic
   with a wry twist (Ouija: the board spells it; Black Sox: "unlike William Wansley, nobody's paying me to say it"), and a one-line
   thank-you and subscribe over the end screen, after the closing line has landed. The like/subscribe line stays in the description too.
 
@@ -186,11 +216,12 @@ column says where each was made.
 - **Say fractions so they can't be misheard** (Reconstruction ch06): "three-quarters of the states", not "three out of four states", which sounds like there were four.
 - Big titles stay on screen for at least 2 seconds.
 - **Gentle transitions** (American West Ep 1, Oct 2026): no whip pans. A "whip" shot change is a soft drift (a ~half-second
-  crossfade with a 70 px slide and light blur), a "cut" is a 6-frame dissolve (`Shots` in `src/previews/fx.tsx`); the whip sound
-  plays at half level.
+  crossfade with a 70 px slide and light blur), a "cut" is a 6-frame dissolve (`Shots` in `src/previews/fx.tsx`). (The whip sound
+  that played at half level is muted since *The Balloon War* v2: cuts and drifts are silent.)
 - **Chunk History branding** (Oct 2026): the 3D Chunk intro after the cold open (5.5 s) and a 2 s mark snap between chapters (the
-  coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`). **Its sound is clicks and page
-  turns only: no tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this).
+  coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`). **Its sound is clicks only: no
+  tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this; the page turns it first had are
+  cut off since *The Balloon War* v2, Nov 2026).
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.
@@ -218,7 +249,28 @@ column says where each was made.
   slight overshoot, a small decaying shake) and settled pieces breathe; texture on everything (torn-paper fibre edges, translucent
   tape, stains, halftone).
 - **3D where it explains something** (you loved the tilted 3D township): the land-grant checkerboard rising as slabs, the race as an
-  elevation ribbon. Drawn teal 3D, never photoreal. Say "heights exaggerated" on screen when they are.
+  elevation ribbon. Drawn teal 3D, never photoreal. Say "heights exaggerated" on screen when they are. **From real data where it
+  exists** (*The Balloon War* v2: the jet stream from NOAA's January 1945 reanalysis winds, real terrain heights, the 285 recorded
+  landings), with one coral element and the source on screen; the kit is the template's `src/fx/`.
+- **Silhouette scenes: one palette for the whole video, locked to the channel** (*The Balloon War* v2, Nov 2026; replaces the
+  Diamond Hoax's palette per mood, which read as eleven different films next to the desk): ink foreground, teal-slate haze, cream
+  light, coral only on the scene's subject; time of day is the only variation. **Figures are one solid black shape**: no faces, no
+  interior or rim-light lines. Made from **one ordered Google Flow prompt** for the whole set, locked with `tools/sil_palette.py`.
+- **Silhouette scenes stay full-frame parallax, not in a container** (*The Balloon War* v2): two prototypes were tried and turned
+  down: a kamishibai paper stage on the desk (`projects/Balloon_War/src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and a
+  shadowbox diorama framing the whole screen (`src/test/ShadowBox.tsx`, `review/shadow_box_test.mp4`). Keep `SilScene` with in-scene
+  motion (mist, dust, a balloon on its own plane).
+- **Parallax layers must be clean** (*Trick-or-Treating Was a Bribe*, Oct 2026: you spotted faint outlines of foreground shapes on
+  the planes behind them). **Since *The Balloon War* v2 the planes are split by colour and region, not depth** (`tools/sil_regions.py`):
+  each object whole on one plane, a continuous structure (a corridor, a fence) on one plane, empty planes allowed; the depth split
+  tore window bars, a man's head from his body and tree trunks in half. Every scene passes the stress test (`tools/sil_stress.py`:
+  planes shifted 12/24/36 px both ways) before it's used.
+- **Respect real victims** (*The Balloon War* v2, the Bly chapter): no silhouettes or illustrations of the victims, before or after;
+  the heavy chapter in the QUIET palette with **no coral**, no jokes, no explosion imagery; real people with no photo are anonymous
+  silhouettes with a "no photo" label, never presented as likenesses.
+- **Prints and props on the black desk** (*The Balloon War* v2): archival photos as `Print`s (no mount, source tag under them); light
+  props (paper, a crane, a card) generated as white objects on black and cut with `tools/prop_cut_black.py`; a coral prop is a
+  see-through tint, never a flat red block.
 - **Trace and source, don't eyeball:** diagrams traced from real drawings, maps from real data, document swipes placed from the
   scan's actual line positions (Gemini's line finder, `review/ai_tests/assets/act_lines.json` in the West Ep 1 project).
 - **Hook alignment in the cold open** (Kallaway): the picture, the first spoken line and a short written hook (orange tape matching
@@ -272,8 +324,13 @@ column says where each was made.
 - **The thumbnail opens the video as a reveal** (the Diamond Hoax, Oct 2026): not a still with a push. Tight on the coral subject, the
   place fades in behind, pull back into the thumbnail frame on the line it illustrates; the background has real parallax and
   coloured light (blue window light, warm lamps). Notes land after the camera settles.
-- **Silhouette scenes can use any palette that matches the mood**, one light source each; and **check every Gemini landscape** for the
+- ~~**Silhouette scenes can use any palette that matches the mood**~~ (the Diamond Hoax; **superseded** by *The Balloon War* v2's one
+  locked palette per video, under **Picture** above). Still true: one light source each, and **check every Gemini landscape** for the
   wrong country (mesas behind San Francisco) and for painted lettering before keeping it.
+- **Faces work for thumbnails** (*The Balloon War* v2, Nov 2026: "faces seem to be good for thumbnails"). When the video has no
+  usable face, make **thumbnail-only ink art** (Gemini, B&W + one coral accent, subject on the right, the left calm for text), with
+  big clean white sans, one word on tape and a teal kicker. **No screaming or victim faces for real victims**: a bystander, or the
+  story's own realization moment. An invented face for a real person with no photo is not named on the thumbnail.
 - **Brainstorm the thumbnail and title first** (the Diamond Hoax, Oct 2026): right after the topic is chosen and fact-checked, before the full script, so the cold open can be built to match it. A thumbnail is a **question, not a label**, with **one idea**; title and thumbnail make one curiosity gap together.
 - The whole head is in frame, and any symbol sits on the head at the right size.
 - Text stays clear of the face.

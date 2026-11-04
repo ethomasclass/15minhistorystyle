@@ -61,8 +61,8 @@ Render frame 140 (every write-on finished), look at the result at 1280×720 and 
 
 **Faces, thumbnail-only ink art and clean type** (*The Balloon War* v2, Nov 2026; seven concepts in
 `projects/Balloon_War/v2/src/ThumbsBW.tsx`, renders in `v2/renders/thumbnails/`):
-- **Faces work for thumbnails** (the user: "faces seem to be good for thumbnails"). A face with a real emotion beat the scene-only
-  concepts (the woods painting, the 3D jet stream, a topic-led drawing).
+- **Faces work for thumbnails** (the user, after the first four concepts had none: "faces seem to be good for thumbnails"; A–D were
+  the woods painting, the schoolgirl silhouette, the 3D jet stream and a topic-led drawing; E–G added faces).
 - **Thumbnail-only AI art** when the video's own pictures have no face: Gemini ink art made for the thumbnail and used nowhere
   else, **black and white with one coral accent** on the subject (Halloween's gas-mask pumpkin, Oct 2026, was the first). The
   style paragraph (prompts in `projects/Balloon_War/public/img/gen/thumb/f*.txt`): a dramatic high-contrast B&W image like a moody

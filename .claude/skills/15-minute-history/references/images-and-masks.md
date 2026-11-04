@@ -319,8 +319,8 @@ front to back: ink foreground with detail only in the outline, two or three hazi
 base, a quiet sky), **the figure rule** in capitals, **the palette with hex codes**, composition rules that make the split work
 (3–4 clearly separated depth bands, figures small and in profile and not tangled, everything important inside the central 80%, one
 light source, no light rays over the foreground), period accuracy, **no text of any kind**, no real person, and then the shots.
-Image 1 is the master style reference; later shots name it, and any earlier shot they share a place with, as references. The
-style carries across the set far better than separate prompts did. (Gemini at 2K with the same paragraph per scene also works:
+Image 1 is the master style reference; later shots name it, and any earlier shot they share a place with, as references, so the
+style and the locations carry across the whole set. (Gemini at 2K with the same paragraph per scene also works:
 `tools/gemini_image.py`, `SIZE=2K`.)
 
 **The pipeline, per scene**

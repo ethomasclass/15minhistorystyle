@@ -142,7 +142,7 @@ Make it act out the first sentence instead: open **tight on the coral subject** 
 frame on their own depth plane), **fade in a background painting** on the words that name the place, then **pull back** so the
 foreground figures slide in from both sides and the camera settles on the exact thumbnail frame; land the loops and notes only
 after it settles (notes drawn during the move run off the edge), and put a money tag or the key number where the thumbnail's tape
-words sat. Give the background real parallax (split it with `tools/sil_layers.py`) and a little coloured light. Code:
+words sat. Give the background real parallax (split it with `tools/sil_regions.py`, or `sil_layers.py` for a painting the depth split handles) and a little coloured light. Code:
 `techniques/components/diamond_hoax/fx/ColdOpenDepth.tsx` (`ColdOpenReveal`), timed with the chapter's word timings.
 
 ## 5. Images in scenes
