@@ -7,7 +7,8 @@ cached there too. Writes, next to this script:
   pacific_winds.json   NOAA-CIRES-DOE 20CRv3 250 hPa u/v, January 1945 monthly mean, 1 deg grid, plus NE 50m coastlines
                        for the North Pacific slab (lon in 0..360)
   landing_coast.json   NE 50m land for the LandingMap (North America, lon in 0..360 so the Aleutians stay together)
-  chiba_hm.json        AWS Terrarium heightmap of the Boso peninsula (Chiba), sea clamped to 0 m, + its 0 m coastline
+  chiba_hm.json        AWS Terrarium heightmap of the Boso peninsula (Chiba), sea clamped to 0 m
+  gearhart_hm.json     AWS Terrarium heightmap: Gearhart Mountain / Bly, Oregon, south to Tule Lake, California
 """
 import io, json, math, os, re, sys, urllib.request
 import numpy as np
@@ -152,3 +153,15 @@ chiba = {'name': 'chiba', 'bounds': B, 'w': 240, 'h': 236, 'kmW': round(km_w, 3)
          'data': [int(round(x)) for x in land.flatten()]}
 json.dump(chiba, open(os.path.join(HERE, 'chiba_hm.json'), 'w'), separators=(',', ':'))
 print('chiba', f'{km_w:.0f} x {km_h:.0f} km', 'max', chiba['max'], 'sea min', sea_min)
+
+# Gearhart Mountain (peak 42.4960 N 120.8773 W; Mitchell Monument 42.4316 N 120.8608 W, both OSM/GNIS) and Bly (42.398 N
+# 121.041 W), south to the Tule Lake camp at Newell, CA (41.888 N 121.375 W)
+G = dict(lat0=41.80, lat1=42.58, lon0=-121.50, lon1=-120.70)
+gm = bake(G['lat0'], G['lat1'], G['lon0'], G['lon1'], 11, 300, 360)
+km_w = (G['lon1'] - G['lon0']) * 111.32 * math.cos(math.radians((G['lat0'] + G['lat1']) / 2))
+km_h = (G['lat1'] - G['lat0']) * 110.95
+gear = {'name': 'gearhart', 'bounds': G, 'w': 300, 'h': 360, 'kmW': round(km_w, 3), 'kmH': round(km_h, 3), 'min': round(float(gm.min()), 1), 'max': round(float(gm.max()), 1),
+        'zoom': 11, 'source': 'AWS Terrarium elevation tiles (Mapzen; SRTM / USGS NED), s3.amazonaws.com/elevation-tiles-prod',
+        'data': [int(round(x)) for x in gm.flatten()]}
+json.dump(gear, open(os.path.join(HERE, 'gearhart_hm.json'), 'w'), separators=(',', ':'))
+print('gearhart', f'{km_w:.0f} x {km_h:.0f} km', gear['min'], '-', gear['max'], 'm')
