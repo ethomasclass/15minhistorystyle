@@ -23,7 +23,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {bed} from '../kit/levels';
 import {Prop} from '../kit/prop';
 import {SilScene} from '../kit/silparallax';
-import {ConCard} from '../kit/con';
+import {ConCard} from '../kit/conCard';
 import {Sheet, Swipe, type SheetCam, camAt} from '../kit/vox';
 import {Tag} from '../kit/Kit';
 import fever from '../../public/img/layers/sil/sil_fever/layers.json';
@@ -296,7 +296,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch06: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch06_cash_out.wav" lead={LEAD} music={[{src: 'music/aw_boomtown_rush.mp3', volume: bed('aw_boomtown_rush')}]}>
+  <ChapterShell n={N} audio="audio/ch06_cash_out.wav" lead={LEAD} music={[{src: 'music/dh_diamond_fever.mp3', volume: bed('dh_diamond_fever')}]}>
     <Body />
   </ChapterShell>
 );

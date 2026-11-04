@@ -220,8 +220,9 @@ column says where each was made.
   that played at half level is muted since *The Balloon War* v2: cuts and drifts are silent.)
 - **Chunk History branding** (Oct 2026): the 3D Chunk intro after the cold open (5.5 s) and a 2 s mark snap between chapters (the
   coral quarter swings in and locks), from `brand/chunk-history/` (`ep1/src/kit/ChunkIntro.tsx`). **Its sound is clicks only: no
-  tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this; the page turns it first had are
-  cut off since *The Balloon War* v2, Nov 2026).
+  tones, no music** (you tried a marimba tune, felt piano, a chopped horn and lo-fi and chose this). **Nov 2026: no page turns
+  anywhere** (first on the Diamond Hoax; then the per-cut whoosh went too on *The Balloon War* v2), and the handwriting/highlighter
+  scratch nearly silent. Both are enforced in `Sfx` (`src/kit/common.tsx`: `MUTED`, `WRITE_MAX`).
 - **Gentle chapter endings** (from *The Exact Spot*): about 2 seconds of hold after the last word, the music lifting into it, then a slower dip to black before the logo break. No cutting off right after the voice.
 - **A built-in end screen** (about 20 s) with clean slots for YouTube's end-screen elements.
 - **Maps:** our own drawn map in 3D perspective (tilted, regions rising as slabs, standing labels), not terrain.

@@ -234,3 +234,10 @@ and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC
 CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
 effects quiet; they should be felt more than heard. **Sound effects are only for things on screen** (waves, wind, a plane, a radio,
 a press) plus the tape stamp; cuts and moves are carried by the voice and the music (*The Balloon War* v2, Nov 2026).
+
+**No page turns, no cut whooshes, the writing scratch nearly silent** (the user, Nov 2026: first on the Diamond Hoax, then again on
+*The Balloon War* v2, where the per-cut whoosh still read as a page flip). `Sfx` in `src/kit/common.tsx` enforces it: `MUTED`
+(page turns, paper sounds, whoosh, whip) never plays, matched by name so variants stay off too, and any marker/highlighter scratch
+is capped at `WRITE_MAX` (0.03). Old chapter code that still lists those sounds stays silent. The branding files are clicks only
+(`tools/make_jingle.py` rebuilds them; `ChunkIntro.tsx` also cuts off the page turn in older copies of `chunk_jingle.mp3` and
+`chunk_snap.wav`).

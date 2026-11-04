@@ -1,6 +1,6 @@
 """Build the Chunk History branding sound (intro + chapter-break sting).
 
-  python3 tools/make_jingle.py            # DEFAULT (the user's call, Oct 2026): clicks and a page turn only, no tones, no music
+  python3 tools/make_jingle.py            # DEFAULT (the user's call, Oct 2026): clicks only (page turn cut Nov 2026), no tones, no music
   python3 tools/make_jingle.py piano      # felt piano + a low plucked cello, from two ElevenLabs one-note samples
   python3 tools/make_jingle.py marimba    # the synthesised marimba version
   python3 tools/make_jingle.py chop       # chopped old-record horn + hip-hop kick/snare + bass (ElevenLabs one-shots)
@@ -182,17 +182,19 @@ def main_foley():
     put(out, 3.60, shifted(click("mouse0"), -2, 0.5))
     for at, name, st in [(3.95, "pen0", 1), (4.04, "pen1", 2), (4.13, "pen0", 3)]:   # HIS - TO - RY
         put(out, at, shifted(click(name), st, 0.75))
-    put(out, 4.45, shifted(page, 0, 0.5))                  # a page turn into the title card
-    out *= 10 ** (-8 / 20) / np.abs(out).max()
+    # no page turn any more (the user, Nov 2026: "eliminate page turn noise"); the gain is still set as if it were there, so
+    # the clicks keep exactly the level they had
+    ref = out.copy(); put(ref, 4.45, shifted(page, 0, 0.5))
+    out *= 10 ** (-8 / 20) / np.abs(ref).max()
     write(os.path.join(HERE, "..", "public", "music", "chunk_jingle.mp3"), out)
     # chapter-break sting (2.2 s): the lock click-clack at 1.0 s (the coral quarter), a page turn as the next chapter fades up
     sn = np.zeros(int(R * 2.2))
     put(sn, 0.99, shifted(click("pen2"), -2, 0.8))
     put(sn, 1.014, shifted(click("key2"), -3, 0.8))
-    put(sn, 1.2, shifted(page, 0, 0.55))
-    sn *= 10 ** (-3 / 20) / np.abs(sn).max()
+    ref = sn.copy(); put(ref, 1.2, shifted(page, 0, 0.55))   # (no page turn now; same gain as when there was one)
+    sn *= 10 ** (-3 / 20) / np.abs(ref).max()
     write(os.path.join(HERE, "..", "public", "sfx", "chunk_snap.wav"), sn)
-    print("wrote clicks-and-page-turn branding sound and snap")
+    print("wrote clicks-only branding sound and snap")
 
 
 def main_chop(total=5.5, out_path=None):

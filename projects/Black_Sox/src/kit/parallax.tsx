@@ -17,7 +17,7 @@ export type Fx =
   | {kind: 'smoke'; x: number; y: number}                                   // cigar smoke rising in a grandstand
   | {kind: 'film'};                                                         // exposure flicker, scratches and gate weave
 
-const Effect: React.FC<{fx: Fx}> = ({fx}) => {
+export const Effect: React.FC<{fx: Fx}> = ({fx}) => {
   const f = useCurrentFrame();
   if (fx.kind === 'flicker') {
     const k = 0.55 + noise2D('fl', f * 0.3, fx.x) * 0.25 + noise2D('fl2', f * 1.2, 0) * 0.1;

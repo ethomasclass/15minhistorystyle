@@ -16,8 +16,10 @@ const MUTED = ['sfx/page_turn.wav', 'sfx/paper_rustle.wav', 'sfx/paper_slap_soft
 const WRITE_MAX = 0.03;
 
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => {
-  if (MUTED.includes(src)) return null;
-  const v = src === WRITE.src ? Math.min(volume, WRITE_MAX) : volume;
+  // Muted by name, so renamed variants (whip_soft, paper_slap_soft …) stay off too. The handwriting/highlighter scratch is
+  // capped at WRITE_MAX, whatever level a chapter asks for (Diamond Hoax: 40%; The Balloon War v2: nearly silent).
+  if (MUTED.some((m) => src.includes(m.replace(/^sfx\/|\.wav$/g, '').replace(/_soft$/, '')))) return null;
+  const v = /marker|highlight|scratch/.test(src) ? Math.min(volume, WRITE_MAX) : volume;
   return <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={v} /></Sequence>;
 };
 

@@ -9,9 +9,18 @@ export const MAP = {w: 4986, h: 4608};
 /** The sound under every handwritten note (one place to change it) and its level. */
 export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
 
-export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
-);
+/** Desk sounds, scaled from the levels set in the chapters (the user's call on the first mix, Oct 2026: the pencil and highlight
+ *  sounds were too loud and the page turns too jarring). 0 takes a sound out everywhere; one place to change it. */
+const SFX_TRIM: Record<string, number> = {
+  'sfx/page_turn.wav': 0, 'sfx/whoosh.wav': 0, 'sfx/paper_rustle.wav': 0.3,
+  'sfx/marker_tick.wav': 0.3, 'sfx/stamp.wav': 0.4, 'sfx/tick_soft.wav': 0.2, 'sfx/tick.wav': 0.4,
+};
+
+export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => {
+  const trim = SFX_TRIM[src] ?? 1;
+  if (trim === 0) return null;
+  return <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume * trim} /></Sequence>;
+};
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */
 export const MapView: React.FC<{cx: number; cy: number; s: number; rot?: number; children?: React.ReactNode; dim?: number}> = ({cx, cy, s, rot = 0, children, dim = 0}) => (
