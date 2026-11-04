@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.6882919073104858, 0.450747013092041, 0.2059556096792221], "glowLayer": 0, "share": [0.27044275564740794, 0.3144384576368702, 0.14523291772650193, 0.26988586898921996]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.0, 0.7680335229681444, 0.0, 0.23196647703185558], "method": "colour/region split (tools/sil_regions.py BW14_aug15_dc), not depth", "note": "corridor on L1 whole; ceiling, glow and the far view on L3"}

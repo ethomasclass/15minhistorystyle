@@ -134,6 +134,20 @@ def soft(mask, px=0.9, grow=1):
     return np.clip(a, 0, 1)
 
 
+def snap(pic, mask, band=14, ref=16, scale=0.5):
+    """Move a rough mask's edge onto the painting's real edge: inside a +-band px strip, each pixel goes to the side whose
+    local colour (a smooth fill from that side's pixels at least `ref` px from the rough edge) it is closer to."""
+    inner, outer = ero(mask, ref), ero(~mask, ref)
+    a = fill(pic.im, inner, scale).astype(np.float32)
+    b = fill(pic.im, outer, scale).astype(np.float32)
+    x = pic.im.astype(np.float32)
+    closer = ((x - a) ** 2).sum(-1) < ((x - b) ** 2).sum(-1)
+    strip = dil(mask, band) & ~ero(mask, band)
+    out = np.where(strip, closer, mask)
+    out = ndi.binary_opening(out, iterations=1)
+    return close(out, 1)
+
+
 # ───────────────────────── build ─────────────────────────
 def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='', fill_scale=0.5):
     """masks: [m0, m1, m2] bool or None (nearer wins). alpha: optional per-plane float alpha overriding the soft mask.
@@ -212,3 +226,19 @@ def main():
         if key is None:
             sys.exit(f'no recipe for {n}; have {sorted(RECIPES)}')
         RECIPES[key]()
+
+
+@recipe
+def r_BW14():
+    """BW14 (the corridor, Aug 15 in Washington). The depth split cut the receding walls, the windows and the floor's light
+    bars into bands that tore apart. Now the whole corridor (both walls, the door, the windows, the floor) is ONE plane, L1 (the
+    door card's plane, ch09/door.tsx CARD_PLANE = 1); the dark ceiling, the glow and the view out of the far end (the Capitol)
+    are the back plate. L0 and L2 are empty."""
+    p = Pic('BW14_aug15_dc')
+    back = p.poly([(316, -4), (917, 297), (917, 476), (1197, 476), (1197, 295), (1344, -4)])
+    back = snap(p, back, band=10, ref=14)
+    build(p, [None, ~back, None], note='corridor on L1 whole; ceiling, glow and the far view on L3')
+
+
+if __name__ == '__main__':
+    main()
