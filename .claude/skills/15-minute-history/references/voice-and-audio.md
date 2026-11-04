@@ -212,7 +212,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 7. Sound effects
 
-**The branding sound is clicks and page turns only: no tones, no music** (the user's call after trying marimba, felt-piano,
+**The branding sound is clicks only (the page turns built into `chunk_jingle.mp3` and `chunk_snap.wav` are cut off in `ChunkIntro.tsx`, Nov 2026): no tones, no music** (the user's call after trying marimba, felt-piano,
 chopped-sample and lo-fi jingles). The template's `public/music/chunk_jingle.mp3` (the 5.5 s intro: five clicks speeding up
 with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny clicks on HIS-TO-RY, a page turn) and
 `public/sfx/chunk_snap.wav` (the chapter break: the click-clack, then a page turn) are built by
@@ -221,7 +221,7 @@ with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny
 
 
 The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker_tick` (notes, via `WRITE`),
-`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,
+`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (muted: cuts are silent), `boom` (big hits), `page_turn`, `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
 `python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**

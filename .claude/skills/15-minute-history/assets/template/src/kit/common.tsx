@@ -7,10 +7,12 @@ import {useGFrame, usePal} from './Kit';
 export const MAP = {w: 4986, h: 4608};
 
 /** The sound under every handwritten note (one place to change it) and its level. */
-// The user's call (Nov 2026): the writing sound barely there, and no page-turn / paper sounds at all.
+// The user's call (Nov 2026): the writing sound barely there, no page-turn / paper sounds, and silent cuts. The whoosh on every
+// cut read as a page flip ("too jarring ... every time we move on to a new photo"). Cuts are carried by the voice and music;
+// sound effects are only for things on screen (waves, wind, a plane, a radio) and the tape stamp.
 export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.03};
-/** Paper sounds the user turned down for good: Sfx plays nothing for these, wherever a chapter still asks for them. */
-const MUTED = ['sfx/page_turn.wav', 'sfx/paper_rustle.wav', 'sfx/paper_slap_soft.wav'];
+/** Sounds the user turned down for good: Sfx plays nothing for these, wherever a chapter still asks for them. */
+const MUTED = ['sfx/page_turn.wav', 'sfx/paper_rustle.wav', 'sfx/paper_slap_soft.wav', 'sfx/whoosh.wav', 'sfx/whip.wav', 'sfx/whip_soft.wav'];
 const WRITE_MAX = 0.03;
 
 export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => {

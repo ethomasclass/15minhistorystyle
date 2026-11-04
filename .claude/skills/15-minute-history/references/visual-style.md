@@ -257,7 +257,7 @@ White `rgba(255,255,255,0.55)` 1.5px lines, **88px cells**, layer opacity **0.5*
 | Camera easing | `Easing.inOut(Easing.cubic)`. Zoom scale is interpolated in **log space** so zooms feel even. |
 | Push-ins | slow scale over a scene: 1.02 → 1.10, 1.04 → 1.16, 1.12 → 1.24, or 1.04 + 0.004 per frame in montages |
 | Punch-ins | a hard cut to a 1.65–2.3× crop of a detail, still creeping +0.2% per frame. A **hard ×1.14 punch** on the climax word ("DEAD OR ALIVE"). |
-| Cuts | **hard cuts only**, 1–2 frames before the cue word, each with a whoosh. No dissolves. The only fade is the channel intro's last 8 frames. |
+| Cuts | **hard cuts only**, 1–2 frames before the cue word, **silent** (no whoosh: the user, Nov 2026). No dissolves. The only fade is the channel intro's last 8 frames. |
 | Exits | marks switch off instantly at their `out` frame |
 | Sync | narration has word-level timings (ElevenLabs forced alignment). A cue is "the frame word X starts" (optionally the nth occurrence). Titles land **on** the word. Notes start **2–4 frames before** the word. Cards pop **1–2 frames before**. Outlines start 1–4 frames after the subject is named. |
 | Wordmark push | the intro scales 1 → 1.04 from the "15" to the end |
@@ -273,10 +273,10 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 | Handwritten note | `sfx/marker_tick.wav` (the `WRITE` setting) | **0.2** | 2 frames before the note's word |
 | Highlighter title | `sfx/stamp.wav` | 0.26–0.45 (0.26–0.28 in chapters) | on the word |
 | Pin / card flip / montage beat / clock tick | `sfx/tick.wav` | 0.45–0.5 | on the pop |
-| Scene cut | `sfx/whoosh.wav` | 0.28–0.3 (Ch02–03), 0.4–0.5 (Ch01) | at the cut frame |
+| Scene cut | none (silent cuts, Nov 2026; `Sfx` mutes `whoosh`) | — | — |
 | Big hit ("DEAD OR ALIVE", "HISTORY") | `sfx/boom.wav` | 0.45–0.5 | on the word |
 | Knock | `sfx/knock.wav` | 0.5 | on each "knock" |
-| Letter sent / diagram flip | `sfx/page_turn.wav` | 0.45–0.5 | on the action |
+| Letter sent / diagram flip | none (no page turns, Nov 2026) | — | — |
 | Sea voyage bed | `sfx/sea_ambience.wav` | 0.12 | fades in and out over 10–30 frames |
 | Music under narration | `music/<chapter>.mp3` | **0.15** (Ch02, Ch03), 0.16 (map sequence), 0.17 (Ch01, dipping to 0.06 at the end) | 15–20-frame fade in and out |
 | Title sting | `music/title_sting.mp3` | 0.45 | 4 frames before the "15" |
@@ -342,7 +342,7 @@ ink #111111, cream #F4EFE6; don't recolour, swap teal and coral, stretch, outlin
   quarter swings in last and locks at 2.80 s, the two slabs slide in beside it; then the **title card** (`TitleCard` in
   `src/ch/Ch01.tsx`, 5 s: title on orange tape, subtitle in teal, dates as a note).
 - **Chapter breaks:** the 2-second **mark snap** (`LogoBreak` in `ChunkIntro.tsx`, §11).
-- **Sound:** clicks and page turns only, no tones and no music (`voice-and-audio.md` §7).
+- **Sound:** clicks only (the jingle's built-in page turn is faded out), no tones and no music (`voice-and-audio.md` §7).
 - **Still on the old brand:** thumbnails and `Brand.tsx` still draw the 15 Minute History `Wordmark` (`src/kit/Intro.tsx`);
   switch them to the Chunk files in `brand/chunk-history/final/` when you next make a thumbnail. The intro in §9.1 below is
   the previous one (from *The Balloon War*), kept for reference.

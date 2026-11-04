@@ -32,7 +32,7 @@ its own words.json, a 3D gallery-corridor open and close (CSS 3D planes), and a 
 4. **Captions.** Inter 800, uppercase, 88 px, cream with the spoken word in orange; three words at a time, never across
    the end of a sentence.
 5. **Sound.** Each segment is an `<Audio startFrom endAt>` inside a `Sequence` at its local start; one music bed from the
-   chapter's cue (0.13–0.22, by the cue's LUFS); a whoosh per cut; a stamp on the end card.
+   chapter's cue (0.13–0.22, by the cue's LUFS); silent cuts; a stamp on the end card.
 6. **Render and master.** `npx remotion render src/index.ts VShortN out/shorts/vshortN.mp4 --crf=18`, then
    `python3 tools/master.py out/shorts/vshortN.mp4 renders/shorts/<SLUG>_ShortN.mp4` (−14 LUFS). Check stills of every scene
    at phone size before rendering.

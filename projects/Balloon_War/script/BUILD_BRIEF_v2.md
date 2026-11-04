@@ -17,7 +17,7 @@ Project: `projects/Balloon_War/v2/` (Remotion 4, 1920×1080, 30 fps; `public/` a
 ## Read first
 1. `v2/src/ch/Ch01.tsx`: **the finished cold open. Follow its patterns exactly**: `makeTimeline(N, 30)`, `t.at('phrase')` (and
    `t.at('phrase', n)` for the n-th occurrence), a cut 1 frame before the word that starts a new idea, each scene in
-   `<Sequence from={cut} layout="none">` with beats passed as `t.at(..) - a`, `useScene(cuts)`, `Sfx` (whoosh per cut, stamp per tape,
+   `<Sequence from={cut} layout="none">` with beats passed as `t.at(..) - a`, `useScene(cuts)`, `Sfx` (no sound on cuts: whoosh is muted; a stamp per tape,
    `WRITE` 2 frames before each note), `Print` (`v2/src/kit/print.tsx`) for archival prints on the black desk, `NoPhoto` labels.
 2. `script/SCENES_v2.md` (your chapters' beats and assets), `script/SCRIPT_v2_story_arc.md` (narration, quote cards, fact-check flags),
    `public/img/IMAGES.md` (files and their on-screen source tags; v2 additions at the end), `script/SILHOUETTES.md` (palette, props).

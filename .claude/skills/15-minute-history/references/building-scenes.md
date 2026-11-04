@@ -28,7 +28,7 @@ const Body: React.FC = () => {
     [at('His critics') - 1, <Spoils t={t} />],
   ];
   const scene = useScene(cuts);
-  return <>{scene}{/* sfx: whoosh per cut, stamp per title, marker per note */}</>;
+  return <>{scene}{/* sfx: silent cuts, a stamp per title, the marker (near-silent) per note */}</>;
 };
 
 export const Ch06 = () => (
@@ -156,7 +156,8 @@ words sat. Give the background real parallax (split it with `tools/sil_layers.py
 
 ## 6. Sound
 
-Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
+Per chapter, in `Body`: **no sound on cuts** (the user, Nov 2026: the per-cut whoosh read as a page flip and was "too jarring"; `Sfx`
+mutes `whoosh`, `whip`, `page_turn`, `paper_rustle`, `paper_slap_soft`), a stamp on every `Highlight` (0.27–0.3),
 the marker sound 2 frames before every `Note` (`WRITE`, capped at 0.03: the user wants it nearly silent; no page-turn or paper sounds, `Sfx` mutes them), a tick on pins and card flips (0.45). Music beds go
 in `ChapterShell`'s `music` with `volume: bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; see
 `voice-and-audio.md` §6). A `whip_soft` under a gentle drift plays at half level (the West series' `Sfx` halves any `whip`
