@@ -17,6 +17,12 @@ stage on the desk (`src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and
 Motion inside the parallax scenes (from the motion list): drifting mist bands between planes, particles (dust, spray, ash), light
 flicker and the dawn line brightening, and gentle sway on trees and the hanging balloon where a plane can be bent.
 
+## Figures are solid black (the user's rule, Nov 3, 2026)
+
+Every figure, animal and object is ONE solid, opaque black shape: no faces, no light or transparent lines for collars, folds,
+buttons or seams, no rim light or glow. Only the outer outline carries information. (The Diamond Hoax figures had white interior
+lines; not here.) The generation brief for all 16 scenes, in reference order, is `FLOW_PROMPT.md`.
+
 ## The palette
 
 Built from the channel's own colours (`visual-style.md`): the desk's warm ink black, a **teal-slate haze** (a dark, quiet cousin of
@@ -101,3 +107,11 @@ used") on their first appearance, never presented as likenesses. Price gets real
 2. Add a Gemini key to `projects/Balloon_War/.env` (only `.env.example` is there) and say go. I'll generate scene 1 and scene 6
    first as a test pair (Japan dawn and Oregon woods), lock them, split them into planes and show you a short parallax clip before
    doing the rest.
+
+## Props (AI, for desk cut-outs) — Nov 4, 2026
+`gemini-3-pro-image`, 2K, 1:1, prompts beside each source in `public/img/props/src/<name>.txt` (the Diamond Hoax prop paragraph;
+white objects on black so they cut out cleanly). Contact sheet: `review/contact/props_v2.jpg`. Never presented as a specific real
+artifact; no source tag. Retakes (round 1 in `src/rejects/`): the barometer had two clock hands; the sandbag was cloth (the real
+ballast bags were paper, Mikesh p. 12); the paste brush was a round Western pastry brush.
+Props: barometer, door_card (blank; "Out of Business" added in post), konnyaku_root, microscope, paper_crane, paste_brush_pot,
+radio, sand_jar, sandbag, sweet_potato, washi_stack.

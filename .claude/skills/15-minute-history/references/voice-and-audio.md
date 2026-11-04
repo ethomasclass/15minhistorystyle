@@ -97,9 +97,11 @@ with tags). Use it for every video from now on:
   occasionally add, drop or repeat a word: the forced-alignment word count check catches most of it, and the
   pronunciation-test listen catches the rest. Retake a chapter that drifts.
 - **Audio tags in the script**, in square brackets, performed and never shown or captioned: `[curious]`,
-  `[thoughtful]`, `[serious]`, `[quietly]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
+  `[thoughtful]`, `[serious]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
   at most one per paragraph, before the sentence it colors; none on facts that need a neutral read; the heavy chapter
-  gets only `[quietly]` or `[serious]`. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
+  gets only `[serious]`. **Never `[quietly]`, `[softly]` or `[whispers]`**: v4 drops 5–10 dB into a whisper (the user, twice:
+  "I shouldn't be whispering to the audience or getting super quiet"); `tools/voice.py` now strips them, and
+  `tools/quiet_check.py` flags any sentence more than 4.5 dB under the chapter's level after voicing. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
   (once or twice a chapter at most).
 - **Clean endings.** Every splice (shortened pauses, sentence and paragraph gaps) is cut at the quietest 10 ms between
   words, keeps two thirds of each kept pause after the last sound so endings ring out, and fades for 12 ms, so no word
@@ -115,7 +117,9 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 
 - A respelling replaces whole words and must keep the word count ("Worcester": "Wooster", not "Woo ster").
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
-  "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
+  "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts have special cases. **Dates are said as ordinals**
+  (the user, *The Balloon War* v2, Nov 2026: "November third", not "November three"): `voice.py` turns any "Month 3" or
+  "Month 3rd" into "Month third", so write digits in the script as usual and listen for it in the pronunciation test.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
 - **Don't respell a common word the voice already knows.** A respelling can make it worse (*The Balloon War*:
   "barrage" → "buh-rahzh" came out "Baraz"; unrespelled, it was right). Keys are case-sensitive, so a respelling
@@ -210,7 +214,7 @@ shifts. Re-check stills for that chapter after re-voicing.
 
 ## 7. Sound effects
 
-**The branding sound is clicks and page turns only: no tones, no music** (the user's call after trying marimba, felt-piano,
+**The branding sound is clicks only (the page turns built into `chunk_jingle.mp3` and `chunk_snap.wav` are cut off in `ChunkIntro.tsx`, Nov 2026): no tones, no music** (the user's call after trying marimba, felt-piano,
 chopped-sample and lo-fi jingles). The template's `public/music/chunk_jingle.mp3` (the 5.5 s intro: five clicks speeding up
 with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny clicks on HIS-TO-RY, a page turn) and
 `public/sfx/chunk_snap.wav` (the chapter break: the click-clack, then a page turn) are built by
@@ -219,7 +223,8 @@ with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny
 
 
 The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker_tick` (notes, via `WRITE`),
-`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (cuts), `boom` (big hits), `page_turn`, `quill`,
+`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (muted: cuts are silent), `boom` (big hits), `page_turn` (muted, like
+`paper_rustle`, `paper_slap_soft`, `whip` and `whip_soft`: `Sfx` never plays them), `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
 `python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**
@@ -227,8 +232,12 @@ The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker
 and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <name>` fetches, trims and normalises it
 and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
 CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
-effects quiet; they should be felt more than heard.
+effects quiet; they should be felt more than heard. **Sound effects are only for things on screen** (waves, wind, a plane, a radio,
+a press) plus the tape stamp; cuts and moves are carried by the voice and the music (*The Balloon War* v2, Nov 2026).
 
-**Update (Nov 2026): no page turns at all**, in the branding or in chapters (the user's call), and the handwriting/highlighter
-scratch (`marker_tick`) at 40% of its old level. `Sfx` in `src/kit/common.tsx` enforces both (`MUTED`, `MARKER_GAIN`), so old chapter
-code that still lists `page_turn` stays silent. The branding files are rebuilt clicks-only by `tools/make_jingle.py`.
+**No page turns, no cut whooshes, the writing scratch nearly silent** (the user, Nov 2026: first on the Diamond Hoax, then again on
+*The Balloon War* v2, where the per-cut whoosh still read as a page flip). `Sfx` in `src/kit/common.tsx` enforces it: `MUTED`
+(page turns, paper sounds, whoosh, whip) never plays, matched by name so variants stay off too, and any marker/highlighter scratch
+is capped at `WRITE_MAX` (0.03). Old chapter code that still lists those sounds stays silent. The branding files are clicks only
+(`tools/make_jingle.py` rebuilds them; `ChunkIntro.tsx` also cuts off the page turn in older copies of `chunk_jingle.mp3` and
+`chunk_snap.wav`).

@@ -12,6 +12,7 @@ Each chapter is a Remotion composition (`src/ch/ChNN.tsx`) timed off its narrati
 6. Sound
 7. Checking your work (do all of these before showing the user)
 8. Lessons from earlier videos
+9. Drawn 3D pieces (`src/fx/`)
 
 ## 1. How a chapter is put together
 
@@ -28,7 +29,7 @@ const Body: React.FC = () => {
     [at('His critics') - 1, <Spoils t={t} />],
   ];
   const scene = useScene(cuts);
-  return <>{scene}{/* sfx: whoosh per cut, stamp per title, marker per note */}</>;
+  return <>{scene}{/* sfx: silent cuts, a stamp per title, the marker (near-silent) per note */}</>;
 };
 
 export const Ch06 = () => (
@@ -75,7 +76,9 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `Tag` (Kit) | Source credit, mono caps, bottom-left | `text` (put one on every image) |
 | `Picture` + `Tint` + `Traced` (Kit) | B&W image, coral subject, teal outline | `place size mask paths` |
 | **`Cut` (desk)** | **The default for a photo**: its subject cut out, on the notebook paper | `name mask size box at traceAt tint valign bare` |
-| **`Desk` (desk)** | Photo with no single subject (landscape, crowd, room) as a cream card on the paper | `src size box at rot pos mask traceAt children(S)` |
+| **`Print` (print)** | Archival print on the black desk (no mount, no frame), slaps down, source tag under it (*The Balloon War* v2) | `src x y w h at out rot pos tag fit` |
+| `NoPhoto` (print) | Mono label for a real person shown only as an anonymous silhouette ("… · NO PHOTO SURVIVES") | `text at x y out` |
+| **`Desk` (desk)** | Photo with no single subject (landscape, crowd, room) as a card on the paper (older: cream; now prefer `Print`) | `src size box at rot pos mask traceAt children(S)` |
 | `Photo` (shell) | Full-bleed image (rarely: maps and documents only; the user dislikes slow-push photo scenes) | `src size fx fy z0 z1 a b mask tint traceAt children(place)` |
 | `CropCard` (shell) | Image on a cream card, cropped window | `src size x y w h fx fy scale rot at mask tint children(S)` |
 | `PhotoCard` / `Card` | Whole image on a card | `src x y w h rot at` |
@@ -87,6 +90,9 @@ All from `src/kit/`. Positions are screen pixels on the 1920×1080 frame unless 
 | `MapScene`, `Pin`, `Route`, `Region`, `PLACES` (map) | 1836 map, camera, pins, routes | `keys: Cam[]`, `children(S, cam)` |
 | `Map3D` + `Slab`, `Fill`, `Border`, `Glow`, `Route`, `Flow`, `MovingBorder`, `Stand` (`Pin3`, `Stake`, `Flag3`, `PlaceTag`, `RegionName`, `Hand`), `StateTiles`, `Count` (map3d) | The tilted 3D map (from *The Exact Spot*): regions rise as slabs, borders draw on with their names, labels stand up | `data keys: Cam3[] ({f x y z tilt rot})`, `children(api)`; data from `tools/build_map.py` (example map: `techniques/components/exact_spot/maps/`) |
 | `Engraving` (engraving) | A wood engraving full frame: 16:9 crop only, slow push, soft fade in/out | `src px fx fy a b z0 z1 fade quiet mask tint traceAt tag children(place)` |
+| **`SilScene` + `PlaneImg` (silparallax)** | A silhouette painting full frame in multi-plane parallax, mist between planes, dust in a beam, a cut-out riding a plane | `name size bands a b cam:{z x y} fog fogColor fade dust insert:[{plane, node}] glowLayer` |
+| `Prop` (prop) | AI prop cut-out on the desk, B&W, optional see-through coral and teal trace | `name x y w at out rot coral trace from` |
+| 3D pieces (`src/fx/`) | Drawn three.js pieces: `Stage`, `camAt`/`makeCam`/`SyncCam`/`project`, `Segs`/`Poly`/`DynSegs`, `MapSlab`, `Label`/`Fine`/`Hand` (kit3d); `MapTop`, `greatCircle` (mapgeo); `buildTerrain` + `TerrainSlab` (terrain) | see §9 |
 | `Parallax` (parallax) | 2.5D archival layers (subject over background) | `name src size a b tag fx fy cam depth crop frame mask tint tintStrength traceAt effects filter` |
 | `Tiles`, `STATES` (tiles) | State tile grid for elections | `state(code) => {fill,label,at}` |
 | `Person` (figures) | Drawn voter or crowd figure | `x y h at dashed hat dress` |
@@ -136,7 +142,7 @@ Make it act out the first sentence instead: open **tight on the coral subject** 
 frame on their own depth plane), **fade in a background painting** on the words that name the place, then **pull back** so the
 foreground figures slide in from both sides and the camera settles on the exact thumbnail frame; land the loops and notes only
 after it settles (notes drawn during the move run off the edge), and put a money tag or the key number where the thumbnail's tape
-words sat. Give the background real parallax (split it with `tools/sil_layers.py`) and a little coloured light. Code:
+words sat. Give the background real parallax (split it with `tools/sil_regions.py`, or `sil_layers.py` for a painting the depth split handles) and a little coloured light. Code:
 `techniques/components/diamond_hoax/fx/ColdOpenDepth.tsx` (`ColdOpenReveal`), timed with the chapter's word timings.
 
 ## 5. Images in scenes
@@ -156,27 +162,34 @@ words sat. Give the background real parallax (split it with `tools/sil_layers.py
 
 ## 6. Sound
 
-Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
-the marker sound 2 frames before every `Note` (`WRITE`, 0.2), a tick on pins and card flips (0.45). Music beds go
+Per chapter, in `Body`: **no sound on cuts** (the user, Nov 2026: the per-cut whoosh read as a page flip and was "too jarring"; `Sfx`
+mutes `whoosh`, `whip`, `page_turn`, `paper_rustle`, `paper_slap_soft`), a stamp on every `Highlight` (0.27–0.3),
+the marker sound 2 frames before every `Note` (`WRITE`, capped at 0.03: the user wants it nearly silent; no page-turn or paper sounds, `Sfx` mutes them), a tick on pins and card flips (0.45). Music beds go
 in `ChapterShell`'s `music` with `volume: bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; see
 `voice-and-audio.md` §6). A `whip_soft` under a gentle drift plays at half level (the West series' `Sfx` halves any `whip`
-sound). Keep the lists of cue words next to the scenes so they stay in sync.
+sound; since Nov 2026 `Sfx` mutes `whip` and `whip_soft` too, so drifts are silent). Sound effects only for things on screen
+(waves, wind, a plane, a radio). Keep the lists of cue words next to the scenes so they stay in sync.
 
 ## 7. Checking your work
 
 Do all of these before sending the user anything. Each one caught real problems on *King Andrew*.
 
 1. **Typecheck:** `npx tsc --noEmit -p .`
-2. **Anchors:** `python3 tools/anchors.py <stem> --src src/ch/ChNN.tsx` for each chapter you touched.
+2. **Anchors:** `python3 tools/anchors.py <stem> --src src/ch/ChNN.tsx` for each chapter you touched. Then **beat scope**:
+   `python3 tools/beatscope.py src/ch/ChNN.tsx public/audio/<stem>.words.json` flags any `t.at()` beat that lands outside its
+   scene's window (a repeated word matching its first occurrence: the beat never shows, and anchors.py can't see it). It caught
+   two real bugs in *The Balloon War* v2.
 3. **Stills:** `node tools/stills.mjs ChNN out/stills 3 9.5 17 ...` (seconds), then
    `python3 tools/sheet.py out/sheet.jpg out/stills/ChNN_*.jpg` and look at the sheet. Pick seconds a little
    after each anchor so every write-on has finished. Look for: text over faces or other text, text running into a
-   divider, arrows crossing words, titles on busy image areas, empty scenes, a tint gone flat.
+   divider, arrows crossing words, titles on busy image areas, empty scenes, a tint gone flat, a scene with nothing new for
+   more than ~8 s. Keep **one labelled contact sheet per chapter** (`review/contact/chNN.jpg`) and look at it before reporting.
+   Chapters with three.js pieces need WebGL stills: `node tools/glstills.mjs out/stills ChNN:900,1200 FX-<piece>:0,60`.
 4. **Text-edge probe:** `SAFE=96 node tools/probe_text.mjs Ch01,Ch02,... 10 2>&1 | grep -v "PROBECOUNT\|emory"`.
    It renders every 10th frame and lists any text whose box crosses the frame edge, and (with `SAFE=96`) any title or
    note inside the outer 5%. Fix every hit (shorter line,
    smaller size, move left, `whiteSpace: 'nowrap'` plus a width check). The user noticed right-edge cut-offs in a
-   480p preview, so treat any hit as a bug.
+   480p preview, so treat any hit as a bug. (The *96 px text probe*: `SAFE=96` must report nothing on every chapter.)
 5. **After rendering:** `python3 tools/frames_sheet.py out/ch/chNN.mp4 out/check.jpg 12 18.5 40` to look at the
    finished frames, especially every spot the probe flagged and every new graphic.
 
@@ -205,6 +218,14 @@ Do all of these before sending the user anything. Each one caught real problems 
   masks, layers, chapter stubs registered in `chapters.ts`), smoke-test them with a few stills, then give 2 chapters each to 4
   agents that may only edit their own `ChNN.tsx`. Review every agent's stills sheet; when two chapters show the same picture,
   move that shot into a shared component so they match (the Waltz went into `src/kit/waltz.tsx`).
+- **Parallel builders from a shared brief** (*The Balloon War* v2, the current form; `projects/Balloon_War/script/BUILD_BRIEF_v2.md`):
+  finish chapter 1 yourself first as the pattern to follow exactly; then one brief for all builders: each builder's files and only
+  those (chapter builders their `ChNN.tsx` and `src/ch/chNN/` helpers; a 3D builder only `src/fx/*` and the registry), what not to
+  touch (`src/kit/*`, `Root.tsx`, `chapters.ts`, tools, another builder's files: copy a shared piece into your folder instead), no
+  commits, no video renders (stills only, one run at a time on a shared 4-core machine), what to read first, the kit, the video's
+  rules (look, silhouettes, tags, vocab and quote cards, the heavy chapter), and the tests before reporting (typecheck, anchors,
+  beatscope, stills at every scene, the 96 px probe, a contact sheet per chapter, a report under 250 words). Three chapter builders
+  plus one 3D builder worked at once; chapters used placeholders until the 3D pieces landed (`TODO(3D)`).
 - **Patterns from *Not in the Picture*** (American West Ep 1, `projects/American_West/ep1/`):
   - **Hatch a region on the drawn map** (`MWest` in `src/kit/ch01_extra.tsx`): the subject area as one see-through coral hatch
     built from state outlines clipped to the land, with a label standing up off the map. It made sparse, dark map shots read.
@@ -221,3 +242,31 @@ Do all of these before sending the user anything. Each one caught real problems 
     bottom; keep that in any new write-on. And **anything standing upright on a tilted 3D plane must sit wholly above its foot**
     (`bottom: 2`, not `top: -0.66em`): the part below the anchor sinks under the plane and the map hides it (`MPin` labels and
     dots did this in Ep 1).
+
+## 9. Drawn 3D pieces (`src/fx/`, from *The Balloon War* v2)
+
+Six three.js pieces carried *The Balloon War* v2 (`projects/Balloon_War/v2/src/fx/`: `PacificWinds` the jet stream as thousands
+of teal particles from real January 1945 reanalysis winds with a coral balloon riding it; `LandingMap` 285 recorded incidents
+standing up as pins in date order with a month counter; `SandToBeach` sand grains pulling out to a real-elevation coast;
+`AltitudeRibbon` the three-day flight as a sawtooth ribbon with sandbags dropping; `BalloonAssembly`; `GearhartTerrain` real
+terrain with the monument). The reusable parts are in the template: `src/fx/kit3d.tsx`, `mapgeo.tsx`, `terrain.tsx`, a
+`registry.tsx` of test compositions and `DemoSlab.tsx` as the smallest example. The patterns:
+- **Drawn, never photoreal**: teal `#2FE0C4` lines on the dark desk, cream sparingly, **one coral element** (the subject), labels
+  in mono tabs kept 96 px inside the frame, a `Fine` line for the source and any honesty note ("heights exaggerated 3×", "path
+  follows that mean wind").
+- **Real data, sourced**: coastlines from Natural Earth and heightmaps from AWS Terrarium tiles (`tools/geo_bake.py`), winds
+  from NOAA 20CRv3 over OPeNDAP, incidents from the book's list; bake small JSON files into `public/data/` and write each one's
+  source, bounds and date into a `public/data/fx_data.md` (the Balloon War's is the model). When the real data can't be had, use a
+  long-term mean and say so on screen.
+- **Every piece is a pure function of the frame** (no state, no randomness at render time; seeded `rng` at module load), so any
+  frame renders the same on any worker.
+- **Beats as props** (`at`, named beats like `windsAt`, `routeAt`, a date window), so a chapter anchors them to words:
+  `<PacificWinds windsAt={t.at('jet stream') - a} />`. A header comment lists the props.
+- **A test composition per piece** in `src/fx/registry.tsx` (registered as `FX-<id>`), checked with WebGL stills before any
+  chapter uses it.
+- **A three.js canvas must mount only after its textures load** (wait with `delayRender` / `continueRender` and render the canvas
+  after), or stills and renders show it blank. Simpler: draw textures synchronously on a canvas, as kit3d's `glowTexture` does (the
+  Balloon War pieces load no image textures at all).
+- **Rendering**: `tools/render_ch.sh` uses the `.real` headless shell and **no `--gl` flag**; `--gl=swangle` also works but was
+  4× slower (60 frames: 67 s vs 15 s). Stills: `tools/glstills.mjs` (`SCALE` sets the size). See `render-and-deliver.md` §2.
+

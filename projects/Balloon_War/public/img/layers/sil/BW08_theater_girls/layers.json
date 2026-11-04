@@ -1,0 +1,1 @@
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.16382238107134206, 0.032456982043362406, 0.0, 0.8037206368852956], "method": "colour/region split (tools/sil_regions.py BW08_theater_girls), not depth", "note": "front row + tables on L0, second row on L1, lamps+cones+fog+third row on L3"}

@@ -1,0 +1,1 @@
+{"size": [2752, 1536], "bands": 4, "thresholds": [0.786441445350647, 0.5116193890571594, 0.2467069923877716], "glowLayer": 0, "share": [0.26007789789244184, 0.0, 0.47746548911397774, 1.0], "method": "colour split (tools/bw12_layers.py), not depth"}

@@ -2526,6 +2526,168 @@
    ],
    "group": "Light, wry and comic",
    "file": "cues/aw_boomtown.mp3"
+  },
+  {
+   "canonical": "bw_something_in_the_woods",
+   "md5": "e4c57eab0345718117f0e17f6ed8a114",
+   "duration_s": 104.9,
+   "integrated_lufs": -15.4,
+   "true_peak_dbtp": -0.3,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a quiet, curious cold open for a documentary about a forgotten mystery in a misty pine forest, a soft felt piano figure of three notes that keeps asking a question, low muted strings underneath, a breath of alto flute, faint harp like falling needles, calm but uneasy, a small dark swell when the secret is revealed, then it holds still and ends on an unresolved chord left hanging in the air, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Quiet curious cold open: felt piano three-note question, low muted strings, alto flute, harp; a small dark swell; ends unresolved.",
+   "good_part": "Sound from the first second (no silent lead); small swells ~15 s and ~40 s; dip 88–92 s; back 93–100 s; fades out by 104 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 1 cold open",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_revenge_on_the_wind",
+   "md5": "7a31845e727a03f2bf7396422767af68",
+   "duration_s": 99.6,
+   "integrated_lufs": -14.6,
+   "true_peak_dbtp": -0.7,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a piece that begins tense and low, with distant low strings and a soft timpani heartbeat for an air raid seen from far away, then turns to wonder as a high wind is discovered, airy strings rising, alto flute and harp drifting west to east, a sense of altitude and open sky, then a cool determined close as a plan takes shape, 76 BPM, 4/4, E minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Tense and distant (low strings, soft timpani heartbeat), turning to airy wonder (rising strings, alto flute, harp), then a cool determined close.",
+   "good_part": "Steady from the top; lifts ~5 s and ~68 s; fullest 80–87 s; fades from 95 s, out by 98 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 2 the raid and the wind",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_paper_and_paste",
+   "md5": "34f9c6fcfca9529d9bad9a5b9a8fb7e8",
+   "duration_s": 120.0,
+   "integrated_lufs": -15.8,
+   "true_peak_dbtp": -0.0,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a delicate, patient piece for teenage girls working in silence in a vast dim 1940s theater, a repeating gentle felt piano pattern like careful brush strokes, a sparse koto answering now and then, soft pizzicato, muted strings, hushed and focused with a quiet sadness underneath, in the middle a soft clockwork pulse of plucked strings and harp like a small machine rising and falling, then back to the brush strokes, ending small and unfinished, 80 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Delicate, patient work in a dim theater: repeating felt-piano brush strokes, sparse koto, pizzicato, muted strings; a soft clockwork pulse in the middle.",
+   "good_part": "Dips 22–25 s and 69–75 s (good landing spots for a line); fullest 55–60 s and 88–93 s; sparse ending 105–118 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 3 the girl who glued",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_dawn_launch",
+   "md5": "71b34a7573f342ba0c168aa19fe21389",
+   "duration_s": 89.9,
+   "integrated_lufs": -14.4,
+   "true_peak_dbtp": -1.4,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a cold winter dawn on a Pacific beach, waves implied by slow harp swells, low strings, felt piano, a koto figure like a question, quietly hopeful as a huge paper balloon fills, a gentle rising swell as it is released and drifts out over the sea, then the music thins into doubt, ending on two lonely notes, 74 BPM, 4/4, G minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Cold winter dawn on a Pacific beach: harp swells like waves, low strings, felt piano, koto; quietly hopeful, a swell as the balloon is released, thinning into doubt.",
+   "good_part": "Full from 2 s and steady; fades from 78 s, out by 89 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 4 the boy on the beach",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_paper_and_sand",
+   "md5": "aa3595bfe7d1469f796d1edf77c3c5d4",
+   "duration_s": 157.9,
+   "integrated_lufs": -14.4,
+   "true_peak_dbtp": -0.1,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a curious 1940s American investigation, pizzicato strings and upright bass, vibraphone, muted trumpet, a light brushed rhythm, puzzled and searching like detectives laying out clues, a brief heroic lift for paratroopers jumping into a forest fire, then microscope-quiet and precise, building to a discovery, and ending on a sudden unresolved question, 96 BPM, 4/4, F minor; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Curious 1940s American investigation: pizzicato, upright bass, vibraphone, muted trumpet, brushes; a brief brave lift; microscope-quiet; ends on an unresolved question.",
+   "good_part": "Steady; dip 89–92 s; lift 92–130 s; dip 132–136 s; last block 136–150 s; fades by 157 s (trimmed from 159.6 s, silent tail).",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 5 \"Paper\" and ch 6 the sand",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_the_newspaperman",
+   "md5": "f5021d18d45cf361a0bdf3e78ae80925",
+   "duration_s": 159.6,
+   "integrated_lufs": -15.1,
+   "true_peak_dbtp": -0.1,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "restrained 1940s Washington intrigue for a newspaperman keeping a secret, upright bass walking softly, brushed cymbal, muted trumpet with a lonely phrase, felt piano, low strings, a steady ticking pulse like a clock in a newsroom at night, measured and serious, a slow tightening as the dilemma grows, a quiet resolved landing near the end, then a held breath, 88 BPM, 4/4, C minor; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Restrained 1940s Washington intrigue: walking upright bass, brushed cymbal, lonely muted trumpet, felt piano, low strings, a newsroom-clock pulse; tightens slowly.",
+   "good_part": "Short quiet start 0–6 s; steady; dip ~105 s; choppier 125–145 s; ends 157 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 7 the newspaperman",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
+  },
+  {
+   "canonical": "bw_gearhart",
+   "md5": "a322910a073d2a5214517471af1d4b01",
+   "duration_s": 128.3,
+   "integrated_lufs": -16.0,
+   "true_peak_dbtp": -1.4,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "very sparse grief for a quiet forest, solo felt piano, single notes with long silences between them, a faint low string held underneath, no melody to speak of, still and respectful, almost nothing, ending in silence, 60 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental",
+   "mood": "Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter.",
+   "good_part": "Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail).",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user). Made for The Balloon War v2 ch 8 (Bly) but not used: the heavy chapter runs birdsong, then silence.",
+   "used_in": []
+  },
+  {
+   "canonical": "bw_a_thousand_cranes",
+   "md5": "1dac034399958f6c42c5f2f4576536f3",
+   "duration_s": 219.6,
+   "integrated_lufs": -14.8,
+   "true_peak_dbtp": -1.5,
+   "source_video": "The Balloon War (v2, story arc)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a warm, quiet reconciliation for a documentary ending, felt piano and soft strings with alto flute, a gentle koto line woven in like folding paper, harp, it begins reflective and grave, slowly opens into warmth and grace in the second half, a hopeful lift that never becomes triumphant, the last minute simple and luminous with long held chords, ends gently on a major chord that rings out, 70 BPM, 4/4, D minor to D major; documentary, restrained, space for narrator, instrumental",
+   "mood": "Warm, quiet reconciliation for the ending: felt piano, soft strings, alto flute, a gentle koto line, harp; reflective, opening into warmth, a gentle lift, a ringing major close.",
+   "good_part": "Steady from ~5 s; swells ~45 s and 150–180 s; quieter 185–205 s; last swell 205–212 s; out by 217 s.",
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
+   "used_in": [
+    {
+     "video": "The Balloon War (v2)",
+     "where": "ch 9 a thousand cranes, closing line and end screen",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ]
   }
  ]
 }

@@ -99,7 +99,7 @@ const Body: React.FC = () => {
   return (
     <>
       {scene}
-      {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.28} />)}
+      {/* no sound on cuts (the user, Nov 2026): cuts are silent; the voice and the music carry them */}
       {['Indiana', 'Illinois'].map((c) => <Sfx key={c} at={at(c)} src="sfx/tick.wav" volume={0.45} />)}
       {['expanding', 'jobs', 'fresh'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.27} />)}
       {['owned', 'any', 'dropped', 'Translation:', 'you', 'building', 'answered'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}

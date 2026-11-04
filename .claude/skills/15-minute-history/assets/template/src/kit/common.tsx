@@ -7,20 +7,21 @@ import {useGFrame, usePal} from './Kit';
 export const MAP = {w: 4986, h: 4608};
 
 /** The sound under every handwritten note (one place to change it) and its level. */
-export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
+// The user's call (Nov 2026): the writing sound barely there, no page-turn / paper sounds, and silent cuts. The whoosh on every
+// cut read as a page flip ("too jarring ... every time we move on to a new photo"). Cuts are carried by the voice and music;
+// sound effects are only for things on screen (waves, wind, a plane, a radio) and the tape stamp.
+export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.03};
+/** Sounds the user turned down for good: Sfx plays nothing for these, wherever a chapter still asks for them. */
+const MUTED = ['sfx/page_turn.wav', 'sfx/paper_rustle.wav', 'sfx/paper_slap_soft.wav', 'sfx/whoosh.wav', 'sfx/whip.wav', 'sfx/whip_soft.wav'];
+const WRITE_MAX = 0.03;
 
-/** Whip sounds at half level (gentle transitions), the handwriting/highlighter scratch well under everything else. */
-const WHIP_GAIN = 0.5;
-const MARKER_GAIN = 0.4;
-/** Sounds the user has cut from the channel: page turns (Nov 2026). Anything listed here never plays. */
-const MUTED = ['page_turn'];
-export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  MUTED.some((m) => src.includes(m)) ? null : (
-    <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none">
-      <Audio src={staticFile(src)} volume={volume * (src.includes('whip') ? WHIP_GAIN : src.includes('marker') ? MARKER_GAIN : 1)} />
-    </Sequence>
-  )
-);
+export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => {
+  // Muted by name, so renamed variants (whip_soft, paper_slap_soft …) stay off too. The handwriting/highlighter scratch is
+  // capped at WRITE_MAX, whatever level a chapter asks for (Diamond Hoax: 40%; The Balloon War v2: nearly silent).
+  if (MUTED.some((m) => src.includes(m.replace(/^sfx\/|\.wav$/g, '').replace(/_soft$/, '')))) return null;
+  const v = /marker|highlight|scratch/.test(src) ? Math.min(volume, WRITE_MAX) : volume;
+  return <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={v} /></Sequence>;
+};
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */
 export const MapView: React.FC<{cx: number; cy: number; s: number; rot?: number; children?: React.ReactNode; dim?: number}> = ({cx, cy, s, rot = 0, children, dim = 0}) => (

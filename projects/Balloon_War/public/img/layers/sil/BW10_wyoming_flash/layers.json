@@ -1,0 +1,1 @@
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.3004855370336725, 0.0, 0.1466156715570494, 0.5528987914092781], "method": "colour/region split (tools/sil_regions.py BW10_wyoming_flash), not depth", "note": "ink (fence, windmill, men, barn, ground) on L0, mesas on L2, sky on L3"}

@@ -170,7 +170,9 @@ flat (one plane, scanner light). The channel gets depth from camera grammar, tex
 - **Texture.** Torn edges from real torn-paper shapes, translucent tape, stains multiplied in, halftone and slight misregistration
   on cut-outs (`tools/weather.py`), grain over everything. Still no cream or white surfaces on the black desk.
 - **3D where it explains.** Tilted township grids with slabs rising, elevation ribbons, cut-away diagrams. Teal contour lines on
-  black, one coral element, real data where possible (or labelled control points, "heights exaggerated" on screen).
+  black, one coral element, real data where possible (or labelled control points, "heights exaggerated" on screen). The kit and
+  the patterns from *The Balloon War* v2's six pieces (real reanalysis winds, real terrain, beats as props, a test composition per
+  piece, WebGL rendering) are in `building-scenes.md` §9.
 - **Hook alignment** (Kallaway). In the first ~2 s the visual, the first spoken line and a short written hook say one thing.
   After the hook, the three tracks do different jobs: the type states the point, the voice explains why, the picture shows it.
 - **Design the end frame first**, then animate toward it, so pieces resolve into a composed frame rather than drifting in.

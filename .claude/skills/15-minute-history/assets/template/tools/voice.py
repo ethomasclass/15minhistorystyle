@@ -79,9 +79,32 @@ def number_words(text):
     return text
 
 
+ORD = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh", 8: "eighth", 9: "ninth",
+       10: "tenth", 11: "eleventh", 12: "twelfth", 13: "thirteenth", 14: "fourteenth", 15: "fifteenth", 16: "sixteenth",
+       17: "seventeenth", 18: "eighteenth", 19: "nineteenth", 20: "twentieth", 30: "thirtieth"}
+
+
+def ordinal(n):
+    """1 -> first, 3 -> third, 22 -> twenty-second, 31 -> thirty-first (days of the month)."""
+    if n in ORD:
+        return ORD[n]
+    t, o = divmod(n, 10)
+    return TENS[t] + "-" + ORD[o]
+
+
+MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+
+
+# Tags that make the voice whisper or drop way down: never sent (the user's note, Nov 2026: "I shouldn't be whispering to the
+# audience or getting super quiet"). Use [serious] for weight instead.
+HUSH = re.compile(r"\[(?:quietly|softly|whisper(?:s|ing)?|hushed|under (?:his|her|my) breath|barely audible)\]\s*", re.I)
+
+
 def spoken(text):
+    text = HUSH.sub("", text)
     text = re.sub(r"\$([\d,]+)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
-    text = re.sub(r"\bJanuary 1\b", "January first", text)
+    # dates are said as ordinals: "November 3, 1944" -> "November third, nineteen forty-four" (the user's note, Nov 2026)
+    text = re.sub(rf"\b({MONTHS}) (\d{{1,2}})(?:st|nd|rd|th)?\b(?![,.]?\d)", lambda m: m.group(1) + " " + ordinal(int(m.group(2))), text)
     for k, v in PRONOUNCE.items():
         text = re.sub(rf"\b{re.escape(k)}\b", v, text)
     return number_words(text)

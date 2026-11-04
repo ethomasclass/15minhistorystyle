@@ -2,7 +2,8 @@
 # A render queue, so finished chapters render one after another instead of fighting for the CPU.
 #   echo 04 >> out/render_queue.txt; tools/render_queue.sh      (starts the runner unless one is already running)
 # The runner takes chapters from the top of out/render_queue.txt, renders each with tools/render_ch.sh, logs to
-# out/render_queue.log, and exits when the queue is empty.
+# out/render_queue.log, and exits when the queue is empty. Background commands in a cloud session stop after 2 hours, and the
+# runner dies with them: queue a batch that fits (two or three chapters), then queue the next (The Balloon War v2).
 cd "$(dirname "$0")/.."
 Q=out/render_queue.txt
 mkdir -p out; touch $Q

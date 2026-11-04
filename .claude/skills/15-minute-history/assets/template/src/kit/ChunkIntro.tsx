@@ -3,8 +3,8 @@
 //    quarter swings in last like a minute hand landing on a quarter past, then the Two slabs wordmark slides in beside it.
 //    Trimmed from the brand's 8.7 s to 5.5 s (the user's pick): it ends soon after the full lockup lands.
 //  - LogoBreak (the mark snap): the chapter break. Dip to black, the teal mark is already there, the coral quarter swings in
-//    and locks on a click-clack, then a page turn as the next chapter fades up (2 s, same overlap contract as the old break).
-// Sound: clicks and page turns only, no tones and no music (the user's call); public/music/chunk_jingle.mp3 and
+//    and locks on a click-clack as the next chapter fades up (2 s, same overlap contract as the old break).
+// Sound: clicks only, no tones and no music (the user's call); the page turns built into both files are cut (Nov 2026); public/music/chunk_jingle.mp3 and
 // public/sfx/chunk_snap.wav, built by projects/American_West/ep1/tools/make_jingle.py.
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Easing, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
@@ -22,13 +22,16 @@ const ease = Easing.bezier(0.22, 1, 0.36, 1);
 
 /** Intro length: the brand intro runs 260 frames; the lockup is complete at 119, so 165 leaves ~1.5 s on it. */
 export const INTRO_FRAMES = 165;
-/** The branding sound is clicks and a page turn only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py.
+/** The branding sound is clicks only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py; the page turn
+ *  built into the file is cut off at PAGE_TURN (no page turns, Nov 2026).
  *  The file already carries its level (peak -8 dBFS), so full volume. */
 const JINGLE_VOL = 1;
+/** Frame where chunk_jingle.mp3's page turn starts (4.45 s); the jingle is silent from here. */
+const PAGE_TURN = Math.round(4.4 * 30);
 
 const FLIGHT = 22; // frames from launch to landing
 // Landing frames, timed to the click track (tools/make_jingle.py): five clicks for the five blocks, the coral quarter locks on a
-// click-clack (2.80 s), CHUNK is one firm click (3.60 s), HIS-TO-RY three tiny clicks from 3.95 s, then a page turn.
+// click-clack (2.80 s), CHUNK is one firm click (3.60 s), HIS-TO-RY three tiny clicks from 3.95 s, then the file's page turn (cut off).
 const MARK_LAND = [36, 50, 60, 68, 74, 84];
 const WM_LAND = [108, 119];
 
@@ -145,7 +148,8 @@ export const ChannelIntro: React.FC = () => {
   return (
     <AbsoluteFill>
       <Stage opacity={fade}><IntroScene /></Stage>
-      <Audio src={staticFile('music/chunk_jingle.mp3')} volume={(f) => interpolate(f, [0, INTRO_FRAMES - 30, INTRO_FRAMES], [JINGLE_VOL, JINGLE_VOL, 0], clamp)} />
+      {/* the jingle's page turn into the title card (4.45 s in) is faded out: no page turns (the user, Nov 2026) */}
+      <Audio src={staticFile('music/chunk_jingle.mp3')} volume={(f) => interpolate(f, [0, PAGE_TURN - 6, PAGE_TURN], [JINGLE_VOL, JINGLE_VOL, 0], clamp)} />
     </AbsoluteFill>
   );
 };
@@ -189,8 +193,8 @@ export const LogoBreak: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: black}}>
       <Stage opacity={logo}><SnapScene /></Stage>
-      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND) and a page turn as the next chapter fades up, quiet */}
-      <Sequence from={0} durationInFrames={66} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
+      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND); the file's page turn (1.3-1.7 s) is cut off at 1.2 s (no page turns) */}
+      <Sequence from={0} durationInFrames={36} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
     </AbsoluteFill>
   );
 };

@@ -2,16 +2,24 @@
 // (tools/thumbs.mjs renders frame 140 so every write-on has finished).
 //   A · the split: one cut-out portrait, teal half / coral half, a gold crown resting on the head, two words under the chin.
 //   B · title-led: a portrait card on the desk, a big highlighter word, a handwritten setup line.
+// The Balloon War v2's face concepts (projects/Balloon_War/v2/src/ThumbsBW.tsx E-G) are the newer pattern: full-frame
+// thumbnail-only ink art (B&W + one coral accent, subject on the right) with `Big` white sans + one Highlight word + a teal Note.
 import React from 'react';
 import {AbsoluteFill, staticFile} from 'remotion';
 import {Wordmark} from './kit/Intro';
 import {DrawnCrown} from './kit/shell';
-import {Finish, Highlight, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
+import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx, Picture, type Place, Tint, Traced} from './kit/Kit';
 import {DarkPaper} from './kit/common';
 import {MASKS} from './masks';
 import {THUMB_PORTRAIT as P, THUMB_WORDS, TITLE} from './project';
 
 export const THUMB_FRAMES = 150;
+
+/** Big clean type for a thumbnail headline (Halloween's lesson: bold white sans reads best at feed size; The Balloon War v2). */
+export const Big: React.FC<{text: string; x: number; y: number; size: number; color?: string}> = ({text, x, y, size, color = '#F4EFE6'}) => (
+  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.sans, fontWeight: 800, fontSize: size, lineHeight: 0.95,
+    letterSpacing: -2, color, textShadow: '0 6px 24px rgba(0,0,0,0.8)', whiteSpace: 'nowrap'}}>{text}</div>
+);
 const TEAL = '#2FE0C4';
 const CORAL = '#FF6F61';
 const GOLD = '#FF9F1C';

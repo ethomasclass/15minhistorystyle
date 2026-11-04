@@ -59,6 +59,24 @@ Rules the user enforced:
 
 Render frame 140 (every write-on finished), look at the result at 1280×720 and at phone size before sending.
 
+**Faces, thumbnail-only ink art and clean type** (*The Balloon War* v2, Nov 2026; seven concepts in
+`projects/Balloon_War/v2/src/ThumbsBW.tsx`, renders in `v2/renders/thumbnails/`):
+- **Faces work for thumbnails** (the user, after the first four concepts had none: "faces seem to be good for thumbnails"; A–D were
+  the woods painting, the schoolgirl silhouette, the 3D jet stream and a topic-led drawing; E–G added faces).
+- **Thumbnail-only AI art** when the video's own pictures have no face: Gemini ink art made for the thumbnail and used nowhere
+  else, **black and white with one coral accent** on the subject (Halloween's gas-mask pumpkin, Oct 2026, was the first). The
+  style paragraph (prompts in `projects/Balloon_War/public/img/gen/thumb/f*.txt`): a dramatic high-contrast B&W image like a moody
+  film still *but clearly a stylized illustration, not a photograph*; the only colour coral `#FF6F61` on the one named object; one
+  clear subject on the RIGHT half and the LEFT 45% calm and dark for the text; no text, logos or watermarks; no recognizable real
+  person.
+- **Type: big clean white sans + one tape word + a teal kicker.** The headline's first line in heavy white sans (`Big`: Inter 800,
+  cream `#F4EFE6`, tight tracking, a soft shadow), one word on orange tape (`Highlight`), an optional handwritten teal `Note` as the
+  kicker ("and didn't know it"). Halloween's lesson holds: clean bold type reads at feed size; newspaper-scan type does not.
+- **Respect on the thumbnail.** No screaming or suffering face for a real victim, and never a victim's likeness: use a bystander
+  (an anonymous farm woman looking up at the balloon) or the story's own realization moment (the schoolgirl, decades later, at the
+  bookstore window). **An invented face for a real person who has no photo is never named on the thumbnail** ("SHE BUILT A BOMB",
+  not her name), just as the video labels her silhouette "no photo".
+
 ## 2. YouTube title, description, chapters, tags
 
 Write them into `review/YouTube_description.md` as four sections: Title (in a code block, with 2 alternates

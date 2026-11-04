@@ -107,7 +107,7 @@ const Body: React.FC = () => {
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
       {/* cold-open music bed, e.g. <Audio src={staticFile('music/cold_open.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, 0.17, 0.17, 0], clamp)} /> */}
-      {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.35} />)}
+      {/* no sound on cuts (the user, Nov 2026): cuts are silent; the voice and the music carry them */}
       <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.3} />
       {['1845.', "People's", 'King'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.3} />)}
       {['wild', 'fought', 'fans', 'enemies', 'question', 'How', 'both', 'evidence'].map((c) => <Sfx key={c} at={at(c) - 2} src={WRITE.src} volume={WRITE.volume} />)}

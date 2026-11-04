@@ -7,3 +7,4 @@ node_modules
 public/img/_scratch/
 public/img/layers/_scratch*/
 public/img/credits.json.lock
+public/img/gen/scenes/2x/*.png

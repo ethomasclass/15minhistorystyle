@@ -14,11 +14,13 @@
 ```sh
 npm install
 pip install pillow numpy imageio-ffmpeg            # + rembg onnxruntime opencv-python-headless for masks
-export REMOTION_CHROME=$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell | head -1)
+export REMOTION_CHROME=$(ls -d /opt/pw-browsers/chromium_headless_shell-*/*/chrome-headless-shell.real | head -1)
 ```
 
-In Claude's cloud containers a headless Chromium is preinstalled (that path). Elsewhere leave `REMOTION_CHROME`
-unset and Remotion downloads its own. ffmpeg comes from `imageio-ffmpeg`; no system ffmpeg is needed.
+In Claude's cloud containers a headless Chromium is preinstalled. Use the **`.real` binary**: the `chrome-headless-shell` next to it
+is a wrapper that fails WebGL, so three.js pieces come out blank (older containers had `chrome-linux/headless_shell`; the render
+scripts try both). Elsewhere leave `REMOTION_CHROME` unset and Remotion downloads its own. ffmpeg comes from `imageio-ffmpeg`; the
+render scripts fall back to a system `ffmpeg` when it is missing.
 
 ## 2. Render, join, master
 
@@ -27,6 +29,12 @@ tools/render.sh              # every chapter in src/chapters.ts, then join + mas
 tools/render.sh 03 07        # re-render only these chapters, then rejoin and master everything
 ```
 
+- **Render chapters as they're finished** (since *Trick-or-Treating Was a Bribe*): `tools/render_ch.sh 04` writes `out/ch/ch04.mp4`
+  and a small `review/previews/ch04_720p.mp4` for the user; `echo 05 >> out/render_queue.txt; tools/render_queue.sh` queues
+  chapters so they render one after another; `JOIN_ONLY=1 tools/render.sh` then only joins and masters. The queue runner is a
+  background command, so it **dies at the 2-hour limit**: queue a batch that fits (two or three chapters), then the next.
+- **WebGL (three.js) chapters** render with the `.real` shell and **no `--gl` flag** (`tools/render_ch.sh`). `--gl=swangle` works
+  too but was about 4× slower (*The Balloon War* v2: 60 frames in 67 s against 15 s). Stills of 3D pieces: `tools/glstills.mjs`.
 - Each chapter renders to `out/ch/chNN.mp4` (CRF 18). Chapters are joined without re-encoding, then
   `tools/master.py` does a two-pass loudness normalisation to **−14 LUFS, −1.5 dBTP** (YouTube's target) and a
   broadly compatible H.264, giving `out/<SLUG>_1080p.mp4`. A 720p copy goes to `renders/<SLUG>_720p.mp4`.
@@ -65,7 +73,8 @@ files (ask the user first: it counts against their GitHub LFS storage, 1 GB on t
 
 ```sh
 git lfs install --local                         # apt-get install -y git-lfs first if `git lfs` is missing
-git lfs track "video/renders/<SLUG>_1080p.mp4"  # track only this path
+git lfs track "video/renders/<SLUG>_1080p.mp4"  # track only this path (it adds a line to the repo's .gitattributes; the style
+                                                # repo's .gitattributes already lists every past master, add the new one there)
 cp out/<SLUG>_1080p.mp4 renders/
 git add .gitattributes renders/<SLUG>_1080p.mp4 && git commit -m "<Title> 1080p master (Git LFS)" && git push
 ```

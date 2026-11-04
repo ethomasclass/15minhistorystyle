@@ -7,7 +7,7 @@ template kit (`src/kit/Kit.tsx`, `src/kit/shell.tsx`, `src/kit/common.tsx`, `src
 Examples name scenes from those videos. **(derived)** marks advice that goes beyond the code.
 
 ## Contents
-1. Brand summary (do / don't) · 2. Color palette (incl. 2.5 heavy chapters) · 3. Typography · 4. Components ·
+1. Brand summary (do / don't) · 2. Color palette (incl. 2.5 heavy chapters and respect, 2.6 silhouette scenes) · 3. Typography · 4. Components ·
 5. Motion and timing · 6. Sound design · 7. Imagery rules · 8. Layout (compositions, thumbnails) ·
 9. Channel identity (wordmark, title card) · 10. Prompt starter for outside design tools · 11. Chapter breaks
 
@@ -114,7 +114,30 @@ book cover, surviving gowns and the silhouette paintings. Rules the user approve
 
 ### 2.5 Palette in heavy chapters
 
-In heavy chapters (asylums, slavery, Indian Removal and the Trail of Tears) pass `quiet` to `ChapterShell`. That switches to `PALETTES.quiet`: teal lines only, titles on bone paper (`#EDE7DC`) instead of orange, no coral subject tint. No jokes and no punch-ins; the narration is voiced slower too (`HEAVY=` in `tools/voice_all.sh`). *King Andrew* chapter 10 (Indian Removal) is the reference: it kept highlighter titles only on the chapter card, then let the images and teal notes carry it. The final chapter comes back to normal colour, gently.
+In heavy chapters (asylums, slavery, Indian Removal and the Trail of Tears, a death) pass `quiet` to `ChapterShell`. That switches to `PALETTES.quiet`: teal lines only, titles on bone paper (`#EDE7DC`) instead of orange, no coral subject tint. No jokes and no punch-ins; the narration is voiced slower too (`HEAVY=` in `tools/voice_all.sh`). *King Andrew* chapter 10 (Indian Removal) is the reference: it kept highlighter titles only on the chapter card, then let the images and teal notes carry it. The final chapter comes back to normal colour, gently.
+
+**Respect for real victims** (*The Balloon War* v2, Nov 2026; the Bly chapter, where six people died): **no silhouettes or
+illustrations of the victims, before or after** (the cold open showed the balloon in the trees with no one near it; the chapter
+showed the road, the car, the archival forest, the monument and the names written by hand), **no coral anywhere in the chapter**
+(silhouettes there use the QUIET ramp, `sil_palette.py --quiet`), no jokes, no shouting tapes, no victims' faces, no explosion
+imagery, a slow camera and black for a beat after the worst line. The same respect holds on the thumbnail (`thumbnail-and-youtube.md`).
+
+### 2.6 Silhouette scenes: one palette per video (*The Balloon War* v2, Nov 2026)
+
+AI scenes for moments with no photo are layered silhouette paintings in **one palette for the whole video, locked to the channel**
+(`tools/sil_palette.py`), shown full frame in parallax (`SilScene`). Per-scene palettes (the Diamond Hoax's purple, blood red,
+peach) read as different films beside the desk, so they're retired. Figures are one solid black shape; coral only on the subject.
+Pipeline and prompt: `images-and-masks.md` §11.
+
+| Role | Hex | Notes |
+|---|---|---|
+| Foreground (ground, people, objects) | `#0D0C09` | the desk's ink, so the scene joins the desk; one solid shape per figure |
+| Sky top, near haze | `#111B1B` → `#1C3332` | |
+| Middle haze | `#335652` → `#5F857F` | hills, trees, the town |
+| Far haze, glow | `#A3BAB2`, `#DFE0D6` | the last ridge; around the light |
+| Light | `#F4EFE6` | cream, never yellow or orange; one light source |
+| Accent | `#FF6F61` | the scene's subject only, one per scene; none in a heavy chapter |
+| Never | orange `#FF9F1C` | the tape colour, titles only |
 
 ---
 
@@ -257,7 +280,7 @@ White `rgba(255,255,255,0.55)` 1.5px lines, **88px cells**, layer opacity **0.5*
 | Camera easing | `Easing.inOut(Easing.cubic)`. Zoom scale is interpolated in **log space** so zooms feel even. |
 | Push-ins | slow scale over a scene: 1.02 → 1.10, 1.04 → 1.16, 1.12 → 1.24, or 1.04 + 0.004 per frame in montages |
 | Punch-ins | a hard cut to a 1.65–2.3× crop of a detail, still creeping +0.2% per frame. A **hard ×1.14 punch** on the climax word ("DEAD OR ALIVE"). |
-| Cuts | **hard cuts only**, 1–2 frames before the cue word, each with a whoosh. No dissolves. The only fade is the channel intro's last 8 frames. |
+| Cuts | **hard cuts only**, 1–2 frames before the cue word, **silent** (no whoosh: the user, Nov 2026). No dissolves. The only fade is the channel intro's last 8 frames. |
 | Exits | marks switch off instantly at their `out` frame |
 | Sync | narration has word-level timings (ElevenLabs forced alignment). A cue is "the frame word X starts" (optionally the nth occurrence). Titles land **on** the word. Notes start **2–4 frames before** the word. Cards pop **1–2 frames before**. Outlines start 1–4 frames after the subject is named. |
 | Wordmark push | the intro scales 1 → 1.04 from the "15" to the end |
@@ -270,15 +293,15 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 
 | Event | File | Volume | Timing |
 |---|---|---|---|
-| Handwritten note | `sfx/marker_tick.wav` (the `WRITE` setting) | **0.2** | 2 frames before the note's word |
+| Handwritten note | `sfx/marker_tick.wav` (the `WRITE` setting) | **0.03** (was 0.2; the user wants it almost silent, Nov 2026; `Sfx` caps it) | 2 frames before the note's word |
 | Highlighter title | `sfx/stamp.wav` | 0.26–0.45 (0.26–0.28 in chapters) | on the word |
 | Pin / card flip / montage beat / clock tick | `sfx/tick.wav` | 0.45–0.5 | on the pop |
-| Scene cut | `sfx/whoosh.wav` | 0.28–0.3 (Ch02–03), 0.4–0.5 (Ch01) | at the cut frame |
+| Scene cut | none (silent cuts, Nov 2026; `Sfx` mutes `whoosh`) | — | — |
 | Big hit ("DEAD OR ALIVE", "HISTORY") | `sfx/boom.wav` | 0.45–0.5 | on the word |
 | Knock | `sfx/knock.wav` | 0.5 | on each "knock" |
-| Letter sent / diagram flip | `sfx/page_turn.wav` | 0.45–0.5 | on the action |
+| Letter sent / diagram flip | none (no page turns, Nov 2026) | — | — |
 | Sea voyage bed | `sfx/sea_ambience.wav` | 0.12 | fades in and out over 10–30 frames |
-| Music under narration | `music/<chapter>.mp3` | **0.15** (Ch02, Ch03), 0.16 (map sequence), 0.17 (Ch01, dipping to 0.06 at the end) | 15–20-frame fade in and out |
+| Music under narration | `music/<chapter>.mp3` | `bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; `voice-and-audio.md` §6). *King Andrew* used flat 0.15–0.17 | 15–20-frame fade in and out |
 | Title sting | `music/title_sting.mp3` | 0.45 | 4 frames before the "15" |
 
 ---
@@ -288,7 +311,7 @@ The template ships every file below except `knock.wav` and `sea_ambience.wav`, w
 1. **Archival first.** Engravings, lithographs, daguerreotypes, broadsides, the 1836 Mitchell map, and printed pages (pamphlets, memorials, the Bill of Rights). Always B&W with contrast boosted (§2.3). Documents may keep a light sepia (0.3).
 2. **One subject in colour.** Coral tint plus teal trace, or the colour-reveal gradient. Never both on different subjects in one image.
 3. **Source tag on every image**, including maps and illustrations.
-4. **Illustrations only where no archive exists.** They are generated with Gemini at 16:9, and every prompt ends with the shared style paragraph (below, verbatim). They must show **no recognizable real person** and **no invented portraits**: show figures from behind, anonymous crowds, or empty rooms. A mask pass (a pixel-aligned copy with the subject filled flat magenta `#FF00FF`, a second subject in green `#00FF00`) gives the coral tint and teal trace their shapes.
+4. **Illustrations only where no archive exists.** They are generated with Gemini (or Google Flow) at 16:9, and every prompt ends with one shared style paragraph. **The current style is the layered silhouette in the locked channel palette (§2.6, `images-and-masks.md` §11)**; the 1830s oil-painting paragraph below is the template's original (*King Andrew*), kept for videos that ask for it. They must show **no recognizable real person** and **no invented portraits**: show figures from behind, anonymous crowds, or empty rooms. A mask pass (a pixel-aligned copy with the subject filled flat magenta `#FF00FF`, a second subject in green `#00FF00`) gives the coral tint and teal trace their shapes.
 5. **Tone map.** Lighter chapters (revivals, spiritualism, temperance) get more energy: stacked highlights, punch-ins, onomatopoeia, montage counters, more notes. Heavy chapters (Dix, Oneida, abolition) get fewer marks, teal only, slower pacing, longer holds and respectful imagery (e.g. empty cells rather than suffering figures).
 
 **Shared illustration style paragraph (verbatim):**
@@ -342,7 +365,7 @@ ink #111111, cream #F4EFE6; don't recolour, swap teal and coral, stretch, outlin
   quarter swings in last and locks at 2.80 s, the two slabs slide in beside it; then the **title card** (`TitleCard` in
   `src/ch/Ch01.tsx`, 5 s: title on orange tape, subtitle in teal, dates as a note).
 - **Chapter breaks:** the 2-second **mark snap** (`LogoBreak` in `ChunkIntro.tsx`, §11).
-- **Sound:** clicks and page turns only, no tones and no music (`voice-and-audio.md` §7).
+- **Sound:** clicks only (the jingle's built-in page turn is faded out), no tones and no music (`voice-and-audio.md` §7).
 - **Still on the old brand:** thumbnails and `Brand.tsx` still draw the 15 Minute History `Wordmark` (`src/kit/Intro.tsx`);
   switch them to the Chunk files in `brand/chunk-history/final/` when you next make a thumbnail. The intro in §9.1 below is
   the previous one (from *The Balloon War*), kept for reference.
@@ -360,7 +383,7 @@ Built in `src/kit/Intro.tsx` from `INTRO_CARDS` (6 of the video's photos), `TITL
 | Logo up | it eases to 0.36 scale near the top (y ≈ 210); the photos dim to 45%; the photo under it fades out | 104–122 |
 | Title tape | a full-width torn orange strip (190 tall, −2°) is pulled across the middle from the left, the title in Abril 132 ink | 108–122 |
 | Subtitle, dates | subtitle in teal Abril 60 under the tape (fades in); dates on a small orange Highlight lower right | 126, 136 |
-| Sound | a paper rustle at the start, the title sting at 0.32 from frame 40, a quiet masking-tape pull with the strip. **No ticks, no stamps, no boom.** | |
+| Sound | the title sting at 0.32 from frame 40, a quiet masking-tape pull with the strip (the paper rustle at the start is muted now: no paper sounds, Nov 2026). **No ticks, no stamps, no boom.** | |
 | Out | fade to black over the last 10 frames | 176–186 |
 
 The `Wordmark` itself (clock ring, coral quarter, "15", MINUTE on orange, HISTORY in teal, orange underline; clock centre
@@ -386,14 +409,15 @@ Built in `src/ch/Ch01.tsx` (`Title`) from `TITLE`, `SUBTITLE` and `DATES` in `sr
 
 **Now (Chunk History, since American West Ep 1): the mark snap.** `LogoBreak` in `src/kit/ChunkIntro.tsx` (60 frames, overlapping
 the end of one chapter and the start of the next, same `LEAD` contract): dip to black, the teal mark is already there, the coral
-quarter swings in and locks with a click-clack at frame 30, a page turn as the next chapter fades up. The mark is about 170 px
+quarter swings in and locks with a click-clack at frame 30, and the next chapter fades up in silence (the file's page turn is cut
+off: no page turns, Nov 2026). The mark is about 170 px
 tall, drifting slightly in 3D. The older wordmark break below is kept for reference.
 
 **Before (built for *King Andrew*):**
 
 Chapters 2 onward open on a 44-frame logo break (`LEAD` in `src/kit/shell.tsx`, drawn by `LogoBreak`): the last
 shot fades to the notebook paper (`DarkPaper`), the wordmark (clock already at a quarter hour) fades up at 50% scale while
-drifting up 20 px, with one quiet page turn (`sfx/page_turn.wav` at 0.14), it fades out, and the chapter fades up over
+drifting up 20 px, with one quiet page turn (`sfx/page_turn.wav` at 0.14; muted since Nov 2026), it fades out, and the chapter fades up over
 10 frames. No ticks (since *The Balloon War*: the user found them grating). No chapter
 title cards between chapters: the logo is the break. Chapter 1 has no break; it runs cold open, channel intro,
 title card.

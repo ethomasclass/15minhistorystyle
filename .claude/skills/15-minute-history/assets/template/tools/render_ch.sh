@@ -4,7 +4,10 @@
 # review/previews/chNN_720p.mp4 (< 30 MB). CONC sets render concurrency (default 2, so other work keeps running).
 # No /tmp cleanup here: other renders may be using their bundles at the same time.
 cd "$(dirname "$0")/.."
-export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
+# three.js chapters need WebGL: use the .real headless shell (the wrapper script fails WebGL; older containers have chrome-linux/
+# headless_shell). No --gl flag: its default draws the 3D pieces fine and is about 4x faster than --gl=swangle (The Balloon War v2:
+# 60 frames in 15 s vs 67 s on 4 cores).
+export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/*/chrome-headless-shell.real /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
 BROWSER=${REMOTION_CHROME:+--browser-executable=$REMOTION_CHROME}
 mkdir -p out/ch review/previews
 for n in "$@"; do

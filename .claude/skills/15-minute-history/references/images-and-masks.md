@@ -2,7 +2,8 @@
 
 > **House rule (the user's, after *The Balloon War*): cut-outs on the notebook first.** Every photo goes on the dark ruled
 > paper (`DarkPaper`): its subject cut out (`Cut` in `src/kit/desk.tsx`: B&W, teal trace, coral on the one key subject), or, when the picture has
-> no single subject or the mask fails (landscapes, crowds, rooms, a speck in the sky), as a cream card on the desk (`Desk`).
+> no single subject or the mask fails (landscapes, crowds, rooms, a speck in the sky), as a print on the desk (`Print` in
+> `src/kit/print.tsx`; no cream card or mount since the West series: everything new stays on the black desk).
 > **No full-screen photos with slow pushes (no "Ken Burns"), no 3D depth fly-throughs, and no color photos**, modern ones
 > included: everything is black and white. Cut masks for every photo while sourcing, not after the scenes are built.
 
@@ -13,7 +14,12 @@
 4. Getting files from the user
 5. Archival parallax and checking masks
 6. Wood engravings, clean masks and marked-up pages (from *The Exact Spot*)
-7. Masks on real-photo videos (from *The Balloon War*)
+7. Google AI Studio (Gemini) and the lithograph style (from the West series)
+8. Masks on real-photo videos (from *The Balloon War*)
+9. Silhouette paintings and AI props (from *Trick-or-Treating Was a Bribe* and the Diamond Hoax; partly superseded by §11)
+10. Portraits are bust cut-outs; white props on black (West Ep 2)
+11. **Silhouette scenes, the current look and pipeline** (from *The Balloon War* v2): one locked palette, solid black figures,
+    split by colour and region, the stress test; props on the black desk
 
 ## 1. Archival first
 
@@ -237,10 +243,14 @@ the first try.
 
 ## 9. Silhouette paintings in multi-plane parallax, and AI props (from *Trick-or-Treating Was a Bribe*)
 
+> **Superseded in part by §11 (*The Balloon War* v2, Nov 2026).** Two things below are no longer the channel's way: a palette per
+> scene (now **one locked palette per video**, `tools/sil_palette.py`) and the **depth split** as the default (now **split by colour
+> and region**, `tools/sil_regions.py`, then `tools/sil_stress.py`). The prompt habits, the landscape checks and the prop notes still hold.
+
 - **Layered-silhouette paintings** (black foreground, ochre haze bands, big moon, one orange light; style paragraph in that project's
   `script/GEMINI_PROMPTS.md`) on `gemini-3-pro-image` at 2K (`tools/gemini_image.py`, `SIZE=2K`). Name anything that must not be
   orange ("a pale turnip, NOT a pumpkin"); reject any take with painted lettering on signs; crop baked-in letterbox bars.
-- **Split into depth planes:** `DEPTH_MODEL=~/models/da2_small.onnx python3 tools/sil_layers.py <painting.jpg>` (Depth Anything V2
+- **Split into depth planes** (the Halloween method; prefer §11's colour/region split now): `DEPTH_MODEL=~/models/da2_small.onnx python3 tools/sil_layers.py <painting.jpg>` (Depth Anything V2
   small, from huggingface `onnx-community/depth-anything-v2-small`). Luminance alone split the sky into patches; depth keeps lanterns
   with the hands holding them. Show it with `SilScene` (`src/kit/silparallax.tsx`): camera push, each plane at its own speed, fog
   between the back planes, flickering lights.
@@ -252,7 +262,8 @@ the first try.
   (`src/kit/prop.tsx`) shows them B&W on the desk with an optional coral tint and teal outline. No source tag, never presented as a
   specific real artifact.
 
-- **A palette per scene** (*They Fooled America's Richest Men*, the user: "other colours… whatever matches the vibe"): name the palette
+- **A palette per scene** (*They Fooled America's Richest Men*; **retired by *The Balloon War* v2**, see §11: next to the black desk
+  the per-scene palettes read as eleven different films; the user: "other colours… whatever matches the vibe"): name the palette
   and the mood in each prompt (e.g. "midnight blue to violet, lantern amber, one red ruby glint; a crime in progress"), keep one light
   source per scene. Contact sheet: `projects/Diamond_Hoax/review/contact/scenes_v2.jpg`.
 - **Check the landscape, not just the figures.** Gemini put desert mesas behind San Francisco, the Bay and the California foothills;
@@ -275,3 +286,74 @@ the first try.
 - **AI props on white** mask well with `tools/mask_white.py` (anything not paper-white in the clean original, small holes filled,
   real openings kept). **White props (snow, paper, bone) go on black instead** (`tools/props.py` `ON_BLACK`, then
   `tools/mask_white.py --bg=black`): snow drawn on white gave a ragged edge the user caught.
+
+## 11. Silhouette scenes: the current look and pipeline (from *The Balloon War* v2, Nov 2026)
+
+The channel's AI illustration style for scenes with no photo (*The Balloon War* v2 had 16; the worked files are
+`projects/Balloon_War/script/SILHOUETTES.md` and `FLOW_PROMPT.md`, the planes in `public/img/layers/sil/`). This replaces §9's
+palette-per-scene and depth split.
+
+**The look (the user's rules)**
+- **One uniform palette per video, locked to the channel.** Warm ink `#0D0C09` for everything in front (the desk's ink, so scenes
+  join the desk), a **teal-slate haze** for the distance (`#111B1B` → `#1C3332` → `#335652` → `#5F857F` → `#A3BAB2`, a dark quiet
+  cousin of the channel teal), a pale sage glow `#DFE0D6`, **cream `#F4EFE6` light** (moon, dawn line, lamps, windows; never yellow
+  or orange), and **coral `#FF6F61` only on the scene's subject** (one coral thing per scene, the same rule as the coral tint on
+  photos; a scene with no subject has none). Never orange (that's the tape), yellow, purple or a warm sunset. Only the time of day
+  varies: where the cream light sits and how bright it is.
+- **The QUIET ramp** for the heavy chapter (`sil_palette.py --quiet`): flatter grey-green fog, no glow, **no coral**.
+- **Figures are ONE solid black shape**: no faces, no eyes, no light or see-through lines for collars, folds, buttons or seams, no
+  rim light or glow. Only the outer outline carries information, in clear profile. (The Diamond Hoax figures had white interior
+  lines; not any more.) Thin light lines that slip in are filled with `tools/sil_solidify.py`.
+- **Anonymous.** A real person with no photo is an anonymous silhouette, labelled once in mono with `NoPhoto` (`src/kit/print.tsx`:
+  "REI MINAMIMURA · NO PHOTO SURVIVES"), never presented as a likeness. No silhouettes of victims, before or after (§ Respect in
+  `visual-style.md` §2.5).
+- **Shown full frame in layered parallax** (`SilScene`, `src/kit/silparallax.tsx`), with motion inside: mist drifting between the
+  planes (the palette's sage haze), dust motes in a lamp beam (`dust`), a cut-out riding a plane (`insert` + `PlaneImg`: a balloon
+  that rises on its own). **No container**: a kamishibai paper stage on the desk and a shadowbox diorama around the screen were both
+  prototyped and turned down (`projects/Balloon_War/src/test/PaperStage.tsx`, `ShadowBox.tsx`; `review/paper_stage_test.mp4`,
+  `shadow_box_test.mp4`). Silhouettes keep their own colours: no grayscale, no coral added, no source tag.
+
+**The prompt: one ordered Google Flow prompt for the whole set.** Write a single prompt that covers every scene in order
+(`FLOW_PROMPT.md` is the model): the output rules (16:9, highest resolution, exact file names, no border), the style (flat bands
+front to back: ink foreground with detail only in the outline, two or three hazier distance layers each with a mist band at its
+base, a quiet sky), **the figure rule** in capitals, **the palette with hex codes**, composition rules that make the split work
+(3–4 clearly separated depth bands, figures small and in profile and not tangled, everything important inside the central 80%, one
+light source, no light rays over the foreground), period accuracy, **no text of any kind**, no real person, and then the shots.
+Image 1 is the master style reference; later shots name it, and any earlier shot they share a place with, as references, so the
+style and the locations carry across the whole set. (Gemini at 2K with the same paragraph per scene also works:
+`tools/gemini_image.py`, `SIZE=2K`.)
+
+**The pipeline, per scene**
+1. **Fix what the model got wrong** before anything else. A Fu-Go paper balloon came back as a teardrop (a hot-air-balloon
+   shape); it was redrawn round in cut paper (`projects/Balloon_War/tools/round_balloon.py`) and pasted over. Keep a fixed copy in
+   `public/img/gen/scenes/plates/<name>.jpg` (a plate without a figure that will move on its own goes there too).
+2. **Upscale 2×**: `tools/upscale_all.sh` (Real-ESRGAN x4plus ONNX, `tools/upscale.py`, about a minute an image on CPU) →
+   `public/img/gen/scenes/2x/`. The parallax push needs the pixels.
+3. **Lock the palette**: `python3 tools/sil_palette.py in.jpg out.jpg` (`--quiet`, `--accent=none`): a gradient map onto the ramp
+   above, warm saturated pixels to coral. Lock before splitting so every plane is in palette. Check at full size that nothing is
+   coral except the subject.
+4. **Split by colour and region, not by depth**: `python3 tools/sil_regions.py <name>` with one recipe per scene (or `--ink` /
+   `--tiers=` for a quick start). Depth splitting (`sil_layers.py` + Depth Anything) **tore objects in half**: a window's bars on
+   two planes, a man's head on one and his body on another, tree trunks fading from near at the foot to far at the top, lamps cut
+   from their light cones; the halves slid apart when the camera moved, and rims left ghost outlines behind. The rules:
+   - **each object whole on one plane** (the man with his desk; the girl with her table and the sheet on it);
+   - **a continuous structure on one plane** (a corridor's walls, floor and door; a fence with its posts; a press with its paper);
+   - soft things stay with what makes them (smoke with its chimney, a lamp with its cone), or everything misty stays on the back plate;
+   - **empty bands are fine**: most scenes need two or three real planes; the unused ones are written empty.
+   The first colour split was `projects/Balloon_War/tools/bw12_layers.py`; its fourteen recipes are in that project's
+   `tools/sil_regions.py` (copy the patterns, not the coordinates), and `tools/split_all.sh` there records how each scene was made.
+   `sil_layers.py` (now with `SOLID=1`) stays for a scene whose depth split passes the stress test as it is.
+5. **Stress-test the planes**: `python3 tools/sil_stress.py <name>` shifts each plane 12, 24 and 36 px per step of depth, both
+   ways, and lays the six results on one sheet (`out/stress/<name>.jpg`). Look at every tile: anything that tears, doubles, leaves a
+   dark outline beside its shape or opens a hole gets its recipe fixed. Ship a scene only when all six tiles are clean.
+6. **Build** with `SilScene` (the `size` and `bands` from `layers.json`), a camera move that suits the line, and the motion layers.
+
+**Props on the black desk (the same video).** Gemini props (`gemini-3-pro-image`, 2K, 1:1, the prompt saved beside each source in
+`public/img/props/src/<name>.txt`) are shot as **white or pale objects on black** when they are light (paper, a crane, a card):
+`tools/prop_cut_black.py` keys them from brightness, keeps the largest object and fills small holes. Others on white go through
+`tools/prop_cut.py`; `FILL_HOLES=1` puts back the enclosed pale parts rembg drops (a barometer's dial, the paste in a pot). Shown
+with `Prop` (B&W; coral is a **see-through** tint, never a flat red block). Check each against the period (a barometer came back
+with two clock hands, a sandbag in cloth when the real ones were paper, a round Western pastry brush): retake, don't excuse.
+Never presented as a specific real artifact; no source tag. Archival photos go down as `Print`s (`src/kit/print.tsx`): B&W, no
+mount or frame, a deep shadow, a slap with a little overshoot, the source tag under the print.
+
