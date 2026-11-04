@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.7074223160743713, 0.420878142118454, 0.15259622037410736], "glowLayer": 0, "share": [0.24176829729893412, 0.07197369715964147, 0.09541025087814922, 0.5908477546632752]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.21736346104348353, 0.0, 0.0, 0.7826365389565164], "method": "colour/region split (tools/sil_regions.py BW02_release), not depth", "note": "boys, cylinders, ground on L0; sand, sea, hills and sky on L3 (row fill)"}

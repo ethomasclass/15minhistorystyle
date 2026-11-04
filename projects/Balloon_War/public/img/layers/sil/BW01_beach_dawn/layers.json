@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.8047364950180054, 0.5511124134063721, 0.2868248522281647], "glowLayer": 1, "share": [5.725003028100775e-05, 0.31660000113553777, 0.10306259273558624, 0.580280156098595]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 1, "share": [0.0, 0.29044430754905526, 0.0, 0.7095556924509447], "method": "colour/region split (tools/sil_regions.py BW01_beach_dawn), not depth", "note": "boys, cylinders, ground, the balloon and its lines on L1; sand, sea, hills and sky on L3 (row fill)"}

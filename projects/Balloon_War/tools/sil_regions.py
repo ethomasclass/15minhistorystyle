@@ -108,6 +108,26 @@ def below_top(m, nearer, pad=2):
     return np.arange(H)[:, None] >= (t[None, :] - pad)
 
 
+def tiers(p, cuts, edge=3, grad=14):
+    """Split a painting built in flat tones (darker = nearer) into tiers by brightness (`cuts` on max(R,G,B)). The anti-aliased
+    rim of each shape (in-between tones on a sharp edge) goes with the darker, nearer shape, so no outline of it is left on the
+    tier behind. Returns a label image (0 = nearest)."""
+    lab = np.digitize(p.mx, cuts).astype(np.uint8)
+    g = (cv2.dilate(p.mx.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(int)
+         - cv2.erode(p.mx.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(int)) > grad
+    g = dil(g, 1)
+    mx = p.mx.astype(np.float32)
+    for k in range(1, len(cuts) + 1):
+        # the tier's own local tone; a rim pixel is darker than it (a bright sharpening halo is not the shape's: it stays and
+        # is filled on the plane behind)
+        own = (lab == k).astype(np.float32)
+        ref = cv2.blur(mx * own, (15, 15)) / np.maximum(cv2.blur(own, (15, 15)), 1e-3)
+        for j in range(k):
+            rim = (lab == k) & dil(lab == j, edge) & g & (mx < ref - 3)
+            lab[rim] = j
+    return lab
+
+
 # ───────────────────────── fills ─────────────────────────
 def pushpull(img, known):
     """Fill the unknown pixels of `img` smoothly from the known ones (a weighted image pyramid: down with weights, back up)."""
@@ -220,9 +240,9 @@ def build(pic, masks, alpha=None, keep=None, edge=6, extend=90, ext=None, note='
         a = np.maximum(a, soft(e, 1.2, 0) * (dil(m, 3) | nearer))   # the extension is opaque where it is hidden or joins m
         a = np.where(e & ~dil(m, 3) & ~nearer, 0, a)
         if shadow:
-            z = dil(m, shadow) & ~dil(m, 1) & ~nearer & ~e
-            behind = fill(im, ~dil(nearer | m, shadow + 2), fill_scale)
-            sa = np.clip(1 - (lum(im) + 2) / (lum(behind) + 2), 0, 0.85)
+            z = dil(m, shadow) & ~dil(m, 1) & ~nearer & ~e & ~taken     # only over the back plate (not over a farther plane)
+            behind = fill(im, ~dil(taken, shadow + 2), fill_scale)
+            sa = np.clip(1 - (lum(im) + 2) / (lum(behind) + 2), 0, 0.4)  # a drop shadow darkens a little; more is a wrong guess
             sa = cv2.GaussianBlur(sa, (0, 0), 1.0) * z
             rgb = np.where(z[..., None] & (sa[..., None] > a[..., None]), np.uint8(8), rgb)
             a = np.maximum(a, sa)
@@ -518,6 +538,18 @@ def r_BW02():
     as BW01 on the sand plane. Now: L0 = the boys, the cylinders and the near ground (as before); L3 = sand, sea, hills, sky
     (row fill: seamless for the horizontal bands). L1, L2 empty."""
     beach('BW02_release', 0)
+
+
+@recipe
+def r_BW04():
+    """BW04 (the road near Bly). The depth split cut the trees across planes and left the near trees' branch outlines, bits of
+    sky and a car-shaped smear on the plane behind. The painting is flat tones in tiers (max RGB: near ink < 22, the second row
+    of trees 30-45, the forest band 60-75, hills and sky > 100), so each tier is a plane, every tree whole:
+      L0 the near trees, the car and the road; L1 the second row of trees and their slope; L2 the forest band; L3 hills and sky."""
+    p = Pic('BW04_bly_road')
+    lab = tiers(p, [22, 52, 100])
+    ms = [big(close(lab == k, 1), 300) for k in range(3)]
+    build(p, ms, shadow=12, note='tone tiers: near trees + car + road L0, second row L1, forest band L2, hills + sky L3')
 
 
 if __name__ == '__main__':
