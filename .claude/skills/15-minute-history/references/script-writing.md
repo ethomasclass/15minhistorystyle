@@ -28,7 +28,10 @@ after voicing means re-voicing that chapter and re-checking its anchors.
   fashionable color of the 1860s was made with arsenic. And people knew it." not "November 1874. Lansing, Michigan.");
   **what the thumbnail shows is on screen at frame 0** (no fade from black, camera already moving); the question lands by
   about 0:40; and the cold open ends on the question plus **one or two promises** that pay off later ("We'll come back to
-  that girl."). Chapter 2 starts in the action, not with backstory: background comes in as a short flashback. Write two or
+  that girl."). **Name the danger plainly in the cold open** (*The Balloon War* v2, Nov 2026): without "it was a bomb" the user
+  said the balloons were just "rando balloons"; the cold open now says "And it was made of paper. Hanging underneath it... was a
+  bomb." Whatever makes the hook matter (a bomb, a poison, a death, a fortune) is said in words, early, not left for the picture to
+  imply. Chapter 2 starts in the action, not with backstory: background comes in as a short flashback. Write two or
   three versions of the first 30 seconds and pick the strongest before voicing. Judge retention by organic traffic (Studio
   → Advanced mode → Traffic source), not the blended graph.
 - **Chapter 1 is a cold open, under a minute.** Open on a concrete artifact: a cartoon, a pamphlet, a portrait,
@@ -78,6 +81,29 @@ A repeatable structure saves a blank page on script day, and viewers learn the r
 It sits on top of the rules above: the cold open is the hook, chapter 2 starts Act I in the action, the long loop pays off in Act III,
 the mid-video plug goes after the escalation's big build, and the last chapter answers the driving question out loud. Mark the four acts
 and the midpoint twist in SCRIPT.md's beat table.
+
+### One story, braided characters (*The Balloon War* v2, Nov 2026: the current way to build a script)
+
+*The Balloon War* was made twice. v1 (9:29) was a topic in three parts ("three balloons, three jobs"). v2 (14:53) retold it as
+**one story with an arc**, in three drafts, and it is the model to follow (`projects/Balloon_War/script/SCRIPT_v2_story_arc.md`;
+its header is the template for any script's header):
+- **Draft 1: the arc.** One story, not a list: hook, setup, escalation with a midpoint twist, climax, fallout.
+- **Draft 2: braid real main characters through it, on both sides.** Pick three to five real people with a want or a job and an
+  arc of their own, at least one on each side of the conflict (there: a Japanese schoolgirl who glued the balloons, a teenage boy
+  on the launch crew, the American newspaperman who kept them out of the news, the picnic party in Oregon, and a man who bridged
+  both). Give each chapter to one of them ("whose chapter"), and let them **all meet in the ending**. A table of them goes in the
+  header: character, side, want / job, arc, source.
+- **Draft 3: cut to time** with a cut list (word counts per cut, the new total), soften anything the evidence can't carry, lock.
+- **The header states the structure** before any narration: the **core concept** in one line ("a silence that won and still cost
+  lives"); the **driving question** (by about 0:40) and its **answer** as the last chapter will say it; the **closing line**; the
+  **long loops** (the first opened at 0:00 and closed in the climax chapter; a second opened in Act I and closed in the last
+  chapter); the **midpoint twist**; a **climax twist** (a second turn inside the climax: the balloon had lain there a month, since
+  about when Japan gave up); an **ending device** (there: on one day both sides erase the story, then the people who refused to let
+  it be erased); the packaging idea and frame 0; and the chapter table with start time, words, act and whose chapter it is.
+- **Long loops run long.** The kids in the woods open at 0:00 and pay off in chapter 8 of 9; the schoolgirl "wouldn't find out for
+  decades" opens in chapter 3 and pays off in the last. Keep at least one open at every moment (Story loops, below).
+- **The plug goes before a heavy climax, not inside it.** When the climax chapter is the heavy one, the short plug goes at the end of
+  the chapter before it, while the long loop is still open (*The Balloon War* v2: about 65% in).
 
 ## 2. The voice
 
@@ -222,8 +248,9 @@ scene import use the same stem.
   speech-to-text) and strips them from the word timings and the screen. Keep them sparing, one every few paragraphs, from a small
   consistent set: `[curious]` (the driving question), `[wry]` / `[dry]` / `[deadpan]` (asides), `[thoughtful]` (the bigger promise,
   "So let's go back to the question"), `[serious]` / `[somber]` / `[grim]` (heavy material), `[warmly]` (the plug, the
-  thank-you), `[light]` (hand-offs), `[pause]` (a beat before a turn). A tag never carries a joke the words don't already make. **Avoid `[quietly]`**: v4 drops to a near-whisper that the user
-  found creepy (Ep 1's "You can't find them"); `[firmly]` or `[plainly]` keeps a quiet line at speaking level.
+  thank-you), `[light]` (hand-offs), `[pause]` (a beat before a turn). A tag never carries a joke the words don't already make. **Never `[quietly]`, `[softly]` or `[whispers]`**: v4 drops to a near-whisper that
+  the user found creepy (Ep 1's "You can't find them"; *The Balloon War* v2: "I shouldn't be whispering to the audience or getting
+  super quiet"). `voice.py` strips them; weight comes from `[serious]` and pauses at speaking level (`[firmly]`, `[plainly]`).
 - Quotes in straight or curly double quotes are fine.
 
 ## 6. SCRIPT.md: the master document

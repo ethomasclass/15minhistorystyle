@@ -117,7 +117,9 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 
 - A respelling replaces whole words and must keep the word count ("Worcester": "Wooster", not "Woo ster").
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
-  "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
+  "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts have special cases. **Dates are said as ordinals**
+  (the user, *The Balloon War* v2, Nov 2026: "November third", not "November three"): `voice.py` turns any "Month 3" or
+  "Month 3rd" into "Month third", so write digits in the script as usual and listen for it in the pronunciation test.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
 - **Don't respell a common word the voice already knows.** A respelling can make it worse (*The Balloon War*:
   "barrage" → "buh-rahzh" came out "Baraz"; unrespelled, it was right). Keys are case-sensitive, so a respelling
@@ -221,7 +223,8 @@ with the blocks, a click-clack on the coral lock, one click on CHUNK, three tiny
 
 
 The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker_tick` (notes, via `WRITE`),
-`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (muted: cuts are silent), `boom` (big hits), `page_turn`, `quill`,
+`tick` (pins, card flips), `tick_soft` (logo break), `whoosh` (muted: cuts are silent), `boom` (big hits), `page_turn` (muted, like
+`paper_rustle`, `paper_slap_soft`, `whip` and `whip_soft`: `Sfx` never plays them), `quill`,
 `gavel`, `crowd_cheer`, `smash`, `knock`. More (`shot`, `crickets`, `rowdy_crowd`, `sea_ambience`, `scrape`,
 `pencil_soft`) are in the style repo's `sfx/` folder with their volumes. Make a new one with
 `python3 tools/sfx_eleven.py <name>` after adding a prompt to `SFX`. **First try a real recording, free:**
@@ -229,4 +232,5 @@ The template ships the channel's set in `public/sfx/`: `stamp` (titles), `marker
 and adding an entry to its `SFX` and running `python3 tools/sfx_openverse.py <name>` fetches, trims and normalises it
 and logs the credit in `public/sfx/credits.json`. Only CC0, Public Domain and CC BY are accepted (never NC, ND or SA);
 CC BY sounds need their credit line in the description. Anonymous API limit: 20 searches a minute, 200 a day. Volumes are in `building-scenes.md` §6. Keep
-effects quiet; they should be felt more than heard.
+effects quiet; they should be felt more than heard. **Sound effects are only for things on screen** (waves, wind, a plane, a radio,
+a press) plus the tape stamp; cuts and moves are carried by the voice and the music (*The Balloon War* v2, Nov 2026).

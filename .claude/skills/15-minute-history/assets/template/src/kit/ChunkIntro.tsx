@@ -22,7 +22,8 @@ const ease = Easing.bezier(0.22, 1, 0.36, 1);
 
 /** Intro length: the brand intro runs 260 frames; the lockup is complete at 119, so 165 leaves ~1.5 s on it. */
 export const INTRO_FRAMES = 165;
-/** The branding sound is clicks and a page turn only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py.
+/** The branding sound is clicks only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py; the page turn
+ *  built into the file is cut off at PAGE_TURN (no page turns, Nov 2026).
  *  The file already carries its level (peak -8 dBFS), so full volume. */
 const JINGLE_VOL = 1;
 /** Frame where chunk_jingle.mp3's page turn starts (4.45 s); the jingle is silent from here. */
@@ -30,7 +31,7 @@ const PAGE_TURN = Math.round(4.4 * 30);
 
 const FLIGHT = 22; // frames from launch to landing
 // Landing frames, timed to the click track (tools/make_jingle.py): five clicks for the five blocks, the coral quarter locks on a
-// click-clack (2.80 s), CHUNK is one firm click (3.60 s), HIS-TO-RY three tiny clicks from 3.95 s, then a page turn.
+// click-clack (2.80 s), CHUNK is one firm click (3.60 s), HIS-TO-RY three tiny clicks from 3.95 s, then the file's page turn (cut off).
 const MARK_LAND = [36, 50, 60, 68, 74, 84];
 const WM_LAND = [108, 119];
 

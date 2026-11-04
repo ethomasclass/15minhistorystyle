@@ -20,6 +20,10 @@ export const CUE_LUFS: Record<string, number> = {
   w_calm_sea: -12.48, w_dawn: -11.6, w_fire: -11.08, w_frontier: -11.97, w_sea_battle: -11.26, w_title_fanfare: -10.79,
   // Ep 2 Suno cues (Oct 2026)
   aw_long_drive: -21.2, aw_white_cold: -21.1, aw_boomtown: -22.4, aw_boomtown_rush: -21.9, aw_boomtown_hollow: -23.0,
+  // Halloween (hb_) and The Balloon War v2 (bw_) Suno cues (Oct-Nov 2026; music/catalog.json)
+  hb_black_halloween: -22.12, hb_coffin_ships: -22.12, hb_mischief_rag: -22.63, hb_oiche_shamhna: -20.67, hb_suburbs_swing: -21.91,
+  bw_something_in_the_woods: -15.4, bw_revenge_on_the_wind: -14.6, bw_paper_and_paste: -15.8, bw_dawn_launch: -14.4, bw_paper_and_sand: -14.4,
+  bw_the_newspaperman: -15.1, bw_gearhart: -16.0, bw_a_thousand_cranes: -14.8,
 };
 /** Volume for a cue so its bed sits `gap` LU under the voice (13 = the Black Sox norm; 14-15 for a quiet, grave stretch). */
 export const bed = (cue: string, gap = 13) => {

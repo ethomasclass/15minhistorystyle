@@ -267,7 +267,7 @@ export const shakeAt = (stamps: number[], f: number) => {
 };
 
 /** The board: dark ground, splats, a camera (keys: frame, centre x, centre y, zoom) with a jolt after each stamp, and the
- *  stamp and whoosh sounds. Children are drawn in board pixels (1920x1080 at zoom 1). Wrap in Ctx (BRAND) and add Defs. */
+ *  stamp sounds (its whoosh and page-turn calls are muted by `Sfx`: no paper sounds, Nov 2026). Children are drawn in board pixels (1920x1080 at zoom 1). Wrap in Ctx (BRAND) and add Defs. */
 export const BoardStage: React.FC<{cam: BoardKey[]; stamps?: number[]; moves?: number[]; splats?: string; children: React.ReactNode}> = ({cam, stamps = [], moves = [], splats = 'b', children}) => {
   const f = useCurrentFrame();
   const c = boardCamAt(cam, f);
