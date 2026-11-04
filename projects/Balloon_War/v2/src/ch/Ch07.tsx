@@ -95,7 +95,7 @@ const Asked: React.FC<{t: TL; a: number}> = ({t, a}) => (
         return <Loop cx={sx} cy={sy} rx={170} ry={44} at={t.at("Price didn't") - a} seed={75} />;
       }}
     </CropPrint>
-    <Note text="he asked." x={220} y={840} size={66} rot={-3} at={t.at('asked') - a} />
+    <Note text="he asked." x={300} y={110} size={66} rot={-3} at={t.at('asked') - a} />
     <CropPrint src="img/v2/price/code_of_wartime_practices_press_radio_may1945.jpg" size={[2523, 3958]} x={1120} y={110} w={520} h={816} fx={1261} fy={1979}
       at={t.at('Newspapers') - a} rot={2} tag="Code of Wartime Practices, 1945 · Office of Censorship" />
     <Note text="voluntarily" x={1040} y={720} size={78} rot={-8} at={t.at('voluntarily') - a} />
@@ -184,7 +184,7 @@ const PowerLine: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
       }}
     </CropPrint>
     <Highlight text="NOT HARMLESS" x={150} y={110} size={84} at={t.at('harmless') - a} seed={82} rot={-3} />
-    <Note text="March 1945" x={250} y={850} size={62} rot={-3} at={t.at('March') - a} />
+    <Note text="March 1945" x={880} y={170} size={62} rot={-3} at={t.at('March') - a} />
   </AbsoluteFill>
 );
 

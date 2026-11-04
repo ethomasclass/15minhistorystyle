@@ -82,11 +82,11 @@ const Landings: React.FC<{t: TL; a: number}> = ({t, a}) => (
       at={t.at('balloon') - a} rot={-3} tag={`A balloon down near Tremonton, Utah, 1945 · ${MIKESH}`} />
     <CropPrint src="img/ch04_paper_balloon/fugo_treed_balloon_pyramid_lake_fig28.jpg" size={[1440, 1104]} x={650} y={190} w={420} h={322} fx={720} fy={552}
       at={t.at('Alaska') - a} rot={2} tag={`Recovering a balloon, Nevada, 1945 · ${MIKESH}`} />
-    <CropPrint src="img/ch04_paper_balloon/fugo_landed_tremonton_utah_fig4.jpg" size={[1880, 2072]} x={420} y={560} w={340} h={400} fx={1520} fy={1640} z={[2.45, 2.45]}
+    <CropPrint src="img/ch04_paper_balloon/fugo_landed_tremonton_utah_fig4.jpg" size={[1880, 2072]} x={420} y={590} w={340} h={390} fx={1520} fy={1640} z={[2.45, 2.45]}
       at={t.at('Oregon') - a} rot={-1} tag={`The same balloon, close up · ${MIKESH}`} />
     <Note text="Wyoming" x={1200} y={200} size={58} rot={-2} at={2} />
     <Note text="+5 days: Montana" x={1200} y={320} size={58} rot={-2} at={t.at('Montana') - a} />
-    <Note text="Alaska, Alaska" x={1200} y={440} size={58} rot={-2} at={t.at('Alaska') - a} />
+    <Note text="Alaska ×2" x={1200} y={440} size={58} rot={-2} at={t.at('Alaska') - a} />
     <Note text="(one on Christmas Eve)" x={1240} y={540} size={46} rot={-2} at={t.at('Christmas') - a} />
     <Note text="Oregon" x={1200} y={650} size={58} rot={-2} at={t.at('Oregon') - a} />
   </AbsoluteFill>

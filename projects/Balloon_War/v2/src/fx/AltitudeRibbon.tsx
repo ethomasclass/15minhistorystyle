@@ -122,7 +122,7 @@ export const AltitudeRibbon: React.FC<AltitudeRibbonProps> = ({at = 0, dur: durI
   // camera: follow the balloon (smoothly, a little behind), or the whole flight
   const follow = Math.max(-4.2, Math.min(4.2, xOf(hourOf(f - 12))));
   const c = useMemo(() => cam === 'wide'
-    ? makeCam({target: [0, 0.9, 0], dist: 33, yaw: -0.2, pitch: 0.16, fov: 30})
+    ? makeCam({target: [0.3, 0.9, 0], dist: 25, yaw: -0.18, pitch: 0.15, fov: 30})
     : makeCam({target: [follow + 0.6, 1.0, 0], dist: 15.5, yaw: -0.32, pitch: 0.14, fov: 30}), [cam, follow]);
   const S2 = (p: readonly number[]) => project(c, p);
 
@@ -178,7 +178,7 @@ export const AltitudeRibbon: React.FC<AltitudeRibbonProps> = ({at = 0, dur: durI
             <div style={{fontFamily: JF.display, fontSize: 64, lineHeight: 1.1, color: CREAM}}>{Math.floor(Math.min(hour, BOMB_H))}</div>
           </div>
         </>}
-        {bombed && <Hand f={g} text="bombs away" x={Math.min(1500, bScr.x + 60)} y={bScr.y + 130} at={frameOfH(BOMB_H) + 4} size={56} rot={-4} />}
+        {bombed && <Hand f={g} text="bombs away" x={Math.min(1460, bScr.x + (cam === 'wide' ? -60 : 60))} y={bScr.y + (cam === 'wide' ? -150 : 130)} at={frameOfH(BOMB_H) + 4} size={56} rot={-4} />}
         <Fine text="FLIGHT PROFILE ILLUSTRATIVE · AFTER MIKESH (1973) · DISTANCE NOT TO SCALE" opacity={0.7 * ramp(g, at, at + 8)} />
       </AbsoluteFill>}
     >
