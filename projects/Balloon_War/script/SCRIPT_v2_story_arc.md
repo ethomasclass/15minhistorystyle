@@ -53,7 +53,7 @@ Five kids on a church picnic found something strange in the woods.
 
 [curious] They'd never seen anything like it. Nobody in their little town had. And there was a reason for that.
 
-It had come from Japan. It had floated across the whole Pacific Ocean, thousands of miles, all on its own. [quietly] And it was made of paper. [serious] Hanging underneath it... was a bomb.
+It had come from Japan. It had floated across the whole Pacific Ocean, thousands of miles, all on its own. And it was made of paper. [serious] Hanging underneath it... was a bomb.
 
 The kids called the grown-ups over to come and look.
 
@@ -109,7 +109,7 @@ The rules were strict. No hairpins. Fingernails cut short. Nothing that could sc
 
 [curious] A metal ring of sandbags kept it at the right height for three days. Then it dropped its bombs and blew itself up.
 
-Rei didn't know any of that. [quietly] She wouldn't find out for decades.
+Rei didn't know any of that. [serious] She wouldn't find out for decades.
 
 ---
 
@@ -215,7 +215,7 @@ While Archie parked the car, Elsie and the kids walked ahead into the trees. The
 
 He was about forty feet away. And he'd heard rumors about Japanese balloons.
 
-[quietly] He later said, "I hurriedly called a warning to them... but it was too late."
+[serious] He later said, "I hurriedly called a warning to them... but it was too late."
 
 Elsie and all five children were killed. Joan, Dick, Jay, Eddie and Sherman. They were between 11 and 14 years old.
 
@@ -225,7 +225,7 @@ They were the only people killed by enemy action on the American mainland in the
 
 [serious] And here's the hardest part. That balloon hadn't just arrived. It had probably been lying in those woods for about a month. Since around the time Japan gave up.
 
-The silence beat the balloons. Japan never learned they worked, so it stopped. [quietly] But the same silence meant almost nobody in Bly knew what one looked like. Nobody had told those kids not to touch it.
+The silence beat the balloons. Japan never learned they worked, so it stopped. [serious] But the same silence meant almost nobody in Bly knew what one looked like. Nobody had told those kids not to touch it.
 
 Even then, the papers could only say that an unidentified object had exploded in the woods. Three days later, Germany surrendered. The country had bigger news.
 
@@ -239,11 +239,11 @@ Seventeen days after the picnic, the government broke its silence. It warned the
 
 Then the war ended. And on August 15, 1945, both sides of this story started to disappear.
 
-That morning in Japan, the secret lab got orders to destroy the evidence. Tatsuo Ogawa helped burn the documents and bury the ashes. Then he heard the Emperor announce the surrender, standing in a vegetable patch in front of his house. The grown-ups around him wept. [quietly] He wasn't surprised.
+That morning in Japan, the secret lab got orders to destroy the evidence. Tatsuo Ogawa helped burn the documents and bury the ashes. Then he heard the Emperor announce the surrender, standing in a vegetable patch in front of his house. The grown-ups around him wept. [serious] He wasn't surprised.
 
 In Washington, on the same date, Byron Price ended the censorship rules and hung a sign on his office door: "Out of Business."
 
-And Rei Minamimura grew up, got married, raised her children... and still didn't know. Until one day, decades later, she walked past a bookstore and saw a photograph in the window. A paper balloon. Just like the ones she'd glued. [quietly] That's when she realized what she'd made.
+And Rei Minamimura grew up, got married, raised her children... and still didn't know. Until one day, decades later, she walked past a bookstore and saw a photograph in the window. A paper balloon. Just like the ones she'd glued. [serious] That's when she realized what she'd made.
 
 She went to the government for records. She found other women who'd done the same work and wrote down their stories. She called it an act of resistance against being erased.
 
@@ -255,7 +255,7 @@ So let's go back to the question. *How does a paper balloon from Japan end up in
 
 *And why did nobody warn those kids?* Because silence was a weapon too. It worked. And it left six people without a warning.
 
-[quietly] A war that came to Bly on paper balloons... ended there with paper birds.
+[serious] A war that came to Bly on paper balloons... ended there with paper birds.
 
 Thanks for watching. If you want more stories like this one, subscribe, and I'll see you next time.
 

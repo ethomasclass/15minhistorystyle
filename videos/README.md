@@ -282,7 +282,10 @@ column says where each was made.
 
 **Sound**
 - The same voice clone every time, with a pronunciation test MP3 before voicing.
-- **v4 emotion cues in every script** (`[wry]`, `[serious]`, `[quietly]`, `[pause]` …), sparing and consistent (West series).
+- **v4 emotion cues in every script** (`[wry]`, `[serious]`, `[pause]` …), sparing and consistent (West series).
+- **Never whisper or go super quiet** (*The Balloon War* v2, Nov 2026, and West Ep 1): no `[quietly]` / `[softly]` / `[whispers]`
+  (`tools/voice.py` strips them); weight comes from `[serious]` and pauses, at speaking level. Run `tools/quiet_check.py` on
+  every take and retake or lift any sentence more than 4.5 dB under the chapter.
 - **Narration on ElevenLabs `eleven_v4`, one take per chapter, speed 1.0** (from the West series, Oct 2026): it sounded better
   than v3, and voicing the whole chapter in one request removed the clicks and breaks the paragraph-by-paragraph splicing made.
 - The same voice clone every time, with a pronunciation test MP3 before voicing. Whole-chapter takes, Creative stability, v3 audio

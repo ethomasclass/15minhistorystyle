@@ -95,7 +95,13 @@ def ordinal(n):
 MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
 
 
+# Tags that make the voice whisper or drop way down: never sent (the user's note, Nov 2026: "I shouldn't be whispering to the
+# audience or getting super quiet"). Use [serious] for weight instead.
+HUSH = re.compile(r"\[(?:quietly|softly|whisper(?:s|ing)?|hushed|under (?:his|her|my) breath|barely audible)\]\s*", re.I)
+
+
 def spoken(text):
+    text = HUSH.sub("", text)
     text = re.sub(r"\$([\d,]+)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
     # dates are said as ordinals: "November 3, 1944" -> "November third, nineteen forty-four" (the user's note, Nov 2026)
     text = re.sub(rf"\b({MONTHS}) (\d{{1,2}})(?:st|nd|rd|th)?\b(?![,.]?\d)", lambda m: m.group(1) + " " + ordinal(int(m.group(2))), text)

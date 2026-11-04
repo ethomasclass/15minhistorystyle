@@ -97,9 +97,11 @@ with tags). Use it for every video from now on:
   occasionally add, drop or repeat a word: the forced-alignment word count check catches most of it, and the
   pronunciation-test listen catches the rest. Retake a chapter that drifts.
 - **Audio tags in the script**, in square brackets, performed and never shown or captioned: `[curious]`,
-  `[thoughtful]`, `[serious]`, `[quietly]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
+  `[thoughtful]`, `[serious]`, `[mischievously]`, `[sarcastic]`, `[warmly]`, `[sighs]`. Rules:
   at most one per paragraph, before the sentence it colors; none on facts that need a neutral read; the heavy chapter
-  gets only `[quietly]` or `[serious]`. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
+  gets only `[serious]`. **Never `[quietly]`, `[softly]` or `[whispers]`**: v4 drops 5–10 dB into a whisper (the user, twice:
+  "I shouldn't be whispering to the audience or getting super quiet"); `tools/voice.py` now strips them, and
+  `tools/quiet_check.py` flags any sentence more than 4.5 dB under the chapter's level after voicing. **Ellipses** (`...`) add a held pause; **CAPS** on one word adds stress
   (once or twice a chapter at most).
 - **Clean endings.** Every splice (shortened pauses, sentence and paragraph gaps) is cut at the quietest 10 ms between
   words, keeps two thirds of each kept pause after the last sound so endings ring out, and fades for 12 ms, so no word
