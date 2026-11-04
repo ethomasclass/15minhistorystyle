@@ -78,8 +78,8 @@ const Pasting: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="sitting on cushions" x={1060} y={160} size={56} rot={-3} at={r('cushions')} />
       <Note text="gluing paper into panels" x={1060} y={270} size={52} rot={-3} at={r('gluing')} />
       {/* a door, about 3 x 6 ft (the panel size) */}
-      <DrawPath d="M1330,840 L1330,420 L1540,420 L1540,840 M1505,640 a9,9 0 1,0 0.1,0" at={r('size')} dur={12} width={7} />
-      <Note text="the size of a door" x={1250} y={870} size={56} rot={-3} at={r('door')} />
+      <DrawPath d="M1330,800 L1330,380 L1540,380 L1540,800 M1505,600 a9,9 0 1,0 0.1,0" at={r('size')} dur={12} width={7} />
+      <Note text="the size of a door" x={1250} y={830} size={56} rot={-3} at={r('door')} />
     </AbsoluteFill>
   );
 };
@@ -96,7 +96,7 @@ const Washi: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Prop name="washi_stack" x={720} y={290} w={480} at={3} />
       <Highlight text="NOT NORMAL PAPER" x={170} y={110} size={92} at={r('normal')} seed={55} rot={-2} />
       <Note text="made from tree bark" x={180} y={520} size={58} rot={-3} at={r('bark')} />
-      <Note text="thin enough to see light through" x={780} y={860} size={54} rot={-3} at={r('light')} />
+      <Note text="thin enough to see light through" x={780} y={840} size={54} rot={-3} at={r('light')} />
     </AbsoluteFill>
   );
 };
@@ -112,7 +112,7 @@ const Paste: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="the glue" x={180} y={150} size={64} rot={-4} at={r('glue')} />
       <Note text="a root vegetable: konnyaku" x={180} y={800} size={54} rot={-3} at={r('root')} />
       <Note text="tinted blue" x={1080} y={250} size={60} rot={-4} at={r('blue')} />
-      <Note text="so thin spots would show" x={1090} y={800} size={54} rot={-3} at={r('show')} />
+      <Note text="so thin spots would show" x={1060} y={800} size={54} rot={-3} at={r('show')} />
     </AbsoluteFill>
   );
 };
@@ -131,7 +131,7 @@ const Edible: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="edible!" x={1280} y={260} size={78} rot={-6} at={r('edible')} />
       <Note text="a wartime food shortage" x={130} y={150} size={56} rot={-3} at={r('food')} />
       <Highlight text="EATING THE GLUE" x={540} y={830} size={100} at={r('eating')} seed={57} rot={-2} />
-      <Note text="how was the war going?" x={1180} y={600} size={52} rot={-4} at={r('tells')} />
+      <Note text="how was the war going?" x={1130} y={600} size={52} rot={-4} at={r('tells')} />
     </AbsoluteFill>
   );
 };
@@ -163,8 +163,8 @@ const Secret: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <CropPrint src={GIRLS_SRC} size={[970, 1000]} crop={[48, 134, 896, 600]} x={220} y={150} w={1000} at={1} rot={1} tag={GIRLS_TAG} />
       </AbsoluteFill>
       <Note text="military police" x={1300} y={180} size={60} rot={-3} at={r('police')} />
-      <RubberStamp text="TOP SECRET" x={1120} y={420} size={104} at={r('secret')} rot={-9} />
-      <Note text="never talk about it" x={1250} y={760} size={60} rot={-3} at={r('never')} />
+      <RubberStamp text="TOP SECRET" x={1000} y={420} size={96} at={r('secret')} rot={-9} />
+      <Note text="never talk about it" x={1180} y={760} size={60} rot={-3} at={r('never')} />
     </AbsoluteFill>
   );
 };
@@ -186,6 +186,8 @@ const bx = (sx: number) => MOF.x + sx * MS;
 const by = (sy: number) => MOF.y + sy * MS;
 
 /** "About 600 pieces made one balloon, 33 feet across. As tall as a three-story house." */
+// TODO(3D): BalloonAssembly (a drawn balloon filling in panel by panel, a counter to 600, then the house for scale) drops in here
+// when src/fx/BalloonAssembly.tsx is ready; the coral Moffett print and the drawn house below are its stand-in.
 const Size: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const r = (p: string) => t.at(p) - a;
   const [l, rr, top] = [bx(564), bx(2635), by(183)];
@@ -230,8 +232,8 @@ const Ring: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="a ring of sandbags" x={1100} y={480} size={54} rot={-3} at={r('sandbags')} />
       <DrawPath d={d} at={r('right height')} dur={30} width={6} />
       <Note text="3 days" x={1600} y={760} size={60} rot={-4} at={r('three days')} />
-      <Note text="then it dropped its bombs" x={190} y={880} size={54} rot={-2} at={r('dropped')} />
-      <Note text="and blew itself up" x={1050} y={880} size={54} rot={-3} at={r('blew')} />
+      <Note text="then it dropped its bombs" x={190} y={860} size={54} rot={-2} at={r('dropped')} />
+      <Note text="and blew itself up" x={1050} y={860} size={54} rot={-3} at={r('blew')} />
     </AbsoluteFill>
   );
 };

@@ -71,10 +71,10 @@ const HitBack: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <AbsoluteFill style={{transform: `scale(${z})`}}>
         <JetMap x={MAP_X} y={MAP_Y} w={MAP_W} at={1} tag="Winter winds over the Pacific · Mikesh, Smithsonian, 1973" />
       </AbsoluteFill>
-      <Highlight text="HIT BACK" x={170} y={90} size={96} at={t.at('hit') - a} seed={35} rot={-2} />
+      <Highlight text="HIT BACK" x={170} y={116} size={96} at={t.at('hit') - a} seed={35} rot={-2} />
       <Note text="not a ship, not an island" x={540} y={690} size={54} rot={-3} at={t.at('ship') - a} />
       <Loop cx={1440} cy={545} rx={280} ry={190} at={t.at('America itself') - a} seed={7} />
-      <Note text="America itself" x={1290} y={860} size={60} rot={-4} at={t.at('America itself') - a} />
+      <Note text="America itself" x={1290} y={840} size={60} rot={-4} at={t.at('America itself') - a} />
     </AbsoluteFill>
   );
 };
@@ -117,7 +117,7 @@ const Lab: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="a very strange idea" x={1220} y={330} size={54} rot={-4} at={r('strange')} />
       <Note text="no plane?" x={250} y={600} size={64} rot={-4} at={r('plane')} />
       <Arrow x1={240} y1={790} x2={1660} y2={760} bow={-50} at={r('the wind could')} dur={10} />
-      <Highlight text="WHAT IF THE WIND…?" x={470} y={860} size={96} at={r('the wind could')} seed={39} rot={-2} />
+      <Highlight text="WHAT IF THE WIND…?" x={470} y={850} size={96} at={r('the wind could')} seed={39} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -134,9 +134,9 @@ const River: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <AbsoluteFill style={{transform: `scale(${z})`}}>
         <JetMap x={MAP_X} y={MAP_Y} w={MAP_W} at={1} flowAt={r('river')} tag="Winter winds over the Pacific · Mikesh, Smithsonian, 1973" />
       </AbsoluteFill>
-      <Highlight text="A RIVER OF AIR" x={170} y={90} size={92} at={r('river')} seed={41} rot={-2} />
-      <Note text="about 30,000 ft up" x={1180} y={110} size={58} rot={-3} at={r('30,000')} />
-      <Note text="west → east" x={720} y={880} size={66} rot={-3} at={r('west')} />
+      <Highlight text="A RIVER OF AIR" x={170} y={116} size={92} at={r('river')} seed={41} rot={-2} />
+      <Note text="about 30,000 ft up" x={1180} y={126} size={58} rot={-3} at={r('30,000')} />
+      <Note text="west → east" x={820} y={840} size={66} rot={-3} at={r('west')} />
     </AbsoluteFill>
   );
 };
@@ -180,8 +180,8 @@ const Build: React.FC<{t: TL; a: number}> = ({t, a}) => {
           tag="A launch crew holds a balloon against the wind · Mikesh, Smithsonian, 1973" />
       </AbsoluteFill>
       <Highlight text="THOUSANDS" x={1120} y={130} size={100} at={t.at('thousands') - a} seed={45} rot={-3} />
-      <Note text="the men were at war" x={1290} y={560} size={50} rot={-4} at={t.at('grown') - a} />
-      <Note text="who would build them?" x={1080} y={850} size={62} rot={-3} at={t.at('war') - a} />
+      <Note text="the men were at war" x={1230} y={560} size={48} rot={-4} at={t.at('grown') - a} />
+      <Note text="who would build them?" x={1050} y={830} size={62} rot={-3} at={t.at('war') - a} />
     </AbsoluteFill>
   );
 };

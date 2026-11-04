@@ -49,7 +49,7 @@ const Beach: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
 const Assignment: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="BW01_beach_dawn" a={0} b={b - a} fade={1} cam={{z: [1.16, 1.24], x: [40, 10], y: [-10, -20]}} fog={0.3} />
-    <Note text="ran a machine at the secret lab" x={980} y={150} size={54} rot={-3} at={t.at('machine') - a} />
+    <Note text="ran a machine at the secret lab" x={880} y={150} size={54} rot={-3} at={t.at('machine') - a} />
     <Highlight text="SPECIAL ASSIGNMENT" x={760} y={330} size={92} at={t.at('special') - a} seed={61} rot={-3} />
     <NoPhoto text={TATSUO} at={0} />
   </AbsoluteFill>
@@ -134,7 +134,7 @@ const Doubts: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="BW01_beach_dawn" a={0} b={b - a} fade={1} cam={{z: [1.1, 1.04], x: [-20, 0], y: [-8, 0]}} fog={0.35} />
     <AbsoluteFill style={{background: 'rgba(8,7,5,0.3)'}} />
-    <Note text="he knew exactly what they were" x={980} y={150} size={54} rot={-3} at={t.at('exactly') - a} />
+    <Note text="he knew exactly what they were" x={860} y={150} size={54} rot={-3} at={t.at('exactly') - a} />
     <Highlight text="THEIR DOUBTS" x={1000} y={300} size={96} at={t.at('doubts') - a} seed={65} rot={-3} />
     <Note text="one night, laughing" x={1100} y={500} size={58} rot={-4} at={t.at('laughing') - a} />
     <NoPhoto text={TATSUO} at={0} />
@@ -157,7 +157,7 @@ const Lose: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => {
           <Quote text="Japan's gonna lose." at={r("Japan's gonna")} x={170} y={380} w={1500} size={120} who="Their team leader, 1944" />
         </>
       )}
-      <Note text="(those were test flights)" x={1080} y={790} size={56} rot={-3} at={r('test')} />
+      <Note text="(those were test flights)" x={1040} y={790} size={56} rot={-3} at={r('test')} />
     </AbsoluteFill>
   );
 };
@@ -170,6 +170,7 @@ const M = cropMap(MAP_AT.x, MAP_AT.y, MAP_AT.w, MAP_CROP);
 /** "On November 3, 1944, the real attack began, from three beaches on Japan's coast. That beach was one of them." */
 const Sites: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const f = useCurrentFrame();
+  const g = useGFrame();
   const z = interpolate(f, [0, 250], [1, 1.04], clamp);
   const r = (p: string) => t.at(p) - a;
   const [nx, ny] = M(1180, 1236); // Nakoso label + dot
@@ -182,13 +183,13 @@ const Sites: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <CropPrint src={SITES_SRC} size={SITES_SIZE} crop={MAP_CROP} x={MAP_AT.x} y={MAP_AT.y} w={MAP_AT.w} at={1} rot={-1} tag={SITES_TAG} />
         <Loop cx={nx} cy={ny} rx={200} ry={30} at={r('three')} dur={8} seed={11} />
         <Loop cx={ox} cy={oy} rx={200} ry={30} at={r('three') + 5} dur={8} seed={12} />
-        <Loop cx={ix} cy={iy} rx={210} ry={58} at={r('beaches')} dur={8} seed={13} />
+        {g < r('That beach') && <Loop cx={ix} cy={iy} rx={210} ry={58} at={r('beaches')} dur={8} seed={13} />}
         <Loop cx={ix} cy={iy} rx={226} ry={70} at={r('That beach')} dur={10} width={8} color={CORAL} seed={14} tilt={-3} />
       </AbsoluteFill>
       <Highlight text="NOV. 3, 1944" x={1100} y={140} size={100} at={r('November')} seed={67} rot={-3} />
       <Note text="the real attack" x={1160} y={330} size={62} rot={-4} at={r('real')} />
       <Note text="three beaches" x={1160} y={470} size={62} rot={-3} at={r('three')} />
-      <Note text="Tatsuo's beach: Ichinomiya" x={1060} y={760} size={58} rot={-3} at={r('That beach')} />
+      <Note text="Tatsuo's beach: Ichinomiya" x={1000} y={760} size={56} rot={-3} at={r('That beach')} />
     </AbsoluteFill>
   );
 };
@@ -203,7 +204,7 @@ const Count: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Note text="Nov 1944 → Apr 1945" x={1080} y={170} size={60} rot={-3} at={r('five months')} />
+      <Note text="Nov 1944 → Apr 1945" x={1110} y={470} size={60} rot={-3} at={r('five months')} />
       <div style={{position: 'absolute', left: 190, top: 230, fontFamily: JF.display, fontSize: 210, lineHeight: 1, color: '#f4efe6',
         textShadow: '0 6px 22px rgba(0,0,0,0.8)', opacity: interpolate(g, [r('launched') - 4, r('launched')], [0, 1], clamp)}}>
         {k < 1 ? n.toLocaleString('en-US') : 'about 9,300'}
@@ -220,7 +221,7 @@ const Count: React.FC<{t: TL; a: number}> = ({t, a}) => {
           );
         })}
       </svg>
-      <Note text="each dot = 100 balloons" x={1160} y={880} size={52} rot={-3} at={t.at('balloons', 2) - a} />
+      <Note text="each dot = 100 balloons" x={1160} y={860} size={52} rot={-3} at={t.at('balloons', 2) - a} />
     </AbsoluteFill>
   );
 };
@@ -241,7 +242,7 @@ const Remember: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <CropPrint src={SITES_SRC} size={SITES_SIZE} crop={CLOSE_CROP} x={CLOSE_AT.x} y={CLOSE_AT.y} w={CLOSE_AT.w} at={1} rot={-1} tag={SITES_TAG} />
         <Loop cx={ix} cy={iy} rx={340} ry={110} at={6} dur={10} width={9} color={CORAL} seed={15} tilt={-3} />
       </AbsoluteFill>
-      <Highlight text="REMEMBER THAT BEACH" x={170} y={100} size={92} at={t.at('Remember') - a} seed={69} rot={-2} />
+      <Highlight text="REMEMBER THAT BEACH" x={170} y={116} size={92} at={t.at('Remember') - a} seed={69} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -251,9 +252,9 @@ const Microscope: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <AbsoluteFill style={{background: 'radial-gradient(circle 520px at 960px 560px, rgba(255,214,160,0.09) 0%, transparent 100%)'}} />
-    <Prop name="microscope" x={790} y={200} w={360} at={2} />
-    <Note text="somebody in America" x={1200} y={230} size={58} rot={-4} at={t.at('somebody') - a} />
-    <Highlight text="A MICROSCOPE" x={1120} y={760} size={96} at={t.at('microscope') - a} seed={71} rot={-3} />
+    <Prop name="microscope" x={620} y={200} w={360} at={2} />
+    <Note text="somebody in America" x={1080} y={240} size={58} rot={-4} at={t.at('somebody') - a} />
+    <Highlight text="A MICROSCOPE" x={1020} y={760} size={96} at={t.at('microscope') - a} seed={71} rot={-3} />
   </AbsoluteFill>
 );
 
