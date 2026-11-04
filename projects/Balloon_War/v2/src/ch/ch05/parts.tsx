@@ -108,7 +108,7 @@ export const FrontPage: React.FC<{x: number; y: number; w: number; h: number; at
   const rows = Math.floor((h - pad - top0) / lh);
   const lines: React.ReactNode[] = [];
   const bars: React.ReactNode[] = [];
-  const hp = interpolate(g, [holeAt, holeAt + 8], [0, 1], clamp);
+  const hp = hole && Number.isFinite(holeAt) ? interpolate(g, [holeAt, holeAt + 8], [0, 1], clamp) : 0;
   for (let c = 0; c < cols; c++) {
     for (let r = 0; r < rows; r++) {
       const cx = pad + c * (cw + gap);

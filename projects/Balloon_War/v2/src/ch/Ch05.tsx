@@ -69,7 +69,7 @@ const Far: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
       }}
     </CropPrint>
     <Note text="far from the war" x={1180} y={200} size={58} rot={-4} at={t.at('war') - a} />
-    <Highlight text="SO WHAT WAS THAT?" x={1000} y={900} size={74} at={t.at('So what') - a} seed={55} rot={-2} />
+    <Highlight text="SO WHAT WAS THAT?" x={1000} y={878} size={74} at={t.at('So what') - a} seed={55} rot={-2} />
   </AbsoluteFill>
 );
 
@@ -133,7 +133,7 @@ const Code: React.FC<{t: TL; a: number}> = ({t, a}) => (
     ]} />
     <RubberStamp text="PAPER" x={980} y={470} at={t.at('paper', 3) - a} size={130} rot={-9} />
     <Note text="not the hardest code to crack" x={300} y={820} size={56} rot={-3} at={t.at('Not the') - a} />
-    <Note text="...but okay" x={1240} y={880} size={56} rot={-5} at={t.at('okay') - a} />
+    <Note text="...but okay" x={1240} y={858} size={56} rot={-5} at={t.at('okay') - a} />
   </AbsoluteFill>
 );
 

@@ -153,7 +153,7 @@ export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from =
   return (
     <Stage
       over={<AbsoluteFill>
-        <div style={{position: 'absolute', left: 120, top: 112, opacity: mapK}}>
+        <div style={{position: 'absolute', left: 110, top: 104, opacity: mapK, background: 'rgba(7,9,8,0.55)', padding: '6px 18px 10px', borderRadius: 6}}>
           <div style={{fontFamily: JF.display, fontSize: 64, color: CREAM, letterSpacing: 1, textShadow: '0 3px 14px rgba(0,0,0,0.9)', whiteSpace: 'nowrap'}}>{monthName}</div>
           <div style={{fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: TEAL, marginTop: 6, textShadow: '0 2px 8px #000', whiteSpace: 'nowrap'}}>
             BALLOON INCIDENTS: {count}

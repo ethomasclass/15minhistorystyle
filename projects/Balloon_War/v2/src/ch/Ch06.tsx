@@ -37,7 +37,7 @@ const Bags: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <Prop name="sandbag" x={720} y={190} w={480} at={1} coral trace />
-    <Note text="some never got dropped" x={1180} y={760} size={58} rot={-4} at={t.at('before') - a} />
+    <Note text="some never got dropped" x={1000} y={760} size={58} rot={-4} at={t.at('before') - a} />
   </AbsoluteFill>
 );
 
@@ -48,7 +48,7 @@ const Geologists: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
     <CropPrint src="img/v2/sand/julia_gardner_placard_reston_usgs.jpg" size={[5000, 3333]} x={150} y={130} w={860} h={574} fx={2560} fy={1560}
       z={[1.18, 1.26]} a={0} b={b - a} at={1} rot={-2} tag="Placard for USGS geologist Julia Gardner · USGS" />
     <Prop name="sand_jar" x={1300} y={170} w={300} at={t.at('sand') - a} />
-    <Note text="one of them: Julia Gardner" x={1100} y={720} size={52} rot={-4} at={t.at('scientists') - a} />
+    <Note text="one of them: Julia Gardner" x={1040} y={720} size={52} rot={-4} at={t.at('scientists') - a} />
     <Definition term="ge·ol·o·gists" def="scientists who study rocks and dirt" at={t.at('geologists') - a} x={150} y={800} w={1100} />
   </AbsoluteFill>
 );
@@ -88,7 +88,7 @@ const NoCoral: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <Note text="CORAL?" x={1050} y={270} size={100} rot={-5} at={t.at('coral') - a} />
     <Strike x1={1030} y1={360} x2={1420} y2={300} at={t.at('No coral') - a} />
     <Note text="not a warm, tropical beach" x={980} y={480} size={56} rot={-3} at={t.at('warm') - a} />
-    <Highlight text="SOMEWHERE COLDER" x={940} y={660} size={84} at={t.at('colder') - a} seed={63} rot={-2} />
+    <Highlight text="SOMEWHERE COLDER" x={890} y={660} size={84} at={t.at('colder') - a} seed={63} rot={-2} />
   </AbsoluteFill>
 );
 
@@ -134,7 +134,7 @@ const CSI: React.FC<{t: TL; a: number}> = ({t, a}) => (
     <Scope src="img/v2/sand/live_foraminifera_microscope_usgs.jpg" cx={640} cy={500} r={330} at={1} zoom={1.2} tag="A foraminifera under the microscope · USGS" />
     <Prop name="microscope" x={1260} y={220} w={380} at={1} from="none" />
     <Highlight text="CSI" x={1060} y={150} size={130} at={t.at('CSI') - a} seed={67} rot={-5} />
-    <Note text="...about 50 years early" x={1000} y={880} size={56} rot={-3} at={t.at('fifty') - a} />
+    <Note text="...about 50 years early" x={1000} y={850} size={56} rot={-3} at={t.at('fifty') - a} />
   </AbsoluteFill>
 );
 

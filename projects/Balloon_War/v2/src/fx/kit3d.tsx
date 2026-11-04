@@ -312,9 +312,9 @@ export const Label: React.FC<{x: number; y: number; text: string; sub?: string; 
 };
 
 /** Small mono line (source / honesty notes), placed by its corner inside the safe frame. */
-export const Fine: React.FC<{text: string; x?: number; y?: number; right?: boolean; opacity?: number; size?: number}> = ({text, x = SAFE + 10, y = H - SAFE - 26, right = false, opacity = 0.75, size = 17}) => (
+export const Fine: React.FC<{text: string; x?: number; y?: number; right?: boolean; opacity?: number; size?: number}> = ({text, x = SAFE + 10, y = H - SAFE - 42, right = false, opacity = 0.75, size = 17}) => (
   <div style={{position: 'absolute', ...(right ? {right: W - x} : {left: x}), top: y, fontFamily: JF.mono, fontSize: size, letterSpacing: 1.5, color: `rgba(244,239,230,${opacity})`,
-    textTransform: 'uppercase', whiteSpace: 'nowrap', textShadow: '0 1px 6px rgba(0,0,0,0.95)'}}>{text}</div>
+    textTransform: 'uppercase', whiteSpace: 'nowrap', textShadow: '0 1px 6px rgba(0,0,0,0.95)', background: 'rgba(7,9,8,0.55)', padding: '3px 8px', borderRadius: 3}}>{text}</div>
 );
 
 /** Handwriting written on left to right over `dur` frames from `at` (`f` = the stepped frame). */

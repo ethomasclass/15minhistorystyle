@@ -82,12 +82,14 @@ const Elsie: React.FC<S> = ({t, a}) => (
 const Morning: React.FC<S> = ({t, a, b}) => (
   <AbsoluteFill>
     <DarkPaper />
+    {/* TODO(3D): GearhartTerrain (the Gearhart Mountain area as a quiet teal-contour slab, one small cream marker, no figures) for
+        "up into the mountains": a beat from "up into the mountains" (t.at('up into')) on the slab, then this stand-in print. */}
     <Zoom a={0} b={b - a} s={1.05} ox={760} oy={480}>
       <QuietPrint src={`${IMG}klamath_falls_picnickers_in_pines_1942.jpg`} x={220} y={120} w={880} h={720} at={0} rot={1} pos="50% 55%" crop={1.14}
         tag="Klamath Falls, 1942 · not the Mitchell party · Russell Lee, Library of Congress" />
     </Zoom>
     <Note text="Archie, a pastor" x={1170} y={230} size={52} rot={-3} at={t.at('pastor') - a} />
-    <Note text="five kids from church" x={1170} y={420} size={56} rot={-3} at={t.at('five') - a} />
+    <Note text="five kids from church" x={1150} y={420} size={54} rot={-3} at={t.at('five') - a} />
     <Note text="to fish, and have lunch" x={1170} y={610} size={52} rot={-3} at={t.at('fish') - a} />
   </AbsoluteFill>
 );
