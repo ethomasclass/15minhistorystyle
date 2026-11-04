@@ -63,6 +63,7 @@ prefix says which video the cue was made for:
 | [`w_calm_sea`](cues/w_calm_sea.mp3) | 1:07 | -12.5 | Calm, open, slightly uneasy morning at sea: rocking 6/8 low strings, solo wooden flute shanty phrase, harp, col legno rope creaks; darkens after ~30 s with a low cello ostinato; held unresolved minor chord. | First ~30 s calm; the threat (cello ostinato) creeps in after ~30 s. | The War Nobody Won, Good Luck |
 | [`m_1924`](cues/m_1924.mp3) | 1:18 | -15.9 | Wry 1920s foxtrot band: muted trumpet, clarinet, tuba, banjo, stride piano, brushed snare, shellac warmth. | Bouncy throughout; strong from the top, so it works as a cold-open bed. | When Europe Ate Mummies |
 | [`m_tomb`](cues/m_tomb.mp3) | 0:54 | -16.5 | Dark ambient tension: low cello drone, frame-drum heartbeat, metallic scrapes, breathy flute. | Near-silent first 2 s; steady tension from ~4 s on. | When Europe Ate Mummies |
+| [`bw_something_in_the_woods`](cues/bw_something_in_the_woods.mp3) | 1:45 | -15.4 | Quiet curious cold open: felt piano three-note question, low muted strings, alto flute, harp; a small dark swell; ends unresolved. | Sound from the first second (no silent lead); small swells ~15 s and ~40 s; dip 88–92 s; back 93–100 s; fades out by 104 s. | The Balloon War (v2) |
 
 ### Light, wry and comic
 
@@ -84,6 +85,9 @@ prefix says which video the cue was made for:
 | [`b_caper_40s`](cues/b_caper_40s.mp3) | 1:59 | -16.0 | 1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous. | Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s. | The Balloon War |
 | [`aw_boomtown`](cues/aw_boomtown.mp3) | 2:52 | -22.4 | The rush that runs out: the acoustic boomtown rush slows and stops at 101.2 s, a beat of silence, then the hollow aftermath. | The stop is at 101.2 s (tape stop from 99.8 s); place it so the stop lands on the line that deflates the boom. | Cheap as Dirt |
 | [`aw_boomtown_rush`](cues/aw_boomtown_rush.mp3) | 2:17 | -21.9 | A gold rush on period instruments: busy parlor piano, scurrying pizzicato, fiddle runs, concertina, wooden taps; feverish and crowded, never lets up (acoustic, no drum kit). | Even all the way through; no ending (made to be cut). | Cheap as Dirt |
+| [`hb_mischief_rag`](cues/hb_mischief_rag.mp3) | 1:59 | -22.6 | Sly ragtime cakewalk for the prank era (~1900): upright piano, staccato bassoon, plucked bass, clarinet slides, wood block; a stop-time break. | Mischievous from the top; steady all through. | Trick-or-Treating Was a Bribe |
+| [`hb_suburbs_swing`](cues/hb_suburbs_swing.mp3) | 1:36 | -21.9 | Postwar 1950s swing with a spooky wink: walking bass, brushes, muted trumpet and clarinet, celesta and vibraphone sparkle; a short minor turn. | Bright and steady; used ~45 s under the baby-boom suburbs. | Trick-or-Treating Was a Bribe |
+| [`bw_paper_and_sand`](cues/bw_paper_and_sand.mp3) | 2:38 | -14.4 | Curious 1940s American investigation: pizzicato, upright bass, vibraphone, muted trumpet, brushes; a brief brave lift; microscope-quiet; ends on an unresolved question. | Steady; dip 89–92 s; lift 92–130 s; dip 132–136 s; last block 136–150 s; fades by 157 s (trimmed from 159.6 s, silent tail). | The Balloon War (v2) |
 
 ### Warm, hopeful and dignified
 
@@ -102,6 +106,8 @@ prefix says which video the cue was made for:
 | [`m_old_world`](cues/m_old_world.mp3) | 1:08 | -15.4 | Renaissance early music: lute, viola da gamba, recorder, soft frame drum; curious, candlelit. | Fullest 14–50 s; thins out in the last 6 s (a natural tail). | When Europe Ate Mummies |
 | [`m_alexandria`](cues/m_alexandria.mp3) | 1:15 | -17.7 | Middle Eastern night-market underscore: oud, ney, qanun, riq/darbuka, string drone, maqam hijaz. | Quiet first ~8 s, then builds; densest 38–60 s. | When Europe Ate Mummies |
 | [`aw_long_drive`](cues/aw_long_drive.mp3) | 3:09 | -21.2 | The cattle trail: loping two-beat gait on hand drum and upright bass, nylon guitar and fiddle trading a plain trail melody, harmonica far off; dusty, steady, a little lonely. | Even all the way through; it thins in the last 15 s. | Cheap as Dirt |
+| [`bw_paper_and_paste`](cues/bw_paper_and_paste.mp3) | 2:00 | -15.8 | Delicate, patient work in a dim theater: repeating felt-piano brush strokes, sparse koto, pizzicato, muted strings; a soft clockwork pulse in the middle. | Dips 22–25 s and 69–75 s (good landing spots for a line); fullest 55–60 s and 88–93 s; sparse ending 105–118 s. | The Balloon War (v2) |
+| [`bw_dawn_launch`](cues/bw_dawn_launch.mp3) | 1:30 | -14.4 | Cold winter dawn on a Pacific beach: harp swells like waves, low strings, felt piano, koto; quietly hopeful, a swell as the balloon is released, thinning into doubt. | Full from 2 s and steady; fades from 78 s, out by 89 s. | The Balloon War (v2) |
 
 ### Grave (heavy chapters)
 
@@ -120,6 +126,8 @@ prefix says which video the cue was made for:
 | [`m_lament_baroque`](cues/m_lament_baroque.mp3) | 1:22 | -15.8 | Baroque lament: viola da gamba and cello, soft chamber organ, descending bass; grave and spare. | Gentle opening, swells 8–16 s and 40–46 s; long quiet tail. | When Europe Ate Mummies |
 | [`aw_white_cold`](cues/aw_white_cold.mp3) | 3:07 | -21.1 | Winter as the enemy: glassy string harmonics over a wind-like drone, sparse frozen piano notes; no melody, no percussion. | Even from 0:05; the stillest stretch is about 2:15-2:35, then it swells again. | Cheap as Dirt |
 | [`aw_boomtown_hollow`](cues/aw_boomtown_hollow.mp3) | 1:10 | -23.0 | The empty aftermath: low strings and a cello drone, one sour piano chord, a lone detuned saloon note; no rhythm. | From 0:00; fades out from about 1:00. | Cheap as Dirt |
+| [`bw_gearhart`](cues/bw_gearhart.mp3) | 2:08 | -16.0 | Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter. | Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail). | made for The Balloon War v2 ch 8, not used |
+| [`hb_coffin_ships`](cues/hb_coffin_ships.mp3) | 2:00 | -22.1 | Grave Irish air for the Great Famine and the Atlantic crossing: low whistle over a cello drone, sparse harp, swaying strings; a cautious hopeful lift with solo fiddle. | Grave first ~60 s; the hopeful lift in the second half (the ships reach America). | Trick-or-Treating Was a Bribe |
 
 ### Tension, dread and dark
 
@@ -138,6 +146,10 @@ prefix says which video the cue was made for:
 | [`cw_telegraph`](cues/cw_telegraph.mp3) ⚠ | 1:00 | -19.1 | Breaking news in the 1860s: an urgent telegraph-like pizzicato tick, tense low strings and snare rolls; shock and hurry, then a hush. | The tick starts at ~0:10 (start the cue there); the busiest stretch is 0:35–0:50. | — |
 | [`r_abolition_b`](cues/r_abolition_b.mp3) | 1:49 | -12.3 | Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending. |  | Fix Everything, King Andrew, The Man Who Couldn't Sit Still, Grip Tighter |
 | [`m_reveal`](cues/m_reveal.mp3) | 1:10 | -17.4 | Shorts engine: ticking clock, pizzicato, low piano ostinato, layers stacking toward a hit. | Hits by ~4 s and builds through; the last strong accent is near 64 s. | When Europe Ate Mummies |
+| [`hb_black_halloween`](cues/hb_black_halloween.mp3) | 2:31 | -22.1 | Tense 1930s Depression riot: low piano ostinato, muted snare, pizzicato footsteps, muted trumpet stabs, a distant fire bell; restrained waves. | Hush (questioning chord) at ~60 s; builds ~85 s and ~130 s. Cold open used it from 31 s so the hush landed under the driving question. | Trick-or-Treating Was a Bribe |
+| [`hb_oiche_shamhna`](cues/hb_oiche_shamhna.mp3) | 2:30 | -20.7 | Haunted Irish Halloween night (darker version 2A): slow eerie air on low whistle, ghostly pipe drones, fiddle harmonics, slow bodhrán heartbeat; a sinister faster middle. | Builds steadily; fullest ~120–135 s (the finale reprise put it under "every fix became the tradition… pay up"); its own outro closed the end screen. | Trick-or-Treating Was a Bribe |
+| [`bw_revenge_on_the_wind`](cues/bw_revenge_on_the_wind.mp3) | 1:40 | -14.6 | Tense and distant (low strings, soft timpani heartbeat), turning to airy wonder (rising strings, alto flute, harp), then a cool determined close. | Steady from the top; lifts ~5 s and ~68 s; fullest 80–87 s; fades from 95 s, out by 98 s. | The Balloon War (v2) |
+| [`bw_the_newspaperman`](cues/bw_the_newspaperman.mp3) | 2:40 | -15.1 | Restrained 1940s Washington intrigue: walking upright bass, brushed cymbal, lonely muted trumpet, felt piano, low strings, a newsroom-clock pulse; tightens slowly. | Short quiet start 0–6 s; steady; dip ~105 s; choppier 125–145 s; ends 157 s. | The Balloon War (v2) |
 
 ### Action and war
 
@@ -159,6 +171,8 @@ prefix says which video the cue was made for:
 |---|---|---|---|---|---|
 | [`r_ending`](cues/r_ending.mp3) | 1:01 | -12.0 | Closing cue: reflective warm piano + strings, second half turns dark/tense with low strings and brass, ends on an unresolved chord. | Warm first ~30 s; the darkening and the unresolved chord are in the second half (King Andrew starts it ~30 s in so the chord lands on 'King'). | Fix Everything, The Man Who Couldn't Sit Still, King Andrew, Grip Tighter, Good Luck, Say It Ain't So, The Exact Spot, Dressed to Kill |
 | [`aw_promise_theme`](cues/aw_promise_theme.mp3) | 2:05 | -16.9 | The American West series theme: a four-note motif on solo piano, taken up by warm strings and a French horn, one restrained peak, back to piano, unresolved. | Full piece; the solo-piano opening sits well under a closing question. | Not in the Picture |
+| [`bw_a_thousand_cranes`](cues/bw_a_thousand_cranes.mp3) | 3:40 | -14.8 | Warm, quiet reconciliation for the ending: felt piano, soft strings, alto flute, a gentle koto line, harp; reflective, opening into warmth, a gentle lift, a ringing major close. | Steady from ~5 s; swells ~45 s and 150–180 s; quieter 185–205 s; last swell 205–212 s; out by 217 s. | The Balloon War (v2) |
+| [`b_paper_wind`](cues/b_paper_wind.mp3) | 2:35 | -17.2 | Fragile elegy carried by the wind: felt piano, muted strings, alto flute, harp, wind; floating, then sorrow, then a warm close. | Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s. | The Balloon War |
 
 | [`rc_reckoning`](cues/rc_reckoning.mp3) ⚠ | 1:00 | -18.3 | End of Reconstruction: a slow solemn brass band and low strings at a distance, a broken march that slows and falters; ends unresolved. | The faltering in the second half and the low unresolved chord at the end. | — |
 ## Recurring roles
@@ -967,10 +981,10 @@ Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 9
 | [`bw_dawn_launch`](cues/bw_dawn_launch.mp3) | 1:30 | -14.4 | Cold winter dawn on a Pacific beach: harp swells like waves, low strings, felt piano, koto; quietly hopeful, a swell as the balloon is released, thinning into doubt. | Full from 2 s and steady; fades from 78 s, out by 89 s. | The Balloon War (v2) |
 | [`bw_paper_and_sand`](cues/bw_paper_and_sand.mp3) | 2:38 | -14.4 | Curious 1940s American investigation: pizzicato, upright bass, vibraphone, muted trumpet, brushes; a brief brave lift; microscope-quiet; ends on an unresolved question. | Steady; dip 89–92 s; lift 92–130 s; dip 132–136 s; last block 136–150 s; fades by 157 s (trimmed from 159.6 s, silent tail). | The Balloon War (v2) |
 | [`bw_the_newspaperman`](cues/bw_the_newspaperman.mp3) | 2:40 | -15.1 | Restrained 1940s Washington intrigue: walking upright bass, brushed cymbal, lonely muted trumpet, felt piano, low strings, a newsroom-clock pulse; tightens slowly. | Short quiet start 0–6 s; steady; dip ~105 s; choppier 125–145 s; ends 157 s. | The Balloon War (v2) |
-| [`bw_gearhart`](cues/bw_gearhart.mp3) | 2:08 | -16.0 | Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter. | Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail). | The Balloon War (v2) |
+| [`bw_gearhart`](cues/bw_gearhart.mp3) | 2:08 | -16.0 | Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter. | Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail). | made for The Balloon War v2 ch 8, not used |
 | [`bw_a_thousand_cranes`](cues/bw_a_thousand_cranes.mp3) | 3:40 | -14.8 | Warm, quiet reconciliation for the ending: felt piano, soft strings, alto flute, a gentle koto line, harp; reflective, opening into warmth, a gentle lift, a ringing major close. | Steady from ~5 s; swells ~45 s and 150–180 s; quieter 185–205 s; last swell 205–212 s; out by 217 s. | The Balloon War (v2) |
 
-The same video reuses `b_paper_wind`.
+The finished video uses only `bw_` cues: `bw_paper_and_sand` runs across ch 5 and ch 6 (ch 6 resumes it where ch 5 stopped), and ch 8 (Bly) has **no music**: birdsong, then silence. `bw_gearhart` was made for ch 8 and left out.
 
 ### `bw_something_in_the_woods`
 
@@ -1022,7 +1036,7 @@ restrained 1940s Washington intrigue for a newspaperman keeping a secret, uprigh
 
 ### `bw_gearhart`
 
-2:08 · -16.0 LUFS · Suno · made for *The Balloon War* (v2): ch 8 Bly (optional; the plan is birdsong, then silence)
+2:08 · -16.0 LUFS · Suno · made for *The Balloon War* (v2) ch 8 Bly, **not used** (the chapter runs birdsong, then silence)
 
 ```
 very sparse grief for a quiet forest, solo felt piano, single notes with long silences between them, a faint low string held underneath, no melody to speak of, still and respectful, almost nothing, ending in silence, 60 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental
@@ -1091,4 +1105,103 @@ Reuse for the Donner Party, Valley Forge, the Children's Blizzard (Ep 3), any di
 
 ```
 brutal Great Plains winter blizzard, cold glassy high string harmonics, a low sustained drone like wind across empty land, a few sparse frozen piano notes, slow and still, no melody to speak of, a slow swell of icy dissonance in the middle then emptiness again, bleak and still, no percussion, ends on near silence, free time, about 50 BPM; documentary, restrained, space for narrator, instrumental
+```
+
+Prompts for the Halloween cues (from `projects/Halloween_Bribe/script/SUNO_PROMPTS.md`; the files are quiet Suno masters, about −21 to −23 LUFS, so `bed()` lifts them):
+
+### `hb_black_halloween`
+
+2:31 · -22.1 LUFS · Suno · made for *Trick-or-Treating Was a Bribe*: ch 1 (the tear-gas headline, under the question) and ch 4 (Fargo and Bismarck, 1933)
+
+```
+1930s Great Depression night of vandalism, tense and propulsive, low pulsing piano ostinato in the bass, tight muted snare and brushes, pizzicato strings like running footsteps, muted trumpet stabs, a distant fire-bell clang, tension builds in waves but stays restrained, a sudden hush at about fifty seconds that holds a questioning chord, then a busier second half with tremolo strings and urgent percussion, ends on a held dark unresolved chord, 104 BPM, 4/4, C minor; documentary, restrained, space for narrator, instrumental
+```
+
+Lyrics box:
+
+```
+[Instrumental]
+[Intro: low piano ostinato alone, ticking brushes]
+[Verse: pizzicato strings like footsteps, muted trumpet stabs]
+[Build: tension rises, distant bell]
+[Break: sudden hush, one held questioning chord]
+[Verse 2: busier, tremolo strings, urgent snare]
+[Build: restrained peak]
+[Outro: thins out, held dark unresolved chord]
+[End]
+```
+
+### `hb_oiche_shamhna`
+
+2:30 · -20.7 LUFS · Suno · made for *Trick-or-Treating Was a Bribe*: ch 2 (Ireland, the night the dead came home), and a reprise under the ch 8 ending (the 2A "haunted slow air" prompt)
+
+```
+upbeat, happy, cheerful, festive, celtic pub, irish pub, drinking song, reel, major key, bright, uplifting, new age, enya, riverdance
+```
+
+Lyrics box:
+
+```
+haunted Irish folk music for Halloween night in 1830s rural Ireland when the dead were believed to come home, dark and uneasy, a slow eerie air in a minor mode on low whistle, ghostly uilleann pipe drones underneath, a fiddle playing thin high harmonics and slow sliding notes like a cold draft, bodhrán frame drum beating a slow heartbeat, soft wind, sparse plucked harp notes that ring and decay, candlelight in a dark cottage with something outside the window, tension and dread, a slightly faster middle section where the bodhrán quickens and the fiddle turns sinister, then back to the lonely whistle, ends on a held drone with a single dissonant fiddle note fading out, 70 BPM, 6/8, D minor; dark folk, haunting, cinematic horror underscore, space for narrator, instrumental
+```
+
+### `hb_coffin_ships`
+
+2:00 · -22.1 LUFS · Suno · made for *Trick-or-Treating Was a Bribe*: ch 3, first half (the potato blight, the famine, the ships, landing in Boston and New York)
+
+```
+Ireland's Great Famine and the Atlantic crossing of the 1840s, a slow Irish air, grave and humane, low whistle carrying a sorrowful melody over a cello drone, sparse harp notes, the sound of a long sea voyage in slow swaying strings, no melodrama, in the second half a cautious, hopeful lift as the ships reach America, a solo fiddle taking the melody, ends on an open chord that is neither sad nor happy, 64 BPM, 3/4, D minor; documentary, restrained, space for narrator, instrumental
+```
+
+Lyrics box:
+
+```
+[Instrumental]
+[Intro: cello drone, sparse harp]
+[Verse: low whistle slow air, grave]
+[Verse 2: swaying strings like the sea, the air continues]
+[Bridge: a cautious hopeful lift, solo fiddle takes the melody]
+[Outro: open chord, fades]
+[End]
+```
+
+### `hb_mischief_rag`
+
+1:59 · -22.6 LUFS · Suno · made for *Trick-or-Treating Was a Bribe*: ch 3, second half (gates off hinges, soaped windows, outhouses, the wagon on the roof), and the start of ch 5 (the deal)
+
+```
+sly mischievous American prank night around 1900, a sneaky ragtime cakewalk on an upright saloon piano, staccato bassoon and plucked double bass tiptoeing, clarinet slides, wood block and a soft cymbal tap, playful and conspiratorial, like kids sneaking through a farmyard at night, a stop-time break where everything freezes for a beat, then the tune bounces back, ends with a cheeky final chord, 100 BPM, 2/4; documentary, restrained, space for narrator, instrumental
+```
+
+Lyrics box:
+
+```
+[Instrumental]
+[Intro: tiptoeing bassoon and plucked bass]
+[Verse: ragtime piano tune, clarinet slides]
+[Verse 2: wood block, the tune gets bolder]
+[Break: stop-time freeze, one beat of silence]
+[Verse 3: the tune bounces back]
+[Outro: cheeky final chord]
+[End]
+```
+
+### `hb_suburbs_swing`
+
+1:36 · -21.9 LUFS · Suno · made for *Trick-or-Treating Was a Bribe*: ch 6, second half (the war ends, sugar returns, the baby boom, the suburbs, "that's a buffet")
+
+```
+cheerful late 1940s American postwar optimism with a spooky wink, a small swing combo, walking upright bass, brushed snare, muted trumpet and clarinet playing a bouncy tune, a celesta and vibraphone adding a Halloween sparkle, playful and bright like kids running door to door in brand new suburbs, a short spooky minor turn in the middle, then back to bright, ends with a cheerful button, 128 BPM, 4/4, F major; documentary, restrained, space for narrator, instrumental
+```
+
+Lyrics box:
+
+```
+[Instrumental]
+[Intro: walking bass and brushes]
+[Verse: muted trumpet and clarinet tune, celesta sparkle]
+[Break: short spooky minor turn, vibraphone]
+[Verse 2: back to bright and bouncy]
+[Outro: cheerful button]
+[End]
 ```

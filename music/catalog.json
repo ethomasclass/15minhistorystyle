@@ -2665,14 +2665,8 @@
    "prompt": "very sparse grief for a quiet forest, solo felt piano, single notes with long silences between them, a faint low string held underneath, no melody to speak of, still and respectful, almost nothing, ending in silence, 60 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental",
    "mood": "Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter.",
    "good_part": "Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail).",
-   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
-   "used_in": [
-    {
-     "video": "The Balloon War (v2)",
-     "where": "ch 8 Bly (optional; the plan is birdsong, then silence)",
-     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
-    }
-   ]
+   "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user). Made for The Balloon War v2 ch 8 (Bly) but not used: the heavy chapter runs birdsong, then silence.",
+   "used_in": []
   },
   {
    "canonical": "bw_a_thousand_cranes",
