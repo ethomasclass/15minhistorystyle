@@ -1,6 +1,6 @@
 # Paper Bombs: The Secret Attack on America (working title)
 
-**Chunk History** · narration script · **v2, draft 2 (main characters)** · **2,581 words** · about **16:35 finished**
+**Chunk History** · narration script · **v2, draft 3 (cut list applied, Price line softened; LOCKED for voicing)** · **2,324 words** · about **15:01 finished**
 (165 wpm with pauses, plus the Chunk intro after the cold open, the 1-second beat, 2-second mark-snap breaks and a 20-second end screen)
 
 v1 (`SCRIPT.md`, the 9:29 video) was "three balloons, three jobs". v2 is **one story told as an arc**: Japan's paper balloon bombs.
@@ -36,14 +36,14 @@ Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken).
 | Starts | Chapter | Words | Arc | Whose chapter |
 |---|---|---|---|---|
 | 0:00 | Something in the Woods (cold open) | 203 | Hook | all four, in one breath |
-| 1:26 | Revenge on the Wind | 234 | Act I · setup | Japan (the plan) |
-| 2:54 | The Girl Who Glued | 289 | Act I · setup | Rei |
-| 4:42 | The Boy on the Beach | 209 | Act I · setup | Tatsuo |
-| 6:01 | "Paper" | 220 | Act II · escalation | America (the Army) |
-| 7:24 | The Sand | 177 | Act II · midpoint twist | the geologists → Tatsuo's beach |
-| 8:31 | The Newspaperman | 408 | Act II → III (Japan quits; plug) | Price |
-| 11:03 | Gearhart Mountain (heavy) | 324 | Act III · climax (heavy) | Bly: Elsie, Archie, Dick, Joan, Dottie |
-| 13:04 | A Thousand Cranes | 517 | Act IV · fallout + answer | Tatsuo, Price, Rei, Takeshita |
+| 1:26 | Revenge on the Wind | 198 | Act I · setup | Japan (the plan) |
+| 2:41 | The Girl Who Glued | 223 | Act I · setup | Rei |
+| 4:05 | The Boy on the Beach | 209 | Act I · setup | Tatsuo |
+| 5:24 | "Paper" | 163 | Act II · escalation | America (the Army) |
+| 6:26 | The Sand | 177 | Act II · midpoint twist | the geologists → Tatsuo's beach |
+| 7:34 | The Newspaperman | 371 | Act II → III (Japan quits; plug) | Price |
+| 9:51 | Gearhart Mountain (heavy) | 324 | Act III · climax (heavy) | Bly: Elsie, Archie, Dick, Joan, Dottie |
+| 11:52 | A Thousand Cranes | 456 | Act IV · fallout + answer | Tatsuo, Price, Rei, Takeshita |
 
 ---
 
@@ -79,9 +79,9 @@ So Japan wanted to hit back. Not at a ship, or an island. At America itself.
 
 [mischievously] So in a secret army lab outside Tokyo, somebody had a very strange idea. What if you didn't need a plane? What if the *wind* could do it?
 
-Way up high, about 30,000 feet, there's a fast river of air that blows west to east, from Japan toward America. A Japanese weatherman had mapped it twenty years earlier. [sarcastic] He published it in Esperanto, a made-up language meant for the whole world. So the whole world mostly didn't read it.
+Way up high, about 30,000 feet, there's a fast river of air that blows west to east, from Japan toward America. A Japanese weatherman had mapped it twenty years earlier.
 
-Today we call it the {jet stream}. It's why a flight from Tokyo to Los Angeles is faster than the flight back.
+Today we call it the {jet stream}.
 
 [serious] So the army made a plan. Hang bombs from a balloon. Let the wind carry it for three days. Then let it fall on America.
 
@@ -89,7 +89,7 @@ They just needed somebody to build thousands of them. And by then, most of Japan
 
 ---
 
-## 2:54 | The Girl Who Glued
+## 2:41 | The Girl Who Glued
 
 So they used kids.
 
@@ -107,15 +107,13 @@ The rules were strict. No hairpins. Fingernails cut short. Nothing that could sc
 
 [thoughtful] What they were making, nobody explained. Rei just glued. Panel after panel. About 600 pieces made one balloon, 33 feet across. As tall as a three-story house.
 
-[curious] And under each balloon hung the clever part. A balloon rises in the warm daytime and sinks in the cold night. Sink too low, and it ends up in the ocean. So a metal ring held 32 little sandbags. Every time the balloon sank too far, a gauge set off a tiny charge and dropped two bags. Lighter, it rose again.
-
-Rise. Sink. Drop two bags. For about three days. Then the ring let go of the bombs, and the balloon blew itself up, so there'd be no evidence.
+[curious] A metal ring of sandbags kept it at the right height for three days. Then it dropped its bombs and blew itself up.
 
 Rei didn't know any of that. [quietly] She wouldn't find out for decades.
 
 ---
 
-## 4:42 | The Boy on the Beach
+## 4:05 | The Boy on the Beach
 
 Meanwhile, on a beach east of Tokyo, a 16-year-old named Tatsuo Ogawa had a job of his own.
 
@@ -137,7 +135,7 @@ Over the next five months, Japan launched about 9,300 balloons.
 
 ---
 
-## 6:01 | "Paper"
+## 5:24 | "Paper"
 
 Just after sunset on a December evening, near a small town in Wyoming, people heard an explosion. [curious] Then they saw a bright red flame... and something like a parachute, drifting down out of the dark.
 
@@ -149,13 +147,11 @@ Five days later, a paper balloon turned up in Montana. Then two in Alaska, one o
 
 [sarcastic] In their reports, soldiers didn't even write the word "balloon." The code word was "paper." Not the hardest code to crack, but okay.
 
-The biggest danger, they decided, was forest fires. So the Army sent paratroopers to the Pacific Northwest to fight them: the 555th, the Triple Nickles. Every one of them was Black. In an army that kept Black and white soldiers apart, their job was to jump out of planes into burning forests. Smokejumpers still do it today.
-
 But you can't stop the balloons until you know where they come from. And the only real clue was... a few bags of sand.
 
 ---
 
-## 7:24 | The Sand
+## 6:26 | The Sand
 
 Some of the balloons came down before they'd dropped all their sandbags. So the Army sent the sand to {geologists}, scientists who study rocks and dirt.
 
@@ -175,7 +171,7 @@ So now there was a harder question than where they were coming from.
 
 ---
 
-## 8:31 | The Newspaperman
+## 7:34 | The Newspaperman
 
 That question landed on the desk of a man named Byron Price.
 
@@ -189,15 +185,13 @@ So on January 4, 1945, Price's office asked every newspaper and radio station in
 
 [thoughtful] Nobody had to go along with it. And yet, from coast to coast, they did.
 
-Today, a bomb in a field would be on somebody's phone in about ten seconds.
-
-The silence left Japan blind. It heard about that one balloon in Wyoming, from a Chinese newspaper. After that, nothing. [sarcastic] So Japan's official news agency just made things up: big fires, deaths in America. In reality, most Americans had no idea the balloons existed.
+The silence left Japan blind. It heard about that one balloon in Wyoming, from a Chinese newspaper. After that, nothing.
 
 Price's office told editors their silence had "baffled the Japanese, annoyed and hindered them."
 
 And the balloons weren't harmless. In March, one hit a power line in Washington State and shut down Hanford, the top-secret plant making plutonium for the atomic bomb. It took about three days to get back to full power. Japan never found out.
 
-[serious] But you can't keep a secret from Japan without keeping it from Americans, too. Nobody could be told what to look for, or not to touch one. As the weeks went by and nobody got hurt, the risk seemed worth it. Price did ask to warn the public about the danger, at least partly. The Navy said no.
+[serious] But you can't keep a secret from Japan without keeping it from Americans, too. Nobody could be told what to look for, or not to touch one. As the weeks went by and nobody got hurt, the risk seemed worth it. At some point, Price asked to warn the public about the danger, at least partly. The Navy said no.
 
 Back in Japan, American bombers had hit the plants making the gas that filled the balloons. And after five months of silence, the generals had no proof the balloons had done anything at all. So in April 1945, they gave up.
 
@@ -209,7 +203,7 @@ Quick favor. If you're enjoying this, hit subscribe. It's free, it really helps 
 
 ---
 
-## 11:03 | Gearhart Mountain (heavy)
+## 9:51 | Gearhart Mountain (heavy)
 
 May 5, 1945. A Saturday. About two weeks after Japan launched its last balloon.
 
@@ -237,11 +231,11 @@ Even then, the papers could only say that an unidentified object had exploded in
 
 ---
 
-## 13:04 | A Thousand Cranes
+## 11:52 | A Thousand Cranes
 
 Seventeen days after the picnic, the government broke its silence. It warned the country: if you find a strange object, don't touch it. Saving even one American life, it said, was worth more than anything Japan might learn.
 
-[thoughtful] Was the silence the right call? It kept Japan blind, and it helped end the attacks. It also meant six people never got a warning. Four years later, Congress paid the families, and supporters said it plainly: the public hadn't been warned, even though the military knew. People still argue about it.
+[thoughtful] Was the silence the right call? It kept Japan blind, and it helped end the attacks. It also meant six people never got a warning. People still argue about it.
 
 Then the war ended. And on August 15, 1945, both sides of this story started to disappear.
 
@@ -256,8 +250,6 @@ She went to the government for records. She found other women who'd done the sam
 [warmly] She wasn't the only one remembering. In the 1980s, a professor named John Takeshita learned that the wife of a childhood friend had made those balloons as a girl. When he was a boy, the US government had held him and his family in a camp for Japanese Americans, about fifty miles from Bly.
 
 He started passing letters between women in Japan and the families in Bly. And in 1987, he carried something to the memorial in those woods. A thousand paper cranes, folded by women who'd glued balloons as schoolgirls. In Japan, a thousand cranes is a wish for peace. They sent them as a sign of their regret.
-
-The trees there still carry scars from the blast. And the balloons aren't all accounted for. In 2014, two forestry workers in Canada found one half buried on a mountain, bomb and all. [quietly] There are probably more out there.
 
 So let's go back to the question. *How does a paper balloon from Japan end up in a forest in Oregon?* A country wanted revenge, found a wind nobody was listening to, and handed the job to kids. A girl glued it without knowing what it was. A boy filled it, sure it could never win.
 
