@@ -107,3 +107,11 @@ used") on their first appearance, never presented as likenesses. Price gets real
 2. Add a Gemini key to `projects/Balloon_War/.env` (only `.env.example` is there) and say go. I'll generate scene 1 and scene 6
    first as a test pair (Japan dawn and Oregon woods), lock them, split them into planes and show you a short parallax clip before
    doing the rest.
+
+## Props (AI, for desk cut-outs) — Nov 4, 2026
+`gemini-3-pro-image`, 2K, 1:1, prompts beside each source in `public/img/props/src/<name>.txt` (the Diamond Hoax prop paragraph;
+white objects on black so they cut out cleanly). Contact sheet: `review/contact/props_v2.jpg`. Never presented as a specific real
+artifact; no source tag. Retakes (round 1 in `src/rejects/`): the barometer had two clock hands; the sandbag was cloth (the real
+ballast bags were paper, Mikesh p. 12); the paste brush was a round Western pastry brush.
+Props: barometer, door_card (blank; "Out of Business" added in post), konnyaku_root, microscope, paper_crane, paste_brush_pot,
+radio, sand_jar, sandbag, sweet_potato, washi_stack.

@@ -294,6 +294,7 @@ column says where each was made.
   quieter, so every take is levelled), music bed **~13 LU under the voice** (set per cue from its measured loudness, `src/kit/levels.ts`
   `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (marker tick
   0.2 as in Black Sox, whooshes and stamps a few dB softer). Master to -14 LUFS.
+- **Dates are said as ordinals** (*The Balloon War* v2, Nov 2026): "November third", not "November three". `tools/voice.py` now turns any "Month 3" into "Month third" (template and project); write digits in the script as usual.
 - **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.
 
