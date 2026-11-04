@@ -7,11 +7,17 @@ import {useGFrame, usePal} from './Kit';
 export const MAP = {w: 4986, h: 4608};
 
 /** The sound under every handwritten note (one place to change it) and its level. */
-export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.2};
+// The user's call (Nov 2026): the writing sound barely there, and no page-turn / paper sounds at all.
+export const WRITE = {src: 'sfx/marker_tick.wav', volume: 0.03};
+/** Paper sounds the user turned down for good: Sfx plays nothing for these, wherever a chapter still asks for them. */
+const MUTED = ['sfx/page_turn.wav', 'sfx/paper_rustle.wav', 'sfx/paper_slap_soft.wav'];
+const WRITE_MAX = 0.03;
 
-export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => (
-  <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={volume} /></Sequence>
-);
+export const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, volume = 0.5}) => {
+  if (MUTED.includes(src)) return null;
+  const v = src === WRITE.src ? Math.min(volume, WRITE_MAX) : volume;
+  return <Sequence from={Math.max(0, at)} durationInFrames={90} layout="none"><Audio src={staticFile(src)} volume={v} /></Sequence>;
+};
 
 /** Mitchell's 1836 map, rotated; camera given in map pixels; children are SVG in map pixels. */
 export const MapView: React.FC<{cx: number; cy: number; s: number; rot?: number; children?: React.ReactNode; dim?: number}> = ({cx, cy, s, rot = 0, children, dim = 0}) => (

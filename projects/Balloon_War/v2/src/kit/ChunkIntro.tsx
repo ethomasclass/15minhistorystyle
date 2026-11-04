@@ -189,8 +189,8 @@ export const LogoBreak: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: black}}>
       <Stage opacity={logo}><SnapScene /></Stage>
-      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND) and a page turn as the next chapter fades up, quiet */}
-      <Sequence from={0} durationInFrames={66} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
+      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND); the file's page turn (1.3-1.7 s) is cut off at 1.2 s (no page turns) */}
+      <Sequence from={0} durationInFrames={36} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
     </AbsoluteFill>
   );
 };

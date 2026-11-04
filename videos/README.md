@@ -292,8 +292,11 @@ column says where each was made.
 - A/B the pace when the subject is heavy.
 - **Mix levels = Black Sox** (measured Oct 2026): narration at **-18 LUFS** (`tools/level_voice.py`; eleven_v4 comes out ~6 dB
   quieter, so every take is levelled), music bed **~13 LU under the voice** (set per cue from its measured loudness, `src/kit/levels.ts`
-  `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (marker tick
-  0.2 as in Black Sox, whooshes and stamps a few dB softer). Master to -14 LUFS.
+  `bed()`; 14-15 for a grave stretch), cold open and title sting as in Black Sox, sound effects at the soft-set levels (whooshes and
+  stamps a few dB softer). Master to -14 LUFS.
+- **No page-turn or paper sounds, and the writing sound almost silent** (*The Balloon War* v2, Nov 2026): page_turn, paper_rustle
+  and paper_slap_soft are never played (`Sfx` mutes them), and the marker tick under notes is capped at 0.03 (was 0.2). The Chunk
+  logo break keeps only its click (the page turn at the end of `chunk_snap.wav` is cut off).
 - **Dates are said as ordinals** (*The Balloon War* v2, Nov 2026): "November third", not "November three". `tools/voice.py` now turns any "Month 3" into "Month third" (template and project); write digits in the script as usual.
 - **Never speed the voice up** (Reconstruction, Oct 2026): no tempo stretch on the narration (it changes the tempo and the pitch). Natural speed everywhere, even if the video runs longer; trim only the pauses.
 - Give music options and let you pick.

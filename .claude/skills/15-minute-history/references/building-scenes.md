@@ -157,7 +157,7 @@ words sat. Give the background real parallax (split it with `tools/sil_layers.py
 ## 6. Sound
 
 Per chapter, in `Body`: a whoosh on every cut after the first (0.28–0.35), a stamp on every `Highlight` (0.27–0.3),
-the marker sound 2 frames before every `Note` (`WRITE`, 0.2), a tick on pins and card flips (0.45). Music beds go
+the marker sound 2 frames before every `Note` (`WRITE`, capped at 0.03: the user wants it nearly silent; no page-turn or paper sounds, `Sfx` mutes them), a tick on pins and card flips (0.45). Music beds go
 in `ChapterShell`'s `music` with `volume: bed('<cue>')` from `src/kit/levels.ts` (13 LU under the voice; see
 `voice-and-audio.md` §6). A `whip_soft` under a gentle drift plays at half level (the West series' `Sfx` halves any `whip`
 sound). Keep the lists of cue words next to the scenes so they stay in sync.
