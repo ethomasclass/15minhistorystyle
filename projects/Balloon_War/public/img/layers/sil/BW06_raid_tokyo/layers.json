@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.7275153994560242, 0.5257920026779175, 0.25589293241500854], "glowLayer": 0, "share": [0.08712177128754844, 0.05751759137294089, 0.2501819226168847, 0.605178714722626]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.37346560456031974, 0.06645474692647771, 0.037063953488372096, 0.5230156950248304], "method": "colour/region split (tools/sil_regions.py BW06_raid_tokyo), not depth", "note": "houses on L0, dark town + pagoda + bombers on L1, lighter town on L2"}

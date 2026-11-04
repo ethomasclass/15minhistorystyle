@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.81285160779953, 0.5318766832351685, 0.21238648891448975], "glowLayer": 0, "share": [0.1767914054929748, 0.22764007804929748, 0.09402726047722869, 0.501541255980499]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.5184319074763808, 0.0, 0.0, 0.4815680925236192], "method": "colour/region split (tools/sil_regions.py BW16_bookstore), not depth", "note": "the shop (front, window, woman, counter) + ground on L0, the street on L3"}

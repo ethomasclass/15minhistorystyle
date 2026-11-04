@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.7057337760925293, 0.4773930013179779, 0.21977601945400238], "glowLayer": 0, "share": [0.19499383970748546, 0.25290815959605134, 0.11456369799236919, 0.437534302704094]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.43372055171996127, 0.0, 0.11833604916121608, 0.44794339911882264], "method": "colour/region split (tools/sil_regions.py BW11_smokejumpers), not depth", "note": "ink on L0, smoke columns + plane on L2, sky/hills/parachutes on L3"}

@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.6667343378067017, 0.40745827555656433, 0.19930411875247955], "glowLayer": 0, "share": [0.21702067057291666, 0.33651449513989823, 0.2421158191769622, 0.20434901511022288]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.18870485291000486, 0.3701292525890262, 0.0, 0.441165894500969], "method": "colour/region split (tools/sil_regions.py BW15_aug15_japan), not depth", "note": "ink + boy + corn on L0, house + village + smoke on L1, sky/mist/hills on L3"}

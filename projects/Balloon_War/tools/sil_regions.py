@@ -393,5 +393,132 @@ def r_BW10():
     build(p, [f, None, g], ext=[None, None, dil(g, 90) & below_top(g, f)], shadow=20, note='ink (fence, windmill, men, barn, ground) on L0, mesas on L2, sky on L3')
 
 
+@recipe
+def r_BW11():
+    """BW11 (smokejumpers; not used in a chapter yet). The depth split cut both smoke columns in two (their tops on the back plate,
+    the rest a plane nearer: a notch opened when they slid) and left ghost tree tips behind the ridge. Now: L0 = all the ink
+    (the near slope and the tree ridge, black on black); L2 = the two smoke columns whole, with the plane; L3 = the sky, the
+    hills and the parachutes, filled row by row. L1 empty."""
+    p = Pic('BW11_smokejumpers')
+    f = front_ink(p, (p.mx < 50) & (p.r >= p.b - 6))
+    sm = big((p.lum > 150) & ((p.r - p.b) > 14) & (p.r >= p.g - 2) & (p.xx > 2 * 600), 20000)
+    sm = ndi.binary_fill_holes(close(sm, 2))
+    # the pale horizon strip has the smoke's colour: keep it only where a column runs through it
+    a, b = 2 * 296, 2 * 350
+    cols = np.convolve((sm[a - 4] | sm[b + 4]).astype(float), np.ones(41), 'same') > 0
+    strip = np.zeros_like(sm)
+    strip[a:b] = True
+    sm &= ~(strip & ~cols[None, :])
+    sm = big(sm, 20000)
+    pale = (p.lum > 120) & ((p.r - p.b) > 8) & (p.yy > 2 * 400)
+    sm |= touching(pale, dil(sm, 12)) & ~f               # the smoke's last puffs between the tree tips
+    box = p.poly([(1000, 186), (1162, 186), (1162, 234), (1000, 234)])
+    local = cv2.GaussianBlur(p.lum.astype(np.float32), (0, 0), 25)
+    plane = dil(big(box & (p.lum < local - 12), 200), 2)   # the plane and its thin wings, darker than the sky around
+    sm |= plane
+    build(p, [f, None, sm & ~f], extend=16, shadow=16, back_fill='rows', note='ink on L0, smoke columns + plane on L2, sky/hills/parachutes on L3')
+
+
+@recipe
+def r_BW06():
+    """BW06 (the raid over Tokyo). The depth split cut the left house in three (its upper roof, wall and lower roof on different
+    planes) and put pieces of the right house's eaves on the plane behind. Now, by colour: L0 = the warm-brown houses (all the near
+    town, one piece; they overlap each other anyway); L1 = the darkest teal town with the pagoda, and the two bombers; L2 = the
+    lighter teal town behind; L3 = the hills and the sky."""
+    p = Pic('BW06_raid_tokyo')
+    f0 = front_ink(p, (p.r >= p.b + 4) & (p.mx < 110))
+    f0 = ndi.binary_fill_holes(f0)                   # the darker tiles inside the roofs
+    teal = p.g > p.r + 12
+    d1 = close(touching(teal & (p.lum < 42) & ~f0, p.poly([(560, 560), (1000, 560), (1000, 640), (560, 640)])), 1)
+    d1 = ndi.binary_fill_holes(d1) & ~f0
+    bombers = big((p.r >= p.b) & (p.mx < 70) & (p.yy < 2 * 300), 2000)
+    local = cv2.GaussianBlur(p.lum.astype(np.float32), (0, 0), 20)
+    bombers |= touching((p.lum < local - 15) & (p.yy < 2 * 300), dil(bombers, 3))   # the thin propellers
+    d2 = big(teal & (p.lum >= 40) & (p.lum < 100) & (p.yy > 2 * 380) & ~f0 & ~d1, 3000)
+    d2 = ndi.binary_fill_holes(d2 | d1 | f0) & ~(d1 | f0) & (p.yy > 2 * 380)
+    build(p, [f0, d1 | bombers, d2], shadow=16, note='houses on L0, dark town + pagoda + bombers on L1, lighter town on L2')
+
+
+@recipe
+def r_BW15():
+    """BW15 (the boy outside the house, Aug 15 in Japan). The depth split left dashed ghost lines of the house's edges on the
+    plane behind, specks around the corn, and the chimney smoke on another plane than its chimney. Now: L0 = the warm ink (the
+    ground, the bean poles, the boy, the corn); L1 = the house whole (with its window and radio), the village, the garden and
+    the dark hill at left, plus the chimney smoke (a soft matte: it fades into the sky); L3 = the sky, the mist and the pale
+    hills. L2 empty."""
+    p = Pic('BW15_aug15_japan')
+    f0 = front_ink(p, (p.mx < 40) & (p.r >= p.b - 3))
+    beans = f0 & (p.yy < 2 * 640) & (p.xx < 2 * 430)     # the bean poles stand against the house: they go with it (they cross
+    f0 &= ~beans                                         # its window, whose bars are the same ink)
+    house = snap(p, p.poly([(330, 145), (590, 326), (548, 336), (548, 598), (120, 598), (120, 336), (75, 328)]), band=16, ref=18)
+    seed = np.zeros_like(f0)
+    seed[-4:] = True
+    lim = np.where(p.xx > 2 * 548, p.yy > 2 * 388, p.yy > 2 * 300)    # below the hill line (right of the house: below the mist)
+    v = touching((p.lum < 125) & (p.g >= p.r) & ~f0 & lim, seed | dil(f0, 3)) | house | beans
+    # the smoke: how far it differs from the sky filled across it row by row (it is darker than the glow, lighter up in the dark)
+    zone = p.poly([(872, 0), (995, 0), (995, 392), (950, 392), (950, 470), (910, 470), (910, 392), (872, 392)])
+    sky = rowfill(p.im, ~zone, 0.5).astype(np.float32)
+    d = np.abs(p.im.astype(np.float32) - sky).sum(-1)
+    sa = np.clip((d - 6) / 24, 0, 1) * cv2.GaussianBlur(zone.astype(np.float32), (0, 0), 4)
+    sa = cv2.GaussianBlur(sa.astype(np.float32), (0, 0), 1.5)
+    smoke = sa > 0.06
+    a1 = np.maximum(soft(v & ~f0), np.where(f0, 0, sa))
+    build(p, [f0, v | smoke, None], alpha=[None, a1, None], shadow=14,
+          note='ink + boy + corn on L0, house + village + smoke on L1, sky/mist/hills on L3')
+
+
+@recipe
+def r_BW16():
+    """BW16 (the bookstore). The depth split put the shop front on one plane and the lit window behind it (the cream light, the
+    photograph, the shelf of books) on another, with smears under the frame, and left the window's light and frame edges
+    ghosting. Now: L0 = the whole shop (awning, frame, the window and everything in it, the woman at its door, the counter) and
+    the near ground, one piece; L3 = the street (one receding alley: buildings, poles, wires). L1, L2 empty. The photograph's
+    glow (ch09 Bookstore, plane 1) rides L1's weight, a pixel or two from L0 with that camera move."""
+    p = Pic('BW16_bookstore')
+    comp = front_ink(p, (p.mx < 32) & (p.r >= p.b))
+    shop = np.zeros_like(comp)
+    for y in range(p.H):
+        xs = np.flatnonzero(comp[y, 2 * 600:])
+        if len(xs):
+            shop[y, 2 * 600 + xs[0]:] = True
+    f = (comp | shop)
+    f = close(f, 2)
+    build(p, [f, None, None], shadow=12, note='the shop (front, window, woman, counter) + ground on L0, the street on L3')
+
+
+def beach(name, plane, balloon=False):
+    p = Pic(name)
+    f = front_ink(p, (p.mx < 60) & (p.r >= p.b - 4))        # the boys, their ropes, the gas cylinders, the near ground
+    if balloon:
+        # the balloon drawn by tools/round_balloon.py (centre 730,524, r 272 in painting px), its shroud lines and the rope, whole
+        cx, cy, R = 730, 524, 272
+        disc = (p.xx - cx) ** 2 + (p.yy - cy) ** 2 <= (R + 3) ** 2
+        box = (p.xx > cx - R - 12) & (p.xx < cx + R + 12) & (p.yy > cy) & (p.yy < cy + R + 140)
+        lines = touching(box & (p.lum < 70), dil(disc, 4) | f)
+        f |= disc | lines | touching(p.coral(), dil(disc, 2))
+    masks = [None, None, None]
+    masks[plane] = f
+    build(p, masks, shadow=20, back_fill='rows', note='boys, cylinders, ground' + (', the balloon and its lines' if balloon else '') +
+          f' on L{plane}; sand, sea, hills and sky on L3 (row fill)')
+
+
+@recipe
+def r_BW01():
+    """BW01 (the beach at dawn, the balloon held on its rope). After the depth split and tools/bw01_balloon_fix.py the boys,
+    the balloon and the ground sat on L1 but the cylinders' and boys' outlines and drop shadows were left as broken dark dashes on
+    the sand plane behind, with an opaque box of sea under the balloon. Now: L1 (the boys' plane, as before) = the boys, the
+    cylinders, the near ground, and the drawn balloon with its shroud lines and rope, straight from the painting (it replaces
+    bw01_balloon_fix.py); L3 = the sand, the sea, the hills and the sky, filled row by row. L0, L2 empty."""
+    beach('BW01_beach_dawn', 1, balloon=True)
+
+
+@recipe
+def r_BW02():
+    """BW02 (the release: the same beach, no balloon; ch04 lets the balloon_ring cut-out rise on plane 3). Same ghost dashes
+    as BW01 on the sand plane. Now: L0 = the boys, the cylinders and the near ground (as before); L3 = sand, sea, hills, sky
+    (row fill: seamless for the horizontal bands). L1, L2 empty."""
+    beach('BW02_release', 0)
+
+
 if __name__ == '__main__':
     main()
