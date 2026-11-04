@@ -5,7 +5,7 @@
 cd "$(dirname "$0")/.."
 export REMOTION_CHROME=${REMOTION_CHROME:-$(ls -d /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -1)}
 BROWSER=${REMOTION_CHROME:+--browser-executable=$REMOTION_CHROME}
-FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
+FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())" 2>/dev/null || echo ffmpeg)
 SLUG=$(sed -n "s/^export const SLUG = '\(.*\)';/\1/p" src/project.ts)
 ALL=$(grep -o "id: 'Ch[0-9]*'" src/chapters.ts | grep -o '[0-9][0-9]*')
 mkdir -p out/ch renders
@@ -23,11 +23,11 @@ python3 tools/master.py out/full_raw.mkv out/${SLUG}_1080p.mp4 || exit 1
 $FF -v error -y -i out/${SLUG}_1080p.mp4 -vf scale=1280:720 -c:v libx264 -crf 24 -preset slow -c:a aac -b:a 160k -movflags +faststart renders/${SLUG}_720p.mp4 || exit 1
 # chapter start times for the YouTube description
 python3 - "$LIST" <<'PY'
-import re, subprocess, sys, imageio_ffmpeg
+import re, subprocess, sys
 t = 0.0
 for line in open(sys.argv[1]):
     f = line.split("'")[1]
-    d = re.search(r"Duration: (\d+):(\d+):([\d.]+)", subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-i", f], capture_output=True, text=True).stderr)
+    d = re.search(r"Duration: (\d+):(\d+):([\d.]+)", subprocess.run(["ffmpeg", "-i", f], capture_output=True, text=True).stderr)
     print(f"{int(t // 60)}:{int(t % 60):02d}  {f.rsplit('/', 1)[-1]}")
     t += int(d[1]) * 3600 + int(d[2]) * 60 + float(d[3])
 print(f"total {int(t // 60)}:{int(t % 60):02d}")

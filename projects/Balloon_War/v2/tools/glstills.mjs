@@ -15,7 +15,7 @@ try {
     const composition = await selectComposition({serveUrl, id, browserExecutable, puppeteerInstance, chromiumOptions: {gl: 'swangle'}, timeoutInMilliseconds: 180000});
     for (const f of fr.split(',')) {
       const frame = Math.min(composition.durationInFrames - 1, Number(f));
-      await renderStill({composition, serveUrl, frame, scale: 0.5, output: path.join(out, `${id}_${f}.jpg`), imageFormat: 'jpeg', jpegQuality: 88, browserExecutable, puppeteerInstance, chromiumOptions: {gl: 'swangle'}, timeoutInMilliseconds: 180000});
+      await renderStill({composition, serveUrl, frame, scale: Number(process.env.SCALE || 0.5), output: path.join(out, `${id}_${f}.jpg`), imageFormat: 'jpeg', jpegQuality: 88, browserExecutable, puppeteerInstance, chromiumOptions: {gl: 'swangle'}, timeoutInMilliseconds: 180000});
       console.log('still', id, f);
     }
   }
