@@ -5,9 +5,10 @@
 //   B · SHE BUILT A BOMB: Rei gluing the coral panel (BW09); "and didn't know" in teal.
 //   C · NO PILOT: the 3D jet stream (real January 1945 winds), one big coral balloon riding it over the Pacific.
 //   D · Topic-led: WWII BALLOON BOMBS / WHY THE SILENCE? over the 1945 drawing, its envelope in coral.
+//   E, F, G · faces (thumbnail-only Gemini ink art, public/img/gen/thumb/f*.txt): see each below.
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
-import {Finish, Highlight, Note, PALETTES, PaletteCtx} from './kit/Kit';
+import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx} from './kit/Kit';
 import {DarkPaper} from './kit/common';
 
 export const THUMB_FRAMES = 150;
@@ -85,6 +86,44 @@ export const ThumbD: React.FC = () => (
   </Frame>
 );
 
+/** Big clean type (the Halloween lesson: bold white sans reads best at feed size), optionally one word in coral. */
+const Big: React.FC<{text: string; x: number; y: number; size: number; color?: string}> = ({text, x, y, size, color = '#F4EFE6'}) => (
+  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.sans, fontWeight: 800, fontSize: size, lineHeight: 0.95,
+    letterSpacing: -2, color, textShadow: '0 6px 24px rgba(0,0,0,0.8)', whiteSpace: 'nowrap'}}>{text}</div>
+);
+
+/** Thumbnail-only ink art (Gemini, B&W + one coral accent), full frame. */
+const Ink: React.FC<{src: string; zoom?: number; cx?: number; cy?: number}> = (p) => <Scene {...p} />;
+
+//   E · SHE BUILT / A BOMB / and didn't know it: the schoolgirl at her table (f1_b), face lit, the balloon looming behind.
+export const ThumbE: React.FC = () => (
+  <Frame vignette={0.25}>
+    <Ink src="img/gen/thumb/f1_b.png" zoom={1.15} cx={0.56} cy={0.48} />
+    <Big text="SHE BUILT" x={90} y={300} size={170} />
+    <Highlight text="A BOMB" x={110} y={520} size={190} at={0} seed={101} rot={-3} />
+    <Note text="and didn't know it" x={130} y={800} size={92} rot={-4} at={0} />
+  </Frame>
+);
+
+//   F · SHE BUILT / A BOMB / ...and found out decades later: the same girl grown up at the bookstore window (f2_b), hand to mouth.
+export const ThumbF: React.FC = () => (
+  <Frame vignette={0.25}>
+    <Ink src="img/gen/thumb/f2_b.png" zoom={1.0} cx={0.5} cy={0.5} />
+    <Big text="SHE BUILT" x={80} y={290} size={165} />
+    <Highlight text="A BOMB" x={100} y={510} size={185} at={0} seed={103} rot={-3} />
+    <Note text="...and found out decades later" x={90} y={800} size={70} rot={-4} at={0} />
+  </Frame>
+);
+
+//   G · SECRET / BOMBS: a 1945 farm woman crying out at the coral balloon and its bomb over the pines (f3_a). Not Elsie, not Bly.
+export const ThumbG: React.FC = () => (
+  <Frame vignette={0.25}>
+    <Ink src="img/gen/thumb/f3_a.png" zoom={1.0} cx={0.5} cy={0.5} />
+    <Big text="SECRET" x={90} y={330} size={200} />
+    <Highlight text="BOMBS" x={110} y={580} size={210} at={0} seed={105} rot={-3} />
+  </Frame>
+);
+
 export const THUMBS: {key: string; C: React.FC}[] = [
-  {key: 'A', C: ThumbA}, {key: 'B', C: ThumbB}, {key: 'C', C: ThumbC}, {key: 'D', C: ThumbD},
+  {key: 'A', C: ThumbA}, {key: 'B', C: ThumbB}, {key: 'C', C: ThumbC}, {key: 'D', C: ThumbD}, {key: 'E', C: ThumbE}, {key: 'F', C: ThumbF}, {key: 'G', C: ThumbG},
 ];
