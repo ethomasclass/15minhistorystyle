@@ -180,7 +180,7 @@ export const PacificWinds: React.FC<PacificWindsProps> = ({at = 0, windsAt = 1e9
   const end = Math.min(1e6, Math.max(at + 240, Math.min(rAt + routeDur + 40, 1e6), Math.min(windsAt + 240, 1e6)));
   const keys: CamKey[] = cam ?? [
     {f: at, target: [0.3, 0, 0.55], dist: 22.5, yaw: 0, pitch: 0.92},
-    {f: end, target: [0.45, 0, 0.4], dist: 21.6, yaw: -0.04, pitch: 0.86},
+    {f: end, target: [0.45, 0, 0.4], dist: 22.3, yaw: -0.04, pitch: 0.86},
   ];
   const c = useMemo(() => makeCam(camAt(keys, f)), [f, keys]);
   const S2 = (p: readonly number[]) => project(c, p);
@@ -223,7 +223,7 @@ export const PacificWinds: React.FC<PacificWindsProps> = ({at = 0, windsAt = 1e9
           {farO > 0.5 && <Hand f={g} text="too far" x={farMid.x + 40} y={farMid.y + 40} at={tooFarAt + 34} size={64} rot={-5} />}
         </>}
         {showBalloon && labels && f < rAt + 8 && <Label x={ich.x} y={ich.y + 46} text="ICHINOMIYA" opacity={ramp(g, balloonAt + 6, balloonAt + 12) * (1 - ramp(g, rAt, rAt + 8))} size={18} />}
-        {arrived && labels && <Label x={land.x} y={land.y + 58} text="LANDFALL · OREGON COAST" opacity={ramp(g, rAt + routeDur, rAt + routeDur + 8)} size={18} />}
+        {arrived && labels && <Label x={land.x - 40} y={land.y + 64} anchor="r" text="LANDFALL · OREGON COAST" opacity={ramp(g, rAt + routeDur, rAt + routeDur + 8)} size={18} />}
         {/* honest source line */}
         <Fine text={windK > 0 || rideK > 0 ? `WINDS: NOAA 20TH CENTURY REANALYSIS V3 · JANUARY 1945 MEAN · 250 hPa${rideK > 0 ? ' · PATH FOLLOWS THAT MEAN WIND' : ''}` : 'MAP: NATURAL EARTH COASTLINES'} opacity={0.7 * mapK} />
       </AbsoluteFill>}

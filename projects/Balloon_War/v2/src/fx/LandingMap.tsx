@@ -97,7 +97,7 @@ const LaunchChart: React.FC<{mi: number; mk: number; x: number; y: number; o: nu
           );
         })}
       </svg>
-      <Hand f={f} text="launches stop" x={230} y={-78} at={endAt} size={44} rot={-4} />
+      <Hand f={f} text="launches stop" x={150} y={-78} at={endAt} size={44} rot={-4} />
     </div>
   );
 };
