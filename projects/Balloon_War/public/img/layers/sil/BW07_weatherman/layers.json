@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.6973623037338257, 0.3999418020248413, 0.18882305920124054], "glowLayer": 0, "share": [0.10981573060501454, 0.07850587830062984, 0.10480966494064922, 0.7068687261537064]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.17879846853803294, 0.0, 0.15909665129905523, 0.6621048801629118], "method": "colour/region split (tools/sil_regions.py BW07_weatherman), not depth", "note": "man + roof + near ground on L0, the fields on L2, mist/mountains/sky/balloon on L3"}

@@ -1,1 +1,1 @@
-{"size": [2752, 1536], "bands": 4, "thresholds": [0.5931060314178467, 0.3104972839355469, 0.16441191732883453], "glowLayer": 0, "share": [0.1859996706940407, 0.09419238659762597, 0.26969424698703975, 0.4501136957212936]}
+{"size": [2752, 1536], "bands": 4, "glowLayer": 0, "share": [0.19269153683684592, 0.0, 0.0, 0.8073084631631541], "method": "colour/region split (tools/sil_regions.py BW09_rei), not depth", "note": "Rei + table + coral sheet on L0; theatre, lamp and cone on L3"}
