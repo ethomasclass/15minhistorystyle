@@ -349,6 +349,11 @@ Background: `#0d0c09` with `DarkPaper`, vignette 0.45.
 | Push | whole mark scales 1 → 1.04 | 58 → 132 |
 | Out | fade to black over the last 8 frames | 124–132 |
 
+**"15 MINUTE HUMAN GEOGRAPHY" variant** (the user's AP Human Geography videos): the same intro, with "HUMAN /
+GEOGRAPHY" on two lines in place of HISTORY. The text is Abril **150**, teal, at **(770, 500)**, line-height 1.0,
+nowrap. The underline moves to top **820** and grows to **860px**, and the logo break gets the same change. Ready-made files are in
+`techniques/components/religion_hug/`. Use this only for geography videos. History videos keep HISTORY.
+
 ### 9.2 Title card (150 frames = 5 s; follows the cold open and the channel intro)
 
 Built in `src/ch/Ch01.tsx` (`Title`) from `TITLE`, `SUBTITLE` and `DATES` in `src/project.ts`. *Fix Everything* values:
@@ -388,3 +393,8 @@ none of them is standard yet; ask before using one. Code and stills are in the s
   - Warm and full-colour grades on some paintings, and a full-colour thumbnail.
   - 24 fps with marks on twos (see the frame-rate note in the style repo's `techniques/README.md`).
   - The coral-subject rule held: the planchette was the one coral thing in every board shot.
+- ***Why Buddhism Vanished* / *One Hilltop, Three Maps* (AP Human Geography religion videos), Vox-style:**
+  - Real d3 world maps with lon/lat cameras, country fills and diffusion arrows (`components/religion_hug/worldmap.tsx`).
+  - Modern photos for life today, muted with `saturate(0.55) contrast(1.08) brightness(0.82)` with teal/coral marks.
+    AI paintings for the past in the usual cutout look.
+  - Sacred figures (the Buddha, Guru Nanak, Muhammad) never get a face. Use text, places or objects instead.

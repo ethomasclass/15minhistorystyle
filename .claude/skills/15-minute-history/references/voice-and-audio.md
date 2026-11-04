@@ -67,6 +67,15 @@ Matched to the channel's earlier videos; don't change them without the user aski
 `STRETCH` is a local, pitch-preserving tempo change (>1 is faster). `MAX_PAUSE` shortens the voice's own pauses.
 The result is about 185 words a minute for normal chapters.
 
+**Don't add "expression" to the voice.** On the religion videos (October 2026) the user asked for more nuance, and
+two takes were tested against the plain one:
+- eleven_v3 audio tags in the script ([warmly], [curious], [pause], ...) at stability 0.0, "creative"
+- the same tags at stability 0.5, "natural"
+
+The user preferred the original, with no tags at stability 0.5 ("i like take one tbh"). So keep stability 0.5, use no
+audio tags, and keep the locked pace above. If the user asks for more expression again, send a short A/B clip of one
+paragraph before re-voicing anything; don't re-voice whole chapters on a guess.
+
 ## 4. Pronunciation
 
 Before voicing a whole video, run the pronunciation check in `script-writing.md` §8: put respellings in
@@ -76,6 +85,9 @@ Before voicing a whole video, run the pronunciation check in `script-writing.md`
 - Years and numbers are spelled out automatically by `number_words()` ("1806" → "eighteen oh-six", "15,000" →
   "fifteen thousand", "1830s" → "eighteen thirties"). Dollar amounts and "January 1" have special cases.
 - If the voice still misreads a word in a chapter, fix `PRONOUNCE` and re-voice only that chapter.
+- Respellings added on the religion videos: "Bodh" → "Bode", "Gaya" → "Guy-uh" (Bodh Gaya). Bare years after 1000
+  that aren't 1700–1999, such as 1200, 1500, 1324 and 1492, read more naturally when the script spells them out
+  ("twelve hundred", "fifteen hundred", "thirteen twenty-four", "fourteen ninety-two").
 
 ## 5. Re-voicing one chapter
 

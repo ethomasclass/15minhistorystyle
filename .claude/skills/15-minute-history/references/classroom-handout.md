@@ -15,6 +15,22 @@ The first draft for *King Andrew* had fill-in blanks, writing lines, section hea
 chart, and the user said: "no, way more simple. Like just the main concepts. Explain, describe, identify, etc."
 Start simple. Add blanks, answer lines, an answer key or a graph only if the user asks.
 
+The religion videos (AP Human Geography, October 2026) taught the same lesson. The first viewing guides had a blank
+for nearly every fact, and the user asked for main points only: "I want students to be able to watch and get the main
+points but not concerned about nitpicky details." The version the user kept had:
+- about 12 short questions per video, answered "in a few words or one sentence", in video order
+- one question per big idea (what makes a religion ethnic or universalizing, its hearth, how it spread, one thing
+  about life today)
+- no questions on dates, counts or names said once
+- a blank world map on the last page with numbered directions to draw each hearth and its diffusion arrows
+
+For a geography video, include that map.
+
+**PDF in the classroom design style.** When the user asks for the worksheet "in our design style", they mean the
+Classroom Print Style design system: black and white, Archivo, the handout header, numbered directions, no em dashes,
+no teacher name, and no time stamps on the student copy (time stamps go only on a key). It was built as HTML and
+printed to letter-size PDF with Playwright.
+
 ## Covering what the teacher needs
 
 - The user often gives a list of required concepts (sometimes with sub-points and "these three matter most").
