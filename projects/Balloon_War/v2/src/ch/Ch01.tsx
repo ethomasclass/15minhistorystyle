@@ -5,7 +5,7 @@
 //   0:00  "Five kids on a church picnic found something strange in the woods." BW03, the balloon in the pines (frame 0 = thumbnail)
 //   0:10  "It had come from Japan... the whole Pacific" Mikesh's winter jet-stream map, the route
 //   0:18  "And it was made of paper." the paper envelope close-up, PAPER
-//   0:20  "The kids called the grown-ups over" back to the woods, closer
+//   0:20  "Hanging underneath it... was a bomb." the 1945 drawing, tilt down to the bombs; it holds through "the kids called the grown-ups over"
 //   0:22  "The government knew... Hundreds of them." the incident map (Mikesh Fig. 87)
 //   0:29  "It had decided not to tell anyone." the 1945 voluntary press code, a censor bar wipes over a line
 //   0:32  the driving question over the woods: HOW DID IT GET HERE? / WHY NO WARNING?
@@ -13,10 +13,10 @@
 //   1:00  "We'll come back to those woods." the woods, pulling back
 //   1:02  "But first, Tokyo..." the 1942 raid over Tokyo rooftops (BW06), held through the beat
 import React from 'react';
-import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/v2_ch01_something_in_the_woods.words.json';
 import {clamp} from '../lib/anim';
-import {Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from '../kit/Kit';
+import {Finish, Highlight, JF, Loop, Note, PALETTES, PaletteCtx, StepCtx, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
 import {makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
@@ -89,14 +89,28 @@ const Paper: React.FC<{t: TL; a: number}> = ({t, a}) => (
   </AbsoluteFill>
 );
 
-/** "The kids called the grown-ups over to come and look." Back in the woods, closer. */
-const Closer: React.FC<{a: number; b: number}> = ({a, b}) => (
-  <AbsoluteFill>
-    <SilScene name="BW03_woods_open" a={0} b={b - a} fade={1} cam={{z: [1.2, 1.3], x: [40, 60], y: [-20, -30]}} fog={0.4} />
-  </AbsoluteFill>
-);
+/** "Hanging underneath it... was a bomb. The kids called the grown-ups over to come and look." The 1945 general-arrangement
+ *  drawing: the camera tilts down the shroud lines from the envelope to the ring, the bombs get the teal loop on "bomb", then a
+ *  slow push in while the kids call the grown-ups over (the viewer now knows what they're walking toward). */
+const Bomb: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const f = useCurrentFrame();
+  const land = t.at('bomb') - a;
+  const ty = interpolate(f, [8, land - 2], [0, -450], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const z = interpolate(f, [land, land + 120], [1, 1.05], clamp);
+  return (
+    <AbsoluteFill>
+      <DarkPaper />
+      <AbsoluteFill style={{transform: `scale(${z}) translateY(${ty}px)`, transformOrigin: '1012px 880px'}}>
+        <Print src="img/ch04_paper_balloon/balloon_general_arrangement_fig39.jpg" x={510} y={80} w={900} h={1303} at={1} rot={0.6}
+          fit="contain" tag="General arrangement of the paper balloon, 1945 · Mikesh, Smithsonian, 1973" />
+        <Loop cx={1012} cy={1330} rx={270} ry={70} at={land} seed={9} tilt={-2} />
+      </AbsoluteFill>
+      <Highlight text="A BOMB" x={1360} y={560} size={110} at={land} seed={31} rot={-4} />
+    </AbsoluteFill>
+  );
+};
 
-/** "The government knew these things were coming down all over North America. Hundreds of them." */
+/** "The government knew these balloon bombs were coming down all over North America. Hundreds of them." */
 const Hundreds: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const f = useCurrentFrame();
   const z = interpolate(f, [0, 200], [1, 1.06], clamp);
@@ -135,7 +149,7 @@ const Question: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
     <SilScene name="BW03_woods_open" a={0} b={b - a} fade={1} cam={{z: [1.12, 1.06], x: [-10, 10], y: [-8, 0]}} fog={0.3} />
     <AbsoluteFill style={{background: 'rgba(8,7,5,0.35)'}} />
     <Highlight text="HOW DID IT GET HERE?" x={160} y={150} size={92} at={t.at('How') - a} seed={21} rot={-3} />
-    <Highlight text="NOBODY" x={260} y={700} size={110} at={t.at('nobody') - a} seed={23} rot={-2} />
+    <Highlight text="NOBODY" x={260} y={700} size={110} at={t.at('nobody', 2) - a} seed={23} rot={-2} />
     <Highlight text="WARNED THEM" x={420} y={830} size={110} at={t.at('warn') - a} seed={25} rot={-1} />
   </AbsoluteFill>
 );
@@ -189,7 +203,7 @@ const Back: React.FC<{a: number; b: number}> = ({a, b}) => (
 const Tokyo: React.FC<{t: TL; a: number; b: number}> = ({t, a, b}) => (
   <AbsoluteFill>
     <SilScene name="BW06_raid_tokyo" a={0} b={b - a + 12} fade={1} cam={{z: [1.04, 1.12], x: [-20, 20], y: [0, -10]}} fog={0.25} />
-    <Note text="Tokyo" x={180} y={190} size={70} rot={-4} at={t.at('Tokyo') - a} />
+    <Note text="Tokyo" x={180} y={190} size={70} rot={-4} at={t.at('Tokyo', 2) - a} />
   </AbsoluteFill>
 );
 
@@ -198,7 +212,7 @@ const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
   const c = {
-    japan: at('It had come') - 1, paper: at('And it was') - 1, closer: at('The kids') - 1, hundreds: at("And here's") - 1,
+    japan: at('It had come') - 1, paper: at('And it was') - 1, bomb: at('Hanging') - 1, hundreds: at("And here's") - 1,
     silence: at('It had decided') - 1, q: at("So here's") - 1, three: at('To answer') - 1, boy: at('A teenage') - 1,
     girl: at('A schoolgirl') - 1, news: at('And an American') - 1, back: at("We'll come") - 1, tokyo: at('But first') - 1,
   };
@@ -206,7 +220,7 @@ const Body: React.FC = () => {
     [0, <Woods t={t} a={0} b={c.japan} />],
     [c.japan, <Sequence from={c.japan} layout="none"><FromJapan t={t} a={c.japan} /></Sequence>],
     [c.paper, <Sequence from={c.paper} layout="none"><Paper t={t} a={c.paper} /></Sequence>],
-    [c.closer, <Sequence from={c.closer} layout="none"><Closer a={c.closer} b={c.hundreds} /></Sequence>],
+    [c.bomb, <Sequence from={c.bomb} layout="none"><Bomb t={t} a={c.bomb} /></Sequence>],
     [c.hundreds, <Sequence from={c.hundreds} layout="none"><Hundreds t={t} a={c.hundreds} /></Sequence>],
     [c.silence, <Sequence from={c.silence} layout="none"><Silence t={t} a={c.silence} /></Sequence>],
     [c.q, <Sequence from={c.q} layout="none"><Question t={t} a={c.q} b={c.three} /></Sequence>],
@@ -230,8 +244,10 @@ const Body: React.FC = () => {
       <Audio src={staticFile('music/bw_something_in_the_woods.mp3')} volume={(f) => interpolate(f, [0, 6, END - 40, END], [v, v, v, 0], clamp)} />
       <Sequence from={0} durationInFrames={c.japan + 10} layout="none"><Audio src={staticFile('sfx/forest_birds.wav')} volume={0.12} /></Sequence>
       {cuts.slice(1).map(([f], i) => <Sfx key={i} at={f} src="sfx/whoosh.wav" volume={0.22} />)}
-      {['found', 'Japan', 'paper', 'knew', 'anyone', 'How', 'nobody', 'warn', 'three', 'keeping'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.22} />)}
-      {['Nobody', 'thousands', 'own', 'Hundreds', 'potatoes', 'decades', 'Tokyo'].map((p) => <Sfx key={p} at={at(p) - 2} src={WRITE.src} volume={WRITE.volume} />)}
+      {['found', 'Japan', 'paper', 'bomb', 'knew', 'anyone', 'How', 'warn', 'three', 'keeping'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.22} />)}
+      {['Nobody', 'thousands', 'own', 'Hundreds', 'potatoes', 'decades'].map((p) => <Sfx key={p} at={at(p) - 2} src={WRITE.src} volume={WRITE.volume} />)}
+      <Sfx at={at('nobody', 2)} src="sfx/stamp.wav" volume={0.22} />
+      <Sfx at={at('Tokyo', 2) - 2} src={WRITE.src} volume={WRITE.volume} />
       <Sfx at={c.silence + 2} src="sfx/tape_pull.wav" volume={0.25} />
       <Sfx at={at('sweet') - 1} src="sfx/paper_slap_soft.wav" volume={0.3} />
       <Sfx at={c.tokyo + 4} src="sfx/plane_flyby.wav" volume={0.18} />
