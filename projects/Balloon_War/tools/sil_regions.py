@@ -240,5 +240,39 @@ def r_BW14():
     build(p, [None, ~back, None], note='corridor on L1 whole; ceiling, glow and the far view on L3')
 
 
+def front_ink(p, ink, bottom_rows=6, near=8, minpx=60):
+    """The ink connected to the bottom edge (the ground and everything standing on it), plus the small ink pieces within
+    `near` px of it (gear teeth, tool handles)."""
+    seed = np.zeros_like(ink)
+    seed[-bottom_rows:] = True
+    f = touching(ink, seed)
+    f |= touching(ink & big(ink, minpx), dil(f, near))
+    return f
+
+
+@recipe
+def r_BW13():
+    """BW13 (the presses). The depth split put the paper ribbons, the lamp cones and the presses on different planes in pieces
+    (ribbons and cones ghosted and split). Now: L0 = the presses, the men, the floor and the paper ribbons running through the
+    presses (one piece); L3 = the hall behind with the hanging lamps and their light cones whole (each lamp with its own
+    cone), the far presses and the fog. L1, L2 empty."""
+    p = Pic('BW13_presses')
+    ink = (p.mx < 62) & (p.r >= p.b)                 # warm ink (the teal-black ceiling is not ink)
+    f = front_ink(p, ink)
+    core = touching((p.lum > 225) & (p.r - p.b < 30), dil(f, 4))       # the paper's lit faces
+    pale = (p.lum > 150) & (p.r - p.b < 36)
+    shade = pale & (p.yy > 2 * 470) & (p.xx < 2 * 1000)   # its shaded turns (low in the frame only: higher up the fog is as pale)
+    paper = touching(shade | core, core)
+    f = close(f | paper, 1)
+    f |= touching(ink & big(ink, 60), dil(f, 8))      # roller ends and handles that only touch the paper
+    # the paper seen through the holes in a press frame: a hole that is mostly paper-coloured goes whole with the press
+    lab, n = ndi.label(~f)
+    for i in range(1, n + 1):
+        h = lab == i
+        if h.sum() < 0.004 * h.size and not (h[0].any() or h[-1].any() or h[:, 0].any() or h[:, -1].any()) and pale[h].mean() > 0.4:
+            f |= h
+    build(p, [f, None, None], note='presses, men, floor, paper on L0; lamps with their cones and the hall on L3')
+
+
 if __name__ == '__main__':
     main()
