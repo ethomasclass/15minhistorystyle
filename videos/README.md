@@ -261,6 +261,13 @@ column says where each was made.
   down: a kamishibai paper stage on the desk (`projects/Balloon_War/src/test/PaperStage.tsx`, `review/paper_stage_test.mp4`) and a
   shadowbox diorama framing the whole screen (`src/test/ShadowBox.tsx`, `review/shadow_box_test.mp4`). Keep `SilScene` with in-scene
   motion (mist, dust, a balloon on its own plane).
+- **Next video: animated silhouette clips for a few key moments** (the user, Nov 5, 2026, after a Google Flow test of the Rei scene:
+  `projects/Balloon_War/review/motion_test_rei_flow.mp4`, 8 s, image-to-video from the scene painting). It matched the palette,
+  kept the figure solid black and gave the shot real action (brush strokes, paste darkening, a slow push-in). Use 3–4 per video for
+  the hero beats, with parallax still the main look. Fixes from the test: trim the opening border (the clip started framed like a
+  picture), watch tools for grey shading and morphing (the brush became a stick for a moment), export 1080p from Flow (the test was
+  720p 24 fps). Add to every motion prompt: *"Full frame from the first frame, no border or picture frame. Every object, including
+  tools, is a solid black silhouette with no shading. Camera move only, slow."* Details: the skill's `images-and-masks.md` §11.
 - **Parallax layers must be clean** (*Trick-or-Treating Was a Bribe*, Oct 2026: you spotted faint outlines of foreground shapes on
   the planes behind them). **Since *The Balloon War* v2 the planes are split by colour and region, not depth** (`tools/sil_regions.py`):
   each object whole on one plane, a continuous structure (a corridor, a fence) on one plane, empty planes allowed; the depth split
