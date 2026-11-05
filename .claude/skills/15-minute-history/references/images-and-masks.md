@@ -357,3 +357,17 @@ with two clock hands, a sandbag in cloth when the real ones were paper, a round 
 Never presented as a specific real artifact; no source tag. Archival photos go down as `Print`s (`src/kit/print.tsx`): B&W, no
 mount or frame, a deep shadow, a slap with a little overshoot, the source tag under the print.
 
+### Animated silhouette clips (planned for the next video, Nov 2026)
+
+The user chose to add **image-to-video motion** (Google Flow) to a few hero silhouette beats in the next video, after a test on
+*The Balloon War* v2's Rei scene (`projects/Balloon_War/review/motion_test_rei_flow.mp4`). What the test showed:
+- **Feed Flow the finished scene painting** (palette-locked, upscaled) as the start frame, so the clip keeps the video's palette and the
+  coral stays the only colour. One action per clip, tied to the narration line it plays under (here: "Panel after panel").
+- **Keep it sparse:** 3–4 clips per video for the key moments (the subject doing the thing the line says); `SilScene` parallax stays the
+  main look, so the clips feel special.
+- **Prompt add-on, every clip:** "Full frame from the first frame, no border or picture frame. Every object, including tools, is a
+  solid black silhouette with no shading. Camera move only, slow." The test opened on a framed border for ~1.2 s (trim it) and drew
+  the brush with grey shading that briefly morphed into a stick.
+- **Check frame by frame** for morphing objects, faces or interior lines appearing on figures (the solid-black rule), and text.
+- **Export 1080p** from Flow (the test was 720p, 24 fps). In Remotion, play it with `OffthreadVideo` muted, trimmed with
+  `startFrom`, at 30 fps (Remotion resamples); upscale with `tools/upscale.py` frame by frame only if no 1080p export exists.
