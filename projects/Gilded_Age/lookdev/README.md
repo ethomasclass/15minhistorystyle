@@ -103,3 +103,22 @@ Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, wh
 
 Teal explains, orange labels, no coral (it means a Kelly). Labels are drawn in screen space so they stay readable when the camera
 pulls back. Note for the script: say "22 of his 26 rivals" to match the picture (research flag: some sources say 21).
+
+## Round 8: "vertical" made literal, bigger text, texture, the refinery
+
+- **Vertical, shown vertically.** After the side-scroll and pull-back, Carnegie's six steps fly out of the landscape into a column:
+  the iron mine at the bottom, the customers at the top, a teal arrow running up it ("raw material" at the foot, "the customer" at
+  the head). The horizontal clip now ends on a side-by-side card: VERTICAL (a column of different steps, "every step, one
+  company," carnegie) next to HORIZONTAL (a row of the same refinery, "one step, every rival," rockefeller).
+- **Bigger text everywhere in the explainers**: tags 28 px mono (was 20), handwriting 1.3x, index cards 36 px body and 52 to 64 px
+  titles, the shipping-cost chart 26 to 28 px. The camera also leans in on the rebate as the money changes hands.
+- **Texture, not flat**: `texDef` in `rig.js` mottles and grains whatever it's applied to, fixed to the world so it moves with the
+  surfaces (a broad patchy layer plus a fine grain, light and dark, kept inside the shapes); patterns for brick, planks, rivets and
+  hatching (`TEX_PATTERNS`); slow clouds across the skies. Applied to the explainers' hills and sets and to the refinery.
+- **`refinery.js`, the refinery tour (17 s)**: Havemeyers & Elder in Williamsburg, cut through like the tenement. The camera follows
+  the sugar (a cream stream running through the pipes): a ship unloading sacks at the wharf by hoist; melting tanks on the ground
+  floor; the pump and the riser to the top; cloth bag filters dripping; bone-char cylinders through two floors with men shovelling
+  from a catwalk; vacuum pans with gauges and glowing sight glasses; centrifugals spinning crystals out (Michael's floor, in coral,
+  wiping his brow: "hot work: ten hours or more"); barrels packed on the ground floor. Brick walls, plank floors, riveted iron,
+  daylight falling in through tall windows, Manhattan across the river. The floor order is the usual sequence, simplified (noted
+  in the file).

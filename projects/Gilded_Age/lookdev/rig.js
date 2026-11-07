@@ -313,3 +313,28 @@ function cast(name, o) {
   return {...c, ...o, h: o.h * scale, fill: c.kelly ? (o.kellyFill || '#FF6F61') : o.fill, tones};
 }
 if (typeof window !== 'undefined') Object.assign(window, {figure, cast, CAST, POSES, lodFor, walkAn, walkPhase});
+
+/* ---------- texture: surfaces that aren't flat ---------- */
+// texDef returns an SVG filter that mottles whatever it's applied to: broad light and dark patches (like weathered paint or
+// stone) plus a fine grain, kept inside the shapes. Region is in the element's own coordinates (for a camera-transformed layer,
+// pass the visible world rectangle), so the texture is fixed to the surfaces and moves with them.
+function texDef(id, x, y, w, h, {soft = 0.006, fine = 0.09, k = 0.3, seed = 1} = {}) {
+  const a = f1(k * 100) / 100;
+  return `<filter id="${id}" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" color-interpolation-filters="sRGB">` +
+    `<feTurbulence type="fractalNoise" baseFrequency="${soft}" numOctaves="3" seed="${seed}" result="n1"/>` +
+    `<feTurbulence type="fractalNoise" baseFrequency="${fine}" numOctaves="2" seed="${seed + 7}" result="n2"/>` +
+    `<feComposite in="n1" in2="n2" operator="arithmetic" k1="0" k2="0.7" k3="0.3" k4="0" result="n"/>` +
+    `<feColorMatrix in="n" type="matrix" values="0 0 0 0 0.93  0 0 0 0 0.94  0 0 0 0 0.9  ${a * 2} 0 0 0 ${-a}" result="lt"/>` +
+    `<feComposite in="lt" in2="SourceGraphic" operator="in" result="ltIn"/>` +
+    `<feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  ${-a * 2} 0 0 0 ${a}" result="dk"/>` +
+    `<feComposite in="dk" in2="SourceGraphic" operator="in" result="dkIn"/>` +
+    `<feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="ltIn"/><feMergeNode in="dkIn"/></feMerge></filter>`;
+}
+// Patterns for surfaces: brick courses, wooden planks, iron rivets. Use as fill="url(#brickT)" over a shape at low opacity.
+const TEX_PATTERNS = `<pattern id="brickT" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="24" height="12" fill="none" stroke="#000" stroke-width="1"/><line x1="12" y1="6" x2="12" y2="12" stroke="#000" stroke-width="1"/><line x1="0" y1="6" x2="24" y2="6" stroke="#000" stroke-width="1"/></pattern>` +
+  `<pattern id="planksT" width="40" height="10" patternUnits="userSpaceOnUse"><line x1="0" y1="9.5" x2="40" y2="9.5" stroke="#000" stroke-width="1"/><line x1="${23}" y1="0" x2="23" y2="10" stroke="#000" stroke-width="0.8"/></pattern>` +
+  `<pattern id="rivetsT" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.6" fill="#000"/></pattern>` +
+  `<pattern id="hatchT" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="8" stroke="#DFE0D6" stroke-width="0.8"/></pattern>`;
+// The visible world rectangle of a camera layer (zoom z around world point ux, uy, with parallax p).
+function visibleRect(c, p, pad = 80) { const zp = 1 + (c.z - 1) * p, ax = 960 + (c.ux - 960) * p, ay = 540 + (c.uy - 540) * p; return [ax - 960 / zp - pad, ay - 540 / zp - pad, 1920 / zp + 2 * pad, 1080 / zp + 2 * pad]; }
+if (typeof window !== 'undefined') Object.assign(window, {texDef, visibleRect});

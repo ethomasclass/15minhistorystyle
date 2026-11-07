@@ -56,11 +56,20 @@ const JOBS = [
   // round 7: the two integration explainers
   {name: 'r7_vi_mine', clip: 'vi_explainer', t: 1.2},
   {name: 'r7_vi_mill', clip: 'vi_explainer', t: 8.1},
-  {name: 'r7_vi_end', clip: 'vi_explainer', t: 21.5},
+  {name: 'r7_vi_end', clip: 'vi_explainer', t: 27.5},
+  {name: 'r7_vi_stack', clip: 'vi_explainer', t: 20.4},
   {name: 'r7_hi_wide', clip: 'hi_explainer', t: 2},
   {name: 'r7_hi_rebate', clip: 'hi_explainer', t: 8.6},
   {name: 'r7_hi_bought', clip: 'hi_explainer', t: 16},
   {name: 'r7_hi_end', clip: 'hi_explainer', t: 23.5},
+  {name: 'r7_hi_compare', clip: 'hi_explainer', t: 30.5},
+  // round 8: the refinery
+  {name: 'r8_rf_wide', clip: 'refinery_tour', t: 1},
+  {name: 'r8_rf_ship', clip: 'refinery_tour', t: 3},
+  {name: 'r8_rf_bags', clip: 'refinery_tour', t: 7.6},
+  {name: 'r8_rf_char', clip: 'refinery_tour', t: 9.2},
+  {name: 'r8_rf_pans', clip: 'refinery_tour', t: 10.6},
+  {name: 'r8_rf_michael', clip: 'refinery_tour', t: 12.5},
 ];
 
 const filter = process.argv[2];
