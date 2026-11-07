@@ -352,16 +352,14 @@ money could make money (a $10 dividend; $50 lent at 7%).
 | Dunfermline | dun-FERM-lin |
 | Allegheny | AL-uh-gay-nee |
 
-## 11. Decided, and still open
+## 11. Decided
 
-Decided (Nov 7): open on the bridge and explain the wire step by step in the last chapter; Carnegie said car-NAY-gee; the Sherman
-Act, *E.C. Knight* and the 1886 strike move to later episodes; more time for both men's backstories.
-
-Still open:
-1. **The wire:** keep the one-line tease at 0:00 and the full explanation at the end (as above), or explain it up front?
-2. **Rockefeller's father:** the bigamy is documented and memorable, but it's adult material for 8th graders. Say it plainly ("he
-   secretly had a second wife under a fake name"), or just "a con man who stayed away for months"?
-3. **Carnegie's marriage after his mother's death:** keep for Episode 2 (where his money goes), or use here?
+- Nov 7: open on the bridge; tease the wire in one line at 0:00 and pay it off at the end (the gilded wire ties the start to the finish).
+- Nov 7: Carnegie said **car-NAY-gee**.
+- Nov 7: the Sherman Act, *E.C. Knight* and the 1886 sugar strike move to later episodes.
+- Nov 7: more time for both men's backstories; Rockefeller's father is told plainly, as written in 5b (the second wife under a fake name included).
+- Nov 7: Carnegie's marriage after his mother's death is saved for a later episode.
+- The animation plan is in `ANIMATION_PLAN.md`.
 
 ## Sources
 
