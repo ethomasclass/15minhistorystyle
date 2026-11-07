@@ -45,3 +45,9 @@ if os.path.exists('out/r3_walk_wide_t1.jpg'):
 if os.path.exists('out/r4_faces.jpg'):
     sheet('7_round4', [('r4_faces', 'FACES · five expressions, Michael and a neighbour'), ('r4_walk_medium_smile', 'WALK · he smiles at the neighbour as she passes'),
                        ('r4_walk_wide_wagon', 'WALK · seated driver, four-beat horse'), ('r4_closeup_awe', 'BRIDGE · awe at the fireworks')], 'ROUND 4 · PROFILE HEADS, EXPRESSIONS, A WALK THAT STAYS ON THE GROUND')
+
+if os.path.exists('out/r5_cut_wide.jpg'):
+    sheet('8_round5', [('r5_cast_sheet', 'THE CAST · and the pose library'), ('r5_cut_wide', 'CUTAWAY · the whole building, about 1883'),
+                       ('r5_cut_labels', 'CUTAWAY · the teaching version'), ('r5_cut_kellys', 'CUTAWAY · the Kellys at home'),
+                       ('r5_cut_garment_shop', 'CUTAWAY · the neighbours\' garment shop'), ('r5_cut_saloon_cellar', 'CUTAWAY · saloon, cellar, the stair hall')],
+          'ROUND 5 · THE MODEL AS A SYSTEM, AND THE TENEMENT CUTAWAY')

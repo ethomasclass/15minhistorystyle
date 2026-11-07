@@ -16,22 +16,6 @@ const WALK_V = 190;         // Michael's walking speed, px/s at the near sidewal
 const M_SCREEN_X = 760;     // where the camera keeps him
 const FAR_GROUND = 876, NEAR_GROUND = 1012;
 
-// A walk cycle for the rig, locked to the ground. Each leg spends half the cycle planted: the foot slides back under the body at
-// exactly the walking speed (so it does not skate), then swings forward with the knee bent. Arms counter-swing; the body is
-// highest at mid-stance. walkPhase() turns distance walked into cycles; positions and poses both step at 12 drawings a second.
-function walkPhase(dist, h, stride = 22) { return dist / (2 * Math.sin(stride * Math.PI / 180) * h); }
-function walkAn(p, {stride = 22, arm = 18, carry = false} = {}) {
-  const sm = Math.sin(stride * Math.PI / 180);
-  const leg = (u) => {
-    u = ((u % 1) + 1) % 1;
-    if (u < 0.5) { const th = Math.asin(sm * (1 - 4 * u)) * 180 / Math.PI; return [th, th]; }
-    const v = (u - 0.5) / 0.5, th = -stride * Math.cos(Math.PI * v); return [th, th - 55 * Math.sin(Math.PI * v)];
-  };
-  const A = leg(p), Bl = leg(p + 0.5), k = A[0] / stride, armF = carry ? 5 : arm;
-  return {legs: [A[0], Bl[0]], shins: [A[1], Bl[1]], fArm: [180 + armF * k, 170 + armF * k], bArm: [180 - arm * k, 192 - arm * k * 1.2],
-    bob: 0.011 * Math.cos(2 * TAU * (p - 0.25)) - 0.007};
-}
-
 /* ---------- far: chimneys, a steeple, factory smoke ---------- */
 function stFar(t) {
   const r = rng(301), s = [], base = 620;
@@ -187,7 +171,7 @@ function stStreet(t) {
 function stNear(t, zoom, mx) {
   const s = [], c = ST.fg;
   s.push(`<rect x="-1000" y="${NEAR_GROUND - 8}" width="7000" height="12" fill="${c}"/><rect x="-1000" y="${NEAR_GROUND}" width="7000" height="1400" fill="${c}"/>`);
-  const lod = (h) => { const hs = h * zoom; return {det: smooth(430, 680, hs), rimA: ST.rim.a * (0.3 + 0.7 * smooth(170, 420, hs))}; };
+  const lod = (h) => { const hs = h * zoom; return lodFor(hs, ST.rim.a); };
   const tones = {tone: ST.tone, lite: ST.lite};
   const passers = [
     {x0: 1500, v: 120, kind: 'woman', hat: 'lady', h: 232, basket: true, ph: 0.2},

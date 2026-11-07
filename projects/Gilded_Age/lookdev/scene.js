@@ -57,206 +57,6 @@ const LOOKS = {
     tone: '#2E403D', lite: '#5C7772', rim: null,
   },
 };
-const MICHAEL_TONES = {tone: '#B5463D', lite: '#FFD9D2'};
-
-/* ---------- helpers ---------- */
-function rng(seed) { // mulberry32
-  let a = seed >>> 0;
-  return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-}
-const f1 = (n) => Math.round(n * 10) / 10;
-const pts = (a) => a.map(([x, y]) => `${f1(x)},${f1(y)}`).join(' ');
-const poly = (a, fill, extra = '') => `<polygon points="${pts(a)}" fill="${fill}" ${extra}/>`;
-const line = (a, stroke, w, extra = '') => `<polyline points="${pts(a)}" fill="none" stroke="${stroke}" stroke-width="${f1(w)}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`;
-const grad = (id, stops, vertical = true) => `<linearGradient id="${id}" x1="0" y1="0" x2="${vertical ? 0 : 1}" y2="${vertical ? 1 : 0}">${stops.map(([o, c, a]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a ?? 1}"/>`).join('')}</linearGradient>`;
-const clamp01 = (v) => Math.max(0, Math.min(1, v));
-const smooth = (e0, e1, v) => { const u = clamp01((v - e0) / (e1 - e0)); return u * u * (3 - 2 * u); };
-const ease = (u) => 0.5 - Math.cos(Math.PI * clamp01(u)) / 2;
-const TAU = Math.PI * 2;
-const step12 = (t) => Math.floor(t * 12 + 1e-6) / 12; // drawn motion: 12 drawings a second
-
-/* ---------- figures (rigs with three levels of detail) ---------- */
-// Units: height 1, feet at 0, +y up. d = facing (+1 right, -1 left). Limbs are strokes, so animating is turning joints.
-// o.an: animation {lean (deg), bob, tilt (head, deg, + looks up), fArm [shoulder, elbow], bArm, legs [a, b], hatInHand, blink,
-//       childWave}. Angles are degrees from straight up, positive toward the way the figure faces.
-// o.det 0..1: interior detail. o.rim {c, a, dx, dy}: rim light (offset in figure heights). o.tones {tone, lite}: detail colours.
-function figure(o) {
-  const {x, y, h, d = 1, kind = 'man', hat = 'bowler', pose = 'stand', beard = false, coat = 'frock', fill, an = {}, det = 0, rim = null, tones = {tone: '#2E403D', lite: '#5C7772'}} = o;
-  const X = (lx) => x + d * lx * h, Y = (ly) => y - ly * h;
-  const P = (a) => a.map(([lx, ly]) => [X(lx), Y(ly)]);
-  const PD = (cmds) => cmds.map((c) => c[0] + (c.length > 1 ? ' ' + c.slice(1).map((v, i) => f1(i % 2 ? Y(v) : X(v))).join(' ') : '')).join(' ');
-  const at = (sx, sy, len, deg) => [sx + Math.sin(deg * Math.PI / 180) * len, sy + Math.cos(deg * Math.PI / 180) * len];
-  const child = kind === 'boy' || kind === 'girl';
-  const headR = child ? [0.088, 0.095] : [0.062, 0.071];
-  const headY = child ? 0.9 : 0.93;
-  const k = child ? 0.8 : 1;
-  const hip = child ? 0.46 : 0.5;
-  const sh = child ? [0, 0.74] : [0, 0.81];
-  const legW = child ? 0.07 : 0.078;
-  const armW = kind === 'woman' ? 0.044 : child ? 0.05 : 0.055;
-  const hatInHand = an.hatInHand ?? (pose === 'wave');
-  const fA = an.fArm || (pose === 'wave' ? [30, 8] : pose === 'point' ? [72, 80] : pose === 'carry' ? [40, -10] : [165, 150]);
-  const bA = an.bArm || [196, 202];
-  const legA = an.legs || [9, -8];
-  const hipX = (i) => (i === 0 ? 0.026 : -0.026);
-  const legJ = legA.map((a, i) => { const knee = at(hipX(i), hip, hip * 0.52, 180 - a); const ank = at(knee[0], knee[1], hip * 0.48, 180 - (an.shins ? an.shins[i] : a * 0.6)); return [knee, [ank[0], Math.max(ank[1], 0.03)]]; });
-  const bE = at(-0.02, sh[1], 0.19 * k, bA[0]), bH = at(bE[0], bE[1], 0.17 * k, bA[1]);
-  const fE = at(0.02, sh[1], 0.19 * k, fA[0]), fH = at(fE[0], fE[1], 0.17 * k, fA[1]);
-  const top = headY + headR[1];
-  const headRot = `rotate(${f1(-(an.tilt || 0) * d)}, ${f1(X(0))}, ${f1(Y(child ? 0.8 : 0.86))})`;
-
-  // The head as one profile: skull, forehead, brow, nose, lips, chin, jaw. Women get a softer brow and smaller nose; children a
-  // rounder, bigger head. `open` drops the jaw for an open mouth (awe).
-  const hs = child ? 1.42 : 1;
-  const prof = kind === 'woman' ? {brow: 0.058, nose: 0.018, lip: 0.067, chin: 0.05} : child ? {brow: 0.058, nose: 0.012, lip: 0.064, chin: 0.05} : {brow: 0.064, nose: 0.026, lip: 0.066, chin: 0.056};
-  const EXPR = {neutral: {open: 0}, smile: {open: 0}, worried: {open: 0}, awe: {open: 0.009}, set: {open: 0}};
-  const expr = EXPR[an.expr] ? an.expr : 'neutral', jaw = EXPR[expr].open;
-  const HP = (dx, dy) => [X(0.008 + dx * hs), Y(headY + dy * hs)];
-  const hpS = (dx, dy) => { const [a, b] = HP(dx, dy); return `${f1(a)},${f1(b)}`; };
-  function headPath() {
-    const q = prof;
-    return `M${hpS(-0.032, -0.062)} Q${hpS(-0.074, -0.03)} ${hpS(-0.064, 0.02)} Q${hpS(-0.056, 0.07)} ${hpS(0.0, 0.073)} Q${hpS(0.048, 0.072)} ${hpS(0.06, 0.032)}` +
-      ` L${hpS(q.brow, 0.014)} L${hpS(0.059, 0.005)} L${hpS(0.06 + q.nose, -0.016)} L${hpS(0.063, -0.026)} L${hpS(q.lip, -0.034)} L${hpS(0.061, -0.04 - jaw)}` +
-      ` L${hpS(q.lip - 0.002, -0.046 - jaw)} Q${hpS(q.chin + 0.008, -0.058 - jaw)} ${hpS(q.chin, -0.066 - jaw)} Q${hpS(0.04, -0.074 - jaw)} ${hpS(0.015, -0.068)} L${hpS(0.02, -0.058)} Z`;
-  }
-  const capShape = (c, cx0, cy0) => `<ellipse cx="${f1(X(cx0))}" cy="${f1(Y(cy0))}" rx="${f1(0.07 * h)}" ry="${f1(0.034 * h)}" fill="${c}"/>` +
-    poly(P([[cx0 + 0.03, cy0 - 0.005], [cx0 + 0.115, cy0 - 0.023], [cx0 + 0.05, cy0 - 0.031]]), c);
-
-  function body(c) {
-    const g = [];
-    const limb = (a, w) => g.push(line(P(a), c, w * h));
-    const shape = (cmds) => g.push(`<path d="${PD(cmds)} Z" fill="${c}" stroke="${c}" stroke-width="${f1(0.012 * h)}" stroke-linejoin="round"/>`);
-    const dot = (lx, ly, r) => g.push(`<circle cx="${f1(X(lx))}" cy="${f1(Y(ly))}" r="${f1(r * h)}" fill="${c}"/>`);
-    // legs + shoes
-    if (kind !== 'woman') for (const [i, [knee, ank]] of legJ.entries()) {
-      limb([[hipX(i), hip], knee, ank], legW);
-      g.push(`<ellipse cx="${f1(X(ank[0] + 0.035))}" cy="${f1(Y(Math.max(ank[1] - 0.012, 0.018)))}" rx="${f1(0.055 * h)}" ry="${f1(0.021 * h)}" fill="${c}"/>`);
-    }
-    // back arm
-    limb([[-0.02, sh[1]], bE, bH], armW); dot(bH[0], bH[1], armW * 0.55);
-    // torso
-    if (kind === 'man') {
-      const hem = coat === 'jacket' ? 0.47 : coat === 'sack' ? 0.42 : 0.33;
-      const hf = coat === 'frock' ? 0.125 : 0.105, hb = coat === 'frock' ? -0.155 : -0.125;
-      shape([['M', -0.035, 0.872], ['Q', -0.095, 0.866, -0.112, 0.8], ['Q', -0.132, 0.72, -0.106, 0.66], ['L', hb, hem - 0.01], ['L', hf, hem], ['L', 0.097, 0.62], ['Q', 0.13, 0.75, 0.104, 0.81], ['Q', 0.088, 0.866, 0.035, 0.872]]);
-    } else if (kind === 'woman') {
-      shape([['M', -0.03, 0.868], ['Q', -0.08, 0.862, -0.092, 0.8], ['Q', -0.1, 0.7, -0.055, 0.6], ['L', 0.055, 0.6], ['L', 0.07, 0.68], ['Q', 0.112, 0.75, 0.086, 0.815], ['Q', 0.072, 0.864, 0.03, 0.868]]);
-      shape([['M', 0.055, 0.61], ['Q', 0.085, 0.35, 0.15, 0.0], ['L', -0.17, 0.0], ['Q', -0.14, 0.2, -0.16, 0.34], ['Q', -0.235, 0.42, -0.2, 0.53], ['Q', -0.15, 0.6, -0.055, 0.61]]);
-    } else if (kind === 'boy') {
-      shape([['M', -0.1, 0.78], ['Q', 0, 0.8, 0.1, 0.78], ['L', 0.1, 0.44], ['L', -0.11, 0.43]]);
-    } else {
-      shape([['M', -0.09, 0.78], ['Q', 0, 0.8, 0.09, 0.78], ['L', 0.08, 0.6], ['Q', 0.12, 0.42, 0.16, 0.26], ['L', -0.17, 0.26], ['Q', -0.12, 0.42, -0.08, 0.6]]);
-    }
-    // head group
-    const hg = [];
-    hg.push(poly(P([[-0.025, 0.83], [0.032, 0.83], [0.03, 0.89], [-0.02, 0.89]]), c));
-    hg.push(`<path d="${headPath()}" fill="${c}" stroke="${c}" stroke-width="${f1(0.004 * h)}" stroke-linejoin="round"/>`); // the profile
-    if (beard) hg.push(poly(P([[-0.03, headY - 0.03], [0.07, headY - 0.03], [0.05, headY - 0.1], [0.0, headY - 0.105]]), c));
-    if (kind === 'woman' || kind === 'girl') hg.push(`<circle cx="${f1(X(-0.06))}" cy="${f1(Y(headY + 0.02))}" r="${f1(0.032 * h)}" fill="${c}"/>`);
-    if (!hatInHand) {
-      if (hat === 'bowler') {
-        hg.push(`<path d="M${f1(X(-0.06))},${f1(Y(top - 0.012))} A${f1(0.06 * h)},${f1(0.055 * h)} 0 0 ${d > 0 ? 1 : 0} ${f1(X(0.068))},${f1(Y(top - 0.012))} Z" fill="${c}"/>`);
-        hg.push(`<ellipse cx="${f1(X(0.006))}" cy="${f1(Y(top - 0.014))}" rx="${f1(0.088 * h)}" ry="${f1(0.013 * h)}" fill="${c}"/>`);
-      } else if (hat === 'top') {
-        hg.push(poly(P([[-0.052, top - 0.02], [0.062, top - 0.02], [0.058, top + 0.13], [-0.048, top + 0.13]]), c));
-        hg.push(`<ellipse cx="${f1(X(0.006))}" cy="${f1(Y(top - 0.016))}" rx="${f1(0.09 * h)}" ry="${f1(0.013 * h)}" fill="${c}"/>`);
-      } else if (hat === 'cap') {
-        hg.push(capShape(c, -0.004, top - 0.005));
-      } else if (hat === 'lady') {
-        hg.push(`<ellipse cx="${f1(X(0.0))}" cy="${f1(Y(top - 0.004))}" rx="${f1(0.07 * h)}" ry="${f1(0.016 * h)}" fill="${c}"/>`);
-        hg.push(poly(P([[-0.04, top], [0.045, top], [0.035, top + 0.05], [-0.03, top + 0.05]]), c));
-        hg.push(`<path d="M${f1(X(-0.02))},${f1(Y(top + 0.04))} q${f1(-d * 0.05 * h)},${f1(-0.09 * h)} ${f1(-d * 0.11 * h)},${f1(-0.03 * h)} q${f1(d * 0.04 * h)},0 ${f1(d * 0.1 * h)},${f1(0.05 * h)} Z" fill="${c}"/>`);
-      } else if (hat === 'boycap') {
-        hg.push(`<ellipse cx="${f1(X(-0.004))}" cy="${f1(Y(top - 0.01))}" rx="${f1(0.095 * h)}" ry="${f1(0.04 * h)}" fill="${c}"/>`);
-        hg.push(poly(P([[0.05, top - 0.02], [0.15, top - 0.04], [0.07, top - 0.05]]), c));
-      }
-    }
-    g.push(`<g transform="${headRot}">${hg.join('')}</g>`);
-    // front arm, hat in hand, cane, parasol
-    limb([[0.02, sh[1]], fE, fH], armW); dot(fH[0], fH[1], armW * 0.55);
-    if (hatInHand && (hat === 'cap' || hat === 'none' || hat === 'bowler' || hat === 'top')) {
-      if (hat === 'bowler' || hat === 'top') g.push(`<ellipse cx="${f1(X(fH[0] + 0.01))}" cy="${f1(Y(fH[1] + 0.03))}" rx="${f1(0.07 * h)}" ry="${f1(0.045 * h)}" fill="${c}"/>`);
-      else g.push(capShape(c, fH[0] + 0.01, fH[1] + 0.035));
-    }
-    if (o.pail) { // a worker's tin dinner pail, hanging from the hand
-      const [hx, hy] = fH;
-      g.push(`<path d="M${f1(X(hx - 0.035))},${f1(Y(hy - 0.05))} Q${f1(X(hx))},${f1(Y(hy + 0.02))} ${f1(X(hx + 0.035))},${f1(Y(hy - 0.05))}" stroke="${c}" stroke-width="${f1(0.008 * h)}" fill="none"/>`);
-      g.push(poly(P([[hx - 0.04, hy - 0.05], [hx + 0.04, hy - 0.05], [hx + 0.034, hy - 0.15], [hx - 0.034, hy - 0.15]]), c));
-    }
-    if (o.basket) g.push(`<path d="M${f1(X(fH[0] - 0.06))},${f1(Y(fH[1] - 0.02))} L${f1(X(fH[0] + 0.06))},${f1(Y(fH[1] - 0.02))} L${f1(X(fH[0] + 0.05))},${f1(Y(fH[1] - 0.11))} L${f1(X(fH[0] - 0.05))},${f1(Y(fH[1] - 0.11))} Z" fill="${c}"/>`);
-    if (o.papers) g.push(poly(P([[-0.06, 0.66], [0.08, 0.7], [0.07, 0.62], [-0.07, 0.58]]), c));
-    if (o.cane) limb([fH, [fH[0] + 0.05, 0.0]], 0.016);
-    if (o.parasol) { limb([[fH[0] - 0.03, fH[1] + 0.08], [fH[0] + 0.07, 0.0]], 0.02); g.push(poly(P([[fH[0] - 0.005, fH[1] - 0.02], [fH[0] + 0.05, fH[1] - 0.3], [fH[0] + 0.035, fH[1] - 0.02]]), c)); }
-    if (pose === 'carry') { // a child riding on the shoulders, waving
-      const ch = 0.5, C = (lx, ly) => [lx * ch, 0.9 + ly * ch];
-      g.push(poly(P([C(-0.1, 0.0), C(0.1, 0.0), C(0.1, 0.34), C(-0.1, 0.34)]), c));
-      limb([C(0.02, 0.02), C(0.2, -0.1), C(0.16, -0.32)], 0.07 * ch);
-      limb([C(-0.02, 0.02), C(-0.17, -0.12), C(-0.14, -0.32)], 0.07 * ch);
-      const hc = C(0.008, 0.46);
-      g.push(`<ellipse cx="${f1(X(hc[0]))}" cy="${f1(Y(hc[1]))}" rx="${f1(0.085 * ch * h)}" ry="${f1(0.092 * ch * h)}" fill="${c}"/>`);
-      const wv = an.childWave || 0;
-      const e = at(0.03 * ch, 0.9 + 0.3 * ch, 0.2 * ch, 35 + wv * 0.5), hn = at(e[0], e[1], 0.18 * ch, 15 + wv);
-      limb([C(0.03, 0.3), e, hn], 0.05 * ch);
-    }
-    return g.join('');
-  }
-
-  function details() { // drawn over the solid shape in close-ups
-    const {tone, lite} = tones, g = [], hg = [];
-    const ln = (a, w = 0.007) => line(P(a), tone, w * h);
-    const dot = (lx, ly, r, c = tone) => `<circle cx="${f1(X(lx))}" cy="${f1(Y(ly))}" r="${f1(r * h)}" fill="${c}"/>`;
-    if (kind === 'man') {
-      g.push(poly(P([[0.012, 0.852], [0.062, 0.85], [0.036, 0.812]]), lite)); // shirt collar
-      g.push(ln([[0.055, 0.842], [0.028, 0.75], [0.078, 0.69]])); // lapel
-      for (const yy of coat === 'jacket' ? [0.72, 0.66, 0.6, 0.54] : [0.7, 0.65, 0.6]) g.push(dot(coat === 'jacket' ? 0.072 : 0.085, yy, 0.0065));
-      g.push(ln([[-0.07, 0.56], [-0.01, 0.56]])); // pocket
-      if (coat !== 'jacket') g.push(`<path d="M${f1(X(0.08))},${f1(Y(0.6))} Q${f1(X(0.04))},${f1(Y(0.565))} ${f1(X(0.01))},${f1(Y(0.6))}" stroke="${lite}" stroke-width="${f1(0.004 * h)}" fill="none"/>`); // watch chain
-      const [knee, ank] = legJ[0];
-      g.push(ln([[0.012, hip - 0.02], [knee[0] + 0.012, knee[1]], [ank[0] + 0.012, ank[1] + 0.03]], 0.005)); // trouser crease
-      g.push(ln([[fH[0] - 0.02, fH[1] + 0.03], [fH[0] + 0.02, fH[1] + 0.035]], 0.006)); // cuff
-    } else if (kind === 'woman') {
-      g.push(`<ellipse cx="${f1(X(0.012))}" cy="${f1(Y(0.84))}" rx="${f1(0.045 * h)}" ry="${f1(0.014 * h)}" fill="${lite}"/>`); // lace collar
-      for (const yy of [0.79, 0.75, 0.71, 0.67, 0.63]) g.push(dot(0.062, yy, 0.0055));
-      g.push(ln([[-0.06, 0.605], [0.06, 0.605]], 0.009)); // waistband
-      for (const [a0, a1] of [[0.03, 0.08], [-0.03, -0.02], [-0.1, -0.12]]) g.push(`<path d="M${f1(X(a0))},${f1(Y(0.58))} Q${f1(X(a0 + 0.02))},${f1(Y(0.3))} ${f1(X(a1))},${f1(Y(0.03))}" stroke="${tone}" stroke-width="${f1(0.006 * h)}" fill="none"/>`);
-      g.push(ln([[-0.16, 0.5], [-0.11, 0.44], [-0.05, 0.47]], 0.006)); // bustle drape
-    } else {
-      g.push(poly(P([[0.0, 0.79], [0.07, 0.79], [0.035, 0.76]]), lite));
-    }
-    // face and head
-    // the face: an expression is a brow, an eye and a mouth (plus a cheek crease for a smile)
-    const hl = (a, w = 0.005) => line(a.map(([dx, dy]) => HP(dx, dy)), tone, w * h * hs);
-    const hq = (a, b, c2, w = 0.005) => { const [p0, p1, p2] = [HP(...a), HP(...b), HP(...c2)]; return `<path d="M${f1(p0[0])},${f1(p0[1])} Q${f1(p1[0])},${f1(p1[1])} ${f1(p2[0])},${f1(p2[1])}" stroke="${tone}" stroke-width="${f1(w * h * hs)}" fill="none" stroke-linecap="round"/>`; };
-    const he = (dx, dy, rx, ry, c2 = tone) => { const [a, b] = HP(dx, dy); return `<ellipse cx="${f1(a)}" cy="${f1(b)}" rx="${f1(rx * h * hs)}" ry="${f1(ry * h * hs)}" fill="${c2}"/>`; };
-    hg.push(he(-0.012, -0.002, 0.012, 0.019) .replace('/>', ' opacity="0.75"/>')); // ear
-    const brow = {neutral: [[0.022, 0.024], [0.05, 0.022]], smile: [[0.022, 0.027], [0.05, 0.026]], worried: [[0.022, 0.021], [0.05, 0.031]],
-      awe: [[0.022, 0.032], [0.05, 0.034]], set: [[0.022, 0.027], [0.052, 0.015]]}[expr];
-    hg.push(hl(brow, 0.006));
-    if (an.blink) hg.push(hl([[0.026, 0.006], [0.042, 0.005]], 0.004));
-    else if (expr === 'smile') hg.push(hq([0.025, 0.006], [0.034, 0.014], [0.043, 0.006], 0.004));
-    else if (expr === 'awe') { hg.push(he(0.034, 0.008, 0.009, 0.008)); hg.push(he(0.037, 0.011, 0.0028, 0.0028, lite)); }
-    else hg.push(he(0.034, 0.008, 0.0075, expr === 'set' ? 0.0042 : 0.0058));
-    if (expr === 'smile') { hg.push(hq([0.061, -0.04], [0.05, -0.047], [0.037, -0.034])); hg.push(hq([0.036, -0.022], [0.031, -0.027], [0.032, -0.033], 0.0035)); }
-    else if (expr === 'worried') hg.push(hq([0.061, -0.04], [0.05, -0.036], [0.038, -0.047]));
-    else if (expr === 'awe') hg.push(he(0.056, -0.044, 0.007, 0.009));
-    else if (expr === 'set') hg.push(hl([[0.061, -0.04], [0.036, -0.041]], 0.006));
-    else hg.push(hq([0.061, -0.04], [0.05, -0.042], [0.04, -0.041], 0.004));
-    if (!(hatInHand || hat === 'none') && kind === 'man') hg.push(`<path d="M${hpS(-0.06, 0.03)} Q${hpS(-0.068, 0.0)} ${hpS(-0.056, -0.03)} L${hpS(-0.044, -0.022)} Q${hpS(-0.05, 0.004)} ${hpS(-0.042, 0.03)} Z" fill="${tone}" opacity="0.85"/>`); // hair below the hat
-    const bare = hatInHand || hat === 'none';
-    if (kind === 'man' && bare) hg.push(`<path d="M${f1(X(-0.064))},${f1(Y(headY - 0.01))} Q${f1(X(-0.066))},${f1(Y(top + 0.012))} ${f1(X(0.01))},${f1(Y(top + 0.008))} Q${f1(X(0.06))},${f1(Y(top))} ${f1(X(0.066))},${f1(Y(headY + 0.03))} Q${f1(X(0.02))},${f1(Y(headY + 0.045))} ${f1(X(-0.02))},${f1(Y(headY + 0.02))} Z" fill="${tone}"/>`); // hair
-    if (kind === 'man' && !bare && hat === 'bowler') hg.push(ln([[-0.058, top - 0.002], [0.066, top - 0.002]], 0.01));
-    if (kind === 'man' && !bare && hat === 'top') hg.push(ln([[-0.05, top + 0.005], [0.06, top + 0.005]], 0.016));
-    if (kind === 'woman' && hat === 'lady') { hg.push(dot(0.03, top + 0.02, 0.012, lite)); hg.push(dot(0.012, top + 0.03, 0.009, lite)); }
-    return g.join('') + `<g transform="${headRot}">${hg.join('')}</g>`;
-  }
-
-  let out = '';
-  if (rim && rim.a > 0.01) out += `<g transform="translate(${f1(rim.dx * h)},${f1(rim.dy * h)})" opacity="${f1(rim.a * 100) / 100}">${body(rim.c)}</g>`;
-  out += body(fill);
-  if (det > 0.01) out += `<g opacity="${f1(det * 100) / 100}">${details()}</g>`;
-  return `<g transform="translate(0,${f1(-(an.bob || 0) * h)}) rotate(${f1((an.lean || 0) * d)}, ${f1(x)}, ${f1(y)})">${out}</g>`;
-}
-
 /* ---------- fireworks: one schedule shared by the sky, the river and the rim light ---------- */
 const BURSTS = [ // x, y (bridge-layer px), radius, colour, launch time (s); the list repeats every 9 s
   [560, 250, 150, '#F4EFE6', -1.2], [880, 150, 120, '#A3BAB2', -0.3], [300, 330, 100, '#DFE0D6', 0.6], [1080, 300, 90, '#F4EFE6', 1.5],
@@ -559,7 +359,7 @@ function crowdLayer(L, t, zoom) {
   }
   // the crowd. Detail follows the size on screen.
   const lit = L.fireworks ? fireBrightness(t) : 1;
-  const lod = (h) => { const hs = h * zoom; return {det: smooth(430, 680, hs), rimA: L.rim ? L.rim.a * lit * (0.3 + 0.7 * smooth(170, 420, hs)) : 0}; };
+  const lod = (h) => { const hs = h * zoom; return {det: smooth(300, 520, hs), rimA: L.rim ? L.rim.a * lit * (0.3 + 0.7 * smooth(140, 320, hs)) : 0}; };
   for (const p of PEOPLE) {
     const facing = p.fixedD ?? (p.flipRoll < 0.82 ? (p.x < 900 ? 1 : -1) : (p.x < 900 ? -1 : 1));
     const {det, rimA} = lod(p.h);
@@ -567,7 +367,7 @@ function crowdLayer(L, t, zoom) {
   }
   // Michael Kelly, 19: the only figure in colour.
   const mh = 248, ml = lod(mh);
-  const wa = 22 * Math.sin(Math.floor(t * 12) * 0.9);
+  const wa = 22 * Math.sin(TAU * t * 1.6);
   const man = (L.michael && L.michael(t)) || {fArm: [30 + wa * 0.4, 8 + wa], hatInHand: true, bob: 0.003 * Math.sin(TAU * tq / 3.2)};
   s.push(figure({x: MX, y: 1040, h: mh, d: -1, kind: 'man', hat: 'cap', pose: 'wave', coat: 'jacket', fill: L.accent, an: man, det: ml.det,
     tones: MICHAEL_TONES, rim: L.rim ? {...L.rim, a: ml.rimA} : null}));
@@ -629,7 +429,7 @@ const CLIPS = {
   // The push-in: from the wide shot to Michael. Detail appears as he gets bigger; he lowers his cap and looks up.
   closeup_night: {look: 'night', sec: 9, cam: (t) => ({zoom: 1 + 2.2 * ease(t / 4.8), fx: 1156, fy: 986}),
     michael: (t) => {
-      const tq = step12(t), wa = 22 * Math.sin(Math.floor(t * 12) * 0.9);
+      const tq = step12(t), wa = 22 * Math.sin(TAU * t * 1.6);
       const down = smooth(3.6, 5.2, tq);
       const fArm = [30 + wa * 0.4 * (1 - down) + (172 - 30) * down, 8 + wa * (1 - down) + (176 - 8) * down];
       const blink = [[2.1, 2.25], [5.9, 6.05], [8.0, 8.15]].some(([a, b]) => tq >= a && tq < b);

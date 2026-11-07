@@ -45,6 +45,14 @@ const JOBS = [
   {name: 'r4_walk_wide_wagon', clip: 'walk_wide', t: 6},
   {name: 'r4_closeup_awe', clip: 'closeup_night', t: 7},
   {name: 'r4_detail_ladder', look: 'dusk', ladder: true},
+  // round 5: the rig as a reusable model, and the tenement cutaway
+  {name: 'r5_cast_sheet', castsheet: true},
+  {name: 'r5_cut_wide', cut: true, t: 2, z: 1, ux: 960, uy: 552},
+  {name: 'r5_cut_labels', cut: true, t: 2, z: 0.86, ux: 900, uy: 520, labels: true},
+  {name: 'r5_cut_kellys', cut: true, t: 12.8, z: 8.2, ux: 548, uy: 560},
+  {name: 'r5_cut_kellys_mid', cut: true, t: 9.4, z: 4.6, ux: 409, uy: 556},
+  {name: 'r5_cut_garment_shop', cut: true, t: 3, z: 4.6, ux: 409, uy: 426},
+  {name: 'r5_cut_saloon_cellar', cut: true, t: 3, z: 3, ux: 560, uy: 880},
 ];
 
 const filter = process.argv[2];

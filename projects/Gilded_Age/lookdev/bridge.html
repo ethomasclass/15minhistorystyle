@@ -13,14 +13,16 @@
   #ov {position: absolute; inset: 0;}
   #ov * {box-sizing: border-box;}
 </style>
+<script src="rig.js"></script>
 <script src="scene.js"></script>
 <script src="street.js"></script>
+<script src="cutaway.js"></script>
 <script src="text.js"></script>
 </head><body>
 <div id="stage"><div id="scene"></div><div id="ov"></div></div>
 <script>
   window.draw = (cfg) => {
-    document.getElementById('scene').innerHTML = cfg.faces ? renderFaces(cfg.look) : cfg.ladder ? renderLadder(cfg.look) : cfg.clip ? renderClipFrame(cfg.clip, cfg.t) : renderScene(cfg);
+    document.getElementById('scene').innerHTML = cfg.castsheet ? renderCastSheet() : cfg.cut ? renderCutaway(cfg) : cfg.faces ? renderFaces(cfg.look) : cfg.ladder ? renderLadder(cfg.look) : cfg.clip ? renderClipFrame(cfg.clip, cfg.t) : renderScene(cfg);
     document.getElementById('ov').innerHTML = cfg.overlay ? OVERLAYS[cfg.overlay](cfg) : '';
     return document.fonts.ready.then(() => true);
   };

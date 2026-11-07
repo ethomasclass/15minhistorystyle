@@ -58,3 +58,17 @@ Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, wh
   legs folding the other way at the hock, tapering legs and a mane.
 - In the clips: Michael walks home tired and set, smiles and nods at the neighbour with the basket as she passes (she smiles back),
   and blinks; at the bridge he smiles while he waves, then looks up in awe. The night crowd watches in awe or smiles.
+
+## Round 5: a reusable model, smooth motion, the tenement cutaway
+
+- **`rig.js`** now holds the whole character model (see `RIG.md`): tapered limbs, mitten hands with a thumb, boots, working skirts,
+  shawls, aprons, a maid's cap and apron, knee breeches, a skullcap, shirtsleeves and vest, props, lying down, twelve poses, the
+  cast, and one level-of-detail rule. Detail now arrives sooner (face from about 520 px tall instead of 680).
+- **Smooth motion.** Characters animate at the full frame rate (you found the 12-a-second steps blurred the faces); clips are now
+  encoded at 1080p.
+- **`cutaway.js`**: a six-storey tenement cut from the street to the back yard, about 1883. Roof (laundry, children, chimney smoke);
+  five floors of railroad flats with dark middle rooms; the Jewish neighbours' garment shop on the fourth floor; the Kellys on the
+  third; boarders, a cradle, lodgers asleep; a saloon at street level; a cobbler and a lodger in the cellar; the dark stair hall;
+  privies, a hydrant and laundry on pulleys in the yard; the rear tenement. Clip `cutaway_push` (14 s): the building alive,
+  Michael climbs the stairs, the camera pushes into the Kellys' flat, he comes in, his mother turns from the stove, his brother and
+  sister look up. A labelled still shows the teaching version (teal leader lines, orange handwriting).
