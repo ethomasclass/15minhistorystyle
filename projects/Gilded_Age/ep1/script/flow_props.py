@@ -180,7 +180,7 @@ print(len(PROPS), 'props')
 
 # The extras-only brief for the Flow agent (same wording as the round 1 master prompt).
 agent = [f"You are making more cut-out prop images for the same Gilded Age history documentary (the 1850s to the 1880s), matching the set you made before. Create one separate image for EACH numbered prop below, {len(EXTRAS)} images in total. Make 2 takes of each. Each image shows only that prop. Do not combine props, do not make a grid or collage, and do not caption or number the images. Name each image with its id (for example {EXTRAS[0][0]}). Square format if available.",
- "", "STYLE FOR EVERY IMAGE (identical across the whole set):", STYLE.replace("STYLE: ", "") + " Not a drawing, not a painting, not a 3D render.",
+ "", "STYLE FOR EVERY IMAGE (identical across the whole set):", STYLE.replace("STYLE: a ", "A ") + " Not a drawing, not a painting, not a 3D render.",
  "", "BACKGROUND: each prop is marked [WHITE] or [BLACK].",
  "[WHITE] = isolated on a plain, flat, pure white background. [BLACK] = isolated on a plain, flat, pure black background.",
  "Either way: no floor, no table, no cast shadow, no reflection, no other objects.",
