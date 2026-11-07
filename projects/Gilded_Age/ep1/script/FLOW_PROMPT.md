@@ -446,7 +446,7 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 ```
 Create one image, square format.
 
-An 1850s–1860s American telegraph key and sounder on one wooden base: a brass straight key with a black knob on a brass lever, and beside it a brass sounder with two upright electromagnet coils wrapped in green-brown silk thread and a pivoting brass bar above them, wires attached to brass binding posts. Three-quarter view.
+An 1850s to 1860s American telegraph key and sounder on one wooden base: a brass straight key with a black knob on a brass lever, and beside it a brass sounder with two upright electromagnet coils wrapped in green-brown silk thread and a pivoting brass bar above them, wires attached to brass binding posts. Three-quarter view.
 
 STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
 
@@ -659,7 +659,7 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 ```
 Create one image, square format.
 
-An 1870s–1880s five-gallon square tinplate kerosene can with a small screw-cap spout in one top corner and a wire handle, dull silver tin with small dents and rust spots, no label, no letters. Three-quarter view.
+An 1870s to 1880s five-gallon square tinplate kerosene can with a small screw-cap spout in one top corner and a wire handle, dull silver tin with small dents and rust spots, no label, no letters. Three-quarter view.
 
 STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
 

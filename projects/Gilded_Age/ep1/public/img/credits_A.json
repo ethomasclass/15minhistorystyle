@@ -12,5 +12,59 @@
     "date": "1876",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Bessemer_steel_manufacture_-_A.R._Waud._LCCN90715021.jpg"
+  },
+  "ch01/bridge_opening_fireworks_currier_ives_1883.jpg": {
+    "title": "The grand display of fireworks and illuminations: at the opening of the great suspension bridge between New York and Brooklyn on the evening of May 24th, 1883",
+    "artist": "Currier & Ives.",
+    "date": "1883-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001702100/",
+    "source": "loc:2001702100"
+  },
+  "ch03/bessemer_converter_1889.jpg": {
+    "title": "File:A Bessemer steel converter LCCN90715020.jpg",
+    "artist": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+    "date": "1889",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Bessemer_steel_converter_LCCN90715020.jpg"
+  },
+  "ch03/bessemer_process_19thc.jpg": {
+    "title": "File:Bessemer process.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "19th centurydate QS:P,+1850-00-00T00:00:00Z/7",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Bessemer_process.jpg"
+  },
+  "ch01/bridge_fireworks_harpers_graham_1883.jpg": {
+    "title": "The Great bridge - Fire-works and illumination, from the Brooklyn side / drawn by Charles Graham.",
+    "artist": "",
+    "date": "1883-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/93512103/",
+    "source": "loc:93512103"
+  },
+  "ch01/bridge_opening_president_arthur_crossing_harpers_1883.jpg": {
+    "title": "The Great bridge - President Arthur and his party crossing the suspended highway / drawn by Schell and Hogan.",
+    "artist": "",
+    "date": "1883-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/93512102/",
+    "source": "loc:93512102"
+  },
+  "ch01/bridge_grand_opening_march_opper_puck_1883.jpg": {
+    "title": "The grand opening march over the Brooklyn Bridge / F. Opper.",
+    "artist": "Opper, Frederick Burr, 1857-1937, artist",
+    "date": "1883-05-23",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012645476/",
+    "source": "loc:2012645476"
+  },
+  "ch01/bridge_currier_ives_view_from_brooklyn_1883.jpg": {
+    "title": "The great East River suspension bridge: connecting the cities of New York and Brooklyn View from Brooklyn, looking west.",
+    "artist": "Currier & Ives.",
+    "date": "1883-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001704262/",
+    "source": "loc:2001704262"
   }
 }
