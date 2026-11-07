@@ -16,6 +16,7 @@ ap.add_argument('--crop', default=''); ap.add_argument('--bust', type=float, def
 ap.add_argument('--model', default='u2net_human_seg'); ap.add_argument('--seed', type=int, default=3)
 ap.add_argument('--tone', type=float, default=0.10)
 ap.add_argument('--erode', type=int, default=2, help='px to pull the edge in (more on a light page)')
+ap.add_argument('--close', type=int, default=0, help='px: close notches bitten into the outline (0 = off)')
 a = ap.parse_args(); rng = np.random.default_rng(a.seed)
 
 im = Image.open(a.src).convert('RGB')
@@ -33,7 +34,9 @@ bgl = np.median(np.concatenate([lum[:12].ravel(), lum[:, :12].ravel(), lum[:, -1
 for i in range(1, k2):                     # fill enclosed holes, unless they are the page background showing through
     x, y, bw, bh, _ = st2[i]
     if x > 0 and y > 0 and x + bw < w and y + bh < h and abs(lum[lab2 == i].mean() - bgl) > 0.12: obj[lab2 == i] = 1
-alpha = np.minimum(alpha, obj * 255.0)
+if a.close:
+    obj = cv2.morphologyEx(obj, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (a.close, a.close)))
+alpha = np.maximum(np.minimum(alpha, obj * 255.0), obj * 255.0 * (a.close > 0))
 alpha = cv2.erode(alpha, np.ones((3, 3), np.uint8), iterations=a.erode)   # pull the edge in past the light halo of the page
 alpha = cv2.GaussianBlur(alpha, (0, 0), 1.0)
 # bust crop: from the top of the head down a fraction of the subject's height, with a soft fade at the cut
