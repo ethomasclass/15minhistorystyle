@@ -350,7 +350,7 @@ money could make money (a $10 dividend; $50 lent at 7%).
 | laissez-faire | LESS-ay FAIR |
 | Roebling | ROHB-ling |
 | Haigh | HAYG |
-| Carnegie | car-NAY-gee (how he said it; decided Nov 7) |
+| Carnegie | car-NAY-ghee, hard g (how he said it; respelling "Car-NAY-ghee" picked by ear Nov 7) |
 | Dunfermline | dun-FERM-lin |
 | Allegheny | AL-uh-gay-nee |
 

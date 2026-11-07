@@ -6,7 +6,7 @@ VOICES = {'NARR': 'mI4rIAStSQeKeqsz4FwM', 'MICHAEL': 'UxeFpulW6hsy9Wt6E0Ai', 'MA
 # the narrator stays fairly even (teacher); the characters get a little more life
 SETTINGS = {'NARR': {'stability': 0.65, 'similarity_boost': 0.85, 'style': 0.0, 'use_speaker_boost': True, 'speed': 1.0},
             'CHAR': {'stability': 0.45, 'similarity_boost': 0.85, 'style': 0.25, 'use_speaker_boost': True, 'speed': 1.0}}
-PRONOUNCE = {'Carnegie': 'Car-NAY-gee', 'Havemeyers': 'HAYV-my-ers', 'laissez-faire': 'lessay-fair', 'solder': 'sodder'}
+PRONOUNCE = {'Carnegie': 'Car-NAY-ghee', 'Havemeyers': 'HAYV-my-ers', 'laissez-faire': 'lessay-fair', 'solder': 'sodder'}
 CACHE = os.path.join(os.path.dirname(__file__) or '.', 'cache'); os.makedirs(CACHE, exist_ok=True)
 
 def say(who, text):

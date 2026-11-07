@@ -34,7 +34,7 @@ wire gets its teal x-ray in ch 9.
 
 Markup: a paragraph that starts `MICHAEL:` or `MA:` is that character's line (each its own take, in that voice). Characters never
 explain or define anything; the narrator does all the teaching. Five lines in this episode (ch 1, ch 4, ch 7).
-Respellings for the narrator: Carnegie → Car-NAY-gee, Havemeyers → HAYV-my-ers, laissez-faire → lessay-fair, solder → sodder.
+Respellings for the narrator: Carnegie → Car-NAY-ghee (hard g, picked Nov 7), Havemeyers → HAYV-my-ers, laissez-faire → lessay-fair, solder → sodder.
 Test files: `tests/pronunciation.mp3`, `tests/scene_bridge.mp3`, `tests/scene_dinner.mp3` (made with `tests/voice_test.py`).
 
 ### Characters
@@ -348,7 +348,7 @@ about 11 minutes; it has the most ground to cover of the six.
 
 | Word | Say it |
 |---|---|
-| Carnegie | car-NAY-gee (how he said it) |
+| Carnegie | Car-NAY-ghee (hard g, as in "get"; how he said it; respelling picked by ear Nov 7) |
 | Havemeyers | HAYV-my-ers |
 | Bessemer | BESS-uh-mer |
 | laissez-faire | LESS-ay FAIR |
