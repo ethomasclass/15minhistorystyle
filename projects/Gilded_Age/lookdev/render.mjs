@@ -35,6 +35,10 @@ const JOBS = [
   {name: 'r2_fireworks_t2', clip: 'fireworks_night', t: 2},
   {name: 'r2_closeup_t7', clip: 'closeup_night', t: 7},
   {name: 'r2_closeup_t2', clip: 'closeup_night', t: 2.6},
+  // round 3: Michael walks home down a tenement street
+  {name: 'r3_walk_wide_t1', clip: 'walk_wide', t: 1},
+  {name: 'r3_walk_wide_t6', clip: 'walk_wide', t: 6},
+  {name: 'r3_walk_medium_t2', clip: 'walk_medium', t: 2},
 ];
 
 const filter = process.argv[2];

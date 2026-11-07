@@ -32,3 +32,16 @@ Not yet decided: the look, coral meaning "a Kelly", which text styles, and wheth
 - **Vocab:** index card and x-ray chosen; the handwritten words are now orange, the drawn lines stay teal.
 - `anim.mjs <clip> <dir> [start] [end]` renders a clip's frames (clips: `alive_dusk`, `fireworks_night`, `closeup_night` in
   `scene.js`). The three clips are in `review/`.
+
+## Round 3: Michael walks home
+
+`street.js`: a Lower East Side tenement street at dusk, about 1883, in look 1. The camera tracks Michael as he walks home from the
+refinery with a tin dinner pail. The rig now has a walk cycle (`walkAn`: thighs swing, the knee bends on the swing, arms
+counter-swing, the body bobs twice a stride), stepped at 12 drawings a second while the camera glides.
+
+Around him: five-storey tenements with cornices, fire escapes (required on tenements after 1867) hung with laundry, gaslit windows
+with figures in some, shop awnings and stoops; a pushcart peddler; a delivery wagon and a walking horse going the other way, its
+spoked wheels turning; telegraph poles strung with the overhead wires New York buried only after 1889; gas street lamps; factory
+smoke and a steeple beyond; people passing on both sidewalks and a boy chasing a hoop. Signs are blank on purpose.
+
+Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, where his close-up detail shows). In `review/`.

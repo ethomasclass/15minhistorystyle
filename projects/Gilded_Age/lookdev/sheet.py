@@ -37,3 +37,7 @@ if os.path.exists('out/r2_detail_ladder.jpg'):
                        ('r2_closeup_t7', 'CLOSE-UP · Michael looks up, rim lit by the fireworks'), ('r2_fireworks_t2', 'OPENING NIGHT · wide, heads tipped up'),
                        ('vocab_2_index_card', 'VOCAB · index card, orange handwriting'), ('vocab_4_in_scene', 'VOCAB · x-ray, orange handwriting')],
           'ROUND 2 · LOOKS 1 + 2, CHARACTERS WITH DETAIL, ORANGE HANDWRITING')
+
+if os.path.exists('out/r3_walk_wide_t1.jpg'):
+    sheet('6_round3_walk', [('r3_walk_wide_t1', 'WALK · wide tracking shot, Lower East Side, dusk'), ('r3_walk_wide_t6', 'WALK · the wagon passes the other way'),
+                            ('r3_walk_medium_t2', 'WALK · medium tracking shot, detail on')], 'ROUND 3 · MICHAEL WALKS HOME FROM THE REFINERY')

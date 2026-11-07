@@ -99,7 +99,7 @@ function figure(o) {
   const bA = an.bArm || [196, 202];
   const legA = an.legs || [9, -8];
   const hipX = (i) => (i === 0 ? 0.026 : -0.026);
-  const legJ = legA.map((a, i) => { const knee = at(hipX(i), hip, hip * 0.52, 180 - a); const ank = at(knee[0], knee[1], hip * 0.48, 180 - a * 0.6); return [knee, [ank[0], Math.max(ank[1], 0.03)]]; });
+  const legJ = legA.map((a, i) => { const knee = at(hipX(i), hip, hip * 0.52, 180 - a); const ank = at(knee[0], knee[1], hip * 0.48, 180 - (an.shins ? an.shins[i] : a * 0.6)); return [knee, [ank[0], Math.max(ank[1], 0.03)]]; });
   const bE = at(-0.02, sh[1], 0.19 * k, bA[0]), bH = at(bE[0], bE[1], 0.17 * k, bA[1]);
   const fE = at(0.02, sh[1], 0.19 * k, fA[0]), fH = at(fE[0], fE[1], 0.17 * k, fA[1]);
   const top = headY + headR[1];
@@ -167,6 +167,13 @@ function figure(o) {
       if (hat === 'bowler' || hat === 'top') g.push(`<ellipse cx="${f1(X(fH[0] + 0.01))}" cy="${f1(Y(fH[1] + 0.03))}" rx="${f1(0.07 * h)}" ry="${f1(0.045 * h)}" fill="${c}"/>`);
       else g.push(capShape(c, fH[0] + 0.01, fH[1] + 0.035));
     }
+    if (o.pail) { // a worker's tin dinner pail, hanging from the hand
+      const [hx, hy] = fH;
+      g.push(`<path d="M${f1(X(hx - 0.035))},${f1(Y(hy - 0.05))} Q${f1(X(hx))},${f1(Y(hy + 0.02))} ${f1(X(hx + 0.035))},${f1(Y(hy - 0.05))}" stroke="${c}" stroke-width="${f1(0.008 * h)}" fill="none"/>`);
+      g.push(poly(P([[hx - 0.04, hy - 0.05], [hx + 0.04, hy - 0.05], [hx + 0.034, hy - 0.15], [hx - 0.034, hy - 0.15]]), c));
+    }
+    if (o.basket) g.push(`<path d="M${f1(X(fH[0] - 0.06))},${f1(Y(fH[1] - 0.02))} L${f1(X(fH[0] + 0.06))},${f1(Y(fH[1] - 0.02))} L${f1(X(fH[0] + 0.05))},${f1(Y(fH[1] - 0.11))} L${f1(X(fH[0] - 0.05))},${f1(Y(fH[1] - 0.11))} Z" fill="${c}"/>`);
+    if (o.papers) g.push(poly(P([[-0.06, 0.66], [0.08, 0.7], [0.07, 0.62], [-0.07, 0.58]]), c));
     if (o.cane) limb([fH, [fH[0] + 0.05, 0.0]], 0.016);
     if (o.parasol) { limb([[fH[0] - 0.03, fH[1] + 0.08], [fH[0] + 0.07, 0.0]], 0.02); g.push(poly(P([[fH[0] - 0.005, fH[1] - 0.02], [fH[0] + 0.05, fH[1] - 0.3], [fH[0] + 0.035, fH[1] - 0.02]]), c)); }
     if (pose === 'carry') { // a child riding on the shoulders, waving
@@ -604,7 +611,7 @@ const CLIPS = {
       return {fArm, hatInHand: true, tilt: 14 * smooth(4.2, 6.0, tq), blink, bob: 0.003 * Math.sin(TAU * tq / 3.2), lean: -1.5 * smooth(4.2, 6, tq)};
     }},
 };
-function renderClipFrame(name, t) { const c = CLIPS[name]; return renderScene({look: c.look, t, ...c.cam(t), michael: c.michael || null}); }
+function renderClipFrame(name, t) { const c = CLIPS[name]; if (c.render) return c.render(t); return renderScene({look: c.look, t, ...c.cam(t), michael: c.michael || null}); }
 
 // Detail ladder: the same characters at three levels, for the sheet.
 function renderLadder(look = 'dusk') {
