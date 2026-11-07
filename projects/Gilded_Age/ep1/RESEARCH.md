@@ -1,7 +1,10 @@
 # Gilded Age Episode 1: research
 
 **Working title:** *Steel, Oil, and Sugar* (or *It Looked Like Gold*)
-**Status:** research and a proposed outline, Nov 7, 2026. Not a script yet.
+**Status:** research and a proposed outline, Nov 7, 2026 (round 2). Not a script yet.
+**Decisions so far (Nov 7):** deeper, human backstories for Carnegie and Rockefeller (how they grew up, how they made their
+first money); say **car-NAY-gee**, as he did; keep the bridge-wire story but explain it step by step; the **Sherman Antitrust Act**
+and **the 1886 sugar strike** move to later episodes.
 **Length:** 10 minutes or less: about 1,450 to 1,500 words of narration at 150 words a minute.
 **Covers (your list):** what the Gilded Age was; industrialization; new inventions; Carnegie, Rockefeller, vertical and
 horizontal integration; entrepreneurship, the free market and laissez-faire.
@@ -61,36 +64,61 @@ Things a 14-year-old may not know, which the script must explain in passing (one
 | **Laissez-faire** (LESS-ay FAIR) | French for "let them do it": the idea that government should leave business alone. |
 | **Captain of industry** / **robber baron** | Two names for the same tycoons: a builder who made the country rich, or a cheat who got rich at others' expense. |
 
-## 4. A proposed outline (story arc, braided with the Kellys)
+## 4. A proposed outline (round 2: more time for the two men)
 
-**Core concept:** In one lifetime America built a machine that looked like solid gold; this episode shows how it was built and who owned it.
+**Core concept:** In one lifetime America built a machine that looked like solid gold; this episode shows how it was built, by whom,
+and who owned it.
 **Driving question (by 0:40):** *How did America become the world's biggest industrial power so fast, and who ended up owning it?*
-**Answer (as the last chapter says it):** New machines and cheap power made mass production possible; a few men figured out how to
-control whole industries, one by owning every step and one by buying every rival; and a government that left business alone, while
-quietly helping it, let them. The Kellys did the work. They got wages. The owners got the gold.
-**Series question (the closer, every episode):** *Who got the gold, and who only got the gilt?*
-**Long loop:** the bad wire inside the bridge (opened at 0:00, closed in the last chapter: "the bridge is still standing; it was built
-strong enough to carry its own lie").
-**Midpoint twist (~4:30):** Carnegie's secret note to himself at 33: piling up money is "the worst species of idolatry," so he'll quit
-at 35. He didn't. He kept going for 33 more years.
-**Climax twist (~7:30):** Michael never changed jobs, but in 1887 his refinery stopped competing with the others. It joined the Sugar Trust.
+**Answer (last chapter):** New machines and cheap power made mass production possible. Two poor boys figured out how to control
+whole industries, one by owning every step and one by buying every rival, and a government that left business alone, while quietly
+helping it, let them. The Kellys did the work. They got wages. The owners got the gold.
+**Series question (the closer):** *Who got the gold, and who only got the gilt?*
+**Long loop:** the bad wire, opened in one line at 0:00 ("inside those cables is a lie"), explained in full in the last chapter.
+**Midpoint twist (~5:10):** Carnegie's secret note to himself at 33: quit at 35, because chasing money is "the worst species of
+idolatry." He didn't.
+**Climax twist (~8:15):** Michael never changed jobs, but in 1887 his refinery stopped competing with the others. It joined the Sugar Trust.
+**What both men share (the episode's quiet thread):** each started with almost nothing and a broken father, and each was raised by a
+mother who ran the family and counted every penny. Both stories start with a machine or a con taking something from their families.
 
 | # | Time | Chapter (whose) | Beat | Words | Visual layer |
 |---|---|---|---|---|---|
-| 1 | 0:00 | **The bridge** (Michael) | May 24, 1883: 150,000 people cross the new Brooklyn Bridge. Michael, 19, a sugar-refinery worker, is in the crowd. Turn: inside the cables is wire that should never have been there. A contractor swapped tested wire for rejected wire, and the engineers found out too late, so they added 150 extra wires to each cable. "It looked like gold. Some of it was gilt." Driving question. | 150 | Bridge scene (looks 1 and 2), close-up push, x-ray of a cable |
-| 2 | 0:50 | **The name** (the era) | Twain and Warner's 1873 novel gives the era its name; define *gilded*. Context in one line (the Civil War ended in 1865). The country doubles: about 38.6 million people in 1870, 76.2 million in 1900. Trains: before 1869, New York to San Francisco took months; after, about a week. Fun beat: in 1883 the railroads reset the nation's clocks (the "day of two noons"). | 230 | Desk + archival; drawn U.S. map with rail lines filling in; a clock |
-| 3 | 2:20 | **The machines** (the inventors) | Define *industrialization*. Bessemer steel in one picture (air through melted iron, minutes instead of a day); steel rails fall from $174 a ton in 1868 to $17 in 1898. Bell files his telephone patent on Feb 14, 1876, hours before a rival files a notice on the same idea. Myth beat: Edison didn't invent the light bulb; he made one that lasted, and then the whole system to power it. Sept 4, 1882: Pearl Street lights about 400 lamps, the switch thrown from J.P. Morgan's office. | 270 | Archival portraits (cut-outs), x-ray vocab of a Bessemer converter, chart |
-| 4 | 4:00 | **The refinery** (Michael) | Michael's workday at Havemeyers & Elder in Williamsburg: rebuilt after an 1882 fire, about 1,000 men, 5,000 barrels of sugar a day; brutal heat, ten- to twelve-hour shifts. Who owns all this? | 110 | Street walk (side-scroll), refinery interior side-scroll (new) |
-| 5 | 4:45 | **Steel** (Carnegie) | Bobbin boy at 12 for $1.20 a week; telegraph messenger; railroad man; builds a steel mill and names it after the president of his biggest customer, the Pennsylvania Railroad. Then owns every step: ore, coke, ships, rails, mills. Define *vertical integration*. Midpoint twist: the 1868 note. By 1900 his mills made more steel than all of Great Britain. | 280 | Archival Carnegie; process side-scroll: mine to mill to market (vertical, scrolled horizontally); index card |
-| 6 | 6:25 | **Oil** (Rockefeller) | Sept 26, 1855: first job, at 16, as a bookkeeper; he celebrates "Job Day" every year for the rest of his life and records every penny in "Ledger A." Define *kerosene*, *refinery*. Cutting costs (his own story: 39 drops of solder instead of 40). 1872: buys 22 of the 26 refineries in Cleveland in about six weeks, helped by railroad *rebates*. Define *horizontal integration*, *monopoly*. 1882: the Standard Oil *Trust*, nine trustees running about 40 companies; around 90% of America's refining. Kerosene gets cheaper, too: about two-thirds cheaper by the mid-1880s. | 280 | Archival Rockefeller; side-scroll of Cleveland's refineries going dark one by one; x-ray of a trust |
-| 7 | 8:05 | **The trust comes to Brooklyn** (Michael) | Oct 1887: Michael's refinery joins the Sugar Refineries Company. Same job, same heat; his boss is now one board running most of the country's sugar. | 80 | Cutaway (the Kellys at home); index card *trust* |
-| 8 | 8:35 | **Leave it alone** (both readings) | Define *free market*, *entrepreneur*, *laissez-faire*. Myth beat 2: government didn't leave business entirely alone: about 130 million acres of federal land to railroads, tariffs on foreign goods; it did leave wages, hours and safety alone. Two views card: captains of industry (cheaper steel, light and fuel, jobs, later libraries) vs robber barons (crushed rivals, secret rebates, low pay). | 180 | Desk; a Puck cartoon (1889 *The Bosses of the Senate*); two-views card |
-| 9 | 9:25 | **Gold or gilt** (Michael) | Back to the bridge, or the roof at night. Answer the driving question. Close the wire loop. "Who got the gold, and who only got the gilt?" Hand off to Episode 2: his sister is about to start work inside a Fifth Avenue mansion, where the gold went. | 100 | Bridge at night; series question card |
-| | | | | **~1,480** | |
+| 1 | 0:00 | **The bridge** (Michael) | May 24, 1883: 150,000 people cross the new Brooklyn Bridge. Michael, 19, a sugar-refinery worker, is in the crowd. One line opens the loop: "Inside those cables is a lie. We'll come back to it." Driving question. | 110 | Bridge scene (looks 1 and 2), the push-in on Michael |
+| 2 | 0:45 | **The name** (the era) | A novel gives the era its name; define *gilded*. The Civil War ended in 1865; the country doubles (38.6 million to 76.2 million by 1900); trains make New York to San Francisco a week instead of months; in 1883 the railroads reset the nation's clocks. | 150 | Desk + archival; drawn map, rail lines filling in; a clock |
+| 3 | 1:45 | **The machines** (the inventors) | Define *industrialization*. Bessemer steel (air through melted iron: minutes instead of a day; rails from over $170 a ton to about $17). Bell files hours before a rival. Myth: Edison didn't invent the light bulb; he made one that lasted and the system to power it (Pearl Street, 1882, about 400 lamps). | 190 | Archival cut-outs; x-ray vocab of a Bessemer converter; a chart |
+| 4 | 3:00 | **The refinery** (Michael) | Michael's day at Havemeyers & Elder in Williamsburg: about 1,000 men, 5,000 barrels of sugar a day, brutal heat, ten- to twelve-hour shifts. Who owns all this? Two boys who started with less than Michael. | 90 | Street walk; refinery side-scroll (new) |
+| 5 | 3:35 | **The weaver's son** (Carnegie) | See section 5a. A steam factory puts his father out of work; the family borrows to cross the ocean; bobbin boy at 12 for $1.20 a week; the messenger who learns every office and reads Morse by ear; Saturday books from a stranger's library; his mother mortgages the house so he can buy his first stock; "the goose that lays the golden eggs." Railroad man, then steel: the mill named after a customer; *vertical integration*. Midpoint twist: the 1868 note. By 1900 his mills out-produce Britain. | 310 | Archival Carnegie (boyhood Dunfermline, the 1848 voyage), a loom side-scroll, process scroll mine to mill; index card |
+| 6 | 5:45 | **The con man's son** (Rockefeller) | See section 5b. A father who sold fake medicine and vanished for months (and kept a second wife under a fake name); a strict mother who taught him to waste nothing. Turkeys sold, $50 lent to a farmer at 7%. Job Day at 16; Ledger A, every penny, including what he gave to church. A produce business at 19, on $1,000 borrowed from his father at 10% interest. Oil; buys out his partners at auction at 25 for $72,500. Then: cutting costs (39 drops), 22 of 26 refineries in six weeks, rebates, *horizontal integration*, *monopoly*, the *trust*, about 90%. | 310 | Archival Rockefeller (the 1850s Cleveland ledger), side-scroll of refineries going dark one by one; x-ray of a trust |
+| 7 | 7:55 | **The trust comes to Brooklyn** (Michael) | Oct 1887: Michael's refinery joins the Sugar Refineries Company. Same job, same heat; his boss is now one board running most of the country's sugar. | 60 | Cutaway (the Kellys at home, by a kerosene lamp: Rockefeller's oil) |
+| 8 | 8:20 | **Leave it alone** (both readings) | Define *free market*, *entrepreneur*, *laissez-faire*. The government left wages, hours and safety alone, but gave railroads about 130 million acres and protected factories with tariffs. Two views: captains of industry or robber barons. | 120 | Desk; Puck cartoon (1889); two-views card |
+| 9 | 9:10 | **Gold or gilt** (Michael) | The wire, explained (section 4a). Answer the driving question. "Who got the gold, and who only got the gilt?" Hand off to Episode 2: his sister starts work inside a Fifth Avenue mansion. | 140 | Bridge at night; x-ray of a cable; the warehouse detour drawn as a little map; question card |
+| | | | | **~1,480** | about 9:50 at 150 words a minute |
 
-**What I'd cut to stay under 10 minutes:** the Sherman Antitrust Act (1890) and *U.S. v. E.C. Knight* (1895). Both were in the
-handoff's Episode 1 outline. They fit better later: *E.C. Knight* is literally the Sugar Trust's case, so it can pay off the Kellys'
-sugar thread in the series' last episode, when the government finally answers. Episode 1 can tease it in one line.
+**Moved out of this episode:** the Sherman Antitrust Act (1890) and *U.S. v. E.C. Knight* (1895), to the episode where the
+government answers the trusts (*E.C. Knight* is the Sugar Trust's own case, a payoff for the Kellys' sugar thread); the 1886
+Brooklyn sugar strike, to the labor episode (Michael can live it).
+
+### 4a. The wire, explained step by step (draft wording for the last chapter)
+
+The order matters, so the picture can follow it one step at a time:
+
+1. **What a cable is.** A suspension bridge hangs its road from giant cables. Each of the Brooklyn Bridge's four cables isn't one
+   thick rope; it's thousands of thin steel wires (more than five thousand), laid side by side and squeezed into a bundle more than
+   a foot thick. *(Picture: an x-ray of one cable opening up into its wires.)*
+2. **Why every wire was tested.** If a few wires are weak, the rest carry the load. Too many weak wires, and the cable is weaker than
+   the engineers think. So every load of wire had to pass a strength test at the factory and get a certificate before it could go
+   to the bridge.
+3. **The trick.** The supplier, a man named J. Lloyd Haigh, beat the test. A wagon of good wire passed inspection and left with its
+   certificate. On the way to the bridge, it was steered into a different building. There, the good wire came off and wire that had
+   **failed** the test went on, and the wagon drove to the bridge with the same certificate. The good wire went back to be tested
+   again. The same good wire passed over and over; the bad wire went into the bridge. *(Picture: a drawn route on a little map, the
+   wagon taking a detour, a card swapping places.)*
+4. **How they caught it.** The inspectors noticed something odd: the pile of rejected wire never got any bigger. By then it was 1878,
+   and tons of bad wire were already in the cables.
+5. **What they did.** Taking the cables apart meant starting over. So the chief engineer, Washington Roebling, ordered 150 extra
+   wires added to every cable, and made Haigh pay for them. The bridge had been designed to be about six times as strong as it needed
+   to be; with the bad wire, it was still about four or five times as strong.
+6. **The ending.** It held. It's still standing. Haigh was never charged for the bridge; he went to prison later, for forgery.
+   **The payoff line:** on the outside it was perfect. Inside, some of it was gilt.
 
 ## 5. Verified facts, by section
 
@@ -128,35 +156,89 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 - Patents: about 437,000 granted in the century up to 1890; under 30,000 by 1860. **Hedge** ("from a few thousand a year to more than
   20,000 a year"); the popular "36,000 vs 440,000" split doesn't match the Patent Office's own report.
 
-### Carnegie (steel, vertical integration)
-- Born in Scotland in 1835; family emigrated to Pittsburgh in 1848. First job at 12 or 13 as a **bobbin boy** in a cotton mill,
-  $1.20 a week, 12 hours a day, six days a week. Then a bobbin factory ($2 a week), then **telegraph messenger** (1849 or 1850,
-  $2.50 a week). **Solid.**
-- **Edgar Thomson Steel Works**: first steel Aug 22, 1875, for 2,000 rails ordered by the Pennsylvania Railroad. Named for the
-  railroad's president, J. Edgar Thomson, to win the goodwill of his biggest customer. **Solid.** A great small story about salesmanship.
-- **Vertical integration:** coke from Henry Clay Frick's company (Frick later became chairman); iron ore from Minnesota's Mesabi Range
-  (from 1894); Great Lakes ore ships; his own railroads. By 1889 the company was an integrated network of supply, manufacturing and
-  transport (Britannica). **Solid** in outline; avoid exact acreage and ore tonnage.
-- The 1868 memo (St. Nicholas Hotel, New York, age 33): his income is $50,000 a year; "the amassing of wealth is one of the worst
-  species of idolatry"; he'll resign business at 35. Found among his papers after his death. He didn't resign. **Solid** (quote the
-  Carnegie Birthplace Museum transcription; wording varies slightly).
-- 1901 sale to J.P. Morgan for $480 million (Charles Schwab carried Carnegie's number on a slip of paper; Morgan: "I accept this
-  price"). Became U.S. Steel. **Solid** for the price; the quote is from secondary accounts (**hedge**: "the story goes").
-  Morgan's "richest man in the world" line: **avoid** or "reportedly." (This belongs at the end of Carnegie's arc, maybe Ep 2.)
+### 5a. Carnegie: the weaver's son (steel, vertical integration)
 
-### Rockefeller (oil, horizontal integration)
-- First job Sept 26, 1855, at 16, assistant bookkeeper at Hewitt & Tuttle, a produce firm in Cleveland. Celebrated "Job Day" every
-  Sept 26 for life. Bought a 10-cent red notebook, "Ledger A," and recorded every penny he earned, spent and gave away. **Solid.**
-  Pay: his own memoir says $50 for his first three months. **Hedge** the popular "50 cents a day."
-- The **solder story**: kerosene export cans got 40 drops of solder; he asked for 38 (some leaked), then 39 (none leaked); one drop saved
-  about $2,500 the first year. **This is his own retelling** and can't be checked; narrate it as "he liked to tell a story."
-- The **Cleveland Massacre**: Feb 17 to Mar 28, 1872, Standard Oil bought 22 of the 26 refineries in Cleveland (some sources: 21 of 26).
-  Rival refiners feared the South Improvement Company, a secret deal with railroads for rebates on Standard's oil and payments on
-  rivals' oil; Pennsylvania killed it on Apr 2, 1872. **Solid** for "22 of 26 in about six weeks" (flag the count).
-- The **Standard Oil Trust**, Jan 2, 1882: stockholders pooled about 40 companies under nine trustees. **Solid.** Share of U.S.
-  refining around 1880: 90 to 95% (Britannica). **Solid** ("about 90 percent").
-- Kerosene price: about 26 cents a gallon (1870) to about 8 cents (mid-1880s). **Hedge** (figures vary a little; much of this is cited by
-  pro-Rockefeller writers, so pair it with the critics' evidence). "Gasoline was dumped in rivers": **avoid** (forum-level sourcing).
+**Growing up**
+- Born Nov 25, 1835, in Dunfermline, Scotland, in a one-room weaver's cottage. His father, William, was a **handloom weaver** of
+  fine damask linen. **Solid.**
+- In 1847 a steam-powered weaving factory opened in Dunfermline and the handloom trade collapsed; hundreds of weavers were suddenly
+  not needed. The family moved to a smaller home and sold the looms. **Solid.** *The irony the script can use: a machine took his
+  father's job; the son would become the greatest machine-owner in America.*
+- His mother, **Margaret**, kept the family going: she opened a small shop and mended shoes. Frugal, hard-working, determined; he
+  was devoted to her all his life. **Solid.**
+- In 1848, when Andrew was 12, the family sold what they had and **borrowed £20** (a lot of money then) to sail to America. **Solid**
+  for the £20; the lender is given as a friend of his mother (Ella Henderson) or as his uncle's family; don't name one. The ship is
+  given as the *Wiscasset*; one timeline says *Aetna*: skip the name.
+- In Allegheny City (across the river from Pittsburgh) his father tried weaving again, failed, and took work in a cotton mill.
+  **Solid.**
+
+**First jobs and first money**
+- **Bobbin boy**, age 12 or 13: changing spools of thread in a cotton mill, 12 hours a day, six days a week, **$1.20 a week**. Then
+  $2 a week at a bobbin factory, tending a steam engine and the boiler. **Solid.**
+- **Telegraph messenger**, 1849 or 1850, **$2.50 a week**. He learned where every business office in Pittsburgh was and the faces of
+  the men in them, and he was one of the first in the office to read Morse code **by ear** instead of from the paper tape. That got
+  him promoted to operator. **Solid** for the job and pay; **hedge** "every office" ("he set out to learn...") and "first by ear"
+  (a fellow operator's memoir says he learned it sooner than the others).
+- **Saturday books:** Colonel James Anderson, a retired Pittsburgh businessman, let working boys borrow from his private library of
+  about 400 books, one each Saturday. Carnegie was one of them, and wrote to a newspaper, signing himself "a Working Boy," when the
+  library tried to exclude messenger boys. Years later he paid for a monument to Anderson, and he built more than 2,500 libraries.
+  **Solid** (the library count is Ep 2 material).
+- **The railroad:** Thomas A. Scott of the Pennsylvania Railroad hired him (1853, age 17 or 18) as his telegrapher and assistant,
+  **$35 a month**. **Solid.**
+- **His first investment:** Scott offered him ten shares of Adams Express (a shipping company) for about $500 he didn't have. His
+  mother **mortgaged the family's house** to raise it. His first dividend check, **$10**, made him say he'd found "the goose that
+  lays the golden eggs": money could earn money while he slept. **Solid** in outline; **hedge** the year (1853 or 1856) and the exact
+  wording of the quote (it varies).
+- From there: more investments (sleeping cars, oil, bridges, iron); by 33 he earned **$50,000 a year** (his own 1868 memo).
+
+**Steel and vertical integration** (as in round 1)
+- **Edgar Thomson Steel Works**: first steel Aug 22, 1875, for 2,000 rails ordered by the Pennsylvania Railroad; named for the
+  railroad's president to win his goodwill and his orders. **Solid.**
+- He owned the steps: coke (Frick), iron ore (the Mesabi Range in Minnesota), ore ships on the Great Lakes, his own railroads, the
+  mills. **Solid** in outline.
+- **The 1868 memo** (age 33): the amassing of wealth is "one of the worst species of idolatry"; he'll resign business at 35. He
+  didn't. **Solid** (quote the Carnegie Birthplace transcription).
+- **His mother again:** she lived with him in a New York hotel suite; he married Louise Whitfield only after Margaret died in 1886.
+  He married in April 1887, at 51. **Solid.** A humanizing aside, maybe for Ep 2.
+- 1901: sold to J.P. Morgan for $480 million; became U.S. Steel. **Solid** for the price (Ep 2 material).
+
+### 5b. Rockefeller: the con man's son (oil, horizontal integration)
+
+**Growing up**
+- Born July 8, 1839, in Richford, New York (a farm town), the second of six children. **Solid.**
+- His father, **William Avery Rockefeller**, called "Devil Bill": a traveling salesman who sold bottles of homemade "medicine" he
+  claimed could cure anything, even cancer; a horse trader with a reputation as a con man; away for months at a time. He secretly
+  married a second wife in 1856 under a fake name ("Dr. William Levingston") while still married to John's mother, and eventually
+  stopped coming home. **Solid.** John later said: "To my father I owe a great debt. He taught me the principles and methods of
+  business." **Solid** (quote). The popular line that his father cheated his sons in deals "to make 'em sharp" is **avoid** (not found
+  in a good source).
+- His mother, **Eliza Davison**: strict, deeply religious (Baptist), and careful with money; she ran the farm and the children
+  mostly alone. **Solid.** Her saying "willful waste makes woeful want" is **hedge** (one source).
+- **Turkeys and a loan:** as a boy he raised turkeys and sold them; with his savings, at his mother's urging, he lent **$50 to a
+  neighboring farmer at 7% interest**. A year later the farmer paid him back with interest, and he realized money could work for
+  him. **Solid** for the story; **hedge** his age (sources say 7, 12, 13 or 14: narrate "as a boy").
+- The family moved to the Cleveland area; at 16 he left high school and took a **ten-week bookkeeping course** at Folsom's
+  Commercial College (spring 1855). **Solid.**
+
+**First job and first money**
+- **Job Day**, Sept 26, 1855, age 16: assistant bookkeeper at Hewitt & Tuttle, a produce firm. He celebrated the date every year,
+  more than his birthday. **Solid.**
+- **Ledger A:** a 10-cent red notebook where he wrote down every penny: what he earned, what he spent, what he gave. Its first
+  entries include a penny each Sunday for Sunday school; he gave part of his small pay to his Baptist church (6% to 10%, by different
+  accounts). **Solid** for the ledger; **hedge** the percentage.
+- **His own business at 19 (1859):** a produce-trading partnership with Maurice Clark. He had about $800 saved and **borrowed $1,000
+  from his father, at 10% interest.** **Solid.** *A line the script can use: even his father charged him interest.*
+- **Oil:** oil was struck in western Pennsylvania in 1859; by 1863 Clark and Rockefeller were in the refining business in Cleveland.
+  In February 1865, at 25, he **bought out his partners at an auction, for $72,500**, bidding against Clark himself. **Solid.**
+- 1870: the Standard Oil Company. Then (as in round 1): the 39 drops of solder (his own story); 22 of 26 Cleveland refineries in
+  about six weeks in 1872, helped by railroad rebates; the Standard Oil Trust in 1882 (nine trustees, about 40 companies); about 90%
+  of U.S. refining. **Solid** with the flags already listed.
+- **How he saw it (for the both-readings card):** he said he was bringing order to a wild, wasteful business, where oil prices crashed
+  and boomed and small refiners went broke; critics said he crushed honest competitors with secret deals. Both are on the record.
+
+**What the two share (for the script's rhythm):** a father who couldn't provide (one replaced by a machine, one who sold fake cures
+and left); a mother who held the family together and counted every penny; a first job before 17; a first investment that taught them
+money could make money (a $10 dividend; $50 lent at 7%).
 
 ### Entrepreneurship, the free market, laissez-faire
 - Federal land grants to railroads: about 130 million acres (states added about 50 million), 1850 to 1871. **Solid.** Some sources
@@ -172,10 +254,11 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 - **Brooklyn Bridge**, opened May 24, 1883: about 150,000 people crossed on the first day, with about 1,800 vehicles. Emily Roebling
   (the chief engineer's wife, who ran much of the work after he fell ill) crossed first. The world's first steel-wire suspension bridge.
   Pedestrian toll: one cent on opening day (some say three cents after). **Solid** on crowds; **hedge** the toll.
-- **The bad wire:** contractor J. Lloyd Haigh's rejected wire was swapped for tested wire on its way to the bridge; possibly over
-  200 tons went into the cables; Washington Roebling added 150 extra wires to each cable rather than tear them out; the bridge was
-  rated about four times as strong as needed. Haigh later went to prison, for other frauds. **Solid** in outline; **hedge** the tonnage
-  ("tons of it"). This is the episode's hook.
+- **The bad wire:** see 4a for the step-by-step. Approved wagonloads were diverted to another building, the good wire swapped for
+  rejected wire, and sent on with the same certificate; the good wire went back to be tested again. Caught in 1878 because the pile of
+  rejected wire never grew. Possibly over 200 tons went in. Roebling added 150 wires per cable (Haigh had to supply them free). Designed
+  about six times stronger than needed; afterward about four or five times. Haigh went to Sing Sing for forgery. **Solid** in outline;
+  **hedge** the tonnage ("tons") and the safety factor ("four or five times").
 - **Bridge stampede, May 30, 1883:** a rumor that the bridge was collapsing caused a crush that killed 12 people. **Solid.** Real victims:
   if used, in the quiet palette with no figures of the dead (the channel's respect rule). Probably not in Episode 1.
 - **Havemeyers & Elder**, Williamsburg: burned Jan 8, 1882 ($1.5 million loss; about 1,000 workers out of work); rebuilt in brick and
@@ -185,12 +268,16 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
   at cost so men could replace lost salt. **Hedge** (local blog sourcing; check the *Brooklyn Daily Eagle*).
 - **Sugar Refineries Company**, Oct 27, 1887: the sugar refiners combined into a trust under Henry O. Havemeyer. Reorganized as the
   American Sugar Refining Company in 1891; by 1907 it controlled about 98% of U.S. sugar refining. **Solid** for 1887; **hedge** the 98%.
-- **Lead for Episode 5 (labor):** in April 1886 sugar workers in Brooklyn struck for a ten-hour day (down from twelve) and $1.75 a day;
+- **Moved to the labor episode:** in April 1886 sugar workers in Brooklyn struck for a ten-hour day (down from twelve) and $1.75 a day;
   the *New York Times* reported a near battle at a refinery gate; the strike failed. **Hedge** (which refinery: verify in the *Eagle*).
   Michael could live this.
 
 ## 6. Story bank (the hooks, ranked for this episode)
 
+0. **The two childhoods** (new, round 2): a steam factory takes Carnegie's father's trade; Rockefeller's father sells fake cures and
+   keeps a second family. Each mother holds things together. **Solid.**
+0. **The mortgage and the goose:** Carnegie's mother mortgages the house for his first stock; the $10 dividend. **Solid.**
+0. **Even his father charged him interest:** Rockefeller's $1,000 loan at 10%. **Solid.**
 1. **The lie inside the bridge** (hook; ties to *gilded*): bad wire hidden in the cables, fixed by adding more. **Solid.**
 2. **The day of two noons** (railroads were so powerful they set the clocks). **Solid.**
 3. **Rockefeller's Job Day and Ledger A** (a teenager who wrote down every penny). **Solid.**
@@ -231,6 +318,15 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 | Patents | 437,000 by 1890 (Patent Office) | avoid the "36,000 vs 440,000" split |
 | Refinery heat | local blogs | verify in the *Brooklyn Daily Eagle* before narrating |
 | Sugar Trust share | ~98% by 1907 | "most of the country's sugar" in 1887 |
+| Carnegie's £20 | lender named differently (Ella Henderson; the Lauder family) | "borrowed twenty pounds" |
+| Carnegie's first stock | 1853 or 1856; $500 or $600 for ten shares | "about $500"; skip the year |
+| "Goose that lays the golden eggs" | wording varies | "he called it the goose that lays the golden eggs" |
+| Reading Morse by ear | a fellow operator's memoir | "he learned to read the clicks by ear" |
+| Rockefeller's $50 loan | age given as 7, 12, 13 or 14 | "as a boy" |
+| Rockefeller's tithe | 6% or 10% | "he gave part of every paycheck to his church" |
+| "To my father I owe a great debt" | Rockefeller's own words | quote as his |
+| The wire's safety factor | designed ~6x; afterward 4x or 5x by different accounts | "still about four or five times as strong as it needed to be" |
+| Wires per cable | 5,434 (most), others 5,282 or 6,289 | "more than five thousand wires" |
 
 ## 9. Archival images to look for (period, public domain)
 
@@ -252,14 +348,20 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 | laissez-faire | LESS-ay FAIR |
 | Roebling | ROHB-ling |
 | Haigh | HAYG |
-| Carnegie | car-NAY-gee (his own) or CAR-nuh-gee (common): **your call** |
+| Carnegie | car-NAY-gee (how he said it; decided Nov 7) |
+| Dunfermline | dun-FERM-lin |
+| Allegheny | AL-uh-gay-nee |
 
-## 11. Questions for you
+## 11. Decided, and still open
 
-1. **Hook:** open on the bad wire inside the Brooklyn Bridge? (It's documented, visual, and literally "gilded.")
-2. **Sherman Act and *E.C. Knight*:** cut from Episode 1 and pay off later with the Sugar Trust case, as proposed?
-3. **Carnegie:** "car-NAY-gee" (how he said it) or "CAR-nuh-gee" (how most Americans say it)?
-4. **The 1886 sugar strike:** save it for Michael in Episode 5?
+Decided (Nov 7): open on the bridge and explain the wire step by step in the last chapter; Carnegie said car-NAY-gee; the Sherman
+Act, *E.C. Knight* and the 1886 strike move to later episodes; more time for both men's backstories.
+
+Still open:
+1. **The wire:** keep the one-line tease at 0:00 and the full explanation at the end (as above), or explain it up front?
+2. **Rockefeller's father:** the bigamy is documented and memorable, but it's adult material for 8th graders. Say it plainly ("he
+   secretly had a second wife under a fake name"), or just "a con man who stayed away for months"?
+3. **Carnegie's marriage after his mother's death:** keep for Episode 2 (where his money goes), or use here?
 
 ## Sources
 
@@ -316,3 +418,21 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 - Greenpointers, the Havemeyer refinery: https://greenpointers.com/2016/06/14/a-history-of-greenpoint-in-25-buildings-6-the-havemeyer-sugar-refinery/
 - NYU finding aid, American Sugar Refining Company records: https://findingaids.library.nyu.edu/cbh/arms_2008_042_american_sugar
 - Patent Office annual report, 1889: https://ipmall.info/node/1011
+- Andrew Carnegie (Wikipedia), early life: https://en.wikipedia.org/wiki/Andrew_Carnegie
+- Carnegie Birthplace Museum, key dates: https://www.carnegiebirthplace.com/s/Key-Dates-p3tn.pdf
+- PBS American Experience, Carnegie biography: https://www.pbs.org/wgbh/americanexperience/features/carnegie-biography/
+- Colonel James Anderson Monument: https://en.wikipedia.org/wiki/Colonel_James_Anderson_Monument
+- LA Public Library, Carnegie and libraries: https://www.lapl.org/fa/node/47719
+- National Humanities Center, Carnegie's *How I Served My Apprenticeship*: https://nationalhumanitiescenter.org/pds/gilded/progress/text7/carnegie.pdf
+- Carnegie Birthplace Museum, communication handout (reading Morse by ear): https://www.carnegiebirthplace.com/s/Carnegie-Creators-Communication.pdf
+- Louise Whitfield Carnegie: https://en.wikipedia.org/wiki/Louise_Whitfield_Carnegie
+- Carnegie Hall, Louise and Andrew Carnegie: https://carnegiehall.org/Explore/Articles/2021/02/26/Louise-and-Andrew-Carnegie
+- William Rockefeller Sr.: https://en.wikipedia.org/wiki/William_Rockefeller_Sr.
+- History.com, Rockefeller's con-man father: https://www.history.com/articles/john-d-rockefeller-father-con-man-origins
+- HistoryNet, Rockefeller's father: https://historynet.com/john-d-rockefeller-sr-s-pap-was-a-con-man/
+- PBS American Experience, John D. Rockefeller: https://www.pbs.org/wgbh/americanexperience/features/rockefellers-john/
+- Maurice B. Clark: https://en.wikipedia.org/wiki/Maurice_B._Clark
+- Time, "Ledger Man": https://content.time.com/time/subscriber/article/0,33009,731797,00.html
+- STRUCTURE magazine, Brooklyn Bridge part 2 (the wire): https://www.structuremag.org/article/brooklyn-bridge-part-2/
+- *The Great Bridge*, "Wire Fraud" chapter: https://erenow.org/common/the-great-bridge-the-epic-story-of-the-building-of-the-brooklyn-bridge/20.php
+- Brooklyn Bridge (Wikipedia): https://en.wikipedia.org/wiki/Brooklyn_Bridge
