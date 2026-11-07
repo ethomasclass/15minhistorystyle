@@ -54,7 +54,7 @@ const desk = () => `<div style="position:absolute;inset:0;background:radial-grad
 /** Cross-section of a main cable in an x-ray circle: 19 strands (1 + 6 + 12), each a hex bundle of 37 wires, a wrapping wire
  *  around the outside. `bad` (0..1) turns the wires of one strand rust, one by one: the wire that failed its test.
  *  (Schematic: the real cable has about 278 wires a strand, 5,434 in all; RESEARCH.md.) */
-function cableXray({cx, cy, r, open = 1, bad = 0, seed = 11}) {
+function cableXray({cx, cy, r, open = 1, bad = 0, seed = 11, extra = 0}) {
   const R = r * ease(open); if (R < 1) return '';
   const strandR = r * 0.168, wr = strandR / 7.2, rr = rng(seed);
   const hexWires = []; for (let q = -3; q <= 3; q++) for (let s = -3; s <= 3; s++) { const t = -q - s; if (Math.abs(t) > 3) continue;
@@ -74,7 +74,8 @@ function cableXray({cx, cy, r, open = 1, bad = 0, seed = 11}) {
   return `<defs><clipPath id="${id}"><circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(R)}"/></clipPath></defs>
     <g clip-path="url(#${id})"><rect x="${f1(cx - r)}" y="${f1(cy - r)}" width="${f1(2 * r)}" height="${f1(2 * r)}" fill="#0E1817" opacity=".97"/>
       <circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(strandR * 5.15)}" fill="none" stroke="#7FA7A0" stroke-width="${f1(wr * 1.6)}" stroke-dasharray="${f1(wr * 1.2)} ${f1(wr * 0.5)}"/>
-      ${parts.join('')}</g>
+      ${parts.join('')}${extra > 0 ? Array.from({length: 64}, (_, i) => { const a = i / 64 * TAU, rr2 = strandR * 5.55;
+        return `<circle cx="${f1(cx + Math.cos(a) * rr2)}" cy="${f1(cy + Math.sin(a) * rr2)}" r="${f1(wr * 1.1)}" fill="${C.teal}" opacity="${clamp01(extra * 2 - i / 64).toFixed(2)}"/>`; }).join('') : ''}</g>
     <circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(R)}" fill="none" stroke="${C.ink}" stroke-width="10"/>
     <circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(R)}" fill="none" stroke="${C.teal}" stroke-width="5"/>`;
 }
