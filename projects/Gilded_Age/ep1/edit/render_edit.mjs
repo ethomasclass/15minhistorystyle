@@ -7,12 +7,14 @@ import path from 'node:path'; import fs from 'node:fs'; import {fileURLToPath} f
 const here = path.dirname(fileURLToPath(import.meta.url));
 const [key, a1, a2, a3] = process.argv.slice(2);
 const audio = path.join(here, '..', 'public', 'audio');
-const ch = fs.readdirSync(audio).find((f) => f.startsWith(key + '_') && f.endsWith('.words.json')).replace('.words.json', '');
-const words = JSON.parse(fs.readFileSync(path.join(here, '..', 'public', 'audio', ch + '.words.json'), 'utf8'));
+const wf = fs.readdirSync(audio).find((f) => f.startsWith(key + '_') && f.endsWith('.words.json'));
+const ch = wf ? wf.replace('.words.json', '') : key;   // cards with no narration (the title) have no words file
+let words = wf ? JSON.parse(fs.readFileSync(path.join(audio, wf), 'utf8')) : null;
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 1920, height: 1080}});
 page.on('pageerror', (e) => { console.error('page error:', e.message); process.exit(1); });
 await page.goto('file://' + path.join(here, 'edit.html'));
+if (!words) words = {duration: await page.evaluate((k) => EDITS[k]().dur, key), words: []};
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
 const shoot = async (T, file, type) => { await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: 82} : {})}); };
 if (a1 === '--stills') {
