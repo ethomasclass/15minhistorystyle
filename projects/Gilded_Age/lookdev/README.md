@@ -122,3 +122,23 @@ pulls back. Note for the script: say "22 of his 26 rivals" to match the picture 
   wiping his brow: "hot work: ten hours or more"); barrels packed on the ground floor. Brick walls, plank floors, riveted iron,
   daylight falling in through tall windows, Manhattan across the river. The floor order is the usual sequence, simplified (noted
   in the file).
+
+## Round 9: materials instead of a filter, and the weaver's son
+
+- **The round-8 mottle filter is off** (it painted the same noise on everything; still available with `{force: true}`). In its place,
+  **`MAT` in `rig.js`**, a material for each kind of surface: `brick` (bricks that vary one by one, mortar, soot at the foot or the
+  roofline), `stone` (irregular blocks, each its own tone), `planks` (boards that vary board by board, knots), `iron` (a highlight so
+  cylinders read round, seams of rivets), `water` (darker with depth, ripples drifting at different speeds, glints), `smoke`
+  (billowing puffs that rise, swell, drift and thin), `ground` (pebbles and tufts along a surface), `trees` (firs and round crowns
+  along a ridge). `MAT_DEFS` holds their gradients.
+- Applied: the explainers (red ore bands in the mine pit, a lake that looks like water, a riveted iron ore boat, brick coke ovens and
+  mill, iron furnaces and stoves, brick refineries with iron tanks, a river, plank freight office, tree lines on every ridge, pebbled
+  ground) and the refinery (a brick back wall sooted at the top, plank floors, iron tanks, char cylinders and pans, water at the
+  wharf, a plank-hulled ship).
+- **`loom.js`, the weaver's son (18 s)**: Dunfermline in the 1840s. The camera starts in the Carnegies' stone cottage: William at
+  his hand loom (front view: warp threads, the shuttle flying across, the beater packing each thread), Andrew about 11 watching, his
+  mother mending by the hearth. It pans down the stone street (smoking chimneys, the abbey on its hill) to the steam weaving factory
+  of 1847 (brick, rows of power looms, belts from a turning line shaft, a boiler and a spinning flywheel, a tall smoking chimney,
+  women tending the looms), then back to the cottage: the loom has stopped, the father sits still, his son beside him. "a machine
+  took his father's trade." William and Andrew are solid silhouettes with no face detail, tagged (no photographs survive of the
+  father at work; the channel's rule for real people).

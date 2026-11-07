@@ -338,3 +338,87 @@ const TEX_PATTERNS = `<pattern id="brickT" width="24" height="12" patternUnits="
 // The visible world rectangle of a camera layer (zoom z around world point ux, uy, with parallax p).
 function visibleRect(c, p, pad = 80) { const zp = 1 + (c.z - 1) * p, ax = 960 + (c.ux - 960) * p, ay = 540 + (c.uy - 540) * p; return [ax - 960 / zp - pad, ay - 540 / zp - pad, 1920 / zp + 2 * pad, 1080 / zp + 2 * pad]; }
 if (typeof window !== 'undefined') Object.assign(window, {texDef, visibleRect});
+
+/* ---------- materials: each surface its own look (round 9) ---------- */
+// The round-8 mottle filter treated everything the same; these give each material its own character instead.
+// MAT_DEFS goes inside a scene's <defs> once.
+const MAT_DEFS = `<linearGradient id="matIronH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.35"/><stop offset="0.28" stop-color="#DFE0D6" stop-opacity="0.13"/><stop offset="0.45" stop-color="#DFE0D6" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></linearGradient>` +
+  `<linearGradient id="matSootB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.45"/></linearGradient>` +
+  `<linearGradient id="matSootT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.4"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>` +
+  ['3E5F5A', '5F857F', '2B4744', 'A3BAB2', '1F3735', 'DFE0D6'].map((c) => `<radialGradient id="puff${c}"><stop offset="0" stop-color="#${c}" stop-opacity="1"/><stop offset="0.55" stop-color="#${c}" stop-opacity="0.7"/><stop offset="1" stop-color="#${c}" stop-opacity="0"/></radialGradient>`).join('') +
+  `<pattern id="mortar" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0,0.5 H24 M0,6.5 H24 M0.5,0 V6 M12.5,6 V12" stroke="#000" stroke-width="1" fill="none"/></pattern>`;
+const shade = (hex, k) => { // lighten (k > 0) or darken (k < 0) a #rrggbb colour
+  const n = parseInt(hex.slice(1), 16), f = (v) => Math.max(0, Math.min(255, Math.round(k > 0 ? v + (255 - v) * k : v * (1 + k))));
+  return '#' + [n >> 16, (n >> 8) & 255, n & 255].map(f).map((v) => v.toString(16).padStart(2, '0')).join('');
+};
+const MAT = {
+  // brick: individual bricks a little lighter or darker than the wall, mortar lines, soot near the ground or the roofline
+  brick(x, y, w, h, {base = '#1F3532', seed = 1, bw = 24, bh = 12, vary = 0.3, soot = 'bottom', op = 1} = {}) {
+    const r = rng(seed), s = [`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" fill="${base}"/>`];
+    for (let row = 0, yy = y; yy < y + h; row++, yy += bh) for (let xx = x - (row % 2 ? bw / 2 : 0); xx < x + w; xx += bw) {
+      if (r() > vary) continue;
+      const k = (r() - 0.5) * 0.36, x0 = Math.max(x, xx), x1 = Math.min(x + w, xx + bw - 1);
+      if (x1 > x0) s.push(`<rect x="${f1(x0)}" y="${f1(yy + 1)}" width="${f1(x1 - x0)}" height="${f1(Math.min(bh - 1, y + h - yy - 1))}" fill="${shade(base, k)}"/>`);
+    }
+    s.push(`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" fill="url(#mortar)" opacity="0.5"/>`);
+    if (soot === 'bottom') s.push(`<rect x="${f1(x)}" y="${f1(y + h * 0.55)}" width="${f1(w)}" height="${f1(h * 0.45)}" fill="url(#matSootB)"/>`);
+    if (soot === 'top') s.push(`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h * 0.35)}" fill="url(#matSootT)"/>`);
+    return `<g opacity="${op}">${s.join('')}</g>`;
+  },
+  // rough stone: irregular blocks in rows, each its own tone, deep joints
+  stone(x, y, w, h, {base = '#26403C', seed = 2, bh = 22, vary = 0.4} = {}) {
+    const r = rng(seed), s = [`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" fill="${shade(base, -0.35)}"/>`];
+    for (let yy = y; yy < y + h; yy += bh) { let xx = x - r() * 20; const rh = Math.min(bh, y + h - yy);
+      while (xx < x + w) { const bw2 = 26 + r() * 40, x0 = Math.max(x, xx + 1.5), x1 = Math.min(x + w, xx + bw2 - 1.5);
+        if (x1 > x0) s.push(`<rect x="${f1(x0)}" y="${f1(yy + 1.5)}" width="${f1(x1 - x0)}" height="${f1(rh - 3)}" rx="3" fill="${shade(base, (r() - 0.5) * vary)}"/>`);
+        xx += bw2; } }
+    return s.join('');
+  },
+  // planks: boards that vary board by board, with a seam between each and the odd knot
+  planks(x, y, w, h, {base = '#1A2B29', seed = 3, size = 14, vertical = false} = {}) {
+    const r = rng(seed), s = [`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" fill="${base}"/>`], L = vertical ? w : h;
+    for (let p = 0; p < L; p += size) { const k = (r() - 0.5) * 0.3, sz = Math.min(size - 1, L - p);
+      s.push(vertical ? `<rect x="${f1(x + p)}" y="${f1(y)}" width="${f1(sz)}" height="${f1(h)}" fill="${shade(base, k)}"/>` : `<rect x="${f1(x)}" y="${f1(y + p)}" width="${f1(w)}" height="${f1(sz)}" fill="${shade(base, k)}"/>`);
+      if (r() < 0.25) { const kx = vertical ? x + p + size / 2 : x + r() * w, ky = vertical ? y + r() * h : y + p + size / 2; s.push(`<ellipse cx="${f1(kx)}" cy="${f1(ky)}" rx="2.5" ry="1.4" fill="${shade(base, -0.4)}"/>`); } }
+    return s.join('');
+  },
+  // iron: a round highlight so a cylinder reads as round, seams of rivets
+  iron(x, y, w, h, {base = '#0B1615', rx = 0, seams = 60, rivet = 7} = {}) {
+    const s = [`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${rx}" fill="${base}"/>`, `<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${rx}" fill="url(#matIronH)"/>`];
+    for (let yy = y + seams / 2; yy < y + h - 6; yy += seams) { s.push(`<rect x="${f1(x + 2)}" y="${f1(yy)}" width="${f1(w - 4)}" height="1.5" fill="#000" opacity="0.5"/>`); for (let xx = x + rivet; xx < x + w - 3; xx += rivet * 2) s.push(`<circle cx="${f1(xx)}" cy="${f1(yy + 4)}" r="1.4" fill="#DFE0D6" opacity="0.18"/>`); }
+    return s.join('');
+  },
+  // water: darker with depth, ripple bands that drift at different speeds, a few glints
+  water(x, y, w, h, t, {top = '#2B4A47', bottom = '#0E1A19', seed = 4, glint = '#DFE0D6', n = 60} = {}) {
+    const r = rng(seed), id = `wg${seed}`;
+    const s = [`<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient><rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" fill="url(#${id})"/>`];
+    for (let i = 0; i < n; i++) { const d = r() ** 1.8, yy = y + 4 + d * Math.min(h, 400), sp = 6 + (1 - d) * 14, len = (20 + r() * 70) * (1 - d * 0.5), xx = x + ((r() * w + t * sp * (r() < 0.5 ? 1 : -0.6)) % w + w) % w;
+      s.push(`<rect x="${f1(xx)}" y="${f1(yy)}" width="${f1(len)}" height="${f1(1.5 + (1 - d) * 1.5)}" rx="1" fill="${r() < 0.6 ? shade(top, 0.25) : shade(bottom, -0.3)}" opacity="${f1((0.5 - d * 0.35) * 100) / 100}"/>`); }
+    for (let i = 0; i < 8; i++) { const gx = x + r() * w, gy = y + 4 + r() * 40, a = Math.max(0, Math.sin(t * (2 + r() * 2) + i * 2.3)); s.push(`<rect x="${f1(gx)}" y="${f1(gy)}" width="${f1(6 + r() * 10)}" height="1.5" fill="${glint}" opacity="${f1(0.55 * a * 100) / 100}"/>`); }
+    return s.join('');
+  },
+  // smoke: billowing puffs that rise, swell, drift with the wind and thin out
+  smoke(x, y, t, {col = '3E5F5A', k = 1, n = 7, rise = 170, drift = 120, speed = 6, seed = 5} = {}) {
+    const r = rng(seed), s = [];
+    for (let i = 0; i < n; i++) { const ph = (t / speed + i / n) % 1, a = 0.6 * Math.pow(1 - ph, 1.3) * Math.min(1, ph * 5), R0 = (9 + ph * 46) * k;
+      const cx = x + ph * drift * k + 6 * Math.sin(t * 0.7 + i), cy = y - ph * rise * k;
+      for (let j = 0; j < 3; j++) { const ox = (r() - 0.5) * R0 * 0.9, oy = (r() - 0.5) * R0 * 0.5, rr = R0 * (0.6 + r() * 0.5); s.push(`<circle cx="${f1(cx + ox)}" cy="${f1(cy + oy)}" r="${f1(rr)}" fill="url(#puff${col})" opacity="${f1(a * 100) / 100}"/>`); } }
+    return s.join('');
+  },
+  // the ground's edge: pebbles and a few tufts of grass along a surface line
+  ground(x0, x1, y, {base = '#0D0C09', seed = 6, tufts = true} = {}) {
+    const r = rng(seed), s = [];
+    for (let x = x0; x < x1; x += 6 + r() * 14) { s.push(`<ellipse cx="${f1(x)}" cy="${f1(y + 3 + r() * 16)}" rx="${f1(1.5 + r() * 3)}" ry="${f1(1 + r() * 1.6)}" fill="${shade(base, 0.12 + r() * 0.12)}"/>`);
+      if (tufts && r() < 0.12) s.push(`<path d="M${f1(x)},${y + 1} l-3,-8 M${f1(x)},${y + 1} l1,-10 M${f1(x)},${y + 1} l4,-7" stroke="${base}" stroke-width="1.5" fill="none"/>`); }
+    return s.join('');
+  },
+  // trees along a ridge: pointed firs and round crowns, sized for the distance
+  trees(points, {col = '#2B4744', seed = 7, size = 26, every = 0.45} = {}) {
+    const r = rng(seed), s = [];
+    for (let i = 0; i < points.length - 1; i++) { const [xa, ya] = points[i], [xb, yb] = points[i + 1];
+      for (let u = 0; u < 1; u += 0.18) { if (r() > every) continue; const x = xa + (xb - xa) * u, y = ya + (yb - ya) * u + 4, hh = size * (0.6 + r() * 0.7);
+        s.push(r() < 0.6 ? `<path d="M${f1(x - hh * 0.3)},${f1(y)} L${f1(x)},${f1(y - hh)} L${f1(x + hh * 0.3)},${f1(y)} Z" fill="${col}"/>` : `<circle cx="${f1(x)}" cy="${f1(y - hh * 0.4)}" r="${f1(hh * 0.4)}" fill="${col}"/>`); } }
+    return s.join('');
+  },
+};
+if (typeof window !== 'undefined') Object.assign(window, {MAT, MAT_DEFS, shade});

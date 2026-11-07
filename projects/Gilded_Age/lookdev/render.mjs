@@ -70,6 +70,12 @@ const JOBS = [
   {name: 'r8_rf_char', clip: 'refinery_tour', t: 9.2},
   {name: 'r8_rf_pans', clip: 'refinery_tour', t: 10.6},
   {name: 'r8_rf_michael', clip: 'refinery_tour', t: 12.5},
+  // round 9: the weaver's son
+  {name: 'r9_lm_loom', clip: 'loom_weaver', t: 2.5},
+  {name: 'r9_lm_street', clip: 'loom_weaver', t: 6.4},
+  {name: 'r9_lm_factory', clip: 'loom_weaver', t: 8.4},
+  {name: 'r9_lm_engine', clip: 'loom_weaver', t: 11},
+  {name: 'r9_lm_idle', clip: 'loom_weaver', t: 16},
 ];
 
 const filter = process.argv[2];

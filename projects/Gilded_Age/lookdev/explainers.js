@@ -27,13 +27,13 @@ function exDefs(t) {
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
     <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${Math.floor(t * 12) % 50}"/><feColorMatrix type="saturate" values="0"/></filter>
     <radialGradient id="excloud"><stop offset="0" stop-color="#A3BAB2" stop-opacity="0.16"/><stop offset="1" stop-color="#A3BAB2" stop-opacity="0"/></radialGradient>
-    ${TEX_PATTERNS}${grad('exmist', [['0', '#A3BAB2', 0], ['0.5', '#A3BAB2', 0.3], ['1', '#A3BAB2', 0]])}</defs>`;
+    ${TEX_PATTERNS}${MAT_DEFS}${grad('exmist', [['0', '#A3BAB2', 0], ['0.5', '#A3BAB2', 0.3], ['1', '#A3BAB2', 0]])}</defs>`;
 }
-const smoke = (x, y, t, col, k = 1, n = 6) => { let s = ''; for (let i = 0; i < n; i++) { const p = ((t / 6 + i / n) % 1); s += `<circle cx="${f1(x + p * 120 * k)}" cy="${f1(y - p * 160 * k)}" r="${f1((10 + p * 40) * k)}" fill="${col}" opacity="${f1(0.45 * (1 - p) * Math.min(1, p * 6))}" filter="url(#soft)"/>`; } return s; };
-function farHills(w, col, base, seed, amp = 120) {
-  const r = rng(seed); let d = `M-2000,${base + 400} L-2000,${base}`;
-  for (let x = -2000; x <= w + 2000; x += 140) d += ` L${x},${f1(base - r() * amp - 20)}`;
-  return `<path d="${d} L${w + 2000},${base + 400} Z" fill="${col}"/>`;
+const smoke = (x, y, t, col, k = 1, n = 6) => MAT.smoke(x, y, t, {col: (col || '#3E5F5A').slice(1).toUpperCase(), k, n: n + 1, seed: Math.round(x) % 97});
+function farHills(w, col, base, seed, amp = 120, trees = 0) {
+  const r = rng(seed), ridge = []; let d = `M-2000,${base + 400} L-2000,${base}`;
+  for (let x = -2000; x <= w + 2000; x += 140) { const y = base - r() * amp - 20; d += ` L${x},${f1(y)}`; ridge.push([x, y]); }
+  return `<path d="${d} L${w + 2000},${base + 400} Z" fill="${col}"/>` + (trees ? MAT.trees(ridge, {col, seed: seed + 50, size: trees}) : '');
 }
 // screen-space labels
 // Text sizes (round 8: bigger, so a phone screen can read them): tags 28 px mono, handwriting x1.3, cards 36 px.
@@ -66,7 +66,7 @@ let TEXN = 0;
 const layerAt = (c, p, body, tex = null) => {
   const zp = 1 + (c.z - 1) * p, ax = 960 + (c.ux - 960) * p, ay = 540 + (c.uy - 540) * p;
   let inner = body;
-  if (tex) { const id = `tx${TEXN++}`, [x, y, w, h] = visibleRect(c, p); inner = `<defs>${texDef(id, x, y, w, h, tex)}</defs><g filter="url(#${id})">${body}</g>`; }
+  if (tex && tex.force) { const id = `tx${TEXN++}`, [x, y, w, h] = visibleRect(c, p); inner = `<defs>${texDef(id, x, y, w, h, tex)}</defs><g filter="url(#${id})">${body}</g>`; }
   return `<g transform="translate(960,540) scale(${zp.toFixed(4)}) translate(${f1(-ax)},${f1(-ay)})">${inner}</g>`;
 };
 // slow clouds across the sky, so it isn't one flat gradient
@@ -85,6 +85,8 @@ const VI = [ // the chain, left to right: x centre, tag, a handwritten owner's n
 function viMine(t) { // an open-pit iron mine: terraces, a steam shovel swinging, ore cars rolling out
   const s = [], c = EX.set, x0 = 250, x1 = 1050;
   s.push(`<path d="M${x0},${GROUND} L${x0 + 80},${GROUND + 40} L${x0 + 160},${GROUND + 40} L${x0 + 240},${GROUND + 80} L${x1 - 240},${GROUND + 80} L${x1 - 160},${GROUND + 40} L${x1 - 80},${GROUND + 40} L${x1},${GROUND} Z" fill="#081010"/>`);
+  for (const [dy, op] of [[14, 0.5], [30, 0.35], [58, 0.45]]) s.push(`<path d="M${x0 + dy * 2},${GROUND + dy} L${x1 - dy * 2},${GROUND + dy}" stroke="#3A2E28" stroke-width="${dy % 2 ? 3 : 5}" opacity="${op}"/>`); // bands of red ore in the pit walls
+  s.push(`<path d="M${x0 + 250},${GROUND + 80} q140,-30 300,0 Z" fill="#3A2E28" opacity="0.8"/>`);
   const sx = 640, sy = GROUND + 80, a = 18 * Math.sin(TAU * t / 3.2);
   s.push(`<rect x="${sx - 40}" y="${sy - 50}" width="80" height="38" fill="${c}"/><rect x="${sx - 46}" y="${sy - 14}" width="92" height="14" rx="7" fill="${c}"/><rect x="${sx + 10}" y="${sy - 76}" width="10" height="28" fill="${c}"/>` + smoke(sx + 15, sy - 80, t, '#3E5F5A', 0.6, 4));
   s.push(`<g transform="rotate(${f1(-35 + a)}, ${sx + 30}, ${sy - 40})">${line([[sx + 30, sy - 40], [sx + 150, sy - 120]], c, 9)}${line([[sx + 110, sy - 96], [sx + 140, sy - 30]], c, 7)}<path d="M${sx + 125},${sy - 36} l30,0 l-6,24 l-22,0 Z" fill="${c}"/></g>`);
@@ -98,13 +100,12 @@ function viMine(t) { // an open-pit iron mine: terraces, a steam shovel swinging
 }
 function viLake(t) { // a lake: an ore dock with chutes, a long ore boat
   const s = [], c = EX.set;
-  s.push(`<rect x="1150" y="${GROUND + 10}" width="1150" height="300" fill="${EX.water}"/>`);
-  for (let i = 0; i < 30; i++) s.push(`<rect x="${1160 + ((i * 97 + t * 14) % 1120)}" y="${GROUND + 20 + (i * 37) % 120}" width="${20 + (i * 13) % 40}" height="2" fill="#A3BAB2" opacity="0.18"/>`);
+  s.push(MAT.water(1150, GROUND + 6, 1150, 400, t, {top: '#3E5F5A', bottom: '#0D1817', seed: 41}));
   s.push(`<rect x="1180" y="${GROUND - 160}" width="200" height="14" fill="${c}"/>`);
   for (let x = 1190; x < 1380; x += 28) s.push(`<rect x="${x}" y="${GROUND - 150}" width="8" height="170" fill="${c}"/>`);
   for (let x = 1220; x < 1380; x += 46) s.push(line([[x, GROUND - 146], [x + 50, GROUND - 90]], c, 5));
   const bob = 3 * Math.sin(TAU * t / 3.6), bx = 1430 + 30 * Math.sin(TAU * t / 20);
-  s.push(`<g transform="translate(0,${f1(bob)})"><path d="M${f1(bx)},${GROUND - 26} L${f1(bx + 640)},${GROUND - 26} L${f1(bx + 610)},${GROUND + 14} L${f1(bx + 20)},${GROUND + 14} Z" fill="${c}"/>` +
+  s.push(`<g transform="translate(0,${f1(bob)})"><clipPath id="hull1"><path d="M${f1(bx)},${GROUND - 26} L${f1(bx + 640)},${GROUND - 26} L${f1(bx + 610)},${GROUND + 14} L${f1(bx + 20)},${GROUND + 14} Z"/></clipPath><g clip-path="url(#hull1)">${MAT.iron(bx, GROUND - 26, 640, 40, {base: c, seams: 16, rivet: 9})}</g>` +
     `<rect x="${f1(bx + 30)}" y="${GROUND - 66}" width="60" height="40" fill="${c}"/><rect x="${f1(bx + 40)}" y="${GROUND - 84}" width="40" height="18" fill="${c}"/>` +
     `<rect x="${f1(bx + 560)}" y="${GROUND - 70}" width="50" height="44" fill="${c}"/><rect x="${f1(bx + 575)}" y="${GROUND - 120}" width="16" height="50" fill="${c}"/>` +
     [0, 1, 2, 3, 4, 5, 6].map((k) => `<path d="M${f1(bx + 120 + k * 62)},${GROUND - 26} q26,-22 52,0 Z" fill="#2B2420"/>`).join('') + `</g>` + smoke(bx + 583, GROUND - 124, t, '#3E5F5A', 0.8));
@@ -112,7 +113,7 @@ function viLake(t) { // a lake: an ore dock with chutes, a long ore boat
 }
 function viCoke(t) { // a bench of beehive coke ovens, glowing, smoking
   const s = [], c = EX.set, x0 = 2420;
-  s.push(`<rect x="${x0 - 20}" y="${GROUND - 70}" width="700" height="70" fill="${c}"/><rect x="${x0 - 20}" y="${GROUND - 70}" width="700" height="70" fill="url(#brickT)" opacity="0.4"/>`);
+  s.push(MAT.brick(x0 - 20, GROUND - 70, 700, 70, {base: '#1A2E2B', seed: 42, vary: 0.4}));
   for (let i = 0; i < 9; i++) {
     const x = x0 + i * 74, fl = 0.55 + 0.2 * Math.sin(t * 5 + i * 1.7);
     s.push(`<path d="M${x},${GROUND - 70} a34,34 0 0 1 68,0 Z" fill="${c}"/><circle cx="${x + 34}" cy="${GROUND - 40}" r="34" fill="url(#exglow)" opacity="${f1(fl)}"/><path d="M${x + 22},${GROUND - 20} a12,12 0 0 1 24,0 L${x + 46},${GROUND - 6} L${x + 22},${GROUND - 6} Z" fill="${EX.glow}" opacity="${f1(fl * 0.8)}"/>`);
@@ -123,8 +124,8 @@ function viCoke(t) { // a bench of beehive coke ovens, glowing, smoking
 }
 function viMill(t) { // a blast furnace, a Bessemer converter throwing sparks, a rolling shed with a glowing rail sliding out
   const s = [], c = EX.set, r = rng(55);
-  s.push(`<rect x="3380" y="${GROUND - 330}" width="90" height="330" fill="${c}"/><rect x="3370" y="${GROUND - 340}" width="110" height="20" fill="${c}"/>`);
-  for (const x of [3300, 3340]) s.push(`<rect x="${x}" y="${GROUND - 260}" width="34" height="260" rx="17" fill="${c}"/>`);
+  s.push(MAT.iron(3380, GROUND - 330, 90, 330, {base: c, seams: 46}) + `<rect x="3370" y="${GROUND - 340}" width="110" height="20" fill="${c}"/>`);
+  for (const x of [3300, 3340]) s.push(MAT.iron(x, GROUND - 260, 34, 260, {base: c, rx: 17, seams: 40, rivet: 5}));
   s.push(smoke(3425, GROUND - 350, t, '#3E5F5A', 1.1));
   const cvx = 3640, cvy = GROUND - 120, tilt = -24;
   s.push(`<rect x="${cvx - 70}" y="${cvy}" width="12" height="120" fill="${c}"/><rect x="${cvx + 58}" y="${cvy}" width="12" height="120" fill="${c}"/>`);
@@ -136,8 +137,7 @@ function viMill(t) { // a blast furnace, a Bessemer converter throwing sparks, a
     const x = mx + Math.cos(ang) * sp * u, y = my + Math.sin(ang) * sp * u + 260 * u * u;
     s.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(2.6 * (1 - u) + 0.8)}" fill="${EX.glow}" opacity="${f1(1 - u)}"/>`);
   }
-  s.push(`<rect x="3800" y="${GROUND - 120}" width="460" height="120" fill="${c}"/><rect x="3800" y="${GROUND - 120}" width="460" height="120" fill="url(#planksT)" opacity="0.4"/><path d="M3790,${GROUND - 120} L4030,${GROUND - 180} L4270,${GROUND - 120} Z" fill="${c}"/>`);
-  s.push(`<rect x="3380" y="${GROUND - 330}" width="90" height="330" fill="url(#rivetsT)" opacity="0.5"/>`);
+  s.push(MAT.brick(3800, GROUND - 120, 460, 120, {base: '#16292A', seed: 43, vary: 0.35}) + `<path d="M3790,${GROUND - 120} L4030,${GROUND - 180} L4270,${GROUND - 120} Z" fill="${c}"/>`);
   const rx = 3900 + ((t * 70) % 500);
   s.push(`<rect x="${f1(rx)}" y="${GROUND - 22}" width="140" height="7" fill="${EX.glow}" opacity="0.85"/><rect x="${f1(rx - 10)}" y="${GROUND - 34}" width="170" height="28" fill="url(#exglow)" opacity="0.6"/>`);
   s.push(worker({x: 3560, y: GROUND, h: 74, d: 1, an: {...POSES.stand(t, 0.4), fArm: [120, 110], tilt: 10}}));
@@ -153,7 +153,7 @@ function viRail(t) { // his railroad: a locomotive pulling flatcars of new rails
 }
 function viCity(t) { // the customers: a city of iron and steel; a steel frame going up, a crane lifting a beam; a bridge
   const s = [], c = EX.set, r = rng(66);
-  for (let x = 5300; x < 6300;) { const w = 60 + r() * 80, h = 80 + r() * 160; s.push(`<rect x="${f1(x)}" y="${f1(GROUND - h)}" width="${f1(w)}" height="${f1(h)}" fill="${c}"/>`); x += w + 6; }
+  for (let x = 5300, i = 0; x < 6300; i++) { const w = 60 + r() * 80, h = 80 + r() * 160; s.push(i % 2 ? MAT.brick(x, GROUND - h, w, h, {base: '#14262A', seed: 60 + i, vary: 0.3, bw: 16, bh: 8}) : `<rect x="${f1(x)}" y="${f1(GROUND - h)}" width="${f1(w)}" height="${f1(h)}" fill="${c}"/>`); x += w + 6; }
   const fx = 5640;
   for (let k = 0; k < 6; k++) s.push(`<rect x="${fx}" y="${GROUND - 60 - k * 50}" width="200" height="5" fill="${c}"/>`);
   for (const x of [fx, fx + 66, fx + 132, fx + 195]) s.push(`<rect x="${x}" y="${GROUND - 320}" width="5" height="320" fill="${c}"/>`);
@@ -178,10 +178,11 @@ function viCam(t) {
 const VI_PULL = VI_T0 + (VI.length - 1) * (VI_HOLD + VI_MOVE) + VI_HOLD + 0.6; // when the pull-back starts (~14.5 s)
 function renderVI(t) {
   const c = cam2(viCam(t)), world = [];
-  world.push(layerAt(c, 0.3, farHills(6400, EX.far, GROUND - 120, 3, 160), {soft: 0.004, fine: 0.05, k: 0.22, seed: 3}));
-  world.push(layerAt(c, 0.6, farHills(6400, EX.mid, GROUND - 40, 4, 90), {soft: 0.006, fine: 0.07, k: 0.28, seed: 4}) + layerAt(c, 0.6, `<rect x="-3000" y="${GROUND - 70}" width="12000" height="90" fill="url(#exmist)"/>`));
+  world.push(layerAt(c, 0.3, farHills(6400, EX.far, GROUND - 120, 3, 160, 18), {soft: 0.004, fine: 0.05, k: 0.22, seed: 3}));
+  world.push(layerAt(c, 0.6, farHills(6400, EX.mid, GROUND - 40, 4, 90, 30), {soft: 0.006, fine: 0.07, k: 0.28, seed: 4}) + layerAt(c, 0.6, `<rect x="-3000" y="${GROUND - 70}" width="12000" height="90" fill="url(#exmist)"/>`));
   const main = [`<rect x="-3000" y="${GROUND}" width="12000" height="3000" fill="${EX.main}"/>`];
   main.push(`<rect x="-3000" y="${GROUND - 4}" width="12000" height="4" fill="#1A2826"/>`); // one track runs the whole chain
+  { const [vx, , vw] = visibleRect(c, 1, 100); main.push(MAT.ground(Math.max(-2900, vx), vx + vw, GROUND, {base: EX.main, seed: 71})); }
   main.push(viMine(t), viLake(t), viCoke(t), viMill(t), viRail(t), viCity(t));
   world.push(layerAt(c, 1, main.join(''), {soft: 0.008, fine: 0.11, k: 0.2, seed: 11}));
   main.length = 0;
@@ -231,17 +232,17 @@ const hiStop = (i) => { const k = HI_BOUGHT.indexOf(i); return k < 0 ? Infinity 
 function refinery(x, t, i, big = false, back = false) {
   const s = [], c = back ? '#1D3432' : EX.set, stopT = big ? Infinity : hiStop(i), gone = t > stopT, fade = big ? 1 : 1 - smooth(stopT, stopT + 0.6, t);
   const w = big ? 300 : 150, h = big ? 120 : 90;
-  s.push(`<rect x="${x}" y="${GROUND - h}" width="${w}" height="${h}" fill="${c}"/><rect x="${x}" y="${GROUND - h}" width="${w}" height="${h}" fill="url(#brickT)" opacity="0.35"/><path d="M${x - 6},${GROUND - h} L${x + w / 2},${GROUND - h - (big ? 50 : 30)} L${x + w + 6},${GROUND - h} Z" fill="${c}"/>`);
+  s.push(`<rect x="${x}" y="${GROUND - h}" width="${w}" height="${h}" fill="${c}"/>${MAT.brick(x, GROUND - h, w, h, {base: c, seed: 100 + i, vary: 0.35, bw: big ? 24 : 18, bh: big ? 12 : 9})}<path d="M${x - 6},${GROUND - h} L${x + w / 2},${GROUND - h - (big ? 50 : 30)} L${x + w + 6},${GROUND - h} Z" fill="${c}"/>`);
   const chims = big ? [x + 40, x + 140, x + 240] : [x + 108];
   for (const cx of chims) { s.push(`<rect x="${cx}" y="${GROUND - h - (big ? 190 : 170)}" width="${big ? 18 : 14}" height="${big ? 190 : 170}" fill="${c}"/>`); if (fade > 0.02) s.push(`<g opacity="${f1(fade * 100) / 100}">${smoke(cx + 7, GROUND - h - (big ? 196 : 176), t + i * 0.7, '#3E5F5A', big ? 1 : 0.8, 5)}</g>`); }
-  s.push(`<rect x="${x + (big ? -90 : -46)}" y="${GROUND - (big ? 80 : 50)}" width="${big ? 80 : 40}" height="${big ? 80 : 50}" rx="${big ? 8 : 5}" fill="${c}"/><ellipse cx="${x + (big ? -50 : -26)}" cy="${GROUND - (big ? 80 : 50)}" rx="${big ? 40 : 20}" ry="${big ? 8 : 5}" fill="#1D3230"/>`);
+  s.push(MAT.iron(x + (big ? -90 : -46), GROUND - (big ? 80 : 50), big ? 80 : 40, big ? 80 : 50, {base: c, rx: big ? 8 : 5, seams: big ? 26 : 18, rivet: 5}) + `<ellipse cx="${x + (big ? -50 : -26)}" cy="${GROUND - (big ? 80 : 50)}" rx="${big ? 40 : 20}" ry="${big ? 8 : 5}" fill="#1D3230"/>`);
   if (!big) s.push(`<rect x="${x + 18}" y="${GROUND - 60}" width="20" height="26" fill="${EX.glow}" opacity="${f1(0.45 * fade * 100) / 100}"/><rect x="${x + 52}" y="${GROUND - 60}" width="20" height="26" fill="${EX.glow}" opacity="${f1(0.35 * fade * 100) / 100}"/>`); // lit windows while it still works
   if (!big && gone) s.push(`<rect x="${x - 4}" y="${GROUND - h - 4}" width="${w + 8}" height="${h + 4}" fill="none" stroke="${EX.teal}" stroke-width="4" vector-effect="non-scaling-stroke" opacity="${f1(smooth(stopT, stopT + 0.5, t) * 100) / 100}"/>`);
   return s.join('');
 }
 function hiDepot(t) { // the railroad freight office: a clerk, two shippers, barrels; the rebate passed back under the counter
   const s = [], c = EX.set, x0 = 200;
-  s.push(`<rect x="${x0}" y="${GROUND - 150}" width="440" height="150" fill="#16292A"/><rect x="${x0}" y="${GROUND - 150}" width="440" height="150" fill="url(#planksT)" opacity="0.45"/><path d="M${x0 - 20},${GROUND - 150} L${x0 + 220},${GROUND - 200} L${x0 + 460},${GROUND - 150} Z" fill="${c}"/>`);
+  s.push(`${MAT.planks(x0, GROUND - 150, 440, 150, {base: '#16292A', seed: 91, size: 16, vertical: true})}<path d="M${x0 - 20},${GROUND - 150} L${x0 + 220},${GROUND - 200} L${x0 + 460},${GROUND - 150} Z" fill="${c}"/>`);
   s.push(`<rect x="${x0 + 200}" y="${GROUND - 60}" width="70" height="60" fill="${c}"/><rect x="${x0 + 190}" y="${GROUND - 64}" width="90" height="6" fill="${c}"/>`);
   s.push(worker({x: x0 + 300, y: GROUND, h: 82, d: -1, hat: 'bowler', coat: 'vest', an: {...POSES.stand(t, 0.1), fArm: [112, 100], tilt: -6}})); // the clerk
   // the big shipper (left) with many barrels; the small one (right) with a few
@@ -267,10 +268,10 @@ function hiCam(t) {
 }
 function renderHI(t) {
   const c = cam2(hiCam(t)), world = [];
-  world.push(layerAt(c, 0.3, farHills(6000, EX.far, GROUND - 200, 7, 140), {soft: 0.004, fine: 0.05, k: 0.22, seed: 7}));
-  world.push(layerAt(c, 0.6, farHills(6000, EX.mid, GROUND - 80, 8, 70), {soft: 0.006, fine: 0.07, k: 0.28, seed: 8}));
-  const main = [`<rect x="-3000" y="${GROUND}" width="12000" height="3000" fill="${EX.main}"/>`, `<rect x="-3000" y="${GROUND + 90}" width="12000" height="1200" fill="${EX.water}"/>`];
-  for (let i = 0; i < 40; i++) main.push(`<rect x="${-200 + ((i * 173 + t * 16) % 5800)}" y="${GROUND + 100 + (i * 29) % 140}" width="${30 + (i * 11) % 50}" height="2.5" fill="#A3BAB2" opacity="0.16"/>`);
+  world.push(layerAt(c, 0.3, farHills(6000, EX.far, GROUND - 200, 7, 140, 18), {soft: 0.004, fine: 0.05, k: 0.22, seed: 7}));
+  world.push(layerAt(c, 0.6, farHills(6000, EX.mid, GROUND - 80, 8, 70, 30), {soft: 0.006, fine: 0.07, k: 0.28, seed: 8}));
+  const main = [`<rect x="-3000" y="${GROUND}" width="12000" height="3000" fill="${EX.main}"/>`];
+  { const [vx, , vw] = visibleRect(c, 1, 100); main.push(MAT.water(Math.max(-2900, vx), GROUND + 90, Math.min(vw, 9000), 1200, t, {top: '#2B4A47', bottom: '#0B1514', seed: 81, n: 90}), MAT.ground(Math.max(-2900, vx), vx + vw, GROUND, {base: EX.main, seed: 82, tufts: false})); }
   main.push(`<rect x="-3000" y="${GROUND + 6}" width="12000" height="4" fill="#1A2826"/>`); // the railroad along the river
   { // oil tank cars rolling along the near bank, and a barge on the river
     const tx = -400 + ((t * 90) % 1400);

@@ -30,10 +30,10 @@ function rfWalls() { // the cut: floors, walls with tall factory windows, the ro
 function rfRooms(t) { // interiors: brick walls, plank floors, daylight falling in from the windows
   const s = [], F = RF.F;
   s.push(`<rect x="${RF.x0}" y="${F[6]}" width="${RF.x1 - RF.x0}" height="${F[0] - F[6]}" fill="${RFC.room}"/>`);
-  s.push(`<rect x="${RF.x0}" y="${F[6]}" width="${RF.x1 - RF.x0}" height="${F[0] - F[6]}" fill="url(#brickT)" opacity="0.28"/>`);
+  s.push(MAT.brick(RF.x0, F[6], RF.x1 - RF.x0, F[0] - F[6], {base: RFC.room, seed: 201, vary: 0.28, soot: 'top'}));
   for (let k = 0; k < 6; k++) { if (k === 4) continue; const top = F[k + 1] + 34, bot = F[k] - 30;
     for (const [x, dir] of [[RF.x0 + RF.wall, 1], [RF.x1 - RF.wall, -1]]) s.push(`<path d="M${x},${top} L${x},${bot} L${x + dir * 260},${F[k]} L${x + dir * 120},${F[k]} Z" fill="#F4EFE6" opacity="0.06"/>`); }
-  for (let k = 0; k < 6; k++) s.push(`<rect x="${RF.x0}" y="${F[k] - 4}" width="${RF.x1 - RF.x0}" height="4" fill="url(#planksT)" opacity="0.8"/>`);
+  for (let k = 0; k < 6; k++) if (k !== 4) s.push(MAT.planks(RF.x0, F[k] - 5, RF.x1 - RF.x0, 5, {base: '#152422', seed: 210 + k, size: 46, vertical: true}));
   return s.join('');
 }
 function rfWindowsOut() { // what's outside the windows: the sky, lit
@@ -48,23 +48,23 @@ const rfPipe = (d, t, w = 10, speed = 70) => `<path d="${d}" fill="none" stroke=
 function rfMachines(t) {
   const s = [], F = RF.F, c = RFC.mach;
   // 2: melting tanks on the ground floor, steaming
-  for (const x of [1150, 1320]) { s.push(`<rect x="${x}" y="${F[0] - 110}" width="140" height="110" rx="10" fill="${c}"/><rect x="${x}" y="${F[0] - 110}" width="140" height="110" fill="url(#rivetsT)" opacity="0.5"/><rect x="${x - 6}" y="${F[0] - 116}" width="152" height="10" fill="${c}"/>` + smoke(x + 70, F[0] - 130, t + x, '#5F857F', 0.5, 4)); }
+  for (const x of [1150, 1320]) { s.push(MAT.iron(x, F[0] - 110, 140, 110, {base: c, rx: 10, seams: 36}) + `<rect x="${x - 6}" y="${F[0] - 116}" width="152" height="10" fill="${c}"/>` + smoke(x + 70, F[0] - 130, t + x, '#5F857F', 0.5, 4)); }
   // the pump and the riser to the top
   s.push(`<rect x="1470" y="${F[0] - 60}" width="50" height="60" fill="${c}"/><circle cx="1495" cy="${F[0] - 70}" r="22" fill="none" stroke="${c}" stroke-width="7"/><line x1="1495" y1="${F[0] - 70}" x2="${f1(1495 + 20 * Math.cos(t * 6))}" y2="${f1(F[0] - 70 + 20 * Math.sin(t * 6))}" stroke="${c}" stroke-width="5"/>`);
   s.push(rfPipe(`M1290,${F[0] - 60} L1495,${F[0] - 60} L1520,${F[0] - 60} L1520,${F[6] + 60} L1420,${F[6] + 60}`, t, 14, 110));
   // 4: top floor: a syrup tank and rows of cloth bag filters dripping
-  s.push(`<rect x="1220" y="${F[6] + 30}" width="200" height="110" rx="12" fill="${c}"/><rect x="1220" y="${F[6] + 30}" width="200" height="110" fill="url(#rivetsT)" opacity="0.5"/>`);
+  s.push(MAT.iron(1220, F[6] + 30, 200, 110, {base: c, rx: 12, seams: 36}));
   s.push(rfPipe(`M1220,${F[6] + 110} L1120,${F[6] + 110} L1120,${F[6] + 40} L430,${F[6] + 40}`, t, 10));
   for (let x = 450; x < 1100; x += 34) { const sw = 1.5 * Math.sin(t * 2 + x); s.push(`<rect x="${f1(x + sw)}" y="${F[6] + 48}" width="20" height="120" rx="6" fill="#DFE0D6" opacity="0.38"/>`); const dp = ((t * 0.9 + x * 0.013) % 1); s.push(`<circle cx="${f1(x + 10)}" cy="${f1(F[6] + 170 + dp * 40)}" r="2" fill="${RFC.sugar}" opacity="${f1(0.8 * (1 - dp))}"/>`); }
   s.push(`<rect x="430" y="${F[5] - 20}" width="700" height="12" fill="${c}"/>`); // the trough under the bags
   s.push(rfPipe(`M440,${F[5] - 14} L370,${F[5] - 14} L370,${F[4] - 150}`, t, 10));
   // 5: the bone-char filters: tall iron cylinders through two floors
-  for (let i = 0; i < 6; i++) { const x = 420 + i * 170; s.push(`<rect x="${x}" y="${F[5] + 26}" width="110" height="${F[3] - F[5] - 26}" rx="18" fill="${c}"/><rect x="${x}" y="${F[5] + 26}" width="110" height="${F[3] - F[5] - 26}" fill="url(#rivetsT)" opacity="0.55"/><ellipse cx="${x + 55}" cy="${F[5] + 26}" rx="55" ry="10" fill="#132423"/>`); }
+  for (let i = 0; i < 6; i++) { const x = 420 + i * 170; s.push(MAT.iron(x, F[5] + 26, 110, F[3] - F[5] - 26, {base: c, rx: 18, seams: 44}) + `<ellipse cx="${x + 55}" cy="${F[5] + 26}" rx="55" ry="10" fill="#132423"/>`); }
   s.push(rfPipe(`M370,${F[4] - 150} L370,${F[5] + 20} L1440,${F[5] + 20}`, t, 8));
   s.push(rfPipe(`M480,${F[3] - 6} L1440,${F[3] - 6}`, t, 8));
   // 6: vacuum pans: big domed vessels with gauges and a glowing sight glass
   for (let i = 0; i < 3; i++) { const x = 470 + i * 320, y = F[2];
-    s.push(`<path d="M${x},${y - 20} L${x},${y - 90} Q${x},${y - 150} ${x + 100},${y - 150} Q${x + 200},${y - 150} ${x + 200},${y - 90} L${x + 200},${y - 20} Z" fill="${c}"/><path d="M${x},${y - 90} Q${x},${y - 150} ${x + 100},${y - 150} Q${x + 200},${y - 150} ${x + 200},${y - 90} L${x + 200},${y - 20} L${x},${y - 20} Z" fill="url(#rivetsT)" opacity="0.5"/>`);
+    s.push(`<path d="M${x},${y - 20} L${x},${y - 90} Q${x},${y - 150} ${x + 100},${y - 150} Q${x + 200},${y - 150} ${x + 200},${y - 90} L${x + 200},${y - 20} Z" fill="${c}"/><path d="M${x},${y - 90} Q${x},${y - 150} ${x + 100},${y - 150} Q${x + 200},${y - 150} ${x + 200},${y - 90} L${x + 200},${y - 20} L${x},${y - 20} Z" fill="url(#matIronH)"/>`);
     s.push(`<rect x="${x + 20}" y="${y - 20}" width="10" height="20" fill="${c}"/><rect x="${x + 170}" y="${y - 20}" width="10" height="20" fill="${c}"/><rect x="${x + 90}" y="${y - 175}" width="20" height="26" fill="${c}"/>`);
     s.push(`<circle cx="${x + 150}" cy="${y - 80}" r="12" fill="#DFE0D6" opacity="0.5"/><line x1="${x + 150}" y1="${y - 80}" x2="${f1(x + 150 + 9 * Math.cos(t * 0.8 + i))}" y2="${f1(y - 80 + 9 * Math.sin(t * 0.8 + i))}" stroke="#111" stroke-width="2"/><ellipse cx="${x + 60}" cy="${y - 70}" rx="14" ry="9" fill="${RFC.sugar}" opacity="${f1(0.55 + 0.15 * Math.sin(t * 3 + i))}"/>`);
     s.push(smoke(x + 100, y - 180, t + i * 2, '#5F857F', 0.45, 3)); }
@@ -104,10 +104,9 @@ function rfPeople(t, z) {
 
 function rfOutside(t) { // the wharf, a ship unloading by hoist, the river
   const s = [], F = RF.F, c = '#0D0C09';
-  s.push(`<rect x="${RF.x1}" y="${F[0]}" width="1600" height="16" fill="#050808"/><rect x="${RF.x1}" y="${F[0] + 16}" width="1600" height="2000" fill="#1C3332"/>`);
-  for (let i = 0; i < 30; i++) s.push(`<rect x="${RF.x1 + ((i * 131 + t * 18) % 1500)}" y="${F[0] + 40 + (i * 23) % 160}" width="${30 + (i * 7) % 40}" height="2.5" fill="#A3BAB2" opacity="0.18"/>`);
+  s.push(MAT.water(RF.x1, F[0] + 16, 1600, 2000, t, {top: '#3E5F5A', bottom: '#0C1716', seed: 221, n: 70}) + MAT.planks(RF.x1, F[0], 1600, 16, {base: '#0B1413', seed: 222, size: 30, vertical: true}));
   const bob = 3 * Math.sin(TAU * t / 4), sx = 1980;
-  s.push(`<g transform="translate(0,${f1(bob)})"><path d="M${sx},${F[0] - 10} L${sx + 520},${F[0] - 10} L${sx + 490},${F[0] + 40} L${sx + 30},${F[0] + 40} Z" fill="${c}"/>` +
+  s.push(`<g transform="translate(0,${f1(bob)})"><clipPath id="rfhull"><path d="M${sx},${F[0] - 10} L${sx + 520},${F[0] - 10} L${sx + 490},${F[0] + 40} L${sx + 30},${F[0] + 40} Z"/></clipPath><g clip-path="url(#rfhull)">${MAT.planks(sx, F[0] - 10, 520, 50, {base: '#0D1211', seed: 223, size: 8})}</g>` +
     [100, 260, 420].map((mx, i) => `<rect x="${sx + mx}" y="${F[0] - 330 + i * 20}" width="7" height="${320 - i * 20}" fill="${c}"/><rect x="${sx + mx - 50}" y="${F[0] - 260 + i * 20}" width="107" height="7" fill="${c}"/>`).join('') + `</g>`);
   s.push(line([[sx + 100, F[0] - 320], [sx - 120, F[0] - 140]], c, 4)); // the hoist boom
   const hu = (t * 0.25) % 1, hx = sx + 60 - hu * 140, hy = F[0] - 150 + 40 * Math.sin(hu * Math.PI);
@@ -116,8 +115,8 @@ function rfOutside(t) { // the wharf, a ship unloading by hoist, the river
 }
 
 function rfCity(c) { // across the river: Manhattan, low and smoky, in two depths
-  return layerAt(c, 0.25, `<rect x="-2000" y="${RF.F[0] - 150}" width="8000" height="300" fill="#3E5F5A"/>` + (() => { const r = rng(5); let s2 = ''; for (let x = -1500; x < 4500;) { const w = 50 + r() * 110, h = 60 + r() * 200; s2 += `<rect x="${f1(x)}" y="${f1(RF.F[0] - 150 - h)}" width="${f1(w)}" height="${f1(h)}" fill="#3E5F5A"/>`; x += w; } return s2 + steeple(2600, RF.F[0] - 300, 30, 120, 160, '#3E5F5A'); })(), {soft: 0.005, fine: 0.06, k: 0.2, seed: 21}) +
-    layerAt(c, 0.5, (() => { const r = rng(6); let s2 = ''; for (let x = -1500; x < 4500;) { const w = 80 + r() * 160, h = 120 + r() * 260; s2 += `<rect x="${f1(x)}" y="${f1(RF.F[0] - 60 - h)}" width="${f1(w)}" height="${f1(h + 60)}" fill="#22403D"/><rect x="${f1(x + w * 0.4)}" y="${f1(RF.F[0] - 60 - h - 160)}" width="16" height="160" fill="#22403D"/>`; x += w + 40; } return s2; })(), {soft: 0.006, fine: 0.08, k: 0.24, seed: 22});
+  return layerAt(c, 0.25, `<rect x="-2000" y="${RF.F[0] - 150}" width="8000" height="300" fill="#3E5F5A"/>` + (() => { const r = rng(5); let s2 = ''; for (let x = -1500; x < 4500;) { const w = 50 + r() * 110, h = 60 + r() * 200; s2 += `<rect x="${f1(x)}" y="${f1(RF.F[0] - 150 - h)}" width="${f1(w)}" height="${f1(h)}" fill="#3E5F5A"/>`; x += w; } return s2 + steeple(2600, RF.F[0] - 300, 30, 120, 160, '#3E5F5A'); })(), null) +
+    layerAt(c, 0.5, (() => { const r = rng(6); let s2 = ''; for (let x = -1500; x < 4500;) { const w = 80 + r() * 160, h = 120 + r() * 260; s2 += `<rect x="${f1(x)}" y="${f1(RF.F[0] - 60 - h)}" width="${f1(w)}" height="${f1(h + 60)}" fill="#22403D"/><rect x="${f1(x + w * 0.4)}" y="${f1(RF.F[0] - 60 - h - 160)}" width="16" height="160" fill="#22403D"/>`; x += w + 40; } return s2; })(), null);
 }
 
 // The tour: a wide shot, then the camera follows the sugar stop by stop; labels name each step.
@@ -144,9 +143,9 @@ function rfCam(t) {
 function renderRefinery(t) {
   const cm = rfCam(t), c = cam2(cm), world = [];
   world.push(rfCity(c));
-  world.push(layerAt(c, 1, rfOutside(t), {soft: 0.008, fine: 0.1, k: 0.18, seed: 31}));
-  world.push(layerAt(c, 1, rfRooms(t) + rfWindowsOut(), {soft: 0.014, fine: 0.16, k: 0.13, seed: 32}));
-  world.push(layerAt(c, 1, rfMachines(t) + rfWalls() + `<rect x="${RF.x1 + 40}" y="${RF.F[6] - 260}" width="60" height="${RF.F[0] - RF.F[6] + 260}" fill="#050808"/>` + smoke(RF.x1 + 70, RF.F[6] - 270, t, '#3E5F5A', 1.2), {soft: 0.016, fine: 0.18, k: 0.12, seed: 33}));
+  world.push(layerAt(c, 1, rfOutside(t), null));
+  world.push(layerAt(c, 1, rfRooms(t) + rfWindowsOut(), null));
+  world.push(layerAt(c, 1, rfMachines(t) + rfWalls() + `<rect x="${RF.x1 + 40}" y="${RF.F[6] - 260}" width="60" height="${RF.F[0] - RF.F[6] + 260}" fill="#050808"/>` + smoke(RF.x1 + 70, RF.F[6] - 270, t, '#3E5F5A', 1.2), null));
   world.push(layerAt(c, 1, rfPeople(t, c.z)));
   const scr = [];
   if (cm.label) scr.push(tag(60, 120, cm.label, 1));
