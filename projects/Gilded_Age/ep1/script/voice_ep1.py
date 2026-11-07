@@ -121,4 +121,4 @@ if __name__ == '__main__':
         subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-ac', '1',
                         '-c:a', 'libmp3lame', '-b:a', '128k', os.path.join(OUT, 'ep1_narration.mp3')], check=True)
         total = sum(json.load(open(w[:-4] + '.words.json'))['duration'] for w in wavs)
-        print(f'ep1_narration.mp3: {total / 60:.0f}:{total % 60:04.1f}')
+        print(f'ep1_narration.mp3: {int(total // 60)}:{total % 60:04.1f}')
