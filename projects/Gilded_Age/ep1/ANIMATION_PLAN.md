@@ -55,7 +55,7 @@ Effort: **S** about an hour, **M** half a day, **L** a day or more.
 | # | Beat | Animation | Explains | Status |
 |---|---|---|---|---|
 | 10 | Industrialization | Split side-scroll: one weaver at a hand loom vs a row of steam looms with whirling belts (shares the set with shot 17) | *industrialization* | new, M |
-| 11 | Bessemer steel | X-ray of a Bessemer converter: melted iron, air blasting up from below, carbon dots burning out, a shower of sparks, a timer reading minutes not a day | *Bessemer process* | new, M |
+| 11 | Bessemer steel | X-ray of a Bessemer converter: melted iron, air blasting up from below, carbon dots burning out, a shower of sparks, a timer reading minutes not a day | *Bessemer process* | **prototyped** (`lookdev/bessemer.js`, round 10) |
 | 12 | Rails get cheap | Chart: a rail's price falling from over $170 to about $17, the bar shrinking under a drawn rail | Why it mattered | adapt (chart kit), S |
 | 13 | Bell files hours first | Archival portraits of Bell and Gray; a drawn clock and two papers sliding into a slot, one stamped first | Invention races | new, S |
 | 14 | Edison's real invention | A bulb flickers out after minutes; Edison's glows; the camera pulls back to show wires, a dynamo, a meter: the system | Myth beat | new, M |

@@ -76,6 +76,13 @@ const JOBS = [
   {name: 'r9_lm_factory', clip: 'loom_weaver', t: 8.4},
   {name: 'r9_lm_engine', clip: 'loom_weaver', t: 11},
   {name: 'r9_lm_idle', clip: 'loom_weaver', t: 16},
+  // round 10: Bessemer steel, the x-ray
+  {name: 'r10_bs_pour', clip: 'bessemer_xray', t: 1.8},
+  {name: 'r10_bs_blow', clip: 'bessemer_xray', t: 5.6},
+  {name: 'r10_bs_xray', clip: 'bessemer_xray', t: 8.6},
+  {name: 'r10_bs_xray_late', clip: 'bessemer_xray', t: 11.6},
+  {name: 'r10_bs_compare', clip: 'bessemer_xray', t: 14.2},
+  {name: 'r10_bs_card', clip: 'bessemer_xray', t: 17},
 ];
 
 const filter = process.argv[2];

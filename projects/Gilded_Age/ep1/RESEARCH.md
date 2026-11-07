@@ -138,6 +138,8 @@ Confidence: **solid** (several good sources agree), **hedge** (sources differ; u
 ### Industrialization and inventions
 - **Bessemer process:** air blown through molten iron burns out carbon and impurities; the reaction makes its own heat; a batch takes
   minutes instead of a day or more. **Solid.**
+- **How long a blow took:** 10 to 20 minutes for a heat (some small charges about 5, large high-silicon ones 20 or more), per the
+  1911 Encyclopaedia Britannica and later summaries. On screen: "10 to 20 minutes"; narrate "minutes instead of a day." **Solid** as a range.
 - Steel rails: $174 a ton in 1868 (in inflated Civil War-era dollars) to $17 in 1898 (1911 Encyclopaedia Britannica). **Hedge:**
   narrate "from more than $170 a ton to about $17." The often-repeated "$160 in 1875" pairing could not be confirmed.
 - U.S. steel output: about 1.4 million tons (1880) to over 11 million (1900); the U.S. passed Great Britain before 1900; by 1900

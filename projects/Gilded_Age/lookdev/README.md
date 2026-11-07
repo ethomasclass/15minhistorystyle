@@ -142,3 +142,16 @@ pulls back. Note for the script: say "22 of his 26 rivals" to match the picture 
   women tending the looms), then back to the cottage: the loom has stopped, the father sits still, his son beside him. "a machine
   took his father's trade." William and Andrew are solid silhouettes with no face detail, tagged (no photographs survive of the
   father at work; the channel's rule for real people).
+
+## Round 10: Bessemer steel, the x-ray (shot 11)
+
+- **`bessemer.js` (18 s)**: a steel mill at night. A crane ladle pours melted iron into a converter lying on its side ("iron is
+  strong, but brittle"); the converter swings upright and the blow starts: a tongue of flame, a fountain of sparks, the shed lit up.
+  The camera pushes in and the shell turns to an x-ray (teal cut edge, a firebrick lining): air comes in through the hollow trunnion,
+  down the pipe to the wind box, and up through the holes in the bottom as teal bubbles; the carbon specks in the white-hot iron each
+  flare and vanish. A clock sweeps the minutes and a "carbon left" bar drains. "no fuel needed: the burning makes its own heat."
+  The x-ray closes, the converter tips and pours steel into a ladle; "the old way: a day or more / Bessemer: 10 to 20 minutes";
+  then the index card, with "cheap steel, so cheap rails" (the hand-off to shot 12, the rail-price chart).
+- Materials: a sooted brick shed with arched windows, riveted iron columns, crane girder and vessel plates, plank floor, smoke.
+- The men are anonymous workers, scaled so the converter reads about two and a half times a man's height.
+
