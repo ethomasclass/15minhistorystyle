@@ -230,3 +230,17 @@ a wry, playful piece about railroads changing time in 1883, a dozen ticking cloc
 | 10:41 | 9 Gold or Gilt | `ga_bad_wire`, then `ga_gilded_theme` (solo piano ending) at 11:37 |
 
 The channel sting and the chapter-break sound come from the library as usual.
+
+## Received (Nov 7, 2026): all 9 in `public/music/` and the library
+
+| Cue | Length | LUFS | Notes from the loudness chart (not listened to) |
+|---|---|---|---|
+| `ga_gilded_theme` | 2:00 | -15.4 | Quieter ~90-110 s (the solo-piano close); out by 118 s |
+| `ga_the_squeeze` | 2:50 | -13.4 | Builds from ~70 s, fullest 120-160 s, low tail from ~162 s |
+| `ga_weavers_son` | 2:15 | -15.2 | Fullest ~55-60 s and ~85-100 s; thins from ~120 s |
+| `ga_kellys` | 1:20 | -14.7 | Dips ~42 s; even otherwise |
+| `ga_bad_wire` | 1:14 | -16.2 | Even; no clear full stop in the chart (check the "held breath" by ear) |
+| `ga_age_of_steel` | 1:24 | -14.9 | Quiet first 4 s, full from ~20 s |
+| `ga_sugar_house` | 1:05 | -13.5 | Steady and heavy after 8 s |
+| `ga_heroes_or_villains` | 1:15 | -15.9 | Dip ~66 s |
+| `ga_noon_twice` | 1:15 | -15.6 | Even all the way |

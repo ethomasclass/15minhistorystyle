@@ -1,6 +1,6 @@
 # Music library
 
-Every music cue made for 15 Minute History (now Chunk History) so far: **89 cues, about 174 MB**, one copy of each. They were collected from all of
+Every music cue made for 15 Minute History (now Chunk History) so far: **98 cues, about 193 MB**, one copy of each. They were collected from all of
 the video repos and branches and deduplicated by file contents. Files are in [`cues/`](cues/), named `<prefix>_<name>.mp3`, and the
 prefix says which video the cue was made for:
 
@@ -18,6 +18,7 @@ prefix says which video the cue was made for:
 | `b_` | *The Balloon War* (WWII) | Suno (prompts and section tags in `Balloon_War/script/MUSIC.md`) |
 | `bw_` | *The Balloon War* v2 (the story-arc version, Nov 2026) | Suno (prompts in `projects/Balloon_War/script/SUNO_PROMPTS_v2.md`) |
 | `hb_` | *Trick-or-Treating Was a Bribe* (Halloween) | Suno (prompts in `projects/Halloween_Bribe/script/SUNO_PROMPTS.md`) |
+| `ga_` | *The Gilded Age* (six-part series; Ep 1, Nov 2026) | Suno (prompts in `projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md`) |
 | `aw_` | *The American West after the Civil War* (four-part series; Ep 1 *Not in the Picture*) | Suno (prompts in `projects/American_West/SUNO_PROMPTS.md`) |
 
 *Good Luck* (Ouija) made no new music; it reused 19 of these. *Say It Ain't So* (Black Sox) made none either; it reused 9. *The Exact Spot* reused 10 and added three Suno cues (`m_`). *Dressed to Kill* made none; it reused 12. Keep the prefixes when you copy a cue into a video
@@ -44,6 +45,22 @@ prefix says which video the cue was made for:
 **No credit line in the description.** Descriptions don't mention AI music, AI images or the AI voice (the user's rule, from *The Exact Spot*).
 
 ## Pick by feeling
+
+### The Gilded Age (ga_)
+
+The parlor-piano and music-box gilt over low cello and brass; Irish low whistle and fiddle for the Kellys only.
+
+| Cue | Length | LUFS | What it sounds like | Best part | Used in |
+|---|---|---|---|---|---|
+| [`ga_gilded_theme`](cues/ga_gilded_theme.mp3) | 1:59 | -15.4 | Series theme: glittering four-note motif on music box/celesta and parlor piano, darkened by low cello and muted brass; restrained swell; solo-piano close on an unresolved chord. | Full from the start; quieter stretch ~90-110 s (the solo-piano close, for the ending); out by 118 s. | Gilded Age Ep 1 |
+| [`ga_the_squeeze`](cues/ga_the_squeeze.mp3) | 2:49 | -13.4 | Sly, cold rise to power: tipsy con-man clarinet and tuba, ledger-ticking pizzicato, refinery pulse, then a tightening squeeze with muted brass; ends cold on a low chord. | Lighter and varied for the first ~65 s, builds from ~70 s, fullest 120-160 s, low tail from ~162 s. | Gilded Age Ep 1 |
+| [`ga_weavers_son`](cues/ga_weavers_son.mp3) | 2:14 | -15.2 | Rags to riches: Scottish fiddle air and loom rhythm, a minor turn, a crossing, telegraph pizzicato, climbing strings and brass, a drop to solo fiddle, a wry button. | Fullest ~55-60 s and ~85-100 s; thins from ~120 s; out by 131 s. | Gilded Age Ep 1 |
+| [`ga_kellys`](cues/ga_kellys.mp3) | 1:19 | -14.7 | The Kelly family theme: tender low-whistle air, fiddle answering, harp and concertina, 3/4; tired warmth, a small wry lift. | Dips ~42 s and at the end (78 s); otherwise even. | Gilded Age Ep 1 |
+| [`ga_bad_wire`](cues/ga_bad_wire.mp3) | 1:14 | -16.2 | Sneaky 1878 swindle caper: tiptoe pizzicato, walking bass, sly clarinet, clip-clop wagon rhythm, tension; settles broad and solid. | Even; small dip ~50 s; out by 73 s. No obvious full stop in the chart: check where the 'held breath' falls by ear. | Gilded Age Ep 1 |
+| [`ga_age_of_steel`](cues/ga_age_of_steel.mp3) | 1:23 | -14.9 | Confident age-of-invention build: col legno ostinato, anvil, furnace-blast brass and timpani, a celesta 'light switching on' moment; optimistic. | Quiet start 0-4 s, full from ~20 s; out by 83 s. | Gilded Age Ep 1 |
+| [`ga_sugar_house`](cues/ga_sugar_house.mp3) | 1:04 | -13.5 | Hot, relentless refinery shift: grinding low-piano/col legno machine rhythm with a clank, low cellos, a tired Irish low-whistle phrase. | Lighter first 8 s, steady and heavy after; ends 64 s. | Gilded Age Ep 1 |
+| [`ga_heroes_or_villains`](cues/ga_heroes_or_villains.mp3) | 1:14 | -15.9 | Even-handed captains-or-barons debate: ticking pulse, a noble brass phrase answered by sly pizzicato and muted trumpet; open questioning end. | Quiet first 2 s; dip ~66 s; ends 74 s. | Gilded Age Ep 1 |
+| [`ga_noon_twice`](cues/ga_noon_twice.mp3) | 1:14 | -15.6 | Wry 1883 railroad-time piece: out-of-step ticking clocks, jaunty parlor piano, cheeky clarinet, a train-chug, a double chime. | Even all the way through; ends at 74 s. | Gilded Age Ep 1 |
 
 ### Stings
 

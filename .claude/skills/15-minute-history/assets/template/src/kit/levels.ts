@@ -24,6 +24,8 @@ export const CUE_LUFS: Record<string, number> = {
   hb_black_halloween: -22.12, hb_coffin_ships: -22.12, hb_mischief_rag: -22.63, hb_oiche_shamhna: -20.67, hb_suburbs_swing: -21.91,
   bw_something_in_the_woods: -15.4, bw_revenge_on_the_wind: -14.6, bw_paper_and_paste: -15.8, bw_dawn_launch: -14.4, bw_paper_and_sand: -14.4,
   bw_the_newspaperman: -15.1, bw_gearhart: -16.0, bw_a_thousand_cranes: -14.8,
+  // Gilded Age Ep 1 Suno cues (Nov 2026; music/catalog.json)
+  ga_gilded_theme: -15.4, ga_the_squeeze: -13.4, ga_weavers_son: -15.2, ga_kellys: -14.7, ga_bad_wire: -16.2, ga_age_of_steel: -14.9, ga_sugar_house: -13.5, ga_heroes_or_villains: -15.9, ga_noon_twice: -15.6,
 };
 /** Volume for a cue so its bed sits `gap` LU under the voice (13 = the Black Sox norm; 14-15 for a quiet, grave stretch). */
 export const bed = (cue: string, gap = 13) => {

@@ -1,24 +1,24 @@
 {
  "levels": [
-  "Beds 0.13–0.17 under narration with 15–20-frame fades (skill voice-and-audio.md §6; ChapterShell does this). Default bed 0.15.",
+  "Beds 0.13\u20130.17 under narration with 15\u201320-frame fades (skill voice-and-audio.md \u00a76; ChapterShell does this). Default bed 0.15.",
   "Cold open 0.17, dipping at the end (Reform: to 0.06; Grip Tighter: to 0.12; King Andrew: to 0).",
-  "Title sting 0.45, starting 4 frames before the '15' (fade 0→0.45 in 3 frames, hold to frame 50, out by frame 74). War Nobody Won title_fanfare 0.45–0.5.",
+  "Title sting 0.45, starting 4 frames before the '15' (fade 0\u21920.45 in 3 frames, hold to frame 50, out by frame 74). War Nobody Won title_fanfare 0.45\u20130.5.",
   "Heavy chapters: a grave cue at ~0.12 or near-silence ('near-silence is a choice, not a gap').",
-  "ElevenLabs King Andrew cues are quieter than the Lyria cues: Ouija runs j_good_feelings / j_gossip / j_cold_open / r_intrigue(j_intrigue) at 0.26–0.3 (Ouija MUSIC.md: 'about 6 dB quieter… beds go about 2× higher').",
-  "Grip Tighter: the Suno cues are 3–4 dB quieter than the Reform (Lyria) cues, so their beds are 0.14–0.17.",
-  "Loudest cues (r_spirits_dark, w_aftermath, r_schools): keep at 0.12–0.14 (Ouija MUSIC.md).",
-  "Final mix is normalized by tools/master.py to −14 LUFS (two-pass loudnorm + limiter), so cues only need to balance against each other.",
-  "Measured integrated loudness: Lyria cues −10.7…−13.1 LUFS; ElevenLabs cues −12.8…−19.6 LUFS; raw Suno cues −14.7…−17.3 LUFS (r_spirits_dark, a mastered Suno cue, −12.1).",
-  "The Exact Spot: every chapter's music lifts to ×1.6 for the ~2 s after the last word, then fades with the picture (TAIL_LIFT in src/kit/shell.tsx); a music entry's `to` hands over to the next cue with a 30-frame crossfade."
+  "ElevenLabs King Andrew cues are quieter than the Lyria cues: Ouija runs j_good_feelings / j_gossip / j_cold_open / r_intrigue(j_intrigue) at 0.26\u20130.3 (Ouija MUSIC.md: 'about 6 dB quieter\u2026 beds go about 2\u00d7 higher').",
+  "Grip Tighter: the Suno cues are 3\u20134 dB quieter than the Reform (Lyria) cues, so their beds are 0.14\u20130.17.",
+  "Loudest cues (r_spirits_dark, w_aftermath, r_schools): keep at 0.12\u20130.14 (Ouija MUSIC.md).",
+  "Final mix is normalized by tools/master.py to \u221214 LUFS (two-pass loudnorm + limiter), so cues only need to balance against each other.",
+  "Measured integrated loudness: Lyria cues \u221210.7\u2026\u221213.1 LUFS; ElevenLabs cues \u221212.8\u2026\u221219.6 LUFS; raw Suno cues \u221214.7\u2026\u221217.3 LUFS (r_spirits_dark, a mastered Suno cue, \u221212.1).",
+  "The Exact Spot: every chapter's music lifts to \u00d71.6 for the ~2 s after the last word, then fades with the picture (TAIL_LIFT in src/kit/shell.tsx); a music entry's `to` hands over to the next cue with a 30-frame crossfade."
  ],
  "suno": {
   "mode": "Custom, Instrumental ON. Paste the Styles text as written; paste the Exclude line into Exclude Styles.",
   "exclude_styles_bierce_and_ouija": "vocals, choir, lyrics, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap",
   "exclude_styles_grip_tighter": "vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat",
-  "length": "Suno makes 2+ minute tracks; that's fine — cues are cut, trimmed and faded to the narration (Ouija: anything 1:30 or longer).",
-  "pick": "Pick the take whose first 30–40 seconds already sound like the cue; most of each cue is built from its opening.",
+  "length": "Suno makes 2+ minute tracks; that's fine \u2014 cues are cut, trimmed and faded to the narration (Ouija: anything 1:30 or longer).",
+  "pick": "Pick the take whose first 30\u201340 seconds already sound like the cue; most of each cue is built from its opening.",
   "delivery": "MP3 (WAV if the plan has it), named as shown; drag into the chat or add to video/public/music/.",
-  "ouija_cover_trick": "Make the theme first (simplest, clearest tune in the first 20 s), then make every other cue as a Cover of that take (Remix/Edit → Cover) with new Styles text, so one melody returns in several arrangements.",
+  "ouija_cover_trick": "Make the theme first (simplest, clearest tune in the first 20 s), then make every other cue as a Cover of that take (Remix/Edit \u2192 Cover) with new Styles text, so one melody returns in several arrangements.",
   "ouija_lyrics_box": "[Intro] [Main Theme] [Variation] [Break] [Main Theme] [Outro] [End]",
   "exclude_styles_exact_spot": "vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat",
   "credit_note": "No music credit in descriptions: they never mention AI music, AI images or the AI voice (user rule)."
@@ -41,7 +41,7 @@
     {
      "video": "Fix Everything (Reform-Era)",
      "where": "Intro / title card (Intro.tsx), starts 4 frames before the '15'",
-     "bed_volume": "0.45 (fade 0→0.45 in 3 f, hold to f50, out by f74)"
+     "bed_volume": "0.45 (fade 0\u21920.45 in 3 f, hold to f50, out by f74)"
     },
     {
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
@@ -103,11 +103,11 @@
    "prompt": "A short theatrical overture flourish for the title card of a toy-theater play: bright brass fanfare, fife and field drums playing a martial 1812-era march phrase, cymbal crash, then a big final chord that rings out. Instrumental only, no vocals.",
    "mood": "Short theatrical overture flourish: bright brass fanfare, fife + field drums, martial 1812 march phrase, cymbal crash, big ringing final chord.",
    "good_part": null,
-   "notes": "The War Nobody Won's own title sting (toy-theater look) — not the channel sting.",
+   "notes": "The War Nobody Won's own title sting (toy-theater look) \u2014 not the channel sting.",
    "used_in": [
     {
      "video": "The War Nobody Won (Jackson repo, src/v2)",
-     "where": "ColdOpen → title playbill",
+     "where": "ColdOpen \u2192 title playbill",
      "bed_volume": "0.5"
     },
     {
@@ -159,7 +159,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Ch01 The Proclamation",
-     "bed_volume": "0.17 → 0.12 over the last 60 frames"
+     "bed_volume": "0.17 \u2192 0.12 over the last 60 frames"
     },
     {
      "video": "Good Luck (Ouija)",
@@ -174,7 +174,7 @@
     {
      "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
      "where": "Ch01 The Exact Spot (cold open)",
-     "bed_volume": "0.17, lifting ×1.5 under the last line, then out"
+     "bed_volume": "0.17, lifting \u00d71.5 under the last line, then out"
     },
     {
      "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
@@ -206,7 +206,7 @@
    "prompt": "Tense, restrained documentary underscore for a history explainer about an 1806 pistol duel in Tennessee. Low solo cello and string drones, sparse plucked pizzicato, a soft ticking pulse, distant frame drum heartbeat, a lonely fiddle line. Slow build of suspense, then a held, unresolved chord. Instrumental only, no vocals, leaves room for a narrator.",
    "mood": "Tense, restrained: low solo cello, string drones, sparse pizzicato, soft ticking pulse, distant frame-drum heartbeat, lonely fiddle; slow suspense build to a held unresolved chord.",
    "good_part": "Written for the 1806 duel: King Andrew MUSIC.md says start it at 'Then came the Revolution' so the swell lands on the duel.",
-   "notes": "Quiet file (−17.8 LUFS) — needs a higher bed than Lyria cues (Ouija uses 0.27).",
+   "notes": "Quiet file (\u221217.8 LUFS) \u2014 needs a higher bed than Lyria cues (Ouija uses 0.27).",
    "used_in": [
     {
      "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
@@ -226,7 +226,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch03/Ch05; copied in as j_cold_open, unused",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Say It Ain't So (Black Sox) (15minhistorystyle, projects/Black_Sox)",
@@ -258,7 +258,7 @@
    "prompt": "Sly, suspenseful documentary underscore about a backroom political deal in 1825 Washington. Low clarinet and bassoon, sneaky pizzicato strings, a ticking harpsichord, a muted snare brushing in; tension that builds to an angry brass sting around the middle, then a brooding, suspicious tail. Instrumental only, no vocals, leaves room for a narrator.",
    "mood": "Sly, suspenseful backroom deal: low clarinet + bassoon, sneaky pizzicato, ticking harpsichord, muted snare; angry brass sting mid-cue; brooding suspicious tail.",
    "good_part": "Brass sting around the middle of the 125 s cue (per its prompt; not timed): King Andrew lines it up with 'Judas of the West'. The brooding tail was the suggested fallback for the Bank War chapter.",
-   "notes": "Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3, so Ouija named it r_intrigue — canonical prefix is j_.",
+   "notes": "Generated for Jackson Video 1 (ElevenLabs); Reform-Era copied it as intrigue.mp3, so Ouija named it r_intrigue \u2014 canonical prefix is j_.",
    "used_in": [
     {
      "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
@@ -330,7 +330,7 @@
     {
      "video": "Fix Everything (Reform-Era)",
      "where": "Originally scored for Ch03 Knock Once for Yes, then replaced by r_spirits_dark (Suno) in commit 8e5d49a; not referenced by any Reform chapter now",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Good Luck (Ouija)",
@@ -366,13 +366,13 @@
    "used_in": [
     {
      "video": "The War Nobody Won (Jackson repo, src/v2)",
-     "where": "ColdOpen (Chesapeake–Leopard, until 'opens fire')",
+     "where": "ColdOpen (Chesapeake\u2013Leopard, until 'opens fire')",
      "bed_volume": "0.2"
     },
     {
      "video": "Good Luck (Ouija)",
      "where": "Previously ch05 Patience Worth (review/music_options/ch05_current_calm_sea), replaced by j_cold_open; still in the folder",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -394,7 +394,7 @@
    "prompt": "A 60-second cue: light, bright and curious for the story of the first free public schools: pizzicato strings, glockenspiel, clarinet and a bouncy piano, playful with a knowing, comic final button. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
    "mood": "Light, bright, curious: pizzicato, glockenspiel, clarinet, bouncy piano; knowing comic final button (Ouija's 'fun' theme).",
    "good_part": "The comic final button (Ouija lands it on \"It's the point.\").",
-   "notes": "Ouija MUSIC.md: among the loudest cues; keep 0.12–0.14.",
+   "notes": "Ouija MUSIC.md: among the loudest cues; keep 0.12\u20130.14.",
    "used_in": [
     {
      "video": "Fix Everything (Reform-Era)",
@@ -408,7 +408,7 @@
     },
     {
      "video": "Good Luck (Ouija)",
-     "where": "Ch07 Next to Monopoly (cuts out at 'Which made…')",
+     "where": "Ch07 Next to Monopoly (cuts out at 'Which made\u2026')",
      "bed_volume": "0.13"
     },
     {
@@ -436,7 +436,7 @@
    "prompt": "Playful, gossipy, mischievous documentary underscore about a scandal among 1830s Washington high society: tiptoeing pizzicato strings, a fussy harpsichord, a sly clarinet, teacup-delicate percussion, occasional dramatic 'gasp' string swells, building to a dramatic finish. Instrumental only, no vocals, leaves room for a narrator.",
    "mood": "Playful, gossipy, mischievous: tiptoeing pizzicato, fussy harpsichord, sly clarinet, teacup percussion, 'gasp' string swells, dramatic finish.",
    "good_part": null,
-   "notes": "Ouija treats it as a quiet King Andrew cue (bed 0.3), though its integrated loudness (−12.8 LUFS) is close to the Lyria cues; its range is wide (LRA 14).",
+   "notes": "Ouija treats it as a quiet King Andrew cue (bed 0.3), though its integrated loudness (\u221212.8 LUFS) is close to the Lyria cues; its range is wide (LRA 14).",
    "used_in": [
     {
      "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
@@ -478,7 +478,7 @@
    "prompt": "caper underscore, gilded age confidence, plucked upright bass walking line, staccato clarinet, pizzicato strings, piano stabs, light brushed snare, sneaky build of tension, then a triumphant cheeky brass button at the end, playful, witty, documentary, space for narrator, instrumental",
    "mood": "Caper underscore, Gilded Age confidence: walking upright bass, staccato clarinet, pizzicato, piano stabs, brushed snare, sneaky tension, cheeky triumphant brass button at the end.",
    "good_part": "The cheeky brass button at the end.",
-   "notes": "Quietest Suno cue (−17.3 LUFS).",
+   "notes": "Quietest Suno cue (\u221217.3 LUFS).",
    "used_in": [
     {
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
@@ -597,7 +597,7 @@
    "prompt": "Light, warm, slightly wry documentary underscore for a history explainer about the calm 'Era of Good Feelings' in 1820s America. Gentle plucked strings, a lilting parlor fiddle melody, soft fife, piano-forte, a relaxed walking pulse; pleasant and a little too cozy, with a faint hint of mischief near the end. Instrumental only, no vocals, leaves room for a narrator.",
    "mood": "Light, warm, slightly wry: plucked strings, lilting parlor fiddle, soft fife, piano-forte, relaxed walking pulse; 'pleasant and a little too cozy, with a faint hint of mischief near the end' (Ouija's 'love' theme).",
    "good_part": "Ouija starts it 8 s in (startFrom 240) to skip the intro; mischief is near the end.",
-   "notes": "Quietest file in the library (−19.6 LUFS, ~7 dB under the Lyria cues): beds 0.26–0.3 in Ouija.",
+   "notes": "Quietest file in the library (\u221219.6 LUFS, ~7 dB under the Lyria cues): beds 0.26\u20130.3 in Ouija.",
    "used_in": [
     {
      "video": "Jackson Video 1 / Part One (Jackson repo, src/v1 scenes)",
@@ -734,7 +734,7 @@
    "generator": "Google Lyria",
    "model": "lyria-3.5",
    "prompt": "A 90-second cue for women's rights in the 1840s: starts restrained and quietly indignant (low strings, a steady piano pulse), builds with determination through rising strings and a noble horn line, and reaches a proud but restrained high point, then settles thoughtfully. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
-   "mood": "Women's rights: restrained, quietly indignant (low strings, piano pulse) → determined build with noble horn → proud restrained peak → thoughtful settle.",
+   "mood": "Women's rights: restrained, quietly indignant (low strings, piano pulse) \u2192 determined build with noble horn \u2192 proud restrained peak \u2192 thoughtful settle.",
    "good_part": null,
    "notes": null,
    "used_in": [
@@ -760,7 +760,7 @@
    "generator": "Google Lyria",
    "model": "lyria-3.5",
    "prompt": "A 120-second cue in three parts: first dreamy and pastoral for writers seeking truth in nature (acoustic guitar, flute, soft strings, birdsong-like figures); then a gentle, plain hymn-like section in the style of the 1848 Shaker tune 'Simple Gifts', played by strings and flute; then it darkens into unease and quiet menace with low drones for a controlling commune, ending somber and unresolved. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
-   "mood": "Three parts: dreamy pastoral (guitar, flute, birdsong) → plain hymn in the style of 'Simple Gifts' → darkening unease, low drones, somber unresolved end.",
+   "mood": "Three parts: dreamy pastoral (guitar, flute, birdsong) \u2192 plain hymn in the style of 'Simple Gifts' \u2192 darkening unease, low drones, somber unresolved end.",
    "good_part": null,
    "notes": null,
    "used_in": [
@@ -772,7 +772,7 @@
     {
      "video": "Good Luck (Ouija)",
      "where": "Alternate in the folder (backup for ch05)",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -830,7 +830,7 @@
     {
      "video": "Good Luck (Ouija)",
      "where": "Copied in as g_founding; not used (listed as written for slavery)",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -872,16 +872,16 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch08 (its hopeful last 15 s, extended)",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Good Luck (Ouija)",
      "where": "Alternate in the folder (backup for ch06)",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Dressed to Kill (15minhistorystyle, projects/Dressed_To_Kill)",
-     "where": "Ch04 The Walls (heavy): cut 4–6 frames before 'natural death' (music drop)",
+     "where": "Ch04 The Walls (heavy): cut 4\u20136 frames before 'natural death' (music drop)",
      "bed_volume": "0.12"
     }
    ],
@@ -971,7 +971,7 @@
    "prompt": "A 60-second cue. The aftermath of a sudden naval attack, 1807: low sustained strings, a distant muffled field drum like a heartbeat, a mournful solo fiddle line, sparse and grave. In the second half it turns quietly questioning and builds tension toward something larger, with a slow crescendo in the strings and a soft snare roll. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
    "mood": "Aftermath of an attack: low sustained strings, distant muffled field drum like a heartbeat, mournful solo fiddle, sparse and grave; second half questioning, slow crescendo + soft snare roll.",
    "good_part": "First half is the grave part; second half builds tension.",
-   "notes": "Ouija MUSIC.md: among the loudest; keep 0.12–0.14.",
+   "notes": "Ouija MUSIC.md: among the loudest; keep 0.12\u20130.14.",
    "used_in": [
     {
      "video": "The War Nobody Won (Jackson repo, src/v2)",
@@ -1058,7 +1058,7 @@
    "generator": "Suno",
    "model": "Suno",
    "prompt": "Civil War documentary underscore, begins with a lone field snare and a fife-like wooden flute, young and eager march, then turns somber and heavy, low strings, distant muted brass, slow timpani, grief without melodrama, then fragile and quiet with solo cello, restrained, respectful, space for narrator, cinematic, instrumental",
-   "mood": "Lone field snare + fife-like flute, young eager march → somber heavy (low strings, muted brass, timpani) → fragile quiet solo cello.",
+   "mood": "Lone field snare + fife-like flute, young eager march \u2192 somber heavy (low strings, muted brass, timpani) \u2192 fragile quiet solo cello.",
    "good_part": "Somber second half is the reusable grave part.",
    "notes": null,
    "used_in": [
@@ -1070,7 +1070,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback (somber second half) for Ch09 aftermath; copied in as a_civil_war, unused",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -1124,7 +1124,7 @@
    "prompt": null,
    "mood": "Dark, low and eerie (Ouija's 'fear' theme); the darker Suno replacement for r_spirits.",
    "good_part": null,
-   "notes": "Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.7 dB, 44.1 kHz/192k). Ouija MUSIC.md: one of the loudest cues, keep at 0.12–0.14.",
+   "notes": "Mastered version of the Suno download r_spirits_dark_suno_src (same Suno id; +4.7 dB, 44.1 kHz/192k). Ouija MUSIC.md: one of the loudest cues, keep at 0.12\u20130.14.",
    "used_in": [
     {
      "video": "Fix Everything (Reform-Era)",
@@ -1139,7 +1139,7 @@
     {
      "video": "Good Luck (Ouija)",
      "where": "Ch01 Two Pictures (the 1973 half, hard cut from j_good_feelings)",
-     "bed_volume": "0.15 → 0.12"
+     "bed_volume": "0.15 \u2192 0.12"
     },
     {
      "video": "Good Luck (Ouija)",
@@ -1222,7 +1222,7 @@
    "prompt": "grave suspense documentary underscore, prophetic and foreboding, low string drones, distant deep drum like a slow heartbeat, sparse eerie high strings like an eclipse, dread slowly rising, a sudden dark swell, then hollow silence and a grieving low cello aftermath, restrained, no action music, no heroics, space for narrator, instrumental",
    "mood": "Grave prophetic suspense: low drones, slow heartbeat drum, eerie high strings (eclipse), rising dread, sudden dark swell, hollow silence, grieving cello aftermath.",
    "good_part": null,
-   "notes": "Embedded Suno title tag says 'World Outside' (id 0a2e74c2…), but it was uploaded as 'South Hampton.mp3' and differs from g_world_outside.",
+   "notes": "Embedded Suno title tag says 'World Outside' (id 0a2e74c2\u2026), but it was uploaded as 'South Hampton.mp3' and differs from g_world_outside.",
    "used_in": [
     {
      "video": "Grip Tighter (Slaveryvideo)",
@@ -1252,13 +1252,13 @@
    "used_in": [
     {
      "video": "Grip Tighter (Slaveryvideo)",
-     "where": "Ch05 The Pyramid (from the top; fades just before '…one more reason. Fear.')",
+     "where": "Ch05 The Pyramid (from the top; fades just before '\u2026one more reason. Fear.')",
      "bed_volume": "0.17"
     },
     {
      "video": "Good Luck (Ouija)",
      "where": "Copied in as g_pyramid; was option A for ch02/C for ch05 (review/music_options), not used",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Dressed to Kill (15minhistorystyle, projects/Dressed_To_Kill)",
@@ -1285,7 +1285,7 @@
    "prompt": "industrial revolution documentary underscore, mechanical ostinato like turning gears and a cotton gin crank, pizzicato strings and muted piano repeating pattern, steady ticking pulse, gradually adds low strings and brass, momentum building relentlessly, darker and heavier as it grows, ominous undertone, no melody hooks, cinematic, space for narrator, instrumental",
    "mood": "Industrial mechanical ostinato (gin crank, gears): pizzicato + muted piano, ticking pulse, adds low strings/brass, relentless, darker and heavier.",
    "good_part": null,
-   "notes": "Embedded Suno title tag says 'Founding' (id 27d1a598…), but it was uploaded as 'Cotton Engine.mp3' and is a different take from g_founding.",
+   "notes": "Embedded Suno title tag says 'Founding' (id 27d1a598\u2026), but it was uploaded as 'Cotton Engine.mp3' and is a different take from g_founding.",
    "used_in": [
     {
      "video": "Grip Tighter (Slaveryvideo)",
@@ -1309,7 +1309,7 @@
    "generator": "Google Lyria",
    "model": "lyria-3.5",
    "prompt": "A 110-second cue about immigrants and the hostility they met, 1830s-1850s: opens with a sorrowful Irish low whistle and cello lament over sustained strings (famine and emigration), then turns uneasy and ominous with a low pulsing ostinato and dark brass swells (a mob, a burning building), then sly and sardonic with plucked strings (a fake bestseller), ending with a tense, secretive march on muted snare. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
-   "mood": "Four moods: Irish low whistle + cello lament (famine) → uneasy pulsing ostinato, dark brass (mob, fire) → sly sardonic pizzicato → tense secretive muted-snare march.",
+   "mood": "Four moods: Irish low whistle + cello lament (famine) \u2192 uneasy pulsing ostinato, dark brass (mob, fire) \u2192 sly sardonic pizzicato \u2192 tense secretive muted-snare march.",
    "good_part": "Second half (from ~55 s: sardonic pizzicato then the secretive march) is the reusable part for non-immigration stories.",
    "notes": null,
    "used_in": [
@@ -1331,7 +1331,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch10 if grip.mp3 missing; copied in as r_nativism but unused",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -1351,7 +1351,7 @@
    "generator": "Google Lyria",
    "model": "lyria-3.5",
    "prompt": "A 110-second cue: defiant and building for a newspaper editor who refuses to back down, 1831: driving low strings and a steady pulse that grow into a powerful, uncompromising theme with timpani hits, then danger and chaos (a mob) with dissonant strings, then a stubborn, resolved ending. Instrumental only, no vocals, no lyrics. Modern documentary underscore for a history explainer in the style of investigative YouTube documentaries: tasteful, textured, cinematic; leave clear space in the midrange for a narrator; no heavy drum kit, no EDM, no pop hooks. Mix: warm and understated.",
-   "mood": "Defiant and building: driving low strings → powerful uncompromising theme with timpani → dissonant chaos (a mob) → stubborn resolved ending.",
+   "mood": "Defiant and building: driving low strings \u2192 powerful uncompromising theme with timpani \u2192 dissonant chaos (a mob) \u2192 stubborn resolved ending.",
    "good_part": null,
    "notes": null,
    "used_in": [
@@ -1373,7 +1373,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Copied in as r_abolition_b, unused",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
@@ -1435,9 +1435,9 @@
    "generator": "Google Lyria",
    "model": "lyria-3.5",
    "prompt": "A 90-second cue: the night the British burned Washington, 1814. Opens urgent and anxious (hurried tremolo strings, a ticking clock pulse), a tender quiet interlude for saving a treasured painting, then dark and heavy as flames rise: low brass, timpani rolls, a descending minor theme. Instrumental only, no vocals. Documentary underscore for a classroom history video staged as a 19th-century paper toy theater; leave space in the midrange for a narrator; no drum kit, no synths, no modern pop production.",
-   "mood": "Burning of Washington: urgent anxious tremolo + ticking clock → tender quiet interlude (saving the painting) → dark and heavy, low brass, timpani, descending minor theme.",
+   "mood": "Burning of Washington: urgent anxious tremolo + ticking clock \u2192 tender quiet interlude (saving the painting) \u2192 dark and heavy, low brass, timpani, descending minor theme.",
    "good_part": null,
-   "notes": "Loudest Lyria cue (−11.1 LUFS, true peak +0.8 dBTP).",
+   "notes": "Loudest Lyria cue (\u221211.1 LUFS, true peak +0.8 dBTP).",
    "used_in": [
     {
      "video": "The War Nobody Won (Jackson repo, src/v2)",
@@ -1447,7 +1447,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch09 Southampton; copied in as w_fire, unused",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -1478,13 +1478,13 @@
     },
     {
      "video": "The War Nobody Won (Jackson repo, src/v2)",
-     "where": "Legacy (final, from fin−10)",
+     "where": "Legacy (final, from fin\u221210)",
      "bed_volume": "0.16"
     },
     {
      "video": "Good Luck (Ouija)",
      "where": "Alternate in the folder (backup for the ending)",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -1503,8 +1503,8 @@
    "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
    "generator": "Suno",
    "model": "Suno",
-   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarrón bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
-   "mood": "Mexican Revolution 1913: nylon guitar, guitarrón, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet.",
+   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarr\u00f3n bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
+   "mood": "Mexican Revolution 1913: nylon guitar, guitarr\u00f3n, lonely trumpet, chugging train rhythm, dusty building tension, ends suspended and quiet.",
    "good_part": null,
    "notes": "Tied to Bierce (Ouija MUSIC.md).",
    "used_in": [
@@ -1534,7 +1534,7 @@
    "source_video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
    "generator": "Suno",
    "model": "Suno",
-   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarrón bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
+   "prompt": "cinematic underscore for the Mexican Revolution of 1913, nylon-string guitar, deep guitarr\u00f3n bass, distant lonely trumpet, steady chugging train rhythm on hand percussion, dusty desert expanse, building tension and momentum, respectful and dramatic, not comic, not mariachi party, ends suspended and quiet, space for narrator, instrumental",
    "mood": "Alternate take of a_mexico (65 s, low dynamic range).",
    "good_part": null,
    "notes": null,
@@ -1542,7 +1542,7 @@
     {
      "video": "The Man Who Couldn't Sit Still (Ambrose Bierce)",
      "where": "Not referenced by any chapter",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     }
    ],
    "alias_names": [
@@ -1588,7 +1588,7 @@
     {
      "video": "Grip Tighter (Slaveryvideo)",
      "where": "Fallback for Ch02 (first 50 s) if founding.mp3 missing",
-     "bed_volume": "—"
+     "bed_volume": "\u2014"
     },
     {
      "video": "Good Luck (Ouija)",
@@ -1627,8 +1627,8 @@
    "source_video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
    "generator": "Suno",
    "model": "Suno",
-   "prompt": "1820s–1840s American and Mexican frontier, wide open plains at dawn, nylon-string guitar and solo fiddle trading a simple folk melody, soft guitarrón bass, light hand drum and shaker, open fifths, gentle walking pulse; hopeful and curious at first, then a slow undercurrent of unease creeps in with low strings in the second half; documentary, restrained, space for narrator, instrumental",
-   "mood": "Frontier theme: nylon guitar and solo fiddle trading a folk melody, guitarrón, hand drum; hopeful and open, then low strings bring unease in the second half.",
+   "prompt": "1820s\u20131840s American and Mexican frontier, wide open plains at dawn, nylon-string guitar and solo fiddle trading a simple folk melody, soft guitarr\u00f3n bass, light hand drum and shaker, open fifths, gentle walking pulse; hopeful and curious at first, then a slow undercurrent of unease creeps in with low strings in the second half; documentary, restrained, space for narrator, instrumental",
+   "mood": "Frontier theme: nylon guitar and solo fiddle trading a folk melody, guitarr\u00f3n, hand drum; hopeful and open, then low strings bring unease in the second half.",
    "good_part": "Hopeful opening for arrivals; the turn toward unease in the second half (The Exact Spot lands it on 'a little too well').",
    "notes": "Written to be reused for westward expansion, the Oregon Trail, the Gold Rush, any 'new land' chapter in the 1800s.",
    "used_in": [
@@ -1656,7 +1656,7 @@
    "prompt": "1840s army on the march, steady field snare and bass drum cadence, low string ostinato, distant bugle-like brass call, building momentum and tension over two minutes, ominous and serious, never triumphant or heroic, no fanfare payoff, ends on a held low note; documentary, restrained, space for narrator, instrumental",
    "mood": "War-outbreak march: field snare and bass-drum cadence, low string ostinato, distant bugle call; builds steadily, ominous, never heroic; held low note.",
    "good_part": "Builds to its peak around 50 s (The Exact Spot times it so the peak lands on 'Congress declares war'); from 0:20 it works as a mid-war push.",
-   "notes": "Quiet file (−17.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, Spanish-American War) or a battle montage.",
+   "notes": "Quiet file (\u221217.9 LUFS): bed 0.17. Reuse for the start of any war (Civil War, Spanish-American War) or a battle montage.",
    "used_in": [
     {
      "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
@@ -1691,7 +1691,7 @@
    "used_in": [
     {
      "video": "The Exact Spot (15minhistorystyle, projects/Mexican_American_War)",
-     "where": "Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Seguín)",
+     "where": "Ch09 Who Paid (heavy chapter: disease, the moving border, the Land Act, Juan Segu\u00edn)",
      "bed_volume": "0.13"
     }
    ],
@@ -1860,7 +1860,7 @@
    "model": "acestep-v15-turbo, 8 steps, seed 1865, planning LM off",
    "prompt": "1860s breaking news, urgent ticking telegraph-like pizzicato rhythm, tense low strings, field snare rolls, a sense of shock and hurry, then a sudden hush at the end, documentary underscore, restrained, cinematic, space for a narrator, instrumental | bpm 100, D minor, 4/4 time, 60 s",
    "mood": "Breaking news in the 1860s: an urgent telegraph-like pizzicato tick, tense low strings and snare rolls; shock and hurry, then a hush.",
-   "good_part": "The tick starts at ~0:10 (start the cue there); the busiest stretch is 0:35–0:50.",
+   "good_part": "The tick starts at ~0:10 (start the cue there); the busiest stretch is 0:35\u20130:50.",
    "notes": "Not approved: the user listened (Oct 2026) and found most of the ACE-Step cues unusable; ask before using any. Free, made locally on CPU (tools/music_acestep.py). Fits: News arriving: Sumter, Lincoln shot, a battle result, an election. Judged from loudness and spectrum; listen before use.",
    "used_in": [],
    "approved": false
@@ -1892,7 +1892,7 @@
    "model": "acestep-v15-turbo, 8 steps, seed 1865, planning LM off",
    "prompt": "dignified slow hymn on reed harmonium and solo cello, 1860s church, quiet determination rising to a restrained proud swell, then settles, documentary underscore, restrained, cinematic, space for a narrator, instrumental | bpm 64, F major, 4/4 time, 60 s",
    "mood": "Dignified slow hymn on reed harmonium and solo cello: quiet determination rising to a restrained proud swell, then settling.",
-   "good_part": "The swell around 0:20–0:45.",
+   "good_part": "The swell around 0:20\u20130:45.",
    "notes": "Not approved: the user listened (Oct 2026) and found most of the ACE-Step cues unusable; ask before using any. Free, made locally on CPU (tools/music_acestep.py). Fits: Organising, conventions, the first Black officeholders, a hard-won amendment. Judged from loudness and spectrum; listen before use.",
    "used_in": [],
    "approved": false
@@ -1940,7 +1940,7 @@
    "model": "Suno",
    "prompt": "1860s railroad construction, driving rhythmic pulse like hammers on spikes and iron wheels on rails, col legno strings and low string ostinato, anvil-like metallic percussion, a steady locomotive chug that slowly gathers speed, low brass entering in the second half, determined and relentless, impressive but not triumphant, ends on a held low chord, 112 BPM, 4/4; documentary, restrained, space for narrator, instrumental",
    "mood": "1860s railroad building: col legno and low-string ostinato, anvil percussion, a locomotive chug gathering speed, low brass in the second half; relentless, impressive, not triumphant.",
-   "good_part": "Quiet ostinato intro (0–8 s) works as a reflective reprise; full drive from ~30 s.",
+   "good_part": "Quiet ostinato intro (0\u20138 s) works as a reflective reprise; full drive from ~30 s.",
    "notes": "Reuse for any building or industry montage: canals, steel, bridges, the assembly line.",
    "used_in": [
     {
@@ -1972,7 +1972,7 @@
    "prompt": "two-part cue: a short heroic Hollywood-western fanfare that falls apart into a deflated, deadpan letdown, bold French horns and trumpets with timpani for the opening, then the brass sags out of tune, the tempo drags to a halt, and only sparse doubtful pizzicato, a lone dry bassoon and soft upright bass remain, wry and sheepish rather than sad, 100 BPM slowing to 70 BPM; documentary, restrained, space for narrator, instrumental",
    "mood": "The myth beat: a heroic Hollywood-western fanfare meant to sour into a deadpan letdown (the turn is subtle in this take).",
    "good_part": "Mark the turn with LEGEND_TURN in Ep 1 Ch05.",
-   "notes": "Reuse for any \"you may have heard…\" myth beat.",
+   "notes": "Reuse for any \"you may have heard\u2026\" myth beat.",
    "used_in": [
     {
      "video": "Not in the Picture (15minhistorystyle, projects/American_West, Ep 1)",
@@ -1998,7 +1998,7 @@
    "prompt": "a long, very quiet grieving bed for the heaviest moments, three minutes, a soft sustained string pad barely moving, a few slow solo cello phrases with long silences between, one low piano note now and then, no swell, no build, no melodrama, the same calm level from start to finish, ends in silence, free time, about 56 BPM; documentary, restrained, space for narrator, instrumental",
    "mood": "A long, very quiet grieving bed: sustained string pad, slow solo cello phrases with long silences, an occasional low piano note; no swell, no build. Trimmed to 3:04.",
    "good_part": "Even all the way through; start anywhere.",
-   "notes": "Reuse for the heaviest chapter of any video (Sand Creek, Wounded Knee in Ep 4). Quiet file (−22 LUFS).",
+   "notes": "Reuse for the heaviest chapter of any video (Sand Creek, Wounded Knee in Ep 4). Quiet file (\u221222 LUFS).",
    "used_in": [
     {
      "video": "Not in the Picture (15minhistorystyle, projects/American_West, Ep 1)",
@@ -2107,7 +2107,7 @@
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch01 cold open (0.15) + Ch09 ending",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2122,13 +2122,13 @@
    "model": null,
    "prompt": "Renaissance early music, lute, viola da gamba, recorder, soft frame drum, curious and contemplative, candlelit study, gentle mid-tempo, modal melody, warm and intimate, sparse, instrumental",
    "mood": "Renaissance early music: lute, viola da gamba, recorder, soft frame drum; curious, candlelit.",
-   "good_part": "Fullest 14–50 s; thins out in the last 6 s (a natural tail).",
+   "good_part": "Fullest 14\u201350 s; thins out in the last 6 s (a natural tail).",
    "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
    "used_in": [
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch02 The Typo + Ch07 opening",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2143,13 +2143,13 @@
    "model": null,
    "prompt": "Middle Eastern cinematic underscore, oud, ney flute, qanun, riq and darbuka, low string drone, maqam hijaz, mysterious night market, slow steady groove, restrained, documentary, instrumental",
    "mood": "Middle Eastern night-market underscore: oud, ney, qanun, riq/darbuka, string drone, maqam hijaz.",
-   "good_part": "Quiet first ~8 s, then builds; densest 38–60 s.",
+   "good_part": "Quiet first ~8 s, then builds; densest 38\u201360 s.",
    "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
    "used_in": [
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch03 The Trade",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2170,7 +2170,7 @@
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch03 tomb raid + Ch04 storeroom",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2185,13 +2185,13 @@
    "model": null,
    "prompt": "vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar",
    "mood": "Dark whimsy: pizzicato, bassoon, harpsichord, celesta, tick-tock percussion; sneaky and macabre.",
-   "good_part": "Mischievous all through; fullest 40–56 s; ends ~64 s.",
+   "good_part": "Mischievous all through; fullest 40\u201356 s; ends ~64 s.",
    "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
    "used_in": [
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch04 The Fakes + Ch05 Fresh Is Best",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2206,13 +2206,13 @@
    "model": null,
    "prompt": "Baroque lament, solo viola da gamba and cello, soft chamber organ, slow descending bass line, grave and respectful, very sparse, long held notes, no percussion, quiet, instrumental",
    "mood": "Baroque lament: viola da gamba and cello, soft chamber organ, descending bass; grave and spare.",
-   "good_part": "Gentle opening, swells 8–16 s and 40–46 s; long quiet tail.",
+   "good_part": "Gentle opening, swells 8\u201316 s and 40\u201346 s; long quiet tail.",
    "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar. Renamed from m_lament when the style branches merged (the Exact Spot cue already had that name).",
    "used_in": [
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch06 Beyond Mummies (heavy)",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ],
    "file": "cues/m_lament_baroque.mp3"
@@ -2228,13 +2228,13 @@
    "model": null,
    "prompt": "Victorian parlor music, upright piano, music box, clarinet, pizzicato violin, waltz time, quaint and curious with a slightly eerie undertone, gaslight atmosphere, gentle, sparse, instrumental",
    "mood": "Victorian parlor waltz: upright piano, music box, clarinet, pizzicato violin; quaint with an eerie edge.",
-   "good_part": "Lively 8–52 s; fades 54 s on.",
+   "good_part": "Lively 8\u201352 s; fades 54 s on.",
    "notes": "Suno custom mode, Instrumental on; exclude: vocals, singing, choir words, rap, EDM, trap, dubstep, drum machine, synth bass, autotune, modern pop, distorted guitar.",
    "used_in": [
     {
      "video": "When Europe Ate Mummies",
      "where": "Ch07 The Party + Ch08 The Tube",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2255,7 +2255,7 @@
     {
      "video": "When Europe Ate Mummies",
      "where": "Shorts (not yet used)",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2270,13 +2270,13 @@
    "model": null,
    "prompt": "1940s wartime newsreel orchestral underscore, instrumental, brushed snare and military snare rolls, low brass chorale, warm strings, solo trumpet, timpani, distant radio-static texture, cinematic but restrained, 72 bpm, minor key turning major",
    "mood": "1940s war years: newsreel orchestra, snare rolls, low brass chorale, solo trumpet, warm strings; restrained, builds to a broad noble middle.",
-   "good_part": "Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80–95 s; settles 114 s; clean ending at 118.5 s.",
+   "good_part": "Quiet first 3 s, enters at 3.5 s, then a slow steady build (no single big hit at 20 s); fullest and noblest 80\u201395 s; settles 114 s; clean ending at 118.5 s.",
    "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
    "used_in": [
     {
      "video": "The Balloon War",
      "where": "Ch01 cold open + Ch02 D-Day (planned)",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2291,13 +2291,13 @@
    "model": null,
    "prompt": "1940s spy caper underscore, instrumental, sneaky swing, walking upright bass, brushed snare, muted trumpet with wah, clarinet runs, pizzicato strings, vibraphone, finger snaps, playful and mischievous, 112 bpm, minor key",
    "mood": "1940s spy caper: sneaky swing, walking bass, muted trumpet, clarinet, vibraphone; playful and mischievous.",
-   "good_part": "Groove from the first second (no quiet intro); stop-time break 70–79 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116–117.5 s.",
+   "good_part": "Groove from the first second (no quiet intro); stop-time break 70\u201379 s (hits at 72, 74, 76, 78.5 s); dip at 84 s, back in at 87.5 s; button and clean end at 116\u2013117.5 s.",
    "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
    "used_in": [
     {
      "video": "The Balloon War",
      "where": "Ch03 The Fake (planned)",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2312,13 +2312,13 @@
    "model": null,
    "prompt": "quiet melancholic cinematic elegy, instrumental, solo felt piano, sparse and slow, soft muted strings, alto flute, harp, gentle wind and paper-rustle textures, fragile and haunting, restrained, no percussion, 60 bpm, minor key, a warm major resolution only at the very end",
    "mood": "Fragile elegy carried by the wind: felt piano, muted strings, alto flute, harp, wind; floating, then sorrow, then a warm close.",
-   "good_part": "Enters at 4 s; swells 18–23 s and 50–52 s; fullest 76–88 s; near silence 90–107 s; returns 108–116 s; last section 128–146 s, fading out by 150 s.",
+   "good_part": "Enters at 4 s; swells 18\u201323 s and 50\u201352 s; fullest 76\u201388 s; near silence 90\u2013107 s; returns 108\u2013116 s; last section 128\u2013146 s, fading out by 150 s.",
    "notes": "Suno custom mode; Lyrics box with section tags only (script/MUSIC.md in Balloon_War); exclude: vocals, choir, lyrics, humming, EDM, trap, pop, rock, synth lead, dubstep, rap, modern drum kit.",
    "used_in": [
     {
      "video": "The Balloon War",
      "where": "Ch04 The Paper Balloon + Ch07 ending (planned)",
-     "bed_volume": "0.18–0.22 (Suno masters quiet)"
+     "bed_volume": "0.18\u20130.22 (Suno masters quiet)"
     }
    ]
   },
@@ -2376,8 +2376,8 @@
    "source_video": "Trick-or-Treating Was a Bribe (Halloween)",
    "generator": "Suno",
    "prompt": "upbeat, happy, cheerful, festive, celtic pub, irish pub, drinking song, reel, major key, bright, uplifting, new age, enya, riverdance",
-   "mood": "Haunted Irish Halloween night (darker version 2A): slow eerie air on low whistle, ghostly pipe drones, fiddle harmonics, slow bodhrán heartbeat; a sinister faster middle.",
-   "good_part": "Builds steadily; fullest ~120–135 s (the finale reprise put it under \"every fix became the tradition… pay up\"); its own outro closed the end screen.",
+   "mood": "Haunted Irish Halloween night (darker version 2A): slow eerie air on low whistle, ghostly pipe drones, fiddle harmonics, slow bodhr\u00e1n heartbeat; a sinister faster middle.",
+   "good_part": "Builds steadily; fullest ~120\u2013135 s (the finale reprise put it under \"every fix became the tradition\u2026 pay up\"); its own outro closed the end screen.",
    "used_in": [
     "Trick-or-Treating Was a Bribe"
    ]
@@ -2406,7 +2406,7 @@
    "source_video": "Cheap as Dirt (15minhistorystyle, projects/American_West, Ep 2)",
    "generator": "Suno",
    "model": "Suno",
-   "prompt": "1870s cattle drive across open Texas grassland, a loping two-beat horse-gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering far off, guitarrón bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme, 92 BPM, 2/4 feel, G major with a modal edge; documentary, restrained, space for narrator, instrumental",
+   "prompt": "1870s cattle drive across open Texas grassland, a loping two-beat horse-gait rhythm on hand drum and upright bass, nylon-string guitar and solo fiddle trading a plain trail melody, harmonica answering far off, guitarr\u00f3n bass in the second half, dusty and steady, a little lonely, warm but not cheerful, never a cowboy movie theme, 92 BPM, 2/4 feel, G major with a modal edge; documentary, restrained, space for narrator, instrumental",
    "mood": "The cattle trail: loping two-beat gait on hand drum and upright bass, nylon guitar and fiddle trading a plain trail melody, harmonica far off; dusty, steady, a little lonely.",
    "good_part": "Even all the way through; it thins in the last 15 s.",
    "notes": "Reuse for any overland journey: the Oregon Trail, the Pony Express, a migration on foot.",
@@ -2538,7 +2538,7 @@
    "model": "Suno",
    "prompt": "a quiet, curious cold open for a documentary about a forgotten mystery in a misty pine forest, a soft felt piano figure of three notes that keeps asking a question, low muted strings underneath, a breath of alto flute, faint harp like falling needles, calm but uneasy, a small dark swell when the secret is revealed, then it holds still and ends on an unresolved chord left hanging in the air, 72 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental",
    "mood": "Quiet curious cold open: felt piano three-note question, low muted strings, alto flute, harp; a small dark swell; ends unresolved.",
-   "good_part": "Sound from the first second (no silent lead); small swells ~15 s and ~40 s; dip 88–92 s; back 93–100 s; fades out by 104 s.",
+   "good_part": "Sound from the first second (no silent lead); small swells ~15 s and ~40 s; dip 88\u201392 s; back 93\u2013100 s; fades out by 104 s.",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2559,7 +2559,7 @@
    "model": "Suno",
    "prompt": "a piece that begins tense and low, with distant low strings and a soft timpani heartbeat for an air raid seen from far away, then turns to wonder as a high wind is discovered, airy strings rising, alto flute and harp drifting west to east, a sense of altitude and open sky, then a cool determined close as a plan takes shape, 76 BPM, 4/4, E minor; documentary, restrained, space for narrator, instrumental",
    "mood": "Tense and distant (low strings, soft timpani heartbeat), turning to airy wonder (rising strings, alto flute, harp), then a cool determined close.",
-   "good_part": "Steady from the top; lifts ~5 s and ~68 s; fullest 80–87 s; fades from 95 s, out by 98 s.",
+   "good_part": "Steady from the top; lifts ~5 s and ~68 s; fullest 80\u201387 s; fades from 95 s, out by 98 s.",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2580,7 +2580,7 @@
    "model": "Suno",
    "prompt": "a delicate, patient piece for teenage girls working in silence in a vast dim 1940s theater, a repeating gentle felt piano pattern like careful brush strokes, a sparse koto answering now and then, soft pizzicato, muted strings, hushed and focused with a quiet sadness underneath, in the middle a soft clockwork pulse of plucked strings and harp like a small machine rising and falling, then back to the brush strokes, ending small and unfinished, 80 BPM, 4/4, A minor; documentary, restrained, space for narrator, instrumental",
    "mood": "Delicate, patient work in a dim theater: repeating felt-piano brush strokes, sparse koto, pizzicato, muted strings; a soft clockwork pulse in the middle.",
-   "good_part": "Dips 22–25 s and 69–75 s (good landing spots for a line); fullest 55–60 s and 88–93 s; sparse ending 105–118 s.",
+   "good_part": "Dips 22\u201325 s and 69\u201375 s (good landing spots for a line); fullest 55\u201360 s and 88\u201393 s; sparse ending 105\u2013118 s.",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2622,7 +2622,7 @@
    "model": "Suno",
    "prompt": "a curious 1940s American investigation, pizzicato strings and upright bass, vibraphone, muted trumpet, a light brushed rhythm, puzzled and searching like detectives laying out clues, a brief heroic lift for paratroopers jumping into a forest fire, then microscope-quiet and precise, building to a discovery, and ending on a sudden unresolved question, 96 BPM, 4/4, F minor; documentary, period instruments, restrained, space for narrator, instrumental",
    "mood": "Curious 1940s American investigation: pizzicato, upright bass, vibraphone, muted trumpet, brushes; a brief brave lift; microscope-quiet; ends on an unresolved question.",
-   "good_part": "Steady; dip 89–92 s; lift 92–130 s; dip 132–136 s; last block 136–150 s; fades by 157 s (trimmed from 159.6 s, silent tail).",
+   "good_part": "Steady; dip 89\u201392 s; lift 92\u2013130 s; dip 132\u2013136 s; last block 136\u2013150 s; fades by 157 s (trimmed from 159.6 s, silent tail).",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2643,7 +2643,7 @@
    "model": "Suno",
    "prompt": "restrained 1940s Washington intrigue for a newspaperman keeping a secret, upright bass walking softly, brushed cymbal, muted trumpet with a lonely phrase, felt piano, low strings, a steady ticking pulse like a clock in a newsroom at night, measured and serious, a slow tightening as the dilemma grows, a quiet resolved landing near the end, then a held breath, 88 BPM, 4/4, C minor; documentary, period instruments, restrained, space for narrator, instrumental",
    "mood": "Restrained 1940s Washington intrigue: walking upright bass, brushed cymbal, lonely muted trumpet, felt piano, low strings, a newsroom-clock pulse; tightens slowly.",
-   "good_part": "Short quiet start 0–6 s; steady; dip ~105 s; choppier 125–145 s; ends 157 s.",
+   "good_part": "Short quiet start 0\u20136 s; steady; dip ~105 s; choppier 125\u2013145 s; ends 157 s.",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2664,7 +2664,7 @@
    "model": "Suno",
    "prompt": "very sparse grief for a quiet forest, solo felt piano, single notes with long silences between them, a faint low string held underneath, no melody to speak of, still and respectful, almost nothing, ending in silence, 60 BPM, 4/4, D minor; documentary, restrained, space for narrator, instrumental",
    "mood": "Asked for very sparse grief (single felt-piano notes, long silences); the take is fuller than asked: check before using it in the heavy chapter.",
-   "good_part": "Dips 3–8 s and 12–15 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail).",
+   "good_part": "Dips 3\u20138 s and 12\u201315 s; otherwise steady; fades by 128 s (trimmed from 129.8 s, silent tail).",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user). Made for The Balloon War v2 ch 8 (Bly) but not used: the heavy chapter runs birdsong, then silence.",
    "used_in": []
   },
@@ -2679,7 +2679,7 @@
    "model": "Suno",
    "prompt": "a warm, quiet reconciliation for a documentary ending, felt piano and soft strings with alto flute, a gentle koto line woven in like folding paper, harp, it begins reflective and grave, slowly opens into warmth and grace in the second half, a hopeful lift that never becomes triumphant, the last minute simple and luminous with long held chords, ends gently on a major chord that rings out, 70 BPM, 4/4, D minor to D major; documentary, restrained, space for narrator, instrumental",
    "mood": "Warm, quiet reconciliation for the ending: felt piano, soft strings, alto flute, a gentle koto line, harp; reflective, opening into warmth, a gentle lift, a ringing major close.",
-   "good_part": "Steady from ~5 s; swells ~45 s and 150–180 s; quieter 185–205 s; last swell 205–212 s; out by 217 s.",
+   "good_part": "Steady from ~5 s; swells ~45 s and 150\u2013180 s; quieter 185\u2013205 s; last swell 205\u2013212 s; out by 217 s.",
    "notes": "Prompt and section tags in projects/Balloon_War/script/SUNO_PROMPTS_v2.md. Loudness charted, not listened to (the cue was chosen by the user).",
    "used_in": [
     {
@@ -2688,6 +2688,240 @@
      "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
     }
    ]
+  },
+  {
+   "canonical": "ga_gilded_theme",
+   "md5": "a2ecca41b73c052072e1a022307ce666",
+   "duration_s": 119.8,
+   "integrated_lufs": -15.4,
+   "true_peak_dbtp": -0.8,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "the theme for a documentary series about America's Gilded Age in the 1880s, a glittering four-note motif on music box and celesta over a bright parlor piano, polished and elegant like gold leaf, then low cello and muted brass enter underneath and the same motif turns darker and heavier, the cheap metal under the shine, steady and restrained, a warm string swell that never becomes triumphant, the last part returns to solo parlor piano playing the motif slowly, ending on an unresolved chord, 84 BPM, 4/4, E-flat major to C minor; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Series theme: glittering four-note motif on music box/celesta and parlor piano, darkened by low cello and muted brass; restrained swell; solo-piano close on an unresolved chord.",
+   "good_part": "Full from the start; quieter stretch ~90-110 s (the solo-piano close, for the ending); out by 118 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 1 cold open (0:00-1:01) and the ending (ch 9 from 11:37)",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Gilded Age Theme - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_gilded_theme.mp3"
+  },
+  {
+   "canonical": "ga_the_squeeze",
+   "md5": "17d16e2e8f271a873e476909c4c1eda7",
+   "duration_s": 169.6,
+   "integrated_lufs": -13.4,
+   "true_peak_dbtp": -0.1,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a sly, cold rise to power in the oil business of the 1860s and 1870s, it starts comic and shady with a tipsy clarinet, light tuba and pizzicato for a con-man father selling fake medicine, then turns neat and precise, a ticking pizzicato like someone counting every penny in a ledger, then a steady refinery pulse of low strings and woodblock, then the squeeze: a slow tightening low-string ostinato and muted brass stabs, the pressure rising bar by bar, heavy brass chords as rivals are bought out one by one, ending cold, controlled and powerful on a low sustained chord, 96 BPM, 4/4, C minor; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Sly, cold rise to power: tipsy con-man clarinet and tuba, ledger-ticking pizzicato, refinery pulse, then a tightening squeeze with muted brass; ends cold on a low chord.",
+   "good_part": "Lighter and varied for the first ~65 s, builds from ~70 s, fullest 120-160 s, low tail from ~162 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 6 the con man's son (tail into ch 7)",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "The Squeeze - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_the_squeeze.mp3"
+  },
+  {
+   "canonical": "ga_weavers_son",
+   "md5": "f4ea12f47abd20a15dc5e80b8f5e8926",
+   "duration_s": 134.5,
+   "integrated_lufs": -15.2,
+   "true_peak_dbtp": -0.3,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a rags-to-riches story that begins in a Scottish weaving village in the 1840s and climbs to the top of American industry, it opens with a gentle Scottish air on solo fiddle and harp over a soft wooden handloom rhythm, turns sad and minor when machines take the work, then a hopeful crossing, then a quick telegraph-like pizzicato tick, the music climbs step by step with more strings and brass as he grows richer, a confident, grand but restrained peak, then it suddenly drops away to the lonely solo fiddle again, ending with a small wry plucked button, 92 BPM, 4/4, A minor to A major; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Rags to riches: Scottish fiddle air and loom rhythm, a minor turn, a crossing, telegraph pizzicato, climbing strings and brass, a drop to solo fiddle, a wry button.",
+   "good_part": "Fullest ~55-60 s and ~85-100 s; thins from ~120 s; out by 131 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 5 the weaver's son",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Weavers Son - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_weavers_son.mp3"
+  },
+  {
+   "canonical": "ga_kellys",
+   "md5": "babb64491efed60d31d2a7f0970e67a7",
+   "duration_s": 79.6,
+   "integrated_lufs": -14.7,
+   "true_peak_dbtp": -1.9,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a warm, tired family supper in a Brooklyn tenement in 1887, an Irish immigrant family at the end of a long day, a simple tender air on low whistle with a fiddle answering, soft harp and a gentle concertina underneath, homely and humane with a quiet worry under it, unhurried, a small wry lift near the end, ending softly on a warm chord, 72 BPM, 3/4, D major; documentary, period folk instruments, restrained, space for narrator, instrumental",
+   "mood": "The Kelly family theme: tender low-whistle air, fiddle answering, harp and concertina, 3/4; tired warmth, a small wry lift.",
+   "good_part": "Dips ~42 s and at the end (78 s); otherwise even.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 7 dinner from 'That night' and every later Kelly scene",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "The Kellys - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_kellys.mp3"
+  },
+  {
+   "canonical": "ga_bad_wire",
+   "md5": "7e2d2c24233e84f94bbffd50bfea63c1",
+   "duration_s": 74.1,
+   "integrated_lufs": -16.2,
+   "true_peak_dbtp": -0.5,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a sneaky caper about a swindle at the Brooklyn Bridge in 1878, tiptoeing pizzicato, walking upright bass, a sly low clarinet, a clip-clop woodblock rhythm like a horse-drawn wagon taking a detour, tension creeping up, a sudden stop and a held breath when the trick is discovered, then broad steady low strings and a calm horn as the bridge holds strong, ending settled and solid, 100 BPM, 4/4, D minor to D major; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Sneaky 1878 swindle caper: tiptoe pizzicato, walking bass, sly clarinet, clip-clop wagon rhythm, tension; settles broad and solid.",
+   "good_part": "Even; small dip ~50 s; out by 73 s. No obvious full stop in the chart: check where the 'held breath' falls by ear.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 9 the wire fraud (10:42-11:37)",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Bad Wire - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_bad_wire.mp3"
+  },
+  {
+   "canonical": "ga_age_of_steel",
+   "md5": "f1f3463a8fc84d2759660e7ec0a9d302",
+   "duration_s": 83.7,
+   "integrated_lufs": -14.9,
+   "true_peak_dbtp": -0.1,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a confident, wondrous piece for the age of invention in 1870s America, a driving col legno and pizzicato ostinato like machines starting up, anvil strikes on the beat, a low brass roar and a timpani roll like a furnace blast, strings climbing with momentum, then a bright moment of wonder on celesta and glockenspiel like the first electric light, building and optimistic, never menacing, ending on a strong held chord, 108 BPM, 4/4, D major; documentary, period orchestra, restrained, space for narrator, instrumental",
+   "mood": "Confident age-of-invention build: col legno ostinato, anvil, furnace-blast brass and timpani, a celesta 'light switching on' moment; optimistic.",
+   "good_part": "Quiet start 0-4 s, full from ~20 s; out by 83 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 3 the machines",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Age of Steel - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_age_of_steel.mp3"
+  },
+  {
+   "canonical": "ga_sugar_house",
+   "md5": "feda9b414a7384fb3fb6ac4c96f4374c",
+   "duration_s": 64.8,
+   "integrated_lufs": -13.5,
+   "true_peak_dbtp": -0.3,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "heavy, hot, relentless work in a Brooklyn sugar refinery in the 1880s, a slow grinding machine rhythm on low piano and col legno strings with a metallic clank on every bar, sustained low cellos like heat, weary and grim but humane, a lonely Irish low whistle plays a short tired phrase over the machines, near the end the rhythm keeps grinding as a low brass chord darkens, 84 BPM, 4/4, E minor; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Hot, relentless refinery shift: grinding low-piano/col legno machine rhythm with a clank, low cellos, a tired Irish low-whistle phrase.",
+   "good_part": "Lighter first 8 s, steady and heavy after; ends 64 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 4 the refinery",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Sugar House - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_sugar_house.mp3"
+  },
+  {
+   "canonical": "ga_heroes_or_villains",
+   "md5": "9fd4f6fc5abcb7446d7758f29b9e4149",
+   "duration_s": 74.8,
+   "integrated_lufs": -15.9,
+   "true_peak_dbtp": -0.5,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "an even-handed piece for a debate about the men who built American industry in the 1880s, a calm ticking pulse, a noble, proud brass and string phrase like a statue being unveiled, then a sly pizzicato and muted trumpet answer with a smirk, the two ideas trade back and forth and neither one wins, ending on an open, questioning chord, 90 BPM, 4/4, F major; documentary, period orchestra, restrained, space for narrator, instrumental",
+   "mood": "Even-handed captains-or-barons debate: ticking pulse, a noble brass phrase answered by sly pizzicato and muted trumpet; open questioning end.",
+   "good_part": "Quiet first 2 s; dip ~66 s; ends 74 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 8 leave it alone",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Heroes or Villains - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_heroes_or_villains.mp3"
+  },
+  {
+   "canonical": "ga_noon_twice",
+   "md5": "a1516733f4edeb420b5177050eefd3f0",
+   "duration_s": 74.8,
+   "integrated_lufs": -15.6,
+   "true_peak_dbtp": -0.4,
+   "source_video": "Gilded Age Ep 1 (Chunk History series)",
+   "generator": "Suno",
+   "model": "Suno",
+   "prompt": "a wry, playful piece about railroads changing time in 1883, a dozen ticking clocks slightly out of step on woodblocks and pizzicato, a jaunty parlor piano, a cheeky clarinet, a gentle train-chug rhythm gathering in the second half, a comic double chime like noon striking twice, ending on a light button, 104 BPM, 4/4, G major; documentary, period instruments, restrained, space for narrator, instrumental",
+   "mood": "Wry 1883 railroad-time piece: out-of-step ticking clocks, jaunty parlor piano, cheeky clarinet, a train-chug, a double chime.",
+   "good_part": "Even all the way through; ends at 74 s.",
+   "notes": "Prompt and section tags in projects/Gilded_Age/ep1/script/SUNO_PROMPTS.md. Loudness charted, not listened to.",
+   "used_in": [
+    {
+     "video": "Gilded Age Ep 1",
+     "where": "ch 2 the name",
+     "bed_volume": "bed() from its LUFS (about 13 LU under the voice)"
+    }
+   ],
+   "alias_names": [
+    "Noon Twice - usesuno.com.mp3"
+   ],
+   "group": "Gilded Age (ga_)",
+   "file": "cues/ga_noon_twice.mp3"
   }
  ]
 }

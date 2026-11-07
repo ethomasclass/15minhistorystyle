@@ -36,7 +36,13 @@ None of these is a real artifact; the red notebook is "a notebook like his", the
 - **p06_dip_pen**: the pen runs off the edge of the frame, so it can't be cut out whole.
 - p06_trust_certificate: readable fake words; not needed (the real 1882 certificate is in ch06/).
 
-## Not received yet
+## Dropped (Nov 7: the user asked to do without the rest)
+Covered instead: the lit lamp is the unlit `p07_kerosene_lamp` with a drawn flame and glow; the 39 drops use `p06_solder_lid`
+(a soldered tin top); the land deed is the archival 1878 land-grant map; shares and the stock certificate use `p05_dividend_check` and
+`p05_mortgage_deed`; bookkeeping uses `p06_red_notebook`; raw sugar arriving uses `p04_raw_sugar_sack`; the rebate, waybill, wagon,
+wire test, factory notice, golden egg, coke and kerosene case are drawn in the silhouette style or shown with archival images.
+
+Not made
 p04_sugar_hogshead, p05_coke, p05_golden_egg, p06_clerk_desk,
 p06_freight_waybill, p06_kerosene_can, p06_kerosene_case, p06_rebate_envelope,
 p07_kerosene_lamp_lit, p08_factory_notice, p08_land_deed, p09_wire_tester, p09_wire_wagon
