@@ -80,3 +80,37 @@ function cableXray({cx, cy, r, open = 1, bad = 0, seed = 11}) {
 }
 
 if (typeof window !== 'undefined') Object.assign(window, {EDITS, editFrame, wordAt});
+
+/** A prop cut-out (public/img/props/*.webp) on the desk, with the same contact + lifted shadow as deskCut. */
+const deskProp = (id, opts) => deskCut(`props/${id}.webp`, opts);
+
+/** An index card for a vocabulary word: the term set big, how to say it, the definition (text.js's vCard, parameterised). */
+function vocabCard(term, say, pos, def, {x = 1180, y = 110, w = 660, o = 1, rot = 2} = {}) {
+  const dy = (1 - ease(o)) * -40;
+  return op(Math.min(1, o * 1.5), `<div style="position:absolute;left:${x}px;top:${y + dy}px;width:${w}px;transform:rotate(${rot}deg);background:${C.cream};box-shadow:0 18px 34px rgba(0,0,0,.6);
+      background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 45px,rgba(17,17,17,.12) 45px,rgba(17,17,17,.12) 47px);background-position:0 96px;padding:30px 38px 34px">
+      <div style="display:flex;align-items:baseline;gap:20px"><div style="font-family:Abril;font-size:72px;line-height:1;color:${C.ink}">${term}</div>
+      <div style="font-family:Mono;font-size:22px;letter-spacing:2px;color:#444">${say} &middot; ${pos}</div></div>
+      <div style="font-family:Inter;font-weight:600;font-size:36px;line-height:1.38;color:${C.ink};margin-top:16px">${def}</div></div>` +
+    tape('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', {x: x + 250, y: y - 18 + dy, size: 36, rot: -6, seed: 21}));
+}
+
+/** An 1880s station clock, drawn: a turned wooden bezel, an aged white dial with bar markers, black hands.
+ *  `time` is in hours (12.0 = noon; 11.8 = 11:48); `flash` (0..1) lights the dial when it strikes. */
+function stationClock(cx, cy, r, time, {flash = 0, seconds = true} = {}) {
+  const h = ((time % 12) + 12) % 12, m = (time * 60) % 60, s = (time * 3600) % 60;
+  const hand = (ang, len, wdt, col = '#141210') => { const a = ang * TAU - TAU / 4;
+    return `<line x1="${f1(cx - Math.cos(a) * len * 0.16)}" y1="${f1(cy - Math.sin(a) * len * 0.16)}" x2="${f1(cx + Math.cos(a) * len)}" y2="${f1(cy + Math.sin(a) * len)}" stroke="${col}" stroke-width="${wdt}" stroke-linecap="round"/>`; };
+  const ticks = []; for (let i = 0; i < 60; i++) { const a = i / 60 * TAU, big = i % 5 === 0, r0 = r * (big ? 0.74 : 0.82), r1 = r * 0.88;
+    ticks.push(`<line x1="${f1(cx + Math.cos(a) * r0)}" y1="${f1(cy + Math.sin(a) * r0)}" x2="${f1(cx + Math.cos(a) * r1)}" y2="${f1(cy + Math.sin(a) * r1)}" stroke="#1d1a16" stroke-width="${big ? r * 0.035 : r * 0.009}"/>`); }
+  return `<g filter="url(#ckshadow)">
+      <circle cx="${cx}" cy="${cy}" r="${f1(r * 1.13)}" fill="#4A3220"/><circle cx="${cx}" cy="${cy}" r="${f1(r * 1.13)}" fill="url(#ckwood)"/>
+      <circle cx="${cx}" cy="${cy}" r="${f1(r * 1.0)}" fill="#2E1F14"/>
+      <circle cx="${cx}" cy="${cy}" r="${f1(r * 0.96)}" fill="#E6DFCF"/><circle cx="${cx}" cy="${cy}" r="${f1(r * 0.96)}" fill="url(#ckdial)"/>
+      ${flash > 0 ? `<circle cx="${cx}" cy="${cy}" r="${f1(r * 0.96)}" fill="#FFF6D8" opacity="${(0.55 * flash).toFixed(3)}"/>` : ''}
+      ${ticks.join('')}${hand(h / 12 + m / 720, r * 0.5, r * 0.06)}${hand(m / 60, r * 0.76, r * 0.04)}${seconds ? hand(s / 60, r * 0.8, r * 0.012, '#8A2E22') : ''}
+      <circle cx="${cx}" cy="${cy}" r="${f1(r * 0.05)}" fill="#141210"/></g>`;
+}
+const clockDefs = `<defs><radialGradient id="ckwood" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#9A6A3E" stop-opacity=".9"/><stop offset=".6" stop-color="#5A3A22" stop-opacity=".4"/><stop offset="1" stop-color="#1E140C" stop-opacity=".9"/></radialGradient>
+  <radialGradient id="ckdial" cx=".5" cy=".45" r=".6"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#6B5A3A" stop-opacity=".35"/></radialGradient>
+  <filter id="ckshadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity=".7"/><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".55"/></filter></defs>`;

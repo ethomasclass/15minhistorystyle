@@ -4,8 +4,7 @@
 set -e
 cd "$(dirname "$0")"
 KEY=$1; CUE=$2; VOL=$3; OFF=${4:-0}
-declare -A NAME=([ch01]=ch01_the_bridge)
-CH=${NAME[$KEY]:-$KEY}
+CH=$(basename $(ls ../public/audio/${KEY}_*.words.json) .words.json)
 WAV=../public/audio/$CH.wav
 N=$(python3 -c "import json,math;print(math.ceil(json.load(open('../public/audio/$CH.words.json'))['duration']*30))")
 mkdir -p out/$KEY review
