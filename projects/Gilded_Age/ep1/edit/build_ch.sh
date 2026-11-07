@@ -14,4 +14,5 @@ DUR=$(python3 -c "print($N/30)")
 ffmpeg -v error -y -framerate 30 -i out/$KEY/f%04d.png -ss $OFF -i ../public/music/$CUE.mp3 -i $WAV \
   -filter_complex "[1]atrim=0:$DUR,asetpts=PTS-STARTPTS,volume=$VOL,afade=t=in:d=0.6,afade=t=out:st=$(python3 -c "print($DUR-1.5)"):d=1.5[m];[2][m]amix=inputs=2:normalize=0[a]" \
   -map 0:v -map "[a]" -vf scale=1280:720 -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k -t $DUR review/${KEY}_720p.mp4
+rm -rf "out/${KEY:?}"   # frames are ~3 GB a chapter: keep only the video
 echo "review/${KEY}_720p.mp4"
