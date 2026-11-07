@@ -30,3 +30,10 @@ sheet('3_titles_and_callouts', [('text_sec_A_tape', 'SECTION A · channel tape +
                                 ('text_gold_or_gilt', 'SERIES QUESTION · every episode ends here')], 'SECTION TITLES, CALLOUTS, THE SERIES QUESTION')
 sheet('4_vocab', [('vocab_1_current_bar', '1  TODAY\'S TEMPLATE BAR'), ('vocab_2_index_card', '2  INDEX CARD'), ('vocab_3_lower_tab', '3  LOWER-THIRD TAB'),
                   ('vocab_4_in_scene', '4  IN THE SCENE · x-ray + handwriting'), ('vocab_5_dictionary', '5  DICTIONARY ENTRY')], 'VOCABULARY CARDS · same term, five treatments')
+
+# Round 2 (looks 1 and 2 chosen): detail levels, the living scene, orange handwriting on the two chosen vocab styles.
+if os.path.exists('out/r2_detail_ladder.jpg'):
+    sheet('5_round2', [('r2_detail_ladder', 'DETAIL FOLLOWS THE CAMERA · dusk'), ('r2_detail_ladder_night', 'DETAIL FOLLOWS THE CAMERA · night'),
+                       ('r2_closeup_t7', 'CLOSE-UP · Michael looks up, rim lit by the fireworks'), ('r2_fireworks_t2', 'OPENING NIGHT · wide, heads tipped up'),
+                       ('vocab_2_index_card', 'VOCAB · index card, orange handwriting'), ('vocab_4_in_scene', 'VOCAB · x-ray, orange handwriting')],
+          'ROUND 2 · LOOKS 1 + 2, CHARACTERS WITH DETAIL, ORANGE HANDWRITING')

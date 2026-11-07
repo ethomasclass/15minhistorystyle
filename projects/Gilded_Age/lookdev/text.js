@@ -74,7 +74,7 @@ const OVERLAYS = {
       <div style="font-family:Mono;font-size:20px;letter-spacing:2px;color:#444">KAY-SAHN &middot; NOUN</div></div>
       <div style="font-family:Inter;font-weight:600;font-size:31px;line-height:1.42;color:${C.ink};margin-top:18px">${TERM.def}</div></div>` +
     tape('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', {x: 1440, y: 96, size: 36, rot: -6, seed: 21}) +
-    pen('each tower sits on one', {x: 1390, y: 610, size: 36, rot: -3}) +
+    pen('each tower sits on one', {x: 1390, y: 610, size: 36, rot: -3, color: C.orange}) +
     svg(arrow([1470, 676], [1390, 748], -30)) + optionTag('VOCAB 2 · INDEX CARD'),
 
   // 3. A lower-third tab: small enough that the scene keeps playing behind it.
@@ -98,8 +98,8 @@ const OVERLAYS = {
         <text x="${tx + 210}" y="${wl + 232}" font-family="Mono" font-size="18" fill="${C.cream}" opacity=".7" text-anchor="end" letter-spacing="2" dx="-120">RIVERBED</text></g>
       <circle cx="${tx}" cy="836" r="214" fill="none" stroke="${C.teal}" stroke-width="5" stroke-dasharray="2 0"/>
       ${arrow([tx + 330, wl - 120], [tx + 178, wl + 112], 40)}`;
-    return svg(body) + pen('caisson', {x: tx + 290, y: 420, size: 56, rot: -5}) +
-      pen('a giant box sunk to the riverbed.<br>men dug out the mud inside it', {x: tx + 290, y: 510, size: 28, rot: -4, w: 400}) +
+    return svg(body) + pen('caisson', {x: tx + 290, y: 420, size: 56, rot: -5, color: C.orange}) +
+      pen('a giant box sunk to the riverbed.<br>men dug out the mud inside it', {x: tx + 290, y: 510, size: 28, rot: -4, w: 400, color: C.orange}) +
       optionTag('VOCAB 4 · IN THE SCENE');
   },
 

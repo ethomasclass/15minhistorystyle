@@ -28,6 +28,13 @@ const JOBS = [
   {name: 'vocab_5_dictionary', look: 'dusk', cx: 0, overlay: 'vDict'},
   {name: 'text_callouts_composite', look: 'dusk', cx: 0, overlay: 'callouts'},
   {name: 'text_gold_or_gilt', look: 'dusk', cx: 0, overlay: 'gilt'},
+  // round 2: the detail ladder and stills from the three clips
+  {name: 'r2_detail_ladder', look: 'dusk', ladder: true},
+  {name: 'r2_detail_ladder_night', look: 'night', ladder: true},
+  {name: 'r2_alive_dusk_t3', clip: 'alive_dusk', t: 3},
+  {name: 'r2_fireworks_t2', clip: 'fireworks_night', t: 2},
+  {name: 'r2_closeup_t7', clip: 'closeup_night', t: 7},
+  {name: 'r2_closeup_t2', clip: 'closeup_night', t: 2.6},
 ];
 
 const filter = process.argv[2];
