@@ -27,6 +27,12 @@ SETTINGS = {'NARR': {'stability': 0.65, 'similarity_boost': 0.85, 'style': 0.0, 
 RUN_GAP = 0.6     # room tone between speakers
 END_GAP = 0.9     # after the last paragraph
 SPEAKER = re.compile(r'^(MICHAEL|MA):\s*')
+# A line changed after approval is re-voiced alone: its neighbours keep being sent the OLD text as context, so their requests
+# (and takes) stay exactly as approved. new tts text -> the tts text it replaced.
+CONTEXT_AS = {
+    "[amazed] Would you look at it. Longest bridge in the world, they say.":
+        "[amazed] Would you look at it. You can see the whole river from up here.",   # ch01, Nov 7: Michael is on the pier, not up on the bridge
+}
 
 
 def request(who, text, prev, nxt):
@@ -65,12 +71,14 @@ def runs_of(src):
 def chapter(src):
     name = os.path.basename(src)[:-4]
     runs = runs_of(src)
-    tts = [V.spoken('\n\n'.join(V.tts_text(p) for p in ps)) for _, ps in runs]
+    raw = ['\n\n'.join(V.tts_text(p) for p in ps) for _, ps in runs]
+    tts = [V.spoken(r) for r in raw]
+    tts_ctx = [V.spoken(CONTEXT_AS.get(r, r)) for r in raw]
     pcm = b'\0\0' * int(V.RATE * V.LEAD_IN)
     words = []
     for i, (who, ps) in enumerate(runs):
         offset = len(pcm) / 2 / V.RATE
-        audio, chars = request(who, tts[i], tts[i - 1] if i else '', tts[i + 1] if i + 1 < len(runs) else '')
+        audio, chars = request(who, tts[i], tts_ctx[i - 1] if i else '', tts_ctx[i + 1] if i + 1 < len(runs) else '')
         txt = ''.join(c for c, _, _ in chars)
         if V.TAG.search(txt):   # drop the tags' own characters so words map 1:1
             keep = [True] * len(chars)

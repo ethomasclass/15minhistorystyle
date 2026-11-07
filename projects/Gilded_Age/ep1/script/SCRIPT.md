@@ -1,6 +1,6 @@
 # Steel, Oil, and Sugar: The Gilded Age, Episode 1 (working title)
 
-**Chunk History** · Gilded Age series, Episode 1 · narration script · **draft 3 (1947 words, with the Kellys' lines; cut menu below)** · about **12:32** finished
+**Chunk History** · Gilded Age series, Episode 1 · narration script · **draft 3 (1945 words, with the Kellys' lines; cut menu below)** · about **12:31** finished
 (165 words a minute with pauses, plus the Chunk intro after the cold open, short chapter breaks and a 20-second end screen)
 
 Markup: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes (series rule). Draft 1 (2,414 words,
@@ -55,16 +55,16 @@ lamp burning Rockefeller's oil.
 
 | Starts | Chapter | Words | Arc | Whose chapter |
 |---|---|---|---|---|
-| 0:00 | The Bridge (cold open) | 165 | Hook | Michael, all threads in one breath |
-| 1:08 | The Name | 165 | Act I · setup | the era |
-| 2:10 | The Machines | 173 | Act I · setup | the inventors |
+| 0:00 | The Bridge (cold open) | 163 | Hook | Michael, all threads in one breath |
+| 1:07 | The Name | 165 | Act I · setup | the era |
+| 2:09 | The Machines | 173 | Act I · setup | the inventors |
 | 3:14 | The Refinery | 126 | Act I · setup | Michael |
 | 4:02 | The Weaver's Son | 303 | Act II · escalation + midpoint twist | Carnegie (and his mother) |
 | 5:54 | The Con Man's Son | 422 | Act II → III · escalation | Rockefeller (and his mother) |
-| 8:30 | The Trust Comes to Brooklyn | 140 | Act III · climax twist + plug | Michael and Ma |
-| 9:23 | Leave It Alone | 144 | Act IV · fallout, both readings | the government, fans and critics |
-| 10:17 | Gold or Gilt | 309 | Act IV · answer + loop closed | Michael, the bridge, all of them |
-| | **Total** | **1947** | | about 12:32 finished |
+| 8:29 | The Trust Comes to Brooklyn | 140 | Act III · climax twist + plug | Michael and Ma |
+| 9:22 | Leave It Alone | 144 | Act IV · fallout, both readings | the government, fans and critics |
+| 10:16 | Gold or Gilt | 309 | Act IV · answer + loop closed | Michael, the bridge, all of them |
+| | **Total** | **1945** | | about 12:31 finished |
 
 ---
 
@@ -74,7 +74,7 @@ On the day the Brooklyn Bridge opened, a hundred and fifty thousand people walke
 
 Nobody in that crowd knew. Not even the nineteen-year-old who works ten-hour shifts in a sugar factory across the river.
 
-**MICHAEL:** [amazed] Would you look at it. You can see the whole river from up here.
+**MICHAEL:** [amazed] Would you look at it. Longest bridge in the world, they say.
 
 That's Michael Kelly. He's made up. But everything that happens to him really happened to people like him.
 
@@ -88,7 +88,7 @@ And we'll come back to that bad wire. It turns out to be the whole story, in min
 
 ---
 
-## 1:08 | The Name
+## 1:07 | The Name
 
 First, the name. Because the name is an insult.
 
@@ -106,7 +106,7 @@ And all those trains needed rails. Which were about to get very cheap.
 
 ---
 
-## 2:10 | The Machines
+## 2:09 | The Machines
 
 The big word for all this is {industrialization}: making things by machine, in factories, in huge numbers, instead of by hand.
 
@@ -190,7 +190,7 @@ To run it, he set up a {trust}: dozens of companies handing control to one small
 
 ---
 
-## 8:30 | The Trust Comes to Brooklyn
+## 8:29 | The Trust Comes to Brooklyn
 
 Back in Brooklyn, in 1887, the sugar refiners copied Rockefeller. Michael's refinery, and most of the others, joined one sugar trust.
 
@@ -210,7 +210,7 @@ Quick favor: hit subscribe. It's free. And unlike kerosene in 1887, you've got o
 
 ---
 
-## 9:23 | Leave It Alone
+## 9:22 | Leave It Alone
 
 So where was the government? Mostly... standing back.
 
@@ -224,7 +224,7 @@ Both sides were looking at the same facts.
 
 ---
 
-## 10:17 | Gold or Gilt
+## 10:16 | Gold or Gilt
 
 So, back to the bridge. And that bad wire.
 
@@ -319,7 +319,7 @@ laissez-faire · free market · entrepreneur · captains of industry / robber ba
 | Heroes or villains? | ch 8 | ch 8 (both readings; no verdict) |
 | Who got the gold? | ch 9 | Episode 2 onward |
 
-## Cut menu: from 12:32 to 10:00 (pick what goes; about 270 words)
+## Cut menu: from 12:31 to 10:00 (pick what goes; about 270 words)
 
 Ranked from least to most painful. Seconds at 165 words a minute.
 

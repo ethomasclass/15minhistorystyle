@@ -310,6 +310,7 @@ money could make money (a $10 dividend; $50 lent at 7%).
 | $480 million sale | price solid; "I accept this price" from secondary accounts | "the story goes, Morgan simply said..." |
 | Carnegie's 1868 memo | transcriptions vary slightly | quote the Carnegie Birthplace Museum copy |
 | Solder drops | Rockefeller's own retelling | "he liked to tell the story of..." |
+| "Longest bridge in the world" (Michael, ch 1) | Main span 1,595 ft 6 in: the world's longest suspension span from 1883 until the Williamsburg Bridge (1903) | Michael says "longest bridge in the world, they say" (it's hearsay in his mouth; strictly, the longest *suspension* bridge) |
 | Rockefeller's first pay | 50 cents a day (popular) vs $50 for three months (his memoir) | skip the pay, or use his memoir |
 | Edison's promise | "ten days" vs "six weeks" in two Rutgers essays | "a small invention every couple of weeks" |
 | Time zones | four or five zones in different sources | "a handful of time zones" |
