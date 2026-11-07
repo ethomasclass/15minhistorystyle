@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face {font-family: Abril; src: url(../../../brand/fonts/AbrilFatface.woff2);}
+  @font-face {font-family: Mono; src: url(../../../brand/fonts/IBMPlexMono.woff2);}
+  @font-face {font-family: Inter; font-weight: 600; src: url(../../../brand/fonts/Inter-600.woff2);}
+  @font-face {font-family: Inter; font-weight: 800; src: url(../../../brand/fonts/Inter-800.woff2);}
+  @font-face {font-family: Pen; src: url(../../../brand/fonts/NanumPenScript.woff2);}
+  @font-face {font-family: Playfair; font-weight: 900; src: url(../../../brand/fonts/PlayfairDisplay-900.woff2);}
+  html, body {margin: 0; background: #0d0c09;}
+  #stage {position: relative; width: 1920px; height: 1080px; overflow: hidden;}
+  #stage > svg {position: absolute; inset: 0;}
+  #ov {position: absolute; inset: 0;}
+  #ov * {box-sizing: border-box;}
+</style>
+<script src="scene.js"></script>
+<script src="text.js"></script>
+</head><body>
+<div id="stage"><div id="scene"></div><div id="ov"></div></div>
+<script>
+  window.draw = (cfg) => {
+    document.getElementById('scene').innerHTML = renderScene(cfg);
+    document.getElementById('ov').innerHTML = cfg.overlay ? OVERLAYS[cfg.overlay](cfg) : '';
+    return document.fonts.ready.then(() => true);
+  };
+</script>
+</body></html>
