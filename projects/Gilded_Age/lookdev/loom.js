@@ -7,7 +7,7 @@
 // loom has stopped and the father sits idle beside his son. Real people with no photographs are solid silhouettes with no face
 // detail, tagged "no photo" (the channel's rule); coral is kept for the Kellys.
 
-const LM = {ground: 820, cot0: 120, cot1: 900, fac0: 2000, fac1: 3640};
+const LM = {ground: 820, cot0: 120, cot1: 900, fac0: 2000, fac1: 3640, fd: 64}; // fd: how deep the floors run back to the wall
 
 function lmLoomFront(x, y, w, h, t, {running = true, scale = 1, col = '#1A2B29', pace = 1.1} = {}) {
   // a loom seen from the front: posts and beams, warp threads running down, the woven cloth growing, the beater, a shuttle
@@ -28,22 +28,26 @@ function lmLoomFront(x, y, w, h, t, {running = true, scale = 1, col = '#1A2B29',
 }
 
 function lmCottage(t) {
-  const s = [], G = LM.ground, x0 = LM.cot0, x1 = LM.cot1, top = G - 300;
-  s.push(MAT.stone(x0, top, x1 - x0, 300, {base: '#1A2F2D', seed: 301, vary: 0.18}));                      // the back wall, rough stone
+  const s = [], G = LM.ground, x0 = LM.cot0, x1 = LM.cot1, top = G - 300, B = G - LM.fd;
+  s.push(MAT.stone(x0, top, x1 - x0, B - top, {base: '#1A2F2D', seed: 301, vary: 0.18}));                      // the back wall, rough stone
   s.push(`<rect x="${x0 + 470}" y="${G - 220}" width="90" height="110" fill="#5F857F" opacity="0.8"/><rect x="${x0 + 513}" y="${G - 220}" width="4" height="110" fill="#1A2B29"/><rect x="${x0 + 470}" y="${G - 167}" width="90" height="4" fill="#1A2B29"/>`); // a small window
-  s.push(`<path d="M${x0 + 470},${G - 220} L${x0 + 560},${G - 220} L${x0 + 420},${G} L${x0 + 250},${G} Z" fill="#F4EFE6" opacity="0.07"/>`); // daylight across the floor
+  s.push(`<path d="M${x0 + 470},${G - 220} L${x0 + 560},${G - 220} L${x0 + 470},${B} L${x0 + 330},${B} Z" fill="#F4EFE6" opacity="0.05"/>`); // daylight down the wall
   for (let x = x0; x < x1; x += 130) s.push(MAT.planks(x, top, 18, 14, {base: '#0D1716', seed: x}));                   // roof beams, cut
-  s.push(MAT.stone(x0, G, x1 - x0, 18, {base: '#1A2B29', seed: 302, bh: 9}));                    // a flagstone floor
-  s.push(`<rect x="${x0 - 30}" y="${top - 30}" width="${x1 - x0 + 60}" height="34" fill="#050808"/><rect x="${x0 - 18}" y="${top - 30}" width="18" height="${330 + 18}" fill="#050808"/><rect x="${x1}" y="${top - 30}" width="18" height="${330 + 18}" fill="#050808"/>`); // the cut walls and roof
+  s.push(MAT.floor(x0, x1, B, G + 6, {kind: 'flag', base: '#243B39', seed: 302, size: 56}));     // the flagstone floor, running back to the wall
+  s.push(`<path d="M${x0 + 330},${B} L${x0 + 470},${B} L${x0 + 420},${G + 6} L${x0 + 250},${G + 6} Z" fill="#F4EFE6" opacity="0.09"/>`); // the daylight patch on the floor
+  s.push(MAT.stone(x0 - 18, G + 6, x1 - x0 + 36, 30, {base: '#0E1716', seed: 304, bh: 15, vary: 0.15}));      // the cut edge: the floor's stone footing
+  s.push(`<rect x="${x0 - 30}" y="${top - 30}" width="${x1 - x0 + 60}" height="34" fill="#050808"/><rect x="${x0 - 18}" y="${top - 30}" width="18" height="${330 + 36}" fill="#050808"/><rect x="${x1}" y="${top - 30}" width="18" height="${330 + 36}" fill="#050808"/>`); // the cut walls and roof
   s.push(`<path d="M${x0 - 50},${top - 30} L${(x0 + x1) / 2},${top - 150} L${x1 + 50},${top - 30} Z" fill="#050808"/><rect x="${x0 + 80}" y="${top - 160}" width="34" height="100" fill="#050808"/>`); // the roof and chimney
   s.push(MAT.smoke(x0 + 97, top - 166, t, {col: '5F857F', k: 0.7, seed: 31}));
   // the hearth, glowing
-  s.push(MAT.stone(x0 + 30, G - 120, 120, 120, {base: '#1A2B29', seed: 303, bh: 14}) + `<rect x="${x0 + 55}" y="${G - 70}" width="70" height="70" fill="#060A0A"/><circle cx="${x0 + 90}" cy="${G - 30}" r="60" fill="url(#exglow)" opacity="${f1(0.5 + 0.1 * Math.sin(t * 7))}"/>`);
+  s.push(MAT.stone(x0 + 30, B - 110, 120, 130, {base: '#1A2B29', seed: 303, bh: 14}) + `<rect x="${x0 + 55}" y="${B - 60}" width="70" height="72" fill="#060A0A"/><rect x="${x0 + 22}" y="${B + 18}" width="136" height="8" fill="#0F1C1B"/><circle cx="${x0 + 90}" cy="${B - 10}" r="60" fill="url(#exglow)" opacity="${f1(0.5 + 0.1 * Math.sin(t * 7))}"/><ellipse cx="${x0 + 90}" cy="${B + 40}" rx="110" ry="18" fill="#F4EFE6" opacity="${f1(0.06 + 0.02 * Math.sin(t * 7))}"/>`); // the hearth in the back wall, its glow on the floor
   return s.join('');
 }
 function lmCottageLife(t, z) {
   const s = [], G = LM.ground, stopped = t > 12.6, rim = {c: '#DFE0D6', a: 0.6, dx: -0.008, dy: -0.003};
-  s.push(lmLoomFront(LM.cot0 + 300, G - 190, 200, 190, t, {running: !stopped}));
+  const LB = G - 22; // the loom stands a little back on the floor
+  s.push(MAT.shadow(LM.cot0 + 400, LB, 120, 0.45), lmLoomFront(LM.cot0 + 300, LB - 190, 200, 190, t, {running: !stopped}));
+  s.push(MAT.shadow(LM.cot0 + 262, G, 46), MAT.shadow(LM.cot0 + 180, G, 34), MAT.shadow(stopped ? LM.cot0 + 312 : LM.cot0 + 600, G, 18));
   // William Carnegie at the bench: working the beater, or, once the factory has taken his trade, sitting still
   const L = lodFor(78 * z, 0.6);
   s.push(FU.bench(LM.cot0 + 230, G, 60));
@@ -60,33 +64,34 @@ function lmCottageLife(t, z) {
 
 function lmStreet(t) {
   const s = [], G = LM.ground, r = rng(311);
-  s.push(MAT.ground(LM.cot1, LM.fac0, G, {base: '#0D0C09', seed: 312, tufts: false}));
-  for (let x = LM.cot1 + 60, i = 0; x < LM.fac0 - 120; i++) { const w = 150 + r() * 80, h = 140 + r() * 60;
+  s.push(MAT.floor(LM.cot1 + 18, LM.fac0 - 18, G - LM.fd, G + 6, {kind: 'cobble', base: '#22393A', seed: 312, size: 40})); // the cobbled street
+  for (let x = LM.cot1 + 60, i = 0; x < LM.fac0 - 120; i++) { const w = 150 + r() * 80, h = 140 + r() * 60, G = LM.ground - LM.fd;
     s.push(MAT.stone(x, G - h, w, h, {base: '#1D3634', seed: 320 + i}) + `<path d="M${x - 10},${G - h} L${x + w / 2},${G - h - 60} L${x + w + 10},${G - h} Z" fill="#0F1C1B"/>` +
       `<rect x="${f1(x + w * 0.2)}" y="${G - h + 30}" width="30" height="40" fill="#5F857F" opacity="0.6"/><rect x="${f1(x + w * 0.6)}" y="${G - 70}" width="34" height="70" fill="#081010"/>` +
       `<rect x="${f1(x + w * 0.75)}" y="${G - h - 70}" width="20" height="40" fill="#0F1C1B"/>` + MAT.smoke(x + w * 0.75 + 10, G - h - 76, t + i * 2, {col: '5F857F', k: 0.5, n: 5, seed: 330 + i}));
     x += w + 40; }
-  for (let k = 0; k < 2; k++) { const u = ((t / 9 + k * 0.5) % 1), x = LM.cot1 + 60 + u * 900; s.push(figure({x, y: G, h: 74, d: 1, kind: k ? 'woman' : 'man', hat: k ? 'kerchief' : 'cap', wear: ['plain'], coat: 'sack', fill: '#0D0C09', an: walkAn(walkPhase(u * 900, 74))})); }
+  for (let k = 0; k < 2; k++) { const u = ((t / 9 + k * 0.5) % 1), x = LM.cot1 + 60 + u * 900, y = G - 14 - k * 22; s.push(MAT.shadow(x, y, 16), figure({x, y, h: 74, d: 1, kind: k ? 'woman' : 'man', hat: k ? 'kerchief' : 'cap', wear: ['plain'], coat: 'sack', fill: '#0D0C09', an: walkAn(walkPhase(u * 900, 74))})); }
   return s.join('');
 }
 
 function lmFactory(t) { // brick walls, rows of power looms, belts from a turning line shaft, the engine and its flywheel
-  const s = [], G = LM.ground, x0 = LM.fac0, x1 = LM.fac1, top = G - 340;
-  s.push(MAT.brick(x0, top, x1 - x0, 340, {base: '#1C3230', seed: 341, vary: 0.3, soot: 'top'}));
+  const s = [], G = LM.ground, x0 = LM.fac0, x1 = LM.fac1, top = G - 340, B = G - LM.fd;
+  s.push(MAT.brick(x0, top, x1 - x0, B - top, {base: '#1C3230', seed: 341, vary: 0.3, soot: 'top'}));
   for (let x = x0 + 120; x < x1 - 300; x += 220) s.push(`<rect x="${x}" y="${top + 50}" width="70" height="120" rx="35" fill="#5F857F" opacity="0.55"/><rect x="${x + 33}" y="${top + 50}" width="4" height="120" fill="#1A2B29"/>`); // arched windows
-  s.push(MAT.planks(x0, G, x1 - x0, 14, {base: '#152422', seed: 342, size: 60, vertical: true}));
+  s.push(MAT.floor(x0, x1, B, G + 6, {kind: 'planks', base: '#2A4240', seed: 342, size: 46}));   // the plank floor, boards running back to the wall
+  s.push(MAT.brick(x0 - 18, G + 6, x1 - x0 + 36, 30, {base: '#0E1716', seed: 345, bw: 30, bh: 10, vary: 0.15})); // the cut edge: a brick footing
   // the line shaft along the ceiling, turning, with a pulley over each loom
   const shY = top + 40;
   s.push(`<rect x="${x0 + 40}" y="${shY - 4}" width="${x1 - x0 - 300}" height="8" fill="#0B1615"/>`);
   for (let row = 0; row < 2; row++) for (let i = 0; i < 6; i++) {
-    const back = row === 0, sc = back ? 0.62 : 0.85, lx = x0 + 90 + i * 210 + (back ? 60 : 0), ly = G - (back ? 40 : 0), lw = 150 * sc, lh = 150 * sc;
+    const back = row === 0, sc = back ? 0.62 : 0.85, lx = x0 + 90 + i * 210 + (back ? 60 : 0), ly = G - (back ? 44 : 10), lw = 150 * sc, lh = 150 * sc;
     const col = back ? '#1F3836' : '#14262A';
-    s.push(lmLoomFront(lx, ly - lh, lw, lh, t + i * 0.13 + row * 0.07, {scale: sc, col, pace: 3.2}));
+    s.push(MAT.shadow(lx + lw / 2, ly, lw * 0.55, 0.4), lmLoomFront(lx, ly - lh, lw, lh, t + i * 0.13 + row * 0.07, {scale: sc, col, pace: 3.2}));
     const px = lx + lw - 10, belt = `M${px},${shY + 4} L${px},${ly - lh + 8}`;
     s.push(`<circle cx="${px}" cy="${shY}" r="${f1(12 * sc)}" fill="#0B1615"/><path d="${belt}" stroke="#0B1615" stroke-width="${f1(4 * sc)}"/><path d="${belt}" stroke="#2B4744" stroke-width="${f1(2 * sc)}" stroke-dasharray="6 8" stroke-dashoffset="${f1(-t * 160)}"/>`);
   }
   // women tending the looms
-  for (let i = 0; i < 4; i++) s.push(figure({x: x0 + 70 + i * 420, y: G, h: 70, d: 1, kind: 'woman', hat: 'none', wear: ['plain', 'apron'], fill: '#0D0C09', an: {...POSES.stand(t, i * 0.2), fArm: [120 + 10 * Math.sin(t * 2 + i), 100], tilt: -8}}));
+  for (let i = 0; i < 4; i++) s.push(MAT.shadow(x0 + 70 + i * 420, G, 18), figure({x: x0 + 70 + i * 420, y: G, h: 70, d: 1, kind: 'woman', hat: 'none', wear: ['plain', 'apron'], fill: '#0D0C09', an: {...POSES.stand(t, i * 0.2), fArm: [120 + 10 * Math.sin(t * 2 + i), 100], tilt: -8}}));
   // the steam engine: boiler with a glowing firebox, a cylinder, a crank, the flywheel and a belt up to the shaft
   const ex = x1 - 250, fy = G - 120, a = t * 3.4;
   s.push(MAT.iron(ex - 40, G - 90, 150, 90, {base: '#0B1615', rx: 30, seams: 30}) + `<rect x="${ex - 10}" y="${G - 46}" width="40" height="30" fill="#F4EFE6" opacity="${f1(0.45 + 0.15 * Math.sin(t * 8))}"/><circle cx="${ex + 10}" cy="${G - 30}" r="70" fill="url(#exglow)" opacity="0.5"/>`);
@@ -96,7 +101,7 @@ function lmFactory(t) { // brick walls, rows of power looms, belts from a turnin
   s.push(line([[ex + 70, fy], [f1(cx), f1(cy)]], '#0B1615', 7) + MAT.iron(ex + 30, fy - 18, 50, 36, {base: '#0B1615', seams: 18, rivet: 5}));
   s.push(`<path d="M${ex + 160},${fy - 88} L${ex + 160},${shY}" stroke="#0B1615" stroke-width="5"/><path d="M${ex + 160},${fy - 88} L${ex + 160},${shY}" stroke="#2B4744" stroke-width="2" stroke-dasharray="6 8" stroke-dashoffset="${f1(-t * 200)}"/>`);
   // the cut walls, the roof, the chimney and its smoke
-  s.push(`<rect x="${x0 - 18}" y="${top - 26}" width="18" height="${340 + 26}" fill="#050808"/><rect x="${x1}" y="${top - 26}" width="18" height="${340 + 26}" fill="#050808"/><path d="M${x0 - 40},${top} L${x0 + 200},${top - 80} L${x1 - 200},${top - 80} L${x1 + 40},${top} Z" fill="#050808"/>`);
+  s.push(`<rect x="${x0 - 18}" y="${top - 26}" width="18" height="${340 + 26 + 36}" fill="#050808"/><rect x="${x1}" y="${top - 26}" width="18" height="${340 + 26 + 36}" fill="#050808"/><path d="M${x0 - 40},${top} L${x0 + 200},${top - 80} L${x1 - 200},${top - 80} L${x1 + 40},${top} Z" fill="#050808"/>`);
   s.push(MAT.brick(x1 + 60, top - 330, 60, 330 + 340, {base: '#121F1E', seed: 343, bw: 16, bh: 8, soot: 'top'}) + MAT.smoke(x1 + 90, top - 340, t, {col: '3E5F5A', k: 1.5, n: 9, seed: 344}));
   return s.join('');
 }

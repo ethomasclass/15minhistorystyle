@@ -342,7 +342,7 @@ if (typeof window !== 'undefined') Object.assign(window, {texDef, visibleRect});
 /* ---------- materials: each surface its own look (round 9) ---------- */
 // The round-8 mottle filter treated everything the same; these give each material its own character instead.
 // MAT_DEFS goes inside a scene's <defs> once.
-const MAT_DEFS = `<linearGradient id="matIronH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.35"/><stop offset="0.28" stop-color="#DFE0D6" stop-opacity="0.13"/><stop offset="0.45" stop-color="#DFE0D6" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></linearGradient>` +
+const MAT_DEFS = `<linearGradient id="matFloorShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.55"/><stop offset="0.55" stop-color="#000" stop-opacity="0.15"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient><linearGradient id="matIronH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.35"/><stop offset="0.28" stop-color="#DFE0D6" stop-opacity="0.13"/><stop offset="0.45" stop-color="#DFE0D6" stop-opacity="0.04"/><stop offset="1" stop-color="#000" stop-opacity="0.4"/></linearGradient>` +
   `<linearGradient id="matSootB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.45"/></linearGradient>` +
   `<linearGradient id="matSootT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.4"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>` +
   ['3E5F5A', '5F857F', '2B4744', 'A3BAB2', '1F3735', 'DFE0D6'].map((c) => `<radialGradient id="puff${c}"><stop offset="0" stop-color="#${c}" stop-opacity="1"/><stop offset="0.55" stop-color="#${c}" stop-opacity="0.7"/><stop offset="1" stop-color="#${c}" stop-opacity="0"/></radialGradient>`).join('') +
@@ -382,6 +382,38 @@ const MAT = {
       if (r() < 0.25) { const kx = vertical ? x + p + size / 2 : x + r() * w, ky = vertical ? y + r() * h : y + p + size / 2; s.push(`<ellipse cx="${f1(kx)}" cy="${f1(ky)}" rx="2.5" ry="1.4" fill="${shade(base, -0.4)}"/>`); } }
     return s.join('');
   },
+  // floor: the floor seen going back to the wall (a band from yBack, the wall's foot, to yFront, the cut edge), so people and furniture
+  // stand ON something. kind 'flag' (flagstones, rows growing toward the front), 'cobble' (a street), 'planks' (boards running back
+  // to a vanishing point). A contact shadow along the wall and a lit lip along the front edge.
+  floor(x0, x1, yBack, yFront, {kind = 'flag', base = '#2A4542', seed = 9, size = 34, vp = null} = {}) {
+    const r = rng(seed), D = yFront - yBack, cid = `flc${seed}_${Math.round(x0)}`, s = [`<clipPath id="${cid}"><rect x="${f1(x0)}" y="${f1(yBack - 8)}" width="${f1(x1 - x0)}" height="${f1(D + 8)}"/></clipPath><g clip-path="url(#${cid})">`, `<rect x="${f1(x0)}" y="${f1(yBack)}" width="${f1(x1 - x0)}" height="${f1(D)}" fill="${shade(base, -0.45)}"/>`];
+    if (kind === 'planks') {
+      const v = vp ?? (x0 + x1) / 2, k = 0.82;
+      for (let x = x0 - (x1 - x0) * 0.2; x < x1 + (x1 - x0) * 0.2; x += size) {
+        const bx = (xx) => v + (xx - v) * k, a = x + 1, b = x + size - 1;
+        s.push(`<polygon points="${f1(a)},${f1(yFront)} ${f1(b)},${f1(yFront)} ${f1(bx(b))},${f1(yBack)} ${f1(bx(a))},${f1(yBack)}" fill="${shade(base, (r() - 0.5) * 0.3)}"/>`);
+        if (r() < 0.5) { const u = 0.2 + r() * 0.7, yy = yBack + D * u, xa = bx(a) + (a - bx(a)) * u, xb = bx(b) + (b - bx(b)) * u; s.push(`<rect x="${f1(xa)}" y="${f1(yy)}" width="${f1(xb - xa)}" height="1.2" fill="${shade(base, -0.5)}"/>`); } // board ends
+      }
+    } else {
+      const n = kind === 'cobble' ? 5 : 4, sz = kind === 'cobble' ? size * 0.5 : size;
+      for (let i = 0; i < n; i++) {
+        const u0 = (i / n) ** 1.3, u1 = ((i + 1) / n) ** 1.3, ya = yBack + D * u0, yb = yBack + D * u1, sc = 0.55 + 0.45 * (u0 + u1) / 2;
+        // stones laid out along the front edge, then drawn in perspective: their side joints lean toward a vanishing point
+        const v = vp ?? (x0 + x1) / 2, kk = (y) => 0.8 + 0.2 * (y - yBack) / D, P = (x, y) => `${f1(v + (x - v) * kk(y))},${f1(y)}`;
+        const ka = kk(ya + 1.2), kb = kk(yb - 1.2), fx0 = v + (x0 - v) / Math.min(ka, kb), fx1 = v + (x1 - v) / Math.min(ka, kb);
+        let xx = fx0 - r() * sz * 2;
+        while (xx < fx1) { const w = sz * (1.1 + r() * (kind === 'cobble' ? 0.6 : 1.6)), a = xx + 1.6, b = xx + w - 1.6;
+          s.push(`<polygon points="${P(a, yb - 1.2)} ${P(b, yb - 1.2)} ${P(b, ya + 1.2)} ${P(a, ya + 1.2)}" fill="${shade(base, (r() - 0.5) * 0.34 + 0.1 * (u0 - 0.5))}"/>`);
+          xx += w; }
+      }
+    }
+    s.push(`<rect x="${f1(x0)}" y="${f1(yBack)}" width="${f1(x1 - x0)}" height="${f1(D)}" fill="url(#matFloorShade)"/>`);                       // darker toward the wall: it reads as going back
+    s.push(`<rect x="${f1(x0)}" y="${f1(yBack - 6)}" width="${f1(x1 - x0)}" height="8" fill="#070C0C" opacity="0.85"/>`);                    // the line where wall meets floor
+    s.push(`<rect x="${f1(x0)}" y="${f1(yFront - 2)}" width="${f1(x1 - x0)}" height="2" fill="#DFE0D6" opacity="0.14"/>`);            // the lit front lip
+    return s.join('') + '</g>';
+  },
+  // a soft shadow where something stands on a floor
+  shadow(x, y, w, op = 0.4) { return `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(w)}" ry="${f1(Math.max(2.5, w * 0.14))}" fill="#000" opacity="${op}"/>`; },
   // iron: a round highlight so a cylinder reads as round, seams of rivets
   iron(x, y, w, h, {base = '#0B1615', rx = 0, seams = 60, rivet = 7} = {}) {
     const s = [`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${rx}" fill="${base}"/>`, `<rect x="${f1(x)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="${rx}" fill="url(#matIronH)"/>`];
