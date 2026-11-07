@@ -1,0 +1,32 @@
+You are making more cut-out prop images for the same Gilded Age history documentary (the 1850s to the 1880s), matching the set you made before. Create one separate image for EACH numbered prop below, 8 images in total. Make 2 takes of each. Each image shows only that prop. Do not combine props, do not make a grid or collage, and do not caption or number the images. Name each image with its id (for example p04_sugar_hogshead). Square format if available.
+
+STYLE FOR EVERY IMAGE (identical across the whole set):
+a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around. Not a drawing, not a painting, not a 3D render.
+
+BACKGROUND: each prop is marked [WHITE] or [BLACK].
+[WHITE] = isolated on a plain, flat, pure white background. [BLACK] = isolated on a plain, flat, pure black background.
+Either way: no floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES FOR EVERY IMAGE:
+- Historically accurate for the stated period; nothing modern: no plastic, no modern screws, labels or barcodes.
+- No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere. Any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. This matters most on the paper props.
+- No people, no hands and no animals.
+- One object only (or exactly the group described).
+
+THE PROPS:
+
+51. p04_sugar_hogshead [WHITE]: A large 1880s wooden sugar hogshead, the big cask raw sugar was shipped in from Cuba: about four feet tall and wider than an ordinary barrel, rough oak staves held by wooden hoops bound with split withies plus a few iron hoops, sticky dark molasses stains leaking between the staves, the top knocked partly open to show coarse, damp brown raw sugar inside. Three-quarter view.
+
+52. p05_telegraph_sounder [WHITE]: An 1850s telegraph office sounder: a small mahogany base with two upright black electromagnet coils wound in silk-covered copper wire, a pivoting brass lever arm above them that clicks down against an adjustable brass stop, and two brass binding screws for the line wires. Three-quarter view.
+
+53. p06_clerk_desk [WHITE]: An 1850s bookkeeper's standing desk from a merchant's counting house: a tall slant-top pine desk on long legs, dark varnish worn pale along the front edge, a large closed account ledger bound in brown leather lying on the slope, a glass inkwell and a steel dip pen on the flat ledge at the top. Three-quarter view.
+
+54. p06_freight_waybill [BLACK]: An 1870s railroad freight waybill: a long, narrow sheet of thin buff paper with an ornamental printed heading made only of illegible flourishes and a small engraving of a steam locomotive at the top, ruled columns below filled with illegible faded handwriting in brown ink, folded once with a soft crease. Flat, seen from straight above.
+
+55. p06_kerosene_case [WHITE]: An open 1870s pine export case holding two square tin kerosene cans side by side: a plain crate of thin, rough pine boards nailed together with the lid off, and inside it two square-section tinplate cans about fourteen inches tall with soldered seams and a small screw cap at one top corner, dull silver tin with a little rust. Three-quarter view from slightly above.
+
+56. p08_factory_notice [BLACK]: A blank 1880s factory notice: a rectangle of stiff yellowed card, slightly curled and water-stained at one corner, with a heavy printed black border and a bold decorative rule across the top, held by four rusty iron tacks at the corners. The body of the card is completely blank. Flat, straight on.
+
+57. p09_wire_tester [WHITE]: An 1870s horizontal testing machine for steel wire, an industrial laboratory instrument: a long cast-iron bed about six feet long on short legs, painted dark green-black with worn edges; at one end a large hand-cranked screw turned by a spoked iron wheel; at the other end a steel beam scale with a sliding brass weight; a short length of bright steel wire clamped taut between two iron jaws in the middle. Three-quarter view.
+
+58. p09_wire_wagon [WHITE]: An 1870s heavy two-horse freight wagon (a dray) with no horses: a long flat wooden bed with low plank sides, four large wooden spoked wheels with iron tyres, the wooden tongue resting on the ground, worn grey-brown paint. The bed is loaded with six coils of grey galvanized steel wire stacked on their sides. Side view from slightly above.

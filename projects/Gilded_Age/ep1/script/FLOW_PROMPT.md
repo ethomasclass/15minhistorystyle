@@ -15,7 +15,7 @@ a specific real artifact (the red notebook is "a notebook like his", not Ledger 
 - **Naming:** save each as its id + `.png` (e.g. `p05_dividend_check.png`) and drop them in the chat or in `ep1/public/img/props_raw/`.
   I cut them out (`prop_cut.py` / `mask_white.py --bg=black`) and check every edge at full size.
 
-**50 props.** Must-haves are marked ★.
+**58 props** (50 in round 1, 8 added in round 2 after the archival search, marked 🆕). Must-haves are marked ★.
 
 **The shared blocks** (already inside every prompt; here for reference):
 
@@ -50,6 +50,7 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 | ★ `p04_sugar_two_bowls` | ch04: "raw brown sugar into the white stuff in your kitchen" | black |
 | ★ `p04_bone_char` | ch04: "filtered through charcoal made from animal bones" | white |
 | `p04_dinner_pail` | ch04: Michael's ten-hour shift | white |
+| 🆕 `p04_sugar_hogshead` | ch04: "raw brown sugar" arriving by ship (1880s Cuban raw sugar came in hogsheads) | white |
 | `p05_shuttle` | ch05: "wove fine linen by hand, one thread at a time" | white |
 | ★ `p05_bobbin` | ch05: "changing spools of thread in a cotton mill" | white |
 | ★ `p05_telegraph_key` | ch05: "taught himself to read the telegraph's clicks by ear" | white |
@@ -60,6 +61,7 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 | `p05_iron_ore` | ch05: "he bought the iron mines" | white |
 | `p05_coke` | ch05: "the coal" (coke for the furnaces) | white |
 | `p05_note_1868` | ch05: "Carnegie wrote himself a private note" (an illustration, not the real note) | black |
+| 🆕 `p05_telegraph_sounder` | ch05: Andrew reads the telegraph by ear (pairs with p05_telegraph_key) | white |
 | ★ `p06_medicine_bottle` | ch06: "bottles of homemade medicine that he said could cure almost anything" | white |
 | `p06_turkey` | ch06: "his turkey money" | white |
 | `p06_coins_stack` | ch06: "lent 50 dollars... got it back with interest" | white |
@@ -69,16 +71,22 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 | ★ `p06_kerosene_can` | ch06: "kerosene: lamp oil" | white |
 | ★ `p06_solder_lid` | ch06: "39 drops of solder... instead of 40" | white |
 | `p06_rebate_envelope` | ch06: "the railroads secretly paid him money back" | black |
-| `p06_trust_certificate` | ch06: "he set up a trust" | black |
+| `p06_trust_certificate` | ch06: "he set up a trust" **(now covered by the real 1882 Standard Oil Trust certificate (ch06/); optional)** | black |
 | `p06_gavel` | ch06: buying out his rivals (optional) | white |
+| 🆕 `p06_clerk_desk` | ch06: his first job as a bookkeeper | white |
+| 🆕 `p06_freight_waybill` | ch06: the rebate (the shipment the railroad paid him back on) | black |
+| 🆕 `p06_kerosene_case` | ch06: kerosene shipped worldwide, two cans to a case (pairs with p06_kerosene_can) | white |
 | ★ `p07_kerosene_lamp` | ch07: "the family eats by the light of a kerosene lamp" (unlit) | white |
 | ★ `p07_kerosene_lamp_lit` | ch07: the same lamp, lit | black |
 | `p07_tin_plate` | ch07: dinner at the Kellys' | white |
 | `p08_land_deed` | ch08: "The government gave railroads more land than all of California" | black |
 | `p08_top_hat` | ch08: the government figure (reference for the animation) | white |
+| 🆕 `p08_factory_notice` | ch08: "No minimum wage. No limit on hours." (the words are added in the edit) | black |
 | ★ `p09_cable_section` | ch09: "more than five thousand steel wires, bundled tight" | white |
 | ★ `p09_inspection_certificate` | ch09: "get a certificate" | black |
 | `p09_rejected_wire_pile` | ch09: "the pile of rejected wire... never got any bigger" | white |
+| 🆕 `p09_wire_tester` | ch09: "every load of wire had to pass a strength test" | white |
+| 🆕 `p09_wire_wagon` | ch09: "a wagon of good wire... same wagon, same certificate" | white |
 
 
 ## Chapter 1
@@ -407,6 +415,21 @@ BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table
 RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
 ```
 
+### 🆕 p04_sugar_hogshead
+*ch04: "raw brown sugar" arriving by ship (1880s Cuban raw sugar came in hogsheads)*
+
+```
+Create one image, square format.
+
+A large 1880s wooden sugar hogshead, the big cask raw sugar was shipped in from Cuba: about four feet tall and wider than an ordinary barrel, rough oak staves held by wooden hoops bound with split withies plus a few iron hoops, sticky dark molasses stains leaking between the staves, the top knocked partly open to show coarse, damp brown raw sugar inside. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
 
 ## Chapter 5
 
@@ -560,6 +583,21 @@ BACKGROUND: isolated on a plain, flat, pure black background. No floor, no table
 RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
 ```
 
+### 🆕 p05_telegraph_sounder
+*ch05: Andrew reads the telegraph by ear (pairs with p05_telegraph_key)*
+
+```
+Create one image, square format.
+
+An 1850s telegraph office sounder: a small mahogany base with two upright black electromagnet coils wound in silk-covered copper wire, a pivoting brass lever arm above them that clicks down against an adjustable brass stop, and two brass binding screws for the line wires. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
 
 ## Chapter 6
 
@@ -699,7 +737,7 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 ```
 
 ### p06_trust_certificate
-*ch06: "he set up a trust"*
+*ch06: "he set up a trust" **(now covered by the real 1882 Standard Oil Trust certificate (ch06/); optional)***
 
 ```
 Create one image, square format.
@@ -720,6 +758,51 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 Create one image, square format.
 
 A 19th-century wooden auctioneer's gavel lying on its round wooden sound block, dark walnut, worn smooth. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
+### 🆕 p06_clerk_desk
+*ch06: his first job as a bookkeeper*
+
+```
+Create one image, square format.
+
+An 1850s bookkeeper's standing desk from a merchant's counting house: a tall slant-top pine desk on long legs, dark varnish worn pale along the front edge, a large closed account ledger bound in brown leather lying on the slope, a glass inkwell and a steel dip pen on the flat ledge at the top. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
+### 🆕 p06_freight_waybill
+*ch06: the rebate (the shipment the railroad paid him back on)*
+
+```
+Create one image, square format.
+
+An 1870s railroad freight waybill: a long, narrow sheet of thin buff paper with an ornamental printed heading made only of illegible flourishes and a small engraving of a steam locomotive at the top, ruled columns below filled with illegible faded handwriting in brown ink, folded once with a soft crease. Flat, seen from straight above.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure black background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
+### 🆕 p06_kerosene_case
+*ch06: kerosene shipped worldwide, two cans to a case (pairs with p06_kerosene_can)*
+
+```
+Create one image, square format.
+
+An open 1870s pine export case holding two square tin kerosene cans side by side: a plain crate of thin, rough pine boards nailed together with the lid off, and inside it two square-section tinplate cans about fourteen inches tall with soldered seams and a small screw cap at one top corner, dull silver tin with a little rust. Three-quarter view from slightly above.
 
 STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
 
@@ -809,6 +892,21 @@ BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table
 RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
 ```
 
+### 🆕 p08_factory_notice
+*ch08: "No minimum wage. No limit on hours." (the words are added in the edit)*
+
+```
+Create one image, square format.
+
+A blank 1880s factory notice: a rectangle of stiff yellowed card, slightly curled and water-stained at one corner, with a heavy printed black border and a bold decorative rule across the top, held by four rusty iron tacks at the corners. The body of the card is completely blank. Flat, straight on.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure black background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
 
 ## Chapter 9
 
@@ -849,6 +947,36 @@ RULES: historically accurate for the stated year and place; nothing modern, no p
 Create one image, square format.
 
 A small heap of tangled, cut lengths and loose coils of 1870s steel wire, dull grey with rust spots, some bent and kinked, piled loosely. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
+### 🆕 p09_wire_tester
+*ch09: "every load of wire had to pass a strength test"*
+
+```
+Create one image, square format.
+
+An 1870s horizontal testing machine for steel wire, an industrial laboratory instrument: a long cast-iron bed about six feet long on short legs, painted dark green-black with worn edges; at one end a large hand-cranked screw turned by a spoked iron wheel; at the other end a steel beam scale with a sliding brass weight; a short length of bright steel wire clamped taut between two iron jaws in the middle. Three-quarter view.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
+```
+
+### 🆕 p09_wire_wagon
+*ch09: "a wagon of good wire... same wagon, same certificate"*
+
+```
+Create one image, square format.
+
+An 1870s heavy two-horse freight wagon (a dray) with no horses: a long flat wooden bed with low plank sides, four large wooden spoked wheels with iron tyres, the wooden tongue resting on the ground, worn grey-brown paint. The bed is loaded with six coils of grey galvanized steel wire stacked on their sides. Side view from slightly above.
 
 STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
 

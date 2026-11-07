@@ -122,6 +122,29 @@ PROPS = [
  ('p09_rejected_wire_pile', 'ch09: "the pile of rejected wire... never got any bigger"', 'white',
   'A small heap of tangled, cut lengths and loose coils of 1870s steel wire, dull grey with rust spots, some bent and kinked, piled loosely. Three-quarter view.'),
 ]
+# Round 2: props for gaps the archival search could not fill (Nov 7). Kept as a separate batch so round 1 ids never change.
+EXTRAS = [
+ ('p04_sugar_hogshead', 'ch04: "raw brown sugar" arriving by ship (1880s Cuban raw sugar came in hogsheads)', 'white',
+  'A large 1880s wooden sugar hogshead, the big cask raw sugar was shipped in from Cuba: about four feet tall and wider than an ordinary barrel, rough oak staves held by wooden hoops bound with split withies plus a few iron hoops, sticky dark molasses stains leaking between the staves, the top knocked partly open to show coarse, damp brown raw sugar inside. Three-quarter view.'),
+ ('p05_telegraph_sounder', 'ch05: Andrew reads the telegraph by ear (pairs with p05_telegraph_key)', 'white',
+  'An 1850s telegraph office sounder: a small mahogany base with two upright black electromagnet coils wound in silk-covered copper wire, a pivoting brass lever arm above them that clicks down against an adjustable brass stop, and two brass binding screws for the line wires. Three-quarter view.'),
+ ('p06_clerk_desk', 'ch06: his first job as a bookkeeper', 'white',
+  'An 1850s bookkeeper\'s standing desk from a merchant\'s counting house: a tall slant-top pine desk on long legs, dark varnish worn pale along the front edge, a large closed account ledger bound in brown leather lying on the slope, a glass inkwell and a steel dip pen on the flat ledge at the top. Three-quarter view.'),
+ ('p06_freight_waybill', 'ch06: the rebate (the shipment the railroad paid him back on)', 'black',
+  'An 1870s railroad freight waybill: a long, narrow sheet of thin buff paper with an ornamental printed heading made only of illegible flourishes and a small engraving of a steam locomotive at the top, ruled columns below filled with illegible faded handwriting in brown ink, folded once with a soft crease. Flat, seen from straight above.'),
+ ('p06_kerosene_case', 'ch06: kerosene shipped worldwide, two cans to a case (pairs with p06_kerosene_can)', 'white',
+  'An open 1870s pine export case holding two square tin kerosene cans side by side: a plain crate of thin, rough pine boards nailed together with the lid off, and inside it two square-section tinplate cans about fourteen inches tall with soldered seams and a small screw cap at one top corner, dull silver tin with a little rust. Three-quarter view from slightly above.'),
+ ('p08_factory_notice', 'ch08: "No minimum wage. No limit on hours." (the words are added in the edit)', 'black',
+  'A blank 1880s factory notice: a rectangle of stiff yellowed card, slightly curled and water-stained at one corner, with a heavy printed black border and a bold decorative rule across the top, held by four rusty iron tacks at the corners. The body of the card is completely blank. Flat, straight on.'),
+ ('p09_wire_tester', 'ch09: "every load of wire had to pass a strength test"', 'white',
+  'An 1870s horizontal testing machine for steel wire, an industrial laboratory instrument: a long cast-iron bed about six feet long on short legs, painted dark green-black with worn edges; at one end a large hand-cranked screw turned by a spoked iron wheel; at the other end a steel beam scale with a sliding brass weight; a short length of bright steel wire clamped taut between two iron jaws in the middle. Three-quarter view.'),
+ ('p09_wire_wagon', 'ch09: "a wagon of good wire... same wagon, same certificate"', 'white',
+  'An 1870s heavy two-horse freight wagon (a dray) with no horses: a long flat wooden bed with low plank sides, four large wooden spoked wheels with iron tyres, the wooden tongue resting on the ground, worn grey-brown paint. The bed is loaded with six coils of grey galvanized steel wire stacked on their sides. Side view from slightly above.'),
+]
+# Round 1 props that archival images now cover: make them only if they are already done or wanted as a backup.
+COVERED = {'p06_trust_certificate': 'the real 1882 Standard Oil Trust certificate (ch06/)'}
+PROPS = PROPS + EXTRAS
+PROPS.sort(key=lambda p: p[0][:3])
 def prompt(subject, bg):
     return f"Create one image, square format.\n\n{subject}\n\n{STYLE}\n\n{BG[bg]}\n\n{RULES}"
 out = ["# Google Flow prompts: Episode 1 cut-out props", "",
@@ -137,17 +160,36 @@ out = ["# Google Flow prompts: Episode 1 cut-out props", "",
  "  numbers and words in the edit (the $10, the 39 drops, the prices).",
  "- **Naming:** save each as its id + `.png` (e.g. `p05_dividend_check.png`) and drop them in the chat or in `ep1/public/img/props_raw/`.",
  "  I cut them out (`prop_cut.py` / `mask_white.py --bg=black`) and check every edge at full size.", "",
- f"**{len(PROPS)} props.** Must-haves are marked ★.", "",
+ f"**{len(PROPS)} props** ({len(PROPS)-len(EXTRAS)} in round 1, {len(EXTRAS)} added in round 2 after the archival search, marked 🆕). Must-haves are marked ★.", "",
  "**The shared blocks** (already inside every prompt; here for reference):", "", "```", STYLE, "", BG['white'], "", RULES, "```", "",
  "| id | chapter and beat | background |", "|---|---|---|"]
 MUST = {'p01_wire_coil','p02_gold_bar_peeled','p02_gold_bar_solid','p02_green_necklace','p03_iron_snapped','p03_steel_bent','p03_edison_bulb','p03_edison_bulb_lit','p04_sugar_two_bowls','p04_bone_char','p05_bobbin','p05_telegraph_key','p05_dividend_check','p05_mortgage_deed','p06_medicine_bottle','p06_red_notebook','p06_kerosene_can','p06_solder_lid','p07_kerosene_lamp','p07_kerosene_lamp_lit','p09_cable_section','p09_inspection_certificate'}
-for pid, beat, bg, subj in PROPS: out.append(f"| {'★ ' if pid in MUST else ''}`{pid}` | {beat} | {bg} |")
+EXTRA_IDS = {p[0] for p in EXTRAS}
+def tag(pid): return ('★ ' if pid in MUST else '') + ('🆕 ' if pid in EXTRA_IDS else '')
+def beatnote(pid, beat): return beat + (f" **(now covered by {COVERED[pid]}; optional)**" if pid in COVERED else '')
+for pid, beat, bg, subj in PROPS: out.append(f"| {tag(pid)}`{pid}` | {beatnote(pid, beat)} | {bg} |")
 out.append("")
 cur = None
 for pid, beat, bg, subj in PROPS:
     ch = pid[1:3]
     if ch != cur:
         cur = ch; out += ["", f"## Chapter {int(ch)}", ""]
-    out += [f"### {'★ ' if pid in MUST else ''}{pid}", f"*{beat}*", "", "```", prompt(subj, bg), "```", ""]
+    out += [f"### {tag(pid)}{pid}", f"*{beatnote(pid, beat)}*", "", "```", prompt(subj, bg), "```", ""]
 open('FLOW_PROMPT.md', 'w').write('\n'.join(out) + '\n')
 print(len(PROPS), 'props')
+
+# The extras-only brief for the Flow agent (same wording as the round 1 master prompt).
+agent = [f"You are making more cut-out prop images for the same Gilded Age history documentary (the 1850s to the 1880s), matching the set you made before. Create one separate image for EACH numbered prop below, {len(EXTRAS)} images in total. Make 2 takes of each. Each image shows only that prop. Do not combine props, do not make a grid or collage, and do not caption or number the images. Name each image with its id (for example {EXTRAS[0][0]}). Square format if available.",
+ "", "STYLE FOR EVERY IMAGE (identical across the whole set):", STYLE.replace("STYLE: ", "") + " Not a drawing, not a painting, not a 3D render.",
+ "", "BACKGROUND: each prop is marked [WHITE] or [BLACK].",
+ "[WHITE] = isolated on a plain, flat, pure white background. [BLACK] = isolated on a plain, flat, pure black background.",
+ "Either way: no floor, no table, no cast shadow, no reflection, no other objects.",
+ "", "RULES FOR EVERY IMAGE:",
+ "- Historically accurate for the stated period; nothing modern: no plastic, no modern screws, labels or barcodes.",
+ "- No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere. Any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. This matters most on the paper props.",
+ "- No people, no hands and no animals.",
+ "- One object only (or exactly the group described).", "", "THE PROPS:", ""]
+for i, (pid, beat, bg, subj) in enumerate(EXTRAS, 51):
+    agent += [f"{i}. {pid} [{bg.upper()}]: {subj}", ""]
+open('FLOW_AGENT_EXTRAS.txt', 'w').write('\n'.join(agent).rstrip() + '\n')
+print(len(EXTRAS), 'extras -> FLOW_AGENT_EXTRAS.txt')
