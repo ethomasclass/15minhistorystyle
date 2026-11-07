@@ -66,5 +66,357 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2001704262/",
     "source": "loc:2001704262"
+  },
+  "ch01/bridge_photo_east_river_1885.jpg": {
+    "title": "East River Bridge, New York City",
+    "artist": "",
+    "date": "1885-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003653821/",
+    "source": "loc:2003653821"
+  },
+  "ch01/bridge_ny_entrance_harpers_cover_roebling_inset_1883.jpg": {
+    "title": "The New York and Brooklyn suspension-bridge - New York entrance / from photograph by Gubelman.",
+    "artist": "",
+    "date": "1883-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/93512100/",
+    "source": "loc:93512100"
+  },
+  "ch09/cable_workers_lashing_stays_leslies_cover_1883.jpg": {
+    "title": "File:1883 Frank Leslie's Illustrated Newspaper Brooklyn Bridge New York City.jpg",
+    "artist": "",
+    "date": "28 April 1883date QS:P571,+1883-04-28T00:00:00Z/11",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1883_Frank_Leslie%27s_Illustrated_Newspaper_Brooklyn_Bridge_New_York_City.jpg"
+  },
+  "ch01/bridge_photo_from_brooklyn_rooftops_1884.jpg": {
+    "title": "File:Le pont suspendu de New York \u00e0 Brooklyn, vu de Brooklyn - btv1b53067280j (1 of 2).jpg",
+    "artist": "Ovington, Edward (18..-1...). Photographe",
+    "date": "1884date QS:P571,+1884-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Le_pont_suspendu_de_New_York_%C3%A0_Brooklyn,_vu_de_Brooklyn_-_btv1b53067280j_(1_of_2).jpg"
+  },
+  "ch02/gilded_age_novel_title_page_1873.jpg": {
+    "title": "The gilded age : a tale of to-day  (page 8)",
+    "artist": "['Twain, Mark, 1835-1910', 'Warner, Charles Dudley, 1829-1900']",
+    "date": "1873",
+    "licence": "public domain by age (1873)",
+    "page": "https://archive.org/details/cu31924022010148/page/n8",
+    "source": "iabook:cu31924022010148:8"
+  },
+  "ch02/gilded_age_novel_frontispiece_col_sellers_1873.jpg": {
+    "title": "The gilded age : a tale of to-day  (page 7)",
+    "artist": "['Twain, Mark, 1835-1910', 'Warner, Charles Dudley, 1829-1900']",
+    "date": "1873",
+    "licence": "public domain by age (1873)",
+    "page": "https://archive.org/details/cu31924022010148/page/n7",
+    "source": "iabook:cu31924022010148:7"
+  },
+  "ch02/mark_twain_engraved_bust_1870.jpg": {
+    "title": "File:Mark Twain. (Samuel Clemens).jpg",
+    "artist": "G. Fay",
+    "date": "1870",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mark_Twain._(Samuel_Clemens).jpg"
+  },
+  "ch02/mark_twain_brady_handy_photo_1871.jpg": {
+    "title": "File:Mark Twain 1871-02-07.jpg",
+    "artist": "Mathew Brady or Levin Handy",
+    "date": "1871-02-07",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mark_Twain_1871-02-07.jpg"
+  },
+  "ch02/standard_railway_time_map_nov18_1883.jpg": {
+    "title": "File:PSM V26 D162 Standard railway time vs greenwich mean time.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "between 1884 and 1885date QS:P,+1884-00-00T00:00:00Z/8,P1319,+1884-00-00T00:00:00Z/9,P1326,+1885-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:PSM_V26_D162_Standard_railway_time_vs_greenwich_mean_time.jpg"
+  },
+  "ch02/local_sun_time_clocks_diagram_johnson_1866.jpg": {
+    "title": "File:1866 Johnson Chart of World Time Zones, from Washington - Geographicus - TimeZones-johnson-1866.jpg",
+    "artist": "Alvin Jewett Johnson",
+    "date": "1866 (undated)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1866_Johnson_Chart_of_World_Time_Zones,_from_Washington_-_Geographicus_-_TimeZones-johnson-1866.jpg"
+  },
+  "ch02/new_standard_time_cartoon_life_1884.jpg": {
+    "title": "File:Backward, Turn Backward, O Time (Life, 1883-01-03).jpg",
+    "artist": "W. P. Snyder",
+    "date": "1884",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Backward,_Turn_Backward,_O_Time_(Life,_1883-01-03).jpg"
+  },
+  "ch04/brooklyn_refinery_asr_1916.jpg": {
+    "title": "A century of sugar refining in the United States, 1816-1916 (page 16)",
+    "artist": "American sugar refining company",
+    "date": "1916",
+    "licence": "public domain by age (1916)",
+    "page": "https://archive.org/details/cu31924003621046/page/n16",
+    "source": "iabook:cu31924003621046:16"
+  },
+  "ch04/refinery_interior_1916.jpg": {
+    "title": "A century of sugar refining in the United States, 1816-1916 (page 36)",
+    "artist": "American sugar refining company",
+    "date": "1916",
+    "licence": "public domain by age (1916)",
+    "page": "https://archive.org/details/cu31924003621046/page/n36",
+    "source": "iabook:cu31924003621046:36"
+  },
+  "ch04/rhinelander_sugar_house_check.jpg": {
+    "title": "A century of sugar refining in the United States, 1816-1916 (page 9)",
+    "artist": "American sugar refining company",
+    "date": "1916",
+    "licence": "public domain by age (1916)",
+    "page": "https://archive.org/details/cu31924003621046/page/n9",
+    "source": "iabook:cu31924003621046:9"
+  },
+  "ch01/bridge_promenade_photo_brainerd_ca1888.jpg": {
+    "title": "File:(Untitled), ca. 1888. (5833504602).jpg",
+    "artist": "Brooklyn Museum",
+    "date": "",
+    "licence": "No restrictions",
+    "page": "https://commons.wikimedia.org/wiki/File:(Untitled),_ca._1888._(5833504602).jpg"
+  },
+  "ch02/charles_dudley_warner_1870.jpg": {
+    "title": "File:Charles Dudley Warner in 1870.jpg",
+    "artist": "not stated",
+    "date": "1870",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_Dudley_Warner_in_1870.jpg"
+  },
+  "ch02/railroad_map_us_rand_mcnally_1883.jpg": {
+    "title": "File:New Official Railroad map of the United States and Canada - DPLA - c7a911d967987d386dc73ac839640637.jpg",
+    "artist": "War Department. Office of the Chief of Engineers. 1818-9/18/1947",
+    "date": "April 1883date QS:P571,+1883-04-00T00:00:00Z/10",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:New_Official_Railroad_map_of_the_United_States_and_Canada_-_DPLA_-_c7a911d967987d386dc73ac839640637.jpg"
+  },
+  "ch02/pacific_railroads_map_1883.jpg": {
+    "title": "File:Large-scale-detailed-old-map-exhibiting-the-several-pacific-railroads-1883.jpg",
+    "artist": "Rand, McNally and co",
+    "date": "1883",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Large-scale-detailed-old-map-exhibiting-the-several-pacific-railroads-1883.jpg"
+  },
+  "ch02/golden_spike_last_rail_russell_1869.jpg": {
+    "title": "File:East and West Shaking hands at the laying of last rail Union Pacific Railroad.jpg",
+    "artist": "Andrew J. Russell",
+    "date": "10 May 1869date QS:P571,+1869-05-10T00:00:00Z/11",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:East_and_West_Shaking_hands_at_the_laying_of_last_rail_Union_Pacific_Railroad.jpg"
+  },
+  "ch09/anchorage_cable_strands_workers_stereograph_1870s.jpg": {
+    "title": "File:Construction work on Brooklyn Bridge (NYPL b11708026-G91F173 012F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Construction_work_on_Brooklyn_Bridge_(NYPL_b11708026-G91F173_012F).tiff"
+  },
+  "ch09/footbridge_from_tower_stereograph_1870s.jpg": {
+    "title": "File:East River bridge, N.Y (NYPL b11708026-G91F173 064F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:East_River_bridge,_N.Y_(NYPL_b11708026-G91F173_064F).tiff"
+  },
+  "ch01/bridge_promenade_crowd_stereograph_1880s.jpg": {
+    "title": "File:On the promenade, Brooklyn Bridge (NYPL b11708026-G91F173 058F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:On_the_promenade,_Brooklyn_Bridge_(NYPL_b11708026-G91F173_058F).tiff"
+  },
+  "ch01/bridge_promenade_stereograph_2_1880s.jpg": {
+    "title": "File:Promenade on New York & Brooklyn bridge (NYPL b11708026-G91F173 051F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Promenade_on_New_York_%26_Brooklyn_bridge_(NYPL_b11708026-G91F173_051F).tiff"
+  },
+  "ch09/wire_cables_under_construction_1878.jpg": {
+    "title": "File:Brooklyn Bridge Under Construction 1878.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1878-01-01",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Brooklyn_Bridge_Under_Construction_1878.jpg"
+  },
+  "ch04/vacuum_pan_engraving_1895.jpg": {
+    "title": "Sugar machinery; a descriptive treatise devoted to the machinery and processes used in the manufacture of cane and beet sugars (page 140)",
+    "artist": "Wallis-Tayler, A. J. (Alexander James), b. 1852",
+    "date": "[1895]",
+    "licence": "public domain by age (1895)",
+    "page": "https://archive.org/details/sugarmachineryde00wallrich/page/n140",
+    "source": "iabook:sugarmachineryde00wallrich:140"
+  },
+  "ch04/centrifugal_engraving_1895.jpg": {
+    "title": "Sugar machinery; a descriptive treatise devoted to the machinery and processes used in the manufacture of cane and beet sugars (page 222)",
+    "artist": "Wallis-Tayler, A. J. (Alexander James), b. 1852",
+    "date": "[1895]",
+    "licence": "public domain by age (1895)",
+    "page": "https://archive.org/details/sugarmachineryde00wallrich/page/n222",
+    "source": "iabook:sugarmachineryde00wallrich:222"
+  },
+  "ch09/wire_spinning_traveling_wheel_hildenbrand_1877.jpg": {
+    "title": "Cable-making for suspension bridges : with special reference to the cables of the East River bridge (page 106)",
+    "artist": "Hildenbrand, Wilhelm",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/cablemakingfors00hildgoog/page/n106",
+    "source": "iabook:cablemakingfors00hildgoog:106"
+  },
+  "ch09/cable_wrapping_machine_hildenbrand_1877.jpg": {
+    "title": "Cable-making for suspension bridges : with special reference to the cables of the East River bridge (page 130)",
+    "artist": "Hildenbrand, Wilhelm",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/cablemakingfors00hildgoog/page/n130",
+    "source": "iabook:cablemakingfors00hildgoog:130"
+  },
+  "ch09/wire_contract_j_lloyd_haigh_text_hildenbrand_1877.jpg": {
+    "title": "Cable-making for suspension bridges : with special reference to the cables of the East River bridge (page 101)",
+    "artist": "Hildenbrand, Wilhelm",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/cablemakingfors00hildgoog/page/n101",
+    "source": "iabook:cablemakingfors00hildgoog:101"
+  },
+  "ch05/carnegie_birthplace_cottage.jpg": {
+    "title": "Autobiography of Andrew Carnegie (page 24)",
+    "artist": "['Carnegie, Andrew, 1835-1919', 'Van Dyke, John Charles, 1856-1932']",
+    "date": "1920",
+    "licence": "public domain by age (1920)",
+    "page": "https://archive.org/details/cu31924029807728/page/n24",
+    "source": "iabook:cu31924029807728:24"
+  },
+  "ch05/margaret_morrison_carnegie_mother.jpg": {
+    "title": "Autobiography of Andrew Carnegie (page 48)",
+    "artist": "['Carnegie, Andrew, 1835-1919', 'Van Dyke, John Charles, 1856-1932']",
+    "date": "1920",
+    "licence": "public domain by age (1920)",
+    "page": "https://archive.org/details/cu31924029807728/page/n48",
+    "source": "iabook:cu31924029807728:48"
+  },
+  "ch05/andrew_carnegie_16_with_brother_tom.jpg": {
+    "title": "Autobiography of Andrew Carnegie (page 58)",
+    "artist": "['Carnegie, Andrew, 1835-1919', 'Van Dyke, John Charles, 1856-1932']",
+    "date": "1920",
+    "licence": "public domain by age (1920)",
+    "page": "https://archive.org/details/cu31924029807728/page/n58",
+    "source": "iabook:cu31924029807728:58"
+  },
+  "ch05/dunfermline_abbey.jpg": {
+    "title": "Autobiography of Andrew Carnegie (page 30)",
+    "artist": "['Carnegie, Andrew, 1835-1919', 'Van Dyke, John Charles, 1856-1932']",
+    "date": "1920",
+    "licence": "public domain by age (1920)",
+    "page": "https://archive.org/details/cu31924029807728/page/n30",
+    "source": "iabook:cu31924029807728:30"
+  },
+  "ch05/thomson_and_scott_portraits_plate.jpg": {
+    "title": "Autobiography of Andrew Carnegie (page 110)",
+    "artist": "['Carnegie, Andrew, 1835-1919', 'Van Dyke, John Charles, 1856-1932']",
+    "date": "1920",
+    "licence": "public domain by age (1920)",
+    "page": "https://archive.org/details/cu31924029807728/page/n110",
+    "source": "iabook:cu31924029807728:110"
+  },
+  "ch09/wire_coupling_shoe_saddle_engravings_1883.jpg": {
+    "title": "The New York and Brooklyn Bridge: Illustrated (page 20)",
+    "artist": "Alfred C. Barnes,  J . H. Fisher,  Frederick Loeser & Co",
+    "date": "1883",
+    "licence": "public domain by age (1883)",
+    "page": "https://archive.org/details/newyorkandbrook00cogoog/page/n20",
+    "source": "iabook:newyorkandbrook00cogoog:20"
+  },
+  "ch09/fifth_avenue_vanderbilt_residences_stereograph_1893.jpg": {
+    "title": "Fifth Avenue, in front of the Vanderbilt Residences, New York, U.S.A.",
+    "artist": "Strohmeyer & Wyman.",
+    "date": "1893-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2017658203/",
+    "source": "loc:2017658203"
+  },
+  "ch09/wk_vanderbilt_house_fifth_ave_entrance_hunt_drawing_ca1879.jpg": {
+    "title": "[Residence for William K. and Alva S. Vanderbilt, 660 Fifth Avenue, New York, New York]. [Fifth Avenue Entrance]",
+    "artist": "Hunt, Richard Morris, 1827-1895, architect",
+    "date": "1879",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2024635966/",
+    "source": "loc:2024635966"
+  },
+  "ch09/vanderbilt_houses_fifth_ave_stereograph_1880s.jpg": {
+    "title": "File:Vanderbilt House, Fifth Ave. side, from Robert N. Dennis collection of stereoscopic views.jpg",
+    "artist": "Unknown artistUnknown artist",
+    "date": "Coverage: [1860?]-1925.\n\nDigital item published 8-31-2005; updated 2-11-2009.",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Vanderbilt_House,_Fifth_Ave._side,_from_Robert_N._Dennis_collection_of_stereoscopic_views.jpg"
+  },
+  "ch09/wk_vanderbilt_petit_chateau_and_triple_palace_ca1885.jpg": {
+    "title": "File:WK Vanderbilt 5th Ave Home.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "circa 1885date QS:P,+1885-00-00T00:00:00Z/9,P1480,Q5727902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:WK_Vanderbilt_5th_Ave_Home.jpg"
+  },
+  "ch05/power_loom_weaving_shed_baines_1835.jpg": {
+    "title": "History of the cotton manufacture in Great Britain; (page 283)",
+    "artist": "Baines, Edward, Sir, 1800-1890",
+    "date": "[1835]",
+    "licence": "public domain by age (1835)",
+    "page": "https://archive.org/details/historyofcottonm00bainrich/page/n283",
+    "source": "iabook:historyofcottonm00bainrich:283"
+  },
+  "ch05/mule_spinning_cotton_mill_baines_1835.jpg": {
+    "title": "History of the cotton manufacture in Great Britain; (page 249)",
+    "artist": "Baines, Edward, Sir, 1800-1890",
+    "date": "[1835]",
+    "licence": "public domain by age (1835)",
+    "page": "https://archive.org/details/historyofcottonm00bainrich/page/n249",
+    "source": "iabook:historyofcottonm00bainrich:249"
+  },
+  "ch09/wh_vanderbilt_drawing_room_sheldon_1883.jpg": {
+    "title": "File:Mr. William H. Vanderbilt's Drawing-Room. Sheldon 1883-84.jpg",
+    "artist": "George William Sheldon.",
+    "date": "between 1883 and 1884date QS:P,+1883-00-00T00:00:00Z/8,P1319,+1883-00-00T00:00:00Z/9,P1326,+1884-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mr._William_H._Vanderbilt%27s_Drawing-Room._Sheldon_1883-84.jpg"
+  },
+  "ch09/emily_warren_roebling_1899.jpg": {
+    "title": "File:Emily-warren-roebling.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1899",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Emily-warren-roebling.jpg"
+  },
+  "ch09/washington_roebling_civil_war_officer_1860s.jpg": {
+    "title": "File:WashingtonAugustusRoebling.jpg",
+    "artist": "",
+    "date": "1854",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:WashingtonAugustusRoebling.jpg"
+  },
+  "ch09/cable_spider_clamp_fig42_hildenbrand_1877.jpg": {
+    "title": "Cable-making for suspension bridges : with special reference to the cables of the East River bridge (page 122)",
+    "artist": "Hildenbrand, Wilhelm",
+    "date": "1877",
+    "licence": "public domain by age (1877)",
+    "page": "https://archive.org/details/cablemakingfors00hildgoog/page/n122",
+    "source": "iabook:cablemakingfors00hildgoog:122"
+  },
+  "ch09/footbridge_from_tower_stereograph_2_1870s.jpg": {
+    "title": "File:East River bridge tower, N.Y (NYPL b11708026-G91F173 047F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:East_River_bridge_tower,_N.Y_(NYPL_b11708026-G91F173_047F).tiff"
+  },
+  "ch09/anchorage_cable_strands_stereograph_2_1870s.jpg": {
+    "title": "File:New York tower of East River bridge (NYPL b11708026-G91F173 030F).tiff",
+    "artist": "Scan by NYPL",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:New_York_tower_of_East_River_bridge_(NYPL_b11708026-G91F173_030F).tiff"
   }
 }
