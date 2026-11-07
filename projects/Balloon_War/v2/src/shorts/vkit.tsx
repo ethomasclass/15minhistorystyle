@@ -91,14 +91,17 @@ export type VInsert = {plane: number; node: React.ReactNode};
  * (k >= 1), its top edge sits at screen y `top` (default: centred), and the painting x `cx` sits at the frame's centre,
  * sliding from cx[0] to cx[1] between frames a and b while the camera pushes in (`z`, near plane; farther planes less) about
  * screen point (540, `oy`). When `top` > 0 the sky plate is continued above the painting by its top rows, mirrored and stretched, so a
- * scene can sit low in the frame under the type. `glow` adds the glow plate (screen blend, flickering) on `glowLayer`.
+ * scene can sit low in the frame under the type. `plate` swaps in a retouched back plate (e.g. with a cut-out lifted off it so
+ * the cut-out can move as an insert). `ease` shapes the move (default ease-in-out; ease-out for a cover that must move at once). `glow` adds the glow plate (screen blend, flickering) on `glowLayer`.
  */
 export const VSil: React.FC<{name: string; size?: [number, number]; bands?: number; glowLayer?: number; glow?: number; a: number; b: number; cx: [number, number];
-  k?: number; top?: number; z?: [number, number]; oy?: number; drift?: [number, number]; insert?: VInsert[]; fog?: number; quietGrade?: boolean}> = ({
+  k?: number; top?: number; z?: [number, number]; oy?: number; drift?: [number, number]; insert?: VInsert[]; fog?: number; quietGrade?: boolean; plate?: string;
+  ease?: (t: number) => number}> = ({
   name, size = [2752, 1536], bands = 4, glowLayer = 0, glow = 0.55, a, b, cx, k = 1, top, z = [1.02, 1.08], oy = 960, drift = [14, -14], insert = [], fog = 0, quietGrade = false,
+  plate, ease = sine,
 }) => {
   const f = useCurrentFrame();
-  const u = interpolate(f, [a, b], [0, 1], {...clamp, easing: sine});
+  const u = interpolate(f, [a, b], [0, 1], {...clamp, easing: ease});
   const [W, H] = size;
   const S = (VH / H) * k;
   const Wc = W * S, Hc = H * S;
@@ -115,16 +118,17 @@ export const VSil: React.FC<{name: string; size?: [number, number]; bands?: numb
     return {position: 'absolute', left: VW / 2 - x * S, top: y0, width: Wc, height: Hc, transformOrigin: `${x * S}px ${oy - y0}px`,
       transform: `translate(${xNear * wt(i) + dx}px, ${dy}px) scale(${zz})`};
   };
-  const file = (i: number) => staticFile(`img/layers/sil/${name}/L${i}.${i === bands - 1 ? 'jpg' : 'webp'}`);
+  const file = (i: number) => staticFile(i === bands - 1 && plate ? plate : `img/layers/sil/${name}/L${i}.${i === bands - 1 ? 'jpg' : 'webp'}`);
   const flick = 1 + 0.5 * (0.35 * noise2D(`${name}fl`, f * 0.21, 0) + 0.15 * noise2D(`${name}fl2`, f * 0.57, 3));
   const img: React.CSSProperties = {position: 'absolute', left: 0, top: 0, width: '100%', height: '100%'};
   const planes: React.ReactNode[] = [];
   for (let i = bands - 1; i >= 0; i--) {
     planes.push(
       <div key={`L${i}`} style={box(i)}>
-        {/* the sky continued upward: its top rows mirrored and stretched 3x, so nothing below them (a moon, a flash) repeats */}
-        {i === bands - 1 && y0 > 0 && <Img src={file(i)} style={{...img, transform: 'scaleY(-3)', transformOrigin: '50% 0%'}} />}
-        <Img src={file(i)} style={img} />
+        {/* the sky continued upward: its top rows mirrored and stretched 6x, so nothing below them (a moon, a flash) repeats */}
+        {i === bands - 1 && y0 > 0 && <Img src={file(i)} style={{...img, transform: 'scaleY(-6)', transformOrigin: '50% 1%'}} />}
+        {/* the plate's top 1% (its edge row reads as a seam) is replaced by the extension, which mirrors about that line */}
+        <Img src={file(i)} style={{...img, clipPath: i === bands - 1 && y0 > 0 ? 'inset(1% 0 0 0)' : undefined}} />
         {insert.filter((s) => s.plane === i).map((s, j) => <React.Fragment key={j}>{s.node}</React.Fragment>)}
       </div>,
     );
@@ -196,14 +200,16 @@ export const projV = (c: Cam, p: readonly number[]) => {
   return {x: ((v.x + 1) / 2) * VW, y: ((1 - v.y) / 2) * VH};
 };
 
-/** Big plain type (the cover and the payoff): Inter 800, white, heavy shadow, fades in at `at` (frame 0 = fully drawn if at < 0). */
-export const BigType: React.FC<{lines: string[]; x: number; y: number; size: number; at?: number; color?: string; align?: 'left' | 'center'; w?: number; lh?: number}> = ({
-  lines, x, y, size, at = -99, color = '#ffffff', align = 'left', w = 870, lh = 1.02,
+/** Big plain type (the cover and the payoff): Inter 800, white, heavy shadow, fades in at `at` (frame 0 = fully drawn if at < 0).
+ *  `punch`: starts at that scale on frame 0 (fully readable) and settles to 1 by frame 6. */
+export const BigType: React.FC<{lines: string[]; x: number; y: number; size: number; at?: number; color?: string; align?: 'left' | 'center'; w?: number; lh?: number; punch?: number}> = ({
+  lines, x, y, size, at = -99, color = '#ffffff', align = 'left', w = 870, lh = 1.02, punch,
 }) => {
   const f = useCurrentFrame();
   const o = interpolate(f, [at, at + 8], [0, 1], clamp);
+  const k = punch ? interpolate(f, [0, 6], [punch, 1], {...clamp, easing: Easing.out(Easing.cubic)}) : 1;
   return (
-    <div style={{position: 'absolute', left: x, top: y, width: w, textAlign: align, opacity: o, fontFamily: JF.sans, fontWeight: 800, fontSize: size, lineHeight: lh, letterSpacing: -1,
+    <div style={{position: 'absolute', left: x, top: y, width: w, textAlign: align, opacity: o, transform: `scale(${k})`, transformOrigin: '0 50%', fontFamily: JF.sans, fontWeight: 800, fontSize: size, lineHeight: lh, letterSpacing: -1,
       color, textTransform: 'uppercase', textShadow: '0 6px 0 #0d0c09, 0 0 30px rgba(0,0,0,0.85), 0 0 8px rgba(0,0,0,0.9)'}}>
       {lines.map((l, i) => <div key={i}>{l}</div>)}
     </div>

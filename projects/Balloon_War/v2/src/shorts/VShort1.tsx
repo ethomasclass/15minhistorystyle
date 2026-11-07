@@ -51,36 +51,56 @@ export const VSHORT1_FRAMES = LOOP_AT + LOOP_TAIL;
 // ---------------------------------------------------------------------------------------------
 // The cover: BW10 cropped tall and set low (the sky continued above it), the flash and the parachute under the type.
 
-const FLASH: [number, number] = [1224, 250]; // the coral burst, painting px
+const FLASH: [number, number] = [1224, 250]; // the coral burst, painting px (on the sky plate)
+const CHUTE = {x: 1330, y: 450, w: 142, h: 172}; // the parachute's box on the sky plate, lifted off into public/img/shorts/
 
 /** The flash flaring: a coral glow on the sky plate that surges from frame 1 and keeps flickering. */
 const Flare: React.FC = () => {
   const f = useCurrentFrame();
-  const surge = interpolate(f, [0, 6, 30], [0, 1, 0.35], clamp);
+  const surge = interpolate(f, [0, 5, 40], [0, 1, 0.3], clamp);
   const flick = 0.12 * Math.sin(f * 0.9) + 0.08 * Math.sin(f * 2.3);
-  const k = 0.55 + surge * 0.9 + flick;
-  const r = 230 * (0.85 + surge * 0.5);
+  const k = 0.5 + surge * 1.0 + flick;
+  const r = 150 * (0.9 + surge * 0.8);
   return (
     <div style={{...atPx(SIL, FLASH[0], FLASH[1]), width: 0, height: 0}}>
       <div style={{position: 'absolute', left: -r, top: -r, width: r * 2, height: r * 2, borderRadius: '50%', mixBlendMode: 'screen', opacity: Math.min(1, k),
-        background: `radial-gradient(circle, rgba(255,243,224,0.95) 0%, ${CORAL}cc 10%, rgba(255,111,97,0.32) 34%, transparent 70%)`}} />
+        background: `radial-gradient(circle, rgba(255,243,224,0.95) 0%, ${CORAL}cc 12%, rgba(255,111,97,0.3) 36%, transparent 70%)`}} />
     </div>
   );
 };
 
+/** The parachute (cut from the painting) drifting down and swaying from frame 1; on frame 0 it sits exactly where it was painted. */
+const Chute: React.FC<{b: number}> = ({b}) => {
+  const f = useCurrentFrame();
+  const dy = interpolate(f, [0, b], [0, 80], clamp);
+  const dx = 14 * Math.sin(f / 22);
+  const rot = 5 * Math.sin(f / 16);
+  return (
+    <Img src={staticFile('img/shorts/bw10_parachute.png')} style={{...atPx(SIL, CHUTE.x + dx, CHUTE.y + dy), width: `${(CHUTE.w / SIL[0]) * 100}%`, height: 'auto',
+      transform: `rotate(${rot}deg)`, transformOrigin: '50% 10%'}} />
+  );
+};
+
+/**
+ * The cover. BW10 set low and small (k 0.75) with the sky continued above, so the type sits in clear sky and the flash and
+ * the parachute sit below it, clear of the text, with the two ranch hands under them. Motion from frame 1: an ease-out push,
+ * the flash flaring, the parachute drifting, the type and the tape punching in (both fully drawn on frame 0).
+ */
 const Cover: React.FC<{b: number}> = ({b}) => {
   const f = useCurrentFrame();
   const kept = at('kept');
   const pulse = interpolate(f, [kept, kept + 4, kept + 10], [1, 1.09, 1], clamp);
+  const slap = interpolate(f, [0, 3, 6], [1.12, 0.97, 1], clamp);
   return (
     <AbsoluteFill>
-      <VSil name="BW10_wyoming_flash" a={0} b={b} cx={[1530, 1515]} top={320} z={[1.0, 1.08]} oy={820} drift={[0, -10]} glow={0.5}
-        insert={[{plane: 3, node: <Flare />}]} />
+      <VSil name="BW10_wyoming_flash" plate="img/shorts/bw10_L3_nochute.jpg" a={0} b={b} cx={[1560, 1540]} k={0.75} top={615} z={[1.0, 1.12]} oy={900}
+        drift={[0, -12]} glow={0.5} ease={Easing.out(Easing.quad)}
+        insert={[{plane: 3, node: <Flare />}, {plane: 3, node: <Chute b={b} />}]} />
       {/* darken the top so the type reads; the continued sky is dark there anyway */}
-      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,7,5,0.55) 0%, rgba(8,7,5,0.25) 28%, rgba(8,7,5,0) 40%)'}} />
-      <BigType lines={['AMERICA', 'WAS UNDER', 'ATTACK']} x={60} y={176} size={138} />
-      <div style={{position: 'absolute', inset: 0, transform: `scale(${pulse})`, transformOrigin: '550px 710px'}}>
-        <Highlight text="KEPT SECRET" x={196} y={646} size={100} at={-30} seed={211} rot={-3} />
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,7,5,0.5) 0%, rgba(8,7,5,0.2) 30%, rgba(8,7,5,0) 40%)'}} />
+      <BigType lines={['AMERICA', 'WAS UNDER', 'ATTACK']} x={60} y={170} size={124} punch={1.07} />
+      <div style={{position: 'absolute', inset: 0, transform: `scale(${pulse * slap})`, transformOrigin: '70px 650px'}}>
+        <Highlight text="KEPT SECRET" x={60} y={594} size={96} at={-30} seed={211} rot={-3} />
       </div>
     </AbsoluteFill>
   );
