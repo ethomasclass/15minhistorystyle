@@ -105,6 +105,20 @@ function figure(o) {
   const top = headY + headR[1];
   const headRot = `rotate(${f1(-(an.tilt || 0) * d)}, ${f1(X(0))}, ${f1(Y(child ? 0.8 : 0.86))})`;
 
+  // The head as one profile: skull, forehead, brow, nose, lips, chin, jaw. Women get a softer brow and smaller nose; children a
+  // rounder, bigger head. `open` drops the jaw for an open mouth (awe).
+  const hs = child ? 1.42 : 1;
+  const prof = kind === 'woman' ? {brow: 0.058, nose: 0.018, lip: 0.067, chin: 0.05} : child ? {brow: 0.058, nose: 0.012, lip: 0.064, chin: 0.05} : {brow: 0.064, nose: 0.026, lip: 0.066, chin: 0.056};
+  const EXPR = {neutral: {open: 0}, smile: {open: 0}, worried: {open: 0}, awe: {open: 0.009}, set: {open: 0}};
+  const expr = EXPR[an.expr] ? an.expr : 'neutral', jaw = EXPR[expr].open;
+  const HP = (dx, dy) => [X(0.008 + dx * hs), Y(headY + dy * hs)];
+  const hpS = (dx, dy) => { const [a, b] = HP(dx, dy); return `${f1(a)},${f1(b)}`; };
+  function headPath() {
+    const q = prof;
+    return `M${hpS(-0.032, -0.062)} Q${hpS(-0.074, -0.03)} ${hpS(-0.064, 0.02)} Q${hpS(-0.056, 0.07)} ${hpS(0.0, 0.073)} Q${hpS(0.048, 0.072)} ${hpS(0.06, 0.032)}` +
+      ` L${hpS(q.brow, 0.014)} L${hpS(0.059, 0.005)} L${hpS(0.06 + q.nose, -0.016)} L${hpS(0.063, -0.026)} L${hpS(q.lip, -0.034)} L${hpS(0.061, -0.04 - jaw)}` +
+      ` L${hpS(q.lip - 0.002, -0.046 - jaw)} Q${hpS(q.chin + 0.008, -0.058 - jaw)} ${hpS(q.chin, -0.066 - jaw)} Q${hpS(0.04, -0.074 - jaw)} ${hpS(0.015, -0.068)} L${hpS(0.02, -0.058)} Z`;
+  }
   const capShape = (c, cx0, cy0) => `<ellipse cx="${f1(X(cx0))}" cy="${f1(Y(cy0))}" rx="${f1(0.07 * h)}" ry="${f1(0.034 * h)}" fill="${c}"/>` +
     poly(P([[cx0 + 0.03, cy0 - 0.005], [cx0 + 0.115, cy0 - 0.023], [cx0 + 0.05, cy0 - 0.031]]), c);
 
@@ -136,10 +150,7 @@ function figure(o) {
     // head group
     const hg = [];
     hg.push(poly(P([[-0.025, 0.83], [0.032, 0.83], [0.03, 0.89], [-0.02, 0.89]]), c));
-    hg.push(`<ellipse cx="${f1(X(0.008))}" cy="${f1(Y(headY))}" rx="${f1(headR[0] * h)}" ry="${f1(headR[1] * h)}" fill="${c}"/>`);
-    hg.push(`<ellipse cx="${f1(X(0.036))}" cy="${f1(Y(headY - 0.046))}" rx="${f1(0.03 * h)}" ry="${f1(0.024 * h)}" fill="${c}"/>`); // jaw and chin
-    const nx = headR[0] + 0.004;
-    hg.push(poly(P([[nx - 0.01, headY + 0.012], [nx + 0.022, headY - 0.012], [nx - 0.006, headY - 0.02]]), c));
+    hg.push(`<path d="${headPath()}" fill="${c}" stroke="${c}" stroke-width="${f1(0.004 * h)}" stroke-linejoin="round"/>`); // the profile
     if (beard) hg.push(poly(P([[-0.03, headY - 0.03], [0.07, headY - 0.03], [0.05, headY - 0.1], [0.0, headY - 0.105]]), c));
     if (kind === 'woman' || kind === 'girl') hg.push(`<circle cx="${f1(X(-0.06))}" cy="${f1(Y(headY + 0.02))}" r="${f1(0.032 * h)}" fill="${c}"/>`);
     if (!hatInHand) {
@@ -213,12 +224,24 @@ function figure(o) {
       g.push(poly(P([[0.0, 0.79], [0.07, 0.79], [0.035, 0.76]]), lite));
     }
     // face and head
-    const eyeX = headR[0] * 0.55, eyeY = headY + 0.01;
-    hg.push(`<ellipse cx="${f1(X(-0.008))}" cy="${f1(Y(headY - 0.002))}" rx="${f1(0.013 * h)}" ry="${f1(0.02 * h)}" fill="${tone}" opacity="0.75"/>`); // ear
-    hg.push(an.blink ? ln([[eyeX - 0.008, eyeY], [eyeX + 0.008, eyeY - 0.002]], 0.004)
-      : `<ellipse cx="${f1(X(eyeX))}" cy="${f1(Y(eyeY))}" rx="${f1(0.0075 * h)}" ry="${f1(0.0055 * h)}" fill="${tone}"/>`);
-    hg.push(ln([[eyeX - 0.012, eyeY + 0.02], [eyeX + 0.014, eyeY + 0.016]], 0.005)); // brow
-    hg.push(ln([[headR[0] - 0.012, headY - 0.042], [headR[0] + 0.006, headY - 0.04]], 0.004)); // mouth
+    // the face: an expression is a brow, an eye and a mouth (plus a cheek crease for a smile)
+    const hl = (a, w = 0.005) => line(a.map(([dx, dy]) => HP(dx, dy)), tone, w * h * hs);
+    const hq = (a, b, c2, w = 0.005) => { const [p0, p1, p2] = [HP(...a), HP(...b), HP(...c2)]; return `<path d="M${f1(p0[0])},${f1(p0[1])} Q${f1(p1[0])},${f1(p1[1])} ${f1(p2[0])},${f1(p2[1])}" stroke="${tone}" stroke-width="${f1(w * h * hs)}" fill="none" stroke-linecap="round"/>`; };
+    const he = (dx, dy, rx, ry, c2 = tone) => { const [a, b] = HP(dx, dy); return `<ellipse cx="${f1(a)}" cy="${f1(b)}" rx="${f1(rx * h * hs)}" ry="${f1(ry * h * hs)}" fill="${c2}"/>`; };
+    hg.push(he(-0.012, -0.002, 0.012, 0.019) .replace('/>', ' opacity="0.75"/>')); // ear
+    const brow = {neutral: [[0.022, 0.024], [0.05, 0.022]], smile: [[0.022, 0.027], [0.05, 0.026]], worried: [[0.022, 0.021], [0.05, 0.031]],
+      awe: [[0.022, 0.032], [0.05, 0.034]], set: [[0.022, 0.027], [0.052, 0.015]]}[expr];
+    hg.push(hl(brow, 0.006));
+    if (an.blink) hg.push(hl([[0.026, 0.006], [0.042, 0.005]], 0.004));
+    else if (expr === 'smile') hg.push(hq([0.025, 0.006], [0.034, 0.014], [0.043, 0.006], 0.004));
+    else if (expr === 'awe') { hg.push(he(0.034, 0.008, 0.009, 0.008)); hg.push(he(0.037, 0.011, 0.0028, 0.0028, lite)); }
+    else hg.push(he(0.034, 0.008, 0.0075, expr === 'set' ? 0.0042 : 0.0058));
+    if (expr === 'smile') { hg.push(hq([0.061, -0.04], [0.05, -0.047], [0.037, -0.034])); hg.push(hq([0.036, -0.022], [0.031, -0.027], [0.032, -0.033], 0.0035)); }
+    else if (expr === 'worried') hg.push(hq([0.061, -0.04], [0.05, -0.036], [0.038, -0.047]));
+    else if (expr === 'awe') hg.push(he(0.056, -0.044, 0.007, 0.009));
+    else if (expr === 'set') hg.push(hl([[0.061, -0.04], [0.036, -0.041]], 0.006));
+    else hg.push(hq([0.061, -0.04], [0.05, -0.042], [0.04, -0.041], 0.004));
+    if (!(hatInHand || hat === 'none') && kind === 'man') hg.push(`<path d="M${hpS(-0.06, 0.03)} Q${hpS(-0.068, 0.0)} ${hpS(-0.056, -0.03)} L${hpS(-0.044, -0.022)} Q${hpS(-0.05, 0.004)} ${hpS(-0.042, 0.03)} Z" fill="${tone}" opacity="0.85"/>`); // hair below the hat
     const bare = hatInHand || hat === 'none';
     if (kind === 'man' && bare) hg.push(`<path d="M${f1(X(-0.064))},${f1(Y(headY - 0.01))} Q${f1(X(-0.066))},${f1(Y(top + 0.012))} ${f1(X(0.01))},${f1(Y(top + 0.008))} Q${f1(X(0.06))},${f1(Y(top))} ${f1(X(0.066))},${f1(Y(headY + 0.03))} Q${f1(X(0.02))},${f1(Y(headY + 0.045))} ${f1(X(-0.02))},${f1(Y(headY + 0.02))} Z" fill="${tone}"/>`); // hair
     if (kind === 'man' && !bare && hat === 'bowler') hg.push(ln([[-0.058, top - 0.002], [0.066, top - 0.002]], 0.01));
@@ -509,6 +532,8 @@ function crowdAnim(p, t, L) {
   const mix = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
   const rest = [165, 150], osc = Math.sin(TAU * tq * 1.7 + ph[4] * 6);
   const child = p.kind === 'boy' || p.kind === 'girl';
+  an.expr = L.fireworks ? (g < 0.55 ? 'awe' : 'smile') : (g < 0.3 ? 'smile' : 'neutral');
+  an.blink = (tq + ph[5] * 5) % 4.3 < 0.12;
   if (p.pose === 'carry') { an.childWave = 25 * osc; return an; }
   if (child && g < 0.6) { an.bob += 0.035 * Math.abs(Math.sin(TAU * (tq * 1.3 + ph[5]))) * env; an.fArm = mix(rest, [20, 10 + 25 * osc], env); }
   else if (p.kind === 'man' && g < 0.22 && p.hat !== 'none') { an.fArm = mix(rest, [28, 10 + 22 * osc], env); an.hatInHand = env > 0.35; }
@@ -608,7 +633,7 @@ const CLIPS = {
       const down = smooth(3.6, 5.2, tq);
       const fArm = [30 + wa * 0.4 * (1 - down) + (172 - 30) * down, 8 + wa * (1 - down) + (176 - 8) * down];
       const blink = [[2.1, 2.25], [5.9, 6.05], [8.0, 8.15]].some(([a, b]) => tq >= a && tq < b);
-      return {fArm, hatInHand: true, tilt: 14 * smooth(4.2, 6.0, tq), blink, bob: 0.003 * Math.sin(TAU * tq / 3.2), lean: -1.5 * smooth(4.2, 6, tq)};
+      return {fArm, hatInHand: true, tilt: 14 * smooth(4.2, 6.0, tq), blink, bob: 0.003 * Math.sin(TAU * tq / 3.2), lean: -1.5 * smooth(4.2, 6, tq), expr: tq < 4.4 ? 'smile' : 'awe'};
     }},
 };
 function renderClipFrame(name, t) { const c = CLIPS[name]; if (c.render) return c.render(t); return renderScene({look: c.look, t, ...c.cam(t), michael: c.michael || null}); }
@@ -631,4 +656,23 @@ function renderLadder(look = 'dusk') {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${s.join('')}</svg>`;
 }
 
-if (typeof window !== 'undefined') Object.assign(window, {renderScene, renderClipFrame, renderLadder, LOOKS, B, CLIPS, figure, rng, f1});
+// Expression sheet: Michael and a neighbour, five faces each, drawn huge so only the heads are in frame.
+function renderFaces(look = 'dusk') {
+  const L = LOOKS[look], s = [];
+  s.push(`<defs>${grad('sky', L.sky)}<filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/></filter></defs>`);
+  s.push(`<rect width="${W}" height="${H}" fill="url(#sky)"/>`);
+  const ex = ['neutral', 'smile', 'worried', 'awe', 'set'];
+  const rows = [{kind: 'man', hat: 'cap', coat: 'jacket', fill: L.accent, tones: MICHAEL_TONES, h: 1500, cy: 280},
+                {kind: 'woman', hat: 'lady', coat: 'frock', fill: L.fg, tones: {tone: L.tone, lite: L.lite}, h: 1500, cy: 830}];
+  rows.forEach((r, ri) => ex.forEach((e, i) => {
+    const cx = 192 + i * 384;
+    s.push(`<clipPath id="c${ri}${i}"><rect x="${cx - 190}" y="${ri * 540 + 4}" width="380" height="532"/></clipPath>`);
+    s.push(`<g clip-path="url(#c${ri}${i})">${figure({x: cx - 20, y: r.cy + 0.93 * r.h, h: r.h, d: 1, kind: r.kind, hat: r.hat, coat: r.coat, fill: r.fill, det: 1, tones: r.tones,
+      rim: {...L.rim, a: L.rim.a}, an: {expr: e}})}</g>`);
+    s.push(`<text x="${cx}" y="${ri * 540 + 520}" fill="#F4EFE6" font-family="Mono" font-size="22" letter-spacing="3" text-anchor="middle">${e.toUpperCase()}</text>`);
+  }));
+  s.push(`<rect width="${W}" height="${H}" filter="url(#grain)" opacity="0.12" style="mix-blend-mode:overlay"/>`);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${s.join('')}</svg>`;
+}
+
+if (typeof window !== 'undefined') Object.assign(window, {renderFaces, renderScene, renderClipFrame, renderLadder, LOOKS, B, CLIPS, figure, rng, f1});

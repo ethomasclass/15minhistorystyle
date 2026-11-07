@@ -39,6 +39,12 @@ const JOBS = [
   {name: 'r3_walk_wide_t1', clip: 'walk_wide', t: 1},
   {name: 'r3_walk_wide_t6', clip: 'walk_wide', t: 6},
   {name: 'r3_walk_medium_t2', clip: 'walk_medium', t: 2},
+  // round 4: profile heads and expressions, locked walk, seated driver, horse gait
+  {name: 'r4_faces', look: 'dusk', faces: true},
+  {name: 'r4_walk_medium_smile', clip: 'walk_medium', t: 2.0},
+  {name: 'r4_walk_wide_wagon', clip: 'walk_wide', t: 6},
+  {name: 'r4_closeup_awe', clip: 'closeup_night', t: 7},
+  {name: 'r4_detail_ladder', look: 'dusk', ladder: true},
 ];
 
 const filter = process.argv[2];

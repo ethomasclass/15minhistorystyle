@@ -16,13 +16,20 @@ const WALK_V = 190;         // Michael's walking speed, px/s at the near sidewal
 const M_SCREEN_X = 760;     // where the camera keeps him
 const FAR_GROUND = 876, NEAR_GROUND = 1012;
 
-// A walk cycle for the rig: thighs swing, the knee bends on the swing, arms counter-swing, the body bobs twice a cycle.
+// A walk cycle for the rig, locked to the ground. Each leg spends half the cycle planted: the foot slides back under the body at
+// exactly the walking speed (so it does not skate), then swings forward with the knee bent. Arms counter-swing; the body is
+// highest at mid-stance. walkPhase() turns distance walked into cycles; positions and poses both step at 12 drawings a second.
+function walkPhase(dist, h, stride = 22) { return dist / (2 * Math.sin(stride * Math.PI / 180) * h); }
 function walkAn(p, {stride = 22, arm = 18, carry = false} = {}) {
-  const a = Math.sin(TAU * p), c = Math.cos(TAU * p);
-  const th = [stride * a, -stride * a];
-  const shins = [th[0] - 38 * Math.max(0, c), th[1] - 38 * Math.max(0, -c)];
-  const armF = carry ? 6 : arm;
-  return {legs: th, shins, fArm: [180 + armF * a, 168 + armF * a], bArm: [180 - arm * a, 192 - arm * a * 1.2], bob: 0.012 * Math.cos(2 * TAU * p) - 0.006};
+  const sm = Math.sin(stride * Math.PI / 180);
+  const leg = (u) => {
+    u = ((u % 1) + 1) % 1;
+    if (u < 0.5) { const th = Math.asin(sm * (1 - 4 * u)) * 180 / Math.PI; return [th, th]; }
+    const v = (u - 0.5) / 0.5, th = -stride * Math.cos(Math.PI * v); return [th, th - 55 * Math.sin(Math.PI * v)];
+  };
+  const A = leg(p), Bl = leg(p + 0.5), k = A[0] / stride, armF = carry ? 5 : arm;
+  return {legs: [A[0], Bl[0]], shins: [A[1], Bl[1]], fArm: [180 + armF * k, 170 + armF * k], bArm: [180 - arm * k, 192 - arm * k * 1.2],
+    bob: 0.011 * Math.cos(2 * TAU * (p - 0.25)) - 0.007};
 }
 
 /* ---------- far: chimneys, a steeple, factory smoke ---------- */
@@ -91,9 +98,9 @@ function stRow(t) {
     s.push(figure({x: fx, y: FAR_GROUND, h: kind === 'girl' || kind === 'boy' ? 62 : 104, d: R() < 0.5 ? 1 : -1, kind, hat, fill: ST.smallFolk,
       an: {bob: 0.006 * Math.sin(TAU * (tq / 3 + ph)), lean: 1.2 * Math.sin(TAU * (tq / 5 + ph)), fArm: [165 - 40 * Math.max(0, Math.sin(TAU * (tq / 6 + ph))) ** 2, 150]}}));
   }
-  const hx = 300 + ((t * 120) % 2600), hp = (t * 2.2) % 1;
-  s.push(figure({x: hx, y: FAR_GROUND, h: 64, d: 1, kind: 'boy', hat: 'boycap', fill: ST.smallFolk, an: {...walkAn(step12(t) * 2.2, {stride: 30, arm: 30}), fArm: [110, 100]}}));
-  const ang = (t * 120) / 14;
+  const tq0 = step12(t), hx = 300 + ((tq0 * 120) % 2600);
+  s.push(figure({x: hx, y: FAR_GROUND, h: 64, d: 1, kind: 'boy', hat: 'boycap', fill: ST.smallFolk, an: {...walkAn(walkPhase(tq0 * 120, 64, 30), {stride: 30, arm: 30}), fArm: [110, 100]}}));
+  const ang = (tq0 * 120) / 14;
   s.push(`<circle cx="${f1(hx + 46)}" cy="${FAR_GROUND - 15}" r="15" fill="none" stroke="${ST.smallFolk}" stroke-width="2.5"/>` +
     `<line x1="${f1(hx + 46)}" y1="${FAR_GROUND - 15}" x2="${f1(hx + 46 + 15 * Math.cos(ang))}" y2="${f1(FAR_GROUND - 15 + 15 * Math.sin(ang))}" stroke="${ST.smallFolk}" stroke-width="1.5"/>`);
   // evening haze along the street, and the light of the low sun on the left side of the row
@@ -102,29 +109,38 @@ function stRow(t) {
 }
 
 /* ---------- the street: cobbles, a pushcart, telegraph poles, a horse and wagon going the other way ---------- */
-function horse(x, gy, sz, c, t, dir = -1) { // sz: height at the withers
-  const s = [], p = step12(t) * 1.15, X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz;
-  const legs = [[-0.4, 0], [-0.3, 0.5], [0.36, 0.25], [0.46, 0.75]];
-  for (const [lx, off] of legs) {
-    const a = 20 * Math.sin(TAU * (p + off)), c2 = Math.cos(TAU * (p + off));
-    const hipP = [X(lx), Yy(0.66)], knee = [hipP[0] + dir * Math.sin(a * Math.PI / 180) * 0.32 * sz, hipP[1] + Math.cos(a * Math.PI / 180) * 0.32 * sz];
-    const sh = a - 30 * Math.max(0, c2), hoof = [knee[0] + dir * Math.sin(sh * Math.PI / 180) * 0.34 * sz, Math.min(gy - 3, knee[1] + Math.cos(sh * Math.PI / 180) * 0.34 * sz)];
-    s.push(line([hipP, knee, hoof], c, 0.075 * sz));
+function horse(x, gy, sz, c, t, dir = -1) { // sz: height at the withers. A four-beat walk, feet planted while on the ground.
+  const s = [], X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz;
+  const L = 0.62, amp = 20, sm = Math.sin(amp * Math.PI / 180);
+  const p = (step12(t) * 120) / (4 * L * sm * sz); // cycles walked
+  const legs = [[-0.4, 0, true], [0.4, 0.25, false], [-0.3, 0.5, true], [0.48, 0.75, false]]; // left hind, left fore, right hind, right fore
+  for (const [lx, off, hind] of legs) {
+    let u = ((p + off) % 1 + 1) % 1, th, bend;
+    if (u < 0.6) { th = Math.asin(sm * (1 - 2 * u / 0.6)) * 180 / Math.PI; bend = 0; }
+    else { const v = (u - 0.6) / 0.4; th = -amp * Math.cos(Math.PI * v); bend = 45 * Math.sin(Math.PI * v); }
+    const hip = [X(lx), Yy(0.66)];
+    const r = (deg) => deg * Math.PI / 180;
+    const knee = [hip[0] + dir * Math.sin(r(th)) * 0.32 * sz, hip[1] + Math.cos(r(th)) * 0.32 * sz];
+    const sh = hind ? th + bend : th - bend; // the hock folds the other way
+    const hoof = [knee[0] + dir * Math.sin(r(sh)) * 0.3 * sz, Math.min(gy - 3, knee[1] + Math.cos(r(sh)) * 0.3 * sz)];
+    s.push(line([hip, knee], c, 0.095 * sz) + line([knee, hoof], c, 0.055 * sz));
+    s.push(`<ellipse cx="${f1(hoof[0] + dir * 0.02 * sz)}" cy="${f1(hoof[1])}" rx="${f1(0.045 * sz)}" ry="${f1(0.025 * sz)}" fill="${c}"/>`);
   }
   s.push(`<ellipse cx="${f1(X(0.02))}" cy="${f1(Yy(0.78))}" rx="${f1(0.56 * sz)}" ry="${f1(0.2 * sz)}" fill="${c}"/>`);
   const nod = 0.03 * Math.sin(TAU * p * 2);
   s.push(poly([[X(0.38), Yy(0.92)], [X(0.62), Yy(1.28 + nod)], [X(0.78), Yy(1.24 + nod)], [X(0.98), Yy(1.0 + nod)], [X(0.9), Yy(0.94 + nod)], [X(0.66), Yy(1.04 + nod)], [X(0.52), Yy(0.66)]], c));
   s.push(poly([[X(0.66), Yy(1.26 + nod)], [X(0.68), Yy(1.38 + nod)], [X(0.72), Yy(1.27 + nod)]], c));
+  s.push(poly([[X(0.42), Yy(0.98)], [X(0.6), Yy(1.27 + nod)], [X(0.5), Yy(1.2 + nod)], [X(0.36), Yy(0.95)]], c)); // mane
   const sw = 0.05 * Math.sin(TAU * p);
   s.push(`<path d="M${f1(X(-0.5))},${f1(Yy(0.88))} Q${f1(X(-0.66))},${f1(Yy(0.6))} ${f1(X(-0.6 + sw))},${f1(Yy(0.32))} L${f1(X(-0.54 + sw))},${f1(Yy(0.34))} Q${f1(X(-0.56))},${f1(Yy(0.62))} ${f1(X(-0.46))},${f1(Yy(0.8))} Z" fill="${c}"/>`);
   return s.join('');
 }
 function wagon(x, gy, sz, c, t, dir = -1) { // a delivery wagon behind the horse, barrels in the back, spoked wheels turning
-  const s = [], X = (u) => x - dir * u * sz, dist = t * 120;
+  const s = [], X = (u) => x - dir * u * sz, dist = step12(t) * 120;
   s.push(horse(x, gy, sz, c, t, dir));
   s.push(line([[X(0.3), gy - 0.8 * sz], [X(1.0), gy - 0.62 * sz]], c, 5));
   const bx0 = X(1.0), bx1 = X(2.3), top = gy - 0.95 * sz, bot = gy - 0.45 * sz;
-  s.push(figure({x: X(1.2), y: top + 0.42 * sz, h: 1.1 * sz, d: dir, kind: 'man', hat: 'bowler', coat: 'sack', fill: c, an: {fArm: [100, 85], bob: 0.01 * Math.sin(TAU * step12(t) * 2.3)}})); // seated behind the box
+  s.push(figure({x: X(1.2), y: top + 0.5 * 1.1 * sz, h: 1.1 * sz, d: dir, kind: 'man', hat: 'bowler', coat: 'sack', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -4, fArm: [100, 85], bob: 0.008 * Math.sin(TAU * step12(t) * 2.3)}})); // seated on the box
   s.push(`<rect x="${f1(Math.min(bx0, bx1))}" y="${f1(top)}" width="${f1(Math.abs(bx1 - bx0))}" height="${f1(bot - top)}" fill="${c}"/>`);
   for (const [k, u] of [[0, 1.75], [1, 2.05]]) s.push(`<rect x="${f1(X(u) - 0.13 * sz)}" y="${f1(top - 0.32 * sz)}" width="${f1(0.26 * sz)}" height="${f1(0.34 * sz)}" rx="${f1(0.06 * sz)}" fill="${c}"/>`);
   for (const [u, rr] of [[1.25, 0.3], [2.1, 0.4]]) {
@@ -163,7 +179,7 @@ function stStreet(t) {
   }
   s.push(`<path d="${wires}" stroke="${ST.mid}" stroke-width="1.4" fill="none" opacity="0.9"/>`);
   s.push(pushcart(1150, FAR_GROUND + 70, ST.mid, t));
-  s.push(wagon(2700 - t * 120, NEAR_GROUND - 24, 150, ST.mid, t, -1));
+  s.push(wagon(2700 - step12(t) * 120, NEAR_GROUND - 24, 150, ST.mid, t, -1));
   return s.join('');
 }
 
@@ -180,15 +196,23 @@ function stNear(t, zoom, mx) {
     {x0: 900, v: 0, kind: 'man', hat: 'bowler', h: 238, coat: 'sack', ph: 0.4, idle: true},
   ];
   for (const p of passers) {
-    const x = p.x0 - p.v * t, {det, rimA} = lod(p.h);
-    const an = p.idle ? {bob: 0.004 * Math.sin(TAU * step12(t) / 3.2), tilt: 8 * Math.sin(TAU * step12(t) / 6), lean: -2} : walkAn((step12(t) * p.v / 160 + p.ph) % 1, {carry: !!p.basket});
+    const tq = step12(t), x = p.x0 - p.v * tq, {det, rimA} = lod(p.h);
+    const an = p.idle ? {bob: 0.004 * Math.sin(TAU * tq / 3.2), tilt: 8 * Math.sin(TAU * tq / 6), lean: -2} : walkAn(walkPhase(p.v * tq, p.h) + p.ph, {carry: !!p.basket});
+    if (p.basket) { an.expr = tq > 3.3 && tq < 4.9 ? 'smile' : 'neutral'; an.tilt = tq > 3.6 && tq < 4.2 ? -7 : 0; }
+    if (p.idle) an.expr = 'neutral';
     s.push(figure({x, y: NEAR_GROUND - 6, h: p.h, d: p.v ? -1 : 1, kind: p.kind, hat: p.hat, coat: p.coat || 'sack', fill: c, an,
       basket: p.basket, cane: p.cane && !p.v, papers: p.papers, det, tones, rim: {...ST.rim, a: rimA}}));
   }
   const {det, rimA} = lod(248);
   s.push(figure({x: mx, y: NEAR_GROUND, h: 248, d: 1, kind: 'man', hat: 'cap', coat: 'jacket', fill: ST.accent, pail: true,
-    an: {...walkAn((step12(t) * WALK_V / 220) % 1, {carry: true}), tilt: -3}, det, tones: MICHAEL_TONES, rim: {...ST.rim, a: rimA}}));
+    an: {...walkAn(walkPhase(WALK_V * step12(t), 248), {carry: true}), ...michaelFace(step12(t))}, det, tones: MICHAEL_TONES, rim: {...ST.rim, a: rimA}}));
   return s.join('');
+}
+
+function michaelFace(tq) {
+  const blink = [[1.2, 1.32], [2.4, 2.52], [6.2, 6.32], [8.6, 8.72]].some(([a, b]) => tq >= a && tq < b);
+  const smile = tq > 3.3 && tq < 5.0;
+  return {expr: smile ? 'smile' : 'set', blink, tilt: tq > 3.7 && tq < 4.3 ? -8 : -2};
 }
 
 function stLamps(t) { // gas street lamps, lit at dusk
@@ -204,8 +228,8 @@ function stLamps(t) { // gas street lamps, lit at dusk
 }
 
 function renderStreet({t = 0, zoom = 1, fx = 960, fy = 540, cx = null}) {
-  const mx = 300 + WALK_V * t;            // Michael's place on the near sidewalk
-  const camX = cx ?? (mx - M_SCREEN_X);   // the camera keeps him at the same spot on screen
+  const mx = 300 + WALK_V * step12(t);    // Michael's place on the near sidewalk (steps with his drawings)
+  const camX = cx ?? (300 + WALK_V * t - M_SCREEN_X);   // the camera glides, keeping him at about the same spot
   const zs = (par) => 1 + (zoom - 1) * par;
   const layer = (par, body) => `<g transform="translate(${f1(fx)},${f1(fy)}) scale(${zs(par).toFixed(4)}) translate(${f1(-fx)},${f1(-fy)}) translate(${f1(-camX * par)},0)">${body}</g>`;
   const defs = `<defs>${grad('sky', ST.sky)}

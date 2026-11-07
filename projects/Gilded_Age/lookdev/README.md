@@ -45,3 +45,16 @@ spoked wheels turning; telegraph poles strung with the overhead wires New York b
 smoke and a steeple beyond; people passing on both sidewalks and a boy chasing a hoop. Signs are blank on purpose.
 
 Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, where his close-up detail shows). In `review/`.
+
+## Round 4: better reads
+
+- **Heads are profiles now** (skull, forehead, brow, nose, lips, chin, jaw) for every figure, so even a solid silhouette reads as a
+  face in profile; women get a softer brow and smaller nose, children a rounder, larger head.
+- **Expressions for close-ups**: neutral, smile, worried, awe, set (determined), plus blinks. Each is a brow, an eye and a mouth
+  (and a cheek crease for a smile); awe also drops the jaw in the silhouette. `out/` sheet: `7_round4`.
+- **The walk is locked to the ground** (`walkPhase` + `walkAn` in `street.js`): each foot stays planted while it is down, and
+  positions step with the drawings, so feet no longer skate.
+- **The wagon driver sits** (thighs forward, shins down, hidden by the box), and **the horse walks a four-beat gait** with the hind
+  legs folding the other way at the hock, tapering legs and a mane.
+- In the clips: Michael walks home tired and set, smiles and nods at the neighbour with the basket as she passes (she smiles back),
+  and blinks; at the bridge he smiles while he waves, then looks up in awe. The night crowd watches in awe or smiles.

@@ -41,3 +41,7 @@ if os.path.exists('out/r2_detail_ladder.jpg'):
 if os.path.exists('out/r3_walk_wide_t1.jpg'):
     sheet('6_round3_walk', [('r3_walk_wide_t1', 'WALK · wide tracking shot, Lower East Side, dusk'), ('r3_walk_wide_t6', 'WALK · the wagon passes the other way'),
                             ('r3_walk_medium_t2', 'WALK · medium tracking shot, detail on')], 'ROUND 3 · MICHAEL WALKS HOME FROM THE REFINERY')
+
+if os.path.exists('out/r4_faces.jpg'):
+    sheet('7_round4', [('r4_faces', 'FACES · five expressions, Michael and a neighbour'), ('r4_walk_medium_smile', 'WALK · he smiles at the neighbour as she passes'),
+                       ('r4_walk_wide_wagon', 'WALK · seated driver, four-beat horse'), ('r4_closeup_awe', 'BRIDGE · awe at the fireworks')], 'ROUND 4 · PROFILE HEADS, EXPRESSIONS, A WALK THAT STAYS ON THE GROUND')
