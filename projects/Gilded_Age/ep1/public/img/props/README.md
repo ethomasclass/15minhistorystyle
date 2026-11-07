@@ -4,7 +4,7 @@ Transparent WebPs cut from the Google Flow takes (`src/<id>.jpg` is the take use
 Cut with `tools/prop_cut.py` (on white), `tools/prop_cut_black.py` (on black) and `tools/prop_fix.py` (pale or dark insides).
 None of these is a real artifact; the red notebook is "a notebook like his", the 1868 note is "a re-creation".
 
-## Done (36)
+## Done (40)
 
 | id | take | notes |
 |---|---|---|
@@ -24,6 +24,10 @@ None of these is a real artifact; the red notebook is "a notebook like his", the
 | p06_coins_stack / oil_barrel / red_notebook / solder_lid / turkey | | |
 | p07_kerosene_lamp / p07_tin_plate | set2 #20 / set1 #11 | plate enamel restored from the rim ellipse |
 | p08_top_hat | set1 #20 | |
+| p05_shuttle | set3 shuttle_b | the loose thread trimmed to a stub (it broke apart in the cut) |
+| p05_telegraph_key | set3 | key and sounder on one base: covers p05_telegraph_sounder too |
+| p06_medicine_bottle | set3 | blank label: the handbill wording goes on in the edit |
+| p06_gavel | set3 | |
 | p09_cable_section / p09_inspection_certificate | set1 #24 / #26 | the wax seal restored (prop_fix fillblack) |
 
 ## Rejected (redo)
@@ -32,6 +36,8 @@ None of these is a real artifact; the red notebook is "a notebook like his", the
 - p06_trust_certificate: readable fake words; not needed (the real 1882 certificate is in ch06/).
 
 ## Not received yet
-p04_sugar_hogshead, p05_coke, p05_golden_egg, p05_shuttle, p05_telegraph_key, p05_telegraph_sounder, p06_clerk_desk,
-p06_freight_waybill, p06_gavel, p06_kerosene_can, p06_kerosene_case, p06_medicine_bottle, p06_rebate_envelope,
+p04_sugar_hogshead, p05_coke, p05_golden_egg, p06_clerk_desk,
+p06_freight_waybill, p06_kerosene_can, p06_kerosene_case, p06_rebate_envelope,
 p07_kerosene_lamp_lit, p08_factory_notice, p08_land_deed, p09_rejected_wire_pile, p09_wire_tester, p09_wire_wagon
+
+(p06_kerosene_can and two lit lamps were shown in chat on Nov 7 but did not arrive as files: resend.)
