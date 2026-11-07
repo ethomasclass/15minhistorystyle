@@ -72,3 +72,16 @@ Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, wh
   privies, a hydrant and laundry on pulleys in the yard; the rear tenement. Clip `cutaway_push` (14 s): the building alive,
   Michael climbs the stairs, the camera pushes into the Kellys' flat, he comes in, his mother turns from the stove, his brother and
   sister look up. A labelled still shows the teaching version (teal leader lines, orange handwriting).
+
+## Round 6: a worn, candlelit dumbbell tenement in the city
+
+- **Worn rooms**: faded wallpaper (three patterns), peeling plaster with the lath showing, water stains from the ceiling, cracks,
+  soot along the ceilings and above each flame, grime along the floors, worn floorboards; bare brick in the cellar and the hall.
+- **Period light**: small kerosene lamps and candles (a hanging lamp in the saloon); dim, flickering pools that stay inside each
+  room; the stair hall unlit. No electric light anywhere. (Script tie: the Kellys' lamp burns cheap kerosene from Rockefeller.)
+- **The dumbbell airshaft**: about 2 1/2 feet wide, open to the sky, down the middle of the building. The middle rooms and the
+  kitchens each get one small window onto it; garbage at the bottom, laundry strung across, stale air that hangs. (The 1879 law
+  required a window in every room; builders met it with shafts like this.)
+- **Fire escapes** on the front and back walls.
+- **The city behind**: two layers of rooftops, chimneys and cornices, steeples, smoking factory chimneys and a Brooklyn Bridge
+  tower in the distance, moving at their own depth as the camera pushes in. The wide shot starts farther back to show it.
