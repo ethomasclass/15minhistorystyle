@@ -85,3 +85,21 @@ Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, wh
 - **Fire escapes** on the front and back walls.
 - **The city behind**: two layers of rooftops, chimneys and cornices, steeples, smoking factory chimneys and a Brooklyn Bridge
   tower in the distance, moving at their own depth as the camera pushes in. The wide shot starts farther back to show it.
+
+## Round 7: the two integration explainers (Episode 1's teaching core)
+
+`explainers.js`, two clips:
+- **`vi_explainer`, vertical integration (22 s).** The camera hops along Carnegie's chain and holds on each step while the narration
+  names it: an open-pit iron mine in Minnesota (a steam shovel swinging, ore cars climbing out), an ore dock and a long ore boat on
+  the Great Lakes, a bench of glowing coke ovens, the mill (a blast furnace, a Bessemer converter throwing sparks, a glowing rail
+  sliding out), his railroad (a train of new rails), the city that buys the steel (a frame going up, a crane). A teal line ties each
+  step to the last; the camera pulls back to one line running the whole chain; the tape title, "carnegie owned every step," and the
+  index card land.
+- **`hi_explainer`, horizontal integration and rebates (24 s).** Cleveland's Standard Oil works and 26 rival refineries in two rows
+  along the river. The camera drops into the railroad's freight office: the big shipper and a rival, and the clerk sliding money
+  back under the counter to the big one (a rebate), with a bar for each one's shipping cost per barrel. Back out: one by one, 22
+  rivals go dark, their smoke stops, a teal outline marks them, and a branch of Standard's teal pipeline reaches each one, with a
+  counter "BOUGHT: 22 OF 26 RIVALS." The tape title, the card, "rockefeller bought his rivals."
+
+Teal explains, orange labels, no coral (it means a Kelly). Labels are drawn in screen space so they stay readable when the camera
+pulls back. Note for the script: say "22 of his 26 rivals" to match the picture (research flag: some sources say 21).

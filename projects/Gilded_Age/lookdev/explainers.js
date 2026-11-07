@@ -1,0 +1,292 @@
+// Episode 1's two teaching explainers, built with rig.js (load rig.js and scene.js first).
+//
+//   vi_explainer  Vertical integration (Carnegie). One long side-scroll through every step of making steel: an iron mine in
+//                 Minnesota, an ore boat on the Great Lakes, coke ovens, the mill, his railroads, the city that buys the steel.
+//                 As each step passes, a teal line ties it to the last; then the camera pulls back to show one line running the
+//                 whole chain, and the term lands.
+//   hi_explainer  Horizontal integration and rebates (Rockefeller). Cleveland's refineries in a row. A railroad clerk quietly
+//                 hands money back to the big shipper (a rebate), so his freight costs less than a rival's. Then, one by one,
+//                 22 rival chimneys stop smoking and teal pipes tie them to Standard Oil, and the term lands.
+//
+// Teal draws and explains; orange labels (the tape title and the handwriting); no coral, because coral means a Kelly.
+// Labels are drawn in screen space, so they stay readable when the camera pulls back.
+
+const EX = {
+  sky: [['0', '#111B1B'], ['0.5', '#1C3332'], ['0.85', '#5F857F'], ['1', '#A3BAB2']],
+  far: '#4E726C', mid: '#2B4744', main: '#0D0C09', set: '#132423', water: '#1C3332', glow: '#F4EFE6',
+  teal: '#2FE0C4', orange: '#FF9F1C', cream: '#F4EFE6', ink: '#111111',
+};
+const GROUND = 820;
+
+/* ---------- shared drawing ---------- */
+const cam2 = (c) => ({...c, sx: (x) => 960 + (x - c.ux) * c.z, sy: (y) => 540 + (y - c.uy) * c.z});
+function exDefs(t) {
+  return `<defs>${grad('exsky', EX.sky)}
+    <radialGradient id="exglow"><stop offset="0" stop-color="#F4EFE6" stop-opacity="0.55"/><stop offset="1" stop-color="#F4EFE6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="exvig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${Math.floor(t * 12) % 50}"/><feColorMatrix type="saturate" values="0"/></filter>
+    ${grad('exmist', [['0', '#A3BAB2', 0], ['0.5', '#A3BAB2', 0.3], ['1', '#A3BAB2', 0]])}</defs>`;
+}
+const smoke = (x, y, t, col, k = 1, n = 6) => { let s = ''; for (let i = 0; i < n; i++) { const p = ((t / 6 + i / n) % 1); s += `<circle cx="${f1(x + p * 120 * k)}" cy="${f1(y - p * 160 * k)}" r="${f1((10 + p * 40) * k)}" fill="${col}" opacity="${f1(0.45 * (1 - p) * Math.min(1, p * 6))}" filter="url(#soft)"/>`; } return s; };
+function farHills(w, col, base, seed, amp = 120) {
+  const r = rng(seed); let d = `M-2000,${base + 400} L-2000,${base}`;
+  for (let x = -2000; x <= w + 2000; x += 140) d += ` L${x},${f1(base - r() * amp - 20)}`;
+  return `<path d="${d} L${w + 2000},${base + 400} Z" fill="${col}"/>`;
+}
+// screen-space labels
+const tag = (x, y, txt, op = 1) => `<g opacity="${f1(op * 100) / 100}"><rect x="${f1(x - 6)}" y="${f1(y - 22)}" width="${f1(txt.length * 14.4 + 14)}" height="30" fill="rgba(13,12,9,0.82)"/><text x="${f1(x)}" y="${f1(y)}" font-family="Mono" font-size="20" letter-spacing="2" fill="${EX.cream}">${txt}</text></g>`;
+const penS = (x, y, txt, size = 40, rot = -3, col = EX.orange) => `<text x="${x}" y="${y}" transform="rotate(${rot}, ${x}, ${y})" font-family="Pen" font-size="${size * 1.55}" fill="${col}" stroke="#111" stroke-width="3" paint-order="stroke">${txt}</text>`;
+function tapeS(x, y, txt, size = 72, rot = -2, op = 1, seed = 4) {
+  const r = rng(seed), w = txt.length * size * 0.66 + size * 0.5, h = size * 1.28, pts2 = [];
+  for (let u = 0; u <= 1.001; u += 0.04) pts2.push([x + u * w, y + r() * 7]);
+  for (let u = 1; u >= -0.001; u -= 0.04) pts2.push([x + u * w, y + h - r() * 7]);
+  return `<g opacity="${f1(op * 100) / 100}" transform="rotate(${rot}, ${x}, ${y})"><polygon points="${pts(pts2)}" fill="${EX.orange}"/><text x="${f1(x + size * 0.25)}" y="${f1(y + size * 1.02)}" font-family="Abril" font-size="${size}" fill="${EX.ink}">${txt}</text></g>`;
+}
+function card(x, y, term, def, note, op = 1) { // the index card, as chosen for the series' vocab
+  if (op <= 0.01) return '';
+  const lines = def.split('|');
+  return `<g opacity="${f1(op * 100) / 100}" transform="rotate(2, ${x}, ${y})"><rect x="${x + 6}" y="${y + 10}" width="640" height="${110 + lines.length * 44}" fill="#000" opacity="0.45" filter="url(#soft)"/>` +
+    `<rect x="${x}" y="${y}" width="640" height="${110 + lines.length * 44}" fill="${EX.cream}"/>` +
+    [0, 1, 2, 3, 4].map((k) => `<rect x="${x}" y="${y + 96 + k * 44}" width="640" height="1.5" fill="#111" opacity="0.12"/>`).join('') +
+    `<text x="${x + 34}" y="${y + 74}" font-family="Abril" font-size="${term.length > 12 ? 40 : 54}" fill="${EX.ink}">${term}</text>` +
+    lines.map((l, i) => `<text x="${x + 34}" y="${y + 134 + i * 44}" font-family="Inter" font-weight="600" font-size="30" fill="${EX.ink}">${l}</text>`).join('') +
+    `<rect x="${x + 280}" y="${y - 14}" width="70" height="28" fill="${EX.orange}" transform="rotate(-6, ${x + 315}, ${y})"/></g>` +
+    (note ? penS(x + 40, y + 190 + lines.length * 44, note, 34, -3) : '');
+}
+function frame(defs, sky, world, screen, t) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">${defs}${sky}${world}${screen}` +
+    `<rect width="1920" height="1080" filter="url(#grain)" opacity="0.13" style="mix-blend-mode:overlay"/><rect width="1920" height="1080" fill="url(#exvig)"/></svg>`;
+}
+const layerAt = (c, p, body) => { const zp = 1 + (c.z - 1) * p, ax = 960 + (c.ux - 960) * p, ay = 540 + (c.uy - 540) * p; return `<g transform="translate(960,540) scale(${zp.toFixed(4)}) translate(${f1(-ax)},${f1(-ay)})">${body}</g>`; };
+const worker = (o) => figure({fill: EX.main, kind: 'man', hat: 'cap', coat: 'jacket', ...o});
+
+/* ================= vertical integration ================= */
+const VI = [ // the chain, left to right: x centre, tag, a handwritten owner's note
+  {x: 650, tag: 'IRON ORE · MINNESOTA'},
+  {x: 1700, tag: 'ORE BOATS · GREAT LAKES'},
+  {x: 2750, tag: 'COKE OVENS'},
+  {x: 3800, tag: 'THE STEEL MILL'},
+  {x: 4800, tag: 'HIS RAILROADS'},
+  {x: 5750, tag: 'THE CUSTOMERS'},
+];
+function viMine(t) { // an open-pit iron mine: terraces, a steam shovel swinging, ore cars rolling out
+  const s = [], c = EX.set, x0 = 250, x1 = 1050;
+  s.push(`<path d="M${x0},${GROUND} L${x0 + 80},${GROUND + 40} L${x0 + 160},${GROUND + 40} L${x0 + 240},${GROUND + 80} L${x1 - 240},${GROUND + 80} L${x1 - 160},${GROUND + 40} L${x1 - 80},${GROUND + 40} L${x1},${GROUND} Z" fill="#081010"/>`);
+  const sx = 640, sy = GROUND + 80, a = 18 * Math.sin(TAU * t / 3.2);
+  s.push(`<rect x="${sx - 40}" y="${sy - 50}" width="80" height="38" fill="${c}"/><rect x="${sx - 46}" y="${sy - 14}" width="92" height="14" rx="7" fill="${c}"/><rect x="${sx + 10}" y="${sy - 76}" width="10" height="28" fill="${c}"/>` + smoke(sx + 15, sy - 80, t, '#3E5F5A', 0.6, 4));
+  s.push(`<g transform="rotate(${f1(-35 + a)}, ${sx + 30}, ${sy - 40})">${line([[sx + 30, sy - 40], [sx + 150, sy - 120]], c, 9)}${line([[sx + 110, sy - 96], [sx + 140, sy - 30]], c, 7)}<path d="M${sx + 125},${sy - 36} l30,0 l-6,24 l-22,0 Z" fill="${c}"/></g>`);
+  for (let i = 0; i < 4; i++) { // ore cars climbing out along the rim track
+    const u = ((t / 8 + i / 4) % 1), cx = x1 - 30 + u * 260;
+    s.push(`<rect x="${f1(cx)}" y="${GROUND - 26}" width="46" height="20" fill="${c}"/><path d="M${f1(cx + 4)},${GROUND - 26} q19,-12 38,0 Z" fill="#2B2420"/><circle cx="${f1(cx + 10)}" cy="${GROUND - 4}" r="5" fill="${c}"/><circle cx="${f1(cx + 36)}" cy="${GROUND - 4}" r="5" fill="${c}"/>`);
+  }
+  s.push(worker({x: 420, y: GROUND + 40, h: 70, d: 1, prop: 'hammer', an: POSES.hammer(t, 0.2)}));
+  s.push(worker({x: 880, y: GROUND + 40, h: 70, d: -1, an: POSES.iron(t, 0.6)}));
+  return s.join('');
+}
+function viLake(t) { // a lake: an ore dock with chutes, a long ore boat
+  const s = [], c = EX.set;
+  s.push(`<rect x="1150" y="${GROUND + 10}" width="1150" height="300" fill="${EX.water}"/>`);
+  for (let i = 0; i < 30; i++) s.push(`<rect x="${1160 + ((i * 97 + t * 14) % 1120)}" y="${GROUND + 20 + (i * 37) % 120}" width="${20 + (i * 13) % 40}" height="2" fill="#A3BAB2" opacity="0.18"/>`);
+  s.push(`<rect x="1180" y="${GROUND - 160}" width="200" height="14" fill="${c}"/>`);
+  for (let x = 1190; x < 1380; x += 28) s.push(`<rect x="${x}" y="${GROUND - 150}" width="8" height="170" fill="${c}"/>`);
+  for (let x = 1220; x < 1380; x += 46) s.push(line([[x, GROUND - 146], [x + 50, GROUND - 90]], c, 5));
+  const bob = 3 * Math.sin(TAU * t / 3.6), bx = 1430 + 30 * Math.sin(TAU * t / 20);
+  s.push(`<g transform="translate(0,${f1(bob)})"><path d="M${f1(bx)},${GROUND - 26} L${f1(bx + 640)},${GROUND - 26} L${f1(bx + 610)},${GROUND + 14} L${f1(bx + 20)},${GROUND + 14} Z" fill="${c}"/>` +
+    `<rect x="${f1(bx + 30)}" y="${GROUND - 66}" width="60" height="40" fill="${c}"/><rect x="${f1(bx + 40)}" y="${GROUND - 84}" width="40" height="18" fill="${c}"/>` +
+    `<rect x="${f1(bx + 560)}" y="${GROUND - 70}" width="50" height="44" fill="${c}"/><rect x="${f1(bx + 575)}" y="${GROUND - 120}" width="16" height="50" fill="${c}"/>` +
+    [0, 1, 2, 3, 4, 5, 6].map((k) => `<path d="M${f1(bx + 120 + k * 62)},${GROUND - 26} q26,-22 52,0 Z" fill="#2B2420"/>`).join('') + `</g>` + smoke(bx + 583, GROUND - 124, t, '#3E5F5A', 0.8));
+  return s.join('');
+}
+function viCoke(t) { // a bench of beehive coke ovens, glowing, smoking
+  const s = [], c = EX.set, x0 = 2420;
+  s.push(`<rect x="${x0 - 20}" y="${GROUND - 70}" width="700" height="70" fill="${c}"/>`);
+  for (let i = 0; i < 9; i++) {
+    const x = x0 + i * 74, fl = 0.55 + 0.2 * Math.sin(t * 5 + i * 1.7);
+    s.push(`<path d="M${x},${GROUND - 70} a34,34 0 0 1 68,0 Z" fill="${c}"/><circle cx="${x + 34}" cy="${GROUND - 40}" r="34" fill="url(#exglow)" opacity="${f1(fl)}"/><path d="M${x + 22},${GROUND - 20} a12,12 0 0 1 24,0 L${x + 46},${GROUND - 6} L${x + 22},${GROUND - 6} Z" fill="${EX.glow}" opacity="${f1(fl * 0.8)}"/>`);
+    if (i % 2 === 0) s.push(smoke(x + 34, GROUND - 110, t + i, '#3E5F5A', 0.7, 4));
+  }
+  s.push(worker({x: 2560, y: GROUND, h: 74, d: 1, prop: 'hammer', an: POSES.iron(t, 0.3)}), worker({x: 2900, y: GROUND, h: 74, d: -1, an: POSES.iron(t, 0.8)}));
+  return s.join('');
+}
+function viMill(t) { // a blast furnace, a Bessemer converter throwing sparks, a rolling shed with a glowing rail sliding out
+  const s = [], c = EX.set, r = rng(55);
+  s.push(`<rect x="3380" y="${GROUND - 330}" width="90" height="330" fill="${c}"/><rect x="3370" y="${GROUND - 340}" width="110" height="20" fill="${c}"/>`);
+  for (const x of [3300, 3340]) s.push(`<rect x="${x}" y="${GROUND - 260}" width="34" height="260" rx="17" fill="${c}"/>`);
+  s.push(smoke(3425, GROUND - 350, t, '#3E5F5A', 1.1));
+  const cvx = 3640, cvy = GROUND - 120, tilt = -24;
+  s.push(`<rect x="${cvx - 70}" y="${cvy}" width="12" height="120" fill="${c}"/><rect x="${cvx + 58}" y="${cvy}" width="12" height="120" fill="${c}"/>`);
+  const mx = cvx - 22 + Math.sin(tilt * Math.PI / 180) * -70, my = cvy - 66;
+  s.push(`<circle cx="${f1(mx)}" cy="${f1(my - 30)}" r="130" fill="url(#exglow)" opacity="0.75"/>`);
+  s.push(`<g transform="rotate(${tilt}, ${cvx}, ${cvy})"><path d="M${cvx - 55},${cvy + 40} Q${cvx - 62},${cvy - 30} ${cvx - 22},${cvy - 70} L${cvx + 22},${cvy - 70} Q${cvx + 62},${cvy - 30} ${cvx + 55},${cvy + 40} Q${cvx},${cvy + 70} ${cvx - 55},${cvy + 40} Z" fill="#070B0B"/><rect x="${cvx - 62}" y="${cvy - 6}" width="124" height="10" fill="#070B0B"/><ellipse cx="${cvx}" cy="${cvy - 70}" rx="22" ry="6" fill="${EX.glow}" opacity="0.9"/></g>`);
+  for (let i = 0; i < 60; i++) { // the blow: a fountain of sparks
+    const ph = r(), u = ((t * 0.9 + ph) % 1), ang = -Math.PI / 2 - 0.5 + r() * 0.8, sp = 220 + r() * 160;
+    const x = mx + Math.cos(ang) * sp * u, y = my + Math.sin(ang) * sp * u + 260 * u * u;
+    s.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(2.6 * (1 - u) + 0.8)}" fill="${EX.glow}" opacity="${f1(1 - u)}"/>`);
+  }
+  s.push(`<rect x="3800" y="${GROUND - 120}" width="460" height="120" fill="${c}"/><path d="M3790,${GROUND - 120} L4030,${GROUND - 180} L4270,${GROUND - 120} Z" fill="${c}"/>`);
+  const rx = 3900 + ((t * 70) % 500);
+  s.push(`<rect x="${f1(rx)}" y="${GROUND - 22}" width="140" height="7" fill="${EX.glow}" opacity="0.85"/><rect x="${f1(rx - 10)}" y="${GROUND - 34}" width="170" height="28" fill="url(#exglow)" opacity="0.6"/>`);
+  s.push(worker({x: 3560, y: GROUND, h: 74, d: 1, an: {...POSES.stand(t, 0.4), fArm: [120, 110], tilt: 10}}));
+  return s.join('');
+}
+function viRail(t) { // his railroad: a locomotive pulling flatcars of new rails
+  const s = [], c = EX.set, tx = 4380 + ((t * 120) % 900);
+  s.push(`<rect x="${f1(tx)}" y="${GROUND - 60}" width="90" height="40" fill="${c}"/><rect x="${f1(tx + 60)}" y="${GROUND - 92}" width="40" height="72" fill="${c}"/><rect x="${f1(tx + 10)}" y="${GROUND - 90}" width="14" height="30" fill="${c}"/>` +
+    `<path d="M${f1(tx - 6)},${GROUND - 20} L${f1(tx + 6)},${GROUND - 40} L${f1(tx + 6)},${GROUND - 20} Z" fill="${c}"/>` + smoke(tx + 17, GROUND - 96, t, '#3E5F5A', 0.8, 5));
+  for (const wx of [20, 50, 80]) s.push(`<circle cx="${f1(tx + wx)}" cy="${GROUND - 12}" r="10" fill="${c}"/>`);
+  for (let k = 1; k <= 3; k++) { const cx = tx - k * 140; s.push(`<rect x="${f1(cx)}" y="${GROUND - 28}" width="126" height="10" fill="${c}"/><rect x="${f1(cx + 4)}" y="${GROUND - 40}" width="118" height="10" fill="#2B4744"/>` + `<circle cx="${f1(cx + 20)}" cy="${GROUND - 10}" r="8" fill="${c}"/><circle cx="${f1(cx + 106)}" cy="${GROUND - 10}" r="8" fill="${c}"/>`); }
+  return s.join('');
+}
+function viCity(t) { // the customers: a city of iron and steel; a steel frame going up, a crane lifting a beam; a bridge
+  const s = [], c = EX.set, r = rng(66);
+  for (let x = 5300; x < 6300;) { const w = 60 + r() * 80, h = 80 + r() * 160; s.push(`<rect x="${f1(x)}" y="${f1(GROUND - h)}" width="${f1(w)}" height="${f1(h)}" fill="${c}"/>`); x += w + 6; }
+  const fx = 5640;
+  for (let k = 0; k < 6; k++) s.push(`<rect x="${fx}" y="${GROUND - 60 - k * 50}" width="200" height="5" fill="${c}"/>`);
+  for (const x of [fx, fx + 66, fx + 132, fx + 195]) s.push(`<rect x="${x}" y="${GROUND - 320}" width="5" height="320" fill="${c}"/>`);
+  const lift = 20 * Math.sin(TAU * t / 6);
+  s.push(line([[fx + 260, GROUND], [fx + 260, GROUND - 420], [fx + 40, GROUND - 400]], c, 6) + line([[fx + 110, GROUND - 405], [fx + 110, GROUND - 330 + lift]], c, 1.5) + `<rect x="${fx + 60}" y="${f1(GROUND - 330 + lift)}" width="100" height="6" fill="${c}"/>`);
+  s.push(worker({x: fx + 100, y: GROUND - 260, h: 50, d: 1, prop: 'hammer', an: POSES.hammer(t, 0.4)}));
+  return s.join('');
+}
+// The camera hops from step to step and holds on each (about 1.5 s), so the narration can name it, then pulls back.
+const VI_HOLD = 1.5, VI_MOVE = 0.9, VI_T0 = 0.4, VI_Z = 1.8, VI_UY = 659;
+function viCam(t) {
+  const n = VI.length, seg = VI_HOLD + VI_MOVE, endHold = VI_T0 + (n - 1) * seg + VI_HOLD + 0.6;
+  if (t < endHold) {
+    const k = Math.max(0, Math.min(n - 1, Math.floor((t - VI_T0) / seg))), local = t - VI_T0 - k * seg;
+    if (k >= n - 1 || local < VI_HOLD) return {z: VI_Z, ux: VI[Math.min(k, n - 1)].x, uy: VI_UY};
+    const u = ease((local - VI_HOLD) / VI_MOVE);
+    return {z: VI_Z, ux: VI[k].x + (VI[k + 1].x - VI[k].x) * u, uy: VI_UY};
+  }
+  const u = ease((t - endHold) / 3.4);
+  return {z: lerpLog(VI_Z, 0.31, u), ux: VI[n - 1].x + (3200 - VI[n - 1].x) * u, uy: VI_UY + (560 - VI_UY) * u};
+}
+const VI_PULL = VI_T0 + (VI.length - 1) * (VI_HOLD + VI_MOVE) + VI_HOLD + 0.6; // when the pull-back starts (~14.5 s)
+function renderVI(t) {
+  const c = cam2(viCam(t)), world = [];
+  world.push(layerAt(c, 0.3, farHills(6400, EX.far, GROUND - 120, 3, 160)));
+  world.push(layerAt(c, 0.6, farHills(6400, EX.mid, GROUND - 40, 4, 90) + `<rect x="-3000" y="${GROUND - 70}" width="12000" height="90" fill="url(#exmist)"/>`));
+  const main = [`<rect x="-3000" y="${GROUND}" width="12000" height="3000" fill="${EX.main}"/>`];
+  main.push(`<rect x="-3000" y="${GROUND - 4}" width="12000" height="4" fill="#1A2826"/>`); // one track runs the whole chain
+  main.push(viMine(t), viLake(t), viCoke(t), viMill(t), viRail(t), viCity(t));
+  // the teal chain: drawn up to just past the camera, with a ring at each step it reaches; full when the camera pulls back
+  const reach = t < VI_PULL ? c.ux + 40 : 99999, pts2 = [];
+  for (const st of VI) { if (st.x <= reach) pts2.push([st.x, GROUND - 330]); }
+  if (pts2.length && reach < 99999) { const last = VI.find((s2) => s2.x > reach); if (last) { const p0 = pts2[pts2.length - 1], u = clamp01((reach - p0[0]) / (last.x - p0[0])); pts2.push([p0[0] + (last.x - p0[0]) * u, GROUND - 330]); } }
+  const chain = pts2.length > 1 ? `<polyline points="${pts(pts2)}" fill="none" stroke="#111" stroke-width="12" vector-effect="non-scaling-stroke" stroke-linecap="round"/><polyline points="${pts(pts2)}" fill="none" stroke="${EX.teal}" stroke-width="7" vector-effect="non-scaling-stroke" stroke-linecap="round"/>` : '';
+  main.push(chain);
+  for (const st of VI) if (st.x <= reach) main.push(`<circle cx="${st.x}" cy="${GROUND - 330}" r="22" fill="#0D0C09" stroke="${EX.teal}" stroke-width="6" vector-effect="non-scaling-stroke"/>` + `<line x1="${st.x}" y1="${GROUND - 448}" x2="${st.x}" y2="${GROUND - 120}" stroke="${EX.teal}" stroke-width="2" stroke-dasharray="6 8" vector-effect="non-scaling-stroke" opacity="0.6"/>`);
+  world.push(layerAt(c, 1, main.join('')));
+  // screen-space labels
+  const scr = [];
+  for (const st of VI) if (st.x <= reach) { const x = c.sx(st.x), y = c.sy(GROUND - 330) - 40; if (x > -300 && x < 2200) scr.push(tag(x - st.tag.length * 7.2, y, st.tag, t < VI_PULL ? 1 : 1 - smooth(VI_PULL + 0.2, VI_PULL + 1, t))); }
+  scr.push(tag(40, 1040, 'ANDREW CARNEGIE · STEEL · 1870s TO 1890s', 1));
+  if (t > VI_PULL + 1.8) scr.push(penS(640, 300, 'carnegie owned every step', 46, -3));
+  scr.push(tapeS(80, 70, 'VERTICAL INTEGRATION', 74, -2, smooth(VI_PULL + 2.4, VI_PULL + 2.9, t)));
+  scr.push(card(1180, 620, 'VERTICAL INTEGRATION', 'Owning every step of making and|moving your product, from the raw|material to the customer.', null, smooth(VI_PULL + 3.8, VI_PULL + 4.4, t)));
+  return frame(exDefs(t), `<rect width="1920" height="1080" fill="url(#exsky)"/>`, world.join(''), scr.join(''), t);
+}
+
+/* ================= horizontal integration ================= */
+const HI_N = 26, HI_X0 = 820, HI_STEP = 300;
+const hiPos = (i) => ({x: HI_X0 + 520 + Math.floor(i / 2) * HI_STEP + (i % 2) * 150, back: i % 2 === 1});
+const HI_BOUGHT = (() => { const r = rng(91), idx = [...Array(HI_N).keys()], out = []; while (out.length < 22) { const k = Math.floor(r() * idx.length); out.push(idx.splice(k, 1)[0]); } return out; })();
+const hiStop = (i) => { const k = HI_BOUGHT.indexOf(i); return k < 0 ? Infinity : 12.4 + k * 0.3; };
+function refinery(x, t, i, big = false, back = false) {
+  const s = [], c = back ? '#1D3432' : EX.set, stopT = big ? Infinity : hiStop(i), gone = t > stopT, fade = big ? 1 : 1 - smooth(stopT, stopT + 0.6, t);
+  const w = big ? 300 : 150, h = big ? 120 : 90;
+  s.push(`<rect x="${x}" y="${GROUND - h}" width="${w}" height="${h}" fill="${c}"/><path d="M${x - 6},${GROUND - h} L${x + w / 2},${GROUND - h - (big ? 50 : 30)} L${x + w + 6},${GROUND - h} Z" fill="${c}"/>`);
+  const chims = big ? [x + 40, x + 140, x + 240] : [x + 108];
+  for (const cx of chims) { s.push(`<rect x="${cx}" y="${GROUND - h - (big ? 190 : 170)}" width="${big ? 18 : 14}" height="${big ? 190 : 170}" fill="${c}"/>`); if (fade > 0.02) s.push(`<g opacity="${f1(fade * 100) / 100}">${smoke(cx + 7, GROUND - h - (big ? 196 : 176), t + i * 0.7, '#3E5F5A', big ? 1 : 0.8, 5)}</g>`); }
+  s.push(`<rect x="${x + (big ? -90 : -46)}" y="${GROUND - (big ? 80 : 50)}" width="${big ? 80 : 40}" height="${big ? 80 : 50}" rx="${big ? 8 : 5}" fill="${c}"/><ellipse cx="${x + (big ? -50 : -26)}" cy="${GROUND - (big ? 80 : 50)}" rx="${big ? 40 : 20}" ry="${big ? 8 : 5}" fill="#1D3230"/>`);
+  if (!big) s.push(`<rect x="${x + 18}" y="${GROUND - 60}" width="20" height="26" fill="${EX.glow}" opacity="${f1(0.45 * fade * 100) / 100}"/><rect x="${x + 52}" y="${GROUND - 60}" width="20" height="26" fill="${EX.glow}" opacity="${f1(0.35 * fade * 100) / 100}"/>`); // lit windows while it still works
+  if (!big && gone) s.push(`<rect x="${x - 4}" y="${GROUND - h - 4}" width="${w + 8}" height="${h + 4}" fill="none" stroke="${EX.teal}" stroke-width="4" vector-effect="non-scaling-stroke" opacity="${f1(smooth(stopT, stopT + 0.5, t) * 100) / 100}"/>`);
+  return s.join('');
+}
+function hiDepot(t) { // the railroad freight office: a clerk, two shippers, barrels; the rebate passed back under the counter
+  const s = [], c = EX.set, x0 = 200;
+  s.push(`<rect x="${x0}" y="${GROUND - 150}" width="440" height="150" fill="#16292A"/><path d="M${x0 - 20},${GROUND - 150} L${x0 + 220},${GROUND - 200} L${x0 + 460},${GROUND - 150} Z" fill="${c}"/>`);
+  s.push(`<rect x="${x0 + 200}" y="${GROUND - 60}" width="70" height="60" fill="${c}"/><rect x="${x0 + 190}" y="${GROUND - 64}" width="90" height="6" fill="${c}"/>`);
+  s.push(worker({x: x0 + 300, y: GROUND, h: 82, d: -1, hat: 'bowler', coat: 'vest', an: {...POSES.stand(t, 0.1), fArm: [112, 100], tilt: -6}})); // the clerk
+  // the big shipper (left) with many barrels; the small one (right) with a few
+  for (let k = 0; k < 10; k++) s.push(FU.barrel(x0 + 10 + (k % 5) * 24, GROUND - Math.floor(k / 5) * 28, 22, 28));
+  s.push(worker({x: x0 + 160, y: GROUND, h: 84, d: 1, hat: 'top', coat: 'frock', an: {...POSES.stand(t, 0.4), fArm: [118 + 10 * smooth(6.2, 6.8, t), 110]}}));
+  for (let k = 0; k < 2; k++) s.push(FU.barrel(x0 + 520 + k * 24, GROUND, 22, 28));
+  s.push(worker({x: x0 + 470, y: GROUND, h: 82, d: -1, hat: 'bowler', coat: 'sack', an: {...POSES.stand(t, 0.7), expr: 'worried'}}));
+  // the rebate: a bag of coins slides back to the big shipper, low, under the counter
+  const u = smooth(6.0, 7.6, t) * (1 - smooth(9.4, 9.9, t));
+  if (u > 0.01) { const bx = x0 + 250 - 70 * u, by = GROUND - 14; s.push(`<g opacity="${f1(Math.min(1, u * 3) * 100) / 100}"><path d="M${x0 + 262},${GROUND - 8} Q${x0 + 225},${GROUND + 18} ${x0 + 178},${GROUND - 4}" fill="none" stroke="#111" stroke-width="6"/><path d="M${x0 + 262},${GROUND - 8} Q${x0 + 225},${GROUND + 18} ${x0 + 178},${GROUND - 4}" fill="none" stroke="${EX.teal}" stroke-width="3"/><path d="M${x0 + 186},${GROUND - 12} L${x0 + 176},${GROUND - 4} L${x0 + 188},${GROUND + 2}" fill="none" stroke="${EX.teal}" stroke-width="3"/><path d="M${f1(bx - 13)},${by} q13,-28 26,0 Z" fill="${EX.cream}"/><rect x="${f1(bx - 5)}" y="${by - 26}" width="10" height="5" fill="${EX.cream}"/></g>`); }
+  return s.join('');
+}
+function hiCam(t) {
+  const wide = {z: 0.45, ux: 2640, uy: 470}, depot = {z: 1.55, ux: 470, uy: 720};
+  if (t < 3.6) return wide;
+  if (t < 5.4) { const u = ease((t - 3.6) / 1.8); return {z: lerpLog(wide.z, depot.z, u), ux: wide.ux + (depot.ux - wide.ux) * u, uy: wide.uy + (depot.uy - wide.uy) * u}; }
+  if (t < 10) return depot;
+  if (t < 11.8) { const u = ease((t - 10) / 1.8); return {z: lerpLog(depot.z, wide.z, u), ux: depot.ux + (wide.ux - depot.ux) * u, uy: depot.uy + (wide.uy - depot.uy) * u}; }
+  return wide;
+}
+function renderHI(t) {
+  const c = cam2(hiCam(t)), world = [];
+  world.push(layerAt(c, 0.3, farHills(6000, EX.far, GROUND - 200, 7, 140)));
+  world.push(layerAt(c, 0.6, farHills(6000, EX.mid, GROUND - 80, 8, 70)));
+  const main = [`<rect x="-3000" y="${GROUND}" width="12000" height="3000" fill="${EX.main}"/>`, `<rect x="-3000" y="${GROUND + 90}" width="12000" height="1200" fill="${EX.water}"/>`];
+  for (let i = 0; i < 40; i++) main.push(`<rect x="${-200 + ((i * 173 + t * 16) % 5800)}" y="${GROUND + 100 + (i * 29) % 140}" width="${30 + (i * 11) % 50}" height="2.5" fill="#A3BAB2" opacity="0.16"/>`);
+  main.push(`<rect x="-3000" y="${GROUND + 6}" width="12000" height="4" fill="#1A2826"/>`); // the railroad along the river
+  { // oil tank cars rolling along the near bank, and a barge on the river
+    const tx = -400 + ((t * 90) % 1400);
+    for (let k = 0; k < 9; k++) { const x = tx + k * 210 + 600; main.push(`<rect x="${f1(x)}" y="${GROUND + 34}" width="180" height="12" fill="${EX.set}"/><rect x="${f1(x + 10)}" y="${GROUND - 6}" width="160" height="40" rx="20" fill="${EX.set}"/><rect x="${f1(x + 80)}" y="${GROUND - 16}" width="20" height="12" fill="${EX.set}"/><circle cx="${f1(x + 30)}" cy="${GROUND + 50}" r="9" fill="${EX.set}"/><circle cx="${f1(x + 150)}" cy="${GROUND + 50}" r="9" fill="${EX.set}"/>`); }
+    const bx = 4200 - ((t * 40) % 2600);
+    main.push(`<path d="M${f1(bx)},${GROUND + 200} L${f1(bx + 420)},${GROUND + 200} L${f1(bx + 390)},${GROUND + 236} L${f1(bx + 30)},${GROUND + 236} Z" fill="${EX.set}"/>` + [0, 1, 2, 3, 4, 5].map((k) => FU.barrel(bx + 40 + k * 56, GROUND + 200, 40, 44)).join(''));
+  }
+  main.push(hiDepot(t), refinery(HI_X0 - 40, t, -1, true));
+  for (let i = 0; i < HI_N; i++) { const q = hiPos(i); if (q.back) main.push(`<g transform="translate(0,-70)">${refinery(q.x, t, i, false, true)}</g>`); }
+  main.push(`<rect x="${HI_X0 + 420}" y="${GROUND - 70}" width="4200" height="70" fill="#162827"/>`);
+  for (let i = 0; i < HI_N; i++) { const q = hiPos(i); if (!q.back) main.push(refinery(q.x, t, i)); }
+  // the pipeline: one teal trunk from Standard Oil, a branch down to each refinery as it is bought
+  const trunkY = GROUND - 420, boughtNow = HI_BOUGHT.filter((i) => t >= hiStop(i));
+  if (boughtNow.length) {
+    const far = Math.max(...boughtNow.map((i) => hiPos(i).x + 75 + (t - hiStop(i) < 0.4 ? 0 : 0)));
+    const tl = `M${HI_X0 + 110},${GROUND - 330} L${HI_X0 + 110},${trunkY} L${far},${trunkY}`;
+    main.push(`<path d="${tl}" fill="none" stroke="#111" stroke-width="9" vector-effect="non-scaling-stroke"/><path d="${tl}" fill="none" stroke="${EX.teal}" stroke-width="5" vector-effect="non-scaling-stroke"/>`);
+    for (const i of boughtNow) {
+      const q = hiPos(i), u = smooth(hiStop(i), hiStop(i) + 0.45, t), x = q.x + 75, yEnd = GROUND - (q.back ? 70 : 0) - 95;
+      const d = `M${x},${trunkY} L${x},${f1(trunkY + (yEnd - trunkY) * u)}`;
+      main.push(`<path d="${d}" fill="none" stroke="#111" stroke-width="7" vector-effect="non-scaling-stroke"/><path d="${d}" fill="none" stroke="${EX.teal}" stroke-width="3.5" vector-effect="non-scaling-stroke"/>`);
+    }
+  }
+  // barrels rolled along the bank by a worker, to keep the wide shot alive
+  const wx = 900 + ((t * 60) % 3800);
+  main.push(worker({x: wx, y: GROUND, h: 74, d: 1, an: {...walkAn(walkPhase(t * 60, 74)), fArm: [140, 120]}}) + FU.barrel(wx + 30, GROUND, 22, 28));
+  world.push(layerAt(c, 1, main.join('')));
+  // screen-space labels
+  const scr = [];
+  scr.push(tag(40, 1040, 'CLEVELAND · FEBRUARY TO MARCH 1872', 1));
+  const std = [c.sx(HI_X0 + 110), c.sy(GROUND - 360)];
+  if (t < 3.8 || t > 11.6) scr.push(tag(std[0] - 90, std[1] - 30, 'STANDARD OIL', 1));
+  if (t < 3.8) scr.push(tag(c.sx(HI_X0 + 2700) - 160, c.sy(GROUND - 470), '26 RIVAL REFINERIES', 1));
+  if (t > 4.6 && t < 10.4) {
+    const op = smooth(4.8, 5.4, t) * (1 - smooth(9.8, 10.3, t));
+    scr.push(penS(c.sx(560), c.sy(GROUND - 150), 'the railroad clerk', 28, -3, EX.orange).replace('<text', `<text opacity="${op}"`));
+    scr.push(penS(c.sx(270), c.sy(GROUND - 120), 'the big shipper', 28, -3, EX.orange).replace('<text', `<text opacity="${op}"`));
+    scr.push(penS(c.sx(640), c.sy(GROUND - 104), 'a rival', 28, -3, EX.orange).replace('<text', `<text opacity="${op}"`));
+    if (t > 6.6) scr.push(penS(140, 960, 'a rebate: money paid back in secret', 34, -2).replace('<text', `<text opacity="${op}"`));
+    // freight cost per barrel: two bars
+    const bw = (v) => 380 * v, by = 160, k = smooth(7.6, 8.4, t);
+    scr.push(`<g opacity="${f1(op * 100) / 100}"><rect x="1200" y="${by - 40}" width="660" height="230" fill="rgba(13,12,9,0.82)"/><text x="1224" y="${by - 6}" font-family="Mono" font-size="20" letter-spacing="2" fill="${EX.cream}">SHIPPING COST PER BARREL</text>` +
+      `<text x="1224" y="${by + 50}" font-family="Mono" font-size="18" fill="${EX.cream}">RIVAL</text><rect x="1420" y="${by + 30}" width="${bw(1)}" height="28" fill="${EX.cream}" opacity="0.85"/>` +
+      `<text x="1224" y="${by + 120}" font-family="Mono" font-size="18" fill="${EX.cream}">STANDARD</text><rect x="1420" y="${by + 100}" width="${f1(bw(1 - 0.45 * k))}" height="28" fill="${EX.teal}"/></g>`);
+  }
+  if (t > 12.2) { const n = HI_BOUGHT.filter((i) => t >= hiStop(i) + 0.3).length; scr.push(tag(1340, 1040, `BOUGHT: ${n} OF 26 RIVALS`, 1)); }
+  scr.push(tapeS(80, 70, 'HORIZONTAL INTEGRATION', 70, -2, smooth(19.6, 20.1, t)));
+  scr.push(card(1180, 600, 'HORIZONTAL INTEGRATION', 'Buying or merging with your|competitors, the companies that|do the same job you do.', null, smooth(20.8, 21.4, t)));
+  if (t > 21.6) scr.push(penS(140, 320, 'rockefeller bought his rivals', 44, -3));
+  return frame(exDefs(t), `<rect width="1920" height="1080" fill="url(#exsky)"/>`, world.join(''), scr.join(''), t);
+}
+
+Object.assign(CLIPS, {
+  vi_explainer: {sec: 22, render: (t) => renderVI(t)},
+  hi_explainer: {sec: 24, render: (t) => renderHI(t)},
+});
+if (typeof window !== 'undefined') Object.assign(window, {renderVI, renderHI});

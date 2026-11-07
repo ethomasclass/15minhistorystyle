@@ -53,6 +53,14 @@ const JOBS = [
   {name: 'r5_cut_kellys_mid', cut: true, t: 9.4, z: 4.6, ux: 409, uy: 556},
   {name: 'r5_cut_garment_shop', cut: true, t: 3, z: 4.6, ux: 409, uy: 426},
   {name: 'r5_cut_saloon_cellar', cut: true, t: 3, z: 3, ux: 560, uy: 880},
+  // round 7: the two integration explainers
+  {name: 'r7_vi_mine', clip: 'vi_explainer', t: 1.2},
+  {name: 'r7_vi_mill', clip: 'vi_explainer', t: 8.1},
+  {name: 'r7_vi_end', clip: 'vi_explainer', t: 21.5},
+  {name: 'r7_hi_wide', clip: 'hi_explainer', t: 2},
+  {name: 'r7_hi_rebate', clip: 'hi_explainer', t: 8.6},
+  {name: 'r7_hi_bought', clip: 'hi_explainer', t: 16},
+  {name: 'r7_hi_end', clip: 'hi_explainer', t: 23.5},
 ];
 
 const filter = process.argv[2];
