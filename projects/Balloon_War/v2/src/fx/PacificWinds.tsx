@@ -16,6 +16,7 @@
 //   routeDur   frames for the crossing                                     default 210
 //   labels     place labels (JAPAN, NORTH AMERICA, PACIFIC OCEAN, JET STREAM)   default true
 //   cam        camera keys (CamKey[], raw frames) to override the default slow push-in
+//   hud        the DOM overlay (labels, source line); false for a portrait Short   default true
 // Exports: PacificWinds, PacificWindsTest, PACIFIC_WINDS_TEST_FRAMES, pacificPoint(lon, lat).
 import React, {useEffect, useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
@@ -170,9 +171,9 @@ const BR = 0.24; // balloon envelope radius (world units, hugely exaggerated)
 const RING = 2.33; // ring below the envelope centre, in envelope radii
 
 export type PacificWindsProps = {at?: number; windsAt?: number; windsOut?: number; tooFarAt?: number; tooFarOut?: number; balloonAt?: number; routeAt?: number; routeDur?: number;
-  labels?: boolean; cam?: CamKey[]};
+  labels?: boolean; cam?: CamKey[]; hud?: boolean};
 
-export const PacificWinds: React.FC<PacificWindsProps> = ({at = 0, windsAt = 1e9, windsOut = 1e9, tooFarAt = 1e9, tooFarOut, balloonAt = 1e9, routeAt, routeDur = 210, labels = true, cam}) => {
+export const PacificWinds: React.FC<PacificWindsProps> = ({at = 0, windsAt = 1e9, windsOut = 1e9, tooFarAt = 1e9, tooFarOut, balloonAt = 1e9, routeAt, routeDur = 210, labels = true, cam, hud = true}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const rAt = routeAt ?? balloonAt + 24;
@@ -211,7 +212,7 @@ export const PacificWinds: React.FC<PacificWindsProps> = ({at = 0, windsAt = 1e9
 
   return (
     <Stage
-      over={<AbsoluteFill>
+      over={hud && <AbsoluteFill>
         {labels && <>
           <Label x={jp.x} y={jp.y} text="JAPAN" opacity={mapK} size={26} />
           <Label x={na.x} y={na.y} text="NORTH AMERICA" opacity={mapK} size={26} />
