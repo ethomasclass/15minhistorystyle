@@ -85,11 +85,11 @@ if (typeof window !== 'undefined') Object.assign(window, {EDITS, editFrame, word
 const deskProp = (id, opts) => deskCut(`props/${id}.webp`, opts);
 
 /** An index card for a vocabulary word: the term set big, how to say it, the definition (text.js's vCard, parameterised). */
-function vocabCard(term, say, pos, def, {x = 1180, y = 110, w = 660, o = 1, rot = 2} = {}) {
+function vocabCard(term, say, pos, def, {x = 1180, y = 110, w = 660, o = 1, rot = 2, size = 72} = {}) {
   const dy = (1 - ease(o)) * -40;
   return op(Math.min(1, o * 1.5), `<div style="position:absolute;left:${x}px;top:${y + dy}px;width:${w}px;transform:rotate(${rot}deg);background:${C.cream};box-shadow:0 18px 34px rgba(0,0,0,.6);
       background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 45px,rgba(17,17,17,.12) 45px,rgba(17,17,17,.12) 47px);background-position:0 96px;padding:30px 38px 34px">
-      <div style="display:flex;align-items:baseline;gap:20px"><div style="font-family:Abril;font-size:72px;line-height:1;color:${C.ink}">${term}</div>
+      <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap"><div style="font-family:Abril;font-size:${size}px;line-height:1;color:${C.ink}">${term}</div>
       <div style="font-family:Mono;font-size:22px;letter-spacing:2px;color:#444">${say} &middot; ${pos}</div></div>
       <div style="font-family:Inter;font-weight:600;font-size:36px;line-height:1.38;color:${C.ink};margin-top:16px">${def}</div></div>` +
     tape('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', {x: x + 250, y: y - 18 + dy, size: 36, rot: -6, seed: 21}));
@@ -114,3 +114,14 @@ function stationClock(cx, cy, r, time, {flash = 0, seconds = true} = {}) {
 const clockDefs = `<defs><radialGradient id="ckwood" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#9A6A3E" stop-opacity=".9"/><stop offset=".6" stop-color="#5A3A22" stop-opacity=".4"/><stop offset="1" stop-color="#1E140C" stop-opacity=".9"/></radialGradient>
   <radialGradient id="ckdial" cx=".5" cy=".45" r=".6"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#6B5A3A" stop-opacity=".35"/></radialGradient>
   <filter id="ckshadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity=".7"/><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity=".55"/></filter></defs>`;
+
+/** Piecewise-linear time map: [[T0, t0], [T1, t1], ...] -> a function from chapter time to a clip's own time. */
+const remap = (pts) => (T) => { if (T <= pts[0][0]) return pts[0][1]; for (let i = 1; i < pts.length; i++) if (T <= pts[i][0]) {
+  const [a, x] = pts[i - 1], [b, y] = pts[i]; return x + (y - x) * (T - a) / (b - a); } return pts[pts.length - 1][1]; };
+/** A line that draws itself from 0 to 1 (teal, with the ink outline), for connections in explainers. */
+function drawLine(pts, k, {w = 5} = {}) {
+  if (k <= 0) return ''; const d = 'M' + pts.map((p) => p.join(',')).join(' L');
+  const L = pts.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]), 0);
+  const da = `stroke-dasharray="${f1(L)}" stroke-dashoffset="${f1(L * (1 - clamp01(k)))}"`;
+  return `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="${w + 4}" stroke-linecap="round" stroke-linejoin="round" ${da}/><path d="${d}" fill="none" stroke="${C.teal}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${da}/>`;
+}
