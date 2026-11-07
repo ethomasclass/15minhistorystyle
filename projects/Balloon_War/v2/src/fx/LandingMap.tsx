@@ -15,6 +15,7 @@
 //   bars         the launches-per-month chart                                     default true
 //   barsScale    size of that chart (grows up and left from its bottom-right corner)  default 1
 //   cam          'wide' (whole continent) | 'west' (Pacific Northwest, closer) | CamKey[]   default 'wide'
+//   hud          the DOM overlay (month, count, chart, Bly tab, source line); false for a portrait Short   default true
 // Exports: LandingMap, LandingMapTest, LANDING_MAP_TEST_FRAMES, landingPoint(lon, lat), W3(lon, lat) (slab-centred, for cam keys).
 import React, {useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
@@ -104,9 +105,9 @@ const LaunchChart: React.FC<{mi: number; mk: number; x: number; y: number; o: nu
 };
 
 export type LandingMapProps = {at?: number; dur?: number; from?: string; to?: string; blyColor?: string; blyLabel?: boolean; dimOthers?: boolean; bars?: boolean; barsScale?: number;
-  cam?: 'wide' | 'west' | CamKey[]};
+  cam?: 'wide' | 'west' | CamKey[]; hud?: boolean};
 
-export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from = '1944-11-01', to = '1945-07-31', blyColor = CORAL, blyLabel = true, dimOthers = false, bars = true, barsScale = 1, cam = 'wide'}) => {
+export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from = '1944-11-01', to = '1945-07-31', blyColor = CORAL, blyLabel = true, dimOthers = false, bars = true, barsScale = 1, cam = 'wide', hud = true}) => {
   const f = useCurrentFrame();
   const g = useGFrame();
   const d0 = day(from), d1 = day(to);
@@ -153,7 +154,7 @@ export const LandingMap: React.FC<LandingMapProps> = ({at = 0, dur = 300, from =
 
   return (
     <Stage
-      over={<AbsoluteFill>
+      over={hud && <AbsoluteFill>
         <div style={{position: 'absolute', left: 110, top: 104, opacity: mapK, background: 'rgba(7,9,8,0.55)', padding: '6px 18px 10px', borderRadius: 6}}>
           <div style={{fontFamily: JF.display, fontSize: 64, color: CREAM, letterSpacing: 1, textShadow: '0 3px 14px rgba(0,0,0,0.9)', whiteSpace: 'nowrap'}}>{monthName}</div>
           <div style={{fontFamily: JF.mono, fontSize: 24, letterSpacing: 3, color: TEAL, marginTop: 6, textShadow: '0 2px 8px #000', whiteSpace: 'nowrap'}}>
