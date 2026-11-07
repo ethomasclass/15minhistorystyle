@@ -208,5 +208,26 @@
     "date": "1874-12-31",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Morse_Signal_Key.png"
+  },
+  "ch05/carnegie_brady_negative_1865_1880.jpg": {
+    "title": "File:Andrew Carnegie LCCN2017657457.jpg",
+    "artist": "Civil War Glass Negatives",
+    "date": "between 1865 and 1880date QS:P,+1850-00-00T00:00:00Z/7,P1319,+1865-00-00T00:00:00Z/9,P1326,+1880-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Andrew_Carnegie_LCCN2017657457.jpg"
+  },
+  "ch05/carnegie_brady_c1890.jpg": {
+    "title": "File:Brady, Mathew B. - Andrew Carnegie (Zeno Fotografie).jpg",
+    "artist": "Mathew Benjamin Brady",
+    "date": "Unknown date",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Brady,_Mathew_B._-_Andrew_Carnegie_(Zeno_Fotografie).jpg"
+  },
+  "ch05/carnegie_c1878_engraving.jpg": {
+    "title": "File:Andrew Carnegie circa 1878 - Project Gutenberg eText 17976.jpg",
+    "artist": "",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Andrew_Carnegie_circa_1878_-_Project_Gutenberg_eText_17976.jpg"
   }
 }
