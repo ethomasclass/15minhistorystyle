@@ -107,7 +107,7 @@ function figure(o) {
       const kn = has('knickers'); limb([[hipX(i), hip], knee], legW * (kn ? 1.35 : 1.12)); limb([knee, ank], legW * (kn ? 0.6 : 0.82));
       const gy = Math.max(ank[1] - 0.03, 0), ax = ank[0]; // a boot: heel, instep, a rounded toe
       g.push(`<path d="${PD([['M', ax - 0.034, gy + 0.045], ['L', ax + 0.026, gy + 0.042], ['Q', ax + 0.05, gy + 0.03, ax + 0.078, gy + 0.018], ['Q', ax + 0.088, gy + 0.004, ax + 0.076, gy], ['L', ax - 0.036, gy]])} Z" fill="${c}"/>`);
-    } else g.push(`<ellipse cx="${f1(X(0.135))}" cy="${f1(Y(0.012))}" rx="${f1(0.04 * h)}" ry="${f1(0.014 * h)}" fill="${c}"/>`); // a toe below the hem
+    } else if (!(an.legs && an.legs[0] > 60)) g.push(`<ellipse cx="${f1(X(0.135))}" cy="${f1(Y(0.012))}" rx="${f1(0.04 * h)}" ry="${f1(0.014 * h)}" fill="${c}"/>`); // a toe below the hem
     // back arm
     limb([[-0.02, sh[1]], bE], armW * 1.1); limb([bE, bH], armW * 0.82); g.push(hand(c, bE, bH));
     // torso
@@ -117,7 +117,11 @@ function figure(o) {
       shape([['M', -0.035, 0.872], ['Q', -0.095, 0.866, -0.112, 0.8], ['Q', -0.132, 0.72, -0.106, 0.66], ['L', hb, hem - 0.01], ['L', hf, hem], ['L', 0.097, 0.62], ['Q', 0.13, 0.75, 0.104, 0.81], ['Q', 0.088, 0.866, 0.035, 0.872]]);
     } else if (kind === 'woman') {
       shape([['M', -0.03, 0.868], ['Q', -0.08, 0.862, -0.092, 0.8], ['Q', -0.1, 0.7, -0.055, 0.6], ['L', 0.055, 0.6], ['L', 0.07, 0.68], ['Q', 0.112, 0.75, 0.086, 0.815], ['Q', 0.072, 0.864, 0.03, 0.868]]);
-      if (has('plain')) shape([['M', 0.055, 0.61], ['Q', 0.085, 0.35, 0.14, 0.0], ['L', -0.14, 0.0], ['Q', -0.11, 0.35, -0.065, 0.61]]); // a plain working skirt
+      const seated = (an.legs && an.legs[0] > 60);
+      if (seated) { // a seated skirt: over the lap to the knee, then down to the floor (the floor is at 0.22 when sitting)
+        shape([['M', 0.055, 0.61], ['Q', 0.06, 0.53, 0.13, 0.52], ['L', 0.25, 0.52], ['Q', 0.27, 0.4, 0.27, 0.235], ['L', 0.06, 0.235], ['L', 0.0, 0.47], ['Q', -0.1, 0.46, -0.075, 0.61]]);
+        g.push(`<ellipse cx="${f1(X(0.29))}" cy="${f1(Y(0.232))}" rx="${f1(0.035 * h)}" ry="${f1(0.013 * h)}" fill="${c}"/>`);
+      } else if (has('plain')) shape([['M', 0.055, 0.61], ['Q', 0.085, 0.35, 0.14, 0.0], ['L', -0.14, 0.0], ['Q', -0.11, 0.35, -0.065, 0.61]]); // a plain working skirt
       else shape([['M', 0.055, 0.61], ['Q', 0.085, 0.35, 0.15, 0.0], ['L', -0.17, 0.0], ['Q', -0.14, 0.2, -0.16, 0.34], ['Q', -0.235, 0.42, -0.2, 0.53], ['Q', -0.15, 0.6, -0.055, 0.61]]); // a bustle
       if (has('shawl')) shape([['M', -0.04, 0.874], ['Q', -0.13, 0.86, -0.14, 0.74], ['L', -0.13, 0.52], ['L', -0.04, 0.6], ['L', 0.104, 0.66], ['Q', 0.12, 0.8, 0.07, 0.862]]);
     } else if (kind === 'boy') {
@@ -154,7 +158,8 @@ function figure(o) {
     g.push(`<g transform="${headRot}">${hg.join('')}</g>`);
     if (c === fill) { // pale cloth: aprons and a maid's cap read even in a wide shot
       const pale = tones.lite, op = f1((0.55 + 0.45 * det) * 100) / 100;
-      if (has('apron') && kind === 'woman') g.push(`<path d="${PD([['M', -0.01, 0.6], ['L', 0.062, 0.6], ['Q', 0.1, 0.32, 0.128, 0.1], ['L', 0.01, 0.08], ['Q', -0.02, 0.35, -0.01, 0.6]])} Z" fill="${pale}" opacity="${op}"/>` +
+      const sat = an.legs && an.legs[0] > 60;
+      if (has('apron') && kind === 'woman') g.push((sat ? `<path d="${PD([['M', 0.0, 0.6], ['L', 0.06, 0.6], ['Q', 0.08, 0.53, 0.14, 0.53], ['L', 0.25, 0.53], ['L', 0.26, 0.4], ['L', 0.1, 0.42], ['Q', 0.02, 0.45, 0.0, 0.6]])} Z" fill="${pale}" opacity="${op}"/>` : `<path d="${PD([['M', -0.01, 0.6], ['L', 0.062, 0.6], ['Q', 0.1, 0.32, 0.128, 0.1], ['L', 0.01, 0.08], ['Q', -0.02, 0.35, -0.01, 0.6]])} Z" fill="${pale}" opacity="${op}"/>`) +
         (has('bib') ? `<path d="${PD([['M', 0.012, 0.6], ['L', 0.068, 0.6], ['L', 0.078, 0.74], ['L', 0.03, 0.75]])} Z" fill="${pale}" opacity="${op}"/>` : ''));
       if (has('apron') && kind === 'man') g.push(`<path d="${PD([['M', -0.02, 0.56], ['L', 0.1, 0.56], ['L', 0.115, 0.22], ['L', -0.01, 0.2]])} Z" fill="${pale}" opacity="${op}"/>`);
       if (hat === 'maid') g.push(`<g transform="${headRot}"><path d="M${hpS(-0.05, 0.05)} Q${hpS(-0.02, 0.1)} ${hpS(0.035, 0.07)} L${hpS(0.03, 0.055)} Q${hpS(-0.01, 0.07)} ${hpS(-0.045, 0.035)} Z" fill="${pale}" opacity="${op}"/></g>`);
@@ -211,7 +216,7 @@ function figure(o) {
       g.push(`<ellipse cx="${f1(X(0.012))}" cy="${f1(Y(0.84))}" rx="${f1(0.045 * h)}" ry="${f1(0.014 * h)}" fill="${lite}"/>`); // lace collar
       for (const yy of [0.79, 0.75, 0.71, 0.67, 0.63]) g.push(dot(0.062, yy, 0.0055));
       g.push(ln([[-0.06, 0.605], [0.06, 0.605]], 0.009)); // waistband
-      for (const [a0, a1] of [[0.03, 0.08], [-0.03, -0.02], [-0.1, -0.12]]) g.push(`<path d="M${f1(X(a0))},${f1(Y(0.58))} Q${f1(X(a0 + 0.02))},${f1(Y(0.3))} ${f1(X(a1))},${f1(Y(0.03))}" stroke="${tone}" stroke-width="${f1(0.006 * h)}" fill="none"/>`);
+      if (!(an.legs && an.legs[0] > 60)) for (const [a0, a1] of [[0.03, 0.08], [-0.03, -0.02], [-0.1, -0.12]]) g.push(`<path d="M${f1(X(a0))},${f1(Y(0.58))} Q${f1(X(a0 + 0.02))},${f1(Y(0.3))} ${f1(X(a1))},${f1(Y(0.03))}" stroke="${tone}" stroke-width="${f1(0.006 * h)}" fill="none"/>`);
       g.push(ln([[-0.16, 0.5], [-0.11, 0.44], [-0.05, 0.47]], 0.006)); // bustle drape
     } else {
       g.push(poly(P([[0.0, 0.79], [0.07, 0.79], [0.035, 0.76]]), lite));
