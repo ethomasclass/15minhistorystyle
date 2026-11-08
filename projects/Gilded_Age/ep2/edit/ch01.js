@@ -79,7 +79,7 @@ EDITS.ch01 = () => {
     // 11. The driving question, over the night street.
     {a: c.so, b: dur, draw: (T) => night(T, {z: 1.2, ux: 1250 + T * 85, uy: 560}) + dimBy(0.74 * fin(T, c.so, 0.6)) +
       op(fin(T, w('know')), mono('the question', {x: 130, y: 250, size: 28, color: C.teal, ls: 6})) +
-      slideUp(fin(T, w('What', 2)), `<div style="position:absolute;left:124px;top:300px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">What did the richest people<br>in America think...</div>`) +
+      slideUp(fin(T, w('What', 2)), `<div class="tx" style="position:absolute;left:124px;top:300px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">What did the richest people<br>in America think...</div>`) +
       (fin(T, w('What', 2) + 0.5) > 0 ? slideUp(fin(T, w('What', 2) + 0.5), tape('they owed everyone else?', {x: 120, y: 560, size: 84, rot: -2, seed: 17})) : '')},
   ];
   return {dur, shots, fadeOut: 0.6};

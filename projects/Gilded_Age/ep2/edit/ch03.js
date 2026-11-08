@@ -7,7 +7,7 @@ EDITS.ch03 = () => {
   };
   const hall = (T, z, ux, uy) => renderBall({t: T, cam: {z, ux, uy}, quiet: true});
   const dawn = (T) => { const t = 2.2 + (T - c.dawn) * 1.4, u = ease(t / 9);
-    return renderFifth({t, dawn: 0.65 + 0.03 * t, cam: {z: lerpLog(0.72, 1.75, u), ux: 1950 - 170 * u, uy: 330 + 340 * u}}); };
+    return renderFifth({t, dawn: 0.65 + 0.03 * t, quiet: true, cam: {z: lerpLog(0.72, 1.75, u), ux: 1950 - 170 * u, uy: 330 + 340 * u}}); };
   const shots = [
     // 1. "And they arrived on horseback. Sort of." The great hall, the hobby-horse quadrille.
     {a: 0, b: c.quad, draw: (T) => hall(T, 2.0 + 0.1 * ease(T / c.quad), 1060, 760) +
@@ -51,7 +51,8 @@ EDITS.ch03 = () => {
       deskProp('p05_dinner_menu', {x: 1180, y: 210, w: 380, rot: 5, o: fin(T, c.supper + 0.2, 0.5), T}) +
       op(fin(T, w('two')), pen('supper: 2 a.m.', {x: 1060, y: 120, size: 60, rot: -4, color: C.orange}))},
     // 9. "The last dance ended at sunrise." Fifth Avenue at dawn; Nora up the area steps.
-    {a: c.dawn, b: c.papers, draw: (T) => dawn(T)},
+    {a: c.dawn, b: c.papers, draw: (T) => dawn(T) + stamp('Fifth Avenue &middot; dawn, March 27, 1883', 1) +
+      op(fin(T, w('last')), pen('the last dance ended at sunrise', {x: 1080, y: 130, size: 50, rot: -3, color: C.orange}))},
     // 10. "The newspapers printed every costume, every flower, every name. Which was the point."
     {a: c.papers, b: c.bill, draw: (T) => push(T, c.papers, c.bill) +
       deskCut('desk/leslies_1883_cover.png', {x: 200, y: 50, w: 620, rot: -2, o: fin(T, c.papers + 0.1, 0.5), T}) + `</div>` +

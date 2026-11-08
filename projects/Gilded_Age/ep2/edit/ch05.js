@@ -9,7 +9,7 @@ EDITS.ch05 = () => {
   const fitA = remap([[c.nature, 0.1], [w('suited'), 0.9], [w('survive'), 1.7], [c.claim, 2.5]]);
   const fitB = remap([[c.claim, 4.7], [w('strongest'), 5.3], [w('weak'), 5.75], [c.fit, 5.97]]);
   const fitFit = remap([[c.fit, 2.55], [w('suited', 2), 2.9], [c.roach, 2.98]]);
-  const banq = remap([[c.dinner, 0], [w('restaurant'), 3.0], [w('told'), 4.6], [w('relax'), 6.6], [c.sumner, 9]]);
+  const banq = remap([[c.dinner, 0], [w('restaurant') + 1.9, 3.0], [w('told'), 4.6], [w('relax'), 6.6], [c.sumner, 9]]);
   const fitC = remap([[c.abcd, 7.3], [w('A', 11), 7.5], [w('B'), 7.7], [w('C', 1), 7.9], [w('D', 1), 8.15], [w('helped'), 8.5], [w('C', 3), 8.7], [w('pays'), 9.0], [w('it', 5), 9.4], [dur, 10]]);
   const shots = [
     // 1. "So how did people like the Vanderbilts feel about all this? A lot of them felt... fine. And they had an idea to explain it."
@@ -42,8 +42,10 @@ EDITS.ch05 = () => {
       (fin(T, w('rock')) > 0 ? slideUp(fin(T, w('rock')), tape('LIKE A ROCK STAR', {x: 200, y: 480, size: 90, rot: -3, seed: 63})) : '')},
     // 8. The banquet at Delmonico's (lookdev spencer_banquet): "he told them they worked too hard ... needed to relax more.
     //    Rich men cheered a speech about working less. Their workers were not invited."
-    {a: c.dinner, b: c.sumner, draw: (T) => renderBanquet(banq(T)) +
-      op(fin(T, w('hard')) * fout(T, w('relax') - 0.3), pen('&ldquo;you work too hard&rdquo;', {x: 140, y: 140, size: 54, rot: -3, color: C.orange})) +
+    {a: c.dinner, b: c.sumner, draw: (T) => renderBanquet(banq(T), true) +
+      op(fin(T, w('huge')), pen('about 200 rich men', {x: 1140, y: 130, size: 50, rot: -3, color: C.orange})) +
+      op(fin(T, w('relax')), pen('his advice: relax more', {x: 1140, y: 240, size: 50, rot: -3, color: C.orange})) +
+      op(fin(T, w('hard')), pen('&ldquo;you work too hard&rdquo;', {x: 140, y: 140, size: 54, rot: -3, color: C.orange})) +
       op(fin(T, w('cheered')), pen('rich men cheered', {x: 140, y: 240, size: 54, rot: -3, color: C.orange})) +
       (fin(T, w('Their', 2)) > 0 ? slideUp(fin(T, w('Their', 2)), tape('THEIR WORKERS: NOT INVITED', {x: 140, y: 820, size: 72, rot: -2, seed: 65})) : '')},
     // 9. "An American professor, William Graham Sumner, went further. In 1883 ... What Social Classes Owe to Each Other."
@@ -51,15 +53,15 @@ EDITS.ch05 = () => {
       return push(T, c.sumner, c.nothing) +
         deskCut('desk/sumner_bust.png', {x: 180, y: 240, w: 560, rot: -2, o: fin(T, c.sumner + 0.2, 0.6), T, caption: 'william graham sumner, yale professor', cx: 20}) +
         deskProp('p07_library_book', {x: 1080, y: 240, w: 600, rot: 4, o: book, T}) + `</div>` +
-        op(book, `<div style="position:absolute;left:1180px;top:${360 + (1 - ease(book)) * 70}px;width:400px;transform:rotate(4deg);padding:20px;background:#E9E1CE;box-shadow:0 6px 14px rgba(0,0,0,.5);text-align:center;font-family:Playfair;font-weight:900;font-size:40px;line-height:1.1;color:#1d1a16">What Social Classes Owe to Each Other<div style="font-family:Mono;font-size:16px;letter-spacing:3px;margin-top:10px;font-weight:400">W. G. SUMNER &middot; 1883</div></div>`) +
+        op(book, `<div class="tx" style="position:absolute;left:1180px;top:${360 + (1 - ease(book)) * 70}px;width:400px;transform:rotate(4deg);padding:20px;background:#E9E1CE;box-shadow:0 6px 14px rgba(0,0,0,.5);text-align:center;font-family:Playfair;font-weight:900;font-size:40px;line-height:1.1;color:#1d1a16">What Social Classes Owe to Each Other<div style="font-family:Mono;font-size:16px;letter-spacing:3px;margin-top:10px;font-weight:400">W. G. SUMNER &middot; 1883</div></div>`) +
         stamp('1883 &middot; the same year as the ball', fin(T, w('1883'))) +
         op(fin(T, w('further')), pen('he went further', {x: 860, y: 120, size: 56, rot: -3, color: C.orange}));
     }},
     // 10. "His answer was: nothing. One line from it: 'A drunkard in the gutter is just where he ought to be.'"
     {a: c.nothing, b: c.abcd, draw: (T) => desk() +
-      (fin(T, w('nothing')) > 0 ? slideUp(fin(T, w('nothing')) * fout(T, w('line') - 0.2), tape('NOTHING.', {x: 640, y: 380, size: 170, rot: -3, seed: 67})) : '') +
-      op(fin(T, c.nothing + 0.2) * fout(T, w('line') - 0.2), mono('what do social classes owe to each other?', {x: 0, y: 300, size: 30, color: C.teal, extra: 'width:1920px;text-align:center'})) +
-      quote('&ldquo;A drunkard in the gutter is just where he ought to be.&rdquo;', 'william graham sumner, 1883', {x: 200, y: 360, w: 1520, size: 80, o: fin(T, w('drunkard') - 0.3, 0.4)})},
+      (fin(T, w('nothing')) > 0 ? slideUp(fin(T, w('nothing')), tape('NOTHING.', {x: 700, y: 130, size: 120, rot: -3, seed: 67})) : '') +
+      op(fin(T, c.nothing + 0.2), mono('what do social classes owe to each other?', {x: 0, y: 70, size: 30, color: C.teal, extra: 'width:1920px;text-align:center'})) +
+      quote('&ldquo;A drunkard in the gutter is just where he ought to be.&rdquo;', 'william graham sumner, 1883', {x: 200, y: 420, w: 1520, size: 76, o: fin(T, w('drunkard') - 0.3, 0.4)})},
     // 11. Sumner's letters: "A and B, he wrote, decide what C shall do for D ... Sumner called him 'the Forgotten Man.'" (beat C)
     {a: c.abcd, b: dur, draw: (T) => renderFittest(fitC(T)) +
       op(fin(T, w('D', 2)), pen('D: the poor person being helped', {x: 1260, y: 470, size: 38, rot: -3, color: C.teal})) +

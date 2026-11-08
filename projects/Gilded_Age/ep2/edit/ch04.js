@@ -29,10 +29,13 @@ EDITS.ch04 = () => {
     }},
     // 4. "Nora was a domestic servant. And she was live-in"
     {a: c.job, b: c.attic, draw: (T) => push(T, c.job, c.attic) + deskProp('p04_maid_cap_apron', {x: 140, y: 300, w: 760, rot: -3, o: fin(T, c.job + 0.1, 0.5), T}) + `</div>` +
-      vocabCard('domestic servant', 'duh-MES-tik SER-vunt', 'noun', "Someone paid to cook, clean or serve in another family's home.", {x: 1080, y: 110, w: 740, size: 64, o: fin(T, w('domestic'), 0.4) * fout(T, w('live-in') - 0.2, 0.3)}) +
-      vocabCard('live-in', 'LIV-in', 'adjective', "Living in the employer's house, so on call almost all the time.", {x: 1100, y: 140, o: fin(T, w('live-in'), 0.4)}) + compositeBar(1)},
+      vocabCard('domestic servant', 'duh-MES-tik SER-vunt', 'noun', "Someone paid to cook, clean or serve in another family's home.", {x: 1080, y: 80, w: 740, size: 60, rot: 1.5, o: fin(T, w('domestic'), 0.4)}) +
+      vocabCard('live-in', 'LIV-in', 'adjective', "Living in the employer's house, so on call almost all the time.", {x: 1120, y: 520, rot: -1.5, o: fin(T, w('live-in'), 0.4)}) + compositeBar(1)},
     // 5. "she slept in the house, in a small room near the roof. That meant she was on call almost all the time." (lookdev nora_attic)
-    {a: c.attic, b: c.hours, draw: (T) => renderAttic(remap([[c.attic, 0.6], [w('on', 1) - 0.1, 4.7], [c.hours, 7.8]])(T))},
+    {a: c.attic, b: c.hours, draw: (T) => renderAttic(remap([[c.attic, 0.6], [w('on', 1) - 0.1, 4.7], [c.hours, 7.8]])(T), true) +
+      op(fin(T, c.attic + 0.4), pen('up the back stairs, under the roof', {x: 1080, y: 120, size: 46, rot: -3, color: C.orange})) +
+      op(fin(T, w('on', 1)), pen('the bell: someone downstairs wants something', {x: 160, y: 230, size: 42, rot: -3, color: C.orange})) +
+      op(fin(T, w('call', 1)), pen('on call, day and night', {x: 1180, y: 230, size: 50, rot: -3, color: C.orange}))},
     // 6. "Most days she worked more than ten hours. Some days fourteen. She got one afternoon off a week, and part of Sunday."
     {a: c.hours, b: c.pay, draw: (T) => { const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'], hrs = [11, 14, 11, 6, 12, 14, 7], g = [];
       const grow = ease(clamp01((T - w('worked')) / 1.2)), base = 860, ph = 38;
@@ -81,8 +84,8 @@ EDITS.ch04 = () => {
     // 10. "On her afternoon off, Nora took the ferry home ... MA: And how were the fancy folk, then? NORA: Tired. Like the rest of us."
     {a: c.home, b: c.wages, draw: (T) => renderFlat({t: flatT(T), cam: flatCam(T), quiet: true}) +
       stamp("The Kellys' flat &middot; Brooklyn &middot; 1883", 1) +
-      op(fin(T, w('ferry')) * fout(T, w('And', 7)), pen('afternoon off: the ferry home', {x: 1000, y: 120, size: 46, rot: -3, color: C.orange})) +
-      op(fin(T, w('same')) * fout(T, w('And', 7)), pen('the same kind of room as episode 1', {x: 900, y: 220, size: 42, rot: -3, color: C.orange}))},
+      op(fin(T, w('ferry')), pen('afternoon off: the ferry home', {x: 1000, y: 120, size: 46, rot: -3, color: C.orange})) +
+      op(fin(T, w('same')), pen('the same kind of room as episode 1', {x: 900, y: 220, size: 42, rot: -3, color: C.orange}))},
     // 11. "She put most of her wages on the table. Her mother and her little brother were sewing shirts by the lamp"
     {a: c.wages, b: c.piece, draw: (T) => renderFlat({t: flatT(T), cam: flatCam(T), quiet: true}) + stamp("The Kellys' flat &middot; Brooklyn &middot; 1883", 1) +
       op(fin(T, w('wages')), pen('most of her wages', {x: 1240, y: 120, size: 56, rot: -3, color: C.orange})) +

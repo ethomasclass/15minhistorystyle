@@ -22,9 +22,9 @@ EDITS.ch06 = () => {
     // 3. "Baseball had a league for the working class: the American Association. Cheaper seats. Games on Sundays, in some cities."
     {a: c.aa, b: c.beer, draw: (T) => desk() +
       op(fin(T, w('league', 1)), mono('a league for the working class', {x: 200, y: 180, size: 30, color: C.teal, ls: 5})) +
-      slideUp(fin(T, w('American')), `<div style="position:absolute;left:190px;top:240px;font-family:Abril;font-size:100px;color:${C.cream}">The American Association</div>`) +
+      slideUp(fin(T, w('American')), `<div class="tx" style="position:absolute;left:190px;top:240px;font-family:Abril;font-size:100px;color:${C.cream}">The American Association</div>`) +
       op(fin(T, w('American')) * 0.9, mono('1882 to 1891 &middot; brooklyn joined in 1884', {x: 200, y: 380, size: 24})) +
-      rows.map(([txt, wd, n], i) => op(fin(T, w(wd, n), 0.3), `<div style="position:absolute;left:300px;top:${500 + i * 120}px;font-family:Inter;font-weight:800;font-size:56px;color:${C.cream}">${txt}</div>`) + tick(210, 548 + i * 120, clamp01((T - w(wd, n)) / 0.4))).join('') +
+      rows.map(([txt, wd, n], i) => op(fin(T, w(wd, n), 0.3), `<div class="tx" style="position:absolute;left:300px;top:${500 + i * 120}px;font-family:Inter;font-weight:800;font-size:56px;color:${C.cream}">${txt}</div>`) + tick(210, 548 + i * 120, clamp01((T - w(wd, n)) / 0.4))).join('') +
       stamp('Brooklyn &middot; 1884', 1)},
     // 4. "And beer, which the other league banned. Its rivals called it 'the Beer and Whiskey League.' ... The fans took it as a compliment."
     {a: c.beer, b: c.hit, draw: (T) => push(T, c.beer, c.hit) +
@@ -32,8 +32,8 @@ EDITS.ch06 = () => {
       deskProp('p06_baseball_1880s', {x: 1180, y: 380, w: 560, rot: 6, o: fin(T, w('rivals'), 0.5), T}) + `</div>` +
       op(fin(T, w('banned')), pen('the other league (the national league) banned it', {x: 160, y: 120, size: 46, rot: -3, color: C.orange})) +
       (fin(T, w('Beer', 2)) > 0 ? slideUp(fin(T, w('Beer', 2)), tape('&ldquo;THE BEER AND WHISKEY LEAGUE&rdquo;', {x: 160, y: 790, size: 70, rot: -2, seed: 71})) : '') +
-      op(fin(T, w('insult')) * fout(T, w('compliment') - 0.2), pen('an insult...', {x: 820, y: 300, size: 60, rot: -4, color: '#E07A5F'})) +
-      op(fin(T, w('compliment')), pen('...a compliment', {x: 820, y: 300, size: 60, rot: -4, color: C.teal}))},
+      op(fin(T, w('insult')), pen('an insult...', {x: 820, y: 260, size: 60, rot: -4, color: '#E07A5F'})) +
+      op(fin(T, w('compliment')), pen('...a compliment', {x: 900, y: 380, size: 60, rot: -4, color: C.teal}))},
     // 5. The hit. MICHAEL: "Did you see that? Clean over the fence!" NORA: "I saw it. I also saw you spill your beer on that man's hat."
     {a: c.hit, b: c.rich, draw: (T) => park(parkB(T))},
     // 6. "The rich had other ideas about Sunday." The America's Cup, 1886.

@@ -38,17 +38,17 @@ EDITS.ch07 = () => {
     //    while he's alive, to things that help people help themselves."
     {a: c.rules, b: c.libs, draw: (T) => desk() + op(fin(T, c.rules + 0.1) * 0.9, mono("carnegie's rules for the rich", {x: 240, y: 170, size: 30, color: C.teal, ls: 5})) +
       rules.map(([txt, wd, yes], i) => { const t0 = w(wd, 1), y = 260 + i * 150;
-        return op(fin(T, t0, 0.3), `<div style="position:absolute;left:340px;top:${y}px;font-family:Inter;font-weight:800;font-size:58px;color:${C.cream}">${txt}</div>`) +
+        return op(fin(T, t0, 0.3), `<div class="tx" style="position:absolute;left:340px;top:${y}px;font-family:Inter;font-weight:800;font-size:58px;color:${C.cream}">${txt}</div>`) +
           (yes ? tick(240, y + 50, clamp01((T - t0 - 0.2) / 0.4)) : cross(240, y + 10, clamp01((T - t0 - 0.2) / 0.4))); }).join('') +
       op(fin(T, w('parties')) * 0.9, mono('(like a certain ball)', {x: 1260, y: 445, size: 24, color: C.orange}))},
     // 5. "Like libraries. And then the line that made him famous: 'The man who dies thus rich dies disgraced.'"
     {a: c.libs, b: c.built, draw: (T) => push(T, c.libs, c.built) + deskProp('p07_library_book', {x: 1300, y: 420, w: 480, rot: 6, o: fin(T, c.libs + 0.1, 0.5), T}) + `</div>` +
-      (fin(T, w('libraries', 1)) > 0 ? slideUp(fin(T, w('libraries', 1)) * fout(T, w('famous'), 0.3), tape('LIKE LIBRARIES', {x: 200, y: 400, size: 100, rot: -3, seed: 75})) : '') +
+      (fin(T, w('libraries', 1)) > 0 ? slideUp(fin(T, w('libraries', 1)), tape('LIKE LIBRARIES', {x: 180, y: 120, size: 80, rot: -3, seed: 75})) : '') +
       quote('&ldquo;The man who dies thus rich dies disgraced.&rdquo;', 'andrew carnegie, &ldquo;wealth,&rdquo; 1889', {x: 180, y: 330, w: 1100, size: 92, o: fin(T, w('The', 4) - 0.2, 0.4)})},
     // 6. "He meant it. He paid to build about seventeen hundred libraries in the United States, and about twenty-five hundred around
     //    the world. Many are still open. Check the cornerstone on yours." (lookdev carnegie_library)
     {a: c.built, b: c.phil, draw: (T) => renderLibrary(lib(T)) +
-      op(fin(T, w('seventeen')), `<div style="position:absolute;left:120px;top:60px;font-family:Abril;font-size:110px;color:${C.cream};text-shadow:0 6px 18px rgba(0,0,0,.7)">about 1,700</div>`) +
+      op(fin(T, w('seventeen')), `<div class="tx" style="position:absolute;left:120px;top:60px;font-family:Abril;font-size:110px;color:${C.cream};text-shadow:0 6px 18px rgba(0,0,0,.7)">about 1,700</div>`) +
       op(fin(T, w('seventeen')), mono('libraries in the united states', {x: 130, y: 190, size: 28, color: C.teal})) +
       op(fin(T, w('twenty-five')), mono('about 2,500 around the world', {x: 130, y: 236, size: 28, color: C.teal})) +
       op(fin(T, w('cornerstone')), pen('check the cornerstone on yours', {x: 120, y: 860, size: 54, rot: -3, color: C.orange}))},

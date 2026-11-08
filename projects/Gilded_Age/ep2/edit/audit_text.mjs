@@ -17,7 +17,7 @@ const dur = await page.evaluate((k) => EDITS[k]().dur, key);
 for (let T = 0; T < dur; T += step) {
   await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]);
   const found = await page.evaluate(() => {
-    const out = [], eff = (el) => { let o = 1; for (let e = el; e && e.id !== 'stage'; e = e.parentElement) { const s = getComputedStyle(e); o *= Number(s.opacity); if (e.getAttribute && e.getAttribute('opacity')) o *= Number(e.getAttribute('opacity')); if (s.display === 'none' || s.visibility === 'hidden') return 0; } return o; };
+    const out = [], eff = (el) => { let o = 1; for (let e = el; e && e.id !== 'stage'; e = e.parentElement) { const s = getComputedStyle(e); o *= Number(s.opacity); if (e.getAttribute && e.getAttribute('opacity')) o *= Number(e.getAttribute('opacity')); if (s.display === 'none') return 0; } return getComputedStyle(el).visibility === 'hidden' ? 0 : o; };
     for (const el of document.querySelectorAll('#stage *')) {
       const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join('').trim();
       if (!own || el.tagName === 'style' || el.tagName === 'STYLE') continue;

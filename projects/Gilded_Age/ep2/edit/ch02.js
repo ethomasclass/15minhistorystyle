@@ -29,7 +29,7 @@ EDITS.ch02 = () => {
       stamp('New York &middot; 1883', fin(T, 0.4) * fout(T, w('French')))},
     // 2. The fortune: the Commodore, his son, his grandson; ships and railroads; about $100 million.
     {a: c.money, b: c.but, draw: (T) => {
-      const big = fin(T, w('hundred'), 0.4), tree = 1 - big;
+      const big = fin(T, w('hundred'), 0.4), tree = 1;
       return desk() +
         box('Cornelius Vanderbilt', '&ldquo;the commodore&rdquo; &middot; 1794 to 1877', 140, 130, fin(T, w('grandson'), 0.4) * tree) +
         box('William H. Vanderbilt', 'his son', 140, 330, fin(T, w('grandson') + 0.3, 0.4) * tree) +
@@ -39,18 +39,18 @@ EDITS.ch02 = () => {
         op(fin(T, w('ships')) * tree, mono('ships', {x: 1150, y: 480, size: 26, color: C.teal})) +
         op(fin(T, w('railroads')) * tree, mono('railroads', {x: 1440, y: 480, size: 26, color: C.teal})) +
         op(fin(T, w('fortune')) * tree, pen('a fortune', {x: 1250, y: 200, size: 60, rot: -4, color: C.orange})) +
-        bigFig('$100,000,000', {y: 330, size: 170, o: big}) +
-        op(big, mono('what the commodore left when he died, 1877', {x: 0, y: 540, size: 28, color: C.teal, extra: 'width:1920px;text-align:center'})) +
-        op(fin(T, w("That's")), pen('more than almost anyone on earth', {x: 520, y: 680, size: 56, rot: -3, color: C.orange}));
+        bigFig('$100,000,000', {x: 780, y: 600, size: 120, w: 1050, align: 'left', o: big}) +
+        op(big, mono('what the commodore left when he died, 1877', {x: 790, y: 740, size: 26, color: C.teal})) +
+        op(fin(T, w("That's")), pen('more than almost anyone on earth', {x: 790, y: 830, size: 50, rot: -3, color: C.orange}));
     }},
     // 3. "But in New York, money wasn't enough. At the top sat a small circle of families ... old money. They decided who was 'in.'"
     {a: c.but, b: c.newm, draw: (T) => { const ring = fin(T, w('circle'), 0.6);
       const xs = Array.from({length: 7}, (_, i) => 430 + Math.cos(i / 7 * TAU) * 260), ys = Array.from({length: 7}, (_, i) => 700 + Math.sin(i / 7 * TAU) * 60);
       return desk() +
-        (fin(T, w('wasn\'t')) > 0 ? slideUp(fin(T, w("wasn't")) * fout(T, w('circle') - 0.3), tape("MONEY WASN'T ENOUGH", {x: 360, y: 400, size: 96, rot: -2, seed: 41})) : '') +
+        (fin(T, w('wasn\'t')) > 0 ? slideUp(fin(T, w("wasn't")), tape("MONEY WASN'T ENOUGH", {x: 160, y: 300, size: 80, rot: -2, seed: 41})) : '') +
         svg(`<ellipse cx="430" cy="730" rx="330" ry="90" fill="none" stroke="${C.teal}" stroke-width="5" opacity="${(0.8 * ring).toFixed(3)}"/>` +
           xs.map((x, i) => crowd(T, [x], ys[i], 300, ring, {d: x > 430 ? -1 : 1})).join('')) +
-        op(fin(T, w('generations')), pen('rich for generations', {x: 160, y: 200, size: 56, rot: -3, color: C.orange})) +
+        op(fin(T, w('generations')), pen('rich for generations', {x: 160, y: 160, size: 56, rot: -3, color: C.orange})) +
         op(fin(T, w('decided')), pen('they decided who was &ldquo;in&rdquo;', {x: 160, y: 900, size: 48, rot: -2, color: C.orange})) +
         vocabCard('old money', 'ohld MUH-nee', 'noun', 'Families who had been rich for generations, and decided who belonged.', {x: 1120, y: 200, o: fin(T, w('old', 1), 0.4)});
     }},

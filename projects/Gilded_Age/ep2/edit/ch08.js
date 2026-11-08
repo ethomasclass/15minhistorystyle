@@ -53,7 +53,7 @@ EDITS.ch08 = () => {
     // 6. The question again.
     {a: c.q, b: c.nothing, draw: (T) => desk() + dimBy(0.3) +
       op(fin(T, w('So')), mono('the question', {x: 130, y: 250, size: 28, color: C.teal, ls: 6})) +
-      slideUp(fin(T, w('what', 1)), `<div style="position:absolute;left:124px;top:300px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">What did the richest people<br>in America think...</div>`) +
+      slideUp(fin(T, w('what', 1)), `<div class="tx" style="position:absolute;left:124px;top:300px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">What did the richest people<br>in America think...</div>`) +
       (fin(T, w('think')) > 0 ? slideUp(fin(T, w('think')), tape('they owed everyone else?', {x: 120, y: 560, size: 84, rot: -2, seed: 17})) : '')},
     // 7. "Some said nothing at all. The fittest win; that's nature."
     {a: c.nothing, b: c.deal, draw: (T) => push(T, c.nothing, c.deal) +
@@ -69,7 +69,7 @@ EDITS.ch08 = () => {
       (fin(T, w('great')) > 0 ? slideUp(fin(T, w('great')), tape('A GREAT DEAL...', {x: 980, y: 260, size: 72, rot: -3, seed: 89})) : '') +
       op(fin(T, w('decide')), pen('...but they decide:', {x: 1000, y: 430, size: 54, rot: -3, color: C.orange})) +
       [['what', 'what', 2], ['how', 'how', 1], ['when', 'when', 1]].map(([txt, wd, n], i) => op(fin(T, w(wd, n), 0.3),
-        `<div style="position:absolute;left:1120px;top:${540 + i * 110}px;font-family:Inter;font-weight:800;font-size:60px;color:${C.cream}">${txt}</div>`) + tick(1030, 590 + i * 110, clamp01((T - w(wd, n)) / 0.4))).join('')},
+        `<div class="tx" style="position:absolute;left:1120px;top:${540 + i * 110}px;font-family:Inter;font-weight:800;font-size:60px;color:${C.cream}">${txt}</div>`) + tick(1030, 590 + i * 110, clamp01((T - w(wd, n)) / 0.4))).join('')},
     // 9. "And while they argued about it, Nora went back to Fifth Avenue on the evening ferry"
     {a: c.nora, b: c.table, draw: (T) => renderFifth({t: T, cam: {z: 1.3, ux: 1800 + (T - c.nora) * 30, uy: 600}, quiet: true}) +
       op(fin(T, w('Nora')), pen('nora, back to fifth avenue', {x: 120, y: 130, size: 56, rot: -3, color: C.orange})) + compositeBar(fin(T, w('Nora'), 0.5))},
