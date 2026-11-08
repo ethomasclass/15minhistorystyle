@@ -1,0 +1,8 @@
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch01_the_ball.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch02_new_money.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch03_the_party.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch04_the_basement.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch05_survival_of_the_fittest.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch06_sunday.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch07_the_gospel_of_wealth.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep2/public/audio/ch08_rags_to_riches.wav'
