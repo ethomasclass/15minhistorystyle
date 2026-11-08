@@ -81,16 +81,54 @@ function guest(o, t = 0) {
 }
 
 /* ---------- the street: carriages, lamps ---------- */
-function brougham(x, gy, sz, c, dist, open = 0, lamp = 1) { // a closed carriage behind one horse; coachman in a top hat on the box
-  const s = [], X = (u) => x - u * sz;
-  s.push(horse(x, gy, sz, c, dist / 120, 1));
-  s.push(line([[X(0.3), gy - 0.78 * sz], [X(0.95), gy - 0.62 * sz]], c, 0.04 * sz));
-  const bx0 = X(2.3), bx1 = X(1.05), top = gy - 1.55 * sz, bot = gy - 0.42 * sz;
-  s.push(`<path d="M${f1(bx0)},${f1(bot)} L${f1(bx0)},${f1(top + 0.08 * sz)} Q${f1(bx0)},${f1(top)} ${f1(bx0 + 0.1 * sz)},${f1(top)} L${f1(X(1.45))},${f1(top)} L${f1(X(1.45))},${f1(gy - 0.8 * sz)} Q${f1(bx1)},${f1(gy - 0.78 * sz)} ${f1(bx1)},${f1(bot - 0.1 * sz)} L${f1(X(1.2))},${f1(bot)} Z" fill="${c}"/>`);
-  s.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.12 * sz)}" width="${f1(0.36 * sz)}" height="${f1(0.4 * sz)}" fill="${MS.warm}" opacity="0.35"/>`);
-  if (open > 0) s.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.1 * sz)}" width="${f1(0.4 * sz * open)}" height="${f1(0.72 * sz)}" fill="${MS.warm}" opacity="0.5"/><rect x="${f1(X(2.05) - 0.38 * sz * open)}" y="${f1(top + 0.1 * sz)}" width="${f1(0.36 * sz * open)}" height="${f1(0.72 * sz)}" fill="${c}"/>`);
-  s.push(`<rect x="${f1(X(1.12))}" y="${f1(top + 0.18 * sz)}" width="${f1(0.06 * sz)}" height="${f1(0.12 * sz)}" fill="${MS.warm}" opacity="${f1(0.85 * lamp)}"/>` + glowC(X(1.09), top + 0.24 * sz, 0.4 * sz, 0.5 * lamp));
-  s.push(figure({x: X(1.3), y: top + 0.12 * sz + 0.5 * 1.05 * sz, h: 1.05 * sz, d: 1, kind: 'man', hat: 'top', coat: 'frock', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -2, fArm: [100, 80]}}));
+// The carriage horse: street.js's four-beat walk, re-derived so each planted hoof stays put on the road. The hoof sweeps
+// 2 sin(amp) (0.32 + 0.3) sz while planted (60% of the cycle), so one cycle covers that / 0.6 of road. dist is road distance in px.
+// toss: 0..1 head toss when standing; shift: a weight shift (one hind leg rests) when standing.
+const MSH = {amp: 20, L: 0.62};
+function msHorse(x, gy, sz, c, dist, toss = 0, shift = 0, dir = 1) {
+  const s = [], X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz;
+  const sm = Math.sin(MSH.amp * Math.PI / 180), cyc = 2 * sm * MSH.L * sz / 0.6, p = dist / cyc;
+  const legs = [[-0.4, 0, true], [0.4, 0.25, false], [-0.3, 0.5, true], [0.48, 0.75, false]];
+  legs.forEach(([lx, off, hind], li) => {
+    let u = ((p + off) % 1 + 1) % 1, th, bend;
+    if (u < 0.6) { th = Math.asin(sm * (1 - 2 * u / 0.6)) * 180 / Math.PI; bend = 0; }
+    else { const v = (u - 0.6) / 0.4; th = -MSH.amp * Math.cos(Math.PI * v); bend = 45 * Math.sin(Math.PI * v); }
+    if (li === 2) { bend += 30 * shift; } // the resting hind leg, hock cocked, toe tipped
+    const hip = [X(lx), Yy(0.66)], r = (deg) => deg * Math.PI / 180;
+    const knee = [hip[0] + dir * Math.sin(r(th)) * 0.32 * sz, hip[1] + Math.cos(r(th)) * 0.32 * sz];
+    const sh = hind ? th + bend : th - bend;
+    const hoof = [knee[0] + dir * Math.sin(r(sh)) * 0.3 * sz, Math.min(gy - 3, knee[1] + Math.cos(r(sh)) * 0.3 * sz)];
+    s.push(line([hip, knee], c, 0.095 * sz) + line([knee, hoof], c, 0.055 * sz));
+    s.push(`<ellipse cx="${f1(hoof[0] + dir * 0.02 * sz)}" cy="${f1(hoof[1])}" rx="${f1(0.045 * sz)}" ry="${f1(0.025 * sz)}" fill="${c}"/>`);
+  });
+  const sag = 0.012 * shift;
+  s.push(`<ellipse cx="${f1(X(0.02))}" cy="${f1(Yy(0.78 - sag))}" rx="${f1(0.56 * sz)}" ry="${f1(0.2 * sz)}" fill="${c}"/>`);
+  const nod = 0.03 * Math.sin(TAU * p * 2) + 0.12 * toss, fw = -0.04 * toss;
+  s.push(poly([[X(0.38), Yy(0.92)], [X(0.62 + fw), Yy(1.28 + nod)], [X(0.78 + fw), Yy(1.24 + nod)], [X(0.98 + fw), Yy(1.0 + nod * 1.4)], [X(0.9 + fw), Yy(0.94 + nod * 1.4)], [X(0.66 + fw), Yy(1.04 + nod)], [X(0.52), Yy(0.66)]], c));
+  s.push(poly([[X(0.66 + fw), Yy(1.26 + nod)], [X(0.68 + fw), Yy(1.38 + nod)], [X(0.72 + fw), Yy(1.27 + nod)]], c));
+  s.push(poly([[X(0.42), Yy(0.98)], [X(0.6 + fw), Yy(1.27 + nod)], [X(0.5 + fw), Yy(1.2 + nod)], [X(0.36), Yy(0.95)]], c));
+  const sw = 0.05 * Math.sin(TAU * p) + 0.04 * toss;
+  s.push(`<path d="M${f1(X(-0.5))},${f1(Yy(0.88))} Q${f1(X(-0.66))},${f1(Yy(0.6))} ${f1(X(-0.6 + sw))},${f1(Yy(0.32))} L${f1(X(-0.54 + sw))},${f1(Yy(0.34))} Q${f1(X(-0.56))},${f1(Yy(0.62))} ${f1(X(-0.46))},${f1(Yy(0.8))} Z" fill="${c}"/>`);
+  return s.join('');
+}
+// a closed carriage behind one horse. dist: road distance (drives hooves and wheels); v: speed 0..1 (springs bob with it, the
+// horse rests and tosses its head when standing); t: time (the coachman sways).
+function brougham(x, gy, sz, c, dist, open = 0, lamp = 1, v = 1, t = 0) {
+  const s = [], X = (u) => x - u * sz, still = 1 - smooth(0.02, 0.25, v);
+  const toss = still * Math.max(0, Math.sin(t * 1.7 + x * 0.01)) ** 6, shift = still * smooth(0.3, 0.6, Math.sin(t * 0.4 + x) * 0.5 + 0.5);
+  s.push(msHorse(x, gy, sz, c, dist, toss, shift, 1));
+  const bob = sz * (0.022 * v * Math.sin(dist * 0.11) + 0.006 * still * Math.sin(t * 2.3 + x)), tilt = 0.8 * v * Math.sin(dist * 0.055);
+  s.push(line([[X(0.3), gy - 0.78 * sz], [X(0.95), gy - 0.62 * sz + bob]], c, 0.04 * sz));
+  const body = [], bx0 = X(2.3), bx1 = X(1.05), top = gy - 1.55 * sz, bot = gy - 0.42 * sz;
+  body.push(`<path d="M${f1(bx0)},${f1(bot)} L${f1(bx0)},${f1(top + 0.08 * sz)} Q${f1(bx0)},${f1(top)} ${f1(bx0 + 0.1 * sz)},${f1(top)} L${f1(X(1.45))},${f1(top)} L${f1(X(1.45))},${f1(gy - 0.8 * sz)} Q${f1(bx1)},${f1(gy - 0.78 * sz)} ${f1(bx1)},${f1(bot - 0.1 * sz)} L${f1(X(1.2))},${f1(bot)} Z" fill="${c}"/>`);
+  body.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.12 * sz)}" width="${f1(0.36 * sz)}" height="${f1(0.4 * sz)}" fill="${MS.warm}" opacity="0.35"/>`);
+  if (open > 0) body.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.1 * sz)}" width="${f1(0.4 * sz * open)}" height="${f1(0.72 * sz)}" fill="${MS.warm}" opacity="0.5"/><rect x="${f1(X(2.05) - 0.38 * sz * open)}" y="${f1(top + 0.1 * sz)}" width="${f1(0.36 * sz * open)}" height="${f1(0.72 * sz)}" fill="${c}"/>`);
+  body.push(`<rect x="${f1(X(1.12))}" y="${f1(top + 0.18 * sz)}" width="${f1(0.06 * sz)}" height="${f1(0.12 * sz)}" fill="${MS.warm}" opacity="${f1(0.85 * lamp)}"/>` + glowC(X(1.09), top + 0.24 * sz, 0.4 * sz, 0.5 * lamp));
+  const sway = 3 * Math.sin(t * 1.9 + x * 0.02) * (0.4 + v) + 4 * v * Math.sin(dist * 0.11);
+  body.push(figure({x: X(1.3), y: top + 0.12 * sz + 0.5 * 1.05 * sz, h: 1.05 * sz, d: 1, kind: 'man', hat: 'top', coat: 'frock', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -2 + sway, fArm: [100 + 4 * Math.sin(t * 1.3 + x), 80]}}));
+  // the body rides on its springs: a bob and a slight rock, about the axle line
+  s.push(`<g transform="translate(0,${f1(bob)}) rotate(${f1(tilt)}, ${f1(X(1.7))}, ${f1(bot)})">${body.join('')}</g>`);
+  s.push(`<path d="M${f1(X(1.15))},${f1(bot + bob)} q${f1(-0.2 * sz)},${f1(0.08 * sz)} ${f1(-0.4 * sz)},0 M${f1(X(1.85))},${f1(bot + bob)} q${f1(-0.2 * sz)},${f1(0.08 * sz)} ${f1(-0.4 * sz)},0" stroke="${c}" stroke-width="${f1(0.035 * sz)}" fill="none"/>`); // the elliptic springs
   for (const [u, rr] of [[1.35, 0.3], [2.05, 0.42]]) {
     const cx = X(u), R = rr * sz, cy = gy - R, ang = dist / R; let sp = '';
     for (let i = 0; i < 12; i++) { const a = ang + i * TAU / 12; sp += `M${f1(cx)},${f1(cy)}L${f1(cx + Math.cos(a) * R)},${f1(cy + Math.sin(a) * R)}`; }
@@ -202,7 +240,8 @@ const GUESTS = [ // costume outlines, after the Sun's descriptions and Mora's ph
 function arrivals(t, z) {
   const s = [], q = queue(t), sz = ARR.sz, stop = DOOR + 240;
   for (let i = q.k - 2; i < q.k + 6; i++) {
-    const x = stop + (q.n - i) * ARR.S + (q.n - i > 0.5 ? (q.n - i - 0.5) * 300 : 0);
+    const xAt = (tt) => { const qq = queue(tt), k2 = qq.n - i; return stop + k2 * ARR.S + (k2 > 0.5 ? (k2 - 0.5) * 300 : 0); };
+    const x = xAt(t), v = clamp01(Math.abs(x - xAt(t - 1 / 30)) * 30 / 260);
     const open = i === q.k ? smooth(1.9, 2.3, q.u) * (1 - smooth(4.0, 4.4, q.u)) : 0;
     if (i === q.k) { // the guests step down on the curb side, come out from behind the carriage and go up the carpet; a footman holds the door
       s.push(guest({x: DOOR + 70 - 30 * open, y: CURB - 4, h: 64, d: -1, coat: 'frock', wear: ['knickers'], cos: ['wig'], an: {fArm: [100 - 10 * open, 80]}}));
@@ -213,7 +252,7 @@ function arrivals(t, z) {
         s.push(`<g opacity="${f1(1 - smooth(0.9, 1, u))}">` + guest({...g, x: gx, y: gy, h: hh, d, an: walkAn(walkPhase(u * 200, hh))}, t) + '</g>');
       });
     }
-    s.push(brougham(x, ROAD, sz, MS.ink, x, open));
+    s.push(brougham(x, ROAD, sz, MS.ink, x, open, 1, v, t));
   }
   return s.join('');
 }
@@ -312,7 +351,7 @@ function departures(t) {
   s.push(figure({...cast('sister', {x, y, h: 75 * 0.85, d: 1}), det: 0, rim: {...MS.rim, a: 0.5}, pail: true,
     an: walking ? walkAn(walkPhase(up * 110, hs), {carry: true}) : {...POSES.stand(t, 0.2), tilt: t > 5.2 ? 8 : 0}}));
   s.push(`<rect x="-3000" y="${CURB}" width="9000" height="8" fill="#2B4744"/><rect x="${ax - 60}" y="${CURB + 8}" width="120" height="60" fill="#0E1A19"/>`);
-  for (let i = 0; i < 4; i++) { const x = DOOR + 2 * sz - 1150 + i * 520 + t * 60; s.push(brougham(x, ROAD, sz, MS.ink, x, 0, 0.3)); }
+  for (let i = 0; i < 4; i++) { const x = DOOR + 2 * sz - 1150 + i * 520 + t * 60; s.push(brougham(x, ROAD, sz, MS.ink, x, 0, 0.3, 0.25, t)); }
   return s.join('');
 }
 
@@ -460,7 +499,7 @@ function renderBall({t, cam = null, labels = false}) {
   const c = cam2(cam || chCam(t)), world = [];
   world.push(layerAt(c, 0.3, `<rect x="-3000" y="560" width="9000" height="3000" fill="#1C3332"/>` + stThomas(1700, 900, '#1C3332') + brownstones(-1400, -200, 380, 0.6, t, 7).replace(/#1C3332/g, '#1C3332')));
   world.push(layerAt(c, 1, `<rect x="-3000" y="${CH.fl.g}" width="9000" height="3000" fill="#0A1110"/><rect x="-3000" y="${CH.fl.g}" width="${3000 + CH.x0 - 14}" height="8" fill="#2B4744"/><rect x="${CH.x1 + 14}" y="${CH.fl.g}" width="4000" height="8" fill="#2B4744"/>` +
-    brougham(CH.x1 + 380, CH.fl.g, 62, MS.ink, 100) + gasLamp(CH.x1 + 120, CH.fl.g, 160, 1, t) + gasLamp(CH.x0 - 260, CH.fl.g, 160, 1, t) + chouse(t) + cpeople(t, c.z)));
+    brougham(CH.x1 + 380, CH.fl.g, 62, MS.ink, 100, 0, 1, 0, t) + gasLamp(CH.x1 + 120, CH.fl.g, 160, 1, t) + gasLamp(CH.x0 - 260, CH.fl.g, 160, 1, t) + chouse(t) + cpeople(t, c.z)));
   const scr = [tag(40, 1040, 'THE BALL · 660 FIFTH AVENUE · MARCH 26, 1883', 1)];
   if (labels) scr.push(chLabels(c));
   else {
