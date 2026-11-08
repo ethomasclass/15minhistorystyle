@@ -286,5 +286,7 @@ in, pushed by ordinary people: muckrakers, settlement houses, trust-busting, the
 | 5 Labor | How did workers fight for a bigger share, and what did it cost them? | ordinary people (unions) |
 | 6 Populism | Could ordinary Americans use politics to fight back? | ordinary people through the government |
 
-Each script asks its supporting question near 0:40 and closes with a line that feeds the compelling question; the classroom handout
-carries a three-column evidence chart (the rich / the government / ordinary people).
+**The videos never name the compelling question.** It belongs to the classroom (handout, discussion, summative task). Each
+script builds evidence for it implicitly: show who helped ordinary people, who didn't, and what it cost, and let students draw the
+line. A script may pose its own episode-level question, but never quotes the unit question or the three-way framing. The
+classroom handout carries a three-column evidence chart (the rich / the government / ordinary people).
