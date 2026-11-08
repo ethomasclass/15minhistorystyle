@@ -24,18 +24,19 @@ government did (nothing in this episode), what ordinary people did for each othe
 
 ### Inflation (for students): "today's money" figures
 
-CPI multiplier 1883 → 2026 taken as about **33x** (1883 CPI ≈ 9.6 on the 1982-84 = 100 back-series; 2026 ≈ 320). **Check the exact
-multiplier at MeasuringWorth before voicing**; the on-screen tags round generously so a small correction won't change them.
+CPI multiplier 1883 → 2026 is about **36x**: Minneapolis Fed CPI back-series (1967 = 100) gives 1883 = 28 (pre-1913 estimate)
+and 2026 = 1001.3 (estimate, Q3 2025 to Q3 2026); 1001.3 / 28 = 35.8. Checked Nov 8, 2026:
+https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1800- (MeasuringWorth not reached).
 
-| 1883 | Today (≈33x) | Where |
+| 1883 | Today (≈36x) | Where |
 |---|---|---|
-| the ball, ~$250,000 (reported) | about **$8 million** | ch 1, ch 3 |
-| champagne, ~$65,000 (reported) | about **$2 million** | ch 3 (on-screen tag only) |
-| Nora's pay, ~$3.60 a week | about **$120 a week**, for 70+ hours | ch 4 |
-| Michael's pay, under $2 a day | about **$60 a day** for 12 hours | ch 4 (on-screen tag) |
-| a cheap seat at the game | (no price until checked) | ch 6 |
+| the ball, ~$250,000 (reported) | about **$9 million** ($8.9M) | ch 1, ch 3 |
+| champagne, ~$65,000 (reported) | about **$2.3 million** | ch 3 (on-screen tag only) |
+| Nora's pay, ~$3.60 a week | about **$130 a week** ($129), for 70+ hours | ch 4 |
+| Michael's pay, under $2 a day | under **$70 a day** ($72 at exactly $2) for 12 hours | ch 4 (on-screen tag) |
+| a cheap seat at the game, 25 cents (AA; NL 50 cents, secondary) | about **$9** | ch 6 (tag only, if used) |
 
-On screen the tag reads `≈ $8 million today` in mono under the 1883 figure. Narration says "in today's money" once (ch 3), then lets
+On screen the tag reads `≈ $9 million today` in mono under the 1883 figure. Narration says "in today's money" once (ch 3), then lets
 the tags carry it. The wage comparison (maid-years) stays the main measure, because prices undersell the gap.
 
 ### Chapters
@@ -58,7 +59,7 @@ the tags carry it. The wage comparison (maid-years) stays the main measure, beca
 
 On a Monday night in March, 1883, more than a thousand people came to a party on Fifth Avenue. Nobody was allowed in wearing ordinary clothes.
 
-They came as kings. As queens. As cats, and birds, and stars. One woman came dressed as electricity, holding up a torch that actually lit up, powered by batteries hidden in her dress.
+They came as kings. As queens. As cats, and hornets, and stars. One woman came dressed as electricity, holding up a torch that actually lit up, powered by batteries hidden in her dress.
 
 Outside, a crowd packed the sidewalk just to watch them climb out of their carriages. The police had to push people back.
 
@@ -100,13 +101,13 @@ The guests had practiced dances for weeks, in groups called {quadrilles}. One gr
 
 These were the most powerful people in America.
 
-The woman with the torch was Alva's sister-in-law, Alice Vanderbilt, dressed as "The Electric Light." In white satin and diamonds. Electric lights had only just started lighting homes in New York. She wore the newest technology in the world, as a dress.
+The woman with the torch was Alva's sister-in-law, Alice Vanderbilt, dressed as "The Electric Light." In white satin and diamonds. Electric lights had only just come to New York. Most homes still used gas. She wore the newest technology in the world, as a dress.
 
-Supper came at two in the morning. The last dance ended at sunrise, and the guests went home as the lamplighters put out the street lamps.
+Supper came at two in the morning. The last dance ended at sunrise.
 
 The newspapers printed every costume, every flower, every name. Which was the point.
 
-The bill, as people reported it: about two hundred and fifty thousand dollars. In today's money, roughly eight million. A reported sixty-five thousand of it was champagne.
+The bill, as people reported it: about two hundred and fifty thousand dollars. In today's money, roughly nine million. A reported sixty-five thousand of it was champagne.
 
 For one night.
 
@@ -148,7 +149,7 @@ Historians later gave the idea a name: {Social Darwinism}. Though it's worth say
 
 In 1882, Spencer toured America, and the rich treated him like a rock star. They threw him a huge dinner at New York's fanciest restaurant. And in his speech, Spencer told them they worked too hard. Americans, he said, needed to relax more.
 
-Rich men cheered a speech about relaxing, at a dinner that cost more than their workers made in a year.
+Rich men cheered a speech about working less. Their workers were not invited.
 
 An American professor, William Graham Sumner, went further. In 1883, the same year as the ball, he wrote a book called *What Social Classes Owe to Each Other*.
 
@@ -221,28 +222,29 @@ Thanks for watching. Subscribe for more, and I'll see you next time.
 | Line | Status | Action |
 |---|---|---|
 | "more than a thousand" guests | MCNY 1,200, others ~1,000 | safe |
-| cats, birds, stars | Sun lists "stars" quadrille; cat costume (Kate Fearing Strong) is well known but unchecked | check the Sun page or Mora album |
+| cats, hornets, stars | **checked**: Kate Fearing Strong's cat (taxidermied head, white tails) and Lila Vanderbilt Webb's hornet, MCNY https://blog.mcny.org/2013/08/06/vanderbilt-ball-how-a-costume-ball-changed-new-york-elite-society/ ; "stars" quadrille per Sun. Bird costumes only weakly sourced (a "Goose", N-YHS photo via thewellesleynews.com), so "birds" changed to "hornets" | fixed |
 | ice cream from the cellar | Delmonico's sent the ices; Nora carrying them is invented | fine as composite |
 | $250,000 "reportedly"; $65,000 champagne "reported" | MCNY only | keep the hedges |
-| "roughly eight million" today | CPI ~33x | **check MeasuringWorth** |
-| left about $100 million | commonly cited | check (Britannica) |
+| "roughly nine million" today | **checked**: CPI 36x (Minneapolis Fed, 28 → 1001.3), $8.9M | fixed (was eight) |
+| left about $100 million; "more than almost anyone on Earth" | **checked**: Britannica, fortune "more than $100 million" https://www.britannica.com/money/Cornelius-Vanderbilt-1794-1877 ; richest American of his lifetime (encyclopedia.com). World ranking not sourced but plausible as "almost anyone" | safe |
 | Mrs. Astor's advisor (McAllister), "400", 1888 quote paraphrased | secondary | fine as paraphrase; "later" covers the date |
 | hobby horses down the grand staircase | Sun, primary | safe |
-| supper at 2, final dance at sunrise | MCNY | safe |
+| supper at 2, final dance at sunrise | **checked**: MCNY (supper 2 a.m., final Virginia reel at sunrise). Lamplighters clause had no source | lamplighters clause cut |
 | servants pooled into one kitchen | Sun, primary | safe |
 | >10 hours, some 14, one afternoon + part of Sunday | Salmon 1897 (1889-90 data) | safe as "most days" |
 | $3.60 a week | Salmon, Eastern average | safe |
 | >1,300 years | $250,000 / $187 | safe |
 | Vikings line | Norse in North America about 1000 AD; 1883 − 1,335 = 548 AD, so "before the Vikings" holds | safe |
-| Spencer coined "survival of the fittest" after reading Darwin | standard | check Britannica |
-| Delmonico's banquet, "relax" speech | secondary; wording varies | paraphrase only (as written) |
-| "cost more than their workers made in a year" | **not sourced** | find the banquet's per-plate cost or cut the clause |
+| Spencer coined "survival of the fittest" after reading Darwin | **checked**: Principles of Biology (1864), written after reading Origin, https://en.wikipedia.org/wiki/Herbert_Spencer ; Smithsonian https://www.smithsonianmag.com/science-nature/herbert-spencer-survival-of-the-fittest-180974756/ | safe |
+| Delmonico's banquet, "relax" speech | **checked**: farewell banquet Nov 9, 1882; Spencer said there had been "too much of the gospel of work" and it was time to preach "the gospel of relaxation" (Appleton 1883, *Herbert Spencer on the Americans*, https://archive.org/details/herbertspenceron00newy ; Popular Science Monthly v.22). Full text not fetched (archive.org 404 / McMaster blocked) | paraphrase as written |
+| "cost more than their workers made in a year" | **false as worded**: no per-plate figure found; Delmonico's subscription banquets ran $12 to $15 a head (Grolier Club, https://grolierclub.omeka.net/exhibits/show/dining-out/gilded-age ), far below a year's wage (~$187 for a maid) | **cut**; replaced with "Their workers were not invited." |
+| Electric Light line | **checked**: Pearl Street opened Sept 4, 1882, mostly offices (59 to 82 customers at first, 513 a year later) https://en.wikipedia.org/wiki/Pearl_Street_Station | reworded: "had only just come to New York. Most homes still used gas." |
 | Sumner 1883 title and quote | Gutenberg text, primary | safe |
-| A, B, C, D and the Forgotten Man | Gutenberg text, primary ("A and B decide what C shall do for D"); the explainer's on-screen fuller wording "put their heads together..." must be checked against the Gutenberg text | check on-screen quote |
-| AA: Sunday games in some cities, beer, "Beer and Whiskey League" | SABR/secondary | safe; no ticket price |
+| A, B, C, D and the Forgotten Man | **checked** Gutenberg #18603 https://www.gutenberg.org/ebooks/18603 : ch. 1 "that A and B decide what C shall do for D"; ch. 9 "A and B put their heads together to decide what C shall be made to do for D... I call C the Forgotten Man." Description: "an honest, sober, industrious citizen, unknown outside his little circle, paying his debts and his taxes" | on-screen quote must read "...what C shall **be made to** do for D" |
+| AA: Sunday games in some cities, beer, "Beer and Whiskey League" | **checked**: SABR https://sabr.org/gamesproj/game/may-2-1882-the-beer-and-whiskey-league-day-one/ (beer and Sunday games, both NL-banned; nickname). 25 vs 50 cents: Wikipedia/secondary only | safe; "cheaper seats" stays unpriced in narration |
 | Brooklyn in the AA from 1884 | so the ballgame is 1884+, a year after the ball | on-screen date tag "1884" |
-| polo, Newport tennis, yachts | standard, unchecked | check before voicing |
+| polo, Newport tennis, yachts | **checked**: Bennett brought polo from England 1876 (Westchester Polo Club, NYC); first U.S. national lawn tennis championships at Newport Casino 1881 https://en.wikipedia.org/wiki/Newport_Casino ; America's Cup defences 1881, 1885, 1886, 1887 (general knowledge, no URL fetched) | safe |
 | "Wealth" 1889, quotes | primary | safe |
 | ~1,700 US / ~2,500 world libraries | secondary | safe as rounded |
-| mill workers' 12-hour days | standard for Carnegie steel | safe |
+| mill workers' 12-hour days; Carnegie 53 in 1889 | **checked**: Edgar Thomson went back to 12-hour shifts 1887-88; 12-hour shift customary by 1890 (Yale teachers unit https://teachers.yale.edu/curriculum/units/2015/3/10/4 ). Born Nov 25, 1835, so 53 when "Wealth" ran (June 1889) | safe |
 | rags-to-riches studies | Gregory and Neu, no percentage | wording safe as written |

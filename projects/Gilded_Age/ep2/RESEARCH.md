@@ -264,6 +264,23 @@ Empire set off the big Jewish migration, so an 1883 to 1884 arrival is plausible
 | First U.S. library | Braddock dedicated 1889; Allegheny commissioned 1886 | "his first American library, in a steel town near Pittsburgh, 1889" |
 | Gregory and Neu percentages | citation confirmed, numbers not | no percentage until the article is read |
 
+### 6a. Fact-check results (Nov 8, 2026)
+
+| Item | Verdict | Source |
+|---|---|---|
+| CPI 1883 → 2026 | ~36x (28 → 1001.3, 1967 = 100; both estimates). $250,000 ≈ $8.9M; $65,000 ≈ $2.3M; $3.60/wk ≈ $129; $2/day ≈ $72 | https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1800- |
+| Spencer banquet cost | no per-plate figure found; Delmonico's subscription banquets $12 to $15 a head, so "cost more than their workers made in a year" is false; cut | https://grolierclub.omeka.net/exhibits/show/dining-out/gilded-age |
+| "gospel of relaxation" | Spencer: too much "gospel of work", time to preach "the gospel of relaxation" (banquet Nov 9, 1882; Appleton 1883 volume; full text not fetched) | https://archive.org/details/herbertspenceron00newy |
+| Cat / bird costumes | cat confirmed (Kate Fearing Strong, "Puss"); hornet (Lila Vanderbilt Webb) confirmed; birds weak (one "Goose" photo) | https://blog.mcny.org/2013/08/06/vanderbilt-ball-how-a-costume-ball-changed-new-york-elite-society/ |
+| Commodore ~$100M | confirmed, richest American of his lifetime | https://www.britannica.com/money/Cornelius-Vanderbilt-1794-1877 |
+| "Survival of the fittest" | Principles of Biology 1864, after reading Darwin | https://en.wikipedia.org/wiki/Herbert_Spencer |
+| Polo / tennis / yachts | Bennett, polo from England 1876; Newport Casino first U.S. championships 1881; America's Cup defences 1881-87 | https://en.wikipedia.org/wiki/Newport_Casino |
+| Sumner A, B, C, D | ch. 1: "A and B decide what C shall do for D"; ch. 9: "A and B put their heads together to decide what C shall be made to do for D"; Forgotten Man "an honest, sober, industrious citizen, unknown outside his little circle, paying his debts and his taxes" | https://www.gutenberg.org/ebooks/18603 |
+| AA | beer, Sunday games, nickname confirmed (SABR); 25 vs 50 cents secondary only | https://sabr.org/gamesproj/game/may-2-1882-the-beer-and-whiskey-league-day-one/ |
+| Electric light in homes | Pearl Street (Sept 1882) served mostly offices; reworded to "only just come to New York" | https://en.wikipedia.org/wiki/Pearl_Street_Station |
+| Carnegie 12-hour days, age 53 | 12-hour shifts restored at Edgar Thomson 1887-88, customary by 1890; age 53 in June 1889 correct | https://teachers.yale.edu/curriculum/units/2015/3/10/4 |
+| Supper 2 a.m., sunrise reel | confirmed (MCNY); "lamplighters" detail unsourced, cut | MCNY blog above |
+
 ## 7. Pronunciation
 
 | Word | Say it |
