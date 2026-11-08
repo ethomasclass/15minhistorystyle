@@ -2,7 +2,7 @@
 EDITS.ch06 = () => {
   const ch = 'ch06_the_con_mans_son', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
   const c = {
-    father: w('His', 1) - 0.25, vanish: w('He', 2) - 0.25, mother: w('So', 1) - 0.25, turkey: w('As') - 0.25, book: w('At', 2) - 0.25,
+    father: w('His', 1) - 0.25, photo: w('Even') - 0.3, vanish: w('He', 2) - 0.25, mother: w('So', 1) - 0.25, turkey: w('As') - 0.25, book: w('At', 2) - 0.25,
     oil: w('Then', 1) - 0.3, drops: w('He', 5) - 0.3, rivals: w('Then', 2) - 0.3, squeeze: w('Cheaper') - 0.3, cleve: w('In', 3) - 0.3,
     mono: w('By', 2) - 0.3, trust: w('To', 7) - 0.3,
   };
@@ -54,16 +54,51 @@ EDITS.ch06 = () => {
       op(fin(T, w('refuse')), pen("an offer they couldn't really refuse", {x: 520, y: 880, size: 50, rot: -2, color: C.orange}));
   }
 
+  /** A farm-town street at dusk, upstate New York, 1840s: his father (a silhouette: no photo of this) sells bottles of "cure" off
+   *  the back of his wagon to a small crowd, then drives off. */
+  function medicine(T) {
+    const G = 900, u = (T - c.father) / (c.photo - c.father), s = [];
+    s.push(`<defs>${MAT_DEFS}<linearGradient id="msky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E3336"/><stop offset=".65" stop-color="#5E7C76"/><stop offset="1" stop-color="#B9C4B2"/></linearGradient></defs>`);
+    s.push(`<rect width="1920" height="1080" fill="url(#msky)"/>`);
+    s.push(`<path d="M0,690 Q300,610 620,660 T1240,640 T1920,670 L1920,1080 L0,1080 Z" fill="#3E5A55"/><path d="M0,760 Q400,700 900,740 T1920,730 L1920,1080 L0,1080 Z" fill="#2C4440"/>`);
+    // false-front wooden stores
+    [[80, 360, 300], [420, 300, 260], [1380, 340, 300], [1700, 380, 240]].forEach(([x, top, w], i) => {
+      s.push(MAT.planks(x, G - (G - top), w, G - top, {base: ['#2B3A36', '#26332F', '#2E3E3A', '#24312D'][i], seed: 300 + i, size: 14, vertical: true}));
+      s.push(`<rect x="${x - 6}" y="${top - 6}" width="${w + 12}" height="12" fill="#151E1C"/><rect x="${x + w * 0.25}" y="${G - 190}" width="${w * 0.22}" height="190" fill="#111816"/>
+        <rect x="${x + w * 0.58}" y="${G - 170}" width="${w * 0.3}" height="90" fill="#C9B98A" opacity="${(0.25 + 0.2 * Math.sin(T * 2 + i)).toFixed(2)}"/>`);
+    });
+    s.push(`<rect x="0" y="${G}" width="1920" height="180" fill="#0D0C09"/>` + MAT.ground(0, 1920, G, {seed: 64}));
+    // the wagon, a covered medicine-show box wagon; it rolls off at the end
+    const wx = 860 + 900 * ease(clamp01((T - (c.photo - 1.0)) / 1.2));
+    s.push(`<g transform="translate(${wx.toFixed(1)},0)"><rect x="-200" y="${G - 300}" width="400" height="210" fill="#1A1714"/>
+      <path d="M-210,${G - 300} Q0,${G - 380} 210,${G - 300} Z" fill="#14110F"/><rect x="-170" y="${G - 260}" width="340" height="120" fill="#2A2420" stroke="#4A3F33" stroke-width="5"/>
+      ${[-130, 130].map((dx) => `<circle cx="${dx}" cy="${G - 52}" r="56" fill="none" stroke="#0A0908" stroke-width="12"/>` + Array.from({length: 8}, (_, k) => { const a = k * Math.PI / 4 + (wx - 860) / 56;
+        return `<line x1="${dx}" y1="${G - 52}" x2="${(dx + Math.cos(a) * 52).toFixed(1)}" y2="${(G - 52 + Math.sin(a) * 52).toFixed(1)}" stroke="#0A0908" stroke-width="6"/>`; }).join('')).join('')}
+      <rect x="-210" y="${G - 96}" width="420" height="14" fill="#0A0908"/></g>`);
+    // his father on the tailboard, holding up a bottle; the crowd
+    const raise = 0.5 + 0.5 * Math.sin(T * 2.2);
+    if (wx < 1500) s.push(figure({x: wx - 230, y: G - 82, h: 320, d: -1, kind: 'man', hat: 'top', coat: 'frock', fill: '#0A0908', prop: 'bottle',
+      rim: {c: '#E8D9B8', a: 0.55, dx: -0.006, dy: -0.004}, an: {fArm: [48 - 22 * raise, 20 - 18 * raise], bArm: [196, 204], tilt: 8, lean: 2}}));
+    const r = rng(611);
+    for (let i = 0; i < 8; i++) { const x = 70 + i * 66 + (r() - 0.5) * 24, kind = ['man', 'woman', 'man', 'boy', 'woman', 'man', 'girl', 'man'][i];
+      s.push(figure({x, y: G + 40 + (i % 2) * 22, h: (kind === 'boy' || kind === 'girl') ? 200 : 290 + (r() - 0.5) * 20, d: 1, kind, hat: kind === 'woman' ? (i % 2 ? 'kerchief' : 'lady') : kind === 'man' ? ['bowler', 'cap', 'none'][i % 3] : 'none',
+        coat: kind === 'woman' ? 'frock' : 'jacket', fill: '#121110', rim: {c: '#E8D9B8', a: 0.4, dx: -0.006, dy: -0.004}, an: {tilt: 10 + 3 * Math.sin(T + i), bob: 0.004 * Math.sin(T * 1.3 + i)}})); }
+    return `<div style="position:absolute;inset:0;transform:scale(${(1 + 0.05 * ease(u)).toFixed(4)});transform-origin:900px 700px">${svg(s.join(''))}</div>` +
+      op(fin(T, c.father + 0.3), mono('his father, selling &ldquo;cures&rdquo; &middot; no photo', {x: 44, y: 1020, size: 22, extra: 'background:rgba(13,12,9,.7);padding:6px 12px'})) +
+      op(fin(T, w('almost')), pen('"cures almost anything"', {x: 1060, y: 200, size: 54, rot: -4, color: C.orange}));
+  }
+
   const shots = [
     // 1. "John D. Rockefeller grew up on farms in upstate New York."
     {a: 0, b: c.father, draw: (T) => backdrop(T, 0, c.father) +
       deskCut('desk/rockefeller_birthplace.png', {x: 320, y: 170, w: 1280, rot: -1.2, o: fin(T, 0.1, 0.6), T}) + `</div>` +
       stamp('richford, new york &middot; birthplace', fin(T, w('farms')))},
-    // 2. His father and the medicine: "could cure almost anything. Even cancer. It couldn't."
-    {a: c.father, b: c.vanish, draw: (T) => backdrop(T, c.father, c.vanish) +
-      deskCut('desk/rockefeller_father_bust.png', {x: 200, y: 200, w: 540, rot: -2, o: fin(T, c.father + 0.1, 0.6), T, caption: 'william avery rockefeller, his father', cx: 0}) +
-      deskProp('p06_medicine_bottle', {x: 1080, y: 160, w: 300, rot: 4, o: fin(T, w('medicine'), 0.5), T}) + `</div>` +
-      op(fin(T, w('almost')), pen('"cures almost anything"', {x: 1180, y: 830, size: 46, rot: -4, color: C.orange})) +
+    // 2a. The medicine show: his father sells bottles off the back of his wagon (a drawn scene: no photo of this).
+    {a: c.father, b: c.photo, draw: (T) => medicine(T)},
+    // 2b. His father as his real photograph, and the bottle: "Even cancer. It couldn't."
+    {a: c.photo, b: c.vanish, draw: (T) => backdrop(T, c.photo, c.vanish) +
+      deskCut('desk/rockefeller_father_bust.png', {x: 200, y: 200, w: 540, rot: -2, o: fin(T, c.photo + 0.05, 0.4), T, caption: 'william avery rockefeller, his father', cx: 0}) +
+      deskProp('p06_medicine_bottle', {x: 1080, y: 160, w: 300, rot: 4, o: fin(T, c.photo + 0.2, 0.4), T}) + `</div>` +
       op(fin(T, w('Even')), pen('even cancer!', {x: 1400, y: 300, size: 52, rot: -6, color: C.orange})) +
       op(fin(T, w("couldn't", 1)), tape("IT COULDN'T.", {x: 820, y: 640, size: 80, rot: -4, seed: 85}))},
     // 3. "He vanished for months ... a second wife under a fake name. Not exactly father of the year."
