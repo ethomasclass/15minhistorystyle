@@ -86,7 +86,7 @@ function waiter(x, y, h, d, t, pour = 0) { const an = pour ? {fArm: [100 - 20 * 
   s += pour ? `<rect x="${f1(hx - 5)}" y="${f1(hy - 30)}" width="10" height="34" rx="2" fill="#1F3735" transform="rotate(${f1(d * 70 * pour)}, ${f1(hx)}, ${f1(hy)})"/>` :
     `<ellipse cx="${f1(hx)}" cy="${f1(hy - 4)}" rx="${f1(0.16 * h)}" ry="4" fill="#C9C2A8"/><path d="M${f1(hx - 0.1 * h)},${f1(hy - 6)} q${f1(0.1 * h)},${f1(-0.12 * h)} ${f1(0.2 * h)},0 Z" fill="#C9C2A8"/>`;
   return s; }
-function renderBanquet(t) {
+function renderBanquet(t, quiet = false) {
   const c = cam2(camAt([[0, 0.9, 900, 540], [6, 1.0, 2000, 540], [10, 1.5, 2380, 600]], t)), G = 900, toast = smooth(5.6, 6.2, t), smokeOp = smooth(6.2, 8.2, t);
   const room = [], back = [], front = [];
   // walls: panelled, flat gilt-framed mirrors between square-headed windows with draped curtains and tassels
@@ -131,6 +131,7 @@ function renderBanquet(t) {
     [0, 1, 2, 3].map((k) => `<rect x="1400" y="${380 + k * 30}" width="${220 - k * 30}" height="6" fill="#111" opacity="0.25"/>`).join('') + '</g>');
   if (t > 4.2 && t < 6.5) scr.push(penS(1180, 140, 'about 200 rich men', 34, -3));
   if (t > 6.5) scr.push(penS(1180, 140, 'his advice: relax more', 36, -3), tag(1200, 220, 'HERBERT SPENCER', smooth(6.5, 7, t)));
+  if (quiet) scr.splice(1);   // keep the place tag; the edit times its own notes
   return frame(msDefs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), t);
 }
 
@@ -221,7 +222,7 @@ function renderLibrary(t) {
 }
 
 /* ================= ch4: Nora's attic room ================= */
-function renderAttic(t) {
+function renderAttic(t, quiet = false) {
   const c = cam2(camAt([[0, 0.92, 960, 540], [9, 1.12, 900, 580]], t)), G = 900, m = [], ring = t > 4.6 && t < 7.2 ? 1 : 0;
   const fl = 0.84 + 0.1 * Math.sin(t * 6.1) + 0.06 * Math.sin(t * 15.3);
   // the room: plaster walls, the roof sloping down on the right, a small dormer window with the night sky, bare boards
@@ -252,6 +253,7 @@ function renderAttic(t) {
   if (t > 1 && t < 4.6) scr.push(penS(1150, 140, 'up the back stairs, under the roof', 30, -3));
   if (ring) scr.push(penS(140, 140, 'the bell: someone downstairs wants something', 30, -3));
   if (t > 7.4) scr.push(penS(1180, 140, 'on call, day and night', 34, -3));
+  if (quiet) scr.splice(1);   // keep the place tag, drop the notes (the edit times its own)
   return frame(msDefs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, layerAt(c, 1, m.join('')), scr.join(''), t);
 }
 

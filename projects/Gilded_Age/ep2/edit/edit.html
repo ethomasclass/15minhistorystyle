@@ -46,7 +46,10 @@
     document.getElementById('A').innerHTML = f.a;
     const b = document.getElementById('B');
     b.innerHTML = f.b || ''; b.style.opacity = f.b ? f.mix : 0;
-    document.getElementById('C').innerHTML = f.c || '';
+    const C = document.getElementById('C'); C.innerHTML = f.c || '';
+    // keep only the text of carried shots: drop their pictures (and their duplicate SVG ids), keep the wrappers' opacity
+    C.querySelectorAll('svg, img').forEach((el) => { if (!el.closest('.tx')) el.remove(); });
+    C.querySelectorAll('div').forEach((el) => { if (el.closest('.tx')) return; if (!el.querySelector('.tx')) el.remove(); else { el.style.background = 'none'; el.style.filter = 'none'; } });
     return document.fonts.ready.then(() => Promise.all([...document.images].map((im) => im.complete ? 1 : new Promise((r) => { im.onload = im.onerror = r; })))).then(safe);
   };
   // Title-safe pass: nudge every text element (.tx) back inside 96 px left/right, 54 px top/bottom. Full-width centred lines are
@@ -57,8 +60,8 @@
     for (const el of document.querySelectorAll('#stage .tx')) {
       if (el.parentElement.closest('.tx')) continue;
       el.style.translate = '';
-      let r = el.getBoundingClientRect();
-      if (r.width > 1700) { const rg = document.createRange(); rg.selectNodeContents(el); r = rg.getBoundingClientRect(); }
+      const rg = document.createRange(); rg.selectNodeContents(el); const t = rg.getBoundingClientRect(), bx = el.getBoundingClientRect();
+      const r = bx.width > 1700 ? t : {left: Math.min(t.left, bx.left), right: Math.max(t.right, bx.right), top: Math.min(t.top, bx.top), bottom: Math.max(t.bottom, bx.bottom), width: bx.width};
       if (!r.width) continue;
       let dx = 0, dy = 0;
       if (r.right > SAFE.x1) dx = SAFE.x1 - r.right; if (r.left + dx < SAFE.x0) dx = SAFE.x0 - r.left;
