@@ -1,5 +1,5 @@
 // Episode 2, the rest of the sets (load after mansion.js). Same rules: real people are silhouettes with no face detail; coral only
-// for the Kellys (Nora Kelly, 17, the maid); teal explains; orange is handwriting.
+// for the Kellys (Nora Kelly, 18, the maid); teal explains; orange is handwriting.
 //
 //   fittest_explainer  ch5  "Survival of the fittest" as a moving teal diagram: moths on sooty bark (fit = suited), a cockroach,
 //                           society drawn as the pyramid the theory claimed sorts people, then Sumner's A, B, C and D.

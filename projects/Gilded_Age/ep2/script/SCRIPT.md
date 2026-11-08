@@ -20,7 +20,7 @@ government did (nothing in this episode), what ordinary people did for each othe
 
 | Character | Voice | Direction |
 |---|---|---|
-| **Nora Kelly**, 17 (composite; Michael's sister, born in County Cork, live-in maid) | to generate in ElevenLabs: young Irish woman, Cork accent, quick, dry, tired but not sorry for herself | light cues allowed (`[whisper]`, `[tired]`) |
+| **Nora Kelly**, 18 (composite; Michael's sister, born in County Cork, live-in maid) | to generate in ElevenLabs: young Irish woman in her early twenties (an adult voice; ElevenLabs blocks designs described as under 18), Cork accent, quick, dry, tired but not sorry for herself | light cues allowed (`[whisper]`, `[tired]`) |
 
 ### Inflation (for students): "today's money" figures
 
@@ -63,7 +63,7 @@ They came as kings. As queens. As cats, and hornets, and stars. One woman came d
 
 Outside, a crowd packed the sidewalk just to watch them climb out of their carriages. The police had to push people back.
 
-And downstairs, in the kitchen, a seventeen-year-old girl was carrying ice cream up from the cellar.
+And downstairs, in the kitchen, an eighteen-year-old girl was carrying ice cream up from the cellar.
 
 **NORA:** [whisper] Don't drop it. Don't drop it. Don't drop it.
 
