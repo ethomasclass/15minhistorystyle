@@ -9,8 +9,14 @@ SHEETS = {
   's4_dawn': (['s4_dawn_wide', 's4_dawn_leaving', 's4_dawn_sister'], ['s4_fifth_ave_night/fifth_ave_vanderbilt_mansions_1904.jpg', 's4_fifth_ave_night/up_fifth_ave_home_of_rich_c1903.jpg']),
   's5_ballpark': (['s5_park_wide', 's5_park_swing', 's5_park_hit'], ['s5_baseball/polo_grounds_new_york_1887.jpg', 's5_baseball/brooklyn_bridegrooms_1888.jpg']),
   's8_kelly_flat': (['s8_flat_wide', 's8_flat_enter', 's8_flat_wages'], ['s8_tenement/riis_bohemian_cigarmakers_tenement_c1889.jpg', 's8_tenement/riis_italian_flat_c1889.jpg', 's8_tenement/riis_gotham_court_flat_c1890.jpg']),
+  'ch6_rich_leisure': (['ch6_leisure_tennis', 'ch6_leisure_polo', 'ch6_leisure_yachts'], ['s6_rich_leisure/mayflower_galatea_start_1886.jpg', 's6_rich_leisure/yacht_race_puritan_genesta_buoy_1886.jpg']),
+  'ch7_carnegie_library': (['ch7_library_outside', 'ch7_library_arrive', 'ch7_library_reading'], ['s7_carnegie_library/braddock_library_addition_1893.jpg', 's7_carnegie_library/allegheny_carnegie_library_1905.jpg', 's7_carnegie_library/braddock_library_gymnasium_1893.jpg']),
+  'ch4_nora_attic': (['ch4_attic_sits', 'ch4_attic_bell', 'ch4_attic_up'], ['s3_below_stairs/merchants_house_1943_a.jpg', 's3_below_stairs/merchants_house_1943_b.jpg']),
 }
+import sys
+only = sys.argv[1:]
 for name, (ours, refs) in SHEETS.items():
+    if only and name not in only: continue
     tw, th, W = 760, 428, 20
     rh = 428
     left = len(ours)

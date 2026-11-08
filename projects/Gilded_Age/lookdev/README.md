@@ -204,3 +204,31 @@ Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume 
   hoof's sweep while planted (checked numerically: a planted hoof's x holds to 0.1 px across frames); wheels turn at
   distance / radius; the body bobs and rocks on elliptic springs with speed; carriages ease into the canopy and away; standing
   horses rest a hind leg and toss their heads; the coachmen sway.
+
+## Round 12: the rest of Episode 2
+
+`ep2_more.js` (loaded after `mansion.js`). The sister is now **Nora Kelly, 17**. Five clips, 720p in `review/ep2/`, three stills each.
+
+- **`fittest_explainer` (ch5, 10 s).** A moving teal diagram in three beats. Nature: a sooty trunk, two dark moths hidden on it, a
+  pale one that shows; a bird takes the pale one ("fit" means suited, not best); a cockroach scuttles past ("a cockroach is very
+  fit"). The claim: society as a pyramid of silhouettes (top hats at the top, caps and shawls at the base), a teal arrow ("the
+  strongest rise", "the weak fall") and the index card "Social Darwinism". Sumner, 1883: A and B (top hats) put their heads
+  together, an arrow points at C (bowler, orange letter, "the Forgotten Man", the ordinary taxpayer), who hands a coin to D. The
+  quote on screen is from *What Social Classes Owe to Each Other*: "A and B put their heads together to decide what C shall be made
+  to do for D."
+- **`spencer_banquet` (ch5, 9 s).** Delmonico's, November 9, 1882: a long table in white with candelabra, a far row of diners in
+  evening dress, a near row with their backs to us, arched mirrors and a row of gas chandeliers, waiters. The camera tracks to the
+  head of the table, where Spencer (a silhouette with side whiskers, no face) stands and speaks; the room raises its glasses. "his
+  advice: relax more."
+- **`rich_leisure` (ch6, 10 s).** One side-scroll: a Newport shingle-style cottage with a veranda and tower, lawn tennis (a woman
+  in a bustled dress, a man in flannels and cap, underarm strokes, a net), onlookers with parasols; polo, four riders cantering
+  (the planted-hoof horse) with mallets swinging; then the water, three racing cutters heeling under huge gaff mainsails, topsails
+  and jibs, after the 1886 America's Cup photographs.
+- **`carnegie_library` (ch7, 9 s).** The Carnegie Free Library at Braddock (opened 1889) after the 1893 photograph: rough stone,
+  a round corner tower with a conical roof, steep gables, arched windows lit, an arched door; mill chimneys smoking beyond; workers
+  and a boy walking up. Dissolve to the reading room: shelves of books, warm lamps on long tables, working men with newspapers, a
+  boy reading, the librarian at her desk. "free to anyone."
+- **`nora_attic` (ch4, 9 s).** Nora's room at the top of 660 Fifth Avenue: the roof sloping in, a small dormer with the night sky,
+  bare boards, an iron bed, a washstand with pitcher and basin, one candle on a chair, her uniform (black dress, white apron and
+  cap) on a hook. Nora (coral) sits on the bed; the call bell on its spring rings (teal ring marks), and she gets up. "on call, day
+  and night." The room's details are typical of servants' attic rooms, not from a plan of this house (no attic plan found).
