@@ -214,3 +214,14 @@ Code: [`components/diamond_hoax/`](components/diamond_hoax/) (README lists every
 - **Flow "tobacco card" prints (Black Sox).** A flat five-ink baseball-card illustration style in channel colours was written up as an alternative to painterly AI images, then not used (no AI images this video). Prompts and the style paragraph are in `examples/07_Say_It_Aint_So/PROMPTS.md`.
 - **The ambush engraving (The Exact Spot).** A Flow engraving of dragoons crowded inside a ranch fence with lancers around them. You asked why they were inside a fence; it read as a pen, not a trap. Replaced with the map plus a drawn diagram.
 - **Oil-painting AI images (The Exact Spot).** The first image plan (`GEMINI_PROMPTS.md`) used the Bingham/Mount oil style. It was replaced by Flow wood engravings, which sit better beside real 1840s prints.
+
+## Code-drawn worlds (the Gilded Age series, Nov 2026)
+
+Scenes drawn entirely in code (SVG), a reusable figure rig, materials, and chapters cut on the narration's word timings by a
+small HTML/Playwright editor; desk shots step at 12 drawings a second, scenes stay smooth. The kit is in
+`projects/Gilded_Age/lookdev/` (sets, `rig.js`, `RIG.md`) and `projects/Gilded_Age/ep1/edit/` (the editor, README); the method
+and its mistakes are in the skill's [`code-drawn-series.md`](../.claude/skills/15-minute-history/references/code-drawn-series.md).
+Highlights worth reusing: the cut-away building with a camera push into one flat (tenement), the factory cut through along the
+product's path (refinery), x-ray explainers (Bessemer converter, cable cross-section with the extra wires), the vertical and
+horizontal integration side-scrolls, the price-squeeze chart, the swap diagram, station clocks set from longitude, aged bust
+cut-outs (`tools/bust_cut.py`), and the Chunk intro merged with the title card.

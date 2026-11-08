@@ -253,6 +253,16 @@ column says where each was made.
   elevation ribbon. Drawn teal 3D, never photoreal. Say "heights exaggerated" on screen when they are. **From real data where it
   exists** (*The Balloon War* v2: the jet stream from NOAA's January 1945 reanalysis winds, real terrain heights, the 285 recorded
   landings), with one coral element and the source on screen; the kit is the template's `src/fx/`.
+- **Gilded Age series (Nov 2026), new calls:**
+  - **Desk motion steps at 12 drawings a second; animated scenes stay smooth** ("to keep the handmade look we typically have"):
+    photos, props, tape, handwriting, cards and drawn explainers move on 12; the code-drawn scenes run at 30.
+  - **Music beds 17 LU under the voice** for this series (asked for lower twice after the 13 LU rough mix).
+  - **No whooshes or strong sound effects.** The Chunk History intro's clicks are the only branding sound.
+  - **The Chunk intro and the episode title are one card**, the intro sped to 1.4x so viewers aren't lost (about 4.2 s).
+  - **The narrator (you) stays fairly even, little emotion; characters get their own ElevenLabs voices** (you make them from prompts).
+  - **Character lines must match the picture** (Michael "can see the whole river from up here" while standing on the ground: fixed).
+  - **No white borders on any image**, prints and cut-outs alike; cut-outs get aging and a shadow for depth.
+  - Spec and worked example: the skill's `references/code-drawn-series.md`, `projects/Gilded_Age/ep1/edit/`.
 - **Silhouette scenes: one palette for the whole video, locked to the channel** (*The Balloon War* v2, Nov 2026; replaces the
   Diamond Hoax's palette per mood, which read as eleven different films next to the desk): ink foreground, teal-slate haze, cream
   light, coral only on the scene's subject; time of day is the only variation. **Figures are one solid black shape**: no faces, no

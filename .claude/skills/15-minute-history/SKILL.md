@@ -152,6 +152,8 @@ renders/     720p video, thumbnails, (LFS) 1080p master
   `python3 tools/youtube_check.py`.
 - "Handout / viewing guide / questions for the video": `references/classroom-handout.md`. Keep it simple.
 - "Make Shorts": `references/shorts.md`. Native vertical, hook first, only the video's own assets.
+- "A recurring drawn world" / "scenes drawn in code" / anything in the Gilded Age series: `references/code-drawn-series.md` (SVG sets and
+  rig, chapters cut to word timings, bust cut-outs, 12-a-second desk motion, character voices, the intro + title card).
 - "Plan a series" / "a multi-part video": `references/script-writing.md` §10 (one arc every episode follows, a unit question,
   a recurring card, hinge years, a callback table). Worked example: `projects/American_West/SERIES.md` and its episode outlines
   in the style repo; `projects/Reconstruction/` for a series built around the collage board.
