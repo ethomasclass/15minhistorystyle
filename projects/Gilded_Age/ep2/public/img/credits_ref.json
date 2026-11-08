@@ -225,5 +225,154 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2012645506/",
     "source": "loc:2012645506"
+  },
+  "ref/s5_baseball/polo_grounds_new_york_1887.jpg": {
+    "title": "The polo grounds. New York",
+    "artist": "",
+    "date": "1887",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003673069/",
+    "source": "loc:2003673069"
+  },
+  "ref/s5_baseball/x_fans_brooklyn_ball_grounds.jpg": {
+    "title": "\"Fans\" crowd at Brooklyn ball grounds",
+    "artist": "",
+    "date": "1908-01-01",
+    "licence": "No known restrictions on reproduction.",
+    "page": "https://www.loc.gov/item/2001704357/",
+    "source": "loc:2001704357"
+  },
+  "ref/s4_fifth_ave_night/fifth_ave_sunday_crowd_53rd_c1907.jpg": {
+    "title": "The Sunday noonday crowd on Fifth Ave., looking north from 53rd St., New York",
+    "artist": "H.C. White Co.",
+    "date": "1907-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003670973/",
+    "source": "loc:2003670973"
+  },
+  "ref/s4_fifth_ave_night/fifth_ave_vanderbilt_mansions_1904.jpg": {
+    "title": "Fifth Avenue and Vanderbilt Mansions, New York City, U. S. A.",
+    "artist": "American Stereoscopic Company",
+    "date": "1904-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2017659013/",
+    "source": "loc:2017659013"
+  },
+  "ref/s4_fifth_ave_night/up_fifth_ave_home_of_rich_c1903.jpg": {
+    "title": "Up 5th Ave., the home of the rich, from Madison Square, New York City",
+    "artist": "",
+    "date": "1903-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/95517665/",
+    "source": "loc:95517665"
+  },
+  "ref/s8_tenement/riis_italian_flat_c1889.jpg": {
+    "title": "Italian Flat in South 5th Ave.",
+    "artist": "Riis, Jacob A. (Jacob August), 1849-1914, photographer",
+    "date": "1889",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002710295/",
+    "source": "loc:2002710295"
+  },
+  "ref/s8_tenement/riis_gotham_court_flat_c1890.jpg": {
+    "title": "Sewing pants for the trade in a Gotham Court \"flat,\" about 1890",
+    "artist": "Riis, Jacob A. (Jacob August), 1849-1914, photographer",
+    "date": "1890",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002710299/",
+    "source": "loc:2002710299"
+  },
+  "ref/s2_ball/mrs_charles_walsh_costume_mora_1883.jpg": {
+    "title": "File:Mrs. Charles Walsh 1883 Costume Ball.jpg",
+    "artist": "photographed by Jose Maria Mora",
+    "date": "1883-03-26",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Mrs._Charles_Walsh_1883_Costume_Ball.jpg"
+  },
+  "ref/s8_tenement/riis_bohemian_cigarmakers_tenement_c1889.jpg": {
+    "title": "Bohemian cigarmakers at work in their tenement",
+    "artist": "Riis, Jacob A. (Jacob August), 1849-1914, photographer",
+    "date": "1889",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002710251/",
+    "source": "loc:2002710251"
+  },
+  "ref/s5_baseball/brooklyn_bridegrooms_team_1889.jpg": {
+    "title": "File:1889 Brooklyn Bridegrooms.jpg",
+    "artist": "Gardner &amp; Co., 276 &amp; 278 Fulton St., Brooklyn, New York",
+    "date": "1889",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1889_Brooklyn_Bridegrooms.jpg"
+  },
+  "ref/s7_carnegie_library/allegheny_carnegie_library_1905.jpg": {
+    "title": "Carnegie Library, Allegheny, Pa.",
+    "artist": "",
+    "date": "1905",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2025674860/",
+    "source": "loc:2025674860"
+  },
+  "ref/s7_carnegie_library/allegheny_carnegie_library_ground_plan_1892.jpg": {
+    "title": "Ground plan of the Carnegie Free Library, Allegheny, Pa",
+    "artist": "",
+    "date": "1893-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2007682635/",
+    "source": "loc:2007682635"
+  },
+  "ref/s7_carnegie_library/braddock_library_addition_1893.jpg": {
+    "title": "[Braddock Carnegie Free Library addition, Braddock, Pennsylvania]",
+    "artist": "Longfellow, Alden and Harlow (Firm), architect",
+    "date": "1893-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2007684798/",
+    "source": "loc:2007684798"
+  },
+  "ref/s7_carnegie_library/braddock_library_gymnasium_1893.jpg": {
+    "title": "[Gymnasium, Braddock Carnegie Free Library, Braddock, Pennsylvania]",
+    "artist": "Longfellow, Alden and Harlow (Firm), architect",
+    "date": "1893-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2007684788/",
+    "source": "loc:2007684788"
+  },
+  "ref/s6_rich_leisure/yacht_race_puritan_genesta_buoy_1886.jpg": {
+    "title": "International yacht race between \"Purtian & Genesta\" (rounding the buoy)",
+    "artist": "",
+    "date": "1886-01-01",
+    "licence": "No known restrictions on publication. For information see: \"Popular Graphic Arts,\" https://hdl.loc.gov/loc.pnp/res.248.pga",
+    "page": "https://www.loc.gov/item/2018757275/",
+    "source": "loc:2018757275"
+  },
+  "ref/s6_rich_leisure/mayflower_galatea_start_1886.jpg": {
+    "title": "Mayflower [and] Galatea, the start",
+    "artist": "Johnston, J. S. (John S.), photographer, Detroit Publishing Co., publisher",
+    "date": "1886-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016813333/",
+    "source": "loc:2016813333"
+  },
+  "ref/s5_baseball/brooklyn_bridegrooms_1888.jpg": {
+    "title": "File:1888 Brooklyn Bridegrooms.jpg",
+    "artist": "original photo by Joseph Hall",
+    "date": "1888-04-18",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:1888_Brooklyn_Bridegrooms.jpg"
+  },
+  "ref/s5_baseball/boston_base_ball_club_1887.jpg": {
+    "title": "Boston Base Ball Club",
+    "artist": "",
+    "date": "1887-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2004671804/",
+    "source": "loc:2004671804"
+  },
+  "ref/s5_baseball/washington_park_brooklyn_1914_later_site.jpg": {
+    "title": "[Federal League Park (Washington Park), Brooklyn (baseball)]",
+    "artist": "Bain News Service, publisher",
+    "date": "1914-01-01",
+    "licence": "No known restrictions on publication. For more information, see George Grantham Bain Collection - Rights and Restrictions Information https://www.loc.gov/rr/print/res/274_bain.html",
+    "page": "https://www.loc.gov/item/2014695564/",
+    "source": "loc:2014695564"
   }
 }
