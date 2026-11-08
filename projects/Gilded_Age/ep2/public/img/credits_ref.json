@@ -366,5 +366,29 @@
     "licence": "No known restrictions on publication.",
     "page": "https://www.loc.gov/item/2024635963/",
     "source": "loc:2024635963"
+  },
+  "ref/s9_people/herbert_spencer_1889_wellcome.jpg": {
+    "title": "File:Herbert Spencer. Photograph, 1889. Wellcome V0027201.jpg",
+    "artist": "Wellcome Collection",
+    "date": "1889",
+    "licence": "CC BY 4.0 (attribution required: Wellcome Collection)",
+    "page": "https://commons.wikimedia.org/wiki/File:Herbert_Spencer._Photograph,_1889._Wellcome_V0027201.jpg",
+    "used_as": "desk/spencer_bust.png"
+  },
+  "ref/s9_people/william_graham_sumner.jpg": {
+    "title": "File:William Graham Sumner.png",
+    "artist": "Unknown",
+    "date": "1902",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:William_Graham_Sumner.png",
+    "used_as": "desk/sumner_bust.png"
+  },
+  "ref/s9_people/caroline_astor.jpg": {
+    "title": "File:Caroline Schermerhorn Astor.jpg",
+    "artist": "Unknown",
+    "date": "between 1853 and 1860",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Caroline_Schermerhorn_Astor.jpg",
+    "used_as": "desk/astor_bust.png"
   }
 }
