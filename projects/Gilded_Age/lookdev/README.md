@@ -162,6 +162,11 @@ pulls back. Note for the script: say "22 of his 26 rivals" to match the picture 
 frame). Four clips, all in `review/ep2/` (720p) with JPG stills and a contact sheet per scene that puts our frames beside the
 reference images (`sheet_*.jpg`, built by `ep2sheet.py`). Stills: `node ep2stills.mjs <dir> name:clip:t[:labels]`.
 
+- **Decisions applied (Nov 8):** all street lighting is gas (the arc lamp is gone); police are 1880s NYPD (dark knee-length frock
+  coat, brass buttons, domed helmet, club at the belt); the sister works in the Vanderbilts' own kitchen; the ballpark is Brooklyn,
+  1884, with no price on screen; Alice stays the one pale glowing figure. Fixes: the dawn shot opens wide with sky above the
+  roofline; the cutaway roof has the exterior's iron cresting, crocketed stone gable and turret; hobby horses are one clean shape in
+  a lighter tone; the ballpark crowd mixes bowlers, caps, toppers, women (one with a parasol), boys, drinkers and standers.
 - **`fifth_night` (s1, 10 s).** Fifth Avenue at 52nd Street, looking west. Hunt's limestone chateau after the 1903 stereo view and
   his drawings: steep slate roof with iron cresting, three Gothic dormers with pinnacles, the crocketed stone gable at the north
   end, the corner turret corbelled out and capped by a tall slate cone, stone-mullioned cross windows under hood mouldings, carved
@@ -169,8 +174,7 @@ reference images (`sheet_*.jpg`, built by `ep2sheet.py`). Stills: `node ep2still
   basement windows. Across 52nd Street, W. H. Vanderbilt's brownstone; St. Thomas's tower a block north. Every window blazes. A queue
   of broughams (coachmen in top hats, lit carriage lamps, spoked wheels turning) advances one carriage every 4.6 s; at the canopy
   a footman in livery holds the door and a costumed couple comes out from behind the carriage and up the carpet. Police hold a
-  crowd back on the house's sidewalk; onlookers in the foreground. Gas lamps along the curb and one electric arc lamp at the
-  corner. Slow side-scroll.
+  crowd back on the house's sidewalk; onlookers in the foreground. Gas lamps along the curb. Slow side-scroll.
 - **`ball_cutaway` (s2/s3, 16 s).** The house cut open like the tenement. Attic: the servants' small rooms under the slates, empty
   tonight, one candle. Third floor: the gymnasium, where the Sun says the quadrilles assembled, hobby horses waiting. Second floor:
   supper (tables set, Delmonico's waiters, gasoliers). First floor: the dining hall (tapestries, the stone mantel), the great hall
@@ -181,11 +185,18 @@ reference images (`sheet_*.jpg`, built by `ep2sheet.py`). Stills: `node ep2still
   service stair. The camera holds on the whole house, pushes to the great hall, then down into the kitchen, where the sister
   (coral) carries a tray of ices and cakes to the dumbwaiter and back ("COMPOSITE CHARACTER" tag). A labelled still
   (`s2_cut_labels`) shows the teaching version.
-- **`fifth_dawn` (s4, 9 s).** The same street at dawn: a pale sky wash, most windows dark, the arc lamp off, the lamplighter's
+- **`fifth_dawn` (s4, 9 s).** The same street at dawn: a pale sky wash, most windows dark, the lamplighter's
   pole putting the gas lamps out one by one, carriages pulling away, a couple coming down the steps, and the sister climbing the
   area steps from the basement door with a pail of ashes; she stops at the top and looks up at them. The camera eases in on her.
 - **`ballpark` (s5, 9 s).** A Sunday game in the mid-1880s: a roofed wooden grandstand with bunting and flags, open plank
   bleachers (the cheap seats), a board fence; Michael and his sister in the bleachers (coral), a beer vendor in the aisle; the
   pitch, the swing, the hit, the whole crowd up. "25 cents, and beer for sale."
 
-Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume outline only. s8 (Riis flat) not built yet.
+- **`kelly_flat` (s8, 9 s).** The contrast to the mansion: one room of the Kellys' flat (the same kitchen as `cutaway.js`), after
+  Riis's photographs. Faded, peeling wallpaper with lath showing, a water stain, soot above the stove; a cast-iron coal stove with a
+  steaming kettle and its pipe into the chimney; pots on a shelf, a basket, a washtub, a narrow bed; one small kerosene lamp that
+  flickers; the only window opens on the airshaft (a brick wall, a neighbour's window, washing across the shaft). The mother sews
+  piecework shirts by the lamp, a pile of finished ones on a chair; the younger brother bastes beside her. The sister comes in from
+  the dark hall in her maid's dress and puts her wages on the table ("her week's wages", "COMPOSITE CHARACTERS"). All coral.
+
+Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume outline only.

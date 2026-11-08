@@ -8,6 +8,7 @@ SHEETS = {
   's2s3_ball_cutaway': (['s2_cut_wide', 's2_cut_labels', 's2_cut_hall', 's3_kitchen'], ['s2_ball/alice_vanderbilt_electric_light_mora_1883.jpg', 's2_ball/alva_venetian_princess_mora_1883.jpg', 's1_660_fifth/hunt_plan_basement_servants_loc2024635962.jpg']),
   's4_dawn': (['s4_dawn_wide', 's4_dawn_leaving', 's4_dawn_sister'], ['s4_fifth_ave_night/fifth_ave_vanderbilt_mansions_1904.jpg', 's4_fifth_ave_night/up_fifth_ave_home_of_rich_c1903.jpg']),
   's5_ballpark': (['s5_park_wide', 's5_park_swing', 's5_park_hit'], ['s5_baseball/polo_grounds_new_york_1887.jpg', 's5_baseball/brooklyn_bridegrooms_1888.jpg']),
+  's8_kelly_flat': (['s8_flat_wide', 's8_flat_enter', 's8_flat_wages'], ['s8_tenement/riis_bohemian_cigarmakers_tenement_c1889.jpg', 's8_tenement/riis_italian_flat_c1889.jpg', 's8_tenement/riis_gotham_court_flat_c1890.jpg']),
 }
 for name, (ours, refs) in SHEETS.items():
     tw, th, W = 760, 428, 20

@@ -30,7 +30,7 @@ until checked.
 
 | # | Beat | Words | Whose | Notes |
 |---|---|---|---|---|
-| 1 | Cold open: March 26, 1883, 660 Fifth Avenue. The sister carries trays in the kitchen while 1,200 costumed guests arrive; a woman upstairs glows with a battery-lit torch. Tease the cost. Driving question. | 230 | Family | Composite disclaimer on screen. She works in a *neighboring* house lent for the night, or for the Vanderbilts directly (see flag on Vanderbilt staff). |
+| 1 | Cold open: March 26, 1883, 660 Fifth Avenue. The sister carries trays in the kitchen while 1,200 costumed guests arrive; a woman upstairs glows with a battery-lit torch. Tease the cost. Driving question. | 230 | Family | Composite disclaimer on screen. She works in a *neighboring* house lent for the night, or for the Vanderbilts directly (see flag on Vanderbilt staff). **Decided (Nov 2026): she works in the Vanderbilts' own basement kitchen at 660 Fifth, per The Sun (Mar 27, 1883): the staff of the whole family were "turned into the kitchen of William K.'s house."** |
 | 2 | Why throw this party? Old money vs new money: Mrs. Astor, Ward McAllister, "the 400", the calling-card story (as legend). | 280 | History | |
 | 3 | The ball itself: hobby-horse quadrille down the stairs, the Electric Light dress, Delmonico's ices, dawn on Fifth Avenue. The bill. | 200 | History | The Sun's own words. |
 | 4 | Back below stairs: her wages, hours, Thursday afternoon, her attic room. The math: years of her pay to equal one night. | 230 | Family | Show the arithmetic on screen. |
