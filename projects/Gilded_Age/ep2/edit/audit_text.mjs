@@ -12,7 +12,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 1920, height: 1080}});
 await page.goto('file://' + path.join(here, 'edit.html'));
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
-const items = {};
+const items = {}, overlaps = {};
 const dur = await page.evaluate((k) => EDITS[k]().dur, key);
 for (let T = 0; T < dur; T += step) {
   await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]);
@@ -23,10 +23,11 @@ for (let T = 0; T < dur; T += step) {
       if (!own || el.tagName === 'style' || el.tagName === 'STYLE') continue;
       const o = eff(el); if (o < 0.3) continue;
       const rg = document.createRange(); rg.selectNodeContents(el); const r = rg.getBoundingClientRect(); if (r.width < 2) continue;
-      out.push({t: own.slice(0, 70), x0: r.left, x1: r.right, y0: r.top, y1: r.bottom});
+      out.push({t: own.slice(0, 70), x0: r.left, x1: r.right, y0: r.top, y1: r.bottom, c: !!el.closest('#C')});
     }
     return out;
   });
+  for (const a of found) if (a.c) for (const b of found) if (!b.c && a.t !== b.t && a.x0 < b.x1 - 4 && b.x0 < a.x1 - 4 && a.y0 < b.y1 - 4 && b.y0 < a.y1 - 4) { const k = a.t + ' || ' + b.t; if (!overlaps[k]) overlaps[k] = T.toFixed(1); }
   for (const f of found) {
     const it = items[f.t] || (items[f.t] = {text: f.t, frames: 0, first: T, last: T, out: []});
     it.frames++; it.last = T;
@@ -35,6 +36,6 @@ for (let T = 0; T < dur; T += step) {
   }
 }
 const shots = await page.evaluate((k) => { editFrame(k, 0); return cache[k].shots.map((s) => [s.a, s.b]); }, key);
-console.log(JSON.stringify({shots}));
+console.log(JSON.stringify({shots, overlaps}));
 for (const it of Object.values(items)) console.log(JSON.stringify({...it, secs: +(it.frames * step).toFixed(1)}));
 await browser.close();

@@ -47,11 +47,11 @@ EDITS.ch02 = () => {
     {a: c.but, b: c.newm, draw: (T) => { const ring = fin(T, w('circle'), 0.6);
       const xs = Array.from({length: 7}, (_, i) => 430 + Math.cos(i / 7 * TAU) * 260), ys = Array.from({length: 7}, (_, i) => 700 + Math.sin(i / 7 * TAU) * 60);
       return desk() +
-        (fin(T, w('wasn\'t')) > 0 ? slideUp(fin(T, w("wasn't")), tape("MONEY WASN'T ENOUGH", {x: 160, y: 300, size: 80, rot: -2, seed: 41})) : '') +
+        (fin(T, w('wasn\'t')) > 0 ? slideUp(fin(T, w("wasn't")), tape("MONEY WASN'T ENOUGH", {x: 160, y: 170, size: 64, rot: -2, seed: 41})) : '') +
         svg(`<ellipse cx="430" cy="730" rx="330" ry="90" fill="none" stroke="${C.teal}" stroke-width="5" opacity="${(0.8 * ring).toFixed(3)}"/>` +
           xs.map((x, i) => crowd(T, [x], ys[i], 300, ring, {d: x > 430 ? -1 : 1})).join('')) +
-        op(fin(T, w('generations')), pen('rich for generations', {x: 160, y: 160, size: 56, rot: -3, color: C.orange})) +
-        op(fin(T, w('decided')), pen('they decided who was &ldquo;in&rdquo;', {x: 160, y: 900, size: 48, rot: -2, color: C.orange})) +
+        op(fin(T, w('generations')), pen('rich for generations', {x: 160, y: 800, size: 56, rot: -3, color: C.orange})) +
+        op(fin(T, w('decided')), pen('they decided who was &ldquo;in&rdquo;', {x: 860, y: 890, size: 48, rot: -2, color: C.orange})) +
         vocabCard('old money', 'ohld MUH-nee', 'noun', 'Families who had been rich for generations, and decided who belonged.', {x: 1120, y: 200, o: fin(T, w('old', 1), 0.4)});
     }},
     // 4. "And they looked down on people like the Vanderbilts: new money ... Too fast. Too loud. Railroad people."
@@ -67,7 +67,7 @@ EDITS.ch02 = () => {
     // 5. "The queen of old money was Mrs. Caroline Astor. If she came to your house, you were in. If she didn't, you weren't."
     {a: c.queen, b: c.her, draw: (T) => push(T, c.queen, c.her) +
       deskCut('desk/astor_bust.png', {x: 240, y: 170, w: 560, rot: -2, o: fin(T, w('Mrs', 1), 0.6), T, caption: 'mrs. caroline astor', cx: 40}) + `</div>` +
-      op(fin(T, w('queen')), pen('the queen of old money', {x: 900, y: 180, size: 64, rot: -4, color: C.orange})) +
+      op(fin(T, w('queen')), pen('the queen of old money', {x: 260, y: 950, size: 54, rot: -4, color: C.orange})) +
       callCard('Mrs. Astor', 'she visits', {x: 960, y: 420, w: 440, rot: -4, o: fin(T, w('If', 1), 0.4), T}) +
       tick(1450, 560, clamp01((T - w('in', 7)) / 0.4)) + op(fin(T, w('in', 7)), pen("you're in", {x: 1530, y: 500, size: 56, rot: -4, color: C.teal})) +
       callCard('Mrs. Astor', "she doesn't", {x: 1000, y: 720, w: 440, rot: 3, o: fin(T, w('If', 2), 0.4), T, strike: clamp01((T - w("weren't")) / 0.4)}) +
@@ -77,7 +77,7 @@ EDITS.ch02 = () => {
       for (let i = 0; i < 400; i++) { const x = 170 + (i % 25) * 30, y = 260 + Math.floor(i / 25) * 30;
         d.push(`<circle cx="${x}" cy="${y}" r="${i < N ? 10 : 4}" fill="${i < N ? C.teal : '#3a362e'}"/>`); }
       return desk() + svg(d.join('')) +
-        op(fin(T, w('advisor')), pen('her advisor, ward mcallister', {x: 160, y: 120, size: 50, rot: -3, color: C.orange})) +
+        op(fin(T, w('advisor')), pen('her advisor, ward mcallister', {x: 160, y: 880, size: 50, rot: -3, color: C.orange})) +
         op(fin(T, w('four')), mono('about 400 people', {x: 170, y: 770, size: 30, color: C.teal, ls: 4})) +
         op(fin(T, w('society')), mono('out of more than a million new yorkers', {x: 170, y: 820, size: 22, color: C.cream})) +
         op(fin(T, w('rest')) * fout(T, w('400') - 0.5), pen('the rest made people<br>uncomfortable at parties', {x: 1120, y: 300, size: 50, rot: -3, color: C.orange, w: 700})) +

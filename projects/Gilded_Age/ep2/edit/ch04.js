@@ -25,7 +25,7 @@ EDITS.ch04 = () => {
         op(fin(T, c.plan + 0.4) * 0.9, mono("richard morris hunt's plan of the basement, 660 fifth avenue", {x: 280, y: 990, size: 20})) +
         svg(ring > 0 ? `<ellipse cx="760" cy="420" rx="${f1(170 * ease(ring))}" ry="${f1(110 * ease(ring))}" fill="none" stroke="${C.ink}" stroke-width="11"/><ellipse cx="760" cy="420" rx="${f1(170 * ease(ring))}" ry="${f1(110 * ease(ring))}" fill="none" stroke="${C.teal}" stroke-width="6"/>` : '') +
         op(fin(T, w('century')), pen('the party of the century...', {x: 1100, y: 80, size: 50, rot: -3, color: C.orange})) +
-        op(fin(T, w('servants', 2)), pen('...cooked downstairs', {x: 1180, y: 180, size: 54, rot: -3, color: C.orange}));
+        op(fin(T, w('servants', 2)), pen('...cooked downstairs', {x: 1180, y: 760, size: 54, rot: -3, color: C.orange}));
     }},
     // 4. "Nora was a domestic servant. And she was live-in"
     {a: c.job, b: c.attic, draw: (T) => push(T, c.job, c.attic) + deskProp('p04_maid_cap_apron', {x: 140, y: 300, w: 760, rot: -3, o: fin(T, c.job + 0.1, 0.5), T}) + `</div>` +

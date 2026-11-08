@@ -19,12 +19,12 @@ EDITS.ch03 = () => {
       vocabCard('quadrille', 'kwah-DRIL', 'noun', 'A dance for a set of couples in a fixed pattern. Each group at the ball rehearsed its own.', {x: 1160, y: 110, o: fin(T, w('quadrilles'), 0.4)})},
     // 3. "One group strapped fake horses around their waists and pranced down the grand staircase."
     {a: c.horse, b: c.power, draw: (T) => push(T, c.horse, c.power) +
-      deskCut('desk/660_staircase.png', {x: 820, y: 230, w: 960, rot: 2, o: fin(T, w('grand'), 0.5), T}) +
+      deskCut('desk/660_staircase.png', {x: 820, y: 230, w: 960, rot: 2, o: fin(T, c.horse + 0.6, 0.5), T}) +
       deskProp('p03_hobby_horse', {x: 180, y: 160, w: 640, rot: -4, o: fin(T, c.horse + 0.1, 0.5), T}) + `</div>` +
       op(fin(T, w('fake')), pen('fake horses, strapped on', {x: 160, y: 80, size: 54, rot: -3, color: C.orange})) +
       op(fin(T, w('grand')), pen('down the grand staircase', {x: 900, y: 120, size: 52, rot: -3, color: C.orange})) +
-      op(fin(T, w('grand') + 0.3) * 0.9, mono('the grand staircase, 660 fifth avenue (about 1902)', {x: 840, y: 900, size: 20})) +
-      op(fin(T, c.horse + 0.3) * 0.85, mono('a hobby horse like theirs (re-creation)', {x: 200, y: 1000, size: 18, color: '#9a958c'}))},
+      op(fin(T, c.horse + 0.9) * 0.9, mono('the grand staircase, 660 fifth avenue (about 1902)', {x: 840, y: 900, size: 20})) +
+      op(fin(T, c.horse) * 0.85, mono('a hobby horse like theirs (re-creation)', {x: 200, y: 1000, size: 18, color: '#9a958c'}))},
     // 4. "These were the most powerful people in America."
     {a: c.power, b: c.alice, draw: (T) => hall(T, 1.5 - 0.2 * ease((T - c.power) / 3), 1000, 700) +
       op(fin(T, w('powerful')), pen('the most powerful people in america', {x: 140, y: 140, size: 58, rot: -3, color: C.orange}))},
@@ -49,7 +49,7 @@ EDITS.ch03 = () => {
     // 8. "Supper came at two in the morning."
     {a: c.supper, b: c.dawn, draw: (T) => desk() + svg(clockDefs + stationClock(620, 540, 260, 2.0, {seconds: false})) +
       deskProp('p05_dinner_menu', {x: 1180, y: 210, w: 380, rot: 5, o: fin(T, c.supper + 0.2, 0.5), T}) +
-      op(fin(T, w('two')), pen('supper: 2 a.m.', {x: 1060, y: 120, size: 60, rot: -4, color: C.orange}))},
+      op(fin(T, w('two')), pen('supper: 2 a.m.', {x: 1080, y: 820, size: 60, rot: -4, color: C.orange}))},
     // 9. "The last dance ended at sunrise." Fifth Avenue at dawn; Nora up the area steps.
     {a: c.dawn, b: c.papers, draw: (T) => dawn(T) + stamp('Fifth Avenue &middot; dawn, March 27, 1883', 1) +
       op(fin(T, w('last')), pen('the last dance ended at sunrise', {x: 1080, y: 130, size: 50, rot: -3, color: C.orange}))},

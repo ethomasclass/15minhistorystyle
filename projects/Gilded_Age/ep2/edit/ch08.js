@@ -1,7 +1,7 @@
 // Chapter 8, "Rags to Riches" (9:02 to 10:07): the novels' story, what historians found, the answer to the question (two answers),
 // Nora's wages on the table, Episode 3, thanks. ga_gilded_theme comes in at "So, what did the richest people".
 EDITS.ch08 = () => {
-  const ch = 'ch08_rags_to_riches', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
+  const ch = 'ch08_rags_to_riches', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 3.9;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     novels: w('Popular') - 0.3, carn: w('Carnegie', 1) - 0.3, study: w('But', 1) - 0.3, exc: w('Carnegie', 2) - 0.3, q: w('So') - 0.3,
     nothing: w('Some', 1) - 0.3, deal: w('Some', 2) - 0.3, nora: w('And', 5) - 0.25, table: w('And', 6) - 0.25, next: w('Next', 1) - 0.3,
@@ -85,7 +85,7 @@ EDITS.ch08 = () => {
       op(fin(T, w('neighbors')) * 0.9, mono('episode 3: immigration', {x: 160, y: 680, size: 28, color: C.teal, ls: 5}))},
     // 12. "Thanks for watching. Subscribe for more, and I'll see you next time."
     {a: c.thanks, b: dur, draw: (T) => desk() + slideUp(fin(T, w('Thanks')), tape('THANKS FOR WATCHING', {x: 480, y: 380, size: 100, rot: -2, seed: 129})) +
-      op(fin(T, w('Thanks') + 0.5), mono('chunk history &middot; the gilded age &middot; episode 2 of 6', {x: 560, y: 600, size: 26, color: C.teal}))},
+      op(fin(T, w('Thanks')), mono('chunk history &middot; the gilded age &middot; episode 2 of 6', {x: 560, y: 600, size: 26, color: C.teal}))},
   ];
   return {dur, shots, fadeOut: 0.8};
 };

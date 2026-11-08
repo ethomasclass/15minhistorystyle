@@ -1,7 +1,7 @@
 // Chapter 7, "The Gospel of Wealth" (7:45 to 9:00): Carnegie at 53, "Wealth" (1889), give it away while alive, the libraries,
 // philanthropy, the rich as trustees, and the mill workers' question.
 EDITS.ch07 = () => {
-  const ch = 'ch07_the_gospel_of_wealth', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
+  const ch = 'ch07_the_gospel_of_wealth', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 3.5;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     y1889: w('In', 1) - 0.3, essay: w('But', 1) - 0.3, rules: w('Carnegie', 2) - 0.3, libs: w('Like') - 0.3, built: w('He', 4) - 0.3,
     phil: w("That's") - 0.3, trust: w('said', 2) - 0.6, mill: w('And', 5) - 0.25, hold: w('Hold') - 0.3,
@@ -26,7 +26,7 @@ EDITS.ch07 = () => {
       op(fin(T, w('quitting')), pen('still not quitting', {x: 1160, y: 640, size: 60, rot: -4, color: C.orange}))},
     // 3. "But he did write an essay. It was called 'Wealth,' and people nicknamed it the Gospel of Wealth."
     {a: c.essay, b: c.rules, draw: (T) => { const o = fin(T, w('essay'), 0.5);
-      return desk() + op(o, `<div style="position:absolute;left:200px;top:${150 + (1 - ease(o)) * 60}px;width:640px;height:820px;transform:rotate(-2deg);background:#E9E1CE;box-shadow:0 6px 4px rgba(0,0,0,.6),0 24px 40px rgba(0,0,0,.55);padding:50px 56px;color:#1d1a16">
+      return desk() + op(o, `<div class="tk" style="position:absolute;left:200px;top:${150 + (1 - ease(o)) * 60}px;width:640px;height:820px;transform:rotate(-2deg);background:#E9E1CE;box-shadow:0 6px 4px rgba(0,0,0,.6),0 24px 40px rgba(0,0,0,.55);padding:50px 56px;color:#1d1a16">
           <div style="font-family:Mono;font-size:18px;letter-spacing:3px;text-align:center">THE NORTH AMERICAN REVIEW &middot; JUNE 1889</div><div style="height:2px;background:#1d1a16;margin:16px 0 30px"></div>
           <div style="font-family:Playfair;font-weight:900;font-size:110px;text-align:center;line-height:1">WEALTH.</div>
           <div style="font-family:Mono;font-size:20px;letter-spacing:3px;text-align:center;margin:20px 0 34px">BY ANDREW CARNEGIE</div>
@@ -57,9 +57,9 @@ EDITS.ch07 = () => {
       op(fin(T, c.phil + 0.4) * 0.9, mono('carnegie free library, braddock, pennsylvania (1893)', {x: 140, y: 980, size: 20})) +
       vocabCard('philanthropy', 'fih-LAN-thruh-pee', 'noun', 'Giving money to causes that help the public, like libraries, schools and hospitals.', {x: 1180, y: 200, o: fin(T, w('philanthropy'), 0.4)})},
     // 8. "But Carnegie also said the rich should act as trustees for the poor ... 'better than they would or could do for themselves.'"
-    {a: c.trust, b: c.mill, draw: (T) => push(T, c.trust, c.mill) + deskCut('desk/carnegie_1885_bust.png', {x: 120, y: 360, w: 600, rot: -2, o: fin(T, c.trust + 0.1, 0.5), T}) + `</div>` +
-      vocabCard('trustee', 'trus-TEE', 'noun', 'Someone trusted to manage money or property for other people.', {x: 1180, y: 110, o: fin(T, w('trustees'), 0.4)}) +
-      op(fin(T, w('deciding')), pen("deciding what's good for them", {x: 160, y: 140, size: 52, rot: -3, color: C.orange})) +
+    {a: c.trust, b: c.mill, draw: (T) => push(T, c.trust, c.mill) + deskCut('desk/carnegie_1885_bust.png', {x: 120, y: 420, w: 600, rot: -2, o: fin(T, c.trust + 0.1, 0.5), T}) + `</div>` +
+      vocabCard('trustee', 'trus-TEE', 'noun', 'Someone trusted to manage money or property for other people.', {x: 120, y: 60, w: 600, rot: -1.5, size: 64, o: fin(T, w('trustees'), 0.4)}) +
+      op(fin(T, w('deciding')), pen("deciding what's good for them", {x: 780, y: 440, size: 52, rot: -3, color: C.orange})) +
       quote('&ldquo;better than they would or could do for themselves&rdquo;', 'carnegie, on the poor, 1889', {x: 760, y: 600, w: 1080, size: 58, o: fin(T, w('better') - 0.2, 0.4)})},
     // 9. "And at the same time, the men in his steel mills worked twelve-hour days, for low pay. Some of them asked: why not pay us more,
     //    and let us buy our own books?"

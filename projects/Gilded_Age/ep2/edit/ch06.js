@@ -1,7 +1,7 @@
 // Chapter 6, "Sunday" (6:51 to 7:43): Michael and Nora at a Sunday game in Brooklyn (the American Association: cheap seats,
 // Sunday games, beer), then the rich on their Sunday: polo, Newport tennis, racing yachts. Same day off.
 EDITS.ch06 = () => {
-  const ch = 'ch06_sunday', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
+  const ch = 'ch06_sunday', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 3.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     game: w('On', 2) - 0.3, aa: w('Baseball') - 0.3, beer: w('And', 2) - 0.25, hit: w('Did') - 0.6, rich: w('The', 8) - 0.3,
     polo: w('Polo') - 0.3, tennis: w('Tennis') - 0.3, yacht: w('Racing') - 0.3, same: w('Same') - 0.3,
@@ -38,7 +38,7 @@ EDITS.ch06 = () => {
     {a: c.hit, b: c.rich, draw: (T) => park(parkB(T))},
     // 6. "The rich had other ideas about Sunday." The America's Cup, 1886.
     {a: c.rich, b: c.polo, draw: (T) => push(T, c.rich, c.polo) + deskCut('desk/mayflower_galatea_1886.png', {x: 360, y: 120, w: 1200, rot: -1.5, o: fin(T, c.rich + 0.1, 0.5), T}) + `</div>` +
-      op(fin(T, c.rich + 0.4) * 0.9, mono("mayflower and galatea, the america's cup, 1886", {x: 380, y: 1000, size: 20})) +
+      op(fin(T, c.rich) * 0.9, mono("mayflower and galatea, the america's cup, 1886", {x: 380, y: 1000, size: 20})) +
       op(fin(T, w('ideas')), pen('other ideas about sunday', {x: 200, y: 60, size: 54, rot: -3, color: C.orange}))},
     // 7. "Polo, brought over from England."
     {a: c.polo, b: c.tennis, draw: (T) => renderLeisure(3.7 + (T - c.polo) * 1.1, true) + stamp('Polo &middot; 1880s', 1) +

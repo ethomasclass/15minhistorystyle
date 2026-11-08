@@ -70,3 +70,26 @@ Placement is from the loudness profile of each cue (short-term LUFS every 5 s), 
 - `renderFifth`, `renderBall`, `renderBallpark`, `renderFlat`, `renderLeisure` take `quiet` (drop the clip's own notes so the edit's
   notes and stamps go on instead).
 - The Kellys' flat tag read "Lower East Side"; it now reads "Brooklyn" (Ep 1 puts the Kellys in Brooklyn, and Nora takes the ferry home).
+
+## Reading time and title-safe text (review round 1, Nov 8)
+
+Feedback: some cards and notes left too fast; some text touched the frame edge. Rules now enforced by script:
+- **Reading time:** every text element stays on screen at least 0.3 s a word + 1.5 s, minimum 4.5 s.
+- **Title-safe:** every text element stays inside 96 px left/right and 54 px top/bottom of the 1920x1080 frame.
+
+- `audit_text.mjs ch01 [step]`: samples the chapter every 0.2 s in the page and lists every text element (HTML and SVG) with its
+  seconds on screen, any time its text box leaves the safe area, and any carried label that overlaps a current one. The
+  generator for `carry.js` (in the session scratchpad, `carry.py`) reads these lists.
+- `carry.js`, generated: `HOLD[ch][shot]` delays a cut (up to 4.6 s, leaving the next shot at least 1.2 s), so the outgoing shot's
+  text gets its time. `CARRY[ch][shot]` is the remainder: the shot's text (the `.tx` elements, without its picture or its small
+  mono captions) stays in a top layer over the next shot. A carried label that would land on current text is moved to the
+  nearest free place (`safe()` in `edit.html`).
+- `safe()` in `edit.html` nudges any `.tx` element back inside the safe area after layout. The look-dev's SVG `tag`/`penS`
+  (`lookdev/explainers.js`) clamp themselves to the same area. The stamp and the composite bar sit higher.
+- Each chapter has a held tail after its last word (1 to 3.9 s; `render_edit.mjs --dur` gives the length, which `build_ch.sh` uses),
+  so the closing labels get their time.
+- Labels that used to be swapped out mid-shot now stay: the Vanderbilt tree, both servant cards, "an insult" / "a compliment",
+  NOTHING, LIKE LIBRARIES. `renderAttic` and `renderBanquet` take `quiet`, and the edit times those notes itself.
+- Exceptions left on purpose: small captions and credits under a picture (e.g. the Mayflower photo credit, the
+  "Lawn tennis · Newport" stamp) leave with their picture, because a caption without its picture means nothing. Up to 4 such
+  items run 2.6 to 3.8 s.

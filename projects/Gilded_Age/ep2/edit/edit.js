@@ -51,7 +51,7 @@ function editFrame(ch, T) {
 
 /* ---------- shared pieces ---------- */
 const stamp = (text, o = 1) => op(o, mono(text, {x: 100, y: 972, size: 22, color: C.cream, extra: 'background:rgba(13,12,9,.7);padding:6px 12px'}));
-const compositeBar = (o = 1) => op(o, `<div class="tx" style="position:absolute;left:100px;top:962px;display:flex;align-items:center;gap:12px;background:rgba(13,12,9,.85);padding:9px 16px">
+const compositeBar = (o = 1) => op(o, `<div class="tx" style="position:absolute;left:100px;top:905px;display:flex;align-items:center;gap:12px;background:rgba(13,12,9,.85);padding:9px 16px">
   <div style="width:16px;height:16px;border-radius:50%;background:${C.coral}"></div>
   <div style="font-family:Mono;font-size:22px;letter-spacing:2px;color:${C.cream}">COMPOSITE CHARACTER &middot; NORA IS MADE UP &middot; THOUSANDS OF GIRLS HAD HER JOB</div></div>`);
 
