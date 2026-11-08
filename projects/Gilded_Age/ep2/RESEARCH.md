@@ -336,3 +336,11 @@ Empire set off the big Jewish migration, so an 1883 to 1884 arrival is plausible
 - Gregory and Neu, in Miller, ed., *Men in Business* (1952), catalog record: https://buscador.unsam.edu.ar/Record/22258/TOC
 - "American Entrepreneurs and the Horatio Alger Myth," *Journal of Economic History*: https://www.cambridge.org/core/journals/journal-of-economic-history/article/american-entrepreneurs-and-the-horatio-alger-myth/F8A05B9C589523B5CA4123E9FE7E7670
 - To check next: MeasuringWorth (https://www.measuringworth.com) for the dollar conversion; NYT archive, March 27, 1883; Appleton's 1883 Spencer banquet report; Gregory and Neu full text; Nasaw, *Andrew Carnegie* (2006).
+
+## Decisions (Nov 8, 2026)
+
+- The sister lives in at 660 Fifth Avenue and visits the family flat on her afternoon off (Thursday or Sunday); the script needs
+  this beat, and it pays off beat 4: her week's wages counted onto the table against the ball's bill.
+- The Kellys' home piecework is shirt sewing (Ma and the younger brother).
+- No police close-up: the police are background at the arrival; the helmet silhouette is enough.
+- All street lighting at 52nd St is gas; the ballpark scene is Brooklyn, 1884 or later, with no ticket price shown until checked.
