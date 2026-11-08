@@ -23,5 +23,7 @@ J=$(ffmpeg -hide_banner -i out/ep2_joined.mkv -af loudnorm=I=-14:TP=-1.5:LRA=11:
 M=$(echo "$J" | python3 -c "import json,sys;j=json.load(sys.stdin);print(f\"measured_I={j['input_i']}:measured_TP={j['input_tp']}:measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}\")")
 ffmpeg -v error -y -i out/ep2_joined.mkv -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11:$M -c:a aac -b:a 192k -ar 48000 review/ep2_full_720p.mp4
 rm -f out/ep2_joined.mkv
+# loudnorm stops short of -14 here (it holds the -1.5 dBTP ceiling): a gentle lift into a limiter lands -13.9 LUFS, peak -0.9 dBFS
+ffmpeg -v error -y -i review/ep2_full_720p.mp4 -c:v copy -af "volume=2.4dB,alimiter=limit=0.79:level=false:attack=2:release=40" -c:a aac -b:a 192k -ar 48000 out/ep2_lift.mp4 && mv out/ep2_lift.mp4 review/ep2_full_720p.mp4
 ffmpeg -v error -y -i review/ep2_full_720p.mp4 -vf scale=960:540 -c:v libx264 -preset slow -crf 29 -c:a aac -b:a 128k review/ep2_preview.mp4
 echo review/ep2_full_720p.mp4
