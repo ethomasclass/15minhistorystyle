@@ -151,7 +151,7 @@ function cutter(x, y, s, t, heel = 10) { // a racing cutter of 1886: long low hu
     `<path d="M-14,-540 L-250,-380" stroke="${c}" stroke-width="5"/><path d="M-260,-10 L-14,-10" stroke="${c}" stroke-width="5"/>` +
     [-140, -80, -40].map((cx) => figure({x: cx, y: 0, h: 50, d: 1, kind: 'man', hat: 'cap', coat: 'jacket', fill: c, an: {}})).join('') + `</g>`;
 }
-function renderLeisure(t) {
+function renderLeisure(t, quiet = false) {
   const c = cam2({z: 0.9, ux: 900 + 470 * t, uy: 560}), G = 860, w = [];
   w.push(layerAt(c, 0.3, `<rect x="-2000" y="${G - 140}" width="9000" height="400" fill="#7FA39C"/>` + MAT.trees([[-2000, G - 140], [8000, G - 150]], {col: '#7FA39C', seed: 61, size: 36})));
   const m = [];
@@ -178,6 +178,7 @@ function renderLeisure(t) {
   const scr = [tag(40, 1040, t < 3.6 ? 'LAWN TENNIS · NEWPORT · 1880s' : t < 6.6 ? 'POLO · 1880s' : 'THE AMERICA\'S CUP · 1886', 1)];
   scr.push(penS(1180, 140, 'same day off. very different sunday.', 30, -3));
   const defs = msDefs(t).replace('</defs>', `<pattern id="netp" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0,0 L6,6 M6,0 L0,6" stroke="#0D0C09" stroke-width="1"/></pattern></defs>`);
+  if (quiet) scr.length = 0;
   return frame(defs, `<rect width="1920" height="1080" fill="url(#msday)"/>` + clouds(t), w.join(''), scr.join(''), t);
 }
 

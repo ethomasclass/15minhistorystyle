@@ -304,7 +304,7 @@ function msDefs(t) {
 }
 
 /* ---------- s1 / s4: Fifth Avenue ---------- */
-function renderFifth({t, dawn = 0, cam}) {
+function renderFifth({t, dawn = 0, cam, quiet = false}) {
   const c = cam2(cam), world = [], lit = 1 - smooth(0.2, 1, dawn) * 0.85;
   const lighterX = dawn > 0 ? 700 + t * 140 : -1e9; // the lamplighter's pole puts the lamps out as he passes
   const sky = `<rect width="1920" height="1080" fill="url(#msnight)"/>` + (dawn > 0 ? `<rect width="1920" height="1080" fill="url(#msdawn)" opacity="${f1(dawn)}"/>` + clouds(t, 11) + `<ellipse cx="1500" cy="${f1(c.sy(G5 - 300))}" rx="900" ry="220" fill="url(#mswarm)" opacity="${f1(dawn)}"/>` : '');
@@ -331,6 +331,7 @@ function renderFifth({t, dawn = 0, cam}) {
   const scr = [tag(40, 1040, dawn ? 'FIFTH AVENUE · DAWN, MARCH 27, 1883' : '660 FIFTH AVENUE · MONDAY, MARCH 26, 1883', 1)];
   if (!dawn && t > 4.5) scr.push(penS(1220, 140, '1,200 guests in costume', 34, -3, EX.orange));
   if (dawn && t > 3) scr.push(penS(1180, 140, 'the last dance ended at sunrise', 32, -3, EX.orange));
+  if (quiet) scr.length = 0;   // the edit puts its own notes on
   return frame(msDefs(t), sky + stars, world.join(''), scr.join(''), t);
 }
 function s0push(a, v) { a.push(v); }
@@ -495,7 +496,7 @@ function chCam(t) { let k = CH_KEYS.length - 2;
   for (let i = 0; i < CH_KEYS.length - 1; i++) if (t < CH_KEYS[i + 1][0]) { k = i; break; }
   const [t0, z0, x0, y0] = CH_KEYS[k], [t1, z1, x1, y1] = CH_KEYS[k + 1], u = ease(clamp01((t - t0) / (t1 - t0)));
   return {z: lerpLog(z0, z1, u), ux: x0 + (x1 - x0) * u, uy: y0 + (y1 - y0) * u}; }
-function renderBall({t, cam = null, labels = false}) {
+function renderBall({t, cam = null, labels = false, quiet = false}) {
   const c = cam2(cam || chCam(t)), world = [];
   world.push(layerAt(c, 0.3, `<rect x="-3000" y="560" width="9000" height="3000" fill="#1C3332"/>` + stThomas(1700, 900, '#1C3332') + brownstones(-1400, -200, 380, 0.6, t, 7).replace(/#1C3332/g, '#1C3332')));
   world.push(layerAt(c, 1, `<rect x="-3000" y="${CH.fl.g}" width="9000" height="3000" fill="#0A1110"/><rect x="-3000" y="${CH.fl.g}" width="${3000 + CH.x0 - 14}" height="8" fill="#2B4744"/><rect x="${CH.x1 + 14}" y="${CH.fl.g}" width="4000" height="8" fill="#2B4744"/>` +
@@ -506,6 +507,7 @@ function renderBall({t, cam = null, labels = false}) {
     if (t > 1.2 && t < 8.5) scr.push(penS(60, 150, 'upstairs: 1,200 guests', 32, -3, EX.orange));
     if (t > 11 && t < 16) scr.push(penS(1100, 150, 'downstairs: the kitchen', 34, -3, EX.orange), tag(1180, 230, 'COMPOSITE CHARACTER', smooth(11.5, 12, t)));
   }
+  if (quiet) scr.length = 0;
   return frame(msDefs(t), `<rect width="1920" height="1080" fill="url(#msnight)"/>`, world.join(''), scr.join(''), t);
 }
 
@@ -520,7 +522,7 @@ if (typeof window !== 'undefined') Object.assign(window, {renderFifth, renderBal
 /* ---------- s5: a Sunday ballgame, mid-1880s (American Association: cheap seats, beer) ---------- */
 // A side view down the first-base line: a wooden grandstand with a roof on posts and bunting, open bleachers, a board fence, the
 // field. Michael and his sister (coral) sit in the 25-cent bleachers; a vendor sells beer. The pitch, the swing, the ball, the crowd up.
-function renderBallpark({t, cam}) {
+function renderBallpark({t, cam, quiet = false}) {
   const c = cam2(cam), GF = 820, s = [], r = rng(1884), hit = 3.0, ballT = t - hit;
   const crowdUp = smooth(hit + 0.2, hit + 0.6, t) * (1 - smooth(hit + 3.4, hit + 4.4, t));
   // far: trees, city roofs, a factory chimney
@@ -579,6 +581,7 @@ function renderBallpark({t, cam}) {
   s.push(layerAt(c, 1.25, f.join('')));
   const scr = [tag(40, 1040, 'A SUNDAY GAME · BROOKLYN · 1884', 1)];
   if (t > 4.6) scr.push(penS(1180, 140, 'sunday, cheap seats, and beer', 32, -3, EX.orange));
+  if (quiet) scr.length = 0;
   return frame(msDefs(t), `<rect width="1920" height="1080" fill="url(#msday)"/>` + clouds(t), s.join(''), scr.join(''), t);
 }
 Object.assign(CLIPS, {ballpark: {sec: 9, render: (t) => renderBallpark({t, cam: {z: 1.0 + 0.02 * t, ux: 1000 + 30 * t, uy: 600}})}});
@@ -590,7 +593,7 @@ if (typeof window !== 'undefined') Object.assign(window, {renderBallpark});
 // kerosene lamp; the only window opens on the airshaft, a brick wall an arm's length away. The mother sews piecework (shirts,
 // paid by the dozen) at the table by the lamp, finished ones piled on a chair; the younger brother bastes beside her. On her
 // afternoon off the sister comes in, still in her maid's dress, and puts her wages on the table. The Kellys are coral.
-function renderFlat({t, cam}) {
+function renderFlat({t, cam, quiet = false}) {
   const c = cam2(cam), s = [], F = 900, H8 = 360; // floor; a grown man's height
   const fl = 0.86 + 0.08 * Math.sin(t * 7.3) + 0.06 * Math.sin(t * 17.1);
   // the walls: faded wallpaper, peeling plaster with lath, a water stain, soot above the stove, a worn wainscot
@@ -639,13 +642,14 @@ function renderFlat({t, cam}) {
   // the door frame, left, the dark hall beyond
   s.push(`<rect x="-120" y="120" width="170" height="${F - 120}" fill="#060A0A" opacity="${f1(0.9 - 0.3 * enter * (1 - smooth(5.6, 6.4, t)))}"/><rect x="50" y="110" width="18" height="${F - 110}" fill="#0D0C09"/>`);
   const world = layerAt(c, 1, s.join(''));
-  const scr = [tag(40, 1040, 'THE KELLYS\' FLAT · LOWER EAST SIDE · 1883', 1)];
+  const scr = [tag(40, 1040, 'THE KELLYS\' FLAT · BROOKLYN · 1883', 1)];
   if (t > 1 && t < 5.5) scr.push(penS(1180, 140, 'one room: kitchen, workshop, bedroom', 30, -3, EX.orange));
   if (t > 6.8) scr.push(penS(1240, 140, 'her week\'s wages', 34, -3, EX.orange), tag(1250, 220, 'COMPOSITE CHARACTERS', smooth(6.8, 7.2, t)));
   const defs = msDefs(t).replace('</defs>', `<pattern id="flwp" width="40" height="56" patternUnits="userSpaceOnUse"><path d="M20,6 q10,10 0,20 q-10,10 0,20" stroke="#DFE0D6" stroke-width="2" fill="none"/><circle cx="4" cy="28" r="3" fill="#DFE0D6"/></pattern>` +
     `<linearGradient id="flstain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050A09" stop-opacity="0.55"/><stop offset="1" stop-color="#050A09" stop-opacity="0"/></linearGradient>` +
     `<radialGradient id="flsoot" cx="0.5" cy="0.2" r="0.6"><stop offset="0" stop-color="#030606" stop-opacity="0.6"/><stop offset="1" stop-color="#030606" stop-opacity="0"/></radialGradient>` +
     `<linearGradient id="flshaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A3BAB2" stop-opacity="0.45"/><stop offset="0.5" stop-color="#5F857F" stop-opacity="0.2"/><stop offset="1" stop-color="#000" stop-opacity="0.5"/></linearGradient></defs>`);
+  if (quiet) scr.length = 0;
   return frame(defs, `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), t);
 }
 Object.assign(CLIPS, {kelly_flat: {sec: 9, render: (t) => renderFlat({t, cam: (() => { const u = ease(t / 9); return {z: lerpLog(0.86, 1.06, u), ux: 960 - 40 * u, uy: 540 + 40 * u}; })()})}});
