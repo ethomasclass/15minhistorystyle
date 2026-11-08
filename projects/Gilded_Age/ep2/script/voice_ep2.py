@@ -30,6 +30,7 @@ SPEAKER = re.compile(r'^(MICHAEL|MA|NORA):\s*')
 # A line changed after approval is re-voiced alone: its neighbours keep being sent the OLD text as context, so their requests
 # (and takes) stay exactly as approved. new tts text -> the tts text it replaced.
 CONTEXT_AS = {
+    "[dry] And how were the rich, then?": "[dry] And how were the rich?",   # ch04: the old take stuttered on 'rich'
 }
 
 
