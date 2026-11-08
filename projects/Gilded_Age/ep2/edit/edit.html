@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face {font-family: Abril; src: url(../../../../brand/fonts/AbrilFatface.woff2);}
+  @font-face {font-family: Mono; src: url(../../../../brand/fonts/IBMPlexMono.woff2);}
+  @font-face {font-family: Inter; font-weight: 600; src: url(../../../../brand/fonts/Inter-600.woff2);}
+  @font-face {font-family: Inter; font-weight: 800; src: url(../../../../brand/fonts/Inter-800.woff2);}
+  @font-face {font-family: Pen; src: url(../../../../brand/fonts/NanumPenScript.woff2);}
+  @font-face {font-family: Playfair; font-weight: 900; src: url(../../../../brand/fonts/PlayfairDisplay-900.woff2);}
+  html, body {margin: 0; background: #0d0c09;}
+  #stage {position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #0d0c09;}
+  .layer {position: absolute; inset: 0;}
+  .layer > svg {position: absolute; inset: 0;}
+  .layer * {box-sizing: border-box;}
+</style>
+<script src="../../lookdev/rig.js"></script>
+<script src="../../lookdev/scene.js"></script>
+<script src="../../lookdev/street.js"></script>
+<script src="../../lookdev/cutaway.js"></script>
+<script src="../../lookdev/explainers.js"></script>
+<script src="../../lookdev/refinery.js"></script>
+<script src="../../lookdev/loom.js"></script>
+<script src="../../lookdev/bessemer.js"></script>
+<script src="../../lookdev/mansion.js"></script>
+<script src="../../lookdev/ep2_more.js"></script>
+<script src="../../lookdev/text.js"></script>
+<script src="edit.js"></script>
+<script src="ch01.js"></script>
+<script src="ch02.js"></script>
+<script src="ch03.js"></script>
+<script src="ch04.js"></script>
+<script src="ch05.js"></script>
+<script src="ch06.js"></script>
+<script src="ch07.js"></script>
+<script src="ch08.js"></script>
+<script src="title.js"></script>
+<script src="brand.js"></script>
+</head><body>
+<div id="stage"><div id="A" class="layer"></div><div id="B" class="layer"></div></div>
+<script>
+  window.drawEdit = (ch, T) => {
+    const f = editFrame(ch, T);
+    document.getElementById('A').innerHTML = f.a;
+    const b = document.getElementById('B');
+    b.innerHTML = f.b || ''; b.style.opacity = f.b ? f.mix : 0;
+    return document.fonts.ready.then(() => Promise.all([...document.images].map((im) => im.complete ? 1 : new Promise((r) => { im.onload = im.onerror = r; }))));
+  };
+</script>
+</body></html>
