@@ -3,7 +3,9 @@
 // injected by render_edit.mjs as window.WORDS[ch], so re-voicing re-times the cut without touching the shots.
 //   EDITS.ch01 = () => ({dur, shots: [{a, b, draw: (T) => html}, ...]})
 const EDITS = {};
-const XF = 0.3;                    // crossfade between shots, seconds (centred on the cut)
+const XF = 0.3;
+const STEP = 12;                   // drawings a second for desk/prop/text shots
+const LIVE = /render(Scene|Refinery|Loom|Bessemer|VI|HI|Cutaway|Street)\(|gateScene\(/;                    // crossfade between shots, seconds (centred on the cut)
 const IMG = '../public/img/';
 
 /** Start time of the nth (1-based) occurrence of a word in a chapter, matched without punctuation or case. */
@@ -26,9 +28,15 @@ function editFrame(ch, T) {
   const fade = E.fadeOut ? fout(T, E.dur - E.fadeOut, E.fadeOut) : 1;
   const wrap = (h) => fade < 1 ? `${h}<div style="position:absolute;inset:0;background:#0d0c09;opacity:${(1 - fade).toFixed(3)}"></div>` : h;
   const s = S[i], next = S[i + 1], prev = S[i - 1];
-  if (next && !next.cut && T > s.b - XF / 2) return {a: wrap(s.draw(T)), b: wrap(next.draw(T)), mix: ease((T - (s.b - XF / 2)) / XF)};
-  if (prev && !s.cut && T < s.a + XF / 2) return {a: wrap(prev.draw(T)), b: wrap(s.draw(T)), mix: ease((T - (s.a - XF / 2)) / XF)};
-  return {a: wrap(s.draw(T))};
+  // The handmade look: desk, print, prop, text and drawn-explainer shots move on 12 drawings a second (each pose held 2-3
+  // frames); the animated silhouette scenes and look-dev explainers ("live" shots) stay smooth at 30. Crossfades and the
+  // closing fade use real time, so cuts never stutter.
+  const live = (sh) => sh.live ?? (sh.live = LIVE.test(sh.draw.toString()));
+  const at = (sh) => live(sh) ? T : Math.floor(T * STEP + 1e-6) / STEP;
+  const drw = (sh) => sh.draw(at(sh));
+  if (next && !next.cut && T > s.b - XF / 2) return {a: wrap(drw(s)), b: wrap(drw(next)), mix: ease((T - (s.b - XF / 2)) / XF)};
+  if (prev && !s.cut && T < s.a + XF / 2) return {a: wrap(drw(prev)), b: wrap(drw(s)), mix: ease((T - (s.a - XF / 2)) / XF)};
+  return {a: wrap(drw(s))};
 }
 
 /* ---------- shared pieces ---------- */
