@@ -5,7 +5,7 @@
 const EDITS = {};
 const XF = 0.3;
 const STEP = 12;                   // drawings a second for desk/prop/text shots
-const LIVE = /render(Scene|Refinery|Loom|Bessemer|VI|HI|Cutaway|Street)\(|gateScene\(|medicine\(/;                    // crossfade between shots, seconds (centred on the cut)
+const LIVE = /render(Scene|Refinery|Loom|Bessemer|VI|HI|Cutaway|Street)\(|gateScene\(|medicine\(|mansion\(/;                    // crossfade between shots, seconds (centred on the cut)
 const IMG = '../public/img/';
 
 /** Start time of the nth (1-based) occurrence of a word in a chapter, matched without punctuation or case. */

@@ -4,7 +4,7 @@ EDITS.ch09 = () => {
   const c = {
     cables: w('Each') - 0.3, trick: w('The', 4) - 0.3, caught: w('They') - 0.3, fix: w('By') - 0.3, held: w('built') - 0.8,
     recap: w('So', 3) - 0.3, money: w('who', 1) - 0.4, home: w('Michael', 1) - 0.3, outside: w('From') - 0.3, gold: w('Gold', 2) - 0.3,
-    q: w('Who', 3) - 0.3, next: w('Next') - 0.3, thanks: w('Thanks') - 0.3,
+    q: w('Who', 3) - 0.3, next: w('Next') - 0.3, sister: w('inside', 2) - 0.3, thanks: w('Thanks') - 0.3,
   };
   const backdrop = (T, a, b, z = 0.035) => `<div style="position:absolute;inset:0;transform:scale(${(1 + z * ease((T - a) / (b - a))).toFixed(4)})">${desk()}`;
   const xw = B.tB - 330, saddle = B.top + 8, mid = (B.tM + B.tB) / 2;
@@ -46,6 +46,37 @@ EDITS.ch09 = () => {
       op(fin(T, w('failed')), pen('...failed wire on', {x: 1080, y: 240, size: 46, rot: -4, color: C.orange})) +
       op(fin(T, w('Same', 1)), pen('same wagon. same certificate.', {x: 1060, y: 820, size: 50, rot: -3, color: C.orange})) +
       op(fin(T, w('back', 2)), pen('the good wire, tested again', {x: 220, y: 820, size: 46, rot: -3, color: C.orange}));
+  }
+
+  /** Fifth Avenue at night: a mansion lit up floor by floor, and below the street, the servants' door. Michael's sister (coral,
+   *  a maid's cap and apron) walks along the railing and down the areaway steps. Reused in Episode 2. */
+  function mansion(T) {
+    const G = 860, a0 = c.sister, s = [], z = 1 + 0.08 * ease((T - a0) / (c.thanks - a0));
+    s.push(`<defs>${MAT_DEFS}<linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A1C"/><stop offset="1" stop-color="#2C4442"/></linearGradient>
+      <radialGradient id="glw"><stop offset="0" stop-color="#FFD9A0" stop-opacity=".55"/><stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/></radialGradient></defs>`);
+    s.push(`<rect width="1920" height="1080" fill="url(#nsky)"/>`);
+    // the mansion: stone facade, cornices, tall lit windows, a grand front door up a stoop
+    s.push(MAT.stone(220, 120, 1300, G - 120, {base: '#3A4542', seed: 501, bh: 26}));
+    for (const y of [120, 360, 600]) s.push(`<rect x="200" y="${y - 18}" width="1340" height="22" fill="#232B29"/>`);
+    for (let fl = 0; fl < 3; fl++) for (let k = 0; k < 6; k++) { const x = 290 + k * 200, y = 170 + fl * 240, lit = (k * 3 + fl) % 4 !== 1;
+      s.push(`<rect x="${x - 16}" y="${y - 16}" width="112" height="182" fill="#1B2321"/><rect x="${x}" y="${y}" width="80" height="150" fill="${lit ? '#E9C57A' : '#16201E'}" opacity="${lit ? (0.85 + 0.05 * Math.sin(T * 3 + k)).toFixed(2) : 1}"/>`);
+      if (lit) s.push(`<rect x="${x + 38}" y="${y}" width="4" height="150" fill="#3A2E1C"/><rect x="${x}" y="${y + 72}" width="80" height="4" fill="#3A2E1C"/><ellipse cx="${x + 40}" cy="${y + 75}" rx="120" ry="120" fill="url(#glw)"/>`); }
+    s.push(`<rect x="760" y="${G - 220}" width="220" height="220" fill="#151B1A"/><path d="M760,${G - 220} Q870,${G - 300} 980,${G - 220} Z" fill="#232B29"/><rect x="780" y="${G - 200}" width="180" height="190" fill="#2A1E12"/>`);
+    for (let k = 0; k < 4; k++) s.push(`<rect x="${700 - k * 22}" y="${G + k * 18}" width="${340 + k * 44}" height="18" fill="#2A3331"/>`);
+    // the sidewalk, the iron railing, the areaway below street level with the servants' door
+    s.push(`<rect x="0" y="${G + 70}" width="1920" height="200" fill="#0D0C09"/>`);
+    s.push(`<rect x="1240" y="${G - 40}" width="300" height="110" fill="#0A0E0D"/><rect x="1440" y="${G - 34}" width="70" height="104" fill="#3C2A16"/><rect x="1452" y="${G - 22}" width="46" height="36" fill="#E9C57A" opacity=".8"/>`);
+    for (let x = 1100; x < 1580; x += 18) s.push(`<rect x="${x}" y="${G - 10}" width="4" height="80" fill="#050707"/>`);
+    s.push(`<rect x="1100" y="${G - 14}" width="480" height="6" fill="#050707"/>`);
+    s.push(`<rect x="1640" y="${G - 300}" width="10" height="370" fill="#050707"/><path d="M1620,${G - 330} L1670,${G - 330} L1660,${G - 290} L1630,${G - 290} Z" fill="#E9C57A"/><ellipse cx="1645" cy="${G - 300}" rx="180" ry="180" fill="url(#glw)"/>`);
+    // the sister walks along the sidewalk to the areaway gate and down
+    const k = clamp01((T - a0) / (w('maid') - a0)), x = 300 + 1080 * ease(k), down = clamp01((x - 1240) / 160), y = G + 70 + 110 * down * 0.0;
+    s.push(figure(cast('sister', {x, y, h: 330, d: 1, an: {...walkAn(walkPhase(x - 300, 330 * 0.88)), tilt: -4}, rim: {c: '#FFE3B0', a: 0.5, dx: -0.006, dy: -0.004}})));
+    return `<div style="position:absolute;inset:0;transform:scale(${z.toFixed(4)});transform-origin:1300px 760px">${svg(s.join(''))}</div>` +
+      op(fin(T, a0 + 0.3), mono('fifth avenue, new york &middot; night', {x: 44, y: 1020, size: 22, extra: 'background:rgba(13,12,9,.7);padding:6px 12px'})) +
+      slideUp(fin(T, w('Next')), tape('NEXT TIME', {x: 120, y: 40, size: 80, rot: -2, seed: 127})) +
+      op(fin(T, w('sister')), pen("michael's sister", {x: 1200, y: 150, size: 54, rot: -4, color: C.orange})) +
+      op(fin(T, w('maid')), pen('...as a maid', {x: 1300, y: 250, size: 58, rot: -5, color: C.orange}));
   }
 
   const shots = [
@@ -124,8 +155,8 @@ EDITS.ch09 = () => {
         <span style="background:linear-gradient(180deg,#F6E7B0 0%,#D9AE4E 45%,#9C7424 55%,#E9C56E 100%);-webkit-background-clip:text;color:transparent">GOLD</span>...</div>`) +
       (fin(T, w('gilt', 2) - 0.6) > 0 ? slideUp(fin(T, w('gilt', 2) - 0.6), `<div style="position:absolute;left:0;top:460px;width:1920px;text-align:center;font-family:Abril;font-size:80px;color:${C.cream}">AND WHO ONLY GOT THE</div>` +
         tape('GILT?', {x: 790, y: 580, size: 150, rot: -3, seed: 41})) : '')},
-    // 13. "Next time: Michael's sister gets a job inside one of those golden mansions. As a maid."
-    {a: c.next, b: c.thanks, draw: (T) => {
+    // 13a. "Next time:" the mansions on Fifth Avenue (photo, about 1885).
+    {a: c.next, b: c.sister, draw: (T) => {
       const room = fin(T, w('inside', 2), 0.6);
       return backdrop(T, c.next, c.thanks, 0.05) + deskCut('desk/vanderbilt_mansions.png', {x: 200, y: 120, w: 1100, rot: -2, o: fin(T, c.next + 0.1, 0.6), T}) +
         deskCut('desk/vanderbilt_drawing_room_1883.png', {x: 900, y: 320, w: 860, rot: 2.5, o: room, T}) + `</div>` +
@@ -134,6 +165,8 @@ EDITS.ch09 = () => {
         op(fin(T, w('sister')), pen("michael's sister", {x: 1260, y: 120, size: 52, rot: -4, color: C.orange})) +
         op(fin(T, w('maid')), pen('...as a maid', {x: 1340, y: 220, size: 56, rot: -5, color: C.orange}));
     }},
+    // 13b. "Michael's sister gets a job inside one of those golden mansions. As a maid." (drawn; reused in Episode 2)
+    {a: c.sister, b: c.thanks, draw: (T) => mansion(T)},
     // 14. "Thanks for watching. Subscribe for more, and I'll see you next time."
     {a: c.thanks, b: dur, draw: (T) => desk() + slideUp(fin(T, w('Thanks')), tape('THANKS FOR WATCHING', {x: 480, y: 380, size: 100, rot: -2, seed: 129})) +
       op(fin(T, w('Subscribe')), mono('chunk history &middot; the gilded age &middot; episode 1 of 6', {x: 560, y: 600, size: 26, color: C.teal}))},
