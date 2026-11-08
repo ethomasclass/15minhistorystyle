@@ -156,6 +156,8 @@ His answer was: nothing.
 
 One line from it: "A drunkard in the gutter is just where he ought to be."
 
+Sumner explained reformers with letters. A and B, he wrote, decide what C shall do for D. D is the poor person being helped. And C? C is the ordinary working man who pays for it. Sumner called him "the Forgotten Man."
+
 ## 6 | Sunday
 
 Spencer said Americans should relax. Michael and Nora were working on it.
@@ -236,6 +238,7 @@ Thanks for watching. Subscribe for more, and I'll see you next time.
 | Delmonico's banquet, "relax" speech | secondary; wording varies | paraphrase only (as written) |
 | "cost more than their workers made in a year" | **not sourced** | find the banquet's per-plate cost or cut the clause |
 | Sumner 1883 title and quote | Gutenberg text, primary | safe |
+| A, B, C, D and the Forgotten Man | Gutenberg text, primary ("A and B decide what C shall do for D"); the explainer's on-screen fuller wording "put their heads together..." must be checked against the Gutenberg text | check on-screen quote |
 | AA: Sunday games in some cities, beer, "Beer and Whiskey League" | SABR/secondary | safe; no ticket price |
 | Brooklyn in the AA from 1884 | so the ballgame is 1884+, a year after the ball | on-screen date tag "1884" |
 | polo, Newport tennis, yachts | standard, unchecked | check before voicing |
