@@ -200,3 +200,7 @@ reference images (`sheet_*.jpg`, built by `ep2sheet.py`). Stills: `node ep2still
   the dark hall in her maid's dress and puts her wages on the table ("her week's wages", "COMPOSITE CHARACTERS"). All coral.
 
 Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume outline only.
+- **Carriages, fixed (Nov 8):** `msHorse` in `mansion.js` re-derives street.js's four-beat walk so the cycle length matches the
+  hoof's sweep while planted (checked numerically: a planted hoof's x holds to 0.1 px across frames); wheels turn at
+  distance / radius; the body bobs and rocks on elliptic springs with speed; carriages ease into the canopy and away; standing
+  horses rest a hind leg and toss their heads; the coachmen sway.
