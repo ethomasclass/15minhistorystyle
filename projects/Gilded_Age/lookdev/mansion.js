@@ -71,7 +71,7 @@ const COSTUME = {
     return `<ellipse cx="${f1(X(0.0))}" cy="${f1(Y(0.995))}" rx="${f1(0.085 * o.h)}" ry="${f1(0.022 * o.h)}" fill="${c}"/>` + `<path d="M${f1(X(-0.04))},${f1(Y(1.0))} q${f1(-o.d * 0.1 * o.h)},${f1(-0.08 * o.h)} ${f1(-o.d * 0.16 * o.h)},${f1(-0.02 * o.h)}" stroke="${c}" stroke-width="${f1(0.012 * o.h)}" fill="none"/>`; },
   cape(o, c) { const X = (u) => o.x + o.d * u * o.h, Y = (v) => o.y - v * o.h; return poly([[X(-0.06), Y(0.84)], [X(-0.2), Y(0.36)], [X(0.0), Y(0.4)], [X(0.06), Y(0.8)]], c); },
   ruff(o, c) { const X = (u) => o.x + o.d * u * o.h, Y = (v) => o.y - v * o.h; return `<ellipse cx="${f1(X(0.01))}" cy="${f1(Y(0.85))}" rx="${f1(0.07 * o.h)}" ry="${f1(0.025 * o.h)}" fill="${c}"/>`; },
-  toque(o, c) { const X = (u) => o.x + o.d * u * o.h, Y = (v) => o.y - v * o.h; return `<rect x="${f1(X(0) - 0.055 * o.h)}" y="${f1(Y(1.12))}" width="${f1(0.11 * o.h)}" height="${f1(0.13 * o.h)}" rx="${f1(0.03 * o.h)}" fill="${c}"/>`; },
+  toque(o, c) { const X = (u) => o.x + o.d * u * o.h, Y = (v) => o.y - v * o.h; return `<path d="M${f1(X(-0.055))},${f1(Y(0.93))} L${f1(X(-0.07))},${f1(Y(1.08))} Q${f1(X(-0.09))},${f1(Y(1.17))} ${f1(X(0))},${f1(Y(1.16))} Q${f1(X(0.09))},${f1(Y(1.17))} ${f1(X(0.07))},${f1(Y(1.08))} L${f1(X(0.07))},${f1(Y(0.93))} Z" fill="${c}"/>`; },
   wig(o, c) { const X = (u) => o.x + o.d * u * o.h, Y = (v) => o.y - v * o.h; return `<ellipse cx="${f1(X(-0.01))}" cy="${f1(Y(0.95))}" rx="${f1(0.07 * o.h)}" ry="${f1(0.06 * o.h)}" fill="${c}"/>`; },
 };
 // a guest: figure() with no face detail, plus a costume piece
@@ -87,9 +87,9 @@ function brougham(x, gy, sz, c, dist, open = 0, lamp = 1) { // a closed carriage
   const s = [], X = (u) => x - u * sz;
   s.push(horse(x, gy, sz, c, dist / 120, 1));
   s.push(line([[X(0.3), gy - 0.78 * sz], [X(0.95), gy - 0.62 * sz]], c, 0.04 * sz));
-  const bx0 = X(2.3), bx1 = X(1.05), top = gy - 1.25 * sz, bot = gy - 0.42 * sz;
+  const bx0 = X(2.3), bx1 = X(1.05), top = gy - 1.55 * sz, bot = gy - 0.42 * sz;
   s.push(`<path d="M${f1(bx0)},${f1(bot)} L${f1(bx0)},${f1(top + 0.08 * sz)} Q${f1(bx0)},${f1(top)} ${f1(bx0 + 0.1 * sz)},${f1(top)} L${f1(X(1.45))},${f1(top)} L${f1(X(1.45))},${f1(gy - 0.8 * sz)} Q${f1(bx1)},${f1(gy - 0.78 * sz)} ${f1(bx1)},${f1(bot - 0.1 * sz)} L${f1(X(1.2))},${f1(bot)} Z" fill="${c}"/>`);
-  s.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.12 * sz)}" width="${f1(0.36 * sz)}" height="${f1(0.3 * sz)}" fill="${MS.warm}" opacity="0.35"/>`);
+  s.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.12 * sz)}" width="${f1(0.36 * sz)}" height="${f1(0.4 * sz)}" fill="${MS.warm}" opacity="0.35"/>`);
   if (open > 0) s.push(`<rect x="${f1(X(2.05))}" y="${f1(top + 0.1 * sz)}" width="${f1(0.4 * sz * open)}" height="${f1(0.72 * sz)}" fill="${MS.warm}" opacity="0.5"/><rect x="${f1(X(2.05) - 0.38 * sz * open)}" y="${f1(top + 0.1 * sz)}" width="${f1(0.36 * sz * open)}" height="${f1(0.72 * sz)}" fill="${c}"/>`);
   s.push(`<rect x="${f1(X(1.12))}" y="${f1(top + 0.18 * sz)}" width="${f1(0.06 * sz)}" height="${f1(0.12 * sz)}" fill="${MS.warm}" opacity="${f1(0.85 * lamp)}"/>` + glowC(X(1.09), top + 0.24 * sz, 0.4 * sz, 0.5 * lamp));
   s.push(figure({x: X(1.3), y: top + 0.12 * sz + 0.5 * 1.05 * sz, h: 1.05 * sz, d: 1, kind: 'man', hat: 'top', coat: 'frock', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -2, fArm: [100, 80]}}));
@@ -113,7 +113,7 @@ function arcLamp(x, base, on, t) { // an electric arc lamp on a tall pole: harde
 
 /* ---------- the chateau ---------- */
 function windowSet(x, y, w, h, lit, t, seed, hood = true) { // a stone-mullioned cross window with a Gothic hood moulding
-  const r = rng(seed), on = lit * (r() > 0.12 ? 1 : 0.3), fl = 0.92 + 0.08 * Math.sin(t * 5 + seed);
+  const r = rng(seed), on = (r() < lit * 1.05 ? 1 : 0) * (r() > 0.12 ? 1 : 0.3), fl = 0.92 + 0.08 * Math.sin(t * 5 + seed);
   let s = on > 0.02 ? glowC(x + w / 2, y + h / 2, w * 1.3, 0.35 * on * fl) : '';
   s += `<rect x="${x - 5}" y="${y - 5}" width="${w + 10}" height="${h + 10}" fill="${MS.stoneD}"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${on > 0.02 ? MS.warm : '#0E1918'}" opacity="${f1(on > 0.02 ? 0.35 + 0.6 * on * fl : 1)}"/>`;
   s += `<rect x="${x + w / 2 - 3}" y="${y}" width="6" height="${h}" fill="${MS.stoneD}"/><rect x="${x}" y="${y + h * 0.36}" width="${w}" height="6" fill="${MS.stoneD}"/>`;
@@ -165,7 +165,7 @@ function chateau(t, lit, dawn = 0) {
   s.push(`<path d="${rail}" stroke="${MS.ink}" stroke-width="2.5"/><rect x="${x0 - 20}" y="${G5 - 36}" width="${x1 - x0 + 40}" height="4" fill="${MS.ink}" opacity="0.9"/>`);
   // the corner turret: corbelled out from the second floor, rising to a tall slate cone with a finial
   const tx = x0 + 10, tr = 62;
-  s.push(`<path d="M${tx - tr},610 L${tx + tr},610 L${tx},700 Z" fill="${MS.stone}"/><rect x="${tx - tr}" y="200" width="${tr * 2}" height="410" fill="${MS.stone}"/><rect x="${tx - tr}" y="200" width="${tr * 2}" height="410" fill="url(#msround)"/>`);
+  s.push(`<path d="M${tx - tr},610 L${tx + tr},610 L${tx + 20},650 L${tx - 20},650 Z" fill="${MS.stone}"/><rect x="${tx - tr}" y="200" width="${tr * 2}" height="410" fill="${MS.stone}"/><rect x="${tx - tr}" y="200" width="${tr * 2}" height="410" fill="url(#msround)"/>`);
   for (const y of [470, 330, 225]) s.push(windowSet(tx - 16, y, 32, y === 225 ? 50 : 90, lit, t, 70 + y, false));
   s.push(`<rect x="${tx - tr - 6}" y="192" width="${tr * 2 + 12}" height="12" fill="#41625D"/>` + slateRoof([[tx - tr - 4, 194], [tx, -180], [tx + tr + 4, 194]], 2) + `<path d="M${tx},-180 l0,-34 M${tx - 8},-200 l16,0" stroke="${MS.ink}" stroke-width="4"/>`);
   // dormers and the stone gable at the north end, with pinnacles and crockets
@@ -207,26 +207,27 @@ const GUESTS = [ // costume outlines, after the Sun's descriptions and Mora's ph
   [{kind: 'man', cos: ['cape'], hat: 'top'}, {kind: 'woman', hat: 'none', cos: ['ruff']}],
 ];
 function arrivals(t, z) {
-  const s = [], q = queue(t), sz = ARR.sz, stop = DOOR + 2.0 * sz;
+  const s = [], q = queue(t), sz = ARR.sz, stop = DOOR + 240;
   for (let i = q.k - 2; i < q.k + 6; i++) {
     const x = stop + (q.n - i) * ARR.S + (q.n - i > 0.5 ? (q.n - i - 0.5) * 300 : 0);
     const open = i === q.k ? smooth(1.9, 2.3, q.u) * (1 - smooth(4.0, 4.4, q.u)) : 0;
-    s.push(brougham(x, ROAD, sz, MS.ink, x, open));
-    if (i === q.k) { // a footman at the door; two guests step down and walk up under the canopy
-      s.push(guest({x: stop - 2.0 * sz - 40, y: ROAD + 2, h: 64, d: 1, coat: 'frock', wear: ['knickers'], cos: ['wig'], an: {fArm: [110, 90]}}));
+    if (i === q.k) { // the guests step down on the curb side, come out from behind the carriage and go up the carpet; a footman holds the door
+      s.push(guest({x: DOOR + 70 - 30 * open, y: CURB - 4, h: 64, d: -1, coat: 'frock', wear: ['knickers'], cos: ['wig'], an: {fArm: [100 - 10 * open, 80]}}));
       GUESTS[((i % 4) + 4) % 4].forEach((g, j) => {
-        const u = clamp01((q.u - 2.2 - j * 0.6) / 1.9); if (u <= 0 || u >= 1) return;
-        const gx = stop - 2.05 * sz + 20 * u + j * 6, gy = ROAD + 2 - (ROAD - G5 - 8) * smooth(0.15, 1, u), hh = 66 - 8 * u;
-        s.push(`<g opacity="${f1(1 - smooth(0.85, 1, u))}">` + guest({...g, x: gx, y: gy, h: hh, d: 1, an: walkAn(walkPhase(u * 160, hh))}, t) + '</g>');
+        const u = clamp01((q.u - 2.1 - j * 0.55) / 2.3); if (u <= 0 || u >= 1) return;
+        const a2 = smooth(0, 0.5, u), b2 = smooth(0.5, 1, u);
+        const gx = DOOR + 110 - 110 * a2 + j * 14, gy = CURB - 2 - (CURB - G5 - 4) * b2, hh = 68 - 8 * b2, d = a2 < 0.98 ? -1 : 1;
+        s.push(`<g opacity="${f1(1 - smooth(0.9, 1, u))}">` + guest({...g, x: gx, y: gy, h: hh, d, an: walkAn(walkPhase(u * 200, hh))}, t) + '</g>');
       });
     }
+    s.push(brougham(x, ROAD, sz, MS.ink, x, open));
   }
   return s.join('');
 }
 function canopy(dawn) { // an awning from the door to the curb, and a carpet
   const c = MS.ink, x0 = DOOR - 80, x1 = DOOR + 80;
   return `<rect x="${x0}" y="${G5 + 4}" width="160" height="${CURB - G5}" fill="#1F3735"/>` + (dawn > 0.5 ? '' :
-    `<path d="M${x0 - 10},${G5 - 150} L${x1 + 10},${G5 - 150} L${x1 + 20},${CURB - 120} L${x0 - 20},${CURB - 120} Z" fill="${c}" opacity="0.9"/><rect x="${x0 - 18}" y="${CURB - 124}" width="6" height="124" fill="${c}"/><rect x="${x1 + 12}" y="${CURB - 124}" width="6" height="124" fill="${c}"/>`);
+    `<rect x="${x0 - 22}" y="${CURB - 132}" width="204" height="14" fill="${c}"/><path d="M${x0 - 22},${CURB - 118} ${[...Array(12)].map((_, k) => `q8.5,12 17,0`).join(' ')}" fill="${c}"/><rect x="${x0 - 18}" y="${CURB - 124}" width="6" height="124" fill="${c}"/><rect x="${x1 + 12}" y="${CURB - 124}" width="6" height="124" fill="${c}"/>`);
 }
 function onlookersFar(t) { // the crowd on the house's sidewalk, held back on either side of the canopy by police
   const s = [], r = rng(1883);
@@ -243,7 +244,7 @@ function onlookersNear(t, rimA) { // the crowd on the near sidewalk, in the fore
   for (let i = 0; i < 14; i++) {
     const x = -300 + i * 330 + r() * 120, h = 300 + r() * 50, kind = r() > 0.55 ? 'woman' : 'man', ph = r();
     const wave = kind === 'man' && r() > 0.6 && (t + ph * 6) % 6 < 1.4;
-    s.push(figure({x, y: 1250, h, d: r() > 0.3 ? 1 : -1, kind, hat: kind === 'man' ? ['bowler', 'cap', 'top'][Math.floor(r() * 3)] : 'lady', coat: 'sack', fill: '#060807',
+    s.push(figure({x, y: 1200, h, d: r() > 0.3 ? 1 : -1, kind, hat: kind === 'man' ? ['bowler', 'cap', 'top'][Math.floor(r() * 3)] : 'lady', coat: 'sack', fill: '#060807',
       rim: {...MS.rim, a: rimA}, an: {...POSES.stand(t, ph), tilt: 8, ...(wave ? {fArm: [20, 10]} : {})}}));
   }
   return s.join('');
@@ -251,7 +252,7 @@ function onlookersNear(t, rimA) { // the crowd on the near sidewalk, in the fore
 function lamplighter(x, t) { return figure({x, y: CURB - 2, h: 62, d: 1, kind: 'man', hat: 'cap', coat: 'jacket', fill: MS.ink, an: {...walkAn(walkPhase(x, 62)), fArm: [30, 20]}}) + line([[x + 10, CURB - 62], [x + 40, CURB - 150]], MS.ink, 3); }
 
 function msDefs(t) {
-  return exDefs(t).replace('</defs>', grad('msnight', MS.night) + grad('msdawn', MS.dawn) +
+  return exDefs(t).replace('</defs>', grad('msnight', MS.night) + grad('msday', [['0', '#5F857F'], ['0.7', '#A3BAB2'], ['1', '#DFE0D6']]) + grad('msdawn', MS.dawn) +
     `<radialGradient id="msglow"><stop offset="0" stop-color="#FFF3D6" stop-opacity="0.5"/><stop offset="0.4" stop-color="#FFF3D6" stop-opacity="0.15"/><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"/></radialGradient>` +
     `<radialGradient id="msbulb"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.7"/><stop offset="0.3" stop-color="#E6FFF9" stop-opacity="0.22"/><stop offset="1" stop-color="#E6FFF9" stop-opacity="0"/></radialGradient>` +
     `<linearGradient id="msstone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.25"/><stop offset="0.6" stop-color="#FFF3D6" stop-opacity="0.04"/><stop offset="1" stop-color="#FFF3D6" stop-opacity="0.12"/></linearGradient>` +
@@ -267,7 +268,8 @@ function renderFifth({t, dawn = 0, cam}) {
   const sky = `<rect width="1920" height="1080" fill="url(#msnight)"/>` + (dawn > 0 ? `<rect width="1920" height="1080" fill="url(#msdawn)" opacity="${f1(dawn)}"/>` : '');
   const stars = dawn < 1 ? (() => { const r = rng(9); let s2 = ''; for (let i = 0; i < 60; i++) s2 += `<circle cx="${f1(r() * 1920)}" cy="${f1(r() * 500)}" r="${f1(0.8 + r())}" fill="#DFE0D6" opacity="${f1((0.25 + 0.3 * r()) * (1 - dawn))}"/>`; return s2; })() : '';
   // far: the city's roofline and St. Thomas's tower a block north
-  world.push(layerAt(c, 0.35, `<rect x="-2000" y="${G5 - 260}" width="8000" height="2000" fill="#1C3332"/>` + stThomas(3300, G5, '#1C3332') + (() => { const r = rng(3); let s2 = ''; for (let x = -1500; x < 5000; x += 160 + r() * 120) { const hh = 280 + r() * 260; s2 += `<rect x="${f1(x)}" y="${f1(G5 - hh)}" width="${f1(140 + r() * 100)}" height="${f1(hh)}" fill="#1C3332"/>`; } return s2; })()));
+  const farC = dawn ? '#3E5F5A' : '#1C3332';
+  world.push(layerAt(c, 0.35, (`<rect x="-2000" y="${G5 - 260}" width="8000" height="2000" fill="#1C3332"/>` + stThomas(3300, G5, '#1C3332') + (() => { const r = rng(3); let s2 = ''; for (let x = -1500; x < 5000; x += 160 + r() * 120) { const hh = 280 + r() * 260; s2 += `<rect x="${f1(x)}" y="${f1(G5 - hh)}" width="${f1(140 + r() * 100)}" height="${f1(hh)}" fill="#1C3332"/>`; } return s2; })()).replace(/#1C3332/g, farC)));
   // main: the triple palace, 52nd Street, the chateau, brownstones north
   const main = [];
   main.push(brownstones(-600, 1130, 250, lit * 0.8, t, 640));
@@ -282,7 +284,8 @@ function renderFifth({t, dawn = 0, cam}) {
   if (dawn > 0) main.push(lamplighter(lighterX - 30, t));
   if (dawn < 0.5) main.push(onlookersFar(t), arrivals(t, c.z)); else main.push(departures(t));
   world.push(layerAt(c, 1, main.join('')));
-  world.push(layerAt(c, 1.3, onlookersNear(t, 0.5 * (1 - dawn) + 0.2)));
+  if (!dawn) world.push(layerAt(c, 1.3, onlookersNear(t, 0.5)));
+  if (dawn) world.push(`<rect width="1920" height="1080" fill="url(#msdawn)" opacity="${f1(0.22 * dawn)}" style="mix-blend-mode:screen"/>`);
   const scr = [tag(40, 1040, dawn ? 'FIFTH AVENUE · DAWN, MARCH 27, 1883' : '660 FIFTH AVENUE · MONDAY, MARCH 26, 1883', 1)];
   if (!dawn && t > 4.5) scr.push(penS(1220, 140, '1,200 guests in costume', 34, -3, EX.orange));
   if (dawn && t > 3) scr.push(penS(1180, 140, 'the last dance ended at sunrise', 32, -3, EX.orange));
@@ -294,16 +297,19 @@ function s0push(a, v) { a.push(v); }
 function departures(t) {
   const s = [], sz = ARR.sz;
   // carriages pull away north; guests come down the steps in twos
-  for (let i = 0; i < 4; i++) { const x = DOOR + 2 * sz - 900 + i * 520 + t * 60 + (i === 0 ? 0 : 0); s.push(brougham(x, ROAD, sz, MS.ink, x, 0, 0.3)); }
   const pairs = [[0.4, {kind: 'woman', hat: 'none', cos: ['ruff']}], [0.9, {kind: 'man', cos: ['cape', 'beret'], coat: 'jacket', wear: ['knickers']}], [3.6, {kind: 'woman', hat: 'none', cos: ['wig']}], [4.1, {kind: 'man', cos: ['wig'], wear: ['knickers']}]];
   for (const [t0, g] of pairs) { const u = clamp01((t - t0) / 3.4); if (u <= 0 || u >= 1) continue;
     const gx = DOOR - 10 + 140 * u, gy = G5 + 2 + (ROAD - G5) * smooth(0, 0.7, u), hh = 58 + 8 * u;
     s.push(guest({...g, x: gx, y: gy, h: hh, d: 1, an: {...walkAn(walkPhase(u * 140, hh)), lean: 4}}, t)); }
-  // the sister: up the area steps with a pail of ashes, she stops at the top and watches them go
-  const ax = HX + 250, up = smooth(0.8, 4.2, t), y = G5 + 60 - 60 * up, x = ax - 30 + 40 * up, hs = 75 * 0.88 * 0.85;
-  const walking = t > 0.8 && t < 4.2;
-  s.push(figure({...cast('sister', {x, y, h: 75 * 0.85, d: 1}), det: 0, rim: {...MS.rim, a: 0.4}, pail: true, an: walking ? walkAn(walkPhase(up * 80, hs), {carry: true}) : {...POSES.stand(t, 0.2), tilt: t > 5 ? 6 : 0}}));
-  s.push(`<rect x="${ax - 40}" y="${G5}" width="80" height="70" fill="#0B1414"/>`.replace('fill', 'opacity="0" fill')); // (the areaway pit sits below the sidewalk)
+  // the sister: up the area steps from the basement door with a pail of ashes; at the top she stops and watches them go
+  const ax = HX + 250, up = smooth(0.8, 4.6, t), hs = 75 * 0.85 * 0.88;
+  let st = ''; for (let k = 0; k < 6; k++) st += `<rect x="${ax - 50 + k * 14}" y="${CURB + 30 - k * 12}" width="100" height="3" fill="#24403D"/>`;
+  s.push(`<rect x="${ax - 56}" y="${G5 + 6}" width="112" height="${CURB - G5 + 40}" fill="#060A0A"/>` + st + glowC(ax - 40, CURB, 60, 0.5));
+  const x = ax - 46 + 80 * up, y = CURB + 36 - (CURB + 36 - G5 - 24) * up, walking = t > 0.8 && t < 4.6;
+  s.push(figure({...cast('sister', {x, y, h: 75 * 0.85, d: 1}), det: 0, rim: {...MS.rim, a: 0.5}, pail: true,
+    an: walking ? walkAn(walkPhase(up * 110, hs), {carry: true}) : {...POSES.stand(t, 0.2), tilt: t > 5.2 ? 8 : 0}}));
+  s.push(`<rect x="-3000" y="${CURB}" width="9000" height="8" fill="#2B4744"/><rect x="${ax - 60}" y="${CURB + 8}" width="120" height="60" fill="#0E1A19"/>`);
+  for (let i = 0; i < 4; i++) { const x = DOOR + 2 * sz - 1150 + i * 520 + t * 60; s.push(brougham(x, ROAD, sz, MS.ink, x, 0, 0.3)); }
   return s.join('');
 }
 
@@ -388,7 +394,7 @@ function cpeople(t, z) {
     const line2 = i < 4 ? 0 : 1, k = i % 4, ph = TAU * t / 4, adv = 26 * Math.sin(ph) * (line2 ? -1 : 1);
     const x = x0 + 440 + k * 70 + adv + line2 * 30, y = fl.g - 2 - line2 * 10, d = (line2 ? -1 : 1) * (Math.sin(ph) > -0.9 ? 1 : -1);
     const hop = Math.abs(Math.sin(TAU * t * 1.2 + i)) * 0.03;
-    s.push(guest({x, y, h: M, d, kind: i % 2 ? 'woman' : 'man', hat: 'cap', coat: 'jacket', wear: i % 2 ? ['plain'] : [], cos: ['hobby'], an: {bob: hop, fArm: [120, 90], legs: [10 * Math.sin(TAU * t * 1.2 + i), -10 * Math.sin(TAU * t * 1.2 + i)]}}, t));
+    s.push(guest({x, y, h: M, d, kind: i % 2 ? 'woman' : 'man', hat: 'cap', coat: 'jacket', wear: i % 2 ? ['plain'] : [], cos: ['hobby'], an: {bob: hop, fArm: [140, 100], bArm: [150, 110], legs: [10 * Math.sin(TAU * t * 1.2 + i), -10 * Math.sin(TAU * t * 1.2 + i)]}}, t));
   }
   // couples at the edges of the floor, in costume
   const r = rng(5);
@@ -428,13 +434,13 @@ function cpeople(t, z) {
   return s.join('');
 }
 function chLabels(c) {
-  const lab = (lx, ly, wx, wy, txt) => { const X = c.sx(wx), Y = c.sy(wy); return `<path d="M${f1(lx < X ? lx + txt.length * 15 : lx - 10)},${f1(ly - 10)} L${f1(X)},${f1(Y)}" stroke="#111" stroke-width="6"/><path d="M${f1(lx < X ? lx + txt.length * 15 : lx - 10)},${f1(ly - 10)} L${f1(X)},${f1(Y)}" stroke="${EX.teal}" stroke-width="3"/><circle cx="${f1(X)}" cy="${f1(Y)}" r="6" fill="${EX.teal}"/>` + penS(lx, ly, txt, 26, -2); };
+  const lab = (lx, ly, wx, wy, txt) => { const X = c.sx(wx), Y = c.sy(wy); return `<path d="M${f1(lx < X ? lx + txt.length * 21 : lx - 10)},${f1(ly - 10)} L${f1(X)},${f1(Y)}" stroke="#111" stroke-width="6"/><path d="M${f1(lx < X ? lx + txt.length * 21 : lx - 10)},${f1(ly - 10)} L${f1(X)},${f1(Y)}" stroke="${EX.teal}" stroke-width="3"/><circle cx="${f1(X)}" cy="${f1(Y)}" r="6" fill="${EX.teal}"/>` + penS(lx, ly, txt, 26, -2); };
   const {x0, fl} = CH;
-  return [lab(1500, 200, x0 + 500, fl.at - 40, 'servants\' rooms under the roof'), lab(1500, 330, x0 + 700, fl.th - 40, 'the quadrilles gather'),
-    lab(1520, 470, x0 + 600, fl.s - 50, 'supper at 2 a.m.'), lab(1530, 610, x0 + 1100, fl.g - 140, 'down the grand staircase'),
-    lab(40, 650, x0 + 690, fl.g - 80, 'the electric light'), lab(40, 950, x0 + 300, fl.b - 40, 'the kitchen: every vanderbilt cook')].join('');
+  return [lab(1530, 200, x0 + 500, fl.at - 40, 'servants\' attic rooms'), lab(1530, 330, x0 + 700, fl.th - 40, 'quadrilles gather'),
+    lab(1520, 470, x0 + 600, fl.s - 50, 'supper, 2 a.m.'), lab(1530, 610, x0 + 1100, fl.g - 140, 'grand staircase'),
+    lab(40, 650, x0 + 690, fl.g - 80, 'the electric light'), lab(40, 975, x0 + 300, fl.b - 40, 'the kitchen')].join('');
 }
-const CH_KEYS = [[0, 0.78, 930, 540], [4.2, 0.8, 930, 540], [9.0, 2.0, 1060, 760], [10.2, 2.0, 1060, 760], [13.2, 4.6, 560, 950], [16, 4.9, 590, 950]];
+const CH_KEYS = [[0, 0.78, 930, 540], [4.2, 0.8, 930, 540], [9.0, 2.0, 1060, 760], [10.2, 2.0, 1060, 760], [13.2, 4.3, 560, 925], [16, 4.6, 590, 925]];
 function chCam(t) { let k = CH_KEYS.length - 2;
   for (let i = 0; i < CH_KEYS.length - 1; i++) if (t < CH_KEYS[i + 1][0]) { k = i; break; }
   const [t0, z0, x0, y0] = CH_KEYS[k], [t1, z1, x1, y1] = CH_KEYS[k + 1], u = ease(clamp01((t - t0) / (t1 - t0)));
@@ -455,8 +461,69 @@ function renderBall({t, cam = null, labels = false}) {
 
 /* ---------- clips ---------- */
 Object.assign(CLIPS, {
-  fifth_night: {sec: 10, render: (t) => renderFifth({t, cam: {z: 1.0, ux: 1350 + t * 75, uy: 520}})},
+  fifth_night: {sec: 10, render: (t) => renderFifth({t, cam: {z: 1.2, ux: 1250 + t * 85, uy: 560}})},
   ball_cutaway: {sec: 16, render: (t) => renderBall({t})},
-  fifth_dawn: {sec: 9, render: (t) => renderFifth({t, dawn: 0.65 + 0.03 * t, cam: (() => { const u = ease(t / 9); return {z: lerpLog(0.95, 2.4, u), ux: 1900 - 160 * u, uy: 540 + 220 * u}; })()})},
+  fifth_dawn: {sec: 9, render: (t) => renderFifth({t, dawn: 0.65 + 0.03 * t, cam: (() => { const u = ease(t / 9); return {z: lerpLog(1.0, 1.75, u), ux: 1950 - 170 * u, uy: 560 + 110 * u}; })()})},
 });
 if (typeof window !== 'undefined') Object.assign(window, {renderFifth, renderBall});
+
+/* ---------- s5: a Sunday ballgame, mid-1880s (American Association: cheap seats, beer) ---------- */
+// A side view down the first-base line: a wooden grandstand with a roof on posts and bunting, open bleachers, a board fence, the
+// field. Michael and his sister (coral) sit in the 25-cent bleachers; a vendor sells beer. The pitch, the swing, the ball, the crowd up.
+function renderBallpark({t, cam}) {
+  const c = cam2(cam), GF = 820, s = [], r = rng(1884), hit = 3.0, ballT = t - hit;
+  const crowdUp = smooth(hit + 0.2, hit + 0.6, t) * (1 - smooth(hit + 3.4, hit + 4.4, t));
+  // far: trees, city roofs, a factory chimney
+  const far = `<rect x="-2000" y="${GF - 120}" width="8000" height="400" fill="#4E726C"/>` + MAT.trees([[-2000, GF - 120], [6000, GF - 130]], {col: '#4E726C', seed: 3, size: 40}) +
+    `<rect x="2600" y="${GF - 330}" width="40" height="220" fill="#4E726C"/>` + MAT.smoke(2620, GF - 334, t, {col: '5F857F', k: 0.8, seed: 2});
+  s.push(layerAt(c, 0.4, far));
+  const m = [];
+  m.push(`<rect x="-3000" y="${GF}" width="9000" height="600" fill="#2B4744"/>` + MAT.ground(-3000, 6000, GF, {base: '#2B4744', seed: 9}));
+  // the grandstand (left): tiers of plank seats rising back, roof on posts, bunting under the eave, flags on poles
+  const g0 = -300, g1 = 1100;
+  m.push(MAT.planks(g0, GF - 360, g1 - g0, 360, {base: '#1C3332', seed: 4, size: 18}));
+  for (let k = 0; k < 9; k++) m.push(`<rect x="${g0}" y="${GF - 40 - k * 36}" width="${g1 - g0}" height="6" fill="#0D0C09"/>`);
+  m.push(`<path d="M${g0 - 40},${GF - 400} L${g1 + 40},${GF - 400} L${g1 + 10},${GF - 380} L${g0 - 10},${GF - 380} Z" fill="#0D0C09"/><path d="M${g0 - 40},${GF - 400} L${g0 + 300},${GF - 470} L${g1 - 300},${GF - 470} L${g1 + 40},${GF - 400} Z" fill="#132423"/>`);
+  for (let x = g0; x <= g1; x += 175) m.push(`<rect x="${x}" y="${GF - 380}" width="8" height="380" fill="#0D0C09"/>`);
+  let bun = ''; for (let x = g0 - 30; x < g1 + 30; x += 70) bun += `q35,26 70,0 `; m.push(`<path d="M${g0 - 30},${GF - 378} ${bun}" stroke="#DFE0D6" stroke-width="5" fill="none" opacity="0.7"/>`);
+  for (const fx of [g0 + 100, g0 + 700]) m.push(`<rect x="${fx}" y="${GF - 600}" width="5" height="140" fill="#0D0C09"/>` + flag(fx + 5, GF - 598, 70, 36, '#DFE0D6', t, fx));
+  // the bleachers (right): open plank tiers, no roof (the cheap seats)
+  const b0 = 1200, b1 = 2500;
+  for (let k = 0; k < 6; k++) m.push(`<rect x="${b0 + k * 30}" y="${GF - 40 - k * 32}" width="${b1 - b0 - k * 60}" height="8" fill="#0D0C09"/>`);
+  m.push(`<path d="M${b0},${GF} L${b0 + 180},${GF - 232} L${b1 - 180},${GF - 232} L${b1},${GF} Z" fill="#132423"/>`);
+  for (let k = 0; k < 6; k++) m.push(`<rect x="${b0 + k * 30}" y="${GF - 40 - k * 32}" width="${b1 - b0 - k * 60}" height="6" fill="#0D0C09"/>`);
+  // the crowd: rows of seated men in bowlers and caps, a few women; they jump up on the hit
+  const seat = (x, y, i, row) => { const kind = r() > 0.82 ? 'woman' : 'man', ph = r(), up = crowdUp * (0.6 + 0.4 * Math.sin(i));
+    const an = up > 0.3 ? {fArm: [20 + 20 * Math.sin(t * 8 + i), 10], tilt: 10, bob: 0.02 * up} : {...POSES.sit(t, ph), tilt: 4};
+    return figure({x, y: up > 0.3 ? y : y + 0.22 * 52, h: 52, d: 1, kind, hat: kind === 'man' ? ['bowler', 'cap', 'bowler', 'top'][Math.floor(r() * 4)] : 'lady', coat: 'sack', fill: '#0D0C09', an}); };
+  for (let row = 0; row < 8; row++) for (let x = g0 + 20 + (row % 2) * 30; x < g1 - 20; x += 62) m.push(seat(x + r() * 14, GF - 46 - row * 36, x + row, row));
+  for (let row = 0; row < 6; row++) for (let x = b0 + 30 + row * 30; x < b1 - 30 - row * 30; x += 56) { if (row === 2 && Math.abs(x - 1700) < 70) continue; m.push(seat(x + r() * 12, GF - 46 - row * 32, x + row * 7, row)); }
+  // Michael and his sister in the bleachers
+  const kup = crowdUp > 0.3, kan = kup ? {fArm: [20, 10], tilt: 10} : {...POSES.sit(t, 0.1), tilt: 4};
+  m.push(figure({...cast('michael', {x: 1660, y: kup ? GF - 110 : GF - 110 + 0.22 * 52, h: 52, d: 1}), det: 0, an: kan}));
+  m.push(figure({...cast('sister', {x: 1712, y: kup ? GF - 110 : GF - 110 + 0.22 * 52 * 0.88, h: 52, d: 1}), hat: 'lady', wear: ['plain'], det: 0, an: kup ? {fArm: [30, 20], tilt: 10} : {...POSES.sit(t, 0.4), tilt: 2}}));
+  // a beer vendor working the bleacher aisle
+  const vx = 1300 + ((t * 40) % 900);
+  m.push(figure({x: vx, y: GF - 10, h: 58, d: 1, kind: 'man', hat: 'cap', coat: 'jacket', fill: '#0D0C09', an: {...walkAn(walkPhase(t * 40, 58)), fArm: [60, 20]}}) + `<rect x="${vx + 20}" y="${GF - 66}" width="10" height="13" fill="#DFE0D6" opacity="0.8"/>`);
+  // the fence and the field in front
+  m.push(MAT.planks(-3000, GF - 6, 9000, 30, {base: '#132423', seed: 7, vertical: true, size: 16}));
+  s.push(layerAt(c, 1, m.join('')));
+  // the field (near layer): pitcher, batter, catcher; the ball
+  const f = [], FY = 1030, px = 900, bx = 1500, pitch = smooth(1.6, 2.6, t), swing = smooth(2.8, 3.1, t);
+  f.push(`<rect x="-3000" y="${FY - 60}" width="9000" height="400" fill="#335652"/><path d="M-3000,${FY - 20} L6000,${FY - 20}" stroke="#DFE0D6" stroke-width="3" opacity="0.4"/>`);
+  f.push(figure({x: px, y: FY, h: 150, d: 1, kind: 'man', hat: 'boycap', coat: 'jacket', fill: '#0D0C09', wear: ['knickers'], an: {fArm: [200 - 190 * pitch, 160 - 150 * pitch], lean: 12 * pitch, legs: [10 + 20 * pitch, -10]}}));
+  f.push(figure({x: bx, y: FY, h: 150, d: -1, kind: 'man', hat: 'boycap', coat: 'jacket', fill: '#0D0C09', wear: ['knickers'], an: {fArm: [40 - 140 * swing, 20 - 120 * swing], bArm: [50 - 140 * swing, 30 - 120 * swing], lean: -6 + 14 * swing}}));
+  { const o = {x: bx, y: FY, h: 150, d: -1}, [hx, hy] = hand(o, [40 - 140 * swing, 20 - 120 * swing]), th = (-35 + 125 * swing) * Math.PI / 180;
+    f.push(line([[hx, hy], [hx - Math.sin(th) * 95, hy - Math.cos(th) * 95]], '#0D0C09', 7)); }
+  f.push(figure({x: bx + 90, y: FY + 0.22 * 140, h: 140, d: -1, kind: 'man', hat: 'boycap', coat: 'jacket', fill: '#0D0C09', wear: ['knickers'], an: {legs: [90, 70], shins: [-40, -50], fArm: [100, 80], lean: 10}}));
+  let ball = null;
+  if (t > 2.2 && t < hit) { const u = (t - 2.2) / (hit - 2.2); ball = [px + 40 + (bx - 60 - px - 40) * u, FY - 110 + 10 * Math.sin(u * Math.PI)]; }
+  else if (t >= hit) { const u = ballT; ball = [bx - 60 - 380 * u, FY - 110 - 520 * u + 160 * u * u]; }
+  if (ball) f.push(`<circle cx="${f1(ball[0])}" cy="${f1(ball[1])}" r="7" fill="#F4EFE6"/>`);
+  s.push(layerAt(c, 1.25, f.join('')));
+  const scr = [tag(40, 1040, 'A SUNDAY BALLGAME · NEW YORK · MID-1880s', 1)];
+  if (t > 4.6) scr.push(penS(1180, 140, '25 cents, and beer for sale', 32, -3, EX.orange));
+  return frame(msDefs(t), `<rect width="1920" height="1080" fill="url(#msday)"/>` + clouds(t), s.join(''), scr.join(''), t);
+}
+Object.assign(CLIPS, {ballpark: {sec: 9, render: (t) => renderBallpark({t, cam: {z: 1.0 + 0.02 * t, ux: 1000 + 30 * t, uy: 600}})}});
+if (typeof window !== 'undefined') Object.assign(window, {renderBallpark});
