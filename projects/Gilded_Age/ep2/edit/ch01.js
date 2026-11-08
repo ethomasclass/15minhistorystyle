@@ -1,7 +1,7 @@
 // Chapter 1, "The Ball" (cold open, 0:00 to 1:06): Fifth Avenue on the night of the ball, the costumes, the crowd outside,
 // then down through the house into the kitchen, where Nora carries the ices. The bill, her wage, and the question.
 EDITS.ch01 = () => {
-  const ch = 'ch01_the_ball', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch01_the_ball', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 1.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     nobody: w('Nobody') - 0.3, kings: w('They') - 0.3, elec: w('One') - 0.3, outside: w('Outside') - 0.3, down: w('And', 3) - 0.25,
     drop: w("Don't", 1) - 0.4, thats: w("That's") - 0.3, but: w('But') - 0.3, bill: w('The', 5) - 0.25, so: w('So') - 0.25,
@@ -80,7 +80,7 @@ EDITS.ch01 = () => {
     {a: c.so, b: dur, draw: (T) => night(T, {z: 1.2, ux: 1250 + T * 85, uy: 560}) + dimBy(0.74 * fin(T, c.so, 0.6)) +
       op(fin(T, w('know')), mono('the question', {x: 130, y: 250, size: 28, color: C.teal, ls: 6})) +
       slideUp(fin(T, w('What', 2)), `<div style="position:absolute;left:124px;top:300px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">What did the richest people<br>in America think...</div>`) +
-      (fin(T, w('think')) > 0 ? slideUp(fin(T, w('think')), tape('they owed everyone else?', {x: 120, y: 560, size: 84, rot: -2, seed: 17})) : '')},
+      (fin(T, w('What', 2) + 0.5) > 0 ? slideUp(fin(T, w('What', 2) + 0.5), tape('they owed everyone else?', {x: 120, y: 560, size: 84, rot: -2, seed: 17})) : '')},
   ];
   return {dur, shots, fadeOut: 0.6};
 };

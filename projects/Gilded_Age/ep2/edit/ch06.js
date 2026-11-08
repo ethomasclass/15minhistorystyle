@@ -1,7 +1,7 @@
 // Chapter 6, "Sunday" (6:51 to 7:43): Michael and Nora at a Sunday game in Brooklyn (the American Association: cheap seats,
 // Sunday games, beer), then the rich on their Sunday: polo, Newport tennis, racing yachts. Same day off.
 EDITS.ch06 = () => {
-  const ch = 'ch06_sunday', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch06_sunday', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     game: w('On', 2) - 0.3, aa: w('Baseball') - 0.3, beer: w('And', 2) - 0.25, hit: w('Did') - 0.6, rich: w('The', 8) - 0.3,
     polo: w('Polo') - 0.3, tennis: w('Tennis') - 0.3, yacht: w('Racing') - 0.3, same: w('Same') - 0.3,
@@ -46,13 +46,12 @@ EDITS.ch06 = () => {
     // 8. "Tennis at the beach houses in Newport."
     {a: c.tennis, b: c.yacht, draw: (T) => renderLeisure(0.5 + (T - c.tennis) * 1.1, true) + stamp('Lawn tennis &middot; Newport, Rhode Island &middot; 1880s', 1) +
       op(fin(T, w('Newport')), pen('the beach houses of newport', {x: 1160, y: 140, size: 50, rot: -3, color: C.orange}))},
-    // 9. "Racing yachts the size of houses."
-    {a: c.yacht, b: c.same, draw: (T) => renderLeisure(6.8 + (T - c.yacht) * 1.0, true) + stamp("The America's Cup &middot; 1886", 1) +
-      op(fin(T, w('size')), pen('the size of houses', {x: 1240, y: 140, size: 54, rot: -3, color: C.orange}))},
     // 10. "Same day off. Very different Sunday." The two Sundays side by side.
-    {a: c.same, b: dur, draw: (T) => twoScenes(park(6 + (T - c.same) * 0.5, true), renderLeisure(8.6 + (T - c.same) * 0.4, true)) +
+    //    (from "Racing yachts the size of houses": the right half is the yachts, so the closing words get their reading time)
+    {a: c.yacht, b: dur, draw: (T) => twoScenes(park(6 + (T - c.yacht) * 0.5, true), renderLeisure(8.0 + (T - c.yacht) * 0.3, true)) +
+      op(fin(T, w('size')), pen('yachts the size of houses', {x: 1000, y: 880, size: 50, rot: -3, color: C.orange})) +
       (fin(T, w('Same')) > 0 ? slideUp(fin(T, w('Same')), tape('SAME DAY OFF.', {x: 640, y: 120, size: 84, rot: -2, seed: 73})) : '') +
-      op(fin(T, w('Very')), pen('very different sunday.', {x: 640, y: 290, size: 64, rot: -3, color: C.orange}))},
+      op(fin(T, w('Same') + 0.6), pen('very different sunday.', {x: 640, y: 290, size: 64, rot: -3, color: C.orange}))},
   ];
   return {dur, shots, fadeOut: 0.6};
 };

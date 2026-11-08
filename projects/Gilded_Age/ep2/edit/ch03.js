@@ -1,6 +1,6 @@
 // Chapter 3, "The Party" (2:43 to 3:42): the hobby-horse quadrille, the Electric Light, supper at two, sunrise, the papers, the bill.
 EDITS.ch03 = () => {
-  const ch = 'ch03_the_party', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch03_the_party', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     quad: w('The', 1) - 0.3, horse: w('One', 1) - 0.3, power: w('These') - 0.3, alice: w('The', 4) - 0.3, gas: w('Electric', 2) - 0.3,
     dress: w('She') - 0.3, supper: w('Supper') - 0.3, dawn: w('The', 10) - 0.3, papers: w('The', 11) - 0.3, bill: w('The', 13) - 0.3,
@@ -61,14 +61,14 @@ EDITS.ch03 = () => {
       op(fin(T, w('name')), pen('every name.', {x: 1120, y: 500, size: 60, rot: -3, color: C.orange})) +
       (fin(T, w('Which')) > 0 ? slideUp(fin(T, w('Which')), tape('WHICH WAS THE POINT', {x: 960, y: 700, size: 70, rot: -3, seed: 52})) : '')},
     // 11. The bill: $250,000 (about $9 million today); $65,000 of it champagne. "For one night."
-    {a: c.bill, b: dur, draw: (T) => { const ch2 = fin(T, w('sixty-five'), 0.4);
+    {a: c.bill, b: dur, draw: (T) => { const ch2 = fin(T, w('A', 2), 0.4);
       return push(T, c.bill, dur) + deskProp('p03_champagne', {x: 1180, y: 380, w: 620, rot: 3, o: ch2, T}) + `</div>` +
         op(fin(T, w('bill')) * 0.9, mono('the bill (as reported)', {x: 160, y: 190, size: 28, ls: 4})) +
         bigFig('$250,000', {x: 140, y: 240, size: 180, w: 1100, align: 'left', o: fin(T, w('two', 2), 0.4)}) +
         today('&asymp; $9 million today', {x: 160, y: 440, w: 900, align: 'left', o: fin(T, w("today's"), 0.4)}) +
         bigFig('$65,000 champagne', {x: 140, y: 600, size: 90, w: 1100, align: 'left', o: ch2}) +
-        today('&asymp; $2.3 million today &middot; reported', {x: 160, y: 710, w: 1000, align: 'left', o: fin(T, w('champagne'), 0.4)}) +
-        (fin(T, w('For', 2)) > 0 ? slideUp(fin(T, w('For', 2)), tape('FOR ONE NIGHT.', {x: 160, y: 830, size: 90, rot: -2, seed: 55})) : '');
+        today('&asymp; $2.3 million today &middot; reported', {x: 160, y: 710, w: 1000, align: 'left', o: fin(T, w('A', 2) + 0.3, 0.4)}) +
+        (fin(T, w('champagne')) > 0 ? slideUp(fin(T, w('champagne')), tape('FOR ONE NIGHT.', {x: 160, y: 830, size: 90, rot: -2, seed: 55})) : '');
     }},
   ];
   return {dur, shots, fadeOut: 0.6};

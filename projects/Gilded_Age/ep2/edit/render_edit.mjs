@@ -17,11 +17,13 @@ await page.goto('file://' + path.join(here, 'edit.html'));
 if (!words) words = {duration: await page.evaluate((k) => EDITS[k]().dur, key), words: []};
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
 const shoot = async (T, file, type) => { await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: 82} : {})}); };
+const editDur = await page.evaluate((k) => EDITS[k]().dur, key);   // the chapter's length, with any held tail after the last word
+if (a1 === '--dur') { console.log(editDur); await browser.close(); process.exit(0); }
 if (a1 === '--stills') {
   for (const T of a2.split(',').map(Number)) await shoot(T, `${a3}_${T.toFixed(1)}.jpg`, 'jpeg');
 } else {
   fs.mkdirSync(a1, {recursive: true});
-  const N = Math.ceil(words.duration * 30), s = Number(a2 ?? 0), e = Math.min(N, Number(a3 ?? N));
+  const N = Math.ceil(editDur * 30), s = Number(a2 ?? 0), e = Math.min(N, Number(a3 ?? N));
   for (let i = s; i < e; i++) await shoot(i / 30, path.join(a1, `f${String(i).padStart(4, '0')}.png`), 'png');
   console.log('done', key, s, e);
 }

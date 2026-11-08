@@ -12,6 +12,8 @@
   .layer {position: absolute; inset: 0;}
   .layer > svg {position: absolute; inset: 0;}
   .layer * {box-sizing: border-box;}
+  /* the carry layer shows only text: everything else in a carried shot is hidden */
+  #C .carry * {visibility: hidden;} #C .carry .tx, #C .carry .tx * {visibility: visible;}
 </style>
 <script src="../../lookdev/rig.js"></script>
 <script src="../../lookdev/scene.js"></script>
@@ -25,6 +27,7 @@
 <script src="../../lookdev/ep2_more.js"></script>
 <script src="../../lookdev/text.js"></script>
 <script src="edit.js"></script>
+<script src="carry.js"></script>
 <script src="ch01.js"></script>
 <script src="ch02.js"></script>
 <script src="ch03.js"></script>
@@ -36,14 +39,32 @@
 <script src="title.js"></script>
 <script src="brand.js"></script>
 </head><body>
-<div id="stage"><div id="A" class="layer"></div><div id="B" class="layer"></div></div>
+<div id="stage"><div id="A" class="layer"></div><div id="B" class="layer"></div><div id="C" class="layer"></div></div>
 <script>
   window.drawEdit = (ch, T) => {
     const f = editFrame(ch, T);
     document.getElementById('A').innerHTML = f.a;
     const b = document.getElementById('B');
     b.innerHTML = f.b || ''; b.style.opacity = f.b ? f.mix : 0;
-    return document.fonts.ready.then(() => Promise.all([...document.images].map((im) => im.complete ? 1 : new Promise((r) => { im.onload = im.onerror = r; }))));
+    document.getElementById('C').innerHTML = f.c || '';
+    return document.fonts.ready.then(() => Promise.all([...document.images].map((im) => im.complete ? 1 : new Promise((r) => { im.onload = im.onerror = r; })))).then(safe);
   };
+  // Title-safe pass: nudge every text element (.tx) back inside 96 px left/right, 54 px top/bottom. Full-width centred lines are
+  // measured by their text, not their box.
+  const SAFE_AREA = {x0: 96, x1: 1824, y0: 54, y1: 1026};
+  function safe() {
+    const SAFE = SAFE_AREA;
+    for (const el of document.querySelectorAll('#stage .tx')) {
+      if (el.parentElement.closest('.tx')) continue;
+      el.style.translate = '';
+      let r = el.getBoundingClientRect();
+      if (r.width > 1700) { const rg = document.createRange(); rg.selectNodeContents(el); r = rg.getBoundingClientRect(); }
+      if (!r.width) continue;
+      let dx = 0, dy = 0;
+      if (r.right > SAFE.x1) dx = SAFE.x1 - r.right; if (r.left + dx < SAFE.x0) dx = SAFE.x0 - r.left;
+      if (r.bottom > SAFE.y1) dy = SAFE.y1 - r.bottom; if (r.top + dy < SAFE.y0) dy = SAFE.y0 - r.top;
+      if (dx || dy) el.style.translate = `${dx.toFixed(1)}px ${dy.toFixed(1)}px`;
+    }
+  }
 </script>
 </body></html>

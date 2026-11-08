@@ -13,14 +13,14 @@ function tornClip(seed, depth = 9) {
 }
 // The channel's torn orange strip: padding 10% top, 22% sides, 6% bottom of the type size, tilted about -2 degrees.
 function tape(text, {x, y, size = 84, rot = -2, seed = 3, bg = C.orange, color = C.ink, font = 'Abril', ls = 0}) {
-  return `<div style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${rot}deg);transform-origin:left top;
+  return `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${rot}deg);transform-origin:left top;
     background:${bg};clip-path:${tornClip(seed)};padding:${size * 0.16}px ${size * 0.22}px ${size * 0.1}px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))">
     <div style="font-family:${font};font-size:${size}px;line-height:1;color:${color};letter-spacing:${ls}px;white-space:nowrap">${text}</div></div>`;
 }
 const mono = (text, {x, y, size = 22, color = C.cream, ls = 3, extra = ''}) =>
-  `<div style="position:absolute;left:${x}px;top:${y}px;font-family:Mono;font-size:${size}px;letter-spacing:${ls}px;color:${color};text-transform:uppercase;white-space:nowrap;${extra}">${text}</div>`;
+  `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;font-family:Mono;font-size:${size}px;letter-spacing:${ls}px;color:${color};text-transform:uppercase;white-space:nowrap;${extra}">${text}</div>`;
 const pen = (text, {x, y, size = 40, rot = -4, color = C.teal, w}) =>
-  `<div style="position:absolute;left:${x}px;top:${y}px;${w ? `width:${w}px;` : 'white-space:nowrap;'}transform:rotate(${rot}deg);font-family:Pen;font-size:${size * 1.55}px;line-height:0.95;color:${color};
+  `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;${w ? `width:${w}px;` : 'white-space:nowrap;'}transform:rotate(${rot}deg);font-family:Pen;font-size:${size * 1.55}px;line-height:0.95;color:${color};
     -webkit-text-stroke:2px ${C.ink};paint-order:stroke fill;">${text}</div>`;
 // A bowed teal arrow with an open chevron head (SVG overlay, full frame).
 function arrow([x0, y0], [x1, y1], bow = 60) {

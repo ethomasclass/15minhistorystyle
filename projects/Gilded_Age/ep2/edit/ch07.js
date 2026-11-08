@@ -1,7 +1,7 @@
 // Chapter 7, "The Gospel of Wealth" (7:45 to 9:00): Carnegie at 53, "Wealth" (1889), give it away while alive, the libraries,
 // philanthropy, the rich as trustees, and the mill workers' question.
 EDITS.ch07 = () => {
-  const ch = 'ch07_the_gospel_of_wealth', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch07_the_gospel_of_wealth', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 2.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     y1889: w('In', 1) - 0.3, essay: w('But', 1) - 0.3, rules: w('Carnegie', 2) - 0.3, libs: w('Like') - 0.3, built: w('He', 4) - 0.3,
     phil: w("That's") - 0.3, trust: w('said', 2) - 0.6, mill: w('And', 5) - 0.25, hold: w('Hold') - 0.3,
@@ -71,8 +71,8 @@ EDITS.ch07 = () => {
       (fin(T, w('let')) > 0 ? slideUp(fin(T, w('let')), tape('...AND LET US BUY OUR OWN BOOKS?', {x: 420, y: 880, size: 62, rot: -1, seed: 79})) : '')},
     // 10. "Hold on to that question. It's about to get very loud." The mill again, dimmed.
     {a: c.hold, b: dur, draw: (T) => push(T, c.hold, dur, 0.12) + deskCut(EP1 + 'desk/edgar_thomson_works_1886.png', {x: 160, y: 140, w: 1200, rot: -1.5, o: 1, T}) + `</div>` + dimBy(0.5 * fin(T, c.hold, 0.8)) +
-      (fin(T, w('Hold')) > 0 ? slideUp(fin(T, w('Hold')), tape('HOLD ON TO THAT QUESTION.', {x: 260, y: 420, size: 90, rot: -2, seed: 81})) : '') +
-      op(fin(T, w('loud')), pen("it's about to get very loud.", {x: 700, y: 620, size: 64, rot: -3, color: C.orange}))},
+      (fin(T, w('Hold') - 0.2) > 0 ? slideUp(fin(T, w('Hold') - 0.2), tape('HOLD ON TO THAT QUESTION.', {x: 260, y: 420, size: 90, rot: -2, seed: 81})) : '') +
+      op(fin(T, w('Hold') + 0.8), pen("it's about to get very loud.", {x: 700, y: 620, size: 64, rot: -3, color: C.orange}))},
   ];
   return {dur, shots, fadeOut: 0.6};
 };

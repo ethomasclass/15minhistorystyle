@@ -1,7 +1,7 @@
 // Chapter 5, "Survival of the Fittest" (5:05 to 6:49): Spencer's phrase, Social Darwinism and what "fit" means, the Delmonico's
 // banquet, Sumner's book, and his A, B, C, D (lookdev/ep2_more.js fittest_explainer, re-timed to the words).
 EDITS.ch05 = () => {
-  const ch = 'ch05_survival_of_the_fittest', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch05_survival_of_the_fittest', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 1.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     spencer: w('It', 2) - 0.3, nature: w('In', 1) - 0.3, claim: w('Spencer', 3) - 0.3, fit: w('Though') - 0.3, roach: w('A', 5) - 0.2,
     tour: w('In', 4) - 0.3, dinner: w('They', 2) - 0.3, sumner: w('An', 2) - 0.3, nothing: w('His', 3) - 0.3, abcd: w('Sumner', 2) - 0.3,
@@ -64,7 +64,7 @@ EDITS.ch05 = () => {
     {a: c.abcd, b: dur, draw: (T) => renderFittest(fitC(T)) +
       op(fin(T, w('D', 2)), pen('D: the poor person being helped', {x: 1260, y: 470, size: 38, rot: -3, color: C.teal})) +
       op(fin(T, w('A', 11)) * fout(T, w('D', 2)), pen('A and B: the reformers', {x: 260, y: 470, size: 38, rot: -3, color: C.teal})) +
-      (fin(T, w('Forgotten')) > 0 ? slideUp(fin(T, w('Forgotten')), tape('THE FORGOTTEN MAN', {x: 700, y: 40, size: 70, rot: -2, seed: 69})) : '')},
+      (fin(T, w('C', 3)) > 0 ? slideUp(fin(T, w('C', 3)), tape('THE FORGOTTEN MAN', {x: 700, y: 40, size: 70, rot: -2, seed: 69})) : '')},
   ];
   return {dur, shots, fadeOut: 0.6};
 };

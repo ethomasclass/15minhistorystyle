@@ -10,7 +10,7 @@ KEY=$1; shift
 if [ $# -eq 2 ] && [[ "$1" != *@* ]]; then set -- "$1@$2@0@0"; fi
 CH=$(basename $(ls ../public/audio/${KEY}_*.words.json) .words.json)
 WAV=../public/audio/$CH.wav
-N=$(python3 -c "import json,math;print(math.ceil(json.load(open('../public/audio/$CH.words.json'))['duration']*30))")
+N=$(python3 -c "import math;print(math.ceil($(node render_edit.mjs $KEY --dur)*30))")   # the edit's length: narration + held tail
 DUR=$(python3 -c "print($N/30)")
 mkdir -p out/$KEY review
 if [ ! -f out/$KEY/f$(printf %04d $((N - 1))).png ]; then

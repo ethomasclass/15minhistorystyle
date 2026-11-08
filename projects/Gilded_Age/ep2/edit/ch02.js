@@ -1,7 +1,7 @@
 // Chapter 2, "New Money" (1:10 to 2:41): the house, the Commodore's fortune, old money and new, Mrs. Astor, the 400, the calling
 // card story, and the ball as an announcement.
 EDITS.ch02 = () => {
-  const ch = 'ch02_new_money', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch02_new_money', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 1.5;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     money: w('The', 3) - 0.3, but: w('But') - 0.3, newm: w('And', 4) - 0.25, queen: w('The', 7) - 0.3, her: w('Her', 1) - 0.3,
     story: w("There's") - 0.3, so: w('So', 1) - 0.3, tru: w('True') - 0.3, job: w('So', 2) - 0.3,
@@ -107,7 +107,7 @@ EDITS.ch02 = () => {
     {a: c.job, b: dur, draw: (T) => renderFifth({t: T + 20, cam: {z: 1.25, ux: 1500 + (T - c.job) * 60, uy: 560}, quiet: true}) +
       op(fin(T, w('job')), pen('the party had a job', {x: 120, y: 120, size: 60, rot: -4, color: C.orange})) +
       op(fin(T, w('announcement')), mono('an announcement', {x: 140, y: 300, size: 34, color: C.teal, ls: 5})) +
-      (fin(T, w('The', 14)) > 0 ? slideUp(fin(T, w('The', 14)), tape('THE VANDERBILTS HAVE ARRIVED', {x: 140, y: 360, size: 90, rot: -2, seed: 47})) : '')},
+      (fin(T, w('announcement')) > 0 ? slideUp(fin(T, w('announcement')), tape('THE VANDERBILTS HAVE ARRIVED', {x: 140, y: 360, size: 90, rot: -2, seed: 47})) : '')},
   ];
   return {dur, shots, fadeOut: 0.6};
 };

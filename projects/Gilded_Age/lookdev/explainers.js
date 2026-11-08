@@ -37,9 +37,12 @@ function farHills(w, col, base, seed, amp = 120, trees = 0) {
 }
 // screen-space labels
 // Text sizes (round 8: bigger, so a phone screen can read them): tags 28 px mono, handwriting x1.3, cards 36 px.
-const tag = (x, y, txt, op = 1) => `<g opacity="${f1(op * 100) / 100}"><rect x="${f1(x - 10)}" y="${f1(y - 31)}" width="${f1(txt.length * 19.4 + 20)}" height="42" fill="rgba(13,12,9,0.86)"/><text x="${f1(x)}" y="${f1(y)}" font-family="Mono" font-size="28" letter-spacing="2" fill="${EX.cream}">${txt}</text></g>`;
+// Title-safe (Nov 2026): tags and handwritten notes are kept inside 96 px left/right, 54 px top/bottom of a 1920x1080 frame.
+const SAFE = {x0: 96, x1: 1824, y0: 54, y1: 1026};
+const tag = (x0, y0, txt, op = 1) => { const x = Math.max(SAFE.x0 + 10, Math.min(x0, SAFE.x1 - txt.length * 19.4 - 10)), y = Math.max(SAFE.y0 + 31, Math.min(y0, SAFE.y1 - 11)); return `<g opacity="${f1(op * 100) / 100}"><rect x="${f1(x - 10)}" y="${f1(y - 31)}" width="${f1(txt.length * 19.4 + 20)}" height="42" fill="rgba(13,12,9,0.86)"/><text x="${f1(x)}" y="${f1(y)}" font-family="Mono" font-size="28" letter-spacing="2" fill="${EX.cream}">${txt}</text></g>`; };
 const PEN_SCALE = 1.3;
-const penS = (x, y, txt, size = 40, rot = -3, col = EX.orange) => `<text x="${x}" y="${y}" transform="rotate(${rot}, ${x}, ${y})" font-family="Pen" font-size="${f1(size * 1.55 * PEN_SCALE)}" fill="${col}" stroke="#111" stroke-width="4" paint-order="stroke">${txt}</text>`;
+const penS = (x0, y0, txt, size = 40, rot = -3, col = EX.orange) => { const fs = size * 1.55 * PEN_SCALE, wd = String(txt).replace(/&[a-z]+;/g, 'x').length * fs * 0.43;
+  const x = Math.max(SAFE.x0 + 4, Math.min(x0, SAFE.x1 - 4 - wd)), y = Math.max(SAFE.y0 + fs * 0.85 + Math.max(0, -rot) * wd * 0.0175, Math.min(y0, SAFE.y1 - fs * 0.3)); return `<text x="${x}" y="${y}" transform="rotate(${rot}, ${x}, ${y})" font-family="Pen" font-size="${f1(size * 1.55 * PEN_SCALE)}" fill="${col}" stroke="#111" stroke-width="4" paint-order="stroke">${txt}</text>`; };
 function tapeS(x, y, txt, size = 72, rot = -2, op = 1, seed = 4) {
   const r = rng(seed), w = txt.length * size * 0.66 + size * 0.5, h = size * 1.28, pts2 = [];
   for (let u = 0; u <= 1.001; u += 0.04) pts2.push([x + u * w, y + r() * 7]);

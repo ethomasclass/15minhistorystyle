@@ -1,13 +1,13 @@
 // Chapter 4, "The Basement" (3:44 to 5:03): the kitchen, Nora's job and room, her hours and pay, the arithmetic (more than 1,300
 // years), the Vikings, and her afternoon off at home in Brooklyn with her wages on the table.
 EDITS.ch04 = () => {
-  const ch = 'ch04_the_basement', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
+  const ch = 'ch04_the_basement', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration + 1.0;   // + a held tail after the last word, so the last labels get their reading time
   const c = {
     kitchen: w('That', 1) - 0.3, plan: w('The', 2) - 0.3, job: w('Nora', 1) - 0.3, attic: w('slept') - 0.4, hours: w('Most', 1) - 0.3,
-    pay: w('Her', 1) - 0.3, math: w('So') - 0.3, vik: w('Nora', 3) - 0.3, home: w('On', 2) - 0.3, wages: w('She', 6) - 0.3, piece: w('paid') - 0.3,
+    pay: w('Her', 1) - 0.3, math: w('So') - 0.3, vik: w('Nora', 3) - 0.3, home: w('On', 2) - 0.3, wages: w('She', 6) - 0.3, piece: w('sewing') - 0.3,
   };
   const ball = (T, cam) => renderBall({t: T, cam, quiet: true});
-  const flatT = remap([[c.home, 1.0], [w('home') + 1.4, 4.4], [w('time', 2) + 0.4, 5.6], [c.wages, 5.75], [w('wages'), 6.3], [w('mother'), 7.1], [c.piece, 8.3]]);
+  const flatT = remap([[c.home, 1.0], [w('home') + 1.4, 4.4], [w('time', 2) + 0.4, 5.6], [c.wages, 5.75], [w('wages'), 6.3], [w('mother'), 7.1], [c.piece, 8.0]]);
   const flatCam = (T) => { const u = ease(clamp01((T - c.home) / 5)), v = ease(clamp01((T - w('And', 7)) / 2.5)), k = ease(clamp01((T - c.wages) / 3));
     return {z: lerpLog(lerpLog(lerpLog(0.86, 1.0, u), 1.3, v), 1.12, k), ux: 960 - 40 * u - 120 * v + 200 * k, uy: 540 + 40 * u + 60 * v - 20 * k}; };
   const ix = (yr) => 200 + (yr - 500) / 1400 * 1520;
@@ -86,11 +86,12 @@ EDITS.ch04 = () => {
     // 11. "She put most of her wages on the table. Her mother and her little brother were sewing shirts by the lamp"
     {a: c.wages, b: c.piece, draw: (T) => renderFlat({t: flatT(T), cam: flatCam(T), quiet: true}) + stamp("The Kellys' flat &middot; Brooklyn &middot; 1883", 1) +
       op(fin(T, w('wages')), pen('most of her wages', {x: 1240, y: 120, size: 56, rot: -3, color: C.orange})) +
-      op(fin(T, w('sewing')), pen('sewing shirts by the lamp', {x: 1200, y: 230, size: 48, rot: -3, color: C.orange})) + compositeBar(fin(T, c.wages + 0.5))},
+      compositeBar(fin(T, c.wages + 0.5))},
     // 12. "paid by the piece. That money was how the family made rent."
     {a: c.piece, b: dur, draw: (T) => push(T, c.piece, dur) + deskProp('p04_piecework_shirt', {x: 420, y: 260, w: 1000, rot: -2, o: fin(T, c.piece + 0.1, 0.5), T}) + `</div>` +
-      op(fin(T, w('piece')), pen('paid by the piece', {x: 200, y: 140, size: 60, rot: -4, color: C.orange})) +
-      op(fin(T, w('rent')), pen('...how the family made rent', {x: 1000, y: 880, size: 56, rot: -3, color: C.orange})) +
+      op(fin(T, c.piece + 0.3), pen('sewing shirts by the lamp', {x: 200, y: 140, size: 54, rot: -4, color: C.orange})) +
+      op(fin(T, w('piece')), pen('paid by the piece', {x: 220, y: 250, size: 60, rot: -4, color: C.orange})) +
+      op(fin(T, c.piece + 0.6), pen('...how the family made rent', {x: 900, y: 860, size: 56, rot: -3, color: C.orange})) +
       op(fin(T, c.piece + 0.3) * 0.85, mono('a shirt like theirs (re-creation)', {x: 440, y: 1010, size: 18, color: '#9a958c'}))},
   ];
   return {dur, shots, fadeOut: 0.6};

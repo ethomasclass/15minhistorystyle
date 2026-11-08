@@ -23,7 +23,10 @@ const slideUp = (o, html, px = 30) => `<div style="position:absolute;inset:0;opa
 
 const cache = {};
 function editFrame(ch, T) {
-  const E = cache[ch] || (cache[ch] = EDITS[ch]());
+  const E = cache[ch] || (cache[ch] = ((e) => { // HOLD (carry.js): delay a cut so the outgoing shot's text gets its reading time
+    const h = (window.HOLD && window.HOLD[ch]) || {};
+    e.shots.forEach((sh, j) => { const k = h[j] || 0; if (k > 0 && e.shots[j + 1]) { sh.b += k; e.shots[j + 1].a += k; } });
+    return e; })(EDITS[ch]()));
   const S = E.shots;
   let i = S.findIndex((s) => T >= s.a && T < s.b); if (i < 0) i = T < S[0].a ? 0 : S.length - 1;
   const fade = E.fadeOut ? fout(T, E.dur - E.fadeOut, E.fadeOut) : 1;
@@ -35,14 +38,20 @@ function editFrame(ch, T) {
   const live = (sh) => sh.live ?? (sh.live = LIVE.test(sh.draw.toString()));
   const at = (sh) => live(sh) ? T : Math.floor(T * STEP + 1e-6) / STEP;
   const drw = (sh) => sh.draw(at(sh));
-  if (next && !next.cut && T > s.b - XF / 2) return {a: wrap(drw(s)), b: wrap(drw(next)), mix: ease((T - (s.b - XF / 2)) / XF)};
-  if (prev && !s.cut && T < s.a + XF / 2) return {a: wrap(drw(prev)), b: wrap(drw(s)), mix: ease((T - (s.a - XF / 2)) / XF)};
-  return {a: wrap(drw(s))};
+  // Carry: a shot's text (the .tx elements: notes, tags, cards) stays on over the following shots for `carry` seconds, so every
+  // label gets its reading time (CARRY in carry.js, from audit_text.mjs: 0.3 s a word + 1.5 s, at least 4.5 s).
+  const cw = (window.CARRY && window.CARRY[ch]) || {}, cs = [];
+  S.forEach((sh, j) => { const k = cw[j] || 0; if (j < i && k > 0 && T >= sh.b + XF / 2 && T < sh.b + k) {
+    const o = fout(T, sh.b + k - 0.35, 0.35) * fade; cs.push(`<div class="carry" style="position:absolute;inset:0;opacity:${o.toFixed(3)}">${sh.draw(at(sh))}</div>`); } });
+  const c = cs.join('');
+  if (next && !next.cut && T > s.b - XF / 2) return {a: wrap(drw(s)), b: wrap(drw(next)), mix: ease((T - (s.b - XF / 2)) / XF), c};
+  if (prev && !s.cut && T < s.a + XF / 2) return {a: wrap(drw(prev)), b: wrap(drw(s)), mix: ease((T - (s.a - XF / 2)) / XF), c};
+  return {a: wrap(drw(s)), c};
 }
 
 /* ---------- shared pieces ---------- */
-const stamp = (text, o = 1) => op(o, mono(text, {x: 44, y: 1022, size: 22, color: C.cream, extra: 'background:rgba(13,12,9,.7);padding:6px 12px'}));
-const compositeBar = (o = 1) => op(o, `<div style="position:absolute;left:44px;top:1010px;display:flex;align-items:center;gap:12px;background:rgba(13,12,9,.85);padding:9px 16px">
+const stamp = (text, o = 1) => op(o, mono(text, {x: 100, y: 972, size: 22, color: C.cream, extra: 'background:rgba(13,12,9,.7);padding:6px 12px'}));
+const compositeBar = (o = 1) => op(o, `<div class="tx" style="position:absolute;left:100px;top:962px;display:flex;align-items:center;gap:12px;background:rgba(13,12,9,.85);padding:9px 16px">
   <div style="width:16px;height:16px;border-radius:50%;background:${C.coral}"></div>
   <div style="font-family:Mono;font-size:22px;letter-spacing:2px;color:${C.cream}">COMPOSITE CHARACTER &middot; NORA IS MADE UP &middot; THOUSANDS OF GIRLS HAD HER JOB</div></div>`);
 
@@ -97,7 +106,7 @@ const deskProp = (id, opts) => deskCut(`desk/${id}.webp`, opts);
 /** An index card for a vocabulary word: the term set big, how to say it, the definition (text.js's vCard, parameterised). */
 function vocabCard(term, say, pos, def, {x = 1180, y = 110, w = 660, o = 1, rot = 2, size = 72} = {}) {
   const dy = (1 - ease(o)) * -40;
-  return op(Math.min(1, o * 1.5), `<div style="position:absolute;left:${x}px;top:${y + dy}px;width:${w}px;transform:rotate(${rot}deg);background:${C.cream};box-shadow:0 18px 34px rgba(0,0,0,.6);
+  return op(Math.min(1, o * 1.5), `<div class="tx" style="position:absolute;left:${x}px;top:${y + dy}px;width:${w}px;transform:rotate(${rot}deg);background:${C.cream};box-shadow:0 18px 34px rgba(0,0,0,.6);
       background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 45px,rgba(17,17,17,.12) 45px,rgba(17,17,17,.12) 47px);background-position:0 96px;padding:30px 38px 34px">
       <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap"><div style="font-family:Abril;font-size:${size}px;line-height:1;color:${C.ink}">${term}</div>
       <div style="font-family:Mono;font-size:22px;letter-spacing:2px;color:#444">${say} &middot; ${pos}</div></div>
@@ -142,18 +151,18 @@ const EP1 = '../../../ep1/public/img/';        // reused Ep 1 cut-outs, props an
 const push = (T, a, b, z = 0.035) => `<div style="position:absolute;inset:0;transform:scale(${(1 + z * ease(clamp01((T - a) / (b - a)))).toFixed(4)})">${desk()}`;
 /** A big figure in Abril (money, years) with an optional mono note under it. */
 const bigFig = (text, {x = 0, y = 330, size = 190, w = 1920, align = 'center', color = C.cream, o = 1} = {}) =>
-  op(o, `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align};font-family:Abril;font-size:${size}px;line-height:1;color:${color};text-shadow:0 8px 24px rgba(0,0,0,.6)">${text}</div>`);
+  op(o, `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align};font-family:Abril;font-size:${size}px;line-height:1;color:${color};text-shadow:0 8px 24px rgba(0,0,0,.6)">${text}</div>`);
 /** The "today's money" tag under an 1883 figure: teal mono, CPI about 36x (SCRIPT.md inflation table). */
 const today = (text, {x = 0, y = 540, w = 1920, align = 'center', o = 1, size = 30} = {}) =>
-  op(o, `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align};font-family:Mono;font-size:${size}px;letter-spacing:3px;color:${C.teal};text-transform:uppercase">${text}</div>`);
+  op(o, `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align};font-family:Mono;font-size:${size}px;letter-spacing:3px;color:${C.teal};text-transform:uppercase">${text}</div>`);
 /** A quotation in Playfair, cream on the desk, with its source in mono. */
 const quote = (text, src, {x = 160, y = 330, w = 1600, size = 74, o = 1, align = 'left'} = {}) =>
-  op(o, `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align}"><div style="font-family:Playfair;font-weight:900;font-size:${size}px;line-height:1.12;color:${C.cream};text-shadow:0 6px 18px rgba(0,0,0,.7)">${text}</div>
+  op(o, `<div class="tx" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;text-align:${align}"><div style="font-family:Playfair;font-weight:900;font-size:${size}px;line-height:1.12;color:${C.cream};text-shadow:0 6px 18px rgba(0,0,0,.7)">${text}</div>
     <div style="font-family:Mono;font-size:24px;letter-spacing:3px;color:${C.teal};margin-top:22px;text-transform:uppercase">${src}</div></div>`);
 /** A drawn calling card / invitation: cream card, engraved-style name; `strike` (0..1) draws a line through the name. */
 function callCard(name, sub, {x, y, w = 520, rot = 0, o = 1, strike = 0, T = 0}) {
   const dy = (1 - ease(o)) * 60 + Math.sin(T * 0.8 + x) * 2, h = w * 0.56;
-  return op(Math.min(1, o * 1.6), `<div style="position:absolute;left:${x}px;top:${(y + dy).toFixed(1)}px;width:${w}px;height:${h}px;transform:rotate(${rot}deg);background:#EFE8D8;
+  return op(Math.min(1, o * 1.6), `<div class="tx" style="position:absolute;left:${x}px;top:${(y + dy).toFixed(1)}px;width:${w}px;height:${h}px;transform:rotate(${rot}deg);background:#EFE8D8;
       box-shadow:0 3px 2px rgba(0,0,0,.6),0 18px 26px rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center">
       <div style="font-family:Playfair;font-weight:900;font-size:${w * 0.085}px;color:#1d1a16;font-style:italic">${name}</div>
       ${sub ? `<div style="font-family:Mono;font-size:${w * 0.034}px;letter-spacing:3px;color:#5a5348;margin-top:${w * 0.03}px;text-transform:uppercase">${sub}</div>` : ''}
