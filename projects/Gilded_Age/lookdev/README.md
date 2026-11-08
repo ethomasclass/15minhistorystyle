@@ -216,10 +216,12 @@ Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume 
   together, an arrow points at C (bowler, orange letter, "the Forgotten Man", the ordinary taxpayer), who hands a coin to D. The
   quote on screen is from *What Social Classes Owe to Each Other*: "A and B put their heads together to decide what C shall be made
   to do for D."
-- **`spencer_banquet` (ch5, 9 s).** Delmonico's, November 9, 1882: a long table in white with candelabra, a far row of diners in
-  evening dress, a near row with their backs to us, arched mirrors and a row of gas chandeliers, waiters. The camera tracks to the
-  head of the table, where Spencer (a silhouette with side whiskers, no face) stands and speaks; the room raises its glasses. "his
-  advice: relax more."
+- **`spencer_banquet` (ch5, 9 s), redone (it read as a church).** An 1880s restaurant banquet room: flat gilt-framed mirrors and
+  panels, square-headed windows with heavy draped curtains and tassels, gas chandeliers with glass globes, palms in tubs; two long
+  tables in white crowded with plates, glasses, bottles, silver platters, menu cards and flower centrepieces; waiters in white
+  aprons carrying trays, one pouring wine. A printed menu card opens the shot ("DELMONICO'S · DINNER TO HERBERT SPENCER · NOVEMBER
+  9, 1882"). Spencer stands at his place among the diners, not raised, napkin in hand (side whiskers, no face); glasses go up;
+  cigar smoke drifts in at the end. No pointed arches.
 - **`rich_leisure` (ch6, 10 s).** One side-scroll: a Newport shingle-style cottage with a veranda and tower, lawn tennis (a woman
   in a bustled dress, a man in flannels and cap, underarm strokes, a net), onlookers with parasols; polo, four riders cantering
   (the planted-hoof horse) with mallets swinging; then the water, three racing cutters heeling under huge gaff mainsails, topsails

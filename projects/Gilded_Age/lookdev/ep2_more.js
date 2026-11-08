@@ -62,33 +62,76 @@ function renderFittest(t) {
 }
 
 /* ================= ch5: Spencer's banquet at Delmonico's ================= */
+// An 1880s restaurant banquet room, not a church: flat gilt-framed mirrors and panels, square-headed windows with heavy draped
+// curtains and tassels, gas chandeliers with glass globes, palms and flowers; several long tables crowded with plates, glasses,
+// bottles, silver, centrepieces and menu cards; waiters in white aprons pouring; Spencer stands at his place among the diners,
+// napkin in hand. Cigar smoke drifts in at the end.
+function bqTable(x0, x1, ty, r, t) { const s = [];
+  s.push(`<rect x="${x0}" y="${ty}" width="${x1 - x0}" height="16" fill="#DFE0D6"/><rect x="${x0}" y="${ty + 16}" width="${x1 - x0}" height="70" fill="#A3BAB2" opacity="0.9"/>` +
+    [...Array(Math.floor((x1 - x0) / 60))].map((_, k) => `<path d="M${x0 + k * 60},${ty + 16} q30,14 60,0" stroke="#7FA39C" stroke-width="2" fill="none"/>`).join(''));
+  for (let x = x0 + 30; x < x1 - 20; x += 44) { const k = r();
+    s.push(`<ellipse cx="${x}" cy="${ty + 2}" rx="15" ry="3.5" fill="#F4EFE6"/>`);
+    s.push(`<path d="M${x + 14},${ty} l-4,-16 l10,0 l-4,16 Z M${x + 12},${ty - 16} l6,0" stroke="#DFE0D6" stroke-width="1.5" fill="#DFE0D6" fill-opacity="0.35"/>`);
+    if (k > 0.7) s.push(`<rect x="${x - 4}" y="${ty - 34}" width="9" height="30" rx="2" fill="#1F3735"/><rect x="${x - 2}" y="${ty - 44}" width="5" height="12" fill="#1F3735"/>`);
+    else if (k > 0.55) s.push(`<rect x="${x - 6}" y="${ty - 14}" width="11" height="14" fill="#F4EFE6" transform="rotate(-8, ${x}, ${ty})"/>`); // a menu card
+    else if (k > 0.45) s.push(`<ellipse cx="${x}" cy="${ty - 4}" rx="20" ry="7" fill="#C9C2A8"/><path d="M${x - 16},${ty - 6} q16,-16 32,0" fill="#C9C2A8"/>`); }
+  for (let x = x0 + 120; x < x1 - 60; x += 300) { s.push(`<rect x="${x - 3}" y="${ty - 50}" width="6" height="50" fill="#C9C2A8"/>`);
+    for (let k = 0; k < 9; k++) s.push(`<circle cx="${f1(x + Math.cos(k * 0.7) * 22)}" cy="${f1(ty - 58 - Math.sin(k * 1.3) * 14 - k % 3 * 5)}" r="${7 + k % 3}" fill="${['#DFE0D6', '#A3BAB2', '#5F857F'][k % 3]}"/>`); }
+  return s.join(''); }
+function waiter(x, y, h, d, t, pour = 0) { const an = pour ? {fArm: [100 - 20 * pour, 70 - 40 * pour], bArm: [190, 200], lean: 6 * pour} : {fArm: [95, 20], bArm: [190, 200]};
+  const X = (u) => x + d * u * h, Y = (v) => y - v * h;
+  let s = figure({x, y, h, d, kind: 'man', hat: 'none', coat: 'jacket', fill: '#060807', an});
+  s += poly([[X(-0.08), Y(0.6)], [X(0.12), Y(0.6)], [X(0.14), Y(0.12)], [X(-0.1), Y(0.12)]], '#DFE0D6');
+  const [hx, hy] = hand({x, y, h, d}, an.fArm);
+  s += pour ? `<rect x="${f1(hx - 5)}" y="${f1(hy - 30)}" width="10" height="34" rx="2" fill="#1F3735" transform="rotate(${f1(d * 70 * pour)}, ${f1(hx)}, ${f1(hy)})"/>` :
+    `<ellipse cx="${f1(hx)}" cy="${f1(hy - 4)}" rx="${f1(0.16 * h)}" ry="4" fill="#C9C2A8"/><path d="M${f1(hx - 0.1 * h)},${f1(hy - 6)} q${f1(0.1 * h)},${f1(-0.12 * h)} ${f1(0.2 * h)},0 Z" fill="#C9C2A8"/>`;
+  return s; }
 function renderBanquet(t) {
-  const c = cam2(camAt([[0, 0.9, 900, 560], [6, 1.05, 2100, 560], [10, 1.6, 2550, 620]], t)), w = [], G = 900, TY = G - 92;
-  const toast = smooth(5.6, 6.2, t);
-  // the room: panelled walls, tall mirrors in arched frames, a row of gas chandeliers, a coffered ceiling
-  w.push(`<rect x="-600" y="-300" width="4200" height="${G + 300}" fill="#1C3332"/>` + MAT.planks(-600, G - 220, 4200, 220, {base: '#172A28', seed: 91, size: 40, vertical: true}));
-  for (let x = -500; x < 3500; x += 300) w.push(`<rect x="${x}" y="80" width="150" height="420" rx="75" fill="#24403D"/><rect x="${x + 10}" y="90" width="130" height="400" rx="65" fill="#2B4744"/><rect x="${x + 10}" y="90" width="130" height="400" rx="65" fill="url(#mswarm)" opacity="0.4"/>`);
-  for (let x = -400; x < 3500; x += 300) w.push(gasolier(x + 225, 120, t, 1.6));
-  w.push(`<rect x="-600" y="-300" width="4200" height="320" fill="#132423"/>` + [...Array(28)].map((_, k) => `<rect x="${-600 + k * 150}" y="-300" width="8" height="320" fill="#0D0C09"/>`).join(''));
-  // the far row of diners (seated, facing us across the table: drawn in profile, alternating)
+  const c = cam2(camAt([[0, 0.9, 900, 540], [6, 1.0, 2000, 540], [10, 1.5, 2380, 600]], t)), G = 900, toast = smooth(5.6, 6.2, t), smokeOp = smooth(6.2, 8.2, t);
+  const room = [], back = [], front = [];
+  // walls: panelled, flat gilt-framed mirrors between square-headed windows with draped curtains and tassels
+  room.push(`<rect x="-800" y="-300" width="4600" height="${G + 300}" fill="#24403D"/>` + MAT.planks(-800, G - 230, 4600, 230, {base: '#1C3332', seed: 91, size: 60, vertical: true}) + `<rect x="-800" y="${G - 236}" width="4600" height="8" fill="#C9B98A" opacity="0.7"/>`);
+  for (let x = -700; x < 3700; x += 520) {
+    room.push(`<rect x="${x}" y="40" width="200" height="560" fill="#2B4744"/><rect x="${x}" y="40" width="200" height="560" fill="none" stroke="#C9B98A" stroke-width="8"/><rect x="${x + 12}" y="52" width="176" height="536" fill="#4E726C" opacity="0.5"/><rect x="${x + 12}" y="52" width="176" height="536" fill="url(#mswarm)" opacity="0.5"/>`);
+    const wx = x + 290; room.push(`<rect x="${wx}" y="60" width="150" height="520" fill="#0F1C1B"/>` + [0, 1].map((k) => `<rect x="${wx + k * 75 + 35}" y="60" width="4" height="520" fill="#24403D"/>`).join('') + `<rect x="${wx}" y="300" width="150" height="4" fill="#24403D"/>`);
+    room.push(`<path d="M${wx - 40},30 L${wx + 190},30 L${wx + 190},60 Q${wx + 75},110 ${wx - 40},60 Z" fill="#132423"/>` +
+      `<path d="M${wx - 40},40 L${wx + 20},40 Q${wx + 10},300 ${wx + 34},420 Q${wx - 10},600 ${wx - 30},${G - 236} L${wx - 50},${G - 236} Z" fill="#132423"/><path d="M${wx + 190},40 L${wx + 130},40 Q${wx + 140},300 ${wx + 116},420 Q${wx + 160},600 ${wx + 180},${G - 236} L${wx + 200},${G - 236} Z" fill="#132423"/>` +
+      `<circle cx="${wx + 32}" cy="424" r="7" fill="#C9B98A"/><path d="M${wx + 32},430 l-6,30 l12,0 Z" fill="#C9B98A"/><circle cx="${wx + 118}" cy="424" r="7" fill="#C9B98A"/><path d="M${wx + 118},430 l-6,30 l12,0 Z" fill="#C9B98A"/>`); }
+  room.push(`<rect x="-800" y="-300" width="4600" height="330" fill="#1C3332"/><rect x="-800" y="24" width="4600" height="10" fill="#C9B98A" opacity="0.7"/>`);
+  // gas chandeliers with glass globes
+  for (let x = -400; x < 3700; x += 520) { const fl = 0.92 + 0.08 * Math.sin(t * 7 + x);
+    room.push(glowC(x, 190, 260, 0.8 * fl, 'mswarm') + `<rect x="${x - 2}" y="30" width="4" height="120" fill="#C9B98A"/><path d="M${x - 70},180 Q${x},150 ${x + 70},180" stroke="#C9B98A" stroke-width="4" fill="none"/>`);
+    for (const k of [-1, -0.5, 0, 0.5, 1]) room.push(`<circle cx="${x + k * 70}" cy="${170 + Math.abs(k) * 10}" r="12" fill="#FFF3D6" opacity="0.9"/>`); }
+  // palms in tubs
+  for (const px of [-600, 1400, 3300]) { room.push(`<path d="M${px - 30},${G - 20} L${px + 30},${G - 20} L${px + 22},${G - 80} L${px - 22},${G - 80} Z" fill="#0D0C09"/>`);
+    for (let k = -4; k <= 4; k++) room.push(`<path d="M${px},${G - 80} Q${px + k * 30},${G - 260} ${px + k * 60},${G - 200 + Math.abs(k) * 20}" stroke="#132423" stroke-width="10" fill="none"/>`); }
+  // the back table (across the room) and its diners, smaller
   const r = rng(1882);
-  for (let x = -480; x < 3300; x += 56) w.push(figure({x, y: sitY(TY + 6, 150), h: 150, d: r() > 0.5 ? 1 : -1, kind: 'man', hat: 'none', coat: 'frock', beard: r() > 0.6, fill: E2.ink,
-    an: toast > 0.3 && r() > 0.25 ? {legs: [86, 80], shins: [6, 0], fArm: [20 + 10 * Math.sin(t * 3 + x), 10], tilt: 8} : {...POSES.sit(t, r()), tilt: -4 + 8 * r()}, prop: toast > 0.3 ? 'glass' : null}));
-  // the table: white cloth, candelabra, glasses, flowers
-  w.push(`<rect x="-500" y="${TY}" width="3800" height="18" fill="#DFE0D6"/><rect x="-500" y="${TY + 18}" width="3800" height="74" fill="#A3BAB2" opacity="0.85"/>`);
-  for (let x = -460; x < 3300; x += 180) w.push(`<rect x="${x}" y="${TY - 70}" width="4" height="70" fill="#C9C2A8"/><path d="M${x - 20},${TY - 50} q22,-18 44,0" stroke="#C9C2A8" stroke-width="3" fill="none"/>` + [-20, 2, 24].map((d) => `<ellipse cx="${x + d}" cy="${TY - 56 - (d === 2 ? 20 : 0)}" rx="2.5" ry="6" fill="#FFF3D6"/>`).join('') + glowC(x, TY - 70, 60, 0.5, 'mswarm'));
-  // the near row (backs to us, lower and darker)
-  for (let x = -450; x < 3300; x += 64) w.push(figure({x, y: G + 120, h: 210, d: r() > 0.5 ? 1 : -1, kind: 'man', hat: 'none', coat: 'frock', fill: '#060807', an: toast > 0.3 && r() > 0.3 ? {fArm: [24, 12], tilt: 10} : POSES.stand(t, r())}));
-  // the head of the table: Spencer stands to speak (a silhouette with side whiskers, no face)
-  const sx = 2600, speak = smooth(1.5, 2.0, t);
-  w.push(figure({x: sx, y: TY + 6, h: 190, d: -1, kind: 'man', hat: 'none', coat: 'frock', fill: E2.ink, an: {fArm: [120 - 50 * speak + 10 * Math.sin(t * 2.2) * speak, 90 - 40 * speak], tilt: 4 * speak}}));
-  w.push(`<path d="M${sx + 2},${TY - 0.93 * 190 + 6} q8,22 -2,40 l-10,-6 q4,-16 0,-30 Z" fill="${E2.ink}"/><path d="M${sx - 2},${TY - 190 + 6} q-14,0 -16,12" stroke="${E2.ink}" stroke-width="4" fill="none"/>`);
-  // waiters
-  for (const wx of [400, 1500]) { const x = wx + 300 * Math.sin(t * 0.3 + wx); w.push(figure({x, y: G + 4, h: 180, d: Math.cos(t * 0.3 + wx) > 0 ? 1 : -1, kind: 'man', hat: 'none', coat: 'frock', fill: '#060807', an: {fArm: [95, 70]}})); }
+  for (let x = -560; x < 3500; x += 50) back.push(figure({x, y: sitY(G - 150, 120), h: 120, d: r() > 0.5 ? 1 : -1, kind: 'man', hat: 'none', coat: 'frock', beard: r() > 0.6, fill: '#0F1A19',
+    an: toast > 0.3 && r() > 0.3 ? {legs: [86, 80], shins: [6, 0], fArm: [24, 12], tilt: 8} : {...POSES.sit(t, r()), tilt: -4 + 8 * r()}, prop: toast > 0.3 ? 'glass' : null}));
+  back.push(bqTable(-600, 3500, G - 210, rng(5), t).replace(/#DFE0D6/g, '#A3BAB2'));
+  // the main table and its far row of diners; Spencer stands at his place, napkin in hand, among them
+  const TY = G - 60, sx = 2380, speak = smooth(1.5, 2.0, t);
+  for (let x = -500; x < 3400; x += 58) { if (Math.abs(x - sx) < 40) continue; front.push(figure({x, y: sitY(TY + 6, 170), h: 170, d: r() > 0.5 ? 1 : -1, kind: 'man', hat: 'none', coat: 'frock', beard: r() > 0.6, fill: E2.ink,
+    an: toast > 0.3 && r() > 0.25 ? {legs: [86, 80], shins: [6, 0], fArm: [22 + 10 * Math.sin(t * 3 + x), 10], tilt: 8} : {...POSES.sit(t, r()), tilt: -4 + 8 * r()}, prop: toast > 0.3 ? 'glass' : null})); }
+  front.push(figure({x: sx, y: TY + 6, h: 180, d: -1, kind: 'man', hat: 'none', coat: 'frock', fill: E2.ink, an: {fArm: [120 - 40 * speak + 8 * Math.sin(t * 2.2) * speak, 90 - 30 * speak], bArm: [170, 175], tilt: 3 * speak}}));
+  front.push(`<path d="M${sx + 2},${TY - 0.93 * 180 + 6} q8,22 -2,38 l-10,-6 q4,-16 0,-28 Z" fill="${E2.ink}"/>` + `<path d="M${sx + 0.05 * 180},${TY - 0.62 * 180} l14,8 l-4,22 l-14,-6 Z" fill="#F4EFE6"/>`); // side whiskers; the napkin in his other hand
+  front.push(bqTable(-560, 3420, TY, rng(9), t));
+  // waiters in white aprons: one pours, others carry trays
+  front.push(waiter(700 + 200 * Math.sin(t * 0.35), G + 160, 260, 1, t), waiter(1800, G + 160, 260, -1, t, smooth(3, 3.6, t) * (1 - smooth(5, 5.6, t))), waiter(2900 - 150 * Math.sin(t * 0.3), G + 160, 260, -1, t));
+  // cigar smoke at the end
+  let sm = ''; if (smokeOp > 0.01) for (let x = -300; x < 3300; x += 260) sm += MAT.smoke(x, TY - 150, t, {col: 'A3BAB2', k: 0.6, n: 6, rise: 240, drift: 140, seed: 900 + x});
+  const world = layerAt(c, 1, room.join('') + back.join('') + front.join('') + `<g opacity="${f1(0.55 * smokeOp)}">${sm}</g>`);
+  // a menu card, as printed for the dinner
+  const mc = smooth(0.2, 0.7, t) * (1 - smooth(3.6, 4.2, t));
   const scr = [tag(40, 1040, 'DELMONICO\'S · NEW YORK · NOVEMBER 9, 1882', 1)];
-  if (t > 1.0 && t < 6.5) scr.push(penS(1180, 140, 'a farewell dinner for herbert spencer', 30, -3));
+  if (mc > 0.01) scr.push(`<g opacity="${f1(mc)}" transform="rotate(-3, 1500, 300)"><rect x="1330" y="110" width="360" height="420" fill="#F4EFE6"/><rect x="1346" y="126" width="328" height="388" fill="none" stroke="#111" stroke-width="2"/>` +
+    `<text x="1510" y="200" font-family="Playfair" font-weight="900" font-size="40" text-anchor="middle" fill="#111">DELMONICO'S</text><text x="1510" y="250" font-family="Inter" font-weight="600" font-size="22" text-anchor="middle" fill="#111">DINNER TO</text>` +
+    `<text x="1510" y="290" font-family="Inter" font-weight="800" font-size="28" text-anchor="middle" fill="#111">HERBERT SPENCER</text><text x="1510" y="340" font-family="Inter" font-weight="600" font-size="22" text-anchor="middle" fill="#111">NOVEMBER 9, 1882</text>` +
+    [0, 1, 2, 3].map((k) => `<rect x="1400" y="${380 + k * 30}" width="${220 - k * 30}" height="6" fill="#111" opacity="0.25"/>`).join('') + '</g>');
+  if (t > 4.2 && t < 6.5) scr.push(penS(1180, 140, 'about 200 rich men', 34, -3));
   if (t > 6.5) scr.push(penS(1180, 140, 'his advice: relax more', 36, -3), tag(1200, 220, 'HERBERT SPENCER', smooth(6.5, 7, t)));
-  return frame(msDefs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, layerAt(c, 1, w.join('')), scr.join(''), t);
+  return frame(msDefs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), t);
 }
 
 /* ================= ch6: rich leisure, one side-scroll ================= */
