@@ -75,6 +75,7 @@ def chapter(src):
     tts_ctx = [V.spoken(CONTEXT_AS.get(r, r)) for r in raw]
     pcm = b'\0\0' * int(V.RATE * V.LEAD_IN)
     words = []
+    bed_src = None
     for i, (who, ps) in enumerate(runs):
         offset = len(pcm) / 2 / V.RATE
         audio, chars = request(who, tts[i], tts_ctx[i - 1] if i else '', tts_ctx[i + 1] if i + 1 < len(runs) else '')
@@ -96,7 +97,11 @@ def chapter(src):
             if k: w['k'] = k
         words += ws
         last = i + 1 == len(runs)
-        pcm += V.fade_edges(audio) + V.room_tone(audio, END_GAP if last else RUN_GAP)
+        # Room tone comes from the longest take so far: a short character line's quietest 0.2 s can hold the tail of a
+        # breath, and looped it flutters faintly between lines (heard between Ma and Nora, ch04).
+        if bed_src is None or len(audio) > len(bed_src):
+            bed_src = audio
+        pcm += V.fade_edges(audio) + V.room_tone(bed_src, END_GAP if last else RUN_GAP)
         print(f'  {name} run {i + 1}/{len(runs)} {who}: {len(audio) / 2 / V.RATE:.1f}s', flush=True)
     wav = os.path.join(OUT, name + '.wav')
     with wave.open(wav, 'wb') as w:
