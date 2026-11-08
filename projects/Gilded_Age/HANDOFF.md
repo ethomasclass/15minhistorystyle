@@ -267,3 +267,24 @@ Suggested next steps for the Claude Code session:
 
 4.  Once two or three scripts exist, test one cold open in Flow using
     the style notes above.
+
+## Series inquiry question (C3 style, chosen Nov 8, 2026)
+
+**Compelling question:** *Who should look out for ordinary people: the rich, the government, or ordinary people themselves?*
+
+Each episode tests one or more of the three answers; students track evidence for each across the series, then argue in a summative
+task. The series closer leaves it open; a short **Progressive Era mini unit** follows as the payoff (the government increasingly steps
+in, pushed by ordinary people: muckrakers, settlement houses, trust-busting, the 1911 Standard Oil breakup, meat inspection, the
+16th and 17th Amendments; many reforms trace back to the Populists of ep 6).
+
+| Ep | Supporting question | Answer(s) it tests |
+|---|---|---|
+| 1 Industrialization and the tycoons | How did America get so rich, so fast, and who ended up with the money? | the rich (tycoons); the government stands back |
+| 2 Wealth and culture | What did the richest Americans think they owed everyone else? | the rich (Gospel of Wealth, philanthropy) vs Social Darwinism |
+| 3 Immigration | Was America a land of opportunity for newcomers? | ordinary people (immigrant networks, family, mutual aid) |
+| 4 Cities and machines | Did political machines help the poor or exploit them? | the government, the machine version |
+| 5 Labor | How did workers fight for a bigger share, and what did it cost them? | ordinary people (unions) |
+| 6 Populism | Could ordinary Americans use politics to fight back? | ordinary people through the government |
+
+Each script asks its supporting question near 0:40 and closes with a line that feeds the compelling question; the classroom handout
+carries a three-column evidence chart (the rich / the government / ordinary people).
