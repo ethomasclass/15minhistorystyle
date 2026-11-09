@@ -85,9 +85,12 @@ stereo cards returned 404 on download. The drawn samovar, brass candlesticks and
 
 ## 7. Ellis Island, 1892 (g_ellis), for a later beat
 
-Gaps: nothing saved yet. LoC "[First U.S. immigrant station on Ellis Island]" (1891) shows only as a thumbnail outside the Library.
-On Commons, to fetch when the rate limit lifts: "Original building at Ellis Island 1892" (NYPL), "(King1893NYC) pg087
-ELLIS-ISLAND IMMIGRANT STATION" (King's Handbook of New York, 1893), "Ellis Island First Bldg Burnt 15-June-1897". The first
+| File | Date | Shows | Borrow |
+|---|---|---|---|
+| ellis_immigrant_station_king_1893.jpg (Commons, *King's Handbook of New York*, 1893) | 1893 | Five halftones: the landing for emigrants with a ferry, the **main building** (long two-storey wooden hall, steep roofs, conical-capped corner towers and a taller central tower, a pier in front), the dining hall, the surgeon's residence, the detention room | Everything for a later Ellis beat: the main building's silhouette from the water, the ferry slip |
+
+Gaps: LoC "[First U.S. immigrant station on Ellis Island]" (1891) shows only as a thumbnail outside the Library. Still to fetch on
+Commons: "Original building at Ellis Island 1892" (NYPL), "Ellis Island First Bldg Burnt 15-June-1897". The first
 station was a large wooden (Georgia pine) building with corner towers; it opened January 1, 1892 and burned June 15, 1897.
 
 ## 8. Nativism (h_nativism) and the contrast, Liberty (i_liberty)
@@ -97,21 +100,23 @@ station was a large wooden (Georgia pine) building with corner towers; it opened
 | the_only_one_barred_out_1882_loc2001696530.jpg | Apr 1 1882 | Frank Leslie's: a Chinese man sits outside the shut "Golden Gate of Liberty"; the notice welcomes "Communist, Nihilist, Socialist, Fenian & Hoodlum, but no admittance to" the Chinese. **The cartoon criticises the exclusion bill.** | **SLUR** in the notice ("Chinamen"); **CARICATURE** (queue, features). Desk print `desk/the_only_one_barred_out_1882.png` crops to the cartoon | The exclusion beat |
 | opper_irish_declaration_of_independence_1883_loc2012645471.jpg | May 9 1883 | Puck cover by Frederick Opper: a huge Irish cook ("Bridget") in a shamrock dress shakes her fist at her frightened mistress | **CARICATURE** (the anti-Irish servant stereotype; ties to Nora's job in ep 2). Desk print `desk/opper_irish_declaration_1883.png` | Anti-Irish cartoons of the Kellys' own time |
 | keppler_darn_ye_both_apa_1894_loc2012648672.jpg | Nov 7 1894 | Puck by Udo Keppler: Uncle Sam knocks together the heads of an American Protective Association man and a Catholic priest | Mild caricature; condemns both sides | The APA (anti-Catholic, founded 1887) |
+| chinese_exclusion_act_1882_text.jpg (Commons, National Archives) | May 1882 | The enrolled Act, handwritten: "An Act To execute certain treaty stipulations relating to Chinese," the preamble and Sec. 1 (Chinese laborers suspended for ten years) | None (the law's own words) | Desk print `desk/chinese_exclusion_act_1882_text.png` (top half) |
+| keppler_looking_backward_1893.jpg (Commons) | Jan 11 1893 | Puck centrefold by Joseph Keppler: wealthy men in top hats bar a poor immigrant with a bundle from the gangway; behind each stands the shadow of his own immigrant father. Caption (checked on the print): "They would close to the new-comer the bridge that carried them and their fathers over." | **CARICATURE** (the shadows and the newcomer are drawn as ethnic types) | The irony beat; desk print `desk/keppler_looking_backward_1893.png`, the pull-quote |
+| gillam_sop_to_cerberus_chinese_exclusion_1882.jpg (Commons) | May 17 1882 | Puck cover by Bernhard Gillam: President Arthur, in a toga, throws a sop (the exclusion bill) to a three-headed dog (the anti-Chinese vote) | Mild; political caricature of Arthur | Who passed the law and why (votes in the West) |
+| keppler_uncle_sams_lodging_house_1882.jpg (Commons) | Jun 7 1882 | Puck centrefold by Joseph Keppler: Uncle Sam, lamp in hand, scolds a rowdy Irish lodger who keeps the other lodgers (German, English, French, Russian, Chinese and others, berths labelled by nationality) awake | **CARICATURE** (the brawling Irishman, ethnic types; a berth label is a period racial term) | Anti-Irish stereotype of the Kellys' own decade; bunks as a picture of "a nation of lodgers" |
+| keppler_welcome_to_all_1880.jpg (Commons) | Apr 28 1880 | Puck by Keppler: Uncle Sam welcomes immigrants of every kind into the "U.S. Ark of Refuge"; signs: "No oppressive taxes, no expensive kings, no compulsory military service, no knouts or dungeons" | Mild caricature; pro-immigration | The welcome side of the argument, for contrast |
+| wasp_a_statue_for_our_harbor_1881.jpg (Commons) | Nov 11 1881 | The Wasp (San Francisco), by George F. Keller: an anti-Chinese parody of the Statue of Liberty, its rays labelled with slanders (disease, filth, immorality, "ruin to white labor"), a skull at its foot | **CARICATURE**, openly racist; the strongest image here. Show only if the script needs the West Coast's anti-Chinese movement, briefly and framed | Anti-Chinese politics in the West before the 1882 Act |
+| new_colossus_manuscript_lazarus_1883.jpg (Commons) | 1883 | Emma Lazarus's manuscript of "The New Colossus," ending "(Written in aid of Bartholdi Pedestal Fund.)" | None | The contrast card in `ep3_nativism`; the poem's real words |
 | unveiling_bartholdi_statue_1886_loc99614119.jpg | Nov 1886 | Frank Leslie's: sailors on a warship watch the unveiling of the statue, the fleet saluting, October 28, 1886 | None | The contrast: the statue as immigrants first saw it |
 
-To fetch when Commons allows (titles exact, all public domain): Keppler, "Looking Backward" (Puck, Jan 11 1893; caption "They
-would close to the new-comer the bridge that carried them and their fathers over": the episode's irony, prosperous immigrants'
-sons barring the next arrivals, **CARICATURE**); Keppler, "Uncle Sam's lodging-house" (Puck, Jun 7 1882, **CARICATURE**: Irish
-lodger as a troublemaker); Keppler, "Welcome to All!" (Puck, 1880, a pro-immigration ark); Gillam, "A sop to Cerberus" (1882,
-Arthur and the exclusion bill); "Chineseexclusionact.JPG" (the Act's text page); Nast, "The Chinese Question" (Harper's, Feb 18
-1871, Nast *defending* Chinese immigrants against a mob) and "Every Dog (No Distinction of Color) Has His Day" (1879, defends the
-Chinese); The Wasp, "A Statue for Our Harbor" (San Francisco, Nov 11 1881, **CARICATURE**: an anti-Chinese parody of the Statue
-of Liberty) and "The First Blow at the Chinese Question" (1877); Nast, "The Usual Irish Way of Doing Things" (1871, **CARICATURE**,
-ape-like Irishman; strongly offensive, use only if the script needs it); Henry F. Bowers portrait (APA founder); "To save
-trouble no Irish need apply" (New York *Evening Post*, Sept 8 1828, a newspaper ad); "No Irish Need Apply" lyric sheet (1862 song);
-Edward Moran, "Unveiling the Statue of Liberty" (1886 painting); "New Colossus manuscript Lazarus" (Lazarus's 1883 manuscript).
-LoC copies of "Looking Backward" (2022641130) and the Nast 1879 cartoon exist but are thumbnail-only or carry a slur in the
-title; use the Commons scans.
+Still to fetch on Commons (rate-limited this session; titles exact, all public domain): Gillam, "The immigrant. Is he an
+acquisition or a detriment?" (Judge, 1903, later); Nast, "The Chinese Question" (Harper's, Feb 18 1871, Nast *defending* Chinese
+immigrants) and "Every Dog (No Distinction of Color) Has His Day" (1879); The Wasp, "The First Blow at the Chinese Question" (1877,
+**CARICATURE**); Nast, "The Usual Irish Way of Doing Things" (1871, **CARICATURE**, an ape-like Irishman; strongly offensive, use
+only if the script needs it); Henry F. Bowers portrait (APA founder); "To save trouble no Irish need apply" (New York *Evening
+Post*, Sept 8 1828, a newspaper ad); "No Irish Need Apply" lyric sheet (1862 song); Edward Moran, "Unveiling the Statue of Liberty"
+(1886 painting); "Original building at Ellis Island 1892" (NYPL); "Ellis Island First Bldg Burnt 15-June-1897". LoC's copy of
+"Looking Backward" (2022641130) is thumbnail-only off-site, and the LoC Nast 1879 cartoon carries a slur in its title; use Commons.
 
 **"No Irish Need Apply"**: genuinely attested as **newspaper help-wanted ads** (mostly for domestic servants) and in a popular
 1862 song, but historians dispute how common NINA **signs** in shop windows were. Richard Jensen ("No Irish Need Apply: A Myth of

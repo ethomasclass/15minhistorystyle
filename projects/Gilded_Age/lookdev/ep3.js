@@ -274,8 +274,8 @@ function renderCastleGarden(t) {
   let worldA = '', worldB = '';
   const scr = [];
   if (X < 1) {
-    const c = cam2(camAt([[0, 0.9, 960, 500], [4.8, 1.02, 860, 540]], t)), arrive = smooth(0.2, 4.2, t);
-    const bx = -1100 + 1100 * ease(arrive);
+    const c = cam2(camAt([[0, 0.9, 840, 500], [4.8, 1.0, 780, 540]], t)), arrive = smooth(0, 3.4, t);
+    const bx = -460 + 460 * ease(arrive);
     const water = MAT.water(-1000, CG.wl - 6, 4000, 900, t, {seed: 59, n: 120, top: '#3E5F5A', bottom: '#0B1414'});
     // landing: once the barge is in, people walk up the gangway onto the pier
     const walkers = []; if (t > 3.4) { const r = rng(60); for (let k = 0; k < 6; k++) { const d0 = (t - 3.4 - k * 0.35) * 80; if (d0 < 0) continue; const x = 210 + d0;
@@ -558,17 +558,17 @@ function renderLetter(t) {
 // The prints are made by tools/crease.py into ep3/public/img/desk/ (see ep3/research/REFERENCES.md for sources and handling notes).
 const NV_DIR = '../ep3/public/img/desk/';
 const NV_PRINTS = [ // file, centre x, y, width, rotation, time it lands, caption
-  ['chinese_exclusion_act_1882_text', 420, 470, 440, -4, 0.3, 'CHINESE EXCLUSION ACT · 1882'],
-  ['the_only_one_barred_out_1882', 690, 640, 420, 5, 1.2, 'FRANK LESLIE\'S · 1882'],
-  ['nast_usual_irish_way_1871', 1180, 420, 420, 3, 2.1, 'HARPER\'S WEEKLY · 1871'],
-  ['keppler_looking_backward_1893', 1500, 640, 520, -3, 3.0, 'PUCK · 1893'],
+  ['chinese_exclusion_act_1882_text', 330, 440, 400, -4, 0.3, 'EXCLUSION ACT · 1882'],
+  ['the_only_one_barred_out_1882', 720, 520, 340, 5, 1.2, 'FRANK LESLIE\'S · 1882'],
+  ['opper_irish_declaration_1883', 1160, 470, 380, 3, 2.1, 'PUCK · 1883'],
+  ['keppler_looking_backward_1893', 1560, 520, 480, -3, 3.0, 'PUCK · 1893'],
 ];
 if (typeof window !== 'undefined') window.E3_PRELOAD = Promise.all(NV_PRINTS.map(([f]) => new Promise((ok) => { const im = new Image(); im.onload = im.onerror = () => ok(true); im.src = NV_DIR + f + '.png'; })));
 function renderNativism(t) {
   const X = smooth(5.5, 6.3, t); let out = '';
   const scr = [];
   if (X < 1) {
-    const push = smooth(4.4, 6.0, t), z = 1 + 0.9 * push, ux = 960 + (1500 - 960) * push, uy = 540 + (600 - 540) * push;
+    const push = smooth(4.4, 6.0, t), z = 1 + 0.7 * push, ux = 960 + (1560 - 960) * push, uy = 540 + (500 - 540) * push;
     const s = [];
     s.push(MAT.planks(-200, -200, 2400, 1500, {base: '#2A2117', seed: 111, size: 60}) + `<rect x="-200" y="-200" width="2400" height="1500" fill="url(#exvig)"/>`);
     s.push(`<rect x="930" y="160" width="6" height="760" fill="${E3.teal}" opacity="${f1(smooth(0.2, 0.8, t))}"/>`);
@@ -587,7 +587,7 @@ function renderNativism(t) {
       if (t > 2.2) scr.push(tag(1000, 140, 'LET IN, BUT MOCKED', smooth(2.2, 2.6, t) * (1 - X)));
       for (const [f, x, y, w, rot, t0, cap] of NV_PRINTS) if (t > t0 + 0.4) scr.push(tag(x - w / 2, y + w * 0.4 + 40, cap, smooth(t0 + 0.4, t0 + 0.8, t)));
     }
-    if (t > 4.6 && X < 0.5) scr.push(penS(160, 860, '"They would close to the new-comer', 30, -2), penS(160, 950, 'the bridge that carried them and their fathers over."', 30, -2));
+    if (t > 4.6 && X < 0.5) scr.push(penS(140, 130, '"They would close to the new-comer', 30, -2), penS(140, 215, 'the bridge that carried them and their fathers over."', 30, -2));
   }
   if (X > 0) { // the irony, in the family: Ma Kelly at her window
     const tt = 9.4 + (t - 5.5) * 0.12;

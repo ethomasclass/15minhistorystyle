@@ -234,3 +234,56 @@ Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume 
   bare boards, an iron bed, a washstand with pitcher and basin, one candle on a chair, her uniform (black dress, white apron and
   cap) on a hook. Nora (coral) sits on the bed; the call bell on its spring rings (teal ring marks), and she gets up. "on call, day
   and night." The room's details are typical of servants' attic rooms, not from a plan of this house (no attic plan found).
+
+## Round 13: Episode 3 draft sets (Immigration, about 1884)
+
+`ep3.js` (loaded by `bridge.html` after `ep2_more.js`; reuses `rig.js`, the camera/labels/frame from `explainers.js`, `msDefs`,
+`glowC` and the planted-hoof `msHorse` from `mansion.js`, `camAt` from `ep2_more.js`). DRAFTS for review, no script yet. Six
+10 s clips (720p) in `review/ep3/`, three JPG stills each, and a reference sheet per scene (`sheet_*.jpg`, built by `ep3sheet.py`,
+our stills beside the period references). References: `../ep3/research/REFERENCES.md`, files in `../ep3/public/img/ref/`.
+
+- **The neighbours' colour.** The Jewish family from the Russian Empire (composites, not Kellys; names to come) is drawn in one
+  accent, **muted wheat gold `#E2B864`** (`E3.acc`; detail tones `#7A5B22` / `#FFF0C9`), via `nb(castKey, opts)`. Coral stays only
+  for the Kellys. `nb` takes `scale` so the daughter (about 12) is taller than the rig's default girl (0.8 vs 0.56); the boy is 0.5.
+  Outdoors the father wears a cap and a long coat; at home a skullcap and vest; the mother a head scarf.
+- **`ep3_steerage`.** An early-1880s Atlantic liner side-on, cut open like `cutaway.js`: two raked funnels (smoke trailing aft),
+  three masts with furled sails and rigging, lifeboats and first-class strollers on the deckhouse; the first-class dining saloon
+  (gilt lamps, mirrors, long tables, stewards); steerage in the 'tween deck fore and aft of the boiler casing (two-tier berths,
+  lanterns that swing more as the sea gets up, portholes, people sitting, lying, standing); boilers with stokers and furnace glow,
+  the compound engine's crank, holds. The ship rolls and heaves, foam at the bow and in the wake, the sea see-through over the hull
+  below the waterline. The camera pushes from the whole ship into forward steerage: the family on a berth with a trunk, a rolled
+  feather bed and brass candlesticks; the daughter looks up toward first class. "a week or two at sea."
+- **`ep3_castle_garden`.** Outside (0 to 5 s), after the 1880s stereo views: the round sandstone fort with its broad low roof and
+  arched-window lantern, flags, the arched gate and a blank name board; the Battery's bare trees, lower Manhattan behind (Trinity's
+  spire); a two-deck barge full of people with bundles is towed in by a tug, and they walk onto the depot's pier. Inside (5 to 10 s),
+  after the NYPL engraving: the rotunda's gallery ring, offices round the wall, iron columns opening into fans of ribs, light from
+  the lantern; clerks on high stools at high desks; benches of waiting families; the family steps up and the father gives their
+  name ("name, age, where from, where to").
+- **`ep3_moving_in`.** A Brooklyn tenement front (brick, bracketed cornice, stone lintels, curtains, fire escapes with washing,
+  a stoop rising along the front, areaway windows), gas lamp, telegraph wires. A wagon at the curb (the horse stands, rests a hind
+  leg, tosses its head) holds a roped feather bed, a trunk, a samovar and chairs; the family carries them up the stoop one by one
+  (trunk on the father's shoulder, feather bed, samovar, candlesticks). A one-horse horsecar passes in front. Neighbours watch from
+  a stoop and a fire escape; the camera rises to Ma Kelly (coral) at her second-floor window, arms folded, turning her head to
+  follow them. "Ma Kelly is not so sure."
+- **`ep3_sweatshop`.** After Riis's Ludlow Street and Division Street photographs: one room, garments on a line overhead, the
+  window to the street; two of three treadle machines run (wheels and treadles turning); the father presses at his board (steam on
+  each stroke, irons heating on the stove); the daughter sews at a machine; the boy pulls threads by the pile; the mother finishes
+  by hand at the window. At 4.4 s the contractor (ink, bowler) brings a bundle, drops it, and leaves; the pile grows.
+  "home by night, workshop by day", "paid by the piece".
+- **`ep3_letter`.** The kitchen table by lamplight (samovar, candlesticks, kerosene lamp): the father writes, the mother looks on.
+  The letter rises in screen space, its unreadable Yiddish-style script written **right to left**, and a prepaid steamship ticket
+  slides in on top. Then the map (Natural Earth 1:50m land, embedded as `E3_LAND`, equirectangular squashed by cos 48°): the
+  Russian Empire hatched; an envelope carries the letter east from New York to "home" (a town in the Pale); then the cousin's route
+  draws west in teal dots, by rail to Hamburg, by steamship (a little ship icon) to New York.
+- **`ep3_nativism`** (added Nov 9 on request). The desk layer: creased prints (`ep2/tools/crease.py` into
+  `../ep3/public/img/desk/`) land one by one either side of a teal rule, "SHUT OUT BY LAW" (the Chinese Exclusion Act text,
+  Frank Leslie's "The Only One Barred Out", 1882) and "LET IN, BUT MOCKED" (Opper's anti-Irish Puck cover, 1883; Keppler's "Looking
+  Backward", 1893), each with a mono caption; Lazarus's 1883 line on a card as the contrast; the camera pushes into "Looking
+  Backward" with its caption as the pull-quote. Then the irony in the family: Ma Kelly at her window. "not long ago, the cartoons
+  mocked the Irish" / "now Ma Kelly watches the newcomers". Caricatures are shown briefly and small, never animated or mocked;
+  REFERENCES.md flags which prints carry slurs or caricatures.
+- `bridge.html`'s `draw()` now also waits for `window.E3_PRELOAD` (the desk prints) and two animation frames, so `<image>` prints
+  are decoded before a screenshot.
+
+Known draft limits: the steamship is a generic type (no plan of a specific Hamburg-America ship found yet); the barge and horsecar
+are generic; the Brooklyn street has no Brooklyn-specific reference; Ma's folded arms read as hands at her chest in profile.
