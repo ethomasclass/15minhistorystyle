@@ -319,3 +319,22 @@ Need Apply" window sign; Ma Kelly came over about 1870; route rail to Hamburg, s
   at school, the daughter crosses out Rivke on her slate and writes Rebecca. Later still, the father's shop sign RABINOWITZ becomes
   RABIN ("most name changes came later, made by families themselves"). The surname is invented for the composite family.
   Sources and the script wording are in `../ep3/research/REFERENCES.md`.
+
+### Round 13c (Nov 9): contacts, and the "Looking Backward" read
+
+- **Contacts are solved, not placed.** `ep3.js` now carries forward kinematics and two-bone IK that match `rig.js`'s limb chain
+  exactly (`E3K.hand`, `E3K.foot`, `E3K.armIK`, `E3K.legIK`, with lean and bob). Held things are drawn at the grip
+  (`holding`, `hanging`); hands that work on something are solved onto it (`reach`); feet are solved onto floors, treads and
+  treadles (`plant`, `sitOn`); walkers use `stepWalk`, which plants each foot on a foothold until it lifts (on the stoop each
+  foothold is a tread). Every contact is logged to `window.E3LOG` (target vs reached) each frame.
+- **Audit** (every other frame of every Ep 3 clip, `scratchpad` script `verify.mjs`): holds and hand contacts 0 px error; planted
+  feet 0 to 0.1 px error and 0 to 0.1 px drift while planted; seated feet 0 px (steerage berth sitters 2 px at a 72 px figure).
+  The rig's palm is drawn within about 5 px of the grip at a 400 px figure (the mitten's own offset).
+- **Rig change (backward compatible):** `rig.js` treats `an.standing` as "not seated" when choosing a woman's skirt, so a woman
+  climbing a stair (thigh raised past 60 degrees) keeps her standing skirt. Unset everywhere else, so Ep 1 and Ep 2 render as before.
+- **`ep3_looking_backward` (25 s, new).** Keppler's *Puck* centre spread of January 11, 1893 on the desk, then a guided read:
+  the five men in top hats ringed and an arrow to the newcomer they block; a teal line from each man up to his shadow (the poor
+  immigrant he or his father was; "THE SHADOWS HAVE NO LABELS"); the caption underlined and set as a quote card; arrows from the
+  shadows down to the men and "KEPPLER WAS AN IMMIGRANT TOO: BORN IN VIENNA, 1838"; a "Look again" question card. Facts and a
+  65-word draft narration timed to the beats: `../ep3/research/LOOKING_BACKWARD.md`. Source image is the 1280 px Commons copy, so
+  the pushes (to 2.35x) are soft; swap in a larger scan when one can be fetched.

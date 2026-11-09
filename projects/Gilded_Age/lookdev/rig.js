@@ -118,7 +118,7 @@ function figure(o) {
       shape([['M', -0.035, 0.872], ['Q', -0.095, 0.866, -0.112, 0.8], ['Q', -0.132, 0.72, -0.106, 0.66], ['L', hb, hem - 0.01], ['L', hf, hem], ['L', 0.097, 0.62], ['Q', 0.13, 0.75, 0.104, 0.81], ['Q', 0.088, 0.866, 0.035, 0.872]]);
     } else if (kind === 'woman') {
       shape([['M', -0.03, 0.868], ['Q', -0.08, 0.862, -0.092, 0.8], ['Q', -0.1, 0.7, -0.055, 0.6], ['L', 0.055, 0.6], ['L', 0.07, 0.68], ['Q', 0.112, 0.75, 0.086, 0.815], ['Q', 0.072, 0.864, 0.03, 0.868]]);
-      const seated = (an.legs && an.legs[0] > 60);
+      const seated = !an.standing && (an.legs && an.legs[0] > 60); // an.standing: a standing or walking figure whose thigh is raised (a stair step) keeps her standing skirt
       if (seated) { // a seated skirt: over the lap to the knee, then down to the floor (the floor is at 0.22 when sitting)
         shape([['M', 0.055, 0.61], ['Q', 0.06, 0.53, 0.13, 0.52], ['L', 0.25, 0.52], ['Q', 0.27, 0.4, 0.27, 0.235], ['L', 0.06, 0.235], ['L', 0.0, 0.47], ['Q', -0.1, 0.46, -0.075, 0.61]]);
         g.push(`<ellipse cx="${f1(X(0.29))}" cy="${f1(Y(0.232))}" rx="${f1(0.035 * h)}" ry="${f1(0.013 * h)}" fill="${c}"/>`);

@@ -29,6 +29,7 @@
 <div id="stage"><div id="scene"></div><div id="ov"></div></div>
 <script>
   window.draw = (cfg) => {
+    if (window.E3LOG) window.E3LOG.length = 0;
     document.getElementById('scene').innerHTML = cfg.ball ? renderBall(cfg) : cfg.castsheet ? renderCastSheet() : cfg.cut ? renderCutaway(cfg) : cfg.faces ? renderFaces(cfg.look) : cfg.ladder ? renderLadder(cfg.look) : cfg.clip ? renderClipFrame(cfg.clip, cfg.t) : renderScene(cfg);
     document.getElementById('ov').innerHTML = cfg.overlay ? OVERLAYS[cfg.overlay](cfg) : '';
     return Promise.all([document.fonts.ready, window.E3_PRELOAD || true]).then(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => ok(true)))));
