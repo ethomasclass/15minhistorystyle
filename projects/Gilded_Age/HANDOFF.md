@@ -290,3 +290,8 @@ in, pushed by ordinary people: muckrakers, settlement houses, trust-busting, the
 script builds evidence for it implicitly: show who helped ordinary people, who didn't, and what it cost, and let students draw the
 line. A script may pose its own episode-level question, but never quotes the unit question or the three-way framing. The
 classroom handout carries a three-column evidence chart (the rich / the government / ordinary people).
+
+**Ep 3 addition (Nov 9, 2026):** the user asked that Episode 3 cover **nativism**: the Chinese Exclusion Act (1882), anti-immigrant
+cartoons, the American Protective Association (1887), "old" vs "new" immigrants, and the irony that the Irish, once the target, turn
+wary of newer arrivals. Contrast: the Statue of Liberty (1886) and Emma Lazarus's "The New Colossus" (1883). Handle caricatures and
+slurs in sources carefully: brief, framed by narration, never played for laughs.
