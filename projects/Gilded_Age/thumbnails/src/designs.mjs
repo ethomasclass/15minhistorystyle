@@ -25,7 +25,7 @@ export const JOBS = [
   {name: 's2_A_son_father', ...V, ov: `<div class="desk"></div>
    <img class="cut" src="${I}desk/rockefeller_18_bust.png" style="left:-40px;top:560px;width:900px">
    <img class="cut" src="${I}desk/rockefeller_father_bust.png" style="left:640px;top:1000px;width:420px">
-   <div class="big" style="top:250px">HIS DAD</div><div class="tape" style="top:390px;font-size:112px;letter-spacing:-3px">CHARGED INTEREST</div>
+   <div class="big" style="top:250px">HIS DAD</div><div class="tape" style="top:390px;font-size:94px;letter-spacing:-2px">CHARGED INTEREST</div>
    <div class="pen" style="left:70px;top:1330px;transform:rotate(-4deg)">John D., about 18</div><div class="pen" style="left:700px;top:1600px;transform:rotate(-4deg)">his father</div><div class="vig"></div><img class="logo" src="${LOGO}">`},
   {name: 's2_B_father_note', ...V, ov: `<div class="desk"></div>
    <img class="cut" src="${I}props/p05_note_1868.webp" style="left:60px;top:1050px;width:760px;transform:rotate(-6deg)">
