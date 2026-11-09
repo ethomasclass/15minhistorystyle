@@ -22,10 +22,27 @@ const E3_TONES = {tone: E3.accTone, lite: E3.accLite};
 function nb(name, o) {
   const base = cast(name, o);
   if (o.scale) base.h = o.h * o.scale; // e.g. the daughter, about 12, is taller than the rig's default girl
-  return figure({...base, fill: o.fill || E3.acc, tones: E3_TONES});
+  return e3Shadow(o, base.h) + figure({...base, fill: o.fill || E3.acc, tones: E3_TONES});
 }
-const kel = (name, o) => figure(cast(name, o));
-const E3_FOLD = {fArm: [176, 38], bArm: [172, 28]}; // arms folded, in profile
+// a contact shadow where a standing figure's feet meet the floor (skipped for sitting, lying or framed-in-a-window figures,
+// or placed at o.floorY when the floor is not at the feet)
+function e3Shadow(o, h) {
+  if (o.noShadow || o.lie) return '';
+  const sitting = o.an && o.an.legs && o.an.legs[0] > 60;
+  if (sitting && o.floorY == null) return '';
+  return MAT.shadow(o.x, (o.floorY ?? o.y) + 1, h * 0.16, 0.38);
+}
+const kel = (name, o) => { const c = cast(name, o); return e3Shadow(o, c.h) + figure(o.fold ? {...c, an: {...c.an, ...E3_FOLD, lean: 0}} : c) + (o.fold ? foldedArms(o.x, o.y, c.h, o.d ?? 1, c.fill, c.tones.tone) : ''); };
+// folded arms drawn over a profile figure: the near forearm crosses the chest, its elbow jutting out in front, the far hand tucked
+// under it; a darker crease separates arm from body so the fold reads at any size
+function foldedArms(x, y, h, d, fill, tone) {
+  const X = (u) => x + d * u * h, Y = (v) => y - v * h;
+  const arm = `M${f1(X(-0.06))},${f1(Y(0.675))} L${f1(X(0.105))},${f1(Y(0.67))} Q${f1(X(0.14))},${f1(Y(0.648))} ${f1(X(0.115))},${f1(Y(0.622))} L${f1(X(-0.06))},${f1(Y(0.628))} Z`;
+  return `<path d="M${f1(X(0.03))},${f1(Y(0.8))} L${f1(X(0.118))},${f1(Y(0.655))}" stroke="${tone}" stroke-width="${f1(0.01 * h)}" fill="none" opacity="0.85"/>` +
+    `<path d="${arm}" fill="${fill}" stroke="${tone}" stroke-width="${f1(0.01 * h)}"/>`;
+}
+// arms folded across the chest, in profile: elbows jut forward, forearms run back across the chest (they overlap the body)
+const E3_FOLD = {fArm: [150, -92], bArm: [140, -98]};
 const lerp = (a, b, u) => a + (b - a) * u;
 function e3Defs(t, extra = '') {
   return msDefs(t).replace('</defs>', grad('e3sea', [['0', '#2B4744'], ['1', '#0B1414']]) + grad('e3overcast', [['0', '#1C3332'], ['0.55', '#4E726C'], ['1', '#A3BAB2']]) +
@@ -39,7 +56,8 @@ function e3Person(r, x, y, h, t, col, o = {}) {
   const [kind, hat, coat] = E3_KINDS[Math.floor(r() * E3_KINDS.length)], ph = r(), d = r() < 0.5 ? 1 : -1;
   const hh = kind === 'boy' || kind === 'girl' ? h * 0.62 : kind === 'woman' ? h * 0.92 : h;
   const wear = kind === 'woman' || kind === 'girl' ? ['plain', r() < 0.6 ? 'shawl' : 'apron'] : [];
-  return figure({x, y, h: hh, d: o.d ?? d, kind, hat, coat, beard: kind === 'man' && r() < 0.4, wear, fill: col, an: {...POSES.stand(t, ph), ...(o.an || {})}, det: 0, rim: o.rim || null});
+  const an = {...POSES.stand(t, ph), ...(o.an || {})};
+  return e3Shadow({...o, x, y, an}, hh) + figure({x, y, h: hh, d: o.d ?? d, kind, hat, coat, beard: kind === 'man' && r() < 0.4, wear, fill: col, an, det: 0, rim: o.rim || null});
 }
 // a bundle tied in a cloth, a feather bed rolled and roped, a trunk, a samovar, a candlestick: what families carried
 const bundle = (x, y, s, col = '#2B4744') => `<path d="M${f1(x - 20 * s)},${f1(y)} q${f1(-6 * s)},${f1(-30 * s)} ${f1(20 * s)},${f1(-34 * s)} q${f1(26 * s)},${f1(4 * s)} ${f1(20 * s)},${f1(34 * s)} Z" fill="${col}"/><path d="M${f1(x - 4 * s)},${f1(y - 34 * s)} l${f1(4 * s)},${f1(-8 * s)} l${f1(4 * s)},${f1(8 * s)}" fill="${col}"/>`;
@@ -95,6 +113,9 @@ function renderSteerage(t) {
   ship.push(MAT.planks(cut0, deck, cut1 - cut0, saloon - deck, {base: '#2B2418', seed: 33, size: 12, vertical: true}));                  // saloon panelling
   ship.push(`<rect x="${cut0}" y="${saloon}" width="${cut1 - cut0}" height="${tween - saloon}" fill="#1A2624"/>` + MAT.iron(cut0, saloon, cut1 - cut0, tween - saloon, {base: '#16211F', seams: 44, rivet: 9}));
   ship.push(`<rect x="${cut0}" y="${tween}" width="${cut1 - cut0}" height="${keel - tween}" fill="#101A19"/>` + MAT.iron(cut0, tween, cut1 - cut0, keel - tween, {base: '#0E1716', seams: 52, rivet: 10}));
+  // the floors: deck planking seen going back to the hull side, on every level, so people stand ON something
+  ship.push(MAT.floor(cut0, cut1, saloon - 16, saloon + 6, {kind: 'planks', base: '#5A4A2A', seed: 38, size: 18}) + MAT.floor(cut0, cut1, tween - 16, tween + 6, {kind: 'planks', base: '#3B3020', seed: 39, size: 18}) +
+    MAT.floor(cut0, cut1, hold - 16, hold + 6, {kind: 'planks', base: '#24302C', seed: 40, size: 22}));
   // first class: the dining saloon amidships under a skylight; gilt lamps; long tables with diners and stewards
   const sx0 = 380, sx1 = 1720;
   ship.push(`<rect x="${sx0}" y="${deck}" width="${sx1 - sx0}" height="${saloon - deck}" fill="#3A3120" opacity="0.65"/>`);
@@ -107,7 +128,9 @@ function renderSteerage(t) {
   const R1 = rng(34);
   for (let x = sx0 + 60; x < sx1 - 40; x += 58) { if (Math.abs(x - 1060) < 60) continue;
     const woman = R1() < 0.45, d = R1() < 0.5 ? 1 : -1, ph = R1(), toast = smooth(1.4, 2.0, t) * (1 - smooth(3.0, 3.6, t)) * (R1() < 0.5 ? 1 : 0);
-    ship.push(figure({x, y: saloon - 2, h: SH.man * (woman ? 0.9 : 1), d, kind: woman ? 'woman' : 'man', hat: 'none', coat: 'frock', fill: '#0D0C09',
+    const hh = SH.man * (woman ? 0.9 : 1);
+    ship.push(`<rect x="${f1(x - 8 * d - 7)}" y="${f1(saloon - 0.27 * SH.man)}" width="14" height="3" fill="#0D0C09"/><rect x="${f1(x - 8 * d - 7)}" y="${f1(saloon - 0.27 * SH.man)}" width="2.5" height="${f1(0.27 * SH.man)}" fill="#0D0C09"/><rect x="${f1(x - 8 * d + 5)}" y="${f1(saloon - 0.27 * SH.man)}" width="2.5" height="${f1(0.27 * SH.man)}" fill="#0D0C09"/><rect x="${f1(x - 8 * d - 7 * d - (d > 0 ? 0 : -12))}" y="${f1(saloon - 0.62 * SH.man)}" width="2.5" height="${f1(0.36 * SH.man)}" fill="#0D0C09"/>`);
+    ship.push(figure({x, y: sitY(saloon - 4, hh), h: hh, d, kind: woman ? 'woman' : 'man', hat: 'none', coat: 'frock', fill: '#0D0C09',
       an: {...POSES.sit(t, ph), fArm: toast ? [40, 10] : [120, 95 + 10 * Math.sin(t * 2 + ph * 9)]}}));
   }
   for (const [x0w, sp] of [[sx0 + 120, 46], [1300, -38]]) { const wx = x0w + sp * ((t * 0.9) % 6);
@@ -150,7 +173,8 @@ function renderSteerage(t) {
   ship.push(`<circle cx="410" cy="${hold - 40}" r="34" fill="none" stroke="#2B4744" stroke-width="6"/>` + line([[410, tween + 120], [410 + 34 * Math.cos(crank), hold - 40 + 34 * Math.sin(crank)]], '#4E726C', 8) + line([[cut0, hold - 40], [410, hold - 40]], '#2B4744', 10));
   for (let x = 1360; x < cut1 - 80; x += 110) ship.push(`<rect x="${x}" y="${hold - 70 - (x % 3) * 20}" width="90" height="${70 + (x % 3) * 20}" fill="#1F3532"/><rect x="${x + 6}" y="${hold - 60 - (x % 3) * 20}" width="78" height="4" fill="#0D0C09"/>`);
   // the cut: decks drawn as solid black bands, the hull plating edge
-  for (const y of [deck, saloon, tween, hold]) ship.push(`<rect x="${cut0}" y="${y - 6}" width="${cut1 - cut0}" height="12" fill="#0D0C09"/>`);
+  for (const y of [saloon, tween, hold]) ship.push(`<rect x="${cut0}" y="${y + 6}" width="${cut1 - cut0}" height="10" fill="#0D0C09"/>`);
+  ship.push(`<rect x="${cut0}" y="${deck - 6}" width="${cut1 - cut0}" height="12" fill="#0D0C09"/>`);
   ship.push(`</g>`);
   ship.push(`<path d="${shipHullPath()}" fill="none" stroke="#0D0C09" stroke-width="10"/>`);
   // outside plating beyond the cut (left and right of it) with a row of portholes; a boot topping line
@@ -160,7 +184,8 @@ function renderSteerage(t) {
   ship.push(`<rect x="${cut0 - 3}" y="${deck - 26}" width="6" height="${keel - deck}" fill="${E3.teal}" opacity="0.0"/>`);
   // above the deck: the deckhouse, lifeboats, two raked funnels, three masts with furled sails and rigging; first-class strollers
   ship.push(`<rect x="420" y="${house}" width="1260" height="${deck - house - 24}" fill="#24403D"/>` + [...Array(18)].map((_, k) => `<rect x="${450 + k * 68}" y="${house + 24}" width="34" height="40" fill="${E3.warm}" opacity="0.35"/>`).join(''));
-  ship.push(`<rect x="410" y="${house - 6}" width="1280" height="10" fill="#0D0C09"/>` + [...Array(32)].map((_, k) => `<rect x="${414 + k * 40}" y="${house - 28}" width="3" height="24" fill="#0D0C09"/>`).join('') + `<rect x="410" y="${house - 30}" width="1280" height="4" fill="#0D0C09"/>`);
+  ship.push(MAT.floor(410, 1690, house - 14, house - 4, {kind: 'planks', base: '#6B5A3A', seed: 41, size: 16}));
+  ship.push(`<rect x="410" y="${house - 4}" width="1280" height="8" fill="#0D0C09"/>` + [...Array(32)].map((_, k) => `<rect x="${414 + k * 40}" y="${house - 28}" width="3" height="24" fill="#0D0C09"/>`).join('') + `<rect x="410" y="${house - 30}" width="1280" height="4" fill="#0D0C09"/>`);
   for (const x of [470, 1530]) ship.push(`<path d="M${x},${house - 40} q70,26 140,0 Z" fill="#DFE0D6" opacity="0.8"/>` + line([[x + 10, house - 40], [x + 10, house - 90], [x + 30, house - 90]], '#0D0C09', 4) + line([[x + 130, house - 40], [x + 130, house - 90], [x + 110, house - 90]], '#0D0C09', 4));
   const funnel = (x) => `<path d="M${x},${house - 4} L${x + 110},${house - 4} L${x + 50},${house - 420} L${x - 60},${house - 420} Z" fill="#B88A3A"/><path d="M${x - 50},${house - 380} L${x + 56},${house - 380} L${x + 50},${house - 420} L${x - 60},${house - 420} Z" fill="#0D0C09"/>`;
   ship.push(funnel(860) + funnel(1080));
@@ -224,7 +249,8 @@ function cgOutside(t) {
   s.push(`<rect x="${cx - rx - 330}" y="${wl - 120}" width="260" height="86" fill="#1F3532"/><path d="M${cx - rx - 344},${wl - 120} l144,-40 l144,40 Z" fill="#162826"/>`);
   return s.join('');
 }
-function cgBarge(x, t, arrive) { // a covered two-deck barge towed alongside a small tug, packed with people and their bundles
+function cgBarge(x, t, arrive) { return `<g transform="translate(${f1(x)},${CG.wl}) scale(1.45) translate(${f1(-x)},${-CG.wl})">${cgBargeBody(x, t, arrive)}</g>`; }
+function cgBargeBody(x, t, arrive) { // a covered two-deck barge towed alongside a small tug, packed with people and their bundles
   const s = [], wl = CG.wl, r = rng(55), bob = 3 * Math.sin(t * 1.6);
   s.push(`<path d="M${x - 330},${wl - 30 + bob} L${x + 310},${wl - 30 + bob} L${x + 290},${wl + 8 + bob} L${x - 310},${wl + 8 + bob} Z" fill="#0D0C09"/>`);
   s.push(`<rect x="${x - 300}" y="${wl - 120 + bob}" width="580" height="8" fill="#0D0C09"/><path d="M${x - 310},${wl - 120 + bob} l20,-14 l560,0 l20,14 Z" fill="#162826"/>` + [0, 1, 2, 3, 4, 5, 6, 7].map((k) => `<rect x="${x - 296 + k * 81}" y="${wl - 112 + bob}" width="5" height="82" fill="#0D0C09"/>`).join(''));
@@ -250,7 +276,7 @@ function cgInside(t) {
   // offices under the gallery: doors and windows in the ring wall
   for (let x = -460; x < 2400; x += 230) s.push(`<rect x="${x}" y="${gy + 120}" width="120" height="${F - gy - 140}" fill="#132423"/><rect x="${x + 12}" y="${gy + 140}" width="96" height="120" fill="${E3.cream}" opacity="0.18"/>`);
   for (let x = -380; x < 2400; x += 460) s.push(`<rect x="${x}" y="${gy + 40}" width="16" height="${F - gy - 40}" fill="#0D0C09"/>`);
-  s.push(MAT.floor(-500, 2400, F, F + 200, {kind: 'planks', base: '#24403D', seed: 58, size: 40, vp: 960}));
+  s.push(`<rect x="-500" y="${F - 70}" width="2900" height="12" fill="#0D0C09" opacity="0.6"/>` + MAT.floor(-500, 2400, F - 58, F + 220, {kind: 'flag', base: '#4E5F58', seed: 58, size: 70, vp: 960})); // flagstones
   // the iron columns that hold up the middle of the roof, each opening at the top into a fan of ribs (after the NYPL engraving)
   for (const x of [150, 700, 1220, 1770]) { s.push(`<rect x="${x - 9}" y="-140" width="18" height="${F + 140}" fill="#0D0C09"/><rect x="${x - 16}" y="${F - 30}" width="32" height="30" fill="#0D0C09"/>`);
     for (let k = -3; k <= 3; k++) s.push(`<path d="M${x},-60 Q${x + k * 40},-120 ${x + k * 80},-150" stroke="#0D0C09" stroke-width="7" fill="none"/>`); }
@@ -274,8 +300,8 @@ function renderCastleGarden(t) {
   let worldA = '', worldB = '';
   const scr = [];
   if (X < 1) {
-    const c = cam2(camAt([[0, 0.9, 840, 500], [4.8, 1.0, 780, 540]], t)), arrive = smooth(0, 3.4, t);
-    const bx = -460 + 460 * ease(arrive);
+    const c = cam2(camAt([[0, 0.9, 760, 500], [4.8, 1.0, 720, 540]], t)), arrive = smooth(0, 3.4, t);
+    const bx = -560 + 620 * ease(arrive);
     const water = MAT.water(-1000, CG.wl - 6, 4000, 900, t, {seed: 59, n: 120, top: '#3E5F5A', bottom: '#0B1414'});
     // landing: once the barge is in, people walk up the gangway onto the pier
     const walkers = []; if (t > 3.4) { const r = rng(60); for (let k = 0; k < 6; k++) { const d0 = (t - 3.4 - k * 0.35) * 80; if (d0 < 0) continue; const x = 210 + d0;
@@ -303,45 +329,25 @@ function renderCastleGarden(t) {
 }
 
 /* ================= ep3_moving_in: the new family moves into the Kellys' building ================= */
-// A Brooklyn tenement row about 1884: brick fronts five storeys high with bracketed cornices, stone lintels, a stoop rising along
-// the front to the door, basement windows behind an areaway rail, fire escapes; gas lamps, telegraph wires, a horsecar on its rails.
-// A wagon at the curb holds what the family brought: a rolled feather bed, a trunk, a samovar, chairs. They carry it up the stoop.
-// Ma Kelly (coral) watches from her second-floor window, arms folded.
-const MI = {G: 860, x0: 300, x1: 1620, door: 930, stoopTop: 740, stoopFoot: 1200, man: 124, rows: [600, 450, 300, 150, 0], cols: [420, 560, 760, 1110, 1290, 1460]};
-function miFacade(t) {
-  const s = [], {G, x0, x1, rows, cols} = MI;
-  s.push(`<rect x="-600" y="-300" width="${x0 + 600}" height="${G + 300}" fill="#1C3332"/><rect x="${x1}" y="-200" width="1400" height="${G + 200}" fill="#24403D"/>`); // the neighbours either side
-  for (const [a, b, top] of [[-600, x0, -300], [x1, x1 + 1400, -200]]) for (let x = a + 60; x < b - 60; x += 140) for (let y = top + 100; y < G - 200; y += 150) s.push(`<rect x="${x}" y="${y}" width="60" height="100" fill="#0F1E1D"/><rect x="${x - 6}" y="${y - 10}" width="72" height="10" fill="#33504C"/>`);
-  s.push(MAT.brick(x0, -60, x1 - x0, G + 60, {base: '#3A2A22', seed: 71, soot: 'top', bw: 26, bh: 13}));
-  s.push(`<rect x="${x0 - 20}" y="-110" width="${x1 - x0 + 40}" height="40" fill="#0D0C09"/><rect x="${x0 - 10}" y="-70" width="${x1 - x0 + 20}" height="14" fill="#1F3532"/>` + [...Array(Math.floor((x1 - x0) / 60))].map((_, k) => `<rect x="${x0 + 10 + k * 60}" y="-70" width="14" height="30" fill="#0D0C09"/>`).join(''));
-  const lit = (ri, ci) => ((ri * 7 + ci * 3) % 5) === 0;
-  rows.forEach((y, ri) => cols.forEach((x, ci) => { if (ri === 0 && Math.abs(x - MI.door) < 140) return;
-    s.push(`<rect x="${x - 6}" y="${y - 16}" width="82" height="16" fill="#A3BAB2" opacity="0.7"/><rect x="${x}" y="${y}" width="70" height="110" fill="${lit(ri, ci) ? '#5F857F' : '#0F1E1D'}"/><rect x="${x + 33}" y="${y}" width="4" height="110" fill="#0D0C09"/><rect x="${x}" y="${y + 52}" width="70" height="4" fill="#0D0C09"/><rect x="${x - 6}" y="${y + 110}" width="82" height="8" fill="#A3BAB2" opacity="0.6"/>`);
-    if ((ri + ci) % 3 === 1) s.push(`<path d="M${x + 4},${y + 4} q16,40 6,100 l-10,0 Z" fill="#DFE0D6" opacity="0.4"/>`); // a curtain
-  }));
-  // fire escapes on the right-hand bays, laundry on one
-  for (const y of rows.slice(1)) { const fx0 = 1090, fx1 = 1550, by = y + 124; s.push(`<rect x="${fx0}" y="${by}" width="${fx1 - fx0}" height="5" fill="#0D0C09"/><rect x="${fx0}" y="${by - 34}" width="${fx1 - fx0}" height="3" fill="#0D0C09"/>` + [...Array(Math.floor((fx1 - fx0) / 10))].map((_, k) => `<rect x="${fx0 + k * 10}" y="${by - 34}" width="1.6" height="34" fill="#0D0C09"/>`).join('') + line([[fx1 - 50, by], [fx1 - 90, by + 150]], '#0D0C09', 3)); }
-  for (let k = 0; k < 5; k++) { const sw = 3 * Math.sin(t * 1.4 + k); s.push(`<path d="M${1120 + k * 30},${rows[2] + 92} l22,0 l${2 + sw},26 l-22,0 Z" fill="#DFE0D6" opacity="0.6"/>`); }
-  // the door at the top of the stoop: stone surround, a transom
-  s.push(`<rect x="${MI.door - 70}" y="${MI.stoopTop - 190}" width="140" height="190" fill="#33504C"/><rect x="${MI.door - 50}" y="${MI.stoopTop - 170}" width="100" height="170" fill="#0D0C09"/><rect x="${MI.door - 50}" y="${MI.stoopTop - 170}" width="100" height="30" fill="#5F857F" opacity="0.5"/>`);
-  // basement: an areaway rail and half windows
-  for (const x of [420, 560, 1290, 1460]) s.push(`<rect x="${x}" y="${G - 70}" width="70" height="60" fill="#0F1E1D"/>`);
-  return s.join('');
-}
-function miStoop() { // steps rising to the left along the front, from the sidewalk to the door landing; an iron rail
-  const s = [], {G, stoopTop, stoopFoot, door} = MI, n = 8, run = (stoopFoot - (door + 80)) / n, rise = (G - stoopTop) / n;
-  s.push(`<rect x="${door - 90}" y="${stoopTop}" width="170" height="${G - stoopTop}" fill="#33504C"/>`);
-  for (let k = 0; k < n; k++) { const x = door + 80 + k * run, y = stoopTop + k * rise; s.push(`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(stoopFoot - x)}" height="${f1(rise + 1)}" fill="${k % 2 ? '#3A5650' : '#33504C'}"/><rect x="${f1(x)}" y="${f1(y)}" width="${f1(stoopFoot - x)}" height="3" fill="#A3BAB2" opacity="0.4"/>`); }
-  s.push(line([[door - 90, stoopTop - 60], [door + 80, stoopTop - 60], [stoopFoot, G - 60]], '#0D0C09', 4) + [...Array(12)].map((_, k) => { const x = door + 80 + k * (stoopFoot - door - 80) / 11, y = stoopTop - 60 + (G - stoopTop) * k / 11; return `<rect x="${f1(x)}" y="${f1(y)}" width="3" height="60" fill="#0D0C09"/>`; }).join(''));
-  return s.join('');
-}
-const miStepY = (x) => (x >= MI.stoopFoot ? MI.G : x <= MI.door + 80 ? MI.stoopTop : MI.stoopTop + (MI.G - MI.stoopTop) * (x - MI.door - 80) / (MI.stoopFoot - MI.door - 80));
-function miCarrier(name, t, t0, o) { // walk from the wagon along the sidewalk and up the stoop to the door; returns the figure (or '' once inside)
-  const v = 110, start = 1500, end = MI.door, dist = Math.max(0, (t - t0) * v), x = Math.max(end, start - dist);
-  if (x <= end + 1 && t - t0 > (start - end) / v + 0.6) return '';
-  const moving = t > t0 && x > end, y = miStepY(x) + 2;
-  const an = moving ? {...walkAn(walkPhase(Math.min(dist, start - end), MI.man), {carry: true}), ...o.arms} : {...POSES.stand(t, 0.3), ...o.arms};
-  return nb(name, {x, y, h: MI.man, d: -1, ...o, an}) + (o.load ? o.load(x, y) : '');
+// The Kellys' building is the one from Episode 1: the row tenement drawn by street.js's tenement() (same brick-dark facade, cornice
+// on brackets, three windows a floor with stone lintels, the fire escape across the middle bays with washing, the saloon's awning
+// and lit window at street level, the doorway and its stoop), five storeys of flats over the saloon as in cutaway.js. The Kellys
+// live at the front of the third floor (cutaway.js), so Ma Kelly watches from the middle window of that floor. Coordinates are
+// street.js's (sidewalk at FAR_GROUND); the camera does the scaling. The street is Brooklyn, as in Episode 2.
+const MI = {x: 760, w: 270, floors: 5, seed: 402, man: 92};
+MI.top = FAR_GROUND - 150 - MI.floors * 128;
+MI.gap = (MI.w - 3 * 34) / 4;
+MI.win = {x: MI.x + MI.gap + 34 + MI.gap, y: MI.top + 3 * 128 + 34, w: 34, h: 62}; // the Kellys' front window, third floor, middle bay
+MI.door = MI.x + MI.w * 0.81;            // the doorway at the top of the stoop
+MI.stoopFoot = MI.x + MI.w * 0.68 + 3 * 6 + MI.w * 0.26 + 30;
+function miCarrier(name, t, t0, o) { // walk from the wagon along the sidewalk to the stoop, climb its four steps, go in at the door
+  const v = 64, start = 1240, dist = Math.max(0, (t - t0) * v), x = Math.max(MI.door, start - dist), G = FAR_GROUND;
+  const climb = clamp01((MI.stoopFoot - x) / (MI.stoopFoot - MI.door)), y = G - 34 * climb;
+  const inside = smooth(0, 0.8, (t - t0) - (start - MI.door) / v);
+  if (inside >= 1) return '';
+  const moving = t > t0 && x > MI.door;
+  const an = moving ? {...walkAn(walkPhase(Math.min(dist, start - MI.door), MI.man), {carry: true}), ...o.arms} : {...POSES.stand(t, 0.3), ...o.arms};
+  return `<g opacity="${f1(1 - inside)}">${nb(name, {x, y, h: MI.man, d: -1, ...o, an})}${o.load ? o.load(x, y) : ''}</g>`;
 }
 function horsecar(x, y, t) { // a one-horse street railway car: platforms, a row of windows, a clerestory roof, the driver at the front
   const s = [], c = '#0D0C09';
@@ -352,45 +358,49 @@ function horsecar(x, y, t) { // a one-horse street railway car: platforms, a row
   s.push(figure({x: x + 455, y: y - 60, h: 120, d: 1, kind: 'man', hat: 'bowler', coat: 'frock', fill: c, an: {fArm: [110, 80]}}));
   return s.join('');
 }
+function miKellyWindow(t, look) { // Ma Kelly behind her window, arms folded; the wall below the sill hides her from the waist down
+  const {x, y, w, h} = MI.win, s = [], facade = MI.seed % 2 ? ST.facade : ST.facadeDark;
+  s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#0B1414"/>` + glowC(x + 6, y + 30, 40, 0.5, 'mswarm'));
+  s.push(kel('mother', {x: x + 15, y: y + h + 24, h: MI.man, d: 1, noShadow: true, fold: true, det: 0, rim: {c: '#FFF3D6', a: 0.55, dx: 0.012, dy: -0.004},
+    an: {...E3_FOLD, tilt: -10 - 6 * look, lean: -1 + 2 * look, blink: t % 3.6 < 0.12}}));
+  s.push(`<rect x="${x - 2}" y="${y + h}" width="${w + 4}" height="44" fill="${facade}"/><rect x="${x - 3}" y="${y - 6}" width="${w + 6}" height="6" fill="${ST.iron}"/>`);
+  const by = y + h + 4, bx0 = MI.x + MI.gap * 0.6, bx1 = MI.x + MI.w - MI.gap * 0.6; // the fire escape in front of her
+  s.push(`<rect x="${f1(bx0)}" y="${by}" width="${f1(bx1 - bx0)}" height="4" fill="${ST.iron}"/><rect x="${f1(bx0)}" y="${by - 30}" width="${f1(bx1 - bx0)}" height="3" fill="${ST.iron}"/>` +
+    [...Array(Math.ceil((bx1 - bx0) / 9))].map((_, k) => `<rect x="${f1(bx0 + k * 9)}" y="${by - 30}" width="1.6" height="30" fill="${ST.iron}"/>`).join(''));
+  return s.join('');
+}
 function renderMovingIn(t, o = {}) {
-  const keys = o.keys || [[0, 0.74, 960, 420], [4.4, 0.8, 1020, 470], [7.6, 2.4, 610, 520], [10, 2.5, 605, 518]];
-  const c = cam2(camAt(keys, t)), G = MI.G, s = [], lod = lodFor(MI.man * c.z), rim = {c: '#FFF3D6', a: lod.rimA * 0.7, dx: -0.01, dy: -0.004};
-  s.push(miFacade(t));
-  // Ma Kelly at her window on the second floor, arms folded; the sash raised, a geranium pot; she turns her head to follow them
-  const wx = 560, wy = MI.rows[1], look = smooth(6.4, 7.4, t);
-  s.push(`<rect x="${wx}" y="${wy}" width="70" height="110" fill="#0B1414"/>`);
-  s.push(kel('mother', {x: wx + 34, y: wy + 140, h: MI.man * 1.08, d: 1, det: lodFor(MI.man * c.z).det, rim: {c: '#FFF3D6', a: 0.5, dx: 0.01, dy: -0.004}, an: {...E3_FOLD, tilt: -8 - 6 * look, lean: -2 + 3 * look, expr: look > 0.5 ? 'set' : 'neutral', blink: t % 3.6 < 0.12}}));
-  s.push(MAT.brick(wx - 8, wy + 110, 86, 60, {base: '#3A2A22', seed: 72, soot: 'none', bw: 26, bh: 13}) + `<rect x="${wx - 6}" y="${wy + 106}" width="82" height="8" fill="#A3BAB2" opacity="0.7"/><rect x="${wx}" y="${wy - 30}" width="70" height="40" fill="#0F1E1D"/><rect x="${wx}" y="${wy + 8}" width="70" height="4" fill="#0D0C09"/>`);
-  // another neighbour, top floor, leaning out to look
-  s.push(figure({x: 1150, y: MI.rows[3] + 150, h: MI.man, d: -1, kind: 'woman', hat: 'kerchief', wear: ['plain', 'shawl'], fill: '#0D0C09', an: {...POSES.stand(t, 0.6), lean: 10, fArm: [120, 100]}}) + MAT.brick(1104, MI.rows[3] + 110, 86, 40, {base: '#3A2A22', seed: 73, soot: 'none', bw: 26, bh: 13}));
-  // the sidewalk, curb and street; the stoop; a gas lamp; telegraph pole and wires
-  s.push(`<rect x="-600" y="${G}" width="3200" height="30" fill="#33504C"/><rect x="-600" y="${G + 30}" width="3200" height="10" fill="#0D0C09"/>` + MAT.floor(-600, 2600, G + 40, 1200, {kind: 'cobble', base: '#2B4744', seed: 74, size: 40}));
-  s.push(miStoop());
-  s.push(gasLamp(240, G, 250, 0, t) + `<rect x="1680" y="${G - 640}" width="14" height="640" fill="#0D0C09"/><rect x="1630" y="${G - 610}" width="114" height="8" fill="#0D0C09"/>` + line([[-600, G - 590], [1687, G - 606], [2600, G - 580]], '#0D0C09', 1.6) + line([[-600, G - 560], [1687, G - 590], [2600, G - 560]], '#0D0C09', 1.6));
-  // the wagon at the curb with the family's things; the horse stands, rests a hind leg and tosses its head
-  const wgx = 1820, wgy = G + 120;
-  s.push(msHorse(wgx + 130, wgy, 120, '#0D0C09', 0, Math.max(0, Math.sin(t * 1.3)) ** 6, 1, 1));
-  s.push(line([[wgx + 40, wgy - 100], [wgx + 110, wgy - 90]], '#0D0C09', 6) + `<rect x="${wgx - 420}" y="${wgy - 120}" width="460" height="50" fill="#0D0C09"/>`);
-  for (const [u, rr] of [[wgx - 360, 50], [wgx - 40, 50]]) s.push(`<circle cx="${u}" cy="${wgy - rr}" r="${rr}" fill="none" stroke="#0D0C09" stroke-width="7"/>` + [...Array(10)].map((_, k) => { const a = k * TAU / 10; return line([[u, wgy - rr], [u + Math.cos(a) * rr, wgy - rr + Math.sin(a) * rr]], '#0D0C09', 3); }).join(''));
-  const fbGone = t > 0.4, trunkGone = t > 0.1, samGone = t > 1.6;
-  s.push(`<rect x="${wgx - 400}" y="${wgy - 180}" width="10" height="60" fill="#0D0C09"/><rect x="${wgx - 400}" y="${wgy - 180}" width="60" height="8" fill="#0D0C09"/>` + `<rect x="${wgx - 330}" y="${wgy - 200}" width="10" height="80" fill="#0D0C09"/>`); // a chair, legs up
-  s.push(featherBed(wgx - 300, wgy - 120, 130, 56, '#DFE0D6') + trunk(wgx - 160, wgy - 120, 80, 46, '#1A1410', '#5F857F') + (samGone ? '' : samovar(wgx - 60, wgy - 120, 1.2)));
-  // the family carries things up the stoop, one after another: father with the trunk on his shoulder, mother with a feather bed,
-  // the daughter with the samovar, the small boy with the candlesticks
+  const keys = o.keys || [[0, 1.12, 930, 560], [4.4, 1.16, 940, 566], [7.8, 5.0, MI.win.x + 20, MI.win.y + 46], [10, 5.2, MI.win.x + 20, MI.win.y + 46]];
+  const c = cam2(camAt(keys, t)), G = FAR_GROUND, s = [], lod = lodFor(MI.man * c.z), rim = {c: '#FFF3D6', a: lod.rimA * 0.7, dx: -0.01, dy: -0.004};
+  // the row: the Kellys' building (Episode 1's tenement) between its neighbours
+  for (const [x, w, fl, seed] of [[-80, 250, 4, 409], [174, 300, 5, 404], [478, 278, 5, 405], [MI.x, MI.w, MI.floors, MI.seed], [1034, 250, 4, 403], [1288, 290, 5, 406], [1582, 260, 5, 407], [1846, 270, 4, 408]]) s.push(tenement(x, w, fl, seed, t));
+  s.push(miKellyWindow(t, smooth(6.4, 7.4, t)));
+  // the sidewalk (flagstones), the curb, the cobbled street; a gas lamp; a telegraph pole and its wires
+  s.push(MAT.floor(-400, 2400, G, G + 34, {kind: 'flag', base: '#3E5F5A', seed: 74, size: 46}) + `<rect x="-400" y="${G + 34}" width="2800" height="8" fill="#0D0C09"/>` + MAT.floor(-400, 2400, G + 42, G + 260, {kind: 'cobble', base: '#2B4744', seed: 75, size: 40}));
+  s.push(gasLamp(700, G + 30, 170, 0, t) + `<rect x="1460" y="${G - 870}" width="12" height="${870 + 30}" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<rect x="${1406}" y="${G - 850 + k * 34}" width="120" height="6" fill="#0D0C09"/>`).join(''));
+  s.push([0, 1, 2].map((k) => line([[-400, G - 830 + k * 34], [1466, G - 846 + k * 34], [2400, G - 822 + k * 34]], '#0D0C09', 1.4)).join(''));
+  // the wagon at the curb, the horse standing (resting a hind leg, tossing its head); the family's things on it
+  const wy = G + 120, wx = 1230;
+  s.push(MAT.shadow(wx + 60, wy + 2, 120, 0.4) + msHorse(wx + 110, wy, 62, '#0D0C09', 0, Math.max(0, Math.sin(t * 1.3)) ** 6, 1, 1));
+  s.push(line([[wx + 30, wy - 52], [wx + 80, wy - 48]], '#0D0C09', 4) + `<rect x="${wx - 230}" y="${wy - 66}" width="260" height="28" fill="#0D0C09"/>`);
+  for (const u of [wx - 200, wx - 20]) s.push(`<circle cx="${u}" cy="${wy - 26}" r="26" fill="none" stroke="#0D0C09" stroke-width="5"/>` + [...Array(10)].map((_, k) => { const a = k * TAU / 10; return line([[u, wy - 26], [u + Math.cos(a) * 26, wy - 26 + Math.sin(a) * 26]], '#0D0C09', 2); }).join(''));
+  s.push(`<rect x="${wx - 220}" y="${wy - 100}" width="6" height="34" fill="#0D0C09"/><rect x="${wx - 220}" y="${wy - 100}" width="34" height="5" fill="#0D0C09"/>`);
+  s.push(featherBed(wx - 180, wy - 66, 70, 30, '#DFE0D6') + (t > 0.2 ? '' : trunk(wx - 100, wy - 66, 46, 26, '#1A1410', '#5F857F')) + (t > 2.4 ? '' : samovar(wx - 40, wy - 66, 0.66)));
+  // the family carries their things up the stoop, one after another
   const carry = {fArm: [20, -20], bArm: [30, -10]};
-  s.push(miCarrier('nfather', t, 0.2, {hat: 'cap', coat: 'frock', det: lod.det, rim, arms: carry, load: (x, y) => trunk(x - 40, y - MI.man * 1.0, 80, 40, '#1A1410', '#5F857F')}));
-  s.push(miCarrier('nmother', t, 1.3, {det: lod.det, rim, arms: {fArm: [90, 40], bArm: [100, 50]}, load: (x, y) => featherBed(x - 70, y - MI.man * 0.5, 100, 48, '#DFE0D6')}));
-  s.push(miCarrier('ndaughter', t, 2.4, {scale: 0.8, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, arms: {fArm: [130, 80], bArm: [140, 90]}, load: (x, y) => samovar(x - 26, y - MI.man * 0.36, 0.7)}));
-  s.push(miCarrier('nson', t, 3.4, {scale: 0.52, det: lod.det, rim, arms: {fArm: [110, 40]}, load: (x, y) => candlestick(x - 28, y - MI.man * 0.32, 0.8)}));
-  // two Irish neighbours on the next stoop, watching (ink)
-  s.push(figure({x: 1990, y: G, h: MI.man, d: -1, kind: 'man', hat: 'cap', coat: 'jacket', fill: '#0D0C09', an: {...POSES.stand(t, 0.1), ...E3_FOLD}}) + figure({x: 2050, y: G, h: MI.man * 0.9, d: -1, kind: 'woman', hat: 'kerchief', wear: ['plain', 'apron'], fill: '#0D0C09', an: {...POSES.stand(t, 0.5), tilt: -4}}));
-  // a horsecar passes along the street in front (nearer plane)
-  const hc = t > 1.4 && t < 6.4 ? -900 + (t - 1.4) * 760 : -5000;
-  const near = horsecar(hc, 1230, t) + line([[-2000, 1236], [5000, 1236]], '#0D0C09', 6);
-  const world = layerAt(c, 0.4, `<rect x="-2000" y="-1400" width="6000" height="1300" fill="url(#e3day)"/>` + `<rect x="200" y="-500" width="40" height="260" fill="#4E726C"/><path d="M196,-500 L220,-700 L244,-500 Z" fill="#4E726C"/>`) + layerAt(c, 1, s.join('')) + layerAt(c, 1.2, near);
+  s.push(miCarrier('nfather', t, 0.2, {hat: 'cap', coat: 'frock', det: lod.det, rim, arms: carry, load: (x, y) => trunk(x - 22, y - MI.man * 1.0, 46, 24, '#1A1410', '#5F857F')}));
+  s.push(miCarrier('nmother', t, 1.3, {det: lod.det, rim, arms: {fArm: [90, 40], bArm: [100, 50]}, load: (x, y) => featherBed(x - 38, y - MI.man * 0.48, 56, 26, '#DFE0D6')}));
+  s.push(miCarrier('ndaughter', t, 2.4, {scale: 0.8, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, arms: {fArm: [130, 80], bArm: [140, 90]}, load: (x, y) => samovar(x - 15, y - MI.man * 0.34, 0.42)}));
+  s.push(miCarrier('nson', t, 3.4, {scale: 0.52, det: lod.det, rim, arms: {fArm: [110, 40]}, load: (x, y) => candlestick(x - 15, y - MI.man * 0.3, 0.5)}));
+  // two Irish neighbours on the next stoop down, watching (ink)
+  s.push(e3Person(rng(76), 1120, G, MI.man, t, '#0D0C09', {d: -1, an: E3_FOLD}) + e3Person(rng(79), 1160, G, MI.man, t, '#0D0C09', {d: -1}));
+  // a horsecar passes along the street in front
+  const hc = t > 1.2 && t < 6.6 ? -700 + (t - 1.2) * 520 : -5000;
+  s.push(`<g transform="translate(0,${G + 250}) scale(0.62) translate(0,${-(G + 250)})">${horsecar(hc / 0.62, G + 250, t)}</g>` + line([[-400, G + 252], [2400, G + 252]], '#0D0C09', 4));
+  const world = layerAt(c, 0.3, `<rect x="-3000" y="-2000" width="8000" height="3000" fill="url(#e3day)"/>` + stFar(t)) + layerAt(c, 1, s.join(''));
   const scr = [tag(40, 1040, 'THE KELLYS\' STREET · BROOKLYN · 1884', 1)];
   if (t > 1 && t < 4.4) scr.push(penS(1060, 160, 'new neighbours, from the Russian Empire', 30, -3));
-  if (t > 7.6) scr.push(penS(980, 170, 'Ma Kelly is not so sure', 34, -3), tag(1000, 250, 'COMPOSITE CHARACTERS', smooth(7.6, 8.0, t)));
+  if (t > 7.8) scr.push(penS(980, 170, 'Ma Kelly is not so sure', 34, -3), tag(1000, 250, 'COMPOSITE CHARACTERS', smooth(7.8, 8.2, t)));
   if (o.quiet) scr.length = 0;
   return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#4E726C"/>`, world, scr.join(''), t);
 }
@@ -416,52 +426,76 @@ function treadle(x, F, t, run = 1) { // a treadle sewing machine on its iron sta
 function coatPile(x, y, n, seed, col = '#4E726C') { const r = rng(seed), s = [];
   for (let k = 0; k < n; k++) { const w = 120 + r() * 60, yy = y - k * 14; s.push(`<path d="M${f1(x + (r() - 0.5) * 30)},${f1(yy)} l${f1(w)},0 l-8,-16 l${f1(-w + 20)},-2 Z" fill="${shade(col, (r() - 0.5) * 0.5)}"/>`); }
   return s.join(''); }
+// A tenement room drawn to scale (about 84 px to the foot with a grown man 480 px tall): a front room roughly 12 ft wide with an
+// 8 1/2 ft plaster ceiling, cut open like cutaway.js so the walls, ceiling and floor read as a box. Returns {back, front}: draw back,
+// then the furniture and people, then front (the cut walls, slabs and the floor's front lip, which overlap whatever is at the edge).
+const RM = {x0: 456, x1: 1464, F: 980, wallFoot: 930, ceil: 220, H: 480};
+function e3Room({door = false, seed = 1, paper = 0.12} = {}) {
+  const {x0, x1, F, wallFoot, ceil} = RM, r = rng(seed), b = [], f = [];
+  b.push(`<rect x="-1500" y="-1200" width="5000" height="3600" fill="#060A0A"/>`);
+  b.push(`<rect x="${x0}" y="${ceil}" width="${x1 - x0}" height="${wallFoot - ceil}" fill="#1F3532"/><rect x="${x0}" y="${ceil}" width="${x1 - x0}" height="${wallFoot - ceil}" fill="url(#flwp)" opacity="${paper}"/>`);
+  for (let k = 0; k < 3; k++) { const x = x0 + 80 + r() * (x1 - x0 - 260), y = ceil + 60 + r() * 380, w = 90 + r() * 120, h = 60 + r() * 120; // peeling plaster with the lath showing
+    b.push(`<path d="M${f1(x)},${f1(y)} q${f1(w * 0.4)},-12 ${f1(w * 0.7)},4 q${f1(w * 0.3)},${f1(h * 0.4)} 0,${f1(h)} q${f1(-w * 0.5)},10 ${f1(-w * 0.7)},-6 Z" fill="#2B4744"/>` + [...Array(4)].map((_, i) => `<rect x="${f1(x + 8)}" y="${f1(y + 10 + i * h / 4.5)}" width="${f1(w * 0.55)}" height="4" fill="#24403D"/>`).join('')); }
+  b.push(`<rect x="${x0 + 300 + r() * 300}" y="${ceil}" width="70" height="300" fill="url(#flstain)"/><rect x="${x0}" y="${ceil}" width="${x1 - x0}" height="140" fill="url(#matSootT)"/>`);
+  // the plaster ceiling: a lighter band, a crack, a water stain round the stovepipe hole
+  b.push(`<rect x="${x0}" y="${ceil - 4}" width="${x1 - x0}" height="30" fill="#2B4744"/><path d="M${x0 + 120},${ceil + 8} l60,6 l40,-4 l70,8 l30,-3" stroke="#132423" stroke-width="2" fill="none"/><ellipse cx="${x0 + 360}" cy="${ceil + 12}" rx="70" ry="10" fill="#132423" opacity="0.6"/><rect x="${x0}" y="${ceil + 24}" width="${x1 - x0}" height="6" fill="#132423"/>`);
+  // the baseboard and the floor: worn boards in perspective, running back to the wall, darker toward it
+  b.push(`<rect x="${x0}" y="${wallFoot - 14}" width="${x1 - x0}" height="14" fill="#2B2418"/>` + MAT.floor(x0, x1, wallFoot, F + 70, {kind: 'planks', base: '#3A3326', seed: seed + 5, size: 52, vp: (x0 + x1) / 2}));
+  for (let k = 0; k < 9; k++) b.push(`<ellipse cx="${f1(x0 + 40 + r() * (x1 - x0 - 80))}" cy="${f1(wallFoot + 20 + r() * 110)}" rx="${f1(10 + r() * 30)}" ry="${f1(2 + r() * 4)}" fill="#0D0C09" opacity="0.35"/>`); // grime and scraps
+  // the cut: the side walls, the ceiling slab and the floor slab in solid black; a door through the left wall to the dark hall
+  const c = '#050505', dh = door ? 600 : 0;
+  f.push(`<rect x="${x0 - 34}" y="${ceil - 60}" width="34" height="${F + 70 - ceil + 60 - dh}" fill="${c}"/>` + (door ? `<rect x="${x0 - 34}" y="${F + 70 - 40}" width="34" height="40" fill="${c}"/><rect x="${x0 - 30}" y="${F + 70 - dh - 40}" width="10" height="${dh}" fill="#2B2418"/>` : ''));
+  f.push(`<rect x="${x1}" y="${ceil - 60}" width="34" height="${F + 70 - ceil + 100}" fill="${c}"/><rect x="${x0 - 34}" y="${ceil - 60}" width="${x1 - x0 + 68}" height="56" fill="${c}"/><rect x="${x0 - 34}" y="${F + 70}" width="${x1 - x0 + 68}" height="40" fill="${c}"/>`);
+  f.push(`<rect x="${x0}" y="${F + 68}" width="${x1 - x0}" height="3" fill="#DFE0D6" opacity="0.15"/>`);
+  return {back: b.join(''), front: f.join('')};
+}
+const e3Defs2 = (t) => e3Defs(t, `<pattern id="flwp" width="40" height="56" patternUnits="userSpaceOnUse"><path d="M20,6 q10,10 0,20 q-10,10 0,20" stroke="#DFE0D6" stroke-width="2" fill="none"/><circle cx="4" cy="28" r="3" fill="#DFE0D6"/></pattern>` +
+  `<linearGradient id="flstain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050A09" stop-opacity="0.55"/><stop offset="1" stop-color="#050A09" stop-opacity="0"/></linearGradient>`);
+const scaled = (x, y, k, body) => `<g transform="translate(${f1(x)},${f1(y)}) scale(${k}) translate(${f1(-x)},${f1(-y)})">${body}</g>`;
 function renderSweatshop(t) {
-  const c = cam2(camAt([[0, 0.8, 960, 520], [4.6, 0.86, 980, 540], [10, 1.3, 900, 640]], t)), F = SW.F, H = SW.man, s = [];
-  const lod = lodFor(H * 0.8 * c.z), rim = {c: '#E9F0E6', a: lod.rimA * 0.6, dx: 0.01, dy: -0.004};
-  // the room: faded paper, a soot-dark ceiling line, bare boards; the window to the street at the back
-  s.push(`<rect x="-500" y="-300" width="2900" height="${F + 300}" fill="#1F3532"/><rect x="-500" y="-300" width="2900" height="${F + 300}" fill="url(#flwp)" opacity="0.12"/><rect x="-500" y="-300" width="2900" height="160" fill="url(#matSootT)"/>`);
-  s.push(MAT.floor(-500, 2400, F, F + 220, {kind: 'planks', base: '#24403D', seed: 91, size: 46, vp: 1000}));
-  const wx = 1290, wy = 170;
-  s.push(`<rect x="${wx - 16}" y="${wy - 16}" width="292" height="412" fill="#0D0C09"/><rect x="${wx}" y="${wy}" width="260" height="380" fill="#A3BAB2"/>` + MAT.brick(wx, wy + 60, 260, 320, {base: '#5F857F', seed: 92, soot: 'none', bw: 30, bh: 14, vary: 0.2}) +
-    [0, 1].map((k) => `<rect x="${wx + 30 + k * 130}" y="${wy + 110}" width="70" height="110" fill="#2B4744"/>`).join('') + `<rect x="${wx}" y="${wy}" width="260" height="380" fill="#DFE0D6" opacity="0.25"/><rect x="${wx + 126}" y="${wy}" width="8" height="380" fill="#0D0C09"/><rect x="${wx}" y="${wy + 186}" width="260" height="8" fill="#0D0C09"/><rect x="${wx - 30}" y="${wy + 380}" width="320" height="16" fill="#0D0C09"/>`);
-  s.push(`<path d="M${wx},${wy + 396} L${wx - 260},${F} L${wx + 520},${F} L${wx + 260},${wy + 396} Z" fill="#DFE0D6" opacity="0.06"/>`);
-  // a line overhead with garments drying; a calendar-sized blank card on the wall
-  s.push(line([[-200, 120], [2200, 150]], '#0D0C09', 2) + [0, 1, 2, 3, 4, 5].map((k) => { const x = 200 + k * 180, sw = 2 * Math.sin(t * 1.2 + k); return `<path d="M${x},${124 + k * 1.5} l70,0 l${8 + sw},120 l-86,0 Z" fill="#2B4744"/><path d="M${x + 10},${124 + k * 1.5} l20,30 l20,-30" stroke="#0D0C09" stroke-width="3" fill="none"/>`; }).join(''));
-  // the stove with irons heating, its pipe; the presser's board; the father presses (steam on each stroke)
-  const sx = 40;
-  s.push(`<rect x="${sx}" y="${F - 200}" width="200" height="160" fill="#0D0C09"/><rect x="${sx - 10}" y="${F - 210}" width="220" height="14" fill="#0D0C09"/><rect x="${sx + 140}" y="-300" width="30" height="${F - 210 + 300}" fill="#0D0C09"/><rect x="${sx + 30}" y="${F - 160}" width="60" height="40" fill="#FFB15C" opacity="${f1(0.4 + 0.2 * Math.sin(t * 8))}"/>` + glowC(sx + 60, F - 140, 200, 0.4, 'e3fire'));
-  for (const k of [0, 1]) s.push(`<path d="M${sx + 20 + k * 60},${F - 210} l8,-24 l36,0 l8,24 Z" fill="#0D0C09"/><path d="M${sx + 34 + k * 60},${F - 234} q14,-16 28,0" stroke="#0D0C09" stroke-width="5" fill="none"/>`);
-  s.push(`<rect x="280" y="${F - 170}" width="320" height="14" fill="#2B2418"/><rect x="300" y="${F - 156}" width="10" height="156" fill="#0D0C09"/><rect x="570" y="${F - 156}" width="10" height="156" fill="#0D0C09"/><path d="M300,${F - 172} l280,0 l-10,-14 l-260,0 Z" fill="#5F857F"/>`);
-  const strokeP = Math.sin(t * TAU * 0.6), ironX = 440 + 90 * strokeP;
-  s.push(nb('nfather', {x: 560, y: F, h: H, d: -1, hat: 'kippah', coat: 'vest', det: lod.det, rim, an: {fArm: [112 + 22 * strokeP, 98 + 18 * strokeP], bArm: [150, 120], tilt: -14, lean: 9}}));
-  s.push(`<path d="M${f1(ironX - 50)},${F - 186} l90,0 l10,-6 l-20,-22 l-70,0 Z" fill="#0D0C09"/><path d="M${f1(ironX - 30)},${F - 208} q30,-24 60,0" stroke="#0D0C09" stroke-width="7" fill="none"/>`);
-  s.push(MAT.smoke(ironX - 10, F - 190, t, {col: 'DFE0D6', k: 0.4, n: 4, rise: 110, drift: 30, speed: 1.6, seed: 93}));
-  // the long table with three treadle machines; operators: a man, the daughter (accent), a woman
-  for (const [x, who] of [[760, 'man'], [1000, 'daughter'], [1840, 'woman']]) {
-    s.push(treadle(x, F, t + x, 1));
-    const sy = sitY(F, who === 'daughter' ? H * 0.8 : H * 0.92);
-    s.push(`<rect x="${x - 190}" y="${F - 92}" width="70" height="10" fill="#0D0C09"/><rect x="${x - 186}" y="${F - 82}" width="8" height="82" fill="#0D0C09"/><rect x="${x - 132}" y="${F - 82}" width="8" height="82" fill="#0D0C09"/>`);
-    if (who === 'daughter') s.push(nb('ndaughter', {x: x - 150, y: sy, h: H, scale: 0.8, d: 1, hat: 'none', wear: ['plain', 'apron'], det: lod.det, rim, an: {...POSES.sew(t, 0.3), tilt: t > 6.2 && t < 7.4 ? 4 : -14, expr: t > 6.2 && t < 7.4 ? 'worried' : 'set', blink: t % 3.1 < 0.12}}));
-    else s.push(figure({x: x - 150, y: sy, h: H * (who === 'woman' ? 0.92 : 1), d: 1, kind: who, hat: who === 'man' ? 'cap' : 'kerchief', coat: 'vest', beard: who === 'man', wear: who === 'woman' ? ['plain', 'apron'] : [], fill: '#0D0C09', an: POSES.sew(t + x * 0.01, 0.6)}));
+  const c = cam2(camAt([[0, 1.24, 960, 632], [4.4, 1.26, 960, 632], [10, 1.6, 900, 700]], t)), {F, H, x0, x1, wallFoot, ceil} = RM, s = [];
+  const lod = lodFor(H * 0.8 * c.z), rim = {c: '#E9F0E6', a: lod.rimA * 0.6, dx: 0.01, dy: -0.004}, room = e3Room({door: true, seed: 91});
+  s.push(room.back);
+  // the window to the street on the back wall: the tenement opposite, grey daylight falling in
+  const wx = 990, wy = 330, ww = 190, wh = 300;
+  s.push(`<rect x="${wx - 12}" y="${wy - 12}" width="${ww + 24}" height="${wh + 24}" fill="#0D0C09"/>` + MAT.brick(wx, wy, ww, wh, {base: '#5F857F', seed: 92, soot: 'none', bw: 22, bh: 11, vary: 0.2}) +
+    `<rect x="${wx + 30}" y="${wy + 90}" width="50" height="80" fill="#2B4744"/><rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" fill="#DFE0D6" opacity="0.28"/><rect x="${wx + ww / 2 - 4}" y="${wy}" width="8" height="${wh}" fill="#0D0C09"/><rect x="${wx}" y="${wy + wh / 2 - 4}" width="${ww}" height="8" fill="#0D0C09"/><rect x="${wx - 24}" y="${wy + wh}" width="${ww + 48}" height="14" fill="#0D0C09"/>`);
+  s.push(`<path d="M${wx},${wy + wh + 14} L${wx - 200},${F + 70} L${wx + ww + 200},${F + 70} L${wx + ww},${wy + wh + 14} Z" fill="#DFE0D6" opacity="0.07"/>`);
+  // a line of finished coats strung right under the ceiling: no headroom
+  s.push(line([[x0, ceil + 70], [x1, ceil + 80]], '#0D0C09', 2) + [0, 1, 2, 3, 4, 5].map((k) => { const x = x0 + 90 + k * 150, sw = 2 * Math.sin(t * 1.1 + k); return `<path d="M${x},${ceil + 72 + k * 1.6} l90,0 l${8 + sw},150 l-106,0 Z" fill="#2B4744"/><path d="M${x + 14},${ceil + 72 + k * 1.6} l30,40 l30,-40" stroke="#0D0C09" stroke-width="4" fill="none"/>`; }).join(''));
+  // the stove against the back wall, irons heating on it, the pipe up through the ceiling
+  s.push(`<rect x="480" y="${wallFoot - 210}" width="150" height="190" fill="#0D0C09"/><rect x="472" y="${wallFoot - 220}" width="166" height="14" fill="#0D0C09"/><rect x="590" y="${ceil}" width="28" height="${wallFoot - 220 - ceil}" fill="#0D0C09"/><rect x="500" y="${wallFoot - 150}" width="60" height="44" fill="#FFB15C" opacity="${f1(0.35 + 0.2 * Math.sin(t * 8))}"/>` + glowC(530, wallFoot - 130, 220, 0.42, 'e3fire'));
+  for (const k of [0, 1]) s.push(`<path d="M${488 + k * 62},${wallFoot - 220} l10,-28 l40,0 l10,28 Z" fill="#0D0C09"/><path d="M${504 + k * 62},${wallFoot - 248} q16,-18 32,0" stroke="#0D0C09" stroke-width="6" fill="none"/>`);
+  // the bed against the back wall on the right, heaped with cut cloth and finished coats
+  s.push(`<rect x="1170" y="${wallFoot - 120}" width="300" height="26" fill="#0D0C09"/><rect x="1170" y="${wallFoot - 260}" width="14" height="260" fill="#0D0C09"/>` + coatPile(1190, wallFoot - 120, 10, 95, '#2B4744') + coatPile(1280, wallFoot - 150, 7, 96, '#4E726C'));
+  // the pressing board and the father, pressing (steam on each stroke)
+  const strokeP = Math.sin(t * TAU * 0.6), ironX = 550 + 50 * strokeP, by = F - 250;
+  s.push(`<path d="M466,${by} l180,0 l-12,-18 l-160,0 Z" fill="#5F857F"/><rect x="466" y="${by}" width="180" height="14" fill="#2B2418"/><rect x="482" y="${by + 14}" width="12" height="${F - by - 14}" fill="#0D0C09"/><rect x="618" y="${by + 14}" width="12" height="${F - by - 14}" fill="#0D0C09"/>` + MAT.shadow(556, F + 2, 100, 0.35));
+  s.push(nb('nfather', {x: 694, y: F, h: H, d: -1, hat: 'kippah', coat: 'vest', det: lod.det, rim, an: {fArm: [112 + 20 * strokeP, 96 + 16 * strokeP], bArm: [150, 120], tilt: -14, lean: 9}}));
+  s.push(`<path d="M${f1(ironX - 60)},${by - 18} l110,0 l12,-8 l-24,-26 l-86,0 Z" fill="#0D0C09"/><path d="M${f1(ironX - 36)},${by - 44} q36,-28 72,0" stroke="#0D0C09" stroke-width="8" fill="none"/>`);
+  s.push(MAT.smoke(ironX - 10, by - 30, t, {col: 'DFE0D6', k: 0.5, n: 4, rise: 140, drift: 40, speed: 1.6, seed: 93}));
+  // two treadle machines nearly touching: the daughter at the first, the mother at the second
+  for (const [mx, who] of [[990, 'daughter'], [1336, 'mother']]) {
+    s.push(MAT.shadow(mx + 20, F - 6, 150, 0.35) + scaled(mx, F - 8, 1.25, treadle(mx, F - 8, t + mx, 1)));
+    const ox = mx - 180, hh = who === 'daughter' ? H * 0.8 : H * 0.88;
+    s.push(`<rect x="${ox - 50}" y="${F - 128}" width="90" height="12" fill="#0D0C09"/><rect x="${ox - 44}" y="${F - 116}" width="10" height="116" fill="#0D0C09"/><rect x="${ox + 24}" y="${F - 116}" width="10" height="116" fill="#0D0C09"/>` + MAT.shadow(ox, F + 2, 70, 0.3));
+    if (who === 'daughter') s.push(nb('ndaughter', {x: ox, y: sitY(F, hh), h: H, scale: 0.8, d: 1, hat: 'none', wear: ['plain', 'apron'], det: lod.det, rim, an: {...POSES.sew(t, 0.3), tilt: t > 6.2 && t < 7.4 ? 4 : -14, expr: t > 6.2 && t < 7.4 ? 'worried' : 'set', blink: t % 3.1 < 0.12}}));
+    else s.push(nb('nmother', {x: ox, y: sitY(F, hh), h: H, d: 1, det: lod.det, rim, an: {...POSES.sew(t + 0.4, 0.6), tilt: -12}}));
   }
-  // the pile by the window grows when the contractor drops his bundle; the boy pulls threads beside it; the mother finishes by hand
+  // cut cloth piles up by the door; the boy pulls basting threads on the floor in front
   const drop = smooth(5.8, 6.1, t);
-  s.push(coatPile(1260, F, 6 + Math.round(4 * drop), 94));
-  s.push(nb('nson', {x: 1250, y: sitY(F, H * 0.5) - 40, h: H, scale: 0.5, d: 1, det: lod.det, rim, an: {...POSES.handsew(t, 0.2), legs: [80, 70], shins: [80, 70]}}));
-  s.push(`<rect x="1960" y="${F - 120}" width="400" height="22" fill="#0D0C09"/><rect x="1960" y="${F - 220}" width="12" height="220" fill="#0D0C09"/>` + coatPile(1990, F - 120, 6, 95, '#2B4744'));
-  s.push(`<rect x="1450" y="${F - 92}" width="70" height="10" fill="#0D0C09"/><rect x="1456" y="${F - 82}" width="8" height="82" fill="#0D0C09"/>` + nb('nmother', {x: 1480, y: sitY(F, H * 0.88), h: H, d: 1, det: lod.det, rim: {...rim, dx: 0.012}, an: {...POSES.handsew(t, 0.5), tilt: -16}}));
-  // the contractor (ink, bowler) comes in from the stair door on the right with a bundle on his shoulder, drops it, leaves
-  const cIn = smooth(4.4, 5.8, t), cOut = smooth(6.6, 8.6, t), cx = 2300 - 860 * cIn + 900 * cOut, walking = (t > 4.4 && t < 5.8) || (t > 6.6 && t < 8.6);
-  s.push(`<rect x="2140" y="160" width="200" height="${F - 160}" fill="#0B1211"/><rect x="2120" y="150" width="20" height="${F - 150}" fill="#0D0C09"/>`);
-  s.push(figure({x: cx, y: F, h: H, d: cOut > 0 ? 1 : -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: '#0D0C09', an: walking ? walkAn(walkPhase(860 * cIn + 900 * cOut, H)) : {...POSES.stand(t, 0.2), fArm: [120, 120]}}));
-  if (t < 5.9) s.push(bundle(cx + 10, F - H * 0.82, 2.4, '#4E726C'));
+  s.push(coatPile(560, F + 50, 6 + Math.round(5 * drop), 94, '#4E726C') + MAT.shadow(650, F + 52, 120, 0.4));
+  s.push(nb('nson', {x: 1010, y: F + 44, h: H, scale: 0.5, d: 1, floorY: F + 44, det: lod.det, rim, an: {...POSES.handsew(t, 0.2), legs: [86, 86], shins: [96, 90]}}) + coatPile(1110, F + 62, 4, 97, '#2B4744'));
+  // the contractor (ink, bowler) comes in through the door with a bundle on his shoulder, drops it on the pile, goes out
+  const cIn = smooth(4.4, 5.6, t), cOut = smooth(6.6, 7.8, t), cx = 330 + 260 * cIn - 300 * cOut, walking = (t > 4.4 && t < 5.6) || (t > 6.6 && t < 7.8);
+  if (t > 4.2 && t < 8) { s.push(figure({x: cx, y: F, h: H, d: cOut > 0 ? -1 : 1, kind: 'man', hat: 'bowler', coat: 'frock', fill: '#0D0C09', an: walking ? walkAn(walkPhase(260 * cIn + 300 * cOut, H)) : {...POSES.stand(t, 0.2), fArm: [130, 120]}}) + MAT.shadow(cx, F + 2, 76, 0.35));
+    if (t < 5.9) s.push(bundle(cx - 10, F - H * 0.8, 3.2, '#4E726C')); }
+  s.push(room.front);
   const world = layerAt(c, 1, s.join(''));
   const scr = [tag(40, 1040, 'A TENEMENT WORKSHOP · ABOUT 1885', 1)];
-  if (t > 0.8 && t < 4.6) scr.push(penS(180, 170, 'home by night, workshop by day', 30, -3));
-  if (t > 6.4) scr.push(penS(1060, 170, 'paid by the piece', 34, -3), tag(1100, 250, 'COMPOSITE CHARACTERS', smooth(6.4, 6.8, t)));
-  const defs = e3Defs(t, `<pattern id="flwp" width="40" height="56" patternUnits="userSpaceOnUse"><path d="M20,6 q10,10 0,20 q-10,10 0,20" stroke="#DFE0D6" stroke-width="2" fill="none"/><circle cx="4" cy="28" r="3" fill="#DFE0D6"/></pattern>`);
-  return frame(defs, `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), t);
+  if (t > 0.8 && t < 4.4) scr.push(penS(180, 150, 'one room, about 12 feet across', 30, -3));
+  if (t > 6.4) scr.push(penS(1060, 150, 'paid by the piece', 34, -3), tag(1100, 230, 'COMPOSITE CHARACTERS', smooth(6.4, 6.8, t)));
+  return frame(e3Defs2(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr.join(''), t);
 }
 
 /* ================= ep3_letter: a letter home with a ticket in it, and the route ================= */
@@ -485,20 +519,26 @@ function renderLetter(t) {
   const M = smooth(4.8, 5.8, t); let out = '';
   const scr = [];
   if (M < 1) { // the table by lamplight
-    const c = cam2(camAt([[0, 1.0, 960, 560], [5, 1.12, 1000, 580]], t)), F = 900, s = [], H = 470, fl = 0.86 + 0.08 * Math.sin(t * 7.1) + 0.05 * Math.sin(t * 16.3);
-    s.push(`<rect x="-400" y="-200" width="2800" height="${F + 200}" fill="#1C3332"/><rect x="-400" y="-200" width="2800" height="${F + 200}" fill="url(#flwp)" opacity="0.1"/>`);
-    s.push(MAT.planks(-400, F, 2800, 400, {base: '#162826', seed: 101, size: 26}) + `<rect x="-400" y="${F}" width="2800" height="120" fill="url(#matFloorShade)"/>`);
-    const tx = 820, ty = F - 210;
-    s.push(glowC(tx + 380, ty - 120, 700, 0.85 * fl, 'mswarm') + glowC(tx + 380, ty - 120, 170, 0.6 * fl));
-    s.push(`<rect x="${tx}" y="${ty}" width="760" height="16" fill="#2B2418"/><rect x="${tx + 20}" y="${ty + 16}" width="14" height="${F - ty - 16}" fill="#0D0C09"/><rect x="${tx + 726}" y="${ty + 16}" width="14" height="${F - ty - 16}" fill="#0D0C09"/>`);
-    s.push(samovar(tx + 120, ty, 2.4) + candlestick(tx + 250, ty, 2.6, '#C9A55A') + candlestick(tx + 290, ty, 2.6, '#C9A55A'));
-    s.push(`<path d="M${tx + 360},${ty} l12,-40 q-24,-26 18,-46 q42,20 18,46 l12,40 Z" fill="#0D0C09"/><path d="M${tx + 372},${ty - 90} q18,-56 36,0 l0,8 l-36,0 Z" fill="${E3.cream}" opacity="${f1(0.55 + 0.3 * fl)}"/><ellipse cx="${tx + 390}" cy="${ty - 100}" rx="5" ry="12" fill="#FFF3D6"/>`);
-    s.push(`<path d="M${tx + 450},${ty} l200,0 l0,-4 l-200,0 Z" fill="${E3.paper}"/><path d="M${tx + 600},${ty - 4} l60,-1 l0,-4 l-60,1 Z" fill="${E3.paper}" opacity="0.8"/>`);
+    const c = cam2(camAt([[0, 1.32, 1010, 600], [5, 1.44, 1060, 610]], t)), {F, H, x0, x1, wallFoot, ceil} = RM, s = [], fl = 0.86 + 0.08 * Math.sin(t * 7.1) + 0.05 * Math.sin(t * 16.3);
+    const room = e3Room({seed: 101, paper: 0.1});
+    s.push(room.back);
+    // the only window opens on the airshaft: a brick wall an arm's length away
+    s.push(`<rect x="650" y="340" width="160" height="250" fill="#0D0C09"/>` + MAT.brick(662, 352, 136, 226, {base: '#2B4744', seed: 102, soot: 'bottom', bw: 22, bh: 11}) + `<rect x="726" y="352" width="8" height="226" fill="#0D0C09"/><rect x="662" y="462" width="136" height="8" fill="#0D0C09"/>`);
+    // the stove at the left wall, a kettle; a shelf with pots
+    s.push(`<rect x="480" y="${wallFoot - 200}" width="150" height="180" fill="#0D0C09"/><rect x="472" y="${wallFoot - 210}" width="166" height="14" fill="#0D0C09"/><rect x="590" y="${ceil}" width="26" height="${wallFoot - 210 - ceil}" fill="#0D0C09"/><path d="M500,${wallFoot - 210} q0,-46 46,-46 q46,0 46,46 Z" fill="#0D0C09"/><rect x="500" y="${wallFoot - 140}" width="60" height="40" fill="#FFB15C" opacity="0.35"/>` + glowC(530, wallFoot - 120, 180, 0.35, 'e3fire'));
+    s.push(`<rect x="860" y="330" width="240" height="10" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<path d="M${880 + k * 70},330 l6,-40 l40,0 l6,40 Z" fill="#0D0C09"/>`).join(''));
+    const tx = 760, ty = F - 250;
+    s.push(glowC(tx + 260, ty - 110, 640, 0.85 * fl, 'mswarm') + glowC(tx + 260, ty - 110, 150, 0.6 * fl));
+    s.push(MAT.shadow(tx + 230, F + 4, 260, 0.45) + `<rect x="${tx}" y="${ty}" width="460" height="16" fill="#2B2418"/><rect x="${tx + 16}" y="${ty + 16}" width="14" height="${F - ty - 16}" fill="#0D0C09"/><rect x="${tx + 430}" y="${ty + 16}" width="14" height="${F - ty - 16}" fill="#0D0C09"/>`);
+    s.push(samovar(tx + 70, ty, 2.0) + candlestick(tx + 170, ty, 2.2, '#C9A55A') + candlestick(tx + 205, ty, 2.2, '#C9A55A'));
+    s.push(`<path d="M${tx + 260},${ty} l12,-40 q-24,-26 18,-46 q42,20 18,46 l12,40 Z" fill="#0D0C09"/><path d="M${tx + 272},${ty - 90} q18,-56 36,0 l0,8 l-36,0 Z" fill="${E3.cream}" opacity="${f1(0.55 + 0.3 * fl)}"/><ellipse cx="${tx + 290}" cy="${ty - 100}" rx="5" ry="12" fill="#FFF3D6"/>`);
+    s.push(`<path d="M${tx + 330},${ty} l120,0 l0,-4 l-120,0 Z" fill="${E3.paper}"/>`);
     const write = Math.sin(t * 9) * 0.5 + 0.5;
-    s.push(`<rect x="${tx + 800}" y="${F - 120}" width="110" height="12" fill="#0D0C09"/><rect x="${tx + 806}" y="${F - 108}" width="10" height="108" fill="#0D0C09"/><rect x="${tx + 894}" y="${F - 108}" width="10" height="108" fill="#0D0C09"/><rect x="${tx + 894}" y="${F - 260}" width="10" height="150" fill="#0D0C09"/>`);
+    s.push(`<rect x="${tx + 470}" y="${F - 128}" width="110" height="12" fill="#0D0C09"/><rect x="${tx + 476}" y="${F - 116}" width="10" height="116" fill="#0D0C09"/><rect x="${tx + 564}" y="${F - 116}" width="10" height="116" fill="#0D0C09"/><rect x="${tx + 564}" y="${F - 300}" width="10" height="184" fill="#0D0C09"/>` + MAT.shadow(tx + 525, F + 4, 70, 0.35));
     const lod = lodFor(H * c.z);
-    s.push(nb('nfather', {x: tx + 840, y: sitY(F, H * 0.97), h: H, d: -1, hat: 'kippah', coat: 'vest', det: lod.det, rim: {c: '#FFE6C9', a: 0.7 * fl, dx: -0.01, dy: -0.004}, an: {...POSES.sit(t, 0.1), fArm: [112 + 4 * write, 70 + 6 * write], bArm: [125, 85], tilt: -18, lean: 8, expr: 'set', blink: t % 3.4 < 0.12}}));
-    s.push(nb('nmother', {x: tx + 1000, y: F, h: H, d: -1, det: lod.det, rim: {c: '#FFE6C9', a: 0.6 * fl, dx: -0.01, dy: -0.004}, an: {...POSES.stand(t, 0.4), fArm: [130, 120], tilt: -10, expr: 'smile', blink: (t + 1) % 3.9 < 0.12}}));
+    s.push(nb('nfather', {x: tx + 520, y: sitY(F, H * 0.97), h: H, d: -1, hat: 'kippah', coat: 'vest', det: lod.det, rim: {c: '#FFE6C9', a: 0.7 * fl, dx: -0.01, dy: -0.004}, an: {...POSES.sit(t, 0.1), fArm: [112 + 4 * write, 70 + 6 * write], bArm: [125, 85], tilt: -18, lean: 8, expr: 'set', blink: t % 3.4 < 0.12}}));
+    s.push(nb('nmother', {x: tx + 640, y: F, h: H, d: -1, det: lod.det, rim: {c: '#FFE6C9', a: 0.6 * fl, dx: -0.01, dy: -0.004}, an: {...POSES.stand(t, 0.4), fArm: [130, 120], tilt: -10, expr: 'smile', blink: (t + 1) % 3.9 < 0.12}}));
+    s.push(room.front);
     const world = layerAt(c, 1, s.join(''));
     // the letter close up, rising into view (screen space): right-to-left script, then the prepaid ticket slid in on top
     const rise = smooth(1.2, 1.9, t), tk = smooth(3.3, 3.9, t), px = 120, py = 140 + 60 * (1 - rise);
@@ -546,8 +586,7 @@ function renderLetter(t) {
       if (uS > 0.3) scr.push(penS(560, 860, 'by steamship to New York', 32, -3));
     }
   }
-  const defs = e3Defs(t, `<pattern id="flwp" width="40" height="56" patternUnits="userSpaceOnUse"><path d="M20,6 q10,10 0,20 q-10,10 0,20" stroke="#DFE0D6" stroke-width="2" fill="none"/><circle cx="4" cy="28" r="3" fill="#DFE0D6"/></pattern>`);
-  return frame(defs, `<rect width="1920" height="1080" fill="#0B1414"/>`, out, scr.join(''), t);
+  return frame(e3Defs2(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, out, scr.join(''), t);
 }
 
 /* ================= ep3_nativism: who was "in" and who was "out" ================= */
@@ -591,14 +630,107 @@ function renderNativism(t) {
   }
   if (X > 0) { // the irony, in the family: Ma Kelly at her window
     const tt = 9.4 + (t - 5.5) * 0.12;
-    out += `<g opacity="${f1(X)}">${renderMovingIn(tt, {quiet: true, keys: [[0, 2.7, 605, 518], [20, 2.9, 600, 516]]})}</g>`;
-    if (t > 6.4 && t < 8.2) scr.push(penS(1000, 170, 'not long ago, the cartoons mocked the Irish', 30, -3));
+    out += `<g opacity="${f1(X)}">${renderMovingIn(tt, {quiet: true, keys: [[0, 5.2, MI.win.x + 20, MI.win.y + 46], [20, 5.5, MI.win.x + 20, MI.win.y + 44]]})}</g>`;
+    if (t > 6.4 && t < 8.2) scr.push(penS(1000, 170, 'in 1883, Puck was still mocking the Irish', 30, -3));
     if (t > 8.2) scr.push(penS(1000, 170, 'now Ma Kelly watches the newcomers', 32, -3), tag(1040, 250, 'COMPOSITE CHARACTER', smooth(8.2, 8.6, t)));
   }
   return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, out, scr.join(''), t);
 }
 
-if (typeof window !== 'undefined') Object.assign(window, {renderSteerage, renderCastleGarden, renderMovingIn, renderSweatshop, renderLetter, renderNativism});
+/* ================= ep3_names: what happened to their name ================= */
+// The myth says clerks at the station changed immigrants' names. They did not: the clerk copied each name from the ship's passenger
+// list, which was written at the port of departure (here Hamburg, by a German-speaking clerk, from the family's own papers). Spellings
+// shifted as a name moved between alphabets (Hebrew letters, then German, then English spelling), and most real changes came later,
+// made by the families themselves: at school, at work, on a shop sign, on naturalization papers. The surname here is invented for
+// the composite family: Rabinovich, written "Rabinowitsch" in Hamburg, "Rabinowitz" in New York, and later shortened to "Rabin".
+// The daughter's Yiddish name Rivke (Rebecca) becomes "Rebecca" at school.
+function hebrewish(x, y, sz, n, seed, col) { // a word in square Hebrew-style letters, unreadable on purpose, written right to left
+  const r = rng(seed), s = []; let xx = x;
+  for (let i = 0; i < n; i++) { const w = sz * (0.5 + r() * 0.35), k = Math.floor(r() * 5), sw = Math.max(2, sz * 0.12), X0 = xx - w;
+    if (k === 0) s.push(`<path d="M${f1(X0)},${f1(y - sz)} H${f1(xx)} V${f1(y)}" stroke="${col}" stroke-width="${f1(sw)}" fill="none"/>`);
+    else if (k === 1) s.push(`<path d="M${f1(X0)},${f1(y - sz)} H${f1(xx)} V${f1(y)} H${f1(X0)}" stroke="${col}" stroke-width="${f1(sw)}" fill="none"/>`);
+    else if (k === 2) s.push(`<path d="M${f1(X0)},${f1(y - sz)} H${f1(xx)} M${f1(X0 + w * 0.35)},${f1(y - sz)} V${f1(y)}" stroke="${col}" stroke-width="${f1(sw)}" fill="none"/>`);
+    else if (k === 3) s.push(`<path d="M${f1(X0)},${f1(y)} V${f1(y - sz)} H${f1(xx)} V${f1(y)}" stroke="${col}" stroke-width="${f1(sw)}" fill="none"/>`);
+    else s.push(`<path d="M${f1(xx - w * 0.3)},${f1(y - sz)} V${f1(y - sz * 0.45)}" stroke="${col}" stroke-width="${f1(sw)}" fill="none"/>`);
+    xx = X0 - sz * 0.18; }
+  return s.join('');
+}
+function renderNames(t) {
+  const A = 1 - smooth(4.4, 5.0, t), B = smooth(4.4, 5.0, t) * (1 - smooth(7.0, 7.6, t)), C = smooth(7.0, 7.6, t);
+  let out = ''; const scr = [];
+  if (A > 0) { // the desk at Castle Garden: the clerk copies the name from the ship's list into the register
+    const c = cam2(camAt([[0, 1.0, 960, 560], [4.6, 1.08, 980, 560]], t)), F = 960, s = [], H = 520;
+    s.push(`<rect x="-500" y="-400" width="3000" height="${F + 400}" fill="#1F3532"/>` + [0, 1, 2].map((k) => `<rect x="${-200 + k * 900}" y="140" width="220" height="${F - 220}" fill="#132423"/><rect x="${-180 + k * 900}" y="170" width="180" height="200" fill="${E3.cream}" opacity="0.14"/>`).join(''));
+    s.push(`<rect x="-500" y="${F - 64}" width="3000" height="12" fill="#0D0C09" opacity="0.6"/>` + MAT.floor(-500, 2500, F - 52, F + 200, {kind: 'flag', base: '#4E5F58', seed: 121, size: 80, vp: 960}));
+    // the high desk, the open register, the clerk on his stool writing
+    s.push(MAT.shadow(820, F + 4, 260, 0.45) + `<path d="M560,${F - 330} L1080,${F - 360} L1080,${F - 320} L560,${F - 320} Z" fill="#2B2418"/><rect x="580" y="${F - 320}" width="480" height="${320}" fill="#0D0C09"/>`);
+    s.push(`<path d="M640,${F - 336} L820,${F - 346} L820,${F - 330} L640,${F - 322} Z" fill="${E3.paper}"/><path d="M820,${F - 346} L1000,${F - 356} L1000,${F - 340} L820,${F - 330} Z" fill="#DCCFB0"/>`);
+    const w = Math.sin(t * 8) * 0.5 + 0.5;
+    s.push(`<rect x="1080" y="${F - 190}" width="90" height="12" fill="#0D0C09"/><rect x="1090" y="${F - 178}" width="10" height="178" fill="#0D0C09"/><rect x="1150" y="${F - 178}" width="10" height="178" fill="#0D0C09"/>` +
+      figure({x: 1120, y: F - 190 + 0.22 * H, h: H, d: -1, kind: 'man', hat: 'none', coat: 'frock', beard: true, fill: '#0D0C09', rim: {c: '#DFE0D6', a: 0.5, dx: -0.01, dy: -0.004}, an: {legs: [86, 80], shins: [6, 0], fArm: [118 + 6 * w, 70 + 8 * w], bArm: [130, 90], tilt: -16, lean: 6}}));
+    // the father in front of the desk with the family's papers
+    const lod = lodFor(H * c.z);
+    s.push(nb('nfather', {x: 330, y: F, h: H, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim: {c: E3.warm, a: lod.rimA * 0.8, dx: 0.01, dy: -0.004}, an: {...POSES.stand(t, 0.2), fArm: [110, 70]}}) + `<rect x="${f1(330 + 0.33 * H)}" y="${f1(F - 0.68 * H)}" width="36" height="26" fill="${E3.paper}" transform="rotate(-10, ${f1(330 + 0.33 * H)}, ${f1(F - 0.68 * H)})"/>`);
+    out += `<g opacity="${f1(A)}"><rect width="1920" height="1080" fill="#0B1414"/>${layerAt(c, 1, s.join(''))}</g>`;
+    // screen space: the ship's list (left) and the register (right); one row lights, and a teal arrow carries it across
+    const up = smooth(0.6, 1.2, t), row = smooth(1.6, 2.0, t), arrow = smooth(2.0, 2.8, t), copy = smooth(2.8, 3.8, t);
+    const card = (x, y, w2, h2, rot, body) => `<g opacity="${f1(up * A)}" transform="rotate(${rot}, ${x + w2 / 2}, ${y + h2 / 2})"><rect x="${x + 8}" y="${y + 10}" width="${w2}" height="${h2}" fill="#000" opacity="0.4" filter="url(#soft)"/><rect x="${x}" y="${y}" width="${w2}" height="${h2}" fill="${E3.paper}"/>${body}</g>`;
+    let lst = ''; for (let k = 0; k < 7; k++) { const yy = 150 + 40 + k * 34; lst += `<rect x="${120 + 20}" y="${yy}" width="460" height="1" fill="#2B2418" opacity="0.2"/>` + e3Script(130, yy - 6, 120, 1, 1, 130 + k).replace(/stroke="#2B2418"/g, 'stroke="#2B2418"') + `<rect x="${270 + (k * 37) % 60}" y="${yy - 14}" width="${140 + (k * 53) % 90}" height="5" fill="#2B2418" opacity="0.55"/>`; }
+    if (row > 0) lst += `<rect x="128" y="${150 + 40 + 4 * 34 - 26}" width="472" height="32" fill="${E3.teal}" opacity="${f1(0.35 * row)}"/>`;
+    out += card(110, 140, 500, 290, -2, `<rect x="110" y="140" width="500" height="34" fill="#DCCFB0"/>` + lst);
+    let reg = ''; for (let k = 0; k < 7; k++) { const yy = 190 + k * 34; reg += `<rect x="1330" y="${yy}" width="460" height="1" fill="#2B2418" opacity="0.2"/>` + (k < 4 ? `<rect x="${1350 + (k * 41) % 40}" y="${yy - 14}" width="${200 + (k * 61) % 120}" height="5" fill="#2B2418" opacity="0.55"/>` : ''); }
+    if (copy > 0) reg += `<rect x="1350" y="${190 + 4 * 34 - 14}" width="${f1(300 * copy)}" height="5" fill="#2B2418"/>`;
+    out += card(1310, 140, 500, 290, 2, `<rect x="1310" y="140" width="500" height="34" fill="#C9B98A"/>` + reg);
+    if (arrow > 0) { const a = [], n = 30; for (let i = 0; i <= n * arrow; i++) { const u = i / n; a.push([600 + 730 * u, 306 - 120 * Math.sin(Math.PI * u)]); } out += tealLine(a, A, 5) + (arrow > 0.98 ? `<path d="M1330,306 l-24,-12 l4,24 Z" fill="${E3.teal}" opacity="${f1(A)}"/>` : ''); }
+    // the name as it travels between alphabets: Hebrew letters on the family's papers, then the Hamburg clerk's German spelling
+    const m1 = smooth(2.2, 2.7, t), nameY = 760;
+    if (t > 1.0) {
+      out += `<g opacity="${f1(A * (1 - m1))}"><rect x="660" y="${nameY - 70}" width="600" height="100" fill="#0D0C09" opacity="0.85"/>${hebrewish(1180, nameY + 6, 56, 8, 140, E3.teal)}</g>`;
+      out += `<g opacity="${f1(A * m1)}"><rect x="660" y="${nameY - 70}" width="600" height="100" fill="#0D0C09" opacity="0.85"/><text x="960" y="${nameY + 6}" font-family="Mono" font-size="54" text-anchor="middle" fill="${E3.teal}" letter-spacing="3">RABINOWITSCH</text></g>`;
+    }
+    scr.push(tag(130, 120 + 0, 'SHIP\'S PASSENGER LIST · WRITTEN IN HAMBURG', up * A), tag(1180, 486, 'THE REGISTER · COPIED FROM THE LIST', up * A));
+    if (t > 2.9) scr.push(penS(540, 900, 'the clerk copied the name; he did not change it', 30, -2));
+    scr.push(tag(40, 1040, 'CASTLE GARDEN · 1884', A));
+  }
+  if (B > 0) { // later, at school: the daughter writes her new first name on her slate
+    const tt = t - 4.4, c = cam2(camAt([[0, 1.0, 960, 560], [3, 1.1, 940, 580]], tt)), F = 960, s = [], H = 520;
+    const room = `<rect x="-500" y="-400" width="3000" height="${F + 400}" fill="#24403D"/><rect x="200" y="160" width="900" height="360" fill="#132423"/><rect x="190" y="150" width="920" height="10" fill="#2B2418"/>` +
+      MAT.floor(-500, 2500, F - 52, F + 200, {kind: 'planks', base: '#3A3326', seed: 122, size: 52, vp: 960}) + `<rect x="-500" y="${F - 66}" width="3000" height="14" fill="#2B2418"/>`;
+    s.push(room + `<text x="300" y="300" font-family="Pen" font-size="80" fill="#DFE0D6" opacity="0.5">A b c</text>`);
+    for (const dx of [0, 520, 1040]) { const x = 300 + dx; s.push(MAT.shadow(x + 140, F + 4, 200, 0.4) + `<path d="M${x},${F - 300} L${x + 280},${F - 320} L${x + 280},${F - 300} Z" fill="#2B2418"/><rect x="${x}" y="${F - 300}" width="280" height="14" fill="#2B2418"/><rect x="${x + 20}" y="${F - 286}" width="12" height="286" fill="#0D0C09"/><rect x="${x + 250}" y="${F - 286}" width="12" height="286" fill="#0D0C09"/><rect x="${x - 120}" y="${F - 150}" width="110" height="12" fill="#0D0C09"/><rect x="${x - 112}" y="${F - 138}" width="10" height="138" fill="#0D0C09"/><rect x="${x - 30}" y="${F - 138}" width="10" height="138" fill="#0D0C09"/>`); }
+    const lod = lodFor(H * 0.8 * c.z), w = Math.sin(tt * 8) * 0.5 + 0.5;
+    s.push(nb('ndaughter', {x: 820 - 60, y: sitY(F, H * 0.8), h: H, scale: 0.8, d: 1, hat: 'none', wear: ['plain', 'apron'], det: lod.det, rim: {c: '#E9F0E6', a: 0.5, dx: 0.01, dy: -0.004}, an: {...POSES.sit(tt, 0.2), fArm: [112 + 5 * w, 72 + 8 * w], bArm: [125, 85], tilt: -14, expr: 'set', blink: tt % 3.2 < 0.12}}));
+    s.push(e3Person(rng(123), 300 - 60, sitY(F, H * 0.62), H, tt, '#0D0C09', {d: 1, an: POSES.sit(tt, 0.4)}) + e3Person(rng(124), 1340 - 60, sitY(F, H * 0.62), H, tt, '#0D0C09', {d: 1, an: POSES.sit(tt, 0.7)}));
+    out += `<g opacity="${f1(B)}"><rect width="1920" height="1080" fill="#0B1414"/>${layerAt(c, 1, s.join(''))}</g>`;
+    // the slate, close up (screen space): her Yiddish name crossed out, the new one written under it
+    const sl = smooth(0.4, 0.9, tt), x2 = smooth(1.0, 1.4, tt), w2 = smooth(1.4, 2.4, tt);
+    out += `<g opacity="${f1(sl * B)}" transform="rotate(-3, 1500, 420)"><rect x="1250" y="250" width="520" height="340" rx="10" fill="#7A5B22"/><rect x="1272" y="272" width="476" height="296" fill="#1C2624"/>` +
+      `<text x="1320" y="370" font-family="Pen" font-size="78" fill="#DFE0D6">Rivke</text>` + (x2 > 0 ? `<rect x="1310" y="342" width="${f1(220 * x2)}" height="5" fill="#DFE0D6"/>` : '') +
+      `<clipPath id="e3slate"><rect x="1300" y="400" width="${f1(420 * w2)}" height="140"/></clipPath><text x="1320" y="500" font-family="Pen" font-size="78" fill="#DFE0D6" clip-path="url(#e3slate)">Rebecca</text></g>`;
+    scr.push(tag(40, 1040, 'LATER: SCHOOL, BROOKLYN', B));
+    if (tt > 1.2) scr.push(penS(140, 150, 'at school, Rivke becomes Rebecca', 32, -3));
+  }
+  if (C > 0) { // later still: the father's shop sign, the name shortened
+    const tt = t - 7.0, c = cam2(camAt([[0, 1.0, 960, 540], [3, 1.06, 960, 530]], tt)), G = 900, s = [], H = 420;
+    s.push(`<rect x="-500" y="-400" width="3000" height="1500" fill="url(#e3day)"/>` + MAT.brick(260, -200, 1400, G + 200, {base: '#3A2A22', seed: 125, soot: 'top', bw: 26, bh: 13}));
+    s.push(`<rect x="420" y="${G - 420}" width="760" height="420" fill="#0F1E1D"/><rect x="440" y="${G - 400}" width="460" height="380" fill="${E3.cream}" opacity="0.18"/><rect x="960" y="${G - 400}" width="200" height="400" fill="#0B1414"/>`);
+    for (let k = 0; k < 5; k++) s.push(`<rect x="${470 + k * 86}" y="${G - 140}" width="60" height="90" fill="#2B4744"/><path d="M${470 + k * 86},${G - 140} l30,-24 l30,24" fill="#2B4744"/>`); // coats in the window
+    // the sign board over the shop: the long name, then the last letters slide away and the short one remains
+    const cut = smooth(1.0, 2.0, tt), signY = G - 520;
+    s.push(`<rect x="400" y="${signY - 70}" width="800" height="110" fill="#1A1410"/><rect x="410" y="${signY - 60}" width="780" height="90" fill="none" stroke="#C9A55A" stroke-width="3"/>`);
+    s.push(`<text x="800" y="${signY + 12}" font-family="Playfair" font-weight="900" font-size="68" text-anchor="middle" fill="#C9A55A" opacity="${f1(1 - cut)}">RABINOWITZ</text>`);
+    s.push(`<text x="800" y="${signY + 12}" font-family="Playfair" font-weight="900" font-size="68" text-anchor="middle" fill="#C9A55A" opacity="${f1(cut)}">RABIN</text>`);
+    s.push(MAT.floor(-500, 2500, G, G + 200, {kind: 'flag', base: '#3E5F5A', seed: 126, size: 60}));
+    const lod = lodFor(H * c.z);
+    s.push(nb('nfather', {x: 1300, y: G + 20, h: H, d: -1, hat: 'bowler', coat: 'sack', det: lod.det, rim: {c: E3.warm, a: 0.6, dx: -0.01, dy: -0.004}, an: {...POSES.stand(tt, 0.3), tilt: 14, fArm: [150, 120], expr: 'smile'}}));
+    out += `<g opacity="${f1(C)}"><rect width="1920" height="1080" fill="#0B1414"/>${layerAt(c, 1, s.join(''))}</g>`;
+    scr.push(tag(40, 1040, 'LATER STILL: HIS OWN SHOP', C));
+    if (tt > 1.6) scr.push(penS(140, 150, 'most name changes came later,', 32, -3), penS(140, 235, 'made by families themselves', 32, -3), tag(1300, 300, 'COMPOSITE CHARACTERS', smooth(1.6, 2.0, tt)));
+  }
+  return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, out, scr.join(''), t);
+}
+
+if (typeof window !== 'undefined') Object.assign(window, {renderSteerage, renderCastleGarden, renderMovingIn, renderSweatshop, renderLetter, renderNativism, renderNames});
 Object.assign(CLIPS, {
   ep3_steerage: {sec: 10, render: (t) => renderSteerage(t)},
   ep3_castle_garden: {sec: 10, render: (t) => renderCastleGarden(t)},
@@ -606,4 +738,5 @@ Object.assign(CLIPS, {
   ep3_sweatshop: {sec: 10, render: (t) => renderSweatshop(t)},
   ep3_letter: {sec: 10, render: (t) => renderLetter(t)},
   ep3_nativism: {sec: 10, render: (t) => renderNativism(t)},
+  ep3_names: {sec: 10, render: (t) => renderNames(t)},
 });

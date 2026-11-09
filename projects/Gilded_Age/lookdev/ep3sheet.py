@@ -10,6 +10,7 @@ SHEETS = {
   'moving_in': (['mi_wide', 'mi_stoop', 'mi_window'], ['d_street/hester_street_1897_loc2017659396.jpg', 'd_street/peddlers_carts_elizabeth_st_c1902_loc2007678128.jpg', 'f_clothing/puck_columbia_welcomes_victims_1881_loc2001696516.jpg']),
   'sweatshop': (['sw_room', 'sw_contractor', 'sw_daughter'], ['e_sweatshop/riis_sweatshop_ludlow_st_c1889_loc2002710271.jpg', 'e_sweatshop/riis_necktie_workshop_division_st_c1889_loc2002710291.jpg', 'e_sweatshop/riis_boy_pulling_threads_c1889_loc2002710250.jpg']),
   'letter': (['lt_table', 'lt_ticket', 'lt_map'], ['e_sweatshop/riis_women_sewing_elizabeth_st_c1889_loc2002711500.jpg', 'f_clothing/puck_columbia_welcomes_victims_1881_loc2001696516.jpg']),
+  'names': (['nm_desk', 'nm_school', 'nm_sign'], ['b_castle_garden/registering_emigrants_1866_loc2001697361.jpg', 'b_castle_garden/rotunda_interior_emigrant_depot_c1870s_nypl423062.jpg', 'd_street/hester_street_1897_loc2017659396.jpg']),
   'nativism': (['nv_desk', 'nv_quote', 'nv_ma'], ['h_nativism/keppler_looking_backward_1893.jpg', 'h_nativism/chinese_exclusion_act_1882_text.jpg', 'h_nativism/opper_irish_declaration_of_independence_1883_loc2012645471.jpg']),
 }
 only = sys.argv[1:]

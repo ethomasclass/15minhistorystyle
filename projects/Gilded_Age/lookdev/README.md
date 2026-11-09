@@ -287,3 +287,35 @@ our stills beside the period references). References: `../ep3/research/REFERENCE
 
 Known draft limits: the steamship is a generic type (no plan of a specific Hamburg-America ship found yet); the barge and horsecar
 are generic; the Brooklyn street has no Brooklyn-specific reference; Ma's folded arms read as hands at her chest in profile.
+
+### Round 13b (Nov 9): surfaces, the Ep 1 building, room scale, name changes
+
+Applied the user's feedback and decisions (neighbours stay wheat gold `#E2B864`; The Wasp's 1881 cartoon left out; no "No Irish
+Need Apply" window sign; Ma Kelly came over about 1870; route rail to Hamburg, steamship to New York, home town unnamed).
+
+- **Surfaces.** Every standing figure now gets a contact shadow on its floor (`e3Shadow`, built into `nb`, `kel` and `e3Person`;
+  sitting, lying and window figures skip it or take `floorY`). Ship: plank decks in perspective on the saloon, 'tween deck and hold
+  levels and on the deckhouse roof, the black deck sections below them, chairs under the first-class diners. Rotunda: flagstones
+  running back to the wall. Street: flagstone sidewalk, curb, cobbles. Rooms: a back wall with a baseboard, worn boards receding to
+  it, a plaster ceiling with a crack and a stain, the cut side walls and slabs in black (`e3Room`).
+- **`ep3_moving_in` rebuilt on Episode 1's tenement.** The row is drawn with `street.js`'s own `tenement()` (same facade colours,
+  bracketed cornice, three windows a floor with lintels, fire escape and washing, the saloon's awning at street level, doorway and
+  stoop) and `stFar()` behind; coordinates are street.js's. The Kellys' building has five floors of flats over the saloon as in
+  `cutaway.js`, and Ma Kelly is at the middle front window of the third floor, where cutaway.js puts the Kellys. The family walks
+  from the wagon, climbs the stoop's four steps and goes in at the door. Horsecar and wagon rescaled to the facade.
+- **Folded arms that read.** `kel(..., {fold: true})` poses the arms (elbow forward, forearm back across the chest) and draws
+  `foldedArms()` over them with a darker crease, so the fold reads in silhouette.
+- **Room scale.** `RM`/`e3Room()`: a front room about 12 ft wide with an 8 1/2 ft ceiling at about 84 px to the foot (a man 480 px).
+  `ep3_sweatshop` is now that room: stove and pressing board by the door, the father pressing, two treadle machines nearly touching
+  (the daughter and the mother at them), the bed against the back wall heaped with cloth, coats strung just under the ceiling, cut
+  cloth piled on the floor, the boy pulling threads at their feet, the contractor coming in through the door. The letter's kitchen
+  uses the same room (stove, airshaft window, shelf, table with samovar, candlesticks and lamp).
+- **Castle Garden.** The barge is 1.45x bigger and lands in view at the depot pier.
+- **`ep3_nativism`.** The ending note now reads "in 1883, Puck was still mocking the Irish" (Opper's cover is 1883), then "now Ma
+  Kelly watches the newcomers", on the new window.
+- **New: `ep3_names` (10 s).** At the Castle Garden desk the clerk copies a row from the ship's passenger list ("WRITTEN IN
+  HAMBURG") into the register ("COPIED FROM THE LIST"), a teal arc carrying it across, while the name changes from unreadable
+  Hebrew-style letters to the Hamburg clerk's spelling, RABINOWITSCH ("the clerk copied the name; he did not change it"). Later,
+  at school, the daughter crosses out Rivke on her slate and writes Rebecca. Later still, the father's shop sign RABINOWITZ becomes
+  RABIN ("most name changes came later, made by families themselves"). The surname is invented for the composite family.
+  Sources and the script wording are in `../ep3/research/REFERENCES.md`.
