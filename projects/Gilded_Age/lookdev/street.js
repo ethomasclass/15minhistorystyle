@@ -1,4 +1,4 @@
-// A Lower East Side tenement street at dusk, about 1883: Michael Kelly walks home from the refinery and the camera tracks him.
+// A Brooklyn tenement street (Williamsburg) at dusk, about 1883: Michael Kelly walks home from the refinery and the camera tracks him.
 // Drawn in code with the same rig, palette (look 1) and detail levels as the bridge scene (scene.js must load first).
 //
 // Planes, back to front: sky; far chimneys and a steeple (0.25); the tenement row across the street (0.5); the street with a

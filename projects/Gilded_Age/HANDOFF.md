@@ -154,7 +154,7 @@ on your computer may not be able to open the link.
 Its structure, which later episodes should copy:
 
 1.  **Cold open (family):** Brooklyn Bridge opens, May 24, 1883; Michael
-    and the Lower East Side tenement.
+    and the Kellys' Brooklyn tenement (Williamsburg, near the sugar refineries).
 
 2.  **What was the Gilded Age (history):** Twain and Warner, tariffs,
     laissez-faire, the transcontinental railroad.

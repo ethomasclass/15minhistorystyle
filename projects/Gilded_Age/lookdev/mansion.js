@@ -587,7 +587,7 @@ function renderBallpark({t, cam, quiet = false}) {
 Object.assign(CLIPS, {ballpark: {sec: 9, render: (t) => renderBallpark({t, cam: {z: 1.0 + 0.02 * t, ux: 1000 + 30 * t, uy: 600}})}});
 if (typeof window !== 'undefined') Object.assign(window, {renderBallpark});
 
-/* ---------- s8: the Kellys' flat, Lower East Side, about 1883-84 (the contrast to the mansion) ---------- */
+/* ---------- s8: the Kellys' flat, Brooklyn, about 1883-84 (the contrast to the mansion) ---------- */
 // One cramped room of the Kellys' third-floor flat (the same kitchen as cutaway.js), after Jacob Riis's flash photographs:
 // faded, peeling wallpaper; a cast-iron coal stove with its pipe into the chimney; pots, a basket and a washtub; one small
 // kerosene lamp; the only window opens on the airshaft, a brick wall an arm's length away. The mother sews piecework (shirts,

@@ -1,4 +1,4 @@
-// The tenement cutaway: a six-storey Lower East Side tenement, about 1883, cut through from the street (left) to the back yard
+// The tenement cutaway: a six-storey Brooklyn tenement (the Kellys', Williamsburg), about 1883, cut through from the street (left) to the back yard
 // (right), so every room shows at once. Built with rig.js (load rig.js first). Scale: 13 px to the foot at zoom 1.
 //
 // Floors, top to bottom: the roof (laundry, children, chimneys); five floors of flats, each a "railroad" flat at the front and one
