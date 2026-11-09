@@ -13,7 +13,7 @@ if [ ! -f out/$KEY/f$(printf %04d $((N - 1))).png ]; then
   P=4; STEP=$(( (N + P - 1) / P ))
   for i in $(seq 0 $((P - 1))); do node render_edit.mjs $KEY out/$KEY $((i * STEP)) $(( (i + 1) * STEP )) & done; wait
 fi
-lufs() { ffmpeg -nostats -i "$1" -t $DUR -af ebur128 -f null - 2>&1 | awk '/Integrated loudness/{f=1} f&&/I:/{print $2; exit}'; }
+lufs() { ffmpeg -nostats -i "$1" -af ebur128 -f null - 2>&1 | awk '/Integrated loudness/{f=1} f&&/I:/{print $2; exit}'; }
 LV=$(lufs $WAV); LM=$(lufs $MUS)
 GAIN=$(python3 -c "print(round($LV - 17 - $LM, 2))")
 FO=$(python3 -c "print($DUR - 2.0)")
@@ -21,4 +21,8 @@ ffmpeg -v error -y -framerate 30 -i out/$KEY/f%04d.png -i $WAV -i $MUS -filter_c
   "[2]atrim=0:$DUR,asetpts=PTS-STARTPTS,volume=${GAIN}dB,afade=t=in:d=0.5,afade=t=out:st=$FO:d=2[m];[1][m]amix=inputs=2:normalize=0:duration=longest,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[a]" \
   -map 0:v -map "[a]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -t $DUR -movflags +faststart ../review/$CH.mp4
 rm -rf "out/${KEY:?}"
+# one-pass loudnorm lands a little low on speech: measure the master and trim the audio to -14 LUFS (video copied)
+for pass in 1 2; do I=$(lufs ../review/$CH.mp4); D=$(python3 -c "print(round(-14 - $I, 2))")
+ffmpeg -v error -y -i ../review/$CH.mp4 -c:v copy -af "volume=${D}dB,alimiter=limit=0.84:level=false" -c:a aac -b:a 192k -movflags +faststart ../review/$CH.tmp.mp4
+mv ../review/$CH.tmp.mp4 ../review/$CH.mp4; done; echo "master $(lufs ../review/$CH.mp4) LUFS"
 echo "voice $LV LUFS, music $LM LUFS, bed gain ${GAIN} dB -> ../review/$CH.mp4"
