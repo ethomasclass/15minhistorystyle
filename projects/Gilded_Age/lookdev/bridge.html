@@ -23,6 +23,7 @@
 <script src="bessemer.js"></script>
 <script src="mansion.js"></script>
 <script src="ep2_more.js"></script>
+<script src="ep3.js"></script>
 <script src="text.js"></script>
 </head><body>
 <div id="stage"><div id="scene"></div><div id="ov"></div></div>
@@ -30,7 +31,7 @@
   window.draw = (cfg) => {
     document.getElementById('scene').innerHTML = cfg.ball ? renderBall(cfg) : cfg.castsheet ? renderCastSheet() : cfg.cut ? renderCutaway(cfg) : cfg.faces ? renderFaces(cfg.look) : cfg.ladder ? renderLadder(cfg.look) : cfg.clip ? renderClipFrame(cfg.clip, cfg.t) : renderScene(cfg);
     document.getElementById('ov').innerHTML = cfg.overlay ? OVERLAYS[cfg.overlay](cfg) : '';
-    return document.fonts.ready.then(() => true);
+    return Promise.all([document.fonts.ready, window.E3_PRELOAD || true]).then(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => ok(true)))));
   };
 </script>
 </body></html>
