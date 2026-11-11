@@ -26,6 +26,7 @@ const CSS = `
 @font-face{font-family:Mono;src:url(${F}IBMPlexMono.woff2)}
 body{margin:0;background:#000}#s{position:relative;width:1280px;height:720px;overflow:hidden;background:#0d0c09}
 #s img{position:absolute;left:-5px;top:0;width:1290px;height:720px}
+.glow{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse 430px 360px at 70% 26%,rgba(47,224,196,.42),rgba(47,224,196,0) 72%),radial-gradient(ellipse 300px 240px at 6% 8%,rgba(47,224,196,.30),rgba(47,224,196,0) 70%),radial-gradient(ellipse 520px 300px at 88% 100%,rgba(255,111,97,.55),rgba(255,111,97,0) 70%),radial-gradient(ellipse 420px 260px at 20% 100%,rgba(255,159,28,.30),rgba(255,159,28,0) 70%)}
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 45%)}
 .tag{position:absolute;left:64px;top:44px;font:22px Mono;letter-spacing:4px;color:#E2B864}
 .big{position:absolute;left:58px;font:800 150px/0.9 Inter;color:#F4EFE6;letter-spacing:-5px;text-shadow:0 6px 24px rgba(0,0,0,.9)}
@@ -37,6 +38,7 @@ const base = (inner) => `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class
 const JOBS = {
   ep1_A_who_paid: base(`<div class="big" style="top:150px">WHO</div><div class="tape" style="top:300px">PAID?</div>`),
   ep1_C_series: `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class="shade"></div><div class="series"><b>The Gilded Age</b><i>PART 1</i></div><div class="big" style="top:150px;font-size:200px;letter-spacing:-7px">WHO</div><div class="tape" style="top:340px;font-size:192px;letter-spacing:-7px;padding:4px 30px 18px">PAID?</div></div>`,
+  ep1_D_glow: `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class="shade"></div><div class="glow"></div><img src="img/ep1_bust_cut.png"><div class="series"><b>The Gilded Age</b><i>PART 1</i></div><div class="big" style="top:150px;font-size:200px;letter-spacing:-7px">WHO</div><div class="tape" style="top:340px;font-size:192px;letter-spacing:-7px;padding:4px 30px 18px">PAID?</div></div>`,
   ep1_B_family: base(`<div class="big" style="top:110px">WHO</div><div class="tape" style="top:255px">PAID?</div>${fam}`),
 };
 const browser = await chromium.launch();
