@@ -12,6 +12,7 @@ Each chapter is a list of shots drawn with the look-dev kit (`../../lookdev/`), 
 | `render_edit.mjs` | `node render_edit.mjs ch01 <dir> [from] [to]` renders frames; `--stills 3,9.5 <prefix>` renders check stills |
 | `build_ch.sh` | `./build_ch.sh ch01 ga_gilded_theme 0.105`, or several cues `cue@volume@start@offset[@end]`: renders in 4 parallel chunks, mixes narration + music, writes `review/chNN_720p.mp4`, deletes the frames (about 3 GB a chapter) |
 | `assemble.sh` | Chapter 1, the title card, chapters 2 to 9, mastered to -14 LUFS: `review/ep1_full_720p.mp4` |
+| `RES=1080` | Either script at full size (no scale, CRF 18): `RES=1080 ./build_ch.sh ...` writes `review/chNN_1080p.mp4` (git-ignored), `RES=1080 ./assemble.sh` writes the master `../renders/ep1_full_1080p.mp4` (Git LFS; no preview). Default `RES=720` is unchanged |
 | `../tools/bust_cut.py` | Portrait to aged bust cut-out (rembg; no border, mount or oval; warm tone, lifted blacks, grain, dust, faint scratches; `--close` fills notches) |
 | `../tools/crease.py` | Archival print to an aged, creased, frameless print (black and white) |
 
@@ -19,6 +20,23 @@ Music per chapter (bed 17 LU under the voice, `../script/MUSIC.md`): ch01 `ga_gi
 ch03 `ga_age_of_steel` 0.099 · ch04 `ga_sugar_house` 0.084 · ch05 `ga_weavers_son` 0.102 · ch06 `ga_the_squeeze` 0.083 ·
 ch07 the squeeze's tail, then `ga_kellys` 0.097 from "That night" · ch08 `ga_heroes_or_villains` 0.111 ·
 ch09 `ga_bad_wire` 0.115 to "So how did America", then `ga_gilded_theme` 0.105 from 62.7 s in (its solo-piano close on the end).
+
+The exact builds (the 720p and 1080p mixes match these bit for bit; prefix `RES=1080` for the master):
+
+```
+./build_ch.sh ch01 ga_gilded_theme 0.105
+./build_ch.sh ch02 ga_noon_twice 0.107
+./build_ch.sh ch03 ga_age_of_steel 0.099
+./build_ch.sh ch04 ga_sugar_house 0.084
+./build_ch.sh ch05 ga_weavers_son 0.102
+./build_ch.sh ch06 ga_the_squeeze 0.083
+./build_ch.sh ch07 ga_the_squeeze@0.083@0@158.5@11 ga_kellys@0.097@23.94@0
+./build_ch.sh ch08 ga_heroes_or_villains 0.111
+./build_ch.sh ch09 ga_bad_wire@0.115@0@0@55.5 ga_gilded_theme@0.105@55.5@62.7
+./assemble.sh
+```
+
+Renders: `../renders/ep1_full_1080p.mp4` is the 1080p master (1920x1080, 30 fps, H.264 CRF 18, AAC 192k, -14 LUFS), tracked with Git LFS.
 
 Rules kept here:
 - **No white borders on any image.** Portraits are bust cut-outs on the desk with a shadow; prints are frameless and creased; never a mount, card edge, oval or page margin. Everything is black and white (the land-grant map's grants come back as a teal overlay).

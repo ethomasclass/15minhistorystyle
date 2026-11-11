@@ -4,8 +4,11 @@
 #   ./build_ch.sh ch09 ga_bad_wire@0.115@0@0@55.5 ga_gilded_theme@0.105@55.5@62.7   several cues: cue@volume@start@offset[@end]
 #     start = where the cue enters in the chapter (s); offset = where in the cue file it starts (s); end = where it stops (default: chapter end)
 #   -> review/<ch>_720p.mp4 (frames in out/<ch>/ are deleted after encoding)
+#   RES=1080 ./build_ch.sh ...   full-size master chapter, no scale, CRF 18 -> review/<ch>_1080p.mp4 (same mix; default RES=720)
 set -e
 cd "$(dirname "$0")"
+RES=${RES:-720}
+case $RES in 720) VF=(-vf scale=1280:720); CRF=20 ;; 1080) VF=(); CRF=18 ;; *) echo "RES must be 720 or 1080" >&2; exit 1 ;; esac
 KEY=$1; shift
 if [ $# -eq 2 ] && [[ "$1" != *@* ]]; then set -- "$1@$2@0@0"; fi
 CH=$(basename $(ls ../public/audio/${KEY}_*.words.json) .words.json)
@@ -27,6 +30,6 @@ for spec in "$@"; do
   MIX+="[m$k]"; k=$((k + 1))
 done
 FL+="${MIX}amix=inputs=$((k - 1)):normalize=0[a]"
-ffmpeg -v error -y "${ARGS[@]}" -filter_complex "$FL" -map 0:v -map "[a]" -vf scale=1280:720 -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k -t $DUR review/${KEY}_720p.mp4
+ffmpeg -v error -y "${ARGS[@]}" -filter_complex "$FL" -map 0:v -map "[a]" "${VF[@]}" -c:v libx264 -pix_fmt yuv420p -crf $CRF -c:a aac -b:a 160k -t $DUR review/${KEY}_${RES}p.mp4
 rm -rf "out/${KEY:?}"   # frames are ~3 GB a chapter: keep only the video
-echo "review/${KEY}_720p.mp4"
+echo "review/${KEY}_${RES}p.mp4"

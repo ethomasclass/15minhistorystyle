@@ -13,7 +13,8 @@ Built the same way as Episode 1 (`../../ep1/edit/README.md`): each chapter is a 
 | `brand.js` | The 2 s mark snap and the 20 s end screen (as Ep 1) |
 | `render_edit.mjs` | `node render_edit.mjs ch01 --stills 3,9.5 <prefix>` for check stills; frames otherwise |
 | `build_ch.sh` | As Ep 1; a cue not in `../public/music/` is taken from `../../ep1/public/music/` (the series theme) |
-| `assemble.sh` | ch01, title, ch02, mark snap before each of ch03 to ch08, end screen; two-pass loudnorm to -14 LUFS; 540p preview |
+| `assemble.sh` | ch01, title, ch02, mark snap before each of ch03 to ch08, end screen; two-pass loudnorm to -14 LUFS, +2.4 dB into a limiter; 540p preview |
+| `RES=1080` | Either script at full size (no scale, CRF 18): `RES=1080 ./build_ch.sh ...` writes `review/chNN_1080p.mp4` (git-ignored), `RES=1080 ./assemble.sh` writes the master `../renders/ep2_full_1080p.mp4` (Git LFS; no preview). Default `RES=720` is unchanged |
 | `../tools/` | Copies of Ep 1's `bust_cut.py`, `crease.py`, `prop_cut.py`, `prop_cut_black.py`, `prop_fix.py`, writing to `../public/img/desk/` |
 
 ## Music (beds 17 LU under the voice: volume = 10^((-35 - cue LUFS) / 20))
@@ -27,7 +28,7 @@ Built the same way as Episode 1 (`../../ep1/edit/README.md`): each chapter is a 
 | ch05 Survival of the Fittest | `ga_fittest` | -16.5 | 0.119 |
 | ch06 Sunday | `ga_sunday` | -15.3 | 0.104 |
 | ch07 The Gospel of Wealth | `ga_gospel_of_wealth` | -14.2 | 0.091 |
-| ch08 Rags to Riches | `ga_gospel_of_wealth` from 1:15 to "So, what did the richest people" (31.6 s), then `ga_gilded_theme` from 66.2 s in | -15.4 | 0.105 |
+| ch08 Rags to Riches | `ga_gospel_of_wealth` from 1:15 to "So, what did the richest people" (31.6 s), then `ga_gilded_theme` from 62.28 s in (moved back 3.9 s with the held tail, so the end screen still picks it up at 99.8 s) | -15.4 | 0.105 |
 | end screen | `ga_gilded_theme` carries on from 99.8 s, so its final chord lands on the end screen | | 0.105 |
 
 Placement is from the loudness profile of each cue (short-term LUFS every 5 s), not from listening; check by ear.
@@ -40,9 +41,13 @@ Placement is from the loudness profile of each cue (short-term LUFS every 5 s), 
 ./build_ch.sh ch05 ga_fittest 0.119
 ./build_ch.sh ch06 ga_sunday 0.104
 ./build_ch.sh ch07 ga_gospel_of_wealth 0.091
-./build_ch.sh ch08 ga_gospel_of_wealth@0.091@0@75@31.6 ga_gilded_theme@0.105@31.6@66.18@66.72
+./build_ch.sh ch08 ga_gospel_of_wealth@0.091@0@75@31.6 ga_gilded_theme@0.105@31.6@62.28@70.62
 ./assemble.sh
 ```
+
+These are the builds of the approved (re-rendered, Nov 8) chapters: their mixes match `review/*_720p.mp4` bit for bit. Prefix
+`RES=1080` for the master. Renders: `../renders/ep2_full_1080p.mp4` is the 1080p master (1920x1080, 30 fps, H.264 CRF 18,
+AAC 192k, about -14 LUFS), tracked with Git LFS.
 
 ## Desk assets (`../public/img/desk/`)
 
