@@ -22,3 +22,5 @@ projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short2.mp4 filter=lfs diff=lfs
 projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short3.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short4.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short5.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Gilded_Age/ep1/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Gilded_Age/ep2/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
