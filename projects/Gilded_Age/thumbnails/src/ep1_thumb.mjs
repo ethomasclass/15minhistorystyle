@@ -33,9 +33,32 @@ body{margin:0;background:#000}#s{position:relative;width:1280px;height:720px;ove
 .series{position:absolute;left:62px;top:40px;display:flex;align-items:center;gap:18px}
 .series b{font:400 60px/1.1 Abril;letter-spacing:1px;background:linear-gradient(172deg,#8a5a12 0%,#f7e39a 22%,#c8902b 38%,#fff6cf 50%,#b47a1e 63%,#e9c46a 80%,#7a4d10 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0.6px rgba(255,240,190,.35);filter:drop-shadow(0 2px 0 #3a2506) drop-shadow(0 6px 14px rgba(0,0,0,.9))}
 .series i{font:600 26px/1 Mono;font-style:normal;color:#2a1a04;background:linear-gradient(172deg,#b47a1e,#f7e39a 45%,#c8902b 60%,#e9c46a);box-shadow:0 3px 10px rgba(0,0,0,.7);padding:8px 12px 6px;letter-spacing:3px}
+@font-face{font-family:Pen;src:url(${F}NanumPenScript.woff2)}
+#s .bg{position:absolute;left:-150px;top:-40px;width:1500px;height:970px;filter:grayscale(1) contrast(1.15) brightness(.62)}
+.wash{position:absolute;inset:0;background:#2FE0C4;mix-blend-mode:color;opacity:.22}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse 900px 600px at 55% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.75) 100%),linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,0) 50%)}
+.grain{position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay}
+#s .bust{position:absolute;left:-10px;top:58px;width:1420px;height:792px;filter:drop-shadow(4px 0 0 #2FE0C4) drop-shadow(-4px 0 0 #2FE0C4) drop-shadow(0 4px 0 #2FE0C4) drop-shadow(0 -4px 0 #2FE0C4) drop-shadow(0 10px 30px rgba(0,0,0,.8))}
+#s .logo{position:absolute;left:26px;top:22px;width:96px;height:96px}
+.strip{position:absolute;background:#FF9F1C;color:#111;font:400 150px/1 Abril;padding:14px 40px 24px;transform:rotate(-2deg);box-shadow:0 10px 26px rgba(0,0,0,.6)}
+.hand{position:absolute;font:400 96px/1 Pen;color:#2FE0C4;text-shadow:0 0 6px #111,0 3px 0 #111,2px 0 0 #111,-2px 0 0 #111}
+.sm{position:absolute;font:400 34px/1 Abril;letter-spacing:1px;background:linear-gradient(172deg,#8a5a12 0%,#f7e39a 22%,#c8902b 38%,#fff6cf 50%,#b47a1e 63%,#e9c46a 80%,#7a4d10 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a2506) drop-shadow(0 4px 10px rgba(0,0,0,.9))}
 .tape{position:absolute;left:52px;transform:rotate(-2.5deg);background:#FF9F1C;color:#111;font:800 150px/1 Inter;letter-spacing:-5px;padding:6px 30px 16px;box-shadow:0 10px 30px rgba(0,0,0,.6)}`;
 const base = (inner) => `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class="shade"></div><div class="tag">THE GILDED AGE · 1</div>${inner}</div>`;
+
+const torn = (seed) => { let r = seed; const rnd = () => ((r = (r * 9301 + 49297) % 233280) / 233280);
+  const pts = []; for (let x = 0; x <= 100; x += 4) pts.push(`${x}% ${rnd() * 7}%`);
+  for (let y = 0; y <= 100; y += 20) pts.push(`${100 - rnd() * 1.5}% ${y}%`);
+  for (let x = 100; x >= 0; x -= 4) pts.push(`${x}% ${100 - rnd() * 7}%`);
+  for (let y = 100; y >= 0; y -= 20) pts.push(`${rnd() * 1.5}% ${y}%`);
+  return `clip-path:polygon(${pts.join(',')})`; };
+const grain = `<svg class="grain" width="1280" height="720"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1280" height="720" filter="url(#n)"/></svg>`;
+const brand = (inner) => `<div id="s"><img class="bg" src="img/ep1_bridge_bw.jpg"><div class="wash"></div><div class="vig"></div>${grain}
+  <img class="bust" src="img/ep1_bust_cut2.png"><img class="logo" src="../../../../brand/logo/clock-transparent.png">
+  <div class="sm" style="left:132px;top:52px">The Gilded Age · Part 1</div>${inner}</div>`;
 const JOBS = {
+  ep1_E_who_paid: brand(`<div class="hand" style="left:62px;top:322px;transform:rotate(-3deg)">richer than kings...</div><div class="strip" style="left:36px;top:420px;font-size:136px;padding:12px 34px 22px;${torn(7)}">WHO PAID?</div>`),
+  ep1_F_kings: brand(`<div class="strip" style="left:30px;top:255px;font-size:100px;padding:12px 30px 20px;${torn(3)}">RICHER THAN</div><div class="strip" style="left:90px;top:375px;font-size:150px;transform:rotate(1.5deg);${torn(11)}">KINGS</div><div class="hand" style="left:150px;top:560px;transform:rotate(-3deg)">so who paid?</div>`),
   ep1_A_who_paid: base(`<div class="big" style="top:150px">WHO</div><div class="tape" style="top:300px">PAID?</div>`),
   ep1_C_series: `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class="shade"></div><div class="series"><b>The Gilded Age</b><i>PART 1</i></div><div class="big" style="top:150px;font-size:200px;letter-spacing:-7px">WHO</div><div class="tape" style="top:340px;font-size:192px;letter-spacing:-7px;padding:4px 30px 18px">PAID?</div></div>`,
   ep1_D_glow: `<div id="s"><img src="img/ep1_bust_flow.jpg"><div class="shade"></div><div class="glow"></div><img src="img/ep1_bust_cut.png"><div class="series"><b>The Gilded Age</b><i>PART 1</i></div><div class="big" style="top:150px;font-size:200px;letter-spacing:-7px">WHO</div><div class="tape" style="top:340px;font-size:192px;letter-spacing:-7px;padding:4px 30px 18px">PAID?</div></div>`,
