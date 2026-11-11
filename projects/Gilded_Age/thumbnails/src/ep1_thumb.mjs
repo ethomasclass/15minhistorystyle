@@ -39,7 +39,7 @@ body{margin:0;background:#000}#s{position:relative;width:1280px;height:720px;ove
 .vig{position:absolute;inset:0;background:radial-gradient(ellipse 900px 600px at 55% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.75) 100%),linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,0) 50%)}
 .grain{position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay}
 #s .bust{position:absolute;left:-10px;top:58px;width:1420px;height:792px;filter:drop-shadow(4px 0 0 #2FE0C4) drop-shadow(-4px 0 0 #2FE0C4) drop-shadow(0 4px 0 #2FE0C4) drop-shadow(0 -4px 0 #2FE0C4) drop-shadow(0 10px 30px rgba(0,0,0,.8))}
-#s .logo{position:absolute;left:26px;top:22px;width:96px;height:96px}
+#s .logo{position:absolute;left:36px;top:32px;width:300px;height:45px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.7))}
 .strip{position:absolute;background:#FF9F1C;color:#111;font:400 150px/1 Abril;padding:14px 40px 24px;transform:rotate(-2deg);box-shadow:0 10px 26px rgba(0,0,0,.6)}
 .hand{position:absolute;font:400 96px/1 Pen;color:#2FE0C4;text-shadow:0 0 6px #111,0 3px 0 #111,2px 0 0 #111,-2px 0 0 #111}
 .sm{position:absolute;font:400 34px/1 Abril;letter-spacing:1px;background:linear-gradient(172deg,#8a5a12 0%,#f7e39a 22%,#c8902b 38%,#fff6cf 50%,#b47a1e 63%,#e9c46a 80%,#7a4d10 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a2506) drop-shadow(0 4px 10px rgba(0,0,0,.9))}
@@ -54,8 +54,8 @@ const torn = (seed) => { let r = seed; const rnd = () => ((r = (r * 9301 + 49297
   return `clip-path:polygon(${pts.join(',')})`; };
 const grain = `<svg class="grain" width="1280" height="720"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1280" height="720" filter="url(#n)"/></svg>`;
 const brand = (inner) => `<div id="s"><img class="bg" src="img/ep1_bridge_bw.jpg"><div class="wash"></div><div class="vig"></div>${grain}
-  <img class="bust" src="img/ep1_bust_cut2.png"><img class="logo" src="../../../../brand/logo/clock-transparent.png">
-  <div class="sm" style="left:132px;top:52px">The Gilded Age · Part 1</div>${inner}</div>`;
+  <img class="bust" src="img/ep1_bust_cut2.png"><img class="logo" src="../../../../brand/chunk-history/final/chunk-history-horizontal.svg">
+  <div class="sm" style="left:38px;top:94px">The Gilded Age · Part 1</div>${inner}</div>`;
 const JOBS = {
   ep1_E_who_paid: brand(`<div class="hand" style="left:62px;top:322px;transform:rotate(-3deg)">richer than kings...</div><div class="strip" style="left:36px;top:420px;font-size:136px;padding:12px 34px 22px;${torn(7)}">WHO PAID?</div>`),
   ep1_F_kings: brand(`<div class="strip" style="left:30px;top:255px;font-size:100px;padding:12px 30px 20px;${torn(3)}">RICHER THAN</div><div class="strip" style="left:90px;top:375px;font-size:150px;transform:rotate(1.5deg);${torn(11)}">KINGS</div><div class="hand" style="left:150px;top:560px;transform:rotate(-3deg)">so who paid?</div>`),
