@@ -47,7 +47,7 @@ Placement is from the loudness profile of each cue (short-term LUFS every 5 s), 
 
 These are the builds of the approved (re-rendered, Nov 8) chapters: their mixes match `review/*_720p.mp4` bit for bit. Prefix
 `RES=1080` for the master. Renders: `../renders/ep2_full_1080p.mp4` is the 1080p master (1920x1080, 30 fps, H.264 CRF 18,
-AAC 192k, about -14 LUFS), tracked with Git LFS.
+AAC 192k, -13.9 LUFS, true peak -1.0 dBFS), tracked with Git LFS.
 
 ## Desk assets (`../public/img/desk/`)
 

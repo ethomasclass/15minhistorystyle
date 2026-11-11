@@ -36,7 +36,7 @@ The exact builds (the 720p and 1080p mixes match these bit for bit; prefix `RES=
 ./assemble.sh
 ```
 
-Renders: `../renders/ep1_full_1080p.mp4` is the 1080p master (1920x1080, 30 fps, H.264 CRF 18, AAC 192k, -14 LUFS), tracked with Git LFS.
+Renders: `../renders/ep1_full_1080p.mp4` is the 1080p master (1920x1080, 30 fps, H.264 CRF 18, AAC 192k), tracked with Git LFS. Its audio is bit-identical to the 720p master: the two-pass loudnorm lands -15.2 LUFS integrated, true peak -1.1 dBFS (it holds the -1.5 dBTP ceiling; Ep 2 adds a +2.4 dB limiter step for this, Ep 1 does not).
 
 Rules kept here:
 - **No white borders on any image.** Portraits are bust cut-outs on the desk with a shadow; prints are frameless and creased; never a mount, card edge, oval or page margin. Everything is black and white (the land-grant map's grants come back as a teal overlay).
