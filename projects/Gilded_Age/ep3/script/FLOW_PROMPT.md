@@ -211,3 +211,33 @@ BACKGROUND: isolated on a plain, flat, pure white background. No floor, no table
 
 RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere; any printing or engraving on paper or metal is shown as illegible decorative flourishes or left blank. No people, no hands. One object only (or the exact group described). Not a drawing, not a painting, not a 3D render.
 ```
+
+## Re-runs (Nov 11, 2026)
+
+Twelve props came back clean and are in `../public/img/props_raw/`. Two need another take:
+
+### `p02_buttonhook_chalk` (re-run)
+*The first take showed a large blade with a hook, like a hay hook. A medical buttonhook is small and slim.*
+
+```
+A small, slim steel buttonhook of the kind doctors used at Ellis Island in the 1890s to turn back eyelids: a thin polished steel shaft about the length of a pencil, bent into a small, narrow hook at one end, with a plain turned bone handle at the other. It lies on its side beside a short stub of white blackboard chalk. Only these two small objects, close together.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus from front to back, true-to-life materials and wear (scratches, patina, dents, faded paint, grain in wood, fibres in paper). Natural, slightly muted colours. Shot straight on or at a gentle three-quarter angle, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure black background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the stated year and place; nothing modern, no plastic, no modern screws, labels or barcodes. No text of any kind: no letters, words, numbers, dates, prices, brand names, signatures or monograms anywhere. No people, no hands. Not a knife, not a blade, not a tool for hay or leather. Not a drawing, not a painting, not a 3D render.
+```
+
+### `p05_letter_ticket` (re-run)
+*The first take had readable words ("STEAMSHIP TICKET", "Dear ...") and half-readable fake handwriting, which looks wrong close up.*
+
+```
+An opened 1890s envelope with a folded letter and a folded ticket tucked inside, worn soft cream paper, creased and slightly stained. The letter's handwriting is shown only as soft, blurred, out-of-focus lines of brown ink with no readable letters at all. The ticket is a plain folded card with only faint decorative border lines, completely blank. The stamp is a plain small rectangle with a faded engraved portrait shape and no printing.
+
+STYLE: a high-resolution studio photograph of a real antique object, like a museum collection catalogue photo. Soft, even, shadowless light from above. Sharp focus on the paper edges, true-to-life materials and wear (creases, foxing, fibres in paper). Natural, slightly muted colours. Shot from slightly above, the whole object in frame with a wide empty margin all around.
+
+BACKGROUND: isolated on a plain, flat, pure black background. No floor, no table, no cast shadow, no reflection, no other objects.
+
+RULES: historically accurate for the 1890s; nothing modern. ABSOLUTELY NO TEXT: no letters, words, numbers, dates, names, postmarks or printing anywhere, not even partly readable. No people, no hands. Not a drawing, not a painting, not a 3D render.
+```
