@@ -132,58 +132,60 @@ function renderPaleMap(t) {
 const XP_SUN = '../ep3/public/img/f_letters/steamship_ads_prepaid_steerage_the_sun_jun11_1884_loc_sn83030272.jpg';
 if (typeof window !== 'undefined') window.E3_PRELOAD = Promise.all([window.E3_PRELOAD, new Promise((ok) => { const im = new Image(); im.onload = im.onerror = () => ok(true); im.src = XP_SUN; })]);
 function renderChain(t) {
-  const G = 470, west = [[1330, 300], [565, 300]], top = xpCurve(west[0], west[1], 110), bot = xpCurve([470, 540], [1400, 540], 110);
-  const s = [xpBoard()];
+  // A numbered story, left to right in time. Westbound arcs stack top to bottom in the order they happen (1 Yankel, 4 the family,
+  // 5 a cousin), each labelled just above its own middle when it lands; the eastbound arc (3) runs under the sea, labelled below.
+  const G = 470, s = [xpBoard()], scr = [];
+  const arc1 = xpCurve([1300, 215], [570, 215], 60), arc4 = xpCurve([1300, 325], [590, 325], 60), arc5 = xpCurve([1300, 425], [620, 425], 60);
+  const arc3 = xpCurve([560, 565], [1400, 565], 60);
   // the two ends: New York (left) and the old country (right), the ocean between
   s.push(icon('city', 150, G - 176, 2.3, '#1F3A37') + icon('city', 380, G - 150, 1.9, '#1F3A37'));
   s.push(xpHouse(1520, G, 1.6, '#1F3A37'));
-  for (let i = 0; i < 4; i++) s.push(`<path d="M${720 + (i % 2) * 40},${G - 40 + i * 22} ${[...Array(9)].map((_, j) => `q20,-10 40,0 q20,10 40,0`).join(' ')}" fill="none" stroke="#2B4744" stroke-width="3" opacity="0.8"/>`);
+  for (let i = 0; i < 4; i++) s.push(`<path d="M${720 + (i % 2) * 40},${G - 40 + i * 22} ${[...Array(9)].map(() => `q20,-10 40,0 q20,10 40,0`).join(' ')}" fill="none" stroke="#2B4744" stroke-width="3" opacity="0.8"/>`);
   s.push(`<rect x="110" y="${G}" width="560" height="3" fill="#2B4744"/><rect x="1250" y="${G}" width="560" height="3" fill="#2B4744"/>`);
   const fig2 = (name, x, d, h, o = {}) => nb(name, {x, y: G, h, d, det: 0, hat: o.hat, coat: o.coat, scale: o.scale, an: {...POSES.stand(t, x / 300), ...(o.an || {})}});
-  // Yankel: home until 0.9 s, then the crossing (top arc), then New York; he works at a pressing board
-  const uY = xpIn(0.9, t, 1.6), yArr = smooth(2.3, 2.6, t);
-  if (uY < 0.05) s.push(fig2('nfather', 1340, -1, 210, {hat: 'cap', coat: 'frock'}));
-  s.push(xpArrow(top, uY, {w: 6}));
-  if (uY > 0.02 && uY < 0.98) { const p = xpAt(top, uY); s.push(xpPerson(p[0], p[1] - 6, 56, XP.gold)); }
+  // 1. Yankel goes first (1882)
+  const u1 = xpIn(0.9, t, 1.6), yArr = smooth(2.3, 2.6, t);
+  if (u1 < 0.05) s.push(fig2('nfather', 1340, -1, 210, {hat: 'cap', coat: 'frock'}));
+  s.push(xpArrow(arc1, u1, {w: 6}));
+  if (u1 > 0.02 && u1 < 0.98) { const p = xpAt(arc1, u1); s.push(xpPerson(p[0], p[1] - 8, 56, XP.gold)); }
   if (yArr > 0) s.push(xpOp(yArr, fig2('nfather', 300, 1, 210, {hat: 'cap', coat: 'frock', an: t > 3 ? POSES.iron(t) : {}})));
+  // 2. works, saves: a pressing board, coins piling up
   const work = xpWin(3.0, 8.6, t);
   if (work > 0) s.push(xpOp(work, `<rect x="380" y="${G - 108}" width="150" height="10" fill="#2B4744"/><rect x="392" y="${G - 98}" width="8" height="98" fill="#2B4744"/><rect x="508" y="${G - 98}" width="8" height="98" fill="#2B4744"/>` +
     xpIron(440 + 18 * Math.sin(t * 4), G - 108, 1.1, XP.cream) + [0, 1, 2].map((i) => (t > 3.4 + i * 0.4 ? xpCoin(560, G - 20 - i * 12, 0.9) : '')).join('')));
-  // the family at home until 1884
-  const uF = xpIn(7.6, t, 1.6), fArr = smooth(9.0, 9.3, t);
-  if (uF < 0.05) s.push(fig2('nmother', 1360, -1, 210) + fig2('ndaughter', 1430, -1, 210, {scale: 0.8}) + fig2('nson', 1490, -1, 210, {scale: 0.5}));
-  // letters + money, then the ticket, go east along the bottom arc
+  // 3. letters + money, then the ticket, go east under the sea
   const uL = xpIn(4.2, t, 1.4), uT = xpIn(5.8, t, 1.3);
-  s.push(xpArrow(bot, Math.max(uL, uT), {w: 6}));
-  if (uL > 0.02 && uL < 0.98) { const p = xpAt(bot, uL); s.push(xpEnvelope(p[0] - 30, p[1], 1) + xpCoin(p[0] + 26, p[1] + 4, 0.9)); }
-  if (uT > 0.02) { const p = xpAt(bot, Math.min(uT, 0.995)); s.push(xpOp(1 - smooth(7.6, 8.0, t), xpTicket(p[0], p[1] - (uT > 0.99 ? 30 : 0), 1.2))); }
-  // the family crosses (1884)
-  const top2 = xpCurve([1330, 330], [585, 330], 110);
-  if (uF > 0) s.push(xpArrow(top2, uF, {w: 6}));
-  if (uF > 0.02 && uF < 0.98) { const p = xpAt(top2, uF); s.push(xpPerson(p[0] - 30, p[1] - 14, 66, XP.gold, {skirt: true}) + xpPerson(p[0] + 6, p[1] - 14, 54, XP.gold, {skirt: true, kid: true}) + xpPerson(p[0] + 36, p[1] - 14, 42, XP.gold, {kid: true})); }
+  s.push(xpArrow(arc3, Math.max(uL, uT), {w: 6}));
+  if (uL > 0.02 && uL < 0.98) { const p = xpAt(arc3, uL); s.push(xpEnvelope(p[0] - 30, p[1], 1) + xpCoin(p[0] + 26, p[1] + 4, 0.9)); }
+  if (uT > 0.02) { const p = xpAt(arc3, Math.min(uT, 0.995)); s.push(xpOp(1 - smooth(7.6, 8.0, t), xpTicket(p[0], p[1] - (uT > 0.99 ? 34 : 0), 1.2))); }
+  // 4. the family follows (1884)
+  const u4 = xpIn(7.6, t, 1.6), fArr = smooth(9.0, 9.3, t);
+  if (u4 < 0.05) s.push(fig2('nmother', 1360, -1, 210) + fig2('ndaughter', 1430, -1, 210, {scale: 0.8}) + fig2('nson', 1490, -1, 210, {scale: 0.5}));
+  if (u4 > 0) s.push(xpArrow(arc4, u4, {w: 6}));
+  if (u4 > 0.02 && u4 < 0.98) { const p = xpAt(arc4, u4); s.push(xpPerson(p[0] - 30, p[1] - 8, 60, XP.gold, {skirt: true}) + xpPerson(p[0] + 4, p[1] - 8, 48, XP.gold, {skirt: true, kid: true}) + xpPerson(p[0] + 32, p[1] - 8, 38, XP.gold, {kid: true})); }
   if (fArr > 0) s.push(xpOp(fArr, fig2('nmother', 380, 1, 210) + fig2('ndaughter', 445, 1, 210, {scale: 0.8}) + fig2('nson', 500, 1, 210, {scale: 0.5})));
-  // later: a cousin, waiting at home for the next ticket (the chain goes on)
-  const uC = xpIn(9.8, t, 0.6);
-  if (uC > 0) s.push(xpOp(uC * 0.7, fig2('nmother', 1420, -1, 200)) + xpArrow(xpCurve([1330, 360], [620, 365], 90), xpIn(10.0, t, 1.0), {w: 5, dash: '4 16'}));
+  // 5. later: a cousin, waiting at home for the next ticket; a dotted arc, because it has not happened yet
+  const uC = xpIn(9.8, t, 0.6), u5 = xpIn(10.0, t, 1.0);
+  if (uC > 0) s.push(xpOp(uC * 0.7, fig2('nmother', 1420, -1, 200)) + xpArrow(arc5, u5, {w: 5, dash: '4 16'}));
   // The Sun, June 11, 1884: the shipping ads (Anchor Line "Steerage, $18"; Monarch Line "prepaid steerage tickets")
   const ad = xpWin(5.9, 10.3, t, 0.5);
   if (ad > 0) {
-    const ax = 130, ay = 600, aw = 520, ah = aw * 380 / 690; // crop: the top of the column (y 20 to 400 of 1500)
+    const ax = 130, ay = 640, aw = 520, ah = aw * 380 / 690; // crop: the top of the column (y 20 to 400 of 1500)
     s.push(xpOp(ad, `<g transform="rotate(-1.5, ${ax}, ${ay})"><rect x="${ax + 8}" y="${ay + 12}" width="${aw}" height="${f1(ah)}" fill="#000" opacity="0.5" filter="url(#soft)"/>` +
       `<svg x="${ax}" y="${ay}" width="${aw}" height="${f1(ah)}" viewBox="0 20 690 380" preserveAspectRatio="xMidYMid slice"><image href="${XP_SUN}" x="0" y="0" width="690" height="1500"/></svg>` +
       `<ellipse cx="${f1(ax + aw * 605 / 690)}" cy="${f1(ay + (252 - 20) * aw / 690)}" rx="62" ry="22" fill="none" stroke="${XP.teal}" stroke-width="5" opacity="${f1(smooth(6.6, 7.0, t))}"/></g>`));
   }
-  const scr = [];
+  // labels: each lands with its own arrow, next to it
   scr.push(tag(150, 185, 'NEW YORK', xpIn(0.2, t)), tag(1450, 185, 'THE OLD COUNTRY', xpIn(0.2, t)));
-  scr.push(xpOp(xpIn(1.0, t), penS(640, 128, '1. Yankel goes first', 26, -3)), tag(700, 222, '1882', xpIn(1.4, t)));
-  scr.push(xpOp(xpIn(3.0, t), penS(140, 560, '2. works, saves', 26, -3)));
-  scr.push(xpOp(xpWin(4.4, 10.2, t), penS(720, 718, '3. letters + money home', 26, -3)));
-  scr.push(tag(1090, 625, 'PREPAID TICKET', xpWin(6.2, 10.2, t)));
-  scr.push(tag(150, 1000, 'THE SUN, NEW YORK, JUNE 11, 1884', ad), tag(690, 905, '$18 ≈ $650 TODAY', ad * xpIn(6.8, t)));
-  scr.push(xpOp(xpIn(7.8, t), penS(1130, 128, '4. the family follows', 26, -3)), tag(1000, 222, '1884', xpIn(8.2, t)));
-  scr.push(tag(1420, 600, 'LATER: A COUSIN', xpIn(10.0, t)), tag(700, 615, 'LETTERS, MONEY, A TICKET', xpIn(10.4, t)));
+  const L1 = xpIn(2.2, t), L3 = xpIn(5.0, t), L4 = xpIn(8.9, t), L5 = xpIn(10.8, t);
+  scr.push(tag(650, 206, '1882', L1), xpOp(L1, penS(780, 212, '1. Yankel goes first', 24, -2)));
+  scr.push(tag(160, 525, '2. WORKS, SAVES', xpIn(3.2, t)));
+  scr.push(xpOp(L3, penS(720, 628, '3. letters, money, a ticket', 24, -2)));
+  scr.push(tag(650, 316, '1884', L4), xpOp(L4, penS(780, 322, '4. the family follows', 24, -2)));
+  scr.push(xpOp(L5, penS(780, 420, '5. later: a cousin', 24, -2)));
+  scr.push(tag(150, 1000, 'THE SUN, NEW YORK, JUNE 11, 1884', ad), tag(690, 940, '$18 ≈ $650 TODAY', ad * xpIn(6.8, t)));
   scr.push(card(130, 700, 'Chain migration', 'One family member moves first, then|helps the next one come.', '', xpIn(10.6, t)));
-  scr.push(card(980, 700, 'Prepaid ticket', 'A ship ticket bought in America|and mailed to someone in Europe.', '', xpIn(11.6, t)));
+  scr.push(card(980, 700, 'Prepaid ticket', 'A ship ticket bought in America|and mailed to someone in Europe.', '', xpIn(11.4, t)));
   return xpFrame(t, s.join(''), scr.join(''));
 }
 
