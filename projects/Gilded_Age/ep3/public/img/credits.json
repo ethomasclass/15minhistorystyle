@@ -682,7 +682,7 @@
   "a_departure/kiev_expulsion_of_jewish_families_ilustracion_espanola_1881_commons.jpg": {
     "title": "File:1881-06-22, La Ilustraci\u00f3n Espa\u00f1ola y Americana, Kieff (Rusia), La expulsi\u00f3n de los jud\u00edos eslavos, familias israelitas abandonando sus hogares (cropped).jpg",
     "artist": "Tom\u00e1s Carlos Capuz",
-    "date": "Published on\u00a022 June 1881",
+    "date": "1881-06-22",
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:1881-06-22,_La_Ilustraci%C3%B3n_Espa%C3%B1ola_y_Americana,_Kieff_(Rusia),_La_expulsi%C3%B3n_de_los_jud%C3%ADos_eslavos,_familias_israelitas_abandonando_sus_hogares_(cropped).jpg",
     "source": "commons:File:1881-06-22, La Ilustraci\u00f3n Espa\u00f1ola y Americana, Kieff (Rusia), La expulsi\u00f3n de los jud\u00edos eslavos, familias israelitas abandonando sus hogares (cropped).jpg"
@@ -783,14 +783,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:Emmalazarusengraving.jpg",
     "source": "commons:File:Emmalazarusengraving.jpg"
   },
-  "i_portraits/jacob_riis_1890s_commons.jpg": {
-    "title": "File:Jacob Riis 12.jpg",
-    "artist": "Jacob Riis (1849-1914)",
-    "date": "1890sdate QS:P,+1890-00-00T00:00:00Z/8",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Jacob_Riis_12.jpg",
-    "source": "commons:File:Jacob Riis 12.jpg"
-  },
   "g_nativism/taylor_mortar_of_assimilation_puck_1889_commons.jpg": {
     "title": "File:Mortar of Assimilation Citizenship 1889.jpg",
     "artist": "Signature looks to read \"C. J. Taylor\"",
@@ -806,5 +798,145 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:Paul-Joseph-Victor_Dargaud_-_La_statue_de_la_Libert%C3%A9_de_Bartholdi,_dans_l%27atelier_du_fondeur_Gaget,_rue_de_Chazelles_-_P1964_-_Mus%C3%A9e_Carnavalet.jpg",
     "source": "commons:File:Paul-Joseph-Victor Dargaud - La statue de la Libert\u00e9 de Bartholdi, dans l'atelier du fondeur Gaget, rue de Chazelles - P1964 - Mus\u00e9e Carnavalet.jpg"
+  },
+  "c_arrival/barge_office_battery_place_kings_handbook_1893_ia_p78.jpg": {
+    "title": "King's handbook of New York City ; an outline history and description of the American Metropolis ; with over one thousand illustrations ... (page 78)",
+    "artist": "King, Moses, 1853-1909,",
+    "date": "1893",
+    "licence": "public domain by age (1893)",
+    "page": "https://archive.org/details/kingshandbookofn00king_0/page/n78",
+    "source": "iabook:kingshandbookofn00king_0:78"
+  },
+  "f_letters/hamburg_american_packet_co_page_kings_handbook_1893_ia_p94.jpg": {
+    "title": "King's handbook of New York City ; an outline history and description of the American Metropolis ; with over one thousand illustrations ... (page 94)",
+    "artist": "King, Moses, 1853-1909,",
+    "date": "1893",
+    "licence": "public domain by age (1893)",
+    "page": "https://archive.org/details/kingshandbookofn00king_0/page/n94",
+    "source": "iabook:kingshandbookofn00king_0:94"
+  },
+  "f_letters/north_german_lloyd_page_kings_handbook_1893_ia_p92.jpg": {
+    "title": "King's handbook of New York City ; an outline history and description of the American Metropolis ; with over one thousand illustrations ... (page 92)",
+    "artist": "King, Moses, 1853-1909,",
+    "date": "1893",
+    "licence": "public domain by age (1893)",
+    "page": "https://archive.org/details/kingshandbookofn00king_0/page/n92",
+    "source": "iabook:kingshandbookofn00king_0:92"
+  },
+  "c_arrival/castle_garden_first_thanksgiving_dinner_harpers_1884_loc90707729.jpg": {
+    "title": "Castle Garden--their first Thanksgiving dinner / Harper.",
+    "artist": "Harper, W. St. John, 1851-1910, artist",
+    "date": "1884-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/90707729/",
+    "source": "loc:90707729"
+  },
+  "g_nativism/nast_which_color_is_to_be_tabooed_next_harpers_1882_loc91793231.jpg": {
+    "title": "Which color is to be tabooed next? / Th. Nast.",
+    "artist": "Nast, Thomas, 1840-1902.",
+    "date": "1882-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/91793231/",
+    "source": "loc:91793231"
+  },
+  "g_nativism/keppler_looking_backward_puck_1893_colour_commons.jpg": {
+    "title": "File:Looking Backward.png",
+    "artist": "Joseph Keppler for Puck Magazine",
+    "date": "1893-01-11",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Looking_Backward.png",
+    "note": "copied from the look-dev reference set (1280 px; Commons was rate-limiting larger downloads)"
+  },
+  "c_arrival/ellis_island_station_kings_handbook_1893_commons.jpg": {
+    "title": "File:(King1893NYC) pg087 ELLIS-ISLAND IMMIGRANT STATION.jpg",
+    "artist": "",
+    "date": "1893date QS:P571,+1893-00-00T00:00:00Z/9",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:(King1893NYC)_pg087_ELLIS-ISLAND_IMMIGRANT_STATION.jpg",
+    "note": "copied from the look-dev reference set (1280 px; Commons was rate-limiting larger downloads)"
+  },
+  "a_departure/kiev_pogrom_engraving_1881_commons.jpg": {
+    "title": "File:Jewish pogrom in Kiev (1881).jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1881",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jewish_pogrom_in_Kiev_(1881).jpg",
+    "source": "commons:File:Jewish pogrom in Kiev (1881).jpg"
+  },
+  "h_names/naturalization_record_solomon_aarons_1880_dpla_commons.jpg": {
+    "title": "File:AARONS, SOLOMON - Born- (BLANK), Naturalized- 1880 - DPLA - 3df9b93f33bafcd4517bdf49b3da58fe.jpg",
+    "artist": "U.S. District Court for the Southern District of New York. 1814",
+    "date": "",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:AARONS,_SOLOMON_-_Born-_(BLANK),_Naturalized-_1880_-_DPLA_-_3df9b93f33bafcd4517bdf49b3da58fe.jpg",
+    "source": "commons:File:AARONS, SOLOMON - Born- (BLANK), Naturalized- 1880 - DPLA - 3df9b93f33bafcd4517bdf49b3da58fe.jpg"
+  },
+  "i_portraits/henry_f_bowers_apa_founder_commons.jpg": {
+    "title": "File:Henry Francis Bowers N(1837-1911) Founder Of The American Protective Association.jpg",
+    "artist": "Uncredited",
+    "date": "1911",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Henry_Francis_Bowers_N(1837-1911)_Founder_Of_The_American_Protective_Association.jpg",
+    "source": "commons:File:Henry Francis Bowers N(1837-1911) Founder Of The American Protective Association.jpg"
+  },
+  "g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg": {
+    "title": "Looking Backward (\"They would close to the new-comer the bridge that carried them and their fathers over\")",
+    "artist": "Joseph Keppler (Puck, J. Ottmann Lith. Co.)",
+    "date": "1893-01-11",
+    "licence": "Public domain (published 1893, United States)",
+    "page": "https://archive.org/details/sim_puck_1893-01-11_32_827",
+    "source": "ia:sim_puck_1893-01-11_32_827 pages n7+n8",
+    "note": "Centrefold stitched from the two microfilm page scans (each 3964x5141) of Puck vol. 32, no. 827; black and white (the printed original is a colour lithograph). Full stitch is 7300x4825 before the 3000 px resize."
+  },
+  "h_names/manifest_ss_russia_hamburg_1891_nara_m237_r580_p1039.jpg": {
+    "title": "Passenger list (manifest) of the S.S. Russia, Hamburg and Havre to New York, arrived December 31, 1891, sheet 1",
+    "artist": "Master G. Schmidt; U.S. Customs Service",
+    "date": "1891-12-31",
+    "licence": "Public domain (U.S. federal record, National Archives RG 36)",
+    "page": "https://archive.org/details/passengerlistsof0580unit/page/n1039",
+    "source": "ia:passengerlistsof0580unit:1039",
+    "note": "National Archives microfilm M237 (Passenger Lists of Vessels Arriving at New York, 1820-1897), reel 580, list no. 1986."
+  },
+  "h_names/manifest_ss_russia_1891_names_detail_nara_m237_r580_p1039.jpg": {
+    "title": "Passenger list (manifest) of the S.S. Russia, Hamburg and Havre to New York, arrived December 31, 1891, sheet 1",
+    "artist": "Master G. Schmidt; U.S. Customs Service",
+    "date": "1891-12-31",
+    "licence": "Public domain (U.S. federal record, National Archives RG 36)",
+    "page": "https://archive.org/details/passengerlistsof0580unit/page/n1039",
+    "source": "ia:passengerlistsof0580unit:1039",
+    "note": "Detail crop (header and passengers 1 to 17) of M237 reel 580, image 1039."
+  },
+  "f_letters/steamship_ads_prepaid_steerage_the_sun_jun11_1884_loc_sn83030272.jpg": {
+    "title": "\"Shipping\" advertisements column (Anchor, Monarch, National, Red Star, State lines; prepaid steerage tickets)",
+    "artist": "The Sun (New York)",
+    "date": "1884-06-11",
+    "licence": "Public domain (published 1884); Chronicling America, Library of Congress",
+    "page": "https://www.loc.gov/resource/sn83030272/1884-06-11/ed-1/?sp=4",
+    "source": "loc:chroniclingamerica sn83030272 1884-06-11 p4 (crop)"
+  },
+  "g_nativism/the_only_one_barred_out_leslies_1882_cartoon_crop_loc2001696530.jpg": {
+    "title": "The only one barred out Enlightened American statesman - \"We must draw the line somewhere, you know.\"",
+    "artist": "",
+    "date": "1882-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2001696530/",
+    "source": "loc:2001696530",
+    "note": "Crop of the cartoon from the full newspaper page."
+  },
+  "d_streets/brooklyn_bridge_tenements_c1909_loc2007665887.jpg": {
+    "title": "Tenements under Brooklyn Bridge (Brooklyn Bridge tenements)",
+    "artist": "Pennell, Joseph, 1857-1926",
+    "date": "[ca. 1909]",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/pictures/item/2007665887/",
+    "source": "loc:2007665887"
+  },
+  "d_streets/riis_street_arabs_sleeping_1890s_commons.jpg": {
+    "title": "File:Jacob Riis 12.jpg",
+    "artist": "Jacob Riis (1849-1914)",
+    "date": "1890sdate QS:P,+1890-00-00T00:00:00Z/8",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jacob_Riis_12.jpg",
+    "source": "commons:File:Jacob Riis 12.jpg"
   }
 }
