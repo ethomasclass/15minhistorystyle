@@ -41,9 +41,14 @@ institution's presence on the Lower East Side by 1884 before voicing.
 ### Where the family lives: decision
 
 The research flagged Russian Jews in Williamsburg in 1884 as early and rare (the big wave came after the 1903 bridge). An
-enclave walk needs the Lower East Side. **Decision: the Rabinowitzes live on the Lower East Side** (Yankel has boarded there
-since 1882). The stoop scene with Ma Kelly is dropped; the Kelly link moves to a single crossing in the script (to be drafted)
-and to the Irish-enclave parallel. Ep 4 setting notes stand.
+enclave walk needs the Lower East Side. **Decision (revised Nov 12): the Rabinowitzes start on the Lower East Side** (Yankel has
+boarded there since 1882), and the enclave carries beats 5 to 7. **The closer moves them across the river to the Kellys'
+Williamsburg building** (Yankel's work at a Brooklyn shop; out of the crowding). The stoop scene returns as the closer: Ma at
+the window, "More of them," then the knock at her door. Narrate honestly: a few Jewish families made that move in the 1880s;
+most would not for twenty years, until the Williamsburg Bridge (1903).
+
+Why: Episode 2 ends with "Next time: new neighbors move into the Kellys' building. They've come a very long way." This keeps
+that promise without touching Episode 2, and keeps Ma Kelly's irony loop.
 
 ## Hull House: not in Episode 3
 
