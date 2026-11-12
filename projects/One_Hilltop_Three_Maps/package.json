@@ -1,0 +1,23 @@
+{
+  "name": "15-minute-history-video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.528",
+    "@remotion/noise": "^4.0.528",
+    "@types/d3-geo": "^3.1.1",
+    "@types/react": "^18.3.31",
+    "@types/topojson-client": "^3.1.5",
+    "d3-geo": "^3.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.528",
+    "topojson-client": "^3.1.0",
+    "typescript": "^5.9.3",
+    "world-atlas": "^2.0.2"
+  }
+}
