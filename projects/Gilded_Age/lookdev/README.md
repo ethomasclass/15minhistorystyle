@@ -338,3 +338,36 @@ Need Apply" window sign; Ma Kelly came over about 1870; route rail to Hamburg, s
   shadows down to the men and "KEPPLER WAS AN IMMIGRANT TOO: BORN IN VIENNA, 1838"; a "Look again" question card. Facts and a
   65-word draft narration timed to the beats: `../ep3/research/LOOKING_BACKWARD.md`. Source image is the 1280 px Commons copy, so
   the pushes (to 2.35x) are soft; swap in a larger scan when one can be fetched.
+
+## Round 14 diagrams (Nov 12): Episode 3 explainers
+
+`ep3_explain.js` (loaded by `bridge.html` right after `ep3.js`; reads, never edits, `ep3.js`'s `E3`, `E3_LAND`, `E3P`,
+`E3_RUSSIA`, `nb()` and `e3Defs`, plus `tag`, `penS`, `tapeS`, `card`, `icon`, `frame` from `explainers.js`). Nine diagram clips,
+720p in `review/ep3/` (`<clip>_720p.mp4`), two or three stills each (`xp_<name>_N.jpg`, e.g. `xp_pale_map_1.jpg`). The look is the explainer board: near-black
+teal with faint graph-paper squares, mono tags on dark boxes, orange torn strips (Abril) for titles, Nanum Pen handwriting, the
+series' index cards for vocabulary. Every chart builds in steps; teal draws and explains; orange is strips and handwriting; the
+Rabinowitzes (and Jewish arrivals) are wheat gold; the Kellys coral; everyone else ink or a muted grey-green.
+
+| Clip | Ch | s | What builds |
+|---|---|---|---|
+| `ep3_pale_map` | 2 | 14 | The letter map's projection zoomed on eastern Europe: the Russian Empire hatched ("RUSSIAN EMPIRE"), the Pale of Settlement traced in teal dashes and shaded (the 15 western provinces, hand traced and rounded; tag "ABOUT 1884 · BORDERS APPROXIMATE"), "where most Jews had to live", the orange "HOME" dot; then three index cards stack on the right: Pale of Settlement, Pogrom, May Laws (glossary wording). |
+| `ep3_chain` | 3 | 15 | New York (left) and the old country (right). 1. Yankel goes first (1882), a gold figure along a teal arc; 2. works, saves (pressing board, coins); 3. letters + money, then a prepaid ticket, travel east; The Sun, June 11, 1884 shipping ads cropped and laid in, "Steerage, $18" ringed, tag "$18 ≈ $650 TODAY"; 4. the family follows (1884); LATER: A COUSIN (dashed arc). Cards: Chain migration, Prepaid ticket. |
+| `ep3_stat_cg` | 4 | 10.5 | CASTLE GARDEN strip and a small fort; "1855 to 1890"; "≈ 8 MILLION PEOPLE"; three figures, two turn teal; "2 OF EVERY 3 / IMMIGRANTS" with "WHO CAME TO THE U.S. IN THOSE YEARS". |
+| `ep3_old_new` | 5 | 15 | The old vs new chart rebuilt on cream notebook paper (no textbook image): headers, the 1880 line as an orange torn strip with an "1880" scrap, then the five rows one at a time; row 4 reads "SEEN AS similar ... / SEEN AS different" with "SEEN AS" underlined in teal, the row highlighted, and "WHO DECIDED? / NATIVE-BORN PROTESTANT AMERICANS"; the Kellys (four coral figures) slide into the old column and a teal arrow leads to "except the Irish: Catholic" under "Mainly Protestant". |
+| `ep3_decades` | 5 | 13.5 | Bars grow one by one: 1870s 2.8 M, 1880s 5.2 M (teal), 1890s 3.7 M, 1900s 8.8 M (source tag: DHS Yearbook, Table 1); "1884" on the 1880s bar, an arrow to "1 in 50": fifty figures, one gold and ringed, "ABOUT 11,000 OF 500,000+ WERE JEWISH". |
+| `ep3_piecework` | 7 | 15 | BIG COMPANY (cuts the cloth) → CONTRACTOR (ink, walking with bundles) → THE FAMILY'S ROOM (gold: presser, machine, finisher, thread puller); coins "PAID BY THE PIECE"; FINISHED GARMENTS ride back; cards Contractor and Sweatshop; then a Riis card line by line: "knee pants: 70¢ a dozen", "beginners: $2 to $5 a week", "sunrise to 9 p.m.", tag "JACOB RIIS, 1890". |
+| `ep3_laws` | 8 | 15 | WALLS AND WELCOME: a 1882 to 1887 line; walls above in ink cards with orange strips (1882 Chinese Exclusion Act, "first major law to keep out a group by nationality"; 1882 head tax + "public charge"; 1885 contract labor ban), welcome below in teal ("The New Colossus" 1883; the pedestal fund 1885 to 1886, a teal span on the line; Statue dedicated October 28, 1886). Held complete, then the line steps back and the Nativism card lands. |
+| `ep3_pedestal` | 8 | 11 | THE PEDESTAL FUND: "100,000+ / PEOPLE CHIPPED IN", "1885"; 100 figures fill a 10 x 10 grid (EACH FIGURE = 1,000 PEOPLE); "most gave $1 or less" and a row of dollar coins. |
+| `ep3_tenement_plan` | 6 | 11.5 | One floor from above, flat and schematic after the 1879 dumbbell plans: outline draws on, four flats (FLAT 1 to 4) of three rooms, only the street and yard rooms lit, the inside rooms go dark ("inside rooms: no windows"); the hall with stairs and ONE SINK FOR THE WHOLE FLOOR; the Rabinowitzes' flat outlined in gold, four gold dots in one room and a boarder in the kitchen, "THE RABINOWITZES: 4 PEOPLE + A BOARDER". |
+
+Notes and decisions:
+- **Numbers are as briefed.** "$18 ≈ $650 TODAY" is the brief's conversion (the script itself says "about a month's pay for a
+  laborer"; RESEARCH found no dollar fare for Hamburg, so the $18 is the 1884 Sun ad's Anchor Line steerage rate, ringed on screen).
+- **The law timeline runs 1882 to 1887, not 1882 to 1893.** All the briefed events fall between 1882 and 1886; a linear axis to
+  1893 left most of the width empty and crowded the cards. If 1891 (the Immigration Act) and 1892 (Geary Act) are wanted, the
+  axis can be extended and two wall cards added (both are in RESEARCH 4.3 and 4.7).
+- **The Pale outline is approximate** (15 provinces, Congress Poland left out as in most maps of the Pale); it says so on screen.
+- **Text audit:** `audit_text.mjs <clip> [step]` (adapted from `ep2/edit/audit_text.mjs`) samples a clip every 0.2 s and reports
+  any visible text whose rotated font box leaves title safe (96 / 54 px) or overlaps another text, texts on screen under 2.5 s,
+  and how long the final set of texts is held. Final pass: no OUT, no OVERLAP, no SHORT on all nine; the complete chart is held
+  3.0 to 5.2 s at the end of every clip.

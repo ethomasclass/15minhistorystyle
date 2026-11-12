@@ -469,11 +469,42 @@ function miStoopSide() {
 }
 function miCarrier(name, t, t0, o) { // walk from the wagon to the stoop on planted feet, climb tread by tread, go in at the door
   const x0 = MI.landR + 8 * MI.step, v = 60, sEnd = x0 - MI.door, s = clamp01((t - t0) * v / sEnd) * sEnd;
-  const inside = smooth(0, 0.8, (t - t0) - sEnd / v);
-  if (inside >= 1) return '';
+  const inside = smooth(0, 0.8, (t - t0) - sEnd / v), appear = MI.queue ? smooth(t0 - 0.5, t0, t) : 1; // Round 14: each waits at the wagon, out of sight, until it is their turn
+  if (inside >= 1 || appear <= 0) return '';
   let fo = nbOpts(name, {x: x0, y: FAR_GROUND, h: MI.man, d: -1, ...o, an: {...o.arms}});
   fo = stepWalk(fo, x0, -1, s, MI.ground, 'stoop.' + name);
-  return `<g opacity="${f1(1 - inside)}">${fig(fo)}${o.load ? holding(fo, 'f', 'load.' + name, (gx, gy, ang) => o.load(gx, gy, fo)) : ''}</g>`;
+  return `<g opacity="${f1((1 - inside) * appear)}">${fig(fo)}${o.load ? holding(fo, 'f', 'load.' + name, (gx, gy, ang) => o.load(gx, gy, fo)) : ''}</g>`;
+}
+// Round 14: Yankel wrestles the trunk at the foot of the stoop (its back end still on the flags); Michael Kelly, home from the
+// refinery along the sidewalk, crouches and takes the other end in both hands; they lift it level and carry it up the stoop
+// between them, Yankel ahead with his far hand on the front handle, and in at the door. Every hand is solved onto a handle.
+function miTrunkPair(t, lod, rim) {
+  const G = FAR_GROUND, L = 56, X0 = MI.landR + 4 * MI.step + 6, sTot = X0 - MI.door + 82, s = [];
+  const carry = e3Trap(t, 3.4, 7.9, 0.15) * sTot;
+  let yk = nbOpts('nfather', {x: X0, y: G, h: MI.man, d: -1, hat: 'cap', coat: 'frock', det: lod.det, rim, an: {fArm: [176, 180], tilt: t < 3.4 ? -10 : 0, expr: t < 2.8 ? 'set' : 'smile'}});
+  yk = stepWalk(yk, X0, -1, carry, MI.ground, 'mi.yankel');
+  const P1 = [yk.x + 15, yk.y - 0.56 * yk.h];
+  yk = reach(yk, 'b', P1[0], P1[1], 'mi.yankel.trunk');
+  // Michael: along the sidewalk from the right (0 to 2.6), crouch for the low end (2.6 to 3.0), lift (3.0 to 3.4), then carry
+  const mx1 = X0 + 82, mx0 = mx1 + 8 * MI.step, mw = e3Trap(t, 0, 2.6);
+  let mk = cast('michael', {x: mx0, y: G, h: MI.man, d: -1, det: lod.det, rim, an: {tilt: t < 2.2 ? 0 : -8, expr: t > 3.0 ? 'smile' : 'neutral', blink: t % 3.5 < 0.12}});
+  mk = t < 3.4 ? stepWalk(mk, mx0, -1, 8 * MI.step * mw, () => G, 'mi.michael') : stepWalk({...mk, x: mx1}, mx1, -1, carry, MI.ground, 'mi.michael.carry');
+  const cr = smooth(2.6, 3.0, t) * (1 - smooth(3.0, 3.4, t));
+  if (cr > 0) { const feet = [E3K.foot(mk, 0), E3K.foot(mk, 1)]; mk = plant({...mk, y: mk.y + 22 * cr, an: {...mk.an, lean: 30 * cr}}, feet, 'mi.michael.crouch'); }
+  // the back handle: resting on the flags until Michael has it, then lifted level with the front, then carried at his hands' height
+  const restY = G - 24, lifted = smooth(3.0, 3.4, t), carryY = mk.y - 0.56 * yk.h;
+  const P2y = t < 3.0 ? restY : t < 3.4 ? lerp(restY, P1[1], lifted) : carryY, dy = P2y - P1[1], P2 = [P1[0] + Math.sqrt(L * L - dy * dy), P2y];
+  if (t > 2.3) { const k = smooth(2.3, 2.7, t), gf = E3K.hand(mk, 'f'), gb = E3K.hand(mk, 'b');
+    if (t < 2.7) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 1, k), lerp(gb.y, P2[1] + 2, k), 'mi.michael.toTrunk.b'); }
+    else { mk = reach(mk, 'f', P2[0], P2[1], 'mi.michael.trunk.handle'); mk = reach(mk, 'b', P2[0] + 1, P2[1] + 2, 'mi.michael.trunk.corner'); } }
+  const ang = Math.atan2(P2[1] - P1[1], P2[0] - P1[0]) * 180 / Math.PI;
+  const trunkSvg = `<g transform="translate(${f1(P1[0])},${f1(P1[1])}) rotate(${f1(ang)})">${trunk(0, 24, L, 20, '#1A1410', '#5F857F')}<path d="M-4,2 q4,-5 8,0 M${L - 4},2 q4,-5 8,0" stroke="#0D0C09" stroke-width="2" fill="none"/></g>`;
+  // in at the door: each fades as he passes the door post
+  const inY = smooth(0, 0.8, (MI.door + 4 - yk.x) / 30), inM = smooth(0, 0.8, (MI.door + 4 - mk.x) / 30), inT = smooth(0, 0.8, (MI.door + 4 - (P1[0] + P2[0]) / 2) / 30);
+  if (inY < 1) s.push(`<g opacity="${f1(1 - inY)}">${fig(yk)}</g>`);
+  if (inT < 1) s.push(`<g opacity="${f1(1 - inT)}">${trunkSvg}</g>`);
+  if (inM < 1) s.push(`<g opacity="${f1(1 - inM)}">${e3Shadow(mk, mk.h)}${figure(mk)}</g>`);
+  return s.join('');
 }
 function horsecar(x, y, t) { // a one-horse street railway car: platforms, a row of windows, a clerestory roof, the driver at the front
   const s = [], c = '#0D0C09';
@@ -496,11 +527,11 @@ function miKellyWindow(t, look) { // Ma Kelly behind her window, arms folded; th
   return s.join('');
 }
 function renderMovingIn(t, o = {}) {
-  const keys = o.keys || [[0, 1.12, 930, 560], [4.4, 1.16, 940, 566], [7.8, 5.0, MI.win.x + 20, MI.win.y + 46], [10, 5.2, MI.win.x + 20, MI.win.y + 46]];
+  const keys = o.keys || [[0, 1.5, 1110, 700], [3.0, 1.62, 1090, 712], [8.0, 1.2, 960, 600], [10.2, 1.16, 940, 566], [12.0, 5.0, MI.win.x + 20, MI.win.y + 46], [15, 5.2, MI.win.x + 20, MI.win.y + 46]];
   const c = cam2(camAt(keys, t)), G = FAR_GROUND, s = [], lod = lodFor(MI.man * c.z), rim = {c: '#FFF3D6', a: lod.rimA * 0.7, dx: -0.01, dy: -0.004};
   // the row: the Kellys' building (Episode 1's tenement) between its neighbours
   for (const [x, w, fl, seed] of [[-80, 250, 4, 409], [174, 300, 5, 404], [478, 278, 5, 405], [MI.x, MI.w, MI.floors, MI.seed], [1034, 250, 4, 403], [1288, 290, 5, 406], [1582, 260, 5, 407], [1846, 270, 4, 408]]) s.push(tenement(x, w, fl, seed, t));
-  s.push(miKellyWindow(t, smooth(6.4, 7.4, t)));
+  s.push(miKellyWindow(t, o.keys ? smooth(6.4, 7.4, t) : smooth(10.8, 11.8, t)));
   // the sidewalk (flagstones), the curb, the cobbled street; a gas lamp; a telegraph pole and its wires
   s.push(MAT.floor(-400, 2400, G, G + 34, {kind: 'flag', base: '#3E5F5A', seed: 74, size: 46}) + `<rect x="-400" y="${G + 34}" width="2800" height="8" fill="#0D0C09"/>` + MAT.floor(-400, 2400, G + 42, G + 260, {kind: 'cobble', base: '#2B4744', seed: 75, size: 40}));
   s.push(gasLamp(700, G + 30, 170, 0, t) + `<rect x="1460" y="${G - 870}" width="12" height="${870 + 30}" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<rect x="${1406}" y="${G - 850 + k * 34}" width="120" height="6" fill="#0D0C09"/>`).join(''));
@@ -511,24 +542,26 @@ function renderMovingIn(t, o = {}) {
   s.push(line([[wx + 30, wy - 52], [wx + 80, wy - 48]], '#0D0C09', 4) + `<rect x="${wx - 230}" y="${wy - 66}" width="260" height="28" fill="#0D0C09"/>`);
   for (const u of [wx - 200, wx - 20]) s.push(`<circle cx="${u}" cy="${wy - 26}" r="26" fill="none" stroke="#0D0C09" stroke-width="5"/>` + [...Array(10)].map((_, k) => { const a = k * TAU / 10; return line([[u, wy - 26], [u + Math.cos(a) * 26, wy - 26 + Math.sin(a) * 26]], '#0D0C09', 2); }).join(''));
   s.push(`<rect x="${wx - 220}" y="${wy - 100}" width="6" height="34" fill="#0D0C09"/><rect x="${wx - 220}" y="${wy - 100}" width="34" height="5" fill="#0D0C09"/>`);
-  s.push(featherBed(wx - 180, wy - 66, 70, 30, '#DFE0D6') + (t > 0.2 ? '' : trunk(wx - 100, wy - 66, 46, 26, '#1A1410', '#5F857F')) + (t > 2.4 ? '' : samovar(wx - 40, wy - 66, 0.66)));
+  s.push(featherBed(wx - 180, wy - 66, 70, 30, '#DFE0D6') + (t > 5.6 ? '' : samovar(wx - 40, wy - 66, 0.66)));
   // the family carries their things up the stoop, one after another
   s.push(miStoopSide());
   // loads are drawn from the grip: the trunk's end in the father's raised hand (resting on his shoulder), the rolled bed hugged at
   // the mother's hands, the samovar by its handle, the candlestick by its stem
-  s.push(miCarrier('nfather', t, 0.2, {hat: 'cap', coat: 'frock', det: lod.det, rim, arms: {fArm: [100, -40], bArm: [196, 202]}, load: (gx, gy, fo) => trunk(gx - (fo.d < 0 ? 12 : 34), gy + 10, 46, 22, '#1A1410', '#5F857F')}));
-  s.push(miCarrier('nmother', t, 1.3, {det: lod.det, rim, arms: {fArm: [88, 30], bArm: [100, 50]}, load: (gx, gy) => featherBed(gx - 28, gy + 14, 56, 28, '#DFE0D6')}));
-  s.push(miCarrier('ndaughter', t, 2.4, {scale: 0.8, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, arms: {fArm: [140, 60], bArm: [140, 90]}, load: (gx, gy, fo) => samovar(gx - fo.d * 14 * 0.42, gy + 40 * 0.42, 0.42)}));
-  s.push(miCarrier('nson', t, 3.4, {scale: 0.52, det: lod.det, rim, arms: {fArm: [110, 40]}, load: (gx, gy) => candlestick(gx, gy + 12 * 0.5, 0.5)}));
+  s.push(miTrunkPair(t, lod, rim)); MI.queue = !o.keys;
+  s.push(miCarrier('nmother', t, 4.6, {det: lod.det, rim, arms: {fArm: [88, 30], bArm: [100, 50]}, load: (gx, gy) => featherBed(gx - 28, gy + 14, 56, 28, '#DFE0D6')}));
+  s.push(miCarrier('ndaughter', t, 5.6, {scale: 0.8, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, arms: {fArm: [140, 60], bArm: [140, 90]}, load: (gx, gy, fo) => samovar(gx - fo.d * 14 * 0.42, gy + 40 * 0.42, 0.42)}));
+  s.push(miCarrier('nson', t, 6.5, {scale: 0.52, det: lod.det, rim, arms: {fArm: [110, 40]}, load: (gx, gy) => candlestick(gx, gy + 12 * 0.5, 0.5)}));
   // two Irish neighbours on the next stoop down, watching (ink)
   s.push(e3Person(rng(76), 600, G, MI.man, t, '#0D0C09', {d: 1, an: E3_FOLD}) + e3Person(rng(79), 640, G, MI.man, t, '#0D0C09', {d: 1}));
   // a horsecar passes along the street in front
   const hc = t > 1.2 && t < 6.6 ? -700 + (t - 1.2) * 520 : -5000;
   s.push(`<g transform="translate(0,${G + 250}) scale(0.62) translate(0,${-(G + 250)})">${horsecar(hc / 0.62, G + 250, t)}</g>` + line([[-400, G + 252], [2400, G + 252]], '#0D0C09', 4));
   const world = layerAt(c, 0.3, `<rect x="-3000" y="-2000" width="8000" height="3000" fill="url(#e3day)"/>` + stFar(t)) + layerAt(c, 1, s.join(''));
-  const scr = [tag(40, 1040, 'THE KELLYS\' STREET · BROOKLYN · 1884', 1)];
-  if (t > 1 && t < 4.4) scr.push(penS(1060, 160, 'new neighbours, from the Russian Empire', 30, -3));
-  if (t > 7.8) scr.push(penS(980, 170, 'Ma Kelly is not so sure', 34, -3), tag(1000, 250, 'COMPOSITE CHARACTERS', smooth(7.8, 8.2, t)));
+  const scr = [tag(40, 1040, 'THE KELLYS\' STREET · BROOKLYN', 1), tag(130, 120, 'SPRING 1886', smooth(0.2, 0.6, t))];
+  if (t > 0.6 && t < 3.4) scr.push(penS(1000, 230, 'new neighbours, wrestling a trunk', 30, -3));
+  if (t > 3.6 && t < 6.8) scr.push(penS(860, 230, 'Michael grabs the other end', 32, -3));
+  if (t > 7.2 && t < 10.4) scr.push(penS(1000, 230, 'new neighbours, from the Russian Empire', 30, -3));
+  if (t > 12.0) scr.push(penS(980, 230, 'Ma Kelly is not so sure', 34, -3), tag(1000, 300, 'COMPOSITE CHARACTERS', smooth(12.0, 12.4, t)));
   if (o.quiet) scr.length = 0;
   return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#4E726C"/>`, world, scr.join(''), t);
 }
@@ -958,7 +991,7 @@ if (typeof window !== 'undefined') Object.assign(window, {renderSteerage, render
 Object.assign(CLIPS, {
   ep3_steerage: {sec: 10, render: (t) => renderSteerage(t)},
   ep3_castle_garden: {sec: 10, render: (t) => renderCastleGarden(t)},
-  ep3_moving_in: {sec: 10, render: (t) => renderMovingIn(t)},
+  ep3_moving_in: {sec: 15, render: (t) => renderMovingIn(t)},
   ep3_sweatshop: {sec: 10, render: (t) => renderSweatshop(t)},
   ep3_letter: {sec: 10, render: (t) => renderLetter(t)},
   ep3_nativism: {sec: 10, render: (t) => renderNativism(t)},
