@@ -494,8 +494,8 @@ function miTrunkPair(t, lod, rim) {
   // the back handle: resting on the flags until Michael has it, then lifted level with the front, then carried at his hands' height
   const restY = G - 24, lifted = smooth(3.0, 3.4, t), carryY = mk.y - 0.56 * yk.h;
   const P2y = t < 3.0 ? restY : t < 3.4 ? lerp(restY, P1[1], lifted) : carryY, dy = P2y - P1[1], P2 = [P1[0] + Math.sqrt(L * L - dy * dy), P2y];
-  if (t > 2.3) { const k = smooth(2.3, 2.7, t), gf = E3K.hand(mk, 'f'), gb = E3K.hand(mk, 'b');
-    if (t < 2.7) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 1, k), lerp(gb.y, P2[1] + 2, k), 'mi.michael.toTrunk.b'); }
+  if (t > 2.4) { const k = smooth(2.4, 2.96, t), gf = E3K.hand(mk, 'f'), gb = E3K.hand(mk, 'b');
+    if (t < 2.96) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 1, k), lerp(gb.y, P2[1] + 2, k), 'mi.michael.toTrunk.b'); }
     else { mk = reach(mk, 'f', P2[0], P2[1], 'mi.michael.trunk.handle'); mk = reach(mk, 'b', P2[0] + 1, P2[1] + 2, 'mi.michael.trunk.corner'); } }
   const ang = Math.atan2(P2[1] - P1[1], P2[0] - P1[0]) * 180 / Math.PI;
   const trunkSvg = `<g transform="translate(${f1(P1[0])},${f1(P1[1])}) rotate(${f1(ang)})">${trunk(0, 24, L, 20, '#1A1410', '#5F857F')}<path d="M-4,2 q4,-5 8,0 M${L - 4},2 q4,-5 8,0" stroke="#0D0C09" stroke-width="2" fill="none"/></g>`;
