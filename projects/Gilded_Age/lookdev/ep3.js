@@ -527,7 +527,7 @@ function miKellyWindow(t, look) { // Ma Kelly behind her window, arms folded; th
   return s.join('');
 }
 function renderMovingIn(t, o = {}) {
-  const keys = o.keys || [[0, 1.5, 1110, 700], [3.0, 1.62, 1090, 712], [8.0, 1.2, 960, 600], [10.2, 1.16, 940, 566], [12.0, 5.0, MI.win.x + 20, MI.win.y + 46], [15, 5.2, MI.win.x + 20, MI.win.y + 46]];
+  const keys = o.keys || [[0, 2.3, 1200, 750], [3.0, 2.5, 1130, 765], [7.6, 1.7, 1020, 700], [10.2, 1.16, 940, 566], [12.0, 5.0, MI.win.x + 20, MI.win.y + 46], [15, 5.2, MI.win.x + 20, MI.win.y + 46]];
   const c = cam2(camAt(keys, t)), G = FAR_GROUND, s = [], lod = lodFor(MI.man * c.z), rim = {c: '#FFF3D6', a: lod.rimA * 0.7, dx: -0.01, dy: -0.004};
   // the row: the Kellys' building (Episode 1's tenement) between its neighbours
   for (const [x, w, fl, seed] of [[-80, 250, 4, 409], [174, 300, 5, 404], [478, 278, 5, 405], [MI.x, MI.w, MI.floors, MI.seed], [1034, 250, 4, 403], [1288, 290, 5, 406], [1582, 260, 5, 407], [1846, 270, 4, 408]]) s.push(tenement(x, w, fl, seed, t));
@@ -561,7 +561,7 @@ function renderMovingIn(t, o = {}) {
   if (t > 0.6 && t < 3.4) scr.push(penS(1000, 230, 'new neighbours, wrestling a trunk', 30, -3));
   if (t > 3.6 && t < 6.8) scr.push(penS(860, 230, 'Michael grabs the other end', 32, -3));
   if (t > 7.2 && t < 10.4) scr.push(penS(1000, 230, 'new neighbours, from the Russian Empire', 30, -3));
-  if (t > 12.0) scr.push(penS(980, 230, 'Ma Kelly is not so sure', 34, -3), tag(1000, 300, 'COMPOSITE CHARACTERS', smooth(12.0, 12.4, t)));
+  if (t > 12.0) scr.push(penS(980, 230, 'Ma Kelly is not so sure', 34, -3), tag(1180, 990, 'COMPOSITE CHARACTERS', smooth(12.0, 12.4, t)));
   if (o.quiet) scr.length = 0;
   return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#4E726C"/>`, world, scr.join(''), t);
 }
