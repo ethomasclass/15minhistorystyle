@@ -328,16 +328,18 @@ function renderSteerage(t) {
 // Immigrants were brought from the steamships by barge and landed at the depot's pier. Inside, the rotunda: a ring of offices and a
 // gallery under the roof, the lantern's light falling in the middle, clerks at high desks writing names in the register.
 const CG = {wl: 760, cx: 1060, rx: 520, wallTop: 560, wallBot: 760};
-function cgOutside(t) {
+function cgOutside(t, o = {}) { // o.city false: no Manhattan skyline behind (the fort seen from the Battery side, harbour behind)
   const s = [], {cx, rx, wallTop, wallBot, wl} = CG;
   // lower Manhattan behind, 1884: low brick blocks, Trinity's spire, a towered office building, smoke
   const r = rng(51);
+  if (o.city !== false) {
   for (let x = -400; x < 2600;) { const w = 50 + r() * 110, h = 70 + r() * 150; s.push(`<rect x="${f1(x)}" y="${f1(560 - h)}" width="${f1(w)}" height="${f1(h + 60)}" fill="#4E726C"/>`); x += w + 2; }
   s.push(`<rect x="1570" y="300" width="56" height="300" fill="#4E726C"/><path d="M1564,300 L1598,80 L1632,300 Z" fill="#4E726C"/>`); // Trinity Church spire
   s.push(`<rect x="560" y="280" width="120" height="300" fill="#4E726C"/><rect x="596" y="200" width="48" height="90" fill="#4E726C"/><path d="M590,200 L620,150 L650,200 Z" fill="#4E726C"/>`); // a towered office block
   s.push(MAT.smoke(300, 420, t, {col: '5F857F', k: 0.8, n: 6, drift: 120, seed: 52}) + MAT.smoke(2000, 440, t, {col: '5F857F', k: 0.7, n: 6, drift: 100, seed: 53}));
+  } else for (let x = -400; x < 2600;) { const w = 50 + r() * 110; r(); x += w + 2; } // keep the seeded draws the same
   // the Battery: a sea wall, bare trees
-  s.push(`<rect x="-400" y="600" width="3000" height="${wl - 600}" fill="#2B4744"/>`);
+  if (o.city !== false) s.push(`<rect x="-400" y="600" width="3000" height="${wl - 600}" fill="#2B4744"/>`);
   for (let k = 0; k < 16; k++) { const x = -300 + k * 190 + r() * 60; if (Math.abs(x - cx) < rx + 40) continue; const h = 150 + r() * 90;
     s.push(`<rect x="${f1(x - 5)}" y="${f1(wl - 40 - h)}" width="10" height="${f1(h)}" fill="#1C3332"/>`);
     for (let b = 0; b < 7; b++) { const a = -70 + b * 23, L = 50 + r() * 60, y0 = wl - 40 - h * (0.45 + r() * 0.5); s.push(line([[x, y0], [x + Math.sin(a * Math.PI / 180) * L, y0 - Math.cos(a * Math.PI / 180) * L]], '#1C3332', 3)); } }
@@ -963,3 +965,587 @@ Object.assign(CLIPS, {
   ep3_names: {sec: 10, render: (t) => renderNames(t)},
   ep3_looking_backward: {sec: 25, render: (t) => renderLookingBackward(t)},
 });
+
+/* =====================================================================================================================
+   Round 14 (Nov 12): scenes for the script (ep3/script/SCRIPT.md). The family has names now: Yankel (father), Sore (mother),
+   Rivke (daughter, 12), Shmuel (son, 7), cast keys nfather, nmother, ndaughter (scale 0.8), nson (scale 0.5).
+   ===================================================================================================================== */
+// a long low-sun shadow: whatever is drawn standing on the line y = G is sheared along the ground away from the sun (to the left
+// for kx > 0) and flattened. body must be drawn in solid black.
+const e3LongShadow = (body, G, kx = 1.7, sq = 0.15, op = 0.3) => `<g opacity="${op}" transform="matrix(1,0,${kx},${sq},${f1(-kx * G)},${f1(G * (1 - sq))})">${body}</g>`;
+const e3Black = (fo) => figure({...fo, fill: '#000', det: 0, rim: null});
+// two hands meet at P: both arms are solved onto it; the meeting itself is logged as a 'pair' (hand to hand distance)
+function e3Clasp(A, wa, B, wb, P, name) {
+  const A2 = reach(A, wa, P[0], P[1], name + '.a'), B2 = reach(B, wb, P[0], P[1], name + '.b');
+  const ga = E3K.hand(A2, wa), gb = E3K.hand(B2, wb); E3K.log('pair', name, [ga.x, ga.y], [gb.x, gb.y]);
+  return [A2, B2];
+}
+// a hand on its way somewhere (no contact yet): solved like reach, but logged as 'move', so the audit checks only real contacts
+function e3Move(fo, which, wx, wy, name, elbowUp = false) { const o = reach(fo, which, wx, wy, name, elbowUp); E3LOG[E3LOG.length - 1].kind = 'move'; return o; }
+// after a walk has stopped (both feet down a stride apart), the back foot steps up beside the front one (u 0..1): the body moves to
+// stand over both feet. The front foot stays planted; the back foot swings, and is planted again at the end.
+function e3Settle(fo, u, name) {
+  if (u <= 0) return fo;
+  const d = fo.d ?? 1, A = E3K.foot(fo, 0), B = E3K.foot(fo, 1), fi = (A[0] - B[0]) * d >= 0 ? 0 : 1, F0 = fi ? B : A, K0 = fi ? A : B, e = ease(u);
+  const T = [F0[0] - d * 0.11 * fo.h, F0[1]], P = [lerp(K0[0], T[0], e), lerp(K0[1], T[1], e) - 0.05 * fo.h * Math.sin(Math.PI * clamp01(u))];
+  const o1 = {...fo, x: lerp(fo.x, (F0[0] + T[0]) / 2 + d * 0.0 * fo.h, e)}, feet = fi ? [P, F0] : [F0, P];
+  const o2 = {...o1, an: E3K.legsTo(o1, feet)};
+  E3K.log('plant', name + '.settle.' + fi, F0, E3K.foot(o2, fi));
+  E3K.log(u >= 1 ? 'plant' : 'swing', name + '.settle.' + (1 - fi), P, E3K.foot(o2, 1 - fi));
+  return o2;
+}
+// a trunk drawn from its top handle (hx, hy): hanging from a hand, or standing on a floor (then hy = floor - E3TR.lift)
+const E3TR = {w: 128, h: 70}; E3TR.lift = 1.175 * E3TR.h + 7;
+function e3TrunkAt(hx, hy, rot = 0) {
+  const {w, h} = E3TR, y = hy + E3TR.lift, x = hx - w / 2;
+  return `<g transform="rotate(${f1(rot)},${f1(hx)},${f1(hy)})">${trunk(x, y, w, h, '#1A1410', '#5F857F')}<rect x="${f1(x + 10)}" y="${f1(y - h * 0.55)}" width="${f1(w - 20)}" height="3" fill="#5F857F" opacity="0.6"/>` +
+    `<path d="M${f1(hx - 13)},${f1(hy + 7)} q13,-13 26,0" stroke="#0D0C09" stroke-width="4.5" fill="none"/></g>`;
+}
+// trapezoid travel 0..1 between t0 and t1: speeds up over the first a, steady, slows over the last a
+function e3Trap(t, t0, t1, a = 0.22) { const u = clamp01((t - t0) / (t1 - t0)), v = 1 / (1 - a);
+  if (u < a) return v * u * u / (2 * a);
+  if (u > 1 - a) { const w = 1 - u; return 1 - v * w * w / (2 * a); }
+  return v * (u - a / 2); }
+const e3R = (h) => 2 * Math.sin(22 * Math.PI / 180) * h / 2; // one walking step for a figure of height h (stepWalk's foothold spacing)
+// a rolled, roped feather bed hugged in front of the chest, both hands under it (Rivke, or Sore later)
+function e3HugBed(fo, name, w = 120, hh = 50) {
+  const d = fo.d ?? 1, cx = fo.x + d * 0.14 * fo.h, cy = fo.y - 0.64 * fo.h;
+  let o = reach(fo, 'f', cx + d * (w * 0.14), cy + hh * 0.42, name + '.bed.f');
+  o = reach(o, 'b', cx - d * (w * 0.12), cy + hh * 0.46, name + '.bed.b');
+  return {fo: o, bed: featherBed(cx - w / 2, cy + hh / 2, w, hh, '#DFE0D6')};
+}
+
+/* ================= ep3_runner: the Battery at dusk, May 1884 (ch 1 cold open, ch 4 payoff) ================= */
+// Sore comes out past the depot's fence with Rivke, Shmuel, a roped feather bed and the trunk. Yankel is not there. A man in a good
+// coat (ink) has been watching from the edge of the promenade; he walks up smiling, takes the trunk, and Shmuel lets go of his
+// mother's hand and takes his. Hard freeze. Payoff (ch 4): he leads them along the Battery, away from the ferry slips; Rivke runs,
+// takes Shmuel's other hand and pulls him back; Yankel shoves through the crowd from the ferries; the man drops the trunk and is gone.
+// Low sun from the right: long shadows thrown left, a warm rim on the right of every figure. Promenade ground G; a man is 300 px.
+const RN = {G: 930, H: 300, ink: '#0D0C09', ferry: 1460};
+function rnBack(t, c) { // the harbour behind the depot at dusk: low sun, the Jersey shore, ships at anchor (masts, yards), the fort
+  const s = [], G = RN.G, r = rng(141);
+  // far: the Jersey shore and the harbour water with the sun's path on it
+  const far = [`<path d="M-1200,640 L-600,628 L-200,634 L400,622 L900,632 L1500,618 L2200,630 L3200,626 L3200,700 L-1200,700 Z" fill="#2B3B38"/>`,
+    MAT.water(-1200, 652, 4600, 260, t, {seed: 142, n: 140, top: '#5A4A3A', bottom: '#1C2B2A', glint: '#FFD9A0'}),
+    `<rect x="1300" y="654" width="900" height="200" fill="url(#rnpath)" opacity="0.55"/>`];
+  for (let k = 0; k < 7; k++) { // ships at anchor: hull, two or three masts with yards, a few stays
+    const x = -700 + k * 520 + r() * 160, y = 680 + r() * 30, L = 160 + r() * 120, m = 2 + (r() < 0.5 ? 1 : 0), hm = 150 + r() * 70, col = '#1C2422';
+    far.push(`<path d="M${f1(x)},${f1(y - 16)} L${f1(x + L)},${f1(y - 20)} L${f1(x + L - 18)},${f1(y)} L${f1(x + 14)},${f1(y)} Z" fill="${col}"/>`);
+    for (let j = 0; j < m; j++) { const mx = x + L * (0.22 + j * 0.3), mh = hm * (j === 1 ? 1 : 0.88);
+      far.push(`<rect x="${f1(mx - 2)}" y="${f1(y - 16 - mh)}" width="4" height="${f1(mh)}" fill="${col}"/>` + [0.3, 0.55, 0.78].map((u) => `<rect x="${f1(mx - 30 * (1 - u * 0.5))}" y="${f1(y - 16 - mh * u)}" width="${f1(60 * (1 - u * 0.5))}" height="3" fill="${col}"/>`).join(''));
+      far.push(line([[mx, y - 16 - mh], [x + (j ? L * (0.22 + (j - 1) * 0.3) : -20), y - 18]], col, 1.2) + line([[mx, y - 16 - mh], [x + L * (0.22 + (j + 1) * 0.3), j === m - 1 ? y - 20 : y - 16 - mh * 0.9]], col, 1.2)); }
+  }
+  s.push(layerAt(c, 0.35, far.join('')));
+  // middle: the fort (Castle Garden, Round 13's drawing without the city behind it), set back behind the depot's fence
+  const fort = `<g transform="translate(380,${G - 100}) scale(0.7) translate(-1060,-760)">${cgOutside(t, {city: false})}</g>`;
+  // the ferry house at the right: a shed with arched slips, a blank sign board (scribbles only), a ferry with its walking beam
+  const fx = RN.ferry, fy = G - 120, fh = [];
+  fh.push(`<rect x="${fx}" y="${fy - 230}" width="560" height="230" fill="#1F2B2A"/><path d="M${fx - 20},${fy - 230} L${fx + 280},${fy - 300} L${fx + 580},${fy - 230} Z" fill="#162120"/>`);
+  for (let k = 0; k < 3; k++) fh.push(`<path d="M${fx + 40 + k * 180},${fy} l0,-130 q60,-60 120,0 l0,130 Z" fill="#0B1110"/>`);
+  fh.push(`<rect x="${fx + 120}" y="${fy - 214}" width="320" height="44" fill="#DFE0D6" opacity="0.7"/>` + e3Script(fx + 150, fy - 194, 260, 1, 1, 143, '#2B2418'));
+  fh.push(`<rect x="${fx + 270}" y="${fy - 360}" width="10" height="70" fill="#162120"/>` + flag(fx + 280, fy - 360, 60, 34, '#A3BAB2', t, 7));
+  const bx = fx + 140; // the ferry in the slip: a double-ended hull, the cabin, the walking beam on its A-frame, the stack
+  fh.push(`<rect x="${bx - 40}" y="${fy - 60}" width="420" height="40" fill="#0D0C09"/><rect x="${bx}" y="${fy - 120}" width="340" height="60" fill="#1A2120"/>` + [...Array(8)].map((_, k) => `<rect x="${bx + 14 + k * 40}" y="${fy - 108}" width="22" height="26" fill="${E3.warm}" opacity="0.35"/>`).join('') +
+    `<path d="M${bx + 150},${fy - 120} l30,-70 l30,70" stroke="#0D0C09" stroke-width="6" fill="none"/><path d="M${bx + 120},${fy - 186 + 8 * Math.sin(t * 2)} L${bx + 240},${fy - 194 - 8 * Math.sin(t * 2)}" stroke="#0D0C09" stroke-width="9"/><rect x="${bx + 250}" y="${fy - 210}" width="20" height="90" fill="#0D0C09"/>`);
+  fh.push(MAT.smoke(bx + 260, fy - 214, t, {col: '3E5F5A', k: 0.9, n: 6, drift: -140, seed: 144}));
+  s.push(layerAt(c, 0.7, `<rect x="-1200" y="${G - 140}" width="4600" height="60" fill="#162120"/>` + fort + fh.join('')));
+  return s.join('');
+}
+function rnFore(t) { // the promenade: the depot's iron fence and its gate behind, flagstones, gas lamps, a bench
+  const G = RN.G, s = [];
+  s.push(MAT.floor(-1200, 3400, G - 110, G + 700, {kind: 'flag', base: '#3A4440', seed: 145, size: 60, vp: 960}));
+  // the fence round the depot (built to keep runners out): palings with spear tops, stone piers, the gate standing open
+  const fy = G - 110, pal = [];
+  for (let x = -1200; x < 1500; x += 16) { if (x > 300 && x < 470) continue; pal.push(`<rect x="${x}" y="${fy - 120}" width="4" height="120" fill="#0D0C09"/><path d="M${x - 3},${fy - 120} l5,-12 l5,12 Z" fill="#0D0C09"/>`); }
+  s.push(pal.join('') + `<rect x="-1200" y="${fy - 104}" width="1500" height="5" fill="#0D0C09"/><rect x="470" y="${fy - 104}" width="1030" height="5" fill="#0D0C09"/><rect x="-1200" y="${fy - 20}" width="1500" height="5" fill="#0D0C09"/><rect x="470" y="${fy - 20}" width="1030" height="5" fill="#0D0C09"/>`);
+  for (const x of [270, 470, 1500]) s.push(`<rect x="${x - 16}" y="${fy - 160}" width="32" height="160" fill="#1A2120"/><rect x="${x - 22}" y="${fy - 170}" width="44" height="14" fill="#0D0C09"/>`);
+  s.push(`<path d="M300,${fy} l-70,-12 l0,-110 l70,12 Z" fill="none" stroke="#0D0C09" stroke-width="4"/><path d="M440,${fy} l70,-12 l0,-110 l-70,12 Z" fill="none" stroke="#0D0C09" stroke-width="4"/>`);
+  s.push(gasLamp(1760, G - 2, 300, 0.25, t) + gasLamp(-200, G - 2, 300, 0.25, t));
+  s.push(`<rect x="1300" y="${G - 150}" width="200" height="12" fill="#0D0C09"/><rect x="1310" y="${G - 138}" width="8" height="48" fill="#0D0C09"/><rect x="1482" y="${G - 138}" width="8" height="48" fill="#0D0C09"/>`);
+  return s.join('');
+}
+function renderE3Runner(t) {
+  const G = RN.G, H = RN.H, FR0 = 11.5, FR1 = 14.5, PO = 14.7; // the freeze, and the payoff's start (after a cut through black)
+  const payoff = t >= FR1, ts = payoff ? t : Math.min(t, FR0), u = t - PO;
+  const keys = payoff ? [[FR1, 0.98, 1060, 600], [PO + 3, 1.0, 1040, 610], [22, 1.04, 1020, 630]]
+    : [[0, 1.0, 960, 560], [5.0, 0.98, 1010, 560], [8.4, 1.5, 960, 690], [11.5, 1.75, 940, 712], [14.5, 1.75, 940, 712]];
+  const c = cam2(camAt(keys, ts)), lod = lodFor(H * c.z), det = lod.det;
+  const sun = {c: '#FFC88A', a: 0.75, dx: 0.011, dy: -0.004};
+  const W = [], SH = [], FG = [], scr = [];  // world figures, their long shadows
+  const put = (fo, extra = '') => { SH.push(e3Black(fo)); W.push(fig({...fo, noShadow: true}) + extra); };
+  if (!payoff) {
+    // the walk out: Sore with the trunk in her near hand and Shmuel by the other, Rivke behind hugging the feather bed
+    const wk = e3Trap(ts, 0, 3.5), Rs = e3R(H * 0.88), Rb = e3R(H * 0.5), Rr = e3R(H * 0.8);
+    const xs0 = 860 - 4 * Rs, xb0 = xs0 - 60, xr0 = xs0 - 170;
+    let so = stepWalk(nbOpts('nmother', {x: xs0, y: G, h: H, d: 1, det, rim: sun, an: {fArm: [174, 178], bArm: [196, 202], expr: ts > 4.4 ? 'worried' : 'neutral', tilt: ts > 4.4 && ts < 6.2 ? 6 * Math.sin((ts - 4.4) * 2.2) + 4 : 0}}), xs0, 1, 4 * Rs * wk, () => G, 'rn.sore');
+    let sb = stepWalk(nbOpts('nson', {x: xb0, y: G, h: H, scale: 0.5, d: 1, det, rim: sun, an: {fArm: [150, 140], tilt: 6}}), xb0, 1, 7 * Rb * wk, () => G, 'rn.shmuel');
+    let rv = stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {tilt: ts > 5 ? 10 : 0, expr: 'set'}}), xr0, 1, 4 * Rr * wk, () => G, 'rn.rivke');
+    rv = e3Settle(rv, smooth(3.7, 4.05, ts), 'rn.rivke'); // (Sore keeps her stride: she has the trunk in one hand and Shmuel in the other)
+    const hb = e3HugBed(rv, 'rn.rivke'); rv = hb.fo;
+    // the trunk: hanging from Sore's near hand while she walks; set down in front of her at 3.5 to 4.2; then her hand comes away
+    // the trunk hangs from Sore's near hand the whole time she stands there; the man takes it out of her hand (contact 9.5), and it
+    // swings across to hang from his far hand (9.5 to 10.1)
+    const g0 = E3K.hand(so, 'f');
+    let trunkW = [g0.x, g0.y];
+    // the runner: watching from the lamp post at the right edge, then he walks up (5.6 to 8.4), stoops for the handle (8.9 to 9.5),
+    // straightens with the trunk (9.5 to 10.1); his near hand goes out to the boy (10.3 to 11.3)
+    const Rm = e3R(H), xm1 = 990, xm0 = xm1 + 6 * Rm, wm = e3Trap(ts, 5.6, 8.4);
+    const smile = ts > 7.4, crouch = smooth(8.9, 9.5, ts) * (1 - smooth(9.5, 10.1, ts));
+    let rm = {x: xm0, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: ts > 7 ? det : 0, rim: ts > 5.6 ? {...sun, a: 0.55} : null,
+      an: {fArm: [176, 182], bArm: [184, 188], expr: smile ? 'smile' : 'neutral', tilt: ts < 5.6 ? -4 : ts > 10.3 ? -16 : -6}};
+    rm = stepWalk(rm, xm0, -1, 6 * Rm * wm, () => G, 'rn.runner'); rm = e3Settle(rm, smooth(8.45, 8.8, ts), 'rn.runner');
+    const gripR = E3K.hand(rm, 'b'), lift = smooth(9.5, 10.1, ts);
+    if (crouch > 0) { const feet = [E3K.foot(rm, 0), E3K.foot(rm, 1)]; rm = plant({...rm, y: rm.y + 26 * crouch, an: {...rm.an, lean: 25 * crouch}}, feet, 'rn.runner.stoop'); }
+    if (ts > 8.9) {
+      if (ts < 9.5) { const k = smooth(8.9, 9.45, ts); rm = e3Move(rm, 'b', lerp(gripR.x, g0.x + 12, k), lerp(gripR.y, g0.y, k), 'rn.runner.reach'); if (ts > 9.45) rm = reach(rm, 'b', g0.x + 12, g0.y, 'rn.runner.handle'); }
+      else { trunkW = [lerp(g0.x, gripR.x - 12, lift), lerp(g0.y, gripR.y, lift)]; rm = reach(rm, 'b', trunkW[0] + 12, trunkW[1], 'rn.runner.handle'); }
+    }
+    if (ts < 9.5) E3K.log('hold', 'rn.sore.handle', [g0.x, g0.y], [g0.x, g0.y]);
+    // Shmuel holds his mother's hand until 10.2; then he lets go, walks two steps to the man and takes his hand (contact at 11.3)
+    const Pm = [so.x - 26, G - 132];
+    const xb1 = xb0 + 7 * Rb, walk2 = e3Trap(ts, 10.2, 11.1);
+    if (ts >= 10.2) sb = stepWalk({...sb, x: xb1}, xb1, 1, 2 * Rb * walk2, () => G, 'rn.shmuel2');
+    const P2 = [sb.x + 28, G - 138];
+    if (ts < 10.2) [so, sb] = e3Clasp(so, 'b', sb, 'f', Pm, 'rn.hand.mother');
+    else {
+      const rel = smooth(10.2, 10.6, ts), gRest = E3K.hand({...so, an: {...so.an, bArm: [192, 198]}}, 'b'); so = e3Move(so, 'b', lerp(Pm[0], gRest.x, rel), lerp(Pm[1], gRest.y, rel), 'rn.sore.hand');
+      const offer = smooth(10.3, 11.0, ts); rm = {...rm, an: {...rm.an, lean: 8 * offer}}; const gF = E3K.hand(rm, 'f');
+      if (ts < 11.3) { rm = e3Move(rm, 'f', lerp(gF.x, P2[0], offer), lerp(gF.y, P2[1], offer), 'rn.runner.offer');
+        const take = smooth(10.9, 11.3, ts), gB = E3K.hand(sb, 'f'); sb = e3Move(sb, 'f', lerp(gB.x, P2[0], take), lerp(gB.y, P2[1], take), 'rn.shmuel.take'); }
+      else [rm, sb] = e3Clasp(rm, 'f', sb, 'f', P2, 'rn.hand.runner');
+    }
+    // draw: the trunk behind the runner while he has it, in front of Sore while she does
+    const trunkSvg = e3TrunkAt(trunkW[0], trunkW[1]);
+    SH.push(`<g fill="#000">${trunkSvg.replace(/fill="#[0-9A-Fa-f]+"/g, 'fill="#000"')}</g>`);
+    put(rv, hb.bed);
+    W.push(trunkSvg); put(so); // drawn behind her: it reads on her far side
+    put(rm); put(sb);
+    // screen text
+    scr.push(tag(130, 120, 'THE BATTERY · NEW YORK · MAY 1884', smooth(0.3, 0.7, ts) * (1 - smooth(5.2, 5.6, ts))));
+    if (ts > 1.4 && ts < 4.4) scr.push(penS(1020, 250, 'everything they own', 34, -3));
+    if (ts > 4.6 && ts < 7.4) scr.push(penS(130, 230, 'her husband was supposed to be here', 32, -3), tag(150, 300, 'COMPOSITE CHARACTERS', smooth(4.6, 5.0, ts)));
+    if (ts > 7.6 && ts < 10.4) scr.push(penS(1020, 210, 'good coat, clean boots', 32, -3));
+    if (t >= FR0) { // HARD FREEZE: a flash, the colour drains, a teal ring on the two hands
+      const fz = t - FR0, Ps = [c.sx(P2[0]), c.sy(P2[1])];
+      scr.push(`<rect width="1920" height="1080" fill="#0D0C09" opacity="${f1(0.38 * smooth(0, 0.12, fz))}"/><rect width="1920" height="1080" fill="#FFF" opacity="${f1(0.55 * (1 - smooth(0, 0.18, fz)))}"/>`);
+      scr.push(drawOn([...Array(41)].map((_, k) => { const q = -Math.PI / 2 + TAU * k / 40 * 1.05; return [Ps[0] + Math.cos(q) * 70, Ps[1] + Math.sin(q) * 62]; }), smooth(0.15, 0.6, fz), 6));
+      scr.push(penS(130, 220, 'he has never heard of Yankel Rabinowitz', 32, -3));
+      if (fz > 0.5) scr.push(tag(150, 980, 'NEW YORK CALLED THEM RUNNERS', smooth(0.5, 0.9, fz)));
+    }
+  } else {
+    // ---- payoff (ch 4): along the Battery, away from the ferries ----
+    const Rm = e3R(H), Rs = e3R(H * 0.88), Rr = e3R(H * 0.8), Ry = e3R(H * 0.97);
+    const xm0 = 1150, a1 = e3Trap(u, 0, 3.0) * 4 * Rm, a2 = e3Trap(u, 3.6, 6.0, 0.15) * 7 * Rm, sm = a1 + a2;
+    const drop = smooth(3.3, 3.6, u);
+    let rm = stepWalk({x: xm0, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: 0, rim: {...sun, a: 0.5}, an: {fArm: [176, 182], bArm: [184, 188], tilt: u > 2.9 && u < 3.6 ? 8 : -4}}, xm0, -1, sm, () => G, 'rn.p.runner');
+    // Shmuel trails him by the hand (his near hand in the man's far hand) until Rivke has him
+    const Rb = e3R(H * 0.5), xb0 = xm0 + 60;
+    let sb = stepWalk(nbOpts('nson', {x: xb0, y: G, h: H, scale: 0.5, d: -1, det, rim: sun, an: {tilt: 4, lean: u > 3.0 ? -6 * smooth(3.0, 3.3, u) : 0}}), xb0, -1, Math.min(a1, 4 * Rm), () => G, 'rn.p.shmuel');
+    const P2 = [rm.x + 30, G - 142], hold = u < 3.0, rel = smooth(3.0, 3.3, u);
+    if (hold) [rm, sb] = e3Clasp(rm, 'b', sb, 'f', P2, 'rn.p.hand.runner');
+    else { const gB = E3K.hand({...sb, an: {...sb.an, fArm: [168, 160]}}, 'f'); sb = e3Move(sb, 'f', lerp(P2[0], gB.x, rel), lerp(P2[1], gB.y, rel), 'rn.p.shmuel.free');
+      if (u < 3.6) rm = e3Move(rm, 'b', lerp(P2[0], rm.x + 10, rel), lerp(P2[1], G - 0.4 * H, rel), 'rn.p.runner.free'); }
+    // the trunk in the man's near hand; he lets it fall at 3.3 to 3.6 and hurries off left
+    const gT = E3K.hand(rm, 'f');
+    let trunkW = [gT.x, gT.y];
+    if (u < 3.3) holding(rm, 'f', 'rn.p.trunk', () => ''); else { const g3 = E3K.hand({...rm, x: xm0 - a1}, 'f'); trunkW = [g3.x, lerp(g3.y, G - E3TR.lift, smooth(3.3, 3.55, u))]; }
+    // Sore follows with the feather bed; she stops when Rivke shouts (3.0)
+    const xs0 = xm0 + 230;
+    let so = stepWalk(nbOpts('nmother', {x: xs0, y: G, h: H, d: -1, det, rim: sun, an: {tilt: u > 3.1 ? 8 : 0, expr: u > 3.1 ? 'worried' : 'neutral'}}), xs0, -1, e3Trap(u, 0, 3.1) * 4 * Rs, () => G, 'rn.p.sore');
+    const sb2 = e3HugBed(so, 'rn.p.sore'); so = sb2.fo;
+    // Rivke: looking back at the ferry slips, then she turns and runs to Shmuel and takes his free hand (2.9)
+    const xr1 = xb0 - 4 * Rm + 78, xr0 = xr1 + 7 * Rr, ru = e3Trap(u, 1.3, 2.9, 0.18);
+    let rv = u < 1.3 ? {...nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {...POSES.stand(u, 0.3), tilt: 6, expr: 'set'}})}
+      : stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: -1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {lean: 0, expr: u > 2.9 ? 'worried' : 'set', tilt: 0}}), xr0, -1, 7 * Rr * ru, () => G, 'rn.p.rivke');
+    if (u >= 2.6) { const gS = E3K.hand(sb, 'b'), gR = E3K.hand(rv, 'f'), k2 = smooth(2.6, 2.9, u);
+      if (u < 2.9) rv = e3Move(rv, 'f', lerp(gR.x, gS.x, k2), lerp(gR.y, gS.y, k2), 'rn.p.rivke.reach');
+      else { const P3 = [sb.x + 36, G - 124]; [rv, sb] = e3Clasp(rv, 'f', sb, 'b', P3, 'rn.p.hand.rivke'); } }
+    if (u < 1.3) rv = plant(rv, [[xr0 + 0.04 * rv.h, G], [xr0 - 0.05 * rv.h, G]], 'rn.p.rivke.stand');
+    // Yankel shoves through the crowd from the ferries (2.4 to 5.2)
+    const xy1 = xs0 - 4 * Rs + 170, xy0 = xy1 + 9 * Ry, yu = e3Trap(u, 2.4, 5.2, 0.15);
+    let yk = stepWalk(nbOpts('nfather', {x: xy0, y: G, h: H, d: -1, hat: 'cap', coat: 'frock', det, rim: sun, an: {fArm: [120, 100], bArm: [200, 210], lean: 0, tilt: 6, expr: 'worried'}}), xy0, -1, 9 * Ry * yu, () => G, 'rn.p.yankel');
+    const crowd = []; const rc = rng(146);
+    for (let k = 0; k < 9; k++) { const cx0 = 1650 + k * 95 + rc() * 30, near = Math.max(0, 1 - Math.abs(yk.x - cx0) / 110), fo = e3PersonOpts(rc, cx0, G - 6 - (k % 2) * 10, H, u, RN.ink, {an: {lean: -14 * near}});
+      crowd.push(fo); }
+    crowd.forEach((fo) => put({...fo, rim: {...sun, a: 0.4}}));
+    const trunkSvg = e3TrunkAt(trunkW[0], trunkW[1]);
+    SH.push(`<g>${trunkSvg.replace(/fill="#[0-9A-Fa-f]+"/g, 'fill="#000"')}</g>`);
+    put(yk); put(so, sb2.bed); W.push(trunkSvg); put(rm); put(sb); put(rv);
+    // teal: a ring on the ferry slips, and an arrow the way they should have gone
+    scr.push(tag(130, 120, 'A FEW MINUTES LATER', smooth(0.1, 0.4, u) * (1 - smooth(2.6, 3.0, u))));
+    if (u > 0.4 && u < 3.4) { const k3 = smooth(0.4, 1.0, u) * (1 - smooth(3.0, 3.4, u));
+      const zp = 1 + (c.z - 1) * 0.7, ax = 960 + (c.ux - 960) * 0.7, ay = 540 + (c.uy - 540) * 0.7, fxs = 960 + (RN.ferry + 280 - ax) * zp, fys = 540 + (G - 380 - ay) * zp;
+      scr.push(drawOn([[fxs - 520, fys - 40], [fxs - 200, fys - 70], [fxs - 20, fys - 10]], k3, 7) + (k3 > 0.9 ? `<path d="M${f1(fxs - 14)},${f1(fys - 4)} l-30,-12 l12,-26 Z" fill="${E3.teal}"/>` : '') + penS(fxs - 560, fys - 110, 'the ferries were this way', 30, -3)); }
+    if (u > 1.0 && u < 3.6) scr.push(penS(130, 230, 'heading away from the ferries', 32, -3));
+    if (u > 3.4 && u < 6.0) scr.push(penS(1060, 230, 'Yankel, late from work', 32, -3));
+    if (u > 5.2) scr.push(penS(130, 230, 'the man in the good coat was gone', 32, -3));
+  }
+  const black = payoff ? 1 - smooth(PO - 0.2, PO + 0.25, t) : 0;
+  const world = rnBack(ts, c) + layerAt(c, 1, rnFore(ts) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
+  const defs = e3Defs(ts, grad('rndusk', [['0', '#152220'], ['0.5', '#3B4743'], ['0.78', '#9A6E4C'], ['1', '#D99A62']]) +
+    `<radialGradient id="rnsun"><stop offset="0" stop-color="#FFE2B0" stop-opacity="0.95"/><stop offset="0.12" stop-color="#FFC88A" stop-opacity="0.6"/><stop offset="1" stop-color="#FFB15C" stop-opacity="0"/></radialGradient>` +
+    `<linearGradient id="rnpath" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC88A" stop-opacity="0"/><stop offset="0.5" stop-color="#FFC88A" stop-opacity="0.5"/><stop offset="1" stop-color="#FFC88A" stop-opacity="0"/></linearGradient>`);
+  const sky = `<rect width="1920" height="1080" fill="url(#rndusk)"/><circle cx="${f1(1700 - (c.ux - 960) * 0.1)}" cy="${f1(470 - (c.uy - 560) * 0.1)}" r="420" fill="url(#rnsun)"/>`;
+  return frame(defs, sky, world, scr.join('') + (black > 0 ? `<rect width="1920" height="1080" fill="#000" opacity="${f1(black)}"/>` : ''), t);
+}
+
+/* ================= ep3_shtetl: what they left behind (ch 2) ================= */
+// A small wooden house in a small town in the Pale of Settlement (what is now Ukraine). (1) Friday night: the Sabbath candles in
+// brass sticks, the challah under its cloth, the family at the table, Sore's blessing over the candles; the house is cut open
+// like cutaway.js. (2) Spring 1881, night: from the dark yard, far roofs burned out against a glow and smoke on the horizon; no
+// people, no violence shown, Rivke at the window. (3) Dawn, 1882: Yankel goes first, alone, with a bundle; the family at the door.
+// Scale: a man 360 px (about 68 px to the foot); the floor F, the yard G one step lower.
+const SHT = {F: 900, G: 930, x0: 480, x1: 1440, top: 420, H: 360, door: [560, 680], win: [1060, 1200, 560, 690]};
+function shHouse(t, {cut = 0, lit = 1, night = 1} = {}) { // returns {back, front}: back = the room (when cut), front = the walls, roof, door
+  const {F, G, x0, x1, top} = SHT, b = [], f = [], fl = 0.88 + 0.07 * Math.sin(t * 7.3) + 0.05 * Math.sin(t * 15.1);
+  // the room: plank back wall, the whitewashed clay oven, a shelf of pots and a bench, boards on the floor
+  b.push(MAT.planks(x0, top, x1 - x0, F - top, {base: '#2E261C', seed: 151, size: 30}) + `<rect x="${x0}" y="${top}" width="${x1 - x0}" height="${F - top}" fill="#000" opacity="${f1(0.15 + 0.35 * night)}"/>`);
+  b.push(`<path d="M${x0 + 20},${F} L${x0 + 20},${F - 300} Q${x0 + 20},${F - 360} ${x0 + 90},${F - 360} L${x0 + 200},${F - 360} L${x0 + 200},${F} Z" fill="#8F8A7A"/><rect x="${x0 + 60}" y="${F - 200}" width="90" height="70" rx="30" fill="#1A1410"/><rect x="${x0 + 120}" y="${top}" width="50" height="${F - 360 - top}" fill="#6E6A5C"/>`);
+  b.push(`<rect x="${x0 + 260}" y="${top + 120}" width="200" height="10" fill="#1A1410"/>` + [0, 1, 2].map((k) => `<path d="M${x0 + 274 + k * 60},${top + 120} l6,-36 l34,0 l6,36 Z" fill="#1A1410"/>`).join(''));
+  b.push(MAT.floor(x0, x1, F - 40, F + 26, {kind: 'planks', base: '#3A3326', seed: 152, size: 46, vp: (x0 + x1) / 2}));
+  if (lit > 0) b.push(glowC(930, F - 220, 520, 0.85 * lit * fl, 'mswarm') + glowC(930, F - 220, 140, 0.6 * lit * fl));
+  // outside: the front wall of horizontal planks with the door and the window, or (cut) only the section of the walls
+  const wall = MAT.planks(x0 - 20, top, x1 - x0 + 40, F - top + 24, {base: '#3B3022', seed: 153, size: 28});
+  const [d0, d1] = SHT.door, [w0, w1, wy0, wy1] = SHT.win;
+  if (cut < 1) {
+    f.push(`<g opacity="${f1(1 - cut)}">${wall}<rect x="${x0 - 20}" y="${top}" width="${x1 - x0 + 40}" height="${F - top + 24}" fill="#000" opacity="${f1(0.25 + 0.4 * night)}"/>` +
+      `<rect x="${d0}" y="${F - 330}" width="${d1 - d0}" height="330" fill="#0D0A07"/><rect x="${d0 - 10}" y="${F - 340}" width="${d1 - d0 + 20}" height="12" fill="#1A1410"/>` +
+      `<rect x="${w0 - 14}" y="${wy0 - 14}" width="${w1 - w0 + 28}" height="${wy1 - wy0 + 28}" fill="#1A1410"/><rect x="${w0}" y="${wy0}" width="${w1 - w0}" height="${wy1 - wy0}" fill="${lit > 0 ? '#6A4524' : '#0D1414'}" opacity="1"/>` +
+      (lit > 0 ? glowC((w0 + w1) / 2, wy1 - 50, 160, 0.9 * fl, 'mswarm') + [w0 + 50, w0 + 92].map((cx) => glowC(cx, wy1 - 6 - 60, 34, 0.9 * fl) + candlestick(cx, wy1 - 6, 1.6, '#C9A55A', 1) + `<ellipse cx="${cx}" cy="${wy1 - 6 - 60}" rx="4" ry="9" fill="#FFF3D6"/>`).join('') : '') +
+      `<rect x="${(w0 + w1) / 2 - 4}" y="${wy0}" width="8" height="${wy1 - wy0}" fill="#1A1410"/><rect x="${w0}" y="${(wy0 + wy1) / 2 - 3}" width="${w1 - w0}" height="6" fill="#1A1410"/>` +
+      `<rect x="${w0 - 70}" y="${wy0 - 10}" width="56" height="${wy1 - wy0 + 20}" fill="#2B2418"/><rect x="${w1 + 14}" y="${wy0 - 10}" width="56" height="${wy1 - wy0 + 20}" fill="#2B2418"/></g>`);
+  }
+  // the cut walls and the floor slab, the low stone footing, the steep shingled roof with its overhang, the chimney
+  f.push(`<rect x="${x0 - 30}" y="${top - 10}" width="30" height="${F - top + 40}" fill="#0A0806"/><rect x="${x1}" y="${top - 10}" width="30" height="${F - top + 40}" fill="#0A0806"/><rect x="${x0 - 30}" y="${F + 26}" width="${x1 - x0 + 60}" height="${G - F + 4}" fill="#1E1A14"/>`);
+  for (let k = 0; k < 14; k++) f.push(`<rect x="${x0 - 26 + k * 72}" y="${F + 28}" width="66" height="${G - F - 2}" rx="6" fill="#2B2620"/>`);
+  const roof = `M${x0 - 90},${top + 10} L${x1 + 90},${top + 10} L${x1 - 120},${top - 300} L${x0 + 120},${top - 300} Z`;
+  f.push(`<path d="${roof}" fill="#1F1A13"/>` + [...Array(10)].map((_, k) => { const y = top - 290 + k * 30, u = (y - (top - 300)) / 310; return `<rect x="${f1(x0 + 120 - 210 * u)}" y="${f1(y)}" width="${f1(x1 - x0 - 240 + 420 * u)}" height="2" fill="#0D0A07" opacity="0.6"/>`; }).join('') +
+    `<rect x="${x0 + 130}" y="${top - 380}" width="56" height="140" fill="#2B2620"/><rect x="${x0 + 124}" y="${top - 390}" width="68" height="14" fill="#1A1410"/>`);
+  if (cut > 0) f.push(`<rect x="${x0 - 90}" y="${top}" width="${x1 - x0 + 180}" height="12" fill="#0A0806"/>`); // the ceiling slab in section
+  return {back: b.join(''), front: f.join('')};
+}
+function challah(x, y, s) { // a braided loaf on a board under an embroidered cloth (y: the board's top)
+  return `<rect x="${f1(x - 70 * s)}" y="${f1(y - 6 * s)}" width="${f1(140 * s)}" height="${f1(6 * s)}" fill="#3B2A18"/><path d="M${f1(x - 64 * s)},${f1(y - 6 * s)} q${f1(4 * s)},${f1(-34 * s)} ${f1(64 * s)},${f1(-34 * s)} q${f1(60 * s)},0 ${f1(64 * s)},${f1(34 * s)} Z" fill="#E9E4D6"/>` +
+    `<path d="M${f1(x - 52 * s)},${f1(y - 14 * s)} q${f1(52 * s)},${f1(-20 * s)} ${f1(104 * s)},0" stroke="#C9A55A" stroke-width="${f1(3 * s)}" fill="none" stroke-dasharray="${f1(6 * s)} ${f1(5 * s)}"/>`;
+}
+function shNightTown(t) { // spring 1881: far roofs burned out on the horizon, a red glow and smoke; nearer, dark yards and fences
+  const s = [], r = rng(155), hz = 640;
+  s.push(`<rect width="1920" height="1080" fill="url(#shnight)"/>`);
+  s.push(`<ellipse cx="1260" cy="${hz}" rx="900" ry="260" fill="url(#e3fire)" opacity="${f1(0.75 + 0.15 * Math.sin(t * 3.1))}"/>`);
+  for (const [x, k] of [[980, 0.9], [1300, 1.2], [1560, 0.8]]) s.push(MAT.smoke(x, hz - 40, t, {col: '1F3735', k: 1.6 * k, n: 8, rise: 380, drift: 260, speed: 7, seed: 156 + x}));
+  // the far row of houses; some only black frames of rafters now
+  for (let x = -60; x < 2000;) { const w = 70 + r() * 70, h = 40 + r() * 30, burnt = x > 820 && x < 1700 && r() < 0.65;
+    if (burnt) { s.push(`<rect x="${f1(x)}" y="${f1(hz - h)}" width="${f1(w)}" height="${f1(h)}" fill="#0D0A07" opacity="0.55"/>`); for (let k = 0; k <= 5; k++) s.push(line([[x + k * w / 5, hz - h], [x + w / 2 + (r() - 0.5) * 8, hz - h - 46 - r() * 10]], '#0D0A07', 3)); }
+    else s.push(`<path d="M${f1(x)},${hz} l0,${f1(-h)} l${f1(w / 2)},-46 l${f1(w / 2)},46 l0,${f1(h)} Z" fill="#0D0A07"/>`);
+    if (r() < 0.25) s.push(`<rect x="${f1(x + w * 0.3)}" y="${f1(hz - h * 0.6)}" width="10" height="12" fill="#FFB15C" opacity="0.5"/>`);
+    x += w + 10 + r() * 30; }
+  for (let k = 0; k < 26; k++) { const ph = (t * 0.4 + k / 26) % 1, x = 900 + ((k * 137) % 800), y = hz - 40 - ph * 260; s.push(`<circle cx="${f1(x + 30 * Math.sin(ph * 6 + k))}" cy="${f1(y)}" r="2" fill="#FFB15C" opacity="${f1(0.8 * (1 - ph))}"/>`); } // sparks
+  s.push(`<path d="M-100,${hz} Q600,${hz + 30} 2100,${hz + 10} L2100,1200 L-100,1200 Z" fill="#0B0D0B"/>`);
+  for (let x = -60; x < 2000; x += 26) s.push(`<rect x="${x}" y="${hz + 80 + 10 * Math.sin(x / 140)}" width="5" height="60" fill="#050605"/>`);
+  return s.join('');
+}
+function renderE3Shtetl(t) {
+  const {F, G, H} = SHT, scr = [];
+  const P1 = t < 6.0, P2 = t >= 5.6 && t < 10.9, P3 = t >= 10.5;
+  let out = '';
+  if (P1) { // Friday night: outside the window (0 to 2.4), then the house opens up (2.2 to 3.0) and we are at the table
+    const c = cam2(camAt([[0, 1.6, 1130, 610], [2.4, 1.9, 1130, 620], [3.0, 1.12, 960, 640], [6, 1.18, 950, 650]], t)), cut = smooth(2.2, 3.0, t), lod = lodFor(H * c.z);
+    const h = shHouse(t, {cut, lit: 1}), s = [h.back], fl = 0.88 + 0.07 * Math.sin(t * 7.3);
+    const rim = {c: '#FFE2B0', a: lod.rimA * 0.8 * fl, dx: -0.01, dy: -0.004}, rimR = {...rim, dx: 0.01};
+    if (cut > 0) {
+      const tx0 = 780, tx1 = 1140, ty = F - 160;
+      // Sore behind the table, at the candles: her hands circle over the flames (3.2 to 4.6), then cover her eyes (4.6 to 5.8)
+      let so = nbOpts('nmother', {x: 880, y: F - 34, h: H, d: 1, det: lod.det, rim, an: {...POSES.stand(t, 0.2), tilt: t > 4.6 ? -2 : -14, expr: 'neutral', blink: t > 4.7 || t % 3.7 < 0.12}});
+      const circ = smooth(3.2, 3.6, t) * (1 - smooth(4.5, 4.7, t)), cover = smooth(4.6, 5.0, t), a = (t - 3.2) * 5.4;
+      if (circ > 0) { so = e3Move(so, 'f', lerp(E3K.hand(so, 'f').x, 955 + 22 * Math.cos(a), circ), lerp(E3K.hand(so, 'f').y, ty - 110 + 12 * Math.sin(a), circ), 'sh.sore.circle'); so = e3Move(so, 'b', lerp(E3K.hand(so, 'b').x, 935 + 20 * Math.cos(a + 1), circ), lerp(E3K.hand(so, 'b').y, ty - 104 + 10 * Math.sin(a + 1), circ), 'sh.sore.circle.b'); }
+      if (cover > 0) { const hd = E3K.toWorld(so, 0.07, 0.92); so = e3Move(so, 'f', lerp(E3K.hand(so, 'f').x, hd[0] + 6, cover), lerp(E3K.hand(so, 'f').y, hd[1] + 6, cover), 'sh.sore.eyes', true); so = e3Move(so, 'b', lerp(E3K.hand(so, 'b').x, hd[0], cover), lerp(E3K.hand(so, 'b').y, hd[1] + 12, cover), 'sh.sore.eyes.b', true); }
+      s.push(fig({...so, floorY: F - 34}));
+      // Rivke behind the table, the far side, hands resting on its edge
+      let rv = nbOpts('ndaughter', {x: 1078, y: F - 20, h: H, scale: 0.8, d: -1, hat: 'kerchief', wear: ['plain', 'apron'], det: lod.det, rim: rimR, an: {...POSES.stand(t, 0.6), lean: 0, bob: 0, tilt: -8, expr: 'smile', blink: (t + 1) % 4.1 < 0.12}});
+      rv = reach(rv, 'f', 1050, ty, 'sh.rivke.table'); rv = reach(rv, 'b', 1064, ty, 'sh.rivke.table.b');
+      s.push(fig({...rv, floorY: F - 20}));
+      // the table: a white Sabbath cloth, the brass candlesticks (lit), the challah under its cloth, a cup
+      s.push(`<rect x="${tx0}" y="${ty}" width="${tx1 - tx0}" height="12" fill="#2B2418"/><path d="M${tx0 - 8},${ty} L${tx1 + 8},${ty} L${tx1 + 14},${ty + 70} L${tx0 - 14},${ty + 70} Z" fill="#E9E4D6"/><rect x="${tx0 + 14}" y="${ty + 70}" width="14" height="${F - ty - 70}" fill="#1A1410"/><rect x="${tx1 - 28}" y="${ty + 70}" width="14" height="${F - ty - 70}" fill="#1A1410"/>` + MAT.shadow((tx0 + tx1) / 2, F + 4, 200, 0.4));
+      s.push(candlestick(945, ty, 2.0, '#C9A55A', 1) + candlestick(985, ty, 2.0, '#C9A55A', 1) + challah(1060, ty, 0.62) + `<path d="M${tx0 + 60},${ty} l4,-30 l22,0 l4,30 Z" fill="#C9A55A"/>`);
+      // Yankel at the right end, Shmuel at the left, seated, hands on the table
+      s.push(`<rect x="1170" y="${F - 100}" width="90" height="10" fill="#1A1410"/><rect x="1176" y="${F - 90}" width="8" height="90" fill="#1A1410"/><rect x="1246" y="${F - 90}" width="8" height="90" fill="#1A1410"/><rect x="1246" y="${F - 250}" width="8" height="160" fill="#1A1410"/>`);
+      let yk = sitOn(nbOpts('nfather', {x: 1215, y: 0, h: H, d: -1, hat: 'kippah', coat: 'vest', det: lod.det, rim: rimR, an: {tilt: -4, expr: 'smile', blink: t % 3.3 < 0.12}}), F - 100, F, 0.28, 'sh.yankel');
+      yk = reach(yk, 'f', tx1 - 30, ty, 'sh.yankel.table'); s.push(fig({...yk, floorY: F}));
+      s.push(`<rect x="700" y="${F - 100}" width="80" height="10" fill="#1A1410"/><rect x="706" y="${F - 90}" width="8" height="90" fill="#1A1410"/><rect x="766" y="${F - 90}" width="8" height="90" fill="#1A1410"/>`);
+      // Shmuel is seven: on a grown-up's chair his feet do not reach the floor, so they hang (no foot contact)
+      let sb = nbOpts('nson', {x: 738, y: 0, h: H, scale: 0.5, d: 1, det: lod.det, rim, an: {tilt: 10, expr: 'awe', blink: (t + 2) % 3.9 < 0.12}});
+      sb = {...sb, y: F - 100 + (0.46 - 0.035) * sb.h, an: {...POSES.sit(0), ...sb.an, legs: [84, 70], shins: [12 + 6 * Math.sin(t * 2.2), 4 + 6 * Math.sin(t * 2.2 + 1)], lean: 0, bob: 0}};
+      sb = reach(sb, 'f', tx0 + 6, ty, 'sh.shmuel.table'); s.push(fig({...sb, floorY: F}));
+    }
+    s.push(h.front);
+    const sky = `<rect x="-2000" y="-2000" width="6000" height="6000" fill="url(#shnight)"/>` + [...Array(40)].map((_, k) => { const r = rng(160 + k); return `<circle cx="${f1(-400 + r() * 2800)}" cy="${f1(-300 + r() * 600)}" r="${f1(1 + r() * 1.5)}" fill="#E9F0E6" opacity="${f1(0.3 + 0.5 * r())}"/>`; }).join('');
+    const ground = `<rect x="-2000" y="${G}" width="6000" height="800" fill="#141310"/>` + MAT.ground(-1000, 3000, G, {base: '#141310', seed: 161});
+    out += `<g opacity="${f1(1 - smooth(5.6, 6.0, t))}">${layerAt(c, 1, sky + ground + s.join(''))}</g>`;
+    scr.push(tag(130, 120, 'A SMALL TOWN IN THE PALE · RUSSIAN EMPIRE', smooth(0.3, 0.7, t) * (1 - smooth(5.4, 5.8, t))));
+    if (t > 0.9 && t < 5.0) scr.push(penS(130, 230, 'Friday night: the Sabbath candles', 32, -3));
+    if (t > 3.0 && t < 5.8) scr.push(tag(150, 990, 'COMPOSITE CHARACTERS', smooth(3.0, 3.4, t) * (1 - smooth(5.4, 5.8, t))));
+  }
+  if (P2) { // spring 1881: the town at night, roofs burning on the horizon; Rivke at the dark window, watching
+    const k = smooth(5.6, 6.0, t) * (1 - smooth(10.5, 10.9, t)), dr = (t - 5.6) * 6;
+    let n = `<g transform="translate(${f1(-dr)},0)">${shNightTown(t)}</g>`;
+    // our house in the near dark at the left (scaled), its window dark now, Rivke behind it
+    const hs = 0.42, hx = 200, hy = 1010, h2 = shHouse(t, {cut: 0, lit: 0});
+    let rv = nbOpts('ndaughter', {x: 1120, y: 790, h: H, scale: 0.8, d: 1, hat: 'kerchief', det: 0, rim: {c: '#FFB15C', a: 0.7, dx: 0.012, dy: 0}, an: {tilt: 6, expr: 'worried', fArm: [150, 120]}});
+    const win = `<clipPath id="shwin"><rect x="${SHT.win[0]}" y="${SHT.win[2]}" width="${SHT.win[1] - SHT.win[0]}" height="${SHT.win[3] - SHT.win[2]}"/></clipPath><g clip-path="url(#shwin)">${figure(rv)}</g>`;
+    const near = `<g transform="translate(${hx},${hy}) scale(${hs}) translate(${-SHT.x0},${-SHT.G})">${h2.back}${h2.front.replace('fill="#0D1414" opacity="1"', 'fill="#3A1E12" opacity="0.8"')}${win}<rect x="${SHT.win[0] - 14}" y="${SHT.win[2] - 14}" width="14" height="${SHT.win[3] - SHT.win[2] + 28}" fill="#1A1410"/></g>`;
+    out += `<g opacity="${f1(k)}">${n}${near}</g>`;
+    scr.push(tag(130, 120, 'SPRING 1881', smooth(6.0, 6.4, t) * (1 - smooth(10.3, 10.7, t))));
+    if (t > 6.6 && t < 10.4) scr.push(penS(1000, 230, 'town after town, houses burned', 32, -3));
+  }
+  if (P3) { // dawn, 1882: Yankel leaves with a bundle; Sore, Rivke and Shmuel at the door
+    const v = t - 10.5, c = cam2(camAt([[0, 0.78, 1150, 560], [7.5, 0.8, 1180, 560]], v)), lod = lodFor(H * c.z);
+    const h = shHouse(t, {cut: 0, lit: 0, night: 0.3}), s = [];
+    const dawn = {c: '#FFE6C9', a: 0.55, dx: 0.011, dy: -0.004};
+    const yR = e3R(H * 0.97), x0y = 640, ground = (x) => (x < SHT.door[1] + 30 ? F : G);
+    const w1 = e3Trap(v, 0.4, 3.4), w2 = e3Trap(v, 4.9, 7.5, 0.12), turned = v > 3.5 && v < 4.8;
+    let yk = nbOpts('nfather', {x: x0y, y: F, h: H, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim: dawn, an: {fArm: [176, 182], bArm: [-20, 200], tilt: 0}});
+    yk = stepWalk(yk, x0y, 1, 6 * yR * w1 + 7 * yR * w2, ground, 'sh.yankel.walk');
+    if (turned) { yk = {...yk, d: -1, an: {...yk.an, fArm: [36 + 10 * Math.sin((v - 3.6) * 9), 10], tilt: 4}}; yk = plant(yk, [E3K.foot({...yk, d: 1}, 1), E3K.foot({...yk, d: 1}, 0)], 'sh.yankel.turn'); }
+    // the bundle: a cloth bundle tied to a stick over the far shoulder, the stick held in the far hand
+    const bundleSvg = holding(yk, 'b', 'sh.yankel.stick', (gx, gy) => { const dd = yk.d, ex = gx - dd * 70, ey = gy - 78; return line([[gx + dd * 8, gy + 8], [ex, ey]], '#2B2418', 5) + bundle(ex - dd * 4, ey + 44, 1.3, '#4E726C'); });
+    s.push(h.back, h.front);
+    // the family in the doorway: Sore with a hand on the door post, Shmuel holding her hand, Rivke on the step
+    let so = nbOpts('nmother', {x: 650, y: F, h: H, d: 1, det: lod.det, rim: dawn, an: {...POSES.stand(v, 0.1), lean: 0, bob: 0, tilt: v > 4 ? 4 : -4, expr: 'worried', blink: v % 3.6 < 0.12}});
+    so = reach(so, 'f', SHT.door[1] - 2, F - 200, 'sh.sore.doorpost');
+    let sb = nbOpts('nson', {x: 600, y: F, h: H, scale: 0.5, d: 1, det: lod.det, rim: dawn, an: {...POSES.stand(v, 0.5), lean: 0, bob: 0, tilt: 8}});
+    [so, sb] = e3Clasp(so, 'b', sb, 'f', [so.x - 26, F - 0.44 * H], 'sh.hand.mother');
+    let rv = nbOpts('ndaughter', {x: 760, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: dawn, an: {...POSES.stand(v, 0.8), lean: 0, bob: 0, tilt: 6, fArm: v > 3.6 && v < 4.9 ? [40, 20] : [170, 160], expr: 'worried'}});
+    rv = plant(rv, [[770, G], [748, G]], 'sh.rivke.step');
+    s.push(`<rect x="${SHT.door[0] - 30}" y="${F - 330}" width="30" height="330" fill="#0D0A07"/>`);
+    s.push(fig({...sb, floorY: F}), fig({...so, floorY: F}), fig(rv));
+    s.push(bundleSvg + fig(yk));
+    const sky = `<rect x="-3000" y="-2000" width="8000" height="6000" fill="url(#shdawn)"/>` + farHills(2400, '#3E5F5A', 760, 162, 60, 18);
+    const ground2 = `<rect x="-3000" y="${G}" width="8000" height="900" fill="#2B2620"/>` + MAT.ground(-1000, 4000, G, {base: '#2B2620', seed: 163}) + [...Array(12)].map((_, k) => `<rect x="${1500 + k * 90}" y="${G - 80}" width="8" height="80" fill="#1A1410"/>`).join('') + `<rect x="1500" y="${G - 64}" width="1000" height="6" fill="#1A1410"/>`;
+    out += `<g opacity="${f1(smooth(10.5, 10.9, t))}">${layerAt(c, 1, sky + ground2 + s.join(''))}</g>`;
+    scr.push(tag(130, 120, 'DAWN · 1882', smooth(10.9, 11.3, t)));
+    if (v > 1.1 && v < 4.3) scr.push(penS(1000, 230, 'Yankel goes first, alone', 32, -3));
+    if (v > 4.5) scr.push(penS(860, 230, 'two years of waiting for a ticket', 32, -3));
+  }
+  const defs = e3Defs(t, grad('shnight', [['0', '#05080A'], ['0.6', '#0E1618'], ['1', '#1A1A16']]) + grad('shdawn', [['0', '#2B4744'], ['0.6', '#7E8F86'], ['0.85', '#D9B892'], ['1', '#F0D2A8']]));
+  return frame(defs, `<rect width="1920" height="1080" fill="#05080A"/>`, out, scr.join(''), t);
+}
+
+
+/* ================= ep3_hester: Rivke's first morning on the Lower East Side (ch 6) ================= */
+// A side-scroll down a pushcart market street (street.js coordinates: Episode 1's tenement() row, sidewalk at FAR_GROUND): pushcarts
+// end to end at the curb (after the Flow prop, p03_pushcart: a plank box on two big spoked wheels, legs and long handles), herring
+// barrels, pickles, pots, used coats hung on a pole, apples, bolts of cloth; vendors behind their carts, women bargaining in front
+// (ink), signs in Hebrew-style letters that cannot be read, a goat on a rope. Yankel walks ahead (cap, long coat); Rivke follows,
+// stops at the goat, and hurries to catch up. Then the same night: one room and a kitchen (e3Room), four asleep in the room, the
+// boarder on two chairs pushed together in the kitchen. A man is 100 px on the street (the camera brings him to about 230).
+const HS = {G: 1000, cartY: 952, M: 100, x1: 2500};
+function hsCart(x, y, load, t, seed) { // x: the cart's left (handle) end; y: the street under its wheels. Returns {svg, top: [x0, x1, y]}
+  const s = [], r = rng(seed), c = '#1A1410', wood = '#3B3328', bx0 = x + 46, bx1 = x + 166, top = y - 58;
+  s.push(MAT.shadow(x + 110, y + 2, 80, 0.35));
+  s.push(`<rect x="${bx0}" y="${top}" width="${bx1 - bx0}" height="18" fill="${wood}"/><rect x="${bx0}" y="${top}" width="${bx1 - bx0}" height="3" fill="#5F574A"/>` + line([[bx0 + 6, top + 16], [x, y - 44]], c, 5) + `<rect x="${bx0 + 8}" y="${top + 18}" width="6" height="${58 - 18}" fill="${c}"/>`);
+  const wx = bx1 - 22, wy = y - 24; s.push(`<circle cx="${wx}" cy="${wy}" r="24" fill="none" stroke="${c}" stroke-width="4"/>` + [...Array(10)].map((_, k) => line([[wx, wy], [wx + 24 * Math.cos(k * TAU / 10), wy + 24 * Math.sin(k * TAU / 10)]], c, 1.6)).join('') + `<circle cx="${wx}" cy="${wy}" r="4" fill="${c}"/>`);
+  if (load === 'pots') for (let k = 0; k < 5; k++) { const px = bx0 + 8 + k * 22, h = 14 + r() * 10; s.push(`<path d="M${px},${top} l3,${-h} l18,0 l3,${h} Z" fill="#4E5F58"/><rect x="${px + 1}" y="${top - h - 3}" width="22" height="3" fill="#A3BAB2" opacity="0.7"/>`); }
+  if (load === 'fruit') for (let k = 0; k < 22; k++) { const px = bx0 + 10 + r() * 96, py = top - 4 - r() * 14 * (1 - Math.abs(px - (bx0 + 58)) / 60); s.push(`<circle cx="${f1(px)}" cy="${f1(py)}" r="5.5" fill="${r() < 0.5 ? '#8A6A4A' : '#9A8458'}"/>`); }
+  if (load === 'cloth') for (let k = 0; k < 4; k++) s.push(`<rect x="${bx0 + 6}" y="${top - 12 - k * 11}" width="${100 - k * 8}" height="11" rx="5" fill="${['#4E726C', '#5F574A', '#2B4744', '#7E8F86'][k]}"/>`);
+  if (load === 'coats') { s.push(`<rect x="${bx0 + 4}" y="${top - 110}" width="4" height="110" fill="${c}"/><rect x="${bx1 - 8}" y="${top - 110}" width="4" height="110" fill="${c}"/><rect x="${bx0 + 4}" y="${top - 112}" width="${bx1 - bx0 - 8}" height="4" fill="${c}"/>`);
+    for (let k = 0; k < 3; k++) { const cx = bx0 + 26 + k * 34, sw = 2 * Math.sin(t * 1.4 + k + seed); s.push(`<path d="M${cx - 12},${top - 106} l24,0 l${4 + sw},62 l-32,0 Z" fill="${['#2B4744', '#4E5F58', '#3B3328'][k]}"/><path d="M${cx - 6},${top - 106} l6,10 l6,-10" stroke="${c}" stroke-width="2" fill="none"/>`); } }
+  return {svg: s.join(''), top: [bx0, bx1, top]};
+}
+function hsBarrel(x, y, kind) { // a barrel on the street: herring heads up out of the brine, or pickles
+  const s = [`<path d="M${x - 18},${y} q-4,-24 0,-48 l36,0 q4,24 0,48 Z" fill="#3B3328"/><rect x="${x - 20}" y="${y - 12}" width="40" height="3" fill="#1A1410"/><rect x="${x - 20}" y="${y - 38}" width="40" height="3" fill="#1A1410"/><ellipse cx="${x}" cy="${y - 48}" rx="18" ry="4" fill="#1A1410"/>`];
+  if (kind === 'herring') for (let k = 0; k < 5; k++) s.push(`<path d="M${x - 12 + k * 6},${y - 48} l2,-14 l3,0 l1,14 Z" fill="#A3BAB2"/>`);
+  else for (let k = 0; k < 6; k++) s.push(`<ellipse cx="${x - 12 + k * 5}" cy="${y - 50}" rx="3" ry="6" fill="#5F7A52"/>`);
+  return s.join('');
+}
+function hsGoat(x, y, t) { // a nanny goat, munching: body, thin legs, horns, a little beard; the head dips to the cabbage leaves
+  const c = '#4A4034', dip = Math.max(0, Math.sin(t * 1.7)) * 8, hx = x + 40, hy = y - 46 + dip;
+  return MAT.shadow(x + 10, y + 1, 34, 0.35) + `<ellipse cx="${x + 8}" cy="${y - 42}" rx="32" ry="15" fill="${c}"/>` + [[-16, 0], [-8, 0], [18, 0], [26, 0]].map(([lx]) => `<rect x="${x + lx}" y="${y - 32}" width="4" height="32" fill="${c}"/>`).join('') +
+    `<path d="M${x + 32},${y - 48} L${hx + 4},${hy - 8} L${hx + 14},${hy + 6} L${x + 34},${y - 34} Z" fill="${c}"/><path d="M${hx + 2},${hy - 8} q4,-14 -6,-18" stroke="${c}" stroke-width="3" fill="none"/><path d="M${hx + 12},${hy + 6} l-2,8 l4,-1 Z" fill="${c}"/><path d="M${x - 24},${y - 46} l-6,-6" stroke="${c}" stroke-width="3"/>` +
+    `<path d="M${hx + 8},${y} q6,-8 12,0 q-6,-4 -12,0" fill="#5F7A52"/>`;
+}
+function hsStreet(t) { // the tenement row, signboards in unreadable Hebrew-style letters, the sidewalk, curb and cobbles
+  const G0 = FAR_GROUND, s = [], r = rng(171);
+  let x = -200, i = 0; const rows = [];
+  while (x < HS.x1 + 300) { const w = 240 + r() * 50, fl = 4 + (r() < 0.6 ? 1 : 0); rows.push([x, w]); s.push(tenement(x, w, fl, 420 + i, t)); x += w + 4; i++; }
+  for (const [x0, w] of rows) { const sy = G0 - 150 + 4, sw = w * 0.6; s.push(`<rect x="${f1(x0 + 6)}" y="${sy}" width="${f1(sw)}" height="16" fill="#DFE0D6" opacity="0.85"/>` + hebrewish(x0 + 6 + sw - 10, sy + 13, 10, Math.floor(sw / 11), 172 + Math.round(x0), '#1A1410')); }
+  s.push(MAT.floor(-400, HS.x1 + 600, G0, G0 + 40, {kind: 'flag', base: '#3E5F5A', seed: 173, size: 40}) + `<rect x="-400" y="${G0 + 40}" width="${HS.x1 + 1000}" height="6" fill="#0D0C09"/>` + MAT.floor(-400, HS.x1 + 600, G0 + 46, HS.G + 300, {kind: 'cobble', base: '#2B4744', seed: 174, size: 30}));
+  return s.join('');
+}
+function hsRoom(t) { // night: one room and the kitchen beside it; four asleep in the room, the boarder on two chairs in the kitchen
+  const {F, x0, x1, ceil, wallFoot, H} = RM, room = e3Room({door: true, seed: 177, paper: 0.08}), s = [room.back];
+  // the kitchen to the left of the room's wall: a stove, a shelf, the sink is out in the hall; the boarder on two chairs
+  const k0 = x0 - 640;
+  s.push(`<rect x="${k0}" y="${ceil}" width="${x0 - 34 - k0}" height="${wallFoot - ceil}" fill="#182B29"/><rect x="${k0}" y="${wallFoot - 14}" width="${x0 - 34 - k0}" height="14" fill="#2B2418"/>` + MAT.floor(k0, x0 - 34, wallFoot, F + 70, {kind: 'planks', base: '#332D22', seed: 178, size: 50, vp: (k0 + x0) / 2}));
+  s.push(`<rect x="${k0 + 430}" y="${wallFoot - 190}" width="140" height="170" fill="#0D0C09"/><rect x="${k0 + 422}" y="${wallFoot - 200}" width="156" height="12" fill="#0D0C09"/><rect x="${k0 + 530}" y="${ceil}" width="24" height="${wallFoot - 200 - ceil}" fill="#0D0C09"/><rect x="${k0 + 452}" y="${wallFoot - 130}" width="50" height="34" fill="#FFB15C" opacity="0.18"/>` + glowC(k0 + 480, wallFoot - 110, 160, 0.25, 'e3fire'));
+  s.push(`<rect x="${k0 - 34}" y="${ceil - 60}" width="34" height="${F + 110 - ceil + 60}" fill="#050505"/><rect x="${k0 - 34}" y="${ceil - 60}" width="${x0 - k0}" height="56" fill="#050505"/><rect x="${k0 - 34}" y="${F + 70}" width="${x0 - k0}" height="40" fill="#050505"/>`);
+  const ch = [k0 + 130, k0 + 400]; // two chairs facing each other, the boarder (ink) stretched across them under his coat
+  for (const [cx, dd] of [[ch[0], -1], [ch[1], 1]]) s.push(`<rect x="${cx - 40}" y="${F - 140}" width="80" height="12" fill="#0D0C09"/><rect x="${cx - 36}" y="${F - 128}" width="8" height="128" fill="#0D0C09"/><rect x="${cx + 28}" y="${F - 128}" width="8" height="128" fill="#0D0C09"/><rect x="${cx + dd * 36 - 4}" y="${F - 330}" width="8" height="200" fill="#0D0C09"/>`);
+  s.push(figure({x: ch[0] - 90, y: F - 140 - 0.12 * H, h: H, d: -1, kind: 'man', hat: 'none', coat: 'sack', fill: '#0D0C09', lie: true, an: POSES.sleep(t)}));
+  E3K.log('rest', 'hs.boarder.chairs', [ch[0], F - 140], [ch[0], F - 140]);
+  s.push(`<path d="M${ch[0] - 40},${F - 150} q100,-40 ${ch[1] - ch[0] + 60},-10 l0,14 l${-(ch[1] - ch[0] + 60)},0 Z" fill="#2B4744" opacity="0.9"/>`); // his coat over him
+  // the room: the window on the back wall (moonlight, the tenement opposite), the bed (Yankel and Sore), the feather bed on the floor (Rivke and Shmuel)
+  s.push(`<rect x="1110" y="330" width="170" height="260" fill="#0D0C09"/><rect x="1122" y="342" width="146" height="236" fill="#2B4744"/><rect x="1150" y="400" width="40" height="60" fill="#FFE2B0" opacity="0.25"/><rect x="1191" y="342" width="8" height="236" fill="#0D0C09"/><rect x="1122" y="456" width="146" height="8" fill="#0D0C09"/>`);
+  s.push(`<path d="M1122,590 L980,${F + 70} L1500,${F + 70} L1268,590 Z" fill="#A3BAB2" opacity="0.06"/>`);
+  const bedTop = F - 150;
+  s.push(`<rect x="700" y="${bedTop}" width="460" height="30" fill="#1A1410"/><rect x="700" y="${bedTop - 150}" width="16" height="${F - bedTop + 150}" fill="#1A1410"/><rect x="1144" y="${bedTop - 80}" width="16" height="${F - bedTop + 80}" fill="#1A1410"/><rect x="716" y="${bedTop - 14}" width="428" height="16" rx="7" fill="#DFE0D6" opacity="0.6"/>`);
+  for (const [x, nm, dd] of [[1110, 'nfather', 1], [1080, 'nmother', 1]]) s.push(fig({...nbOpts(nm, {x, y: bedTop - 14 - 0.12 * H, h: H, d: dd, hat: nm === 'nfather' ? 'kippah' : 'kerchief', coat: 'vest', det: 0, rim: {c: '#A3BAB2', a: 0.35, dx: 0.008, dy: -0.004}, an: POSES.sleep(t + (nm === 'nmother' ? 1.3 : 0))}), lie: true}));
+  E3K.log('rest', 'hs.bed', [900, bedTop - 14], [900, bedTop - 14]);
+  s.push(`<path d="M730,${bedTop - 24} q200,-30 400,-6 l0,22 l-400,0 Z" fill="#4E726C"/>`); // the quilt
+  s.push(featherBed(560, F + 40, 360, 34, '#A3BAB2'));
+  for (const [x, nm, sc] of [[880, 'ndaughter', 0.8], [720, 'nson', 0.5]]) s.push(fig({...nbOpts(nm, {x, y: F + 6 - 0.12 * H * sc, h: H, scale: sc, d: 1, hat: 'none', det: 0, rim: {c: '#A3BAB2', a: 0.35, dx: 0.008, dy: -0.004}, an: POSES.sleep(t + sc)}), lie: true}));
+  s.push(`<path d="M580,${F + 2} q160,-26 320,-8 l0,18 l-320,0 Z" fill="#2B4744"/>`);
+  s.push(room.front);
+  return s.join('');
+}
+function renderE3Hester(t) {
+  const G = HS.G, M = HS.M, scr = [], X = smooth(15.2, 16.0, t);
+  let out = '';
+  if (X < 1) {
+    const tt = Math.min(t, 15.8), vY = 80, yR = e3R(M * 0.97), rR = e3R(M * 0.8);
+    // Yankel walks steadily; Rivke stops at the goat (both feet down), then hurries to catch up
+    const sY = vY * tt, sStop = 21 * rR, tStop = sStop / vY, sR = tt < tStop ? vY * tt : tt < 9.6 ? sStop : tt < 13 ? sStop + (vY * 13 - 60 - sStop) * (tt - 9.6) / 3.4 : vY * tt - 60;
+    const c = cam2({z: 2.15, ux: 420 + vY * tt - 40, uy: 812}), lod = lodFor(M * c.z);
+    const rim = {c: '#FFF3D6', a: 0.6, dx: -0.01, dy: -0.004};
+    const s = [hsStreet(tt)];
+    // the carts, end to end along the curb, each with a vendor behind and shoppers in front
+    const loads = ['pots', 'fruit', 'coats', 'cloth', 'pots', 'coats', 'fruit', 'cloth', 'coats', 'pots', 'fruit', 'cloth', 'coats', 'pots'];
+    const back = [], mid = [], front = [];
+    loads.forEach((ld, k) => {
+      const cx = 120 + k * 180, cr = hsCart(cx, HS.cartY, ld, tt, 180 + k), rv = rng(190 + k);
+      let vo = e3PersonOpts(rv, cr.top[0] + 60, HS.cartY - 14, M, tt, '#0D0C09', {d: rv() < 0.5 ? 1 : -1});
+      vo = {...vo, an: {...vo.an, lean: 0, bob: 0}};
+      if (vo.kind === 'man' || vo.kind === 'woman') vo = reach(vo, 'f', vo.x + vo.d * 0.06 * vo.h, cr.top[2] - 1, 'hs.vendor' + k); // a hand on the cart's edge (a child minding a cart is too short to)
+      back.push(fig({...vo, floorY: HS.cartY - 14}));
+      mid.push(cr.svg);
+      if (k % 3 === 1) mid.push(hsBarrel(cx + 186, HS.cartY, k % 2 ? 'herring' : 'pickles'));
+      // a shopper (or two) bargaining: hands out, palm up, then a point at the goods
+      for (let j = 0; j < (k % 2) + 1; j++) { const r2 = rng(300 + k * 7 + j); let so = e3PersonOpts(r2, cx + 70 + j * 60, HS.cartY + 20, M, tt, '#0D0C09', {d: -1});
+        const g = Math.max(0, Math.sin(tt * 2.2 + k + j * 2)); so = {...so, d: k % 4 === 0 && j === 1 ? 1 : -1, an: {...so.an, fArm: [100 - 40 * g, 80 - 50 * g], tilt: 6 * g}};
+        front.push(fig({...so, floorY: HS.cartY + 20}));
+        if (k === 4 && j === 0 && so.kind === 'woman') front.push(holding(so, 'b', 'hs.shopper.fish', (gx, gy) => `<path d="M${gx},${gy} l-4,8 q4,22 0,40 l8,0 q-4,-18 0,-40 Z" fill="#A3BAB2"/>`)); }
+    });
+    // the goat and the boy holding her rope, at the curb in front of the sixth cart
+    const gx = 1010, goatY = HS.cartY + 30;
+    let boy = e3PersonOpts(rng(199), gx - 70, goatY, M, tt, '#0D0C09', {d: 1}); boy = {...boy, kind: 'boy', hat: 'boycap', h: M * 0.62, d: 1, an: {...boy.an, fArm: [150, 130]}};
+    const gr = E3K.hand(boy, 'f');
+    front.push(hsGoat(gx, goatY, tt) + fig({...boy, floorY: goatY}) + holding(boy, 'f', 'hs.goat.rope', (hx, hy) => `<path d="M${f1(hx)},${f1(hy)} Q${f1((hx + gx + 36) / 2)},${f1(hy + 26)} ${gx + 36},${goatY - 38}" stroke="#5F574A" stroke-width="2" fill="none"/>`));
+    // Yankel and Rivke in the street, nearest us
+    let yk = stepWalk(nbOpts('nfather', {x: 420, y: G, h: M, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim, an: {fArm: [176, 180], bArm: [190, 196], tilt: 0}}), 420, 1, sY, () => G, 'hs.yankel');
+    const look = tt > tStop && tt < 9.6;
+    let rv = stepWalk(nbOpts('ndaughter', {x: 330, y: G, h: M, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, an: {tilt: look ? -14 : 8 * Math.sin(tt * 0.9), expr: look ? 'smile' : 'awe'}}), 330, 1, sR, () => G, 'hs.rivke');
+    if (look) rv = e3Settle(rv, smooth(tStop + 0.05, tStop + 0.4, tt) * (1 - smooth(9.25, 9.6, tt)), 'hs.rivke');
+    out += `<g opacity="${f1(1 - X)}">${layerAt(c, 0.25, `<rect x="-3000" y="-2000" width="9000" height="3000" fill="url(#e3day)"/>`)}${layerAt(c, 1, s.join('') + back.join('') + mid.join('') + front.join('') + fig(yk) + fig(rv))}</g>`;
+    scr.push(tag(130, 120, 'HESTER STREET · LOWER EAST SIDE · 1884', smooth(0.3, 0.7, t) * (1 - smooth(14.6, 15.0, t))));
+    if (t > 0.8 && t < 3.8) scr.push(penS(130, 230, 'Rivke\'s first morning', 32, -3), tag(150, 990, 'COMPOSITE CHARACTERS', smooth(0.8, 1.2, t) * (1 - smooth(3.4, 3.8, t))));
+    if (t > 4.2 && t < 7.2) scr.push(penS(1000, 230, 'pushcarts, end to end', 32, -3));
+    if (t > 7.8 && t < 10.8) scr.push(penS(860, 230, 'for a second, it felt like home', 32, -3));
+    if (t > 11.4 && t < 14.8) scr.push(penS(130, 230, 'an enclave', 34, -3));
+  }
+  if (X > 0) {
+    const v = t - 15.2, c = cam2(camAt([[0, 0.92, 640, 640], [6, 0.96, 640, 640]], v));
+    out += `<g opacity="${f1(X)}">${layerAt(c, 1, hsRoom(t))}</g>`;
+    scr.push(tag(130, 120, 'THE SAME NIGHT · ONE ROOM AND A KITCHEN', smooth(15.6, 16.0, t)));
+    if (t > 16.2) scr.push(penS(960, 230, 'four in one room', 32, -3));
+    if (t > 17.6) scr.push(penS(130, 990, 'a boarder in the kitchen', 32, -3));
+  }
+  return frame(e3Defs2(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, out, scr.join(''), t);
+}
+
+
+/* ================= ep3_knock: a knock at Ma Kelly's door (ch 9) ================= */
+// Evening, spring 1886, the Kellys' flat (coral), with Episode 2's kelly_flat look (faded wallpaper, the coal stove and kettle, a
+// shelf of pots, the airshaft window with washing across it, one kerosene lamp) drawn at the room scale (RM: about 84 px to the
+// foot). The flat's door is in the cut wall on the left, the dark hall beyond it. Sore and Rivke come along the hall; Rivke knocks;
+// Ma gets up from her sewing, crosses the room, opens the door, folds her arms. Rivke translates for her mother. Ma listens, arms
+// folded, then unfolds them and nods.
+function maFig(o, fold) { // Ma Kelly with her arms folded (fold 1), opening out to hanging (fold 0)
+  const c = cast('mother', o), an = {...c.an};
+  if (fold > 0) { an.fArm = [lerp(o.an?.fArm?.[0] ?? 172, E3_FOLD.fArm[0], fold), lerp(o.an?.fArm?.[1] ?? 168, E3_FOLD.fArm[1], fold)]; an.bArm = [lerp(194, E3_FOLD.bArm[0], fold), lerp(198, E3_FOLD.bArm[1], fold)]; an.lean = 0; }
+  return {fo: {...c, an}, over: fold > 0.85 ? foldedArms(o.x, o.y, c.h, o.d ?? 1, c.fill, c.tones.tone) : ''};
+}
+function knDoor(a, t) { // the flat's door in the left wall: closed (a 0) it fills the opening; opening, it swings into the room
+  const {x0, F} = RM, y0 = F - 530, y1 = F + 30, sa = Math.sin(a * Math.PI / 180), W = 210, rattle = (t > 2.4 && t < 3.1) ? 1.5 * Math.sin(t * 60) : 0;
+  if (a < 1) return {svg: `<rect x="${x0 - 32 + rattle}" y="${y0}" width="30" height="${y1 - y0}" fill="#3B2A18"/><circle cx="${x0 + 4}" cy="${F - 250}" r="6" fill="#C9A55A"/>`, handle: [x0 + 6, F - 250]};
+  const xe = x0 + W * sa, g = 18 * sa;
+  return {svg: `<path d="M${x0},${y0} L${f1(xe)},${f1(y0 - g)} L${f1(xe)},${f1(y1 + g)} L${x0},${y1} Z" fill="#3B2A18"/><path d="M${f1(x0 + (xe - x0) * 0.15)},${f1(y0 + 30)} L${f1(x0 + (xe - x0) * 0.85)},${f1(y0 + 30 - g * 0.7)} L${f1(x0 + (xe - x0) * 0.85)},${f1(y0 + 250 - g * 0.5)} L${f1(x0 + (xe - x0) * 0.15)},${f1(y0 + 250)} Z" fill="#2B1F12"/>` +
+    `<circle cx="${f1(xe - 16 * sa)}" cy="${F - 250}" r="6" fill="#C9A55A"/>`, handle: [xe - 16 * sa, F - 250]};
+}
+function renderE3Knock(t) {
+  const {x0, x1, F, ceil, wallFoot, H} = RM, s = [], scr = [];
+  const c = cam2(camAt([[0, 0.98, 640, 600], [6, 1.0, 620, 610], [8, 1.2, 420, 640], [16, 1.24, 430, 640]], t)), lod = lodFor(H * 0.9 * c.z);
+  const fl = 0.86 + 0.08 * Math.sin(t * 7.3) + 0.05 * Math.sin(t * 16.1);
+  const room = e3Room({door: true, seed: 181, paper: 0.16});
+  s.push(room.back);
+  // the hall outside the door: dark boards, a gas jet on the wall, the stair rail
+  const h0 = x0 - 760;
+  s.push(`<rect x="${h0}" y="${ceil}" width="${x0 - 34 - h0}" height="${wallFoot - ceil}" fill="#101C1B"/>` + MAT.floor(h0, x0 - 34, wallFoot, F + 70, {kind: 'planks', base: '#2A251C', seed: 182, size: 50, vp: (h0 + x0) / 2}) +
+    glowC(x0 - 420, F - 430, 260, 0.45, 'mswarm') + `<rect x="${x0 - 424}" y="${F - 440}" width="8" height="30" fill="#0D0C09"/><ellipse cx="${x0 - 420}" cy="${F - 450}" rx="5" ry="10" fill="#FFF3D6"/>` +
+    `<rect x="${h0 + 60}" y="${F - 360}" width="16" height="360" fill="#0D0C09"/>` + line([[h0 + 68, F - 350], [h0 - 200, F - 560]], '#0D0C09', 10));
+  // the flat (kelly_flat's look): the airshaft window with washing across the shaft, the coal stove and kettle, the shelf of pots
+  const wx = 860, wy = 360;
+  s.push(`<rect x="${wx - 14}" y="${wy - 14}" width="218" height="318" fill="#0D0C09"/>` + MAT.brick(wx, wy, 190, 290, {base: '#2B4744', seed: 183, soot: 'bottom', bw: 26, bh: 12}) + `<rect x="${wx}" y="${wy}" width="190" height="290" fill="url(#knshaft)"/>` +
+    line([[wx, wy + 60], [wx + 190, wy + 72]], '#0D0C09', 2) + [0, 1].map((k) => `<path d="M${wx + 30 + k * 80},${wy + 64 + k * 5} l44,2 l-4,${54 + 8 * Math.sin(t * 1.3 + k)} l-36,-2 Z" fill="#4E726C"/>`).join('') +
+    `<rect x="${wx + 91}" y="${wy}" width="8" height="290" fill="#0D0C09"/><rect x="${wx}" y="${wy + 140}" width="190" height="8" fill="#0D0C09"/><rect x="${wx - 24}" y="${wy + 300}" width="238" height="14" fill="#0D0C09"/>`);
+  const sx = 1270;
+  s.push(`<rect x="${sx}" y="${wallFoot - 230}" width="170" height="210" fill="#0D0C09"/><rect x="${sx - 8}" y="${wallFoot - 240}" width="186" height="14" fill="#0D0C09"/><rect x="${sx + 120}" y="${ceil}" width="28" height="${wallFoot - 240 - ceil}" fill="#0D0C09"/><rect x="${sx + 24}" y="${wallFoot - 170}" width="70" height="44" fill="#FFF3D6" opacity="${f1(0.4 + 0.1 * Math.sin(t * 9))}"/>` +
+    `<path d="M${sx + 20},${wallFoot - 240} q0,-44 44,-44 q44,0 44,44 Z" fill="#0D0C09"/>` + glowC(sx + 60, wallFoot - 150, 200, 0.4 * fl, 'mswarm') + MAT.smoke(sx + 80, wallFoot - 300, t, {col: 'A3BAB2', k: 0.4, n: 5, rise: 140, drift: 50, seed: 184}));
+  s.push(`<rect x="560" y="330" width="230" height="10" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<path d="M${578 + k * 70},330 l6,-${40 + (k % 2) * 14} l40,0 l6,${40 + (k % 2) * 14} Z" fill="#0D0C09"/>`).join(''));
+  // the table and the lamp, a pile of shirts; Ma's chair
+  const tx = 1000, ty = F - 250;
+  s.push(glowC(tx + 110, ty - 90, 560, 0.8 * fl, 'mswarm') + glowC(tx + 110, ty - 90, 140, 0.55 * fl));
+  s.push(MAT.shadow(tx + 110, F + 4, 200, 0.4) + `<rect x="${tx - 100}" y="${ty}" width="300" height="14" fill="#2B2418"/><rect x="${tx - 86}" y="${ty + 14}" width="12" height="${F - ty - 14}" fill="#0D0C09"/><rect x="${tx + 174}" y="${ty + 14}" width="12" height="${F - ty - 14}" fill="#0D0C09"/>`);
+  s.push(`<path d="M${tx + 90},${ty} l10,-40 q-22,-26 18,-44 q40,18 18,44 l10,40 Z" fill="#0D0C09"/><path d="M${tx + 104},${ty - 86} q16,-52 32,0 l0,8 l-32,0 Z" fill="${E3.cream}" opacity="${f1(0.55 + 0.3 * fl)}"/><ellipse cx="${tx + 120}" cy="${ty - 96}" rx="5" ry="12" fill="#FFF3D6"/>`);
+  for (let k = 0; k < 5; k++) s.push(`<path d="M${tx - 80 + k * 2},${ty - 6 - k * 9} l100,0 l4,9 l-104,0 Z" fill="#DFE0D6" opacity="0.7"/>`);
+  const chx = 1230, seat = F - 150;
+  s.push(`<rect x="${chx - 50}" y="${seat}" width="100" height="12" fill="#0D0C09"/><rect x="${chx - 44}" y="${seat + 12}" width="10" height="${F - seat - 12}" fill="#0D0C09"/><rect x="${chx + 34}" y="${seat + 12}" width="10" height="${F - seat - 12}" fill="#0D0C09"/><rect x="${chx + 34}" y="${seat - 230}" width="10" height="230" fill="#0D0C09"/>`);
+  // Ma: sewing at the table (0 to 3.3), stands (3.4 to 4.1), crosses to the door (4.1 to 6.1), takes the handle and opens (6.2 to 7.4),
+  // folds her arms (7.6 to 8.0); listens; unfolds them (12.0 to 12.6) and nods (12.6 to 14)
+  const rimM = {c: '#FFE6C9', a: lod.rimA * 0.8 * fl, dx: -0.01, dy: -0.004};
+  const mR = e3R(H * 0.9), mx1 = x0 + 160, mx0 = mx1 + 4 * mR, rise = smooth(3.4, 4.1, t), walk = e3Trap(t, 4.1, 6.1);
+  const nod = t > 12.6 && t < 14 ? -9 * Math.max(0, Math.sin((t - 12.6) * 7)) : 0, fold = smooth(7.6, 8.0, t) * (1 - smooth(12.0, 12.6, t));
+  const expr = t > 12.4 ? 'smile' : t > 7.6 ? 'set' : 'neutral';
+  let ma, over = '';
+  const baseO = {x: mx0, y: F, h: H, d: -1, det: lod.det, rim: rimM, an: {tilt: t < 3.0 ? -14 : t < 4.2 ? 4 : 0 + nod, expr, blink: t % 3.7 < 0.12}};
+  if (t < 4.1) { // seated (sitOn) blending to standing, feet planted where they rest
+    const st = sitOn(cast('mother', {...baseO, an: {...baseO.an}}), seat, F, 0.2, 'kn.ma.seat');
+    const feet = [E3K.foot(st, 0), E3K.foot(st, 1)];
+    ma = rise > 0 ? plant({...st, y: lerp(st.y, F, rise), an: {...st.an, legs: [lerp(86, 9, rise), lerp(80, -8, rise)], shins: [lerp(6, 5, rise), lerp(0, -5, rise)], standing: rise > 0.5}}, feet, 'kn.ma.rise') : st;
+    if (t < 3.3) { const k = Math.max(0, Math.sin(t * 3.4)); ma = reach(ma, 'f', tx + 160 - 30 * k, ty - 4, 'kn.ma.sew'); ma = reach(ma, 'b', tx + 176, ty - 2, 'kn.ma.cloth'); }
+  } else {
+    const m = maFig({...baseO, an: {...baseO.an}}, fold); ma = stepWalk(m.fo, mx0, -1, 4 * mR * walk, () => F, 'kn.ma.walk'); ma = {...ma, an: {...ma.an, ...(fold > 0 ? {fArm: m.fo.an.fArm, bArm: m.fo.an.bArm, lean: 0} : {})}};
+    over = fold > 0.85 ? foldedArms(ma.x, ma.y, ma.h, -1, ma.fill, ma.tones.tone) : '';
+  }
+  // the door: Ma's hand on the handle from 6.2; she pulls it open (6.6 to 7.4) and lets go (7.5)
+  const da = 78 * smooth(6.6, 7.4, t), door = knDoor(da, t);
+  if (t > 6.0 && t < 7.6) { const gN = E3K.hand(ma, 'f'), k = smooth(6.0, 6.25, t);
+    ma = t < 6.25 ? e3Move(ma, 'f', lerp(gN.x, door.handle[0], k), lerp(gN.y, door.handle[1], k), 'kn.ma.toHandle') : reach(ma, 'f', door.handle[0], door.handle[1], 'kn.ma.handle'); }
+  s.push(door.svg);
+  // Sore and Rivke come along the hall (0 to 2.2); Rivke knocks three times (2.4 to 3.0); Rivke translates (8 to 11.5), turning to
+  // her mother and back; Sore asks with an open hand
+  const rimV = {c: '#FFF3D6', a: lod.rimA * 0.5, dx: 0.01, dy: -0.004}, vR = e3R(H * 0.8), sR = e3R(H * 0.88);
+  const rx1 = x0 - 140, sx1 = x0 - 330, wv = e3Trap(t, 0, 2.2);
+  const turn = t > 9.0 && t < 9.9, talk = (t > 8.2 && t < 11.6) ? (Math.sin(t * 11) > 0 ? 'awe' : 'neutral') : 'neutral';
+  let rv = stepWalk(nbOpts('ndaughter', {x: rx1 - 4 * vR, y: F, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimV, an: {tilt: 2, expr: turn ? 'smile' : talk, blink: (t + 1) % 4 < 0.12}}), rx1 - 4 * vR, 1, 4 * vR * wv, () => F, 'kn.rivke');
+  let so = stepWalk(nbOpts('nmother', {x: sx1 - 4 * sR, y: F, h: H, d: 1, det: lod.det, rim: rimV, an: {tilt: 0, expr: t > 9.6 && t < 11.4 ? 'worried' : 'neutral', blink: t % 3.9 < 0.12}}), sx1 - 4 * sR, 1, 4 * sR * wv, () => F, 'kn.sore');
+  rv = e3Settle(rv, smooth(2.2, 2.4, t), 'kn.rivke'); so = e3Settle(so, smooth(2.3, 2.6, t), 'kn.sore');
+  if (turn) { const feet = [E3K.foot(rv, 1), E3K.foot(rv, 0)]; rv = plant({...rv, d: -1}, feet, 'kn.rivke.turn'); }
+  if (t > 2.3 && t < 3.2) { // three knocks: the knuckles touch the door at each tap
+    const taps = [2.45, 2.7, 2.95], near = taps.some((q) => Math.abs(t - q) < 0.035), off = 14 * Math.min(...taps.map((q) => Math.min(1, Math.abs(t - q) / 0.12)));
+    rv = near ? reach(rv, 'f', x0 - 34, F - 290, 'kn.rivke.knock') : e3Move(rv, 'f', x0 - 34 - off, F - 290, 'kn.rivke.knock.lift'); }
+  if (t > 9.4 && t < 11.0) { const k = smooth(9.4, 9.8, t) * (1 - smooth(10.6, 11.0, t)); so = {...so, an: {...so.an, fArm: [lerp(176, 104, k), lerp(170, 70, k)]}}; }
+  s.push(fig(so), fig(rv));
+  s.push(fig(ma) + over);
+  if (t > 2.4 && t < 3.3) for (const q of [2.45, 2.7, 2.95]) { const u = clamp01((t - q) / 0.3); if (u > 0 && u < 1) s.push(`<path d="M${x0 + 20 + 30 * u},${F - 320} q14,30 0,60" stroke="${E3.cream}" stroke-width="4" fill="none" opacity="${f1(1 - u)}"/>`); }
+  s.push(room.front.replace(`<rect x="${x0 - 34}" y="${F + 70 - 40}"`, `<rect data-k="1" x="${x0 - 34}" y="${F + 70 - 40}"`));
+  const world = layerAt(c, 1, s.join(''));
+  scr.push(tag(130, 120, 'THE KELLYS\' FLAT · BROOKLYN · 1886', smooth(0.3, 0.7, t) * (1 - smooth(5.4, 5.8, t))));
+  if (t > 1.6 && t < 4.8) scr.push(penS(1000, 230, 'that evening, a knock', 32, -3));
+  if (t > 7.8 && t < 10.7) scr.push(penS(1000, 230, 'Rivke translates', 32, -3), tag(1060, 300, 'COMPOSITE CHARACTERS', smooth(7.8, 8.2, t) * (1 - smooth(10.3, 10.7, t))));
+  if (t > 10.8 && t < 13.6) scr.push(penS(860, 230, 'a ticket, for her sister', 32, -3));
+  if (t > 13.4) scr.push(penS(130, 990, 'Ma knew exactly where', 32, -3));
+  const defs = e3Defs2(t).replace('</defs>', `<linearGradient id="knshaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F857F" stop-opacity="0.35"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient></defs>`);
+  return frame(defs, `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr.join(''), t);
+}
+
+if (typeof window !== 'undefined') Object.assign(window, {renderE3Runner, renderE3Shtetl, renderE3Hester, renderE3Knock});
+Object.assign(CLIPS, {ep3_runner: {sec: 22, render: (t) => renderE3Runner(t)}, ep3_shtetl: {sec: 18, render: (t) => renderE3Shtetl(t)}, ep3_hester: {sec: 21, render: (t) => renderE3Hester(t)}, ep3_knock: {sec: 16, render: (t) => renderE3Knock(t)}});
