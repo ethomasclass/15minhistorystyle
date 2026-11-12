@@ -48,6 +48,59 @@ To verify before voicing: that runners often worked their own countrymen in thei
 Production: new clip `ep3_runner` (Battery, fort behind, the trunk, the hand reaching for it, a hard freeze before the payoff).
 Subtitles stay up at least 2.5 s a line. `ep3_moving_in` stays, moved to beat 5.
 
+## Option A2 (current pick, Nov 12): darker, held mystery
+
+Changes from A: the runner is watching before he speaks, the boy takes his hand, and the cold open never says where he wants to
+take them or that he is an immigrant too. Both are held for the payoff in beat 4.
+
+> May, 1884. The bottom tip of Manhattan. The sun is going down.
+>
+> A woman walks out of an old round stone fort with two children, a roped feather bed and a trunk. Everything they own.
+>
+> Three weeks ago they lived in the Russian Empire. Tonight, they have no idea where they'll sleep.
+>
+> Her husband was supposed to be waiting right here. He isn't.
+>
+> But someone else is.
+>
+> He's been watching them since they came through the gate. Good coat. Clean boots. A man who has watched a lot of boats come in.
+>
+> He walks over, smiling, and speaks to her in her own language.
+>
+> RUNNER: [warm, subtitled Yiddish] Welcome! Who are you waiting for?
+>
+> SORE: [subtitled Yiddish] My husband. Yankel Rabinowitz.
+>
+> RUNNER: [subtitled Yiddish] Yankel! Of course. He sent me. Come. I'll take the trunk.
+>
+> [music drops out]
+>
+> He has never heard of Yankel Rabinowitz.
+>
+> And the little boy lets go of his mother's hand, and takes his.
+>
+> New York had a name for men like this. Runners. The state built a fence around this entire fort to keep them out.
+>
+> It didn't work.
+>
+> Where does he want to take them? We'll get back to that.
+>
+> Because this family is about to learn the most important thing about arriving in America with almost nothing: you have to
+> decide, fast, who to trust. *Who helped newcomers make it in America, and who tried to keep them out?*
+
+About 200 words. Visuals: dusk, long shadows; the runner first seen only from behind or as a figure at the edge of frame, face
+in shadow until he smiles; close-up of Shmuel's small hand going into the man's gloved one; freeze-frame and a low sting on "It
+didn't work." Sound: harbor, gulls, crowd fade out under the last Yiddish line. Subtitles at least 2.5 s a line, bottom centre,
+clear of faces.
+
+Payoff (beat 4): back to the Battery at the freeze. Rivke (12) sees they are walking away from the ferry signs. She pulls
+Shmuel back. Yankel shoves through the crowd, late from the shop, shouting her name. The runner is already gone. Then the
+reveal: men like him were usually immigrants themselves, working the newest arrivals in their own language, paid by boarding
+houses (verify). The danger and the help came from people who had made the same trip.
+
+Accuracy guardrails: no violence or kidnapping implied as typical. The threat stays money and belongings, unless sources
+confirm more.
+
 ## Option B: "Look behind them"
 
 Open on Keppler's "Looking Backward" (Puck, 1893) cropped to the rich men turning away a poor immigrant, the shadows hidden.
@@ -68,6 +121,6 @@ Payoff in beat 4 with the USCIS evidence and the Rabinovich to Rabin chain. Very
 
 ## Recommendation
 
-**A.** It opens on a real threat to a family the viewer just met, holds a cliffhanger across beats 2 and 3, and the twist
+**A2** (the user liked the runner; asked for more danger and mystery). Originally **A.** It opens on a real threat to a family the viewer just met, holds a cliffhanger across beats 2 and 3, and the twist
 ("the man reaching for that trunk was an immigrant too") is the same irony the episode ends on with Ma Kelly. It also
 gives a title: "The Con Men Waiting at the Dock | The Gilded Age, Part 3".
