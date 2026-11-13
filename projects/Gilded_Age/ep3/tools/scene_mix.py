@@ -10,7 +10,7 @@ Times come from the chapter's words.json (find a phrase), so a re-voiced chapter
 
 How it sounds "inside": the bed sits low under the narrator and swells into each character line (+9 dB), then settles;
 character lines get a short room (or an open-air slap, or distance), so they sound recorded in the place, while the
-narrator stays the dry storyteller on top. Spots are only for things on screen (channel rule)."""
+narrator stays the dry storyteller on top. Spots are only for things on screen (channel rule). Outdoor lines get no reverb at all."""
 import json, os, re, subprocess, sys, tempfile, wave
 import numpy as np
 from scipy.signal import butter, sosfilt, fftconvolve
@@ -27,11 +27,13 @@ NARR_DB, DLG_DB = -40, -31
 # rooms: rt = decay (s), wet = reverb level (dB), pre = pre-delay (s), lp = wet lowpass (Hz), slap = (delay s, dB) or None,
 #        dry = dry gain (dB), dlp/dhp = dry low/high pass (Hz) for distance
 ROOMS = {
-    'outdoor': dict(rt=0.30, wet=-19, pre=0.020, lp=4500, slap=(0.11, -24)),
+    # outdoors there are no walls: no reverb and no slap, just a voice in open air (a little less low end than the
+    # close studio sound) with the ambience around it doing the work (user, Nov 13: the first version sounded indoors)
+    'outdoor': dict(rt=None, dhp=150),
     'ship':    dict(rt=0.55, wet=-14, pre=0.006, lp=2600, slap=None),
     'room':    dict(rt=0.38, wet=-15, pre=0.004, lp=3800, slap=None),
-    'far':     dict(rt=0.90, wet=-8, pre=0.040, lp=2600, slap=(0.16, -14), dry=-9, dlp=2800, dhp=320),
-    'window':  dict(rt=0.35, wet=-14, pre=0.025, lp=4000, slap=(0.09, -20), dry=-3, dlp=5200, dhp=180),
+    'far':     dict(rt=None, dry=-10, dlp=2600, dhp=350),        # shouted across an open crowd: quieter, thinner, no room
+    'window':  dict(rt=None, dry=-4, dlp=5000, dhp=200),         # Ma at an upstairs window, heard from the street
 }
 
 
@@ -131,7 +133,7 @@ def chapter(ch, spec):
         dry = seg * db(p.get('dry', 0))
         if p.get('dlp'): dry = sosfilt(butter(2, p['dlp'], 'lp', fs=R, output='sos'), dry)
         if p.get('dhp'): dry = sosfilt(butter(2, p['dhp'], 'hp', fs=R, output='sos'), dry)
-        wet = fftconvolve(seg, ir(p['rt'], p['pre'], p['lp'], p['slap'])) * db(p['wet'])
+        wet = fftconvolve(seg, ir(p['rt'], p['pre'], p['lp'], p['slap'])) * db(p['wet']) if p.get('rt') else np.zeros(len(seg))
         tail = len(wet) - len(seg)
         placed = np.concatenate([dry, np.zeros(tail)]) + wet
         f = int(0.03 * R); env = np.ones(len(placed)); env[:f] = np.linspace(0, 1, f)
@@ -176,7 +178,7 @@ def rooms_by_time(ranges):
 SCENES = {
     'ch01': lambda f: dict(
         rooms={}, room_at=rooms_by_time([(0, 999, 'outdoor')]),
-        beds=[dict(name='bed_harbor_dusk', t0=0.0, t1=f("I'll take the trunk", end=True) + 0.9, fin=2.5, fout=1.0,
+        beds=[dict(name='bed_harbor_dusk', t0=0.0, t1=f("I'll take the trunk", end=True) + 0.9, fin=2.5, fout=1.0, dlg=-28,
                    lift=[(0.0, f('Three weeks ago'), -35)])],   # the opening shot breathes, then settles under the story
         spots=[('trunk_lift', f("I'll take the trunk", end=True) + 0.15, -20)],
         listen=[(f('He walks over'), f('He has never heard', end=True) + 1.5)]),
@@ -188,7 +190,7 @@ SCENES = {
     'ch04': lambda f: dict(
         rooms={'YANKEL': 'far'}, room_at=rooms_by_time([(0, 999, 'outdoor')]),
         beds=[dict(name='bed_rotunda', t0=f('Inside, clerks asked'), t1=f('Now, about names') + 1.0, narr=-42),
-              dict(name='bed_harbor_dusk', t0=f('And just outside it'), t1=f('was gone', end=True) + 1.5)],
+              dict(name='bed_harbor_dusk', t0=f('And just outside it'), t1=f('was gone', end=True) + 1.5, dlg=-28)],
         listen=[(f('And just outside it'), f('was gone', end=True) + 1.5)]),
     'ch06': lambda f: dict(
         rooms={}, room_at=lambda t: None,
@@ -202,7 +204,7 @@ SCENES = {
         listen=[(f('So Yankel pressed seams'), f('A reporter named') + 1.5)]),
     'ch09': lambda f: dict(
         rooms={'MA': 'window'}, room_at=lambda t: None,  # MA's later lines are re-roomed below by time
-        beds=[dict(name='bed_brooklyn_street', t0=f('Michael Kelly was coming home'), t1=f('More of them', end=True) + 1.8, fout=1.8),
+        beds=[dict(name='bed_brooklyn_street', t0=f('Michael Kelly was coming home'), t1=f('More of them', end=True) + 1.8, fout=1.8, dlg=-29),
               dict(name='bed_kitchen_evening', t0=f('That evening'), t1=f('Nobody', end=True, nth=0) + 2.0, narr=-41, dlg=-32)],
         spots=[('trunk_thump', f('He grabbed the other end', end=True) + 0.25, -21),
                ('door_knock', f('there was a knock', end=True) + 0.15, -16),
