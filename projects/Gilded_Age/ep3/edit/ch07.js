@@ -55,7 +55,7 @@ EDITS.ch07 = () => {
       lNote('a few years later: 1889', 1040, 70, lVis(T, w('few') , c.knee - 0.2))},
     // 5. "...knee pants for seventy cents a dozen. Beginners earned two to five dollars a week. They worked from sunrise until nine
     //    at night." ep3_piecework's chain, and Riis's numbers line by line on its card.
-    {a: c.knee - 0.28, b: c.sound + 0.25, cut: true, draw: (T) => renderPiecework(remap([[c.knee - 0.28, 9.45], [c.knee, 9.6], [c.beginners, 10.5], [c.they - 0.45, 11.4], [c.sound + 0.3, 12.6]])(T))},
+    {a: c.knee - 0.28, b: c.sound + 0.25, cut: true, draw: (T) => renderPiecework(remap([[c.knee - 0.28, 9.45], [c.knee, 9.6], [c.beginners, 10.5], [c.they - 0.45, 11.4], [c.they + 0.3, 12.05], [c.sound + 0.3, 12.6]])(T))},
     // 6. "Sound familiar? Back in Brooklyn, Ma Kelly was sewing shirts by the piece too." The two rooms side by side.
     {a: c.sound + 0.25, b: c.it - 0.1, cut: true, live: true, draw: (T) => twoScenes(room(T, {z: 1.75, ux: 1500, uy: 700}), maFlat(T)) +
       lTag('THE RABINOWITZES · LOWER EAST SIDE', 130, 120, lVis(T, c.sound, c.it)) + lTag("THE KELLYS · BROOKLYN", 1090, 120, lVis(T, c.sound + 0.4, c.it)) +

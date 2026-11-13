@@ -54,7 +54,7 @@ EDITS.ch08 = () => {
     {a: c.nine + 0.04, b: c.but - 0.1, cut: true, draw: (T) => renderLookingBackward(remap([[c.nine, 0.2], [c.rich - 0.8, 4.6], [c.look + 0.6, 8.4],
       [c.each - 0.6, 9.6], [c.caption - 0.2, 13.8], [c.caption + 0.4, 14.9], [c.kepImm - 0.4, 18.2], [c.kepImm, 19.0], [c.but - 0.1, 21.7]])(T))},
     // 8. "But here's the other side. In 1883, a poet named..." The timeline again, its welcome row: "The New Colossus", 1883.
-    {a: c.but - 0.1, b: c.lazarus - 0.1, cut: true, draw: (T) => renderLaws(remap([[c.but - 0.1, 3.2], [c.but + 0.5, 3.75], [c.lazarus, 4.35]])(T)) +
+    {a: c.but - 0.1, b: c.lazarus - 0.1, cut: true, draw: (T) => renderLaws(remap([[c.but - 0.1, 3.2], [c.but + 0.5, 3.75], [c.but + 0.9, 4.28], [c.lazarus, 4.4]])(T)) +
       lNote('the other side', 1200, 860, lVis(T, c.but, c.lazarus + 0.3), 40)},
     // 9. "...Emma Lazarus, who had volunteered with Jewish refugees, wrote a poem for a giant statue coming from France." Her
     //    portrait (an engraving of 1888), then the statue being built in Paris (Dargaud's painting, 1884).
@@ -74,7 +74,7 @@ EDITS.ch08 = () => {
     {a: c.needed - 0.25, b: c.so + 0.4, cut: true, draw: (T) => lPrint(T, c.needed, c.so, 'desk/pedestal_1885.webp', {x: 360, y: 110, w: 1200, rot: 1, z: 0.04}) +
       lSrc("THE PEDESTAL GOING UP, BEDLOE'S ISLAND, 1885 · LIBRARY OF CONGRESS", lVis(T, c.needed - 0.25, c.so + 0.4)) + lNote('the money ran out', 1250, 70, lVis(T, c.ran - 1.3, c.so + 0.5))},
     // 12. "So a newspaper asked ordinary people to chip in. More than a hundred thousand people did, most giving a dollar or less."
-    {a: c.so + 0.4, b: c.and - 0.1, cut: true, draw: (T) => renderPedestal(remap([[c.so + 0.4, 0.0], [c.more, 1.0], [c.most - 0.6, 5.4], [c.and, 7.2]])(T))},
+    {a: c.so + 0.4, b: c.and - 0.1, cut: true, draw: (T) => renderPedestal(remap([[c.so + 0.4, 0.0], [c.more, 1.0], [c.most - 0.9, 5.4], [c.most - 0.6, 5.9], [c.and, 7.2]])(T))},
     // 13. "And across the river in Brooklyn, the Kellys were about to get new neighbors." The model, across the East River to the
     //     Kellys' coral building; the card "New Neighbors" lands on "new neighbors".
     {a: c.and - 0.1, b: dur, cut: true, live: true, draw: (T) => renderModelShot(T, {keys: [[c.and - 0.1, 600, 260, 0, 4, 46, 3300, 0, 20], [cardAt, 1420, 140, 0, 8, 44, 2000, 0, 20], [dur, 1500, 110, 0, 9, 44, 1700, 0, 20]],

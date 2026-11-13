@@ -326,7 +326,7 @@ function renderKnockB(T, o) {
   s.push(door.svg);
   // Sore and Rivke along the hall; Rivke knocks at K.knock; steps back; translates
   const rimV = {c: '#FFF3D6', a: lod.rimA * 0.5, dx: 0.01, dy: -0.004}, vR = e3R(H * 0.8), sR = e3R(H * 0.88);
-  const rx1 = x0 - 140, sx1 = x0 - 480, wv = e3Trap(t, K.hall, K.hall + 2.2);
+  const rx1 = x0 - 128, sx1 = x0 - 480, wv = e3Trap(t, K.hall, K.hall + 2.2); // (Rivke stops close enough to reach the door)
   const rvTalk = o.talk('RIVKE', t), rvMouth = o.mouth('RIVKE', t);
   const turned = o.rivkeTurn(t); // Rivke facing her mother (relaying), else facing Ma
   const rvTilt = turned ? 6 : rvTalk ? (t > K.sabbath0 && t < K.sabbath1 ? -8 : 7) + 3 * Math.sin(t * 6.1) : (o.talk('MA', t) ? 10 : 5) + 2 * Math.sin(t * 0.9);
@@ -334,7 +334,9 @@ function renderKnockB(T, o) {
   let rv = stepWalk(nbOpts('ndaughter', {x: rx1 - 4 * vR, y: F, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimV, an: {tilt: 2, expr: 'neutral', blink: (t + 1) % 4 < 0.12}}), rx1 - 4 * vR, 1, 4 * vR * wv, () => F, 'kb.rivke');
   let so = stepWalk(nbOpts('nmother', {x: sx1 - 4 * sR, y: F, h: H, d: 1, det: lod.det, rim: rimV, an: {tilt: 0, expr: 'neutral', blink: t % 3.9 < 0.12}}), sx1 - 4 * sR, 1, 4 * sR * wv, () => F, 'kb.sore');
   const kEnd = K.hall + 2.2;
-  rv = e3Settle(rv, smooth(kEnd, kEnd + 0.2, t), 'kb.rivke'); so = e3Settle(so, smooth(kEnd + 0.1, kEnd + 0.4, t), 'kb.sore');
+  // once settled, the settle is only the place they stand on (e3Stand draws them): its contacts are not logged again
+  const settled = (fo, u, name, done) => { if (!done) return e3Settle(fo, u, name); const n0 = E3LOG.length, o2 = e3Settle(fo, 1, name); E3LOG.length = n0; return o2; };
+  rv = settled(rv, smooth(kEnd, kEnd + 0.2, t), 'kb.rivke', t >= kEnd + 0.2); so = settled(so, smooth(kEnd + 0.1, kEnd + 0.4, t), 'kb.sore', t >= kEnd + 0.4);
   if (t >= kEnd + 0.4) { const soTilt = (o.talk('MA', t) ? 6 : 2) + -7 * (bump(K.soreNod, 0.5) + bump(K.soreNod + 0.55, 0.45)) + (turned ? 8 : 0);
     so = e3Stand({...so, y: F, floorY: F, an: {...so.an, ...POSES.stand(t, 0.1), tilt: soTilt, expr: t > K.sister - 0.3 && t < K.sister + 2.4 ? 'worried' : 'neutral'}}, so.x, so.x, 0, 'kb.sore.stand'); }
   if (t >= kEnd + 0.2) {
