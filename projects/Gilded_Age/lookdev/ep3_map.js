@@ -466,8 +466,9 @@ function renderEnclave(t) {
   // buildings
   for (const l of EM_LOTS) {
     const p = l.place ? EM_PLACES[l.place] : null, lift = l.place ? emPlaceLift(l.place, n) : 0;
-    const highlight = p && p.cue != null && emLiftU(n, p.cue) > 0.02;
-    const pal = emPal(p && p.col, highlight), edge = highlight ? EM.cream : null;
+    const hk = p && p.cue != null ? smooth(0, 0.35, emLiftU(n, p.cue)) : 0, highlight = hk > 0.02; // the ink turns pale as it rises
+    const p0 = emPal(p && p.col, false), p1 = emPal(p && p.col, true), pal = hk > 0 ? Object.fromEntries(Object.keys(p0).map((k) => [k, emMix(p0[k], p1[k], hk)])) : p0;
+    const edge = highlight ? emMix(EM.inkDark, EM.cream, hk) : null;
     const cen = [(l.x0 + l.x1) / 2, (l.y0 + l.y1) / 2, emH(l.floors) / 2 + lift];
     const b = {x0: l.x0, x1: l.x1, y0: l.y0, y1: l.y1, z0: lift, h: emH(l.floors), floors: l.floors, front: l.front, pal, kind: p ? p.kind : null, seed: l.seed, shop: l.shop, edge};
     let draw;
