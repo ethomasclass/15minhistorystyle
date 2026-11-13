@@ -125,3 +125,28 @@ SFX="chunk_snap@0.3@77.02"  ./build_ch.sh ch05 ga_letters@0.08@0@0
   `ep3_map_arrival` (already keyed to this chapter) under the card "The Lower East Side".
 - QA per chapter: text audit (all >= 2.5 s, none out of the safe area, no overlaps), contact audit (0.00 px, except
   `ep3_steerage`'s berth sitters at 2 px as in look-dev Round 13c), contact sheets, loudness.
+
+## Chapters 6 to 9 (Nov 13)
+
+`ch06.js` to `ch09.js`, shared pieces in `late.js` (`lQuiet` renders a look-dev clip without its clip text, `lPrint` an archival
+print on the desk with a slow push, `lSrc` the source tag, `lNote`/`lTag` pen notes and mono tags, `lWord` the occurrence of a word
+nearest a time, `lSpeak` the words.json speaker spans), the baton card from `cards.js`. New drawn shots in `../../lookdev/ep3_late.js`
+(new functions only; the clip renderers in `ep3.js`/`ep3_map.js` are unchanged): `renderHesterB` (the market walk on narration time,
+the listed things labelled as they are named, Rivke stops at the goat, Yankel stops, turns back and waves her on), `renderRoomB` (the
+night room, and Monday's dawn), `renderSweatshopB` (the front room with the edit's camera, Sore sewing by hand at the window and
+counting pieces onto a pile), `renderJarB` (the jar for a cousin's ticket), `renderUSMap` (coast to coast, California), `renderKnockB`
+(the whole conversation at Ma's door, acting driven by the words.json speakers), `renderMovingInB` (Michael's longer walk home,
+Yankel tugging at the trunk, Ma's look and head shake), `renderModelShot` (the 3D model with the edit's camera keys and tags).
+
+```
+SCALE=0.6667 FRAMES=<scratch>/ch06 SFX="chunk_snap@0.3@86.02" ./build_ch.sh ch06 ga_new_neighbors@0.093@0@0
+SCALE=0.6667 FRAMES=<scratch>/ch07 SFX="chunk_snap@0.3@80.38" ./build_ch.sh ch07 ga_sweatshop@0.093@0@0
+SCALE=0.6667 FRAMES=<scratch>/ch08 SFX="chunk_snap@0.3@114.22" ./build_ch.sh ch08 ga_not_welcome@0.098@0@0@60.2@1.2 ga_looking_backward@0.093@59.6@0@83.0@1.2 ga_letters@0.101@82.3@0
+SCALE=0.6667 FRAMES=<scratch>/ch09 ./build_ch.sh ch09 ga_new_neighbors@0.093@0@0@29.9@1.0 ga_new_neighbors@0.05@29.3@29.3@63.7@0.9 ga_gilded_theme@0.105@63.2@55.88
+```
+
+- `SCALE=0.6667` (render_edit.mjs) renders the stage straight to 1280 x 720 (a third of the pixels and disk); leave it out for
+  `RES=1080`. `FRAMES=<dir>` (build_ch.sh) puts the frames outside `out/`. Both default to the old behaviour.
+- Music levels as Ep 2 (17 LU under the voice). Ch 9 dips `ga_new_neighbors` to 0.05 under the dialogue and brings in the series
+  theme at 63.2 s from 55.88 s into the cue, so the cue is at 99.8 s when the chapter ends and the end screen (assemble.sh, as Ep 2)
+  carries it on.

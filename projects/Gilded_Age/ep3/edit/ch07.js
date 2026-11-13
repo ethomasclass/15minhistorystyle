@@ -10,7 +10,7 @@ EDITS.ch07 = () => {
   const c = {sweat: w('sweatshop'), contractor: w('contractor,'), so: w('So', 1), yankel: w('Yankel'), rivke: w('Rivke,'), sore: w('Sore'), even: w('Even'),
     f14: w('Fourteen.'), f15: w('Fifteen.'), f16: w('Sixteen.'), riis: w('reporter') - 0.08, knee: w('knee'), beginners: w('Beginners'), they: w('They'),
     sound: w('Sound'), ma: w('Ma'), it: w('It'), together: w('together,'), every: w('every'), cents: w('cents', 2), so2: w('So', 2), mostly: w('Mostly,'),
-    family: w('Family.'), neighbors: w('Neighbors.'), people: w('People'), but: w('But', 2)};
+    family: w('Family.'), neighbors: w('Neighbors.'), people: lWord(ch, 'People', 76.34), but: w('But', 2)};
   // the front room: camera keys [T, zoom, ux, uy] through a monotone cubic (zoom in log space), to each worker as they are named
   // (the room is a cut-open box about 1,080 px wide: from zoom 1.9 up the frame stays inside it, so close-ups pan only a little and
   // put the person named on their own third of the frame)

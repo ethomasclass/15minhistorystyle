@@ -380,7 +380,7 @@ function miTrunkPairB(t, lod, rim, o = {}) {
   let yk = nbOpts('nfather', {x: X0, y: G, h: MI.man, d: -1, hat: 'cap', coat: 'frock', det: lod.det, rim, an: {fArm: [176, 180], tilt: t < 3.4 ? -10 : 0, expr: t < 2.8 ? 'set' : 'smile'}});
   yk = stepWalk(yk, X0, -1, carry, MI.ground, 'mi.yankel');
   const tug = t < 2.9 ? Math.sin(t * 5.3) * (1 - smooth(2.4, 2.9, t)) : 0; yk = {...yk, an: {...yk.an, lean: 5 * tug - 3}};
-  const P1 = [yk.x + 15, yk.y - 0.56 * yk.h + 7 * tug];
+  const P1 = [yk.x + 15, yk.y - 0.56 * yk.h + 6 * Math.max(0, tug) - 2 * Math.max(0, -tug)];
   yk = reach(yk, 'b', P1[0], P1[1], 'mi.yankel.trunk');
   // Michael: along the sidewalk from the right (0 to 2.6), crouch for the low end (2.6 to 3.0), lift (3.0 to 3.4), then carry
   const mS = o.mSteps || 8, mx1 = X0 + 82, mx0 = mx1 + mS * MI.step, mw = e3Trap(t, o.mStart ?? 0, 2.6, 0.12);
