@@ -988,14 +988,14 @@ function renderLookingBackward(t) {
   shadows.forEach((sh, i) => { const x0 = sh[0], y0 = sh[1] + 125 * K, x1 = men[i][0], y1 = men[i][1] - 125 * K; const u = smooth(19.0 + i * 0.2, 19.8 + i * 0.2, t) * (1 - smooth(21.4, 21.8, t)); w.push(drawOn([[x0, y0], [x1, y1]], u, 7)); if (u > 0.95) w.push(`<path d="M${f1(x1)},${f1(y1 + 6)} l-11,-20 l22,0 Z" fill="${E3.teal}" stroke="#111" stroke-width="2"/>`); });
   const world = layerAt(c, 1, w.join(''));
   // screen-space text, beat by beat
-  if (t > 1.0 && t < 4.2) scr.push(tag(140, 140, 'PUCK · JANUARY 11, 1893', smooth(1.0, 1.4, t) * (1 - smooth(3.8, 4.2, t))), tag(140, 200, '"LOOKING BACKWARD" · JOSEPH KEPPLER', smooth(1.4, 1.8, t) * (1 - smooth(3.8, 4.2, t))));
+  if (t > 0.9 && t < 4.4) scr.push(tag(140, 140, 'PUCK · JANUARY 11, 1893', smooth(0.9, 1.15, t) * (1 - smooth(4.15, 4.4, t))), tag(140, 200, '"LOOKING BACKWARD" · JOSEPH KEPPLER', smooth(1.0, 1.25, t) * (1 - smooth(4.15, 4.4, t))));
   if (t > 5.0 && t < 8.2) scr.push(penS(140, 150, 'rich men in top hats, on the dock', 32, -3));
-  if (t > 6.8 && t < 8.2) scr.push(penS(1100, 960, 'holding back a newcomer', 32, -3));
+  if (t > 5.6 && t < 8.3) scr.push(penS(1100, 960, 'holding back a newcomer', 32, -3));
   if (t > 9.6 && t < 13.5) scr.push(penS(140, 960, 'each shadow: the poor immigrant he once was', 32, -2));
-  if (t > 11.2 && t < 13.5) scr.push(tag(1180, 150, 'THE SHADOWS HAVE NO LABELS', smooth(11.2, 11.6, t)));
-  if (t > 15.6 && t < 17.6) { const u = smooth(15.6, 16.1, t);
+  if (t > 10.6 && t < 13.6) scr.push(tag(1180, 150, 'THE SHADOWS HAVE NO LABELS', smooth(10.6, 10.85, t)));
+  if (t > 15.0 && t < 17.9) { const u = smooth(15.0, 15.3, t);
     scr.push(`<g opacity="${f1(u)}"><rect x="200" y="96" width="1520" height="190" fill="${E3.cream}" opacity="0.96"/><text x="960" y="176" font-family="Playfair" font-weight="900" font-size="46" text-anchor="middle" fill="#111">"They would close to the new-comer the bridge</text><text x="960" y="238" font-family="Playfair" font-weight="900" font-size="46" text-anchor="middle" fill="#111">that carried them and their fathers over."</text></g>`); }
-  if (t > 19.0 && t < 21.6) scr.push(penS(140, 150, 'they came through the same door', 32, -3), tag(140, 980, 'KEPPLER WAS AN IMMIGRANT TOO: BORN IN VIENNA, 1838', smooth(19.6, 20.0, t)));
+  if (t > 19.0 && t < 21.8) scr.push(penS(140, 150, 'they came through the same door', 32, -3), tag(140, 980, 'KEPPLER WAS AN IMMIGRANT TOO: BORN IN VIENNA, 1838', smooth(19.0, 19.25, t)));
   if (t > 21.8) scr.push(card(560, 300, 'Look again', 'Who is Keppler criticizing?|What does he want you to notice?', '', smooth(21.8, 22.4, t)));
   return frame(e3Defs(t), `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), t);
 }
