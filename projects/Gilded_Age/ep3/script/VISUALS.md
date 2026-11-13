@@ -20,3 +20,12 @@ Counts: silhouette BUILT 7 (+ `ep3_looking_backward`), NEW 4 (`ep3_runner`, `ep3
 Diagrams BUILT 2 (route map, names chain), NEW 9.
 
 Order of work: `ep3_runner` (cold open) → old/new chart and bar chart → `ep3_hester` → enclave diagram → the rest.
+
+## The 3D neighborhood model (user, Nov 13: "epic, use it as much as we need")
+
+`lookdev/ep3_map.js`. Built: `ep3_enclave` (ch 6, 57 s). Queued from the same model:
+- `ep3_map_arrival` (ch 4 end into ch 5's last line): walking route from Castle Garden at the Battery up to Hester Street.
+- `ep3_map_sweatshop` (ch 7 open): the contractor carrying bundles from a loft to the tenements, then a dive into the front room.
+- `ep3_map_move` (ch 9 open): the family crosses the East River by ferry to the Kellys' Williamsburg building, 1886.
+- `ep3_map_density` (ch 6, optional): the blocks fill with people, Riis's 330,000 per square mile.
+Episode 4 (cities and machines) can reuse the model: wards, the district leader's network, the Brooklyn machine.
