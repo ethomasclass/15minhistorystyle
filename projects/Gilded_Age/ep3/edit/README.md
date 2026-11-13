@@ -75,3 +75,17 @@ through its keys), `quiet` (no clip text), `look` (head tilt, expression, blinks
   preview (chapter 1 + title, mastered as `assemble.sh` does) -14.1 LUFS, peak -1.2 dBFS.
 - Rendering note: the disk filled during the first render and Chromium dropped scripts and screenshots; `render_edit.mjs` now retries a
   failed frame, and frames are best rendered with about 6 GB free (2,608 frames at 1080p are about 4.5 GB).
+
+## Review round 1 polish (coordinator, Nov 13)
+
+- Dialogue two-shot: a slow push-in (z 1.5 to 1.95, 37.4 to 51.8 s); acting driven by the words.json `who` spans: the runner's free
+  hand opens on "Welcome, welcome", lifts on "Yankel!", goes to his chest on "He sent me", beckons on "Come", and is back at his side
+  before he stoops; Sore looks up at him while she answers and shifts her grip on the trunk after; Rivke looks up at whoever speaks.
+  The runner now stops 60 px short, at Sore's side (`manIn`), and steps in on "Come" (`e3Stand`), so he is no longer behind her.
+- Holds 12 to 34 s: Shmuel fidgets (head, a small sway), Rivke hitches the feather bed up three times (`e3HugBed` dy), heads drift.
+- Shmuel's two steps play at the clip's own speed (55.7 to 56.8 s); the hand-hold then holds to the freeze.
+- Dusk model: teal-slate haze, ground and water as the series; warmth only on sunlit faces and the sun's glow (right third).
+- "Runners" vocab card (`card()`), 61.4 to 65.9 s, top left, clear of the ring and the tag.
+- Fix in `e3Settle` (lookdev): the walk cycle's frozen bob eased out as a walker settles; it had left the runner standing with bent knees.
+- Audits after: text all >= 2.8 s, inside the safe area; contacts 0.00 px except Sore and Shmuel's held hands at 0.16 px at
+  most while he sways (12 to 34 s; under a quarter of a screen pixel); chapter -18.2 LUFS, preview -14.1 LUFS.

@@ -43,8 +43,8 @@ const EM_LIGHT = v3.norm([-0.45, -0.6, 0.66]); // cream morning light from the s
 // every other clip keeps the default light. A low warm sun from the west-north-west, warm lit faces, cool shade, darker water,
 // long shadows on the ground, a warm haze. emC(k) is the colour for k in the current look.
 let EM_ENV = null;
-const EM_DUSK = {light: v3.norm([-0.92, 0.33, 0.2]), warm: '#F0A866', cool: '#0B1716', k: 1, haze: '#6E5A48', water: '#0C1A1A', street: '#3B4642',
-  bg: '#0E1616', glint: '#FFC88A', park: '#26362E', shadowLen: 3.2, shadowOp: 0.42};
+const EM_DUSK = {light: v3.norm([-0.92, 0.33, 0.2]), warm: '#F0A866', cool: '#0B1716', k: 1, haze: '#4E6A66', water: '#0F2120', street: '#3E524E',
+  bg: '#0E1817', glint: '#FFC88A', park: '#2A443E', shadowLen: 3.2, shadowOp: 0.42}; // series teal-slate; warm only on sunlit faces and near the sun
 const emC = (k) => (EM_ENV && EM_ENV[k]) || EM[k];
 function emWithEnv(env, fn) { const keep = EM_ENV; EM_ENV = env; try { return fn(); } finally { EM_ENV = keep; } }
 
@@ -216,7 +216,7 @@ function emBuilding(cam, b) {
   const top = [[b.x0, b.y0, z1], [b.x1, b.y0, z1], [b.x1, b.y1, z1], [b.x0, b.y1, z1]];
   if (b.kind !== 'church') {
     if (b.glow > 0.01) s.push(emPoly(cam, top, emMix(H(pal.top), '#FFF3D6', 0.45 * b.glow), `stroke="${EM.cream}" stroke-width="2" stroke-opacity="${f1(b.glow * 90) / 100}"`)); else
-    s.push(emPoly(cam, top, H(EM_ENV ? emMix(pal.top, EM_ENV.warm, 0.3) : pal.top), b.edge ? `stroke="${b.edge}" stroke-width="2"` : `stroke="${EM.cream}" stroke-opacity="${f1(0.16 * det * 100) / 100}" stroke-width="1"`));
+    s.push(emPoly(cam, top, H(EM_ENV ? emMix(pal.top, EM_ENV.warm, 0.1) : pal.top), b.edge ? `stroke="${b.edge}" stroke-width="2"` : `stroke="${EM.cream}" stroke-opacity="${f1(0.16 * det * 100) / 100}" stroke-width="1"`));
     if (!b.noChimney && sc > 0.35) { const r = rng(b.seed + 3), cx = b.x0 + 3 + r() * (b.x1 - b.x0 - 8), cy = b.y0 + 8 + r() * (b.y1 - b.y0 - 16);
       s.push(emBoxSimple(cam, cx, cx + 3, cy, cy + 4, z1, z1 + 5, H(pal.dark), H(pal.lit), H(pal.top))); }
     if (b.dots > 0) { // the people who live here, as teal dots on the roof: more and more of them
@@ -651,7 +651,7 @@ function renderEnclave(t) {
   return emFrame(t, world, scr);
 }
 const emFrame = (t, world, scr) => frame(e3Defs(t, `<filter id="emblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>` +
-    (EM_ENV ? grad('emhaze', [['0', '#F2B57A', 0.42], ['0.35', '#B07A52', 0.16], ['0.75', '#5A4636', 0]]) : grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]])) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21})),
+    (EM_ENV ? grad('emhaze', [['0', '#A3BAB2', 0.32], ['0.38', '#7C918B', 0.11], ['0.7', '#4E726C', 0]]) : grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]])) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21})),
   '', `<g filter="url(#emtex)">${world.join('')}</g>`, scr.join(''), t);
 // tags with leader lines: each tag box sits at its preferred offset from its anchor, is pushed apart from the others, and is kept
 // inside the title-safe area
@@ -908,11 +908,11 @@ function emLongShadows(cam, S) {
 }
 // the sun's glow at the top of the frame, on the side it sets (screen space; the sun itself is above the frame at these pitches)
 function emSunGlow(cam) {
-  const L = EM_ENV.light, far = emP(cam, [cam.T[0] + L[0] * 9000, cam.T[1] + L[1] * 9000, 0]), x = far ? Math.max(-200, Math.min(2120, far[0])) : 1700;
-  return `<defs><radialGradient id="emsun"><stop offset="0" stop-color="#FFD9A0" stop-opacity="0.55"/><stop offset="0.35" stop-color="#F0A866" stop-opacity="0.22"/><stop offset="1" stop-color="#F0A866" stop-opacity="0"/></radialGradient></defs>` +
-    `<ellipse cx="${f1(x)}" cy="-140" rx="1300" ry="760" fill="url(#emsun)"/>`;
+  const L = EM_ENV.light, far = emP(cam, [cam.T[0] + L[0] * 9000, cam.T[1] + L[1] * 9000, 0]), x = far ? Math.max(1250, Math.min(2050, far[0])) : 1700; // kept on the right third, the side the sun sets (as in the drawn scene)
+  return `<defs><radialGradient id="emsun"><stop offset="0" stop-color="#FFD9A0" stop-opacity="0.8"/><stop offset="0.3" stop-color="#F0A866" stop-opacity="0.38"/><stop offset="1" stop-color="#F0A866" stop-opacity="0"/></radialGradient></defs>` +
+    `<ellipse cx="${f1(x)}" cy="-120" rx="1050" ry="640" fill="url(#emsun)"/>`;
 }
-const EM_GRADE = `<rect width="1920" height="1080" fill="#E0904E" opacity="0.2" style="mix-blend-mode:overlay"/>`; // a warm evening grade over the whole model
+const EM_GRADE = ''; // (a whole-frame warm grade was tried and read sepia; the warmth now stays on the sunlit faces and the sun's glow)
 // 1) the opening glide: over lower Manhattan at sunset, south-west to the round fort at the Battery (0 to 6.6 s; cut at 6.5)
 const DG_KEYS = [[0.0, -1430, -1820, 0, -152, 29, 2350, 0, 0], [6.6, -1915, -2850, 0, -129, 35, 1000, 0, 30], [9.0, -1940, -2900, 0, -122, 37, 760, 0, 40]];
 function renderDuskGlide(n) {

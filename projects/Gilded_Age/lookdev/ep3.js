@@ -1070,7 +1070,8 @@ function e3Settle(fo, u, name) {
   if (u <= 0) return fo;
   const d = fo.d ?? 1, A = E3K.foot(fo, 0), B = E3K.foot(fo, 1), fi = (A[0] - B[0]) * d >= 0 ? 0 : 1, F0 = fi ? B : A, K0 = fi ? A : B, e = ease(u);
   const T = [F0[0] - d * 0.11 * fo.h, F0[1]], P = [lerp(K0[0], T[0], e), lerp(K0[1], T[1], e) - 0.05 * fo.h * Math.sin(Math.PI * clamp01(u))];
-  const o1 = {...fo, x: lerp(fo.x, (F0[0] + T[0]) / 2, e)}, feet = fi ? [P, F0] : [F0, P];
+  // the walk cycle's bob (rig.js walkAn, frozen at the last step) eases out as he stands: left in, it held the hips low and the knees bent
+  const o1 = {...fo, x: lerp(fo.x, (F0[0] + T[0]) / 2, e), an: {...fo.an, bob: (fo.an && fo.an.bob || 0) * (1 - e)}}, feet = fi ? [P, F0] : [F0, P];
   const o2 = e3Legs(o1, feet, fo.floorY ?? F0[1], fi ? [u >= 1, true] : [true, u >= 1]);
   E3K.log('plant', name + '.settle.' + fi, F0, E3K.foot(o2, fi));
   E3K.log(u >= 1 ? 'plant' : 'swing', name + '.settle.' + (1 - fi), P, E3K.foot(o2, 1 - fi));
@@ -1105,8 +1106,8 @@ function e3Trap(t, t0, t1, a = 0.22) { const u = clamp01((t - t0) / (t1 - t0)), 
   return v * (u - a / 2); }
 const e3R = (h) => 2 * Math.sin(22 * Math.PI / 180) * h / 2; // one walking step for a figure of height h (stepWalk's foothold spacing)
 // a rolled, roped feather bed hugged in front of the chest, both hands under it (Rivke, or Sore later)
-function e3HugBed(fo, name, w = 120, hh = 50) {
-  const d = fo.d ?? 1, cx = fo.x + d * 0.14 * fo.h, cy = fo.y - 0.64 * fo.h;
+function e3HugBed(fo, name, w = 120, hh = 50, dy = 0) { // dy: the bed hitched up (negative) or sagging, hands still solved under it
+  const d = fo.d ?? 1, cx = fo.x + d * 0.14 * fo.h, cy = fo.y - 0.64 * fo.h + dy;
   let o = reach(fo, 'f', cx + d * (w * 0.14), cy + hh * 0.42, name + '.bed.f');
   o = reach(o, 'b', cx - d * (w * 0.12), cy + hh * 0.46, name + '.bed.b');
   return {fo: o, bed: featherBed(cx - w / 2, cy + hh / 2, w, hh, '#DFE0D6')};
@@ -1184,7 +1185,7 @@ function renderE3Runner(t, o = {}) {
     let sb = stepWalk(nbOpts('nson', {x: xb0, y: G, h: H, scale: 0.5, d: 1, det, rim: sun, an: {fArm: [150, 140], tilt: 6, ...LK.shmuel}}), xb0, 1, 7 * Rb * wk, () => G, 'rn.shmuel');
     let rv = stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {tilt: ts > 5 ? 10 : 0, expr: 'set', ...LK.rivke}}), xr0, 1, 4 * Rr * wk, () => G, 'rn.rivke');
     rv = e3Settle(rv, smooth(3.7, 4.05, ts), 'rn.rivke'); // (Sore keeps her stride: she has the trunk in one hand and Shmuel in the other)
-    const hb = e3HugBed(rv, 'rn.rivke'); rv = hb.fo;
+    const hb = e3HugBed(rv, 'rn.rivke', 120, 50, LK.bedDy || 0); rv = hb.fo;
     // the trunk: hanging from Sore's near hand while she walks; set down in front of her at 3.5 to 4.2; then her hand comes away
     // the trunk hangs from Sore's near hand the whole time she stands there; the man takes it out of her hand (contact 9.5), and it
     // swings across to hang from his far hand (9.5 to 10.1)
@@ -1192,11 +1193,13 @@ function renderE3Runner(t, o = {}) {
     let trunkW = [g0.x, g0.y];
     // the runner: watching from the lamp post at the right edge, then he walks up (5.6 to 8.4), stoops for the handle (8.9 to 9.5),
     // straightens with the trunk (9.5 to 10.1); his near hand goes out to the boy (10.3 to 11.3)
-    const Rm = e3R(H), xm1 = 990, xm0 = xm1 + 6 * Rm, wm = e3Trap(ts, 5.6, 8.4);
+    // o.manIn: he stops that far short of the clip's mark (to Sore's side, not behind her) and steps in on o.manStep (0..1)
+    const Rm = e3R(H), xm0 = 990 + 6 * Rm, xm1 = 990 + (o.manIn || 0), wm = e3Trap(ts, 5.6, 8.4);
     const smile = ts > 7.4, crouch = smooth(8.9, 9.5, ts) * (1 - smooth(9.5, 10.1, ts));
     let rm = {x: xm0, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: o.manDet ?? (ts > 7 ? det : 0), rim: o.manRim ?? (ts > 5.6 ? {...sun, a: 0.55} : null),
       an: {fArm: [176, 182], bArm: [184, 188], expr: smile ? 'smile' : 'neutral', tilt: ts < 5.6 ? -4 : ts > 10.3 ? -16 : -6, ...LK.man}};
-    rm = stepWalk(rm, xm0, -1, 6 * Rm * wm, () => G, 'rn.runner'); rm = e3Settle(rm, smooth(8.45, 8.8, ts), 'rn.runner');
+    rm = stepWalk(rm, xm0, -1, (xm0 - xm1) * wm, () => G, 'rn.runner'); rm = e3Settle(rm, smooth(8.45, 8.8, ts), 'rn.runner');
+    if (o.manIn && o.manStep > 0) rm = e3Stand(rm, rm.x, rm.x - o.manIn, Math.min(1, o.manStep), 'rn.runner.step');
     const gripR = E3K.hand(rm, 'b'), lift = smooth(9.5, 10.1, ts);
     if (crouch > 0) { const feet = [E3K.foot(rm, 0), E3K.foot(rm, 1)]; rm = plant({...rm, y: rm.y + 26 * crouch, an: {...rm.an, lean: 25 * crouch}}, feet, 'rn.runner.stoop'); }
     if (ts > 8.9) {
