@@ -551,3 +551,42 @@ checked by someone who reads Hebrew so no real word appears by chance; ch 2's "b
 - **`ep3_runner` payoff:** a push-in (z 2.0) on Rivke taking Shmuel's hand and the trunk dropping, 17.0 to 18.7 s, then back out.
 - Audits after the fixes: contacts (holds 0, hands and pairs 0 to 0.25 px, planted feet 0.00 px error and drift; steerage's berth
   sitters 2 px as in Round 13c); text audit clean (no OUT, OVERLAP or SHORT) on runner, hester, knock.
+
+### Round 14b map (Nov 13): four more shots from the enclave model
+
+Same model, engine and rules as `ep3_enclave` (all in `ep3_map.js`). `renderEnclave` now draws through `emWorld(n, cam, S)`, which
+takes each clip's state (lifts, highlights, glows, a gold floor band, people dots, the loft, the background ferry, extra sorted
+items), so every clip shares one model. New in the model: Manhattan's shore narrows to the Battery in the south-west, with the
+round Castle Garden fort (a 24-sided wall with arched windows, a broad low roof and a lantern), the Battery's trees, and flat
+blocks of lower Manhattan; screen-space map markers (a ground ring, a pin and a ball: gold for the Rabinowitzes, ink for the
+contractor, with cream bundles); teal dotted routes (the whole way faint, the part already walked bright); tags whose anchors
+leave the frame fade out; the tag solver pushes a tag the other way when an edge blocks it. The new clips render straight at
+720p (`deviceScaleFactor` 2/3 in a scratch renderer) to save time. Each clip keeps its own clock from its own chapter's
+words.json and its own camera keys.
+
+- **`ep3_map_arrival`** (14 s, ch 5 end; `AR.T0` = 66.5 s of `ch05_old_and_new`). Castle Garden at the Battery ("In 1884", 67.2)
+  with "CASTLE GARDEN"; the gold marker and four tiny gold walkers appear at the fort gate ("the Rabinowitzes", 68.5); the teal
+  route draws on and the family walks north-east through lower Manhattan into Hester Street, the camera following; "JEWISH
+  ARRIVALS IN 1884: ABOUT 1 IN 50" ("one arrival in fifty", 72.5); they reach the gold building on "the Lower East Side" (77.0 to
+  77.9), where the place tag becomes "HESTER STREET · LOWER EAST SIDE" and the middle of the frame is left clear for the chapter
+  card. The walk is squeezed (about 1.7 miles in life); the direction is right.
+- **`ep3_map_sweatshop`** (16 s, ch 7 open; `SW2.T0` = 5.0 s of `ch07_sweatshop`). The gold building's windows light ("inside a
+  family's home"): "THE RABINOWITZES / A WORKSHOP AT HOME"; a clothing firm's seven-floor loft west of the blocks turns pale
+  ("ready-made clothes", 7.9): "CLOTHING FIRM / CUTS THE CLOTH" (12.7); the contractor's ink marker leaves its door with three
+  cream bundles ("a contractor", 14.4 to 15.4), drops one at each of two tenements (which light up) and the last at the gold
+  building, along a teal dotted route ("carried bundles"); "CONTRACTOR", "PAID BY THE PIECE". Then the dive (18.6 to 21.2, distance
+  interpolated in log space so it feels even): over the street, then down to the Rabinowitzes' top-floor front window, which fills
+  the frame at 21.2, the hard cut to `ep3_sweatshop` ("So Yankel pressed").
+- **`ep3_map_move`** (17 s, ch 9 open; clock = `ch09_new_neighbors` seconds). Both enclaves wide, "SPRING 1886", "LOWER EAST SIDE",
+  "WILLIAMSBURG, BROOKLYN", "THE KELLYS". On "found steadier work" (4.1) the gold marker walks east on Hester and north to Grand
+  Street, rides the Grand Street ferry north-east across the East River ("across the East River", 6.7; tag "GRAND STREET FERRY"),
+  lands in Williamsburg and walks south to the Kellys' street; the coral building takes a gold floor (their flat) and the tag
+  becomes "THE KELLYS / AND THE RABINOWITZES · 1886"; on "Most wouldn't come for another twenty years" (13.6) a quiet teal-text tag:
+  "MOST JEWISH FAMILIES: AFTER 1903" (the Williamsburg Bridge; RESEARCH.md). Geography checked: Williamsburg lies across the East
+  River from the Lower East Side, a little north-east; the Grand Street ferry ran from Grand Street, Manhattan to Broadway,
+  Williamsburg. In the model Grand Street is the northern street of the Lower East Side blocks.
+- **`ep3_map_density`** (8 s, ch 6; `DN.T0` = 77.8 s). The Lower East Side from above; teal dots (people) fill the roofs from "A few
+  years later" (78.3) until dense on "the most crowded place on Earth" (82.5); "ABOUT 330,000 PEOPLE PER SQUARE MILE" and "CLAIMED BY
+  JACOB RIIS, 1890" (Riis, *How the Other Half Lives*, ch. X, of part of the Tenth Ward).
+
+Stills: `ma_*.jpg` (arrival), `ms_*.jpg` (sweatshop), `mm_*.jpg` (move), `md_*.jpg` (density).
