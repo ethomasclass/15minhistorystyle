@@ -73,10 +73,12 @@ function emInterp(keys, n) { // Fritsch-Carlson monotone cubic per channel (no o
   }
   return out;
 }
-function emCamera(n) {
-  const [tx, ty, tz, yaw, pitch, D, ox, oy] = emInterp(EM_KEYS, n), ps = pitch * DEG, ys = yaw * DEG;
+function emCamera(n, keys = EM_KEYS, logD = false) { // logD: interpolate distance in log space (a dive feels even all the way in)
+  const kk = logD ? keys.map((k) => k.map((v, i) => i === 6 ? Math.log(v) : v)) : keys;
+  let [tx, ty, tz, yaw, pitch, D, ox, oy] = emInterp(kk, n); if (logD) D = Math.exp(D);
+  const ps = pitch * DEG, ys = yaw * DEG;
   const f = [Math.cos(ps) * Math.sin(ys), Math.cos(ps) * Math.cos(ys), -Math.sin(ps)], r = [Math.cos(ys), -Math.sin(ys), 0], u = v3.cross(r, f);
-  return {f, r, u, C: v3.sub([tx, ty, tz], v3.mul(f, D)), F: 2400, cx: 960 + ox, cy: 540 + oy, D, T: [tx, ty, tz], yaw, pitch};
+  return {f, r, u, C: v3.sub([tx, ty, tz], v3.mul(f, D)), F: 2400, cx: 960 + ox, cy: 540 + oy, D, HD: logD ? Math.max(D, 700) : D, T: [tx, ty, tz], yaw, pitch};
 }
 const EM_NEAR = 4;
 const emCamPt = (cam, p) => { const d = v3.sub(p, cam.C); return [v3.dot(d, cam.r), v3.dot(d, cam.u), v3.dot(d, cam.f)]; };
@@ -97,7 +99,7 @@ const emPoly = (cam, P3, fill, extra = '') => { const s = emPoly2(cam, P3); retu
 const emLine = (cam, a, b, col, w, extra = '') => { const A = emP(cam, a), B = emP(cam, b); return A && B ? `<line x1="${f1(A[0])}" y1="${f1(A[1])}" x2="${f1(B[0])}" y2="${f1(B[1])}" stroke="${col}" stroke-width="${f1(w * 10) / 10}" ${extra}/>` : ''; };
 const emScale = (cam, p) => { const q = emCamPt(cam, p); return q[2] > EM_NEAR ? cam.F / q[2] : 0; }; // px per foot at p
 const emSeen = (cam, p, nrm) => v3.dot(nrm, v3.sub(cam.C, p)) > 0;
-const emHazeK = (cam, p) => clamp01((v3.len(v3.sub(p, cam.C)) - cam.D * 1.05) / (cam.D * 1.6)) * 0.6;
+const emHazeK = (cam, p) => clamp01((v3.len(v3.sub(p, cam.C)) - cam.HD * 1.05) / (cam.HD * 1.6)) * 0.6;
 
 /* ---------- the model: blocks, lots, places ---------- */
 // Lower East Side: three blocks east-west by three rows; Hester Street (the market) runs between rows 1 and 2.
@@ -193,14 +195,23 @@ function emBuilding(cam, b) {
     const isFront = name === b.front, isBack = (b.front === 'S' && name === 'N') || (b.front === 'N' && name === 'S');
     if (det > 0.05 && (isFront || isBack) && b.kind !== 'church') s.push(emFacade(cam, b, g, isFront, sc, H, det));
     else if (det > 0.05 && b.kind === 'church') s.push(emChurchSide(cam, b, g, isFront, sc, H));
+    if (b.band > 0.01 && b.floors > 2) { // the Rabinowitzes' floor in the Kellys' building, in their gold
+      s.push(emQuad(cam, g, 0, 13, g.W, 25, '#E2B864', `opacity="${f1(b.band * 100) / 100}"`));
+      if (sc > 1.1) for (let k = 0; k < 3; k++) { const uc = g.W * (k + 0.5) / 3; s.push(emQuad(cam, g, uc - 1.5, 16, uc + 1.5, 21.6, '#7A5B22', `opacity="${f1(b.band * 100) / 100}"`)); } }
     if (b.edge) s.push(emQuad(cam, g, 0, 0, g.W, g.H, 'none', `stroke="${b.edge}" stroke-width="1.6" stroke-opacity="0.75"`));
   }
   // roof
   const top = [[b.x0, b.y0, z1], [b.x1, b.y0, z1], [b.x1, b.y1, z1], [b.x0, b.y1, z1]];
   if (b.kind !== 'church') {
+    if (b.glow > 0.01) s.push(emPoly(cam, top, emMix(H(pal.top), '#FFF3D6', 0.45 * b.glow), `stroke="${EM.cream}" stroke-width="2" stroke-opacity="${f1(b.glow * 90) / 100}"`)); else
     s.push(emPoly(cam, top, H(pal.top), b.edge ? `stroke="${b.edge}" stroke-width="2"` : `stroke="${EM.cream}" stroke-opacity="${f1(0.16 * det * 100) / 100}" stroke-width="1"`));
     if (!b.noChimney && sc > 0.35) { const r = rng(b.seed + 3), cx = b.x0 + 3 + r() * (b.x1 - b.x0 - 8), cy = b.y0 + 8 + r() * (b.y1 - b.y0 - 16);
       s.push(emBoxSimple(cam, cx, cx + 3, cy, cy + 4, z1, z1 + 5, H(pal.dark), H(pal.lit), H(pal.top))); }
+    if (b.dots > 0) { // the people who live here, as teal dots on the roof: more and more of them
+      const r = rng(b.seed + 11), rr = Math.max(1.6, sc * 1.1), nd = Math.round((b.x1 - b.x0) * (b.y1 - b.y0) / 95);
+      for (let k = 0; k < nd; k++) { const x = b.x0 + 2 + r() * (b.x1 - b.x0 - 4), y = b.y0 + 2 + r() * (b.y1 - b.y0 - 4), th = r();
+        if (th > b.dots) continue; const c = emP(cam, [x, y, z1 + 0.5]); if (c) s.push(`<circle cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(rr)}" fill="${EM.teal}" opacity="${f1(clamp01((b.dots - th) * 12) * 90) / 100}"/>`); }
+    }
   }
   return `<g${b.op != null && b.op < 1 ? ` opacity="${f1(b.op * 100) / 100}"` : ''}>${s.join('')}</g>`;
 }
@@ -222,6 +233,7 @@ function emFacade(cam, b, g, isFront, sc, H, det) {
       if (b.kind === 'shul' && f === 1 && isFront) { v0 = z + 1.5; v1 = z + 10.2; fill = '#F4EFE6'; o = 0.5; ww = 3.6; } // the upstairs prayer room: tall bright windows
       else if (b.kind === 'hall' && f === 1 && isFront) { v0 = z + 1.5; v1 = z + 10; fill = '#F4EFE6'; o = 0.42; }
       else if (b.kind === 'shop' && f === nf - 1) { fill = '#FFF3D6'; o = 0.55; } // the workshop under the roof, lit
+      else if (b.glow > 0.01) { fill = '#FFF3D6'; o = 0.25 + 0.7 * b.glow; } // a home turned workshop: every window lit
       else if (r() < 0.12) { fill = '#DFE0D6'; o = 0.35; }
       s.push(emQuad(cam, g, uc - ww / 2, v0, uc + ww / 2, v1, fill, o < 1 ? op(o) : op(1)));
       if ((b.kind === 'shul' || b.kind === 'hall') && f === 1 && isFront) s.push(emPoly(cam, [emAt(g, uc - ww / 2, v1), emAt(g, uc, v1 + 1.4), emAt(g, uc + ww / 2, v1)], fill, op(o)));
@@ -419,21 +431,55 @@ function emPlanDraw(cam, n, lot, z) {
   return `<g opacity="${f1(reveal)}">${s.join('')}</g>`;
 }
 
+/* ---------- lower Manhattan: the shore narrows to the Battery, with Castle Garden at the tip ---------- */
+// Distances are squeezed (the real walk from the Battery to Hester Street is about 1.7 miles); the shape and the direction
+// (south-west to north-east) are right. Williamsburg lies across the East River from the Lower East Side, a little north-east.
+const EM_MANHATTAN = [[-3600, 4200], [EM_RIVER[0], 4200], [EM_RIVER[0], -1450], [420, -1950], [-300, -2450], [-1100, -2850], [-1700, -3080], [-2100, -3080],
+  [-2450, -2850], [-2700, -2300], [-3000, -1400], [-3400, -300]];
+const EM_FORT = [-1960, -2930, 95]; // Castle Garden: centre x, y, radius (the round fort at the Battery's tip)
+const EM_BATTERY = [[-2420, -2840], [-2150, -3060], [-1720, -3060], [-1420, -2900], [-1500, -2620], [-1900, -2470], [-2300, -2520]];
+function emInside(P, x, y) { let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, yi] = P[i], [xj, yj] = P[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c; } return c; }
+function emFort(cam) { // the round sandstone fort with its broad low roof and the lantern on top
+  const [cx, cy, R] = EM_FORT, N = 24, ring = (r, z) => Array.from({length: N}, (_, k) => [cx + Math.cos(k * TAU / N) * r, cy + Math.sin(k * TAU / N) * r, z]);
+  const pal = {lit: '#2E4A47', dark: '#081110'}, H = (c) => emMix(c, EM.haze, emHazeK(cam, [cx, cy, 20])), ed = `${EM.cream}`;
+  const prism = (r, z0, z1) => { const a = ring(r, z0), b = ring(r, z1), F = []; for (let k = 0; k < N; k++) F.push([a[k], a[(k + 1) % N], b[(k + 1) % N], b[k]]); F.push(b.slice().reverse()); return F; };
+  const cone = (r, z0, z1) => { const a = ring(r, z0), F = []; for (let k = 0; k < N; k++) F.push([a[k], a[(k + 1) % N], [cx, cy, z1]]); F.push(a); return F; };
+  let s = emSolid(cam, prism(R, 0, 30), pal, H) + emSolid(cam, cone(R + 4, 30, 52), {lit: '#1E3130', dark: '#0A1312'}, H) + emSolid(cam, prism(16, 46, 60), pal, H) + emSolid(cam, cone(19, 60, 68), {lit: '#1E3130', dark: '#0A1312'}, H);
+  const rim = ring(R + 4, 30).map((p) => emP(cam, p)); if (rim.every(Boolean)) s += `<polygon points="${pts(rim)}" fill="none" stroke="${ed}" stroke-opacity="0.55" stroke-width="2"/>`;
+  for (let k = 0; k < N; k += 2) { const a = k * TAU / N, p = [cx + Math.cos(a) * (R + 0.5), cy + Math.sin(a) * (R + 0.5)], nrm = [Math.cos(a), Math.sin(a), 0];
+    if (emSeen(cam, [p[0], p[1], 10], nrm)) s += emLine(cam, [p[0], p[1], 6], [p[0], p[1], 20], H('#0A1110'), Math.max(1.5, emScale(cam, [p[0], p[1], 10]) * 5)); } // arched windows
+  return s;
+}
+
 /* ---------- the scene ---------- */
-function emGround(cam, n) {
+function emGround(cam, n, S = {}) {
   const s = [];
-  const land = (x0, x1) => emPoly(cam, [[x0, -4000, 0], [x1, -4000, 0], [x1, 4000, 0], [x0, 4000, 0]], EM.street);
-  s.push(land(-6000, EM_RIVER[0]), land(EM_RIVER[1], 8000));
-  // the river: dark water, glints drifting downstream, a ferry crossing
-  s.push(emPoly(cam, [[EM_RIVER[0], -4000, -2], [EM_RIVER[1], -4000, -2], [EM_RIVER[1], 4000, -2], [EM_RIVER[0], 4000, -2]], EM.water));
+  // the harbour and the river under everything; then the land: Manhattan narrows to the Battery in the south-west, Brooklyn
+  // across the East River
+  s.push(emPoly(cam, [[-7000, -6000, -2], [9000, -6000, -2], [9000, 5000, -2], [-7000, 5000, -2]], EM.water));
+  s.push(emPoly(cam, EM_MANHATTAN.map(([x, y]) => [x, y, 0]), EM.street, 'stroke="#0A1312" stroke-width="3"'));
+  s.push(emPoly(cam, [[EM_RIVER[1], -4000, 0], [8000, -4000, 0], [8000, 4000, 0], [EM_RIVER[1], 4000, 0]], EM.street));
+  const rh = rng(405); // glints in the harbour round the Battery
+  for (let k = 0; k < 120; k++) { const x = -3600 + rh() * 4400, y = -3800 + rh() * 1900 + ((n * 6) % 40), L = 12 + rh() * 30, o = 0.15 + rh() * 0.2;
+    if (!emInside(EM_MANHATTAN, x, y) && !emInside(EM_MANHATTAN, x + L, y)) s.push(emLine(cam, [x, y, -1.5], [x + L * 0.6, y, -1.5], '#A3BAB2', 1.4, `stroke-opacity="${f1(o * 100) / 100}"`)); }
+  // the Battery: a park of trees round the fort, and the blocks of lower Manhattan as flat footprints
+  s.push(emPoly(cam, EM_BATTERY.map(([x, y]) => [x, y, 0.3]), '#33504A'));
+  const rt = rng(406);
+  for (let k = 0; k < 60; k++) { const x = -2350 + rt() * 800, y = -2950 + rt() * 650; if (!emInside(EM_BATTERY, x, y) || Math.hypot(x - EM_FORT[0], y - EM_FORT[1]) < EM_FORT[2] + 30) continue;
+    const ring = []; for (let q = 0; q < 8; q++) ring.push([x + Math.cos(q * TAU / 8) * 14, y + Math.sin(q * TAU / 8) * 14, 1]); s.push(emPoly(cam, ring, '#16261F', 'opacity="0.9"')); }
+  for (let x = -2600; x < 400; x += 350) for (let y = -2780; y <= -1030; y += 250) {
+    const c4 = [[x, y], [x + 300, y], [x + 300, y + 200], [x, y + 200]]; if (!c4.every(([a, b]) => emInside(EM_MANHATTAN, a, b) && !emInside(EM_BATTERY, a, b))) continue;
+    s.push(emPoly(cam, c4.map(([a, b]) => [a, b, 0.2]), EM.ghost, `stroke="#0E1918" stroke-width="1" opacity="0.85"`));
+  }
   const r = rng(404);
   for (let k = 0; k < 140; k++) { const x = EM_RIVER[0] + 20 + r() * (EM_RIVER[1] - EM_RIVER[0] - 40), y = ((r() * 3200 - n * 9) % 3200 + 3200) % 3200 - 1600, L = 12 + r() * 30;
     s.push(emLine(cam, [x, y, -1.5], [x + L * 0.6, y, -1.5], '#A3BAB2', 1.4, `stroke-opacity="${f1((0.18 + r() * 0.2) * 100) / 100}"`)); }
-  for (const [x0, x1] of [[EM_RIVER[0] - 4, EM_RIVER[0] + 2], [EM_RIVER[1] - 2, EM_RIVER[1] + 4]]) s.push(emPoly(cam, [[x0, -4000, 0], [x1, -4000, 0], [x1, 4000, 0], [x0, 4000, 0]], '#0A1312'));
+  s.push(emPoly(cam, [[EM_RIVER[1] - 2, -4000, 0], [EM_RIVER[1] + 4, -4000, 0], [EM_RIVER[1] + 4, 4000, 0], [EM_RIVER[1] - 2, 4000, 0]], '#0A1312'));
   for (const [x, y, w] of [[EM_RIVER[0], -120, 90], [EM_RIVER[0], 220, 110], [EM_RIVER[1] - 100, 40, 100], [EM_RIVER[1] - 90, -300, 90]]) s.push(emPoly(cam, [[x, y, 0.5], [x + w, y, 0.5], [x + w, y + 22, 0.5], [x, y + 22, 0.5]], '#2A3B38')); // piers
   // ghost blocks beyond the models: flat footprints that fade into the haze
   for (const M of [{xs: [-1550, -1200, -850, -500, -150, 200], ys: [-780, -530, -280, 30, 280, 530, 780, 1030], m: EM_LES, x1: EM_RIVER[0]}, {xs: [1450, 1800, 2150, 2500, 2850], ys: [-780, -530, -280, 30, 280, 530], m: EM_BK, x0: EM_RIVER[1]}]) {
     for (const x of M.xs) for (const y of M.ys) {
+      if (S.loft && x === -850 && y === 30) continue; // the clothing firm's loft stands here
       if (M.m.cols.some(([a]) => a === x) && M.m.rows.some(([b]) => b === y || b === y - 0)) continue;
       const w = 300, h = 200, xx0 = Math.max(x, M.x0 ?? -9e9), xx1 = Math.min(x + w, M.x1 ?? 9e9); if (xx1 <= xx0) continue;
       s.push(emPoly(cam, [[xx0, y, 0.2], [xx1, y, 0.2], [xx1, y + h, 0.2], [xx0, y + h, 0.2]], EM.ghost, `stroke="#0E1918" stroke-width="1" opacity="0.85"`));
@@ -445,32 +491,37 @@ function emGround(cam, n) {
     s.push(emPoly(cam, [[x0, y0, 0.6], [x1, y0, 0.6], [x1, y1, 0.6], [x0, y1, 0.6]], EM.yard));
   }
   // the market: its slab of street leaves a dark trench when it lifts
-  const ml = emMarketLift(n);
+  const ml = S.mlift || 0;
   if (ml > 0.5) s.push(emPoly(cam, [[EM_MARKET.x0, EM_MARKET.y0, 0.7], [EM_MARKET.x1, EM_MARKET.y0, 0.7], [EM_MARKET.x1, EM_MARKET.y1, 0.7], [EM_MARKET.x0, EM_MARKET.y1, 0.7]], '#0A1312'));
   return s.join('');
 }
-function emShadows(cam, n) { // soft shadows cast on the ground by whatever has lifted (the light is high in the south-west)
+function emShadows(cam, n, S) { // soft shadows cast on the ground by whatever has lifted (the light is high in the south-west)
   const s = [];
   const sh = (x0, x1, y0, y1, L, z = 0.8) => { if (L < 1) return; const dx = L * 0.55, dy = L * 0.7, o = clamp01(L / 20) * 0.55;
     s.push(emPoly(cam, [[x0 + dx, y0 + dy, z], [x1 + dx, y0 + dy, z], [x1 + dx, y1 + dy, z], [x0 + dx, y1 + dy, z]], '#000', `opacity="${f1(o * 100) / 100}" filter="url(#emblur)"`)); };
-  for (const k of Object.keys(EM_PLACES)) { const L = emPlaceLift(k, n); if (L > 0) { const l = emLot(k); sh(l.x0, l.x1, l.y0, l.y1, L);
+  for (const k of Object.keys(EM_PLACES)) { const L = S.lift ? S.lift(k) : 0; if (L > 0) { const l = emLot(k); sh(l.x0, l.x1, l.y0, l.y1, L);
     s.push(emPoly(cam, [[l.x0, l.y0, 0.7], [l.x1, l.y0, 0.7], [l.x1, l.y1, 0.7], [l.x0, l.y1, 0.7]], '#070D0C', `opacity="${f1(clamp01(L / 8) * 100) / 100}"`)); } }
-  const ml = emMarketLift(n); if (ml > 0) sh(EM_MARKET.x0, EM_MARKET.x1, EM_MARKET.y0, EM_MARKET.y1, ml);
+  const ml = S.mlift || 0; if (ml > 0) sh(EM_MARKET.x0, EM_MARKET.x1, EM_MARKET.y0, EM_MARKET.y1, ml);
   return s.join('');
 }
-function renderEnclave(t) {
-  const n = t + EM_T0, cam = emCamera(n), items = [];
+// the model, drawn for one camera: buildings (with lifts, highlights, glows), street life, ground, shadows, haze. S holds the
+// clip's state: lift(k) and hk(k) per place, mlift (the market slab), openU (the gold roof lifting off), glow(lot) and band(lot)
+// (0..1), dots (0..1, people filling the blocks), loft (the clothing firm's building), ferry (the background ferry), extra
+// (more sorted items), hazeOn
+function emWorld(n, cam, S) {
+  const items = [...(S.extra || [])];
   const dist = (p) => v3.len(v3.sub(p, cam.C));
   const H0 = (p) => (c) => emMix(c, EM.haze, emHazeK(cam, p));
-  const openU = smooth(EM_CUE.tenements - 0.6, EM_CUE.tenements + 1.0, n); // the gold building's roof lifts off
+  const openU = S.openU || 0, lift0 = S.lift || (() => 0), hk0 = S.hk || (() => 0);
   // buildings
   for (const l of EM_LOTS) {
-    const p = l.place ? EM_PLACES[l.place] : null, lift = l.place ? emPlaceLift(l.place, n) : 0;
-    const hk = p && p.cue != null ? smooth(0, 0.35, emLiftU(n, p.cue)) : 0, highlight = hk > 0.02; // the ink turns pale as it rises
+    const p = l.place ? EM_PLACES[l.place] : null, lift = l.place ? lift0(l.place) : 0;
+    const hk = p ? hk0(l.place) : 0, highlight = hk > 0.02; // the ink turns pale as it rises
     const p0 = emPal(p && p.col, false), p1 = emPal(p && p.col, true), pal = hk > 0 ? Object.fromEntries(Object.keys(p0).map((k) => [k, emMix(p0[k], p1[k], hk)])) : p0;
     const edge = highlight ? emMix(EM.inkDark, EM.cream, hk) : null;
     const cen = [(l.x0 + l.x1) / 2, (l.y0 + l.y1) / 2, emH(l.floors) / 2 + lift];
-    const b = {x0: l.x0, x1: l.x1, y0: l.y0, y1: l.y1, z0: lift, h: emH(l.floors), floors: l.floors, front: l.front, pal, kind: p ? p.kind : null, seed: l.seed, shop: l.shop, edge};
+    const b = {x0: l.x0, x1: l.x1, y0: l.y0, y1: l.y1, z0: lift, h: emH(l.floors), floors: l.floors, front: l.front, pal, kind: p ? p.kind : null, seed: l.seed, shop: l.shop, edge,
+      glow: S.glow ? S.glow(l.key) : 0, band: S.band ? S.band(l.key) : 0, dots: S.dots && l.m === 'L' ? S.dots : 0};
     let draw;
     if (l.place === 'church') draw = () => emChurch(cam, l, lift, pal, edge, n);
     else if (l.place === 'gold' && openU > 0) {
@@ -481,8 +532,10 @@ function renderEnclave(t) {
     else draw = () => emBuilding(cam, b);
     items.push({d: dist([cen[0], cen[1], 0]) - lift * 0.3, draw});
   }
+  if (S.loft) { const L = EM_LOFT, hk = S.loft; const p0 = emPal(null, false), p1 = emPal(null, true), pal = Object.fromEntries(Object.keys(p0).map((k) => [k, emMix(p0[k], p1[k], hk)]));
+    items.push({d: dist([(L.x0 + L.x1) / 2, (L.y0 + L.y1) / 2, 0]), draw: () => emBuilding(cam, {...L, z0: 0, h: emH(L.floors), front: 'S', pal, kind: 'loft', seed: 77, shop: true, edge: hk > 0.02 ? emMix(EM.inkDark, EM.cream, hk) : null})}); }
   // the market slab and everything on it
-  const ml = emMarketLift(n);
+  const ml = S.mlift || 0;
   const inMarket = (x, y) => x > EM_MARKET.x0 && x < EM_MARKET.x1 && y > EM_MARKET.y0 && y < EM_MARKET.y1;
   const mcen = [(EM_MARKET.x0 + EM_MARKET.x1) / 2, 0, 0];
   const life = (x, y, z, k, H) => k.cart ? emCart(cam, x, y, z, k.seed, H) : emPerson(cam, x, y, z, k.h, EM.ink, k.op ?? 1);
@@ -501,17 +554,26 @@ function renderEnclave(t) {
     onSlab.map((o) => ({...o, dd: dist([o.x, o.y, z])})).sort((a, b) => b.dd - a.dd).forEach((o) => s.push(life(o.x, o.y, z, o.k, hz)));
     return s.join('');
   }});
-  items.push({d: dist([1000, 900, 0]), draw: () => { // a ferry crossing the river
+  if (S.ferry !== false) items.push({d: dist([1000, 900, 0]), draw: () => { // a ferry crossing the river
     const u = ((n * 14) % 700) / 700, x = EM_RIVER[0] + 40 + u * (EM_RIVER[1] - EM_RIVER[0] - 140), y = 560;
-    return emPoly(cam, [[x - 60, y + 20, -1], [x - 120, y + 26, -1], [x - 120, y + 14, -1]], '#A3BAB2', 'opacity="0.25"') +
-      emBoxSimple(cam, x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + emBoxSimple(cam, x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
-      emBoxSimple(cam, x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111');
+    return emFerry(cam, x, y);
   }});
+  items.push({d: dist([EM_FORT[0], EM_FORT[1], 0]), draw: () => emFort(cam)});
   items.sort((a, b) => b.d - a.d);
-  const world = [`<rect width="1920" height="1080" fill="${EM.bg}"/>`, emGround(cam, n), emShadows(cam, n), items.map((it) => it.draw()).join('')];
-  // haze over the far ground (the top of the frame), cream light from the left
-  const hazeOn = 1 - smooth(EM_CUE.cost + 1, EM_CUE.tenements, n);
-  world.push(`<rect width="1920" height="1080" fill="url(#emhaze)" opacity="${f1(hazeOn * 100) / 100}"/>`);
+  const world = [`<rect width="1920" height="1080" fill="${EM.bg}"/>`, emGround(cam, n, S), emShadows(cam, n, S), items.map((it) => it.draw()).join('')];
+  world.push(`<rect width="1920" height="1080" fill="url(#emhaze)" opacity="${f1((S.hazeOn ?? 1) * 100) / 100}"/>`);
+  return world;
+}
+const emFerry = (cam, x, y) => emPoly(cam, [[x - 60, y + 20, -1], [x - 120, y + 26, -1], [x - 120, y + 14, -1]], '#A3BAB2', 'opacity="0.25"') +
+  emBoxSimple(cam, x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + emBoxSimple(cam, x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
+  emBoxSimple(cam, x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111');
+const EM_LOFT = {x0: -830, x1: -640, y0: 40, y1: 150, floors: 7}; // a clothing firm's cast-iron loft, west of the model (ep3_map_sweatshop)
+function renderEnclave(t) {
+  const n = t + EM_T0, cam = emCamera(n);
+  const openU = smooth(EM_CUE.tenements - 0.6, EM_CUE.tenements + 1.0, n); // the gold building's roof lifts off
+  const ml = emMarketLift(n), mcen = [(EM_MARKET.x0 + EM_MARKET.x1) / 2, 0, 0];
+  const world = emWorld(n, cam, {lift: (k) => emPlaceLift(k, n), hk: (k) => EM_PLACES[k].cue != null ? smooth(0, 0.35, emLiftU(n, EM_PLACES[k].cue)) : 0, mlift: ml, openU,
+    hazeOn: 1 - smooth(EM_CUE.cost + 1, EM_CUE.tenements, n)});
   // the network: teal arcs from the gold building to each place as it lifts (and from coral in Brooklyn)
   const net = [], netOut = 1 - smooth(EM_CUE.cost, EM_CUE.cost + 1.2, n);
   const arc = (a, b, u, w = 5) => { if (u <= 0) return; const L = Math.hypot(b[0] - a[0], b[1] - a[1]), P3 = [];
@@ -571,10 +633,11 @@ function renderEnclave(t) {
   const cd = on(EM_CUE.enclave, EM_CUE.other + 0.9, 0.5), slide = 40 * (1 - smooth(EM_CUE.enclave, EM_CUE.enclave + 0.5, n));
   if (cd > 0) { fixed.push({x: 990, y: 580, w: 820, h: 400}); scr.push(`<g transform="translate(0,${f1(slide)})">${card(1000, 590, 'Enclave', 'A neighborhood where people from|the same place live close together,|keep their language, and look|after each other.', null, cd)}</g>`); }
   scr.unshift(emLabels(lab.map(([lines, a3, off, op]) => ({lines, a: anchor(a3), off, op})).filter((L) => L.a && L.op > 0.01), fixed));
-  const defs = e3Defs(t, `<filter id="emblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>` +
-    grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]]) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21}));
-  return frame(defs, '', `<g filter="url(#emtex)">${world.join('')}</g>`, scr.join(''), t);
+  return emFrame(t, world, scr);
 }
+const emFrame = (t, world, scr) => frame(e3Defs(t, `<filter id="emblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>` +
+    grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]]) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21})),
+  '', `<g filter="url(#emtex)">${world.join('')}</g>`, scr.join(''), t);
 // tags with leader lines: each tag box sits at its preferred offset from its anchor, is pushed apart from the others, and is kept
 // inside the title-safe area
 function emLabels(L, fixed = []) {
@@ -586,7 +649,10 @@ function emLabels(L, fixed = []) {
   for (let it = 0; it < 40; it++) { let moved = false;
     for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) { const A = all[i], B = all[j]; if (A.fixed && B.fixed) continue;
       const ox = Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x) + 12, oy = Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y) + 12;
-      if (ox > 0 && oy > 0) { moved = true; const dir = (A.y + A.h / 2) <= (B.y + B.h / 2) ? -1 : 1, ka = A.fixed ? 0 : B.fixed ? 1 : 0.5;
+      if (ox > 0 && oy > 0) { moved = true; let dir = (A.y + A.h / 2) <= (B.y + B.h / 2) ? -1 : 1; const ka = A.fixed ? 0 : B.fixed ? 1 : 0.5;
+        const lo = SAFE.y0 + 4, hiA = SAFE.y1 - 4 - A.h, hiB = SAFE.y1 - 4 - B.h; // if the box that must move is against the edge, push the other way
+        if (ka === 1 && (A.y + dir * oy > hiA || A.y + dir * oy < lo)) dir = -dir;
+        if (ka === 0 && (B.y - dir * oy > hiB || B.y - dir * oy < lo)) dir = -dir;
         A.y += dir * oy * ka; B.y -= dir * oy * (1 - ka);
         for (const C of [A, B]) if (!C.fixed) C.y = Math.max(SAFE.y0 + 4, Math.min(SAFE.y1 - 4 - C.h, C.y)); } }
     if (!moved) break; }
@@ -598,5 +664,172 @@ function emLabels(L, fixed = []) {
   }).join('');
 }
 
-if (typeof window !== 'undefined') Object.assign(window, {renderEnclave});
-Object.assign(CLIPS, {ep3_enclave: {sec: 57, render: (t) => renderEnclave(t)}});
+/* ================= more shots from the same model (Round 14b) ================= */
+// Each clip keeps its own narration clock (n = t + its T0, from that chapter's words.json) and its own camera keys.
+function emPath(P) { // a polyline on the ground, walked by arc length (u 0..1)
+  const L = [0]; for (let i = 1; i < P.length; i++) L.push(L[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]));
+  const len = L[L.length - 1];
+  const at = (u) => { const d = clamp01(u) * len; let i = 1; while (i < L.length - 1 && L[i] < d) i++; const k = (d - L[i - 1]) / ((L[i] - L[i - 1]) || 1); return [P[i - 1][0] + (P[i][0] - P[i - 1][0]) * k, P[i - 1][1] + (P[i][1] - P[i - 1][1]) * k]; };
+  return {P, L, len, at, frac: (i) => L[i] / len};
+}
+// the route as teal dots on the ground: the whole way faint (drawn on with `show`), the part already walked bright
+function emRoute(cam, path, show, walked, op = 1) {
+  if (show <= 0 || op <= 0.01) return '';
+  const samp = (u0, u1) => { const out = []; for (let d = u0 * path.len; d <= u1 * path.len + 0.01; d += 10) { const p = path.at(d / path.len), q = emP(cam, [p[0], p[1], 1.2]); if (q) out.push(q); } return out; };
+  const line = (S, w, o) => S.length > 1 ? `<polyline points="${pts(S)}" fill="none" stroke="#111" stroke-width="${w + 4}" stroke-dasharray="0.1 ${w * 2.6}" stroke-linecap="round" opacity="${f1(o * 60) / 100}"/><polyline points="${pts(S)}" fill="none" stroke="${EM.teal}" stroke-width="${w}" stroke-dasharray="0.1 ${w * 2.6}" stroke-linecap="round" opacity="${f1(o * 100) / 100}"/>` : '';
+  return line(samp(0, show), 6, 0.45 * op) + line(samp(0, Math.min(walked, show)), 8, op);
+}
+// a marker in screen space over a ground point: a ring on the ground, a pin, a ball (gold for the Rabinowitzes, ink for others);
+// parcels: little cream bundles carried beside the ball
+function emPin(cam, x, y, col, op = 1, parcels = 0) {
+  if (op <= 0.01) return '';
+  const g = emP(cam, [x, y, 0.5]); if (!g) return '';
+  const ring = []; for (let k = 0; k < 20; k++) ring.push([x + Math.cos(k * TAU / 20) * 11, y + Math.sin(k * TAU / 20) * 11, 0.8]);
+  const R = emPoly2(cam, ring), bx = g[0], by = g[1] - 52, stroke = col === EM.ink ? EM.cream : '#111';
+  let s = R ? `<polygon points="${pts(R)}" fill="none" stroke="#111" stroke-width="6"/><polygon points="${pts(R)}" fill="none" stroke="${col === EM.ink ? EM.cream : col}" stroke-width="3"/>` : '';
+  s += `<line x1="${f1(g[0])}" y1="${f1(g[1])}" x2="${f1(bx)}" y2="${f1(by)}" stroke="#111" stroke-width="6"/><line x1="${f1(g[0])}" y1="${f1(g[1])}" x2="${f1(bx)}" y2="${f1(by)}" stroke="${stroke}" stroke-width="2.5"/>`;
+  s += `<circle cx="${f1(bx)}" cy="${f1(by)}" r="13" fill="${col}" stroke="${stroke}" stroke-width="3"/>`;
+  for (let k = 0; k < parcels; k++) s += `<rect x="${f1(bx + 18)}" y="${f1(by - 4 - k * 13)}" width="20" height="11" rx="2" fill="${EM.cream}" stroke="#111" stroke-width="2"/><line x1="${f1(bx + 28)}" y1="${f1(by - 4 - k * 13)}" x2="${f1(bx + 28)}" y2="${f1(by + 7 - k * 13)}" stroke="#7C918B" stroke-width="1.5"/>`;
+  return `<g opacity="${f1(op * 100) / 100}">${s}</g>`;
+}
+// the family itself, tiny and gold, walking with the marker (map scale: four strokes with heads)
+const emFamily = (cam, x, y, n, col = EM.gold) => [[-3, -2, 5.6], [2.5, -2.5, 5.2], [-1, 2.5, 4.4], [3.5, 2, 3.6]].map(([dx, dy, h], k) => emPerson(cam, x + dx, y + dy + 0.4 * Math.sin(n * 5 + k), 0, h, col)).join('');
+// a tag with teal text, for a quiet note
+const emTagTeal = (x, y, txt, op) => tag(x, y, txt, op).replace(`fill="${EX.cream}"`, `fill="${EM.teal}"`);
+function emFixed(scr, fixed, x, y, txt, op, teal = false) { if (op <= 0.01) return; fixed.push({x: x - 10, y: y - 31, w: txt.length * 19.4 + 20, h: 42}); scr.push(teal ? emTagTeal(x, y, txt, op) : tag(x, y, txt, op)); }
+const emOn = (n, a, b, fade = 0.35) => smooth(a, a + fade, n) * (1 - smooth(b - fade, b, n));
+const emTopC = (k) => { const l = emLot(k); return [(l.x0 + l.x1) / 2, (l.y0 + l.y1) / 2, emH(l.floors) + 2]; };
+
+/* ----- ep3_map_arrival (end of ch 5): Castle Garden to Hester Street ----- */
+// ch05_old_and_new.words.json: "In 1884" 67.2, "Jewish families like the Rabinowitzes" 68.5, "about one arrival in fifty" 72.5,
+// "Most of them crowded" 74.6, "the Lower East Side" 77.0 to 77.9 (the chapter card can land there; the centre of the frame is
+// left clear from then on). The walk: out of the fort, up past the Battery, north-east through lower Manhattan, into Hester Street.
+const AR = {T0: 66.5, cue: {y1884: 67.2, fam: 68.5, fifty: 72.5, most: 74.6, les: 77.0}};
+const AR_PATH = emPath([[-1905, -2850], [-1800, -2700], [-1650, -2480], [-1350, -1900], [-950, -1250], [-640, -680], [-525, -330], [-525, 8], [-300, 8], [-12.5, 8], [-12.5, 22]]);
+const AR_KEYS = [
+  [66.5, -1880, -2760, 0, 34, 42, 1450, 0, 30],
+  [70.6, -1760, -2560, 0, 31, 43, 1600, 0, 20],
+  [73.6, -1080, -1380, 0, 20, 45, 2300, 0, 0],
+  [75.6, -520, -380, 0, 13, 45, 2050, 0, 0],
+  [77.0, -130, 10, 0, 6, 46, 1600, 0, 0],
+  [80.5, -60, 50, 0, 2, 47, 1420, 0, 10],
+];
+function renderArrival(t) {
+  const n = t + AR.T0, cam = emCamera(n, AR_KEYS), C = AR.cue;
+  const u = smooth(70.4, C.les, n), [mx, my] = AR_PATH.at(u), mop = smooth(C.fam, C.fam + 0.4, n);
+  const dist = (p) => v3.len(v3.sub(p, cam.C));
+  const world = emWorld(n, cam, {extra: mop > 0 ? [{d: dist([mx, my, 0]), draw: () => `<g opacity="${f1(mop * 100) / 100}">${emFamily(cam, mx, my, n)}</g>`}] : []});
+  world.push(emRoute(cam, AR_PATH, smooth(69.4, 70.6, n), u));
+  const scr = [emPin(cam, mx, my, EM.gold, mop)], fixed = [];
+  emFixed(scr, fixed, 130, 1000, 'CASTLE GARDEN · THE BATTERY · 1884', emOn(n, C.y1884 - 0.4, 76.9));
+  emFixed(scr, fixed, 130, 1000, 'HESTER STREET · LOWER EAST SIDE', emOn(n, C.les, 81));
+  emFixed(scr, fixed, 960 - 38 * 19.4 / 2, 120, 'JEWISH ARRIVALS IN 1884: ABOUT 1 IN 50', emOn(n, C.fifty, 76.8));
+  const g = emP(cam, [mx, my, 0.5]), lab = [];
+  lab.push({lines: ['CASTLE GARDEN'], a: emP(cam, [EM_FORT[0], EM_FORT[1], 70]), off: [-330, -30], op: emOn(n, C.y1884, 71.8)});
+  if (g) lab.push({lines: ['THE RABINOWITZES'], a: [g[0], g[1] - 66], off: [190, -70], op: emOn(n, C.fam + 0.2, 81)});
+  scr.unshift(emLabels(lab.filter((L) => L.a && L.op > 0.01), fixed));
+  return emFrame(t, world, scr);
+}
+
+/* ----- ep3_map_sweatshop (start of ch 7): the contractor's round, then into the front room ----- */
+// ch07_sweatshop.words.json: "often right inside a family's home" 5.4 to 7.0, "New York made more ready-made clothes" 7.9,
+// "Big companies cut the cloth" 11.9 to 13.0, "a middleman, a contractor" 14.4 to 15.4, "carried bundles" 16.4,
+// "rooms like this one" 18.3 to 19.0, "paid by the piece" 19.6 to 20.1, "So Yankel pressed" 21.2 (the hard cut to ep3_sweatshop).
+const SW2 = {T0: 5.0, cue: {home: 5.4, made: 7.9, cut: 11.9, cloth: 12.7, middle: 14.4, carried: 15.4, rooms: 18.3, piece: 19.6, cut2: 21.2}};
+const SW_PATH = emPath([[-700, 36], [-700, 12], [-412.5, 12], [-237.5, 12], [-12.5, 12]]);
+const SW_STOPS = [['L01s3', 2, -412.5], ['L01s10', 3, -237.5], [null, 4, -12.5]]; // lot key, path index, x
+const SW_KEYS = [
+  [5.0, -170, 70, 0, -20, 44, 2150, 0, 0],
+  [14.0, -170, 60, 0, -14, 45, 2000, 0, 0],
+  [18.6, -110, 40, 0, -7, 43, 1450, 0, 0],
+  [20.3, -20.8, 29, 66.8, -2, 56, 95, 0, 0],
+  [21.2, -20.8, 29, 66.8, 0, 3, 21, 0, 0],
+];
+function renderSweatMap(t) {
+  const n = t + SW2.T0, cam = emCamera(n, SW_KEYS, true), C = SW2.cue;
+  const u = smooth(C.carried, 18.4, n), [cx, cy] = SW_PATH.at(u), done = SW_STOPS.map(([, i]) => u >= SW_PATH.frac(i) - 0.002);
+  const tStop = (i) => { for (let k = 0; k < 60; k++) { const tt = C.carried + k * (18.4 - C.carried) / 60; if (smooth(C.carried, 18.4, tt) >= SW_PATH.frac(i)) return tt; } return 18.4; };
+  const glowAt = SW_STOPS.map(([, i]) => tStop(i));
+  const gl = {}; SW_STOPS.forEach(([key], k) => { if (key) gl[key] = smooth(glowAt[k], glowAt[k] + 0.5, n); });
+  const goldKey = emLot('gold').key, cop = emOn(n, C.middle, 19.2);
+  const dist = (p) => v3.len(v3.sub(p, cam.C)), extra = [];
+  SW_STOPS.forEach(([, , x], k) => { if (done[k]) extra.push({d: dist([x, 33, 0]), draw: () => emBoxSimple(cam, x + 3, x + 6, 32, 34.5, 0, 2.2, '#8C8676', '#F4EFE6', '#DFE0D6')}); }); // the bundle left at the door
+  if (cop > 0) extra.push({d: dist([cx, cy, 0]), draw: () => `<g opacity="${f1(cop * 100) / 100}">${emPerson(cam, cx, cy, 0, 5.8, EM.ink)}</g>`});
+  const world = emWorld(n, cam, {loft: smooth(C.made + 0.5, C.made + 1.0, n), glow: (key) => key === goldKey ? smooth(C.home, C.home + 0.8, n) : (gl[key] || 0), extra});
+  world.push(emRoute(cam, SW_PATH, smooth(C.middle, C.carried, n), u, 1 - smooth(18.6, 19.2, n)));
+  const scr = [emPin(cam, cx, cy, EM.ink, cop, 3 - done.filter(Boolean).length)], fixed = [];
+  emFixed(scr, fixed, 130, 1000, 'LOWER EAST SIDE · 1884', emOn(n, 5.2, 18.8));
+  emFixed(scr, fixed, SAFE.x1 - 10 - 17 * 19.4, 1000, 'PAID BY THE PIECE', emOn(n, 16.6, 22));
+  const lab = [], g = emP(cam, [cx, cy, 0.5]);
+  lab.push({lines: n > 6.1 ? ['THE RABINOWITZES', 'A WORKSHOP AT HOME'] : ['THE RABINOWITZES'], a: emP(cam, emTopC('gold')), off: [170, -150], op: emOn(n, 5.2, 18.8)});
+  lab.push({lines: n > C.cloth ? ['CLOTHING FIRM', 'CUTS THE CLOTH'] : ['CLOTHING FIRM'], a: emP(cam, [(EM_LOFT.x0 + EM_LOFT.x1) / 2, (EM_LOFT.y0 + EM_LOFT.y1) / 2, emH(EM_LOFT.floors) + 2]), off: [-40, -150], op: emOn(n, C.made + 0.5, 18.8)});
+  if (g) lab.push({lines: ['CONTRACTOR'], a: [g[0], g[1] - 66], off: [150, -40], op: emOn(n, C.middle + 0.6, 19.2)});
+  scr.unshift(emLabels(lab.filter((L) => L.a && L.op > 0.01), fixed));
+  return emFrame(t, world, scr);
+}
+
+/* ----- ep3_map_move (start of ch 9): spring 1886, across the river to the Kellys' building ----- */
+// ch09_new_neighbors.words.json: "spring of 1886" 1.8 to 2.3, "found steadier work, at a shop across the East River" 4.7 to 7.4,
+// "move to Williamsburg" 10.0 to 10.3, "cheaper rent" 12.7, "Most wouldn't come for another twenty years" 13.6 to 15.4.
+// Geography: Williamsburg is across the East River from the Lower East Side and a little north-east; the Grand Street ferry ran
+// from Grand Street, Manhattan to Broadway, Williamsburg. Here the family walks north to Grand Street (the model's northern
+// street), takes the ferry north-east, and walks south to the Kellys' street.
+const MV = {cue: {spring: 1.8, work: 4.1, river: 6.7, wburg: 10.0, rent: 12.7, most: 13.6}};
+const MV_WALK1 = emPath([[-12.5, 22], [-12.5, 12], [175, 12], [175, 255], [640, 255]]);
+const MV_FERRY = [[660, 255], [1290, 430]];
+const MV_WALK2 = emPath([[1310, 430], [1425, 430], [1425, 12], [1587.5, 12], [1587.5, 24]]);
+const MV_KEYS = [
+  [0.0, 820, 130, 0, 0, 50, 3650, 0, 40],
+  [6.5, 880, 200, 0, 2, 50, 3350, 0, 30],
+  [12.4, 1330, 160, 0, 6, 48, 2450, 0, 30],
+  [17.0, 1430, 120, 0, 8, 47, 2150, 0, 30],
+];
+function renderMove(t) {
+  const n = t, cam = emCamera(n, MV_KEYS), C = MV.cue;
+  const u1 = smooth(C.work, 7.0, n), uf = smooth(7.0, 9.6, n), u2 = smooth(9.6, 12.4, n);
+  let mx, my, onFerry = false;
+  if (n < 7.0) [mx, my] = MV_WALK1.at(u1); else if (n < 9.6) { onFerry = true; mx = lerp(MV_FERRY[0][0], MV_FERRY[1][0], uf); my = lerp(MV_FERRY[0][1], MV_FERRY[1][1], uf); } else [mx, my] = MV_WALK2.at(u2);
+  const fx = onFerry ? mx : n < 7.0 ? MV_FERRY[0][0] : MV_FERRY[1][0], fy = onFerry ? my : n < 7.0 ? MV_FERRY[0][1] : MV_FERRY[1][1];
+  const dist = (p) => v3.len(v3.sub(p, cam.C)), kellyKey = emLot('kelly').key;
+  const extra = [{d: dist([fx, fy, 0]), draw: () => emFerry(cam, fx, fy - 20)}];
+  if (!onFerry) extra.push({d: dist([mx, my, 0]), draw: () => `<g opacity="${f1((1 - smooth(12.4, 13.0, n)) * 100) / 100}">${emFamily(cam, mx, my, n)}</g>`});
+  const world = emWorld(n, cam, {ferry: false, extra, band: (key) => key === kellyKey ? smooth(12.4, 13.0, n) : 0});
+  const route = emPath([...MV_WALK1.P, ...MV_WALK2.P]); // the ferry leg is drawn as part of the dotted route too
+  const walked = n < 7.0 ? u1 * MV_WALK1.len / route.len : n < 9.6 ? (MV_WALK1.len + uf * (route.L[MV_WALK1.P.length] - MV_WALK1.len)) / route.len : (route.L[MV_WALK1.P.length] + u2 * MV_WALK2.len) / route.len;
+  world.push(emRoute(cam, route, smooth(3.4, 4.4, n), walked));
+  const scr = [emPin(cam, mx, onFerry ? my - 4 : my, EM.gold, 1 - smooth(12.6, 13.2, n))], fixed = [];
+  emFixed(scr, fixed, 130, 1000, 'SPRING 1886', emOn(n, C.spring - 0.6, 18));
+  emFixed(scr, fixed, 960 - 32 * 19.4 / 2, 120, 'MOST JEWISH FAMILIES: AFTER 1903', emOn(n, C.most, 18), true);
+  const lab = [], g = emP(cam, [mx, my, 0.5]);
+  lab.push({lines: ['LOWER EAST SIDE'], a: emP(cam, [0, 480, 90]), off: [0, -70], op: emOn(n, 0.5, 18)});
+  lab.push({lines: ['WILLIAMSBURG, BROOKLYN'], a: emP(cam, [1775, 230, 90]), off: [80, -150], op: emOn(n, 0.5, 18)});
+  lab.push({lines: n > 12.6 ? ['THE KELLYS', 'AND THE RABINOWITZES · 1886'] : ['THE KELLYS'], a: emP(cam, emTopC('kelly')), off: [40, 150], op: emOn(n, 0.8, 18)});
+  if (g && n < 12.9) lab.push({lines: ['THE RABINOWITZES'], a: [g[0], g[1] - 66], off: [-60, -60], op: emOn(n, 0.6, 12.9)});
+  lab.push({lines: ['GRAND STREET FERRY'], a: emP(cam, [fx, fy, 20]), off: [0, 110], op: emOn(n, 6.9, 9.9)});
+  scr.unshift(emLabels(lab.filter((L) => L.a && L.op > 0.01), fixed));
+  return emFrame(t, world, scr);
+}
+
+/* ----- ep3_map_density (ch 6): the blocks fill with people ----- */
+// ch06 words: "A few years later" 78.3, "a reporter claimed" 79.5 to 80.1, "the most crowded place on Earth" 80.7 to 82.5. Riis, How
+// the Other Half Lives (1890), ch. X, on part of the Tenth Ward: "three hundred and thirty thousand per square mile".
+const DN = {T0: 77.8};
+const DN_KEYS = [[77.8, -20, 100, 0, -32, 42, 2450, 0, 20], [85.8, -20, 110, 0, -20, 46, 2050, 0, 20]];
+function renderDensity(t) {
+  const n = t + DN.T0, cam = emCamera(n, DN_KEYS);
+  const world = emWorld(n, cam, {dots: smooth(78.3, 82.6, n) ** 1.2});
+  const scr = [], fixed = [];
+  emFixed(scr, fixed, 130, 1000, 'LOWER EAST SIDE', emOn(n, 78.0, 87));
+  emFixed(scr, fixed, 960 - 36 * 19.4 / 2, 110, 'ABOUT 330,000 PEOPLE PER SQUARE MILE', emOn(n, 80.1, 87));
+  emFixed(scr, fixed, 960 - 27 * 19.4 / 2, 160, 'CLAIMED BY JACOB RIIS, 1890', emOn(n, 80.5, 87));
+  return emFrame(t, world, scr);
+}
+
+if (typeof window !== 'undefined') Object.assign(window, {renderEnclave, renderArrival, renderSweatMap, renderMove, renderDensity});
+Object.assign(CLIPS, {
+  ep3_enclave: {sec: 57, render: (t) => renderEnclave(t)},
+  ep3_map_arrival: {sec: 14, render: (t) => renderArrival(t)},
+  ep3_map_sweatshop: {sec: 16, render: (t) => renderSweatMap(t)},
+  ep3_map_move: {sec: 17, render: (t) => renderMove(t)},
+  ep3_map_density: {sec: 8, render: (t) => renderDensity(t)},
+});
