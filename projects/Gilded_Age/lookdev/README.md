@@ -371,3 +371,68 @@ Notes and decisions:
   any visible text whose rotated font box leaves title safe (96 / 54 px) or overlaps another text, texts on screen under 2.5 s,
   and how long the final set of texts is held. Final pass: no OUT, no OVERLAP, no SHORT on all nine; the complete chart is held
   3.0 to 5.2 s at the end of every clip.
+
+## Round 14 map (Nov 12): ep3_enclave
+
+`ep3_map.js` (loaded by `bridge.html` right after `ep3.js`; uses `rig.js` helpers, `tag`/`card`/`frame`/`SAFE` from
+`explainers.js`, `e3Defs` and `drawOn` from `ep3.js`). One clip for chapter 6, "The Lower East Side": **`ep3_enclave`**, 57 s,
+720p in `review/ep3/ep3_enclave_720p.mp4`, stills `en_*.jpg`.
+
+- **A real 3D model, drawn as SVG.** World units are feet (x east, y north, z up). A camera with target, yaw, pitch and distance
+  (keyframes interpolated by a monotone cubic, so it never overshoots or stops dead) projects every point in perspective
+  (focal 2400 px) with near-plane clipping. Each building is a box whose faces are back-face culled and shaded by a cream light
+  from the south-west; buildings, pushcarts and people are sorted by distance from the camera (painter's algorithm; lots share a
+  25 ft grid, so the sort is exact for them). Far things mix into a teal-slate haze; the whole picture gets the paper mottle
+  (`texDef`) and grain.
+- **The Lower East Side model.** Three blocks by three rows, two rows of 25 x 85 ft lots per block (4 to 6 floors: store 13 ft,
+  floors 12 ft), yards between. Tenements carry window grids, a dark cornice with a lit lip, shop windows and sloping awnings, fire
+  escapes with railings, ladders and washing on the street front, a chimney on the roof. Hester Street has pushcarts end to end
+  along both curbs (some with umbrellas, goods heaped on top) and a crowd; the other sidewalks have walkers. Flat ghost blocks run
+  out into the haze. The Rabinowitzes' building (wheat gold, 6 floors) faces Hester; its neighbours are held to 5 floors so its
+  open top floor can be seen from above.
+- **Beats, keyed to the narration.** The clip starts at narration second 23.0 (`EM_T0`); every cue is a word start time from
+  `ch06_the_lower_east_side.words.json`, kept in `EM_CUE` so a re-voice is a table edit. Each place LIFTS 82 ft (enough to clear
+  the roofs, so it floats free) with a small overshoot, a soft shadow and a dark vacated lot, turns pale with a cream edge (blended in as it rises, so nothing pops), and a
+  teal arc draws from the gold building's roof to it. Tags sit on cream leader lines; a small solver keeps them apart, off the
+  fixed place tag, headline and card, and inside `SAFE`.
+
+  | clip t | narration | beat |
+  | --- | --- | --- |
+  | 0 to 1.1 | "It felt ... like home" | the model from high up, "THE RABINOWITZES" |
+  | 1.1 | "That was the point" | Hester's market lifts: "PUSHCART MARKET" |
+  | 3.2 to 10.5 | "enclave: a neighborhood ..." | the camera slides the map left, the vocab card "Enclave" |
+  | 11.3 | "found work through a man from his own town" | a workshop lifts: "A JOB THROUGH A MAN FROM HOME" |
+  | 14.7 | "kosher meat" | "KOSHER BUTCHER" |
+  | 16.3 | "a little synagogue upstairs over a shop" | "SYNAGOGUE UPSTAIRS OVER A SHOP" (its first floor up has tall bright windows) |
+  | 19.9 to 29.2 | "landsmanshaftn ... sick ... doctor ... grave" | a hall lifts: "LANDSMANSHAFT", then "A SICK FUND · A DOCTOR · A GRAVE" one by one |
+  | 30.2 to 32.8 | "Irish families had built the same thing" | pull back, pan across the East River (ferry), headline tag |
+  | 33.6 to 35.3 | "a parish, a saloon, a savings bank" | Brooklyn, coral Kelly building: "PARISH CHURCH", "SALOON", "SAVINGS BANK" |
+  | 38.7 to 41.7 | "Ma Kelly's neighborhood was an enclave too" | both models side by side: "LOWER EAST SIDE", "THE KELLYS' BROOKLYN / AN ENCLAVE TOO" |
+  | 40.7 to 44.4 | "But the Lower East Side had a cost" | lifts settle, lines fade; the camera flies back and dives, orbiting 90 degrees |
+  | 44.3 to 46 | "buildings called tenements" | the gold building's top floor and roof lift off and slide away: the floor plan |
+  | 47.7 | "one sink in the hall for the whole floor" | the sink ringed in teal: "ONE SINK IN THE HALL / FOR THE WHOLE FLOOR" |
+  | 51.3 | "slept four in one room" | four gold sleepers (parents on the bed, two children on a floor mattress), room outlined: "FOUR IN ONE ROOM" |
+  | 53.0 to 57 | "a boarder in the kitchen" | the boarder on a cot by the stove (ink): "A BOARDER IN THE KITCHEN" |
+
+- **The floor.** A dumbbell tenement of the 1880s (the 1879 law's shape: airshafts pinch the middle), 25 x 85 ft: four flats of
+  three rooms (front room, kitchen, small dark inner bedroom), the hall and stairs down the middle, two water closets, ONE sink. The
+  Rabinowitzes have the front flat on the west side, tinted gold (front room with two sewing machines and a cutting table: the
+  next chapter's sweatshop; kitchen with stove, table and the boarder's cot; bedroom). The other flats sleep ink families. Walls
+  are cut at 3.4 ft so the rooms read from above.
+- **Brooklyn.** Two blocks by two rows, lower buildings; the Kellys' building is coral (saloon floor plus five floors of flats,
+  as in `cutaway.js`). Parish church (nave, gable roof, tower and spire, lancet windows), a corner saloon, a savings bank with
+  columns and a pediment.
+- **Colour.** Gold only for the Rabinowitzes (their building, their flat, the four sleepers); coral only for the Kellys' building;
+  everything else ink or slate; teal only for the network arcs, the room outlines and the sink ring; no orange needed. No in-world
+  writing. Map-scale people are ink strokes with a head (at this size there are no feet to place).
+
+Known limits: the blocks are a generic grid, not surveyed Hester Street lots; the Emigrant Industrial Savings Bank stood on
+Chambers Street in Manhattan, so the Brooklyn bank is a stand-in for "a savings bank started by Irish immigrants"; the corner
+saloon is separate from the saloon under the Kellys (Ep 1), so both can be read; from straight above, map-scale people read as
+dark pills; the network lines are drawn over everything (a diagram, not occluded).
+
+QA (three passes, stills read at about 30 timepoints plus a frame-difference pop check over all 1710 frames): lifted places first
+rose only 42 ft and were hidden by the rows in front (raised to 82 ft); tags collided with the place tag and the headline and ran
+off the bottom (the solver now treats fixed text as obstacles; Brooklyn and side-by-side framings moved); the gold roof slab first
+rose into the lens and covered the plan (it now slides away north); the open building was sorted to the front and its side showed
+through its neighbour (fixed); the ink-to-pale switch at each lift start popped (now blended). Clip: 57 s at 30 fps.
