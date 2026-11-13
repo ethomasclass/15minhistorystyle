@@ -488,7 +488,7 @@ function miTrunkPair(t, lod, rim) {
   // Michael: along the sidewalk from the right (0 to 2.6), crouch for the low end (2.6 to 3.0), lift (3.0 to 3.4), then carry
   const mx1 = X0 + 82, mx0 = mx1 + 8 * MI.step, mw = e3Trap(t, 0, 2.6);
   let mk = cast('michael', {x: mx0, y: G, h: MI.man, d: -1, det: lod.det, rim, an: {tilt: t < 2.2 ? 0 : -8, expr: t > 3.0 ? 'smile' : 'neutral', blink: t % 3.5 < 0.12}});
-  mk = t < 3.4 ? stepWalk(mk, mx0, -1, 8 * MI.step * mw, () => G, 'mi.michael') : stepWalk({...mk, x: mx1}, mx1, -1, carry, MI.ground, 'mi.michael.carry');
+  mk = t < 3.4 ? stepWalk(mk, mx0, -1, 8 * MI.step * mw, () => G, 'mi.michael') : stepWalk({...mk, x: mx1}, mx1, -1, carry, MI.ground, 'mi.michael.carry'); if (t >= 3.4) mk = {...mk, an: {...mk.an, lean: 7}}; // leaning into the load
   const cr = smooth(2.6, 3.0, t) * (1 - smooth(3.0, 3.4, t));
   if (cr > 0) { const feet = [E3K.foot(mk, 0), E3K.foot(mk, 1)]; mk = plant({...mk, y: mk.y + 22 * cr, an: {...mk.an, lean: 30 * cr}}, feet, 'mi.michael.crouch'); }
   // the back handle: resting on the flags until Michael has it, then lifted level with the front, then carried at his hands' height
@@ -1176,7 +1176,7 @@ function renderE3Runner(t) {
       scr.push(`<rect width="1920" height="1080" fill="#0D0C09" opacity="${f1(0.38 * smooth(0, 0.12, fz))}"/><rect width="1920" height="1080" fill="#FFF" opacity="${f1(0.55 * (1 - smooth(0, 0.18, fz)))}"/>`);
       scr.push(drawOn([...Array(41)].map((_, k) => { const q = -Math.PI / 2 + TAU * k / 40 * 1.05; return [Ps[0] + Math.cos(q) * 70, Ps[1] + Math.sin(q) * 62]; }), smooth(0.15, 0.6, fz), 6));
       scr.push(penS(130, 220, 'he has never heard of Yankel Rabinowitz', 32, -3));
-      if (fz > 0.5) scr.push(tag(150, 980, 'NEW YORK CALLED THEM RUNNERS', smooth(0.5, 0.9, fz)));
+      if (fz > 0.1) scr.push(tag(150, 980, 'NEW YORK CALLED THEM RUNNERS', smooth(0.1, 0.35, fz)));
     }
   } else {
     // ---- payoff (ch 4): along the Battery, away from the ferries ----
@@ -1588,7 +1588,8 @@ function renderE3Knock(t) {
   const world = layerAt(c, 1, s.join(''));
   scr.push(tag(130, 120, 'THE KELLYS\' FLAT · BROOKLYN · 1886', smooth(0.3, 0.7, t) * (1 - smooth(5.4, 5.8, t))));
   if (t > 1.6 && t < 4.8) scr.push(penS(1000, 230, 'that evening, a knock', 32, -3));
-  if (t > 7.8 && t < 10.7) scr.push(penS(1000, 230, 'Rivke translates', 32, -3), tag(1060, 300, 'COMPOSITE CHARACTERS', smooth(7.8, 8.2, t) * (1 - smooth(10.3, 10.7, t))));
+  if (t > 7.8 && t < 10.7) scr.push(penS(1000, 230, 'Rivke translates', 32, -3));
+  if (t > 7.6 && t < 11.0) scr.push(tag(1060, 300, 'COMPOSITE CHARACTERS', smooth(7.6, 7.9, t) * (1 - smooth(10.7, 11.0, t))));
   if (t > 10.8 && t < 13.6) scr.push(penS(860, 230, 'a ticket, for her sister', 32, -3));
   if (t > 13.4) scr.push(penS(130, 990, 'Ma knew exactly where', 32, -3));
   const defs = e3Defs2(t).replace('</defs>', `<linearGradient id="knshaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F857F" stop-opacity="0.35"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient></defs>`);
