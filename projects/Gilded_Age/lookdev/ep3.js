@@ -1161,12 +1161,18 @@ function rnFore(t) { // the promenade: the depot's iron fence and its gate behin
   s.push(`<rect x="1300" y="${G - 150}" width="200" height="12" fill="#0D0C09"/><rect x="1310" y="${G - 138}" width="8" height="48" fill="#0D0C09"/><rect x="1482" y="${G - 138}" width="8" height="48" fill="#0D0C09"/>`);
   return s.join('');
 }
-function renderE3Runner(t) {
+// o (all optional; the Ep 3 edit uses them, the clip passes none): te = the environment clock (water, smoke, flags, grain), so a
+// held beat stays alive; cam = {z, ux, uy} overrides the camera; quiet drops the clip's own screen text; look(ts) returns per-figure
+// pose overrides {sore, shmuel, rivke, man} (head tilt, expression, blink: nothing that touches a contact); manDet / manRim force
+// the runner's detail and rim (close-up inserts); boots = polish glints on his toe caps; ring (0..1) draws the teal ring on the
+// two hands; fz = seconds since the freeze (dims; flash unless noFlash); fence (0..1) traces the depot's fence in teal; hardT =
+// seconds since the hard freeze (a second flash, darker).
+function renderE3Runner(t, o = {}) {
   const G = RN.G, H = RN.H, FR0 = 11.5, FR1 = 14.5, PO = 14.7; // the freeze, and the payoff's start (after a cut through black)
-  const payoff = t >= FR1, ts = payoff ? t : Math.min(t, FR0), u = t - PO;
+  const payoff = t >= FR1, ts = payoff ? t : Math.min(t, FR0), u = t - PO, te = o.te ?? ts, LK = o.look ? o.look(ts) : {};
   const keys = payoff ? [[FR1, 0.98, 1060, 600], [PO + 2.3, 1.0, 1040, 610], [PO + 2.95, 2.0, 830, 760], [PO + 4.0, 2.0, 820, 760], [PO + 4.9, 1.0, 1040, 610], [23, 1.04, 1020, 630]]
     : [[0, 1.0, 960, 560], [5.0, 0.98, 1010, 560], [8.4, 1.5, 960, 690], [11.5, 1.75, 940, 712], [14.5, 1.75, 940, 712]];
-  const c = cam2(camAt(keys, ts)), lod = lodFor(H * c.z), det = lod.det;
+  const c = cam2(o.cam || camAt(keys, ts)), lod = lodFor(H * c.z), det = lod.det;
   const sun = {c: '#FFC88A', a: 0.75, dx: 0.011, dy: -0.004};
   const W = [], SH = [], FG = [], scr = [];  // world figures, their long shadows
   const put = (fo, extra = '') => { SH.push(e3Black(fo)); W.push(fig({...fo, noShadow: true}) + extra); };
@@ -1174,9 +1180,9 @@ function renderE3Runner(t) {
     // the walk out: Sore with the trunk in her near hand and Shmuel by the other, Rivke behind hugging the feather bed
     const wk = e3Trap(ts, 0, 3.5), Rs = e3R(H * 0.88), Rb = e3R(H * 0.5), Rr = e3R(H * 0.8);
     const xs0 = 860 - 4 * Rs, xb0 = xs0 - 60, xr0 = xs0 - 170;
-    let so = stepWalk(nbOpts('nmother', {x: xs0, y: G, h: H, d: 1, det, rim: sun, an: {fArm: [174, 178], bArm: [196, 202], expr: ts > 4.4 ? 'worried' : 'neutral', tilt: ts > 4.4 && ts < 6.2 ? 6 * Math.sin((ts - 4.4) * 2.2) + 4 : 0}}), xs0, 1, 4 * Rs * wk, () => G, 'rn.sore');
-    let sb = stepWalk(nbOpts('nson', {x: xb0, y: G, h: H, scale: 0.5, d: 1, det, rim: sun, an: {fArm: [150, 140], tilt: 6}}), xb0, 1, 7 * Rb * wk, () => G, 'rn.shmuel');
-    let rv = stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {tilt: ts > 5 ? 10 : 0, expr: 'set'}}), xr0, 1, 4 * Rr * wk, () => G, 'rn.rivke');
+    let so = stepWalk(nbOpts('nmother', {x: xs0, y: G, h: H, d: 1, det, rim: sun, an: {fArm: [174, 178], bArm: [196, 202], expr: ts > 4.4 ? 'worried' : 'neutral', tilt: ts > 4.4 && ts < 6.2 ? 6 * Math.sin((ts - 4.4) * 2.2) + 4 : 0, ...LK.sore}}), xs0, 1, 4 * Rs * wk, () => G, 'rn.sore');
+    let sb = stepWalk(nbOpts('nson', {x: xb0, y: G, h: H, scale: 0.5, d: 1, det, rim: sun, an: {fArm: [150, 140], tilt: 6, ...LK.shmuel}}), xb0, 1, 7 * Rb * wk, () => G, 'rn.shmuel');
+    let rv = stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {tilt: ts > 5 ? 10 : 0, expr: 'set', ...LK.rivke}}), xr0, 1, 4 * Rr * wk, () => G, 'rn.rivke');
     rv = e3Settle(rv, smooth(3.7, 4.05, ts), 'rn.rivke'); // (Sore keeps her stride: she has the trunk in one hand and Shmuel in the other)
     const hb = e3HugBed(rv, 'rn.rivke'); rv = hb.fo;
     // the trunk: hanging from Sore's near hand while she walks; set down in front of her at 3.5 to 4.2; then her hand comes away
@@ -1188,8 +1194,8 @@ function renderE3Runner(t) {
     // straightens with the trunk (9.5 to 10.1); his near hand goes out to the boy (10.3 to 11.3)
     const Rm = e3R(H), xm1 = 990, xm0 = xm1 + 6 * Rm, wm = e3Trap(ts, 5.6, 8.4);
     const smile = ts > 7.4, crouch = smooth(8.9, 9.5, ts) * (1 - smooth(9.5, 10.1, ts));
-    let rm = {x: xm0, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: ts > 7 ? det : 0, rim: ts > 5.6 ? {...sun, a: 0.55} : null,
-      an: {fArm: [176, 182], bArm: [184, 188], expr: smile ? 'smile' : 'neutral', tilt: ts < 5.6 ? -4 : ts > 10.3 ? -16 : -6}};
+    let rm = {x: xm0, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: o.manDet ?? (ts > 7 ? det : 0), rim: o.manRim ?? (ts > 5.6 ? {...sun, a: 0.55} : null),
+      an: {fArm: [176, 182], bArm: [184, 188], expr: smile ? 'smile' : 'neutral', tilt: ts < 5.6 ? -4 : ts > 10.3 ? -16 : -6, ...LK.man}};
     rm = stepWalk(rm, xm0, -1, 6 * Rm * wm, () => G, 'rn.runner'); rm = e3Settle(rm, smooth(8.45, 8.8, ts), 'rn.runner');
     const gripR = E3K.hand(rm, 'b'), lift = smooth(9.5, 10.1, ts);
     if (crouch > 0) { const feet = [E3K.foot(rm, 0), E3K.foot(rm, 1)]; rm = plant({...rm, y: rm.y + 26 * crouch, an: {...rm.an, lean: 25 * crouch}}, feet, 'rn.runner.stoop'); }
@@ -1217,15 +1223,28 @@ function renderE3Runner(t) {
     put(rv, hb.bed);
     W.push(trunkSvg); put(so); // drawn behind her: it reads on her far side
     put(rm); put(sb);
+    if (o.boots) [0, 1].forEach((i) => { const [fx, fy] = E3K.foot(rm, i), d = rm.d ?? 1; // polish: a thin cream glint along each toe cap
+      W.push(`<path d="M${f1(fx + d * 0.034 * H)},${f1(fy - 0.03 * H)} Q${f1(fx + d * 0.058 * H)},${f1(fy - 0.027 * H)} ${f1(fx + d * 0.072 * H)},${f1(fy - 0.012 * H)}" stroke="#F4EFE6" stroke-opacity="0.55" stroke-width="${f1(0.0035 * H)}" fill="none" stroke-linecap="round"/>` +
+        `<path d="M${f1(fx - d * 0.02 * H)},${f1(fy - 0.04 * H)} L${f1(fx + d * 0.012 * H)},${f1(fy - 0.041 * H)}" stroke="#FFC88A" stroke-opacity="0.45" stroke-width="${f1(0.0025 * H)}" stroke-linecap="round"/>`); });
     // screen text
-    scr.push(tag(130, 120, 'THE BATTERY · NEW YORK · MAY 1884', smooth(0.3, 0.7, ts) * (1 - smooth(5.2, 5.6, ts))));
-    if (ts > 1.4 && ts < 4.4) scr.push(penS(1020, 250, 'everything they own', 34, -3));
-    if (ts > 4.6 && ts < 7.4) scr.push(penS(130, 230, 'her husband was supposed to be here', 32, -3), tag(150, 300, 'COMPOSITE CHARACTERS', smooth(4.6, 5.0, ts)));
-    if (ts > 7.6 && ts < 10.4) scr.push(penS(1020, 210, 'good coat, clean boots', 32, -3));
-    if (t >= FR0) { // HARD FREEZE: a flash, the colour drains, a teal ring on the two hands
-      const fz = t - FR0, Ps = [c.sx(P2[0]), c.sy(P2[1])];
-      scr.push(`<rect width="1920" height="1080" fill="#0D0C09" opacity="${f1(0.38 * smooth(0, 0.12, fz))}"/><rect width="1920" height="1080" fill="#FFF" opacity="${f1(0.55 * (1 - smooth(0, 0.18, fz)))}"/>`);
-      scr.push(drawOn([...Array(41)].map((_, k) => { const q = -Math.PI / 2 + TAU * k / 40 * 1.05; return [Ps[0] + Math.cos(q) * 70, Ps[1] + Math.sin(q) * 62]; }), smooth(0.15, 0.6, fz), 6));
+    if (!o.quiet) {
+      scr.push(tag(130, 120, 'THE BATTERY · NEW YORK · MAY 1884', smooth(0.3, 0.7, ts) * (1 - smooth(5.2, 5.6, ts))));
+      if (ts > 1.4 && ts < 4.4) scr.push(penS(1020, 250, 'everything they own', 34, -3));
+      if (ts > 4.6 && ts < 7.4) scr.push(penS(130, 230, 'her husband was supposed to be here', 32, -3), tag(150, 300, 'COMPOSITE CHARACTERS', smooth(4.6, 5.0, ts)));
+      if (ts > 7.6 && ts < 10.4) scr.push(penS(1020, 210, 'good coat, clean boots', 32, -3));
+    }
+    const fz = o.fz ?? (t >= FR0 ? t - FR0 : null), Ps = [c.sx(P2[0]), c.sy(P2[1])];
+    if (fz != null && fz >= 0) { // HARD FREEZE: a flash, the frame dims
+      scr.push(`<rect width="1920" height="1080" fill="#0D0C09" opacity="${f1(0.38 * smooth(0, 0.12, fz))}"/>` + (o.noFlash ? '' : `<rect width="1920" height="1080" fill="#FFF" opacity="${f1(0.55 * (1 - smooth(0, 0.18, fz)))}"/>`));
+    }
+    if (o.hardT != null && o.hardT >= 0) scr.push(`<rect width="1920" height="1080" fill="#0D0C09" opacity="${f1(0.2 * smooth(0, 0.1, o.hardT))}"/><rect width="1920" height="1080" fill="#FFF" opacity="${f1(0.42 * (1 - smooth(0, 0.22, o.hardT)))}"/>`);
+    if (o.fence > 0) { // the depot's fence, traced in teal along its top rail (in the world, behind the figures), left edge to right
+      const xa = (0 - 960) / c.z + c.ux - 40, xb = (1920 - 960) / c.z + c.ux + 40, P = []; for (let k = 0; k <= 60; k++) P.push([xa + (xb - xa) * k / 60, G - 110 - 104]);
+      W.unshift(drawOn(P, o.fence, 6 / c.z));
+    }
+    const ringU = o.ring ?? (fz != null && fz >= 0 ? smooth(0.15, 0.6, fz) : 0), rr = 70 * Math.max(1, c.z / 1.75);
+    if (ringU > 0) scr.push(drawOn([...Array(41)].map((_, k) => { const q = -Math.PI / 2 + TAU * k / 40 * 1.05; return [Ps[0] + Math.cos(q) * rr, Ps[1] + Math.sin(q) * rr * 0.89]; }), ringU, 6));
+    if (!o.quiet && fz != null && fz >= 0) {
       scr.push(penS(130, 220, 'he has never heard of Yankel Rabinowitz', 32, -3));
       if (fz > 0.1) scr.push(tag(150, 980, 'NEW YORK CALLED THEM RUNNERS', smooth(0.1, 0.35, fz)));
     }
@@ -1278,12 +1297,12 @@ function renderE3Runner(t) {
     if (u > 5.0) scr.push(penS(130, 230, 'the man in the good coat was gone', 32, -3));
   }
   const black = payoff ? 1 - smooth(PO - 0.2, PO + 0.25, t) : 0;
-  const world = rnBack(ts, c) + layerAt(c, 1, rnFore(ts) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
-  const defs = e3Defs(ts, grad('rndusk', [['0', '#152220'], ['0.5', '#3B4743'], ['0.78', '#9A6E4C'], ['1', '#D99A62']]) +
+  const world = rnBack(te, c) + layerAt(c, 1, rnFore(te) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
+  const defs = e3Defs(te, grad('rndusk', [['0', '#152220'], ['0.5', '#3B4743'], ['0.78', '#9A6E4C'], ['1', '#D99A62']]) +
     `<radialGradient id="rnsun"><stop offset="0" stop-color="#FFE2B0" stop-opacity="0.95"/><stop offset="0.12" stop-color="#FFC88A" stop-opacity="0.6"/><stop offset="1" stop-color="#FFB15C" stop-opacity="0"/></radialGradient>` +
     `<linearGradient id="rnpath" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC88A" stop-opacity="0"/><stop offset="0.5" stop-color="#FFC88A" stop-opacity="0.5"/><stop offset="1" stop-color="#FFC88A" stop-opacity="0"/></linearGradient>`);
   const sky = `<rect width="1920" height="1080" fill="url(#rndusk)"/><circle cx="${f1(1700 - (c.ux - 960) * 0.1)}" cy="${f1(470 - (c.uy - 560) * 0.1)}" r="420" fill="url(#rnsun)"/>`;
-  return frame(defs, sky, world, scr.join('') + (black > 0 ? `<rect width="1920" height="1080" fill="#000" opacity="${f1(black)}"/>` : ''), t);
+  return frame(defs, sky, world, scr.join('') + (black > 0 ? `<rect width="1920" height="1080" fill="#000" opacity="${f1(black)}"/>` : ''), o.te ?? t);
 }
 
 /* ================= ep3_shtetl: what they left behind (ch 2) ================= */

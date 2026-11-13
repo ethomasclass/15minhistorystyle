@@ -1,0 +1,91 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face {font-family: Abril; src: url(../../../../brand/fonts/AbrilFatface.woff2);}
+  @font-face {font-family: Mono; src: url(../../../../brand/fonts/IBMPlexMono.woff2);}
+  @font-face {font-family: Inter; font-weight: 600; src: url(../../../../brand/fonts/Inter-600.woff2);}
+  @font-face {font-family: Inter; font-weight: 800; src: url(../../../../brand/fonts/Inter-800.woff2);}
+  @font-face {font-family: Pen; src: url(../../../../brand/fonts/NanumPenScript.woff2);}
+  @font-face {font-family: Playfair; font-weight: 900; src: url(../../../../brand/fonts/PlayfairDisplay-900.woff2);}
+  html, body {margin: 0; background: #0d0c09;}
+  #stage {position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #0d0c09;}
+  .layer {position: absolute; inset: 0;}
+  .layer > svg {position: absolute; inset: 0;}
+  .layer * {box-sizing: border-box;}
+  /* the carry layer shows only text: everything else in a carried shot is hidden */
+  #C .carry * {visibility: hidden;} #C .carry .tx, #C .carry .tx * {visibility: visible;}
+</style>
+<script src="../../lookdev/rig.js"></script>
+<script src="../../lookdev/scene.js"></script>
+<script src="../../lookdev/street.js"></script>
+<script src="../../lookdev/cutaway.js"></script>
+<script src="../../lookdev/explainers.js"></script>
+<script src="../../lookdev/refinery.js"></script>
+<script src="../../lookdev/loom.js"></script>
+<script src="../../lookdev/bessemer.js"></script>
+<script src="../../lookdev/mansion.js"></script>
+<script src="../../lookdev/ep2_more.js"></script>
+<script src="../../lookdev/ep3.js"></script>
+<script src="../../lookdev/ep3_map.js"></script>
+<script src="../../lookdev/ep3_explain.js"></script>
+<script src="../../lookdev/text.js"></script>
+<script src="edit.js"></script>
+<script src="carry.js"></script>
+<script src="ch01.js"></script>
+<script src="title.js"></script>
+<script src="brand.js"></script>
+</head><body>
+<div id="stage"><div id="A" class="layer"></div><div id="B" class="layer"></div><div id="C" class="layer"></div></div>
+<script>
+  window.drawEdit = (ch, T) => {
+    if (window.E3LOG) window.E3LOG.length = 0;   // the Ep 3 contact log (lookdev/ep3.js): one frame's contacts at a time
+    const f = editFrame(ch, T);
+    document.getElementById('A').innerHTML = f.a;
+    const b = document.getElementById('B');
+    b.innerHTML = f.b || ''; b.style.opacity = f.b ? f.mix : 0;
+    const C = document.getElementById('C'); C.innerHTML = f.c || '';
+    // keep only the text of carried shots: drop their pictures (and their duplicate SVG ids), keep the wrappers' opacity
+    C.querySelectorAll('svg, img').forEach((el) => { if (!el.closest('.tx')) el.remove(); });
+    // captions and credits (small mono) describe a picture that has gone: they are not carried
+    C.querySelectorAll('.tx').forEach((el) => { const cs = getComputedStyle(el); if (/Mono/.test(cs.fontFamily) && parseFloat(cs.fontSize) <= 22 && !el.querySelector('.tx')) el.remove(); });
+    C.querySelectorAll('div').forEach((el) => { if (el.closest('.tx')) return; if (!el.querySelector('.tx')) el.remove(); else { el.style.background = 'none'; el.style.filter = 'none'; } });
+    return Promise.all([document.fonts.ready, window.E3_PRELOAD || true]).then(() => Promise.all([...document.images].map((im) => im.complete ? 1 : new Promise((r) => { im.onload = im.onerror = r; })))).then(safe);
+  };
+  // Title-safe pass: nudge every text element (.tx) back inside 96 px left/right, 54 px top/bottom. Full-width centred lines are
+  // measured by their text, not their box.
+  const SAFE_AREA = {x0: 96, x1: 1824, y0: 54, y1: 1026};
+  function safe() {
+    const SAFE = SAFE_AREA;
+    for (const el of document.querySelectorAll('#stage .tx')) {
+      if (el.parentElement.closest('.tx')) continue;
+      el.style.translate = '';
+      const rg = document.createRange(); rg.selectNodeContents(el); const t = rg.getBoundingClientRect(), bx = el.getBoundingClientRect();
+      const r = bx.width > 1700 ? t : {left: Math.min(t.left, bx.left), right: Math.max(t.right, bx.right), top: Math.min(t.top, bx.top), bottom: Math.max(t.bottom, bx.bottom), width: bx.width};
+      if (!r.width) continue;
+      let dx = 0, dy = 0;
+      if (r.right > SAFE.x1) dx = SAFE.x1 - r.right; if (r.left + dx < SAFE.x0) dx = SAFE.x0 - r.left;
+      if (r.bottom > SAFE.y1) dy = SAFE.y1 - r.bottom; if (r.top + dy < SAFE.y0) dy = SAFE.y0 - r.top;
+      if (dx || dy) el.style.translate = `${dx.toFixed(1)}px ${dy.toFixed(1)}px`;
+    }
+    // carried text never sits on the current shot's text: move it to the nearest free place inside the safe area
+    const box = (el) => { const rg = document.createRange(); rg.selectNodeContents(el); const t = rg.getBoundingClientRect(), bx = el.getBoundingClientRect();
+      return bx.width > 1700 ? t : {left: Math.min(t.left, bx.left), right: Math.max(t.right, bx.right), top: Math.min(t.top, bx.top), bottom: Math.max(t.bottom, bx.bottom)}; };
+    const top = (sel) => [...document.querySelectorAll(sel)].filter((el) => !el.parentElement.closest('.tx'));
+    const taken = [...top('#A .tx, #B .tx').map(box), ...[...document.querySelectorAll('#A text, #B text, #A .tk, #B .tk')].map((el) => el.getBoundingClientRect())].filter((r) => r.right > r.left);
+    const hit = (r) => taken.some((q) => r.left < q.right && q.left < r.right && r.top < q.bottom && q.top < r.bottom);
+    for (const el of top('#C .tx')) {
+      const r = box(el); if (!(r.right > r.left)) continue;
+      if (hit(r)) {
+        let best = null;
+        for (let k = 1; k <= 12 && !best; k++) for (const [dx, dy] of [[0, 70 * k], [0, -70 * k], [-110 * k, 0], [110 * k, 0]]) {
+          const q = {left: r.left + dx, right: r.right + dx, top: r.top + dy, bottom: r.bottom + dy};
+          if (q.left >= SAFE.x0 && q.right <= SAFE.x1 && q.top >= SAFE.y0 && q.bottom <= SAFE.y1 && !hit(q)) { best = [dx, dy]; break; }
+        }
+        if (best) { const [ox, oy] = (el.style.translate || '0px 0px').split(' ').map(parseFloat);
+          el.style.translate = `${(ox || 0) + best[0]}px ${(oy || 0) + best[1]}px`; taken.push({left: r.left + best[0], right: r.right + best[0], top: r.top + best[1], bottom: r.bottom + best[1]}); continue; }
+      }
+      taken.push(r);
+    }
+  }
+</script>
+</body></html>

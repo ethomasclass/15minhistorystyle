@@ -39,6 +39,14 @@ const v3 = {
   len: (a) => Math.hypot(a[0], a[1], a[2]), norm: (a) => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; },
 };
 const EM_LIGHT = v3.norm([-0.45, -0.6, 0.66]); // cream morning light from the south-west, high
+// The dusk look (ch 1 cold open, May 1884, sunset): renderers set EM_ENV for the length of one frame (emWithEnv) and restore it, so
+// every other clip keeps the default light. A low warm sun from the west-north-west, warm lit faces, cool shade, darker water,
+// long shadows on the ground, a warm haze. emC(k) is the colour for k in the current look.
+let EM_ENV = null;
+const EM_DUSK = {light: v3.norm([-0.92, 0.33, 0.2]), warm: '#F0A866', cool: '#0B1716', k: 1, haze: '#6E5A48', water: '#0C1A1A', street: '#3B4642',
+  bg: '#0E1616', glint: '#FFC88A', park: '#26362E', shadowLen: 3.2, shadowOp: 0.42};
+const emC = (k) => (EM_ENV && EM_ENV[k]) || EM[k];
+function emWithEnv(env, fn) { const keep = EM_ENV; EM_ENV = env; try { return fn(); } finally { EM_ENV = keep; } }
 
 /* ---------- camera: monotone cubic through keyframes, then a real perspective projection ---------- */
 // keys: [narration time, tx, ty, tz, yaw, pitch, D, ox, oy]
@@ -180,12 +188,16 @@ function emPal(col, place) {
   if (place) return {lit: '#A9BAB3', dark: '#4E625E', top: '#C9D3CC', win: '#1A2826', trim: '#22302E', shop: '#F4EFE6'};
   return {lit: EM.inkLit, dark: EM.inkDark, top: EM.roof, win: EM.win, trim: EM.iron, shop: '#F4EFE6'};
 }
-function emShade(pal, nrm) { const d = v3.dot(nrm, EM_LIGHT); return emMix(pal.dark, pal.lit, clamp01(0.12 + 0.88 * (d + 0.6) / 1.26)); }
+function emShade(pal, nrm) {
+  const d = v3.dot(nrm, EM_ENV ? EM_ENV.light : EM_LIGHT), base = emMix(pal.dark, pal.lit, clamp01(0.12 + 0.88 * (d + 0.6) / 1.26));
+  if (!EM_ENV) return base;
+  return d > 0 ? emMix(base, EM_ENV.warm, EM_ENV.k * Math.min(0.62, 0.75 * d)) : emMix(base, EM_ENV.cool, EM_ENV.k * Math.min(0.45, -d * 0.9));
+}
 // one building: box faces (back-face culled), facade detail on the street front and the back, cornice, fire escapes, awning,
 // a chimney on the roof. b: {x0..y1, z0 (lift), h, floors, front, pal, kind, seed, shop, op}
 function emBuilding(cam, b) {
   const s = [], z0 = b.z0 || 0, z1 = z0 + b.h, pal = b.pal, cen = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, z0 + b.h / 2];
-  const hz = emHazeK(cam, cen), H = (c) => emMix(c, EM.haze, hz), sc = emScale(cam, cen);
+  const hz = emHazeK(cam, cen), H = (c) => emMix(c, emC('haze'), hz), sc = emScale(cam, cen);
   if (sc <= 0) return '';
   const det = clamp01(1 - hz * 1.4);
   for (const name of ['S', 'N', 'W', 'E']) {
@@ -204,7 +216,7 @@ function emBuilding(cam, b) {
   const top = [[b.x0, b.y0, z1], [b.x1, b.y0, z1], [b.x1, b.y1, z1], [b.x0, b.y1, z1]];
   if (b.kind !== 'church') {
     if (b.glow > 0.01) s.push(emPoly(cam, top, emMix(H(pal.top), '#FFF3D6', 0.45 * b.glow), `stroke="${EM.cream}" stroke-width="2" stroke-opacity="${f1(b.glow * 90) / 100}"`)); else
-    s.push(emPoly(cam, top, H(pal.top), b.edge ? `stroke="${b.edge}" stroke-width="2"` : `stroke="${EM.cream}" stroke-opacity="${f1(0.16 * det * 100) / 100}" stroke-width="1"`));
+    s.push(emPoly(cam, top, H(EM_ENV ? emMix(pal.top, EM_ENV.warm, 0.3) : pal.top), b.edge ? `stroke="${b.edge}" stroke-width="2"` : `stroke="${EM.cream}" stroke-opacity="${f1(0.16 * det * 100) / 100}" stroke-width="1"`));
     if (!b.noChimney && sc > 0.35) { const r = rng(b.seed + 3), cx = b.x0 + 3 + r() * (b.x1 - b.x0 - 8), cy = b.y0 + 8 + r() * (b.y1 - b.y0 - 16);
       s.push(emBoxSimple(cam, cx, cx + 3, cy, cy + 4, z1, z1 + 5, H(pal.dark), H(pal.lit), H(pal.top))); }
     if (b.dots > 0) { // the people who live here, as teal dots on the roof: more and more of them
@@ -294,7 +306,7 @@ function emSolid(cam, faces, pal, H, edge) {
 }
 function emChurch(cam, l, lift, pal, edge, n) {
   const z0 = lift, x0 = l.x0 + 6, x1 = l.x1 - 6, y0 = l.y0 + 22, y1 = l.y1 + 10, hN = 42, ridge = 66, cen = [(x0 + x1) / 2, (y0 + y1) / 2, z0 + 30];
-  const hz = emHazeK(cam, cen), H = (c) => emMix(c, EM.haze, hz), xm = (x0 + x1) / 2;
+  const hz = emHazeK(cam, cen), H = (c) => emMix(c, emC('haze'), hz), xm = (x0 + x1) / 2;
   const nave = {x0, x1, y0, y1, z0, h: hN, floors: 1, front: 'S', pal, kind: 'church', seed: 5, edge, noChimney: true};
   const roof = [[[x0, y0, z0 + hN], [x1, y0, z0 + hN], [xm, y0, z0 + ridge]], [[x0, y1, z0 + hN], [x1, y1, z0 + hN], [xm, y1, z0 + ridge]],
     [[x0, y0, z0 + hN], [xm, y0, z0 + ridge], [xm, y1, z0 + ridge], [x0, y1, z0 + hN]], [[x1, y0, z0 + hN], [xm, y0, z0 + ridge], [xm, y1, z0 + ridge], [x1, y1, z0 + hN]]];
@@ -441,7 +453,7 @@ const EM_BATTERY = [[-2420, -2840], [-2150, -3060], [-1720, -3060], [-1420, -290
 function emInside(P, x, y) { let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, yi] = P[i], [xj, yj] = P[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c; } return c; }
 function emFort(cam) { // the round sandstone fort with its broad low roof and the lantern on top
   const [cx, cy, R] = EM_FORT, N = 24, ring = (r, z) => Array.from({length: N}, (_, k) => [cx + Math.cos(k * TAU / N) * r, cy + Math.sin(k * TAU / N) * r, z]);
-  const pal = {lit: '#2E4A47', dark: '#081110'}, H = (c) => emMix(c, EM.haze, emHazeK(cam, [cx, cy, 20])), ed = `${EM.cream}`;
+  const pal = {lit: '#2E4A47', dark: '#081110'}, H = (c) => emMix(c, emC('haze'), emHazeK(cam, [cx, cy, 20])), ed = `${EM.cream}`;
   const prism = (r, z0, z1) => { const a = ring(r, z0), b = ring(r, z1), F = []; for (let k = 0; k < N; k++) F.push([a[k], a[(k + 1) % N], b[(k + 1) % N], b[k]]); F.push(b.slice().reverse()); return F; };
   const cone = (r, z0, z1) => { const a = ring(r, z0), F = []; for (let k = 0; k < N; k++) F.push([a[k], a[(k + 1) % N], [cx, cy, z1]]); F.push(a); return F; };
   let s = emSolid(cam, prism(R, 0, 30), pal, H) + emSolid(cam, cone(R + 4, 30, 52), {lit: '#1E3130', dark: '#0A1312'}, H) + emSolid(cam, prism(16, 46, 60), pal, H) + emSolid(cam, cone(19, 60, 68), {lit: '#1E3130', dark: '#0A1312'}, H);
@@ -456,14 +468,14 @@ function emGround(cam, n, S = {}) {
   const s = [];
   // the harbour and the river under everything; then the land: Manhattan narrows to the Battery in the south-west, Brooklyn
   // across the East River
-  s.push(emPoly(cam, [[-7000, -6000, -2], [9000, -6000, -2], [9000, 5000, -2], [-7000, 5000, -2]], EM.water));
-  s.push(emPoly(cam, EM_MANHATTAN.map(([x, y]) => [x, y, 0]), EM.street, 'stroke="#0A1312" stroke-width="3"'));
-  s.push(emPoly(cam, [[EM_RIVER[1], -4000, 0], [8000, -4000, 0], [8000, 4000, 0], [EM_RIVER[1], 4000, 0]], EM.street));
+  s.push(emPoly(cam, [[-7000, -6000, -2], [9000, -6000, -2], [9000, 5000, -2], [-7000, 5000, -2]], emC('water')));
+  s.push(emPoly(cam, EM_MANHATTAN.map(([x, y]) => [x, y, 0]), emC('street'), 'stroke="#0A1312" stroke-width="3"'));
+  s.push(emPoly(cam, [[EM_RIVER[1], -4000, 0], [8000, -4000, 0], [8000, 4000, 0], [EM_RIVER[1], 4000, 0]], emC('street')));
   const rh = rng(405); // glints in the harbour round the Battery
   for (let k = 0; k < 120; k++) { const x = -3600 + rh() * 4400, y = -3800 + rh() * 1900 + ((n * 6) % 40), L = 12 + rh() * 30, o = 0.15 + rh() * 0.2;
-    if (!emInside(EM_MANHATTAN, x, y) && !emInside(EM_MANHATTAN, x + L, y)) s.push(emLine(cam, [x, y, -1.5], [x + L * 0.6, y, -1.5], '#A3BAB2', 1.4, `stroke-opacity="${f1(o * 100) / 100}"`)); }
+    if (!emInside(EM_MANHATTAN, x, y) && !emInside(EM_MANHATTAN, x + L, y)) s.push(emLine(cam, [x, y, -1.5], [x + L * 0.6, y, -1.5], EM_ENV ? EM_ENV.glint : '#A3BAB2', 1.4, `stroke-opacity="${f1(o * (EM_ENV && x < -1500 ? 1.8 : 1) * 100) / 100}"`)); }
   // the Battery: a park of trees round the fort, and the blocks of lower Manhattan as flat footprints
-  s.push(emPoly(cam, EM_BATTERY.map(([x, y]) => [x, y, 0.3]), '#33504A'));
+  s.push(emPoly(cam, EM_BATTERY.map(([x, y]) => [x, y, 0.3]), EM_ENV ? EM_ENV.park : '#33504A'));
   const rt = rng(406);
   for (let k = 0; k < 60; k++) { const x = -2350 + rt() * 800, y = -2950 + rt() * 650; if (!emInside(EM_BATTERY, x, y) || Math.hypot(x - EM_FORT[0], y - EM_FORT[1]) < EM_FORT[2] + 30) continue;
     const ring = []; for (let q = 0; q < 8; q++) ring.push([x + Math.cos(q * TAU / 8) * 14, y + Math.sin(q * TAU / 8) * 14, 1]); s.push(emPoly(cam, ring, '#16261F', 'opacity="0.9"')); }
@@ -511,7 +523,7 @@ function emShadows(cam, n, S) { // soft shadows cast on the ground by whatever h
 function emWorld(n, cam, S) {
   const items = [...(S.extra || [])];
   const dist = (p) => v3.len(v3.sub(p, cam.C));
-  const H0 = (p) => (c) => emMix(c, EM.haze, emHazeK(cam, p));
+  const H0 = (p) => (c) => emMix(c, emC('haze'), emHazeK(cam, p));
   const openU = S.openU || 0, lift0 = S.lift || (() => 0), hk0 = S.hk || (() => 0);
   // buildings
   for (const l of EM_LOTS) {
@@ -559,8 +571,10 @@ function emWorld(n, cam, S) {
     return emFerry(cam, x, y);
   }});
   items.push({d: dist([EM_FORT[0], EM_FORT[1], 0]), draw: () => emFort(cam)});
+  if (S.lower) for (const b of EM_LOWER) { const c0 = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, 0]; items.push({d: dist(c0), draw: () => emBuilding(cam, b)}); }
+  if (S.lower) for (const sh of EM_SHIPS) items.push({d: dist([sh.x, sh.y, 0]), draw: () => emShip(cam, sh, n)});
   items.sort((a, b) => b.d - a.d);
-  const world = [`<rect width="1920" height="1080" fill="${EM.bg}"/>`, emGround(cam, n, S), emShadows(cam, n, S), items.map((it) => it.draw()).join('')];
+  const world = [`<rect width="1920" height="1080" fill="${emC('bg')}"/>`, emGround(cam, n, S), emShadows(cam, n, S), EM_ENV ? emLongShadows(cam, S) : '', items.map((it) => it.draw()).join('')];
   world.push(`<rect width="1920" height="1080" fill="url(#emhaze)" opacity="${f1((S.hazeOn ?? 1) * 100) / 100}"/>`);
   return world;
 }
@@ -637,7 +651,7 @@ function renderEnclave(t) {
   return emFrame(t, world, scr);
 }
 const emFrame = (t, world, scr) => frame(e3Defs(t, `<filter id="emblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>` +
-    grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]]) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21})),
+    (EM_ENV ? grad('emhaze', [['0', '#F2B57A', 0.42], ['0.35', '#B07A52', 0.16], ['0.75', '#5A4636', 0]]) : grad('emhaze', [['0', '#A3BAB2', 0.34], ['0.38', '#7C918B', 0.12], ['0.7', '#4E726C', 0]])) + texDef('emtex', 0, 0, 1920, 1080, {soft: 0.004, fine: 0.11, k: 0.16, seed: 21})),
   '', `<g filter="url(#emtex)">${world.join('')}</g>`, scr.join(''), t);
 // tags with leader lines: each tag box sits at its preferred offset from its anchor, is pushed apart from the others, and is kept
 // inside the title-safe area
@@ -835,3 +849,137 @@ Object.assign(CLIPS, {
   ep3_map_move: {sec: 17, render: (t) => renderMove(t)},
   ep3_map_density: {sec: 8, render: (t) => renderDensity(t)},
 });
+
+/* =====================================================================================================================
+   Chapter 1 cold open (Nov 13): the model at dusk, and the map home. Clocks are ch01_he_sent_me.words.json seconds (n):
+   "May, 1884" 0.5, "The sun is going down" 4.8 to 6.1, "A woman walks out" 6.7 (the cut to the drawn ep3_runner); "Where does he
+   want to take them" 67.7 (the rise back into the model), the driving question 75.5 to 80.7, "back three weeks and four thousand
+   miles, to what they left behind" 81.2 to 86.8 (the map home; the episode title card lands on "behind").
+   ===================================================================================================================== */
+// lower Manhattan, extruded: the flat block footprints south of the Lower East Side model become rows of 3 to 6 storey buildings
+// (warehouses, offices, boarding houses; generic, like the rest of the model). Only drawn when a clip asks (S.lower).
+const EM_LOWER = (() => {
+  const out = [], r = rng(611);
+  for (let x = -2600; x < 400; x += 350) for (let y = -2780; y <= -1030; y += 250) {
+    const c4 = [[x, y], [x + 300, y], [x + 300, y + 200], [x, y + 200]]; if (!c4.every(([a, b]) => emInside(EM_MANHATTAN, a, b) && !emInside(EM_BATTERY, a, b))) continue;
+    for (const [y0, y1, front] of [[y, y + 96, 'S'], [y + 104, y + 200, 'N']]) {
+      let xx = x; while (xx < x + 300 - 10) { const w = Math.min(x + 300 - xx, [25, 25, 50, 50, 75][Math.floor(r() * 5)]), roll = r();
+        const floors = roll < 0.2 ? 3 : roll < 0.55 ? 4 : roll < 0.85 ? 5 : 6;
+        out.push({x0: xx, x1: xx + w, y0, y1, z0: 0, h: emH(floors), floors, front, pal: emPal(null, false), kind: null, seed: Math.floor(r() * 9999), shop: r() < 0.6});
+        xx += w; }
+    }
+  }
+  return out;
+})();
+// ships at anchor in the harbour off the Battery: a hull, a deckhouse, two or three bare masts with yards, rocking a little
+const EM_SHIPS = [[-2650, -3330, 0.4, 3], [-2230, -3560, -0.2, 2], [-1650, -3420, 0.9, 3], [-3080, -2950, 0.1, 2], [-1250, -3180, -0.6, 3], [-3200, -2280, 1.4, 2], [-900, -2850, 0.5, 2]]
+  .map(([x, y, a, m], i) => ({x, y, a, m, L: 110 + 25 * (i % 3), i}));
+function emShip(cam, sh, n) {
+  const ca = Math.cos(sh.a), sa = Math.sin(sh.a), P = (u, v, z) => [sh.x + ca * u - sa * v, sh.y + sa * u + ca * v, z], L = sh.L, W = L * 0.17, roll = 0.6 * Math.sin(n * 0.9 + sh.i);
+  const H = (c) => emMix(c, emC('haze'), emHazeK(cam, [sh.x, sh.y, 10])), s = [];
+  const hull = [[-L / 2, 0], [-L * 0.42, -W / 2], [L * 0.38, -W / 2], [L / 2, 0], [L * 0.38, W / 2], [-L * 0.42, W / 2]];
+  s.push(emPoly(cam, hull.map(([u, v]) => P(u, v, -1)), H('#05090A'), 'opacity="0.6"'));
+  for (let k = 0; k < hull.length; k++) { const a = hull[k], b = hull[(k + 1) % hull.length], du = b[0] - a[0], dv = b[1] - a[1];
+    const nrm = v3.norm([ca * dv - sa * -du, sa * dv + ca * -du, 0]), A = P(a[0], a[1], -1); // outward (the hull runs counter-clockwise)
+    if (emSeen(cam, A, nrm)) s.push(emPoly(cam, [A, P(b[0], b[1], -1), P(b[0], b[1], 9), P(a[0], a[1], 9)], H(emShade({lit: '#2B3B38', dark: '#0A1110'}, nrm)))); }
+  s.push(emPoly(cam, hull.map(([u, v]) => P(u, v, 9)), H('#2A2A24')));
+  s.push(emBoxSimple(cam, ...(() => { const c = P(-L * 0.15, 0, 0); return [c[0] - 9, c[0] + 9, c[1] - 6, c[1] + 6]; })(), 9, 17, H('#0A1110'), H('#3A3A30'), H('#22221C')));
+  for (let j = 0; j < sh.m; j++) { const u = -L * 0.32 + j * L * 0.3, top = P(u + roll * 2, 0, 9 + 80 - j * 6), foot = P(u, 0, 9);
+    s.push(emLine(cam, foot, top, H('#0A0C0C'), Math.max(1, emScale(cam, foot) * 1.2)));
+    for (const k of [0.45, 0.7, 0.9]) { const z = 9 + (80 - j * 6) * k, y = W * (1.3 - k); s.push(emLine(cam, P(u + roll * 2 * k, -y, z), P(u + roll * 2 * k, y, z), H('#0A0C0C'), Math.max(0.8, emScale(cam, foot) * 0.7))); }
+    s.push(emLine(cam, top, P(j ? u - L * 0.3 : -L / 2, 0, 9), H('#0A0C0C'), 0.8, 'stroke-opacity="0.7"')); }
+  return s.join('');
+}
+// long low-sun shadows on the ground: each building's footprint swept away from the sun (convex hull of the footprint and its
+// shifted copy), all drawn opaque inside one translucent group so overlaps stay one even shade
+function emLongShadows(cam, S) {
+  const L = EM_ENV.light, k = EM_ENV.shadowLen, dx = -L[0] / Math.hypot(L[0], L[1]), dy = -L[1] / Math.hypot(L[0], L[1]), out = [];
+  const hull = (P) => { P = P.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]); const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lo = [], up = []; for (const p of P) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], p) <= 0) lo.pop(); lo.push(p); }
+    for (const p of P.slice().reverse()) { while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], p) <= 0) up.pop(); up.push(p); }
+    return lo.slice(0, -1).concat(up.slice(0, -1)); };
+  const box = (x0, x1, y0, y1, h) => { const F = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], d = h * k, Hh = hull(F.concat(F.map(([a, b]) => [a + dx * d, b + dy * d])));
+    out.push(emPoly(cam, Hh.map(([a, b]) => [a, b, 0.25]), '#000')); };
+  for (const l of EM_LOTS) box(l.x0, l.x1, l.y0, l.y1, emH(l.floors));
+  if (S.lower) for (const b of EM_LOWER) { if (emScale(cam, [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, 0]) > 0.08) box(b.x0, b.x1, b.y0, b.y1, b.h); }
+  const [fx, fy, R] = EM_FORT, ring = []; for (let q = 0; q < 24; q++) ring.push([fx + Math.cos(q * TAU / 24) * R, fy + Math.sin(q * TAU / 24) * R]);
+  out.push(emPoly(cam, hull(ring.concat(ring.map(([a, b]) => [a + dx * 40 * k, b + dy * 40 * k]))).map(([a, b]) => [a, b, 0.25]), '#000'));
+  return `<g opacity="${EM_ENV.shadowOp}">${out.join('')}</g>`;
+}
+// the sun's glow at the top of the frame, on the side it sets (screen space; the sun itself is above the frame at these pitches)
+function emSunGlow(cam) {
+  const L = EM_ENV.light, far = emP(cam, [cam.T[0] + L[0] * 9000, cam.T[1] + L[1] * 9000, 0]), x = far ? Math.max(-200, Math.min(2120, far[0])) : 1700;
+  return `<defs><radialGradient id="emsun"><stop offset="0" stop-color="#FFD9A0" stop-opacity="0.55"/><stop offset="0.35" stop-color="#F0A866" stop-opacity="0.22"/><stop offset="1" stop-color="#F0A866" stop-opacity="0"/></radialGradient></defs>` +
+    `<ellipse cx="${f1(x)}" cy="-140" rx="1300" ry="760" fill="url(#emsun)"/>`;
+}
+const EM_GRADE = `<rect width="1920" height="1080" fill="#E0904E" opacity="0.2" style="mix-blend-mode:overlay"/>`; // a warm evening grade over the whole model
+// 1) the opening glide: over lower Manhattan at sunset, south-west to the round fort at the Battery (0 to 6.6 s; cut at 6.5)
+const DG_KEYS = [[0.0, -1430, -1820, 0, -152, 29, 2350, 0, 0], [6.6, -1915, -2850, 0, -129, 35, 1000, 0, 30], [9.0, -1940, -2900, 0, -122, 37, 760, 0, 40]];
+function renderDuskGlide(n) {
+  return emWithEnv(EM_DUSK, () => { const cam = emCamera(n, DG_KEYS, true), world = emWorld(n, cam, {lower: true, ferry: false});
+    world.push(emSunGlow(cam), EM_GRADE); return emFrame(n, world, []); });
+}
+// 2) the rise (67.3 on): from the drawn Battery back up into the model; the family a tiny gold marker at the fort gate among
+// other small arrivals (ink), the light the same dusk
+const DR_KEYS = [[67.3, -1905, -2858, 0, -140, 22, 430, 0, 60], [70.6, -1918, -2875, 0, -133, 41, 880, 0, 30], [75.5, -1928, -2885, 0, -127, 49, 1120, 0, 10], [81.6, -1935, -2890, 0, -122, 53, 1300, 0, 0]];
+const DR_FOLK = (() => { const r = rng(612), out = []; for (let k = 0; k < 46; k++) { const a = -0.2 + r() * 2.1, d = 18 + r() * 90, walk = r() < 0.55;
+  out.push({x: EM_FORT[0] + 55 + Math.cos(a) * d * 0.9 + 20, y: EM_FORT[1] + 45 + Math.sin(a) * d * 0.7, h: 5.0 + r() * 0.8, v: walk ? 2 + r() * 3 : 0, dir: [0.55 + r() * 0.4, 0.5 + r() * 0.5], ph: r()}); } return out; })();
+function renderDuskRise(n, {labels = true} = {}) {
+  return emWithEnv(EM_DUSK, () => {
+    const cam = emCamera(n, DR_KEYS, true), dist = (p) => v3.len(v3.sub(p, cam.C)), fam = [EM_FORT[0] + 62, EM_FORT[1] + 74];
+    const extra = DR_FOLK.map((f) => { const s = f.v * Math.max(0, n - 66), x = f.x + f.dir[0] * s, y = f.y + f.dir[1] * s + (f.v ? 0 : 0.5 * Math.sin(n + f.ph * 9));
+      return {d: dist([x, y, 0]), draw: () => emPerson(cam, x, y, 0, f.h, EM.ink, 1)}; });
+    extra.push({d: dist([fam[0], fam[1], 0]), draw: () => emFamily(cam, fam[0], fam[1], n)});
+    const world = emWorld(n, cam, {lower: true, ferry: false, extra});
+    world.push(emSunGlow(cam), EM_GRADE);
+    const scr = [emPin(cam, fam[0], fam[1], EM.gold, smooth(68.0, 68.5, n))], lab = [];
+    if (labels) {
+      const g = emP(cam, [fam[0], fam[1], 0.5]);
+      if (g) lab.push({lines: ['THE RABINOWITZES'], a: [g[0], g[1] - 66], off: [210, -80], op: emOn(n, 68.4, 75.4)});
+      lab.push({lines: ['CASTLE GARDEN'], a: emP(cam, [EM_FORT[0], EM_FORT[1], 70]), off: [-320, -40], op: emOn(n, 69.2, 75.4)});
+    }
+    scr.unshift(emLabels(lab.filter((L) => L.a && L.op > 0.01), []));
+    return emFrame(n, world, scr);
+  });
+}
+// 3) the map home (81.2 to 86.9): the route map's look (ep3_letter, ep3_pale_map); the camera leaves New York and sweeps east over
+// the Atlantic, the route drawing back the way the family came (steamship from Hamburg, rail from home), and settles on HOME in the
+// Pale as the narration says "behind"
+const SWP = {a: 81.2, b: 84.6, end: 86.9};
+function renderSweepHome(n) {
+  const home = E3P(28.6, 50.25), ham = E3P(9.99, 53.55), ny = E3P(-74.0, 40.7);
+  const rail = [home, E3P(25.1, 50.1), E3P(21, 51.6), E3P(17, 52.2), E3P(13.4, 52.5), ham];
+  const sea = [ham, E3P(8.3, 54.0), E3P(4.5, 53.2), E3P(1.6, 51.0), E3P(-5.5, 49.6), E3P(-20, 48.6), E3P(-40, 46.2), E3P(-58, 43.5), E3P(-68, 41.2), ny];
+  const back = [...sea].reverse().concat([...rail].reverse().slice(1)); // New York to home
+  const u = smooth(SWP.a + 0.9, SWP.b, n), mid = [(ny[0] + home[0]) / 2, (ny[1] + home[1]) / 2 - 40];
+  // camera: centre and zoom along a gentle arc (zoom out over the ocean, in again on the Pale); HOME ends left of centre-right
+  const cA = [ny[0] + 120, ny[1] - 30], cB = [home[0] - 150, home[1] + 10], v = ease(u);
+  const ctr = [lerp(cA[0], cB[0], v), lerp(cA[1], cB[1], v) - 140 * Math.sin(Math.PI * v)], settle = smooth(SWP.b, SWP.end, n);
+  const Z = Math.exp(lerp(Math.log(1.9), Math.log(1.75), v) - 0.85 * Math.sin(Math.PI * v)) * (1 + 0.04 * settle);
+  const S = (p) => [960 + (p[0] - ctr[0]) * Z, 540 + (p[1] - ctr[1]) * Z], tr = `translate(${f1(960 - ctr[0] * Z)},${f1(540 - ctr[1] * Z)}) scale(${f1(Z * 1000) / 1000})`;
+  const m = [`<rect width="1920" height="1080" fill="#132423"/>`];
+  m.push(`<clipPath id="swland"><path d="${E3_LAND}" transform="${tr}"/></clipPath>`);
+  m.push(`<path d="${E3_LAND}" transform="${tr}" fill="#24403D" stroke="#5F857F" stroke-width="${f1(2 / Z)}" vector-effect="non-scaling-stroke"/>`);
+  for (let lat = 35; lat < 66; lat += 10) m.push(line([S(E3P(-80, lat)), S(E3P(46, lat))], '#2B4744', 1));
+  for (let lon = -70; lon < 46; lon += 20) m.push(line([S(E3P(lon, 33)), S(E3P(lon, 66))], '#2B4744', 1));
+  m.push(`<g clip-path="url(#swland)"><polygon points="${pts(E3_RUSSIA.map(([a, b]) => S(E3P(a, b))))}" fill="#3E5F5A"/><polygon points="${pts(E3_RUSSIA.map(([a, b]) => S(E3P(a, b))))}" fill="url(#hatchT)" opacity="0.5"/></g>`);
+  const uP = smooth(SWP.b - 0.6, SWP.b + 0.6, n); // the Pale, shaded in teal as on the Pale map
+  if (uP > 0) m.push(`<g clip-path="url(#swland)" opacity="${f1(uP * 100) / 100}"><polygon points="${pts(XP_PALE.map(([a, b]) => S(E3P(a, b))))}" fill="${EM.teal}" opacity="0.28"/></g>` +
+    `<polyline points="${pts(XP_PALE.concat([XP_PALE[0]]).map(([a, b]) => S(E3P(a, b))))}" fill="none" stroke="${EM.teal}" stroke-width="3.5" stroke-dasharray="12 8" opacity="${f1(uP * 85) / 100}"/>`);
+  // the route back east, drawing with the camera; a small travelling dot at its head
+  const rp = xpPartial(back.map(S), smooth(SWP.a + 0.25, SWP.b - 0.05, n));
+  if (rp.length > 1) { m.push(`<polyline points="${pts(rp)}" fill="none" stroke="#111" stroke-width="10" stroke-dasharray="2 16" stroke-linecap="round"/><polyline points="${pts(rp)}" fill="none" stroke="${EM.teal}" stroke-width="6" stroke-dasharray="2 16" stroke-linecap="round"/>`);
+    const e = rp[rp.length - 1]; if (n < SWP.b) m.push(`<circle cx="${f1(e[0])}" cy="${f1(e[1])}" r="9" fill="${EM.teal}" stroke="#111" stroke-width="3"/>`); }
+  const dot = (p, k) => k > 0 ? `<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="${f1(12 * k)}" fill="${EM.orange}" stroke="#111" stroke-width="3"/>` : '';
+  m.push(dot(S(ny), 1), dot(S(home), smooth(SWP.b - 0.5, SWP.b - 0.1, n)));
+  const scr = [], hS = S(home), nS = S(ny);
+  scr.push(tag(nS[0] - 10, nS[1] + 70, 'NEW YORK', smooth(SWP.a, SWP.a + 0.3, n) * smooth(110, 230, nS[0]))); // leaves with its dot
+  scr.push(tag(hS[0] - 50, hS[1] + 70, 'HOME', smooth(SWP.b - 0.45, SWP.b - 0.1, n)));
+  return frame(e3Defs(n), '', m.join(''), scr.join(''), n);
+}
+Object.assign(CLIPS, {
+  ep3_ch1_glide: {sec: 7, render: (t) => renderDuskGlide(t)},
+  ep3_ch1_rise: {sec: 14, render: (t) => renderDuskRise(t + 67.3)},
+  ep3_ch1_home: {sec: 6, render: (t) => renderSweepHome(t + 81.0)},
+});
+if (typeof window !== 'undefined') Object.assign(window, {renderDuskGlide, renderDuskRise, renderSweepHome, emWithEnv, EM_DUSK});
