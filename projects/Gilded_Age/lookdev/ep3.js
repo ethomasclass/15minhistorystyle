@@ -1040,6 +1040,21 @@ function e3Settle(fo, u, name) {
   E3K.log(u >= 1 ? 'plant' : 'swing', name + '.settle.' + (1 - fi), P, E3K.foot(o2, 1 - fi));
   return o2;
 }
+// a standing figure on both feet (feet 0.055 h either side of x, the stance e3Settle ends in), optionally stepping from xa to xb
+// (u 0..1: the trailing foot moves first, then the leading one); legs straight, no lean
+function e3Stand(fo, xa, xb, u, name) {
+  const d = fo.d ?? 1, e = 0.055 * fo.h, mv = (xb - xa) * d, lead = mv >= 0 ? 1 : -1; // lead: which foot moves second
+  const ua = ease(clamp01(2 * u)), ub = ease(clamp01(2 * u - 1)), y = fo.floorY ?? fo.y;
+  const fF = [lerp(xa + d * e, xb + d * e, lead > 0 ? ub : ua), y - (lead > 0 ? 1 : 0) * 0.05 * fo.h * Math.sin(Math.PI * ub) - (lead > 0 ? 0 : 1) * 0.05 * fo.h * Math.sin(Math.PI * ua)];
+  const fB = [lerp(xa - d * e, xb - d * e, lead > 0 ? ua : ub), y - (lead > 0 ? 1 : 0) * 0.05 * fo.h * Math.sin(Math.PI * ua) - (lead > 0 ? 0 : 1) * 0.05 * fo.h * Math.sin(Math.PI * ub)];
+  const o1 = {...fo, x: (fF[0] + fB[0]) / 2, y, floorY: y, an: {...fo.an, lean: 0, bob: 0, standing: true}};
+  // still: straight legs as rig.js stands them (ankles clamped at the floor), feet on the floor line; stepping: legs solved
+  const o2 = u <= 0 || u >= 1 ? {...o1, an: {...o1.an, legs: [7, -7], shins: [4, -4]}} : {...o1, an: E3K.legsTo(o1, [fF, fB])};
+  if (u <= 0 || u >= 1) { fF[0] = E3K.foot(o2, 0)[0]; fB[0] = E3K.foot(o2, 1)[0]; }
+  const movingF = u > 0 && u < 1 && (lead > 0 ? (u > 0.5) : (u < 0.5)), movingB = u > 0 && u < 1 && !movingF;
+  E3K.log(movingF ? 'swing' : 'plant', name + '.0', fF, E3K.foot(o2, 0)); E3K.log(movingB ? 'swing' : 'plant', name + '.1', fB, E3K.foot(o2, 1));
+  return o2;
+}
 // a trunk drawn from its top handle (hx, hy): hanging from a hand, or standing on a floor (then hy = floor - E3TR.lift)
 const E3TR = {w: 128, h: 70}; E3TR.lift = 1.175 * E3TR.h + 7;
 function e3TrunkAt(hx, hy, rot = 0) {
@@ -1113,7 +1128,7 @@ function rnFore(t) { // the promenade: the depot's iron fence and its gate behin
 function renderE3Runner(t) {
   const G = RN.G, H = RN.H, FR0 = 11.5, FR1 = 14.5, PO = 14.7; // the freeze, and the payoff's start (after a cut through black)
   const payoff = t >= FR1, ts = payoff ? t : Math.min(t, FR0), u = t - PO;
-  const keys = payoff ? [[FR1, 0.98, 1060, 600], [PO + 3, 1.0, 1040, 610], [22, 1.04, 1020, 630]]
+  const keys = payoff ? [[FR1, 0.98, 1060, 600], [PO + 2.3, 1.0, 1040, 610], [PO + 2.95, 2.0, 830, 760], [PO + 4.0, 2.0, 820, 760], [PO + 4.9, 1.0, 1040, 610], [23, 1.04, 1020, 630]]
     : [[0, 1.0, 960, 560], [5.0, 0.98, 1010, 560], [8.4, 1.5, 960, 690], [11.5, 1.75, 940, 712], [14.5, 1.75, 940, 712]];
   const c = cam2(camAt(keys, ts)), lod = lodFor(H * c.z), det = lod.det;
   const sun = {c: '#FFC88A', a: 0.75, dx: 0.011, dy: -0.004};
@@ -1409,11 +1424,19 @@ function hsGoat(x, y, t) { // a nanny goat, munching: body, thin legs, horns, a 
     `<path d="M${x + 32},${y - 48} L${hx + 4},${hy - 8} L${hx + 14},${hy + 6} L${x + 34},${y - 34} Z" fill="${c}"/><path d="M${hx + 2},${hy - 8} q4,-14 -6,-18" stroke="${c}" stroke-width="3" fill="none"/><path d="M${hx + 12},${hy + 6} l-2,8 l4,-1 Z" fill="${c}"/><path d="M${x - 24},${y - 46} l-6,-6" stroke="${c}" stroke-width="3"/>` +
     `<path d="M${hx + 8},${y} q6,-8 12,0 q-6,-4 -12,0" fill="#5F7A52"/>`;
 }
+// marks on a signboard that only suggest lettering: broken dashes at two heights and a few short ticks, never a letter shape
+function e3SignMarks(x, y, w, h, seed, col) {
+  const r = rng(seed), s = []; let xx = x + w;
+  while (xx > x + 8) { const L = 6 + r() * 16, row = r() < 0.5 ? 0 : 1; s.push(`<rect x="${f1(xx - L)}" y="${f1(y + (row ? h * 0.62 : h * 0.12))}" width="${f1(L)}" height="${f1(h * 0.22)}" fill="${col}" opacity="0.8"/>`);
+    if (r() < 0.25) s.push(`<rect x="${f1(xx - L * 0.5)}" y="${f1(y + h * 0.3)}" width="1.6" height="${f1(h * 0.25)}" fill="${col}" opacity="0.6"/>`);
+    xx -= L + 3 + r() * 9; }
+  return s.join('');
+}
 function hsStreet(t) { // the tenement row, signboards in unreadable Hebrew-style letters, the sidewalk, curb and cobbles
   const G0 = FAR_GROUND, s = [], r = rng(171);
   let x = -200, i = 0; const rows = [];
   while (x < HS.x1 + 300) { const w = 240 + r() * 50, fl = 4 + (r() < 0.6 ? 1 : 0); rows.push([x, w]); s.push(tenement(x, w, fl, 420 + i, t)); x += w + 4; i++; }
-  for (const [x0, w] of rows) { const sy = G0 - 150 + 4, sw = w * 0.6; s.push(`<rect x="${f1(x0 + 6)}" y="${sy}" width="${f1(sw)}" height="16" fill="#DFE0D6" opacity="0.85"/>` + hebrewish(x0 + 6 + sw - 10, sy + 13, 10, Math.floor(sw / 11), 172 + Math.round(x0), '#1A1410')); }
+  for (const [x0, w] of rows) { const sy = G0 - 150 + 4, sw = w * 0.6; s.push(`<rect x="${f1(x0 + 6)}" y="${sy}" width="${f1(sw)}" height="16" fill="#DFE0D6" opacity="0.85"/>` + e3SignMarks(x0 + 14, sy + 3, sw - 16, 10, 172 + Math.round(x0), '#1A1410')); }
   s.push(MAT.floor(-400, HS.x1 + 600, G0, G0 + 40, {kind: 'flag', base: '#3E5F5A', seed: 173, size: 40}) + `<rect x="-400" y="${G0 + 40}" width="${HS.x1 + 1000}" height="6" fill="#0D0C09"/>` + MAT.floor(-400, HS.x1 + 600, G0 + 46, HS.G + 300, {kind: 'cobble', base: '#2B4744', seed: 174, size: 30}));
   return s.join('');
 }
@@ -1571,16 +1594,20 @@ function renderE3Knock(t) {
   // Sore and Rivke come along the hall (0 to 2.2); Rivke knocks three times (2.4 to 3.0); Rivke translates (8 to 11.5), turning to
   // her mother and back; Sore asks with an open hand
   const rimV = {c: '#FFF3D6', a: lod.rimA * 0.5, dx: 0.01, dy: -0.004}, vR = e3R(H * 0.8), sR = e3R(H * 0.88);
-  const rx1 = x0 - 140, sx1 = x0 - 330, wv = e3Trap(t, 0, 2.2);
+  const rx1 = x0 - 140, sx1 = x0 - 410, wv = e3Trap(t, 0, 2.2);
   const turn = t > 9.0 && t < 9.9, talk = (t > 8.2 && t < 11.6) ? (Math.sin(t * 11) > 0 ? 'awe' : 'neutral') : 'neutral';
   let rv = stepWalk(nbOpts('ndaughter', {x: rx1 - 4 * vR, y: F, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimV, an: {tilt: 2, expr: turn ? 'smile' : talk, blink: (t + 1) % 4 < 0.12}}), rx1 - 4 * vR, 1, 4 * vR * wv, () => F, 'kn.rivke');
   let so = stepWalk(nbOpts('nmother', {x: sx1 - 4 * sR, y: F, h: H, d: 1, det: lod.det, rim: rimV, an: {tilt: 0, expr: t > 9.6 && t < 11.4 ? 'worried' : 'neutral', blink: t % 3.9 < 0.12}}), sx1 - 4 * sR, 1, 4 * sR * wv, () => F, 'kn.sore');
-  rv = e3Settle(rv, smooth(2.2, 2.4, t), 'kn.rivke'); so = e3Settle(so, smooth(2.3, 2.6, t), 'kn.sore');
-  if (turn) { const feet = [E3K.foot(rv, 1), E3K.foot(rv, 0)]; rv = plant({...rv, d: -1}, feet, 'kn.rivke.turn'); }
+  rv = e3Settle(rv, smooth(2.2, 2.4, t), 'kn.rivke'); so = e3Settle(so, smooth(2.3, 2.6, t), 'kn.sore'); if (t >= 2.6) so = e3Stand({...so, y: F, floorY: F}, so.x, so.x, 0, 'kn.sore.stand');
+  if (t >= 2.4) { // standing on both feet; after the knocks she steps back from the door into the hall (3.3 to 3.9), and turns to her mother as she translates
+    const xs = rx1 + 0.055 * rv.h * 0 , back = smooth(3.3, 3.9, t), xa = rv.x, xb = rv.x - 80, cur = lerp(xa, xb, back);
+    const base = {...rv, y: F, floorY: F, an: {...POSES.stand(t, 0.4), tilt: 2, expr: turn ? 'smile' : talk, blink: (t + 1) % 4 < 0.12}};
+    rv = t < 3.3 ? e3Stand(base, xa, xa, 0, 'kn.rivke.stand') : t < 3.9 ? e3Stand(base, xa, xb, (t - 3.3) / 0.6, 'kn.rivke.step') : e3Stand({...base, d: turn ? -1 : 1}, xb, xb, 0, 'kn.rivke.stand');
+  }
   if (t > 2.3 && t < 3.2) { // three knocks: the knuckles touch the door at each tap
     const taps = [2.45, 2.7, 2.95], near = taps.some((q) => Math.abs(t - q) < 0.035), off = 14 * Math.min(...taps.map((q) => Math.min(1, Math.abs(t - q) / 0.12)));
     rv = near ? reach(rv, 'f', x0 - 34, F - 290, 'kn.rivke.knock') : e3Move(rv, 'f', x0 - 34 - off, F - 290, 'kn.rivke.knock.lift'); }
-  if (t > 9.4 && t < 11.0) { const k = smooth(9.4, 9.8, t) * (1 - smooth(10.6, 11.0, t)); so = {...so, an: {...so.an, fArm: [lerp(176, 104, k), lerp(170, 70, k)]}}; }
+  if (t > 9.4 && t < 11.0) { const k = smooth(9.4, 9.8, t) * (1 - smooth(10.6, 11.0, t)); so = {...so, an: {...so.an, fArm: [lerp(176, 132, k), lerp(170, 92, k)]}}; }
   s.push(fig(so), fig(rv));
   s.push(fig(ma) + over);
   if (t > 2.4 && t < 3.3) for (const q of [2.45, 2.7, 2.95]) { const u = clamp01((t - q) / 0.3); if (u > 0 && u < 1) s.push(`<path d="M${x0 + 20 + 30 * u},${F - 320} q14,30 0,60" stroke="${E3.cream}" stroke-width="4" fill="none" opacity="${f1(1 - u)}"/>`); }
@@ -1589,7 +1616,7 @@ function renderE3Knock(t) {
   scr.push(tag(130, 120, 'THE KELLYS\' FLAT · BROOKLYN · 1886', smooth(0.3, 0.7, t) * (1 - smooth(5.4, 5.8, t))));
   if (t > 1.6 && t < 4.8) scr.push(penS(1000, 230, 'that evening, a knock', 32, -3));
   if (t > 7.8 && t < 10.7) scr.push(penS(1000, 230, 'Rivke translates', 32, -3));
-  if (t > 7.6 && t < 11.0) scr.push(tag(1060, 300, 'COMPOSITE CHARACTERS', smooth(7.6, 7.9, t) * (1 - smooth(10.7, 11.0, t))));
+  if (t > 7.6 && t < 11.0) scr.push(tag(1320, 990, 'COMPOSITE CHARACTERS', smooth(7.6, 7.9, t) * (1 - smooth(10.7, 11.0, t))));
   if (t > 10.8 && t < 13.6) scr.push(penS(860, 230, 'a ticket, for her sister', 32, -3));
   if (t > 13.4) scr.push(penS(130, 990, 'Ma knew exactly where', 32, -3));
   const defs = e3Defs2(t).replace('</defs>', `<linearGradient id="knshaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F857F" stop-opacity="0.35"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient></defs>`);
