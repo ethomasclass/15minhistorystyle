@@ -526,3 +526,28 @@ Known weak spots: the runner payoff is wide, so its figures are small (no faces)
 cycle is not a run); Sore covering her eyes is a rough hand pose; in the night room the sleepers are side-on silhouettes on a
 plain quilt; the goat is small and dark; the Hebrew-style sign letters are random strokes (unreadable on purpose) and might be
 checked by someone who reads Hebrew so no real word appears by chance; ch 2's "burned roofs" are a generic far row.
+
+### Round 14b (Nov 13): review fixes and the walk
+
+- **The walk (user note: "weird and creepy gait").** `stepWalk` put the figure's origin 2% of its height below the floor and
+  always aimed the ankle 0.03 h above the sole, so both knees stayed bent through the whole cycle: a crouching, sneaking walk in
+  every Episode 3 clip. rig.js never draws an ankle lower than 0.03 h above the origin, so a sole rests on the origin's line
+  whenever its ankle is anywhere from 0 to 0.03 h up. New `e3Legs`: the origin sits on the floor while a planted leg can reach
+  nearly straight (99% of its length) and dips only as much as the stride needs at double support (about 2% of height: the natural
+  bob, lowest at double support, highest at passing); a planted foot on the floor line aims its ankle as low as that clamp allows,
+  so the stance leg straightens; the swing foot lifts 0.045 h (was 0.07). Arms now swing opposite the legs (about 16 degrees,
+  elbows a little bent) wherever a scene has not posed them for holding something; the runner and Yankel's "shove" lost their
+  frozen or outstretched arms. `e3Settle` and the new `e3Stand` end with straight legs. Since every Ep 3 walker uses `stepWalk`,
+  this also fixes `ep3_steerage`, `ep3_castle_garden`, `ep3_sweatshop` and `ep3_moving_in`; all eight walking clips re-rendered.
+  Filmstrips (10 fps, one cycle) were read for every walker: the runner (before/after: `review/ep3/gait_runner_before.jpg`,
+  `gait_runner_after.jpg`), the family walking out, Rivke's dash, Yankel through the crowd, Yankel and Rivke on Hester Street,
+  Yankel leaving the shtetl, Ma crossing her room, Michael on the sidewalk and the trunk carried up the stoop, the contractor,
+  the pier walkers. Planted feet are now 0.00 px error and drift in all eight clips.
+- **`ep3_knock`:** Rivke stands on straight legs, steps back from the door after knocking and stands clear of the door frame in the
+  hall (Sore further back), then turns to her mother as she translates; Sore's open-hand gesture is lower; "COMPOSITE CHARACTERS"
+  moved off the door to the floor area, bottom right.
+- **`ep3_hester` signs:** no letter shapes at all now (`e3SignMarks`: broken dashes at two heights and a few ticks on a pale board).
+  The ferry sign in `ep3_runner` is the cursive scribble line. (`ep3_names` still uses `hebrewish`; left for review.)
+- **`ep3_runner` payoff:** a push-in (z 2.0) on Rivke taking Shmuel's hand and the trunk dropping, 17.0 to 18.7 s, then back out.
+- Audits after the fixes: contacts (holds 0, hands and pairs 0 to 0.25 px, planted feet 0.00 px error and drift; steerage's berth
+  sitters 2 px as in Round 13c); text audit clean (no OUT, OVERLAP or SHORT) on runner, hester, knock.

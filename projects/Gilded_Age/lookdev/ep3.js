@@ -115,15 +115,38 @@ function stepWalk(fo, x0, dir, s, ground, name) {
     let L = Math.floor(n); if (((L % 2) + 2) % 2 !== f) L -= 1;  // the foothold this foot last landed on (parity = foot)
     const u = n - L;                                           // 0..1 planted, 1..2 swinging
     if (u <= 1) { feet[f] = hold(L); planted[f] = true; }
-    else { const v = u - 1, A = hold(L), B = hold(L + 2), lift = 0.07 * fo.h * Math.sin(Math.PI * v) + Math.max(0, A[1] - B[1]) * Math.sin(Math.PI * Math.min(1, v * 1.4));
+    else { const v = u - 1, A = hold(L), B = hold(L + 2), lift = 0.045 * fo.h * Math.sin(Math.PI * v) + Math.max(0, A[1] - B[1]) * Math.sin(Math.PI * Math.min(1, v * 1.4));
       feet[f] = [A[0] + (B[0] - A[0]) * ease(v), A[1] + (B[1] - A[1]) * smooth(0.2, 0.8, v) - lift]; planted[f] = false; }
   }
-  // the body rides on the supporting (planted) foot, a little crouched; the swinging foot may be higher or lower (on stairs)
+  // Round 14b (gait fix). rig.js draws an ankle never lower than 0.03 h above the figure's origin, so a sole sits on the origin's
+  // line whenever its ankle is anywhere from 0 to 0.03 h up. The old walk put the origin 0.02 h below the floor and always aimed the
+  // ankle 0.03 h above the sole: both knees bent through the whole cycle (a crouch). Now the origin sits on the floor while a planted
+  // leg can reach it nearly straight (99% of the leg), and dips only as much as the stride needs at double support (about 2% of
+  // height, the natural bob); a planted foot on the origin's line aims its ankle as low as that clamp allows, so the leg straightens.
   const support = planted[0] && planted[1] ? Math.max(feet[0][1], feet[1][1]) : planted[0] ? feet[0][1] : feet[1][1];
-  const o1 = {...fo, x: x0 + dir * s, y: support + 0.02 * fo.h, floorY: support, d: dir, an: {...fo.an, lean: 0, bob: 0, standing: true}};
-  const o2 = {...o1, an: E3K.legsTo(o1, feet)};
+  const bx = x0 + dir * s;
+  // arms swing opposite the legs unless the scene has posed them (a hand that holds something)
+  const kSw = clamp01(Math.abs(feet[0][0] - feet[1][0]) / R) * Math.sign((feet[0][0] - feet[1][0]) * dir), an0 = {...fo.an};
+  if (!fo.an || !fo.an.fArm) an0.fArm = [180 + 16 * kSw, 172 + 18 * kSw];
+  if (!fo.an || !fo.an.bArm) an0.bArm = [180 - 16 * kSw, 172 - 18 * kSw];
+  const o1 = e3Legs({...fo, x: bx, d: dir, floorY: support, an: {...an0, lean: 0, bob: 0, standing: true}}, feet, support, planted);
+  const o2 = o1;
   [0, 1].forEach((i) => E3K.log(planted[i] ? 'plant' : 'swing', name + '.' + i, feet[i], E3K.foot(o2, i), {t: s}));
   return o2;
+}
+// legs for a standing or walking figure: origin on the floor (support, world y) or dipped just enough for the planted feet to be
+// reached by a 99%-straight leg; each leg solved so the sole lands exactly on its foot point (see stepWalk). Returns new options.
+function e3Legs(fo, feet, support, planted = [true, true]) {
+  const {hip} = E3K.dims(fo), h = fo.h, Lr = 0.99 * hip, d = fo.d ?? 1, hx = (i) => (i === 0 ? 0.026 : -0.026);
+  let dip = 0;
+  [0, 1].forEach((i) => { if (!planted[i]) return; const dx = (feet[i][0] - fo.x) * d / h - hx(i), dyF = (support - feet[i][1]) / h;
+    dip = Math.max(dip, hip - 0.03 - dyF - Math.sqrt(Math.max(0, Lr * Lr - dx * dx))); });
+  const o = {...fo, y: support + dip * h};
+  const legs = [], shins = [];
+  [0, 1].forEach((i) => { const T = E3K.toLocal(o, feet[i][0], feet[i][1]), S = [hx(i), hip], fl = T[1];
+    let ank = fl + 0.03; if (fl < 1e-6) { const dx = T[0] - S[0]; ank = Math.min(0.03, Math.max(0, hip - Math.sqrt(Math.max(0, Lr * Lr - dx * dx)))); }
+    const A = E3K.solve2(S, [T[0], ank], hip * 0.52, hip * 0.48, (a, b) => (a[2][0] > b[2][0] ? a : b)); legs[i] = 180 - A[0]; shins[i] = 180 - A[1]; });
+  return {...o, an: {...o.an, legs, shins}};
 }
 // a contact shadow where a standing figure's feet meet the floor (skipped for sitting, lying or framed-in-a-window figures,
 // or placed at o.floorY when the floor is not at the feet)
@@ -1034,8 +1057,8 @@ function e3Settle(fo, u, name) {
   if (u <= 0) return fo;
   const d = fo.d ?? 1, A = E3K.foot(fo, 0), B = E3K.foot(fo, 1), fi = (A[0] - B[0]) * d >= 0 ? 0 : 1, F0 = fi ? B : A, K0 = fi ? A : B, e = ease(u);
   const T = [F0[0] - d * 0.11 * fo.h, F0[1]], P = [lerp(K0[0], T[0], e), lerp(K0[1], T[1], e) - 0.05 * fo.h * Math.sin(Math.PI * clamp01(u))];
-  const o1 = {...fo, x: lerp(fo.x, (F0[0] + T[0]) / 2 + d * 0.0 * fo.h, e)}, feet = fi ? [P, F0] : [F0, P];
-  const o2 = {...o1, an: E3K.legsTo(o1, feet)};
+  const o1 = {...fo, x: lerp(fo.x, (F0[0] + T[0]) / 2, e)}, feet = fi ? [P, F0] : [F0, P];
+  const o2 = e3Legs(o1, feet, fo.floorY ?? F0[1], fi ? [u >= 1, true] : [true, u >= 1]);
   E3K.log('plant', name + '.settle.' + fi, F0, E3K.foot(o2, fi));
   E3K.log(u >= 1 ? 'plant' : 'swing', name + '.settle.' + (1 - fi), P, E3K.foot(o2, 1 - fi));
   return o2;
@@ -1224,7 +1247,7 @@ function renderE3Runner(t) {
     if (u < 1.3) rv = plant(rv, [[xr0 + 0.04 * rv.h, G], [xr0 - 0.05 * rv.h, G]], 'rn.p.rivke.stand');
     // Yankel shoves through the crowd from the ferries (2.4 to 5.2)
     const xy1 = xs0 - 4 * Rs + 170, xy0 = xy1 + 9 * Ry, yu = e3Trap(u, 2.4, 5.2, 0.15);
-    let yk = stepWalk(nbOpts('nfather', {x: xy0, y: G, h: H, d: -1, hat: 'cap', coat: 'frock', det, rim: sun, an: {fArm: [120, 100], bArm: [200, 210], lean: 0, tilt: 6, expr: 'worried'}}), xy0, -1, 9 * Ry * yu, () => G, 'rn.p.yankel');
+    let yk = stepWalk(nbOpts('nfather', {x: xy0, y: G, h: H, d: -1, hat: 'cap', coat: 'frock', det, rim: sun, an: {lean: 0, tilt: 6, expr: 'worried'}}), xy0, -1, 9 * Ry * yu, () => G, 'rn.p.yankel');
     const crowd = []; const rc = rng(146);
     for (let k = 0; k < 9; k++) { const cx0 = 1650 + k * 95 + rc() * 30, near = Math.max(0, 1 - Math.abs(yk.x - cx0) / 110), fo = e3PersonOpts(rc, cx0, G - 6 - (k % 2) * 10, H, u, RN.ink, {an: {lean: -14 * near}});
       crowd.push(fo); }
