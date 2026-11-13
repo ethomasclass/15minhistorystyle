@@ -436,3 +436,93 @@ rose only 42 ft and were hidden by the rows in front (raised to 82 ft); tags col
 off the bottom (the solver now treats fixed text as obstacles; Brooklyn and side-by-side framings moved); the gold roof slab first
 rose into the lens and covered the plan (it now slides away north); the open building was sorted to the front and its side showed
 through its neighbour (fixed); the ink-to-pale switch at each lift start popped (now blended). Clip: 57 s at 30 fps.
+
+## Round 14 (Nov 12): Episode 3 scenes for the script
+
+The drawn scenes `ep3/script/VISUALS.md` asks for, in `ep3.js` (new code at the end of the file, under "Round 14"). The family
+has names now: Yankel (father), Sore (mother), Rivke (12), Shmuel (7), still the cast keys `nfather`, `nmother`, `ndaughter`
+(scale 0.8), `nson` (scale 0.5), all wheat gold; the Kellys coral; everyone else ink. 720p clips in `review/ep3/`, three stills
+each, and a reference sheet per scene (`sheet_<name>.jpg`, our stills beside period and Flow prop references).
+
+New helpers (all contacts go through E3K and are logged to `E3LOG`):
+- `e3Clasp(A, wa, B, wb, P, name)`: two hands meet at one point; both arms are solved onto it and the hand to hand distance is
+  logged as a `pair`. Used for every hand held between two people.
+- `e3Settle(fo, u, name)`: after a walk stops a stride apart, the back foot steps up beside the front one (front foot planted).
+- `e3Move(...)`: a hand on its way somewhere, solved like `reach` but logged as `move`, so the audit only counts real contacts.
+- `e3LongShadow(body, G)`: a low-sun shadow, the figure sheared along the ground and flattened; `e3TrunkAt(hx, hy)`: the trunk
+  drawn from its top handle; `e3HugBed(fo)`: a roped feather bed hugged with both hands under it; `e3Trap`: trapezoid travel.
+- `cgOutside(t, {city: false})`: Round 13's Castle Garden drawing without the Manhattan skyline (the fort from the Battery side).
+
+Scenes:
+- **`ep3_runner` (ch 1 cold open + ch 4 payoff, 23 s).** The Battery at dusk, May 1884: low sun on the right, long shadows
+  thrown left, warm rims, the Jersey shore and ships at anchor (masts, yards, stays) on the harbour, the fort (Castle Garden,
+  small, behind the depot's iron fence with its gate standing open), a ferry house on the right with arched slips, a blank sign
+  board with scribbles and a walking-beam ferry. Sore walks out with the trunk hanging from her near hand and Shmuel by the other
+  (`e3Clasp`), Rivke behind hugging the roped feather bed. The man in the good coat (ink, bowler) waits at the lamp post at the
+  right edge, a pure silhouette (no face detail) until he comes close; he walks up (5.6 to 8.4 s), smiling once the camera is in,
+  stoops and takes the trunk out of Sore's hand (both hands on the handle, then it swings across to his far hand), offers his
+  near hand, and Shmuel lets go of his mother, takes two steps and takes it (exact clasp at 11.3 s). Hard freeze 11.5 to 14.5 s:
+  a white flash, the frame dims, a teal ring on the two hands, "he has never heard of Yankel Rabinowitz", "NEW YORK CALLED THEM
+  RUNNERS". Cut through black to the payoff ("A FEW MINUTES LATER"): he leads Shmuel by the hand along the Battery with the
+  trunk, Sore follows with the feather bed; Rivke looks back at the ferry slips (teal arrow, "the ferries were this way",
+  "heading away from the ferries"), turns and runs, takes Shmuel's other hand (clasp) and pulls; he lets go, drops the trunk and
+  hurries off left out of frame; Yankel pushes through a crowd from the ferries (the crowd leans out of his way); "the man in the
+  good coat was gone". Nothing readable in the world: the ferry sign is scribbles.
+- **`ep3_shtetl` (ch 2, 18 s).** (1) Friday night: outside the small wooden house, the window with two brass Sabbath candles
+  lit (after the Flow candlesticks and challah props); the house opens up like `cutaway.js`: the whitewashed clay oven, the white
+  cloth, the challah under its embroidered cover, Sore circling her hands over the candles and covering her eyes, Rivke at the
+  table, Yankel and Shmuel seated (Shmuel's feet hang: a seven-year-old on a grown-up's chair; no foot contact is claimed).
+  (2) Spring 1881, night: far roofs burned to black rafters on the horizon against a red glow, smoke and sparks; no people, no
+  violence; Rivke at the dark window of the house in the foreground. (3) Dawn, 1882: Yankel leaves with a bundle on a stick,
+  steps down from the sill, turns and waves, walks off; Sore at the door post with Shmuel by the hand, Rivke on the step waving.
+- **`ep3_hester` (ch 6, 21 s).** A side-scroll down a pushcart market on Episode 1's tenement row (`street.js` `tenement()`):
+  signboards in Hebrew-style letters that cannot be read (`hebrewish`), carts end to end at the curb after the Flow pushcart
+  (plank box, two big spoked wheels, legs, long handles) with pots, apples, bolts of cloth, used coats on a pole; herring and
+  pickle barrels; a vendor behind each cart with a hand on its edge; shoppers bargaining in front (hands out, then pointing); a
+  goat on a rope held by a boy. Yankel walks ahead; Rivke follows, stops at the goat (feet settle together), and hurries to
+  catch up. Texts: "Rivke's first morning", "pushcarts, end to end", "for a second, it felt like home", "an enclave". Then the
+  same night: the room (`e3Room`, 84 px to the foot) and a kitchen beside it; Yankel and Sore asleep in the bed, Rivke and Shmuel
+  on the feather bed on the floor, the boarder (ink) on two chairs pushed together in the kitchen under his coat.
+- **`ep3_knock` (ch 9, 16 s).** The Kellys' flat in the evening, kelly_flat's look at room scale (wallpaper, airshaft window
+  with washing, coal stove and kettle, shelf of pots, the lamp, a pile of shirts), the door in the cut wall and the dark hall
+  outside with a gas jet. Sore and Rivke come along the hall; Rivke knocks three times (her knuckles touch the door at each
+  tap); Ma gets up from her sewing (feet planted, then under her), crosses the room, takes the handle and pulls the door open,
+  then folds her arms. Rivke translates, turning to her mother and back; Sore asks with an open hand ("a ticket, for her
+  sister"); Ma, arms folded, listens, then unfolds them and nods ("Ma knew exactly where").
+- **`ep3_moving_in` updated (ch 9, now 15 s).** Tag "SPRING 1886". Yankel wrestles the trunk at the foot of the stoop (its back
+  end on the flags); Michael Kelly (coral) comes home along the sidewalk, crouches and takes the other end in both hands (handle
+  and corner); they lift it level and carry it up the stoop between them, Yankel ahead with his far hand on the front handle;
+  the trunk tilts with the treads. Sore, Rivke and Shmuel wait out of sight and follow with the feather bed, samovar and
+  candlestick. The camera rises to Ma at her window, arms folded ("Ma Kelly is not so sure").
+- **`ep3_looking_backward` updated.** Now the 3000 x 1983 Internet Archive scan
+  (`ep3/public/img/g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg`), referenced in place (no copy), cropped to the
+  picture and caption (black margins and the PUCK masthead left out) and shown at its own aspect (1254 x 809). Every mark was
+  re-measured on the scan (pixel coordinates in `LBM`: the five men's heads and hats, their shadows' heads, the centre man's raised
+  hand, the newcomer's face, the caption line) and mapped to the desk through the crop, including the print's 0.6 degree turn on
+  the desk. The camera's shadow and caption pushes were re-aimed. The old 1280 px copy's offsets are kept as `LBP` (carried onto
+  the scan by an OpenCV ECC affine fit, correlation 0.86) for anything still measured on it.
+
+QA (two rounds of renders and stills, frames read at several times per clip):
+- **Round 1** (stills at 6 to 10 times per clip): the payoff ran off the promenade (sky showing under the floor), the ferry house
+  was out of frame, Sore crouching pushed her skirt through the floor (she now holds the trunk and the runner takes it from her
+  hand), the freeze drained the family's gold (now only dimmed), Rivke's bed hands and Shmuel's chair feet could not reach
+  (bed regrabbed; his feet now hang), the Shabbat window flames had no contrast, the boarder overhung his chairs, the fish floated
+  by a child, Michael's first takes of the trunk were out of reach, walkers stopped mid-stride (`e3Settle`), Ma's door handle
+  passed through her (she now pulls the door to about 30 degrees and lets it swing on).
+- **Round 2** (after a full render, plus the container restart): every clip re-rendered from the final code and checked as a
+  contact sheet of frames every 2 s; text audit (`audit_text.mjs`, every 0.25 s) found four short texts in our new scenes and five
+  in the Round 13 `ep3_looking_backward` read (all now at least 2.5 s; the read's beats were overlapped to make room). Final: no
+  OUT, no OVERLAP, no SHORT in all six clips.
+- **Contact audit** (every other frame, scratchpad `verify.mjs`; `move` hands excluded, they touch nothing): holds 0 px; hands
+  and hand to hand pairs 0 to 0.22 px; planted feet 0 to 0.52 px error and 0 to 0.52 px drift (the worst is Rivke's last run in
+  the payoff); seated and resting contacts 0 px. Moving_in: Michael's two hands on the trunk 0 px (he leans into the load on the
+  stoop). Knock: all 0 px except planted feet 0.17 px.
+- **Clips:** `ep3_runner` 23 s, `ep3_shtetl` 18 s, `ep3_hester` 21 s, `ep3_knock` 16 s, `ep3_moving_in` 15 s,
+  `ep3_looking_backward` 25 s. Stills: `rn_open/freeze/payoff`, `sh_candles/night/dawn`, `hs_carts/goat/room`,
+  `kn_knock/door/nod`, `mi_wide/stoop/window` (replaced), `lb_men/shadows/caption` (replaced). Sheets: `sheet_runner`, `sheet_shtetl`,
+  `sheet_hester`, `sheet_knock`, `sheet_moving_in`, `sheet_looking_backward` (built by a copy of `ep3sheet.py`'s layout).
+
+Known weak spots: the runner payoff is wide, so its figures are small (no faces); Rivke's run reads as a fast walk (the walk
+cycle is not a run); Sore covering her eyes is a rough hand pose; in the night room the sleepers are side-on silhouettes on a
+plain quilt; the goat is small and dark; the Hebrew-style sign letters are random strokes (unreadable on purpose) and might be
+checked by someone who reads Hebrew so no real word appears by chance; ch 2's "burned roofs" are a generic far row.
