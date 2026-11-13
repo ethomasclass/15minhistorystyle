@@ -66,8 +66,14 @@ function renderHesterB(T, o = {}) {
   const world = layerAt(c, 0.25, `<rect x="-3000" y="-2000" width="9000" height="3000" fill="url(#e3day)"/>`) + layerAt(c, 1, s.join('') + back.join('') + mid.join('') + front.join('') + fig(yk) + fig(rv));
   // the listed things, labelled in pen as they are named (anchored to the thing, so the label rides with it)
   const notes = [['herring', 1150, HS.cartY - 40, 9.9, 470], ['pickles', 1262, HS.cartY - 40, 11.3, 560], ['pots', 1306, HS.cartY - 100, 12.2, 430], ['used coats', 1486, HS.cartY - 190, 13.1, 520]];
-  for (const [txt, wx, wy, t0, sy] of notes) { if (T < t0 || T > t0 + 3.2) continue; const x = c.sx(wx), y = c.sy(wy), o = smooth(t0, t0 + 0.25, T) * (1 - smooth(t0 + 2.9, t0 + 3.2, T));
-    scr.push(`<g opacity="${f1(o * 100) / 100}">${line([[x, sy + 14], [x, y - 8]], '#111', 5)}${line([[x, sy + 14], [x, y - 8]], EX.orange, 2.5)}${penS(x - 50, sy, txt, 30, -3)}</g>`); }
+  // "Women bargaining in Yiddish": a shopper at the pots cart; "Signs in Hebrew letters": a shop sign (the boards carry abstract
+  // marks, never letters), labelled from below
+  const signAt = (wx) => { const r = rng(171); let x = -200; while (x < HS.x1 + 300) { const w = 240 + r() * 50; r(); if (x + 6 + w * 0.3 > wx) return [x + 6 + w * 0.3, FAR_GROUND - 146 + 8]; x += w + 4; } return [wx, FAR_GROUND - 138]; };
+  const sign = signAt(lhCamX(16.1) + 60);
+  notes.push(['bargaining in Yiddish', 120 + 7 * 180 + 70, HS.cartY - 70, 14.2, 600], ['signs in Hebrew letters', sign[0], sign[1], 16.1, 0, true]);
+  for (const [txt, wx, wy, t0, sy0, below] of notes) { if (T < t0 || T > t0 + 3.2) continue; const x = c.sx(wx), y = c.sy(wy), o = smooth(t0, t0 + 0.25, T) * (1 - smooth(t0 + 2.9, t0 + 3.2, T));
+    const sy = below ? y + 120 : sy0, a = below ? [x, sy - 30] : [x, sy + 14], b = below ? [x, y + 14] : [x, y - 8];
+    scr.push(`<g opacity="${f1(o * 100) / 100}">${line([a, b], '#111', 5)}${line([a, b], EX.orange, 2.5)}${penS(x - 50, sy, txt, 30, -3)}</g>`); }
   return frame(e3Defs2(T), `<rect width="1920" height="1080" fill="#0B1414"/>`, world, scr.join(''), T);
 }
 

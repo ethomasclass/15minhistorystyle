@@ -73,45 +73,45 @@ EDITS.ch09 = () => {
       lNote('she had done it herself, for Nora', 900, 230, lVis(T, c.shed - 0.2, c.tell + 0.6)) +
       lNote('Saturday: their Sabbath', 1040, 990, lVis(T, c.sabbath - 0.3, c.sunday + 0.6))},
     // 4. "So, who helped newcomers make it in America, and who tried to keep them out?" The question, over the doorway.
-    {a: c.so - 0.1, b: c.mostly - 0.1, cut: true, live: true, draw: (T) => knock(c.so) + dimBy(0.74 * fin(T, c.so, 0.6)) +
+    {a: c.so - 0.1, b: c.mostly + 0.45, cut: true, live: true, draw: (T) => knock(c.so) + dimBy(0.74 * fin(T, c.so, 0.6)) +
       op(fin(T, c.so + 0.1), mono('the question', {x: 130, y: 300, size: 28, color: C.teal, ls: 6})) +
       slideUp(fin(T, c.so + 0.4, 0.45), `<div class="tx" style="position:absolute;left:124px;top:350px;font-family:Abril;font-size:96px;line-height:1.08;color:${C.cream}">Who helped newcomers<br>make it in America,</div>`) +
-      (T > c.and2 - 0.1 ? slideUp(fin(T, c.and2 - 0.1), tape('and who tried to keep them out?', {x: 120, y: 610, size: 84, rot: -2, seed: 31})) : '')},
+      (T > c.and2 - 0.35 ? slideUp(fin(T, c.and2 - 0.35), tape('and who tried to keep them out?', {x: 120, y: 610, size: 84, rot: -2, seed: 31})) : '')},
     // 5. "Mostly, newcomers helped each other. A letter. A ticket. A job through a friend. A neighbor at the door." The chain of
     //    letters, tickets and jobs (ep3_chain, complete), the answers on tape.
-    {a: c.mostly - 0.1, b: c.walls - 0.35, cut: true, draw: (T) => lQuiet(() => renderChain(14.6)) + dimBy(0.45) +
-      slideUp(fin(T, c.mostly), tape('NEWCOMERS HELPED EACH OTHER', {x: 140, y: 120, size: 76, rot: -2, seed: 901})) +
+    {a: c.mostly + 0.45, b: c.walls + 0.75, cut: true, draw: (T) => lQuiet(() => renderChain(14.6)) + dimBy(0.45) +
+      slideUp(fin(T, c.mostly + 0.45), tape('NEWCOMERS HELPED EACH OTHER', {x: 140, y: 120, size: 76, rot: -2, seed: 901})) +
       (T > c.letter - 0.1 ? slideUp(fin(T, c.letter - 0.1), tape('A LETTER', {x: 190, y: 330, size: 60, rot: -3, seed: 902})) : '') +
       (T > c.ticket - 0.1 ? slideUp(fin(T, c.ticket - 0.1), tape('A TICKET', {x: 600, y: 470, size: 60, rot: 2, seed: 903})) : '') +
       (T > c.job - 0.1 ? slideUp(fin(T, c.job - 0.1), tape('A JOB THROUGH A FRIEND', {x: 1040, y: 360, size: 60, rot: -2, seed: 904})) : '') +
-      (T > c.neighbor - 0.2 ? slideUp(fin(T, c.neighbor - 0.2), tape('A NEIGHBOR AT THE DOOR', {x: 520, y: 700, size: 64, rot: -1, seed: 905})) : '')},
+      (T > c.neighbor - 0.45 ? slideUp(fin(T, c.neighbor - 0.45), tape('A NEIGHBOR AT THE DOOR', {x: 520, y: 700, size: 64, rot: -1, seed: 905})) : '')},
     // 6. "The walls came from Americans, and some of them had once been newcomers too." Keppler's shadows.
-    {a: c.walls - 0.35, b: c.sometimes - 0.3, cut: true, draw: (T) => renderLookingBackward(remap([[c.walls - 0.35, 9.4], [c.sometimes - 0.3, 13.2]])(T)) +
-      (T > c.walls ? slideUp(fin(T, c.walls), tape('THE WALLS', {x: 1300, y: 860, size: 64, rot: -2, seed: 906})) : '')},
+    {a: c.walls + 0.75, b: c.sometimes - 0.3, cut: true, draw: (T) => renderLookingBackward(remap([[c.walls + 0.75, 9.8], [c.sometimes - 0.3, 13.2]])(T)) +
+      (T > c.walls + 0.75 ? slideUp(fin(T, c.walls + 0.75), tape('THE WALLS', {x: 1300, y: 860, size: 64, rot: -2, seed: 906})) : '')},
     // 7. "And sometimes, like Ma Kelly, the same person did a little of both." Ma at her window, arms folded; Ma at her door, nodding.
-    {a: c.sometimes - 0.3, b: c.fall - 0.25, cut: true, live: true, draw: (T) => twoScenes(renderMovingInB(28.6 + 0.2 * (T - c.sometimes), {t0: 19.85, cam: () => ({z: 4.6, ux: MI.win.x + 119, uy: MI.win.y + 40}), mSteps: 16, mStart: -2.6, carT: -99, look: () => 1}),
+    {a: c.sometimes - 0.3, b: c.statue + 0.15, cut: true, live: true, draw: (T) => twoScenes(renderMovingInB(28.6 + 0.2 * (T - c.sometimes), {t0: 19.85, cam: () => ({z: 4.6, ux: MI.win.x + 119, uy: MI.win.y + 40}), mSteps: 16, mStart: -2.6, carT: -99, look: () => 1}),
       knock(c.sunday + 0.2 + 0.25 * (T - c.sometimes))) +
-      lNote('"More of them."', 140, 230, lVis(T, c.sometimes, c.fall)) + lNote('"Sunday, then."', 1100, 230, lVis(T, c.sometimes + 0.6, c.fall)) +
+      lNote('"More of them."', 140, 230, lVis(T, c.sometimes, c.statue + 0.3)) + lNote('"Sunday, then."', 1100, 230, lVis(T, c.sometimes + 0.6, c.statue + 0.3)) +
       (T > c.little - 0.2 ? slideUp(fin(T, c.little - 0.2), tape('A LITTLE OF BOTH', {x: 640, y: 820, size: 76, rot: -2, seed: 907})) : '')},
     // 8. "That fall, the Statue of Liberty was finally dedicated in New York Harbor." Moran's painting of the day, 1886.
-    {a: c.fall - 0.25, b: c.rab - 0.25, cut: true, draw: (T) => lPrint(T, c.fall, c.rab, 'c_arrival/moran_unveiling_statue_of_liberty_1886_commons.jpg', {x: 610, y: 36, w: 700, rot: 1, z: 0.04, oy: 300}) +
-      lTag('OCTOBER 28, 1886', 130, 120, lVis(T, c.statue, c.rab)) +
-      lSrc('THE UNVEILING OF THE STATUE OF LIBERTY · EDWARD MORAN, 1886 · WIKIMEDIA COMMONS', lVis(T, c.fall, c.rab))},
+    {a: c.statue + 0.15, b: c.rab - 0.25, cut: true, draw: (T) => lPrint(T, c.statue + 0.15, c.rab, 'c_arrival/moran_unveiling_statue_of_liberty_1886_commons.jpg', {x: 610, y: 36, w: 700, rot: 1, z: 0.04, oy: 300}) +
+      lTag('OCTOBER 28, 1886', 130, 120, lVis(T, c.statue + 0.2, c.rab)) +
+      lSrc('THE UNVEILING OF THE STATUE OF LIBERTY · EDWARD MORAN, 1886 · WIKIMEDIA COMMONS', lVis(T, c.statue + 0.2, c.rab))},
     // 9. "And the Rabinowitzes sent a letter, with a ticket folded inside." The letter at the kitchen table (ep3_letter), the
     //    ticket folded in.
     {a: c.rab - 0.25, b: c.next + 0.45, cut: true, live: true, draw: (T) => lQuiet(() => renderLetter(remap([[c.rab - 0.25, 0.4], [c.folded2 - 0.5, 3.3], [c.next + 0.45, 4.7]])(T))) +
       lTag('THE RABINOWITZES · BROOKLYN · FALL 1886', 40, 1040, lVis(T, c.rab, c.next + 0.6)) +
-      lNote('a ticket, folded inside', 1000, 200, lVis(T, c.folded2 - 0.5, c.next + 0.6))},
+      lNote('a ticket, folded inside', 1000, 200, lVis(T, c.rab + 1.0, c.next + 0.6))},
     // 10. "Next time: Michael meets a man who can get you a job, a ton of coal, or a lawyer. All he wants in return is your vote."
-    {a: c.next + 0.45, b: c.thanks - 0.1, cut: true, draw: (T) => desk() + dimBy(0.1) +
+    {a: c.next + 0.45, b: c.thanks + 0.25, cut: true, draw: (T) => desk() + dimBy(0.1) +
       slideUp(fin(T, c.next + 0.45), tape('NEXT TIME', {x: 140, y: 150, size: 96, rot: -2, seed: 911})) +
-      op(fin(T, c.michael > 0 ? c.next + 0.9 : 0), mono('michael kelly meets a man who can get you...', {x: 160, y: 330, size: 30, color: C.teal, ls: 4})) +
+      op(fin(T, c.next + 0.9), mono('michael kelly meets a man who can get you...', {x: 160, y: 330, size: 30, color: C.teal, ls: 4})) +
       (T > c.jobN - 0.15 ? slideUp(fin(T, c.jobN - 0.15), tape('A JOB', {x: 220, y: 450, size: 64, rot: -3, seed: 912})) : '') +
       (T > c.coal - 0.4 ? slideUp(fin(T, c.coal - 0.4), tape('A TON OF COAL', {x: 650, y: 520, size: 64, rot: 2, seed: 913})) : '') +
       (T > c.lawyer - 0.15 ? slideUp(fin(T, c.lawyer - 0.15), tape('A LAWYER', {x: 1260, y: 450, size: 64, rot: -2, seed: 914})) : '') +
-      (T > c.all ? slideUp(fin(T, c.all), tape('ALL HE WANTS: YOUR VOTE', {x: 420, y: 760, size: 84, rot: -2, seed: 915})) : '')},
+      (T > c.all - 0.2 ? slideUp(fin(T, c.all - 0.2), tape('ALL HE WANTS: YOUR VOTE', {x: 420, y: 760, size: 84, rot: -2, seed: 915})) : '')},
     // 11. "Thanks for watching. Subscribe for more, and I'll see you next time." (The 20 s end screen follows: brand.js endscreen.)
-    {a: c.thanks - 0.1, b: dur, cut: true, draw: (T) => desk() + slideUp(fin(T, c.thanks), tape('THANKS FOR WATCHING', {x: 480, y: 420, size: 100, rot: -2, seed: 129}))},
+    {a: c.thanks + 0.25, b: dur, cut: true, draw: (T) => desk() + slideUp(fin(T, c.thanks + 0.25), tape('THANKS FOR WATCHING', {x: 480, y: 420, size: 100, rot: -2, seed: 129}))},
   ];
   return {dur, shots};
 };

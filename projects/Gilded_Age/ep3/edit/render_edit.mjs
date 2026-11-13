@@ -11,7 +11,8 @@ const wf = fs.readdirSync(audio).find((f) => f.startsWith(key + '_') && f.endsWi
 const ch = wf ? wf.replace('.words.json', '') : key;   // cards with no narration (the title) have no words file
 let words = wf ? JSON.parse(fs.readFileSync(path.join(audio, wf), 'utf8')) : null;
 const browser = await chromium.launch();
-const page = await browser.newPage({viewport: {width: 1920, height: 1080}});
+// SCALE=0.6667 renders the 1920 x 1080 stage straight to 1280 x 720 (review renders: a third of the pixels, a third of the disk)
+const page = await browser.newPage({viewport: {width: 1920, height: 1080}, deviceScaleFactor: Number(process.env.SCALE || 1)});
 page.on('pageerror', (e) => { console.error('page error:', e.message); process.exit(1); });
 await page.goto('file://' + path.join(here, 'edit.html'));
 if (!words) words = {duration: await page.evaluate((k) => EDITS[k]().dur, key), words: []};

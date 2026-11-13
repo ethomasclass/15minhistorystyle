@@ -22,6 +22,11 @@ if [ "$PREVIEW" = coldopen ]; then PARTS=(ch01 title); OUT=ep3_coldopen; else
   [ -f review/brk_${RES}p.mp4 ] || card brk 2.0 -i $M1/chunk_snap.wav -filter_complex "[1]atrim=0:1.2,asetpts=PTS-STARTPTS,volume=0.3,afade=t=out:st=1.1:d=0.1,apad=whole_dur=2.0,$ST[a]"
   PARTS=(ch01 title); [ -f review/ch02_${RES}p.mp4 ] && PARTS+=(ch02)
   for c in ch03 ch04 ch05 ch06 ch07 ch08 ch09; do [ -f review/${c}_${RES}p.mp4 ] && PARTS+=(brk $c); done
+  # the 20 s end screen after chapter 9 (as Ep 2): ga_gilded_theme carries on from where chapter 9 leaves it (99.8 s into the cue)
+  if [ -f review/ch09_${RES}p.mp4 ]; then
+    [ -f review/endscreen_${RES}p.mp4 ] || card endscreen 20 -ss 99.8 -i $M1/ga_gilded_theme.mp3 -filter_complex "[1]atrim=0:20,asetpts=PTS-STARTPTS,volume=0.105,afade=t=in:d=0.08,afade=t=out:st=18.5:d=1.5,apad=whole_dur=20,$ST[a]"
+    PARTS+=(endscreen)
+  fi
   OUT=ep3_full
 fi
 IN=(); FL=""; i=0
