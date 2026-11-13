@@ -7,6 +7,7 @@
 #   Narration: ../public/audio/<ch>.scene.wav when it exists (character lines placed in their room, SOUND.md), else <ch>.wav;
 #   <ch>.fx.wav (beds and spots, already timed) is mixed in at full volume when it exists.
 #   -> review/<ch>_720p.mp4 (frames in out/<ch>/ are deleted after encoding; KEEP=1 keeps them)
+#   FRAMES=<dir> ./build_ch.sh ...   render the frames into <dir> instead of out/<ch>/ (deleted after encoding, as out/<ch>/)
 #   RES=1080 ./build_ch.sh ...   full-size master chapter, no scale, CRF 18 -> review/<ch>_1080p.mp4 (same mix; default RES=720)
 set -e
 cd "$(dirname "$0")"
@@ -17,12 +18,13 @@ CH=$(basename $(ls ../public/audio/${KEY}_*.words.json) .words.json)
 WAV=../public/audio/$CH.wav; [ -f ../public/audio/$CH.scene.wav ] && WAV=../public/audio/$CH.scene.wav
 N=$(python3 -c "import math;print(math.ceil($(node render_edit.mjs $KEY --dur)*30))")   # the edit's length
 DUR=$(python3 -c "print($N/30)")
-mkdir -p out/$KEY review
-if [ ! -f out/$KEY/f$(printf %04d $((N - 1))).png ]; then
+FR=${FRAMES:-out/$KEY}
+mkdir -p "$FR" review
+if [ ! -f "$FR"/f$(printf %04d $((N - 1))).png ]; then
   P=4; STEP=$(( (N + P - 1) / P ))
-  for i in $(seq 0 $((P - 1))); do node render_edit.mjs $KEY out/$KEY $((i * STEP)) $(( (i + 1) * STEP )) & done; wait
+  for i in $(seq 0 $((P - 1))); do node render_edit.mjs $KEY "$FR" $((i * STEP)) $(( (i + 1) * STEP )) & done; wait
 fi
-ARGS=(-framerate 30 -i out/$KEY/f%04d.png -i $WAV); FL=""; MIX="[1]"; k=2
+ARGS=(-framerate 30 -i "$FR"/f%04d.png -i $WAV); FL=""; MIX="[1]"; k=2
 if [ -f ../public/audio/$CH.fx.wav ]; then ARGS+=(-i ../public/audio/$CH.fx.wav); MIX+="[$k]"; k=$((k + 1)); fi
 for spec in "$@"; do
   IFS=@ read -r CUE VOL START OFF END FOD <<< "$spec"; END=${END:-$DUR}; FOD=${FOD:-1.4}
@@ -39,5 +41,5 @@ for spec in $SFX; do
 done
 FL+="${MIX}amix=inputs=$((k - 1)):normalize=0,aformat=channel_layouts=stereo[a]"
 ffmpeg -v error -y "${ARGS[@]}" -filter_complex "$FL" -map 0:v -map "[a]" "${VF[@]}" -c:v libx264 -pix_fmt yuv420p -crf $CRF -c:a aac -b:a 160k -t $DUR review/${KEY}_${RES}p.mp4
-[ -n "$KEEP" ] || rm -rf "out/${KEY:?}"   # frames are ~3 GB a chapter: keep only the video
+[ -n "$KEEP" ] || rm -rf "${FR:?}"   # frames are ~3 GB a chapter: keep only the video
 echo "review/${KEY}_${RES}p.mp4"

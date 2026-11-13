@@ -239,4 +239,196 @@ function renderUSMap(T, o = {}) {
   return xpFrame(T, s.join(''), scr.join(''));
 }
 
-if (typeof window !== 'undefined') Object.assign(window, {renderHesterB, renderRoomB, renderSweatshopB, renderJarB, renderUSMap, renderModelShot, lhCam, LH});
+
+/* ================= ch 9: the knock at Ma Kelly's door, the whole conversation (variant of renderE3Knock) ================= */
+// The same flat, hall and door as ep3.js renderE3Knock; the edit gives every beat a narration time (o.beats), the camera
+// (o.cam), who is talking (o.talk, o.mouth: the words.json 'who' spans), Rivke's turns (o.rivkeTurn) and the speakers' hand keys
+// (o.maArm, o.rivkeArm: [T, shoulder, elbow]).
+function renderKnockB(T, o) {
+  const t = T, K = o.beats;
+  const {x0, x1, F, ceil, wallFoot, H} = RM, s = [], scr = [];
+  const c = cam2(o.cam(T)), lod = lodFor(H * 0.9 * c.z);
+  const fl = 0.86 + 0.08 * Math.sin(t * 7.3) + 0.05 * Math.sin(t * 16.1);
+  const room = e3Room({door: true, seed: 181, paper: 0.16});
+  s.push(room.back);
+  // the hall outside the door: dark boards, a gas jet on the wall, the stair rail
+  const h0 = x0 - 760;
+  s.push(`<rect x="${h0}" y="${ceil}" width="${x0 - 34 - h0}" height="${wallFoot - ceil}" fill="#101C1B"/>` + MAT.floor(h0, x0 - 34, wallFoot, F + 70, {kind: 'planks', base: '#2A251C', seed: 182, size: 50, vp: (h0 + x0) / 2}) +
+    glowC(x0 - 420, F - 430, 260, 0.45, 'mswarm') + `<rect x="${x0 - 424}" y="${F - 440}" width="8" height="30" fill="#0D0C09"/><ellipse cx="${x0 - 420}" cy="${F - 450}" rx="5" ry="10" fill="#FFF3D6"/>` +
+    `<rect x="${h0 + 60}" y="${F - 360}" width="16" height="360" fill="#0D0C09"/>` + line([[h0 + 68, F - 350], [h0 - 200, F - 560]], '#0D0C09', 10));
+  // the flat (kelly_flat's look): the airshaft window with washing across the shaft, the coal stove and kettle, the shelf of pots
+  const wx = 860, wy = 360;
+  s.push(`<rect x="${wx - 14}" y="${wy - 14}" width="218" height="318" fill="#0D0C09"/>` + MAT.brick(wx, wy, 190, 290, {base: '#2B4744', seed: 183, soot: 'bottom', bw: 26, bh: 12}) + `<rect x="${wx}" y="${wy}" width="190" height="290" fill="url(#knshaft)"/>` +
+    line([[wx, wy + 60], [wx + 190, wy + 72]], '#0D0C09', 2) + [0, 1].map((k) => `<path d="M${wx + 30 + k * 80},${wy + 64 + k * 5} l44,2 l-4,${54 + 8 * Math.sin(t * 1.3 + k)} l-36,-2 Z" fill="#4E726C"/>`).join('') +
+    `<rect x="${wx + 91}" y="${wy}" width="8" height="290" fill="#0D0C09"/><rect x="${wx}" y="${wy + 140}" width="190" height="8" fill="#0D0C09"/><rect x="${wx - 24}" y="${wy + 300}" width="238" height="14" fill="#0D0C09"/>`);
+  const sx = 1270;
+  s.push(`<rect x="${sx}" y="${wallFoot - 230}" width="170" height="210" fill="#0D0C09"/><rect x="${sx - 8}" y="${wallFoot - 240}" width="186" height="14" fill="#0D0C09"/><rect x="${sx + 120}" y="${ceil}" width="28" height="${wallFoot - 240 - ceil}" fill="#0D0C09"/><rect x="${sx + 24}" y="${wallFoot - 170}" width="70" height="44" fill="#FFF3D6" opacity="${f1(0.4 + 0.1 * Math.sin(t * 9))}"/>` +
+    `<path d="M${sx + 20},${wallFoot - 240} q0,-44 44,-44 q44,0 44,44 Z" fill="#0D0C09"/>` + glowC(sx + 60, wallFoot - 150, 200, 0.4 * fl, 'mswarm') + MAT.smoke(sx + 80, wallFoot - 300, t, {col: 'A3BAB2', k: 0.4, n: 5, rise: 140, drift: 50, seed: 184}));
+  s.push(`<rect x="560" y="330" width="230" height="10" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<path d="M${578 + k * 70},330 l6,-${40 + (k % 2) * 14} l40,0 l6,${40 + (k % 2) * 14} Z" fill="#0D0C09"/>`).join(''));
+  // the table and the lamp, a pile of shirts; Ma's chair
+  const tx = 1000, ty = F - 250;
+  s.push(glowC(tx + 110, ty - 90, 560, 0.8 * fl, 'mswarm') + glowC(tx + 110, ty - 90, 140, 0.55 * fl));
+  s.push(MAT.shadow(tx + 110, F + 4, 200, 0.4) + `<rect x="${tx - 100}" y="${ty}" width="300" height="14" fill="#2B2418"/><rect x="${tx - 86}" y="${ty + 14}" width="12" height="${F - ty - 14}" fill="#0D0C09"/><rect x="${tx + 174}" y="${ty + 14}" width="12" height="${F - ty - 14}" fill="#0D0C09"/>`);
+  s.push(`<path d="M${tx + 90},${ty} l10,-40 q-22,-26 18,-44 q40,18 18,44 l10,40 Z" fill="#0D0C09"/><path d="M${tx + 104},${ty - 86} q16,-52 32,0 l0,8 l-32,0 Z" fill="${E3.cream}" opacity="${f1(0.55 + 0.3 * fl)}"/><ellipse cx="${tx + 120}" cy="${ty - 96}" rx="5" ry="12" fill="#FFF3D6"/>`);
+  for (let k = 0; k < 5; k++) s.push(`<path d="M${tx - 80 + k * 2},${ty - 6 - k * 9} l100,0 l4,9 l-104,0 Z" fill="#DFE0D6" opacity="0.7"/>`);
+  const chx = 1230, seat = F - 150;
+  s.push(`<rect x="${chx - 50}" y="${seat}" width="100" height="12" fill="#0D0C09"/><rect x="${chx - 44}" y="${seat + 12}" width="10" height="${F - seat - 12}" fill="#0D0C09"/><rect x="${chx + 34}" y="${seat + 12}" width="10" height="${F - seat - 12}" fill="#0D0C09"/><rect x="${chx + 34}" y="${seat - 230}" width="10" height="230" fill="#0D0C09"/>`);
+  // ---- the acting (the edit's): every beat is a narration time in K, and who speaks when comes from the words (o.talk(who, T),
+  // o.mouth(who, T)). Ma: sewing at the table; looks up at the knocks; gets up, crosses, takes the handle and pulls the door open;
+  // folds her arms; listens; looks down (remembering); unfolds them and answers with her hands. Rivke knocks, steps back, turns
+  // to her mother and back as she translates; Sore asks with an open hand and nods at the end.
+  const bump = (a, d) => (t > a && t < a + d ? Math.sin(Math.PI * (t - a) / d) : 0);
+  const keysAt = (KK, def) => { if (!KK.length || t <= KK[0][0]) return KK.length ? [KK[0][1], KK[0][2]] : def; for (let i = 1; i < KK.length; i++) if (t <= KK[i][0]) {
+    const u = ease((t - KK[i - 1][0]) / (KK[i][0] - KK[i - 1][0])); return [lerp(KK[i - 1][1], KK[i][1], u), lerp(KK[i - 1][2], KK[i][2], u)]; } return [KK[KK.length - 1][1], KK[KK.length - 1][2]]; };
+  const rimM = {c: '#FFE6C9', a: lod.rimA * 0.8 * fl, dx: -0.01, dy: -0.004};
+  const mR = e3R(H * 0.9), mx1 = x0 + 120, steps = 4, mx0 = mx1 + steps * mR;
+  const rise = smooth(K.rise, K.rise + 0.5, t), walk = e3Trap(t, K.cross, K.cross + K.crossDur), fold = smooth(K.fold, K.fold + 0.4, t) * (1 - smooth(K.unfold, K.unfold + 0.5, t));
+  const maTalk = o.talk('MA', t), maMouth = o.mouth('MA', t);
+  const nod = -8 * (bump(K.nod1, 0.5) + bump(K.nod2, 0.45) + 0.6 * bump(K.nod2 + 0.45, 0.4));
+  const maTilt = t < K.knock[0] ? -14 + 2 * Math.sin(t * 1.3) : t < K.rise + 0.4 ? 4 : t > K.recall && t < K.recall + 2.2 ? -12 * bump(K.recall, 2.2) - 3 : (maTalk ? 2 + 3 * Math.sin(t * 5.1) : 1.5 * Math.sin(t * 0.8)) + nod;
+  const maExpr = maMouth ? 'awe' : t > K.fold ? 'set' : 'neutral';
+  let ma, over = '';
+  const baseO = {x: mx0, y: F, h: H, d: -1, det: lod.det, rim: rimM, an: {tilt: maTilt, expr: maExpr, blink: (t + 0.5) % 3.7 < 0.12}};
+  if (t < K.cross) { // seated, then rising, feet planted where they rest
+    const st = sitOn(cast('mother', {...baseO, an: {...baseO.an}}), F - 150, F, 0.2, 'kb.ma.seat');
+    const feet = [E3K.foot(st, 0), E3K.foot(st, 1)], fUnder = [[mx0 - 0.04 * st.h, F], [mx0 + 0.04 * st.h, F]], fr = smooth(0, 0.7, rise);
+    const feetR = [[lerp(feet[0][0], fUnder[0][0], fr), F], [lerp(feet[1][0], fUnder[1][0], fr), F]];
+    ma = rise > 0 ? plant({...st, y: lerp(st.y, F, rise), an: {...st.an, legs: [lerp(86, 9, rise), lerp(80, -8, rise)], shins: [lerp(6, 5, rise), lerp(0, -5, rise)], standing: rise > 0.5}}, feetR, 'kb.ma.rise') : st;
+    if (t < K.knock[0] + 0.15) { const k = Math.max(0, Math.sin(t * 3.4)); ma = reach(ma, 'f', tx + 160 - 30 * k, ty - 4, 'kb.ma.sew'); ma = reach(ma, 'b', tx + 176, ty - 2, 'kb.ma.cloth'); }
+  } else if (t < K.cross + K.crossDur + 0.05) {
+    ma = stepWalk(cast('mother', {...baseO, an: {...baseO.an}}), mx0, -1, steps * mR * walk, () => F, 'kb.ma.walk');
+  } else { // at the door: settled, then standing; the arms as the scene needs them
+    const m = maFig({...baseO, an: {...baseO.an}}, fold);
+    const arrived = stepWalk({...m.fo, an: {...m.fo.an, fArm: undefined, bArm: undefined}}, mx0, -1, steps * mR, () => F, 'kb.ma.walk');
+    const settle = smooth(K.cross + K.crossDur + 0.05, K.cross + K.crossDur + 0.45, t);
+    const sway = POSES.stand(t, 0.6);
+    if (settle < 1) ma = e3Settle(arrived, settle, 'kb.ma');
+    else ma = e3Stand({...arrived, y: F, floorY: F, an: {...arrived.an, ...sway, tilt: maTilt, expr: maExpr}}, mx1 - 0.0, mx1 - 0.0, 0, 'kb.ma.stand');
+    // her hands while she talks (unfolded): "Tell her" a small open hand toward Sore; "I'll take her" to her chest; "Saturday."
+    // one finger up; "Sunday, then" the hand turns over; "And tell her this" the finger up at Rivke; "...nobody talks to anybody"
+    // a wag; "Nobody." a flat chop down
+    const MA_F = o.maArm || [], arm = fold > 0 ? m.fo.an.fArm : keysAt(MA_F, [176, 180]), barm = fold > 0 ? m.fo.an.bArm : [182, 186];
+    const wag = t > K.wag0 && t < K.wag1 ? 14 * Math.sin((t - K.wag0) * 11) : 0;
+    ma = {...ma, an: {...ma.an, fArm: [arm[0], arm[1] + wag], bArm: barm, lean: fold > 0 ? 0 : (maTalk ? 2 : 0)}};
+    over = fold > 0.85 ? foldedArms(ma.x, ma.y, ma.h, -1, ma.fill, ma.tones.tone) : '';
+  }
+  // the door: her hand on the handle; she pulls it open and lets go, it swings on
+  const da = 30 * smooth(K.open, K.open + 0.35, t) + 48 * smooth(K.open + 0.35, K.open + 0.9, t), door = knDoor(da, -9);
+  if (t > K.open - 0.25 && t < K.open + 0.45) { const gN = E3K.hand(ma, 'f'), k = smooth(K.open - 0.25, K.open - 0.05, t);
+    ma = t < K.open - 0.05 ? e3Move(ma, 'f', lerp(gN.x, door.handle[0], k), lerp(gN.y, door.handle[1], k), 'kb.ma.toHandle') : reach(ma, 'f', door.handle[0], door.handle[1], 'kb.ma.handle'); }
+  if (t >= K.open + 0.45 && t < K.open + 0.8) { const hA = knDoor(30, -9).handle, gN = E3K.hand(ma, 'f'), k = smooth(K.open + 0.45, K.open + 0.8, t); ma = e3Move(ma, 'f', lerp(hA[0], gN.x, k), lerp(hA[1], gN.y, k), 'kb.ma.letGo'); }
+  s.push(door.svg);
+  // Sore and Rivke along the hall; Rivke knocks at K.knock; steps back; translates
+  const rimV = {c: '#FFF3D6', a: lod.rimA * 0.5, dx: 0.01, dy: -0.004}, vR = e3R(H * 0.8), sR = e3R(H * 0.88);
+  const rx1 = x0 - 140, sx1 = x0 - 480, wv = e3Trap(t, K.hall, K.hall + 2.2);
+  const rvTalk = o.talk('RIVKE', t), rvMouth = o.mouth('RIVKE', t);
+  const turned = o.rivkeTurn(t); // Rivke facing her mother (relaying), else facing Ma
+  const rvTilt = turned ? 6 : rvTalk ? (t > K.sabbath0 && t < K.sabbath1 ? -8 : 7) + 3 * Math.sin(t * 6.1) : (o.talk('MA', t) ? 10 : 5) + 2 * Math.sin(t * 0.9);
+  const rvExpr = rvMouth ? 'awe' : t > K.sabbath0 && t < K.sabbath1 + 0.6 ? 'worried' : 'neutral';
+  let rv = stepWalk(nbOpts('ndaughter', {x: rx1 - 4 * vR, y: F, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimV, an: {tilt: 2, expr: 'neutral', blink: (t + 1) % 4 < 0.12}}), rx1 - 4 * vR, 1, 4 * vR * wv, () => F, 'kb.rivke');
+  let so = stepWalk(nbOpts('nmother', {x: sx1 - 4 * sR, y: F, h: H, d: 1, det: lod.det, rim: rimV, an: {tilt: 0, expr: 'neutral', blink: t % 3.9 < 0.12}}), sx1 - 4 * sR, 1, 4 * sR * wv, () => F, 'kb.sore');
+  const kEnd = K.hall + 2.2;
+  rv = e3Settle(rv, smooth(kEnd, kEnd + 0.2, t), 'kb.rivke'); so = e3Settle(so, smooth(kEnd + 0.1, kEnd + 0.4, t), 'kb.sore');
+  if (t >= kEnd + 0.4) { const soTilt = (o.talk('MA', t) ? 6 : 2) + -7 * (bump(K.soreNod, 0.5) + bump(K.soreNod + 0.55, 0.45)) + (turned ? 8 : 0);
+    so = e3Stand({...so, y: F, floorY: F, an: {...so.an, ...POSES.stand(t, 0.1), tilt: soTilt, expr: t > K.sister - 0.3 && t < K.sister + 2.4 ? 'worried' : 'neutral'}}, so.x, so.x, 0, 'kb.sore.stand'); }
+  if (t >= kEnd + 0.2) {
+    const back = smooth(K.stepBack, K.stepBack + 0.6, t), xa = rv.x, xb = rv.x - 80;
+    const base = {...rv, y: F, floorY: F, an: {...POSES.stand(t, 0.4), tilt: rvTilt, expr: rvExpr, blink: (t + 1) % 4 < 0.12}};
+    rv = t < K.stepBack ? e3Stand(base, xa, xa, 0, 'kb.rivke.stand') : t < K.stepBack + 0.6 ? e3Stand(base, xa, xb, (t - K.stepBack) / 0.6, 'kb.rivke.step') : e3Stand({...base, d: turned ? -1 : 1}, xb, xb, 0, 'kb.rivke.stand');
+    // her hand while she talks: an open palm toward whoever she speaks to; low and open for "Saturday is our Sabbath"
+    if (t > K.stepBack + 0.6) { const A = keysAt(o.rivkeArm || [], [176, 180]); rv = {...rv, an: {...rv.an, fArm: A}}; }
+  }
+  if (t > K.knock[0] - 0.25 && t < K.knock[2] + 0.25) { // three knocks: the knuckles touch the door at each tap
+    const near = K.knock.some((q) => Math.abs(t - q) < 0.035), off = 14 * Math.min(...K.knock.map((q) => Math.min(1, Math.abs(t - q) / 0.1)));
+    rv = near ? reach(rv, 'f', x0 - 34, F - 290, 'kb.rivke.knock') : e3Move(rv, 'f', x0 - 34 - off, F - 290, 'kb.rivke.knock.lift'); }
+  { const k = smooth(K.sister - 0.4, K.sister, t) * (1 - smooth(K.sister + 1.8, K.sister + 2.3, t)); if (k > 0) so = {...so, an: {...so.an, fArm: [lerp(176, 132, k), lerp(170, 92, k)]}}; }
+  s.push(fig(so), fig(rv));
+  s.push(fig(ma) + over);
+  for (const q of K.knock) { const u = clamp01((t - q) / 0.3); if (u > 0 && u < 1) s.push(`<path d="M${x0 + 20 + 30 * u},${F - 320} q14,30 0,60" stroke="${E3.cream}" stroke-width="4" fill="none" opacity="${f1(1 - u)}"/>`); }
+  s.push(room.front.replace(`<rect x="${x0 - 34}" y="${F + 70 - 40}"`, `<rect data-k="1" x="${x0 - 34}" y="${F + 70 - 40}"`));
+  const world = layerAt(c, 1, s.join(''));
+  const defs = e3Defs2(t).replace('</defs>', `<linearGradient id="knshaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F857F" stop-opacity="0.35"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient></defs>`);
+  return frame(defs, `<rect width="1920" height="1080" fill="#060A0A"/>`, world, '', t);
+}
+
+
+/* ================= ch 9: moving in (variant of renderMovingIn) ================= */
+// Clip time t = T - o.t0 for the action; the edit's camera (o.cam), Ma's look and head (o.look, o.maTilt), the horsecar (o.carT).
+// Michael walks a longer way home along the sidewalk (o.mSteps steps from o.mStart), and Yankel tugs at the trunk until he comes.
+function miKellyWindowB(t, look, extraTilt = 0) { // Ma Kelly behind her window, arms folded; the wall below the sill hides her from the waist down
+  const {x, y, w, h} = MI.win, s = [], facade = MI.seed % 2 ? ST.facade : ST.facadeDark;
+  s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#0B1414"/>` + glowC(x + 6, y + 30, 40, 0.5, 'mswarm'));
+  s.push(kel('mother', {x: x + 15, y: y + h + 24, h: MI.man, d: 1, noShadow: true, fold: true, det: 0, rim: {c: '#FFF3D6', a: 0.55, dx: 0.012, dy: -0.004},
+    an: {...E3_FOLD, tilt: -10 - 6 * look + extraTilt, lean: -1 + 2 * look, blink: t % 3.6 < 0.12}}));
+  s.push(`<rect x="${x - 2}" y="${y + h}" width="${w + 4}" height="44" fill="${facade}"/><rect x="${x - 3}" y="${y - 6}" width="${w + 6}" height="6" fill="${ST.iron}"/>`);
+  const by = y + h + 4, bx0 = MI.x + MI.gap * 0.6, bx1 = MI.x + MI.w - MI.gap * 0.6; // the fire escape in front of her
+  s.push(`<rect x="${f1(bx0)}" y="${by}" width="${f1(bx1 - bx0)}" height="4" fill="${ST.iron}"/><rect x="${f1(bx0)}" y="${by - 30}" width="${f1(bx1 - bx0)}" height="3" fill="${ST.iron}"/>` +
+    [...Array(Math.ceil((bx1 - bx0) / 9))].map((_, k) => `<rect x="${f1(bx0 + k * 9)}" y="${by - 30}" width="1.6" height="30" fill="${ST.iron}"/>`).join(''));
+  return s.join('');
+}
+function miTrunkPairB(t, lod, rim, o = {}) {
+  const G = FAR_GROUND, L = 56, X0 = MI.landR + 4 * MI.step + 6, sTot = X0 - MI.door + 82, s = [];
+  const carry = e3Trap(t, 3.4, 7.9, 0.15) * sTot;
+  let yk = nbOpts('nfather', {x: X0, y: G, h: MI.man, d: -1, hat: 'cap', coat: 'frock', det: lod.det, rim, an: {fArm: [176, 180], tilt: t < 3.4 ? -10 : 0, expr: t < 2.8 ? 'set' : 'smile'}});
+  yk = stepWalk(yk, X0, -1, carry, MI.ground, 'mi.yankel');
+  const tug = t < 2.9 ? Math.sin(t * 5.3) * (1 - smooth(2.4, 2.9, t)) : 0; yk = {...yk, an: {...yk.an, lean: 5 * tug - 3}};
+  const P1 = [yk.x + 15, yk.y - 0.56 * yk.h + 7 * tug];
+  yk = reach(yk, 'b', P1[0], P1[1], 'mi.yankel.trunk');
+  // Michael: along the sidewalk from the right (0 to 2.6), crouch for the low end (2.6 to 3.0), lift (3.0 to 3.4), then carry
+  const mS = o.mSteps || 8, mx1 = X0 + 82, mx0 = mx1 + mS * MI.step, mw = e3Trap(t, o.mStart ?? 0, 2.6, 0.12);
+  let mk = cast('michael', {x: mx0, y: G, h: MI.man, d: -1, det: lod.det, rim, an: {tilt: t < 2.2 ? 0 : -8, expr: t > 3.0 ? 'smile' : 'neutral', blink: t % 3.5 < 0.12}});
+  mk = t < 3.4 ? stepWalk(mk, mx0, -1, mS * MI.step * mw, () => G, 'mi.michael') : stepWalk({...mk, x: mx1}, mx1, -1, carry, MI.ground, 'mi.michael.carry'); if (t >= 3.4) mk = {...mk, an: {...mk.an, lean: 7}}; // leaning into the load
+  const cr = smooth(2.6, 3.0, t) * (1 - smooth(3.0, 3.4, t));
+  if (cr > 0) { const feet = [E3K.foot(mk, 0), E3K.foot(mk, 1)]; mk = plant({...mk, y: mk.y + 22 * cr, an: {...mk.an, lean: 30 * cr}}, feet, 'mi.michael.crouch'); }
+  // the back handle: resting on the flags until Michael has it, then lifted level with the front, then carried at his hands' height
+  const restY = G - 24, lifted = smooth(3.0, 3.4, t), carryY = mk.y - 0.56 * yk.h;
+  const P2y = t < 3.0 ? restY : t < 3.4 ? lerp(restY, P1[1], lifted) : carryY, dy = P2y - P1[1], P2 = [P1[0] + Math.sqrt(L * L - dy * dy), P2y];
+  if (t > 2.4) { const k = smooth(2.4, 2.96, t), gf = E3K.hand(mk, 'f'), gb = E3K.hand(mk, 'b');
+    if (t < 2.96) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 5, k), lerp(gb.y, P2[1], k), 'mi.michael.toTrunk.b'); }
+    else { mk = reach(mk, 'f', P2[0], P2[1], 'mi.michael.trunk.handle'); mk = reach(mk, 'b', P2[0] + 5, P2[1], 'mi.michael.trunk.corner'); } }
+  const ang = Math.atan2(P2[1] - P1[1], P2[0] - P1[0]) * 180 / Math.PI;
+  const trunkSvg = `<g transform="translate(${f1(P1[0])},${f1(P1[1])}) rotate(${f1(ang)})">${trunk(0, 24, L, 20, '#1A1410', '#5F857F')}<path d="M-4,2 q4,-5 8,0 M${L - 4},2 q4,-5 8,0" stroke="#0D0C09" stroke-width="2" fill="none"/></g>`;
+  // in at the door: each fades as he passes the door post
+  const inY = smooth(0, 0.8, (MI.door + 4 - yk.x) / 30), inM = smooth(0, 0.8, (MI.door + 4 - mk.x) / 30), inT = smooth(0, 0.8, (MI.door + 4 - (P1[0] + P2[0]) / 2) / 30);
+  if (inY < 1) s.push(`<g opacity="${f1(1 - inY)}">${fig(yk)}</g>`);
+  if (inT < 1) s.push(`<g opacity="${f1(1 - inT)}">${trunkSvg}</g>`);
+  if (inM < 1) s.push(`<g opacity="${f1(1 - inM)}">${e3Shadow(mk, mk.h)}${figure(mk)}</g>`);
+  return s.join('');
+}
+function renderMovingInB(T, o = {}) {
+  const t = T - o.t0;
+  const keys0 = [[0, 2.3, 1200, 750], [3.0, 2.5, 1130, 765], [7.6, 1.7, 1020, 700], [10.2, 1.16, 940, 566], [12.0, 5.0, MI.win.x + 20, MI.win.y + 46], [15, 5.2, MI.win.x + 20, MI.win.y + 46]];
+  const c = cam2(o.cam(T)), G = FAR_GROUND, s = [], lod = lodFor(MI.man * c.z), rim = {c: '#FFF3D6', a: lod.rimA * 0.7, dx: -0.01, dy: -0.004};
+  // the row: the Kellys' building (Episode 1's tenement) between its neighbours
+  for (const [x, w, fl, seed] of [[-80, 250, 4, 409], [174, 300, 5, 404], [478, 278, 5, 405], [MI.x, MI.w, MI.floors, MI.seed], [1034, 250, 4, 403], [1288, 290, 5, 406], [1582, 260, 5, 407], [1846, 270, 4, 408]]) s.push(tenement(x, w, fl, seed, t));
+  s.push(miKellyWindowB(T, o.look(T), o.maTilt ? o.maTilt(T) : 0));
+  // the sidewalk (flagstones), the curb, the cobbled street; a gas lamp; a telegraph pole and its wires
+  s.push(MAT.floor(-400, 2400, G, G + 34, {kind: 'flag', base: '#3E5F5A', seed: 74, size: 46}) + `<rect x="-400" y="${G + 34}" width="2800" height="8" fill="#0D0C09"/>` + MAT.floor(-400, 2400, G + 42, G + 260, {kind: 'cobble', base: '#2B4744', seed: 75, size: 40}));
+  s.push(gasLamp(700, G + 30, 170, 0, t) + `<rect x="1460" y="${G - 870}" width="12" height="${870 + 30}" fill="#0D0C09"/>` + [0, 1, 2].map((k) => `<rect x="${1406}" y="${G - 850 + k * 34}" width="120" height="6" fill="#0D0C09"/>`).join(''));
+  s.push([0, 1, 2].map((k) => line([[-400, G - 830 + k * 34], [1466, G - 846 + k * 34], [2400, G - 822 + k * 34]], '#0D0C09', 1.4)).join(''));
+  // the wagon at the curb, the horse standing (resting a hind leg, tossing its head); the family's things on it
+  const wy = G + 120, wx = 1230;
+  s.push(MAT.shadow(wx + 60, wy + 2, 120, 0.4) + msHorse(wx + 110, wy, 62, '#0D0C09', 0, Math.max(0, Math.sin(t * 1.3)) ** 6, 1, 1));
+  s.push(line([[wx + 30, wy - 52], [wx + 80, wy - 48]], '#0D0C09', 4) + `<rect x="${wx - 230}" y="${wy - 66}" width="260" height="28" fill="#0D0C09"/>`);
+  for (const u of [wx - 200, wx - 20]) s.push(`<circle cx="${u}" cy="${wy - 26}" r="26" fill="none" stroke="#0D0C09" stroke-width="5"/>` + [...Array(10)].map((_, k) => { const a = k * TAU / 10; return line([[u, wy - 26], [u + Math.cos(a) * 26, wy - 26 + Math.sin(a) * 26]], '#0D0C09', 2); }).join(''));
+  s.push(`<rect x="${wx - 220}" y="${wy - 100}" width="6" height="34" fill="#0D0C09"/><rect x="${wx - 220}" y="${wy - 100}" width="34" height="5" fill="#0D0C09"/>`);
+  s.push(featherBed(wx - 180, wy - 66, 70, 30, '#DFE0D6') + (t > 5.6 ? '' : samovar(wx - 40, wy - 66, 0.66)));
+  // the family carries their things up the stoop, one after another
+  s.push(miStoopSide());
+  // loads are drawn from the grip: the trunk's end in the father's raised hand (resting on his shoulder), the rolled bed hugged at
+  // the mother's hands, the samovar by its handle, the candlestick by its stem
+  s.push(miTrunkPairB(t, lod, rim, o)); MI.queue = true;
+  s.push(miCarrier('nmother', t, 4.6, {det: lod.det, rim, arms: {fArm: [88, 30], bArm: [100, 50]}, load: (gx, gy) => featherBed(gx - 28, gy + 14, 56, 28, '#DFE0D6')}));
+  s.push(miCarrier('ndaughter', t, 5.6, {scale: 0.8, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim, arms: {fArm: [140, 60], bArm: [140, 90]}, load: (gx, gy, fo) => samovar(gx - fo.d * 14 * 0.42, gy + 40 * 0.42, 0.42)}));
+  s.push(miCarrier('nson', t, 6.5, {scale: 0.52, det: lod.det, rim, arms: {fArm: [110, 40]}, load: (gx, gy) => candlestick(gx, gy + 12 * 0.5, 0.5)}));
+  // two Irish neighbours on the next stoop down, watching (ink)
+  s.push(e3Person(rng(76), 600, G, MI.man, t, '#0D0C09', {d: 1, an: E3_FOLD}) + e3Person(rng(79), 640, G, MI.man, t, '#0D0C09', {d: 1}));
+  // a horsecar passes along the street in front
+  const hc = T > o.carT && T < o.carT + 5.4 ? -700 + (T - o.carT) * 520 : -5000;
+  s.push(`<g transform="translate(0,${G + 250}) scale(0.62) translate(0,${-(G + 250)})">${horsecar(hc / 0.62, G + 250, t)}</g>` + line([[-400, G + 252], [2400, G + 252]], '#0D0C09', 4));
+  const world = layerAt(c, 0.3, `<rect x="-3000" y="-2000" width="8000" height="3000" fill="url(#e3day)"/>` + stFar(t)) + layerAt(c, 1, s.join(''));
+  const scr = [];
+  return frame(e3Defs(T), `<rect width="1920" height="1080" fill="#4E726C"/>`, world, scr.join(''), T);
+}
+
+if (typeof window !== 'undefined') Object.assign(window, {renderHesterB, renderRoomB, renderSweatshopB, renderJarB, renderUSMap, renderKnockB, renderMovingInB, renderModelShot, lhCam, LH});
