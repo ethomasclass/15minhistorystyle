@@ -89,3 +89,39 @@ through its keys), `quiet` (no clip text), `look` (head tilt, expression, blinks
 - Fix in `e3Settle` (lookdev): the walk cycle's frozen bob eased out as a walker settles; it had left the runner standing with bent knees.
 - Audits after: text all >= 2.8 s, inside the safe area; contacts 0.00 px except Sore and Shmuel's held hands at 0.16 px at
   most while he sways (12 to 34 s; under a quarter of a screen pixel); chapter -18.2 LUFS, preview -14.1 LUFS.
+
+## Chapters 2 to 5 (Nov 13, FULL_BUILD.md)
+
+Each chapter is built from the look-dev clips, retimed to its words with `remap` (clip time from narration time; the clips' own
+notes ride along), plus archival prints on the desk (`cards.js` `printCard`, each with its source and date), and ends on the
+baton card (`cards.js` `batonCard`: the next chapter's title on a torn orange strip, slammed in on its spoken words, held
+`CARD_HOLD` = 2.6 s; the chunk_snap click from `../public/sfx/` at the same time).
+
+```
+SFX="chunk_snap@0.3@81.94"  ./build_ch.sh ch02 ga_letters@0.085@0@0
+SFX="chunk_snap@0.3@77.76"  ./build_ch.sh ch03 ga_letters@0.09@0@40@49.4 ga_steerage@0.085@49.4@51.5
+SFX="chunk_snap@0.3@121.28" ./build_ch.sh ch04 ga_castle_garden@0.1@0@0@76.0@1.0 ga_castle_garden@0.09@97.6@76
+SFX="chunk_snap@0.3@77.02"  ./build_ch.sh ch05 ga_letters@0.08@0@0
+```
+
+- **ch02 What They Left Behind:** `ep3_shtetl` (house and Friday table; the spring night with roofs burning far off, no people
+  shown; dawn 1882, Yankel goes), `ep3_pale_map` twice (the Pale card; then all three cards for the May Laws), Makovsky's 1881
+  deathbed painting, the 1883 farewell print, "2 million+" over Harper's 1874 Hamburg print, the Pogrom card on the night.
+- **ch03 The Ticket:** `ep3_letter` with `{alone: true}` (Yankel writes alone, as a boarder in New York; the family is still in
+  Europe) and the Prepaid ticket card; The Sun, June 11, 1884 ($18, about $650 today); `ep3_chain`; what Sore packed (drawn
+  candlesticks, feather bed, samovar, trunk); the route map (`noEast`: no "letter goes east" note); `ep3_steerage` with the
+  Steerage card and "SPEAKING YIDDISH"; `ep3_castle_garden` (the barge) under the card.
+- **ch04 Castle Garden:** Ulrich 1884, `ep3_stat_cg`, the rotunda, the labor exchange (1868), the rotunda engraving (about 1870)
+  with a coral figure for Ma Kelly, the name myth (registering, 1866), `ep3_names` (its Hebrew-style marks are now an abstract
+  scribble), the name chain (Рабинович, Rabinowitsch, Rabinowitz), Ellis Island dated (about 1904; the 1893 station), the runner
+  payoff, a RUNNERS board, Shults 1880 under the card.
+  - **The payoff** is `renderE3Payoff` (lookdev/ep3.js), the clip's action with a clock per actor: the man, Shmuel and Sore walk in
+    from the ferry side at walking pace (`pre` 7.5 s), Rivke walks with them, stops on "she was watching" (80.2 s) and looks back,
+    runs on "heading away from the ferries" (13.5 of her steps, a run's pace) and takes Shmuel's hand at 86.4 ("Mama. Stop."); the
+    man lets go and drops the trunk on "Stop." and hurries off; Yankel pushes through the crowd from 89.8 ("Sore! Sore!" is his
+    voice off screen); the camera pushes in on the hands and back out.
+- **ch05 Old and New:** `renderOldNew(t, {cells, at})` reveals each cell on its words (the old column, then the new; who decided;
+  "SEEN AS similar / different"; the Kellys and "except the Irish: Catholic"); `ep3_decades` bars on their numbers;
+  `ep3_map_arrival` (already keyed to this chapter) under the card "The Lower East Side".
+- QA per chapter: text audit (all >= 2.5 s, none out of the safe area, no overlaps), contact audit (0.00 px, except
+  `ep3_steerage`'s berth sitters at 2 px as in look-dev Round 13c), contact sheets, loudness.
