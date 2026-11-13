@@ -129,7 +129,7 @@ function renderPaleMap(t) {
 }
 
 /* ================= 2. ep3_chain (ch 3): chain migration ================= */
-const XP_SUN = '../ep3/public/img/f_letters/steamship_ads_prepaid_steerage_the_sun_jun11_1884_loc_sn83030272.jpg';
+const XP_SUN = E3_IMG + 'f_letters/steamship_ads_prepaid_steerage_the_sun_jun11_1884_loc_sn83030272.jpg';
 if (typeof window !== 'undefined') window.E3_PRELOAD = Promise.all([window.E3_PRELOAD, new Promise((ok) => { const im = new Image(); im.onload = im.onerror = () => ok(true); im.src = XP_SUN; })]);
 function renderChain(t) {
   // A numbered story, left to right in time. Westbound arcs stack top to bottom in the order they happen (1 Yankel, 4 the family,
@@ -228,7 +228,10 @@ function xpTornH(x, y, w, h, seed) { // a horizontal torn strip of orange paper
   for (let u = 0; u <= w + 0.1; u += 16) { T.push([x + u, y + r() * 4]); B.push([x + u, y + h - r() * 4]); }
   return `<polygon points="${pts([...T, ...B.reverse()])}" fill="${XP.orange}"/>`;
 }
-function renderOldNew(t) {
+// o (optional, the Ep 3 edit, ch 5): at = {header, line, seen, who, kellys, kpen, arrow, except} reveal times; cells[i] = [left, right]
+// reveal times per row (the narration reads the old column first, then the new), all in the same clock as t
+function renderOldNew(t, o = {}) {
+  const AT = (k, d) => (o.at && o.at[k] != null ? o.at[k] : d);
   const PX0 = 120, PX1 = 1800, PY0 = 70, PY1 = 1010, DIV = 960, LX = 170, RX = 1010, ROW0 = 215, RH = 125;
   const s = [`<rect width="1920" height="1080" fill="#14110D"/>`, MAT.planks(-40, -40, 2000, 1160, {base: '#2A2117', seed: 141, size: 70}), `<rect width="1920" height="1080" fill="url(#exvig)"/>`];
   const sheet = xpIn(0, t, 0.6), sy = 40 * (1 - sheet);
@@ -236,36 +239,37 @@ function renderOldNew(t) {
   p.push(`<rect x="${PX0 + 10}" y="${PY0 + 14}" width="${PX1 - PX0}" height="${PY1 - PY0}" fill="#000" opacity="0.5" filter="url(#soft)"/><rect x="${PX0}" y="${PY0}" width="${PX1 - PX0}" height="${PY1 - PY0}" fill="${XP.cream}"/>`);
   for (let y = PY0 + 60; y < PY1; y += 42) p.push(`<rect x="${PX0}" y="${y}" width="${PX1 - PX0}" height="1.4" fill="#2B4744" opacity="0.13"/>`);
   // headers
-  const uh = xpIn(0.5, t);
+  const uh = xpIn(AT('header', 0.5), t);
   p.push(xpOp(uh, xpAbril((PX0 + DIV) / 2, 172, 'OLD IMMIGRANTS', 58, XP.ink, 'middle') + xpAbril((DIV + PX1) / 2, 172, 'NEW IMMIGRANTS', 58, XP.ink, 'middle') + `<rect x="${PX0 + 30}" y="${ROW0 - 12}" width="${PX1 - PX0 - 60}" height="3" fill="${XP.ink}"/>`));
   // the 1880 line: an orange torn strip down the middle
-  const ud = xpIn(0.8, t, 0.9);
+  const ud = xpIn(AT('line', 0.8), t, 0.9);
   if (ud > 0) p.push(xpTornV(DIV, 110, ROW0 + RH * 5, 26, 7, ud));
   // rows, one at a time
   const T_ROW = [1.8, 3.3, 4.8, 6.3, 7.9];
   XP_ROWS.forEach((row, i) => {
-    const u = xpIn(T_ROW[i], t, 0.5); if (u <= 0) return;
+    const uL = xpIn(o.cells ? o.cells[i][0] : T_ROW[i], t, 0.5), uR = xpIn(o.cells ? o.cells[i][1] : T_ROW[i], t, 0.5), u = Math.max(uL, uR); if (u <= 0) return;
     const top = ROW0 + i * RH, dx = -24 * (1 - u);
     const cell = (x, lines) => lines.map((ln, j) => {
       const y = top + (lines.length === 1 && !(i === 2 && x === LX) ? 74 : 54 + j * 42);
       if (ln.startsWith('<SEEN>')) return xpInter(x + 150, y, ln.slice(6), 34, XP.ink, 600) + xpInter(x, y, 'SEEN AS', 34, XP.ink, 800) + `<rect x="${x}" y="${y + 8}" width="136" height="6" fill="#111"/><rect x="${x + 1}" y="${y + 9}" width="134" height="4" fill="${XP.teal}"/>`;
       return xpInter(x, y, ln, 34, XP.ink, 600);
     }).join('');
-    p.push(xpOp(u, `<g transform="translate(${f1(dx)},0)">${cell(LX, row[0])}${cell(RX, row[1])}</g>` + `<rect x="${PX0 + 30}" y="${top + RH - 1}" width="${PX1 - PX0 - 60}" height="1.5" fill="${XP.ink}" opacity="0.3"/>`));
+    const dL = -24 * (1 - uL), dR = -24 * (1 - uR);
+    p.push(xpOp(uL, `<g transform="translate(${f1(dL)},0)">${cell(LX, row[0])}</g>`) + xpOp(uR, `<g transform="translate(${f1(dR)},0)">${cell(RX, row[1])}</g>`) + xpOp(u, `<rect x="${PX0 + 30}" y="${top + RH - 1}" width="${PX1 - PX0 - 60}" height="1.5" fill="${XP.ink}" opacity="0.3"/>`));
   });
-  const u4 = xpIn(6.9, t);
+  const u4 = xpIn(AT('seen', 6.9), t);
   if (u4 > 0) p.splice(3, 0, `<rect x="${PX0 + 20}" y="${ROW0 + 3 * RH + 4}" width="${PX1 - PX0 - 40}" height="${RH - 8}" fill="${XP.teal}" opacity="${f1(0.22 * u4 * 100) / 100}"/>`);
   const scr = [];
   // the Kellys slide into the old column; the exception, in teal
-  const uk = xpIn(9.4, t, 0.8), kx = -260 * (1 - uk);
+  const uk = xpIn(AT('kellys', 9.4), t, 0.8), kx = -260 * (1 - uk);
   if (uk > 0) p.push(`<g transform="translate(${f1(kx)},0)">` + xpPerson(210, 990, 118, XP.coral, {skirt: true}) + xpPerson(272, 990, 128, XP.coral) + xpPerson(330, 990, 112, XP.coral, {skirt: true}) + xpPerson(382, 990, 92, XP.coral, {kid: true}) + `</g>`);
-  const ua = xpIn(10.6, t, 0.7);
+  const ua = xpIn(AT('arrow', 10.6), t, 0.7);
   if (ua > 0) p.push(xpArrow([[150, 880], [142, 760], [140, 640], [150, 585], [168, 572]], ua, {w: 5}));
   const sheetG = `<g transform="translate(0,${f1(sy)})" opacity="${f1(sheet)}">${p.join('')}</g>`;
-  scr.push(xpOp(xpIn(1.2, t), tapeS(DIV - 64, 96, '1880', 40, -2, 1, 12)));
-  if (t > 6.9) scr.push(xpOp(xpIn(6.9, t), `<g>${tag(1010, 905, 'WHO DECIDED?', 1)}${tag(1010, 960, 'NATIVE-BORN PROTESTANT AMERICANS', 1)}</g>` + xpArrow([[990, 872], [988, 800], [988, 712]], xpIn(7.2, t, 0.5), {w: 5})));
-  if (t > 10.0) scr.push(xpOp(xpIn(10.0, t), penS(440, 975, 'the Kellys, Irish', 22, -3)));
-  if (t > 11.0) scr.push(xpOp(xpIn(11.0, t), penS(205, 572, 'except the Irish: Catholic', 22, -2, XP.teal)));
+  scr.push(xpOp(xpIn(AT('line', 0.8) + 0.4, t), tapeS(DIV - 64, 96, '1880', 40, -2, 1, 12)));
+  if (t > AT('who', 6.9)) scr.push(xpOp(xpIn(AT('who', 6.9), t), `<g>${tag(1010, 905, 'WHO DECIDED?', 1)}${tag(1010, 960, 'NATIVE-BORN PROTESTANT AMERICANS', 1)}</g>` + xpArrow([[990, 872], [988, 800], [988, 712]], xpIn(AT('who', 6.9) + 0.3, t, 0.5), {w: 5})));
+  if (t > AT('kpen', 10.0)) scr.push(xpOp(xpIn(AT('kpen', 10.0), t), penS(440, 975, 'the Kellys, Irish', 22, -3)));
+  if (t > AT('except', 11.0)) scr.push(xpOp(xpIn(AT('except', 11.0), t), penS(205, 572, 'except the Irish: Catholic', 22, -2, XP.teal)));
   return xpFrame(t, s.join('') + sheetG, scr.join(''));
 }
 

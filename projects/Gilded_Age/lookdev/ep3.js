@@ -154,7 +154,8 @@ function e3Legs(fo, feet, support, planted = [true, true]) {
   let dip = 0;
   [0, 1].forEach((i) => { if (!planted[i]) return; const dx = (feet[i][0] - fo.x) * d / h - hx(i), dyF = (support - feet[i][1]) / h;
     dip = Math.max(dip, hip - 0.03 - dyF - Math.sqrt(Math.max(0, Lr * Lr - dx * dx))); });
-  const o = {...fo, y: support + dip * h};
+  // a positive bob (rig.js draws the body that much higher) would leave a planted leg short of its foot: lower the origin to match
+  const o = {...fo, y: support + (dip + Math.max(0, (fo.an && fo.an.bob) || 0)) * h};
   const legs = [], shins = [];
   [0, 1].forEach((i) => { const T = E3K.toLocal(o, feet[i][0], feet[i][1]), S = [hx(i), hip], fl = T[1];
     let ank = fl + 0.03; if (fl < 1e-6) { const dx = T[0] - S[0]; ank = Math.min(0.03, Math.max(0, hip - Math.sqrt(Math.max(0, Lr * Lr - dx * dx)))); }
@@ -737,7 +738,9 @@ function e3Script(x, y, w, lines, prog, seed, col = '#2B2418') { // unreadable h
     s.push(`<path d="${d}" stroke="${col}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`); }
   return s.join('');
 }
-function renderLetter(t) {
+// o (optional, the Ep 3 edit): alone = Yankel writes alone (ch 3: he is a boarder in New York, the family still in Europe);
+// tag = the place tag in place of the default; quiet = no handwritten notes
+function renderLetter(t, o = {}) {
   const M = smooth(4.8, 5.8, t); let out = '';
   const scr = [];
   if (M < 1) { // the table by lamplight
@@ -767,7 +770,7 @@ function renderLetter(t) {
     const shF = E3K.shoulder(wf, 'b');
     let wm = nbOpts('nmother', {x: tx + 640, y: F, h: H, d: -1, det: lod.det, rim: {c: '#FFE6C9', a: 0.6 * fl, dx: -0.01, dy: -0.004}, an: {...POSES.stand(t, 0.4), lean: 0, bob: 0, tilt: -10, expr: 'smile', blink: (t + 1) % 3.9 < 0.12}});
     wm = reach(wm, 'f', shF[0] + 6, shF[1] - 4, 'letter.mother.hand');
-    s.push(fig(wm));
+    if (!o.alone) s.push(fig(wm));
     s.push(room.front);
     const world = layerAt(c, 1, s.join(''));
     // the letter close up, rising into view (screen space): right-to-left script, then the prepaid ticket slid in on top
@@ -781,9 +784,9 @@ function renderLetter(t) {
         [...Array(5)].map((_, k) => `<rect x="${px + 310}" y="${py + 520 + k * 30}" width="${200 - k * 22}" height="6" fill="#2B2418" opacity="0.55"/>`).join('') + `</g>`;
     }
     out += `<g opacity="${f1(1 - M)}"><rect width="1920" height="1080" fill="#0B1414"/>${world}</g>` + paper;
-    scr.push(tag(40, 1040, 'A LETTER HOME · BROOKLYN · 1884', 1 - M));
-    if (t > 2.2 && t < 3.3) scr.push(penS(1000, 200, 'Yiddish, written right to left', 30, -3));
-    if (t > 3.9 && t < 4.9) scr.push(penS(1000, 200, 'and a ticket, already paid for', 32, -3));
+    scr.push(tag(40, 1040, o.tag || 'A LETTER HOME · BROOKLYN · 1884', 1 - M));
+    if (!o.quiet && t > 2.2 && t < 3.3) scr.push(penS(1000, 200, 'Yiddish, written right to left', 30, -3));
+    if (!o.quiet && t > 3.9 && t < 4.9) scr.push(penS(1000, 200, 'and a ticket, already paid for', 32, -3));
   }
   if (M > 0) { // the route map
     const k = 0.74, ox = 70, oy = 200, P = (lon, lat) => { const [x, y] = E3P(lon, lat); return [ox + x * k, oy + y * k]; }, mp = [];
@@ -811,7 +814,7 @@ function renderLetter(t) {
     if (M > 0.5) {
       const [hx, hy] = S(home), [mx, my] = S(ham), [nx, ny2] = S(ny);
       scr.push(tag(1600, 330, 'RUSSIAN EMPIRE', M), tag(hx - 70, hy + 70, 'HOME', M), tag(mx - 100, my - 30, 'HAMBURG', M), tag(nx - 10, ny2 + 70, 'NEW YORK', M));
-      if (uL > 0 && uR < 0.2) scr.push(penS(700, 230, 'the letter goes east', 34, -3));
+      if (!o.noEast && uL > 0 && uR < 0.2) scr.push(penS(700, 230, 'the letter goes east', 34, -3));
       if (uR > 0.2 && uS < 0.3) scr.push(penS(1180, 860, 'by rail to the port', 30, -3));
       if (uS > 0.3) scr.push(penS(560, 860, 'by steamship to New York', 32, -3));
     }
@@ -825,7 +828,9 @@ function renderLetter(t) {
 // Exclusion Act, 1882). Right: let in, but mocked (anti-Irish cartoons of the 1870s-80s) and Keppler's 1893 "Looking Backward",
 // whose caption is the episode's irony. Then the irony in the family: Ma Kelly at her window, watching the newcomers.
 // The prints are made by tools/crease.py into ep3/public/img/desk/ (see ep3/research/REFERENCES.md for sources and handling notes).
-const NV_DIR = '../ep3/public/img/desk/';
+// the Ep 3 image folder, from whichever page loads this file (lookdev/bridge.html, or the edit's ep3/edit/edit.html)
+const E3_IMG = typeof location !== 'undefined' && /\/ep3\/edit\//.test(location.pathname) ? '../public/img/' : '../ep3/public/img/';
+const NV_DIR = E3_IMG + 'desk/';
 const NV_PRINTS = [ // file, centre x, y, width, rotation, time it lands, caption
   ['chinese_exclusion_act_1882_text', 330, 440, 400, -4, 0.3, 'EXCLUSION ACT · 1882'],
   ['the_only_one_barred_out_1882', 720, 520, 340, 5, 1.2, 'FRANK LESLIE\'S · 1882'],
@@ -919,7 +924,7 @@ function renderNames(t) {
     // the name as it travels between alphabets: Hebrew letters on the family's papers, then the Hamburg clerk's German spelling
     const m1 = smooth(2.2, 2.7, t), nameY = 760;
     if (t > 1.0) {
-      out += `<g opacity="${f1(A * (1 - m1))}"><rect x="660" y="${nameY - 70}" width="600" height="100" fill="#0D0C09" opacity="0.85"/>${hebrewish(1180, nameY + 6, 56, 8, 140, E3.teal)}</g>`;
+      out += `<g opacity="${f1(A * (1 - m1))}"><rect x="660" y="${nameY - 70}" width="600" height="100" fill="#0D0C09" opacity="0.85"/>${e3Script(700, nameY - 4, 520, 1, 1, 140, E3.teal)}</g>`; // abstract scribble (no letter shapes): the name as written in Hamburg
       out += `<g opacity="${f1(A * m1)}"><rect x="660" y="${nameY - 70}" width="600" height="100" fill="#0D0C09" opacity="0.85"/><text x="960" y="${nameY + 6}" font-family="Mono" font-size="54" text-anchor="middle" fill="${E3.teal}" letter-spacing="3">RABINOWITSCH</text></g>`;
     }
     scr.push(tag(130, 120 + 0, 'SHIP\'S PASSENGER LIST · WRITTEN IN HAMBURG', up * A), tag(1180, 486, 'THE REGISTER · COPIED FROM THE LIST', up * A));
@@ -982,7 +987,7 @@ function renderNames(t) {
 // the picture and its caption (the black page margins and the PUCK masthead left out) and shown at its own aspect. The guide marks were
 // measured on the old 1280 px Commons copy; they are carried onto the scan by an affine fit of the two images (OpenCV ECC, correlation
 // 0.86): old-copy pixel -> scan pixel = LB.T, then scan pixel -> world through the crop (LB.c) at scale LB.k.
-const LB = {src: '../ep3/public/img/g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg', W: 3000, H: 1983,
+const LB = {src: E3_IMG + 'g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg', W: 3000, H: 1983,
   c: [19.5, 80.8, 2928.8, 1888.8], T: [[2.34120, -0.00891, 19.519], [-0.00299, 2.39565, 80.759]], x0: 333, w: 1254};
 LB.k = LB.w / LB.c[2]; LB.h = LB.c[3] * LB.k; LB.y0 = 521 - LB.h / 2;
 const LBP = (px, py) => { const ox = px - 12.8, oy = py - 41.6, T = LB.T, sx = T[0][0] * ox + T[0][1] * oy + T[0][2], sy = T[1][0] * ox + T[1][1] * oy + T[1][2];
@@ -1307,6 +1312,65 @@ function renderE3Runner(t, o = {}) {
   const sky = `<rect width="1920" height="1080" fill="url(#rndusk)"/><circle cx="${f1(1700 - (c.ux - 960) * 0.1)}" cy="${f1(470 - (c.uy - 560) * 0.1)}" r="420" fill="url(#rnsun)"/>`;
   return frame(defs, sky, world, scr.join('') + (black > 0 ? `<rect width="1920" height="1080" fill="#000" opacity="${f1(black)}"/>` : ''), o.te ?? t);
 }
+
+/* ----- ep3_runner payoff for the edit (ch 4): a clock per actor, and a walk-in ----- */
+// The same action as renderE3Runner's payoff (u >= 0), but each actor keeps his own clock, so the narration can spread the beats
+// without slowing a walk: o.w = the walkers (the man, Shmuel, Sore, the trunk), o.r = Rivke, o.y = Yankel, all in the payoff's
+// u units. o.pre: seconds of extra walking before w = 0 (the three walk in from the right, from the ferry side, at the same
+// pace); o.preR: Rivke walks with them for that long before r = 0, stops, and looks back. o.cam (required), o.te (water, flags,
+// crowd idle), o.look() = per-figure head overrides {man, shmuel, sore, rivke, yankel}, o.ferry (0..1) = the teal arrow to the ferries.
+function renderE3Payoff(o) {
+  const G = RN.G, H = RN.H, w = o.w, r = o.r, yy = o.y, te = o.te ?? w, LK = o.look ? o.look() : {};
+  const c = cam2(o.cam), lod = lodFor(H * c.z), det = lod.det;
+  const sun = {c: '#FFC88A', a: 0.75, dx: 0.011, dy: -0.004};
+  const W = [], SH = [], scr = [];
+  const put = (fo, extra = '') => { SH.push(e3Black(fo)); W.push(fig({...fo, noShadow: true}) + extra); };
+  const Rm = e3R(H), Rs = e3R(H * 0.88), Rr = e3R(H * 0.8), Ry = e3R(H * 0.97);
+  const pre = o.pre || 0, preR = o.preR || 0, ex = (4 * Rm / 3) * pre, vAvg = (4 * Rm + ex) / (3 + pre), exR = vAvg * preR;
+  const xm0 = 1150, a1 = (4 * Rm + ex) * e3Trap(w, -pre, 3.0, pre ? 0.1 : 0.22), a2 = e3Trap(w, 3.6, 6.0, 0.15) * 7 * Rm, sm = a1 + a2;
+  let rm = stepWalk({x: xm0 + ex, y: G, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'frock', fill: RN.ink, det: 0, rim: {...sun, a: 0.5}, an: {fArm: [176, 182], bArm: [184, 188], tilt: w > 2.9 && w < 3.6 ? 8 : -4, ...LK.man}}, xm0 + ex, -1, sm, () => G, 'rn.p.runner');
+  const Rb = e3R(H * 0.5), xb0 = xm0 + 60;
+  let sb = stepWalk(nbOpts('nson', {x: xb0 + ex, y: G, h: H, scale: 0.5, d: -1, det, rim: sun, an: {tilt: 4, lean: w > 3.0 ? -6 * smooth(3.0, 3.3, w) : 0, ...LK.shmuel}}), xb0 + ex, -1, Math.min(a1, 4 * Rm + ex), () => G, 'rn.p.shmuel');
+  const P2 = [rm.x + 30, G - 142], hold = w < 3.0, rel = smooth(3.0, 3.3, w);
+  if (hold) [rm, sb] = e3Clasp(rm, 'b', sb, 'f', P2, 'rn.p.hand.runner');
+  else { const gB = E3K.hand({...sb, an: {...sb.an, fArm: [168, 160]}}, 'f'); sb = e3Move(sb, 'f', lerp(P2[0], gB.x, rel), lerp(P2[1], gB.y, rel), 'rn.p.shmuel.free');
+    if (w < 3.6) rm = e3Move(rm, 'b', lerp(P2[0], rm.x + 10, rel), lerp(P2[1], G - 0.4 * H, rel), 'rn.p.runner.free'); }
+  const gT = E3K.hand(rm, 'f');
+  let trunkW = [gT.x, gT.y];
+  if (w < 3.3) holding(rm, 'f', 'rn.p.trunk', () => ''); else { const g3 = E3K.hand({...rm, x: xm0 + ex - a1}, 'f'); trunkW = [g3.x, lerp(g3.y, G - E3TR.lift, smooth(3.3, 3.55, w))]; }
+  const xs0 = xm0 + 230;
+  let so = stepWalk(nbOpts('nmother', {x: xs0 + ex, y: G, h: H, d: -1, det, rim: sun, an: {tilt: w > 3.1 ? 8 : 0, expr: w > 3.1 ? 'worried' : 'neutral', ...LK.sore}}), xs0 + ex, -1, (4 * Rs + ex) * e3Trap(w, -pre, 3.1, pre ? 0.1 : 0.22), () => G, 'rn.p.sore');
+  const sb2 = e3HugBed(so, 'rn.p.sore'); so = sb2.fo;
+  // Rivke: walks with them (r < 0), stops and looks back at the ferry slips (0 to 1.3), turns and runs, takes Shmuel's free hand (2.9)
+  // o.runSteps: how far back she stops (in her steps) and so how far she runs (default 7, as the clip)
+  const RS = o.runSteps || 7, xr1 = xb0 - 4 * Rm + 78, xr0 = xr1 + RS * Rr, ru = e3Trap(r, 1.3, 2.9, 0.18);
+  const dOpts = (d, an) => nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an});
+  let rv;
+  if (r < 0) { rv = stepWalk({...dOpts(-1, {tilt: 0, expr: 'set', ...LK.rivke}), x: xr0 + exR}, xr0 + exR, -1, exR * e3Trap(r, -preR, -0.4, 0.12), () => G, 'rn.p.rivke.in'); }
+  else if (r < 1.3) rv = plant({...dOpts(1, {...POSES.stand(te, 0.3), lean: 0, bob: 0, tilt: 6, expr: 'set', ...LK.rivke})}, [[xr0 + 0.04 * H * 0.8, G], [xr0 - 0.05 * H * 0.8, G]], 'rn.p.rivke.stand');
+  else rv = stepWalk(dOpts(-1, {lean: 0, expr: r > 2.9 ? 'worried' : 'set', tilt: 0, ...LK.rivke}), xr0, -1, RS * Rr * ru, () => G, 'rn.p.rivke');
+  if (r >= 2.6) { const gS = E3K.hand(sb, 'b'), gR = E3K.hand(rv, 'f'), k2 = smooth(2.6, 2.9, r);
+    if (r < 2.9) rv = e3Move(rv, 'f', lerp(gR.x, gS.x, k2), lerp(gR.y, gS.y, k2), 'rn.p.rivke.reach');
+    else { const P3 = [sb.x + 36, G - 124]; [rv, sb] = e3Clasp(rv, 'f', sb, 'b', P3, 'rn.p.hand.rivke'); } }
+  // Yankel shoves through the crowd from the ferries (2.4 to 5.2 on his clock)
+  const xy1 = xs0 - 4 * Rs + 170, xy0 = xy1 + 9 * Ry, yu = e3Trap(yy, 2.4, 5.2, 0.15);
+  const yk = stepWalk(nbOpts('nfather', {x: xy0, y: G, h: H, d: -1, hat: 'cap', coat: 'frock', det, rim: sun, an: {lean: 0, tilt: 6, expr: 'worried', ...LK.yankel}}), xy0, -1, 9 * Ry * yu, () => G, 'rn.p.yankel');
+  const rc = rng(146);
+  for (let k = 0; k < 9; k++) { const cx0 = 1650 + k * 95 + rc() * 30, near = Math.max(0, 1 - Math.abs(yk.x - cx0) / 110), fo = e3PersonOpts(rc, cx0, G - 6 - (k % 2) * 10, H, te, RN.ink, {an: {lean: -14 * near}});
+    put({...fo, rim: {...sun, a: 0.4}}); }
+  const trunkSvg = e3TrunkAt(trunkW[0], trunkW[1]);
+  SH.push(`<g>${trunkSvg.replace(/fill="#[0-9A-Fa-f]+"/g, 'fill="#000"')}</g>`);
+  put(yk); put(so, sb2.bed); W.push(trunkSvg); put(rm); put(sb); put(rv);
+  if (o.ferry > 0) { const zp = 1 + (c.z - 1) * 0.7, ax = 960 + (c.ux - 960) * 0.7, ay = 540 + (c.uy - 540) * 0.7, fxs = 960 + (RN.ferry + 280 - ax) * zp, fys = 540 + (G - 380 - ay) * zp;
+    scr.push(drawOn([[fxs - 520, fys - 40], [fxs - 200, fys - 70], [fxs - 20, fys - 10]], o.ferry, 7) + (o.ferry > 0.9 ? `<path d="M${f1(fxs - 14)},${f1(fys - 4)} l-30,-12 l12,-26 Z" fill="${E3.teal}"/>` : '')); }
+  const world = rnBack(te, c) + layerAt(c, 1, rnFore(te) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
+  const defs = e3Defs(te, grad('rndusk', [['0', '#152220'], ['0.5', '#3B4743'], ['0.78', '#9A6E4C'], ['1', '#D99A62']]) +
+    `<radialGradient id="rnsun"><stop offset="0" stop-color="#FFE2B0" stop-opacity="0.95"/><stop offset="0.12" stop-color="#FFC88A" stop-opacity="0.6"/><stop offset="1" stop-color="#FFB15C" stop-opacity="0"/></radialGradient>` +
+    `<linearGradient id="rnpath" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC88A" stop-opacity="0"/><stop offset="0.5" stop-color="#FFC88A" stop-opacity="0.5"/><stop offset="1" stop-color="#FFC88A" stop-opacity="0"/></linearGradient>`);
+  const sky = `<rect width="1920" height="1080" fill="url(#rndusk)"/><circle cx="${f1(1700 - (c.ux - 960) * 0.1)}" cy="${f1(470 - (c.uy - 560) * 0.1)}" r="420" fill="url(#rnsun)"/>`;
+  return frame(defs, sky, world, scr.join(''), te);
+}
+if (typeof window !== 'undefined') window.renderE3Payoff = renderE3Payoff;
 
 /* ================= ep3_shtetl: what they left behind (ch 2) ================= */
 // A small wooden house in a small town in the Pale of Settlement (what is now Ukraine). (1) Friday night: the Sabbath candles in
