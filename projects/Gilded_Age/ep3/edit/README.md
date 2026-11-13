@@ -63,3 +63,15 @@ through its keys), `quiet` (no clip text), `look` (head tilt, expression, blinks
   fort gate among 46 ink arrivals), `renderSweepHome` (81.2 to 86.9 s: the route map's look, New York to HOME in the Pale). Clips
   `ep3_ch1_glide`, `ep3_ch1_rise`, `ep3_ch1_home` in `bridge.html`.
 - `ep3.js`: `renderE3Runner(t, o)` options (above); the boots' polish glints; the fence trace drawn in the world, behind the figures.
+
+## Chapter 1 QA (Nov 13)
+
+- Contact sheets of the finished chapter every 3 s, read; the stills that show a beat checked against its word (table above).
+- `audit_text.mjs ch01`: 13 text elements, all on screen 2.6 s or more (shortest: HOME 2.8 s at 0.2 s sampling, the question's
+  tape line 3.8 s), none outside the title-safe area, no overlaps. The map's NEW YORK tag was dropped: its dot leaves the frame
+  within two seconds, too soon to read.
+- `audit_contacts.mjs ch01`: hands on handles, hand-to-hand pairs, planted feet, the stoop and held things all 0.00 px over the chapter.
+- Loudness: chapter mix -18.2 LUFS integrated (narration alone -18.1, as Ep 2's chapters), peak -2.2 dBFS; the cold-open
+  preview (chapter 1 + title, mastered as `assemble.sh` does) -14.1 LUFS, peak -1.2 dBFS.
+- Rendering note: the disk filled during the first render and Chromium dropped scripts and screenshots; `render_edit.mjs` now retries a
+  failed frame, and frames are best rendered with about 6 GB free (2,608 frames at 1080p are about 4.5 GB).

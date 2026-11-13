@@ -9,7 +9,7 @@ EDITS.title = () => {
   return {dur, fadeOut: 0.35, shots: [{a: 0, b: dur, live: true, draw: (T) => {
     const f = Math.min(185, 1 + Math.floor(T * 30 * INTRO_SPEED)), u = slam(T);
     return `<div style="position:absolute;inset:0;background:radial-gradient(ellipse 75% 75% at 50% 45%,#1b1b1b 0%,#121212 60%,#0b0b0b 100%)"></div>
-      <img src="${IMG}${EP1}intro/f${String(f).padStart(4, '0')}.jpg" style="position:absolute;inset:0;width:1920px;height:1080px;transform:translateY(-300px) scale(0.56);transform-origin:960px 540px;-webkit-mask-image:radial-gradient(ellipse 60% 40% at 50% 50%,#000 55%,transparent 100%)">` +
+      <img src="${IMG}${EP1}intro/f${String(f).padStart(4, '0')}.jpg" style="position:absolute;inset:0;width:1920px;height:1080px;transform:translateY(-268px) scale(0.56);transform-origin:960px 540px;-webkit-mask-image:radial-gradient(ellipse 60% 40% at 50% 50%,#000 55%,transparent 100%)">` +
       `<div style="position:absolute;inset:0;transform:scale(${(1.06 - 0.06 * u).toFixed(4)});transform-origin:960px 650px">` +
       tape('THE GILDED AGE', {x: 330, y: 470, size: 150, rot: -2, seed: 131}) +
       `<div class="tx" style="position:absolute;left:0;top:720px;width:1920px;text-align:center;font-family:Abril;font-size:84px;color:${C.cream}">He Sent Me</div>` +

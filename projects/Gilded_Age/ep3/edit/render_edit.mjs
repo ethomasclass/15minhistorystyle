@@ -16,7 +16,9 @@ page.on('pageerror', (e) => { console.error('page error:', e.message); process.e
 await page.goto('file://' + path.join(here, 'edit.html'));
 if (!words) words = {duration: await page.evaluate((k) => EDITS[k]().dur, key), words: []};
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
-const shoot = async (T, file, type) => { await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: 82} : {})}); };
+const shoot = async (T, file, type) => { // retried: a long render can hit a one-off "Unable to capture screenshot"
+  for (let k = 0; ; k++) { try { await page.evaluate(([c, t]) => window.drawEdit(c, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: 82} : {})}); return; }
+    catch (e) { if (k >= 3) throw e; console.error('retry', T, e.message.split('\n')[0]); await new Promise((r) => setTimeout(r, 1000)); } } };
 const editDur = await page.evaluate((k) => EDITS[k]().dur, key);   // the chapter's length, with any held tail after the last word
 if (a1 === '--dur') { console.log(editDur); await browser.close(); process.exit(0); }
 if (a1 === '--stills') {

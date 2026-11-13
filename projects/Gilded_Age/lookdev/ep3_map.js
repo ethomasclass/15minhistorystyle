@@ -944,16 +944,16 @@ function renderDuskRise(n, {labels = true} = {}) {
 }
 // 3) the map home (81.2 to 86.9): the route map's look (ep3_letter, ep3_pale_map); the camera leaves New York and sweeps east over
 // the Atlantic, the route drawing back the way the family came (steamship from Hamburg, rail from home), and settles on HOME in the
-// Pale as the narration says "behind"
-const SWP = {a: 81.2, b: 84.6, end: 86.9};
+// Pale as the narration says "behind" (HOME is up from 84.0, so it has 2.5 s before the cut)
+const SWP = {a: 81.2, b: 84.4, end: 86.9};
 function renderSweepHome(n) {
   const home = E3P(28.6, 50.25), ham = E3P(9.99, 53.55), ny = E3P(-74.0, 40.7);
   const rail = [home, E3P(25.1, 50.1), E3P(21, 51.6), E3P(17, 52.2), E3P(13.4, 52.5), ham];
   const sea = [ham, E3P(8.3, 54.0), E3P(4.5, 53.2), E3P(1.6, 51.0), E3P(-5.5, 49.6), E3P(-20, 48.6), E3P(-40, 46.2), E3P(-58, 43.5), E3P(-68, 41.2), ny];
   const back = [...sea].reverse().concat([...rail].reverse().slice(1)); // New York to home
-  const u = smooth(SWP.a + 0.9, SWP.b, n), mid = [(ny[0] + home[0]) / 2, (ny[1] + home[1]) / 2 - 40];
+  const u = smooth(SWP.a + 0.5, SWP.b, n), mid = [(ny[0] + home[0]) / 2, (ny[1] + home[1]) / 2 - 40];
   // camera: centre and zoom along a gentle arc (zoom out over the ocean, in again on the Pale); HOME ends left of centre-right
-  const cA = [ny[0] + 120, ny[1] - 30], cB = [home[0] - 150, home[1] + 10], v = ease(u);
+  const cA = [ny[0] + 120, ny[1] - 30], cB = [home[0] - 150, home[1] + 10], v = u; // u is already eased (one easing, so the middle of the sweep is not a rush)
   const ctr = [lerp(cA[0], cB[0], v), lerp(cA[1], cB[1], v) - 140 * Math.sin(Math.PI * v)], settle = smooth(SWP.b, SWP.end, n);
   const Z = Math.exp(lerp(Math.log(1.9), Math.log(1.75), v) - 0.85 * Math.sin(Math.PI * v)) * (1 + 0.04 * settle);
   const S = (p) => [960 + (p[0] - ctr[0]) * Z, 540 + (p[1] - ctr[1]) * Z], tr = `translate(${f1(960 - ctr[0] * Z)},${f1(540 - ctr[1] * Z)}) scale(${f1(Z * 1000) / 1000})`;
@@ -973,7 +973,7 @@ function renderSweepHome(n) {
   const dot = (p, k) => k > 0 ? `<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="${f1(12 * k)}" fill="${EM.orange}" stroke="#111" stroke-width="3"/>` : '';
   m.push(dot(S(ny), 1), dot(S(home), smooth(SWP.b - 0.5, SWP.b - 0.1, n)));
   const scr = [], hS = S(home), nS = S(ny);
-  scr.push(tag(nS[0] - 10, nS[1] + 70, 'NEW YORK', smooth(SWP.a, SWP.a + 0.3, n) * smooth(110, 230, nS[0]))); // leaves with its dot
+  // (no NEW YORK tag: its dot leaves the frame within two seconds, too soon to read a label; the route starts at the dot)
   scr.push(tag(hS[0] - 50, hS[1] + 70, 'HOME', smooth(SWP.b - 0.45, SWP.b - 0.1, n)));
   return frame(e3Defs(n), '', m.join(''), scr.join(''), n);
 }
