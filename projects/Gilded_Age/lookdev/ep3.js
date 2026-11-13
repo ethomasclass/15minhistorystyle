@@ -495,8 +495,8 @@ function miTrunkPair(t, lod, rim) {
   const restY = G - 24, lifted = smooth(3.0, 3.4, t), carryY = mk.y - 0.56 * yk.h;
   const P2y = t < 3.0 ? restY : t < 3.4 ? lerp(restY, P1[1], lifted) : carryY, dy = P2y - P1[1], P2 = [P1[0] + Math.sqrt(L * L - dy * dy), P2y];
   if (t > 2.4) { const k = smooth(2.4, 2.96, t), gf = E3K.hand(mk, 'f'), gb = E3K.hand(mk, 'b');
-    if (t < 2.96) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 1, k), lerp(gb.y, P2[1] + 2, k), 'mi.michael.toTrunk.b'); }
-    else { mk = reach(mk, 'f', P2[0], P2[1], 'mi.michael.trunk.handle'); mk = reach(mk, 'b', P2[0] + 1, P2[1] + 2, 'mi.michael.trunk.corner'); } }
+    if (t < 2.96) { mk = e3Move(mk, 'f', lerp(gf.x, P2[0], k), lerp(gf.y, P2[1], k), 'mi.michael.toTrunk'); mk = e3Move(mk, 'b', lerp(gb.x, P2[0] + 5, k), lerp(gb.y, P2[1], k), 'mi.michael.toTrunk.b'); }
+    else { mk = reach(mk, 'f', P2[0], P2[1], 'mi.michael.trunk.handle'); mk = reach(mk, 'b', P2[0] + 5, P2[1], 'mi.michael.trunk.corner'); } }
   const ang = Math.atan2(P2[1] - P1[1], P2[0] - P1[0]) * 180 / Math.PI;
   const trunkSvg = `<g transform="translate(${f1(P1[0])},${f1(P1[1])}) rotate(${f1(ang)})">${trunk(0, 24, L, 20, '#1A1410', '#5F857F')}<path d="M-4,2 q4,-5 8,0 M${L - 4},2 q4,-5 8,0" stroke="#0D0C09" stroke-width="2" fill="none"/></g>`;
   // in at the door: each fades as he passes the door post
@@ -942,9 +942,24 @@ function renderNames(t) {
 // the newcomer (3.5 to 8), (b) the shadows (8 to 13.5), (c) the caption (13.5 to 17.5), (d) the point and the cartoonist (17.5 to
 // 21.5), (e) a question card for students (21.5 to 25). Caricature: the shadows are drawn as ethnic types (one with a peddler's
 // pack and hooked nose); the camera reads the gesture and the idea, and never lingers on a face.
-const LB = {x0: 333, y0: 126, w: 1254, h: 790};
-const LBP = (px, py) => [LB.x0 + px - 12.8, LB.y0 + py - 41.6]; // a point on the original 1280 x 832 print -> world
-if (typeof window !== 'undefined') window.E3_PRELOAD = Promise.all([window.E3_PRELOAD, new Promise((ok) => { const im = new Image(); im.onload = im.onerror = () => ok(true); im.src = NV_DIR + 'keppler_looking_backward_1893_large.png'; })]);
+// Round 14: the print is now the 3000 x 1983 scan from the Internet Archive's run of Puck (sim_puck, Jan 11 1893, B&W), cropped to
+// the picture and its caption (the black page margins and the PUCK masthead left out) and shown at its own aspect. The guide marks were
+// measured on the old 1280 px Commons copy; they are carried onto the scan by an affine fit of the two images (OpenCV ECC, correlation
+// 0.86): old-copy pixel -> scan pixel = LB.T, then scan pixel -> world through the crop (LB.c) at scale LB.k.
+const LB = {src: '../ep3/public/img/g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg', W: 3000, H: 1983,
+  c: [19.5, 80.8, 2928.8, 1888.8], T: [[2.34120, -0.00891, 19.519], [-0.00299, 2.39565, 80.759]], x0: 333, w: 1254};
+LB.k = LB.w / LB.c[2]; LB.h = LB.c[3] * LB.k; LB.y0 = 521 - LB.h / 2;
+const LBP = (px, py) => { const ox = px - 12.8, oy = py - 41.6, T = LB.T, sx = T[0][0] * ox + T[0][1] * oy + T[0][2], sy = T[1][0] * ox + T[1][1] * oy + T[1][2];
+  const wx = LB.x0 + (sx - LB.c[0]) * LB.k - 960, wy = LB.y0 + (sy - LB.c[1]) * LB.k - 520, a = -0.6 * Math.PI / 180; // the print lies turned 0.6 deg on the desk
+  return [960 + wx * Math.cos(a) - wy * Math.sin(a), 520 + wx * Math.sin(a) + wy * Math.cos(a)]; }; // a point on the original 1280 x 832 print -> world
+const LBS = (sx, sy) => { const wx = LB.x0 + (sx - LB.c[0]) * LB.k - 960, wy = LB.y0 + (sy - LB.c[1]) * LB.k - 520, a = -0.6 * Math.PI / 180;
+  return [960 + wx * Math.cos(a) - wy * Math.sin(a), 520 + wx * Math.sin(a) + wy * Math.cos(a)]; }; // a point on the 3000 px scan -> world
+// the guide marks, measured on the scan (pixels): each man's head and hat, his shadow's head, the newcomer's face, the centre man's
+// raised hand, the caption line
+const LBM = {men: [[590, 640], [1040, 700], [1560, 725], [2150, 710], [2740, 680]], shadows: [[550, 250], [1110, 280], [1590, 300], [2165, 300], [2615, 330]],
+  hand: [1820, 785], newcomer: [2235, 935], caption: [[1035, 1940], [1970, 1938]]};
+const lbImage = () => `<svg x="${f1(LB.x0)}" y="${f1(LB.y0)}" width="${f1(LB.w)}" height="${f1(LB.h)}" viewBox="${LB.c.join(' ')}" preserveAspectRatio="none"><image href="${LB.src}" x="0" y="0" width="${LB.W}" height="${LB.H}"/></svg>`;
+if (typeof window !== 'undefined') window.E3_PRELOAD = Promise.all([window.E3_PRELOAD, new Promise((ok) => { const im = new Image(); im.onload = im.onerror = () => ok(true); im.src = LB.src; })]);
 function drawOn(a, u, w = 5, col = E3.teal) { // a teal line that draws itself on (u 0..1)
   if (u <= 0) return '';
   return `<polyline points="${pts(a)}" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${f1((1 - clamp01(u)) * 1000) / 1000}" fill="none" stroke="#111" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round"/>` +
@@ -952,27 +967,25 @@ function drawOn(a, u, w = 5, col = E3.teal) { // a teal line that draws itself o
 }
 const ringOn = (cx, cy, r, u, w = 5) => { const a = []; for (let k = 0; k <= 40; k++) { const q = -Math.PI / 2 + TAU * k / 40 * 1.05; a.push([cx + Math.cos(q) * r, cy + Math.sin(q) * r * 0.9]); } return drawOn(a, u, w); };
 function renderLookingBackward(t) {
-  const keys = [[0, 1.0, 960, 520], [3.5, 1.0, 960, 520], [5.0, 1.55, 960, 560], [8.0, 1.6, 990, 560], [9.4, 1.7, 980, 300], [13.5, 1.72, 990, 300],
-    [14.8, 2.3, 975, 830], [17.5, 2.35, 975, 830], [18.8, 1.0, 960, 520], [25, 1.02, 960, 520]];
+  const keys = [[0, 1.0, 960, 520], [3.5, 1.0, 960, 520], [5.0, 1.55, 960, 560], [8.0, 1.6, 990, 560], [9.4, 1.7, 980, 345], [13.5, 1.72, 990, 345],
+    [14.8, 2.3, 975, 760], [17.5, 2.35, 975, 765], [18.8, 1.0, 960, 520], [25, 1.02, 960, 520]];
   const c = cam2(camAt(keys, t)), w = [], scr = [];
   w.push(MAT.planks(-600, -400, 3200, 1900, {base: '#2A2117', seed: 131, size: 64}));
   const land = smooth(0.2, 1.0, t), lift = 40 * (1 - land);
   w.push(`<g opacity="${f1(land)}" transform="translate(0,${f1(-lift)}) rotate(${f1(-1.2 * (1 - land) - 0.6)}, 960, 520)"><rect x="${LB.x0 + 14}" y="${LB.y0 + 20}" width="${LB.w}" height="${LB.h}" fill="#000" opacity="0.45" filter="url(#soft)"/>` +
-    `<image href="${NV_DIR}keppler_looking_backward_1893_large.png" x="${LB.x0}" y="${LB.y0}" width="${LB.w}" height="${LB.h}"/></g>`);
-  // (a) the men in top hats, ringed one by one; an arrow to the newcomer they block
-  const men = [[250, 250], [445, 275], [690, 285], [935, 270], [1170, 248]];
-  men.forEach(([px, py], i) => { const [x, y] = LBP(px, py); w.push(ringOn(x, y, 46, smooth(4.6 + i * 0.35, 5.2 + i * 0.35, t) * (1 - smooth(8.2, 8.6, t)), 4)); });
-  const nc = LBP(1030, 340), ncF = LBP(1030, 560);
-  w.push(drawOn([LBP(735, 330), LBP(880, 380), [nc[0] - 36, nc[1] + 40]], smooth(6.4, 7.2, t) * (1 - smooth(8.2, 8.6, t)), 5));
-  if (t > 7.1 && t < 8.4) w.push(`<path d="M${f1(nc[0] - 36)},${f1(nc[1] + 40)} l-22,-4 l12,18 Z" fill="${E3.teal}"/>`);
-  // (b) each man tied to his shadow by a teal line
-  const shadows = [[235, 95], [470, 85], [690, 85], [920, 95], [1110, 95]];
-  men.forEach((m, i) => { const [x0, y0] = LBP(m[0], m[1] - 40), [x1, y1] = LBP(shadows[i][0], shadows[i][1] + 30); w.push(drawOn([[x0, y0], [x1, y1]], smooth(9.6 + i * 0.4, 10.2 + i * 0.4, t) * (1 - smooth(13.4, 13.8, t)), 4)); w.push(ringOn(x1, y1 - 20, 52, smooth(9.9 + i * 0.4, 10.5 + i * 0.4, t) * (1 - smooth(13.4, 13.8, t)), 4)); });
+    lbImage() + `</g>`);
+  // (a) the men in top hats, ringed one by one; an arrow from the raised hand to the newcomer they block
+  const men = LBM.men.map(([x, y]) => LBS(x, y)), shadows = LBM.shadows.map(([x, y]) => LBS(x, y)), K = LB.k;
+  men.forEach(([x, y], i) => { w.push(ringOn(x, y, 46, smooth(4.6 + i * 0.35, 5.2 + i * 0.35, t) * (1 - smooth(8.2, 8.6, t)), 4)); });
+  const hd = LBS(...LBM.hand), nc = LBS(...LBM.newcomer), mid = LBS(2030, 880);
+  w.push(drawOn([hd, mid, nc], smooth(6.4, 7.2, t) * (1 - smooth(8.2, 8.6, t)), 5));
+  if (t > 7.1 && t < 8.4) w.push(`<path d="M${f1(nc[0])},${f1(nc[1])} l-20,-12 l4,22 Z" fill="${E3.teal}"/>`);
+  // (b) each man tied to his shadow by a teal line (from the top of his hat to the shadow's chin), the shadow's head ringed
+  men.forEach((m, i) => { const sh = shadows[i]; w.push(drawOn([[m[0], m[1] - 100 * K], [sh[0], sh[1] + 120 * K]], smooth(9.6 + i * 0.4, 10.2 + i * 0.4, t) * (1 - smooth(13.4, 13.8, t)), 4)); w.push(ringOn(sh[0], sh[1], 52, smooth(9.9 + i * 0.4, 10.5 + i * 0.4, t) * (1 - smooth(13.4, 13.8, t)), 4)); });
   // (c) the caption underlined
-  const cap0 = LBP(355, 820), cap1 = LBP(985, 818);
-  w.push(drawOn([cap0, cap1], smooth(14.9, 15.6, t) * (1 - smooth(17.4, 17.8, t)), 3));
+  w.push(drawOn([LBS(...LBM.caption[0]), LBS(...LBM.caption[1])], smooth(14.9, 15.6, t) * (1 - smooth(17.4, 17.8, t)), 3));
   // (d) back out: arrows from the shadows down to the men (the past behind the present)
-  shadows.forEach((sh, i) => { const [x0, y0] = LBP(sh[0], sh[1] + 40), [x1, y1] = LBP(men[i][0], men[i][1] - 30); const u = smooth(19.0 + i * 0.2, 19.8 + i * 0.2, t) * (1 - smooth(21.4, 21.8, t)); w.push(drawOn([[x0, y0], [x1, y1]], u, 7)); if (u > 0.95) w.push(`<path d="M${f1(x1)},${f1(y1 + 6)} l-11,-20 l22,0 Z" fill="${E3.teal}" stroke="#111" stroke-width="2"/>`); });
+  shadows.forEach((sh, i) => { const x0 = sh[0], y0 = sh[1] + 125 * K, x1 = men[i][0], y1 = men[i][1] - 125 * K; const u = smooth(19.0 + i * 0.2, 19.8 + i * 0.2, t) * (1 - smooth(21.4, 21.8, t)); w.push(drawOn([[x0, y0], [x1, y1]], u, 7)); if (u > 0.95) w.push(`<path d="M${f1(x1)},${f1(y1 + 6)} l-11,-20 l22,0 Z" fill="${E3.teal}" stroke="#111" stroke-width="2"/>`); });
   const world = layerAt(c, 1, w.join(''));
   // screen-space text, beat by beat
   if (t > 1.0 && t < 4.2) scr.push(tag(140, 140, 'PUCK · JANUARY 11, 1893', smooth(1.0, 1.4, t) * (1 - smooth(3.8, 4.2, t))), tag(140, 200, '"LOOKING BACKWARD" · JOSEPH KEPPLER', smooth(1.4, 1.8, t) * (1 - smooth(3.8, 4.2, t))));
@@ -1188,7 +1201,7 @@ function renderE3Runner(t) {
     const sb2 = e3HugBed(so, 'rn.p.sore'); so = sb2.fo;
     // Rivke: looking back at the ferry slips, then she turns and runs to Shmuel and takes his free hand (2.9)
     const xr1 = xb0 - 4 * Rm + 78, xr0 = xr1 + 7 * Rr, ru = e3Trap(u, 1.3, 2.9, 0.18);
-    let rv = u < 1.3 ? {...nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {...POSES.stand(u, 0.3), tilt: 6, expr: 'set'}})}
+    let rv = u < 1.3 ? {...nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {...POSES.stand(u, 0.3), lean: 0, bob: 0, tilt: 6, expr: 'set'}})}
       : stepWalk(nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d: -1, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an: {lean: 0, expr: u > 2.9 ? 'worried' : 'set', tilt: 0}}), xr0, -1, 7 * Rr * ru, () => G, 'rn.p.rivke');
     if (u >= 2.6) { const gS = E3K.hand(sb, 'b'), gR = E3K.hand(rv, 'f'), k2 = smooth(2.6, 2.9, u);
       if (u < 2.9) rv = e3Move(rv, 'f', lerp(gR.x, gS.x, k2), lerp(gR.y, gS.y, k2), 'rn.p.rivke.reach');
@@ -1211,7 +1224,7 @@ function renderE3Runner(t) {
       scr.push(drawOn([[fxs - 520, fys - 40], [fxs - 200, fys - 70], [fxs - 20, fys - 10]], k3, 7) + (k3 > 0.9 ? `<path d="M${f1(fxs - 14)},${f1(fys - 4)} l-30,-12 l12,-26 Z" fill="${E3.teal}"/>` : '') + penS(fxs - 560, fys - 110, 'the ferries were this way', 30, -3)); }
     if (u > 1.0 && u < 3.6) scr.push(penS(130, 230, 'heading away from the ferries', 32, -3));
     if (u > 3.4 && u < 6.0) scr.push(penS(1060, 230, 'Yankel, late from work', 32, -3));
-    if (u > 5.2) scr.push(penS(130, 230, 'the man in the good coat was gone', 32, -3));
+    if (u > 5.0) scr.push(penS(130, 230, 'the man in the good coat was gone', 32, -3));
   }
   const black = payoff ? 1 - smooth(PO - 0.2, PO + 0.25, t) : 0;
   const world = rnBack(ts, c) + layerAt(c, 1, rnFore(ts) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
@@ -1534,7 +1547,7 @@ function renderE3Knock(t) {
   // Ma: sewing at the table (0 to 3.3), stands (3.4 to 4.1), crosses to the door (4.1 to 6.1), takes the handle and opens (6.2 to 7.4),
   // folds her arms (7.6 to 8.0); listens; unfolds them (12.0 to 12.6) and nods (12.6 to 14)
   const rimM = {c: '#FFE6C9', a: lod.rimA * 0.8 * fl, dx: -0.01, dy: -0.004};
-  const mR = e3R(H * 0.9), mx1 = x0 + 160, mx0 = mx1 + 4 * mR, rise = smooth(3.4, 4.1, t), walk = e3Trap(t, 4.1, 6.1);
+  const mR = e3R(H * 0.9), mx1 = x0 + 120, mx0 = mx1 + 4 * mR, rise = smooth(3.4, 4.1, t), walk = e3Trap(t, 4.1, 6.1);
   const nod = t > 12.6 && t < 14 ? -9 * Math.max(0, Math.sin((t - 12.6) * 7)) : 0, fold = smooth(7.6, 8.0, t) * (1 - smooth(12.0, 12.6, t));
   const expr = t > 12.4 ? 'smile' : t > 7.6 ? 'set' : 'neutral';
   let ma, over = '';
@@ -1542,16 +1555,18 @@ function renderE3Knock(t) {
   if (t < 4.1) { // seated (sitOn) blending to standing, feet planted where they rest
     const st = sitOn(cast('mother', {...baseO, an: {...baseO.an}}), seat, F, 0.2, 'kn.ma.seat');
     const feet = [E3K.foot(st, 0), E3K.foot(st, 1)];
-    ma = rise > 0 ? plant({...st, y: lerp(st.y, F, rise), an: {...st.an, legs: [lerp(86, 9, rise), lerp(80, -8, rise)], shins: [lerp(6, 5, rise), lerp(0, -5, rise)], standing: rise > 0.5}}, feet, 'kn.ma.rise') : st;
+    const fUnder = [[mx0 - 0.04 * st.h, F], [mx0 + 0.04 * st.h, F]], fr = smooth(0, 0.7, rise), feetR = [[lerp(feet[0][0], fUnder[0][0], fr), F], [lerp(feet[1][0], fUnder[1][0], fr), F]];
+    ma = rise > 0 ? plant({...st, y: lerp(st.y, F, rise), an: {...st.an, legs: [lerp(86, 9, rise), lerp(80, -8, rise)], shins: [lerp(6, 5, rise), lerp(0, -5, rise)], standing: rise > 0.5}}, feetR, 'kn.ma.rise') : st;
     if (t < 3.3) { const k = Math.max(0, Math.sin(t * 3.4)); ma = reach(ma, 'f', tx + 160 - 30 * k, ty - 4, 'kn.ma.sew'); ma = reach(ma, 'b', tx + 176, ty - 2, 'kn.ma.cloth'); }
   } else {
     const m = maFig({...baseO, an: {...baseO.an}}, fold); ma = stepWalk(m.fo, mx0, -1, 4 * mR * walk, () => F, 'kn.ma.walk'); ma = {...ma, an: {...ma.an, ...(fold > 0 ? {fArm: m.fo.an.fArm, bArm: m.fo.an.bArm, lean: 0} : {})}};
     over = fold > 0.85 ? foldedArms(ma.x, ma.y, ma.h, -1, ma.fill, ma.tones.tone) : '';
   }
   // the door: Ma's hand on the handle from 6.2; she pulls it open (6.6 to 7.4) and lets go (7.5)
-  const da = 78 * smooth(6.6, 7.4, t), door = knDoor(da, t);
-  if (t > 6.0 && t < 7.6) { const gN = E3K.hand(ma, 'f'), k = smooth(6.0, 6.25, t);
+  const da = 30 * smooth(6.3, 6.8, t) + 48 * smooth(6.8, 7.4, t), door = knDoor(da, t); // she pulls it to about 30 deg, lets go, it swings on
+  if (t > 6.0 && t < 6.8) { const gN = E3K.hand(ma, 'f'), k = smooth(6.0, 6.25, t);
     ma = t < 6.25 ? e3Move(ma, 'f', lerp(gN.x, door.handle[0], k), lerp(gN.y, door.handle[1], k), 'kn.ma.toHandle') : reach(ma, 'f', door.handle[0], door.handle[1], 'kn.ma.handle'); }
+  if (t >= 6.8 && t < 7.15) { const hA = knDoor(30, 6.8).handle, gN = E3K.hand(ma, 'f'), k = smooth(6.8, 7.15, t); ma = e3Move(ma, 'f', lerp(hA[0], gN.x, k), lerp(hA[1], gN.y, k), 'kn.ma.letGo'); }
   s.push(door.svg);
   // Sore and Rivke come along the hall (0 to 2.2); Rivke knocks three times (2.4 to 3.0); Rivke translates (8 to 11.5), turning to
   // her mother and back; Sore asks with an open hand
@@ -1581,4 +1596,4 @@ function renderE3Knock(t) {
 }
 
 if (typeof window !== 'undefined') Object.assign(window, {renderE3Runner, renderE3Shtetl, renderE3Hester, renderE3Knock});
-Object.assign(CLIPS, {ep3_runner: {sec: 22, render: (t) => renderE3Runner(t)}, ep3_shtetl: {sec: 18, render: (t) => renderE3Shtetl(t)}, ep3_hester: {sec: 21, render: (t) => renderE3Hester(t)}, ep3_knock: {sec: 16, render: (t) => renderE3Knock(t)}});
+Object.assign(CLIPS, {ep3_runner: {sec: 23, render: (t) => renderE3Runner(t)}, ep3_shtetl: {sec: 18, render: (t) => renderE3Shtetl(t)}, ep3_hester: {sec: 21, render: (t) => renderE3Hester(t)}, ep3_knock: {sec: 16, render: (t) => renderE3Knock(t)}});

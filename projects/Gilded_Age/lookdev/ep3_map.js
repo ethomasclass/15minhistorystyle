@@ -52,10 +52,10 @@ const EM_KEYS = [
   [46.0, -30, 130, 0, -10, 47, 1840, 0, 0],
   [52.6, -10, 125, 0, -8, 47, 1880, 0, 0],
   [54.2, 850, 90, 0, 3, 46, 2400, 0, 30],
-  [55.8, 1760, 40, 0, 16, 44, 1250, 0, 40],
-  [60.6, 1775, 50, 0, 22, 45, 1180, 0, 40],
-  [61.9, 890, 90, 0, 4, 50, 3250, 0, 60],
-  [63.7, 890, 90, 0, 0, 51, 3180, 0, 60],
+  [55.8, 1760, 0, 0, 16, 44, 1380, 0, 40],
+  [60.6, 1775, 10, 0, 22, 45, 1320, 0, 40],
+  [61.7, 840, 90, 0, 4, 50, 3750, 0, 40],
+  [63.7, 840, 90, 0, 0, 51, 3680, 0, 40],
   [67.4, -12.5, 72.5, 61, -90, 78, 178, 0, 0],
   [80.0, -12.5, 72.5, 61, -93, 80, 148, 0, 10],
 ];
@@ -544,11 +544,11 @@ function renderEnclave(t) {
   const bkOn = on(EM_CUE.earlier - 0.6, EM_CUE.maKelly + 0.2);
   if (bkOn > 0) {
     lab.push([['THE KELLYS'], [hub('kelly')[0], hub('kelly')[1], hub('kelly')[2] + 6], [-170, -110], bkOn]);
-    lab.push([EM_PLACES.church.tag, ends('church'), [200, -90], on(EM_CUE.parish + 0.2, EM_CUE.maKelly + 0.2)]);
+    lab.push([EM_PLACES.church.tag, ends('church'), [240, 40], on(EM_CUE.parish + 0.2, EM_CUE.maKelly + 0.2)]);
     lab.push([EM_PLACES.saloon.tag, ends('saloon'), [170, 90], on(EM_CUE.saloon + 0.2, EM_CUE.maKelly + 0.2)]);
-    lab.push([EM_PLACES.bank.tag, ends('bank'), [-270, 60], on(EM_CUE.bank + 0.2, EM_CUE.maKelly + 0.2)]);
+    lab.push([EM_PLACES.bank.tag, ends('bank'), [-270, -40], on(EM_CUE.bank + 0.2, EM_CUE.maKelly + 0.2)]);
   }
-  const sbs = on(EM_CUE.maKelly + 0.1, EM_CUE.cost + 0.5);
+  const sbs = on(EM_CUE.maKelly + 0.7, EM_CUE.cost + 1.0);
   if (sbs > 0) {
     lab.push([['LOWER EAST SIDE'], [0, 480, 90], [0, -70], sbs]);
     lab.push([['THE KELLYS\' BROOKLYN', 'AN ENCLAVE TOO'], [1775, 230, 90], [0, -90], sbs]);
