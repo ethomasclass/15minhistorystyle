@@ -12,7 +12,7 @@ EDITS.ch04 = () => {
     now: w('Now,'), heard: w('heard'), it: wa('It', 46), copied: w('copied'), names: wa('Names', 53), shop: w('shop'), rabinovich: w('Rabinovich,'),
     rabinowitsch: wa('Rabinowitsch', 62), rabinowitz: wa('Rabinowitz', 65), rivke: w('Rivke', 1), rebecca: w('Rebecca'), ellis: w('Ellis'),
     famous: w('famous'), open: w('open'), and76: wa('And', 76), but: w('But'), heading: w('heading'), mama: w('Mama.'), sore: w('Sore!'),
-    yankel: wa('Yankel', 90), when: w('When'), gone: w('gone.'), runners: w('Runners'), shady: w('shady'), sellers: w('sellers,'), charging: w('charging'),
+    yankel: wa('Yankel', 90), when: wa('When', 93), gone: w('gone.'), runners: w('Runners'), shady: w('shady'), sellers: wa('sellers', 99), charging: w('charging'),
     very: w('very'), themselves: w('themselves,'), working: w('working'), so: wa('So', 110), newcomer: wa('newcomer', 113.5), rabin2: wa('Rabinowitzes', 115),
     giant: w('giant'), americans: wa('Americans', 119),
   };
