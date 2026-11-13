@@ -208,7 +208,7 @@ function emBuilding(cam, b) {
     if (!b.noChimney && sc > 0.35) { const r = rng(b.seed + 3), cx = b.x0 + 3 + r() * (b.x1 - b.x0 - 8), cy = b.y0 + 8 + r() * (b.y1 - b.y0 - 16);
       s.push(emBoxSimple(cam, cx, cx + 3, cy, cy + 4, z1, z1 + 5, H(pal.dark), H(pal.lit), H(pal.top))); }
     if (b.dots > 0) { // the people who live here, as teal dots on the roof: more and more of them
-      const r = rng(b.seed + 11), rr = Math.max(1.6, sc * 1.1), nd = Math.round((b.x1 - b.x0) * (b.y1 - b.y0) / 95);
+      const r = rng(b.seed + 11), rr = Math.max(1.8, sc * 1.3), nd = Math.round((b.x1 - b.x0) * (b.y1 - b.y0) / 70);
       for (let k = 0; k < nd; k++) { const x = b.x0 + 2 + r() * (b.x1 - b.x0 - 4), y = b.y0 + 2 + r() * (b.y1 - b.y0 - 4), th = r();
         if (th > b.dots) continue; const c = emP(cam, [x, y, z1 + 0.5]); if (c) s.push(`<circle cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(rr)}" fill="${EM.teal}" opacity="${f1(clamp01((b.dots - th) * 12) * 90) / 100}"/>`); }
     }
@@ -564,9 +564,10 @@ function emWorld(n, cam, S) {
   world.push(`<rect width="1920" height="1080" fill="url(#emhaze)" opacity="${f1((S.hazeOn ?? 1) * 100) / 100}"/>`);
   return world;
 }
-const emFerry = (cam, x, y) => emPoly(cam, [[x - 60, y + 20, -1], [x - 120, y + 26, -1], [x - 120, y + 14, -1]], '#A3BAB2', 'opacity="0.25"') +
-  emBoxSimple(cam, x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + emBoxSimple(cam, x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
-  emBoxSimple(cam, x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111');
+const emFerry = (cam, x0, y0, k = 1) => emFerryK(cam, x0, y0, k);
+const emFerryK = (cam, X, Y, k) => { const x = 0, y = 0, T = ([a, b, c]) => [X + a * k, Y + b * k, c * k], P = (pp, f, e) => emPoly(cam, pp.map(T), f, e), Bx = (a, b, c, d, e, f, g, h, i) => emBoxSimple(cam, X + a * k, X + b * k, Y + c * k, Y + d * k, e * k, f * k, g, h, i); return P([[x - 60, y + 20, -1], [x - 120, y + 26, -1], [x - 120, y + 14, -1]], '#A3BAB2', 'opacity="0.25"') +
+  Bx(x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + Bx(x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
+  Bx(x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111'); };
 const EM_LOFT = {x0: -830, x1: -640, y0: 40, y1: 150, floors: 7}; // a clothing firm's cast-iron loft, west of the model (ep3_map_sweatshop)
 function renderEnclave(t) {
   const n = t + EM_T0, cam = emCamera(n);
@@ -641,6 +642,7 @@ const emFrame = (t, world, scr) => frame(e3Defs(t, `<filter id="emblur" x="-50%"
 // tags with leader lines: each tag box sits at its preferred offset from its anchor, is pushed apart from the others, and is kept
 // inside the title-safe area
 function emLabels(L, fixed = []) {
+  L = L.map((l) => ({...l, op: l.op * smooth(-40, 30, Math.min(l.a[0], 1920 - l.a[0])) * smooth(-40, 30, Math.min(l.a[1], 1080 - l.a[1]))})).filter((l) => l.op > 0.01); // anchors leaving the frame take their tags with them
   const boxes = L.map((l) => { const w = Math.max(...l.lines.map((s) => s.length)) * 19.4 + 20, h = l.lines.length * 46 - 4;
     let x = l.a[0] + l.off[0] - w / 2, y = l.a[1] + l.off[1] - h / 2;
     x = Math.max(SAFE.x0 + 4, Math.min(SAFE.x1 - 4 - w, x)); y = Math.max(SAFE.y0 + 4, Math.min(SAFE.y1 - 4 - h, y));
@@ -781,8 +783,8 @@ const MV_WALK2 = emPath([[1310, 430], [1425, 430], [1425, 12], [1587.5, 12], [15
 const MV_KEYS = [
   [0.0, 820, 130, 0, 0, 50, 3650, 0, 40],
   [6.5, 880, 200, 0, 2, 50, 3350, 0, 30],
-  [12.4, 1330, 160, 0, 6, 48, 2450, 0, 30],
-  [17.0, 1430, 120, 0, 8, 47, 2150, 0, 30],
+  [12.4, 1420, 130, 0, 6, 48, 2050, 0, 30],
+  [17.0, 1570, 70, 0, 8, 46, 1300, 0, 30],
 ];
 function renderMove(t) {
   const n = t, cam = emCamera(n, MV_KEYS), C = MV.cue;
@@ -791,7 +793,7 @@ function renderMove(t) {
   if (n < 7.0) [mx, my] = MV_WALK1.at(u1); else if (n < 9.6) { onFerry = true; mx = lerp(MV_FERRY[0][0], MV_FERRY[1][0], uf); my = lerp(MV_FERRY[0][1], MV_FERRY[1][1], uf); } else [mx, my] = MV_WALK2.at(u2);
   const fx = onFerry ? mx : n < 7.0 ? MV_FERRY[0][0] : MV_FERRY[1][0], fy = onFerry ? my : n < 7.0 ? MV_FERRY[0][1] : MV_FERRY[1][1];
   const dist = (p) => v3.len(v3.sub(p, cam.C)), kellyKey = emLot('kelly').key;
-  const extra = [{d: dist([fx, fy, 0]), draw: () => emFerry(cam, fx, fy - 20)}];
+  const extra = [{d: dist([fx, fy, 0]), draw: () => emFerry(cam, fx, fy - 20, 1.8)}];
   if (!onFerry) extra.push({d: dist([mx, my, 0]), draw: () => `<g opacity="${f1((1 - smooth(12.4, 13.0, n)) * 100) / 100}">${emFamily(cam, mx, my, n)}</g>`});
   const world = emWorld(n, cam, {ferry: false, extra, band: (key) => key === kellyKey ? smooth(12.4, 13.0, n) : 0});
   const route = emPath([...MV_WALK1.P, ...MV_WALK2.P]); // the ferry leg is drawn as part of the dotted route too
@@ -803,7 +805,7 @@ function renderMove(t) {
   const lab = [], g = emP(cam, [mx, my, 0.5]);
   lab.push({lines: ['LOWER EAST SIDE'], a: emP(cam, [0, 480, 90]), off: [0, -70], op: emOn(n, 0.5, 18)});
   lab.push({lines: ['WILLIAMSBURG, BROOKLYN'], a: emP(cam, [1775, 230, 90]), off: [80, -150], op: emOn(n, 0.5, 18)});
-  lab.push({lines: n > 12.6 ? ['THE KELLYS', 'AND THE RABINOWITZES · 1886'] : ['THE KELLYS'], a: emP(cam, emTopC('kelly')), off: [40, 150], op: emOn(n, 0.8, 18)});
+  lab.push({lines: n > 12.6 ? ['THE KELLYS', 'AND THE RABINOWITZES · 1886'] : ['THE KELLYS'], a: emP(cam, emTopC('kelly')), off: [-340, 70], op: emOn(n, 0.8, 18)});
   if (g && n < 12.9) lab.push({lines: ['THE RABINOWITZES'], a: [g[0], g[1] - 66], off: [-60, -60], op: emOn(n, 0.6, 12.9)});
   lab.push({lines: ['GRAND STREET FERRY'], a: emP(cam, [fx, fy, 20]), off: [0, 110], op: emOn(n, 6.9, 9.9)});
   scr.unshift(emLabels(lab.filter((L) => L.a && L.op > 0.01), fixed));
@@ -814,7 +816,7 @@ function renderMove(t) {
 // ch06 words: "A few years later" 78.3, "a reporter claimed" 79.5 to 80.1, "the most crowded place on Earth" 80.7 to 82.5. Riis, How
 // the Other Half Lives (1890), ch. X, on part of the Tenth Ward: "three hundred and thirty thousand per square mile".
 const DN = {T0: 77.8};
-const DN_KEYS = [[77.8, -20, 100, 0, -32, 42, 2450, 0, 20], [85.8, -20, 110, 0, -20, 46, 2050, 0, 20]];
+const DN_KEYS = [[77.8, -10, 110, 0, -30, 42, 2000, 0, 30], [85.8, -10, 120, 0, -21, 46, 1600, 0, 30]];
 function renderDensity(t) {
   const n = t + DN.T0, cam = emCamera(n, DN_KEYS);
   const world = emWorld(n, cam, {dots: smooth(78.3, 82.6, n) ** 1.2});
