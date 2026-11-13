@@ -109,6 +109,19 @@ function hanging(fo, which, name, swingDeg, drawAt) { return holding(fo, which, 
 // walking over footholds: feet land one foothold apart (one step = 0.375 h, as walkAn), each foot planted while the body passes
 // over it, swinging to the foothold after next. ground(x) gives the surface height (world y) under x. Body x = x0 + dir * s.
 function stepWalk(fo, x0, dir, s, ground, name) {
+  // Round 14c (user, Nov 13: "are they coded the same as in video 1? that was better"): on flat ground every Ep 3 walker now uses
+  // Episode 1's own walk cycle, rig.js walkAn / walkPhase (the street and cutaway walkers), unchanged. Its stance foot slides back at
+  // exactly the walking speed, so planted feet stay put. Only uneven ground (the stoop's treads) keeps the solved walk below.
+  const g0 = ground(x0), bx0 = x0 + dir * s, R0 = 2 * Math.sin(22 * Math.PI / 180) * fo.h / 2;
+  if (Math.abs(ground(bx0) - g0) < 0.5 && Math.abs(ground(bx0 + dir * R0 * 2) - g0) < 0.5 && Math.abs(ground(bx0 - dir * R0 * 2) - g0) < 0.5) {
+    const child = fo.kind === 'boy' || fo.kind === 'girl', stride = child ? 26 : 22, posed = !!(fo.an && (fo.an.fArm || fo.an.bArm));
+    const w = walkAn(walkPhase(s, fo.h, stride), {stride, arm: child ? 24 : 18, carry: posed});
+    const an = {...(fo.an || {}), legs: w.legs, shins: w.shins, bob: w.bob, standing: true,
+      fArm: fo.an && fo.an.fArm ? fo.an.fArm : w.fArm, bArm: fo.an && fo.an.bArm ? fo.an.bArm : w.bArm};
+    const o = {...fo, x: bx0, y: g0, d: dir, floorY: g0, an};
+    [0, 1].forEach((i) => E3K.log('swing', name + '.' + i, E3K.foot(o, i), E3K.foot(o, i), {t: s}));
+    return o;
+  }
   const R = 2 * Math.sin(22 * Math.PI / 180) * fo.h / 2, n = s / R, hold = (j) => [x0 + dir * (j + 0.5) * R, ground(x0 + dir * (j + 0.5) * R)];
   const feet = [], planted = [];
   for (const f of [0, 1]) {
