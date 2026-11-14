@@ -334,7 +334,7 @@ Thanks for watching. Subscribe for more, and I'll see you next time.
 | pogroms: homes and shops in town after town; police often stood by | RESEARCH 4.1 (glossary: "officials looking the other way") | safe; no death toll |
 | "pogrom" from Russian "devastation" | unverified; standard | check a dictionary |
 | May Laws 1882, "temporary," lasted until 1917 (35 years); barred settling in villages | RESEARCH 4.1 | safe |
-| "More than two million Jews would leave over the next forty years, most for America" | **VERIFY** (standard figure ~2 to 2.5 million, 1881 to 1924; not in RESEARCH) | check YIVO |
+| "More than two million Jews would leave over the next forty years, most for America" | **checked Nov 14**: about 2 million left the Russian Empire 1881 to 1914, about 78 to 80% to the U.S. (Kononczuk 2020, https://www.kh-ihpan.edu.pl/images/KH2020-3/05_Kononczuk.pdf ; Boustan, https://lboustan.scholar.princeton.edu/document/30 ; JTA: 1,681,683 Russia to U.S. 1881 to 1923, https://www.jta.org/archive/1681683-jews-emigrated-from-russia-to-united-states-between-1881-and-1923 ). Over forty years "more than two million" holds | safe |
 | Jews almost never went back | Joseph 1914 (RESEARCH 4.1) | safe |
 | prepaid steerage ~$18 in 1884 NY ads | The Sun, June 11, 1884 (image found; Monarch, National, Red Star lines) | safe as worded |
 | about a month's pay for a laborer | Keeling 2013 | safe |
