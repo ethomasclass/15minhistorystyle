@@ -37,5 +37,5 @@ M=$(echo "$J" | python3 -c "import json,sys;j=json.load(sys.stdin);print(f\"meas
 ffmpeg -v error -y -i out/ep3_joined.mkv -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11:$M -c:a aac -b:a 192k -ar 48000 review/${OUT}_${RES}p.mp4
 rm -f out/ep3_joined.mkv
 if [ "$PREVIEW" = coldopen ]; then mv review/${OUT}_${RES}p.mp4 review/ep3_coldopen_preview.mp4; echo review/ep3_coldopen_preview.mp4; exit 0; fi
-[ $RES = 720 ] && ffmpeg -v error -y -i review/${OUT}_${RES}p.mp4 -vf scale=960:540 -c:v libx264 -preset slow -crf 29 -c:a aac -b:a 128k review/ep3_preview.mp4
+[ $RES = 720 ] && ffmpeg -v error -y -i review/${OUT}_${RES}p.mp4 -vf scale=960:540 -c:v libx264 -preset slow -crf 32 -c:a aac -b:a 96k review/ep3_preview.mp4   # under 30 MB for chat
 if [ $RES = 1080 ]; then mkdir -p ../renders && mv review/ep3_full_1080p.mp4 ../renders/ && echo ../renders/ep3_full_1080p.mp4; else echo review/ep3_full_720p.mp4; fi
