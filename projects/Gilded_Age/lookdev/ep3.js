@@ -312,7 +312,7 @@ function renderSteerage(t, o = {}) {
   if (!o.noFather) ship.push(figure(sitOn(nbOpts('nfather', {x: fx - 40, y: 0, h: SH.man, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim: rimF, an: {fArm: [130, 95], tilt: -10 + 8 * up}}), tween - 21, tween, 0.18, 'father')));
   let mo = sitOn(nbOpts('nmother', {x: fx + 34, y: 0, h: SH.man, d: -1, det: lod.det, rim: rimF, an: {fArm: POSES.rock(te).fArm, bArm: [150, 110], tilt: -12, ...LK.sore}}), tween - 21, tween, 0.16, 'mother');
   if (o.stroke > 0) { const sh = E3K.shoulder(rvO, 'f'), g0 = E3K.hand(mo, 'f'), k = ease(clamp01(o.stroke)), wv = 5 * Math.sin(te * 2.4) * k;
-    const P = [sh[0] + 2, sh[1] + 12 + wv]; mo = k < 1 ? e3Move(mo, 'f', lerp(g0.x, P[0], k), lerp(g0.y, P[1], k), 'steerage.mother.reach') : reach(mo, 'f', P[0], P[1], 'steerage.mother.stroke'); }
+    const gR = E3K.hand(rvO, 'f'), P = [lerp(sh[0], gR.x, 0.6) + 2, lerp(sh[1], gR.y, 0.6) + wv]; /* on her forearm */ mo = k < 1 ? e3Move(mo, 'f', lerp(g0.x, P[0], k), lerp(g0.y, P[1], k), 'steerage.mother.reach') : reach(mo, 'f', P[0], P[1], 'steerage.mother.stroke'); }
   ship.push(figure(mo));
   ship.push(nb('nson', {x: o.talk ? fx - 92 : fx + 8, y: tween, h: SH.man, scale: 0.5, d: 1, det: lod.det, rim: rimF, an: {...POSES.stand(te, 0.7), lean: o.talk ? 0 : -8, tilt: 4, ...LK.shmuel}}));
   for (const x of [cut0 + 260, 520, 1400, 1960, 2200]) ship.push(shipLantern(x, saloon + 6, te + x, 6 + 10 * smooth(6.5, 8, t)));
