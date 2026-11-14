@@ -150,3 +150,16 @@ SCALE=0.6667 FRAMES=<scratch>/ch09 ./build_ch.sh ch09 ga_new_neighbors@0.093@0@0
 - Music levels as Ep 2 (17 LU under the voice). Ch 9 dips `ga_new_neighbors` to 0.05 under the dialogue and brings in the series
   theme at 63.2 s from 55.88 s into the cue, so the cue is at 99.8 s when the chapter ends and the end screen (assemble.sh, as Ep 2)
   carries it on.
+
+### Chapters 2 to 5 polish (Nov 14, coordinator review)
+
+- ch05: the chart in three visits (old column; new column; who decided and the Kellys) with archival groups between them (German
+  emigrants 1882, Irish depositors 1880; Barge Office arrivals 1902, Riis's Mulberry Bend 1890); the camera leans toward the row
+  being read (at most 5 %, so nothing leaves the frame) and a soft teal band marks it.
+- ch04: Rivke turns round by a squash through edge-on (no mirror flip) where she stops and where she starts to run; the crowd stands
+  set back and leans out of the way; the RUNNERS board icons are larger.
+- ch03: steerage without Yankel (he went first); Rivke beside her mother, asks looking at her; Sore turns her head and answers,
+  her hand on Rivke's forearm (a solved contact); the ship rolls on narration time; the note reads "about two weeks at sea"; the
+  camera pushes in closer for the dialogue.
+- ch02: the May Laws board ends once its cards are read; then the Kiev expulsion print (1881) with "temporary" / "it lasted 35 years".
+- Single archival prints are 1,100 to 1,180 px wide (about 60 % of the frame).
