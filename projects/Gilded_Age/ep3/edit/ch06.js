@@ -26,7 +26,7 @@ EDITS.ch06 = () => {
     // 3. "That was the point. This was an enclave..." to "...one sink in the hall for the whole floor." ep3_enclave, keyed to this
     //    chapter's words (clip t = T - 23.0): the market lifts, the network draws (job, kosher butcher, synagogue, landsmanshaft), the
     //    Irish parallel in Brooklyn, then the dive to the Rabinowitzes' floor and the one sink.
-    {a: c.that - 0.1, b: c.slept - 0.2, cut: true, live: true, draw: (T) => renderEnclave(T - EM_T0) +
+    {a: c.that - 0.1, b: c.slept - 0.2, cut: true, live: true, draw: (T) => renderEnclave(T - EM_T0, {holdL: 0.9, holdK: 0.6}) +
       (T > 42.7 ? svg(card(1300, 680, 'Landsmanshaftn', 'Clubs for people from the|same hometown: dues each|month, help when needed.', null, lVis(T, w('landsmanshaftn:'), 52.9, 0.45))) : '')},
     // 4. "The Rabinowitzes slept four in one room, with a boarder in the kitchen to help pay rent." The room that night.
     {a: c.slept - 0.2, b: 78.6, cut: true, live: true, draw: (T) => renderRoomB(T, {z: 0.94 + 0.05 * smooth(c.slept, 78.6, T), ux: 640 + 30 * smooth(c.slept, 78.6, T)}) +

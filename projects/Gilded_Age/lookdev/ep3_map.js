@@ -583,8 +583,8 @@ const emFerryK = (cam, X, Y, k) => { const x = 0, y = 0, T = ([a, b, c]) => [X +
   Bx(x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + Bx(x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
   Bx(x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111'); };
 const EM_LOFT = {x0: -830, x1: -640, y0: 40, y1: 150, floors: 7}; // a clothing firm's cast-iron loft, west of the model (ep3_map_sweatshop)
-function renderEnclave(t) {
-  const n = t + EM_T0, cam = emCamera(n);
+function renderEnclave(t, o = {}) { // o.holdL / o.holdK (s, the Ep 3 edit only): keep the Lower East Side / Brooklyn place tags that much longer
+  const n = t + EM_T0, cam = emCamera(n), hL = o.holdL || 0, hK = o.holdK || 0;
   const openU = smooth(EM_CUE.tenements - 0.6, EM_CUE.tenements + 1.0, n); // the gold building's roof lifts off
   const ml = emMarketLift(n), mcen = [(EM_MARKET.x0 + EM_MARKET.x1) / 2, 0, 0];
   const world = emWorld(n, cam, {lift: (k) => emPlaceLift(k, n), hk: (k) => EM_PLACES[k].cue != null ? smooth(0, 0.35, emLiftU(n, EM_PLACES[k].cue)) : 0, mlift: ml, openU,
@@ -608,23 +608,23 @@ function renderEnclave(t) {
   const lab = [];
   const anchor = (p) => emP(cam, p);
   const on = (a, b, fade = 0.35) => smooth(a, a + fade, n) * (1 - smooth(b - fade, b, n));
-  const lesOn = on(EM_CUE.point - 1.0, EM_CUE.irish + 0.4);
+  const lesOn = on(EM_CUE.point - 1.0, EM_CUE.irish + 0.4 + hL);
   // [lines, anchor 3D, preferred offset (dx, dy) of the tag box centre from the anchor, opacity]
   if (lesOn > 0) {
     lab.push([['THE RABINOWITZES'], [hub('gold')[0], hub('gold')[1], hub('gold')[2] + 6], [150, -120], lesOn]);
-    lab.push([['PUSHCART MARKET'], [mcen[0], -10, ml + 4], [-150, -100], on(EM_CUE.point + 0.2, EM_CUE.irish + 0.4)]);
-    lab.push([EM_PLACES.workshop.tag, ends('workshop'), [120, -90], on(EM_PLACES.workshop.tagAt, EM_CUE.irish + 0.4)]);
-    lab.push([EM_PLACES.butcher.tag, ends('butcher'), [200, 110], on(EM_CUE.kosher + 0.2, EM_CUE.irish + 0.4)]);
-    lab.push([EM_PLACES.synagogue.tag, ends('synagogue'), [-40, 150], on(EM_PLACES.synagogue.tagAt, EM_CUE.irish + 0.4)]);
+    lab.push([['PUSHCART MARKET'], [mcen[0], -10, ml + 4], [-150, -100], on(EM_CUE.point + 0.2, EM_CUE.irish + 0.4 + hL)]);
+    lab.push([EM_PLACES.workshop.tag, ends('workshop'), [120, -90], on(EM_PLACES.workshop.tagAt, EM_CUE.irish + 0.4 + hL)]);
+    lab.push([EM_PLACES.butcher.tag, ends('butcher'), [200, 110], on(EM_CUE.kosher + 0.2, EM_CUE.irish + 0.4 + hL)]);
+    lab.push([EM_PLACES.synagogue.tag, ends('synagogue'), [-40, 150], on(EM_PLACES.synagogue.tagAt, EM_CUE.irish + 0.4 + hL)]);
     const sub = [[EM_CUE.paid, 'A SICK FUND'], [EM_CUE.doctor, 'A DOCTOR'], [EM_CUE.grave, 'A GRAVE']].filter(([c]) => n > c).map(([, s2]) => s2);
-    lab.push([sub.length ? ['LANDSMANSHAFT', sub.join(' · ')] : ['LANDSMANSHAFT'], ends('hall'), [-60, -120], on(EM_CUE.landsman + 0.2, EM_CUE.irish + 0.4)]);
+    lab.push([sub.length ? ['LANDSMANSHAFT', sub.join(' · ')] : ['LANDSMANSHAFT'], ends('hall'), [-60, -120], on(EM_CUE.landsman + 0.2, EM_CUE.irish + 0.4 + hL)]);
   }
-  const bkOn = on(EM_CUE.earlier - 0.6, EM_CUE.maKelly + 0.2);
+  const bkOn = on(EM_CUE.earlier - 0.6, EM_CUE.maKelly + 0.2 + hK);
   if (bkOn > 0) {
     lab.push([['THE KELLYS'], [hub('kelly')[0], hub('kelly')[1], hub('kelly')[2] + 6], [-170, -110], bkOn]);
-    lab.push([EM_PLACES.church.tag, ends('church'), [240, 40], on(EM_CUE.parish + 0.2, EM_CUE.maKelly + 0.2)]);
-    lab.push([EM_PLACES.saloon.tag, ends('saloon'), [170, 90], on(EM_CUE.saloon + 0.2, EM_CUE.maKelly + 0.2)]);
-    lab.push([EM_PLACES.bank.tag, ends('bank'), [-270, -40], on(EM_CUE.bank + 0.2, EM_CUE.maKelly + 0.2)]);
+    lab.push([EM_PLACES.church.tag, ends('church'), [240, 40], on(EM_CUE.parish + 0.2, EM_CUE.maKelly + 0.2 + hK)]);
+    lab.push([EM_PLACES.saloon.tag, ends('saloon'), [170, 90], on(EM_CUE.saloon + 0.2, EM_CUE.maKelly + 0.2 + hK)]);
+    lab.push([EM_PLACES.bank.tag, ends('bank'), [-270, -40], on(EM_CUE.bank + 0.2, EM_CUE.maKelly + 0.2 + hK)]);
   }
   const sbs = on(EM_CUE.maKelly + 0.7, EM_CUE.cost + 1.0);
   if (sbs > 0) {
