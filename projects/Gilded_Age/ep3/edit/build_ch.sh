@@ -19,12 +19,13 @@ WAV=../public/audio/$CH.wav; [ -f ../public/audio/$CH.scene.wav ] && WAV=../publ
 N=$(python3 -c "import math;print(math.ceil($(node render_edit.mjs $KEY --dur)*30))")   # the edit's length
 DUR=$(python3 -c "print($N/30)")
 FR=${FRAMES:-out/$KEY}
+FX=png; [ -n "$FRAMEJPG" ] && FX=jpg   # FRAMEJPG=1: JPEG frames (render_edit.mjs), for 1080p builds on a small disk
 mkdir -p "$FR" review
-if [ ! -f "$FR"/f$(printf %04d $((N - 1))).png ]; then
+if [ ! -f "$FR"/f$(printf %04d $((N - 1))).$FX ]; then
   P=4; STEP=$(( (N + P - 1) / P ))
   for i in $(seq 0 $((P - 1))); do node render_edit.mjs $KEY "$FR" $((i * STEP)) $(( (i + 1) * STEP )) & done; wait
 fi
-ARGS=(-framerate 30 -i "$FR"/f%04d.png -i $WAV); FL=""; MIX="[1]"; k=2
+ARGS=(-framerate 30 -i "$FR"/f%04d.$FX -i $WAV); FL=""; MIX="[1]"; k=2
 if [ -f ../public/audio/$CH.fx.wav ]; then ARGS+=(-i ../public/audio/$CH.fx.wav); MIX+="[$k]"; k=$((k + 1)); fi
 for spec in "$@"; do
   IFS=@ read -r CUE VOL START OFF END FOD <<< "$spec"; END=${END:-$DUR}; FOD=${FOD:-1.4}

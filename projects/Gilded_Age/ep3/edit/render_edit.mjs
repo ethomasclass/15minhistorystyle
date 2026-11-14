@@ -18,7 +18,7 @@ await page.goto('file://' + path.join(here, 'edit.html'));
 if (!words) words = {duration: await page.evaluate((k) => EDITS[k]().dur, key), words: []};
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
 const shoot = async (T, file, type) => { // retried: a long render can hit a one-off "Unable to capture screenshot"
-  for (let k = 0; ; k++) { try { await page.evaluate(([c, t]) => window.drawEdit(c, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: 82} : {})}); return; }
+  for (let k = 0; ; k++) { try { await page.evaluate(([c, t]) => window.drawEdit(c, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: process.env.FRAMEJPG ? 94 : 82} : {})}); return; }
     catch (e) { if (k >= 3) throw e; console.error('retry', T, e.message.split('\n')[0]); await new Promise((r) => setTimeout(r, 1000)); } } };
 const editDur = await page.evaluate((k) => EDITS[k]().dur, key);   // the chapter's length, with any held tail after the last word
 if (a1 === '--dur') { console.log(editDur); await browser.close(); process.exit(0); }
@@ -27,7 +27,9 @@ if (a1 === '--stills') {
 } else {
   fs.mkdirSync(a1, {recursive: true});
   const N = Math.ceil(editDur * 30), s = Number(a2 ?? 0), e = Math.min(N, Number(a3 ?? N));
-  for (let i = s; i < e; i++) await shoot(i / 30, path.join(a1, `f${String(i).padStart(4, '0')}.png`), 'png');
+  // FRAMEJPG=1: JPEG frames (quality 94; a fraction of the disk of PNG at 1080p)
+  const jpg = !!process.env.FRAMEJPG;
+  for (let i = s; i < e; i++) await shoot(i / 30, path.join(a1, `f${String(i).padStart(4, '0')}.${jpg ? 'jpg' : 'png'}`), jpg ? 'jpeg' : 'png');
   console.log('done', key, s, e);
 }
 await browser.close();
