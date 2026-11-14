@@ -583,7 +583,7 @@ const emFerryK = (cam, X, Y, k) => { const x = 0, y = 0, T = ([a, b, c]) => [X +
   Bx(x - 30, x + 30, y + 8, y + 32, 0, 8, '#0B1312', '#22383A', '#1A2A29') + Bx(x - 14, x + 14, y + 12, y + 28, 8, 18, '#0B1312', '#33504C', '#2B4744') +
   Bx(x - 2, x + 2, y + 18, y + 22, 18, 32, '#050505', '#1A1A18', '#111'); };
 const EM_LOFT = {x0: -830, x1: -640, y0: 40, y1: 150, floors: 7}; // a clothing firm's cast-iron loft, west of the model (ep3_map_sweatshop)
-function renderEnclave(t, o = {}) { // o.holdL / o.holdK (s, the Ep 3 edit only): keep the Lower East Side / Brooklyn place tags that much longer
+function renderEnclave(t, o = {}) { // o.holdL / o.holdK (s, the Ep 3 edit only): keep the Lower East Side / Brooklyn place tags that much longer; o.graveAt: when 'A GRAVE' joins the landsmanshaft tag
   const n = t + EM_T0, cam = emCamera(n), hL = o.holdL || 0, hK = o.holdK || 0;
   const openU = smooth(EM_CUE.tenements - 0.6, EM_CUE.tenements + 1.0, n); // the gold building's roof lifts off
   const ml = emMarketLift(n), mcen = [(EM_MARKET.x0 + EM_MARKET.x1) / 2, 0, 0];
@@ -616,7 +616,7 @@ function renderEnclave(t, o = {}) { // o.holdL / o.holdK (s, the Ep 3 edit only)
     lab.push([EM_PLACES.workshop.tag, ends('workshop'), [120, -90], on(EM_PLACES.workshop.tagAt, EM_CUE.irish + 0.4 + hL)]);
     lab.push([EM_PLACES.butcher.tag, ends('butcher'), [200, 110], on(EM_CUE.kosher + 0.2, EM_CUE.irish + 0.4 + hL)]);
     lab.push([EM_PLACES.synagogue.tag, ends('synagogue'), [-40, 150], on(EM_PLACES.synagogue.tagAt, EM_CUE.irish + 0.4 + hL)]);
-    const sub = [[EM_CUE.paid, 'A SICK FUND'], [EM_CUE.doctor, 'A DOCTOR'], [EM_CUE.grave, 'A GRAVE']].filter(([c]) => n > c).map(([, s2]) => s2);
+    const sub = [[EM_CUE.paid, 'A SICK FUND'], [EM_CUE.doctor, 'A DOCTOR'], [o.graveAt ?? EM_CUE.grave, 'A GRAVE']].filter(([c]) => n > c).map(([, s2]) => s2);
     lab.push([sub.length ? ['LANDSMANSHAFT', sub.join(' · ')] : ['LANDSMANSHAFT'], ends('hall'), [-60, -120], on(EM_CUE.landsman + 0.2, EM_CUE.irish + 0.4 + hL)]);
   }
   const bkOn = on(EM_CUE.earlier - 0.6, EM_CUE.maKelly + 0.2 + hK);
