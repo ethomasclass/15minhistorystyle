@@ -19,7 +19,12 @@ EDITS.ch03 = () => {
   const table = letter([[0, 0], [7.9, 1.1], [9.0, 1.9], [11.0, 3.3], [11.9, 3.9], [15.9, 4.7]], {alone: true, quiet: true, tag: 'A LETTER HOME · NEW YORK · 1884'});
   const route = letter([[46.0, 7.3], [c.hamburg + 0.4, 8.1], [c.there + 0.2, 8.15], [c.steerage, 9.6], [c.cheapest + 0.2, 9.7]], {noEast: true});
   const chain = ((m) => (T) => renderChain(m(T)))(remap([[25.9, 0], [31.1, 2.3], [31.8, 3.0], [32.7, 4.2], [33.7, 5.8], [34.6, 6.8], [35.6, 8.2], [36.5, 9.4], [37.4, 10.35], [38.0, 10.9], [41.8, 11.35]]));
-  const ship = ((m) => (T) => renderSteerage(m(T)))(remap([[c.cheapest + 0.2, 1.2], [55.1, 3.6], [56.5, 4.6], [c.hundreds, 6.5], [61.0, 8.4], [c.then - 0.1, 10.0]]));
+  const ship = ((m) => (T) => renderSteerage(m(T), {keys: [[10.9, 4.3, 1625, 395]], te: T, noFather: true, talk: true, rivkeDx: 20, look: sLook(T), stroke: smooth(64.6, 65.4, T) * (1 - smooth(67.4, 67.8, T))}))(remap([[c.cheapest + 0.2, 1.2], [55.1, 3.6], [56.5, 4.6], [c.hundreds, 6.5], [61.0, 8.4], [62.0, 10.0], [c.then - 0.1, 10.9]]));
+  // the dialogue: Rivke looks up at her mother and asks; Sore turns her head to her and answers, her hand on Rivke's arm
+  const sLook = (T) => () => { const ask = T > w('Mama,') - 0.2 && T < 64.6, ans = T > 65.2 && T < 67.0;
+    return {rivke: T > 60.0 ? {tilt: ask ? -14 + 2 * Math.sin(T * 6) : -8, expr: 'worried', blink: ((T + 1.3) % 3.7) < 0.12} : {},
+      sore: T > 60.0 ? {tilt: ans ? -2 + 3 * Math.sin(T * 5.5) : ask ? -6 : -12, expr: ans ? 'smile' : 'neutral', blink: ((T + 0.4) % 3.9) < 0.12} : {},
+      shmuel: {tilt: 4 + 6 * Math.sin(T * 0.7), blink: ((T + 2.2) % 3.3) < 0.12}}; };
   const fort = ((m) => (T) => renderCastleGarden(m(T)))(remap([[c.then - 0.1, 0], [c.barge - 0.2, 1.0], [cardAt, 3.2], [dur, 4.2]]));
   const shots = [
     // 1. "The ticket came in a letter. Yankel had found work in New York, pressing coats. He lived as a boarder in somebody else's

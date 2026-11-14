@@ -19,7 +19,7 @@ EDITS.ch02 = () => {
   const night = sht([[35.0, 5.7], [41.6, 10.1], [48.4, 10.4]]);
   const dawn = sht([[73.0, 11.2], [c.yankel, 11.6], [76.6, 14.8], [c.two - 0.4, 15.1], [cardAt, 18.0]]);
   const map1 = pale([[11.6, 0], [13.0, 0.8], [16.6, 2.4], [18.0, 3.8], [18.5, 4.8], [19.0, 6.4], [22.4, 7.6]]);
-  const map2 = pale([[48.4, 6.0], [48.8, 6.6], [49.6, 8.3], [c.may, 10.0], [59.0, 14.0]]);
+  const map2 = pale([[48.4, 6.0], [48.8, 6.6], [49.6, 8.3], [c.may, 10.0], [54.4, 11.0]]);
   const shots = [
     // 1. "What they left behind was a small wooden house in a small town, in what is now Ukraine. The Rabinowitzes are made up.
     //    But millions of families lived just like them." The house in the Pale; it opens on the Friday-night table.
@@ -30,12 +30,12 @@ EDITS.ch02 = () => {
     // 3. "Then, in March 1881, a group of revolutionaries assassinated the tsar, Alexander the Second. A rumor spread that the Jews
     //    were behind it. They weren't." Makovsky's deathbed painting (1881).
     {a: c.then - 0.1, b: 35.0, draw: (T) => push(T, c.then, 35.0, 0.04) +
-      printCard('a_departure/alexander_ii_on_his_deathbed_makovsky_1881_commons.jpg', {x: 150, y: 150, w: 980, ar: 0.722, rot: -1.5, o: fin(T, c.then, 0.5), T,
+      printCard('a_departure/alexander_ii_on_his_deathbed_makovsky_1881_commons.jpg', {x: 110, y: 120, w: 1150, ar: 0.722, rot: -1.5, o: fin(T, c.then, 0.5), T,
         caption: 'Alexander II on his deathbed &middot; Makovsky, 1881'}) + `</div>` +
-      T_('MARCH 1881', 1250, 220, fin(T, c.march, 0.3)) +
-      P_('the tsar, assassinated', 1250, 360, fin(T, c.tsar, 0.3), 30) +
-      P_('a rumor blamed the Jews', 1250, 520, fin(T, c.rumor, 0.3), 30) +
-      P_('it was false', 1290, 640, fin(T, c.weren, 0.3), 34)},
+      T_('MARCH 1881', 1300, 220, fin(T, c.march, 0.3)) +
+      P_('the tsar, assassinated', 1300, 360, fin(T, c.tsar, 0.3), 26) +
+      P_('a rumor blamed the Jews', 1290, 520, fin(T, c.rumor, 0.3), 26) +
+      P_('it was false', 1330, 650, fin(T, c.weren, 0.3), 34)},
     // 4. "That spring, mobs attacked Jewish homes and shops in town after town. Houses burned. The police often stood by. English
     //    got a new word from those months. Pogrom. It comes from a Russian word for 'devastation.'" Night, roofs burning far off
     //    (no people shown); the card.
@@ -45,15 +45,21 @@ EDITS.ch02 = () => {
       P_('from Russian: &quot;devastation&quot;', 1040, 950, fin(T, c.russian - 0.2, 0.3), 30)},
     // 5. "The next year, the government passed the May Laws. They were called 'temporary.' They lasted thirty-five years, pushing
     //    Jews out of villages and out of work." Back to the Pale map: its three cards.
-    {a: 48.4, b: c.so - 0.1, live: true, draw: (T) => map2(T) + P_('&quot;temporary&quot;: 35 years', 130, 800, fin(T, c.temporary, 0.3), 32)},
+    {a: 48.4, b: 54.4, live: true, draw: (T) => map2(T)},
+    //    "They lasted thirty-five years, pushing Jews out of villages and out of work." Families driven out (Kiev, 1881).
+    {a: 54.4, b: c.so - 0.1, draw: (T) => push(T, 54.4, c.so, 0.04) +
+      printCard('a_departure/kiev_expulsion_of_jewish_families_ilustracion_espanola_1881_commons.jpg', {x: 110, y: 150, w: 1150, ar: 0.635, rot: -1, o: fin(T, 54.4, 0.5), T,
+        caption: 'Jewish families driven from their homes, Kiev &middot; La Ilustraci&oacute;n Espa&ntilde;ola, 1881'}) + `</div>` +
+      P_('&ldquo;temporary&rdquo;', 1320, 330, fin(T, 54.5, 0.3), 36) + P_('it lasted 35 years', 1310, 470, fin(T, 54.9, 0.3), 30) +
+      P_('out of villages, out of work', 1300, 610, fin(T, w('pushing'), 0.3), 26)},
     // 6. "So families had a choice. Stay and hope. Or leave." A village farewell (print, 1883).
     {a: c.so - 0.1, b: 65.4, draw: (T) => push(T, c.so, 65.4, 0.04) +
-      printCard('a_departure/the_emigrants_farewell_abschied_print_1883_loc2013646644.jpg', {x: 520, y: 70, w: 860, ar: 0.79, rot: 1.2, o: fin(T, c.so - 0.1, 0.5), T,
+      printCard('a_departure/the_emigrants_farewell_abschied_print_1883_loc2013646644.jpg', {x: 590, y: 50, w: 1150, ar: 0.79, rot: 1.2, o: fin(T, c.so - 0.1, 0.5), T,
         caption: 'The emigrants&rsquo; farewell &middot; print, 1883'}) + `</div>` +
-      P_('stay and hope?', 120, 300, fin(T, c.stay, 0.3), 40) + P_('or leave', 1440, 420, fin(T, c.or, 0.3), 46)},
+      P_('stay and hope?', 110, 330, fin(T, c.stay, 0.3), 34) + P_('or leave', 150, 560, fin(T, c.or, 0.3), 44)},
     // 7. "More than two million Jews would leave over the next forty years, most of them for America. And they almost never came back."
     {a: 65.4, b: 73.0, draw: (T) => push(T, 65.4, 73.0, 0.03) +
-      printCard('a_departure/german_emigrants_embarking_hamburg_steamer_harpers_1874_commons.jpg', {x: 1120, y: 150, w: 640, ar: 0.799, rot: 2, o: fin(T, 65.4, 0.5) * 0.92, T,
+      printCard('a_departure/german_emigrants_embarking_hamburg_steamer_harpers_1874_commons.jpg', {x: 1040, y: 130, w: 760, ar: 0.799, rot: 2, o: fin(T, 65.4, 0.5) * 0.92, T,
         caption: 'Emigrants boarding at Hamburg &middot; Harper&rsquo;s, 1874'}) + `</div>` +
       bigFig('2 million+', {x: 140, y: 300, size: 150, w: 900, align: 'left', o: fin(T, w('million'), 0.4)}) +
       op(fin(T, w('Jews', 4), 0.4), mono('Jews who left the Russian Empire', {x: 150, y: 480, size: 28, color: C.cream, ls: 3})) +

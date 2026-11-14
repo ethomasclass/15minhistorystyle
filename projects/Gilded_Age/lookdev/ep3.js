@@ -238,10 +238,14 @@ function bunks(x0, x1, yTop, yBot, seed) { // two-tier wooden berths in rows, st
 }
 function shipLantern(x, y, t, swing) { const a = swing * Math.sin(t * 1.3);
   return `<g transform="rotate(${f1(a)}, ${x}, ${y})">${line([[x, y], [x, y + 18]], '#0D0C09', 2)}<rect x="${x - 6}" y="${y + 18}" width="12" height="16" fill="#0D0C09"/><rect x="${x - 4}" y="${y + 21}" width="8" height="10" fill="${E3.warm}" opacity="0.9"/></g>` + glowC(x + 30 * Math.sin(a * Math.PI / 180), y + 26, 110, 0.55); }
-function renderSteerage(t) {
-  const keys = [[0, 0.5, 1000, 40], [3.2, 0.53, 1000, 60], [8.2, 2.85, 1640, 404], [10, 2.95, 1650, 404]];
-  const c = cam2(camAt(keys, t)), z = c.z;
-  const roll = 0.7 * Math.sin(t * 0.85), heave = 6 * Math.sin(t * 0.85 + 1.2);
+// o (optional, the Ep 3 edit, ch 3): te = the sea's clock (roll, heave, waves, idle), so a slowed or held beat still rolls;
+// noFather = Yankel is not aboard (he went first, in 1882); talk = the family close together for "Mama, how much farther?" (Rivke
+// beside her mother, Shmuel behind), look() = head/expression overrides {rivke, sore, shmuel}, stroke (0..1) = Sore's hand on
+// Rivke's arm, moving gently (phase from te)
+function renderSteerage(t, o = {}) {
+  const keys = [[0, 0.5, 1000, 40], [3.2, 0.53, 1000, 60], [8.2, 2.85, 1640, 404], [10, 2.95, 1650, 404], ...(o.keys || [])]; // o.keys: more camera keys after 10
+  const c = cam2(camAt(keys, t)), z = c.z, te = o.te ?? t, LK = o.look ? o.look() : {};
+  const roll = 0.7 * Math.sin(te * 0.85), heave = 6 * Math.sin(te * 0.85 + 1.2);
   const back = [], ship = [], front = [];
   // sea behind the hull and a low overcast sky band with a far steamer's smoke
   back.push(`<rect x="-3000" y="${SH.wl - 10}" width="9000" height="2000" fill="url(#e3sea)"/>` + MAT.water(-3000, SH.wl - 6, 9000, 600, t, {seed: 31, n: 140, top: '#3E5F5A', bottom: '#0B1414'}));
@@ -302,12 +306,16 @@ function renderSteerage(t) {
   const rimF = {c: E3.warm, a: lod.rimA * 0.9, dx: 0.01, dy: -0.004};
   ship.push(trunk(fx + 60, tween - 2, 46, 26, '#0D0C09') + featherBed(fx - 120, tween - 2, 60, 22, '#A3BAB2'));
   ship.push(candlestick(fx + 74, tween - 30, 0.9, '#C9A55A') + candlestick(fx + 90, tween - 30, 0.9, '#C9A55A'));
-  ship.push(nb('ndaughter', {x: fx - 96, y: tween, h: SH.man, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimF, an: {...POSES.stand(t, 0.4), tilt: 22 * up + 2, fArm: [165 - 20 * up, 150], expr: up > 0.5 ? 'awe' : 'neutral'}}));
+  const rvO = nbOpts('ndaughter', {x: o.talk ? fx + (o.rivkeDx ?? -8) : fx - 96, y: tween, h: SH.man, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimF, an: {...POSES.stand(te, 0.4), tilt: 22 * up + 2, fArm: [165 - 20 * up, 150], expr: up > 0.5 ? 'awe' : 'neutral', ...LK.rivke}});
+  ship.push(fig(rvO));
   // father and mother sit on the lower berth's straw tick (top at tween - 21), feet flat on the deck planks
-  ship.push(figure(sitOn(nbOpts('nfather', {x: fx - 40, y: 0, h: SH.man, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim: rimF, an: {fArm: [130, 95], tilt: -10 + 8 * up}}), tween - 21, tween, 0.18, 'father')));
-  ship.push(figure(sitOn(nbOpts('nmother', {x: fx + 34, y: 0, h: SH.man, d: -1, det: lod.det, rim: rimF, an: {fArm: POSES.rock(t).fArm, bArm: [150, 110], tilt: -12}}), tween - 21, tween, 0.16, 'mother')));
-  ship.push(nb('nson', {x: fx + 8, y: tween, h: SH.man, scale: 0.5, d: 1, det: lod.det, rim: rimF, an: {...POSES.stand(t, 0.7), lean: -8, tilt: 4}}));
-  for (const x of [cut0 + 260, 520, 1400, 1960, 2200]) ship.push(shipLantern(x, saloon + 6, t + x, 6 + 10 * smooth(6.5, 8, t)));
+  if (!o.noFather) ship.push(figure(sitOn(nbOpts('nfather', {x: fx - 40, y: 0, h: SH.man, d: 1, hat: 'cap', coat: 'frock', det: lod.det, rim: rimF, an: {fArm: [130, 95], tilt: -10 + 8 * up}}), tween - 21, tween, 0.18, 'father')));
+  let mo = sitOn(nbOpts('nmother', {x: fx + 34, y: 0, h: SH.man, d: -1, det: lod.det, rim: rimF, an: {fArm: POSES.rock(te).fArm, bArm: [150, 110], tilt: -12, ...LK.sore}}), tween - 21, tween, 0.16, 'mother');
+  if (o.stroke > 0) { const sh = E3K.shoulder(rvO, 'f'), g0 = E3K.hand(mo, 'f'), k = ease(clamp01(o.stroke)), wv = 5 * Math.sin(te * 2.4) * k;
+    const P = [sh[0] + 2, sh[1] + 12 + wv]; mo = k < 1 ? e3Move(mo, 'f', lerp(g0.x, P[0], k), lerp(g0.y, P[1], k), 'steerage.mother.reach') : reach(mo, 'f', P[0], P[1], 'steerage.mother.stroke'); }
+  ship.push(figure(mo));
+  ship.push(nb('nson', {x: o.talk ? fx - 92 : fx + 8, y: tween, h: SH.man, scale: 0.5, d: 1, det: lod.det, rim: rimF, an: {...POSES.stand(te, 0.7), lean: o.talk ? 0 : -8, tilt: 4, ...LK.shmuel}}));
+  for (const x of [cut0 + 260, 520, 1400, 1960, 2200]) ship.push(shipLantern(x, saloon + 6, te + x, 6 + 10 * smooth(6.5, 8, t)));
   // boiler room below the casing: three boilers, furnace doors glowing, stokers shovelling coal; the engine aft; holds forward
   const bx0 = 700, bx1 = 1300;
   for (let k = 0; k < 3; k++) { const x = bx0 + 30 + k * 190, open = Math.max(0, Math.sin(t * 2.2 + k * 2));
@@ -348,14 +356,14 @@ function renderSteerage(t) {
   // in front of the hull: the sea, see-through below the surface (an x-ray of the hold), foam at the bow and in the wake
   let wave = `M-3000,${wl}`; for (let x = -3000; x <= 6000; x += 40) wave += ` L${x},${f1(wl + 7 * Math.sin(x * 0.012 + t * 2.2) + 4 * Math.sin(x * 0.031 - t * 1.4))}`;
   front.push(`<path d="${wave} L6000,3000 L-3000,3000 Z" fill="#1C3332" opacity="0.32"/><path d="${wave}" stroke="#A3BAB2" stroke-width="3" fill="none" opacity="0.7"/>`);
-  front.push([...Array(10)].map((_, k) => { const ph = (t * 0.6 + k / 10) % 1; return `<ellipse cx="${f1(SH.x1 + 40 - ph * 900)}" cy="${f1(wl + 8 + ph * 10)}" rx="${f1(30 + ph * 90)}" ry="6" fill="#DFE0D6" opacity="${f1(0.55 * (1 - ph))}"/>`; }).join(''));
-  front.push([...Array(12)].map((_, k) => { const ph = (t * 0.5 + k / 12) % 1; return `<ellipse cx="${f1(SH.x0 - ph * 1400)}" cy="${f1(wl + 6)}" rx="${f1(40 + ph * 120)}" ry="5" fill="#DFE0D6" opacity="${f1(0.45 * (1 - ph))}"/>`; }).join(''));
+  front.push([...Array(10)].map((_, k) => { const ph = (te * 0.6 + k / 10) % 1; return `<ellipse cx="${f1(SH.x1 + 40 - ph * 900)}" cy="${f1(wl + 8 + ph * 10)}" rx="${f1(30 + ph * 90)}" ry="6" fill="#DFE0D6" opacity="${f1(0.55 * (1 - ph))}"/>`; }).join(''));
+  front.push([...Array(12)].map((_, k) => { const ph = (te * 0.5 + k / 12) % 1; return `<ellipse cx="${f1(SH.x0 - ph * 1400)}" cy="${f1(wl + 6)}" rx="${f1(40 + ph * 120)}" ry="5" fill="#DFE0D6" opacity="${f1(0.45 * (1 - ph))}"/>`; }).join(''));
   const shipG = `<g transform="translate(0,${f1(heave)}) rotate(${f1(roll)}, 1000, ${wl})">${ship.join('')}</g>`;
   const sky = `<rect width="1920" height="1080" fill="url(#e3overcast)"/>` + clouds(t, 31);
   const world = layerAt(c, 0.35, `<rect x="-6000" y="${SH.wl - 30}" width="14000" height="30" fill="#4E726C" opacity="0.4"/>`) + layerAt(c, 1, back.join('') + shipG + front.join(''));
   const scr = [tag(40, 1040, 'AN ATLANTIC STEAMSHIP · ABOUT 1884', 1)];
   if (t > 0.8 && t < 3.6) scr.push(penS(c.sx(-200), c.sy(-320), 'first class: a dining saloon', 30, -3), penS(c.sx(1300), c.sy(tween) + 130, 'steerage: hundreds below decks', 30, -3));
-  if (t > 8.4) scr.push(penS(1060, 170, 'a week or two at sea', 34, -3), tag(1100, 250, 'COMPOSITE CHARACTERS', smooth(8.4, 8.8, t)));
+  if (t > 8.4) scr.push(penS(1060, 170, 'about two weeks at sea', 34, -3), tag(1100, 250, 'COMPOSITE CHARACTERS', smooth(8.4, 8.8, t)));
   return frame(e3Defs(t), sky, world, scr.join(''), t);
 }
 
@@ -1346,8 +1354,10 @@ function renderE3Payoff(o) {
   const RS = o.runSteps || 7, xr1 = xb0 - 4 * Rm + 78, xr0 = xr1 + RS * Rr, ru = e3Trap(r, 1.3, 2.9, 0.18);
   const dOpts = (d, an) => nbOpts('ndaughter', {x: xr0, y: G, h: H, scale: 0.8, d, hat: 'kerchief', wear: ['plain', 'shawl'], det, rim: sun, an});
   let rv;
-  if (r < 0) { rv = stepWalk({...dOpts(-1, {tilt: 0, expr: 'set', ...LK.rivke}), x: xr0 + exR}, xr0 + exR, -1, exR * e3Trap(r, -preR, -0.4, 0.12), () => G, 'rn.p.rivke.in'); }
-  else if (r < 1.3) rv = plant({...dOpts(1, {...POSES.stand(te, 0.3), lean: 0, bob: 0, tilt: 6, expr: 'set', ...LK.rivke})}, [[xr0 + 0.04 * H * 0.8, G], [xr0 - 0.05 * H * 0.8, G]], 'rn.p.rivke.stand');
+  // turning round is a squash through edge-on (scaleX |cos|), not a mirror flip: at the stop (r -0.25 to 0) and to run (1.15 to 1.4)
+  const turnK = r >= -0.25 && r < 0 ? (r + 0.25) / 0.25 : r >= 1.15 && r < 1.4 ? (r - 1.15) / 0.25 : -1, sxR = turnK < 0 ? 1 : Math.max(0.06, Math.abs(Math.cos(Math.PI * turnK)));
+  if (r < -0.125) { rv = stepWalk({...dOpts(-1, {tilt: 0, expr: 'set', ...LK.rivke}), x: xr0 + exR}, xr0 + exR, -1, exR * e3Trap(r, -preR, -0.4, 0.12), () => G, 'rn.p.rivke.in'); }
+  else if (r < 1.275) rv = plant({...dOpts(1, {...POSES.stand(te, 0.3), lean: 0, bob: 0, tilt: 6, expr: 'set', ...LK.rivke})}, [[xr0 + 0.04 * H * 0.8, G], [xr0 - 0.05 * H * 0.8, G]], 'rn.p.rivke.stand');
   else rv = stepWalk(dOpts(-1, {lean: 0, expr: r > 2.9 ? 'worried' : 'set', tilt: 0, ...LK.rivke}), xr0, -1, RS * Rr * ru, () => G, 'rn.p.rivke');
   if (r >= 2.6) { const gS = E3K.hand(sb, 'b'), gR = E3K.hand(rv, 'f'), k2 = smooth(2.6, 2.9, r);
     if (r < 2.9) rv = e3Move(rv, 'f', lerp(gR.x, gS.x, k2), lerp(gR.y, gS.y, k2), 'rn.p.rivke.reach');
@@ -1356,11 +1366,15 @@ function renderE3Payoff(o) {
   const xy1 = xs0 - 4 * Rs + 170, xy0 = xy1 + 9 * Ry, yu = e3Trap(yy, 2.4, 5.2, 0.15);
   const yk = stepWalk(nbOpts('nfather', {x: xy0, y: G, h: H, d: -1, hat: 'cap', coat: 'frock', det, rim: sun, an: {lean: 0, tilt: 6, expr: 'worried', ...LK.yankel}}), xy0, -1, 9 * Ry * yu, () => G, 'rn.p.yankel');
   const rc = rng(146);
-  for (let k = 0; k < 9; k++) { const cx0 = 1650 + k * 95 + rc() * 30, near = Math.max(0, 1 - Math.abs(yk.x - cx0) / 110), fo = e3PersonOpts(rc, cx0, G - 6 - (k % 2) * 10, H, te, RN.ink, {an: {lean: -14 * near}});
+  // the crowd stands set back from the walkway (the family passes in front of it), and leans out of the way of whoever passes
+  const passers = [rm, sb, so, rv, yk].map((f) => f.x);
+  for (let k = 0; k < 9; k++) { const cx0 = 1650 + k * 95 + rc() * 30, near = Math.max(0, 1 - Math.abs(yk.x - cx0) / 110), nearF = Math.max(...passers.map((x) => Math.max(0, 1 - Math.abs(x - cx0) / 120)));
+    const fo = e3PersonOpts(rc, cx0, G - 44 - (k % 2) * 12, H * 0.9, te, RN.ink, {an: {lean: -14 * Math.max(near, 0.5 * nearF)}});
     put({...fo, rim: {...sun, a: 0.4}}); }
   const trunkSvg = e3TrunkAt(trunkW[0], trunkW[1]);
   SH.push(`<g>${trunkSvg.replace(/fill="#[0-9A-Fa-f]+"/g, 'fill="#000"')}</g>`);
-  put(yk); put(so, sb2.bed); W.push(trunkSvg); put(rm); put(sb); put(rv);
+  put(yk); put(so, sb2.bed); W.push(trunkSvg); put(rm); put(sb);
+  if (sxR < 1) { const sq = (svg) => `<g transform="translate(${f1(rv.x)},0) scale(${f1(sxR * 1000) / 1000},1) translate(${f1(-rv.x)},0)">${svg}</g>`; SH.push(sq(e3Black(rv))); W.push(sq(fig({...rv, noShadow: true}))); } else put(rv);
   if (o.ferry > 0) { const zp = 1 + (c.z - 1) * 0.7, ax = 960 + (c.ux - 960) * 0.7, ay = 540 + (c.uy - 540) * 0.7, fxs = 960 + (RN.ferry + 280 - ax) * zp, fys = 540 + (G - 380 - ay) * zp;
     scr.push(drawOn([[fxs - 520, fys - 40], [fxs - 200, fys - 70], [fxs - 20, fys - 10]], o.ferry, 7) + (o.ferry > 0.9 ? `<path d="M${f1(fxs - 14)},${f1(fys - 4)} l-30,-12 l12,-26 Z" fill="${E3.teal}"/>` : '')); }
   const world = rnBack(te, c) + layerAt(c, 1, rnFore(te) + e3LongShadow(SH.join(''), G, 1.6, 0.14, 0.3) + W.join(''));
