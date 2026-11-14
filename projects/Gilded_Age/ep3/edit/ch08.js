@@ -45,8 +45,9 @@ EDITS.ch08 = () => {
     //    workers. Immigrants, building the wall." The print, still and framed; no part of it is animated.
     {a: c.puck - 0.1, b: c.nine + 0.04, cut: true, draw: (T) => lPrint(T, c.puck, c.nine, 'desk/puck_anti_chinese_wall_1882.webp', {x: 300, y: 110, w: 1320, rot: -1, z: 0.03}) +
       lSrc('PUCK, 1882 · &ldquo;THE ANTI-CHINESE WALL&rdquo; · LIBRARY OF CONGRESS', lVis(T, c.puck + 0.2, c.nine + 0.1)) +
-      lTag('IRISH, JEWISH AND ITALIAN WORKERS', 330, 120, lVis(T, c.irish, c.nine + 0.1)) +
-      (T > c.immigrants - 0.5 ? slideUp(fin(T, c.immigrants - 0.5), tape('IMMIGRANTS, BUILDING THE WALL', {x: 470, y: 780, size: 72, rot: -2, seed: 803})) : '')},
+      lTag('IN THE PRINT: IRISH, ITALIAN, FRENCH AND JEWISH WORKERS,', 150, 70, lVis(T, c.irish - 0.3, c.nine + 0.1)) +
+      lTag('AN AFRICAN AMERICAN WORKER AND A CIVIL WAR VETERAN (LOC)', 150, 118, lVis(T, c.irish - 0.1, c.nine + 0.1)) +
+      (T > c.immigrants - 0.5 ? slideUp(fin(T, c.immigrants - 0.5), tape('MOSTLY IMMIGRANTS, BUILDING THE WALL', {x: 400, y: 780, size: 68, rot: -2, seed: 803})) : '')},
     // 7. "Nine years later, Puck's founder, Joseph Keppler, drew this. Rich men turning a newcomer away. But look at their shadows.
     //    Each one is a poor immigrant: the man he, or his father, used to be. The caption says they would close 'the bridge that
     //    carried them and their fathers over.' Keppler was an immigrant too, from Austria." ep3_looking_backward, retimed: the

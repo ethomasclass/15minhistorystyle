@@ -334,6 +334,10 @@ function renderKnockB(T, o) {
   let rv = stepWalk(nbOpts('ndaughter', {x: rx1 - 4 * vR, y: F, h: H, scale: 0.8, d: 1, hat: 'kerchief', wear: ['plain', 'shawl'], det: lod.det, rim: rimV, an: {tilt: 2, expr: 'neutral', blink: (t + 1) % 4 < 0.12}}), rx1 - 4 * vR, 1, 4 * vR * wv, () => F, 'kb.rivke');
   let so = stepWalk(nbOpts('nmother', {x: sx1 - 4 * sR, y: F, h: H, d: 1, det: lod.det, rim: rimV, an: {tilt: 0, expr: 'neutral', blink: t % 3.9 < 0.12}}), sx1 - 4 * sR, 1, 4 * sR * wv, () => F, 'kb.sore');
   const kEnd = K.hall + 2.2;
+  // the walk cycle's bob leaves the soles up to about 5 px under the floor line at the end of the walk: over its last 0.5 s the
+  // figure is eased up until both soles are on the floor, so the settle starts from feet that are really planted
+  const onFloor = (fo) => { const dy = Math.max(E3K.foot(fo, 0)[1], E3K.foot(fo, 1)[1]) - F, k = smooth(kEnd - 0.5, kEnd, t); return dy > 0 && k > 0 ? {...fo, y: fo.y - dy * k} : fo; };
+  rv = onFloor(rv); so = onFloor(so);
   // once settled, the settle is only the place they stand on (e3Stand draws them): its contacts are not logged again
   const settled = (fo, u, name, done) => { if (!done) return e3Settle(fo, u, name); const n0 = E3LOG.length, o2 = e3Settle(fo, 1, name); E3LOG.length = n0; return o2; };
   rv = settled(rv, smooth(kEnd, kEnd + 0.2, t), 'kb.rivke', t >= kEnd + 0.2); so = settled(so, smooth(kEnd + 0.1, kEnd + 0.4, t), 'kb.sore', t >= kEnd + 0.4);
