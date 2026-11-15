@@ -104,9 +104,9 @@ function e4Horse(xs, gy, sz, c, dist, o = {}) {
   const dir = o.dir ?? 1, G = E4_GAIT[o.gait || 'walk'], x = xs + dir * dist, p = dist / (G.C * sz), cyc = G.C * sz;
   const gal = o.gait === 'gallop' ? (o.v ?? 1) : 0, bob = gal * 0.035 * sz * Math.max(0, Math.sin(TAU * p * 1 + 0.6)), pitch = gal * 3 * Math.sin(TAU * p + 1.2);
   const L1 = 0.35 * sz, L2 = 0.33 * sz, legs = [[-0.4, true, G.off[0]], [-0.3, true, G.off[1]], [0.42, false, G.off[2]], [0.5, false, G.off[3]]]; // LH, RH, LF, RF
-  const near = [], far = [];
+  const near = [], far = [], hh = o.rest != null ? lerp(G.hh, 0.668, smooth(0, 0.9, o.rest)) : G.hh; // standing: legs nearly straight
   legs.forEach(([lx, hind, off], li) => {
-    const hip = [x + dir * lx * sz, gy - G.hh * sz - bob + dir * lx * sz * Math.sin(pitch * Math.PI / 180)];
+    const hip = [x + dir * lx * sz, gy - hh * sz - bob + dir * lx * sz * Math.sin(pitch * Math.PI / 180)];
     const q = p + off, n = Math.floor(q), u = q - n, plantX = (m) => xs + dir * ((m - off + G.s / 2) * cyc) + dir * lx * sz;
     let T = u < G.s ? [plantX(n), gy] : (() => { const v = (u - G.s) / (1 - G.s); return [lerp(plantX(n), plantX(n + 1), ease(v)), gy - G.lift * sz * Math.sin(Math.PI * v)]; })();
     if (o.rest != null) { const k = smooth(0.18 * li, 0.18 * li + 0.4, o.rest), R = [hip[0] + dir * 0.02 * sz, gy]; T = [lerp(T[0], R[0], k), lerp(T[1], R[1], k) - 0.08 * sz * Math.sin(Math.PI * k) * (T[1] >= gy - 0.5 ? 1 : 0.4)]; }
@@ -119,7 +119,7 @@ function e4Horse(xs, gy, sz, c, dist, o = {}) {
     const col = li % 2 ? shade(c, 0.12) : c, svg = line([hip, knee], col, 0.095 * sz) + line([knee, hoof], col, 0.055 * sz) + `<ellipse cx="${f1(hoof[0] + dir * 0.02 * sz)}" cy="${f1(hoof[1] - 0.022 * sz)}" rx="${f1(0.045 * sz)}" ry="${f1(0.024 * sz)}" fill="${col}"/>`;
     (li % 2 ? far : near).push(svg);
   });
-  const X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz - bob, toss = o.toss || 0;
+  const X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz - bob - (hh - 0.64) * sz, toss = o.toss || 0;
   const nod = (gal ? 0.05 * Math.sin(TAU * p + 0.3) : 0.03 * Math.sin(TAU * p * 2)) + 0.12 * toss, fw = gal * 0.1 - 0.04 * toss, dn = gal * 0.1;
   const body = `<g transform="rotate(${f1(-pitch * dir)}, ${f1(x)}, ${f1(gy - 0.78 * sz)})"><ellipse cx="${f1(X(0.02))}" cy="${f1(Yy(0.78))}" rx="${f1(0.56 * sz)}" ry="${f1(0.2 * sz)}" fill="${c}"/>` +
     poly([[X(0.38), Yy(0.92)], [X(0.62 + fw), Yy(1.28 + nod - dn)], [X(0.78 + fw), Yy(1.24 + nod - dn)], [X(0.98 + fw), Yy(1.0 + nod * 1.4 - dn)], [X(0.9 + fw), Yy(0.94 + nod * 1.4 - dn)], [X(0.66 + fw), Yy(1.04 + nod - dn)], [X(0.52), Yy(0.66)]], c) +
@@ -199,8 +199,8 @@ function e4Facade(b, t, fireK) {
 // smoke from the burning building: a plume off the roof drifting right, and wisps from the top windows; lit orange from below
 function e4Smoke(t, fireK) {
   const s = [];
-  s.push(MAT.smoke(420, E4F.top - 40, t, {col: '4A4440', k: 3.6, n: 10, rise: 520, drift: 340, speed: 7, seed: 51}));
-  s.push(MAT.smoke(600, E4F.top - 30, t + 2.1, {col: '5C4A3E', k: 3.0, n: 9, rise: 460, drift: 300, speed: 6, seed: 52}));
+  s.push(MAT.smoke(420, E4F.top - 40, t, {col: '6A625C', k: 3.6, n: 10, rise: 520, drift: 340, speed: 7, seed: 51}));
+  s.push(MAT.smoke(600, E4F.top - 30, t + 2.1, {col: '7A6656', k: 3.0, n: 9, rise: 460, drift: 300, speed: 6, seed: 52}));
   for (const [wx, sd] of [[330, 53], [480, 54], [640, 55]]) s.push(MAT.smoke(wx, E4F.L[3] - 175, t + sd, {col: '4A4440', k: 1.3, n: 6, rise: 240, drift: 110, speed: 4, seed: sd}));
   s.push(MAT.smoke(500, E4F.top - 20, t + 0.7, {col: 'A0582E', k: 2.0, n: 7, rise: 170, drift: 90, speed: 3, seed: 56}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.85 * fireK * 100) / 100}"`));
   return s.join('');
@@ -274,12 +274,14 @@ function e4Shoes(gx, gy, t) { const sw = 6 * Math.sin(t * 2.1); return `<g trans
 // (38.6 to 45.5); "Not tonight"; he turns to Michael's stoop (45.6 to 47.2), tips his hat (50.6) and speaks (51.8 to 57.8); he walks on.
 const FT = {eng0: 16.4, engStop: 20.6, hop1: 21.0, hop2: 21.35, water: 23.3, cap0: 22.6, capStop: 27.6, blanket: 28.15, wrap0: 29.4, wrap1: 30.8, release: 32.0,
   talk1: [[31.0, 31.9], [32.3, 35.2], [35.5, 36.6], [37.0, 38.3]], doyleTurn: 38.45, doyle0: 38.7, doyle1: 45.6, capWalk2: [45.7, 47.1], tip: 50.6, talk2: [[51.8, 53.8], [54.2, 56.0], [56.4, 57.8]], tip2: 58.2, leave: 59.3};
-const E4_CAM = [[0, 0.9, 560, 250], [5.6, 0.95, 820, 520], [8.6, 1.45, 880, 735], [15.2, 1.55, 940, 745], [16.6, 1.0, 1000, 580], [21.4, 1.0, 900, 590], [23.2, 1.15, 1250, 650],
-  [27.8, 1.4, 1200, 700], [30.6, 2.15, 1110, 745], [37.9, 2.35, 1105, 745], [39.8, 1.35, 1560, 700], [45.4, 1.4, 1700, 700], [47.6, 1.55, 1460, 690], [51.0, 2.15, 1450, 715], [57.8, 2.4, 1450, 712], [62, 1.55, 1300, 680]];
+const E4_CAM = [[0, 0.86, 600, 160], [5.6, 0.95, 820, 520], [8.6, 1.45, 880, 735], [15.2, 1.55, 940, 745], [16.6, 1.0, 1000, 580], [21.4, 1.0, 900, 590], [23.2, 1.15, 1250, 650],
+  [27.8, 1.4, 1200, 700], [30.4, 2.7, 1100, 760], [37.9, 2.9, 1095, 760], [39.8, 1.35, 1560, 700], [45.4, 1.4, 1700, 700], [47.6, 1.55, 1460, 690], [51.0, 2.15, 1450, 715], [57.8, 2.4, 1450, 712], [62, 1.55, 1300, 680]];
 function renderE4Fire(t, o = {}) {
   const {H, WF, CURB, GC, GM, GD, GE} = E4F, c = cam2(o.cam || camAt(E4_CAM, t)), lod = lodFor(H * c.z), det = lod.det;
   const fl = clamp01(0.75 + 0.15 * Math.sin(t * 7.7) + 0.1 * Math.sin(t * 17.3) + 0.08 * Math.sin(t * 2.9)), fireX = 470, fireK = 1;
-  const rimAt = (x, y = 900) => { const k = Math.exp(-Math.abs(x - fireX) / 900) * fl; return {c: '#FFB06A', a: lod.rimA * (0.35 + 0.6 * k), dx: (x > fireX ? -1 : 1) * 0.009, dy: -0.004}; };
+  const rimAt = (x, y = 900) => { const k = Math.exp(-Math.abs(x - fireX) / 900) * fl, kl = Math.exp(-Math.abs(x - 1730) / 300);
+    if (kl > k) return {c: '#FFE9C4', a: lod.rimA * (0.6 + 0.4 * kl), dx: (x > 1730 ? -1 : 1) * 0.009, dy: -0.005}; // the gas lamp
+    return {c: '#FFB06A', a: lod.rimA * (0.6 + 0.4 * k), dx: (x > fireX ? -1 : 1) * 0.009, dy: -0.004}; };
   const back = [], W = [], front = [], street = [], scr = [];
   // ---- the block ----
   E4_ROW.forEach((b) => back.push(e4Facade(b, t, fireK)));
@@ -289,6 +291,12 @@ function renderE4Fire(t, o = {}) {
     `<rect x="-1500" y="${CURB}" width="6000" height="10" fill="#2B3534"/><rect x="-1500" y="${CURB - 3}" width="6000" height="4" fill="${E4.snow}" opacity="0.8"/><rect x="-1500" y="${CURB + 10}" width="6000" height="900" fill="#4E5E61"/>` +
     [1000, 1035, 1078, 1110].map((yy, k) => `<rect x="-1500" y="${yy}" width="6000" height="${k % 2 ? 5 : 3}" fill="#3A4749" opacity="0.7"/>`).join(''));
   back.push(`<ellipse cx="${fireX + 120}" cy="${WF + 60}" rx="${1100 * (0.9 + 0.1 * fl)}" ry="160" fill="url(#e4pool)" opacity="${f1(0.75 * fl * 100) / 100}" style="mix-blend-mode:screen"/>`);
+  // a gas lamp at the curb between the Doyles and the Kellys' stoop: its pool of light on the snow, and the post (drawn in front)
+  const LX = 1730, lampFl = 0.92 + 0.08 * Math.sin(t * 9.3);
+  back.push(`<ellipse cx="${LX}" cy="${CURB - 20}" rx="330" ry="70" fill="url(#mswarm)" opacity="${f1(0.9 * lampFl)}"/>`);
+  const lampPost = `<rect x="${LX - 6}" y="${CURB - 470}" width="12" height="470" fill="#080C0B"/><rect x="${LX - 12}" y="${CURB - 40}" width="24" height="40" fill="#080C0B"/>` +
+    poly([[LX - 24, CURB - 520], [LX + 24, CURB - 520], [LX + 17, CURB - 466], [LX - 17, CURB - 466]], '#FFF0CF', 'opacity="0.85"') + poly([[LX - 30, CURB - 518], [LX, CURB - 540], [LX + 30, CURB - 518]], '#080C0B') +
+    `<rect x="${LX - 31}" y="${CURB - 545}" width="62" height="5" rx="2" fill="${E4.snow}" opacity="0.8"/>` + glowC(LX, CURB - 490, 360, 0.75 * lampFl, 'mswarm') + glowC(LX, CURB - 490, 90, 0.6 * lampFl);
   // ---- the engine ----
   const XS = 330, D = 1900, ue = clamp01((t - FT.eng0) / (FT.engStop - FT.eng0)), ex = XS + D * (1 - ue) * (1 - ue), dist = D - (ex - XS), vE = t < FT.engStop ? 1 - ue : 0;
   const pumping = smooth(FT.water - 0.6, FT.water, t);
@@ -309,7 +317,7 @@ function renderE4Fire(t, o = {}) {
   const fireCrew = [], hose = [];
   const crew = (k, xOn, hopT, xLand, xWork, walkT) => {
     let f;
-    if (t < hopT) { const sx = pm.step[0] + (ex - XS) + xOn; f = e3Stand(fireman(sx, stepY + pm.sh, {...POSES.stand(t, 0.2 * k), tilt: 4}), sx, sx, 0, `fi.f${k}.ride`); f = reach(f, 'b', ...[f.x - 0.06 * H, f.y - 0.56 * H], `fi.f${k}.rail`); f = {...f, floorY: stepY + pm.sh}; }
+    if (t < hopT) { const sx = pm.step[0] + xOn; f = e3Stand(fireman(sx, stepY + pm.sh, {...POSES.stand(t, 0.2 * k), tilt: 4}), sx, sx, 0, `fi.f${k}.ride`); f = reach(f, 'b', ...[f.x - 0.06 * H, f.y - 0.56 * H], `fi.f${k}.rail`); f = {...f, floorY: stepY + pm.sh}; }
     else if (t < hopT + 0.45) f = e4Hop(fireman(0, 0, {tilt: -4}), [pm.step[0] + xOn, stepY], [xLand, GE], (t - hopT) / 0.45, `fi.f${k}.hop`);
     else { const tr = e4Track(fireman(0, 0, {tilt: -6}), {x: xLand, d: -1, G: GE, walks: [{t0: walkT[0], t1: walkT[1], to: xWork, dAfter: -1, carry: k === 1, an: k === 1 ? {fArm: [118, 70], bArm: [130, 84]} : {}}]}, t, `fi.f${k}`); f = tr.fo; f.state = tr.state; }
     return f;
@@ -363,14 +371,14 @@ function renderE4Fire(t, o = {}) {
   const bo = {h: H * 0.62, kind: 'boy', hat: 'none', fill: ink, det, rim: rimAt(1000)}, go = {h: H * 0.7, kind: 'girl', hat: 'none', wear: ['plain'], fill: ink, det, rim: rimAt(970)};
   const kidsD = t >= FT.doyleTurn ? 1 : dTurn;
   let bt = e4Track({...bo, an: {tilt: t < 25.2 ? 16 : 10, blink: (t + 1.3) % 4.2 < 0.12}}, {x: 1027, d: kidsD, G: GD + 4, walks: t >= FT.doyle0 - 0.01 ? [{t0: FT.doyle0, t1: FT.doyle1, to: 2440 - 33, a: 0.12, carry: true}] : []}, t, 'fi.boy');
-  let gt = e4Track({...go, an: {tilt: t < 25.2 ? 14 : 8, blink: (t + 2.1) % 4.4 < 0.12}}, {x: 990, d: kidsD, G: GD + 8, walks: t >= FT.doyle0 - 0.01 ? [{t0: FT.doyle0, t1: FT.doyle1, to: 2440 - 70, a: 0.12, carry: true}] : []}, t, 'fi.girl2');
+  let gt = e4Track({...go, an: {tilt: t < 25.2 ? 14 : 8, blink: (t + 2.1) % 4.4 < 0.12}}, {x: 996, d: kidsD, G: GD + 8, walks: t >= FT.doyle0 - 0.01 ? [{t0: FT.doyle0, t1: FT.doyle1, to: 2440 - 64, a: 0.12, carry: true}] : []}, t, 'fi.girl2');
   let by = {...bt.fo, d: kidsD}, gg = {...gt.fo, d: kidsD};
   // the boy's front hand holds a fold of her nightgown (a point on her skirt, behind her); the girl holds the boy's free hand
   // (facing right the mother is in front of him: his front hand; facing left she is behind him: his back hand)
   const toMo = kidsD === 1 ? 'f' : 'b', toGirl = kidsD === 1 ? 'b' : 'f', gHand = kidsD === 1 ? 'f' : 'b';
   const skirtPt = E3K.toWorld({...dm, an: {...dm.an, lean: 0, bob: 0}}, dm.d === 1 ? -0.11 : 0.11, 0.44).map((v, i) => v - (i ? (dm.an.bob || 0) * 0 : 0));
   by = reach(by, toMo, skirtPt[0], skirtPt[1], 'fi.boy.skirt');
-  const midX = (gg.x + by.x) / 2, kh = Math.min(gg.y - 0.42 * gg.h, by.y - 0.47 * by.h);
+  const midX = (gg.x + by.x) / 2, kh = (gg.y - 0.47 * gg.h + by.y - 0.5 * by.h) / 2;
   [gg, by] = e3Clasp(gg, gHand, by, toGirl, [midX, kh], 'fi.kids.hands');
   // ---- the captain and his three men walk in from the right ----
   const capX1 = 1185, M = [{x1: 1272, d0: 0.35, h: H * 0.98, hat: 'bowler', coat: 'sack'}, {x1: 1350, d0: 0.7, h: H * 1.02, hat: 'cap', coat: 'jacket'}, {x1: 1425, d0: 1.0, h: H * 0.97, hat: 'bowler', coat: 'frock'}];
@@ -392,12 +400,12 @@ function renderE4Fire(t, o = {}) {
   const men = M.map((m, k) => {
     const base = {x: 0, y: 0, h: m.h, d: -1, kind: 'man', hat: m.hat, coat: m.coat, fill: ink, det: Math.min(det, 0.6), rim: rimAt(m.x1), an: {tilt: 2 + 3 * Math.sin(t * 0.7 + k), blink: (t + k) % 4.1 < 0.12}};
     const walks = [{t0: FT.cap0 + m.d0, t1: FT.capStop + m.d0 + 0.2, to: m.x1, dAfter: -1, a: 0.12, carry: k === 0, an: k === 0 ? {fArm: [150, 92]} : {}}];
-    if (k === 1) walks.push({t0: 33.2, t1: 37.0, to: 905, dAfter: -1}); // to the couple
-    if (k === 2) walks.push({t0: 33.8, t1: 37.4, to: 770, dAfter: 1});  // to the old woman
+    if (k === 1) walks.push({t0: 39.2, t1: 42.8, to: 905, dAfter: -1}); // to the couple
+    if (k === 2) walks.push({t0: 39.7, t1: 43.3, to: 770, dAfter: 1});  // to the old woman
     if (k === 0) walks.push({t0: 39.3, t1: 45.6, to: 2320, a: 0.12});    // he sees the Doyles to the cab
-    const tr = e4Track({...base, an: {...base.an, ...(k === 0 ? {fArm: [150, 92]} : {})}}, {x: 2280 + 80 * (k + 1), d: -1, G: GM - 4 * k, ph: 0.3 * k, walks}, t, `fi.man${k}`);
+    const tr = e4Track({...base, an: {...base.an, ...(k === 0 && t < FT.blanket + 0.45 ? {fArm: [150, 92]} : {})}}, {x: 2280 + 80 * (k + 1), d: -1, G: GM - 4 * k, ph: 0.3 * k, walks}, t, `fi.man${k}`);
     let f = tr.fo; f.state = tr.state;
-    if (k > 0 && tr.state === 'stand' && t > 37.4) { const g = Math.max(0, Math.sin((t - 37.4) * 2.4)); f = {...f, an: {...f.an, fArm: [140 - 40 * g, 110 - 50 * g], tilt: -4}}; } // talking to the families
+    if (k > 0 && tr.state === 'stand' && t > 43.4) { const g = Math.max(0, Math.sin((t - 43.4) * 2.4)); f = {...f, an: {...f.an, fArm: [140 - 40 * g, 110 - 50 * g], tilt: -4}}; } // talking to the families
     return f;
   });
   // blanket handover (28.15 to 29.4): his near (back) hand comes back to the folded blanket on the man's arm, takes it
@@ -476,7 +484,7 @@ function renderE4Fire(t, o = {}) {
   if (t < FT.blanket + 0.45 && fold) W.push(`<rect x="${f1(fold[0] - 26)}" y="${f1(fold[1] - 4)}" width="52" height="20" rx="4" fill="${E4.blanket}"/><rect x="${f1(fold[0] - 26)}" y="${f1(fold[1] + 4)}" width="52" height="3" fill="#3E4842"/>`);
   W.push(e4Captain(cp));
   W.push(fig(gg), fig(by), fig(dm) + drapeSvg + baby.svg, blanketSvg);
-  street.push(horseFar.svg, pole, horseNear.svg, pm.svg, fig(drv), reins, ...fireCrew, ...hose);
+  street.push(lampPost, horseFar.svg, pole, horseNear.svg, pm.svg, fig(drv), reins, ...fireCrew, ...hose);
   // ---- light: firelight wash over everything near the building; snow ----
   const glowWash = `<ellipse cx="${fireX + 60}" cy="560" rx="1250" ry="720" fill="url(#e4wash)" opacity="${f1(0.55 * fl * 100) / 100}" style="mix-blend-mode:screen"/>`;
   const world = layerAt(c, 1, back.join('') + e4Smoke(t, fireK) + W.join('') + street.join('') + pm.sparks + glowWash);
@@ -494,7 +502,7 @@ function e4FireDefs() {
     `<radialGradient id="e4haze"><stop offset="0" stop-color="#C2582A" stop-opacity="0.55"/><stop offset="0.5" stop-color="#7A3418" stop-opacity="0.2"/><stop offset="1" stop-color="#7A3418" stop-opacity="0"/></radialGradient>` +
     `<linearGradient id="e4win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A2E"/><stop offset="0.6" stop-color="#FFA24D"/><stop offset="1" stop-color="#FFD08A"/></linearGradient>` +
     `<filter id="e4blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.6"/></filter>` +
-    ['4A4440', '5C4A3E', 'A0582E', '3A3633'].map((cc) => `<radialGradient id="puff${cc}"><stop offset="0" stop-color="#${cc}" stop-opacity="1"/><stop offset="0.55" stop-color="#${cc}" stop-opacity="0.7"/><stop offset="1" stop-color="#${cc}" stop-opacity="0"/></radialGradient>`).join('');
+    ['4A4440', '6A625C', '7A6656', 'A0582E', '3A3633'].map((cc) => `<radialGradient id="puff${cc}"><stop offset="0" stop-color="#${cc}" stop-opacity="1"/><stop offset="0.55" stop-color="#${cc}" stop-opacity="0.7"/><stop offset="1" stop-color="#${cc}" stop-opacity="0"/></radialGradient>`).join('');
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE4Fire});
 Object.assign(CLIPS, {ep4_fire: {sec: E4F.sec, render: (t) => renderE4Fire(t)}});

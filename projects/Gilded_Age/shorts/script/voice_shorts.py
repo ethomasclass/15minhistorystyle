@@ -1,8 +1,8 @@
-"""Voices Gilded Age Shorts on eleven_v4 with three voices: Ellis (narrator, kept even) and the Kellys.
-   ELEVEN_KEY_FILE=/path/to/key python3 voice_ep1.py            # all chapters
-   ELEVEN_KEY_FILE=/path/to/key python3 voice_ep1.py ch07       # one chapter
--> ../public/audio/chNN_*.wav + .words.json (word timings from forced alignment; each word carries "who"),
-   ../public/audio/ep2_narration.mp3 (all chapters, for listening).
+"""Voices the Gilded Age Shorts on eleven_v4: Ellis (narrator) and, where a short has a character line, the Kellys
+(s3: Nora, "NORA: Don't drop it."). Same multi-voice logic as ../../ep3/script/voice_ep3.py.
+   ELEVEN_KEY_FILE=/path/to/key python3 voice_shorts.py            # all shorts
+   ELEVEN_KEY_FILE=/path/to/key python3 voice_shorts.py s3         # one short
+-> ../public/audio/sN_*.wav + .words.json (word timings from forced alignment; each word carries "who").
 
 Paragraphs that start "MICHAEL:" or "MA:" are character lines. Each run of narrator paragraphs is ONE request
 (the model paces them itself); each character line is its own request. Runs are joined with room tone.
@@ -29,14 +29,26 @@ END_GAP = 0.9     # after the last paragraph
 SPEAKER = re.compile(r'^(MICHAEL|MA|NORA):\s*')
 # A line changed after approval is re-voiced alone: its neighbours keep being sent the OLD text as context, so their requests
 # (and takes) stay exactly as approved. new tts text -> the tts text it replaced.
+# Per-short narrator speed (short-form pacing). s1/s2 were voiced at 1.0 and keep their cached takes.
+SPEED = {'s3': 1.2}
+# eleven_v4 barely follows `speed`, so a short can also take a local pitch-preserving tempo (V.STRETCH, ffmpeg atempo).
+STRETCH = {'s3': 1.08}
+# Per-short pause cap (V.tighten: the voice's own silences longer than this are shortened) and gap between speakers.
+MAX_PAUSE = {'s3': 0.3}
+GAPS = {'s3': (0.3, 0.6)}   # (between speakers, after the last line)
+# Character tags the channel's voice.py drops (HUSH: no whispering or going very quiet) are swapped for one it keeps, so
+# Nora's line still sounds tense and hushed-in-spirit without the take dropping out of level.
+CHAR_TAG = {'[whisper]': '[nervous]'}
 CONTEXT_AS = {
     "[dry] And how were the fancy folk, then?": "[dry] And how were the rich?",   # ch04: Ma's voice buzzes on the "ch" of "rich"
 }
 
 
-def request(who, text, prev, nxt):
-    body = {'text': text, 'model_id': 'eleven_v4', 'previous_text': prev, 'next_text': nxt,
-            'voice_settings': SETTINGS['NARR' if who == 'NARR' else 'CHAR']}
+def request(who, text, prev, nxt, speed=1.0):
+    vs = dict(SETTINGS['NARR' if who == 'NARR' else 'CHAR'])
+    if who == 'NARR' and speed != 1.0:
+        vs['speed'] = speed
+    body = {'text': text, 'model_id': 'eleven_v4', 'previous_text': prev, 'next_text': nxt, 'voice_settings': vs}
     key = hashlib.sha1(json.dumps([VOICES[who], body], sort_keys=True).encode()).hexdigest()[:16]
     cached = os.path.join(V.CACHE, key + '.json')
     if not os.path.exists(cached):
@@ -70,6 +82,12 @@ def runs_of(src):
 def chapter(src):
     name = os.path.basename(src)[:-4]
     runs = runs_of(src)
+    for k, v in CHAR_TAG.items():
+        runs = [(who, [p.replace(k, v) if who != 'NARR' else p for p in ps]) for who, ps in runs]
+    key = name.split('_')[0]
+    speed, cap = SPEED.get(key, 1.0), MAX_PAUSE.get(key, 0)
+    run_gap, end_gap = GAPS.get(key, (RUN_GAP, END_GAP))
+    V.STRETCH = STRETCH.get(key, 1.0)
     raw = ['\n\n'.join(V.tts_text(p) for p in ps) for _, ps in runs]
     tts = [V.spoken(r) for r in raw]
     tts_ctx = [V.spoken(CONTEXT_AS.get(r, r)) for r in raw]
@@ -78,7 +96,9 @@ def chapter(src):
     bed_src = None
     for i, (who, ps) in enumerate(runs):
         offset = len(pcm) / 2 / V.RATE
-        audio, chars = request(who, tts[i], tts_ctx[i - 1] if i else '', tts_ctx[i + 1] if i + 1 < len(runs) else '')
+        audio, chars = request(who, tts[i], tts_ctx[i - 1] if i else '', tts_ctx[i + 1] if i + 1 < len(runs) else '', speed)
+        if cap:
+            audio, chars = V.tighten(audio, chars, cap)
         txt = ''.join(c for c, _, _ in chars)
         if V.TAG.search(txt):   # drop the tags' own characters so words map 1:1
             keep = [True] * len(chars)
@@ -101,7 +121,7 @@ def chapter(src):
         # breath, and looped it flutters faintly between lines (heard between Ma and Nora, ch04).
         if bed_src is None or len(audio) > len(bed_src):
             bed_src = audio
-        pcm += V.fade_edges(audio) + V.room_tone(bed_src, END_GAP if last else RUN_GAP)
+        pcm += V.fade_edges(audio) + V.room_tone(bed_src, end_gap if last else run_gap)
         print(f'  {name} run {i + 1}/{len(runs)} {who}: {len(audio) / 2 / V.RATE:.1f}s', flush=True)
     wav = os.path.join(OUT, name + '.wav')
     with wave.open(wav, 'wb') as w:
