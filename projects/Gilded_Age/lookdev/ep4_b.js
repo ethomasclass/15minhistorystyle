@@ -653,21 +653,21 @@ function renderE4Bootblack(t, o = {}) {
   const beat = sp.on ? sp.beat : 0, gK = [[0, 20, 30], [1.0, 60, 110], [2.0, 70, 130], [3.6, 30, 40], [4.4, 80, 150], [5.6, 95, 170], [7.4, 40, 60], [8.2, 70, 120], [9.4, 100, 160], [11.2, 30, 40], [12.0, 85, 150], [14.2, 40, 60], [15, 25, 35]];
   const arm = e4Keys(gK, t); arm[1] += 10 * beat;
   const turn = e4Val([[0, 0.2], [3.4, 0.2], [3.9, 0.8], [4.6, 0.4], [7.2, 0.4], [7.7, 0.9], [8.4, 0.3], [11.0, 0.3], [11.5, 0.9], [12.2, 0.4], [15, 0.6]], t);
-  const pk = e4BackSitter(cx, seatY, H, arm, turn, -3 * beat);
+  const pk = e4BackSitter(cx, seatY, H * 1.12, arm, turn, -3 * beat);
   // the chair: arms and the back between us and him (his shoulders, head and hat show above it)
-  const chair = `<rect x="${cx - 0.2 * H}" y="${seatY - 0.2 * H}" width="${0.4 * H}" height="${0.2 * H + 10}" rx="10" fill="#3A2416"/><rect x="${cx - 0.2 * H}" y="${seatY - 0.2 * H}" width="${0.4 * H}" height="6" rx="3" fill="#FFE6C0" opacity="0.2"/>` +
+  const chair = `<rect x="${cx - 0.2 * H}" y="${seatY - 0.11 * H}" width="${0.4 * H}" height="${0.11 * H + 10}" rx="10" fill="#3A2416"/><rect x="${cx - 0.2 * H}" y="${seatY - 0.11 * H}" width="${0.4 * H}" height="6" rx="3" fill="#FFE6C0" opacity="0.2"/>` +
     `<rect x="${cx - 0.24 * H}" y="${seatY - 0.08 * H}" width="${0.06 * H}" height="${0.08 * H + 10}" fill="#2A1A10"/><rect x="${cx + 0.18 * H}" y="${seatY - 0.08 * H}" width="${0.06 * H}" height="${0.08 * H + 10}" fill="#2A1A10"/>` +
     `<rect x="${cx - 0.2 * H}" y="${seatY + 10}" width="${0.4 * H}" height="${plat - seatY - 10}" fill="#24160C"/><rect x="${cx - 0.18 * H}" y="${seatY + 10}" width="10" height="${plat - seatY - 10}" fill="#120D08"/><rect x="${cx + 0.18 * H - 10}" y="${seatY + 10}" width="10" height="${plat - seatY - 10}" fill="#120D08"/>`;
   // his far hand on the far armrest (drawn at the rest: logged as an exact contact)
-  const fh = [cx - 0.21 * H, seatY - 0.085 * H]; E3K.log('hand', 'bb.plunkitt.armrest', fh, fh);
+  const fh = [cx - 0.215 * H, seatY - 0.085 * H]; E3K.log('hand', 'bb.plunkitt.armrest', fh, fh);
   const farHand = `<ellipse cx="${f1(fh[0])}" cy="${f1(fh[1])}" rx="${f1(0.03 * H)}" ry="${f1(0.022 * H)}" fill="#0D0C09"/>`;
-  // the bootblack (ink), on the lower step at the footrest, bent to the shoe: the brush in his near hand on the toe, back and forth
-  const bx = cx + 250, bh = H * 0.7, brush = Math.sin(t * 9.5) * 16;
-  let bk = {x: bx, y: step, h: bh, d: -1, kind: 'boy', hat: 'boycap', fill: '#0D0C09', det: Math.min(lod.det, 0.5), rim: {c: '#FFE6C0', a: lod.rimA * 0.5, dx: 0.008, dy: -0.005}, an: {tilt: -16, blink: (t + 0.7) % 4 < 0.12}};
-  bk = e3Stand({...bk, floorY: step}, bx, bx, 0, 'bb.boot'); bk = {...bk, an: {...bk.an, lean: 26}};
-  const toe = [shoe[0] + 26 + brush, shoe[1] - 12 + Math.abs(brush) * 0.1];
-  bk = reach(bk, 'f', toe[0], toe[1], 'bb.boot.brush'); bk = reach(bk, 'b', shoe[0] - 6, shoe[1] - 6, 'bb.boot.heel');
-  const brushSvg = holding(bk, 'f', 'bb.boot.brushH', (gx, gy) => `<rect x="${f1(gx - 14)}" y="${f1(gy - 5)}" width="28" height="10" rx="3" fill="#5A4428"/><rect x="${f1(gx - 13)}" y="${f1(gy + 4)}" width="26" height="5" fill="#2A2018"/>`);
+  // the bootblack (ink), a boy on a low box on the platform by the footrest, the brush in his near hand on the toe, back and forth
+  const bx = cx + 215, bh = H * 0.62, brush = Math.sin(t * 9.5) * 14, boxTop = plat - 46;
+  let bk = sitOn({x: bx, y: 0, h: bh, d: -1, kind: 'boy', hat: 'boycap', fill: '#0D0C09', det: Math.min(lod.det, 0.5), rim: {c: '#FFE6C0', a: lod.rimA * 0.5, dx: 0.008, dy: -0.005}, an: {tilt: -10 + 2 * Math.sin(t * 1.3), blink: (t + 0.7) % 4 < 0.12}}, boxTop, plat, 0.14, 'bb.boot.seat');
+  bk = {...bk, an: {...bk.an, lean: 10}};
+  const toe = [shoe[0] + 28 + brush, shoe[1] - 10 + Math.abs(brush) * 0.1];
+  bk = reach(bk, 'f', toe[0], toe[1], 'bb.boot.brush'); bk = reach(bk, 'b', shoe[0] + 2, shoe[1] - 4, 'bb.boot.heel');
+  const brushSvg = `<rect x="${bx - 40}" y="${boxTop}" width="70" height="${plat - boxTop}" fill="#4A3A26"/><rect x="${bx - 40}" y="${boxTop}" width="70" height="4" fill="#FFE6C0" opacity="0.2"/>` + holding(bk, 'f', 'bb.boot.brushH', (gx, gy) => `<rect x="${f1(gx - 14)}" y="${f1(gy - 5)}" width="28" height="10" rx="3" fill="#5A4428"/><rect x="${f1(gx - 13)}" y="${f1(gy + 4)}" width="26" height="5" fill="#2A2018"/>`);
   // the reporter: notebook in his far hand, pencil in the near hand on the page; writes while Plunkitt talks, looks up between
   const rx = cx + 470, writing = sp.on && (t % 4) > 1.2, rTilt = writing ? -22 : 14 + 2 * Math.sin(t * 0.8);
   let rp = {x: rx, y: F, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'sack', fill: '#0D0C09', det: lod.det, rim: {c: '#FFE6C0', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005}, an: {...POSES.stand(t, 0.4), tilt: rTilt - 7 * e4Bump(t, 3.7, 0.5) - 7 * e4Bump(t, 11.4, 0.5), expr: 'neutral', blink: (t + 1.9) % 3.8 < 0.12}};
