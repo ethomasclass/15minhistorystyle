@@ -350,7 +350,8 @@ statistics come from the city Registrar of Vital Statistics, Dr. Roger S. Tracy,
   p. 944); "The 'Brains' That Achieved the Tammany Victory at the Rochester Democratic Convention" (October 21, 1871, p. 992); "The
   Tammany Tiger Loose: 'What are you going to do about it?'" (November 11, 1871); "Tweed-le-dee and Tilden-dum" (July 1, 1876, p.
   525). [museum: Massachusetts Historical Society, "Thomas Nast: A Life in Cartoons" (Oct 7 and Oct 21, 1871; July 1, 1876); LoC item
-  96519163 (Tweed-le-dee); Aug 19 and Nov 11 dates unverified this pass]
+  96519163 (Tweed-le-dee); Ohio State University Libraries Thomas Nast site: "Who Stole" was the second half of "Two Great
+  Questions," Aug 19, 1871; "The Tammany Tiger Loose," Nov 11, 1871, pp. 1056 to 1057, on sale six days before the election]
 - **The quote, honestly:** the earliest version found is Paine (1904), after "Who Stole the People's Money" appeared: "'Let's stop them
   d--d pictures,' proposed Tweed when he saw it. 'I don't care so much what the papers write about me--my constituents can't read; but,
   d--n it, they can see pictures!'" (dashes as printed) [primary/period: Albert Bigelow Paine, *Th. Nast: His Period and His Pictures*
@@ -705,6 +706,7 @@ newspaper reporter (he says he first published the talks in the *Evening Post*, 
 - NYC Landmarks Preservation Commission, Tweed Courthouse interior designation report, LP-1122 (October 16, 1984): https://s-media.nyc.gov/agencies/lpc/lp/1122.pdf
 - Alexander B. Callow Jr., "The House That Tweed Built," *American Heritage* 16:6 (October 1965): https://www.americanheritage.com/house-tweed-built
 - Massachusetts Historical Society, "Thomas Nast: A Life in Cartoons": https://www.masshist.org/features/thomasnast
+- Ohio State University Libraries, Thomas Nast site, "The Tammany Tiger Loose": https://library.osu.edu/site/thomasnast/the-tammany-tiger-loose/ ; "Who Stole the People's Money" ("Two Great Questions"): https://library.osu.edu/site/thomasnast/?p=282
 - Library of Congress, "Tweed-le-dee and Tilden-dum / Th. Nast": https://www.loc.gov/item/96519163/ (not fetched; LoC blocks the tool)
 - Britannica, "Thomas Nast": https://www.britannica.com/biography/Thomas-Nast
 - The Daily Cartoonist, summary of John Adler and Draper Hill, *Doomed by Cartoon* (2008): https://www.dailycartoonist.com/?p=65998
