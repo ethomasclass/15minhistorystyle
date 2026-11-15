@@ -111,13 +111,13 @@ function renderPyramid(n, C = PY_CUE) {
     if (i % 2 === 0) s.push(x4Glint(down[0], down[1], 9, flow, n)); else s.push(x4Pulse(up[0], up[1], 7, flow));
   }
   // labels
-  scr.push(xpOp(xpIn(C.pyr + 0.2, n), tapeS(110, 70, 'THE MACHINE', 54, -2, 1, 61)));
+  scr.push(xpOp(xpIn(C.pyr + 0.2, n), tapeS(110, 92, 'THE MACHINE', 54, -2, 1, 61)));
   scr.push(tag(130, 1000, 'CAPTAIN · ONE FOR EVERY FEW HUNDRED VOTERS', xpIn(C.captain, n)));
   scr.push(tag(capX(duffy) - 120, PY.base - 150, 'MR. DUFFY', xpIn(C.duffy + 0.2, n) * (1 - xpIn(C.above, n))));
   scr.push(tag(wardX(0) - 330, PY.wy - 40, 'WARD BOSS', xpIn(C.ward + 0.2, n)));
   scr.push(tag(PY.cx + 110, PY.by - 60, 'THE BOSS', xpIn(C.boss + 0.2, n)));
   // who he knew (before the card arrives on the right)
-  const kn = xpWin(C.knew, C.ward - 0.4, n);
+  const kn = xpWin(C.knew, C.ward + 0.5, n);
   if (kn > 0.01) {
     scr.push(xpOp(kn * xpIn(C.knew, n), penS(1120, 330, 'every family on his blocks:', 30, -3)));
     scr.push(xpOp(kn * xpIn(C.sick, n), penS(1180, 470, 'who was sick', 30, -3)));
@@ -125,9 +125,9 @@ function renderPyramid(n, C = PY_CUE) {
     scr.push(xpOp(kn * xpIn(C.baby, n), penS(1180, 710, "who'd just had a baby", 30, -3)));
     s.push(xpOp(kn * xpIn(C.sick, n), xpArrow(xpCurve([1160, 650], [capX(duffy) + 60, PY.base + 80], 80), xpIn(C.sick, n, 0.7), {w: 4})));
   }
-  scr.push(card(1010, 160, 'Ward boss', 'The party leader for one ward,|a district of the city, over|its captains. At the top, the|boss runs the whole machine.', null, xpIn(C.ward, n, 0.4)));
+  scr.push(card(1010, 160 + 0 * C.ward, 'Ward boss', 'The party leader for one ward,|a district of the city, over|its captains. At the top, the|boss runs the whole machine.', null, xpIn(C.ward + 0.9, n, 0.4)));
   const bj = xpIn(C.picked, n, 0.4);
-  if (bj > 0) { scr.push(xpOp(bj, penS(1040, 680, 'picks the candidates', 32, -3))); scr.push(xpOp(xpIn(C.jobs, n, 0.4), penS(1060, 800, 'hands out the city jobs', 32, -3)));
+  if (bj > 0) { scr.push(xpOp(bj, penS(1040, 680, 'picks the candidates', 32, -3))); scr.push(xpOp(xpIn(C.picked + 0.3, n, 0.4), penS(1060, 800, 'hands out the city jobs', 32, -3)));
     s.push(x4Icon('ballot', PY.cx - 190, PY.by - 30, 0.75 * x4Pop(xpIn(C.picked, n, 0.4))) + x4Icon('job', PY.cx + 220, PY.by + 10, 0.7 * x4Pop(xpIn(C.jobs, n, 0.4)))); }
   return xpFrame(n, `<g transform="translate(${zx},${zy}) scale(${f1(z * 1000) / 1000}) translate(${-zx},${-zy})">${s.join('')}</g>`, scr.join(''));
 }
@@ -135,9 +135,9 @@ function renderPyramid(n, C = PY_CUE) {
 /* ================= ep4_citizen (ch5): five years, then a vote ================= */
 const CZ_CUE = {last: 47.38, rab: 48.94, empire: 51.3, father: 52.72, y1882: 53.82, after: 55.32, citizen: 57.16, vote: 58.18, meant: 58.98, y1887: 59.54, duffy: 61.2, count: 61.98};
 function renderCitizen(n, C = CZ_CUE) {
-  const s = [xpBoard(6)], scr = [], X = (yr) => 260 + (yr - 1882) * 280, Y = 640;
+  const s = [xpBoard(6)], scr = [], X = (yr) => 240 + (yr - 1882) * 250, Y = 640;
   const z = 1 + 0.035 * smooth(C.last, C.count + 1, n);
-  scr.push(xpOp(xpIn(C.last, n), tapeS(110, 70, 'HELP WITH CITIZENSHIP PAPERS', 50, -2, 1, 62)));
+  scr.push(xpOp(xpIn(C.last, n), tapeS(110, 92, 'HELP WITH CITIZENSHIP PAPERS', 50, -2, 1, 62)));
   // the timeline
   s.push(xpOp(xpIn(C.father, n), `<rect x="${X(1882) - 40}" y="${Y}" width="${X(1887) - X(1882) + 80}" height="5" fill="${XP.pale}"/>`));
   for (let yr = 1882; yr <= 1887; yr++) {
@@ -158,7 +158,7 @@ function renderCitizen(n, C = CZ_CUE) {
   // a citizen, and a voter
   const ck = x4Pop(xpIn(C.citizen, n, 0.45)), vk = x4Pop(xpIn(C.vote, n, 0.45));
   s.push(x4Icon('papers', X(1887) + 190, Y - 130, 1.5 * ck) + x4Icon('ballot', X(1887) + 190, Y - 340, 1.5 * vk));
-  scr.push(tag(X(1887) - 470, Y - 300, 'A CITIZEN · AND A VOTER', xpIn(C.vote, n)));
+  scr.push(tag(X(1887) - 520, Y - 300, 'A CITIZEN · AND A VOTER', xpIn(C.vote, n)));
   // 1887, ringed
   const rk = xpIn(C.meant, n, 0.5);
   if (rk > 0) s.push(`<ellipse cx="${X(1887)}" cy="${Y + 56}" rx="${f1(84 * rk)}" ry="${f1(44 * rk)}" fill="none" stroke="${XP.teal}" stroke-width="5"/>`);
@@ -174,7 +174,7 @@ function renderCitizen(n, C = CZ_CUE) {
 
 /* ================= ep4_ledger (ch6): the courthouse accounts ================= */
 const LG_CUE = {in1858: 12.04, cost: 14.34, k250: 15.5, by: 17.88, y1871: 18.06, between: 20.36, million: 22.58, still: 24.3, fin: 24.92, where: 25.92, look: 27.42, thermo: 28.8, t7500: 30.0, forT: 32.42,
-  carpets: 34.12, c675: 36.74, plast: 39.52, p138: 41.02, two: 44.56, dec: 46.04, end: 47.2};
+  carpets: 34.12, c675: 36.74, plast: 39.52, p138: 41.02, two: 44.56, dec: 46.04, prince: 47.26, end: 50.9};
 function renderLedger(n, C = LG_CUE) {
   const s = [], scr = [];
   // the camera: the whole page and the meter, then closer on the lines as the bills are read
@@ -203,9 +203,10 @@ function renderLedger(n, C = LG_CUE) {
   });
   scr.push(xpOp(xpIn(C.forT, n), penS(P.x + 480, P.y + 330, 'for thermometers', 30, -4)));
   scr.push(xpOp(xpIn(C.dec, n), penS(P.x + 480, P.y + 610, 'in December', 30, -4)));
+  if (C.prince) scr.push(tag(P.x + 90, P.y + 700, 'THE TIMES: "THE PRINCE OF PLASTERERS"', xpIn(C.prince, n)));
   scr.push(xpOp(xpIn(C.two, n), `<path d="M${P.x + 360},${P.y + 512} q170,22 340,-4" fill="none" stroke="${XP.orange}" stroke-width="5" stroke-linecap="round"/>`));
   // the cost meter: a tall tube; the limit a line near the bottom; the fill climbs to 11 to 13 million
-  const M = {x: 1420, y0: 930, y1: 310, w: 120}, top = 13e6, Yv = (v) => M.y0 - (M.y0 - M.y1) * v / top;
+  const M = {x: 1420, y0: 900, y1: 300, w: 120}, top = 13e6, Yv = (v) => M.y0 - (M.y0 - M.y1) * v / top;
   const fillV = lerp(0, 250000, smooth(C.cost, C.k250 + 0.3, n)) + (11e6 - 250000) * smooth(C.y1871, C.million + 0.4, n) + 2e6 * smooth(C.million, C.fin, n) * (0.5 + 0.5 * Math.sin(n * 2.2));
   s.push(`<rect x="${M.x - 10}" y="${M.y1 - 40}" width="${M.w + 20}" height="${M.y0 - M.y1 + 60}" rx="16" fill="#0B1414" stroke="#111" stroke-width="5"/>`);
   for (let v = 0; v <= 13; v++) s.push(`<rect x="${M.x + M.w + 14}" y="${f1(Yv(v * 1e6))}" width="${v % 5 === 0 ? 26 : 14}" height="3" fill="${XP.pale}"/>`);
@@ -218,7 +219,7 @@ function renderLedger(n, C = LG_CUE) {
   if (big > 0) { const shown = fillV < 1e6 ? `$${Math.round(fillV / 1000)},000` : `$${(fillV / 1e6).toFixed(1)} million`;
     scr.push(xpOp(big * (1 - xpIn(C.between, n, 0.3)), xpAbril(M.x + M.w / 2, M.y1 - 110, shown, 50, XP.cream, 'middle')));
     scr.push(xpOp(xpIn(C.between, n, 0.4), xpAbril(M.x + M.w / 2, M.y1 - 110, '$11 to 13 million', 46, XP.cream, 'middle')));
-    scr.push(tag(M.x - 30, M.y0 + 64, 'BY 1871', big)); }
+    scr.push(tag(M.x - 10, M.y0 + 50, 'BY 1871', big)); }
   scr.push(xpOp(xpIn(C.still, n), penS(P.x + 90, P.y + 800, 'and still not finished', 32, -4)));
   const body = `<g transform="translate(${f1(fx)},${f1(fy)}) scale(${f1(z * 1000) / 1000}) translate(${f1(-fx)},${f1(-fy)})">${s.join('')}${scr.slice(0, 2).join('')}</g>`;
   const defs = `<linearGradient id="lgdesk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.2"/><stop offset="1" stop-color="#000" stop-opacity="0.5"/></linearGradient>` +
@@ -256,8 +257,8 @@ function renderEscape(n, C = ES_CUE) {
   scr.push(tag(nS[0] + 30, nS[1] - 20, 'NEW YORK · ESCAPED DECEMBER 1875', xpIn(C.y1875, n) * (1 - xpIn(C.spain, n))));
   scr.push(tag(cS[0] + 30, cS[1] + 50, 'CUBA · 1876', xpIn(C.cuba + 0.1, n)));
   scr.push(tag(vS[0] - 470, vS[1] + 60, 'VIGO, SPAIN · SEPTEMBER 1876', xpIn(C.where, n)));
-  scr.push(xpOp(xpIn(C.papers - 0.3, n), penS(vS[0] - 420, vS[1] - 70, 'they had newspapers', 30, -4)));
-  scr.push(xpOp(xpIn(C.y1875, n), tapeS(110, 70, 'THE ESCAPE', 54, -2, 1, 63)));
+  scr.push(xpOp(xpIn(C.where, n), penS(vS[0] - 420, vS[1] - 70, 'they had newspapers', 30, -4)));
+  scr.push(xpOp(xpIn(C.y1875, n), tapeS(110, 92, 'THE ESCAPE', 54, -2, 1, 63)));
   return frame(e3Defs(n), '', m.join(''), scr.join(''), n);
 }
 
@@ -267,7 +268,7 @@ const JB_JOBS = ['ASSEMBLYMAN', 'ALDERMAN', 'POLICE MAGISTRATE', 'COUNTY SUPERVI
 function renderJobs(n, C = JB_CUE) {
   const s = [xpBoard(7)], scr = [];
   const z = 1 + 0.05 * smooth(C.held, C.rich + 1, n);
-  scr.push(xpOp(xpIn(C.held - 0.3, n), tapeS(110, 70, 'PLUNKITT, 1870', 54, -2, 1, 64)));
+  scr.push(xpOp(xpIn(C.held - 0.3, n), tapeS(110, 92, 'PLUNKITT, 1870', 54, -2, 1, 64)));
   // Plunkitt as a picture-graph man in a top hat (faceless), in the middle
   s.push(x4At(960, 640, x4Pop(xpIn(C.held - 0.3, n, 0.45)), x4Man(0, 0, 220, '#1A2422', 'top', {stroke: XP.cream})));
   const pos = [[430, 330], [1490, 330], [430, 760], [1490, 760]];
@@ -326,14 +327,14 @@ function renderGraft(n, C = GR_CUE) {
   for (let k = 0; k < 7; k++) { const a = C.buy2 + 0.22 * k, u = smooth(a, a + 1.0, n); if (u > 0 && u < 1) { const p = [lerp(CH[0], 560, u), lerp(CH[1] + 40, 600, u) - 120 * Math.sin(Math.PI * u)]; s.push(x4Glint(p[0], p[1], 11, 1, n)); } }
   const pile = smooth(C.price, C.price + 0.8, n);
   if (pile > 0) for (let k = 0; k < 6; k++) s.push(x4Glint(600 + (k % 3) * 24, 720 - Math.floor(k / 3) * 22, 9, pile, n + k));
-  scr.push(tag(SW.x + 20, SW.y - 30, 'A SWAMP', xpIn(C.say - 0.3, n) * (1 - xpIn(C.park, n))));
-  scr.push(tag(SW.x + 20, SW.y - 30, 'THE CITY PLANS A PARK HERE', xpIn(C.park + 0.1, n) * (1 - xpIn(C.buy, n))));
-  scr.push(tag(SW.x + 20, SW.y - 30, 'HE BUYS IT FIRST · CHEAP', xpIn(C.buy, n) * (1 - xpIn(C.then, n))));
-  scr.push(tag(SW.x + 20, SW.y - 30, 'THE CITY BUYS IT FROM HIM · A GOOD PRICE', xpIn(C.then + 0.1, n)));
-  scr.push(tag(390, 900, 'PLUNKITT', xpIn(C.say, n)));
+  scr.push(tag(SW.x + 20, SW.y - 30, 'A SWAMP', xpIn(C.say - 0.3, n) * (1 - xpIn(C.then, n))));
+  scr.push(tag(SW.x + 20, SW.y + SW.h + 62, 'THE CITY PLANS A PARK HERE', xpIn(C.park, n)));
+  scr.push(tag(390, 900, 'PLUNKITT', xpIn(C.say - 0.3, n) * (1 - xpIn(C.buy, n))));
+  scr.push(tag(330, 900, 'PLUNKITT BUYS IT FIRST · CHEAP', xpIn(C.buy, n)));
+  scr.push(tag(SW.x + 20, SW.y - 30, 'THE CITY BUYS IT FROM HIM · A GOOD PRICE', xpIn(C.then + 0.45, n)));
   scr.push(xpOp(xpIn(C.anything, n), penS(240, 300, '“Anything dishonest in that?”', 36, -4)));
-  scr.push(xpOp(xpIn(C.insider - 0.4, n), tapeS(640, 860, 'INSIDER DEALING', 60, -2, 1, 66)));
-  scr.push(xpOp(xpIn(C.say, n), tapeS(110, 70, 'HONEST GRAFT', 54, -2, 1, 67)));
+  scr.push(xpOp(xpIn(C.today, n), tapeS(1000, 900, 'INSIDER DEALING', 60, -2, 1, 66)));
+  scr.push(xpOp(xpIn(C.say, n), tapeS(110, 92, 'HONEST GRAFT', 54, -2, 1, 67)));
   return frame(e3Defs(n), '', `<g transform="translate(${fx},${fy}) scale(${f1(z * 1000) / 1000}) translate(${-fx},${-fy})">${s.join('')}</g>`, scr.join(''), n);
 }
 
@@ -349,11 +350,11 @@ function renderTombstone(n, C = TB_CUE) {
     `<path d="M670,${sy - 10} L670,${sy - 515} Q670,${sy - 660} 960,${sy - 660} Q1250,${sy - 660} 1250,${sy - 515} L1250,${sy - 10}" fill="none" stroke="#7B8B86" stroke-width="3"/>` +
     `<rect x="600" y="${sy - 4}" width="720" height="40" fill="#4E5C58" stroke="#111" stroke-width="5"/><rect x="0" y="${sy + 30}" width="1920" height="30" fill="#14231F"/></g>`);
   const carve = (y, txt, size, k, font = 'Playfair') => (k > 0 ? `<text x="960" y="${f1(y)}" font-family="${font}" font-weight="900" font-size="${size}" fill="#1A2220" text-anchor="middle" opacity="${f1(k)}" style="paint-order:stroke" stroke="#8A9A95" stroke-width="1.2">${txt}</text>` : '');
-  const k1 = xpIn(C.wanted - 0.2, n, 0.5), k2 = xpIn(C.tomb - 0.3, n, 0.5);
+  const k1 = xpIn(C.liked + 0.3, n, 0.5), k2 = xpIn(C.wanted, n, 0.5);
   scr.push(carve(sy - 520, 'George W. Plunkitt.', 58, k1 * up));
   scr.push(carve(sy - 400, 'He Seen His', 66, k2 * up), carve(sy - 315, 'Opportunities,', 66, k2 * up), carve(sy - 230, "and He Took 'Em.", 66, k2 * up));
   scr.push(tag(130, 1000, 'THE EPITAPH HE WANTED · PLUNKITT OF TAMMANY HALL, 1905', xpIn(C.liked, n)));
-  scr.push(xpOp(xpIn(C.seriously - 0.1, n), penS(1330, 360, 'seriously', 38, -6)));
+  scr.push(xpOp(xpIn(C.tomb, n), penS(1330, 360, 'seriously', 38, -6)));
   return frame(e3Defs(n), '', `<g transform="translate(960,600) scale(${f1(z * 1000) / 1000}) translate(-960,-600)">${s.join('')}${scr.slice(0, 4).join('')}</g>`, scr.slice(4).join(''), n);
 }
 
@@ -375,7 +376,7 @@ function renderScorecard(n, C = SC_CUE) {
       const a = C[cue], k = x4Pop(xpIn(a, n, 0.4)), y = 300 + i * 150, lit = 1 - 0.35 * (key === 'helper' ? side : 1 - side);
       if (k <= 0) return;
       s.push(xpOp(lit, x4Icon(ic, x0 + 90, y, 1.12 * k)));
-      scr.push(xpOp(xpIn(a + 0.1, n, 0.35) * lit, `<text x="${x0 + 175}" y="${y + 12}" font-family="Mono" font-size="${lab.length > 28 ? 27 : 31}" letter-spacing="1.5" fill="${XP.cream}">${lab}</text>`));
+      scr.push(xpOp(xpIn(a - 0.1, n, 0.35) * lit, `<text x="${x0 + 175}" y="${y + 12}" font-family="Mono" font-size="${lab.length > 28 ? 27 : 31}" letter-spacing="1.5" fill="${XP.cream}">${lab}</text>`));
     });
   };
   col('helper', 140, C.helper, 'HELPER', 71);
@@ -406,7 +407,7 @@ function renderCivil(n, C = CV_CUE) {
   const tk = xpIn(C.test, n, 0.4), xk = xpIn(C.voted + 0.4, n, 0.4);
   s.push(xpOp(tk, `<path d="M${bx + 12},${b1 - 18} l18,22 l36,-48" fill="none" stroke="#111" stroke-width="13" stroke-linecap="round"/><path d="M${bx + 12},${b1 - 18} l18,22 l36,-48" fill="none" stroke="${XP.teal}" stroke-width="7" stroke-linecap="round"/>`));
   s.push(xpOp(xk, `<path d="M${bx + 14},${b2 - 36} l42,42 M${bx + 56},${b2 - 36} l-42,42" stroke="#111" stroke-width="13" stroke-linecap="round"/><path d="M${bx + 14},${b2 - 36} l42,42 M${bx + 56},${b2 - 36} l-42,42" stroke="${XP.orange}" stroke-width="7" stroke-linecap="round"/>`));
-  scr.push(xpOp(xpIn(C.in1883 - 0.1, n), tapeS(110, 70, 'THE PENDLETON ACT · 1883', 54, -2, 1, 73)));
+  scr.push(xpOp(xpIn(C.in1883 - 0.1, n), tapeS(110, 92, 'THE PENDLETON ACT · 1883', 54, -2, 1, 73)));
   scr.push(xpOp(xpIn(C.jobs, n), penS(330, 600, 'for some federal jobs', 34, -3)));
   scr.push(card(1000, 760, 'Civil service', 'Government jobs filled by merit,|through tests, not as rewards.', null, xpIn(C.called, n, 0.4)));
   const defs = `<linearGradient id="lgdesk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2620" stop-opacity="0.6"/><stop offset="1" stop-color="#000" stop-opacity="0.6"/></linearGradient>`;

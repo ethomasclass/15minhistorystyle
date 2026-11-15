@@ -99,11 +99,11 @@ function e4xUrban(T, o) {
   const s = [xpBoard(11)], row = (y, n, t0, tc, label, frac) => {
     const ui = e4In(t0, T, 0.4); if (ui <= 0) return;
     s.push(xpOp(ui, xpAbril(150, y - 150, label, 64, E4X.cream)));
-    for (let i = 0; i < 20; i++) { const city = i < n, k = city ? e4In(tc + i * 0.06, T, 0.35) : 0, x = 170 + i * 46 + (city ? -10 * ease(k) : 0), pi = e4In(t0 + i * 0.025, T, 0.2);
-      s.push(e4xIcon(x, y, 78, k > 0.5 ? E4X.teal : '#5B6E6A', pi)); }
-    const kc = e4In(tc, T, 0.6); s.push(e4xSkyline(1120, y, kc));
-    if (kc > 0) s.push(xpOp(kc, xpMono(1120, y + 46, 'TOWNS AND CITIES', 24, E4X.teal, 'start', 3)));
-    const kf = e4In(tc + 0.5, T, 0.4); if (kf > 0) s.push(xpOp(kf, xpAbril(1420, y - 20, frac, 96, E4X.teal)));
+    for (let i = 0; i < 20; i++) { const city = i < n, k = city ? e4In(tc + i * 0.06, T, 0.35) : 0, x = 160 + i * 54 + (city ? -12 * ease(k) : 0), pi = e4In(t0 + i * 0.025, T, 0.2);
+      s.push(e4xIcon(x, y, 112, k > 0.5 ? E4X.teal : '#5B6E6A', pi)); }
+    const kc = e4In(tc, T, 0.6); s.push(e4xSkyline(1250, y, kc));
+    if (kc > 0) s.push(xpOp(kc, xpMono(1250, y + 46, 'TOWNS AND CITIES', 24, E4X.teal, 'start', 3)));
+    const kf = e4In(tc + 0.5, T, 0.4); if (kf > 0) s.push(xpOp(kf, xpAbril(1500, y - 20, frac, 104, E4X.teal)));
   };
   row(430, 5, o.r1, o.c1, '1870', '1 in 4');
   row(820, 8, o.r2, o.c2, '1900', '4 in 10');
@@ -135,9 +135,9 @@ function e4xBars(T, o) {
 /* ---------- ch 2: why the cities grew (three panels, filled on the three sentences) ---------- */
 // o: {farm, factory, ships}: the times of "Machines on farms", "Factories in cities", "immigrants"
 function e4xWhy(T, o) {
-  const s = [xpBoard(15)], G = 780;
+  const s0 = [xpBoard(15)], s = [], top = [], G = 780;
   // the city in the middle-right: a skyline the people walk into
-  s.push(e4xSkyline(1210, G, e4In(o.farm - 0.3, T, 0.6), '#4E726C'));
+  s.push(e4xSkyline(1180, G, e4In(o.farm - 0.3, T, 0.6), '#4E726C'));
   // 1) the farm: a field, a horse-drawn reaper; the farmhands it replaces get up and walk off toward the city
   const kf = e4In(o.farm, T, 0.4);
   if (kf > 0) {
@@ -146,29 +146,29 @@ function e4xWhy(T, o) {
     s.push(xpOp(kf, `<g transform="translate(${f1(rx)},0)"><circle cx="0" cy="${G - 46}" r="46" fill="none" stroke="${E4X.cream}" stroke-width="7"/>` +
       [0, 1, 2, 3].map((k) => `<line x1="0" y1="${G - 46}" x2="${f1(46 * Math.cos(wh + k * Math.PI / 2))}" y2="${f1(G - 46 + 46 * Math.sin(wh + k * Math.PI / 2))}" stroke="${E4X.cream}" stroke-width="4"/>`).join('') +
       `<rect x="-60" y="${G - 14}" width="120" height="8" fill="${E4X.cream}"/><path d="M-10,${G - 90} l-30,-30 l60,0 Z" fill="${E4X.cream}"/><rect x="-80" y="${G - 140}" width="16" height="70" fill="${E4X.cream}"/></g>`));
-    for (let i = 0; i < 4; i++) { const go = i > 0 ? e4In(o.farm + 0.9 + i * 0.35, T, 3.0) : 0, x = 210 + i * 90 + go * (920 - i * 40), y = G;
+    for (let i = 0; i < 4; i++) { const go = i > 0 ? e4In(o.farm + 0.9 + i * 0.35, T, 3.0) : 0, x = 210 + i * 90 + go * (960 - i * 70), y = G;
       s.push(e4xIcon(x, y, 92, go > 0.05 ? E4X.cream : '#8C9A86', kf)); }
-    s.push(tag(150, 320, 'MACHINES ON FARMS', kf));
+    top.push(tag(150, 200, 'MACHINES ON FARMS', kf));
   }
   // 2) the factory: a mill with stacks and smoke, beside the city; people go in
   const kx = e4In(o.factory, T, 0.4);
   if (kx > 0) {
-    s.push(xpOp(kx, `<path d="M1460,${G} l0,-120 l60,-40 l0,40 l60,-40 l0,40 l60,-40 l0,40 l60,-40 l0,160 Z" fill="${E4X.cream}" opacity="0.9"/><rect x="1640" y="${G - 300}" width="30" height="140" fill="${E4X.cream}" opacity="0.9"/><rect x="1690" y="${G - 260}" width="26" height="100" fill="${E4X.cream}" opacity="0.9"/>` +
-      [...Array(4)].map((_, k) => `<rect x="${1480 + k * 60}" y="${G - 60}" width="22" height="30" fill="${E4X.bg}"/>`).join('')));
-    for (let k = 0; k < 6; k++) { const ph = ((T * 0.25 + k / 6) % 1); s.push(`<circle cx="${f1(1655 + ph * 60)}" cy="${f1(G - 310 - ph * 180)}" r="${f1(14 + 30 * ph)}" fill="#7C918B" opacity="${f1(0.6 * (1 - ph) * kx)}"/>`); }
-    s.push(tag(1180, 320, 'FACTORIES IN CITIES', kx));
+    s.push(xpOp(kx, `<path d="M1430,${G} l0,-120 l60,-40 l0,40 l60,-40 l0,40 l60,-40 l0,40 l60,-40 l0,160 Z" fill="${E4X.cream}" opacity="0.9"/><rect x="1610" y="${G - 300}" width="30" height="140" fill="${E4X.cream}" opacity="0.9"/><rect x="1660" y="${G - 260}" width="26" height="100" fill="${E4X.cream}" opacity="0.9"/>` +
+      [...Array(4)].map((_, k) => `<rect x="${1450 + k * 60}" y="${G - 60}" width="22" height="30" fill="${E4X.bg}"/>`).join('')));
+    for (let k = 0; k < 6; k++) { const ph = ((T * 0.25 + k / 6) % 1); s.push(`<circle cx="${f1(1625 + ph * 60)}" cy="${f1(G - 310 - ph * 180)}" r="${f1(14 + 30 * ph)}" fill="#7C918B" opacity="${f1(0.6 * (1 - ph) * kx)}"/>`); }
+    top.push(tag(1180, 200, 'FACTORIES IN CITIES', kx));
   }
   // 3) the ships: a steamer comes in from the left along the bottom, its people walk up into the city
   const ks = e4In(o.ships, T, 0.4);
   if (ks > 0) {
     const sx = -200 + 760 * e4In(o.ships, T, 2.4), sy = 960;
-    s.push(xpOp(ks, `<rect x="0" y="${sy}" width="1920" height="120" fill="#16302C"/><g transform="translate(${f1(sx)},0)"><path d="M-170,${sy - 10} l340,0 l-30,46 l-280,0 Z" fill="${E4X.cream}"/><rect x="-90" y="${sy - 50}" width="150" height="40" fill="${E4X.cream}"/><rect x="-20" y="${sy - 110}" width="28" height="60" fill="${E4X.cream}"/>` +
+    top.push(xpOp(ks, `<rect x="0" y="${sy}" width="1920" height="120" fill="#16302C"/><g transform="translate(${f1(sx)},0)"><path d="M-170,${sy - 10} l340,0 l-30,46 l-280,0 Z" fill="${E4X.cream}"/><rect x="-90" y="${sy - 50}" width="150" height="40" fill="${E4X.cream}"/><rect x="-20" y="${sy - 110}" width="28" height="60" fill="${E4X.cream}"/>` +
       [...Array(9)].map((_, k) => `<circle cx="${-150 + k * 34}" cy="${sy - 0}" r="7" fill="${E4X.bg}"/>`).join('') + '</g>'));
     for (let i = 0; i < 6; i++) { const go = e4In(o.ships + 1.6 + i * 0.25, T, 2.4), x = 640 + i * 30 + go * (560 - i * 20), y = 940 - go * 160;
-      if (go > 0) s.push(e4xIcon(x, y, 70, E4X.teal, Math.min(1, go * 4))); }
-    s.push(tag(660, 1010, 'IMMIGRANTS, LANDING WHERE THE JOBS WERE', ks));
+      if (go > 0) top.push(e4xIcon(x, y, 70, E4X.teal, Math.min(1, go * 4))); }
+    top.push(tag(660, 1010, 'IMMIGRANTS, LANDING WHERE THE JOBS WERE', ks));
   }
-  return s.join('');
+  return s0.join('') + `<g transform="translate(960,760) scale(1.1) translate(-930,-760)">${s.join('')}</g>` + top.join('');
 }
 if (typeof window !== 'undefined') Object.assign(window, {e4xUrban, e4xBars, e4xWhy, e4xIcon, e4xSkyline});
 
@@ -218,7 +218,7 @@ function e4xTrolley(T, o) {
   s.push(`<rect x="0" y="${G - 60}" width="1920" height="300" fill="#22302E"/><rect x="0" y="${G + 26}" width="1920" height="5" fill="${E4X.pale}"/><rect x="0" y="${G + 46}" width="1920" height="3" fill="${E4X.mute}"/>`);
   // the wire and its poles (scrolling with the street), the car fixed in the frame with a little bob
   const wireY = 300; s.push(`<line x1="0" y1="${wireY}" x2="1920" y2="${wireY + 4}" stroke="#C9D3CC" stroke-width="3"/>`);
-  for (let i = -1; i < 6; i++) { const x = ((i * 520 + scroll) % 3120 + 3120) % 3120 - 600; s.push(`<rect x="${f1(x)}" y="${wireY - 40}" width="12" height="${G + 26 - wireY + 40}" fill="#0B1312"/><rect x="${f1(x - 40)}" y="${wireY - 6}" width="52" height="7" fill="#0B1312"/>`); }
+  for (let i = -1; i < 6; i++) { const x = ((i * 520 + scroll) % 3120 + 3120) % 3120 - 600; s.push(`<rect x="${f1(x)}" y="${wireY - 40}" width="12" height="${G + 26 - wireY + 40}" fill="#4E726C"/><rect x="${f1(x - 40)}" y="${wireY - 6}" width="52" height="7" fill="#4E726C"/>`); }
   const cx = 860, bob = 2 * Math.sin(u * 9), cy = G + 22 + bob, wh = -(u * 6) % TAU;
   s.push(`<g>` + `<rect x="${cx - 300}" y="${cy - 230}" width="600" height="200" rx="10" fill="${E4X.cream}"/><rect x="${cx - 320}" y="${cy - 250}" width="640" height="26" rx="8" fill="#C9C2B0"/><rect x="${cx - 200}" y="${cy - 274}" width="400" height="26" rx="6" fill="#C9C2B0"/>` +
     [...Array(8)].map((_, i) => `<rect x="${cx - 270 + i * 68}" y="${cy - 200}" width="50" height="70" rx="5" fill="#20302E"/>`).join('') +
@@ -226,7 +226,7 @@ function e4xTrolley(T, o) {
     [cx - 190, cx + 190].map((x) => `<circle cx="${x}" cy="${cy - 18}" r="34" fill="#0B1312" stroke="${E4X.pale}" stroke-width="4"/>` + [0, 1, 2].map((q) => `<line x1="${x}" y1="${cy - 18}" x2="${f1(x + 30 * Math.cos(wh + q * 2.09))}" y2="${f1(cy - 18 + 30 * Math.sin(wh + q * 2.09))}" stroke="${E4X.pale}" stroke-width="3"/>`).join('')).join('') + `</g>`);
   // the trolley pole from the roof up and back to the wire; the wheel at its tip; sparks
   const base = [cx + 120, cy - 272], tip = [cx + 330, wireY + 6];
-  s.push(`<line x1="${base[0]}" y1="${base[1]}" x2="${tip[0]}" y2="${tip[1]}" stroke="#0B1312" stroke-width="9"/><circle cx="${tip[0]}" cy="${tip[1]}" r="9" fill="#0B1312"/>`);
+  s.push(`<line x1="${base[0]}" y1="${base[1]}" x2="${tip[0]}" y2="${tip[1]}" stroke="#A3BAB2" stroke-width="8"/><circle cx="${tip[0]}" cy="${tip[1]}" r="10" fill="#C9D3CC"/><rect x="${base[0] - 22}" y="${base[1] - 6}" width="44" height="10" fill="#A3BAB2"/>`);
   const sp = Math.max(0, Math.sin(u * 13.7) * Math.sin(u * 3.1)) ** 3;
   if (sp > 0.05) { s.push(`<circle cx="${tip[0]}" cy="${tip[1]}" r="${f1(16 + 30 * sp)}" fill="#BFF7EE" opacity="${f1(0.55 * sp)}"/>`); for (let k = 0; k < 6; k++) { const a = r() * TAU, L = 18 + 30 * sp * r(); s.push(`<line x1="${tip[0]}" y1="${tip[1]}" x2="${f1(tip[0] + Math.cos(a) * L)}" y2="${f1(tip[1] + Math.sin(a) * L)}" stroke="#E9FFFB" stroke-width="2.5" opacity="${f1(sp)}"/>`); } }
   return `<g opacity="${f1(k0)}">${s.join('')}</g>`;

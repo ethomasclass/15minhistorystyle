@@ -191,17 +191,26 @@ SCENES = {
         rooms={}, room_at=lambda t: None,
         beds=[dict(name='bed_street_horses', t0=f('Too many horses') - 0.4, t1=f('dead horses', end=True) + 1.2, fin=0.6, fout=1.2, narr=-36)],
         listen=[]),
-    # ch 5 (chapters 5 to 8 builder: retime to your shots). The captain's line in the hallway at the Rabinowitzes' door; the brothers'
-    # exchange in the kitchen; the coal spot when ep4_coal's coal runs down the chute (set its time to the edit's).
+    # ch 5 (chapters 5 to 8 builder; times match ../edit/ch05.js). The club's murmur under the two club shots (the opening, and Tommy's
+    # errand), a street under the coal with the coal down the chute, the kitchen under the brothers; the captain's line in the hallway.
     'ch05': lambda f: dict(
         rooms={'CAPTAIN': 'hall', 'MICHAEL': 'room', 'TOMMY': 'room'}, room_at=lambda t: None,
-        beds=[dict(name='bed_winter_kitchen', t0=f('That winter, the Kellys'), t1=f('Just how you vote', end=True) + 1.2, narr=-42, dlg=-33)],
-        spots=[],
+        beds=[dict(name='bed_clubhouse', t0=0.0, t1=f('It worked like') + 1.0, fin=0.4, fout=0.6, narr=-39),
+              dict(name='bed_street_horses', t0=f('That winter, the Kellys') - 0.05, t1=f('And Tommy took') + 0.45, fin=0.3, fout=0.4, narr=-41),
+              dict(name='bed_clubhouse', t0=f('And Tommy took') + 0.3, t1=f("What's it cost") - 0.3, fin=0.3, fout=0.3, narr=-39),
+              dict(name='bed_winter_kitchen', t0=f("What's it cost") - 0.5, t1=f('But the most famous') + 0.15, fin=0.3, fout=0.4, narr=-42, dlg=-33)],
+        spots=[('coal_chute', f('That winter, the Kellys') + 0.35, -17)],
         listen=[(f('Tell your father'), f('No charge', end=True) + 1.0), (f('That winter, the Kellys'), f('Just how you vote', end=True) + 1.2)]),
-    # ch 8: Tommy bursts into the kitchen with the job (ep4_kelly_flat_end)
+    # ch 7 (times match ../edit/ch07.js): the cold open's fire night under the callback shot (the engine, the captain).
+    'ch07': lambda f: dict(
+        rooms={}, room_at=lambda t: None,
+        beds=[dict(name='bed_fire_night', t0=f('When there was a fire') - 0.15, t1=f('a charity') - 0.25, fin=0.3, fout=0.5, narr=-38)],
+        spots=[], listen=[]),
+    # ch 8 (times match ../edit/ch08.js): the election street under the polls; Tommy bursts into the kitchen (ep4_kelly_flat_end).
     'ch08': lambda f: dict(
         rooms={'MICHAEL': 'room', 'TOMMY': 'room'}, room_at=lambda t: None,
-        beds=[dict(name='bed_winter_kitchen', t0=f('For the Kellys'), t1=f('Again', end=True) + 1.5, narr=-41, dlg=-32)],
+        beds=[dict(name='bed_election_street', t0=f('But the machines') + 0.7, t1=f('For the Kellys') - 0.1, fin=0.3, fout=0.4, narr=-40),
+              dict(name='bed_winter_kitchen', t0=f('For the Kellys') - 0.1, t1=f('Next time'), fin=0.4, fout=0.8, narr=-41, dlg=-32)],
         spots=[],
         listen=[(f('For the Kellys'), f('Again', end=True) + 1.5)]),
 }

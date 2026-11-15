@@ -16,7 +16,7 @@ EDITS.ch02 = () => {
   const d1870 = E4_C1870.map(([nm, lon, lat], i) => [lon, lat, c.in1870b + 0.3 + i * 0.14]);
   const d1900 = E4_C1900.map(([nm, lon, lat], i) => [lon, lat, c.by1900b + 0.1 + i * 0.055]);
   const count = (T) => T < c.by1900b ? 14 : Math.round(lerp(14, 38, clamp01((T - c.by1900b - 0.1) / (c.t38 - c.by1900b))));
-  const GROW_KEYS = [[c.so - 0.1, 2150, -150, 0, -68, 38, 2900, 0, 0], [dur, 1990, -160, 0, -54, 33, 2350, 0, 0]];
+  const GROW_KEYS = [[c.so - 0.1, 2050, -150, 0, -66, 31, 2100, 0, 0], [dur, 1900, -200, 0, -52, 27, 1750, 0, 0]];
   const shots = [
     // 1. "Bursting is not an exaggeration." New York and Brooklyn from above, Currier and Ives, 1884.
     {a: 0, b: c.in1870 - 0.05, draw: (T) => push(T, 0, c.in1870, 0.06) +
@@ -34,7 +34,7 @@ EDITS.ch02 = () => {
     // 4. "Chicago went from about 300,000 people to 1.7 million in thirty years. It cheated a little. It swallowed its suburbs. And
     //    Brooklyn doubled, to more than 800,000, the fourth-biggest city in the country."
     {a: c.chicago - 0.1, b: c.why - 0.1, draw: (T) => svg(e4xBars(T, {chi: c.chicago, chi2: c.mil - 0.3, ann: c.swallowed, bk: c.brooklyn, bk2: c.doubled})) +
-      P_('it swallowed its suburbs', 140, 640, fin(T, c.swallowed, 0.3), 30) + P_('(annexed, 1889)', 200, 730, fin(T, c.swallowed + 0.4, 0.3), 30) +
+      P_('it swallowed its suburbs', 690, 560, fin(T, c.swallowed, 0.3), 28) + P_('(annexed, 1889)', 720, 640, fin(T, c.swallowed + 0.4, 0.3), 28) +
       P_('doubled', 1520, 330, fin(T, c.doubled, 0.3), 40) +
       lTag('4TH-BIGGEST CITY IN THE COUNTRY', 1010, 1000, fin(T, c.fourth, 0.3))},
     // 5. "Why? Machines on farms meant fewer jobs for farmhands. Factories in cities meant more jobs for everybody else. And millions

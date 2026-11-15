@@ -94,13 +94,13 @@ function renderMachineNet(n, cfg = {}) {
   if (fireL) lab(['THE FIRE · JANUARY 1887'], [(fireL.x0 + fireL.x1) / 2, (fireL.y0 + fireL.y1) / 2, emH(fireL.floors) + 8], [-230, -90], on(C.fire[0] + 0.3, C.fire[1]) * fireK);
   // the favors: index cards along the bottom, each with its icon, popping in as they are named
   const cards = C.favors.filter(([a]) => n > a - 0.05);
-  cards.forEach(([a, icon, txt], k) => { const u = x4Pop(clamp01((n - a) / 0.4)), x = 150 + k * 420, y = 820;
+  cards.forEach(([a, icon, txt], k) => { const u = x4Pop(clamp01((n - a) / 0.4)), x = 150 + k * 420, y = 820, wd = txt.split(' ');
+    const lines = txt.length > 14 ? (wd[0] === 'HELP' ? ['HELP WITH', wd.slice(2).join(' ')] : [wd.slice(0, Math.ceil(wd.length / 2)).join(' '), wd.slice(Math.ceil(wd.length / 2)).join(' ')]) : [txt];
     fixed.push({x, y, w: 380, h: 170});
     scr.push(`<g opacity="${f1(Math.min(1, u * 2) * 100) / 100}" transform="translate(${x + 190},${y + 85}) scale(${f1(u * 1000) / 1000}) rotate(${k % 2 ? 1.5 : -1.5}) translate(${-(x + 190)},${-(y + 85)})">` +
       `<rect x="${x + 6}" y="${y + 10}" width="380" height="170" fill="#000" opacity="0.45" filter="url(#soft)"/><rect x="${x}" y="${y}" width="380" height="170" fill="${EX.cream}"/>` +
       x4Icon(icon, x + 80, y + 80, 0.95) + x4Glint(x + 140, y + 34, 9, a < 99 ? 1 : 0, n) +
-      `<text x="${x + 150}" y="${y + 92}" font-family="Mono" font-size="${txt.length > 14 ? 25 : 28}" letter-spacing="1" fill="#111">${txt.length > 14 ? txt.split(' ').slice(0, Math.ceil(txt.split(' ').length / 2)).join(' ') : txt}</text>` +
-      (txt.length > 14 ? `<text x="${x + 150}" y="${y + 124}" font-family="Mono" font-size="25" letter-spacing="1" fill="#111">${txt.split(' ').slice(Math.ceil(txt.split(' ').length / 2)).join(' ')}</text>` : '') + `</g>`);
+      lines.map((ln, j) => `<text x="${x + 140}" y="${y + (lines.length > 1 ? 80 + j * 34 : 94)}" font-family="Mono" font-size="${f1(Math.min(27, 232 / (ln.length * 0.6)))}" letter-spacing="0" fill="#111">${ln}</text>`).join('') + `</g>`);
   });
   (C.fixedTags || []).forEach(([x, y, txt, a, b]) => emFixed(scr, fixed, x, y, txt, on(a, b)));
   scr.unshift(emLabels(L, fixed));

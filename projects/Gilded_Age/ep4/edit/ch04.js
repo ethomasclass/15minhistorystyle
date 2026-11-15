@@ -18,7 +18,7 @@ EDITS.ch04 = () => {
   const cardAt = c.the, dur = cardAt + CARD_HOLD;
   const P_ = (txt, x, y, o, size = 32, rot = -3) => lNote(txt, x, y, o, size, rot);
   const PLAN = remap([[c.often + 1.3, 3.0], [c.sink + 0.9, 4.9], [c.on - 0.1, 5.9]]);       // Ep 3's plan, kept before its gold flat (6.2)
-  const WALKIN = remap([[c.into - 0.1, 23.6], [cardAt + 0.4, 26.6]]);                       // ep4_fire: the captain and his men walking in
+  const WALKIN = remap([[c.into + 1.3, 25.4], [cardAt + 2.6, 28.2]]);                       // ep4_fire: the captain and his men walking in
   const shots = [
     // 1. "Too many people, first. By 1890, more than a million New Yorkers lived in about 37,000 tenements." Mulberry Bend (Riis,
     //    about 1890) and the counts; the vocab card.
@@ -32,7 +32,7 @@ EDITS.ch04 = () => {
       vocab(1020, 560, 'Tenement', 'A crowded apartment building|for poor families, often|with no running water inside.', fin(T, c.tenements - 0.25, 0.35))},
     // 2. "Often there was one sink for a whole floor, a toilet shed in the yard, and sewage running straight into the river."
     {a: c.often + 1.3, b: c.on - 0.1, draw: (T) => renderTenementPlan(PLAN(T)) + svg(e4xYard(T, {privy: c.toilet, sewer: c.sewage})) +
-      lTag('TOILET SHED', 1530, 760, fin(T, c.toilet + 0.2, 0.3)) + lTag('TO THE RIVER', 150, 950, fin(T, c.sewage + 1.0, 0.3))},
+      lTag('TOILET SHED', 1640, 570, fin(T, c.toilet + 0.2, 0.3)) + lTag('TO THE RIVER', 150, 950, fin(T, c.sewage + 1.0, 0.3))},
     // 3. "On one Manhattan block, about one small child in seven died in a single year."
     {a: c.on - 0.1, b: c.horses1 - 0.6, draw: (T) => svg(e4xSeven(T, {a: c.on, died: c.died})) +
       bigFig('1 in 7', {x: 0, y: 160, size: 150, o: fin(T, c.seven, 0.3)}) +
