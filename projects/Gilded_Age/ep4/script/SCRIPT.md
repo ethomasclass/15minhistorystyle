@@ -81,7 +81,7 @@ And right behind them, almost as fast, comes somebody else. A man in a good wool
 
 He knows everybody's name.
 
-**CAPTAIN:** [warm, calm, close] Mrs. Doyle. You and the children have a room at the hotel tonight. It's taken care of. Go on, get warm.
+**CAPTAIN:** [warm, calm, close] Mrs. Doyle. You and the little ones have a room at the hotel tonight. It's taken care of. Go on, get warm.
 
 He doesn't ask how the Doyles vote. He doesn't send them to a charity office. By morning, they have a room, new clothes and a hot meal. And he asks for nothing in return.
 
@@ -89,7 +89,7 @@ Not tonight.
 
 Michael Kelly watched the whole thing from his front stoop.
 
-**CAPTAIN:** [easy, friendly] You're Kelly, from the sugar refinery. Come by the club some evening. We look after our own.
+**CAPTAIN:** [easy, friendly] You'd be Kelly, from the sugar refinery. Come by the club some evening. We look after our own.
 
 That man worked for a {political machine}. Machines like his ran cities all over America. And across the river, in New York, the most famous machine of all once kept books showing 179,729 dollars and 60 cents. For forty chairs and three tables.
 
