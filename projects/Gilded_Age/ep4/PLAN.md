@@ -1,6 +1,6 @@
 # Episode 4 plan: Cities and Political Machines (target 10 to 12 minutes, about 1,600 to 1,750 words)
 
-Numbering: the playlist and title cards count this as Episode 4 of 6 (Labor is 5, Populism 6). The user called it "episode 5" on
+Numbering: Episode 4 of 5 (Nov 15: Labor and Populism merged into one finale, Episode 5). The user called it "episode 5" on
 Nov 14; confirm before the title card is made.
 
 Episode question (the video may ask this one): **Did the political machines help the poor or rob them?** The series compelling

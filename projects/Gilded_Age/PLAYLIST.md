@@ -13,9 +13,8 @@ This series follows one fictional working family, the Kellys of Brooklyn, throug
 1. Industrialization and the Tycoons: Carnegie, Rockefeller, steel, oil and monopolies
 2. Wealth and Society: the mansions, the maids, Social Darwinism and the Gospel of Wealth
 3. Immigration: Castle Garden, Ellis Island, tenements, name changes and nativism
-4. Cities and Political Machines (coming soon)
-5. Labor and Unions (coming soon)
-6. Farmers and the Populists (coming soon)
+4. Cities and Political Machines: Boss Tweed, Tammany Hall, tenements and the growth of cities
+5. Workers and Farmers Fight Back (coming soon): unions, strikes, the Populists and the election of 1896
 Then: a short Progressive Era unit on how Americans responded.
 
 Made for middle and high school US History classrooms (and anyone curious). Watch in order: each part picks up where the last one left off.
