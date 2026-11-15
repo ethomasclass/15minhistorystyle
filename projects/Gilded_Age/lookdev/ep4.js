@@ -425,7 +425,7 @@ function renderE4Fire(t, o = {}) {
   // (facing right the mother is in front of him: his front hand; facing left she is behind him: his back hand)
   const toMo = kidsD === 1 ? 'f' : 'b', toGirl = kidsD === 1 ? 'b' : 'f', gHand = kidsD === 1 ? 'f' : 'b';
   const skirtPt = E3K.toWorld({...dm, an: {...dm.an, lean: 0, bob: 0}}, dm.d === 1 ? -0.11 : 0.11, 0.44).map((v, i) => v - (i ? (dm.an.bob || 0) * 0 : 0));
-  by = reach(by, toMo, skirtPt[0], skirtPt[1], 'fi.boy.skirt');
+  // (no hand on his mother: the user's caution about contact in silhouette; he walks beside her holding his sister's hand)
   const midX = (gg.x + by.x) / 2, kh = (gg.y - 0.47 * gg.h + by.y - 0.5 * by.h) / 2;
   [gg, by] = e3Clasp(gg, gHand, by, toGirl, [midX, kh], 'fi.kids.hands');
   // ---- the captain and his three men walk in from the right ----

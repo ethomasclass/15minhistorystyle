@@ -608,14 +608,22 @@ New shared pieces (`ep4.js`):
 - `e4Speak`: speaker-driven mouths (a new backward-compatible `an.jaw` in `rig.js` opens the jaw without the awe face) plus a beat
   signal for head nods and keyed gestures (`e4Keys`).
 - `e4Captain`: Mr. Duffy, ink, bowler, a long overcoat (the frock coat carried below the knee) and the gold glint of his watch chain.
-- `e4Horse`: one gait model for walk and gallop: each hoof planted where the hip will be at mid-stance and carried on an arc to
-  the next plant, the leg solved onto it, so hooves never slide at any speed; when the horse stops, each leg steps under its hip.
+- `e4Horse`: walk and gallop. Each hoof is planted where the hip will be at mid-stance (so planted hooves never slide), the leg
+  solved onto it. The walk carries the hoof on an arc to its next plant; the gallop follows rotary-gallop key poses relative to the
+  hip (planted and swept back, pushed off, folded under the body, reached forward extended, set down; `E4_GKEYS`), with pitch and a
+  suspension phase. When the horse stops, each leg steps under its hip. In `ep4_fire` the camera closes in and runs with the
+  horses for about 2 s (18 to 20.5 s).
+- `e4Outlined`: a thin ink outline round a coral figure, used on the Kellys in the kitchen and at the polls so overlapping
+  Kellys stay separate shapes.
 - `e4Pumper` (steam fire engine: boiler and flared stack, air chamber, driver's box, bell, sparks), `e4Snow`, `e4Facade` (the
   Williamsburg block: four-storey tenements over raised basements, stoops, fire escapes, snow on every ledge), `e4Smoke`.
 
 Scenes:
-- **`ep4_fire`** (ch 1 cold open, 62 s). Night, snow. The burning tenement shows only as orange glow in its windows, firelight on
-  the snow and walls, and smoke (no flame on anyone). Families in nightclothes: an old woman in a shawl, a husband with his hand on
+- **`ep4_fire`** (ch 1 cold open, 62 s). Night, snow. The burning tenement: flames inside its windows (tongues licking up out of the
+  tops of some frames onto the soot-stained brick), broken glass glinting, thick smoke pouring from the windows and rolling off the
+  roofline across the top of the frame, lit orange from below, embers rising among the snowflakes, and a pulsing orange glow on the
+  snow, the street, the neighbours' walls and every figure's rim (no flame on anyone). The close shots carry a flickering warm key
+  from frame left with smoke and embers drifting through. The blanket is a muted brown wool with stripes, folds and a fringe. Families in nightclothes: an old woman in a shawl, a husband with his hand on
   his wife's shoulder, a barefoot girl holding her shoes and shifting from foot to foot, Mrs. Doyle with the baby, her boy holding
   her nightgown and her girl holding his hand. The pumper gallops in (16.4 to 20.6), firemen jump down, one takes the nozzle and
   one the hose behind him, water on (23.3). The captain and three men walk in (22.6 to 27.6); the blanket comes off his man's arm,
@@ -649,9 +657,12 @@ Scenes:
   (`../ep4/public/img/g_tweed/the_capture_of_tweed_the_picture_that_made_spanish_officials_harpers_1876-10-07_ia.jpg`, 2710 x 4000);
   the page is a clean cream sheet with a thin border for the edit to fill.
 - **`ep4_bootblack`** (ch 7, 15 s). The rotunda of Tweed's courthouse (arches, iron galleries, skylight beams; after the HABS
-  photograph): Plunkitt seen only from behind (a back view drawn for this: top hat, shoulders over the chair, his right hand making
-  points, his head turning toward the reporter), a bootblack on a low box brushing the shoe on the footrest, the reporter writing.
-  The left half of the frame is kept clear for the handwritten quotes. Tag "NEW YORK COUNTY COURTHOUSE · 1905".
+  photograph). Plunkitt alone on the stand, three-quarter from behind (a back view drawn for this: top hat, shoulders, his right hand
+  making points, his head turning toward the reporter), in a high armchair on a stepped platform (back, arms and legs showing), his
+  legs forward and his feet on the iron footrests; an empty shoeshine box with brushes, polish and a rag set aside on the platform.
+  The reporter stands upright about two metres off at the side and writes. Slow push-in. The left half of the frame is kept clear
+  for the handwritten quotes. Tag "NEW YORK COUNTY COURTHOUSE · 1905". (Revised on the user's note: no bootblack and no figure
+  low at a seated man's feet; the same caution was applied everywhere, so the Doyle boy no longer holds his mother's nightgown.)
 
 QA: each clip rendered, read as a contact sheet of frames every 1.5 to 2.5 s, walkers checked as 10 fps filmstrips with the camera
 locked on them (the captain, the Doyles and the children holding hands, Tommy's fast entrance, Michael at the polls, the firemen's
@@ -663,7 +674,7 @@ across the room, and Tommy now passes in front of Ma); the coal man's whole-body
 from review, the captain in `ep4_coal` now walks along the street in front of the wagon, so he no longer seems to stand on the coal.
 - **Contact audit** (every other frame, all nine clips; scratchpad `e4/verify.mjs`, `move` hands excluded): planted feet 0.00 to
   0.42 px and drift 0.00 to 0.40 px (Ep 1 walkers now pinned to the floor), seated feet 0.00 px, holds 0.00 px, hands 0.00 to
-  0.99 px (the worst: the Doyle boy's hand on his mother's nightgown at the end of their walk), hand to hand 0.12 px.
+  0.37 px, hand to hand 0.11 px.
 - **Text audit** (`audit_text.mjs`, every 0.25 s): no OUT, OVERLAP or SHORT in any clip (one place/date tag each, 3.3 to 5.6 s;
   `ep4_kelly_flat_end` has none; `ep4_papers` carries "COMPOSITE CHARACTERS" for 3.4 s).
 
