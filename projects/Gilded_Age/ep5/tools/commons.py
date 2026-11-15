@@ -101,6 +101,13 @@ def get(title, dest, width=3840):
         except urllib.error.HTTPError as e:
             if e.code != 429 or attempt == 4:
                 raise
+            if not width:
+                # Ep 5: a rate-limited original falls back to the largest standard thumbnail below it
+                tw = max([w for w in STD_WIDTHS if w < w0] or [0])
+                if tw:
+                    i = info([title], tw)[0]; width = tw
+                    req = urllib.request.Request(i["url"], headers={"User-Agent": UA})
+                    continue
             time.sleep(min(60, int(e.headers.get("Retry-After") or 0) or 30 * (attempt + 1)))
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     save_jpeg(data, dest)
