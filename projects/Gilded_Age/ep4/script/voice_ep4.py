@@ -18,8 +18,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'public', 'audio')
 V.CACHE = os.path.join(OUT, 'cache')
 os.makedirs(V.CACHE, exist_ok=True)
-V.PRONOUNCE = {'Plunkitt': 'PLUNK-it', 'Tammany': 'TAM-uh-nee', 'McLaughlin': 'mick-LOCK-lin', 'Riis': 'REESE',
-                'Vigo': 'VEE-go', 'Nast': 'NAST', 'Sprague': 'SPRAYG', 'Pendleton': 'PEN-dl-tun', 'Doyle': 'DOYL'}
+# Respellings must be mixed case: an all-caps respelling (NAST) gets read letter by letter.
+V.PRONOUNCE = {'Plunkitt': 'Plunk-it', 'McLaughlin': 'Mick-Lock-lin', 'Riis': 'Reese', 'Vigo': 'Vee-go', 'Sprague': 'Sprayg'}
 os.environ['ELEVENLABS_API_KEY'] = open(os.environ['ELEVEN_KEY_FILE']).read().strip()
 
 VOICES = {'NARR': 'mI4rIAStSQeKeqsz4FwM', 'MICHAEL': 'UxeFpulW6hsy9Wt6E0Ai', 'MA': 'ingzPMbrZqU3iFbHVKBR',
