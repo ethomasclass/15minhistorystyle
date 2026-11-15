@@ -590,3 +590,84 @@ words.json and its own camera keys.
   JACOB RIIS, 1890" (Riis, *How the Other Half Lives*, ch. X, of part of the Tenth Ward).
 
 Stills: `ma_*.jpg` (arrival), `ms_*.jpg` (sweatshop), `mm_*.jpg` (move), `md_*.jpg` (density).
+
+## Episode 4 (Nov 15): the machine, drawn silhouette scenes
+
+`ep4.js` (shared helpers and the cold open) and `ep4_b.js` (the other seven), loaded by `bridge.html` after `ep3_explain.js`. They
+build on `ep3.js` (E3K contacts and the E3LOG audit, `stepWalk`, `e3Settle`, `e3Stand`, `e3Clasp`, `e3Room`), `rig.js`,
+`mansion.js` (`brougham`, glows) and `ep2_more.js` (`camAt`). The beats follow `../ep4/script/SCRIPT.md` draft 1 at about 150
+words a minute; every beat is a named time near the top of its renderer (`FT`, `CB`, `CO`, `KF`, `PA`, `PO`, `VG`, `BB`) so the
+edit can retime them to the voice. 720p review clips in `review/ep4/`. Colours as the series: the Kellys coral, the Rabinowitzes
+wheat gold, everyone else ink; money only as the captain's small warm-gold watch-chain glint (`E4.glint`); real people faceless.
+
+New shared pieces (`ep4.js`):
+- `e4Walk`: Episode 1's walk (rig.js `walkAn` through `stepWalk`) with the stance sole pinned exactly to the floor line each frame
+  (walkAn's straight stance leg and its bob let the sole wander a few px above and below), so planted feet audit at 0 px. Rig
+  children have a 0.46 h leg while walkAn sweeps a 0.5 h one, so their cycle is driven 1/0.92 faster (their feet slid 4 px a step).
+- `e4Track`: stand, walk to a mark, settle (`e3Settle`), stand again, several legs in one plan; walks start from the passing pose.
+- `e4Speak`: speaker-driven mouths (a new backward-compatible `an.jaw` in `rig.js` opens the jaw without the awe face) plus a beat
+  signal for head nods and keyed gestures (`e4Keys`).
+- `e4Captain`: Mr. Duffy, ink, bowler, a long overcoat (the frock coat carried below the knee) and the gold glint of his watch chain.
+- `e4Horse`: one gait model for walk and gallop: each hoof planted where the hip will be at mid-stance and carried on an arc to
+  the next plant, the leg solved onto it, so hooves never slide at any speed; when the horse stops, each leg steps under its hip.
+- `e4Pumper` (steam fire engine: boiler and flared stack, air chamber, driver's box, bell, sparks), `e4Snow`, `e4Facade` (the
+  Williamsburg block: four-storey tenements over raised basements, stoops, fire escapes, snow on every ledge), `e4Smoke`.
+
+Scenes:
+- **`ep4_fire`** (ch 1 cold open, 62 s). Night, snow. The burning tenement shows only as orange glow in its windows, firelight on
+  the snow and walls, and smoke (no flame on anyone). Families in nightclothes: an old woman in a shawl, a husband with his hand on
+  his wife's shoulder, a barefoot girl holding her shoes and shifting from foot to foot, Mrs. Doyle with the baby, her boy holding
+  her nightgown and her girl holding his hand. The pumper gallops in (16.4 to 20.6), firemen jump down, one takes the nozzle and
+  one the hose behind him, water on (23.3). The captain and three men walk in (22.6 to 27.6); the blanket comes off his man's arm,
+  opens between his hands and goes round Mrs. Doyle's shoulders; his first line (31.0 to 38.3) with gestures toward the waiting cab;
+  the Doyles walk off to it, his man with them, and it drives away; "Not tonight"; he steps over to the Kellys' stoop, tips his hat
+  to Michael (coral, arms folded on the stoop two doors down) and says his second line (51.8 to 57.8), push-ins on both lines.
+  A gas lamp by the Kellys' stoop lights the second half. Tag "WILLIAMSBURG, BROOKLYN · JANUARY 1887 · 3 A.M." (0.4 to 6.0).
+- **`ep4_clubhouse`** (ch 5, 27 s). The back room behind a saloon in gaslight (bunting, wainscot, a gasolier, the saloon's light
+  through the side opening, a back door to the yard). The captain at a small table with the ledger; a mother hands him a letter (he
+  reads it and lays it down), an old man with a cane talks and touches his brim in thanks, a young man holds his cap in both hands;
+  the captain writes in the ledger after each and nods; each leaves by the back door; the line steps up. Tommy (coral) comes in fast
+  from the saloon with a note, hands it over, grins, goes. On the wall over the table a big empty frame (the boss, faceless).
+- **`ep4_coal`** (ch 5, 12 s). The cold open's street by day: a coal wagon at the curb (the horse resting a hind hoof), the coal
+  man on the bed shovelling into a chute to the Kellys' coal hole (lumps run down it, dust puffs up), Ma (coral) watching from the
+  top of the stoop with her arms folded; the captain walks by, tips his hat without stopping, and she gives a small nod.
+- **`ep4_kelly_flat`** (ch 2, 13 s) and **`ep4_kelly_flat_end`** (ch 8, 16 s). The Kellys' kitchen at Ep 3's room scale with
+  kelly_flat's look and a front window over the roofs to the refinery's stacks. Ch 2: the coal bucket empty (its bottom showing),
+  the stove low, frost on the glass; Ma looks into the bucket, then warms her hands; Michael with a mug in both hands; Tommy at the
+  window, then at the table talking, Michael shakes his head. Ch 8: the bucket heaped, the stove bright, Ma stirring; Tommy bursts
+  in through the door with his news (4.0 to 7.5), Michael turns and answers flatly (8.3 to 9.2) and turns back to the stacks.
+- **`ep4_papers`** (ch 5, 12 s). The building's hall at the Rabinowitzes' open door (their candlesticks and samovar warm behind):
+  Yankel holds out his papers, the captain touches them and says his line to Rivke (1.1 to 4.0), she leans in and translates,
+  Yankel turns to listen, turns back and nods; the captain tips his hat and goes along the hall.
+- **`ep4_polls`** (ch 8, 15 s). Election day, November 1887: a barbershop polling place (the ballot box on a table inside the
+  window), a line to the door, a policeman, a rival party's man handing out his own tickets; Tommy at the curb with a stack of the
+  party's printed ballots, Michael takes one, reads it, looks at his brother, goes to the end of the line.
+- **`ep4_vigo`** (ch 6, 13 s). A sunny quay in Vigo, 1876: a large man in a hat (Tweed: a flat profile silhouette, no features)
+  comes off a steamer's gangplank with a carpet bag; two Guardia Civil officers (tricorns, capes) compare him with a newspaper page,
+  look again, walk into his path; one holds the page up beside his head. **Composite hold 8.2 to 11.2 s**, camera still: the page's
+  rectangle on the 1920 x 1080 frame is `e4VigoPageRect()` (x 760, y 379, 352 x 519 px), proportioned like the Harper's scan
+  (`../ep4/public/img/g_tweed/the_capture_of_tweed_the_picture_that_made_spanish_officials_harpers_1876-10-07_ia.jpg`, 2710 x 4000);
+  the page is a clean cream sheet with a thin border for the edit to fill.
+- **`ep4_bootblack`** (ch 7, 15 s). The rotunda of Tweed's courthouse (arches, iron galleries, skylight beams; after the HABS
+  photograph): Plunkitt seen only from behind (a back view drawn for this: top hat, shoulders over the chair, his right hand making
+  points, his head turning toward the reporter), a bootblack on a low box brushing the shoe on the footrest, the reporter writing.
+  The left half of the frame is kept clear for the handwritten quotes. Tag "NEW YORK COUNTY COURTHOUSE · 1905".
+
+QA: each clip rendered, read as a contact sheet of frames every 1.5 to 2.5 s, walkers checked as 10 fps filmstrips with the camera
+locked on them (the captain, the Doyles and the children holding hands, Tommy's fast entrance, Michael at the polls, the firemen's
+jump, the galloping and stopping horses). Fixes from that pass: the children's walk slid 4 px a step (leg length, above); the
+horses' legs stopped in a gallop pose (now they gather under the body over the last strides and stand on straight legs); the
+blanket hid Mrs. Doyle's head; the gas lamp stood in the middle of the dialogue push-in (moved); the men crossed the frame during
+the captain's line (now after it); Tommy's walks were too fast; the Kellys stood on top of each other in the kitchen (spread
+across the room, and Tommy now passes in front of Ma); the coal man's whole-body tilt (now a small lean into the dig only); and,
+from review, the captain in `ep4_coal` now walks along the street in front of the wagon, so he no longer seems to stand on the coal.
+- **Contact audit** (every other frame, all nine clips; scratchpad `e4/verify.mjs`, `move` hands excluded): planted feet 0.00 to
+  0.42 px and drift 0.00 to 0.40 px (Ep 1 walkers now pinned to the floor), seated feet 0.00 px, holds 0.00 px, hands 0.00 to
+  0.99 px (the worst: the Doyle boy's hand on his mother's nightgown at the end of their walk), hand to hand 0.12 px.
+- **Text audit** (`audit_text.mjs`, every 0.25 s): no OUT, OVERLAP or SHORT in any clip (one place/date tag each, 3.3 to 5.6 s;
+  `ep4_kelly_flat_end` has none; `ep4_papers` carries "COMPOSITE CHARACTERS" for 3.4 s).
+
+Known weak spots: the horses' gallop is drawn, not studied (a fast stride with tucked legs), and they are small in the wide shot;
+the firemen's helmets are simple shapes; the wide fire shots keep figures small (190 px) so the block and the glow read; Plunkitt's
+back view is a new one-off drawing (shoulders over the chair back) rather than the rig; Tweed is a profile silhouette (det 0, no
+eye or mouth) with a rim of sun, which still shows a nose line; the polls' line and the clubhouse queue are generic men.

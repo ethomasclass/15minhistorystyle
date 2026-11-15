@@ -174,7 +174,7 @@ Object.assign(CLIPS, {ep4_clubhouse: {sec: CB.sec, render: (t) => renderE4Club(t
 // wagon stands at the curb, the horse resting a hind hoof; the coal man on the wagon bed shovels coal into a chute that runs down to
 // the Kellys' coal hole; lumps rattle down, dust puffs out. Ma Kelly (coral) watches from the top of the stoop, arms folded. The
 // captain walks by along the sidewalk, tips his hat to her, and walks on.
-const CO = {sec: 12, wx: 1250, hole: [1338, 942], bedY: 1062 - 0.62 * 190};
+const CO = {sec: 12, wx: 1250, hole: [1338, 942], bedY: 1062 - 0.62 * 190, capG: 1100};
 function e4CoalWagon(t, H) { // faces left; x = its tail (right end); returns svg and the chute mouth
   const {GE} = E4F, x = CO.wx, c = '#141A19', s = [];
   const X = (u) => x - u * H, Y = (v) => GE - v * H;
@@ -189,7 +189,7 @@ function e4CoalWagon(t, H) { // faces left; x = its tail (right end); returns sv
   return {svg: s.join(''), bed: Y(0.98) + 0, mouth: [X(-0.05), Y(1.0)]};
 }
 function renderE4Coal(t, o = {}) {
-  const {H, GC, GE, CURB, WF} = E4F, c = cam2(o.cam || camAt([[0, 1.62, 1230, 770], [6, 1.72, 1330, 760], [12, 1.84, 1430, 752]], t)), lod = lodFor(H * c.z), det = lod.det;
+  const {H, GC, GE, CURB, WF} = E4F, c = cam2(o.cam || camAt([[0, 1.58, 1230, 820], [6, 1.66, 1330, 826], [12, 1.76, 1430, 830]], t)), lod = lodFor(H * c.z), det = lod.det;
   const back = [], W = [], street = [], scr = [], rim = {c: '#E9EEEA', a: lod.rimA * 0.55, dx: -0.007, dy: -0.006};
   E4_ROW.forEach((b) => back.push(e4Facade({...b, burn: false}, t, 0)));
   for (const b of E4_ROW) for (const cx of [b.x + 60, b.x + b.w - 110]) back.push(`<rect x="${cx}" y="${E4F.top - 110}" width="50" height="76" fill="#0E1514"/><rect x="${cx - 7}" y="${E4F.top - 122}" width="64" height="5" rx="2" fill="${E4.snow}" opacity="0.8"/>` + MAT.smoke(cx + 25, E4F.top - 120, t + 20 + cx * 0.01, {col: 'A3BAB2', k: 0.7, n: 5, rise: 160, drift: 120, speed: 6, seed: cx}));
@@ -209,7 +209,7 @@ function renderE4Coal(t, o = {}) {
   const cyc = 1.7, ph = (t % cyc) / cyc, k = Math.floor(t / cyc);
   const bedY = wg.bed, cm0 = {x: CO.wx - 0.78 * H, y: bedY, h: H * 0.98, d: 1, kind: 'man', hat: 'cap', coat: 'jacket', fill: '#0D0C09', det: Math.min(det, 0.6), rim, an: {...POSES.stand(t, 0.4), tilt: -12}};
   const dig = smooth(0.0, 0.25, ph) * (1 - smooth(0.45, 0.62, ph)), tip = smooth(0.55, 0.72, ph) * (1 - smooth(0.85, 1.0, ph));
-  const lean = 22 * dig - 6 * tip;
+  const lean = 9 * dig; // a small forward lean into the dig only (the rig leans from the feet, so more reads as a tilting plank)
   let cm = e3Stand({...cm0, floorY: bedY}, cm0.x, cm0.x, 0, 'co.coalman');
   cm = {...cm, an: {...cm.an, lean}};
   // the blade: down in the heap behind him while digging, up at the chute mouth when tipping
@@ -236,11 +236,10 @@ function renderE4Coal(t, o = {}) {
   ma = e3Stand({...ma, floorY: my}, mx, mx, 0, 'co.ma'); ma = {...ma, d: cx > mx ? 1 : -1, an: {...ma.an, ...E3_FOLD, lean: 0}};
   W.push(fig(ma) + foldedArms(ma.x, ma.y, ma.h, ma.d, ma.fill, ma.tones.tone));
   // the captain walks by and tips his hat to her (7.0 to 7.9) without stopping
-  let cp = e4Walk(e4CaptainOpts({x: 0, y: 0, h: H, d: 1, det, rim, an: {tilt: cx > 1300 && cx < 1700 ? 14 : 2, expr: "smile", blink: (t + 0.4) % 3.6 < 0.12, glintT: t}}), 380, 1, cx - 380, GC, 'co.cap');
+  let cp = e4Walk(e4CaptainOpts({x: 0, y: 0, h: H, d: 1, det, rim, an: {tilt: cx > 1300 && cx < 1700 ? 14 : 2, expr: "smile", blink: (t + 0.4) % 3.6 < 0.12, glintT: t}}), 380, 1, cx - 380, CO.capG, 'co.cap');
   if (t > 6.7 && t < 8.2) { const brim = E3K.toWorld(cp, 0.1, 0.99), g = E3K.hand(cp, 'f'), kk = smooth(6.7, 7.0, t) * (1 - smooth(7.8, 8.2, t));
     cp = kk >= 1 ? reach(cp, 'f', brim[0], brim[1], 'co.cap.brim', true) : e3Move(cp, 'f', lerp(g.x, brim[0], kk), lerp(g.y, brim[1], kk), 'co.cap.toBrim', true); }
-  W.push(e4Captain(cp));
-  street.push(horse.svg, wg.svg, fig(cm), shovel, chute, ...lumps, dust);
+  street.push(horse.svg, wg.svg, fig(cm), shovel, chute, ...lumps, dust, e4Captain(cp));
   back.push(`<rect x="-1500" y="-600" width="6000" height="${WF + 10 + 600}" fill="#C9D6D2" opacity="0.13"/>`); // flat grey morning light on the brick
   const world = layerAt(c, 1, back.join('') + W.join('') + street.join(''));
   const sky = `<rect width="1920" height="1080" fill="url(#e4day)"/>`;
