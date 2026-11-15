@@ -1,5 +1,8 @@
 # Suno prompts: Gilded Age, Episode 4
 
+**Status (Nov 15): not needed.** The user approved the stand-in cues (listed per cue below, mapped in `edit/mix/cues.tsv`) as the
+final music for Episode 4. These prompts are kept only for reference.
+
 Same settings, exclude list and palette as Episodes 1 to 3 (`../../ep1/script/SUNO_PROMPTS.md`): Custom mode, Instrumental OFF, paste
 the tags box into Lyrics, 2 to 4 takes, keep the take whose first 30 to 40 s is right, download MP3 with the exact name.
 Gilt = parlor piano, music box, celesta. Underneath = low cello, muted brass. The Kellys = low whistle, fiddle, harp, concertina.
