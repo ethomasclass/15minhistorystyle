@@ -44,7 +44,7 @@ def fetch(url, binary=False, tries=5):
                 data = r.read()
             return data if binary else json.loads(data)
         except urllib.error.HTTPError as e:
-            if e.code in (429, 503) and i < tries - 1:
+            if e.code in (429, 500, 502, 503, 504, 520, 522, 524) and i < tries - 1:
                 time.sleep(5 * (i + 1)); continue
             raise
 
