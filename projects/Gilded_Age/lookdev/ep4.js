@@ -41,8 +41,8 @@ const e4Bump = (t, a, d) => (t > a && t < a + d ? Math.sin(Math.PI * (t - a) / d
 function e4Walk(fo, x0, dir, s, G, name) {
   // (rig children have a 0.46 h leg but walkAn's stance sweep assumes 0.5 h: their cycle is driven 1/0.92 faster so the foot stays put)
   const child = fo.kind === 'boy' || fo.kind === 'girl', kc = child ? 0.92 : 1, o = {...stepWalk(fo, x0, dir, s / kc, () => G, name), x: x0 + dir * s};
-  const f0 = E3K.foot(o, 0), f1 = E3K.foot(o, 1), low = Math.max(f0[1], f1[1]), o2 = {...o, y: o.y + (G - low), floorY: G};
-  const p = walkPhase(s / kc, fo.h, child ? 26 : 22);
+  // the foot in its stance half of the cycle goes exactly on the floor (the swing foot is then never more than a hair below it)
+  const p = walkPhase(s / kc, fo.h, child ? 26 : 22), pl = (((p % 1) + 1) % 1) < 0.5 ? 0 : 1, o2 = {...o, y: o.y + (G - E3K.foot(o, pl)[1]), floorY: G};
   [[0, p], [1, p + 0.5]].forEach(([i, q]) => { const fr = ((q % 1) + 1) % 1; if (fr < 0.5) { const g = E3K.foot(o2, i); E3K.log('plant', `${name}.${i}#${Math.floor(q)}`, [g[0], G], g, {walk: 1}); } });
   return o2;
 }
@@ -68,7 +68,7 @@ function e4Track(base, plan, t, name) {
 // the captain (Mr. Duffy, ink): a long overcoat (the frock coat's skirt carried down below the knee), a bowler, and a small warm-gold
 // glint of watch chain across the front of the coat. Draw the options from e4Track etc.
 function e4CaptainOpts(o) { return {kind: 'man', hat: 'bowler', coat: 'frock', fill: E4.ink, beard: false, ...o, an: {...(o.an || {})}}; }
-function e4Captain(fo, glint = 1) {
+function e4Captain(fo, glint = 1, skirtOn = true) { // skirtOn false: seated (the coat lies over the lap)
   const d = fo.d ?? 1, an = fo.an || {}, legs = an.legs || [9, -8], sw = (legs[0] + legs[1]) / 2 * 0.003;
   const W = (lx, ly) => E3K.toWorld(fo, lx, ly), P = (a) => a.map(([lx, ly]) => W(lx, ly));
   const skirt = P([[-0.15, 0.38], [0.122, 0.38], [0.142 + sw, 0.2], [0.02 + sw, 0.185], [-0.172 + sw, 0.2]]);
@@ -76,6 +76,7 @@ function e4Captain(fo, glint = 1) {
   const g0 = W(0.086, 0.6), g1 = W(0.05, 0.565), g2 = W(0.012, 0.598), sp = 0.55 + 0.45 * Math.max(0, Math.sin((fo.x * 0.01) + (an.glintT ?? 0) * 2.3));
   const chain = glint > 0 ? `<path d="M${f1(g0[0])},${f1(g0[1])} Q${f1(g1[0])},${f1(g1[1])} ${f1(g2[0])},${f1(g2[1])}" stroke="${E4.glint}" stroke-width="${f1(Math.max(1.2, 0.0055 * fo.h))}" fill="none" stroke-linecap="round" opacity="${f1(0.9 * glint)}"/>` +
     `<circle cx="${f1(g0[0])}" cy="${f1(g0[1])}" r="${f1(Math.max(1.4, 0.0075 * fo.h) * sp)}" fill="#FFF1C2" opacity="${f1(0.85 * glint)}"/>` : '';
+  if (!skirtOn) return figure(fo) + chain;
   return e3Shadow(fo, fo.h) + rimSk + poly(skirt, fo.fill) + figure(fo) + chain; // (toWorld already carries lean and bob)
 }
 // a fireman's helmet over a bare head (long back brim, a front shield), drawn at the head's place (lean and bob followed)
@@ -301,7 +302,7 @@ function renderE4Fire(t, o = {}) {
   const XS = 330, D = 1900, ue = clamp01((t - FT.eng0) / (FT.engStop - FT.eng0)), ex = XS + D * (1 - ue) * (1 - ue), dist = D - (ex - XS), vE = t < FT.engStop ? 1 - ue : 0;
   const pumping = smooth(FT.water - 0.6, FT.water, t);
   const pm = e4Pumper(ex, GE, dist, t, vE, pumping);
-  const hx0 = XS + D - 1.35 * H, hr = t > FT.engStop ? t - FT.engStop : null;
+  const hx0 = XS + D - 1.35 * H, hr = t > FT.engStop - 0.7 ? t - (FT.engStop - 0.7) : null; // the legs gather under the horses over the last strides
   const horseFar = e4Horse(hx0 - 0.12 * H, GE - 10, 0.95 * H, '#1A2220', dist, {dir: -1, gait: 'gallop', v: vE, rest: hr, harness: true, toss: hr != null ? Math.max(0, Math.sin(t * 1.3)) ** 8 : 0});
   const horseNear = e4Horse(hx0, GE, 0.95 * H, '#0B100F', dist * 0.995 + 6, {dir: -1, gait: 'gallop', v: vE, rest: hr != null ? hr + 0.1 : null, harness: true, toss: hr != null ? Math.max(0, Math.sin(t * 1.1 + 2)) ** 8 : 0});
   const pole = line([[ex - 0.2 * H, GE - 0.62 * H + pm.sh], [hx0 - dist + 0.3 * H, GE - 0.78 * H]], '#0B100F', 6);
