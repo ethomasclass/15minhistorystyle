@@ -1,6 +1,6 @@
 # The Man in the Good Coat: The Gilded Age, Episode 4 (working title)
 
-**Chunk History** · Gilded Age series, Episode 4 · narration script · **draft 1 (about 1,790 words with outro)** · about 11:30 finished
+**Chunk History** · Gilded Age series, Episode 4 · narration script · **draft 2, as voiced (Nov 15): pronunciation fix, Riis line reworded, light humor, trims** · about 11:30 finished
 
 Markup as in Episodes 1 to 3: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
 `CAPTAIN:` / `MICHAEL:` / `TOMMY:` paragraphs are character lines. Facts and safe wordings come from `../RESEARCH.md` §4 and §6.
@@ -73,7 +73,7 @@ January, 1887. Three o'clock in the morning. Williamsburg, Brooklyn.
 
 A fire bell. Then shouting.
 
-A tenement two doors down from the Kelly family is burning. Families stand in the snow in their nightclothes. Shoes in their hands, if they were lucky. Everything else is still inside.
+A tenement two doors down from the Kelly family is burning. Families stand in the snow in their nightclothes, shoes in their hands if they were lucky.
 
 The fire engines come, steam pumpers pulled by horses at a gallop.
 
@@ -107,9 +107,9 @@ In 1870, about one American in four lived in a town or a city. By 1900, it was f
 
 In 1870, the United States had 14 cities with more than a hundred thousand people. By 1900, it had 38.
 
-Chicago went from about 300,000 people to 1.7 million in thirty years. *(It cheated a little. It swallowed its suburbs.)* And Brooklyn doubled, to more than 800,000, the fourth-biggest city in the country.
+Chicago went from about 300,000 people to 1.7 million in thirty years. It cheated a little. It swallowed its suburbs. And Brooklyn doubled, to more than 800,000, the fourth-biggest city in the country.
 
-Why? Machines on farms meant fewer jobs for farmhands. Factories in cities meant more jobs for everybody else. And millions of immigrants were landing in exactly the cities where those jobs were.
+Why? Machines on farms meant fewer jobs for farmhands. Factories in cities meant more jobs for everybody else. And millions of immigrants were landing right where the jobs were.
 
 The Kellys were part of it. Ma had come from Ireland. Michael boiled sugar at the refinery on the river. His sister Nora worked as a maid in a Fifth Avenue mansion. And his little brother Tommy, seventeen, would take any job that paid.
 
@@ -119,7 +119,7 @@ So many people, and so little room. The city had only two directions left to go.
 
 Up came first.
 
-Two things made it possible. The safety elevator, so nobody had to climb ten flights of stairs. And frames of iron and steel, so the walls no longer had to hold up the whole building.
+Two things made it possible. Safety elevators, so nobody had to climb ten flights of stairs. Every day. With groceries. And frames of iron and steel, strong enough to hold the whole building up.
 
 In 1885, Chicago's Home Insurance Building rose ten stories into the sky. Many people call it the first {skyscraper}.
 
@@ -139,31 +139,31 @@ By 1890, more than a million New Yorkers lived in about 37,000 {tenements}. Ofte
 
 On one Manhattan block, about one small child in seven died in a single year.
 
-Too many horses. New York and Brooklyn had up to 175,000 of them, and together they left three to four *million* pounds of manure on the streets. Every day. When a horse died, it could lie in the street for days. In one year, New York hauled away nearly fifteen thousand dead horses.
+Too many horses. New York and Brooklyn had up to 175,000 of them, and together they left three to four *million* pounds of manure on the streets. Every day. Watch your step. In one year, New York hauled away nearly fifteen thousand dead horses.
 
 And too many fires. Wooden stairs, coal stoves, oil lamps, all packed together.
 
-A reporter named Jacob Riis photographed all of it for a famous 1890 book, *How the Other Half Lives*. His pictures shocked readers into caring. He also described some immigrant groups with ugly stereotypes. Both are true.
+A reporter named Jacob Riis photographed all of it for a famous 1890 book, *How the Other Half Lives*. His photos shocked readers into caring, even though his writing was full of unfair stereotypes about immigrants.
 
 So who was supposed to help? Not the city government, not much. In 1877, Brooklyn gave coal or groceries to more than 46,000 poor people. In 1878, it stopped. Completely. One magazine writer argued that poor families should save for winter like the squirrel does, and if they didn't, let them suffer.
 
-So the people in that gap needed help from somewhere. And into the gap stepped something new. People called it the machine.
+Into that gap stepped something new. People called it the machine.
 
 ## 5. The Machine
 
 The machine wasn't a machine. It was an organization that ran a city's politics like a business. Its product was favors. Its price was votes.
 
-It worked like a pyramid. At the bottom, a captain for every few hundred voters, like Mr. Duffy. He knew every family on his blocks: who was sick, who was out of work, who'd just had a baby. Above him, a {ward boss}. And at the top, the {boss}, who picked the candidates and handed out the city jobs, and often never ran for anything himself.
+It worked like a pyramid. At the bottom, a captain for every few hundred voters, like Mr. Duffy. He knew every family on his blocks: who was sick, who was out of work, who'd just had a baby. Above him, a {ward boss}. And at the top, the {boss}, who picked the candidates and handed out the city jobs.
 
 In Brooklyn, the boss for forty years was an Irish Brooklynite named Hugh McLaughlin.
 
-So what could the machine do for you? A job on the city payroll, digging sewers or wearing a police badge. Half a ton of coal in January. A word with the judge when your son got arrested. Help with citizenship papers.
+So what could the machine do for you? A city job. Half a ton of coal in January. A word with the judge when your son got arrested. Help with citizenship papers.
 
-That last one mattered. Upstairs from the Kellys lived the Rabinowitzes, who had come from the Russian Empire. The father had arrived in 1882. After five years, he could become a citizen, and vote. That meant 1887. Mr. Duffy could count, too.
+That last one mattered. The Rabinowitz family upstairs had come from the Russian Empire. The father arrived in 1882. After five years, he could become a citizen, and vote. That meant 1887. Mr. Duffy could count, too.
 
 **CAPTAIN:** [kind] Tell your father we'll help with his papers. No charge.
 
-And in return? Just your vote. And your brother's. And your friends'. Some men voted more than once, under other people's names. They were called {repeaters}.
+And in return? Just your vote. And your brother's. And your friends'. Some men voted more than once, under other people's names. They were called {repeaters}. One Tammany man later told a story about a repeater who gave his name at the polls as the local bishop. The clerk wasn't buying it.
 
 That winter, the Kellys took the coal. And Tommy took a job, running errands for the club.
 
@@ -171,29 +171,27 @@ That winter, the Kellys took the coal. And Tommy took a job, running errands for
 
 **TOMMY:** [bright] Nothing! Just how you vote.
 
-Machines ran Chicago, Philadelphia, Boston, almost every big city. But the most famous was across the river: New York's Tammany Hall. And its most famous boss: Boss Tweed.
+But the most famous machine of all was across the river: New York's Tammany Hall. And its most famous boss: Boss Tweed.
 
 ## 6. Boss Tweed
 
-Boss Tweed was a huge man, close to 300 pounds, and by the late 1860s he and his friends, the Tweed Ring, controlled New York City's money.
+Boss Tweed was a huge man, and by the late 1860s he and his friends, the Tweed Ring, controlled New York City's money.
 
 Here's how. Take the new county courthouse. In 1858, the law said it should cost no more than 250,000 dollars. By 1871, it had cost somewhere between eleven and thirteen *million* dollars. And it still wasn't finished.
 
-Where did the money go? Look at the bills. Thermometers: 7,500 dollars. Carpets, shades and curtains: more than 675,000. One plasterer was paid 138,187 dollars for two days' work. In December. The *New York Times* called him "the Prince of Plasterers."
+Where did the money go? Look at the bills. Thermometers: 7,500 dollars. For thermometers. Carpets, shades and curtains: more than 675,000. One plasterer was paid 138,187 dollars for two days' work. In December. The *New York Times* called him "the Prince of Plasterers."
 
 Every bill was padded, and the extra went back to the Ring. That's called a {kickback}.
 
-How did anyone find out? Someone got a clerk hired in the city's accounting office. The clerk quietly copied the books. And in July 1871, the *Times* printed them.
+How did anyone find out? A clerk planted in the city's accounting office quietly copied the books. In July 1871, the *Times* printed them.
 
 Meanwhile, a cartoonist named Thomas Nast drew Tweed again and again in *Harper's Weekly*: a fat man with a moneybag for a head. Tweed is supposed to have said, "My voters can't read. But they can *see* pictures!"
 
-Tweed was arrested, convicted and sent to jail. In 1875, he escaped. To Cuba. Then to Spain.
+Tweed was arrested, convicted and sent to jail. In 1875, he escaped. To Cuba. Then to Spain. Where, it turned out, they had newspapers.
 
-And in Spain, officials who couldn't read a word of English recognized him... from a Nast cartoon. In it, Tweed was grabbing two boys by the collar, so they arrested him as a kidnapper.
+Spanish officials who couldn't read a word of English recognized him... from a Nast cartoon. In it, Tweed was grabbing two boys by the collar, so they arrested him as a kidnapper.
 
 He died in a New York jail in 1878.
-
-*(Brooklyn people liked to point out that their own courthouse cost about three quarters of a million.)*
 
 But the bosses who came after Tweed learned a lesson. His mistake, they said, wasn't getting rich. It was getting caught. One of them even had a name for doing it right. He called it honest graft.
 
@@ -201,13 +199,13 @@ But the bosses who came after Tweed learned a lesson. His mistake, they said, wa
 
 Honest graft. {Graft} means using a public job to make money for yourself.
 
-George Washington Plunkitt was a Tammany leader who, in 1870, held four government jobs at once. He got rich. Years later, in 1905, he explained how to a newspaper reporter, from his favorite seat: a shoeshine stand in Tweed's old courthouse.
+George Washington Plunkitt was a Tammany leader who, in 1870, held four government jobs at once, and collected paychecks from three of them. At the same time. He got rich. Years later, in 1905, he explained how to a newspaper reporter, from his favorite seat: a shoeshine stand in Tweed's old courthouse.
 
 Stealing, he said, was for fools. His way: "I seen my opportunities and I took 'em."
 
 Say he heard the city was planning a new park. He'd quietly buy the land there first, cheap. Then the city would have to buy it from him, at a good price. "Anything dishonest in that?" he asked.
 
-Today we'd call that insider dealing. Plunkitt wanted it on his tombstone.
+Today we'd call that insider dealing. Plunkitt liked his line so much, he wanted it on his tombstone. Seriously.
 
 He also explained why poor voters stuck with the machine. When there was a fire, he said, he was there "as soon as the fire engines." He didn't ask how people voted. And he didn't send them to a charity that would "decide they were worthy of help about the time they are dead from starvation."
 
@@ -225,7 +223,7 @@ Now, thief.
 
 It stole millions from the same taxpayers and renters it claimed to help. It bought votes and faked them. And none of those favors was really free. You paid with your vote, and the machine decided who got what.
 
-Reformers pushed back. In 1883, a new federal law, the {Pendleton Act}, said some government jobs had to go to people who passed a test, not people who voted the right way. That's called {civil service}. In Brooklyn, a reform mayor, Seth Low, tried the same idea for city jobs. But the machines adapted, and lasted for decades.
+Reformers pushed back. In 1883, a new federal law, the {Pendleton Act}, said some government jobs had to go to people who passed a test, not people who voted the right way. That's called {civil service}. But the machines adapted, and lasted for decades.
 
 For the Kellys, it wasn't a debate. It was January, and the coal was already in the cellar.
 
