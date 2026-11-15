@@ -1,0 +1,8 @@
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch01_the_man_in_the_good_coat.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch02_bursting_at_the_seams.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch03_up_and_out.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch04_too_many_too_fast.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch05_the_machine.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch06_boss_tweed.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch07_honest_graft.wav'
+file '/home/user/15minhistorystyle/projects/Gilded_Age/ep4/public/audio/ch08_helper_or_thief.wav'
