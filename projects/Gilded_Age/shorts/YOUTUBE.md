@@ -37,7 +37,8 @@ Full episode: [LINK TO GILDED AGE PART 2]
 
 ## Covers
 
-Covers are in `../thumbnails/`: `s1_cover.jpg` (s1_bad_wire) and `s2_cover.jpg` (s2_rockefeller), 1080x1920; options and
+Covers are in `../thumbnails/`: `s1_cover.jpg` (s1_bad_wire) and `s2_cover.jpg` (s2_rockefeller), 1080x1920 (s3's is
+`review/s3_cover.jpg`, drawn by `edit/render_edit.mjs s3 --cover`); options and
 comparison sheets (`s1_sheet.jpg`, `s2_sheet.jpg`) beside them, built by `thumbnails/src/` (`node render.mjs ../options`).
 Each cover is embedded in its MP4 as cover art (attached_pic; the video timing is unchanged). YouTube Shorts do not use
 that embedded image: pick the cover in the YouTube app from a frame of the video (or upload the JPG where the app offers it).

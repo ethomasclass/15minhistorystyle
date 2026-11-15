@@ -169,7 +169,7 @@ CPL.c_duchess = (T, id) => {
 };
 // "The Electric Light" (Alice Vanderbilt): white satin and diamonds, a torch that really lit, wired to batteries in her dress.
 // opts.on: the time the torch flickers on (default: 0.6 s into the shot).
-CPL.c_electric = (T, id, {t0 = 0, on} = {}) => {
+CPL.c_electric = (T, id, {t0 = 0, on, flare = 0} = {}) => {   // flare: an extra blazing bloom and lens streak (the hook)
   const tOn = on ?? t0 + 0.6, u = T - tOn;
   const flick = u < 0 ? 0 : u < 0.5 ? ([1, 0, 1, 0.2, 1, 0.5, 1][Math.floor(u * 14) % 7]) : 0.92 + 0.08 * Math.sin(T * 31) * Math.sin(T * 7);
   const tx = -150, ty = -640;
@@ -187,6 +187,8 @@ CPL.c_electric = (T, id, {t0 = 0, on} = {}) => {
     `<rect x="${tx - 9}" y="${ty + 10}" width="18" height="70" rx="4" fill="#E8C35A"/><path d="M${tx - 22},${ty + 14} L${tx + 22},${ty + 14} L${tx + 12},${ty - 2} L${tx - 12},${ty - 2} Z" fill="#B8912E"/>` +
     `<ellipse cx="${tx}" cy="${ty - 20}" rx="22" ry="28" fill="${flick > 0.1 ? '#FFFFFF' : '#5A5E66'}"/>` +
     `<g opacity="${CP.f(flick)}">${rays}<circle cx="${tx}" cy="${ty - 20}" r="70" fill="#FFFFFF" filter="url(#${id}blur)"/></g>` +
+    (flare ? `<g opacity="${CP.f(flare * flick)}" style="mix-blend-mode:screen"><circle cx="${tx}" cy="${ty - 20}" r="${CP.f(150 + 14 * Math.sin(T * 19))}" fill="#FFFFFF" filter="url(#${id}blur)"/>
+      <ellipse cx="${tx}" cy="${ty - 20}" rx="${CP.f(560 + 40 * Math.sin(T * 11))}" ry="7" fill="#DDEEFF" filter="url(#${id}soft)"/><ellipse cx="${tx}" cy="${ty - 20}" rx="9" ry="300" fill="#DDEEFF" opacity=".55" filter="url(#${id}soft)"/></g>` : '') +
     `<defs><radialGradient id="${id}bulb" cx="${tx}" cy="${ty}" r="520" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".15" stop-color="#CFE6FF" stop-opacity=".45"/><stop offset="1" stop-color="#9CC8FF" stop-opacity="0"/></radialGradient></defs></g>`,
     focus: [350, 300]};
 };
@@ -234,9 +236,9 @@ CPL.c_door = (T, id) => {
 function costumePlate(name, T, t0, t1, opts = {}) {
   const id = name.replace('c_', 'k') + (opts.key || '');
   CP.fid = id;
-  const P = CPL[name](T, id, {t0, ...opts}), u = clamp01((T - t0) / Math.max(0.5, t1 - t0)), k = 1 + (opts.push ?? 0.12) * (1 - Math.pow(1 - u, 2.2));
+  const P = CPL[name](T, id, {t0, ...opts}), u = clamp01((T - t0) / Math.max(0.5, t1 - t0)), k = (opts.base ?? 1) + (opts.push ?? 0.12) * (1 - Math.pow(1 - u, 2.2));
   const [fx, fy] = opts.focus || P.focus;
-  const room = cpRoom(id, T, {spot: P.spot, spotA: P.spotA ?? 0.55, glow: P.glow ?? 1});
+  const room = cpRoom(id, T, {spot: P.spot, spotA: opts.spotA ?? P.spotA ?? 0.55, glow: P.glow ?? 1});
   return `<div style="position:absolute;inset:0;transform-origin:${fx}px ${fy}px;transform:scale(${k.toFixed(4)})"><svg style="position:absolute;inset:0" width="1080" height="1920" viewBox="0 0 1080 1920">${room}<g transform="translate(0 ${opts.drop ?? 170})">${P.fig}</g>${cpFinish(id)}</svg></div>`;
 }
 if (typeof window !== 'undefined') Object.assign(window, {costumePlate, cpLady, cpHead});

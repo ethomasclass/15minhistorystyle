@@ -6,7 +6,7 @@ Vertical YouTube Shorts cut from the episodes' material, each voiced on its own 
 |---|---|---|---|---|
 | s1 "The Bad Wire" (54.7 s) | `script/s1_bad_wire.txt` | `public/audio/s1_bad_wire.wav` + `.words.json` | `review/s1_bad_wire.mp4` | ep1 ch09 (the swap, cableXray +150) and ch01 (the bridge) |
 | s2 "Rockefeller's Father" (51.2 s) | `script/s2_rockefeller.txt` | `public/audio/s2_rockefeller.wav` + `.words.json` | `review/s2_rockefeller.mp4` | ep1 ch06 (con-man father, turkey money, red notebook, $1,000 at interest, ~90%) |
-| s3 "They Spent $9 Million on One Party" (71.4 s) | `script/s3_vanderbilt_ball.txt` | `public/audio/s3_vanderbilt_ball.wav` + `.words.json` | `review/s3_vanderbilt_ball.mp4` | ep2 ch01/ch02/ch03 (the ball, Alva vs Mrs. Astor, the costumes, Nora's ices) + the drawn costume plates (`edit/costumes.js`); plan in `S3_PLAN.md` |
+| s3 "They Spent $9 Million on One Party" (71.4 s, cover `review/s3_cover.jpg`) | `script/s3_vanderbilt_ball.txt` | `public/audio/s3_vanderbilt_ball.wav` + `.words.json` | `review/s3_vanderbilt_ball.mp4` | ep2 ch01/ch02/ch03 (the ball, Alva vs Mrs. Astor, the costumes, Nora's ices) + the drawn costume plates (`edit/costumes.js`); plan in `S3_PLAN.md` |
 
 ## How it's built (`edit/`)
 
@@ -22,7 +22,10 @@ Same machinery as `../ep1/edit`, rendered directly at **1080x1920**:
 - `s1.js`, `s2.js`: shots anchored with `wordAt` (occurrences counted; the counts are listed in each file's header).
   Scenes (`renderScene`, the medicine show) run smooth at 30 fps; desk shots step at 12.
 - `render_edit.mjs s1 <dir> [from] [to]` renders frames, `--stills 0,5,9 <prefix>` renders check stills.
-- s3 (`s3.js`, `costumes.js`): the pace rule, nothing on screen longer than 3 s (34 shots, 1.5 to 2.95 s each). Ep 2's sets
+- s3 (`s3.js`, `costumes.js`): the pace rule, nothing on screen longer than 3 s (35 shots, 1.5 to 2.95 s each). It opens on a
+  hook frame (0 to 2.1 s): the Electric Light plate already blazing on frame 0, "THE $9 MILLION PARTY" on torn tape with a
+  small 1883, then a hard cut to Fifth Avenue. The costume names sit on opaque tape below the figures, clear of the headdresses.
+  `render_edit.mjs s3 --cover ../review/s3_cover.jpg` draws the cover (window.COVERS.s3: the cat plate, the title, the mark). Ep 2's sets
   (`lookdev/mansion.js`: Fifth Avenue at night and dawn, the house cut open, Nora in the kitchen) are loaded in `edit.html`.
   `costumes.js` draws the seven costume plates (cat, hornet, devil, duchess, Electric Light, Dresden porcelain, kings) plus the
   lone guest at the door: SVG, vivid costume colour in a dark room with a spotlight and grain, a quick push-in and one small

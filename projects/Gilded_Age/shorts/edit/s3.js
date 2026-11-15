@@ -2,6 +2,7 @@
 // public/audio/s3_vanderbilt_ball.words.json. THE PACE RULE (user, Nov 15): nothing on screen longer than 3 s; every shot is
 // 1.5 to 3.0 s, a long line gets two or three cuts. Costume plates: costumes.js. Coral is Nora's alone; teal explains (the
 // counter, the math); orange is tape and handwriting; every archival image carries its source tag.
+// The hook (0 to 2.1 s, user's note): the Electric Light plate already blazing on frame 0, the title on tape; hard cut to the street.
 // Repeats counted: "on" 1 = "on a single party"; "And" 1 = "And the guest"; "came" 1 = "came in costume"; "cat" 1 = "A cat,";
 // "woman" 2 = "One woman came as electricity"; "last" 1 = the last dance; "Alva" 1 = "was Alva";
 // "story" 1 = "The story goes"; "She" 1 = "She came to the ball"; "Don't" 1 = Nora's first.
@@ -9,7 +10,7 @@ const E2 = '../../../ep2/public/img/desk/';   // Ep 2's cut-outs and props, rela
 EDITS.s3 = () => {
   const ch = 's3_vanderbilt_ball', w = (word, n) => wordAt(ch, word, n), dur = window.WORDS[ch].duration;
   const c = {
-    mansion: w('spent') - 0.14, party: w('on', 1) - 0.54, door: w('And', 1) - 0.12, hall: w('More') - 0.08, kings: w('came', 1) - 0.03,
+    street: 2.1, mansion: w('nine') + 0.47, party: w('on', 1) - 0.34, door: w('And', 1) - 0.12, hall: w('More') - 0.08, kings: w('came', 1) - 0.03,
     cat: w('cat', 1) + 0.26, tails: w('seven') - 0.35, hornet: w('hornet') - 0.28, devil: w('devil') - 0.28, fringe: w('trimmed') - 0.14,
     duchess: w('duchess') - 0.28, jewels: w('rubies') + 0.26, alice: w('woman', 2) - 0.32, elec: w('torch') - 0.5, torch: w('wired') + 0.08,
     horse: w('Dancers') - 0.08, porc: w('last', 1) - 0.33, dawn: w('sunrise') - 0.08, alva: w('Alva', 1) - 0.14, newm: w('new') - 0.18,
@@ -45,12 +46,14 @@ EDITS.s3 = () => {
       <div style="font-family:Playfair;font-weight:900;font-size:58px;color:${C.ink}">Mrs. Astor</div><div style="font-family:Mono;font-size:18px;letter-spacing:4px;color:#666;margin-top:10px">CALLING CARD</div></div>` : ''; };
 
   const shots = [
-    // 1. "In 1883, one family" Fifth Avenue on the night: the carriages queue.
-    {a: 0, b: c.mansion, live: true, draw: (T) => fifth(T, {z: 1.25, ux: 1150 + T * 90, uy: 600}, {s: 1.8, fx: 900}) + src('660 fifth avenue &middot; monday, march 26, 1883', fin(T, 0.2))},
+    // 0. THE HOOK, frame 0: the Electric Light, torch already blazing (flare, flicker, a push already moving), the title on tape.
+    {a: 0, b: c.street, live: true, draw: (T) => plate('c_electric', T, -0.6, c.street, {key: 'h', on: -5, flare: 1, focus: [360, 560], base: 1.6, push: 0.14, spotA: 0.34}) + hookTitle(1)},
+    // 1. "In 1883, one family" Fifth Avenue on the night: the carriages queue. (hard cut in from the hook)
+    {a: c.street, b: c.mansion, cut: true, live: true, draw: (T) => fifth(T, {z: 1.25, ux: 1150 + T * 90, uy: 600}, {s: 1.8, fx: 900}) + src('660 fifth avenue &middot; monday, march 26, 1883', fin(T, c.street + 0.05, 0.2))},
     // 2. "spent about nine million dollars, in today's money": the house blazing, the counter in teal.
     {a: c.mansion, b: c.party, live: true, draw: (T) => fifth(T, {z: 1.0 + 0.08 * (T - c.mansion), ux: 1960, uy: 520}, {s: 1.85}) +
-      dimTop(0.55) + big('$' + fmt(count(T, w('nine'), w('dollars') + 0.3, 9000000)), fin(T, w('nine') - 0.1, 0.2), {y: 300, size: 150}) +
-      op(fin(T, w("today's") - 0.3, 0.3), mono("in today's money &middot; about $250,000 in 1883", {x: 40, y: 480, size: 26, color: C.teal, ls: 3, extra: 'width:860px;text-align:center'}))},
+      dimTop(0.55) + big('$' + fmt(count(T, c.mansion - 0.15, w('dollars') + 0.3, 9000000)), fin(T, c.mansion - 0.15, 0.2), {y: 300, size: 150}) +
+      op(fin(T, c.mansion, 0.3), mono("in today's money &middot; about $250,000 in 1883", {x: 40, y: 480, size: 26, color: C.teal, ls: 3, extra: 'width:860px;text-align:center'}))},
     // 3. "on a single party." The house cut open, every floor full.
     {a: c.party, b: c.door, live: true, draw: (T) => ball(T, {z: 0.8 + 0.12 * ease(clamp01((T - c.party) / 1.8)), ux: 930, uy: 600}, {s: 1.8}) +
       note('one party. one night.', fin(T, c.party + 0.05, 0.3), {y: 240, size: 64})},
@@ -61,24 +64,24 @@ EDITS.s3 = () => {
     // 6. "came in costume." A king, a Lear, a Joan of Arc pop in.
     {a: c.kings, b: c.cat, live: true, draw: (T) => plate('c_kings', T, c.kings, c.cat, {push: 0.06}) + note('costumes only', fin(T, c.kings + 0.05, 0.3), {y: 230, size: 70})},
     // 7. "A cat, with a stuffed cat's head on top" (push to the head)
-    {a: c.cat, b: c.tails, live: true, draw: (T) => plate('c_cat', T, c.cat, c.tails, {focus: [470, 420], push: 0.16}) + note("a real stuffed cat's head", fin(T, c.cat + 0.05, 0.3), {y: 230, size: 60, x: 40}) + drawn('kate fearing strong', fin(T, c.cat + 0.1, 0.3))},
+    {a: c.cat, b: c.tails, live: true, draw: (T) => plate('c_cat', T, c.cat, c.tails, {focus: [470, 420], push: 0.16}) + tp("A STUFFED CAT'S HEAD", fin(T, c.cat + 0.05, 0.25), {x: 60, y: 1080, size: 58, rot: -2, seed: 71}) + drawn('kate fearing strong', fin(T, c.cat + 0.1, 0.3))},
     // 8. "and seven cat tails sewn to her skirt." (close on the tails, which sway)
     {a: c.tails, b: c.hornet, live: true, draw: (T) => plate('c_cat', T, c.tails, c.hornet, {key: 'b', focus: [470, 1280], push: 0.2}) + tp('7 CAT TAILS', fin(T, c.tails + 0.05, 0.3), {x: 120, y: 260, size: 100})},
     // 9. "A hornet, in diamonds." (wings flick, diamonds glint)
-    {a: c.hornet, b: c.devil, live: true, draw: (T) => plate('c_hornet', T, c.hornet, c.devil, {push: 0.14}) + note('a hornet, in diamonds', fin(T, c.hornet + 0.05, 0.3), {y: 230, size: 62, x: 40}) + drawn('lila vanderbilt webb', fin(T, c.hornet + 0.1, 0.3))},
+    {a: c.hornet, b: c.devil, live: true, draw: (T) => plate('c_hornet', T, c.hornet, c.devil, {push: 0.14}) + tp('A HORNET, IN DIAMONDS', fin(T, c.hornet + 0.05, 0.25), {x: 60, y: 1080, size: 58, rot: -2, seed: 72}) + drawn('lila vanderbilt webb', fin(T, c.hornet + 0.1, 0.3))},
     // 10. "A devil in red satin,"
-    {a: c.devil, b: c.fringe, live: true, draw: (T) => plate('c_devil', T, c.devil, c.fringe, {push: 0.1, focus: [470, 700]}) + note('a devil, in red satin', fin(T, c.devil + 0.05, 0.3), {y: 230, size: 62, x: 40}) + drawn('bessie webb', fin(T, c.devil + 0.1, 0.3))},
+    {a: c.devil, b: c.fringe, live: true, draw: (T) => plate('c_devil', T, c.devil, c.fringe, {push: 0.1, focus: [470, 700]}) + tp('A DEVIL, IN RED SATIN', fin(T, c.devil + 0.05, 0.25), {x: 60, y: 1080, size: 58, rot: -2, seed: 73}) + drawn('bessie webb', fin(T, c.devil + 0.1, 0.3))},
     // 11. "trimmed with tiny demon heads." (close on the fringe, which swings)
     {a: c.fringe, b: c.duchess, live: true, draw: (T) => plate('c_devil', T, c.fringe, c.duchess, {key: 'b', focus: [520, 1150], push: 0.3}) + note('tiny demon heads!', fin(T, c.fringe + 0.05, 0.3), {y: 230, size: 70})},
     // 12. "A duchess"
-    {a: c.duchess, b: c.jewels, live: true, draw: (T) => plate('c_duchess', T, c.duchess, c.jewels, {push: 0.08, focus: [470, 500]}) + note('the duchess of burgundy', fin(T, c.duchess + 0.05, 0.3), {y: 230, size: 58, x: 40}) + drawn('edith fish', fin(T, c.duchess + 0.1, 0.3))},
+    {a: c.duchess, b: c.jewels, live: true, draw: (T) => plate('c_duchess', T, c.duchess, c.jewels, {push: 0.08, focus: [470, 500]}) + tp('DUCHESS OF BURGUNDY', fin(T, c.duchess + 0.05, 0.25), {x: 60, y: 1080, size: 58, rot: -2, seed: 74}) + drawn('edith fish', fin(T, c.duchess + 0.1, 0.3))},
     // 13. "with real rubies and emeralds sewn on her dress." (the jewels sparkle one by one)
     {a: c.jewels, b: c.alice, live: true, draw: (T) => plate('c_duchess', T, c.jewels, c.alice, {key: 'b', focus: [470, 1000], push: 0.3}) + tp('REAL JEWELS', fin(T, c.jewels + 0.05, 0.3), {x: 140, y: 260, size: 100})},
     // 14. "One woman came as electricity." Mora's photograph of Alice Vanderbilt.
     {a: c.alice, b: c.elec, draw: (T) => vback(T, c.alice, c.elec, 0.06) + cut('alice_electric_light_mora_1883.png', {x: 260, y: 330, w: 420, rot: -2, o: fin(T, c.alice, 0.3), T}) + `</div>` +
       note('dressed as electricity', fin(T, c.alice + 0.05, 0.3), {y: 230, size: 64, x: 40}) + src('alice vanderbilt, &ldquo;the electric light&rdquo; &middot; photograph by josé maría mora, 1883', fin(T, c.alice + 0.1, 0.3))},
     // 15. "Her torch really lit up," (drawn: the torch flickers on)
-    {a: c.elec, b: c.torch, live: true, draw: (T) => plate('c_electric', T, c.elec, c.torch, {on: w('torch') + 0.25, push: 0.14}) + note('it really lit up!', fin(T, w('torch'), 0.3), {y: 210, size: 66, x: 420}) + drawn('alice vanderbilt', fin(T, c.elec + 0.1, 0.3))},
+    {a: c.elec, b: c.torch, live: true, draw: (T) => plate('c_electric', T, c.elec, c.torch, {on: w('torch') + 0.25, push: 0.06, focus: [500, 1150]}) + note('it really lit up!', fin(T, w('torch'), 0.3), {y: 210, size: 66, x: 420}) + drawn('alice vanderbilt', fin(T, c.elec + 0.1, 0.3))},
     // 16. "wired to batteries hidden in her dress." A torch like hers, glowing.
     {a: c.torch, b: c.horse, draw: (T) => { const g = 0.8 + 0.2 * Math.sin(T * 23) * Math.sin(T * 7);
       return vback(T, c.torch, c.horse, 0.06) + `<div style="position:absolute;left:380px;top:180px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,${(0.85 * g).toFixed(2)}) 0%,rgba(200,225,255,${(0.35 * g).toFixed(2)}) 35%,rgba(160,200,255,0) 70%)"></div>` +
@@ -139,5 +142,12 @@ EDITS.s3 = () => {
   ];
   return {ch, dur, shots, fadeOut: 0.3, capEnd: c.end + 0.15};
 };
+// the hook's title: "THE $9 MILLION PARTY" on torn orange tape, a small 1883 tag, inside the safe area (x 40 to 900)
+const hookTitle = (o) => op(o, tape('1883', {x: 70, y: 838, size: 46, rot: -4, seed: 81, bg: C.cream}) +
+  tape('THE $9 MILLION', {x: 56, y: 900, size: 88, rot: -3, seed: 82}) + tape('PARTY', {x: 300, y: 1004, size: 88, rot: -2, seed: 83}));
+// the cover (shorts/review/s3_cover.jpg): the cat plate, the title, 1883, the mark small
+window.COVERS = Object.assign(window.COVERS || {}, {s3: () => costumePlate('c_cat', 1.2, 0, 2.5, {key: 'cv', focus: [470, 600], push: 0.1, base: 1.05}) +
+  op(1, tape('1883', {x: 70, y: 1010, size: 52, rot: -4, seed: 81, bg: C.cream}) + tape('THE $9 MILLION', {x: 50, y: 1080, size: 96, rot: -3, seed: 82}) + tape('PARTY', {x: 290, y: 1192, size: 96, rot: -2, seed: 83})) +
+  vsvg(chunkMark(90, 270, 90, 0, 1)) + op(1, mono('chunk history', {x: 150, y: 252, size: 26, color: C.cream, ls: 4}))});
 // a soft darkening of the top of the frame, so teal and orange text reads over a bright scene
 const dimTop = (a) => `<div style="position:absolute;left:0;top:0;width:1080px;height:760px;background:linear-gradient(rgba(8,9,8,${a}),rgba(8,9,8,0))"></div>`;

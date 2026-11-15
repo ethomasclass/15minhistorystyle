@@ -17,7 +17,11 @@ page.on('pageerror', (e) => { console.error('page error:', e.message); process.e
 await page.goto('file://' + path.join(here, 'edit.html'));
 await page.evaluate(([c, w]) => { window.WORDS = {[c]: w}; }, [ch, words]);
 const shoot = async (T, file, type) => { await page.evaluate(([k, t]) => window.drawEdit(k, t), [key, T]); await page.locator('#stage').screenshot({path: file, type, ...(type === 'jpeg' ? {quality: file.includes('/f') && process.env.FRAMEJPG ? 94 : 82} : {})}); };
-if (a1 === '--stills') {
+if (a1 === '--cover') {           // node render_edit.mjs s3 --cover <out.jpg>   (window.COVERS[key])
+  await page.evaluate((k) => { document.getElementById('A').innerHTML = window.COVERS[k](); document.getElementById('B').innerHTML = ''; document.getElementById('CAP').innerHTML = ''; }, key);
+  await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(300);
+  await page.locator('#stage').screenshot({path: a2, type: 'jpeg', quality: 92});
+} else if (a1 === '--stills') {
   for (const T of a2.split(',').map(Number)) await shoot(T, `${a3}_${T.toFixed(1)}.jpg`, 'jpeg');
 } else {
   fs.mkdirSync(a1, {recursive: true});
