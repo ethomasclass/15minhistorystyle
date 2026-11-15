@@ -1,188 +1,207 @@
-"""Builds research/IMAGES.md: Ep 3's on-screen archival images (B&W photo cards on the desk), by topic, with credits.
+"""Builds research/IMAGES.md: Ep 4's on-screen archival images, by topic, with credits (adapted from ep3/research/build_images_md.py).
    python3 research/build_images_md.py   (re-run after adding or removing images; credits come from public/img/credits.json)
-   Contact sheets: research/sheets/<topic>.jpg. Look-dev references for the drawn sets are a separate set (REFERENCES.md)."""
+   Contact sheets: python3 tools/sheet.py -> research/sheets/<topic>.jpg. Downloads: tools/find_images.py, tools/batch_get.py."""
 import glob, json, os, re
 from PIL import Image
+Image.MAX_IMAGE_PIXELS = None
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 C = json.load(open('public/img/credits.json'))
 TOPICS = [
- ('a_departure', 'Why they left: pogroms and departure (1881 to 1882)'),
- ('b_steerage', 'The crossing: steamships and steerage'),
- ('c_arrival', 'Arrival: Liberty, Castle Garden, the Barge Office, Ellis Island'),
- ('d_streets', 'The Lower East Side and its streets'),
- ('e_sweatshop', 'Home work and sweatshops (Riis, about 1889)'),
- ('f_letters', 'Letters, tickets, steamship lines, aid societies'),
- ('g_nativism', 'Nativism and the answer to it (cartoons, the Exclusion Act)'),
- ('h_names', 'Names: manifests and naturalization'),
- ('i_portraits', 'Portraits'),
+ ('a_city_growth', 'The city explodes: bird\'s-eye views, skylines, Chicago'),
+ ('b_building_up', 'Building up: the Home Insurance Building, steel frames, elevators'),
+ ('c_transit', 'Transit: the Brooklyn Bridge, elevated railways, horsecars, cable cars'),
+ ('d_streets_filth', 'Too many, too fast: crowded streets, tenements, filth (Riis and the illustrated papers)'),
+ ('e_fire', 'Fire: tenement fires and fire engines (nothing graphic)'),
+ ('f_machine', 'The machine: Tammany Hall, elections, naturalization, favors'),
+ ('g_tweed', 'Boss Tweed: portraits, the courthouse, Nast\'s cartoons, the Times exposé, the capture'),
+ ('h_plunkitt', 'Plunkitt and "honest graft" (1905)'),
+ ('i_brooklyn', 'Brooklyn: City Hall, McLaughlin, streets and ferries'),
+ ('j_reform', 'Reform: civil service, reformers, Seth Low'),
 ]
-# file -> (what it shows, how it could be used, flags). Flags: CARICATURE / SLUR / LATE (after 1893, label the date) / SMALL / SENSITIVE
+# file -> (what it shows, how it could be used, flags). Flags: CARICATURE / SLUR / SENSITIVE / LATE (after 1890, label the date) / SMALL / MODERN
 N = {
- # a_departure
- 'alexander_ii_on_his_deathbed_makovsky_1881_commons.jpg': ('Makovsky painting: Tsar Alexander II on his deathbed after the bomb of March 1881', 'The trigger: the assassination that set off the pogroms', ''),
- 'german_emigrants_embarking_hamburg_steamer_harpers_1874_commons.jpg': ("Harper's double page: emigrants crowd the gangway and deck of a Hamburg steamer", 'Departure from Hamburg (earlier decade, same port and ships)', 'Date: 1874'),
- 'kiev_expulsion_of_jewish_families_ilustracion_espanola_1881_commons.jpg': ('Spanish weekly, June 1881: Jewish families driven from their homes in Kiev, carts and bundles', 'The pogroms of 1881 seen by the world press', 'SENSITIVE (violence implied)'),
- 'kiev_pogrom_engraving_1881_commons.jpg': ('Engraving of the Kiev pogrom, 1881: a mob with clubs and an axe drags a Jewish man through the street while soldiers stand by', 'The pogroms themselves; brief, framed by narration', 'SENSITIVE (mob violence)'),
- 'odessa_pogrom_1881_commons.jpg': ('Small engraving of the 1881 Odessa riots', 'Inset only', 'SMALL; SENSITIVE'),
- 'stop_your_cruel_oppression_of_the_jews_puck_1904_loc2004671428.jpg': ('Puck: Theodore Roosevelt tells the Tsar to stop crushing a Jewish man under a sack labelled "Oppression"', 'American opinion against Russian persecution', 'LATE 1904 (after Kishinev); mild CARICATURE'),
- 'the_emigrants_die_auswanderer_print_1882_loc2013646643.jpg': ('German-American print: a family walks out of its village with animals and bundles', 'Leaving home (generic, sentimental)', 'Not Jewish or Russian; rural German'),
- 'the_emigrants_farewell_abschied_print_1883_loc2013646644.jpg': ('Print: villagers say goodbye at the town gate where the wagons wait', 'The goodbye', 'Generic central European village'),
- # b_steerage
- 'castaigne_on_the_steerage_deck_1898_loc2010715345.jpg': ('Pencil drawing: a mother and children huddled on deck', 'Steerage family', 'SMALL; 1898'),
- 'horrors_of_emigrant_ship_hold_harpers_1869_loc92522099.jpg': ("Harper's: crowded below-deck steerage berths in the hold of an emigrant ship", 'What steerage below decks looked like (sailing-ship era)', 'Date: 1869'),
- 'leslies_welcome_land_of_freedom_steerage_deck_1887_loc97502086.jpg': ("Frank Leslie's, July 2, 1887: steerage passengers cheer as their steamer passes the new Statue of Liberty", 'The key arrival image: first sight of the statue', ''),
- 'ss_city_of_berlin_inman_line_1890s_loc2016805763.jpg': ('Photo: the Inman liner City of Berlin (1875) at sea', 'The kind of ship (single funnel, masts)', 'Photo 1890s'),
- 'steerage_deck_friedrich_der_grosse_c1907_loc2001704446.jpg': ('Photo: emigrants on the open steerage deck of a German liner', 'Steerage passengers on deck', 'LATE c1907'),
- 'stieglitz_the_steerage_1907_loc89715190.jpg': ('Alfred Stieglitz, "The Steerage" (photogravure)', 'The famous image of steerage', 'LATE 1907 (and the ship was eastbound)'),
- # c_arrival
- 'annie_moore_arrival_1892_commons.jpg': ('National Archives passenger list page with Annie Moore, the first person registered at Ellis Island (SS Nevada, from Queenstown)', 'Annie Moore beat; also the names beat', 'Check the line before zooming to her name'),
- 'barge_office_battery_place_kings_handbook_1893_ia_p78.jpg': ("King's Handbook halftone: the U.S. Barge Office at the Battery, the immigrant station of 1890 to 1891", 'Between Castle Garden and Ellis Island', ''),
- 'barge_office_battery_stereo_c1865_loc2017645395.jpg': ('Stereo: the old Barge Office on its pier at the Battery', 'Context only', 'Date c1865 (an older building)'),
- 'barge_office_landing_immigrants_1902_commons.jpg': ('Photo: immigrants landing from the Ellis Island ferry outside the Barge Office', 'Bundles, families, the crush at the landing', 'LATE 1902'),
- 'castle_garden_depot_exterior_c1870s_nypl1266460.jpg': ('Engraving: the State Emigrant Landing Depot (Castle Garden) from the land side, flags flying', 'Castle Garden exterior', 'c1861 to 1880'),
- 'castle_garden_depot_three_views_c1870s_nypl422119.jpg': ('Three engravings: the depot from the water, the interior, the Ward\'s Island refuge', 'Castle Garden overview card', 'c1861 to 1880'),
- 'castle_garden_first_thanksgiving_dinner_harpers_1884_loc90707729.jpg': ("Harper's, Nov 1884: three newcomers eat their first Thanksgiving dinner on a bench at Castle Garden", 'Our year exactly; warm, human', ''),
- 'castle_garden_landing_barge_office_met_dr175.jpg': ('Colour print: Castle Garden and the Barge Office landing seen from above, the harbour busy with ships', 'Bird\'s-eye of the landing', 'Met CC0; undated (1850 to 1900)'),
- 'castle_garden_rotunda_interior_c1870s_nypl423062.jpg': ('Engraving: the rotunda inside Castle Garden, galleries on iron columns, people waiting at rails', 'The registration hall', 'c1861 to 1880'),
- 'castle_garden_stereo_anthony_1880s_loc2017649604.jpg': ('Stereo view of Castle Garden across the Battery\'s trees', 'Castle Garden exterior photo', ''),
- 'castle_garden_with_statue_of_liberty_c1887_loc92516023.jpg': ('Colour print: Castle Garden on the Battery with the Statue of Liberty across the bay', 'Puts the station and the statue in one frame', ''),
- 'dargaud_statue_of_liberty_in_gaget_workshop_paris_1884_commons.jpg': ('Painting: the statue rising above the rooftops of Paris in the Gaget workshop yard, 1884', 'Bartholdi\'s statue being built', ''),
- 'ellis_eye_examination_inspectors_1913_loc97501532.jpg': ('Photo: inspectors examine immigrants\' eyes (the buttonhook test for trachoma)', 'Eye exam beat', 'LATE 1913'),
- 'ellis_immigrants_awaiting_examination_c1900s_loc2017660810.jpg': ('Stereo: the registry hall full of immigrants waiting for examination', 'The crowd inside', 'LATE (second building)'),
- 'ellis_island_first_building_c1896_commons.jpg': ('Photo: the first (wooden) Ellis Island station, opened 1892, burned 1897', 'The real 1892 building', 'SMALL'),
- 'ellis_island_immigrants_just_arrived_c1904_loc97501095.jpg': ('Stereo: immigrants just arrived in the Ellis Island building', 'Arrival crowd', 'LATE c1904'),
- 'ellis_island_station_kings_handbook_1893_commons.jpg': ("King's Handbook 1893: five views of the first Ellis Island station (landing, main building, dining hall, surgeon's house, detention room)", 'The 1892 station inside and out', '1280 px'),
- 'ellis_medical_examination_c1902_1913_dpla.jpg': ('Photo: a doctor examines a woman and children at a rail in the medical line', 'Medical inspection', 'LATE 1902 to 1913'),
- 'ellis_physicians_examining_jewish_immigrants_c1907_loc2012646350.jpg': ('Photo: physicians examine a line of Jewish immigrant men, stripped to the waist', 'Medical inspection', 'LATE c1907; SENSITIVE (partial undress)'),
- 'evening_post_liberty_statue_page_oct28_1886_commons.jpg': ('New York Evening Post front page, Oct 28, 1886: "Liberty\'s Statue"', 'Dedication day headline', ''),
- 'immigrants_landing_castle_garden_1880_loc2023631214.jpg': ("Harper's, May 29, 1880: two scenes of immigrants landing at Castle Garden", 'Landing at Castle Garden', 'SMALL'),
- 'immigrants_landing_castle_garden_shults_harpers_1880_loc90707732.jpg': ("Harper's 1880 (A. B. Shults): a crowd with bundles and children comes ashore under the Castle Garden shed", 'Landing at Castle Garden', ''),
- 'labor_exchange_castle_garden_harpers_1868_loc90709503.jpg': ("Harper's, 1868: immigrants waiting on the Battery; the labor exchange hall inside", 'The labor exchange', 'Date: 1868'),
- 'lazarus_new_colossus_manuscript_1883_commons.jpg': ('Emma Lazarus\'s handwritten "The New Colossus", 1883', 'The poem in her hand', 'SMALL (501 px); a larger scan is at the American Jewish Historical Society'),
- 'liberty_inauguration_salute_currier_ives_1886_commons.jpg': ('Currier & Ives: the inauguration of the statue, Oct 28, 1886, in fog and gun smoke', 'Dedication day', ''),
- 'moran_unveiling_statue_of_liberty_1886_commons.jpg': ('Edward Moran painting: the unveiling, fireworks and the fleet', 'Dedication day (colour)', ''),
- 'new_colossus_plaque_1903_nps_commons.jpg': ('The bronze "New Colossus" plaque put up in the pedestal in 1903', 'The poem was little known in 1886', 'LATE 1903'),
- 'port_of_new_york_birds_eye_from_battery_1892_loc91482228.jpg': ('Colour bird\'s-eye: the Port of New York from the Battery, 1892, Castle Garden in front', 'Establishing shot of the harbour', ''),
- 'registering_emigrants_castle_garden_1866_loc2001697361.jpg': ('Engraving: a clerk at a high desk registers emigrants at Castle Garden', 'The clerk writes the name (names beat)', 'Date: 1866'),
- 'statue_of_liberty_illumination_harbor_1886_loc99614266.jpg': ('Engraving: the statue and the harbour lit by fireworks, 1886', 'Dedication night', ''),
- 'statue_pedestal_bedloes_island_1885_loc99614265.jpg': ('Engraving: the pedestal under construction on Bedloe\'s Island, with Bartholdi inset', 'The pedestal fund (Lazarus wrote for it)', ''),
- 'ulrich_in_the_land_of_promise_castle_garden_1884_commons.jpg': ('Charles Ulrich painting, 1884: a young mother nursing her baby among waiting immigrants inside Castle Garden', 'The strongest single image for our year and place', ''),
- 'unveiling_statue_of_liberty_leslies_1886_loc99614119.jpg': ("Frank Leslie's: sailors watch the unveiling as the fleet salutes", 'Dedication day', ''),
- # d_streets
- 'brooklyn_bridge_tenements_c1909_loc2007665887.jpg': ('Joseph Pennell drawing: tenements packed under the Brooklyn Bridge', 'Tenements and the bridge (links to Ep 1)', 'LATE c1909; SMALL'),
- 'hester_street_market_panorama_c1902_loc2007661243.jpg': ('Panorama: Hester Street jammed with pushcarts and shoppers', 'Pushcart market', 'LATE c1902 (thin it out for the 1880s)'),
- 'hester_street_stereo_1897_loc2017659396.jpg': ('Stereo: a Hester Street corner, awnings and crowds', 'Street life', '1897'),
- 'in_hester_st_candy_stereo_c1896_loc90713721.jpg': ('Stereo: a candy pushcart with children on Hester Street', 'Pushcarts, children', 'c1896'),
- 'jewish_new_year_east_side_c1905_loc91482962.jpg': ('Photo: crowds on an East Side street at the Jewish New Year', 'Community and holidays', 'LATE c1905'),
- 'norfolk_and_hester_street_c1898_commons.jpg': ('Photo: Norfolk and Hester Streets, pushcarts and women in shawls', 'Pushcarts (best street photo of the set)', 'c1898'),
- 'pushcarts_elizabeth_st_from_hester_c1902_loc2007678128.jpg': ('Stereo: a long row of pushcarts and fire escapes on Elizabeth Street', 'Density of the street', 'LATE c1902'),
- 'riis_bandits_roost_mulberry_st_1888_commons.jpg': ('Riis: "Bandits\' Roost," an alley off Mulberry Street', 'Tenement alleys (Riis\'s most famous)', 'Italian district; framed as slum by Riis'),
- 'riis_baxter_street_alley_mulberry_bend_1888_loc2002710255.jpg': ('Riis: Baxter Street alley in Mulberry Bend', 'Tenement backs', ''),
- 'riis_five_cents_a_spot_bayard_st_lodgings_1890_loc2002710259.jpg': ('Riis: "Five cents a spot," lodgers crowded into a Bayard Street tenement room', 'Crowding', 'SENSITIVE (poverty, people in bed)'),
- 'riis_hester_street_1890_loc2002710254.jpg': ('Riis: Hester Street, 1890, shop signs, carts and men in the street', 'The Jewish quarter in our decade', ''),
- 'riis_ludlow_street_cellar_habitation_1895_loc2002710266.jpg': ('Riis: a family living in a Ludlow Street cellar', 'Living conditions', 'SENSITIVE (poverty)'),
- 'riis_ludlow_street_stands_1887_loc2015647196.jpg': ('Riis: street stands along Ludlow Street in front of a public school, 1887', 'Peddlers in our decade (rare 1887 date)', ''),
- 'riis_peddler_slept_in_cellar_1890_loc2002710253.jpg': ('Riis: a peddler who slept in a cellar, sitting on his bed of barrels', 'Peddlers', 'SENSITIVE (poverty)'),
- 'riis_street_arabs_sleeping_1890s_commons.jpg': ('Riis: homeless boys asleep in a tenement passage', 'Children in the streets', 'SENSITIVE (homeless children)'),
- 'riis_tenement_fire_escape_1890_loc2002710276.jpg': ('Riis: a fire escape used as an extra room, laundry hanging', 'Tenement exterior', ''),
- 'riis_vegetable_stand_mulberry_bend_1890_loc2002710252.jpg': ('Riis: a vegetable stand under an umbrella, Mulberry Bend', 'Street selling', 'Italian district'),
- 'williamsburg_grand_street_ferry_stereo_dennis_commons.jpg': ('Stereo: the East River from the Grand Street ferry, Williamsburg (Brooklyn, E.D.)', 'Williamsburg, where many families moved', 'Undated (1862 to 1890s)'),
- # e_sweatshop
- 'riis_bohemian_cigarmakers_tenement_1889_loc2002710251.jpg': ('Riis: a Bohemian family rolling cigars in their tenement room', 'Cigar making at home (Gompers\'s trade)', 'Children working'),
- 'riis_boy_pulling_threads_sweatshop_1889_loc2002710250.jpg': ('Riis: a twelve-year-old boy "pulling threads" among the men', 'Child labor in the garment trade', 'Children working'),
- 'riis_necktie_workshop_division_st_1889_loc2002710291.jpg': ('Riis: a necktie workshop in a Division Street tenement, girls at the table', 'Sweatshop interior (largest scan)', 'Children working'),
- 'riis_sewing_pants_gotham_court_1890_loc2002710299.jpg': ('Riis: women sewing pants for the trade in a Gotham Court flat', 'Home work, paid by the piece', ''),
- 'riis_shoemaker_working_in_house_1895_loc2002710273.jpg': ('Riis: a shoemaker working in his room', 'Home trades', '1895'),
- 'riis_sweatshop_ludlow_street_c1889_loc2002710271.jpg': ('Riis: "Sweatshop in Ludlow Street Tenement," men at work among heaps of coats', 'The Ludlow Street sweatshop', ''),
- 'riis_women_sewing_elizabeth_st_1889_loc2002711500.jpg': ('Riis: women sewing by lamplight in an Elizabeth Street room', 'Home finishing work', ''),
- # f_letters
- 'hamburg_american_packet_co_page_kings_handbook_1893_ia_p94.jpg': ("King's Handbook page: the Hamburg-American Packet Company, its steamers and saloons", 'The line most Russian Jews sailed from Hamburg', 'Full page (crop in the edit)'),
- 'hebrew_emigrant_aid_society_report_1882_cover_commons.jpg': ('Cover of the Hebrew Emigrant Aid Society report, 1882 (German edition, "Bericht")', 'Aid societies', 'SMALL (312 px)'),
- 'irish_depositors_emigrant_savings_bank_1880_loc2012646222.jpg': ("Frank Leslie's, 1880: Irish depositors at the Emigrant Savings Bank withdraw money to send to relatives", 'Money and tickets sent home; chain migration', ''),
- 'national_line_steamships_egypt_spain_ad_c1879_loc2002709991.jpg': ('Colour print advertising the National Line steamships Egypt and Spain, New York to Liverpool', 'Steamship line advertising', 'c1879'),
- 'north_german_lloyd_page_kings_handbook_1893_ia_p92.jpg': ("King's Handbook page: the North German Lloyd (Bremen line) and its steamers", 'The Bremen route', 'Full page'),
- 'red_star_line_poster_cassiers_1898_commons.jpg': ('Henri Cassiers poster: Red Star Line, Antwerp to New York', 'Steamship poster', 'LATE 1898; colour'),
- 'steamship_ads_prepaid_steerage_the_sun_jun11_1884_loc_sn83030272.jpg': ('The Sun, June 11, 1884: "Shipping" ads column; Monarch, National and Red Star lines offer "prepaid steerage" tickets ($18 to $19)', 'Prepaid tickets bought in America for relatives (our year)', 'SMALL width (690 px): newspaper scan'),
- # g_nativism
- 'a_trio_that_must_go_puck_1883_loc2012645510.jpg': ('Puck cover, Sept 1883: a church bell, a battered Republican elephant and a Chinese man as "a trio that must go"', 'Anti-Chinese politics as a punchline', 'CARICATURE'),
- 'anti_chinese_wall_puck_1882_loc96500349.jpg': ('Puck, 1882: Irish, Black, Italian, Jewish and other workers build an anti-Chinese wall with "Congressional mortar" while China opens its own wall to trade', 'The irony beat: immigrants shutting out the next group (critical of exclusion)', 'CARICATURE (every group drawn as a type)'),
- 'chinese_exclusion_act_1882_enrolled_text_nara_commons.jpg': ('The enrolled Chinese Exclusion Act, May 1882 (National Archives)', 'The law\'s own words', 'Wording of the law uses period terms'),
- 'columbia_welcomes_victims_of_persecution_1881_loc2001696516.jpg': ("Frank Leslie's, Jan 1881: Columbia welcomes Jewish refugees from German persecution", 'A sympathetic cartoon', 'CARICATURE (features exaggerated though kindly meant)'),
- 'gillam_sop_to_cerberus_puck_1882_commons.jpg': ('Puck cover, May 1882: President Arthur throws the Exclusion bill as a sop to the three-headed anti-Chinese dog', 'Why the law passed (Western votes)', 'Political caricature'),
- 'hamilton_where_the_blame_lies_judge_1891_loc97515495.jpg': ('Judge, April 1891: a line of immigrants drawn as criminals and anarchists pours off a ship while Uncle Sam is told "the blame lies" with lax laws', 'Openly nativist; show briefly as the restrictionist argument', 'CARICATURE; strongly offensive types'),
- 'hobsons_choice_chinese_1886_loc91793034.jpg': ('Puck cover, 1886: a man in an "Oregon" hat shoots Chinese men off a cliff; a torn "Treaty with China" on the ground (condemns the violence)', 'Anti-Chinese violence in the West', 'CARICATURE; SENSITIVE (killing shown)'),
- 'keppler_darn_ye_both_apa_puck_1894_loc2012648672.jpg': ('Puck, 1894 (Udo Keppler): Uncle Sam knocks together an APA man and a Catholic priest', 'The American Protective Association', 'LATE 1894; mild caricature'),
- 'keppler_looking_backward_puck_1893_colour_commons.jpg': ('"Looking Backward," colour copy (1438 px original)', 'Colour reference only; use the IA scan on screen', 'CARICATURE'),
- 'keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg': ('"Looking Backward," Puck, Jan 11, 1893: rich men bar a newcomer; behind each stands the shadow of his own immigrant father. Stitched from the Internet Archive microfilm of the issue', 'The irony beat; zoom on shadows, newcomer and caption (hi-res source: 7300 px stitch)', 'CARICATURE; B&W (original is colour)'),
- 'keppler_uncle_sams_lodging_house_puck_1882_loc2004670115.jpg': ('Puck, 1882: Uncle Sam scolds a rowdy Irish lodger who keeps the other nationalities awake', 'Anti-Irish stereotype in the Kellys\' decade', 'CARICATURE; a berth label is a period racial term'),
- 'keppler_welcome_to_all_puck_1880_loc2002719044.jpg': ('Puck, 1880: Uncle Sam welcomes immigrants into the "U.S. Ark of Refuge"', 'The welcome side, for contrast', 'Mild caricature'),
- 'nast_every_dog_has_his_day_harpers_1879_loc2002706054.jpg': ("Nast, Harper's 1879: a Native American tells a Chinese man \"Pale face 'fraid you crowd him out, as he did me\"", 'Nast against anti-Chinese politics', 'CARICATURE; dialect caption'),
- 'nast_the_chinese_question_harpers_1871_commons.jpg': ("Nast, Harper's Feb 18, 1871: Columbia shields a Chinese man from a mob; the wall is plastered with anti-Chinese slogans", 'The case for fairness; slogans show the slurs of the time', 'SLUR (the wall posters); larger copy of the LoC file'),
- 'nast_the_chinese_question_harpers_1871_loc2005696252.jpg': ('Same Nast cartoon, LoC copy', 'Backup copy', 'SLUR; smaller'),
- 'nast_which_color_is_to_be_tabooed_next_harpers_1882_loc91793231.jpg': ("Nast, Harper's 1882: a Chinese man and a Black man face the question \"Which color is to be tabooed next?\" (against the exclusion bill)", 'Exclusion as racial, from a critic', 'CARICATURE'),
- 'new_transatlantic_hebrew_line_1881_loc2002720441.jpg': ('Opper, Puck, Jan 19, 1881: "The New Trans-Atlantic Hebrew Line, for the exclusive use of the persecuted," a ship shaped like a hooked nose crowded with Jewish emigrants', 'Show only if the script names antisemitic mockery; otherwise leave out', 'CARICATURE; antisemitic; strongly offensive'),
- 'opper_irish_declaration_puck_1883_loc2012645471.jpg': ('Puck cover by Opper, May 1883: a huge Irish cook shakes her fist at her mistress', 'Anti-Irish servant stereotype (ties to Nora)', 'CARICATURE'),
- 'taylor_mortar_of_assimilation_puck_1889_commons.jpg': ('Puck 1889 (C. J. Taylor): "The mortar of assimilation, and the one element that won\'t mix," an Irishman with a knife refuses to blend in', 'Assimilation debate; anti-Irish', 'CARICATURE; SMALL (446 px)'),
- 'the_american_pope_puck_1894_loc2012648656.jpg': ('Puck 1894: Cardinal Satolli on an "American Headquarters" dome, casting the Pope\'s shadow over the U.S. and its schools', 'Anti-Catholic fear in the APA years', 'LATE 1894; anti-Catholic CARICATURE'),
- 'the_only_one_barred_out_leslies_1882_cartoon_crop_loc2001696530.jpg': ('Crop of the cartoon: a Chinese man sits outside the shut "Golden Gate of Liberty"', 'The exclusion beat', 'SLUR (notice); CARICATURE'),
- 'the_only_one_barred_out_leslies_1882_loc2001696530.jpg': ("Frank Leslie's, April 1, 1882: full page with the cartoon among the ads", 'Full page as a desk prop', 'SLUR; CARICATURE'),
- 'their_new_jerusalem_judge_1892_loc2005681047.jpg': ('Judge 1892: "Their New Jerusalem," Jewish immigrants streaming into a New York of Jewish-named shops', 'Antisemitic nativism of 1892; only with narration', 'CARICATURE; antisemitic; strongly offensive'),
- 'uncle_sam_return_quota_assisted_immigrants_1887_loc2010717610.jpg': ('W. A. Rogers cartoon, c1887: Uncle Sam ships "assisted" paupers back to Britain', 'The "public charge" rule (1882 Act)', 'CARICATURE; SMALL'),
- 'wasp_first_blow_at_the_chinese_question_1877_commons.jpg': ('The Wasp, Dec 1877: San Francisco workingmen attack a Chinese man', 'Anti-Chinese movement in California before 1882', 'CARICATURE; SENSITIVE (violence)'),
- 'wasp_the_chinese_must_go_who_keeps_them_1878_commons.jpg': ('The Wasp, May 1878: "The Chinese Must Go! But, Who Keeps Them?," employers who hire Chinese labor beside Denis Kearney\'s crowd', 'Labor competition argument', 'CARICATURE'),
- # h_names
- 'manifest_ss_russia_1891_names_detail_nara_m237_r580_p1039.jpg': ('Detail: passengers 1 to 17 with age, sex, trade, country (Russia, Poland, Hungary) and town (Kovno, Odessa)', 'Zoom on how a German clerk in Hamburg spelled Yiddish names (Abrahamson, Mottel, Sussel)', ''),
- 'manifest_ss_russia_hamburg_1891_nara_m237_r580_p1039.jpg': ('Real passenger list: S.S. Russia, Hamburg and Havre to New York, arrived Dec 31, 1891, sheet 1 (45 passengers, many from Russia and Poland)', 'The names beat: the clerk copied the name from this list', 'Real names of real people: keep zooms general'),
- 'naturalization_of_foreigners_nyc_harpers_1869_loc98511394.jpg': ("Harper's 1869: Judge McCunn's court naturalizing a crowd of immigrants", 'Becoming a citizen', 'Date: 1869 (Tammany-era mass naturalization)'),
- 'naturalization_record_solomon_aarons_1880_dpla_commons.jpg': ('Index card: Solomon Aarons, naturalized in the U.S. District Court, New York, Oct 17, 1880 (seaman, English)', 'A real 1880 naturalization record', 'Card typed later (index of old records)'),
- # i_portraits
- 'emma_lazarus_c1888_loc99402695.jpg': ('Emma Lazarus, engraving after a Kurtz photograph, with signature', 'Lazarus portrait (largest)', ''),
- 'emma_lazarus_engraving_1889_commons.jpg': ('Emma Lazarus, engraving, 1889', 'Lazarus portrait', ''),
- 'emma_lazarus_photo_kurtz_1872_commons.jpg': ('Emma Lazarus, photograph by W. Kurtz, 1872', 'Inset', 'SMALL'),
- 'henry_f_bowers_apa_founder_commons.jpg': ('Henry F. Bowers, founder of the American Protective Association (1887)', 'The APA', 'SMALL'),
- 'jacob_riis_seated_c1890_loc2001704054.jpg': ('Jacob Riis seated, about 1890', 'Riis portrait (immigrant from Denmark)', 'SMALL'),
- 'joseph_keppler_1880_commons.jpg': ('Joseph Keppler, 1880', 'Keppler portrait (immigrant from Austria, founder of Puck)', 'SMALL'),
- 'joseph_keppler_1893_commons.jpg': ('Joseph Keppler, drawn 1893', 'Keppler in the year of "Looking Backward"', 'SMALL'),
- 'samuel_gompers_c1902_loc2002717893.jpg': ('Samuel Gompers about 1902', 'Gompers (cigar maker from London, AFL president)', 'LATE c1902; no early photo found'),
+ # a_city_growth
+ 'birdseye_new_york_north_of_52nd_street_photo_1888_loc.jpg': ('Photograph from a high roof: Fifth Avenue running north past church spires and brownstones toward Central Park', 'The real city at our date, from above; under the population chart', ''),
+ 'broadway_east_side_9th_10th_street_photo_c1885_commons.jpg': ('Cast-iron store fronts on Broadway, a carriage at the curb', 'Commercial Manhattan, the money side of the city (wide crop)', ''),
+ 'chicago_birdseye_before_the_great_fire_harpers_1871_loc.jpg': ("Harper's double page: Chicago from the lake, ships in front, the grid running to the horizon", 'Chicago before it exploded (300,000 people); pair with the 1892 view', 'gutter down the middle'),
+ 'chicago_state_street_from_madison_stereo_1892_commons.jpg': ('Stereo card: State Street, Chicago, packed with streetcars, wagons and people', 'Chicago at full size; crop one half of the pair', 'LATE 1892'),
+ 'city_of_chicago_currier_ives_1892_loc.jpg': ('Currier and Ives colour view of Chicago from the lake: an endless grid of blocks and smokestacks', 'Chicago grown (about 1.1 million); the "after" for the 1871 view', 'LATE 1892'),
+ 'city_of_new_york_birdseye_currier_ives_1884_commons.jpg': ('Currier and Ives colour bird\'s-eye of Manhattan with the new Brooklyn Bridge, Brooklyn in the foreground', 'Opening wide shot of the setting; slow push in toward Brooklyn', ''),
+ 'new_york_birdseye_currier_ives_1883_commons.jpg': ('Currier and Ives bird\'s-eye of lower Manhattan for the Equitable Life building, bridge on the right', 'Alternative wide shot of the city in 1883', ''),
+ 'new_york_dry_goods_district_1886_commons.jpg': ('Colour poster: "A glimpse of New York\'s dry goods district", signs, wagons, crowds on Broadway', 'The busy commercial city; a colour accent among B&W', ''),
+ 'new_york_skyline_from_across_the_river_etching_1882_commons.jpg': ('Etching: people on a rocky shore looking across the water to the low skyline and the unfinished bridge', 'Quiet beat: the city seen from outside; weak as a main image', ''),
+ # b_building_up
+ 'chicago_building_of_the_home_insurance_co_1885_loc.jpg': ('Framed colour lithograph: "The Chicago Building of the Home Insurance Co. of New York", ten storeys, carriages in front', 'The Home Insurance Building as new in 1885 (the key image for chapter 3)', 'frame and mat around the print'),
+ 'fair_building_chicago_steel_frame_under_construction_1891_loc.jpg': ('Engraving: the Fair Building in Chicago with its bare steel skeleton rising floor by floor', 'Shows how a steel frame works better than any photo; animate the floors', 'LATE 1891'),
+ 'home_insurance_building_chicago_1907_loc.jpg': ('Colour postcard of the Home Insurance Building on its corner, with the two storeys added in 1890', 'Second view of the building (note it is taller than in 1885)', 'LATE 1907'),
+ 'home_insurance_building_chicago_photo_c1920s_commons.jpg': ('Photograph of the Home Insurance Building among taller neighbours, 1920s cars below', 'Only as a small inset ("the first skyscraper, soon dwarfed")', 'SMALL; LATE c1920s'),
+ 'montauk_block_chicago_1886_commons.jpg': ('Engraving of the Montauk Block, Chicago (1882), a ten-storey office block over a street of carriages', 'Chicago going up before steel frames', ''),
+ 'new_york_northwest_from_world_building_1894_loc.jpg': ('Photograph from the World Building dome: City Hall Park, the Tweed Courthouse roofs, tall office towers', 'Skyline rising; the Tweed Courthouse is visible in the middle ground', 'LATE 1894'),
+ 'otis_elevator_patent_drawing_1861_commons.jpg': ("E. G. Otis's patent drawing for hoisting apparatus (elevator), 1861", 'The elevator that made tall buildings usable; insert', ''),
+ 'tallest_buildings_in_the_world_new_york_1901_loc.jpg': ('Colour photochrom: "The tallest buildings in the world", Park Row towers over low brick roofs', 'Where it led by 1900; end of the "up" section', 'LATE 1901'),
+ # c_transit
+ 'a_typical_cable_accident_on_broadway_cartoon_1895_commons.jpg': ('Drawing: a crowd and a fallen woman beside a Broadway cable car, "A Typical Cable \'Accident\'"', 'Cable cars were fast and dangerous; a brief beat only', 'LATE 1895; SENSITIVE (injured woman, not graphic)'),
+ 'brooklyn_bridge_approaches_from_city_hall_park_1883_commons.jpg': ("Leslie's: the bridge and its Manhattan approach seen from City Hall Park, horsecars below", 'The bridge landing in the city; map-like view', 'Date: 1881 per LoC'),
+ 'brooklyn_bridge_cable_car_machinery_1883_commons.jpg': ("Leslie's: the engine room with huge wheels that pull the bridge's cable cars, and a car", 'How the bridge railway worked', ''),
+ 'brooklyn_bridge_distant_view_photo_1888_loc.jpg': ('Photograph: the bridge across rooftops and the river', 'The bridge in the Kellys\' time; B&W', ''),
+ 'brooklyn_bridge_grand_birdseye_currier_ives_1885_commons.jpg': ('Currier and Ives colour bird\'s-eye: the Great East River Suspension Bridge, harbour and both cities', 'Hero image for the bridge (1883)', ''),
+ 'brooklyn_bridge_leslies_1883_commons.jpg': ("Leslie's cover, April 28, 1883: workers lashing the stays high above the river", 'The men who built it; dizzying height', ''),
+ 'brooklyn_bridge_new_york_entrance_harpers_1883_loc.jpg': ("Harper's cover, May 1883: the New York entrance building, crowds, portrait of Roebling inset", 'Opening week; the station where the Kellys would walk on', ''),
+ 'brooklyn_bridge_opening_fireworks_1883_commons.jpg': ('Colour print: the grand display of fireworks at the opening, May 24, 1883', 'Celebration beat; colour', ''),
+ 'brooklyn_bridge_president_arthur_crossing_1883_commons.jpg': ("Harper's: President Arthur and his party crossing the bridge on opening day", 'Opening day', ''),
+ 'east_river_bridge_photo_1885_commons.jpg': ('Photograph: the bridge from the water with sailing ships and a steamer', 'Clean B&W establishing shot of the bridge', ''),
+ 'elevated_s_curve_110th_street_photo_c1889_commons.jpg': ('Photograph: the elevated railway on tall iron legs curving at 110th Street', 'The El at our date; dramatic structure', ''),
+ 'first_train_gilbert_elevated_sixth_avenue_1878_loc.jpg': ("Leslie's: the first train on the Gilbert Elevated over Sixth Avenue, crowds and horsecars below", 'The elevated arrives (1878)', ''),
+ 'new_york_and_brooklyn_bridge_photo_1889_loc.jpg': ('Photograph (Albertype): the bridge behind masts and waterfront sheds', 'Bridge and working port together', ''),
+ 'sixth_avenue_elevated_42nd_street_photo_c1888_commons.jpg': ('Photograph under the Sixth Avenue El at 42nd Street: dark iron, strips of light, shops', 'Life under the El: noise and shadow', ''),
+ 'the_cars_as_they_will_be_on_the_brooklyn_bridge_1883_loc.jpg': ("Harper's page: the cars as they will be on the bridge; below, at the dog pound", 'Bridge cars (top half only)', 'crop the top panel'),
+ 'the_crowded_horse_car_1872_loc.jpg': ('Engraving: two horses straining to pull an overloaded horsecar', 'Before electric power: horses did it all', ''),
+ # d_streets_filth
+ 'doing_the_slums_five_points_leslies_1885_commons.jpg': ("Leslie's: well-dressed visitors with a policeman \"doing the slums\" in the Five Points; poor women and children watch", 'How the rich looked at the poor; frame it critically', 'CARICATURE (mild, the poor drawn as types)'),
+ 'homeless_poor_donovan_lane_five_points_1872_commons.jpg': ("Leslie's: \"Our homeless poor\", early morning in Donovan Lane near the Five Points, a crumbling alley", 'Poverty before Riis; atmosphere', ''),
+ 'opper_street_cleaning_authorities_summer_epidemics_1879_loc.jpg': ("Opper in Leslie's: a lone sweeper pushes garbage around while rubbish barrels overflow, \"How the street-cleaning authorities guard against summer epidemics\"", 'Filth and a city government that did not cope; light satire', 'CARICATURE (check the sweeper; he may be drawn as an Irish type)'),
+ 'riis_at_the_cradle_of_the_tenement_1890_commons.jpg': ('Drawing from How the Other Half Lives: two girls on the stoop of an old tenement doorway', 'Tenement children; gentle', ''),
+ 'riis_bandits_roost_c1888_commons.jpg': ("Riis: Bandit's Roost, a narrow alley off Mulberry Street, men in bowler hats staring at the camera", 'The iconic Riis image; framed', 'real private people'),
+ 'riis_baxter_street_alley_mulberry_bend_c1888_loc.jpg': ('Riis: Baxter Street alley in Mulberry Bend, wooden stairs, laundry, a figure on the steps', 'Tenement yard', 'real private people'),
+ 'riis_birdseye_view_east_side_tenement_block_1890_commons.jpg': ('Line drawing: a whole East Side tenement block from above, buildings packed to the back', 'Explains crowding; good under the 3D model', ''),
+ 'riis_gotham_court_c1890_commons.jpg': ('Drawing (Otto Bacher, after Riis): Gotham Court, a narrow tenement alley with women and children', 'The worst tenement in the city; atmosphere', ''),
+ 'riis_hester_street_c1890_loc.jpg': ('Riis: Hester Street, a busy market street', 'Crowded street', 'real private people'),
+ 'riis_how_the_other_half_lives_cover_1890_commons.jpg': ('The cloth cover of How the Other Half Lives (1890)', 'Name the book on screen', ''),
+ 'riis_lodgers_bayard_street_tenement_1889_commons.jpg': ('Riis: lodgers sleeping on the floor and in bunks of a crowded Bayard Street tenement room, "five cents a spot"', 'The strongest crowding image; framed, with dignity', 'SENSITIVE (people in bed, poverty); real private people'),
+ 'riis_mulberry_bend_c1890_commons.jpg': ('Riis: Mulberry Bend street, packed with people, carts and fire escapes', 'The crowded street, large and sharp', 'real private people'),
+ 'riis_stale_bread_vendor_mulberry_bend_c1890_loc.jpg': ('Riis: a woman selling stale bread from a basket in Mulberry Bend', 'Making a living on the street', 'real private people'),
+ 'riis_vegetable_stand_mulberry_bend_c1890_loc.jpg': ('Riis: a vegetable stand under an umbrella, a banca (bank) and post office sign', 'Immigrant street economy', 'real private people'),
+ 'view_of_mulberry_bend_contract_laborers_leslies_1888_commons.jpg': ("Leslie's: Mulberry Bend crowded with Italian contract laborers leaving for the coal mines", 'The street at its most crowded; who lived there', ''),
+ # e_fire
+ 'a_fire_on_broadway_new_york_1893_loc.jpg': ('Photograph: a steam fire engine and horses working at a fire on Broadway, hoses in the street', 'The fire engines come; real equipment', 'LATE 1893'),
+ 'burning_of_a_tenement_house_forty_fifth_street_1860_loc.jpg': ("Harper's: a tenement house burning at night on Forty-fifth Street, crowds below", 'Night fire for the cold open (glow, no victims shown)', 'SENSITIVE (caption reports deaths; show the building only); early 1860'),
+ 'currier_ives_life_of_a_fireman_night_fire_c1854_commons.jpg': ('Currier and Ives colour print: a city street fire, flames and smoke, volunteer firemen hauling engines', 'Colour fire-glow reference for the drawn set', 'early (volunteer era)'),
+ 'firemen_spraying_burning_building_14th_street_1909_loc.jpg': ('Photograph: firemen spraying a burning building on 14th Street, smoke, a trolley in front', 'Scale of a city fire (later date)', 'LATE 1909'),
+ 'horse_drawn_fire_engine_rushing_to_a_fire_1900_loc.jpg': ('Photograph: three white horses pull a steam fire engine at a gallop', '"The fire engines come"', 'LATE 1900'),
+ 'new_york_world_building_fire_chromolithograph_1883_loc.jpg': ('Colour lithograph: the World Building on fire at night (January 1882), steam engines and crowds in the snow', 'Winter night fire with engines; strong colour', 'SENSITIVE (a deadly fire; nothing graphic shown)'),
+ 'number_twelve_steam_fire_engine_1897_loc.jpg': ('Photograph: Engine Number Twelve, a steam pumper with its horses and crew outside the firehouse', 'The equipment, close', 'LATE 1897'),
+ 'riis_tenement_fire_escape_as_extension_of_the_flat_c1890_loc.jpg': ('Riis: a tenement fire escape crammed with bedding, laundry and belongings', 'Why tenement fires were deadly: blocked escapes', ''),
+ 'the_american_fireman_always_ready_maurer_1858_commons.jpg': ('Currier and Ives print (Maurer): a fireman in helmet hauling an engine out of the firehouse', 'Fireman as hero; colour', 'early 1858'),
+ # f_machine
+ 'counting_the_vote_at_elephant_johnnies_1876_loc.jpg': ("Leslie's: counting the vote on election night at \"Elephant Johnnie's\", a saloon used as a polling place, police and officials around a ballot box", 'Election day in a saloon: the machine\'s home ground', 'real named private person (the saloon keeper)'),
+ 'hard_coal_for_the_poor_1874_loc.jpg': ("Harper's: a coal man shovelling coal into a poor woman's bucket in the snow, children waiting", 'Coal for the winter: the kind of favor the ward heeler gave', ''),
+ 'john_kelly_galvanizes_the_corpse_of_tammany_puck_1882_loc.jpg': ('Puck colour cover: Tammany boss John Kelly using a battery to revive a Tammany corpse', 'Tammany in the 1880s (Kelly, boss until 1886)', 'CARICATURE (check: Tammany "Indian" costume)'),
+ 'nast_move_on_naturalized_voter_1871_loc.jpg': ('Nast: at the polls, an Irish-caricatured crowd and a policeman push away a Native American voter, "Move on!"', 'Only if the script discusses who was let vote', 'CARICATURE (Irish and Native American)'),
+ 'nast_tammany_defeat_1875_loc.jpg': ('Nast: the Republican elephant trampling "Reformed Tammany Hall", 1875', 'Tammany beaten, briefly', ''),
+ 'nast_tammany_hall_going_to_the_inauguration_1885_loc.jpg': ('Nast: Tammany men marching to Cleveland\'s inauguration with a "Tammany Hall: This is our funeral" banner', 'Tammany in our decade', ''),
+ 'naturalization_of_foreigners_judge_mccunn_1869_loc.jpg': ("Leslie's: Judge McCunn's court mass-naturalizing immigrants at night, October 1869", 'The machine turning immigrants into voters (naturalization mills)', ''),
+ 'naturalization_scene_in_tammany_hall_1856_commons.jpg': ("Leslie's: naturalization of foreigners at Tammany Hall, men lined up at a desk", 'Same, earlier; Tammany\'s own hall', 'CARICATURE (mild, Irish types); early 1856'),
+ 'october_elections_challenging_a_voter_1872_loc.jpg': ("Harper's page: challenging a voter at the polls; Pennsylvania miners at the polls", 'Election-day scenes (polls, ballot boxes)', ''),
+ 'pewter_mug_tavern_and_tammany_hall_1860_commons.jpg': ('Print: the Pewter Mug tavern and the old Tammany Hall on Frankfort Street, 1860, a crowd at night', 'Saloon and machine side by side', 'early'),
+ 'philadelphia_election_fraud_repeaters_leslies_1872_loc.jpg': ("Leslie's cover: the Philadelphia election fraud, repeaters and a scuffle at the polls", 'Vote fraud (a machine elsewhere); illustrate "votes bought and repeated"', 'SENSITIVE (scuffle)'),
+ 'presidential_electioneering_new_york_street_scene_1864_loc.jpg': ('Illustrated London News: presidential electioneering in New York, a street speaker and a torchlight procession', 'Torchlight parades; politics as street theatre', 'early 1864'),
+ 'shoe_line_bowery_gift_from_tim_sullivan_1910_loc.jpg': ('Photograph: Bowery men lined up for free shoes, a gift from Tammany\'s "Big Tim" Sullivan', 'The machine as charity: the best real photo of favors for votes', 'LATE 1910; real private people'),
+ 'tammany_hall_14th_street_photo_1875_commons.jpg': ('Stereo card: Tammany Hall on 14th Street', 'The building (crop one half)', ''),
+ 'tammany_hall_14th_street_photo_c1890_commons.jpg': ('Photograph: Tammany Hall on 14th Street, brick and arches, a horse at the curb', 'The building, clean B&W', ''),
+ 'tammany_hall_interior_convention_1868_commons.jpg': ('Colour print: the hall inside Tammany, decorated with flags for the 1868 Democratic convention', 'Inside the wigwam; colour', ''),
+ 'watching_the_election_returns_times_building_1907_loc.jpg': ('Stereo card: huge night crowds watching election returns at Times Square', 'Election night excitement (much later)', 'LATE 1907'),
+ # g_tweed
+ 'county_court_house_kings_handbook_1893_commons.jpg': ("King's Handbook: the County Court-House (Tweed Courthouse) from the street", 'The finished courthouse', 'LATE 1893'),
+ 'how_new_york_is_governed_frauds_of_the_tammany_democrats_nyt_1871_ia.jpg': ('Title page of the Times pamphlet "How New York is Governed. Frauds of the Tammany Democrats" (1871)', 'The exposé in print', ''),
+ 'how_new_york_is_governed_ingersoll_accounts_page_nyt_1871_ia.jpg': ('Page of the same pamphlet: columns of warrants paid to Ingersoll & Co. and others for furniture and repairs', 'Zoom into the numbers (chairs, carpets); the ledger', 'names Ring members'),
+ 'nast_as_long_as_i_count_the_votes_harpers_1871_loc.jpg': ("Nast: Tweed leaning on a ballot box, \"In counting there is strength\": \"As long as I count the votes, what are you going to do about it?\"", 'Tweed\'s contempt in one panel; key image', ''),
+ 'nast_group_of_vultures_let_us_prey_harpers_1871_loc.jpg': ('Nast: the Ring as vultures on a mountain ledge over the bones of New York, "Let us prey"', 'The Ring feeding on the city', ''),
+ 'nast_self_portrait_harpers_1876_commons.jpg': ("Nast self-portrait at his drawing board, Harper's 1876", 'Introduce Nast', ''),
+ 'nast_stone_walls_do_not_a_prison_make_1872_loc.jpg': ('Nast: Tweed too big for the city jail, bursting out of it', 'Rich men did not stay in jail; the escape', ''),
+ 'nast_stop_thief_harpers_1871_loc.jpg': ('Nast: the Ring running from the Treasury with bags of money, "Stop thief!"', 'The Ring flees after the exposé', 'foxed scan'),
+ 'nast_the_arrest_of_boss_tweed_another_good_joke_1871_loc.jpg': ('Nast: Tweed laughing in a chair while officials make a show of arresting him, "another good joke"', 'Arrest of 1871', ''),
+ 'nast_the_brains_harpers_1871_loc.jpg': ('Nast: "The Brains", Tweed\'s body with a money bag for a head', 'The most famous Tweed image; key image', ''),
+ 'nast_the_power_behind_the_throne_tammany_ring_dom_in_paine_1904_ia.jpg': ('Nast: "The Tammany Ring-dom", Tweed as the power behind a puppet king (Governor Hoffman)', 'Tweed controlled the officials', 'book reprint (Paine 1904)'),
+ 'nast_the_spirit_of_tweed_is_mighty_still_1886_loc.jpg': ('Nast: the ghost of Tweed in prison stripes next to a poster of "bribery and corruption" in New York, 1886', 'Tweed was gone but the system lived on (our decade)', 'SMALL'),
+ 'nast_the_tammany_tiger_loose_harpers_1871_ia.jpg': ('Nast double page: the Tammany tiger mauling Columbia in a Roman arena while Tweed and the Ring watch, "What are you going to do about it?"', 'The great tiger image; first use of the tiger symbol', 'SENSITIVE (allegorical violence: a woman mauled, bodies in the arena); stitched across the gutter, part of the caption lost'),
+ 'nast_too_thin_ring_members_1871_in_paine_1904_ia.jpg': ('Nast: four Ring members (Tweed, Sweeny, Connolly, Hall) protest "We know nothing about the stolen vouchers", "Too thin!"', 'After the vouchers vanished', 'book reprint (Paine 1904)'),
+ 'nast_tweed_le_dee_and_tilden_dum_harpers_1876_loc.jpg': ("Nast, Harper's cover July 1, 1876: Tweed in prison stripes holding two street boys by the collar", 'The cartoon Spanish officials used to identify him', ''),
+ 'nast_two_great_questions_harpers_1871-08-19_ia.jpg': ('Nast full page: "Who is Ingersoll\'s Co.?" above, "Who stole the people\'s money? Do tell. \'Twas him." below', 'Both panels; the pointing circle', ''),
+ 'nast_two_great_questions_original_woodblock_1871_commons.jpg': ('The engraved printing block of "Two Great Questions" (metal and wood surface, image in relief)', 'How the cartoons were printed; a texture shot', ''),
+ 'nast_under_the_thumb_1871_in_paine_1904_ia.jpg': ('Nast: "Under the Thumb", Tweed\'s giant thumb pressing down on Manhattan, "Well, what are you going to do about it?"', 'Tweed\'s power over the city', 'SMALL; book reprint (Paine 1904)'),
+ 'nast_what_are_you_laughing_at_harpers_1871_commons.jpg': ("Nast, Harper's cover Nov 25, 1871: Tweed in Roman armour, the Ring smashed, \"What are you laughing at? To the victor belong the spoils\"", 'The fall of 1871', ''),
+ 'nast_who_stole_the_peoples_money_twas_him_harpers_1871_ia.jpg': ('Nast: the Ring in a circle, each pointing to the man beside him, "Who stole the people\'s money? Do tell. \'Twas him."', 'Key image; slow zoom around the circle', ''),
+ 'new_york_county_court_house_valentines_manual_1868_commons.jpg': ("Lithograph from Valentine's Manual: the planned County Court House with its dome (never built that way)", 'The courthouse as promised', ''),
+ 'new_york_times_front_page_1871-07-22_ia.jpg': ('The New-York Times front page, July 22, 1871: "The Secret Accounts. Proofs of undoubted frauds brought to light", columns of payments', 'The exposé; zoom to the headline and the Ingersoll table', 'microfilm, dark; grade up'),
+ 'the_capture_of_tweed_the_picture_that_made_spanish_officials_harpers_1876-10-07_ia.jpg': ("Harper's, Oct 7, 1876: \"The Capture of Tweed: the picture that made the Spanish officials take him for a child-stealer\", the Tweed-le-dee cartoon reprinted with the story", 'Insert for the Vigo scene: the cartoon and the caption together', ''),
+ 'thomas_nast_portrait_brady_c1865_commons.jpg': ('Brady studio photograph of Thomas Nast seated', 'Introduce Nast', ''),
+ 'tweed_courthouse_rotunda_courtyard_habs_photo_modern_commons.jpg': ('Survey photograph of the courthouse rotunda: iron galleries and arches', 'Reference for the bootblack-stand set', 'MODERN (HABS)'),
+ 'tweed_courthouse_side_view_stereo_c1916_commons.jpg': ('Stereo card: side view of "Boss Tweed\'s courthouse"', 'Courthouse exterior', 'LATE 1916'),
+ 'tweed_portrait_1873_commons.jpg': ('Engraved portrait of William M. Tweed', 'Identity card for Tweed', ''),
+ 'tweed_portrait_brady_handy_c1870_commons.jpg': ('Brady-Handy photograph of Tweed, head and shoulders', 'Main Tweed portrait', ''),
+ # h_plunkitt
+ 'plunkitt_honest_graft_and_dishonest_graft_chapter_page_1905_ia.jpg': ('Book page: "Honest Graft and Dishonest Graft", the opening of Plunkitt\'s first talk', 'Text on screen for chapter 7', ''),
+ 'plunkitt_i_seen_my_opportunities_page_1905_ia.jpg': ('Book page beginning "...whole thing by sayin\': \'I seen my opportunities and I took \'em.\'"', 'The famous line, highlighted', ''),
+ 'plunkitt_of_tammany_hall_title_page_1905_ia.jpg': ('Title page: Plunkitt of Tammany Hall, "talks... from his rostrum, the New York County Court-House bootblack stand", Riordon, 1905', 'Name the book and the bootblack stand', 'LATE 1905'),
+ 'plunkitt_on_his_rostrum_bootblack_stand_frontispiece_1905_ia.jpg': ('Frontispiece photograph: Plunkitt in a top hat seated on his "rostrum", the courthouse bootblack stand, with other men and a girl', 'The real stand; reference for the drawn set', 'LATE 1905; real private people beside him'),
+ 'plunkitt_portrait_c1910_commons.jpg': ('Studio portrait of George Washington Plunkitt (spelled "Plunkett" on the plate)', 'Identity card for Plunkitt', 'LATE c1910'),
+ # i_brooklyn
+ 'brooklyn_bridge_and_elevated_railways_from_brooklyn_1890_loc.jpg': ('Stereo card: the Brooklyn end of the bridge and the elevated railway terminal', 'Brooklyn side of the bridge, the Kellys\' way to work', ''),
+ 'brooklyn_city_hall_1895_commons.jpg': ('Blue roundel print of Brooklyn City Hall with flags and carriages', 'McLaughlin\'s city hall', 'LATE 1895'),
+ 'brooklyn_city_hall_stereo_commons.jpg': ('Stereo card: Brooklyn City Hall with its cupola and the park in front', 'Brooklyn City Hall, B&W', 'date range 1862 to 1915'),
+ 'brooklyn_institute_and_houses_washington_street_brooklyn_c1910_loc.jpg': ('Photograph: the Brooklyn Institute and row houses on Washington Street, the El at the end', 'A real Brooklyn street', 'LATE (print stamped 1910)'),
+ 'carr_picnic_prospect_park_brooklyn_1883_commons.jpg': ('Samuel Carr painting: a picnic in Prospect Park, Brooklyn, 1883, children in white under trees', 'Brooklyn leisure in our year; contrast with the tenements', ''),
+ 'ferry_boat_crossing_east_river_stereo_commons.jpg': ('Stereo card: a ferry crossing the East River, a bridge tower rising behind', 'How Brooklyn crossed before the bridge', 'c1870s'),
+ 'hugh_mclaughlin_portrait_commons.jpg': ('Engraved portrait of Hugh McLaughlin, the Brooklyn Democratic boss', 'Identity card for Brooklyn\'s own boss', 'published 1910'),
+ 'new_york_from_brooklyn_fulton_street_ferry_stereo_c1860s_loc.jpg': ('Stereo card: the Fulton Street ferry house in Brooklyn, Manhattan across the water', 'Brooklyn waterfront', 'early'),
+ 'the_city_hall_brooklyn_1863_loc.jpg': ('Photograph: Brooklyn City Hall from the side, cupola and columns', 'Brooklyn City Hall', 'early 1863'),
+ 'washington_street_from_fulton_brooklyn_1900_loc.jpg': ('Detroit Publishing photo: Washington Street from Fulton, Brooklyn, the El and Borough Hall park', 'Downtown Brooklyn street', 'LATE 1900'),
+ # j_reform
+ 'charles_parkhurst_portrait_1896_commons.jpg': ('Photograph of the Rev. Charles Parkhurst in robes; his 1892 sermons attacked Tammany', 'A reformer', 'LATE 1896'),
+ 'civil_service_cerberus_hercules_of_spoils_1880_loc.jpg': ('Cartoon drawing: a spoils-system Hercules with a club facing a three-headed civil service watchdog', 'Civil service vs the spoils system', 'SMALL'),
+ 'consistent_civil_service_reform_puck_1885_loc.jpg': ('Opper, Puck cover 1885: President Cleveland and office-seekers, "Consistent civil service reform"', 'Jobs as rewards; reform', ''),
+ 'gillam_a_hard_job_with_the_hogs_spoilsmen_puck_1885_loc.jpg': ('Gillam, Puck 1885: President Cleveland trying to drive a herd of office-seeking hogs', 'Office-seekers wanting their jobs', ''),
+ 'men_may_come_work_of_reform_puck_1884_loc.jpg': ('Keppler, Puck 1884: Columbia and a reform worker, a crane lifting civil service reform into place', 'Reform as building work', ''),
+ 'nast_civil_service_reform_1877_loc.jpg': ('Nast 1877: office-seekers bowing at a statue of Andrew Jackson, "To the victor belong the spoils"', 'Where the spoils system came from', ''),
+ 'pughe_the_independents_fought_nobly_puck_1894_commons.jpg': ('Pughe, Puck 1894: the Tammany tiger and party bosses in a heap, the reform banner flying', 'Reform beats Tammany in 1894', 'LATE 1894; CARICATURE (check faces)'),
+ 'seth_low_portrait_1901_commons.jpg': ('Photograph of Seth Low, standing', 'Brooklyn reform mayor (1882 to 1885); this portrait is later', 'LATE 1901'),
 }
 WATCH = [
- '**Keppler "Looking Backward":** the old `desk/keppler_looking_backward_1893_large.png` is only 1254x790 and soft. The new on-screen file is '
- '`g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg`, stitched from the Internet Archive microfilm of *Puck* no. 827 '
- '(Jan 11, 1893, pages n7 and n8, each 3964x5141). The seam was aligned by matching the overlap; no visible join. Black and white (the print is colour). '
- 'LoC\'s own scan (LC-USZ62-29010) is thumbnail-only outside the Library. Re-stitch from the IA pages for a 7300 px master if a deep zoom needs it.',
- '**Caricatures and slurs** are marked CARICATURE / SLUR (HANDOFF "Ep 3 addition"): brief, framed by narration, never played for laughs. '
- 'Three are strongly offensive and should appear only if the script names what they show: `new_transatlantic_hebrew_line_1881`, '
- '`their_new_jerusalem_judge_1892` (both antisemitic) and `hamilton_where_the_blame_lies_judge_1891`. The Wasp\'s "A Statue for Our Harbor" stays out (decision of Nov 9).',
- '**Sensitive content:** pogrom engravings (mob violence), "Hobson\'s Choice" (Chinese men shot), The Wasp 1877 (assault), the c1907 Ellis medical photo (men stripped to the waist), '
- 'Riis\'s poverty photos (children, people in bed). Riis framed his subjects as a reformer; narration should give them dignity.',
- '**Date labels needed** (LATE): anything after 1893: Ellis Island photos of 1902 to 1913, Stieglitz 1907, Hester Street c1902, Gompers c1902, the 1903 plaque, '
- 'Puck 1894 and 1904, Red Star poster 1898. Earlier context: Castle Garden engravings of the 1860s and 1870s, Harper\'s 1869 steerage hold.',
- '**Real names:** the S.S. Russia list and Annie Moore\'s page name real people. Zoom on spelling, not on one family\'s story, unless the script is about them.',
- '**Small files** (under 1000 px on the long side) are marked with a small square below: insets or desk props, not full frame.',
- 'Riis photos come from LoC prints of his work (most are 1536 px); the Museum of the City of New York holds the negatives (not free to use).',
+ '**Key images for the script:** "Who Stole the People\'s Money?" (now a clean crop of the lower panel from the IA microfilm of *Harper\'s*, Aug 19, 1871), '
+ '"The Brains", "The Tammany Tiger Loose" (stitched by hand from the two microfilm pages of Nov 11, 1871: the join is invisible in the art, but the caption loses '
+ '"E." of "LOOSE" in the gutter), "As long as I count the votes", "Under the Thumb", "Tweed-le-dee and Tilden-dum" and its Oct 7, 1876 reprint with the capture story, '
+ 'and the *Times* front page of July 22, 1871 ("The Secret Accounts").',
+ '**LoC copies that failed:** LoC items 2022641895 ("Who Stole") and 2021630656 ("Tiger Loose") returned 503 errors every time; the IA microfilm versions replace them. '
+ '"Under the Thumb", "Too Thin!" and "The Power behind the Throne" are crops from Paine, *Th. Nast: His Period and His Pictures* (1904): fine for insets, soft at full frame.',
+ '**Caricatures** are marked CARICATURE: brief, framed by narration, never played for laughs. Nast\'s "Move On!" (1871) caricatures both Irish voters and a Native American '
+ 'and should appear only if the script talks about who could vote. The 1856 Tammany naturalization scene draws the Irish as rough types. Puck\'s "Tammany Fagin" (an '
+ 'antisemitic Fagin figure) was downloaded and then deleted. Most of the Tweed cartoons caricature Tweed himself (a public figure), not an ethnic group.',
+ '**Sensitive:** "The Tammany Tiger Loose" (allegorical violence, Columbia mauled, bodies in the arena); the 1860 tenement fire (the caption reports deaths; show the '
+ 'burning building only); the World Building fire (deadly, nothing shown); the Philadelphia fraud cover (a scuffle); the 1895 cable car "accident" (a fallen woman); '
+ 'Riis\'s lodging-room photo (people in bed). Nothing gory was kept.',
+ '**Date labels needed** (LATE): Plunkitt (1905 book, c1910 portrait), the Tim Sullivan shoe line (1910), election crowds (1907), the 14th Street fire (1909), '
+ 'Seth Low (1901) and Parkhurst (1896), the 1890s skyline views, the Home Insurance postcard (1907) and photo (1920s). Plunkitt\'s fire story itself is from 1905: '
+ 'narrate it as "how the machine worked."',
+ '**Real private people:** Riis\'s subjects, the men in the Bowery shoe line, the men and girl beside Plunkitt on the bootblack stand, the owner of "Elephant Johnnie\'s". '
+ 'The *Times* and pamphlet pages name Ring members and contractors (public figures for this story).',
+ '**Small files** (under 1000 px on the long side) are marked with a small square below: insets only. The Home Insurance Building has no large period photograph on '
+ 'Commons or LoC; the 1885 lithograph (LoC 2010634573) is the best image of it.',
+ '**Scans with frames or bars:** several LoC prints include mats, frames or colour bars (Home Insurance lithograph, the Cerberus drawing was trimmed). Crop in the edit.',
 ]
 GAPS = [
- 'Brody (1881 to 1882 refugee camp) and the Hamburg emigrant halls of the 1880s: no public-domain picture found (BallinStadt photos are 1900s).',
- 'A Jewish family at the Hamburg or Bremen docks in the 1880s: none; the 1874 Harper\'s Hamburg steamer is the closest.',
- 'An 1880s photograph of steerage berths: none (Harper\'s 1869 engraving or drawn).',
- 'Annie Moore herself: no authentic photograph (the widely shared one is another woman). Use her list page and the 1892 building.',
- 'Ellis Island chalk marks: no PD photo of chalk-marked coats found; the eye exam and medical line photos are 1902 to 1913.',
- 'The first Ellis Island building: only King\'s Handbook (1280 px) and a 722 px photo. A larger King\'s scan was blocked (Commons rate limit); the IA copy of King\'s 1893 is a different edition.',
- 'Williamsburg/Brooklyn streets in the 1880s: only a ferry stereo. Brooklyn Public Library holds more (not all PD).',
- 'Letters home in Yiddish, prepaid ticket stubs, landsmanshaft society photos: none found PD for the period; use a drawn prop (`p05_letter_ticket`).',
- 'Synagogues of the era (e.g. Eldridge Street, 1887): no period image found; HABS photos are modern.',
- 'American Protective Association material beyond Bowers\'s portrait and Puck: none. Immigration Restriction League (founded 1894): outside our years, none taken.',
- 'A naturalization certificate of the 1880s: only a later index card (Aarons, 1880). NARA naturalization images on Commons are 1900s to 1940s.',
- 'Gompers, Lazarus manuscript: early Gompers photo not found; the manuscript is only 501 px (AJHS holds a larger scan).',
- 'Not downloaded (rights "not evaluated" at LoC, though published before 1930): "In the steerage" (1891), Keppler photo 1880 (LoC copy), Lillian Wald, C. J. Taylor\'s "Mortar of assimilation" (LoC copy; a small Commons copy is used). '
- 'Not digitized at LoC: Life\'s "And we open our arms to them" (1883), the Harrison restriction cartoon (1889), Gillam\'s "They are pretty safe there" (1882).',
+ 'Electric trolley in Richmond (1888): no public-domain photo found; the only trolley images are 1897 and later (Boston, Rights not cleared at LoC).',
+ 'Cable cars on Brooklyn or Chicago streets in the 1880s: only the Brooklyn Bridge cable car machinery (1883) and the 1895 Broadway "accident" drawing.',
+ 'Horses, manure, dead horses in the street: no public-domain photo found for the 1880s (the famous ones are Municipal Archives / MCNY). Use the Opper 1879 cartoon or a drawn set.',
+ 'Street cleaning: Waring\'s "White Wings" (1895 onward) not found PD; after our date anyway.',
+ 'A burned-out family on the street at night: none found (and the plan keeps faces off screen). The cold open is better drawn; the 1860 and 1882 fire prints give the glow.',
+ 'Ward heeler, ward club or saloon interior in the 1880s: only "Elephant Johnnie\'s" (1876) and the Tim Sullivan shoe line (1910). No PD photo of a Tammany clubhouse interior.',
+ 'Hugh McLaughlin: only one engraved portrait (published 1910, 1196 px). No photograph of him or of Brooklyn\'s Democratic headquarters (Willoughby Street) found.',
+ 'Williamsburg in the 1880s: nothing usable; Brooklyn street photos are 1900 and later.',
+ 'Seth Low as Brooklyn mayor (1882 to 1885): only portraits from 1901 and later at usable size (an 1890 image is 494 px).',
+ 'Tweed Courthouse under construction (1860s): no photograph found; Valentine\'s 1868 lithograph shows the planned building.',
+ 'The Spanish arrest itself (Vigo, 1876): no image beyond Harper\'s reprint of the cartoon; the scene is drawn (`ep4_vigo`).',
+ 'Election day in Brooklyn in the 1880s: none; New York and Philadelphia scenes of the 1870s stand in.',
+ 'Not downloaded (rights "not evaluated" or blank at LoC, no Commons copy): Riis "Bootblacks, New York" (1896), "The East River, Brooklyn" (1900), the Leslie\'s 1883 bridge view (2006684386), '
+ 'the 1890 to 1920 horsecar and trolley photos (2005690145), the 1903 Chicago steel frame (89711517), the Harper\'s Monthly Tweed engraving (2004677360), Nast\'s "Even Tammany sachems draw the line" (Goldstein collection, restricted).',
 ]
 total = sum(len(glob.glob(f'public/img/{t}/*.jpg')) for t, _ in TOPICS)
-out = ['# Episode 3 archival images', '',
-       f'{total} public-domain images for the edit (B&W photo cards on the desk), in `public/img/a_departure` to `i_portraits`, with credits in '
-       '`public/img/credits.json` (title, artist, date, source page, rights). Contact sheets: `research/sheets/<topic>.jpg`. '
+out = ['# Episode 4 archival images', '',
+       f'{total} public-domain images for the edit, in `public/img/a_city_growth` to `j_reform`, with credits in `public/img/credits.json` '
+       '(title, artist, date, licence, source page, source id). Contact sheets: `research/sheets/<topic>.jpg`. '
        'Sources: Library of Congress ("no known restrictions on publication"), Wikimedia Commons (public domain), the Internet Archive '
-       '(pre-1930 publications; National Archives microfilm), Chronicling America. Look-dev references for the drawn sets are separate (`REFERENCES.md`).', '',
+       '(pre-1930 publications: *Harper\'s Weekly* and *New-York Times* microfilm, Paine 1904, Riordon 1905, the 1871 *Times* pamphlet). '
+       'Every file is a JPEG of at most 4000 px on the long side. Tools: `tools/find_images.py` (search, get), `tools/batch_get.py` (lists), '
+       '`tools/sheet.py` (contact sheets), `tools/rename.py` and `tools/add_credit.py` (hand-made crops and stitches).', '',
        '## Watch for', ''] + [f'- {w}' for w in WATCH] + ['']
 for t, name in TOPICS:
     fs = sorted(glob.glob(f'public/img/{t}/*.jpg'))
@@ -190,14 +209,14 @@ for t, name in TOPICS:
     for f in fs:
         k = os.path.relpath(f, 'public/img'); b = os.path.basename(f); m = C.get(k, {}); w, h = Image.open(f).size
         what, use, flag = N.get(b, ('', '', ''))
-        date = re.sub(r'date QS.*|-01-01.*|T00.*|Published on ', '', str(m.get('date', '')))[:16]
+        date = re.sub(r'date QS.*|-01-01.*|T00.*|Published on ', '', str(m.get('date', '')))[:40]
         page = m.get('page', '')
         src = 'LoC' if 'loc.gov' in page else 'Commons' if 'wikimedia' in page else 'Internet Archive' if 'archive.org' in page else 'link'
         out.append(f"| {'▫ ' if max(w, h) < 1000 else ''}`{b}` | {w}×{h} | {date} | {what.replace('|', '/')} | {use} | {flag} | [{src}]({page}) |")
     out.append('')
 out += ['## Gaps', ''] + [f'- {g}' for g in GAPS] + ['']
 txt = '\n'.join(out)
-assert '—' not in txt, 'no em dashes'
+assert '\u2014' not in txt, 'no em dashes'
 open('research/IMAGES.md', 'w').write(txt)
 missing = [os.path.basename(f) for t, _ in TOPICS for f in glob.glob(f'public/img/{t}/*.jpg') if os.path.basename(f) not in N]
 print('IMAGES.md:', total, 'images; no notes for:', missing)

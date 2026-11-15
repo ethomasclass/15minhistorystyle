@@ -52,7 +52,7 @@ def search(q, n=12):
     r = api(action="query", list="search", srsearch=q, srnamespace=6, srlimit=n)
     titles = [s["title"] for s in r["query"]["search"]]
     for i in info(titles) if titles else []:
-        print(f'{i["w"]}x{i["h"]}  [{i["licence"]}]  {i["title"]}  — {i["artist"]} {i["date"]}')
+        print(f'{i["w"]}x{i["h"]}  [{i["licence"]}]  {i["title"]}  - {i["artist"]} {i["date"]}')
 
 
 def save_jpeg(data, dest, cap=4000):
@@ -87,6 +87,8 @@ def get(title, dest, width=3840):
     # thumbnails are served freely: take the largest standard width below the original (3840 at most).
     w0 = info([title])[0]["w"]
     width = max([w for w in STD_WIDTHS if w < w0 and w <= width] or [0])
+    if w0 <= 1600:
+        width = 0   # small originals: take the original itself (one request, rarely rate-limited)
     i = info([title], width)[0] if width else info([title])[0]
     if not re.search(r"public domain|pd|cc0|no restrictions|cc by(?!-nc)", i["licence"], re.I):
         sys.exit(f"refusing licence {i['licence']!r} for {title}")

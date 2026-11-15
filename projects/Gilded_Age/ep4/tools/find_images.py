@@ -149,7 +149,7 @@ def search(text, srcs, n=8):
         try:
             for r in SOURCES[name](text, n):
                 flag = "OK  " if r["ok"] else ("??  " if r["ok"] is None else "SKIP")
-                print(f"  {flag} {r['id']:<40.40} {r['size']:>10}  {r['date'][:14]:<14} {r['title'][:60]}  — {r['who'][:40]}")
+                print(f"  {flag} {r['id']:<40.40} {r['size']:>10}  {r['date'][:14]:<14} {r['title'][:60]}  - {r['who'][:40]}")
         except Exception as e:  # one archive being down should not stop the others
             print(f"  (error: {e})")
 
