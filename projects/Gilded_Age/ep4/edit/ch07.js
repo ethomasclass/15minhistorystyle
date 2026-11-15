@@ -10,7 +10,7 @@ EDITS.ch07 = () => {
   const c = {graft: L('Graft', 2.22), george: L('George', 5.96), held: L('held', 10.34), rich: L('rich.', 16.86), years: L('Years', 17.78), shoe: L('shoeshine', 23.86), stealing: L('Stealing,', 26.7),
     seen: L('"I', 30.18), say: L('Say', 33.06), liked: L('Plunkitt', 47.6), also: L('He', 52.7), when: L('When', 56.08), there: L('there', 58.08), didnt: L('He', 60.44), decide: L('"decide', 64.32),
     phil: L('"It\'s', 68.58), mighty: L('Mighty', 72.1), so: L('So', 74.02)};
-  const pg = 0, por = c.george - 0.1, jobs = 10.15, photo = 19.3, bb = 23.7, gr = 33.0, tb = 47.45, bb2 = 53.0, fire = c.when - 0.15, qt = 63.0, bb3 = c.phil - 0.1;
+  const pg = 0, por = c.george - 0.1, jobs = 10.15, photo = 19.3, bb = 23.7, gr = 33.0, tb = 47.45, bb2 = 53.2, fire = c.when - 0.15, qt = 63.0, bb3 = c.phil - 0.1;
   const shots = [
     // 1. "Honest graft. Graft means using a public job to make money for yourself." His own chapter title, 1905.
     {a: pg, b: por, draw: (T) => kDesk(T, pg, por, kCrop('h_plunkitt/plunkitt_honest_graft_and_dishonest_graft_chapter_page_1905_ia.jpg', {x: 250, y: 60, w: 640, size: [1918, 2786], crop: [0.1, 0.05, 0.92, 0.6], rot: -1, o: fin(T, 0.05, 0.5), T}), 0.04, 600, 400) +
@@ -34,7 +34,7 @@ EDITS.ch07 = () => {
     // 7. "Plunkitt liked his line so much, he wanted it on his tombstone. Seriously."
     {a: tb, b: bb2, cut: true, live: true, draw: (T) => renderTombstone(T, TB_CUE)},
     // 8. "He also explained why poor voters stuck with the machine."
-    {a: bb2, b: fire, cut: true, live: true, draw: (T) => kQ(() => renderE4Bootblack(remap([[bb2, 10.6], [fire, 14.0]])(T))) + lNote('why poor voters stuck with the machine', 140, 330, lVis(T, bb2 + 0.3, fire + 0.4), 32, -4)},
+    {a: bb2, b: fire, cut: true, live: true, draw: (T) => kQ(() => renderE4Bootblack(remap([[bb2, 10.6], [fire, 14.0]])(T))) + lNote('why poor voters stuck with the machine', 140, 330, lVis(T, bb2, fire + 0.4), 32, -4)},
     // 9. "When there was a fire, he said, he was there 'as soon as the fire engines.' He didn't ask how people voted." The cold open's
     //    fire again: the engine pulls up, the captain and his men walk in behind it.
     {a: fire, b: qt, cut: true, live: true, draw: (T) => kQ(() => renderE4Fire(remap([[fire, 20.4], [qt, 28.6]])(T))) +

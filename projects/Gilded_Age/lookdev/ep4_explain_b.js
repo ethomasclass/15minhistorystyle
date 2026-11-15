@@ -126,8 +126,8 @@ function renderPyramid(n, C = PY_CUE) {
     s.push(xpOp(kn * xpIn(C.sick, n), xpArrow(xpCurve([1160, 650], [capX(duffy) + 60, PY.base + 80], 80), xpIn(C.sick, n, 0.7), {w: 4})));
   }
   scr.push(card(1010, 160 + 0 * C.ward, 'Ward boss', 'The party leader for one ward,|a district of the city, over|its captains. At the top, the|boss runs the whole machine.', null, xpIn(C.ward + 0.9, n, 0.4)));
-  const bj = xpIn(C.picked, n, 0.4);
-  if (bj > 0) { scr.push(xpOp(bj, penS(1040, 680, 'picks the candidates', 32, -3))); scr.push(xpOp(xpIn(C.picked + 0.3, n, 0.4), penS(1060, 800, 'hands out the city jobs', 32, -3)));
+  const bj = xpIn(C.picked - 0.3, n, 0.4);
+  if (bj > 0) { scr.push(xpOp(xpIn(C.picked - 0.3, n, 0.4), penS(1040, 680, 'picks the candidates', 32, -3))); scr.push(xpOp(xpIn(C.picked - 0.1, n, 0.4), penS(1060, 800, 'hands out the city jobs', 32, -3)));
     s.push(x4Icon('ballot', PY.cx - 190, PY.by - 30, 0.75 * x4Pop(xpIn(C.picked, n, 0.4))) + x4Icon('job', PY.cx + 220, PY.by + 10, 0.7 * x4Pop(xpIn(C.jobs, n, 0.4)))); }
   return xpFrame(n, `<g transform="translate(${zx},${zy}) scale(${f1(z * 1000) / 1000}) translate(${-zx},${-zy})">${s.join('')}</g>`, scr.join(''));
 }
@@ -189,7 +189,7 @@ function renderLedger(n, C = LG_CUE) {
   scr.push(`<g>${xpAbril(P.x + 60, P.y + 92, 'New County Court House', 56, X4.ink)}${xpMono(P.x + 62, P.y + 140, 'ACCOUNTS OF THE COUNTY · NEW YORK', 22, '#5A5040')}</g>`);
   // the stamp: the 1858 limit
   const st = xpIn(C.k250, n, 0.12), stS = 1.25 - 0.25 * ease(st);
-  if (st > 0) scr.push(`<g opacity="${f1(Math.min(1, st * 1.4))}" transform="translate(${P.x + 820},${P.y + 690}) rotate(-8) scale(${f1(stS * 1000) / 1000})"><rect x="-190" y="-58" width="380" height="116" fill="none" stroke="${X4.stamp}" stroke-width="7"/><rect x="-178" y="-46" width="356" height="92" fill="none" stroke="${X4.stamp}" stroke-width="2"/>` +
+  if (st > 0) scr.push(`<g opacity="${f1(Math.min(1, st * 1.4))}" transform="translate(${P.x + 885},${P.y + 112}) rotate(-6) scale(${f1(stS * 850) / 1000})"><rect x="-190" y="-58" width="380" height="116" fill="none" stroke="${X4.stamp}" stroke-width="7"/><rect x="-178" y="-46" width="356" height="92" fill="none" stroke="${X4.stamp}" stroke-width="2"/>` +
     `<text x="0" y="-8" font-family="Mono" font-size="26" letter-spacing="3" fill="${X4.stamp}" text-anchor="middle">LIMIT · LAW OF 1858</text><text x="0" y="34" font-family="Abril" font-size="42" fill="${X4.stamp}" text-anchor="middle">$250,000</text></g>`);
   // the bills, written in as they are read: [cue, label, amount, glint x]
   const rows = [[C.thermo, 'Thermometers', '$7,500.00'], [C.carpets, 'Carpets, shades and curtains', '$675,534.44'], [C.plast, 'One plasterer, two days’ work', '$138,187.00']];
@@ -217,7 +217,6 @@ function renderLedger(n, C = LG_CUE) {
   scr.push(xpOp(xpIn(C.cost, n), xpMono(M.x + M.w / 2, M.y1 - 70, 'COST', 26, XP.teal, 'middle', 4)));
   const big = xpIn(C.y1871, n, 0.4);
   if (big > 0) { const shown = fillV < 1e6 ? `$${Math.round(fillV / 1000)},000` : `$${(fillV / 1e6).toFixed(1)} million`;
-    scr.push(xpOp(big * (1 - xpIn(C.between, n, 0.3)), xpAbril(M.x + M.w / 2, M.y1 - 110, shown, 50, XP.cream, 'middle')));
     scr.push(xpOp(xpIn(C.between, n, 0.4), xpAbril(M.x + M.w / 2, M.y1 - 110, '$11 to 13 million', 46, XP.cream, 'middle')));
     scr.push(tag(M.x - 10, M.y0 + 50, 'BY 1871', big)); }
   scr.push(xpOp(xpIn(C.still, n), penS(P.x + 90, P.y + 800, 'and still not finished', 32, -4)));
@@ -333,7 +332,7 @@ function renderGraft(n, C = GR_CUE) {
   scr.push(tag(330, 900, 'PLUNKITT BUYS IT FIRST · CHEAP', xpIn(C.buy, n)));
   scr.push(tag(SW.x + 20, SW.y - 30, 'THE CITY BUYS IT FROM HIM · A GOOD PRICE', xpIn(C.then + 0.45, n)));
   scr.push(xpOp(xpIn(C.anything, n), penS(240, 300, '“Anything dishonest in that?”', 36, -4)));
-  scr.push(xpOp(xpIn(C.today, n), tapeS(1000, 900, 'INSIDER DEALING', 60, -2, 1, 66)));
+  scr.push(xpOp(xpIn(C.today - 0.35, n), tapeS(1000, 900, 'INSIDER DEALING', 60, -2, 1, 66)));
   scr.push(xpOp(xpIn(C.say, n), tapeS(110, 92, 'HONEST GRAFT', 54, -2, 1, 67)));
   return frame(e3Defs(n), '', `<g transform="translate(${fx},${fy}) scale(${f1(z * 1000) / 1000}) translate(${-fx},${-fy})">${s.join('')}</g>`, scr.join(''), n);
 }
@@ -354,7 +353,7 @@ function renderTombstone(n, C = TB_CUE) {
   scr.push(carve(sy - 520, 'George W. Plunkitt.', 58, k1 * up));
   scr.push(carve(sy - 400, 'He Seen His', 66, k2 * up), carve(sy - 315, 'Opportunities,', 66, k2 * up), carve(sy - 230, "and He Took 'Em.", 66, k2 * up));
   scr.push(tag(130, 1000, 'THE EPITAPH HE WANTED · PLUNKITT OF TAMMANY HALL, 1905', xpIn(C.liked, n)));
-  scr.push(xpOp(xpIn(C.tomb, n), penS(1330, 360, 'seriously', 38, -6)));
+  scr.push(xpOp(xpIn(C.tomb - 0.3, n), penS(1330, 360, 'seriously', 38, -6)));
   return frame(e3Defs(n), '', `<g transform="translate(960,600) scale(${f1(z * 1000) / 1000}) translate(-960,-600)">${s.join('')}${scr.slice(0, 4).join('')}</g>`, scr.slice(4).join(''), n);
 }
 

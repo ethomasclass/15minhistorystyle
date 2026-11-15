@@ -16,7 +16,7 @@ EDITS.ch06 = () => {
     y1875: L('In', 84.28), spanish: L('Spanish', 92.76), nast: L('Nast', 96.84), inIt: L('In', 98.24), so: L('so', 101.28), kid: L('kidnapper.', 102.48), died: L('He', 103.52),
     but: L('But', 106.78), mistake: L('His', 109.92), caught: L('It', 112.82), one: L('One', 114.36), called: L('He', 116.98)};
   const pr = 4.5, cth = 9.0, ledger = c.in1858 - 0.1, who = c.every - 0.1, leak = 58.5, nyt = c.july - 0.1, nast = c.mean - 0.05, brains = c.fat - 0.05, qt = c.supposed - 0.05,
-    jail = c.arrested - 0.05, esc = c.y1875 - 0.1, vigo = c.spanish - 0.1, ins = 98.6, vigo2 = c.so - 0.1, died = c.died + 0.35, spirit = 107.0, title = 115.6;
+    jail = c.arrested - 0.05, esc = c.y1875 - 0.1, vigo = c.spanish - 0.1, ins = 98.35, vigo2 = c.so - 0.1, died = c.died + 0.35, spirit = 107.0, title = 115.6;
   const vigoMap = (T) => (T < ins ? remap([[vigo, 2.6], [96.6, 8.2], [ins, 9.9]])(T) : remap([[vigo2, 10.0], [died, 11.15]])(T));
   // the real page in the officials' hands during the clip's composite hold (8.2 to 11.2 s, camera still): e4VigoPageRect()
   const vigoPage = (t) => { const k = smooth(8.2, 8.45, t) * (1 - smooth(10.95, 11.2, t)); if (k <= 0) return ''; const r = e4VigoPageRect();
@@ -67,10 +67,10 @@ EDITS.ch06 = () => {
     //     page, step into his path and hold it up beside his head (the real Harper's page in their hands).
     {a: vigo, b: ins, cut: true, live: true, draw: (T) => { const t = vigoMap(T); return kQ(() => renderE4Vigo(t)) + vigoPage(t) +
       lTag('VIGO, SPAIN · SEPTEMBER 1876', 130, 120, lVis(T, vigo + 0.2, vigo + 3.6)) +
-      lTag('THE PAGE: HARPER’S WEEKLY, OCTOBER 7, 1876', 130, 990, lVis(T, 95.9, ins + 0.4)); }},
+      lTag('THE PAGE: HARPER’S WEEKLY, OCTOBER 7, 1876', 130, 990, lVis(T, 95.6, ins + 0.4)); }},
     // 15. "In it, Tweed was grabbing two boys by the collar," Nast's cover of July 1, 1876.
     {a: ins, b: vigo2, cut: true, draw: (T) => kDesk(T, ins, vigo2, kCrop('g_tweed/nast_tweed_le_dee_and_tilden_dum_harpers_1876_loc.jpg', {x: 560, y: 60, w: 760, size: [3202, 4000], crop: [0.1, 0.27, 0.92, 0.9], rot: -1, o: fin(T, ins + 0.05, 0.4), T}), 0.05, 960, 500) +
-      lSrc('"TWEED-LE-DEE AND TILDEN-DUM" · NAST, HARPER’S WEEKLY, JULY 1, 1876 · LIBRARY OF CONGRESS', lVis(T, ins + 0.1, vigo2 + 0.4))},
+      lSrc('"TWEED-LE-DEE AND TILDEN-DUM" · NAST, HARPER’S WEEKLY, JULY 1, 1876 · LIBRARY OF CONGRESS', lVis(T, ins, vigo2 + 0.4))},
     // 16. "so they arrested him as a kidnapper."
     {a: vigo2, b: died, cut: true, live: true, draw: (T) => { const t = vigoMap(T); return kQ(() => renderE4Vigo(t)) + vigoPage(t) + lNote('arrested as a kidnapper', 130, 230, lVis(T, c.so, died + 0.3)); }},
     // 17. "He died in a New York jail in 1878."
