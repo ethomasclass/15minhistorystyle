@@ -256,6 +256,9 @@ Object.assign(CLIPS, {ep4_coal: {sec: CO.sec, render: (t) => renderE4Coal(t)}});
 // Ch 2: the coal bucket by the stove is empty, the fire low, frost on the glass: Ma at the stove, Michael at the table with a mug,
 // Tommy restless by the window, then at the table talking. Ch 8: the bucket heaped with coal, the stove bright; Tommy bursts in
 // ("there's a city job for you"), Michael answers flatly ("I've got a job.") and turns back to the window and the stacks.
+// a thin ink outline round a coral figure, so Kellys that overlap stay separate shapes (four ink copies offset under it)
+function e4Outlined(fo, w = 3) { const ink = figure({...fo, fill: '#0D0C09', det: 0, rim: null, tones: {tone: '#0D0C09', lite: '#0D0C09'}});
+  return e3Shadow(fo, fo.h) + [[-w, 0], [w, 0], [0, -w], [0, w]].map(([dx, dy]) => `<g transform="translate(${dx},${dy})">${ink}</g>`).join('') + figure(fo); }
 const KF = {stove: 520, scuttle: 730, table: [1130, 1370], tableEnd: [800, 1040], win: [1250, 1430], chair: 1080};
 function e4KellyRoom(t, full) {
   KF.tbl = full ? KF.tableEnd : KF.table;
@@ -350,7 +353,7 @@ function renderE4KellyFlat(t, o = {}) {
     const da = 70 * smooth(KT.door, KT.door + 0.3, t) * (1 - smooth(KT.in1 + 0.6, KT.in1 + 2.2, t));
     s.push(knDoor(da, -9).svg);
   }
-  s.push(pot, fig(ma) + maOver, room.scuttle, tmProps, fig(mi) + miOver, `<g clip-path="url(#kfroom)">${fig(tm)}</g>`, room.front);
+  s.push(pot, e4Outlined(ma) + maOver, room.scuttle, tmProps, e4Outlined(mi) + miOver, `<g clip-path="url(#kfroom)">${e4Outlined(tm)}</g>`, room.front);
   const world = layerAt(c, 1, s.join(''));
   if (!o.quiet && !full) scr.push(tag(130, 120, 'THE KELLYS\' KITCHEN · WINTER 1887', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t))));
   return frame(e4KfDefs(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr.join(''), t);
@@ -504,7 +507,7 @@ function renderE4Polls(t, o = {}) {
       mi = reach(mi, 'f', T2[0], T2[1], 'po.michael.ticket'); if (up > 0.6) mi = reach(mi, 'b', T2[0] + 16, T2[1] + 4, 'po.michael.ticket2'); }
     ticket += holding(mi, 'f', 'po.michael.ticketH', (gx, gy) => t < MT.take ? '' : e4Ticket(gx - 4, gy + 6, -70 * smooth(MT.take, MT.read[0], t) * (1 - smooth(MT.read[1], MT.read[1] + 0.5, t)) - 12, 1 + 0.25 * smooth(MT.take, MT.read[0], t)));
   } else if (t >= MT.go[0]) { mi = {...mi, an: {...mi.an, fArm: mtr.state === 'walk' ? [160, 140] : [160, 140]}}; ticket += holding(mi, 'f', 'po.michael.ticketH', (gx, gy) => e4Ticket(gx, gy + 4, -16)); }
-  s.push(fig(pc), fig(rv) + rvT, fig(mi), fig(tm), stack, ticket);
+  s.push(fig(pc), fig(rv) + rvT, e4Outlined(mi), e4Outlined(tm), stack, ticket);
   s.splice(1, 0, `<rect x="-1500" y="-800" width="6000" height="${PO.G - 30 + 800}" fill="#C9D6D2" opacity="0.12"/>`);
   const world = layerAt(c, 1, s.join(''));
   const sky = `<rect width="1920" height="1080" fill="#5F7472"/>`;
@@ -599,11 +602,12 @@ Object.assign(CLIPS, {ep4_vigo: {sec: VG.sec, render: (t) => renderE4Vigo(t)}});
 
 /* ================= ep4_bootblack: Plunkitt on his "rostrum", the courthouse bootblack stand, 1905 (ch 7) ================= */
 // The rotunda of Tweed's old county courthouse (simplified from the HABS survey photograph: tall arches, iron galleries, light from
-// the skylight). A shoeshine stand; George Washington Plunkitt (a real person: seen from behind only, a back view drawn for this
-// shot, no face) sits high on it in his top hat, talking, his right hand making his points; a bootblack works on the shoe on the
-// footrest; a younger man with a notebook (the reporter, Riordon) stands by and writes. The left half of the frame is kept clear
-// (the arches and the light) for the handwritten quotes the edit adds. A man 360 px.
-const BB = {sec: 15, H: 360, F: 990, wall: 905, plat: 880, step: 935, cx: 1180, speak: [[0.8, 3.6], [4.2, 7.4], [8.0, 11.2], [11.8, 14.2]]};
+// the skylight). George Washington Plunkitt (a real person: seen from behind, three-quarter rear, no face) sits alone in the high
+// armchair of a shoeshine stand (a raised platform with steps, his feet on the iron footrests, an empty shoeshine box with brushes
+// and a rag set aside on the platform), talking, his right hand making his points. The reporter (Riordon) stands upright about two
+// metres off at the side of the stand and writes in his notebook. Nobody else is near him (the user's note: no figure low at a
+// seated man's feet, anywhere). A slow push-in; the left half of the frame is kept clear for the handwritten quotes. A man 360 px.
+const BB = {sec: 15, H: 360, F: 990, wall: 905, plat: 860, step: 925, cx: 1130, speak: [[0.8, 3.6], [4.2, 7.4], [8.0, 11.2], [11.8, 14.2]]};
 function e4Rotunda(t) {
   const {F, wall} = BB, s = [];
   s.push(`<rect x="-1500" y="-1200" width="5000" height="3600" fill="#141A18"/><rect x="-800" y="-400" width="3600" height="${wall + 400}" fill="#3C4642"/>`);
@@ -640,45 +644,53 @@ function e4BackSitter(x, seatY, h, arm, turn, nod, col = '#0D0C09') {
 }
 function renderE4Bootblack(t, o = {}) {
   const {H, F, plat, step, cx} = BB, s = [e4Rotunda(t)], scr = [];
-  const c = cam2(o.cam || camAt([[0, 1.05, 1000, 600], [5, 1.15, 1060, 620], [10, 1.22, 1100, 630], [15, 1.12, 1040, 610]], t)), lod = lodFor(H * c.z);
-  const sp = e4Speak(BB.speak, t);
-  // the stand: two steps up to a platform, the high chair (we see its back), the footrests, a box of brushes
-  const seatY = plat - 0.42 * H;
-  s.push(MAT.shadow(cx + 40, F + 4, 330, 0.4) + `<rect x="${cx - 260}" y="${plat}" width="560" height="${F - plat}" fill="#2A221A"/><rect x="${cx - 300}" y="${step}" width="640" height="${F - step}" fill="#3A2E22"/><rect x="${cx - 260}" y="${plat}" width="560" height="5" fill="#FFE6C0" opacity="0.18"/><rect x="${cx - 300}" y="${step}" width="640" height="4" fill="#FFE6C0" opacity="0.15"/>`);
-  s.push(`<rect x="${cx + 120}" y="${plat - 120}" width="12" height="120" fill="#120D08"/><path d="M${cx + 100},${plat - 124} l60,-6 l0,10 l-60,6 Z" fill="#6A5A3A"/>`); // the footrest (brass-topped, dull)
-  // his near shoe on the footrest, his trouser leg running out from under the chair
-  const shoe = [cx + 128, plat - 132];
-  s.push(line([[cx + 40, seatY + 20], [cx + 112, plat - 150]], '#0D0C09', 0.07 * H) + `<path d="M${shoe[0] - 26},${shoe[1] + 4} l10,-26 l20,0 q30,6 40,20 l0,6 Z" fill="#0D0C09"/><path d="M${shoe[0] + 6},${shoe[1] - 16} q18,4 26,14" stroke="#F4EFE6" stroke-width="2" opacity="${f1(0.3 + 0.3 * Math.max(0, Math.sin(t * 6)))}" fill="none"/>`);
-  // Plunkitt, from behind: the right hand makes his points while he talks; head turns toward the reporter at the ends of points
+  const c = cam2(o.cam || camAt([[0, 1.0, 1000, 590], [15, 1.24, 1130, 630]], t)), lod = lodFor(H * c.z);
+  const sp = e4Speak(BB.speak, t), ink = '#0D0C09', wood = '#3A2416', woodD = '#24160C';
+  // the stand: two steps up to a wide platform
+  s.push(MAT.shadow(cx + 60, F + 4, 360, 0.4) + `<rect x="${cx - 300}" y="${plat}" width="640" height="${F - plat}" fill="#2A221A"/><rect x="${cx - 340}" y="${step}" width="720" height="${F - step}" fill="#3A2E22"/>` +
+    `<rect x="${cx - 300}" y="${plat}" width="640" height="5" fill="#FFE6C0" opacity="0.18"/><rect x="${cx - 340}" y="${step}" width="720" height="4" fill="#FFE6C0" opacity="0.15"/>` +
+    [0, 1, 2, 3].map((k) => `<rect x="${cx - 280 + k * 160}" y="${plat + 14}" width="120" height="${step - plat - 24}" fill="none" stroke="#1A140E" stroke-width="3"/>`).join(''));
+  // the empty shoeshine box set aside on the platform: a slanted foot block on top, brushes, a tin of polish, a rag over the edge
+  const bx = cx - 230;
+  s.push(`<rect x="${bx}" y="${plat - 62}" width="110" height="62" fill="#4A3A26"/><rect x="${bx}" y="${plat - 62}" width="110" height="4" fill="#FFE6C0" opacity="0.2"/><path d="M${bx + 30},${plat - 62} l14,-26 l40,4 l-6,22 Z" fill="#3A2C1C"/>` +
+    `<rect x="${bx + 8}" y="${plat - 74}" width="24" height="10" rx="3" fill="#5A4428"/><rect x="${bx + 9}" y="${plat - 66}" width="22" height="4" fill="#2A2018"/><ellipse cx="${bx + 96}" cy="${plat - 66}" rx="10" ry="4" fill="#1A1A16"/>` +
+    `<path d="M${bx + 70},${plat - 62} q14,10 6,36 q-10,6 -14,-2 q4,-16 -4,-30 Z" fill="#8C7E66"/>`);
+  // the high armchair, three-quarter from behind (turned toward the right): back panel, seat, arms, four legs on the platform
+  const seatY = plat - 0.4 * H, k = 0.55; // k: how far the seat's front edge is shifted up and right (the turn)
+  const B0 = [cx - 0.18 * H, seatY], B1 = [cx + 0.12 * H, seatY - 0.02 * H], Fr = [0.2 * H * k * 1.6, -0.09 * H]; // back edge, front offset
+  const leg = (P, dx) => `<rect x="${f1(P[0] + dx - 5)}" y="${f1(P[1])}" width="10" height="${f1(plat - P[1])}" fill="${woodD}"/>`;
+  const chairBack = [leg(B0, 4), leg(B1, -4), `<path d="M${f1(B0[0])},${f1(B0[1])} L${f1(B1[0])},${f1(B1[1])} L${f1(B1[0] + Fr[0])},${f1(B1[1] + Fr[1])} L${f1(B0[0] + Fr[0])},${f1(B0[1] + Fr[1])} Z" fill="${wood}"/>`,
+    leg([B1[0] + Fr[0], B1[1] + Fr[1]], -4), leg([B0[0] + Fr[0], B0[1] + Fr[1]], 4)];
+  const backPanel = `<path d="M${f1(B0[0])},${f1(B0[1] + 4)} L${f1(B0[0] + 6)},${f1(seatY - 0.17 * H)} Q${f1((B0[0] + B1[0]) / 2)},${f1(seatY - 0.21 * H)} ${f1(B1[0] - 6)},${f1(seatY - 0.19 * H)} L${f1(B1[0])},${f1(B1[1] + 4)} Z" fill="${wood}"/>` +
+    `<path d="M${f1(B0[0] + 16)},${f1(seatY - 0.02 * H)} L${f1(B0[0] + 20)},${f1(seatY - 0.15 * H)} L${f1(B1[0] - 18)},${f1(seatY - 0.16 * H)} L${f1(B1[0] - 14)},${f1(seatY - 0.03 * H)} Z" fill="none" stroke="#1A0F08" stroke-width="3"/>` +
+    `<path d="M${f1(B0[0] + 6)},${f1(seatY - 0.17 * H)} Q${f1((B0[0] + B1[0]) / 2)},${f1(seatY - 0.21 * H)} ${f1(B1[0] - 6)},${f1(seatY - 0.19 * H)}" stroke="#FFE6C0" stroke-width="3" opacity="0.2" fill="none"/>`;
+  const arm = (P0) => `<path d="M${f1(P0[0])},${f1(P0[1] - 0.09 * H)} L${f1(P0[0] + Fr[0] + 6)},${f1(P0[1] + Fr[1] - 0.09 * H)} L${f1(P0[0] + Fr[0] + 6)},${f1(P0[1] + Fr[1] - 0.07 * H)} L${f1(P0[0])},${f1(P0[1] - 0.07 * H)} Z" fill="${woodD}"/>` + `<rect x="${f1(P0[0] + Fr[0] - 2)}" y="${f1(P0[1] + Fr[1] - 0.08 * H)}" width="8" height="${f1(0.08 * H)}" fill="${woodD}"/>`;
+  // his legs: out from the front of the seat, knees up, shins down to the iron footrests; the shoes on the plates
+  const knee = [B1[0] + Fr[0] + 0.12 * H, seatY - 0.12 * H], foot = [knee[0] + 0.08 * H, plat - 0.2 * H], knee2 = [knee[0] - 0.05 * H, knee[1] + 0.01 * H], foot2 = [foot[0] - 0.06 * H, foot[1] + 0.02 * H];
+  const hip = [B1[0] + 0.02 * H, seatY - 0.06 * H], hip2 = [B0[0] + Fr[0] + 0.1 * H, seatY - 0.08 * H];
+  const legs = line([hip2, knee2, foot2], '#141210', 0.07 * H) + line([hip, knee, foot], ink, 0.075 * H);
+  const rest = (P) => `<rect x="${f1(P[0] - 4)}" y="${f1(P[1] + 6)}" width="8" height="${f1(plat - P[1] - 6)}" fill="#1C2120"/><path d="M${f1(P[0] - 18)},${f1(P[1] + 8)} l46,-6 l0,8 l-46,6 Z" fill="#2E3432"/>`;
+  const shoe = (P, col) => `<path d="M${f1(P[0] - 14)},${f1(P[1] + 6)} l6,-20 l16,0 q26,4 34,16 l0,4 Z" fill="${col}"/>`;
+  const shine = `<path d="M${f1(foot[0] + 8)},${f1(foot[1] - 8)} q14,3 20,10" stroke="#F4EFE6" stroke-width="2" opacity="${f1(0.25 + 0.2 * Math.max(0, Math.sin(t * 1.3)))}" fill="none"/>`;
+  // Plunkitt from behind, three-quarter: the right hand makes his points while he talks; his head turns toward the reporter
   const beat = sp.on ? sp.beat : 0, gK = [[0, 20, 30], [1.0, 60, 110], [2.0, 70, 130], [3.6, 30, 40], [4.4, 80, 150], [5.6, 95, 170], [7.4, 40, 60], [8.2, 70, 120], [9.4, 100, 160], [11.2, 30, 40], [12.0, 85, 150], [14.2, 40, 60], [15, 25, 35]];
-  const arm = e4Keys(gK, t); arm[1] += 10 * beat;
-  const turn = e4Val([[0, 0.2], [3.4, 0.2], [3.9, 0.8], [4.6, 0.4], [7.2, 0.4], [7.7, 0.9], [8.4, 0.3], [11.0, 0.3], [11.5, 0.9], [12.2, 0.4], [15, 0.6]], t);
-  const pk = e4BackSitter(cx, seatY, H * 1.12, arm, turn, -3 * beat);
-  // the chair: arms and the back between us and him (his shoulders, head and hat show above it)
-  const chair = `<rect x="${cx - 0.2 * H}" y="${seatY - 0.11 * H}" width="${0.4 * H}" height="${0.11 * H + 10}" rx="10" fill="#3A2416"/><rect x="${cx - 0.2 * H}" y="${seatY - 0.11 * H}" width="${0.4 * H}" height="6" rx="3" fill="#FFE6C0" opacity="0.2"/>` +
-    `<rect x="${cx - 0.24 * H}" y="${seatY - 0.08 * H}" width="${0.06 * H}" height="${0.08 * H + 10}" fill="#2A1A10"/><rect x="${cx + 0.18 * H}" y="${seatY - 0.08 * H}" width="${0.06 * H}" height="${0.08 * H + 10}" fill="#2A1A10"/>` +
-    `<rect x="${cx - 0.2 * H}" y="${seatY + 10}" width="${0.4 * H}" height="${plat - seatY - 10}" fill="#24160C"/><rect x="${cx - 0.18 * H}" y="${seatY + 10}" width="10" height="${plat - seatY - 10}" fill="#120D08"/><rect x="${cx + 0.18 * H - 10}" y="${seatY + 10}" width="10" height="${plat - seatY - 10}" fill="#120D08"/>`;
-  // his far hand on the far armrest (drawn at the rest: logged as an exact contact)
-  const fh = [cx - 0.215 * H, seatY - 0.085 * H]; E3K.log('hand', 'bb.plunkitt.armrest', fh, fh);
-  const farHand = `<ellipse cx="${f1(fh[0])}" cy="${f1(fh[1])}" rx="${f1(0.03 * H)}" ry="${f1(0.022 * H)}" fill="#0D0C09"/>`;
-  // the bootblack (ink), a boy on a low box on the platform by the footrest, the brush in his near hand on the toe, back and forth
-  const bx = cx + 215, bh = H * 0.62, brush = Math.sin(t * 9.5) * 14, boxTop = plat - 46;
-  let bk = sitOn({x: bx, y: 0, h: bh, d: -1, kind: 'boy', hat: 'boycap', fill: '#0D0C09', det: Math.min(lod.det, 0.5), rim: {c: '#FFE6C0', a: lod.rimA * 0.5, dx: 0.008, dy: -0.005}, an: {tilt: -10 + 2 * Math.sin(t * 1.3), blink: (t + 0.7) % 4 < 0.12}}, boxTop, plat, 0.14, 'bb.boot.seat');
-  bk = {...bk, an: {...bk.an, lean: 10}};
-  const toe = [shoe[0] + 28 + brush, shoe[1] - 10 + Math.abs(brush) * 0.1];
-  bk = reach(bk, 'f', toe[0], toe[1], 'bb.boot.brush'); bk = reach(bk, 'b', shoe[0] + 2, shoe[1] - 4, 'bb.boot.heel');
-  const brushSvg = `<rect x="${bx - 40}" y="${boxTop}" width="70" height="${plat - boxTop}" fill="#4A3A26"/><rect x="${bx - 40}" y="${boxTop}" width="70" height="4" fill="#FFE6C0" opacity="0.2"/>` + holding(bk, 'f', 'bb.boot.brushH', (gx, gy) => `<rect x="${f1(gx - 14)}" y="${f1(gy - 5)}" width="28" height="10" rx="3" fill="#5A4428"/><rect x="${f1(gx - 13)}" y="${f1(gy + 4)}" width="26" height="5" fill="#2A2018"/>`);
-  // the reporter: notebook in his far hand, pencil in the near hand on the page; writes while Plunkitt talks, looks up between
-  const rx = cx + 470, writing = sp.on && (t % 4) > 1.2, rTilt = writing ? -22 : 14 + 2 * Math.sin(t * 0.8);
-  let rp = {x: rx, y: F, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'sack', fill: '#0D0C09', det: lod.det, rim: {c: '#FFE6C0', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005}, an: {...POSES.stand(t, 0.4), tilt: rTilt - 7 * e4Bump(t, 3.7, 0.5) - 7 * e4Bump(t, 11.4, 0.5), expr: 'neutral', blink: (t + 1.9) % 3.8 < 0.12}};
-  rp = e3Stand({...rp, floorY: F}, rx, rx, 0, 'bb.reporter');
-  const nb = [rx - 0.17 * H, F - 0.66 * H];
+  const armA = e4Keys(gK, t); armA[1] += 10 * beat;
+  const turn = e4Val([[0, 0.5], [3.4, 0.5], [3.9, 0.9], [4.6, 0.6], [7.2, 0.6], [7.7, 1.0], [8.4, 0.6], [11.0, 0.6], [11.5, 1.0], [12.2, 0.6], [15, 0.8]], t);
+  const pk = e4BackSitter(cx - 0.02 * H, seatY + 0.02 * H, H * 1.1, armA, turn, -3 * beat);
+  const fh = [B0[0] + 0.03 * H, seatY - 0.085 * H]; E3K.log('hand', 'bb.plunkitt.armrest', fh, fh); // his far hand on the far arm
+  const farHand = `<ellipse cx="${f1(fh[0])}" cy="${f1(fh[1])}" rx="${f1(0.03 * H)}" ry="${f1(0.022 * H)}" fill="${ink}"/>`;
+  // the reporter: upright, about two metres off at the side of the stand; notebook at his chest, writing, looking up between
+  const rx = cx + 640, writing = sp.on && (t % 4) > 1.2, rTilt = writing ? -18 : 14 + 2 * Math.sin(t * 0.8);
+  let rp = {x: rx, y: F, h: H, d: -1, kind: 'man', hat: 'bowler', coat: 'sack', fill: ink, det: lod.det, rim: {c: '#FFE6C0', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005}, an: {...POSES.stand(t, 0.4), tilt: rTilt - 7 * e4Bump(t, 3.7, 0.5) - 7 * e4Bump(t, 11.4, 0.5), expr: 'neutral', blink: (t + 1.9) % 3.8 < 0.12}};
+  rp = e3Stand({...rp, floorY: F}, rx, rx, 0, 'bb.reporter'); rp = {...rp, an: {...rp.an, lean: 0}};
+  const nb = [rx - 0.17 * H, F - 0.68 * H];
   rp = reach(rp, 'b', nb[0] + 22, nb[1] + 10, 'bb.reporter.book');
   const nib = writing ? [nb[0] - 14 + ((t * 40) % 30), nb[1] - 4 + 2 * Math.sin(t * 25)] : [nb[0] - 4, nb[1] + 18];
   rp = reach(rp, 'f', nib[0] + 6, nib[1] + 14, writing ? 'bb.reporter.write' : 'bb.reporter.rest');
   const book = `<g transform="rotate(-24, ${f1(nb[0])}, ${f1(nb[1])})"><rect x="${f1(nb[0] - 26)}" y="${f1(nb[1] - 8)}" width="52" height="16" fill="#EDE6D2"/><rect x="${f1(nb[0] - 26)}" y="${f1(nb[1] + 6)}" width="52" height="4" fill="#3A2E22"/></g>`;
   const pencil = holding(rp, 'f', 'bb.reporter.pencil', (gx, gy) => line([[gx, gy], [gx - 6, gy - 26]], '#3A2E22', 3));
-  s.push(pk.svg, chair, farHand, fig(bk) + brushSvg, fig(rp) + book + pencil);
+  // draw, back to front: the chair's far parts and seat, the far arm; his legs; the man; the back panel and near arm over his lower back
+  s.push(rest(foot2), rest(foot), chairBack.join(''), arm(B0), legs, shoe(foot2, '#141210'), shoe(foot, ink), shine, pk.svg, backPanel, arm(B1), farHand, fig(rp) + book + pencil);
   const world = layerAt(c, 1, s.join(''));
   if (!o.quiet) scr.push(tag(130, 120, 'NEW YORK COUNTY COURTHOUSE · 1905', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t))));
   const defs = e3Defs(t, `<linearGradient id="bbbeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3D6" stop-opacity="0.5"/><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"/></linearGradient>`);
