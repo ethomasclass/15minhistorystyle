@@ -16,12 +16,15 @@ EDITS.brk = () => ({dur: 2.0, shots: [{a: 0, b: 2.0, live: true, draw: (T) => {
   return `<div style="position:absolute;inset:0;background:#0b0b0b"></div>` + svg(chunkMark(960, 540, 230, -110 * (1 - k), o));
 }}]});
 EDITS.endscreen = () => {
-  const dur = 20, V = [[150, 300], [1050, 300]], VW = 720, VH = 405;
+  // Slots sized to YouTube Studio's end-screen elements at 1920x1080: video/playlist cards 614x345 (16:9), subscribe circle
+  // 298 across; all inside the 10% safe margin (x 192-1728, y 108-972), so the elements drop straight onto the boxes.
+  const dur = 20, VW = 614, VH = 345, GAP = 80, X0 = (1920 - 2 * VW - GAP) / 2, VY = 250, V = [[X0, VY], [X0 + VW + GAP, VY]];
+  const R = 149, CY = 780;
   return {dur, fadeOut: 1.0, shots: [{a: 0, b: dur, draw: (T) => desk() +
-    svg(chunkMark(960, 120, 110, 0, fin(T, 0.2, 0.5)) +
+    svg(chunkMark(960, 132, 96, 0, fin(T, 0.2, 0.5)) +
       V.map(([x, y]) => `<rect x="${x}" y="${y}" width="${VW}" height="${VH}" rx="6" fill="rgba(13,12,9,.55)" stroke="#2FE0C4" stroke-opacity=".35" stroke-width="3"/>`).join('') +
-      `<circle cx="960" cy="860" r="92" fill="rgba(13,12,9,.55)" stroke="#FF6F61" stroke-opacity=".45" stroke-width="3"/>`) +
-    op(fin(T, 0.4, 0.5), mono('watch next', {x: 150, y: 250, size: 26, color: C.teal, ls: 5})) +
-    op(fin(T, 0.6, 0.5), mono('more from the gilded age', {x: 1050, y: 250, size: 26, color: C.teal, ls: 5})) +
-    op(fin(T, 0.8, 0.5), mono('subscribe', {x: 0, y: 975, size: 24, color: C.cream, ls: 6, extra: 'width:1920px;text-align:center'}))}]};
+      `<circle cx="960" cy="${CY}" r="${R}" fill="rgba(13,12,9,.55)" stroke="#FF6F61" stroke-opacity=".45" stroke-width="3"/>`) +
+    op(fin(T, 0.4, 0.5), mono('watch next', {x: V[0][0], y: VY - 44, size: 24, color: C.teal, ls: 5})) +
+    op(fin(T, 0.6, 0.5), mono('more from the gilded age', {x: V[1][0], y: VY - 44, size: 24, color: C.teal, ls: 5})) +
+    op(fin(T, 0.8, 0.5), mono('subscribe', {x: 0, y: CY + R + 16, size: 24, color: C.cream, ls: 6, extra: 'width:1920px;text-align:center'}))}]};
 };

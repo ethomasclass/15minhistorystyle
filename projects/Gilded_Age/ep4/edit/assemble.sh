@@ -1,7 +1,7 @@
 #!/bin/bash
 # The episode so far, as Ep 3's assemble.sh: chapter 1 (cold open, ending on its baton card "Bursting at the Seams"), the Chunk
 # intro + title card (Ep 2 and 3's exact intro: the logo assembles centred, then lifts to make way for the title), chapters 2 to 8
-# back to back (each ends on its baton card; no mark snap between chapters, as Ep 3 final), and the 20 s end screen after chapter 8.
+# each ending on its baton card, with the 2 s Chunk mark snap before chapters 3 to 8 (as Ep 1 and 2), and the 20 s end screen after chapter 8.
 # Chapters not built yet are skipped. Two-pass loudness master to -14 LUFS.
 #   -> review/ep4_full_720p.mp4 + review/ep4_preview.mp4 (540p)
 #   PREVIEW=coldopen ./assemble.sh   only chapter 1 + the title card -> review/ep4_coldopen_preview.mp4 (720p, for review)
@@ -22,7 +22,9 @@ ST="aformat=sample_rates=44100:channel_layouts=stereo"
 [ -f review/title_${RES}p.mp4 ] || card title 4.2 -i $M1/chunk_jingle.mp3 -filter_complex "[1]atempo=1.4,atrim=0:3.1,asetpts=PTS-STARTPTS,afade=t=out:st=2.8:d=0.3,apad=whole_dur=4.2,$ST[a]"
 if [ "$PREVIEW" = coldopen ]; then PARTS=(ch01 title); OUT=ep4_coldopen; else
   PARTS=(ch01 title)
-  for c in ch02 ch03 ch04 ch05 ch06 ch07 ch08; do [ -f review/${c}_${RES}p.mp4 ] && PARTS+=($c); done   # no mark snap: the baton card (with its chunk_snap) ends each chapter
+  # the 2 s Chunk mark snap (as Ep 1 and 2) between chapters: after each baton card, before chapters 3 to 8
+  [ -f review/brk_${RES}p.mp4 ] || card brk 2.0 -i ../public/sfx/chunk_snap.wav -filter_complex "[1]atrim=0:1.2,asetpts=PTS-STARTPTS,volume=0.3,afade=t=out:st=1.1:d=0.1,apad=whole_dur=2.0,$ST[a]"
+  for c in ch02 ch03 ch04 ch05 ch06 ch07 ch08; do [ -f review/${c}_${RES}p.mp4 ] && { [ $c != ch02 ] && PARTS+=(brk); PARTS+=($c); }; done
   # the 20 s end screen after chapter 8: ga_gilded_theme (the series end theme, Ep 1) carries on from END_THEME_AT
   if [ -f review/ch08_${RES}p.mp4 ]; then
     [ -f review/endscreen_${RES}p.mp4 ] || card endscreen 20 -ss ${END_THEME_AT:-0} -i $M1/ga_gilded_theme.mp3 -filter_complex "[1]atrim=0:20,asetpts=PTS-STARTPTS,volume=0.105,afade=t=in:d=0.08,afade=t=out:st=18.5:d=1.5,apad=whole_dur=20,$ST[a]"
