@@ -520,7 +520,8 @@ Object.assign(CLIPS, {ep4_polls: {sec: PO.sec, render: (t) => renderE4Polls(t)}}
 // it to him, back to it, to him; lower it and step in front of him. One holds the page up beside him: the camera pushes in and holds
 // still (8.2 to 11.2 s) so the edit can lay the real Harper's page (Oct 7, 1876, "The Capture of Tweed") into the page's frame.
 // The page in the clip is a clean cream sheet with a thin border, proportioned like that scan (2710 x 4000). A man 300 px.
-const VG = {sec: 13, H: 300, G: 930, page: {w: 150, h: 221}, hold: [8.2, 11.2], cam: [2.35, 1300, 640]};
+const VG = {sec: 13, H: 300, G: 930, page: {w: 150, h: 221}, hold: [8.2, 11.2], cam: [2.35, 1255, 690]};
+VG.holdP = (x1) => [x1 + 0.2 * VG.H + VG.page.w / 2, VG.G - 0.66 * VG.H];
 // points given in a figure's head frame (local units, the head's tilt applied), to world: hats over a bare head
 function e4HeadPts(fo, a) { const tl = (fo.an && fo.an.tilt || 0) * Math.PI / 180;
   return a.map(([lx, ly]) => { const dx = lx, dy = ly - 0.86; return E3K.toWorld(fo, dx * Math.cos(tl) - dy * Math.sin(tl), 0.86 + dx * Math.sin(tl) + dy * Math.cos(tl)); }); }
@@ -545,7 +546,7 @@ function renderE4Vigo(t, o = {}) {
   for (const bx of [700, 1800, 2400]) s.push(MAT.shadow(bx, G + 34, 30, 0.35) + `<path d="M${bx - 18},${G + 34} l4,-46 q14,-10 28,0 l4,46 Z" fill="#2A2420"/>`);
   s.push(`<rect x="1620" y="${G - 70}" width="110" height="90" fill="#6A5236"/><rect x="1690" y="${G - 140}" width="90" height="70" fill="#5A4430"/><path d="M1550,${G + 20} q-10,-60 40,-64 q50,4 40,64 Z" fill="#8A7A5A"/>`);
   // ---- Tweed: down the gangplank's foot and along the quay, slowing; stopped by the officials ----
-  const TW = {w0: 0.6, w1: 6.1, x0: 880, x1: 1150};
+  const TW = {w0: 0.6, w1: 6.0, x0: 880, x1: 1110};
   const twBase = {kind: 'man', hat: 'bowler', coat: 'frock', fill: ink, det: 0, rim: sun, h: H * 1.04, an: {tilt: t > 6 ? 6 * smooth(6, 6.5, t) : 2, blink: false}};
   const twT = e4Track(twBase, {x: TW.x0, d: 1, G, walks: [{t0: TW.w0, t1: TW.w1, to: TW.x1, a: 0.3}]}, t, 'vg.tweed');
   let tw = twT.fo;
@@ -553,29 +554,30 @@ function renderE4Vigo(t, o = {}) {
   // a carpet bag in his far hand
   tw = {...tw, an: {...tw.an, bArm: twT.state === 'walk' ? tw.an.bArm : [188, 192]}};
   const bag = holding(tw, 'b', 'vg.tweed.bag', (gx, gy) => `<path d="M${f1(gx - 26)},${f1(gy + 16)} q26,-26 52,0 l6,46 l-64,0 Z" fill="#3A2A20"/><path d="M${f1(gx - 10)},${f1(gy + 6)} q10,-12 20,0" stroke="#3A2A20" stroke-width="4" fill="none"/>`);
-  // ---- the officials: holding the page up between them; look at it, at him, at it; lower it and step in front of him ----
-  const OF = {raise: [2.2, 2.8], look: [[3.2, -12], [3.9, 4], [4.4, -12], [4.75, 6], [5.0, 6]], lower: [5.2, 5.6], step: [5.4, 6.1], hold: [7.2, 7.8], tap: 11.6};
-  const ax0 = 1430, bx0 = 1540, ax1 = 1260, bx1 = 1370, step = smooth(OF.step[0], OF.step[1], t);
-  const oBase = (x, k) => ({x, y: G, h: H * (1 + 0.03 * k), d: -1, kind: 'man', hat: 'none', coat: 'frock', fill: ink, det: Math.min(lod.det, 0.65), rim: sun, floorY: G, an: {...POSES.stand(t, 0.3 + 0.4 * k), tilt: 0, blink: (t + k * 1.3) % 3.9 < 0.12}});
+  // ---- the officials: A holds the page up at arm's length and looks from it to him and back, B peering over A's shoulder; they
+  // lower it and walk into his path; A holds it up beside Tweed's head (the composite hold); B points from the page to the man ----
+  const OF = {raise: [2.2, 2.8], look: [[3.2, -10], [3.9, 6], [4.4, -10], [4.75, 8], [5.0, 8]], lower: [5.1, 5.5], walk: [5.3, 6.5], hold: [7.0, 7.8], point: [11.3, 12.6]};
+  const ax0 = 1440, bx0 = 1560, ax1 = 1535, bx1 = 1640;
   const lookA = e4Val([[0, 0], ...OF.look], t), lookB = e4Val([[0, 0], ...OF.look.map(([tt, v]) => [tt + 0.15, v])], t);
-  let oa = e3Stand({...oBase(ax0, 0), an: {...oBase(ax0, 0).an, tilt: lookA, expr: t > 4.6 ? 'awe' : 'neutral'}}, ax0, ax1, step > 0 && step < 1 ? step : 0, 'vg.offA');
-  let ob = e3Stand({...oBase(bx0, 1), an: {...oBase(bx0, 1).an, tilt: lookB, expr: t > 4.8 ? 'awe' : 'neutral'}}, bx0, bx1, step > 0 && step < 1 ? step : 0, 'vg.offB');
-  if (step >= 1) { oa = e3Stand({...oa, x: ax1}, ax1, ax1, 0, 'vg.offA.st'); ob = e3Stand({...ob, x: bx1}, bx1, bx1, 0, 'vg.offB.st'); }
-  // the page: between them while they compare; then A holds it up beside Tweed (the composite hold)
+  const oBase = (k, tilt, expr) => ({kind: 'man', hat: 'none', coat: 'frock', fill: ink, h: H * (1 + 0.03 * k), det: Math.min(lod.det, 0.65), rim: sun, an: {tilt, expr, blink: (t + k * 1.3) % 3.9 < 0.12}});
+  const trA = e4Track(oBase(0, lookA, t > 4.6 && t < 7 ? 'awe' : 'neutral'), {x: ax0 + 160, d: -1, G, ph: 0.3, walks: [{t0: OF.walk[0], t1: OF.walk[1], to: ax1 - 140, dAfter: -1}]}, t, 'vg.offA');
+  const trB = e4Track(oBase(1, lookB + (t > 3 && t < 5.1 ? 4 : 0), t > 4.8 && t < 7 ? 'awe' : 'neutral'), {x: bx0 + 160, d: -1, G: G - 6, ph: 0.6, walks: [{t0: OF.walk[0] + 0.15, t1: OF.walk[1] + 0.2, to: bx1 - 140, dAfter: -1}]}, t, 'vg.offB');
+  let oa = trA.fo, ob = trB.fo;
+  if (trB.state !== 'walk' && t > 3.0 && t < 5.1) ob = {...ob, an: {...ob.an, lean: 6 * smooth(3.0, 3.4, t) * (1 - smooth(4.8, 5.1, t))}};
+  // the page: up at A's arm's length (compare), lowered while they walk (in his near hand), then held up beside Tweed's head
   const up = smooth(OF.raise[0], OF.raise[1], t) * (1 - smooth(OF.lower[0], OF.lower[1], t)), hold = smooth(OF.hold[0], OF.hold[1], t);
-  const cmpP = [(oa.x + ob.x) / 2 - 40, G - 0.66 * H - 40 * up], holdP = [TW.x1 + 0.36 * H, G - 0.62 * H];
-  let pc = up > 0.01 ? cmpP : hold > 0 ? [lerp(oa.x - 0.12 * H, holdP[0], hold), lerp(G - 0.45 * H, holdP[1], hold)] : null; // page centre
-  const restP = [oa.x - 0.12 * H, G - 0.45 * H];
-  if (!pc && t > OF.lower[1] && t < OF.hold[0]) pc = [lerp(cmpP[0], restP[0], smooth(OF.lower[0], OF.lower[1] + 0.2, t)), lerp(cmpP[1], restP[1], smooth(OF.lower[0], OF.lower[1] + 0.2, t))];
-  if (!pc) pc = [(oa.x + ob.x) / 2 - 40, G - 0.5 * H];
-  if (t >= OF.lower[0] && t < OF.hold[0] && up < 0.99) pc = [lerp(cmpP[0], oa.x - 0.12 * H, smooth(OF.lower[0], OF.lower[1], t)), lerp((G - 0.66 * H - 40), G - 0.45 * H, smooth(OF.lower[0], OF.lower[1], t))];
-  const pw = page.w * (t > OF.hold[0] ? 1 : 0.8), ph = page.h * (t > OF.hold[0] ? 1 : 0.8);
-  // hands on the page's edges: before the hold both men hold a side each; for the hold, A alone, at its lower corners' height
-  if (t < OF.hold[0]) { oa = reach(oa, 'f', pc[0] + pw / 2 - 4, pc[1], 'vg.offA.page'); if (t < OF.lower[1] + 0.3) ob = reach(ob, 'f', pc[0] - pw / 2 + 4, pc[1] + 4, 'vg.offB.page'); }
-  else { oa = reach(oa, 'f', pc[0] + pw / 2 - 4, pc[1] + ph * 0.18, 'vg.offA.pageR'); oa = reach(oa, 'b', pc[0] + pw / 2 - 4, pc[1] - ph * 0.18, 'vg.offA.pageR2'); }
-  // B, after letting go of the page, lays a hand on Tweed's arm (11.6)
-  if (t > OF.lower[1] + 0.3) { const arm = E3K.toWorld(tw, 0.06, 0.6), g = E3K.hand({...ob, an: {...ob.an, fArm: [175, 172]}}, 'f'), k = smooth(OF.tap - 0.4, OF.tap, t);
-    ob = k <= 0 ? {...ob, an: {...ob.an, fArm: [175, 172]}} : k < 1 ? e3Move(ob, 'f', lerp(g.x, arm[0], k), lerp(g.y, arm[1], k), 'vg.offB.toArm') : reach(ob, 'f', arm[0], arm[1], 'vg.offB.arm'); }
+  const full = t >= OF.hold[0], pw = page.w * (full ? lerp(0.8, 1, hold) : 0.8), ph = page.h * (full ? lerp(0.8, 1, hold) : 0.8);
+  const shA = E3K.shoulder(oa, 'f'), cmpP = [shA[0] - 0.25 * H - pw / 2 + 10, shA[1] - 0.02 * H], lowP = [oa.x - 0.14 * H - pw / 2 + 12, oa.y - 0.56 * H];
+  const holdP = VG.holdP(TW.x1);
+  let pc;
+  if (t < OF.hold[0]) { const k = up; pc = [lerp(lowP[0], cmpP[0], k), lerp(lowP[1], cmpP[1], k)]; }
+  else pc = [lerp(lowP[0], holdP[0], hold), lerp(lowP[1], holdP[1], hold)];
+  // A's hands on the page's right edge (the near edge to him): both while it is up, the near hand while lowered
+  const edge = (dy) => [pc[0] + pw / 2 - 3, pc[1] + dy];
+  oa = reach(oa, 'f', ...edge(ph * 0.1), 'vg.offA.page'); if (up > 0.5 || hold > 0.5) oa = reach(oa, 'b', ...edge(-ph * 0.22), 'vg.offA.page2');
+  // B points from the page to the man at the end
+  if (t > OF.point[0]) { const k = smooth(OF.point[0], OF.point[0] + 0.4, t) * (1 - smooth(OF.point[1] - 0.3, OF.point[1], t)), g = E3K.hand(ob, 'f'), tgt = k < 0.5 ? [pc[0] + 10, pc[1] - 30] : [TW.x1 + 0.08 * H, G - 0.8 * H];
+    ob = e3Move(ob, 'f', lerp(g.x, tgt[0], Math.min(1, k * 1.4)), lerp(g.y, tgt[1], Math.min(1, k * 1.4)), 'vg.offB.point'); }
   const pageSvg = `<rect x="${f1(pc[0] - pw / 2 + 5)}" y="${f1(pc[1] - ph / 2 + 6)}" width="${f1(pw)}" height="${f1(ph)}" fill="#000" opacity="0.2"/><rect x="${f1(pc[0] - pw / 2)}" y="${f1(pc[1] - ph / 2)}" width="${f1(pw)}" height="${f1(ph)}" fill="#F1EADA"/>` +
     `<rect x="${f1(pc[0] - pw / 2 + 5)}" y="${f1(pc[1] - ph / 2 + 5)}" width="${f1(pw - 10)}" height="${f1(ph - 10)}" fill="none" stroke="#2A2620" stroke-width="1.2" opacity="0.6"/>`;
   // long sun shadows on the quay (sun high on the right)
@@ -590,7 +592,7 @@ function renderE4Vigo(t, o = {}) {
   return frame(defs, sky, world, scr.join(''), t);
 }
 // the page's rectangle on screen during the hold (for the composite): world centre and size through the hold camera
-function e4VigoPageRect() { const c = cam2({z: VG.cam[0], ux: VG.cam[1], uy: VG.cam[2]}), pc = [1150 + 0.36 * VG.H, VG.G - 0.62 * VG.H], w = VG.page.w * c.z, h = VG.page.h * c.z;
+function e4VigoPageRect() { const c = cam2({z: VG.cam[0], ux: VG.cam[1], uy: VG.cam[2]}), pc = VG.holdP(1110), w = VG.page.w * c.z, h = VG.page.h * c.z;
   return {x: c.sx(pc[0]) - w / 2, y: c.sy(pc[1]) - h / 2, w, h}; }
 if (typeof window !== 'undefined') Object.assign(window, {renderE4Vigo, e4VigoPageRect});
 Object.assign(CLIPS, {ep4_vigo: {sec: VG.sec, render: (t) => renderE4Vigo(t)}});
