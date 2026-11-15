@@ -65,7 +65,7 @@ function figure(o) {
   const hs = child ? 1.42 : 1;
   const prof = kind === 'woman' ? {brow: 0.058, nose: 0.018, lip: 0.067, chin: 0.05} : child ? {brow: 0.058, nose: 0.012, lip: 0.064, chin: 0.05} : {brow: 0.064, nose: 0.026, lip: 0.066, chin: 0.056};
   const EXPR = {neutral: {open: 0}, smile: {open: 0}, worried: {open: 0}, awe: {open: 0.009}, set: {open: 0}};
-  const expr = EXPR[an.expr] ? an.expr : 'neutral', jaw = EXPR[expr].open;
+  const expr = EXPR[an.expr] ? an.expr : 'neutral', jaw = an.jaw != null ? an.jaw : EXPR[expr].open; // an.jaw (Ep 4): a speaking mouth without the awe face
   const HP = (dx, dy) => [X(0.008 + dx * hs), Y(headY + dy * hs)];
   const hpS = (dx, dy) => { const [a, b] = HP(dx, dy); return `${f1(a)},${f1(b)}`; };
   function headPath() {
