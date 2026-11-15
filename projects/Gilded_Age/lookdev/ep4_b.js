@@ -142,9 +142,9 @@ function renderE4Club(t, o = {}) {
   if (py.state !== 'walk' || ym.an.hatInHand) { const g = E3K.hand(ym, 'f'); if (ym.an.hatInHand && !(t > 23.25)) ym = reach(ym, 'b', g.x - (ym.d ?? 1) * 0.03 * ym.h, g.y + 0.02 * ym.h, 'cb.young.cap'); }
   if (t > 23.0) ym = {...ym, an: {...ym.an, hatInHand: t < 23.3}};
   // ---- Tommy (coral) darts in from the saloon with a note, gives it to the captain, darts out ----
-  const TS = {in0: 18.2, in1: 19.5, give: 19.8, out0: 20.6, out1: 22.0};
+  const TS = {in0: 17.6, in1: 19.5, give: 19.8, out0: 20.6, out1: 22.5};
   const tomBase = cast('brother', {x: 0, y: 0, h: H * 1.12, hat: 'boycap', wear: [], det, rim: rimW(900), an: {tilt: 6, expr: 'smile', blink: (t + 0.3) % 3.4 < 0.12}});
-  const tr = e4Track({...tomBase, an: {...tomBase.an}}, {x: 2050, d: -1, G: GT, ph: 0.5, walks: [{t0: TS.in0, t1: TS.in1, to: 900, dAfter: -1, a: 0.15, carry: true, an: {fArm: [150, 120]}}, {t0: TS.out0, t1: TS.out1, to: 2100, a: 0.12}]}, t, 'cb.tommy');
+  const tr = e4Track({...tomBase, an: {...tomBase.an}}, {x: 1840, d: -1, G: GT, ph: 0.5, walks: [{t0: TS.in0, t1: TS.in1, to: 900, dAfter: -1, a: 0.15, carry: true, an: {fArm: [150, 120]}}, {t0: TS.out0, t1: TS.out1, to: 1860, a: 0.12}]}, t, 'cb.tommy');
   let tm = tr.fo; if (tr.state !== 'walk' && t > TS.in1 && t < TS.out0) tm = {...tm, an: {...tm.an, lean: 6, tilt: 10}};
   const NP = [808, top - 44];
   if (t > TS.in0 && t < TS.give + 0.1) { if (t < TS.in1 + 0.05) noteSvg = holding(tm, 'f', 'cb.tommy.note', (gx, gy) => `<rect x="${f1(gx - 14)}" y="${f1(gy - 8)}" width="22" height="10" fill="#E9E0C8"/>`);
@@ -301,8 +301,9 @@ function renderE4KellyFlat(t, o = {}) {
   const lod = lodFor(H * c.z), det = lod.det, rimW = {c: '#FFE6C9', a: lod.rimA * 0.7 * room.fl, dx: -0.008, dy: -0.004}, rimC = {c: '#DCE8E6', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005};
   // ---- Ma at the stove: stirring the pot (ch 8), or looking down at the empty bucket and warming her hands (ch 2) ----
   const mx = KF.stove + 290;
-  let ma = cast('mother', {x: mx, y: F, h: H, d: -1, det, rim: rimW, an: {...POSES.stand(t, 0.5), tilt: full ? -12 + (t > 9.4 && t < 12 ? 16 : 0) : (t < 4.5 ? -24 : -8), expr: full && t > 9.6 ? 'worried' : 'neutral', blink: (t + 0.6) % 3.8 < 0.12}});
-  ma = e3Stand({...ma, floorY: F}, mx, mx, 0, 'kf.ma');
+  const mF = full ? F - 16 : F;
+  let ma = cast('mother', {x: mx, y: mF, h: H, d: -1, det, rim: rimW, an: {...POSES.stand(t, 0.5), tilt: full ? -12 + (t > 9.4 && t < 12 ? 16 : 0) : (t < 4.5 ? -24 : -8), expr: full && t > 9.6 ? 'worried' : 'neutral', blink: (t + 0.6) % 3.8 < 0.12}});
+  ma = e3Stand({...ma, floorY: mF}, mx, mx, 0, 'kf.ma');
   const potP = [KF.stove + 120, RM.wallFoot - 280];
   if (full) { const k = Math.sin(t * 3.1); ma = {...ma, an: {...ma.an, lean: 8}}; ma = reach(ma, 'f', potP[0] + 18 * k, potP[1] - 4 * Math.abs(k), 'kf.ma.spoon'); ma = reach(ma, 'b', potP[0] + 46, potP[1] + 4, 'kf.ma.pot'); }
   else { const warm = smooth(4.5, 5.2, t), rub = Math.sin(t * 7) * 6 * warm; const hp = [KF.stove + 210, RM.wallFoot - 200];
@@ -324,10 +325,10 @@ function renderE4KellyFlat(t, o = {}) {
     tmProps = e4Mug(mug[0], mug[1]) + `<rect x="${cx - 50}" y="${F - 0.24 * H}" width="100" height="12" fill="#0D0C09"/><rect x="${cx - 46}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${cx + 34}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${cx - 50}" y="${F - 0.24 * H - 220}" width="10" height="220" fill="#0D0C09"/>`;
     const tsp = e4Speak([[8.0, 9.4], [9.7, 10.6]], t);
     const tBase = cast('brother', {x: 0, y: 0, h: H * 1.12, hat: 'boycap', wear: [], det, rim: rimC, an: {tilt: t < 6 ? 8 + 4 * Math.sin(t * 1.3) : 6 + 4 * tsp.beat, expr: 'smile', jaw: tsp.jaw, blink: (t + 0.2) % 3.3 < 0.12}});
-    const tr = e4Track(tBase, {x: 1330, d: -1, G: F, ph: 0.8, walks: [{t0: 6.0, t1: 7.0, to: 1410, dAfter: -1, a: 0.2}]}, t, 'kf.tommy');
+    const tr = e4Track(tBase, {x: 1330, d: -1, G: F, ph: 0.8, walks: [{t0: 6.0, t1: 7.0, to: 1385, dAfter: -1, a: 0.2}]}, t, 'kf.tommy');
     tm = tr.fo;
     if (tr.state === 'start') { const bounce = 0.012 * Math.abs(Math.sin(t * 5.2)); tm = {...tm, an: {...tm.an, bob: 0}}; tm = e3Stand({...tm, y: F - bounce * 0 }, tm.x, tm.x, 0, 'kf.tommy.bounce'); tm = {...tm, d: t > 2.2 && t < 4.6 ? 1 : -1, an: {...tm.an, tilt: t > 2.2 && t < 4.6 ? 14 : tm.an.tilt}}; } // looking out, then round
-    if (tr.state === 'stand' && t > 7.6) { const lean = smooth(7.6, 8.0, t); tm = {...tm, an: {...tm.an, lean: 10 * lean}}; const T1 = [KF.table[1] - 20, ty - 1], T2 = [KF.table[1] - 64, ty - 1];
+    if (tr.state === 'stand' && t > 7.6) { const lean = smooth(7.6, 8.0, t); tm = {...tm, an: {...tm.an, lean: 10 * lean}}; const T1 = [KF.table[1] - 40, ty - 1], T2 = [KF.table[1] - 84, ty - 1];
       tm = lean < 1 ? e3Move(tm, 'f', lerp(E3K.hand(tm, 'f').x, T2[0], lean), lerp(E3K.hand(tm, 'f').y, T2[1], lean), 'kf.tommy.toTable') : reach(tm, 'f', T2[0] + (tsp.on ? 0 : 0), T2[1], 'kf.tommy.table');
       if (lean >= 1) { tm = reach(tm, 'b', T1[0], T1[1], 'kf.tommy.table2'); if (tsp.on && t > 9.7) { const g = E3K.hand(tm, 'f'); tm = e3Move(tm, 'f', g.x, g.y - 60 * tsp.beat, 'kf.tommy.gesture'); } } }
   } else {
@@ -339,7 +340,7 @@ function renderE4KellyFlat(t, o = {}) {
     mi = e3Stand({...mi, floorY: F}, mxw, mxw, 0, 'kf.michael.stand');
     if (!toT) { mi = {...mi, an: {...mi.an, ...E3_FOLD, lean: 0}}; miOver = foldedArms(mi.x, mi.y, mi.h, mi.d, mi.fill, mi.tones.tone); }
     const tBase = cast('brother', {x: 0, y: 0, h: H * 1.12, hat: 'boycap', wear: [], det, rim: rimW, an: {tilt: 4 + 5 * tsp.beat + (t > 9.4 ? -10 * smooth(9.4, 10.2, t) : 0), expr: t > 9.4 ? 'neutral' : 'smile', jaw: tsp.jaw, blink: (t + 0.9) % 3.3 < 0.12}});
-    const tr = e4Track(tBase, {x: RM.x0 - 200, d: 1, G: F, ph: 0.8, walks: [{t0: KT.in0, t1: KT.in1, to: mxw - 250, dAfter: 1, a: 0.14}]}, t, 'kf.tommy');
+    const tr = e4Track(tBase, {x: RM.x0 - 200, d: 1, G: F + 24, ph: 0.8, walks: [{t0: KT.in0, t1: KT.in1, to: mxw - 250, dAfter: 1, a: 0.14}]}, t, 'kf.tommy');
     tm = tr.fo;
     if (tr.state === 'stand' || tr.state === 'settle') { // fast, bright gestures while he talks; arms fall at Michael's answer; a shrug
       const b = tsp.on ? 10 * tsp.beat : 0;
