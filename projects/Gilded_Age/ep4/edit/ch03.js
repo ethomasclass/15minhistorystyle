@@ -20,15 +20,15 @@ EDITS.ch03 = () => {
     //    groceries. And frames of iron and steel, strong enough to hold the whole building up." The cutaway: the car rises floor by
     //    floor while a neighbour with a grocery bag trudges up the stairs; Otis's patent (1861) beside it; the frame draws on, then
     //    the walls hang on it.
-    {a: 0, b: c.in1885 - 0.1, draw: (T) => svg(e4xFrame(T, {a: 0, elev: c.safety + 0.2, frame: c.frames, hold: c.hold})) +
+    {a: 0, b: c.in1885 + 0.4, draw: (T) => svg(e4xFrame(T, {a: 0, elev: c.safety + 0.2, frame: c.frames, hold: c.hold})) +
       lTag('UP', 130, 120, lVis(T, 0.2, c.safety + 0.4)) +
       (T < c.frames + 0.2 ? op(fin(T, c.safety, 0.4) * fout(T, c.frames - 0.2, 0.35), printCard('b_building_up/otis_elevator_patent_drawing_1861_commons.jpg', {x: 1120, y: 150, w: 640, ar: 0.676, rot: 1.5, o: 1, T, caption: 'E. G. Otis, elevator patent, 1861'})) : '') +
       lTag('SAFETY ELEVATOR', 1120, 690, lVis(T, c.safety + 0.3, c.frames - 0.1)) +
       P_('ten flights of stairs', 1080, 860, lVis(T, c.climb, c.frames - 0.1), 32) + P_('every day, with groceries', 1080, 950, lVis(T, c.every, c.frames - 0.1), 30) +
       lTag('IRON AND STEEL FRAME', 1120, 360, fin(T, c.frames + 0.2, 0.3)) + P_('the frame holds the building up', 1080, 480, fin(T, c.strong, 0.3), 32) +
-      P_('the walls just hang on it', 1080, 590, fin(T, c.hold + 0.3, 0.3), 32)},
+      P_('the walls just hang on it', 1080, 590, fin(T, c.hold - 0.6, 0.3), 32)},
     // 2. "In 1885, Chicago's Home Insurance Building rose ten stories into the sky. Many people call it the first skyscraper."
-    {a: c.in1885 - 0.1, b: c.then - 0.1, draw: (T) => push(T, c.in1885, c.then, 0.05) +
+    {a: c.in1885 + 0.4, b: c.then - 0.1, draw: (T) => push(T, c.in1885, c.then, 0.05) +
       printCard('b_building_up/chicago_building_of_the_home_insurance_co_1885_loc.jpg', {x: 200, y: 60, w: 720, ar: 1.222, rot: -1.2, o: fin(T, c.in1885 - 0.1, 0.45), T}) + `</div>` +
       lSrc('The Chicago Building of the Home Insurance Co. &middot; lithograph, 1885', fin(T, c.in1885 + 0.2)) +
       bigFig('1885', {x: 1020, y: 160, size: 150, w: 700, align: 'left', o: fin(T, c.in1885, 0.3)}) +
@@ -43,7 +43,7 @@ EDITS.ch03 = () => {
     {a: c.steam - 0.1, b: c.and1888 - 0.1, draw: (T) => push(T, c.steam, c.and1888, 0.06) +
       printCard('c_transit/elevated_s_curve_110th_street_photo_c1889_commons.jpg', {x: 300, y: 70, w: 1300, ar: 0.7, rot: -1, o: fin(T, c.steam - 0.1, 0.45), T}) + `</div>` +
       lSrc('The elevated railway at 110th Street &middot; photograph, about 1889', fin(T, c.steam + 0.2)) +
-      lTag('ELEVATED RAILWAY · MANHATTAN', 1080, 1000, fin(T, c.elevated, 0.3))},
+      lTag('ELEVATED RAILWAY · MANHATTAN', 1080, 1000, fin(T, c.steam + 0.3, 0.3))},
     // 5. "And in 1888, in Richmond, Virginia, Frank Sprague got a whole system of electric streetcars running." Drawn.
     {a: c.and1888 - 0.1, b: c.within - 0.1, draw: (T) => svg(e4xTrolley(T, {a: c.and1888 - 0.1})) +
       lTag('ELECTRIC STREETCAR · RICHMOND, VIRGINIA · 1888', 130, 120, fin(T, c.richmond - 0.3, 0.3)) +

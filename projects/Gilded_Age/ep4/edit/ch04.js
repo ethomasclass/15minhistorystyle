@@ -31,12 +31,12 @@ EDITS.ch04 = () => {
       op(fin(T, c.t37 + 0.2, 0.3), mono('tenement buildings, 1890', {x: 1320, y: 480, size: 26, color: C.cream, ls: 2})) +
       vocab(1020, 560, 'Tenement', 'A crowded apartment building|for poor families, often|with no running water inside.', fin(T, c.tenements - 0.25, 0.35))},
     // 2. "Often there was one sink for a whole floor, a toilet shed in the yard, and sewage running straight into the river."
-    {a: c.often + 1.3, b: c.on - 0.1, draw: (T) => renderTenementPlan(PLAN(T)) + svg(e4xYard(T, {privy: c.toilet, sewer: c.sewage})) +
-      lTag('TOILET SHED', 1640, 570, fin(T, c.toilet + 0.2, 0.3)) + lTag('TO THE RIVER', 150, 950, fin(T, c.sewage + 1.0, 0.3))},
+    {a: c.often + 1.3, b: c.on + 0.5, draw: (T) => renderTenementPlan(PLAN(T)) + svg(e4xYard(T, {privy: c.toilet, sewer: c.sewage})) +
+      lTag('TOILET SHED', 1640, 570, fin(T, c.toilet + 0.2, 0.3)) + lTag('TO THE RIVER', 150, 950, fin(T, c.sewage + 0.2, 0.3))},
     // 3. "On one Manhattan block, about one small child in seven died in a single year."
-    {a: c.on - 0.1, b: c.horses1 - 0.6, draw: (T) => svg(e4xSeven(T, {a: c.on, died: c.died})) +
+    {a: c.on + 0.5, b: c.horses1 - 0.6, draw: (T) => svg(e4xSeven(T, {a: c.on, died: c.died})) +
       bigFig('1 in 7', {x: 0, y: 160, size: 150, o: fin(T, c.seven, 0.3)}) +
-      op(fin(T, c.seven + 0.3, 0.3), mono('small children on one Manhattan block, dead within a year', {x: 0, y: 860, size: 28, color: C.cream, ls: 2, extra: 'width:1920px;text-align:center'})) +
+      op(fin(T, c.seven - 0.2, 0.3), mono('small children on one Manhattan block, dead within a year', {x: 0, y: 860, size: 28, color: C.cream, ls: 2, extra: 'width:1920px;text-align:center'})) +
       lSrc('Figures from Jacob Riis, How the Other Half Lives, 1890', fin(T, c.on + 0.5))},
     // 4. "Too many horses. New York and Brooklyn had up to 175,000 of them, and together they left three to four million pounds of
     //    manure on the streets. Every day. Watch your step. In one year, New York hauled away nearly fifteen thousand dead horses."
@@ -50,14 +50,14 @@ EDITS.ch04 = () => {
         op(lVis(T, c.manure, c.hauled - 0.1), mono('of manure on the streets', {x: 130, y: 440, size: 28, color: C.cream, ls: 2, extra: 'background:rgba(13,12,9,.6);padding:4px 10px'})) +
         P_('every day', 160, 560, lVis(T, c.every, c.hauled - 0.1), 46) + P_('watch your step', 1100, 760, lVis(T, c.watch, c.hauled + 1.6), 40) +
         bigFig('nearly 15,000', {x: 0, y: 330, size: 120, o: fin(T, c.fifteen - 0.2, 0.3)}) +
-        op(fin(T, c.dead - 0.4, 0.3), mono('dead horses hauled away in one year', {x: 0, y: 470, size: 30, color: C.cream, ls: 2, extra: 'width:1920px;text-align:center'})); }},
+        op(fin(T, c.fifteen, 0.3), mono('dead horses hauled away in one year', {x: 0, y: 470, size: 30, color: C.cream, ls: 2, extra: 'width:1920px;text-align:center'})); }},
     // 5. "And too many fires. Wooden stairs, coal stoves, oil lamps, all packed together." The World Building fire (January 1882,
     //    colour print, 1883); then Riis's fire escape heaped with a family's things (about 1890).
     {a: c.fires - 1.1, b: c.reporter - 0.1, draw: (T) => push(T, c.fires - 1.1, c.reporter, 0.04) +
       printCard('e_fire/new_york_world_building_fire_chromolithograph_1883_loc.jpg', {x: 130, y: 80, w: 900, ar: 0.786, rot: -1.2, o: fin(T, c.fires - 1.1, 0.4), T, caption: 'The World Building fire, New York, 1882 &middot; colour print, 1883'}) +
       printCard('e_fire/riis_tenement_fire_escape_as_extension_of_the_flat_c1890_loc.jpg', {x: 900, y: 270, w: 800, ar: 0.794, rot: 1.6, o: fin(T, c.wooden - 0.1, 0.4), T, caption: 'A fire escape used as part of the flat &middot; Jacob Riis, about 1890'}) + `</div>` +
       lTag('TOO MANY FIRES', 130, 120, fin(T, c.fires - 0.8, 0.3)) +
-      P_('wooden stairs', 1240, 120, fin(T, c.wooden, 0.3), 28) + P_('coal stoves', 1240, 185, fin(T, c.coal, 0.3), 28) + P_('oil lamps', 1240, 250, fin(T, c.oil, 0.3), 28)},
+      P_('wooden stairs', 1240, 120, fin(T, c.wooden, 0.3), 28) + P_('coal stoves', 1240, 185, fin(T, c.coal, 0.3), 28) + P_('oil lamps', 1240, 250, fin(T, c.oil - 0.2, 0.3), 28)},
     // 6. "A reporter named Jacob Riis photographed all of it for a famous 1890 book, How the Other Half Lives."
     {a: c.reporter - 0.1, b: c.his - 0.1, draw: (T) => push(T, c.reporter, c.his, 0.04) +
       printCard('d_streets_filth/riis_how_the_other_half_lives_cover_1890_commons.jpg', {x: 220, y: 110, w: 520, ar: 1.457, rot: -2, o: fin(T, c.reporter - 0.1, 0.4), T, caption: 'How the Other Half Lives &middot; Jacob Riis, 1890'}) +
@@ -71,13 +71,14 @@ EDITS.ch04 = () => {
     // 8. "So who was supposed to help? Not the city government, not much. In 1877, Brooklyn gave coal or groceries to more than
     //    46,000 poor people. In 1878, it stopped. Completely." The bars (1877: 46,350; 1878: none) and Harper's "Hard Coal for the
     //    Poor" (1874) beside them.
-    {a: c.so - 0.1, b: c.one - 0.1, draw: (T) => svg(e4xRelief(T, {a: c.so - 0.1, b77: c.in1877, b78: c.in1878, stop: c.stopped})) +
+    {a: c.so - 0.1, b: c.one + 1.0, draw: (T) => svg(e4xRelief(T, {a: c.so - 0.1, b77: c.in1877, b78: c.in1878, stop: c.stopped})) +
       lTag('SO WHO WAS SUPPOSED TO HELP?', 130, 120, lVis(T, c.so, c.in1877 + 0.2)) +
+      op(fin(T, c.so, 0.4) * fout(T, c.coal2 - 0.5, 0.35), printCard('i_brooklyn/brooklyn_city_hall_1895_commons.jpg', {x: 1160, y: 200, w: 560, ar: 1, rot: -1.4, o: 1, T, caption: 'Brooklyn City Hall &middot; print, 1895'})) +
       op(fin(T, c.coal2 - 0.3, 0.4), printCard('f_machine/hard_coal_for_the_poor_1874_loc.jpg', {x: 1120, y: 300, w: 680, ar: 0.686, rot: 1.6, o: 1, T, caption: 'Hard Coal for the Poor &middot; Harper&rsquo;s Weekly, 1874'})) +
-      lTag('NONE', 640, 760, fin(T, c.completely, 0.2))},
+      lTag('NONE', 640, 760, fin(T, c.stopped + 0.3, 0.2))},
     // 9. "One magazine writer argued that poor families should save for winter like the squirrel does, and if they didn't, let them
     //    suffer." The words themselves, as a printed clipping (Popular Science Monthly, November 1888).
-    {a: c.one - 0.1, b: c.into + 1.3, draw: (T) => desk() + e4Clipping(T, c.one) +
+    {a: c.one + 1.0, b: c.into + 1.3, draw: (T) => desk() + e4Clipping(T, c.one) +
       P_('save for winter, like the squirrel', 160, 960, fin(T, c.squirrel, 0.3), 32)},
     // 10. "Into that gap stepped something new. People called it the machine." The man in the good coat walks in (the cold open).
     {a: c.into + 1.3, b: dur, live: true, draw: (T) => renderE4Fire(WALKIN(T), {quiet: true}) + batonCard(T, cardAt, 'The Machine')},
