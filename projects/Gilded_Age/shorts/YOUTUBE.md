@@ -22,6 +22,19 @@ Full episode: [LINK TO GILDED AGE EPISODE 1]
 
 #history #shorts #rockefeller #gildedage
 
+## s3_vanderbilt_ball.mp4
+
+**Title:** They Spent $9 Million on One Party (1883)
+
+Alternates: The Craziest Party of the Gilded Age / She Came to the Party Dressed as Electricity
+
+**Description:**
+In 1883, Alva Vanderbilt threw a costume ball that reportedly cost about $250,000, around $9 million today. Guests
+came as cats, hornets and electricity. Here's why she did it, and what it looked like from the kitchen.
+Full episode: [LINK TO GILDED AGE PART 2]
+
+#history #shorts #gildedage #vanderbilt
+
 ## Covers
 
 Covers are in `../thumbnails/`: `s1_cover.jpg` (s1_bad_wire) and `s2_cover.jpg` (s2_rockefeller), 1080x1920; options and

@@ -64,7 +64,8 @@ function captions(ch, T) {
   if (E.capEnd && T >= E.capEnd) return '';
   const c = capChunks(E.ch).find((k) => T >= k.s && T < k.e); if (!c) return '';
   const pop = 0.88 + 0.12 * ease(clamp01((T - c.s) / 0.12));
-  const words = c.ws.map((x) => `<span style="color:${T >= x.s - 0.02 && T < (x.e + 0.08) ? C.orange : C.cream}">${capText(x.w)}</span>`).join(' ');
+  // a character's words (s3: Nora) are coral, hers alone; the narrator's spoken word is orange
+  const words = c.ws.map((x) => `<span style="color:${x.who && x.who !== 'NARR' ? C.coral : T >= x.s - 0.02 && T < (x.e + 0.08) ? C.orange : C.cream}">${capText(x.w)}</span>`).join(' ');
   const cx = (SAFE_V.x0 + SAFE_V.x1) / 2;
   return `<div style="position:absolute;left:${cx - 420}px;top:${CAP_Y}px;width:840px;text-align:center;transform:scale(${pop.toFixed(3)});transform-origin:50% 50%;
     font-family:Inter;font-weight:800;font-size:92px;line-height:1.04;letter-spacing:1px;-webkit-text-stroke:14px ${C.ink};paint-order:stroke fill;
@@ -73,10 +74,10 @@ function captions(ch, T) {
 
 /* ---------- end card ---------- */
 /** The last ~2 s: the desk, the Chunk History mark snapping in (Ep1's brand.js mark), the name, and the pointer to the episode. */
-function endCard(T, t0) {
+function endCard(T, t0, ep = 1) {
   const u = clamp01((T - t0) / 0.8), back = 1.70158 * 1.3, k = 1 + (back + 1) * Math.pow(u - 1, 3) + back * Math.pow(u - 1, 2);
   return vdesk() + vsvg(chunkMark(470, 640, 300, -110 * (1 - k), fin(T, t0, 0.25))) +
     slideUp(fin(T, t0 + 0.25, 0.4), `<div style="position:absolute;left:0;top:850px;width:940px;text-align:center;font-family:Abril;font-size:104px;line-height:1;color:${C.cream}">Chunk History</div>`) +
     slideUp(fin(T, t0 + 0.5, 0.4), `<div style="position:absolute;left:0;top:1010px;width:940px;display:flex;justify-content:center">${tape('full episode on the channel', {x: 0, y: 0, size: 58, rot: -2, seed: 31}).replace('position:absolute;left:0px;top:0px;', 'position:relative;')}</div>`) +
-    op(fin(T, t0 + 0.7, 0.4), mono('the gilded age &middot; episode 1', {x: 0, y: 1150, size: 28, color: C.teal, ls: 5, extra: 'width:940px;text-align:center'}));
+    op(fin(T, t0 + 0.7, 0.4), mono(`the gilded age &middot; episode ${ep}`, {x: 0, y: 1150, size: 28, color: C.teal, ls: 5, extra: 'width:940px;text-align:center'}));
 }
