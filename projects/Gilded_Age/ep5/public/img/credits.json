@@ -535,14 +535,6 @@
     "page": "https://www.loc.gov/item/93500896/",
     "source": "loc:93500896"
   },
-  "j_1896/dollar_mark_hanna_davenport_loc.jpg": {
-    "title": "[Dollar Mark Hanna]",
-    "artist": "Davenport, Homer, 1867-1912, artist",
-    "date": "1900",
-    "licence": "No known restrictions on publication. No renewal in Copyright Office.",
-    "page": "https://www.loc.gov/item/2009616593/",
-    "source": "loc:2009616593"
-  },
   "j_1896/our_home_defenders_mckinley_poster_1896_loc.jpg": {
     "title": "Our home defenders",
     "artist": "Gillespie, Metzgar & Kelley.",
@@ -791,14 +783,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:War_of_wealth_bank_run_poster.jpg",
     "source": "commons:File:War of wealth bank run poster.jpg"
   },
-  "i_populists/panic_at_the_stock_exchange_may_1893_commons.jpg": {
-    "title": "File:Panic at the NYSE 5 May 1893 cph.3b13869.jpg",
-    "artist": "Unknown authorUnknown author",
-    "date": "1893-05-18",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Panic_at_the_NYSE_5_May_1893_cph.3b13869.jpg",
-    "source": "commons:File:Panic at the NYSE 5 May 1893 cph.3b13869.jpg"
-  },
   "i_populists/james_b_weaver_brady_handy_commons.jpg": {
     "title": "File:James Weaver - Brady-Handy.jpg",
     "artist": "Brady-Handy Photograph Collection (Library of Congress)",
@@ -1014,5 +998,141 @@
     "licence": "Public domain",
     "page": "https://commons.wikimedia.org/wiki/File:ChicagoAnarchists.jpg",
     "source": "commons:File:ChicagoAnarchists.jpg"
+  },
+  "g_farm_life/semler_near_woods_park_butcher_1886_loc.jpg": {
+    "title": "[J.D. Semler, near Woods Park, Custer County, Nebraska]",
+    "artist": "Butcher, Solomon D. (Solomon Devore), 1856-1927, photographer",
+    "date": "1886-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2005693377/",
+    "source": "loc:2005693377"
+  },
+  "g_farm_life/kansas_wheat_field_harvester_combine_LATE_c1900_loc.jpg": {
+    "title": "A Kansas wheat field, Harvester Combine in action",
+    "artist": "",
+    "date": "1900-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012646392/",
+    "source": "loc:2012646392"
+  },
+  "g_farm_life/loading_whaleback_ship_at_grain_elevator_c1895_loc.jpg": {
+    "title": "Loading the great whaleback ship at the famous grain elevators, Chicago, U.S.A.",
+    "artist": "Barker, George, 1844-1894, photographer",
+    "date": "1895-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2014650312/",
+    "source": "loc:2014650312"
+  },
+  "h_grange_alliance/i_feed_you_all_grange_print_1875_loc.jpg": {
+    "title": "I feed you all!",
+    "artist": "American Oleograph Co., lithographer",
+    "date": "1875-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2003690771/",
+    "source": "loc:2003690771"
+  },
+  "d_afl_gompers/labor_day_parade_pennsylvania_avenue_c1894_loc.jpg": {
+    "title": "[Labor Day parade on Pennsylvania Avenue, Washington, D.C.]",
+    "artist": "",
+    "date": "1894",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2017645684/",
+    "source": "loc:2017645684"
+  },
+  "d_afl_gompers/labor_day_parade_main_street_buffalo_c1895_loc.jpg": {
+    "title": "[Labor Day parade, Main Street, Buffalo, N.Y.]",
+    "artist": "Detroit Publishing Co., publisher",
+    "date": "1895-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016806812/",
+    "source": "loc:2016806812"
+  },
+  "i_populists/pro_coxey_cartoon_1894_loc.jpg": {
+    "title": "[Pro-Coxey cartoon.]",
+    "artist": "",
+    "date": "1894-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016651920/",
+    "source": "loc:2016651920"
+  },
+  "i_populists/coxeys_paternalism_taylor_puck_1894_loc.jpg": {
+    "title": "Coxey'[s ... patern]alism\" / C.J. Taylor.",
+    "artist": "Taylor, Charles Jay, 1855-1929, artist",
+    "date": "1894-04-18",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012648716/",
+    "source": "loc:2012648716"
+  },
+  "j_1896/william_jennings_bryan_cm_bell_1894_loc.jpg": {
+    "title": "Bryan, W.J.",
+    "artist": "C.M. Bell (Firm : Washington, D.C.), photographer",
+    "date": "1894",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016696715/",
+    "source": "loc:2016696715"
+  },
+  "j_1896/free_silver_bryan_davenport_1896_loc.jpg": {
+    "title": "Free silver Bryan",
+    "artist": "Davenport, Homer, 1867-1912, artist",
+    "date": "1896-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2016681281/",
+    "source": "loc:2016681281"
+  },
+  "j_1896/bryans_gas_pughe_puck_1896_loc.jpg": {
+    "title": "Bryan's gas",
+    "artist": "Pughe, J. S. (John S.), 1870-1909, artist",
+    "date": "1896-09-23",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2012648473/",
+    "source": "loc:2012648473"
+  },
+  "l_garfield_civil_service/assassination_of_garfield_historical_photo_1881_loc.jpg": {
+    "title": "Historical photograph of the assassination of President Garfield",
+    "artist": "",
+    "date": "1881-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2002709476/",
+    "source": "loc:2002709476"
+  },
+  "l_garfield_civil_service/consistent_civil_service_reform_opper_1885_loc.jpg": {
+    "title": "Consistent civil service reform / F. Opper.",
+    "artist": "Opper, Frederick Burr, 1857-1937, artist",
+    "date": "1885-04-08",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/2011661434/",
+    "source": "loc:2011661434"
+  },
+  "l_garfield_civil_service/civil_service_reform_nast_1877_loc.jpg": {
+    "title": "Civil Service Reform",
+    "artist": "Nast, Thomas, 1840-1902, artist",
+    "date": "1877-01-01",
+    "licence": "No known restrictions on publication.",
+    "page": "https://www.loc.gov/item/97510860/",
+    "source": "loc:97510860"
+  },
+  "i_populists/panic_at_the_stock_exchange_may_1893_SMALL_commons.jpg": {
+    "title": "File:Panic at the NYSE 5 May 1893 cph.3b13869.jpg",
+    "artist": "Unknown authorUnknown author",
+    "date": "1893-05-18",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Panic_at_the_NYSE_5_May_1893_cph.3b13869.jpg",
+    "source": "commons:File:Panic at the NYSE 5 May 1893 cph.3b13869.jpg"
+  },
+  "j_1896/dollar_mark_hanna_davenport_LATE_1900_loc.jpg": {
+    "title": "[Dollar Mark Hanna]",
+    "artist": "Davenport, Homer, 1867-1912, artist",
+    "date": "1900",
+    "licence": "No known restrictions on publication. No renewal in Copyright Office.",
+    "page": "https://www.loc.gov/item/2009616593/",
+    "source": "loc:2009616593"
+  },
+  "j_1896/electoral_map_1896_modern_svg_render_commons.png": {
+    "title": "File:ElectoralCollege1896.svg",
+    "artist": "SteveSims",
+    "date": "23 June 2008 (upload date)",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:ElectoralCollege1896.svg",
+    "source": "commons:File:ElectoralCollege1896.svg"
   }
 }

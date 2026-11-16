@@ -195,23 +195,29 @@ function renderE5Meeting(t, o = {}) {
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Meeting});
 Object.assign(CLIPS, {ep5_union_meeting: {sec: UM.sec, render: (t) => renderE5Meeting(t)}});
 
-/* ================= ep5_homestead_dawn: the barges come up the Monongahela, July 6, 1892, before dawn (18 s) ================= */
-// Looking across the river from the Homestead bank in the last of the night: the far hills, mist lying on the water and drifting, the
-// Carnegie works on the near bank to the right (long sheds, a row of stacks, the furnaces banked: a faint glow in a few windows; the
-// mill is locked out). A small tug tows two covered barges upriver toward the works' landing, its stack smoking, one lit window.
-// The townspeople (ink, small and faceless in the half light) come along the bank with lanterns and gather at the landing; some point.
-// As the barges near the landing (about 14 s) a few tiny muzzle flashes far off at the barges' bows and the bank, puffs of smoke
-// drifting into the mist; the crowd flinches and stands its ground; no one falls. Scale: a man 150 to 200 px by depth.
-const HD = {sec: 18, W0: 560, W1: 795, land: [1150, 1330], flash: [[14.3, 1040, 668], [14.55, 1290, 778], [14.75, 1010, 664], [15.2, 1310, 782], [15.65, 1050, 670], [16.3, 1280, 780]]};
-const e5BargePath = (t) => { const u = e3Trap(t, 0, 17.4, 0.05) * 0.8 + 0.2 * smooth(0, 17.4, t); return {x: lerp(-420, 960, u), y: lerp(668, 752, u * u), k: lerp(0.5, 0.82, u)}; };
-function e5Barge(x, y, k, t, seed) { // a covered barge (x = its bow, facing right): low hull, a long roofed house with dark vents
-  const L = 420 * k, s = [];
-  s.push(`<path d="M${f1(x - L)},${f1(y - 26 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 12 * k)} L${f1(x - 8 * k)},${f1(y)} L${f1(x - L)},${f1(y)} Z" fill="#101415"/>`);
-  s.push(`<path d="M${f1(x - L + 16 * k)},${f1(y - 26 * k)} L${f1(x - L + 16 * k)},${f1(y - 70 * k)} L${f1(x - L / 2)},${f1(y - 84 * k)} L${f1(x - 30 * k)},${f1(y - 70 * k)} L${f1(x - 30 * k)},${f1(y - 26 * k)} Z" fill="#161B1C"/>`);
-  for (let i = 0; i < 9; i++) s.push(`<rect x="${f1(x - L + 40 * k + i * 40 * k)}" y="${f1(y - 58 * k)}" width="${f1(14 * k)}" height="${f1(6 * k)}" fill="#05080A"/>`);
-  s.push(line([[x - L + 16 * k, y - 70 * k], [x - L / 2, y - 84 * k], [x - 30 * k, y - 70 * k]], '#AEBBBC', 1.4 * k, 'opacity="0.35"'));
-  return s.join('');
-}
+/* ================= ep5_homestead_dawn: the cold open's last shots, July 6, 1892, 4 a.m. (29 s, five shots and a freeze) ================= */
+// The end of the cold open ("Barges at Dawn", ../ep5/PLAN.md). Five shots cut inside the clip, then a freeze:
+//   A  0.0  wide: the black Monongahela in fog, the works on the bank, furnaces glowing deep orange-red through the haze, embers off
+//           the stacks; two dark shapes far off in the fog downriver. Tag "HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M.".
+//   B  6.2  the works' roof: the steam whistle blasts (6.8 to 9.3), a great white plume, the warning to the town.
+//   C  9.6  the hillside: the town pours down the street toward the river with lanterns and torches; in front, men run at the
+//           works' board fence; the front men push the gate and it goes over (12.2); they surge through toward the landing.
+//   D 15.0  low at the water: the two covered barges loom huge out of the fog behind the tug, its lantern beam sweeping; in the
+//           lit doorways, armed guards (ink, faceless, rifles held upright).
+//   E 20.0  the landing: the barge's bow at the bank, the gangplank lowering (22.0); the crowd on the bank shouting, lanterns raised,
+//           torches; one flares (24.4); a slow push to the gangplank's end.
+//   F 26.25 FREEZE as the gangplank touches: the image holds and drains toward monochrome with a teal and orange grade (to 29.0).
+// No shot is fired on screen; nobody is hurt. Real people never get faces (every figure here is det 0).
+const HD = {sec: 29, cuts: [6.2, 9.6, 15.0, 20.0], whistle: [6.8, 9.3], gate: 12.2, plank: [22.0, 26.25], flare: 24.4, freeze: 26.25};
+const e5Torch = (gx, gy, t, s = 0, k = 1, big = 1) => { const sw = 6 * Math.sin(t * 7.3 + s) + 3 * Math.sin(t * 13.1 + s), fl = e5Flick(t, s), top = [gx + 5 * k, gy - 58 * k];
+  return line([[gx - 2 * k, gy + 24 * k], top], '#2A1C10', 5 * k) + `<ellipse cx="${f1(top[0])}" cy="${f1(top[1])}" rx="${f1(7 * k)}" ry="${f1(10 * k)}" fill="#1A120A"/>` +
+    e4Tongue(top[0], top[1], 26 * k * big, 70 * k * big * fl, sw * k, '#FF5A1A', 0.92) + e4Tongue(top[0], top[1], 15 * k * big, 48 * k * big * fl, sw * 0.8 * k, '#FFB23A', 0.92) + e4Tongue(top[0], top[1], 7 * k * big, 26 * k * big, sw * 0.5 * k, '#FFF1B8', 0.9) +
+    glowC(top[0], top[1] - 20 * k, 60 * k * big, 0.7 * fl, 'msglow') + glowC(top[0], top[1] - 20 * k, 300 * k * big, 0.8 * fl, 'e4glow'); };
+// embers rising and drifting from (x0..x1, y): n sparks
+function e5Embers(t, x0, x1, y, n, seed, rise = 700, drift = -260) { const r = rng(seed), s = [];
+  for (let i = 0; i < n; i++) { const xs = x0 + r() * (x1 - x0), sp = 0.1 + r() * 0.15, ph = (t * sp + r()) % 1, wob = 14 * Math.sin(t * (1 + r() * 2) + i), a = Math.sin(Math.PI * ph) * (0.55 + 0.45 * Math.sin(t * 11 + i));
+    s.push(`<circle cx="${f1(xs + drift * ph + wob)}" cy="${f1(y - ph * rise * (0.6 + 0.6 * r()))}" r="${f1(1.4 + r() * 2.4)}" fill="${r() < 0.5 ? '#FFC36B' : '#FF6A2A'}" opacity="${f1(Math.max(0, a) * 100) / 100}"/>`); }
+  return s.join(''); }
 function e5Tug(x, y, k, t) { // the tug (x = its bow, facing right): hull, cabin with a lit window, pilot house, tall stack; smoke and wake
   const s = [];
   s.push(`<path d="M${f1(x - 150 * k)},${f1(y - 22 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 14 * k)} L${f1(x - 12 * k)},${f1(y)} L${f1(x - 140 * k)},${f1(y)} Z" fill="#0D1011"/>`);
@@ -221,75 +227,199 @@ function e5Tug(x, y, k, t) { // the tug (x = its bow, facing right): hull, cabin
   s.push(line([[x - 150 * k, y - 18 * k], [x - 220 * k, y - 10 * k]], '#0D1011', 1.2)); // the tow line back to the barges
   return s.join('');
 }
-function e5Works(t) { // the Homestead works on the near bank to the right: sheds, a row of stacks, banked furnaces
-  const s = [], fl = 0.8 + 0.2 * Math.sin(t * 1.3) * Math.sin(t * 0.7 + 1);
+// the works (shot A and B): sheds, a row of stacks with embers, furnaces glowing deep orange-red; the whistle on the big shed's ridge
+function e5Works(t, blast = 0) {
+  const s = [], fl = 0.82 + 0.18 * Math.sin(t * 1.3) * Math.sin(t * 0.7 + 1);
+  s.push(glowC(1640, 600, 700, 0.85 * fl, 'e4haze'));
   for (const [sx, sw, sh] of [[1360, 22, 520], [1430, 26, 600], [1505, 22, 560], [1580, 28, 640], [1660, 22, 540], [1735, 26, 610], [1820, 24, 580], [1900, 28, 620]]) {
-    s.push(`<rect x="${sx}" y="${770 - sh}" width="${sw}" height="${sh}" fill="#1D2629"/><rect x="${sx - 3}" y="${770 - sh}" width="${sw + 6}" height="8" fill="#1A2224"/>`);
-    s.push(MAT.smoke(sx + sw / 2, 770 - sh - 6, t + sx * 0.01, {col: '8C9A9C', k: 0.8, n: 5, rise: 160, drift: -200, speed: 9, seed: sx}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.35 * 100) / 100}"`));
+    s.push(`<rect x="${sx}" y="${770 - sh}" width="${sw}" height="${sh}" fill="#141B1E"/><rect x="${sx - 3}" y="${770 - sh}" width="${sw + 6}" height="8" fill="#10171A"/><rect x="${sx}" y="${770 - sh + 8}" width="${sw}" height="60" fill="#FF5A2A" opacity="0.12"/>`);
+    s.push(glowC(sx + sw / 2, 770 - sh, 40, 0.6 * fl, 'e4glow') + MAT.smoke(sx + sw / 2, 770 - sh - 6, t + sx * 0.01, {col: '6A625C', k: 0.9, n: 5, rise: 180, drift: -220, speed: 9, seed: sx}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.5 * 100) / 100}"`));
   }
-  // long sheds with sawtooth roofs; a few windows glowing faintly
-  s.push(`<path d="M1280,800 L1280,600 ${[...Array(9).keys()].map((i) => `L${1280 + i * 90},560 L${1280 + i * 90 + 90},600`).join(' ')} L2110,800 Z" fill="#232D30"/>`);
-  s.push(`<path d="M1500,800 L1500,520 L1720,470 L1940,520 L1940,800 Z" fill="#1F282B"/>`);
-  for (let i = 0; i < 12; i++) { const wx = 1310 + i * 64, a = (i % 3 === 1 ? 0.55 : 0.14) * fl; s.push(`<rect x="${wx}" y="650" width="22" height="34" fill="#FF9A4A" opacity="${f1(a)}"/>`); }
-  s.push(glowC(1640, 640, 260, 0.35 * fl, 'e4glow'));
+  s.push(e5Embers(t, 1360, 1930, 160, 60, 551, 500, -300));
+  s.push(`<path d="M1280,800 L1280,600 ${[...Array(9).keys()].map((i) => `L${1280 + i * 90},560 L${1280 + i * 90 + 90},600`).join(' ')} L2110,800 Z" fill="#161E21"/>`);
+  s.push(`<path d="M1500,800 L1500,520 L1720,470 L1940,520 L1940,800 Z" fill="#131A1D"/>`);
+  for (let i = 0; i < 12; i++) { const wx = 1310 + i * 64, a = (i % 3 === 1 ? 0.95 : 0.55) * fl * (0.85 + 0.15 * Math.sin(t * 3 + i)); s.push(`<rect x="${wx}" y="650" width="22" height="34" fill="${i % 2 ? '#FF4A1E' : '#FF7A2E'}" opacity="${f1(a)}"/>`); }
+  s.push(glowC(1640, 670, 340, 0.7 * fl, 'e4glow'));
+  // the whistle on the ridge: a pipe, a valve wheel, the bell; its plume when it blows
+  s.push(`<rect x="1716" y="420" width="8" height="52" fill="#0D1011"/><path d="M1710,424 l20,0 l-3,-30 q-7,-6 -14,0 Z" fill="#0D1011"/><circle cx="1720" cy="450" r="7" fill="none" stroke="#0D1011" stroke-width="3"/>`);
+  if (blast > 0) { const p = [];
+    for (let i = 0; i < 16; i++) { const ph = ((t * 1.6 + i / 16) % 1), a = blast * 0.85 * Math.pow(1 - ph, 0.8) * Math.min(1, ph * 8), R = 14 + ph * 120, r2 = rng(560 + i);
+      p.push(`<circle cx="${f1(1720 + ph * 160 + 30 * Math.sin(i))}" cy="${f1(392 - ph * 360 - 20 * r2())}" r="${f1(R)}" fill="url(#puffD9DEDA)" opacity="${f1(a * 100) / 100}"/>`); }
+    s.push(p.join('') + glowC(1720, 380, 60, 0.8 * blast, 'msglow')); }
   return s.join('');
 }
-function renderE5Homestead(t, o = {}) {
-  const c = cam2(o.cam || camAt([[0, 1.0, 900, 560], [9, 1.08, 980, 585], [18, 1.24, 1060, 615]], t)), s = [];
-  // sky (behind the camera layer: a slight parallax), far hills, the river and mist
-  const sky = `<rect width="1920" height="1080" fill="url(#hdsky)"/>` + `<ellipse cx="${f1(1500 - (c.ux - 960) * 0.2)}" cy="560" rx="900" ry="200" fill="url(#hddawn)" opacity="${f1(0.55 + 0.25 * smooth(0, 18, t))}"/>`;
-  s.push(`<path d="M-600,560 L-600,470 Q-300,430 0,470 Q260,500 520,440 Q800,400 1100,470 Q1400,520 1700,450 Q2000,410 2600,470 L2600,560 Z" fill="#3A4A4E"/>` + MAT.trees([[-600, 470], [0, 470], [520, 440], [1100, 470], [1700, 450], [2600, 470]], {col: '#33434A', seed: 531, size: 22, every: 0.5}));
-  s.push(`<path d="M-600,${HD.W0} L-600,520 Q200,505 900,530 Q1600,550 2600,515 L2600,${HD.W0} Z" fill="#2E3D41"/>`);
-  s.push(e5Mist(t, -600, 2600, 470, 560, {n: 10, seed: 532, speed: 6, op: 0.55, h: 40}));
-  s.push(MAT.water(-600, HD.W0, 3200, HD.W1 - HD.W0, t, {top: '#55666A', bottom: '#2A3639', seed: 533, glint: '#C9D4D2', n: 90}));
-  // the works on the near bank (right) and its reflection
-  s.push(e5Works(t));
-  // the barges and tug, coming up from the left toward the landing; their wake
-  const bp = e5BargePath(t), k = bp.k;
-  s.push(`<ellipse cx="${f1(bp.x - 160)}" cy="${f1(bp.y + 4)}" rx="420" ry="10" fill="#1A2224" opacity="0.5"/>` + [0, 1, 2].map((i) => line([[bp.x + 40 - i * 30, bp.y + 2 + i * 3], [bp.x - 260 - i * 80, bp.y + 10 + i * 9]], '#AEBBBC', 1.5, `opacity="${0.35 - i * 0.1}"`)).join(''));
-  s.push(e5Barge(bp.x - 70 * k, bp.y - 30 * k, k * 0.9, t, 1), e5Barge(bp.x + 20 * k, bp.y, k, t, 2), e5Tug(bp.x + 270 * k, bp.y + 2, k, t));
-  // the muzzle flashes, far off, and their smoke (brief; no one is seen hit)
-  for (let [ft, fx, fy] of HD.flash) { const onBarge = fx < 1100, x = onBarge ? bp.x + (fx - 1060) * k : fx; if (onBarge) fy = bp.y - 40 * k + (fy - 668);
-    if (t > ft && t < ft + 0.14) s.push(glowC(x, fy, 26, 1 - (t - ft) / 0.14, 'e5flash') + `<circle cx="${x}" cy="${fy}" r="2.5" fill="#FFF8E8"/>`);
-    if (t > ft) { const u = t - ft; s.push(`<circle cx="${f1(x - 6 * u)}" cy="${f1(fy - 10 * u)}" r="${f1(6 + 9 * u)}" fill="url(#puffB8C4C4)" opacity="${f1(Math.max(0, 0.55 - 0.16 * u) * 100) / 100}"/>`); } }
-  // mist on the water, drifting slowly over the barges
-  s.push(e5Mist(t, -600, 2600, 600, 780, {n: 18, seed: 534, speed: 10, op: 0.6, h: 46}));
-  // the near bank: a mud slope to the water, the works' landing (planks on piles), the ground where the crowd stands
-  s.push(`<path d="M-600,${HD.W1} L2600,${HD.W1} L2600,1300 L-600,1300 Z" fill="#141819"/><path d="M-600,${HD.W1} L2600,${HD.W1} L2600,${HD.W1 + 34} L-600,${HD.W1 + 40} Z" fill="#262E30"/>` + MAT.ground(-600, 2600, HD.W1 + 36, {base: '#141819', seed: 535}));
-  const [l0, l1] = HD.land;
-  s.push(`<rect x="${l0}" y="${HD.W1 - 12}" width="${l1 - l0}" height="12" fill="#1F2426"/>` + [0, 1, 2, 3, 4].map((i) => `<rect x="${l0 + 8 + i * 42}" y="${HD.W1 - 4}" width="7" height="24" fill="#0D1011"/>`).join('') + line([[l0, HD.W1 - 12], [l1, HD.W1 - 12]], '#AEBBBC', 1.2, 'opacity="0.3"'));
-  // ---- the crowd: three depths, some walking in from the left with lanterns, gathering at the landing; some point at the barges ----
-  const rows = [{G: 880, H: 150}, {G: 940, H: 175}, {G: 1005, H: 200}], P = [], shots = t > HD.flash[0][0];
-  const flinch = (ph) => e4Bump(t, HD.flash[0][0] + 0.05 + ph * 0.2, 0.7);
-  const people = [ // [row, x, kind, hat, lantern, walk {t0, t1, to} | null, point time]
-    [0, 980, 'man', 'cap', 1, null, 11.5], [0, 1060, 'man', 'bowler', 0, null, 0], [0, 1270, 'man', 'cap', 1, null, 12.2], [0, 1380, 'woman', 'kerchief', 0, null, 0], [0, 1450, 'man', 'cap', 0, null, 13],
-    [0, 300, 'man', 'cap', 1, {t0: 0.5, t1: 9.5, to: 860}, 0], [0, 120, 'man', 'bowler', 0, {t0: 1.5, t1: 11.0, to: 760}, 0],
-    [1, 900, 'man', 'cap', 0, null, 12.8], [1, 1120, 'man', 'bowler', 1, null, 0], [1, 1220, 'man', 'cap', 0, null, 11.0], [1, 1340, 'man', 'cap', 1, null, 0],
-    [1, 160, 'woman', 'kerchief', 1, {t0: 2.0, t1: 12.0, to: 1010}, 0], [1, -40, 'man', 'cap', 1, {t0: 0.0, t1: 10.5, to: 700}, 0], [1, 1520, 'man', 'bowler', 0, null, 0],
-    [2, 820, 'man', 'cap', 1, null, 0], [2, 1010, 'man', 'cap', 0, null, 12.5], [2, 1180, 'man', 'bowler', 0, null, 0], [2, 1330, 'man', 'cap', 1, null, 0],
-    [2, 380, 'man', 'cap', 1, {t0: 0.2, t1: 8.6, to: 640}, 0], [2, 60, 'man', 'cap', 0, {t0: 3.0, t1: 13.0, to: 520}, 0],
-  ];
-  const rimSky = {c: '#C9D4D2', a: 0.35, dx: 0.006, dy: -0.007};
-  people.forEach(([ri, x, kind, hat, lant, walk, pt], i) => {
-    const {G, H} = rows[ri], name = `hd.p${i}`, base = {kind, hat, coat: i % 3 ? 'jacket' : 'sack', wear: kind === 'woman' ? ['plain', 'shawl'] : [], h: kind === 'woman' ? H * 0.9 : H, fill: E5.ink, det: 0, rim: rimSky, tones: {tone: '#1C2122', lite: '#2C3335'}};
-    const an0 = {fArm: lant ? [174, 178] : undefined, tilt: 4 * Math.sin(t * 0.5 + i)};
-    let fo;
-    if (walk) { const tr = e4Track({...base, an: {...an0}}, {x, d: 1, G, ph: i * 0.13, walks: [{...walk, dAfter: 1, a: 0.12, carry: !!lant, an: lant ? {fArm: [174, 178]} : {}}]}, t, name); fo = tr.fo; }
-    else fo = e5Standing({...base, d: x > 1250 ? -1 : 1}, x, G, t, i * 0.17, name, an0.fArm ? {fArm: an0.fArm} : {});
-    const fk = shots ? flinch(i % 4) : 0;
-    if (fk > 0) fo = {...fo, an: {...fo.an, lean: (fo.an.lean || 0) - 9 * fk, tilt: (fo.an.tilt || 0) - 6 * fk}};
-    if (pt && !lant && t > pt && t < pt + 2.4) { const u = smooth(pt, pt + 0.4, t) * (1 - smooth(pt + 2.0, pt + 2.4, t)); fo = {...fo, an: {...fo.an, fArm: [lerp(176, 72, u), lerp(180, 80, u)]}}; }
-    const lan = lant ? holding(fo, 'f', name + '.lantern', (gx, gy) => e5Lantern(gx, gy, t, i * 1.3, H / 190)) : '';
-    P.push({ri, svg: fig(fo) + lan});
+const e5Sky = (k = 1) => `<rect width="1920" height="1080" fill="url(#hdsky)"/>`;
+function e5ShotA(t, c, blast = 0) { // the wide (also the whistle shot's world)
+  const s = [];
+  s.push(`<path d="M-600,560 L-600,470 Q-300,430 0,470 Q260,500 520,440 Q800,400 1100,470 Q1400,520 1700,450 Q2000,410 2600,470 L2600,560 Z" fill="#2A383E"/>` + MAT.trees([[-600, 470], [0, 470], [520, 440], [1100, 470], [1700, 450], [2600, 470]], {col: '#25333A', seed: 531, size: 22, every: 0.5}));
+  // the town's lights on the hill above the works
+  const r = rng(552); for (let i = 0; i < 40; i++) { const x = 1100 + r() * 1300, y = 470 + r() * 60; s.push(`<rect x="${f1(x)}" y="${f1(y)}" width="4" height="5" fill="#FFC27A" opacity="${f1((0.35 + 0.4 * r()) * e5Flick(t, i))}"/>`); }
+  s.push(`<path d="M-600,560 L-600,520 Q200,505 900,530 Q1600,550 2600,515 L2600,560 Z" fill="#1E2A2E"/>`);
+  s.push(e5Mist(t, -600, 2600, 470, 560, {n: 10, seed: 532, speed: 6, op: 0.6, h: 40}));
+  s.push(MAT.water(-600, 560, 3200, 235, t, {top: '#1C272B', bottom: '#06090A', seed: 533, glint: '#8FA0A2', n: 70}));
+  // the furnace glow on the water under the works
+  s.push(`<ellipse cx="1650" cy="700" rx="420" ry="60" fill="url(#e4pool)" opacity="0.8"/>`);
+  // two dark shapes far down the river in the fog (the barges, not yet known)
+  const bx = lerp(-200, 120, smooth(0, 6.2, t));
+  s.push(`<g opacity="${f1(0.55 * smooth(1.5, 4, t))}"><rect x="${f1(bx - 120)}" y="640" width="110" height="16" fill="#0A0E10"/><rect x="${f1(bx - 140)}" y="628" width="100" height="14" fill="#0A0E10"/><rect x="${f1(bx + 10)}" y="642" width="30" height="12" fill="#0A0E10"/></g>`);
+  s.push(e5Mist(t, -600, 2600, 590, 790, {n: 22, seed: 534, speed: 10, op: 0.65, h: 46}));
+  s.push(e5Works(t, blast));
+  s.push(`<path d="M-600,795 L2600,795 L2600,1300 L-600,1300 Z" fill="#0B0E0F"/><path d="M-600,795 L2600,795 L2600,826 L-600,832 Z" fill="#171D1F"/>` + MAT.ground(-600, 2600, 830, {base: '#0B0E0F', seed: 535}));
+  s.push(e5Mist(t, -600, 2600, 800, 1000, {n: 10, seed: 536, speed: 7, op: 0.35, h: 50}));
+  return s.join('');
+}
+// a small figure walking down the hill street (shot C background): walk cycle, no contact logging at this size
+function e5Downhill(x, y, h, t, ph, lant) { const an = walkAn(ph % 1 + t * 1.3, {carry: lant}), fo = {kind: 'man', hat: 'cap', coat: 'jacket', x, y, h, d: 1, fill: '#0A0B0B', det: 0, an};
+  return figure(fo) + (lant ? glowC(x + 0.12 * h, y - 0.42 * h, 26, 0.9 * e5Flick(t, ph * 9), 'e5lant') + `<circle cx="${f1(x + 0.12 * h)}" cy="${f1(y - 0.42 * h)}" r="2.6" fill="#FFD08A"/>` : ''); }
+function e5ShotC(t) { // the hillside town and the works' fence
+  const s = [], r = rng(571);
+  s.push(`<rect x="-600" y="-200" width="3200" height="1500" fill="url(#hdsky)"/>`);
+  s.push(glowC(1900, 760, 900, 0.75, 'e4haze'));
+  // the hill rising to the left with rows of frame houses, lit windows; the street running down it to the right
+  s.push(`<path d="M-600,200 L200,240 L900,480 L1500,760 L-600,760 Z" fill="#161E22"/>`);
+  for (let row = 0; row < 5; row++) for (let i = 0; i < 9; i++) { const x = -500 + i * 150 + row * 130 + r() * 30, y = 260 + row * 110 + (x + 500) * 0.12, w = 90 + r() * 30, h = 70 + r() * 30; if (y > 720 || x > 1350) continue;
+    s.push(`<path d="M${f1(x)},${f1(y)} l0,-${f1(h)} l${f1(w / 2)},-36 l${f1(w / 2)},36 l0,${f1(h)} Z" fill="#0F1518"/>` + (r() < 0.7 ? `<rect x="${f1(x + w * 0.3)}" y="${f1(y - h * 0.7)}" width="12" height="16" fill="#FFB25C" opacity="${f1((0.5 + 0.4 * r()) * e5Flick(t, i + row))}"/>` : '')); }
+  // people streaming down the street (a line from upper left to the bottom right), lanterns bobbing
+  for (let i = 0; i < 26; i++) { const u = ((t - 9.6) * (0.05 + 0.02 * (i % 3)) + i / 26) % 1, x = -300 + u * 1500, y = 300 + u * 520, h = 60 + u * 60; s.push(e5Downhill(x, y, h, t, i * 0.37, i % 3 === 0)); }
+  s.push(e5Mist(t, -600, 2600, 520, 820, {n: 12, seed: 572, speed: 12, op: 0.4, h: 60}));
+  // the ground at the works and the fence ("Fort Frick": tall boards, barbed wire on top, a gate)
+  const G = 1000;
+  s.push(`<rect x="-600" y="740" width="3200" height="800" fill="#0D1012"/>` + MAT.ground(-600, 2600, G + 6, {base: '#0D1012', seed: 573}));
+  const fall = smooth(HD.gate, HD.gate + 0.45, t), gx0 = 1300, gx1 = 1520, fy = G - 340;
+  s.push(`<rect x="1020" y="${fy}" width="${gx0 - 1020}" height="340" fill="#1E1A15"/><rect x="${gx1}" y="${fy}" width="1000" height="340" fill="#1E1A15"/>` + [...Array(40).keys()].map((i) => i * 22 + 1020 < gx0 || i * 22 + 1020 > gx1 ? `<rect x="${1020 + i * 22}" y="${fy}" width="2" height="340" fill="#0D0B08"/>` : '').join('') +
+    line([[1020, fy - 14], [2600, fy - 14]], '#3A3530', 2) + line([[1020, fy - 26], [2600, fy - 26]], '#3A3530', 2) + [...Array(80).keys()].map((i) => `<path d="M${1030 + i * 20},${fy - 14} l4,-6 M${1036 + i * 20},${fy - 26} l-3,-6" stroke="#3A3530" stroke-width="1.5"/>`).join('') +
+    [1020, gx0 - 10, gx1, 1800, 2100].map((px) => `<rect x="${px}" y="${fy - 34}" width="12" height="374" fill="#0D0B08"/>`).join(''));
+  // the gate leaves topple back flat (seen from the side: they shrink to their bottom edge)
+  const gh = 330 * (1 - fall * 0.94);
+  s.push(`<rect x="${gx0}" y="${f1(G - 10 - gh)}" width="${gx1 - gx0}" height="${f1(gh)}" fill="#2A241C"/>` + [...Array(10).keys()].map((i) => `<rect x="${gx0 + i * 22}" y="${f1(G - 10 - gh)}" width="2" height="${f1(gh)}" fill="#0D0B08"/>`).join('') + (fall < 0.2 ? line([[gx0, G - 10 - gh * 0.3], [gx1, G - 10 - gh * 0.7]], '#0D0B08', 6) : ''));
+  if (t > HD.gate + 0.3) s.push(MAT.smoke(gx0 + 110, G - 20, t - HD.gate, {col: '6A625C', k: 1.4, n: 6, rise: 90, drift: 120, speed: 2.4, seed: 574}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.5 * Math.max(0, 1 - (t - HD.gate) / 3) * 100) / 100}"`));
+  return {svg: s.join(''), G, gx0, gx1};
+}
+// a covered barge, big (x = its bow, facing right): hull, the house with lit doorways; returns doorway rects for guards
+function e5BargeBig(x, y, k, t, doors = [0.2, 0.45, 0.7]) {
+  const L = 420 * k, s = [], D = [];
+  s.push(`<path d="M${f1(x - L)},${f1(y - 26 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 12 * k)} L${f1(x - 8 * k)},${f1(y)} L${f1(x - L)},${f1(y)} Z" fill="#0A0D0E"/>` + line([[x - L, y - 26 * k], [x - 10 * k, y - 26 * k]], '#6F8084', 1.5, 'opacity="0.5"'));
+  const hx0 = x - L + 16 * k, hx1 = x - 30 * k, hy = y - 26 * k, hh = 66 * k;
+  s.push(`<path d="M${f1(hx0)},${f1(hy)} L${f1(hx0)},${f1(hy - hh)} L${f1(x - L / 2)},${f1(hy - hh - 14 * k)} L${f1(hx1)},${f1(hy - hh)} L${f1(hx1)},${f1(hy)} Z" fill="#0F1314"/>` + line([[hx0, hy - hh], [x - L / 2, hy - hh - 14 * k], [hx1, hy - hh]], '#8A9A9C', 1.6, 'opacity="0.45"'));
+  for (let i = 0; i < 9; i++) s.push(`<rect x="${f1(hx0 + 20 * k + i * 40 * k)}" y="${f1(hy - hh + 14 * k)}" width="${f1(12 * k)}" height="${f1(5 * k)}" fill="#05080A"/>`);
+  for (const u of doors) { const dx = hx0 + (hx1 - hx0) * u, dw = 34 * k, dh = 54 * k, fl = e5Flick(t, u * 9);
+    s.push(`<rect x="${f1(dx - dw / 2)}" y="${f1(hy - dh)}" width="${f1(dw)}" height="${f1(dh)}" fill="#8A5A2E" opacity="${f1(0.85 * fl)}"/><rect x="${f1(dx - dw / 2)}" y="${f1(hy - dh)}" width="${f1(dw)}" height="${f1(dh)}" fill="url(#hddoor)"/>` + glowC(dx, hy - dh / 2, 50 * k, 0.35 * fl, 'e5lant'));
+    D.push([dx, hy, dw, dh]); }
+  return {svg: s.join(''), doors: D, deck: hy};
+}
+// a guard in a doorway: ink, faceless, a rifle held upright before him (muzzle up, never toward the camera)
+function e5Guard(dx, deck, h, t, i, d = 1) {
+  let fo = e3Stand({kind: 'man', hat: i % 2 ? 'bowler' : 'cap', coat: 'sack', x: dx, y: deck, floorY: deck, h, d, fill: '#050606', det: 0, tones: {tone: '#161A1B', lite: '#222'}, rim: {c: '#FFB870', a: 0.5, dx: -0.008 * d, dy: -0.004}, an: {...POSES.stand(t, i * 0.3), tilt: 4 * Math.sin(t * 0.6 + i)}}, dx, dx, 0, `hd.guard${i}`);
+  const grip = E3K.toWorld(fo, 0.1, 0.58); fo = reach(fo, 'f', grip[0], grip[1], `hd.guard${i}.rifle`);
+  const gf = E3K.hand(fo, 'f'); fo = reach(fo, 'b', gf.x + 1, gf.y + 0.1 * h, `hd.guard${i}.rifle2`);
+  const rifle = holding(fo, 'f', `hd.guard${i}.rifleH`, (gx, gy) => line([[gx, gy + 0.3 * h], [gx + 2, gy - 0.42 * h]], '#050606', Math.max(2, 0.018 * h)) + line([[gx - 1, gy + 0.1 * h], [gx, gy + 0.3 * h]], '#050606', Math.max(4, 0.035 * h)));
+  return figure(fo) + rifle;
+}
+function e5Tug2(x, y, k, t, beamA) { // the tug with its lantern beam (beamA: the beam's angle in degrees, 180 = pointing left)
+  const s = [];
+  s.push(e5Tug(x, y, k, t));
+  const lx = x - 50 * k, ly = y - 66 * k, a = beamA * Math.PI / 180, L = 1400, w = 0.16;
+  s.push(`<g filter="url(#hdbeamblur)" style="mix-blend-mode:screen">` + [0.04, 0.08, 0.13].map((ww) => `<path d="M${f1(lx)},${f1(ly)} L${f1(lx + L * Math.cos(a - ww))},${f1(ly + L * Math.sin(a - ww))} L${f1(lx + L * Math.cos(a + ww))},${f1(ly + L * Math.sin(a + ww))} Z" fill="url(#hdbeam)" opacity="0.16"/>`).join('') + `</g>` + glowC(lx, ly, 50 * k, 0.9, 'msglow'));
+  return s.join('');
+}
+function e5ShotD(t) { // low at the water: the barges loom out of the fog
+  const s = [], u = smooth(15.0, 20.0, t);
+  s.push(`<rect x="-600" y="-200" width="3200" height="1500" fill="url(#hdsky)"/>` + glowC(1800, 640, 800, 0.6, 'e4haze'));
+  s.push(`<path d="M-600,690 Q400,660 1200,690 Q1900,710 2600,680 L2600,760 L-600,760 Z" fill="#1A2428"/>`);
+  s.push(e5Mist(t, -600, 2600, 560, 760, {n: 14, seed: 581, speed: 14, op: 0.7, h: 70}));
+  s.push(MAT.water(-600, 740, 3200, 500, t, {top: '#1A2327', bottom: '#040607', seed: 582, glint: '#9FB0B2', n: 120}));
+  // the rear barge (further, fogged), then the tug, then the front barge, huge
+  const xb = lerp(1250, 1520, u);
+  const rear = e5BargeBig(xb - 160, 760, 2.1, t, [0.3, 0.62]);
+  s.push(rear.svg, rear.doors.map((dd, i) => e5Guard(dd[0], dd[1], dd[3] * 0.92, t, i + 5)).join(''));
+  s.push(e5Mist(t, -600, 2600, 640, 820, {n: 10, seed: 583, speed: 16, op: 0.55, h: 60}));
+  s.push(e5Tug2(xb + 520, 800, 1.6, t, 176 + 10 * Math.sin((t - 15) * 0.9)));
+  const front = e5BargeBig(xb + 80, 880, 3.1, t, [0.18, 0.44, 0.7]);
+  s.push(front.svg, front.doors.map((dd, i) => e5Guard(dd[0], dd[1], dd[3] * 0.92, t, i)).join(''));
+  // wake breaking white along the hull, near ripples
+  s.push([0, 1, 2, 3].map((i) => line([[xb + 80 - i * 40, 884 + i * 6], [xb - 1200 - i * 100, 896 + i * 18]], '#BCC8C8', 2.5, `opacity="${f1(0.35 - i * 0.07)}"`)).join(''));
+  s.push(e5Mist(t, -600, 2600, 800, 1080, {n: 14, seed: 584, speed: 18, op: 0.5, h: 70}));
+  return s.join('');
+}
+// the landing (shot E and the freeze): the barge's bow at the bank, the gangplank, the crowd
+function e5ShotE(t, c) {
+  const s = [], ft = Math.min(t, HD.freeze), BANK = 900;
+  s.push(`<rect x="-600" y="-200" width="3200" height="1500" fill="url(#hdsky)"/>`);
+  // the works behind the crowd, top right: stacks and the furnace glow
+  s.push(glowC(1700, 520, 900, 0.9, 'e4haze'));
+  for (const [sx, sh] of [[1380, 640], [1500, 720], [1640, 680], [1780, 760], [1920, 700]]) s.push(`<rect x="${sx}" y="${BANK - sh}" width="40" height="${sh}" fill="#11171A"/><rect x="${sx}" y="${BANK - sh + 10}" width="40" height="80" fill="#FF5A2A" opacity="0.12"/>`);
+  s.push(e5Embers(t, 1380, 1960, BANK - 700, 50, 591, 400, -200));
+  s.push(`<path d="M1200,${BANK} L1200,560 L1460,520 L1460,${BANK} Z M1460,${BANK} L1460,500 L2400,500 L2400,${BANK} Z" fill="#141B1E"/>` + [...Array(12).keys()].map((i) => `<rect x="${1230 + i * 90}" y="600" width="30" height="44" fill="#FF5A24" opacity="${f1((i % 3 === 1 ? 0.9 : 0.5) * e5Flick(t, i))}"/>`).join(''));
+  s.push(e5Mist(t, -600, 2600, 520, 760, {n: 12, seed: 592, speed: 8, op: 0.55, h: 60}));
+  s.push(MAT.water(-600, 760, 2000, 520, t, {top: '#182226', bottom: '#040607', seed: 593, glint: '#9FB0B2', n: 90}));
+  // the bank: a mud slope from the water up to the landing, the landing's planks
+  s.push(`<path d="M980,1300 L980,${BANK + 30} Q1040,${BANK} 1100,${BANK} L2600,${BANK} L2600,1300 Z" fill="#0C0F10"/><path d="M980,${BANK + 30} Q1040,${BANK} 1100,${BANK} L2600,${BANK} L2600,${BANK + 12} L1100,${BANK + 12} Z" fill="#20282A"/>` +
+    `<rect x="1060" y="${BANK - 6}" width="320" height="10" fill="#2A2620"/>` + [0, 1, 2, 3].map((i) => `<rect x="${1070 + i * 90}" y="${BANK + 4}" width="10" height="60" fill="#0A0C0C"/>`).join(''));
+  // the barge at the landing (bow right at x 1000), guards in the doorways
+  const bg = e5BargeBig(1000, 860, 2.4, t, [0.28, 0.55, 0.8]);
+  s.push(bg.svg, bg.doors.map((dd, i) => e5Guard(dd[0], dd[1], dd[3] * 0.92, t, i)).join(''));
+  // the gangplank: hinged at the bow deck, lowered from upright until its end rests on the landing
+  const hinge = [990, bg.deck], end = [1170, BANK - 6], L = Math.hypot(end[0] - hinge[0], end[1] - hinge[1]), aEnd = Math.atan2(end[1] - hinge[1], end[0] - hinge[0]);
+  const a = lerp(-1.2, aEnd, Math.pow(smooth(HD.plank[0], HD.plank[1], ft), 1.4)), tip = [hinge[0] + L * Math.cos(a), hinge[1] + L * Math.sin(a)];
+  const nx = -Math.sin(a) * 18, ny = Math.cos(a) * 18;
+  s.push(`<path d="M${f1(hinge[0])},${f1(hinge[1])} L${f1(tip[0])},${f1(tip[1])} L${f1(tip[0] + nx)},${f1(tip[1] + ny)} L${f1(hinge[0] + nx)},${f1(hinge[1] + ny)} Z" fill="#3A2E22"/>` + line([hinge, tip], '#FFB870', 2.5, 'opacity="0.7"') +
+    line([[hinge[0] - 30, hinge[1] - 120], tip], '#1A1612', 2) + line([[hinge[0] - 30, hinge[1] - 140], [hinge[0] - 30, hinge[1]]], '#0D0B08', 6));
+  s.push(e5Mist(t, -600, 1300, 760, 900, {n: 10, seed: 594, speed: 12, op: 0.5, h: 50}));
+  // the crowd: three rows on the bank facing the barge, shouting (arms up, heads up), lanterns raised, torches
+  const rows = [{G: BANK + 20, H: 270}, {G: BANK + 80, H: 320}, {G: BANK + 150, H: 380}], P = [];
+  const crowd = [[0, 1260, 'L'], [0, 1360, 0], [0, 1470, 'T'], [0, 1580, 0], [0, 1690, 'L'], [0, 1800, 0], [0, 1900, 'T'],
+    [1, 1300, 0], [1, 1420, 'L'], [1, 1550, 0], [1, 1680, 'T'], [1, 1810, 0], [1, 1930, 'L'],
+    [2, 1230, 'T'], [2, 1390, 0], [2, 1560, 'L'], [2, 1740, 0], [2, 1910, 'T']];
+  crowd.forEach(([ri, x, prop], i) => {
+    const {G, H} = rows[ri], name = `hd.c${i}`, sh = Math.max(0, Math.sin(ft * (2.2 + (i % 3) * 0.4) + i)), woman = i % 7 === 3;
+    let fo = e5Standing({kind: woman ? 'woman' : 'man', hat: woman ? 'kerchief' : i % 3 ? 'cap' : 'bowler', coat: i % 2 ? 'jacket' : 'sack', wear: woman ? ['plain', 'shawl'] : [], h: woman ? H * 0.9 : H, d: -1, fill: '#050606', det: 0, tones: {tone: '#151A1B', lite: '#222829'},
+      rim: {c: '#FFB060', a: 0.75, dx: 0.009, dy: -0.006}}, x, G, ft, i * 0.21, name, {tilt: 10 + 6 * sh});
+    if (prop === 'T') fo = {...fo, an: {...fo.an, fArm: [lerp(150, 24, smooth(19.6 + i * 0.05, 20.4, ft)), lerp(130, 14, smooth(19.6, 20.4, ft))]}};
+    else if (prop === 'L') fo = {...fo, an: {...fo.an, fArm: [40 + 14 * sh, 30 + 10 * sh]}};
+    else { const w = Math.max(0, Math.sin(ft * 3.1 + i * 1.7)); fo = {...fo, an: {...fo.an, fArm: [20 + 40 * w, 10 + 30 * w], lean: -3 * w}}; }
+    const ex = prop === 'T' ? holding(fo, 'f', name + '.torch', (gx, gy) => e5Torch(gx, gy, ft, i, H / 300, i === 13 ? 1 + 0.9 * e4Bump(ft, HD.flare, 1.4) : 1)) :
+      prop === 'L' ? holding(fo, 'f', name + '.lantern', (gx, gy) => e5Lantern(gx, gy, ft, i, H / 220)) : '';
+    P.push({ri, svg: fig(fo) + ex});
   });
   [0, 1, 2].forEach((ri) => P.filter((p) => p.ri === ri).forEach((p) => s.push(p.svg)));
-  // low mist curling along the bank in front
-  s.push(e5Mist(t, -600, 2600, 860, 1060, {n: 10, seed: 536, speed: 7, op: 0.28, h: 50}));
-  const world = layerAt(c, 1, s.join(''));
-  const scr = o.quiet ? '' : tag(130, 120, 'HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M.', smooth(0.3, 0.7, t) * (1 - smooth(4.2, 4.6, t)));
-  return frame(e5Defs(t, grad('hdsky', [['0', '#0A1216'], ['0.55', '#22323A'], ['0.85', '#56666A'], ['1', '#7C8886']]) +
-    `<radialGradient id="hddawn"><stop offset="0" stop-color="#C8A88E" stop-opacity="0.45"/><stop offset="1" stop-color="#C8A88E" stop-opacity="0"/></radialGradient>` +
-    `<clipPath id="hdwater"><rect x="-600" y="${HD.W0}" width="3200" height="${HD.W1 - HD.W0}"/></clipPath>`), sky, world, scr, t);
+  s.push(e5Mist(t, -600, 2600, 1000, 1200, {n: 8, seed: 595, speed: 8, op: 0.3, h: 60}));
+  return {svg: s.join(''), tip};
+}
+function renderE5Homestead(t, o = {}) {
+  const [cA, cB, cC, cD] = HD.cuts, FZ = HD.freeze, frozen = t >= FZ, tt = frozen ? FZ : t;
+  let world = '', scr = '', c;
+  if (tt < cA) { c = cam2(camAt([[0, 1.0, 960, 520], [cA, 1.1, 1060, 545]], tt)); world = layerAt(c, 1, e5ShotA(tt, c, 0));
+    if (!o.quiet) scr = tag(130, 120, 'HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M.', smooth(0.3, 0.7, tt) * (1 - smooth(4.2, 4.6, tt))); }
+  else if (tt < cB) { const blast = smooth(HD.whistle[0], HD.whistle[0] + 0.15, tt) * (1 - smooth(HD.whistle[1] - 0.3, HD.whistle[1], tt));
+    c = cam2(camAt([[cA, 2.0, 1690, 430], [cB, 2.25, 1700, 410]], tt)); world = layerAt(c, 1, e5ShotA(tt, c, blast)); }
+  else if (tt < cC) {
+    c = cam2(camAt([[cB, 1.0, 900, 560], [cC, 1.12, 1100, 600]], tt));
+    const set = e5ShotC(tt), P = [];
+    // the runners in front: down from the left at speed toward the gate; the front three push it; all surge through
+    const R = [[-260, 280, 1, 0], [-420, 320, 0, 0], [-120, 300, 2, 1], [-600, 300, 0, 1], [-760, 340, 1, 0], [-880, 290, 2, 1], [-1000, 320, 0, 0], [-1150, 300, 1, 1]];
+    R.forEach(([x0, H, row, lant], i) => {
+      const G = set.G - 6 + row * 18, push = i < 3, at = push ? set.gx0 - 55 - i * 30 : 900 - i * 40;
+      const walks = push ? [{t0: cB, t1: 11.5, to: at, a: 0.08}, {t0: HD.gate + 0.4, t1: 15.2, to: 2300, a: 0.08}] : [{t0: cB + 0.1 * i, t1: 15.0, to: 2100 - i * 60, a: 0.05}];
+      const base = {kind: 'man', hat: i % 2 ? 'cap' : 'bowler', coat: i % 2 ? 'jacket' : 'sack', h: H, fill: '#050606', det: 0, tones: {tone: '#151A1B', lite: '#222829'}, rim: {c: '#FFB060', a: 0.55, dx: 0.008, dy: -0.006}};
+      const tr = e4Track({...base, an: {}}, {x: x0, d: 1, G, ph: i * 0.2, walks: walks.map((w) => ({...w, carry: !!lant, an: lant ? {fArm: [150, 30]} : {}}))}, tt, `hd.run${i}`);
+      let fo = tr.fo; fo = {...fo, an: {...fo.an, lean: (fo.an.lean || 0) + (tr.state === 'walk' ? 8 : 0)}};
+      if (push && tr.state !== 'walk' && tt > 11.5 && tt < HD.gate + 0.4) { const k = smooth(11.5, 11.8, tt), P1 = [set.gx0 + 6, set.G - 10 - 330 * 0.55 + i * 10];
+        fo = {...fo, an: {...fo.an, lean: 14 * k}}; const g = E3K.hand(fo, 'f'); fo = k < 1 ? e3Move(fo, 'f', lerp(g.x, P1[0], k), lerp(g.y, P1[1], k), `hd.run${i}.toGate`) : (tt < HD.gate ? reach(fo, 'f', P1[0], P1[1], `hd.run${i}.gate`) : fo); }
+      const ex = lant ? holding(fo, 'f', `hd.run${i}.torch`, (gx, gy) => (i % 2 ? e5Lantern(gx, gy, tt, i, H / 220) : e5Torch(gx, gy, tt, i, H / 300))) : '';
+      P.push({row, svg: fig(fo) + ex});
+    });
+    world = layerAt(c, 1, set.svg + [0, 1, 2].map((r) => P.filter((p) => p.row === r).map((p) => p.svg).join('')).join(''));
+  } else if (tt < cD) { c = cam2(camAt([[cC, 1.0, 960, 640], [cD, 1.12, 900, 660]], tt)); world = layerAt(c, 1, e5ShotD(tt)); }
+  else { c = cam2(camAt([[cD, 1.0, 1080, 640], [FZ, 1.32, 1120, 700]], tt)); world = layerAt(c, 1, e5ShotE(tt, c).svg); }
+  // the freeze: hold the last frame, drain toward monochrome, grade teal (shadows) and orange (lights)
+  const z = frozen ? smooth(FZ, FZ + 1.4, t) : 0;
+  const defs = e5Defs(tt, e4FireDefs() + grad('hdsky', [['0', '#060C10'], ['0.5', '#13212A'], ['0.8', '#2F4450'], ['1', '#4E6068']]) +
+    `<linearGradient id="hddoor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.5"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>` +
+    `<linearGradient id="hdbeam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF0C8" stop-opacity="0.7"/><stop offset="1" stop-color="#FFF0C8" stop-opacity="0"/></linearGradient>` +
+    `<filter id="hdbeamblur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="16"/></filter><filter id="hdgrade"><feColorMatrix type="saturate" values="${f1((1 - 0.78 * z) * 100) / 100}"/></filter>` +
+    grad('hdtone', [['0', '#1E6E70'], ['0.6', '#2A5A5A'], ['1', '#C8642A']]));
+  const graded = z > 0 ? `<g filter="url(#hdgrade)">${world}</g><rect width="1920" height="1080" fill="url(#hdtone)" opacity="${f1(0.5 * z * 100) / 100}" style="mix-blend-mode:overlay"/><rect width="1920" height="1080" fill="#000" opacity="${f1(0.12 * z * 100) / 100}"/>` : world;
+  return frame(defs, `<rect width="1920" height="1080" fill="#060C10"/>`, graded, scr, tt);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Homestead});
 Object.assign(CLIPS, {ep5_homestead_dawn: {sec: HD.sec, render: (t) => renderE5Homestead(t)}});
