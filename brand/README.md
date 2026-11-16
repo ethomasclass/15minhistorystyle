@@ -80,3 +80,5 @@ Every thumbnail made so far is in [`thumbnails/`](thumbnails/). The one marked â
 - The wordmark goes small in the top-left. Keep the bottom-right corner clear, because YouTube's duration badge covers it.
 - The whole head stays in frame, and text never covers a face.
 - **Topic-led variant** (*The Exact Spot* D, asked for by the user): when the search term is the topic ("Mexican-American War"), put the topic on the first strip and the question on the second, over a period print of the event itself rather than one person. With two sides, wash the picture in a horizontal gradient, coral for one side and teal for the other (`mix-blend-mode: color` at 0.75 plus `multiply` at 0.18, inside `isolation: isolate`), so the split reads without cutting anyone out.
+
+- **Gilded Age series look** ("the neon silhouette": Flow base image, rembg cutout with a neon teal outline, darkened background, headline on jagged torn orange strips in Abril Fatface, handwritten or teal-strip setup line): recipe and template in [`projects/Gilded_Age/thumbnails/STYLE.md`](../projects/Gilded_Age/thumbnails/STYLE.md). Used for Ep 3 and Ep 4.
