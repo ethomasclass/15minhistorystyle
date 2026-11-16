@@ -203,7 +203,7 @@ Object.assign(CLIPS, {ep5_union_meeting: {sec: UM.sec, render: (t) => renderE5Me
 // As the barges near the landing (about 14 s) a few tiny muzzle flashes far off at the barges' bows and the bank, puffs of smoke
 // drifting into the mist; the crowd flinches and stands its ground; no one falls. Scale: a man 150 to 200 px by depth.
 const HD = {sec: 18, W0: 560, W1: 795, land: [1150, 1330], flash: [[14.3, 1040, 668], [14.55, 1290, 778], [14.75, 1010, 664], [15.2, 1310, 782], [15.65, 1050, 670], [16.3, 1280, 780]]};
-const e5BargePath = (t) => { const u = e3Trap(t, 0, 17.4, 0.05) * 0.8 + 0.2 * smooth(0, 17.4, t); return {x: lerp(-420, 960, u), y: lerp(668, 762, u * u), k: lerp(0.5, 0.82, u)}; };
+const e5BargePath = (t) => { const u = e3Trap(t, 0, 17.4, 0.05) * 0.8 + 0.2 * smooth(0, 17.4, t); return {x: lerp(-420, 960, u), y: lerp(668, 752, u * u), k: lerp(0.5, 0.82, u)}; };
 function e5Barge(x, y, k, t, seed) { // a covered barge (x = its bow, facing right): low hull, a long roofed house with dark vents
   const L = 420 * k, s = [];
   s.push(`<path d="M${f1(x - L)},${f1(y - 26 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 12 * k)} L${f1(x - 8 * k)},${f1(y)} L${f1(x - L)},${f1(y)} Z" fill="#101415"/>`);
@@ -247,7 +247,7 @@ function renderE5Homestead(t, o = {}) {
   // the barges and tug, coming up from the left toward the landing; their wake
   const bp = e5BargePath(t), k = bp.k;
   s.push(`<ellipse cx="${f1(bp.x - 160)}" cy="${f1(bp.y + 4)}" rx="420" ry="10" fill="#1A2224" opacity="0.5"/>` + [0, 1, 2].map((i) => line([[bp.x + 40 - i * 30, bp.y + 2 + i * 3], [bp.x - 260 - i * 80, bp.y + 10 + i * 9]], '#AEBBBC', 1.5, `opacity="${0.35 - i * 0.1}"`)).join(''));
-  s.push(e5Barge(bp.x - 10 * k, bp.y - 12 * k, k * 0.94, t, 1), e5Barge(bp.x + 20 * k, bp.y, k, t, 2), e5Tug(bp.x + 270 * k, bp.y + 2, k, t));
+  s.push(e5Barge(bp.x - 70 * k, bp.y - 30 * k, k * 0.9, t, 1), e5Barge(bp.x + 20 * k, bp.y, k, t, 2), e5Tug(bp.x + 270 * k, bp.y + 2, k, t));
   // the muzzle flashes, far off, and their smoke (brief; no one is seen hit)
   for (let [ft, fx, fy] of HD.flash) { const onBarge = fx < 1100, x = onBarge ? bp.x + (fx - 1060) * k : fx; if (onBarge) fy = bp.y - 40 * k + (fy - 668);
     if (t > ft && t < ft + 0.14) s.push(glowC(x, fy, 26, 1 - (t - ft) / 0.14, 'e5flash') + `<circle cx="${x}" cy="${fy}" r="2.5" fill="#FFF8E8"/>`);
