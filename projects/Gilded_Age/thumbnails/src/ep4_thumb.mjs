@@ -14,6 +14,7 @@ const CSS = `
 @font-face{font-family:Pen;src:url(${F}NanumPenScript.woff2)}
 body{margin:0;background:#000}#s{position:relative;width:1280px;height:720px;overflow:hidden;background:#0b0d0c}
 #s img{position:absolute;left:-4px;top:-2px;width:1288px;height:719px}
+#s img.cut{height:794px}
 #s .bg{filter:brightness(.62) saturate(.9)}
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35) 48%,rgba(0,0,0,0) 62%),radial-gradient(ellipse 700px 520px at 76% 45%,rgba(0,0,0,0),rgba(0,0,0,.45))}
 .rim{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse 420px 420px at 78% 45%,rgba(47,224,196,.22),rgba(47,224,196,0) 70%)}
