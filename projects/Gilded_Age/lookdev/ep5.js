@@ -293,3 +293,117 @@ function renderE5Homestead(t, o = {}) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Homestead});
 Object.assign(CLIPS, {ep5_homestead_dawn: {sec: HD.sec, render: (t) => renderE5Homestead(t)}});
+
+/* ================= ep5_farm_kitchen: a sod house near O'Neill, Holt County, Nebraska, a winter evening, about 1890 (16 s) ================= */
+// Uncle Owen Kelly (Da's younger brother, coral) farms near O'Neill, an Irish colony on the Plains. One room cut out of the prairie:
+// walls of stacked sod blocks, a muslin ceiling sagging between the poles, one small deep-set window with snow driving past it. Owen
+// sits at the table by the lamp writing a letter home; beside him a pile of bills and the mortgage papers, the top sheet with a small
+// red stamp; a calendar on the wall. His wife (coral) at the stove with the kettle steaming, glancing over at him once. Their child
+// (coral) asleep in the bed in the far corner, the quilt rising and falling; nobody near the bed. He stops writing, looks at the pile,
+// rubs his brow, and writes on. Wind gusts drive the snow and make the lamp flame dip. Scale: a man 440 px.
+const FK = {sec: 16, x0: 300, x1: 1640, ceil: 300, wallFoot: 930, F: 1000, H: 440, bed: [330, 640], stove: [700, 880], table: [1120, 1400], chair: 1475, win: [1190, 1310], cal: 1540,
+  pause: [6.2, 9.4], glance: [4.4, 6.0]};
+FK.top = FK.F - 0.43 * FK.H;
+const e5Gust = (t) => 0.5 + 0.5 * Math.max(0, Math.sin(t * 0.9) * Math.sin(t * 0.37 + 1));
+function e5SodRoom(t) {
+  const {x0, x1, ceil, wallFoot, F} = FK, b = [], r = rng(541), g = e5Gust(t);
+  b.push(`<rect x="-1500" y="-1200" width="5000" height="3600" fill="#070605"/>`);
+  // sod blocks: courses of irregular cut turves, roots and grass at the joints, a little whitewash wearing off at eye height
+  b.push(`<rect x="${x0}" y="${ceil}" width="${x1 - x0}" height="${wallFoot - ceil}" fill="#3A3024"/><g clip-path="url(#fkroom)">`);
+  for (let y = ceil, row = 0; y < wallFoot; y += 44, row++) for (let x = x0 - (row % 2) * 60; x < x1; x += 100 + r() * 30) {
+    const w = 96 + r() * 26, sh = r();
+    b.push(`<rect x="${f1(x + 2 + r() * 4)}" y="${f1(y + 1 + r() * 5)}" width="${f1(w - 8)}" height="${f1(34 + r() * 6)}" rx="11" fill="${sh < 0.33 ? '#433728' : sh < 0.66 ? '#3F3326' : '#352B20'}"/>`);
+    if (r() < 0.6) b.push(`<path d="M${f1(x + 10 + r() * 60)},${f1(y + 42)} l-4,-9 M${f1(x + 14 + r() * 60)},${f1(y + 42)} l1,-11 M${f1(x + 30 + r() * 50)},${f1(y + 42)} l4,-8 M${f1(x + 40 + r() * 50)},${f1(y + 2)} q-6,8 -2,14" stroke="#2A2318" stroke-width="2" fill="none"/>`);
+  }
+  b.push(`</g><rect x="${x0}" y="${ceil + 160}" width="${x1 - x0}" height="300" fill="#CFC2A4" opacity="0.07"/>`);
+  // the muslin ceiling sagging between poles
+  b.push(`<rect x="${x0}" y="${ceil - 60}" width="${x1 - x0}" height="60" fill="#211B13"/>` + [...Array(6).keys()].map((i) => { const a = x0 + i * (x1 - x0) / 6, w = (x1 - x0) / 6;
+    return `<path d="M${f1(a)},${ceil - 6} Q${f1(a + w / 2)},${ceil + 30} ${f1(a + w)},${ceil - 6} L${f1(a + w)},${ceil - 60} L${f1(a)},${ceil - 60} Z" fill="#6E6450" opacity="0.6"/>`; }).join('') +
+    [...Array(7).keys()].map((i) => `<rect x="${f1(x0 + i * (x1 - x0) / 6 - 7)}" y="${ceil - 60}" width="14" height="${f1(56)}" fill="#1A140D"/>`).join(''));
+  // the window: deep in the thick wall (splayed reveals), night outside, snow driving past in gusts, a drift on the sill
+  const [w0, w1] = FK.win, wy0 = 430, wy1 = 560;
+  b.push(`<path d="M${w0 - 40},${wy0 - 34} L${w1 + 40},${wy0 - 34} L${w1 + 40},${wy1 + 30} L${w0 - 40},${wy1 + 30} Z" fill="#2A2219"/><path d="M${w0 - 40},${wy1 + 30} L${w0},${wy1} L${w1},${wy1} L${w1 + 40},${wy1 + 30} Z" fill="#4A3E2E"/>` +
+    `<rect x="${w0}" y="${wy0}" width="${w1 - w0}" height="${wy1 - wy0}" fill="#1A2A33"/>`);
+  const sn = []; const rs = rng(543);
+  for (let i = 0; i < 40; i++) { const sp = 160 + 260 * g, y0 = rs() * 200, x0s = rs() * 300, x = w0 + ((x0s + t * sp) % 300) - 80, y = wy0 + ((y0 + t * (60 + 40 * rs())) % 150) - 10;
+    sn.push(line([[x, y], [x - 6 - 10 * g, y - 2]], '#E6EEF0', 1.6, `opacity="${f1(0.4 + 0.5 * rs())}"`)); }
+  b.push(`<g clip-path="url(#fkwin)">${sn.join('')}<path d="M${w0},${wy1} q30,-26 60,-16 q30,-18 ${w1 - w0 - 60},6 L${w1},${wy1} Z" fill="#DCE4E6" opacity="0.85"/></g>` +
+    `<rect x="${(w0 + w1) / 2 - 3}" y="${wy0}" width="6" height="${wy1 - wy0}" fill="#120D08"/><rect x="${w0}" y="${(wy0 + wy1) / 2 - 3}" width="${w1 - w0}" height="6" fill="#120D08"/><rect x="${w0}" y="${wy0}" width="${w1 - w0}" height="${wy1 - wy0}" fill="none" stroke="#120D08" stroke-width="8"/>` +
+    [[w0 + 4, wy0 + 4, 1, 1], [w1 - 4, wy0 + 4, -1, 1]].map(([x, y, dx, dy]) => `<path d="M${x},${y} q${dx * 30},${dy * 4} ${dx * 40},${dy * 26} q${-dx * 20},${-dy * 6} ${-dx * 40},${dy * 18} Z" fill="#E6EEEC" opacity="0.4"/>`).join('') + glowC((w0 + w1) / 2, (wy0 + wy1) / 2, 200, 0.3, 'kfcold'));
+  // the calendar: a picture at the top, a grid of days, a page curling in the draught
+  const cx = FK.cal, cy = 440, cu = 4 * g;
+  b.push(`<rect x="${cx}" y="${cy}" width="74" height="104" fill="#D8CFB8" opacity="0.85"/><rect x="${cx + 6}" y="${cy + 6}" width="62" height="34" fill="#6B7A6E" opacity="0.8"/><path d="M${cx + 6},${cy + 34} q20,-12 30,-4 q14,-10 32,0 L${cx + 68},${cy + 40} L${cx + 6},${cy + 40} Z" fill="#4E5A50"/>` +
+    [...Array(5).keys()].map((ry) => [...Array(7).keys()].map((rx) => `<rect x="${cx + 7 + rx * 9}" y="${cy + 48 + ry * 10}" width="7" height="7" fill="none" stroke="#5A5040" stroke-width="1"/>`).join('')).join('') +
+    `<path d="M${cx + 74},${cy + 104} L${cx + 74 - 10 - cu},${cy + 104 - cu * 0.5} L${cx + 74},${cy + 90} Z" fill="#BFB59C"/><circle cx="${cx + 37}" cy="${cy - 2}" r="3" fill="#120D08"/>`);
+  // a shelf with tins and a crock; a coat and a hat on pegs by the door side
+  b.push(`<rect x="900" y="420" width="220" height="10" fill="#1A140D"/>` + [[912, 40], [952, 54], [1010, 34], [1052, 46]].map(([x, h]) => `<rect x="${x}" y="${420 - h}" width="30" height="${h}" rx="3" fill="#1D1912"/>`).join(''));
+  // the floor: packed earth with a rag rug
+  b.push(`<rect x="${x0}" y="${wallFoot - 10}" width="${x1 - x0}" height="10" fill="#2A2218"/><rect x="${x0}" y="${wallFoot}" width="${x1 - x0}" height="${F + 80 - wallFoot}" fill="#3A2F22"/><rect x="${x0}" y="${wallFoot}" width="${x1 - x0}" height="${F + 80 - wallFoot}" fill="url(#matFloorShade)"/>` +
+    `<ellipse cx="1000" cy="${F + 26}" rx="230" ry="22" fill="#5A4636" opacity="0.7"/><ellipse cx="1000" cy="${F + 26}" rx="190" ry="16" fill="none" stroke="#6E5A44" stroke-width="4" opacity="0.6"/>`);
+  for (let k = 0; k < 18; k++) b.push(`<ellipse cx="${f1(x0 + r() * (x1 - x0))}" cy="${f1(wallFoot + 10 + r() * 140)}" rx="${f1(4 + r() * 16)}" ry="${f1(1 + r() * 3)}" fill="#1E180F" opacity="0.4"/>`);
+  const c = '#050505', f = `<rect x="${x0 - 40}" y="${ceil - 120}" width="40" height="${F - ceil + 220}" fill="${c}"/><rect x="${x1}" y="${ceil - 120}" width="40" height="${F - ceil + 220}" fill="${c}"/>` +
+    `<rect x="${x0 - 40}" y="${ceil - 120}" width="${x1 - x0 + 80}" height="62" fill="${c}"/><rect x="${x0 - 40}" y="${F + 80}" width="${x1 - x0 + 80}" height="80" fill="${c}"/>`;
+  return {back: b.join(''), front: f};
+}
+// the bed in the corner: iron frame, straw tick, a patchwork quilt rising and falling with the child's breathing; the child's head
+// (coral, an ink outline) on the pillow, asleep, face turned to the wall
+function e5Bed(t) {
+  const [b0, b1] = FK.bed, F = FK.F, top = F - 120, br = 1 + 0.012 * Math.sin(t * 1.6), s = [];
+  s.push(MAT.shadow((b0 + b1) / 2, F + 4, 180, 0.45) + `<rect x="${b0}" y="${top - 110}" width="12" height="${F - top + 110}" fill="#1A1A18"/><rect x="${b1 - 12}" y="${top - 60}" width="12" height="${F - top + 60}" fill="#1A1A18"/>` +
+    line([[b0 + 6, top - 106], [b0 + 6, top - 50]], '#1A1A18', 3) + [0, 1, 2].map((i) => line([[b0 + 12, top - 90 + i * 22], [b0 + 30, top - 90 + i * 22]], '#1A1A18', 3)).join('') +
+    `<rect x="${b0 + 8}" y="${top}" width="${b1 - b0 - 16}" height="26" fill="#6E6450"/><rect x="${b0 + 8}" y="${top + 26}" width="${b1 - b0 - 16}" height="12" fill="#1A1A18"/>`);
+  s.push(`<ellipse cx="${b0 + 70}" cy="${top - 10}" rx="52" ry="18" fill="#D8D0BC"/>`);
+  const hx = b0 + 74, hy = top - 30, hd = `<circle cx="${hx}" cy="${hy}" r="23" fill="${E5.coral}"/><path d="M${hx - 22},${hy - 6} q4,-22 26,-20 q18,4 18,14 q-20,-8 -44,6 Z" fill="#B5463D"/>`;
+  s.push(`<circle cx="${hx}" cy="${hy}" r="26" fill="#0D0C09"/>` + hd);
+  const qy = top - 34 * br;
+  s.push(`<path d="M${b0 + 96},${top + 4} Q${b0 + 110},${qy - 6} ${b0 + 170},${qy} Q${b0 + 260},${qy + 6} ${b1 - 30},${top - 10} L${b1 - 14},${top + 30} L${b0 + 92},${top + 30} Z" fill="#5C4A3E"/>` +
+    [...Array(6).keys()].map((i) => `<rect x="${b0 + 110 + i * 70}" y="${f1(qy + 10 + (i % 2) * 8)}" width="36" height="22" fill="${['#7A5A44', '#4E5A50', '#8A7A5A'][i % 3]}" opacity="0.6"/>`).join(''));
+  return s.join('');
+}
+function renderE5Farm(t, o = {}) {
+  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.38, 970, 625], [7, 1.44, 1000, 632], [16, 1.48, 995, 642]], t));
+  const lod = lodFor(H * c.z), det = lod.det, g = e5Gust(t), room = e5SodRoom(t), s = [room.back];
+  const lampX = 1255, fl = e5Flick(t) * (1 - 0.12 * g * Math.max(0, Math.sin(t * 7.1))), rimL = (x) => ({c: '#FFE0B0', a: lod.rimA * 0.7 * fl, dx: x > lampX ? -0.008 : 0.008, dy: -0.005});
+  const OWEN = {kind: 'man', hat: 'none', coat: 'vest', beard: true, fill: E5.coral, tones: MICHAEL_TONES};
+  const WIFE = {kind: 'woman', hat: 'kerchief', coat: 'frock', wear: ['plain', 'apron'], fill: E5.coral, tones: MICHAEL_TONES};
+  // the stove, its pipe through the ceiling, the kettle steaming, the fire's glow
+  const [s0, s1] = FK.stove, sy = FK.wallFoot - 210;
+  s.push(`<rect x="${s0}" y="${sy}" width="${s1 - s0}" height="170" fill="#0D0C09"/><rect x="${s0 - 10}" y="${sy - 12}" width="${s1 - s0 + 20}" height="14" fill="#0D0C09"/><rect x="${s0 + 14}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/><rect x="${s1 - 28}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/>` +
+    `<rect x="${s0 + 110}" y="${FK.ceil - 60}" width="26" height="${sy - 12 - FK.ceil + 60}" fill="#0D0C09"/><rect x="${s0 + 26}" y="${sy + 50}" width="70" height="44" fill="#FFB15C" opacity="${f1(0.6 * (0.85 + 0.15 * Math.sin(t * 9)))}"/>` + glowC(s0 + 60, sy + 70, 320, 0.5 * fl, 'mswarm'));
+  const kx = s0 + 46, ky = sy - 12;
+  s.push(`<path d="M${kx - 30},${ky} q-4,-40 30,-44 q34,4 30,44 Z" fill="#141817"/><path d="M${kx + 26},${ky - 26} l26,-18 l4,6 l-24,20 Z" fill="#141817"/><path d="M${kx - 18},${ky - 40} q18,-30 36,0" stroke="#141817" stroke-width="5" fill="none"/>` +
+    MAT.smoke(kx + 54, ky - 46, t, {col: 'D9DEDA', k: 0.45, n: 7, rise: 150, drift: 30 + 40 * g, speed: 3.2, seed: 547}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.55 * 100) / 100}"`));
+  // ---- the wife at the stove: a hand on the kettle's handle, the other stirring the pot; she glances over at Owen once ----
+  const wx = s1 + 110, gl = t > FK.glance[0] && t < FK.glance[1];
+  let wf = e5Standing({...WIFE, x: wx, h: H * 0.9, d: gl ? 1 : -1, det, rim: rimL(wx)}, wx, F, t, 0.3, 'fk.wife', {tilt: gl ? 2 : -12, expr: 'neutral', blink: (t + 0.4) % 3.9 < 0.12});
+  const potX = s0 + 130, potY = sy - 12;
+  s.push(`<path d="M${potX - 26},${potY} l4,-34 l48,0 l4,34 Z" fill="#141817"/>`);
+  let spoon = '';
+  if (!gl) { const k = Math.sin(t * 2.6); wf = {...wf, an: {...wf.an, lean: 8}}; wf = reach(wf, 'f', potX + 10 * k, potY - 40 - 3 * Math.abs(k), 'fk.wife.spoon'); spoon = holding(wf, 'f', 'fk.spoon', (gx, gy) => line([[gx, gy], [gx - 4, gy + 30]], '#3A2C1C', 4)); }
+  // ---- the table: the lamp, the pile of bills and the mortgage papers (a small red stamp on the top sheet), Owen's letter ----
+  const [tx0, tx1] = FK.table, papX = 1150, letX = 1355;
+  const table = MAT.shadow((tx0 + tx1) / 2, F + 4, 170, 0.45) + `<rect x="${tx0}" y="${top}" width="${tx1 - tx0}" height="14" fill="#2B2418"/><rect x="${tx0}" y="${top}" width="${tx1 - tx0}" height="3" fill="#FFE6C0" opacity="0.22"/>` +
+    `<rect x="${tx0 + 14}" y="${top + 14}" width="12" height="${F - top - 14}" fill="#0D0C09"/><rect x="${tx1 - 26}" y="${top + 14}" width="12" height="${F - top - 14}" fill="#0D0C09"/>` +
+    [0, 1, 2, 3, 4, 5].map((i) => `<rect x="${papX - 4 + (i % 2) * 6}" y="${top - 3 - i * 3}" width="70" height="3" fill="${i % 3 === 1 ? '#CFC4A8' : '#E3DAC4'}" transform="rotate(${(i % 3) - 1}, ${papX + 30}, ${top - i * 3})"/>`).join('') +
+    `<path d="M${papX + 4},${top - 21} L${papX + 72},${top - 25} L${papX + 76},${top - 21} L${papX + 6},${top - 18} Z" fill="#EFE7D2"/><ellipse cx="${papX + 52}" cy="${top - 22}" rx="7" ry="2.2" fill="#B8322A"/>` +
+    `<path d="M${letX - 34},${top} L${letX + 30},${top - 4} L${letX + 34},${top} Z" fill="#EFE7D2"/><rect x="${letX - 60}" y="${top - 14}" width="14" height="14" rx="3" fill="#0D0C09"/>` + e5Lamp(lampX, top, t * (1 + 0.3 * g), 1.05, 2);
+  // ---- Owen at the table: writes; stops, looks at the pile, rubs his brow; writes on ----
+  const [p0, p1] = FK.pause, paused = t > p0 && t < p1, rub = smooth(p0 + 0.9, p0 + 1.3, t) * (1 - smooth(p1 - 1.0, p1 - 0.6, t));
+  let ow = e5Sit({...OWEN, h: H, d: -1, det, rim: rimL(FK.chair)}, FK.chair, F - 0.24 * H, F, t, 0.2, 'fk.owen.seat', {tilt: paused ? -6 - 10 * smooth(p0, p0 + 0.6, t) + 14 * rub : -16, expr: 'set', blink: (t + 1.2) % 4.1 < 0.12});
+  const wu = ((t < p0 ? t : t > p1 ? t - (p1 - p0) : p0) * 0.12) % 1, nib = [letX + 18 - 40 * wu + 2.5 * Math.sin(t * 27), top - 2 - Math.abs(2 * Math.sin(t * 15))];
+  const penHome = [letX + 20, top - 34];
+  if (paused) { const k = smooth(p0, p0 + 0.4, t) * (1 - smooth(p1 - 0.4, p1, t)); ow = k < 1 ? e3Move(ow, 'f', lerp(nib[0] + 7, penHome[0], k), lerp(nib[1] - 20, penHome[1], k), 'fk.owen.lift') : reach(ow, 'f', penHome[0], penHome[1], 'fk.owen.penUp'); }
+  else ow = reach(ow, 'f', nib[0] + 7, nib[1] - 20, 'fk.owen.write');
+  if (rub > 0) { const brow = E3K.toWorld(ow, 0.07, 0.95), rest = [letX + 14, top - 3], k = rub; ow = k < 1 ? e3Move(ow, 'b', lerp(rest[0], brow[0], k), lerp(rest[1], brow[1], k), 'fk.owen.toBrow', true) : e3Move(ow, 'b', brow[0] + 3 * Math.sin(t * 6), brow[1], 'fk.owen.brow', true); }
+  else ow = reach(ow, 'b', letX + 14, top - 3, 'fk.owen.letter');
+  const ink = (t > 0.3 ? line([[letX + 18, top - 2], [letX + 18 - 40 * wu, top - 2]], '#1C1A16', 1.2, 'opacity="0.7"') : '');
+  const pen = holding(ow, 'f', 'fk.owen.pen', (gx, gy) => line([[gx, gy], [gx - 7, gy + 20]], '#0D0C09', 2.4) + line([[gx + 2, gy], [gx + 9, gy - 20]], '#E9E0C8', 1.4, 'opacity="0.8"'));
+  const chair = `<rect x="${FK.chair - 50}" y="${F - 0.24 * H}" width="100" height="12" fill="#0D0C09"/><rect x="${FK.chair - 46}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${FK.chair + 36}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${FK.chair + 40}" y="${F - 0.24 * H - 210}" width="10" height="210" fill="#0D0C09"/>`;
+  // ---- draw ----
+  s.push(e5Bed(t), e4Outlined(wf) + spoon, chair, e4Outlined(ow), pen, table, ink, room.front);
+  const world = layerAt(c, 1, s.join(''));
+  const scr = o.quiet ? '' : tag(130, 120, 'NEAR O\'NEILL, HOLT COUNTY, NEBRASKA · WINTER 1890', smooth(0.3, 0.7, t) * (1 - smooth(4.0, 4.4, t)));
+  return frame(e5Defs(t, `<clipPath id="fkroom"><rect x="${FK.x0}" y="0" width="${FK.x1 - FK.x0}" height="1200"/></clipPath><clipPath id="fkwin"><rect x="${FK.win[0]}" y="430" width="${FK.win[1] - FK.win[0]}" height="130"/></clipPath><radialGradient id="kfcold"><stop offset="0" stop-color="#CFE0DE" stop-opacity="0.35"/><stop offset="1" stop-color="#CFE0DE" stop-opacity="0"/></radialGradient>`), `<rect width="1920" height="1080" fill="#070605"/>`, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Farm});
+Object.assign(CLIPS, {ep5_farm_kitchen: {sec: FK.sec, render: (t) => renderE5Farm(t)}});

@@ -682,3 +682,59 @@ Known weak spots: the horses' gallop is drawn, not studied (a fast stride with t
 the firemen's helmets are simple shapes; the wide fire shots keep figures small (190 px) so the block and the glow read; Plunkitt's
 back view is a new one-off drawing (shoulders over the chair back) rather than the rig; Tweed is a profile silhouette (det 0, no
 eye or mouth) with a rim of sun, which still shows a nose line; the polls' line and the clubhouse queue are generic men.
+
+## Episode 5 (Nov 16): the finale, labor and the Populists (first three drawn sets)
+
+`ep5.js`, loaded by `bridge.html` after `ep4_map_b.js`; same look and helpers as Episode 4 (`e4Track`, `e4Walk`, `e4Speak`,
+`e4Keys`, `e4Bump`, `e4Outlined`, E3K contacts, `camAt`). 720p review clips and contact sheets (a frame every 1.5 s) in
+`review/ep5/<id>.mp4` and `review/ep5/<id>_contact.jpg`. Beats are named times near the top of each renderer (`UM`, `HD`, `FK`) so
+the edit can retime them to the voice. Colours as the series: the Kellys coral (always outlined in ink), everyone else ink; no
+real people appear; no money on screen.
+
+New shared pieces (`ep5.js`):
+- `e5Defs(t, extra)`: the Ep 3/4 defs plus smoke puffs (greys and mist tones), a warm lamp glow (`e5lamp`), a lantern glow
+  (`e5lant`), a muzzle flash (`e5flash`), soft mist (`e5mist`) and a blur (`e5blur`).
+- `e5Flick` (seeded lamp flicker), `e5Lamp` (kerosene table lamp: font, chimney, flame, glow), `e5Lantern` (a hand lantern hung
+  from a grip, swinging, with its glow; use through `holding`).
+- `e5Ink` (ink figure options with the lamp rim on the side toward the light; dark arm tones so the back arm does not read as a
+  sash), `e5Sit` (seated on a bench or chair, feet on the floor, hands resting on the thighs as logged contacts unless arms are
+  keyed), `e5Standing` (planted stand with sway), `e5Raise` (a show of hands), `e5Bench`, `e5Pen`.
+- `e5Mist(t, x0, x1, y0, y1, opts)`: slow drifting, breathing, blurred mist bands in world space.
+
+Scenes:
+- **`ep5_union_meeting`** (16 s). A back room over a saloon, Brooklyn, night: stained plaster, a dado, a fringed Knights of Labor
+  banner (ring, triangle and star as shapes, no lettering), a broadside of ruled lines, a bracket lamp, the stair light through the
+  door. The speaker (ink, standing behind the table) talks with keyed gestures; a secretary sits at the table's end with the roll
+  book; seven men on two benches, two standing at the back (one with a pipe, smoking), a man at the window draws the curtain an
+  inch to look down at the street (3.6 to 6.6 s), lets it fall and turns back. At 8.6 the speaker opens his arms for names; two
+  hands go up (9.2, 9.5); Michael (coral, by the door) looks at them, raises his own (10.3), the speaker nods to him (10.9), the
+  secretary writes (11.2 to 13.6), hands come down. Slow push and pan from the speaker toward Michael. Tag "A KNIGHTS OF LABOR
+  ASSEMBLY · BROOKLYN · 1886" (0.3 to 4.4).
+- **`ep5_homestead_dawn`** (18 s). Across the Monongahela before dawn: far hills and trees, mist lying on the water and drifting,
+  the works on the near bank (sawtooth sheds, eight stacks with thin smoke, a few banked furnace windows glowing). A small tug
+  (lit pilot house window, smoking stack, tow line) brings two covered barges up from the left, growing as they near the works'
+  landing (`e5BargePath`). Twenty townspeople (ink, faceless at this size, rimmed by the grey sky) stand along the bank or walk in
+  from the left with swinging lanterns; several point at the barges. From 14.3 s six tiny muzzle flashes far off at the barges' bows
+  and by the landing, each leaving a puff of smoke into the mist; the crowd flinches back and holds its ground; no one falls.
+  Tag "HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M." (0.3 to 4.6).
+- **`ep5_farm_kitchen`** (16 s). Uncle Owen Kelly's sod house near O'Neill, Holt County, Nebraska (Da's younger brother; the Irish
+  colony on the Plains), a winter evening: courses of sod blocks with roots and grass at the joints, a muslin ceiling sagging
+  between poles, a deep-set window with snow driving past in gusts and a drift on the sill, a calendar whose corner lifts in the
+  draught, a shelf of tins, a rag rug on the earth floor. Owen (coral, bearded, vest) sits at the table by the lamp writing; beside
+  him a pile of bills and mortgage papers, the top sheet with a small red stamp. He stops (6.2 to 9.4), lifts his pen, looks at the
+  pile, rubs his brow, writes on. His wife (coral) stirs the pot at the stove with the kettle steaming, and glances over at him
+  (4.4 to 6.0). Their child (coral head, ink outline, face to the wall) sleeps in the iron bed in the far corner under a patchwork
+  quilt that rises and falls; nobody is near the bed. The lamp flame dips with the gusts. Tag "NEAR O'NEILL, HOLT COUNTY,
+  NEBRASKA · WINTER 1890" (0.3 to 4.4).
+
+QA: contact sheets read for each clip; contact audit (`e4/verify.mjs`, every 6 to 10 frames): planted feet, seated feet, hands
+(thighs, curtain, roll book, pen, letter, spoon) and held lanterns and pens all 0.00 px, planted drift 0.00 px. Fixes from that
+pass: seated men held their arms out (now hands on thighs); the table lamp sat in front of the speaker (moved to the table's end);
+the window watcher reached above his head for the curtain; the end of the meeting push ran past the room's right wall; the barges
+trailed far behind the tug and lay on top of each other; the sod courses spilled past the room's cut walls; the farm room sat small
+in the frame (closer camera); Owen's letter hand could not reach the paper.
+
+Known weak spots: the bench rows are a dense ink mass (rims and spacing separate heads and shoulders, not every arm); the Homestead
+crowd is generic, the barges are simple shapes and stay small, and there is no sound in these clips (the flashes want a distant
+crack in the mix); the child in bed is a drawn head on a pillow, not the rig; the sod wall still reads a little like brick at a
+distance.
