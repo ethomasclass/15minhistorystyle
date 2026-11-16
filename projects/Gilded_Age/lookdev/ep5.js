@@ -36,13 +36,16 @@ function e5Lamp(x, y, t, k = 1, s = 0) {
 }
 // an ink figure's options with the lamp's rim on the side toward the light
 function e5Ink(base, lod, lampX, fl = 1) { const x = base.x ?? 0;
-  return {fill: E5.ink, det: Math.min(lod.det, 0.6), ...base, rim: {c: '#FFE6C0', a: lod.rimA * (0.4 + 0.45 * Math.exp(-Math.abs(x - lampX) / 700)) * fl, dx: x > lampX ? -0.008 : 0.008, dy: -0.006}}; }
+  return {fill: E5.ink, det: Math.min(lod.det, 0.6), tones: {tone: '#25231D', lite: '#3A3730'}, ...base, rim: {c: '#FFE6C0', a: lod.rimA * (0.4 + 0.45 * Math.exp(-Math.abs(x - lampX) / 700)) * fl, dx: x > lampX ? -0.008 : 0.008, dy: -0.006}}; }
 // a plank bench seen side on: seat top at seatY, legs to floorY
 const e5Bench = (x0, x1, seatY, floorY, col = '#120D08') => MAT.shadow((x0 + x1) / 2, floorY + 2, (x1 - x0) * 0.55, 0.4) + `<rect x="${x0}" y="${seatY}" width="${x1 - x0}" height="12" fill="${col}"/><rect x="${x0}" y="${seatY}" width="${x1 - x0}" height="2" fill="#FFE6C0" opacity="0.16"/>` +
   [x0 + 16, x1 - 28].map((lx) => `<rect x="${lx}" y="${seatY + 12}" width="12" height="${floorY - seatY - 12}" fill="${col}"/>`).join('');
 // a man seated on a bench (feet on the floor), with the sit pose's small breathing and his own tilt
 function e5Sit(base, x, seatY, floorY, t, ph, name, an = {}) {
-  return sitOn({...base, x, y: 0, an: {...POSES.sit(t, ph), tilt: 3 * Math.sin(t * 0.45 + ph * 6), blink: (t + ph * 7) % 4.2 < 0.12, ...an}}, seatY, floorY, 0.2, name);
+  const fo = sitOn({...base, x, y: 0, an: {...POSES.sit(t, ph), tilt: 3 * Math.sin(t * 0.45 + ph * 6), blink: (t + ph * 7) % 4.2 < 0.12, ...an}}, seatY, floorY, 0.2, name);
+  if (an.fArm) return fo; // keyed arms: the caller places the hands
+  const kf = E3K.toWorld(fo, 0.17, 0.5), kb = E3K.toWorld(fo, 0.12, 0.51); // hands resting on the thighs
+  return reach(reach(fo, 'f', kf[0], kf[1], name + '.knee'), 'b', kb[0], kb[1], name + '.knee2');
 }
 // a standing figure planted at x (both feet on the floor), the stand pose's sway
 function e5Standing(base, x, G, t, ph, name, an = {}) {
@@ -76,7 +79,7 @@ function e5Mist(t, x0, x1, y0, y1, {n = 14, seed = 5, speed = 9, op = 0.5, h = 6
 // Knights of Labor banner (a fringed cloth, the emblem as a shape, no lettering). The speaker asks for names; hands go up; Michael
 // Kelly (coral, by the door) looks at them, then raises his own; the speaker nods to him; the secretary writes.
 // Scale: a man 380 px. Floors: back bench 958, front bench 1012, standing at the back 980, speaker 975.
-const UM = {sec: 16, x0: 140, x1: 1800, ceil: 170, wallFoot: 930, F: 1040, H: 380, win: [250, 380], door: [1665, 1785], lampX: 760, table: [560, 880],
+const UM = {sec: 16, x0: 140, x1: 1800, ceil: 170, wallFoot: 930, F: 1040, H: 380, win: [250, 380], door: [1665, 1785], lampX: 886, table: [560, 920],
   ask: 8.6, up1: 9.2, up2: 9.5, look: 9.7, kup: 10.3, nod: 10.9, write: [11.2, 13.6], down: 13.2};
 UM.top = 975 - 0.43 * UM.H;
 function e5MeetRoom(t) {
@@ -121,20 +124,20 @@ function e5MeetRoom(t) {
   return {back: b.join(''), front: f, fl};
 }
 function renderE5Meeting(t, o = {}) {
-  const {H, lampX} = UM, c = cam2(o.cam || camAt([[0, 1.1, 900, 600], [5, 1.16, 960, 605], [10.2, 1.3, 1170, 615], [16, 1.36, 1200, 618]], t));
+  const {H, lampX} = UM, c = cam2(o.cam || camAt([[0, 1.1, 900, 600], [5, 1.16, 960, 605], [10.2, 1.3, 1090, 615], [16, 1.36, 1085, 618]], t));
   const lod = lodFor(H * c.z), room = e5MeetRoom(t), fl = room.fl, s = [room.back];
   const I = (base) => e5Ink(base, lod, lampX, fl);
   // ---- the speaker: stands behind the table, talks to the room, asks for names, nods to Michael ----
   const sp = e4Speak([[0.5, 2.6], [2.9, 4.8], [5.1, 7.4], [7.8, 9.0], [12.2, 14.4]], t), ask = smooth(UM.ask - 0.3, UM.ask + 0.3, t) * (1 - smooth(UM.nod + 0.6, UM.nod + 1.2, t));
-  let spk = e5Standing(I({kind: 'man', hat: 'none', coat: 'frock', beard: true, h: H, d: 1, x: 790}), 790, 975, t, 0.1, 'um.speaker',
+  let spk = e5Standing(I({kind: 'man', hat: 'none', coat: 'frock', beard: true, h: H, d: 1, x: 720}), 720, 975, t, 0.1, 'um.speaker',
     {jaw: sp.jaw, tilt: 4 + 4 * sp.beat - 9 * e4Bump(t, UM.nod, 0.5) + (t > UM.kup && t < UM.nod + 0.6 ? 6 : 0)});
   const b = sp.on ? sp.beat : 0;
   spk = {...spk, an: {...spk.an, fArm: e4Keys([[0, 150, 110], [1.2, 120, 70 + 8 * b], [2.6, 140, 100], [3.4, 112, 60 + 10 * b], [4.8, 150, 108], [5.6, 104, 62 + 8 * b], [7.4, 150, 110], [UM.ask - 0.3, 150, 110], [UM.ask + 0.3, 96, 70], [UM.nod, 96, 70], [UM.nod + 1.0, 160, 140], [12.4, 120, 72 + 8 * b], [14.4, 150, 110]], t),
     bArm: e4Keys([[0, 186, 192], [UM.ask - 0.3, 186, 192], [UM.ask + 0.3, 120, 100], [UM.nod + 0.4, 120, 100], [UM.nod + 1.0, 186, 192]], t), lean: 3 * ask}};
   // ---- the secretary at the table's end, the roll book open; he writes Michael's name ----
-  const [tx0, tx1] = UM.table, top = UM.top, bookX = 640;
+  const [tx0, tx1] = UM.table, top = UM.top, bookX = 625;
   let sec = e5Sit(I({kind: 'man', hat: 'none', coat: 'vest', h: H * 0.97, d: 1, x: 520}), 520, 975 - 0.24 * H, 975, t, 0.6, 'um.sec.seat', {tilt: -14});
-  const [w0, w1] = UM.write, writing = t > w0 && t < w1, nib = [bookX + 10 + 50 * clamp01((t - w0) / (w1 - w0)) + 3 * Math.sin(t * 29), top - 4 - Math.abs(2 * Math.sin(t * 17))];
+  const [w0, w1] = UM.write, writing = t > w0 && t < w1, nib = [bookX + 6 + 34 * clamp01((t - w0) / (w1 - w0)) + 3 * Math.sin(t * 29), top - 4 - Math.abs(2 * Math.sin(t * 17))];
   sec = writing ? reach(sec, 'f', nib[0] - 7, nib[1] - 20, 'um.sec.write') : reach(sec, 'f', bookX + 6, top - 22, 'um.sec.penRest');
   sec = reach(sec, 'b', bookX - 26, top - 2, 'um.sec.book');
   if (t > UM.kup - 0.4 && t < w0) sec = {...sec, an: {...sec.an, tilt: 6}};
@@ -142,13 +145,13 @@ function renderE5Meeting(t, o = {}) {
   const table = MAT.shadow((tx0 + tx1) / 2, 980, 160, 0.45) + `<rect x="${tx0}" y="${top}" width="${tx1 - tx0}" height="15" fill="#241A10"/><rect x="${tx0}" y="${top}" width="${tx1 - tx0}" height="3" fill="#FFE6C0" opacity="0.25"/>` +
     `<rect x="${tx0 + 14}" y="${top + 15}" width="12" height="${980 - top - 15}" fill="#120D08"/><rect x="${tx1 - 26}" y="${top + 15}" width="12" height="${980 - top - 15}" fill="#120D08"/><rect x="${tx0 + 8}" y="${top + 15}" width="${tx1 - tx0 - 16}" height="20" fill="#1A120A"/>` +
     `<path d="M${bookX - 40},${top} L${bookX + 20},${top - 10} L${bookX + 80},${top} L${bookX + 80},${top + 2} L${bookX - 40},${top + 2} Z" fill="#E9E0C8"/>` + line([[bookX + 20, top - 10], [bookX + 20, top + 1]], '#8A7F66', 1.4) +
-    (t > w0 ? line([[bookX + 30, top - 8], [bookX + 30 + 46 * clamp01((t - w0) / (w1 - w0)), top - 4]], '#1C1A16', 1.6) : '') + `<rect x="${bookX + 96}" y="${top - 14}" width="16" height="14" rx="3" fill="#0D0C09"/>` +
-    `<rect x="${tx1 - 110}" y="${top - 8}" width="60" height="8" fill="#CFC6AE" opacity="0.7"/>` + e5Lamp(lampX + 40, top, t);
+    (t > w0 ? line([[bookX + 6, top - 4], [bookX + 6 + 34 * clamp01((t - w0) / (w1 - w0)), top - 3]], '#1C1A16', 1.6) : '') + `<rect x="${bookX + 96}" y="${top - 14}" width="16" height="14" rx="3" fill="#0D0C09"/>` +
+    `<rect x="${tx1 - 64}" y="${top - 6}" width="50" height="6" fill="#CFC6AE" opacity="0.7"/>` + e5Lamp(UM.table[1] - 34, top, t);
   // ---- the window watcher: at the curtain, draws it aside, looks down, lets it fall, turns back to the room ----
   const WT = {to: 3.2, peek: [3.6, 6.2], turn: 6.8}, wx = 440, peek = smooth(WT.peek[0], WT.peek[0] + 0.4, t) * (1 - smooth(WT.peek[1], WT.peek[1] + 0.4, t));
   let wat = e5Standing(I({kind: 'man', hat: 'cap', coat: 'jacket', h: H, d: t < WT.turn ? -1 : 1, x: wx}), wx, 975, t, 0.4, 'um.watch', {tilt: t < WT.turn ? -2 - 10 * peek : 2});
   const curtainEdge = lerp(UM.win[1] - 6, UM.win[1] - 44, peek);
-  if (t > WT.peek[0] - 0.4 && t < WT.peek[1] + 0.6) { const g = E3K.hand({...wat, an: {...wat.an, fArm: [176, 180]}}, 'f'), k = smooth(WT.peek[0] - 0.4, WT.peek[0], t) * (1 - smooth(WT.peek[1] + 0.2, WT.peek[1] + 0.6, t)), cp = [curtainEdge, 470];
+  if (t > WT.peek[0] - 0.4 && t < WT.peek[1] + 0.6) { const g = E3K.hand({...wat, an: {...wat.an, fArm: [176, 180]}}, 'f'), k = smooth(WT.peek[0] - 0.4, WT.peek[0], t) * (1 - smooth(WT.peek[1] + 0.2, WT.peek[1] + 0.6, t)), cp = [curtainEdge, 612];
     wat = k < 1 ? e3Move(wat, 'f', lerp(g.x, cp[0], k), lerp(g.y, cp[1], k), 'um.watch.toCurtain') : reach(wat, 'f', cp[0], cp[1], 'um.watch.curtain'); }
   const [cw0, cw1] = UM.win, curtain = `<rect x="${cw0 - 30}" y="318" width="${cw1 - cw0 + 60}" height="6" fill="#0D0C09"/>` +
     `<path d="M${cw0 - 24},322 L${curtainEdge},322 Q${curtainEdge - 8 + 3 * Math.sin(t)},500 ${curtainEdge},${660} L${cw0 - 24},660 Z" fill="#3E3428"/>` + [0, 1, 2, 3].map((k) => line([[cw0 - 10 + k * (curtainEdge - cw0) / 4, 326], [cw0 - 8 + k * (curtainEdge - cw0) / 4, 656]], '#2A221A', 3)).join('');
