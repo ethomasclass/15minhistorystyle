@@ -194,3 +194,102 @@ function renderE5Meeting(t, o = {}) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Meeting});
 Object.assign(CLIPS, {ep5_union_meeting: {sec: UM.sec, render: (t) => renderE5Meeting(t)}});
+
+/* ================= ep5_homestead_dawn: the barges come up the Monongahela, July 6, 1892, before dawn (18 s) ================= */
+// Looking across the river from the Homestead bank in the last of the night: the far hills, mist lying on the water and drifting, the
+// Carnegie works on the near bank to the right (long sheds, a row of stacks, the furnaces banked: a faint glow in a few windows; the
+// mill is locked out). A small tug tows two covered barges upriver toward the works' landing, its stack smoking, one lit window.
+// The townspeople (ink, small and faceless in the half light) come along the bank with lanterns and gather at the landing; some point.
+// As the barges near the landing (about 14 s) a few tiny muzzle flashes far off at the barges' bows and the bank, puffs of smoke
+// drifting into the mist; the crowd flinches and stands its ground; no one falls. Scale: a man 150 to 200 px by depth.
+const HD = {sec: 18, W0: 560, W1: 795, land: [1150, 1330], flash: [[14.3, 1040, 668], [14.55, 1290, 778], [14.75, 1010, 664], [15.2, 1310, 782], [15.65, 1050, 670], [16.3, 1280, 780]]};
+const e5BargePath = (t) => { const u = e3Trap(t, 0, 17.4, 0.05) * 0.8 + 0.2 * smooth(0, 17.4, t); return {x: lerp(-420, 960, u), y: lerp(668, 762, u * u), k: lerp(0.5, 0.82, u)}; };
+function e5Barge(x, y, k, t, seed) { // a covered barge (x = its bow, facing right): low hull, a long roofed house with dark vents
+  const L = 420 * k, s = [];
+  s.push(`<path d="M${f1(x - L)},${f1(y - 26 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 12 * k)} L${f1(x - 8 * k)},${f1(y)} L${f1(x - L)},${f1(y)} Z" fill="#101415"/>`);
+  s.push(`<path d="M${f1(x - L + 16 * k)},${f1(y - 26 * k)} L${f1(x - L + 16 * k)},${f1(y - 70 * k)} L${f1(x - L / 2)},${f1(y - 84 * k)} L${f1(x - 30 * k)},${f1(y - 70 * k)} L${f1(x - 30 * k)},${f1(y - 26 * k)} Z" fill="#161B1C"/>`);
+  for (let i = 0; i < 9; i++) s.push(`<rect x="${f1(x - L + 40 * k + i * 40 * k)}" y="${f1(y - 58 * k)}" width="${f1(14 * k)}" height="${f1(6 * k)}" fill="#05080A"/>`);
+  s.push(line([[x - L + 16 * k, y - 70 * k], [x - L / 2, y - 84 * k], [x - 30 * k, y - 70 * k]], '#AEBBBC', 1.4 * k, 'opacity="0.35"'));
+  return s.join('');
+}
+function e5Tug(x, y, k, t) { // the tug (x = its bow, facing right): hull, cabin with a lit window, pilot house, tall stack; smoke and wake
+  const s = [];
+  s.push(`<path d="M${f1(x - 150 * k)},${f1(y - 22 * k)} L${f1(x - 10 * k)},${f1(y - 26 * k)} L${f1(x)},${f1(y - 14 * k)} L${f1(x - 12 * k)},${f1(y)} L${f1(x - 140 * k)},${f1(y)} Z" fill="#0D1011"/>`);
+  s.push(`<rect x="${f1(x - 120 * k)}" y="${f1(y - 52 * k)}" width="${f1(80 * k)}" height="${f1(28 * k)}" fill="#121617"/><rect x="${f1(x - 64 * k)}" y="${f1(y - 76 * k)}" width="${f1(30 * k)}" height="${f1(24 * k)}" fill="#121617"/>`);
+  s.push(`<rect x="${f1(x - 58 * k)}" y="${f1(y - 70 * k)}" width="${f1(16 * k)}" height="${f1(9 * k)}" fill="#FFCB80" opacity="${f1(0.8 * e5Flick(t, 7))}"/>` + glowC(x - 50 * k, y - 66 * k, 60 * k, 0.6, 'e5lant'));
+  s.push(`<rect x="${f1(x - 100 * k)}" y="${f1(y - 110 * k)}" width="${f1(12 * k)}" height="${f1(60 * k)}" fill="#0D1011"/>` + MAT.smoke(x - 94 * k, y - 112 * k, t, {col: '6A625C', k: 0.9 * k, n: 8, rise: 150, drift: -260, speed: 5, seed: 523}));
+  s.push(line([[x - 150 * k, y - 18 * k], [x - 220 * k, y - 10 * k]], '#0D1011', 1.2)); // the tow line back to the barges
+  return s.join('');
+}
+function e5Works(t) { // the Homestead works on the near bank to the right: sheds, a row of stacks, banked furnaces
+  const s = [], fl = 0.8 + 0.2 * Math.sin(t * 1.3) * Math.sin(t * 0.7 + 1);
+  for (const [sx, sw, sh] of [[1360, 22, 520], [1430, 26, 600], [1505, 22, 560], [1580, 28, 640], [1660, 22, 540], [1735, 26, 610], [1820, 24, 580], [1900, 28, 620]]) {
+    s.push(`<rect x="${sx}" y="${770 - sh}" width="${sw}" height="${sh}" fill="#1D2629"/><rect x="${sx - 3}" y="${770 - sh}" width="${sw + 6}" height="8" fill="#1A2224"/>`);
+    s.push(MAT.smoke(sx + sw / 2, 770 - sh - 6, t + sx * 0.01, {col: '8C9A9C', k: 0.8, n: 5, rise: 160, drift: -200, speed: 9, seed: sx}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.35 * 100) / 100}"`));
+  }
+  // long sheds with sawtooth roofs; a few windows glowing faintly
+  s.push(`<path d="M1280,800 L1280,600 ${[...Array(9).keys()].map((i) => `L${1280 + i * 90},560 L${1280 + i * 90 + 90},600`).join(' ')} L2110,800 Z" fill="#232D30"/>`);
+  s.push(`<path d="M1500,800 L1500,520 L1720,470 L1940,520 L1940,800 Z" fill="#1F282B"/>`);
+  for (let i = 0; i < 12; i++) { const wx = 1310 + i * 64, a = (i % 3 === 1 ? 0.55 : 0.14) * fl; s.push(`<rect x="${wx}" y="650" width="22" height="34" fill="#FF9A4A" opacity="${f1(a)}"/>`); }
+  s.push(glowC(1640, 640, 260, 0.35 * fl, 'e4glow'));
+  return s.join('');
+}
+function renderE5Homestead(t, o = {}) {
+  const c = cam2(o.cam || camAt([[0, 1.0, 900, 560], [9, 1.08, 980, 585], [18, 1.24, 1060, 615]], t)), s = [];
+  // sky (behind the camera layer: a slight parallax), far hills, the river and mist
+  const sky = `<rect width="1920" height="1080" fill="url(#hdsky)"/>` + `<ellipse cx="${f1(1500 - (c.ux - 960) * 0.2)}" cy="560" rx="900" ry="200" fill="url(#hddawn)" opacity="${f1(0.55 + 0.25 * smooth(0, 18, t))}"/>`;
+  s.push(`<path d="M-600,560 L-600,470 Q-300,430 0,470 Q260,500 520,440 Q800,400 1100,470 Q1400,520 1700,450 Q2000,410 2600,470 L2600,560 Z" fill="#3A4A4E"/>` + MAT.trees([[-600, 470], [0, 470], [520, 440], [1100, 470], [1700, 450], [2600, 470]], {col: '#33434A', seed: 531, size: 22, every: 0.5}));
+  s.push(`<path d="M-600,${HD.W0} L-600,520 Q200,505 900,530 Q1600,550 2600,515 L2600,${HD.W0} Z" fill="#2E3D41"/>`);
+  s.push(e5Mist(t, -600, 2600, 470, 560, {n: 10, seed: 532, speed: 6, op: 0.55, h: 40}));
+  s.push(MAT.water(-600, HD.W0, 3200, HD.W1 - HD.W0, t, {top: '#55666A', bottom: '#2A3639', seed: 533, glint: '#C9D4D2', n: 90}));
+  // the works on the near bank (right) and its reflection
+  s.push(e5Works(t));
+  // the barges and tug, coming up from the left toward the landing; their wake
+  const bp = e5BargePath(t), k = bp.k;
+  s.push(`<ellipse cx="${f1(bp.x - 160)}" cy="${f1(bp.y + 4)}" rx="420" ry="10" fill="#1A2224" opacity="0.5"/>` + [0, 1, 2].map((i) => line([[bp.x + 40 - i * 30, bp.y + 2 + i * 3], [bp.x - 260 - i * 80, bp.y + 10 + i * 9]], '#AEBBBC', 1.5, `opacity="${0.35 - i * 0.1}"`)).join(''));
+  s.push(e5Barge(bp.x - 10 * k, bp.y - 12 * k, k * 0.94, t, 1), e5Barge(bp.x + 20 * k, bp.y, k, t, 2), e5Tug(bp.x + 270 * k, bp.y + 2, k, t));
+  // the muzzle flashes, far off, and their smoke (brief; no one is seen hit)
+  for (let [ft, fx, fy] of HD.flash) { const onBarge = fx < 1100, x = onBarge ? bp.x + (fx - 1060) * k : fx; if (onBarge) fy = bp.y - 40 * k + (fy - 668);
+    if (t > ft && t < ft + 0.14) s.push(glowC(x, fy, 26, 1 - (t - ft) / 0.14, 'e5flash') + `<circle cx="${x}" cy="${fy}" r="2.5" fill="#FFF8E8"/>`);
+    if (t > ft) { const u = t - ft; s.push(`<circle cx="${f1(x - 6 * u)}" cy="${f1(fy - 10 * u)}" r="${f1(6 + 9 * u)}" fill="url(#puffB8C4C4)" opacity="${f1(Math.max(0, 0.55 - 0.16 * u) * 100) / 100}"/>`); } }
+  // mist on the water, drifting slowly over the barges
+  s.push(e5Mist(t, -600, 2600, 600, 780, {n: 18, seed: 534, speed: 10, op: 0.6, h: 46}));
+  // the near bank: a mud slope to the water, the works' landing (planks on piles), the ground where the crowd stands
+  s.push(`<path d="M-600,${HD.W1} L2600,${HD.W1} L2600,1300 L-600,1300 Z" fill="#141819"/><path d="M-600,${HD.W1} L2600,${HD.W1} L2600,${HD.W1 + 34} L-600,${HD.W1 + 40} Z" fill="#262E30"/>` + MAT.ground(-600, 2600, HD.W1 + 36, {base: '#141819', seed: 535}));
+  const [l0, l1] = HD.land;
+  s.push(`<rect x="${l0}" y="${HD.W1 - 12}" width="${l1 - l0}" height="12" fill="#1F2426"/>` + [0, 1, 2, 3, 4].map((i) => `<rect x="${l0 + 8 + i * 42}" y="${HD.W1 - 4}" width="7" height="24" fill="#0D1011"/>`).join('') + line([[l0, HD.W1 - 12], [l1, HD.W1 - 12]], '#AEBBBC', 1.2, 'opacity="0.3"'));
+  // ---- the crowd: three depths, some walking in from the left with lanterns, gathering at the landing; some point at the barges ----
+  const rows = [{G: 880, H: 150}, {G: 940, H: 175}, {G: 1005, H: 200}], P = [], shots = t > HD.flash[0][0];
+  const flinch = (ph) => e4Bump(t, HD.flash[0][0] + 0.05 + ph * 0.2, 0.7);
+  const people = [ // [row, x, kind, hat, lantern, walk {t0, t1, to} | null, point time]
+    [0, 980, 'man', 'cap', 1, null, 11.5], [0, 1060, 'man', 'bowler', 0, null, 0], [0, 1270, 'man', 'cap', 1, null, 12.2], [0, 1380, 'woman', 'kerchief', 0, null, 0], [0, 1450, 'man', 'cap', 0, null, 13],
+    [0, 300, 'man', 'cap', 1, {t0: 0.5, t1: 9.5, to: 860}, 0], [0, 120, 'man', 'bowler', 0, {t0: 1.5, t1: 11.0, to: 760}, 0],
+    [1, 900, 'man', 'cap', 0, null, 12.8], [1, 1120, 'man', 'bowler', 1, null, 0], [1, 1220, 'man', 'cap', 0, null, 11.0], [1, 1340, 'man', 'cap', 1, null, 0],
+    [1, 160, 'woman', 'kerchief', 1, {t0: 2.0, t1: 12.0, to: 1010}, 0], [1, -40, 'man', 'cap', 1, {t0: 0.0, t1: 10.5, to: 700}, 0], [1, 1520, 'man', 'bowler', 0, null, 0],
+    [2, 820, 'man', 'cap', 1, null, 0], [2, 1010, 'man', 'cap', 0, null, 12.5], [2, 1180, 'man', 'bowler', 0, null, 0], [2, 1330, 'man', 'cap', 1, null, 0],
+    [2, 380, 'man', 'cap', 1, {t0: 0.2, t1: 8.6, to: 640}, 0], [2, 60, 'man', 'cap', 0, {t0: 3.0, t1: 13.0, to: 520}, 0],
+  ];
+  const rimSky = {c: '#C9D4D2', a: 0.35, dx: 0.006, dy: -0.007};
+  people.forEach(([ri, x, kind, hat, lant, walk, pt], i) => {
+    const {G, H} = rows[ri], name = `hd.p${i}`, base = {kind, hat, coat: i % 3 ? 'jacket' : 'sack', wear: kind === 'woman' ? ['plain', 'shawl'] : [], h: kind === 'woman' ? H * 0.9 : H, fill: E5.ink, det: 0, rim: rimSky, tones: {tone: '#1C2122', lite: '#2C3335'}};
+    const an0 = {fArm: lant ? [174, 178] : undefined, tilt: 4 * Math.sin(t * 0.5 + i)};
+    let fo;
+    if (walk) { const tr = e4Track({...base, an: {...an0}}, {x, d: 1, G, ph: i * 0.13, walks: [{...walk, dAfter: 1, a: 0.12, carry: !!lant, an: lant ? {fArm: [174, 178]} : {}}]}, t, name); fo = tr.fo; }
+    else fo = e5Standing({...base, d: x > 1250 ? -1 : 1}, x, G, t, i * 0.17, name, an0.fArm ? {fArm: an0.fArm} : {});
+    const fk = shots ? flinch(i % 4) : 0;
+    if (fk > 0) fo = {...fo, an: {...fo.an, lean: (fo.an.lean || 0) - 9 * fk, tilt: (fo.an.tilt || 0) - 6 * fk}};
+    if (pt && !lant && t > pt && t < pt + 2.4) { const u = smooth(pt, pt + 0.4, t) * (1 - smooth(pt + 2.0, pt + 2.4, t)); fo = {...fo, an: {...fo.an, fArm: [lerp(176, 72, u), lerp(180, 80, u)]}}; }
+    const lan = lant ? holding(fo, 'f', name + '.lantern', (gx, gy) => e5Lantern(gx, gy, t, i * 1.3, H / 190)) : '';
+    P.push({ri, svg: fig(fo) + lan});
+  });
+  [0, 1, 2].forEach((ri) => P.filter((p) => p.ri === ri).forEach((p) => s.push(p.svg)));
+  // low mist curling along the bank in front
+  s.push(e5Mist(t, -600, 2600, 860, 1060, {n: 10, seed: 536, speed: 7, op: 0.28, h: 50}));
+  const world = layerAt(c, 1, s.join(''));
+  const scr = o.quiet ? '' : tag(130, 120, 'HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M.', smooth(0.3, 0.7, t) * (1 - smooth(4.2, 4.6, t)));
+  return frame(e5Defs(t, grad('hdsky', [['0', '#0A1216'], ['0.55', '#22323A'], ['0.85', '#56666A'], ['1', '#7C8886']]) +
+    `<radialGradient id="hddawn"><stop offset="0" stop-color="#C8A88E" stop-opacity="0.45"/><stop offset="1" stop-color="#C8A88E" stop-opacity="0"/></radialGradient>` +
+    `<clipPath id="hdwater"><rect x="-600" y="${HD.W0}" width="3200" height="${HD.W1 - HD.W0}"/></clipPath>`), sky, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Homestead});
+Object.assign(CLIPS, {ep5_homestead_dawn: {sec: HD.sec, render: (t) => renderE5Homestead(t)}});
