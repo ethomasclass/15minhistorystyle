@@ -31,14 +31,15 @@ const torn = (seed, depth = 9) => { const r = rng(seed), top = [], bot = [];
   for (let x = 0; x <= 100; x += 2.5) { top.push(`${x}% ${(r() * depth).toFixed(1)}%`); bot.push(`${100 - x}% ${(100 - depth + r() * depth).toFixed(1)}%`); }
   return `polygon(${top.join(',')},${bot.join(',')})`; };
 // the channel's torn orange strip, Abril Fatface (as lookdev/text.js tape())
-const tape = (text, x, y, size, rot, seed) => `<div style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${rot}deg);transform-origin:left top;filter:drop-shadow(0 8px 14px rgba(0,0,0,.65))">
-  <div style="background:#FF9F1C;clip-path:${torn(seed)};padding:${size * 0.16}px ${size * 0.22}px ${size * 0.1}px"><div style="font:400 ${size}px/1 Abril;color:#111;white-space:nowrap">${text}</div></div></div>`;
+const tape = (text, x, y, size, rot, seed, bg = '#FF9F1C') => `<div style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${rot}deg);transform-origin:left top;filter:drop-shadow(0 8px 14px rgba(0,0,0,.65))">
+  <div style="background:${bg};clip-path:${torn(seed)};padding:${size * 0.16}px ${size * 0.22}px ${size * 0.1}px"><div style="font:400 ${size}px/1 Abril;color:#111;white-space:nowrap">${text}</div></div></div>`;
 const base = (inner) => `<div id="s"><img class="bg" src="img/ep4_flow_base.jpg"><div class="shade"></div><div class="rim"></div>
   <img class="cut" src="img/ep4_tweed_cut.png"><div class="series"><b>The Gilded Age</b><i>PART 4</i></div>
   ${tape('BOSS', 42, 158, 160, -2.5, 7)}${tape('TWEED', 50, 335, 182, -2, 19)}${inner}</div>`;
 const JOBS = {
   ep4_A_hand: base(`<div class="hand" style="left:84px;top:575px;transform:rotate(-3deg)">stole millions</div>`),
   ep4_B_tape: base(tape('STOLE MILLIONS', 70, 590, 64, -2, 31)),
+  ep4_C_teal: base(tape('STOLE MILLIONS', 70, 590, 64, -2, 31, '#2FE0C4')),
 };
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 1280, height: 720}});
