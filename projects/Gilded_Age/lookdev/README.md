@@ -696,8 +696,8 @@ New shared pieces (`ep5.js`):
   (`e5lant`), a muzzle flash (`e5flash`), soft mist (`e5mist`) and a blur (`e5blur`).
 - `e5Flick` (seeded lamp flicker), `e5Lamp` (kerosene table lamp: font, chimney, flame, glow), `e5Lantern` (a hand lantern hung
   from a grip, swinging, with its glow; use through `holding`).
-- `e5Ink` (ink figure options with the lamp rim on the side toward the light; dark arm tones so the back arm does not read as a
-  sash), `e5Sit` (seated on a bench or chair, feet on the floor, hands resting on the thighs as logged contacts unless arms are
+- `e5Ink` (ink figure options: no face marks (det 0), a strong warm lamp rim on head and shoulders toward the light, dark arm tones
+  so the back arm does not read as a sash), `e5Sit` (seated on a bench or chair, feet on the floor, hands resting on the thighs as logged contacts unless arms are
   keyed), `e5Standing` (planted stand with sway), `e5Raise` (a show of hands), `e5Bench`, `e5Pen`.
 - `e5Mist(t, x0, x1, y0, y1, opts)`: slow drifting, breathing, blurred mist bands in world space.
 
@@ -705,22 +705,39 @@ Scenes:
 - **`ep5_union_meeting`** (16 s). A back room over a saloon, Brooklyn, night: stained plaster, a dado, a fringed Knights of Labor
   banner (ring, triangle and star as shapes, no lettering), a broadside of ruled lines, a bracket lamp, the stair light through the
   door. The speaker (ink, standing behind the table) talks with keyed gestures; a secretary sits at the table's end with the roll
-  book; seven men on two benches, two standing at the back (one with a pipe, smoking), a man at the window draws the curtain an
+  book; seven men on two benches (rows spread further apart; the back row and the men standing behind it a shade lighter for depth in the
+  lamp haze, everyone rim-lit warm from the lamp), two standing at the back (one with a pipe, smoking), a man at the window draws the curtain an
   inch to look down at the street (3.6 to 6.6 s), lets it fall and turns back. At 8.6 the speaker opens his arms for names; two
   hands go up (9.2, 9.5); Michael (coral, by the door) looks at them, raises his own (10.3), the speaker nods to him (10.9), the
   secretary writes (11.2 to 13.6), hands come down. Slow push and pan from the speaker toward Michael. Tag "A KNIGHTS OF LABOR
   ASSEMBLY · BROOKLYN · 1886" (0.3 to 4.4).
-- **`ep5_homestead_dawn`** (18 s). Across the Monongahela before dawn: far hills and trees, mist lying on the water and drifting,
-  the works on the near bank (sawtooth sheds, eight stacks with thin smoke, a few banked furnace windows glowing). A small tug
-  (lit pilot house window, smoking stack, tow line) brings two covered barges up from the left, growing as they near the works'
-  landing (`e5BargePath`). Twenty townspeople (ink, faceless at this size, rimmed by the grey sky) stand along the bank or walk in
-  from the left with swinging lanterns; several point at the barges. From 14.3 s six tiny muzzle flashes far off at the barges' bows
-  and by the landing, each leaving a puff of smoke into the mist; the crowd flinches back and holds its ground; no one falls.
-  Tag "HOMESTEAD, PENNSYLVANIA · JULY 6, 1892 · 4 A.M." (0.3 to 4.6).
+- **`ep5_homestead_dawn`** (29 s; rebuilt Nov 17 as the end of the cold open, `../ep5/PLAN.md` "Barges at Dawn"). Five shots cut
+  inside the clip, then a freeze. Beat times for the sound mix (`HD` in `ep5.js`):
+  - **0.0 A, wide.** The black Monongahela in fog, the works on the bank with furnaces glowing deep orange-red through the haze,
+    embers off the stacks, the town's lights on the hill, two dark shapes far down the river. Tag "HOMESTEAD, PENNSYLVANIA · JULY 6,
+    1892 · 4 A.M." (0.3 to 4.6). Sound: water, distant furnaces.
+  - **6.2 B, the works' roof.** The steam whistle: **blast 6.8 to 9.3**, a great white plume rolling off the ridge.
+  - **9.6 C, the hillside.** The town pours down the hill street with lanterns (26 small walkers); in front, men run at the board
+    fence (barbed wire on top) with lanterns and torches; the front men put their hands on the gate and push; **the gate goes over
+    at 12.2** (dust); they surge through toward the landing. Sound: running feet, shouts, the crash of boards.
+  - **15.0 D, low at the water.** The two covered barges loom huge out of the fog behind the tug (its lantern beam sweeping, stack
+    smoking), wake breaking along the hull; armed guards (ink, faceless, rifles held upright) stand in the lit doorways. Sound: tug
+    engine, water against the hulls.
+  - **20.0 E, the landing.** The barge's bow at the bank, guards in the doorways; eighteen people on the bank in three rows (270 to
+    380 px tall) shouting with arms up, lanterns raised, five torches lit (raised 19.6 to 20.4); **one torch flares at 24.4**; the
+    **gangplank lowers from 22.0** and a slow push closes on it. Sound: the crowd swelling.
+  - **26.25 F, FREEZE** as the gangplank's end touches the landing: the frame holds and drains toward monochrome with a teal (top) to
+    orange (bottom) grade by about 27.6, to the end at 29.0. No shot is fired on screen; nobody is hurt.
+  New helpers: `e5Torch` (a held torch: pole, layered flame tongues, warm glow), `e5Embers`, `e5BargeBig` (covered barge with lit
+  doorways; returns them), `e5Guard` (ink guard, rifle upright, both hands on it), `e5Tug2` (the tug with a soft swept beam),
+  `e5Downhill` (small walk-cycle figures on a slope, no contact log), and the freeze grade (`hdgrade` saturation filter plus a
+  `hdtone` overlay).
 - **`ep5_farm_kitchen`** (16 s). Uncle Owen Kelly's sod house near O'Neill, Holt County, Nebraska (Da's younger brother; the Irish
   colony on the Plains), a winter evening: courses of sod blocks with roots and grass at the joints, a muslin ceiling sagging
   between poles, a deep-set window with snow driving past in gusts and a drift on the sill, a calendar whose corner lifts in the
-  draught, a shelf of tins, a rag rug on the earth floor. Owen (coral, bearded, vest) sits at the table by the lamp writing; beside
+  draught, a shelf of tins, a rag rug on the earth floor. The sod (revised Nov 17) is lumpy turves of different sizes in seven
+  earth shades, courses sagging a little toward the middle, grass wisps out of the joints and root hairs hanging below; the slow push
+  now ends wider so the bed stays whole in frame. Owen (coral, bearded, vest) sits at the table by the lamp writing; beside
   him a pile of bills and mortgage papers, the top sheet with a small red stamp. He stops (6.2 to 9.4), lifts his pen, looks at the
   pile, rubs his brow, writes on. His wife (coral) stirs the pot at the stove with the kettle steaming, and glances over at him
   (4.4 to 6.0). Their child (coral head, ink outline, face to the wall) sleeps in the iron bed in the far corner under a patchwork
@@ -734,7 +751,6 @@ the window watcher reached above his head for the curtain; the end of the meetin
 trailed far behind the tug and lay on top of each other; the sod courses spilled past the room's cut walls; the farm room sat small
 in the frame (closer camera); Owen's letter hand could not reach the paper.
 
-Known weak spots: the bench rows are a dense ink mass (rims and spacing separate heads and shoulders, not every arm); the Homestead
-crowd is generic, the barges are simple shapes and stay small, and there is no sound in these clips (the flashes want a distant
-crack in the mix); the child in bed is a drawn head on a pillow, not the rig; the sod wall still reads a little like brick at a
-distance.
+Known weak spots: the Homestead hill houses are simple stacked shapes and the tug's beam is a soft wedge rather than a true
+volumetric light; the crowd's shouting is all arms and heads (no faces by rule); there is no sound in these clips; the child in bed
+is a drawn head on a pillow, not the rig.
