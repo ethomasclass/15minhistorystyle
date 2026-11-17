@@ -679,14 +679,6 @@
     "page": "https://commons.wikimedia.org/wiki/File:Theodore_Roosevelt_in_1885_LCCN2009633128.jpg",
     "source": "commons:File:Theodore Roosevelt in 1885 LCCN2009633128.jpg"
   },
-  "a_work_conditions/sweatshop_ludlow_street_tenement_riis_c1889_commons.jpg": {
-    "title": "File:Sweatshop in Ludlow Street Tenement, New York cph.3a24271.jpg",
-    "artist": "Jacob Riis",
-    "date": "circa 1889date QS:P,+1889-00-00T00:00:00Z/9,P1480,Q5727902",
-    "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Sweatshop_in_Ludlow_Street_Tenement,_New_York_cph.3a24271.jpg",
-    "source": "commons:File:Sweatshop in Ludlow Street Tenement, New York cph.3a24271.jpg"
-  },
   "i_populists/war_of_wealth_bank_run_poster_1895_commons.jpg": {
     "title": "File:War of wealth bank run poster.jpg",
     "artist": "Strobridge &amp; Co. Lith.",
@@ -1134,5 +1126,21 @@
     "licence": "CC BY 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Massachusetts_1889_election_-_Australian_Secret_Ballot.jpg",
     "source": "commons:File:Massachusetts 1889 election - Australian Secret Ballot.jpg"
+  },
+  "a_work_conditions/bohemian_cigarmakers_tenement_riis_1890_commons.jpg": {
+    "title": "File:Jacob Riis - Bohemian Cigarmakers at Work in their Tenement.jpg",
+    "artist": "Jacob Riis (1849-1914)",
+    "date": "1890",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jacob_Riis_-_Bohemian_Cigarmakers_at_Work_in_their_Tenement.jpg",
+    "source": "commons:File:Jacob Riis - Bohemian Cigarmakers at Work in their Tenement.jpg"
+  },
+  "a_work_conditions/ludlow_street_sweaters_shop_riis_1890_commons.jpg": {
+    "title": "File:Jacob Riis - A Ludlow Street Sweater's Shop.jpg",
+    "artist": "Jacob Riis (1849-1914)",
+    "date": "1890",
+    "licence": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Jacob_Riis_-_A_Ludlow_Street_Sweater%27s_Shop.jpg",
+    "source": "commons:File:Jacob Riis - A Ludlow Street Sweater's Shop.jpg"
   }
 }
