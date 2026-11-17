@@ -15,11 +15,17 @@ July 6th, 1892. Four o'clock in the morning. The Monongahela River, near Pittsbu
 
 Fog on the water. Two covered barges slide upstream behind a tugboat, no lights showing.
 
-A lookout spots them. The mill whistle screams, and the whole town of Homestead runs down to the river. Steelworkers. Their families. Some carry lanterns. Some carry rifles.
+A lookout spots them. The mill whistle screams, and the whole town of Homestead runs down to the river. Steelworkers. Their families. They tear down the company's fence and pack the landing. Some carry lanterns. Some carry rifles.
 
-Inside the barges are about three hundred armed men. Not soldiers. Not police. Private guards, hired by the biggest steel company in America to take its own mill back from its own workers.
+Inside the barges are about three hundred men with Winchester rifles. Not soldiers. Not police. Private guards, hired by the biggest steel company in America to take its own mill back from its own workers.
 
 The gangplank goes down.
+
+On the barges, rifles come up. On the bank, rifles come up too.
+
+A company's private army, aiming at American workers, in an American town. And the workers, aiming right back.
+
+Nobody knows who will fire first.
 
 How did America get here, where a company could send its own army up a river? And when ordinary people stuck together, what did they win? And what did it cost them?
 
