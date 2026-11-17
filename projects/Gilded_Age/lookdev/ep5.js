@@ -36,7 +36,7 @@ function e5Lamp(x, y, t, k = 1, s = 0) {
 }
 // an ink figure's options with the lamp's rim on the side toward the light
 function e5Ink(base, lod, lampX, fl = 1) { const x = base.x ?? 0;
-  return {fill: E5.ink, det: Math.min(lod.det, 0.6), tones: {tone: '#25231D', lite: '#3A3730'}, ...base, rim: {c: '#FFE6C0', a: lod.rimA * (0.4 + 0.45 * Math.exp(-Math.abs(x - lampX) / 700)) * fl, dx: x > lampX ? -0.008 : 0.008, dy: -0.006}}; }
+  return {fill: E5.ink, det: 0, tones: {tone: '#25231D', lite: '#3A3730'}, ...base, rim: {c: '#FFD8A0', a: Math.min(1, (0.75 + 0.25 * Math.exp(-Math.abs(x - lampX) / 700)) * fl), dx: x > lampX ? -0.011 : 0.011, dy: -0.008}}; } // ink figures: no face marks (det 0), a warm lamp rim on head and shoulders
 // a plank bench seen side on: seat top at seatY, legs to floorY
 const e5Bench = (x0, x1, seatY, floorY, col = '#120D08') => MAT.shadow((x0 + x1) / 2, floorY + 2, (x1 - x0) * 0.55, 0.4) + `<rect x="${x0}" y="${seatY}" width="${x1 - x0}" height="12" fill="${col}"/><rect x="${x0}" y="${seatY}" width="${x1 - x0}" height="2" fill="#FFE6C0" opacity="0.16"/>` +
   [x0 + 16, x1 - 28].map((lx) => `<rect x="${lx}" y="${seatY + 12}" width="12" height="${floorY - seatY - 12}" fill="${col}"/>`).join('');
@@ -156,20 +156,21 @@ function renderE5Meeting(t, o = {}) {
   const [cw0, cw1] = UM.win, curtain = `<rect x="${cw0 - 30}" y="318" width="${cw1 - cw0 + 60}" height="6" fill="#0D0C09"/>` +
     `<path d="M${cw0 - 24},322 L${curtainEdge},322 Q${curtainEdge - 8 + 3 * Math.sin(t)},500 ${curtainEdge},${660} L${cw0 - 24},660 Z" fill="#3E3428"/>` + [0, 1, 2, 3].map((k) => line([[cw0 - 10 + k * (curtainEdge - cw0) / 4, 326], [cw0 - 8 + k * (curtainEdge - cw0) / 4, 656]], '#2A221A', 3)).join('');
   // ---- the men on the benches: back row (floor 958) and front row (floor 1012), facing the speaker (left) ----
-  const backBench = 958, frontBench = 1012, seatB = backBench - 0.24 * H, seatF = frontBench - 0.24 * H;
+  const backBench = 948, frontBench = 1024, seatB = backBench - 0.24 * H, seatF = frontBench - 0.24 * H;
   const hats = ['cap', 'bowler', 'cap', 'none', 'bowler', 'cap', 'cap'], coats = ['jacket', 'sack', 'jacket', 'vest', 'sack', 'jacket', 'sack'];
-  const backRow = [1030, 1190, 1350], frontRow = [1100, 1265, 1430, 1560];
+  const backRow = [1000, 1190, 1380], frontRow = [1090, 1265, 1440, 1580];
+  const far = {fill: '#2E281F', tones: {tone: '#3A3328', lite: '#4A4234'}}; // the back row a shade lighter: atmospheric depth in the lamp haze
   const up = {f1265: [UM.up1, 1.0], b1190: [UM.up2, 0.9]};
   const sitters = [];
-  backRow.forEach((x, k) => { let fo = e5Sit(I({kind: 'man', hat: hats[k], coat: coats[k], beard: k === 1, h: H * 0.96, d: -1, x}), x, seatB, backBench, t, 0.3 * k + 0.1, `um.b${x}`);
+  backRow.forEach((x, k) => { let fo = e5Sit({...I({kind: 'man', hat: hats[k], coat: coats[k], beard: k === 1, h: H * 0.96, d: -1, x}), ...far}, x, seatB, backBench, t, 0.3 * k + 0.1, `um.b${x}`);
     const u = up['b' + x]; if (u) fo = e5Raise(fo, smooth(u[0], u[0] + 0.35, t) * (1 - smooth(UM.down, UM.down + 0.5, t)));
     sitters.push({fo, row: 0}); });
   frontRow.forEach((x, k) => { let fo = e5Sit(I({kind: 'man', hat: hats[k + 3], coat: coats[k + 3], beard: k === 2, h: H, d: -1, x}), x, seatF, frontBench, t, 0.27 * k + 0.5, `um.f${x}`);
     const u = up['f' + x]; if (u) fo = e5Raise(fo, smooth(u[0], u[0] + 0.35, t) * (1 - smooth(UM.down, UM.down + 0.5, t)));
-    if (x === 1430) fo = {...fo, an: {...fo.an, tilt: t > UM.up1 && t < 11 ? 14 : fo.an.tilt}}; // turns his head to the raised hands
+    if (x === 1440) fo = {...fo, an: {...fo.an, tilt: t > UM.up1 && t < 11 ? 14 : fo.an.tilt}}; // turns his head to the raised hands
     sitters.push({fo, row: 1}); });
   // ---- standing at the back by the door: three men (one with a pipe) and Michael Kelly nearest the door ----
-  const standers = [[1500, 'bowler', 'sack', 0.2], [1610, 'cap', 'jacket', 0.7]].map(([x, hat, coat, ph]) => e5Standing(I({kind: 'man', hat, coat, h: H * 1.0, d: -1, x}), x, 985, t, ph, `um.s${x}`));
+  const standers = [[1500, 'bowler', 'sack', 0.2], [1610, 'cap', 'jacket', 0.7]].map(([x, hat, coat, ph]) => e5Standing({...I({kind: 'man', hat, coat, h: H * 1.0, d: -1, x}), fill: '#1E1A14', tones: {tone: '#2C271F', lite: '#3A3428'}}, x, 985, t, ph, `um.s${x}`));
   standers[0] = {...standers[0], an: {...standers[0].an, ...E3_FOLD, lean: 0}};
   const pipeMan = standers[1], pg = E3K.toWorld(pipeMan, 0.07, 0.905);
   const pipe = line([[pg[0], pg[1]], [pg[0] - 18, pg[1] + 6], [pg[0] - 22, pg[1] - 4]], '#0D0C09', 3.4) + MAT.smoke(pg[0] - 22, pg[1] - 8, t, {col: 'B8C4C4', k: 0.3, n: 5, rise: 120, drift: -40, speed: 4, seed: 517});
@@ -182,9 +183,9 @@ function renderE5Meeting(t, o = {}) {
   // ---- draw, back to front ----
   s.push(curtain, fig(wat), fig(spk), chair(520, 1), fig(sec), table);
   if (writing || true) s.push(e5Pen(sec, 'um.sec.pen'));
-  s.push(e5Bench(backRow[0] - 90, backRow[2] + 80, seatB, backBench));
+  s.push(e5Bench(backRow[0] - 90, backRow[2] + 80, seatB, backBench, '#211A12'));
   sitters.filter((r) => r.row === 0).forEach((r) => s.push(fig(r.fo)));
-  s.push(fig(standers[0]) + foldedArms(standers[0].x, standers[0].y, standers[0].h, -1, E5.ink, NEIGHBOUR_TONES.tone), fig(pipeMan), pipe);
+  s.push(fig(standers[0]) + foldedArms(standers[0].x, standers[0].y, standers[0].h, -1, '#1E1A14', '#2C271F'), fig(pipeMan), pipe);
   s.push(e5Bench(frontRow[0] - 90, frontRow[3] + 70, seatF, frontBench));
   sitters.filter((r) => r.row === 1).forEach((r) => s.push(fig(r.fo)));
   s.push(e4Outlined(mi) + miOver, room.front);
@@ -440,11 +441,21 @@ function e5SodRoom(t) {
   b.push(`<rect x="-1500" y="-1200" width="5000" height="3600" fill="#070605"/>`);
   // sod blocks: courses of irregular cut turves, roots and grass at the joints, a little whitewash wearing off at eye height
   b.push(`<rect x="${x0}" y="${ceil}" width="${x1 - x0}" height="${wallFoot - ceil}" fill="#3A3024"/><g clip-path="url(#fkroom)">`);
-  for (let y = ceil, row = 0; y < wallFoot; y += 44, row++) for (let x = x0 - (row % 2) * 60; x < x1; x += 100 + r() * 30) {
-    const w = 96 + r() * 26, sh = r();
-    b.push(`<rect x="${f1(x + 2 + r() * 4)}" y="${f1(y + 1 + r() * 5)}" width="${f1(w - 8)}" height="${f1(34 + r() * 6)}" rx="11" fill="${sh < 0.33 ? '#433728' : sh < 0.66 ? '#3F3326' : '#352B20'}"/>`);
-    if (r() < 0.6) b.push(`<path d="M${f1(x + 10 + r() * 60)},${f1(y + 42)} l-4,-9 M${f1(x + 14 + r() * 60)},${f1(y + 42)} l1,-11 M${f1(x + 30 + r() * 50)},${f1(y + 42)} l4,-8 M${f1(x + 40 + r() * 50)},${f1(y + 2)} q-6,8 -2,14" stroke="#2A2318" stroke-width="2" fill="none"/>`);
-  }
+  // irregular chunky turves of different sizes in courses that sag a little toward the middle of the wall; each block a lumpy
+  // polygon in its own earthy shade, grass wisps sticking out of the joints above, root hairs hanging from the joints below
+  const cols = ['#4A3A28', '#3E3122', '#55432E', '#33291D', '#5A4A34', '#463626', '#3A2E20'];
+  for (let y = ceil - 10, row = 0; y < wallFoot + 10; row++) {
+    const ch = 38 + r() * 22; let x = x0 - 40 - r() * 60;
+    while (x < x1 + 20) { const w = 70 + r() * 110, sag = (xx) => 9 * Math.sin(Math.PI * clamp01((xx - x0) / (x1 - x0))), j = () => (r() - 0.5) * 7;
+      const pts = [[x + 3 + j(), y + 3 + sag(x) + j()], [x + w * 0.5, y + 2 + sag(x + w * 0.5) + j()], [x + w - 3 + j(), y + 4 + sag(x + w) + j()], [x + w - 2 + j(), y + ch - 4 + sag(x + w) + j()], [x + w * 0.45, y + ch - 2 + sag(x + w * 0.45) + j()], [x + 2 + j(), y + ch - 3 + sag(x) + j()]];
+      b.push(`<path d="M${f1(pts[0][0])},${f1(pts[0][1])} ${pts.slice(1).map((p, i) => `Q${f1((pts[i][0] + p[0]) / 2 + j())},${f1((pts[i][1] + p[1]) / 2 + j())} ${f1(p[0])},${f1(p[1])}`).join(' ')} Z" fill="${cols[Math.floor(r() * cols.length)]}"/>`);
+      if (r() < 0.5) b.push(`<path d="M${f1(x + w * 0.2)},${f1(y + ch * 0.4 + sag(x))} q${f1(w * 0.2)},-6 ${f1(w * 0.45)},2" stroke="#2A2117" stroke-width="2" fill="none" opacity="0.6"/>`);
+      const gx = x + 8 + r() * (w - 16), gy = y + 4 + sag(gx);
+      if (r() < 0.55) b.push(`<path d="M${f1(gx)},${f1(gy)} q-3,-9 -9,-13 M${f1(gx + 4)},${f1(gy)} q1,-10 -1,-16 M${f1(gx + 8)},${f1(gy)} q5,-8 10,-10" stroke="#5E5A36" stroke-width="1.6" fill="none" opacity="0.8"/>`);
+      const rx = x + 10 + r() * (w - 20), ry = y + ch - 3 + sag(rx);
+      if (r() < 0.45) b.push(`<path d="M${f1(rx)},${f1(ry)} q2,8 -2,14 M${f1(rx + 5)},${f1(ry)} q-3,6 1,11" stroke="#1F180F" stroke-width="1.3" fill="none" opacity="0.8"/>`);
+      x += w; }
+    y += ch; }
   b.push(`</g><rect x="${x0}" y="${ceil + 160}" width="${x1 - x0}" height="300" fill="#CFC2A4" opacity="0.07"/>`);
   // the muslin ceiling sagging between poles
   b.push(`<rect x="${x0}" y="${ceil - 60}" width="${x1 - x0}" height="60" fill="#211B13"/>` + [...Array(6).keys()].map((i) => { const a = x0 + i * (x1 - x0) / 6, w = (x1 - x0) / 6;
@@ -491,7 +502,7 @@ function e5Bed(t) {
   return s.join('');
 }
 function renderE5Farm(t, o = {}) {
-  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.38, 970, 625], [7, 1.44, 1000, 632], [16, 1.48, 995, 642]], t));
+  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.36, 968, 622], [16, 1.44, 965, 640]], t));
   const lod = lodFor(H * c.z), det = lod.det, g = e5Gust(t), room = e5SodRoom(t), s = [room.back];
   const lampX = 1255, fl = e5Flick(t) * (1 - 0.12 * g * Math.max(0, Math.sin(t * 7.1))), rimL = (x) => ({c: '#FFE0B0', a: lod.rimA * 0.7 * fl, dx: x > lampX ? -0.008 : 0.008, dy: -0.005});
   const OWEN = {kind: 'man', hat: 'none', coat: 'vest', beard: true, fill: E5.coral, tones: MICHAEL_TONES};
