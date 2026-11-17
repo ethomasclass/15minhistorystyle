@@ -711,25 +711,30 @@ Scenes:
   hands go up (9.2, 9.5); Michael (coral, by the door) looks at them, raises his own (10.3), the speaker nods to him (10.9), the
   secretary writes (11.2 to 13.6), hands come down. Slow push and pan from the speaker toward Michael. Tag "A KNIGHTS OF LABOR
   ASSEMBLY · BROOKLYN · 1886" (0.3 to 4.4).
-- **`ep5_homestead_dawn`** (29 s; rebuilt Nov 17 as the end of the cold open, `../ep5/PLAN.md` "Barges at Dawn"). Five shots cut
+- **`ep5_homestead_dawn`** (34.5 s; rebuilt Nov 17 as the end of the cold open, `../ep5/PLAN.md` "Barges at Dawn", and revised the
+  same day for the narration "The gangplank goes down. On the barges, rifles come up. On the bank, rifles come up too..."). Shots cut
   inside the clip, then a freeze. Beat times for the sound mix (`HD` in `ep5.js`):
   - **0.0 A, wide.** The black Monongahela in fog, the works on the bank with furnaces glowing deep orange-red through the haze,
     embers off the stacks, the town's lights on the hill, two dark shapes far down the river. Tag "HOMESTEAD, PENNSYLVANIA · JULY 6,
     1892 · 4 A.M." (0.3 to 4.6). Sound: water, distant furnaces.
   - **6.2 B, the works' roof.** The steam whistle: **blast 6.8 to 9.3**, a great white plume rolling off the ridge.
-  - **9.6 C, the hillside.** The town pours down the hill street with lanterns (26 small walkers); in front, men run at the board
-    fence (barbed wire on top) with lanterns and torches; the front men put their hands on the gate and push; **the gate goes over
-    at 12.2** (dust); they surge through toward the landing. Sound: running feet, shouts, the crash of boards.
-  - **15.0 D, low at the water.** The two covered barges loom huge out of the fog behind the tug (its lantern beam sweeping, stack
-    smoking), wake breaking along the hull; armed guards (ink, faceless, rifles held upright) stand in the lit doorways. Sound: tug
-    engine, water against the hulls.
-  - **20.0 E, the landing.** The barge's bow at the bank, guards in the doorways; eighteen people on the bank in three rows (270 to
-    380 px tall) shouting with arms up, lanterns raised, five torches lit (raised 19.6 to 20.4); **one torch flares at 24.4**; the
-    **gangplank lowers from 22.0** and a slow push closes on it. Sound: the crowd swelling.
-  - **26.25 F, FREEZE** as the gangplank's end touches the landing: the frame holds and drains toward monochrome with a teal (top) to
-    orange (bottom) grade by about 27.6, to the end at 29.0. No shot is fired on screen; nobody is hurt.
+  - **9.6 C, the hillside.** The town pours down the hill street with lanterns; in front, men run at the board fence with lanterns and
+    torches, push the gate, and **the gate goes over at 12.2**; they surge through toward the landing.
+  - **15.0 D, low at the water.** The two covered barges loom out of the fog behind the tug (its lantern beam sweeping); guards (ink,
+    faceless) stand in the lit doorways with rifles upright. **Rifles up on the barges: 17.0 to 18.4**, the line levelling its
+    Winchesters toward the bank off frame left (side on, never toward the viewer). Sound: tug engine, water, the clack of levers.
+  - **19.0 D2, closer.** The doorways: more rifle barrels slide out of the dark (from 19.3), lantern light glinting along them.
+  - **22.0 E, the bank (reverse angle).** The barge's bow at the landing, the guards aiming toward the crowd; eighteen people on the
+    bank shouting, lanterns raised, five torches, one flaring at 24.4. **Rifles and shotguns up on the bank: 23.0 to 24.5** (eight men);
+    **the shouting stops 23.6 to 24.6**: arms drop, the crowd goes still. The **gangplank lowers from 22.0**.
+  - **26.5 F, the stare-down.** A tight two-sided frame: the guards' rifles from the doorways on the left, the workers' rifles on the
+    right, the narrow strip of water and the lowering gangplank between; slow push, torches guttering, mist. **Silence from about
+    28.5.**
+  - **31.5 FREEZE** as the gangplank's end touches the landing, both lines aimed: the frame holds and drains toward monochrome with a
+    teal-to-orange grade by about 32.9, to the end at 34.5. No shot is fired on screen, no muzzle flash, nobody is hurt.
   New helpers: `e5Torch` (a held torch: pole, layered flame tongues, warm glow), `e5Embers`, `e5BargeBig` (covered barge with lit
-  doorways; returns them), `e5Guard` (ink guard, rifle upright, both hands on it), `e5Tug2` (the tug with a soft swept beam),
+  doorways; returns them), `e5Gun` (a long gun in both hands, raised from upright to levelled at the shoulder, side on; rifle or double-barrel shotgun),
+  `e5Guard` (ink guard with an `e5Gun`), `e5Tug2` (the tug with a soft swept beam),
   `e5Downhill` (small walk-cycle figures on a slope, no contact log), and the freeze grade (`hdgrade` saturation filter plus a
   `hdtone` overlay).
 - **`ep5_farm_kitchen`** (16 s). Uncle Owen Kelly's sod house near O'Neill, Holt County, Nebraska (Da's younger brother; the Irish
