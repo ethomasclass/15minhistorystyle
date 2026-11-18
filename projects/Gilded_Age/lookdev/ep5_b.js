@@ -279,3 +279,110 @@ function renderE5CornStove(t, o = {}) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5CornStove});
 Object.assign(CLIPS, {ep5_corn_stove: {sec: CS.sec, render: (t) => renderE5CornStove(t)}});
+
+/* ================= ep5_coxey (ch 8, 15.5 s, two shots): Coxey's Army reaches the Capitol, May 1, 1894 ================= */
+// Shot A (0 to 6.5): Pennsylvania Avenue on a spring morning, the Capitol dome on its hill at the end of the street. The column of
+// marchers (ink) walks right toward it with cloth banners on poles; at its head a white horse, led by the bridle. Shot B (6.5 to
+// 15.5): the Capitol steps and lawn. Coxey (ink, bowler, faceless) climbs the steps and lifts his speech; two police (ink, helmets)
+// come to him, one up from the lawn and one down from the terrace, take him by the arms and walk him back down and off the grass,
+// past a small KEEP OFF THE GRASS sign in the foreground. Nobody is pushed or struck.
+const CX = {sec: 15.5, cut: 6.5, H: 370, G: 990, TX0: 1000, rise: 30, climb: [6.8, 9.9], speak: 10.3, copN: [8.0, 11.3], copF: [9.8, 11.5], grip: [11.9, 12.3], down: 12.5};
+CX.R = Math.sin(22 * Math.PI / 180) * CX.H; // one step of the walk = one tread
+// two treads, a landing three steps deep (where Coxey stops), three more treads to the terrace
+const cxGround = (x) => { const i = Math.floor((x - CX.TX0) / CX.R); return x < CX.TX0 ? CX.G : i < 2 ? CX.G - CX.rise * (i + 1) : i < 5 ? CX.G - 3 * CX.rise : CX.G - CX.rise * (Math.min(i, 7) - 1); };
+const e5bHelmet = (fo) => { const [hx, hy] = E3K.toWorld(fo, 0.005, 0.985), w = 0.085 * fo.h; return `<path d="M${f1(hx - w * 0.62)},${f1(hy + w * 0.12)} Q${f1(hx - w * 0.55)},${f1(hy - w * 1.15)} ${f1(hx)},${f1(hy - w * 1.2)} Q${f1(hx + w * 0.55)},${f1(hy - w * 1.15)} ${f1(hx + w * 0.62)},${f1(hy + w * 0.12)} Z" fill="${fo.fill}"/><rect x="${f1(hx - w * 0.75)}" y="${f1(hy + w * 0.02)}" width="${f1(w * 1.5)}" height="${f1(w * 0.18)}" fill="${fo.fill}"/><circle cx="${f1(hx)}" cy="${f1(hy - w * 1.24)}" r="${f1(w * 0.12)}" fill="${fo.fill}"/><circle cx="${f1(hx + (fo.d ?? 1) * w * 0.3)}" cy="${f1(hy - w * 0.45)}" r="${f1(w * 0.12)}" fill="#C9C2A8" opacity="0.8"/>`; };
+function e5bCapitol(cx, gy, k, col) { // the dome on its drum over the central block and wings (a silhouette), cx = the dome's axis
+  const X = (u) => cx + u * k, Y = (v) => gy - v * k, s = [];
+  s.push(`<rect x="${X(-560)}" y="${Y(120)}" width="${1120 * k}" height="${120 * k}" fill="${col}"/><rect x="${X(-180)}" y="${Y(190)}" width="${360 * k}" height="${80 * k}" fill="${col}"/><path d="M${X(-120)},${Y(190)} L${X(0)},${Y(230)} L${X(120)},${Y(190)} Z" fill="${col}"/>`);
+  s.push(`<rect x="${X(-120)}" y="${Y(300)}" width="${240 * k}" height="${110 * k}" fill="${col}"/><rect x="${X(-138)}" y="${Y(312)}" width="${276 * k}" height="${14 * k}" fill="${col}"/>` + [...Array(13).keys()].map((i) => `<rect x="${X(-112 + i * 18.5)}" y="${Y(296)}" width="${6 * k}" height="${100 * k}" fill="#000" opacity="0.12"/>`).join(''));
+  s.push(`<rect x="${X(-96)}" y="${Y(360)}" width="${192 * k}" height="${50 * k}" fill="${col}"/><path d="M${X(-96)},${Y(360)} Q${X(-92)},${Y(470)} ${X(0)},${Y(480)} Q${X(92)},${Y(470)} ${X(96)},${Y(360)} Z" fill="${col}"/>`);
+  s.push(`<rect x="${X(-16)}" y="${Y(530)}" width="${32 * k}" height="${52 * k}" fill="${col}"/><path d="M${X(-18)},${Y(530)} Q${X(0)},${Y(552)} ${X(18)},${Y(530)} Z" fill="${col}"/><rect x="${X(-3)}" y="${Y(580)}" width="${6 * k}" height="${28 * k}" fill="${col}"/>`);
+  return s.join('');
+}
+const e5bTree = (x, gy, h, col, seed) => { const r = rng(seed); return `<rect x="${f1(x - 0.03 * h)}" y="${f1(gy - h * 0.55)}" width="${f1(0.06 * h)}" height="${f1(h * 0.55)}" fill="#1E2420"/>` + [...Array(6).keys()].map(() => `<circle cx="${f1(x + (r() - 0.5) * h * 0.5)}" cy="${f1(gy - h * (0.6 + r() * 0.35))}" r="${f1(h * (0.16 + r() * 0.12))}" fill="${col}"/>`).join(''); };
+// a cloth banner on a pole carried in both hands (plain stripes, no lettering); returns {fo, svg}
+function e5bBanner(fo, t, name, ph = 0) {
+  const d = fo.d ?? 1, [px, py] = E3K.toWorld(fo, 0.1, 0.55), top = [px + d * 10, py - 0.95 * fo.h], sway = 4 * Math.sin(t * 1.7 + ph);
+  let o = reach(fo, 'f', px + d * 4, py - 0.02 * fo.h, name + '.pole'); o = reach(o, 'b', lerp(px, top[0], 0.2), lerp(py, top[1], 0.2) + 0.04 * fo.h, name + '.pole2');
+  const w = 0.62 * fo.h, hh = 0.32 * fo.h, cx0 = top[0], cy0 = top[1] + 6;
+  const cloth = `<path d="M${f1(cx0)},${f1(cy0)} L${f1(cx0 - d * w)},${f1(cy0 + sway)} L${f1(cx0 - d * w + 3 * Math.sin(t * 2.3 + ph))},${f1(cy0 + hh + sway)} Q${f1(cx0 - d * w / 2)},${f1(cy0 + hh + 8 + sway)} ${f1(cx0)},${f1(cy0 + hh)} Z" fill="#E9E2CC" stroke="#0D0C09" stroke-width="3"/>` +
+    [0.3, 0.7].map((v) => line([[cx0, cy0 + hh * v], [cx0 - d * w, cy0 + hh * v + sway]], '#7A4A3E', 5, 'opacity="0.75"')).join('');
+  return {fo: o, svg: line([[px + d * 2, py + 0.12 * fo.h], top], '#2A1E12', 5) + cloth};
+}
+function e5bCoxeyA(t) {
+  const {H} = CX, G = 960, v = 62, c = cam2(camAt([[0, 1.0, 820, 560], [CX.cut, 1.06, 820 + v * CX.cut * 0.9, 570]], t)), s = [];
+  s.push(`<rect x="-2000" y="-600" width="6000" height="2200" fill="url(#cxsky)"/>`);
+  s.push(layerAt(c, 0.3, e5bCapitol(1500, 690, 0.9, '#8EA09C') + `<rect x="-1500" y="680" width="5000" height="300" fill="#8EA09C"/>`));
+  const far = [], r = rng(611);
+  for (let k = 0; k < 16; k++) { const x = -800 + k * 260; far.push(e5bTree(x, 900, 360 + 80 * r(), '#6E8478', 700 + k)); }
+  for (let k = 0; k < 6; k++) { const x = -500 + k * 520; far.push(`<rect x="${x}" y="${700}" width="6" height="200" fill="#2A2E2B"/><rect x="${x - 10}" y="690" width="26" height="22" fill="#2A2E2B"/>`); }
+  s.push(layerAt(c, 0.7, far.join('') + `<rect x="-1500" y="900" width="5000" height="30" fill="#A9B2AA"/>`));
+  const w = [`<rect x="-1500" y="910" width="5000" height="400" fill="#8A8E84"/><rect x="-1500" y="910" width="5000" height="400" fill="url(#matFloorShade)" opacity="0.5"/>`];
+  // the column: far row (lighter, smaller) and near row; the white horse at the head led by a man at the bridle
+  const head = 860 + v * t, farRow = [], nearRow = [], hats = ['cap', 'bowler', 'cap', 'cap', 'none', 'bowler'], coats = ['jacket', 'sack', 'jacket', 'frock'];
+  const walker = (x0, gy, h, k, fill, tones, name) => e4Walk({kind: 'man', hat: hats[k % 6], coat: coats[k % 4], beard: k % 5 === 2, h, d: 1, x: 0, y: gy, fill, det: 0, tones, rim: {c: '#F4EFE6', a: 0.35, dx: 0.008, dy: -0.006}}, x0, 1, v * t + 37 * k, gy, name);
+  for (let k = 0; k < 12; k++) { let fo = walker(head - 320 - k * 96 - 37 * k + 30, G - 28, H * 0.86, k + 3, '#2C2F2A', {tone: '#383B35', lite: '#464A42'}, `cx.f${k}`);
+    if (k === 3 || k === 8) { const b = e5bBanner(fo, t, `cx.fb${k}`, k); farRow.push(b.svg + fig(b.fo)); } else farRow.push(fig(fo)); }
+  for (let k = 0; k < 11; k++) { const x0 = head - 260 - k * 104 - 37 * k; let fo = walker(x0, G, H, k, '#0D0C09', {tone: '#25231D', lite: '#3A3730'}, `cx.n${k}`);
+    if (k === 0) fo = {...fo, hat: 'bowler', coat: 'frock'};
+    if (k === 2 || k === 6 || k === 9) { const b = e5bBanner(fo, t, `cx.nb${k}`, k * 2); nearRow.push(b.svg + fig(b.fo)); } else nearRow.push(fig(fo)); }
+  const horse = e4Horse(head - 60, G - 14, H * 1.0, '#E6E1D3', v * t, {dir: 1, gait: 'walk'});
+  let lead = e4Walk({kind: 'man', hat: 'cap', coat: 'jacket', h: H, d: 1, x: 0, y: G, fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}}, head + 10, 1, v * t, G, 'cx.lead');
+  lead = reach(lead, 'b', horse.mouth[0] - 6, horse.mouth[1] + 8, 'cx.lead.bridle');
+  w.push(farRow.join(''), `<g>${horse.svg}</g>`, nearRow.join(''), fig(lead) + line([[horse.mouth[0], horse.mouth[1]], [E3K.hand(lead, 'b').x, E3K.hand(lead, 'b').y]], '#3A2C1C', 2));
+  s.push(layerAt(c, 1, w.join('')));
+  return {world: s.join(''), scr: tag(130, 120, 'WASHINGTON, D.C. · MAY 1, 1894', smooth(0.3, 0.7, t) * (1 - smooth(3.8, 4.2, t)))};
+}
+function e5bCoxeyB(t) {
+  const {H, G, TX0, R, rise} = CX, c = cam2(camAt([[CX.cut, 1.08, 1120, 680], [CX.down, 1.14, 1120, 690], [CX.sec, 1.14, 960, 690]], t)), s = [];
+  s.push(`<rect x="-2000" y="-600" width="6000" height="2200" fill="url(#cxsky)"/>`);
+  // the Capitol's west front: a rusticated terrace wall and the columns above, the dome cut off at the top
+  const top = G - 6 * rise, wx = TX0 + 6 * R;
+  s.push(layerAt(c, 0.85, `<rect x="${wx - 200}" y="80" width="2400" height="${top - 80}" fill="#B9BDB2"/>` + [...Array(12).keys()].map((i) => `<rect x="${wx - 150 + i * 120}" y="150" width="44" height="${top - 290}" fill="#D4D6CC"/><rect x="${wx - 160 + i * 120}" y="140" width="64" height="16" fill="#9EA398"/>`).join('') + `<rect x="${wx - 200}" y="${top - 140}" width="2400" height="140" fill="#9EA398"/>` + [...Array(4).keys()].map((k) => `<rect x="${wx - 200}" y="${top - 140 + k * 35}" width="2400" height="2" fill="#7E8378"/>`).join('')));
+  // the lawn and the walk, a crowd far off on the left behind a rope
+  const crowd = [], r = rng(631);
+  for (let k = 0; k < 26; k++) { const x = -700 + k * 44 + r() * 20, h = 170 + 30 * r(); crowd.push(figure({kind: 'man', hat: ['cap', 'bowler', 'none'][k % 3], coat: 'jacket', x, y: 905, h, d: 1, fill: '#3E4A44', det: 0, tones: {tone: '#4A564F', lite: '#566259'}, an: {...POSES.stand(t, r()), tilt: 6 * Math.sin(t * 0.7 + k)}})); }
+  s.push(layerAt(c, 1, `<rect x="-2000" y="880" width="5000" height="400" fill="#71876A"/>` + crowd.join('') + line([[-800, 880], [500, 880]], '#2A2E2B', 2) + [...Array(8).keys()].map((k) => `<rect x="${-780 + k * 180}" y="852" width="5" height="30" fill="#2A2E2B"/>`).join('') +
+    `<rect x="-2000" y="905" width="5000" height="400" fill="#7C9474"/><rect x="${TX0 - 520}" y="${G - 4}" width="520" height="16" fill="#C9C6B8"/>`));
+  // the steps (treads one walk step deep), the landing and the terrace
+  const st = [];
+  for (let i = 0; i < 9; i++) { if (i === 3 || i === 4) continue; const x = TX0 + i * R, y = cxGround(x + 1); st.push(`<rect x="${f1(x)}" y="${y}" width="${f1((9 - i) * R + 600)}" height="${G - y + 2}" fill="${i % 2 ? '#CFCFC4' : '#C5C6BA'}"/><rect x="${f1(x)}" y="${y}" width="${f1((9 - i) * R + 600)}" height="3" fill="#F2F1EA"/>`); }
+  // ---- Coxey: up to the landing; lifts his speech; the police come, one up from the lawn, one down from the terrace; then the three
+  // walk back down and off the grass, a policeman at each arm ----
+  const ink = {fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}, rim: {c: '#F4EFE6', a: 0.4, dx: -0.008, dy: -0.006}};
+  const COX = {...ink, kind: 'man', hat: 'bowler', coat: 'frock', h: H, beard: false};
+  const COP = {...ink, kind: 'man', hat: 'none', coat: 'frock', h: H * 1.03};
+  const walkOn = (base, x0, dir, s0, name) => stepWalk({...base, d: dir, x: 0, y: 0, an: {...(base.an || {})}}, x0, dir, s0, cxGround, name);
+  // walk S px from x0 between t0 and t1, then settle (e3Settle) and stand
+  const leg = (base, x0, dir, S, t0, t1, name) => { if (t < t1) return walkOn(base, x0, dir, Math.max(0.001, S * e3Trap(t, t0, t1, 0.15)), name);
+    const n0 = E3LOG.length, arr = walkOn(base, x0, dir, S, name); E3LOG.length = n0; const o = e3Settle({...arr, floorY: undefined}, smooth(t1, t1 + 0.35, t), name + '.settle');
+    return {...o, an: {...o.an, ...POSES.stand(t, 0.4), legs: o.an.legs, shins: o.an.shins, lean: 0, bob: 0}}; };
+  const fin = {cox: TX0 + 3.4 * R, n: TX0 + 2.4 * R, f: TX0 + 4.4 * R}, vD = 126, sD = 0.5 * R + vD * Math.max(0, t - CX.down);
+  let cox, copN, copF;
+  if (t < CX.down) {
+    cox = leg(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'cx.cox');
+    const up = smooth(CX.speak, CX.speak + 0.5, t) * (1 - smooth(CX.grip[0] - 0.4, CX.grip[0], t)); if (up > 0) cox = {...cox, an: {...cox.an, fArm: [lerp(176, 40, up), lerp(180, 20, up)], tilt: 6 * up}};
+    copN = leg(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'cx.copN');
+    copF = leg({...COP, h: H}, fin.f + 4.5 * R, -1, 4.5 * R, CX.copF[0], CX.copF[1], 'cx.copF');
+  } else { cox = walkOn(COX, fin.cox + 0.5 * R, -1, sD, 'cx.cox.down'); copN = walkOn(COP, fin.n + 0.5 * R, -1, sD, 'cx.copN.down'); copF = walkOn({...COP, h: H}, fin.f + 0.5 * R, -1, sD, 'cx.copF.down'); }
+  // the grip: each takes an arm above the elbow
+  const g = smooth(CX.grip[0], CX.grip[1], t);
+  if (g > 0) { const dn = t >= CX.down, aN = E3K.toWorld(cox, dn ? 0.03 : -0.03, 0.63), aF = E3K.toWorld(cox, dn ? -0.03 : 0.03, 0.64), wN = dn ? 'b' : 'f';
+    if (g < 1) { const hN = E3K.hand(copN, wN), hF = E3K.hand(copF, 'f'); copN = e3Move(copN, wN, lerp(hN.x, aN[0], g), lerp(hN.y, aN[1], g), 'cx.copN.to'); copF = e3Move(copF, 'f', lerp(hF.x, aF[0], g), lerp(hF.y, aF[1], g), 'cx.copF.to'); }
+    else { copN = reach(copN, wN, aN[0], aN[1], 'cx.copN.arm'); copF = reach(copF, 'f', aF[0], aF[1], 'cx.copF.arm'); } }
+  const paper = t > CX.speak - 0.2 && t < CX.down ? holding(cox, 'f', 'cx.speech', (gx, gy) => `<rect x="${f1(gx - 4)}" y="${f1(gy - 30)}" width="22" height="30" fill="#EFE7D2" stroke="#0D0C09" stroke-width="2" transform="rotate(-10, ${f1(gx)}, ${f1(gy)})"/>`) : '';
+  const w = [st.join(''), fig(copF) + e5bHelmet(copF), fig(cox), paper, fig(copN) + e5bHelmet(copN)];
+  // the sign in the foreground, on a stake in the grass
+  const sx = 430, sy = 1010;
+  w.push(`<rect x="${sx - 4}" y="${sy - 70}" width="8" height="110" fill="#3A2C1C"/><rect x="${sx - 92}" y="${sy - 128}" width="184" height="66" fill="#F1ECDD" stroke="#0D0C09" stroke-width="4"/>` +
+    `<text x="${sx}" y="${sy - 101}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">KEEP OFF</text><text x="${sx}" y="${sy - 74}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">THE GRASS</text>` +
+    [...Array(18).keys()].map((k) => line([[sx - 140 + k * 16, sy + 44], [sx - 136 + k * 16 + 4 * Math.sin(t * 2 + k), sy + 26]], '#55704E', 3)).join(''));
+  s.push(layerAt(c, 1, w.join('')));
+  return {world: s.join(''), scr: ''};
+}
+function renderE5Coxey(t) {
+  const sh = t < CX.cut ? e5bCoxeyA(t) : e5bCoxeyB(t);
+  return frame(e5Defs(t, grad('cxsky', [['0', '#A9BCC0'], ['1', '#E2E6DE']])), `<rect width="1920" height="1080" fill="#C9D2CE"/>`, sh.world, sh.scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Coxey});
+Object.assign(CLIPS, {ep5_coxey: {sec: CX.sec, render: (t) => renderE5Coxey(t)}});
