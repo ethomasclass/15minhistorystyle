@@ -6,7 +6,7 @@ Tone: casual storyteller asides in light spots ([casual], [amused], [deadpan], [
 Markup as in Episodes 1 to 4: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
 `MICHAEL:` / `TOMMY:` / `MA:` / `NORA:` / `OWEN:` paragraphs are character lines (OWEN is a new voice: Irish-born Nebraska farmer, 40s,
 warm and weary). Facts and safe wordings: `../RESEARCH.md` and `../PLAN.md`. Items marked [VERIFY] are checked before voicing.
-Baton rule as Episodes 3 and 4: each chapter ends on the next chapter's title.
+Baton rule: each chapter ends on words that become the next chapter's title card, but the next chapter does NOT repeat them (user, Nov 18: openings start naturally).
 
 ---
 
@@ -62,9 +62,7 @@ One worker against a giant company had no chance. But all the workers, together?
 
 ## 3. Strength in Numbers
 
-Strength in numbers. That's the idea behind a union.
-
-A {union} is a group of workers who join together to deal with their boss as one. One worker who asks for a raise can be fired. A thousand workers asking at once are much harder to ignore.
+That's the idea behind a {union}: a group of workers who join together to deal with their boss as one. One worker who asks for a raise can be fired. A thousand workers asking at once are much harder to ignore.
 
 When a union and a company sit down to agree on pay, hours and safety, that's called {collective bargaining}. Collective means together. Bargaining means negotiating.
 
@@ -80,7 +78,7 @@ People decided there had to be a better way. And two kinds of unions offered one
 
 ## 4. Two Kinds of Unions
 
-Two kinds of unions. The first was the {Knights of Labor}.
+There were two kinds of unions. The first was the {Knights of Labor}.
 
 [amused] The Knights started out so secret that newspapers printed their name as five little stars. Like a swear word. By 1886 they had hundreds of thousands of members, because they let almost anyone join: skilled and unskilled workers, women, and Black workers. But not Chinese immigrants.
 
@@ -106,7 +104,7 @@ But the biggest fight was still coming, at a steel mill the workers called Fort 
 
 ## 5. Fort Frick
 
-Fort Frick was the workers' nickname for the steel mill in Homestead, Pennsylvania. Remember those barges?
+Remember those barges? This is where they were headed: the steel mill in Homestead, Pennsylvania.
 
 The mill belonged to Andrew Carnegie, one of the richest men in the world. [casual] Okay, this part matters, so stick with me. Carnegie owned the mill. A tough manager named Henry Clay Frick ran it for him. Carnegie was the boss. Frick was the boss's tough guy.
 
@@ -154,7 +152,7 @@ Why were prices falling in the first place? That's the money problem.
 
 ## 7. The Money Problem
 
-The money problem. [casual] I know, I know: economics. But stay with me, because this is the key to the whole fight.
+[casual] Okay. I know, I know: economics. But stay with me, because this is the key to the whole fight.
 
 Say Uncle Owen borrows a thousand dollars when wheat sells for a dollar a bushel. To pay it back, he needs to sell a thousand bushels.
 
@@ -178,9 +176,7 @@ Farmers needed the government in Washington on their side. But Washington had it
 
 ## 8. Washington's Problem
 
-Washington's problem was jobs.
-
-For years, whichever party won an election handed out government jobs to the people who helped it win. [casual] Win an election, give jobs to your buddies. That was called the {spoils system}.
+That problem was jobs. For years, whichever party won an election handed out government jobs to the people who helped it win. [casual] Win an election, give jobs to your buddies. That was called the {spoils system}.
 
 Then, in 1881, a man who thought he was owed a government job shot President James Garfield, who died a few months later.
 
@@ -192,7 +188,7 @@ Real reforms. But they didn't fix crop prices, money, or wages. So farmers decid
 
 ## 9. A Party of Their Own
 
-A party of their own. On July 4th, 1892, in Omaha, Nebraska, farmers formed the People's Party, also called the Populists. {Populism} means ordinary people uniting against powerful elites, like big banks, railroads and corporations.
+On July 4th, 1892, in Omaha, Nebraska, farmers formed the People's Party, also called the Populists. {Populism} means ordinary people uniting against powerful elites, like big banks, railroads and corporations.
 
 They said America was producing two kinds of people: tramps, meaning homeless wanderers, and millionaires.
 
@@ -213,8 +209,6 @@ When they reached the Capitol, police arrested Coxey. For what? Carrying banners
 For millions of Americans, the crash seemed to prove the Populists right. By 1896, the whole election came down to gold or silver, and a speech about a cross of gold.
 
 ## 10. The Cross of Gold
-
-The cross of gold came from a speech.
 
 In July 1896, the Democrats, one of the two big parties, met in Chicago to pick a candidate for president. A 36-year-old from Nebraska named William Jennings Bryan stood up and argued for free silver. He finished with his arms spread wide, like a cross:
 
@@ -244,7 +238,7 @@ So where did ordinary Americans stand? Time to check the scorecard.
 
 ## 11. The Scorecard
 
-The scorecard. Three doors.
+Let's go back to those three doors.
 
 Fighting at work: fought back, fell short.
 
@@ -271,15 +265,15 @@ That's the end of our story of the Gilded Age. Thanks for watching, and for stic
 | Out of | Last words (= next title) | In to | First line picks up |
 |---|---|---|---|
 | 1 | "...Start with the rules." | (title card) then 2 | "The rules of work in the Gilded Age were simple." |
-| 2 | "...There was strength in numbers." | 3 | "Strength in numbers." |
-| 3 | "...two kinds of unions offered one." | 4 | "Two kinds of unions." |
-| 4 | "...a steel mill the workers called Fort Frick." | 5 | "Fort Frick was the workers' nickname..." |
+| 2 | "...There was strength in numbers." | 3 | "That's the idea behind a union..." |
+| 3 | "...two kinds of unions offered one." | 4 | "There were two kinds of unions." |
+| 4 | "...a steel mill the workers called Fort Frick." | 5 | "Remember those barges?" |
 | 5 | "...to Uncle Owen's letters." | 6 | "Uncle Owen was Michael's uncle..." |
-| 6 | "...the money problem." | 7 | "The money problem." |
-| 7 | "...Washington had its own problem." | 8 | "Washington's problem was jobs." |
-| 8 | "...a party of their own." | 9 | "A party of their own." |
-| 9 | "...a speech about a cross of gold." | 10 | "The cross of gold came from a speech." |
-| 10 | "...check the scorecard." | 11 | "The scorecard. Three doors." |
+| 6 | "...the money problem." | 7 | "Okay. I know, I know: economics." |
+| 7 | "...Washington had its own problem." | 8 | "That problem was jobs." |
+| 8 | "...a party of their own." | 9 | "On July 4th, 1892..." |
+| 9 | "...a speech about a cross of gold." | 10 | "In July 1896..." |
+| 10 | "...check the scorecard." | 11 | "Let's go back to those three doors." |
 
 ## Three doors (on screen, recurring)
 Three doors drawn in the series' notebook style, labelled AT WORK, ON THE FARM, AT THE BALLOT BOX. Introduced at the end of ch 1. Door 1
