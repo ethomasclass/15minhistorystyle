@@ -6,7 +6,7 @@
 # Chapters not built yet are skipped. Two-pass loudness master to -14 LUFS.
 #   -> review/ep5_full_720p.mp4 + review/ep5_preview.mp4 (540p)
 #   PREVIEW=coldopen ./assemble.sh   only chapter 1 + the title card -> review/ep5_coldopen_preview.mp4 (720p, for review)
-#   END_THEME_AT=<s>  where in ga_gilded_theme the end screen picks the theme up (where chapter 10 leaves it; default 0)
+#   END_THEME_AT=<s>  where in ga_gilded_theme the end screen picks the theme up (default 55.7: chapter 10 plays the theme from its top, mix/ch10.sh, and is 55.7 s long)
 # RES=1080 ./assemble.sh: the full-size master from review/*_1080p.mp4 -> ../renders/ep5_full_1080p.mp4 (Git LFS), no preview
 set -e
 cd "${EDIT_DIR:-$(dirname "$0")}"
@@ -28,7 +28,7 @@ if [ "$PREVIEW" = coldopen ]; then PARTS=(ch01 title); OUT=ep5_coldopen; else
   for c in ch02 ch03 ch04 ch05 ch06 ch07 ch08 ch09 ch10; do [ -f review/${c}_${RES}p.mp4 ] && { [ $c != ch02 ] && PARTS+=(brk); PARTS+=($c); }; done
   # the 20 s end screen after chapter 10: ga_gilded_theme (the series end theme, Ep 1) carries on from END_THEME_AT
   if [ -f review/ch10_${RES}p.mp4 ]; then
-    [ -f review/endscreen_${RES}p.mp4 ] || card endscreen 20 -ss ${END_THEME_AT:-0} -i $M1/ga_gilded_theme.mp3 -filter_complex "[1]atrim=0:20,asetpts=PTS-STARTPTS,volume=0.105,afade=t=in:d=0.08,afade=t=out:st=18.5:d=1.5,apad=whole_dur=20,$ST[a]"
+    [ -f review/endscreen_${RES}p.mp4 ] || card endscreen 20 -ss ${END_THEME_AT:-55.7} -i $M1/ga_gilded_theme.mp3 -filter_complex "[1]atrim=0:20,asetpts=PTS-STARTPTS,volume=0.105,afade=t=in:d=0.08,afade=t=out:st=18.5:d=1.5,apad=whole_dur=20,$ST[a]"
     PARTS+=(endscreen)
   fi
   OUT=ep5_full
