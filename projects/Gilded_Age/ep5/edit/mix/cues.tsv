@@ -1,0 +1,15 @@
+# Ep 5 cue name	existing series music it plays (the user wants no new music for Ep 5). Volume for about 17 LU under the voice
+# (-18 LUFS narration): vol = 10^((-35.2 - cue LUFS) / 20); the cue's integrated loudness and that volume are noted per line.
+ga_barges	ga_not_welcome	# ch01 cold open, tense (-14.8 LUFS: 0.095)
+ga_the_rules	ga_sugar_house	# ch02 the refinery, work (-13.5: 0.082)
+ga_strength	ga_age_of_steel	# ch03 unions and strikes (-14.9: 0.097)
+ga_two_unions	ga_sweatshop	# ch04 the Knights, Haymarket, the AFL (-14.4: 0.091)
+ga_fort_frick	ga_the_squeeze	# ch05 Homestead (-13.4: 0.081)
+ga_hero_villain	ga_heroes_or_villains	# ch05 under "Hero? Villain? Or both?"; also ch09 (-15.9: 0.108)
+ga_owens_letters	ga_letters	# ch06 the farm (-15.1: 0.099)
+ga_money_problem	ga_kellys	# ch07 the money problem (-14.7: 0.094)
+ga_the_crash	ga_bad_wire	# ch08 the Panic of 1893 (-16.2: 0.112)
+ga_coxey	ga_new_neighbors	# ch08 lighter, Coxey's march (-14.4: 0.091)
+ga_cross_of_gold	ga_heroes_or_villains	# ch09 the convention (-15.9: 0.108)
+ga_scorecard	ga_looking_backward	# ch09/ch10 alternative, reflective (-14.4: 0.091)
+# ch10 into the end screen: ga_gilded_theme itself (Ep 1; -15.4 LUFS: 0.102)
