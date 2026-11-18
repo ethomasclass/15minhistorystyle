@@ -85,9 +85,9 @@ function e5bRefineryA(t) {
   let stir = reach(sFo0, 'f', ...along(0.32), 'rf.stir.paddle'); stir = reach(stir, 'b', ...along(0.08), 'rf.stir.paddle2');
   s.push(line([pTop, [pBot[0], pBot[1] + 30]], '#2A1E12', 7) + fig(stir));
   // the stoker: shovel into the left firebox, a rhythmic dig
-  const kx = 600 - 230, dig = Math.max(0, Math.sin(t * 1.9)), stk = e5Standing({...e5Ink({kind: 'man', hat: 'none', coat: 'vest', h: H, d: 1, x: kx}, lod, 600), det: 0}, kx, GB + 14, t, 0.6, 'rf.stoke', {lean: 6 + 8 * dig, tilt: -14});
-  const sh0 = [kx + 70 + 40 * dig, GB - 30 - 20 * dig], sh1 = [kx + 150 + 50 * dig, GB - 60 + 10 * dig];
-  let stoke = reach(stk, 'f', lerp(sh0[0], sh1[0], 0.45), lerp(sh0[1], sh1[1], 0.45), 'rf.stoke.sh'); stoke = reach(stoke, 'b', sh0[0], sh0[1], 'rf.stoke.sh2');
+  const kx = 600 - 150, dig = Math.max(0, Math.sin(t * 1.9)), stk = e5Standing({...e5Ink({kind: 'man', hat: 'none', coat: 'vest', h: H, d: 1, x: kx}, lod, 600), det: 0}, kx, GB + 14, t, 0.6, 'rf.stoke', {lean: 6 + 8 * dig, tilt: -14});
+  const sh0 = E3K.toWorld(stk, 0.12, 0.58), sh1 = [545 + 30 * dig, GB - 60 + 6 * dig];
+  let stoke = reach(stk, 'f', lerp(sh0[0], sh1[0], 0.22), lerp(sh0[1], sh1[1], 0.22), 'rf.stoke.sh'); stoke = reach(stoke, 'b', sh0[0], sh0[1], 'rf.stoke.sh2');
   s.push(fig(stoke) + line([[sh0[0] - 20, sh0[1] + 10], sh1], '#1A140D', 6) + `<path d="M${f1(sh1[0])},${f1(sh1[1] - 10)} l26,4 l-4,22 l-24,-6 Z" fill="#1A140D"/>`);
   s.push(vats.map((v) => v.steam).join(''));
   // Michael: the sack on his shoulder, from left to right in front of the vats, head down under the load
@@ -213,7 +213,7 @@ Object.assign(CLIPS, {ep5_kitchen_1887: {sec: K7.sec, render: (t) => renderE5Kit
 // Uncle Owen (coral) stands at the stove with an armful of ears of corn; he opens the firebox door (warm light floods over him),
 // feeds three ears into the fire one by one (each catches with a flare and sparks), closes the door and warms his hands. The child
 // sleeps in the far corner. Scale as the farm kitchen (a man 440 px).
-const CS = {sec: 13, open: [1.2, 2.0], feeds: [3.0, 5.6, 8.2], close: [10.9, 11.6], warm: 11.9, ox: 975};
+const CS = {sec: 13, open: [1.2, 2.0], feeds: [3.0, 5.6, 8.2], close: [10.9, 11.6], warm: 11.9, ox: 905};
 function e5bFire(x, y, w, h, t, k) { const s = [], r = rng(733);
   s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#3A1408"/><rect x="${x}" y="${y + h * 0.62}" width="${w}" height="${h * 0.38}" fill="#FF7A2A" opacity="0.9"/>`);
   for (let j = 0; j < 4; j++) { const bx = x + w * (0.15 + 0.23 * j), ph = r() * 9, th = h * (0.5 + 0.4 * Math.abs(Math.sin(t * (5 + r() * 3) + ph))) * k, sw = 5 * Math.sin(t * 6.3 + ph);
@@ -229,13 +229,14 @@ function renderE5CornStove(t, o = {}) {
   let flare = 0; CS.feeds.forEach((f) => { flare = Math.max(flare, e4Bump(t, f + 1.4, 1.0)); });
   const fire = 0.85 + 0.15 * Math.sin(t * 9) * Math.sin(t * 5.7), heat = door * (0.75 + 0.35 * flare) * fire;
   // the stove (as the farm kitchen's) with the firebox door on its right-hand front, hinged on its left edge
-  const dx0 = s0 + 96, dw = 70, dy0 = sy + 40, dh = 60;
+  const dx0 = s0 + 96, dw = 70, dy0 = sy + 22, dh = 60;
   s.push(`<rect x="${s0}" y="${sy}" width="${s1 - s0}" height="170" fill="#0D0C09"/><rect x="${s0 - 10}" y="${sy - 12}" width="${s1 - s0 + 20}" height="14" fill="#0D0C09"/><rect x="${s0 + 14}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/><rect x="${s1 - 28}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/>` +
     `<rect x="${s0 + 110}" y="${FK.ceil - 60}" width="26" height="${sy - 12 - FK.ceil + 60}" fill="#0D0C09"/><rect x="${s0 + 16}" y="${sy + 110}" width="60" height="10" fill="#FFB15C" opacity="${f1(0.5 * fire)}"/>`);
   s.push(e5bFire(dx0, dy0, dw, dh, t, 0.7 + 0.5 * flare) + `<rect x="${dx0}" y="${dy0}" width="${dw}" height="${dh}" fill="none" stroke="#0D0C09" stroke-width="5"/>`);
   const dwv = dw * Math.cos(door * Math.PI * 0.62); // the door leaf, foreshortened as it swings out toward us
-  s.push(`<path d="M${dx0},${dy0 - 3} L${f1(dx0 + dwv)},${f1(dy0 - 3 - 8 * door)} L${f1(dx0 + dwv)},${f1(dy0 + dh + 3 + 8 * door)} L${dx0},${dy0 + dh + 3} Z" fill="#1A1A18" stroke="#0D0C09" stroke-width="3"/>`);
-  const handle = [dx0 + dwv - 8 * Math.sign(dwv || 1), dy0 + dh / 2];
+  const hg = dx0 + dw; // the hinge on the right edge: the door swings out toward Owen
+  s.push(`<path d="M${hg},${dy0 - 3} L${f1(hg - dwv)},${f1(dy0 - 3 - 8 * door)} L${f1(hg - dwv)},${f1(dy0 + dh + 3 + 8 * door)} L${hg},${dy0 + dh + 3} Z" fill="#1A1A18" stroke="#0D0C09" stroke-width="3"/>`);
+  const handle = [hg - dwv * 0.86, dy0 + dh / 2];
   s.push(`<circle cx="${f1(handle[0])}" cy="${f1(handle[1])}" r="5" fill="#3A3A36"/>`);
   if (flare > 0.05) for (let k = 0; k < 8; k++) { const p = ((t * 1.3 + k / 8) % 1); s.push(`<circle cx="${f1(dx0 + dw * 0.5 + 30 * Math.sin(k * 2.3 + t) * p)}" cy="${f1(dy0 - 10 - 120 * p)}" r="2" fill="#FFD27A" opacity="${f1(flare * door * (1 - p))}"/>`); }
   s.push(glowC(dx0 + dw / 2, dy0 + dh / 2, 520, 0.75 * heat, 'mswarm') + glowC(dx0 + dw / 2, dy0 + dh / 2, 160, 0.6 * heat, 'msglow') + glowC(s0 + 60, sy + 70, 300, 0.35 * fl, 'mswarm'));
@@ -253,7 +254,7 @@ function renderE5CornStove(t, o = {}) {
   // ---- Owen: an armful of ears in the crook of his far arm; opens the door; feeds them in one by one; shuts it; warms his hands ----
   const OWEN = {kind: 'man', hat: 'none', coat: 'vest', beard: true, fill: E5.coral, tones: MICHAEL_TONES};
   const rim = {c: '#FFC27A', a: Math.min(1, lod.rimA * 0.5 + 0.7 * heat), dx: 0.012, dy: -0.004};
-  let ow = e5Standing({...OWEN, x: CS.ox, h: H, d: -1, det, rim}, CS.ox, F, t, 0.2, 'cs.owen', {lean: 9, tilt: -16 + 6 * door, expr: 'set', blink: (t + 1.2) % 4.1 < 0.12});
+  let ow = e5Standing({...OWEN, x: CS.ox, h: H, d: -1, det, rim}, CS.ox, F, t, 0.2, 'cs.owen', {lean: 12, tilt: -16 + 6 * door, expr: 'set', blink: (t + 1.2) % 4.1 < 0.12});
   const arm = E3K.toWorld(ow, 0.1, 0.6), left = Math.max(0, 3 - CS.feeds.filter((f) => t > f + 1.2).length); // ears still in his arm
   ow = reach(ow, 'b', arm[0], arm[1], 'cs.owen.armful');
   const mouth = [dx0 + dw * 0.55, dy0 + dh * 0.5], rest = [dx0 + dw + 30, dy0 + dh + 20];
@@ -320,14 +321,14 @@ function e5bCoxeyA(t) {
   const w = [`<rect x="-1500" y="910" width="5000" height="400" fill="#8A8E84"/><rect x="-1500" y="910" width="5000" height="400" fill="url(#matFloorShade)" opacity="0.5"/>`];
   // the column: far row (lighter, smaller) and near row; the white horse at the head led by a man at the bridle
   const head = 860 + v * t, farRow = [], nearRow = [], hats = ['cap', 'bowler', 'cap', 'cap', 'none', 'bowler'], coats = ['jacket', 'sack', 'jacket', 'frock'];
-  const walker = (x0, gy, h, k, fill, tones, name) => e4Walk({kind: 'man', hat: hats[k % 6], coat: coats[k % 4], beard: k % 5 === 2, h, d: 1, x: 0, y: gy, fill, det: 0, tones, rim: {c: '#F4EFE6', a: 0.35, dx: 0.008, dy: -0.006}}, x0, 1, v * t + 37 * k, gy, name);
-  for (let k = 0; k < 12; k++) { let fo = walker(head - 320 - k * 96 - 37 * k + 30, G - 28, H * 0.86, k + 3, '#2C2F2A', {tone: '#383B35', lite: '#464A42'}, `cx.f${k}`);
+  const H0 = 860, walker = (x0, gy, h, k, fill, tones, name) => e4Walk({kind: 'man', hat: hats[k % 6], coat: coats[k % 4], beard: k % 5 === 2, h, d: 1, x: 0, y: gy, fill, det: 0, tones, rim: {c: '#F4EFE6', a: 0.35, dx: 0.008, dy: -0.006}}, x0, 1, v * t + 37 * k, gy, name);
+  for (let k = 0; k < 12; k++) { let fo = walker(H0 - 320 - k * 96 - 37 * k + 30, G - 28, H * 0.86, k + 3, '#2C2F2A', {tone: '#383B35', lite: '#464A42'}, `cx.f${k}`);
     if (k === 3 || k === 8) { const b = e5bBanner(fo, t, `cx.fb${k}`, k); farRow.push(b.svg + fig(b.fo)); } else farRow.push(fig(fo)); }
-  for (let k = 0; k < 11; k++) { const x0 = head - 260 - k * 104 - 37 * k; let fo = walker(x0, G, H, k, '#0D0C09', {tone: '#25231D', lite: '#3A3730'}, `cx.n${k}`);
+  for (let k = 0; k < 11; k++) { const x0 = H0 - 260 - k * 104 - 37 * k; let fo = walker(x0, G, H, k, '#0D0C09', {tone: '#25231D', lite: '#3A3730'}, `cx.n${k}`);
     if (k === 0) fo = {...fo, hat: 'bowler', coat: 'frock'};
     if (k === 2 || k === 6 || k === 9) { const b = e5bBanner(fo, t, `cx.nb${k}`, k * 2); nearRow.push(b.svg + fig(b.fo)); } else nearRow.push(fig(fo)); }
-  const horse = e4Horse(head - 60, G - 14, H * 1.0, '#E6E1D3', v * t, {dir: 1, gait: 'walk'});
-  let lead = e4Walk({kind: 'man', hat: 'cap', coat: 'jacket', h: H, d: 1, x: 0, y: G, fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}}, head + 10, 1, v * t, G, 'cx.lead');
+  const horse = e4Horse(H0 - 60, G - 14, H * 1.0, '#E6E1D3', v * t, {dir: 1, gait: 'walk'});
+  let lead = e4Walk({kind: 'man', hat: 'cap', coat: 'jacket', h: H, d: 1, x: 0, y: G, fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}}, H0 + 370, 1, v * t, G, 'cx.lead');
   lead = reach(lead, 'b', horse.mouth[0] - 6, horse.mouth[1] + 8, 'cx.lead.bridle');
   w.push(farRow.join(''), `<g>${horse.svg}</g>`, nearRow.join(''), fig(lead) + line([[horse.mouth[0], horse.mouth[1]], [E3K.hand(lead, 'b').x, E3K.hand(lead, 'b').y]], '#3A2C1C', 2));
   s.push(layerAt(c, 1, w.join('')));
@@ -352,19 +353,22 @@ function e5bCoxeyB(t) {
   const ink = {fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}, rim: {c: '#F4EFE6', a: 0.4, dx: -0.008, dy: -0.006}};
   const COX = {...ink, kind: 'man', hat: 'bowler', coat: 'frock', h: H, beard: false};
   const COP = {...ink, kind: 'man', hat: 'none', coat: 'frock', h: H * 1.03};
-  const walkOn = (base, x0, dir, s0, name) => stepWalk({...base, d: dir, x: 0, y: 0, an: {...(base.an || {})}}, x0, dir, s0, cxGround, name);
+  const tNow = t, walkOn = (base, x0, dir, s0, name) => stepWalk({...base, d: dir, x: 0, y: 0, an: {...(base.an || {})}}, x0, dir, s0, cxGround, name);
   // walk S px from x0 between t0 and t1, then settle (e3Settle) and stand
-  const leg = (base, x0, dir, S, t0, t1, name) => { if (t < t1) return walkOn(base, x0, dir, Math.max(0.001, S * e3Trap(t, t0, t1, 0.15)), name);
+  const leg = (base, x0, dir, S, t0, t1, name, t = tNow) => { if (t < t1) return walkOn(base, x0, dir, Math.max(0.001, S * e3Trap(t, t0, t1, 0.15)), name);
     const n0 = E3LOG.length, arr = walkOn(base, x0, dir, S, name); E3LOG.length = n0; const o = e3Settle({...arr, floorY: undefined}, smooth(t1, t1 + 0.35, t), name + '.settle');
     return {...o, an: {...o.an, ...POSES.stand(t, 0.4), legs: o.an.legs, shins: o.an.shins, lean: 0, bob: 0}}; };
-  const fin = {cox: TX0 + 3.4 * R, n: TX0 + 2.4 * R, f: TX0 + 4.4 * R}, vD = 126, sD = 0.5 * R + vD * Math.max(0, t - CX.down);
+  const fin = {cox: TX0 + 3.55 * R, n: TX0 + 2.55 * R, f: TX0 + 4.25 * R}, vD = 126, sD = 0.5 * R + vD * Math.max(0, t - CX.down);
   let cox, copN, copF;
   if (t < CX.down) {
     cox = leg(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'cx.cox');
     const up = smooth(CX.speak, CX.speak + 0.5, t) * (1 - smooth(CX.grip[0] - 0.4, CX.grip[0], t)); if (up > 0) cox = {...cox, an: {...cox.an, fArm: [lerp(176, 40, up), lerp(180, 20, up)], tilt: 6 * up}};
     copN = leg(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'cx.copN');
     copF = leg({...COP, h: H}, fin.f + 4.5 * R, -1, 4.5 * R, CX.copF[0], CX.copF[1], 'cx.copF');
-  } else { cox = walkOn(COX, fin.cox + 0.5 * R, -1, sD, 'cx.cox.down'); copN = walkOn(COP, fin.n + 0.5 * R, -1, sD, 'cx.copN.down'); copF = walkOn({...COP, h: H}, fin.f + 0.5 * R, -1, sD, 'cx.copF.down'); }
+  } else { // the walk down starts from where each one settled (their stance at CX.down)
+    const n0 = E3LOG.length, at = (b, x0, d, S, t0, t1, nm) => leg(b, x0, d, S, t0, t1, nm, CX.down).x;
+    const xs = {cox: at(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'q'), n: at(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'q'), f: at({...COP, h: H}, fin.f + 4.5 * R, -1, 4.5 * R, CX.copF[0], CX.copF[1], 'q')}; E3LOG.length = n0;
+    cox = walkOn(COX, xs.cox + 0.5 * R, -1, sD, 'cx.cox.down'); copN = walkOn(COP, xs.n + 0.5 * R, -1, sD, 'cx.copN.down'); copF = walkOn({...COP, h: H}, xs.f + 0.5 * R, -1, sD + 0.26 * R * smooth(CX.down, CX.down + 1.2, t), 'cx.copF.down'); } // he closes up a little on the stairs
   // the grip: each takes an arm above the elbow
   const g = smooth(CX.grip[0], CX.grip[1], t);
   if (g > 0) { const dn = t >= CX.down, aN = E3K.toWorld(cox, dn ? 0.03 : -0.03, 0.63), aF = E3K.toWorld(cox, dn ? -0.03 : 0.03, 0.64), wN = dn ? 'b' : 'f';
@@ -374,8 +378,8 @@ function e5bCoxeyB(t) {
   const w = [st.join(''), fig(copF) + e5bHelmet(copF), fig(cox), paper, fig(copN) + e5bHelmet(copN)];
   // the sign in the foreground, on a stake in the grass
   const sx = 430, sy = 1010;
-  w.push(`<rect x="${sx - 4}" y="${sy - 70}" width="8" height="110" fill="#3A2C1C"/><rect x="${sx - 92}" y="${sy - 128}" width="184" height="66" fill="#F1ECDD" stroke="#0D0C09" stroke-width="4"/>` +
-    `<text x="${sx}" y="${sy - 101}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">KEEP OFF</text><text x="${sx}" y="${sy - 74}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">THE GRASS</text>` +
+  w.push(`<rect x="${sx - 4}" y="${sy - 70}" width="8" height="110" fill="#3A2C1C"/><rect x="${sx - 92}" y="${sy - 134}" width="184" height="74" fill="#F1ECDD" stroke="#0D0C09" stroke-width="4"/>` +
+    `<text x="${sx}" y="${sy - 106}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">KEEP OFF</text><text x="${sx}" y="${sy - 72}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">THE GRASS</text>` +
     [...Array(18).keys()].map((k) => line([[sx - 140 + k * 16, sy + 44], [sx - 136 + k * 16 + 4 * Math.sin(t * 2 + k), sy + 26]], '#55704E', 3)).join(''));
   s.push(layerAt(c, 1, w.join('')));
   return {world: s.join(''), scr: ''};
@@ -538,12 +542,12 @@ function renderE5Kitchen1896(t, o = {}) {
     MAT.smoke(950, tTop - 6, t, {col: 'D9DEDA', k: 0.3, n: 5, rise: 90, drift: 20, speed: 4, seed: 787}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.4 * 100) / 100}"`);
   // ---- Ma: scrubbing at the board; stops before her line, straightens, turns to them and says it; a hand toward the window (the
   // west, the farm) on "losing his farm", the hand down flat on "metal" ----
-  const mx = 800, stop = smooth(A0 - 0.9, A0 - 0.4, t), b9 = as.beat;
+  const mx = 835, stop = smooth(A0 - 0.9, A0 - 0.4, t), b9 = as.beat;
   let ma = cast('mother', {x: mx, y: F, h: H, d: 1, det, rim: rimW, an: {...POSES.stand(t, 0.5), tilt: lerp(-18, 4, stop) + 3 * b9, lean: 10 * (1 - stop), expr: t > A0 - 1 ? 'set' : 'neutral', jaw: as.jaw, blink: (t + 0.6) % 3.8 < 0.12}});
   ma = e3Stand({...ma, floorY: F}, mx, mx, 0, 'k9.ma');
-  if (stop < 1) { const k = Math.sin(t * 5.2), bp = [tb[0] + 44 + 6 * k, tTop - 34 + 16 * k], g = E3K.hand({...ma, an: {...ma.an, fArm: [150, 120]}}, 'f');
+  if (stop < 1) { const k = Math.sin(t * 5.2), bp = [tb[0] + 44 + 6 * k, tTop - 42 + 14 * k], g = E3K.hand({...ma, an: {...ma.an, fArm: [150, 120]}}, 'f');
     ma = stop > 0 ? e3Move(ma, 'f', lerp(bp[0], g.x, stop), lerp(bp[1], g.y, stop), 'k9.ma.up') : reach(ma, 'f', bp[0], bp[1], 'k9.ma.scrub');
-    const bp2 = [tb[0] + 30 + 6 * k, tTop - 20 + 16 * k], g2 = E3K.hand({...ma, an: {...ma.an, bArm: [160, 130]}}, 'b');
+    const bp2 = [tb[0] + 36 + 5 * k, tTop - 40 + 10 * k], g2 = E3K.hand({...ma, an: {...ma.an, bArm: [160, 130]}}, 'b');
     ma = stop > 0 ? e3Move(ma, 'b', lerp(bp2[0], g2.x, stop), lerp(bp2[1], g2.y, stop), 'k9.ma.up2') : reach(ma, 'b', bp2[0], bp2[1], 'k9.ma.scrub2'); }
   else ma = {...ma, an: {...ma.an, fArm: e4Keys([[A0 - 0.4, 150, 120], [A0 + 0.5, 70, 60], [A0 + 1.5, 64, 56 + 6 * b9], [A0 + 2.0, 110, 120], [A1 - 0.6, 92, 96], [A1 - 0.3, 110, 130], [A1 + 0.5, 150, 140], [A1 + 1.2, 176, 180]], t), bArm: e4Keys([[A0 - 0.4, 160, 130], [A0 + 0.6, 176, 186]], t)}};
   // ---- Michael at the table, worried: looks up at Tommy for his answer; looks down into the mug after Ma ----
