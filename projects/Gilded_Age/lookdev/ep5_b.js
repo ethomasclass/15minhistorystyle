@@ -581,7 +581,7 @@ function e5bBurst(x, y, t, t0, seed) { const u = (t - t0) / 2.2; if (u < 0 || u 
     s.push(line([[x + Math.cos(ang) * rr * 0.7, y + Math.sin(ang) * rr * 0.7 + 40 * u * u], [px, py]], col, 2.4, `opacity="${f1(a * 0.8 * 100) / 100}"`) + `<circle cx="${f1(px)}" cy="${f1(py)}" r="2.6" fill="${col}" opacity="${f1(a * 100) / 100}"/>`); }
   return s.join(''); }
 function renderE5Bridge(t) {
-  const {H, G, v, x0} = BJ, s = v * t, mx = x0 + s, c = cam2({z: 1.05 + 0.07 * t / BJ.sec, ux: mx + 160 + 60 * Math.sin(t * 0.25), uy: 640}), L = [];
+  const {H, G, v, x0} = BJ, s = v * t, mx = x0 + s, c = cam2({z: 1.05 + 0.07 * t / BJ.sec, ux: mx + 140 + 60 * Math.sin(t * 0.25), uy: 640}), L = [];
   L.push(`<rect width="1920" height="1080" fill="url(#bjsky)"/>`);
   // far: the river and the Manhattan skyline at dusk (parallax 0.15), its windows lighting up; steeples; fireworks above it
   const far = [], r = rng(811);
@@ -610,9 +610,9 @@ function renderE5Bridge(t) {
   // ---- the brothers: Michael a little behind on the far side, Tommy on the near side talking with his hands ----
   const rim = {c: '#FFB880', a: 0.55, dx: -0.009, dy: -0.006};
   const tg = e4Speak([[1.4, 3.6], [5.0, 7.2], [9.6, 11.6]], t), gest = Math.max(e4Bump(t, 1.6, 2.0), e4Bump(t, 5.2, 2.0), e4Bump(t, 9.8, 1.8));
-  let mi = e4Walk(cast('michael', {x: 0, y: G - 8, h: H, d: 1, det: 0.6, rim, an: {tilt: 2 + 8 * e4Bump(t, 7.6, 1.2) - 6 * Math.max(0, Math.sin((t - 7.6) * 9)) * e4Bump(t, 7.6, 1.2) + (t > 3.0 && t < 7.4 ? 6 : 0), expr: t > 7.4 ? 'smile' : 'set', blink: (t + 1.1) % 3.7 < 0.12}}), x0 - 70, 1, s, G - 8, 'bj.michael');
+  let mi = e4Walk(cast('michael', {x: 0, y: G - 8, h: H, d: 1, det: 0.6, rim, an: {tilt: 2 + 8 * e4Bump(t, 7.6, 1.2) - 6 * Math.max(0, Math.sin((t - 7.6) * 9)) * e4Bump(t, 7.6, 1.2) + (t > 3.0 && t < 7.4 ? 6 : 0), expr: t > 7.4 ? 'smile' : 'set', blink: (t + 1.1) % 3.7 < 0.12}}), x0 - 170, 1, s, G - 8, 'bj.michael');
   const tb0 = cast('brother', {x: 0, y: G + 10, h: H * 1.18, hat: 'cap', wear: [], d: 1, det: 0.6, rim, an: {tilt: -4 + 4 * tg.beat, expr: 'smile', jaw: tg.jaw, blink: (t + 0.4) % 3.3 < 0.12}});
-  let tm = e4Walk(tb0, x0 + 40, 1, s, G + 10, 'bj.tommy');
+  let tm = e4Walk(tb0, x0 + 130, 1, s, G + 10, 'bj.tommy');
   if (gest > 0) { const w = walkAn(walkPhase(s, tm.h)); tm = {...tm, an: {...tm.an, bArm: [lerp(w.bArm[0], 120, gest), lerp(w.bArm[1], 50 + 20 * tg.beat, gest)]}}; }
   L.push(layerAt(c, 1, e4Outlined(mi) + e4Outlined(tm) + `<rect x="-800" y="${G + 26}" width="4200" height="8" fill="#0D1114"/>` + [...Array(80).keys()].map((k) => `<rect x="${-780 + k * 52}" y="${G + 26}" width="5" height="40" fill="#0D1114"/>`).join('')));
   L.push(e4Snow(t, c, {n: 140, size: 2.6, speed: 60, op: 0.75, par: 0.5}));

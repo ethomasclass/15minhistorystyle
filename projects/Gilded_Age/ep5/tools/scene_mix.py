@@ -213,15 +213,38 @@ SCENES = {
     # ch 6: Owen's lines in the sod house (ep5_farm_kitchen, ep5_corn_stove) under the winter bed; corn flares in the stove; door 2 slams
     'ch06': lambda f: dict(
         rooms={'OWEN': 'sod'}, room_at=lambda t: None,
-        beds=[dict(name='bed_sod_winter', t0=0.0, t1=f('Burned corn in the stove', end=True) + 2.0, fin=0.8, fout=1.2, narr=-41, dlg=-33)],
-        spots=[], listen=[(f("Wheat's selling"), f('wants its payment', end=True) + 1.0)]),
-    # ch 8: Owen's line; the street crowd under Coxey's march (ep5_coxey)
+        # ch06.js: the sod house under Owen's letter (ep5_farm_kitchen, from "Wheat's selling") and under the corn (ep5_corn_stove, from "Corn got")
+        beds=[dict(name='bed_sod_winter', t0=f("Wheat's selling") - 0.6, t1=f('Farmers had three') - 0.1, fin=0.5, fout=0.5, narr=-41, dlg=-33),
+              dict(name='bed_sod_winter', t0=f('Corn got so cheap') - 0.4, t1=f('So farmers teamed') + 0.2, fin=0.5, fout=0.6, narr=-41, dlg=-33)],
+        # the three ears flare in the firebox (ch06.js mCS: clip 4.4, 7.0, 9.6); door 2 slams on "closed", the FELL SHORT stamp 0.52 s later
+        spots=[('corn_flare', 51.46, -21), ('corn_flare', 54.38, -22), ('corn_flare', 56.42, -22),
+               ('door_slam_dust', f('closed.', nth=0), -12), ('stamp_thud', f('closed.', nth=0) + 0.52, -15)],
+        listen=[(f("Wheat's selling"), f('wants its payment', end=True) + 1.0)]),
+    # ch 8 (ch08.js): Owen's line by his lamp (ep5_farm_kitchen) under the sod bed; the street crowd at the Capitol (ep5_coxey, from "When they reached")
     'ch08': lambda f: dict(
-        rooms={'OWEN': 'sod'}, room_at=lambda t: None, beds=[], spots=[], listen=[]),
-    # ch 9: Owen (sod), the convention (ep5_bryan: bed_convention_crowd, crowd_roar at the eruption), the porch (train_arrive), the kitchen
+        rooms={'OWEN': 'sod'}, room_at=lambda t: None,
+        beds=[dict(name='bed_sod_winter', t0=f("We've got our own") - 0.4, t1=f('That November') - 0.2, fin=0.3, fout=0.4, narr=-41, dlg=-33),
+              dict(name='bed_street_crowd', t0=f('When they reached') - 0.25, t1=f('By 1896') - 0.2, fin=0.4, fout=0.6, narr=-38)],
+        spots=[], listen=[(f("We've got our own"), f('party now', end=True) + 1.0)]),
+    # ch 9 (ch09.js): the convention hall (ep5_bryan) under the opening and from "He finished" to Owen, the roar when the hall erupts on
+    # "went wild"; Owen (sod); the train pulling in at Canton (ep5_porch, it stops on "trainload"); the kitchen; door 3 slams on "closed"
     'ch09': lambda f: dict(
-        rooms={'OWEN': 'sod', 'TOMMY': 'room', 'MICHAEL': 'room', 'MA': 'room'}, room_at=lambda t: None, beds=[], spots=[],
+        rooms={'OWEN': 'sod', 'TOMMY': 'room', 'MICHAEL': 'room', 'MA': 'room'}, room_at=lambda t: None,
+        beds=[dict(name='bed_convention_crowd', t0=0.0, t1=f('A 36-year-old') - 0.2, fin=0.6, fout=0.4, narr=-38),
+              dict(name='bed_convention_crowd', t0=f('He finished') - 0.2, t1=f("Bryan's a Nebraska", nth=0) - 0.4, fin=0.4, fout=0.5, narr=-40,
+                   lift=[(f('The crowd went wild'), f('backed him too', end=True), -33)]),
+              dict(name='bed_sod_winter', t0=f("Bryan's a Nebraska", nth=0) - 0.4, t1=f('Bryan crisscrossed') - 0.3, fin=0.3, fout=0.4, narr=-41, dlg=-33),
+              dict(name='bed_winter_kitchen', t0=f('kitchen table') - 0.85, t1=f('McKinley won') - 0.3, fin=0.4, fout=0.6, narr=-41, dlg=-33)],
+        spots=[('crowd_roar', f('went wild'), -16), ('train_arrive', f('trainload') - 1.7, -21),
+               ('door_slam_dust', f('closed.', nth=0), -12), ('stamp_thud', f('closed.', nth=0) + 0.52, -15)],
         listen=[(f("Bryan's for the working man"), f('arguing about metal', end=True) + 1.0)]),
+    # ch 10 (ch10.js): a FELL SHORT stamp on each "fell short" (ep5_doors_finale); distant fireworks over Manhattan as they burst on screen
+    # (ep5_bridge_1898 bursts at clip 4.6, 8.2, 11.6, mapped in ch10.js)
+    'ch10': lambda f: dict(
+        rooms={}, room_at=lambda t: None, beds=[],
+        spots=[('stamp_thud', f('fell', nth=0) + 0.02, -15), ('stamp_thud', f('fell', nth=1) + 0.02, -15), ('stamp_thud', f('fell', nth=2) + 0.02, -15),
+               ('fireworks_distant', 32.1, -25), ('fireworks_distant', 37.2, -25), ('fireworks_distant', 41.0, -26)],
+        listen=[]),
 }
 
 if __name__ == '__main__':

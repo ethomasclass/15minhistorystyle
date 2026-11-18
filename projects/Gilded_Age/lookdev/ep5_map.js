@@ -109,11 +109,12 @@ function renderE5Map1896(t, C = E5M_EL) {
   // the big cities, cream dots ("most city voters chose him")
   E5M_CITIES.forEach((c, i) => { const [x, y] = P(e5mP(c)); s.push(e5mDot(x, y, 8, E5M.cream, smooth(C.cities + i * 0.08, C.cities + i * 0.08 + 0.3, t), C.cities + i * 0.08, t)); });
   // the tally: electoral votes counted as each state fills
-  let vb = 0, vm = 0; for (const nm of E5M_ORDER) { const r = E5M_1896[nm]; if (t < C.fill[0] + E5M_ORDER.indexOf(nm) * dt + 0.2) continue; const sp = r[2] || 0; if (r[1] === 'B') { vb += r[0] - sp; vm += sp; } else { vm += r[0] - sp; vb += sp; } }
+  // the electoral votes: the totals appear once every state is in (a ticking counter would flash numbers too briefly to read)
+  const kv = smooth(C.fill[1] + 0.1, C.fill[1] + 0.5, t), vb = 176, vm = 271;
   scr.push(x5Op(smooth(C.title, C.title + 0.4, t), tapeS(180, 128, 'THE ELECTION OF 1896', 50, -1.5, 1, 96)));
   const kl = smooth(C.legend, C.legend + 0.4, t), chip = (y, col, a, b, v) => `<rect x="172" y="${y - 30}" width="34" height="34" fill="${col}" stroke="#111" stroke-width="3"/>` +
     `<text x="222" y="${y}" font-family="Abril" font-size="38" fill="${E5M.cream}">${a}</text><text x="222" y="${y + 34}" font-family="Mono" font-size="22" letter-spacing="2" fill="${E5M.pale}">${b}</text>` +
-    `<text x="640" y="${y}" font-family="Mono" font-size="38" fill="${col}" text-anchor="end">${v}</text>`;
+    (kv > 0.01 ? `<text x="640" y="${y}" font-family="Mono" font-size="38" fill="${col}" text-anchor="end" opacity="${f1(kv)}">${v}</text>` : '');
   if (kl > 0) scr.push(`<g opacity="${f1(kl)}"><rect x="156" y="806" width="508" height="182" rx="6" fill="rgba(11,20,20,0.9)"/>` + chip(856, E5M.bry, 'BRYAN', 'FARM STATES: SOUTH, WEST', vb) + chip(940, E5M.mck, 'McKINLEY', 'NORTHEAST, MIDWEST CITIES', vm) + '</g>');
   if (kl > 0) scr.push(x5Op(kl, x5Mono(410, 796, 'ELECTORAL VOTES', 20, E5M.pale, 'middle')));
   // the Nebraska callout, with a leader line from above the map
