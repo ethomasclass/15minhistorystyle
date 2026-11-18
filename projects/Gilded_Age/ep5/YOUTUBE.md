@@ -44,4 +44,4 @@ Archival images: Library of Congress, Wikimedia Commons, the Internet Archive an
 
 ## Tags (comma-separated, paste into the Tags box)
 
-gilded age, the gilded age, labor unions, homestead strike, populist party, populism, cross of gold, william jennings bryan, election of 1896, free silver, gold standard, knights of labor, haymarket affair, samuel gompers, american federation of labor, collective bargaining, coxey's army, andrew carnegie, henry clay frick, pullman strike, omaha platform, greenbacks, panic of 1893, spoils system, garfield assassination, pendleton act, us history, apush, american history, history explained, chunk history
+gilded age, labor unions, homestead strike, populist party, populism, cross of gold, william jennings bryan, election of 1896, free silver, gold standard, knights of labor, haymarket affair, samuel gompers, american federation of labor, collective bargaining, coxey's army, andrew carnegie, henry clay frick, pullman strike, omaha platform, greenbacks, panic of 1893, spoils system, garfield assassination, pendleton act, us history, apush, american history, chunk history
