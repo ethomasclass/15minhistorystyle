@@ -207,3 +207,75 @@ function renderE5Kitchen1887(t, o = {}) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1887});
 Object.assign(CLIPS, {ep5_kitchen_1887: {sec: K7.sec, render: (t) => renderE5Kitchen1887(t)}});
+
+/* ================= ep5_corn_stove (ch 6, 13 s): "Burned corn in the stove this winter." ================= */
+// The sod house of ep5_farm_kitchen (e5SodRoom, e5Bed, the table and lamp), the same winter night, snow driving past the window.
+// Uncle Owen (coral) stands at the stove with an armful of ears of corn; he opens the firebox door (warm light floods over him),
+// feeds three ears into the fire one by one (each catches with a flare and sparks), closes the door and warms his hands. The child
+// sleeps in the far corner. Scale as the farm kitchen (a man 440 px).
+const CS = {sec: 13, open: [1.2, 2.0], feeds: [3.0, 5.6, 8.2], close: [10.9, 11.6], warm: 11.9, ox: 975};
+function e5bFire(x, y, w, h, t, k) { const s = [], r = rng(733);
+  s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#3A1408"/><rect x="${x}" y="${y + h * 0.62}" width="${w}" height="${h * 0.38}" fill="#FF7A2A" opacity="0.9"/>`);
+  for (let j = 0; j < 4; j++) { const bx = x + w * (0.15 + 0.23 * j), ph = r() * 9, th = h * (0.5 + 0.4 * Math.abs(Math.sin(t * (5 + r() * 3) + ph))) * k, sw = 5 * Math.sin(t * 6.3 + ph);
+    s.push(e4Tongue(bx, y + h, w * 0.3, th, sw, '#FF5A1A', 0.95), e4Tongue(bx + sw * 0.2, y + h, w * 0.16, th * 0.7, sw * 0.8, '#FFC24A', 0.95), e4Tongue(bx, y + h, w * 0.07, th * 0.42, sw * 0.6, '#FFF1B8', 0.9)); }
+  return s.join(''); }
+const e5bEar = (x, y, ang, k = 1) => `<g transform="rotate(${f1(ang)}, ${f1(x)}, ${f1(y)})"><ellipse cx="${f1(x + 22 * k)}" cy="${f1(y)}" rx="${f1(24 * k)}" ry="${f1(7.5 * k)}" fill="#E0B44A" stroke="#0D0C09" stroke-width="2"/>` +
+  `<path d="M${f1(x + 4 * k)},${f1(y - 6 * k)} q${f1(16 * k)},${f1(-4 * k)} ${f1(34 * k)},${f1(2 * k)} M${f1(x + 4 * k)},${f1(y + 6 * k)} q${f1(16 * k)},${f1(4 * k)} ${f1(34 * k)},${f1(-2 * k)}" stroke="#B88A34" stroke-width="2" fill="none"/><path d="M${f1(x)},${f1(y)} l${f1(-12 * k)},${f1(-6 * k)} l${f1(2 * k)},${f1(8 * k)} Z" fill="#C8B07A"/></g>`;
+function renderE5CornStove(t, o = {}) {
+  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.42, 960, 690], [13, 1.58, 930, 705]], t));
+  const lod = lodFor(H * c.z), det = lod.det, g = e5Gust(t), room = e5SodRoom(t), s = [room.back];
+  const [s0, s1] = FK.stove, sy = FK.wallFoot - 210, lampX = 1255, fl = e5Flick(t) * (1 - 0.12 * g * Math.max(0, Math.sin(t * 7.1)));
+  const door = smooth(CS.open[0], CS.open[1], t) * (1 - smooth(CS.close[0], CS.close[1], t)); // 0 shut .. 1 open
+  let flare = 0; CS.feeds.forEach((f) => { flare = Math.max(flare, e4Bump(t, f + 1.4, 1.0)); });
+  const fire = 0.85 + 0.15 * Math.sin(t * 9) * Math.sin(t * 5.7), heat = door * (0.75 + 0.35 * flare) * fire;
+  // the stove (as the farm kitchen's) with the firebox door on its right-hand front, hinged on its left edge
+  const dx0 = s0 + 96, dw = 70, dy0 = sy + 40, dh = 60;
+  s.push(`<rect x="${s0}" y="${sy}" width="${s1 - s0}" height="170" fill="#0D0C09"/><rect x="${s0 - 10}" y="${sy - 12}" width="${s1 - s0 + 20}" height="14" fill="#0D0C09"/><rect x="${s0 + 14}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/><rect x="${s1 - 28}" y="${FK.wallFoot - 40}" width="14" height="${F - FK.wallFoot + 40}" fill="#0D0C09"/>` +
+    `<rect x="${s0 + 110}" y="${FK.ceil - 60}" width="26" height="${sy - 12 - FK.ceil + 60}" fill="#0D0C09"/><rect x="${s0 + 16}" y="${sy + 110}" width="60" height="10" fill="#FFB15C" opacity="${f1(0.5 * fire)}"/>`);
+  s.push(e5bFire(dx0, dy0, dw, dh, t, 0.7 + 0.5 * flare) + `<rect x="${dx0}" y="${dy0}" width="${dw}" height="${dh}" fill="none" stroke="#0D0C09" stroke-width="5"/>`);
+  const dwv = dw * Math.cos(door * Math.PI * 0.62); // the door leaf, foreshortened as it swings out toward us
+  s.push(`<path d="M${dx0},${dy0 - 3} L${f1(dx0 + dwv)},${f1(dy0 - 3 - 8 * door)} L${f1(dx0 + dwv)},${f1(dy0 + dh + 3 + 8 * door)} L${dx0},${dy0 + dh + 3} Z" fill="#1A1A18" stroke="#0D0C09" stroke-width="3"/>`);
+  const handle = [dx0 + dwv - 8 * Math.sign(dwv || 1), dy0 + dh / 2];
+  s.push(`<circle cx="${f1(handle[0])}" cy="${f1(handle[1])}" r="5" fill="#3A3A36"/>`);
+  if (flare > 0.05) for (let k = 0; k < 8; k++) { const p = ((t * 1.3 + k / 8) % 1); s.push(`<circle cx="${f1(dx0 + dw * 0.5 + 30 * Math.sin(k * 2.3 + t) * p)}" cy="${f1(dy0 - 10 - 120 * p)}" r="2" fill="#FFD27A" opacity="${f1(flare * door * (1 - p))}"/>`); }
+  s.push(glowC(dx0 + dw / 2, dy0 + dh / 2, 520, 0.75 * heat, 'mswarm') + glowC(dx0 + dw / 2, dy0 + dh / 2, 160, 0.6 * heat, 'msglow') + glowC(s0 + 60, sy + 70, 300, 0.35 * fl, 'mswarm'));
+  const kx = s0 + 46, ky = sy - 12;
+  s.push(`<path d="M${kx - 30},${ky} q-4,-40 30,-44 q34,4 30,44 Z" fill="#141817"/><path d="M${kx - 18},${ky - 40} q18,-30 36,0" stroke="#141817" stroke-width="5" fill="none"/>` +
+    MAT.smoke(kx + 30, ky - 46, t, {col: 'D9DEDA', k: 0.4, n: 6, rise: 140, drift: 30 + 40 * g, speed: 3.2, seed: 547}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.45 * 100) / 100}"`));
+  // a bushel basket of ears by the stove
+  const bx = CS.ox + 62;
+  const basket = (MAT.shadow(bx + 40, F + 30, 60, 0.4) + `<path d="M${bx},${F + 28} L${bx - 8},${F - 50} L${bx + 88},${F - 50} L${bx + 80},${F + 28} Z" fill="#5A4430" stroke="#0D0C09" stroke-width="3"/>` + [0, 1, 2].map((k) => line([[bx - 4, F - 26 + k * 22], [bx + 84, F - 26 + k * 22]], '#3A2C1C', 3)).join('') +
+    [[bx + 4, F - 56, -20], [bx + 24, F - 62, 10], [bx + 44, F - 58, -6], [bx + 30, F - 50, 24]].map(([x, y, a]) => e5bEar(x, y, a, 0.9)).join(''));
+  // the table and lamp (the farm kitchen's), nobody at it tonight
+  const [tx0, tx1] = FK.table;
+  s.push(MAT.shadow((tx0 + tx1) / 2, F + 4, 170, 0.45) + `<rect x="${tx0}" y="${top}" width="${tx1 - tx0}" height="14" fill="#2B2418"/><rect x="${tx0 + 14}" y="${top + 14}" width="12" height="${F - top - 14}" fill="#0D0C09"/><rect x="${tx1 - 26}" y="${top + 14}" width="12" height="${F - top - 14}" fill="#0D0C09"/>` +
+    [0, 1, 2, 3].map((i) => `<rect x="${1146 + (i % 2) * 6}" y="${top - 3 - i * 3}" width="70" height="3" fill="#E3DAC4"/>`).join('') + e5Lamp(lampX, top, t * (1 + 0.3 * g), 1.05, 2), basket);
+  // ---- Owen: an armful of ears in the crook of his far arm; opens the door; feeds them in one by one; shuts it; warms his hands ----
+  const OWEN = {kind: 'man', hat: 'none', coat: 'vest', beard: true, fill: E5.coral, tones: MICHAEL_TONES};
+  const rim = {c: '#FFC27A', a: Math.min(1, lod.rimA * 0.5 + 0.7 * heat), dx: 0.012, dy: -0.004};
+  let ow = e5Standing({...OWEN, x: CS.ox, h: H, d: -1, det, rim}, CS.ox, F, t, 0.2, 'cs.owen', {lean: 9, tilt: -16 + 6 * door, expr: 'set', blink: (t + 1.2) % 4.1 < 0.12});
+  const arm = E3K.toWorld(ow, 0.1, 0.6), left = Math.max(0, 3 - CS.feeds.filter((f) => t > f + 1.2).length); // ears still in his arm
+  ow = reach(ow, 'b', arm[0], arm[1], 'cs.owen.armful');
+  const mouth = [dx0 + dw * 0.55, dy0 + dh * 0.5], rest = [dx0 + dw + 30, dy0 + dh + 20];
+  let earIn = null;
+  const fi = CS.feeds.findIndex((f) => t > f && t < f + 2.0);
+  if (t < CS.open[0] - 0.4) ow = e3Move(ow, 'f', rest[0], rest[1], 'cs.owen.rest');
+  else if (t < CS.open[1] + 0.3) { const k = smooth(CS.open[0] - 0.4, CS.open[0], t); ow = k < 1 ? e3Move(ow, 'f', lerp(rest[0], handle[0], k), lerp(rest[1], handle[1], k), 'cs.owen.toHandle') : reach(ow, 'f', handle[0], handle[1], 'cs.owen.handle'); }
+  else if (fi >= 0) { const u = t - CS.feeds[fi], A = [arm[0] + 6, arm[1] - 8], B = mouth;
+    if (u < 0.5) ow = e3Move(ow, 'f', lerp(rest[0], A[0], ease(u / 0.5)), lerp(rest[1], A[1], ease(u / 0.5)), 'cs.owen.toArm');
+    else if (u < 1.3) { const k = ease((u - 0.5) / 0.8); ow = e3Move(ow, 'f', lerp(A[0], B[0], k), lerp(A[1], B[1], k), 'cs.owen.carry'); earIn = 1; }
+    else if (u < 1.5) { ow = reach(ow, 'f', B[0], B[1], 'cs.owen.feed'); earIn = 1 - (u - 1.3) / 0.2; }
+    else ow = e3Move(ow, 'f', lerp(B[0], rest[0], ease((u - 1.5) / 0.5)), lerp(B[1], rest[1], ease((u - 1.5) / 0.5)), 'cs.owen.back'); }
+  else if (t > CS.close[0] - 0.4 && t < CS.warm) { const k = smooth(CS.close[0] - 0.4, CS.close[0], t); ow = k < 1 ? e3Move(ow, 'f', lerp(rest[0], handle[0], k), lerp(rest[1], handle[1], k), 'cs.owen.toHandle2') : reach(ow, 'f', handle[0], handle[1], 'cs.owen.handle2'); }
+  else if (t >= CS.warm) { const k = smooth(CS.warm, CS.warm + 0.6, t), wp = [s1 + 10 + 4 * Math.sin(t * 5) * k, sy - 40]; ow = e3Move(ow, 'f', lerp(handle[0], wp[0], k), lerp(handle[1], wp[1], k), 'cs.owen.warm');
+    ow = e3Move(ow, 'b', lerp(arm[0], wp[0] + 20, k), lerp(arm[1], wp[1] + 8, k), 'cs.owen.warm2'); }
+  else ow = e3Move(ow, 'f', rest[0], rest[1], 'cs.owen.rest');
+  const armful = t < CS.warm ? [...Array(left + (fi >= 0 && (t - CS.feeds[fi]) < 0.5 ? 0 : 0)).keys()].map((k) => e5bEar(arm[0] - 34 + k * 6, arm[1] + 4 - k * 8, -14 + k * 10, 1)).join('') : '';
+  const held = earIn != null && earIn > 0 ? holding(ow, 'f', 'cs.owen.ear', (gx, gy, ang) => `<g opacity="${f1(earIn)}">${e5bEar(gx - 6, gy, 180 + 10, 1)}</g>`) : '';
+  s.push(e5Bed(t), e4Outlined(ow), armful, held, glowC(dx0 + dw / 2, dy0 + dh / 2, 420, 0.35 * heat, 'mswarm'), room.front);
+  const world = layerAt(c, 1, s.join(''));
+  const scr = o.quiet ? '' : tag(130, 120, 'NEAR O\'NEILL, NEBRASKA · WINTER 1890', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  return frame(e5Defs(t, `<clipPath id="fkroom"><rect x="${FK.x0}" y="0" width="${FK.x1 - FK.x0}" height="1200"/></clipPath><clipPath id="fkwin"><rect x="${FK.win[0]}" y="430" width="${FK.win[1] - FK.win[0]}" height="130"/></clipPath><radialGradient id="kfcold"><stop offset="0" stop-color="#CFE0DE" stop-opacity="0.35"/><stop offset="1" stop-color="#CFE0DE" stop-opacity="0"/></radialGradient>`), `<rect width="1920" height="1080" fill="#070605"/>`, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5CornStove});
+Object.assign(CLIPS, {ep5_corn_stove: {sec: CS.sec, render: (t) => renderE5CornStove(t)}});
