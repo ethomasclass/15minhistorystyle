@@ -504,3 +504,63 @@ function renderE5Porch(t) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Porch});
 Object.assign(CLIPS, {ep5_porch: {sec: PC.sec, render: (t) => renderE5Porch(t)}});
+
+/* ================= ep5_kitchen_1896 (ch 9, 18.5 s): "you're arguing about metal" ================= */
+// The Kellys' kitchen in the fall of 1896, the same room. Ma has taken in washing: a line of other people's shirts and sheets across
+// the room, a washtub and washboard on a stool. Tommy (coral) by the window, fired up: "Bryan's for the working man! Even Mr. Duffy
+// says so." Michael (coral) at the table, worried: "The foreman says if Bryan wins, the refinery closes. And silver means higher
+// prices for bread." Ma (coral) stops scrubbing, straightens and ends it: "Your uncle's losing his farm, and you're arguing about
+// metal." The brothers drop their eyes. Synced to ch09_the_cross_of_gold.words.json from 65.5 s (clip t = chapter t - 65.5).
+const K9 = {sec: 18.5, off: 65.5};
+K9.tommy = e5bW([[67.04, 67.46], [67.5, 67.58], [67.64, 67.68], [67.78, 68.16], [68.2, 68.48], [68.82, 69.0], [69.04, 69.1], [69.38, 69.66], [69.76, 69.98], [70.04, 70.24]], K9.off);
+K9.michael = e5bW([[71.28, 71.4], [71.48, 71.76], [71.88, 72.04], [72.08, 72.2], [72.24, 72.6], [72.66, 72.98], [73.2, 73.26], [73.28, 73.86], [73.92, 74.44], [75.02, 75.14], [75.24, 75.58], [75.62, 75.82], [75.88, 76.16], [76.22, 76.62], [76.66, 76.78], [76.82, 77.14]], K9.off);
+K9.ma = e5bW([[78.5, 78.64], [78.7, 79.08], [79.16, 79.48], [79.52, 79.7], [79.78, 80.12], [80.4, 80.52], [80.58, 80.8], [80.9, 81.26], [81.32, 81.52], [81.68, 82.08]], K9.off);
+function e5bWashLine(t) { // a line across the room with other people's washing pegged on it, swaying a little
+  const y = 300, s = [line([[480, y], [1440, y + 10]], '#2A2218', 2)], items = [[540, 70, 120, '#E6E0D0', 'shirt'], [650, 120, 150, '#D8D4C6', 'sheet'], [800, 60, 90, '#C9D3D6', 'shirt'], [1180, 130, 170, '#E9E4D6', 'sheet'], [1330, 60, 110, '#DDD6C2', 'shirt']];
+  items.forEach(([x, w, h, col, kind], i) => { const yy = y + (x - 480) / 96, sw = 3 * Math.sin(t * 0.9 + i * 1.7);
+    s.push(kind === 'shirt' ? `<path d="M${x},${yy} L${x + w},${yy} L${x + w + 16 + sw},${yy + 30} L${x + w - 4 + sw},${yy + 38} L${x + w - 6 + sw},${yy + h} L${x + 6 + sw},${yy + h} L${x + 4 + sw},${yy + 38} L${x - 16 + sw},${yy + 30} Z" fill="${col}" opacity="0.92"/>`
+      : `<path d="M${x},${yy} L${x + w},${yy} L${x + w + sw},${yy + h} Q${x + w / 2 + sw},${yy + h + 10} ${x + sw},${yy + h} Z" fill="${col}" opacity="0.9"/><path d="M${x + w * 0.3},${yy + 4} l${sw * 0.5},${h - 10} M${x + w * 0.7},${yy + 4} l${sw * 0.5},${h - 6}" stroke="#B5AE9C" stroke-width="2"/>`);
+    s.push(`<rect x="${x - 2}" y="${yy - 6}" width="5" height="12" fill="#5A4430"/><rect x="${x + w - 3}" y="${yy - 6}" width="5" height="12" fill="#5A4430"/>`); });
+  return s.join('');
+}
+function renderE5Kitchen1896(t, o = {}) {
+  const {F, H} = RM, room = e4KellyRoom(t, false), s = [room.back], ty = room.ty;
+  const c = cam2(camAt([[0, 1.2, 960, 612], [11.8, 1.3, 1040, 616], [13.2, 1.26, 960, 612], [K9.sec, 1.34, 940, 612]], t));
+  const lod = lodFor(H * c.z), det = lod.det, rimW = {c: '#FFE6C9', a: lod.rimA * 0.7 * room.fl, dx: -0.008, dy: -0.004}, rimC = {c: '#DCE8E6', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005};
+  const ts = e5bSay(K9.tommy, t), ms = e5bSay(K9.michael, t), as = e5bSay(K9.ma, t);
+  const T0 = K9.tommy[0][0], M0 = K9.michael[0][0], M1 = K9.michael[K9.michael.length - 1][1], A0 = K9.ma[0][0], A1 = K9.ma[K9.ma.length - 1][1];
+  s.push(e5bWashLine(t));
+  // the washtub on a stool, the washboard in it, a little steam
+  const tb = [880, 980], tTop = F - 196;
+  const tub = MAT.shadow(930, F + 4, 70, 0.4) + `<rect x="${tb[0] + 14}" y="${tTop + 70}" width="10" height="${F - tTop - 70}" fill="#0D0C09"/><rect x="${tb[1] - 24}" y="${tTop + 70}" width="10" height="${F - tTop - 70}" fill="#0D0C09"/><rect x="${tb[0]}" y="${tTop + 64}" width="${tb[1] - tb[0]}" height="10" fill="#0D0C09"/>` +
+    `<path d="M${tb[0] - 6},${tTop} L${tb[1] + 6},${tTop} L${tb[1] - 2},${tTop + 64} L${tb[0] + 2},${tTop + 64} Z" fill="#5A4430"/>` + [0, 1].map((k) => `<rect x="${tb[0] - 4 + k * 0}" y="${tTop + 14 + k * 30}" width="${tb[1] - tb[0] + 8}" height="5" fill="#2A2218"/>`).join('') +
+    `<ellipse cx="930" cy="${tTop}" rx="56" ry="7" fill="#A9BAB6"/><rect x="${tb[0] + 20}" y="${tTop - 70}" width="40" height="80" fill="#6E5A44" transform="rotate(-12, ${tb[0] + 40}, ${tTop})"/>` + [0, 1, 2, 3, 4].map((k) => `<rect x="${tb[0] + 24}" y="${tTop - 60 + k * 12}" width="32" height="4" fill="#9A8A6E" transform="rotate(-12, ${tb[0] + 40}, ${tTop})"/>`).join('') +
+    MAT.smoke(950, tTop - 6, t, {col: 'D9DEDA', k: 0.3, n: 5, rise: 90, drift: 20, speed: 4, seed: 787}).replace(/opacity="([\d.]+)"/g, (m, a) => `opacity="${f1(Number(a) * 0.4 * 100) / 100}"`);
+  // ---- Ma: scrubbing at the board; stops before her line, straightens, turns to them and says it; a hand toward the window (the
+  // west, the farm) on "losing his farm", the hand down flat on "metal" ----
+  const mx = 800, stop = smooth(A0 - 0.9, A0 - 0.4, t), b9 = as.beat;
+  let ma = cast('mother', {x: mx, y: F, h: H, d: 1, det, rim: rimW, an: {...POSES.stand(t, 0.5), tilt: lerp(-18, 4, stop) + 3 * b9, lean: 10 * (1 - stop), expr: t > A0 - 1 ? 'set' : 'neutral', jaw: as.jaw, blink: (t + 0.6) % 3.8 < 0.12}});
+  ma = e3Stand({...ma, floorY: F}, mx, mx, 0, 'k9.ma');
+  if (stop < 1) { const k = Math.sin(t * 5.2), bp = [tb[0] + 44 + 6 * k, tTop - 34 + 16 * k], g = E3K.hand({...ma, an: {...ma.an, fArm: [150, 120]}}, 'f');
+    ma = stop > 0 ? e3Move(ma, 'f', lerp(bp[0], g.x, stop), lerp(bp[1], g.y, stop), 'k9.ma.up') : reach(ma, 'f', bp[0], bp[1], 'k9.ma.scrub');
+    const bp2 = [tb[0] + 30 + 6 * k, tTop - 20 + 16 * k], g2 = E3K.hand({...ma, an: {...ma.an, bArm: [160, 130]}}, 'b');
+    ma = stop > 0 ? e3Move(ma, 'b', lerp(bp2[0], g2.x, stop), lerp(bp2[1], g2.y, stop), 'k9.ma.up2') : reach(ma, 'b', bp2[0], bp2[1], 'k9.ma.scrub2'); }
+  else ma = {...ma, an: {...ma.an, fArm: e4Keys([[A0 - 0.4, 150, 120], [A0 + 0.5, 70, 60], [A0 + 1.5, 64, 56 + 6 * b9], [A0 + 2.0, 110, 120], [A1 - 0.6, 92, 96], [A1 - 0.3, 110, 130], [A1 + 0.5, 150, 140], [A1 + 1.2, 176, 180]], t), bArm: e4Keys([[A0 - 0.4, 160, 130], [A0 + 0.6, 176, 186]], t)}};
+  // ---- Michael at the table, worried: looks up at Tommy for his answer; looks down into the mug after Ma ----
+  const look = smooth(T0 + 0.8, T0 + 1.3, t) * (1 - smooth(A0 + 0.6, A0 + 1.2, t));
+  const mm = e5bMichaelMug({tilt: lerp(-10, 8, look) + 3 * ms.beat - 8 * smooth(A1 - 0.4, A1 + 0.4, t) + 2 * Math.sin(t * 0.6), expr: t > M0 - 0.3 ? 'worried' : 'set', jaw: ms.jaw, blink: (t + 1.4) % 3.6 < 0.12}, ty, 0, det, rimW, 'k9.michael');
+  // ---- Tommy by the window, fired up: a fist up on "working man!", a point on "Mr. Duffy"; hands out at Michael's answer, a scoff;
+  // Ma's line stops him: arms down, head down ----
+  const tx = 1395, sub = smooth(A0 + 0.4, A0 + 1.2, t), b = ts.beat * 10;
+  let tm = cast('brother', {x: tx, y: F, h: H * 1.18, hat: 'cap', wear: [], d: -1, det, rim: rimC, an: {...POSES.stand(t, 0.8), tilt: 6 + 5 * ts.beat - 16 * sub + 4 * e4Bump(t, M1 + 0.2, 0.6), expr: t < M0 ? 'smile' : 'neutral', jaw: ts.jaw, blink: (t + 0.2) % 3.3 < 0.12}});
+  tm = e3Stand({...tm, floorY: F}, tx, tx, 0, 'k9.tommy');
+  const fK = [[T0 - 0.4, 176, 180], [T0 + 0.3, 120, 70], [T0 + 0.9, 30, 0 + b], [T0 + 1.5, 26, -4], [T0 + 1.9, 90, 84], [T0 + 2.4, 84, 80 + b], [T0 + 3.3, 150, 160], [M0 + 0.4, 176, 180], [M1 + 0.1, 176, 180], [M1 + 0.4, 112, 50], [M1 + 1.0, 116, 56], [A0 + 0.6, 112, 56], [A0 + 1.3, 176, 182]];
+  const bK = [[T0 - 0.4, 184, 190], [T0 + 0.3, 150, 120], [T0 + 1.5, 150, 120], [T0 + 2.0, 184, 190], [M1 + 0.1, 184, 190], [M1 + 0.4, 120, 58], [M1 + 1.0, 122, 60], [A0 + 0.6, 122, 60], [A0 + 1.3, 186, 192]];
+  tm = {...tm, an: {...tm.an, fArm: e4Keys(fK, t), bArm: e4Keys(bK, t), lean: ts.line ? 4 : 0}};
+  s.push(room.scuttle, tub, e4Outlined(ma), mm.chair, e4Outlined(mm.fo), mm.mug, e4Outlined(tm), room.front);
+  const world = layerAt(c, 1, s.join(''));
+  const scr = o.quiet ? '' : tag(130, 120, 'THE KELLYS\' KITCHEN · FALL 1896', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
+  return frame(e4KfDefs(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1896});
+Object.assign(CLIPS, {ep5_kitchen_1896: {sec: K9.sec, render: (t) => renderE5Kitchen1896(t)}});
