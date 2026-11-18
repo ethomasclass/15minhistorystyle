@@ -105,7 +105,7 @@ But the workers didn't win. The governor sent eight thousand soldiers, and the m
 
 And Andrew Carnegie? He spent the strike on vacation in Scotland, sending Frick his support.
 
-But six years earlier, Carnegie had written that workers' right to form unions was "no less sacred" than the rights of owners. He gave away most of his fortune and built thousands of free libraries. But one steelworker asked, "After working twelve hours, how can a man go to a library?"
+But six years earlier, Carnegie had written that workers' right to form unions was "no less sacred" than the rights of owners. He gave away most of his fortune and built thousands of free libraries. Still, one steelworker asked, "After working twelve hours, how can a man go to a library?"
 
 So, Andrew Carnegie. Hero? Villain? Or both?
 
