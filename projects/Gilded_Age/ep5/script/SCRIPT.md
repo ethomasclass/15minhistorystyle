@@ -231,13 +231,13 @@ By 1900, workers still had no legal right to form a union. Most still worked ten
 
 But those ideas didn't go away: an eight-hour day, the right to organize, a tax on the richest, senators elected by the people, a government that answered to ordinary Americans. The Gilded Age left Americans wanting more.
 
-And in the next era, Americans would finally start winning some of these fights. That era is called the {Progressive Era}.
-
 New Year's Day, 1898. Brooklyn became part of New York City. Michael and Tommy walked across the bridge together, voters in the same city at last. They still didn't vote the same way.
 
 Upstairs, Rivke Rabinowitz was sewing shirts in a factory now. And she had started going to meetings. About a union.
 
 The Kellys never got the gold. But they hadn't stopped fighting for their share.
+
+And in the next era, Americans would finally start winning some of these fights. That era is called the {Progressive Era}.
 
 That's the end of our story of the Gilded Age. Thanks for watching, and for sticking with the Kellys all the way.
 
