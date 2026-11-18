@@ -816,8 +816,14 @@ raised arm; the horse at the head of the march is led, not ridden; the conventio
 `ep5_doors.js` (the three doors, the episode's signature graphic) and `ep5_explain.js` (teal explainers), loaded by `bridge.html`
 after `ep5.js`. 720p review clips and contact sheets (a frame every 1.5 s) in `review/ep5/<id>.mp4` / `<id>_contact.jpg`. Every
 beat is a named table near the top of its renderer (`DI`, `DCL`, `DF`, `X5_*`), in seconds from the clip start, so the edit can
-retime to the voice; the explainer renderers also take a cue table argument. Text audit (`audit_text.mjs`): no OVERLAP or SHORT in
-any clip; the door clips report OUT only for door labels sliding out of frame while the camera tracks past them.
+retime to the voice; the explainer renderers also take a cue table argument.
+
+Margins (revised Nov 18 on review): every text and key element sits inside an 8% safe area (x 154 to 1766, y 86 to 994) whenever
+it is on screen for more than half a second. `audit_text.mjs` takes the margin as an optional third argument
+(`node audit_text.mjs <clip> 0.25 0.08`): OUT then counts only texts partly in frame and outside the margin for more than 0.5 s.
+All 17 clips pass it with no OVERLAP or SHORT; in the door clips the only OUT left is labels and stamps crossing the frame edge
+while the camera is moving between doors (each about 0.4 s). The doors are spaced 1150 apart and the walks hold at z 1.12, so
+the door being lit or stamped is centred and whole and its neighbours are out of frame.
 
 **The doors.** A dim corridor drawn in the notebook style: plaster with faint ruled lines and a red margin line, a dado, boards on
 the floor converging on a vanishing point that follows the camera, dark pillars in the foreground for parallax, dust motes in the
@@ -829,14 +835,17 @@ dome over steps).
 
 | id | ch | sec | beats (s) |
 |---|---|---|---|
-| `ep5_doors_intro` | 1 end | 8.5 | camera tracks; AT WORK lights 0.9 ("fought at work"), ON THE FARM 2.5 ("teamed up on the farm"), AT THE BALLOT BOX 4.1 ("fought at the ballot box"); pull back to all three 5.2 to 6.4; the doors swing open a crack 5.9 to 7.1, light spills across the floor; hold to 8.5 |
+| `ep5_doors_intro` | 1 end | 8.5 | camera tracks and holds on each door as it lights: AT WORK 0.9 ("fought at work"), ON THE FARM 2.5 ("teamed up on the farm"), AT THE BALLOT BOX 4.1 ("fought at the ballot box"); pull back to all three 4.8 to 6.5; the doors swing open a crack 5.9 to 7.1, light spills across the floor; hold to 8.5 |
 | `ep5_door1_close` | 5 end | 5 | door open on the steel mill, light pouring out; paper scraps drawn toward the door by the draught 1.0; swing 1.45; **slam 1.78** (light cut, camera shake, dust puff, scraps skitter; the keyhole dies last, 2.15); **FELL SHORT slaps 2.3**, holds to 5.0 |
 | `ep5_door2_close` | 6 end | 5 | same beats; wheat field beyond |
 | `ep5_door3_close` | 9 end | 5 | same beats; the Capitol dome beyond |
-| `ep5_doors_finale` | 10 | 24 | walk past the three closed doors; **FELL SHORT stamps 1.9, 4.5, 7.1** (each with a small jolt: "fought back, fell short" x3); pull back and the camera rises 7.1 to 9.8; teal light leaks under the doors 9.2; glowing scraps rise and open into cards (readable once above the labels, about 1.2 s after each start): EIGHT-HOUR DAY 10.0, RIGHT TO ORGANIZE 11.2, INCOME TAX 12.4, SENATORS ELECTED BY VOTERS 13.6; "still wanted" (teal pen) 15.0 to 19.4; the pan down the corridor 16.8 to 20.0, cards tighten up top; PROGRESSIVE ERA door glows 18.8, **cracks open 20.4**; the cards turn to light and stream into it 21.4 to 23.2; hold to 24 (the Progressive Era line can be cut to 20.4 to 24, or freeze-framed) |
-| `ep5_doors_bug` | overlay | 6 | the scorecard corner bug (top right, 372 x 196 px box, inside title-safe): three tiny doors, teal-lit while open; each gets an orange torn strip with an ink X at 1.0, 2.4, 3.8. `drDoorsBug(n, t, {bg})` draws any state (n = 0 to 3, fractional animates) for stills or the edit |
+| `ep5_doors_finale` | 10 | 24 | walk past the three closed doors, holding on each: **FELL SHORT stamps 1.9, 4.5, 7.1** (each with a small jolt: "fought back, fell short" x3); pull back and the camera rises 7.7 to 9.6; teal light leaks under the doors 9.2; glowing scraps rise and open into cards (readable once above the labels, about 1.2 s after each start): EIGHT-HOUR DAY 10.0, RIGHT TO ORGANIZE 11.2, INCOME TAX 12.4, SENATORS ELECTED BY VOTERS 13.6; "still wanted" (teal pen) 13.9 to 16.8; the pan down the corridor 16.8 to 20.0, cards tighten up top; PROGRESSIVE ERA door glows 18.8, **swings open 20.4 to 22.8** onto bright morning light and a path; the cards turn to light and stream into it 21.4 to 23.2; hold to 24 (the Progressive Era line can be cut to 20.4 to 24, or freeze-framed) |
+| `ep5_doors_bug` | overlay | 6 | the scorecard corner bug (top right, 372 x 196 px box at x 1372, y 86, inside the 8% safe area): three tiny doors, teal-lit while open; each gets an orange torn strip with an ink X at 1.0, 2.4, 3.8. `drDoorsBug(n, t, {bg})` draws any state (n = 0 to 3, fractional animates) for stills or the edit |
 
-**Explainers** (notebook paper on the dark desk, or the dark graph board for the vault, the gauge and the chain of command).
+**Explainers** in the Ep 4 diagram look (revised Nov 18): the dark graph board (`xpBoard`), teal linework with an ink under-stroke,
+cream Abril type, Mono tags, orange torn tape, teal Pen notes; icons redrawn to read on dark (grey-green fills with ink outlines,
+pale line work). Cream paper is kept only for real documents: the name cards, price tags, the bills, the civil service exam and
+the Omaha Platform, a printed page on the desk.
 
 | id | ch | sec | beats (s) |
 |---|---|---|---|
@@ -852,6 +861,5 @@ dome over steps).
 | `ep5_x_spoils` | 8 | 12 | THE SPOILS SYSTEM 0.3; a line of men shuffles toward the GOVERNMENT JOBS door 0.8; JOBS FOR PARTY FRIENDS 2.4; the CIVIL SERVICE examination card slides in 6.0; THE PENDLETON ACT: PASS A TEST 6.4; ticks 7.4 to 8.4 |
 | `ep5_x_omaha` | 8 | 11 | THE OMAHA PLATFORM 0.3, THE PEOPLE'S PARTY · OMAHA, NEBRASKA · JULY 4, 1892 0.6; ticked one by one: FREE SILVER 1.2, INCOME TAX 2.4, SENATORS ELECTED BY VOTERS 3.6, GOVERNMENT-RUN RAILROADS 4.8, EIGHT-HOUR DAY 6.0 |
 
-The 1896 map is left for the 3D model. Known weak spots: the dust puff is soft blurred discs (reads as dust at speed, blobby on a
-still frame); the spoils line just shuffles (no party man handing out jobs); gold bars and coins are the only money shapes beyond
+The 1896 map is left for the 3D model. The slam's dust is now many small motes plus short streaks for the first 0.6 s. Known weak spots: the spoils line just shuffles (no party man handing out jobs); gold bars and coins are the only money shapes beyond
 glints (muted gold tone); the door labels are world-space, so in tracking shots they slide out of frame like the doors do.
