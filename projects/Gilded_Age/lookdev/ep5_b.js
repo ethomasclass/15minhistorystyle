@@ -564,3 +564,56 @@ function renderE5Kitchen1896(t, o = {}) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1896});
 Object.assign(CLIPS, {ep5_kitchen_1896: {sec: K9.sec, render: (t) => renderE5Kitchen1896(t)}});
+
+/* ================= ep5_bridge_1898 (ch 10, 14 s): New Year's Day, 1898 ================= */
+// Brooklyn has just become part of New York City. Dusk, snow falling. Michael and Tommy (coral, outlined) walk together along the
+// Brooklyn Bridge promenade toward the Manhattan tower (Episode 1's walk cycle, planted feet); the suspenders and stays of the cables
+// stream past, the river and the Manhattan skyline below with its lights coming on, and a few distant fireworks over the city. Tommy
+// talks with his hands; Michael shakes his head with a smile. The camera travels with them.
+const BJ = {sec: 14, H: 400, G: 940, v: 92, x0: 260, bursts: [[4.6, 380, 330], [6.9, 1180, 270], [8.2, 760, 360], [10.4, 1480, 300], [11.6, 980, 250], [12.9, 560, 310]]};
+function e5bBurst(x, y, t, t0, seed) { const u = (t - t0) / 2.2; if (u < 0 || u > 1) return ''; const r = rng(seed), n = 22, R = 90 * Math.sqrt(u), a = Math.pow(1 - u, 1.4), cols = ['#FFE9B0', '#FFD06A', '#E8F2E0'], col = cols[seed % 3], s = [];
+  if (u < 0.12) s.push(glowC(x, y, 140, 0.8 * (1 - u / 0.12), 'msglow'));
+  for (let i = 0; i < n; i++) { const ang = i / n * TAU + r() * 0.2, rr = R * (0.85 + 0.3 * r()), px = x + Math.cos(ang) * rr, py = y + Math.sin(ang) * rr + 40 * u * u;
+    s.push(line([[x + Math.cos(ang) * rr * 0.7, y + Math.sin(ang) * rr * 0.7 + 40 * u * u], [px, py]], col, 2.4, `opacity="${f1(a * 0.8 * 100) / 100}"`) + `<circle cx="${f1(px)}" cy="${f1(py)}" r="2.6" fill="${col}" opacity="${f1(a * 100) / 100}"/>`); }
+  return s.join(''); }
+function renderE5Bridge(t) {
+  const {H, G, v, x0} = BJ, s = v * t, mx = x0 + s, c = cam2({z: 1.05 + 0.07 * t / BJ.sec, ux: mx + 160 + 60 * Math.sin(t * 0.25), uy: 640}), L = [];
+  L.push(`<rect width="1920" height="1080" fill="url(#bjsky)"/>`);
+  // far: the river and the Manhattan skyline at dusk (parallax 0.15), its windows lighting up; steeples; fireworks above it
+  const far = [], r = rng(811);
+  far.push(`<rect x="-2000" y="700" width="6000" height="600" fill="#1E2A33"/>`);
+  for (let x = -1200; x < 3600;) { const w = 40 + r() * 90, h = 50 + r() * 210 + (r() < 0.08 ? 160 : 0); far.push(`<rect x="${f1(x)}" y="${f1(700 - h)}" width="${f1(w)}" height="${f1(h)}" fill="#1A222A"/>`);
+    for (let k = 0; k < 4; k++) if (r() < 0.6) { const on = smooth(r() * 6, r() * 6 + 0.5, t); far.push(`<rect x="${f1(x + 6 + r() * (w - 14))}" y="${f1(700 - h + 10 + r() * (h - 20))}" width="5" height="7" fill="#FFD890" opacity="${f1(on * 0.85)}"/>`); }
+    if (r() < 0.06) far.push(`<path d="M${f1(x + w / 2 - 10)},${f1(700 - h)} L${f1(x + w / 2)},${f1(700 - h - 120)} L${f1(x + w / 2 + 10)},${f1(700 - h)} Z" fill="#1A222A"/>`);
+    x += w + 4; }
+  far.push(`<rect x="-2000" y="700" width="6000" height="6" fill="#FFD890" opacity="0.15"/>`);
+  for (let k = 0; k < 60; k++) { const gx = -1200 + r() * 4800, gy = 712 + r() * 160, ph = Math.sin(t * (1 + r() * 2) + k); far.push(`<rect x="${f1(gx + 6 * ph)}" y="${f1(gy)}" width="${f1(10 + r() * 30)}" height="2" fill="#FFC880" opacity="${f1(0.15 + 0.2 * (0.5 + 0.5 * ph))}"/>`); }
+  BJ.bursts.forEach(([t0, bx, by], i) => far.push(e5bBurst(bx + 0.15 * (c.ux - 960) / c.z * 0, by, t, t0, 820 + i)));
+  L.push(layerAt(c, 0.15, far.join('')));
+  // mid: the main cable sweeping down from the Manhattan tower, the suspenders hanging from it, the diagonal stays (parallax 1, behind)
+  const tX = 2350, tTop = 120, mid = [], cab = (x) => tTop + 40 + 520 * Math.pow(Math.max(0, (tX - 80 - x) / 1700), 0.7) * (1 - Math.max(0, (tX - 1780 - x) / 2400));
+  let d = `M-600,${f1(cab(-600))}`; for (let x = -600; x <= tX - 80; x += 40) d += ` L${x},${f1(cab(x))}`; mid.push(`<path d="${d}" stroke="#141A1E" stroke-width="10" fill="none"/>`);
+  for (let x = -580; x < tX - 100; x += 46) mid.push(line([[x, cab(x)], [x, G - 40]], '#1A2228', 2));
+  for (let k = 1; k < 9; k++) mid.push(line([[tX - 60, tTop + 60], [tX - 60 - k * 190, G - 40]], '#1A2228', 2.4));
+  // the tower: two pointed arches through stone
+  mid.push(`<rect x="${tX - 70}" y="${tTop}" width="460" height="${G + 300 - tTop}" fill="#5C5A54"/><rect x="${tX - 70}" y="${tTop}" width="460" height="${G + 300 - tTop}" fill="url(#matSootT)" opacity="0.6"/>` +
+    [tX - 20, tX + 200].map((ax) => `<path d="M${ax},${G + 300} L${ax},${tTop + 330} Q${ax + 70},${tTop + 170} ${ax + 140},${tTop + 330} L${ax + 140},${G + 300} Z" fill="#2A3138"/>`).join('') + `<rect x="${tX - 90}" y="${tTop - 20}" width="500" height="26" fill="#4A4842"/>` +
+    MAT.stone(tX - 70, tTop + 6, 460, 80, {base: '#5C5A54', seed: 813}));
+  // the promenade: plank deck with snow on it, the far railing; the near railing in front of the walkers
+  mid.push(`<rect x="-800" y="${G - 46}" width="4200" height="8" fill="#141A1E"/>` + [...Array(110).keys()].map((k) => `<rect x="${-780 + k * 38}" y="${G - 46}" width="4" height="46" fill="#141A1E"/>`).join(''));
+  mid.push(`<rect x="-800" y="${G}" width="4200" height="60" fill="#3A322A"/><rect x="-800" y="${G - 2}" width="4200" height="8" fill="#E6ECEE" opacity="0.85"/><rect x="-800" y="${G + 60}" width="4200" height="400" fill="#141A1E"/>`);
+  L.push(layerAt(c, 1, mid.join('')));
+  // ---- the brothers: Michael a little behind on the far side, Tommy on the near side talking with his hands ----
+  const rim = {c: '#FFB880', a: 0.55, dx: -0.009, dy: -0.006};
+  const tg = e4Speak([[1.4, 3.6], [5.0, 7.2], [9.6, 11.6]], t), gest = Math.max(e4Bump(t, 1.6, 2.0), e4Bump(t, 5.2, 2.0), e4Bump(t, 9.8, 1.8));
+  let mi = e4Walk(cast('michael', {x: 0, y: G - 8, h: H, d: 1, det: 0.6, rim, an: {tilt: 2 + 8 * e4Bump(t, 7.6, 1.2) - 6 * Math.max(0, Math.sin((t - 7.6) * 9)) * e4Bump(t, 7.6, 1.2) + (t > 3.0 && t < 7.4 ? 6 : 0), expr: t > 7.4 ? 'smile' : 'set', blink: (t + 1.1) % 3.7 < 0.12}}), x0 - 70, 1, s, G - 8, 'bj.michael');
+  const tb0 = cast('brother', {x: 0, y: G + 10, h: H * 1.18, hat: 'cap', wear: [], d: 1, det: 0.6, rim, an: {tilt: -4 + 4 * tg.beat, expr: 'smile', jaw: tg.jaw, blink: (t + 0.4) % 3.3 < 0.12}});
+  let tm = e4Walk(tb0, x0 + 40, 1, s, G + 10, 'bj.tommy');
+  if (gest > 0) { const w = walkAn(walkPhase(s, tm.h)); tm = {...tm, an: {...tm.an, bArm: [lerp(w.bArm[0], 120, gest), lerp(w.bArm[1], 50 + 20 * tg.beat, gest)]}}; }
+  L.push(layerAt(c, 1, e4Outlined(mi) + e4Outlined(tm) + `<rect x="-800" y="${G + 26}" width="4200" height="8" fill="#0D1114"/>` + [...Array(80).keys()].map((k) => `<rect x="${-780 + k * 52}" y="${G + 26}" width="5" height="40" fill="#0D1114"/>`).join('')));
+  L.push(e4Snow(t, c, {n: 140, size: 2.6, speed: 60, op: 0.75, par: 0.5}));
+  const scr = tag(130, 120, 'THE BROOKLYN BRIDGE · NEW YEAR\'S DAY, 1898', smooth(0.4, 0.8, t) * (1 - smooth(4.0, 4.4, t)));
+  return frame(e5Defs(t, grad('bjsky', [['0', '#1C2A44'], ['0.35', '#4A4A66'], ['0.55', '#A0685A'], ['0.68', '#E09A60'], ['1', '#E8A060']])), '', L.join(''), scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Bridge});
+Object.assign(CLIPS, {ep5_bridge_1898: {sec: BJ.sec, render: (t) => renderE5Bridge(t)}});
