@@ -49,3 +49,13 @@ Only one frame render at a time on this machine (the flock); frames are deleted 
 | 10 | `ga_gilded_theme` | the series theme, carried into the end screen (`END_THEME_AT`) |
 
 Levels as Ep 4: about 17 LU under the voice (cue volume = 10^((-35.2 - cue LUFS) / 20), noted in `cues.tsv`); chapter mix about -18 LUFS.
+
+## Chapters 1 to 5: what lands where
+
+| Ch | Length | Key beats (words) |
+|---|---|---|
+| 1 Barges at Dawn | 61.7 s | ep5_homestead_dawn re-ordered to the voice: whistle on "whistle", the gate over at 17.7 (gate_clank), rifles up on "On the barges" / "On the bank", freeze after "first." (40.9) held under "the rules were stacked"; music out for the stare-down; ep5_doors_intro, each door on its "fought / teamed / fought"; the question over the doors; card "The Rules" on "Start" |
+| 2 The Rules | 77.2 s | "The boss made them."; Ep 4's kitchen + "WATCH FROM EPISODE 1" tape + the Kellys-are-fictional bar; Ep 1's refinery; ep5_refinery A on "hauls"; Riis 1890 + Hine 1908 (dated) with the four notes; Hine 1911 breaker boys + "1 in 6"; Castle Garden 1880; ep5_refinery B, the point on "point"; PAY CUT on "cut"; one worker vs all; card on "strength" |
+| 3 Strength in Numbers | 68.6 s | ep5_x_weapons cued to the words, vocab cards union / collective bargaining / strike / blacklist / lockout / strikebreakers; Labor Day 1882; Koehler's The Strike; Pittsburgh 1877 photographs; card on "two" |
+| 4 Two Kinds of Unions | 108.4 s | ep5_x_unions cued to the words; vocab Knights of Labor / arbitration / anarchists / AFL; the five stars line; women delegates 1886; May 1886 strike; Haymarket via the trial print only; Gompers 1908 (dated); ep5_union_meeting (hand up on "joined"); ep5_kitchen_1887 synced (t = T - 91.4); Fort Frick stereograph; card on "Fort" |
+| 5 Fort Frick | 118.4 s | barges callback; ep5_x_charge cued; Carnegie and Frick portraits (Ep 1 archive); the fence (FORT FRICK, LOCKED OUT); the fight in words over the frozen stare-down; surrender; 8,000 soldiers; Frick shot told in words; Braddock library + the steelworker's question; HERO? VILLAIN? OR BOTH? (ga_hero_villain); Pullman + injunction card; ep5_door1_close, slam on "closed"; the farm door lights; card on "Uncle" |
