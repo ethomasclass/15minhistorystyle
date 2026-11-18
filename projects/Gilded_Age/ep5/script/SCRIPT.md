@@ -1,7 +1,8 @@
 # Fighting Back: The Gilded Age, Episode 5 (finale)
 
-**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 5 (Nov 18): framed as ordinary people fighting back and falling short, with a recurring FOUGHT BACK / FELL SHORT scorecard; title Fighting Back** · target about 15 minutes
+**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 6 (Nov 18): Fighting Back frame plus a casual, storyteller voice in spots (asides, deadpan beats); scorecard** · target about 15 minutes
 
+Tone (draft 6): casual storyteller asides in light spots ([casual], [amused], [deadpan], [incredulous] delivery tags); never casual about deaths, Haymarket, the Homestead shooting, Pullman or Garfield.
 Markup as in Episodes 1 to 4: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
 `MICHAEL:` / `TOMMY:` / `MA:` / `NORA:` / `OWEN:` paragraphs are character lines (OWEN is a new voice: Irish-born Nebraska farmer, 40s,
 warm and weary). Facts and safe wordings: `../RESEARCH.md` and `../PLAN.md`. Items marked [VERIFY] are checked before voicing.
@@ -37,7 +38,7 @@ To understand why they fought, start with a job. Twelve hours a day.
 
 Twelve hours a day, six days a week. That's how long Michael Kelly worked at a sugar refinery in Brooklyn. It's January 1887. Michael is 23. He hauls heavy sacks and tends vats of boiling sugar, in heat that could make a man collapse.
 
-That was normal. Here's what normal looked like.
+[casual] And here's the wild part: that was normal. Totally normal. Here's what normal looked like.
 
 Long hours. Ten to twelve hours a day was common. Steelworkers often worked seven days a week.
 
@@ -49,7 +50,7 @@ Children. By 1900, about one in six American kids between ten and fifteen had a 
 
 And no safety net. Lose your job, and there was no unemployment check.
 
-So why not quit, or complain? Because every year, hundreds of thousands of new immigrants arrived looking for work. If Michael complained, the foreman could point at the gate.
+[casual] So why not just quit? Or complain? Because every year, hundreds of thousands of new immigrants arrived looking for work. If Michael complained, the foreman would just point at the gate. [deadpan] Plenty of guys out there want your job.
 
 And that January, the refinery cut the men's pay. Again.
 
@@ -63,9 +64,9 @@ A {union} is a group of workers who join together to deal with their employer as
 
 When a union and a company sit down to agree on pay, hours and safety for everyone, that's called {collective bargaining}. Collective means together. Bargaining means negotiating.
 
-And if the company says no? The union's biggest weapon is a {strike}: everyone stops working at once. No workers, no product, no profit.
+And if the company says no? Then everybody puts down their tools and walks out. That's a {strike}. No workers, no product, no profit. [amused] Suddenly the boss wants to talk.
 
-But companies had weapons too. They could fire union members and put their names on a {blacklist}, so nobody else would hire them. They could lock the gates until workers gave in. That's a {lockout}. They could bring in {strikebreakers}, new workers hired to replace the strikers. And they could call on the courts, private guards, even soldiers.
+But here's the thing. Companies had weapons too. A lot of them. They could fire union members and put their names on a {blacklist}, so nobody else would hire them. They could lock the gates until workers gave in. That's a {lockout}. They could bring in {strikebreakers}, new workers hired to replace the strikers. And they could call on the courts, private guards, even soldiers.
 
 In 1877, when railroad workers went on strike across the country, the President sent in the army. About a hundred people died, and the strike failed.
 
@@ -73,7 +74,7 @@ Ten years later, Michael Kelly climbed the stairs to a back room above a saloon,
 
 ## 4. Eight Hours and a Bomb
 
-The union was the {Knights of Labor}. They were once so secret that newspapers printed their name as five stars. By 1886 they had hundreds of thousands of members, and they let almost anyone join: skilled and unskilled workers, women, and Black workers. But not Chinese immigrants.
+The union was the {Knights of Labor}. [amused] These guys were so secret that for years, newspapers printed their name as five little stars. Like a swear word. By 1886 they had hundreds of thousands of members, and they let almost anyone join: skilled and unskilled workers, women, and Black workers. But not Chinese immigrants.
 
 Their big goal was an eight-hour workday. On May 1st, 1886, hundreds of thousands of workers went on strike for it. Their slogan: eight hours for work, eight hours for rest, eight hours for what we will.
 
@@ -89,7 +90,7 @@ TOMMY: [annoyed] A union? Mr. Duffy says the Knights are nothing but trouble.
 
 MICHAEL: [dry] Mr. Duffy doesn't work at the refinery.
 
-Tommy ran errands for the local political machine, and the machine didn't like anything it didn't control. Just that November, the brothers had fought over Henry George, a writer the unions ran for mayor of New York. Michael cheered for him. Tommy's machine helped beat him. George came in second, ahead of a young Theodore Roosevelt. Roosevelt would be fine. Working people had come close at the ballot box. Close, but short.
+Tommy ran errands for the local political machine, and the machine didn't like anything it didn't control. Just that November, the brothers had fought over Henry George, a writer the unions ran for mayor of New York. Michael cheered for him. Tommy's machine helped beat him. George came in second. And who came in third? A 28-year-old named Theodore Roosevelt. [deadpan] Don't worry about Teddy. He'd be fine. Working people had come close at the ballot box. Close, but short.
 
 Six years later, the powerful struck back, at a steel mill the workers called Fort Frick.
 
@@ -97,7 +98,7 @@ Six years later, the powerful struck back, at a steel mill the workers called Fo
 
 Fort Frick was the workers' nickname for the steel mill in Homestead, Pennsylvania. Remember those barges?
 
-The mill belonged to Andrew Carnegie, one of the richest men in the world. His company was run by a tough manager named Henry Clay Frick. Remember that order. Carnegie owned the mill. Frick ran it for him.
+The mill belonged to Andrew Carnegie, one of the richest men in the world. His company was run by a tough manager named Henry Clay Frick. [casual] Okay, this part matters, so stick with me. Carnegie owned the mill. Frick ran it for him. Carnegie was the boss. Frick was the boss's tough guy.
 
 In 1892, the union and the company were bargaining over a new contract. The company offered lower pay. When the union said no, Frick refused to deal with the union at all. He put a tall fence around the mill, topped with barbed wire. The workers called it Fort Frick. Then he locked them out.
 
@@ -105,9 +106,9 @@ To run the mill with new workers, Frick hired about three hundred guards from th
 
 The shooting at the landing went on most of the day. At least ten people were killed, workers and guards. That afternoon, the Pinkertons surrendered.
 
-But the workers didn't win. The governor sent eight thousand soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. Frick survived, public opinion turned against the strikers, and the union was crushed. The workers had won the battle at the river. They lost the fight.
+But the workers didn't win. The governor sent eight thousand soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. And Frick survived. [incredulous] The guy was back at his desk in about a week. Public opinion turned against the strikers, and the union was crushed. The workers had won the battle at the river. They lost the fight.
 
-And Andrew Carnegie? He spent the strike on vacation in Scotland, sending Frick his support.
+And where was Andrew Carnegie during all this? [deadpan] On vacation. In Scotland. Sending Frick his support.
 
 But six years earlier, Carnegie had written that workers' right to form unions was "no less sacred" than the rights of owners. He gave away most of his fortune and built thousands of free libraries. Still, one steelworker asked, "After working twelve hours, how can a man go to a library?"
 
@@ -121,7 +122,7 @@ Hard times hit in 1893. Banks failed. Railroads went bankrupt. By 1894, more tha
 
 The refinery let Michael go. Ma took in washing. Nora's pay as a maid kept the family fed.
 
-In Ohio, a businessman named Jacob Coxey led hundreds of unemployed men on a march to Washington, to ask Congress for jobs building roads. They called themselves Coxey's Army. Coxey had even named his baby son Legal Tender, a term for official money. When they reached the Capitol, Coxey was arrested. The charges: carrying banners. And walking on the grass.
+In Ohio, a businessman named Jacob Coxey led hundreds of unemployed men on a march to Washington, to ask Congress for jobs building roads. They called themselves Coxey's Army. [amused] And Coxey cared so much about money that he named his baby son... Legal Tender. That's a term for official money. He named his kid after money. When the marchers finally reached the Capitol, police arrested Coxey. For what? Carrying banners. [deadpan] And walking on the grass. The grass.
 
 That same spring, near Chicago, the Pullman train car company cut its workers' pay by about a quarter. But the workers lived in a {company town}. Pullman owned their houses. And Pullman did not cut the rent.
 
@@ -149,17 +150,17 @@ Third, and worst: crop prices kept falling. Wheat that sold for about a dollar a
 
 OWEN: [dry] Burned corn in the stove this winter. Cheaper than coal.
 
-So farmers organized, too. First came the {Grange}, farmers' clubs started by a man named Oliver Kelley. No relation. Then the much bigger {Farmers' Alliance}.
+So farmers organized, too. First came the {Grange}, farmers' clubs started by a guy named Oliver Kelley. [deadpan] No relation. Then the much bigger {Farmers' Alliance}.
 
 But to understand why farmers were so angry, you need to understand the money problem.
 
 ## 8. The Money Problem
 
-The money problem was this: the harder farmers worked, the deeper they sank into debt. Here's how.
+The money problem. [casual] I know, I know: economics. But stay with me, because this is the key to the whole fight. The harder farmers worked, the deeper they sank into debt. Here's how.
 
 Say Uncle Owen borrows a thousand dollars when wheat sells for a dollar a bushel. To pay it back, he needs to sell a thousand bushels.
 
-Ten years later, wheat sells for fifty cents. He still owes a thousand dollars. But now he has to sell two thousand bushels. Same debt. Twice the work.
+Ten years later, wheat sells for fifty cents. He still owes a thousand dollars. But now he has to sell two thousand bushels. Same debt. Twice the work. [incredulous] You see the problem.
 
 Why did prices keep falling? Part of the answer was money itself.
 
@@ -179,7 +180,7 @@ Farmers needed Washington on their side. But Washington wasn't listening. So the
 
 ## 9. A Party of Their Own
 
-A party of their own. Why? Because both big parties seemed busier with something else: handing out government jobs to their supporters, called the {spoils system}. It got so bad that in 1881, a man who thought he was owed a job shot President James Garfield. Congress responded by requiring tests for some government jobs, called {civil service}. But that fixed who got jobs. It didn't fix railroad prices, crop prices or wages.
+A party of their own. Why? Because both big parties seemed busier with something else: handing out government jobs. Win an election, and you give jobs to your buddies. That was called the {spoils system}. It got so bad that in 1881, a man who thought he was owed a job shot President James Garfield. Congress responded by requiring tests for some government jobs, called {civil service}. But that fixed who got jobs. It didn't fix railroad prices, crop prices or wages.
 
 So on July 4th, 1892, in Omaha, Nebraska, farmers and workers formed a new party: the People's Party, also called the Populists. {Populism} means ordinary people uniting against powerful elites, like big banks, railroads and corporations.
 
@@ -201,11 +202,11 @@ In July 1896, a 36-year-old Nebraskan named William Jennings Bryan argued for fr
 
 In plain words: don't sacrifice ordinary people to protect gold.
 
-The Democrats made Bryan their candidate. Then the Populists chose him too.
+The Democrats made Bryan their candidate. Then the Populists picked him too, but with a different vice president. [amused] So Bryan was running with two running mates at the same time. Awkward.
 
 OWEN: [fired up] Bryan's a Nebraska man. He's one of us.
 
-Bryan crisscrossed the country. His opponent, Republican William McKinley, stayed home in Ohio and spoke from his front porch, while his campaign raised millions from big business. Some factory owners warned workers that if Bryan won, the factory might close.
+Bryan crisscrossed the country. And his opponent, Republican William McKinley? [amused] His strategy was: stay home. Sit on the porch. Let the voters come to him. And they did, by the trainload, while his campaign raised millions from big business. Some factory owners warned workers that if Bryan won, the factory might close.
 
 At the Kellys' kitchen table, the family split. And this time, the brothers had switched sides.
 
@@ -223,11 +224,11 @@ So after all that fighting, what did ordinary Americans have to show for it? Was
 
 ## 11. Gold or Gilt
 
-Gold or gilt? Add up the fights.
+Gold or gilt? [casual] Okay, let's add up the scorecard.
 
 The Knights of Labor: fought back, fell short. Henry George: fought back, fell short. Homestead: fought back, fell short. Pullman: fought back, fell short. The Populists: fought back, fell short.
 
-By 1900, workers still had no legal right to form a union. Most still worked ten or twelve hours a day. Children still worked in mills and mines. Farmers were still in debt. And the government still usually took the side of business.
+By 1900, workers still had no legal right to form a union. Kids still worked in mills and mines. Farmers were still in debt. And the government still usually sided with business.
 
 But those ideas didn't go away: an eight-hour day, the right to organize, a tax on the richest, senators elected by the people, a government that answered to ordinary Americans. The Gilded Age left Americans wanting more.
 
