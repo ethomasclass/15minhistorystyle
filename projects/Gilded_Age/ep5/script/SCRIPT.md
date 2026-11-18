@@ -1,6 +1,6 @@
-# The Cross of Gold: The Gilded Age, Episode 5 (finale)
+# Fighting Back: The Gilded Age, Episode 5 (finale)
 
-**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 4 (Nov 18): draft 3 trimmed to about 17 minutes; Henry George and Garfield folded in briefly; 11 chapters** · target about 15 minutes
+**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 5 (Nov 18): framed as ordinary people fighting back and falling short, with a recurring FOUGHT BACK / FELL SHORT scorecard; title Fighting Back** · target about 15 minutes
 
 Markup as in Episodes 1 to 4: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
 `MICHAEL:` / `TOMMY:` / `MA:` / `NORA:` / `OWEN:` paragraphs are character lines (OWEN is a new voice: Irish-born Nebraska farmer, 40s,
@@ -27,7 +27,11 @@ A company's private army, aiming at American workers. And the workers, aiming ri
 
 Nobody knows who will fire first.
 
-How did it come to this? This is the story of two groups left behind in the Gilded Age: workers in the cities, and farmers out west. Both fought back. To understand why, start with a job. Twelve hours a day.
+How did it come to this?
+
+This is the story of ordinary Americans, workers in the cities and farmers out west, finally fighting back against the most powerful companies in the country. They would win some battles. They would lose more. And what they started wasn't finished.
+
+To understand why they fought, start with a job. Twelve hours a day.
 
 ## 2. Twelve Hours a Day
 
@@ -77,7 +81,7 @@ Three days later, at a protest in Chicago's Haymarket Square, police moved in. S
 
 Eight {anarchists}, people who wanted no government at all, were convicted anyway, on very little evidence. Four were hanged.
 
-For many Americans, unions now meant violence. The Knights got the blame, and fell apart. A smaller union survived: Samuel Gompers' {American Federation of Labor}, for skilled workers, focused on better pay and shorter hours.
+For many Americans, unions now meant violence. The Knights got the blame, and fell apart. They had fought back, and organized hundreds of thousands of workers. But they fell short. A smaller union survived: Samuel Gompers' {American Federation of Labor}, for skilled workers, focused on better pay and shorter hours.
 
 Michael joined the Knights anyway. His little brother was not happy.
 
@@ -85,9 +89,9 @@ TOMMY: [annoyed] A union? Mr. Duffy says the Knights are nothing but trouble.
 
 MICHAEL: [dry] Mr. Duffy doesn't work at the refinery.
 
-Tommy ran errands for the local political machine, and the machine didn't like anything it didn't control. Just that November, the brothers had fought over Henry George, a writer the unions ran for mayor of New York. Michael cheered for him. Tommy's machine helped beat him. George came in second, ahead of a young Theodore Roosevelt. Roosevelt would be fine.
+Tommy ran errands for the local political machine, and the machine didn't like anything it didn't control. Just that November, the brothers had fought over Henry George, a writer the unions ran for mayor of New York. Michael cheered for him. Tommy's machine helped beat him. George came in second, ahead of a young Theodore Roosevelt. Roosevelt would be fine. Working people had come close at the ballot box. Close, but short.
 
-Working people had scared the powerful. Six years later, the powerful struck back, at a steel mill the workers called Fort Frick.
+Six years later, the powerful struck back, at a steel mill the workers called Fort Frick.
 
 ## 5. Fort Frick
 
@@ -101,7 +105,7 @@ To run the mill with new workers, Frick hired about three hundred guards from th
 
 The shooting at the landing went on most of the day. At least ten people were killed, workers and guards. That afternoon, the Pinkertons surrendered.
 
-But the workers didn't win. The governor sent eight thousand soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. Frick survived, public opinion turned against the strikers, and the union was crushed.
+But the workers didn't win. The governor sent eight thousand soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. Frick survived, public opinion turned against the strikers, and the union was crushed. The workers had won the battle at the river. They lost the fight.
 
 And Andrew Carnegie? He spent the strike on vacation in Scotland, sending Frick his support.
 
@@ -123,7 +127,7 @@ That same spring, near Chicago, the Pullman train car company cut its workers' p
 
 The workers went on strike. A national railroad union, led by Eugene Debs, backed them by refusing to run any train pulling a Pullman car. Trains stopped across much of the country.
 
-Then the government stepped in, on the companies' side. A judge issued an {injunction}, a court order banning the strike. President Grover Cleveland sent federal troops to Chicago. About thirty people were killed. Debs went to jail, and the strike collapsed.
+Then the government stepped in, on the companies' side. A judge issued an {injunction}, a court order banning the strike. President Grover Cleveland sent federal troops to Chicago. About thirty people were killed. Debs went to jail, and the strike collapsed. Workers had stopped trains across the whole country. And still, they fell short.
 
 The lesson seemed clear: when workers took on big companies, the government usually sided with the companies.
 
@@ -213,19 +217,21 @@ NORA: [amused] You should hear them on Fifth Avenue. They think Bryan's coming f
 
 MA: [firm] Your uncle's losing his farm, and you're arguing about metal.
 
-McKinley won. Most city voters, including many factory workers, chose him. Bryan won the farm states, and it wasn't enough. The Populists soon faded away.
+McKinley won. Most city voters, including many factory workers, chose him. Bryan won the farm states, and it wasn't enough. Farmers had built a party of their own, and taken it all the way to a presidential election. And they fell short. The Populists soon faded away.
 
-So after all that fighting, what did workers and farmers have to show for it? Was it gold, or just gilt?
+So after all that fighting, what did ordinary Americans have to show for it? Was it gold, or just gilt?
 
 ## 11. Gold or Gilt
 
-Gold or gilt? By 1900, it looked a lot like gilt.
+Gold or gilt? Add up the fights.
 
-Workers still had no legal right to form a union. Most still worked ten or twelve hours a day. Children still worked in mills and mines. Farmers were still in debt. And the government still usually took the side of business.
+The Knights of Labor: fought back, fell short. Henry George: fought back, fell short. Homestead: fought back, fell short. Pullman: fought back, fell short. The Populists: fought back, fell short.
 
-The strikers lost. The Populists lost. But they put their ideas in front of the whole country: shorter workdays, fair pay, the right to organize, a fairer tax, and a government that answered to ordinary people.
+By 1900, workers still had no legal right to form a union. Most still worked ten or twelve hours a day. Children still worked in mills and mines. Farmers were still in debt. And the government still usually took the side of business.
 
-The Gilded Age left Americans wanting more. And in the years after 1900, many would start demanding it, in a new age of reform called the Progressive Era.
+But those ideas didn't go away: an eight-hour day, the right to organize, a tax on the richest, senators elected by the people, a government that answered to ordinary Americans. The Gilded Age left Americans wanting more.
+
+And in the next era, Americans would finally start winning some of these fights. That era is called the {Progressive Era}.
 
 New Year's Day, 1898. Brooklyn became part of New York City. Michael and Tommy walked across the bridge together, voters in the same city at last. They still didn't vote the same way.
 
@@ -251,6 +257,10 @@ That's the end of our story of the Gilded Age. Thanks for watching, and for stic
 | 8 | "...a party of their own." | 9 | "A party of their own. Why?" |
 | 9 | "...silver, and a cross of gold." | 10 | "The cross of gold came from a speech." |
 | 10 | "...Was it gold, or just gilt?" | 11 | "Gold or gilt?" |
+
+## Scorecard (on screen, recurring)
+A two-column card, FOUGHT BACK / FELL SHORT (teal and orange), that adds a row at each "fell short" line: the Knights (ch 4), Henry George (ch 4),
+Homestead (ch 5), Pullman (ch 6), the Populists (ch 10); ch 11 shows the full tally, then the ideas lift off the card as "still wanted".
 
 ## To verify before voicing
 - New in draft 3: sugar refinery heat; railroad worker deaths per year (thousands, 1890s ICC figures); child labor one in six (1900 census, ages 10 to 15);
