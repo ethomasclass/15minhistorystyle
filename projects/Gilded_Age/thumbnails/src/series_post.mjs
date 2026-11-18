@@ -24,6 +24,9 @@ const CSS = `
 @font-face{font-family:Pen;src:url(${F}NanumPenScript.woff2)}
 body{margin:0}#s{width:1080px;height:1080px;position:relative;overflow:hidden;
   background:radial-gradient(ellipse 900px 700px at 50% 35%,#16302c,#0b0d0c 75%)}
+.photo{position:absolute;inset:0;background:url(img/ep1_bridge_bw.jpg) center/cover;filter:grayscale(1) contrast(1.15) brightness(1.05) sepia(.25);opacity:.55}
+.tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,12,.5),rgba(11,13,12,.05) 40%,rgba(11,13,12,.6)),radial-gradient(ellipse 820px 700px at 50% 45%,rgba(22,60,54,.3),rgba(5,7,6,.7));mix-blend-mode:normal}
+.grain{position:absolute;inset:0;opacity:.14;mix-blend-mode:overlay}
 .head{position:absolute;top:34px;width:100%;text-align:center}
 .head b{display:block;font:400 84px/1 Abril;letter-spacing:1px;background:linear-gradient(172deg,#8a5a12 0%,#f7e39a 22%,#c8902b 38%,#fff6cf 50%,#b47a1e 63%,#e9c46a 80%,#7a4d10 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a2506) drop-shadow(0 6px 14px rgba(0,0,0,.9))}
@@ -35,7 +38,8 @@ body{margin:0}#s{width:1080px;height:1080px;position:relative;overflow:hidden;
 .fin{position:absolute;left:280px;top:756px}
 .fin img{box-shadow:0 0 0 3px #2FE0C4,0 0 26px rgba(47,224,196,.55),0 10px 26px rgba(0,0,0,.7)}
 .lab{position:absolute;left:58px;top:872px;font:400 50px/1 Pen;color:#2FE0C4;transform:rotate(-4deg);text-shadow:0 2px 0 #000}`;
-const html = `<div id="s"><div class="head"><b>The Gilded Age</b><div class="tp">${tape('THE FULL SERIES IS UP', 46, -2, 13)}</div></div>
+const GRAIN = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>`;
+const html = `<div id="s"><div class="photo"></div><div class="tint"></div><div class="grain" style="background-image:url('data:image/svg+xml;utf8,${encodeURIComponent(GRAIN)}')"></div><div class="head"><b>The Gilded Age</b><div class="tp">${tape('THE FULL SERIES IS UP', 46, -2, 13)}</div></div>
   <div class="grid">${[0, 1, 2, 3].map(i => `<div>${thumb(i, 420)}</div>`).join('')}</div>
   <div class="lab">+ the finale</div><div class="fin">${thumb(4, 520)}</div></div>`;
 const browser = await chromium.launch();
