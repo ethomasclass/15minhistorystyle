@@ -386,3 +386,71 @@ function renderE5Coxey(t) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Coxey});
 Object.assign(CLIPS, {ep5_coxey: {sec: CX.sec, render: (t) => renderE5Coxey(t)}});
+
+/* ================= ep5_bryan (ch 9, 14 s): the Cross of Gold, Chicago, July 9, 1896 ================= */
+// The convention hall in gaslight: gasoliers, red, cream and slate bunting swagged along the gallery fronts, flags, the galleries packed.
+// From behind the delegates on the floor (back views, hats) the camera pushes slowly toward the rostrum, where Bryan (a faceless
+// silhouette, seen from the front, backlit by the platform's lights) speaks with his arms, then spreads them wide like a cross and
+// holds (6.6 to 9.6); the hall erupts (9.4): everyone up, hands and hats in the air, handkerchiefs waving in the galleries.
+const BR = {sec: 14, cross: [6.0, 6.8], erupt: 9.4, lower: 10.6};
+// a frontal silhouette (Bryan): head, collar, frock coat to the lectern; arms by angle from hanging (0) to out sideways (90, 180 up)
+function e5bFront(x, y, k, armR, armL, col = '#0D0C09') {
+  const arm = (side, [a1, a2]) => { const sh = [x + side * 34 * k, y + 8 * k], r1 = a1 * Math.PI / 180, e = [sh[0] + side * Math.sin(r1) * 52 * k, sh[1] + Math.cos(r1) * 52 * k], r2 = a2 * Math.PI / 180, hnd = [e[0] + side * Math.sin(r2) * 48 * k, e[1] + Math.cos(r2) * 48 * k];
+    return line([sh, e, hnd], col, 17 * k) + `<circle cx="${f1(hnd[0])}" cy="${f1(hnd[1])}" r="${f1(8 * k)}" fill="${col}"/>`; };
+  return arm(1, armR) + arm(-1, armL) + `<path d="M${f1(x - 38 * k)},${f1(y + 4 * k)} Q${f1(x)},${f1(y - 8 * k)} ${f1(x + 38 * k)},${f1(y + 4 * k)} L${f1(x + 34 * k)},${f1(y + 120 * k)} L${f1(x - 34 * k)},${f1(y + 120 * k)} Z" fill="${col}"/>` +
+    `<rect x="${f1(x - 8 * k)}" y="${f1(y - 16 * k)}" width="${f1(16 * k)}" height="${f1(18 * k)}" fill="${col}"/><ellipse cx="${f1(x)}" cy="${f1(y - 34 * k)}" rx="${f1(18 * k)}" ry="${f1(22 * k)}" fill="${col}"/><path d="M${f1(x - 18 * k)},${f1(y - 40 * k)} q${f1(18 * k)},${f1(-18 * k)} ${f1(36 * k)},0 q0,${f1(-14 * k)} ${f1(-18 * k)},${f1(-16 * k)} q${f1(-18 * k)},${f1(2 * k)} ${f1(-18 * k)},${f1(16 * k)} Z" fill="${col}"/>`;
+}
+// a delegate seen from behind: shoulders, head, a hat; up 0..1: on his feet with his arms up (and the hat thrown, if he throws)
+function e5bBackMan(x, y, k, col, r, t, up, throws) {
+  const bob = up * (8 + 6 * Math.abs(Math.sin(t * (5 + 3 * r) + r * 9))) * k, yy = y - bob - up * 18 * k, hat = Math.floor(r * 3), s = [];
+  if (up > 0.05) { const wv = 18 * Math.sin(t * (6 + 4 * r) + r * 20); [-1, 1].forEach((sd, i) => { if (i === 1 && r < 0.35) return; const sh = [x + sd * 22 * k, yy - 34 * k], hd = [x + sd * (30 + wv * (i ? 1 : -1) * 0.6) * k, yy - (34 + 88 * up) * k];
+    s.push(line([sh, [lerp(sh[0], hd[0], 0.5) + sd * 8 * k, lerp(sh[1], hd[1], 0.5)], hd], col, 11 * k) + `<circle cx="${f1(hd[0])}" cy="${f1(hd[1])}" r="${f1(6 * k)}" fill="${col}"/>`); }); }
+  s.push(`<path d="M${f1(x - 32 * k)},${f1(yy + 60 * k)} L${f1(x - 30 * k)},${f1(yy - 24 * k)} Q${f1(x - 28 * k)},${f1(yy - 40 * k)} ${f1(x)},${f1(yy - 42 * k)} Q${f1(x + 28 * k)},${f1(yy - 40 * k)} ${f1(x + 30 * k)},${f1(yy - 24 * k)} L${f1(x + 32 * k)},${f1(yy + 60 * k)} Z" fill="${col}"/><circle cx="${f1(x)}" cy="${f1(yy - 58 * k)}" r="${f1(15 * k)}" fill="${col}"/>`);
+  const hy = yy - 70 * k, fly = throws && up > 0.05 ? (() => { const u = ((t - BR.erupt - r * 0.4) % 2.2) / 2.2; return u < 0 ? null : {dy: -260 * k * Math.sin(Math.PI * u), rot: 400 * u * (r < 0.5 ? 1 : -1), dx: 30 * k * u * (r - 0.5)}; })() : null;
+  const hx = x + (fly ? fly.dx : 0), hy2 = hy + (fly ? fly.dy : 0), rot = fly ? fly.rot : 0;
+  if (hat === 0) s.push(`<g transform="rotate(${f1(rot)}, ${f1(hx)}, ${f1(hy2)})"><path d="M${f1(hx - 14 * k)},${f1(hy2 + 6 * k)} Q${f1(hx - 13 * k)},${f1(hy2 - 12 * k)} ${f1(hx)},${f1(hy2 - 13 * k)} Q${f1(hx + 13 * k)},${f1(hy2 - 12 * k)} ${f1(hx + 14 * k)},${f1(hy2 + 6 * k)} Z" fill="${col}"/><rect x="${f1(hx - 20 * k)}" y="${f1(hy2 + 3 * k)}" width="${f1(40 * k)}" height="${f1(5 * k)}" fill="${col}"/></g>`);
+  else if (hat === 1) s.push(`<g transform="rotate(${f1(rot)}, ${f1(hx)}, ${f1(hy2)})"><rect x="${f1(hx - 13 * k)}" y="${f1(hy2 - 8 * k)}" width="${f1(26 * k)}" height="${f1(13 * k)}" fill="#C8B583"/><rect x="${f1(hx - 13 * k)}" y="${f1(hy2 - 1 * k)}" width="${f1(26 * k)}" height="${f1(4 * k)}" fill="${col}"/><rect x="${f1(hx - 22 * k)}" y="${f1(hy2 + 4 * k)}" width="${f1(44 * k)}" height="${f1(4 * k)}" fill="#C8B583"/></g>`); // a straw boater
+  return s.join('');
+}
+function renderE5Bryan(t) {
+  const c = cam2(camAt([[0, 1.05, 960, 560], [BR.erupt - 0.4, 1.6, 960, 500], [BR.erupt + 0.4, 1.3, 960, 530], [BR.sec, 1.22, 960, 540]], t)), s = [], fl = e5Flick(t);
+  const up = (r) => smooth(BR.erupt + r * 0.5, BR.erupt + r * 0.5 + 0.35, t);
+  // the hall: the back wall behind the platform, the high roof trusses, flags, the galleries left and right
+  s.push(`<rect x="-400" y="-300" width="2720" height="1700" fill="#1E1611"/><rect x="-400" y="-300" width="2720" height="560" fill="#140F0B"/>`);
+  for (let k = 0; k < 9; k++) s.push(line([[-300 + k * 320, 40], [-140 + k * 320, 140], [20 + k * 320, 40]], '#0B0806', 7));
+  s.push(glowC(960, 470, 760, 0.85 * fl, 'mswarm') + glowC(960, 470, 300, 0.6 * fl, 'msglow')); // the platform lights: Bryan is backlit
+  // flags and the bunting on the back wall
+  const swag = (x0, x1, y, n, cols) => [...Array(n).keys()].map((i) => { const a = x0 + i * (x1 - x0) / n, w = (x1 - x0) / n; return cols.map((cc, j) => `<path d="M${f1(a)},${y + j * 12} Q${f1(a + w / 2)},${y + 52 + j * 12} ${f1(a + w)},${y + j * 12} L${f1(a + w)},${y + j * 12 + 12} Q${f1(a + w / 2)},${y + 64 + j * 12} ${f1(a)},${y + j * 12 + 12} Z" fill="${cc}"/>`).join(''); }).join('');
+  s.push(swag(380, 1540, 250, 6, ['#9A3B34', '#E3D8BE', '#3E5068']));
+  [[560, 180], [1360, 180]].forEach(([x, y], i) => s.push(`<rect x="${x}" y="${y}" width="6" height="200" fill="#0B0806"/><path d="M${x + 6},${y} l${i ? -1 : 1}0,0 Q${x + 60},${y + 10 + 6 * Math.sin(t * 1.3 + i)} ${x + 120},${y} L${x + 120},${y + 70} Q${x + 60},${y + 80 + 6 * Math.sin(t * 1.3 + i)} ${x + 6},${y + 70} Z" fill="#9A3B34" opacity="0.9"/>` + [1, 3, 5].map((j) => `<rect x="${x + 6}" y="${y + j * 10}" width="114" height="10" fill="#E3D8BE" opacity="0.85"/>`).join('') + `<rect x="${x + 6}" y="${y}" width="50" height="40" fill="#3E5068"/>`));
+  // galleries: rails with bunting, packed rows of small heads; handkerchiefs after the erupt
+  const gal = [];
+  [[-400, 420], [1500, 2320]].forEach(([g0, g1], gi) => { const gy = 470, r = rng(700 + gi);
+    gal.push(`<rect x="${g0}" y="${gy - 180}" width="${g1 - g0}" height="200" fill="#120D09"/>`);
+    for (let row = 0; row < 3; row++) for (let x = g0 + 10; x < g1; x += 30) { const rr = r(), u = up(rr), by = gy - 150 + row * 50 - u * 8 * Math.abs(Math.sin(t * 6 + rr * 9)); gal.push(`<circle cx="${x + row * 12}" cy="${f1(by)}" r="10" fill="#2A1F17"/><rect x="${x + row * 12 - 12}" y="${f1(by + 8)}" width="24" height="30" fill="#2A1F17"/>`);
+      if (u > 0.1 && rr < 0.3) gal.push(`<rect x="${f1(x + row * 12 + 8 * Math.sin(t * 9 + rr * 30))}" y="${f1(by - 40)}" width="12" height="9" fill="#E9E2CC" opacity="0.9"/>`); }
+    gal.push(`<rect x="${g0}" y="${gy}" width="${g1 - g0}" height="20" fill="#0B0806"/>` + swag(g0, g1, gy + 20, Math.round((g1 - g0) / 170), ['#9A3B34', '#E3D8BE', '#3E5068'])); });
+  s.push(gal.join(''));
+  // the gasoliers: rings of flames on drop pipes
+  [[300, 300], [960, 160], [1620, 300]].forEach(([x, y]) => { s.push(line([[x, -300], [x, y]], '#0B0806', 4) + `<ellipse cx="${x}" cy="${y}" rx="80" ry="14" fill="none" stroke="#0B0806" stroke-width="5"/>`);
+    for (let k = 0; k < 7; k++) { const a = k / 7 * TAU, fx = x + 80 * Math.cos(a), fy = y + 14 * Math.sin(a) - 12; s.push(`<ellipse cx="${f1(fx)}" cy="${f1(fy)}" rx="4" ry="9" fill="#FFE9B0" opacity="${f1(0.9 * e5Flick(t, k))}"/>`); }
+    s.push(glowC(x, y - 10, 260, 0.6 * fl, 'mswarm')); });
+  // the platform and the lectern; Bryan behind it
+  s.push(`<rect x="560" y="600" width="800" height="120" fill="#140F0B"/><rect x="560" y="600" width="800" height="8" fill="#FFD9A0" opacity="0.4"/>` + swag(560, 1360, 610, 5, ['#9A3B34', '#E3D8BE', '#3E5068']));
+  const cr = smooth(BR.cross[0], BR.cross[1], t) * (1 - smooth(BR.lower, BR.lower + 0.8, t)), sp = e4Speak([[0.4, 2.6], [2.9, 5.6]], t), b = sp.beat;
+  const R = e4Keys([[0, 20, 30], [0.8, 50, 120 + 10 * b], [2.6, 30, 80], [3.2, 60, 140 + 10 * b], [5.6, 40, 60], [6.0, 40, 60]], t), L = e4Keys([[0, 10, 10], [1.5, 20, 40], [3.0, 30, 70 + 8 * b], [5.6, 14, 20], [6.0, 14, 20]], t);
+  const armR = [lerp(R[0], 92, cr), lerp(R[1], 96, cr)], armL = [lerp(L[0], 92, cr), lerp(L[1], 96, cr)];
+  s.push(e5bFront(960, 470 - 4 * cr, 1.0, armR, armL) + glowC(960, 440, 120, 0.35 * fl, 'msglow'));
+  s.push(`<path d="M890,540 L1030,540 L1010,640 L910,640 Z" fill="#0D0907"/><rect x="880" y="532" width="160" height="12" fill="#0D0907"/><rect x="880" y="532" width="160" height="3" fill="#FFD9A0" opacity="0.5"/>`);
+  // the floor: rows of delegates from the platform toward us; haze between the rows
+  const rows = [];
+  for (let row = 0; row < 9; row++) { const k = 0.42 + row * 0.13, y = 720 + row * row * 6 + row * 26, r = rng(720 + row), col = row < 3 ? '#3A2C22' : row < 6 ? '#22190F' : '#0D0A07';
+    for (let x = -300 + (row % 2) * 30 * k; x < 2240; x += 66 * k) { const rr = r(); rows.push(e5bBackMan(x + (rr - 0.5) * 18 * k, y, k, col, rr, t, up(rr), rr < 0.42)); }
+    if (row < 6) rows.push(`<rect x="-400" y="${y + 20}" width="2720" height="40" fill="#FFC890" opacity="0.04"/>`); }
+  s.push(rows.join(''));
+  const world = layerAt(c, 1, s.join(''));
+  const scr = tag(130, 120, 'THE DEMOCRATIC CONVENTION · CHICAGO · JULY 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  return frame(e5Defs(t), `<rect width="1920" height="1080" fill="#1E1611"/>`, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Bryan});
+Object.assign(CLIPS, {ep5_bryan: {sec: BR.sec, render: (t) => renderE5Bryan(t)}});
