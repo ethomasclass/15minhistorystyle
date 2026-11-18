@@ -1,7 +1,7 @@
 # Gilded Age thumbnail style ("the neon silhouette")
 
 Set with Ep 3 (immigrant woman) and Ep 4 (Boss Tweed). Reusable for the finale. Template: `src/ep4_thumb.mjs` (Playwright, 1280x720).
-Picks: Ep 3 `options/ep3_A_hand.jpg`; Ep 4 `options/ep4_C_teal.jpg`.
+Picks: Ep 3 `options/ep3_A_hand.jpg`; Ep 4 `options/ep4_C_teal.jpg`; Ep 5 `options/ep5_A_low.jpg` (`src/ep5_thumb.mjs`: centered subject on a split furnace/strike background, so the strips sit low across the chest).
 
 ## Recipe
 1. **Base image from Google Flow** (16:9). One subject on the right third, the left 40% left dark and empty for the headline.
