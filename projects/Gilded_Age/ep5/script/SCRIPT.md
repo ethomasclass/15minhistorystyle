@@ -202,7 +202,7 @@ OWEN: [fired up] Bryan's a Nebraska man. He's one of us.
 
 Bryan crisscrossed the country. And his opponent, Republican William McKinley? [amused] His strategy was: stay home. Sit on the porch. Let the voters come to him. And they did, by the trainload, while his campaign raised millions from big business. Some factory owners warned workers that if Bryan won, the factory might close.
 
-By then, Michael was back at the refinery. And at the Kellys' kitchen table, the family split. And this time, the brothers had switched sides.
+By then, Michael was back at the refinery. At the Kellys' kitchen table, the family split. And this time, the brothers had switched sides.
 
 TOMMY: [fired up] Bryan's for the working man! Even Mr. Duffy says so.
 
