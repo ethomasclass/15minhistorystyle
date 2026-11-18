@@ -145,3 +145,65 @@ function renderE5Refinery(t) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Refinery});
 Object.assign(CLIPS, {ep5_refinery: {sec: RFN.sec, render: (t) => renderE5Refinery(t)}});
+
+/* ================= the Kelly kitchen (Ep 4's set, e4KellyRoom): dialogue helpers ================= */
+// speech from word times: words [[start, end], ...] (seconds in the clip): the mouth closes between words, as e4Speak inside each
+function e5bSay(words, t) { const sp = e4Speak(words.map(([a, b]) => [a - 0.02, b + 0.04]), t); const a = words[0][0], b = words[words.length - 1][1];
+  return {...sp, line: t > a - 0.1 && t < b + 0.25, beat: t > a && t < b ? Math.max(0, Math.sin(t * 6.7 + 0.4)) : 0}; }
+// word times from a chapter's words.json (seconds in the chapter), shifted to the clip (clip t = chapter t - off)
+const e5bW = (arr, off) => arr.map(([a, b]) => [+(a - off).toFixed(2), +(b - off).toFixed(2)]);
+// Michael seated at the kitchen table with a mug in both hands; sip: 0..1 lifts the mug to his mouth
+function e5bMichaelMug(an, ty, sip, det, rim, name) {
+  const {F, H} = RM, cx = KF.chair;
+  let mi = sitOn(cast('michael', {x: cx, y: 0, h: H, d: 1, det, rim, an}), F - 0.24 * H, F, 0.18, name + '.seat');
+  const m0 = [KF.table[0] + 60, ty], m1 = E3K.toWorld(mi, 0.13, 0.84), k = ease(sip), mug = [lerp(m0[0], m1[0], k), lerp(m0[1], m1[1] + 14, k)];
+  mi = reach(mi, 'f', mug[0] + 14, mug[1] - 16, name + '.mug'); mi = reach(mi, 'b', mug[0] - 12, mug[1] - 14, name + '.mug2');
+  const chair = `<rect x="${cx - 50}" y="${F - 0.24 * H}" width="100" height="12" fill="#0D0C09"/><rect x="${cx - 46}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${cx + 34}" y="${F - 0.24 * H + 12}" width="10" height="${0.24 * H - 12}" fill="#0D0C09"/><rect x="${cx - 50}" y="${F - 0.24 * H - 220}" width="10" height="220" fill="#0D0C09"/>`;
+  return {fo: mi, chair, mug: e4Mug(mug[0], mug[1])};
+}
+// Ma at the stove, stirring the pot (kitchen right side of the stove); look: turns her head toward the table
+function e5bMaStir(t, det, rim, look = 0, name = 'k5.ma', expr = 'neutral') {
+  const {F, H} = RM, mx = KF.stove + 290, potP = [KF.stove + 120, RM.wallFoot - 280];
+  let ma = cast('mother', {x: mx, y: F, h: H, d: look > 0.5 ? 1 : -1, det, rim, an: {...POSES.stand(t, 0.5), tilt: look > 0.5 ? 4 : -12, expr, blink: (t + 0.6) % 3.8 < 0.12}});
+  ma = e3Stand({...ma, floorY: F}, mx, mx, 0, name);
+  let spoon = '';
+  if (look <= 0.5) { const k = Math.sin(t * 3.1); ma = {...ma, an: {...ma.an, lean: 8}}; ma = reach(ma, 'f', potP[0] + 18 * k, potP[1] - 4 * Math.abs(k), name + '.spoon'); ma = reach(ma, 'b', potP[0] + 46, potP[1] + 4, name + '.pot');
+    spoon = holding(ma, 'f', name + '.spoonH', (gx, gy) => line([[gx, gy], [gx + 10, gy + 40]], '#3A2C1C', 4)); }
+  return {fo: ma, pot: `<path d="M${potP[0] - 10},${RM.wallFoot - 262} l6,-46 l100,0 l6,46 Z" fill="#141817"/>`, spoon};
+}
+
+/* ================= ep5_kitchen_1887 (ch 4, 12 s): "A union?" ================= */
+// The Kellys' kitchen, winter 1887 (Ep 4's set: frost on the glass, the coal low). Michael (coral) at the table with a mug; Tommy
+// (coral, younger, quick) by the window, annoyed: "A union? Mr. Duffy says the Knights are nothing but trouble." Michael, dry, looks
+// up at him: "Mr. Duffy doesn't work at the refinery." and takes a sip; Tommy folds his arms and looks away to the window. Ma at the
+// stove stirring. Synced to ch04_two_kinds_of_unions.words.json from 91.4 s (clip t = chapter t - 91.4).
+const K7 = {sec: 12, off: 91.4};
+K7.tommy = e5bW([[93.42, 93.52], [93.78, 94.2], [94.62, 94.68], [95.0, 95.3], [95.36, 95.52], [95.56, 95.66], [95.68, 95.96], [95.98, 96.1], [96.22, 96.5], [96.52, 96.66], [96.74, 97.14]], K7.off);
+K7.michael = e5bW([[98.2, 98.26], [98.58, 98.9], [98.94, 99.2], [99.28, 99.5], [99.54, 99.6], [99.64, 99.7], [99.72, 100.36]], K7.off);
+function renderE5Kitchen1887(t, o = {}) {
+  const {F, H} = RM, room = e4KellyRoom(t, false), s = [room.back], ty = room.ty;
+  const c = cam2(camAt([[0, 1.2, 960, 612], [5.5, 1.3, 1080, 616], [12, 1.38, 1150, 612]], t));
+  const lod = lodFor(H * c.z), det = lod.det, rimW = {c: '#FFE6C9', a: lod.rimA * 0.7 * room.fl, dx: -0.008, dy: -0.004}, rimC = {c: '#DCE8E6', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005};
+  const ts = e5bSay(K7.tommy, t), ms = e5bSay(K7.michael, t), T0 = K7.tommy[0][0], M0 = K7.michael[0][0], M1 = K7.michael[K7.michael.length - 1][1];
+  // Ma stirring at the stove; she glances over at Michael's answer
+  const ma = e5bMaStir(t, det, rimW, t > M0 + 0.3 && t < M1 + 0.6 ? 1 : 0, 'k7.ma');
+  // Michael: mug in both hands, eyes on the mug; looks up at Tommy for his answer; a sip after it
+  const sip = smooth(M1 + 0.3, M1 + 0.9, t) * (1 - smooth(M1 + 1.9, M1 + 2.5, t));
+  const look = smooth(T0 + 0.6, T0 + 1.0, t);
+  const mm = e5bMichaelMug({tilt: lerp(-12, 8, look) + 3 * ms.beat - 10 * sip + 2 * Math.sin(t * 0.6), expr: 'set', jaw: ms.jaw, blink: (t + 1.4) % 3.6 < 0.12}, ty, sip, det, rimW, 'k7.michael');
+  // Tommy: by the window, quick and annoyed; hands up on "A union?", a finger on "Mr. Duffy says", a flat chop on "nothing but trouble";
+  // then folds his arms through Michael's answer and turns his head to the window
+  const tx = 1395, away = smooth(M1 + 0.4, M1 + 1.0, t), b = ts.beat * 8;
+  let tm = cast('brother', {x: tx, y: F, h: H * 1.12, hat: 'boycap', wear: [], d: -1, det, rim: rimC, an: {...POSES.stand(t, 0.8), tilt: 4 + 5 * ts.beat - 14 * away + (t < T0 ? 2 * Math.sin(t * 1.3) : 0), expr: t > M0 ? 'neutral' : 'worried', jaw: ts.jaw, blink: (t + 0.2) % 3.3 < 0.12}});
+  tm = e3Stand({...tm, floorY: F}, tx, tx, 0, 'k7.tommy');
+  const fK = [[T0 - 0.3, 176, 180], [T0 + 0.1, 112, 44], [T0 + 0.75, 112, 44 + b], [T0 + 1.1, 120, 20], [T0 + 2.0, 118, 16 + b], [T0 + 2.6, 98, 92], [T0 + 2.9, 120, 150], [T0 + 3.3, 150, 168], [M0 - 0.2, 160, 160], [M0 + 0.5, 150, -92]];
+  const bK = [[T0 - 0.3, 184, 190], [T0 + 0.1, 118, 52], [T0 + 0.75, 118, 52], [T0 + 1.1, 182, 188], [M0 - 0.2, 184, 190], [M0 + 0.5, 140, -98]];
+  tm = {...tm, an: {...tm.an, fArm: e4Keys(fK, t), bArm: e4Keys(bK, t), lean: ts.line ? 3 : 0}};
+  const tmOver = t > M0 + 0.5 ? foldedArms(tm.x, tm.y, tm.h, tm.d, tm.fill, tm.tones.tone) : '';
+  s.push(ma.pot, e4Outlined(ma.fo) + ma.spoon, room.scuttle, mm.chair, e4Outlined(mm.fo), mm.mug, e4Outlined(tm) + tmOver, room.front);
+  const world = layerAt(c, 1, s.join(''));
+  const scr = o.quiet ? '' : tag(130, 120, 'THE KELLYS\' KITCHEN · WINTER 1887', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
+  return frame(e4KfDefs(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1887});
+Object.assign(CLIPS, {ep5_kitchen_1887: {sec: K7.sec, render: (t) => renderE5Kitchen1887(t)}});
