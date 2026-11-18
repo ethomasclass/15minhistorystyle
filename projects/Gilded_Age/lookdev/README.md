@@ -760,6 +760,57 @@ Known weak spots: the Homestead hill houses are simple stacked shapes and the tu
 volumetric light; the crowd's shouting is all arms and heads (no faces by rule); there is no sound in these clips; the child in bed
 is a drawn head on a pillow, not the rig.
 
+## Episode 5, the rest of the drawn sets (Nov 18, `ep5_b.js`)
+
+`ep5_b.js`, loaded by `bridge.html` after `ep5.js`; same look and helpers (e5/e4/e3), reusing the Ep 4 Kelly kitchen
+(`e4KellyRoom`), the farm kitchen's sod room (`e5SodRoom`, `e5Bed`), refinery.js's palette and `rfPipe`. 720p clips and contact
+sheets in `review/ep5/`. Every clip keeps its characters, hands at work and place tags inside an 8% safe area (x 154 to 1766,
+y 86 to 994); tags sit at x 172. New helpers: `e5bShoulderSack` (a sack carried on the shoulder, both hands on it), `e5bHeatDef`
+(rising heat shimmer filter), `e5bBreath`, `e5bSay` / `e5bW` (mouths from words.json word times, shifted to the clip),
+`e5bMichaelMug`, `e5bMaStir`, `e5bFront` (a frontal silhouette with arm angles), `e5bBackMan` (a delegate from behind, arms and
+thrown hat), `e5bBanner`, `e5bHelmet`, `e5bCapitol`, `e5bTree`, `e5bBurst` (fireworks), `e5bEar` (an ear of corn).
+
+- **`ep5_refinery`** (ch 2, 14 s). Shot A (0 to 7.8): the boiling floor, three open vats over firebox glow, steam into the roof,
+  heat shimmer; Michael (coral) carries a sack on his shoulder left to right, a man stirs a vat with a paddle, a stoker shovels,
+  two men carry sacks the other way at the back. Tag "THE REFINERY · WILLIAMSBURG, BROOKLYN · 1887" (0.3 to 4.8). Shot B (7.8 to
+  14): the yard by the gate, a grey January morning, light snow; the foreman (ink, bowler) turns (9.6) and points past the gate
+  (10.0 to 13.0) at sixteen men waiting outside the railing (breath in the cold); Michael looks (10.4).
+- **`ep5_kitchen_1887`** (ch 4, 12 s). Ep 4's kitchen in winter. Synced to `ch04_two_kinds_of_unions.words.json` from 91.4 s
+  (clip t = chapter t - 91.4): **Tommy 2.02 to 5.74** ("A union?" hands up, a finger on "Mr. Duffy says", a chop on "nothing but
+  trouble"), **Michael 6.80 to 8.96** (looks up from his mug, dry; a sip at 9.3 to 11.5); Tommy folds his arms and looks to the
+  window; Ma stirs and glances over. Tag "THE KELLYS' KITCHEN · WINTER 1887" (0.2 to 3.8).
+- **`ep5_corn_stove`** (ch 6, 13 s). The sod house at night, snow at the window, the child asleep. Owen (coral), an armful of ears,
+  opens the firebox door (1.2 to 2.0, hinged toward him, warm light floods over him), feeds three ears (3.0, 5.6, 8.2; each flares
+  with sparks about 1.4 s later), shuts it (10.9 to 11.6), warms his hands. Tag "NEAR O'NEILL, NEBRASKA · WINTER 1890" (0.3 to 4.0).
+- **`ep5_coxey`** (ch 8, 15.5 s). Shot A (0 to 6.5): Pennsylvania Avenue, the dome at the end; the column (two rows, cloth banners
+  without lettering) with a white horse led at the head. Tag "WASHINGTON, D.C. · MAY 1, 1894" (0.3 to 4.2). Shot B (6.5 to 15.5):
+  the Capitol steps (treads one walk step deep, a landing); Coxey (ink, bowler, faceless) climbs (6.8 to 9.9) and lifts his speech
+  (10.3); one policeman comes up from the lawn (8.0 to 11.3), one down from the terrace (9.8 to 11.5); they take his arms
+  (11.9 to 12.3) and the three walk back down and off the grass (12.5 on) past the KEEP OFF THE GRASS sign (on screen 6.5 to end).
+- **`ep5_bryan`** (ch 9, 14 s). The Chicago hall in gaslight: gasoliers, bunting swags, flags, packed galleries; delegates from
+  behind. Bryan (frontal faceless silhouette, backlit) speaks with his arms (0.4 to 5.6), spreads them like a cross (6.0 to 6.8,
+  held to 10.6); the camera pushes in to 9.0; **the hall erupts at 9.4** (on their feet, hands up, hats thrown, handkerchiefs in the
+  galleries). Tag "THE DEMOCRATIC CONVENTION · CHICAGO · JULY 1896" (0.3 to 4.0).
+- **`ep5_porch`** (ch 9, 8.5 s). Canton: the house with its deep porch and picket fence; behind, a train rolls in and stops at the
+  depot (4.6, a cloud of steam); eighteen voters walk up the street and gather at the fence, some with small flags; a faceless
+  figure on the porch waves (from 2.4). Tag "CANTON, OHIO · FALL 1896" (0.3 to 4.0).
+- **`ep5_kitchen_1896`** (ch 9, 18.5 s). The kitchen with other people's washing on a line, a washtub and board (Ma took in
+  washing). Synced to `ch09_the_cross_of_gold.words.json` from 65.5 s: **Tommy 1.54 to 4.74** (fist up on "working man!", a point
+  on "Mr. Duffy"), **Michael 5.78 to 11.64** (worried, at the table; Tommy throws his hands out after it), **Ma 13.00 to 16.58**
+  (stops scrubbing at about 12.1, straightens, a hand out toward them, the hand down on "metal"); the brothers drop their eyes.
+  Tag "THE KELLYS' KITCHEN · FALL 1896" (0.2 to 3.8).
+- **`ep5_bridge_1898`** (ch 10, 14 s). Dusk, snow; Michael and Tommy walk the promenade together (Ep 1 walk, planted feet), the
+  cables streaming past, the Manhattan skyline with lights coming on and the river below, six distant fireworks (4.6 to 12.9),
+  the Manhattan tower arriving at the end; Tommy talks with his hands, Michael shakes his head with a smile (7.6). Tag "THE
+  BROOKLYN BRIDGE · NEW YEAR'S DAY, 1898" (0.4 to 4.4).
+
+QA: contact audit (`e4/verify.mjs`): planted feet and drift 0.00 px in every clip, holds 0.00 px, hands 0.00 to 0.4 px except
+the policeman's grip on the stairs (up to 1.6 px for a frame). Text audit: no OUT, OVERLAP or SHORT. Fixes from review: the stoker,
+Owen at the door and Ma at the washboard could not reach (moved closer, door re-hinged); the Coxey marchers and the bridge walkers
+were driven twice their speed (feet slid); the police first stood a tread apart (legs stretched); every camera re-framed for the
+8% safe area. Known weak spots: Bryan and the convention crowd are drawn frontal/back shapes, not the rig; McKinley's wave is a
+raised arm; the horse at the head of the march is led, not ridden; the convention hats in flight read as streaks.
+
 ## Episode 5 doors and explainers (Nov 18)
 
 `ep5_doors.js` (the three doors, the episode's signature graphic) and `ep5_explain.js` (teal explainers), loaded by `bridge.html`

@@ -69,7 +69,7 @@ function e5bVat(x, t, i) { // an open boiling vat (x = centre): iron drum on a b
   return {svg: s.join(''), steam: MAT.smoke(x - 80, top - 10, t + i * 1.7, {col: 'D9DEDA', k: 2.2, n: 9, rise: 210, drift: 50, speed: 5, seed: 640 + i}) + MAT.smoke(x + 90, top - 10, t + i * 2.3 + 1, {col: 'B8C4C4', k: 1.8, n: 7, rise: 230, drift: -40, speed: 6, seed: 650 + i}), top};
 }
 function e5bRefineryA(t) {
-  const {H, G, GB} = RFN, c = cam2(camAt([[0, 1.0, 760, 600], [RFN.cut, 1.08, 1540, 610]], t)), s = [], fr = [];
+  const {H, G, GB} = RFN, c = cam2(camAt([[0, 1.0, 760, 600], [RFN.cut, 1.06, 1760, 610]], t)), s = [], fr = [];
   const lod = lodFor(H * c.z), det = lod.det, rimF = (x) => ({c: '#FFC890', a: lod.rimA * 0.6, dx: 0.008, dy: -0.006});
   s.push(e5bBoilFloor(t, c));
   const vats = [600, 1250, 1900].map((x, i) => e5bVat(x, t, i));
@@ -99,10 +99,10 @@ function e5bRefineryA(t) {
   const floor = `<rect x="-600" y="${GB}" width="3600" height="${G + 120 - GB}" fill="#132423"/>` + MAT.planks(-600, GB, 3600, G + 120 - GB, {base: '#152422', seed: 533, size: 46, vertical: true}) + `<rect x="-600" y="${GB}" width="3600" height="${G + 120 - GB}" fill="url(#matFloorShade)"/>`;
   const world = layerAt(c, 1, s[0] + floor + s.slice(1).join('') + fr.join(''));
   const heatHaze = `<rect width="1920" height="1080" fill="#FFB060" opacity="0.06"/>`;
-  return {world: world + heatHaze, scr: tag(130, 120, 'THE REFINERY · WILLIAMSBURG, BROOKLYN · 1887', smooth(0.3, 0.7, t) * (1 - smooth(4.4, 4.8, t)))};
+  return {world: world + heatHaze, scr: tag(172, 124, 'THE REFINERY · WILLIAMSBURG, BROOKLYN · 1887', smooth(0.3, 0.7, t) * (1 - smooth(4.4, 4.8, t)))};
 }
 function e5bRefineryB(t) {
-  const H = 440, G = 1010, GQ = 890, c = cam2(camAt([[RFN.cut, 1.12, 760, 640], [RFN.point, 1.12, 830, 640], [RFN.drop, 1.0, 1350, 610], [RFN.sec, 1.0, 1400, 610]], t)), s = [];
+  const H = 440, G = 1010, GQ = 890, c = cam2(camAt([[RFN.cut, 1.12, 760, 640], [RFN.point, 1.12, 830, 640], [RFN.drop, 1.0, 1120, 610], [RFN.sec, 1.0, 1150, 610]], t)), s = [];
   // the sky, the refinery's wall and stacks behind (left), the street outside the railing
   s.push(`<rect x="-800" y="-400" width="3800" height="1500" fill="url(#rfbsky)"/>`);
   s.push([[1700, 140, 60], [1900, 60, 70], [2300, 200, 56]].map(([x, y, w]) => `<rect x="${x}" y="${y}" width="${w}" height="${GQ - y}" fill="#5F7472"/>` + MAT.smoke(x + w / 2, y, t + x * 0.01, {col: 'A3BAB2', k: 1.2, n: 6, rise: 160, drift: 120, speed: 6, seed: x})).join(''));
@@ -182,7 +182,7 @@ K7.tommy = e5bW([[93.42, 93.52], [93.78, 94.2], [94.62, 94.68], [95.0, 95.3], [9
 K7.michael = e5bW([[98.2, 98.26], [98.58, 98.9], [98.94, 99.2], [99.28, 99.5], [99.54, 99.6], [99.64, 99.7], [99.72, 100.36]], K7.off);
 function renderE5Kitchen1887(t, o = {}) {
   const {F, H} = RM, room = e4KellyRoom(t, false), s = [room.back], ty = room.ty;
-  const c = cam2(camAt([[0, 1.2, 960, 612], [5.5, 1.3, 1080, 616], [12, 1.38, 1150, 612]], t));
+  const c = cam2(camAt([[0, 1.2, 960, 626], [5.5, 1.3, 1070, 642], [12, 1.36, 1130, 656]], t));
   const lod = lodFor(H * c.z), det = lod.det, rimW = {c: '#FFE6C9', a: lod.rimA * 0.7 * room.fl, dx: -0.008, dy: -0.004}, rimC = {c: '#DCE8E6', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005};
   const ts = e5bSay(K7.tommy, t), ms = e5bSay(K7.michael, t), T0 = K7.tommy[0][0], M0 = K7.michael[0][0], M1 = K7.michael[K7.michael.length - 1][1];
   // Ma stirring at the stove; she glances over at Michael's answer
@@ -202,7 +202,7 @@ function renderE5Kitchen1887(t, o = {}) {
   const tmOver = t > M0 + 0.5 ? foldedArms(tm.x, tm.y, tm.h, tm.d, tm.fill, tm.tones.tone) : '';
   s.push(ma.pot, e4Outlined(ma.fo) + ma.spoon, room.scuttle, mm.chair, e4Outlined(mm.fo), mm.mug, e4Outlined(tm) + tmOver, room.front);
   const world = layerAt(c, 1, s.join(''));
-  const scr = o.quiet ? '' : tag(130, 120, 'THE KELLYS\' KITCHEN · WINTER 1887', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
+  const scr = o.quiet ? '' : tag(172, 124, 'THE KELLYS\' KITCHEN · WINTER 1887', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
   return frame(e4KfDefs(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1887});
@@ -222,7 +222,7 @@ function e5bFire(x, y, w, h, t, k) { const s = [], r = rng(733);
 const e5bEar = (x, y, ang, k = 1) => `<g transform="rotate(${f1(ang)}, ${f1(x)}, ${f1(y)})"><ellipse cx="${f1(x + 22 * k)}" cy="${f1(y)}" rx="${f1(24 * k)}" ry="${f1(7.5 * k)}" fill="#E0B44A" stroke="#0D0C09" stroke-width="2"/>` +
   `<path d="M${f1(x + 4 * k)},${f1(y - 6 * k)} q${f1(16 * k)},${f1(-4 * k)} ${f1(34 * k)},${f1(2 * k)} M${f1(x + 4 * k)},${f1(y + 6 * k)} q${f1(16 * k)},${f1(4 * k)} ${f1(34 * k)},${f1(-2 * k)}" stroke="#B88A34" stroke-width="2" fill="none"/><path d="M${f1(x)},${f1(y)} l${f1(-12 * k)},${f1(-6 * k)} l${f1(2 * k)},${f1(8 * k)} Z" fill="#C8B07A"/></g>`;
 function renderE5CornStove(t, o = {}) {
-  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.42, 960, 690], [13, 1.58, 930, 705]], t));
+  const {H, F, top} = FK, c = cam2(o.cam || camAt([[0, 1.4, 965, 690], [13, 1.44, 950, 705]], t));
   const lod = lodFor(H * c.z), det = lod.det, g = e5Gust(t), room = e5SodRoom(t), s = [room.back];
   const [s0, s1] = FK.stove, sy = FK.wallFoot - 210, lampX = 1255, fl = e5Flick(t) * (1 - 0.12 * g * Math.max(0, Math.sin(t * 7.1)));
   const door = smooth(CS.open[0], CS.open[1], t) * (1 - smooth(CS.close[0], CS.close[1], t)); // 0 shut .. 1 open
@@ -275,7 +275,7 @@ function renderE5CornStove(t, o = {}) {
   const held = earIn != null && earIn > 0 ? holding(ow, 'f', 'cs.owen.ear', (gx, gy, ang) => `<g opacity="${f1(earIn)}">${e5bEar(gx - 6, gy, 180 + 10, 1)}</g>`) : '';
   s.push(e5Bed(t), e4Outlined(ow), armful, held, glowC(dx0 + dw / 2, dy0 + dh / 2, 420, 0.35 * heat, 'mswarm'), room.front);
   const world = layerAt(c, 1, s.join(''));
-  const scr = o.quiet ? '' : tag(130, 120, 'NEAR O\'NEILL, NEBRASKA · WINTER 1890', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  const scr = o.quiet ? '' : tag(172, 124, 'NEAR O\'NEILL, NEBRASKA · WINTER 1890', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
   return frame(e5Defs(t, `<clipPath id="fkroom"><rect x="${FK.x0}" y="0" width="${FK.x1 - FK.x0}" height="1200"/></clipPath><clipPath id="fkwin"><rect x="${FK.win[0]}" y="430" width="${FK.win[1] - FK.win[0]}" height="130"/></clipPath><radialGradient id="kfcold"><stop offset="0" stop-color="#CFE0DE" stop-opacity="0.35"/><stop offset="1" stop-color="#CFE0DE" stop-opacity="0"/></radialGradient>`), `<rect width="1920" height="1080" fill="#070605"/>`, world, scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5CornStove});
@@ -332,10 +332,10 @@ function e5bCoxeyA(t) {
   lead = reach(lead, 'b', horse.mouth[0] - 6, horse.mouth[1] + 8, 'cx.lead.bridle');
   w.push(farRow.join(''), `<g>${horse.svg}</g>`, nearRow.join(''), fig(lead) + line([[horse.mouth[0], horse.mouth[1]], [E3K.hand(lead, 'b').x, E3K.hand(lead, 'b').y]], '#3A2C1C', 2));
   s.push(layerAt(c, 1, w.join('')));
-  return {world: s.join(''), scr: tag(130, 120, 'WASHINGTON, D.C. · MAY 1, 1894', smooth(0.3, 0.7, t) * (1 - smooth(3.8, 4.2, t)))};
+  return {world: s.join(''), scr: tag(172, 124, 'WASHINGTON, D.C. · MAY 1, 1894', smooth(0.3, 0.7, t) * (1 - smooth(3.8, 4.2, t)))};
 }
 function e5bCoxeyB(t) {
-  const {H, G, TX0, R, rise} = CX, c = cam2(camAt([[CX.cut, 1.08, 1120, 680], [CX.down, 1.14, 1120, 690], [CX.sec, 1.14, 960, 690]], t)), s = [];
+  const {H, G, TX0, R, rise} = CX, c = cam2(camAt([[CX.cut, 0.95, 1250, 690], [CX.down, 1.0, 1230, 690], [CX.sec, 1.02, 1060, 690]], t)), s = [];
   s.push(`<rect x="-2000" y="-600" width="6000" height="2200" fill="url(#cxsky)"/>`);
   // the Capitol's west front: a rusticated terrace wall and the columns above, the dome cut off at the top
   const top = G - 6 * rise, wx = TX0 + 6 * R;
@@ -364,10 +364,10 @@ function e5bCoxeyB(t) {
     cox = leg(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'cx.cox');
     const up = smooth(CX.speak, CX.speak + 0.5, t) * (1 - smooth(CX.grip[0] - 0.4, CX.grip[0], t)); if (up > 0) cox = {...cox, an: {...cox.an, fArm: [lerp(176, 40, up), lerp(180, 20, up)], tilt: 6 * up}};
     copN = leg(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'cx.copN');
-    copF = leg({...COP, h: H}, fin.f + 4.5 * R, -1, 4.5 * R, CX.copF[0], CX.copF[1], 'cx.copF');
+    copF = leg({...COP, h: H}, fin.f + 2.5 * R, -1, 2.5 * R, CX.copF[0], CX.copF[1], 'cx.copF');
   } else { // the walk down starts from where each one settled (their stance at CX.down)
     const n0 = E3LOG.length, at = (b, x0, d, S, t0, t1, nm) => leg(b, x0, d, S, t0, t1, nm, CX.down).x;
-    const xs = {cox: at(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'q'), n: at(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'q'), f: at({...COP, h: H}, fin.f + 4.5 * R, -1, 4.5 * R, CX.copF[0], CX.copF[1], 'q')}; E3LOG.length = n0;
+    const xs = {cox: at(COX, fin.cox - 6.5 * R, 1, 6.5 * R, CX.climb[0], CX.climb[1], 'q'), n: at(COP, fin.n - 6.5 * R, 1, 6.5 * R, CX.copN[0], CX.copN[1], 'q'), f: at({...COP, h: H}, fin.f + 2.5 * R, -1, 2.5 * R, CX.copF[0], CX.copF[1], 'q')}; E3LOG.length = n0;
     cox = walkOn(COX, xs.cox + 0.5 * R, -1, sD, 'cx.cox.down'); copN = walkOn(COP, xs.n + 0.5 * R, -1, sD, 'cx.copN.down'); copF = walkOn({...COP, h: H}, xs.f + 0.5 * R, -1, sD + 0.26 * R * smooth(CX.down, CX.down + 1.2, t), 'cx.copF.down'); } // he closes up a little on the stairs
   // the grip: each takes an arm above the elbow
   const g = smooth(CX.grip[0], CX.grip[1], t);
@@ -377,7 +377,7 @@ function e5bCoxeyB(t) {
   const paper = t > CX.speak - 0.2 && t < CX.down ? holding(cox, 'f', 'cx.speech', (gx, gy) => `<rect x="${f1(gx - 4)}" y="${f1(gy - 30)}" width="22" height="30" fill="#EFE7D2" stroke="#0D0C09" stroke-width="2" transform="rotate(-10, ${f1(gx)}, ${f1(gy)})"/>`) : '';
   const w = [st.join(''), fig(copF) + e5bHelmet(copF), fig(cox), paper, fig(copN) + e5bHelmet(copN)];
   // the sign in the foreground, on a stake in the grass
-  const sx = 430, sy = 1010;
+  const sx = 520, sy = 1010;
   w.push(`<rect x="${sx - 4}" y="${sy - 70}" width="8" height="110" fill="#3A2C1C"/><rect x="${sx - 92}" y="${sy - 134}" width="184" height="74" fill="#F1ECDD" stroke="#0D0C09" stroke-width="4"/>` +
     `<text x="${sx}" y="${sy - 106}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">KEEP OFF</text><text x="${sx}" y="${sy - 72}" font-family="Mono" font-size="22" text-anchor="middle" fill="#0D0C09">THE GRASS</text>` +
     [...Array(18).keys()].map((k) => line([[sx - 140 + k * 16, sy + 44], [sx - 136 + k * 16 + 4 * Math.sin(t * 2 + k), sy + 26]], '#55704E', 3)).join(''));
@@ -453,7 +453,7 @@ function renderE5Bryan(t) {
     if (row < 6) rows.push(`<rect x="-400" y="${y + 20}" width="2720" height="40" fill="#FFC890" opacity="0.04"/>`); }
   s.push(rows.join(''));
   const world = layerAt(c, 1, s.join(''));
-  const scr = tag(130, 120, 'THE DEMOCRATIC CONVENTION · CHICAGO · JULY 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  const scr = tag(172, 124, 'THE DEMOCRATIC CONVENTION · CHICAGO · JULY 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
   return frame(e5Defs(t), `<rect width="1920" height="1080" fill="#1E1611"/>`, world, scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Bryan});
@@ -503,7 +503,7 @@ function renderE5Porch(t) {
     crowd.push({near, svg: fig(fo) + (k % 4 === 1 && tr.state !== 'walk' ? holding(fo, 'f', 'pc.flag' + k, (gx, gy) => line([[gx, gy + 6], [gx + 4, gy - 50]], '#2A1E12', 3) + `<path d="M${f1(gx + 4)},${f1(gy - 50)} l28,4 l-2,16 l-26,-4 Z" fill="#9A3B34"/><rect x="${f1(gx + 4)}" y="${f1(gy - 47)}" width="10" height="8" fill="#3E5068"/>`) : '')}); }
   w.push(crowd.filter((q) => !q.near).map((q) => q.svg).join(''), crowd.filter((q) => q.near).map((q) => q.svg).join(''));
   s.push(layerAt(c, 1, w.join('')));
-  const scr = tag(130, 120, 'CANTON, OHIO · FALL 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  const scr = tag(172, 124, 'CANTON, OHIO · FALL 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
   return frame(e5Defs(t, grad('pcsky', [['0', '#B9C4C2'], ['1', '#E9E2CF']])), `<rect width="1920" height="1080" fill="#D9D6C8"/>`, s.join(''), scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Porch});
@@ -529,7 +529,7 @@ function e5bWashLine(t) { // a line across the room with other people's washing 
 }
 function renderE5Kitchen1896(t, o = {}) {
   const {F, H} = RM, room = e4KellyRoom(t, false), s = [room.back], ty = room.ty;
-  const c = cam2(camAt([[0, 1.2, 960, 612], [11.8, 1.3, 1040, 616], [13.2, 1.26, 960, 612], [K9.sec, 1.34, 940, 612]], t));
+  const c = cam2(camAt([[0, 1.2, 960, 626], [11.8, 1.3, 1040, 642], [13.2, 1.26, 960, 634], [K9.sec, 1.32, 940, 648]], t));
   const lod = lodFor(H * c.z), det = lod.det, rimW = {c: '#FFE6C9', a: lod.rimA * 0.7 * room.fl, dx: -0.008, dy: -0.004}, rimC = {c: '#DCE8E6', a: lod.rimA * 0.6, dx: 0.008, dy: -0.005};
   const ts = e5bSay(K9.tommy, t), ms = e5bSay(K9.michael, t), as = e5bSay(K9.ma, t);
   const T0 = K9.tommy[0][0], M0 = K9.michael[0][0], M1 = K9.michael[K9.michael.length - 1][1], A0 = K9.ma[0][0], A1 = K9.ma[K9.ma.length - 1][1];
@@ -563,7 +563,7 @@ function renderE5Kitchen1896(t, o = {}) {
   tm = {...tm, an: {...tm.an, fArm: e4Keys(fK, t), bArm: e4Keys(bK, t), lean: ts.line ? 4 : 0}};
   s.push(room.scuttle, tub, e4Outlined(ma), mm.chair, e4Outlined(mm.fo), mm.mug, e4Outlined(tm), room.front);
   const world = layerAt(c, 1, s.join(''));
-  const scr = o.quiet ? '' : tag(130, 120, 'THE KELLYS\' KITCHEN · FALL 1896', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
+  const scr = o.quiet ? '' : tag(172, 124, 'THE KELLYS\' KITCHEN · FALL 1896', smooth(0.2, 0.5, t) * (1 - smooth(3.4, 3.8, t)));
   return frame(e4KfDefs(t), `<rect width="1920" height="1080" fill="#060A0A"/>`, world, scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Kitchen1896});
@@ -616,7 +616,7 @@ function renderE5Bridge(t) {
   if (gest > 0) { const w = walkAn(walkPhase(s, tm.h)); tm = {...tm, an: {...tm.an, bArm: [lerp(w.bArm[0], 120, gest), lerp(w.bArm[1], 50 + 20 * tg.beat, gest)]}}; }
   L.push(layerAt(c, 1, e4Outlined(mi) + e4Outlined(tm) + `<rect x="-800" y="${G + 26}" width="4200" height="8" fill="#0D1114"/>` + [...Array(80).keys()].map((k) => `<rect x="${-780 + k * 52}" y="${G + 26}" width="5" height="40" fill="#0D1114"/>`).join('')));
   L.push(e4Snow(t, c, {n: 140, size: 2.6, speed: 60, op: 0.75, par: 0.5}));
-  const scr = tag(130, 120, 'THE BROOKLYN BRIDGE · NEW YEAR\'S DAY, 1898', smooth(0.4, 0.8, t) * (1 - smooth(4.0, 4.4, t)));
+  const scr = tag(172, 124, 'THE BROOKLYN BRIDGE · NEW YEAR\'S DAY, 1898', smooth(0.4, 0.8, t) * (1 - smooth(4.0, 4.4, t)));
   return frame(e5Defs(t, grad('bjsky', [['0', '#1C2A44'], ['0.35', '#4A4A66'], ['0.55', '#A0685A'], ['0.68', '#E09A60'], ['1', '#E8A060']])), '', L.join(''), scr, t);
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Bridge});
