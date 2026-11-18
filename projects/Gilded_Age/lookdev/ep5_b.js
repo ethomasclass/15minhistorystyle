@@ -454,3 +454,53 @@ function renderE5Bryan(t) {
 }
 if (typeof window !== 'undefined') Object.assign(window, {renderE5Bryan});
 Object.assign(CLIPS, {ep5_bryan: {sec: BR.sec, render: (t) => renderE5Bryan(t)}});
+
+/* ================= ep5_porch (ch 9, 8.5 s): McKinley's front porch, Canton, Ohio, fall 1896 ================= */
+// A frame house with a deep front porch behind a picket fence; behind the street the depot, where a train pulls in and stops in a
+// cloud of steam. Voters (ink) who came by the trainload walk up the street toward the porch and gather at the fence; on the porch a
+// faceless figure in a frock coat (McKinley, no features) waves to them. Slow push toward the porch.
+const PC = {sec: 8.5, H: 300, G: 975, porch: 880, trainStop: 4.6};
+function renderE5Porch(t) {
+  const {H, G} = PC, c = cam2(camAt([[0, 1.0, 900, 600], [PC.sec, 1.12, 1060, 640]], t)), s = [];
+  s.push(`<rect x="-800" y="-600" width="3600" height="2000" fill="url(#pcsky)"/>`);
+  // far: the depot and the train (parallax 0.55): engine and four cars rolling in from the left, slowing to a stop; steam
+  const far = [], u = clamp01(t / PC.trainStop), tx = lerp(-900, 520, 1 - (1 - u) * (1 - u)), gy = 600, moving = u < 1;
+  for (let k = 0; k < 10; k++) far.push(e5bTree(-700 + k * 330, gy + 40, 300, k % 2 ? '#9C8A5E' : '#8A7A52', 780 + k));
+  far.push(`<path d="M-1500,${gy + 10} L3500,${gy + 10} L3500,${gy + 200} L-1500,${gy + 200} Z" fill="#9A9474"/>`);
+  far.push(`<rect x="-1500" y="${gy}" width="5000" height="10" fill="#4A4A42"/><rect x="380" y="${gy - 120}" width="420" height="110" fill="#6E5A48"/><path d="M350,${gy - 120} L830,${gy - 120} L800,${gy - 170} L380,${gy - 170} Z" fill="#4A3A2E"/><rect x="330" y="${gy - 70}" width="520" height="8" fill="#3A2E24"/>` + [0, 1, 2, 3].map((k) => `<rect x="${410 + k * 100}" y="${gy - 104}" width="40" height="56" fill="#E6CF9A" opacity="0.6"/>`).join(''));
+  for (let k = 0; k < 4; k++) { const x = tx - 260 - k * 230; far.push(`<rect x="${x}" y="${gy - 92}" width="214" height="78" rx="6" fill="#2E2A24"/><rect x="${x - 4}" y="${gy - 98}" width="222" height="10" rx="4" fill="#1E1B17"/>` + [0, 1, 2, 3, 4].map((w) => `<rect x="${x + 16 + w * 40}" y="${gy - 80}" width="24" height="22" fill="#D9C48E" opacity="0.55"/>`).join('') + [30, 184].map((wx) => `<circle cx="${x + wx}" cy="${gy - 10}" r="12" fill="#1A1814"/>`).join('')); }
+  const wr = moving ? t * 6 * (1 - u) : 0;
+  far.push(`<rect x="${tx - 230}" y="${gy - 110}" width="170" height="80" fill="#1A1814"/><rect x="${tx - 250}" y="${gy - 130}" width="80" height="100" fill="#1A1814"/><rect x="${tx - 70}" y="${gy - 140}" width="22" height="50" fill="#1A1814"/><path d="M${tx - 80},${gy - 150} l42,0 l-8,14 l-26,0 Z" fill="#1A1814"/><path d="M${tx - 50},${gy - 30} l40,30 l-50,0 Z" fill="#1A1814"/>` +
+    [[-200, 26], [-130, 26], [-80, 16]].map(([wx, rr]) => `<circle cx="${tx + wx}" cy="${gy - rr + 4}" r="${rr}" fill="#1A1814"/><line x1="${tx + wx}" y1="${gy - rr + 4}" x2="${f1(tx + wx + rr * Math.cos(wr))}" y2="${f1(gy - rr + 4 + rr * Math.sin(wr))}" stroke="#4A4438" stroke-width="3"/>`).join(''));
+  far.push(MAT.smoke(tx - 59, gy - 150, t, {col: 'D9DEDA', k: 1.6, n: 9, rise: 220, drift: moving ? -260 : 60, speed: 4, seed: 761}) + (t > PC.trainStop - 0.6 ? MAT.smoke(tx - 120, gy - 20, t, {col: 'E8EEEE', k: 1.8 * smooth(PC.trainStop - 0.6, PC.trainStop + 0.4, t), n: 6, rise: 90, drift: 140, speed: 3, seed: 763}) : ''));
+  s.push(layerAt(c, 0.55, far.join('')));
+  // the house: clapboard, two storeys, gable, the porch with columns, rail and steps
+  const hx0 = 1180, hx1 = 1860, P = PC.porch, w = [];
+  w.push(`<rect x="-800" y="${G - 20}" width="3600" height="400" fill="#8C8F6A"/><rect x="-800" y="${G - 40}" width="3600" height="30" fill="#A6A18A"/>`); // the street, the lawn
+  w.push(`<rect x="${hx0}" y="380" width="${hx1 - hx0}" height="${P - 380}" fill="#D8D0BC"/>` + [...Array(18).keys()].map((k) => `<rect x="${hx0}" y="${390 + k * 27}" width="${hx1 - hx0}" height="2" fill="#B5AC96"/>`).join('') +
+    `<path d="M${hx0 - 30},390 L${(hx0 + hx1) / 2},220 L${hx1 + 30},390 Z" fill="#4E4436"/>` + [[1260, 430], [1460, 430], [1660, 430], [1300, 640], [1700, 640]].map(([x, y]) => `<rect x="${x}" y="${y}" width="80" height="130" fill="#2E3438"/><rect x="${x - 8}" y="${y - 10}" width="96" height="10" fill="#F2EDE0"/><rect x="${x + 38}" y="${y}" width="4" height="130" fill="#F2EDE0"/>`).join('') +
+    `<rect x="1470" y="660" width="80" height="${P - 660}" fill="#3A2C22"/>`);
+  w.push(`<rect x="${hx0 - 60}" y="580" width="${hx1 - hx0 + 120}" height="22" fill="#4E4436"/><rect x="${hx0 - 60}" y="${P}" width="${hx1 - hx0 + 120}" height="18" fill="#BDB49C"/><rect x="${hx0 - 60}" y="${P + 18}" width="${hx1 - hx0 + 120}" height="${G - P - 18}" fill="#5A5040"/>` +
+    [hx0 - 50, hx0 + 140, hx0 + 330, hx0 + 520, hx1 + 40].map((x) => `<rect x="${x}" y="600" width="18" height="${P - 600}" fill="#F2EDE0"/>`).join('') + `<rect x="${hx0 - 60}" y="${P - 70}" width="${hx1 - hx0 + 120}" height="8" fill="#F2EDE0"/>` + [...Array(40).keys()].map((k) => `<rect x="${hx0 - 50 + k * 18}" y="${P - 62}" width="5" height="62" fill="#F2EDE0"/>`).join(''));
+  // the steps down from the porch (left end) and a path to the gate in the picket fence
+  for (let k = 0; k < 3; k++) w.push(`<rect x="${hx0 - 60 - (k + 1) * 34}" y="${P + k * 32}" width="${(k + 1) * 34 + 30}" height="${G - P - k * 32}" fill="#BDB49C"/>`);
+  // ---- McKinley on the porch: hatless, frock coat, faceless; waves ----
+  const wv = smooth(2.4, 2.9, t), mk0 = e5Standing({kind: 'man', hat: 'none', coat: 'frock', h: H * 1.02, d: -1, x: 1250, fill: '#0D0C09', det: 0, tones: {tone: '#25231D', lite: '#3A3730'}, rim: {c: '#FFF3D6', a: 0.5, dx: -0.008, dy: -0.006}}, 1250, P, t, 0.2, 'pc.mck', {tilt: 4});
+  const mk = {...mk0, an: {...mk0.an, fArm: [lerp(176, 48, wv), lerp(180, 14 + 26 * Math.sin(t * 5), wv)]}};
+  w.push(fig(mk));
+  // the picket fence along the lawn
+  w.push(`<rect x="300" y="${G - 70}" width="${hx0 - 120 - 300}" height="6" fill="#EDE7D8"/>` + [...Array(Math.floor((hx0 - 120 - 300) / 20)).keys()].map((k) => `<path d="M${304 + k * 20},${G - 30} l0,-56 l5,-8 l5,8 l0,56 Z" fill="#EDE7D8"/>`).join(''));
+  // the crowd: they walk up the street from the left and gather along the fence, some with small flags; a few already there
+  const crowd = [], r = rng(771), hats = ['bowler', 'cap', 'top', 'bowler', 'cap', 'none'], coats = ['sack', 'frock', 'jacket', 'sack'];
+  for (let k = 0; k < 18; k++) { const stop = 1080 - k * 52 + (r() - 0.5) * 16, start = stop - 700 - r() * 500, t0 = r() * 0.6, t1 = 3.4 + k * 0.22 + r() * 0.8, hh = H * (0.92 + 0.12 * r()), near = k % 2;
+    const base = {kind: k % 7 === 3 ? 'woman' : 'man', hat: k % 7 === 3 ? 'lady' : hats[k % 6], coat: k % 7 === 3 ? 'frock' : coats[k % 4], h: hh * (near ? 1.04 : 0.94), fill: near ? '#0D0C09' : '#2E2A24', det: 0, tones: near ? {tone: '#25231D', lite: '#3A3730'} : {tone: '#3A3530', lite: '#4A443C'}, rim: {c: '#FFF3D6', a: 0.35, dx: 0.008, dy: -0.006}};
+    const tr = e4Track(base, {x: start, d: 1, G: near ? G + 6 : G - 14, ph: r(), walks: [{t0, t1, to: stop, dAfter: 1, a: 0.15}]}, t, 'pc.v' + k);
+    let fo = tr.fo; if (k % 4 === 1 && tr.state !== 'walk') fo = {...fo, an: {...fo.an, fArm: [40, 20 + 10 * Math.sin(t * 4 + k)], tilt: 10}};
+    crowd.push({near, svg: fig(fo) + (k % 4 === 1 && tr.state !== 'walk' ? holding(fo, 'f', 'pc.flag' + k, (gx, gy) => line([[gx, gy + 6], [gx + 4, gy - 50]], '#2A1E12', 3) + `<path d="M${f1(gx + 4)},${f1(gy - 50)} l28,4 l-2,16 l-26,-4 Z" fill="#9A3B34"/><rect x="${f1(gx + 4)}" y="${f1(gy - 47)}" width="10" height="8" fill="#3E5068"/>`) : '')}); }
+  w.push(crowd.filter((q) => !q.near).map((q) => q.svg).join(''), crowd.filter((q) => q.near).map((q) => q.svg).join(''));
+  s.push(layerAt(c, 1, w.join('')));
+  const scr = tag(130, 120, 'CANTON, OHIO · FALL 1896', smooth(0.3, 0.7, t) * (1 - smooth(3.6, 4.0, t)));
+  return frame(e5Defs(t, grad('pcsky', [['0', '#B9C4C2'], ['1', '#E9E2CF']])), `<rect width="1920" height="1080" fill="#D9D6C8"/>`, s.join(''), scr, t);
+}
+if (typeof window !== 'undefined') Object.assign(window, {renderE5Porch});
+Object.assign(CLIPS, {ep5_porch: {sec: PC.sec, render: (t) => renderE5Porch(t)}});
