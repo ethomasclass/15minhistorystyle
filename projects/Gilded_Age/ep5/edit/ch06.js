@@ -6,8 +6,7 @@
 // closes (ep5_door2_close: the slam on "closed"); the card "The Money Problem" on "the money problem".
 //
 // Shared helpers for chapters 6 to 10 (this file loads first of the five): q-prefixed so they never clash with chapters 1 to 5.
-// The maps (lookdev/ep5_map.js) are loaded here, right after this file, so edit.html stays untouched.
-document.write('<script src="../../lookdev/ep5_map.js"><\/script>');
+// The maps (lookdev/ep5_map.js: ep5_map_owen, ep5_map_coxey, ep5_map_1896) are loaded by edit.html.
 /** The desk with a slow push, and a body on it. */
 const qDesk = (T, a, b, body, z = 0.04, ox = 960, oy = 540) => `<div style="position:absolute;inset:0;transform:scale(${(1 + z * ease(clamp01((T - a) / Math.max(0.1, b - a)))).toFixed(4)});transform-origin:${ox}px ${oy}px">${desk()}${body}</div>`;
 /** An archival print shot: the print on the desk from a to b, its source tag; `p` = printCard options (x, y, w, ar, rot). */

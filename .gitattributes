@@ -27,4 +27,5 @@ projects/Gilded_Age/ep2/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Gilded_Age/ep3/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Gilded_Age/ep3/edit/review/ep3_full_720p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Gilded_Age/ep4/edit/review/ep4_full_720p.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Gilded_Age/ep5/edit/review/ep5_full_720p.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Gilded_Age/ep4/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text

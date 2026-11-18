@@ -8,7 +8,7 @@ the cuts follow the words. Sources: `../script/SCRIPT.md` (draft 9, as voiced), 
 
 | File | What it does |
 |---|---|
-| `edit.html` | Loads the look-dev scripts (Ep 1 to 5: `ep5.js`, `ep5_doors.js`, `ep5_explain.js`, `ep5_b.js`), `edit.js`, `carry.js`, `cards.js`, `late.js`, `ch01.js` to `ch10.js` (a missing one is skipped), `title.js`, `brand.js`. Its title-safe pass nudges `.tx` text into the **8% safe area** (x 154 to 1766, y 86 to 994) |
+| `edit.html` | Loads the look-dev scripts (Ep 1 to 5: `ep5.js`, `ep5_doors.js`, `ep5_explain.js`, `ep5_b.js`, `ep5_map.js`), `edit.js`, `carry.js`, `cards.js`, `late.js`, `ch01.js` to `ch10.js` (a missing one is skipped), `title.js`, `brand.js`. Its title-safe pass nudges `.tx` text into the **8% safe area** (x 154 to 1766, y 86 to 994) |
 | `edit.js` | As Ep 4; `LIVE` (30 fps shots) also covers `renderE5...` (drawn sets), `renderDoors...` / `renderDoorClose` and anything wrapped in `e5Live(...)`; the `renderX5...` explainers, desk, prints and text move on 12 drawings a second |
 | `carry.js` | Only initialises `window.HOLD` / `window.CARRY`: each chapter file sets its own entry |
 | `cards.js` | `batonCard` (the next chapter's title on a torn orange strip, slammed in on its spoken words, held `CARD_HOLD` = 2.6 s; chunk_snap at the same time), `printCard` (an archival print with its source and date), `vocab` |
