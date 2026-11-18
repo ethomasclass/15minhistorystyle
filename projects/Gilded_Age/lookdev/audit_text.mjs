@@ -1,6 +1,6 @@
 // Text audit for lookdev clips (adapted from ep2/edit/audit_text.mjs):  node audit_text.mjs <clip> [step=0.2]
 // Samples the clip, finds every visible text element (effective opacity > 0.3), and reports:
-//   OUT      any time a text box leaves the title-safe area (96 px left/right, 54 px top/bottom of 1920 x 1080)
+//   OUT      any time a text box leaves the title-safe area (96 px left/right, 54 px top/bottom of 1920 x 1080; or a margin given as the third argument)
 //   OVERLAP  any two different visible texts whose boxes overlap by more than 4 px (first time seen)
 //   SHORT    texts on screen less than 2.5 s (unless still on screen at the end of the clip)
 //   HOLD     how long the final frame's full set of texts has been on screen unchanged
@@ -9,7 +9,10 @@ import {createRequire} from 'node:module';
 const {chromium} = createRequire(import.meta.url)('playwright');
 import path from 'node:path'; import {fileURLToPath} from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
-const [clip, stepArg] = process.argv.slice(2), step = Number(stepArg || 0.2);
+const [clip, stepArg, marginArg] = process.argv.slice(2), step = Number(stepArg || 0.2);
+// optional third argument: a safe margin as a fraction of the frame (e.g. 0.08 = 154 px left/right, 86 px top/bottom); OUT then
+// counts the time each text spends outside it and reports only texts outside for more than 0.5 s
+const MG = marginArg ? Number(marginArg) : 0, MX = MG ? 1920 * MG : 96, MY = MG ? 1080 * MG : 54;
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 1920, height: 1080}});
 await page.goto('file://' + path.join(here, 'bridge.html'));
@@ -38,8 +41,10 @@ for (let T = 0; T < dur - 1e-6; T += step) {
   for (const f of found) {
     const it = items[f.t] || (items[f.t] = {text: f.t, frames: 0, first: T, last: T, out: []});
     it.frames++; it.last = T;
-    const bad = f.x0 < 96 || f.x1 > 1824 || f.y0 < 54 || f.y1 > 1026;
-    if (bad && it.out.length < 3) it.out.push(`${T.toFixed(1)}s [${f.x0.toFixed(0)},${f.y0.toFixed(0)},${f.x1.toFixed(0)},${f.y1.toFixed(0)}]`);
+    const bad = f.x0 < MX || f.x1 > 1920 - MX || f.y0 < MY || f.y1 > 1080 - MY;
+    const seen = f.x1 > 0 && f.x0 < 1920 && f.y1 > 0 && f.y0 < 1080; // wholly off frame is not cut, just not there
+    if (bad && seen) it.outT = (it.outT || 0) + step;
+    if (bad && seen && it.out.length < 3) it.out.push(`${T.toFixed(1)}s [${f.x0.toFixed(0)},${f.y0.toFixed(0)},${f.x1.toFixed(0)},${f.y1.toFixed(0)}]`);
   }
   sets.push([T, found.map((f) => f.t).sort().join('|')]);
 }
@@ -49,7 +54,7 @@ let hold = 0; for (let i = sets.length - 1; i >= 0 && sets[i][1] === sets[sets.l
 const report = [`${clip}: ${dur} s, ${Object.keys(items).length} texts, final set held ${hold.toFixed(1)} s`];
 for (const it of Object.values(items)) {
   const secs = it.frames * step, atEnd = it.last >= lastT - 1e-6;
-  if (it.out.length) report.push(`  OUT      "${it.text}" ${it.out.join(' ')}`);
+  if (it.out.length && (!MG || it.outT > 0.5)) report.push(`  OUT      "${it.text}" ${it.out.join(' ')}`);
   if (secs < 2.5 && !atEnd) report.push(`  SHORT    "${it.text}" ${secs.toFixed(1)} s (${it.first.toFixed(1)} to ${it.last.toFixed(1)})`);
 }
 for (const [k, T] of Object.entries(overlaps)) report.push(`  OVERLAP  ${k} (from ${T} s)`);

@@ -136,7 +136,10 @@ function drBeyond(kind, t) {
     for (let k = 0; k < 6; k++) s.push(`<rect x="${cx - 150 - k * 8}" y="${g + k * 9}" width="${300 + k * 16}" height="9" fill="${sil}" opacity="${f1(0.7 + k * 0.04)}"/>`);
     s.push(`<rect x="-10" y="${g + 54}" width="${W + 20}" height="${H}" fill="${sil}" opacity="0.92"/>`);
   } else {
-    s.push(`<rect x="-10" y="${H * 0.75}" width="${W + 20}" height="${H}" fill="#9FF5E6" opacity="0.5"/>`);
+    // the Progressive Era: open, bright morning light, a path running away into it
+    s.push(`<rect x="-10" y="-10" width="${W + 20}" height="${H + 20}" fill="#F4FFFC"/><circle cx="${W * 0.55}" cy="${H * 0.55}" r="${f1(170 + 12 * Math.sin(t * 1.5))}" fill="#FFFFFF" filter="url(#drb2)"/>`);
+    s.push(`<path d="M${W * 0.45},${H * 0.62} L${W * 0.58},${H * 0.62} L${W + 40},${H + 10} L-60,${H + 10} Z" fill="#9FF5E6" opacity="0.55"/>`);
+    for (let k = 0; k < 7; k++) { const a = -1.2 + k * 0.4; s.push(`<line x1="${W * 0.55}" y1="${H * 0.55}" x2="${f1(W * 0.55 + Math.cos(a) * 600)}" y2="${f1(H * 0.55 + Math.sin(a) * 600)}" stroke="#2FE0C4" stroke-width="10" opacity="0.18"/>`); }
   }
   return s.join('');
 }
@@ -149,7 +152,7 @@ function drDoor(d, st, t, F) {
   const glow = st.glow || 0, light = st.light || 0, leak = st.leak || 0, id = `dr${d.seed}`;
   const back = [], front = [];
   // a halo on the wall when lit
-  const hk = Math.max(glow * 0.8, light, leak * 0.5);
+  const hk = Math.max(glow * 0.8, light, leak * 0.5) * (d.kind === 'prog' ? 1.6 : 1);
   if (hk > 0.01) back.push(`<ellipse cx="${d.x}" cy="${FY - H * 0.5}" rx="${W * 1.25}" ry="${H * 0.78}" fill="url(#drhalo)" opacity="${f1(hk * 0.85)}"/>`);
   // the frame (architrave, lintel, cornice)
   const fw = 28;
@@ -192,8 +195,8 @@ function drDoor(d, st, t, F) {
   if (st.open > 0.01 && light > 0.01) L.push(`<line x1="${f1(Q(1, 0)[0])}" y1="${f1(Q(1, 0)[1])}" x2="${f1(Q(1, 1)[0])}" y2="${f1(Q(1, 1)[1])}" stroke="#E8FFFA" stroke-width="4" opacity="${f1(light)}"/>`);
   front.push(L.join(''));
   // the label on torn tape above the lintel
-  const lw = d.label.length * 44 * 0.66 + 22;
-  front.push(tapeS(d.x - lw / 2, top - fw - 104, d.label, 44, -2, 1, d.seed + 20));
+  const lw = d.label.length * 52 * 0.66 + 26;
+  front.push(tapeS(d.x - lw / 2, top - fw - 110, d.label, 52, -2, 1, d.seed + 20));
   // the stamp
   if (st.stamp > 0.001) front.push(drStamp(d.x, FY - H * 0.47, st.stamp, d.seed));
   return {back: back.join(''), front: front.join(''), gap: [x0 + w, x0 + W]};
@@ -210,11 +213,12 @@ function drStamp(x, y, u, seed) {
 function drPuff(d, dt) {
   if (dt < 0 || dt > 2.2) return '';
   const {W, H, FY} = DR, r = rng(d.seed + 77), s = [];
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 170; i++) {
     const side = r(), bx = d.x - W / 2 + (side < 0.6 ? r() * W : side < 0.8 ? W + 6 : -6), by = side < 0.6 ? FY - 4 : FY - r() * H;
     const vx = side < 0.6 ? (r() - 0.5) * 260 : (side < 0.8 ? 1 : -1) * (60 + r() * 160), vy = side < 0.6 ? -(20 + r() * 90) : (r() - 0.5) * 60;
-    const e = 1 - Math.exp(-dt * 3.2), x = bx + vx * e, y = by + vy * e - dt * 14, rad = 12 + r() * 18 + dt * 30, a = (1 - dt / 2.2) ** 1.5;
-    s.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(rad)}" fill="#C9C2B0" opacity="${f1(0.16 * a)}"/>`);
+    const e = 1 - Math.exp(-dt * 3.2), x = bx + vx * e, y = by + vy * e - dt * 14, rad = 3 + r() * 7 + dt * 14, a = (1 - dt / 2.2) ** 1.5;
+    if (i % 4 === 0 && dt < 0.6) { const L = 0.09 * (1 - dt / 0.6); s.push(`<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x - vx * L)}" y2="${f1(y - vy * L)}" stroke="#D8D2C2" stroke-width="2" opacity="${f1(0.5 * (1 - dt / 0.6))}"/>`); }
+    s.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(rad)}" fill="#C9C2B0" opacity="${f1(0.28 * a)}"/>`);
   }
   for (let i = 0; i < 9; i++) {
     const bx = d.x - W / 2 + r() * W, vx = (r() - 0.5) * 520, vy = -(120 + r() * 220), e = Math.min(dt, 1.6);
@@ -222,12 +226,12 @@ function drPuff(d, dt) {
     if (y > FY + 120) continue;
     s.push(`<rect x="${f1(-sz / 2)}" y="${f1(-sz * 0.35)}" width="${f1(sz)}" height="${f1(sz * 0.7)}" fill="${DR.cream}" stroke="#111" stroke-width="1.2" opacity="${f1(Math.max(0, 1 - dt / 2))}" transform="translate(${f1(Math.min(y, FY + 40) === y ? x : x)},${f1(Math.min(y, FY + 30))}) rotate(${f1(rot)}) scale(1,${f1(0.4 + 0.6 * Math.abs(Math.cos(rot * 0.03)))})"/>`);
   }
-  return `<g filter="url(#drb4)">${s.filter((q) => q.startsWith('<circle')).join('')}</g>` + s.filter((q) => q.startsWith('<rect')).join('');
+  return `<g filter="url(#drb1)">${s.filter((q) => q.startsWith('<circle')).join('')}</g>` + s.filter((q) => q.startsWith('<line') || q.startsWith('<rect')).join('');
 }
 
 /* ---------- a frame of the corridor ---------- */
 // doors: [{d, st}], extraWorld/extraScreen: strings or functions of the camera helpers
-function drFrame(t, c, doors, {world = '', screen = '', motes = null, sh = [0, 0], pillars = [-500, 1100, 1900, 2950, 3700]} = {}) {
+function drFrame(t, c, doors, {world = '', screen = '', motes = null, sh = [0, 0], pillars = [-400, 1275, 2425, 3800, 5300]} = {}) {
   const F = drFloor(c), built = doors.map(({d, st}) => drDoor(d, st, t, F));
   let spills = '';
   doors.forEach(({d, st}, i) => {
@@ -252,16 +256,16 @@ function drFrame(t, c, doors, {world = '', screen = '', motes = null, sh = [0, 0
 
 const DR_DOORS = [
   {x: 700, kind: 'work', label: 'AT WORK', seed: 11},
-  {x: 1500, kind: 'farm', label: 'ON THE FARM', seed: 23},
-  {x: 2300, kind: 'vote', label: 'AT THE BALLOT BOX', seed: 37},
+  {x: 1850, kind: 'farm', label: 'ON THE FARM', seed: 23},
+  {x: 3000, kind: 'vote', label: 'AT THE BALLOT BOX', seed: 37},
 ];
-const DR_PROG = {x: 3500, kind: 'prog', label: 'PROGRESSIVE ERA', seed: 51};
+const DR_PROG = {x: 4600, kind: 'prog', label: 'PROGRESSIVE ERA', seed: 51};
 
 /* ================= ep5_doors_intro (ch 1 end) ================= */
 // "They fought at work. They teamed up on the farm. And they fought at the ballot box."
 const DI = {sec: 8.5, d1: 0.9, d2: 2.5, d3: 4.1, wide: 5.2, open: 5.9, hold: 7.0};
 function renderDoorsIntro(t) {
-  const c = drKey([[0, {x: 600, y: 550, z: 1.0}], [DI.d1 + 0.4, {x: 780, y: 550, z: 1.0}], [DI.d2 + 0.4, {x: 1500, y: 550, z: 1.0}], [DI.d3 + 0.4, {x: 2220, y: 550, z: 1.0}], [DI.wide + 1.2, {x: 1500, y: 640, z: 0.74}], [DI.sec, {x: 1500, y: 650, z: 0.76}]], t);
+  const c = drKey([[0, {x: 480, y: 495, z: 1.12}], [DI.d1 + 0.4, {x: 700, y: 495, z: 1.12}], [DI.d1 + 0.8, {x: 700, y: 495, z: 1.12}], [DI.d2 + 0.4, {x: 1850, y: 495, z: 1.12}], [DI.d2 + 0.8, {x: 1850, y: 495, z: 1.12}], [DI.d3 + 0.4, {x: 3000, y: 495, z: 1.12}], [DI.d3 + 0.7, {x: 3000, y: 495, z: 1.12}], [DI.wide + 1.3, {x: 1850, y: 470, z: 0.55}], [DI.sec, {x: 1850, y: 470, z: 0.56}]], t);
   const lit = [DI.d1, DI.d2, DI.d3];
   const doors = DR_DOORS.map((d, i) => {
     const g = drIn(lit[i], t, 0.5), flare = Math.exp(-Math.max(0, t - lit[i]) * 2.5) * (t > lit[i] ? 1 : 0);
@@ -276,7 +280,7 @@ const DCL = {sec: 5, gust: 1.0, swing: 1.45, shut: 1.78, keyOut: 2.15, stamp: 2.
 function renderDoorClose(t, i) {
   const d = {...DR_DOORS[i], x: 960};
   const [shx, shy] = drShake(t, DCL.shut, 16);
-  const c = {x: 990 + 20 * smooth(0, DCL.shut, t), y: 520, z: 1.04 + 0.04 * smooth(0, DCL.shut, t) + 0.03 * smooth(DCL.stamp, DCL.sec, t)};
+  const c = {x: 990 + 20 * smooth(0, DCL.shut, t), y: 505, z: 1.04 + 0.04 * smooth(0, DCL.shut, t) + 0.03 * smooth(DCL.stamp, DCL.sec, t)};
   // open wide on the world beyond, then the swing: slow at first, then fast, a small rebound off the frame
   let open;
   if (t < DCL.swing) open = 0.72 + 0.02 * Math.sin(t * 2.2);
@@ -302,7 +306,7 @@ function renderDoorClose(t, i) {
 //  ... "That time is called the Progressive Era."
 const DF = {sec: 24, s1: 1.9, s2: 4.5, s3: 7.1, wide: 8.0, leak: 9.2, c1: 10.0, c2: 11.2, c3: 12.4, c4: 13.6, still: 15.0, pan: 16.8, prog: 19.4, open4: 20.4, fly: 21.4};
 const DF_CARDS = [['EIGHT-HOUR DAY', 0, 'c1'], ['RIGHT TO ORGANIZE', 0, 'c2'], ['INCOME TAX', 1, 'c3'], ['SENATORS ELECTED BY VOTERS', 2, 'c4']];
-const DF_SLOT = [[150, 200], [990, 200], [150, 340], [990, 340]], DF_TIGHT = [[300, 130], [960, 130], [300, 230], [960, 230]];
+const DF_SLOT = [[180, 245], [960, 245], [180, 370], [960, 370]], DF_TIGHT = [[300, 130], [960, 130], [300, 230], [960, 230]];
 function drCard(x, y, txt, k, gl) { // a glowing index card (screen space), x,y = top left
   if (k <= 0.01) return '';
   const size = 44, w = Math.max(360, txt.length * size * 0.64 + 64), h = 96;
@@ -312,12 +316,12 @@ function drCard(x, y, txt, k, gl) { // a glowing index card (screen space), x,y 
     `<text x="${f1(x + 40)}" y="${f1(y + 64)}" font-family="Abril" font-size="${size}" fill="${DR.ink}">${txt}</text></g>`;
 }
 function renderDoorsFinale(t) {
-  const c = drKey([[0, {x: 520, y: 550, z: 1.0}], [DF.s1 - 0.3, {x: 700, y: 550, z: 1.0}], [DF.s2 - 0.3, {x: 1500, y: 550, z: 1.0}], [DF.s3 - 0.3, {x: 2300, y: 550, z: 1.0}],
-    [DF.leak + 0.6, {x: 1500, y: 260, z: 0.66}], [DF.still + 0.6, {x: 1500, y: 240, z: 0.66}], [DF.pan, {x: 1560, y: 240, z: 0.66}], [DF.prog + 0.6, {x: 3330, y: 330, z: 0.8}], [DF.sec, {x: 3420, y: 360, z: 0.88}]], t);
+  const c = drKey([[0, {x: 450, y: 495, z: 1.12}], [DF.s1 - 0.4, {x: 700, y: 495, z: 1.12}], [DF.s1 + 0.7, {x: 700, y: 495, z: 1.12}], [DF.s2 - 0.3, {x: 1850, y: 495, z: 1.12}], [DF.s2 + 0.7, {x: 1850, y: 495, z: 1.12}],
+    [DF.s3 - 0.3, {x: 3000, y: 495, z: 1.12}], [DF.s3 + 0.6, {x: 3000, y: 495, z: 1.12}], [DF.leak + 0.4, {x: 1850, y: 200, z: 0.55}], [DF.pan, {x: 1880, y: 200, z: 0.55}], [DF.prog + 0.6, {x: 4570, y: 330, z: 0.8}], [DF.sec, {x: 4640, y: 350, z: 0.86}]], t);
   const st3 = [DF.s1, DF.s2, DF.s3], leak = drIn(DF.leak, t, 1.0) * (0.8 + 0.2 * Math.sin(t * 2.3));
   const sh = [0, 1, 2].reduce((a, i) => { const s = drShake(t, st3[i] + 0.13, 6); return [a[0] + s[0], a[1] + s[1]]; }, [0, 0]);
   const doors = DR_DOORS.map((d, i) => ({d, st: {open: 0, stamp: t >= st3[i] ? Math.min(1.6, (t - st3[i]) / 0.13) : 0, leak, emb: 0.3 + leak * 0.4}}));
-  const o4 = drIn(DF.open4, t, 2.2) * 0.32, l4 = drIn(DF.open4, t, 0.8);
+  const o4 = drIn(DF.open4, t, 2.4) * 0.85, l4 = drIn(DF.open4, t, 0.8);
   doors.push({d: DR_PROG, st: {open: o4, light: l4, glow: drIn(DF.prog - 0.6, t, 1.0) * 0.8, emb: 0.4 + l4}});
   const {sx, sy} = drS(c), gapS = [sx(DR_PROG.x - DR.W / 2 + DR.W * Math.cos(o4 * 1.31) + 30), sy(DR.FY - DR.H * 0.45)];
   const scr = [];
@@ -329,7 +333,7 @@ function renderDoorsFinale(t) {
     const pan = ease(clamp01((t - DF.pan) / 3)), fly = ease(clamp01((t - DF.fly - [0.5, 0.75, 0, 0.25][i]) / 1.4));
     x = lerp(x, DF_TIGHT[i][0], pan); y = lerp(y, DF_TIGHT[i][1], pan);
     // a glowing scrap rises off the threshold and only opens into a readable card once it is above the door labels
-    const ur = clamp01((t - t0) / 1.7), open = smooth(0.62, 0.82, ur), gone = smooth(0.0, 0.16, fly);
+    const ur = clamp01((t - t0) / 1.7), open = smooth(0.74, 0.92, ur), gone = smooth(0.0, 0.16, fly);
     const k = open * (1 - gone), sc = (0.35 + 0.65 * open) * (1 - 0.3 * pan);
     { const cx = gapS[0] + 380, cy = gapS[1] + 140, m = 1 - fly; x = m * m * x + 2 * m * fly * cx + fly * fly * gapS[0]; y = m * m * y + 2 * m * fly * cy + fly * fly * gapS[1]; }
     const sc2 = sc * (1 - 0.85 * fly), orb = Math.max(1 - open, fly > 0 && fly < 1 ? Math.sin(fly * Math.PI) : 0);
@@ -338,8 +342,8 @@ function renderDoorsFinale(t) {
         `<rect x="${f1(ox - 14)}" y="${f1(oy - 10)}" width="28" height="20" fill="${DR.cream}" opacity="${f1(0.8 * orb * (1 - open))}" transform="rotate(${f1(Math.sin(t * 3 + i) * 30)}, ${f1(ox)}, ${f1(oy)})"/>`); }
     scr.push(`<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(sc2 * 1000) / 1000})">${drCard(0, 0, txt, k, 0.6 + 0.4 * Math.sin(t * 2 + i))}</g>`);
   });
-  const still = drIn(DF.still, t, 0.5) * (1 - drIn(DF.prog, t, 0.4));
-  if (still > 0.01) scr.push(drOp(still, penS(1380, 150, 'still wanted', 40, -4, DR.teal)));
+  const still = drIn(DF.still - 1.1, t, 0.5) * (1 - drIn(DF.pan, t, 0.3));
+  if (still > 0.01) scr.push(drOp(still, penS(190, 195, 'still wanted', 34, -3, DR.teal)));
   const motes = [0, 0, 1920, 1080, 70, Math.max(leak * 0.6, l4), 13];
   return drFrame(t, c, doors, {sh, screen: scr.join(''), motes});
 }
@@ -347,7 +351,7 @@ function renderDoorsFinale(t) {
 /* ================= ep5_doors_bug: the scorecard corner bug ================= */
 // three tiny doors (top right, inside title-safe); n doors closed and stamped (fractional n animates the next stamp)
 function drDoorsBug(n, t = 0, {bg = true} = {}) {
-  const X = 1470, Y = 70, s = [];
+  const X = 1390, Y = 100, s = [];
   if (bg) s.push(`<rect x="${X - 18}" y="${Y - 14}" width="372" height="196" rx="8" fill="rgba(13,12,9,0.82)" stroke="#22302E" stroke-width="2"/>`);
   ['work', 'farm', 'ballot'].forEach((kind, i) => {
     const x = X + 12 + i * 116, y = Y + 18, w = 80, h = 120, closed = n >= i + 1 ? 1 : clamp01(n - i) > 0 ? clamp01(n - i) : 0;
