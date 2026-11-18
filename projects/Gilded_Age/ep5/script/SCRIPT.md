@@ -1,6 +1,6 @@
 # Fighting Back: The Gilded Age, Episode 5 (finale)
 
-**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 8 (Nov 18): rebuilt around three doors (fight at work, team up on the farm, fight at the ballot box), each falling short; no assumed knowledge; aligned with the class slides (13.4 Politics, Labor Unions); series callback in ch 2** · target about 15 minutes
+**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 9 (Nov 18): cut to about 15 minutes, 10 chapters (Washington merged into A Party of Their Own); greenbacks explain inflation; three doors arc; natural chapter openings** · target about 15 minutes
 
 Tone: casual storyteller asides in light spots ([casual], [amused], [deadpan], [incredulous] delivery tags); never casual about deaths, Haymarket, the Homestead shooting, Pullman or Garfield.
 Markup as in Episodes 1 to 4: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
@@ -12,23 +12,17 @@ Baton rule: each chapter ends on words that become the next chapter's title card
 
 ## 1. Barges at Dawn
 
-July 6th, 1892. Four o'clock in the morning. A river near Pittsburgh, Pennsylvania, one of the biggest steel-making cities in America.
+July 6th, 1892. Four in the morning. Fog on a river near Pittsburgh, Pennsylvania. Two covered barges slide upstream, no lights showing.
 
-Fog on the water. Two covered barges slide upstream behind a tugboat, no lights showing.
+A lookout spots them. The steel mill's whistle screams, and the town of Homestead runs down to the river. Some carry lanterns. Some carry rifles.
 
-A lookout spots them. The steel mill's whistle screams, and the town of Homestead runs down to the river. They tear down the company's fence and pack the landing. Some carry lanterns. Some carry rifles.
+Inside the barges are about three hundred armed men. Not soldiers. Not police. Private guards, hired by a steel company to take its own mill back from its own workers.
 
-Inside the barges are about three hundred men with rifles. Not soldiers. Not police. Private guards, hired by a steel company to take its own mill back from its own workers.
-
-The gangplank goes down.
-
-On the barges, rifles come up. On the bank, rifles come up too.
-
-A company's private army, aiming at American workers. And the workers, aiming right back.
+The gangplank goes down. On the barges, rifles come up. On the bank, rifles come up too.
 
 Nobody knows who will fire first.
 
-How did it come to this? In the Gilded Age, the late 1800s, the rules were stacked against ordinary people. So they tried three ways to change the rules. They fought at work. They teamed up on the farm. And they fought at the ballot box.
+In the Gilded Age, the late 1800s, the rules were stacked against ordinary people. So they tried three ways to change them. They fought at work. They teamed up on the farm. And they fought at the ballot box.
 
 How did ordinary Americans fight back? And why did they keep losing? Start with the rules.
 
@@ -40,21 +34,9 @@ Take Michael Kelly. We've been following the Kelly family since Episode 1 of thi
 
 It's 1887, in Brooklyn, New York. Michael is 23. He works twelve hours a day, six days a week, in a sugar refinery, a factory that turns raw sugar into the white sugar you buy at the store. He hauls heavy sacks next to vats of boiling sugar, in heat that could make a man collapse.
 
-[casual] And here's the wild part: that was normal.
+[casual] And here's the wild part: that was normal. Long hours. Pay the company could cut whenever it wanted. Machines with no safety guards, and no help if you got hurt. Even kids: by 1900, about one in six American kids between ten and fifteen had a job.
 
-Long hours were normal. Some steelworkers worked seven days a week.
-
-Low pay was normal. The company could cut your pay whenever it wanted.
-
-Danger was normal. Machines had no safety guards, and railroads killed thousands of their own workers every year. If you got hurt, the company owed you nothing.
-
-Even child labor was normal. By 1900, about one in six American kids between ten and fifteen had a job.
-
-Skilled workers, like machinists, had it a little better. Their jobs took years to learn, so they were hard to replace. But most workers were unskilled. Anyone could learn their job in a day, and anyone could take it.
-
-So why not quit? Because every year, hundreds of thousands of new immigrants arrived looking for work. If Michael complained, the foreman would just point at the gate. [deadpan] Plenty of guys out there want your job.
-
-Why not go to court? Because no law protected workers who joined together, and judges almost always sided with owners.
+Most workers were unskilled, and easy to replace. Every year, hundreds of thousands of new immigrants arrived looking for work. So if Michael complained, the foreman would just point at the gate. [deadpan] Plenty of guys out there want your job.
 
 And that January, the refinery cut the men's pay. Again.
 
@@ -70,27 +52,21 @@ And if the company says no? Everybody walks out. That's a {strike}. No workers, 
 
 But owners had weapons too. They could fire union members and put their names on a {blacklist}, so no other company would hire them. They could lock the gates, with no pay, until workers gave in. That's a {lockout}. They could hire {strikebreakers} to replace the strikers. And they could call on the courts, private guards, even soldiers.
 
-Plus, many Americans didn't trust unions. Owners said unions were trying to control property that wasn't theirs, and some people linked unions with violent radicals in Europe.
-
-In 1877, railroad companies cut wages, and about eighty thousand railroad workers walked off the job in city after city. It was the first strike to spread across the whole country. The President sent in troops, about a hundred people died, and the strike failed.
-
-People decided there had to be a better way. And two kinds of unions offered one.
+In 1877, a railroad strike spread across the country until the President sent in troops, and about a hundred people died. There had to be a better way. And two kinds of unions offered one.
 
 ## 4. Two Kinds of Unions
 
 There were two kinds of unions. The first was the {Knights of Labor}.
 
-[amused] The Knights started out so secret that newspapers printed their name as five little stars. Like a swear word. By 1886 they had hundreds of thousands of members, because they let almost anyone join: skilled and unskilled workers, women, and Black workers. But not Chinese immigrants.
+[amused] The Knights started out so secret that newspapers printed their name as five little stars. Like a swear word. They let almost anyone join: skilled and unskilled workers, women, and Black workers, but not Chinese immigrants. By 1886, they had hundreds of thousands of members.
 
-The Knights wanted big changes: an eight-hour workday and an end to child labor. And they liked settling fights through {arbitration}: both sides explain their case to a neutral person, who decides.
+The Knights wanted big changes, like an eight-hour workday and an end to child labor. And they liked settling fights through {arbitration}: both sides explain their case to a neutral person, who decides.
 
-On May 1st, 1886, hundreds of thousands of workers went on strike for an eight-hour day. Three days later, at a protest in Haymarket Square in Chicago, police moved in, and someone threw a bomb. Seven police officers and at least four other people died. Nobody ever proved who threw it, but eight {anarchists}, people who wanted no government at all, were convicted.
+On May 1st, 1886, hundreds of thousands of workers went on strike for an eight-hour day. Three days later, at a protest in Haymarket Square in Chicago, someone threw a bomb at police. Seven officers and at least four other people died. Nobody ever proved who threw it, but eight {anarchists}, people who wanted no government at all, were convicted.
 
 For many Americans, unions now meant violence. The Knights had nothing to do with the bomb, but they got the blame, and soon fell apart.
 
 The second kind of union lasted: the {American Federation of Labor}, or AFL, led by Samuel Gompers. It took only skilled workers, mostly white men, and it focused on "bread and butter": better pay, shorter hours, safer jobs. Its main tool was collective bargaining.
-
-The lesson: the big union that wanted to change everything collapsed. The narrow one that bargained for practical things survived.
 
 Michael joined the Knights anyway. His little brother Tommy was not happy.
 
@@ -98,23 +74,21 @@ TOMMY: [annoyed] A union? Mr. Duffy says the Knights are nothing but trouble.
 
 MICHAEL: [dry] Mr. Duffy doesn't work at the refinery.
 
-Tommy ran errands for the local political machine, a group that ran city politics by trading favors for votes. And the machine didn't like anything it couldn't control.
-
 But the biggest fight was still coming, at a steel mill the workers called Fort Frick.
 
 ## 5. Fort Frick
 
 Remember those barges? This is where they were headed: the steel mill in Homestead, Pennsylvania.
 
-The mill belonged to Andrew Carnegie, one of the richest men in the world. [casual] Okay, this part matters, so stick with me. Carnegie owned the mill. A tough manager named Henry Clay Frick ran it for him. Carnegie was the boss. Frick was the boss's tough guy.
+The mill belonged to Andrew Carnegie, one of the richest men in the world. [casual] This part matters. Carnegie owned the mill. A tough manager named Henry Clay Frick ran it for him. Carnegie was the boss. Frick was the boss's tough guy.
 
 In 1892, the union and the company were bargaining over a new contract. The company offered lower pay. When the union said no, Frick refused to deal with the union at all. He built a tall fence around the mill, topped with barbed wire. The workers called it Fort Frick. Then he locked them out.
 
-To run the mill with new workers, Frick hired about three hundred guards from the Pinkerton Detective Agency, a private company businesses hired to break strikes. Those were the men on the barges.
+To run the mill with new workers, Frick hired about three hundred guards from the Pinkerton Detective Agency, a private company that broke strikes. The men on the barges.
 
-The shooting went on most of the day. At least ten people were killed, workers and guards. The Pinkertons surrendered.
+In the fight that followed, at least ten people were killed, workers and guards. The Pinkertons surrendered.
 
-But the workers didn't win. The governor sent eight thousand state soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. Frick survived. [incredulous] The guy was back at his desk in about a week. The public turned against the strikers, and the union was crushed.
+But the workers didn't win. The governor sent eight thousand state soldiers, and the mill reopened with strikebreakers. Then an anarchist with no connection to the union shot Frick. Frick survived, but the public turned against the strikers, and the union was crushed.
 
 And where was Andrew Carnegie? [deadpan] On vacation. In Scotland. Sending Frick his support.
 
@@ -122,7 +96,7 @@ This is the same Carnegie who gave away most of his fortune and built thousands 
 
 So, Andrew Carnegie. Hero? Villain? Or both?
 
-Two years later, near Chicago, workers at the Pullman train car company went on strike, and it spread across the country. A federal court ordered the strike to stop, an order called an {injunction}. Then the President sent in the army.
+Two years later, at the Pullman train car company near Chicago, a court banned another big strike with an order called an {injunction}, and the President sent in the army.
 
 The first door had closed. When workers took on big business, the government took business's side.
 
@@ -138,15 +112,13 @@ Farmers had three big problems.
 
 First, debt. Most farmers borrowed money for land, seed and machines. Many took out a {mortgage}: a loan where, if you can't pay, the bank takes your farm.
 
-Second, railroads. Often only one railroad served a town, so it could charge farmers whatever it wanted to ship their crops.
+Second, railroads. Often only one railroad served a town, so it charged whatever it wanted.
 
-Third, and worst: crop prices kept falling. Wheat that sold for about a dollar a bushel dropped to around fifty cents. Corn got so cheap that some farmers burned it in their stoves, because it was cheaper than coal.
+Third, and worst: crop prices kept falling. Corn got so cheap that some farmers burned it in their stoves, because it was cheaper than coal.
 
 OWEN: [dry] Burned corn in the stove this winter. Cheaper than coal.
 
-So farmers teamed up. First came the {Grange}, farmers' clubs started by a guy named Oliver Kelley. [deadpan] No relation. Then came the bigger {Farmers' Alliance}. They set up co-ops, where farmers bought and sold together to get better prices.
-
-It didn't work. Crop prices were set by markets all over the world, and even thousands of farmers together were too small to change them. The second door had closed.
+So farmers teamed up. First came the {Grange}, farmers' clubs started by a guy named Oliver Kelley. [deadpan] No relation. Then came the bigger {Farmers' Alliance}. They set up co-ops to buy and sell together. It didn't work. Crop prices were set by markets all over the world, and even thousands of farmers were too small to change them. The second door had closed.
 
 Why were prices falling in the first place? That's the money problem.
 
@@ -158,57 +130,45 @@ Say Uncle Owen borrows a thousand dollars when wheat sells for a dollar a bushel
 
 Ten years later, wheat sells for fifty cents. He still owes a thousand dollars. But now he has to sell two thousand bushels. Same debt. Twice the work. [incredulous] You see the problem.
 
-So why did prices keep falling? Part of the answer was money itself.
+During the Civil War, in the 1860s, the government printed lots of extra paper money, called greenbacks, to pay for the war. When there's suddenly a lot more money, but the same amount of stuff to buy, sellers can charge more. Prices go up. That's called {inflation}.
 
-During the Civil War, in the 1860s, the government printed lots of extra paper money. After the war, it pulled much of that money back and stopped making silver dollars. Then it tied every dollar to gold. That's the {gold standard}: the country could only have as many dollars as it had gold.
+After the war, the government did the opposite. It pulled money back out, stopped making silver dollars, and tied every dollar to gold. That's the {gold standard}: the country could only have as many dollars as it had gold.
 
-But America kept growing, with more and more things to buy and sell. And the amount of money barely grew.
+But America kept growing, with more and more things to buy and sell, and the amount of money barely grew. So prices went the other way. Down.
 
-Picture a town with a hundred dollars and a hundred loaves of bread. Each loaf sells for a dollar. Now the town bakes two hundred loaves, but there are still only a hundred dollars. Each loaf now sells for fifty cents. More stuff, same money, so prices fall. That's {deflation}.
+Picture a town with a hundred dollars and a hundred loaves of bread. Each loaf sells for a dollar. Now the town bakes two hundred loaves, but there are still only a hundred dollars. Each loaf now sells for fifty cents. More stuff, same money, so prices fall. That's {deflation}, the opposite of inflation.
 
 Cheaper bread is great if you're buying. But if you're selling wheat, and you owe the bank, it's a disaster.
 
-Farmers had a fix: silver. If the government made dollars out of silver as well as gold, there would be more money going around. More money, higher prices. Wheat climbs back toward a dollar, and Owen's debt gets easier to pay. That idea was called {free silver}.
+Farmers had a fix: make dollars out of silver too. More money, higher prices. Wheat climbs back toward a dollar, and Owen's debt gets easier to pay. That idea was called {free silver}.
 
-Not everyone liked it. Bankers wanted to be paid back in dollars worth as much as the ones they lent. And city workers like Michael worried that higher prices meant more expensive bread and rent.
+Bankers hated it. And city workers like Michael worried it meant more expensive bread.
 
-Farmers needed the government in Washington on their side. But Washington had its own problem.
+Farmers needed the government on their side. But it wasn't listening. So they decided to build a party of their own.
 
-## 8. Washington's Problem
+## 8. A Party of Their Own
 
-That problem was jobs. For years, whichever party won an election handed out government jobs to the people who helped it win. [casual] Win an election, give jobs to your buddies. That was called the {spoils system}.
+Why not vote for one of the two big parties? Because both seemed busy handing out government jobs to their buddies. That was called the {spoils system}. In 1881, a man who thought he was owed a job even shot President James Garfield. Congress responded with the {Pendleton Act}: some government jobs now required passing a test, called {civil service}. That fixed who got jobs, not crop prices.
 
-Then, in 1881, a man who thought he was owed a government job shot President James Garfield, who died a few months later.
-
-Congress, the part of government that makes laws, passed the {Pendleton Act}. Now some government jobs had to go to people who passed a test. That's called {civil service}. At first, it covered only about one job in ten.
-
-In 1887, Congress also passed the {Interstate Commerce Act}, the first law letting the national government regulate railroads. But it had little power to stop high prices.
-
-Real reforms. But they didn't fix crop prices, money, or wages. So farmers decided that if neither big party would listen, they'd build a party of their own.
-
-## 9. A Party of Their Own
-
-On July 4th, 1892, in Omaha, Nebraska, farmers formed the People's Party, also called the Populists. {Populism} means ordinary people uniting against powerful elites, like big banks, railroads and corporations.
-
-They said America was producing two kinds of people: tramps, meaning homeless wanderers, and millionaires.
+So on July 4th, 1892, in Omaha, Nebraska, farmers formed the People's Party, also called the Populists. {Populism} means ordinary people uniting against powerful elites, like big banks, railroads and corporations.
 
 Their plan, the {Omaha Platform}, demanded free silver. An income tax, so the richest paid the most. Senators elected directly by voters. Government control of the railroads. And an eight-hour workday.
 
 OWEN: [proud] We've got our own party now.
 
-The Populists tried to bring city workers in too, but mostly failed. Workers like Michael didn't see how free silver helped them. Still, that November, the Populist candidate, James Weaver, won over a million votes.
+That November, the Populists won over a million votes.
 
 Then, in 1893, the economy crashed. Banks failed. By 1894, more than one worker in ten had no job. It was called a {depression}, the worst the country had seen. And the government did almost nothing.
 
-The refinery let Michael go. Ma took in washing. Michael's sister Nora worked as a maid for a rich family, and her pay kept them fed.
+The refinery let Michael go. Ma took in washing to keep the family fed.
 
-In Ohio, a businessman and Populist named Jacob Coxey led hundreds of jobless men on a march to Washington, to ask Congress to hire them to build roads. They called themselves Coxey's Army. [amused] Coxey cared so much about money that he named his baby son... Legal Tender. That's a term for official money. He named his kid after money.
+In Ohio, a businessman and Populist named Jacob Coxey led hundreds of jobless men to Washington, to ask Congress for jobs building roads: Coxey's Army. [amused] Coxey cared so much about money that he named his baby son... Legal Tender. He named his kid after money.
 
-When they reached the Capitol, police arrested Coxey. For what? Carrying banners. [deadpan] And walking on the grass. The grass.
+When they reached the Capitol, police arrested Coxey. For what? Carrying banners. [deadpan] And walking on the grass.
 
-For millions of Americans, the crash seemed to prove the Populists right. By 1896, the whole election came down to gold or silver, and a speech about a cross of gold.
+By 1896, the whole election came down to gold or silver, and a speech about a cross of gold.
 
-## 10. The Cross of Gold
+## 9. The Cross of Gold
 
 In July 1896, the Democrats, one of the two big parties, met in Chicago to pick a candidate for president. A 36-year-old from Nebraska named William Jennings Bryan stood up and argued for free silver. He finished with his arms spread wide, like a cross:
 
@@ -216,19 +176,17 @@ In July 1896, the Democrats, one of the two big parties, met in Chicago to pick 
 
 In plain words: don't sacrifice ordinary people just to protect gold.
 
-The crowd went wild. The Democrats made Bryan their candidate. Then the Populists picked him too, but with a different running mate. [amused] So Bryan had two vice presidents at the same time. Awkward.
+The crowd went wild. The Democrats made Bryan their candidate, and the Populists backed him too.
 
 OWEN: [fired up] Bryan's a Nebraska man. He's one of us.
 
-Bryan crisscrossed the country giving speeches. His opponent, Republican William McKinley? [amused] His strategy was: stay home, sit on the porch, and let the voters come to him. And they did, by the trainload. McKinley promised steady jobs and a strong dollar, and many factory owners warned workers that if Bryan won, the factory might close.
+Bryan crisscrossed the country. His opponent, Republican William McKinley, [amused] just stayed home on his porch and let voters come to him, by the trainload. McKinley promised steady jobs and a strong dollar, and some factory owners warned that if Bryan won, the factory might close.
 
-By then, Michael was back at the refinery. At the Kellys' kitchen table, the family split.
+At the Kellys' kitchen table, the family split.
 
 TOMMY: [fired up] Bryan's for the working man! Even Mr. Duffy says so.
 
 MICHAEL: [worried] The foreman says if Bryan wins, the refinery closes. And silver means higher prices for bread.
-
-NORA: [amused] You should hear the family I work for. They think Bryan's coming for the silverware.
 
 MA: [firm] Your uncle's losing his farm, and you're arguing about metal.
 
@@ -236,7 +194,7 @@ McKinley won. Most city voters, including many factory workers, chose him. Bryan
 
 So where did ordinary Americans stand? Time to check the scorecard.
 
-## 11. The Scorecard
+## 10. The Scorecard
 
 Let's go back to those three doors.
 
@@ -245,8 +203,6 @@ Fighting at work: fought back, fell short.
 Teaming up on the farm: fought back, fell short.
 
 Fighting at the ballot box: fought back, fell short.
-
-By 1900, workers still had no legal right to form a union. Kids still worked in mills and mines. Farmers were still in debt. And the government still usually took business's side.
 
 But their ideas didn't go away: an eight-hour workday, the right to join a union, an income tax, senators elected by the people. The Gilded Age left Americans wanting more.
 
@@ -262,22 +218,21 @@ That's the end of our story of the Gilded Age. Thanks for watching, and for stic
 
 ## Baton table
 
-| Out of | Last words (= next title) | In to | First line picks up |
+| Out of | Last words (= next title card) | In to | First line |
 |---|---|---|---|
 | 1 | "...Start with the rules." | (title card) then 2 | "The rules of work in the Gilded Age were simple." |
 | 2 | "...There was strength in numbers." | 3 | "That's the idea behind a union..." |
 | 3 | "...two kinds of unions offered one." | 4 | "There were two kinds of unions." |
 | 4 | "...a steel mill the workers called Fort Frick." | 5 | "Remember those barges?" |
 | 5 | "...to Uncle Owen's letters." | 6 | "Uncle Owen was Michael's uncle..." |
-| 6 | "...the money problem." | 7 | "Okay. I know, I know: economics." |
-| 7 | "...Washington had its own problem." | 8 | "That problem was jobs." |
-| 8 | "...a party of their own." | 9 | "On July 4th, 1892..." |
-| 9 | "...a speech about a cross of gold." | 10 | "In July 1896..." |
-| 10 | "...check the scorecard." | 11 | "Let's go back to those three doors." |
+| 6 | "...That's the money problem." | 7 | "Okay. I know, I know: economics." |
+| 7 | "...a party of their own." | 8 | "Why not just vote for one of the two big parties?" |
+| 8 | "...a speech about a cross of gold." | 9 | "In July 1896..." |
+| 9 | "...check the scorecard." | 10 | "Let's go back to those three doors." |
 
 ## Three doors (on screen, recurring)
 Three doors drawn in the series' notebook style, labelled AT WORK, ON THE FARM, AT THE BALLOT BOX. Introduced at the end of ch 1. Door 1
-closes with a "FELL SHORT" stamp at the end of ch 5, door 2 at the end of ch 6 (co-ops fail), door 3 at the end of ch 10. Ch 11 shows all
+closes with a "FELL SHORT" stamp at the end of ch 5, door 2 at the end of ch 6 (co-ops fail), door 3 at the end of ch 9. Ch 10 shows all
 three closed, then the ideas (eight-hour day, right to organize, income tax, senators by voters) float out from under the doors as STILL WANTED.
 
 ## To verify before voicing
