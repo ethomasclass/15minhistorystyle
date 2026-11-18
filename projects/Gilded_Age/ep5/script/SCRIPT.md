@@ -1,6 +1,6 @@
 # Fighting Back: The Gilded Age, Episode 5 (finale)
 
-**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 6 (Nov 18): Fighting Back frame plus a casual, storyteller voice in spots (asides, deadpan beats); scorecard** · target about 15 minutes
+**Chunk History** · Gilded Age series, Episode 5 of 5 · narration script · **draft 7 (Nov 18): Pullman cut; Homestead closes the workers half; the 1893 crash and Coxey move into the farmers half; casual storyteller beats; scorecard** · target about 15 minutes
 
 Tone (draft 6): casual storyteller asides in light spots ([casual], [amused], [deadpan], [incredulous] delivery tags); never casual about deaths, Haymarket, the Homestead shooting, Pullman or Garfield.
 Markup as in Episodes 1 to 4: `*emphasis*`, `{vocab}`, `[tag]` = ElevenLabs delivery cue (not spoken). No em dashes.
@@ -114,27 +114,9 @@ But six years earlier, Carnegie had written that workers' right to form unions w
 
 So, Andrew Carnegie. Hero? Villain? Or both?
 
-For workers, things were about to get even worse. Hard times were coming.
+Workers had fought back, and lost. But they weren't the only ones fighting. Let's leave the city, go back a few years, and head out west, to Uncle Owen's letters.
 
-## 6. Hard Times
-
-Hard times hit in 1893. Banks failed. Railroads went bankrupt. By 1894, more than one worker in ten was out of a job. It was called a {depression}, the worst the country had seen.
-
-The refinery let Michael go. Ma took in washing. Nora's pay as a maid kept the family fed.
-
-In Ohio, a businessman named Jacob Coxey led hundreds of unemployed men on a march to Washington, to ask Congress for jobs building roads. They called themselves Coxey's Army. [amused] And Coxey cared so much about money that he named his baby son... Legal Tender. That's a term for official money. He named his kid after money. When the marchers finally reached the Capitol, police arrested Coxey. For what? Carrying banners. [deadpan] And walking on the grass. The grass.
-
-That same spring, near Chicago, the Pullman train car company cut its workers' pay by about a quarter. But the workers lived in a {company town}. Pullman owned their houses. And Pullman did not cut the rent.
-
-The workers went on strike. A national railroad union, led by Eugene Debs, backed them by refusing to run any train pulling a Pullman car. Trains stopped across much of the country.
-
-Then the government stepped in, on the companies' side. A judge issued an {injunction}, a court order banning the strike. President Grover Cleveland sent federal troops to Chicago. About thirty people were killed. Debs went to jail, and the strike collapsed. Workers had stopped trains across the whole country. And still, they fell short.
-
-The lesson seemed clear: when workers took on big companies, the government usually sided with the companies.
-
-Workers weren't the only ones who felt that way. Let's leave the city, go back a few years, and head out west, to Uncle Owen's letters.
-
-## 7. Uncle Owen's Letters
+## 6. Uncle Owen's Letters
 
 Uncle Owen was Michael's uncle, his father's younger brother. He farmed 160 acres near O'Neill, Nebraska, out on the Great Plains. Every few months, a letter came to Brooklyn.
 
@@ -154,7 +136,7 @@ So farmers organized, too. First came the {Grange}, farmers' clubs started by a 
 
 But to understand why farmers were so angry, you need to understand the money problem.
 
-## 8. The Money Problem
+## 7. The Money Problem
 
 The money problem. [casual] I know, I know: economics. But stay with me, because this is the key to the whole fight. The harder farmers worked, the deeper they sank into debt. Here's how.
 
@@ -178,7 +160,7 @@ Not everyone liked it. Bankers wanted to be paid back in dollars worth as much a
 
 Farmers needed Washington on their side. But Washington wasn't listening. So they decided to build a party of their own.
 
-## 9. A Party of Their Own
+## 8. A Party of Their Own
 
 A party of their own. Why? Because both big parties seemed busier with something else: handing out government jobs. Win an election, and you give jobs to your buddies. That was called the {spoils system}. It got so bad that in 1881, a man who thought he was owed a job shot President James Garfield. Congress responded by requiring tests for some government jobs, called {civil service}. But that fixed who got jobs. It didn't fix railroad prices, crop prices or wages.
 
@@ -190,7 +172,19 @@ Their plan, the {Omaha Platform}, demanded free silver. An income tax, so the ri
 
 OWEN: [proud] We've got our own party now. Farmers and working men, together.
 
-That November, the Populists won over a million votes. But the biggest fight came in 1896, when the whole election came down to silver, and a cross of gold.
+That November, the Populists won over a million votes. And then, the very next year, the whole country hit hard times.
+
+## 9. Hard Times
+
+Hard times hit in 1893. Banks failed. Railroads went bankrupt. By 1894, more than one worker in ten was out of a job. It was called a {depression}, the worst the country had seen.
+
+The refinery let Michael go. Ma took in washing. Nora's pay as a maid kept the family fed.
+
+In Ohio, a businessman and Populist named Jacob Coxey led hundreds of unemployed men on a four-hundred-mile march to Washington, to ask Congress for jobs building roads. They called themselves Coxey's Army. [amused] And Coxey cared so much about money that he named his baby son... Legal Tender. That's a term for official money. He named his kid after money. When the marchers finally reached the Capitol, police arrested Coxey. For what? Carrying banners. [deadpan] And walking on the grass. The grass.
+
+They'd walked four hundred miles to ask for jobs, and got arrested over a lawn. Fought back. Fell short.
+
+For millions of Americans, the crash seemed to prove the Populists right: the system worked for bankers and big business, not for them. By 1896, the whole election came down to silver, and a cross of gold.
 
 ## 10. The Cross of Gold
 
@@ -208,7 +202,7 @@ OWEN: [fired up] Bryan's a Nebraska man. He's one of us.
 
 Bryan crisscrossed the country. And his opponent, Republican William McKinley? [amused] His strategy was: stay home. Sit on the porch. Let the voters come to him. And they did, by the trainload, while his campaign raised millions from big business. Some factory owners warned workers that if Bryan won, the factory might close.
 
-At the Kellys' kitchen table, the family split. And this time, the brothers had switched sides.
+By then, Michael was back at the refinery. And at the Kellys' kitchen table, the family split. And this time, the brothers had switched sides.
 
 TOMMY: [fired up] Bryan's for the working man! Even Mr. Duffy says so.
 
@@ -226,7 +220,7 @@ So after all that fighting, what did ordinary Americans have to show for it? Was
 
 Gold or gilt? [casual] Okay, let's add up the scorecard.
 
-The Knights of Labor: fought back, fell short. Henry George: fought back, fell short. Homestead: fought back, fell short. Pullman: fought back, fell short. The Populists: fought back, fell short.
+The Knights of Labor: fought back, fell short. Henry George: fought back, fell short. Homestead: fought back, fell short. Coxey's Army: fought back, fell short. The Populists: fought back, fell short.
 
 By 1900, workers still had no legal right to form a union. Kids still worked in mills and mines. Farmers were still in debt. And the government still usually sided with business.
 
@@ -252,16 +246,16 @@ That's the end of our story of the Gilded Age. Thanks for watching, and for stic
 | 2 | "...There was strength in numbers." | 3 | "Strength in numbers." |
 | 3 | "...a fight over eight hours. And a bomb." | 4 | "The union was the Knights of Labor." |
 | 4 | "...a steel mill the workers called Fort Frick." | 5 | "Fort Frick was the workers' nickname..." |
-| 5 | "...Hard times were coming." | 6 | "Hard times hit in 1893." |
-| 6 | "...to Uncle Owen's letters." | 7 | "Uncle Owen was Michael's uncle..." |
-| 7 | "...the money problem." | 8 | "The money problem was this..." |
-| 8 | "...a party of their own." | 9 | "A party of their own. Why?" |
+| 5 | "...to Uncle Owen's letters." | 6 | "Uncle Owen was Michael's uncle..." |
+| 6 | "...the money problem." | 7 | "The money problem." |
+| 7 | "...a party of their own." | 8 | "A party of their own. Why?" |
+| 8 | "...the whole country hit hard times." | 9 | "Hard times hit in 1893." |
 | 9 | "...silver, and a cross of gold." | 10 | "The cross of gold came from a speech." |
 | 10 | "...Was it gold, or just gilt?" | 11 | "Gold or gilt?" |
 
 ## Scorecard (on screen, recurring)
 A two-column card, FOUGHT BACK / FELL SHORT (teal and orange), that adds a row at each "fell short" line: the Knights (ch 4), Henry George (ch 4),
-Homestead (ch 5), Pullman (ch 6), the Populists (ch 10); ch 11 shows the full tally, then the ideas lift off the card as "still wanted".
+Homestead (ch 5), Coxey's Army (ch 9), the Populists (ch 10); ch 11 shows the full tally, then the ideas lift off the card as "still wanted".
 
 ## To verify before voicing
 - New in draft 3: sugar refinery heat; railroad worker deaths per year (thousands, 1890s ICC figures); child labor one in six (1900 census, ages 10 to 15);
