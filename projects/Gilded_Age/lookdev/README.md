@@ -759,3 +759,48 @@ in the frame (closer camera); Owen's letter hand could not reach the paper.
 Known weak spots: the Homestead hill houses are simple stacked shapes and the tug's beam is a soft wedge rather than a true
 volumetric light; the crowd's shouting is all arms and heads (no faces by rule); there is no sound in these clips; the child in bed
 is a drawn head on a pillow, not the rig.
+
+## Episode 5 doors and explainers (Nov 18)
+
+`ep5_doors.js` (the three doors, the episode's signature graphic) and `ep5_explain.js` (teal explainers), loaded by `bridge.html`
+after `ep5.js`. 720p review clips and contact sheets (a frame every 1.5 s) in `review/ep5/<id>.mp4` / `<id>_contact.jpg`. Every
+beat is a named table near the top of its renderer (`DI`, `DCL`, `DF`, `X5_*`), in seconds from the clip start, so the edit can
+retime to the voice; the explainer renderers also take a cue table argument. Text audit (`audit_text.mjs`): no OVERLAP or SHORT in
+any clip; the door clips report OUT only for door labels sliding out of frame while the camera tracks past them.
+
+**The doors.** A dim corridor drawn in the notebook style: plaster with faint ruled lines and a red margin line, a dado, boards on
+the floor converging on a vanishing point that follows the camera, dark pillars in the foreground for parallax, dust motes in the
+light. Each door: inked frame and lintel, panelled leaf (hinged left, it swings toward camera with perspective), a teal emblem
+(clasped hands and a hammer, a wheat sheaf, a ballot box, a rising sun for the fourth door), a keyhole that burns teal with a thin
+horizontal flare, a torn orange label. Teal = hope: light round the leaf edges and threshold, a halo on the wall, a fan of light
+across the floor, and through the gap the world beyond (steel mill with stacks and smoke, wheat field with a windmill, the Capitol
+dome over steps).
+
+| id | ch | sec | beats (s) |
+|---|---|---|---|
+| `ep5_doors_intro` | 1 end | 8.5 | camera tracks; AT WORK lights 0.9 ("fought at work"), ON THE FARM 2.5 ("teamed up on the farm"), AT THE BALLOT BOX 4.1 ("fought at the ballot box"); pull back to all three 5.2 to 6.4; the doors swing open a crack 5.9 to 7.1, light spills across the floor; hold to 8.5 |
+| `ep5_door1_close` | 5 end | 5 | door open on the steel mill, light pouring out; paper scraps drawn toward the door by the draught 1.0; swing 1.45; **slam 1.78** (light cut, camera shake, dust puff, scraps skitter; the keyhole dies last, 2.15); **FELL SHORT slaps 2.3**, holds to 5.0 |
+| `ep5_door2_close` | 6 end | 5 | same beats; wheat field beyond |
+| `ep5_door3_close` | 9 end | 5 | same beats; the Capitol dome beyond |
+| `ep5_doors_finale` | 10 | 24 | walk past the three closed doors; **FELL SHORT stamps 1.9, 4.5, 7.1** (each with a small jolt: "fought back, fell short" x3); pull back and the camera rises 7.1 to 9.8; teal light leaks under the doors 9.2; glowing scraps rise and open into cards (readable once above the labels, about 1.2 s after each start): EIGHT-HOUR DAY 10.0, RIGHT TO ORGANIZE 11.2, INCOME TAX 12.4, SENATORS ELECTED BY VOTERS 13.6; "still wanted" (teal pen) 15.0 to 19.4; the pan down the corridor 16.8 to 20.0, cards tighten up top; PROGRESSIVE ERA door glows 18.8, **cracks open 20.4**; the cards turn to light and stream into it 21.4 to 23.2; hold to 24 (the Progressive Era line can be cut to 20.4 to 24, or freeze-framed) |
+| `ep5_doors_bug` | overlay | 6 | the scorecard corner bug (top right, 372 x 196 px box, inside title-safe): three tiny doors, teal-lit while open; each gets an orange torn strip with an ink X at 1.0, 2.4, 3.8. `drDoorsBug(n, t, {bg})` draws any state (n = 0 to 3, fractional animates) for stills or the edit |
+
+**Explainers** (notebook paper on the dark desk, or the dark graph board for the vault, the gauge and the chain of command).
+
+| id | ch | sec | beats (s) |
+|---|---|---|---|
+| `ep5_x_weapons` | 3 | 13 | WORKERS' TOOLS 0.3: UNION 1.0, COLLECTIVE BARGAINING 2.3, STRIKE 3.6; OWNERS' WEAPONS 5.0: BLACKLIST 5.4, LOCKOUT 6.6, STRIKEBREAKERS 7.8, COURTS AND SOLDIERS 9.0 |
+| `ep5_x_unions` | 4 | 13 | KNIGHTS OF LABOR 0.3: EVERYONE 1.1, BIG GOALS 2.0, ARBITRATION 2.9; AFL 4.0: SKILLED WORKERS 4.8, BREAD AND BUTTER 5.7, COLLECTIVE BARGAINING 6.6; HAYMARKET · 1886 slaps 7.8; the Knights' column cracks and tilts 8.2 to 9.2; AFL ringed teal, "it lasted" 9.8 |
+| `ep5_x_charge` | 5 | 10 | name cards, no faces: ANDREW CARNEGIE · OWNER 0.4; arrow; HENRY CLAY FRICK · RUNS IT FOR HIM 2.0; arrow; THE HOMESTEAD MILL 3.6; pen "the boss" 5.0, "the boss's tough guy" 6.0 |
+| `ep5_x_owen3` | 6 | 10 | FARMERS' THREE PROBLEMS 0.3; 1 DEBT 1.0 (house and mortgage), 2 RAILROADS 2.8, 3 FALLING PRICES 4.6 (the price line falls 5.0); "the worst" 6.6 |
+| `ep5_x_loan` | 7 | 13 | $1,000 DEBT 0.4 (one gold glint); WHEAT: $1 A BUSHEL 1.8, ten sacks 2.4, 1,000 BUSHELS 3.0; WHEAT: 50 CENTS 5.0, twenty sacks 5.6, 2,000 BUSHELS 6.7; SAME DEBT. TWICE THE WORK. slaps 8.6 |
+| `ep5_x_inflation` | 7 | 11 | GREENBACKS 0.3; bills pour into a pile 0.8 to 4.6; LOTS MORE MONEY 2.0; the same bread, shoes and coat with PRICE tags 3.2, THE SAME AMOUNT OF STUFF; the tags climb 4.4 to 6.4; INFLATION slaps 7.0 |
+| `ep5_x_gold` | 7 | 10 | THE GOLD STANDARD 0.3; the vault and its bars 0.6; a row of dollars 1.8; each chained to a bar 3.0 to 4.6; EVERY DOLLAR TIED TO GOLD 4.0; pen "only as many dollars / as it had gold" 5.6 |
+| `ep5_x_bread` | 7 | 13 | 100 DOLLARS 0.5; 100 loaves 1.4 (100 LOAVES 1.9); $1 A LOAF 3.0; 100 more loaves 5.0 (200 LOAVES 6.1); STILL 100 DOLLARS 6.6; the tag drops to 50 CENTS 7.8; DEFLATION slaps 9.6; "more stuff, same money" 9.9 |
+| `ep5_x_silver` | 7 | 11 | FREE SILVER 0.3; GOLD DOLLARS 0.8; silver coins drop in 1.8 (+ SILVER DOLLARS TOO 2.4); the WHEAT gauge climbs from 50 CENTS toward $1, 4.0 to 6.6; "owen's debt gets easier" 7.0 |
+| `ep5_x_spoils` | 8 | 12 | THE SPOILS SYSTEM 0.3; a line of men shuffles toward the GOVERNMENT JOBS door 0.8; JOBS FOR PARTY FRIENDS 2.4; the CIVIL SERVICE examination card slides in 6.0; THE PENDLETON ACT: PASS A TEST 6.4; ticks 7.4 to 8.4 |
+| `ep5_x_omaha` | 8 | 11 | THE OMAHA PLATFORM 0.3, THE PEOPLE'S PARTY · OMAHA, NEBRASKA · JULY 4, 1892 0.6; ticked one by one: FREE SILVER 1.2, INCOME TAX 2.4, SENATORS ELECTED BY VOTERS 3.6, GOVERNMENT-RUN RAILROADS 4.8, EIGHT-HOUR DAY 6.0 |
+
+The 1896 map is left for the 3D model. Known weak spots: the dust puff is soft blurred discs (reads as dust at speed, blobby on a
+still frame); the spoils line just shuffles (no party man handing out jobs); gold bars and coins are the only money shapes beyond
+glints (muted gold tone); the door labels are world-space, so in tracking shots they slide out of frame like the doors do.
