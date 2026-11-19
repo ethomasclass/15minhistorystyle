@@ -276,7 +276,9 @@ function figure(o) {
   out += body(fill);
   if (det > 0.01) out += `<g opacity="${f1(det * 100) / 100}">${details()}</g>`;
   const lie = o.lie ? ` rotate(${-90 * d}, ${f1(x)}, ${f1(y)})` : '';
-  return `<g transform="translate(0,${f1(-(an.bob || 0) * h)})${lie} rotate(${f1((an.lean || 0) * d)}, ${f1(x)}, ${f1(y)})">${out}</g>`;
+  // an.shear (Thanksgiving): lean as a shear about the feet line instead of a turn, so a skirt's hem and planted soles stay flat
+  const leanT = an.shear ? `translate(${f1(x)},${f1(y)}) skewX(${f1(-(an.lean || 0) * d)}) translate(${f1(-x)},${f1(-y)})` : `rotate(${f1((an.lean || 0) * d)}, ${f1(x)}, ${f1(y)})`;
+  return `<g transform="translate(0,${f1(-(an.bob || 0) * h)})${lie} ${leanT}">${out}</g>`;
 }
 
 

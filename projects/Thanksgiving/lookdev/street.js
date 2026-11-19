@@ -1,3 +1,4 @@
+let HORSE_LOG = null; // Thanksgiving audit: when set, horse() logs its hooves (tg_contacts.js)
 // A Brooklyn tenement street (Williamsburg) at dusk, about 1883: Michael Kelly walks home from the refinery and the camera tracks him.
 // Drawn in code with the same rig, palette (look 1) and detail levels as the bridge scene (scene.js must load first).
 //
@@ -93,29 +94,32 @@ function stRow(t) {
 }
 
 /* ---------- the street: cobbles, a pushcart, telegraph poles, a horse and wagon going the other way ---------- */
-function horse(x, gy, sz, c, t, dir = -1) { // sz: height at the withers. A four-beat walk, feet planted while on the ground.
+function horse(x, gy, sz, c, t, dir = -1, stand = false) { // sz: height at the withers. A four-beat walk, feet planted while on the ground.
+  // stand (Thanksgiving): a horse standing still in the shafts: four hooves square on the ground line, the tail and head moving on t
   const s = [], X = (u) => x + dir * u * sz, Yy = (v) => gy - v * sz;
   const L = 0.62, amp = 20, sm = Math.sin(amp * Math.PI / 180);
   const p = (step12(t) * 120) / (4 * L * sm * sz); // cycles walked
   const legs = [[-0.4, 0, true], [0.4, 0.25, false], [-0.3, 0.5, true], [0.48, 0.75, false]]; // left hind, left fore, right hind, right fore
   for (const [lx, off, hind] of legs) {
     let u = ((p + off) % 1 + 1) % 1, th, bend;
-    if (u < 0.6) { th = Math.asin(sm * (1 - 2 * u / 0.6)) * 180 / Math.PI; bend = 0; }
+    if (stand) { th = hind ? (lx < -0.35 ? -5 : 3) : (lx > 0.45 ? 4 : -2); bend = 0; }
+    else if (u < 0.6) { th = Math.asin(sm * (1 - 2 * u / 0.6)) * 180 / Math.PI; bend = 0; }
     else { const v = (u - 0.6) / 0.4; th = -amp * Math.cos(Math.PI * v); bend = 45 * Math.sin(Math.PI * v); }
     const hip = [X(lx), Yy(0.66)];
     const r = (deg) => deg * Math.PI / 180;
     const knee = [hip[0] + dir * Math.sin(r(th)) * 0.32 * sz, hip[1] + Math.cos(r(th)) * 0.32 * sz];
     const sh = hind ? th + bend : th - bend; // the hock folds the other way
-    const hoof = [knee[0] + dir * Math.sin(r(sh)) * 0.3 * sz, Math.min(gy - 3, knee[1] + Math.cos(r(sh)) * 0.3 * sz)];
+    const hoof = stand ? [knee[0] + dir * Math.sin(r(sh)) * 0.3 * sz, gy - 0.025 * sz] : [knee[0] + dir * Math.sin(r(sh)) * 0.3 * sz, Math.min(gy - 3, knee[1] + Math.cos(r(sh)) * 0.3 * sz)];
+    if (typeof HORSE_LOG !== 'undefined' && HORSE_LOG && typeof TGK !== 'undefined') { const hb = [hoof[0] + dir * 0.02 * sz, hoof[1] + 0.025 * sz]; TGK.log('sole', HORSE_LOG + '.' + lx, [hb[0], gy], hb, {gy: stand ? gy : gy - 3 + 0.025 * sz}); if (stand || u < 0.6) TGK.log('foot', HORSE_LOG + '.' + lx, [hb[0], gy], hb); }
     s.push(line([hip, knee], c, 0.095 * sz) + line([knee, hoof], c, 0.055 * sz));
     s.push(`<ellipse cx="${f1(hoof[0] + dir * 0.02 * sz)}" cy="${f1(hoof[1])}" rx="${f1(0.045 * sz)}" ry="${f1(0.025 * sz)}" fill="${c}"/>`);
   }
   s.push(`<ellipse cx="${f1(X(0.02))}" cy="${f1(Yy(0.78))}" rx="${f1(0.56 * sz)}" ry="${f1(0.2 * sz)}" fill="${c}"/>`);
-  const nod = 0.03 * Math.sin(TAU * p * 2);
+  const nod = stand ? 0.012 * Math.sin(TAU * t / 3.1) : 0.03 * Math.sin(TAU * p * 2);
   s.push(poly([[X(0.38), Yy(0.92)], [X(0.62), Yy(1.28 + nod)], [X(0.78), Yy(1.24 + nod)], [X(0.98), Yy(1.0 + nod)], [X(0.9), Yy(0.94 + nod)], [X(0.66), Yy(1.04 + nod)], [X(0.52), Yy(0.66)]], c));
   s.push(poly([[X(0.66), Yy(1.26 + nod)], [X(0.68), Yy(1.38 + nod)], [X(0.72), Yy(1.27 + nod)]], c));
   s.push(poly([[X(0.42), Yy(0.98)], [X(0.6), Yy(1.27 + nod)], [X(0.5), Yy(1.2 + nod)], [X(0.36), Yy(0.95)]], c)); // mane
-  const sw = 0.05 * Math.sin(TAU * p);
+  const sw = stand ? 0.03 * Math.sin(TAU * t / 1.7) : 0.05 * Math.sin(TAU * p);
   s.push(`<path d="M${f1(X(-0.5))},${f1(Yy(0.88))} Q${f1(X(-0.66))},${f1(Yy(0.6))} ${f1(X(-0.6 + sw))},${f1(Yy(0.32))} L${f1(X(-0.54 + sw))},${f1(Yy(0.34))} Q${f1(X(-0.56))},${f1(Yy(0.62))} ${f1(X(-0.46))},${f1(Yy(0.8))} Z" fill="${c}"/>`);
   return s.join('');
 }

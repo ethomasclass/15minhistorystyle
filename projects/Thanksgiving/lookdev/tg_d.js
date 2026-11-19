@@ -35,8 +35,18 @@ function t3Paint(cam, faces, {lift = 0, op = 1, k = 1, cx = 0, cy = 0} = {}) { c
   return op >= 0.995 ? g : `<g opacity="${f1(op * 100) / 100}">${g}</g>`; }
 // a thing landing on the table: it drops the last few inches, overshoots a touch and settles; a soft shadow gathers under it
 const t3Land = (t, t0) => { const u = clamp01((t - t0) / 0.55); if (u <= 0) return null; const e = 1 - Math.pow(1 - u, 3), b = Math.sin(Math.PI * u) * (1 - u); return {lift: 16 * (1 - e) + 2.2 * b * 0, op: Math.min(1, u * 4), k: 0.86 + 0.14 * e + 0.08 * Math.sin(Math.PI * u) * (1 - u)}; };
-const t3Ring = (cam, cx, cy, z, r, n = 40) => [...Array(n + 1)].map((_, i) => cam.P([cx + Math.cos(i / n * TAU) * r, cy + Math.sin(i / n * TAU) * r, z]));
+const t3Ring = (cam, cx, cy, z, r, n = 40, ry = r) => [...Array(n + 1)].map((_, i) => cam.P([cx + Math.cos(i / n * TAU) * r, cy + Math.sin(i / n * TAU) * ry, z]));
 
+// the audit's 3D checks: footprints on the cloth must not overlap (each pair: the overlap in screen px at that spot), and every
+// footprint must lie inside the table top
+function t3Audit(cam, fp, TOP) {
+  const ppi = (x, y) => Math.hypot(...[0, 1].map((k) => cam.P([x + 0.5, y, TOP])[k] - cam.P([x - 0.5, y, TOP])[k])); // screen px per inch there
+  const rad = (f, ux, uy) => 1 / Math.hypot(ux / f[2], uy / f[3]); // an ellipse's radius along a unit direction
+  for (let i = 0; i < fp.length; i++) for (let j = i + 1; j < fp.length; j++) { const a = fp[i], b = fp[j]; if (!a[4] || !b[4]) continue;
+    const dx = b[0] - a[0], dy = b[1] - a[1], D = Math.hypot(dx, dy) || 1e-6, ov = rad(a, dx / D, dy / D) + rad(b, dx / D, dy / D) - D;
+    const k = ppi((a[0] + b[0]) / 2, (a[1] + b[1]) / 2); TGK.log('overlap', a[5] + '/' + b[5], [0, 0], [0, Math.max(0, ov) * k]); }
+  for (const f of fp) if (f[4]) { const out = Math.max(0, Math.abs(f[0]) + f[2] - 50.75, Math.abs(f[1]) + f[3] - 22.75); TGK.log('rest3d', f[5] + '.ontable', [0, 0], [0, out * ppi(f[0], f[1])]); }
+}
 function renderTgTable3d({t}) {
   const cam = t3Cam(t), TOP = T3.TOP, L = 100, W = 44, s = [];
   // the floor: boards running the length of the room, a pool of lamplight under the table
@@ -54,25 +64,35 @@ function renderTgTable3d({t}) {
   // the table: a white cloth to within a hand of the floor, its top a shade brighter
   s.push(t3Paint(cam, [...t3Box(0, 0, 7, L, W, TOP - 7, '#D8CFBC'), ...t3Box(0, 0, TOP - 0.2, L + 1.5, W + 1.5, 0.6, '#FBF6EA')]));
   const items = []; // [x, y, svg]: everything on the table, painted far to near
-  const put = (x, y, t0, faces, ring = null, sr = 5.4) => { const ld = t3Land(t, t0); if (!ld) return; const sh = t3Ring(cam, x, y, TOP + 0.5, ring ? ring[0] : sr, 24);
-    items.push([x, y, `<polygon points="${pts(sh)}" fill="#3A2A1A" opacity="${f1(0.28 * ld.op * (1 - ld.lift / 20))}"/>` + (ring ? (() => { const a = clamp01((t - t0 - 0.3) / 1.6); if (a <= 0 || a >= 1) return ''; const rr = t3Ring(cam, x, y, TOP + 0.6, ring[0] * (1 + 0.9 * a)); return line(rr, '#0D0C09', 7, `opacity="${f1(0.5 * (1 - a))}"`) + line(rr, '#2FE0C4', 4, `opacity="${f1(1 - a)}"`); })() : '') + t3Paint(cam, faces, {...ld, cx: x, cy: y})]); };
+  // faces: one mesh, or layers (an array of meshes) painted in order, each sorted on its own: a plate and then its well, a dish and
+  // then what is in it, so two parts that touch can never swap places in the painter's sort (no flicker where they meet)
+  const put = (x, y, t0, faces, ring = null, sr = 5.4, sry = null) => { const ld = t3Land(t, t0); if (!ld) return; const sh = t3Ring(cam, x, y, TOP + 0.45, ring ? ring[0] : sr, 24, sry ?? (ring ? ring[0] : sr));
+    const layered = Array.isArray(faces[0]), paint = layered ? faces.map((f) => t3Paint(cam, f, {...ld, cx: x, cy: y})).join('') : t3Paint(cam, faces, {...ld, cx: x, cy: y});
+    items.push([x, y, `<polygon points="${pts(sh)}" fill="#3A2A1A" opacity="${f1(0.28 * ld.op * (1 - ld.lift / 20))}"/>` + (ring ? (() => { const a = clamp01((t - t0 - 0.3) / 1.6); if (a <= 0 || a >= 1) return ''; const rr = t3Ring(cam, x, y, TOP + 0.6, ring[0] * (1 + 0.9 * a)); return line(rr, '#0D0C09', 7, `opacity="${f1(0.5 * (1 - a))}"`) + line(rr, '#2FE0C4', 4, `opacity="${f1(1 - a)}"`); })() : '') + paint]); };
   // places: a plate, a glass, a napkin at each chair
   for (const [i, [x, y]] of [[-32, -15], [0, -15], [32, -15], [-32, 15], [0, 15], [32, 15], [-43, 0], [43, 0]].entries()) {
-    put(x, y, T3.plates + i * 0.07, [...t3Cyl(x, y, TOP + 0.4, 4.4, 4.4, 0.5, 18, '#D9D2C0', '#FFFFFF', 1.18), ...t3Cyl(x, y, TOP + 0.95, 3.2, 3.2, 0.05, 14, '#E8E2D2', '#EFE9DA')]);
-    const gx = x + (Math.abs(x) > 40 ? 0 : 6), gy = y + (Math.abs(x) > 40 ? 7 : -Math.sign(y) * 4.5); put(gx, gy, T3.plates + 0.3 + i * 0.07, [...t3Cyl(gx, gy, TOP + 0.4, 0.9, 0.9, 2.6, 8, '#B9D6D2', '#B9D6D2'), ...t3Cyl(gx, gy, TOP + 3, 1.1, 1.1, 2.4, 10, '#CFE8E4', '#7A2030', 1.5)], null, 1.8); }
+    put(x, y, T3.plates + i * 0.07, [t3Cyl(x, y, TOP + 0.4, 4.4, 4.4, 0.5, 18, '#D9D2C0', '#FFFFFF', 1.18), t3Cyl(x, y, TOP + 0.86, 3.2, 3.2, 0.02, 14, '#E8E2D2', '#EFE9DA')]);
+    const gx = x + (Math.abs(x) > 40 ? 0 : 6), gy = y + (Math.abs(x) > 40 ? 7 : -Math.sign(y) * 4.5); put(gx, gy, T3.plates + 0.3 + i * 0.07, [t3Cyl(gx, gy, TOP + 0.4, 0.9, 0.9, 2.6, 8, '#B9D6D2', '#B9D6D2'), t3Cyl(gx, gy, TOP + 3, 1.1, 1.1, 2.4, 10, '#CFE8E4', '#7A2030', 1.5)], null, 1.8); }
   // the sides: a bowl of mash, cranberry sauce, a gravy boat, rolls, a second pie
-  const bowl = (x, y, r, cs, cf) => [...t3Cyl(x, y, TOP + 0.4, r * 0.55, r * 0.55, 3, 16, cs, cs, 1.8), ...t3Cyl(x, y, TOP + 3.3, r * 0.9, r * 0.9, 0.3, 16, cf, cf)];
-  put(-17, 6, T3.sides[0], [...bowl(-17, 6, 5, '#E9E2CF', '#F4E7B8'), ...t3Ball(-17, 6, TOP + 4.2, 3.6, 3.6, 1.6, '#F6EDC8', 5, 12)]);
+  const bowl = (x, y, r, cs, cf) => [t3Cyl(x, y, TOP + 0.4, r * 0.55, r * 0.55, 3, 16, cs, cs, 1.8), t3Cyl(x, y, TOP + 3.1, r * 0.9, r * 0.9, 0.2, 16, cf, cf)];
+  put(-17, 6, T3.sides[0], [...bowl(-17, 6, 5, '#E9E2CF', '#F4E7B8'), t3Ball(-17, 6, TOP + 3.9, 3.6, 3.6, 1.6, '#F6EDC8', 5, 12)]);
   put(-19, -7, T3.sides[1], bowl(-19, -7, 3.8, '#E9E2CF', '#8A1F2E'));
-  put(18, -8, T3.sides[2], [...t3Cyl(18, -8, TOP + 0.4, 5, 3.4, 0.5, 16, '#C9C2A8', '#D9D2C0'), ...t3Ball(18, -8, TOP + 2.4, 3.6, 2, 2, '#C9C2A8', 6, 12), ...t3Cyl(18, -8, TOP + 3.6, 2.6, 1.3, 0.2, 12, '#7A4A22', '#7A4A22')]);
-  put(17, 8, T3.sides[3], [...t3Cyl(17, 8, TOP + 0.4, 5, 5, 0.6, 16, '#B98A56', '#C9A066', 1.1), ...[[0, 0], [2.6, 1.4], [-2.4, 1.6], [0.4, -2.8], [-2.2, -1.6], [2.4, -1.8]].flatMap(([dx, dy]) => t3Ball(17 + dx, 8 + dy, TOP + 2.2, 1.9, 1.9, 1.5, '#E0B070', 5, 10))]);
-  put(-34, 0, T3.sides[4], [...t3Cyl(-34, 0, TOP + 0.4, 2.2, 2.2, 5, 10, '#C9B98A', '#C9B98A', 0.5), ...t3Cyl(-34, 0, TOP + 5.4, 0.7, 0.7, 7, 8, '#F4EFE6', '#FFE9A8')], null, 2.6);
+  put(18, -8, T3.sides[2], [t3Cyl(18, -8, TOP + 0.4, 5, 3.4, 0.5, 16, '#C9C2A8', '#D9D2C0'), t3Ball(18, -8, TOP + 2.9, 3.6, 2, 2, '#C9C2A8', 6, 12), t3Cyl(18, -8, TOP + 3.6, 2.6, 1.3, 0.2, 12, '#7A4A22', '#7A4A22')], null, 5.2, 3.6);
+  put(17, 8, T3.sides[3], [t3Cyl(17, 8, TOP + 0.4, 5, 5, 0.6, 16, '#B98A56', '#C9A066', 1.1), [[0, 0], [2.6, 1.4], [-2.4, 1.6], [0.4, -2.8], [-2.2, -1.6], [2.4, -1.8]].flatMap(([dx, dy]) => t3Ball(17 + dx, 8 + dy, TOP + 2.4, 1.9, 1.9, 1.5, '#E0B070', 5, 10))]);
+  put(-34, 0, T3.sides[4], [t3Cyl(-34, 0, TOP + 0.4, 2.2, 2.2, 5, 10, '#C9B98A', '#C9B98A', 0.5), t3Cyl(-34, 0, TOP + 5.4, 0.7, 0.7, 7, 8, '#F4EFE6', '#FFE9A8')], null, 2.6);
   // the turkey, in the middle (coral: the subject): a platter, the body, two drumsticks
-  { const x = 0, y = 0, z = TOP + 1.2; put(x, y, T3.turkey, [...t3Cyl(x, y, TOP + 0.4, 13, 9, 0.8, 28, '#C9C2A8', '#E4DECB', 1.08),
+  { const x = 0, y = 0, z = TOP + 1.2; put(x, y, T3.turkey, [t3Cyl(x, y, TOP + 0.4, 13, 8, 0.8, 28, '#C9C2A8', '#E4DECB', 1.08), [
       ...t3Ball(x - 0.5, y, z + 4.6, 9.2, 6.6, 5, '#FF6F61', 9, 20, -0.12), ...t3Ball(x + 6.4, y - 5.4, z + 4.4, 4.6, 2.2, 2.3, '#F2604F', 6, 12, 0.6), ...t3Ball(x + 6.4, y + 5.4, z + 4.4, 4.6, 2.2, 2.3, '#F2604F', 6, 12, 0.6),
-      ...t3Ball(x + 10, y - 5.4, z + 7.2, 0.9, 0.9, 0.9, '#F4EFE6', 4, 8), ...t3Ball(x + 10, y + 5.4, z + 7.2, 0.9, 0.9, 0.9, '#F4EFE6', 4, 8), ...t3Ball(x - 8.4, y - 3, z + 1.6, 1.5, 1.5, 1.3, '#6FA85A', 4, 8), ...t3Ball(x - 8.8, y + 2.6, z + 1.5, 1.5, 1.5, 1.3, '#6FA85A', 4, 8)], [14]); }
+      ...t3Ball(x + 10, y - 5.4, z + 7.2, 0.9, 0.9, 0.9, '#F4EFE6', 4, 8), ...t3Ball(x + 10, y + 5.4, z + 7.2, 0.9, 0.9, 0.9, '#F4EFE6', 4, 8), ...t3Ball(x - 8.4, y - 3, z + 1.6, 1.5, 1.5, 1.3, '#6FA85A', 4, 8), ...t3Ball(x - 8.8, y + 2.6, z + 1.5, 1.5, 1.5, 1.3, '#6FA85A', 4, 8)]], [14.3], 5.4, 8.9); }
   // the pumpkin pie, at the end
-  { const x = 33, y = 0; put(x, y, T3.pie, [...t3Cyl(x, y, TOP + 0.4, 5.2, 5.2, 1.5, 24, '#C9A066', '#E0B070', 1.3), ...t3Cyl(x, y, TOP + 1.95, 5.6, 5.6, 0.08, 24, '#C96A24', '#D9772F'), ...t3Ball(x, y, TOP + 2.1, 1.3, 1.3, 0.8, '#FBF6EA', 4, 10)], [8.5]); }
+  // (at x 29, clear of the end place: the pie dish, 6.8 in across the rim, used to run 2 in into the end plate at x 43)
+  { const x = 29, y = 0; put(x, y, T3.pie, [t3Cyl(x, y, TOP + 0.4, 5.2, 5.2, 1.5, 24, '#C9A066', '#E0B070', 1.3), t3Cyl(x, y, TOP + 1.82, 5.6, 5.6, 0.06, 24, '#C96A24', '#D9772F'), t3Ball(x, y, TOP + 2.1, 1.3, 1.3, 0.8, '#FBF6EA', 4, 10)], [8.5], 7); }
+  { const fp = [], landed = (t0) => t >= t0 + 0.55; // AUDIT: footprints on the cloth [x, y, rx, ry, landed, name]
+    [[-32, -15], [0, -15], [32, -15], [-32, 15], [0, 15], [32, 15], [-43, 0], [43, 0]].forEach(([x, y], i) => { fp.push([x, y, 5.2, 5.2, landed(T3.plates + i * 0.07), 'plate' + i]);
+      const gx = x + (Math.abs(x) > 40 ? 0 : 6), gy = y + (Math.abs(x) > 40 ? 7 : -Math.sign(y) * 4.5); fp.push([gx, gy, 1.65, 1.65, landed(T3.plates + 0.3 + i * 0.07), 'glass' + i]); });
+    fp.push([-17, 6, 4.95, 4.95, landed(T3.sides[0]), 'mash'], [-19, -7, 3.76, 3.76, landed(T3.sides[1]), 'cran'], [18, -8, 5, 3.4, landed(T3.sides[2]), 'gravy'], [17, 8, 5.5, 5.5, landed(T3.sides[3]), 'rolls'], [-34, 0, 2.2, 2.2, landed(T3.sides[4]), 'candle'],
+      [0, 0, 14.04, 8.64, landed(T3.turkey), 'platter'], [29, 0, 6.76, 6.76, landed(T3.pie), 'pie']);
+    t3Audit(cam, fp, TOP); }
   items.sort((a, b) => dist(b[0], b[1]) - dist(a[0], a[1])); for (const it of items) s.push(it[2]);
   for (const [, , m] of near) s.push(t3Paint(cam, m));
   const defs = tgDefsB(t).replace('</defs>', `<radialGradient id="t3pool"><stop offset="0" stop-color="#FFD9A0" stop-opacity="0.34"/><stop offset="0.5" stop-color="#FFD9A0" stop-opacity="0.1"/><stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/></radialGradient>` +

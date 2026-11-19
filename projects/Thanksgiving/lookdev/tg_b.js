@@ -72,6 +72,24 @@ function tgTurtleCrate(x, y, w, h, t) { const wd = '#5A3F28', dk = '#2A1B10', n 
     `<rect x="${f1(x - w / 2 - 6)}" y="${f1(y - h - 4)}" width="${w + 12}" height="16" fill="${wd}"/><rect x="${f1(x - w / 2 - 6)}" y="${f1(y - h - 4)}" width="${w + 12}" height="3" fill="#8A6A48"/><rect x="${f1(x - w / 2 - 6)}" y="${f1(y - 14)}" width="${w + 12}" height="16" fill="${wd}"/><rect x="${f1(x - w / 2 - 6)}" y="${f1(y - 14)}" width="${w + 12}" height="3" fill="#8A6A48" opacity="0.7"/><rect x="${f1(x - w / 2 - 6)}" y="${f1(y)}" width="${w + 12}" height="3" fill="${dk}"/>`; }
 const tgGull = (x, y, sz, fl, c = '#F4EFE6') => `<path d="M${f1(x - sz)},${f1(y - sz * fl * 0.7)} Q${f1(x - sz / 2)},${f1(y - sz * fl - sz * 0.15)} ${f1(x)},${f1(y)} Q${f1(x + sz / 2)},${f1(y - sz * fl - sz * 0.15)} ${f1(x + sz)},${f1(y - sz * fl * 0.7)}" stroke="${c}" stroke-width="${f1(Math.max(2, sz * 0.14))}" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="${f1(x)}" cy="${f1(y + sz * 0.05)}" rx="${f1(sz * 0.26)}" ry="${f1(sz * 0.1)}" fill="${c}"/>`;
 
+// street.js's wagon, standing: the horse stands square (horse(..., stand)), the wheels rest their tyres on the ground (the tyre's
+// stroke is centred on the circle, so the circle sits half a stroke higher), the driver sits on the box, the reins run to the bit
+function tgWagon(x, gy, sz, c, t, dir = -1, o = {}) {
+  const s = [], X = (u) => x - dir * u * sz;
+  HORSE_LOG = 'horse'; s.push(horse(x, gy, sz, c, t, dir, true)); HORSE_LOG = null;
+  s.push(line([[X(0.3), gy - 0.8 * sz], [X(1.0), gy - 0.62 * sz]], c, 5));
+  const bx0 = X(1.0), bx1 = X(2.3), top = gy - 0.95 * sz, bot = gy - 0.45 * sz, dh = 1.1 * sz;
+  const dr = {x: X(1.2), y: top + (0.5 - 0.035) * dh, h: dh, d: dir, kind: 'man', hat: o.hat || 'bowler', coat: o.coat || 'sack', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -4, fArm: [100, 85], bob: 0.004 * Math.sin(TAU * t / 2.3)}};
+  { const sp = TGK.seatAt({...dr, an: {...dr.an, lean: 0, bob: 0}}); TGK.log('seat', 'driver', [sp[0], top], sp); } s.push(figure(dr));
+  const [hx, hy] = TGK.hand(dr, 'f'); s.push(line([[hx, hy], [X(-0.84), gy - 1.06 * sz]], c, 2.5)); // the reins, from his hand to the bit
+  s.push(`<rect x="${f1(Math.min(bx0, bx1))}" y="${f1(top)}" width="${f1(Math.abs(bx1 - bx0))}" height="${f1(bot - top)}" fill="${c}"/>`);
+  for (const u of [1.75, 2.05]) s.push(`<rect x="${f1(X(u) - 0.13 * sz)}" y="${f1(top - 0.32 * sz)}" width="${f1(0.26 * sz)}" height="${f1(0.34 * sz)}" rx="${f1(0.06 * sz)}" fill="${c}"/>`);
+  for (const [u, rr] of [[1.25, 0.3], [2.1, 0.4]]) { const R = rr * sz, sw2 = 0.05 * sz, cx = X(u), cyw = gy - R - sw2 / 2;
+    let spokes = ''; for (let i = 0; i < 10; i++) { const a = i * TAU / 10 + u; spokes += `M${f1(cx)},${f1(cyw)}L${f1(cx + Math.cos(a) * R)},${f1(cyw + Math.sin(a) * R)}`; }
+    s.push(`<circle cx="${f1(cx)}" cy="${f1(cyw)}" r="${f1(R)}" fill="none" stroke="${c}" stroke-width="${f1(sw2)}"/><path d="${spokes}" stroke="${c}" stroke-width="${f1(0.022 * sz)}"/><circle cx="${f1(cx)}" cy="${f1(cyw)}" r="${f1(0.06 * sz)}" fill="${c}"/>`);
+    TGK.log('wheel', 'wagon.wheel' + u, [cx, gy], [cx, cyw + R + sw2 / 2]); }
+  return s.join('');
+}
 function renderTgDock({t, cam, quiet = false}) {
   const c = cam2(cam), {D, H} = TD, ink = '#0F0D0A';
   const sky = `<rect width="1920" height="1080" fill="url(#tgharbour)"/><circle cx="1240" cy="470" r="560" fill="url(#tgsun)" opacity="0.8"/>` + clouds(t, 31);
@@ -82,7 +100,7 @@ function renderTgDock({t, cam, quiet = false}) {
   far.push(`<rect x="-800" y="560" width="4200" height="100" fill="url(#tgmist)" opacity="0.9"/>`);
   // the harbour (0.5): water, ships at anchor in the haze (the bridge scene's ships), a mist band
   const mid = `<rect x="-800" y="636" width="4200" height="500" fill="url(#tgsea)"/>` + MAT.water(-800, 640, 4200, 200, t, {top: '#C9CDB0', bottom: '#5E8A8C', seed: 33, glint: '#FFF8DC', n: 120}) +
-    `<g transform="translate(180,676) scale(0.62)" opacity="0.8">${ship(0, 0, '#6F9296', t, 0.2)}</g><g transform="translate(2060,690) scale(0.8)" opacity="0.85">${ship(0, 0, '#5E8488', t, 0.7)}</g><g transform="translate(1180,668) scale(0.42)" opacity="0.7">${ship(0, 0, '#84A3A4', t, 0.45)}</g>` +
+    `<g transform="translate(180,676) scale(0.62)" opacity="0.8">${ship(0, 0, '#6F9296', t, 0.2, false)}</g><g transform="translate(2060,690) scale(0.8)" opacity="0.85">${ship(0, 0, '#5E8488', t, 0.7, false)}</g><g transform="translate(1180,668) scale(0.42)" opacity="0.7">${ship(0, 0, '#84A3A4', t, 0.45, false)}</g>` +
     `<rect x="-800" y="610" width="4200" height="130" fill="url(#tghaze)" opacity="0.75"/>`;
   // the brig alongside (0.8): hull and rigging against the bright haze
   const brig = tgBrig(-250, D - 14, 2.5, '#1B2A2C', t) + `<rect x="-800" y="${D - 240}" width="4200" height="250" fill="url(#tghaze)" opacity="0.4"/>`;
@@ -95,26 +113,44 @@ function renderTgDock({t, cam, quiet = false}) {
   // cargo on the left: crates stacked, barrels, a sack pile; a gull on the top crate
   s.push(tgCrate(120, D + 30, 220, 130, 2) + tgCrate(330, D + 30, 170, 110, 3) + tgCrate(150, D - 100, 180, 104, 4) + tgCrate(-110, D + 30, 200, 150, 5) + tgBarrel(470, D + 36, 92, 124));
   s.push(`<g transform="translate(176,${D - 204})"><ellipse cx="0" cy="-12" rx="22" ry="11" fill="#F4EFE6"/><circle cx="17" cy="-25" r="8.5" fill="#F4EFE6"/><path d="M24,-25 l13,3 l-13,3 Z" fill="#E0A63C"/><path d="M-20,-12 l-22,5 l20,5 Z" fill="#9AA6A6"/><path d="M-4,-2 l0,14 M5,-2 l0,14" stroke="#E0A63C" stroke-width="2.5"/></g>`);
-  // the derrick: a timber post with a strut and a jib, a block at the jib's tip
-  const [tx, ty] = TD.tip, px = TD.post;
+  // the derrick: a timber post with a strut and a jib, a sheave at the jib's tip, one at the post head and a lead block low on the post.
+  // The fall runs from the crate's ring up to the tip sheave, back along the jib to the post head, down the post to the lead block,
+  // and out along the deck to the two men, who pay it out hand over hand (the rope only reaches the men low and nearly level, so
+  // both can hold the one straight line); the slack goes down to a coil behind them.
+  const [tx, ty] = TD.tip, px = TD.post, rope = '#C9B98A', SH = [tx, ty + 12], PH = [px, 205], LB = [px + 22, 668];
   s.push(line([[px, D + 20], [px, 190]], '#2A1B10', 26) + line([[px - 9, D + 20], [px - 9, 190]], '#7A5A3A', 4, 'opacity="0.6"') + line([[px, 215], [tx, ty]], '#2A1B10', 18) + line([[px, 470], [tx + 150, ty + 60]], '#2A1B10', 11) +
-    line([[px + 130, D + 20], [px, 560]], '#2A1B10', 14) + `<rect x="${px - 60}" y="${D + 8}" width="240" height="18" fill="#2A1B10"/><circle cx="${tx}" cy="${ty + 12}" r="17" fill="#1A1009"/><circle cx="${tx}" cy="${ty + 12}" r="6" fill="#7A5A3A"/><circle cx="${px}" cy="205" r="15" fill="#1A1009"/>`);
-  // the crate comes down on the fall; it turns and swings a little, and settles on the deck
+    line([[px + 130, D + 20], [px, 560]], '#2A1B10', 14) + `<rect x="${px - 60}" y="${D + 8}" width="240" height="18" fill="#2A1B10"/>`);
+  // the crate comes down on the fall; it turns and swings a little, the swing dying away before it touches, and settles on the deck
   const lu = smooth(TD.lower[0], TD.lower[1], t), landed = smooth(TD.lower[1] - 0.15, TD.lower[1] + 0.25, t), cy = 470 + (D + 34 - 470) * (lu * (2 - lu) * 0.35 + lu * 0.65);
-  const sw = (1 - landed) * 2.6 * Math.sin(t * 2.1), cw = 270, ch = 150, rope = '#C9B98A';
-  s.push(line([[tx, ty + 28], [tx + (cy - ch - 70 - ty) * Math.sin(sw * Math.PI / 180), cy - ch - 68]], rope, 5));
-  s.push(`<g transform="rotate(${f1(sw)}, ${tx}, ${ty + 12})">` + line([[tx, cy - ch - 70], [tx - cw / 2 + 10, cy - ch]], rope, 4) + line([[tx, cy - ch - 70], [tx + cw / 2 - 10, cy - ch]], rope, 4) + `<circle cx="${tx}" cy="${f1(cy - ch - 70)}" r="8" fill="#1A1009"/>` + tgTurtleCrate(tx, cy, cw, ch, t) + `</g>`);
-  s.push(`<ellipse cx="${tx}" cy="${D + 38}" rx="${f1(90 + 80 * lu)}" ry="${f1(6 + 6 * lu)}" fill="#000" opacity="${f1(0.18 + 0.3 * lu)}"/>`);
-  // two dockworkers pay the rope out hand over hand, leaning back against the load; shirtsleeves, a felt hat and a knitted cap
-  const lod = lodFor(H * c.z), rim = {c: '#FFF1CC', a: 0.8 * lod.rimA, dx: 0.011, dy: -0.004}, pay = (1 - landed) * 1, ph = t * 1.5;
-  const mk = (x, hat, k) => { const q = Math.sin(TAU * (ph + k * 0.37)), o = {x, y: D + 44 + k * 8, h: H * (k ? 0.97 : 1), d: -1, kind: 'man', hat, coat: 'vest', fill: ink, det: 0, rim,
-    an: {legs: [26 - 18 * landed, -24 + 18 * landed], shins: [10 - 6 * landed, -30 + 24 * landed], lean: -9 - 3 * pay + 2 * landed * 6, fArm: [74 + 12 * q * pay + 60 * landed, 64 + 18 * q * pay + 60 * landed], bArm: [92 - 12 * q * pay + 70 * landed, 74 - 18 * q * pay + 80 * landed], tilt: 10 - 14 * landed, bob: 0.004 * q * pay}}; return o; };
-  const m1 = mk(1080, 'felt', 0), m2 = mk(1200, 'knit', 1), h1 = tgHand(m1), h2 = tgHand(m2), slack = 40 * landed;
-  s.push(`<path d="M${px},205 Q${f1((px + h1[0]) / 2)},${f1((205 + h1[1]) / 2 + 4 + slack)} ${f1(h1[0])},${f1(h1[1])} Q${f1((h1[0] + h2[0]) / 2)},${f1((h1[1] + h2[1]) / 2 + 8 + slack * 0.6)} ${f1(h2[0])},${f1(h2[1])} Q${f1(h2[0] + 70)},${f1(h2[1] + 120)} ${f1(h2[0] + 96)},${D + 40}" stroke="${rope}" stroke-width="5" fill="none" stroke-linecap="round"/>` +
-    `<ellipse cx="${f1(h2[0] + 110)}" cy="${D + 42}" rx="44" ry="10" fill="none" stroke="${rope}" stroke-width="5"/><ellipse cx="${f1(h2[0] + 110)}" cy="${D + 34}" rx="38" ry="9" fill="none" stroke="${rope}" stroke-width="5"/>`);
-  s.push(figure(m2) + figure(m1) + MAT.shadow(1080, D + 46, 60, 0.3) + MAT.shadow(1200, D + 54, 60, 0.3));
-  // the wagon that will take it up to the taverns: a horse standing in the shafts, the driver waiting
-  s.push(MAT.shadow(1560, D + 62, 320, 0.3) + wagon(1830, D + 58, 220, ink, 0.31, 1, {hat: 'felt', coat: 'vest'}) + line([[1830 - 1.2 * 220 + 0.25 * 220, D + 58 - 0.5 * 1.1 * 220 - 0.33 * 220], [1830 + 0.9 * 220, D + 58 - 1.0 * 220]], ink, 2.5));
+  const sw = (1 - smooth(TD.lower[1] - 0.9, TD.lower[1] - 0.05, t)) * 2.6 * Math.sin(t * 2.1), cw = 270, ch = 150;
+  // the crate hangs from the tip sheave: its group turns by sw about the sheave's centre, so the ring is where that turn puts it
+  const turn = (q) => { const a = sw * Math.PI / 180, dx = q[0] - SH[0], dy = q[1] - SH[1]; return [SH[0] + dx * Math.cos(a) - dy * Math.sin(a), SH[1] + dx * Math.sin(a) + dy * Math.cos(a)]; };
+  const ring = turn([tx, cy - ch - 70]), fallTop = [SH[0] + 17 * Math.sin(-sw * Math.PI / 180) * 0, SH[1]];
+  s.push(line([fallTop, ring], rope, 5)); TGK.log('rope', 'fall.ring', turn([tx, cy - ch - 70]), ring);
+  s.push(line([[tx, ty - 5], [px, 190]], rope, 4) + line([[px + 15, 205], [px + 15, LB[1] - 14]], rope, 4)); // along the jib; down the post
+  s.push(`<circle cx="${SH[0]}" cy="${SH[1]}" r="17" fill="#1A1009"/><circle cx="${SH[0]}" cy="${SH[1]}" r="6" fill="#7A5A3A"/><circle cx="${PH[0]}" cy="${PH[1]}" r="15" fill="#1A1009"/>` +
+    `<rect x="${px + 6}" y="${LB[1] - 22}" width="26" height="30" rx="8" fill="#1A1009"/><circle cx="${LB[0] - 3}" cy="${LB[1] - 6}" r="5" fill="#7A5A3A"/>`);
+  { const lo = Math.max(turn([tx - cw / 2 - 6, cy])[1], turn([tx + cw / 2 + 6, cy])[1]); if (lu >= 1) TGK.rest('crate', tx, lo, D + 34); else if (lo > D + 34) TGK.rest('crate.swing', tx, lo, D + 34); }
+  s.push(`<g transform="rotate(${f1(sw)}, ${SH[0]}, ${SH[1]})">` + line([[tx, cy - ch - 70], [tx - cw / 2 + 10, cy - ch]], rope, 4) + line([[tx, cy - ch - 70], [tx + cw / 2 - 10, cy - ch]], rope, 4) + `<circle cx="${tx}" cy="${f1(cy - ch - 70)}" r="8" fill="#1A1009"/>` + tgTurtleCrate(tx, cy - 3, cw, ch - 3, t) + `</g>`);
+  s.push(`<ellipse cx="${tx}" cy="${D + 36}" rx="${f1(90 + 80 * lu)}" ry="${f1(6 + 6 * lu)}" fill="#000" opacity="${f1(0.18 + 0.3 * lu)}"/>`);
+  // two dockworkers pay the rope out hand over hand, leaning back against the load (feet planted: legs by IK); the rope runs from the
+  // lead block out through both men's hands in one straight line, dropping a little; each hand slides along it in turn while paying
+  // out; when the crate is down they straighten up and hold it slack
+  const lod = lodFor(H * c.z), rim = {c: '#FFF1CC', a: 0.8 * lod.rimA, dx: 0.011, dy: -0.004}, pay = 1 - landed, ph = t * 1.5;
+  const ropeY = (x) => LB[1] + (x - LB[0]) * (0.07 + 0.06 * landed); // the hauling part, from the lead block out to the men
+  const men = [[1080, 'felt', 0], [1200, 'knit', 1]].map(([x, hat, k]) => { const h = H * (k ? 0.97 : 1), y = D + 44 + k * 8, q = Math.sin(TAU * (ph + k * 0.37));
+    const o0 = {x, y, h, d: -1, kind: 'man', hat, coat: 'vest', fill: ink, det: 0, rim, an: {lean: (-5 - 2.5 * (0.6 + 0.4 * q)) * pay - 1, tilt: 10 - 14 * landed, bob: 0, shear: true}};
+    const feet = [[x - 0.11 * h, y], [x + 0.1 * h, y]]; let o = TGK.plant(o0, feet, 'm' + (k + 1));
+    const slideF = 0.035 * h * pay * Math.max(0, q), slideB = 0.035 * h * pay * Math.max(0, -q); // hand over hand: one hand slides out while the other grips
+    const fx = x - 0.2 * h - slideF, bx = x - 0.06 * h - slideB;
+    o = TGK.reach(o, 'f', fx, ropeY(fx), 'm' + (k + 1) + '.f.rope'); o = TGK.reach(o, 'b', bx, ropeY(bx), 'm' + (k + 1) + '.b.rope');
+    return o; });
+  const [m1, m2] = men, hb2 = TGK.hand(m2, 'b'), coil = [hb2[0] + 120, D + 42];
+  s.push(line([[LB[0], LB[1]], [hb2[0], ropeY(hb2[0])]], rope, 5) + `<path d="M${f1(hb2[0])},${f1(ropeY(hb2[0]))} Q${f1(hb2[0] + 60)},${f1(ropeY(hb2[0]) + 30)} ${f1(coil[0] - 30)},${f1(coil[1] - 4)}" stroke="${rope}" stroke-width="5" fill="none" stroke-linecap="round"/>` +
+    `<ellipse cx="${f1(coil[0])}" cy="${D + 42}" rx="44" ry="10" fill="none" stroke="${rope}" stroke-width="5"/><ellipse cx="${f1(coil[0])}" cy="${D + 35}" rx="38" ry="9" fill="none" stroke="${rope}" stroke-width="5"/>`);
+  s.push(MAT.shadow(1080, D + 46, 70, 0.3) + MAT.shadow(1200, D + 54, 70, 0.3) + figure(m2) + figure(m1));
+  // the wagon that will take it up to the taverns: a horse standing still in the shafts, the driver sitting on the box
+  s.push(MAT.shadow(1620, D + 62, 320, 0.3) + tgWagon(1890, D + 58, 220, ink, t, 1, {hat: 'felt', coat: 'vest'}));
   // gulls wheeling over the water (0.6), white against the haze
   let gl = ''; for (let i = 0; i < 4; i++) { const gx = ((300 + i * 520 + t * (46 + i * 9)) % 2600) - 200, gy = 250 + i * 54 + 14 * Math.sin(t * 0.9 + i * 2); gl += tgGull(gx, gy, 20 - i * 2, 0.75 * Math.sin(TAU * (t * 1.5 + i * 0.3))); }
   // foreground (1.35): a bollard with a turn of rope, the corner of a crate: dark and soft
@@ -197,20 +233,37 @@ function renderTgDining({t, cam, quiet = false}) {
       rim: {c: '#FFD9A0', a: 0.85 * fl * lod.rimA / 0.8, dx: 0.012 * Math.sign(TX - x || 1) * d, dy: -0.005},
       an: drink ? {legs: [86, 80], shins: [6, 0], ...POSES.drink(t, ph), bArm: [150, 110]} : {...POSES.sit(t, ph), fArm: [138, 96 + 4 * Math.sin(t * 1.3 + i)], tilt: -6 + 10 * look + 3 * Math.sin(t * 0.8 + i), lean: 3 * look}})); }
   // the table, and the host and hostess at its ends, in clear profile
-  for (const [ex, d] of [[X0 - 70, 1], [X1 + 70, -1]]) { s.push(`<rect x="${ex - d * 76 - 9}" y="${G - 400}" width="18" height="${400 + 30}" rx="6" fill="#150F0C"/><rect x="${Math.min(ex - d * 76, ex + d * 40)}" y="${G - 96}" width="116" height="14" fill="#150F0C"/><rect x="${ex + d * 30 - 6}" y="${G - 90}" width="12" height="120" fill="#150F0C"/><circle cx="${ex - d * 76}" cy="${G - 404}" r="14" fill="#150F0C"/>`);
-    s.push(figure({x: ex, y: sitY(G + 30, H * 1.04), h: H * 1.04 * (d < 0 ? 0.93 : 1), d, kind: d > 0 ? 'man' : 'woman', hat: 'none', coat: 'frock', beard: d > 0, fill: ink, det: lod.det * 0.6, rim: {c: '#FFD9A0', a: 0.9 * fl * lod.rimA / 0.8, dx: 0.012, dy: -0.005},
-      an: {...POSES.sit(t, d > 0 ? 0.2 : 0.7), fArm: [130, 92], tilt: -4 + 10 * arrive, lean: 2 + 3 * arrive}})); }
+  // (each sits on a chair whose seat is at the height the rig's seated proportions need: 0.245 h above the floor for a man, so his
+  // legs are solved down to the floor; 0.23 h for a woman, so her seated skirt's hem meets the floor)
+  for (const [ex, d] of [[X0 - 70, 1], [X1 + 70, -1]]) { const hh = H * 1.04 * (d < 0 ? 0.93 : 1), FL = G + 30, seatY = FL - (d > 0 ? 0.245 : 0.23) * hh;
+    s.push(`<rect x="${ex - d * 76 - 9}" y="${G - 400}" width="18" height="${FL - G + 400}" rx="6" fill="#150F0C"/><rect x="${Math.min(ex - d * 76, ex + d * 40)}" y="${f1(seatY)}" width="116" height="14" fill="#150F0C"/><rect x="${ex + d * 30 - 6}" y="${f1(seatY + 6)}" width="12" height="${f1(FL - seatY - 6)}" fill="#150F0C"/><circle cx="${ex - d * 76}" cy="${G - 404}" r="14" fill="#150F0C"/>`);
+    const fo = {x: ex, y: 0, h: hh, d, kind: d > 0 ? 'man' : 'woman', hat: 'none', coat: 'frock', beard: d > 0, fill: ink, det: lod.det * 0.6, rim: {c: '#FFD9A0', a: 0.9 * fl * lod.rimA / 0.8, dx: 0.012, dy: -0.005},
+      an: {...POSES.sit(t, d > 0 ? 0.2 : 0.7), fArm: [130, 92], tilt: -4 + 10 * arrive}};
+    const so = tgSit(fo, seatY, FL, 0.19, d > 0 ? 'host' : 'hostess');
+    if (d < 0) { const hem = TGK.W(so, 0.2, 0.235); TGK.log('foot', 'hostess.hem', [hem[0], FL], hem); }
+    s.push(figure({...so, an: {...so.an, bob: POSES.sit(t, d > 0 ? 0.2 : 0.7).bob * 0}})); }
   s.push(tgLongTable(X0, X1, ty, G, t, TX) + glowC(TX, ty - 60, 300, 0.55 * su * fl, 'tgcandle'));
-  // the waiter: a tailcoat and a long white apron; he carries the tureen in from the right, sets it down and steps back a half pace
-  const wu = smooth(DH.walk[0], DH.walk[1], t), bu = smooth(DH.back[0], DH.back[1], t), hW = H * 1.12, wx0 = TX + 120, wx = wx0 + 1150 * (1 - wu) + 46 * bu, walking = wu < 1;
-  const carry = [[112, 84], [120, 92]], put = [[132, 104], [138, 110]], rest = [[172, 166], [188, 196]], mixA = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
-  const fA = mixA(mixA(carry[0], put[0], su), rest[0], bu), bA = mixA(mixA(carry[1], put[1], su), rest[1], bu);
-  const wo = {x: wx, y: G + 78, h: hW, d: -1, kind: 'man', hat: 'none', coat: 'jacket', fill: '#070606', det: 0, rim: {c: '#FFD9A0', a: 0.7 * fl, dx: -0.011, dy: -0.004},
-    an: walking ? {...walkAn(walkPhase(1150 * wu, hW * 0.9, 20), {stride: 20, carry: true}), fArm: fA, bArm: bA, lean: 2} : {...POSES.stand(t, 0.3), fArm: fA, bArm: bA, lean: 7 * su * (1 - bu), tilt: -8 * (1 - bu)}};
-  const WX = (u) => wx - u * hW, WY = (v) => G + 78 - v * hW, [hx, hy] = tgHand(wo);
-  s.push(figure(wo) + poly([[WX(-0.01), WY(0.6)], [WX(0.098), WY(0.6)], [WX(0.118), WY(0.12)], [WX(0.0), WY(0.1)]], '#EFE9DC') + poly([[WX(0.03), WY(0.845)], [WX(0.075), WY(0.842)], [WX(0.07), WY(0.74)], [WX(0.045), WY(0.7)]], '#EFE9DC'));
-  const tux = hx - 30 + (TX - (hx - 30)) * su, tuy = hy + 44 + (ty - (hy + 44)) * su;
-  s.push(tgTureen(tux, tuy, 176, t));
+  // the waiter: a tailcoat and a long white apron. He walks in from the right (a whole number of steps), brings his feet together,
+  // and carries the tureen cradled in both hands at the corners of its base, clear of his chest; he leans in with his feet planted,
+  // sets it on the cloth (the base's corners stay in his hands all the way down), lets go and steps back a half pace.
+  const hW = H * 1.12, TW = 130, gW = G + 78, sx = TX + 0.31 * hW, dist = tgWalkDist(1150, hW, 17), wu = smooth(DH.walk[0], DH.walk[1], t), bu = smooth(DH.back[0], DH.back[1], t);
+  const W0 = {kind: 'man', hat: 'none', coat: 'jacket', h: hW, fill: '#070606', det: 0, rim: {c: '#FFD9A0', a: 0.7 * fl, dx: -0.011, dy: -0.004}};
+  const ws = tgWalkSettle(W0, sx + dist, -1, dist, wu, smooth(DH.walk[1], DH.walk[1] + 0.3, t), gW, 'waiter', {stride: 17, carry: true, an: {lean: 1, tilt: -2}});
+  let wo = ws.o;
+  if (wu >= 1) { // standing: feet planted (IK); lean in to set it down, then step back half a pace (the back foot first, then the front)
+    const f = (ws.cur || ws.feet).map((q) => [...q]), back = ws.feet[0][0] > ws.feet[1][0] ? 0 : 1, sb = 0.12 * hW, ub = smooth(DH.back[0], DH.back[0] + 0.35, t), uf = smooth(DH.back[0] + 0.35, DH.back[1], t);
+    f[back][0] += sb * ease(ub); f[1 - back][0] += sb * ease(uf); const lift = (u) => 0.04 * hW * Math.sin(Math.PI * u); f[back][1] -= lift(ub); f[1 - back][1] -= lift(uf);
+    const body = {...wo, x: (f[0][0] + f[1][0]) / 2 - 0.01 * hW, an: {...wo.an, ...POSES.stand(t, 0.3), bob: 0, lean: 1 + 5 * su * (1 - bu), tilt: -2 - 12 * su * (1 - bu), shear: true}};
+    wo = tgLegs(body, f); [0, 1].forEach((i) => { const p = E3K.foot(wo, i), mv = (i === back ? ub : uf) > 0 && (i === back ? ub : uf) < 1; TGK.log(mv || ws.moving === i ? 'swing' : 'foot', 'waiter.stand.' + i, f[i], p); TGK.log('sole', 'waiter.stand.' + i, [p[0], gW], p, {gy: gW}); }); }
+  // the tureen: carried with its base 0.66 h up, 0.27 h ahead of him; set: its base comes down onto the cloth at TX
+  const carryAt = [wo.x - 0.27 * hW, gW - 0.68 * hW], tux = lerp(carryAt[0], TX, su), tuy = lerp(carryAt[1], ty, su), held = bu === 0;
+  const gripF = [tux - 0.2 * TW - 7, tuy - 3], gripB = [tux + 0.2 * TW + 7, tuy - 3]; // at the sides of the base, palms up under its rim
+  if (held) { wo = TGK.reach(wo, 'f', gripF[0], gripF[1], 'waiter.f.tureen'); wo = TGK.reach(wo, 'b', gripB[0], gripB[1], 'waiter.b.tureen', false); }
+  else { const r1 = ease(bu); wo = TGK.reach(wo, 'f', lerp(gripF[0], wo.x - 0.1 * hW, r1), lerp(gripF[1], gW - 0.46 * hW, r1), 'waiter.f.let', false, 'move'); wo = TGK.reach(wo, 'b', lerp(gripB[0], wo.x + 0.02 * hW, r1), lerp(gripB[1], gW - 0.45 * hW, r1), 'waiter.b.let', false, 'move'); }
+  if (su >= 1) TGK.rest('tureen', tux, tuy, ty);
+  const AP = (a) => a.map(([u, v]) => TGK.W(wo, u, v)); // the apron, in the figure's own frame so it leans with him
+  s.push(figure(wo) + poly(AP([[-0.01, 0.6], [0.098, 0.6], [0.118, 0.12], [0.0, 0.1]]), '#EFE9DC') + poly(AP([[0.03, 0.845], [0.075, 0.842], [0.07, 0.74], [0.045, 0.7]]), '#EFE9DC'));
+  s.push((su > 0.98 ? `<ellipse cx="${f1(tux)}" cy="${f1(ty + 1)}" rx="${f1(TW * 0.3)}" ry="4" fill="#000" opacity="0.25"/>` : '') + tgTureen(tux, tuy, TW, t));
   // foreground (1.3): a palm in a tub and the end of a sideboard with a decanter: dark and soft
   let fore = `<g filter="url(#tgblur)"><path d="M-630,1200 L-600,${G + 60} L-410,${G + 60} L-380,1200 Z" fill="#060505"/>`;
   for (let k = -4; k <= 4; k++) fore += `<path d="M-505,${G + 60} Q${-505 + k * 70},${G - 420} ${-505 + k * 150},${G - 300 + Math.abs(k) * 50}" stroke="#060505" stroke-width="22" fill="none" stroke-linecap="round"/>`;

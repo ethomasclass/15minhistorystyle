@@ -234,7 +234,7 @@ function fireworks(L, t) {
   return s.join('');
 }
 
-function ship(x, base, c, t, seed) { // a three-masted ship dressed with a line of flags, rocking at anchor
+function ship(x, base, c, t, seed, dressed = true) { // a three-masted ship dressed with a line of flags, rocking at anchor (dressed = false: plain rigging, no flags: Thanksgiving's 1800 harbour)
   const s = [], tq = step12(t), bob = 3 * Math.sin(TAU * (tq / 3.7 + seed)), rock = 0.7 * Math.sin(TAU * (tq / 4.3 + seed));
   s.push(poly([[x, base - 38], [x + 320, base - 38], [x + 300, base], [x + 30, base]], c));
   s.push(poly([[x + 320, base - 38], [x + 380, base - 52], [x + 322, base - 30]], c));
@@ -242,11 +242,12 @@ function ship(x, base, c, t, seed) { // a three-masted ship dressed with a line 
   for (const [mx, mh] of masts) {
     s.push(`<rect x="${mx - 3}" y="${base - 38 - mh}" width="6" height="${mh}" fill="${c}"/>`);
     for (const [kk, w] of [[0.3, 110], [0.55, 90], [0.78, 64]]) s.push(`<rect x="${mx - w / 2}" y="${f1(base - 38 - mh * kk - 6)}" width="${w}" height="9" rx="4" fill="${c}"/>`);
-    s.push(flag(mx + 3, base - 38 - mh, 26, 10, c, t, seed + mx * 0.01));
+    if (dressed) s.push(flag(mx + 3, base - 38 - mh, 26, 10, c, t, seed + mx * 0.01));
   }
   const rig = [[x + 380, base - 52], [masts[2][0], base - 38 - masts[2][1]], [masts[1][0], base - 38 - masts[1][1]], [masts[0][0], base - 38 - masts[0][1]], [x + 10, base - 38]];
   s.push(line(rig, c, 1.5));
-  for (let i = 0; i < rig.length - 1; i++) {
+  if (!dressed) for (const [mx, mh] of masts) s.push(line([[mx - 40, base - 38], [mx, base - 38 - mh * 0.8], [mx + 40, base - 38]], c, 1)); // shrouds
+  if (dressed) for (let i = 0; i < rig.length - 1; i++) {
     const [x0, y0] = rig[i], [x1, y1] = rig[i + 1];
     for (let u = 0.1; u < 1; u += 0.16) { const px = x0 + (x1 - x0) * u, py = y0 + (y1 - y0) * u, sw = 4 * Math.sin(TAU * (tq * 0.8 + u + i)); s.push(poly([[px - 5, py], [px + 5, py], [px + sw, py + 14]], c)); }
   }

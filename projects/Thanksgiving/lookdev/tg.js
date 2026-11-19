@@ -59,12 +59,15 @@ function tgEelBody(pts, w = 9) {
 // an eel driven out of the mud at (x, y) from time t0: it slides out head first, low, and wriggles away along the flat (dir)
 function tgEel(x, y, t, t0, dir, L, seed) {
   const u = clamp01((t - t0) / 1.1); if (u <= 0) return '';
-  const out = L * (u * u * (3 - 2 * u)), crawl = Math.max(0, t - t0 - 1.1) * 16, pts = [];
-  for (let k = 0; k <= 16; k++) { const q = k / 16, sd = (out + crawl) * (1 - q) - Math.max(0, crawl - (L - out)) * 0, d = Math.max(0, out * (1 - q) + crawl); // distance from the hole, head first
-    const wv = Math.sin(t * 7 - q * 6.5 + seed * 2.1), amp = (3 + 6 * (1 - q)) * Math.min(1, d / 30);
-    pts.push([x + dir * d + wv * amp * 0.5, y - 5 - 7 * Math.sin(Math.PI * clamp01(d / (L * 0.6))) * (1 - u * 0.6) + wv * amp * 0.75 + (k === 0 ? -3 - 2 * Math.sin(t * 3 + seed) : 0)]); }
-  if (crawl > 0) for (let k = 0; k <= 16; k++) { const q = k / 16; pts[k][0] = x + dir * (crawl + L * (1 - q)) + (pts[k][0] - (x + dir * (out * (1 - q) + crawl))); }
-  return `<ellipse cx="${f1(x)}" cy="${y + 1}" rx="${f1(16 * Math.min(1, u * 3))}" ry="4" fill="#0B0A08" opacity="${f1(0.9 * (1 - smooth(1.4, 3, t - t0)))}"/>` + tgEelBody(pts);
+  // its belly lies on the mud line y (the centre line is half a body above it); the wriggle is side to side across the flat, which
+  // a low camera sees as a long wave along the body and only a small rise and fall (it never leaves the mud or sinks into it)
+  const out = L * (u * u * (3 - 2 * u)), crawl = Math.max(0, t - t0 - 1.1) * 16, pts = [], half = 6.25;
+  for (let k = 0; k <= 16; k++) { const q = k / 16, d = Math.max(0, out * (1 - q) + crawl); // distance from the hole, head first
+    const wv = Math.sin(t * 7 - q * 6.5 + seed * 2.1), amp = (3 + 6 * (1 - q)) * Math.min(1, d / 30), emerging = 7 * Math.sin(Math.PI * clamp01(d / (L * 0.6))) * (1 - u);
+    pts.push([x + dir * d + wv * amp * 0.6, y - half - emerging - Math.abs(wv) * amp * 0.12 + (k === 0 ? -3 - 2 * Math.sin(t * 3 + seed) : 0)]); }
+  if (t - t0 > 1.1) for (const k of [8, 16]) TGK.log('eel', 'eel' + seed + '.' + k, [pts[k][0], y], [pts[k][0], pts[k][1] + half]);
+  return `<ellipse cx="${f1(x)}" cy="${y + 1}" rx="${f1(16 * Math.min(1, u * 3))}" ry="4" fill="#0B0A08" opacity="${f1(0.9 * (1 - smooth(1.4, 3, t - t0)))}"/>` +
+    `<ellipse cx="${f1(pts[8][0])}" cy="${y + 1.5}" rx="${f1(L * 0.42 * u)}" ry="3" fill="#0B0A08" opacity="0.35"/>` + tgEelBody(pts);
 }
 function renderTgEel({t, cam, quiet = false}) {
   const c = cam2(cam), H = 330, B = ER.bank;
@@ -91,34 +94,57 @@ function renderTgEel({t, cam, quiet = false}) {
   // the shallow pool he treads in: ankle-deep water lying on the mud, the sky in it
   const FY = B + 40, px = ER.spot;
   s.push(`<ellipse cx="${px + 10}" cy="${FY + 6}" rx="330" ry="30" fill="#15130F"/><ellipse cx="${px + 10}" cy="${FY + 4}" rx="320" ry="25" fill="url(#tgpool)"/><ellipse cx="${px + 70}" cy="${FY - 2}" rx="210" ry="9" fill="#F2C79A" opacity="0.45"/>`);
-  // the treader: wades out, then treads the mud: one knee lifts high, the foot presses down, a ring spreads; then the other
-  const wu = smooth(ER.walk[0], ER.walk[1], t), fx = px - 620 + 620 * wu, treading = t >= ER.tread;
+  // the treader: wades out (a whole number of steps, so he stops with both feet down), brings the back foot up beside the front, then
+  // treads the mud: one knee lifts high and the foot presses down into the ooze while the other foot stays planted, then the other
+  const g = FY + 4, wdist = tgWalkDist(620, H, 16), wu = smooth(ER.walk[0], ER.walk[1] - 0.25, t), treading = t >= ER.tread;
   const lod = lodFor(H * c.z), rim = {c: '#FFE0B0', a: 0.75 * lod.rimA, dx: 0.012, dy: -0.004};
   const lift = (ph) => { ph = ((ph % 1) + 1) % 1; return ph < 0.3 ? ease(ph / 0.3) : ph < 0.4 ? 1 : ph < 0.5 ? 1 - Math.pow((ph - 0.4) / 0.1, 2) : 0; };
   const press = (ph) => { ph = ((ph % 1) + 1) % 1; return ph >= 0.5 && ph < 0.72 ? Math.sin(Math.PI * (ph - 0.5) / 0.22) : 0; };
   const tp = treading ? (t - ER.tread) / ER.step : 0;
-  let an;
-  if (!treading) an = {...walkAn(walkPhase(620 * wu, H * 0.9, 16), {stride: 16, arm: 10}), lean: 3};
-  else { const a = lift(tp), b = lift(tp + 0.5), pr = press(tp) + press(tp + 0.5);
-    an = {legs: [4 + 64 * a, -4 + 64 * b], shins: [4 - 26 * a, -4 - 26 * b], fArm: [162 - 22 * a + 10 * b, 140 - 30 * a], bArm: [196 + 16 * a - 10 * b, 206 + 10 * a], bob: -0.016 * pr + 0.006 * (a + b), lean: 4 + 3 * pr, tilt: -16}; }
+  const W0 = {...TG_WAMP, h: H, fill: TG.ink, rim}, ws = tgWalkSettle(W0, px - wdist, 1, wdist, wu, smooth(ER.walk[1] - 0.25, ER.tread, t), g, 'treader', {stride: 16, arm: 10, an: {lean: 3}, gap: 0.09});
+  let tw = ws.o, fx = tw.x;
+  if (treading) { const a = lift(tp), b = lift(tp + 0.5), pa = press(tp), pb = press(tp + 0.5), pr = pa + pb, B0 = ws.feet[0], B1 = ws.feet[1];
+    // foot targets: a lifted foot rises 0.16 h and comes a little forward; a pressing foot pushes 5 px into the mud (under the water)
+    const tgt = (Bf, l, p) => [Bf[0] + 0.03 * H * l, g - 0.16 * H * l + 5 * p], feet = [tgt(B0, a, pa), tgt(B1, b, pb)];
+    const body = {...tw, an: {...tw.an, fArm: [162 - 22 * a + 10 * b, 140 - 30 * a], bArm: [196 + 16 * a - 10 * b, 206 + 10 * a], bob: -0.012 * pr - 0.008 * (a + b), lean: 4 + 3 * pr, tilt: -16, shear: true}};
+    tw = tgLegs(body, feet);
+    [[a, pa], [b, pb]].forEach(([l, p], i) => { const q = E3K.foot(tw, i), still = l === 0 && p === 0; TGK.log(still ? 'foot' : 'swing', 'treader.' + i, feet[i], q); TGK.log('sole', 'treader.' + i, [q[0], g], q, {gy: g}); }); }
   // eels driven out round his feet, one a press: low on the mud, wriggling away
   if (treading) { const n = Math.floor(tp * 2), spots = [[70, 1, 150], [-64, -1, 128], [96, 1, 168], [-90, -1, 140], [52, 1, 120], [-48, -1, 158], [110, 1, 132]];
     for (let k = 0; k < Math.min(n + 1, spots.length); k++) { const t0 = ER.tread + (k + 1) * ER.step / 2 + 0.05; s.push(tgEel(fx + spots[k][0], FY - 2 + (k % 3) * 5, t, t0, spots[k][1], spots[k][2], k + 1)); } }
-  s.push(figure({...TG_WAMP, x: fx, y: FY + 4, h: H, d: 1, fill: TG.ink, rim, an}));
+  s.push(figure(tw));
   // the water over his feet, and the rings each press sends out
   s.push(`<ellipse cx="${f1(fx + 8)}" cy="${FY + 7}" rx="70" ry="6" fill="#7E6A5C"/><ellipse cx="${f1(fx + 8)}" cy="${FY + 9}" rx="54" ry="3.5" fill="#4A4038" opacity="0.7"/>`);
   if (treading) for (let k = 0; k < 2; k++) for (let j = 0; j < 2; j++) { const age = (((tp + k * 0.5 - 0.5) % 1) + 1) % 1 * ER.step - j * 0.28; if (tp + k * 0.5 < 0.5 || age < 0 || age > 1.5) continue; const u = age / 1.5;
     s.push(`<ellipse cx="${f1(fx + (k ? -10 : 18))}" cy="${FY + 7}" rx="${f1(24 + 150 * u)}" ry="${f1(3.5 + 13 * u)}" fill="none" stroke="#FFF3D6" stroke-width="${f1(3.2 - 1.6 * u)}" opacity="${f1(0.85 * (1 - u))}"/>`); }
-  // the colonist waits on the flat with a rush basket (coral), then brings it over and sets it down; a few eels in it already
-  { const bu = smooth(ER.basket[0], ER.basket[1], t), bx = 2230 - 360 * bu, walking = bu > 0 && bu < 1, hB = H * 0.95, set = smooth(ER.basket[1], ER.basket[1] + 0.7, t);
-    const o = {...TG_COLONIST, x: bx, y: B + 44, h: hB, d: -1, fill: TG.ink, rim: {...rim, dx: -0.012},
-      an: walking ? {...walkAn(walkPhase(360 * bu, hB * 0.9, 18), {stride: 18, carry: true}), fArm: [172, 166], lean: 3} : {...POSES.stand(t, 0.4), fArm: [172 - 30 * set, 166 - 60 * set], tilt: -10 - 6 * set}};
-    s.push(figure(o));
-    const [hx, hy] = hand({...o, an: {fArm: [172, 166]}}), bxx = hx + (bx - 130 - hx) * set, by = hy + 16 + (B + 30 - (hy + 16)) * set;
-    const eelIn = (k) => { const p = []; for (let j = 0; j <= 10; j++) { const q = j / 10, w = Math.sin(t * 5 + k * 2 - q * 5) * (2 + 3 * q); p.push([bxx + (k - 1) * 22 + (k - 1) * 30 * q * q + w * 0.6, by - 8 - 20 * Math.sin(Math.PI * Math.min(1, q * 1.3)) + 26 * q * q + w * 0.6]); } return tgEelBody(p, 8); };
-    s.push(`<path d="M${f1(bxx - 40)},${f1(by - 4)} Q${f1(bxx)},${f1(by - 78)} ${f1(bxx + 40)},${f1(by - 4)}" stroke="#B8463C" stroke-width="5" fill="none" opacity="${f1(1 - set * 0.2)}"/>` + eelIn(0) +
+  // the colonist waits on the flat with a rush basket (coral), brings it over (a whole number of steps), steps his feet together,
+  // crouches with his feet planted and lowers it onto the mud by its handle, lets go and stands. The basket hangs from his hand by
+  // the top of its handle the whole time it is carried; once down, it rests on the mud a little in front of him.
+  { const hB = H * 0.95, gC = B + 44, dist = tgWalkDist(360, hB, 18), bu = smooth(ER.basket[0], ER.basket[1], t), set = smooth(ER.basket[1] + 0.15, ER.basket[1] + 0.85, t),
+      rel = smooth(ER.basket[1] + 0.95, ER.basket[1] + 1.5, t), crouch = smooth(ER.basket[1], ER.basket[1] + 0.55, t) * (1 - rel);
+    const C0 = {...TG_COLONIST, h: hB, fill: TG.ink, rim: {...rim, dx: -0.012}};
+    const cs = tgWalkSettle(C0, 2230, -1, dist, bu, smooth(ER.basket[1], ER.basket[1] + 0.35, t), gC, 'colonist', {stride: 18, carry: true, an: {fArm: [166, 144], lean: 3}});
+    let o = cs.o; const settled = bu >= 1;
+    if (settled) { // the kneel: the back foot slides back 0.2 h as the hips drop, so the back knee comes down onto the mud
+      const kb = cs.feet.map((f) => [...f]), back = (kb[0][0] - kb[1][0]) * -1 >= 0 ? 0 : 1; kb[back][0] += 0.2 * hB * crouch; // d = -1: back is +x
+      const body = {...o, an: {...o.an, ...POSES.stand(t, 0.4), bob: -0.2 * crouch, lean: 3 + 9 * crouch, tilt: -10 - 14 * crouch, shear: crouch < 0.05}}; o = tgLegs(body, kb);
+      [0, 1].forEach((i) => TGK.log(t < ER.basket[1] + 0.35 || (i === back && crouch > 0 && crouch < 1 && rel === 0) || (i === back && rel > 0 && rel < 1) ? 'swing' : 'foot', 'colonist.crouch.' + i, kb[i], E3K.foot(o, i))); }
+    // the basket: rim at by - 4, bottom at by + 58, handle top at by - 41. Carried: the handle top is in the hand. Set: its bottom
+    // comes down to the mud at gC + 6, a little in front of his feet; the hand follows the handle down (IK), then lets go
+    const bot = gC + 6, rest = [o.x - 0.3 * hB, bot - 58 - 41];
+    let apex;
+    if (!settled || set <= 0) { const g2 = E3K.hand(o, 'f'); apex = [g2.x, g2.y]; TGK.log('hand', 'colonist.basket', apex, apex); }
+    else { const hang = E3K.hand({...o, an: {...o.an, fArm: [166, 144]}}, 'f'); apex = [lerp(hang.x, rest[0], set), lerp(hang.y, rest[1], set)];
+      o = rel > 0 ? TGK.reach(o, 'f', lerp(apex[0], o.x - 0.05 * hB, ease(rel)), lerp(apex[1], gC - 0.42 * hB, ease(rel)), 'colonist.let.go', false, 'move') : TGK.reach(o, 'f', apex[0], apex[1], 'colonist.basket'); }
+    const bxx = apex[0], by = apex[1] + 41, onMud = settled && set >= 1;
+    if (onMud) TGK.rest('basket', bxx, by + 58, bot);
+    const eelIn = (k) => { const p = []; for (let j = 0; j <= 10; j++) { const q = j / 10, w = Math.sin(t * 5 + k * 2 - q * 5) * (2 + 3 * q); p.push([bxx + (k - 1) * 20 + (k - 1) * 14 * q + w * 0.6, by + 26 - 44 * Math.sin(Math.PI * Math.min(1, q * 1.15)) + w * 0.5]); } return tgEelBody(p, 8); };
+    // handle (behind), the eels looping up out of the basket and back in, then the basket's body in front of them
+    s.push((onMud ? `<ellipse cx="${f1(bxx)}" cy="${f1(bot + 1)}" rx="54" ry="7" fill="#0B0A08" opacity="0.45"/>` : '') +
+      `<path d="M${f1(bxx - 40)},${f1(by - 4)} Q${f1(bxx)},${f1(by - 78)} ${f1(bxx + 40)},${f1(by - 4)}" stroke="#B8463C" stroke-width="5" fill="none"/>` + eelIn(0) + eelIn(2) + eelIn(1) +
       `<path d="M${f1(bxx - 46)},${f1(by - 4)} q46,-14 92,0 l-12,62 q-34,12 -68,0 Z" fill="url(#tgcoral)"/><path d="M${f1(bxx - 46)},${f1(by - 4)} q46,14 92,0" stroke="#7A2A22" stroke-width="3" fill="none"/>` +
-      [0, 1, 2].map((k) => `<path d="M${f1(bxx - 40 + k * 4)},${f1(by + 14 + k * 16)} q40,10 ${80 - k * 8},0" stroke="#7A2A22" stroke-width="2" fill="none" opacity="0.7"/>`).join('') + eelIn(1) + eelIn(2)); }
+      [0, 1, 2].map((k) => `<path d="M${f1(bxx - 40 + k * 4)},${f1(by + 14 + k * 16)} q40,10 ${80 - k * 8},0" stroke="#7A2A22" stroke-width="2" fill="none" opacity="0.7"/>`).join(''));
+    s.push(figure(o)); }
   // near reeds along the flat's edge, and the foreground: big dark reeds, soft, moving against the camera
   const reedsMid = [-500, -120, 260, 1050, 2420, 2700, 3000, 3300].map((x, i) => tgReeds(x, B + 6, 16, 150, t, 60 + i, '#1F2A24')).join('');
   const fore = `<g filter="url(#tgblur)">` + [-260, 420, 980, 2180, 3200].map((x, i) => tgReeds(x, 1230, 26, 400, t, 80 + i, '#0A0D0B')).join('') + `</g>`;
@@ -134,12 +160,13 @@ Object.assign(CLIPS, {tg_eel_river: {sec: ER.sec, render: (t) => renderTgEel({t,
 const VK = {sec: 12, F: 900, H: 370, maid: [3.2, 8.4], hours: [1, 11]}; // floor line; a grown woman's height in the room
 
 // a copper pan hanging from the rail: a round body with a highlight and a long iron handle up to its hook
-const tgPan = (x, y, r, t, k) => { const sw = 1.2 * Math.sin(t * 0.9 + k);
-  return `<g transform="rotate(${f1(sw)}, ${x}, ${y - r - 60})"><rect x="${x - 3}" y="${y - r - 60}" width="6" height="64" fill="#1A120D"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#tgcop)"/><circle cx="${x}" cy="${y}" r="${f1(r * 0.72)}" fill="none" stroke="#7A4526" stroke-width="2" opacity="0.6"/><path d="M${f1(x - r * 0.55)},${f1(y - r * 0.35)} q${f1(r * 0.2)},-${f1(r * 0.35)} ${f1(r * 0.6)},-${f1(r * 0.42)}" stroke="#FFD9A8" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/></g>`; };
+const TG_RAIL = 250; // the pan rail's top edge: every pan's hook hangs over it
+const tgPan = (x, y, r, t, k) => { const sw = 1.2 * Math.sin(t * 0.9 + k), top = TG_RAIL - 5;
+  return `<g transform="rotate(${f1(sw)}, ${x}, ${top + 5})"><path d="M${x - 6},${top + 12} q0,-12 6,-12 q7,0 7,10" stroke="#1A120D" stroke-width="4" fill="none"/><rect x="${x - 3}" y="${top + 8}" width="6" height="${f1(y - r - top - 4)}" fill="#1A120D"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#tgcop)"/><circle cx="${x}" cy="${y}" r="${f1(r * 0.72)}" fill="none" stroke="#7A4526" stroke-width="2" opacity="0.6"/><path d="M${f1(x - r * 0.55)},${f1(y - r * 0.35)} q${f1(r * 0.2)},-${f1(r * 0.35)} ${f1(r * 0.6)},-${f1(r * 0.42)}" stroke="#FFD9A8" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/></g>`; };
 // a fluted jelly mould, drawn tall (a turret of rings); fill is a gradient id
 const tgMould = (x, y, w, fill) => { const h = w * 0.95; let s = `<path d="M${x - w / 2},${y} L${x - w * 0.42},${y - h * 0.5} L${x - w * 0.3},${y - h * 0.52} L${x - w * 0.24},${y - h} L${x + w * 0.24},${y - h} L${x + w * 0.3},${y - h * 0.52} L${x + w * 0.42},${y - h * 0.5} L${x + w / 2},${y} Z" fill="url(#${fill})"/>`;
   for (let k = -3; k <= 3; k++) s += `<path d="M${f1(x + k * w * 0.13)},${y - 3} L${f1(x + k * w * 0.11)},${f1(y - h * 0.5)} M${f1(x + k * w * 0.075)},${f1(y - h * 0.53)} L${f1(x + k * w * 0.07)},${f1(y - h + 3)}" stroke="#000" stroke-width="2" opacity="0.28"/>`;
-  return s + `<rect x="${x - w / 2 - 6}" y="${y - 6}" width="${w + 12}" height="8" rx="3" fill="url(#${fill})"/>`; };
+  return s + `<rect x="${x - w / 2 - 6}" y="${y - 8}" width="${w + 12}" height="8" rx="3" fill="url(#${fill})"/>`; }; // the base's underside on y
 function renderTgKitchen({t, cam, quiet = false}) {
   const c = cam2(cam), {F, H} = VK, fl = 0.86 + 0.09 * Math.sin(t * 7.1) + 0.05 * Math.sin(t * 16.7), s = [], back = [];
   // back plane (0.9): the brick wall in firelight, the high areaway window (night), the pan rail, a dresser of moulds, the clock
@@ -166,26 +193,49 @@ function renderTgKitchen({t, cam, quiet = false}) {
   s.push(`<rect x="${rx + 420}" y="${F - 165}" width="110" height="130" rx="5" fill="#050302"/><circle cx="${rx + 510}" cy="${F - 100}" r="7" fill="${TG.copper}"/>`);
   s.push(glowC(rx + 200, F - 105, 620, 0.95 * fl, 'tgfire') + glowC(rx + 200, F - 60, 900, 0.5 * fl, 'tgfire'));
   // the stockpot (copper, big) and a kettle; steam rolling up into the hood
-  { const px = rx + 170, py = F - 204; s.push(`<rect x="${px - 100}" y="${py - 120}" width="200" height="120" rx="10" fill="url(#tgcop)"/><rect x="${px - 110}" y="${py - 128}" width="220" height="16" rx="6" fill="#7A4526"/><path d="M${px - 110},${py - 80} q-34,0 -34,30 M${px + 110},${py - 80} q34,0 34,30" stroke="#5A311B" stroke-width="9" fill="none"/>` +
-      MAT.smoke(px - 30, py - 130, t, {col: 'F4EFE6', k: 1.0, n: 9, rise: 260, drift: 30, speed: 5, seed: 23}) + MAT.smoke(px + 40, py - 130, t + 1.3, {col: 'FFE0B0', k: 0.8, n: 7, rise: 230, drift: 50, speed: 4, seed: 24}));
+  // (a broad stockpot, 84 px tall: its rim at the cook's shoulder height, so she can stir it with a long spoon from beside the range)
+  const PT = {x: rx + 170, y: F - 204, h: 84}; PT.rim = PT.y - PT.h - 8;
+  { const px = PT.x, py = PT.y, ph = PT.h; s.push(`<rect x="${px - 104}" y="${py - ph}" width="208" height="${ph}" rx="10" fill="url(#tgcop)"/><rect x="${px - 114}" y="${py - ph - 8}" width="228" height="16" rx="6" fill="#7A4526"/><path d="M${px - 114},${py - ph + 30} q-34,0 -34,30 M${px + 114},${py - ph + 30} q34,0 34,30" stroke="#5A311B" stroke-width="9" fill="none"/>` +
+      MAT.smoke(px - 30, py - ph - 10, t, {col: 'F4EFE6', k: 1.0, n: 9, rise: 260, drift: 30, speed: 5, seed: 23}) + MAT.smoke(px + 40, py - ph - 10, t + 1.3, {col: 'FFE0B0', k: 0.8, n: 7, rise: 230, drift: 50, speed: 4, seed: 24}));
+    TGK.rest('stockpot', px, py, F - 204);
     s.push(`<path d="M${rx + 390},${py} q0,-70 60,-70 q60,0 60,70 Z" fill="#0D0907"/><path d="M${rx + 505},${py - 40} l44,-24" stroke="#0D0907" stroke-width="10"/>` + MAT.smoke(rx + 552, py - 70, t, {col: 'F4EFE6', k: 0.45, n: 5, rise: 160, drift: 60, seed: 25})); }
   // the table: long, scrubbed; the jelly bag on its stand dripping into a bowl; the coral mould; a second mould and a sugar loaf
   const tx = 900, ty = F - 200, tw = 860;
   s.push(`<rect x="${tx}" y="${ty}" width="${tw}" height="20" fill="#0D0907"/><rect x="${tx + 30}" y="${ty + 20}" width="18" height="180" fill="#0D0907"/><rect x="${tx + tw - 48}" y="${ty + 20}" width="18" height="180" fill="#0D0907"/><rect x="${tx + 30}" y="${ty + 120}" width="${tw - 60}" height="10" fill="#0D0907"/>`);
   { const jx = tx + 250; s.push(line([[jx - 70, ty], [jx - 40, ty - 250]], '#0D0907', 9) + line([[jx + 70, ty], [jx + 40, ty - 250]], '#0D0907', 9) + `<rect x="${jx - 60}" y="${ty - 256}" width="120" height="10" fill="#0D0907"/>` +
       `<path d="M${jx - 46},${ty - 246} L${jx + 46},${ty - 246} L${jx + 6},${ty - 96} L${jx - 6},${ty - 96} Z" fill="#E9DFC6" opacity="0.92"/><path d="M${jx - 30},${ty - 246} L${jx},${ty - 100}" stroke="#B9AC8E" stroke-width="3" opacity="0.7"/>`);
-    const du = (t * 0.9) % 1; s.push(`<ellipse cx="${jx}" cy="${f1(ty - 92 + 62 * du * du)}" rx="4" ry="${f1(6 + 6 * du)}" fill="${TG.gold}" opacity="${f1(1 - du * 0.3)}"/>`);
-    const lvl = 10 + 26 * smooth(0, VK.sec, t); s.push(`<path d="M${jx - 70},${ty - 44} q70,52 140,0 Z" fill="#E9DFC6"/><path d="M${jx - 62},${f1(ty - 38)} q62,${f1(lvl)} 124,0 Z" fill="${TG.gold}" opacity="0.85"/><rect x="${jx - 26}" y="${ty - 8}" width="52" height="8" fill="#B9AC8E"/>`); }
+    const du = (t * 0.9) % 1; s.push(`<ellipse cx="${jx}" cy="${f1(ty - 92 + 70 * du * du)}" rx="4" ry="${f1(6 + 6 * du)}" fill="${TG.gold}" opacity="${f1(1 - du * 0.3)}"/>`);
+    const lvl = 10 + 26 * smooth(0, VK.sec, t); s.push(`<path d="M${jx - 70},${ty - 34} q70,52 140,0 Z" fill="#E9DFC6"/><path d="M${jx - 62},${f1(ty - 28)} q62,${f1(lvl)} 124,0 Z" fill="${TG.gold}" opacity="0.85"/><rect x="${jx - 26}" y="${ty - 8}" width="52" height="8" fill="#B9AC8E"/>`); }
   s.push(tgMould(tx + 540, ty, 150, 'tgcoral') + glowC(tx + 540, ty - 80, 190, 0.5, 'tggas') + `<g opacity="0.9">${tgMould(tx + 730, ty, 96, 'tgcop')}</g>` + `<path d="M${tx + 90},${ty} l22,-120 l22,120 Z" fill="#E9DFC6" opacity="0.9"/>`);
-  // the cook at the pot (ink, solid until the push-in), stirring; the kitchen maid crosses with a bowl and sets it on the table
+  // the cook at the pot (ink, solid until the push-in): she stands beside the range, her hand over the pot's mouth, and stirs with a
+  // long wooden spoon whose bowl is down in the stock (the spoon is hidden below the rim). The hand circles; the arm follows by IK.
   const lod = lodFor(H * c.z), K = (o) => figure({kind: 'woman', hat: 'maid', wear: ['plain', 'apron'], fill: TG.ink, det: lod.det * 0.6, rim: {c: '#FFB877', a: 0.85 * fl, dx: -0.012, dy: -0.004}, ...o});
-  s.push(K({x: rx + 420, y: F, h: H, d: -1, prop: 'spoon', an: {...POSES.stir(t, 0.2), fArm: [112 + 5 * Math.sin(TAU * t * 0.8), 82 + 14 * Math.cos(TAU * t * 0.8)], tilt: -12 + 4 * Math.sin(t * 0.7), lean: 6}}));
-  { const mu = smooth(VK.maid[0], VK.maid[1], t), mx = 2300 - 780 * mu, walking = mu > 0 && mu < 1, hM = H * 0.92;
-    s.push(K({x: mx, y: F, h: hM, d: -1, hat: 'kerchief', prop: 'bowl', rim: {c: '#FFE0A0', a: 0.7 * fl, dx: 0.012, dy: -0.004},
-      an: walking ? walkAn(walkPhase(780 * mu, hM * 0.88), {carry: true}) : {...POSES.stand(t, 0.5), fArm: [140 - 30 * smooth(8.4, 9.2, t), 110], tilt: -8}})); }
+  { const w = TAU * t * 0.8, co0 = {kind: 'woman', hat: 'maid', wear: ['plain', 'apron'], x: rx + 374, y: F, h: H, d: -1, an: {...POSES.stir(t, 0.2), bArm: [158, 122], tilt: -14 + 3 * Math.sin(t * 0.7), lean: 7 + 1.5 * Math.sin(w), bob: 0, shear: true}};
+    const co1 = TGK.ground(co0, F); TGK.stander(co1, F, 'cook');
+    const H0 = [PT.x + 62 + 24 * Math.cos(w), PT.rim - 26 + 6 * Math.sin(w)], co = TGK.reach(co1, 'f', H0[0], H0[1], 'cook.spoon');
+    const [hx, hy] = TGK.hand(co, 'f'), tip = [hx - 46 - 10 * Math.cos(w), PT.rim + 62]; // the spoon's bowl, down in the stock
+    TGK.log('hand', 'cook.spoon.tip', [Math.max(PT.x - 96, Math.min(PT.x + 96, tip[0])), Math.max(PT.rim + 12, Math.min(PT.y - 8, tip[1]))], tip);
+    s.push(`<clipPath id="tgpotmouth"><rect x="${PT.x - 300}" y="-500" width="900" height="${PT.rim + 500}"/></clipPath><g clip-path="url(#tgpotmouth)">${line([[hx + 4, hy - 8], tip], '#8A5A30', 7)}</g>` + K({...co, an: {...co.an}})); }
+  // the kitchen maid crosses with a white bowl in both hands (the hands at its sides), stops at the table, leans in and sets it down
+  // beside the jelly stand, lets go and straightens; her skirt glides with its hem on the floor
+  { const hM = H * 0.92, BW = 70, bowlX = tx + 392, xEnd = bowlX + 0.24 * hM, dist = 2300 - xEnd, mu = smooth(VK.maid[0], VK.maid[1], t), su = smooth(VK.maid[1], VK.maid[1] + 0.6, t), ru = smooth(VK.maid[1] + 0.8, VK.maid[1] + 1.4, t);
+    const sway = 1.6 * Math.sin(TAU * walkPhase(dist * mu, hM, 22)) * (mu > 0 && mu < 1 ? 1 : 0);
+    const ms = tgWalkSettle({kind: 'woman', hat: 'kerchief', wear: ['plain', 'apron'], h: hM, rim: {c: '#FFE0A0', a: 0.7 * fl, dx: 0.012, dy: -0.004}}, 2300, -1, dist, mu, 1, F, 'maid', {stride: 22, carry: true, an: {...POSES.stand(t, 0.5), lean: 2 + sway + 5 * su * (1 - ru), tilt: -6 - 8 * su}});
+    let mo = ms.o; const carry = [mo.x - 0.2 * hM, F - 0.68 * hM], bx = lerp(carry[0], bowlX, su), by = lerp(carry[1], ty, su);
+    const gF = [bx - BW / 2 - 2, by - 15], gB = [bx + BW / 2 + 2, by - 15];
+    if (ru === 0) { mo = TGK.reach(mo, 'f', gF[0], gF[1], 'maid.f.bowl'); mo = TGK.reach(mo, 'b', gB[0], gB[1], 'maid.b.bowl'); }
+    else { mo = TGK.reach(mo, 'f', lerp(gF[0], mo.x - 0.1 * hM, ease(ru)), lerp(gF[1], F - 0.45 * hM, ease(ru)), 'maid.f.let', false, 'move'); mo = TGK.reach(mo, 'b', lerp(gB[0], mo.x + 0.03 * hM, ease(ru)), lerp(gB[1], F - 0.44 * hM, ease(ru)), 'maid.b.let', false, 'move'); }
+    if (su >= 1) TGK.rest('bowl', bx, by, ty);
+    s.push(K(mo) + (su >= 1 ? `<ellipse cx="${f1(bx)}" cy="${f1(ty + 1)}" rx="${BW * 0.32}" ry="3" fill="#000" opacity="0.3"/>` : '') +
+      `<path d="M${f1(bx - BW / 2)},${f1(by - 30)} Q${f1(bx - BW / 2)},${f1(by - 4)} ${f1(bx - 12)},${f1(by - 4)} L${f1(bx - 14)},${f1(by)} L${f1(bx + 14)},${f1(by)} L${f1(bx + 12)},${f1(by - 4)} Q${f1(bx + BW / 2)},${f1(by - 4)} ${f1(bx + BW / 2)},${f1(by - 30)} Z" fill="#E9DFC6"/>` +
+      `<rect x="${f1(bx - BW / 2 - 3)}" y="${f1(by - 33)}" width="${BW + 6}" height="5" rx="2" fill="#F6F0E2"/><path d="M${f1(bx - BW / 2 + 8)},${f1(by - 24)} q6,14 18,16" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.6"/>`); }
+  { const jx = tx + 250; TGK.rest('jellybowl', jx, ty - 8, ty - 8); TGK.rest('mould.coral', tx + 540, ty, ty); [0, 1, 2, 3, 4, 5, 6].forEach((k) => TGK.log('hang', 'pan' + k, [470 + k * 100, TG_RAIL], [470 + k * 100, TG_RAIL - 5 + 5])); }
   // foreground (1.3): the near end of a second table, a strainer, a stack of bowls, a bunch of herbs hanging: dark, soft
   const fore = `<g filter="url(#tgblur)"><rect x="-500" y="${F + 150}" width="820" height="300" fill="#060403"/><path d="M-40,${F + 150} q80,-100 160,0 Z" fill="#060403"/><rect x="150" y="${F + 104}" width="130" height="46" rx="8" fill="#060403"/><rect x="163" y="${F + 78}" width="104" height="30" rx="8" fill="#060403"/>` +
-    `<path d="M2150,-100 l0,300 M2150,200 q-70,90 -30,190 M2150,200 q10,110 50,180 M2150,200 q70,70 110,150" stroke="#060403" stroke-width="16" fill="none" stroke-linecap="round"/><rect x="2380" y="${F - 60}" width="500" height="500" fill="#060403"/></g>`;
+    `<path d="M2150,-100 l0,290" stroke="#060403" stroke-width="7"/><rect x="2134" y="186" width="32" height="20" rx="6" fill="#060403"/>` + (() => { let hb = ''; const rr = rng(91); // a bunch of herbs hung upside down to dry: tied stems, sprays of leaves
+      for (let k = 0; k < 9; k++) { const a = -0.5 + k / 8, L = 150 + rr() * 70, ex = 2150 + Math.sin(a) * L * 0.6, ey = 200 + Math.cos(a) * L; hb += `<path d="M2150,205 Q${f1(2150 + Math.sin(a) * L * 0.2)},${f1(205 + L * 0.5)} ${f1(ex)},${f1(ey)}" stroke="#060403" stroke-width="5" fill="none"/>`;
+        for (let j = 0; j < 5; j++) { const u = 0.35 + j * 0.15, lx = 2150 + Math.sin(a) * L * 0.6 * u * u + (rr() - 0.5) * 6, ly = 205 + L * u; hb += `<ellipse cx="${f1(lx + (j % 2 ? 9 : -9))}" cy="${f1(ly)}" rx="11" ry="5" fill="#060403" transform="rotate(${j % 2 ? 35 : -35}, ${f1(lx)}, ${f1(ly)})"/>`; } }
+      return hb; })() + `<rect x="2380" y="${F - 60}" width="500" height="500" fill="#060403"/></g>`;
   const world = layerAt(c, 0.9, back.join('')) + layerAt(c, 1, s.join('')) + layerAt(c, 1.3, fore);
   const scr = quiet ? '' : tag(172, 150, 'A BIG HOUSE\'S KITCHEN · ABOUT 1860', smooth(0.4, 1.2, t) * (1 - smooth(5.5, 6.2, t)));
   return frame(tgDefs(t), `<rect width="1920" height="1080" fill="#0B0705"/>`, world, scr, t);

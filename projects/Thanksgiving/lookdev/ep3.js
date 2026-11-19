@@ -40,13 +40,15 @@ const E3K = {
   toWorld(o, lx, ly) {
     const d = o.d ?? 1, an = o.an || {}; let wx = o.x + d * lx * o.h, wy = o.y - ly * o.h;
     const L = (an.lean || 0) * d * Math.PI / 180;
-    if (L) { const dx = wx - o.x, dy = wy - o.y; wx = o.x + dx * Math.cos(L) - dy * Math.sin(L); wy = o.y + dx * Math.sin(L) + dy * Math.cos(L); }
+    if (L && an.shear) wx += Math.tan(-L) * (wy - o.y); // rig.js an.shear: skewX(-lean d) about the feet line
+    else if (L) { const dx = wx - o.x, dy = wy - o.y; wx = o.x + dx * Math.cos(L) - dy * Math.sin(L); wy = o.y + dx * Math.sin(L) + dy * Math.cos(L); }
     return [wx, wy - (an.bob || 0) * o.h];
   },
   toLocal(o, wx, wy) {
     const d = o.d ?? 1, an = o.an || {}; wy += (an.bob || 0) * o.h;
     const L = -(an.lean || 0) * d * Math.PI / 180;
-    if (L) { const dx = wx - o.x, dy = wy - o.y; wx = o.x + dx * Math.cos(L) - dy * Math.sin(L); wy = o.y + dx * Math.sin(L) + dy * Math.cos(L); }
+    if (L && an.shear) wx -= Math.tan(L) * (wy - o.y); // undo the shear (L here is -lean d)
+    else if (L) { const dx = wx - o.x, dy = wy - o.y; wx = o.x + dx * Math.cos(L) - dy * Math.sin(L); wy = o.y + dx * Math.sin(L) + dy * Math.cos(L); }
     return [(wx - o.x) / (d * o.h), (o.y - wy) / o.h];
   },
   armAngles(o, which) { const an = o.an || {}; return which === 'f' ? (an.fArm || [165, 150]) : (an.bArm || [196, 202]); },
