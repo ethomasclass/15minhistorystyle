@@ -102,6 +102,8 @@ HUSH = re.compile(r"\[(?:quietly|softly|whisper(?:s|ing)?|hushed|under (?:his|he
 
 def spoken(text):
     text = HUSH.sub("", text)
+    if os.environ.get("VOICE_NO_TAGS", "1") != "0":  # take B: no delivery tags at all
+        text = re.sub(r"\[[^\]]*\]\s*", "", text)
     text = re.sub(r"\$([\d,]+)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
     # dates are said as ordinals: "November 3, 1944" -> "November third, nineteen forty-four" (the user's note, Nov 2026)
     text = re.sub(rf"\b({MONTHS}) (\d{{1,2}})(?:st|nd|rd|th)?\b(?![,.]?\d)", lambda m: m.group(1) + " " + ordinal(int(m.group(2))), text)
@@ -130,8 +132,8 @@ def eleven(text, prev, nxt):
                 "voice_settings": {"stability": 0.5, "similarity_boost": 0.85, "speed": SPEED}}
     else:
         body = {"text": text, "model_id": model, "previous_text": prev, "next_text": nxt,
-                "voice_settings": {"stability": 0.45, "similarity_boost": 0.85, "style": 0.15,
-                                   "use_speaker_boost": True, "speed": SPEED}}
+                "voice_settings": {"stability": float(os.environ.get("VOICE_STABILITY", "0.5")), "similarity_boost": 0.85,
+                                   "speed": SPEED}}  # Thanksgiving: take B ("Natural", no style), the user's driest pick
     # Responses are cached by request body so re-running (e.g. to change pauses) spends no credits.
     key = hashlib.sha1(json.dumps([voice, body], sort_keys=True).encode()).hexdigest()[:16]
     cached = os.path.join(CACHE, key + ".json")
