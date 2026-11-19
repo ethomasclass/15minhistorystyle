@@ -1,5 +1,6 @@
 // The desk-colour A/B/C test (Nov 2026): the end of Ch03 from the Simmons pan ("Here's", so the "That's step one" hold and the
-// pan are in range) through all of Ch04, played back to back with a DeskMap set. The real chapters set no map: black desk.
+// pan are in range) through all of Ch04, played back to back with a DeskMap set. (The real chapters now use kit/tg_desk_map.ts,
+// brighter tones and the mark swaps; these maps still override it: A = all black.)
 //   A  all black (the current look)        B  colour by beat type, no textures        C  colour plus textures
 import React from 'react';
 import {AbsoluteFill, Sequence} from 'remotion';

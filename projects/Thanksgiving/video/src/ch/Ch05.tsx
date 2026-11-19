@@ -8,6 +8,7 @@ import {AbsoluteFill} from 'remotion';
 import words from '../../public/audio/ch05_hale.words.json';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {DeskScene} from '../kit/tg_desk';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
 import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
@@ -295,7 +296,7 @@ const Body: React.FC = () => {
   const scene = useScene(cuts);
   return (
     <>
-      {scene}
+      <DeskScene ch="ch05" cuts={c} t={t}>{scene}</DeskScene>
       {/* silent cuts; a stamp per title, the near-silent marker before each note, sound only for things on screen */}
       {['Sarah', 'Northwood.', 'Written', "Godey's", 'Year after', 'September', 'Days later'].map((w) => <Sfx key={w} at={at(w)} src="sfx/stamp.wav" volume={0.27} />)}
       {['Mary had', 'That was her', 'novel', 'Thanksgiving dinner', 'the pumpkin', 'Turkey in', 'pie at', 'two hundred', 'editor', 'most popular', 'used it',

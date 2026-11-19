@@ -4,7 +4,8 @@
 //                                  and builds course by course; Turtle Soup swiped coral on "turtle"
 //   "shipped"         Dock         the turtle-dock diorama (placeholder): shipped up alive from the Caribbean
 //   "Here's"          TurtlePan    full-screen guided pan down Simmons p. 20, landing on the quoted line as it is spoken
-//                                  (swiped coral), then held, with nothing new, for "That's step one."
+//                                  (swiped coral), held
+//   "That's"          StepOne      the swiped line alone on the coral desk for "That's step one." (a 1.4 s flash)
 //   "Then" (1st)      Steps        steps 2–4 on slips beside the page
 //   "Then came"       Pie          mince pie state sheet whole → cut (placeholder), then beside the Simmons minced-pies page,
 //                                  exploded into its ingredients, each swiped on the page and labelled as it is said
@@ -22,7 +23,7 @@ import {FullFrame} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
-import {DeskScene, useDeskTest} from '../kit/tg_desk';
+import {DeskScene} from '../kit/tg_desk';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
@@ -136,8 +137,8 @@ const TurtlePan: React.FC<{t: TL; a?: number}> = ({t}) => {
 };
 
 /**
- * Colour test only (TestColor_*, never the real chapter): the "That's step one" hold as a hard cut to the swiped line alone on
- * the desk, so the coral flash has desk to show (the real chapter holds the landed pan).
+ * The "That's step one" hold as a hard cut to the swiped line alone on the desk: the coral flash (kit/tg_desk_map), 1.4 s,
+ * then the hard cut to the steps on the black desk.
  */
 const StepOne: React.FC<{t: TL; a?: number}> = () => (
   <AbsoluteFill>
@@ -284,12 +285,11 @@ const Board: React.FC<{t: TL; a?: number}> = ({t}) => <ChBoard ch={3} at={t.at('
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
-  const test = useDeskTest();
   const c: Record<string, number> = {
     menu: 0,
     dock: at('shipped') - 1,
     turtlePan: at("Here's") - 1,
-    ...(test ? {stepOne: at("That's") - 1} : {}),
+    stepOne: at("That's") - 1,
     steps: at('Then') - 1,
     pie: at('Then came') - 1,
     count: at('So count') - 1,
@@ -300,7 +300,7 @@ const Body: React.FC = () => {
     [c.menu, <Menu t={t} a={c.menu} />],
     [c.dock, <Dock t={t} a={c.dock} />],
     [c.turtlePan, <TurtlePan t={t} a={c.turtlePan} />],
-    ...(test ? [[c.stepOne, <StepOne t={t} a={c.stepOne} />] as [number, React.ReactNode]] : []),
+    [c.stepOne, <StepOne t={t} a={c.stepOne} />],
     [c.steps, <Steps t={t} a={c.steps} />],
     [c.pie, <Pie t={t} a={c.pie} />],
     [c.count, <Count t={t} a={c.count} />],

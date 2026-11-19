@@ -11,7 +11,9 @@ export const ORANGE = '#F28C28';
 export const INK = '#111111';
 
 /** Signature colours: `mark` = outlines, highlighter, notes; `ink` = type on the highlighter; `subject` = the one figure in colour. */
-export type Palette = {name: string; mark: string; ink: string; subject: string; box?: string; accent?: string};
+export type Palette = {name: string; mark: string; ink: string; subject: string; box?: string; accent?: string; tint?: string; edge?: string};
+// `tint` = the archival subject's colour when it differs from `subject` (on a coloured desk, kit/tg_desk); `edge` = an ink outline
+// round the highlighter tapes (on the coral desk).
 /** Highlighter box colour (defaults to mark) and accent for notes, arrows and pins (defaults to mark). */
 export const boxOf = (p: Palette) => p.box ?? p.mark;
 export const accentOf = (p: Palette) => p.accent ?? p.mark;
@@ -116,7 +118,8 @@ export const Picture: React.FC<{src: string; place: Place; size: [number, number
 
 /** Colour the masked subject: a flat colour laid over the black-and-white picture in 'color' blend keeps the engraving's shading. */
 export const Tint: React.FC<{mask: string; place: Place; size: [number, number]; color?: string; strength?: number}> = ({mask, place, size, color, strength = 1}) => {
-  color = color ?? usePal().subject;
+  const pal0 = usePal();
+  color = color ?? pal0.tint ?? pal0.subject;
   const m: React.CSSProperties = {
     position: 'absolute', left: place.left, top: place.top, width: size[0] * place.scale, height: size[1] * place.scale,
     WebkitMaskImage: `url(${staticFile(mask)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(mask)})`, maskSize: '100% 100%',
@@ -189,7 +192,8 @@ export const Highlight: React.FC<{text: string; after?: string; x: number; y: nu
   for (let i = 0; i <= steps; i++) pts.push(`${(i / steps) * 100}% ${random(`t${seed}${i}`) * 9}%`);
   for (let i = steps; i >= 0; i--) pts.push(`${(i / steps) * 100}% ${100 - random(`b${seed}${i}`) * 9}%`);
   return (
-    <div style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: size * 0.28, transform: `rotate(${rot}deg)`}}>
+    <div style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: size * 0.28, transform: `rotate(${rot}deg)`,
+      filter: pal.edge ? `drop-shadow(3px 0 0 ${pal.edge}) drop-shadow(-3px 0 0 ${pal.edge}) drop-shadow(0 3px 0 ${pal.edge}) drop-shadow(0 -3px 0 ${pal.edge})` : undefined}}>
       <div style={{position: 'relative', padding: `${size * 0.1}px ${size * 0.22}px ${size * 0.06}px`}}>
         <div style={{position: 'absolute', inset: 0, background: boxOf(pal), clipPath: `polygon(${pts.join(',')})`, transformOrigin: 'left', transform: `scaleX(${wipe})`}} />
         <div style={{position: 'relative', fontFamily: JF.display, fontSize: size, lineHeight: 1.05, color: pal.ink, whiteSpace: 'nowrap', opacity: interpolate(frame, [at + 3, at + 7], [0, 1], clamp)}}>{text}</div>

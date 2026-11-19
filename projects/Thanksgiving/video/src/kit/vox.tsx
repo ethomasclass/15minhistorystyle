@@ -12,6 +12,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
 import {useGFrame} from './Kit';
 import {Sfx} from './common';
+import {useMarks} from './tg_desk';
 
 export const CORAL = '#FF6F61';
 export const TEAL = '#2FE0C4';
@@ -72,8 +73,11 @@ export const Sheet: React.FC<{src: string; size: [number, number]; cam: SheetCam
 };
 
 /** The coral highlighter along printed lines (page px), from `from` to `to` at an even reading speed, stepped. */
-export const Swipe: React.FC<{lines: Box[]; from: number; to: number; seed?: string; color?: string; out?: number}> = ({lines, from, to, seed = 'sw', color = CORAL, out = Infinity}) => {
+export const Swipe: React.FC<{lines: Box[]; from: number; to: number; seed?: string; color?: string; out?: number}> = ({lines, from, to, seed = 'sw', color: c, out = Infinity}) => {
   const g = useGFrame();
+  const mk = useMarks();
+  const color = c ?? mk.swipe;
+  const under = c === undefined && mk.underline; // the desk decides the highlighter (kit/tg_desk)
   if (g < from || g >= out) return null;
   const total = lines.reduce((s, b) => s + b[2], 0);
   let left = interpolate(g, [from, to], [0, total], clamp);
@@ -86,6 +90,8 @@ export const Swipe: React.FC<{lines: Box[]; from: number; to: number; seed?: str
         const pts: string[] = [];
         for (let k = 0; k <= 30; k++) pts.push(`${(k / 30) * 100}% ${random(`${seed}t${i}${k}`) * 14}%`);
         for (let k = 30; k >= 0; k--) pts.push(`${(k / 30) * 100}% ${100 - random(`${seed}b${i}${k}`) * 14}%`);
+        if (under) return <div key={i} style={{position: 'absolute', left: x - h * 0.1, top: y + h * 0.92, width: fillW + h * 0.2, height: Math.max(3, h * 0.13), background: color,
+          opacity: 0.9, borderRadius: h, clipPath: `polygon(${pts.join(',')})`}} />;
         return <div key={i} style={{position: 'absolute', left: x - h * 0.15, top: y - h * 0.08, width: fillW + h * 0.3, height: h * 1.16, background: color, opacity: 0.8,
           mixBlendMode: 'multiply', clipPath: `polygon(${pts.join(',')})`}} />;
       })}
@@ -201,8 +207,10 @@ export const WordRun: React.FC<{items: RunItem[]; at: number; durs: number[]; ho
  * on in dark ink. Cream with deep-teal ink by default; `coral` for the subject or punchline. `size` is the hand's px.
  */
 export const Slip: React.FC<{text: string; x: number; y: number; at: number; rot?: number; size?: number; coral?: boolean; dur?: number; seed?: string}> = ({
-  text, x, y, at, rot = -3, size = 62, coral, dur = 10, seed = text,
+  text, x, y, at, rot = -3, size = 62, coral: c0, dur = 10, seed = text,
 }) => {
+  const mk = useMarks();
+  const coral = c0 && mk.slip === 'coral'; // on the coral desk a coral slip is a cream one
   const f = useCurrentFrame();
   const g = useGFrame();
   if (f < at) return null;

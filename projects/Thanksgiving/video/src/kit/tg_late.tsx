@@ -15,6 +15,7 @@ import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} fro
 import {clamp} from '../lib/anim';
 import {Arrow, Highlight, JF, Loop, useGFrame} from './Kit';
 import {hasFile} from './shell';
+import {useMarks} from './tg_desk';
 
 export const TEAL = '#2FE0C4';
 export const CORAL = '#FF6F61';
@@ -73,6 +74,7 @@ export const Loupe: React.FC<{layer: React.ReactNode; cx: number; cy: number; r?
   layer, cx, cy, r = 160, zoom = 3, to, at, small, bow = -40,
 }) => {
   const g = useGFrame();
+  const mk = useMarks(); // the ring and the lens's ground follow the desk
   if (g < at) return null;
   const s = small ?? r / zoom + 14;
   const ringAt = at + 8;
@@ -84,8 +86,8 @@ export const Loupe: React.FC<{layer: React.ReactNode; cx: number; cy: number; r?
     <>
       <Loop cx={cx} cy={cy} rx={s} ry={s} at={at} dur={8} width={5} seed={7} />
       {g >= ringAt && (
-        <div style={{position: 'absolute', left: tx - r, top: ty - r, width: r * 2, height: r * 2, borderRadius: '50%', overflow: 'hidden', background: '#0d0c09',
-          boxShadow: `0 0 0 6px ${TEAL}, 0 20px 40px rgba(0,0,0,0.75)`, transform: `scale(${0.6 + 0.4 * k})`, opacity: Math.min(1, k * 2)}}>
+        <div style={{position: 'absolute', left: tx - r, top: ty - r, width: r * 2, height: r * 2, borderRadius: '50%', overflow: 'hidden', background: mk.ground,
+          boxShadow: `0 0 0 6px ${mk.teal}, 0 20px 40px rgba(0,0,0,0.75)`, transform: `scale(${0.6 + 0.4 * k})`, opacity: Math.min(1, k * 2)}}>
           <div style={{position: 'absolute', left: r - cx * zoom, top: r - cy * zoom, width: 1920, height: 1080, transform: `scale(${zoom})`, transformOrigin: '0 0'}}>{layer}</div>
         </div>
       )}

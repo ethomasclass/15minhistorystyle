@@ -8,6 +8,7 @@ import words from '../../public/audio/ch01_cold_open.words.json';
 import {clamp} from '../lib/anim';
 import {Arrow, Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {DeskScene, useMarks} from '../kit/tg_desk';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
 import {hasFile, makeTimeline, type Narration, Quote, Stamp, type TL, useScene} from '../kit/shell';
 import {type Box, Slip, Swipe} from '../kit/vox';
@@ -80,6 +81,7 @@ const Tread: React.FC<S> = ({t}) => {
   const press = t.at('tread');
   const dy = interpolate(g, [press, press + 5, press + 12, press + 17], [0, 46, 46, 40], clamp);
   const mud = 712;
+  const ground = useMarks().ground; // the mud: the desk's own darkest tone
   const wave = Array.from({length: 33}, (_, i) => `${i ? 'L' : 'M'} ${120 + i * 52} ${420 + Math.sin(i * 1.3) * 7}`).join(' ');
   const draw = interpolate(g, [t.at('You wade'), t.at('You wade') + 10], [0, 1], clamp);
   // a bare leg in profile, facing left: shin, ankle, foot, heel, calf (the thigh runs off the top of the frame)
@@ -92,7 +94,7 @@ const Tread: React.FC<S> = ({t}) => {
       <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
         <path d={wave} stroke={pal.mark} strokeWidth={5} fill="none" opacity={0.75} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
         <path d={leg} stroke={pal.mark} strokeWidth={7} fill="rgba(13,12,9,0.6)" strokeLinejoin="round" strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
-        <rect x={0} y={mud} width={1920} height={440} fill="#0d0c09" opacity={0.93} />
+        <rect x={0} y={mud} width={1920} height={440} fill={ground} opacity={0.93} />
         {Array.from({length: 26}, (_, i) => <line key={i} x1={100 + i * 70} y1={mud + 40 + (i % 3) * 30} x2={140 + i * 70} y2={mud + 70 + (i % 3) * 30} stroke={pal.mark} strokeWidth={3} opacity={0.3} />)}
         <path d={`M 100 ${mud} Q 960 ${mud - 14} 1820 ${mud}`} stroke={pal.mark} strokeWidth={6} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
       </svg>
@@ -171,7 +173,7 @@ const Numbers: React.FC<S> = ({t}) => (
     <Cran at={-999} still={5} k={0.82} right={1880} bottom={860} fade />
     <Stamp text="46 MILLION" x={140} y={150} size={124} at={t.at('forty-six')} />
     <Note text="turkeys, every thanksgiving" x={170} y={300} size={54} rot={-3} at={t.at('turkeys') - 3} />
-    <Stamp text="70 MILLION" x={140} y={480} size={124} at={t.at('seventy')} color="#FF6F61" />
+    <Stamp text="70 MILLION" x={140} y={480} size={124} at={t.at('seventy')} color={usePal().subject} />
     <Note text="cans of cranberry sauce a year" x={170} y={630} size={54} rot={-3} at={t.at('cans') - 3} />
     <Note text="most of them in about two months" x={170} y={760} size={48} rot={-3} at={t.at('most') - 3} color="#ffffff" />
     <Tag text="Turkeys: National Turkey Federation estimate · Cans: Ocean Spray figures (about 67-75 million a year)" />
@@ -245,7 +247,7 @@ const Body: React.FC = () => {
   else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
   return (
     <AbsoluteFill style={{background: '#000'}}>
-      {scene}
+      {frame < END ? <DeskScene ch="ch01" cuts={c} t={t}>{scene}</DeskScene> : scene}
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
       <Audio src={staticFile('music/tg_table_theme.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, TABLE_THEME_VOL, TABLE_THEME_VOL, 0], clamp)} />

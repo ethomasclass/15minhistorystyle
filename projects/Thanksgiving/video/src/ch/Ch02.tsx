@@ -8,6 +8,7 @@ import words from '../../public/audio/ch02_1621.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {DeskScene} from '../kit/tg_desk';
 import {NoPhoto} from '../kit/print';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {bed} from '../kit/levels';
@@ -305,7 +306,7 @@ const Body: React.FC = () => {
   const scene = useScene(cuts);
   return (
     <>
-      {scene}
+      <DeskScene ch="ch02" cuts={c} t={t}>{scene}</DeskScene>
       {/* no sound on cuts (the user, Nov 2026): cuts are silent; the voice and the music carry them. Slips tick on their own. */}
       {["wasn't turkey", 'Plymouth', 'one letter', 'Edward Winslow', 'Massasoit', 'five deer', 'And venison', 'alliance', 'diplomacy', 'called it Thanksgiving', 'Showing off'].map((p) => (
         <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.27} />

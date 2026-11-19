@@ -2,7 +2,8 @@
 // it is said), the cranberry can paid off on "Because it IS the can" (cran frame 6 held, a loupe on the ridges), 1955 in the
 // second person (a kitchen diorama, the notes as your shopping list), a fast 1954/1955 montage of recipe cards dealt by the
 // silhouette hand, the casserole state sheet (casserole -> three cans), the third mock morph with the MOCK tape, and the can
-// landing on the collage board. Scenes are timed to words (script/ch07_test_kitchens.txt); placeholders are listed in PLACEHOLDERS.
+// landing on the collage board. Coral-desk flashes (kit/tg_desk_map): "Because it IS the can" (a cut-in on frame 6, then the
+// ridges loupe on teal) and the MOCK tape cut-in. Scenes are timed to words (script/ch07_test_kitchens.txt); placeholders are listed in PLACEHOLDERS.
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch07_test_kitchens.words.json';
@@ -15,6 +16,7 @@ import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
+import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
 import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;
@@ -170,6 +172,7 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
   const drawAt = t.at('Fresh berries') - 2;
   const fewAt = t.at('few weeks');
   const canAt = t.at('in a can.');
+  const mk = useMarks();
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -187,8 +190,8 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
               const fresh = i >= 40 && i <= 46 && g >= fewAt;
               const can = g >= canAt + Math.floor(i / 4);
               return <div key={i} style={{width: 56, height: 40, borderRadius: 3, opacity: shown ? 1 : 0, boxSizing: 'border-box',
-                border: `2px solid ${can ? pal.mark : fresh ? pal.subject : 'rgba(47,224,196,0.35)'}`,
-                background: can ? 'rgba(47,224,196,0.55)' : fresh ? 'rgba(255,111,97,0.85)' : 'transparent'}} />;
+                border: `2px solid ${can ? pal.mark : fresh ? pal.subject : rgba(mk.teal, 0.35)}`,
+                background: can ? rgba(mk.teal, 0.55) : fresh ? rgba(mk.coral, 0.85) : 'transparent'}} />;
             })}
           </div>
         </div>
@@ -371,20 +374,20 @@ const Casserole: React.FC<{t: TL; a: number}> = ({t}) => {
   );
 };
 
-/** Twenty million a year, then the third mock: the homemade pie becomes a can (morph M3), and the MOCK tape lands on "Mock". */
-const MockHomemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
+/** (`solo`: the morph and the tape only, for the MOCK flash's cut-in.) Twenty million a year, then the third mock: the homemade pie becomes a can (morph M3), and the MOCK tape lands on "Mock". */
+const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
   const mockAt = t.at('Mock homemade.');
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />
-      <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />
-      <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />
+      {!solo && <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />}
+      {!solo && <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />}
+      {!solo && <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />}
       <Morph a={P.m3a} b={P.m3b} dir={MORPH_DIR} from={Math.max(a + 10, mockAt - 90)} to={mockAt - 3} x={1000} y={170} w={800} h={600} />
       <MockTape x={1150} y={400} at={mockAt} size={140} />
-      <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />
-      <Note text="dressed up as Grandma's" x={190} y={760} size={64} rot={-3} at={t.at('dressed up') - 2} color={pal.subject} />
+      {!solo && <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />}
+      {!solo && <Note text="dressed up as Grandma's" x={190} y={760} size={64} rot={-3} at={t.at('dressed up') - 2} color={pal.subject} />}
     </AbsoluteFill>
   );
 };
@@ -413,11 +416,14 @@ const Body: React.FC = () => {
     ocean: at('In 1941,') - 1,
     question: at('And that answers') - 1,
     payoff: at('Because it IS') - 1,
+    ridges: at('Those ridges') - 1,
     hosting: at('Now jump') - 1,
     pantry: at("You've got") - 1,
     montage: at('In 1954,') - 1,
     casserole: at('Green beans.') - 1,
     mock: at("Campbell's says") - 1,
+    mockFlash: at('Mock homemade.') - 1,
+    mockAfter: at('dressed up') - 1,
     board: at('And then they') - 1,
   };
   const scene = useScene([
@@ -429,12 +435,15 @@ const Body: React.FC = () => {
     [c.urann, <Urann t={t} a={c.urann} />],
     [c.ocean, <Ocean t={t} a={c.ocean} />],
     [c.question, <Question t={t} a={c.question} />],
-    [c.payoff, <Payoff t={t} a={c.payoff} />],
+    [c.payoff, <CutIn x={PAY.cx - 60} y={640} z={1.25}><Payoff t={t} a={c.payoff} /></CutIn>],
+    [c.ridges, <Payoff t={t} a={c.ridges} />],
     [c.hosting, <Hosting t={t} a={c.hosting} />],
     [c.pantry, <Pantry t={t} a={c.pantry} />],
     [c.montage, <Montage t={t} a={c.montage} />],
     [c.casserole, <Casserole t={t} a={c.casserole} />],
     [c.mock, <MockHomemade t={t} a={c.mock} />],
+    [c.mockFlash, <CutIn x={1400} y={470} z={1.3}><MockHomemade t={t} a={c.mock} solo /></CutIn>],
+    [c.mockAfter, <MockHomemade t={t} a={c.mock} />],
     [c.board, <Board t={t} a={c.board} />],
   ]);
   // sound lists, kept next to the scenes: silent cuts; a stamp per title, stamp and tape; the near-silent marker per note; a tick per card
@@ -444,7 +453,7 @@ const Body: React.FC = () => {
   const ticks = [at('1954,'), at('In 1955,') + 2, at('Dorcas'), at('Fresh berries'), at('Those ridges') + 10];
   return (
     <>
-      {scene}
+      <DeskScene ch="ch07" cuts={c} t={t}>{scene}</DeskScene>
       {stamps.map((s) => <Sfx key={s} at={at(s)} src="sfx/stamp.wav" volume={0.28} />)}
       {notes.map((s) => <Sfx key={s} at={at(s) - 2} src={WRITE.src} volume={WRITE.volume} />)}
       {ticks.map((f, i) => <Sfx key={i} at={f} src="sfx/tick.wav" volume={0.45} />)}

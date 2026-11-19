@@ -2,8 +2,9 @@
 // calf's-feet stock recipe swiped over the kitchen diorama, the mould woodcut, colour Plate VII), Knox (the 1891 label, the 1911
 // ads), the aspic mould morphing into a Jell-O box, the second MOCK tape on "Mock aspic", the real 1920 Jell-O booklet as a
 // colour print, Perfection Salad (Knox 1915). Then the pattern interrupt: a hard cut to the Knox 1915 Tuna Fish Salad page,
-// full frame in colour, a pan-to-reveal (this chapter's one pan), the music cut to silence, and the frame held with no new
-// marks through the pause and "Yes. People ate this. On purpose." The Jell-O piece lands on the board on the last line.
+// full frame in colour, a pan-to-reveal (this chapter's one pan), the music cut to silence, held through the pause, then a hard
+// cut to the dish alone on the coral desk for "Yes. People ate this. On purpose." The Jell-O piece lands on the board on the last
+// line. Coral-desk flashes (kit/tg_desk_map): "we have servants", the MOCK tape cut-in, the tuna line.
 // Hard, silent cuts. Placeholders are listed in PLACEHOLDERS; every beat is timed to the words.
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
@@ -17,6 +18,7 @@ import {type Box, Swipe} from '../kit/vox';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {MockTape} from '../kit/tg_mock';
 import {ChBoard} from '../kit/tg_board';
+import {CutIn, DeskScene} from '../kit/tg_desk';
 
 const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
@@ -158,6 +160,18 @@ const Servants: React.FC<{t: TL; a: number}> = ({t}) => {
   );
 };
 
+/** "we have servants.": a hard cut in, the line alone and large beside the jelly (the coral flash). */
+const ServantsFlash: React.FC<{t: TL; a: number}> = () => {
+  const pal = usePal();
+  return (
+    <AbsoluteFill>
+      <DarkPaper />
+      <PageScrap src={BPLATE} size={BEETON_SIZE} box={BELLEVUE} x={1060} y={170} w={700} rot={-2} seed="bv2" filter={COLOUR_DOC} tag="Savoury Jelly a la Belle-Vue · Beeton, 1869" />
+      <Note text="“we have servants.”" x={150} y={430} size={104} rot={-3} at={-999} color={pal.subject} />
+    </AbsoluteFill>
+  );
+};
+
 // ---------------------------------------------------------------- Knox: the shortcut
 const Knox: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
@@ -216,15 +230,16 @@ const Booklet: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ---------------------------------------------------------------- Mock aspic: the pair, the tape, a held frame
-const Mock: React.FC<{t: TL; a: number}> = ({t, a}) => {
+/** `solo`: the box side only (the MOCK flash's cut-in). */
+const Mock: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <div style={{position: 'absolute', left: 958, top: 130, width: 4, height: 820, background: 'rgba(244,239,230,0.35)'}} />
-      <div style={{position: 'absolute', left: 200, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.mark}}>THE REAL THING</div>
+      {!solo && <div style={{position: 'absolute', left: 958, top: 130, width: 4, height: 820, background: 'rgba(244,239,230,0.35)'}} />}
+      {!solo && <div style={{position: 'absolute', left: 200, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.mark}}>THE REAL THING</div>}
       <div style={{position: 'absolute', left: 1100, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.subject}}>FROM A BOX</div>
-      <Ph file="img/flow/morph_aspic_jello_first.png" what="the copper mould (M2 first frame)" x={180} y={240} w={620} h={620} at={a - 999} land="none" />
+      {!solo && <Ph file="img/flow/morph_aspic_jello_first.png" what="the copper mould (M2 first frame)" x={180} y={240} w={620} h={620} at={a - 999} land="none" />}
       <Ph file="img/flow/morph_aspic_jello_last.png" what="the Jell-O box (M2 last frame)" x={1100} y={240} w={620} h={620} at={a - 999} land="none" />
       <MockTape x={1410} y={560} at={t.at('Mock aspic')} />
     </AbsoluteFill>
@@ -286,6 +301,15 @@ const Ad: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
+/** "Yes. People ate this. On purpose.": a hard cut from the held page to the dish alone, a colour print on the coral desk (the flash). */
+const TUNA_DISH: Box = [380, 2300, 1560, 780];
+const TunaFlash: React.FC<{t: TL; a: number}> = () => (
+  <AbsoluteFill>
+    <DarkPaper />
+    <PageScrap src={K26.src} size={K26.size} box={TUNA_DISH} x={300} y={250} w={1320} rot={-1.5} seed="k26t" filter={COLOUR_DOC} tag={`Tuna Fish Salad, ${KNOX_1915_TAG}, p. 26`} />
+  </AbsoluteFill>
+);
+
 // ---------------------------------------------------------------- The board: the Jell-O piece lands with its MOCK tag
 const Board: React.FC<{t: TL; a: number}> = ({t, a}) => <ChBoard ch={6} at={a + 4} ghost={{id: 'can', at: t.at('write the recipe') - 2}} />;
 
@@ -298,13 +322,16 @@ const Body: React.FC = () => {
     kitchen: at('To make one') - 1,
     aspic: at('Some were') - 1,
     servants: at('A wobbling') - 1,
+    servantsFlash: at('we have servants') - 1,
     knox: at('Then came the shortcut') - 1,
     morph: at('In 1897') - 1,
     booklet: at('Suddenly') - 1,
-    mock: at('Mock aspic') - 1,
+    mockFlash: at('Mock aspic') - 1,
+    mock: at('Mock aspic') + 44,
     perfection: at('Around 1905') - 1,
     fifties: at('By the 1910s') - 1,
     ad: at('Like this') - 1,
+    tunaFlash: at('Yes.') - 1,
     board: at('And the companies') - 1,
   };
   const cuts: [number, React.ReactNode][] = [
@@ -313,19 +340,22 @@ const Body: React.FC = () => {
     [c.kitchen, <Kitchen t={t} a={c.kitchen} />],
     [c.aspic, <Aspic t={t} a={c.aspic} />],
     [c.servants, <Servants t={t} a={c.servants} />],
+    [c.servantsFlash, <ServantsFlash t={t} a={c.servantsFlash} />],
     [c.knox, <Knox t={t} a={c.knox} />],
     [c.morph, <Morph t={t} a={c.morph} />],
     [c.booklet, <Booklet t={t} a={c.booklet} />],
+    [c.mockFlash, <CutIn x={1410} y={490} z={1.2}><Mock t={t} a={c.mockFlash} solo /></CutIn>],
     [c.mock, <Mock t={t} a={c.mock} />],
     [c.perfection, <Perfection t={t} a={c.perfection} />],
     [c.fifties, <Fifties t={t} a={c.fifties} />],
     [c.ad, <Ad t={t} a={c.ad} />],
+    [c.tunaFlash, <TunaFlash t={t} a={c.tunaFlash} />],
     [c.board, <Board t={t} a={c.board} />],
   ];
   const scene = useScene(cuts);
   return (
     <>
-      {scene}
+      <DeskScene ch="ch06" cuts={c} t={t}>{scene}</DeskScene>
       {/* silent cuts. Stamps on titles and the MOCK tape; the near-silent marker before notes. Nothing at all in the held ad frame. */}
       {['gelatin', 'aspic.', 'shortcut.', 'In 1897', 'Perfection', '1910s,'].map((w) => <Sfx key={w} at={at(w)} src="sfx/stamp.wav" volume={0.27} />)}
       <Sfx at={at('Mock aspic')} src="sfx/stamp.wav" volume={0.32} />

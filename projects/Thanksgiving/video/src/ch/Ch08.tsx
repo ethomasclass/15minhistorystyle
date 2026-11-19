@@ -2,13 +2,15 @@
 // drawn loop, then the inflating turkey on its scale (IMAGE_PRESENTATION.md: chest swell, feather swap, the counter 13 -> 30+ with the
 // legs unchanged, the tip forward, the hold on "Happy Thanksgiving."), the heritage bird beside it, the turkey landing on the board,
 // the subscribe note, the question again, the recap stack, the pull-back to the whole board, the eel and the can side by side for
-// the last lines, and the end screen (20 s from "Thanks for watching"). Placeholders are listed in PLACEHOLDERS.
+// the last lines, and the end screen (20 s from "Thanks for watching"). Placeholders are listed in PLACEHOLDERS. Coral-desk
+// flashes (kit/tg_desk_map): "Happy Thanksgiving." (a cut in on the bird) and "It's still delicious." (a cut in on card and can).
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch08_turkey.words.json';
 import {clamp} from '../lib/anim';
 import {Arrow, Highlight, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {CutIn, DeskScene, useMarks} from '../kit/tg_desk';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, Stamp, TAIL, type TL, useScene} from '../kit/shell';
 import {type Box, Slip} from '../kit/vox';
@@ -93,6 +95,7 @@ const Gmo: React.FC<{t: TL; a: number}> = ({t}) => (
 /** A hand-jittered diagram box (teal, drawn on over 8 frames) with an Abril label and a mono line under it. */
 const DBox: React.FC<{x: number; y: number; w: number; h: number; label: string; sub: string; at: number; seed: string}> = ({x, y, w, h, label, sub, at, seed}) => {
   const g = useGFrame();
+  const TEAL = useMarks().teal;
   if (g < at) return null;
   const p = interpolate(g, [at, at + 8], [0, 1], clamp);
   const j = (k: string) => (random(`${seed}${k}`) - 0.5) * 10;
@@ -113,6 +116,7 @@ const OldWay: React.FC<{t: TL; a: number}> = ({t}) => {
   const g = useGFrame();
   const genAt = t.at('Generation after generation,');
   const gen = g >= genAt ? 2 + Math.floor((g - genAt) / 5) : 1;
+  const CORAL = useMarks().coral;
   const y = 400, w = 360, h = 150;
   return (
     <AbsoluteFill>
@@ -176,7 +180,7 @@ const BirdLoupe: React.FC<{t: TL; a: number}> = ({t}) => {
       <Loupe layer={layer} cx={cx} cy={cy} r={180} zoom={3} to={[1480, 340]} at={t.at('pluck a white bird,') + 2} bow={-40} />
       <Note text="leftover pin feathers" x={1180} y={590} size={50} rot={-3} at={t.at('pin feathers') - 2} color="#ffffff" />
       <Note text="don't show on white" x={1190} y={690} size={56} rot={-3} at={t.at("don't show.") - 2} />
-      <Note text="cleaner in the store" x={1180} y={810} size={56} rot={-3} at={t.at('looks cleaner') - 2} color={CORAL} />
+      <Note text="cleaner in the store" x={1180} y={810} size={56} rot={-3} at={t.at('looks cleaner') - 2} color={usePal().subject} />
     </TurkeySet>
   );
 };
@@ -213,6 +217,9 @@ const BirdCount: React.FC<{t: TL; a: number}> = ({t}) => (
 );
 
 // ------------------------------------------------------------------ heritage, the board
+/** "Happy Thanksgiving.": a hard cut in to the bird alone on the coral desk, nothing new on it, held (the flash), then the cut. */
+const BirdHappy: React.FC<{t: TL; a: number}> = ({t}) => <TurkeySet b={beatsOf(t)} cam={{x: 900, y: 560, z: 1.2}} dial={false} labels={false} />;
+
 const Heritage: React.FC<{t: TL; a: number}> = ({t}) => {
   const pal = usePal();
   const done: TurkeyBeats = {swellAt: -100, tipAt: -100};
@@ -327,8 +334,8 @@ const PullBack: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ------------------------------------------------------------------ the last lines
-/** The eel and the can, side by side; the hand deals one last recipe card between them. Then hold. */
-const EelCan: React.FC<{t: TL; a: number}> = ({t, a}) => {
+/** (`solo`: no notes or dates, for the "It's still delicious." cut-in.) The eel and the can, side by side; the hand deals one last recipe card between them. Then hold. */
+const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
   const can = {cx: 1560, by: 860, pw: 560};
   const cm = cranMap(6, can.cx, can.by, can.pw);
@@ -341,13 +348,13 @@ const EelCan: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <EelLoop x={20} y={170} w={900} at={a} />
       <Cran n={6} {...can} />
-      <div style={{position: 'absolute', left: 150, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>1621</div>
-      <div style={{position: 'absolute', left: cm.at(370, 0)[0] - 260, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>NOW</div>
-      <Note text="what they could catch" x={140} y={580} size={50} rot={-3} at={t.at('could catch.') - 2} color="#ffffff" />
-      <Note text="what somebody wrote down," x={1060} y={170} size={44} rot={-3} at={t.at('somebody wrote down,') - 2} color="#ffffff" />
-      <Note text="...and sold back to us" x={1100} y={270} size={50} rot={-3} at={t.at('sold back') - 2} color={pal.subject} />
+      {!solo && <div style={{position: 'absolute', left: 150, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>1621</div>}
+      {!solo && <div style={{position: 'absolute', left: cm.at(370, 0)[0] - 260, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>NOW</div>}
+      {!solo && <Note text="what they could catch" x={140} y={580} size={50} rot={-3} at={t.at('could catch.') - 2} color="#ffffff" />}
+      {!solo && <Note text="what somebody wrote down," x={1060} y={170} size={44} rot={-3} at={t.at('somebody wrote down,') - 2} color="#ffffff" />}
+      {!solo && <Note text="...and sold back to us" x={1100} y={270} size={50} rot={-3} at={t.at('sold back') - 2} color={pal.subject} />}
       <HandDeal deals={deals} />
-      <Loop cx={lx + 150} cy={ly} rx={170} ry={36} at={t.at('an ad.') + 2} seed={21} tilt={-3} color={CORAL} />
+      <Loop cx={lx + 150} cy={ly} rx={170} ry={36} at={t.at('an ad.') + 2} seed={21} tilt={-3} color={pal.subject} />
     </AbsoluteFill>
   );
 };
@@ -428,6 +435,7 @@ const Body: React.FC = () => {
     weight: at('And the birds kept') - 1,
     tip: at('It worked so well') - 1,
     count: at('Out of the roughly') - 1,
+    happy: at('Happy Thanksgiving.') - 1,
     heritage: at('The older breeds,') - 1,
     invention: at('So even the bird') - 1,
     subscribe: at('Quick favor:') - 1,
@@ -435,6 +443,7 @@ const Body: React.FC = () => {
     recap: at('Step by step.') - 1,
     pull: at('That means almost') - 1,
     eelcan: at('The people of 1621') - 1,
+    delicious: at("It's still delicious.") - 1,
     end: at('Thanks for watching.') - 1,
   };
   const scene = useScene([
@@ -448,6 +457,7 @@ const Body: React.FC = () => {
     [c.weight, <BirdWeight t={t} a={c.weight} />],
     [c.tip, <BirdTip t={t} a={c.tip} />],
     [c.count, <BirdCount t={t} a={c.count} />],
+    [c.happy, <BirdHappy t={t} a={c.happy} />],
     [c.heritage, <Heritage t={t} a={c.heritage} />],
     [c.invention, <Invention t={t} a={c.invention} />],
     [c.subscribe, <Subscribe t={t} a={c.subscribe} />],
@@ -455,6 +465,7 @@ const Body: React.FC = () => {
     [c.recap, <Recap t={t} a={c.recap} />],
     [c.pull, <PullBack t={t} a={c.pull} />],
     [c.eelcan, <EelCan t={t} a={c.eelcan} />],
+    [c.delicious, <CutIn x={1240} y={700} z={1.3}><EelCan t={t} a={c.eelcan} solo /></CutIn>],
     [c.end, <EndScreen t={t} a={c.end} />],
   ]);
   // sound lists, kept next to the scenes: silent cuts; a stamp per title, stamp and tape; the near-silent marker per note; ticks on
@@ -469,7 +480,7 @@ const Body: React.FC = () => {
     at('recipe card') + 2, at('marshmallow people,'), at('subscribe, and')];
   return (
     <>
-      {scene}
+      <DeskScene ch="ch08" cuts={c} t={t}>{scene}</DeskScene>
       {stamps.map((s) => <Sfx key={s} at={at(s)} src="sfx/stamp.wav" volume={0.28} />)}
       <Sfx at={at('faked it.') + 4} src="sfx/stamp.wav" volume={0.3} />
       <Sfx at={at('Thanks for watching.') + 1} src="sfx/stamp.wav" volume={0.26} />

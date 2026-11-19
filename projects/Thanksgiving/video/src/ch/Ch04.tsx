@@ -5,7 +5,8 @@
 //   "You take"              Recipe        Simmons p. 22, "To dress a Calve's Head. Turtle fashion.": "The head and feet" and
 //                                         "open the head, taking the brains" swiped as they are said
 //   "And you cook"          Morph         Flow M1 calf's head → turtle tureen (placeholder), finishing on "like turtle"
-//   "Mock turtle" (1)       Pair (mock)   real vs mock; the MOCK tape slaps on "Mock"; cheap, always more of it
+//   "Mock turtle" (1)       MockFlash     a cut-in on the fake as the MOCK tape slaps on "Mock" (the coral desk flash, ~1.9 s)
+//   "It's going"            Pair (mock)   real vs mock again, black desk, the tape on; cheap, always more of it
 //   "Caribbean green"       Decline       100 drawn turtles; the stepped number counts to −97% as 97 go grey; 3 stay coral
 //   "Mock turtle" (2)       Pair (late)   the real thing faded, the fake still taped: 1796 … 1884; held on "The fake outlasted"
 //   "But one"               Board         the board (kit/tg_board): the calf's head piece lands with its MOCK tag
@@ -20,7 +21,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, 
 import {MockTape} from '../kit/tg_mock';
 import {type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
-import {DeskScene} from '../kit/tg_desk';
+import {CutIn, DeskScene, useMarks} from '../kit/tg_desk';
 import {camAt, Sheet, Slip, Swipe} from '../kit/vox';
 import {BOSTON, FrameSeqOr, PageScrap, SIMMONS_P2, SIMMONS_P22, TAG_SIMMONS} from './ch34/parts';
 
@@ -32,27 +33,29 @@ export const PLACEHOLDERS: PlaceholderInfo[] = [
     scene: 'Morph', anchor: 'And you cook', swap: 'drop the frames in public/img/flow/m1/; FrameSeqOr plays them (set n to the real count)'},
 ];
 
-const CORAL = '#FF6F61';
-const TEAL = '#2FE0C4';
 
 // ------------------------------------------------------------------ real vs mock
 const SCRAP_L = {x: 110, y: 400, w: 760};
 const SCRAP_R = {x: 1060, y: 290, w: 720};
 const TAPE: [number, number] = [1420, 470];
 
-const Pair: React.FC<{mode: 'empty' | 'mock'; tapeAt?: number; fadeAt?: number; children?: React.ReactNode}> = ({mode, tapeAt = -999, fadeAt = 1e7, children}) => {
+/** `solo`: the fake side only (the MOCK flash's cut-in, so nothing is cropped at the frame edge). */
+const Pair: React.FC<{mode: 'empty' | 'mock'; tapeAt?: number; fadeAt?: number; solo?: boolean; children?: React.ReactNode}> = ({mode, tapeAt = -999, fadeAt = 1e7, solo, children}) => {
   const g = useGFrame();
   const fade = interpolate(g, [fadeAt, fadeAt + 6], [1, 0.32], clamp);
+  const mk = useMarks();
   return (
     <AbsoluteFill>
       <DarkPaper />
+      <div style={{position: 'absolute', left: 1080, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: mk.coral}}>THE FAKE</div>
+      {!solo && <>
       <div style={{position: 'absolute', left: 958, top: 120, width: 4, height: 840, background: 'rgba(244,239,230,0.35)'}} />
-      <div style={{position: 'absolute', left: 140, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: TEAL}}>THE REAL THING</div>
-      <div style={{position: 'absolute', left: 1080, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: CORAL}}>THE FAKE</div>
+      <div style={{position: 'absolute', left: 140, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: mk.teal}}>THE REAL THING</div>
       <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={SIMMONS_P2.scrap} x={SCRAP_L.x} y={SCRAP_L.y} w={SCRAP_L.w} rot={-1.5} opacity={fade} seed="pl" />
       <div style={{position: 'absolute', left: SCRAP_L.x, top: SCRAP_L.y + 220, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1, color: 'rgba(244,239,230,0.75)', opacity: fade}}>
         TURTLE · SIMMONS, AMERICAN COOKERY, 1796 · LOC / IA
       </div>
+      </>}
       {mode === 'empty' ? (
         <div style={{position: 'absolute', left: SCRAP_R.x, top: SCRAP_R.y, width: SCRAP_R.w, height: 400, border: '4px dashed rgba(244,239,230,0.35)', boxSizing: 'border-box',
           display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: JF.display, fontSize: 180, color: 'rgba(244,239,230,0.35)'}}>?</div>
@@ -125,9 +128,9 @@ const Morph: React.FC<{t: TL; a?: number}> = ({t}) => {
   );
 };
 
-const PairMock: React.FC<{t: TL; a?: number}> = ({t}) => {
+const PairMock: React.FC<{t: TL; a?: number; solo?: boolean}> = ({t, solo}) => {
   return (
-    <Pair mode="mock" tapeAt={t.at('Mock turtle')}>
+    <Pair mode="mock" tapeAt={t.at('Mock turtle')} solo={solo}>
       <Loop cx={TAPE[0]} cy={TAPE[1]} rx={250} ry={110} at={t.at('Remember')} seed={43} tilt={-8} />
       <Slip text="cheap" x={1080} y={790} at={t.at('cheap') - 2} rot={-3} size={62} />
       <Slip text="always more of it" x={1290} y={800} at={t.at('always more') - 2} rot={2} size={62} />
@@ -155,6 +158,7 @@ const Decline: React.FC<{t: TL; a?: number}> = ({t}) => {
   const c0 = t.at('fell by'), c1 = t.at('percent') + 3;
   const v = Math.round(interpolate(g, [c0, c1], [0, 97], clamp));
   const done = g >= c1;
+  const {teal: TEAL, coral: CORAL} = useMarks();
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -201,7 +205,8 @@ const Body: React.FC = () => {
     book: at('Flip') - 1,
     recipe: at('You take') - 1,
     morph: at('And you cook') - 1,
-    pairMock: at('Mock turtle') - 1,
+    mockFlash: at('Mock turtle') - 1,
+    pairMock: at("It's going") - 1,
     decline: at('Caribbean green') - 1,
     pairLate: at('Mock turtle', 2) - 1,
     board: at('But one') - 1,
@@ -211,6 +216,7 @@ const Body: React.FC = () => {
     [c.book, <Book t={t} a={c.book} />],
     [c.recipe, <Recipe t={t} a={c.recipe} />],
     [c.morph, <Morph t={t} a={c.morph} />],
+    [c.mockFlash, <CutIn x={1420} y={470} z={1.3}><PairMock t={t} a={c.mockFlash} solo /></CutIn>],
     [c.pairMock, <PairMock t={t} a={c.pairMock} />],
     [c.decline, <Decline t={t} a={c.decline} />],
     [c.pairLate, <PairLate t={t} a={c.pairLate} />],

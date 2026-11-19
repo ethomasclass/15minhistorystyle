@@ -41,10 +41,10 @@ export const mapToScreen = (cx: number, cy: number, s: number, rot = 0) => ([x, 
 };
 
 /** Dark notebook-paper backdrop for diagrams. */
-// In a TestColor composition the scene's DeskCtx can ask for the deep teal or oxblood desk (kit/tg_desk); by default, black.
+// Inside a chapter's DeskScene the scene's DeskCtx can ask for the teal or coral desk (kit/tg_desk, tg_desk_map); by default, black.
 export const DarkPaper: React.FC = () => {
   const desk = React.useContext(DeskCtx);
-  if (desk.mode !== 'black') return <ToneDesk mode={desk.mode} texture={desk.texture} />;
+  if (desk.mode !== 'black') return <ToneDesk mode={desk.mode} texture={desk.texture} dots={desk.dots} />;
   return <BlackPaper />;
 };
 
