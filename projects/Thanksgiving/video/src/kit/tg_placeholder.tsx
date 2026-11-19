@@ -63,6 +63,15 @@ export const Ph: React.FC<{file: string; what?: string; x: number; y: number; w:
     op = Math.min(1, s * 1.5);
   } else if (land === 'slap') k = interpolate(g, [at, at + 4, at + 7], [1.3, 0.96, 1], clamp);
   const fl = float ? Math.sin(g / 45) * 4 : 0;
+  // the asset has landed: the picture itself, whole (its own aspect inside the box), lying on the desk; no card, no label
+  if (hasFile(file)) {
+    return (
+      <div style={{position: 'absolute', left: x, top: y + dy + fl, width: w, height: h, opacity: op, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: '50% 60%'}}>
+        <Img src={staticFile(file)} style={{width: w, height: h, objectFit: 'contain', display: 'block', filter: `saturate(0.88) contrast(1.03) drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 16px 22px rgba(0,0,0,0.55))`}} />
+        {children}
+      </div>
+    );
+  }
   return (
     <div style={{position: 'absolute', left: x, top: y + dy + fl, width: w, height: h, opacity: op, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: '50% 60%',
       background: PH_BG, outline: `2px solid ${PH_LINE}`, outlineOffset: -2, boxShadow: shadow ? '0 26px 46px rgba(0,0,0,0.8)' : undefined}}>
@@ -88,7 +97,7 @@ export const TgPrint: React.FC<{src: string; x: number; y: number; w: number; h:
 };
 
 const PrintTag: React.FC<{text: string; top: number; w: number}> = ({text, top, w}) => (
-  <div style={{position: 'absolute', left: 0, top, width: 'max-content', maxWidth: w + 60, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1,
+  <div data-tx style={{position: 'absolute', left: 0, top, width: 'max-content', maxWidth: w + 60, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1,
     color: 'rgba(244,239,230,0.75)', textTransform: 'uppercase', textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div>
 );
 
@@ -107,8 +116,9 @@ export const PrintOr: React.FC<{src: string; what: string; x: number; y: number;
 };
 
 /** A source tag that stays readable over a bright page filling the frame: Kit's Tag on a dark backing strip. */
-export const TagOn: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 44, y = 1030}) => (
-  <div style={{position: 'absolute', left: x - 10, top: y - 6, padding: '6px 10px', background: 'rgba(13,12,9,0.78)', borderRadius: 2, fontFamily: JF.mono, fontSize: 18,
+// (inside the 8% safe area, as Kit's Tag)
+export const TagOn: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 170, y = 958}) => (
+  <div data-tx style={{position: 'absolute', left: x - 10, top: y - 6, padding: '6px 10px', background: 'rgba(13,12,9,0.78)', borderRadius: 2, fontFamily: JF.mono, fontSize: 18,
     lineHeight: 1, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', whiteSpace: 'nowrap'}}>{text}</div>
 );
 

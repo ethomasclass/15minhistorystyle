@@ -11,8 +11,8 @@ const CORAL = '#FF6F61';
 const TEAL = '#2FE0C4';
 
 /** `w` is the width on screen (px at 1080p); the height follows the image. `coral` tints it; `trace` adds a teal outline. */
-export const Prop: React.FC<{name: string; x: number; y: number; w: number; at: number; out?: number; rot?: number; coral?: boolean; trace?: boolean;
-  from?: 'top' | 'bottom' | 'none'; z?: number}> = ({name, x, y, w, at, out = Infinity, rot = 0, coral = false, trace = false, from = 'bottom', z = 0}) => {
+export const Prop: React.FC<{name: string; x: number; y: number; w: number; at: number; out?: number; rot?: number; coral?: boolean; trace?: boolean; colour?: boolean;
+  from?: 'top' | 'bottom' | 'none'; z?: number}> = ({name, x, y, w, at, out = Infinity, rot = 0, coral = false, trace = false, colour = false, from = 'bottom', z = 0}) => {
   const g = useGFrame();
   if (g < at || g >= out) return null;
   const k = interpolate(g, [at, at + 6], [0, 1], {...clamp, easing: (t) => 1 - Math.pow(1 - t, 3)});
@@ -22,9 +22,10 @@ export const Prop: React.FC<{name: string; x: number; y: number; w: number; at: 
   const outline = trace ? ` drop-shadow(3px 0 0 ${TEAL}) drop-shadow(-3px 0 0 ${TEAL}) drop-shadow(0 3px 0 ${TEAL}) drop-shadow(0 -3px 0 ${TEAL})` : '';
   return (
     <div style={{position: 'absolute', left: x, top: y + dy, width: w, transform: `rotate(${rot}deg) scale(${0.92 + 0.08 * k})`, opacity: Math.min(1, k * 1.6), zIndex: z,
-      filter: `${outline} drop-shadow(0 22px 26px rgba(0,0,0,0.7))`}}>
+      // a tight contact shadow and a soft lifted one: the cut-out lies on the desk (the Gilded Age's deskCut)
+      filter: `${outline} drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 16px 22px rgba(0,0,0,0.55))`}}>
       <div style={{position: 'relative', width: '100%'}}>
-        <Img src={src} style={{width: '100%', display: 'block', filter: coral ? 'grayscale(1) contrast(1.05) brightness(1.12)' : 'grayscale(1) contrast(1.15) brightness(0.95)'}} />
+        <Img src={src} style={{width: '100%', display: 'block', filter: coral ? 'grayscale(1) contrast(1.05) brightness(1.12)' : colour ? 'saturate(0.88) contrast(1.03)' : 'grayscale(1) contrast(1.15) brightness(0.95)'}} />
         {coral && (
           // a see-through coral, never a flat red block (the user's rule, Diamond Hoax and The Balloon War v2): the texture shows through
           <>

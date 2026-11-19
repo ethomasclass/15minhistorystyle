@@ -90,7 +90,7 @@ const Book: React.FC<{t: TL; a?: number}> = ({t}) => {
       <TgPrint src={SIMMONS_P22.src} x={1000} y={150} w={520} h={707} at={t.at('few pages') - 1} rot={2} />
       <AbsoluteFill style={{background: 'rgba(13,12,9,0.74)', opacity: interpolate(g, [q - 2, q + 4], [0, 1], clamp)}} />
       <Quote text="To dress a Calve’s Head, Turtle fashion." at={q - 1} x={160} y={400} w={1600} size={84} who="Amelia Simmons, American Cookery, 1796" />
-      <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
+      <div data-tx style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
         textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{TAG_SIMMONS}</div>
     </AbsoluteFill>
   );
@@ -110,7 +110,7 @@ const Recipe: React.FC<{t: TL; a?: number}> = ({t}) => {
         <Swipe lines={[P.brains]} from={t.at('take out the brains') - 1} to={t.end('the brains') + 4} seed="b2" />
       </Sheet>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.6) 100%), linear-gradient(transparent 85%, rgba(0,0,0,0.55) 100%)'}} />
-      <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
+      <div data-tx style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
         textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{`${TAG_SIMMONS} · p. 22`}</div>
     </AbsoluteFill>
   );
@@ -180,7 +180,7 @@ const Decline: React.FC<{t: TL; a?: number}> = ({t}) => {
         </div>
       )}
       <Slip text="off the menu" x={140} y={800} at={t.at('disappeared') - 2} rot={-3} size={64} />
-      <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
+      <div data-tx style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
         textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>Estimate reported by phys.org (2018) · Oceanic Society</div>
     </AbsoluteFill>
   );

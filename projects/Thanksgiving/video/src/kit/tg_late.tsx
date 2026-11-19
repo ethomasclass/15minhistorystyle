@@ -49,7 +49,7 @@ export const PH: React.FC<{file: string; x?: number; y?: number; w: number; h: n
     <div style={{position: 'absolute', left: x, top: y, width: w, height: h, transform: rot ? `rotate(${rot}deg)` : undefined, ...style}}>
       {real ? (
         <Img src={staticFile(file)} style={{width: w, height: h, objectFit: fit, objectPosition: pos, display: 'block', filter,
-          ...(shadow ? {filter: `${filter} drop-shadow(0 22px 30px rgba(0,0,0,0.7))`} : {})}} />
+          ...(shadow ? {filter: `${filter} drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 16px 22px rgba(0,0,0,0.55))`} : {})}} />
       ) : (
         <div style={{position: 'absolute', inset: 0, background: `rgb(${c},${c - 2},${c - 5})`, border: '2px solid rgba(244,239,230,0.16)', boxSizing: 'border-box',
           boxShadow: shadow ? '0 22px 40px rgba(0,0,0,0.6)' : undefined, overflow: 'hidden'}}>

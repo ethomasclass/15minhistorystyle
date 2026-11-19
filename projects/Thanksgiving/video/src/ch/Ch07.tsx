@@ -5,7 +5,7 @@
 // landing on the collage board. Coral-desk flashes (kit/tg_desk_map): "Because it IS the can" (a cut-in on frame 6, then the
 // ridges loupe on teal) and the MOCK tape cut-in. Scenes are timed to words (script/ch07_test_kitchens.txt); placeholders are listed in PLACEHOLDERS.
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, interpolate, useCurrentFrame, Img, staticFile} from 'remotion';
 import words from '../../public/audio/ch07_test_kitchens.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
@@ -14,6 +14,7 @@ import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
+import {Cut, Hand} from '../kit/tg_cut';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
@@ -32,18 +33,13 @@ const P = {
   dCab: {file: 'img/flow/d4_kitchen_cabinets.png', what: 'diorama D4, plane b: 1950s cabinets and a new refrigerator'},
   dHost: {file: 'img/flow/d4_kitchen_hostess.png', what: 'diorama D4, plane c: a hostess in profile at the counter (solid black)'},
   dFront: {file: 'img/flow/d4_kitchen_front.png', what: 'diorama D4, plane d: the counter, a casserole dish (coral) and a row of plain cans'},
+  plate50: {file: 'img/flow/tg_adplate_1950s.png', what: '1950s ad plate: a kitchen, a gingham table, a blank cream panel right; colour'},
   reilly: {file: 'img/arch/dorcas_reilly.jpg', what: 'Dorcas Reilly in the Campbell test kitchen (photo)'},
-  casA: {file: 'img/flow/s2_casserole_a.png', what: 'state sheet S2, A: green bean casserole with fried onions, 1950s glass dish'},
-  casB: {file: 'img/flow/s2_casserole_b.png', what: 'S2, B: the same dish, half spooned out'},
-  casC: {file: 'img/flow/s2_casserole_c.png', what: 'S2, C: the dish empty beside three plain unlabelled 1950s cans'},
-  m3a: {file: 'img/flow/m3_homemade_pie.png', what: 'morph M3, first frame: a homemade pie on a cloth, a rolling pin beside it'},
-  m3b: {file: 'img/flow/m3_can.png', what: 'morph M3, last frame: a plain unlabelled tin can on the same cloth'},
 } satisfies Record<string, Placeholder>;
-const MORPH_DIR = 'img/flow/m3_mock_homemade';
 const PLATE_SIZE: [number, number] = [2880, 1080];
 
 /** Every placeholder in this chapter, for the asset swap. */
-export const PLACEHOLDERS: Placeholder[] = [...Object.values(P), {file: `${MORPH_DIR}/frame_0000.png`, what: 'morph M3 as frames (12/s), first frame 0000'}];
+export const PLACEHOLDERS: Placeholder[] = Object.values(P).filter((p) => p !== P.plate && p !== P.plate50);
 
 const TAG_BOOKLET = 'Recipe paraphrased from the Angelus Marshmallows booklet, 1917';
 
@@ -250,6 +246,7 @@ const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
       <Cran n={6} {...PAY} />
       <Loupe layer={layer} cx={lx} cy={ly} r={170} zoom={2.6} to={[430, 360]} at={t.at('Those ridges') + 2} bow={50} />
       <Loop cx={kx} cy={ky} rx={110} ry={80} at={t.at("can's ridges.") + 2} seed={9} tilt={-20} />
+      <Hand name="tg_hand_point" x={kx + 150} y={ky + 10} w={620} at={t.at("can's ridges.") + 2} out={t.at("can's ridges.") + 40} />
       <Note text="same ridges." x={190} y={640} size={56} rot={-3} at={t.at("can's ridges.") + 6} color="#ffffff" />
     </AbsoluteFill>
   );
@@ -351,40 +348,42 @@ const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
 };
 
 // ------------------------------------------------------------------ the casserole
-/** State sheet S2, swapped like stop-motion replacement frames on the ingredient words: the dish -> half gone -> three cans. */
-const Casserole: React.FC<{t: TL; a: number}> = ({t}) => {
-  const g = useGFrame();
-  const pal = usePal();
-  const bAt = t.at('cream of mushroom'), cAt = t.at('Fried onions');
-  const st = g >= cAt ? P.casC : g >= bAt ? P.casB : P.casA;
-  const X = 680, Y = 140, Wd = 1140, Ht = 640;
+/** The casserole on the 1950s kitchen table (the 1950s ad plate, full frame, colour): one still, the dish; the three ingredients
+ *  land on it as slips, the last one dropped in by the pinching hand; MIX. BAKE. DONE. on the plate's blank panel. */
+const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const cAt = t.at('Fried onions');
+  const ink = '#2a2118';
   return (
-    <AbsoluteFill>
-      <DarkPaper />
-      <PH {...st} x={X} y={Y} w={Wd} h={Ht} filter="saturate(0.9)" tone={st === P.casC ? 0.2 : st === P.casB ? 0.1 : 0} />
-      {/* the three cans in state C: a label slip on each */}
-      <Slip text="green beans" x={X + Wd * 0.5} y={Y + Ht * 0.22} at={cAt} size={48} rot={-3} />
-      <Slip text="cream of mushroom soup" x={X + Wd * 0.42} y={Y + Ht * 0.44} at={cAt + 3} size={48} rot={2} />
-      <Slip text="fried onions" x={X + Wd * 0.55} y={Y + Ht * 0.66} at={cAt + 6} size={48} rot={-2} coral />
-      <Stamp text="MIX." x={130} y={200} size={96} at={t.at('Mix,')} rot={-4} />
-      <Stamp text="BAKE." x={150} y={330} size={96} at={t.at('bake,')} rot={-2} />
-      <Stamp text="DONE." x={170} y={460} size={96} at={t.at('done.')} rot={-5} color={pal.subject} />
-      <Highlight text="GREEN BEAN CASSEROLE" x={130} y={850} size={88} at={t.at('Green bean casserole.')} seed={79} rot={-2} />
+    <AbsoluteFill style={{background: INK}}>
+      <Img src={staticFile(P.plate50.file)} style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, objectFit: 'cover', filter: 'saturate(0.85) contrast(1.02)'}} />
+      <Cut name="tg_casserole_A" x={330} y={470} w={760} rot={-2} at={a + 1} land="slap" />
+      <Slip text="green beans" x={420} y={520} at={t.at('Green beans.') - 2} size={50} rot={-3} />
+      <Slip text="cream of mushroom soup" x={470} y={680} at={t.at('cream of mushroom') - 2} size={50} rot={2} />
+      <Slip text="fried onions" x={620} y={840} at={cAt} size={50} rot={-2} coral />
+      <Hand name="tg_hand_pinch" x={900} y={850} w={700} at={cAt} out={cAt + 14} />
+      <Stamp text="MIX." x={1400} y={250} size={96} at={t.at('Mix,')} rot={-4} color={ink} />
+      <Stamp text="BAKE." x={1410} y={390} size={96} at={t.at('bake,')} rot={-2} color={ink} />
+      <Stamp text="DONE." x={1420} y={530} size={96} at={t.at('done.')} rot={-5} color="#c2452f" />
+      <Highlight text="GREEN BEAN CASSEROLE" x={170} y={110} size={84} at={t.at('Green bean casserole.')} seed={79} rot={-2} />
     </AbsoluteFill>
   );
 };
 
-/** (`solo`: the morph and the tape only, for the MOCK flash's cut-in.) Twenty million a year, then the third mock: the homemade pie becomes a can (morph M3), and the MOCK tape lands on "Mock". */
+/** (`solo`: the picture and the tape only, for the MOCK flash's cut-in.) Twenty million a year, then the third mock, made in code
+ *  from stills: the homemade pie sits on the desk; the silhouette hand reaches in and sets a can down in its place (a hard swap on
+ *  the drawing the can lands), and the MOCK tape lands on "Mock". */
 const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
   const mockAt = t.at('Mock homemade.');
+  const swap = Math.max(a + 14, mockAt - 12);
   return (
     <AbsoluteFill>
       <DarkPaper />
       {!solo && <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />}
       {!solo && <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />}
       {!solo && <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />}
-      <Morph a={P.m3a} b={P.m3b} dir={MORPH_DIR} from={Math.max(a + 10, mockAt - 90)} to={mockAt - 3} x={1000} y={170} w={800} h={600} />
+      <Cut name="tg_homemade_pie" x={1010} y={250} w={780} at={solo ? -999 : a + 2} out={swap} land="slap" />
+      <Hand name="tg_hand_can" x={1280} y={700} w={1150} at={swap} />
       <MockTape x={1150} y={400} at={mockAt} size={140} />
       {!solo && <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />}
       {!solo && <Note text="dressed up as Grandma's" x={190} y={760} size={64} rot={-3} at={t.at('dressed up') - 2} color={pal.subject} />}

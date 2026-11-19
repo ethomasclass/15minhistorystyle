@@ -104,7 +104,7 @@ export const AssetOr: React.FC<{src: string; what: string; x: number; y: number;
   if (hasFile(src)) {
     return (
       <div style={{position: 'absolute', left: x, top: y, width: w, height: h}}>
-        <Img src={staticFile(src)} style={{width: '100%', height: '100%', objectFit: 'contain', filter: `${color ? 'saturate(0.9)' : 'grayscale(1) contrast(1.15)'} drop-shadow(0 22px 26px rgba(0,0,0,0.7))`}} />
+        <Img src={staticFile(src)} style={{width: '100%', height: '100%', objectFit: 'contain', filter: `${color ? 'saturate(0.88) contrast(1.03)' : 'grayscale(1) contrast(1.15)'} drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 16px 22px rgba(0,0,0,0.55))`}} />
         {children}
       </div>
     );
@@ -124,7 +124,7 @@ export const FrameSeqOr: React.FC<{base: string; n: number; what: string; x: num
   const i = Math.min(n - 1, Math.floor(p * n));
   const file = `${base}_${String(i).padStart(4, '0')}.png`;
   if (hasFile(`${base}_0000.png`)) {
-    return <Img src={staticFile(file)} style={{position: 'absolute', left: x, top: y, width: w, height: h, objectFit: 'contain', filter: 'saturate(0.9) drop-shadow(0 22px 26px rgba(0,0,0,0.7))'}} />;
+    return <Img src={staticFile(file)} style={{position: 'absolute', left: x, top: y, width: w, height: h, objectFit: 'contain', filter: 'saturate(0.88) contrast(1.03) drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 16px 22px rgba(0,0,0,0.55))'}} />;
   }
   return (
     <Ph file={`${base}_0000…${String(n - 1).padStart(4, '0')}.png`} what={what} x={x} y={y} w={w} h={h} land="none">

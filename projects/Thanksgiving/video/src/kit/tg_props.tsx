@@ -219,9 +219,11 @@ export const PrintSlot: React.FC<{src: string; x: number; y: number; w: number; 
   : <Placeholder file={p.src} x={p.x} y={p.y} w={p.w} h={p.h} rot={p.rot} at={p.at} out={p.out} note={note} />);
 
 /** A Prop (img/props/<name>.webp cut-out) once it exists, else a Placeholder `w` x `h` at (x, y). */
+// (Flow's food and animal cut-outs keep their muted colour in this video; `grey` for a B&W beat. The prop keeps its own aspect:
+// `h` only sizes the placeholder.)
 export const PropSlot: React.FC<{name: string; x: number; y: number; w: number; h: number; at: number; out?: number; rot?: number; coral?: boolean; trace?: boolean;
-  note?: string}> = ({name, h, note, ...p}) => (hasFile(`img/props/${name}.webp`)
-  ? <Prop name={name} {...p} />
+  note?: string; grey?: boolean}> = ({name, h, note, grey, ...p}) => (hasFile(`img/props/${name}.webp`)
+  ? <Prop name={name} colour={!grey} {...p} />
   : <Placeholder file={`img/props/${name}.webp`} x={p.x} y={p.y} w={p.w} h={h} rot={p.rot} at={p.at} out={p.out} note={note} tone="#22201b" />);
 
 // ------------------------------------------------------------------ the diorama

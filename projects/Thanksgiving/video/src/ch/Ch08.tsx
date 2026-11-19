@@ -17,6 +17,7 @@ import {type Box, Slip} from '../kit/vox';
 import {PageScrap} from './ch34/parts';
 import {Print} from '../kit/print';
 import {EndSlots} from '../kit/ga_brand';
+import {Hand} from '../kit/tg_cut';
 import {TgBoard} from '../kit/tg_board';
 import {chestAt, SET, TURKEY, type TurkeyBeats, TurkeyRig, TurkeySet} from '../kit/tg_turkey';
 import {CORAL, Cran, cranMap, type Deal, EelLoop, HandDeal, Loupe, MockTape, ORANGE, PH, type Placeholder, RecipeCard, TEAL } from '../kit/tg_late';
@@ -265,6 +266,8 @@ const Subscribe: React.FC<{t: TL; a: number}> = ({t}) => (
     <Note text="quick favor:" x={200} y={240} size={56} rot={-3} at={t.at('Quick favor:') - 2} color="#ffffff" />
     <Note text="hit subscribe" x={240} y={360} size={96} rot={-3} at={t.at('hit subscribe.') - 2} />
     <Note text="it's free." x={290} y={540} size={60} rot={-3} at={t.at("It's free.") - 2} color="#ffffff" />
+    {/* the hand holds the ask out on a card, and takes it away before the grocer's ad lands */}
+    <Hand name="tg_hand_card" x={1160} y={400} w={1000} at={t.at('hit subscribe.') + 2} out={t.at('marshmallow people,') - 10} label="subscribe" />
     <PageScrap src={AD22.src} size={AD22.size} box={AD22.crop} x={1100} y={260} w={680} at={t.at('marshmallow people,')} rot={4} seed="s22"
       tag="Piggly Wiggly ad, Albuquerque Morning Journal, Oct. 28, 1922 · LOC" />
     <Note text="(not selling anything)" x={300} y={700} size={50} rot={-3} at={t.at('not selling') - 2} />

@@ -25,6 +25,7 @@ import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
 import {DeskScene} from '../kit/tg_desk';
+import {Cut} from '../kit/tg_cut';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
@@ -32,12 +33,8 @@ export const CH03_FRAMES = chapterFrames(N, LEAD);
 
 
 export const PLACEHOLDERS: PlaceholderInfo[] = [
-  {file: 'img/flow/d2_turtle_dock.png', what: 'Flow D2 turtle-dock diorama (or its planes), a coral turtle in a crate', scene: 'Dock', anchor: 'shipped',
+  {file: 'img/flow/d2_turtle_dock.png', what: 'the turtle dock, to be drawn in code as a silhouette scene (STYLE_GAP.md); the turtle cut-out is already on it', scene: 'Dock', anchor: 'shipped',
     swap: 'drop the file in public/; AssetOr shows it full frame'},
-  {file: 'img/flow/mince_pie_A.png', what: 'Flow S1 state A: the whole mince pie on a pewter plate (RGBA cut-out)', scene: 'Pie', anchor: 'Then came', swap: 'drop in public/'},
-  {file: 'img/flow/mince_pie_B.png', what: 'Flow S1 state B: one wedge cut out, the meat filling showing', scene: 'Pie', anchor: 'had meat', swap: 'drop in public/'},
-  {file: 'img/flow/mince_pie_C.png', what: 'Flow S1 state C: the ingredients laid out around the empty plate', scene: 'Pie', anchor: 'cattle feet',
-    swap: 'drop in public/; re-place the five ingredient slips on the real pieces (PIE_LABELS)'},
 ];
 
 // ------------------------------------------------------------------ the bill of fare
@@ -105,6 +102,8 @@ const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
       <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('oysters') - 3} color="#ffffff" out={card} />
       <MenuCard x={1040} y={110} rot={1.5} numAt={card} rowAt={rowAt} swipeAt={t.at('turtle')} at={card} />
       <Slip text="“we've arrived”" x={150} y={560} at={t.at('said') - 2} rot={-3} size={66} />
+      {/* the dish itself: the turtle-lidded tureen, set down on the desk as the soup is named */}
+      <Cut name="tg_tureen" x={600} y={800} w={400} rot={-2} at={t.at('was turtle') - 2} />
       <Slip text="green sea turtle" x={190} y={720} at={t.at('Green') - 2} rot={2} size={62} coral />
     </AbsoluteFill>
   );
@@ -113,7 +112,9 @@ const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
 /** Green sea turtles shipped up alive: the Flow turtle-dock diorama, full frame (placeholder until it lands). */
 const Dock: React.FC<{t: TL; a?: number}> = ({t}) => (
   <AbsoluteFill style={{background: '#0d0c09'}}>
-    <AssetOr src="img/flow/d2_turtle_dock.png" what="Flow D2 · turtle dock, 1800s: harbour haze, masts, crates, a coral turtle" x={0} y={0} w={1920} h={1080} />
+    {/* the dock itself is still to come (a code-drawn silhouette scene: STYLE_GAP.md); the turtle is here already */}
+    <AssetOr src="img/flow/d2_turtle_dock.png" what="turtle dock, 1800s (code-drawn scene to come): harbour haze, masts, crates" x={0} y={0} w={1920} h={1080} />
+    <Cut name="tg_turtle" x={1010} y={250} w={640} rot={8} at={t.at('alive') - 8} land="rise" />
     <Slip text="shipped up alive" x={150} y={760} at={t.at('alive') - 2} rot={-3} size={64} />
     <Slip text="from the Caribbean" x={200} y={870} at={t.at('Caribbean') - 2} rot={2} size={56} />
   </AbsoluteFill>
@@ -156,6 +157,7 @@ const Steps: React.FC<{t: TL; a?: number}> = ({t}) => {
       <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={SIMMONS_P2.scrap} x={110} y={360} w={880} rot={-1.5} tag={TAG_SIMMONS} seed="st">
         <Swipe lines={SIMMONS_P2.quote} from={-999} to={-998} seed="tq" />
       </PageScrap>
+      <Cut name="tg_turtle" x={400} y={40} w={340} rot={-12} land="none" />
       <Slip text="1. hang it up" x={1110} y={210} at={-999} rot={-2} size={60} />
       <Slip text="2. cleaned" x={1110} y={360} at={t.at('cleaned') - 2} rot={-3} size={60} />
       <Slip text="3. seasoned" x={1110} y={510} at={t.at('seasoned') - 2} rot={-2} size={60} />
@@ -167,11 +169,11 @@ const Steps: React.FC<{t: TL; a?: number}> = ({t}) => {
 // ------------------------------------------------------------------ the mince pie
 /** Ingredient labels around the exploded pie: [text, word, x, y] on screen, for the placeholder layout of state C. */
 const PIE_LABELS: [string, string, number, number][] = [
-  ['cattle feet', 'cattle feet', 1060, 230],
-  ['beef suet', 'beef suet', 1480, 300],
-  ['wine', 'and wine', 1620, 560],
-  ['apples', 'apples', 1080, 790],
-  ['raisins', 'raisins', 1450, 840],
+  ['cattle feet', 'cattle feet', 1050, 300],
+  ['beef suet', 'beef suet', 1470, 270],
+  ['wine', 'and wine', 1610, 500],
+  ['apples', 'apples', 1090, 730],
+  ['raisins', 'raisins', 1440, 770],
 ];
 
 const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
@@ -179,16 +181,15 @@ const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
   const g = useGFrame();
   const mince = t.at('Mince');
   const px = interpolate(f, [mince, mince + 12], [760, 1020], {...clamp, easing: (p) => 1 - Math.pow(1 - p, 3)});
-  const st = g >= t.at('cattle feet') - 1 ? 'C' : g >= t.at('had meat') ? 'B' : 'A';
-  const what = {A: 'state A · the whole pie', B: 'state B · a wedge cut out', C: 'state C · the ingredients apart'}[st];
+  // one still (the whole pie): the change is made in code, the coral "meat" slip and then the five ingredient slips landing on it
   const P = MINCE;
   return (
     <AbsoluteFill>
       <DarkPaper />
       {g >= t.at('dessert') && g < mince && <Highlight text="DESSERT" x={120} y={110} size={104} at={t.at('dessert')} seed={33} rot={-2} />}
       {g >= mince && <Highlight text="MINCE PIE" x={110} y={110} size={104} at={mince} seed={35} rot={-2} />}
-      <AssetOr key={st} src={`img/flow/mince_pie_${st}.png`} what={`Flow S1 mince pie, ${what}`} x={px} y={190} w={800} h={720} />
-      {st === 'B' && <Slip text="meat" x={px + 520} y={640} at={t.at('meat in it') + 3} rot={-4} size={66} coral />}
+      <Cut name="tg_mince_A" x={px} y={360} w={800} land="none" />
+      {g < t.at('cattle feet') - 1 && <Slip text="meat" x={px + 300} y={470} at={t.at('meat in it') + 3} rot={-4} size={74} coral />}
       <PageScrap src={P.src} size={P.size} box={P.scrap} x={90} y={350} w={860} at={mince + 2} rot={-1.5} tag={TAG_SIMMONS} seed="mp">
         <Swipe lines={[P.feet]} from={t.at('cattle feet') - 1} to={t.at('cattle feet') + 7} seed="m1" />
         <Swipe lines={P.suet} from={t.at('beef suet') - 1} to={t.at('beef suet') + 8} seed="m2" />

@@ -27,17 +27,14 @@ const cropped = (p: Omit<Piece, 'h'> & {h?: number}): Piece => ({...p, h: p.h ??
 /** In chapter order. `tag` is the word on the yarn from the previous piece. */
 export const PIECES: Piece[] = [
   {id: 'eel', ch: 2, x: 110, y: 180, w: 300, h: 170, rot: -3, label: 'EELS · 1621', src: 'img/flow/eel/eel_0000.png'},
-  cropped({id: 'turtle', ch: 3, x: 370, y: 540, w: 280, rot: 2, label: 'TURTLE · 1796', src: 'img/arch/simmons-1796-to-dress-a-turtle-p2.jpg', size: [3504, 4762],
-    crop: [700, 2560, 2300, 1300], tag: 'but'}),
-  cropped({id: 'mock', ch: 4, x: 680, y: 180, w: 280, rot: -2, label: 'MOCK TURTLE · 1796', src: 'img/arch/simmons-1796-calves-head-turtle-fashion-p22.jpg',
-    size: [3504, 4762], crop: [700, 1290, 2300, 1300], mock: true, tag: 'therefore'}),
+  // the Flow cut-outs (their own aspect: h = w x the picture's height / width)
+  {id: 'turtle', ch: 3, x: 390, y: 520, w: 250, h: 219, rot: 2, label: 'TURTLE · 1796', src: 'img/flow/tg_turtle.png', colour: true, tag: 'but'},
+  {id: 'mock', ch: 4, x: 670, y: 200, w: 300, h: 122, rot: -2, label: 'MOCK TURTLE · 1796', src: 'img/flow/tg_calf_head.png', colour: true, mock: true, tag: 'therefore'},
   cropped({id: 'hale', ch: 5, x: 980, y: 480, w: 210, rot: 3, label: 'SARAH HALE · 1863', src: 'img/arch/sarah-josepha-hale-engraving-1880-signature.jpg', size: [1046, 1536],
     crop: [170, 110, 720, 880], tag: 'but'}),
-  cropped({id: 'jello', ch: 6, x: 1230, y: 170, w: 290, rot: -3, label: 'JELL-O · 1920', src: 'img/arch/jello-girl-gives-a-party-1920-p2.jpg', size: [2472, 3351],
-    crop: [120, 60, 1840, 1060], colour: true, mock: true, tag: 'therefore'}),
+  {id: 'jello', ch: 6, x: 1230, y: 170, w: 290, h: 194, rot: -3, label: 'JELL-O · 1920', src: 'img/flow/tg_jello.png', colour: true, mock: true, tag: 'therefore'},
   {id: 'can', ch: 7, x: 1440, y: 560, w: 230, h: 190, rot: 2, label: 'THE CAN · 1941', src: 'img/flow/cran/cran_cut6.png', colour: true, mock: true, tag: 'therefore'},
-  cropped({id: 'turkey', ch: 8, x: 1630, y: 150, w: 190, rot: -2, label: 'BROAD-BREASTED WHITE', src: 'img/arch/large-white-turkey-female-usda-ars.jpg', size: [640, 963],
-    crop: [0, 80, 640, 800], tag: 'therefore'}),
+  {id: 'turkey', ch: 8, x: 1620, y: 130, w: 210, h: 197, rot: -2, label: 'BROAD-BREASTED WHITE', src: 'img/flow/tg_turkey_white.png', colour: true, tag: 'therefore'},
 ];
 export const piece = (id: PieceId) => PIECES.find((p) => p.id === id)!;
 /** Where a piece's pin sits (board px): top-centre. */
@@ -49,7 +46,7 @@ export const centreOf = (id: PieceId): [number, number] => { const p = piece(id)
 const PieceImg: React.FC<{p: Piece}> = ({p}) => {
   const filter = p.colour ? 'saturate(0.85)' : BW;
   if (!p.crop || !p.size) {
-    return <Img src={staticFile(p.src)} style={{width: p.w, height: p.h, objectFit: 'contain', display: 'block', filter}} />;
+    return <Img src={staticFile(p.src)} style={{width: p.w, height: p.h, objectFit: 'contain', display: 'block', filter: `${filter} drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(0 10px 14px rgba(0,0,0,0.5))`}} />;
   }
   const [cx, cy, cw] = p.crop;
   const s = p.w / cw;

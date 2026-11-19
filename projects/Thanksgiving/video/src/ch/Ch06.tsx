@@ -14,7 +14,8 @@ import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
-import {FullFrame, Ph, PhLabel, type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
+import {Cut, CutLoop, Swap} from '../kit/tg_cut';
+import {FullFrame, PhLabel, type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {type Box, Swipe} from '../kit/vox';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {MockTape} from '../kit/tg_mock';
@@ -25,15 +26,11 @@ const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
 
 
+// Still to come: only the Victorian kitchen, which will be drawn in code as a silhouette scene (STYLE_GAP.md). Everything else is
+// here: the Jell-O ring is our own wobble loop (img/flow/jello_ring), and the mould-to-box change is made in code from two stills.
 export const PLACEHOLDERS: PlaceholderInfo[] = [
-  {file: 'img/flow/jello_ring/ring_0000.png …', what: 'Flow V2: the Jell-O ring trembling, video-to-cut-out frames at 12 fps (colour)', scene: 'Mold', anchor: "Here's a dish",
-    swap: 'replace <Ph> in <Mold> with a frame loop like the eel (img/flow/jello_ring/ring_%04d.png)'},
-  {file: 'img/flow/d3_kitchen_{1..4}.png', what: 'Flow D3 diorama: Victorian kitchen at night, 4 planes (sky/back wall, range + cook, table, front), copper mould coral',
-    scene: 'Kitchen', anchor: 'To make one', swap: 'replace KitchenDiorama planes with PlaneImg layers (SilScene); steam loop screen-blended on the range'},
-  {file: 'img/flow/morph_aspic_jello.mp4', what: 'Flow M2 morph: copper aspic mould -> plain 1920s gelatin box, middle 2-3 s', scene: 'Morph', anchor: 'In 1897 … Jell-O',
-    swap: '<OffthreadVideo> trimmed to MORPH_TRIM, from at("added sugar") to at("Jell-O.")'},
-  {file: 'img/flow/morph_aspic_jello_first.png', what: "M2's first frame (the copper mould) as a cut-out", scene: 'Morph, Mock', anchor: 'In 1897 / Mock aspic', swap: '<Img> in the same box'},
-  {file: 'img/flow/morph_aspic_jello_last.png', what: "M2's last frame (the box and the red gelatin) as a cut-out", scene: 'Morph, Mock', anchor: 'Jell-O / Mock aspic', swap: '<Img> in the same box'},
+  {file: 'img/flow/d3_kitchen_{1..4}.png', what: 'the Victorian kitchen at night, to be drawn in code: back wall and pans, the range and the cook, the table and the copper mould, the front',
+    scene: 'Kitchen', anchor: 'To make one', swap: 'replace KitchenDiorama with the drawn scene'},
 ];
 
 // ---------------------------------------------------------------- the scans (CREDITS.md), line boxes measured on them (source px)
@@ -60,7 +57,8 @@ const Mold: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Ph file="img/flow/jello_ring/ring_0000.png" what="Jell-O ring trembling · Flow cut-out loop, colour" x={1000} y={260} w={720} h={560} at={a + 1} land="drop" />
+      {/* our own wobble loop of the ring (24 warped drawings, 12 a second) */}
+      <CutLoop dir="jello_ring" stem="ring" n={24} size={[859, 531]} x={960} y={300} w={800} at={a + 1} />
       {g >= t.at('gelatin') && <Highlight text="THE GELATIN MOLD" x={110} y={130} size={88} at={t.at('gelatin')} seed={61} rot={-2} />}
       <Note text="from nowhere?" x={150} y={320} size={54} rot={-3} at={t.at('nowhere.') - 3} color="#ffffff" />
     </AbsoluteFill>
@@ -197,13 +195,11 @@ const Morph: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const pal = usePal();
   const m0 = t.at('added sugar') - 2;
   const m1 = t.at('Jell-O.');
-  // the morph clip runs m0 -> m1 (Flow M2, its middle 2-3 s); before it, its first frame; after it, its last frame
-  const phase = g < m0 ? ['img/flow/morph_aspic_jello_first.png', 'M2 first frame: the copper aspic mould'] : g < m1 ? ['img/flow/morph_aspic_jello.mp4', 'M2 morph playing: mould -> Jell-O box']
-    : ['img/flow/morph_aspic_jello_last.png', 'M2 last frame: the box + red gelatin'];
+  // made in code from two stills (no video): the aspic wobbles, the two cross-dissolve in 12-a-second steps, the box settles
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Ph file={phase[0]} what={`${phase[1]} · colour`} {...MORPH_BOX} at={a + 1} land="none" shadow={false} />
+      <Swap a="tg_aspic" b="tg_gelatin_box" cx={MORPH_BOX.x + MORPH_BOX.w / 2} base={MORPH_BOX.y + MORPH_BOX.h - 30} h={640} from={m0} to={m1 + 4} at={a + 1} />
       {g >= t.at('In 1897') && <Highlight text="1897" x={110} y={120} size={110} at={t.at('In 1897')} seed={65} rot={-2} />}
       <Note text="upstate new york" x={140} y={300} size={50} rot={-3} at={t.at('upstate') - 3} color="#ffffff" />
       <Note text="+ sugar" x={160} y={430} size={58} rot={-3} at={t.at('added sugar') - 3} />
@@ -238,8 +234,8 @@ const Mock: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
       {!solo && <div style={{position: 'absolute', left: 958, top: 130, width: 4, height: 820, background: 'rgba(244,239,230,0.35)'}} />}
       {!solo && <div style={{position: 'absolute', left: 200, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.mark}}>THE REAL THING</div>}
       <div style={{position: 'absolute', left: 1100, top: 150, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: pal.subject}}>FROM A BOX</div>
-      {!solo && <Ph file="img/flow/morph_aspic_jello_first.png" what="the copper mould (M2 first frame)" x={180} y={240} w={620} h={620} at={a - 999} land="none" />}
-      <Ph file="img/flow/morph_aspic_jello_last.png" what="the Jell-O box (M2 last frame)" x={1100} y={240} w={620} h={620} at={a - 999} land="none" />
+      {!solo && <Cut name="tg_aspic" x={190} y={270} w={600} land="none" />}
+      <Cut name="tg_gelatin_box" x={1110} y={270} w={600} land="none" />
       <MockTape x={1410} y={560} at={t.at('Mock aspic')} />
     </AbsoluteFill>
   );
@@ -277,6 +273,8 @@ const Fifties: React.FC<{t: TL; a: number}> = ({t}) => {
       <DarkPaper />
       {g >= t.at('1910s,') && <Highlight text="BY THE 1910s" x={300} y={330} size={120} at={t.at('1910s,')} seed={67} rot={-2} />}
       <Note text="…just about anything" x={380} y={560} size={80} rot={-3} at={t.at('anything') - 3} color={pal.subject} />
+      {/* eggs, carrots, peas and ham set in a dome: just about anything */}
+      <Cut name="tg_aspic_savory" x={1200} y={690} w={520} rot={2} at={t.at('anything') - 1} />
     </AbsoluteFill>
   );
 };

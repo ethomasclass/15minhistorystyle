@@ -16,6 +16,7 @@ import {type Box, Slip, Swipe} from '../kit/vox';
 import {PageScrap} from './ch34/parts';
 import {Barrel, Cran, Eel, Placeholder, Strike} from '../kit/tg_props';
 import {DATES, SUBTITLE, TITLE} from '../project';
+import {Cut} from '../kit/tg_cut';
 
 const N = words as Narration;
 /** The one-second beat after the question, held on the frame, before the channel intro. */
@@ -39,11 +40,8 @@ const P62 = {src: 'img/arch/mourts-relation-1622-hogshead-of-eeles-p62.jpg', scr
   /** "we can take a Hogshead of Eeles in" / "a night," */
   hog: [[1480, 1625, 1460, 80], [660, 1718, 300, 80]] as Box[]};
 
-/** Assets not here yet: each is a labelled placeholder card in the scenes below (swap them when the files land). */
-export const PLACEHOLDERS = [
-  {file: 'img/flow/tg_modern_plate.png', scenes: ['Plate (full frame, "Now look")', 'Meal (a print on the desk, "It\'s a great meal")'],
-    note: 'the modern plate: turkey, green bean casserole with fried onions, sweet potatoes with marshmallows; colour is OK (brief). 16:9. When it lands, Plate shows it full frame (hasFile swap) and the slips can become loops on each dish.'},
-] as const;
+/** Nothing in this chapter is a placeholder any more (the modern plate landed, Nov 2026). */
+export const PLACEHOLDERS = [] as const;
 
 type S = {t: TL; a: number};
 
@@ -133,13 +131,13 @@ const BarrelNight: React.FC<S> = ({t, a}) => {
 
 /** Hard cut to today: the modern plate full frame, the dishes named on slips as they're said. */
 const Plate: React.FC<S> = ({t}) => (
-  <AbsoluteFill style={{background: '#111'}}>
-    {hasFile('img/flow/tg_modern_plate.png')
-      ? <Img src={staticFile('img/flow/tg_modern_plate.png')} style={{position: 'absolute', inset: 0, width: 1920, height: 1080, objectFit: 'cover'}} />
-      : <Placeholder full file="img/flow/tg_modern_plate.png" note="the modern Thanksgiving plate, full frame (colour OK)" />}
-    <Slip text="a turkey" x={140} y={620} size={56} rot={-3} at={t.at('A turkey') - 2} />
-    <Slip text="green beans, fried onions" x={160} y={740} size={56} rot={-2} at={t.at('Green beans') - 2} />
-    <Slip text="marshmallows on sweet potatoes" x={140} y={860} size={56} rot={-3} at={t.at('Marshmallows') - 2} />
+  <AbsoluteFill>
+    <DarkPaper />
+    {/* the plate whole, big on the desk (a cut-out, its colour kept: the brief allows it); the slips sit beside it, one per dish */}
+    <Cut name="tg_modern_plate" x={900} y={70} w={900} land="none" />
+    <Slip text="a turkey" x={170} y={330} size={62} rot={-3} at={t.at('A turkey') - 2} />
+    <Slip text="green beans, fried onions" x={170} y={500} size={58} rot={-2} at={t.at('Green beans') - 2} />
+    <Slip text="marshmallows on sweet potatoes" x={170} y={670} size={54} rot={-3} at={t.at('Marshmallows') - 2} />
   </AbsoluteFill>
 );
 
@@ -171,13 +169,10 @@ const Meal: React.FC<S> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      {hasFile('img/flow/tg_modern_plate.png')
-        ? <Img src={staticFile('img/flow/tg_modern_plate.png')} style={{position: 'absolute', left: 520, top: 120, width: 880, height: 495, objectFit: 'cover', transform: 'rotate(-2deg)',
-          boxShadow: '0 26px 46px rgba(0,0,0,0.8)'}} />
-        : <Placeholder file="img/flow/tg_modern_plate.png" x={520} y={120} w={880} h={495} rot={-2} at={a + 1} note="the modern plate, as a print" />}
-      <Note text="a great meal." x={1400} y={170} size={56} rot={-4} at={t.at('great') - 3} color="#ffffff" />
-      <Strike x1={560} y1={170} x2={1370} y2={580} at={none + 4} bow={20} width={10} />
-      <Strike x1={1360} y1={150} x2={560} y2={600} at={none + 8} bow={-20} width={10} />
+      <Cut name="tg_modern_plate" x={700} y={90} w={560} rot={-2} at={a + 1} land="slap" />
+      <Note text="a great meal." x={1330} y={170} size={56} rot={-4} at={t.at('great') - 3} color="#ffffff" />
+      <Strike x1={720} y1={130} x2={1250} y2={620} at={none + 4} bow={20} width={10} />
+      <Strike x1={1250} y1={120} x2={720} y2={630} at={none + 8} bow={-20} width={10} />
       <Highlight text="ALMOST NONE OF IT" x={160} y={760} size={86} at={none} seed={17} rot={-2} />
       <Highlight text="1621" x={1290} y={770} size={120} at={t.at('1621')} seed={19} rot={3} />
     </AbsoluteFill>

@@ -10,6 +10,7 @@ import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {DeskScene} from '../kit/tg_desk';
 import {bed} from '../kit/levels';
+import {Cut as FlowCut} from '../kit/tg_cut';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
 import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
@@ -135,8 +136,8 @@ const TableDrawing: React.FC<{t: TL; a: number}> = ({t, a}) => {
       {plates.map(([x, y], i) => <circle key={i} cx={x} cy={y + (y < 400 ? 18 : -18)} r={34} {...stroke} strokeWidth={4} strokeDashoffset={1 - pPlates} />)}
       {/* the turkey: one coral shape, the subject */}
       <ellipse cx={960} cy={467} rx={92} ry={62} fill={pal.subject} fillOpacity={0.35 * pTurkey} stroke={pal.subject} strokeWidth={6} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - pTurkey} />
-      {/* the pie, a wedge at the end of the table */}
-      <path d="M1352,470 L1412,422 A76,76 0 0 1 1412,518 Z" {...stroke} strokeDashoffset={1 - pPie} />
+      {/* the pie's place at the end of the table (the pumpkin pie cut-out lands on it: Menu) */}
+      <circle cx={1372} cy={467} r={70} {...stroke} strokeWidth={4} strokeDashoffset={1 - pPie} />
     </svg>
   );
 };
@@ -149,6 +150,7 @@ const Menu: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <Note text="sound familiar?" x={120} y={110} size={54} rot={-3} at={a + 1} color="#ffffff" />
       <TableDrawing t={t} a={a} />
+      <FlowCut name="tg_pie_1" x={1262} y={393} w={220} at={t.at('pie at') + 4} />
       <Note text="turkey in the middle" x={760} y={170} size={46} rot={-3} at={t.at('Turkey in') - 3} color={pal.subject} />
       <Note text="pumpkin pie at the end" x={1150} y={650} size={46} rot={-3} at={t.at('pie at') - 3} />
       {g >= t.at('Written') && <Stamp text="1827" x={170} y={790} at={t.at('Written')} size={150} />}
@@ -257,6 +259,7 @@ const Homemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="homemade." x={180} y={330} size={72} rot={-3} at={t.at('was homemade') - 1} />
       <Note text="from scratch." x={200} y={490} size={72} rot={-3} at={t.at('From scratch') - 3} />
       <Note text="all day long." x={220} y={650} size={72} rot={-3} at={t.at('All day long') - 3} color={pal.subject} />
+      <FlowCut name="tg_homemade_pie" x={760} y={470} w={520} rot={-3} at={t.at('From scratch') + 6} />
       <Tag text={HALE_TAG} />
     </AbsoluteFill>
   );

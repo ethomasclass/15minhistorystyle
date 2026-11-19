@@ -17,7 +17,7 @@ import {DarkPaper} from './common';
 import {hasFile} from './shell';
 import {CORAL, PH, TEAL} from './tg_late';
 
-export const TURKEY = {bronze: 'img/flow/tg_turkey_bronze.png', white: 'img/flow/tg_turkey_white.png', scale: 'img/flow/tg_platform_scale.png'};
+export const TURKEY = {bronze: 'img/flow/tg_turkey_bronze.png', white: 'img/flow/tg_turkey_white.png', scale: 'img/flow/tg_scale.png'};
 
 export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; grow?: [number, number]; tipAt?: number};
 
@@ -166,8 +166,10 @@ export const Counter: React.FC<{x: number; y: number; b: TurkeyBeats; size?: num
   );
 };
 
+/** The scale's width on screen (its tray is about three quarters of that). */
+const SCALE_W = 330;
 /** Where things sit in the set (screen px at zoom 1). */
-export const SET = {feet: [860, 836] as [number, number], size: 600, dial: [1470, 420] as [number, number], counter: [1310, 650] as [number, number]};
+export const SET = {feet: [860, 800] as [number, number], size: 600, dial: [1470, 420] as [number, number], counter: [1310, 650] as [number, number]};
 /** The chest's screen position at zoom 1 (for loupes and cut-ins). */
 export const chestAt = (): [number, number] => [SET.feet[0] - SET.size / 2 + CHEST[0] * SET.size, SET.feet[1] - SET.size + CHEST[1] * SET.size];
 
@@ -181,7 +183,9 @@ export const TurkeySet: React.FC<{b: TurkeyBeats; cam?: {x: number; y: number; z
     <AbsoluteFill>
       <DarkPaper />
       <AbsoluteFill style={{transform: `translate(${960 - cam.x * cam.z}px, ${540 - cam.y * cam.z}px) scale(${cam.z})`, transformOrigin: '0 0'}}>
-        <PH file={TURKEY.scale} what="period platform scale (the bird stands on its deck)" x={fx - 380} y={fy - 14} w={760} h={150} label={labels} />
+        {/* the scale, its own aspect (482 x 537): the tray's middle (58% across, 4% down) under the bird's feet */}
+        <PH file={TURKEY.scale} what="period scale (the bird stands on its tray)" x={fx - SCALE_W * 0.58 + 10} y={fy - SCALE_W * (537 / 482) * 0.045} w={SCALE_W} h={SCALE_W * (537 / 482)} label={labels}
+          filter="saturate(0.85) contrast(1.03)" />
         <TurkeyRig x={fx} y={fy} size={SET.size} b={b} label={labels} />
         {dial && <Dial x={SET.dial[0]} y={SET.dial[1]} b={b} />}
         {dial && <Counter x={SET.counter[0]} y={SET.counter[1]} b={b} />}
