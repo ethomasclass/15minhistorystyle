@@ -191,3 +191,29 @@ The ending names the viewer as someone who fell for it ("then you fell for World
 - F8's byline (Phil Edwards) is inferred from style and is not confirmed.
 - Not read: Vox's turkey video (fiWOCiexIkE) and Phil Edwards's Salisbury steak, Oreo and McDonald's fries videos. I found no Vox or ex-Vox videos on green bean casserole, cranberry sauce, Jell-O, marshmallows or canned food. Howtown (Fong) and Johnny Harris have no food-history pieces in what I could search.
 - The facts in the "our version" lines that are flagged inline (the 1955 AP story, the 1850 Godey's reprint, "1917 is the earliest") need checking against primary sources before they go in a script.
+
+## Appendix: "The truth about gut health" (Vox, transcript supplied by the user, Nov 2026)
+
+Beat map (timestamps from the user's transcript):
+- 0:00 **Number stack, smallest to biggest**: "#guttok has over 6 billion views" → a montage of people saying "gut health" → "And if you think that's a big number, how about $60 billion?" → "projected to grow to over $100 billion by 2033." Three numbers, each one bigger than the last.
+- 0:24 **"Just a taste"**: a food pun in the transition. Then "Gut health is everywhere right now, and honestly, it should be." It grants the grain of truth before any doubt.
+- 0:49 **The turn**: "But with so much information out there... it can be confusing to tell what's backed by real evidence instead of marketing gimmicks." The promise lands at 1:04.
+- 1:16 **Define it, with a joke**: "And just to get this out of the way, it involves pooping." A deadpan line breaks up the definition.
+- 1:52 **Scale emphasis**: "That's trillions with a T."
+- 3:53 **"So, it's a good thing... but"**: the midpoint pivot from the science to how it got sold.
+- 4:22 **Dated history of the hype**: the 2010s, then labels ("supports gut health"), then influencers. Each one causes the next.
+- 4:54 **Second number stack**: "$6 trillion", then "almost 30%... completely dead".
+- 5:49 **Sponsor read (Colgate)**: not for us.
+- 7:12 **Second-person scene**: "It's midnight and you're scrolling TikTok..." This puts the viewer inside the sales pitch.
+- 8:06 **"So, what should we really be doing?"**: the practical payoff.
+- 9:39 **Ending**: "probably the same thing that your mom has been telling you for years." It lets the viewer off gently, with a domestic image.
+
+New habits for the channel:
+1. **An escalating number ladder in the first 20 s** ("And if you think that's a big number..."). For us: turkeys eaten, then cans of cranberry sauce, then a projection.
+2. **The label as evidence**: quote the claim off the package. For us: the 1917 booklet, can labels, ad copy.
+3. **"Just to get this out of the way" + a blunt joke** as a pattern interrupt inside a definition.
+4. **The second-person scene** ("It's midnight and you're...") to put the viewer at the 1950s table.
+5. **"...and honestly, it should be"**: grant the thing its due before the turn. It keeps the tone warm.
+6. **Hype history told as a chain** (a decade, then a product, then a messenger), with each step causing the next.
+
+Not adopted: expert talking heads (no historian names), the sponsor read, and the Patreon end card.
