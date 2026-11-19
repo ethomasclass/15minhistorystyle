@@ -79,6 +79,11 @@ E4. Effect loops on pure black, for screen blending: tg_steam.mp4 (soft white st
 F. SILHOUETTE HANDS (same rules as T8; make each pose entering from the RIGHT and again from the LEFT, with _R or _L at the end of the name)
 tg_hand_card, tg_hand_place, tg_hand_pinch (pinching and dropping a small ingredient), tg_hand_point (pointing with the index finger), tg_hand_can (gripping a tin can from the side).
 
+H. INFLATING TURKEY (ch8)
+H1. tg_turkey_live_bronze.png: a live heritage bronze turkey standing in strict side view, legs straight and fully visible, on a flat seamless pale grey background. Muted engraving colours. [PAPER LOOK]
+H2. tg_turkey_live_white.png (use H1 as reference: same pose, size and position): the same turkey with all-white feathers.
+H3. tg_scale.png: an early-1900s farm platform scale with a round dial (the dial face blank, no numbers), side view, on a flat seamless pale grey background. [PAPER LOOK]
+
 G. PERIOD AD BACKGROUNDS (no paper look)
 G1. tg_adplate_1950s.png: a colourful 1950s American magazine food-ad illustration background: a sunny kitchen counter with a red-and-white checked cloth, an empty plate area in the centre, a large blank cream panel on the right side. Gouache illustration style. Absolutely no text, letters, logos or brands.
 G2. tg_adplate_1910s.png: a 1910s magazine illustration background in soft lithograph colours: a decorative ornate border around a large blank cream panel, with a small still life of sweet potatoes in one corner. Absolutely no text.

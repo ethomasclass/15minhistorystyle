@@ -40,3 +40,12 @@ The standing rules still apply: no slow-push "Ken Burns," no 3D photo fly-throug
   - D. **Tilt down a page:** a menu card or booklet read top to bottom as the dishes are named.
   The rules: no 3D parallax, and every pan ends on a held frame or a hard cut. One pan at a time, never back-to-back.
 - **Colour is OK in the right places.** Planned uses: the 1950s gelatin ad in full colour (the pattern interrupt), period colour lithographs and ads, and the modern plate. The rest stays B&W.
+
+## The inflating turkey (ch8, user idea, Nov 2026)
+One live-turkey cut-out (side view; a heritage-type bird from a period engraving or Flow) sits on a period farm scale, with a weight dial or counter beside it.
+- **"bred for a broader chest"**: the breast swells (a local warp of the chest region only, the same method as the eel), stepped at 12 fps.
+- **"swapped dark feathers for white"**: a hard swap or quick wipe from bronze to white feathers; a loupe on the pin feathers.
+- **"thirteen pounds... over thirty"**: the counter ticks 13 → 30+ as the whole body inflates; the scale needle swings; the legs stay the same thin size (the visual joke and the point).
+- **"too top-heavy"**: the bird tips forward a few degrees and wobbles (a pivot at the feet), then holds.
+- **"Happy Thanksgiving."**: hold, then a hard cut.
+Assets needed: a turkey cut-out in bronze and in white (Flow: same pose, two feather colours), a period platform scale, the dial. Archival option: a USDA/ARS photo of a Broad-Breasted White (public domain) for the "today" end.
