@@ -220,7 +220,7 @@ export const Slip: React.FC<{text: string; x: number; y: number; at: number; rot
   for (let i = 0; i <= 16; i++) pts.push(`${(i / 16) * 100}% ${random(`${seed}t${i}`) * 9}%`);
   for (let i = 16; i >= 0; i--) pts.push(`${(i / 16) * 100}% ${100 - random(`${seed}b${i}`) * 9}%`);
   return (
-    <div style={{position: 'absolute', left: x, top: y, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: 'left center', opacity: interpolate(f, [at, at + 2], [0, 1], clamp),
+    <div data-tx style={{position: 'absolute', left: x, top: y, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: 'left center', opacity: interpolate(f, [at, at + 2], [0, 1], clamp),
       filter: 'drop-shadow(4px 5px 0 rgba(0,0,0,0.55))'}}>
       <div style={{background: coral ? '#f3c6bf' : '#ece6d8', clipPath: `polygon(${pts.join(',')})`, padding: `${size * 0.1}px ${size * 0.38}px ${size * 0.16}px`,
         fontFamily: '"Nanum Pen Script", cursive', fontSize: size, lineHeight: 1, color: coral ? '#5a1d17' : '#0f3e37', whiteSpace: 'nowrap'}}>

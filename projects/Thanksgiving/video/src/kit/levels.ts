@@ -1,6 +1,6 @@
-// Music bed levels, matched to the Black Sox mix (American West Ep 1, Oct 2026): the narration sits at -18 LUFS
-// (tools/level_voice.py, which voice.py runs on every take) and the bed about 13 LU under it (Black Sox chapters 2-8 measured
-// 12.2-15.1, mean 12.9). Library cues are mastered differently (-11 to -22 LUFS), so one flat volume puts some beds 9 dB louder
+// Music bed levels. The narration sits at -18 LUFS (tools/level_voice.py, which voice.py runs on every take) and the bed 17 LU
+// under it: the Gilded Age mix (ep5/edit/mix/cues.tsv: volume = 10^((-35.2 - cue LUFS) / 20)), the user's reference for this video
+// (Nov 2026). It was 13 LU (the Black Sox mix, Oct 2026). Library cues are mastered differently (-11 to -22 LUFS), so one flat volume puts some beds 9 dB louder
 // than others; bed() turns a cue's measured loudness into the volume that lands it at the target. Use it for every music entry:
 //   {src: 'music/g_grip.mp3', volume: bed('g_grip')}        a grave stretch: bed('j_grief', 14)
 // CUE_LUFS is generated from music/catalog.json (integrated_lufs). A new cue: measure it (ffmpeg -af ebur128) and add it here.
@@ -27,8 +27,10 @@ export const CUE_LUFS: Record<string, number> = {
   bw_something_in_the_woods: -15.4, bw_revenge_on_the_wind: -14.6, bw_paper_and_paste: -15.8, bw_dawn_launch: -14.4, bw_paper_and_sand: -14.4,
   bw_the_newspaperman: -15.1, bw_gearhart: -16.0, bw_a_thousand_cranes: -14.8,
 };
-/** Volume for a cue so its bed sits `gap` LU under the voice (13 = the Black Sox norm; 14-15 for a quiet, grave stretch). */
-export const bed = (cue: string, gap = 13) => {
+/** Gap between voice and bed, LU (the Gilded Age: 17.2). */
+export const BED_GAP = 17.2;
+/** Volume for a cue so its bed sits `gap` LU under the voice (17.2 = the Gilded Age norm; 15 for a sting that has to land). */
+export const bed = (cue: string, gap = BED_GAP) => {
   const l = CUE_LUFS[cue];
   if (l === undefined) throw new Error(`bed(): no loudness measured for ${cue}; add it to CUE_LUFS`);
   return +Math.pow(10, (VOICE - gap - l) / 20).toFixed(3);

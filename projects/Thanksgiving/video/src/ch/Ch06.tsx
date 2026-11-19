@@ -372,9 +372,9 @@ const Music = (t: TL) => {
   const like = t.at('Like this');
   const back = t.at('And the companies') - 2;
   return [
-    {src: 'music/tg_gelatin.mp3', volume: bedAt(-15.2), to: like - 4, fadeOut: 5},
-    {src: 'music/tg_ad_sting.mp3', volume: bedAt(-14.8, 11), from: like - 1, to: t.end('box.') + 4, fadeOut: 12},
-    {src: 'music/tg_gelatin.mp3', volume: bedAt(-15.2), from: back, startFrom: like},
+    {src: 'music/tg_gelatin.mp3', volume: bed('tg_gelatin'), to: like - 4, fadeOut: 5},
+    {src: 'music/tg_ad_sting.mp3', volume: bed('tg_ad_sting', 15), from: like - 1, to: t.end('box.') + 4, fadeOut: 12},
+    {src: 'music/tg_gelatin.mp3', volume: bed('tg_gelatin'), from: back, startFrom: like},
   ];
 };
 

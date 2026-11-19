@@ -309,7 +309,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch05: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch05_hale.wav" lead={LEAD} music={[{src: 'music/tg_hale.mp3', volume: bedAt(-14.7)}]}>
+  <ChapterShell n={N} audio="audio/ch05_hale.wav" lead={LEAD} music={[{src: 'music/tg_hale.mp3', volume: bed('tg_hale')}]}>
     <Body />
   </ChapterShell>
 );

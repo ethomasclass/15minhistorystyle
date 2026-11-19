@@ -145,5 +145,6 @@ const REAL_MAP: DeskMap = {texture: true, scenes: DESK_MAP};
 export const CutIn: React.FC<{x: number; y: number; z: number; children: React.ReactNode}> = ({x, y, z, children}) => {
   const L = Math.min(0, Math.max(1920 - 1920 * z, 960 - x * z));
   const T = Math.min(0, Math.max(1080 - 1080 * z, 540 - y * z));
-  return <AbsoluteFill style={{transform: `translate(${L}px, ${T}px) scale(${z})`, transformOrigin: '0 0'}}>{children}</AbsoluteFill>;
+  // data-nosafe: a pushed-in shot crops its text on purpose; the title-safe pass (kit/ga_brand SafeText) leaves it alone
+  return <AbsoluteFill data-nosafe style={{transform: `translate(${L}px, ${T}px) scale(${z})`, transformOrigin: '0 0'}}>{children}</AbsoluteFill>;
 };

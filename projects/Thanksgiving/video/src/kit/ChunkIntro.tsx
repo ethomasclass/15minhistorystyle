@@ -7,7 +7,7 @@
 // Sound: clicks only, no tones and no music (the user's call); the page turns built into both files are cut (Nov 2026); public/music/chunk_jingle.mp3 and
 // public/sfx/chunk_snap.wav, built by projects/American_West/ep1/tools/make_jingle.py.
 import React, {useMemo} from 'react';
-import {AbsoluteFill, Audio, Easing, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
@@ -25,9 +25,7 @@ export const INTRO_FRAMES = 165;
 /** The branding sound is clicks only: no tones, no music (the user's call, Oct 2026), built by tools/make_jingle.py; the page turn
  *  built into the file is cut off at PAGE_TURN (no page turns, Nov 2026).
  *  The file already carries its level (peak -8 dBFS), so full volume. */
-const JINGLE_VOL = 1;
 /** Frame where chunk_jingle.mp3's page turn starts (4.45 s); the jingle is silent from here. */
-const PAGE_TURN = Math.round(4.4 * 30);
 
 const FLIGHT = 22; // frames from launch to landing
 // Landing frames, timed to the click track (tools/make_jingle.py): five clicks for the five blocks, the coral quarter locks on a
@@ -92,8 +90,9 @@ const Quarter: React.FC<{p: Piece; t: number; visible: boolean}> = ({p, t, visib
   </group>
 );
 
-const IntroScene: React.FC = () => {
-  const frame = useCurrentFrame();
+/** `speed` plays the assembly faster (the Gilded Age title card runs it at 1.4x); `max` holds it on a brand frame. */
+export const IntroScene: React.FC<{speed?: number; max?: number}> = ({speed = 1, max = Infinity}) => {
+  const frame = Math.min(max, useCurrentFrame() * speed);
   const {fps} = useVideoConfig();
   const go = (land: number) => spring({frame: frame - (land - FLIGHT), fps, config: {damping: 15, stiffness: 110, mass: 0.9}});
   const slide = interpolate(frame, [86, 106], [0, 1], {...clamp, easing: ease});
@@ -127,11 +126,12 @@ const IntroScene: React.FC = () => {
   );
 };
 
-const Stage: React.FC<{opacity: number; children: React.ReactNode}> = ({opacity, children}) => {
+/** The 3D stage. `bare` leaves the background out (kit/ga_brand's title card moves the logo over its own). */
+export const Stage: React.FC<{opacity: number; bare?: boolean; children: React.ReactNode}> = ({opacity, bare, children}) => {
   const {width, height} = useVideoConfig();
   return (
-    <AbsoluteFill style={{background: INK}}>
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #1b1b1b 0%, #111111 60%, #0a0a0a 100%)'}} />
+    <AbsoluteFill style={{background: bare ? undefined : INK}}>
+      {!bare && <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, #1b1b1b 0%, #111111 60%, #0a0a0a 100%)'}} />}
       <AbsoluteFill style={{opacity}}>
         <ThreeCanvas width={width} height={height} camera={{fov: 30, near: 0.1, far: 100}} gl={{antialias: true}} flat linear={false}>
           {children}
@@ -148,8 +148,7 @@ export const ChannelIntro: React.FC = () => {
   return (
     <AbsoluteFill>
       <Stage opacity={fade}><IntroScene /></Stage>
-      {/* the jingle's page turn into the title card (4.45 s in) is faded out: no page turns (the user, Nov 2026) */}
-      <Audio src={staticFile('music/chunk_jingle.mp3')} volume={(f) => interpolate(f, [0, PAGE_TURN - 6, PAGE_TURN], [JINGLE_VOL, JINGLE_VOL, 0], clamp)} />
+      {/* silent: no sound effects in this video (the user, Nov 2026); the brand's click track (music/chunk_jingle.mp3) is not played */}
     </AbsoluteFill>
   );
 };
@@ -193,8 +192,7 @@ export const LogoBreak: React.FC = () => {
   return (
     <AbsoluteFill style={{opacity: black}}>
       <Stage opacity={logo}><SnapScene /></Stage>
-      {/* chunk_snap.wav: the lock click-clack at 1.0 s in (= SNAP_LAND); the file's page turn (1.3-1.7 s) is cut off at 1.2 s (no page turns) */}
-      <Sequence from={0} durationInFrames={36} layout="none"><Audio src={staticFile('sfx/chunk_snap.wav')} volume={0.3} /></Sequence>
+      {/* silent: no sound effects in this video (the user, Nov 2026); sfx/chunk_snap.wav is not played */}
     </AbsoluteFill>
   );
 };

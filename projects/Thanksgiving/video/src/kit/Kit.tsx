@@ -192,7 +192,7 @@ export const Highlight: React.FC<{text: string; after?: string; x: number; y: nu
   for (let i = 0; i <= steps; i++) pts.push(`${(i / steps) * 100}% ${random(`t${seed}${i}`) * 9}%`);
   for (let i = steps; i >= 0; i--) pts.push(`${(i / steps) * 100}% ${100 - random(`b${seed}${i}`) * 9}%`);
   return (
-    <div style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: size * 0.28, transform: `rotate(${rot}deg)`,
+    <div data-tx style={{position: 'absolute', left: x, top: y, display: 'flex', alignItems: 'center', gap: size * 0.28, transform: `rotate(${rot}deg)`,
       filter: pal.edge ? `drop-shadow(3px 0 0 ${pal.edge}) drop-shadow(-3px 0 0 ${pal.edge}) drop-shadow(0 3px 0 ${pal.edge}) drop-shadow(0 -3px 0 ${pal.edge})` : undefined}}>
       <div style={{position: 'relative', padding: `${size * 0.1}px ${size * 0.22}px ${size * 0.06}px`}}>
         <div style={{position: 'absolute', inset: 0, background: boxOf(pal), clipPath: `polygon(${pts.join(',')})`, transformOrigin: 'left', transform: `scaleX(${wipe})`}} />
@@ -219,7 +219,7 @@ export const Note: React.FC<{text: string; x: number; y: number; size?: number; 
   if (frame < at || frame >= out) return null;
   const p = interpolate(frame, [at, at + dur], [0, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: size * hand.scale, color: color ?? accent, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap',
+    <div data-tx style={{position: 'absolute', left: x, top: y, fontFamily: hand.family, fontWeight: hand.weight, fontSize: size * hand.scale, color: color ?? accent, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap',
       textShadow: '0 0 2px #111, 0 0 4px #111, 2px 2px 0 #111, -2px 2px 0 #111, 2px -2px 0 #111, -2px -2px 0 #111, 0 3px 12px rgba(0,0,0,0.7)', clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`}}>{text}</div>
   );
 };
@@ -244,9 +244,11 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; bo
   );
 };
 
-export const Tag: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 44, y = 1030}) => (
-  <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
-    textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{text}</div>
+// The source tag sits inside the 8% safe area on a dark box, as the Gilded Age's lSrc (it was bare type at x 44, y 1030, outside
+// title safe). Type stays 18 px: this video's longest credits run 115 letters and must fit the safe width.
+export const Tag: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 160, y = 952}) => (
+  <div data-tx style={{position: 'absolute', left: x, top: y, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(244,239,230,0.92)', textTransform: 'uppercase',
+    background: 'rgba(13,12,9,0.78)', padding: '6px 12px', whiteSpace: 'nowrap'}}>{text}</div>
 );
 
 /** Paper/film texture and a soft vignette over everything. */

@@ -6,18 +6,20 @@ import {clamp} from '../lib/anim';
 import {makeTimeline, type Narration} from '../lib/timing';
 import {Finish, INK, JF, PALETTES, PaletteCtx, Picture, Place, StepCtx, Tint, Traced, useGFrame, usePal} from './Kit';
 import type {MaskRef} from './maskref';
-import {LogoBreak} from './ChunkIntro';
+import {BatonCard, MarkSnap, SafeText, SNAP_FRAMES} from './ga_brand';
 
 export type TL = ReturnType<typeof makeTimeline>;
 export {makeTimeline};
 export type {Narration};
 
-/** Frames of black-with-logo at the start of chapters 2-11 before the chapter fades up. */
-export const LEAD = 44;
+/** Frames of black-with-logo at the start of chapters 2 on before the chapter fades up: the whole 2 s mark snap (kit/ga_brand,
+ *  as the Gilded Age's `brk`; it was 44 frames of a 3D snap that started 16 frames in). */
+export const LEAD = SNAP_FRAMES;
 /** Frames the chapter picture takes to fade up from black / down to black (a gentle dip, not a cut). */
 export const FADE = 18;
 /** Frames after the last word before the chapter fades out: room to breathe while the music lifts a little. */
-export const TAIL = 54;
+// 60 + FADE = 78 frames = the Gilded Age's 2.6 s baton-card hold (it was 54).
+export const TAIL = 60;
 /** How much the music bed lifts in the tail after the last word (1 = no lift). */
 export const TAIL_LIFT = 1.6;
 
@@ -62,7 +64,7 @@ export const Definition: React.FC<{term: string; def: string; at: number; x?: nu
   const g = useGFrame();
   if (g < at) return null;
   return (
-    <div style={{position: 'absolute', left: x, top: y, maxWidth: w, fontFamily: JF.sans, fontWeight: 600, fontSize: 38, lineHeight: 1.35, color: '#fff', background: 'rgba(10,10,10,0.8)', padding: '16px 26px',
+    <div data-tx style={{position: 'absolute', left: x, top: y, maxWidth: w, fontFamily: JF.sans, fontWeight: 600, fontSize: 38, lineHeight: 1.35, color: '#fff', background: 'rgba(10,10,10,0.8)', padding: '16px 26px',
       opacity: interpolate(g, [at, at + 6], [0, 1], clamp)}}>
       <span style={{color: usePal().mark}}>{term}</span> · {def}
     </div>
@@ -75,7 +77,7 @@ export const Quote: React.FC<{text: string; at: number; x?: number; y?: number; 
   if (g < at) return null;
   const o = interpolate(g, [at, at + 6], [0, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: x, top: y, width: w, opacity: o}}>
+    <div data-tx style={{position: 'absolute', left: x, top: y, width: w, opacity: o}}>
       <div style={{fontFamily: JF.heavy, fontWeight: 900, fontSize: size, lineHeight: 1.3, color: '#f4efe6', textShadow: '0 3px 14px #000'}}>“{text}”</div>
       {who && <div style={{marginTop: 24, fontFamily: JF.mono, fontSize: 24, letterSpacing: 2, color: 'rgba(244,239,230,0.8)', textTransform: 'uppercase'}}>{who}</div>}
     </div>
@@ -105,7 +107,7 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
   if (g < at) return null;
   const k = interpolate(g, [at, at + 3, at + 6], [1.35, 0.95, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: x, top: y, fontFamily: JF.display, fontSize: size, lineHeight: 1, color, whiteSpace: 'nowrap', textShadow: '0 6px 22px rgba(0,0,0,0.8)',
+    <div data-tx style={{position: 'absolute', left: x, top: y, fontFamily: JF.display, fontSize: size, lineHeight: 1, color, whiteSpace: 'nowrap', textShadow: '0 6px 22px rgba(0,0,0,0.8)',
       transform: `scale(${k}) rotate(${rot}deg)`, transformOrigin: 'left center'}}>{text}</div>
   );
 };
@@ -114,20 +116,29 @@ export const Stamp: React.FC<{text: string; x: number; y: number; at: number; si
  * Chapter wrapper. With `lead` > 0 the chapter opens on the channel-logo break, then fades up.
  * Narration starts at `lead`; `body` is rendered in narration time (frame 0 = first sample of narration).
  */
-export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number;
-  music?: {src: string; volume?: number; startFrom?: number; from?: number; to?: number; fadeOut?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, music = [], children}) => {
+// `baton`: the next chapter's title, slammed in on a torn orange strip at the chapter's end and held to the cut (kit/ga_brand
+// BatonCard). `batonWords`: how many of the narration's last words speak that title (the card lands on the first of them);
+// 0 = the script doesn't say it, and the card lands just after the last word.
+export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; quiet?: boolean; extra?: number; baton?: string; batonWords?: number;
+  music?: {src: string; volume?: number; startFrom?: number; from?: number; to?: number; fadeOut?: number}[]; children: React.ReactNode}> = ({n, audio, lead, quiet, extra = 0, baton, batonWords = 0, music = [], children}) => {
   const frame = useCurrentFrame();
   // `extra` frames after the narration: a music-only end screen on the last chapter (add the same to its FRAMES)
   const total = chapterFrames(n, lead) + extra;
   const up = interpolate(frame, [lead, lead + FADE], [lead ? 0 : 1, 1], clamp);
-  const down = interpolate(frame, [total - FADE, total], [1, 0], clamp);
+  // with a baton card the picture holds to the end and cuts to the mark snap (a 4-frame dip), as the Gilded Age does
+  const down = interpolate(frame, [total - (baton ? 4 : FADE), total], [1, 0], clamp);
+  const W = n.words;
+  const batonAt = batonWords > 0 ? Math.round(W[W.length - batonWords].s * 30) : Math.round(W[W.length - 1].e * 30) + 5;
   return (
     <PaletteCtx.Provider value={quiet ? PALETTES.quiet : PALETTES.locked}>
       <StepCtx.Provider value={2.5}>
         <AbsoluteFill style={{background: '#000'}}>
           <Sequence from={lead} layout="none">
             <AbsoluteFill style={{opacity: Math.min(up, down)}}>
-              {children}
+              <SafeText>
+                {children}
+                {baton && <BatonCard title={baton} at={batonAt} />}
+              </SafeText>
               <Finish vignette={0.3} />
             </AbsoluteFill>
             <Audio src={staticFile(audio)} />
@@ -155,11 +166,11 @@ export const ChapterShell: React.FC<{n: Narration; audio: string; lead: number; 
   );
 };
 
-/** The logo break as a chapter lead-in: black, logo fades up, ticks, fades out. */
+/** The mark snap as a chapter lead-in: 2 s of black, the mark, the coral quarter locking at 1.0 s; then the chapter fades up. */
 const LogoLead: React.FC = () => {
   const frame = useCurrentFrame();
   if (frame >= LEAD) return null;
-  return <Sequence from={-16} layout="none"><LogoBreak /></Sequence>;
+  return <Sequence from={0} durationInFrames={SNAP_FRAMES} layout="none"><MarkSnap /></Sequence>;
 };
 
 /**
