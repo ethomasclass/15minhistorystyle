@@ -182,7 +182,7 @@ const Booklet: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <TgPrint src="img/arch/jello-girl-gives-a-party-1920-cover.jpg" x={150} y={110} w={600} h={821} at={a + 1} rot={-2} color tag={BOOK} />
+      <TgPrint src="img/arch/jello-girl-gives-a-party-1920-cover.jpg" x={160} y={100} w={560} h={766} at={a + 1} rot={-2} color tag={BOOK} />
       <Note text="anyone could make it" x={880} y={200} size={60} rot={-3} at={t.at('anyone') - 3} />
       <Note text="the rich family's dessert" x={920} y={330} size={50} rot={-3} at={t.at("rich family's") - 3} color="#ffffff" />
       <Note text="in about 10 minutes" x={900} y={520} size={76} rot={-3} at={t.at('In about') - 3} color={pal.subject} />

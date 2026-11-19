@@ -25,13 +25,21 @@ const PH_LINE = 'rgba(244,239,230,0.24)';
 /** One entry per placeholder in a chapter's PLACEHOLDERS list. */
 export type PlaceholderInfo = {file: string; what: string; scene: string; anchor: string; swap: string};
 
+/**
+ * Placeholder text is drawn through a ::after pseudo-element (no DOM text node), so tools/probe_text.mjs measures only the
+ * chapter's real text: a stand-in page that runs past the frame edge, as the real scan will, isn't a text-edge bug.
+ */
+const PhText: React.FC<{text: string; style?: React.CSSProperties}> = ({text, style}) => (
+  <div className="tgph" data-t={text} style={style}><style>{'.tgph::after{content:attr(data-t)}'}</style></div>
+);
+
 /** The label inside a placeholder: PLACEHOLDER, the file, what it is. `scale` shrinks it for small cards. */
 export const PhLabel: React.FC<{file: string; what?: string; scale?: number; style?: React.CSSProperties}> = ({file, what, scale = 1, style}) => (
   <div style={{position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
     padding: 24 * scale, boxSizing: 'border-box', gap: 10 * scale, ...style}}>
-    <div style={{fontFamily: JF.mono, fontSize: 15 * scale, letterSpacing: 3, color: 'rgba(244,239,230,0.5)'}}>PLACEHOLDER</div>
-    <div style={{fontFamily: JF.mono, fontSize: 19 * scale, color: 'rgba(244,239,230,0.88)', wordBreak: 'break-all', maxWidth: '100%'}}>{file}</div>
-    {what ? <div style={{fontFamily: JF.mono, fontSize: 14 * scale, color: 'rgba(244,239,230,0.55)', maxWidth: '100%'}}>{what}</div> : null}
+    <PhText text="PLACEHOLDER" style={{fontFamily: JF.mono, fontSize: 15 * scale, letterSpacing: 3, color: 'rgba(244,239,230,0.5)'}} />
+    <PhText text={file} style={{fontFamily: JF.mono, fontSize: 19 * scale, color: 'rgba(244,239,230,0.88)', wordBreak: 'break-all', maxWidth: '100%'}} />
+    {what ? <PhText text={what} style={{fontFamily: JF.mono, fontSize: 14 * scale, color: 'rgba(244,239,230,0.55)', maxWidth: '100%'}} /> : null}
   </div>
 );
 
@@ -130,9 +138,9 @@ const PhPageBody: React.FC<{size: [number, number]; lines?: StandIn[]; hand?: bo
     <div style={{position: 'absolute', inset: 0, background: PH_BG, outline: `${Math.max(2, w / 600)}px solid ${PH_LINE}`, outlineOffset: -2}}>
       {rows}
       {lines.map((l, i) => (
-        <div key={i} style={{position: 'absolute', left: l.x, top: l.y, width: l.w, height: l.h, display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', overflow: 'hidden',
+        <PhText key={i} text={l.text} style={{position: 'absolute', left: l.x, top: l.y, width: l.w, height: l.h, display: 'flex', alignItems: 'center', whiteSpace: 'nowrap', overflow: 'hidden',
           fontFamily: l.hand ?? hand ? '"Nanum Pen Script", cursive' : JF.heavy, fontWeight: l.hand ?? hand ? 400 : 900, fontSize: l.h * (l.hand ?? hand ? 0.95 : 0.72),
-          color: 'rgba(244,239,230,0.82)'}}>{l.text}</div>
+          color: 'rgba(244,239,230,0.82)'}} />
       ))}
     </div>
   );

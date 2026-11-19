@@ -130,7 +130,11 @@ export const TgBoard: React.FC<{ch: number; at: number; pull?: number; children?
   const y0 = Math.min(...slots.map((s) => s.y)) - 90, y1 = Math.max(...slots.map((s) => s.y + s.h)) + 200;
   const zw = Math.min(1, 1920 / (x1 - x0), 1080 / (y1 - y0));
   const [bx, by] = [(x0 + x1) / 2, (y0 + y1) / 2];
-  const cam: [number, number, number, number][] = [[0, cx, cy, 1.55], [at + 14, cx, cy, 1.55], [at + pull, bx, by, zw], [at + pull + 400, bx, by, zw * 0.97]];
+  // the board framed from the start (a tight start on the new piece cut neighbours' labels at the frame edge), easing a
+  // little toward the new piece as it lands, then settling back
+  const [nx, ny] = [bx + (cx - bx) * 0.12, by + (cy - by) * 0.12];
+  const cam: [number, number, number, number][] = [[0, bx, by, zw * 0.985], [at, bx, by, zw * 0.985], [at + 24, nx, ny, zw * 1.02], [at + pull + 30, bx, by, zw * 0.99],
+    [at + pull + 400, bx, by, zw * 0.97]];
   const labelP = interpolate(g, [at + 9, at + 18], [0, 1], clamp);
   return (
     <Ctx.Provider value={BRAND}>
