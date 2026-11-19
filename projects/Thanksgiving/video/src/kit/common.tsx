@@ -3,6 +3,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, Img, interpolate, random, Sequence, staticFile} from 'remotion';
 import {clamp} from '../lib/anim';
 import {useGFrame, usePal} from './Kit';
+import {DeskCtx, ToneDesk} from './tg_desk';
 
 export const MAP = {w: 4986, h: 4608};
 
@@ -40,7 +41,14 @@ export const mapToScreen = (cx: number, cy: number, s: number, rot = 0) => ([x, 
 };
 
 /** Dark notebook-paper backdrop for diagrams. */
-export const DarkPaper: React.FC = () => (
+// In a TestColor composition the scene's DeskCtx can ask for the deep teal or oxblood desk (kit/tg_desk); by default, black.
+export const DarkPaper: React.FC = () => {
+  const desk = React.useContext(DeskCtx);
+  if (desk.mode !== 'black') return <ToneDesk mode={desk.mode} texture={desk.texture} />;
+  return <BlackPaper />;
+};
+
+const BlackPaper: React.FC = () => (
   <AbsoluteFill style={{background: 'radial-gradient(ellipse at 45% 40%, #2a2620 0%, #16140f 70%, #0d0c09 100%)'}}>
     <AbsoluteFill style={{opacity: 0.12, backgroundImage: 'linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)', backgroundSize: '100% 64px'}} />
   </AbsoluteFill>

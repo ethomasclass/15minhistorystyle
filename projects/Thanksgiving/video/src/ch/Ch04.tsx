@@ -20,6 +20,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, 
 import {MockTape} from '../kit/tg_mock';
 import {type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
+import {DeskScene} from '../kit/tg_desk';
 import {camAt, Sheet, Slip, Swipe} from '../kit/vox';
 import {BOSTON, FrameSeqOr, PageScrap, SIMMONS_P2, SIMMONS_P22, TAG_SIMMONS} from './ch34/parts';
 
@@ -218,7 +219,7 @@ const Body: React.FC = () => {
   const scene = useScene(cuts);
   return (
     <>
-      {scene}
+      <DeskScene ch="ch04" cuts={c} t={t}>{scene}</DeskScene>
       {/* silent cuts; the stamp on the MOCK tape and the tape title; the marker (nearly silent) per note */}
       <Sfx at={at('Mock turtle')} src="sfx/stamp.wav" volume={0.3} />
       <Sfx at={at('Caribbean green')} src="sfx/stamp.wav" volume={0.27} />

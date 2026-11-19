@@ -22,6 +22,7 @@ import {FullFrame} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
+import {DeskScene, useDeskTest} from '../kit/tg_desk';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
@@ -133,6 +134,19 @@ const TurtlePan: React.FC<{t: TL; a?: number}> = ({t}) => {
     </AbsoluteFill>
   );
 };
+
+/**
+ * Colour test only (TestColor_*, never the real chapter): the "That's step one" hold as a hard cut to the swiped line alone on
+ * the desk, so the coral flash has desk to show (the real chapter holds the landed pan).
+ */
+const StepOne: React.FC<{t: TL; a?: number}> = () => (
+  <AbsoluteFill>
+    <DarkPaper />
+    <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={[780, 3130, 2150, 240]} x={260} y={450} w={1400} rot={-1.5} tag={TAG_SIMMONS} seed="s1">
+      <Swipe lines={SIMMONS_P2.quote} from={-999} to={-998} seed="tq" />
+    </PageScrap>
+  </AbsoluteFill>
+);
 
 /** Steps 2-4, beside the page with the line still swiped. */
 const Steps: React.FC<{t: TL; a?: number}> = ({t}) => {
@@ -270,10 +284,12 @@ const Board: React.FC<{t: TL; a?: number}> = ({t}) => <ChBoard ch={3} at={t.at('
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
-  const c = {
+  const test = useDeskTest();
+  const c: Record<string, number> = {
     menu: 0,
     dock: at('shipped') - 1,
     turtlePan: at("Here's") - 1,
+    ...(test ? {stepOne: at("That's") - 1} : {}),
     steps: at('Then') - 1,
     pie: at('Then came') - 1,
     count: at('So count') - 1,
@@ -284,6 +300,7 @@ const Body: React.FC = () => {
     [c.menu, <Menu t={t} a={c.menu} />],
     [c.dock, <Dock t={t} a={c.dock} />],
     [c.turtlePan, <TurtlePan t={t} a={c.turtlePan} />],
+    ...(test ? [[c.stepOne, <StepOne t={t} a={c.stepOne} />] as [number, React.ReactNode]] : []),
     [c.steps, <Steps t={t} a={c.steps} />],
     [c.pie, <Pie t={t} a={c.pie} />],
     [c.count, <Count t={t} a={c.count} />],
@@ -293,7 +310,7 @@ const Body: React.FC = () => {
   const scene = useScene(cuts);
   return (
     <>
-      {scene}
+      <DeskScene ch="ch03" cuts={c} t={t}>{scene}</DeskScene>
       {/* silent cuts; a stamp per tape title and per MEAT stamp; the marker (nearly silent) per note */}
       {['1800s', 'dessert', 'Mince', 'look what'].map((c) => <Sfx key={c} at={at(c)} src="sfx/stamp.wav" volume={0.27} />)}
       {COUNT.map(([ph]) => <Sfx key={ph} at={at(ph) + 5} src="sfx/stamp.wav" volume={0.3} />)}
