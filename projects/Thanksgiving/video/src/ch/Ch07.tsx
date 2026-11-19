@@ -9,10 +9,11 @@ import words from '../../public/audio/ch07_test_kitchens.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Slip} from '../kit/vox';
-import {centreOf, TgBoard} from '../kit/tg_endboard';
-import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tgBed, tornPct} from '../kit/tg_late';
+import {TgBoard} from '../kit/tg_endboard';
+import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -92,10 +93,10 @@ const Recipe: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
       <AbsoluteFill style={{transform: `translateX(${-x}px)`}}>
-        <PH {...P.plate} w={PLATE_SIZE[0]} h={PLATE_SIZE[1]} fit="cover" filter="saturate(0.85)" shadow={false} />
-        <PH {...P.booklet} x={250} y={130} w={560} h={800} rot={-3} filter="saturate(0.8) contrast(1.05)" />
+        <PH {...P.plate} w={PLATE_SIZE[0]} h={PLATE_SIZE[1]} fit="cover" filter="saturate(0.85)" shadow={false} label={false} />
+        <PH {...P.booklet} x={250} y={130} w={560} h={800} rot={-3} filter="saturate(0.8) contrast(1.05)" label={false} />
         {/* the paraphrase, set in our own type on the plate's blank panel (never presented as the booklet's words) */}
-        <div style={{position: 'absolute', left: 2010, top: 300, width: 760}}>
+        {f >= land - 8 && <div style={{position: 'absolute', left: 2010, top: 300, width: 760, opacity: interpolate(f, [land - 8, land - 2], [0, 1], clamp)}}>
           <div style={{fontFamily: JF.mono, fontSize: 20, letterSpacing: 3, color: real ? '#5a4a36' : 'rgba(244,239,230,0.6)', marginBottom: 26}}>THE RECIPE, IN SHORT</div>
           <div style={{fontFamily: JF.heavy, fontWeight: 900, fontSize: 76, lineHeight: 1.2, color: real ? '#2a2118' : '#f4efe6'}}>
             {W.map((w, k) => {
@@ -109,7 +110,7 @@ const Recipe: React.FC<{t: TL; a: number}> = ({t, a}) => {
               );
             })}
           </div>
-        </div>
+        </div>}
       </AbsoluteFill>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.5) 100%)'}} />
       <Tag text={TAG_BOOKLET} />
@@ -234,9 +235,9 @@ const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
 
 // ------------------------------------------------------------------ 1955, you
 /** The 1950s kitchen diorama: four planes in parallax (a slow drift), placeholders until D4's planes exist. */
-const Diorama: React.FC<{drift: number; z?: number; fx?: number; fy?: number}> = ({drift, z = 1, fx = 960, fy = 540}) => {
+const Diorama: React.FC<{drift: number; z?: number; fx?: number; fy?: number; labels?: boolean}> = ({drift, z = 1, fx = 960, fy = 540, labels = true}) => {
   const planes: [Placeholder, number, [number, number, number, number], number][] = [
-    [P.dSky, 0.15, [-80, -40, 2080, 1160], 0.05],
+    [P.dSky, 0.15, [-80, 0, 2080, 1100], 0.05],
     [P.dCab, 0.4, [-80, 150, 2080, 700], 0.14],
     [P.dHost, 0.7, [1120, 230, 420, 780], 0.24],
     [P.dFront, 1, [-80, 760, 2080, 360], 0.33],
@@ -245,7 +246,7 @@ const Diorama: React.FC<{drift: number; z?: number; fx?: number; fy?: number}> =
     <AbsoluteFill style={{overflow: 'hidden', background: INK}}>
       <AbsoluteFill style={{transform: `translate(${fx - fx * z}px, ${fy - fy * z}px) scale(${z})`, transformOrigin: '0 0'}}>
         {planes.map(([ph, depth, [x, y, w, h], tone], i) => (
-          <PH key={i} {...ph} x={x + drift * depth} y={y} w={w} h={h} tone={tone} fit="cover" filter="none" shadow={i > 0} inset={x < 0 ? 130 : 14} />
+          <PH key={i} {...ph} x={x + drift * depth} y={y} w={w} h={h} tone={tone} fit="cover" filter="none" shadow={i > 0} inset={x < 0 ? 160 : 14} label={labels} />
         ))}
       </AbsoluteFill>
     </AbsoluteFill>
@@ -292,7 +293,7 @@ const Pantry: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const drift = interpolate(f, [a, t.at('In 1954,')], [-20, 20], clamp);
   return (
     <AbsoluteFill>
-      <Diorama drift={drift} z={1.3} fx={700} fy={860} />
+      <Diorama drift={drift} z={1.3} fx={700} fy={860} labels={false} />
       <ListPad x={1220} y={150} items={[
         {text: 'new refrigerator', at: t.at('refrigerator,') - 2},
         {text: 'pantry full of cans', at: t.at('pantry full') - 2},
@@ -370,9 +371,8 @@ const MockHomemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
 // ------------------------------------------------------------------ the board
 /** The can lands on the board; the yarn from the Jell-O mould says "therefore"; the turkey's slot waits, with a question. */
 const Board: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const [cx, cy] = centreOf('can');
   return (
-    <TgBoard subject="can" cam={[[a, cx - 40, cy - 20, 1.5], [t.at('redesigned') - 4, 1560, 470, 1.4], [t.at('redesigned') + 16, 1560, 470, 1.4]]}
+    <TgBoard subject="can" only={['hale', 'jello', 'can', 'turkey']} cam={[[a, 1512, 560, 1.5], [t.at('redesigned') - 4, 1512, 560, 1.5], [t.at('redesigned') + 16, 1570, 520, 1.4]]}
       land={{can: a + 6, turkey: null}} threads={{can: t.at('one step further.')}} ghost={{id: 'turkey', at: t.at('redesigned')}} />
   );
 };
@@ -437,9 +437,9 @@ const Body: React.FC = () => {
 const CUE = 104 * 30;
 const total = CH07_FRAMES - LEAD;
 const music = total <= CUE - 30
-  ? [{src: 'music/tg_test_kitchen.mp3', volume: tgBed('tg_test_kitchen')}]
-  : [{src: 'music/tg_test_kitchen.mp3', volume: tgBed('tg_test_kitchen'), to: CUE - 150, fadeOut: 45},
-    {src: 'music/tg_test_kitchen.mp3', volume: tgBed('tg_test_kitchen'), from: CUE - 200, startFrom: 20 * 30}];
+  ? [{src: 'music/tg_test_kitchen.mp3', volume: bed('tg_test_kitchen')}]
+  : [{src: 'music/tg_test_kitchen.mp3', volume: bed('tg_test_kitchen'), to: CUE - 150, fadeOut: 45},
+    {src: 'music/tg_test_kitchen.mp3', volume: bed('tg_test_kitchen'), from: CUE - 200, startFrom: 20 * 30}];
 
 export const Ch07: React.FC = () => (
   <ChapterShell n={N} audio="audio/ch07_test_kitchens.wav" lead={LEAD} music={music}>

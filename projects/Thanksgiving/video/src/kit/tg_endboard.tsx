@@ -38,7 +38,7 @@ const PieceView: React.FC<{p: Piece; subject: boolean}> = ({p, subject}) => (
     <div style={{position: 'absolute', left: -6, top: p.h + 8}}>
       <Strip text={p.label} size={20} seed={p.id} bg={subject ? CORAL : undefined} />
     </div>
-    {p.mock && <div style={{position: 'absolute', left: p.w - 70, top: p.h - 6}}><MockTape x={0} y={0} at={-999} size={28} rot={-8} seed={p.id.length * 7} /></div>}
+    {p.mock && <div style={{position: 'absolute', left: p.w - 80, top: p.h - 46}}><MockTape x={0} y={0} at={-999} size={28} rot={-8} seed={p.id.length * 7} /></div>}
   </div>
 );
 
@@ -78,11 +78,12 @@ const Yarn: React.FC<{a: [number, number]; b: [number, number]; at: number; tag?
  * stamps [{text, x, y, at, rot}] in board px. `ghost`: an empty dashed slot for a piece still to come, with a coral "?" sticky.
  */
 export const TgBoard: React.FC<{cam: BoardKey[]; land?: Partial<Record<PieceId, number | null>>; threads?: Partial<Record<PieceId, number>>; subject?: PieceId;
-  stamps?: {text: string; x: number; y: number; at: number; rot?: number}[]; ghost?: {id: PieceId; at: number}; children?: React.ReactNode}> = ({
-  cam, land = {}, threads = {}, subject, stamps = [], ghost, children,
+  stamps?: {text: string; x: number; y: number; at: number; rot?: number}[]; ghost?: {id: PieceId; at: number}; only?: PieceId[]; children?: React.ReactNode}> = ({
+  cam, land = {}, threads = {}, subject, stamps = [], ghost, only, children,
 }) => {
   const f = useCurrentFrame();
-  const shown = (p: Piece) => land[p.id] !== null;
+  // `only`: draw just these pieces (a close-up, so nothing sits half-cut at the frame's edge)
+  const shown = (p: Piece) => land[p.id] !== null && (!only || only.includes(p.id));
   const landAt = (p: Piece) => land[p.id] ?? -1000;
   return (
     <Ctx.Provider value={BRAND}>

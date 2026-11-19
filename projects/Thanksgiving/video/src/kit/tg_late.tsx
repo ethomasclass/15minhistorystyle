@@ -10,7 +10,6 @@
 //   EelLoop     the cold open's wriggling eel cut-out (48 drawings at 12/s, looped)
 //   Cran        one of the six cranberry stop-motion frames, aligned plate-bottom-centre as in tests/cran_cut.py
 //   Morph       the first/last-frame "mock" morph: the Flow clip's frames when they exist, else a stepped crossfade
-//   tgBed       music volume for the tg_ cues (levels.ts has no tg_ entries yet; same formula as bed())
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
@@ -21,12 +20,6 @@ export const TEAL = '#2FE0C4';
 export const CORAL = '#FF6F61';
 export const ORANGE = '#FF9F1C';
 export const BW = 'grayscale(1) contrast(1.15) brightness(0.95)';
-
-// ------------------------------------------------------------------ music
-/** Measured loudness of the user's Suno cues (script/MUSIC.md, Nov 19 2026). */
-const TG_LUFS: Record<string, number> = {tg_test_kitchen: -13.9, tg_turkey: -16.1, tg_table_theme: -15.9, tg_table_theme_alt: -15.9};
-/** Volume that sits a tg_ cue `gap` LU under the -18 LUFS voice (the bed() formula from levels.ts). */
-export const tgBed = (cue: string, gap = 13) => +Math.pow(10, (-18 - gap - TG_LUFS[cue]) / 20).toFixed(3);
 
 /** A torn top and bottom edge as a percentage clip-path (any size): for highlighter swipes behind words. */
 export const tornPct = (seed: string, amp = 14, n = 16) => {
@@ -46,8 +39,8 @@ export type Placeholder = {file: string; what: string};
  * `children` draw over either (a stand-in drawing, a label).
  */
 export const PH: React.FC<{file: string; x?: number; y?: number; w: number; h: number; what?: string; tone?: number; rot?: number; filter?: string;
-  fit?: 'cover' | 'contain'; pos?: string; shadow?: boolean; inset?: number; children?: React.ReactNode; style?: React.CSSProperties}> = ({
-  file, x = 0, y = 0, w, h, what, tone = 0, rot = 0, filter = BW, fit = 'contain', pos = '50% 50%', shadow = true, inset = 14, children, style,
+  fit?: 'cover' | 'contain'; pos?: string; shadow?: boolean; inset?: number; label?: boolean; children?: React.ReactNode; style?: React.CSSProperties}> = ({
+  file, x = 0, y = 0, w, h, what, tone = 0, rot = 0, filter = BW, fit = 'contain', pos = '50% 50%', shadow = true, inset = 14, label = true, children, style,
 }) => {
   const real = hasFile(file);
   const c = Math.round(26 + tone * 40);
@@ -59,10 +52,10 @@ export const PH: React.FC<{file: string; x?: number; y?: number; w: number; h: n
       ) : (
         <div style={{position: 'absolute', inset: 0, background: `rgb(${c},${c - 2},${c - 5})`, border: '2px solid rgba(244,239,230,0.16)', boxSizing: 'border-box',
           boxShadow: shadow ? '0 22px 40px rgba(0,0,0,0.6)' : undefined, overflow: 'hidden'}}>
-          <div style={{position: 'absolute', left: inset, top: 12, right: 14, fontFamily: JF.mono, fontSize: 16, lineHeight: 1.35, letterSpacing: 0.5, color: 'rgba(244,239,230,0.72)',
+          {label && <div style={{position: 'absolute', left: inset, top: 12, maxWidth: Math.min(w - inset - 14, 900), fontFamily: JF.mono, fontSize: 16, lineHeight: 1.35, letterSpacing: 0.5, color: 'rgba(244,239,230,0.72)',
             wordBreak: 'break-all'}}>
             PLACEHOLDER: {file}{what ? <div style={{color: 'rgba(244,239,230,0.45)', wordBreak: 'normal'}}>{what}</div> : null}
-          </div>
+          </div>}
         </div>
       )}
       {children}
@@ -179,7 +172,7 @@ export const HandDeal: React.FC<{deals: Deal[]; w?: number}> = ({deals, w = CARD
     // let go: palm-down for 4 frames at the card's right half, then slide out to the right
     const p = interpolate(t, [4, 4 + OUT], [0, 1], {...clamp, easing: (q) => q * q});
     const px = cx + w * 0.18 + p * 1500, py = cy + h * 0.1 - p * 40;
-    const ps = sc * 0.95;
+    const ps = sc * 0.8;
     return {
       card: null,
       img: <Img src={staticFile('img/flow/tg_hand_place_R_cut.png')} style={{position: 'absolute', left: px - HAND_PLACE.x * ps, top: py - HAND_PLACE.y * ps,

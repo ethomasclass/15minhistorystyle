@@ -23,7 +23,7 @@ export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; gr
 
 /** Rig geometry as fractions of the rig box: hip line (legs below it never scale), chest centre and radius. */
 const HIP = 0.69;
-const CHEST: [number, number] = [0.3, 0.5];
+const CHEST: [number, number] = [0.3, 0.57];
 const CHEST_R = 0.24;
 
 /** The weight the dial and counter show at graphics frame g (null before the 1930s figure is said). */
@@ -87,14 +87,18 @@ export const TurkeyRig: React.FC<{x: number; y: number; size: number; b: TurkeyB
   const chestMask = `radial-gradient(circle at ${cx}px ${cy}px, #000 0, #000 ${r * 0.55}px, transparent ${r}px)`;
   const hipY = HIP * size;
   const sw = 1 + 0.28 * swell;
+  // soft seam at the hip: the body fades out and the legs fade in over ~4% of the bird, so no straight cut shows when it inflates
+  const seam = size * 0.04;
+  const bodyMask = `linear-gradient(to bottom, #000 0, #000 ${hipY - seam}px, transparent ${hipY + seam * 0.6}px)`;
+  const legMask = `linear-gradient(to bottom, transparent 0, transparent ${hipY - seam}px, #000 ${hipY + seam * 0.6}px)`;
   return (
     <>
       <div style={{position: 'absolute', left: x - size / 2, top: y - size, width: size, height: size, transform: `rotate(${tip}deg)`, transformOrigin: `${size * 0.52}px ${size}px`,
         filter: 'drop-shadow(10px 16px 14px rgba(0,0,0,0.55))'}}>
         {/* the legs: never scaled */}
-        <div style={{position: 'absolute', inset: 0, clipPath: `inset(${hipY - 2}px -20% -5% -20%)`}}><Art size={size} p={p} /></div>
+        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: legMask, maskImage: legMask}}><Art size={size} p={p} /></div>
         {/* the body: inflates about the hip; the chest swells inside it */}
-        <div style={{position: 'absolute', inset: 0, clipPath: `inset(-60% -60% ${size - hipY}px -60%)`, transform: `scale(${inflate})`, transformOrigin: `${size * 0.5}px ${hipY}px`}}>
+        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: bodyMask, maskImage: bodyMask, transform: `scale(${inflate})`, transformOrigin: `${size * 0.5}px ${hipY}px`}}>
           <Art size={size} p={p} />
           {swell > 0 && (
             <div style={{position: 'absolute', inset: 0, WebkitMaskImage: chestMask, maskImage: chestMask, transform: `scale(${sw})`, transformOrigin: `${cx}px ${cy}px`}}>
@@ -171,14 +175,14 @@ export const chestAt = (): [number, number] => [SET.feet[0] - SET.size / 2 + CHE
  * The whole set (desk, platform scale, the bird, the dial, the counter) through a camera looking at (cx, cy) at zoom z (smooth,
  * not stepped). `dial` hides the dial and counter for the shots before the weights. Children draw in screen px over the set.
  */
-export const TurkeySet: React.FC<{b: TurkeyBeats; cam?: {x: number; y: number; z: number}; dial?: boolean; children?: React.ReactNode}> = ({b, cam = {x: 960, y: 540, z: 1}, dial = true, children}) => {
+export const TurkeySet: React.FC<{b: TurkeyBeats; cam?: {x: number; y: number; z: number}; dial?: boolean; labels?: boolean; children?: React.ReactNode}> = ({b, cam = {x: 960, y: 540, z: 1}, dial = true, labels = true, children}) => {
   const [fx, fy] = SET.feet;
   return (
     <AbsoluteFill>
       <DarkPaper />
       <AbsoluteFill style={{transform: `translate(${960 - cam.x * cam.z}px, ${540 - cam.y * cam.z}px) scale(${cam.z})`, transformOrigin: '0 0'}}>
-        <PH file={TURKEY.scale} what="period platform scale (the bird stands on its deck)" x={fx - 380} y={fy - 14} w={760} h={150} />
-        <TurkeyRig x={fx} y={fy} size={SET.size} b={b} />
+        <PH file={TURKEY.scale} what="period platform scale (the bird stands on its deck)" x={fx - 380} y={fy - 14} w={760} h={150} label={labels} />
+        <TurkeyRig x={fx} y={fy} size={SET.size} b={b} label={labels} />
         {dial && <Dial x={SET.dial[0]} y={SET.dial[1]} b={b} />}
         {dial && <Counter x={SET.counter[0]} y={SET.counter[1]} b={b} />}
       </AbsoluteFill>

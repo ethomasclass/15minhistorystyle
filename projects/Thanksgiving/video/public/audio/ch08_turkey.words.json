@@ -1,6 +1,6 @@
 {
 "voice": "placeholder",
-"duration": 131.101,
+"duration": 130.459,
 "words": [
 {
 "w": "The",
@@ -1832,12 +1832,6 @@
 "w": "time.",
 "s": 129.665,
 "e": 129.941,
-"para_end": true
-},
-{
-"w": "---",
-"s": 130.459,
-"e": 130.707,
 "para_end": true
 }
 ]
