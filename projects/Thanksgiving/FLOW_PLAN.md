@@ -1,4 +1,11 @@
-# Google Flow plan: Thanksgiving food video (draft 1, before the image search returns)
+# Scene plan: Thanksgiving food video (draft 2)
+
+**Change (user, Nov 2026): the scenes are animated code-drawn silhouettes, the same way as the Gilded Age series.** The kit is `projects/Gilded_Age/lookdev/` on branch `ccr-799e8939-spv3wr`: SVG rigs (`rig.js`, `RIG.md`), parallax planes (`scene.js`), walk cycles, idles, expressions, a level-of-detail rule. Reuse first:
+- `mansion.js`: the Vanderbilt dining hall, Delmonico's waiters, and the basement kitchen with its range, copper pans and cooks. That's ch3 (showing off) and ch5/ch6 (the Victorian kitchen).
+- `cutaway.js` / `kelly_flat`: a modest 1880s kitchen. That's ch4 (mock turtle: the family that can't afford a turtle).
+- New sets: the 1621 tidal river (eel treading), the 1621 gathering, the turtle dock (street.js's wagon and horse plus a ship from scene.js), and a 1950s suburban kitchen.
+Google Flow is now for **props** (section B) and any texture plates; section A's scenes are rebuilt in code. Section C (Flow image-to-video) only applies if a code scene can't do the action.
+
 
 The final `FLOW_PROMPT.md` (one ordered prompt) gets written once the archival search shows the real gaps. Rules from the skill (`images-and-masks.md` §11): one locked palette, figures as one solid black shape in profile, no faces, no text, no recognizable real people, everything important inside the central 80%, 3–4 depth bands.
 
