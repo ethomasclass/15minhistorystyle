@@ -217,3 +217,22 @@ New habits for the channel:
 6. **Hype history told as a chain** (a decade, then a product, then a messenger), with each step causing the next.
 
 Not adopted: expert talking heads (no historian names), the sponsor read, and the Patreon end card.
+
+## Appendix: "American power" timeline explainer (Vox, older format, transcript supplied by the user, Nov 2026)
+
+Shape: a chronological history in 7 chapters, about 8:40. The opener is a superlative backed by two numbers ("800 military bases and 37%..."), then "To understand X, you have to go back to when X wasn't X at all."
+
+Worth keeping:
+1. **"Go back to when it wasn't."** "...back to when America wasn't a global power in any sense of the word." For us: "...back to when Thanksgiving dinner wasn't turkey in any sense of the word."
+2. **One tug-of-war as the spine.** Expansion against isolationism, swinging back and forth each chapter, keeps the timeline from turning into a plain list. For us: homemade against store-bought, or showing off against saving money.
+3. **A chapter-ending turn line.** "But something was happening in the late 1800s that would change the debate." Each chapter ends on a "but" that opens the next.
+4. **A rapid montage of dates and places.** "Hawaii (1898), Wake Island (1899), American Samoa (1900)..." For us: a fast run of the 1950s canned goods.
+5. **"The most famous example... but it isn't the only one."** This turns from the famous item to the surprising one.
+
+Weaker than the gut-health video for retention:
+- The opener is a thesis, not a hook. There is no artifact and no puzzle, and the first 20 s are a lecture.
+- It is "and then" for long stretches (2:01–2:13 is a list of annexations).
+- There are no jokes and no pattern interrupts, and the tone stays flat.
+- It ends on a modern politician and "we'll find out" (against the channel's neutrality rule).
+
+Verdict for the Thanksgiving video: use the gut-health video's shape (puzzle hook, number ladder, warm turn, the hype told as a chain of causes, a gentle let-off). Borrow only the timeline video's spine of tension and its chapter-ending "but" lines to stitch the eras together.
