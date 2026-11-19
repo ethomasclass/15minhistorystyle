@@ -1,0 +1,33 @@
+{
+ "size": [
+  2600,
+  3851
+ ],
+ "paper": "South Bend news-times (South Bend, Ind.), November 23, 1920, (Morning Edition)",
+ "url": "https://www.loc.gov/resource/sn87055779/1920-11-23/ed-1/",
+ "sp": "7",
+ "phrases": {
+  "Angelus Marshmallows": [
+   [
+    2305.2,
+    2736.5,
+    46.0,
+    21.1
+   ],
+   [
+    1627.0,
+    2771.4,
+    303.6,
+    29.5
+   ]
+  ],
+  "sweet potatoes": [
+   [
+    1725.2,
+    1763.5,
+    201.7,
+    24.9
+   ]
+  ]
+ }
+}

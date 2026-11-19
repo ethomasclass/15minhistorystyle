@@ -1,0 +1,33 @@
+{
+ "size": [
+  2600,
+  3805
+ ],
+ "paper": "The Washington times (Washington [D.C.]), October 8, 1920, (FINAL EDITION)",
+ "url": "https://www.loc.gov/resource/sn84026749/1920-10-08/ed-1/",
+ "sp": "10",
+ "phrases": {
+  "Angelus Marshmallows": [
+   [
+    2435.7,
+    2214.3,
+    88.7,
+    70.4
+   ],
+   [
+    976.0,
+    2276.0,
+    488.7,
+    68.6
+   ]
+  ],
+  "sweet potatoes": [
+   [
+    984.3,
+    696.9,
+    334.7,
+    67.8
+   ]
+  ]
+ }
+}
