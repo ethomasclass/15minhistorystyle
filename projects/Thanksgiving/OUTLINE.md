@@ -11,18 +11,18 @@
 - **Long loops:** (1) the can from the cold open, which pays off in ch7; (2) "we'll come back to the turkey," which pays off in ch8.
 - **Midpoint twist:** Jell-O was the rich family's dish.
 - **Climax twist:** the companies redesigned the turkey itself.
-- **Ending device:** back to the can; the gentle let-off.
+- **Ending device:** back to the eel and the can side by side; the gentle let-off.
 - **Collage board:** one pin per chapter, from the turtle to the casserole, linked by teal *but* / *therefore* yarn.
 
 ## Chapters
 
-**1. Cold open: the can (~0:45, 170 words)**
-- Frame 0: a cranberry log slides out of the can, ridges and all.
-- Number ladder: turkeys eaten each Thanksgiving [check, about 46M], then cans of cranberry sauce [check], then green bean casseroles [check].
-- "It's a great meal. Honestly, it should be. But almost none of it was there at the first one."
-- Name the strangeness: "They ate deer. Birds. And that fall, the colonists' big survival food was eels."
-- Question: "So how did we get from eels to *this*?" Promise: "And why is so much of it shaped like a can?"
-- A 1-second beat.
+**1. Cold open: the eel (~0:45, 170 words)**
+- Frame 0: an eel (a period engraving, cut out on the desk). The first line is the hook: "The people at the first Thanksgiving knew how to catch these with their feet."
+- Name the strangeness: Squanto treads eels out of the mud, "fat and sweet." Accurate framing: eels were the colonists' survival food that fall; the feast itself records deer and "fowl" [check, and keep the claim exact].
+- A hard cut to the modern plate: the turkey, then the cranberry log sliding out of its can, then the casserole. Number ladder: turkeys eaten each Thanksgiving [check], then cans of cranberry sauce [check].
+- "It's a great meal. Honestly, it should be. But almost none of it was there in 1621."
+- Question: "So how did we get from eels to *this*?" Promise: "And why is the cranberry sauce shaped like a can?"
+- A 1-second beat, held on the eel.
 
 **2. 1621: the meal that proved nothing (~1:00, 190 words)**
 - The bridge: "To understand dinner, go back to when it wasn't turkey in any sense of the word."
