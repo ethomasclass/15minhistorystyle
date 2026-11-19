@@ -10,9 +10,9 @@ import {clamp} from '../lib/anim';
 import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Slip, tornPoly} from '../kit/vox';
+import {Slip} from '../kit/vox';
 import {centreOf, TgBoard} from '../kit/tg_endboard';
-import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tgBed} from '../kit/tg_late';
+import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tgBed, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -103,7 +103,7 @@ const Recipe: React.FC<{t: TL; a: number}> = ({t, a}) => {
               return (
                 <span key={k} style={{position: 'relative', display: 'inline-block', marginRight: 22}}>
                   {on && <span style={{position: 'absolute', left: -8, right: -10, top: '12%', bottom: '2%', background: CORAL, opacity: 0.85, mixBlendMode: real ? 'multiply' : 'normal',
-                    clipPath: tornPoly(`rw${k}`, 400, 90, 7, 18).replace(/(\d+(\.\d+)?)px (\d+(\.\d+)?)px/g, (_m, a, _b, c) => `${(+a / 4).toFixed(1)}% ${(+c / 0.9).toFixed(1)}%`)}} />}
+                    clipPath: tornPct(`rw${k}`)}} />}
                   <span style={{position: 'relative', color: on ? '#1a120c' : undefined}}>{w}</span>
                 </span>
               );

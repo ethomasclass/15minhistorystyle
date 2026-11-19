@@ -12,7 +12,7 @@
 //   Morph       the first/last-frame "mock" morph: the Flow clip's frames when they exist, else a stepped crossfade
 //   tgBed       music volume for the tg_ cues (levels.ts has no tg_ entries yet; same formula as bed())
 import React from 'react';
-import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {Arrow, Highlight, JF, Loop, useGFrame} from './Kit';
 import {hasFile} from './shell';
@@ -27,6 +27,14 @@ export const BW = 'grayscale(1) contrast(1.15) brightness(0.95)';
 const TG_LUFS: Record<string, number> = {tg_test_kitchen: -13.9, tg_turkey: -16.1, tg_table_theme: -15.9, tg_table_theme_alt: -15.9};
 /** Volume that sits a tg_ cue `gap` LU under the -18 LUFS voice (the bed() formula from levels.ts). */
 export const tgBed = (cue: string, gap = 13) => +Math.pow(10, (-18 - gap - TG_LUFS[cue]) / 20).toFixed(3);
+
+/** A torn top and bottom edge as a percentage clip-path (any size): for highlighter swipes behind words. */
+export const tornPct = (seed: string, amp = 14, n = 16) => {
+  const pts: string[] = [];
+  for (let i = 0; i <= n; i++) pts.push(`${(i / n) * 100}% ${(random(`${seed}t${i}`) * amp).toFixed(1)}%`);
+  for (let i = n; i >= 0; i--) pts.push(`${(i / n) * 100}% ${(100 - random(`${seed}b${i}`) * amp).toFixed(1)}%`);
+  return `polygon(${pts.join(',')})`;
+};
 
 // ------------------------------------------------------------------ placeholders
 export type Placeholder = {file: string; what: string};
