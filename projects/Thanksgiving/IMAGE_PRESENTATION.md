@@ -32,6 +32,11 @@ The standing rules still apply: no slow-push "Ken Burns," no 3D photo fly-throug
 7. **Test kitchens:** the 1917 booklet full-frame, then a loupe (3, 5); the POV kitchen scene (14); a 1950s card-deal montage (6); the casserole as three cans (9).
 8. **Turkey + ending:** a USDA turkey photo cut-out (1); the era panel recap (11); the board pull-back (12); the eel beside the can (10).
 
-## Questions for the user
-- Full-frame: OK to limit it to documents and ads, held still with hard cuts? Or do you also want full-frame photos?
-- Do the modern food photos go black and white like everything else, or get a one-off colour exception for the can (like the colour exception in `explainer-craft.md` §5)?
+## Decisions (user, Nov 2026)
+- **Full-screen pans: test them in this video.** This lifts the "no Ken Burns" rule for this video, as a test. Vox does pan across full-frame archival photos and documents, usually a slow move that follows the eye to the detail the line is about, then a hard cut. Test variants, from one image each, each 4–6 s:
+  - A. **Smooth guided pan:** a linear move across a document or ad that lands on the quoted line or detail as it is spoken.
+  - B. **Stepped pan (12 fps):** the same move stepped like our marks, the channel's own feel.
+  - C. **Pan to reveal:** start tight on an odd detail (a fish in the gelatin), then pull out to the whole ad on the reveal word.
+  - D. **Tilt down a page:** a menu card or booklet read top to bottom as the dishes are named.
+  The rules: no 3D parallax, and every pan ends on a held frame or a hard cut. One pan at a time, never back-to-back.
+- **Colour is OK in the right places.** Planned uses: the 1950s gelatin ad in full colour (the pattern interrupt), period colour lithographs and ads, and the modern plate. The rest stays B&W.
