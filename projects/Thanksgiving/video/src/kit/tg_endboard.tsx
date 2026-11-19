@@ -38,7 +38,7 @@ const PieceView: React.FC<{p: Piece; subject: boolean}> = ({p, subject}) => (
     <div style={{position: 'absolute', left: -6, top: p.h + 8}}>
       <Strip text={p.label} size={20} seed={p.id} bg={subject ? CORAL : undefined} />
     </div>
-    {p.mock && <div style={{position: 'absolute', left: p.w * 0.35, top: p.h * 0.55}}><MockTape x={0} y={0} at={-999} size={34} rot={-10} seed={p.id.length * 7} /></div>}
+    {p.mock && <div style={{position: 'absolute', left: p.w - 70, top: p.h - 6}}><MockTape x={0} y={0} at={-999} size={28} rot={-8} seed={p.id.length * 7} /></div>}
   </div>
 );
 

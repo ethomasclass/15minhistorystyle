@@ -6,6 +6,8 @@
 // CUE_LUFS is generated from music/catalog.json (integrated_lufs). A new cue: measure it (ffmpeg -af ebur128) and add it here.
 const VOICE = -18;
 export const CUE_LUFS: Record<string, number> = {
+  tg_table_theme: -15.9, tg_table_theme_alt: -15.9, tg_parlor_waltz: -16.1, tg_hale: -14.7, tg_gelatin: -15.2, tg_ad_sting: -14.8,
+  tg_test_kitchen: -13.9, tg_turkey: -16.1,
   a_civil_war: -15.37, a_mexico: -15.69, a_mexico_short: -14.69, a_newsroom: -15.1, a_price: -17.29, aw_iron_horse: -16.6,
   aw_legend_sours: -17.0, aw_long_grief: -22.0, aw_panic: -15.9, aw_promise_theme: -16.9, aw_robber_barons: -16.7,
   b_caper_40s: -16.0, b_newsreel: -16.4, b_paper_wind: -17.2, cw_aftermath: -18.3, cw_camp_night: -18.1, cw_fife_dread: -16.2,

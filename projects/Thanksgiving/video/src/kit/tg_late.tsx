@@ -38,8 +38,8 @@ export type Placeholder = {file: string; what: string};
  * `children` draw over either (a stand-in drawing, a label).
  */
 export const PH: React.FC<{file: string; x?: number; y?: number; w: number; h: number; what?: string; tone?: number; rot?: number; filter?: string;
-  fit?: 'cover' | 'contain'; pos?: string; shadow?: boolean; children?: React.ReactNode; style?: React.CSSProperties}> = ({
-  file, x = 0, y = 0, w, h, what, tone = 0, rot = 0, filter = BW, fit = 'contain', pos = '50% 50%', shadow = true, children, style,
+  fit?: 'cover' | 'contain'; pos?: string; shadow?: boolean; inset?: number; children?: React.ReactNode; style?: React.CSSProperties}> = ({
+  file, x = 0, y = 0, w, h, what, tone = 0, rot = 0, filter = BW, fit = 'contain', pos = '50% 50%', shadow = true, inset = 14, children, style,
 }) => {
   const real = hasFile(file);
   const c = Math.round(26 + tone * 40);
@@ -51,7 +51,7 @@ export const PH: React.FC<{file: string; x?: number; y?: number; w: number; h: n
       ) : (
         <div style={{position: 'absolute', inset: 0, background: `rgb(${c},${c - 2},${c - 5})`, border: '2px solid rgba(244,239,230,0.16)', boxSizing: 'border-box',
           boxShadow: shadow ? '0 22px 40px rgba(0,0,0,0.6)' : undefined, overflow: 'hidden'}}>
-          <div style={{position: 'absolute', left: 14, top: 12, right: 14, fontFamily: JF.mono, fontSize: 16, lineHeight: 1.35, letterSpacing: 0.5, color: 'rgba(244,239,230,0.72)',
+          <div style={{position: 'absolute', left: inset, top: 12, right: 14, fontFamily: JF.mono, fontSize: 16, lineHeight: 1.35, letterSpacing: 0.5, color: 'rgba(244,239,230,0.72)',
             wordBreak: 'break-all'}}>
             PLACEHOLDER: {file}{what ? <div style={{color: 'rgba(244,239,230,0.45)', wordBreak: 'normal'}}>{what}</div> : null}
           </div>
@@ -107,7 +107,7 @@ export const MockTape: React.FC<{x: number; y: number; at: number; size?: number
 };
 
 // ------------------------------------------------------------------ recipe cards
-export const CARD: [number, number] = [440, 270];
+export const CARD: [number, number] = [520, 320];
 
 /** A 3x5 recipe card: dark paper, faint teal rules, a coral header rule. `title` in the hand (white), `lines` in teal. */
 export const RecipeCard: React.FC<{title: string; lines?: string[]; kicker?: string; w?: number; h?: number; children?: React.ReactNode}> = ({
@@ -117,10 +117,10 @@ export const RecipeCard: React.FC<{title: string; lines?: string[]; kicker?: str
     boxShadow: '0 16px 28px rgba(0,0,0,0.65), inset 0 0 0 1px rgba(244,239,230,0.08)'}}>
     {Array.from({length: 6}, (_, i) => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: h * 0.3 + i * h * 0.12, height: 1.5, background: 'rgba(47,224,196,0.22)'}} />)}
     <div style={{position: 'absolute', left: 0, right: 0, top: h * 0.26, height: 3, background: 'rgba(255,111,97,0.7)'}} />
-    <div style={{position: 'absolute', left: w * 0.05, top: h * 0.05, fontFamily: JF.mono, fontSize: Math.round(h * 0.062), letterSpacing: 2, color: 'rgba(244,239,230,0.55)'}}>{kicker}</div>
-    <div style={{position: 'absolute', left: w * 0.05, top: h * 0.1, fontFamily: '"Nanum Pen Script", cursive', fontSize: h * 0.17, lineHeight: 1, color: '#f4efe6', whiteSpace: 'nowrap'}}>{title}</div>
+    <div style={{position: 'absolute', left: w * 0.05, top: h * 0.04, fontFamily: JF.mono, fontSize: Math.round(h * 0.058), letterSpacing: 2, color: 'rgba(244,239,230,0.6)'}}>{kicker}</div>
+    <div style={{position: 'absolute', left: w * 0.05, top: h * 0.105, fontFamily: '"Nanum Pen Script", cursive', fontSize: h * 0.15, lineHeight: 1, color: '#f4efe6', whiteSpace: 'nowrap'}}>{title}</div>
     {lines.map((l, i) => (
-      <div key={i} style={{position: 'absolute', left: w * 0.06, top: h * 0.3 + i * h * 0.12 - h * 0.105, fontFamily: '"Nanum Pen Script", cursive', fontSize: h * 0.12, lineHeight: 1,
+      <div key={i} style={{position: 'absolute', left: w * 0.06, top: h * 0.3 + (i + 1) * h * 0.12 - h * 0.115, fontFamily: '"Nanum Pen Script", cursive', fontSize: h * 0.12, lineHeight: 1,
         color: TEAL, whiteSpace: 'nowrap'}}>{l}</div>
     ))}
     {children}
@@ -156,12 +156,12 @@ export const HandDeal: React.FC<{deals: Deal[]; w?: number}> = ({deals, w = CARD
     const cx = d.x + w / 2, cy = d.y + h / 2;
     const t = g - d.at;
     if (t < 0) {
-      // carrying: from off the right edge to the drop point
+      // carrying: from off the right edge to the drop point, the card at the hand's own tilt
       const p = interpolate(t, [-IN, 0], [0, 1], {...clamp, easing: (q) => 1 - Math.pow(1 - q, 3)});
       const ox = (1 - p) * (2100 - cx), oy = (1 - p) * -60;
-      const ang = rot - HAND_CARD.rot + (1 - p) * -6;
+      const ang = (1 - p) * -5;
       return {
-        card: <div style={{position: 'absolute', left: d.x + ox, top: d.y + oy, transform: `rotate(${rot + (1 - p) * -6}deg)`}}>{d.card}</div>,
+        card: <div style={{position: 'absolute', left: d.x + ox, top: d.y + oy, transform: `rotate(${HAND_CARD.rot + ang}deg)`}}>{d.card}</div>,
         img: <Img src={staticFile('img/flow/tg_hand_card_R_cut.png')} style={{position: 'absolute', left: cx + ox - HAND_CARD.cx * sc, top: cy + oy - HAND_CARD.cy * sc,
           width: HAND_SIZE[0] * sc, height: HAND_SIZE[1] * sc, transform: `rotate(${ang}deg)`, transformOrigin: `${HAND_CARD.cx * sc}px ${HAND_CARD.cy * sc}px`}} />,
       };
@@ -175,15 +175,17 @@ export const HandDeal: React.FC<{deals: Deal[]; w?: number}> = ({deals, w = CARD
     return {
       card: null,
       img: <Img src={staticFile('img/flow/tg_hand_place_R_cut.png')} style={{position: 'absolute', left: px - HAND_PLACE.x * ps, top: py - HAND_PLACE.y * ps,
-        width: HAND_SIZE[0] * ps, height: HAND_SIZE[1] * ps, transform: `rotate(${rot * 0.5}deg)`, transformOrigin: `${HAND_PLACE.x * ps}px ${HAND_PLACE.y * ps}px`}} />,
+        width: HAND_SIZE[0] * ps, height: HAND_SIZE[1] * ps, transform: `rotate(${rot * 0.3}deg)`, transformOrigin: `${HAND_PLACE.x * ps}px ${HAND_PLACE.y * ps}px`}} />,
     };
   })();
   return (
     <AbsoluteFill>
       {deals.map((d, i) => {
         if (g < d.at) return null;
+        // let go: the card drops from the hand's tilt to its own and settles
         const k = interpolate(g - d.at, [0, 2.5, 5], [1.04, 0.99, 1], clamp);
-        return <div key={i} style={{position: 'absolute', left: d.x, top: d.y, transform: `rotate(${d.rot ?? 0}deg) scale(${k})`}}>{d.card}</div>;
+        const r = interpolate(g - d.at, [0, 5], [HAND_CARD.rot, d.rot ?? 0], {...clamp, easing: (q) => 1 - Math.pow(1 - q, 2)});
+        return <div key={i} style={{position: 'absolute', left: d.x, top: d.y, transform: `rotate(${r}deg) scale(${k})`}}>{d.card}</div>;
       })}
       {hand?.card}
       {/* the hand's shadow on the desk, then the hand */}

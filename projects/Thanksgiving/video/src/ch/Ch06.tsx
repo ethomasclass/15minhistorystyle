@@ -241,7 +241,7 @@ const AD_SIZE: [number, number] = [2000, 2700];
 const AD_DISH = {x: 1000, y: 1560};
 const AD_LINES: StandIn[] = [
   {x: 330, y: 260, w: 1340, h: 150, text: 'Monterey Soufflé Salad'},
-  {x: 560, y: 1500, w: 880, h: 120, text: '[ the salad: tuna in lemon gelatin ]'},
+  {x: 330, y: 1520, w: 1340, h: 84, text: '[ the salad: tuna in lemon gelatin ]'},
   {x: 420, y: 2280, w: 1160, h: 80, text: '[ recipe and Star-Kist copy ]'},
 ];
 const Ad: React.FC<{t: TL; a: number}> = ({t, a}) => {

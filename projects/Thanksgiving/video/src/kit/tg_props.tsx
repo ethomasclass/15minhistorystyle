@@ -245,7 +245,7 @@ export const Diorama: React.FC<{planes: Plane[]; a: number; b: number; drift?: n
               : (
                 <div style={{position: 'absolute', left: -120, width: 2160, top: pl.band[0], height: pl.band[1], background: pl.tone, clipPath: tornPoly(`dio${i}`, 2160, pl.band[1], 26, 40),
                   outline: '2px dashed rgba(244,239,230,0.22)', outlineOffset: -14}}>
-                  <div style={{position: 'absolute', left: 260 + i * 330, top: pl.band[0] < 100 ? 160 : 26, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(244,239,230,0.7)', whiteSpace: 'nowrap',
+                  <div style={{position: 'absolute', left: i === 0 ? 1150 : 260 + i * 330, top: pl.band[0] < 100 ? 160 : 26, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(244,239,230,0.7)', whiteSpace: 'nowrap',
                     textShadow: '0 1px 4px rgba(0,0,0,0.8)'}}>PLACEHOLDER: {pl.src}</div>
                 </div>
               )}

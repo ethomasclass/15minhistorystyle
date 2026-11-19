@@ -4,9 +4,9 @@
 export const SLUG = 'Thanksgiving_Menu';
 
 /** Title card after the channel intro: a highlighter title, a teal subtitle and a handwritten date range. */
-export const TITLE = 'KING ANDREW';
-export const SUBTITLE = "How the People's President Got a Crown";
-export const DATES = '1767 – 1845';
+export const TITLE = 'FROM EELS TO THIS';
+export const SUBTITLE = 'How the Thanksgiving Menu Was Invented';
+export const DATES = '1621 – 1955';
 
 /**
  * Archival pictures that flip past at the start of the channel intro (five reads best). Paths in public/.

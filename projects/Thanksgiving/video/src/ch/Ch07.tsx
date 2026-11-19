@@ -10,9 +10,9 @@ import {clamp} from '../lib/anim';
 import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Slip} from '../kit/vox';
+import {Slip, tornPoly} from '../kit/vox';
 import {centreOf, TgBoard} from '../kit/tg_endboard';
-import {CARD, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tgBed} from '../kit/tg_late';
+import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tgBed} from '../kit/tg_late';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -98,9 +98,16 @@ const Recipe: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <div style={{position: 'absolute', left: 2010, top: 300, width: 760}}>
           <div style={{fontFamily: JF.mono, fontSize: 20, letterSpacing: 3, color: real ? '#5a4a36' : 'rgba(244,239,230,0.6)', marginBottom: 26}}>THE RECIPE, IN SHORT</div>
           <div style={{fontFamily: JF.heavy, fontWeight: 900, fontSize: 76, lineHeight: 1.2, color: real ? '#2a2118' : '#f4efe6'}}>
-            {W.map((w, k) => (
-              <span key={k} style={{padding: '0 6px', marginLeft: -6, background: k >= 2 && lit(k - 2) ? 'rgba(255,111,97,0.75)' : 'transparent', color: k >= 2 && lit(k - 2) ? '#1a120c' : undefined}}>{w} </span>
-            ))}
+            {W.map((w, k) => {
+              const on = k >= 2 && lit(k - 2);
+              return (
+                <span key={k} style={{position: 'relative', display: 'inline-block', marginRight: 22}}>
+                  {on && <span style={{position: 'absolute', left: -8, right: -10, top: '12%', bottom: '2%', background: CORAL, opacity: 0.85, mixBlendMode: real ? 'multiply' : 'normal',
+                    clipPath: tornPoly(`rw${k}`, 400, 90, 7, 18).replace(/(\d+(\.\d+)?)px (\d+(\.\d+)?)px/g, (_m, a, _b, c) => `${(+a / 4).toFixed(1)}% ${(+c / 0.9).toFixed(1)}%`)}} />}
+                  <span style={{position: 'relative', color: on ? '#1a120c' : undefined}}>{w}</span>
+                </span>
+              );
+            })}
           </div>
         </div>
       </AbsoluteFill>
@@ -189,7 +196,7 @@ const Ocean: React.FC<{t: TL; a: number}> = ({t}) => (
 
 // ------------------------------------------------------------------ the can, paid off
 /** Plate centre and width for the payoff shots (screen px). */
-const PAY = {cx: 640, by: 900, pw: 880};
+const PAY = {cx: 1330, by: 930, pw: 860};
 
 /** The cold open's question comes back while the log slides out (frames 1-5), stopping one frame short. */
 const Question: React.FC<{t: TL; a: number}> = ({t}) => {
@@ -200,7 +207,7 @@ const Question: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Cran n={n} cx={1380} by={900} pw={640} />
+      <Cran n={n} cx={1540} by={930} pw={700} />
       <Note text="one of our questions:" x={130} y={170} size={50} rot={-3} at={t.at('answers') - 2} color="#ffffff" />
       <Note text="why is it shaped" x={150} y={300} size={70} rot={-3} at={t.at('Why is') - 2} />
       <Note text="like a can?" x={200} y={430} size={70} rot={-3} at={t.at('like a can?') - 2} color={pal.subject} />
@@ -218,9 +225,9 @@ const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       <Cran n={6} {...PAY} />
-      <Loupe layer={layer} cx={lx} cy={ly} r={170} zoom={2.6} to={[1560, 330]} at={t.at('Those ridges') + 2} bow={-50} />
+      <Loupe layer={layer} cx={lx} cy={ly} r={170} zoom={2.6} to={[430, 360]} at={t.at('Those ridges') + 2} bow={50} />
       <Loop cx={kx} cy={ky} rx={110} ry={80} at={t.at("can's ridges.") + 2} seed={9} tilt={-20} />
-      <Note text="same ridges." x={1430} y={600} size={56} rot={-3} at={t.at("can's ridges.") + 6} color="#ffffff" />
+      <Note text="same ridges." x={190} y={640} size={56} rot={-3} at={t.at("can's ridges.") + 6} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -238,7 +245,7 @@ const Diorama: React.FC<{drift: number; z?: number; fx?: number; fy?: number}> =
     <AbsoluteFill style={{overflow: 'hidden', background: INK}}>
       <AbsoluteFill style={{transform: `translate(${fx - fx * z}px, ${fy - fy * z}px) scale(${z})`, transformOrigin: '0 0'}}>
         {planes.map(([ph, depth, [x, y, w, h], tone], i) => (
-          <PH key={i} {...ph} x={x + drift * depth} y={y} w={w} h={h} tone={tone} fit="cover" filter="none" shadow={i > 0} />
+          <PH key={i} {...ph} x={x + drift * depth} y={y} w={w} h={h} tone={tone} fit="cover" filter="none" shadow={i > 0} inset={x < 0 ? 130 : 14} />
         ))}
       </AbsoluteFill>
     </AbsoluteFill>
@@ -350,7 +357,7 @@ const MockHomemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
     <AbsoluteFill>
       <DarkPaper />
       <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />
-      <Note text="green bean casseroles a Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />
+      <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />
       <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />
       <Morph a={P.m3a} b={P.m3b} dir={MORPH_DIR} from={Math.max(a + 10, mockAt - 90)} to={mockAt - 3} x={1000} y={170} w={800} h={600} />
       <MockTape x={1150} y={400} at={mockAt} size={140} />
