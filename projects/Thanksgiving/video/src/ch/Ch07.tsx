@@ -14,7 +14,7 @@ import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
-import {Cut, Hand} from '../kit/tg_cut';
+import {Cut, Hand, States} from '../kit/tg_cut';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
@@ -215,7 +215,7 @@ const Ocean: React.FC<{t: TL; a: number}> = ({t}) => (
 
 // ------------------------------------------------------------------ the can, paid off
 /** Plate centre and width for the payoff shots (screen px). */
-const PAY = {cx: 1330, by: 930, pw: 860};
+const PAY = {cx: 1010, by: 930, pw: 740};
 
 /** The cold open's question comes back while the log slides out (frames 1-5), stopping one frame short. */
 const Question: React.FC<{t: TL; a: number}> = ({t}) => {
@@ -226,7 +226,7 @@ const Question: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Cran n={n} cx={1540} by={930} pw={700} />
+      <Cran n={n} cx={1300} by={930} pw={700} />
       <Note text="one of our questions:" x={130} y={170} size={50} rot={-3} at={t.at('answers') - 2} color="#ffffff" />
       <Note text="why is it shaped" x={150} y={300} size={70} rot={-3} at={t.at('Why is') - 2} />
       <Note text="like a can?" x={200} y={430} size={70} rot={-3} at={t.at('like a can?') - 2} color={pal.subject} />
@@ -238,8 +238,8 @@ const Question: React.FC<{t: TL; a: number}> = ({t}) => {
 const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
   const m = cranMap(6, PAY.cx, PAY.by, PAY.pw);
   const layer = <Cran n={6} {...PAY} shadow={false} />;
-  const [lx, ly] = m.at(330, 380); // the log's ridges (frame 6's own pixels)
-  const [kx, ky] = m.at(690, 250); // the empty can's ridges
+  const [lx, ly] = m.at(588, 340); // the log's ridges (frame 6's own pixels)
+  const [kx, ky] = m.at(1010, 450); // the empty can's ridges
   return (
     <AbsoluteFill>
       <DarkPaper />
@@ -315,6 +315,8 @@ const Pantry: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <Diorama drift={drift} z={1.3} fx={700} fy={860} labels={false} />
+      {/* "a pantry full of cans": the can on its cloth */}
+      <Cut name="tg_can" x={280} y={380} w={640} rot={-2} at={t.at('pantry full') - 2} />
       <ListPad x={1220} y={150} items={[
         {text: 'new refrigerator', at: t.at('refrigerator,') - 2},
         {text: 'pantry full of cans', at: t.at('pantry full') - 2},
@@ -348,19 +350,30 @@ const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
 };
 
 // ------------------------------------------------------------------ the casserole
-/** The casserole on the 1950s kitchen table (the 1950s ad plate, full frame, colour): one still, the dish; the three ingredients
- *  land on it as slips, the last one dropped in by the pinching hand; MIX. BAKE. DONE. on the plate's blank panel. */
+/** The casserole on the 1950s kitchen table (the 1950s ad plate, full frame, colour). Three registered state stills swapped like
+ *  stop-motion: the full dish, half spooned out ("Green beans."), the empty dish ("cream of mushroom"); then a hard cut from the
+ *  empty dish to what it was made of, three cans, a slip on each (the pinching hand drops the last); MIX. BAKE. DONE. on the
+ *  plate's blank panel; and the full dish back on its name. */
 const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const cAt = t.at('Fried onions');
+  const g = useGFrame();
+  const bAt = t.at('Green beans.') - 1, cAt = t.at('cream of mushroom') - 1, cans = t.at('Fried onions') - 1, back = t.at('Green bean casserole.') - 1;
   const ink = '#2a2118';
+  const CX = 300, CY = 440, CW = 740; // the cans' picture (1150 x 610) on the table
+  const can = (sx: number, sy: number): [number, number] => [CX + (sx * CW) / 1150, CY + (sy * CW) / 1150];
   return (
     <AbsoluteFill style={{background: INK}}>
       <Img src={staticFile(P.plate50.file)} style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, objectFit: 'cover', filter: 'saturate(0.85) contrast(1.02)'}} />
-      <Cut name="tg_casserole_A" x={330} y={470} w={760} rot={-2} at={a + 1} land="slap" />
-      <Slip text="green beans" x={420} y={520} at={t.at('Green beans.') - 2} size={50} rot={-3} />
-      <Slip text="cream of mushroom soup" x={470} y={680} at={t.at('cream of mushroom') - 2} size={50} rot={2} />
-      <Slip text="fried onions" x={620} y={840} at={cAt} size={50} rot={-2} coral />
-      <Hand name="tg_hand_pinch" x={900} y={850} w={700} at={cAt} out={cAt + 14} />
+      <States srcs={['s2_casserole_a', 's2_casserole_b', 's2_casserole_c']} at={[a + 1, bAt, cAt]} x={150} y={370} w={1040} out={cans} />
+      <Cut name="tg_three_cans" x={CX} y={CY} w={CW} at={cans} out={back} land="slap" />
+      {g >= cans && g < back && (
+        <>
+          <Slip text="green beans" x={can(161, 303)[0] - 110} y={can(161, 303)[1] - 20} at={cans + 2} size={46} rot={-3} />
+          <Slip text="cream of mushroom soup" x={can(565, 357)[0] - 150} y={can(565, 357)[1] + 60} at={cans + 5} size={44} rot={2} />
+          <Slip text="fried onions" x={can(971, 439)[0] - 90} y={can(971, 439)[1] - 10} at={cans + 8} size={46} rot={-2} coral />
+          <Hand name="tg_hand_pinch" x={can(971, 439)[0] + 130} y={can(971, 439)[1] + 10} w={640} at={cans + 8} out={cans + 20} />
+        </>
+      )}
+      <States srcs={['s2_casserole_a']} at={[back]} x={150} y={370} w={1040} />
       <Stamp text="MIX." x={1400} y={250} size={96} at={t.at('Mix,')} rot={-4} color={ink} />
       <Stamp text="BAKE." x={1410} y={390} size={96} at={t.at('bake,')} rot={-2} color={ink} />
       <Stamp text="DONE." x={1420} y={530} size={96} at={t.at('done.')} rot={-5} color="#c2452f" />
@@ -370,7 +383,7 @@ const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 /** (`solo`: the picture and the tape only, for the MOCK flash's cut-in.) Twenty million a year, then the third mock, made in code
- *  from stills: the homemade pie sits on the desk; the silhouette hand reaches in and sets a can down in its place (a hard swap on
+ *  from stills: the homemade pie sits on its cloth; the silhouette hand reaches in and sets a can down in its place (the still swaps on
  *  the drawing the can lands), and the MOCK tape lands on "Mock". */
 const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
@@ -382,8 +395,10 @@ const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}
       {!solo && <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />}
       {!solo && <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />}
       {!solo && <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />}
-      <Cut name="tg_homemade_pie" x={1010} y={250} w={780} at={solo ? -999 : a + 2} out={swap} land="slap" />
-      <Hand name="tg_hand_can" x={1280} y={700} w={1150} at={swap} />
+      {/* two registered stills on the same checked cloth: the lattice pie and its rolling pin, then a tin can; the hand sets the can
+          down (it arrives on the drawing the picture swaps) and leaves */}
+      <States srcs={['m3_homemade_pie', 'm3_can']} at={[solo ? -999 : a + 2, swap]} x={700} y={80} w={1376} />
+      <Hand name="tg_hand_can" x={1405} y={560} w={900} at={swap} out={swap + 8} />
       <MockTape x={1150} y={400} at={mockAt} size={140} />
       {!solo && <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />}
       {!solo && <Note text="dressed up as Grandma's" x={190} y={760} size={64} rot={-3} at={t.at('dressed up') - 2} color={pal.subject} />}

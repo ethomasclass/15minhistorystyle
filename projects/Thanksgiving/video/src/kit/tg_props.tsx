@@ -59,6 +59,11 @@ const CRAN = [
   {W: 841, cx: 418.5, by: 621, pw: 715}, {W: 842, cx: 417.5, by: 613, pw: 713}, {W: 842, cx: 369.5, by: 609, pw: 659},
 ];
 const CRAN_H = 695;
+/** The second set (img/flow/cran2, the whole can in frame, 1376 x 768): used for every still; W = the art's right edge. */
+const CRAN2 = [
+  {W: 1022, cx: 686, by: 630, pw: 665}, {W: 1017, cx: 673, by: 663, pw: 665}, {W: 1032, cx: 678, by: 624, pw: 665},
+  {W: 1103, cx: 657, by: 642, pw: 665}, {W: 1156, cx: 571, by: 594, pw: 665}, {W: 1211, cx: 591, by: 637, pw: 665},
+];
 const PW0 = CRAN.reduce((a, c) => a + c.pw, 0) / CRAN.length;
 /** Drawings at 12/s, as in the approved test: 4 on the first, 3 on each middle one, then the last held. */
 const CRAN_SEQ = [0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4];
@@ -78,11 +83,20 @@ export const Cran: React.FC<{at: number; k?: number; right?: number; bottom?: nu
   if (land !== undefined && f < land) return null;
   const step = Math.floor(Math.max(0, g - at) / 2.5);
   const i = still ?? (g < at ? 0 : step < CRAN_SEQ.length ? CRAN_SEQ[step] : 5);
-  const c = CRAN[i];
+  // a still is drawn from the second set (the can whole); the slide itself (the Ch01 close-up) keeps the first, tighter set
+  const two = still !== undefined;
+  const c = two ? CRAN2[i] : CRAN[i];
   const s = k * (PW0 / c.pw);
   const kk = land === undefined ? 1 : spring({frame: f - land, fps, config: {damping: 14, mass: 0.8}});
   const left = right - c.W * s;
   const top = bottom - c.by * s - (1 - kk) * 120;
+  if (two) {
+    return (
+      <div style={{position: 'absolute', left, top, width: 1376 * s, height: 768 * s, opacity: Math.min(1, kk * 1.5), filter: 'drop-shadow(0 3px 2px rgba(0,0,0,0.6)) drop-shadow(14px 16px 16px rgba(0,0,0,0.5))'}}>
+        <Img src={staticFile(`img/flow/cran2/cran_${i + 1}.png`)} style={{width: '100%', height: '100%', display: 'block'}} />
+      </div>
+    );
+  }
   const m = fade ? {WebkitMaskImage: 'linear-gradient(90deg, #000 80%, transparent 99%)', maskImage: 'linear-gradient(90deg, #000 80%, transparent 99%)'} : {};
   return (
     <div style={{position: 'absolute', left, top, width: c.W * s, height: CRAN_H * s, opacity: Math.min(1, kk * 1.5), filter: 'drop-shadow(18px 15px 15px rgba(0,0,0,0.55))'}}>

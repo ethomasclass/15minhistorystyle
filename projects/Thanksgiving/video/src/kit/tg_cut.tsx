@@ -5,9 +5,14 @@
 //             and a soft lifted one (the Gilded Age's deskCut), muted colour, a stepped landing.
 //   CutLoop   a frame loop of cut-outs at 12 drawings a second (img/flow/<dir>/<stem>_0000.png ...).
 //   Swap      one still turning into another in 12-a-second steps: a short wobble, a stepped cross-dissolve, a settle.
+//   States    a set of state stills drawn on one 1376 x 768 frame (so they stay registered): stop-motion replacement, each state
+//             cut in on its frame with a one-drawing dissolve and an optional wobble (mince pie, casserole, pumpkin pie, the
+//             pie-to-can cloth, the three-step aspic-to-box change).
+//   Clip      one of our own drawn silhouette scenes (projects/Thanksgiving/lookdev/tg.js, rendered to public/clips/), full frame,
+//             muted, smooth at 30 fps; it starts `start` seconds into the clip at frame `at` and holds its last frame.
 //   Hand      a silhouette hand reaching in from the right edge (puppet move), holding at its mark, and leaving.
 import React from 'react';
-import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Freeze, Img, interpolate, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {useGFrame} from './Kit';
 
@@ -16,7 +21,8 @@ export const FLOW = {
   tg_aspic: [711, 645], tg_aspic_savory: [758, 411], tg_calf_head: [864, 350], tg_casserole_A: [933, 576], tg_deer: [490, 571], tg_fowl: [920, 540],
   tg_gelatin_box: [692, 644], tg_hand_can: [776, 308], tg_hand_card: [895, 518], tg_hand_pinch: [751, 273], tg_hand_point: [686, 222], tg_homemade_pie: [803, 480],
   tg_jello: [779, 521], tg_mince_A: [878, 400], tg_modern_plate: [651, 644], tg_pie_1: [791, 533], tg_potato: [810, 554], tg_scale: [482, 537], tg_tureen: [862, 386],
-  tg_turkey_bronze: [671, 628], tg_turkey_white: [671, 628], tg_turtle: [654, 573],
+  tg_turkey_bronze: [671, 628], tg_turkey_white: [671, 628], tg_turtle: [654, 573], tg_can: [803, 480], tg_three_cans: [1150, 610], tg_turkey_big: [666, 628],
+  tg_pie_2: [792, 537], tg_pie_3: [792, 539], tg_pie_4: [792, 537], tg_pie_5: [791, 535],
 } as const;
 export type FlowName = keyof typeof FLOW;
 export const flowSrc = (name: FlowName) => `img/flow/${name}.png`;
@@ -98,6 +104,35 @@ export const Swap: React.FC<{a: FlowName; b: FlowName; cx: number; base: number;
   );
 };
 
+/** The state stills' frame. */
+export const STATE_SIZE: [number, number] = [1376, 768];
+/**
+ * Stop-motion replacement between registered state stills (img/flow/<src>.png, each the full 1376 x 768 frame). `at[i]` is the
+ * frame state i cuts in (at[0] = when the first lands); each change is a one-drawing 50% dissolve, and with `wobble` a squash
+ * and stretch over the next three drawings. The frame is drawn `w` px wide with its top-left at (x, y); `map(sx, sy)` on
+ * stateMap gives a source pixel's place on screen for labels.
+ */
+export const stateMap = (x: number, y: number, w: number) => (sx: number, sy: number): [number, number] => [x + (sx * w) / STATE_SIZE[0], y + (sy * w) / STATE_SIZE[0]];
+export const States: React.FC<{srcs: string[]; at: number[]; x: number; y: number; w: number; land?: Land; wobble?: boolean; out?: number; origin?: [number, number]}> = ({
+  srcs, at, x, y, w, land = 'slap', wobble = false, out = Infinity, origin = [0.5, 0.8],
+}) => {
+  const g = useGFrame();
+  if (g < at[0] || g >= out) return null;
+  let i = 0;
+  at.forEach((a, k) => { if (g >= a) i = k; });
+  const since = g - at[i];
+  const h = (w * STATE_SIZE[1]) / STATE_SIZE[0];
+  const {dy, k, o} = landing(g, at[0], land);
+  const wob = wobble && i > 0 && since < 9 ? 0.05 * Math.exp(-since / 4) * Math.cos(since * 1.1) : 0;
+  const img = (j: number, op: number) => <Img key={j} src={staticFile(`img/flow/${srcs[j]}.png`)} style={{position: 'absolute', left: 0, top: 0, width: w, height: h, opacity: op, filter: CUT_COLOUR}} />;
+  return (
+    <div style={{position: 'absolute', left: x, top: y + dy, width: w, height: h, opacity: o, filter: DESK_SHADOW,
+      transform: `scale(${(k * (1 + wob)).toFixed(4)}, ${(k * (1 - wob)).toFixed(4)})`, transformOrigin: `${origin[0] * 100}% ${origin[1] * 100}%`}}>
+      {i > 0 && since < 2.5 ? [img(i - 1, 1), img(i, 0.5)] : img(i, 1)}
+    </div>
+  );
+};
+
 /** Where each hand's fingertips are, as a fraction of its picture (the hands all reach in from the right). */
 // (the pointing fingertip; the pinch; the base of the can it holds; the middle of the card it holds)
 const TIP: Record<string, [number, number]> = {tg_hand_point: [0.02, 0.33], tg_hand_pinch: [0.08, 0.68], tg_hand_can: [0.11, 0.95], tg_hand_card: [0.14, 0.28]};
@@ -125,9 +160,24 @@ export const Hand: React.FC<{name: 'tg_hand_point' | 'tg_hand_pinch' | 'tg_hand_
       {img({})}
       {/* words on the card it holds (the card lies about 17 degrees off level in the picture) */}
       {label && name === 'tg_hand_card' && (
-        <div style={{position: 'absolute', left: left + tx * w - 0.13 * w, top: top + ty * h - 0.05 * w, width: 0.26 * w, textAlign: 'center', transform: `rotate(${rot + 17}deg)`,
-          fontFamily: '"Nanum Pen Script", cursive', fontSize: w * 0.085, lineHeight: 1, color: '#0f3e37', whiteSpace: 'nowrap'}}>{label}</div>
+        <div style={{position: 'absolute', left: left + tx * w - 0.105 * w, top: top + ty * h - 0.02 * w, width: 0.26 * w, textAlign: 'center', transform: `rotate(${rot + 17}deg)`,
+          fontFamily: '"Nanum Pen Script", cursive', fontSize: w * 0.072, lineHeight: 1, color: '#0f3e37', whiteSpace: 'nowrap'}}>{label}</div>
       )}
     </>
+  );
+};
+
+/** Our drawn scenes, rendered from lookdev/tg.js: file and length in frames. */
+export const CLIPS = {eel_river: ['clips/tg_eel_river.mp4', 420], victorian_kitchen: ['clips/tg_victorian_kitchen.mp4', 360]} as const;
+/** A drawn scene, full frame, from frame `at`, starting `start` s into the clip; it holds on its last frame. Muted (the clips have no sound). */
+export const Clip: React.FC<{name: keyof typeof CLIPS; at: number; start?: number; dim?: number}> = ({name, at, start = 0, dim = 0}) => {
+  const f = useCurrentFrame();
+  const [src, n] = CLIPS[name];
+  const k = Math.max(0, Math.min(n - 1, f - at + Math.round(start * 30)));
+  return (
+    <AbsoluteFill style={{background: '#0d0c09'}}>
+      <Freeze frame={k}><OffthreadVideo src={staticFile(src)} muted style={{width: 1920, height: 1080}} /></Freeze>
+      {dim > 0 && <AbsoluteFill style={{background: `rgba(13,12,9,${dim})`}} />}
+    </AbsoluteFill>
   );
 };

@@ -17,7 +17,8 @@ import {DarkPaper} from './common';
 import {hasFile} from './shell';
 import {CORAL, PH, TEAL} from './tg_late';
 
-export const TURKEY = {bronze: 'img/flow/tg_turkey_bronze.png', white: 'img/flow/tg_turkey_white.png', scale: 'img/flow/tg_scale.png'};
+/** `big`: the white bird with a much heavier body, same pose and registration: the end state the growth dissolves toward. */
+export const TURKEY = {big: 'img/flow/tg_turkey_big.png', bronze: 'img/flow/tg_turkey_bronze.png', white: 'img/flow/tg_turkey_white.png', scale: 'img/flow/tg_scale.png'};
 
 export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; grow?: [number, number]; tipAt?: number};
 
@@ -54,7 +55,7 @@ const StandIn: React.FC<{size: number; white?: boolean}> = ({size, white}) => {
 };
 
 /** The bird's art at the current feather state: bronze, white, or the wipe between (p 0..1). */
-const Art: React.FC<{size: number; p: number}> = ({size, p}) => {
+const Art: React.FC<{size: number; p: number; big?: number}> = ({size, p, big = 0}) => {
   const img = (src: string) => <Img src={staticFile(src)} style={{position: 'absolute', left: 0, top: 0, width: size, height: size, objectFit: 'contain', objectPosition: '50% 100%'}} />;
   const bronze = hasFile(TURKEY.bronze) ? img(TURKEY.bronze) : <StandIn size={size} />;
   const white = hasFile(TURKEY.white) ? img(TURKEY.white) : <StandIn size={size} white />;
@@ -62,6 +63,7 @@ const Art: React.FC<{size: number; p: number}> = ({size, p}) => {
     <>
       {p < 1 && <div style={{position: 'absolute', inset: 0}}>{bronze}</div>}
       {p > 0 && <div style={{position: 'absolute', inset: 0, clipPath: `inset(-5% ${(1 - p) * 105}% -5% -5%)`}}>{white}</div>}
+      {big > 0 && hasFile(TURKEY.big) && <div style={{position: 'absolute', inset: 0, opacity: big}}>{img(TURKEY.big)}</div>}
     </>
   );
 };
@@ -76,7 +78,10 @@ export const TurkeyRig: React.FC<{x: number; y: number; size: number; b: TurkeyB
   const p = white ? 1 : b.swapAt === undefined ? 0 : interpolate(g, [b.swapAt, b.swapAt + 5], [0, 1], clamp);
   const w = weightAt(g, b);
   const k = fixedGrow ?? (w === null ? 0 : (w - 13) / 17);
-  const inflate = 1 + 0.4 * k;
+  // with the heavy bird's own drawing to dissolve into, the warp only has to carry the change (it was 0.4 on its own)
+  const hasBig = hasFile(TURKEY.big);
+  const inflate = 1 + (hasBig ? 0.16 : 0.4) * k;
+  const big = hasBig ? Math.round(k * 6) / 6 : 0;
   let tip = 0;
   if (b.tipAt !== undefined && g >= b.tipAt) {
     const t = g - b.tipAt;
@@ -96,13 +101,13 @@ export const TurkeyRig: React.FC<{x: number; y: number; size: number; b: TurkeyB
       <div style={{position: 'absolute', left: x - size / 2, top: y - size, width: size, height: size, transform: `rotate(${tip}deg)`, transformOrigin: `${size * 0.52}px ${size}px`,
         filter: 'drop-shadow(10px 16px 14px rgba(0,0,0,0.55))'}}>
         {/* the legs: never scaled */}
-        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: legMask, maskImage: legMask}}><Art size={size} p={p} /></div>
+        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: legMask, maskImage: legMask}}><Art size={size} p={p} big={big} /></div>
         {/* the body: inflates about the hip; the chest swells inside it */}
         <div style={{position: 'absolute', inset: 0, WebkitMaskImage: bodyMask, maskImage: bodyMask, transform: `scale(${inflate})`, transformOrigin: `${size * 0.5}px ${hipY}px`}}>
-          <Art size={size} p={p} />
+          <Art size={size} p={p} big={big} />
           {swell > 0 && (
             <div style={{position: 'absolute', inset: 0, WebkitMaskImage: chestMask, maskImage: chestMask, transform: `scale(${sw})`, transformOrigin: `${cx}px ${cy}px`}}>
-              <Art size={size} p={p} />
+              <Art size={size} p={p} big={big} />
             </div>
           )}
         </div>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face {font-family: Abril; src: url(../../../brand/fonts/AbrilFatface.woff2);}
+  @font-face {font-family: Mono; src: url(../../../brand/fonts/IBMPlexMono.woff2);}
+  @font-face {font-family: Inter; font-weight: 600; src: url(../../../brand/fonts/Inter-600.woff2);}
+  @font-face {font-family: Inter; font-weight: 800; src: url(../../../brand/fonts/Inter-800.woff2);}
+  @font-face {font-family: Pen; src: url(../../../brand/fonts/NanumPenScript.woff2);}
+  @font-face {font-family: Playfair; font-weight: 900; src: url(../../../brand/fonts/PlayfairDisplay-900.woff2);}
+  html, body {margin: 0; background: #0d0c09;}
+  #stage {position: relative; width: 1920px; height: 1080px; overflow: hidden;}
+  #stage > svg {position: absolute; inset: 0;}
+  #ov {position: absolute; inset: 0;}
+  #ov * {box-sizing: border-box;}
+</style>
+<script src="rig.js"></script>
+<script src="scene.js"></script>
+<script src="street.js"></script>
+<script src="cutaway.js"></script>
+<script src="explainers.js"></script>
+<script src="refinery.js"></script>
+<script src="loom.js"></script>
+<script src="bessemer.js"></script>
+<script src="mansion.js"></script>
+<script src="ep2_more.js"></script>
+<script src="ep3.js"></script>
+<script src="ep3_map.js"></script>
+<script src="ep3_explain.js"></script>
+<script src="ep4.js"></script>
+<script src="ep4_b.js"></script>
+<script src="ep4_explain_b.js"></script>
+<script src="ep4_map_b.js"></script>
+<script src="ep5.js"></script>
+<script src="ep5_doors.js"></script>
+<script src="ep5_explain.js"></script>
+<script src="ep5_b.js"></script>
+<script src="ep5_map.js"></script>
+<script src="text.js"></script>
+<script src="tg.js"></script>
+</head><body>
+<div id="stage"><div id="scene"></div><div id="ov"></div></div>
+<script>
+  window.draw = (cfg) => {
+    if (window.E3LOG) window.E3LOG.length = 0;
+    document.getElementById('scene').innerHTML = cfg.ball ? renderBall(cfg) : cfg.castsheet ? renderCastSheet() : cfg.cut ? renderCutaway(cfg) : cfg.faces ? renderFaces(cfg.look) : cfg.ladder ? renderLadder(cfg.look) : cfg.clip ? renderClipFrame(cfg.clip, cfg.t) : renderScene(cfg);
+    document.getElementById('ov').innerHTML = cfg.overlay ? OVERLAYS[cfg.overlay](cfg) : '';
+    return Promise.all([document.fonts.ready, window.E3_PRELOAD || true]).then(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => ok(true)))));
+  };
+</script>
+</body></html>

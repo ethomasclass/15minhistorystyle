@@ -25,7 +25,7 @@ import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
 import {DeskScene} from '../kit/tg_desk';
-import {Cut} from '../kit/tg_cut';
+import {Cut, stateMap, States} from '../kit/tg_cut';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
@@ -169,11 +169,12 @@ const Steps: React.FC<{t: TL; a?: number}> = ({t}) => {
 // ------------------------------------------------------------------ the mince pie
 /** Ingredient labels around the exploded pie: [text, word, x, y] on screen, for the placeholder layout of state C. */
 const PIE_LABELS: [string, string, number, number][] = [
-  ['cattle feet', 'cattle feet', 1050, 300],
-  ['beef suet', 'beef suet', 1470, 270],
-  ['wine', 'and wine', 1610, 500],
-  ['apples', 'apples', 1090, 730],
-  ['raisins', 'raisins', 1440, 770],
+  // [text, word, the ingredient's centre in state C (source px of the 1376 x 768 frame)]
+  ['cattle feet', 'cattle feet', 382, 175],
+  ['beef suet', 'beef suet', 976, 168],
+  ['wine', 'and wine', 1201, 423],
+  ['apples', 'apples', 974, 625],
+  ['raisins', 'raisins', 230, 501],
 ];
 
 const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
@@ -181,15 +182,18 @@ const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
   const g = useGFrame();
   const mince = t.at('Mince');
   const px = interpolate(f, [mince, mince + 12], [760, 1020], {...clamp, easing: (p) => 1 - Math.pow(1 - p, 3)});
-  // one still (the whole pie): the change is made in code, the coral "meat" slip and then the five ingredient slips landing on it
+  // three registered state stills, swapped like stop-motion replacement frames: whole, a wedge cut (on "had meat"), then the
+  // ingredients laid out round the empty plate (on "cattle feet"), a slip landing on each as it is named
+  const PW = 1010, PX = px - 130, PY = 170;
+  const M = stateMap(PX, PY, PW);
   const P = MINCE;
   return (
     <AbsoluteFill>
       <DarkPaper />
       {g >= t.at('dessert') && g < mince && <Highlight text="DESSERT" x={120} y={110} size={104} at={t.at('dessert')} seed={33} rot={-2} />}
       {g >= mince && <Highlight text="MINCE PIE" x={110} y={110} size={104} at={mince} seed={35} rot={-2} />}
-      <Cut name="tg_mince_A" x={px} y={360} w={800} land="none" />
-      {g < t.at('cattle feet') - 1 && <Slip text="meat" x={px + 300} y={470} at={t.at('meat in it') + 3} rot={-4} size={74} coral />}
+      <States srcs={['mince_pie_A', 'mince_pie_B', 'mince_pie_C']} at={[-999, t.at('had meat'), t.at('cattle feet') - 1]} x={PX} y={PY} w={PW} land="none" wobble />
+      {g < t.at('cattle feet') - 1 && <Slip text="meat" x={M(840, 300)[0]} y={M(840, 300)[1] - 110} at={t.at('meat in it') + 3} rot={-4} size={74} coral />}
       <PageScrap src={P.src} size={P.size} box={P.scrap} x={90} y={350} w={860} at={mince + 2} rot={-1.5} tag={TAG_SIMMONS} seed="mp">
         <Swipe lines={[P.feet]} from={t.at('cattle feet') - 1} to={t.at('cattle feet') + 7} seed="m1" />
         <Swipe lines={P.suet} from={t.at('beef suet') - 1} to={t.at('beef suet') + 8} seed="m2" />
@@ -197,7 +201,7 @@ const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
         <Swipe lines={[P.apples]} from={t.at('apples') - 1} to={t.at('apples') + 6} seed="m4" />
         <Swipe lines={[P.raisins]} from={t.at('raisins') - 1} to={t.at('raisins') + 7} seed="m5" />
       </PageScrap>
-      {PIE_LABELS.map(([text, w, x, y]) => <Slip key={text} text={text} x={x} y={y} at={t.at(w) - 2} rot={random(text) * 6 - 3} size={54} />)}
+      {PIE_LABELS.map(([text, w, sx, sy]) => <Slip key={text} text={text} x={M(sx, sy)[0] - text.length * 9} y={M(sx, sy)[1] + 30} at={t.at(w) - 2} rot={random(text) * 6 - 3} size={50} />)}
     </AbsoluteFill>
   );
 };

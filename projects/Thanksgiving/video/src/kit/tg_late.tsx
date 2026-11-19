@@ -208,11 +208,12 @@ export const EelLoop: React.FC<{x: number; y: number; w: number; at?: number; fi
     WebkitFilter: filter}} />;
 };
 
-/** Each cranberry frame's plate, measured in its own pixels (centre x, bottom y, width): the Flow frames drift, so frames are placed
- *  by their plate (as tests/cran_cut.py aligns them). Frame 6 is the payoff: the log standing on the plate with the can's ridges,
- *  the empty can beside it. */
-export const CRAN_SIZE: [number, number] = [842, 695];
-const CRAN_PLATE: [number, number, number][] = [[413.5, 626, 725], [414, 623, 728], [411.5, 626, 727], [418.5, 621, 715], [417.5, 613, 713], [370, 609, 658]];
+/** The cranberry set with the whole can in frame (img/flow/cran2/cran_1..6.png, each the full 1376 x 768 frame). Each frame's plate,
+ *  in its own pixels (centre x, bottom y, width): the plate moves a little between frames, so frames are placed by their plate (as
+ *  tests/cran_cut.py aligns the first set). Frame 6 is the payoff: the log standing on the plate with the can's ridges, the empty
+ *  can beside it. (The first set, img/flow/cran, crops the can at the right edge: kit/tg_props keeps it for the Ch01 close-up only.) */
+export const CRAN_SIZE: [number, number] = [1376, 768];
+const CRAN_PLATE: [number, number, number][] = [[686, 630, 665], [673, 663, 665], [678, 624, 665], [657, 642, 665], [571, 594, 665], [591, 637, 665]];
 /** Where frame n's source pixel lands on screen when its plate is centred at (cx, by) and `pw` wide. */
 export const cranMap = (n: number, cx: number, by: number, pw: number) => {
   const [pcx, pby, pww] = CRAN_PLATE[n - 1];
@@ -223,7 +224,7 @@ export const cranMap = (n: number, cx: number, by: number, pw: number) => {
 export const Cran: React.FC<{n: number; cx: number; by: number; pw: number; shadow?: boolean}> = ({n, cx, by, pw, shadow = true}) => {
   const m = cranMap(n, cx, by, pw);
   return (
-    <Img src={staticFile(`img/flow/cran/cran_cut${n}.png`)} style={{position: 'absolute', left: m.left, top: m.top, width: CRAN_SIZE[0] * m.s, height: CRAN_SIZE[1] * m.s,
+    <Img src={staticFile(`img/flow/cran2/cran_${n}.png`)} style={{position: 'absolute', left: m.left, top: m.top, width: CRAN_SIZE[0] * m.s, height: CRAN_SIZE[1] * m.s,
       filter: shadow ? 'saturate(0.9) drop-shadow(10px 16px 14px rgba(0,0,0,0.6))' : 'saturate(0.9)'}} />
   );
 };

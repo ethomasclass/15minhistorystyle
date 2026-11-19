@@ -15,6 +15,7 @@ import {bed} from '../kit/levels';
 import {Slip, Swipe, type Box} from '../kit/vox';
 import {ChBoard} from '../kit/tg_board';
 import {TagOn} from '../kit/tg_placeholder';
+import {Clip, States} from '../kit/tg_cut';
 import {Cran, Diorama, Eel, PageRead, PrintSlot, PropSlot, Strike, Tally, type Plane} from '../kit/tg_props';
 
 const N = words as Narration;
@@ -32,15 +33,7 @@ const LETTER_P60 = 'img/arch/mourts-relation-1622-letter-sent-from-new-england-p
 const TAG_MOURT = "Mourt's Relation, London, 1622 · Boston Public Library / Internet Archive";
 /** Only a 412 x 500 copy is free to use: a small print, never full frame. */
 const WINSLOW = 'img/arch/edward-winslow-portrait-1651-commons-small.jpg';
-const D1: Plane[] = [
-  {src: 'img/flow/d1_sky.png', depth: 0, band: [0, 1080], tone: '#1C3332'},
-  {src: 'img/flow/d1_far.png', depth: 0.25, band: [470, 260], tone: '#335652'},
-  {src: 'img/flow/d1_mid.png', depth: 0.55, band: [610, 300], tone: '#24403d'},
-  {src: 'img/flow/d1_front.png', depth: 1, band: [800, 300], tone: '#0D0C09'},
-];
-
 export const PLACEHOLDERS = [
-  ...D1.map((p) => ({file: p.src, scenes: ['Plymouth'], note: 'D1 eel river at dawn (FLOW_CUTOUT_PROMPTS §7), one plane, full-frame RGBA cut from black; the rejected d1_sky.jpg is not used. The front plane carries the wading figure and the coral basket.'})),
   {file: 'img/props/tg_fowl.webp', scenes: ['Translation'], note: 'Flow prop: a brace of wild fowl (ducks/geese), paper look, muted engraving colour, cut with prop_cut.py.'},
   {file: 'img/props/tg_deer.webp', scenes: ['Deer (x5)', 'Translation'], note: 'Flow prop: one deer (side view), paper look, muted engraving colour.'},
   {file: 'img/props/tg_pie.webp', scenes: ['NotThere'], note: 'Flow prop: a pumpkin pie, whole (it is struck out).'},
@@ -62,10 +55,13 @@ const Before: React.FC<S> = ({t}) => (
 /** Plymouth, autumn 1621: the eel-river diorama (placeholder planes) in a slow parallax. */
 const Plymouth: React.FC<S> = ({t, a}) => (
   <AbsoluteFill>
-    <Diorama planes={D1} a={a} b={t.at('About half')} drift={110} />
+    {/* our drawn scene (lookdev/tg.js tg_eel_river): the tidal river at dawn, the walk out onto the flat */}
+    <Clip name="eel_river" at={a} />
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.5) 0%, transparent 38%)'}} />
     <Highlight text="PLYMOUTH · AUTUMN 1621" x={120} y={114} size={84} at={t.at('Plymouth')} seed={23} rot={-2} />
     <Slip text="first year: survived" x={150} y={280} size={56} rot={-3} at={t.at('first year') - 3} />
     <Slip text="barely." x={170} y={390} size={60} rot={-2} at={t.at('Barely') - 2} coral />
+    <Tag text="Drawn scene · the figures are anonymous: no portrait of anyone at Patuxet in 1621 survives" />
   </AbsoluteFill>
 );
 
@@ -214,7 +210,9 @@ const NotThere: React.FC<S> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       <Note text="what wasn't there?" x={140} y={118} size={56} rot={-3} at={t.at("What wasn't there") - 3} color="#ffffff" />
-      <PropSlot name="tg_pie" x={150} y={290} w={460} h={340} rot={-2} at={pie - 1} note="pie" />
+      {/* the pumpkin pie, five registered stills: it loses a slice for each thing they didn't have, then is struck out */}
+      <States srcs={['pie/pie_0000', 'pie/pie_0001', 'pie/pie_0002', 'pie/pie_0003', 'pie/pie_0004']}
+        at={[pie - 1, t.at('real flour') + 2, t.at('butter') + 2, t.at('oven') + 2, t.at('oven') + 12]} x={-40} y={200} w={840} land="drop" />
       <Note text="pie" x={180} y={660} size={60} rot={-3} at={pie - 2} />
       <Note text="no real flour" x={190} y={750} size={42} rot={-2} at={t.at('real flour') - 3} color="#ffffff" />
       <Note text="no butter" x={190} y={815} size={42} rot={-2} at={t.at('butter') - 3} color="#ffffff" />

@@ -153,6 +153,55 @@ Cost, roughly: the loader and wrapper half a day; scenes 4 and 5 are re-dressing
 1, 2, 3 and 7 a day each; scene 6 a day and a half (new set, new figure outline, new pose); explainers 8 to 11 two to three hours
 each. About seven working days for all of it; scenes 4, 6, 8 and 9 first would change the video most.
 
+## Update, later on Nov 19: what changed after the first pass
+
+Three directions from the user arrived while this was being written. They overrule parts of the plan above.
+
+1. **No AI video; the four silhouette scenes are the Gilded Age kind.** The look-dev kit's code is now copied to
+   `projects/Thanksgiving/lookdev/` (every `.js`, `bridge.html`, `render.mjs`, `anim.mjs`, the READMEs; fonts from `brand/fonts`; no
+   media) and renders here: `NODE_PATH=/opt/node-tools/node_modules node anim.mjs <clip> <dir>`, stills with
+   `node tg_stills.mjs <clip> <dir> <t> ...`. This video's scenes are in `lookdev/tg.js`.
+
+   | Scene | State | In the cut |
+   |---|---|---|
+   | `tg_eel_river` (14 s): a peach and gold dawn over a tidal river, far trees in two planes, mist, a dugout, mud flats, reeds in three planes; a figure walks out and treads, four eels come up, a second figure brings a coral rush basket | Built, rendered (`video/public/clips/tg_eel_river.mp4`, 420 frames) | Ch 2 "Plymouth" (from 0 s) and Ch 1 "You wade out" (from 4.6 s), replacing D1 and the line drawing of a leg |
+   | `tg_victorian_kitchen` (12 s): firelit brick, the range and hood, a copper stockpot steaming, seven copper pans swinging on a rail, a jelly bag dripping into a bowl that fills, a clock running the hours, a dresser of moulds, a night window, a gas bracket; the cook stirs, a maid crosses with a bowl; the mould on the table is coral | Built, rendered (`video/public/clips/tg_victorian_kitchen.mp4`, 360 frames) | Ch 6 "To make one", replacing D3 |
+   | `tg_turtle_dock` | Not built | Ch 3 keeps its placeholder frame with the turtle cut-out on it |
+   | `tg_1950s_kitchen` | Not built | Ch 7 keeps the D4 placeholder planes behind the 1959 LOOK photograph |
+   | The dining hall with waiters (Ch 3) | Not built | |
+
+   The clips are placed with `Clip` (`kit/tg_cut.tsx`: `OffthreadVideo`, muted, holds its last frame). This is plan (a) by another
+   door: the kit runs as it is, in its own page, and Remotion takes the result. The live `GAScene` wrapper is still the better end
+   state (cues from our words instead of fixed clip times), and nothing here blocks it.
+
+   Limits to know about. The kit's people wear 1880s outlines, so the two 1621 figures are bare-headed solid silhouettes in
+   shirtsleeves, not Wampanoag dress: a period outline has to be added to `rig.js` before the scene is called accurate, and the edit
+   labels them "anonymous: no portrait survives". The eels are simple wriggling bands. The treading step is a new pose written for
+   this scene and has not been through the contact audit.
+
+2. **Break brand rules where they make a shot worse.** Rules broken so far, each one the user can veto:
+
+   | Rule | Broken where | Why |
+   |---|---|---|
+   | Scene palette is ink, teal-slate haze and cream light | Both drawn scenes: a peach, gold and blue dawn; firelight orange, copper and a blue night window | The teal-on-teal sets read as flat next to this video's teal desk; coloured light gives depth |
+   | Coral marks the one subject, a person | The rush basket and the jelly mould are coral | The subject of both beats is a thing |
+   | Props and archival pictures are black and white | All 24 Flow food and animal cut-outs keep their colour, a little muted | They were painted in colour and grey killed them |
+   | Graphics step at 12 drawings a second | The drawn scenes, the title card, the baton slam and the mark snap run at 30 | As the Gilded Age does |
+   | No full-frame pictures | The 1950s kitchen plate full frame under the casserole; the modern plate 900 px across | Bigger, fewer things per frame |
+   | Titles top-left | The title, the batons and the end screen are centred | The Gilded Age layout |
+   | The intro is its own card with its click track | Intro and title are one silent card | The Gilded Age layout, and no sound effects |
+   | Handwritten source tags, bottom-left corner | Tags boxed, inside the 8% area | Legibility on the coloured desks |
+
+   Not broken: no sound effects, tg_ cues only, no AI video, credits unchanged, nothing fake presented as a document, no likeness of
+   a real person, text inside the frame.
+
+3. **Flow batches 2 and 3 (stills only).** Every still is in the cut; the motion is ours. Besides the table under "Motion we
+   make": the mince pie is three registered states (whole, wedge, ingredients apart) with a slip on each ingredient; the casserole
+   is three states (full, half, empty) and then a hard cut to three cans; the pumpkin pie loses a slice for each thing the colonists
+   lacked; the aspic becomes the gelatin box in three steps; the white turkey dissolves toward the heavy bird as the counter runs
+   to 30; the cranberry stills use the new set with the whole can in frame (the Ch 1 close-up slide keeps the first, tighter set,
+   which reads better there). `States` in `kit/tg_cut.tsx` does the replacement.
+
 ## Implemented today (Remotion project)
 
 - `src/kit/ga_brand.tsx` (new): `TitleIntro`, `MarkSnap`, `BatonCard`, `EndSlots`, `Tape`, `ChunkMark`, `SAFE`, `SafeText`.
@@ -166,7 +215,9 @@ each. About seven working days for all of it; scenes 4, 6, 8 and 9 first would c
 - `src/ch/Ch02.tsx` to `Ch07.tsx`: baton cards (Showing Off, Mock Turtle, Hale Writes the Menu, Jell-O, The Test Kitchens, The
   Turkey). `src/ch/Ch08.tsx`: the 20 s end screen is `EndSlots`.
 - `src/Root.tsx`: `Intro`, `LogoBreak` and `EndScreen` compositions show the new pieces on their own.
-- `src/kit/tg_cut.tsx` (new): `Cut`, `CutLoop`, `Swap`, `Hand` for the 24 Flow stills; used in every chapter (list in the report).
+- `src/kit/tg_cut.tsx` (new): `Cut`, `CutLoop`, `States`, `Swap`, `Hand`, `Clip`; every Flow still is used in a chapter.
+- `lookdev/` (new): the Gilded Age kit's code, plus `tg.js` and `tg_stills.mjs`; `video/public/clips/` holds the two rendered scenes
+  (15 MB and 11 MB: track them with Git LFS if they are committed).
 - `tools/contact.mjs`, `tools/contact_sheet.py` (new): contact sheets of every chapter from one bundle.
 
 Not done, on purpose: no sound effects were added anywhere; the desk colours are untouched; nothing is committed; the full video

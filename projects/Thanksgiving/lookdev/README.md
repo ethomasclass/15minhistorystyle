@@ -1,0 +1,865 @@
+# Gilded Age series: look development (Nov 7, 2026)
+
+A test of a **2D side-scrolling silhouette style** for Chunk History's Gilded Age series, on one scene: the Brooklyn Bridge
+opening, May 24, 1883, with Michael Kelly (the composite family's eldest son) in the crowd. **Everything is drawn in code**
+(no AI images, no Veo): sky, skyline, bridge, boats, pier, crowd and Michael are SVG shapes, so they stay consistent from shot
+to shot, can be edited, and can be animated. The figures are rigs: limbs are separate strokes, so a walk or a wave just turns joints.
+
+| File | What it is |
+|---|---|
+| `scene.js` | The scene builder: five looks, five parallax planes (0.25 / 0.5 / 0.75 / 1.0 / 1.35), the figure rig |
+| `text.js` | On-screen text options: three section titles, five vocab cards, callouts + the composite label, the series question |
+| `bridge.html` | The page both load into; fonts come from `brand/fonts/` |
+| `render.mjs` | `node render.mjs [filter]` renders the frames to `out/` (1920x1080) |
+| `scroll.mjs` | `node scroll.mjs <dir>` renders the 9-second scroll test's frames; then `ffmpeg -framerate 30 -i <dir>/f%04d.png -vf scale=1280:720 -c:v libx264 -pix_fmt yuv420p -crf 20 out/scroll_test_720p.mp4` |
+| `sheet.py` | Converts frames to JPG and builds the four labelled sheets in `sheets/` |
+| `frames/`, `review/` | Copies of the 19 frames and the scroll test (`out/` is git-ignored, as in every project) |
+
+Checked against the bridge's real proportions (towers about 276 ft above the water, main span 1,595 ft, side spans 930 ft,
+deck about 119 ft up). One known cheat: a true side view hides the towers' Gothic arches; like most illustrations, we show them.
+Not yet decided: the look, coral meaning "a Kelly", which text styles, and whether "GOLD" gets its one off-palette gold leaf.
+
+## Round 2 (same day): looks 1 and 2, a living scene, detail that follows the camera
+
+- **Movement.** Everyone idles (breathing, weight shifts, glances); some cheer with a hat, point, wave or hop; the child on his
+  father's shoulders waves. Flags ripple, bunting sways, ships rock, the ferry's walking beam rocks and its smoke drifts, rowers pull,
+  gulls cross, mist drifts, the river shimmers, and at night the fireworks launch, burst and fall. Drawn motion steps at 12 drawings
+  a second; the camera and mist glide.
+- **Detail follows the camera.** A figure under about 400 px tall on screen is one solid shape; bigger, it gains a rim of light on the
+  lit side (at night it flickers with the fireworks); in a close-up (over about 600 px) it gains collar, lapel, buttons, cuffs, a
+  trouser crease, a hat band, hair, an ear, an eye that blinks, and on women a lace collar, buttons and skirt folds. Wides keep the
+  channel's solid-silhouette rule; close-ups loosen it on purpose.
+- **Vocab:** index card and x-ray chosen; the handwritten words are now orange, the drawn lines stay teal.
+- `anim.mjs <clip> <dir> [start] [end]` renders a clip's frames (clips: `alive_dusk`, `fireworks_night`, `closeup_night` in
+  `scene.js`). The three clips are in `review/`.
+
+## Round 3: Michael walks home
+
+`street.js`: a Lower East Side tenement street at dusk, about 1883, in look 1. The camera tracks Michael as he walks home from the
+refinery with a tin dinner pail. The rig now has a walk cycle (`walkAn`: thighs swing, the knee bends on the swing, arms
+counter-swing, the body bobs twice a stride), stepped at 12 drawings a second while the camera glides.
+
+Around him: five-storey tenements with cornices, fire escapes (required on tenements after 1867) hung with laundry, gaslit windows
+with figures in some, shop awnings and stoops; a pushcart peddler; a delivery wagon and a walking horse going the other way, its
+spoked wheels turning; telegraph poles strung with the overhead wires New York buried only after 1889; gas street lamps; factory
+smoke and a steeple beyond; people passing on both sidewalks and a boy chasing a hoop. Signs are blank on purpose.
+
+Clips: `walk_wide` (10 s, the whole street) and `walk_medium` (7 s, zoom 4.2, where his close-up detail shows). In `review/`.
+
+## Round 4: better reads
+
+- **Heads are profiles now** (skull, forehead, brow, nose, lips, chin, jaw) for every figure, so even a solid silhouette reads as a
+  face in profile; women get a softer brow and smaller nose, children a rounder, larger head.
+- **Expressions for close-ups**: neutral, smile, worried, awe, set (determined), plus blinks. Each is a brow, an eye and a mouth
+  (and a cheek crease for a smile); awe also drops the jaw in the silhouette. `out/` sheet: `7_round4`.
+- **The walk is locked to the ground** (`walkPhase` + `walkAn` in `street.js`): each foot stays planted while it is down, and
+  positions step with the drawings, so feet no longer skate.
+- **The wagon driver sits** (thighs forward, shins down, hidden by the box), and **the horse walks a four-beat gait** with the hind
+  legs folding the other way at the hock, tapering legs and a mane.
+- In the clips: Michael walks home tired and set, smiles and nods at the neighbour with the basket as she passes (she smiles back),
+  and blinks; at the bridge he smiles while he waves, then looks up in awe. The night crowd watches in awe or smiles.
+
+## Round 5: a reusable model, smooth motion, the tenement cutaway
+
+- **`rig.js`** now holds the whole character model (see `RIG.md`): tapered limbs, mitten hands with a thumb, boots, working skirts,
+  shawls, aprons, a maid's cap and apron, knee breeches, a skullcap, shirtsleeves and vest, props, lying down, twelve poses, the
+  cast, and one level-of-detail rule. Detail now arrives sooner (face from about 520 px tall instead of 680).
+- **Smooth motion.** Characters animate at the full frame rate (you found the 12-a-second steps blurred the faces); clips are now
+  encoded at 1080p.
+- **`cutaway.js`**: a six-storey tenement cut from the street to the back yard, about 1883. Roof (laundry, children, chimney smoke);
+  five floors of railroad flats with dark middle rooms; the Jewish neighbours' garment shop on the fourth floor; the Kellys on the
+  third; boarders, a cradle, lodgers asleep; a saloon at street level; a cobbler and a lodger in the cellar; the dark stair hall;
+  privies, a hydrant and laundry on pulleys in the yard; the rear tenement. Clip `cutaway_push` (14 s): the building alive,
+  Michael climbs the stairs, the camera pushes into the Kellys' flat, he comes in, his mother turns from the stove, his brother and
+  sister look up. A labelled still shows the teaching version (teal leader lines, orange handwriting).
+
+## Round 6: a worn, candlelit dumbbell tenement in the city
+
+- **Worn rooms**: faded wallpaper (three patterns), peeling plaster with the lath showing, water stains from the ceiling, cracks,
+  soot along the ceilings and above each flame, grime along the floors, worn floorboards; bare brick in the cellar and the hall.
+- **Period light**: small kerosene lamps and candles (a hanging lamp in the saloon); dim, flickering pools that stay inside each
+  room; the stair hall unlit. No electric light anywhere. (Script tie: the Kellys' lamp burns cheap kerosene from Rockefeller.)
+- **The dumbbell airshaft**: about 2 1/2 feet wide, open to the sky, down the middle of the building. The middle rooms and the
+  kitchens each get one small window onto it; garbage at the bottom, laundry strung across, stale air that hangs. (The 1879 law
+  required a window in every room; builders met it with shafts like this.)
+- **Fire escapes** on the front and back walls.
+- **The city behind**: two layers of rooftops, chimneys and cornices, steeples, smoking factory chimneys and a Brooklyn Bridge
+  tower in the distance, moving at their own depth as the camera pushes in. The wide shot starts farther back to show it.
+
+## Round 7: the two integration explainers (Episode 1's teaching core)
+
+`explainers.js`, two clips:
+- **`vi_explainer`, vertical integration (22 s).** The camera hops along Carnegie's chain and holds on each step while the narration
+  names it: an open-pit iron mine in Minnesota (a steam shovel swinging, ore cars climbing out), an ore dock and a long ore boat on
+  the Great Lakes, a bench of glowing coke ovens, the mill (a blast furnace, a Bessemer converter throwing sparks, a glowing rail
+  sliding out), his railroad (a train of new rails), the city that buys the steel (a frame going up, a crane). A teal line ties each
+  step to the last; the camera pulls back to one line running the whole chain; the tape title, "carnegie owned every step," and the
+  index card land.
+- **`hi_explainer`, horizontal integration and rebates (24 s).** Cleveland's Standard Oil works and 26 rival refineries in two rows
+  along the river. The camera drops into the railroad's freight office: the big shipper and a rival, and the clerk sliding money
+  back under the counter to the big one (a rebate), with a bar for each one's shipping cost per barrel. Back out: one by one, 22
+  rivals go dark, their smoke stops, a teal outline marks them, and a branch of Standard's teal pipeline reaches each one, with a
+  counter "BOUGHT: 22 OF 26 RIVALS." The tape title, the card, "rockefeller bought his rivals."
+
+Teal explains, orange labels, no coral (it means a Kelly). Labels are drawn in screen space so they stay readable when the camera
+pulls back. Note for the script: say "22 of his 26 rivals" to match the picture (research flag: some sources say 21).
+
+## Round 8: "vertical" made literal, bigger text, texture, the refinery
+
+- **Vertical, shown vertically.** After the side-scroll and pull-back, Carnegie's six steps fly out of the landscape into a column:
+  the iron mine at the bottom, the customers at the top, a teal arrow running up it ("raw material" at the foot, "the customer" at
+  the head). The horizontal clip now ends on a side-by-side card: VERTICAL (a column of different steps, "every step, one
+  company," carnegie) next to HORIZONTAL (a row of the same refinery, "one step, every rival," rockefeller).
+- **Bigger text everywhere in the explainers**: tags 28 px mono (was 20), handwriting 1.3x, index cards 36 px body and 52 to 64 px
+  titles, the shipping-cost chart 26 to 28 px. The camera also leans in on the rebate as the money changes hands.
+- **Texture, not flat**: `texDef` in `rig.js` mottles and grains whatever it's applied to, fixed to the world so it moves with the
+  surfaces (a broad patchy layer plus a fine grain, light and dark, kept inside the shapes); patterns for brick, planks, rivets and
+  hatching (`TEX_PATTERNS`); slow clouds across the skies. Applied to the explainers' hills and sets and to the refinery.
+- **`refinery.js`, the refinery tour (17 s)**: Havemeyers & Elder in Williamsburg, cut through like the tenement. The camera follows
+  the sugar (a cream stream running through the pipes): a ship unloading sacks at the wharf by hoist; melting tanks on the ground
+  floor; the pump and the riser to the top; cloth bag filters dripping; bone-char cylinders through two floors with men shovelling
+  from a catwalk; vacuum pans with gauges and glowing sight glasses; centrifugals spinning crystals out (Michael's floor, in coral,
+  wiping his brow: "hot work: ten hours or more"); barrels packed on the ground floor. Brick walls, plank floors, riveted iron,
+  daylight falling in through tall windows, Manhattan across the river. The floor order is the usual sequence, simplified (noted
+  in the file).
+
+## Round 9: materials instead of a filter, and the weaver's son
+
+- **The round-8 mottle filter is off** (it painted the same noise on everything; still available with `{force: true}`). In its place,
+  **`MAT` in `rig.js`**, a material for each kind of surface: `brick` (bricks that vary one by one, mortar, soot at the foot or the
+  roofline), `stone` (irregular blocks, each its own tone), `planks` (boards that vary board by board, knots), `iron` (a highlight so
+  cylinders read round, seams of rivets), `water` (darker with depth, ripples drifting at different speeds, glints), `smoke`
+  (billowing puffs that rise, swell, drift and thin), `ground` (pebbles and tufts along a surface), `trees` (firs and round crowns
+  along a ridge). `MAT_DEFS` holds their gradients.
+- Applied: the explainers (red ore bands in the mine pit, a lake that looks like water, a riveted iron ore boat, brick coke ovens and
+  mill, iron furnaces and stoves, brick refineries with iron tanks, a river, plank freight office, tree lines on every ridge, pebbled
+  ground) and the refinery (a brick back wall sooted at the top, plank floors, iron tanks, char cylinders and pans, water at the
+  wharf, a plank-hulled ship).
+- **`loom.js`, the weaver's son (18 s)**: Dunfermline in the 1840s. The camera starts in the Carnegies' stone cottage: William at
+  his hand loom (front view: warp threads, the shuttle flying across, the beater packing each thread), Andrew about 11 watching, his
+  mother mending by the hearth. It pans down the stone street (smoking chimneys, the abbey on its hill) to the steam weaving factory
+  of 1847 (brick, rows of power looms, belts from a turning line shaft, a boiler and a spinning flywheel, a tall smoking chimney,
+  women tending the looms), then back to the cottage: the loom has stopped, the father sits still, his son beside him. "a machine
+  took his father's trade." William and Andrew are solid silhouettes with no face detail, tagged (no photographs survive of the
+  father at work; the channel's rule for real people).
+
+## Round 10: Bessemer steel, the x-ray (shot 11)
+
+- **`bessemer.js` (18 s)**: a steel mill at night. A crane ladle pours melted iron into a converter lying on its side ("iron is
+  strong, but brittle"); the converter swings upright and the blow starts: a tongue of flame, a fountain of sparks, the shed lit up.
+  The camera pushes in and the shell turns to an x-ray (teal cut edge, a firebrick lining): air comes in through the hollow trunnion,
+  down the pipe to the wind box, and up through the holes in the bottom as teal bubbles; the carbon specks in the white-hot iron each
+  flare and vanish. A clock sweeps the minutes and a "carbon left" bar drains. "no fuel needed: the burning makes its own heat."
+  The x-ray closes, the converter tips and pours steel into a ladle; "the old way: a day or more / Bessemer: 10 to 20 minutes";
+  then the index card, with "cheap steel, so cheap rails" (the hand-off to shot 12, the rail-price chart).
+- Materials: a sooted brick shed with arched windows, riveted iron columns, crane girder and vessel plates, plank floor, smoke.
+- The men are anonymous workers, scaled so the converter reads about two and a half times a man's height.
+
+
+## Round 11: Episode 2 sets (the Vanderbilt ball, March 26, 1883)
+
+`mansion.js` (loaded by `bridge.html` after `bessemer.js`; uses `rig.js`, `street.js`'s horse, `explainers.js`' camera, labels and
+frame). Four clips, all in `review/ep2/` (720p) with JPG stills and a contact sheet per scene that puts our frames beside the
+reference images (`sheet_*.jpg`, built by `ep2sheet.py`). Stills: `node ep2stills.mjs <dir> name:clip:t[:labels]`.
+
+- **Decisions applied (Nov 8):** all street lighting is gas (the arc lamp is gone); police are 1880s NYPD (dark knee-length frock
+  coat, brass buttons, domed helmet, club at the belt); the sister works in the Vanderbilts' own kitchen; the ballpark is Brooklyn,
+  1884, with no price on screen; Alice stays the one pale glowing figure. Fixes: the dawn shot opens wide with sky above the
+  roofline; the cutaway roof has the exterior's iron cresting, crocketed stone gable and turret; hobby horses are one clean shape in
+  a lighter tone; the ballpark crowd mixes bowlers, caps, toppers, women (one with a parasol), boys, drinkers and standers.
+- **`fifth_night` (s1, 10 s).** Fifth Avenue at 52nd Street, looking west. Hunt's limestone chateau after the 1903 stereo view and
+  his drawings: steep slate roof with iron cresting, three Gothic dormers with pinnacles, the crocketed stone gable at the north
+  end, the corner turret corbelled out and capped by a tall slate cone, stone-mullioned cross windows under hood mouldings, carved
+  string courses, the oriel and balcony over the arched main entrance, lanterns either side, the areaway railing and barred
+  basement windows. Across 52nd Street, W. H. Vanderbilt's brownstone; St. Thomas's tower a block north. Every window blazes. A queue
+  of broughams (coachmen in top hats, lit carriage lamps, spoked wheels turning) advances one carriage every 4.6 s; at the canopy
+  a footman in livery holds the door and a costumed couple comes out from behind the carriage and up the carpet. Police hold a
+  crowd back on the house's sidewalk; onlookers in the foreground. Gas lamps along the curb. Slow side-scroll.
+- **`ball_cutaway` (s2/s3, 16 s).** The house cut open like the tenement. Attic: the servants' small rooms under the slates, empty
+  tonight, one candle. Third floor: the gymnasium, where the Sun says the quadrilles assembled, hobby horses waiting. Second floor:
+  supper (tables set, Delmonico's waiters, gasoliers). First floor: the dining hall (tapestries, the stone mantel), the great hall
+  with palms, the hobby-horse quadrille advancing and retiring, Alva as a Venetian princess (halo headdress, train, a dove) at the
+  foot of the grand staircase, Alice Vanderbilt as the Electric Light (a pale gown that glitters, a glowing battery torch raised)
+  and the next quadrille coming down the stairs. Basement, from Hunt's plan: kitchen (range under a hood, copper pans, cooks in
+  toques, the high areaway window), servants' hall (footmen in knee breeches), wine cellar with the butler, the dumbwaiter and the
+  service stair. The camera holds on the whole house, pushes to the great hall, then down into the kitchen, where the sister
+  (coral) carries a tray of ices and cakes to the dumbwaiter and back ("COMPOSITE CHARACTER" tag). A labelled still
+  (`s2_cut_labels`) shows the teaching version.
+- **`fifth_dawn` (s4, 9 s).** The same street at dawn: a pale sky wash, most windows dark, the lamplighter's
+  pole putting the gas lamps out one by one, carriages pulling away, a couple coming down the steps, and the sister climbing the
+  area steps from the basement door with a pail of ashes; she stops at the top and looks up at them. The camera eases in on her.
+- **`ballpark` (s5, 9 s).** A Sunday game in the mid-1880s: a roofed wooden grandstand with bunting and flags, open plank
+  bleachers (the cheap seats), a board fence; Michael and his sister in the bleachers (coral), a beer vendor in the aisle; the
+  pitch, the swing, the hit, the whole crowd up. "25 cents, and beer for sale."
+
+- **`kelly_flat` (s8, 9 s).** The contrast to the mansion: one room of the Kellys' flat (the same kitchen as `cutaway.js`), after
+  Riis's photographs. Faded, peeling wallpaper with lath showing, a water stain, soot above the stove; a cast-iron coal stove with a
+  steaming kettle and its pipe into the chimney; pots on a shelf, a basket, a washtub, a narrow bed; one small kerosene lamp that
+  flickers; the only window opens on the airshaft (a brick wall, a neighbour's window, washing across the shaft). The mother sews
+  piecework shirts by the lamp, a pile of finished ones on a chair; the younger brother bastes beside her. The sister comes in from
+  the dark hall in her maid's dress and puts her wages on the table ("her week's wages", "COMPOSITE CHARACTERS"). All coral.
+
+Real people (Alva, Alice, every guest) are solid silhouettes, `det: 0`, costume outline only.
+- **Carriages, fixed (Nov 8):** `msHorse` in `mansion.js` re-derives street.js's four-beat walk so the cycle length matches the
+  hoof's sweep while planted (checked numerically: a planted hoof's x holds to 0.1 px across frames); wheels turn at
+  distance / radius; the body bobs and rocks on elliptic springs with speed; carriages ease into the canopy and away; standing
+  horses rest a hind leg and toss their heads; the coachmen sway.
+
+## Round 12: the rest of Episode 2
+
+`ep2_more.js` (loaded after `mansion.js`). The sister is now **Nora Kelly, 17**. Five clips, 720p in `review/ep2/`, three stills each.
+
+- **`fittest_explainer` (ch5, 10 s).** A moving teal diagram in three beats. Nature: a sooty trunk, two dark moths hidden on it, a
+  pale one that shows; a bird takes the pale one ("fit" means suited, not best); a cockroach scuttles past ("a cockroach is very
+  fit"). The claim: society as a pyramid of silhouettes (top hats at the top, caps and shawls at the base), a teal arrow ("the
+  strongest rise", "the weak fall") and the index card "Social Darwinism". Sumner, 1883: A and B (top hats) put their heads
+  together, an arrow points at C (bowler, orange letter, "the Forgotten Man", the ordinary taxpayer), who hands a coin to D. The
+  quote on screen is from *What Social Classes Owe to Each Other*: "A and B put their heads together to decide what C shall be made
+  to do for D."
+- **`spencer_banquet` (ch5, 9 s), redone (it read as a church).** An 1880s restaurant banquet room: flat gilt-framed mirrors and
+  panels, square-headed windows with heavy draped curtains and tassels, gas chandeliers with glass globes, palms in tubs; two long
+  tables in white crowded with plates, glasses, bottles, silver platters, menu cards and flower centrepieces; waiters in white
+  aprons carrying trays, one pouring wine. A printed menu card opens the shot ("DELMONICO'S · DINNER TO HERBERT SPENCER · NOVEMBER
+  9, 1882"). Spencer stands at his place among the diners, not raised, napkin in hand (side whiskers, no face); glasses go up;
+  cigar smoke drifts in at the end. No pointed arches.
+- **`rich_leisure` (ch6, 10 s).** One side-scroll: a Newport shingle-style cottage with a veranda and tower, lawn tennis (a woman
+  in a bustled dress, a man in flannels and cap, underarm strokes, a net), onlookers with parasols; polo, four riders cantering
+  (the planted-hoof horse) with mallets swinging; then the water, three racing cutters heeling under huge gaff mainsails, topsails
+  and jibs, after the 1886 America's Cup photographs.
+- **`carnegie_library` (ch7, 9 s).** The Carnegie Free Library at Braddock (opened 1889) after the 1893 photograph: rough stone,
+  a round corner tower with a conical roof, steep gables, arched windows lit, an arched door; mill chimneys smoking beyond; workers
+  and a boy walking up. Dissolve to the reading room: shelves of books, warm lamps on long tables, working men with newspapers, a
+  boy reading, the librarian at her desk. "free to anyone."
+- **`nora_attic` (ch4, 9 s).** Nora's room at the top of 660 Fifth Avenue: the roof sloping in, a small dormer with the night sky,
+  bare boards, an iron bed, a washstand with pitcher and basin, one candle on a chair, her uniform (black dress, white apron and
+  cap) on a hook. Nora (coral) sits on the bed; the call bell on its spring rings (teal ring marks), and she gets up. "on call, day
+  and night." The room's details are typical of servants' attic rooms, not from a plan of this house (no attic plan found).
+
+## Round 13: Episode 3 draft sets (Immigration, about 1884)
+
+`ep3.js` (loaded by `bridge.html` after `ep2_more.js`; reuses `rig.js`, the camera/labels/frame from `explainers.js`, `msDefs`,
+`glowC` and the planted-hoof `msHorse` from `mansion.js`, `camAt` from `ep2_more.js`). DRAFTS for review, no script yet. Six
+10 s clips (720p) in `review/ep3/`, three JPG stills each, and a reference sheet per scene (`sheet_*.jpg`, built by `ep3sheet.py`,
+our stills beside the period references). References: `../ep3/research/REFERENCES.md`, files in `../ep3/public/img/ref/`.
+
+- **The neighbours' colour.** The Jewish family from the Russian Empire (composites, not Kellys; names to come) is drawn in one
+  accent, **muted wheat gold `#E2B864`** (`E3.acc`; detail tones `#7A5B22` / `#FFF0C9`), via `nb(castKey, opts)`. Coral stays only
+  for the Kellys. `nb` takes `scale` so the daughter (about 12) is taller than the rig's default girl (0.8 vs 0.56); the boy is 0.5.
+  Outdoors the father wears a cap and a long coat; at home a skullcap and vest; the mother a head scarf.
+- **`ep3_steerage`.** An early-1880s Atlantic liner side-on, cut open like `cutaway.js`: two raked funnels (smoke trailing aft),
+  three masts with furled sails and rigging, lifeboats and first-class strollers on the deckhouse; the first-class dining saloon
+  (gilt lamps, mirrors, long tables, stewards); steerage in the 'tween deck fore and aft of the boiler casing (two-tier berths,
+  lanterns that swing more as the sea gets up, portholes, people sitting, lying, standing); boilers with stokers and furnace glow,
+  the compound engine's crank, holds. The ship rolls and heaves, foam at the bow and in the wake, the sea see-through over the hull
+  below the waterline. The camera pushes from the whole ship into forward steerage: the family on a berth with a trunk, a rolled
+  feather bed and brass candlesticks; the daughter looks up toward first class. "a week or two at sea."
+- **`ep3_castle_garden`.** Outside (0 to 5 s), after the 1880s stereo views: the round sandstone fort with its broad low roof and
+  arched-window lantern, flags, the arched gate and a blank name board; the Battery's bare trees, lower Manhattan behind (Trinity's
+  spire); a two-deck barge full of people with bundles is towed in by a tug, and they walk onto the depot's pier. Inside (5 to 10 s),
+  after the NYPL engraving: the rotunda's gallery ring, offices round the wall, iron columns opening into fans of ribs, light from
+  the lantern; clerks on high stools at high desks; benches of waiting families; the family steps up and the father gives their
+  name ("name, age, where from, where to").
+- **`ep3_moving_in`.** A Brooklyn tenement front (brick, bracketed cornice, stone lintels, curtains, fire escapes with washing,
+  a stoop rising along the front, areaway windows), gas lamp, telegraph wires. A wagon at the curb (the horse stands, rests a hind
+  leg, tosses its head) holds a roped feather bed, a trunk, a samovar and chairs; the family carries them up the stoop one by one
+  (trunk on the father's shoulder, feather bed, samovar, candlesticks). A one-horse horsecar passes in front. Neighbours watch from
+  a stoop and a fire escape; the camera rises to Ma Kelly (coral) at her second-floor window, arms folded, turning her head to
+  follow them. "Ma Kelly is not so sure."
+- **`ep3_sweatshop`.** After Riis's Ludlow Street and Division Street photographs: one room, garments on a line overhead, the
+  window to the street; two of three treadle machines run (wheels and treadles turning); the father presses at his board (steam on
+  each stroke, irons heating on the stove); the daughter sews at a machine; the boy pulls threads by the pile; the mother finishes
+  by hand at the window. At 4.4 s the contractor (ink, bowler) brings a bundle, drops it, and leaves; the pile grows.
+  "home by night, workshop by day", "paid by the piece".
+- **`ep3_letter`.** The kitchen table by lamplight (samovar, candlesticks, kerosene lamp): the father writes, the mother looks on.
+  The letter rises in screen space, its unreadable Yiddish-style script written **right to left**, and a prepaid steamship ticket
+  slides in on top. Then the map (Natural Earth 1:50m land, embedded as `E3_LAND`, equirectangular squashed by cos 48°): the
+  Russian Empire hatched; an envelope carries the letter east from New York to "home" (a town in the Pale); then the cousin's route
+  draws west in teal dots, by rail to Hamburg, by steamship (a little ship icon) to New York.
+- **`ep3_nativism`** (added Nov 9 on request). The desk layer: creased prints (`ep2/tools/crease.py` into
+  `../ep3/public/img/desk/`) land one by one either side of a teal rule, "SHUT OUT BY LAW" (the Chinese Exclusion Act text,
+  Frank Leslie's "The Only One Barred Out", 1882) and "LET IN, BUT MOCKED" (Opper's anti-Irish Puck cover, 1883; Keppler's "Looking
+  Backward", 1893), each with a mono caption; Lazarus's 1883 line on a card as the contrast; the camera pushes into "Looking
+  Backward" with its caption as the pull-quote. Then the irony in the family: Ma Kelly at her window. "not long ago, the cartoons
+  mocked the Irish" / "now Ma Kelly watches the newcomers". Caricatures are shown briefly and small, never animated or mocked;
+  REFERENCES.md flags which prints carry slurs or caricatures.
+- `bridge.html`'s `draw()` now also waits for `window.E3_PRELOAD` (the desk prints) and two animation frames, so `<image>` prints
+  are decoded before a screenshot.
+
+Known draft limits: the steamship is a generic type (no plan of a specific Hamburg-America ship found yet); the barge and horsecar
+are generic; the Brooklyn street has no Brooklyn-specific reference; Ma's folded arms read as hands at her chest in profile.
+
+### Round 13b (Nov 9): surfaces, the Ep 1 building, room scale, name changes
+
+Applied the user's feedback and decisions (neighbours stay wheat gold `#E2B864`; The Wasp's 1881 cartoon left out; no "No Irish
+Need Apply" window sign; Ma Kelly came over about 1870; route rail to Hamburg, steamship to New York, home town unnamed).
+
+- **Surfaces.** Every standing figure now gets a contact shadow on its floor (`e3Shadow`, built into `nb`, `kel` and `e3Person`;
+  sitting, lying and window figures skip it or take `floorY`). Ship: plank decks in perspective on the saloon, 'tween deck and hold
+  levels and on the deckhouse roof, the black deck sections below them, chairs under the first-class diners. Rotunda: flagstones
+  running back to the wall. Street: flagstone sidewalk, curb, cobbles. Rooms: a back wall with a baseboard, worn boards receding to
+  it, a plaster ceiling with a crack and a stain, the cut side walls and slabs in black (`e3Room`).
+- **`ep3_moving_in` rebuilt on Episode 1's tenement.** The row is drawn with `street.js`'s own `tenement()` (same facade colours,
+  bracketed cornice, three windows a floor with lintels, fire escape and washing, the saloon's awning at street level, doorway and
+  stoop) and `stFar()` behind; coordinates are street.js's. The Kellys' building has five floors of flats over the saloon as in
+  `cutaway.js`, and Ma Kelly is at the middle front window of the third floor, where cutaway.js puts the Kellys. The family walks
+  from the wagon, climbs the stoop's four steps and goes in at the door. Horsecar and wagon rescaled to the facade.
+- **Folded arms that read.** `kel(..., {fold: true})` poses the arms (elbow forward, forearm back across the chest) and draws
+  `foldedArms()` over them with a darker crease, so the fold reads in silhouette.
+- **Room scale.** `RM`/`e3Room()`: a front room about 12 ft wide with an 8 1/2 ft ceiling at about 84 px to the foot (a man 480 px).
+  `ep3_sweatshop` is now that room: stove and pressing board by the door, the father pressing, two treadle machines nearly touching
+  (the daughter and the mother at them), the bed against the back wall heaped with cloth, coats strung just under the ceiling, cut
+  cloth piled on the floor, the boy pulling threads at their feet, the contractor coming in through the door. The letter's kitchen
+  uses the same room (stove, airshaft window, shelf, table with samovar, candlesticks and lamp).
+- **Castle Garden.** The barge is 1.45x bigger and lands in view at the depot pier.
+- **`ep3_nativism`.** The ending note now reads "in 1883, Puck was still mocking the Irish" (Opper's cover is 1883), then "now Ma
+  Kelly watches the newcomers", on the new window.
+- **New: `ep3_names` (10 s).** At the Castle Garden desk the clerk copies a row from the ship's passenger list ("WRITTEN IN
+  HAMBURG") into the register ("COPIED FROM THE LIST"), a teal arc carrying it across, while the name changes from unreadable
+  Hebrew-style letters to the Hamburg clerk's spelling, RABINOWITSCH ("the clerk copied the name; he did not change it"). Later,
+  at school, the daughter crosses out Rivke on her slate and writes Rebecca. Later still, the father's shop sign RABINOWITZ becomes
+  RABIN ("most name changes came later, made by families themselves"). The surname is invented for the composite family.
+  Sources and the script wording are in `../ep3/research/REFERENCES.md`.
+
+### Round 13c (Nov 9): contacts, and the "Looking Backward" read
+
+- **Contacts are solved, not placed.** `ep3.js` now carries forward kinematics and two-bone IK that match `rig.js`'s limb chain
+  exactly (`E3K.hand`, `E3K.foot`, `E3K.armIK`, `E3K.legIK`, with lean and bob). Held things are drawn at the grip
+  (`holding`, `hanging`); hands that work on something are solved onto it (`reach`); feet are solved onto floors, treads and
+  treadles (`plant`, `sitOn`); walkers use `stepWalk`, which plants each foot on a foothold until it lifts (on the stoop each
+  foothold is a tread). Every contact is logged to `window.E3LOG` (target vs reached) each frame.
+- **Audit** (every other frame of every Ep 3 clip, `scratchpad` script `verify.mjs`): holds and hand contacts 0 px error; planted
+  feet 0 to 0.1 px error and 0 to 0.1 px drift while planted; seated feet 0 px (steerage berth sitters 2 px at a 72 px figure).
+  The rig's palm is drawn within about 5 px of the grip at a 400 px figure (the mitten's own offset).
+- **Rig change (backward compatible):** `rig.js` treats `an.standing` as "not seated" when choosing a woman's skirt, so a woman
+  climbing a stair (thigh raised past 60 degrees) keeps her standing skirt. Unset everywhere else, so Ep 1 and Ep 2 render as before.
+- **`ep3_looking_backward` (25 s, new).** Keppler's *Puck* centre spread of January 11, 1893 on the desk, then a guided read:
+  the five men in top hats ringed and an arrow to the newcomer they block; a teal line from each man up to his shadow (the poor
+  immigrant he or his father was; "THE SHADOWS HAVE NO LABELS"); the caption underlined and set as a quote card; arrows from the
+  shadows down to the men and "KEPPLER WAS AN IMMIGRANT TOO: BORN IN VIENNA, 1838"; a "Look again" question card. Facts and a
+  65-word draft narration timed to the beats: `../ep3/research/LOOKING_BACKWARD.md`. Source image is the 1280 px Commons copy, so
+  the pushes (to 2.35x) are soft; swap in a larger scan when one can be fetched.
+
+## Round 14 diagrams (Nov 12): Episode 3 explainers
+
+`ep3_explain.js` (loaded by `bridge.html` right after `ep3.js`; reads, never edits, `ep3.js`'s `E3`, `E3_LAND`, `E3P`,
+`E3_RUSSIA`, `nb()` and `e3Defs`, plus `tag`, `penS`, `tapeS`, `card`, `icon`, `frame` from `explainers.js`). Nine diagram clips,
+720p in `review/ep3/` (`<clip>_720p.mp4`), two or three stills each (`xp_<name>_N.jpg`, e.g. `xp_pale_map_1.jpg`). The look is the explainer board: near-black
+teal with faint graph-paper squares, mono tags on dark boxes, orange torn strips (Abril) for titles, Nanum Pen handwriting, the
+series' index cards for vocabulary. Every chart builds in steps; teal draws and explains; orange is strips and handwriting; the
+Rabinowitzes (and Jewish arrivals) are wheat gold; the Kellys coral; everyone else ink or a muted grey-green.
+
+| Clip | Ch | s | What builds |
+|---|---|---|---|
+| `ep3_pale_map` | 2 | 14 | The letter map's projection zoomed on eastern Europe: the Russian Empire hatched ("RUSSIAN EMPIRE"), the Pale of Settlement traced in teal dashes and shaded (the 15 western provinces, hand traced and rounded; tag "ABOUT 1884 · BORDERS APPROXIMATE"), "where most Jews had to live", the orange "HOME" dot; then three index cards stack on the right: Pale of Settlement, Pogrom, May Laws (glossary wording). |
+| `ep3_chain` | 3 | 15 | A numbered story, New York (left) and the old country (right); each arrow draws in and its own label lands beside it. Westbound arcs stack in time order: 1. Yankel goes first (1882), 4. the family follows (1884), 5. later: a cousin (dotted, not yet happened). 2. WORKS, SAVES sits under the New York Yankel (pressing board, coins). 3. letters, money, a ticket: the one eastbound arc, under the sea, labelled below it; The Sun, June 11, 1884 shipping ads cropped and laid in, "Steerage, $18" ringed, tag "$18 ≈ $650 TODAY". Cards: Chain migration, Prepaid ticket. (Restructured Nov 12 after review: steps were out of order and two arcs were unlabelled.) |
+| `ep3_stat_cg` | 4 | 10.5 | CASTLE GARDEN strip and a small fort; "1855 to 1890"; "≈ 8 MILLION PEOPLE"; three figures, two turn teal; "2 OF EVERY 3 / IMMIGRANTS" with "WHO CAME TO THE U.S. IN THOSE YEARS". |
+| `ep3_old_new` | 5 | 15 | The old vs new chart rebuilt on cream notebook paper (no textbook image): headers, the 1880 line as an orange torn strip with an "1880" scrap, then the five rows one at a time; row 4 reads "SEEN AS similar ... / SEEN AS different" with "SEEN AS" underlined in teal, the row highlighted, and "WHO DECIDED? / NATIVE-BORN PROTESTANT AMERICANS"; the Kellys (four coral figures) slide into the old column and a teal arrow leads to "except the Irish: Catholic" under "Mainly Protestant". |
+| `ep3_decades` | 5 | 13.5 | Bars grow one by one: 1870s 2.8 M, 1880s 5.2 M (teal), 1890s 3.7 M, 1900s 8.8 M (source tag: DHS Yearbook, Table 1); "1884" on the 1880s bar, an arrow to "1 in 50": fifty figures, one gold and ringed, "ABOUT 11,000 OF 500,000+ WERE JEWISH". |
+| `ep3_piecework` | 7 | 15 | BIG COMPANY (cuts the cloth) → CONTRACTOR (ink, walking with bundles) → THE FAMILY'S ROOM (gold: presser, machine, finisher, thread puller); coins "PAID BY THE PIECE"; FINISHED GARMENTS ride back; cards Contractor and Sweatshop; then a Riis card line by line: "knee pants: 70¢ a dozen", "beginners: $2 to $5 a week", "sunrise to 9 p.m.", tag "JACOB RIIS, 1890". |
+| `ep3_laws` | 8 | 15 | WALLS AND WELCOME: a 1882 to 1887 line; walls above in ink cards with orange strips (1882 Chinese Exclusion Act, "first major law to keep out a group by nationality"; 1882 head tax + "public charge"; 1885 contract labor ban), welcome below in teal ("The New Colossus" 1883; the pedestal fund 1885 to 1886, a teal span on the line; Statue dedicated October 28, 1886). Held complete, then the line steps back and the Nativism card lands. |
+| `ep3_pedestal` | 8 | 11 | THE PEDESTAL FUND: "100,000+ / PEOPLE CHIPPED IN", "1885"; 100 figures fill a 10 x 10 grid (EACH FIGURE = 1,000 PEOPLE); "most gave $1 or less" and a row of dollar coins. |
+| `ep3_tenement_plan` | 6 | 11.5 | One floor from above, flat and schematic after the 1879 dumbbell plans: outline draws on, four flats (FLAT 1 to 4) of three rooms, only the street and yard rooms lit, the inside rooms go dark ("inside rooms: no windows"); the hall with stairs and ONE SINK FOR THE WHOLE FLOOR; the Rabinowitzes' flat outlined in gold, four gold dots in one room and a boarder in the kitchen, "THE RABINOWITZES: 4 PEOPLE + A BOARDER". |
+
+Notes and decisions:
+- **Numbers are as briefed.** "$18 ≈ $650 TODAY" is the brief's conversion (the script itself says "about a month's pay for a
+  laborer"; RESEARCH found no dollar fare for Hamburg, so the $18 is the 1884 Sun ad's Anchor Line steerage rate, ringed on screen).
+- **The law timeline runs 1882 to 1887, not 1882 to 1893.** All the briefed events fall between 1882 and 1886; a linear axis to
+  1893 left most of the width empty and crowded the cards. If 1891 (the Immigration Act) and 1892 (Geary Act) are wanted, the
+  axis can be extended and two wall cards added (both are in RESEARCH 4.3 and 4.7).
+- **The Pale outline is approximate** (15 provinces, Congress Poland left out as in most maps of the Pale); it says so on screen.
+- **Text audit:** `audit_text.mjs <clip> [step]` (adapted from `ep2/edit/audit_text.mjs`) samples a clip every 0.2 s and reports
+  any visible text whose rotated font box leaves title safe (96 / 54 px) or overlaps another text, texts on screen under 2.5 s,
+  and how long the final set of texts is held. Final pass: no OUT, no OVERLAP, no SHORT on all nine; the complete chart is held
+  3.0 to 5.2 s at the end of every clip.
+
+## Round 14 map (Nov 12): ep3_enclave
+
+`ep3_map.js` (loaded by `bridge.html` right after `ep3.js`; uses `rig.js` helpers, `tag`/`card`/`frame`/`SAFE` from
+`explainers.js`, `e3Defs` and `drawOn` from `ep3.js`). One clip for chapter 6, "The Lower East Side": **`ep3_enclave`**, 57 s,
+720p in `review/ep3/ep3_enclave_720p.mp4`, stills `en_*.jpg`.
+
+- **A real 3D model, drawn as SVG.** World units are feet (x east, y north, z up). A camera with target, yaw, pitch and distance
+  (keyframes interpolated by a monotone cubic, so it never overshoots or stops dead) projects every point in perspective
+  (focal 2400 px) with near-plane clipping. Each building is a box whose faces are back-face culled and shaded by a cream light
+  from the south-west; buildings, pushcarts and people are sorted by distance from the camera (painter's algorithm; lots share a
+  25 ft grid, so the sort is exact for them). Far things mix into a teal-slate haze; the whole picture gets the paper mottle
+  (`texDef`) and grain.
+- **The Lower East Side model.** Three blocks by three rows, two rows of 25 x 85 ft lots per block (4 to 6 floors: store 13 ft,
+  floors 12 ft), yards between. Tenements carry window grids, a dark cornice with a lit lip, shop windows and sloping awnings, fire
+  escapes with railings, ladders and washing on the street front, a chimney on the roof. Hester Street has pushcarts end to end
+  along both curbs (some with umbrellas, goods heaped on top) and a crowd; the other sidewalks have walkers. Flat ghost blocks run
+  out into the haze. The Rabinowitzes' building (wheat gold, 6 floors) faces Hester; its neighbours are held to 5 floors so its
+  open top floor can be seen from above.
+- **Beats, keyed to the narration.** The clip starts at narration second 23.0 (`EM_T0`); every cue is a word start time from
+  `ch06_the_lower_east_side.words.json`, kept in `EM_CUE` so a re-voice is a table edit. Each place LIFTS 82 ft (enough to clear
+  the roofs, so it floats free) with a small overshoot, a soft shadow and a dark vacated lot, turns pale with a cream edge (blended in as it rises, so nothing pops), and a
+  teal arc draws from the gold building's roof to it. Tags sit on cream leader lines; a small solver keeps them apart, off the
+  fixed place tag, headline and card, and inside `SAFE`.
+
+  | clip t | narration | beat |
+  | --- | --- | --- |
+  | 0 to 1.1 | "It felt ... like home" | the model from high up, "THE RABINOWITZES" |
+  | 1.1 | "That was the point" | Hester's market lifts: "PUSHCART MARKET" |
+  | 3.2 to 10.5 | "enclave: a neighborhood ..." | the camera slides the map left, the vocab card "Enclave" |
+  | 11.3 | "found work through a man from his own town" | a workshop lifts: "A JOB THROUGH A MAN FROM HOME" |
+  | 14.7 | "kosher meat" | "KOSHER BUTCHER" |
+  | 16.3 | "a little synagogue upstairs over a shop" | "SYNAGOGUE UPSTAIRS OVER A SHOP" (its first floor up has tall bright windows) |
+  | 19.9 to 29.2 | "landsmanshaftn ... sick ... doctor ... grave" | a hall lifts: "LANDSMANSHAFT", then "A SICK FUND · A DOCTOR · A GRAVE" one by one |
+  | 30.2 to 32.8 | "Irish families had built the same thing" | pull back, pan across the East River (ferry), headline tag |
+  | 33.6 to 35.3 | "a parish, a saloon, a savings bank" | Brooklyn, coral Kelly building: "PARISH CHURCH", "SALOON", "SAVINGS BANK" |
+  | 38.7 to 41.7 | "Ma Kelly's neighborhood was an enclave too" | both models side by side: "LOWER EAST SIDE", "THE KELLYS' BROOKLYN / AN ENCLAVE TOO" |
+  | 40.7 to 44.4 | "But the Lower East Side had a cost" | lifts settle, lines fade; the camera flies back and dives, orbiting 90 degrees |
+  | 44.3 to 46 | "buildings called tenements" | the gold building's top floor and roof lift off and slide away: the floor plan |
+  | 47.7 | "one sink in the hall for the whole floor" | the sink ringed in teal: "ONE SINK IN THE HALL / FOR THE WHOLE FLOOR" |
+  | 51.3 | "slept four in one room" | four gold sleepers (parents on the bed, two children on a floor mattress), room outlined: "FOUR IN ONE ROOM" |
+  | 53.0 to 57 | "a boarder in the kitchen" | the boarder on a cot by the stove (ink): "A BOARDER IN THE KITCHEN" |
+
+- **The floor.** A dumbbell tenement of the 1880s (the 1879 law's shape: airshafts pinch the middle), 25 x 85 ft: four flats of
+  three rooms (front room, kitchen, small dark inner bedroom), the hall and stairs down the middle, two water closets, ONE sink. The
+  Rabinowitzes have the front flat on the west side, tinted gold (front room with two sewing machines and a cutting table: the
+  next chapter's sweatshop; kitchen with stove, table and the boarder's cot; bedroom). The other flats sleep ink families. Walls
+  are cut at 3.4 ft so the rooms read from above.
+- **Brooklyn.** Two blocks by two rows, lower buildings; the Kellys' building is coral (saloon floor plus five floors of flats,
+  as in `cutaway.js`). Parish church (nave, gable roof, tower and spire, lancet windows), a corner saloon, a savings bank with
+  columns and a pediment.
+- **Colour.** Gold only for the Rabinowitzes (their building, their flat, the four sleepers); coral only for the Kellys' building;
+  everything else ink or slate; teal only for the network arcs, the room outlines and the sink ring; no orange needed. No in-world
+  writing. Map-scale people are ink strokes with a head (at this size there are no feet to place).
+
+Known limits: the blocks are a generic grid, not surveyed Hester Street lots; the Emigrant Industrial Savings Bank stood on
+Chambers Street in Manhattan, so the Brooklyn bank is a stand-in for "a savings bank started by Irish immigrants"; the corner
+saloon is separate from the saloon under the Kellys (Ep 1), so both can be read; from straight above, map-scale people read as
+dark pills; the network lines are drawn over everything (a diagram, not occluded).
+
+QA (three passes, stills read at about 30 timepoints plus a frame-difference pop check over all 1710 frames): lifted places first
+rose only 42 ft and were hidden by the rows in front (raised to 82 ft); tags collided with the place tag and the headline and ran
+off the bottom (the solver now treats fixed text as obstacles; Brooklyn and side-by-side framings moved); the gold roof slab first
+rose into the lens and covered the plan (it now slides away north); the open building was sorted to the front and its side showed
+through its neighbour (fixed); the ink-to-pale switch at each lift start popped (now blended). Clip: 57 s at 30 fps.
+
+## Round 14 (Nov 12): Episode 3 scenes for the script
+
+The drawn scenes `ep3/script/VISUALS.md` asks for, in `ep3.js` (new code at the end of the file, under "Round 14"). The family
+has names now: Yankel (father), Sore (mother), Rivke (12), Shmuel (7), still the cast keys `nfather`, `nmother`, `ndaughter`
+(scale 0.8), `nson` (scale 0.5), all wheat gold; the Kellys coral; everyone else ink. 720p clips in `review/ep3/`, three stills
+each, and a reference sheet per scene (`sheet_<name>.jpg`, our stills beside period and Flow prop references).
+
+New helpers (all contacts go through E3K and are logged to `E3LOG`):
+- `e3Clasp(A, wa, B, wb, P, name)`: two hands meet at one point; both arms are solved onto it and the hand to hand distance is
+  logged as a `pair`. Used for every hand held between two people.
+- `e3Settle(fo, u, name)`: after a walk stops a stride apart, the back foot steps up beside the front one (front foot planted).
+- `e3Move(...)`: a hand on its way somewhere, solved like `reach` but logged as `move`, so the audit only counts real contacts.
+- `e3LongShadow(body, G)`: a low-sun shadow, the figure sheared along the ground and flattened; `e3TrunkAt(hx, hy)`: the trunk
+  drawn from its top handle; `e3HugBed(fo)`: a roped feather bed hugged with both hands under it; `e3Trap`: trapezoid travel.
+- `cgOutside(t, {city: false})`: Round 13's Castle Garden drawing without the Manhattan skyline (the fort from the Battery side).
+
+Scenes:
+- **`ep3_runner` (ch 1 cold open + ch 4 payoff, 23 s).** The Battery at dusk, May 1884: low sun on the right, long shadows
+  thrown left, warm rims, the Jersey shore and ships at anchor (masts, yards, stays) on the harbour, the fort (Castle Garden,
+  small, behind the depot's iron fence with its gate standing open), a ferry house on the right with arched slips, a blank sign
+  board with scribbles and a walking-beam ferry. Sore walks out with the trunk hanging from her near hand and Shmuel by the other
+  (`e3Clasp`), Rivke behind hugging the roped feather bed. The man in the good coat (ink, bowler) waits at the lamp post at the
+  right edge, a pure silhouette (no face detail) until he comes close; he walks up (5.6 to 8.4 s), smiling once the camera is in,
+  stoops and takes the trunk out of Sore's hand (both hands on the handle, then it swings across to his far hand), offers his
+  near hand, and Shmuel lets go of his mother, takes two steps and takes it (exact clasp at 11.3 s). Hard freeze 11.5 to 14.5 s:
+  a white flash, the frame dims, a teal ring on the two hands, "he has never heard of Yankel Rabinowitz", "NEW YORK CALLED THEM
+  RUNNERS". Cut through black to the payoff ("A FEW MINUTES LATER"): he leads Shmuel by the hand along the Battery with the
+  trunk, Sore follows with the feather bed; Rivke looks back at the ferry slips (teal arrow, "the ferries were this way",
+  "heading away from the ferries"), turns and runs, takes Shmuel's other hand (clasp) and pulls; he lets go, drops the trunk and
+  hurries off left out of frame; Yankel pushes through a crowd from the ferries (the crowd leans out of his way); "the man in the
+  good coat was gone". Nothing readable in the world: the ferry sign is scribbles.
+- **`ep3_shtetl` (ch 2, 18 s).** (1) Friday night: outside the small wooden house, the window with two brass Sabbath candles
+  lit (after the Flow candlesticks and challah props); the house opens up like `cutaway.js`: the whitewashed clay oven, the white
+  cloth, the challah under its embroidered cover, Sore circling her hands over the candles and covering her eyes, Rivke at the
+  table, Yankel and Shmuel seated (Shmuel's feet hang: a seven-year-old on a grown-up's chair; no foot contact is claimed).
+  (2) Spring 1881, night: far roofs burned to black rafters on the horizon against a red glow, smoke and sparks; no people, no
+  violence; Rivke at the dark window of the house in the foreground. (3) Dawn, 1882: Yankel leaves with a bundle on a stick,
+  steps down from the sill, turns and waves, walks off; Sore at the door post with Shmuel by the hand, Rivke on the step waving.
+- **`ep3_hester` (ch 6, 21 s).** A side-scroll down a pushcart market on Episode 1's tenement row (`street.js` `tenement()`):
+  signboards in Hebrew-style letters that cannot be read (`hebrewish`), carts end to end at the curb after the Flow pushcart
+  (plank box, two big spoked wheels, legs, long handles) with pots, apples, bolts of cloth, used coats on a pole; herring and
+  pickle barrels; a vendor behind each cart with a hand on its edge; shoppers bargaining in front (hands out, then pointing); a
+  goat on a rope held by a boy. Yankel walks ahead; Rivke follows, stops at the goat (feet settle together), and hurries to
+  catch up. Texts: "Rivke's first morning", "pushcarts, end to end", "for a second, it felt like home", "an enclave". Then the
+  same night: the room (`e3Room`, 84 px to the foot) and a kitchen beside it; Yankel and Sore asleep in the bed, Rivke and Shmuel
+  on the feather bed on the floor, the boarder (ink) on two chairs pushed together in the kitchen under his coat.
+- **`ep3_knock` (ch 9, 16 s).** The Kellys' flat in the evening, kelly_flat's look at room scale (wallpaper, airshaft window
+  with washing, coal stove and kettle, shelf of pots, the lamp, a pile of shirts), the door in the cut wall and the dark hall
+  outside with a gas jet. Sore and Rivke come along the hall; Rivke knocks three times (her knuckles touch the door at each
+  tap); Ma gets up from her sewing (feet planted, then under her), crosses the room, takes the handle and pulls the door open,
+  then folds her arms. Rivke translates, turning to her mother and back; Sore asks with an open hand ("a ticket, for her
+  sister"); Ma, arms folded, listens, then unfolds them and nods ("Ma knew exactly where").
+- **`ep3_moving_in` updated (ch 9, now 15 s).** Tag "SPRING 1886". Yankel wrestles the trunk at the foot of the stoop (its back
+  end on the flags); Michael Kelly (coral) comes home along the sidewalk, crouches and takes the other end in both hands (handle
+  and corner); they lift it level and carry it up the stoop between them, Yankel ahead with his far hand on the front handle;
+  the trunk tilts with the treads. Sore, Rivke and Shmuel wait out of sight and follow with the feather bed, samovar and
+  candlestick. The camera rises to Ma at her window, arms folded ("Ma Kelly is not so sure").
+- **`ep3_looking_backward` updated.** Now the 3000 x 1983 Internet Archive scan
+  (`ep3/public/img/g_nativism/keppler_looking_backward_puck_1893_ia_sim_puck_827.jpg`), referenced in place (no copy), cropped to the
+  picture and caption (black margins and the PUCK masthead left out) and shown at its own aspect (1254 x 809). Every mark was
+  re-measured on the scan (pixel coordinates in `LBM`: the five men's heads and hats, their shadows' heads, the centre man's raised
+  hand, the newcomer's face, the caption line) and mapped to the desk through the crop, including the print's 0.6 degree turn on
+  the desk. The camera's shadow and caption pushes were re-aimed. The old 1280 px copy's offsets are kept as `LBP` (carried onto
+  the scan by an OpenCV ECC affine fit, correlation 0.86) for anything still measured on it.
+
+QA (two rounds of renders and stills, frames read at several times per clip):
+- **Round 1** (stills at 6 to 10 times per clip): the payoff ran off the promenade (sky showing under the floor), the ferry house
+  was out of frame, Sore crouching pushed her skirt through the floor (she now holds the trunk and the runner takes it from her
+  hand), the freeze drained the family's gold (now only dimmed), Rivke's bed hands and Shmuel's chair feet could not reach
+  (bed regrabbed; his feet now hang), the Shabbat window flames had no contrast, the boarder overhung his chairs, the fish floated
+  by a child, Michael's first takes of the trunk were out of reach, walkers stopped mid-stride (`e3Settle`), Ma's door handle
+  passed through her (she now pulls the door to about 30 degrees and lets it swing on).
+- **Round 2** (after a full render, plus the container restart): every clip re-rendered from the final code and checked as a
+  contact sheet of frames every 2 s; text audit (`audit_text.mjs`, every 0.25 s) found four short texts in our new scenes and five
+  in the Round 13 `ep3_looking_backward` read (all now at least 2.5 s; the read's beats were overlapped to make room). Final: no
+  OUT, no OVERLAP, no SHORT in all six clips.
+- **Contact audit** (every other frame, scratchpad `verify.mjs`; `move` hands excluded, they touch nothing): holds 0 px; hands
+  and hand to hand pairs 0 to 0.22 px; planted feet 0 to 0.52 px error and 0 to 0.52 px drift (the worst is Rivke's last run in
+  the payoff); seated and resting contacts 0 px. Moving_in: Michael's two hands on the trunk 0 px (he leans into the load on the
+  stoop). Knock: all 0 px except planted feet 0.17 px.
+- **Clips:** `ep3_runner` 23 s, `ep3_shtetl` 18 s, `ep3_hester` 21 s, `ep3_knock` 16 s, `ep3_moving_in` 15 s,
+  `ep3_looking_backward` 25 s. Stills: `rn_open/freeze/payoff`, `sh_candles/night/dawn`, `hs_carts/goat/room`,
+  `kn_knock/door/nod`, `mi_wide/stoop/window` (replaced), `lb_men/shadows/caption` (replaced). Sheets: `sheet_runner`, `sheet_shtetl`,
+  `sheet_hester`, `sheet_knock`, `sheet_moving_in`, `sheet_looking_backward` (built by a copy of `ep3sheet.py`'s layout).
+
+Known weak spots: the runner payoff is wide, so its figures are small (no faces); Rivke's run reads as a fast walk (the walk
+cycle is not a run); Sore covering her eyes is a rough hand pose; in the night room the sleepers are side-on silhouettes on a
+plain quilt; the goat is small and dark; the Hebrew-style sign letters are random strokes (unreadable on purpose) and might be
+checked by someone who reads Hebrew so no real word appears by chance; ch 2's "burned roofs" are a generic far row.
+
+### Round 14b (Nov 13): review fixes and the walk
+
+- **The walk (user note: "weird and creepy gait").** `stepWalk` put the figure's origin 2% of its height below the floor and
+  always aimed the ankle 0.03 h above the sole, so both knees stayed bent through the whole cycle: a crouching, sneaking walk in
+  every Episode 3 clip. rig.js never draws an ankle lower than 0.03 h above the origin, so a sole rests on the origin's line
+  whenever its ankle is anywhere from 0 to 0.03 h up. New `e3Legs`: the origin sits on the floor while a planted leg can reach
+  nearly straight (99% of its length) and dips only as much as the stride needs at double support (about 2% of height: the natural
+  bob, lowest at double support, highest at passing); a planted foot on the floor line aims its ankle as low as that clamp allows,
+  so the stance leg straightens; the swing foot lifts 0.045 h (was 0.07). Arms now swing opposite the legs (about 16 degrees,
+  elbows a little bent) wherever a scene has not posed them for holding something; the runner and Yankel's "shove" lost their
+  frozen or outstretched arms. `e3Settle` and the new `e3Stand` end with straight legs. Since every Ep 3 walker uses `stepWalk`,
+  this also fixes `ep3_steerage`, `ep3_castle_garden`, `ep3_sweatshop` and `ep3_moving_in`; all eight walking clips re-rendered.
+  Filmstrips (10 fps, one cycle) were read for every walker: the runner (before/after: `review/ep3/gait_runner_before.jpg`,
+  `gait_runner_after.jpg`), the family walking out, Rivke's dash, Yankel through the crowd, Yankel and Rivke on Hester Street,
+  Yankel leaving the shtetl, Ma crossing her room, Michael on the sidewalk and the trunk carried up the stoop, the contractor,
+  the pier walkers. Planted feet are now 0.00 px error and drift in all eight clips.
+- **`ep3_knock`:** Rivke stands on straight legs, steps back from the door after knocking and stands clear of the door frame in the
+  hall (Sore further back), then turns to her mother as she translates; Sore's open-hand gesture is lower; "COMPOSITE CHARACTERS"
+  moved off the door to the floor area, bottom right.
+- **`ep3_hester` signs:** no letter shapes at all now (`e3SignMarks`: broken dashes at two heights and a few ticks on a pale board).
+  The ferry sign in `ep3_runner` is the cursive scribble line. (`ep3_names` still uses `hebrewish`; left for review.)
+- **`ep3_runner` payoff:** a push-in (z 2.0) on Rivke taking Shmuel's hand and the trunk dropping, 17.0 to 18.7 s, then back out.
+- Audits after the fixes: contacts (holds 0, hands and pairs 0 to 0.25 px, planted feet 0.00 px error and drift; steerage's berth
+  sitters 2 px as in Round 13c); text audit clean (no OUT, OVERLAP or SHORT) on runner, hester, knock.
+
+### Round 14b map (Nov 13): four more shots from the enclave model
+
+Same model, engine and rules as `ep3_enclave` (all in `ep3_map.js`). `renderEnclave` now draws through `emWorld(n, cam, S)`, which
+takes each clip's state (lifts, highlights, glows, a gold floor band, people dots, the loft, the background ferry, extra sorted
+items), so every clip shares one model. New in the model: Manhattan's shore narrows to the Battery in the south-west, with the
+round Castle Garden fort (a 24-sided wall with arched windows, a broad low roof and a lantern), the Battery's trees, and flat
+blocks of lower Manhattan; screen-space map markers (a ground ring, a pin and a ball: gold for the Rabinowitzes, ink for the
+contractor, with cream bundles); teal dotted routes (the whole way faint, the part already walked bright); tags whose anchors
+leave the frame fade out; the tag solver pushes a tag the other way when an edge blocks it. The new clips render straight at
+720p (`deviceScaleFactor` 2/3 in a scratch renderer) to save time. Each clip keeps its own clock from its own chapter's
+words.json and its own camera keys.
+
+- **`ep3_map_arrival`** (14 s, ch 5 end; `AR.T0` = 66.5 s of `ch05_old_and_new`). Castle Garden at the Battery ("In 1884", 67.2)
+  with "CASTLE GARDEN"; the gold marker and four tiny gold walkers appear at the fort gate ("the Rabinowitzes", 68.5); the teal
+  route draws on and the family walks north-east through lower Manhattan into Hester Street, the camera following; "JEWISH
+  ARRIVALS IN 1884: ABOUT 1 IN 50" ("one arrival in fifty", 72.5); they reach the gold building on "the Lower East Side" (77.0 to
+  77.9), where the place tag becomes "HESTER STREET · LOWER EAST SIDE" and the middle of the frame is left clear for the chapter
+  card. The walk is squeezed (about 1.7 miles in life); the direction is right.
+- **`ep3_map_sweatshop`** (16 s, ch 7 open; `SW2.T0` = 5.0 s of `ch07_sweatshop`). The gold building's windows light ("inside a
+  family's home"): "THE RABINOWITZES / A WORKSHOP AT HOME"; a clothing firm's seven-floor loft west of the blocks turns pale
+  ("ready-made clothes", 7.9): "CLOTHING FIRM / CUTS THE CLOTH" (12.7); the contractor's ink marker leaves its door with three
+  cream bundles ("a contractor", 14.4 to 15.4), drops one at each of two tenements (which light up) and the last at the gold
+  building, along a teal dotted route ("carried bundles"); "CONTRACTOR", "PAID BY THE PIECE". Then the dive (18.6 to 21.2, distance
+  interpolated in log space so it feels even): over the street, then down to the Rabinowitzes' top-floor front window, which fills
+  the frame at 21.2, the hard cut to `ep3_sweatshop` ("So Yankel pressed").
+- **`ep3_map_move`** (17 s, ch 9 open; clock = `ch09_new_neighbors` seconds). Both enclaves wide, "SPRING 1886", "LOWER EAST SIDE",
+  "WILLIAMSBURG, BROOKLYN", "THE KELLYS". On "found steadier work" (4.1) the gold marker walks east on Hester and north to Grand
+  Street, rides the Grand Street ferry north-east across the East River ("across the East River", 6.7; tag "GRAND STREET FERRY"),
+  lands in Williamsburg and walks south to the Kellys' street; the coral building takes a gold floor (their flat) and the tag
+  becomes "THE KELLYS / AND THE RABINOWITZES · 1886"; on "Most wouldn't come for another twenty years" (13.6) a quiet teal-text tag:
+  "MOST JEWISH FAMILIES: AFTER 1903" (the Williamsburg Bridge; RESEARCH.md). Geography checked: Williamsburg lies across the East
+  River from the Lower East Side, a little north-east; the Grand Street ferry ran from Grand Street, Manhattan to Broadway,
+  Williamsburg. In the model Grand Street is the northern street of the Lower East Side blocks.
+- **`ep3_map_density`** (8 s, ch 6; `DN.T0` = 77.8 s). The Lower East Side from above; teal dots (people) fill the roofs from "A few
+  years later" (78.3) until dense on "the most crowded place on Earth" (82.5); "ABOUT 330,000 PEOPLE PER SQUARE MILE" and "CLAIMED BY
+  JACOB RIIS, 1890" (Riis, *How the Other Half Lives*, ch. X, of part of the Tenth Ward).
+
+Stills: `ma_*.jpg` (arrival), `ms_*.jpg` (sweatshop), `mm_*.jpg` (move), `md_*.jpg` (density).
+
+## Episode 4 (Nov 15): the machine, drawn silhouette scenes
+
+`ep4.js` (shared helpers and the cold open) and `ep4_b.js` (the other seven), loaded by `bridge.html` after `ep3_explain.js`. They
+build on `ep3.js` (E3K contacts and the E3LOG audit, `stepWalk`, `e3Settle`, `e3Stand`, `e3Clasp`, `e3Room`), `rig.js`,
+`mansion.js` (`brougham`, glows) and `ep2_more.js` (`camAt`). The beats follow `../ep4/script/SCRIPT.md` draft 1 at about 150
+words a minute; every beat is a named time near the top of its renderer (`FT`, `CB`, `CO`, `KF`, `PA`, `PO`, `VG`, `BB`) so the
+edit can retime them to the voice. 720p review clips in `review/ep4/`. Colours as the series: the Kellys coral, the Rabinowitzes
+wheat gold, everyone else ink; money only as the captain's small warm-gold watch-chain glint (`E4.glint`); real people faceless.
+
+New shared pieces (`ep4.js`):
+- `e4Walk`: Episode 1's walk (rig.js `walkAn` through `stepWalk`) with the stance sole pinned exactly to the floor line each frame
+  (walkAn's straight stance leg and its bob let the sole wander a few px above and below), so planted feet audit at 0 px. Rig
+  children have a 0.46 h leg while walkAn sweeps a 0.5 h one, so their cycle is driven 1/0.92 faster (their feet slid 4 px a step).
+- `e4Track`: stand, walk to a mark, settle (`e3Settle`), stand again, several legs in one plan; walks start from the passing pose.
+- `e4Speak`: speaker-driven mouths (a new backward-compatible `an.jaw` in `rig.js` opens the jaw without the awe face) plus a beat
+  signal for head nods and keyed gestures (`e4Keys`).
+- `e4Captain`: Mr. Duffy, ink, bowler, a long overcoat (the frock coat carried below the knee) and the gold glint of his watch chain.
+- `e4Horse`: walk and gallop. Each hoof is planted where the hip will be at mid-stance (so planted hooves never slide), the leg
+  solved onto it. The walk carries the hoof on an arc to its next plant; the gallop follows rotary-gallop key poses relative to the
+  hip (planted and swept back, pushed off, folded under the body, reached forward extended, set down; `E4_GKEYS`), with pitch and a
+  suspension phase. When the horse stops, each leg steps under its hip. In `ep4_fire` the camera closes in and runs with the
+  horses for about 2 s (18 to 20.5 s).
+- `e4Outlined`: a thin ink outline round a coral figure, used on the Kellys in the kitchen and at the polls so overlapping
+  Kellys stay separate shapes.
+- `e4Pumper` (steam fire engine: boiler and flared stack, air chamber, driver's box, bell, sparks), `e4Snow`, `e4Facade` (the
+  Williamsburg block: four-storey tenements over raised basements, stoops, fire escapes, snow on every ledge), `e4Smoke`.
+
+Scenes:
+- **`ep4_fire`** (ch 1 cold open, 62 s). Night, snow. The burning tenement: flames inside its windows (tongues licking up out of the
+  tops of some frames onto the soot-stained brick), broken glass glinting, thick smoke pouring from the windows and rolling off the
+  roofline across the top of the frame, lit orange from below, embers rising among the snowflakes, and a pulsing orange glow on the
+  snow, the street, the neighbours' walls and every figure's rim (no flame on anyone). The close shots carry a flickering warm key
+  from frame left with smoke and embers drifting through. The blanket is a muted brown wool with stripes, folds and a fringe. Families in nightclothes: an old woman in a shawl, a husband with his hand on
+  his wife's shoulder, a barefoot girl holding her shoes and shifting from foot to foot, Mrs. Doyle with the baby, her boy holding
+  her nightgown and her girl holding his hand. The pumper gallops in (16.4 to 20.6), firemen jump down, one takes the nozzle and
+  one the hose behind him, water on (23.3). The captain and three men walk in (22.6 to 27.6); the blanket comes off his man's arm,
+  opens between his hands and goes round Mrs. Doyle's shoulders; his first line (31.0 to 38.3) with gestures toward the waiting cab;
+  the Doyles walk off to it, his man with them, and it drives away; "Not tonight"; he steps over to the Kellys' stoop, tips his hat
+  to Michael (coral, arms folded on the stoop two doors down) and says his second line (51.8 to 57.8), push-ins on both lines.
+  A gas lamp by the Kellys' stoop lights the second half. Tag "WILLIAMSBURG, BROOKLYN · JANUARY 1887 · 3 A.M." (0.4 to 6.0).
+- **`ep4_clubhouse`** (ch 5, 27 s). The back room behind a saloon in gaslight (bunting, wainscot, a gasolier, the saloon's light
+  through the side opening, a back door to the yard). The captain at a small table with the ledger; a mother hands him a letter (he
+  reads it and lays it down), an old man with a cane talks and touches his brim in thanks, a young man holds his cap in both hands;
+  the captain writes in the ledger after each and nods; each leaves by the back door; the line steps up. Tommy (coral) comes in fast
+  from the saloon with a note, hands it over, grins, goes. On the wall over the table a big empty frame (the boss, faceless).
+- **`ep4_coal`** (ch 5, 12 s). The cold open's street by day: a coal wagon at the curb (the horse resting a hind hoof), the coal
+  man on the bed shovelling into a chute to the Kellys' coal hole (lumps run down it, dust puffs up), Ma (coral) watching from the
+  top of the stoop with her arms folded; the captain walks by, tips his hat without stopping, and she gives a small nod.
+- **`ep4_kelly_flat`** (ch 2, 13 s) and **`ep4_kelly_flat_end`** (ch 8, 16 s). The Kellys' kitchen at Ep 3's room scale with
+  kelly_flat's look and a front window over the roofs to the refinery's stacks. Ch 2: the coal bucket empty (its bottom showing),
+  the stove low, frost on the glass; Ma looks into the bucket, then warms her hands; Michael with a mug in both hands; Tommy at the
+  window, then at the table talking, Michael shakes his head. Ch 8: the bucket heaped, the stove bright, Ma stirring; Tommy bursts
+  in through the door with his news (4.0 to 7.5), Michael turns and answers flatly (8.3 to 9.2) and turns back to the stacks.
+- **`ep4_papers`** (ch 5, 12 s). The building's hall at the Rabinowitzes' open door (their candlesticks and samovar warm behind):
+  Yankel holds out his papers, the captain touches them and says his line to Rivke (1.1 to 4.0), she leans in and translates,
+  Yankel turns to listen, turns back and nods; the captain tips his hat and goes along the hall.
+- **`ep4_polls`** (ch 8, 15 s). Election day, November 1887: a barbershop polling place (the ballot box on a table inside the
+  window), a line to the door, a policeman, a rival party's man handing out his own tickets; Tommy at the curb with a stack of the
+  party's printed ballots, Michael takes one, reads it, looks at his brother, goes to the end of the line.
+- **`ep4_vigo`** (ch 6, 13 s). A sunny quay in Vigo, 1876: a large man in a hat (Tweed: a flat profile silhouette, no features)
+  comes off a steamer's gangplank with a carpet bag; two Guardia Civil officers (tricorns, capes) compare him with a newspaper page,
+  look again, walk into his path; one holds the page up beside his head. **Composite hold 8.2 to 11.2 s**, camera still: the page's
+  rectangle on the 1920 x 1080 frame is `e4VigoPageRect()` (x 760, y 379, 352 x 519 px), proportioned like the Harper's scan
+  (`../ep4/public/img/g_tweed/the_capture_of_tweed_the_picture_that_made_spanish_officials_harpers_1876-10-07_ia.jpg`, 2710 x 4000);
+  the page is a clean cream sheet with a thin border for the edit to fill.
+- **`ep4_bootblack`** (ch 7, 15 s). The rotunda of Tweed's courthouse (arches, iron galleries, skylight beams; after the HABS
+  photograph). Plunkitt alone on the stand, three-quarter from behind (a back view drawn for this: top hat, shoulders, his right hand
+  making points, his head turning toward the reporter), in a high armchair on a stepped platform (back, arms and legs showing), his
+  legs forward and his feet on the iron footrests; an empty shoeshine box with brushes, polish and a rag set aside on the platform.
+  The reporter stands upright about two metres off at the side and writes. Slow push-in. The left half of the frame is kept clear
+  for the handwritten quotes. Tag "NEW YORK COUNTY COURTHOUSE · 1905". (Revised on the user's note: no bootblack and no figure
+  low at a seated man's feet; the same caution was applied everywhere, so the Doyle boy no longer holds his mother's nightgown.)
+
+QA: each clip rendered, read as a contact sheet of frames every 1.5 to 2.5 s, walkers checked as 10 fps filmstrips with the camera
+locked on them (the captain, the Doyles and the children holding hands, Tommy's fast entrance, Michael at the polls, the firemen's
+jump, the galloping and stopping horses). Fixes from that pass: the children's walk slid 4 px a step (leg length, above); the
+horses' legs stopped in a gallop pose (now they gather under the body over the last strides and stand on straight legs); the
+blanket hid Mrs. Doyle's head; the gas lamp stood in the middle of the dialogue push-in (moved); the men crossed the frame during
+the captain's line (now after it); Tommy's walks were too fast; the Kellys stood on top of each other in the kitchen (spread
+across the room, and Tommy now passes in front of Ma); the coal man's whole-body tilt (now a small lean into the dig only); and,
+from review, the captain in `ep4_coal` now walks along the street in front of the wagon, so he no longer seems to stand on the coal.
+- **Contact audit** (every other frame, all nine clips; scratchpad `e4/verify.mjs`, `move` hands excluded): planted feet 0.00 to
+  0.42 px and drift 0.00 to 0.40 px (Ep 1 walkers now pinned to the floor), seated feet 0.00 px, holds 0.00 px, hands 0.00 to
+  0.37 px, hand to hand 0.11 px.
+- **Text audit** (`audit_text.mjs`, every 0.25 s): no OUT, OVERLAP or SHORT in any clip (one place/date tag each, 3.3 to 5.6 s;
+  `ep4_kelly_flat_end` has none; `ep4_papers` carries "COMPOSITE CHARACTERS" for 3.4 s).
+
+Known weak spots: the horses' gallop is drawn, not studied (a fast stride with tucked legs), and they are small in the wide shot;
+the firemen's helmets are simple shapes; the wide fire shots keep figures small (190 px) so the block and the glow read; Plunkitt's
+back view is a new one-off drawing (shoulders over the chair back) rather than the rig; Tweed is a profile silhouette (det 0, no
+eye or mouth) with a rim of sun, which still shows a nose line; the polls' line and the clubhouse queue are generic men.
+
+## Episode 5 (Nov 16): the finale, labor and the Populists (first three drawn sets)
+
+`ep5.js`, loaded by `bridge.html` after `ep4_map_b.js`; same look and helpers as Episode 4 (`e4Track`, `e4Walk`, `e4Speak`,
+`e4Keys`, `e4Bump`, `e4Outlined`, E3K contacts, `camAt`). 720p review clips and contact sheets (a frame every 1.5 s) in
+`review/ep5/<id>.mp4` and `review/ep5/<id>_contact.jpg`. Beats are named times near the top of each renderer (`UM`, `HD`, `FK`) so
+the edit can retime them to the voice. Colours as the series: the Kellys coral (always outlined in ink), everyone else ink; no
+real people appear; no money on screen.
+
+New shared pieces (`ep5.js`):
+- `e5Defs(t, extra)`: the Ep 3/4 defs plus smoke puffs (greys and mist tones), a warm lamp glow (`e5lamp`), a lantern glow
+  (`e5lant`), a muzzle flash (`e5flash`), soft mist (`e5mist`) and a blur (`e5blur`).
+- `e5Flick` (seeded lamp flicker), `e5Lamp` (kerosene table lamp: font, chimney, flame, glow), `e5Lantern` (a hand lantern hung
+  from a grip, swinging, with its glow; use through `holding`).
+- `e5Ink` (ink figure options: no face marks (det 0), a strong warm lamp rim on head and shoulders toward the light, dark arm tones
+  so the back arm does not read as a sash), `e5Sit` (seated on a bench or chair, feet on the floor, hands resting on the thighs as logged contacts unless arms are
+  keyed), `e5Standing` (planted stand with sway), `e5Raise` (a show of hands), `e5Bench`, `e5Pen`.
+- `e5Mist(t, x0, x1, y0, y1, opts)`: slow drifting, breathing, blurred mist bands in world space.
+
+Scenes:
+- **`ep5_union_meeting`** (16 s). A back room over a saloon, Brooklyn, night: stained plaster, a dado, a fringed Knights of Labor
+  banner (ring, triangle and star as shapes, no lettering), a broadside of ruled lines, a bracket lamp, the stair light through the
+  door. The speaker (ink, standing behind the table) talks with keyed gestures; a secretary sits at the table's end with the roll
+  book; seven men on two benches (rows spread further apart; the back row and the men standing behind it a shade lighter for depth in the
+  lamp haze, everyone rim-lit warm from the lamp), two standing at the back (one with a pipe, smoking), a man at the window draws the curtain an
+  inch to look down at the street (3.6 to 6.6 s), lets it fall and turns back. At 8.6 the speaker opens his arms for names; two
+  hands go up (9.2, 9.5); Michael (coral, by the door) looks at them, raises his own (10.3), the speaker nods to him (10.9), the
+  secretary writes (11.2 to 13.6), hands come down. Slow push and pan from the speaker toward Michael. Tag "A KNIGHTS OF LABOR
+  ASSEMBLY · BROOKLYN · 1886" (0.3 to 4.4).
+- **`ep5_homestead_dawn`** (34.5 s; rebuilt Nov 17 as the end of the cold open, `../ep5/PLAN.md` "Barges at Dawn", and revised the
+  same day for the narration "The gangplank goes down. On the barges, rifles come up. On the bank, rifles come up too..."). Shots cut
+  inside the clip, then a freeze. Beat times for the sound mix (`HD` in `ep5.js`):
+  - **0.0 A, wide.** The black Monongahela in fog, the works on the bank with furnaces glowing deep orange-red through the haze,
+    embers off the stacks, the town's lights on the hill, two dark shapes far down the river. Tag "HOMESTEAD, PENNSYLVANIA · JULY 6,
+    1892 · 4 A.M." (0.3 to 4.6). Sound: water, distant furnaces.
+  - **6.2 B, the works' roof.** The steam whistle: **blast 6.8 to 9.3**, a great white plume rolling off the ridge.
+  - **9.6 C, the hillside.** The town pours down the hill street with lanterns; in front, men run at the board fence with lanterns and
+    torches, push the gate, and **the gate goes over at 12.2**; they surge through toward the landing.
+  - **15.0 D, low at the water.** The two covered barges loom out of the fog behind the tug (its lantern beam sweeping); guards (ink,
+    faceless) stand in the lit doorways with rifles upright. **Rifles up on the barges: 17.0 to 18.4**, the line levelling its
+    Winchesters toward the bank off frame left (side on, never toward the viewer). Sound: tug engine, water, the clack of levers.
+  - **19.0 D2, closer.** The doorways: more rifle barrels slide out of the dark (from 19.3), lantern light glinting along them.
+  - **22.0 E, the bank (reverse angle).** The barge's bow at the landing, the guards aiming toward the crowd; eighteen people on the
+    bank shouting, lanterns raised, five torches, one flaring at 24.4. **Rifles and shotguns up on the bank: 23.0 to 24.5** (eight men);
+    **the shouting stops 23.6 to 24.6**: arms drop, the crowd goes still. The **gangplank lowers from 22.0**.
+  - **26.5 F, the stare-down.** A tight two-sided frame: the guards' rifles from the doorways on the left, the workers' rifles on the
+    right, the narrow strip of water and the lowering gangplank between; slow push, torches guttering, mist. **Silence from about
+    28.5.**
+  - **31.5 FREEZE** as the gangplank's end touches the landing, both lines aimed: the frame holds and drains toward monochrome with a
+    teal-to-orange grade by about 32.9, to the end at 34.5. No shot is fired on screen, no muzzle flash, nobody is hurt.
+  New helpers: `e5Torch` (a held torch: pole, layered flame tongues, warm glow), `e5Embers`, `e5BargeBig` (covered barge with lit
+  doorways; returns them), `e5Gun` (a long gun in both hands, raised from upright to levelled at the shoulder, side on; rifle or double-barrel shotgun),
+  `e5Guard` (ink guard with an `e5Gun`), `e5Tug2` (the tug with a soft swept beam),
+  `e5Downhill` (small walk-cycle figures on a slope, no contact log), and the freeze grade (`hdgrade` saturation filter plus a
+  `hdtone` overlay).
+- **`ep5_farm_kitchen`** (16 s). Uncle Owen Kelly's sod house near O'Neill, Holt County, Nebraska (Da's younger brother; the Irish
+  colony on the Plains), a winter evening: courses of sod blocks with roots and grass at the joints, a muslin ceiling sagging
+  between poles, a deep-set window with snow driving past in gusts and a drift on the sill, a calendar whose corner lifts in the
+  draught, a shelf of tins, a rag rug on the earth floor. The sod (revised Nov 17) is lumpy turves of different sizes in seven
+  earth shades, courses sagging a little toward the middle, grass wisps out of the joints and root hairs hanging below; the slow push
+  now ends wider so the bed stays whole in frame. Owen (coral, bearded, vest) sits at the table by the lamp writing; beside
+  him a pile of bills and mortgage papers, the top sheet with a small red stamp. He stops (6.2 to 9.4), lifts his pen, looks at the
+  pile, rubs his brow, writes on. His wife (coral) stirs the pot at the stove with the kettle steaming, and glances over at him
+  (4.4 to 6.0). Their child (coral head, ink outline, face to the wall) sleeps in the iron bed in the far corner under a patchwork
+  quilt that rises and falls; nobody is near the bed. The lamp flame dips with the gusts. Tag "NEAR O'NEILL, HOLT COUNTY,
+  NEBRASKA · WINTER 1890" (0.3 to 4.4).
+
+QA: contact sheets read for each clip; contact audit (`e4/verify.mjs`, every 6 to 10 frames): planted feet, seated feet, hands
+(thighs, curtain, roll book, pen, letter, spoon) and held lanterns and pens all 0.00 px, planted drift 0.00 px. Fixes from that
+pass: seated men held their arms out (now hands on thighs); the table lamp sat in front of the speaker (moved to the table's end);
+the window watcher reached above his head for the curtain; the end of the meeting push ran past the room's right wall; the barges
+trailed far behind the tug and lay on top of each other; the sod courses spilled past the room's cut walls; the farm room sat small
+in the frame (closer camera); Owen's letter hand could not reach the paper.
+
+Known weak spots: the Homestead hill houses are simple stacked shapes and the tug's beam is a soft wedge rather than a true
+volumetric light; the crowd's shouting is all arms and heads (no faces by rule); there is no sound in these clips; the child in bed
+is a drawn head on a pillow, not the rig.
+
+## Episode 5, the rest of the drawn sets (Nov 18, `ep5_b.js`)
+
+`ep5_b.js`, loaded by `bridge.html` after `ep5.js`; same look and helpers (e5/e4/e3), reusing the Ep 4 Kelly kitchen
+(`e4KellyRoom`), the farm kitchen's sod room (`e5SodRoom`, `e5Bed`), refinery.js's palette and `rfPipe`. 720p clips and contact
+sheets in `review/ep5/`. Every clip keeps its characters, hands at work and place tags inside an 8% safe area (x 154 to 1766,
+y 86 to 994); tags sit at x 172. New helpers: `e5bShoulderSack` (a sack carried on the shoulder, both hands on it), `e5bHeatDef`
+(rising heat shimmer filter), `e5bBreath`, `e5bSay` / `e5bW` (mouths from words.json word times, shifted to the clip),
+`e5bMichaelMug`, `e5bMaStir`, `e5bFront` (a frontal silhouette with arm angles), `e5bBackMan` (a delegate from behind, arms and
+thrown hat), `e5bBanner`, `e5bHelmet`, `e5bCapitol`, `e5bTree`, `e5bBurst` (fireworks), `e5bEar` (an ear of corn).
+
+- **`ep5_refinery`** (ch 2, 14 s). Shot A (0 to 7.8): the boiling floor, three open vats over firebox glow, steam into the roof,
+  heat shimmer; Michael (coral) carries a sack on his shoulder left to right, a man stirs a vat with a paddle, a stoker shovels,
+  two men carry sacks the other way at the back. Tag "THE REFINERY · WILLIAMSBURG, BROOKLYN · 1887" (0.3 to 4.8). Shot B (7.8 to
+  14): the yard by the gate, a grey January morning, light snow; the foreman (ink, bowler) turns (9.6) and points past the gate
+  (10.0 to 13.0) at sixteen men waiting outside the railing (breath in the cold); Michael looks (10.4).
+- **`ep5_kitchen_1887`** (ch 4, 12 s). Ep 4's kitchen in winter. Synced to `ch04_two_kinds_of_unions.words.json` from 91.4 s
+  (clip t = chapter t - 91.4): **Tommy 2.02 to 5.74** ("A union?" hands up, a finger on "Mr. Duffy says", a chop on "nothing but
+  trouble"), **Michael 6.80 to 8.96** (looks up from his mug, dry; a sip at 9.3 to 11.5); Tommy folds his arms and looks to the
+  window; Ma stirs and glances over. Tag "THE KELLYS' KITCHEN · WINTER 1887" (0.2 to 3.8).
+- **`ep5_corn_stove`** (ch 6, 13 s). The sod house at night, snow at the window, the child asleep. Owen (coral), an armful of ears,
+  opens the firebox door (1.2 to 2.0, hinged toward him, warm light floods over him), feeds three ears (3.0, 5.6, 8.2; each flares
+  with sparks about 1.4 s later), shuts it (10.9 to 11.6), warms his hands. Tag "NEAR O'NEILL, NEBRASKA · WINTER 1890" (0.3 to 4.0).
+- **`ep5_coxey`** (ch 8, 15.5 s). Shot A (0 to 6.5): Pennsylvania Avenue, the dome at the end; the column (two rows, cloth banners
+  without lettering) with a white horse led at the head. Tag "WASHINGTON, D.C. · MAY 1, 1894" (0.3 to 4.2). Shot B (6.5 to 15.5):
+  the Capitol steps (treads one walk step deep, a landing); Coxey (ink, bowler, faceless) climbs (6.8 to 9.9) and lifts his speech
+  (10.3); one policeman comes up from the lawn (8.0 to 11.3), one down from the terrace (9.8 to 11.5); they take his arms
+  (11.9 to 12.3) and the three walk back down and off the grass (12.5 on) past the KEEP OFF THE GRASS sign (on screen 6.5 to end).
+- **`ep5_bryan`** (ch 9, 14 s). The Chicago hall in gaslight: gasoliers, bunting swags, flags, packed galleries; delegates from
+  behind. Bryan (frontal faceless silhouette, backlit) speaks with his arms (0.4 to 5.6), spreads them like a cross (6.0 to 6.8,
+  held to 10.6); the camera pushes in to 9.0; **the hall erupts at 9.4** (on their feet, hands up, hats thrown, handkerchiefs in the
+  galleries). Tag "THE DEMOCRATIC CONVENTION · CHICAGO · JULY 1896" (0.3 to 4.0).
+- **`ep5_porch`** (ch 9, 8.5 s). Canton: the house with its deep porch and picket fence; behind, a train rolls in and stops at the
+  depot (4.6, a cloud of steam); eighteen voters walk up the street and gather at the fence, some with small flags; a faceless
+  figure on the porch waves (from 2.4). Tag "CANTON, OHIO · FALL 1896" (0.3 to 4.0).
+- **`ep5_kitchen_1896`** (ch 9, 18.5 s). The kitchen with other people's washing on a line, a washtub and board (Ma took in
+  washing). Synced to `ch09_the_cross_of_gold.words.json` from 65.5 s: **Tommy 1.54 to 4.74** (fist up on "working man!", a point
+  on "Mr. Duffy"), **Michael 5.78 to 11.64** (worried, at the table; Tommy throws his hands out after it), **Ma 13.00 to 16.58**
+  (stops scrubbing at about 12.1, straightens, a hand out toward them, the hand down on "metal"); the brothers drop their eyes.
+  Tag "THE KELLYS' KITCHEN · FALL 1896" (0.2 to 3.8).
+- **`ep5_bridge_1898`** (ch 10, 14 s). Dusk, snow; Michael and Tommy walk the promenade together (Ep 1 walk, planted feet), the
+  cables streaming past, the Manhattan skyline with lights coming on and the river below, six distant fireworks (4.6 to 12.9),
+  the Manhattan tower arriving at the end; Tommy talks with his hands, Michael shakes his head with a smile (7.6). Tag "THE
+  BROOKLYN BRIDGE · NEW YEAR'S DAY, 1898" (0.4 to 4.4).
+
+QA: contact audit (`e4/verify.mjs`): planted feet and drift 0.00 px in every clip, holds 0.00 px, hands 0.00 to 0.4 px except
+the policeman's grip on the stairs (up to 1.6 px for a frame). Text audit: no OUT, OVERLAP or SHORT. Fixes from review: the stoker,
+Owen at the door and Ma at the washboard could not reach (moved closer, door re-hinged); the Coxey marchers and the bridge walkers
+were driven twice their speed (feet slid); the police first stood a tread apart (legs stretched); every camera re-framed for the
+8% safe area. Known weak spots: Bryan and the convention crowd are drawn frontal/back shapes, not the rig; McKinley's wave is a
+raised arm; the horse at the head of the march is led, not ridden; the convention hats in flight read as streaks.
+
+## Episode 5 doors and explainers (Nov 18)
+
+`ep5_doors.js` (the three doors, the episode's signature graphic) and `ep5_explain.js` (teal explainers), loaded by `bridge.html`
+after `ep5.js`. 720p review clips and contact sheets (a frame every 1.5 s) in `review/ep5/<id>.mp4` / `<id>_contact.jpg`. Every
+beat is a named table near the top of its renderer (`DI`, `DCL`, `DF`, `X5_*`), in seconds from the clip start, so the edit can
+retime to the voice; the explainer renderers also take a cue table argument.
+
+Margins (revised Nov 18 on review): every text and key element sits inside an 8% safe area (x 154 to 1766, y 86 to 994) whenever
+it is on screen for more than half a second. `audit_text.mjs` takes the margin as an optional third argument
+(`node audit_text.mjs <clip> 0.25 0.08`): OUT then counts only texts partly in frame and outside the margin for more than 0.5 s.
+All 17 clips pass it with no OVERLAP or SHORT; in the door clips the only OUT left is labels and stamps crossing the frame edge
+while the camera is moving between doors (each about 0.4 s). The doors are spaced 1150 apart and the walks hold at z 1.12, so
+the door being lit or stamped is centred and whole and its neighbours are out of frame.
+
+**The doors.** A dim corridor drawn in the notebook style: plaster with faint ruled lines and a red margin line, a dado, boards on
+the floor converging on a vanishing point that follows the camera, dark pillars in the foreground for parallax, dust motes in the
+light. Each door: inked frame and lintel, panelled leaf (hinged left, it swings toward camera with perspective), a teal emblem
+(clasped hands and a hammer, a wheat sheaf, a ballot box, a rising sun for the fourth door), a keyhole that burns teal with a thin
+horizontal flare, a torn orange label. Teal = hope: light round the leaf edges and threshold, a halo on the wall, a fan of light
+across the floor, and through the gap the world beyond (steel mill with stacks and smoke, wheat field with a windmill, the Capitol
+dome over steps).
+
+| id | ch | sec | beats (s) |
+|---|---|---|---|
+| `ep5_doors_intro` | 1 end | 8.5 | camera tracks and holds on each door as it lights: AT WORK 0.9 ("fought at work"), ON THE FARM 2.5 ("teamed up on the farm"), AT THE BALLOT BOX 4.1 ("fought at the ballot box"); pull back to all three 4.8 to 6.5; the doors swing open a crack 5.9 to 7.1, light spills across the floor; hold to 8.5 |
+| `ep5_door1_close` | 5 end | 5 | door open on the steel mill, light pouring out; paper scraps drawn toward the door by the draught 1.0; swing 1.45; **slam 1.78** (light cut, camera shake, dust puff, scraps skitter; the keyhole dies last, 2.15); **FELL SHORT slaps 2.3**, holds to 5.0 |
+| `ep5_door2_close` | 6 end | 5 | same beats; wheat field beyond |
+| `ep5_door3_close` | 9 end | 5 | same beats; the Capitol dome beyond |
+| `ep5_doors_finale` | 10 | 24 | walk past the three closed doors, holding on each: **FELL SHORT stamps 1.9, 4.5, 7.1** (each with a small jolt: "fought back, fell short" x3); pull back and the camera rises 7.7 to 9.6; teal light leaks under the doors 9.2; glowing scraps rise and open into cards (readable once above the labels, about 1.2 s after each start): EIGHT-HOUR DAY 10.0, RIGHT TO ORGANIZE 11.2, INCOME TAX 12.4, SENATORS ELECTED BY VOTERS 13.6; "still wanted" (teal pen) 13.9 to 16.8; the pan down the corridor 16.8 to 20.0, cards tighten up top; PROGRESSIVE ERA door glows 18.8, **swings open 20.4 to 22.8** onto bright morning light and a path; the cards turn to light and stream into it 21.4 to 23.2; hold to 24 (the Progressive Era line can be cut to 20.4 to 24, or freeze-framed) |
+| `ep5_doors_bug` | overlay | 6 | the scorecard corner bug (top right, 372 x 196 px box at x 1372, y 86, inside the 8% safe area): three tiny doors, teal-lit while open; each gets an orange torn strip with an ink X at 1.0, 2.4, 3.8. `drDoorsBug(n, t, {bg})` draws any state (n = 0 to 3, fractional animates) for stills or the edit |
+
+**Explainers** in the Ep 4 diagram look (revised Nov 18): the dark graph board (`xpBoard`), teal linework with an ink under-stroke,
+cream Abril type, Mono tags, orange torn tape, teal Pen notes; icons redrawn to read on dark (grey-green fills with ink outlines,
+pale line work). Cream paper is kept only for real documents: the name cards, price tags, the bills, the civil service exam and
+the Omaha Platform, a printed page on the desk.
+
+| id | ch | sec | beats (s) |
+|---|---|---|---|
+| `ep5_x_weapons` | 3 | 13 | WORKERS' TOOLS 0.3: UNION 1.0, COLLECTIVE BARGAINING 2.3, STRIKE 3.6; OWNERS' WEAPONS 5.0: BLACKLIST 5.4, LOCKOUT 6.6, STRIKEBREAKERS 7.8, COURTS AND SOLDIERS 9.0 |
+| `ep5_x_unions` | 4 | 13 | KNIGHTS OF LABOR 0.3: EVERYONE 1.1, BIG GOALS 2.0, ARBITRATION 2.9; AFL 4.0: SKILLED WORKERS 4.8, BREAD AND BUTTER 5.7, COLLECTIVE BARGAINING 6.6; HAYMARKET · 1886 slaps 7.8; the Knights' column cracks and tilts 8.2 to 9.2; AFL ringed teal, "it lasted" 9.8 |
+| `ep5_x_charge` | 5 | 10 | name cards, no faces: ANDREW CARNEGIE · OWNER 0.4; arrow; HENRY CLAY FRICK · RUNS IT FOR HIM 2.0; arrow; THE HOMESTEAD MILL 3.6; pen "the boss" 5.0, "the boss's tough guy" 6.0 |
+| `ep5_x_owen3` | 6 | 10 | FARMERS' THREE PROBLEMS 0.3; 1 DEBT 1.0 (house and mortgage), 2 RAILROADS 2.8, 3 FALLING PRICES 4.6 (the price line falls 5.0); "the worst" 6.6 |
+| `ep5_x_loan` | 7 | 13 | $1,000 DEBT 0.4 (one gold glint); WHEAT: $1 A BUSHEL 1.8, ten sacks 2.4, 1,000 BUSHELS 3.0; WHEAT: 50 CENTS 5.0, twenty sacks 5.6, 2,000 BUSHELS 6.7; SAME DEBT. TWICE THE WORK. slaps 8.6 |
+| `ep5_x_inflation` | 7 | 11 | GREENBACKS 0.3; bills pour into a pile 0.8 to 4.6; LOTS MORE MONEY 2.0; the same bread, shoes and coat with PRICE tags 3.2, THE SAME AMOUNT OF STUFF; the tags climb 4.4 to 6.4; INFLATION slaps 7.0 |
+| `ep5_x_gold` | 7 | 10 | THE GOLD STANDARD 0.3; the vault and its bars 0.6; a row of dollars 1.8; each chained to a bar 3.0 to 4.6; EVERY DOLLAR TIED TO GOLD 4.0; pen "only as many dollars / as it had gold" 5.6 |
+| `ep5_x_bread` | 7 | 13 | 100 DOLLARS 0.5; 100 loaves 1.4 (100 LOAVES 1.9); $1 A LOAF 3.0; 100 more loaves 5.0 (200 LOAVES 6.1); STILL 100 DOLLARS 6.6; the tag drops to 50 CENTS 7.8; DEFLATION slaps 9.6; "more stuff, same money" 9.9 |
+| `ep5_x_silver` | 7 | 11 | FREE SILVER 0.3; GOLD DOLLARS 0.8; silver coins drop in 1.8 (+ SILVER DOLLARS TOO 2.4); the WHEAT gauge climbs from 50 CENTS toward $1, 4.0 to 6.6; "owen's debt gets easier" 7.0 |
+| `ep5_x_spoils` | 8 | 12 | THE SPOILS SYSTEM 0.3; a line of men shuffles toward the GOVERNMENT JOBS door 0.8; JOBS FOR PARTY FRIENDS 2.4; the CIVIL SERVICE examination card slides in 6.0; THE PENDLETON ACT: PASS A TEST 6.4; ticks 7.4 to 8.4 |
+| `ep5_x_omaha` | 8 | 11 | THE OMAHA PLATFORM 0.3, THE PEOPLE'S PARTY · OMAHA, NEBRASKA · JULY 4, 1892 0.6; ticked one by one: FREE SILVER 1.2, INCOME TAX 2.4, SENATORS ELECTED BY VOTERS 3.6, GOVERNMENT-RUN RAILROADS 4.8, EIGHT-HOUR DAY 6.0 |
+
+The 1896 map is left for the 3D model. The slam's dust is now many small motes plus short streaks for the first 0.6 s. Known weak spots: the spoils line just shuffles (no party man handing out jobs); gold bars and coins are the only money shapes beyond
+glints (muted gold tone); the door labels are world-space, so in tracking shots they slide out of frame like the doors do.

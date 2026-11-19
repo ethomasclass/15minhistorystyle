@@ -341,7 +341,7 @@ const PullBack: React.FC<{t: TL; a: number}> = ({t, a}) => {
 /** (`solo`: no notes or dates, for the "It's still delicious." cut-in.) The eel and the can, side by side; the hand deals one last recipe card between them. Then hold. */
 const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
-  const can = {cx: 1560, by: 860, pw: 560};
+  const can = {cx: 1370, by: 860, pw: 540};
   const cm = cranMap(6, can.cx, can.by, can.pw);
   const [lx, ly] = [690, 757]; // the "1 can" line on the card (screen px), for the loop
   const deals: Deal[] = [{at: t.at('recipe card') + 2, x: 690, y: 640, rot: -3, card: (
@@ -353,7 +353,7 @@ const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
       <EelLoop x={20} y={170} w={900} at={a} />
       <Cran n={6} {...can} />
       {!solo && <div style={{position: 'absolute', left: 150, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>1621</div>}
-      {!solo && <div style={{position: 'absolute', left: cm.at(370, 0)[0] - 260, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>NOW</div>}
+      {!solo && <div style={{position: 'absolute', left: cm.at(620, 0)[0] - 60, top: 110, fontFamily: JF.mono, fontSize: 24, letterSpacing: 4, color: 'rgba(244,239,230,0.75)'}}>NOW</div>}
       {!solo && <Note text="what they could catch" x={140} y={580} size={50} rot={-3} at={t.at('could catch.') - 2} color="#ffffff" />}
       {!solo && <Note text="what somebody wrote down," x={1060} y={170} size={44} rot={-3} at={t.at('somebody wrote down,') - 2} color="#ffffff" />}
       {!solo && <Note text="...and sold back to us" x={1100} y={270} size={50} rot={-3} at={t.at('sold back') - 2} color={pal.subject} />}

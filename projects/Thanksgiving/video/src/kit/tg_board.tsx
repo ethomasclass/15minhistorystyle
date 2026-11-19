@@ -33,7 +33,8 @@ export const PIECES: Piece[] = [
   cropped({id: 'hale', ch: 5, x: 980, y: 480, w: 210, rot: 3, label: 'SARAH HALE · 1863', src: 'img/arch/sarah-josepha-hale-engraving-1880-signature.jpg', size: [1046, 1536],
     crop: [170, 110, 720, 880], tag: 'but'}),
   {id: 'jello', ch: 6, x: 1230, y: 170, w: 290, h: 194, rot: -3, label: 'JELL-O · 1920', src: 'img/flow/tg_jello.png', colour: true, mock: true, tag: 'therefore'},
-  {id: 'can', ch: 7, x: 1440, y: 560, w: 230, h: 190, rot: 2, label: 'THE CAN · 1941', src: 'img/flow/cran/cran_cut6.png', colour: true, mock: true, tag: 'therefore'},
+  // (the whole frame of the second cranberry set, drawn wide so the log and the can are the size of the other pieces)
+  {id: 'can', ch: 7, x: 1400, y: 540, w: 330, h: 184, rot: 2, label: 'THE CAN · 1941', src: 'img/flow/cran2/cran_6.png', colour: true, mock: true, tag: 'therefore'},
   {id: 'turkey', ch: 8, x: 1620, y: 130, w: 210, h: 197, rot: -2, label: 'BROAD-BREASTED WHITE', src: 'img/flow/tg_turkey_white.png', colour: true, tag: 'therefore'},
 ];
 export const piece = (id: PieceId) => PIECES.find((p) => p.id === id)!;

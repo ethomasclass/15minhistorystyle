@@ -14,7 +14,7 @@ import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
-import {Cut, CutLoop, Swap} from '../kit/tg_cut';
+import {Clip, Cut, CutLoop, States} from '../kit/tg_cut';
 import {FullFrame, PhLabel, type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {type Box, Swipe} from '../kit/vox';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
@@ -26,12 +26,8 @@ const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
 
 
-// Still to come: only the Victorian kitchen, which will be drawn in code as a silhouette scene (STYLE_GAP.md). Everything else is
-// here: the Jell-O ring is our own wobble loop (img/flow/jello_ring), and the mould-to-box change is made in code from two stills.
-export const PLACEHOLDERS: PlaceholderInfo[] = [
-  {file: 'img/flow/d3_kitchen_{1..4}.png', what: 'the Victorian kitchen at night, to be drawn in code: back wall and pans, the range and the cook, the table and the copper mould, the front',
-    scene: 'Kitchen', anchor: 'To make one', swap: 'replace KitchenDiorama with the drawn scene'},
-];
+// Nothing in this chapter is a placeholder any more.
+export const PLACEHOLDERS: PlaceholderInfo[] = [];
 
 // ---------------------------------------------------------------- the scans (CREDITS.md), line boxes measured on them (source px)
 const BEETON_SIZE: [number, number] = [1523, 2367];
@@ -79,28 +75,7 @@ const Showpiece: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
-// ---------------------------------------------------------------- How you made one: the kitchen diorama (4 planes, parallax)
-const PLANES = [
-  {file: 'img/flow/d3_kitchen_1.png', what: 'plane 1 · back wall, copper pans, window', y: 0, h: 1080, depth: 0.25, tone: '#121a19'},
-  {file: 'img/flow/d3_kitchen_2.png', what: 'plane 2 · the range, a steaming pot, the cook in profile', y: 300, h: 780, depth: 0.5, tone: '#141614'},
-  {file: 'img/flow/d3_kitchen_3.png', what: 'plane 3 · the table, the copper jelly mould (coral)', y: 610, h: 470, depth: 0.78, tone: '#161411'},
-  {file: 'img/flow/d3_kitchen_4.png', what: 'plane 4 · front: bowls, a strainer, cloth', y: 860, h: 220, depth: 1, tone: '#0f0e0b'},
-];
-/** The diorama's motion is built: a slow sideways camera drift, each plane moving by its depth (no 3D, no push). */
-const KitchenDiorama: React.FC<{a: number; b: number}> = ({a, b}) => {
-  const f = useCurrentFrame();
-  const cx = interpolate(f, [a, b], [0, -90], clamp);
-  return (
-    <AbsoluteFill style={{background: '#0d0c09', overflow: 'hidden'}}>
-      {PLANES.map((p, i) => (
-        <div key={i} style={{position: 'absolute', left: -120 + cx * p.depth, top: p.y, width: 2160, height: p.h, background: p.tone, borderTop: `2px solid rgba(244,239,230,${0.1 + i * 0.04})`}}>
-          <div style={{position: 'absolute', right: 260, top: 10, width: 520, height: Math.min(110, p.h - 10)}}><PhLabel file={p.file} what={p.what} scale={0.75} /></div>
-        </div>
-      ))}
-    </AbsoluteFill>
-  );
-};
-
+// ---------------------------------------------------------------- How you made one: the drawn kitchen
 const Kitchen: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const pal = usePal();
   const steps: [string, string, string?][] = [
@@ -111,16 +86,16 @@ const Kitchen: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const xs = [130, 560, 130, 130, 130, 130];
   return (
     <AbsoluteFill>
-      <KitchenDiorama a={a} b={t.at('Some were')} />
-      <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(13,12,9,0.8) 0%, rgba(13,12,9,0.55) 45%, transparent 70%)'}} />
+      {/* our drawn scene (lookdev/tg.js tg_victorian_kitchen): the stockpot, the jelly bag, the clock, the coral mould */}
+      <Clip name="victorian_kitchen" at={a} />
+      <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(13,12,9,0.78) 0%, rgba(13,12,9,0.4) 30%, transparent 48%)'}} />
       {steps.map(([text, w, color], i) => <Note key={w} text={text} x={xs[i]} y={ys[i]} size={i === 1 ? 44 : 52} rot={-3} at={t.at(w) - 3} color={color} />)}
       {/* the recipe itself: Beeton's calf's-feet stock, each step swiped as it's said; then the mould, a woodcut */}
-      <PageScrap src={B729.src} size={BEETON_SIZE} box={B729.scrap} x={1080} y={90} w={720} at={t.at('boiled') - 2} rot={1.5} seed="b729" tag={`${BEETON_TAG} · p. 729`}>
+      <PageScrap src={B729.src} size={BEETON_SIZE} box={B729.scrap} x={1330} y={96} w={430} at={t.at('boiled') - 2} rot={1.5} seed="b729" tag={`${BEETON_TAG} · p. 729`}>
         <Swipe lines={[B729.feet]} from={t.at("calves' feet") - 1} to={t.end("calves' feet") + 4} seed="bf" />
         <Swipe lines={[B729.hours]} from={t.at('for hours.') - 1} to={t.end('for hours.') + 4} seed="bh" />
         <Swipe lines={[B729.strain]} from={t.at('strained') - 1} to={t.end('strained') + 4} seed="bs" />
       </PageScrap>
-      <PageScrap src={B751.src} size={BEETON_SIZE} box={B751.mould} x={720} y={760} w={260} at={t.at('copper') - 2} rot={-3} seed="b751" />
     </AbsoluteFill>
   );
 };
@@ -195,11 +170,12 @@ const Morph: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const pal = usePal();
   const m0 = t.at('added sugar') - 2;
   const m1 = t.at('Jell-O.');
-  // made in code from two stills (no video): the aspic wobbles, the two cross-dissolve in 12-a-second steps, the box settles
+  // made in code from three registered stills (no video), swapped like stop-motion: the amber aspic and its copper mould; half
+  // red, the mould turning to a cardboard box ("added sugar"); the red gelatin and its box ("Jell-O."). Each lands with a wobble.
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Swap a="tg_aspic" b="tg_gelatin_box" cx={MORPH_BOX.x + MORPH_BOX.w / 2} base={MORPH_BOX.y + MORPH_BOX.h - 30} h={640} from={m0} to={m1 + 4} at={a + 1} />
+      <States srcs={['morph_aspic_jello_first', 'morph_aspic_jello_mid', 'morph_aspic_jello_last']} at={[a + 1, m0, m1]} x={MORPH_BOX.x - 330} y={MORPH_BOX.y - 30} w={1400} land="drop" wobble />
       {g >= t.at('In 1897') && <Highlight text="1897" x={110} y={120} size={110} at={t.at('In 1897')} seed={65} rot={-2} />}
       <Note text="upstate new york" x={140} y={300} size={50} rot={-3} at={t.at('upstate') - 3} color="#ffffff" />
       <Note text="+ sugar" x={160} y={430} size={58} rot={-3} at={t.at('added sugar') - 3} />

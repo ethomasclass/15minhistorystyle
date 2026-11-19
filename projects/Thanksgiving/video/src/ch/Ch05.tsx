@@ -259,7 +259,7 @@ const Homemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="homemade." x={180} y={330} size={72} rot={-3} at={t.at('was homemade') - 1} />
       <Note text="from scratch." x={200} y={490} size={72} rot={-3} at={t.at('From scratch') - 3} />
       <Note text="all day long." x={220} y={650} size={72} rot={-3} at={t.at('All day long') - 3} color={pal.subject} />
-      <FlowCut name="tg_homemade_pie" x={760} y={470} w={520} rot={-3} at={t.at('From scratch') + 6} />
+      <FlowCut name="tg_homemade_pie" x={610} y={230} w={400} rot={-3} at={t.at('From scratch') + 6} />
       <Tag text={HALE_TAG} />
     </AbsoluteFill>
   );
