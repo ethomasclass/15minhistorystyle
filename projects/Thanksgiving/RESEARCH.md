@@ -1,6 +1,58 @@
 # Thanksgiving Menu: Fact Check and Research
 
-Written from established scholarship and primary texts. No live web check was run this session, so open every URL and match every quote against a scan before the script is locked.
+## Verified (live sources, Nov 2026)
+
+Checked 19 Nov 2026. Primary scans were read on the Internet Archive (Project Gutenberg was down for maintenance). "Safe wording" is what the script can say.
+
+### 1621
+- **Winslow's feast passage (Mourt's Relation, 1622).** VERIFIED, and it matches the modernized text below almost word for word. The original reads "after a *more* speciall manner" ("more" is missing from the old modernized quote) and "some ninetie men." Scan (Dexter ed., 1865, p.[61]): https://archive.org/details/mourtsrelationor00brad
+  - Safe: "Our harvest being gotten in, our governor sent four men on fowling... They four in one day killed as much fowl as, with a little help beside, served the company almost a week... their greatest king Massasoit, with some ninety men... they went out and killed five deer."
+- **"Fat and sweet" eels.** VERIFIED, but it is the March 1621 journal entry, not the autumn letter and not the feast. Original: "Squanto went at noone to fish for Eeles, at night he came home with as many as he could well lift in one hand, which our people were glad of, they were fat & sweet, he trod them out with his feete, and so caught them with his hands without any other Instrument." Same scan as above.
+  - Winslow's December 1621 letter adds: "in September we can take a Hogshead of Eeles in a night, with small labour, & can dig them out of their beds, all the Winter." Use this line for "eels that fall."
+  - Safe: "That spring, Squanto trod eels out of the mud with his feet. The colonists wrote that they were 'fat and sweet.' By autumn they could take a barrel of eels in a night. But no account puts eels at the feast."
+- **Bradford.** VERIFIED (modern-spelling edition): "And besides waterfowl there was a great store of wild turkeys, of which they took many, besides venison, etc." Note "*a* great store." He is describing the autumn of 1621 in general, not the feast. https://archive.org/details/Bradford_William_-_History_of_Plymouth_Plantation ; manuscript: https://www.mass.gov/info-details/of-plimoth-plantation
+
+### Showing off
+- **Simmons, "To Dress a Turtle" (American Cookery, 2nd ed., 1796, p.14-15).** VERIFIED, with a CORRECTION. There is no "night before." The text: "Fill a boiler or kettle, with a quantity of water sufficient to scald the callapach and callapee, the fins, &c. and about 9 o'clock hang up your Turtle by the hind fins, cut off the head and save the blood." The dish is also **baked in deep dishes with Madeira and forcemeat balls**, not a soup. https://archive.org/details/simmons-american-cookery
+  - Safe: "Amelia Simmons' recipe starts at nine o'clock: hang the turtle up by its back flippers, cut off the head, and save the blood."
+- **Mock turtle with calf's head.** VERIFIED in the same book, on the next page: "To dress a Calve's Head, Turtle fashion. The head and feet being well scalded and cleaned, open the head, taking the brains..." This is an American 1796 mock turtle, which is better than citing Glasse. Same URL.
+- **Oyster soup on an 1800s Thanksgiving menu.** PARTLY VERIFIED. No 1870 menu with oyster soup was found. The Everett House menu (Chicago, 24 Nov 1870, Newberry Library) has wild goose, turkey, cranberry sauce and pumpkin pie but no oyster soup in the published excerpt: https://newberry.org/blog/pass-the-three-varieties-of-squirrel-please-thanksgiving-in-1870 . A Cincinnati Enquirer account of the 1848 New England Hotel dinner lists oyster soup among three soups (cited by Cincinnati Magazine, which returned a 403, so this is secondhand): https://www.cincinnatimagazine.com/citywiseblog/heres-what-19th-century-cincinnatians-ate-for-thanksgiving-dinner/ . The Hotel Vendome, Boston, 1894, opens with Blue Point oysters and lists "Mince, Apple and Pumpkin Pies": https://www.pilgrimhall.org/thanksgiving-menus/ . UNLV has 1883 Thanksgiving menus with "Mock Turtle Soup" and raw oysters: https://special.library.unlv.edu/node/314777
+  - Safe: "Hotel Thanksgiving menus opened with oysters." To use oyster soup, show the 1848 menu and drop "1870."
+- **Mince pie with meat.** VERIFIED. Simmons 1796, "Minced Pies. A Foot Pie": neat's (cattle) feet, "to every four pound minced meat, add one pound of beef suet, and four pound apple raw... one quart of wine." Meat stayed in the filling through the 1800s and was dropped in the late Victorian era (https://www.historic-uk.com/CultureUK/Mince-Pies/). The 1887 green-tomato mince pie was NOT FOUND, so cut it.
+- **Decline of turtle soup.** VERIFIED (secondary). Overharvesting for soup cut Caribbean green turtles by an estimated 97% by the mid-20th century, prices rose, and mock turtle replaced the real thing. The green turtle has been listed as endangered in the US since 1978. https://phys.org/news/2018-06-turtle-delicacy.html ; https://www.oceanicsociety.org/news-and-announcements/the-long-road-of-green-sea-turtle-recovery/
+
+### Hale
+- **Northwood (1827) quotes.** VERIFIED, with CORRECTIONS. Scan: https://archive.org/details/northwoodatalen00halegoog (p.109-110). The text:
+  - "The roasted turkey took precedence on this occasion, being placed at the head of the table."
+  - "Indispensable" is said of the **chicken pie**, which is "like the celebrated pumpkin pie, an indispensable part of a good and true Yankee Thanksgiving." In the dessert course, "the pumpkin pie occupied the most distinguished niche."
+  - **Mince pie is not named.** The text has "a huge plumb pudding, custards, and pies of every name and description ever known in Yankee land."
+  - Safe: "the turkey 'at the head of the table'... pumpkin pie in 'the most distinguished niche.'"
+- **The 1863 letter.** VERIFIED: dated 28 Sept 1863, Philadelphia. LOC: https://www.loc.gov/item/mal2669900/ (the old file's "mal2629300" was wrong). Text: https://en.wikisource.org/wiki/Letter_to_Abraham_Lincoln_from_Sarah_Josepha_Hale . In the letter she writes "**For the last fifteen years** I have set forth this idea in the 'Lady's Book'" and asks for "a National and fixed Union Festival." Lincoln's proclamation followed on 3 Oct.
+  - "17 years": historians count roughly 1846-63, but her own letter says fifteen. Safe: "for more than fifteen years." "Five presidents" (Taylor, Fillmore, Pierce, Buchanan, Lincoln) is widely repeated in secondary sources (https://www.history.com/articles/abraham-lincoln-and-the-mother-of-thanksgiving), but only the Lincoln letter was seen. Safe: "letters to presidents, including Lincoln."
+
+### Gelatin
+- **Aspic and calves'-foot jelly.** VERIFIED (secondary). Gelatin dishes were a status symbol until the mid-1800s because extracting gelatin was so time-consuming that it implied a kitchen staff. In 1876, Mary Foote Henderson wrote that she had made calf's-foot jelly twice and would not again. https://blogs.mhnsw.au/cook/take-a-gang-of-calfs-feet/index.html ; https://www.npr.org/130543905
+- **Knox.** CORRECTION: Charles Knox began selling granulated gelatine in **1889** (or the early 1890s), not "the 1890s" alone. https://digitalsc.lib.vt.edu/exhibits/show/gelatine/the-knox-gelatine-company . Safe: "Knox, around 1890."
+- **Jell-O 1897.** VERIFIED: Pearle Wait of LeRoy, NY, named it in 1897 and sold the rights in 1899 for $450. https://www.thehenryford.org/collections/explore/articles/2019/america-s-most-famous-dessert
+- **Perfection Salad.** VERIFIED, with a caveat: Mrs. John E. Cooke won third prize in a Knox contest judged by Fannie Farmer. Some sources date it 1904; most, including Beard, say 1905. https://www.history.com/articles/jell-o-salad . Safe: "around 1905."
+- **A dated savory gelatin ad.** FOUND, with a CORRECTION: it uses lemon, not lime. A Star-Kist Tuna ad in *Woman's Day*, June 1955, "Monterey Soufflé Salad": tuna, a package of lemon-flavored gelatin, mayonnaise, olives, pimento. https://clickamericana.com/eras/1950s/monterey-souffle-salad-recipe-1955 . No dated lime-and-tuna ad was found. Also available: "Marvelous Salmon Salad," *The Country Gentleman*, 1 July 1953, made with unflavored gelatin: https://www.saturdayeveningpost.com/2018/05/frozen-gelatinous-wonders-1950s-fridge/
+
+### Test kitchens
+- **Angelus 1917.** PARTLY VERIFIED (secondary only; no scan of the booklet was found). The 1917 booklet promoting Angelus Marshmallows had recipes by Janet McKenzie Hill and the first documented sweet-potato-with-marshmallow dish. https://www.thekitchn.com/marshmallows-on-sweet-potatoes-who-thought-this-up-anyway-237538 ; https://www.mentalfloss.com/holidays/thanksgiving/why-we-eat-sweet-potato-casserole-with-marshmallows . The maker in 1917 was **Rueckheim Bros. & Eckstein** of Chicago, the Cracker Jack makers, renamed the Cracker Jack Co. in 1922: https://www.ggarchives.com/Epicurean/VintageAds/AngelusMarshmallows.html . Don't "read it straight." Paraphrase: "mashed sweet potatoes baked with a marshmallow topping."
+- **Urann, 1912 / Ocean Spray, 1941.** VERIFIED (secondary). Urann began canning cranberry sauce in 1912 for the local Massachusetts market. The co-op formed in 1930, and the jellied log went national in 1941. https://www.smithsonianmag.com/arts-culture/this-man-made-the-first-canned-cranberry-sauce-180947862/
+- **Green bean casserole.** VERIFIED, with a CORRECTION: her name is **Dorcas** Reilly (1955, Campbell's home economics kitchen, Camden NJ; first called "Green Bean Bake"). https://www.npr.org/2018/10/25/660436852/remembering-the-woman-behind-the-classic-american-green-bean-casserole
+- **Butterball, 1954.** VERIFIED: Swift & Co. launched the Butterball turkey in 1954. The name was trademarked in 1940 and licensed from Leo Peters. https://en.wikipedia.org/wiki/Butterball
+- **Broad-Breasted White.** VERIFIED: the breast-heavy build, short keel and short shanks keep males from mounting effectively, so commercial flocks rely on artificial insemination. https://livestockconservancy.org/heritage-turkey-definition/ ; https://modernfarmer.com/2014/11/turkeys-got-broad-white-breasts/ . Safe: "too top-heavy to mate on its own; nearly every commercial turkey comes from artificial insemination."
+
+### Numbers (all are industry estimates)
+- **Turkeys:** about 46 million at Thanksgiving, the National Turkey Federation's long-running estimate. It has been about the same every year since 2007 and has no published method. https://time.com/5022315/turkeys-killed-thanksgiving
+- **Cranberry cans:** Ocean Spray figures vary by year and outlet. About 67-75 million cans of jellied sauce a year, about 80-85% of them sold in the holiday season (Adweek; 2022 reporting). https://www.adweek.com/commerce/why-ocean-spray-intentionally-labels-its-cranberry-sauce-upside-down/ . Safe: "around 70 million cans each holiday season."
+- **Green bean casserole:** Campbell's estimate is about 20 million homes or dinners each Thanksgiving (NPR, 2018). Safe: "about 20 million, by Campbell's count."
+
+---
+
+## SUPERSEDED: earlier research (written without web access; kept for reference, see corrections above)
+
 
 ## 1. "1621 had no turkey, no potatoes, no pie; they ate eels." Verdict: PARTLY FALSE / OVERSTATED
 - **Primary source, Edward Winslow, letter of 11 Dec 1621, printed in *Mourt's Relation* (1622), modernized spelling:**
