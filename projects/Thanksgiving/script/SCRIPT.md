@@ -132,19 +132,19 @@ And then they went one step further. They redesigned the turkey.
 
 The turkey on most American tables is a breed called the Broad-Breasted White.
 
-You may have heard it's a GMO turkey. It isn't. Nobody edited its genes in a lab. They did it the old-fashioned way: pick the biggest birds, breed them, and repeat. For about seventy years. [check]
+You may have heard it's a GMO turkey. It isn't. Nobody edited its genes in a lab. They did it the old-fashioned way: pick the biggest birds, breed them, and repeat. Generation after generation, starting back in the 1920s and '30s.
 
-First, farmers wanted more breast meat, so they bred for a broader chest. Then in the 1950s, they swapped the turkey's dark feathers for white ones. Why? Because when you pluck a white bird, the little leftover pin feathers don't show. It looks cleaner in the store. [check]
+First, farmers wanted more breast meat, so they bred for a broader chest. Then in the 1950s, they swapped the turkey's dark feathers for white ones. Why? Because when you pluck a white bird, the little leftover pin feathers don't show. It looks cleaner in the store.
 
-And the birds kept getting bigger. In the 1930s, an average turkey weighed about thirteen pounds. Today, it's over thirty. [check: USDA live-weight figures]
+And the birds kept getting bigger. In the 1930s, an average turkey weighed about thirteen pounds, live. Today, it's over thirty.
 
-[serious] It worked so well that the birds got too top-heavy to mate on their own. The males are too heavy. The shape is wrong. So every single one of them now comes from artificial insemination. [check: Livestock Conservancy]
+[serious] It worked so well that the birds got too top-heavy to mate on their own. The males are too heavy. The shape is wrong. So nearly every one of them now comes from artificial insemination.
 
-Out of the more than 200 million turkeys raised in America each year, almost all of them are this one breed. [check: USDA NASS]
+Out of the roughly 194 million turkeys raised in America last year, almost all of them are this one breed.
 
 [deadpan] Happy Thanksgiving.
 
-The older breeds, the heritage turkeys, can still do it themselves. They're smaller, slower-growing, and much more expensive. They're what a turkey used to be. [check]
+The older breeds, the heritage turkeys, can still do it themselves. They're smaller, slower-growing, and more expensive. They're what a turkey used to be.
 
 So even the bird is an invention.
 
