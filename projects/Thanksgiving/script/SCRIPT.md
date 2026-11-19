@@ -94,7 +94,7 @@ But homemade takes all day. And by 1900, somebody was ready to sell a shortcut.
 
 Here's a dish that seems like it came from nowhere. The gelatin mold.
 
-But in the 1800s, a shimmering jelly on the table was a showpiece. To make one, you boiled calves' feet for hours. Then you skimmed it, strained it, cleared it, and set it in a copper mold. Only a house with a cook, and a lot of time, could pull it off. A wobbling jelly said: we have servants.
+But in the 1800s, a shimmering jelly on the table was a showpiece. To make one, you boiled calves' feet for hours. Then you skimmed it, strained it, cleared it, and set it in a copper mold. Some were sweet. The savory ones, with meat or vegetables set inside, had a fancy French name: aspic. Only a house with a cook, and a lot of time, could pull it off. A wobbling aspic said: we have servants.
 
 Then came the shortcut. Around 1890, Charles Knox started selling gelatine already ground up and ready to dissolve. In 1897, a company in upstate New York added sugar and fruit flavor and called it Jell-O. Suddenly, anyone could make the rich family's dessert. In about ten minutes.
 
@@ -102,7 +102,7 @@ Mock aspic.
 
 And then home cooks got ambitious. Around 1905, a prize in a gelatine contest went to something called "Perfection Salad": shredded cabbage, celery and peppers, suspended in gelatin. By the 1950s, people were putting just about anything in there.
 
-Like this. "Monterey Soufflé Salad," from 1955. That's tuna. In lemon gelatin.
+Like this. "Monterey Soufflé Salad," from 1955. That's tuna. In lemon gelatin. The rich family's aspic, now from a box.
 
 [pause 3 s]
 
