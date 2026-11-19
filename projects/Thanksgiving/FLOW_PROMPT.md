@@ -1,91 +1,83 @@
-You are making image and video assets in Google Flow for a YouTube history video about how the Thanksgiving menu was invented. Make every asset below, in order, exactly as described, and name each download with the exact file name given. These are PIECES that will be cut out and animated later, not finished scenes, so follow the background and framing rules strictly.
+You are making image and video assets in Google Flow for a YouTube history video about how the Thanksgiving menu was invented. Make every asset below, in order, exactly as described, and name each download with the exact file name given. Most of these are PIECES that will be cut out and animated later, so follow the background and framing rules strictly.
 
 RULES FOR EVERY ASSET
-1. No text of any kind: no letters, numbers, labels, logos, brands or signatures, not even on cans, boxes or menus.
-2. No real or recognizable people and no faces. People appear only as solid black silhouettes (rule 6) or as hands (section F).
-3. One object or set per image, whole and fully inside the frame with a clear margin on every side. Nothing cropped by the edge.
-4. 16:9, highest resolution available. Even, soft light from the upper left. No border, frame, vignette or picture mount.
-5. Backgrounds: "flat seamless pale grey" unless the asset says "pure black". The background must be perfectly flat and even, with no gradient, shadow, floor line or texture, because it will be removed.
-6. Silhouette figures are ONE SOLID BLACK SHAPE: no faces, no eyes, no light lines for collars, folds, buttons or seams, no rim light. Clear profile, small in the frame, not overlapping other figures.
-7. PAPER LOOK on every prop (sections A–D), unless the asset says otherwise: "made of cut paper craft: the printed image clipped from an old magazine, visible paper fibres, slightly torn white edges, a faint drop shadow."
-8. Colour: assets from 1621 to the 1890s use muted, faded engraving colours. Assets from the 1900s to the 1950s use bright, saturated magazine colour.
-9. When a step says "use [file] as reference," attach that image so the object, scale, lighting and framing stay identical.
-10. Videos: 8 seconds, export 1080p. Add to EVERY video prompt: "Full frame from the first frame, no border or picture frame. Locked-off camera, no camera movement. The background stays perfectly flat and even. Nothing enters or leaves the frame. No text."
+1. No text of any kind: no letters, numbers, labels, logos, brands or signatures, not even on cans, boxes, dials or menus.
+2. No real or recognizable people and no faces. People appear only as solid black silhouettes (rule 6) or as hands.
+3. One object or set per image, whole and fully inside the frame with a wide clear margin on every side. Nothing cropped by the edge.
+4. 16:9. Download at the LARGEST size Flow offers (2K or 4K), never 1376x768. Even, soft light from the upper left. No border, frame, panel lines, vignette or picture mount.
+5. Prop backgrounds are "flat seamless pale grey": perfectly flat and even, with no gradient, floor line, texture or cast shadow on the background, because it will be removed.
+6. Silhouette figures are ONE SOLID BLACK SHAPE: no faces, no eyes, no light lines for collars, folds, buttons or seams, no rim light, no white cuffs. Clear profile, not overlapping other figures.
+7. PAPER LOOK for every prop in sections A to D: "made of cut paper craft: the printed image clipped from an old magazine, cut along the object's own outline (never a rectangle of paper behind it), visible paper fibres, slightly torn white edges."
+8. Colour: assets set between 1621 and the 1890s use muted, faded engraving colours. Assets set from the 1900s to the 1950s use bright, saturated magazine colour.
+9. One image per file. Never put several frames on one sheet. When a step says "use [file] as reference," attach that image so the object, scale, position, lighting and framing stay identical.
+10. VIDEO RULES, for every video: 8 seconds, export 1080p. Add to the prompt: "Full frame from the first frame, no border or picture frame. Locked-off camera, no camera movement. The background stays perfectly flat and even. Nothing enters or leaves the frame. No text."
+
+Already done, do not remake: the eel, the cranberry sauce sliding out of the can, and the hand placing an object.
 
 ========================================
-BATCH 1: THE TEST (make these first, then stop and wait for feedback)
+A. PROPS (still images, grey background, paper look)
 ========================================
-
-T1. tg_eel.png
-A single dark river eel lying in a loose S-curve, seen from above, on a flat seamless pale grey background. Muted faded engraving colours. [PAPER LOOK]
-
-T2. tg_eel_wriggle.mp4  (image-to-video, start frame: tg_eel.png)
-The eel slowly wriggles in place, its body rippling in an S-curve, then settles back down. [VIDEO RULES]
-
-T3. tg_calf_head.png
-A boiled calf's head on an oval platter, cooked and plain, not gory, side view, in an 1800s kitchen style, on a flat seamless pale grey background. Muted engraving colours. [PAPER LOOK]
-
-T4. tg_tureen.png  (use tg_calf_head.png as reference for scale, position and platter)
-An ornate Victorian silver soup tureen with a turtle-shaped lid, on the same oval platter, same size and position, on a flat seamless pale grey background. Muted engraving colours. [PAPER LOOK]
-
-T5. tg_morph_mock_turtle.mp4  (first frame: tg_calf_head.png, last frame: tg_tureen.png)
-The calf's head transforms into the turtle tureen in one continuous, smooth, slightly magical change. No extra objects. [VIDEO RULES]
-
-T6. Eel river at dawn, four separate plane images. Make d1_sky.png first, then use it as reference for the other three. Palette for ALL four, exactly: ink #0D0C09 for the nearest shapes; teal-slate haze #1C3332, #335652, #5F857F for the distance; sage glow #DFE0D6; cream #F4EFE6 for light; coral #FF6F61 ONLY on the basket. No other colours, no paper look.
-- d1_sky.png: a pale dawn sky band over a still tidal river, soft low mist, full frame.
-- d1_far.png: a low line of hazy distant trees along the far shore, on pure black, the trees in the bottom third only.
-- d1_mid.png: the near riverbank with tall reeds and a small dugout canoe pulled up, on pure black.
-- d1_front.png: dark mud flats and reeds across the bottom of the frame; one anonymous wading figure in profile, a solid black silhouette, pressing one foot into the mud; a woven basket beside the figure, in coral #FF6F61. On pure black.
-
-T7. Cranberry sauce, 6 frames: tg_cran_1.png to tg_cran_6.png. Make frame 1, then use it as reference for frames 2–6.
-- Frame 1: a plain unlabelled tin can tipped on its side over a white plate, the dark red jellied cranberry sauce just starting to slide out. Side view, centred, on a flat seamless pale grey background. Bright saturated 1950s magazine colour. [PAPER LOOK]
-- Frames 2–5: the same, with the ridged cylinder of sauce one-fifth, two-fifths, three-fifths and four-fifths of the way out.
-- Frame 6: the sauce fully out, standing upright on the plate, the can's ridges printed around it, the empty can lying beside it.
-
-T8. Two hand poses, solid black silhouettes:
-- tg_hand_card_R.png: a single adult hand and forearm entering from the right edge, holding a small blank card between finger and thumb.
-- tg_hand_place_R.png: the same hand, palm down, as if just setting an object down.
-For both: a solid black silhouette with no detail, no rings or nails, a plain shirt cuff shown only as an outline, on a flat seamless pale grey background. No paper look.
-
-STOP after Batch 1. Wait for feedback before Batch 2.
+A1. tg_calf_head.png: a young CALF's head (small, hornless, soft face; not an adult cow), boiled and plain, not gory, lying on an oval pewter platter, side view. Paper cut along the platter's outline. Muted engraving colours.
+A2. tg_tureen.png (use A1 as reference: same platter, size and position): an ornate Victorian silver soup tureen with a turtle-shaped lid, on the same oval platter. Muted engraving colours.
+A3. tg_turtle.png: a green sea turtle seen from above, flippers spread. Muted engraving colours.
+A4. tg_aspic.png: a tall, clear amber calves'-foot jelly turned out of its mould, standing on a glass cake stand, with the copper jelly mould beside it. Muted engraving colours.
+A5. tg_aspic_savory.png: a Victorian savoury aspic: a clear golden jelly dome with slices of egg, vegetables and meat set inside it, on a silver dish. Muted engraving colours.
+A6. tg_gelatin_box.png (use A4 as reference: same size and position): a small plain 1900s dessert-powder box with a blank label, beside a bright red wobbly gelatin on a plate. Bright magazine colour.
+A7. tg_jello.png: a bright green gelatin ring mould with sliced vegetables suspended inside it, on a white plate, side three-quarter view. Bright 1950s magazine colour.
+A8. tg_homemade_pie.png: a homemade double-crust pie on a red checked cloth, a wooden rolling pin beside it. Bright 1900s magazine colour.
+A9. tg_can.png (use A8 as reference: same cloth, size and position): one plain unlabelled tin can standing on the same red checked cloth.
+A10. tg_modern_plate.png: a full modern American Thanksgiving dinner plate seen from above: sliced roast turkey, green bean casserole with fried onions, sweet potatoes topped with toasted marshmallows, and a slice of ridged jellied cranberry sauce. Bright colour. Paper cut along the plate's outline.
+A11. tg_turkey_bronze.png: a live heritage bronze turkey standing in strict side view facing LEFT, legs straight and fully visible, feet at the bottom centre. Muted engraving colours.
+A12. tg_turkey_white.png (use A11 as reference: same pose, size and position): the same turkey with all-white feathers.
+A13. tg_scale.png: an early-1900s farm platform scale with a large round dial (the dial face completely blank), side view.
+A14. tg_deer.png: a white-tailed deer, side view, standing. Muted engraving colours.
+A15. tg_fowl.png: a brace of wild ducks and a goose laid together, as in an old game engraving. Muted engraving colours.
+A16. tg_potato.png: three plain potatoes. Muted engraving colours.
 
 ========================================
-BATCH 2: EVERYTHING ELSE (only after Batch 1 is approved)
+B. STATE SHEETS (three separate images each, identical framing; use image A of each as reference)
 ========================================
+B1. Mince pie. tg_mince_A.png: a 19th-century double-crust mince pie on a pewter plate, whole. tg_mince_B.png: the same pie with one wedge cut out, showing a dark filling of chopped beef, suet, raisins and apple. tg_mince_C.png: the same plate, now empty, with the ingredients laid out around it, well apart from each other: a piece of boiled beef, a block of white suet, a pile of raisins, two apples, a small plain wine bottle. Overhead three-quarter view. Muted engraving colours.
+B2. Green bean casserole. tg_casserole_A.png: a green bean casserole topped with fried onions in a 1950s glass baking dish. tg_casserole_B.png: the same dish with half of it spooned out. tg_casserole_C.png: the same dish, empty, beside three plain unlabelled 1950s tin cans. Bright 1950s magazine colour.
+B3. Pumpkin pie, five images, tg_pie_1.png to tg_pie_5.png: a whole pumpkin pie in a tin pie plate, overhead three-quarter view, then the same pie missing 1, 2, 3 and 4 slices. Bright colour.
 
-A. STOP-MOTION FRAMES (make frame 1, then use it as reference for the rest)
-A1. tg_pie_1.png to tg_pie_5.png: a whole pumpkin pie in a tin pie plate, overhead three-quarter view, then the same pie missing 1, 2, 3 and 4 slices. Grey background. 1900s magazine colour. [PAPER LOOK]
-A2. tg_turkey_1.png to tg_turkey_5.png: a whole roast turkey on a platter, side view, then the breast sliced away step by step until a carved carcass remains. Grey background. 1950s colour. [PAPER LOOK]
+========================================
+C. HANDS (solid black silhouettes, grey background, NO paper look)
+========================================
+For all: a single adult hand and forearm entering from the RIGHT edge of the frame. The hand, wrist and sleeve are ONE solid black shape: no white cuff, no rings, no nails, no detail.
+C1. tg_hand_card.png: holding a small blank CREAM card (#F4EFE6) between finger and thumb.
+C2. tg_hand_pinch.png: pinching and dropping a small ingredient.
+C3. tg_hand_point.png: pointing with the index finger.
+C4. tg_hand_can.png: gripping a plain tin can from the side.
 
-B. STATE SHEETS (three images, identical framing; use image 1 as reference)
-B1. tg_mince_A.png: a 19th-century double-crust mince pie on a pewter plate, whole. tg_mince_B.png: the same pie with one wedge cut out, showing a dark filling of chopped beef, suet, raisins and apple. tg_mince_C.png: the same plate empty, with the ingredients laid out around it: a piece of boiled beef, a block of white suet, a pile of raisins, two apples, a small plain wine bottle. Grey background. Muted engraving colours. [PAPER LOOK]
-B2. tg_casserole_A.png: a green bean casserole topped with fried onions in a 1950s glass baking dish. tg_casserole_B.png: the same dish with half of it spooned out. tg_casserole_C.png: the dish empty, beside three plain unlabelled 1950s tin cans. Grey background. 1950s colour. [PAPER LOOK]
+========================================
+D. PERIOD AD BACKGROUNDS (full frame, no paper look, no grey background)
+========================================
+D1. tg_adplate_1910s.png: a 1910s magazine illustration background in soft lithograph colours: a decorative ornate border around a large blank cream panel, with a small still life of sweet potatoes in one corner. Absolutely no text.
+D2. tg_adplate_1950s.png: a colourful 1950s American magazine food-ad background in gouache: a sunny kitchen counter with a red-and-white checked cloth, an empty area in the centre, a large blank cream panel on the right. Absolutely no text, letters, logos or brands.
 
-C. MOVING CUT-OUTS (make the image, then image-to-video)
-C1. tg_jello.png: a bright green gelatin ring mould with sliced vegetables suspended inside it, on a plate, side three-quarter view. Grey background. 1950s colour. [PAPER LOOK]
-C2. tg_jello_wobble.mp4 (start frame: tg_jello.png): the gelatin trembles and wobbles as if the table was bumped, then settles. [VIDEO RULES]
+========================================
+E. SILHOUETTE SCENES (full-frame images, then one video from each)
+========================================
+STYLE for all four: NOT a photograph. A flat, graphic, layered paper-cut illustration, like a screen print, with 3 or 4 clearly separated depth bands and a soft mist band between them. Use ONLY these colours: ink #0D0C09 for the nearest shapes and all figures; teal-slate haze #1C3332, #335652, #5F857F for the distance; pale sage #DFE0D6; cream #F4EFE6 for light (sky glow, windows, lamps); and coral #FF6F61 on ONE named object only. No other colours. Figures follow rule 6. Keep everything important inside the central 80% of the frame. Make E1 first and use it as the style reference for E2, E3 and E4.
 
-D. "MOCK" MORPHS (first image, then second image using the first as reference, then the video)
-D1. tg_aspic.png: a tall copper jelly mould with a clear amber jelly turned out beside it on a glass stand, muted engraving colours. tg_gelatin_box.png: in the same place and size, a small plain 1920s-style dessert box with no text, beside a bright red wobbly gelatin. tg_morph_mock_aspic.mp4: first frame tg_aspic.png, last frame tg_gelatin_box.png, one continuous smooth slightly magical transformation. [VIDEO RULES]
-D2. tg_homemade_pie.png: a homemade pie on a checked cloth with a wooden rolling pin beside it, 1900s colour. tg_can.png: in the same place and size, a plain unlabelled tin can on the same cloth. tg_morph_mock_homemade.mp4: first frame tg_homemade_pie.png, last frame tg_can.png, the same kind of transformation. [VIDEO RULES]
-For D1 and D2, use the paper look on the still images.
+E1. scene_eel_river.png: a tidal river at dawn in 1621 New England. Far: a low line of hazy trees. Middle: a riverbank with tall reeds and a small dugout canoe pulled up. Front: dark mud flats and reeds; one wading figure in profile, knee-deep, pressing one foot into the mud; a woven basket beside the figure, in coral. A pale cream dawn band low in the sky.
+    scene_eel_river.mp4 (start frame: scene_eel_river.png): the figure slowly lifts one foot and presses it down into the mud; the water ripples gently; mist drifts. Every object stays a solid flat silhouette with no shading. [VIDEO RULES]
+E2. scene_turtle_dock.png: an 1800s harbour dock. Far: the masts and rigging of a sailing ship in haze. Middle: a wooden dock with stacked crates and a horse-drawn wagon in profile. Front: two dockworkers in profile lowering an open wooden crate that holds a large sea turtle on its back; the turtle is coral.
+    scene_turtle_dock.mp4: the crate is lowered slowly; the turtle's flipper moves once; gulls cross the far sky. Solid flat silhouettes, no shading. [VIDEO RULES]
+E3. scene_victorian_kitchen.png: a grand Victorian basement kitchen at night. Back: a wall of hanging copper pans and a small window with cream moonlight. Middle: a cast-iron range with a big steaming pot; a cook in profile lifting a ladle. Front: a wooden table with a tall copper jelly mould, in coral.
+    scene_victorian_kitchen.mp4: steam rises from the pot; the cook slowly stirs with the ladle. Solid flat silhouettes, no shading. [VIDEO RULES]
+E4. scene_1950s_kitchen.png: a 1950s suburban kitchen in daytime. Back: a window showing a lawn and a picket fence, cream light. Middle: cabinets and a counter; a hostess in profile in a 1950s dress and apron. Front: a row of plain tin cans and a casserole dish, the dish in coral.
+    scene_1950s_kitchen.mp4: the hostess turns a hand can-opener on a can, then sets the can down. Solid flat silhouettes, no shading. [VIDEO RULES]
 
-E. DIORAMA PLANES (same palette and rules as T6: no paper look; make the sky first, then the other planes using it as reference; the far, mid and front planes on pure black; coral only on the named subject)
-E1. Turtle dock, 1800s: d2_sky.png (a hazy harbour sky), d2_far.png (the masts and rigging of a sailing ship), d2_mid.png (a wooden dock with crates and a horse-drawn wagon in profile), d2_front.png (an open wooden crate of live sea turtles; one turtle in coral).
-E2. Victorian kitchen at night: d3_back.png (a back wall with hanging copper pans and a small window with cream moonlight), d3_mid.png (a cast-iron range with a big steaming pot; a cook in profile, solid black), d3_front.png (a wooden table with a copper jelly mould in coral).
-E3. 1950s suburban kitchen, daytime: d4_back.png (a window showing a lawn and a picket fence, cream light), d4_mid.png (kitchen cabinets and a counter; a hostess in profile in a 1950s dress, solid black), d4_front.png (a casserole dish in coral and a row of plain cans).
-E4. Effect loops on pure black, for screen blending: tg_steam.mp4 (soft white steam rising and curling, from the bottom centre) and tg_simmer.mp4 (bubbles gently simmering, seen from the side). Locked camera, nothing else in frame. [VIDEO RULES]
+========================================
+F. PROP VIDEOS
+========================================
+For the three morphs, add: "A single continuous, smooth, slightly magical transformation. No extra objects appear."
+F1. tg_morph_mock_turtle.mp4 (first frame: tg_calf_head.png, last frame: tg_tureen.png): the calf's head transforms into the turtle tureen. [VIDEO RULES]
+F2. tg_morph_mock_aspic.mp4 (first frame: tg_aspic.png, last frame: tg_gelatin_box.png): the jelly and its copper mould transform into the box and the red gelatin. [VIDEO RULES]
+F3. tg_morph_mock_homemade.mp4 (first frame: tg_homemade_pie.png, last frame: tg_can.png): the pie and rolling pin transform into the tin can. [VIDEO RULES]
+F4. tg_jello_wobble.mp4 (start frame: tg_jello.png): the gelatin trembles and wobbles as if the table was bumped, then settles. [VIDEO RULES]
+F5. tg_steam.mp4: soft white steam rising and curling from the bottom centre, on a pure black background, nothing else in frame. [VIDEO RULES]
 
-F. SILHOUETTE HANDS (same rules as T8; make each pose entering from the RIGHT and again from the LEFT, with _R or _L at the end of the name)
-tg_hand_card, tg_hand_place, tg_hand_pinch (pinching and dropping a small ingredient), tg_hand_point (pointing with the index finger), tg_hand_can (gripping a tin can from the side).
-
-H. INFLATING TURKEY (ch8)
-H1. tg_turkey_live_bronze.png: a live heritage bronze turkey standing in strict side view, legs straight and fully visible, on a flat seamless pale grey background. Muted engraving colours. [PAPER LOOK]
-H2. tg_turkey_live_white.png (use H1 as reference: same pose, size and position): the same turkey with all-white feathers.
-H3. tg_scale.png: an early-1900s farm platform scale with a round dial (the dial face blank, no numbers), side view, on a flat seamless pale grey background. [PAPER LOOK]
-
-G. PERIOD AD BACKGROUNDS (no paper look)
-G1. tg_adplate_1950s.png: a colourful 1950s American magazine food-ad illustration background: a sunny kitchen counter with a red-and-white checked cloth, an empty plate area in the centre, a large blank cream panel on the right side. Gouache illustration style. Absolutely no text, letters, logos or brands.
-G2. tg_adplate_1910s.png: a 1910s magazine illustration background in soft lithograph colours: a decorative ornate border around a large blank cream panel, with a small still life of sweet potatoes in one corner. Absolutely no text.
-
-FINAL CHECK before handing anything back: zoom in on every image. Redo any that contain text or letter-like marks, a face, light lines inside a silhouette, coral on anything but the named subject, a cropped object, or an uneven background.
+FINAL CHECK before handing anything back: zoom in on every image and scrub every video. Redo any that contain text or letter-like marks, a face, light lines or shading inside a silhouette, coral on anything but the named object, a cropped object, more than one frame on a sheet, a photographic look in section E, or an uneven prop background. Hand back all files in one zip.
