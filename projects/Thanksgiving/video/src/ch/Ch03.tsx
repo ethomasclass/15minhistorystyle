@@ -16,7 +16,7 @@ import React from 'react';
 import {AbsoluteFill, interpolate, random, useCurrentFrame} from 'remotion';
 import words from '../../public/audio/ch03_showing_off.words.json';
 import {clamp} from '../lib/anim';
-import {Arrow, Highlight, JF, Loop, Note, useGFrame} from '../kit/Kit';
+import {Arrow, Highlight, JF, Loop, Note, Tag, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
@@ -25,17 +25,15 @@ import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
 import {DeskScene} from '../kit/tg_desk';
-import {Cut, stateMap, States} from '../kit/tg_cut';
+import {Clip, Cut, stateMap, States} from '../kit/tg_cut';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
 
 
-export const PLACEHOLDERS: PlaceholderInfo[] = [
-  {file: 'img/flow/d2_turtle_dock.png', what: 'the turtle dock, to be drawn in code as a silhouette scene (STYLE_GAP.md); the turtle cut-out is already on it', scene: 'Dock', anchor: 'shipped',
-    swap: 'drop the file in public/; AssetOr shows it full frame'},
-];
+// Nothing in this chapter is a placeholder any more: the dock and the dining hall are our drawn scenes.
+export const PLACEHOLDERS: PlaceholderInfo[] = [];
 
 // ------------------------------------------------------------------ the bill of fare
 const MENU_W = 640;
@@ -86,39 +84,56 @@ const TAG_EVERETT = 'Annual Thanksgiving Dinner, Everett House, Chicago, Nov. 24
 
 const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
   const g = useGFrame();
-  // the real 1870 menu first (oysters swiped on it), then our typeset card slaps over it for the turtle, the grandest dinners' dish
-  const card = t.at('grandest') - 3;
-  const rowAt = [-999, t.at('was turtle') - 2, t.at('grandest') + 2, t.at('grandest') + 6, t.at('grandest') + 10, NEVER];
+  // the real 1870 menu, oysters swiped on it; the grandest dinners' dish arrives in the next shot (the drawn dining hall)
   return (
     <AbsoluteFill>
       <DarkPaper />
       {g >= t.at('1800s') && <Highlight text="THE 1800s" x={120} y={120} size={110} at={t.at('1800s')} seed={31} rot={-2} />}
       <Note text="course after course" x={150} y={310} size={60} rot={-3} at={t.at('course after') - 3} />
-      {g < card + 4 && (
-        <PageScrap src={EVERETT.src} size={EVERETT.size} box={EVERETT.scrap} x={980} y={170} w={820} at={t.at('course after') - 2} rot={1.5} tag={TAG_EVERETT} seed="ev">
-          <Swipe lines={EVERETT.oysters} from={t.at('oysters') - 1} to={t.at('oysters') + 6} seed="evo" />
-        </PageScrap>
-      )}
-      <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('oysters') - 3} color="#ffffff" out={card} />
-      <MenuCard x={1040} y={110} rot={1.5} numAt={card} rowAt={rowAt} swipeAt={t.at('turtle')} at={card} />
-      <Slip text="“we've arrived”" x={150} y={560} at={t.at('said') - 2} rot={-3} size={66} />
-      {/* the dish itself: the turtle-lidded tureen, set down on the desk as the soup is named */}
-      <Cut name="tg_tureen" x={600} y={800} w={400} rot={-2} at={t.at('was turtle') - 2} />
-      <Slip text="green sea turtle" x={190} y={720} at={t.at('Green') - 2} rot={2} size={62} coral />
+      <PageScrap src={EVERETT.src} size={EVERETT.size} box={EVERETT.scrap} x={980} y={170} w={820} at={t.at('course after') - 2} rot={1.5} tag={TAG_EVERETT} seed="ev">
+        <Swipe lines={EVERETT.oysters} from={t.at('oysters') - 1} to={t.at('oysters') + 6} seed="evo" />
+      </PageScrap>
+      <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('oysters') - 3} color="#ffffff" />
     </AbsoluteFill>
   );
 };
 
-/** Green sea turtles shipped up alive: the Flow turtle-dock diorama, full frame (placeholder until it lands). */
-const Dock: React.FC<{t: TL; a?: number}> = ({t}) => (
-  <AbsoluteFill style={{background: '#0d0c09'}}>
-    {/* the dock itself is still to come (a code-drawn silhouette scene: STYLE_GAP.md); the turtle is here already */}
-    <AssetOr src="img/flow/d2_turtle_dock.png" what="turtle dock, 1800s (code-drawn scene to come): harbour haze, masts, crates" x={0} y={0} w={1920} h={1080} />
-    <Cut name="tg_turtle" x={1010} y={250} w={640} rot={8} at={t.at('alive') - 8} land="rise" />
-    <Slip text="shipped up alive" x={150} y={760} at={t.at('alive') - 2} rot={-3} size={64} />
-    <Slip text="from the Caribbean" x={200} y={870} at={t.at('Caribbean') - 2} rot={2} size={56} />
+const TAG_DRAWN = 'Drawn scene · the people are invented';
+/** "The dish that said we've arrived was turtle": our drawn dining hall (lookdev/tg_b.js tg_dining_hall); the waiter sets the
+ *  turtle tureen down on "turtle". */
+const Grand: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <Clip name="dining_hall" at={a} />
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.5) 0%, transparent 36%)'}} />
+    <Slip text="“we've arrived”" x={150} y={130} at={t.at('said') - 2} rot={-3} size={66} />
+    <Slip text="turtle soup" x={200} y={250} at={t.at('was turtle') + 4} rot={2} size={62} coral />
+    <Tag text={TAG_DRAWN} />
   </AbsoluteFill>
 );
+
+/** Green sea turtles shipped up alive: our drawn wharf (lookdev/tg_b.js tg_turtle_dock), the crate coming down off the brig. */
+const Dock: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <Clip name="turtle_dock" at={a} />
+    <Slip text="green sea turtles" x={1130} y={130} at={t.at('Green') - 1} rot={-2} size={62} coral />
+    <Slip text="shipped up alive" x={1190} y={250} at={t.at('alive') - 2} rot={2} size={58} />
+    <Slip text="from the Caribbean" x={1150} y={360} at={t.at('Caribbean') - 2} rot={-2} size={54} />
+    <Tag text={TAG_DRAWN} />
+  </AbsoluteFill>
+);
+
+/** "A table like that said one thing": back in the hall, the tureen on the table, pushing in. */
+const Afford: React.FC<{t: TL; a: number}> = ({t, a}) => {
+  const g = useGFrame();
+  return (
+    <AbsoluteFill>
+      <Clip name="dining_hall" at={a} start={5.4} />
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.5) 0%, transparent 36%)'}} />
+      {g >= t.at('look what') && <Highlight text="LOOK WHAT WE CAN AFFORD" x={150} y={120} size={84} at={t.at('look what')} seed={41} rot={-2} />}
+      <Tag text={TAG_DRAWN} />
+    </AbsoluteFill>
+  );
+};
 
 /** The guided pan: from the page top down Simmons p. 20 to the turtle line, landing as "About nine o'clock" is said. */
 const TurtlePan: React.FC<{t: TL; a?: number}> = ({t}) => {
@@ -279,7 +294,6 @@ const Point: React.FC<{t: TL; a?: number}> = ({t}) => {
       <Loop cx={140 + 320 * s} cy={rowY(5)} rx={200} ry={52} at={t.at('mince pie meant') + 6} seed={39} tilt={2} />
       <Arrow x1={140 + 560 * s} y1={rowY(5)} x2={1010} y2={570} bow={30} at={t.at('mince pie meant') + 9} />
       <Slip text="= hours" x={1030} y={520} at={t.at('hours') - 2} rot={-2} size={70} />
-      {g >= t.at('look what') && <Highlight text="LOOK WHAT WE CAN AFFORD" x={720} y={800} size={64} at={t.at('look what')} seed={41} rot={-2} />}
     </AbsoluteFill>
   );
 };
@@ -291,17 +305,20 @@ const Body: React.FC = () => {
   const at = t.at;
   const c: Record<string, number> = {
     menu: 0,
-    dock: at('shipped') - 1,
-    turtlePan: at("Here's") - 1,
+    grand: at('And at') - 1,
+    dock: at('Green') - 1,
+    turtlePan: at('first American') - 1,
     stepOne: at("That's") - 1,
     steps: at('Then') - 1,
     pie: at('Then came') - 1,
     count: at('So count') - 1,
     point: at('But that') - 1,
+    afford: at('A table like') - 1,
     board: at('But not') - 1,
   };
   const cuts: [number, React.ReactNode][] = [
     [c.menu, <Menu t={t} a={c.menu} />],
+    [c.grand, <Grand t={t} a={c.grand} />],
     [c.dock, <Dock t={t} a={c.dock} />],
     [c.turtlePan, <TurtlePan t={t} a={c.turtlePan} />],
     [c.stepOne, <StepOne t={t} a={c.stepOne} />],
@@ -309,6 +326,7 @@ const Body: React.FC = () => {
     [c.pie, <Pie t={t} a={c.pie} />],
     [c.count, <Count t={t} a={c.count} />],
     [c.point, <Point t={t} a={c.point} />],
+    [c.afford, <Afford t={t} a={c.afford} />],
     [c.board, <Board t={t} a={c.board} />],
   ];
   const scene = useScene(cuts);

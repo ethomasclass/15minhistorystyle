@@ -168,7 +168,8 @@ export const Hand: React.FC<{name: 'tg_hand_point' | 'tg_hand_pinch' | 'tg_hand_
 };
 
 /** Our drawn scenes, rendered from lookdev/tg.js: file and length in frames. */
-export const CLIPS = {eel_river: ['clips/tg_eel_river.mp4', 420], victorian_kitchen: ['clips/tg_victorian_kitchen.mp4', 360]} as const;
+export const CLIPS = {eel_river: ['clips/tg_eel_river.mp4', 420], victorian_kitchen: ['clips/tg_victorian_kitchen.mp4', 360], turtle_dock: ['clips/tg_turtle_dock.mp4', 180],
+  dining_hall: ['clips/tg_dining_hall.mp4', 300], fifties_kitchen: ['clips/tg_1950s_kitchen.mp4', 390], table_3d: ['clips/tg_table_3d.mp4', 270]} as const;
 /** A drawn scene, full frame, from frame `at`, starting `start` s into the clip; it holds on its last frame. Muted (the clips have no sound). */
 export const Clip: React.FC<{name: keyof typeof CLIPS; at: number; start?: number; dim?: number}> = ({name, at, start = 0, dim = 0}) => {
   const f = useCurrentFrame();

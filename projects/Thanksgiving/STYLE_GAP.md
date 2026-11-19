@@ -222,3 +222,23 @@ Three directions from the user arrived while this was being written. They overru
 
 Not done, on purpose: no sound effects were added anywhere; the desk colours are untouched; nothing is committed; the full video
 was not rendered.
+
+## Update, second pass on Nov 19: the drawn scenes are all in
+
+| Scene (file) | Length | In the cut |
+|---|---|---|
+| `tg_eel_river` (`lookdev/tg.js`), remade: real eels (wrist-thick, 2 to 3 ft, olive with a pale belly, low on the mud), a shallow pool, a knee-lift and press with rings, 1621 dress from `rig.js` | 14 s | Ch 2 "Plymouth"; Ch 1 "You wade out" (from 4.4 s) |
+| `tg_turtle_dock` (`tg_b.js`): a wharf about 1800, a brig, a derrick, two dockworkers lowering a slatted crate with the turtle (coral), wagon, gulls | 6 s | Ch 3 "Green sea turtles" to "one of the first" (the page pan now cuts in part-way down) |
+| `tg_dining_hall` (`tg_b.js`): stone hall, mantel fire, gasoliers, a long table of diners in profile, the waiter sets down a turtle tureen (coral) | 10 s | Ch 3 "And at the grandest" (tureen lands on "turtle"); again from 5.4 s on "A table like that" under LOOK WHAT WE CAN AFFORD |
+| `tg_1950s_kitchen` (`tg_c.js`): pastel daytime kitchen, hostess works a can opener, carries a casserole (coral) to the table, a pantry of cans | 13 s | Ch 7 "Now jump ahead" through "half an hour" (two shots, one clip) |
+| `tg_table_3d` (`tg_d.js`): a real 3D table in SVG (perspective camera, culled and sorted faces, as `ep3_map.js`), the camera orbiting as plates, the turkey (coral) and the pie land | 9 s | Ch 5 "Sound familiar?", replacing the flat table drawing |
+
+Render a clip: `node anim.mjs <clip> <dir>` then ffmpeg to `video/public/clips/<clip>.mp4` (crf 16). Stills: `lookdev/review/`.
+No diorama placeholders remain (`d2_turtle_dock`, `d4_kitchen_*` are gone from the chapters).
+
+Changed in the edit to fit them: Ch 3's typeset menu card no longer slaps over the 1870 menu (it first appears in "the point");
+the tureen cut-out is not used in Ch 3; Ch 7's shopping-list pad became slips; the 1959 LOOK kitchen photograph is no longer shown.
+
+More rules broken: full-frame pastel colour (the 1950s kitchen: butter, turquoise, pink); coral on things again (turtle crate,
+tureen, casserole, the turkey); the hostess's apron and the colonist's collar are pale cloth on an ink figure; a low-poly 3D
+model in a series of flat silhouettes. Still to do: none of the new outlines has been through the contact audit.

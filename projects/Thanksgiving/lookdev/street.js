@@ -119,12 +119,13 @@ function horse(x, gy, sz, c, t, dir = -1) { // sz: height at the withers. A four
   s.push(`<path d="M${f1(X(-0.5))},${f1(Yy(0.88))} Q${f1(X(-0.66))},${f1(Yy(0.6))} ${f1(X(-0.6 + sw))},${f1(Yy(0.32))} L${f1(X(-0.54 + sw))},${f1(Yy(0.34))} Q${f1(X(-0.56))},${f1(Yy(0.62))} ${f1(X(-0.46))},${f1(Yy(0.8))} Z" fill="${c}"/>`);
   return s.join('');
 }
-function wagon(x, gy, sz, c, t, dir = -1) { // a delivery wagon behind the horse, barrels in the back, spoked wheels turning
+function wagon(x, gy, sz, c, t, dir = -1, o = {}) { // o.hat / o.coat: the driver's dress (Thanksgiving's 1800 dock: a felt hat)
+  // a delivery wagon behind the horse, barrels in the back, spoked wheels turning
   const s = [], X = (u) => x - dir * u * sz, dist = step12(t) * 120;
   s.push(horse(x, gy, sz, c, t, dir));
   s.push(line([[X(0.3), gy - 0.8 * sz], [X(1.0), gy - 0.62 * sz]], c, 5));
   const bx0 = X(1.0), bx1 = X(2.3), top = gy - 0.95 * sz, bot = gy - 0.45 * sz;
-  s.push(figure({x: X(1.2), y: top + 0.5 * 1.1 * sz, h: 1.1 * sz, d: dir, kind: 'man', hat: 'bowler', coat: 'sack', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -4, fArm: [100, 85], bob: 0.008 * Math.sin(TAU * step12(t) * 2.3)}})); // seated on the box
+  s.push(figure({x: X(1.2), y: top + 0.5 * 1.1 * sz, h: 1.1 * sz, d: dir, kind: 'man', hat: o.hat || 'bowler', coat: o.coat || 'sack', fill: c, an: {legs: [88, 84], shins: [6, 2], lean: -4, fArm: [100, 85], bob: 0.008 * Math.sin(TAU * step12(t) * 2.3)}})); // seated on the box
   s.push(`<rect x="${f1(Math.min(bx0, bx1))}" y="${f1(top)}" width="${f1(Math.abs(bx1 - bx0))}" height="${f1(bot - top)}" fill="${c}"/>`);
   for (const [k, u] of [[0, 1.75], [1, 2.05]]) s.push(`<rect x="${f1(X(u) - 0.13 * sz)}" y="${f1(top - 0.32 * sz)}" width="${f1(0.26 * sz)}" height="${f1(0.34 * sz)}" rx="${f1(0.06 * sz)}" fill="${c}"/>`);
   for (const [u, rr] of [[1.25, 0.3], [2.1, 0.4]]) {

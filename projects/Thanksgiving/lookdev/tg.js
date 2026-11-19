@@ -13,8 +13,8 @@
 // faceless: det 0). Rules bent on purpose (the user, Nov 19: "break brand rules if we need to"): the palettes are warmer and
 // brighter than the series' teal-slate (a peach and gold dawn; firelight and copper in the kitchen), and coral marks an object
 // (the basket, the mould), not a person.
-// Known limit: the kit's figures wear 1880s outlines. The 1621 figures are drawn bare-headed in shirtsleeves with no hat or coat
-// detail; a period outline (breechcloth, leggings, a mantle) is still to be added to rig.js before these are called accurate.
+// The 1621 figures wear period outlines added to rig.js (RIG.md, "Added for Thanksgiving"). More scenes: tg_b.js (dock, dining hall),
+// tg_c.js (1950s kitchen), tg_d.js (the 3D table).
 
 const TG = {ink: '#0D0C09', coral: '#FF6F61', cream: '#F4EFE6', teal: '#2FE0C4', copper: '#C47A45', copperD: '#7A4526', fire: '#FF9F3C', gold: '#F2C277', peach: '#F0A982',
   mud: '#2A2A26', mudL: '#4A463C', reed: '#16201C', water0: '#E8B58A', water1: '#3E6A70', far: '#5C7F86', mid: '#33545A'};
@@ -22,7 +22,7 @@ const TG = {ink: '#0D0C09', coral: '#FF6F61', cream: '#F4EFE6', teal: '#2FE0C4',
 const tgDefs = (t) => msDefs(t).replace('</defs>',
   grad('tgdawn', [['0', '#1E3A4C'], ['0.38', '#4F7C86'], ['0.62', '#D99A7C'], ['0.8', '#F2C277'], ['1', '#F7E3B4']]) +
   grad('tgwater', [['0', '#F2C79A', 0.95], ['0.25', '#B98F7E'], ['0.6', '#3E6A70'], ['1', '#16303A']]) +
-  grad('tgmist', [['0', '#F7E3B4', 0], ['0.5', '#F7E3B4', 0.5], ['1', '#F7E3B4', 0]]) +
+  grad('tgpool', [['0', '#D9A882'], ['0.45', '#8E7A6C'], ['1', '#3E5A5E']]) + grad('tgmist', [['0', '#F7E3B4', 0], ['0.5', '#F7E3B4', 0.5], ['1', '#F7E3B4', 0]]) +
   grad('tgwall', [['0', '#17100C'], ['0.5', '#2B1E16'], ['1', '#3A281B']]) +
   grad('tgnightwin', [['0', '#16263F'], ['1', '#3B5A80']]) +
   `<radialGradient id="tgsun"><stop offset="0" stop-color="#FFF6D8" stop-opacity="0.95"/><stop offset="0.25" stop-color="#FFD9A0" stop-opacity="0.55"/><stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/></radialGradient>` +
@@ -35,7 +35,11 @@ const tgDefs = (t) => msDefs(t).replace('</defs>',
 
 /* ================= tg_eel_river ================= */
 const ER = {sec: 14, bank: 760, water: 700, // y of the mud flat's top edge and the far waterline
-  walk: [0.4, 5.2], tread: [5.4, 11.5], eels: [6.0, 6.9, 7.8, 8.7], basket: [7.4, 10.6]};
+  walk: [0.4, 4.8], tread: 5.0, step: 2.0, spot: 1500, basket: [6.4, 9.6]}; // step: seconds for one leg's lift and press
+// 1621 dress (rig.js): the Wampanoag man in a breechcloth, bare-legged for wading, hair long behind; the English colonist in a
+// doublet and full breeches, a plain falling band and a broad felt hat. Solid and faceless (det 0): nobody's likeness.
+const TG_WAMP = {kind: 'man', hat: 'longhair', coat: 'none', wear: ['breechcloth', 'barefoot'], det: 0};
+const TG_COLONIST = {kind: 'man', hat: 'felt', coat: 'doublet', wear: ['breeches'], det: 0, tones: {tone: '#2E403D', lite: '#E9DFC6'}};
 
 // a clump of reeds rooted at (x, y): blades that lean with a slow wind
 function tgReeds(x, y, n, h, t, seed, col = TG.reed) {
@@ -45,14 +49,22 @@ function tgReeds(x, y, n, h, t, seed, col = TG.reed) {
     if (r() < 0.35) s += `<ellipse cx="${f1(bx + lean + sway)}" cy="${f1(y - hh)}" rx="4.5" ry="15" fill="${col}" transform="rotate(${f1(lean * 0.6 + sway * 0.5)}, ${f1(bx + lean + sway)}, ${f1(y - hh)})"/>`; }
   return s;
 }
-// an eel coming up out of the mud at (x, y): it rises (u 0..1), arches and wriggles
-function tgEel(x, y, u, t, seed) {
-  if (u <= 0) return '';
-  const L = 230 * Math.min(1, u * 1.3), pts = [];
-  for (let k = 0; k <= 14; k++) { const q = k / 14, a = t * 5 + seed + q * 5.2;
-    pts.push([x + Math.sin(a) * (10 + 18 * q) * u + (seed % 2 ? 1 : -1) * 46 * q * q, y - L * q * (0.55 + 0.45 * Math.sin(Math.PI * Math.min(1, u)))]); }
-  return line(pts, '#0D0C09', 22) + line(pts, '#8C9878', 15) + line(pts.slice(2, 12), '#D5DBB8', 4, 'opacity="0.6"') +
-    `<ellipse cx="${f1(x)}" cy="${y + 2}" rx="${f1(34 * Math.min(1, u * 2))}" ry="7" fill="#15130F" opacity="0.8"/>`;
+// An eel as a centre line (points head first): about wrist-thick, dark olive above, a pale belly, a long low fin, a small head.
+// At this scene's scale a man is 330 px, so 1 ft is about 57 px: an eel of 2 to 3 ft is 115 to 170 px long and 9 px thick.
+function tgEelBody(pts, w = 9) {
+  const belly = pts.map(([x, y]) => [x, y + w * 0.3]), [hx, hy] = pts[0], [nx, ny] = pts[1], a = Math.atan2(hy - ny, hx - nx) * 180 / Math.PI;
+  return line(pts, '#0B0E09', w + 3.5) + line(pts, '#2F3A1E', w) + line(belly.slice(1, -2), '#A9A878', w * 0.3, 'opacity="0.85"') + line(pts.slice(-5), '#2F3A1E', w * 0.55) +
+    `<ellipse cx="${f1(hx)}" cy="${f1(hy)}" rx="${f1(w * 0.95)}" ry="${f1(w * 0.62)}" fill="#2F3A1E" stroke="#0B0E09" stroke-width="1.6" transform="rotate(${f1(a)}, ${f1(hx)}, ${f1(hy)})"/><circle cx="${f1(hx + Math.cos(a * Math.PI / 180) * w * 0.3)}" cy="${f1(hy + Math.sin(a * Math.PI / 180) * w * 0.3 - w * 0.2)}" r="1.5" fill="#E9E4C4"/>`;
+}
+// an eel driven out of the mud at (x, y) from time t0: it slides out head first, low, and wriggles away along the flat (dir)
+function tgEel(x, y, t, t0, dir, L, seed) {
+  const u = clamp01((t - t0) / 1.1); if (u <= 0) return '';
+  const out = L * (u * u * (3 - 2 * u)), crawl = Math.max(0, t - t0 - 1.1) * 16, pts = [];
+  for (let k = 0; k <= 16; k++) { const q = k / 16, sd = (out + crawl) * (1 - q) - Math.max(0, crawl - (L - out)) * 0, d = Math.max(0, out * (1 - q) + crawl); // distance from the hole, head first
+    const wv = Math.sin(t * 7 - q * 6.5 + seed * 2.1), amp = (3 + 6 * (1 - q)) * Math.min(1, d / 30);
+    pts.push([x + dir * d + wv * amp * 0.5, y - 5 - 7 * Math.sin(Math.PI * clamp01(d / (L * 0.6))) * (1 - u * 0.6) + wv * amp * 0.75 + (k === 0 ? -3 - 2 * Math.sin(t * 3 + seed) : 0)]); }
+  if (crawl > 0) for (let k = 0; k <= 16; k++) { const q = k / 16; pts[k][0] = x + dir * (crawl + L * (1 - q)) + (pts[k][0] - (x + dir * (out * (1 - q) + crawl))); }
+  return `<ellipse cx="${f1(x)}" cy="${y + 1}" rx="${f1(16 * Math.min(1, u * 3))}" ry="4" fill="#0B0A08" opacity="${f1(0.9 * (1 - smooth(1.4, 3, t - t0)))}"/>` + tgEelBody(pts);
 }
 function renderTgEel({t, cam, quiet = false}) {
   const c = cam2(cam), H = 330, B = ER.bank;
@@ -71,41 +83,51 @@ function renderTgEel({t, cam, quiet = false}) {
   const s = [];
   { const r = rng(55); let d = `M-800,1300 L-800,${B + 10}`; for (let x = -800; x <= 4200; x += 90) d += ` L${x},${f1(B + 8 * Math.sin(x / 210) + r() * 5)}`; d += ' L4200,1300 Z';
     s.push(`<path d="${d}" fill="${TG.mud}"/><path d="${d}" fill="url(#matFloorShade)" opacity="0.5" transform="translate(0,${B + 300}) scale(1,-1) translate(0,${-B})"/>`);
-    for (let i = 0; i < 26; i++) { const x = -600 + r() * 4400, y = B + 30 + r() * 230, w = 60 + r() * 220; s.push(`<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(w)}" ry="${f1(5 + r() * 9)}" fill="#E3B08A" opacity="${f1(0.1 + r() * 0.16)}"/>`); }
+    for (let i = 0; i < 26; i++) { const x = -600 + r() * 4400, y = B + 70 + r() * 200, w = 60 + r() * 220; s.push(`<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(w)}" ry="${f1(5 + r() * 9)}" fill="#E3B08A" opacity="${f1(0.1 + r() * 0.16)}"/>`); }
     s.push(MAT.ground(-800, 4200, B + 4, {base: '#15130F', seed: 57, tufts: false})); }
   // the dugout: a burned and scraped log, blunt ends, a paddle laid across
   { const x = 520, y = B + 24; s.push(`<path d="M${x - 250},${y - 34} q250,-16 500,0 q30,20 -30,44 q-220,22 -440,0 q-60,-24 -30,-44 Z" fill="${TG.ink}"/><path d="M${x - 220},${y - 30} q220,-12 440,0" stroke="#4A463C" stroke-width="3" fill="none"/>` +
     line([[x - 120, y - 56], [x + 210, y - 22]], TG.ink, 7) + `<ellipse cx="${x + 222}" cy="${y - 18}" rx="26" ry="9" fill="${TG.ink}" transform="rotate(8, ${x + 222}, ${y - 18})"/>`); }
-  // the treader: wades out, then treads the mud with a slow, high-kneed step; eels come up round the feet
-  const wu = smooth(ER.walk[0], ER.walk[1], t), fx = 880 + 620 * wu, treading = t >= ER.tread[0];
+  // the shallow pool he treads in: ankle-deep water lying on the mud, the sky in it
+  const FY = B + 40, px = ER.spot;
+  s.push(`<ellipse cx="${px + 10}" cy="${FY + 6}" rx="330" ry="30" fill="#15130F"/><ellipse cx="${px + 10}" cy="${FY + 4}" rx="320" ry="25" fill="url(#tgpool)"/><ellipse cx="${px + 70}" cy="${FY - 2}" rx="210" ry="9" fill="#F2C79A" opacity="0.45"/>`);
+  // the treader: wades out, then treads the mud: one knee lifts high, the foot presses down, a ring spreads; then the other
+  const wu = smooth(ER.walk[0], ER.walk[1], t), fx = px - 620 + 620 * wu, treading = t >= ER.tread;
   const lod = lodFor(H * c.z), rim = {c: '#FFE0B0', a: 0.75 * lod.rimA, dx: 0.012, dy: -0.004};
+  const lift = (ph) => { ph = ((ph % 1) + 1) % 1; return ph < 0.3 ? ease(ph / 0.3) : ph < 0.4 ? 1 : ph < 0.5 ? 1 - Math.pow((ph - 0.4) / 0.1, 2) : 0; };
+  const press = (ph) => { ph = ((ph % 1) + 1) % 1; return ph >= 0.5 && ph < 0.72 ? Math.sin(Math.PI * (ph - 0.5) / 0.22) : 0; };
+  const tp = treading ? (t - ER.tread) / ER.step : 0;
   let an;
   if (!treading) an = {...walkAn(walkPhase(620 * wu, H * 0.9, 16), {stride: 16, arm: 10}), lean: 3};
-  else { const p = (t - ER.tread[0]) * 0.55, a = Math.max(0, Math.sin(TAU * p)), b = Math.max(0, Math.sin(TAU * (p + 0.5)));
-    an = {legs: [34 * a, 34 * b], shins: [34 * a - 62 * a, 34 * b - 62 * b], fArm: [168 + 8 * a, 150 + 10 * a], bArm: [190 - 8 * b, 200 - 8 * b], bob: -0.012 * (Math.pow(1 - a, 6) + Math.pow(1 - b, 6)) * 0.5, lean: 5, tilt: -14}; }
-  // water round the ankles while wading: the figure stands a little into the mud
-  ER.eels.forEach((e0, i) => s.push(tgEel(fx + [-150, 130, -60, 230][i], B + 30 + (i % 2) * 14, clamp01((t - e0) / 1.4), t, i + 1)));
-  s.push(figure({x: fx, y: B + 34, h: H, d: 1, kind: 'man', hat: 'none', coat: 'vest', fill: TG.ink, det: 0, rim, an}));
-  s.push(`<ellipse cx="${f1(fx)}" cy="${B + 38}" rx="92" ry="13" fill="#15130F"/>`);
-  if (treading) for (let k = 0; k < 2; k++) { const u = ((t - ER.tread[0]) * 0.55 + k * 0.5) % 1; s.push(`<ellipse cx="${f1(fx + (k ? 22 : -22))}" cy="${B + 40}" rx="${f1(40 + 120 * u)}" ry="${f1(6 + 14 * u)}" fill="none" stroke="#F7E3B4" stroke-width="2.5" opacity="${f1(0.5 * (1 - u))}"/>`); }
-  // the second figure comes down the flat with the rush basket (coral) and sets it by the eels
-  { const bu = smooth(ER.basket[0], ER.basket[1], t), bx = 2200 - 500 * bu, walking = bu > 0 && bu < 1, hB = H * 0.94;
-    if (bu > 0) { const o = {x: bx, y: B + 40, h: hB, d: -1, kind: 'man', hat: 'none', coat: 'vest', fill: TG.ink, det: 0, rim: {...rim, dx: -0.012},
-        an: walking ? {...walkAn(walkPhase(500 * bu, hB * 0.9, 18), {stride: 18, carry: true}), lean: 4} : {...POSES.stand(t, 0.4), fArm: [150, 120], tilt: -10}};
-      s.push(figure(o));
-      const [hx, hy] = walking ? hand(o, o.an.fArm) : [bx - 120, B + 24], by = walking ? hy + 14 : B + 26, bxx = walking ? hx : bx - 120;
-      s.push(`<path d="M${f1(bxx - 46)},${f1(by - 4)} q46,-14 92,0 l-12,62 q-34,12 -68,0 Z" fill="url(#tgcoral)"/><path d="M${f1(bxx - 46)},${f1(by - 4)} q46,14 92,0" stroke="#7A2A22" stroke-width="3" fill="none"/>` +
-        [0, 1, 2].map((k) => `<path d="M${f1(bxx - 40 + k * 4)},${f1(by + 14 + k * 16)} q40,10 ${80 - k * 8},0" stroke="#7A2A22" stroke-width="2" fill="none" opacity="0.7"/>`).join('') +
-        (walking ? `<path d="M${f1(bxx - 40)},${f1(by - 4)} Q${f1(bxx)},${f1(by - 70)} ${f1(bxx + 40)},${f1(by - 4)}" stroke="#B8463C" stroke-width="5" fill="none"/>` : '')); } }
+  else { const a = lift(tp), b = lift(tp + 0.5), pr = press(tp) + press(tp + 0.5);
+    an = {legs: [4 + 64 * a, -4 + 64 * b], shins: [4 - 26 * a, -4 - 26 * b], fArm: [162 - 22 * a + 10 * b, 140 - 30 * a], bArm: [196 + 16 * a - 10 * b, 206 + 10 * a], bob: -0.016 * pr + 0.006 * (a + b), lean: 4 + 3 * pr, tilt: -16}; }
+  // eels driven out round his feet, one a press: low on the mud, wriggling away
+  if (treading) { const n = Math.floor(tp * 2), spots = [[70, 1, 150], [-64, -1, 128], [96, 1, 168], [-90, -1, 140], [52, 1, 120], [-48, -1, 158], [110, 1, 132]];
+    for (let k = 0; k < Math.min(n + 1, spots.length); k++) { const t0 = ER.tread + (k + 1) * ER.step / 2 + 0.05; s.push(tgEel(fx + spots[k][0], FY - 2 + (k % 3) * 5, t, t0, spots[k][1], spots[k][2], k + 1)); } }
+  s.push(figure({...TG_WAMP, x: fx, y: FY + 4, h: H, d: 1, fill: TG.ink, rim, an}));
+  // the water over his feet, and the rings each press sends out
+  s.push(`<ellipse cx="${f1(fx + 8)}" cy="${FY + 7}" rx="70" ry="6" fill="#7E6A5C"/><ellipse cx="${f1(fx + 8)}" cy="${FY + 9}" rx="54" ry="3.5" fill="#4A4038" opacity="0.7"/>`);
+  if (treading) for (let k = 0; k < 2; k++) for (let j = 0; j < 2; j++) { const age = (((tp + k * 0.5 - 0.5) % 1) + 1) % 1 * ER.step - j * 0.28; if (tp + k * 0.5 < 0.5 || age < 0 || age > 1.5) continue; const u = age / 1.5;
+    s.push(`<ellipse cx="${f1(fx + (k ? -10 : 18))}" cy="${FY + 7}" rx="${f1(24 + 150 * u)}" ry="${f1(3.5 + 13 * u)}" fill="none" stroke="#FFF3D6" stroke-width="${f1(3.2 - 1.6 * u)}" opacity="${f1(0.85 * (1 - u))}"/>`); }
+  // the colonist waits on the flat with a rush basket (coral), then brings it over and sets it down; a few eels in it already
+  { const bu = smooth(ER.basket[0], ER.basket[1], t), bx = 2230 - 360 * bu, walking = bu > 0 && bu < 1, hB = H * 0.95, set = smooth(ER.basket[1], ER.basket[1] + 0.7, t);
+    const o = {...TG_COLONIST, x: bx, y: B + 44, h: hB, d: -1, fill: TG.ink, rim: {...rim, dx: -0.012},
+      an: walking ? {...walkAn(walkPhase(360 * bu, hB * 0.9, 18), {stride: 18, carry: true}), fArm: [172, 166], lean: 3} : {...POSES.stand(t, 0.4), fArm: [172 - 30 * set, 166 - 60 * set], tilt: -10 - 6 * set}};
+    s.push(figure(o));
+    const [hx, hy] = hand({...o, an: {fArm: [172, 166]}}), bxx = hx + (bx - 130 - hx) * set, by = hy + 16 + (B + 30 - (hy + 16)) * set;
+    const eelIn = (k) => { const p = []; for (let j = 0; j <= 10; j++) { const q = j / 10, w = Math.sin(t * 5 + k * 2 - q * 5) * (2 + 3 * q); p.push([bxx + (k - 1) * 22 + (k - 1) * 30 * q * q + w * 0.6, by - 8 - 20 * Math.sin(Math.PI * Math.min(1, q * 1.3)) + 26 * q * q + w * 0.6]); } return tgEelBody(p, 8); };
+    s.push(`<path d="M${f1(bxx - 40)},${f1(by - 4)} Q${f1(bxx)},${f1(by - 78)} ${f1(bxx + 40)},${f1(by - 4)}" stroke="#B8463C" stroke-width="5" fill="none" opacity="${f1(1 - set * 0.2)}"/>` + eelIn(0) +
+      `<path d="M${f1(bxx - 46)},${f1(by - 4)} q46,-14 92,0 l-12,62 q-34,12 -68,0 Z" fill="url(#tgcoral)"/><path d="M${f1(bxx - 46)},${f1(by - 4)} q46,14 92,0" stroke="#7A2A22" stroke-width="3" fill="none"/>` +
+      [0, 1, 2].map((k) => `<path d="M${f1(bxx - 40 + k * 4)},${f1(by + 14 + k * 16)} q40,10 ${80 - k * 8},0" stroke="#7A2A22" stroke-width="2" fill="none" opacity="0.7"/>`).join('') + eelIn(1) + eelIn(2)); }
   // near reeds along the flat's edge, and the foreground: big dark reeds, soft, moving against the camera
-  const reedsMid = [-500, -120, 260, 1750, 2050, 2500, 2900, 3300].map((x, i) => tgReeds(x, B + 6, 16, 150, t, 60 + i, '#1F2A24')).join('');
-  const fore = `<g filter="url(#tgblur)">` + [-260, 560, 1500, 2380, 3200].map((x, i) => tgReeds(x, 1190, 26, 420, t, 80 + i, '#0A0D0B')).join('') + `</g>`;
+  const reedsMid = [-500, -120, 260, 1050, 2420, 2700, 3000, 3300].map((x, i) => tgReeds(x, B + 6, 16, 150, t, 60 + i, '#1F2A24')).join('');
+  const fore = `<g filter="url(#tgblur)">` + [-260, 420, 980, 2180, 3200].map((x, i) => tgReeds(x, 1230, 26, 400, t, 80 + i, '#0A0D0B')).join('') + `</g>`;
   const world = layerAt(c, 0.3, far) + layerAt(c, 0.5, mid) + layerAt(c, 0.8, water) + layerAt(c, 1, reedsMid + s.join('')) + layerAt(c, 1.35, fore) +
     `<rect width="1920" height="1080" fill="#F2C277" opacity="0.07" style="mix-blend-mode:screen"/>`;
   const scr = quiet ? '' : tag(172, 150, 'PATUXET (PLYMOUTH) · 1621 · A TIDAL RIVER AT LOW WATER', smooth(0.4, 1.2, t) * (1 - smooth(6.5, 7.2, t)));
   return frame(tgDefs(t), sky, world, scr, t);
 }
-const tgEelCam = (t) => { const u = ease(t / ER.sec); return {z: lerpLog(0.92, 1.12, smooth(4.5, 9, t)), ux: 1000 + 520 * smooth(0.2, 6, t) + 60 * u, uy: 560 + 40 * smooth(4.5, 9, t)}; };
+const tgEelCam = (t) => { const p = smooth(4.2, 8.5, t); return {z: lerpLog(0.92, 1.42, p), ux: 1000 + 470 * smooth(0.2, 5.2, t) + 80 * p + 30 * ease(t / ER.sec), uy: 560 + 120 * p}; };
 Object.assign(CLIPS, {tg_eel_river: {sec: ER.sec, render: (t) => renderTgEel({t, cam: tgEelCam(t), quiet: true})}});
 
 /* ================= tg_victorian_kitchen ================= */

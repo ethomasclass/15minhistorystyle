@@ -61,7 +61,7 @@ const EelOpen: React.FC<S> = ({t}) => (
  *  moment the treading starts. */
 const Tread: React.FC<S> = ({t, a}) => (
   <AbsoluteFill>
-    <Clip name="eel_river" at={a} start={4.6} />
+    <Clip name="eel_river" at={a} start={4.4} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.45) 0%, transparent 34%)'}} />
     <Note text="mud flats, low tide" x={170} y={130} size={56} rot={-3} at={t.at('mud') - 3} color="#ffffff" />
     <Note text="tread them out" x={1150} y={150} size={72} rot={-4} at={t.at('tread') - 3} />

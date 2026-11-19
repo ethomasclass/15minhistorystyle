@@ -10,7 +10,7 @@ import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {DeskScene} from '../kit/tg_desk';
 import {bed} from '../kit/levels';
-import {Cut as FlowCut} from '../kit/tg_cut';
+import {Clip, Cut as FlowCut} from '../kit/tg_cut';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
 import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
@@ -118,43 +118,21 @@ const Niche: React.FC<{t: TL; a: number}> = ({t}) => {
   );
 };
 
-// ---------------------------------------------------------------- Sound familiar? The menu, drawn
-/** A teal line drawing of the table from above: the turkey (coral) in the middle, the pumpkin pie at the end. */
-const TableDrawing: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const g = useGFrame();
-  const pal = usePal();
-  const draw = (at: number, dur = 12) => interpolate(g, [at, at + dur], [0, 1], clamp);
-  const plates = [[560, 290], [760, 290], [1160, 290], [1360, 290], [560, 640], [760, 640], [1160, 640], [1360, 640]];
-  const pTable = draw(a + 2, 14);
-  const pPlates = draw(t.at('basically'), 8);
-  const pTurkey = draw(t.at('Turkey in') - 1, 10);
-  const pPie = draw(t.at('pie at') - 2, 10);
-  const stroke = {fill: 'none', stroke: pal.mark, strokeWidth: 6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, pathLength: 1, strokeDasharray: 1};
-  return (
-    <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
-      <path d="M470,352 Q468,346 476,344 L1444,340 Q1452,341 1452,350 L1450,580 Q1451,590 1442,590 L478,594 Q468,593 470,584 Z" {...stroke} strokeDashoffset={1 - pTable} />
-      {plates.map(([x, y], i) => <circle key={i} cx={x} cy={y + (y < 400 ? 18 : -18)} r={34} {...stroke} strokeWidth={4} strokeDashoffset={1 - pPlates} />)}
-      {/* the turkey: one coral shape, the subject */}
-      <ellipse cx={960} cy={467} rx={92} ry={62} fill={pal.subject} fillOpacity={0.35 * pTurkey} stroke={pal.subject} strokeWidth={6} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - pTurkey} />
-      {/* the pie's place at the end of the table (the pumpkin pie cut-out lands on it: Menu) */}
-      <circle cx={1372} cy={467} r={70} {...stroke} strokeWidth={4} strokeDashoffset={1 - pPie} />
-    </svg>
-  );
-};
-
+// ---------------------------------------------------------------- Sound familiar? The menu, as a 3D table
 const Menu: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
   const pal = usePal();
   return (
     <AbsoluteFill>
-      <DarkPaper />
-      <Note text="sound familiar?" x={120} y={110} size={54} rot={-3} at={a + 1} color="#ffffff" />
-      <TableDrawing t={t} a={a} />
-      <FlowCut name="tg_pie_1" x={1262} y={393} w={220} at={t.at('pie at') + 4} />
-      <Note text="turkey in the middle" x={760} y={170} size={46} rot={-3} at={t.at('Turkey in') - 3} color={pal.subject} />
-      <Note text="pumpkin pie at the end" x={1150} y={650} size={46} rot={-3} at={t.at('pie at') - 3} />
-      {g >= t.at('Written') && <Stamp text="1827" x={170} y={790} at={t.at('Written')} size={150} />}
-      <Note text="almost 200 years ago" x={560} y={830} size={56} rot={-3} at={t.at('two hundred') - 3} color="#ffffff" />
+      {/* the table as a 3D model the camera orbits (lookdev/tg_d.js tg_table_3d): plates on "basically", the turkey on "Turkey in",
+          the pie on "pie at" (the clip's cues are these words' times) */}
+      <Clip name="table_3d" at={a} />
+      <Note text="sound familiar?" x={160} y={110} size={54} rot={-3} at={a + 1} color="#ffffff" />
+      <Note text="turkey in the middle" x={1160} y={110} size={54} rot={-3} at={t.at('Turkey in') - 3} color={pal.subject} />
+      <Note text="pumpkin pie at the end" x={1150} y={210} size={50} rot={-2} at={t.at('pie at') - 3} />
+      {g >= t.at('Written') && <Stamp text="1827" x={170} y={800} at={t.at('Written')} size={130} />}
+      <Note text="almost 200 years ago" x={560} y={880} size={56} rot={-3} at={t.at('two hundred') - 3} color="#ffffff" />
+      <TagOn text="Drawn model" x={1500} />
     </AbsoluteFill>
   );
 };

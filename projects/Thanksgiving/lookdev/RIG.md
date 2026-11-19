@@ -44,3 +44,17 @@ by the same `distance`. Characters animate at the full frame rate (`SMOOTH_MOTIO
 
 Names are still to be decided, so the keys are roles. The Kellys are coral (the subject colour); everyone else is ink.
 Sheets: `sheets/8_round5.jpg` (the cast and the poses), `sheets/7_round4.jpg` (the five expressions).
+
+## Added for Thanksgiving (Nov 2026)
+
+- **1621, Wampanoag man:** `{kind: 'man', hat: 'longhair', wear: ['breechcloth', 'barefoot']}`, plus `'mantle'` (a deerskin over the far
+  shoulder). Bare torso, a belt, a breechcloth with a flap before and behind, bare legs, hair long behind and short before. Kept
+  plain on purpose (no feathers, no paint). Sources: Plimoth Patuxet Museums, "What to wear" (the breechcloth as the basic garment,
+  leggings tied to its belt in cold or brush, mantles in cool weather); Mourt's Relation, 1622, on hair. Use `det: 0`.
+- **1621, English colonist:** `{kind: 'man', hat: 'felt', coat: 'doublet', wear: ['breeches']}`: a doublet with a short skirt, full
+  breeches to the knee, stockings, a plain linen falling band (pale, `tones.lite`), a broad felt hat. No buckles.
+- **About 1800, dock labour:** `hat: 'felt'` or `hat: 'knit'` (a seaman's cap) with `coat: 'vest'`.
+- **1950s hostess:** `{kind: 'woman', hat: 'set50', wear: ['fullskirt', 'apron']}`: a full mid-calf skirt, calves and court shoes, a
+  half apron with a bow, short set hair. `paleOp: 0.96` draws pale cloth at full strength (a bright room).
+- `street.js` `wagon(..., dir, {hat, coat})`: the driver's dress.
+- The new outlines have no close-up detail pass: keep `det: 0` with them.

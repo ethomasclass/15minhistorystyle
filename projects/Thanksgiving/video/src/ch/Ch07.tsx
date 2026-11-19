@@ -14,7 +14,7 @@ import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
-import {Cut, Hand, States} from '../kit/tg_cut';
+import {Clip, Cut, Hand, States} from '../kit/tg_cut';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
@@ -29,10 +29,6 @@ const P = {
   booklet: {file: 'img/arch/angelus_1917_booklet.jpg', what: 'Angelus marshmallow recipe booklet, 1917 (cover scan; colour)'},
   hill: {file: 'img/arch/janet_mckenzie_hill.jpg', what: 'Janet McKenzie Hill, portrait (bust cut-out)'},
   urann: {file: 'img/arch/marcus_urann.jpg', what: 'Marcus Urann, portrait (bust cut-out)'},
-  dSky: {file: 'img/flow/d4_kitchen_window.png', what: 'diorama D4, plane a: window, lawn, picket fence'},
-  dCab: {file: 'img/flow/d4_kitchen_cabinets.png', what: 'diorama D4, plane b: 1950s cabinets and a new refrigerator'},
-  dHost: {file: 'img/flow/d4_kitchen_hostess.png', what: 'diorama D4, plane c: a hostess in profile at the counter (solid black)'},
-  dFront: {file: 'img/flow/d4_kitchen_front.png', what: 'diorama D4, plane d: the counter, a casserole dish (coral) and a row of plain cans'},
   plate50: {file: 'img/flow/tg_adplate_1950s.png', what: '1950s ad plate: a kitchen, a gingham table, a blank cream panel right; colour'},
   reilly: {file: 'img/arch/dorcas_reilly.jpg', what: 'Dorcas Reilly in the Campbell test kitchen (photo)'},
 } satisfies Record<string, Placeholder>;
@@ -52,8 +48,8 @@ const AD22 = {src: 'img/arch/angelus-marshmallows-cracker-jacks-piggly-wiggly-ad
 const AD20 = {src: 'img/arch/sanitary-grocery-ad-angelus-marshmallows-knox-gelatine-washington-times-1920.jpg', size: [2600, 3805] as [number, number],
   crop: [950, 2090, 1530, 420] as Box, angelus: [976, 2276, 489, 68] as Box,
   tag: 'Sanitary Grocery Co. ad, Washington Times, Oct. 8, 1920 · Library of Congress'};
-const LOOK = 'img/arch/look-miracle-kitchen-1959-woman-pantry-cans.jpg';
-const TAG_LOOK = "LOOK Magazine, 'Miracle Kitchen', 1959 · Bob Lerner · Library of Congress";
+// (The 1959 LOOK 'Miracle Kitchen' photograph, img/arch/look-miracle-kitchen-1959-woman-pantry-cans.jpg, sat over the placeholder
+// diorama; the drawn kitchen now holds the frame alone. The scan is still in public/ if a beat wants it.)
 
 // ------------------------------------------------------------------ 1917
 /** The ad plate full frame, the booklet on it, held still: the cut in is the motion; a stepped 2% nudge lands on the year. */
@@ -253,79 +249,29 @@ const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
 };
 
 // ------------------------------------------------------------------ 1955, you
-/** The 1950s kitchen diorama: four planes in parallax (a slow drift), placeholders until D4's planes exist. */
-const Diorama: React.FC<{drift: number; z?: number; fx?: number; fy?: number; labels?: boolean}> = ({drift, z = 1, fx = 960, fy = 540, labels = true}) => {
-  const planes: [Placeholder, number, [number, number, number, number], number][] = [
-    [P.dSky, 0.15, [-80, 0, 2080, 1100], 0.05],
-    [P.dCab, 0.4, [-80, 150, 2080, 700], 0.14],
-    [P.dHost, 0.7, [1120, 230, 420, 780], 0.24],
-    [P.dFront, 1, [-80, 760, 2080, 360], 0.33],
-  ];
-  return (
-    <AbsoluteFill style={{overflow: 'hidden', background: INK}}>
-      <AbsoluteFill style={{transform: `translate(${fx - fx * z}px, ${fy - fy * z}px) scale(${z})`, transformOrigin: '0 0'}}>
-        {planes.map(([ph, depth, [x, y, w, h], tone], i) => (
-          <PH key={i} {...ph} x={x + drift * depth} y={y} w={w} h={h} tone={tone} fit="cover" filter="none" shadow={i > 0} inset={x < 0 ? 160 : 14} label={labels} />
-        ))}
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
+/** "It's 1955. You're hosting.": our drawn 1950s kitchen (lookdev/tg_c.js tg_1950s_kitchen), from its first frame. */
+const Hosting: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <Clip name="fifties_kitchen" at={a} />
+    <Highlight text="1955" x={1400} y={100} size={120} at={t.at("It's 1955.")} seed={78} rot={-2} />
+    <Slip text="you're hosting." x={1380} y={290} at={t.at("You're hosting.") - 2} size={60} />
+    <Slip text="the in-laws: at four" x={1330} y={395} at={t.at('in-laws') - 2} size={54} rot={2} />
+    <Tag text="Drawn scene" />
+  </AbsoluteFill>
+);
 
-const Hosting: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const drift = interpolate(f, [a, t.at("You've got")], [30, -30], clamp);
-  return (
-    <AbsoluteFill>
-      <Diorama drift={drift} />
-      <Highlight text="1955" x={140} y={230} size={130} at={t.at("It's 1955.")} seed={78} rot={-2} />
-      <Slip text="you're hosting." x={160} y={440} at={t.at("You're hosting.") - 2} size={64} />
-      <Slip text="the in-laws: at four" x={200} y={570} at={t.at('in-laws') - 2} size={56} rot={2} />
-      {/* a real kitchen of the time, labelled by its own date (1959, not 1955) */}
-      <TgPrint src={LOOK} x={1080} y={200} w={720} h={493} at={t.at("You're hosting.") - 1} rot={2} pos="30% 40%" tag={TAG_LOOK} />
-    </AbsoluteFill>
-  );
-};
-
-/** Your shopping list (dark paper, teal rules), writing itself as the voice lists what you've got. */
-const ListPad: React.FC<{x: number; y: number; items: {text: string; at: number; coral?: boolean}[]}> = ({x, y, items}) => {
-  const g = useGFrame();
-  const pal = usePal();
-  return (
-    <div style={{position: 'absolute', left: x, top: y, width: 560, height: 700, background: 'linear-gradient(170deg, #26221c, #181612)', boxShadow: '0 24px 40px rgba(0,0,0,0.7)',
-      transform: 'rotate(2deg)', borderRadius: 4}}>
-      {Array.from({length: 9}, (_, i) => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: 150 + i * 62, height: 1.5, background: 'rgba(47,224,196,0.2)'}} />)}
-      <div style={{position: 'absolute', left: 60, top: 0, bottom: 0, width: 2, background: 'rgba(255,111,97,0.45)'}} />
-      <div style={{position: 'absolute', left: 84, top: 56, fontFamily: JF.mono, fontSize: 22, letterSpacing: 3, color: 'rgba(244,239,230,0.6)'}}>THURSDAY · TO DO</div>
-      {items.map((it, i) => {
-        if (g < it.at) return null;
-        const p = interpolate(g, [it.at, it.at + 10], [0, 1], clamp);
-        return (
-          <div key={i} style={{position: 'absolute', left: 84, top: 102 + i * 124, fontFamily: '"Nanum Pen Script", cursive', fontSize: 64, lineHeight: 1, whiteSpace: 'nowrap',
-            color: it.coral ? pal.subject : pal.mark, clipPath: `inset(-60% ${(1 - p) * 100}% -60% -5%)`}}>□ {it.text}</div>
-        );
-      })}
-    </div>
-  );
-};
-
-const Pantry: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const drift = interpolate(f, [a, t.at('In 1954,')], [-20, 20], clamp);
-  return (
-    <AbsoluteFill>
-      <Diorama drift={drift} z={1.3} fx={700} fy={860} labels={false} />
-      {/* "a pantry full of cans": the can on its cloth */}
-      <Cut name="tg_can" x={280} y={380} w={640} rot={-2} at={t.at('pantry full') - 2} />
-      <ListPad x={1220} y={150} items={[
-        {text: 'new refrigerator', at: t.at('refrigerator,') - 2},
-        {text: 'pantry full of cans', at: t.at('pantry full') - 2},
-        {text: 'the magazine says:', at: t.at('magazine') - 2},
-        {text: 'all in half an hour', at: t.at('half an hour.') - 2, coral: true},
-      ]} />
-    </AbsoluteFill>
-  );
-};
+/** The same kitchen, carried on: she takes the casserole to the table while the list writes itself. `from` = where Hosting began. */
+const Pantry: React.FC<{t: TL; a: number; from: number}> = ({t, from}) => (
+  <AbsoluteFill>
+    <Clip name="fifties_kitchen" at={from} />
+    {/* what you've got, as the voice lists it */}
+    <Slip text="a new refrigerator" x={140} y={110} at={t.at('refrigerator,') - 2} size={52} rot={-2} />
+    <Slip text="a pantry full of cans" x={170} y={215} at={t.at('pantry full') - 2} size={52} rot={1.5} />
+    <Slip text="the magazine says:" x={140} y={320} at={t.at('magazine') - 2} size={52} rot={-2} />
+    <Slip text="all in half an hour" x={180} y={425} at={t.at('half an hour.') - 2} size={56} rot={2} coral />
+    <Tag text="Drawn scene" />
+  </AbsoluteFill>
+);
 
 // ------------------------------------------------------------------ the montage
 /** 1954, 1955: the silhouette hand deals one recipe card per date, fast. */
@@ -452,7 +398,7 @@ const Body: React.FC = () => {
     [c.payoff, <CutIn x={PAY.cx - 60} y={640} z={1.25}><Payoff t={t} a={c.payoff} /></CutIn>],
     [c.ridges, <Payoff t={t} a={c.ridges} />],
     [c.hosting, <Hosting t={t} a={c.hosting} />],
-    [c.pantry, <Pantry t={t} a={c.pantry} />],
+    [c.pantry, <Pantry t={t} a={c.pantry} from={c.hosting} />],
     [c.montage, <Montage t={t} a={c.montage} />],
     [c.casserole, <Casserole t={t} a={c.casserole} />],
     [c.mock, <MockHomemade t={t} a={c.mock} />],
