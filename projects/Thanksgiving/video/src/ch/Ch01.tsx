@@ -31,12 +31,12 @@ const TABLE_THEME_VOL = +Math.pow(10, (-18 - 13 + 15.9) / 20).toFixed(3);
 /** Mourt's Relation (London, 1622), BPL copy on the Internet Archive: line boxes measured on the scans (source px). */
 const MOURT_SIZE: [number, number] = [3250, 4576];
 const MOURT_SRC = 'Boston Public Library / Internet Archive';
-const P39 = {src: 'img/arch/mourts-relation-1622-squanto-treads-eeles-p39.jpg', scrap: [230, 1290, 2420, 420] as Box,
+const P39 = {src: 'img/arch/mourts-relation-1622-squanto-treads-eeles-p39.jpg', scrap: [230, 1290, 2420, 480] as Box,
   /** "they were fat & sweet," / "he trod them out with his feete," */
   fat: [[1670, 1518, 900, 80], [250, 1615, 1600, 80]] as Box[]};
-const P62 = {src: 'img/arch/mourts-relation-1622-hogshead-of-eeles-p62.jpg', scrap: [620, 1520, 2350, 380] as Box,
+const P62 = {src: 'img/arch/mourts-relation-1622-hogshead-of-eeles-p62.jpg', scrap: [620, 1525, 2350, 290] as Box,
   /** "we can take a Hogshead of Eeles in" / "a night," */
-  hog: [[1450, 1625, 1490, 80], [660, 1718, 300, 80]] as Box[]};
+  hog: [[1480, 1625, 1460, 80], [660, 1718, 300, 80]] as Box[]};
 
 /** Assets not here yet: each is a labelled placeholder card in the scenes below (swap them when the files land). */
 export const PLACEHOLDERS = [

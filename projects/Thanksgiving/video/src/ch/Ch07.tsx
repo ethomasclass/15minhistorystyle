@@ -11,7 +11,9 @@ import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {Slip} from '../kit/vox';
+import {type Box, Slip, Swipe} from '../kit/vox';
+import {TgPrint} from '../kit/tg_placeholder';
+import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
@@ -23,9 +25,7 @@ const P = {
   plate: {file: 'img/flow/tg_adplate_1910s.png', what: '1910s magazine ad plate (Flow #11), 2880 x 1080: the booklet area left, a blank cream panel right; colour'},
   booklet: {file: 'img/arch/angelus_1917_booklet.jpg', what: 'Angelus marshmallow recipe booklet, 1917 (cover scan; colour)'},
   hill: {file: 'img/arch/janet_mckenzie_hill.jpg', what: 'Janet McKenzie Hill, portrait (bust cut-out)'},
-  bog: {file: 'img/arch/cranberry_harvest.jpg', what: 'archival photo: a cranberry bog harvest, early 1900s'},
   urann: {file: 'img/arch/marcus_urann.jpg', what: 'Marcus Urann, portrait (bust cut-out)'},
-  ocean: {file: 'img/arch/ocean_spray_1940s_ad.jpg', what: 'an Ocean Spray cranberry sauce ad or can label, 1940s (colour)'},
   dSky: {file: 'img/flow/d4_kitchen_window.png', what: 'diorama D4, plane a: window, lawn, picket fence'},
   dCab: {file: 'img/flow/d4_kitchen_cabinets.png', what: 'diorama D4, plane b: 1950s cabinets and a new refrigerator'},
   dHost: {file: 'img/flow/d4_kitchen_hostess.png', what: 'diorama D4, plane c: a hostess in profile at the counter (solid black)'},
@@ -44,6 +44,18 @@ const PLATE_SIZE: [number, number] = [2880, 1080];
 export const PLACEHOLDERS: Placeholder[] = [...Object.values(P), {file: `${MORPH_DIR}/frame_0000.png`, what: 'morph M3 as frames (12/s), first frame 0000'}];
 
 const TAG_BOOKLET = 'Recipe paraphrased from the Angelus Marshmallows booklet, 1917';
+
+// ------------------------------------------------------------------ the scans that have landed (CREDITS.md; line boxes from the .json / measured)
+/** Piggly Wiggly price list, Albuquerque Morning Journal, 28 Oct 1922 (Chronicling America): "CRACKER JACKS" over "ANGELUS MARSHMALLOWS". */
+const AD22 = {src: 'img/arch/angelus-marshmallows-cracker-jacks-piggly-wiggly-ad-1922.jpg', size: [1675, 2069] as [number, number], crop: [470, 966, 1150, 152] as Box,
+  cj: [500, 972, 500, 46] as Box, angelus: [[500, 1016, 930, 46], [500, 1060, 930, 46]] as Box[],
+  tag: 'Piggly Wiggly ad, Albuquerque Morning Journal, Oct. 28, 1922 · Library of Congress'};
+/** Sanitary Grocery Co. ad, Washington Times, 8 Oct 1920: "Angelus Marshmallows ... 12½c" on the shelf list. */
+const AD20 = {src: 'img/arch/sanitary-grocery-ad-angelus-marshmallows-knox-gelatine-washington-times-1920.jpg', size: [2600, 3805] as [number, number],
+  crop: [950, 2090, 1530, 420] as Box, angelus: [976, 2276, 489, 68] as Box,
+  tag: 'Sanitary Grocery Co. ad, Washington Times, Oct. 8, 1920 · Library of Congress'};
+const LOOK = 'img/arch/look-miracle-kitchen-1959-woman-pantry-cans.jpg';
+const TAG_LOOK = "LOOK Magazine, 'Miracle Kitchen', 1959 · Bob Lerner · Library of Congress";
 
 // ------------------------------------------------------------------ 1917
 /** The ad plate full frame, the booklet on it, held still: the cut in is the motion; a stepped 2% nudge lands on the year. */
@@ -69,13 +81,17 @@ const Booklet: React.FC<{t: TL; a: number}> = ({t}) => {
 const Hired: React.FC<{t: TL; a: number}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PH {...P.booklet} x={150} y={170} w={420} h={600} rot={-4} filter="saturate(0.8)" />
+    {/* the two products side by side on a 1922 grocer's list */}
+    <PageScrap src={AD22.src} size={AD22.size} box={AD22.crop} x={110} y={190} w={900} rot={-2} seed="a22" tag={AD22.tag}>
+      <Swipe lines={AD22.angelus} from={-999} to={-998} seed="a22a" color="rgba(255,111,97,0.55)" />
+      <Swipe lines={[AD22.cj]} from={t.at('Cracker') - 1} to={t.end('Cracker Jack.') + 3} seed="a22c" />
+    </PageScrap>
     <PH {...P.hill} x={1330} y={150} w={440} h={600} />
     <Slip text="the same company made Cracker Jack" x={170} y={850} at={t.at('Cracker') - 2} rot={-2} size={56} />
     <Note text="Janet McKenzie Hill" x={690} y={260} size={56} rot={-3} at={t.at('Janet') - 2} color="#ffffff" />
     <Note text="a well-known cooking teacher" x={710} y={380} size={44} rot={-3} at={t.at('well-known') - 2} />
     <Note text="writes the recipes" x={730} y={480} size={44} rot={-3} at={t.at('write the recipes') - 2} />
-    <Tag text="Angelus booklet, 1917 · Janet McKenzie Hill, portrait" />
+    <Tag text="Janet McKenzie Hill, portrait" />
   </AbsoluteFill>
 );
 
@@ -124,12 +140,13 @@ const Motive: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PH {...P.booklet} x={1240} y={160} w={500} h={710} rot={3} filter="saturate(0.8)" />
+      <PageScrap src={AD20.src} size={AD20.size} box={AD20.crop} x={960} y={250} w={860} rot={2} seed="a20" tag={AD20.tag}>
+        <Swipe lines={[AD20.angelus]} from={t.at('sell marshmallows') - 1} to={t.end('sell marshmallows') + 4} seed="a20a" />
+      </PageScrap>
       <Highlight text="THE MOTIVE" x={130} y={150} size={110} at={t.at('motive.')} seed={72} rot={-2} />
       <Note text="sell marshmallows" x={160} y={340} size={74} rot={-3} at={t.at('sell marshmallows') - 2} color={pal.subject} />
       <Note text="a hundred years later..." x={160} y={560} size={52} rot={-3} at={t.at('a hundred years') - 2} color="#ffffff" />
       <Note text="...it's on your table" x={220} y={680} size={62} rot={-3} at={t.at('on your table') - 2} />
-      <Tag text="Angelus Marshmallows recipe booklet, 1917" />
     </AbsoluteFill>
   );
 };
@@ -138,11 +155,11 @@ const Motive: React.FC<{t: TL; a: number}> = ({t}) => {
 const Berries: React.FC<{t: TL; a: number}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PH {...P.bog} x={880} y={150} w={920} h={640} rot={2} />
+    <TgPrint src="img/arch/fsa-men-scooping-cranberries-nj-1938.jpg" x={880} y={150} w={920} h={640} at={-999} rot={2} pos="50% 60%" />
     <Highlight text="CRANBERRIES" x={120} y={140} size={96} at={t.at('cranberry sauce.')} seed={73} rot={-2} />
     <Note text="an American fruit" x={150} y={330} size={60} rot={-3} at={t.at('American fruit') - 2} />
     <Note text="sauce: for centuries" x={170} y={460} size={52} rot={-3} at={t.at('centuries.') - 2} color="#ffffff" />
-    <Tag text="Cranberry harvest · archival photograph" />
+    <Tag text="Men scooping cranberries, Burlington County, N.J., 1938 · Arthur Rothstein, FSA · Library of Congress" />
   </AbsoluteFill>
 );
 
@@ -186,12 +203,14 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
 const Ocean: React.FC<{t: TL; a: number}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PH {...P.ocean} x={1060} y={130} w={700} h={800} rot={-2} filter="saturate(0.85)" />
+    {/* no PD Ocean Spray item exists: a canned cranberry sauce of the time, labelled as what it is (another brand, 1910) */}
+    <PageScrap src="img/arch/empress-cranberry-sauce-trademark-label-1910.jpg" size={[4150, 6217]} box={[480, 480, 3200, 2500]} x={1040} y={180} w={720} at={t.at('1941,') + 2} rot={-2}
+      seed="emp" filter={COLOUR_DOC} />
     <Highlight text="1941" x={120} y={120} size={120} at={t.at('1941,')} seed={75} rot={-2} />
     <Note text="his growers' cooperative" x={140} y={300} size={52} rot={-3} at={t.at("growers'") - 2} color="#ffffff" />
     <Note text="takes the brand national" x={170} y={410} size={52} rot={-3} at={t.at('brand national.') - 2} />
     <Highlight text="OCEAN SPRAY" x={120} y={590} size={104} at={t.at('Ocean Spray.')} seed={76} rot={-3} />
-    <Tag text="Ocean Spray advertisement, 1940s" />
+    <Tag text="Not Ocean Spray: Empress brand cranberry sauce, trademark registered 1910 · Library of Congress" />
   </AbsoluteFill>
 );
 
@@ -262,6 +281,8 @@ const Hosting: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Highlight text="1955" x={140} y={230} size={130} at={t.at("It's 1955.")} seed={78} rot={-2} />
       <Slip text="you're hosting." x={160} y={440} at={t.at("You're hosting.") - 2} size={64} />
       <Slip text="the in-laws: at four" x={200} y={570} at={t.at('in-laws') - 2} size={56} rot={2} />
+      {/* a real kitchen of the time, labelled by its own date (1959, not 1955) */}
+      <TgPrint src={LOOK} x={1080} y={200} w={720} h={493} at={t.at("You're hosting.") - 1} rot={2} pos="30% 40%" tag={TAG_LOOK} />
     </AbsoluteFill>
   );
 };

@@ -12,6 +12,7 @@ import {hasFile} from '../../kit/shell';
 import {Ph} from '../../kit/tg_placeholder';
 import {type Box, tornPoly} from '../../kit/vox';
 
+export const COLOUR_DOC = 'contrast(1.05) saturate(0.95)';
 export const BW_DOC = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(1.02)';
 
 /** Amelia Simmons, American Cookery (1796), the page with "To Dress a Turtle" (page 20). */
@@ -75,9 +76,9 @@ export const Crop: React.FC<{src: string; size: [number, number]; box: Box; w: n
   );
 };
 
-/** A torn scrap of a scan slapped onto the desk at (x, y), `w` wide, with an optional source tag under it. */
+/** A torn scrap of a scan slapped onto the desk at (x, y), `w` wide, with an optional source tag under it (`filter`: COLOUR_DOC keeps a colour page). */
 export const PageScrap: React.FC<{src: string; size: [number, number]; box: Box; x: number; y: number; w: number; at?: number; rot?: number; tag?: string; opacity?: number;
-  seed?: string; children?: React.ReactNode}> = ({src, size, box, x, y, w, at = -999, rot = 0, tag, opacity = 1, seed = 'scrap', children}) => {
+  seed?: string; filter?: string; children?: React.ReactNode}> = ({src, size, box, x, y, w, at = -999, rot = 0, tag, opacity = 1, seed = 'scrap', filter, children}) => {
   const g = useGFrame();
   if (g < at) return null;
   const k = at < -900 ? 1 : interpolate(g, [at, at + 4, at + 7], [1.3, 0.96, 1], clamp);
@@ -86,7 +87,7 @@ export const PageScrap: React.FC<{src: string; size: [number, number]; box: Box;
     <div style={{position: 'absolute', left: x, top: y, width: w, transform: `rotate(${rot}deg) scale(${k})`, transformOrigin: '50% 60%', opacity}}>
       <div style={{filter: 'drop-shadow(0 22px 30px rgba(0,0,0,0.75))'}}>
         <div style={{clipPath: tornPoly(seed, w, h, 9)}}>
-          <Crop src={src} size={size} box={box} w={w}>{children}</Crop>
+          <Crop src={src} size={size} box={box} w={w} filter={filter}>{children}</Crop>
         </div>
       </div>
       {tag ? <div style={{position: 'absolute', left: 0, top: h + 16, width: 'max-content', maxWidth: w + 60, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1,

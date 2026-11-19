@@ -89,7 +89,8 @@ const Yarn: React.FC<{a: [number, number]; b: [number, number]; at: number; tag?
   const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + 28;
   const pt = (t: number) => [(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * mx + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * my + t * t * b[1]];
   const pts = Array.from({length: 25}, (_, i) => pt((i / 24) * q).map((v) => v.toFixed(1)).join(',')).join(' ');
-  const [tx, ty] = pt(0.5);
+  // the tag sits where along the yarn it is clearest of every piece and label (a tag on a label hid it, Nov 2026)
+  const [tx, ty] = tagSpot(a, b, pt);
   return (
     <>
       <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0, zIndex: 40, overflow: 'visible'}}>
@@ -99,6 +100,45 @@ const Yarn: React.FC<{a: [number, number]; b: [number, number]; at: number; tag?
     </>
   );
 };
+
+/** Board rectangles a yarn tag must stay clear of: each piece and the label strip under it. */
+const KEEP_OUT: [number, number, number, number][] = PIECES.flatMap((p) => [
+  [p.x, p.y, p.w, p.h] as [number, number, number, number],
+  [p.x - 6, p.y + p.h + 8, p.label.length * 13.5 + 30, 34] as [number, number, number, number],
+]);
+const pickSpot = (pt: (t: number) => number[]): number[] => {
+  // score: the clear distance from the tag's box (about 110 x 40) to the nearest keep-out rectangle, or, when it touches one,
+  // minus the area it covers (so the least-covered spot wins when no spot is clear)
+  let best = pt(0.5), bestS = -Infinity;
+  for (let t = 0.2; t <= 0.801; t += 0.025) {
+    const [x, y] = pt(t);
+    const [l, r, tp, bt] = [x - 55, x + 55, y - 20, y + 20];
+    let d = Infinity, cover = 0;
+    for (const [rx, ry, rw, rh] of KEEP_OUT) {
+      const ox = Math.min(r, rx + rw) - Math.max(l, rx), oy = Math.min(bt, ry + rh) - Math.max(tp, ry);
+      if (ox > 0 && oy > 0) cover += ox * oy;
+      d = Math.min(d, Math.hypot(Math.max(rx - r, 0, l - (rx + rw)), Math.max(ry - bt, 0, tp - (ry + rh))));
+    }
+    const sc = cover > 0 ? -cover : d - Math.abs(t - 0.5) * 20;
+    if (sc > bestS) { best = [x, y]; bestS = sc; }
+  }
+  return best;
+};
+/** The sagging yarn between two pins (the same curve Yarn draws). */
+const curve = (a: [number, number], b: [number, number]) => {
+  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + 28;
+  return (t: number) => [(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * mx + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * my + t * t * b[1]];
+};
+/** Every yarn's tag spot, chosen once in chapter order; each placed tag becomes a keep-out for the next, so two tags never stack. */
+const SPOTS = new Map<string, number[]>();
+PIECES.forEach((p, i) => {
+  if (!i) return;
+  const a = pinOf(PIECES[i - 1]), b = pinOf(p);
+  const spot = pickSpot(curve(a, b));
+  SPOTS.set(`${a}|${b}`, spot);
+  KEEP_OUT.push([spot[0] - 60, spot[1] - 22, 120, 44]);
+});
+const tagSpot = (a: [number, number], b: [number, number], pt: (t: number) => number[]) => SPOTS.get(`${a}|${b}`) ?? pt(0.5);
 
 type Ghost = {id: PieceId; at: number; yarnAt?: number};
 

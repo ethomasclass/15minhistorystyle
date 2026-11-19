@@ -9,8 +9,8 @@ import words from '../../public/audio/ch05_hale.words.json';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
-import {type SheetCam, camAt, Swipe} from '../kit/vox';
-import {DocPage, FullFrame, type PlaceholderInfo, PrintOr} from '../kit/tg_placeholder';
+import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
+import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
 import {Cut} from '../kit/desk';
 import {type Box} from '../kit/vox';
@@ -97,7 +97,7 @@ const Northwood: React.FC<{t: TL; a: number}> = ({t, a}) => {
       {wide && g >= t.at('Northwood.') && <Highlight text="NORTHWOOD · 1827" x={110} y={120} size={84} at={t.at('Northwood.')} seed={52} rot={-2} />}
       {wide && <Note text="a novel" x={140} y={300} size={50} rot={-3} at={t.at('novel') - 3} color="#ffffff" />}
       {wide && <Note text="…with a Thanksgiving dinner" x={140} y={420} size={50} rot={-3} at={t.at('Thanksgiving dinner') - 3} />}
-      <Tag text={`${NW_TAG}${wide ? '' : g < pies ? ' · p. 109' : ' · p. 110'}`} x={44} y={40} />
+      <TagOn text={`${NW_TAG}${wide ? '' : g < pies ? ' · p. 109' : ' · p. 110'}`} />
     </AbsoluteFill>
   );
 };
@@ -111,8 +111,8 @@ const Niche: React.FC<{t: TL; a: number}> = ({t}) => {
       <DocPage src={NW_110} what={NW_WHAT} size={NW_SIZE} cam={cam} seed="nw2">
         <Swipe lines={NW_NICHE} from={t.at('the most distinguished')} to={t.end('the most distinguished niche')} seed="nw3" />
       </DocPage>
-      <Note text="the pumpkin pie:" x={140} y={180} size={52} rot={-3} at={t.at('the pumpkin') - 3} color="#ffffff" />
-      <Tag text={`${NW_TAG} · p. 110`} />
+      <Slip text="the pumpkin pie:" x={140} y={150} size={52} rot={-3} at={t.at('the pumpkin') - 3} />
+      <TagOn text={`${NW_TAG} · p. 110`} />
     </AbsoluteFill>
   );
 };
@@ -238,7 +238,7 @@ const Proclamation: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p1.jpg" what="Lincoln, Proclamation of Thanksgiving, 3 Oct 1863" x={1150} y={110} w={540} h={837} at={a + 1} rot={-1}
         tag="Thanksgiving Proclamation, Oct. 3, 1863, p. 1 · National Archives, via Wikimedia Commons" />
-      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p2.jpg" what="Proclamation, p. 2" x={760} y={300} w={420} h={640} at={t.at('last Thursday') - 1} rot={3} pos="50% 30%" />
+      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p2.jpg" what="Proclamation, p. 2" x={900} y={360} w={400} h={610} at={t.at('last Thursday') - 1} rot={3} pos="50% 30%" />
       {g >= t.at('Days later') && <Highlight text="OCT. 3, 1863" x={110} y={130} size={96} at={t.at('Days later')} seed={56} rot={-2} />}
       <Note text="a national thanksgiving" x={140} y={360} size={52} rot={-3} at={t.at('proclaimed') - 3} />
       <Note text="last thursday of november" x={140} y={500} size={52} rot={-3} at={t.at('last Thursday') - 3} color={pal.subject} />

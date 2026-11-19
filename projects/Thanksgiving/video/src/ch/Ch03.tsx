@@ -67,8 +67,8 @@ const MenuCard: React.FC<{x: number; y: number; scale?: number; rot?: number; nu
             <React.Fragment key={r}>
               {numOn && <div style={{position: 'absolute', left: 70, top: ROW_Y(i), width: 90, textAlign: 'right', fontFamily: JF.heavy, fontStyle: 'italic', fontSize: 38, color: '#6b6258'}}>{NUMS[i]}</div>}
               {numOn && <div style={{position: 'absolute', left: 190, top: ROW_Y(i) + 58, width: 360, height: 1, background: 'rgba(42,38,34,0.28)'}} />}
-              <div style={{position: 'absolute', left: 190, top: ROW_Y(i) - 6, fontFamily: JF.heavy, fontWeight: 900, fontSize: 50, color: '#1d1a17', whiteSpace: 'nowrap',
-                clipPath: `inset(-30% ${(1 - p) * 100}% -30% 0)`}}>{r}</div>
+              {p > 0 && <div style={{position: 'absolute', left: 190, top: ROW_Y(i) - 6, fontFamily: JF.heavy, fontWeight: 900, fontSize: 50, color: '#1d1a17', whiteSpace: 'nowrap',
+                clipPath: `inset(-30% ${(1 - p) * 100}% -30% 0)`}}>{r}</div>}
             </React.Fragment>
           );
         })}

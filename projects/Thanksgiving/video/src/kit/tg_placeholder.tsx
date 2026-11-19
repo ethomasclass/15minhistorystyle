@@ -106,6 +106,12 @@ export const PrintOr: React.FC<{src: string; what: string; x: number; y: number;
   );
 };
 
+/** A source tag that stays readable over a bright page filling the frame: Kit's Tag on a dark backing strip. */
+export const TagOn: React.FC<{text: string; x?: number; y?: number}> = ({text, x = 44, y = 1030}) => (
+  <div style={{position: 'absolute', left: x - 10, top: y - 6, padding: '6px 10px', background: 'rgba(13,12,9,0.78)', borderRadius: 2, fontFamily: JF.mono, fontSize: 18,
+    lineHeight: 1, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', whiteSpace: 'nowrap'}}>{text}</div>
+);
+
 export type FCam = {x: number; y: number; z: number};
 /** Smooth (30 fps) camera between keys [frame, cam]: ease in-out, zoom in log space. */
 export const fcamAt = (keys: [number, FCam][], f: number): FCam => {
@@ -174,8 +180,7 @@ export const FullFrame: React.FC<{src: string; what: string; size: [number, numb
       </div>
       {!real && <div style={{position: 'absolute', left: 560, top: 850, width: 800, height: 150, background: 'rgba(13,12,9,0.82)'}}><PhLabel file={src} what={what} /></div>}
       <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,${vignette}) 100%)`}} />
-      {tag && g >= tagAt ? <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)',
-        textTransform: 'uppercase', textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{tag}</div> : null}
+      {tag && g >= tagAt ? <TagOn text={tag} /> : null}
     </AbsoluteFill>
   );
 };

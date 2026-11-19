@@ -13,6 +13,7 @@ import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL
 import {bed} from '../kit/levels';
 import {Slip, Swipe, type Box} from '../kit/vox';
 import {ChBoard} from '../kit/tg_board';
+import {TagOn} from '../kit/tg_placeholder';
 import {Cran, Diorama, Eel, PageRead, PrintSlot, PropSlot, Strike, Tally, type Plane} from '../kit/tg_props';
 
 const N = words as Narration;
@@ -23,8 +24,8 @@ export const CH02_FRAMES = chapterFrames(N, LEAD);
 const LETTER = 'img/arch/mourts-relation-1622-harvest-feast-p61.jpg';
 const LETTER_SIZE: [number, number] = [3250, 4576];
 /** "vernour sent foure men on fowling," (line 2) and "pany almost a weeke," (line 6), measured on the scan. */
-const FOWL: Box[] = [[245, 388, 1470, 80]];
-const WEEK: Box[] = [[245, 815, 985, 85]];
+const FOWL: Box[] = [[245, 402, 1470, 72]];
+const WEEK: Box[] = [[245, 828, 880, 72]];
 /** p. 60, the letter's heading ("A Letter sent from New-England to a friend"), for the print on the desk. */
 const LETTER_P60 = 'img/arch/mourts-relation-1622-letter-sent-from-new-england-p60.jpg';
 const TAG_MOURT = "Mourt's Relation, London, 1622 · Boston Public Library / Internet Archive";
@@ -128,7 +129,7 @@ const Letter: React.FC<S> = ({t, a}) => {
       </PageRead>
       <Slip text="fowling: hunting birds" x={1180} y={150} size={54} rot={-3} at={land + 4} />
       <Slip text="almost a week of birds" x={1180} y={860} size={54} rot={-2} at={t.at('almost a week') - 2} />
-      <Tag text="Edward Winslow, letter of 11 Dec. 1621 · Mourt's Relation, London, 1622, p. 61 · BPL / Internet Archive" x={44} y={40} />
+      <TagOn text="Edward Winslow, letter of 11 Dec. 1621 · Mourt's Relation, London, 1622, p. 61 · BPL / Internet Archive" />
     </AbsoluteFill>
   );
 };

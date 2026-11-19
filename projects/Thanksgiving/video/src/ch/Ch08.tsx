@@ -11,7 +11,8 @@ import {Arrow, Highlight, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/K
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, Stamp, TAIL, type TL, useScene} from '../kit/shell';
-import {Slip} from '../kit/vox';
+import {type Box, Slip} from '../kit/vox';
+import {PageScrap} from './ch34/parts';
 import {Print} from '../kit/print';
 import {TgBoard} from '../kit/tg_board';
 import {chestAt, SET, TURKEY, type TurkeyBeats, TurkeyRig, TurkeySet} from '../kit/tg_turkey';
@@ -29,14 +30,20 @@ const P = {
   bronze: {file: TURKEY.bronze, what: 'Flow: a heritage-type bronze turkey, live, side view facing left, feet at the bottom centre (RGBA)'},
   white: {file: TURKEY.white, what: 'Flow: the same bird and pose with white feathers (RGBA)'},
   scale: {file: TURKEY.scale, what: 'Flow or archival: a period platform scale, its deck at the top'},
-  hale: {file: 'img/arch/hale_portrait.jpg', what: 'Sarah Josepha Hale, portrait (ch5)'},
-  booklet: {file: 'img/arch/angelus_1917_booklet.jpg', what: 'Angelus marshmallow recipe booklet, 1917 (ch7)'},
 } satisfies Record<string, Placeholder>;
 /** Every placeholder in this chapter, for the asset swap. */
 export const PLACEHOLDERS: Placeholder[] = Object.values(P);
 
 const USDA = 'img/arch/large-white-turkey-female-usda-ars.jpg';
 const USDA_TAG = 'Large White turkey hen · USDA Agricultural Research Service';
+/** Turkey Raising, USDA Farmers' Bulletin 1409 (rev. 1952), Internet Archive: fig. 2 the Standardbred Bronze male, fig. 9 a Broad
+ *  Breasted Bronze breeding hen (source px crops of the pages). */
+const BULLETIN = "S. J. Marsden, Turkey Raising, USDA Farmers' Bulletin 1409, 1952 · Internet Archive";
+const FIG2 = {src: 'img/arch/usda-1952-standardbred-bronze-male-fig2.jpg', size: [3298, 5212] as [number, number], crop: [280, 2190, 2700, 2560] as Box};
+const FIG9 = {src: 'img/arch/usda-1952-broad-breasted-bronze-hen-and-carcasses-fig9-10.jpg', size: [3379, 5328] as [number, number], crop: [330, 350, 1100, 2800] as Box};
+const FSA_FARM = 'img/arch/fsa-turkey-farm-harrisburg-pa-1940.jpg';
+const OWI = 'img/arch/owi-thanksgiving-dinner-fincham-family-1942.jpg';
+const AD22 = {src: 'img/arch/angelus-marshmallows-cracker-jacks-piggly-wiggly-ad-1922.jpg', size: [1675, 2069] as [number, number], crop: [470, 966, 1150, 152] as Box};
 
 /** The inflating turkey's beats, from the words (one set, cut between framings; see kit/tg_turkey.tsx). */
 const beatsOf = (t: TL): TurkeyBeats => ({
@@ -74,12 +81,12 @@ const Strike: React.FC<{x1: number; y1: number; x2: number; y2: number; at: numb
 const Gmo: React.FC<{t: TL; a: number}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Print src={USDA} x={1280} y={180} w={440} h={662} at={-999} rot={2} pos="50% 50%" />
+    <PageScrap src={FSA_FARM} size={[5232, 4789]} box={[820, 480, 4150, 3800]} x={1160} y={200} w={620} rot={2} seed="fsa" />
     <Note text="a GMO turkey?" x={150} y={190} size={80} rot={-3} at={t.at('GMO turkey.') - 2} color={ORANGE} />
     <Strike x1={140} y1={265} x2={690} y2={215} at={t.at("isn't.")} />
     <Note text="nobody edited its genes" x={160} y={420} size={60} rot={-3} at={t.at('Nobody edited') - 2} color="#ffffff" />
     <Note text="no lab." x={200} y={560} size={70} rot={-3} at={t.at('in a lab.') - 2} />
-    <Tag text={USDA_TAG} />
+    <Tag text="Turkey farm near Harrisburg, Pennsylvania, 1940 · Royden Dixon, FSA · Library of Congress" />
   </AbsoluteFill>
 );
 
@@ -132,6 +139,7 @@ const OldWay: React.FC<{t: TL; a: number}> = ({t}) => {
 /** Wide: the bronze bird on the scale; more breast meat. */
 const BirdWide: React.FC<{t: TL; a: number}> = ({t}) => (
   <TurkeySet b={beatsOf(t)} cam={{x: 760, y: 540, z: 1}} dial={false}>
+    <PageScrap src={FIG9.src} size={FIG9.size} box={FIG9.crop} x={1480} y={130} w={300} rot={2} seed="f9" tag="Broad Breasted Bronze hen, USDA, 1952" />
     <Highlight text="MORE BREAST MEAT" x={110} y={120} size={80} at={t.at('more breast meat,')} seed={84} rot={-2} />
     <Note text="what farmers wanted" x={130} y={250} size={46} rot={-3} at={t.at('farmers wanted') - 2} color="#ffffff" />
   </TurkeySet>
@@ -214,7 +222,8 @@ const Heritage: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <TurkeyRig x={520} y={930} size={400} b={{}} />
+      {/* a real heritage-type bird: the Standardbred Bronze male of the 1952 USDA bulletin */}
+      <PageScrap src={FIG2.src} size={FIG2.size} box={FIG2.crop} x={250} y={420} w={540} rot={-1.5} seed="f2" />
       <TurkeyRig x={1360} y={930} size={400} b={done} white grow={1} />
       {label(520, 'HERITAGE')}
       {label(1360, 'BROAD-BREASTED WHITE')}
@@ -224,7 +233,8 @@ const Heritage: React.FC<{t: TL; a: number}> = ({t}) => {
       <Note text="slower-growing," x={390} y={350} size={46} rot={-3} at={t.at('slower-growing,') - 2} />
       <Note text="pricier" x={830} y={350} size={46} rot={-3} at={t.at('more expensive.') - 2} />
       <Note text="what a turkey used to be" x={1060} y={240} size={54} rot={-3} at={t.at('what a turkey') - 2} color={pal.subject} />
-      <Arrow x1={1060} y1={300} x2={640} y2={560} bow={-50} at={t.at('what a turkey') + 6} />
+      <Arrow x1={1060} y1={300} x2={700} y2={520} bow={-50} at={t.at('what a turkey') + 6} />
+      <Tag text={`Standardbred Bronze male · ${BULLETIN}`} />
     </AbsoluteFill>
   );
 };
@@ -247,7 +257,8 @@ const Subscribe: React.FC<{t: TL; a: number}> = ({t}) => (
     <Note text="quick favor:" x={200} y={240} size={56} rot={-3} at={t.at('Quick favor:') - 2} color="#ffffff" />
     <Note text="hit subscribe" x={240} y={360} size={96} rot={-3} at={t.at('hit subscribe.') - 2} />
     <Note text="it's free." x={290} y={540} size={60} rot={-3} at={t.at("It's free.") - 2} color="#ffffff" />
-    <Slap at={t.at('marshmallow people,')} x={1240} y={190} rot={4}><PH {...P.booklet} w={460} h={650} filter="saturate(0.8)" /></Slap>
+    <PageScrap src={AD22.src} size={AD22.size} box={AD22.crop} x={1100} y={260} w={680} at={t.at('marshmallow people,')} rot={4} seed="s22"
+      tag="Piggly Wiggly ad, Albuquerque Morning Journal, Oct. 28, 1922 · LOC" />
     <Note text="(not selling anything)" x={300} y={700} size={50} rot={-3} at={t.at('not selling') - 2} />
   </AbsoluteFill>
 );
@@ -262,12 +273,15 @@ const Slap: React.FC<{at: number; x: number; y: number; rot?: number; children: 
 
 const Question: React.FC<{t: TL; a: number}> = ({t}) => {
   const pal = usePal();
+  const g = useGFrame();
   return (
     <AbsoluteFill>
       <DarkPaper />
       <Note text="back to the question:" x={200} y={230} size={56} rot={-3} at={t.at('the question.') - 2} color="#ffffff" />
       <Note text="how did we get from eels..." x={240} y={380} size={88} rot={-3} at={t.at('How did we') - 2} />
       <Note text="...to this?" x={420} y={560} size={100} rot={-3} at={t.at('to this?') - 2} color={pal.subject} />
+      <Print src={OWI} x={1230} y={560} w={560} h={448} at={t.at('to this?')} rot={2} pos="60% 50%" />
+      {g >= t.at('to this?') && <Tag text="Thanksgiving dinner, 1942 · Howard R. Hollem, Office of War Information · Library of Congress" />}
     </AbsoluteFill>
   );
 };
@@ -279,10 +293,10 @@ const Recap: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Print src="img/arch/simmons-1796-to-dress-a-turtle-p1.jpg" x={1010} y={120} w={460} h={640} at={s1 - 1} rot={-4} pos="50% 20%" />
+      <Print src="img/arch/simmons-1796-to-dress-a-turtle-p2.jpg" x={1010} y={120} w={460} h={640} at={s1 - 1} rot={-4} pos="50% 62%" />
       <Print src="img/arch/mock-turtle-soup-boston-cook-book-1884.jpg" x={1090} y={160} w={440} h={640} at={s2 - 1} rot={3} pos="50% 30%" />
       <MockTape x={1200} y={520} at={s2 + 4} size={80} />
-      <Slap at={s3 - 1} x={1170} y={190} rot={-2}><PH {...P.hale} w={440} h={620} /></Slap>
+      <Print src="img/arch/sarah-josepha-hale-engraving-1880-signature.jpg" x={1170} y={190} w={440} h={620} at={s3 - 1} rot={-2} pos="50% 20%" />
       <Print src="img/arch/jello-girl-gives-a-party-1920-cover.jpg" x={1250} y={230} w={450} h={620} at={s4 - 1} rot={4} pos="50% 30%" />
       <Note text="step by step:" x={130} y={40 + 100} size={50} rot={-3} at={t.at('Step by step.') - 2} out={s1} color="#ffffff" />
       <Highlight text="1 · SHOW OFF" x={110} y={130} size={66} at={s1} seed={90} rot={-2} />
@@ -292,7 +306,7 @@ const Recap: React.FC<{t: TL; a: number}> = ({t}) => {
       <Note text="a homemade menu, made national" x={140} y={640} size={40} rot={-2} at={t.at('homemade menu') - 2} color="#ffffff" />
       <Highlight text="4 · SELL THE SHORTCUT" x={110} y={750} size={66} at={s4} seed={93} rot={-2} />
       <Note text="dressed up as homemade" x={140} y={860} size={50} rot={-2} at={t.at('dressed it up') - 2} color={pal.subject} />
-      <Tag text="Simmons, American Cookery, 1796 · Boston Cook Book, 1884 · Jell-O, 1920 · Library of Congress / Internet Archive" />
+      <Tag text="Simmons, American Cookery, 1796 · Boston Cook Book, 1884 · Hale, engraving, 1880 · Jell-O booklet, 1920 · LOC / Wellcome / Internet Archive" />
     </AbsoluteFill>
   );
 };
