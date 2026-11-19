@@ -27,6 +27,10 @@ JOBS = {
     # Crop to one figure when the picture has several people; the largest piece of the cut-out is kept.
     "sully": ("img/demo/sully_jackson_1845.jpg", None, "isnet-general-use"),
     # "clay": ("img/clay_jouett.jpg", None, "isnet-general-use"),
+    # Thanksgiving ch5: Sarah Josepha Hale, Lambdin's c.1831 oil (Commons copy, 1280 x 1707), the whole bust
+    "hale_lambdin": ("img/arch/sarah-josepha-hale-portrait-lambdin-1831.jpg", None, "isnet-general-use"),
+    # the 1880 engraving (LOC), bust only (the signature and the faded foot left out)
+    "hale_1880": ("img/arch/sarah-josepha-hale-engraving-1880-signature.jpg", (60, 80, 1000, 1060), "isnet-general-use"),
     # "voters_a": ("img/gen/ch05_new_voters.png", (80, 120, 420, 850), "isnet-general-use"),
 }
 

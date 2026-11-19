@@ -13,7 +13,7 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {FullFrame, Ph, PhLabel, type PlaceholderInfo, PrintOr, type StandIn, TgPrint} from '../kit/tg_placeholder';
 import {MockTape} from '../kit/tg_mock';
-import {TgBoard} from '../kit/tg_board';
+import {ChBoard} from '../kit/tg_board';
 
 const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
@@ -260,7 +260,7 @@ const Ad: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ---------------------------------------------------------------- The board: the Jell-O piece lands with its MOCK tag
-const Board: React.FC<{t: TL; a: number}> = ({a}) => <TgBoard ch={6} at={a + 4} />;
+const Board: React.FC<{t: TL; a: number}> = ({a}) => <ChBoard ch={6} at={a + 4} />;
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);

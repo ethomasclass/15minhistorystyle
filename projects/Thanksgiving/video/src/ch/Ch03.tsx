@@ -1,6 +1,7 @@
 // Chapter 3 · Showing off: the 1800s menu, turtle, the mince pie with meat in it.
 // Scenes (anchor phrase → scene):
-//   0                 MenuCard     a bill of fare builds course by course; Turtle Soup swiped coral on "turtle"
+//   0                 Menu         the real 1870 Everett House bill of fare (oysters swiped), then our typeset card slaps over it
+//                                  and builds course by course; Turtle Soup swiped coral on "turtle"
 //   "shipped"         Dock         the turtle-dock diorama (placeholder): shipped up alive from the Caribbean
 //   "Here's"          TurtlePan    full-screen guided pan down Simmons p. 20, landing on the quoted line as it is spoken
 //                                  (swiped coral), then held, with nothing new, for "That's step one."
@@ -18,7 +19,7 @@ import {Arrow, Highlight, JF, Loop, Note, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {FullFrame} from '../kit/tg_placeholder';
-import {TgBoard} from '../kit/tg_board';
+import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
 import type {PlaceholderInfo} from '../kit/tg_placeholder';
 import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
@@ -80,15 +81,28 @@ const MenuCard: React.FC<{x: number; y: number; scale?: number; rot?: number; nu
 
 const NEVER = 1e7;
 
+/** A real bill of fare: the Everett House, Chicago, Thanksgiving 1870 (Newberry Library), its top half, "SOUP. Clam. Oysters." */
+const EVERETT = {src: 'img/arch/everett-house-chicago-thanksgiving-dinner-menu-1870.jpg', size: [3412, 2552] as [number, number],
+  scrap: [150, 250, 1300, 1000] as [number, number, number, number], oysters: [[755, 788, 118, 36]] as [number, number, number, number][]};
+const TAG_EVERETT = 'Annual Thanksgiving Dinner, Everett House, Chicago, Nov. 24, 1870 · Newberry Library';
+
 const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
   const g = useGFrame();
-  const rowAt = [t.at('oysters') - 2, t.at('was turtle') - 2, t.at('grandest') + 2, t.at('grandest') + 6, t.at('grandest') + 10, NEVER];
+  // the real 1870 menu first (oysters swiped on it), then our typeset card slaps over it for the turtle, the grandest dinners' dish
+  const card = t.at('grandest') - 3;
+  const rowAt = [-999, t.at('was turtle') - 2, t.at('grandest') + 2, t.at('grandest') + 6, t.at('grandest') + 10, NEVER];
   return (
     <AbsoluteFill>
       <DarkPaper />
       {g >= t.at('1800s') && <Highlight text="THE 1800s" x={120} y={120} size={110} at={t.at('1800s')} seed={31} rot={-2} />}
       <Note text="course after course" x={150} y={310} size={60} rot={-3} at={t.at('course after') - 3} />
-      <MenuCard x={1040} y={110} rot={1.5} numAt={t.at('course after')} rowAt={rowAt} swipeAt={t.at('turtle')} />
+      {g < card + 4 && (
+        <PageScrap src={EVERETT.src} size={EVERETT.size} box={EVERETT.scrap} x={980} y={170} w={820} at={t.at('course after') - 2} rot={1.5} tag={TAG_EVERETT} seed="ev">
+          <Swipe lines={EVERETT.oysters} from={t.at('oysters') - 1} to={t.at('oysters') + 6} seed="evo" />
+        </PageScrap>
+      )}
+      <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('oysters') - 3} color="#ffffff" out={card} />
+      <MenuCard x={1040} y={110} rot={1.5} numAt={card} rowAt={rowAt} swipeAt={t.at('turtle')} at={card} />
       <Slip text="“we've arrived”" x={150} y={560} at={t.at('said') - 2} rot={-3} size={66} />
       <Slip text="green sea turtle" x={190} y={720} at={t.at('Green') - 2} rot={2} size={62} coral />
     </AbsoluteFill>
@@ -251,7 +265,7 @@ const Point: React.FC<{t: TL; a?: number}> = ({t}) => {
   );
 };
 
-const Board: React.FC<{t: TL; a?: number}> = ({t}) => <TgBoard ch={3} at={t.at('But not') + 2} />;
+const Board: React.FC<{t: TL; a?: number}> = ({t}) => <ChBoard ch={3} at={t.at('But not') + 2} ghost={{id: 'mock', at: t.at('afford a turtle') + 4}} />;
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);

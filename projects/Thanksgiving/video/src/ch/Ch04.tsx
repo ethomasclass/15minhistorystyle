@@ -1,10 +1,9 @@
 // Chapter 4 · Mock turtle: the fake, and how it outlasted the real thing.
 // Scenes (anchor phrase → scene):
 //   0                       Pair (empty)  THE REAL THING (the Simmons turtle recipe) beside an empty FAKE slot
-//   "Flip"                  Book          the 1796 pages slap down; the recipe's title as a quote
-//   "You take"              Recipe        the 1884 Boston Cook Book's Mock Turtle Soup on the desk: "1 calf's head" and
-//                                         "Remove the brains" swiped as they are said (Simmons' own calf's-head page isn't
-//                                         in the scans; this is the same dish 88 years on, and the slip and tag say so)
+//   "Flip"                  Book          the 1796 pages (pp. 21-22) slap down; the recipe's title as a quote
+//   "You take"              Recipe        Simmons p. 22, "To dress a Calve's Head. Turtle fashion.": "The head and feet" and
+//                                         "open the head, taking the brains" swiped as they are said
 //   "And you cook"          Morph         Flow M1 calf's head → turtle tureen (placeholder), finishing on "like turtle"
 //   "Mock turtle" (1)       Pair (mock)   real vs mock; the MOCK tape slaps on "Mock"; cheap, always more of it
 //   "Caribbean green"       Decline       100 drawn turtles; the stepped number counts to −97% as 97 go grey; 3 stay coral
@@ -20,9 +19,9 @@ import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
 import {MockTape} from '../kit/tg_mock';
 import {type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
-import {TgBoard} from '../kit/tg_board';
+import {ChBoard} from '../kit/tg_board';
 import {camAt, Sheet, Slip, Swipe} from '../kit/vox';
-import {BOSTON, FrameSeqOr, PageScrap, SIMMONS_P2, TAG_BOSTON, TAG_SIMMONS} from './ch34/parts';
+import {BOSTON, FrameSeqOr, PageScrap, SIMMONS_P2, SIMMONS_P22, TAG_SIMMONS} from './ch34/parts';
 
 const N = words as Narration;
 export const CH04_FRAMES = chapterFrames(N, LEAD);
@@ -51,7 +50,7 @@ const Pair: React.FC<{mode: 'empty' | 'mock'; tapeAt?: number; fadeAt?: number; 
       <div style={{position: 'absolute', left: 1080, top: 170, fontFamily: JF.mono, fontSize: 30, letterSpacing: 4, color: CORAL}}>THE FAKE</div>
       <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={SIMMONS_P2.scrap} x={SCRAP_L.x} y={SCRAP_L.y} w={SCRAP_L.w} rot={-1.5} opacity={fade} seed="pl" />
       <div style={{position: 'absolute', left: SCRAP_L.x, top: SCRAP_L.y + 220, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1, color: 'rgba(244,239,230,0.75)', opacity: fade}}>
-        TURTLE · SIMMONS, 1796
+        TURTLE · SIMMONS, AMERICAN COOKERY, 1796 · LOC / IA
       </div>
       {mode === 'empty' ? (
         <div style={{position: 'absolute', left: SCRAP_R.x, top: SCRAP_R.y, width: SCRAP_R.w, height: 400, border: '4px dashed rgba(244,239,230,0.35)', boxSizing: 'border-box',
@@ -60,7 +59,7 @@ const Pair: React.FC<{mode: 'empty' | 'mock'; tapeAt?: number; fadeAt?: number; 
         <>
           <PageScrap src={BOSTON.src} size={BOSTON.size} box={BOSTON.scrap} x={SCRAP_R.x} y={SCRAP_R.y} w={SCRAP_R.w} rot={1.5} seed="pr" />
           <div style={{position: 'absolute', left: SCRAP_R.x, top: SCRAP_R.y + 420, fontFamily: JF.mono, fontSize: 16, letterSpacing: 1, color: 'rgba(244,239,230,0.75)'}}>
-            {"MOCK TURTLE · MRS. LINCOLN'S BOSTON COOK BOOK, 1884"}
+            {"MOCK TURTLE · MRS. LINCOLN'S BOSTON COOK BOOK, 1884 · WELLCOME / IA"}
           </div>
           <MockTape x={TAPE[0]} y={TAPE[1]} at={tapeAt} />
         </>
@@ -83,8 +82,8 @@ const Book: React.FC<{t: TL; a?: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <TgPrint src={SIMMONS_P2.p1} x={380} y={130} w={520} h={746} at={t.at('Flip') - 1} rot={-3} />
-      <TgPrint src={SIMMONS_P2.src} x={1000} y={150} w={520} h={707} at={t.at('few pages') - 1} rot={2} />
+      <TgPrint src={SIMMONS_P2.p21} x={380} y={130} w={520} h={746} at={t.at('Flip') - 1} rot={-3} />
+      <TgPrint src={SIMMONS_P22.src} x={1000} y={150} w={520} h={707} at={t.at('few pages') - 1} rot={2} />
       <AbsoluteFill style={{background: 'rgba(13,12,9,0.74)', opacity: interpolate(g, [q - 2, q + 4], [0, 1], clamp)}} />
       <Quote text="To dress a Calve’s Head, Turtle fashion." at={q - 1} x={160} y={400} w={1600} size={84} who="Amelia Simmons, American Cookery, 1796" />
       <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
@@ -93,22 +92,22 @@ const Book: React.FC<{t: TL; a?: number}> = ({t}) => {
   );
 };
 
-/** The same dish in 1884: the recipe on the desk, its calf's head and its brains swiped as they are said. */
+/** The 1796 recipe itself (Simmons p. 22): the camera leans in on it; the head, then the brains, swiped as they are said. */
 const Recipe: React.FC<{t: TL; a?: number}> = ({t}) => {
   const f = useCurrentFrame();
   const a = t.at('You take');
-  const cam = camAt([[a, {x: 700, y: 1520, z: 1.42, tilt: 12}], [t.at('take out the brains'), {x: 700, y: 1690, z: 1.5, tilt: 12}]], f);
+  const P = SIMMONS_P22;
+  const cam = camAt([[a, {x: 1780, y: 1420, z: 0.6, tilt: 12}], [t.at('take out the brains'), {x: 1700, y: 1540, z: 0.66, tilt: 12}]], f);
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Sheet src={BOSTON.src} size={BOSTON.size} cam={cam} seed="bk" filter="grayscale(1) sepia(0.15) contrast(1.05) brightness(0.8)">
-        <Swipe lines={[BOSTON.head]} from={t.at("calf's head") - 1} to={t.at("calf's head") + 7} seed="b1" />
-        <Swipe lines={[BOSTON.brains]} from={t.at('take out the brains') - 1} to={t.end('the brains') + 4} seed="b2" />
+      <Sheet src={P.src} size={P.size} cam={cam} seed="ch" filter="grayscale(1) sepia(0.15) contrast(1.12) brightness(0.85)">
+        <Swipe lines={[P.head]} from={t.at("calf's head") - 1} to={t.end('You open it up') + 2} seed="b1" />
+        <Swipe lines={[P.brains]} from={t.at('take out the brains') - 1} to={t.end('the brains') + 4} seed="b2" />
       </Sheet>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.6) 100%), linear-gradient(transparent 85%, rgba(0,0,0,0.55) 100%)'}} />
-      <Slip text="the same dish, 1884:" x={110} y={122} at={a + 2} rot={-3} size={58} />
       <div style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
-        textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{TAG_BOSTON}</div>
+        textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{`${TAG_SIMMONS} · p. 22`}</div>
     </AbsoluteFill>
   );
 };
@@ -191,7 +190,7 @@ const PairLate: React.FC<{t: TL; a?: number}> = ({t}) => {
   );
 };
 
-const Board: React.FC<{t: TL; a?: number}> = ({t}) => <TgBoard ch={4} at={t.at('But one') + 2} pull={34} />;
+const Board: React.FC<{t: TL; a?: number}> = ({t}) => <ChBoard ch={4} at={t.at('But one') + 2} pull={34} ghost={{id: 'hale', at: t.at('one woman') + 2}} />;
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);

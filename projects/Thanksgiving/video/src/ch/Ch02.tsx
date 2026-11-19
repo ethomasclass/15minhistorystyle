@@ -3,28 +3,33 @@
 // and the five deer, the alliance, what wasn't there (pie, potatoes, cranberry: struck out), the 200-year gap, and the board: the
 // eel is this chapter's pin. Missing assets are labelled placeholders (PLACEHOLDERS below); the motion and marks are built round them.
 import React from 'react';
-import {AbsoluteFill, Img, interpolate, random, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, interpolate, random} from 'remotion';
 import words from '../../public/audio/ch02_1621.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {NoPhoto} from '../kit/print';
-import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {bed} from '../kit/levels';
 import {Slip, Swipe, type Box} from '../kit/vox';
-import {APin, AThreads, BRAND, Ctx, Defs, Land, BoardStage, Strip} from '../kit/board';
-import {Cran, Diorama, Eel, PageLine, PageRead, Placeholder, PrintSlot, PropSlot, Strike, Tally, type Plane} from '../kit/tg_props';
+import {ChBoard} from '../kit/tg_board';
+import {Cran, Diorama, Eel, PageRead, PrintSlot, PropSlot, Strike, Tally, type Plane} from '../kit/tg_props';
 
 const N = words as Narration;
 export const CH02_FRAMES = chapterFrames(N, LEAD);
 
 // ------------------------------------------------------------------ assets still to come
-const LETTER = 'img/arch/winslow_letter_mourts_relation_1622.jpg';
-/** The page's pixel size is a guess until the scan lands: re-read it then, and re-measure FOWL / WEEK with tools/phrase_find.py. */
-const LETTER_SIZE: [number, number] = [1700, 2600];
-const FOWL: Box[] = [[150, 1180, 1120, 50]];
-const WEEK: Box[] = [[150, 1372, 1080, 50]];
-const WINSLOW = 'img/arch/winslow_portrait_1651.jpg';
+/** Winslow's letter as printed in Mourt's Relation (London, 1622), p. 61: the harvest passage (BPL copy, Internet Archive). */
+const LETTER = 'img/arch/mourts-relation-1622-harvest-feast-p61.jpg';
+const LETTER_SIZE: [number, number] = [3250, 4576];
+/** "vernour sent foure men on fowling," (line 2) and "pany almost a weeke," (line 6), measured on the scan. */
+const FOWL: Box[] = [[245, 388, 1470, 80]];
+const WEEK: Box[] = [[245, 815, 985, 85]];
+/** p. 60, the letter's heading ("A Letter sent from New-England to a friend"), for the print on the desk. */
+const LETTER_P60 = 'img/arch/mourts-relation-1622-letter-sent-from-new-england-p60.jpg';
+const TAG_MOURT = "Mourt's Relation, London, 1622 · Boston Public Library / Internet Archive";
+/** Only a 412 x 500 copy is free to use: a small print, never full frame. */
+const WINSLOW = 'img/arch/edward-winslow-portrait-1651-commons-small.jpg';
 const D1: Plane[] = [
   {src: 'img/flow/d1_sky.png', depth: 0, band: [0, 1080], tone: '#1C3332'},
   {src: 'img/flow/d1_far.png', depth: 0.25, band: [470, 260], tone: '#335652'},
@@ -34,8 +39,6 @@ const D1: Plane[] = [
 
 export const PLACEHOLDERS = [
   ...D1.map((p) => ({file: p.src, scenes: ['Plymouth'], note: 'D1 eel river at dawn (FLOW_CUTOUT_PROMPTS §7), one plane, full-frame RGBA cut from black; the rejected d1_sky.jpg is not used. The front plane carries the wading figure and the coral basket.'})),
-  {file: LETTER, scenes: ['OneLetter (print)', 'Letter (the guided read)'], note: "Winslow's letter of 11 Dec 1621 as printed in Mourt's Relation (1622), the page with \"sent four men on fowling\" (Dexter ed. 1865, p.[61], per RESEARCH.md). Set LETTER_SIZE to its real size and re-measure the FOWL and WEEK line boxes; the PageLine text then switches off by itself."},
-  {file: WINSLOW, scenes: ['Winslow'], note: 'Edward Winslow, 1651 portrait (Pilgrim Hall Museum). Becomes a bust Cut: tools/mask.py winslow, the entry in src/masks_ch02.ts, coral tint + teal trace.'},
   {file: 'img/props/tg_fowl.webp', scenes: ['Translation'], note: 'Flow prop: a brace of wild fowl (ducks/geese), paper look, muted engraving colour, cut with prop_cut.py.'},
   {file: 'img/props/tg_deer.webp', scenes: ['Deer (x5)', 'Translation'], note: 'Flow prop: one deer (side view), paper look, muted engraving colour.'},
   {file: 'img/props/tg_pie.webp', scenes: ['NotThere'], note: 'Flow prop: a pumpkin pie, whole (it is struck out).'},
@@ -87,48 +90,45 @@ const Half: React.FC<S> = ({t, a}) => {
 const OneLetter: React.FC<S> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <PrintSlot src={LETTER} x={1080} y={110} w={560} h={820} rot={2} at={a + 1} fit="cover" pos="50% 0%" note="Winslow's letter (Mourt's Relation, 1622)" />
+    <PrintSlot src={LETTER_P60} x={1080} y={110} w={560} h={788} rot={2} at={a + 1} fit="cover" pos="50% 0%" tag={TAG_MOURT} />
     <Note text="how do we know what they ate?" x={140} y={260} size={52} rot={-3} at={t.at('how do we know') - 3} color="#ffffff" />
     <Highlight text="ONE LETTER" x={140} y={420} size={120} at={t.at('one letter')} seed={25} rot={-2} />
   </AbsoluteFill>
 );
 
-/** Edward Winslow: a bust cut-out (placeholder until the portrait and its mask exist). */
+/** Edward Winslow: the 1651 portrait as a small print (only a 412 x 500 copy is free to use, so no cut-out, no full frame). */
 const Winslow: React.FC<S> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
-    <Placeholder file={WINSLOW} x={1060} y={150} w={660} h={830} at={a + 1} note="bust cut-out (Cut, mask 'winslow'): coral tint + teal trace" />
+    <PrintSlot src={WINSLOW} x={1180} y={230} w={470} h={570} rot={2} at={a + 1} fit="cover" pos="50% 30%" />
     <Highlight text="EDWARD WINSLOW" x={120} y={130} size={92} at={t.at('Edward Winslow')} seed={27} rot={-2} />
     <Note text="wrote it home, december 1621" x={150} y={320} size={54} rot={-3} at={t.at('December') - 3} />
     <Note text="the whole meal: a few short lines" x={150} y={460} size={54} rot={-3} at={t.at('few short lines') - 3} color="#ffffff" />
-    {hasFile(WINSLOW) && <Tag text="Edward Winslow, portrait, 1651 · Pilgrim Hall Museum" />}
+    <Tag text="Edward Winslow, portrait, 1651 · Pilgrim Hall Museum, via Wikimedia Commons" />
   </AbsoluteFill>
 );
 
 /** The document read: the chapter's one guided pan. The camera glides down the page and lands on "fowling" as it is said; the
  *  swipe follows the line; a short glide on to "almost a week", then it holds to the hard cut. */
 const Letter: React.FC<S> = ({t, a}) => {
-  const real = hasFile(LETTER);
-  const f = useCurrentFrame();
   const land = t.at('fowling');
+  // page px: the whole top of the page, then in on line 2 ("fowling") as it is said, then a short glide down to line 6 ("a weeke")
   const keys: [number, {x: number; y: number; z: number; tilt: number}][] = [
-    [a, {x: 860, y: 640, z: 0.6, tilt: 16}],
-    [land, {x: 780, y: 1200, z: 1.0, tilt: 8}],
-    [t.at('enough birds'), {x: 780, y: 1200, z: 1.0, tilt: 8}],
-    [t.at('almost a week') - 4, {x: 760, y: 1330, z: 1.0, tilt: 8}],
+    [a, {x: 1500, y: 1250, z: 0.36, tilt: 16}],
+    [land, {x: 1000, y: 470, z: 0.9, tilt: 8}],
+    [t.at('enough birds'), {x: 1000, y: 470, z: 0.9, tilt: 8}],
+    [t.at('almost a week') - 4, {x: 1000, y: 760, z: 0.9, tilt: 8}],
   ];
   return (
     <AbsoluteFill>
       <DarkPaper />
       <PageRead src={LETTER} size={LETTER_SIZE} keys={keys} seed="mourt" note="Winslow, 11 Dec 1621, in Mourt's Relation (1622)">
-        {!real && <PageLine text="our governor sent four men on fowling," box={FOWL[0]} />}
-        {!real && f >= t.at('In one day') - 3 && <PageLine text="as much fowl as ... served the company almost a week." box={WEEK[0]} />}
         <Swipe lines={FOWL} from={t.at('Four men')} to={t.end('fowling')} seed="fowl" />
         <Swipe lines={WEEK} from={t.at('enough birds')} to={t.end('almost a week')} seed="week" />
       </PageRead>
-      <Slip text="fowling: hunting birds" x={1180} y={130} size={54} rot={-3} at={land + 4} />
+      <Slip text="fowling: hunting birds" x={1180} y={150} size={54} rot={-3} at={land + 4} />
       <Slip text="almost a week of birds" x={1180} y={860} size={54} rot={-2} at={t.at('almost a week') - 2} />
-      <Tag text="Edward Winslow, letter of 11 December 1621 · Mourt's Relation, London, 1622" x={44} y={40} />
+      <Tag text="Edward Winslow, letter of 11 Dec. 1621 · Mourt's Relation, London, 1622, p. 61 · BPL / Internet Archive" x={44} y={40} />
     </AbsoluteFill>
   );
 };
@@ -257,34 +257,15 @@ const Forgot: React.FC<S> = ({t}) => {
   );
 };
 
-/** The collage board: the eel is this chapter's piece; teal yarn with a "but" tag runs to the next slot, and the new job lands. */
-const BOARD_EEL: [number, number] = [250, 290];
-const Board: React.FC<S> = ({t, a}) => {
-  const pin: [number, number] = [BOARD_EEL[0] + 250, BOARD_EEL[1] + 20];
-  const next: [number, number] = [1520, 380];
-  const job = t.at('new job');
-  return (
-    <AbsoluteFill>
-      <Ctx.Provider value={BRAND}>
-        <Defs />
-        <BoardStage cam={[[a, 640, 500, 1.3], [a + 45, 900, 540, 1]]}>
-          <div style={{position: 'absolute', left: next[0] - 190, top: next[1] - 30, width: 380, height: 300, border: '3px dashed rgba(47,224,196,0.35)'}} />
-          <Land at={a + 4} kind="drop" x={BOARD_EEL[0]} y={BOARD_EEL[1]} r={-3}>
-            <Img src={staticFile('img/flow/eel/eel_0000.png')} style={{width: 860, display: 'block', margin: '-150px -150px -150px -180px'}} />
-          </Land>
-          <APin at={a + 12} x={pin[0]} y={pin[1]} />
-          <Land at={a + 16} kind="slide" x={BOARD_EEL[0] + 120} y={BOARD_EEL[1] + 330} r={-2}><Strip text="EELS · PLYMOUTH, 1621" seed="eel" /></Land>
-          <AThreads lines={[{a: pin, b: next, at: t.at('feasting')}]} />
-          <Land at={t.at('feasting') + 12} kind="slap" x={(pin[0] + next[0]) / 2 - 40} y={(pin[1] + next[1]) / 2 - 30} r={-4} z={60}>
-            <div style={{background: '#ece6d8', padding: '2px 16px 6px', fontFamily: '"Nanum Pen Script", cursive', fontSize: 46, color: '#0f3e37'}}>but</div>
-          </Land>
-        </BoardStage>
-      </Ctx.Provider>
-      <Note text="a new job:" x={1130} y={640} size={52} rot={-3} at={job - 3} color="#ffffff" />
-      <Highlight text="SHOWING OFF" x={1080} y={740} size={96} at={t.at('Showing off')} seed={43} rot={-3} />
-    </AbsoluteFill>
-  );
-};
+/** The collage board (kit/tg_board, the same board every chapter): the eel is this chapter's piece; the next slot opens and the
+ *  teal yarn with its "but" tag runs to it on "feasting"; then the new job. */
+const Board: React.FC<S> = ({t, a}) => (
+  <AbsoluteFill>
+    <ChBoard ch={2} at={a + 4} ghost={{id: 'turtle', at: t.at('feasting'), yarnAt: t.at('feasting')}} />
+    <Note text="a new job:" x={1230} y={300} size={52} rot={-3} at={t.at('new job') - 3} color="#ffffff" />
+    <Highlight text="SHOWING OFF" x={1120} y={400} size={88} at={t.at('Showing off')} seed={43} rot={-3} />
+  </AbsoluteFill>
+);
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
@@ -330,7 +311,6 @@ const Body: React.FC = () => {
       ))}
       <Sfx at={at('Translation: birds') + 10} src="sfx/stamp.wav" volume={0.27} />
       {[0, 1, 2, 3, 4].map((i) => <Sfx key={`d${i}`} at={at('five deer') - 6 + i * 4} src="sfx/tick.wav" volume={0.4} />)}
-      <Sfx at={c.board + 12} src="sfx/knock.wav" volume={0.32} />
       {['Thanksgiving dinner', 'people who came', 'dead', 'harvest', 'how do we know', 'December', 'few short lines', 'Wampanoag leader', 'ninety men', 'Translation',
         'maybe ducks', 'maybe geese', 'maybe turkey', 'A lot of venison', 'dinner guest', 'that spring', "What wasn't there", 'Pie', 'real flour', 'butter', 'oven',
         'No potatoes', 'No cranberry', 'strangest', 'nobody remembered', 'new job'].map((p) => <Sfx key={p} at={at(p) - 5} src={WRITE.src} volume={WRITE.volume} />)}

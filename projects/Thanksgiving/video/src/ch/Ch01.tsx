@@ -10,7 +10,8 @@ import {Arrow, Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, Tag, 
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
 import {hasFile, makeTimeline, type Narration, Quote, Stamp, type TL, useScene} from '../kit/shell';
-import {Slip} from '../kit/vox';
+import {type Box, Slip, Swipe} from '../kit/vox';
+import {PageScrap} from './ch34/parts';
 import {Barrel, Cran, Eel, Placeholder, Strike} from '../kit/tg_props';
 import {DATES, SUBTITLE, TITLE} from '../project';
 
@@ -26,6 +27,16 @@ export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
 /** Music: tg_table_theme (MUSIC.md), -15.9 LUFS measured; not in levels.ts yet, so its bed() volume is worked out here the same way
  *  (13 LU under the -18 LUFS voice). Add `tg_table_theme: -15.9` to CUE_LUFS and switch to bed('tg_table_theme'). */
 const TABLE_THEME_VOL = +Math.pow(10, (-18 - 13 + 15.9) / 20).toFixed(3);
+
+/** Mourt's Relation (London, 1622), BPL copy on the Internet Archive: line boxes measured on the scans (source px). */
+const MOURT_SIZE: [number, number] = [3250, 4576];
+const MOURT_SRC = 'Boston Public Library / Internet Archive';
+const P39 = {src: 'img/arch/mourts-relation-1622-squanto-treads-eeles-p39.jpg', scrap: [230, 1290, 2420, 420] as Box,
+  /** "they were fat & sweet," / "he trod them out with his feete," */
+  fat: [[1670, 1518, 900, 80], [250, 1615, 1600, 80]] as Box[]};
+const P62 = {src: 'img/arch/mourts-relation-1622-hogshead-of-eeles-p62.jpg', scrap: [620, 1520, 2350, 380] as Box,
+  /** "we can take a Hogshead of Eeles in" / "a night," */
+  hog: [[1450, 1625, 1490, 80], [660, 1718, 300, 80]] as Box[]};
 
 /** Assets not here yet: each is a labelled placeholder card in the scenes below (swap them when the files land). */
 export const PLACEHOLDERS = [
@@ -99,7 +110,12 @@ const FatSweet: React.FC<S> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
     <Eel cx={1340} cy={560} w={920} rot={-4} />
-    <Quote text="fat and sweet" at={t.at('Fat and sweet') - 1} x={130} y={330} w={720} size={84} who="Mourt's Relation, 1622 · Squanto's eels, March 1621" />
+    <Quote text="fat and sweet" at={t.at('Fat and sweet') - 1} x={130} y={300} w={720} size={84} who="Mourt's Relation, 1622 · Squanto's eels, March 1621" />
+    {/* the line itself, on the 1622 page: "they were fat & sweet, he trod them out with his feete" */}
+    <PageScrap src={P39.src} size={MOURT_SIZE} box={P39.scrap} x={110} y={640} w={800} at={t.at('Fat and sweet') + 4} rot={-1.5} seed="p39">
+      <Swipe lines={P39.fat} from={t.at('Fat and sweet') + 6} to={t.at('By that fall') - 6} seed="p39s" />
+    </PageScrap>
+    <Tag text={`Mourt's Relation, London, 1622, p. 39 · ${MOURT_SRC}`} />
   </AbsoluteFill>
 );
 
@@ -120,7 +136,10 @@ const BarrelNight: React.FC<S> = ({t, a}) => {
       <Note text="that fall:" x={980} y={300} size={52} rot={-3} at={t.at('fall') - 3} color="#ffffff" />
       <Note text="a barrel of eels" x={1020} y={420} size={76} rot={-4} at={t.at('barrel') - 3} />
       <Note text="in one night" x={1060} y={560} size={76} rot={-4} at={t.at('single night') - 3} color={usePal().subject} />
-      <Tag text="Edward Winslow, letter of December 1621 (“a Hogshead of Eeles in a night”) · Mourt's Relation, 1622" />
+      <PageScrap src={P62.src} size={MOURT_SIZE} box={P62.scrap} x={980} y={720} w={800} at={t.at('barrel') - 2} rot={1.5} seed="p62">
+        <Swipe lines={P62.hog} from={t.at('barrel')} to={t.end('single night')} seed="p62s" />
+      </PageScrap>
+      <Tag text={`Edward Winslow, letter of Dec. 1621 · Mourt's Relation, London, 1622, p. 62 · ${MOURT_SRC}`} />
     </AbsoluteFill>
   );
 };

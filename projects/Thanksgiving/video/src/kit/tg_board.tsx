@@ -1,172 +1,204 @@
-// Thanksgiving: the collage board (techniques/collage_board.md, kit/board.tsx). One piece per chapter, in fixed slots, so
-// every chapter's board beat shows the same board growing: the eel (ch2), the turtle (ch3), the calf's head (ch4), Hale
-// (ch5), the Jell-O mould (ch6), the can (ch7), the turkey (ch8). A MOCK tag sits on each fake. Teal yarn with a "but" /
-// "therefore" tag runs from the previous chapter's piece to the new one. The ending pulls back to the whole board.
+// The Thanksgiving collage board (techniques/collage_board.md, kit/board.tsx): ONE board for the whole video, used by every
+// chapter, so it is visibly the same object growing chapter by chapter and the Ch08 pull-back is the same layout. One piece per
+// chapter, each a real image crop: the eel (ch2), the turtle page (ch3), the calf's head "turtle fashion" (ch4), Hale (ch5),
+// the Jell-O mould (ch6), the can (ch7), the turkey (ch8). A MOCK tape sits on each fake. Teal yarn pin to pin with the
+// but / therefore tag of the chapter turn.
 //
-//   <TgBoard ch={5} at={...} />   the board as it stands at chapter `ch`: earlier pieces already pinned, this chapter's
-//                                  piece drops at `at`, its pin pops, its label reveals, the yarn draws from the last piece,
-//                                  and the camera eases from close on the new piece back to the board.
-// Pieces whose assets haven't landed are placeholder cards (Ph). Swap a piece by giving its slot a `node`.
+//   <ChBoard ch={5} at={f} />      the board as it stands at chapter `ch`: earlier pieces already pinned, this chapter's piece
+//                                  drops at `at` (pin +8, MOCK +12, yarn +12), the camera frames the pieces so far (and the
+//                                  next slot when `ghost` is given), easing a little toward the new piece and back.
+//   <TgBoard cam={...} land={...} /> the same board with a hand-built camera (Ch07, Ch08 close-ups and the final pull-back).
+// Board pixels: 1920 x 1080 at zoom 1. A piece with no `land` frame is already on the board; one with `null` is not there yet.
 import React from 'react';
-import {Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
-import {BoardStage, BRAND, Ctx, Defs, HAND, Land, MONO, torn, WornLogo} from './board';
+import {APin, BRAND, BoardStage, type BoardKey, Ctx, Defs, Land, Stamp, Strip, WornLogo} from './board';
 import {useGFrame} from './Kit';
 import {Sfx} from './common';
-import {PhLabel, PH_BG} from './tg_placeholder';
+import {BW, CORAL, MockTape, TEAL} from './tg_late';
 
-const TEAL = '#2FE0C4';
-const CORAL = '#FF6F61';
+export type PieceId = 'eel' | 'turtle' | 'mock' | 'hale' | 'jello' | 'can' | 'turkey';
+/** `crop` [x, y, w, h] in source px of a `size` image (its height on the board follows the crop's aspect); no crop = contain. */
+type Piece = {id: PieceId; ch: number; x: number; y: number; w: number; h: number; rot: number; label: string; src: string; size?: [number, number];
+  crop?: [number, number, number, number]; colour?: boolean; mock?: boolean; tag?: 'but' | 'therefore'};
 
-export type Slot = {ch: number; x: number; y: number; w: number; h: number; r: number; label: string; mock?: boolean; link?: 'but' | 'therefore';
-  file: string; node?: React.ReactNode};
+const cropped = (p: Omit<Piece, 'h'> & {h?: number}): Piece => ({...p, h: p.h ?? Math.round((p.w * p.crop![3]) / p.crop![2])});
 
-/** The Jell-O piece: the real 1920 booklet's Paradise Pudding (a lemon Jell-O mould), cut from page 2, in its own colour. */
-const JelloPiece: React.FC<{w: number; h: number}> = ({w, h}) => {
-  // source crop of jello-girl-gives-a-party-1920-p2.jpg (2472 x 3351): the pudding on its plate, x 120-1960, y 60-1120
-  const [cx, cy, cw, ch] = [120, 60, 1840, 1060];
-  const sc = Math.max(w / cw, h / ch);
-  return (
-    <div style={{position: 'relative', width: w, height: h, overflow: 'hidden', clipPath: torn('jp', 'lrtb', 6)}}>
-      <Img src={staticFile('img/arch/jello-girl-gives-a-party-1920-p2.jpg')} style={{position: 'absolute', left: -cx * sc, top: -cy * sc, width: 2472 * sc, height: 3351 * sc,
-        filter: 'contrast(1.05) saturate(0.95)'}} />
-    </div>
-  );
-};
-
-/** The eel (ch2): frame 0 of the Flow cut-out, B&W on the board. */
-const EelPiece: React.FC<{w: number; h: number}> = ({w, h}) => (
-  <div style={{width: w, height: h, background: '#1b1a17', clipPath: torn('ep', 'lrtb', 6), display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    <Img src={staticFile('img/flow/eel/eel_0000.png')} style={{width: w * 1.25, filter: 'grayscale(1) contrast(1.15)'}} />
-  </div>
-);
-
-export const TG_SLOTS: Slot[] = [
-  {ch: 2, x: 150, y: 150, w: 330, h: 220, r: -3, label: 'EELS · 1621', file: 'img/flow/eel/eel_0000.png', node: <EelPiece w={330} h={220} />},
-  {ch: 3, x: 590, y: 110, w: 300, h: 260, r: 2, label: 'TURTLE SOUP · 1796', link: 'therefore', file: 'img/props/turtle_plate.webp'},
-  {ch: 4, x: 1000, y: 160, w: 300, h: 240, r: -2, label: 'MOCK TURTLE · 1884', mock: true, link: 'but', file: 'img/props/calf_head.webp'},
-  {ch: 5, x: 1420, y: 100, w: 290, h: 370, r: 3, label: 'SARAH JOSEPHA HALE · 1863', link: 'but', file: 'img/arch/hale_portrait.jpg'},
-  {ch: 6, x: 260, y: 600, w: 380, h: 250, r: 2, label: 'JELL-O · 1897', mock: true, link: 'therefore', file: 'img/arch/jello-girl-gives-a-party-1920-p2.jpg',
-    node: <JelloPiece w={380} h={250} />},
-  {ch: 7, x: 800, y: 620, w: 280, h: 300, r: -3, label: 'THE CAN · 1941', mock: true, link: 'therefore', file: 'img/props/cranberry_can.webp'},
-  {ch: 8, x: 1280, y: 590, w: 420, h: 330, r: 2, label: 'THE TURKEY', link: 'therefore', file: 'img/arch/large-white-turkey-female-usda-ars.jpg'},
+/** In chapter order. `tag` is the word on the yarn from the previous piece. */
+export const PIECES: Piece[] = [
+  {id: 'eel', ch: 2, x: 110, y: 180, w: 300, h: 170, rot: -3, label: 'EELS · 1621', src: 'img/flow/eel/eel_0000.png'},
+  cropped({id: 'turtle', ch: 3, x: 370, y: 540, w: 280, rot: 2, label: 'TURTLE · 1796', src: 'img/arch/simmons-1796-to-dress-a-turtle-p2.jpg', size: [3504, 4762],
+    crop: [700, 2560, 2300, 1300], tag: 'but'}),
+  cropped({id: 'mock', ch: 4, x: 680, y: 180, w: 280, rot: -2, label: 'MOCK TURTLE · 1796', src: 'img/arch/simmons-1796-calves-head-turtle-fashion-p22.jpg',
+    size: [3504, 4762], crop: [700, 1290, 2300, 1300], mock: true, tag: 'therefore'}),
+  cropped({id: 'hale', ch: 5, x: 980, y: 480, w: 210, rot: 3, label: 'SARAH HALE · 1863', src: 'img/arch/sarah-josepha-hale-engraving-1880-signature.jpg', size: [1046, 1536],
+    crop: [170, 110, 720, 880], tag: 'but'}),
+  cropped({id: 'jello', ch: 6, x: 1230, y: 170, w: 290, rot: -3, label: 'JELL-O · 1920', src: 'img/arch/jello-girl-gives-a-party-1920-p2.jpg', size: [2472, 3351],
+    crop: [120, 60, 1840, 1060], colour: true, mock: true, tag: 'therefore'}),
+  {id: 'can', ch: 7, x: 1440, y: 560, w: 230, h: 190, rot: 2, label: 'THE CAN · 1941', src: 'img/flow/cran/cran_cut6.png', colour: true, mock: true, tag: 'therefore'},
+  cropped({id: 'turkey', ch: 8, x: 1630, y: 150, w: 190, rot: -2, label: 'BROAD-BREASTED WHITE', src: 'img/arch/large-white-turkey-female-usda-ars.jpg', size: [640, 963],
+    crop: [0, 80, 640, 800], tag: 'therefore'}),
 ];
+export const piece = (id: PieceId) => PIECES.find((p) => p.id === id)!;
+/** Where a piece's pin sits (board px): top-centre. */
+export const pinOf = (p: Piece): [number, number] => [p.x + p.w / 2, p.y + 10];
+/** A piece's centre (for camera keys). */
+export const centreOf = (id: PieceId): [number, number] => { const p = piece(id); return [p.x + p.w / 2, p.y + p.h / 2 + 20]; };
 
-const pinOf = (s: Slot): [number, number] => [s.x + s.w / 2, s.y + 14];
-
-const BoardPin: React.FC<{x: number; y: number; color: string; at?: number}> = ({x, y, color, at = -999}) => {
-  const f = useCurrentFrame();
-  const {fps} = useVideoConfig();
-  if (f < at) return null;
-  const k = at < -900 ? 1 : spring({frame: f - at, fps, config: {damping: 9, stiffness: 300}});
+/** The image itself: a crop window onto the scan, or the whole cut-out fitted inside. */
+const PieceImg: React.FC<{p: Piece}> = ({p}) => {
+  const filter = p.colour ? 'saturate(0.85)' : BW;
+  if (!p.crop || !p.size) {
+    return <Img src={staticFile(p.src)} style={{width: p.w, height: p.h, objectFit: 'contain', display: 'block', filter}} />;
+  }
+  const [cx, cy, cw] = p.crop;
+  const s = p.w / cw;
   return (
-    <div style={{position: 'absolute', left: x - 11, top: y - 11, width: 22, height: 22, borderRadius: 11, background: color, zIndex: 50, boxShadow: '2px 3px 0 rgba(0,0,0,0.5)',
-      transform: `scale(${0.3 + 0.7 * k})`}}>
-      <div style={{position: 'absolute', left: 5, top: 4, width: 7, height: 5, borderRadius: 3, background: 'rgba(255,255,255,0.6)'}} />
+    <div style={{position: 'relative', width: p.w, height: p.h, overflow: 'hidden', boxShadow: '0 10px 18px rgba(0,0,0,0.45)'}}>
+      <Img src={staticFile(p.src)} style={{position: 'absolute', left: -cx * s, top: -cy * s, width: p.size[0] * s, height: p.size[1] * s, filter}} />
     </div>
   );
 };
 
-/** The piece itself: its node, or a placeholder card. */
-const Piece: React.FC<{s: Slot}> = ({s}) => (s.node ? <>{s.node}</> : (
-  <div style={{position: 'relative', width: s.w, height: s.h, background: PH_BG, clipPath: torn(`ph${s.ch}`, 'lrtb', 6)}}>
-    <PhLabel file={s.file} what={`ch${s.ch} board piece`} scale={0.8} />
-  </div>
-));
-
-const Label: React.FC<{s: Slot; p?: number; subject?: boolean}> = ({s, p = 1, subject}) => (
-  <div style={{position: 'absolute', left: s.x + 10, top: s.y + s.h - 6, transform: `rotate(${s.r * -0.6}deg)`, zIndex: 30, clipPath: `inset(-20% ${(1 - p) * 100}% -20% 0)`}}>
-    <div style={{background: subject ? '#f3c6bf' : '#ece6d8', clipPath: torn(`lb${s.ch}`, 'lr', 5), padding: '5px 16px', fontFamily: MONO, fontSize: 21, letterSpacing: 1,
-      color: '#1a1a1a', whiteSpace: 'nowrap', filter: 'drop-shadow(3px 4px 0 rgba(0,0,0,0.5))'}}>{s.label}</div>
+const PieceView: React.FC<{p: Piece; subject: boolean; mockAt: number}> = ({p, subject, mockAt}) => (
+  <div style={{position: 'relative', width: p.w}}>
+    <PieceImg p={p} />
+    <div style={{position: 'absolute', left: -6, top: p.h + 8}}>
+      <Strip text={p.label} size={20} seed={p.id} bg={subject ? CORAL : undefined} />
+    </div>
+    {p.mock && <div style={{position: 'absolute', left: p.w - 92, top: p.h - 50}}><MockTape x={0} y={0} at={mockAt} size={28} rot={-8} seed={p.id.length * 7} /></div>}
   </div>
 );
 
-const SmallMock: React.FC<{s: Slot; at?: number}> = ({s, at = -999}) => {
+/** A cream yarn tag with the handwritten but / therefore, at the yarn's midpoint. */
+const YarnTag: React.FC<{x: number; y: number; text: string; at: number}> = ({x, y, text, at}) => {
   const g = useGFrame();
   if (g < at) return null;
-  const k = at < -900 ? 1 : interpolate(g, [at, at + 2.5, at + 5], [1.7, 0.94, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: s.x + s.w - 150, top: s.y + 30, transform: `rotate(-10deg) scale(${k})`, zIndex: 35, filter: 'drop-shadow(4px 5px 0 rgba(0,0,0,0.55))'}}>
-      <div style={{background: '#FF9F1C', clipPath: torn(`mk${s.ch}`, 'tb', 4), padding: '4px 18px 2px', fontFamily: '"Abril Fatface", serif', fontSize: 44, color: '#111', letterSpacing: 2}}>MOCK</div>
-    </div>
+    <div style={{position: 'absolute', left: x, top: y, transform: 'translate(-50%, -50%) rotate(-4deg)', zIndex: 45, background: '#ece6d8', padding: '2px 12px 4px',
+      fontFamily: '"Nanum Pen Script", cursive', fontSize: 30, lineHeight: 1, color: '#0f3e37', filter: 'drop-shadow(3px 4px 0 rgba(0,0,0,0.5))', whiteSpace: 'nowrap'}}>{text}</div>
   );
 };
 
-/** Yarn with a little sag, drawn pin to pin from `at` (stepped), and its paper tag. */
-const Yarn: React.FC<{a: [number, number]; b: [number, number]; word: string; at?: number}> = ({a, b, word, at = -999}) => {
+const THREAD = 14;
+const Yarn: React.FC<{a: [number, number]; b: [number, number]; at: number; tag?: string}> = ({a, b, at, tag}) => {
   const g = useGFrame();
-  const q = at < -900 ? 1 : interpolate(g, [at, at + 14], [0, 1], clamp);
+  const q = Math.max(0, Math.min(1, (g - at) / THREAD));
   if (q <= 0) return null;
-  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + Math.hypot(b[0] - a[0], b[1] - a[1]) * 0.08;
-  const tag = q >= 1;
-  // the tag sits 65% of the way along (clear of the pieces the yarn passes)
-  const k = 0.65;
-  const tx = (1 - k) ** 2 * a[0] + 2 * k * (1 - k) * mx + k * k * b[0];
-  const ty = (1 - k) ** 2 * a[1] + 2 * k * (1 - k) * my + k * k * b[1];
+  // a little sag: a quadratic through a midpoint pulled down
+  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + 28;
+  const pt = (t: number) => [(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * mx + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * my + t * t * b[1]];
+  const pts = Array.from({length: 25}, (_, i) => pt((i / 24) * q).map((v) => v.toFixed(1)).join(',')).join(' ');
+  const [tx, ty] = pt(0.5);
   return (
     <>
       <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0, zIndex: 40, overflow: 'visible'}}>
-        <path d={`M${a[0]},${a[1]} Q${mx},${my} ${b[0]},${b[1]}`} fill="none" stroke={TEAL} strokeWidth={3} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - q} />
+        <polyline points={pts} fill="none" stroke={TEAL} strokeWidth={3} strokeLinecap="round" />
       </svg>
-      {tag && <div style={{position: 'absolute', left: tx - 50, top: ty - 22, zIndex: 45, transform: 'rotate(-4deg)',
-        background: '#ece6d8', clipPath: torn(`yt${word}${a[0]}`, 'lrtb', 4), padding: '0 16px 4px', fontFamily: HAND, fontSize: 44, color: '#0f3e37',
-        filter: 'drop-shadow(3px 4px 0 rgba(0,0,0,0.5))'}}>{word}</div>}
+      {tag && q >= 1 && <YarnTag x={tx} y={ty} text={tag} at={at + THREAD} />}
     </>
   );
 };
 
+type Ghost = {id: PieceId; at: number; yarnAt?: number};
+
 /**
- * The board at chapter `ch`. The new piece drops at `at`; pin +6, label +9, MOCK +12 (if a fake), yarn +16. The camera
- * starts close on the new piece and eases back to the whole board by `at + pull`.
+ * The whole board. `land[id]`: the frame a piece drops in (undefined = already there, null = not yet). `threads[id]`: the frame
+ * the yarn into that piece draws (default: 12 frames after its landing). `subject`: the coral piece (coral pin and label).
+ * `stamps`: rubber stamps [{text, x, y, at, rot}] in board px. `ghost`: an empty dashed slot for the piece still to come, with a
+ * coral "?" sticky; with `yarnAt`, the yarn and its tag run to it from the last piece.
  */
-export const TgBoard: React.FC<{ch: number; at: number; pull?: number; children?: React.ReactNode}> = ({ch, at, pull = 75, children}) => {
-  const g = useGFrame();
-  const slots = TG_SLOTS.filter((s) => s.ch <= ch);
-  const cur = TG_SLOTS.find((s) => s.ch === ch)!;
-  const prev = TG_SLOTS.filter((s) => s.ch < ch).slice(-1)[0];
-  const cx = cur.x + cur.w / 2, cy = cur.y + cur.h / 2;
-  // pull back to frame the pieces pinned so far (the whole board once the last row is in), never past z 1
-  const x0 = Math.min(...slots.map((s) => s.x)) - 90, x1 = Math.max(...slots.map((s) => s.x + s.w)) + 90;
-  const y0 = Math.min(...slots.map((s) => s.y)) - 90, y1 = Math.max(...slots.map((s) => s.y + s.h)) + 200;
-  const zw = Math.min(1, 1920 / (x1 - x0), 1080 / (y1 - y0));
-  const [bx, by] = [(x0 + x1) / 2, (y0 + y1) / 2];
-  // the board framed from the start (a tight start on the new piece cut neighbours' labels at the frame edge), easing a
-  // little toward the new piece as it lands, then settling back
-  const [nx, ny] = [bx + (cx - bx) * 0.12, by + (cy - by) * 0.12];
-  const cam: [number, number, number, number][] = [[0, bx, by, zw * 0.985], [at, bx, by, zw * 0.985], [at + 24, nx, ny, zw * 1.02], [at + pull + 30, bx, by, zw * 0.99],
-    [at + pull + 400, bx, by, zw * 0.97]];
-  const labelP = interpolate(g, [at + 9, at + 18], [0, 1], clamp);
+export const TgBoard: React.FC<{cam: BoardKey[]; land?: Partial<Record<PieceId, number | null>>; threads?: Partial<Record<PieceId, number>>; subject?: PieceId;
+  stamps?: {text: string; x: number; y: number; at: number; rot?: number}[]; ghost?: Ghost; only?: PieceId[]; children?: React.ReactNode}> = ({
+  cam, land = {}, threads = {}, subject, stamps = [], ghost, only, children,
+}) => {
+  const f = useCurrentFrame();
+  // `only`: draw just these pieces (a close-up, so nothing sits half-cut at the frame's edge)
+  const shown = (p: Piece) => land[p.id] !== null && (!only || only.includes(p.id));
+  const landAt = (p: Piece) => land[p.id] ?? -1000;
+  const gi = ghost ? PIECES.findIndex((p) => p.id === ghost.id) : -1;
   return (
     <Ctx.Provider value={BRAND}>
       <Defs />
-      <BoardStage cam={cam}>
-        <div style={{position: 'absolute', left: 1640, top: 960, opacity: 0.8}}><WornLogo w={200} /></div>
-        {slots.map((s) => {
-          const isCur = s.ch === ch;
-          const inner = <Piece s={s} />;
+      <BoardStage cam={cam} stamps={stamps.map((s) => s.at)} splats="tg">
+        {/* the worn logo sticker in a corner */}
+        <div style={{position: 'absolute', left: 1620, top: 930, opacity: 0.8}}><WornLogo w={190} /></div>
+        {ghost && f >= ghost.at && (() => {
+          const p = PIECES[gi];
           return (
-            <React.Fragment key={s.ch}>
-              {isCur ? <Land at={at} kind="drop" x={s.x} y={s.y} r={s.r} z={20}>{inner}</Land>
-                : <div style={{position: 'absolute', left: s.x, top: s.y, transform: `rotate(${s.r}deg)`, zIndex: 20, filter: 'drop-shadow(5px 6px 0 rgba(0,0,0,0.55))',
-                  opacity: 0.9}}>{inner}</div>}
-              <BoardPin x={pinOf(s)[0]} y={pinOf(s)[1]} color={isCur ? CORAL : TEAL} at={isCur ? at + 6 : -999} />
-              {(!isCur || g >= at + 9) && <Label s={s} p={isCur ? labelP : 1} subject={isCur} />}
-              {s.mock && <SmallMock s={s} at={isCur ? at + 12 : -999} />}
+            <>
+              <div style={{position: 'absolute', left: p.x, top: p.y, width: p.w, height: p.h, border: '3px dashed rgba(244,239,230,0.3)', borderRadius: 4, transform: `rotate(${p.rot}deg)`}} />
+              <Land at={ghost.at + 6} kind="slap" x={p.x + p.w / 2 - 60} y={p.y + p.h / 2 - 56} r={6}>
+                <div style={{width: 120, height: 112, background: CORAL, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Abril Fatface", serif', fontSize: 70, color: '#1a1a1a'}}>?</div>
+              </Land>
+            </>
+          );
+        })()}
+        {ghost?.yarnAt !== undefined && gi > 0 && shown(PIECES[gi - 1]) && (
+          <Yarn a={pinOf(PIECES[gi - 1])} b={pinOf(PIECES[gi])} at={ghost.yarnAt} tag={PIECES[gi].tag} />
+        )}
+        {PIECES.map((p, i) => {
+          if (!shown(p)) return null;
+          const prev = PIECES[i - 1];
+          return (
+            <React.Fragment key={p.id}>
+              <Land at={landAt(p)} kind="drop" x={p.x} y={p.y} r={p.rot} z={10 + i}>
+                <PieceView p={p} subject={subject === p.id} mockAt={land[p.id] === undefined ? -999 : landAt(p) + 12} />
+              </Land>
+              <PinDot at={landAt(p) + 8} xy={pinOf(p)} coral={subject === p.id} />
+              {prev && shown(prev) && <Yarn a={pinOf(prev)} b={pinOf(p)} at={threads[p.id] ?? landAt(p) + 12} tag={p.tag} />}
             </React.Fragment>
           );
         })}
-        {slots.filter((s) => s.link).map((s) => {
-          const p = TG_SLOTS.find((q) => q.ch === s.ch - 1);
-          if (!p) return null;
-          return <Yarn key={`y${s.ch}`} a={pinOf(p)} b={pinOf(s)} word={s.link!} at={s.ch === ch ? at + 16 : -999} />;
-        })}
+        {stamps.map((s, i) => (
+          <Land key={i} at={s.at} kind="stamp" x={s.x} y={s.y} r={s.rot ?? -8} z={60}><Stamp text={s.text} size={40} /></Land>
+        ))}
         {children}
       </BoardStage>
-      {/* sounds: a tick on the pin, a stamp on the MOCK tag; no paper sounds (Sfx mutes them) */}
-      <Sfx at={at + 6} src="sfx/tick.wav" volume={0.45} />
-      {cur.mock && <Sfx at={at + 12} src="sfx/stamp.wav" volume={0.28} />}
-      {prev && <Sfx at={at + 14} src="sfx/marker_tick.wav" volume={0.03} />}
     </Ctx.Provider>
   );
 };
 
+/** The board at chapter `ch`, for chapters 2-6: later pieces are not there yet; this chapter's piece lands at `at` (or, with
+ *  `ghost`, only the next slot opens). The camera frames everything shown (yarn tags and labels included, never cut at the edge),
+ *  leans 12% toward the new piece as it lands, then settles back. */
+export const ChBoard: React.FC<{ch: number; at: number; pull?: number; ghost?: Ghost; children?: React.ReactNode}> = ({ch, at, pull = 75, ghost, children}) => {
+  const land: Partial<Record<PieceId, number | null>> = {};
+  PIECES.forEach((p) => { if (p.ch > ch) land[p.id] = null; else if (p.ch === ch) land[p.id] = at; });
+  const cur = PIECES.find((p) => p.ch === ch)!;
+  const framed = PIECES.filter((p) => p.ch <= ch || (ghost && p.id === ghost.id));
+  // labels hang ~50 px under a piece and the rotation adds a little: pad the box, then fit it to 16:9
+  const x0 = Math.min(...framed.map((p) => p.x)) - 110, x1 = Math.max(...framed.map((p) => p.x + p.w)) + 110;
+  const y0 = Math.min(...framed.map((p) => p.y)) - 110, y1 = Math.max(...framed.map((p) => p.y + p.h)) + 150;
+  const z = Math.min(1.5, 1920 / (x1 - x0), 1080 / (y1 - y0));
+  const [bx, by] = [(x0 + x1) / 2, (y0 + y1) / 2];
+  const [cx, cy] = [cur.x + cur.w / 2, cur.y + cur.h / 2];
+  const [nx, ny] = [bx + (cx - bx) * 0.12, by + (cy - by) * 0.12];
+  const cam: BoardKey[] = [[0, bx, by, z * 0.985], [at, bx, by, z * 0.985], [at + 24, nx, ny, z * 1.02], [at + pull + 30, bx, by, z * 0.99], [at + pull + 400, bx, by, z * 0.97]];
+  return (
+    <>
+      <TgBoard cam={cam} land={land} subject={cur.id} ghost={ghost}>{children}</TgBoard>
+      {/* sounds: a tick on the pin, a stamp on the MOCK tag; no paper sounds */}
+      <Sfx at={at + 8} src="sfx/tick.wav" volume={0.45} />
+      {cur.mock && <Sfx at={at + 12} src="sfx/stamp.wav" volume={0.28} />}
+      {ch > 2 && <Sfx at={at + 14} src="sfx/marker_tick.wav" volume={0.03} />}
+    </>
+  );
+};
+
+/** A teal pin (coral for the subject) that pops in once its piece has landed. */
+const PinDot: React.FC<{at: number; xy: [number, number]; coral?: boolean}> = ({at, xy, coral}) => {
+  if (coral) return <APin at={at} x={xy[0]} y={xy[1]} />;
+  return <TealPin at={at} x={xy[0]} y={xy[1]} />;
+};
+const TealPin: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const k = interpolate(f, [at, at + 4], [0, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: x - 10, top: y - 10, width: 20, height: 20, borderRadius: 10, background: TEAL, zIndex: 50, boxShadow: '2px 3px 0 rgba(0,0,0,0.5)',
+      transform: `scale(${0.3 + 0.7 * k})`}}>
+      <div style={{position: 'absolute', left: 5, top: 4, width: 6, height: 5, borderRadius: 3, background: 'rgba(255,255,255,0.6)'}} />
+    </div>
+  );
+};

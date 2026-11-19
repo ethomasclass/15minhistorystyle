@@ -12,7 +12,7 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {Slip} from '../kit/vox';
-import {TgBoard} from '../kit/tg_endboard';
+import {TgBoard} from '../kit/tg_board';
 import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;

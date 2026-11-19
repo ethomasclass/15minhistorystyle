@@ -13,7 +13,7 @@ import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, Stamp, TAIL, type TL, useScene} from '../kit/shell';
 import {Slip} from '../kit/vox';
 import {Print} from '../kit/print';
-import {TgBoard} from '../kit/tg_endboard';
+import {TgBoard} from '../kit/tg_board';
 import {chestAt, SET, TURKEY, type TurkeyBeats, TurkeyRig, TurkeySet} from '../kit/tg_turkey';
 import {CORAL, Cran, cranMap, type Deal, EelLoop, HandDeal, Loupe, MockTape, ORANGE, PH, type Placeholder, RecipeCard, TEAL } from '../kit/tg_late';
 

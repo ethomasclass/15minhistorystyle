@@ -3,7 +3,7 @@
 //   PageScrap   a Crop as a torn print slapped onto the desk, with its source tag under it
 //   AssetOr     an image (contain-fitted) when the file exists in public/, else a labelled placeholder (tg_placeholder Ph)
 //   FrameSeqOr  a Flow frame sequence (img/.../name_0000.png …) played at 12/s, else a placeholder with a stepped frame counter
-//   SIMMONS_P2, MINCE, BOSTON: the scans' sizes and the line boxes measured on them (source px)
+//   SIMMONS_P2, SIMMONS_P22, MINCE, BOSTON: the scans' sizes and the line boxes measured on them (source px)
 import React from 'react';
 import {Img, interpolate, staticFile} from 'remotion';
 import {clamp} from '../../lib/anim';
@@ -17,14 +17,26 @@ export const BW_DOC = 'grayscale(1) sepia(0.12) contrast(1.15) brightness(1.02)'
 /** Amelia Simmons, American Cookery (1796), the page with "To Dress a Turtle" (page 20). */
 export const SIMMONS_P2 = {
   src: 'img/arch/simmons-1796-to-dress-a-turtle-p2.jpg',
-  p1: 'img/arch/simmons-1796-to-dress-a-turtle-p1.jpg',
+  /** p. 21, the turtle recipe continued (the file named "_p1" is p. 19 and has no turtle on it: don't use it) */
+  p21: 'img/arch/simmons-1796-to-dress-a-turtle-p21.jpg',
   size: [3504, 4762] as [number, number],
-  p1size: [3306, 4745] as [number, number],
+  p21size: [3306, 4745] as [number, number],
   heading: [1490, 2858, 730, 86] as Box,
   /** "about 9 o'clock hang up your Turtle by the" / "hind fins, cut of the head and fave the blood," */
   quote: [[985, 3162, 1890, 84], [828, 3262, 1880, 84]] as Box[],
   /** the heading plus the four lines under it, for scraps */
   scrap: [770, 2840, 2160, 520] as Box,
+};
+/** Simmons p. 22: the end of the turtle (Madeira), then "To dress a Calve's Head. Turtle fashion." */
+export const SIMMONS_P22 = {
+  src: 'img/arch/simmons-1796-calves-head-turtle-fashion-p22.jpg',
+  size: [3504, 4762] as [number, number],
+  heading: [960, 1330, 1620, 100] as Box,
+  /** "The head and feet being well fcalded and cleaned," */
+  head: [840, 1432, 1990, 92] as Box,
+  /** "open the head, taking the brains," */
+  brains: [745, 1532, 1310, 92] as Box,
+  scrap: [700, 1290, 2300, 1300] as Box,
 };
 export const MINCE = {
   src: 'img/arch/simmons-1796-minced-pies.jpg',
@@ -47,8 +59,8 @@ export const BOSTON = {
   scrap: [170, 1330, 1040, 580] as Box,
 };
 
-export const TAG_SIMMONS = 'Amelia Simmons, American Cookery, 1796 · Internet Archive';
-export const TAG_BOSTON = "Mary J. Lincoln, Mrs. Lincoln's Boston Cook Book, 1884";
+export const TAG_SIMMONS = 'Amelia Simmons, American Cookery, Hartford, 1796 · Library of Congress / Internet Archive';
+export const TAG_BOSTON = "Mary J. Lincoln, Mrs. Lincoln's Boston Cook Book, 1884, p. 137 · Wellcome Collection / Internet Archive";
 
 /** A window onto a scan: source box `box` shown `w` px wide. Children are drawn in source px. */
 export const Crop: React.FC<{src: string; size: [number, number]; box: Box; w: number; filter?: string; children?: React.ReactNode}> = ({src, size, box: [sx, sy, sw, sh], w, filter = BW_DOC, children}) => {
