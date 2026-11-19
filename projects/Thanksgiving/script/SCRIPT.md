@@ -100,9 +100,9 @@ Then came the shortcut. Around 1890, Charles Knox started selling gelatine alrea
 
 Mock aspic.
 
-And then home cooks got ambitious. Around 1905, a prize in a gelatine contest went to something called "Perfection Salad": shredded cabbage, celery and peppers, suspended in gelatin. By the 1950s, people were putting just about anything in there.
+And then home cooks got ambitious. Around 1905, a prize in a gelatine contest went to something called "Perfection Salad": shredded cabbage, celery and peppers, suspended in gelatin. By the 1910s, people were already putting just about anything in there.
 
-Like this. "Monterey Soufflé Salad," from 1955. That's tuna. In lemon gelatin. The rich family's aspic, now from a box.
+Like this. A recipe from 1915. That's tuna. In gelatin. The rich family's aspic, now from a box.
 
 [pause 3 s]
 
@@ -176,7 +176,7 @@ Thanks for watching. If you want more stories like this one, subscribe, and I'll
 7. Green turtle decline of about 97%: a historical-ecology estimate; confirm the source.
 8. "Days later, Lincoln proclaimed": the letter is dated Sept 28, the proclamation Oct 3, 1863. OK.
 9. Knox around 1890 and Jell-O 1897 (LeRoy, NY). Perfection Salad around 1905 (Knox contest; it won third prize, so "a prize" is accurate).
-10. The 1955 Star-Kist "Monterey Soufflé Salad" ad: rights must be checked before it goes on screen; otherwise show a recipe page of the same era.
+10. The tuna salad: Knox *Dainty Desserts* (1915), p.26, "Tuna Fish Salad" (public domain). The 1955 Star-Kist ad was dropped: its magazine issue was renewed (RE0000156474).
 11. The Angelus 1917 booklet is paraphrased (no scan yet). "The company behind it also made Cracker Jack" (Rueckheim Bros. & Eckstein). OK.
 12. "Fresh berries only sell for a few weeks a year": a simplification of Urann's motive; confirm or soften to "a short season."
 13. Campbell's test kitchen location (Camden, NJ) and the 20 million figure (Campbell's, 2018).

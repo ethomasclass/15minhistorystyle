@@ -10,9 +10,11 @@ import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type SheetCam, camAt, Swipe} from '../kit/vox';
-import {DocPage, FullFrame, Ph, type PlaceholderInfo, PrintOr, type StandIn} from '../kit/tg_placeholder';
-import {TgBoard} from '../kit/tg_board';
-import {Land, Sticky} from '../kit/board';
+import {DocPage, FullFrame, type PlaceholderInfo, PrintOr} from '../kit/tg_placeholder';
+import {ChBoard} from '../kit/tg_board';
+import {Cut} from '../kit/desk';
+import {type Box} from '../kit/vox';
+import {MASKS_CH05} from '../masks_ch05';
 import {clamp} from '../lib/anim';
 import {interpolate} from 'remotion';
 
@@ -22,29 +24,17 @@ export const CH05_FRAMES = chapterFrames(N, LEAD);
 /** Music level 13 LU under the voice (as levels.ts bed(); the tg_ cues aren't in CUE_LUFS yet, so measured LUFS from MUSIC.md). */
 const bedAt = (lufs: number, gap = 13) => +Math.pow(10, (-18 - gap - lufs) / 20).toFixed(3);
 
-/** Every stand-in in this chapter, for the swap. */
-export const PLACEHOLDERS: PlaceholderInfo[] = [
-  {file: 'img/arch/hale_portrait.jpg', what: 'Hale portrait, full bust cut-out (Cut + mask, coral tint, teal trace)', scene: 'Hale, Homemade, board', anchor: 'Her name / And Hale\'s menu',
-    swap: 'mask it (tools/mask.py hale_portrait), add to src/masks_ch05.ts, replace <HaleBust> with <Cut name="hale_portrait" box={HALE_BOX} ...>'},
-  {file: 'img/arch/northwood_1827_p109.jpg', what: 'Northwood (1827) pp. 109-110, the Thanksgiving dinner page', scene: 'Northwood, Niche', anchor: 'In 1827 / And among',
-    swap: 'drop the scan in (DocPage switches to the Sheet); set NW_SIZE to its pixel size and NW_LINES to the three quoted lines (tools/phrase_find.py)'},
-  {file: 'img/arch/godeys_cover.jpg', what: "Godey's Lady's Book cover or title page (any Hale-era issue)", scene: 'Godeys', anchor: "Godey's", swap: 'drop in (PrintOr switches); check the crop'},
-  {file: 'img/arch/godeys_editorial_a.jpg', what: "a Godey's Thanksgiving editorial page", scene: 'Editorials', anchor: 'Year after', swap: 'drop in; three different years if found'},
-  {file: 'img/arch/godeys_editorial_b.jpg', what: "a second Godey's Thanksgiving editorial", scene: 'Editorials', anchor: 'after year', swap: 'drop in'},
-  {file: 'img/arch/godeys_editorial_c.jpg', what: "a third Godey's Thanksgiving editorial", scene: 'Editorials', anchor: 'editorials', swap: 'drop in'},
-  {file: 'img/arch/hale_letter_lincoln_1863.jpg', what: 'Hale to Lincoln, 28 Sept 1863, the page with "For the last fifteen years" (LOC mal2669900)', scene: 'Letter',
-    anchor: 'In September / For the last', swap: 'set LETTER_SIZE; move LETTER_LINE to the phrase and the pan keys to land on it'},
-  {file: 'img/arch/lincoln_proclamation_1863.jpg', what: 'Lincoln, Proclamation of Thanksgiving, 3 Oct 1863', scene: 'Proclamation', anchor: 'Days later', swap: 'drop in; fix the tag source'},
-  {file: 'img/arch/hale_portrait.jpg (board crop)', what: 'board piece for ch5 (creased print, tools/crease.py)', scene: 'Board', anchor: 'But homemade', swap: 'give TG_SLOTS ch5 a node'},
-];
+/** Every stand-in in this chapter, for the swap: none left (every archival image has landed; see CREDITS.md). */
+export const PLACEHOLDERS: PlaceholderInfo[] = [];
 
 // ---------------------------------------------------------------- Hale, the bust (placeholder for a Cut)
-/** Where Hale's bust stands: right side, shoulders running off the bottom edge (no straight cut shows). */
-const HALE_BOX: [number, number, number, number] = [1120, 150, 660, 930];
-const HaleBust: React.FC<{at: number; traceAt?: number}> = ({at}) => (
-  <Ph file="img/arch/hale_portrait.jpg" what="full bust cut-out · coral tint + teal trace" x={HALE_BOX[0]} y={HALE_BOX[1]} w={HALE_BOX[2]} h={HALE_BOX[3]} at={at} land="rise" float />
+/** Where Hale's bust stands: right side, the cut-out's straight foot just below the bottom edge (no straight cut shows). */
+const HALE_BOX: [number, number, number, number] = [1060, 130, 780, 990];
+
+const HaleBust: React.FC<{at: number; traceAt?: number}> = ({at, traceAt}) => (
+  <Cut name="hale_1880" mask={MASKS_CH05.hale_1880} size={[1046, 1536]} box={HALE_BOX} at={at} traceAt={traceAt} bare />
 );
-const HALE_TAG = 'Sarah Josepha Hale, portrait · source tbd';
+const HALE_TAG = 'Sarah Josepha Hale, engraved portrait, 1880 · Library of Congress';
 
 const Hale: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
@@ -61,57 +51,68 @@ const Hale: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ---------------------------------------------------------------- Northwood, read off the page
-const NW_SIZE: [number, number] = [1700, 2700];
-const NW_SRC = 'img/arch/northwood_1827_p109.jpg';
-const NW_WHAT = 'Northwood (1827), the Thanksgiving dinner, pp. 109-110';
-/** The three quoted lines, page px (stand-ins until the scan's real line boxes replace them). */
-const NW_LINES: StandIn[] = [
-  {x: 170, y: 880, w: 690, h: 70, text: 'at the head of the table'},
-  {x: 520, y: 1480, w: 860, h: 70, text: 'of every name and description'},
-  {x: 260, y: 2060, w: 840, h: 70, text: 'the most distinguished niche'},
-];
-const box = (l: StandIn): [number, number, number, number] => [l.x, l.y, l.w, l.h];
-const NW_TAG = 'Sarah Josepha Hale, Northwood: A Tale of New England, 1827 · Internet Archive';
+/** Northwood (Boston, 1827), vol. I, pp. 109-110 (Internet Archive): the line boxes measured on the scans (page px). */
+const NW_SIZE: [number, number] = [2362, 4200];
+const NW_109 = 'img/arch/northwood-1827-thanksgiving-dinner-turkey-p109.jpg';
+const NW_110 = 'img/arch/northwood-1827-thanksgiving-dinner-pumpkin-pie-p110.jpg';
+const NW_TITLE = 'img/arch/northwood-1827-title-page-vol1.jpg';
+const NW_WHAT = 'Northwood (1827), the Thanksgiving dinner';
+/** p. 109 "at the head of the table;" */
+const NW_HEAD: Box[] = [[995, 1372, 920, 74]];
+/** p. 110 "pies of every" / "name and description" */
+const NW_EVERY: Box[] = [[1425, 2050, 625, 78], [300, 2142, 960, 78]];
+/** p. 110 "the most distinguish-" / "ed niche." */
+const NW_NICHE: Box[] = [[1265, 2232, 785, 78], [300, 2326, 330, 78]];
+const NW_TAG = 'Sarah Josepha Hale, Northwood: A Tale of New England, Boston, 1827 · Internet Archive';
 
-/** Wide: the page on the desk, then the camera leans in and tilts the page back to read the first two lines. */
+/** Wide: the title page on the desk; then p. 109, the camera leaning in on the turkey's line; then p. 110 for the pies. */
 const Northwood: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
-  // page centre on screen at x ~1290 while the title has the left side; then in on the lines
+  const look = t.at('Look at');
+  const pies = t.at('There are');
   const keys: [number, SheetCam][] = [
-    [a, {x: 25, y: 1350, z: 0.4, rot: -2}],
-    [t.at('Look at'), {x: 25, y: 1350, z: 0.4, rot: -2}],
-    [t.at('The turkey') - 2, {x: 520, y: 915, z: 0.78, tilt: 14, rot: -1, dofY: 915, dof: 4, band: 140}],
-    [t.at('There are') + 2, {x: 520, y: 915, z: 0.78, tilt: 14, rot: -1, dofY: 915, dof: 4, band: 140}],
-    [t.at('of every') - 2, {x: 950, y: 1515, z: 0.78, tilt: 14, rot: -1, dofY: 1515, dof: 4, band: 140}],
+    [a, {x: -40, y: 2100, z: 0.25, rot: -2}],
+    [look, {x: -40, y: 2100, z: 0.25, rot: -2}],
+    [t.at('The turkey') - 2, {x: 1400, y: 1410, z: 0.72, tilt: 14, rot: -1, dofY: 1410, dof: 4, band: 140}],
   ];
-  const cam = camAt(keys, g);
-  const wide = g < t.at('Look at');
+  const keys2: [number, SheetCam][] = [
+    [pies, {x: 1500, y: 2080, z: 0.72, tilt: 14, rot: -1, dofY: 2080, dof: 4, band: 140}],
+    [t.at('of every') + 6, {x: 1180, y: 2140, z: 0.72, tilt: 14, rot: -1, dofY: 2140, dof: 4, band: 150}],
+  ];
+  const wide = g < look;
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <DocPage src={NW_SRC} what={NW_WHAT} size={NW_SIZE} cam={cam} seed="nw" lines={NW_LINES}>
-        <Swipe lines={[box(NW_LINES[0])]} from={t.at('at the head')} to={t.end('at the head of the table')} seed="nw1" />
-        <Swipe lines={[box(NW_LINES[1])]} from={t.at('of every')} to={t.end('of every name and description')} seed="nw2" />
-      </DocPage>
+      {wide && <DocPage src={NW_TITLE} what={NW_WHAT} size={NW_SIZE} cam={keys[0][1]} seed="nwt" />}
+      {!wide && g < pies && (
+        <DocPage src={NW_109} what={NW_WHAT} size={NW_SIZE} cam={camAt(keys, g)} seed="nw">
+          <Swipe lines={NW_HEAD} from={t.at('at the head')} to={t.end('at the head of the table')} seed="nw1" />
+        </DocPage>
+      )}
+      {g >= pies && (
+        <DocPage src={NW_110} what={NW_WHAT} size={NW_SIZE} cam={camAt(keys2, g)} seed="nw2">
+          <Swipe lines={NW_EVERY} from={t.at('of every')} to={t.end('of every name and description')} seed="nw2" />
+        </DocPage>
+      )}
       {wide && g >= t.at('Northwood.') && <Highlight text="NORTHWOOD · 1827" x={110} y={120} size={84} at={t.at('Northwood.')} seed={52} rot={-2} />}
       {wide && <Note text="a novel" x={140} y={300} size={50} rot={-3} at={t.at('novel') - 3} color="#ffffff" />}
       {wide && <Note text="…with a Thanksgiving dinner" x={140} y={420} size={50} rot={-3} at={t.at('Thanksgiving dinner') - 3} />}
-      <Tag text={NW_TAG} x={44} y={40} />
+      <Tag text={`${NW_TAG}${wide ? '' : g < pies ? ' · p. 109' : ' · p. 110'}`} x={44} y={40} />
     </AbsoluteFill>
   );
 };
 
 /** Detail cut-in: the pumpkin pie's line, close, swiped as it's said. */
 const Niche: React.FC<{t: TL; a: number}> = ({t}) => {
-  const cam: SheetCam = {x: 690, y: 2095, z: 1.35, tilt: 10, rot: -1, dofY: 2095, dof: 5, band: 120};
+  const cam: SheetCam = {x: 1060, y: 2300, z: 1.05, tilt: 10, rot: -1, dofY: 2300, dof: 5, band: 140};
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <DocPage src={NW_SRC} what={NW_WHAT} size={NW_SIZE} cam={cam} seed="nw" lines={NW_LINES}>
-        <Swipe lines={[box(NW_LINES[2])]} from={t.at('the most distinguished')} to={t.end('the most distinguished niche')} seed="nw3" />
+      <DocPage src={NW_110} what={NW_WHAT} size={NW_SIZE} cam={cam} seed="nw2">
+        <Swipe lines={NW_NICHE} from={t.at('the most distinguished')} to={t.end('the most distinguished niche')} seed="nw3" />
       </DocPage>
       <Note text="the pumpkin pie:" x={140} y={180} size={52} rot={-3} at={t.at('the pumpkin') - 3} color="#ffffff" />
-      <Tag text={NW_TAG} />
+      <Tag text={`${NW_TAG} · p. 110`} />
     </AbsoluteFill>
   );
 };
@@ -163,8 +164,8 @@ const Godeys: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PrintOr src="img/arch/godeys_cover.jpg" what="Godey's Lady's Book, cover or title page" x={1100} y={110} w={600} h={800} at={t.at("Godey's") - 1} rot={2}
-        tag="Godey's Lady's Book · source tbd" />
+      <PrintOr src="img/arch/godeys-ladys-book-nov-1863-masthead.jpg" what="Godey's Lady's Book, Nov. 1863" x={1100} y={110} w={600} h={800} at={t.at("Godey's") - 1} rot={2}
+        pos="50% 0%" tag="Godey's Lady's Book, Philadelphia, Nov. 1863 · Internet Archive" />
       {g >= t.at("Godey's") && <Highlight text="GODEY'S LADY'S BOOK" x={110} y={150} size={72} at={t.at("Godey's")} seed={53} rot={-2} />}
       <Note text="hale: editor, 1837–1877" x={140} y={330} size={50} rot={-3} at={t.at('editor') - 3} color="#ffffff" />
       <Note text="one of the most popular" x={140} y={450} size={50} rot={-3} at={t.at('most popular') - 3} />
@@ -179,35 +180,44 @@ const Editorials: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PrintOr src="img/arch/godeys_editorial_a.jpg" what="Godey's Thanksgiving editorial" x={140} y={150} w={430} h={590} at={t.at('Year after') - 1} rot={-4} />
-      <PrintOr src="img/arch/godeys_editorial_b.jpg" what="Godey's Thanksgiving editorial" x={430} y={190} w={430} h={590} at={t.at('after year') - 1} rot={2} />
-      <PrintOr src="img/arch/godeys_editorial_c.jpg" what="Godey's Thanksgiving editorial" x={720} y={140} w={430} h={590} at={t.at('editorials') - 1} rot={-1} />
+      {/* three years of the Editors' Table, the clippings Hale sent Lincoln with her letter: July 1859, July 1860, Nov. 1861 */}
+      <PrintOr src="img/arch/godeys-editors-table-thanksgiving-july-1859-clipping.jpg" what="Godey's Editors' Table, 1859" x={140} y={150} w={430} h={590} at={t.at('Year after') - 1} rot={-4}
+        pos="50% 8%" />
+      <PrintOr src="img/arch/godeys-editors-table-thanksgiving-july-1860-clipping.jpg" what="Godey's Editors' Table, 1860" x={430} y={190} w={430} h={590} at={t.at('after year') - 1} rot={2}
+        pos="50% 4%" />
+      <PrintOr src="img/arch/godeys-editors-table-thanksgiving-nov-1861-clipping.jpg" what="Godey's Editors' Table, 1861" x={720} y={140} w={430} h={590} at={t.at('editorials') - 1} rot={-1}
+        pos="50% 6%" />
+      {[[150, '1859'], [440, '1860'], [730, '1861']].map(([x, y], i) => (
+        <Note key={y} text={y as string} x={(x as number) + 300} y={i === 1 ? 700 : 660} size={46} rot={-4} at={t.at(['Year after', 'after year', 'editorials'][i]) + 2} color="#ffffff" />
+      ))}
       {g >= t.at('Year after') && <Highlight text="YEAR AFTER YEAR" x={140} y={850} size={84} at={t.at('Year after')} seed={54} rot={-2} />}
       <Note text="one national day" x={1260} y={230} size={56} rot={-3} at={t.at('one national') - 3} color={pal.subject} />
       <Note text="→ to governors" x={1280} y={420} size={50} rot={-3} at={t.at('governors') - 3} color="#ffffff" />
       <Note text="→ to presidents" x={1280} y={540} size={50} rot={-3} at={t.at('presidents') - 3} color="#ffffff" />
-      <Tag text="Godey's Lady's Book, editorials · source tbd" x={44} y={40} />
+      <Tag text="Godey's Lady's Book, Editors' Table, 1859-61 · Abraham Lincoln Papers, Library of Congress" x={44} y={40} />
     </AbsoluteFill>
   );
 };
 
 // ---------------------------------------------------------------- The letter to Lincoln, full frame, one guided pan
-const LETTER_SIZE: [number, number] = [2400, 3200];
-const LETTER_LINE: StandIn = {x: 330, y: 1700, w: 1180, h: 130, text: 'For the last fifteen years', hand: true};
-const LETTER_LINES: StandIn[] = [{x: 1450, y: 250, w: 760, h: 110, text: 'Philada Sept 28th 1863', hand: true}, LETTER_LINE];
+/** Hale to Lincoln, 28 Sept. 1863, p. 1 (LOC, Lincoln Papers mal2669900): "For the last fifteen years" measured on the scan. */
+const LETTER_SRC = 'img/arch/hale-letter-to-lincoln-1863-p1.jpg';
+const LETTER_SIZE: [number, number] = [4820, 6084];
+const LETTER_LINE: Box = [580, 4380, 1990, 205];
 
 const Letter: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const land = t.at('For the last') - 3;
   // A: a slow guided pan from the dateline down the page; it lands on the line as it's spoken, then holds to the hard cut
+  // page px; z 1 fills the frame (0.398 px per page px here): the dateline, then a slow glide down the page to the line
   const cam: [number, {x: number; y: number; z: number}][] = [
-    [a, {x: 1500, y: 560, z: 1.2}],
-    [t.at('in the middle of'), {x: 1450, y: 600, z: 1.22}],
-    [land, {x: 920, y: 1765, z: 1.55}],
+    [a, {x: 3050, y: 520, z: 1.35}],
+    [t.at('in the middle of'), {x: 2950, y: 600, z: 1.37}],
+    [land, {x: 1580, y: 4480, z: 1.6}],
   ];
   return (
-    <FullFrame src="img/arch/hale_letter_lincoln_1863.jpg" what="Hale to Lincoln, 28 Sept 1863 · full frame, guided pan" size={LETTER_SIZE} cam={cam} lines={LETTER_LINES} hand
-      tag="Sarah J. Hale to Abraham Lincoln, Sept. 28, 1863 · Library of Congress">
-      <Swipe lines={[[LETTER_LINE.x, LETTER_LINE.y, LETTER_LINE.w, LETTER_LINE.h]]} from={t.at('For the last')} to={t.end('For the last fifteen years,')} seed="hl" />
+    <FullFrame src={LETTER_SRC} what="Hale to Lincoln, 28 Sept 1863" size={LETTER_SIZE} cam={cam}
+      tag="Sarah J. Hale to Abraham Lincoln, Sept. 28, 1863, p. 1 · Abraham Lincoln Papers, Library of Congress">
+      <Swipe lines={[LETTER_LINE]} from={t.at('For the last')} to={t.end('For the last fifteen years,')} seed="hl" />
     </FullFrame>
   );
 };
@@ -226,8 +236,9 @@ const Proclamation: React.FC<{t: TL; a: number}> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PrintOr src="img/arch/lincoln_proclamation_1863.jpg" what="Lincoln, Proclamation of Thanksgiving, 3 Oct 1863" x={1100} y={100} w={620} h={840} at={a + 1} rot={-1}
-        fit="contain" tag="Proclamation of Thanksgiving, Oct. 3, 1863 · source tbd" />
+      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p1.jpg" what="Lincoln, Proclamation of Thanksgiving, 3 Oct 1863" x={1150} y={110} w={540} h={837} at={a + 1} rot={-1}
+        tag="Thanksgiving Proclamation, Oct. 3, 1863, p. 1 · National Archives, via Wikimedia Commons" />
+      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p2.jpg" what="Proclamation, p. 2" x={760} y={300} w={420} h={640} at={t.at('last Thursday') - 1} rot={3} pos="50% 30%" />
       {g >= t.at('Days later') && <Highlight text="OCT. 3, 1863" x={110} y={130} size={96} at={t.at('Days later')} seed={56} rot={-2} />}
       <Note text="a national thanksgiving" x={140} y={360} size={52} rot={-3} at={t.at('proclaimed') - 3} />
       <Note text="last thursday of november" x={140} y={500} size={52} rot={-3} at={t.at('last Thursday') - 3} color={pal.subject} />
@@ -252,11 +263,7 @@ const Homemade: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ---------------------------------------------------------------- The board: Hale's piece lands, the question opens
-const Board: React.FC<{t: TL; a: number}> = ({t, a}) => (
-  <TgBoard ch={5} at={a + 4}>
-    <Land at={t.at('shortcut.') - 2} kind="slap" x={1236} y={446} r={-4} z={60}><Sticky text="a shortcut?" w={176} size={48} /></Land>
-  </TgBoard>
-);
+const Board: React.FC<{t: TL; a: number}> = ({t, a}) => <ChBoard ch={5} at={a + 4} ghost={{id: 'jello', at: t.at('shortcut.') - 8, yarnAt: t.at('shortcut.') - 2}} />;
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
