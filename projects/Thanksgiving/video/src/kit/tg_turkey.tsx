@@ -24,6 +24,17 @@ export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; gr
 
 /** Rig geometry as fractions of the rig box: hip line (legs below it never scale), chest centre and radius. */
 const HIP = 0.69;
+/** Where the feet are in the cut-outs (671 x 628 px, all three share registration): centre of the toes, lowest toe pixel. */
+const IMG: [number, number] = [671, 628];
+const FEET_IMG: [number, number] = [268, 616];
+/** The feet's offset inside a size x size rig box (contain-fit, bottom-aligned). */
+const feetIn = (size: number): [number, number] => {
+  const k = Math.min(size / IMG[0], size / IMG[1]);
+  return [(size - IMG[0] * k) / 2 + FEET_IMG[0] * k, size - IMG[1] * k + FEET_IMG[1] * k];
+};
+/** The scale cut-out (482 x 537): the middle of its platform's top face, where the toes rest. */
+const SCALE_IMG: [number, number] = [482, 537];
+const TRAY_IMG: [number, number] = [279, 62];
 const CHEST: [number, number] = [0.3, 0.57];
 const CHEST_R = 0.24;
 
@@ -98,12 +109,12 @@ export const TurkeyRig: React.FC<{x: number; y: number; size: number; b: TurkeyB
   const legMask = `linear-gradient(to bottom, transparent 0, transparent ${hipY - seam}px, #000 ${hipY + seam * 0.6}px)`;
   return (
     <>
-      <div style={{position: 'absolute', left: x - size / 2, top: y - size, width: size, height: size, transform: `rotate(${tip}deg)`, transformOrigin: `${size * 0.52}px ${size}px`,
+      <div style={{position: 'absolute', left: x - feetIn(size)[0], top: y - feetIn(size)[1], width: size, height: size, transform: `rotate(${tip}deg)`, transformOrigin: `${feetIn(size)[0]}px ${feetIn(size)[1]}px`,
         filter: 'drop-shadow(10px 16px 14px rgba(0,0,0,0.55))'}}>
         {/* the legs: never scaled */}
         <div style={{position: 'absolute', inset: 0, WebkitMaskImage: legMask, maskImage: legMask}}><Art size={size} p={p} big={big} /></div>
         {/* the body: inflates about the hip; the chest swells inside it */}
-        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: bodyMask, maskImage: bodyMask, transform: `scale(${inflate})`, transformOrigin: `${size * 0.5}px ${hipY}px`}}>
+        <div style={{position: 'absolute', inset: 0, WebkitMaskImage: bodyMask, maskImage: bodyMask, transform: `scale(${inflate})`, transformOrigin: `${feetIn(size)[0]}px ${hipY}px`}}>
           <Art size={size} p={p} big={big} />
           {swell > 0 && (
             <div style={{position: 'absolute', inset: 0, WebkitMaskImage: chestMask, maskImage: chestMask, transform: `scale(${sw})`, transformOrigin: `${cx}px ${cy}px`}}>
@@ -176,7 +187,9 @@ const SCALE_W = 330;
 /** Where things sit in the set (screen px at zoom 1). */
 export const SET = {feet: [860, 800] as [number, number], size: 600, dial: [1470, 420] as [number, number], counter: [1310, 650] as [number, number]};
 /** The chest's screen position at zoom 1 (for loupes and cut-ins). */
-export const chestAt = (): [number, number] => [SET.feet[0] - SET.size / 2 + CHEST[0] * SET.size, SET.feet[1] - SET.size + CHEST[1] * SET.size];
+export const chestAt = (): [number, number] => [SET.feet[0] - feetIn(SET.size)[0] + CHEST[0] * SET.size, SET.feet[1] - feetIn(SET.size)[1] + CHEST[1] * SET.size];
+/** The legs' screen position at zoom 1 (just above the toes). */
+export const legsAt = (): [number, number] => [SET.feet[0] + 8, SET.feet[1] - SET.size * 0.12];
 
 /**
  * The whole set (desk, platform scale, the bird, the dial, the counter) through a camera looking at (cx, cy) at zoom z (smooth,
@@ -189,7 +202,7 @@ export const TurkeySet: React.FC<{b: TurkeyBeats; cam?: {x: number; y: number; z
       <DarkPaper />
       <AbsoluteFill style={{transform: `translate(${960 - cam.x * cam.z}px, ${540 - cam.y * cam.z}px) scale(${cam.z})`, transformOrigin: '0 0'}}>
         {/* the scale, its own aspect (482 x 537): the tray's middle (58% across, 4% down) under the bird's feet */}
-        <PH file={TURKEY.scale} what="period scale (the bird stands on its tray)" x={fx - SCALE_W * 0.58 + 10} y={fy - SCALE_W * (537 / 482) * 0.045} w={SCALE_W} h={SCALE_W * (537 / 482)} label={labels}
+        <PH file={TURKEY.scale} what="period scale (the bird stands on its tray)" x={fx - TRAY_IMG[0] * (SCALE_W / SCALE_IMG[0])} y={fy - TRAY_IMG[1] * (SCALE_W / SCALE_IMG[0])} w={SCALE_W} h={SCALE_W * (SCALE_IMG[1] / SCALE_IMG[0])} label={labels}
           filter="saturate(0.85) contrast(1.03)" />
         <TurkeyRig x={fx} y={fy} size={SET.size} b={b} label={labels} />
         {dial && <Dial x={SET.dial[0]} y={SET.dial[1]} b={b} />}
