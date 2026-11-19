@@ -18,3 +18,16 @@ The final `FLOW_PROMPT.md` (one ordered prompt) gets written once the archival s
 Eel (coiled); a green sea turtle; a meat mince pie, cut to show the filling; mince ingredients (beef, suet, raisins, a brandy bottle); a calves'-foot jelly in a copper mould; a Jell-O ring with suspended vegetables; a tuna-in-gelatin salad (1955 colour); marshmallow-topped sweet potatoes; a ridged cranberry log on a plate; three 1950s-style unbranded cans; a green bean casserole; a Broad-Breasted White turkey (side view); a Thanksgiving menu card (blank, for adding real type later).
 
 No brand logos on generated props: real brands only from real ads.
+
+## C. Animated silhouette clips (Flow image-to-video), the hero beats
+The method from the Nov 2026 Rei test (`projects/Balloon_War/review/motion_test_rei_flow.mp4`; skill `images-and-masks.md` §11):
+feed Flow the finished, palette-locked, upscaled scene painting as the start frame. One action per clip, tied to its narration line.
+Export 1080p. Trim any opening border. Check frame by frame for morphing, faces, interior lines and text. `SilScene` parallax stays the main look.
+Add to every motion prompt: *"Full frame from the first frame, no border or picture frame. Every object, including tools, is a solid black silhouette with no shading. Camera move only, slow."*
+
+| Clip | From scene | Action (one) | Under the line |
+|---|---|---|---|
+| M1 | S1 eel river | The wading figure's foot presses into the mud; an eel wriggles up into the basket | "...knew how to catch these with their feet." (cold open, frame 0 candidate) |
+| M2 | S3 turtle dock | A crate is lowered; a turtle's flipper pushes slowly against the slats | "...shipped alive from the Caribbean." |
+| M3 | S5 Victorian kitchen | Steam rolls off the pot as the cook lifts the jelly mould; the jelly trembles | "...boiling calves' feet for hours." |
+| M4 | S6 1950s kitchen | The hostess sets the casserole down; the can opener turns | "It's 1955. You're hosting..." |
