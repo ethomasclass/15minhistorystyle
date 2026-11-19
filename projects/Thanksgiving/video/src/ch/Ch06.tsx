@@ -12,6 +12,7 @@ import words from '../../public/audio/ch06_jello.words.json';
 import {clamp} from '../lib/anim';
 import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {FullFrame, Ph, PhLabel, type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {type Box, Swipe} from '../kit/vox';
@@ -23,8 +24,6 @@ import {CutIn, DeskScene} from '../kit/tg_desk';
 const N = words as Narration;
 export const CH06_FRAMES = chapterFrames(N, LEAD);
 
-/** Music level 13 LU under the voice (as levels.ts bed(); the tg_ cues aren't in CUE_LUFS yet, so measured LUFS from MUSIC.md). */
-const bedAt = (lufs: number, gap = 13) => +Math.pow(10, (-18 - gap - lufs) / 20).toFixed(3);
 
 export const PLACEHOLDERS: PlaceholderInfo[] = [
   {file: 'img/flow/jello_ring/ring_0000.png …', what: 'Flow V2: the Jell-O ring trembling, video-to-cut-out frames at 12 fps (colour)', scene: 'Mold', anchor: "Here's a dish",
@@ -381,7 +380,7 @@ const Music = (t: TL) => {
 export const Ch06: React.FC = () => {
   const t = makeTimeline(N, 30);
   return (
-    <ChapterShell n={N} audio="audio/ch06_jello.wav" lead={LEAD} music={Music(t)}>
+    <ChapterShell n={N} audio="audio/ch06_jello.wav" lead={LEAD} baton="The Test Kitchens" music={Music(t)}>
       <Body />
     </ChapterShell>
   );

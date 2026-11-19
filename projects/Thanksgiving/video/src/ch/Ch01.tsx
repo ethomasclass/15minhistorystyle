@@ -9,7 +9,8 @@ import {clamp} from '../lib/anim';
 import {Arrow, Finish, Highlight, JF, Note, PALETTES, PaletteCtx, StepCtx, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {DeskScene, useMarks} from '../kit/tg_desk';
-import {ChannelIntro, INTRO_FRAMES} from '../kit/ChunkIntro';
+import {SafeText, TITLE_INTRO_FRAMES, TitleIntro} from '../kit/ga_brand';
+import {bed} from '../kit/levels';
 import {hasFile, makeTimeline, type Narration, Quote, Stamp, type TL, useScene} from '../kit/shell';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {PageScrap} from './ch34/parts';
@@ -21,13 +22,12 @@ const N = words as Narration;
 const BEAT = 30;
 /** Narration ends; the channel intro starts after the beat. */
 const END = Math.ceil(N.duration * 30) + BEAT;
-/** Title card after the Chunk History intro (the intro carries no title). */
-const TITLE_FRAMES = 150;
-export const CH01_FRAMES = END + INTRO_FRAMES + TITLE_FRAMES;
+/** The condensed Chunk intro and the title in one card (kit/ga_brand TitleIntro, as the Gilded Age's title.js): it was a 5.5 s
+ *  intro and then a 5 s title card. */
+export const CH01_FRAMES = END + TITLE_INTRO_FRAMES;
 
-/** Music: tg_table_theme (MUSIC.md), -15.9 LUFS measured; not in levels.ts yet, so its bed() volume is worked out here the same way
- *  (13 LU under the -18 LUFS voice). Add `tg_table_theme: -15.9` to CUE_LUFS and switch to bed('tg_table_theme'). */
-const TABLE_THEME_VOL = +Math.pow(10, (-18 - 13 + 15.9) / 20).toFixed(3);
+/** Music: tg_table_theme, 17 LU under the voice (kit/levels). */
+const TABLE_THEME_VOL = bed('tg_table_theme');
 
 /** Mourt's Relation (London, 1622), BPL copy on the Internet Archive: line boxes measured on the scans (source px). */
 const MOURT_SIZE: [number, number] = [3250, 4576];
@@ -44,21 +44,6 @@ export const PLACEHOLDERS = [
   {file: 'img/flow/tg_modern_plate.png', scenes: ['Plate (full frame, "Now look")', 'Meal (a print on the desk, "It\'s a great meal")'],
     note: 'the modern plate: turkey, green bean casserole with fried onions, sweet potatoes with marshmallows; colour is OK (brief). 16:9. When it lands, Plate shows it full frame (hasFile swap) and the slips can become loops on each dish.'},
 ] as const;
-
-/** The title card (as in *Not in the Picture*): the notebook page, the title on an orange tape, the subtitle in teal, the dates as a note. */
-const TitleCard: React.FC = () => {
-  const g = useGFrame();
-  const pal = usePal();
-  return (
-    <AbsoluteFill style={{background: '#0b0a08'}}>
-      <DarkPaper />
-      <Highlight text={TITLE} x={280} y={370} size={130} at={4} seed={61} />
-      {g >= 14 && <div style={{position: 'absolute', left: 340, top: 600, fontFamily: JF.display, fontSize: 60, color: pal.mark, whiteSpace: 'nowrap',
-        textShadow: '0 3px 16px rgba(0,0,0,0.9)', opacity: interpolate(g, [14, 20], [0, 1], clamp)}}>{SUBTITLE}</div>}
-      <Note text={DATES} x={1300} y={730} size={56} rot={-5} at={24} />
-    </AbsoluteFill>
-  );
-};
 
 type S = {t: TL; a: number};
 
@@ -243,16 +228,16 @@ const Body: React.FC = () => {
     [c.question, <Question t={t} a={c.question} />],
   ];
   let scene = useScene(cuts);
-  if (frame >= END + INTRO_FRAMES) scene = <Sequence from={END + INTRO_FRAMES} layout="none"><TitleCard /><Finish vignette={0.3} /></Sequence>;
-  else if (frame >= END) scene = <Sequence from={END} layout="none"><ChannelIntro /></Sequence>;
+  if (frame >= END) scene = <Sequence from={END} layout="none"><TitleIntro title={TITLE} subtitle={SUBTITLE} line={DATES} /></Sequence>;
   return (
     <AbsoluteFill style={{background: '#000'}}>
-      {frame < END ? <DeskScene ch="ch01" cuts={c} t={t}>{scene}</DeskScene> : scene}
+      <SafeText>{frame < END ? <DeskScene ch="ch01" cuts={c} t={t}>{scene}</DeskScene> : scene}</SafeText>
       {frame < END && <Finish vignette={0.3} />}
       <Audio src={staticFile('audio/ch01_cold_open.wav')} />
-      <Audio src={staticFile('music/tg_table_theme.mp3')} volume={(f) => interpolate(f, [0, 15, END - 30, END], [0, TABLE_THEME_VOL, TABLE_THEME_VOL, 0], clamp)} />
+      <Audio src={staticFile('music/tg_table_theme.mp3')} volume={(f) => interpolate(f, [0, 15, CH01_FRAMES - 24, CH01_FRAMES - 4], [0, TABLE_THEME_VOL, TABLE_THEME_VOL, 0], clamp)} />
+      {/* the theme carries on under the title card and fades with it: the card itself is silent (no sound effects in this video,
+          so the Gilded Age's click track under the logo is left out) */}
       {/* no sound on cuts (the user, Nov 2026): cuts are silent; the voice and the music carry them. Slips tick on their own. */}
-      <Sfx at={END + INTRO_FRAMES + 4} src="sfx/stamp.wav" volume={0.3} />
       {['first Thanksgiving', 'forty-six', 'seventy', 'almost none', '1621'].map((p) => <Sfx key={p} at={at(p)} src="sfx/stamp.wav" volume={0.28} />)}
       {['feet', 'Eels', 'Squanto', 'wade', 'mud', 'tread', 'fall', 'barrel', 'single night', 'turkeys', 'cans', 'most', 'great', 'from eels', 'to this', 'shaped'].map((p) => (
         <Sfx key={p} at={at(p) - 5} src={WRITE.src} volume={WRITE.volume} />

@@ -16,6 +16,7 @@ import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, S
 import {type Box, Slip} from '../kit/vox';
 import {PageScrap} from './ch34/parts';
 import {Print} from '../kit/print';
+import {EndSlots} from '../kit/ga_brand';
 import {TgBoard} from '../kit/tg_board';
 import {chestAt, SET, TURKEY, type TurkeyBeats, TurkeyRig, TurkeySet} from '../kit/tg_turkey';
 import {CORAL, Cran, cranMap, type Deal, EelLoop, HandDeal, Loupe, MockTape, ORANGE, PH, type Placeholder, RecipeCard, TEAL } from '../kit/tg_late';
@@ -360,64 +361,9 @@ const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
 };
 
 // ------------------------------------------------------------------ the end screen
-/** YouTube end-screen element slots (1080p px): two 16:9 videos and the subscribe circle. Place the elements over these in Studio. */
-export const SLOTS = {videoA: {x: 1120, y: 175, w: 604, h: 340}, videoB: {x: 1120, y: 610, w: 604, h: 340}, subscribe: {cx: 380, cy: 760, r: 150}};
-
-const Slot: React.FC<{x: number; y: number; w: number; h: number; at: number; label: string}> = ({x, y, w, h, at, label}) => {
-  const g = useGFrame();
-  if (g < at) return null;
-  const p = interpolate(g, [at, at + 12], [0, 1], clamp);
-  return (
-    <>
-      <div style={{position: 'absolute', left: x, top: y, width: w, height: h, background: 'rgba(8,8,6,0.55)', borderRadius: 6, opacity: p}} />
-      <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
-        <rect x={x - 6} y={y - 6} width={w + 12} height={h + 12} rx={8} fill="none" stroke={TEAL} strokeWidth={5} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p}
-          strokeLinecap="round" transform={`rotate(-0.6 ${x + w / 2} ${y + h / 2})`} />
-      </svg>
-      <Note text={label} x={x + 10} y={y - 70} size={46} rot={-2} at={at + 4} color="#ffffff" />
-    </>
-  );
-};
-
-/** Thanks, the logo, a drawn subscribe circle, two watch-next slots and the eel still wriggling on the desk. Music only after the voice. */
-const EndScreen: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const g = useGFrame();
-  const sub = t.at('subscribe, and');
-  const more = t.at('more stories');
-  const {cx, cy, r} = SLOTS.subscribe;
-  const ring = interpolate(g, [sub, sub + 12], [0, 1], clamp);
-  const logoIn = interpolate(f, [a + 6, a + 16], [0, 1], clamp);
-  return (
-    <AbsoluteFill style={{background: '#0b0a08'}}>
-      <DarkPaper />
-      <div style={{position: 'absolute', left: 130, top: 104, opacity: logoIn}}>
-        <Img src={staticFile('img/brand/chunk-history-horizontal.svg')} style={{height: 72}} />
-      </div>
-      <Highlight text="THANKS FOR WATCHING" x={120} y={240} size={70} at={a + 2} seed={94} rot={-2} />
-      <Note text="more stories, right here" x={140} y={390} size={50} rot={-3} at={more - 2} color="#ffffff" />
-      <Arrow x1={800} y1={410} x2={1085} y2={345} bow={-20} at={more + 8} />
-      <Arrow x1={800} y1={450} x2={1085} y2={760} bow={30} at={more + 14} />
-      {g >= sub && (
-        <>
-          <div style={{position: 'absolute', left: cx - r, top: cy - r, width: r * 2, height: r * 2, borderRadius: '50%', background: '#15130f', opacity: ring,
-            display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <Img src={staticFile('img/brand/chunk-history-mark.svg')} style={{width: r * 1.1, height: r * 1.1, opacity: 0.9}} />
-          </div>
-          <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
-            <circle cx={cx} cy={cy} r={r + 10} fill="none" stroke={CORAL} strokeWidth={6} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ring}
-              transform={`rotate(-90 ${cx} ${cy})`} strokeLinecap="round" />
-          </svg>
-          <Note text="subscribe" x={cx + r + 40} y={cy - 40} size={60} rot={-4} at={sub} />
-        </>
-      )}
-      <EelLoop x={560} y={760} w={420} at={a} />
-      <Slot {...SLOTS.videoA} at={a + 10} label="watch next" />
-      <Slot {...SLOTS.videoB} at={a + 18} label="more history" />
-      <Tag text="Image credits in the description" x={110} y={1010} />
-    </AbsoluteFill>
-  );
-};
+/** The 20 s end screen from "Thanks for watching" (kit/ga_brand EndSlots, as the Gilded Age's): the desk, the mark, two video slots
+ *  and the subscribe circle sized to YouTube Studio's end-screen elements, three mono labels. Music only after the voice. */
+const EndScreen: React.FC<{t: TL; a: number}> = ({a}) => <EndSlots at={a} />;
 
 // ------------------------------------------------------------------ the chapter
 const Body: React.FC = () => {

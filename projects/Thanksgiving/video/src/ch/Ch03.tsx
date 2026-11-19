@@ -18,6 +18,7 @@ import words from '../../public/audio/ch03_showing_off.words.json';
 import {clamp} from '../lib/anim';
 import {Arrow, Highlight, JF, Loop, Note, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
+import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
 import {FullFrame} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
@@ -29,8 +30,6 @@ import {AssetOr, MINCE, PageScrap, SIMMONS_P2, TAG_SIMMONS} from './ch34/parts';
 const N = words as Narration;
 export const CH03_FRAMES = chapterFrames(N, LEAD);
 
-/** tg_parlor_waltz measured -16.1 LUFS (script/MUSIC.md); bed() 13 LU under the -18 LUFS voice (kit/levels.ts isn't ours to edit). */
-const bedL = (lufs: number, gap = 13) => +Math.pow(10, (-18 - gap - lufs) / 20).toFixed(3);
 
 export const PLACEHOLDERS: PlaceholderInfo[] = [
   {file: 'img/flow/d2_turtle_dock.png', what: 'Flow D2 turtle-dock diorama (or its planes), a coral turtle in a crate', scene: 'Dock', anchor: 'shipped',
@@ -320,7 +319,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch03: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch03_showing_off.wav" lead={LEAD} music={[{src: 'music/tg_parlor_waltz.mp3', volume: bed('tg_parlor_waltz')}]}>
+  <ChapterShell n={N} audio="audio/ch03_showing_off.wav" lead={LEAD} baton="Mock Turtle" music={[{src: 'music/tg_parlor_waltz.mp3', volume: bed('tg_parlor_waltz')}]}>
     <Body />
   </ChapterShell>
 );

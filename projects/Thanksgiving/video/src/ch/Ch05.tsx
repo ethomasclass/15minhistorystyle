@@ -9,6 +9,7 @@ import words from '../../public/audio/ch05_hale.words.json';
 import {Highlight, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {DeskScene} from '../kit/tg_desk';
+import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
 import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
 import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
@@ -22,8 +23,6 @@ import {interpolate} from 'remotion';
 const N = words as Narration;
 export const CH05_FRAMES = chapterFrames(N, LEAD);
 
-/** Music level 13 LU under the voice (as levels.ts bed(); the tg_ cues aren't in CUE_LUFS yet, so measured LUFS from MUSIC.md). */
-const bedAt = (lufs: number, gap = 13) => +Math.pow(10, (-18 - gap - lufs) / 20).toFixed(3);
 
 /** Every stand-in in this chapter, for the swap: none left (every archival image has landed; see CREDITS.md). */
 export const PLACEHOLDERS: PlaceholderInfo[] = [];
@@ -309,7 +308,7 @@ const Body: React.FC = () => {
 };
 
 export const Ch05: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch05_hale.wav" lead={LEAD} music={[{src: 'music/tg_hale.mp3', volume: bed('tg_hale')}]}>
+  <ChapterShell n={N} audio="audio/ch05_hale.wav" lead={LEAD} baton="Jell-O" music={[{src: 'music/tg_hale.mp3', volume: bed('tg_hale')}]}>
     <Body />
   </ChapterShell>
 );

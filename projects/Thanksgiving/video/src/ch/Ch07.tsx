@@ -472,7 +472,7 @@ const music = total <= CUE - 30
     {src: 'music/tg_test_kitchen.mp3', volume: bed('tg_test_kitchen'), from: CUE - 200, startFrom: 20 * 30}];
 
 export const Ch07: React.FC = () => (
-  <ChapterShell n={N} audio="audio/ch07_test_kitchens.wav" lead={LEAD} music={music}>
+  <ChapterShell n={N} audio="audio/ch07_test_kitchens.wav" lead={LEAD} baton="The Turkey" batonWords={2} music={music}>
     <Body />
   </ChapterShell>
 );

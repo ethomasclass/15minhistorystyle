@@ -3,8 +3,8 @@ import {Composition} from 'remotion';
 import {FPS, H, W} from './lib/theme';
 import {CHAPTERS} from './chapters';
 import {JFonts} from './kit/Kit';
-import {ChannelIntro, INTRO_FRAMES} from './kit/ChunkIntro';
-import {BREAK_FRAMES, LogoBreak} from './kit/ChunkIntro';
+import {END_SCREEN_FRAMES, EndSlots, MarkSnap, SNAP_FRAMES, TITLE_INTRO_FRAMES, TitleIntro} from './kit/ga_brand';
+import {DATES, SUBTITLE, TITLE} from './project';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {FX} from './fx/registry';
@@ -18,8 +18,9 @@ export const Root: React.FC = () => (
     {FX.map((x) => <Composition key={x.id} id={`FX-${x.id}`} width={W} height={H} fps={FPS} durationInFrames={x.frames} component={() => <JFonts><x.C /></JFonts>} />)}
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
-    <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={INTRO_FRAMES} component={() => <JFonts><ChannelIntro /></JFonts>} />
-    <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={BREAK_FRAMES} component={() => <JFonts><LogoBreak /></JFonts>} />
+    <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={TITLE_INTRO_FRAMES} component={() => <JFonts><TitleIntro title={TITLE} subtitle={SUBTITLE} line={DATES} /></JFonts>} />
+    <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={SNAP_FRAMES} component={() => <JFonts><MarkSnap /></JFonts>} />
+    <Composition id="EndScreen" width={W} height={H} fps={FPS} durationInFrames={END_SCREEN_FRAMES} component={() => <JFonts><EndSlots /></JFonts>} />
     {/* the desk-colour test (not part of the video) */}
     {([['A', TestColorA], ['B', TestColorB], ['C', TestColorC]] as const).map(([k, C]) => (
       <Composition key={k} id={`TestColor-${k}`} width={W} height={H} fps={FPS} durationInFrames={TEST_COLOR_FRAMES} component={() => <JFonts><C /></JFonts>} />
