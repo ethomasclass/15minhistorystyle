@@ -4,7 +4,7 @@
 **Driving question:** How did we get from eels to this? **Answer:** showing off, then faking it, then a homemade menu made national, then companies selling the shortcut dressed up as homemade.
 **Long loops:** the can (paid off in ch7); the turkey (ch8). **Midpoint twist:** Jell-O was the rich family's dish. **Climax:** they redesigned the turkey. **Ending device:** the eel next to the can; the gentle let-off.
 **Running joke:** "mock," said three times (ch4, ch6, ch7).
-Voice cues in [brackets] are for the voice model, used sparingly. Facts are sourced in `../RESEARCH.md` (verified section).
+Voice cues in [brackets] are for the voice model, used sparingly. **Delivery: deadpan throughout** (see `VOICE_NOTES.md`). Facts are sourced in `../RESEARCH.md` (verified section).
 
 ---
 
@@ -18,7 +18,7 @@ Now look at what we eat. A turkey. Green beans under fried onions. Marshmallows 
 
 By the industry's own count, Americans eat about forty-six million turkeys every Thanksgiving. And we open about seventy million cans of cranberry sauce a year, most of them in about two months.
 
-[warm] It's a great meal. Honestly, it should be. But almost none of it was on the table in 1621.
+It's a great meal. Honestly, it should be. But almost none of it was on the table in 1621.
 
 So how did we get from eels... to *this*? And why is the cranberry sauce shaped like a can?
 
@@ -66,7 +66,7 @@ So people faked it.
 
 Flip a few pages in that same 1796 cookbook and you'll find a recipe called "To dress a Calve's Head, Turtle fashion." You take a calf's head. You open it up. You take out the brains. And you cook it until it tastes, more or less, like turtle.
 
-Mock turtle. [wry] Remember that word. It's going to keep coming back.
+Mock turtle. Remember that word. It's going to keep coming back.
 
 And the fake had a big advantage. It was cheap, and there was always more of it. The real turtles weren't so lucky. Caribbean green turtles were hunted so hard that, over time, their numbers fell by about ninety-seven percent. Real turtle slowly disappeared from American tables. Mock turtle hung around for generations.
 
@@ -114,11 +114,11 @@ And the companies noticed something. They didn't have to just sell the ingredien
 
 Take the sweet potatoes. In 1917, a marshmallow brand called Angelus put out a recipe booklet. The company behind it also made Cracker Jack. They hired a well-known cooking teacher, Janet McKenzie Hill, to write the recipes. And one of them was sweet potatoes, baked with marshmallows on top.
 
-Was it a good idea? Maybe! But notice the motive. The point was to sell marshmallows. And a hundred years later, that booklet is on your table.
+Was it a good idea? Maybe. But notice the motive. The point was to sell marshmallows. And a hundred years later, that booklet is on your table.
 
 Then there's the cranberry sauce. Cranberries really are an American fruit, and people have been making sauce from them for centuries. But in 1912, a cranberry grower named Marcus Urann had a problem. Fresh berries only sell for a few weeks a year. His fix: cook them down and put them in a can. In 1941, his growers' cooperative took its brand national. Ocean Spray.
 
-And that answers one of our questions. Why is the cranberry sauce shaped like a can? [wry] Because it *is* the can. Those ridges are the can's ridges.
+And that answers one of our questions. Why is the cranberry sauce shaped like a can? [deadpan] Because it IS the can. Those ridges are the can's ridges.
 
 Now jump ahead. It's 1955. You're hosting. The in-laws are coming at four. You've got a new refrigerator, a pantry full of cans, and a magazine that says you can do it all in half an hour.
 
@@ -138,7 +138,7 @@ First, farmers wanted more breast meat, so they bred for a broader chest. Then i
 
 And the birds kept getting bigger. In the 1930s, an average turkey weighed about thirteen pounds, live. Today, it's over thirty.
 
-[serious] It worked so well that the birds got too top-heavy to mate on their own. The males are too heavy. The shape is wrong. So nearly every one of them now comes from artificial insemination.
+[deadpan] It worked so well that the birds got too top-heavy to mate on their own. The males are too heavy. The shape is wrong. So nearly every one of them now comes from artificial insemination.
 
 Out of the roughly 194 million turkeys raised in America last year, almost all of them are this one breed.
 
@@ -148,7 +148,7 @@ The older breeds, the heritage turkeys, can still do it themselves. They're smal
 
 So even the bird is an invention.
 
-[wry] Quick favor: hit subscribe. It's free. And unlike the marshmallow people, I'm not selling you anything.
+[deadpan] Quick favor: hit subscribe. It's free. And unlike the marshmallow people, I'm not selling you anything.
 
 So let's go back to the question. How did we get from eels... to this?
 
@@ -158,7 +158,7 @@ That means almost every "traditional" dish was somebody's brand-new idea. A nove
 
 The people of 1621 ate what they could catch. We eat what somebody wrote down, and sold back to us.
 
-[warm] So yes. Your grandmother's recipe card was probably an ad.
+[deadpan] So yes. Your grandmother's recipe card was probably an ad.
 
 It's still delicious.
 
