@@ -10,7 +10,6 @@
 //             pie-to-can cloth, the three-step aspic-to-box change).
 //   Clip      one of our own drawn silhouette scenes (projects/Thanksgiving/lookdev/tg.js, rendered to public/clips/), full frame,
 //             muted, smooth at 30 fps; it starts `start` seconds into the clip at frame `at` and holds its last frame.
-//   Hand      a silhouette hand reaching in from the right edge (puppet move), holding at its mark, and leaving.
 import React from 'react';
 import {AbsoluteFill, Freeze, Img, interpolate, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
@@ -133,39 +132,7 @@ export const States: React.FC<{srcs: string[]; at: number[]; x: number; y: numbe
   );
 };
 
-/** Where each hand's fingertips are, as a fraction of its picture (the hands all reach in from the right). */
-// (the pointing fingertip; the pinch; the base of the can it holds; the middle of the card it holds)
-const TIP: Record<string, [number, number]> = {tg_hand_point: [0.02, 0.33], tg_hand_pinch: [0.08, 0.68], tg_hand_can: [0.11, 0.95], tg_hand_card: [0.14, 0.28]};
-
-/**
- * A silhouette hand reaches in from the right edge so its fingertips land on (x, y) at frame `at` (stepped, 8 drawings), holds,
- * and from `out` leaves the way it came. Its soft shadow falls on the desk below it. `w` = the picture's width on screen.
- */
-export const Hand: React.FC<{name: 'tg_hand_point' | 'tg_hand_pinch' | 'tg_hand_can' | 'tg_hand_card'; x: number; y: number; w?: number; at: number; out?: number; rot?: number;
-  label?: string}> = ({
-  name, x, y, w = 760, at, out = Infinity, rot = 0, label,
-}) => {
-  const g = useGFrame();
-  const IN = 9;
-  if (g < at - IN || g >= out + IN) return null;
-  const p = g < out ? interpolate(g, [at - IN, at], [0, 1], {...clamp, easing: (q) => 1 - Math.pow(1 - q, 3)}) : interpolate(g, [out, out + IN], [1, 0], {...clamp, easing: (q) => 1 - q * q});
-  const h = flowH(name, w);
-  const [tx, ty] = TIP[name];
-  const left = x - tx * w + (1 - p) * (1960 - x), top = y - ty * h - (1 - p) * 50;
-  const img = (extra: React.CSSProperties) => <Img src={staticFile(flowSrc(name))} style={{position: 'absolute', left, top, width: w, height: h, transform: `rotate(${rot}deg)`,
-    transformOrigin: `${tx * 100}% ${ty * 100}%`, ...extra}} />;
-  return (
-    <>
-      {img({filter: 'brightness(0) blur(14px)', opacity: 0.42, translate: '18px 30px'})}
-      {img({})}
-      {/* words on the card it holds (the card lies about 17 degrees off level in the picture) */}
-      {label && name === 'tg_hand_card' && (
-        <div style={{position: 'absolute', left: left + tx * w - 0.105 * w, top: top + ty * h - 0.02 * w, width: 0.26 * w, textAlign: 'center', transform: `rotate(${rot + 17}deg)`,
-          fontFamily: '"Nanum Pen Script", cursive', fontSize: w * 0.072, lineHeight: 1, color: '#0f3e37', whiteSpace: 'nowrap'}}>{label}</div>
-      )}
-    </>
-  );
-};
+// (The silhouette Hand was removed on Nov 19, 2026: no hands anywhere; objects arrive on their own, kit/tg_drop.tsx.)
 
 /** Our drawn scenes, rendered from lookdev/tg.js: file and length in frames. */
 export const CLIPS = {eel_river: ['clips/tg_eel_river.mp4', 420], victorian_kitchen: ['clips/tg_victorian_kitchen.mp4', 360], turtle_dock: ['clips/tg_turtle_dock.mp4', 180],

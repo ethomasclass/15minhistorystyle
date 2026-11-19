@@ -20,6 +20,7 @@ import {Arrow, Highlight, JF, Loop, Note, Tag, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
+import {hold, readEnd} from '../lib/timing';
 import {FullFrame} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
 import {Slip, Spot, Swipe, tornPoly} from '../kit/vox';
@@ -80,7 +81,7 @@ const NEVER = 1e7;
 /** A real bill of fare: the Everett House, Chicago, Thanksgiving 1870 (Newberry Library), its top half, "SOUP. Clam. Oysters." */
 const EVERETT = {src: 'img/arch/everett-house-chicago-thanksgiving-dinner-menu-1870.jpg', size: [3412, 2552] as [number, number],
   scrap: [150, 250, 1300, 1000] as [number, number, number, number], oysters: [[755, 788, 118, 36]] as [number, number, number, number][]};
-const TAG_EVERETT = 'Annual Thanksgiving Dinner, Everett House, Chicago, Nov. 24, 1870 · Newberry Library';
+const TAG_EVERETT = 'Everett House, Chicago, Thanksgiving menu, 1870 · Newberry Library';
 
 const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
   const g = useGFrame();
@@ -93,7 +94,7 @@ const Menu: React.FC<{t: TL; a?: number}> = ({t}) => {
       <PageScrap src={EVERETT.src} size={EVERETT.size} box={EVERETT.scrap} x={980} y={170} w={820} at={t.at('course after') - 2} rot={1.5} tag={TAG_EVERETT} seed="ev">
         <Swipe lines={EVERETT.oysters} from={t.at('oysters') - 1} to={t.at('oysters') + 6} seed="evo" />
       </PageScrap>
-      <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('oysters') - 3} color="#ffffff" />
+      <Note text="opened with oysters" x={170} y={430} size={48} rot={-2} at={t.at('It often opened') - 3} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -115,6 +116,8 @@ const Grand: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Dock: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <Clip name="turtle_dock" at={a} />
+    {/* carried over the cut from the dining hall until it has been read */}
+    {useGFrame() < readEnd(t.at('was turtle') + 4, 'turtle soup', 13) && <Slip text="turtle soup" x={200} y={250} at={-999} rot={2} size={62} coral />}
     <Slip text="green sea turtles" x={1130} y={130} at={t.at('Green') - 1} rot={-2} size={62} coral />
     <Slip text="shipped up alive" x={1190} y={250} at={t.at('alive') - 2} rot={2} size={58} />
     <Slip text="from the Caribbean" x={1150} y={360} at={t.at('Caribbean') - 2} rot={-2} size={54} />
@@ -129,16 +132,16 @@ const Afford: React.FC<{t: TL; a: number}> = ({t, a}) => {
     <AbsoluteFill>
       <Clip name="dining_hall" at={a} start={5.4} />
       <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.5) 0%, transparent 36%)'}} />
-      {g >= t.at('look what') && <Highlight text="LOOK WHAT WE CAN AFFORD" x={150} y={120} size={84} at={t.at('look what')} seed={41} rot={-2} />}
+      {g >= t.at('A table like') && <Highlight text="LOOK WHAT WE CAN AFFORD" x={150} y={120} size={84} at={t.at('A table like')} seed={41} rot={-2} />}
       <Tag text={TAG_DRAWN} />
     </AbsoluteFill>
   );
 };
 
 /** The guided pan: from the page top down Simmons p. 20 to the turtle line, landing as "About nine o'clock" is said. */
-const TurtlePan: React.FC<{t: TL; a?: number}> = ({t}) => {
+const TurtlePan: React.FC<{t: TL; a?: number}> = ({t, a = 0}) => {
   const f = useCurrentFrame();
-  const a = t.at("Here's"), land = t.at('About');
+  const land = t.at('About');
   return (
     <AbsoluteFill>
       <FullFrame src={SIMMONS_P2.src} what="Simmons p. 20" size={SIMMONS_P2.size} cam={[[a, {x: 1850, y: 1000, z: 1.28}], [land, {x: 1860, y: 3255, z: 1.6}]]}
@@ -146,7 +149,7 @@ const TurtlePan: React.FC<{t: TL; a?: number}> = ({t}) => {
         <Spot size={SIMMONS_P2.size} boxes={SIMMONS_P2.quote} at={land} id="tp" dark={0.5} />
         <Swipe lines={SIMMONS_P2.quote} from={land - 1} to={t.end('save the blood')} seed="tq" />
       </FullFrame>
-      {f < land && <Slip text="American Cookery · 1796" x={130} y={130} at={t.at('1796') - 2} rot={-3} size={60} />}
+      {f < Math.max(land, readEnd(t.at('1796') - 2, 'American Cookery · 1796', 13)) && <Slip text="American Cookery · 1796" x={130} y={130} at={t.at('1796') - 2} rot={-3} size={60} />}
     </AbsoluteFill>
   );
 };
@@ -176,7 +179,7 @@ const Steps: React.FC<{t: TL; a?: number}> = ({t}) => {
       <Slip text="1. hang it up" x={1110} y={210} at={-999} rot={-2} size={60} />
       <Slip text="2. cleaned" x={1110} y={360} at={t.at('cleaned') - 2} rot={-3} size={60} />
       <Slip text="3. seasoned" x={1110} y={510} at={t.at('seasoned') - 2} rot={-2} size={60} />
-      <Slip text="4. baked with Madeira wine" x={1110} y={660} at={t.at('Madeira') - 2} rot={-3} size={60} />
+      <Slip text="4. baked with Madeira wine" x={1110} y={660} at={t.at('and baked') - 2} rot={-3} size={60} />
     </AbsoluteFill>
   );
 };
@@ -216,7 +219,8 @@ const Pie: React.FC<{t: TL; a?: number}> = ({t}) => {
         <Swipe lines={[P.apples]} from={t.at('apples') - 1} to={t.at('apples') + 6} seed="m4" />
         <Swipe lines={[P.raisins]} from={t.at('raisins') - 1} to={t.at('raisins') + 7} seed="m5" />
       </PageScrap>
-      {PIE_LABELS.map(([text, w, sx, sy]) => <Slip key={text} text={text} x={M(sx, sy)[0] - text.length * 9} y={M(sx, sy)[1] + 30} at={t.at(w) - 2} rot={random(text) * 6 - 3} size={50} />)}
+      {/* apples and raisins come last and close to the cut: they land together on "along with" */}
+      {PIE_LABELS.map(([text, w, sx, sy]) => <Slip key={text} text={text} x={M(sx, sy)[0] - text.length * 9} y={M(sx, sy)[1] + 30} at={(w === 'apples' || w === 'raisins' ? t.at('along with') : t.at(w)) - 2} rot={random(text) * 6 - 3} size={50} />)}
     </AbsoluteFill>
   );
 };
@@ -293,28 +297,31 @@ const Point: React.FC<{t: TL; a?: number}> = ({t}) => {
       <Slip text="= ships" x={1030} y={290} at={t.at('ships') - 2} rot={-3} size={70} />
       <Loop cx={140 + 320 * s} cy={rowY(5)} rx={200} ry={52} at={t.at('mince pie meant') + 6} seed={39} tilt={2} />
       <Arrow x1={140 + 560 * s} y1={rowY(5)} x2={1010} y2={570} bow={30} at={t.at('mince pie meant') + 9} />
-      <Slip text="= hours" x={1030} y={520} at={t.at('hours') - 2} rot={-2} size={70} />
+      <Slip text="= hours" x={1030} y={520} at={t.at('pie meant') - 2} rot={-2} size={70} />
     </AbsoluteFill>
   );
 };
 
-const Board: React.FC<{t: TL; a?: number}> = ({t}) => <ChBoard ch={3} at={t.at('But not') + 2} ghost={{id: 'mock', at: t.at('afford a turtle') + 4}} />;
+// the turtle lands just before the cut, so the yarn's "but" tag is up for its reading time before the baton card
+const Board: React.FC<{t: TL; a?: number}> = ({t, a = 0}) => <ChBoard ch={3} at={a - 30} ghost={{id: 'mock', at: t.at('not everyone')}} />;
 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
+  const afford = hold(at('A table like') - 1, readEnd(at('pie meant') - 2, '= hours', 13));
   const c: Record<string, number> = {
     menu: 0,
-    grand: at('And at') - 1,
+    grand: hold(at('And at') - 1, readEnd(at('It often opened') - 3, 'opened with oysters')),
     dock: at('Green') - 1,
-    turtlePan: at('first American') - 1,
+    turtlePan: hold(at('first American') - 1, readEnd(at('Caribbean') - 2, 'from the Caribbean', 13)),
     stepOne: at("That's") - 1,
     steps: at('Then') - 1,
-    pie: at('Then came') - 1,
-    count: at('So count') - 1,
+    pie: hold(at('Then came') - 1, readEnd(at('and baked') - 2, '4. baked with Madeira wine', 13)),
+    count: hold(at('So count') - 1, readEnd(at('along with') - 2, 'raisins', 13)),
     point: at('But that') - 1,
-    afford: at('A table like') - 1,
-    board: at('But not') - 1,
+    afford,
+    // the board comes 6 frames before "But not" so the yarn's "but" tag is read before the baton card slams over it
+    board: Math.max(hold(at('But not') - 1) - 6, readEnd(Math.max(afford, at('A table like')), 'LOOK WHAT WE CAN AFFORD', 7)),
   };
   const cuts: [number, React.ReactNode][] = [
     [c.menu, <Menu t={t} a={c.menu} />],

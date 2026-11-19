@@ -12,6 +12,7 @@ import {DeskScene} from '../kit/tg_desk';
 import {bed} from '../kit/levels';
 import {Clip, Cut as FlowCut} from '../kit/tg_cut';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {hold, readEnd} from '../lib/timing';
 import {type SheetCam, camAt, Slip, Swipe} from '../kit/vox';
 import {DocPage, FullFrame, type PlaceholderInfo, PrintOr, TagOn} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
@@ -69,12 +70,13 @@ const NW_TAG = 'Sarah Josepha Hale, Northwood: A Tale of New England, Boston, 18
 /** Wide: the title page on the desk; then p. 109, the camera leaning in on the turkey's line; then p. 110 for the pies. */
 const Northwood: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
-  const look = t.at('Look at');
-  const pies = t.at('There are');
+  // the wide notes get their reading time before the camera leans in; p. 109 then holds 3 s once it has arrived
+  const look = hold(t.at('Look at'), readEnd(t.at('And in it') - 3, '…with a Thanksgiving dinner'));
+  const pies = t.at('There are') + 4;
   const keys: [number, SheetCam][] = [
     [a, {x: -40, y: 2100, z: 0.25, rot: -2}],
     [look, {x: -40, y: 2100, z: 0.25, rot: -2}],
-    [t.at('The turkey') - 2, {x: 1400, y: 1410, z: 0.72, tilt: 14, rot: -1, dofY: 1410, dof: 4, band: 140}],
+    [Math.max(look + 12, t.at('The turkey') - 6), {x: 1400, y: 1410, z: 0.72, tilt: 14, rot: -1, dofY: 1410, dof: 4, band: 140}],
   ];
   const keys2: [number, SheetCam][] = [
     [pies, {x: 1500, y: 2080, z: 0.72, tilt: 14, rot: -1, dofY: 2080, dof: 4, band: 140}],
@@ -97,7 +99,7 @@ const Northwood: React.FC<{t: TL; a: number}> = ({t, a}) => {
       )}
       {wide && g >= t.at('Northwood.') && <Highlight text="NORTHWOOD · 1827" x={110} y={120} size={84} at={t.at('Northwood.')} seed={52} rot={-2} />}
       {wide && <Note text="a novel" x={140} y={300} size={50} rot={-3} at={t.at('novel') - 3} color="#ffffff" />}
-      {wide && <Note text="…with a Thanksgiving dinner" x={140} y={420} size={50} rot={-3} at={t.at('Thanksgiving dinner') - 3} />}
+      {wide && <Note text="…with a Thanksgiving dinner" x={140} y={420} size={50} rot={-3} at={t.at('And in it') - 3} />}
       <TagOn text={`${NW_TAG}${wide ? '' : g < pies ? ' · p. 109' : ' · p. 110'}`} />
     </AbsoluteFill>
   );
@@ -128,10 +130,10 @@ const Menu: React.FC<{t: TL; a: number}> = ({t, a}) => {
           the pie on "pie at" (the clip's cues are these words' times) */}
       <Clip name="table_3d" at={a} />
       <Note text="sound familiar?" x={160} y={110} size={54} rot={-3} at={a + 1} color="#ffffff" />
-      <Note text="turkey in the middle" x={1160} y={110} size={54} rot={-3} at={t.at('Turkey in') - 3} color={pal.subject} />
-      <Note text="pumpkin pie at the end" x={1150} y={210} size={50} rot={-2} at={t.at('pie at') - 3} />
+      <Note text="turkey in the middle" x={1160} y={124} size={54} rot={-3} at={t.at('Turkey in') - 3} color={pal.subject} />
+      <Note text="pumpkin pie at the end" x={1150} y={224} size={50} rot={-2} at={t.at('pie at') - 3} />
       {g >= t.at('Written') && <Stamp text="1827" x={170} y={800} at={t.at('Written')} size={130} />}
-      <Note text="almost 200 years ago" x={560} y={880} size={56} rot={-3} at={t.at('two hundred') - 3} color="#ffffff" />
+      <Note text="almost 200 years ago" x={560} y={866} size={56} rot={-3} at={t.at('almost two') - 3} color="#ffffff" />
       <TagOn text="Drawn model" x={1500} />
     </AbsoluteFill>
   );
@@ -149,7 +151,7 @@ const Godeys: React.FC<{t: TL; a: number}> = ({t}) => {
       {g >= t.at("Godey's") && <Highlight text="GODEY'S LADY'S BOOK" x={110} y={150} size={72} at={t.at("Godey's")} seed={53} rot={-2} />}
       <Note text="hale: editor, 1837–1877" x={140} y={330} size={50} rot={-3} at={t.at('editor') - 3} color="#ffffff" />
       <Note text="one of the most popular" x={140} y={450} size={50} rot={-3} at={t.at('most popular') - 3} />
-      <Note text="and she used it." x={170} y={600} size={60} rot={-3} at={t.at('used it') - 3} color={pal.subject} />
+      <Note text="and she used it." x={170} y={600} size={60} rot={-3} at={t.at('And she used') - 3} color={pal.subject} />
     </AbsoluteFill>
   );
 };
@@ -172,8 +174,8 @@ const Editorials: React.FC<{t: TL; a: number}> = ({t}) => {
       ))}
       {g >= t.at('Year after') && <Highlight text="YEAR AFTER YEAR" x={140} y={850} size={84} at={t.at('Year after')} seed={54} rot={-2} />}
       <Note text="one national day" x={1260} y={230} size={56} rot={-3} at={t.at('one national') - 3} color={pal.subject} />
-      <Note text="→ to governors" x={1280} y={420} size={50} rot={-3} at={t.at('governors') - 3} color="#ffffff" />
-      <Note text="→ to presidents" x={1280} y={540} size={50} rot={-3} at={t.at('presidents') - 3} color="#ffffff" />
+      <Note text="→ to governors" x={1280} y={420} size={50} rot={-3} at={t.at('She wrote to governors') - 3} color="#ffffff" />
+      <Note text="→ to presidents" x={1280} y={540} size={50} rot={-3} at={t.at('She wrote to presidents') - 3} color="#ffffff" />
       <Tag text="Godey's Lady's Book, Editors' Table, 1859-61 · Abraham Lincoln Papers, Library of Congress" x={44} y={40} />
     </AbsoluteFill>
   );
@@ -218,10 +220,10 @@ const Proclamation: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p1.jpg" what="Lincoln, Proclamation of Thanksgiving, 3 Oct 1863" x={1150} y={110} w={540} h={837} at={a + 1} rot={-1}
         tag="Thanksgiving Proclamation, Oct. 3, 1863, p. 1 · National Archives, via Wikimedia Commons" />
-      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p2.jpg" what="Proclamation, p. 2" x={900} y={360} w={400} h={610} at={t.at('last Thursday') - 1} rot={3} pos="50% 30%" />
+      <PrintOr src="img/arch/lincoln-thanksgiving-proclamation-1863-p2.jpg" what="Proclamation, p. 2" x={900} y={360} w={400} h={610} at={t.at('Thanksgiving, on') - 1} rot={3} pos="50% 30%" />
       {g >= t.at('Days later') && <Highlight text="OCT. 3, 1863" x={110} y={130} size={96} at={t.at('Days later')} seed={56} rot={-2} />}
       <Note text="a national thanksgiving" x={140} y={360} size={52} rot={-3} at={t.at('proclaimed') - 3} />
-      <Note text="last thursday of november" x={140} y={500} size={52} rot={-3} at={t.at('last Thursday') - 3} color={pal.subject} />
+      <Note text="last thursday of november" x={140} y={500} size={52} rot={-3} at={t.at('on the last') - 3} color={pal.subject} />
     </AbsoluteFill>
   );
 };
@@ -251,15 +253,15 @@ const Body: React.FC = () => {
   const at = t.at;
   const c = {
     hale: at('Her name') - 1,
-    northwood: at('In 1827') - 1,
+    northwood: hold(at('In 1827') - 1, readEnd(at('That was her') - 3, 'that was her.')),
     niche: at('And among') - 1,
     menu: at('Sound familiar') - 1,
-    godeys: at("Hale didn't") - 1,
-    editorials: at('Year after') - 1,
-    letter: at('In September') - 1,
+    godeys: hold(at("Hale didn't") - 1, readEnd(at('almost two') - 3, 'almost 200 years ago')),
+    editorials: hold(at('Year after') - 1, readEnd(at('And she used') - 3, 'and she used it.')),
+    letter: hold(at('In September') - 1, readEnd(at('She wrote to presidents') - 3, '→ to presidents')),
     procl: at('Days later') - 1,
-    homemade: at("And Hale's") - 1,
-    board: at('But homemade') - 1,
+    homemade: hold(at("And Hale's") - 1, readEnd(at('on the last') - 3, 'last thursday of november'), at('Thanksgiving, on') + 6 + 93),
+    board: hold(at('But homemade') - 1, readEnd(at('All day long') - 3, 'all day long.')),
   };
   const cuts: [number, React.ReactNode][] = [
     [0, <Hale t={t} a={c.hale} />],

@@ -13,14 +13,15 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {CutIn, DeskScene, useMarks} from '../kit/tg_desk';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, Stamp, TAIL, type TL, useScene} from '../kit/shell';
+import {hold, readEnd, readFrames} from '../lib/timing';
 import {type Box, Slip} from '../kit/vox';
 import {PageScrap} from './ch34/parts';
 import {Print} from '../kit/print';
 import {EndSlots} from '../kit/ga_brand';
-import {Hand} from '../kit/tg_cut';
+import {DropDeal, type DropDealCard, DropIn} from '../kit/tg_drop';
 import {TgBoard} from '../kit/tg_board';
 import {chestAt, SET, TURKEY, type TurkeyBeats, TurkeyRig, TurkeySet} from '../kit/tg_turkey';
-import {CORAL, Cran, cranMap, type Deal, EelLoop, HandDeal, Loupe, MockTape, ORANGE, PH, type Placeholder, RecipeCard, TEAL } from '../kit/tg_late';
+import {CORAL, Cran, cranMap, EelLoop, Loupe, MockTape, ORANGE, PH, type Placeholder, RecipeCard, TEAL } from '../kit/tg_late';
 
 const N = words as Narration;
 const T0 = makeTimeline(N, 30);
@@ -63,8 +64,8 @@ const Breed: React.FC<{t: TL; a: number}> = ({t}) => (
   <AbsoluteFill>
     <DarkPaper />
     <Print src={USDA} x={1150} y={110} w={560} h={842} at={2} rot={2} pos="50% 50%" />
-    <Highlight text="BROAD-BREASTED" x={120} y={330} size={104} at={t.at('Broad-Breasted White.')} seed={81} rot={-2} />
-    <Highlight text="WHITE" x={150} y={480} size={104} at={t.at('Broad-Breasted White.') + 4} seed={82} rot={-3} />
+    <Highlight text="BROAD-BREASTED" x={120} y={330} size={104} at={t.at('called the')} seed={81} rot={-2} />
+    <Highlight text="WHITE" x={150} y={480} size={104} at={t.at('called the') + 4} seed={82} rot={-3} />
     <Note text="on most American tables" x={140} y={180} size={50} rot={-3} at={t.at('most American') - 2} color="#ffffff" />
     <Tag text={USDA_TAG} />
   </AbsoluteFill>
@@ -88,8 +89,8 @@ const Gmo: React.FC<{t: TL; a: number}> = ({t}) => (
     <PageScrap src={FSA_FARM} size={[5232, 4789]} box={[820, 480, 4150, 3800]} x={1160} y={200} w={620} rot={2} seed="fsa" />
     <Note text="a GMO turkey?" x={150} y={190} size={80} rot={-3} at={t.at('GMO turkey.') - 2} color={ORANGE} />
     <Strike x1={140} y1={265} x2={690} y2={215} at={t.at("isn't.")} />
-    <Note text="nobody edited its genes" x={160} y={420} size={60} rot={-3} at={t.at('Nobody edited') - 2} color="#ffffff" />
-    <Note text="no lab." x={200} y={560} size={70} rot={-3} at={t.at('in a lab.') - 2} />
+    <Note text="nobody edited its genes" x={160} y={420} size={60} rot={-3} at={t.at("isn't.") - 2} color="#ffffff" />
+    <Note text="no lab." x={200} y={560} size={70} rot={-3} at={t.at('edited its') - 2} />
     <Tag text="Turkey farm near Harrisburg, Pennsylvania, 1940 · Royden Dixon, FSA · Library of Congress" />
   </AbsoluteFill>
 );
@@ -135,7 +136,7 @@ const OldWay: React.FC<{t: TL; a: number}> = ({t}) => {
           GENERATION <span style={{fontFamily: JF.display, fontSize: 64, letterSpacing: 0, color: CORAL}}>{gen}</span>
         </div>
       )}
-      <Note text="since the 1920s and '30s" x={900} y={800} size={60} rot={-3} at={t.at('1920s') - 2} />
+      <Note text="since the 1920s and '30s" x={900} y={800} size={60} rot={-3} at={t.at('starting back') - 2} />
     </AbsoluteFill>
   );
 };
@@ -146,29 +147,18 @@ const OldWay: React.FC<{t: TL; a: number}> = ({t}) => {
 const BirdWide: React.FC<{t: TL; a: number}> = ({t}) => (
   <TurkeySet b={beatsOf(t)} cam={{x: 760, y: 540, z: 1}} dial={false}>
     <PageScrap src={FIG9.src} size={FIG9.size} box={FIG9.crop} x={1480} y={130} w={300} rot={2} seed="f9" tag="Broad Breasted Bronze hen, USDA, 1952" />
-    <Highlight text="MORE BREAST MEAT" x={110} y={120} size={80} at={t.at('more breast meat,')} seed={84} rot={-2} />
-    <Note text="what farmers wanted" x={130} y={250} size={46} rot={-3} at={t.at('farmers wanted') - 2} color="#ffffff" />
+    <Highlight text="MORE BREAST MEAT" x={110} y={120} size={80} at={t.at('farmers wanted')} seed={84} rot={-2} />
+    <Note text="what farmers wanted" x={130} y={250} size={46} rot={-3} at={t.at('First, farmers') - 2} color="#ffffff" />
+    <Note text="a broader chest" x={130} y={370} size={70} rot={-3} at={t.at('so they bred') - 2} />
   </TurkeySet>
 );
-
-/** Cut-in on the chest (a slow push): it swells on "broader chest". */
-const BirdChest: React.FC<{t: TL; a: number}> = ({t, a}) => {
-  const f = useCurrentFrame();
-  const [cx, cy] = chestAt();
-  const z = interpolate(f, [a, t.at('Then in the 1950s,')], [1.6, 1.75], clamp);
-  return (
-    <TurkeySet b={beatsOf(t)} cam={{x: cx + 120, y: cy - 40, z}} dial={false} labels={false}>
-      <Note text="a broader chest" x={130} y={130} size={70} rot={-3} at={t.at('broader chest.') - 2} />
-    </TurkeySet>
-  );
-};
 
 /** Wide again: dark feathers wiped to white. */
 const BirdWhite: React.FC<{t: TL; a: number}> = ({t}) => (
   <TurkeySet b={beatsOf(t)} cam={{x: 960, y: 540, z: 1}} dial={false}>
     <Highlight text="1950s" x={1250} y={130} size={110} at={t.at('1950s,')} seed={85} rot={-2} />
-    <Note text="dark feathers..." x={1260} y={330} size={58} rot={-3} at={t.at('dark feathers') - 2} color="#ffffff" />
-    <Note text="...for white ones" x={1220} y={450} size={64} rot={-3} at={t.at('white ones.') - 2} />
+    <Note text="dark feathers..." x={1260} y={330} size={58} rot={-3} at={t.at('they swapped') - 2} color="#ffffff" />
+    <Note text="...for white ones" x={1220} y={450} size={64} rot={-3} at={t.at('feathers for') - 2} />
   </TurkeySet>
 );
 
@@ -180,9 +170,9 @@ const BirdLoupe: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <TurkeySet b={b} cam={{x: 960, y: 540, z: 1}} dial={false}>
       <Loupe layer={layer} cx={cx} cy={cy} r={180} zoom={3} to={[1480, 340]} at={t.at('pluck a white bird,') + 2} bow={-40} />
-      <Note text="leftover pin feathers" x={1180} y={590} size={50} rot={-3} at={t.at('pin feathers') - 2} color="#ffffff" />
-      <Note text="don't show on white" x={1190} y={690} size={56} rot={-3} at={t.at("don't show.") - 2} />
-      <Note text="cleaner in the store" x={1180} y={810} size={56} rot={-3} at={t.at('looks cleaner') - 2} color={usePal().subject} />
+      <Note text="leftover pin feathers" x={1180} y={590} size={50} rot={-3} at={t.at('little leftover') - 2} color="#ffffff" />
+      <Note text="don't show on white" x={1190} y={690} size={56} rot={-3} at={t.at('pin feathers') - 2} />
+      <Note text="cleaner in the store" x={1180} y={810} size={56} rot={-3} at={t.at("don't show.") - 2} color={usePal().subject} />
     </TurkeySet>
   );
 };
@@ -193,8 +183,8 @@ const BirdWeight: React.FC<{t: TL; a: number}> = ({t}) => (
     <Highlight text="1930s" x={110} y={100} size={110} at={t.at('1930s,')} seed={86} rot={-2} />
     <Note text="average, live" x={130} y={270} size={46} rot={-3} at={t.at('average turkey') - 2} color="#ffffff" />
     <Highlight text="TODAY" x={1180} y={830} size={90} at={t.at('Today,')} seed={87} rot={-2} />
-    <Note text="(same legs)" x={150} y={840} size={54} rot={-3} at={t.at('over thirty.') + 16} color="#ffffff" />
-    <Arrow x1={440} y1={870} x2={690} y2={760} bow={-30} at={t.at('over thirty.') + 20} />
+    <Note text="(same legs)" x={150} y={840} size={54} rot={-3} at={t.at('Today,') + 10} color="#ffffff" />
+    <Arrow x1={440} y1={870} x2={690} y2={760} bow={-30} at={t.at('Today,') + 14} />
   </TurkeySet>
 );
 
@@ -205,7 +195,7 @@ const BirdTip: React.FC<{t: TL; a: number}> = ({t}) => (
     <Note text="to mate on their own" x={1220} y={300} size={44} rot={-3} at={t.at('to mate') - 2} color="#ffffff" />
     <Note text="males: too heavy" x={1220} y={410} size={44} rot={-3} at={t.at('males are') - 2} />
     <Note text="the shape is wrong" x={1240} y={510} size={44} rot={-3} at={t.at('shape is wrong.') - 2} />
-    <Slip text="artificial insemination" x={1220} y={670} at={t.at('artificial insemination.') - 2} size={50} rot={-2} />
+    <Slip text="artificial insemination" x={1220} y={670} at={t.at('now comes') - 2} size={50} rot={-2} />
   </TurkeySet>
 );
 
@@ -214,7 +204,7 @@ const BirdCount: React.FC<{t: TL; a: number}> = ({t}) => (
   <TurkeySet b={beatsOf(t)} cam={{x: 960, y: 480, z: 0.8}} dial={false}>
     <Stamp text="194 MILLION" x={130} y={175} size={120} at={t.at('194 million')} rot={-3} />
     <Note text="raised last year" x={1260} y={420} size={46} rot={-3} at={t.at('turkeys raised') - 2} color="#ffffff" />
-    <Note text="almost all: this breed" x={1240} y={530} size={46} rot={-3} at={t.at('this one breed.') - 2} />
+    <Note text="almost all: this breed" x={1240} y={530} size={46} rot={-3} at={t.at('almost all') - 2} />
   </TurkeySet>
 );
 
@@ -241,8 +231,8 @@ const Heritage: React.FC<{t: TL; a: number}> = ({t}) => {
       <Note text="smaller," x={130} y={350} size={46} rot={-3} at={t.at('smaller,') - 2} />
       <Note text="slower-growing," x={390} y={350} size={46} rot={-3} at={t.at('slower-growing,') - 2} />
       <Note text="pricier" x={830} y={350} size={46} rot={-3} at={t.at('more expensive.') - 2} />
-      <Note text="what a turkey used to be" x={1060} y={240} size={54} rot={-3} at={t.at('what a turkey') - 2} color={pal.subject} />
-      <Arrow x1={1060} y1={300} x2={700} y2={520} bow={-50} at={t.at('what a turkey') + 6} />
+      <Note text="what a turkey used to be" x={1060} y={240} size={54} rot={-3} at={t.at("They're what") - 2} color={pal.subject} />
+      <Arrow x1={1060} y1={300} x2={700} y2={520} bow={-50} at={t.at("They're what") + 6} />
       <Tag text={`Standardbred Bronze male · ${BULLETIN}`} />
     </AbsoluteFill>
   );
@@ -260,16 +250,18 @@ const Invention: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ------------------------------------------------------------------ subscribe, the question, the recap
-const Subscribe: React.FC<{t: TL; a: number}> = ({t}) => (
+const Subscribe: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <DarkPaper />
     <Note text="quick favor:" x={200} y={240} size={56} rot={-3} at={t.at('Quick favor:') - 2} color="#ffffff" />
     <Note text="hit subscribe" x={240} y={360} size={96} rot={-3} at={t.at('hit subscribe.') - 2} />
     <Note text="it's free." x={290} y={540} size={60} rot={-3} at={t.at("It's free.") - 2} color="#ffffff" />
-    {/* the hand holds the ask out on a card, and takes it away before the grocer's ad lands */}
-    <Hand name="tg_hand_card" x={1160} y={400} w={1000} at={t.at('hit subscribe.') + 2} out={t.at('marshmallow people,') - 10} label="subscribe" />
-    <PageScrap src={AD22.src} size={AD22.size} box={AD22.crop} x={1100} y={260} w={680} at={t.at('marshmallow people,')} rot={4} seed="s22"
-      tag="Piggly Wiggly ad, Albuquerque Morning Journal, Oct. 28, 1922 · LOC" />
+    {/* no hands: the ask lands on its own card (lifted, drops, slides and turns to rest) and stays; the grocer's ad lands below it */}
+    <DropIn at={Math.max(a + 12, t.at('hit subscribe.') + 2)} x={1130} y={330} rot={5} from={[650, -480, 30]} out={1e7}>
+      <RecipeCard kicker="QUICK FAVOR" title="subscribe" lines={["it's free."]} />
+    </DropIn>
+    <PageScrap src={AD22.src} size={AD22.size} box={AD22.crop} x={1080} y={760} w={700} at={t.at('marshmallow people,')} rot={2} seed="s22"
+      tag="Piggly Wiggly ad, 1922 · LOC" />
     <Note text="(not selling anything)" x={300} y={700} size={50} rot={-3} at={t.at('not selling') - 2} />
   </AbsoluteFill>
 );
@@ -291,8 +283,8 @@ const Question: React.FC<{t: TL; a: number}> = ({t}) => {
       <Note text="back to the question:" x={200} y={230} size={56} rot={-3} at={t.at('the question.') - 2} color="#ffffff" />
       <Note text="how did we get from eels..." x={240} y={380} size={88} rot={-3} at={t.at('How did we') - 2} />
       <Note text="...to this?" x={420} y={560} size={100} rot={-3} at={t.at('to this?') - 2} color={pal.subject} />
-      <Print src={OWI} x={1230} y={560} w={560} h={448} at={t.at('to this?')} rot={2} pos="60% 50%" />
-      {g >= t.at('to this?') && <Tag text="Thanksgiving dinner, 1942 · Howard R. Hollem, Office of War Information · Library of Congress" />}
+      <Print src={OWI} x={1230} y={560} w={560} h={448} at={t.at('eels...')} rot={2} pos="60% 50%" />
+      {g >= t.at('eels...') && <Tag text="Thanksgiving dinner, 1942 · OWI · Library of Congress" />}
     </AbsoluteFill>
   );
 };
@@ -305,18 +297,17 @@ const Recap: React.FC<{t: TL; a: number}> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       <Print src="img/arch/simmons-1796-to-dress-a-turtle-p2.jpg" x={1010} y={120} w={460} h={640} at={s1 - 1} rot={-4} pos="50% 62%" />
-      <Print src="img/arch/mock-turtle-soup-boston-cook-book-1884.jpg" x={1090} y={160} w={440} h={640} at={s2 - 1} rot={3} pos="50% 30%" />
-      <MockTape x={1200} y={520} at={s2 + 4} size={80} />
-      <Print src="img/arch/sarah-josepha-hale-engraving-1880-signature.jpg" x={1170} y={190} w={440} h={620} at={s3 - 1} rot={-2} pos="50% 20%" />
+      <Print src="img/arch/mock-turtle-soup-boston-cook-book-1884.jpg" x={1090} y={160} w={440} h={640} at={t.at('Then the people') - 1} rot={3} pos="50% 30%" />
+      <MockTape x={1060} y={560} at={s2 + 4} size={80} />
+      <Print src="img/arch/sarah-josepha-hale-engraving-1880-signature.jpg" x={1340} y={190} w={440} h={620} at={s3 - 1} rot={-2} pos="50% 20%" />
       <Print src="img/arch/jello-girl-gives-a-party-1920-cover.jpg" x={1250} y={230} w={450} h={620} at={s4 - 1} rot={4} pos="50% 30%" />
-      <Note text="step by step:" x={130} y={40 + 100} size={50} rot={-3} at={t.at('Step by step.') - 2} out={s1} color="#ffffff" />
       <Highlight text="1 · SHOW OFF" x={110} y={130} size={66} at={s1} seed={90} rot={-2} />
       <Note text="turtles, oysters, meat in the pie" x={140} y={240} size={40} rot={-2} at={t.at('turtles,') - 2} color="#ffffff" />
       <Highlight text="2 · FAKE IT" x={110} y={350} size={66} at={s2} seed={91} rot={-2} />
       <Highlight text="3 · WRITE IT DOWN" x={110} y={530} size={66} at={s3} seed={92} rot={-2} />
       <Note text="a homemade menu, made national" x={140} y={640} size={40} rot={-2} at={t.at('homemade menu') - 2} color="#ffffff" />
       <Highlight text="4 · SELL THE SHORTCUT" x={110} y={750} size={66} at={s4} seed={93} rot={-2} />
-      <Note text="dressed up as homemade" x={140} y={860} size={50} rot={-2} at={t.at('dressed it up') - 2} color={pal.subject} />
+      <Note text="dressed up as homemade" x={140} y={860} size={50} rot={-2} at={t.at('the shortcut,') - 2} color={pal.subject} />
       <Tag text="Simmons, American Cookery, 1796 · Boston Cook Book, 1884 · Hale, engraving, 1880 · Jell-O booklet, 1920 · LOC / Wellcome / Internet Archive" />
     </AbsoluteFill>
   );
@@ -338,13 +329,13 @@ const PullBack: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ------------------------------------------------------------------ the last lines
-/** (`solo`: no notes or dates, for the "It's still delicious." cut-in.) The eel and the can, side by side; the hand deals one last recipe card between them. Then hold. */
+/** (`solo`: no notes or dates, for the "It's still delicious." cut-in.) The eel and the can, side by side; one last recipe card drops between them (no hands). Then hold. */
 const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
   const can = {cx: 1370, by: 860, pw: 540};
   const cm = cranMap(6, can.cx, can.by, can.pw);
   const [lx, ly] = [690, 757]; // the "1 can" line on the card (screen px), for the loop
-  const deals: Deal[] = [{at: t.at('recipe card') + 2, x: 690, y: 640, rot: -3, card: (
+  const deals: DropDealCard[] = [{at: t.at('recipe card') + 2, x: 690, y: 640, rot: -3, from: [600, 520, 22], card: (
     <RecipeCard kicker="FROM THE KITCHEN OF GRANDMA" title="Cranberry sauce" lines={['1 can, jellied', 'open both ends', 'slide onto a plate']} />
   )}];
   return (
@@ -357,7 +348,7 @@ const EelCan: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
       {!solo && <Note text="what they could catch" x={140} y={580} size={50} rot={-3} at={t.at('could catch.') - 2} color="#ffffff" />}
       {!solo && <Note text="what somebody wrote down," x={1060} y={170} size={44} rot={-3} at={t.at('somebody wrote down,') - 2} color="#ffffff" />}
       {!solo && <Note text="...and sold back to us" x={1100} y={270} size={50} rot={-3} at={t.at('sold back') - 2} color={pal.subject} />}
-      <HandDeal deals={deals} />
+      <DropDeal deals={deals} />
       <Loop cx={lx + 150} cy={ly} rx={170} ry={36} at={t.at('an ad.') + 2} seed={21} tilt={-3} color={pal.subject} />
     </AbsoluteFill>
   );
@@ -375,23 +366,23 @@ const Body: React.FC = () => {
   // cut 1 frame before the word that starts the new idea (beatscope reads this object)
   const c = {
     breed: 0,
-    gmo: at('You may have') - 1,
-    oldway: at('They did it') - 1,
-    wide: at('First, farmers') - 1,
-    chest: at('so they bred') - 1,
-    white: at('Then in the 1950s,') - 1,
-    loupe: at('Why? Because') - 1,
-    weight: at('And the birds kept') - 1,
-    tip: at('It worked so well') - 1,
-    count: at('Out of the roughly') - 1,
-    happy: at('Happy Thanksgiving.') - 1,
+    gmo: hold(at('You may have') - 1, readEnd(at('called the') + 4, 'WHITE', 7)),
+    oldway: hold(at('They did it') - 1, readEnd(at('edited its') - 2, 'no lab.')),
+    wide: hold(at('First, farmers') - 1, readEnd(at('starting back') - 2, "since the 1920s and '30s")),
+    white: hold(at('Then in the 1950s,') - 1, readEnd(at('so they bred') - 2, 'a broader chest')),
+    loupe: hold(at('Why? Because') - 1, readEnd(at('feathers for') - 2, '...for white ones')),
+    weight: hold(at('And the birds kept') - 1, readEnd(at("don't show.") - 2, 'cleaner in the store')),
+    tip: hold(at('It worked so well') - 1, readEnd(at('Today,'), 'TODAY', 7), readEnd(at('Today,') + 10, '(same legs)')),
+    count: hold(at('Out of the roughly') - 1, readEnd(at('now comes') - 2, 'artificial insemination', 13)),
+    happy: hold(at('Happy Thanksgiving.') - 1, readEnd(at('almost all') - 2, 'almost all: this breed')),
     heritage: at('The older breeds,') - 1,
-    invention: at('So even the bird') - 1,
-    subscribe: at('Quick favor:') - 1,
-    question: at("So let's go back") - 1,
-    recap: at('Step by step.') - 1,
-    pull: at('That means almost') - 1,
-    eelcan: at('The people of 1621') - 1,
+    invention: hold(at('So even the bird') - 1, readEnd(at("They're what") - 2, 'what a turkey used to be')),
+    subscribe: hold(at('Quick favor:') - 1, readEnd(at('an invention.'), 'REDESIGNED', 8)),
+    // the grocer's ad strip lands on "marshmallow people" and settles: its tag and the strip get their time
+    question: hold(at("So let's go back") - 1, readEnd(at('not selling') - 2, '(not selling anything)'), at('marshmallow people,') + 7 + readFrames('Piggly Wiggly ad, 1922 · LOC', true)),
+    recap: hold(at('Step by step.') - 1, readEnd(at('to this?') - 2, '...to this?'), at('eels...') + 7 + readFrames('', true)),
+    pull: hold(at('That means almost') - 1, readEnd(at('the shortcut,') - 2, 'dressed up as homemade')),
+    eelcan: hold(at('The people of 1621') - 1, readEnd(at("marshmallow company's.") - 2, "a marshmallow company's.")),
     delicious: at("It's still delicious.") - 1,
     end: at('Thanks for watching.') - 1,
   };
@@ -400,7 +391,6 @@ const Body: React.FC = () => {
     [c.gmo, <Gmo t={t} a={c.gmo} />],
     [c.oldway, <OldWay t={t} a={c.oldway} />],
     [c.wide, <BirdWide t={t} a={c.wide} />],
-    [c.chest, <BirdChest t={t} a={c.chest} />],
     [c.white, <BirdWhite t={t} a={c.white} />],
     [c.loupe, <BirdLoupe t={t} a={c.loupe} />],
     [c.weight, <BirdWeight t={t} a={c.weight} />],

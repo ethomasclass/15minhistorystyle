@@ -14,6 +14,7 @@ import {Highlight, JF, Note, Tag, useGFrame, usePal} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, Definition, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
+import {hold, readEnd} from '../lib/timing';
 import {Clip, Cut, CutLoop, States} from '../kit/tg_cut';
 import {FullFrame, PhLabel, type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {type Box, Swipe} from '../kit/vox';
@@ -80,7 +81,7 @@ const Kitchen: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const pal = usePal();
   const steps: [string, string, string?][] = [
     ["1  boil calves' feet", 'boiled'], ['…for hours', 'hours.', '#ffffff'], ['2  skim it', 'skimmed'], ['3  strain it', 'strained'], ['4  clear it', 'cleared'],
-    ['5  set it in a copper mold', 'copper', pal.subject],
+    ['5  set it in a copper mold', 'and set it', pal.subject],
   ];
   const ys = [130, 225, 340, 445, 550, 665];
   const xs = [130, 560, 130, 130, 130, 130];
@@ -112,8 +113,8 @@ const Aspic: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <Note text="some savory" x={540} y={140} size={52} rot={-3} at={t.at('savory') - 3} />
       {g >= t.at('aspic.') && <Highlight text="ASPIC" x={140} y={290} size={130} at={t.at('aspic.')} seed={63} rot={-2} />}
       <Definition term="as·pic" def="a savory jelly with meat or vegetables set inside" at={t.at('aspic.') + 9} x={160} y={500} w={820} />
-      <Note text="only a house with a cook" x={150} y={700} size={52} rot={-3} at={t.at('cook,') - 3} color="#ffffff" />
-      <Note text="and a lot of time" x={170} y={820} size={52} rot={-3} at={t.at('lot of time') - 3} color="#ffffff" />
+      <Note text="only a house with a cook" x={150} y={700} size={52} rot={-3} at={t.at('Only a house') - 3} color="#ffffff" />
+      <Note text="and a lot of time" x={170} y={820} size={52} rot={-3} at={t.at('and a lot') - 3} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -125,7 +126,7 @@ const Servants: React.FC<{t: TL; a: number}> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       <PageScrap src={BPLATE} size={BEETON_SIZE} box={BELLEVUE} x={960} y={140} w={800} rot={1.5} seed="bv" filter={COLOUR_DOC}
-        tag={`Savoury Jelly a la Belle-Vue · ${BEETON_TAG}`} />
+        tag="Savoury Jelly a la Belle-Vue · Beeton, 1869" />
       <Note text="a wobbling aspic said:" x={140} y={300} size={54} rot={-3} at={t.at('A wobbling') - 3} />
       <Note text="“we have servants.”" x={160} y={460} size={72} rot={-3} at={t.at('we have servants') - 3} color={pal.subject} />
     </AbsoluteFill>
@@ -133,11 +134,13 @@ const Servants: React.FC<{t: TL; a: number}> = ({t}) => {
 };
 
 /** "we have servants.": a hard cut in, the line alone and large beside the jelly (the coral flash). */
-const ServantsFlash: React.FC<{t: TL; a: number}> = () => {
+const ServantsFlash: React.FC<{t: TL; a: number; carry: number}> = ({carry}) => {
   const pal = usePal();
+  const g = useGFrame();
   return (
     <AbsoluteFill>
       <DarkPaper />
+      {g < carry && <Note text="a wobbling aspic said:" x={140} y={300} size={54} rot={-3} at={-999} />}
       <PageScrap src={BPLATE} size={BEETON_SIZE} box={BELLEVUE} x={1060} y={170} w={700} rot={-2} seed="bv2" filter={COLOUR_DOC} tag="Savoury Jelly a la Belle-Vue · Beeton, 1869" />
       <Note text="“we have servants.”" x={150} y={430} size={104} rot={-3} at={-999} color={pal.subject} />
     </AbsoluteFill>
@@ -152,13 +155,13 @@ const Knox: React.FC<{t: TL; a: number}> = ({t, a}) => {
       <DarkPaper />
       <PageScrap src="img/arch/knox-sparkling-gelatine-trademark-label-1891.jpg" size={[4216, 6203]} box={[700, 2180, 2650, 1480]} x={1000} y={120} w={800} at={a + 1} rot={1.5}
         seed="kl" filter={COLOUR_DOC} />
-      <TgPrint src="img/arch/knox-gelatine-ad-good-housekeeping-dec-1911.jpg" x={1110} y={560} w={170} h={471} at={t.at('ground up') - 2} rot={-3} color fit="cover" pos="50% 0%" />
-      <TgPrint src="img/arch/knox-gelatine-ad-cosmopolitan-may-1911.jpg" x={1360} y={545} w={170} h={493} at={t.at('dissolve.') - 2} rot={3} color fit="cover" pos="50% 0%" />
-      <Tag text="Knox's Sparkling Gelatine label, trademark reg. 1891 · LOC · Knox ads, Good Housekeeping and Cosmopolitan, 1911 · Internet Archive" x={44} y={40} />
+      <TgPrint src="img/arch/knox-gelatine-ad-good-housekeeping-dec-1911.jpg" x={1110} y={560} w={170} h={471} at={t.at('started selling') - 2} rot={-3} color fit="cover" pos="50% 0%" />
+      <TgPrint src="img/arch/knox-gelatine-ad-cosmopolitan-may-1911.jpg" x={1360} y={545} w={170} h={493} at={t.at('gelatine already') - 2} rot={3} color fit="cover" pos="50% 0%" />
+      <Tag text="Knox label, 1891 · LOC · Knox ads, 1911 · Internet Archive" x={44} y={40} />
       {g >= t.at('shortcut.') && <Highlight text="THE SHORTCUT" x={110} y={130} size={100} at={t.at('shortcut.')} seed={64} rot={-2} />}
       <Note text="charles knox, around 1890" x={140} y={340} size={50} rot={-3} at={t.at('Charles Knox') - 3} color="#ffffff" />
-      <Note text="already ground up" x={160} y={480} size={58} rot={-3} at={t.at('ground up') - 3} />
-      <Note text="ready to dissolve" x={180} y={610} size={58} rot={-3} at={t.at('dissolve.') - 3} />
+      <Note text="already ground up" x={160} y={480} size={58} rot={-3} at={t.at('started selling') - 3} />
+      <Note text="ready to dissolve" x={180} y={610} size={58} rot={-3} at={t.at('gelatine already') - 3} />
     </AbsoluteFill>
   );
 };
@@ -179,14 +182,14 @@ const Morph: React.FC<{t: TL; a: number}> = ({t, a}) => {
       {g >= t.at('In 1897') && <Highlight text="1897" x={110} y={120} size={110} at={t.at('In 1897')} seed={65} rot={-2} />}
       <Note text="upstate new york" x={140} y={300} size={50} rot={-3} at={t.at('upstate') - 3} color="#ffffff" />
       <Note text="+ sugar" x={160} y={430} size={58} rot={-3} at={t.at('added sugar') - 3} />
-      <Note text="+ fruit flavor" x={160} y={550} size={58} rot={-3} at={t.at('fruit flavor') - 3} />
-      <Note text="= jell-o" x={170} y={700} size={92} rot={-3} at={t.at('Jell-O.') - 3} color={pal.subject} />
+      <Note text="+ fruit flavor" x={160} y={550} size={58} rot={-3} at={t.at('sugar and') - 3} />
+      <Note text="= jell-o" x={170} y={700} size={92} rot={-3} at={t.at('and called it') - 3} color={pal.subject} />
     </AbsoluteFill>
   );
 };
 
 // ---------------------------------------------------------------- Anyone could make it: the real 1920 booklet, in colour
-const BOOK = 'The Jell-O Girl Gives a Party, booklet, 1920 · Genesee Pure Food Co. · Wellcome Collection / Internet Archive';
+const BOOK = 'Jell-O booklet, 1920 · Wellcome Collection';
 const Booklet: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const pal = usePal();
   return (
@@ -201,6 +204,14 @@ const Booklet: React.FC<{t: TL; a: number}> = ({t, a}) => {
 };
 
 // ---------------------------------------------------------------- Mock aspic: the pair, the tape, a held frame
+/** Booklet's last note, carried over the MOCK flash's cut (the flash's left half is empty) until it has been read. */
+const CarryNote: React.FC<{t: TL}> = ({t}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  if (g >= readEnd(t.at('In about') - 3, 'in about 10 minutes')) return null;
+  return <Note text="in about 10 minutes" x={140} y={520} size={76} rot={-3} at={-999} color={pal.subject} />;
+};
+
 /** `solo`: the box side only (the MOCK flash's cut-in). */
 const Mock: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
   const pal = usePal();
@@ -235,7 +246,7 @@ const Perfection: React.FC<{t: TL; a: number}> = ({t, a}) => {
       {g >= t.at('Perfection') && <Highlight text="PERFECTION SALAD" x={130} y={270} size={80} at={t.at('Perfection')} seed={66} rot={-2} />}
       <Note text="cabbage" x={170} y={480} size={56} rot={-4} at={t.at('cabbage,') - 3} />
       <Note text="celery" x={460} y={490} size={56} rot={-2} at={t.at('celery') - 3} />
-      <Note text="peppers" x={720} y={480} size={56} rot={-4} at={t.at('peppers,') - 3} />
+      <Note text="peppers" x={720} y={480} size={56} rot={-4} at={t.at('and peppers') - 3} />
       <Note text="…in gelatin" x={200} y={640} size={64} rot={-3} at={t.at('suspended') - 3} />
     </AbsoluteFill>
   );
@@ -248,7 +259,7 @@ const Fifties: React.FC<{t: TL; a: number}> = ({t}) => {
     <AbsoluteFill>
       <DarkPaper />
       {g >= t.at('1910s,') && <Highlight text="BY THE 1910s" x={300} y={330} size={120} at={t.at('1910s,')} seed={67} rot={-2} />}
-      <Note text="…just about anything" x={380} y={560} size={80} rot={-3} at={t.at('anything') - 3} color={pal.subject} />
+      <Note text="…just about anything" x={380} y={560} size={80} rot={-3} at={t.at('people were') - 3} color={pal.subject} />
       {/* eggs, carrots, peas and ham set in a dome: just about anything */}
       <Cut name="tg_aspic_savory" x={1200} y={690} w={520} rot={2} at={t.at('anything') - 1} />
     </AbsoluteFill>
@@ -289,21 +300,26 @@ const Board: React.FC<{t: TL; a: number}> = ({t, a}) => <ChBoard ch={6} at={a + 
 const Body: React.FC = () => {
   const t = makeTimeline(N, 30);
   const at = t.at;
+  // the set-up line of the punchline is read from when its shot starts (that cut is held), and carried over the flash
+  const servants = hold(at('A wobbling') - 1, readEnd(at('and a lot') - 3, 'and a lot of time'));
+  const wobbleRead = readEnd(Math.max(servants, at('A wobbling') - 3), 'a wobbling aspic said:');
   const c = {
     mold: at("Here's a dish") - 1,
-    show: at('a shimmering') - 1,
-    kitchen: at('To make one') - 1,
-    aspic: at('Some were') - 1,
-    servants: at('A wobbling') - 1,
+    show: hold(at('a shimmering') - 1, readEnd(at('gelatin'), 'THE GELATIN MOLD', 7)),
+    kitchen: hold(at('To make one') - 1, readEnd(at('showpiece.') - 3, 'a showpiece.')),
+    aspic: hold(at('Some were') - 1, readEnd(at('and set it') - 3, '5  set it in a copper mold')),
+    servants,
     servantsFlash: at('we have servants') - 1,
-    knox: at('Then came the shortcut') - 1,
-    morph: at('In 1897') - 1,
-    booklet: at('Suddenly') - 1,
+    // the flash holds the punchline (and its set-up, carried over) for their reading time
+    knox: hold(at('Then came the shortcut') - 1, readEnd(at('we have servants') - 3, '“we have servants.”'), wobbleRead),
+    // the second Knox ad lands on "gelatine already" and settles: 3 s in full view
+    morph: hold(at('In 1897') - 1, at('gelatine already') - 2 + 7 + 93),
+    booklet: hold(at('Suddenly') - 1, readEnd(at('and called it') - 3, '= jell-o')),
     mockFlash: at('Mock aspic') - 1,
     mock: at('Mock aspic') + 44,
     perfection: at('Around 1905') - 1,
-    fifties: at('By the 1910s') - 1,
-    ad: at('Like this') - 1,
+    fifties: hold(at('By the 1910s') - 1, readEnd(at('suspended') - 3, '…in gelatin')),
+    ad: hold(at('Like this') - 1, readEnd(at('people were') - 3, '…just about anything')),
     tunaFlash: at('Yes.') - 1,
     board: at('And the companies') - 1,
   };
@@ -313,11 +329,11 @@ const Body: React.FC = () => {
     [c.kitchen, <Kitchen t={t} a={c.kitchen} />],
     [c.aspic, <Aspic t={t} a={c.aspic} />],
     [c.servants, <Servants t={t} a={c.servants} />],
-    [c.servantsFlash, <ServantsFlash t={t} a={c.servantsFlash} />],
+    [c.servantsFlash, <ServantsFlash t={t} a={c.servantsFlash} carry={wobbleRead} />],
     [c.knox, <Knox t={t} a={c.knox} />],
     [c.morph, <Morph t={t} a={c.morph} />],
     [c.booklet, <Booklet t={t} a={c.booklet} />],
-    [c.mockFlash, <CutIn x={1410} y={490} z={1.2}><Mock t={t} a={c.mockFlash} solo /></CutIn>],
+    [c.mockFlash, <><CutIn x={1410} y={490} z={1.2}><Mock t={t} a={c.mockFlash} solo /></CutIn><CarryNote t={t} /></>],
     [c.mock, <Mock t={t} a={c.mock} />],
     [c.perfection, <Perfection t={t} a={c.perfection} />],
     [c.fifties, <Fifties t={t} a={c.fifties} />],

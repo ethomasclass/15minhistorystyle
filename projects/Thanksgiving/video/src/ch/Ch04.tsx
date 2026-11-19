@@ -17,7 +17,8 @@ import {clamp} from '../lib/anim';
 import {Highlight, JF, Loop, Note, useGFrame} from '../kit/Kit';
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
-import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
+import {ChapterShell, chapterFrames, FADE, LEAD, makeTimeline, type Narration, Quote, type TL, useScene} from '../kit/shell';
+import {hold, readEnd, readFrames} from '../lib/timing';
 import {MockTape} from '../kit/tg_mock';
 import {type PlaceholderInfo, TgPrint} from '../kit/tg_placeholder';
 import {ChBoard} from '../kit/tg_board';
@@ -111,7 +112,7 @@ const Recipe: React.FC<{t: TL; a?: number}> = ({t}) => {
       </Sheet>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.6) 100%), linear-gradient(transparent 85%, rgba(0,0,0,0.55) 100%)'}} />
       <div data-tx style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
-        textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>{`${TAG_SIMMONS} · p. 22`}</div>
+        textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>Simmons, American Cookery, 1796 · p. 22</div>
     </AbsoluteFill>
   );
 };
@@ -123,7 +124,7 @@ const Morph: React.FC<{t: TL; a?: number}> = ({t}) => {
       <DarkPaper />
       <FrameSeqOr base="img/flow/m1/m1" n={36} what="Flow M1 · calf's head → turtle-soup tureen (mock morph #1)" x={460} y={140} w={1000} h={560}
         from={t.at('And you cook') + 3} to={t.at('like turtle') + 4} labels={["calf's head", 'turtle tureen']} />
-      <Slip text="more or less" x={1150} y={790} at={t.at('more or less') - 2} rot={-3} size={62} />
+      <Slip text="more or less" x={1150} y={790} at={t.at('until it tastes') - 2} rot={-3} size={62} />
     </AbsoluteFill>
   );
 };
@@ -179,7 +180,7 @@ const Decline: React.FC<{t: TL; a?: number}> = ({t}) => {
           CARIBBEAN GREEN TURTLES<br />ESTIMATED DECLINE, BY THE MID-1900S
         </div>
       )}
-      <Slip text="off the menu" x={140} y={800} at={t.at('disappeared') - 2} rot={-3} size={64} />
+      <Slip text="off the menu" x={140} y={800} at={t.at('Real turtle') - 2} rot={-3} size={64} />
       <div data-tx style={{position: 'absolute', left: 44, top: 1030, fontFamily: JF.mono, fontSize: 18, letterSpacing: 1, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
         textShadow: '0 1px 6px rgba(0,0,0,0.9)'}}>Estimate reported by phys.org (2018) · Oceanic Society</div>
     </AbsoluteFill>
@@ -188,7 +189,7 @@ const Decline: React.FC<{t: TL; a?: number}> = ({t}) => {
 
 const PairLate: React.FC<{t: TL; a?: number}> = ({t}) => {
   return (
-    <Pair mode="mock" fadeAt={t.at('Mock turtle', 2)}>
+    <Pair mode="mock" fadeAt={t.at('Mock turtle', 2) - 7}>
       <Slip text="in cookbooks: 1796" x={1080} y={790} at={t.at('hung around') - 2} rot={-3} size={58} />
       <Slip text="… 1884" x={1560} y={800} at={t.at('generations') - 2} rot={2} size={58} />
     </Pair>
@@ -202,8 +203,9 @@ const Body: React.FC = () => {
   const at = t.at;
   const c = {
     pairEmpty: 0,
-    book: at('Flip') - 1,
-    recipe: at('You take') - 1,
+    // the pair opens the chapter as it fades up: its labels and source line get their reading time first
+    book: hold(at('Flip') - 1, readEnd(at('faked') - 3, 'faked it'), FADE + readFrames('TURTLE · SIMMONS, AMERICAN COOKERY, 1796 · LOC / IA')),
+    recipe: hold(at('You take') - 1, readEnd(at('To dress') - 1, 'To dress a Calve’s Head, Turtle fashion.', 6)),
     morph: at('And you cook') - 1,
     mockFlash: at('Mock turtle') - 1,
     pairMock: at("It's going") - 1,

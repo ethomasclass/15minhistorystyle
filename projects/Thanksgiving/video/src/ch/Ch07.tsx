@@ -1,7 +1,7 @@
 // Chapter 7 · The test kitchens. The 1917 Angelus booklet on a 1910s ad plate (the chapter's one guided pan lands on the recipe as
 // it is said), the cranberry can paid off on "Because it IS the can" (cran frame 6 held, a loupe on the ridges), 1955 in the
-// second person (a kitchen diorama, the notes as your shopping list), a fast 1954/1955 montage of recipe cards dealt by the
-// silhouette hand, the casserole state sheet (casserole -> three cans), the third mock morph with the MOCK tape, and the can
+// second person (a kitchen diorama, the notes as your shopping list), a fast 1954/1955 montage of recipe cards that drop onto
+// the desk on their own (no hands), the casserole state sheet (casserole -> three cans), the third mock morph with the MOCK tape, and the can
 // landing on the collage board. Coral-desk flashes (kit/tg_desk_map): "Because it IS the can" (a cut-in on frame 6, then the
 // ridges loupe on teal) and the MOCK tape cut-in. Scenes are timed to words (script/ch07_test_kitchens.txt); placeholders are listed in PLACEHOLDERS.
 import React from 'react';
@@ -12,13 +12,15 @@ import {Highlight, INK, JF, Loop, Note, Tag, useGFrame, usePal} from '../kit/Kit
 import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {bed} from '../kit/levels';
 import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration, Stamp, type TL, useScene} from '../kit/shell';
+import {hold, readEnd} from '../lib/timing';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
-import {Clip, Cut, Hand, States} from '../kit/tg_cut';
+import {Clip, Cut, States} from '../kit/tg_cut';
+import {DropDeal, type DropDealCard} from '../kit/tg_drop';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
-import {CARD, CORAL, Cran, cranMap, type Deal, HandDeal, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
+import {CARD, CORAL, Cran, cranMap, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
@@ -64,8 +66,8 @@ const Booklet: React.FC<{t: TL; a: number}> = ({t}) => {
       </AbsoluteFill>
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.55) 100%)'}} />
       <Highlight text="1917" x={1000} y={170} size={130} at={t.at('1917,')} seed={71} rot={-2} />
-      <Slip text="Angelus marshmallows" x={1010} y={390} at={t.at('Angelus') - 2} />
-      <Slip text="a recipe booklet" x={1050} y={510} at={t.at('recipe booklet') - 2} rot={2} />
+      <Slip text="Angelus marshmallows" x={1010} y={390} at={t.at('a marshmallow brand') - 2} />
+      <Slip text="a recipe booklet" x={1050} y={510} at={t.at('Angelus put') - 2} rot={2} />
       <Tag text="Angelus Marshmallows recipe booklet, 1917" />
     </AbsoluteFill>
   );
@@ -82,9 +84,9 @@ const Hired: React.FC<{t: TL; a: number}> = ({t}) => (
     </PageScrap>
     <PH {...P.hill} x={1330} y={150} w={440} h={600} />
     <Slip text="the same company made Cracker Jack" x={170} y={850} at={t.at('Cracker') - 2} rot={-2} size={56} />
-    <Note text="Janet McKenzie Hill" x={690} y={260} size={56} rot={-3} at={t.at('Janet') - 2} color="#ffffff" />
+    <Note text="Janet McKenzie Hill" x={690} y={260} size={56} rot={-3} at={t.at('teacher,') - 2} color="#ffffff" />
     <Note text="a well-known cooking teacher" x={710} y={380} size={44} rot={-3} at={t.at('well-known') - 2} />
-    <Note text="writes the recipes" x={730} y={480} size={44} rot={-3} at={t.at('write the recipes') - 2} />
+    <Note text="writes the recipes" x={730} y={480} size={44} rot={-3} at={t.at('Janet') - 2} />
     <Tag text="Janet McKenzie Hill, portrait" />
   </AbsoluteFill>
 );
@@ -140,7 +142,7 @@ const Motive: React.FC<{t: TL; a: number}> = ({t}) => {
       <Highlight text="THE MOTIVE" x={130} y={150} size={110} at={t.at('motive.')} seed={72} rot={-2} />
       <Note text="sell marshmallows" x={160} y={340} size={74} rot={-3} at={t.at('sell marshmallows') - 2} color={pal.subject} />
       <Note text="a hundred years later..." x={160} y={560} size={52} rot={-3} at={t.at('a hundred years') - 2} color="#ffffff" />
-      <Note text="...it's on your table" x={220} y={680} size={62} rot={-3} at={t.at('on your table') - 2} />
+      <Note text="...it's on your table" x={220} y={680} size={62} rot={-3} at={t.at('that booklet') - 2} />
     </AbsoluteFill>
   );
 };
@@ -152,7 +154,7 @@ const Berries: React.FC<{t: TL; a: number}> = ({t}) => (
     <TgPrint src="img/arch/fsa-men-scooping-cranberries-nj-1938.jpg" x={880} y={150} w={920} h={640} at={-999} rot={2} pos="50% 60%" />
     <Highlight text="CRANBERRIES" x={120} y={140} size={96} at={t.at('cranberry sauce.')} seed={73} rot={-2} />
     <Note text="an American fruit" x={150} y={330} size={60} rot={-3} at={t.at('American fruit') - 2} />
-    <Note text="sauce: for centuries" x={170} y={460} size={52} rot={-3} at={t.at('centuries.') - 2} color="#ffffff" />
+    <Note text="sauce: for centuries" x={170} y={460} size={52} rot={-3} at={t.at('people have been') - 2} color="#ffffff" />
     <Tag text="Men scooping cranberries, Burlington County, N.J., 1938 · Arthur Rothstein, FSA · Library of Congress" />
   </AbsoluteFill>
 );
@@ -163,7 +165,7 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
   const pal = usePal();
   const drawAt = t.at('Fresh berries') - 2;
   const fewAt = t.at('few weeks');
-  const canAt = t.at('in a can.');
+  const canAt = t.at('cook them');
   const mk = useMarks();
   return (
     <AbsoluteFill>
@@ -189,7 +191,7 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
         </div>
       )}
       <Note text="his fix: cook them down," x={150} y={720} size={50} rot={-2} at={t.at('His fix:') - 2} />
-      <Note text="put them in a can" x={190} y={830} size={62} rot={-3} at={t.at('in a can.') - 2} color={pal.subject} />
+      <Note text="put them in a can" x={190} y={830} size={62} rot={-3} at={t.at('cook them') - 2} color={pal.subject} />
       <Tag text="Marcus Urann · portrait" />
     </AbsoluteFill>
   );
@@ -203,7 +205,7 @@ const Ocean: React.FC<{t: TL; a: number}> = ({t}) => (
       seed="emp" filter={COLOUR_DOC} />
     <Highlight text="1941" x={120} y={120} size={120} at={t.at('1941,')} seed={75} rot={-2} />
     <Note text="his growers' cooperative" x={140} y={300} size={52} rot={-3} at={t.at("growers'") - 2} color="#ffffff" />
-    <Note text="takes the brand national" x={170} y={410} size={52} rot={-3} at={t.at('brand national.') - 2} />
+    <Note text="takes the brand national" x={170} y={410} size={52} rot={-3} at={t.at('cooperative took') - 2} />
     <Highlight text="OCEAN SPRAY" x={120} y={590} size={104} at={t.at('Ocean Spray.')} seed={76} rot={-3} />
     <Tag text="Not Ocean Spray: Empress brand cranberry sauce, trademark registered 1910 · Library of Congress" />
   </AbsoluteFill>
@@ -242,8 +244,7 @@ const Payoff: React.FC<{t: TL; a: number}> = ({t}) => {
       <Cran n={6} {...PAY} />
       <Loupe layer={layer} cx={lx} cy={ly} r={170} zoom={2.6} to={[430, 360]} at={t.at('Those ridges') + 2} bow={50} />
       <Loop cx={kx} cy={ky} rx={110} ry={80} at={t.at("can's ridges.") + 2} seed={9} tilt={-20} />
-      <Hand name="tg_hand_point" x={kx + 150} y={ky + 10} w={620} at={t.at("can's ridges.") + 2} out={t.at("can's ridges.") + 40} />
-      <Note text="same ridges." x={190} y={640} size={56} rot={-3} at={t.at("can's ridges.") + 6} color="#ffffff" />
+      <Note text="same ridges." x={190} y={640} size={56} rot={-3} at={t.at('Those ridges') + 6} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -254,7 +255,7 @@ const Hosting: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <Clip name="fifties_kitchen" at={a} />
     <Highlight text="1955" x={1400} y={100} size={120} at={t.at("It's 1955.")} seed={78} rot={-2} />
-    <Slip text="you're hosting." x={1380} y={290} at={t.at("You're hosting.") - 2} size={60} />
+    <Slip text="you're hosting." x={1380} y={290} at={t.at("It's 1955.") - 2} size={60} />
     <Slip text="the in-laws: at four" x={1330} y={395} at={t.at('in-laws') - 2} size={54} rot={2} />
     <Tag text="Drawn scene" />
   </AbsoluteFill>
@@ -264,19 +265,21 @@ const Hosting: React.FC<{t: TL; a: number}> = ({t, a}) => (
 const Pantry: React.FC<{t: TL; a: number; from: number}> = ({t, from}) => (
   <AbsoluteFill>
     <Clip name="fifties_kitchen" at={from} />
+    {useGFrame() < readEnd(t.at('in-laws') - 2, 'the in-laws: at four', 13) && <Slip text="the in-laws: at four" x={1330} y={395} at={-999} size={54} rot={2} />}
+    {useGFrame() < readEnd(t.at("It's 1955.") - 2, "you're hosting.", 13) && <Slip text="you're hosting." x={1380} y={290} at={-999} size={60} />}
     {/* what you've got, as the voice lists it */}
     <Slip text="a new refrigerator" x={140} y={110} at={t.at('refrigerator,') - 2} size={52} rot={-2} />
     <Slip text="a pantry full of cans" x={170} y={215} at={t.at('pantry full') - 2} size={52} rot={1.5} />
     <Slip text="the magazine says:" x={140} y={320} at={t.at('magazine') - 2} size={52} rot={-2} />
-    <Slip text="all in half an hour" x={180} y={425} at={t.at('half an hour.') - 2} size={56} rot={2} coral />
+    <Slip text="all in half an hour" x={180} y={425} at={t.at('do it all') - 2} size={56} rot={2} coral />
     <Tag text="Drawn scene" />
   </AbsoluteFill>
 );
 
 // ------------------------------------------------------------------ the montage
-/** 1954, 1955: the silhouette hand deals one recipe card per date, fast. */
+/** 1954, 1955: one recipe card per date drops onto the desk on its own (no hands), fast. */
 const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
-  const deals: Deal[] = [
+  const deals: DropDealCard[] = [
     {at: t.at('1954,'), x: 150, y: 150, rot: -4, card: <RecipeCard kicker="1954 · SWIFT AND COMPANY" title="Butterball turkey" lines={['on the market']} />},
     {at: t.at('In 1955,') + 2, x: 720, y: 330, rot: 3, card: <RecipeCard kicker="1955 · NEW JERSEY" title="Campbell's test kitchen" lines={['home economists']} />},
     {at: t.at('Dorcas'), x: 1290, y: 160, rot: -2, card: (
@@ -288,8 +291,8 @@ const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <HandDeal deals={deals} />
-      <Note text="things people already have" x={170} y={800} size={56} rot={-3} at={t.at('already have') - 2} />
+      <DropDeal deals={deals} />
+      <Note text="things people already have" x={170} y={800} size={56} rot={-3} at={t.at('recipe made') - 2} />
       <Tag text="Dorcas Reilly · Campbell Soup Company photo" />
     </AbsoluteFill>
   );
@@ -298,7 +301,7 @@ const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
 // ------------------------------------------------------------------ the casserole
 /** The casserole on the 1950s kitchen table (the 1950s ad plate, full frame, colour). Three registered state stills swapped like
  *  stop-motion: the full dish, half spooned out ("Green beans."), the empty dish ("cream of mushroom"); then a hard cut from the
- *  empty dish to what it was made of, three cans, a slip on each (the pinching hand drops the last); MIX. BAKE. DONE. on the
+ *  empty dish to what it was made of, three cans, a slip on each (the last lands on its own); MIX. BAKE. DONE. on the
  *  plate's blank panel; and the full dish back on its name. */
 const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
@@ -316,7 +319,6 @@ const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
           <Slip text="green beans" x={can(161, 303)[0] - 110} y={can(161, 303)[1] - 20} at={cans + 2} size={46} rot={-3} />
           <Slip text="cream of mushroom soup" x={can(565, 357)[0] - 150} y={can(565, 357)[1] + 60} at={cans + 5} size={44} rot={2} />
           <Slip text="fried onions" x={can(971, 439)[0] - 90} y={can(971, 439)[1] - 10} at={cans + 8} size={46} rot={-2} coral />
-          <Hand name="tg_hand_pinch" x={can(971, 439)[0] + 130} y={can(971, 439)[1] + 10} w={640} at={cans + 8} out={cans + 20} />
         </>
       )}
       <States srcs={['s2_casserole_a']} at={[back]} x={150} y={370} w={1040} />
@@ -328,24 +330,36 @@ const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
+/** "store-bought," over the MOCK flash, where MockHomemade's own copy will sit after it (the flash's left side is empty desk). */
+const StoreBought: React.FC<{t: TL}> = ({t}) => <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />;
+
+/** The question carried over the payoff's cut-in until it has been read: the answer arrives beside it. */
+const QuestionCarry: React.FC<{t: TL}> = ({t}) => {
+  const g = useGFrame();
+  const pal = usePal();
+  return (
+    <>
+      {g < readEnd(t.at('Why is') - 2, 'why is it shaped') && <Note text="why is it shaped" x={150} y={300} size={70} rot={-3} at={-999} />}
+      {g < readEnd(t.at('like a can?') - 2, 'like a can?') && <Note text="like a can?" x={200} y={430} size={70} rot={-3} at={-999} color={pal.subject} />}
+    </>
+  );
+};
+
 /** (`solo`: the picture and the tape only, for the MOCK flash's cut-in.) Twenty million a year, then the third mock, made in code
- *  from stills: the homemade pie sits on its cloth; the silhouette hand reaches in and sets a can down in its place (the still swaps on
- *  the drawing the can lands), and the MOCK tape lands on "Mock". */
-const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean}> = ({t, a, solo}) => {
+ *  from stills: the homemade pie sits on its cloth; the can simply swaps in on the same cloth (no hands), and the MOCK tape lands on "Mock". */
+const MockHomemade: React.FC<{t: TL; a: number; solo?: boolean; after?: boolean}> = ({t, a, solo, after}) => {
   const pal = usePal();
   const mockAt = t.at('Mock homemade.');
   const swap = Math.max(a + 14, mockAt - 12);
   return (
     <AbsoluteFill>
       <DarkPaper />
-      {!solo && <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />}
-      {!solo && <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('every Thanksgiving.') - 2} />}
-      {!solo && <Note text="(Campbell's own count)" x={150} y={460} size={40} rot={-3} at={t.at('every Thanksgiving.') + 8} color="#ffffff" />}
-      {/* two registered stills on the same checked cloth: the lattice pie and its rolling pin, then a tin can; the hand sets the can
-          down (it arrives on the drawing the picture swaps) and leaves */}
+      {!solo && !after && <Stamp text="20 MILLION" x={120} y={170} size={140} at={t.at('twenty million')} rot={-3} />}
+      {!solo && !after && <Note text="casseroles, every Thanksgiving" x={130} y={360} size={46} rot={-3} at={t.at('twenty million') - 2} />}
+      {/* two registered stills on the same checked cloth: the lattice pie and its rolling pin, then a tin can; the can swaps in */}
       <States srcs={['m3_homemade_pie', 'm3_can']} at={[solo ? -999 : a + 2, swap]} x={700} y={80} w={1376} />
-      <Hand name="tg_hand_can" x={1405} y={560} w={900} at={swap} out={swap + 8} />
       <MockTape x={1150} y={400} at={mockAt} size={140} />
+      {/* (in the flash this one is drawn in screen space, outside the cut-in: see StoreBought) */}
       {!solo && <Note text="store-bought," x={150} y={640} size={56} rot={-3} at={t.at('Store-bought,') - 2} color="#ffffff" />}
       {!solo && <Note text="dressed up as Grandma's" x={190} y={760} size={64} rot={-3} at={t.at('dressed up') - 2} color={pal.subject} />}
     </AbsoluteFill>
@@ -368,23 +382,24 @@ const Body: React.FC = () => {
   // cut 1 frame before the word that starts the new idea (beatscope reads this object)
   const c = {
     booklet: 0,
-    hired: at('The company') - 1,
-    recipe: at('And one of them') - 1,
+    hired: hold(at('The company') - 1, readEnd(at('Angelus put') - 2, 'a recipe booklet', 13)),
+    recipe: hold(at('And one of them') - 1, readEnd(at('Janet') - 2, 'writes the recipes')),
     motive: at('But notice') - 1,
-    berries: at("Then there's") - 1,
-    urann: at('But in 1912,') - 1,
-    ocean: at('In 1941,') - 1,
-    question: at('And that answers') - 1,
+    berries: hold(at("Then there's") - 1, readEnd(at('that booklet') - 2, "...it's on your table")),
+    urann: hold(at('But in 1912,') - 1, readEnd(at('people have been') - 2, 'sauce: for centuries')),
+    ocean: hold(at('In 1941,') - 1, readEnd(at('cook them') - 2, 'put them in a can'), readEnd(at('cook them'), 'IN A CAN: ALL 52 WEEKS', 2)),
+    // Ocean Spray holds through "And that answers one of our questions." (its name lands late in the sentence)
+    question: hold(at('And that answers') - 1, readEnd(at('Ocean Spray.'), 'OCEAN SPRAY', 7)),
     payoff: at('Because it IS') - 1,
     ridges: at('Those ridges') - 1,
-    hosting: at('Now jump') - 1,
+    hosting: hold(at('Now jump') - 1, readEnd(at('Those ridges') + 6, 'same ridges.')),
     pantry: at("You've got") - 1,
-    montage: at('In 1954,') - 1,
+    montage: hold(at('In 1954,') - 1, readEnd(at('do it all') - 2, 'all in half an hour', 13)),
     casserole: at('Green beans.') - 1,
-    mock: at("Campbell's says") - 1,
+    mock: hold(at("Campbell's says") - 1, readEnd(at('Green bean casserole.') - 1, 'GREEN BEAN CASSEROLE', 8)),
     mockFlash: at('Mock homemade.') - 1,
     mockAfter: at('dressed up') - 1,
-    board: at('And then they') - 1,
+    board: hold(at('And then they') - 1, readEnd(at('dressed up') - 2, "dressed up as Grandma's"), readEnd(at('Store-bought,') - 2, 'store-bought,')),
   };
   const scene = useScene([
     [c.booklet, <Booklet t={t} a={c.booklet} />],
@@ -395,21 +410,21 @@ const Body: React.FC = () => {
     [c.urann, <Urann t={t} a={c.urann} />],
     [c.ocean, <Ocean t={t} a={c.ocean} />],
     [c.question, <Question t={t} a={c.question} />],
-    [c.payoff, <CutIn x={PAY.cx - 60} y={640} z={1.25}><Payoff t={t} a={c.payoff} /></CutIn>],
+    [c.payoff, <><CutIn x={PAY.cx - 60} y={640} z={1.25}><Payoff t={t} a={c.payoff} /></CutIn><QuestionCarry t={t} /></>],
     [c.ridges, <Payoff t={t} a={c.ridges} />],
     [c.hosting, <Hosting t={t} a={c.hosting} />],
     [c.pantry, <Pantry t={t} a={c.pantry} from={c.hosting} />],
     [c.montage, <Montage t={t} a={c.montage} />],
     [c.casserole, <Casserole t={t} a={c.casserole} />],
     [c.mock, <MockHomemade t={t} a={c.mock} />],
-    [c.mockFlash, <CutIn x={1400} y={470} z={1.3}><MockHomemade t={t} a={c.mock} solo /></CutIn>],
-    [c.mockAfter, <MockHomemade t={t} a={c.mock} />],
+    [c.mockFlash, <><CutIn x={1400} y={470} z={1.3}><MockHomemade t={t} a={c.mock} solo /></CutIn><StoreBought t={t} /></>],
+    [c.mockAfter, <MockHomemade t={t} a={c.mock} after />],
     [c.board, <Board t={t} a={c.board} />],
   ]);
   // sound lists, kept next to the scenes: silent cuts; a stamp per title, stamp and tape; the near-silent marker per note; a tick per card
   const stamps = ['1917,', 'motive.', 'cranberry sauce.', '1912,', '1941,', 'Ocean Spray.', "It's 1955.", 'Mix,', 'bake,', 'done.', 'Green bean casserole.', 'twenty million', 'Mock homemade.'];
-  const notes = ['Janet', 'well-known', 'write the recipes', 'sell marshmallows', 'a hundred years', 'on your table', 'American fruit', 'centuries.', 'Marcus', 'His fix:', 'in a can.',
-    "growers'", 'brand national.', 'answers', 'Why is', 'like a can?', 'refrigerator,', 'pantry full', 'magazine', 'half an hour.', 'already have', 'every Thanksgiving.', 'Store-bought,', 'dressed up'];
+  const notes = ['teacher,', 'well-known', 'Janet', 'sell marshmallows', 'a hundred years', 'that booklet', 'American fruit', 'people have been', 'Marcus', 'His fix:', 'cook them',
+    "growers'", 'cooperative took', 'answers', 'Why is', 'like a can?', 'refrigerator,', 'pantry full', 'magazine', 'do it all', 'recipe made', 'Store-bought,', 'dressed up'];
   const ticks = [at('1954,'), at('In 1955,') + 2, at('Dorcas'), at('Fresh berries'), at('Those ridges') + 10];
   return (
     <>

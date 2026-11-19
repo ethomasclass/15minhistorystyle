@@ -152,8 +152,9 @@ export const MarkSnap: React.FC = () => {
 /** The logo assembles at 1.4x the brand intro's speed. */
 const INTRO_SPEED = 1.4;
 /** The Gilded Age card runs 4.2 s, which leaves its title 1.25 s on screen. This video's title is a full phrase and a subtitle,
- *  so the card holds 0.8 s longer (the title reads for about 2 s). Set to 4.2 for the Gilded Age's exact length. */
-export const TITLE_SECONDS = 5.0;
+ *  so the card holds longer: the reading-time rule (Nov 19: every text fully readable for at least 2.5 s, plus 0.25 s a word
+ *  beyond five) gives the six-word subtitle 2.75 s once it has faded in, so the card runs 6.6 s. 4.2 is the Gilded Age's length. */
+export const TITLE_SECONDS = 6.6;
 export const TITLE_INTRO_FRAMES = Math.round(TITLE_SECONDS * 30);
 
 /** The channel intro and the title in one card: the logo assembles centred, locks by ~2.8 s, lifts, and the title lands under it. Silent. */
@@ -176,8 +177,8 @@ export const TitleIntro: React.FC<{title: string; subtitle: string; line?: strin
           </div>
         )}
         <div data-tx style={{position: 'absolute', left: 0, top: 720, width: 1920, textAlign: 'center', fontFamily: JF.display, fontSize: Math.min(84, Math.floor(2900 / subtitle.length)), color: CREAM,
-          opacity: fin(T, 3.25, 0.3)}}>{subtitle}</div>
-        {line && <Mono text={line} size={28} color={TEAL} ls={6} style={{left: 0, top: 860, width: 1920, textAlign: 'center', opacity: fin(T, 3.4, 0.3)}} />}
+          opacity: fin(T, 3.1, 0.3)}}>{subtitle}</div>
+        {line && <Mono text={line} size={28} color={TEAL} ls={6} style={{left: 0, top: 860, width: 1920, textAlign: 'center', opacity: fin(T, 3.2, 0.3)}} />}
       </AbsoluteFill>
     </AbsoluteFill>
   );

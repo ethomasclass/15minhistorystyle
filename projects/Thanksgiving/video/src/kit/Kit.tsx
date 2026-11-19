@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {AbsoluteFill, continueRender, delayRender, getInputProps, Img, interpolate, random, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {clamp} from '../lib/anim';
 import '../lib/theme'; // loads the vendored fonts
+import {AuditProbe} from './tg_audit';
 
 export const Y = '#FFE11A'; // highlighter yellow
 export const ORANGE = '#F28C28';
@@ -74,7 +75,7 @@ export const JFonts: React.FC<{children: React.ReactNode}> = ({children}) => {
   useEffect(() => {
     Promise.all(FACES.map((f) => document.fonts.load(f))).then(() => continueRender(h));
   }, [h]);
-  return <>{children}{getInputProps().probe ? <TextProbe /> : null}</>;
+  return <>{children}{getInputProps().probe ? <TextProbe /> : null}{getInputProps().audit ? <AuditProbe /> : null}</>;
 };
 
 /** Render-time check (tools/probe_text.mjs): logs every piece of text whose box crosses the frame edge (or the safe margin). */

@@ -23,7 +23,7 @@ def at(phrase, nth=1):
     return None
 # cut keys: key: at('phrase'[, n]) - 1
 cuts = {}
-for m in re.finditer(r"(\w+):\s*at\(\s*(['\"])(.+?)\2\s*(?:,\s*(\d+))?\)\s*-\s*1", src):
+for m in re.finditer(r"(\w+):\s*(?:Math\.max\()?(?:hold\()?at\(\s*(['\"])(.+?)\2\s*(?:,\s*(\d+))?\)\s*-\s*1", src):
     cuts[m.group(1)] = at(m.group(3), int(m.group(4) or 1))
 order = sorted((v, k) for k, v in cuts.items() if v is not None)
 nxt = {k: (order[i + 1][0] if i + 1 < len(order) else 10**9) for i, (v, k) in enumerate(order)}

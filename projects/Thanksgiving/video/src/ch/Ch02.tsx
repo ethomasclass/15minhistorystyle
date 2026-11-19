@@ -11,6 +11,7 @@ import {DarkPaper, Sfx, WRITE} from '../kit/common';
 import {DeskScene} from '../kit/tg_desk';
 import {NoPhoto} from '../kit/print';
 import {ChapterShell, chapterFrames, LEAD, makeTimeline, type Narration, type TL, useScene} from '../kit/shell';
+import {hold, readEnd} from '../lib/timing';
 import {bed} from '../kit/levels';
 import {Slip, Swipe, type Box} from '../kit/vox';
 import {ChBoard} from '../kit/tg_board';
@@ -76,10 +77,13 @@ const Half: React.FC<S> = ({t, a}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
+      {/* carried over the hard cut from Plymouth (same place) until each has had its reading time */}
+      {g < readEnd(t.at('first year') - 3, 'first year: survived', 13) && <Slip text="first year: survived" x={150} y={280} size={56} rot={-3} at={-999} />}
+      {g < readEnd(t.at('Barely') - 2, 'barely.', 13) && <Slip text="barely." x={170} y={390} size={60} rot={-2} at={-999} coral />}
       <Note text="everyone who came on the mayflower" x={540} y={170} size={52} rot={-2} at={t.at('people who came') - 3} color="#ffffff" />
       <Tally n={102} cols={17} x={580} y={330} gap={48} r={13} at={a + 2} per={0.12} color={(i) => (g >= dead && gone(i) ? 'rgba(237,231,220,0.16)' : pal.mark)} />
       <Note text="about half: dead" x={600} y={660} size={64} rot={-3} at={dead - 2} color="#ffffff" />
-      <Note text="now the harvest is in" x={900} y={800} size={60} rot={-3} at={t.at('harvest') - 3} />
+      <Note text="now the harvest is in" x={900} y={800} size={60} rot={-3} at={t.at('Now the harvest') - 3} />
     </AbsoluteFill>
   );
 };
@@ -90,7 +94,7 @@ const OneLetter: React.FC<S> = ({t, a}) => (
     <DarkPaper />
     <PrintSlot src={LETTER_P60} x={1080} y={110} w={560} h={788} rot={2} at={a + 1} fit="cover" pos="50% 0%" tag={TAG_MOURT} />
     <Note text="how do we know what they ate?" x={140} y={260} size={52} rot={-3} at={t.at('how do we know') - 3} color="#ffffff" />
-    <Highlight text="ONE LETTER" x={140} y={420} size={120} at={t.at('one letter')} seed={25} rot={-2} />
+    <Highlight text="ONE LETTER" x={140} y={420} size={120} at={t.at('Mostly from')} seed={25} rot={-2} />
   </AbsoluteFill>
 );
 
@@ -101,7 +105,7 @@ const Winslow: React.FC<S> = ({t, a}) => (
     <PrintSlot src={WINSLOW} x={1180} y={230} w={470} h={570} rot={2} at={a + 1} fit="cover" pos="50% 30%" />
     <Highlight text="EDWARD WINSLOW" x={120} y={130} size={92} at={t.at('Edward Winslow')} seed={27} rot={-2} />
     <Note text="wrote it home, december 1621" x={150} y={320} size={54} rot={-3} at={t.at('December') - 3} />
-    <Note text="the whole meal: a few short lines" x={150} y={460} size={54} rot={-3} at={t.at('few short lines') - 3} color="#ffffff" />
+    <Note text="the whole meal: a few short lines" x={150} y={460} size={54} rot={-3} at={t.at('whole account') - 3} color="#ffffff" />
     <Tag text="Edward Winslow, portrait, 1651 · Pilgrim Hall Museum, via Wikimedia Commons" />
   </AbsoluteFill>
 );
@@ -125,7 +129,7 @@ const Letter: React.FC<S> = ({t, a}) => {
         <Swipe lines={WEEK} from={t.at('enough birds')} to={t.end('almost a week')} seed="week" />
       </PageRead>
       <Slip text="fowling: hunting birds" x={1180} y={150} size={54} rot={-3} at={land + 4} />
-      <Slip text="almost a week of birds" x={1180} y={860} size={54} rot={-2} at={t.at('almost a week') - 2} />
+      <Slip text="almost a week of birds" x={1180} y={860} size={54} rot={-2} at={t.at('enough birds') - 2} />
       <TagOn text="Edward Winslow, letter of 11 Dec. 1621 · Mourt's Relation, London, 1622, p. 61 · BPL / Internet Archive" />
     </AbsoluteFill>
   );
@@ -142,7 +146,7 @@ const Massasoit: React.FC<S> = ({t, a}) => {
       <Tally n={51} cols={9} x={190} y={440} gap={40} r={12} at={a + 3} per={0.05} color={() => pal.mark} />
       <Note text="the colonists (about 50)" x={160} y={720} size={44} rot={-2} at={a + 6} color="#ffffff" />
       <Tally n={90} cols={15} x={840} y={440} gap={40} r={12} at={t.at('ninety men')} per={0.12} color={() => pal.subject} />
-      <Note text="about 90 men" x={860} y={720} size={62} rot={-3} at={t.at('ninety men') - 2} color={pal.subject} />
+      <Note text="about 90 men" x={860} y={720} size={62} rot={-3} at={t.at('arrived with') - 2} color={pal.subject} />
       <NoPhoto text="Massasoit (Ousamequin), Wampanoag · no portrait survives" at={t.at('Massasoit') + 6} y={900} x={160} />
     </AbsoluteFill>
   );
@@ -154,11 +158,10 @@ const Deer: React.FC<S> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <Highlight text="FIVE DEER" x={130} y={110} size={110} at={five} seed={31} rot={-2} />
+      <Highlight text="FIVE DEER" x={130} y={110} size={110} at={t.at('came back with')} seed={31} rot={-2} />
       {[0, 1, 2, 3, 4].map((i) => (
         <PropSlot key={i} name="tg_deer" x={150 + i * 330} y={400 + (i % 2) * 40} w={300} h={250} rot={i % 2 ? 2 : -2} at={five - 6 + i * 4} note="one deer" />
       ))}
-      <Note text="a gift from the wampanoag" x={560} y={800} size={56} rot={-3} at={five + 18} color="#ffffff" />
     </AbsoluteFill>
   );
 };
@@ -198,7 +201,7 @@ const Alliance: React.FC<S> = ({t}) => {
       <Strike x1={720} y1={176} x2={1210} y2={166} at={t.at('by the way')} bow={6} />
       <Highlight text="ALLIANCE" x={690} y={400} size={110} at={t.at('alliance')} seed={37} rot={-2} />
       <Note text="spring 1621" x={800} y={560} size={56} rot={-3} at={t.at('that spring') - 3} />
-      <Highlight text="DIPLOMACY," after="WITH FOOD." x={260} y={760} size={100} at={t.at('diplomacy')} seed={39} rot={-2} />
+      <Highlight text="DIPLOMACY," after="WITH FOOD." x={260} y={760} size={100} at={t.at('this was diplomacy')} seed={39} rot={-2} />
     </AbsoluteFill>
   );
 };
@@ -275,16 +278,16 @@ const Body: React.FC = () => {
     before: at('To understand') - 1,
     plymouth: at('Plymouth') - 1,
     half: at('About half') - 1,
-    letter1: at('So how do we know') - 1,
-    winslow: at('Edward Winslow') - 1,
-    read: at('Four men') - 1,
+    letter1: hold(at('So how do we know') - 1, readEnd(at('Now the harvest') - 3, 'now the harvest is in')),
+    winslow: hold(at('Edward Winslow') - 1, readEnd(at('Mostly from'), 'ONE LETTER', 7)),
+    read: hold(at('Four men') - 1, readEnd(at('whole account') - 3, 'the whole meal: a few short lines')),
     massasoit: at('Then Massasoit') - 1,
-    deer: at('They went out') - 1,
-    translation: at('Translation') - 1,
-    alliance: at("Massasoit wasn't") - 1,
-    notthere: at("What wasn't there") - 1,
-    forgot: at("And here's the strangest") - 1,
-    board: at('But when Americans') - 1,
+    deer: hold(at('They went out') - 1, readEnd(at('arrived with') - 2, 'about 90 men')),
+    translation: hold(at('Translation') - 1, readEnd(at('came back with'), 'FIVE DEER', 7)),
+    alliance: hold(at("Massasoit wasn't") - 1, readEnd(at('A lot of venison') - 3, 'a lot of venison.')),
+    notthere: hold(at("What wasn't there") - 1, readEnd(at('this was diplomacy'), 'WITH FOOD.', 10)),
+    forgot: hold(at("And here's the strangest") - 1, readEnd(at('No cranberry') - 2, 'cranberry sauce')),
+    board: hold(at('But when Americans') - 1, readEnd(at('nobody remembered') - 3, 'almost nobody remembered it')),
   };
   const cuts: [number, React.ReactNode][] = [
     [0, <Before t={t} a={c.before} />],
