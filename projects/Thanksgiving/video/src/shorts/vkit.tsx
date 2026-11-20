@@ -18,6 +18,7 @@ import {SUBTITLE} from '../project';
 import w01 from '../../public/audio/ch01_cold_open.words.json';
 import w07 from '../../public/audio/ch07_test_kitchens.words.json';
 import w08 from '../../public/audio/ch08_turkey.words.json';
+import ws3 from '../../public/audio/short3_turtle.words.json';
 
 export const FPS = 30;
 export const W = 1080;
@@ -34,6 +35,8 @@ const CH: Record<string, {n: Narration; wav: string}> = {
   ch01: {n: w01 as Narration, wav: 'audio/ch01_cold_open.wav'},
   ch07: {n: w07 as Narration, wav: 'audio/ch07_test_kitchens.wav'},
   ch08: {n: w08 as Narration, wav: 'audio/ch08_turkey.wav'},
+  /** Short 3's own voiced narration (re-ordered with build() so the quote comes first) */
+  short3: {n: ws3 as Narration, wav: 'audio/short3_turtle.wav'},
 };
 
 /** A spoken line taken from a chapter: from the phrase `first` to the end of the phrase `last`. `pre`: extra air before it (s). */

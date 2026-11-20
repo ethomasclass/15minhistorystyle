@@ -1,8 +1,9 @@
-// Short 2 · "The Thanksgiving turkey was redesigned." (native 1080x1920). Opens on the end state of the inflating turkey (the heavy
-// white bird on its scale) under the cover line, then splices chapter 8: the GMO myth, pick / breed / repeat (rows of birds that get
-// bigger each generation), the 1950s white feathers, about thirteen pounds in the 1930s and over thirty today (the dial and the
-// counter stacked top-left while the body inflates over the same thin legs), too top-heavy, artificial insemination for nearly
-// every one, and "Happy Thanksgiving." on a coral flash. The end card sits over the opening picture, so the replay loops.
+// Short 2 · "This turkey can't mate on its own." (native 1080x1920). Opens on the hook: the heavy white bird tipped forward on its
+// scale, the counter at 30+, under the cover line (frame 0, also VShort2Cover), while "It worked so well that the birds got too
+// top-heavy to mate on their own." and "So nearly every one of them now comes from artificial insemination." play; then chapter 8
+// in order: the GMO myth, pick / breed / repeat, the 1950s white feathers, about thirteen pounds in the 1930s and over thirty today,
+// "The males are too heavy. The shape is wrong." (the mating lines are not repeated), and "Happy Thanksgiving." on a coral flash.
+// The end card sits over the cover picture, so the replay loops.
 // The turkey rig is kit/tg_turkey.tsx, re-laid out for portrait: the bird large and mirrored to face right (its head clears the
 // cover type on the left; the tail leaves the top-left free for the dial and counter).
 import React from 'react';
@@ -20,12 +21,16 @@ import {Print} from '../kit/print';
 import {build, type Built, Mode, OUTRO, PTag, type Seg, type ShortDef, storyFrames, VShell} from './vkit';
 
 /** The spliced lines (phrases as in script/ch08_turkey.txt). */
+/** The hook first (too top-heavy to mate; artificial insemination), then the story in order; the mating lines are not repeated
+ *  later: after "over thirty." only "The males are too heavy. The shape is wrong." comes back, as the answer. */
 export const SEGS2: Seg[] = [
+  {ch: 'ch08', first: 'It worked so', last: 'their own.'},
+  {ch: 'ch08', first: 'So nearly', last: 'artificial insemination.'},
   {ch: 'ch08', first: 'You may have', last: 'in a lab.'},
   {ch: 'ch08', first: 'They did it', last: 'and repeat.'},
   {ch: 'ch08', first: 'Then in the 1950s,', last: 'white ones.'},
   {ch: 'ch08', first: 'In the 1930s,', last: 'over thirty.'},
-  {ch: 'ch08', first: 'It worked so', last: 'artificial insemination.'},
+  {ch: 'ch08', first: 'The males are', last: 'is wrong.'},
   {ch: 'ch08', first: 'Happy Thanksgiving.', last: 'Happy Thanksgiving.'},
 ];
 
@@ -65,31 +70,47 @@ const TSet: React.FC<{b: TurkeyBeats; cam?: Cam; dial?: boolean; children?: Reac
   </AbsoluteFill>
 );
 
-/** The finished bird: white, the heavy body (the counter's 30+), standing level. The cover, the flash and the end card. */
+/** The finished bird: white, the heavy body (the counter's 30+), standing level. The flash. */
 const DONE: TurkeyBeats = {swapAt: -200, w13At: -200, grow: [-200, -199]};
+/** The cover's bird (frame 0, the hook, the end card): the same, already tipped forward on its thin legs and rocking on its toes. */
+const TIPPED: TurkeyBeats = {...DONE, tipAt: -200, tipDeg: 17, teeter: true};
+/** The cover's framing: lower again, so the bird's head clears the three lines of type. */
+const COVER_CAM: Cam = {x: 540, y: 690, z: 1};
+/** The cover's counter: 30+ LB, over the bird's back (under the type, left of the head). */
+const COVER_COUNTER: [number, number] = [380, 715];
 /** The finished bird's framing: 190 px lower than the story shots, so its back clears the three lines of cover type. */
 const DONE_CAM: Cam = {x: 540, y: 770, z: 1};
 
-/** Frame 0: the cover, fully drawn from the first frame (the corner wordmark comes from the shell). */
+/** The cover picture (also the end card's): the heavy white bird tipping forward on its scale, the counter at 30+. */
+const CoverPicture: React.FC = () => (
+  <TSet b={TIPPED} cam={COVER_CAM}>
+    <Counter x={COVER_COUNTER[0]} y={COVER_COUNTER[1]} b={TIPPED} size={96} />
+  </TSet>
+);
+
+/** Frame 0: the cover, fully drawn from the first frame (the corner wordmark comes from the shell); held to "So nearly". */
 const Cover: React.FC = () => (
   <Mode m="teal">
-    <TSet b={DONE} cam={DONE_CAM}>
-      <Highlight text="THIS TURKEY" x={60} y={180} size={112} at={-30} seed={31} rot={-3} />
-      <Highlight text="CAN'T MATE" x={90} y={330} size={112} at={-30} seed={32} rot={-2} />
-      <Highlight text="ON ITS OWN" x={60} y={480} size={112} at={-30} seed={33} rot={-3} />
-    </TSet>
+    <CoverPicture />
+    <Highlight text="THIS TURKEY" x={50} y={175} size={128} at={-30} seed={31} rot={-3} />
+    <Highlight text="CAN'T MATE" x={90} y={345} size={128} at={-30} seed={32} rot={-2} />
+    <Highlight text="ON ITS OWN" x={50} y={515} size={128} at={-30} seed={33} rot={-3} />
   </Mode>
 );
 
 /** "You may have heard it's a GMO turkey. It isn't.": the USDA photograph of the breed, the claim struck through. */
-const Gmo: React.FC<{t: TL; a: number}> = ({t, a}) => {
+const Gmo: React.FC<{t: TL; a: number; close?: number}> = ({t, a, close}) => {
   const g = useGFrame();
   const sAt = t.at("isn't.");
   const p = interpolate(g, [sAt, sAt + 5], [0, 1], clamp);
+  // "Nobody edited its genes in a lab": a cut in close on the hen's head, a slow push (the struck note stays)
+  const z = close === undefined ? 1 : interpolate(g, [close, close + 80], [1.55, 1.63], clamp);
   return (
     <Mode m="black">
       <DarkPaper />
-      <Print src="img/arch/large-white-turkey-female-usda-ars.jpg" x={300} y={330} w={560} h={843} at={a + 1} rot={2} pos="50% 50%" />
+      <AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: '600px 560px'}}>
+        <Print src="img/arch/large-white-turkey-female-usda-ars.jpg" x={300} y={330} w={560} h={843} at={a + 1} rot={2} pos="50% 50%" />
+      </AbsoluteFill>
       <Note text="a GMO turkey?" x={70} y={180} size={96} rot={-3} at={a} color={ORANGE} />
       {g >= sAt && (
         <svg width={1080} height={400} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
@@ -149,7 +170,7 @@ const beatsOf = (t: TL): TurkeyBeats => ({
   swapAt: t.at('white ones.'),
   w13At: t.at('thirteen pounds,'),
   grow: [t.at('Today,'), t.at('over thirty.') + 10],
-  tipAt: t.at('top-heavy'),
+  tipAt: t.at('too heavy.'),
 });
 
 /** The 1950s: the dark feathers wiped to white. */
@@ -187,14 +208,14 @@ const Today: React.FC<{t: TL; a: number}> = ({t, a}) => {
   );
 };
 
-/** Too top-heavy: the bird tips forward about its feet and holds; on "the shape is wrong" a loupe on the thin legs. */
+/** "The males are too heavy. The shape is wrong.": the bird tips forward about its feet and holds; a loupe on the thin legs.
+ *  No new text (the cut comes late, so TODAY and "same thin legs" get their reading time). */
 const Tip: React.FC<{t: TL}> = ({t}) => {
   const b = beatsOf(t);
   const layer = <Bird b={b} />;
   return (
     <Mode m="teal">
       <TSet b={b}>
-        <Highlight text="TOO TOP-HEAVY" x={60} y={180} size={104} at={t.at('top-heavy')} seed={37} rot={-3} />
         <Loupe layer={layer} cx={FEET[0] - 6} cy={FEET[1] - 70} r={150} zoom={2.2} to={[230, 640]} at={t.at('shape is wrong.')} bow={40} />
       </TSet>
     </Mode>
@@ -211,7 +232,7 @@ const Nearly: React.FC<{t: TL; a: number}> = ({t, a}) => (
         <Icon key={i} src={TURKEY.big} x={50 + c * 196 + (r % 2) * 20} y={520 + r * 190} w={176} at={a + 2 + Math.floor(i * 0.8)} />
       );
     })}
-    <Slip text="artificial insemination" x={70} y={190} at={t.at('now comes')} size={84} rot={-2} />
+    <Slip text="artificial insemination" x={70} y={190} at={t.at('every one')} size={84} rot={-2} />
     <PTag text="Illustration" />
   </Mode>
 );
@@ -226,30 +247,32 @@ const Happy: React.FC = () => (
 const Scenes: React.FC<{t: TL; len: number}> = ({t, len}) => {
   const at = t.at;
   const c = {
-    cover: 0,
-    gmo: Math.max(75, at("It isn't.") - 1), // the cover holds at least 2.5 s
+    cover: 0, // the hook: "It worked so well that the birds got too top-heavy to mate on their own." over the cover
+    nearly: at('So nearly') - 1,
+    gmo: at('You may have') - 1,
+    gmoClose: at('Nobody edited') - 1,
     oldway: at('They did it') - 1,
     white: at('Then in the 1950s,') - 1,
     weight: at('In the 1930s,') - 1,
     today: at('Today,') - 1,
-    tip: at('top-heavy') - 1,
-    nearly: at('So nearly') - 1,
+    tip: Math.max(at('The males') - 1, at('Today,') + 98), // TODAY and "same thin legs" hold 2.5 s
     happy: at('Happy Thanksgiving.') - 1,
   };
   return (
     <>
       {useScene([
         [c.cover, <Cover />],
+        [c.nearly, <Nearly t={t} a={c.nearly} />],
         [c.gmo, <Gmo t={t} a={c.gmo} />],
+        [c.gmoClose, <Gmo t={t} a={c.gmo} close={c.gmoClose} />],
         [c.oldway, <OldWay t={t} a={c.oldway} />],
         [c.white, <White t={t} />],
         [c.weight, <Weight t={t} />],
         [c.today, <Today t={t} a={c.today} />],
         [c.tip, <Tip t={t} />],
-        [c.nearly, <Nearly t={t} a={c.nearly} />],
         [c.happy, <Happy />],
         // the end card's picture: the cover's, so the replay loops (EndText in the shell draws over it)
-        [len, <Mode m="teal"><TSet b={DONE} cam={DONE_CAM} /></Mode>],
+        [len, <Mode m="teal"><CoverPicture /></Mode>],
       ])}
     </>
   );

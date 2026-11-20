@@ -1,18 +1,16 @@
-// Short 3 · "1796: step one, hang up your turtle." (native 1080x1920). Unlike Shorts 1 and 2 this one has its OWN voiced narration
-// (audio/short3_turtle.wav, script/shorts/short3_turtle.txt), used whole: no splicing. It replaces the cranberry Short (VShort1,
-// still registered but unused).
-// Scenes: the cover (the turtle cut-out and the 1796 recipe scrap under the cover line), the Simmons title page, the turtle recipe
-// (p. 20) with the quoted lines swiped as they are spoken, a coral flash on "That's step one.", the drawn dining hall and the turtle
-// dock (cropped to portrait), the tureen = money, FAKED IT and the calf's head, the brains line swiped on p. 22, the Flow M1 dissolve
-// (calf's head -> tureen) with the MOCK tape on "Mock turtle", the 100-turtle grid (97 go grey, a stepped counter), the turtle
-// fading out on "disappeared", and the tureen with its MOCK tape for "The fake outlasted the real thing." The end card sits over
-// the cover picture, so the replay loops.
+// Short 3 · "1796 recipe, step one: cut off its head." (native 1080x1920). It has its OWN voiced narration (audio/short3_turtle.wav,
+// script/shorts/short3_turtle.txt), re-ordered with build() so the quote comes first: the quote + "That's step one.", then "In 1796, an
+// American cookbook told you how to start dinner.", then the rest in order. It replaces the cranberry Short (VShort1, unused).
+// Scenes: the cover (frame 0, also VShort3Cover: the turtle hanging upside down by its hind flippers from a hook, swaying, the 1796
+// scrap beside it, under the cover line), closer on "cut off" with the quoted lines big and swiped as spoken, the same picture coral
+// on "That's step one.", the Simmons title page, the drawn dining hall and turtle dock, the tureen = money, FAKED IT and the calf's
+// head, p. 22 swiped, the Flow M1 dissolve with MOCK, the 100-turtle grid (−97%), the hanging turtle fading on "disappeared", and
+// THE FAKE OUTLASTED THE REAL THING. The end card sits over the cover picture, so the replay loops.
 import React from 'react';
 import {AbsoluteFill, Img, interpolate, staticFile} from 'remotion';
 import {clamp} from '../lib/anim';
 import {Highlight, JF, Loop, Note, useGFrame} from '../kit/Kit';
 import {DarkPaper} from '../kit/common';
-import {type Narration} from '../lib/timing';
 import {type TL, useScene} from '../kit/shell';
 import {Clip, CUT_COLOUR, flowH, flowSrc, type FlowName} from '../kit/tg_cut';
 import {DropIn} from '../kit/tg_drop';
@@ -21,16 +19,16 @@ import {useMarks} from '../kit/tg_desk';
 import {type Box, Slip, Spot, Swipe} from '../kit/vox';
 import {Print} from '../kit/print';
 import {BW_DOC, FrameSeqOr, PageScrap, SIMMONS_P2, SIMMONS_P22} from '../ch/ch34/parts';
-import {type Built, Mode, OUTRO, PTag, type ShortDef, storyFrames, VShell} from './vkit';
-import words from '../../public/audio/short3_turtle.words.json';
-
-const N = words as Narration;
+import {build, type Built, Mode, OUTRO, PTag, type Seg, type ShortDef, storyFrames, VShell} from './vkit';
 
 /** The quoted lines, widened a little from parts.tsx so the swipe covers "the" and "brains," whole. */
 const QUOTE: Box[] = [[985, 3162, 1925, 84], [828, 3262, 1880, 84]];
 const HEAD22: Box = SIMMONS_P22.head;
 const BRAINS: Box = [745, 1532, 1395, 92];
-const TAG_P20 = 'Amelia Simmons, American Cookery, Hartford, 1796, p. 20 · Library of Congress / Internet Archive';
+/** The cover's tag and the close shot's are the same text, so it reads as one 7 s run. */
+const TAG_P20 = 'Amelia Simmons, American Cookery, Hartford, 1796, p. 20';
+/** The calf's head recipe: tagged from "the same cookbook" through the page, so the long tag gets its reading time. */
+const TAG_P22 = 'Simmons, American Cookery, 1796, p. 22: “To dress a Calve’s Head. Turtle fashion.”';
 const TAG_DRAWN = 'Drawn scene · the people are invented';
 
 // ------------------------------------------------------------------ shared pieces
@@ -77,68 +75,137 @@ const PortraitClip: React.FC<{name: 'dining_hall' | 'turtle_dock'; at: number; s
   );
 };
 
-// ------------------------------------------------------------------ the cover picture (also the end card's)
-const TURTLE = {x: 300, y: 565, w: 760, rot: 8};
+// ------------------------------------------------------------------ the hanging turtle (the cover, the hook, the loop)
+/** The turtle cut-out (654 x 573, head up, top view) turned upside down: the wrap points across its hind flippers, in the turned
+ *  image's px (measured on the alpha: the flippers are ~80 px wide at image row 525, i.e. turned row 48, a little in from the tips). */
+const TIE_A: [number, number] = [417, 48];
+const TIE_B: [number, number] = [233, 48];
+const TIE_MID = (TIE_A[0] + TIE_B[0]) / 2;
+const TWINE = '#cdb98e';
+/** The sway: a slow pendulum about the hook, already at full swing on frame 0 (so frame 0 is the cover, not a fade). */
+const SWAY_DEG = 4.5;
+const SWAY_T = 96; // frames per full swing
+const swayAt = (g: number) => SWAY_DEG * Math.cos((2 * Math.PI * g) / SWAY_T);
+
+type HangLayout = {hx: number; hy: number; tw: number; L: number};
+/** The beam, the iron hook and the turtle hanging upside down by its hind flippers from two cords knotted in the hook's bowl.
+ *  The cords and the turtle swing as one about the knot (hx, hy); the hook and beam hold still. Stark, not gory. */
+const Hanging: React.FC<HangLayout & {opacity?: number}> = ({hx, hy, tw, L, opacity = 1}) => {
+  const g = useGFrame();
+  const k = tw / 654;
+  const th = flowH('tg_turtle', tw);
+  const ang = swayAt(g);
+  const [ax, bx] = [(TIE_A[0] - TIE_MID) * k, (TIE_B[0] - TIE_MID) * k];
+  const band = 36 * k; // half the flipper's width at the wrap
+  return (
+    <>
+      {/* the beam: a dark timber across the top, the hook's eye bolted under it */}
+      <div style={{position: 'absolute', left: -20, top: hy - 168, width: 1120, height: 46, background: 'linear-gradient(180deg, #4a3a2a 0%, #33281d 60%, #1d1712 100%)',
+        boxShadow: '0 14px 22px rgba(0,0,0,0.55)', transform: 'rotate(-1.2deg)', opacity}} />
+      <svg width={200} height={200} viewBox="-100 -170 200 200" style={{position: 'absolute', left: hx - 100, top: hy - 170, overflow: 'visible', opacity,
+        filter: 'drop-shadow(6px 10px 8px rgba(0,0,0,0.55))'}}>
+        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+          {/* the eye plate and the shank */}
+          <rect x={-22} y={-128} width={44} height={14} rx={3} fill="#2a2621" stroke="#0e0c0a" strokeWidth={3} />
+          <path d="M0,-114 L0,-34 C0,-6 -8,8 -22,8 C-40,8 -46,-12 -38,-26" stroke="#0e0c0a" strokeWidth={15} />
+          <path d="M0,-114 L0,-34 C0,-6 -8,8 -22,8 C-40,8 -46,-12 -38,-26" stroke="#4b4640" strokeWidth={9} />
+          <path d="M-2,-110 L-2,-36" stroke="#8a847b" strokeWidth={2.5} strokeOpacity={0.7} />
+        </g>
+      </svg>
+      {/* the cords and the turtle, swinging about the knot in the hook's bowl (the bowl's bottom is 6 px under the hook point) */}
+      <div style={{position: 'absolute', left: hx - 22, top: hy + 2, width: 0, height: 0, transform: `rotate(${ang}deg)`, transformOrigin: '0 0', opacity}}>
+        <div style={{position: 'absolute', left: -TIE_MID * k, top: L - TIE_A[1] * k, width: tw, height: th, transform: 'rotate(180deg)',
+          filter: 'drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(18px 28px 26px rgba(0,0,0,0.5))'}}>
+          <Img src={staticFile(flowSrc('tg_turtle'))} style={{display: 'block', width: tw, height: th, filter: CUT_COLOUR}} />
+        </div>
+        <svg width={10} height={10} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
+          <g strokeLinecap="round" fill="none">
+            {[ax, bx].map((x, i) => {
+              // the cord from the knot to the wrap; the wrap is three turns across the flipper, square to the cord
+              // the flipper's axis (turned image) leans ~20 deg out from vertical; the wraps go square across it
+              const sx = Math.sign(x);
+              const [ux, uy] = [0.34 * sx, -0.94];
+              const [px, py] = [0.94, 0.34 * sx];
+              const turns = [-6, 0, 6].map((o) => ({cx: x + ux * o, cy: L + uy * o}));
+              return (
+                <React.Fragment key={i}>
+                  <line x1={0} y1={0} x2={x} y2={L} stroke="#16120d" strokeWidth={8} />
+                  <line x1={0} y1={0} x2={x} y2={L} stroke={TWINE} strokeWidth={4.5} />
+                  {turns.map((q, j) => (
+                    <React.Fragment key={j}>
+                      <line x1={q.cx - px * band} y1={q.cy - py * band} x2={q.cx + px * band} y2={q.cy + py * band} stroke="#16120d" strokeWidth={6.5} />
+                      <line x1={q.cx - px * band} y1={q.cy - py * band} x2={q.cx + px * band} y2={q.cy + py * band} stroke={TWINE} strokeWidth={3.5} />
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              );
+            })}
+            <circle cx={0} cy={0} r={8} fill={TWINE} stroke="#16120d" strokeWidth={3} />
+          </g>
+        </svg>
+      </div>
+    </>
+  );
+};
+
+/** The cover framing: the hook high, the turtle hanging in the top half, the recipe scrap pinned beside it; the type sits under it. */
+const COVER_HANG: HangLayout = {hx: 640, hy: 232, tw: 560, L: 70};
+/** The close framing (from "cut off"): the turtle bigger and the recipe scrap across the frame, big enough to read. */
+const CLOSE_HANG: HangLayout = {hx: 580, hy: 240, tw: 720, L: 64};
+/** The scrap: the heading and the two quoted lines of p. 20. */
+const SCRAP_BOX: Box = [770, 2840, 2160, 520];
+const LINES_BOX: Box = [790, 3120, 2140, 250];
+
+/** The cover picture (also the end card's and "disappeared"): the hanging turtle and the 1796 scrap, the quote already swiped. */
 const CoverPicture: React.FC<{opacity?: number}> = ({opacity = 1}) => (
   <>
     <DarkPaper />
-    <div style={{position: 'absolute', left: TURTLE.x, top: TURTLE.y, transform: `rotate(${TURTLE.rot}deg)`, opacity,
-      filter: 'drop-shadow(0 3px 2px rgba(0,0,0,0.7)) drop-shadow(14px 22px 22px rgba(0,0,0,0.5))'}}>
-      <Img src={staticFile(flowSrc('tg_turtle'))} style={{display: 'block', width: TURTLE.w, height: flowH('tg_turtle', TURTLE.w), filter: CUT_COLOUR}} />
-    </div>
-    <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={SIMMONS_P2.scrap} x={55} y={930} w={590} rot={-4} seed="c3" opacity={opacity}>
+    <Hanging {...COVER_HANG} opacity={opacity} />
+    <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={SCRAP_BOX} x={30} y={300} w={420} rot={-6} seed="c3" opacity={opacity}>
       <Swipe lines={QUOTE} from={-999} to={-998} seed="q3" />
     </PageScrap>
   </>
 );
 
-/** Frame 0: the cover, fully drawn from the first frame (the corner wordmark comes from the shell). */
+/** Frame 0: the cover, fully drawn from the first frame (the corner wordmark comes from the shell); held until "cut off". */
 const Cover: React.FC = () => (
   <Mode m="teal">
     <CoverPicture />
-    <Note text="1796, step one:" x={70} y={170} size={84} rot={-3} color="#ffffff" />
-    <Highlight text="HANG UP" x={60} y={275} size={132} at={-30} seed={51} rot={-3} />
-    <Highlight text="YOUR TURTLE" x={60} y={440} size={132} at={-30} seed={52} rot={-2} />
-    <PTag text="Amelia Simmons, American Cookery, 1796" />
+    <Note text="1796 recipe, step one:" x={80} y={800} size={72} rot={-3} color="#ffffff" />
+    <Highlight text="CUT OFF" x={60} y={888} size={132} at={-30} seed={51} rot={-3} />
+    <Highlight text="ITS HEAD" x={130} y={1030} size={132} at={-30} seed={52} rot={-2} />
+    <PTag text={TAG_P20} />
   </Mode>
 );
 
-/** "an American cookbook": the 1796 title page lands; a loop on its date. */
-const Title: React.FC<{a: number}> = ({a}) => (
-  <Mode m="black">
+/** From "cut off the head": closer, still swinging; the quote on the real page, big, swiped as it is spoken.
+ *  On "That's step one." the same picture goes coral (nothing new to read). */
+const Close: React.FC<{t: TL; coral?: boolean}> = ({t, coral}) => (
+  <Mode m={coral ? 'coral' : 'teal'}>
     <DarkPaper />
-    <Print src="img/arch/simmons-1796-title-page.jpg" x={190} y={170} w={700} h={1027} at={a + 1} rot={-2} pos="50% 50%" />
-    <Loop cx={555} cy={1090} rx={90} ry={46} at={a + 8} seed={53} tilt={-4} />
-    <PTag text="Amelia Simmons, American Cookery, Hartford, 1796 · title page · Library of Congress" />
+    <Hanging {...CLOSE_HANG} />
+    <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={LINES_BOX} x={40} y={900} w={1000} rot={-2} seed="s3">
+      <Swipe lines={QUOTE} from={t.at('"About') - 1} to={t.end('blood."') + 2} seed="q3" />
+    </PageScrap>
+    <PTag text={TAG_P20} />
   </Mode>
 );
 
-/** The quote: Simmons p. 20, the quoted two lines lit and swiped coral as they are spoken; a slow push. */
-const Quote: React.FC<{t: TL; a: number}> = ({t, a}) => {
+/** "In 1796, an American cookbook told you how to start dinner.": the 1796 title page lands, a slow push; a loop on its date. */
+const Title: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
-  const z = interpolate(g, [a, a + 170], [0.54, 0.56], clamp);
-  const y = interpolate(g, [a, a + 170], [3120, 3200], clamp);
+  const z = interpolate(g, [a, a + 150], [1, 1.08], clamp);
   return (
     <Mode m="black">
       <DarkPaper />
-      <PageCam src={SIMMONS_P2.src} size={SIMMONS_P2.size} x={1880} y={y} z={z} sy={620}>
-        <Spot size={SIMMONS_P2.size} boxes={[SIMMONS_P2.heading, ...QUOTE]} at={a + 4} id="q3s" dark={0.5} />
-        <Swipe lines={QUOTE} from={t.at('"About') - 1} to={t.end('blood."') + 2} seed="q3" />
-      </PageCam>
-      <PTag text={TAG_P20} />
+      <AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: '540px 700px'}}>
+        <Print src="img/arch/simmons-1796-title-page.jpg" x={190} y={170} w={700} h={1027} at={a + 1} rot={-2} pos="50% 50%" />
+        <Loop cx={555} cy={1090} rx={90} ry={46} at={t.at('cookbook') - 2} seed={53} tilt={-4} />
+      </AbsoluteFill>
+      <PTag text="Amelia Simmons, American Cookery, Hartford, 1796 · title page · Library of Congress" />
     </Mode>
   );
 };
-
-/** "That's step one.": the swiped lines alone on the coral desk, nothing new to read, held. */
-const StepOne: React.FC = () => (
-  <Mode m="coral">
-    <DarkPaper />
-    <PageScrap src={SIMMONS_P2.src} size={SIMMONS_P2.size} box={[780, 3130, 2150, 240]} x={60} y={560} w={960} rot={-2} seed="s3">
-      <Swipe lines={QUOTE} from={-999} to={-998} seed="q3" />
-    </PageScrap>
-  </Mode>
-);
 
 /** "Turtle soup was one of the fanciest dishes in America": the drawn dining hall, the waiter and the tureen. */
 const Grand: React.FC<{t: TL; a: number}> = ({t, a}) => (
@@ -156,8 +223,8 @@ const Dock: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <PortraitClip name="turtle_dock" at={a} cx={590} cx2={620} cy={680} z={2.4} dur={130} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.45) 0%, transparent 30%)'}} />
-    <Slip text="shipped up alive" x={70} y={190} at={t.at('shipped') - 3} rot={-3} size={78} coral />
-    <Slip text="from the Caribbean" x={150} y={310} at={t.at('shipped') + 2} rot={2} size={66} />
+    <Slip text="shipped up alive" x={70} y={190} at={a + 2} rot={-3} size={78} coral />
+    <Slip text="from the Caribbean" x={150} y={310} at={a + 7} rot={2} size={66} />
     <PTag text={TAG_DRAWN} />
   </AbsoluteFill>
 );
@@ -180,8 +247,9 @@ const Faked: React.FC<{t: TL}> = ({t}) => (
   <Mode m="teal">
     <DarkPaper />
     <Highlight text="FAKED IT" x={60} y={180} size={140} at={t.at('faked')} seed={57} rot={-3} />
-    <Note text="the same 1796 cookbook:" x={70} y={390} size={74} rot={-3} at={t.at('The same') - 2} color="#ffffff" />
-    <Prop name="tg_calf_head" at={t.at("calf's head.")} x={90} y={640} w={900} rot={2} from={[-600, -700, -18]} />
+    <Note text="the same 1796 cookbook:" x={70} y={390} size={74} rot={-3} at={t.at('faked') + 8} color="#ffffff" />
+    <Prop name="tg_calf_head" at={t.at("calf's head.")} x={90} y={640} w={900} rot={2} from={[-1100, 60, -18]} />
+    <PTag text={TAG_P22} />
   </Mode>
 );
 
@@ -197,7 +265,7 @@ const Brains: React.FC<{t: TL; a: number}> = ({t, a}) => {
         <Swipe lines={[HEAD22]} from={t.at('Open') - 1} to={t.end('it up.') + 2} seed="b31" />
         <Swipe lines={[BRAINS]} from={t.at('Take out') - 1} to={t.end('brains.') + 3} seed="b32" />
       </PageCam>
-      <PTag text="Simmons, American Cookery, 1796, p. 22: “To dress a Calve’s Head. Turtle fashion.”" />
+      <PTag text={TAG_P22} />
     </Mode>
   );
 };
@@ -243,8 +311,8 @@ const Decline: React.FC<{t: TL; a: number}> = ({t, a}) => {
         const color = i < 97 ? (i < v ? 'rgba(244,239,230,0.22)' : TEAL) : done ? CORAL : TEAL;
         return <TurtleGlyph key={i} x={GRID.x + (i % 10) * GRID.gap} y={GRID.y + Math.floor(i / 10) * GRID.gap} color={color} k={k} />;
       })}
-      <div data-tx style={{position: 'absolute', left: 70, top: 160, fontFamily: JF.display, fontSize: 210, lineHeight: 1, color: '#f4efe6', whiteSpace: 'nowrap',
-        textShadow: '0 6px 22px rgba(0,0,0,0.8)'}}>{`−${v}%`}</div>
+      {g >= c0 && <div data-tx style={{position: 'absolute', left: 70, top: 160, fontFamily: JF.display, fontSize: 210, lineHeight: 1, color: '#f4efe6', whiteSpace: 'nowrap',
+        textShadow: '0 6px 22px rgba(0,0,0,0.8)'}}>{`−${v}%`}</div>}
       <div data-tx style={{position: 'absolute', left: 80, top: 385, fontFamily: JF.mono, fontSize: 28, letterSpacing: 2, color: 'rgba(244,239,230,0.85)'}}>
         CARIBBEAN GREEN SEA TURTLES
       </div>
@@ -279,15 +347,15 @@ const Scenes: React.FC<{t: TL; len: number}> = ({t, len}) => {
   const at = t.at;
   const c = {
     cover: 0,
-    title: at('cookbook') - 1, // the cover holds 2.5 s
-    quote: at('"About') - 4,
+    close: at('cut off') - 2, // the cover holds 3.7 s
     step: at("That's step") - 1,
+    title: at('In 1796,') - 2,
     grand: at('Turtle soup') - 1,
     dock: at('Green sea') - 1,
     money: at('If turtle') + 12,
     faked: at('faked') - 1,
     brains: at('Open it') - 1,
-    morph: at('Cook it') - 1,
+    morph: Math.max(at('Cook it') - 1, at('Open it') + 92), // p. 22 in full view for 3 s
     decline: at('The real') - 1,
     gone: at('Turtle soup', 2) - 1,
     outlasted: at('The fake') - 4,
@@ -296,9 +364,9 @@ const Scenes: React.FC<{t: TL; len: number}> = ({t, len}) => {
     <>
       {useScene([
         [c.cover, <Cover />],
-        [c.title, <Title a={c.title} />],
-        [c.quote, <Quote t={t} a={c.quote} />],
-        [c.step, <StepOne />],
+        [c.close, <Close t={t} />],
+        [c.step, <Close t={t} coral />],
+        [c.title, <Title t={t} a={c.title} />],
         [c.grand, <Grand t={t} a={c.grand} />],
         [c.dock, <Dock t={t} a={c.dock} />],
         [c.money, <Money t={t} a={c.money} />],
@@ -315,11 +383,14 @@ const Scenes: React.FC<{t: TL; len: number}> = ({t, len}) => {
   );
 };
 
-/** The Short's own narration, whole: one segment from 0 to the end of the file. */
-export const B3: Built = {
-  segs: [{wav: 'audio/short3_turtle.wav', from: 0, to: N.duration, at: 0, text: N.words.map((w) => w.w).join(' ')}],
-  n: {voice: N.voice ?? 'short3', duration: N.duration, words: N.words},
-};
-const DEF: ShortDef = {music: 'tg_parlor_waltz', Scenes, segs: []};
+/** The Short's own narration, re-ordered at word boundaries (build(): 0.12 s before, 0.2 s after, 0.3 s of air): the quote and
+ *  "That's step one." first, then the opening line, then the rest in order. */
+export const SEGS3: Seg[] = [
+  {ch: 'short3', first: '"About nine', last: 'step one.'},
+  {ch: 'short3', first: 'In 1796,', last: 'start dinner.'},
+  {ch: 'short3', first: 'Turtle soup was', last: 'real thing.'},
+];
+export const B3: Built = build(SEGS3);
+const DEF: ShortDef = {music: 'tg_parlor_waltz', Scenes, segs: SEGS3};
 export const VSHORT3_FRAMES = storyFrames(B3) + OUTRO;
 export const VShort3: React.FC = () => <VShell d={DEF} b={B3} />;

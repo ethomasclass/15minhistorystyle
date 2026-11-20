@@ -29,6 +29,9 @@ export const Root: React.FC = () => (
     <Composition id="VShort2" width={1080} height={1920} fps={FPS} durationInFrames={VSHORT2_FRAMES} component={() => <JFonts><VShort2 /></JFonts>} />
     {/* VShort3 (the turtle-soup Short) has its own voiced narration; it replaces VShort1, which stays registered but unused */}
     <Composition id="VShort3" width={1080} height={1920} fps={FPS} durationInFrames={VSHORT3_FRAMES} component={() => <JFonts><VShort3 /></JFonts>} />
+    {/* the Shorts' covers: frame 0 of each Short, as a still (renders/shorts/<name>_cover.png/.jpg; muxed in as attached_pic) */}
+    <Composition id="VShort2Cover" width={1080} height={1920} fps={FPS} durationInFrames={1} component={() => <JFonts><VShort2 /></JFonts>} />
+    <Composition id="VShort3Cover" width={1080} height={1920} fps={FPS} durationInFrames={1} component={() => <JFonts><VShort3 /></JFonts>} />
     {/* the desk-colour test (not part of the video) */}
     {([['A', TestColorA], ['B', TestColorB], ['C', TestColorC]] as const).map(([k, C]) => (
       <Composition key={k} id={`TestColor-${k}`} width={W} height={H} fps={FPS} durationInFrames={TEST_COLOR_FRAMES} component={() => <JFonts><C /></JFonts>} />

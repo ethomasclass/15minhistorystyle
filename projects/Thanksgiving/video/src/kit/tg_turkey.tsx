@@ -20,7 +20,8 @@ import {CORAL, PH, TEAL} from './tg_late';
 /** `big`: the white bird with a much heavier body, same pose and registration: the end state the growth dissolves toward. */
 export const TURKEY = {big: 'img/flow/tg_turkey_big.png', bronze: 'img/flow/tg_turkey_bronze.png', white: 'img/flow/tg_turkey_white.png', scale: 'img/flow/tg_scale.png'};
 
-export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; grow?: [number, number]; tipAt?: number};
+/** `tipDeg`: how far it tips (default 8); `teeter`: once tipped it keeps rocking a little on its toes (the Shorts' cover, from frame 0). */
+export type TurkeyBeats = {swellAt?: number; swapAt?: number; w13At?: number; grow?: [number, number]; tipAt?: number; tipDeg?: number; teeter?: boolean};
 
 /** Rig geometry as fractions of the rig box: hip line (legs below it never scale), chest centre and radius. */
 const HIP = 0.69;
@@ -96,7 +97,8 @@ export const TurkeyRig: React.FC<{x: number; y: number; size: number; b: TurkeyB
   let tip = 0;
   if (b.tipAt !== undefined && g >= b.tipAt) {
     const t = g - b.tipAt;
-    tip = -8 * interpolate(t, [0, 6], [0, 1], {...clamp, easing: (q) => 1 - Math.pow(1 - q, 3)}) + 3.2 * Math.exp(-t / 9) * Math.sin(t * 0.55) * (t > 4 ? 1 : 0);
+    tip = -(b.tipDeg ?? 8) * interpolate(t, [0, 6], [0, 1], {...clamp, easing: (q) => 1 - Math.pow(1 - q, 3)}) + 3.2 * Math.exp(-t / 9) * Math.sin(t * 0.55) * (t > 4 ? 1 : 0);
+    if (b.teeter) tip += 1.8 * Math.sin((2 * Math.PI * g) / 44);
   }
   const [cx, cy] = [CHEST[0] * size, CHEST[1] * size];
   const r = CHEST_R * size;
