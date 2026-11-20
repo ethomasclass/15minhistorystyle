@@ -26,3 +26,4 @@ projects/Thanksgiving/video/public/clips/*.mp4 filter=lfs diff=lfs merge=lfs -te
 projects/Thanksgiving/review/draft_v4_*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Thanksgiving/review/draft_v*_*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Thanksgiving/renders/*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Thanksgiving/renders/shorts/*.mp4 filter=lfs diff=lfs merge=lfs -text
