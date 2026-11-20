@@ -4,7 +4,8 @@
 
 Why: the music beds and sound effects are set against a -18 LUFS voice (the level of the Black Sox narration, whose mix
 the channel keeps: voice about 13 LU over the music bed). ElevenLabs eleven_v4 renders about 6 dB quieter (~-24 LUFS), so
-every new take is levelled here (voice.py calls this after writing the WAV). A linear gain does the work; a fast look-ahead
+every new take is levelled here (voice.py calls this after writing the WAV). Thanksgiving (Nov 2026): v4 takes are very peaky (about 21 dB peak-to-loudness), so plain gain + limiter crushed
+~4 dB of peaks (audible). Now: a gentle 2.5:1 compressor first, then gain, then a look-ahead
 limiter (delay compensated, so word timings don't move) only touches the few syllables that would go over -1 dBTP.
 The file keeps its sample rate, channel count and length; the .words.json timings stay valid.
 """
@@ -36,7 +37,7 @@ def level(path):
     for _ in range(3):  # the limiter shaves a little loudness off; nudge the gain until it lands within 0.2 LU
         tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
         subprocess.run([FF, "-v", "error", "-y", "-i", path, "-af",
-                        f"volume={gain:.2f}dB,alimiter=limit=0.891:attack=3:release=60:level=false:latency=true",
+                        f"highpass=f=70,acompressor=threshold=-26dB:ratio=2.5:attack=8:release=160:knee=6:makeup=1,volume={gain:.2f}dB,alimiter=limit=0.841:attack=5:release=90:level=false:latency=true",
                         "-ar", str(rate), "-ac", str(ch), "-c:a", "pcm_s16le", tmp], check=True)
         i, tp = loudness(tmp)
         if abs(i - TARGET) <= 0.2:
