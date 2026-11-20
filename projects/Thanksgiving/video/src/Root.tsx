@@ -8,6 +8,8 @@ import {DATES, SUBTITLE, TITLE} from './project';
 import {BRAND} from './Brand';
 import {THUMB_FRAMES, ThumbA, ThumbB} from './Thumbnail';
 import {FX} from './fx/registry';
+import {VShort1, VSHORT1_FRAMES} from './shorts/VShort1';
+import {VShort2, VSHORT2_FRAMES} from './shorts/VShort2';
 import {TEST_COLOR_FRAMES, TestColorA, TestColorB, TestColorC} from './test/TestColor';
 
 export const Root: React.FC = () => (
@@ -21,6 +23,9 @@ export const Root: React.FC = () => (
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={TITLE_INTRO_FRAMES} component={() => <JFonts><TitleIntro title={TITLE} subtitle={SUBTITLE} line={DATES} /></JFonts>} />
     <Composition id="LogoBreak" width={W} height={H} fps={FPS} durationInFrames={SNAP_FRAMES} component={() => <JFonts><MarkSnap /></JFonts>} />
     <Composition id="EndScreen" width={W} height={H} fps={FPS} durationInFrames={END_SCREEN_FRAMES} component={() => <JFonts><EndSlots /></JFonts>} />
+    {/* the vertical Shorts (1080 x 1920), cut from the chapters' narration: src/shorts/ */}
+    <Composition id="VShort1" width={1080} height={1920} fps={FPS} durationInFrames={VSHORT1_FRAMES} component={() => <JFonts><VShort1 /></JFonts>} />
+    <Composition id="VShort2" width={1080} height={1920} fps={FPS} durationInFrames={VSHORT2_FRAMES} component={() => <JFonts><VShort2 /></JFonts>} />
     {/* the desk-colour test (not part of the video) */}
     {([['A', TestColorA], ['B', TestColorB], ['C', TestColorC]] as const).map(([k, C]) => (
       <Composition key={k} id={`TestColor-${k}`} width={W} height={H} fps={FPS} durationInFrames={TEST_COLOR_FRAMES} component={() => <JFonts><C /></JFonts>} />
