@@ -24,3 +24,4 @@ projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short4.mp4 filter=lfs diff=lfs
 projects/Diamond_Hoax/renders/shorts/Diamond_Hoax_Short5.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Thanksgiving/video/public/clips/*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/Thanksgiving/review/draft_v4_*.mp4 filter=lfs diff=lfs merge=lfs -text
+projects/Thanksgiving/review/draft_v*_*.mp4 filter=lfs diff=lfs merge=lfs -text
