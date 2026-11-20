@@ -1,6 +1,6 @@
 """The brand's click track re-cut for the condensed title card (kit/ga_brand.tsx TitleIntro, the logo at 1.4x).
 
-  python3 tools/intro_clicks.py        -> public/music/chunk_intro_clicks.wav (3.1 s, mono 44.1 kHz) and a timing table
+  python3 tools/intro_clicks.py        -> public/sfx/chunk_intro_clicks.wav (3.1 s, mono 44.1 kHz) and a timing table
 
 Why not the whole jingle at 1.4x (the Gilded Age's atempo=1.4): chunk_jingle.mp3 puts each click on the brand intro's MARK_LAND /
 WM_LAND frames, but those are where the spring SETTLES (launch + FLIGHT = 22 frames). Remotion's spring (damping 15, stiffness 110,
@@ -16,7 +16,7 @@ import numpy as np
 R = 44100
 HERE = os.path.dirname(os.path.abspath(__file__))
 JINGLE = os.path.join(HERE, "..", "public", "music", "chunk_jingle.mp3")
-OUT = os.path.join(HERE, "..", "public", "music", "chunk_intro_clicks.wav")
+OUT = os.path.join(HERE, "..", "public", "sfx", "chunk_intro_clicks.wav")
 
 SPEED = 1.4          # ga_brand INTRO_SPEED
 FLIGHT = 22          # ChunkIntro FLIGHT

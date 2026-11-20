@@ -9,7 +9,7 @@
 //  - SAFE + SafeText: the 8% title-safe area (x 154 to 1766, y 86 to 994); text marked data-tx is nudged back inside it.
 // Sound: the brand's clicks, the one exception to this video's no-sound-effects rule (the user, Nov 20 2026: "we are missing the
 // clicks on the Chunk logo animation"). Played with <Audio> here, never through Sfx (common.tsx), which stays silent. Clicks only:
-//  - TitleIntro: music/chunk_intro_clicks.wav (tools/intro_clicks.py), the jingle's clicks sliced one by one and put on the
+//  - TitleIntro: sfx/chunk_intro_clicks.wav (tools/intro_clicks.py), the jingle's clicks sliced one by one and put on the
 //    frame each block / the coral quarter / CHUNK / HISTORY actually arrives at 1.4x (table in that script). Full volume, as the
 //    Gilded Age plays chunk_jingle.mp3 (assemble.sh: no volume filter, trimmed at 3.1 s before the page turn).
 //  - MarkSnap: sfx/chunk_snap.wav at 0.3, trimmed at 1.2 s with a 0.1 s fade (the Gilded Age's brk card); its click-clack at
@@ -181,7 +181,7 @@ export const TITLE_INTRO_FRAMES = Math.round(TITLE_SECONDS * 30);
  *    quarter     51.44  click-clack                  (2.79 s)
  *    CHUNK       68.59                               (3.60 s)
  *    HISTORY     76.44 HIS, 78.37 TO, 80.30 RY       (3.95 4.04 4.13 s; one slab, so HIS lands with it and TO, RY follow 1.4x)  */
-export const INTRO_CLICKS = 'music/chunk_intro_clicks.wav';
+export const INTRO_CLICKS = 'sfx/chunk_intro_clicks.wav';
 
 /** The channel intro and the title in one card: the logo assembles centred, locks by ~2.8 s, lifts, and the title lands under it. */
 export const TitleIntro: React.FC<{title: string; subtitle: string; line?: string}> = ({title, subtitle, line}) => {
