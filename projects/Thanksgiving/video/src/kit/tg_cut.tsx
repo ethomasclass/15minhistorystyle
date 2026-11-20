@@ -22,6 +22,10 @@ export const FLOW = {
   tg_jello: [779, 521], tg_mince_A: [878, 400], tg_modern_plate: [651, 644], tg_pie_1: [791, 533], tg_potato: [810, 554], tg_scale: [482, 537], tg_tureen: [862, 386],
   tg_turkey_bronze: [671, 628], tg_turkey_white: [671, 628], tg_turtle: [654, 573], tg_can: [803, 480], tg_three_cans: [1150, 610], tg_turkey_big: [666, 628],
   tg_pie_2: [792, 537], tg_pie_3: [792, 539], tg_pie_4: [792, 537], tg_pie_5: [791, 535],
+  // Flow batch 4 (Ch 7 stand-in props for the real people and the real booklet: never presented as them)
+  tg_booklet_1910s: [769, 643], tg_marshmallow_tin: [787, 654], tg_sweet_potato_dish: [1199, 674], tg_cooking_school: [728, 640],
+  tg_cranberry_scoop: [1085, 369], tg_cranberry_barrel: [501, 607], tg_cooking_pot_cranberries: [781, 540], tg_test_kitchen_counter: [1376, 468],
+  tg_recipe_card_1955: [824, 546], tg_apron_hook: [359, 695],
 } as const;
 export type FlowName = keyof typeof FLOW;
 export const flowSrc = (name: FlowName) => `img/flow/${name}.png`;

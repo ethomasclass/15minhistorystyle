@@ -7,10 +7,17 @@
 //  - BatonCard: the next chapter's title on a torn orange strip, slammed in over the dimmed picture, held 2.6 s.
 //  - EndSlots: the 20 s end screen, slots sized to YouTube Studio's end-screen elements (614x345 video cards, 298 px circle).
 //  - SAFE + SafeText: the 8% title-safe area (x 154 to 1766, y 86 to 994); text marked data-tx is nudged back inside it.
-// No sound anywhere in this file (the user, Nov 2026: no sound effects in this video). The Gilded Age plays the brand's click
-// track under the intro and chunk_snap under the mark snap and each baton card; those are left out here.
+// Sound: the brand's clicks, the one exception to this video's no-sound-effects rule (the user, Nov 20 2026: "we are missing the
+// clicks on the Chunk logo animation"). Played with <Audio> here, never through Sfx (common.tsx), which stays silent. Clicks only:
+//  - TitleIntro: music/chunk_intro_clicks.wav (tools/intro_clicks.py), the jingle's clicks sliced one by one and put on the
+//    frame each block / the coral quarter / CHUNK / HISTORY actually arrives at 1.4x (table in that script). Full volume, as the
+//    Gilded Age plays chunk_jingle.mp3 (assemble.sh: no volume filter, trimmed at 3.1 s before the page turn).
+//  - MarkSnap: sfx/chunk_snap.wav at 0.3, trimmed at 1.2 s with a 0.1 s fade (the Gilded Age's brk card); its click-clack at
+//    0.99 s is the coral quarter's lock at 1.0 s.
+//  - BatonCard: chunk_snap at 0.3 too, because the Gilded Age has it on every baton (mix/chNN.sh SFX="chunk_snap@0.3@<cardAt>").
+//    Here its click is moved onto the slam's landing; BATON_CLICK = false turns it off.
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {AbsoluteFill, continueRender, delayRender, Easing, interpolate, random, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, continueRender, delayRender, Easing, interpolate, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {clamp} from '../lib/anim';
 import {INK, JF} from './Kit';
 import {DarkPaper} from './common';
@@ -129,7 +136,17 @@ export const ChunkMark: React.FC<{cx: number; cy: number; size: number; angle?: 
 /** The mark snap is 2 s. */
 export const SNAP_FRAMES = 60;
 
-/** The 2 s mark snap between chapters: black, the teal mark already there, the coral quarter swings in and locks at 1.0 s. Silent. */
+/** chunk_snap.wav: the Gilded Age level (0.3), and its click-clack's offset in the file (0.994 s, measured; make_jingle.py puts it at 0.99). */
+const SNAP_VOL = 0.3;
+const SNAP_CLICK = 30;
+/** chunk_snap.wav cut as the Gilded Age cuts it: 1.2 s, the last 0.1 s faded (assemble.sh brk). Starts at the Sequence's frame 0. */
+const SnapClick: React.FC = () => (
+  <Sequence durationInFrames={36} layout="none">
+    <Audio src={staticFile('sfx/chunk_snap.wav')} volume={(f) => SNAP_VOL * interpolate(f, [33, 36], [1, 0], clamp)} />
+  </Sequence>
+);
+
+/** The 2 s mark snap between chapters: black, the teal mark already there, the coral quarter swings in and locks at 1.0 s on the click-clack. */
 export const MarkSnap: React.FC = () => {
   const T = useCurrentFrame() / 30;
   const u = Math.min(1, Math.max(0, T / 1.0));
@@ -141,6 +158,7 @@ export const MarkSnap: React.FC = () => {
       <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{position: 'absolute', left: 0, top: 0}}>
         <ChunkMark cx={960} cy={540} size={230} angle={-110 * (1 - k)} o={o} />
       </svg>
+      <SnapClick />
     </AbsoluteFill>
   );
 };
@@ -157,7 +175,15 @@ const INTRO_SPEED = 1.4;
 export const TITLE_SECONDS = 6.6;
 export const TITLE_INTRO_FRAMES = Math.round(TITLE_SECONDS * 30);
 
-/** The channel intro and the title in one card: the logo assembles centred, locks by ~2.8 s, lifts, and the title lands under it. Silent. */
+/** The intro's clicks, each on its piece's arrival at INTRO_SPEED (built by tools/intro_clicks.py; regenerate it if INTRO_SPEED or
+ *  ChunkIntro's MARK_LAND / WM_LAND / FLIGHT change). Output frames, 30 fps, with the jingle click each one is cut from:
+ *    block 1-5   17.16  27.16  34.30  40.01  44.30   (1.20 1.67 2.00 2.27 2.47 s)
+ *    quarter     51.44  click-clack                  (2.79 s)
+ *    CHUNK       68.59                               (3.60 s)
+ *    HISTORY     76.44 HIS, 78.37 TO, 80.30 RY       (3.95 4.04 4.13 s; one slab, so HIS lands with it and TO, RY follow 1.4x)  */
+export const INTRO_CLICKS = 'music/chunk_intro_clicks.wav';
+
+/** The channel intro and the title in one card: the logo assembles centred, locks by ~2.8 s, lifts, and the title lands under it. */
 export const TitleIntro: React.FC<{title: string; subtitle: string; line?: string}> = ({title, subtitle, line}) => {
   const T = useCurrentFrame() / 30;
   const u = ease(Math.min(1, Math.max(0, (T - 2.75) / 0.45))); // the lift
@@ -180,6 +206,7 @@ export const TitleIntro: React.FC<{title: string; subtitle: string; line?: strin
           opacity: fin(T, 3.1, 0.3)}}>{subtitle}</div>
         {line && <Mono text={line} size={28} color={TEAL} ls={6} style={{left: 0, top: 860, width: 1920, textAlign: 'center', opacity: fin(T, 3.2, 0.3)}} />}
       </AbsoluteFill>
+      <Sequence durationInFrames={93} layout="none"><Audio src={staticFile(INTRO_CLICKS)} /></Sequence>
     </AbsoluteFill>
   );
 };
@@ -191,14 +218,21 @@ export const TitleIntro: React.FC<{title: string; subtitle: string; line?: strin
 /** A baton card holds 2.6 s: about 2 s after its words, 2.5 s of reading. */
 export const CARD_HOLD = 78;
 
-/** The next chapter's title on a torn orange strip, slammed in at frame `at` over the dimmed picture; it holds to the chapter's end. Silent. */
+/** chunk_snap under each baton card, as the Gilded Age has it (false: silent cards). */
+export const BATON_CLICK = true;
+/** The slam lands (scale 1.12 -> 1) 0.16 s after `at`: the snap's click-clack goes there. */
+const SLAM = 5;
+
+/** The next chapter's title on a torn orange strip, slammed in at frame `at` over the dimmed picture; it holds to the chapter's end. */
 export const BatonCard: React.FC<{title: string; at: number}> = ({title, at}) => {
   const f = useCurrentFrame();
-  if (f < at) return null;
+  const click = BATON_CLICK && <Sequence from={at + SLAM - SNAP_CLICK} layout="none"><SnapClick /></Sequence>;
+  if (f < at) return <>{click}</>;
   const T = (f - at) / 30;
   const u = Math.min(1, T / 0.16);
   return (
     <AbsoluteFill>
+      {click}
       <AbsoluteFill style={{background: `rgba(13,12,9,${(0.62 * Math.min(1, T / 0.12)).toFixed(3)})`}} />
       <AbsoluteFill style={{transform: `scale(${(1.12 - 0.12 * ease(u)).toFixed(4)})`, transformOrigin: '960px 540px', opacity: Math.min(1, u * 2)}}>
         <div style={{position: 'absolute', left: 0, top: 460, width: 1920, display: 'flex', justifyContent: 'center'}}>

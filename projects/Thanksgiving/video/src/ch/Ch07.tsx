@@ -1,9 +1,11 @@
-// Chapter 7 · The test kitchens. The 1917 Angelus booklet on a 1910s ad plate (the chapter's one guided pan lands on the recipe as
-// it is said), the cranberry can paid off on "Because it IS the can" (cran frame 6 held, a loupe on the ridges), 1955 in the
-// second person (a kitchen diorama, the notes as your shopping list), a fast 1954/1955 montage of recipe cards that drop onto
-// the desk on their own (no hands), the casserole state sheet (casserole -> three cans), the third mock morph with the MOCK tape, and the can
+// Chapter 7 · The test kitchens. Sweet potatoes, a marshmallow tin and a 1910s recipe booklet land on the desk (Flow stand-in
+// props, tagged "illustration": never the real Angelus booklet; the real 1920-22 Angelus grocery ads are the evidence), the booklet
+// on a 1910s ad plate (the chapter's one guided pan lands on the recipe, paraphrased in our own type, as it is said), Janet McKenzie
+// Hill as a cooking-school table with her name in type, Marcus Urann as scoop, barrel, pot and can with his name in type, the cranberry can paid off on "Because it IS the can" (cran frame 6 held, a loupe on the ridges), 1955 in the
+// second person (a kitchen diorama, the notes as your shopping list), a fast 1954/1955 montage (a recipe card, then Dorcas
+// Reilly as a test-kitchen counter, a recipe card and an apron, her name in type; everything drops in on its own, no hands), the casserole state sheet (casserole -> three cans), the third mock morph with the MOCK tape, and the can
 // landing on the collage board. Coral-desk flashes (kit/tg_desk_map): "Because it IS the can" (a cut-in on frame 6, then the
-// ridges loupe on teal) and the MOCK tape cut-in. Scenes are timed to words (script/ch07_test_kitchens.txt); placeholders are listed in PLACEHOLDERS.
+// ridges loupe on teal) and the MOCK tape cut-in. Scenes are timed to words (script/ch07_test_kitchens.txt). No placeholders remain (PLACEHOLDERS is empty).
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame, Img, staticFile} from 'remotion';
 import words from '../../public/audio/ch07_test_kitchens.words.json';
@@ -15,31 +17,68 @@ import {ChapterShell, chapterFrames, hasFile, LEAD, makeTimeline, type Narration
 import {hold, readEnd} from '../lib/timing';
 import {type Box, Slip, Swipe} from '../kit/vox';
 import {TgPrint} from '../kit/tg_placeholder';
-import {Clip, Cut, States} from '../kit/tg_cut';
-import {DropDeal, type DropDealCard} from '../kit/tg_drop';
+import {Clip, Cut, CUT_COLOUR, flowH, flowSrc, type FlowName, States} from '../kit/tg_cut';
+import {DropDeal, type DropDealCard, DropIn, type From} from '../kit/tg_drop';
 import {COLOUR_DOC, PageScrap} from './ch34/parts';
 import {TgBoard} from '../kit/tg_board';
 import {CutIn, DeskScene, rgba, useMarks} from '../kit/tg_desk';
-import {CARD, CORAL, Cran, cranMap, Loupe, MockTape, Morph, PH, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
+import {CORAL, Cran, cranMap, Loupe, MockTape, type Placeholder, RecipeCard, tornPct} from '../kit/tg_late';
 
 const N = words as Narration;
 export const CH07_FRAMES = chapterFrames(N, LEAD);
 
-// ------------------------------------------------------------------ assets still to come
-const P = {
-  plate: {file: 'img/flow/tg_adplate_1910s.png', what: '1910s magazine ad plate (Flow #11), 2880 x 1080: the booklet area left, a blank cream panel right; colour'},
-  booklet: {file: 'img/arch/angelus_1917_booklet.jpg', what: 'Angelus marshmallow recipe booklet, 1917 (cover scan; colour)'},
-  hill: {file: 'img/arch/janet_mckenzie_hill.jpg', what: 'Janet McKenzie Hill, portrait (bust cut-out)'},
-  urann: {file: 'img/arch/marcus_urann.jpg', what: 'Marcus Urann, portrait (bust cut-out)'},
-  plate50: {file: 'img/flow/tg_adplate_1950s.png', what: '1950s ad plate: a kitchen, a gingham table, a blank cream panel right; colour'},
-  reilly: {file: 'img/arch/dorcas_reilly.jpg', what: 'Dorcas Reilly in the Campbell test kitchen (photo)'},
-} satisfies Record<string, Placeholder>;
+// ------------------------------------------------------------------ the plates and the props
+/** The two Flow ad plates (no text on them: our type goes on their blank panels). */
+const PLATE = 'img/flow/tg_adplate_1910s.png';
+const PLATE50 = 'img/flow/tg_adplate_1950s.png';
 const PLATE_SIZE: [number, number] = [2880, 1080];
 
-/** Every placeholder in this chapter, for the asset swap. */
-export const PLACEHOLDERS: Placeholder[] = Object.values(P).filter((p) => p !== P.plate && p !== P.plate50);
+/** Every placeholder in this chapter, for the asset swap: none. The four real people / documents that were placeholders
+ *  (the 1917 Angelus booklet, Janet McKenzie Hill, Marcus Urann, Dorcas Reilly) are not faked: each beat is built on Flow stand-in
+ *  props with the name in our type and an "illustration" tag, and never claims to show the person or the document. */
+export const PLACEHOLDERS: Placeholder[] = [];
 
-const TAG_BOOKLET = 'Recipe paraphrased from the Angelus Marshmallows booklet, 1917';
+const TAG_BOOKLET = 'Illustration · recipe paraphrased from the Angelus Marshmallows booklet, 1917';
+
+/** A Flow prop cut-out dropped onto the desk on its own (kit/tg_drop DropIn: contact shadow at rest), natural aspect, `w` wide. */
+const Prop: React.FC<{name: FlowName; at: number; x: number; y: number; w: number; rot?: number; from?: From; children?: React.ReactNode}> = ({name, at, x, y, w, rot, from, children}) => (
+  <DropIn at={at} x={x} y={y} rot={rot} from={from}>
+    <div style={{position: 'relative', width: w, height: flowH(name, w)}}>
+      <Img src={staticFile(flowSrc(name))} style={{display: 'block', width: w, height: flowH(name, w), filter: CUT_COLOUR}} />
+      {children}
+    </div>
+  </DropIn>
+);
+
+/** A name set in our type (never handwriting): the name in Abril, a mono role after it, on a dark box. Fades in over 6 frames. */
+const NameType: React.FC<{name: string; role: string; x: number; y: number; at: number; size?: number}> = ({name, role, x, y, at, size = 50}) => {
+  const g = useGFrame();
+  if (g < at) return null;
+  return (
+    <div data-tx style={{position: 'absolute', left: x, top: y, opacity: interpolate(g, [at, at + 6], [0, 1], clamp), background: 'rgba(13,12,9,0.82)', padding: '12px 22px 10px',
+      whiteSpace: 'nowrap', display: 'flex', alignItems: 'baseline', gap: 16}}>
+      <span style={{fontFamily: JF.display, fontSize: size, lineHeight: 1, color: '#f4efe6'}}>{name}</span>
+      <span style={{fontFamily: JF.mono, fontSize: Math.round(size * 0.46), letterSpacing: 3, color: '#2FE0C4', textTransform: 'uppercase'}}>· {role}</span>
+    </div>
+  );
+};
+
+/** Steam off a pot, stepped with the desk (12 drawings a second): three soft puffs rising and fading, from frame `at`. */
+const Steam: React.FC<{x: number; y: number; at: number; w?: number}> = ({x, y, at, w = 260}) => {
+  const g = useGFrame();
+  if (g < at) return null;
+  return (
+    <>
+      {[0, 1, 2, 3].map((i) => {
+        const q = (((g - at) / 42 + i / 4) % 1 + 1) % 1;
+        const px = x + (i - 1.5) * (w / 5) + Math.sin((g + i * 30) / 14) * 14;
+        const r = 40 + 50 * q;
+        return <div key={i} style={{position: 'absolute', left: px - r, top: y - q * 200 - r, width: r * 2, height: r * 2, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0) 70%)', opacity: Math.sin(q * Math.PI) * Math.min(1, (g - at) / 10)}} />;
+      })}
+    </>
+  );
+};
 
 // ------------------------------------------------------------------ the scans that have landed (CREDITS.md; line boxes from the .json / measured)
 /** Piggly Wiggly price list, Albuquerque Morning Journal, 28 Oct 1922 (Chronicling America): "CRACKER JACKS" over "ANGELUS MARSHMALLOWS". */
@@ -54,24 +93,20 @@ const AD20 = {src: 'img/arch/sanitary-grocery-ad-angelus-marshmallows-knox-gelat
 // diorama; the drawn kitchen now holds the frame alone. The scan is still in public/ if a beat wants it.)
 
 // ------------------------------------------------------------------ 1917
-/** The ad plate full frame, the booklet on it, held still: the cut in is the motion; a stepped 2% nudge lands on the year. */
-const Booklet: React.FC<{t: TL; a: number}> = ({t}) => {
-  const g = useGFrame();
-  const nudge = g >= t.at('1917,') ? 1.02 : 1;
-  return (
-    <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
-      <AbsoluteFill style={{transform: `scale(${nudge})`, transformOrigin: '35% 50%'}}>
-        <PH {...P.plate} w={PLATE_SIZE[0]} h={PLATE_SIZE[1]} fit="cover" filter="saturate(0.85)" shadow={false} />
-        <PH {...P.booklet} x={250} y={130} w={560} h={800} rot={-3} filter="saturate(0.8) contrast(1.05)" />
-      </AbsoluteFill>
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.55) 100%)'}} />
-      <Highlight text="1917" x={1000} y={170} size={130} at={t.at('1917,')} seed={71} rot={-2} />
-      <Slip text="Angelus marshmallows" x={1010} y={390} at={t.at('a marshmallow brand') - 2} />
-      <Slip text="a recipe booklet" x={1050} y={510} at={t.at('Angelus put') - 2} rot={2} />
-      <Tag text="Angelus Marshmallows recipe booklet, 1917" />
-    </AbsoluteFill>
-  );
-};
+/** The sweet potatoes land on the desk, then a marshmallow tin on "a marshmallow brand", then a recipe booklet of the period on
+ *  "recipe booklet". All three are Flow props, tagged as an illustration: the booklet is never presented as the Angelus booklet. */
+const Booklet: React.FC<{t: TL; a: number}> = ({t, a}) => (
+  <AbsoluteFill>
+    <DarkPaper />
+    <Prop name="tg_sweet_potato_dish" at={Math.max(a + 4, t.at('sweet potatoes.'))} x={180} y={610} w={660} rot={-2} from={[-700, 420, 18]} />
+    <Prop name="tg_marshmallow_tin" at={t.at('a marshmallow brand')} x={1330} y={540} w={420} rot={3} from={[600, 500, 22]} />
+    <Prop name="tg_booklet_1910s" at={t.at('recipe booklet.')} x={880} y={170} w={580} rot={-4} />
+    <Highlight text="1917" x={170} y={120} size={130} at={t.at('1917,')} seed={71} rot={-2} />
+    <Slip text="Angelus marshmallows" x={180} y={330} at={t.at('a marshmallow brand') - 2} />
+    <Slip text="a recipe booklet" x={220} y={450} at={t.at('Angelus put') - 2} rot={2} />
+    <Tag text="Illustration · a recipe booklet of the 1910s, not the Angelus booklet" />
+  </AbsoluteFill>
+);
 
 /** Who was behind it: the booklet on the desk, the cooking teacher they hired. */
 const Hired: React.FC<{t: TL; a: number}> = ({t}) => (
@@ -82,12 +117,13 @@ const Hired: React.FC<{t: TL; a: number}> = ({t}) => (
       <Swipe lines={AD22.angelus} from={-999} to={-998} seed="a22a" color="rgba(255,111,97,0.55)" />
       <Swipe lines={[AD22.cj]} from={t.at('Cracker') - 1} to={t.end('Cracker Jack.') + 3} seed="a22c" />
     </PageScrap>
-    <PH {...P.hill} x={1330} y={150} w={440} h={600} />
+    {/* a cooking-school demonstration table of the 1900s, with her name in type: not a portrait, and not claimed to be hers */}
+    <Prop name="tg_cooking_school" at={t.at('well-known')} x={1260} y={250} w={500} rot={1} />
+    <NameType name="Janet McKenzie Hill" role="cooking teacher" x={1000} y={720} at={t.at('Janet') - 2} size={46} />
     <Slip text="the same company made Cracker Jack" x={170} y={850} at={t.at('Cracker') - 2} rot={-2} size={56} />
-    <Note text="Janet McKenzie Hill" x={690} y={260} size={56} rot={-3} at={t.at('teacher,') - 2} color="#ffffff" />
-    <Note text="a well-known cooking teacher" x={710} y={380} size={44} rot={-3} at={t.at('well-known') - 2} />
-    <Note text="writes the recipes" x={730} y={480} size={44} rot={-3} at={t.at('Janet') - 2} />
-    <Tag text="Janet McKenzie Hill, portrait" />
+    <Note text="hired: a well-known cooking teacher" x={170} y={470} size={46} rot={-3} at={t.at('well-known') - 2} color="#ffffff" />
+    <Note text="writes the recipes" x={230} y={590} size={50} rot={-3} at={t.at('to write') - 2} />
+    <Tag text="Illustration · a cooking-school table of the 1900s" />
   </AbsoluteFill>
 );
 
@@ -98,15 +134,16 @@ const Recipe: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const g = useGFrame();
   const land = t.at('baked with marshmallows') - 4;
   const x = interpolate(f, [a + 4, land], [0, 960], clamp); // linear: a guided move, no easing
-  const real = hasFile(P.plate.file);
+  const real = hasFile(PLATE);
   const i0 = t.idx('baked with marshmallows on top.');
   const lit = (k: number) => g >= t.wordAt(i0 + k);
   const W = ['Sweet', 'potatoes,', 'baked', 'with', 'marshmallows', 'on', 'top.'];
   return (
     <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
       <AbsoluteFill style={{transform: `translateX(${-x}px)`}}>
-        <PH {...P.plate} w={PLATE_SIZE[0]} h={PLATE_SIZE[1]} fit="cover" filter="saturate(0.85)" shadow={false} label={false} />
-        <PH {...P.booklet} x={250} y={130} w={560} h={800} rot={-3} filter="saturate(0.8) contrast(1.05)" label={false} />
+        <Img src={staticFile(PLATE)} style={{position: 'absolute', left: 0, top: 0, width: PLATE_SIZE[0], height: PLATE_SIZE[1], objectFit: 'cover', filter: 'saturate(0.85)'}} />
+        {/* the generic 1910s booklet (a Flow prop, not the Angelus booklet) lying on the plate */}
+        <Cut name="tg_booklet_1910s" x={230} y={270} w={640} rot={-3} land="none" />
         {/* the paraphrase, set in our own type on the plate's blank panel (never presented as the booklet's words) */}
         {f >= land - 8 && <div style={{position: 'absolute', left: 2010, top: 300, width: 760, opacity: interpolate(f, [land - 8, land - 2], [0, 1], clamp)}}>
           <div style={{fontFamily: JF.mono, fontSize: 20, letterSpacing: 3, color: real ? '#5a4a36' : 'rgba(244,239,230,0.6)', marginBottom: 26}}>THE RECIPE, IN SHORT</div>
@@ -170,9 +207,14 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
   return (
     <AbsoluteFill>
       <DarkPaper />
-      <PH {...P.urann} x={1340} y={150} w={430} h={590} />
+      {/* his year as props: the scoop (the harvest), the barrel (fresh berries), the pot (cook them down), then "in a can" */}
+      <Prop name="tg_cranberry_scoop" at={t.at('Marcus')} x={1120} y={140} w={620} rot={-3} />
+      <Prop name="tg_cranberry_barrel" at={t.at('Fresh berries')} x={1110} y={400} w={290} rot={1} from={[-600, -500, -20]} />
+      <Steam x={1595} y={555} at={t.at('cook them')} w={300} />
+      <Prop name="tg_cooking_pot_cranberries" at={t.at('His fix:')} x={1400} y={540} w={400} rot={-2} from={[500, 600, 22]} />
+      <Stamp text="IN A CAN" x={1180} y={850} size={84} at={t.at('in a can.')} rot={-4} color={CORAL} />
       <Highlight text="1912" x={120} y={110} size={120} at={t.at('1912,')} seed={74} rot={-2} />
-      <Note text="Marcus Urann, cranberry grower" x={140} y={290} size={46} rot={-2} at={t.at('Marcus') - 2} color="#ffffff" />
+      <NameType name="Marcus Urann" role="cranberry grower" x={140} y={290} at={t.at('Marcus') - 2} size={48} />
       {g >= drawAt && (
         <div style={{position: 'absolute', left: 150, top: 430}}>
           <div style={{fontFamily: JF.mono, fontSize: 20, letterSpacing: 3, color: 'rgba(244,239,230,0.7)', marginBottom: 12}}>
@@ -192,7 +234,7 @@ const Urann: React.FC<{t: TL; a: number}> = ({t}) => {
       )}
       <Note text="his fix: cook them down," x={150} y={720} size={50} rot={-2} at={t.at('His fix:') - 2} />
       <Note text="put them in a can" x={190} y={830} size={62} rot={-3} at={t.at('cook them') - 2} color={pal.subject} />
-      <Tag text="Marcus Urann · portrait" />
+      <Tag text="Illustration · a cranberry scoop, barrel and pot" />
     </AbsoluteFill>
   );
 };
@@ -277,23 +319,28 @@ const Pantry: React.FC<{t: TL; a: number; from: number}> = ({t, from}) => (
 );
 
 // ------------------------------------------------------------------ the montage
-/** 1954, 1955: one recipe card per date drops onto the desk on its own (no hands), fast. */
+/** 1954, 1955: the Butterball card drops onto the desk on its own (no hands); then Campbell's test kitchen as props: a 1950s
+ *  counter, a blank recipe card with Dorcas Reilly's name set on it in our type, an apron on its hook. No photograph of her. */
 const Montage: React.FC<{t: TL; a: number}> = ({t}) => {
   const deals: DropDealCard[] = [
-    {at: t.at('1954,'), x: 150, y: 150, rot: -4, card: <RecipeCard kicker="1954 · SWIFT AND COMPANY" title="Butterball turkey" lines={['on the market']} />},
-    {at: t.at('In 1955,') + 2, x: 720, y: 330, rot: 3, card: <RecipeCard kicker="1955 · NEW JERSEY" title="Campbell's test kitchen" lines={['home economists']} />},
-    {at: t.at('Dorcas'), x: 1290, y: 160, rot: -2, card: (
-      <RecipeCard kicker="HOME ECONOMIST" title="Dorcas Reilly" lines={['the ask: a recipe', 'from the pantry']}>
-        <PH {...P.reilly} x={CARD[0] - 150} y={20} w={130} h={170} shadow={false} />
-      </RecipeCard>
-    )},
+    {at: t.at('1954,'), x: 150, y: 130, rot: -4, card: <RecipeCard kicker="1954 · SWIFT AND COMPANY" title="Butterball turkey" lines={['on the market']} />},
   ];
   return (
     <AbsoluteFill>
       <DarkPaper />
       <DropDeal deals={deals} />
-      <Note text="things people already have" x={170} y={800} size={56} rot={-3} at={t.at('recipe made') - 2} />
-      <Tag text="Dorcas Reilly · Campbell Soup Company photo" />
+      <Prop name="tg_test_kitchen_counter" at={t.at('In 1955,') + 2} x={330} y={610} w={1260} from={[0, 700, 0]} />
+      <Slip text="Campbell's test kitchen, 1955" x={190} y={500} at={t.at('test kitchen') - 2} size={50} rot={-2} />
+      <Prop name="tg_apron_hook" at={t.at('home economist')} x={1570} y={110} w={190} from={[300, -600, 12]} />
+      <Prop name="tg_recipe_card_1955" at={t.at('Dorcas')} x={880} y={110} w={560} rot={3} from={[700, -420, -24]}>
+        {/* her name set on the blank card in our type (never a facsimile of a real card) */}
+        <div data-tx style={{position: 'absolute', left: 56, top: 74, color: '#2a2118', whiteSpace: 'nowrap'}}>
+          <div style={{fontFamily: JF.mono, fontSize: 19, letterSpacing: 3, color: '#8a3a2c'}}>HOME ECONOMIST · CAMPBELL'S</div>
+          <div style={{fontFamily: JF.display, fontSize: 64, lineHeight: 1.15, marginTop: 10}}>Dorcas Reilly</div>
+        </div>
+      </Prop>
+      <Note text="things people already have" x={1010} y={520} size={52} rot={-3} at={t.at('recipe made') - 2} />
+      <Tag text="Illustration · a 1950s test-kitchen counter" />
     </AbsoluteFill>
   );
 };
@@ -311,7 +358,7 @@ const Casserole: React.FC<{t: TL; a: number}> = ({t, a}) => {
   const can = (sx: number, sy: number): [number, number] => [CX + (sx * CW) / 1150, CY + (sy * CW) / 1150];
   return (
     <AbsoluteFill style={{background: INK}}>
-      <Img src={staticFile(P.plate50.file)} style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, objectFit: 'cover', filter: 'saturate(0.85) contrast(1.02)'}} />
+      <Img src={staticFile(PLATE50)} style={{position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, objectFit: 'cover', filter: 'saturate(0.85) contrast(1.02)'}} />
       <States srcs={['s2_casserole_a', 's2_casserole_b', 's2_casserole_c']} at={[a + 1, bAt, cAt]} x={150} y={370} w={1040} out={cans} />
       <Cut name="tg_three_cans" x={CX} y={CY} w={CW} at={cans} out={back} land="slap" />
       {g >= cans && g < back && (
@@ -383,11 +430,11 @@ const Body: React.FC = () => {
   const c = {
     booklet: 0,
     hired: hold(at('The company') - 1, readEnd(at('Angelus put') - 2, 'a recipe booklet', 13)),
-    recipe: hold(at('And one of them') - 1, readEnd(at('Janet') - 2, 'writes the recipes')),
+    recipe: hold(at('And one of them') - 1, readEnd(at('Janet') - 2, 'Janet McKenzie Hill · cooking teacher', 6), readEnd(at('to write') - 2, 'writes the recipes')),
     motive: at('But notice') - 1,
     berries: hold(at("Then there's") - 1, readEnd(at('that booklet') - 2, "...it's on your table")),
     urann: hold(at('But in 1912,') - 1, readEnd(at('people have been') - 2, 'sauce: for centuries')),
-    ocean: hold(at('In 1941,') - 1, readEnd(at('cook them') - 2, 'put them in a can'), readEnd(at('cook them'), 'IN A CAN: ALL 52 WEEKS', 2)),
+    ocean: hold(at('In 1941,') - 1, readEnd(at('cook them') - 2, 'put them in a can'), readEnd(at('cook them'), 'IN A CAN: ALL 52 WEEKS', 2), readEnd(at('in a can.'), 'IN A CAN', 6)),
     // Ocean Spray holds through "And that answers one of our questions." (its name lands late in the sentence)
     question: hold(at('And that answers') - 1, readEnd(at('Ocean Spray.'), 'OCEAN SPRAY', 7)),
     payoff: at('Because it IS') - 1,
@@ -423,7 +470,7 @@ const Body: React.FC = () => {
   ]);
   // sound lists, kept next to the scenes: silent cuts; a stamp per title, stamp and tape; the near-silent marker per note; a tick per card
   const stamps = ['1917,', 'motive.', 'cranberry sauce.', '1912,', '1941,', 'Ocean Spray.', "It's 1955.", 'Mix,', 'bake,', 'done.', 'Green bean casserole.', 'twenty million', 'Mock homemade.'];
-  const notes = ['teacher,', 'well-known', 'Janet', 'sell marshmallows', 'a hundred years', 'that booklet', 'American fruit', 'people have been', 'Marcus', 'His fix:', 'cook them',
+  const notes = ['well-known', 'to write', 'sell marshmallows', 'a hundred years', 'that booklet', 'American fruit', 'people have been', 'Marcus', 'His fix:', 'cook them',
     "growers'", 'cooperative took', 'answers', 'Why is', 'like a can?', 'refrigerator,', 'pantry full', 'magazine', 'do it all', 'recipe made', 'Store-bought,', 'dressed up'];
   const ticks = [at('1954,'), at('In 1955,') + 2, at('Dorcas'), at('Fresh berries'), at('Those ridges') + 10];
   return (
