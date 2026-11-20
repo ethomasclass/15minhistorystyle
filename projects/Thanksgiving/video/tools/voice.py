@@ -30,7 +30,7 @@ ONE_TAKE = os.environ.get("VOICE_ONE_TAKE", "1") not in ("0", "", "false")
 
 # Spoken forms for words the voice misreads. Keys are matched as whole words; fill this in per video
 # after the pronunciation test (references/voice-and-audio.md). Numbers and years are spelled out by number_words().
-PRONOUNCE = {"Worcester": "Wooster", "Tocqueville": "Toke-vill", "Mobilier": "Mo-beel-yay", "Schuyler": "Sky-ler", "Kearney": "Kar-nee"}
+PRONOUNCE = {"Massasoit": "Massa-soyt", "Worcester": "Wooster", "Tocqueville": "Toke-vill", "Mobilier": "Mo-beel-yay", "Schuyler": "Sky-ler", "Kearney": "Kar-nee"}
 DOLLARS = {"1,000": "one thousand", "5,000": "five thousand", "10,000": "ten thousand"}
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
@@ -74,7 +74,7 @@ def number_words(text):
     text = re.sub(r"(?<![\w.])\.(\d)(\d\d)\b", average, text)
     text = re.sub(r"\b1([789])00s\b", lambda m: two(int("1" + m.group(1))) + " hundreds", text)
     text = re.sub(r"\b(1[789]\d)0s\b", lambda m: re.sub(r"y$", "ie", year(int(m.group(1) + "0"))) + "s", text)
-    text = re.sub(r"(?<![\d,])\b(1[789]\d\d|20\d\d)\b(?!,\d)", lambda m: year(int(m.group(1))), text)
+    text = re.sub(r"(?<![\d,])\b(1[0-9]\d\d|20\d\d)\b(?!,\d)", lambda m: year(int(m.group(1))), text)
     text = re.sub(r"(?<![\d.])\b\d{1,3}(?:,\d{3})+\b|(?<![\d.,])\b\d+\b(?![.,]\d)", lambda m: cardinal(int(m.group().replace(",", ""))), text)
     return text
 
