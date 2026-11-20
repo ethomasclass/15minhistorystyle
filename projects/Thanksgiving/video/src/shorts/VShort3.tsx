@@ -145,8 +145,8 @@ const Grand: React.FC<{t: TL; a: number}> = ({t, a}) => (
   <AbsoluteFill>
     <PortraitClip name="dining_hall" at={a} start={4.6} cx={1010} cx2={970} cy={680} z={2.4} dur={100} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,12,9,0.55) 0%, transparent 34%)'}} />
-    <Highlight text="THE FANCIEST" x={60} y={180} size={112} at={t.at('Turtle soup')} seed={54} rot={-3} />
-    <Highlight text="DISH IN AMERICA" x={90} y={335} size={100} at={t.at('Turtle soup') + 4} seed={55} rot={-2} />
+    <Highlight text="ONE OF THE FANCIEST" x={50} y={180} size={80} at={t.at('Turtle soup')} seed={54} rot={-3} />
+    <Highlight text="DISHES IN AMERICA" x={80} y={305} size={80} at={t.at('Turtle soup') + 4} seed={55} rot={-2} />
     <PTag text={TAG_DRAWN} />
   </AbsoluteFill>
 );
