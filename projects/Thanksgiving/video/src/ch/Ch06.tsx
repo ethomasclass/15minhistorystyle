@@ -355,17 +355,9 @@ const Body: React.FC = () => {
   );
 };
 
-/** Music: the gelatin cue, dropped to silence 4 frames before the ad; the ad sting under the reveal, gone by the end of "box." so
- *  the pause and the deadpan line sit in silence; the gelatin cue back for the board, picked up where it stopped. */
-const Music = (t: TL) => {
-  const like = t.at('Like this');
-  const back = t.at('And the companies') - 2;
-  return [
-    {src: 'music/tg_gelatin.mp3', volume: bed('tg_gelatin'), to: like - 4, fadeOut: 5},
-    {src: 'music/tg_ad_sting.mp3', volume: bed('tg_ad_sting', 15), from: like - 1, to: t.end('box.') + 4, fadeOut: 12},
-    {src: 'music/tg_gelatin.mp3', volume: bed('tg_gelatin'), from: back, startFrom: like},
-  ];
-};
+/** Music: the gelatin cue runs straight through the chapter (the user, Nov 2026: the cut to silence before the tuna read as a
+ *  glitch, so the music keeps going under the reveal, the pause and the deadpan line; no ad sting). */
+const Music = (_t: TL) => [{src: 'music/tg_gelatin.mp3', volume: bed('tg_gelatin')}];
 
 export const Ch06: React.FC = () => {
   const t = makeTimeline(N, 30);
