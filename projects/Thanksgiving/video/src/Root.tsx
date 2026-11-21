@@ -1,5 +1,6 @@
 import React from 'react';
 import {Composition} from 'remotion';
+import {ThumbEels} from './ThumbEels';
 import {FPS, H, W} from './lib/theme';
 import {CHAPTERS} from './chapters';
 import {JFonts} from './kit/Kit';
@@ -19,6 +20,8 @@ export const Root: React.FC = () => (
       <Composition key={c.id} id={c.id} width={W} height={H} fps={FPS} durationInFrames={c.frames} component={() => <JFonts><c.C /></JFonts>} />
     ))}
     {FX.map((x) => <Composition key={x.id} id={`FX-${x.id}`} width={W} height={H} fps={FPS} durationInFrames={x.frames} component={() => <JFonts><x.C /></JFonts>} />)}
+    <Composition id="ThumbEels-A" width={W} height={H} fps={FPS} durationInFrames={1} component={() => <JFonts><ThumbEels variant="A" /></JFonts>} />
+    <Composition id="ThumbEels-B" width={W} height={H} fps={FPS} durationInFrames={1} component={() => <JFonts><ThumbEels variant="B" /></JFonts>} />
     <Composition id="Thumb-A" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbA /></JFonts>} />
     <Composition id="Thumb-B" width={W} height={H} fps={FPS} durationInFrames={THUMB_FRAMES} component={() => <JFonts><ThumbB /></JFonts>} />
     <Composition id="Intro" width={W} height={H} fps={FPS} durationInFrames={TITLE_INTRO_FRAMES} component={() => <JFonts><TitleIntro title={TITLE} subtitle={SUBTITLE} line={DATES} /></JFonts>} />

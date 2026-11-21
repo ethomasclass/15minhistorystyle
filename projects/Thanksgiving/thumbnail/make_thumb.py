@@ -19,7 +19,7 @@ def make(split,name):
     bg=bg*(1-0.45*sh[...,None])*(1-0.3*sh2[...,None])
     bg=bg*(1-0.6*ring[...,None])+hexbgr('#0D0C09')*0.6*ring[...,None]
     out=np.clip(bg*(1-a[...,None])+im*a[...,None],0,255).astype(np.uint8)
-    out=cv2.resize(out,(1280,720),interpolation=cv2.INTER_AREA); cv2.imwrite(name,out,[cv2.IMWRITE_JPEG_QUALITY,95]); return out
+    big=cv2.resize(out,(1920,1080),interpolation=cv2.INTER_CUBIC); cv2.imwrite(name.replace('.jpg','_1920.png'),big); out=cv2.resize(out,(1280,720),interpolation=cv2.INTER_AREA); cv2.imwrite(name,out,[cv2.IMWRITE_JPEG_QUALITY,95]); return out
 A=make(xx>w*0.5,'thumb_A_vertical.jpg')
 B=make(xx>w*0.5+(yy-h/2)*0.35,'thumb_B_diagonal.jpg')
 small=lambda x: cv2.resize(x,(320,180),interpolation=cv2.INTER_AREA)
