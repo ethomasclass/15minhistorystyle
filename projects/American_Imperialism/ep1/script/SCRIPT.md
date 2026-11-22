@@ -1,6 +1,6 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 1 (not voiced) · 1766 words · about 9:57 of narration at the locked pace
+**Chunk History** · narration script · draft 2 (not voiced) · 1542 words · about 8:44 of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
@@ -19,22 +19,28 @@ use the word. Ledger row 1.
 
 **Title:** The Pitch Meeting · *How America Talked Itself Into an Empire* · dates *1867-1898* (thumbnail working pick: A,
 "WHO TOOK HAWAIʻI?")
-**Tone:** plain and wry, with sarcasm aimed at the powerful and the arguments, and the odd dad joke. No jokes from chapter 7 to
-the end of chapter 8; never a joke on the Queen, Native Hawaiians or workers; never a joke on top of a quote.
+**Tone:** plain and serious in the voice. The humor lives in the edit, the way a mockumentary does it: the narration says
+something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
+
+The toolkit: the **contradiction cut** (a hard cut on the word to a picture that says otherwise), the **snap zoom** on a face,
+the **look to camera** (an illustrated figure glances at us and back, drawn with the figure rig), the **too-long hold** (a beat of
+silence and room tone), **deadpan lower thirds** (true captions that do the joking), and the **background gag** (the pineapple
+that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 
 | # | Starts | Chapter | Words | Length |
 |---|---|---|---|---|
 | 1 | 0:00 | The Locked Room | 51 | 19 s |
-| 2 | 0:18 | The Question | 94 | 32 s |
-| 3 | 0:51 | The Old Guard | 143 | 48 s |
-| 4 | 1:39 | The Pitch Meeting | 461 | 152 s |
-| 5 | 4:10 | The Same Islands | 56 | 20 s |
-| 6 | 4:31 | The Heist | 524 | 172 s |
-| 7 | 7:23 | He Has, We Have | 51 | 19 s |
-| 8 | 7:41 | Under Protest | 201 | 74 s |
-| 9 | 8:55 | Back to the Question | 185 | 62 s |
+| 2 | 0:18 | The Question | 88 | 31 s |
+| 3 | 0:49 | The Old Guard | 117 | 40 s |
+| 4 | 1:29 | The Pitch Meeting | 388 | 128 s |
+| 5 | 3:36 | The Same Islands | 37 | 14 s |
+| 6 | 3:50 | The Heist | 425 | 140 s |
+| 7 | 6:10 | He Has, We Have | 51 | 19 s |
+| 8 | 6:29 | Under Protest | 201 | 74 s |
+| 9 | 7:43 | Back to the Question | 184 | 62 s |
 
 **Story arc check:**
 
@@ -65,103 +71,120 @@ And the men who put her here aren't a foreign army. They're mostly Americans. Or
 
 ## 0:18 | The Question
 
-`ch02_the_question.txt` · 94 words · about 32 s
+`ch02_the_question.txt` · 88 words · about 31 s
 
 [curious] So here's the question. How does a country that was born breaking away from a king end up locking a queen in her own palace?
 
-It didn't happen in a day. It happened through a pitch: four arguments for why America should reach beyond its own shores. [wry] Some of them still sound pretty convincing. Which is exactly the problem.
+It didn't happen in a day. It happened through a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
 
 We'll come back to this room. But first, a phrase from 1776. America told the world that a government gets its power from "the consent of the governed." [beat] Hold on to that. It's coming back.
 
 ---
 
-## 0:51 | The Old Guard
+## 0:49 | The Old Guard
 
-`ch03_the_old_guard.txt` · 143 words · about 48 s
+`ch03_the_old_guard.txt` · 117 words · about 40 s
 
 For most of the 1800s, America had a simple rule for the rest of the world: stay out of it.
 
-That's called {isolationism}: staying out of other countries' wars and alliances. Thomas Jefferson put it in his first speech as president, in 1801: "entangling alliances with none." [wry] In other words: we are not joining your group project.
+That's called {isolationism}: staying out of other countries' wars and alliances. Thomas Jefferson put it in his first speech as president, in 1801: "entangling alliances with none."
+> **CUT:** Jefferson's portrait on the desk. Hold one beat too long, in silence. (He'll be back.)
 
-America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. Critics called it "Seward's Folly," after the Secretary of State who made the deal. [dryly] It got a pretty cold reception. Then people found gold up there. Folly status: revoked.
+America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. Critics called it "Seward's Folly," after the Secretary of State who made the deal.
+> **CUT:** Hard cut on "Folly": a gold nugget slaps onto the desk. Room tone. No narration for a second.
 
-Then, in 1890, the census announced that "there can hardly be said to be a frontier line" anymore. [beat] The continent was officially full. Please try again later.
+Then people found gold there.
+
+In 1890, the census announced that "there can hardly be said to be a frontier line" anymore. The continent was full.
+> **CUT:** World: a wagon rolls to the end of the road and stops at a cliff over the Pacific. The driver turns and looks straight at the camera.
 
 [curious] So where next?
 
 ---
 
-## 1:39 | The Pitch Meeting
+## 1:29 | The Pitch Meeting
 
-`ch04_the_pitch_meeting.txt` · 461 words · about 152 s
+`ch04_the_pitch_meeting.txt` · 388 words · about 128 s
 
 By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it.
 
-Think of it as a pitch meeting. The investor is a whole country. [wry] And the product is other people's countries.
+Think of it as a pitch meeting. Four pitchers, one investor: the United States.
+> **CUT:** World: the pitch room. Washington and Jefferson in portraits on the wall, watching. Each pitcher presents from an easel deck with a title in orange tape.
 
-Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's. [wry] And the pitch was basically: we could totally do this.
+Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
 
-Four pitchers. Here's the first.
+*The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
+> **CUT:** Deck title: MARKET OPPORTUNITY. Snap zoom on the price line as it dives.
 
-*The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. [wry] America had a classic problem: too much stuff. Anyone who has seen a garage knows it's still a classic problem. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
-
-*The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. Picture a road trip where every gas station is in somebody else's country. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. [dryly] His argument held water. Sorry. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
+*The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
+> **CUT:** Deck title: COMPETITIVE LANDSCAPE. A world map shaded with other empires' colonies. A clerk in the background slowly raises his hand. Nobody calls on him.
 
 And here's the thing about the Pacific. It's enormous. And right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
 *The Preacher.* Josiah Strong was a Protestant minister, and in 1885 he wrote a bestseller called *Our Country*. His pitch: America had been given Christianity and civilization, and it owed them to the world. In Hawaiʻi, missionaries had been arriving since 1820.
+> **CUT:** Deck title: MISSION STATEMENT. No gag beyond the title.
 
-*The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. [firmly] It wasn't. It was opinions wearing a lab coat.
+*The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. [firmly] It wasn't.
+> **CUT:** Deck title: THE "SCIENCE", with the quotation marks hand-drawn in teal. Desk only; no illustrated racial imagery.
 
 And here's the strange part. The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled."
-
-[dryly] So much for staying out of it.
+> **CUT:** Hard cut to Washington's portrait. Snap zoom to his face. Hold. A clock ticks.
 
 ---
 
-## 4:10 | The Same Islands
+## 3:36 | The Same Islands
 
-`ch05_the_same_islands.txt` · 56 words · about 20 s
+`ch05_the_same_islands.txt` · 37 words · about 14 s
 
 Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already sold almost entirely to America. A navy base? The best harbor in the Pacific. Missionaries? Three generations of them. And the "science" told them they had every right.
-
-[wry] It's like four people arguing about where to eat, and every single one of them names the same restaurant.
+> **CUT:** All four decks flip to the same slide in unison: ACQUISITION TARGET: HAWAIʻI. One pitcher glances at the camera. The camera pushes into the map and through it to Honolulu.
 
 ---
 
-## 4:31 | The Heist
+## 3:50 | The Heist
 
-`ch06_the_heist.txt` · 524 words · about 172 s
+`ch06_the_heist.txt` · 425 words · about 140 s
 
-In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries. [wry] Their parents came to do good. They stayed to do well.
+In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
-In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and most Native Hawaiians' right to vote. People called it the Bayonet Constitution, [dryly] which tells you everything about how the negotiations went.
+In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and most Native Hawaiians' right to vote. People called it the Bayonet Constitution.
+> **CUT:** The constitution on the desk. A bayonet slides into frame and rests across it. Hold.
 
-Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar went from VIP to standing in line with everybody else. The planters' fastest way back in? Make Hawaiʻi part of America.
+Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
 
 In 1891, a new ruler took the throne: Liliʻuokalani, the king's sister. She wanted a new constitution that gave power back to her people. For the planters, that was the last straw.
 
-In January 1893, they made their move. They called themselves the Committee of Safety. [wry] Bold name for a group planning to overthrow a government. That's a {coup}: a small group seizing a government by force. And the American minister in Honolulu, John Stevens, ordered sailors and Marines ashore from the warship USS *Boston*.
+In January 1893, they made their move. They called themselves the Committee of Safety.
+> **CUT:** Hard cut on "Safety": world, rifles being laid out on a table. One of the men glances at the camera.
+
+That's a {coup}: a small group seizing a government by force. And the American minister in Honolulu, John Stevens, ordered sailors and Marines ashore from the warship USS *Boston*.
+> **CUT:** Deadpan lower third under Stevens' name: JOHN L. STEVENS · U.S. MINISTER TO HAWAIʻI · NOT AUTHORIZED BY CONGRESS.
 
 The Queen would not start a war with the United States. She stepped aside, in writing, and under protest: "I yield to the superior force of the United States of America."
 
-The new government's president was a lawyer named Sanford Dole. [beat] Yes. Dole. If that name rings a bell, hold that thought.
+The new government's president was a lawyer named Sanford Dole. [beat] Yes. That Dole.
+> **CUT:** Dole's portrait on the desk. In the corner of the frame, a pineapple, unexplained. Nobody mentions it.
 
-On February 1st, Stevens raised the American flag and declared Hawaiʻi a {protectorate}: a place under America's protection. [wry] Whether Hawaiʻi wanted protecting was not on the agenda.
+On February 1st, Stevens raised the American flag and declared Hawaiʻi a {protectorate}: a place under America's protection.
 
 The planters told it differently. The Queen, they said, was the one breaking the law, and if America didn't take Hawaiʻi, Britain or Japan would.
 
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
-Dole's answer, more or less: no thanks. [wry] It turns out it's hard to give back a government when the other guy has the keys and the guards.
+Dole refused.
+> **CUT:** Snap zoom on Dole's portrait. Hold. A clock ticks. The pineapple is still there.
 
-On July 4th, 1894, Dole's government declared itself the Republic of Hawaii. [dryly] The date was not an accident. A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today. [wry] Sanford kept the government. His cousin got the fruit. Talk about a sweet deal.
+On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
+> **CUT:** Hard cut: a calendar page, JULY 4. Silence.
+
+A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
+> **CUT:** The pineapple from the corner rolls to the centre of the desk and stops against Dole's portrait. Hard cut to a period can label.
 
 What the planters wanted was {annexation}: one country officially adding another place to itself. But their treaty kept stalling in the Senate. [beat] Partly because of a stack of paper.
 
 ---
 
-## 7:23 | He Has, We Have
+## 6:10 | He Has, We Have
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
@@ -171,7 +194,7 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ---
 
-## 7:41 | Under Protest
+## 6:29 | Under Protest
 
 `ch08_under_protest.txt` · 201 words · about 74 s
 
@@ -189,13 +212,14 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 ---
 
-## 8:55 | Back to the Question
+## 7:43 | Back to the Question
 
-`ch09_back_to_the_question.txt` · 185 words · about 62 s
+`ch09_back_to_the_question.txt` · 184 words · about 62 s
 
 [thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
 
 With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
+> **CUT:** Back in the pitch room, empty now. Jefferson's portrait, the same too-long hold as chapter 3. Callback.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 
@@ -203,7 +227,7 @@ In 1993, a hundred years after the overthrow, Congress formally apologized to Na
 
 So can a republic born fighting an empire become one? [beat] It had taken a kingdom. It just wouldn't use the word.
 
-[wry] And remember, Hawaiʻi only got annexed because America was suddenly at war. A war that started, depending on who you ask, with a ship that blew up in Havana. Or with a newspaper.
+And Hawaiʻi only got annexed because America was suddenly at war. A war that started, depending on who you ask, with a ship that blew up in Havana. Or with a newspaper.
 
 ---
 

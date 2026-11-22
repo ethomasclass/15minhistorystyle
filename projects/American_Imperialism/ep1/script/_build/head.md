@@ -1,6 +1,6 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 1 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
+**Chunk History** · narration script · draft 2 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
@@ -19,8 +19,14 @@ use the word. Ledger row 1.
 
 **Title:** The Pitch Meeting · *How America Talked Itself Into an Empire* · dates *1867-1898* (thumbnail working pick: A,
 "WHO TOOK HAWAIʻI?")
-**Tone:** plain and wry, with sarcasm aimed at the powerful and the arguments, and the odd dad joke. No jokes from chapter 7 to
-the end of chapter 8; never a joke on the Queen, Native Hawaiians or workers; never a joke on top of a quote.
+**Tone:** plain and serious in the voice. The humor lives in the edit, the way a mockumentary does it: the narration says
+something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
+
+The toolkit: the **contradiction cut** (a hard cut on the word to a picture that says otherwise), the **snap zoom** on a face,
+the **look to camera** (an illustrated figure glances at us and back, drawn with the figure rig), the **too-long hold** (a beat of
+silence and room tone), **deadpan lower thirds** (true captions that do the joking), and the **background gag** (the pineapple
+that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 
