@@ -16,16 +16,26 @@ Every line in quotation marks is from a real, checkable source (copies in `../..
 | "a fine of $5,000, and imprisonment at hard labor for five years"; "My palace was my prison"; "Oh, honest Americans ..." | Liliʻuokalani, *Hawaii's Story by Hawaii's Queen*, 1898 (`hawaiisstorybyh00lili.txt`) |
 | "Seward's Folly" | a period nickname (to confirm it was used at the time) |
 
-## Fact flags (check before voicing)
+## Fact check (draft 2, November 2026)
 
-1. **1887:** the renewal and the Pearl Harbor right, and the Bayonet Constitution's voting rules ("most Native Hawaiians' right to vote" may be too strong; property and income rules hit many, and Asian residents were shut out entirely).
-2. **McKinley Tariff, 1890:** raw sugar duty-free plus a bounty (two cents a pound) to U.S. growers.
-3. **"Sugar already sold almost entirely to America"** (ch 5): confirm a share.
-4. **Strong's *Our Country* as a "bestseller":** confirm sales.
-5. **Alaska gold "up there":** gold at Juneau (1880) and Nome (1899); the Klondike (1896) was in Canada. The line stays vague on purpose.
-6. **The Committee of Safety and the sons of missionaries:** Dole and Thurston were; confirm "many."
-7. **The 1895 order:** arrested about January 16, abdication January 24, sentence after; released about eight months later (her book says "about eight months after my arrest").
-8. **"Brought here, to this room":** she was held in an upstairs room of ʻIolani Palace; confirm.
-9. **James Dole:** Sanford's cousin (first cousin once removed), arrived 1899, Hawaiian Pineapple Company 1901.
-10. **"Something you almost never see a president do":** wry framing, not a factual claim; keep or cut.
-11. **1993:** the Apology Resolution passed Congress and was signed November 23, 1993; "formally apologized" is the resolution's own word ("apologizes").
+Every flagged claim, what the sources say, and what changed in the script.
+
+| # | Claim | Verdict | Source | Script |
+|---|---|---|---|---|
+| 1 | 1887 renewal gave the U.S. Pearl Harbor | **Confirmed.** Senate amendment January 20, 1887; ratifications exchanged December 9, 1887 | Reciprocity Treaty of 1875 (Wikipedia, Britannica) | unchanged |
+| 1b | Bayonet Constitution took "most Native Hawaiians' right to vote" | **Too strong.** It brought back income and property rules (for the House of Nobles: $3,000 in property or $600 income) that shut out many Native Hawaiians, and barred Asian residents entirely | NLM Native Voices timeline; Wikipedia | **rewritten**: "new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely." |
+| 2 | McKinley Tariff: sugar duty-free, bonus to U.S. growers | **Confirmed.** Two cents a pound bounty on domestic sugar | Taussig, *Some Aspects of the Tariff Question*; Stevens to the State Dept (FRUS 1894) | unchanged |
+| 3 | Hawaiian sugar "sold almost entirely to America" | **Confirmed.** FRUS 1894: exports went "almost entirely" to the U.S.; about 99 percent by 1890 | FRUS 1894 appendix II; Bill of Rights Institute | unchanged |
+| 4 | *Our Country* was a bestseller | **Confirmed.** 158,000 copies by 1891; over 175,000 in Strong's lifetime | UVA Mark Twain project; SAGE Encyclopedia of Urban History | unchanged |
+| 5 | Gold found in Alaska after the purchase | **Confirmed.** Juneau, 1880, the first major strike | City of Juneau history | unchanged |
+| 6 | Planters were often missionaries' descendants | **Confirmed.** PL 103-150: the Committee of Safety "represented the American and European sugar planters, descendents of missionaries, and financiers." Dole was a missionary's son (Daniel Dole); Thurston a missionaries' grandson | `apology_resolution.txt`; Hawaiʻi State Archives; Wikipedia | unchanged |
+| 7 | 1895 timeline | **Corrected.** Arrested January 16; abdicated January 24 (eight days, not a week); tried by a **military commission** in February; sentence commuted and paroled in September, about eight months after arrest | ʻIolani Palace, "Queen's Imprisonment"; her book (chapter "Released on Parole") | **rewritten**: "Eight days later", "a military court", "let out on parole about eight months later" |
+| 8 | Held in an upstairs room of the palace | **Confirmed.** A single room on the second floor | ʻIolani Palace | unchanged |
+| 9 | James Dole: cousin, pineapples | **Confirmed.** Cousin (once removed); arrived 1899; Hawaiian Pineapple Company 1901; later Dole Food Company | Wikipedia; Jamaica Plain Historical Society | unchanged |
+| 10 | "Seward's Folly" | **Partly a myth.** The nickname existed, but a 2019 study (Michael A. Hill, *Western Historical Quarterly*) found most newspapers supported the purchase; the mockery has been overstated in textbooks | University of Rochester; Library of Congress; Anchorage Daily News | **rewritten**: "A few critics mocked it, and one nickname stuck". The gold-nugget cut still works |
+| 11 | "survival of the fittest" | **Confirmed.** Coined by Herbert Spencer in *Principles of Biology* (1864), after reading Darwin | Britannica; Wikipedia | unchanged |
+| 12 | Annexed "with a simple majority vote" | **Reworded.** The joint resolution needed only a majority; the actual votes were House 209-91 (June 15) and Senate 42-21 (July 6), exactly two-thirds in the Senate. McKinley signed July 7 | National Archives Milestone Documents; Voteview | **rewritten**: "the United States annexed Hawaiʻi anyway ... with a joint resolution, which only needed a majority in each house" |
+| 13 | 1993 apology | **Confirmed.** PL 103-150 "apologizes to Native Hawaiians on behalf of the people of the United States" | `apology_resolution.txt` | unchanged |
+| 14 | 1890 census and the frontier | **Reworded** for precision: the 1890 census *reported* it (Turner quotes the superintendent's bulletin) | `turner_1893.txt` | "the 1890 census reported" |
+
+Nothing left open. One judgment call stays with you: "For the planters, that was the last straw" is interpretation, not a quoted fact.

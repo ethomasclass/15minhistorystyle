@@ -1,6 +1,6 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 2 (not voiced) · 1542 words · about 8:44 of narration at the locked pace
+**Chunk History** · narration script · draft 2 (not voiced) · 1569 words · about 8:53 of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
@@ -33,13 +33,13 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 |---|---|---|---|---|
 | 1 | 0:00 | The Locked Room | 51 | 19 s |
 | 2 | 0:18 | The Question | 88 | 31 s |
-| 3 | 0:49 | The Old Guard | 117 | 40 s |
-| 4 | 1:29 | The Pitch Meeting | 388 | 128 s |
-| 5 | 3:36 | The Same Islands | 37 | 14 s |
-| 6 | 3:50 | The Heist | 425 | 140 s |
-| 7 | 6:10 | He Has, We Have | 51 | 19 s |
-| 8 | 6:29 | Under Protest | 201 | 74 s |
-| 9 | 7:43 | Back to the Question | 184 | 62 s |
+| 3 | 0:49 | The Old Guard | 123 | 42 s |
+| 4 | 1:30 | The Pitch Meeting | 388 | 128 s |
+| 5 | 3:38 | The Same Islands | 37 | 14 s |
+| 6 | 3:52 | The Heist | 436 | 143 s |
+| 7 | 6:16 | He Has, We Have | 51 | 19 s |
+| 8 | 6:34 | Under Protest | 211 | 77 s |
+| 9 | 7:52 | Back to the Question | 184 | 62 s |
 
 **Story arc check:**
 
@@ -82,24 +82,24 @@ We'll come back to this room. But first, a phrase from 1776. America told the wo
 
 ## 0:49 | The Old Guard
 
-`ch03_the_old_guard.txt` · 117 words · about 40 s
+`ch03_the_old_guard.txt` · 123 words · about 42 s
 
 For most of the 1800s, America had a simple rule for the rest of the world: stay out of it.
 
 That's called {isolationism}: staying out of other countries' wars and alliances. Thomas Jefferson put it in his first speech as president, in 1801: "entangling alliances with none."
 
-America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. Critics called it "Seward's Folly," after the Secretary of State who made the deal.
+America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. A few critics mocked it, and one nickname stuck: "Seward's Folly," after the Secretary of State who made the deal.
 > **CUT:** CONTRADICTION. On "Folly," a gold nugget drops onto the desk with a dull thud. 1 s of nothing.
 
 Then people found gold there.
 
-In 1890, the census announced that "there can hardly be said to be a frontier line" anymore. The continent was full.
+Then the 1890 census reported that "there can hardly be said to be a frontier line" anymore. The continent was full.
 
 [curious] So where next?
 
 ---
 
-## 1:29 | The Pitch Meeting
+## 1:30 | The Pitch Meeting
 
 `ch04_the_pitch_meeting.txt` · 388 words · about 128 s
 
@@ -124,7 +124,7 @@ And here's the strange part. The Preacher and the Scientist were often the same 
 
 ---
 
-## 3:36 | The Same Islands
+## 3:38 | The Same Islands
 
 `ch05_the_same_islands.txt` · 37 words · about 14 s
 
@@ -132,13 +132,13 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 
 ---
 
-## 3:50 | The Heist
+## 3:52 | The Heist
 
-`ch06_the_heist.txt` · 425 words · about 140 s
+`ch06_the_heist.txt` · 436 words · about 143 s
 
 In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
-In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and most Native Hawaiians' right to vote. People called it the Bayonet Constitution.
+In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely. People called it the Bayonet Constitution.
 
 Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
 
@@ -174,7 +174,7 @@ What the planters wanted was {annexation}: one country officially adding another
 
 ---
 
-## 6:10 | He Has, We Have
+## 6:16 | He Has, We Have
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
@@ -184,25 +184,25 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ---
 
-## 6:29 | Under Protest
+## 6:34 | Under Protest
 
-`ch08_under_protest.txt` · 201 words · about 74 s
+`ch08_under_protest.txt` · 211 words · about 77 s
 
 [quiet] In January 1895, the Queen's supporters tried to put her back in power. They failed. She was arrested and brought here, to this room.
 
-A week later, as a prisoner, she signed away her throne. Then a court sentenced her to "a fine of $5,000, and imprisonment at hard labor for five years." She later put it simply: "My palace was my prison."
+Eight days later, as a prisoner, she signed away her throne. Then a military court sentenced her to "a fine of $5,000, and imprisonment at hard labor for five years." She later put it simply: "My palace was my prison."
 
-She was released after about eight months. And she kept fighting, with words. In 1897, Native Hawaiians signed petitions against annexation. One petition alone gathered 21,269 names, on 556 pages. The treaty never got the votes it needed.
+She was let out on parole about eight months later. And she kept fighting, with words. In 1897, Native Hawaiians signed petitions against annexation. One petition alone gathered 21,269 names, on 556 pages. The treaty never got the votes it needed.
 
 In 1898, she published a book, and she wrote to Americans directly.
 
 "Oh, honest Americans, as Christians hear me for my down-trodden people! Their form of government is as dear to them as yours is precious to you. Quite as warmly as you love your country, so they love theirs."
 
-[pause] On July 7th, 1898, Congress annexed Hawaiʻi anyway. Not with a treaty, which needed two-thirds of the Senate, but with a simple majority vote in both houses. The country was at war with Spain, and suddenly a navy base in the middle of the Pacific looked very useful.
+[pause] On July 7th, 1898, the United States annexed Hawaiʻi anyway. Not with a treaty, which needed two-thirds of the Senate, but with a joint resolution, which only needed a majority in each house. The country was at war with Spain, and suddenly a navy base in the middle of the Pacific looked very useful.
 
 ---
 
-## 7:43 | Back to the Question
+## 7:52 | Back to the Question
 
 `ch09_back_to_the_question.txt` · 184 words · about 62 s
 
@@ -239,16 +239,26 @@ Every line in quotation marks is from a real, checkable source (copies in `../..
 | "a fine of $5,000, and imprisonment at hard labor for five years"; "My palace was my prison"; "Oh, honest Americans ..." | Liliʻuokalani, *Hawaii's Story by Hawaii's Queen*, 1898 (`hawaiisstorybyh00lili.txt`) |
 | "Seward's Folly" | a period nickname (to confirm it was used at the time) |
 
-## Fact flags (check before voicing)
+## Fact check (draft 2, November 2026)
 
-1. **1887:** the renewal and the Pearl Harbor right, and the Bayonet Constitution's voting rules ("most Native Hawaiians' right to vote" may be too strong; property and income rules hit many, and Asian residents were shut out entirely).
-2. **McKinley Tariff, 1890:** raw sugar duty-free plus a bounty (two cents a pound) to U.S. growers.
-3. **"Sugar already sold almost entirely to America"** (ch 5): confirm a share.
-4. **Strong's *Our Country* as a "bestseller":** confirm sales.
-5. **Alaska gold "up there":** gold at Juneau (1880) and Nome (1899); the Klondike (1896) was in Canada. The line stays vague on purpose.
-6. **The Committee of Safety and the sons of missionaries:** Dole and Thurston were; confirm "many."
-7. **The 1895 order:** arrested about January 16, abdication January 24, sentence after; released about eight months later (her book says "about eight months after my arrest").
-8. **"Brought here, to this room":** she was held in an upstairs room of ʻIolani Palace; confirm.
-9. **James Dole:** Sanford's cousin (first cousin once removed), arrived 1899, Hawaiian Pineapple Company 1901.
-10. **"Something you almost never see a president do":** wry framing, not a factual claim; keep or cut.
-11. **1993:** the Apology Resolution passed Congress and was signed November 23, 1993; "formally apologized" is the resolution's own word ("apologizes").
+Every flagged claim, what the sources say, and what changed in the script.
+
+| # | Claim | Verdict | Source | Script |
+|---|---|---|---|---|
+| 1 | 1887 renewal gave the U.S. Pearl Harbor | **Confirmed.** Senate amendment January 20, 1887; ratifications exchanged December 9, 1887 | Reciprocity Treaty of 1875 (Wikipedia, Britannica) | unchanged |
+| 1b | Bayonet Constitution took "most Native Hawaiians' right to vote" | **Too strong.** It brought back income and property rules (for the House of Nobles: $3,000 in property or $600 income) that shut out many Native Hawaiians, and barred Asian residents entirely | NLM Native Voices timeline; Wikipedia | **rewritten**: "new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely." |
+| 2 | McKinley Tariff: sugar duty-free, bonus to U.S. growers | **Confirmed.** Two cents a pound bounty on domestic sugar | Taussig, *Some Aspects of the Tariff Question*; Stevens to the State Dept (FRUS 1894) | unchanged |
+| 3 | Hawaiian sugar "sold almost entirely to America" | **Confirmed.** FRUS 1894: exports went "almost entirely" to the U.S.; about 99 percent by 1890 | FRUS 1894 appendix II; Bill of Rights Institute | unchanged |
+| 4 | *Our Country* was a bestseller | **Confirmed.** 158,000 copies by 1891; over 175,000 in Strong's lifetime | UVA Mark Twain project; SAGE Encyclopedia of Urban History | unchanged |
+| 5 | Gold found in Alaska after the purchase | **Confirmed.** Juneau, 1880, the first major strike | City of Juneau history | unchanged |
+| 6 | Planters were often missionaries' descendants | **Confirmed.** PL 103-150: the Committee of Safety "represented the American and European sugar planters, descendents of missionaries, and financiers." Dole was a missionary's son (Daniel Dole); Thurston a missionaries' grandson | `apology_resolution.txt`; Hawaiʻi State Archives; Wikipedia | unchanged |
+| 7 | 1895 timeline | **Corrected.** Arrested January 16; abdicated January 24 (eight days, not a week); tried by a **military commission** in February; sentence commuted and paroled in September, about eight months after arrest | ʻIolani Palace, "Queen's Imprisonment"; her book (chapter "Released on Parole") | **rewritten**: "Eight days later", "a military court", "let out on parole about eight months later" |
+| 8 | Held in an upstairs room of the palace | **Confirmed.** A single room on the second floor | ʻIolani Palace | unchanged |
+| 9 | James Dole: cousin, pineapples | **Confirmed.** Cousin (once removed); arrived 1899; Hawaiian Pineapple Company 1901; later Dole Food Company | Wikipedia; Jamaica Plain Historical Society | unchanged |
+| 10 | "Seward's Folly" | **Partly a myth.** The nickname existed, but a 2019 study (Michael A. Hill, *Western Historical Quarterly*) found most newspapers supported the purchase; the mockery has been overstated in textbooks | University of Rochester; Library of Congress; Anchorage Daily News | **rewritten**: "A few critics mocked it, and one nickname stuck". The gold-nugget cut still works |
+| 11 | "survival of the fittest" | **Confirmed.** Coined by Herbert Spencer in *Principles of Biology* (1864), after reading Darwin | Britannica; Wikipedia | unchanged |
+| 12 | Annexed "with a simple majority vote" | **Reworded.** The joint resolution needed only a majority; the actual votes were House 209-91 (June 15) and Senate 42-21 (July 6), exactly two-thirds in the Senate. McKinley signed July 7 | National Archives Milestone Documents; Voteview | **rewritten**: "the United States annexed Hawaiʻi anyway ... with a joint resolution, which only needed a majority in each house" |
+| 13 | 1993 apology | **Confirmed.** PL 103-150 "apologizes to Native Hawaiians on behalf of the people of the United States" | `apology_resolution.txt` | unchanged |
+| 14 | 1890 census and the frontier | **Reworded** for precision: the 1890 census *reported* it (Turner quotes the superintendent's bulletin) | `turner_1893.txt` | "the 1890 census reported" |
+
+Nothing left open. One judgment call stays with you: "For the planters, that was the last straw" is interpretation, not a quoted fact.

@@ -16,12 +16,12 @@ We'll come back to this room. But first, a phrase from 1776. America told the wo
 
 That's called {isolationism}: staying out of other countries' wars and alliances. Thomas Jefferson put it in his first speech as president, in 1801: "entangling alliances with none."
 
-America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. Critics called it "Seward's Folly," after the Secretary of State who made the deal.
+America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. A few critics mocked it, and one nickname stuck: "Seward's Folly," after the Secretary of State who made the deal.
 @CUT CONTRADICTION. On "Folly," a gold nugget drops onto the desk with a dull thud. 1 s of nothing.
 
 Then people found gold there.
 
-In 1890, the census announced that "there can hardly be said to be a frontier line" anymore. The continent was full.
+Then the 1890 census reported that "there can hardly be said to be a frontier line" anymore. The continent was full.
 
 [curious] So where next?"""),
 
@@ -49,7 +49,7 @@ And here's the strange part. The Preacher and the Scientist were often the same 
 
 ("ch06_the_heist", "The Heist", 185, """In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
-In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and most Native Hawaiians' right to vote. People called it the Bayonet Constitution.
+In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely. People called it the Bayonet Constitution.
 
 Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
 
@@ -89,15 +89,15 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ("ch08_under_protest", "Under Protest", 168, """[quiet] In January 1895, the Queen's supporters tried to put her back in power. They failed. She was arrested and brought here, to this room.
 
-A week later, as a prisoner, she signed away her throne. Then a court sentenced her to "a fine of $5,000, and imprisonment at hard labor for five years." She later put it simply: "My palace was my prison."
+Eight days later, as a prisoner, she signed away her throne. Then a military court sentenced her to "a fine of $5,000, and imprisonment at hard labor for five years." She later put it simply: "My palace was my prison."
 
-She was released after about eight months. And she kept fighting, with words. In 1897, Native Hawaiians signed petitions against annexation. One petition alone gathered 21,269 names, on 556 pages. The treaty never got the votes it needed.
+She was let out on parole about eight months later. And she kept fighting, with words. In 1897, Native Hawaiians signed petitions against annexation. One petition alone gathered 21,269 names, on 556 pages. The treaty never got the votes it needed.
 
 In 1898, she published a book, and she wrote to Americans directly.
 
 "Oh, honest Americans, as Christians hear me for my down-trodden people! Their form of government is as dear to them as yours is precious to you. Quite as warmly as you love your country, so they love theirs."
 
-[pause] On July 7th, 1898, Congress annexed Hawaiʻi anyway. Not with a treaty, which needed two-thirds of the Senate, but with a simple majority vote in both houses. The country was at war with Spain, and suddenly a navy base in the middle of the Pacific looked very useful."""),
+[pause] On July 7th, 1898, the United States annexed Hawaiʻi anyway. Not with a treaty, which needed two-thirds of the Senate, but with a joint resolution, which only needed a majority in each house. The country was at war with Spain, and suddenly a navy base in the middle of the Pacific looked very useful."""),
 
 ("ch09_back_to_the_question", "Back to the Question", 185, """[thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
 
