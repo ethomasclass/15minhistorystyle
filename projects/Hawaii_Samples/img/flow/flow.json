@@ -1,0 +1,182 @@
+{
+ "p1_harbour": {
+  "edges": {
+   "top": "#e6dab8",
+   "bottom": "#e4ddbe",
+   "left": "#7c7f65",
+   "right": "#88a197"
+  }
+ },
+ "p4_palace": {
+  "edges": {
+   "top": "#e3dac0",
+   "bottom": "#e7ddba",
+   "left": "#7c7353",
+   "right": "#796f4f"
+  }
+ },
+ "p2_hull_porthole": {
+  "kind": "circle",
+  "cx": 960.0,
+  "cy": 539.5,
+  "r": 198.25,
+  "edges": {
+   "top": "#d8c18e",
+   "bottom": "#678985",
+   "left": "#d1c3a8",
+   "right": "#cfc1a7"
+  }
+ },
+ "p3_wardroom": {
+  "kind": "rect",
+  "x0": 1129.0,
+  "y0": 333.0,
+  "x1": 1675.0,
+  "y1": 656.0,
+  "edges": {
+   "top": "#e9dbba",
+   "bottom": "#5b3a22",
+   "left": "#603e23",
+   "right": "#6a4c2f"
+  }
+ },
+ "p5_tower_window": {
+  "kind": "arch",
+  "x0": 846.0,
+  "x1": 1072.0,
+  "y0": 385.0,
+  "y1": 874.0,
+  "edges": {
+   "top": "#efe6cf",
+   "bottom": "#efe6cb",
+   "left": "#d2d0be",
+   "right": "#d2d1bf"
+  }
+ },
+ "p6_queens_room": {
+  "kind": "quad",
+  "quad": [
+   [
+    1010.811279296875,
+    755.5999755859375
+   ],
+   [
+    1286.1212158203125,
+    726.6199951171875
+   ],
+   [
+    1329.59130859375,
+    836.3300170898438
+   ],
+   [
+    1030.476318359375,
+    869.4500122070312
+   ]
+  ],
+  "cx": 1164.25,
+  "cy": 797.0,
+  "edges": {
+   "top": "#eaddbb",
+   "bottom": "#eedcb9",
+   "left": "#313a27",
+   "right": "#333926"
+  }
+ },
+ "c1_queen": {
+  "cutouts": [
+   {
+    "file": "c1_queen_1.png",
+    "w": 520,
+    "h": 813
+   },
+   {
+    "file": "c1_queen_2.png",
+    "w": 304,
+    "h": 809
+   },
+   {
+    "file": "c1_queen_3.png",
+    "w": 449,
+    "h": 826
+   },
+   {
+    "file": "c1_queen_4.png",
+    "w": 373,
+    "h": 653
+   }
+  ]
+ },
+ "c2_navy": {
+  "cutouts": [
+   {
+    "file": "c2_navy_1.png",
+    "w": 443,
+    "h": 748
+   },
+   {
+    "file": "c2_navy_2.png",
+    "w": 378,
+    "h": 904
+   },
+   {
+    "file": "c2_navy_3.png",
+    "w": 312,
+    "h": 888
+   },
+   {
+    "file": "c2_navy_4.png",
+    "w": 311,
+    "h": 888
+   },
+   {
+    "file": "c2_navy_5.png",
+    "w": 295,
+    "h": 887
+   }
+  ]
+ },
+ "c3_props": {
+  "cutouts": [
+   {
+    "file": "c3_props_1.png",
+    "w": 172,
+    "h": 480
+   },
+   {
+    "file": "c3_props_2.png",
+    "w": 350,
+    "h": 466
+   },
+   {
+    "file": "c3_props_3.png",
+    "w": 172,
+    "h": 480
+   },
+   {
+    "file": "c3_props_4.png",
+    "w": 532,
+    "h": 323
+   },
+   {
+    "file": "c3_props_5.png",
+    "w": 284,
+    "h": 373
+   },
+   {
+    "file": "c3_props_6.png",
+    "w": 288,
+    "h": 451
+   },
+   {
+    "file": "c3_props_7.png",
+    "w": 532,
+    "h": 324
+   },
+   {
+    "file": "c3_props_8.png",
+    "w": 330,
+    "h": 442
+   }
+  ]
+ }
+}

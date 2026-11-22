@@ -47,17 +47,18 @@ def M_svg(M):
 
 
 class Scene:
-    def __init__(self, name, svg, hole=None, F=None, keys=()):
+    def __init__(self, name, svg, hole=None, F=None, keys=(), m0=None):
         """svg: content in a 1920x1080 design space (with bleed beyond it). hole: SVG path data of the opening onto
         the next scene. F: (cx, cy, w[, rot_deg]) the 16:9 frame inside the hole. keys: extra camera keys while we
         are in this scene, (t, x, y, zoom[, rot]) in global time, zoom rising."""
         self.name, self.svg, self.hole, self.F, self.keys = name, svg, hole, F, list(keys)
+        self.m0 = m0        # how tightly this scene is cropped when first seen through its parent's frame (deeper = larger)
 
 
 class Journey:
-    def __init__(self, scenes, T, m0=1.5, over=1.06, m_end=1.03, wobble=0.6):
+    def __init__(self, scenes, T, m0=1.5, over=1.06, m_end=1.03, wobble=0.6, prefix=''):
         """T[k]: the time we pass into scene k (T[0] = 0). T has one more entry: the end of the last scene."""
-        self.S, self.T, self.m0, self.m_end, self.over = scenes, T, m0, m_end, over
+        self.S, self.T, self.m0, self.m_end, self.over, self.prefix = scenes, T, m0, m_end, over, prefix
         self.cams, self.push = [], []
         for k, sc in enumerate(scenes):
             keys = []
@@ -80,7 +81,8 @@ class Journey:
     def _m(self, k, t):
         p = self.push[k - 1]
         u = ease((t - p[0]) / (p[1] - p[0])) if p else 0.0
-        return self.m0 + (self.m_end - self.m0) * u
+        m0 = self.S[k].m0 or self.m0
+        return m0 + (self.m_end - m0) * u
 
     def _place(self, k, t):
         fx, fy, fw = self.S[k - 1].F[:3]; rot = self.S[k - 1].F[3] if len(self.S[k - 1].F) > 3 else 0.0
@@ -136,14 +138,17 @@ class Journey:
         for k in reversed(range(len(self.S))):
             sc = self.S[k]
             if sc.hole:
-                defs += (f'<clipPath id="hole{k}"><path clip-rule="evenodd" d="M-6000,-6000 H8000 V8000 H-6000 Z {sc.hole}"/></clipPath>')
-                body += f'<g id="S{k}" opacity="0"><g clip-path="url(#hole{k})">{sc.svg}</g></g>'
+                defs += (f'<clipPath id="{self.prefix}hole{k}"><path clip-rule="evenodd" d="M-6000,-6000 H8000 V8000 H-6000 Z {sc.hole}"/></clipPath>')
+                body += f'<g id="{self.prefix}S{k}" opacity="0"><g clip-path="url(#{self.prefix}hole{k})">{sc.svg}</g></g>'
             else:
-                body += f'<g id="S{k}" opacity="0">{sc.svg}</g>'
+                body += f'<g id="{self.prefix}S{k}" opacity="0">{sc.svg}</g>'
         return defs, body
+
+    def hidden(self):
+        return {f'{self.prefix}S{k}': 0 for k in range(len(self.S))}
 
     def frame(self, t):
         a, tr = self.transforms(t)
-        T = {f'S{k}': M_svg(m) for k, m in tr.items()}
-        O = {f'S{k}': (1 if k in tr else 0) for k in range(len(self.S))}
+        T = {f'{self.prefix}S{k}': M_svg(m) for k, m in tr.items()}
+        O = {f'{self.prefix}S{k}': (1 if k in tr else 0) for k in range(len(self.S))}
         return a, T, O

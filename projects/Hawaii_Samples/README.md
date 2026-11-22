@@ -28,6 +28,22 @@ their transforms computed in double precision, so a chain can be any length.
 python3 s6_journey.py && node anim_render.mjs ../build/s6_journey && python3 encode.py ../build/s6_journey ../video/s6_one_move_journey.mp4
 ```
 
+## The journey with Google Flow artwork (`video/s7_flow_journey.mp4`, 44.5 s)
+The same journey with nine images made in Google Flow from `flow/FLOW_PROMPT.md` (originals in `flow/in/`).
+
+```
+python3 tools/flow_prep.py                       # from the project folder: plates, doorways, cut-outs -> img/flow/
+cd tools && python3 s7_flow_journey.py && node anim_render.mjs ../build/s7_flow_journey
+python3 encode.py ../build/s7_flow_journey ../video/s7_flow_journey.mp4
+```
+- `tools/flow_prep.py` crops the poster border, scales each plate to 1920×1080, finds the magenta doorway (circle,
+  rectangle, arch or quadrilateral), removes the pink JPEG fringe round it, repaints stray magenta, and keys the green
+  sheets into separate cut-outs.
+- Flow plates are paintings, so they cannot be zoomed a hundredfold like the code drawings. Wide → close-up steps
+  (harbour → hull, palace → tower) are fast pushes cut on the move; the four doorway fly-throughs are unchanged.
+- The officer (wardroom) and the Queen (her room) are cut-outs placed in the plates. The last shot uses the teal
+  gridded desk (`img/desk_grid_teal.jpg`; also black, coral and bone, see `stills/desk_variants.jpg`).
+
 ## Build
 ```
 cd tools
