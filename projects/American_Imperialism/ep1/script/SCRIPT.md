@@ -22,10 +22,10 @@ use the word. Ledger row 1.
 **Tone:** plain and serious in the voice. The humor lives in the edit, the way a mockumentary does it: the narration says
 something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
 
-The toolkit: the **contradiction cut** (a hard cut on the word to a picture that says otherwise), the **snap zoom** on a face,
-the **look to camera** (an illustrated figure glances at us and back, drawn with the figure rig), the **too-long hold** (a beat of
-silence and room tone), **deadpan lower thirds** (true captions that do the joking), and the **background gag** (the pineapple
-that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+Only eight cuts, and each one is a joke and nothing else (staging notes live in the outline's visual plan): the
+**contradiction cut** (a hard cut on the word to a picture that says otherwise), the **look to camera** (an illustrated figure
+glances at us), the **too-long hold** (a beat of silence and room tone), a **deadpan lower third** (a true caption that does the
+joking), and the **background gag** (the pineapple that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
 end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
@@ -109,26 +109,20 @@ In 1890, the census announced that "there can hardly be said to be a frontier li
 By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it.
 
 Think of it as a pitch meeting. Four pitchers, one investor: the United States.
-> **CUT:** World: the pitch room. Washington and Jefferson in portraits on the wall, watching. Each pitcher presents from an easel deck with a title in orange tape.
 
 Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
 
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
-> **CUT:** Deck title: MARKET OPPORTUNITY. Snap zoom on the price line as it dives.
 
 *The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
-> **CUT:** Deck title: COMPETITIVE LANDSCAPE. A world map shaded with other empires' colonies. A clerk in the background slowly raises his hand. Nobody calls on him.
 
 And here's the thing about the Pacific. It's enormous. And right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
 *The Preacher.* Josiah Strong was a Protestant minister, and in 1885 he wrote a bestseller called *Our Country*. His pitch: America had been given Christianity and civilization, and it owed them to the world. In Hawaiʻi, missionaries had been arriving since 1820.
-> **CUT:** Deck title: MISSION STATEMENT. No gag beyond the title.
 
 *The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. [firmly] It wasn't.
-> **CUT:** Deck title: THE "SCIENCE", with the quotation marks hand-drawn in teal. Desk only; no illustrated racial imagery.
 
 And here's the strange part. The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled."
-> **CUT:** Hard cut to Washington's portrait. Snap zoom to his face. Hold. A clock ticks.
 
 ---
 
@@ -137,7 +131,6 @@ And here's the strange part. The Preacher and the Scientist were often the same 
 `ch05_the_same_islands.txt` · 37 words · about 14 s
 
 Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already sold almost entirely to America. A navy base? The best harbor in the Pacific. Missionaries? Three generations of them. And the "science" told them they had every right.
-> **CUT:** All four decks flip to the same slide in unison: ACQUISITION TARGET: HAWAIʻI. One pitcher glances at the camera. The camera pushes into the map and through it to Honolulu.
 
 ---
 
@@ -148,7 +141,6 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
 In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and most Native Hawaiians' right to vote. People called it the Bayonet Constitution.
-> **CUT:** The constitution on the desk. A bayonet slides into frame and rests across it. Hold.
 
 Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
 
@@ -172,10 +164,8 @@ The planters told it differently. The Queen, they said, was the one breaking the
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
 Dole refused.
-> **CUT:** Snap zoom on Dole's portrait. Hold. A clock ticks. The pineapple is still there.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
-> **CUT:** Hard cut: a calendar page, JULY 4. Silence.
 
 A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
 > **CUT:** The pineapple from the corner rolls to the centre of the desk and stops against Dole's portrait. Hard cut to a period can label.

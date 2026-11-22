@@ -44,8 +44,9 @@ And here's the thing about the Pacific. It's enormous. And right in the middle o
 *The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. [firmly] It wasn't.
 
 And here's the strange part. The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled."
+"""),
 
-("ch05_the_same_islands", "The Same Islands", 185, """Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already sold almost entirely to America. A navy base? The best harbor in the Pacific. Missionaries? Three generations of them. And the "science" told them they had every right.
+("ch05_the_same_islands", "The Same Islands", 185, """Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already sold almost entirely to America. A navy base? The best harbor in the Pacific. Missionaries? Three generations of them. And the "science" told them they had every right."""),
 
 ("ch06_the_heist", "The Heist", 185, """In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
