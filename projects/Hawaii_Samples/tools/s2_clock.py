@@ -64,7 +64,7 @@ def card_svg(i, e, k):
     o += f'<rect x="{x0}" y="{y0}" width="{w}" height="{hgt}" fill="{CREAM}"/>'
     if e.get('quote'):
         o += text(x0 + 60, y0 + 90, 'LILIʻUOKALANI, 17 JANUARY 1893', 24, 'Plex', '#6b6457', extra='letter-spacing="3"')
-        lines = ['“I yield to the superior force', 'of the United States of America …', 'I do this under protest.”']
+        lines = ['“I yield to the superior force', 'of the United States of America …', 'I do this under protest …”']
         for j, ln in enumerate(lines):
             o += text(x0 + 60, y0 + 200 + j * 86, ln, 62, 'Playfair7', INK)
         o += tag(x0 + 60, y0 + hgt - 40, 'FROM HER PROTEST, AS QUOTED IN PUBLIC LAW 103-150 (1993)', 18, '#6b6457')

@@ -36,13 +36,25 @@ def load(name):
     raise FileNotFoundError(name)
 
 
-def put(a, t, vol, fade_out=None):
+def put(a, t, vol, fade_out=None, fade_in=None, dur=None):
+    """mix sound a at time t; optional fades (s) and a trimmed or looped length (s), for ambience under one scene"""
     i = int(max(0, t) * SR)
+    if dur:
+        while len(a) < int(dur * SR):
+            a = np.concatenate([a, a])
+        a = a[:int(dur * SR)]
     a = a[:max(0, n - i)] * vol
+    m = len(a)
+    if fade_out or fade_in:
+        a = a.copy()
     if fade_out:
-        m = len(a); f = int(fade_out * SR)
-        if f and m > f:
-            a = a.copy(); a[-f:] *= np.linspace(1, 0, f)[:, None]
+        f = min(m, int(fade_out * SR))
+        if f:
+            a[-f:] *= np.linspace(1, 0, f)[:, None]
+    if fade_in:
+        f = min(m, int(fade_in * SR))
+        if f:
+            a[:f] *= np.linspace(0, 1, f)[:, None]
     mix[i:i + len(a)] += a
 
 
@@ -55,7 +67,7 @@ if ev.get('bed'):
     mix += b * vol
 for s in ev['sounds']:
     name, t, vol = s[:3]
-    put(load(name), t, vol, s[3] if len(s) > 3 else None)
+    put(load(name), t, vol, *(s[3:6]))
 mix *= np.clip((n - np.arange(n)) / (SR * 0.6), 0, 1)[:, None]
 rms = np.sqrt(np.mean(mix ** 2) + 1e-12)
 mix *= min(10 ** (-19 / 20) / rms, 0.95 / (np.abs(mix).max() + 1e-9))

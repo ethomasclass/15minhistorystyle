@@ -12,6 +12,22 @@ cuts with no dissolves, every picture credited, titles in the orange tape box. F
 | `video/s4_palace_window.mp4` (16 s) | **Through the window.** From the faceted poster palace, push through an upper window into the room where her 1891 portrait hangs. The room sits deeper, so it grows more slowly (parallax, no dissolve). | onetake's zoom-through; Retro_Poster_Test style |
 | `video/s5_flag_match_cuts.mp4` (14 s) | **Match cuts.** The illustration and the 1898 ceremony photo registered on the palace tower; quickening hard cuts under one continuous push; the Hawaiian flag lower each time, then the U.S. flag up. | horizon-montage (registration, one camera across cuts) |
 
+## The portal journey (`video/s6_one_move_journey.mp4`, 43 s)
+The through-the-window transition, generalised and chained: harbour → (porthole) → the Boston's wardroom →
+(framed picture) → ʻIolani Palace → (tower window) → the Queen's room → (the page on her desk) → her words, then a
+hard cut to the archival portrait on the gridded desk. All illustration until the cut.
+
+`tools/portal.py` is the engine. A journey is a list of `Scene`s; each has a hole (any SVG path) that shows the next
+scene, and a 16:9 frame inside the hole (it can be tilted). For each transition the camera pushes at the frame with
+zoom in log space and its centre closing in step with the zoom; the next scene sits deeper, so the view inside the
+frame widens as it grows; when the frame covers the screen the outer scene is dropped with no dissolve; and the inner
+scene's camera is seeded from the approach so the speed carries through. Only three scenes are drawn at a time, with
+their transforms computed in double precision, so a chain can be any length.
+
+```
+python3 s6_journey.py && node anim_render.mjs ../build/s6_journey && python3 encode.py ../build/s6_journey ../video/s6_one_move_journey.mp4
+```
+
 ## Build
 ```
 cd tools
