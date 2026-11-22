@@ -22,10 +22,12 @@ use the word. Ledger row 1.
 **Tone:** plain and serious in the voice. The humor lives in the edit, the way a mockumentary does it: the narration says
 something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
 
-Only eight cuts, and each one is a joke and nothing else (staging notes live in the outline's visual plan): the
-**contradiction cut** (a hard cut on the word to a picture that says otherwise), the **look to camera** (an illustrated figure
-glances at us), the **too-long hold** (a beat of silence and room tone), a **deadpan lower third** (a true caption that does the
-joking), and the **background gag** (the pineapple that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+Ten beats, but really six jokes: two of them are running gags in threes (the Jefferson look, the pineapple).
+**How to play them** (mockumentary rules, as in *The Office* and *Parks and Recreation*): the narrator never notices the joke and
+never pauses for it; no music stings or comedy sound effects, only room tone, wind or one real sound; holds of 1 to 2.5 s,
+then back on the next word; the camera behaves like a documentary crew (handheld, a slow creep, a snap zoom, a shot through a
+doorway); illustrated people react only by turning their heads to us, because our figures have no faces, which is the
+deadpan; captions are true and plain. Staging that is not a joke lives in the outline's visual plan. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
 end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).

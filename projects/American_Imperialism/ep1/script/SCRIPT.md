@@ -22,10 +22,12 @@ use the word. Ledger row 1.
 **Tone:** plain and serious in the voice. The humor lives in the edit, the way a mockumentary does it: the narration says
 something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
 
-Only eight cuts, and each one is a joke and nothing else (staging notes live in the outline's visual plan): the
-**contradiction cut** (a hard cut on the word to a picture that says otherwise), the **look to camera** (an illustrated figure
-glances at us), the **too-long hold** (a beat of silence and room tone), a **deadpan lower third** (a true caption that does the
-joking), and the **background gag** (the pineapple that sits in the corner until it pays off). Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+Ten beats, but really six jokes: two of them are running gags in threes (the Jefferson look, the pineapple).
+**How to play them** (mockumentary rules, as in *The Office* and *Parks and Recreation*): the narrator never notices the joke and
+never pauses for it; no music stings or comedy sound effects, only room tone, wind or one real sound; holds of 1 to 2.5 s,
+then back on the next word; the camera behaves like a documentary crew (handheld, a slow creep, a snap zoom, a shot through a
+doorway); illustrated people react only by turning their heads to us, because our figures have no faces, which is the
+deadpan; captions are true and plain. Staging that is not a joke lives in the outline's visual plan. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
 end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
@@ -88,15 +90,15 @@ We'll come back to this room. But first, a phrase from 1776. America told the wo
 For most of the 1800s, America had a simple rule for the rest of the world: stay out of it.
 
 That's called {isolationism}: staying out of other countries' wars and alliances. Thomas Jefferson put it in his first speech as president, in 1801: "entangling alliances with none."
-> **CUT:** Jefferson's portrait on the desk. Hold one beat too long, in silence. (He'll be back.)
+> **CUT:** THE JEFFERSON LOOK, 1 of 3. On "none," hard cut to Jefferson's portrait, framed a little too tight. The camera creeps in 3 percent. 1.5 s of room tone. Back on the next word.
 
 America did grow. It just grew across its own continent. In 1867 it bought Alaska from Russia for $7.2 million. That's less than two cents an acre. Critics called it "Seward's Folly," after the Secretary of State who made the deal.
-> **CUT:** Hard cut on "Folly": a gold nugget slaps onto the desk. Room tone. No narration for a second.
+> **CUT:** On "Folly," hard cut to a gold nugget dropping onto the desk with a dull thud. 1 s of nothing. The narrator says the next line as if nothing happened.
 
 Then people found gold there.
 
 In 1890, the census announced that "there can hardly be said to be a frontier line" anymore. The continent was full.
-> **CUT:** World: a wagon rolls to the end of the road and stops at a cliff over the Pacific. The driver turns and looks straight at the camera.
+> **CUT:** LOOK TO CAMERA. World, wide and still: a wagon reaches the end of the road at a cliff over the Pacific. The driver looks at the ocean. Looks at us. Looks at the ocean. Wind, one gull, no music. 2.5 s.
 
 [curious] So where next?
 
@@ -115,6 +117,7 @@ Two words before we start. {Imperialism}: a strong country taking control of wea
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
 
 *The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
+> **CUT:** THE JEFFERSON LOOK, 2 of 3. On "left out," hard cut to his portrait on the pitch-room wall. Same framing, same creep. 1.5 s.
 
 And here's the thing about the Pacific. It's enormous. And right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
@@ -147,15 +150,15 @@ Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid A
 In 1891, a new ruler took the throne: Liliʻuokalani, the king's sister. She wanted a new constitution that gave power back to her people. For the planters, that was the last straw.
 
 In January 1893, they made their move. They called themselves the Committee of Safety.
-> **CUT:** Hard cut on "Safety": world, rifles being laid out on a table. One of the men glances at the camera.
+> **CUT:** CAUGHT ON CAMERA. On "Safety," hard cut to a handheld shot through a doorway, as if the crew wasn't supposed to be there: men laying rifles on a table. Snap zoom. One man freezes with a rifle in his hands, turns his head to us, then slowly puts it down. 2 s.
 
 That's a {coup}: a small group seizing a government by force. And the American minister in Honolulu, John Stevens, ordered sailors and Marines ashore from the warship USS *Boston*.
-> **CUT:** Deadpan lower third under Stevens' name: JOHN L. STEVENS · U.S. MINISTER TO HAWAIʻI · NOT AUTHORIZED BY CONGRESS.
+> **CUT:** DEADPAN LOWER THIRD, in the documentary's plain caption style, held a beat longer than needed: JOHN L. STEVENS / U.S. Minister to Hawaiʻi / Not authorized by Congress.
 
 The Queen would not start a war with the United States. She stepped aside, in writing, and under protest: "I yield to the superior force of the United States of America."
 
 The new government's president was a lawyer named Sanford Dole. [beat] Yes. That Dole.
-> **CUT:** Dole's portrait on the desk. In the corner of the frame, a pineapple, unexplained. Nobody mentions it.
+> **CUT:** THE PINEAPPLE, 1 of 3. Dole's portrait on the desk. Bottom corner of the frame: a pineapple. Not lit, not mentioned, not explained.
 
 On February 1st, Stevens raised the American flag and declared Hawaiʻi a {protectorate}: a place under America's protection.
 
@@ -164,11 +167,12 @@ The planters told it differently. The Queen, they said, was the one breaking the
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
 Dole refused.
+> **CUT:** THE PINEAPPLE, 2 of 3. Dole's portrait, held 2 s in silence. The pineapple has moved halfway across the desk. Nobody moved it.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
 
 A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
-> **CUT:** The pineapple from the corner rolls to the centre of the desk and stops against Dole's portrait. Hard cut to a period can label.
+> **CUT:** THE PINEAPPLE, 3 of 3. Back on Dole's portrait. The pineapple is now right next to it, touching the frame. Hard cut to a period pineapple-can label. Silence.
 
 What the planters wanted was {annexation}: one country officially adding another place to itself. But their treaty kept stalling in the Senate. [beat] Partly because of a stack of paper.
 
@@ -209,7 +213,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 [thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
 
 With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
-> **CUT:** Back in the pitch room, empty now. Jefferson's portrait, the same too-long hold as chapter 3. Callback.
+> **CUT:** THE JEFFERSON LOOK, 3 of 3. The pitch room, empty now, chairs pushed back. Jefferson's portrait, same framing, same 3 percent creep, a full 2 s.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 
