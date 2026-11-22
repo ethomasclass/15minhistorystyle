@@ -24,7 +24,7 @@ something straight and the **cut** answers it. Cues are marked **CUT:** under th
 
 The rules and the research behind them are in [`../../HUMOR.md`](../../HUMOR.md). In short: the narrator never jokes;
 the joke is in the cut (say, then show); holds of 1 to 2 s with no stings; the camera acts like a documentary crew; one line of the
-Declaration, "consent of the governed," is the running cut back, the series' stand-in for the viewer; captions are true. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+Declaration, "consent of the governed," is the running cut back, the series' stand-in for the viewer; captions are true; and no gag needs outside knowledge or memory of an earlier shot. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
 end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
@@ -112,7 +112,6 @@ Two words before we start. {Imperialism}: a strong country taking control of wea
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
 
 *The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
-> **CUT:** THE LINE, 1 of 3. On "left out," hard cut to the Declaration on the desk, framed tight on "consent of the governed." One teal underline draws itself. Slow creep, 1.5 s of room tone.
 
 And here's the thing about the Pacific. It's enormous. And right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
@@ -139,13 +138,14 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
 In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution. It took away most of his power, and new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely. People called it the Bayonet Constitution.
+> **CUT:** THE LINE, 1 of 3. On "Bayonet Constitution," hard cut to the Declaration, the words "consent of the governed" large and readable. One teal underline draws itself. 1.5 s of room tone.
 
 Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free, and paid American growers a bonus on top. Overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
 
 In 1891, a new ruler took the throne: Liliʻuokalani, the king's sister. She wanted a new constitution that gave power back to her people. For the planters, that was the last straw.
 
 In January 1893, they made their move. They called themselves the Committee of Safety.
-> **CUT:** CONTRADICTION. On "Safety," hard cut to a handheld shot through a doorway: men laying rifles on a table. Snap zoom. 1.5 s. Nobody looks up.
+> **CUT:** CONTRADICTION. On "Safety," hard cut to rifles being laid out on a table. Snap zoom. 1.5 s of silence.
 
 That's a {coup}: a small group seizing a government by force. And the American minister in Honolulu, John Stevens, ordered sailors and Marines ashore from the warship USS *Boston*.
 > **CUT:** TRUE CAPTION. Lower third, held a beat longer than needed: JOHN L. STEVENS / U.S. Minister to Hawaiʻi / Not authorized by Congress.
@@ -153,22 +153,21 @@ That's a {coup}: a small group seizing a government by force. And the American m
 The Queen would not start a war with the United States. She stepped aside, in writing, and under protest: "I yield to the superior force of the United States of America."
 
 The new government's president was a lawyer named Sanford Dole. [beat] Yes. That Dole.
-> **CUT:** THE PINEAPPLE, 1 of 3. Dole's portrait on the desk. Bottom corner of the frame: a pineapple. Not lit, not mentioned, not explained.
+> **CUT:** THE PINEAPPLE, setup. Dole's portrait on the desk, and a pineapple sitting beside it. Nobody explains it yet.
 
 On February 1st, Stevens raised the American flag and declared Hawaiʻi a {protectorate}: a place under America's protection.
-> **CUT:** LATE CAMERA, then THE LINE, 2 of 3. The camera tilts up a flagpole a second too late: the flag is already up and the ceremony is breaking up. Hard cut to "consent of the governed," same framing. A second underline. 1.5 s.
+> **CUT:** THE LINE, 2 of 3. On "flag," hard cut to the Declaration, the words "consent of the governed" large and readable. A second teal underline draws itself under the first. 1.5 s.
 
 The planters told it differently. The Queen, they said, was the one breaking the law, and if America didn't take Hawaiʻi, Britain or Japan would.
 
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
 Dole refused.
-> **CUT:** THE PINEAPPLE, 2 of 3. Dole's portrait, held 2 s in silence. The pineapple has moved halfway across the desk. Nobody moved it.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
 
 A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
-> **CUT:** THE PINEAPPLE, 3 of 3. Back on Dole's portrait. The pineapple is now right next to it, touching the frame. Hard cut to a period pineapple-can label. Silence.
+> **CUT:** THE PINEAPPLE, payoff. Back on Dole's portrait and the pineapple. Hard cut to a period pineapple-can label with DOLE on it. Silence.
 
 What the planters wanted was {annexation}: one country officially adding another place to itself. But their treaty kept stalling in the Senate. [beat] Partly because of a stack of paper.
 
@@ -209,7 +208,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 [thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
 
 With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
-> **CUT:** THE LINE, 3 of 3. Hard cut to "consent of the governed," same framing. The teal pen circles it. 2 s of silence.
+> **CUT:** THE LINE, 3 of 3. Hard cut to the Declaration, "consent of the governed" large and readable, two underlines. The teal pen circles it. 2 s of silence.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 
