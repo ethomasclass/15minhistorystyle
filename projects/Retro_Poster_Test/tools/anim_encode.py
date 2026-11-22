@@ -64,21 +64,35 @@ def put(a, t, vol):
     i = int(t * SR)
     a = a[:max(0, n - i)]
     mix[i:i + len(a)] += a * vol
-birds = load('forest_birds')[:n]
-fade = np.clip(np.minimum(np.arange(len(birds)) / (SR * 1.0), (len(birds) - np.arange(len(birds))) / (SR * 1.2)), 0, 1)[:, None]
-mix[:len(birds)] += birds * fade * 0.35
-tick = load('tick')
-for k, t in enumerate(ev['ticks']):
-    put(tick, max(0, t - 0.02), 0.16 + 0.05 * ((k * 37) % 5) / 5)
-creak = load('rope_creak')
-for t in ev['creaks']:
-    c = creak.copy(); m = len(c)
-    c *= np.clip(np.minimum(np.arange(m) / (SR * 0.3), (m - np.arange(m)) / (SR * 1.0)), 0, 1)[:, None]
-    put(c, t, 0.3)
-morse = load('morse_code')
-m = len(morse)
-morse = morse * np.clip(np.minimum(np.arange(m) / (SR * 0.5), (m - np.arange(m)) / (SR * 1.0)), 0, 1)[:, None]
-put(morse, 4.4, 0.1)
+if 'sounds' in ev:                     # generic cue list: [name, time, volume]; bed: [name, volume]
+    if ev.get('bed'):
+        bed = load(ev['bed'][0])
+        while len(bed) < n:
+            bed = np.concatenate([bed, bed])
+        bed = bed[:n]
+        fade = np.clip(np.minimum(np.arange(n) / (SR * 1.0), (n - np.arange(n)) / (SR * 1.2)), 0, 1)[:, None]
+        mix += bed * fade * ev['bed'][1]
+    cache = {}
+    for name, t, vol in ev['sounds']:
+        if name not in cache:
+            cache[name] = load(name)
+        put(cache[name], max(0, t), vol)
+else:
+    birds = load('forest_birds')[:n]
+    fade = np.clip(np.minimum(np.arange(len(birds)) / (SR * 1.0), (len(birds) - np.arange(len(birds))) / (SR * 1.2)), 0, 1)[:, None]
+    mix[:len(birds)] += birds * fade * 0.35
+    tick = load('tick')
+    for k, t in enumerate(ev['ticks']):
+        put(tick, max(0, t - 0.02), 0.16 + 0.05 * ((k * 37) % 5) / 5)
+    creak = load('rope_creak')
+    for t in ev['creaks']:
+        c = creak.copy(); m = len(c)
+        c *= np.clip(np.minimum(np.arange(m) / (SR * 0.3), (m - np.arange(m)) / (SR * 1.0)), 0, 1)[:, None]
+        put(c, t, 0.3)
+    morse = load('morse_code')
+    m = len(morse)
+    morse = morse * np.clip(np.minimum(np.arange(m) / (SR * 0.5), (m - np.arange(m)) / (SR * 1.0)), 0, 1)[:, None]
+    put(morse, 4.4, 0.1)
 mix *= np.clip((n - np.arange(n)) / (SR * 0.8), 0, 1)[:, None]
 wavfile.write(os.path.join(d, 'audio.wav'), SR, (np.clip(mix, -1, 1) * 32767).astype(np.int16))
 

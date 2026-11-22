@@ -40,8 +40,10 @@ const t0 = Date.now();
 for await (const line of rl) {
   if (i >= first && i <= last) {
     await page.evaluate((fr) => {
-      for (const id in fr.t) document.getElementById(id).setAttribute('transform', fr.t[id]);
-      for (const id in fr.h) document.getElementById(id).innerHTML = fr.h[id];
+      for (const id in (fr.t || {})) document.getElementById(id).setAttribute('transform', fr.t[id]);
+      for (const id in (fr.h || {})) document.getElementById(id).innerHTML = fr.h[id];
+      for (const id in (fr.o || {})) document.getElementById(id).setAttribute('opacity', fr.o[id]);
+      for (const id in (fr.a || {})) for (const k in fr.a[id]) document.getElementById(id).setAttribute(k, fr.a[id][k]);
     }, JSON.parse(line));
     await page.screenshot({path: path.join(dir, 'f', String(i).padStart(4, '0') + '.png')});
     if (i % 30 === 0) console.log('frame', i, ((Date.now() - t0) / 1000).toFixed(0) + 's');

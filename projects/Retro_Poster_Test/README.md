@@ -35,6 +35,23 @@ same rig. Figures and marks step at 12 drawings a second and the camera and ball
 The paper texture is applied after the frame is drawn and never moves. Sound is mixed from the repo's `sfx/`
 (birds, rope creak, morse code, a tick per typed letter).
 
+## Scene type 2: the portrait (`stills/03_portrait_lowe.png`, `video/portrait_reveal_14s.mp4`)
+A medium shot of a named person, for the moments a wide scene can't carry. It uses the same palette, paper and print
+pass, and it does not touch the wide-scene kit (`figures.py` still draws the small faceless figures).
+```
+python3 tools/scene_portrait.py build/portrait.svg && node tools/render.mjs build/portrait.svg build/portrait_raw.png
+python3 tools/press.py build/portrait_raw.png stills/03_portrait_lowe.png
+python3 tools/reveal_portrait.py && node tools/anim_render.mjs build/reveal
+python3 tools/anim_encode.py build/reveal video/portrait_reveal_14s.mp4
+```
+- `tools/portrait.py`: `bust()` draws a head and shoulders with no outlines. The face is read from shade planes (eye
+  socket, nose, lip, cheek, jaw), a simple eye and brow, hair and whiskers. Options: skin, hair colour and style
+  (`parted`, `short`, `long`, none), moustache (`walrus`, `trim`), beard (`full`, `chin`), hat (`slouch`, `kepi`),
+  coat, cravat, `age`. It returns ordered `(stage, svg)` pieces: `flat`, `shade`, `detail`.
+- `tools/scene_portrait.py`: Lowe in the basket of the Intrepid, the camp far below.
+- `tools/reveal_portrait.py`: the picture assembles itself. Guide lines draw on, the sky washes in, then each shape is
+  laid down in order (stepped at 12 drawings a second) with a soft paper sound, and the caption types on.
+
 ## What comes from claude-drawing-skill
 [cloveric/claude-drawing-skill](https://github.com/cloveric/claude-drawing-skill) (MIT) paints 83 styles with numpy +
 Pillow. Two ideas from it are used here:
@@ -44,6 +61,11 @@ Pillow. Two ideas from it are used here:
   on black and on white and the alpha is recovered from the difference.
 - **Seam shadows** (`seam()` in `tools/facet.py`): FlatVector's depth cue, where every lifted layer drops a short soft
   night-blue shadow on what is below, so overlaps read as stacked paper.
+
+- **Staged pictures** (`reveal_portrait.py`): every style in the skill can save its picture stage by stage; here the
+  same idea runs shape by shape.
+- **A face for medium shots** (`portrait.py`): prompted by the head with a simple eye in the skill's flat-illustration
+  style, redrawn in this poster's faceted planes.
 
 The skill's working method (render, look, fix against a checklist, 2–4 rounds) is how these stills were tuned.
 
