@@ -1,0 +1,11 @@
+58:  `dry-thud` (impactSoft_medium_001.ogg), `impact-wood-light` (impactWood_light_002.ogg), `impact-soft-3`
+62:- **rpg-audio** (5): `page-turn` (bookFlip1.ogg), `coins-handful-1` (handleCoins.ogg), `coins-handful-2`
+63:  (handleCoins2.ogg), `book-open` (bookOpen.ogg), `book-close` (bookClose.ogg).
+83:| `clock-tick` | https://opengameart.org/content/clock-tick-0 | «Clock Tick», IgnasD | https://opengameart.org/sites/default/files/Timetick.ogg | none |
+88:| `paper-crumple`, `paper-rip`, `paper-handle-1`, `paper-handle-2` | https://opengameart.org/content/various-paper-sound-effects | «Various Paper Sound Effects», Luckius | https://opengameart.org/sites/default/files
+89:| `pencil-write` | https://opengameart.org/content/pencil-sounds | «Pencil Sounds», AntumDeluge | https://opengameart.org/sites/default/files/pencil.zip (ogg/pencil_write.ogg) | none. The zip `README.txt` says «Lic
+130:- Pure synthesis: `riser-short-2s`, `riser-medium-4s`, `riser-long-8s`, `swell-soft-3s`, `whoosh-medium-1s`,
+131:  `whoosh-long-2s`, `whoosh-reverse-1s`, `reverse-cymbal-2s`, `downlifter-2s`, `send-whoosh-up`, `glitch-soft-1`,
+132:  `glitch-soft-2`, `stinger-calm-pad`, `stinger-serious-low`, `stinger-energetic-hit`, `stinger-intro-bells`,
+134:  `beep-short`, `ambience-room-tone-30s`, `ambience-office-hvac-45s`.
+136:  register bell), `stamp-thud` (Kenney rpg-audio bookPlace1.ogg plus impact-sounds impactSoft_medium_000.ogg),
