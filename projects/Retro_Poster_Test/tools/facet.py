@@ -271,11 +271,19 @@ GRAIN = '''
   <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="9"/>
   <feColorMatrix type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.22  0 0 0 0.9 -0.25"/>
 </filter>
+<filter id="seam" x="-5%" y="-5%" width="115%" height="115%">
+  <feDropShadow dx="5" dy="7" stdDeviation="4" flood-color="#1f2a38" flood-opacity="0.28"/>
+</filter>
 <radialGradient id="vig" cx="50%" cy="48%" r="75%">
   <stop offset="60%" stop-color="#5a4426" stop-opacity="0"/>
   <stop offset="100%" stop-color="#5a4426" stop-opacity="0.35"/>
 </radialGradient>
 '''
+
+
+def seam(svg):
+    """Flat-vector depth cue (from claude-drawing-skill's FlatVector): a lifted layer drops a short soft shadow."""
+    return f'<g filter="url(#seam)">{svg}</g>'
 
 
 def finish(body, w=W, h=H):

@@ -2,6 +2,7 @@
 import math, sys
 import numpy as np
 from facet import *
+from trees import scene_tree
 
 seed(11)
 B = []
@@ -20,7 +21,7 @@ for y, amp, col, sv in [(560, 70, PAL['mist1'], 1.3), (600, 60, PAL['mist2'], 4.
 
 # valley floor, faceted, with the camp
 valley = [(-20, 660), (W + 20, 640), (W + 20, H + 20), (-20, H + 20)]
-B.append(facets(valley, PAL['olive_lt'], hill_h(0.003, 90, (0, 0.05)), cell=150, contrast=0.45, bias=0.08))
+B.append(seam(facets(valley, PAL['olive_lt'], hill_h(0.003, 90, (0, 0.05)), cell=150, contrast=0.45, bias=0.08)))
 
 def tent(x, y, s):
     return (poly([(x, y - s), (x - s * .9, y), (x, y)], PAL['cream'])
@@ -39,20 +40,20 @@ for i in range(6):
 
 # foreground rise on the right (the launch ground)
 rise = [(820, H + 20), (900, 905), (1100, 870), (1380, 860), (1650, 880), (1940, 840), (1940, H + 20)]
-B.append(facets(rise, PAL['olive'], hill_h(0.004, 110, (0.02, -0.08)), cell=120, contrast=0.7, bias=0.1))
+B.append(seam(facets(rise, PAL['olive'], hill_h(0.004, 110, (0.02, -0.08)), cell=120, contrast=0.7, bias=0.1)))
 B.append(f'<polyline points="{pts(rise[1:-1])}" fill="none" stroke="{PAL["olive_lt"][3]}" stroke-width="5" stroke-linejoin="bevel"/>')
 # a cliff edge on the far left, like the poster's crag
 crag = [(-20, 760), (90, 745), (210, 770), (300, 840), (330, 1000), (350, H + 20), (-20, H + 20)]
-B.append(facets(crag, PAL['rock'], ridge_h(0.03, 90, 0.1), cell=60, contrast=1.1))
+B.append(seam(facets(crag, PAL['rock'], ridge_h(0.03, 90, 0.1), cell=60, contrast=1.1)))
 top = [(-20, 760), (90, 745), (210, 770), (190, 790), (60, 785), (-20, 790)]
-B.append(facets(top, PAL['olive'], hill_h(0.02, 40), cell=40))
+B.append(seam(facets(top, PAL['olive'], hill_h(0.02, 40), cell=40)))
 
 # the balloon
 cx, cy, r = 1240, 330, 165
 env = [(cx + r * math.cos(a) * 0.93, cy + r * math.sin(a) * (1.05 if math.sin(a) > 0 else 1.0)) for a in np.linspace(0, 2 * math.pi, 48, endpoint=False)]
 env = [(x, y + (max(0, y - cy) ** 1.6) * 0.012) for x, y in env]  # slightly pear-shaped
 sphere = lambda x, y: 300 * math.sqrt(max(0.0, 1 - ((x - cx) / (r * 1.25)) ** 2 - ((y - cy - 10) / (r * 1.25)) ** 2))
-B.append(facets(env, ['#7d5f37', '#9f7e4c', '#c4a267', '#dcc086', '#ecd9a7'], sphere, cell=46, contrast=1.25, jitter=0.3))
+B.append(seam(facets(env, ['#7d5f37', '#9f7e4c', '#c4a267', '#dcc086', '#ecd9a7'], sphere, cell=46, contrast=1.25, jitter=0.3)))
 # gores
 for k in range(-3, 4):
     f = k / 3.6
@@ -82,11 +83,11 @@ for x, y, c in crew:
     B.append(figure(x, y, 14, c, hat=PAL['ink']))
 
 # framing trees, cropped by the edges like the poster
-B.append(tree(70, 1120, 900, lean=0.05, clumps=13, spread=0.32))
-B.append(tree(1860, 1120, 820, lean=-0.06, clumps=12, spread=0.36))
+B.append(scene_tree(80, 1110, 920, lean=0.04, spread=0.36, n_branches=7, seed=5))
+B.append(scene_tree(1850, 1110, 840, lean=-0.05, spread=0.38, n_branches=7, seed=8))
 B.append(pine(1745, 900, 230))
 B.append(pine(1800, 905, 180))
-B.append(tree(380, 900, 260, ramp=PAL['olive_lt'][:3], clumps=5))
+B.append(scene_tree(380, 900, 280, lean=0.02, n_branches=4, seed=12, leaf=24, airy=0.0, clump=0.13))
 
 B.append(title(560, 150, ['Above the Lines'], size=64))
 B.append(f'<text x="562" y="250" font-family="Special Elite" font-size="28" fill="{PAL["ink2"]}">Fair Oaks, Virginia - 1862</text>')

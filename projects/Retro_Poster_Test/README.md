@@ -13,6 +13,18 @@ vertical ridges, flat scalloped clouds, angular trees and pines, figures, constr
 (blotchy tone, grain, warm vignette). Needs `numpy` and `scipy`. Everything is vector, so each element can become its own
 parallax layer later.
 
+## What comes from claude-drawing-skill
+[cloveric/claude-drawing-skill](https://github.com/cloveric/claude-drawing-skill) (MIT) paints 83 styles with numpy +
+Pillow. Two ideas from it are used here:
+- **Trees** (`tools/trees.py`): the `SunlitGreen.canopy()` painter (vendored unmodified in `tools/vendor/`), set to
+  angular `chip` leaves and five flat olive tones, with a lit stripe on each limb. `scene_tree(x, base, h, ...)` grows a
+  tree from a height and lean and returns an SVG `<image>`. The canopy paints on an opaque canvas, so each tree is painted
+  on black and on white and the alpha is recovered from the difference.
+- **Seam shadows** (`seam()` in `tools/facet.py`): FlatVector's depth cue, where every lifted layer drops a short soft
+  night-blue shadow on what is below, so overlaps read as stacked paper.
+
+The skill's working method (render, look, fix against a checklist, 2–4 rounds) is how these stills were tuned.
+
 ## Gemini route (for archival photos)
 The same look as an image-edit prompt, for `tools/gemini_edit.py` (copy it from `projects/Diamond_Hoax/tools/`):
 
