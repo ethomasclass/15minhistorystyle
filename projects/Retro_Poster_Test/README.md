@@ -22,6 +22,19 @@ Needs `numpy`, `scipy` and `Pillow`. Trees are cached in `build/` by their setti
 | `tools/press.py` | The print pass on the finished render: ink dropout specks, uneven ink density, 1 px plate misregistration, paper fibres, worn edges. |
 | `tools/scene_*.py` | The scenes. Each is plain Python that places the pieces. |
 
+## Animated test (`video/balloon_test_12s.mp4`)
+```
+python3 tools/anim_balloon.py                       # layers, stage and per-frame data -> build/anim/
+node tools/anim_render.mjs build/anim               # layer PNGs once, then 360 frames
+python3 tools/anim_encode.py build/anim video/balloon_test_12s.mp4   # print pass, sound, ffmpeg
+```
+About two and a half minutes end to end. Seven depth planes (sky, clouds, ridges, camp, launch ground, crag, trees) sit
+under a slow push-in camera, each moving by its depth. The static part of every plane is rendered once to a cut-out
+PNG with overscan; whatever moves (figures, ropes, flag, smoke, birds, title) is regenerated for each frame from the
+same rig. Figures and marks step at 12 drawings a second and the camera and balloon glide, as in the channel's rule 3.
+The paper texture is applied after the frame is drawn and never moves. Sound is mixed from the repo's `sfx/`
+(birds, rope creak, morse code, a tick per typed letter).
+
 ## What comes from claude-drawing-skill
 [cloveric/claude-drawing-skill](https://github.com/cloveric/claude-drawing-skill) (MIT) paints 83 styles with numpy +
 Pillow. Two ideas from it are used here:

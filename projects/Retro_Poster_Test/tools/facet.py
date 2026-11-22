@@ -349,7 +349,7 @@ def mist(y, h, col=None, op=0.5):
     g = uid('mist')
     return (f'<defs><linearGradient id="{g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{col}" stop-opacity="0"/>'
             f'<stop offset="0.6" stop-color="{col}" stop-opacity="{op}"/><stop offset="1" stop-color="{col}" stop-opacity="0"/>'
-            f'</linearGradient></defs><rect x="0" y="{y - h / 2:.0f}" width="{W}" height="{h}" fill="url(#{g})"/>')
+            f'</linearGradient></defs><rect x="-400" y="{y - h / 2:.0f}" width="{W + 800}" height="{h}" fill="url(#{g})"/>')
 
 
 def tuft(x, y, h, col=None, n=4):
