@@ -12,7 +12,7 @@
 
 | Ep | Working title | Years | The answer America gives itself | Outline |
 |---|---|---|---|---|
-| 1 | **The Pitch Meeting** · *How America Talked Itself Into an Empire* | 1867-1898 | "Not yet. But it's practicing." | [`EP1_PITCH_MEETING_OUTLINE.md`](EP1_PITCH_MEETING_OUTLINE.md) |
+| 1 | **The Pitch Meeting** · *How America Talked Itself Into an Empire* | 1867-1898 | "Almost. It took a kingdom, but it wouldn't use the word." | [`EP1_PITCH_MEETING_OUTLINE.md`](EP1_PITCH_MEETING_OUTLINE.md) |
 | 2 | **Whose War Was It?** · *Cuba, the Maine, and the Splendid Little War* | 1895-1898 | "We're liberators, not an empire." | to write |
 | 3 | **The Road to China** · *The Philippines, the Open Door, and the War Nobody Named* | 1898-1902 | "Yes, and some Americans knew it." | to write |
 | 4 | **America's Backyard** · *Big Stick, Dollars, and Morals* | 1898-1917 | "Yes, just without the name." | to write |
