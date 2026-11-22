@@ -55,8 +55,8 @@ if __name__ == '__main__':
 _n = [0]
 
 
-def scene_tree(x, base, h, lean=0.0, spread=0.42, n_branches=6, seed=1, leaf=34.0, tones=OLIVE, far=0.0,
-               airy=0.35, clump=0.085, outdir=None):
+def scene_tree(x, base, h, lean=0.0, spread=0.42, n_branches=8, seed=1, leaf=30.0, tones=OLIVE, far=0.0,
+               airy=0.42, clump=0.065, outdir=None):
     """Grow a poster tree of height h whose trunk foot sits at (x, base) in scene px; return an SVG <image>.
     The canvas is sized from the clumps, so nothing is clipped."""
     outdir = outdir or os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'build')
@@ -72,6 +72,9 @@ def scene_tree(x, base, h, lean=0.0, spread=0.42, n_branches=6, seed=1, leaf=34.
         branches.append([(sx, sy), ((sx + ex) / 2, (sy + ey) / 2 - h * 0.03), (ex, ey)])
         rr = h * (clump + 0.035 * r.random())
         clumps.append((ex, ey - rr * 0.2, rr * 1.25, rr))
+        if r.random() < 0.7:      # a smaller clump part-way along the branch, so foliage follows the limbs
+            q = 0.45 + 0.25 * r.random()
+            clumps.append((sx + (ex - sx) * q, sy + (ey - sy) * q - rr * 0.5, rr * 0.8, rr * 0.62))
     rr = h * (clump + 0.03)
     clumps.append((top[0], top[1] + rr * 0.5, rr * 1.2, rr))
     K = np.array(clumps)
@@ -87,8 +90,9 @@ def scene_tree(x, base, h, lean=0.0, spread=0.42, n_branches=6, seed=1, leaf=34.
     T = (top[0] + ox, top[1] + oy)
     # the canopy scales leaves by min(W, H) / 1000; undo that so `leaf` is in scene px
     k = min(W, H) / 1000
-    _n[0] += 1
-    path = os.path.abspath(os.path.join(outdir, f'tree_{seed}_{_n[0]}.png'))
+    import hashlib
+    key = hashlib.md5(repr((h, lean, spread, n_branches, seed, leaf, list(tones), far, airy, clump)).encode()).hexdigest()[:10]
+    path = os.path.abspath(os.path.join(outdir, f'tree_{key}.png'))
 
     def fn(s):
         s.limb([(ox, H + 10), ((ox + T[0]) / 2, (oy + T[1]) / 2), T], h * 0.03, h * 0.009, colour=BARK,
@@ -97,5 +101,6 @@ def scene_tree(x, base, h, lean=0.0, spread=0.42, n_branches=6, seed=1, leaf=34.
             s.limb(b, h * 0.009, h * 0.003, colour=BARK, lit=BARK_LIT, seed=seed + j)
         s.canopy(clumps, tones=tones, leaf=leaf / k, shape='chip', holes=0.0, sub=2.0, mottle=0.05, noise=0.1,
                  levels=(0.0, 0.34, 0.5, 0.64, 0.8), airy=airy, twigs=0, far=far, haze='#b3bfb8', seed=seed)
-    cutout(path, W, H, fn, seed)
+    if not os.path.exists(path):
+        cutout(path, W, H, fn, seed)
     return f'<image href="file://{path}" x="{x - ox:.0f}" y="{base - oy:.0f}" width="{W}" height="{H}"/>'

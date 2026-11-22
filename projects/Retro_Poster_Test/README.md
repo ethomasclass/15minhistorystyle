@@ -5,13 +5,22 @@ typewriter title, thin construction lines, tiny figures picked out in one spot c
 
 ## Procedural stills (no API needed)
 ```
-python3 tools/scene_balloon.py build/balloon.svg && node tools/render.mjs build/balloon.svg stills/01_balloon_fair_oaks.png
-python3 tools/scene_mesa.py    build/mesa.svg    && node tools/render.mjs build/mesa.svg    stills/02_salted_field_1872.png
+for s in cast balloon mesa; do
+  python3 tools/scene_$s.py build/$s.svg && node tools/render.mjs build/$s.svg build/${s}_raw.png
+done
+python3 tools/press.py build/cast_raw.png    stills/00_cast_sheet.png
+python3 tools/press.py build/balloon_raw.png stills/01_balloon_fair_oaks.png
+python3 tools/press.py build/mesa_raw.png    stills/02_salted_field_1872.png
 ```
-`tools/facet.py` is the kit: Delaunay facets shaded from a height field and posterised to a colour ramp, cliffs with
-vertical ridges, flat scalloped clouds, angular trees and pines, figures, construction arcs, titles, and the paper finish
-(blotchy tone, grain, warm vignette). Needs `numpy` and `scipy`. Everything is vector, so each element can become its own
-parallax layer later.
+Needs `numpy`, `scipy` and `Pillow`. Trees are cached in `build/` by their settings, so re-renders take seconds.
+
+| File | What it does |
+|---|---|
+| `tools/facet.py` | The kit: Delaunay facets shaded from a height field and posterised to a ramp, cliffs with vertical ridges, sky gradient, two-tone clouds (`cloud2`), haze bands (`mist`), faceted ridges, moss, tufts, rocks, ropes, construction arcs, titles, seam shadows, the paper finish. |
+| `tools/figures.py` | **People and animals.** `person()` is a jointed rig 8 units tall (side, front or back view) with 14 poses (`stand`, `walk`, `haul`, `pull`, `kneel`, `bend`, `sit`, `glass`, `write`, `hips`...), coats of any length, dresses, vests, belts, straps, beards, 7 hats, a shade side and a cast shadow. It returns the joints, so ropes and tools attach to hands. `mule()` draws mules and horses; `rifle()` and `tool()` add props. |
+| `tools/trees.py` | Poster trees from the drawing-skill canopy painter (see below). |
+| `tools/press.py` | The print pass on the finished render: ink dropout specks, uneven ink density, 1 px plate misregistration, paper fibres, worn edges. |
+| `tools/scene_*.py` | The scenes. Each is plain Python that places the pieces. |
 
 ## What comes from claude-drawing-skill
 [cloveric/claude-drawing-skill](https://github.com/cloveric/claude-drawing-skill) (MIT) paints 83 styles with numpy +

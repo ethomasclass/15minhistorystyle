@@ -274,6 +274,9 @@ GRAIN = '''
 <filter id="seam" x="-5%" y="-5%" width="115%" height="115%">
   <feDropShadow dx="5" dy="7" stdDeviation="4" flood-color="#1f2a38" flood-opacity="0.28"/>
 </filter>
+<filter id="flatshadow" x="-50%" y="-50%" width="200%" height="200%">
+  <feColorMatrix type="matrix" values="0 0 0 0 0.12  0 0 0 0 0.15  0 0 0 0 0.2  0 0 0 1 0"/>
+</filter>
 <radialGradient id="vig" cx="50%" cy="48%" r="75%">
   <stop offset="60%" stop-color="#5a4426" stop-opacity="0"/>
   <stop offset="100%" stop-color="#5a4426" stop-opacity="0.35"/>
@@ -296,3 +299,98 @@ def finish(body, w=W, h=H):
 <rect width="{w}" height="{h}" filter="url(#grain)" style="mix-blend-mode:multiply" opacity="0.22"/>
 <rect width="{w}" height="{h}" fill="url(#vig)" style="mix-blend-mode:multiply"/>
 </svg>'''
+
+
+# ---------------------------------------------------------------- second-pass kit (sky, mist, ground detail)
+def _hex(c):
+    c = c.lstrip('#')
+    return [int(c[i:i + 2], 16) for i in (0, 2, 4)]
+
+
+def shift(c, k):
+    """k < 0 darkens, k > 0 lightens"""
+    v = [int(a + (255 - a) * k) if k > 0 else int(a * (1 + k)) for a in _hex(c)]
+    return '#%02x%02x%02x' % tuple(max(0, min(255, a)) for a in v)
+
+
+def tones(c, n=4, spread=0.1):
+    """a posterised ramp around one colour, dark to light"""
+    return [shift(c, -spread + 2 * spread * i / (n - 1)) for i in range(n)]
+
+
+_uid = [0]
+
+
+def uid(p='u'):
+    _uid[0] += 1
+    return f'{p}{_uid[0]}'
+
+
+def sky(top, bottom, y1):
+    g = uid('sky')
+    return (f'<defs><linearGradient id="{g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{top}"/>'
+            f'<stop offset="1" stop-color="{bottom}"/></linearGradient></defs><rect width="{W}" height="{y1}" fill="url(#{g})"/>')
+
+
+def cloud2(cx, cy, w, h, fill, belly=None, n=9, drop=0.3):
+    """cloud() with a flat belly tone: the part of the cloud that a copy shifted up does not cover"""
+    body = cloud(cx, cy, w, h, '#fff', n=n)
+    m = uid('m')
+    out = body.replace('fill="#fff"', f'fill="{fill}"')
+    if belly:
+        out += (f'<mask id="{m}"><g>{body}</g><g transform="translate(0 {-h * drop:.1f})">{body.replace("#fff", "#000")}</g></mask>'
+                f'<rect x="{cx - w:.0f}" y="{cy - h * 2:.0f}" width="{w * 2:.0f}" height="{h * 3:.0f}" fill="{belly}" mask="url(#{m})"/>')
+    return out
+
+
+def mist(y, h, col=None, op=0.5):
+    """a horizontal band of haze that fades out above and below"""
+    col = col or PAL['cream']
+    g = uid('mist')
+    return (f'<defs><linearGradient id="{g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{col}" stop-opacity="0"/>'
+            f'<stop offset="0.6" stop-color="{col}" stop-opacity="{op}"/><stop offset="1" stop-color="{col}" stop-opacity="0"/>'
+            f'</linearGradient></defs><rect x="0" y="{y - h / 2:.0f}" width="{W}" height="{h}" fill="url(#{g})"/>')
+
+
+def tuft(x, y, h, col=None, n=4):
+    col = col or PAL['olive'][1]
+    out = ''
+    for i in range(n):
+        a = (i - (n - 1) / 2) * 0.28 + (rng.random() - .5) * 0.2
+        w = h * 0.13
+        out += poly([(x - w + i * w * 0.6, y), (x + w + i * w * 0.6, y), (x + i * w * 0.6 + math.sin(a) * h, y - math.cos(a) * h * (0.7 + rng.random() * 0.4))], col)
+    return out
+
+
+def moss(x, y, w, ramp=None):
+    """a flat patch of moss or scrub: two or three wide shards"""
+    ramp = ramp or PAL['olive'][1:4]
+    out = ''
+    for i, col in enumerate(ramp):
+        ww = w * (1 - i * 0.22)
+        hh = w * 0.22 * (1 - i * 0.2)
+        ox = -i * w * 0.08
+        p = [(x + ox - ww * .5, y), (x + ox - ww * .3, y - hh), (x + ox + ww * .1, y - hh * (0.8 + rng.random() * .5)),
+             (x + ox + ww * .5, y - hh * .3), (x + ox + ww * .45, y + hh * .25), (x + ox - ww * .2, y + hh * .35)]
+        out += poly(p, col)
+    return out
+
+
+def rock(x, y, w, ramp=None):
+    """a small faceted boulder sitting on (x, y)"""
+    ramp = ramp or PAL['rock']
+    h = w * 0.6
+    out = poly([(x - w * .5, y), (x - w * .38, y - h * .7), (x - w * .05, y - h), (x + w * .32, y - h * .75), (x + w * .5, y)], ramp[1])
+    out += poly([(x - w * .5, y), (x - w * .38, y - h * .7), (x - w * .05, y - h), (x - w * .1, y)], ramp[3])
+    out += poly([(x - w * .05, y - h), (x + w * .32, y - h * .75), (x + w * .1, y - h * .4), (x - w * .1, y)], ramp[2])
+    return out
+
+
+def rope(points, col=None, w=2.2, sag=0.0):
+    """a rope through a list of points, sagging a little between them"""
+    col = col or PAL['ink']
+    d = f'M{points[0][0]:.1f},{points[0][1]:.1f}'
+    for a, b in zip(points, points[1:]):
+        mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 + sag * math.hypot(b[0] - a[0], b[1] - a[1])
+        d += f' Q{mx:.1f},{my:.1f} {b[0]:.1f},{b[1]:.1f}'
+    return f'<path d="{d}" stroke="{col}" stroke-width="{w}" fill="none" stroke-linecap="round"/>'
