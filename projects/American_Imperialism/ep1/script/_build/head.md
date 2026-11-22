@@ -23,8 +23,8 @@ use the word. Ledger row 1.
 something straight and the **cut** answers it. Cues are marked **CUT:** under the line they belong to; they are never voiced.
 
 The rules and the research behind them are in [`../../HUMOR.md`](../../HUMOR.md). In short: the narrator never jokes;
-the joke is in the cut (say, then show); holds of 1 to 2 s with no stings; the camera acts like a documentary crew; only
-Jefferson's portrait ever "looks," as the series' stand-in for the viewer; captions are true. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
+the joke is in the cut (say, then show); holds of 1 to 2 s with no stings; the camera acts like a documentary crew; one line of the
+Declaration, "consent of the governed," is the running cut back, the series' stand-in for the viewer; captions are true. Never aimed at the Queen, Native Hawaiians or workers; nothing from chapter 7 to the
 end of chapter 8; never on top of a quote.
 
 Markup: `*emphasis*`, `{vocab term}` (defined where it appears).

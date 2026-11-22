@@ -34,7 +34,7 @@ Two words before we start. {Imperialism}: a strong country taking control of wea
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
 
 *The Admiral.* His name was Alfred Thayer Mahan, a navy captain, and in 1890 he wrote a book about how Britain got so powerful. His answer: Britain ruled the world because it ruled the sea. And a navy needs more than ships. Steamships burned coal, and they burned through it fast. So you need bases and coaling stations, scattered across the ocean. Mahan wrote that "it is equally vain to acquire distant coaling stations without maintaining a powerful navy." You need both. Meanwhile, Britain, France and Germany were grabbing colonies all over the world, and a lot of Americans did not want to be left out.
-@CUT THE LOOK, 1 of 3. On "left out," hard cut to Jefferson's portrait on the pitch-room wall. Slow 3 percent creep. 1.5 s of room tone.
+@CUT THE LINE, 1 of 3. On "left out," hard cut to the Declaration on the desk, framed tight on "consent of the governed." One teal underline draws itself. Slow creep, 1.5 s of room tone.
 
 And here's the thing about the Pacific. It's enormous. And right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
@@ -67,7 +67,7 @@ The new government's president was a lawyer named Sanford Dole. [beat] Yes. That
 @CUT THE PINEAPPLE, 1 of 3. Dole's portrait on the desk. Bottom corner of the frame: a pineapple. Not lit, not mentioned, not explained.
 
 On February 1st, Stevens raised the American flag and declared Hawaiʻi a {protectorate}: a place under America's protection.
-@CUT LATE CAMERA, then THE LOOK, 2 of 3. The camera tilts up a flagpole a second too late: the flag is already up and the ceremony is breaking up. Hard cut to Jefferson, 1.5 s.
+@CUT LATE CAMERA, then THE LINE, 2 of 3. The camera tilts up a flagpole a second too late: the flag is already up and the ceremony is breaking up. Hard cut to "consent of the governed," same framing. A second underline. 1.5 s.
 
 The planters told it differently. The Queen, they said, was the one breaking the law, and if America didn't take Hawaiʻi, Britain or Japan would.
 
@@ -102,7 +102,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 ("ch09_back_to_the_question", "Back to the Question", 185, """[thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
 
 With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
-@CUT THE LOOK, 3 of 3. The pitch room, empty now, chairs pushed back. Jefferson. Same framing, same creep, 2 s.
+@CUT THE LINE, 3 of 3. Hard cut to "consent of the governed," same framing. The teal pen circles it. 2 s of silence.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 

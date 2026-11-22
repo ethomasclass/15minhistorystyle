@@ -32,8 +32,11 @@ history channels. It applies to all four episodes. Sources are listed at the end
 - **Holds of 1 to 2 seconds**, then back on the next word. Never wait for a laugh.
 - **The camera acts like a documentary crew:** handheld, a slow creep, a snap zoom, a shot through a doorway, a tilt that
   arrives too late.
-- **The look belongs to one character: Jefferson's portrait.** He is the series' Jim. Every time America does the opposite of
-  what it said, the camera cuts to him. Same framing, same slow creep, every episode. No one else looks at the camera.
+- **The running cut back is one line of the Declaration: "consent of the governed."** It is planted straight in each
+  episode's opening ("Hold on to that. It's coming back."). Every time America does the opposite, hard cut to it: same
+  parchment, same tight framing, same slow creep, silence. It escalates in teal: one underline, then two, then a circle. It
+  plays the role of Jim's look (the viewer's stand-in), and it is also the series bookend, so the joke and the argument stay
+  the same thing. No person ever looks at the camera.
 - **Captions are true and plain.** A lower third can be the joke if it is just a fact.
 - **About five gags an episode,** with one running gag in threes.
 - **Never aimed at** the people on the receiving end (in Ep 1: the Queen, Native Hawaiians, cane workers). Nothing from the
@@ -44,15 +47,15 @@ history channels. It applies to all four episodes. Sources are listed at the end
 | # | Kind | The line | The cut |
 |---|---|---|---|
 | 1 | Contradiction | "Critics called it 'Seward's Folly.'" | On "Folly," a gold nugget drops onto the desk with a dull thud. 1 s of nothing. |
-| 2 | The look, 1 of 3 | "...a lot of Americans did not want to be left out." | Hard cut to Jefferson's portrait on the pitch-room wall (he was quoted, straight, in ch 3: "entangling alliances with none"). Slow 3 percent creep, 1.5 s. |
+| 2 | The line, 1 of 3 | "...a lot of Americans did not want to be left out." | Hard cut to the Declaration, tight on "consent of the governed" (planted in ch 2). One teal underline. Slow creep, 1.5 s. |
 | 3 | Contradiction | "They called themselves the Committee of Safety." | Hard cut on "Safety" to a handheld shot through a doorway: men laying rifles on a table. Snap zoom. 1.5 s. |
 | 4 | True caption | "...John Stevens, ordered sailors and Marines ashore..." | Lower third, held a beat long: JOHN L. STEVENS / U.S. Minister to Hawaiʻi / Not authorized by Congress. |
-| 5 | Late camera, then the look, 2 of 3 | "On February 1st, Stevens raised the American flag..." | The camera tilts up a flagpole, a second late: the flag is already up and the ceremony is breaking up. Cut to Jefferson. |
+| 5 | Late camera, then the line, 2 of 3 | "On February 1st, Stevens raised the American flag..." | The camera tilts up a flagpole, a second late: the flag is already up and the ceremony is breaking up. Cut to the line: a second underline. |
 | 6 | Running gag, 3 beats | "Sanford Dole. Yes. That Dole." / "Dole refused." / "...his cousin James arrived and started growing pineapples." | A pineapple in the corner of the desk, unexplained. Then halfway across the desk; nobody moved it. Then touching Dole's portrait, and a hard cut to a pineapple-can label. |
-| 7 | The look, 3 of 3 | "...then took the islands anyway." | The empty pitch room. Jefferson. 2 s. |
+| 7 | The line, 3 of 3 | "...then took the islands anyway." | The line again. The teal pen circles it. 2 s of silence. |
 
-Cut from earlier drafts: the wagon driver looking at the camera (the look belongs to Jefferson, and the frontier closing isn't
-absurd); the pitch-deck titles and the calendar page (staging, not jokes).
+Cut from earlier drafts: Jefferson's portrait as the recurring "look" (a still portrait reads as a reminder, not a reaction, and
+he is a complicated stand-in for these ideals); the wagon driver looking at the camera (the frontier closing isn't absurd); the pitch-deck titles and the calendar page (staging, not jokes).
 
 ## Sources
 
