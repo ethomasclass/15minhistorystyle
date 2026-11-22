@@ -69,3 +69,13 @@ The same for `s2_clock`, `s3_petition`, `s4_window` and `s5_flags`. Each takes a
   Congress (full-size master TIFFs) and the National Archives. The Commons photos of the 1898 flag lowering and
   raising, and a portrait of Stevens, are still worth getting.
 - **The "pear" quotation** is from the published diplomatic correspondence (FRUS 1894); check it against a scan.
+
+## People who move (`video/s8_movement_test.mp4`, 12.5 s)
+A landing party marches past the palace plate, wide and then in a close tracking shot. The column, the officer and the
+townspeople are drawn in code with the poster figure rig; the walk is solved each frame (feet planted, knees by inverse
+kinematics, speed set from the stride) and the townspeople ease between poses with a small anticipation first. Two
+sentries and the spyglass officer are Flow cut-outs with a breathing loop only, for comparison.
+
+```
+cd tools && python3 s8_movement.py && node anim_render.mjs ../build/s8_movement && python3 encode.py ../build/s8_movement ../video/s8_movement_test.mp4
+```

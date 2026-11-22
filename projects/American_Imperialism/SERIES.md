@@ -24,22 +24,33 @@ oceans, so the story splits: the Pacific and China (Ep 3), then the Caribbean an
 
 ## The story arc every episode follows
 
-The channel's methods, applied the same way four times, so the parts feel like one series.
+Each episode is about **10:00**, which is about 1,500 to 1,600 words of narration. Six beats, the same in all four, so the
+parts feel like one series. The beats are never announced on screen.
 
-| Beat | What it does |
+| Beat | When | What it does |
+|---|---|---|
+| **1. Cold open from the future** | 0:00-0:25 | A later, dramatic moment, in the illustrated world, at frame 0 (and in the thumbnail). The first sentence is the hook, never a date. |
+| **2. Question and bridge** | by 0:45 | The driving question in one breath, one sentence on why it matters to the viewer, and one "we'll come back to that" promise. |
+| **3. The setup, then the case** | 0:50 to about 4:45 | Start in the action. One real person carries each part. A new loop opens about every 60 to 90 seconds, and the part that sits on the 3:00 dip must open a strong one. |
+| **4. The twist, then the test** | about 4:45 to 7:30 | The fact that turns the case into an event. Both readings are stated fairly. It ends on the **George III callback** as the climax. |
+| **5. The quiet chapter** | about 8:00 | Slower voice, no jokes, the desk and real images only, a primary source and space. The ledger voice speaks here. |
+| **6. The answer and the handoff** | about 9:15 | "So let's go back to the question." Fill this episode's row of the Ledger, end on a short reversal over the opening image, then one line that tees up the next episode. |
+
+No plug in the middle of the video. Each chapter closes one loop and opens the next.
+
+### Episode 1 shape (locked)
+
+| Time | Part |
 |---|---|
-| **1. Cold open from the future** (0:00-0:55) | Open on a later, dramatic moment with a real artifact on screen at frame 0 (and in the thumbnail). The first sentence is the hook, never a date. Name the danger in words. |
-| **2. Question + promises** (by about 0:40) | The episode's driving question in one breath, then one or two "we'll come back to that" promises. |
-| **3. Start in the action** (ch 2) | No backstory before the question. Background arrives just in time as a short flashback. |
-| **4. One person carries each chapter** | Three to five real people on both sides, each with a want. Person, then the general point, then back to the person. |
-| **5. Stack, then "That means"** | A one-sentence recap before each payoff. |
-| **6. Myth beat** | One myth per episode, named and corrected kindly. |
-| **7. Both readings** | The imperialists' own case, stated fairly, and the critics' case. No verdict from the narrator. |
-| **8. The George III callback** (once, at the climax) | The Declaration on parchment. One grievance lights up. "He has" is struck through and "We have" is written over it. |
-| **9. The quiet chapter** | One heavy chapter per episode: slower voice, no jokes, teal-only quiet palette, a primary source and space. This is where the ledger voice speaks. |
-| **10. Plug after the climax** (about 80%) | Short and wry, while a loop is open, never in the quiet chapter. |
-| **11. "So let's go back to the question."** | Answer the unit question for this episode, fill this episode's row of the Ledger, end on a short reversal over the opening image. |
-| **12. The handoff** | One line that tees up the next episode, then the end-screen thank-you. |
+| 0:00 | Cold open: the Queen locked in her own palace, 1895 |
+| 0:25 | Question and bridge |
+| 0:50 | The setup: Alaska in a line, then 1890 and the closed frontier (the continent is full, so where next?) |
+| 1:45 | The four pitches, about 45 seconds each: the Businessman (markets), the Admiral (Mahan and bases, with one sentence on rivalry with Europe), the Missionary (Christianity and Western civilization), the "Scientist" (Social Darwinism) |
+| 4:45 | Twist: all four arguments point at the same islands |
+| 5:00 | Hawaiʻi: sugar, the harbor, the 1893 overthrow |
+| 7:30 | The George III callback |
+| 8:00 | The quiet chapter: the petition and the Queen's own words |
+| 9:15 | The answer, the ledger row, the handoff |
 
 ---
 
@@ -64,7 +75,7 @@ The channel's methods, applied the same way four times, so the parts feel like o
 
   | Ep | What America said | What America did | Who answered back |
   |---|---|---|---|
-  | 1 | "No entangling alliances." | Took a kingdom's harbor, then the kingdom | Liliʻuokalani |
+  | 1 | "Entangling alliances with none." (Jefferson, 1801) | Took a kingdom's harbor, then the kingdom | Liliʻuokalani |
   | 2 | "We will not annex Cuba." (Teller) | Won Spain's colonies in under three months | José Martí |
   | 3 | "An open door for all." | Fought Filipinos who had been its allies; shut the door on Chinese people | Emilio Aguinaldo, Wu Tingfang |
   | 4 | "Democracy and human rights." | Policed the hemisphere | To choose (see `HANDOFF.md` section 7) |
@@ -119,10 +130,13 @@ The channel's methods, applied the same way four times, so the parts feel like o
 
 ## Open decisions (from `HANDOFF.md` section 7, with a recommendation for each)
 
-1. **Runtime.** Recommend the channel standard: about 15:00 finished, which is about 2,300 words of narration at the current pace.
-2. **Visual style.** Recommend two modes that alternate: archival pictures on the gridded desk (black, with teal and coral
-   surfaces for variety), and illustrated "journey" sequences that fly from scene to scene through doorways, made from Google
-   Flow plates (tested on the Hawaiʻi overthrow in `projects/Hawaii_Samples/`). Two or three journeys per episode.
+1. **Runtime.** Decided: four episodes of about 10:00 each.
+2. **Visual style.** Decided: at least 5 of every 10 minutes is spent in the illustrated world, and more where the story
+   allows. The two modes have different jobs. The **desk** (black, with teal and coral gridded surfaces) is the evidence:
+   real photographs and documents. The **world** is being there: illustrated scenes flown through doorways (tested in
+   `projects/Hawaii_Samples/`, samples 6 and 7), with people who move (sample 8). We enter the world through a picture on
+   the desk and leave it through a document inside the scene. Real people's faces come only from period photographs, so
+   illustrated figures stay distant or turned away. The quiet chapter stays on the desk.
 3. **Ep 4 ledger voice.** Decide when Ep 4 is outlined.
 4. **Classroom companions.** The Ledger is built to be the graphic organizer if they are wanted.
 5. **Gilded Age link.** Ep 1 can open its pitch with the overproduction problem in one line, with or without naming the earlier series.
