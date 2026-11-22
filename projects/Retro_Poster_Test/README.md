@@ -52,23 +52,6 @@ python3 tools/anim_encode.py build/reveal video/portrait_reveal_14s.mp4
 - `tools/reveal_portrait.py`: the picture assembles itself. Guide lines draw on, the sky washes in, then each shape is
   laid down in order (stepped at 12 drawings a second) with a soft paper sound, and the caption types on.
 
-## Paper and movement (`video/portrait_paper_16s.mp4`, `stills/04_portrait_paper.png`)
-The same portrait as real cut paper, placed by hand and then moved like a puppet. A separate treatment: the poster
-scenes and the first reveal are unchanged.
-```
-python3 tools/reveal_paper.py            # builds the pieces and rasterises each once with its paper filter
-node tools/anim_render.mjs build/paper
-python3 tools/anim_encode.py build/paper video/portrait_paper_16s.mp4
-```
-- `tools/paper.py`: SVG filters that turn a flat shape into paper. `cut` (scissors: a slightly wandering outline,
-  fibres and tooth, and the sheet's thickness as a pale lit edge and a dark edge), `torn` (a ragged outline with the
-  pale core of the paper showing as an uneven rim), `kraft` (the board), and eight shadow levels from lying flat
-  (`sh0`, a thin contact line) to held above the page (`sh7`, wide, soft and far away).
-- `tools/paper_pieces.mjs`: rasterises every piece once, cropped to its own box, so frames only move images.
-- `tools/reveal_paper.py`: a torn sky sheet is laid on a kraft board and taped; guide lines are pencilled; each piece
-  arrives lifted (a little larger, turned, wide shadow) and is lowered in five stop-motion drawings; shade is rubbed
-  on; then a jointed arm on a brass pin swings a spyglass up and the head tips to meet it.
-
 ## What comes from claude-drawing-skill
 [cloveric/claude-drawing-skill](https://github.com/cloveric/claude-drawing-skill) (MIT) paints 83 styles with numpy +
 Pillow. Two ideas from it are used here:
@@ -79,10 +62,6 @@ Pillow. Two ideas from it are used here:
 - **Seam shadows** (`seam()` in `tools/facet.py`): FlatVector's depth cue, where every lifted layer drops a short soft
   night-blue shadow on what is below, so overlaps read as stacked paper.
 
-- **Paper** (`paper.py`): the torn rim and paper depth of its paper collage, the print-then-tear-or-cut model of its
-  newspaper collage, and the lifted-sheet shadows of its overlay sheets, rebuilt as SVG filters.
-- **Movement** (`reveal_paper.py`): pieces joined at a pivot and posed by angle, as in its shadow puppets, and
-  stop-motion placement on twos.
 - **Staged pictures** (`reveal_portrait.py`): every style in the skill can save its picture stage by stage; here the
   same idea runs shape by shape.
 - **A face for medium shots** (`portrait.py`): prompted by the head with a simple eye in the skill's flat-illustration
