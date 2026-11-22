@@ -1,7 +1,7 @@
 # Ep 1 · The Pitch Meeting: How America Talked Itself Into an Empire
 
 **Chunk History** · beat outline · series part 1 of 4 ([`SERIES.md`](SERIES.md)) · target **about 10:00 finished**
-About 1,560 words of narration at about 160 words a minute. The quiet chapter is voiced slower. Years on the title card: **1867-1898**.
+About 1,600 words of narration at about 160 words a minute. The quiet chapter is voiced slower. Years on the title card: **1867-1898**.
 
 ---
 
@@ -43,6 +43,7 @@ practicing." in `SERIES.md`, because Ep 1 ends with the annexation.)
 | **Alfred Thayer Mahan**, naval officer and author | A big navy, and the bases to keep it at sea | Ch 4 (the Admiral) |
 | **Josiah Strong**, minister and author of *Our Country* (1885) | Christian, English-speaking civilization spread across the world | Ch 4 (the Preacher, and he crosses into the "Scientist") |
 | **Sanford Dole**, Honolulu lawyer, son of American missionaries | Annexation to the U.S., and a government run by men like him | Ch 6 |
+| **James Dole**, Sanford's cousin | Pineapples (arrives 1899, founds the Hawaiian Pineapple Company in 1901) | Ch 6, a running gag and a flash-forward |
 | **John L. Stevens**, U.S. minister (ambassador) to Hawaiʻi | Annexation; he lands the troops | Ch 6 |
 | **Grover Cleveland**, U.S. president | To undo what was done in America's name | Ch 6 |
 
@@ -61,11 +62,11 @@ W = time in the illustrated world, D = time on the gridded desk. Target: at leas
 | 3 | 0:50 | The Old Guard | 150 | 30 W · 25 D | isolationism |
 | 4 | 1:45 | The Pitch Meeting | 480 | 130 W · 50 D | imperialism, interventionism, Social Darwinism |
 | 5 | 4:45 | The Same Islands (twist) | 40 | 15 W | |
-| 6 | 5:00 | The Heist | 400 | 95 W · 55 D | coup, protectorate (planted), annexation |
+| 6 | 5:00 | The Heist | 440 | 95 W · 55 D | coup, protectorate (planted), annexation |
 | 7 | 7:30 | He Has / We Have (George III callback) | 70 | 15 W · 15 D | |
 | 8 | 8:00 | Under Protest (quiet chapter) | 170 | 75 D | |
 | 9 | 9:15 | Back to the Question | 120 | 15 W · 30 D | |
-| | | **Total** | **1,560** | **5:40 W · 4:20 D** | |
+| | | **Total** | **1,600** | **5:40 W · 4:20 D** | |
 
 ---
 
@@ -158,7 +159,7 @@ wall into that pitch's world, then hard-cuts back. People move: clerks, a man pa
 - **The coup (January 1893):** **Coup**, defined: a small group seizing a government by force. A "Committee of Safety" of
   planters and businessmen moves. Minister Stevens lands sailors and Marines from the USS *Boston*. **World:** the marching
   column past the palace (sample 8, built out). She gives way to avoid bloodshed: "I yield to the superior force of the United
-  States of America." Sanford Dole becomes president of the new government. On February 1, Stevens raises the U.S. flag and
+  States of America." Sanford Dole becomes president of the new government. *Yes, Dole. If that name rings a bell, hold that thought.* On February 1, Stevens raises the U.S. flag and
   declares Hawaiʻi an American **protectorate** (planted; Ep 4 defines it fully).
 - **Both readings, fairly:** the planters said the Queen was the one breaking the law, that they were protecting property and
   American lives, and that if America didn't take the islands, Britain or Japan would. The Queen's side: a lawful government
@@ -167,6 +168,10 @@ wall into that pitch's world, then hard-cuts back. People move: clerks, a man pa
   had done.* He told Congress the overthrow was an "act of war, committed with the participation of a diplomatic
   representative of the United States and without authority of Congress," and a "substantial wrong." He asked for the Queen
   to be restored. Dole refused. **Desk:** Cleveland's photo, the message.
+- **The pineapple payoff:** Dole's government renames itself the Republic of Hawaii on July 4, 1894 (the date was not an
+  accident). A few years later his cousin James arrives, buys land outside Honolulu, and in 1901 starts the Hawaiian Pineapple
+  Company. That is the Dole on the can in your kitchen. *Sanford kept the government. His cousin got the fruit.* **World:** a
+  pineapple field, then a hard cut to a period can label on the desk.
 - **Annexation**, defined: one country officially adding another place to itself. The annexation treaty stalls in the Senate.
   *A stack of paper will help stop it* (loop to ch 8).
 - **Sources:** `apology_resolution.txt`, `nara_newlands.txt`, `nara_petition_lesson.txt`, LoC images, Hawaii_Samples `FACTS.md`.
@@ -207,6 +212,33 @@ wall into that pitch's world, then hard-cuts back. People move: clerks, a man pa
 
 ---
 
+## Humor pass
+
+The channel voice is plain and a little wry. Here it gets more room: sarcasm aimed at the powerful and at the arguments, and
+the occasional dad joke. **Rules:** the joke is never on the Queen, Native Hawaiians or cane workers; no jokes from the George
+III callback (7:30) to the end of the quiet chapter (9:15); and a joke never sits on top of a primary-source quote. Drafts
+below, to be tuned in the script.
+
+| Where | Line (draft) | Kind |
+|---|---|---|
+| Ch 2, the bridge | "Some of these arguments still sound convincing. Which is exactly the problem." | wry |
+| Ch 3, isolationism | Jefferson's "entangling alliances with none," then: "In other words: we're not joining your group project." | sarcasm |
+| Ch 3, Alaska | "Critics gave the deal a pretty cold reception." Then gold turns up: "Folly status: revoked." | dad joke |
+| Ch 3, 1890 census | "The continent was officially full. Please try again later." | wry |
+| Ch 4, the pitch room | "Think of it as a pitch meeting where the investor is a whole country, and the product is other people's countries." | sarcasm |
+| Ch 4, the Businessman | "America had a classic problem: too much stuff. Anyone who has seen a garage knows it's still a classic problem." | wry |
+| Ch 4, the Admiral | "Steamships ran on coal and ran out a lot. Picture a road trip where every gas station is in somebody else's country." Then: "His argument held water. Sorry." | explainer + dad joke |
+| Ch 4, the "Scientist" | "It sounded like science. It wasn't. It was opinions wearing a lab coat." | sarcasm |
+| Ch 5, the twist | "Four people arguing about where to eat, and every one of them names the same restaurant." | wry |
+| Ch 6, 1887 | "They called it the Bayonet Constitution, which tells you everything about how the negotiations went." | sarcasm |
+| Ch 6, 1890 tariff | "Overnight, Hawaiian sugar went from VIP to standing in line with everybody else." | wry |
+| Ch 6, the coup | "They called themselves the Committee of Safety. Bold name for a group planning to overthrow a government." | sarcasm |
+| Ch 6, Cleveland | After Dole refuses: "It turns out it's hard to give back a government when the other guy has the keys and the guards." | wry |
+| Ch 6, pineapples | "Sanford kept the government. His cousin got the fruit. Talk about a sweet deal." | dad joke |
+| Ch 9, the handoff | "Hawaiʻi only got annexed because America was suddenly at war. And that war, depending on who you ask, was started by a newspaper." | wry |
+
+---
+
 ## Must-cover check (HANDOFF section 5, deck 14.1)
 
 | Item | Where |
@@ -221,7 +253,7 @@ wall into that pitch's world, then hard-cuts back. People move: clerks, a man pa
 | Ledger voice: Liliʻuokalani; close on the 1993 Apology Resolution | Ch 8, ch 9 |
 
 **Deliberately left out or trimmed for time:** Midway (1867) as a separate beat; the Blount and Morgan reports' disagreement
-(one line at most); James Dole and the pineapple company (unverified and not needed); the Gilded Age callback (one line in
+(one line at most); the Gilded Age callback (one line in
 the Businessman pitch, if you want it).
 
 ---
@@ -241,6 +273,9 @@ Resolution (November 23, 1993).
 - 1887 renewal and the Pearl Harbor right (ratified that year); the Bayonet Constitution's voting rules
 - How many sailors and Marines landed from the *Boston* (commonly 162)
 - Sanford Dole as the son of missionaries
+- Pineapple flash-forward: James Dole is Sanford's cousin (first cousin once removed; one academic source says second cousin, so
+  the script says only "cousin"), arrived 1899, founded the Hawaiian Pineapple Company in 1901; later renamed Dole Food Company.
+  Confirm one primary or museum source.
 - "Seward's Folly" as a newspaper nickname (and how widely it was used)
 - Spencer, not Darwin, coined "survival of the fittest" (1864): reword the "Scientist" line to say so
 - The planters' "Britain or Japan would take it" argument: find it in a period source
