@@ -1,8 +1,10 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
 **Chunk History** · narration script · draft 3 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
-(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
-cues for the voice, never spoken or shown.
+(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. **Delivery: deadpan throughout** (Ellis,
+Nov 2026): no emotion tags. `[beat]` and `[pause]` are timing marks, never sent to the voice: `tools/beats.py` puts a 0.6 s
+silence at each after voicing. Voice: `eleven_v4_turbo`, stability 0.75, style 0, the voice's own pauses capped at 0.25 s (test
+take A5).
 
 Series: *American Imperialism, 1867-1898*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_PITCH_MEETING_OUTLINE.md`](../../EP1_PITCH_MEETING_OUTLINE.md)

@@ -1,8 +1,10 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
 **Chunk History** · narration script · draft 3 (not voiced) · 1674 words · about 9:27 of narration at the locked pace
-(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
-cues for the voice, never spoken or shown.
+(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. **Delivery: deadpan throughout** (Ellis,
+Nov 2026): no emotion tags. `[beat]` and `[pause]` are timing marks, never sent to the voice: `tools/beats.py` puts a 0.6 s
+silence at each after voicing. Voice: `eleven_v4_turbo`, stability 0.75, style 0, the voice's own pauses capped at 0.25 s (test
+take A5).
 
 Series: *American Imperialism, 1867-1898*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_PITCH_MEETING_OUTLINE.md`](../../EP1_PITCH_MEETING_OUTLINE.md)
@@ -62,7 +64,7 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 
 `ch01_the_locked_room.txt` · 51 words · about 19 s
 
-[quiet] The Queen of Hawaiʻi is a prisoner in her own palace.
+The Queen of Hawaiʻi is a prisoner in her own palace.
 
 It's 1895. There's an armed guard outside her door. From her window, she can see the city she used to rule.
 
@@ -74,7 +76,7 @@ And the men who put her here aren't a foreign army. They're mostly Americans. Or
 
 `ch02_the_question.txt` · 96 words · about 33 s
 
-[curious] In 1776, America told the world something new. A government gets its power from "the consent of the governed." [beat] The people have to say yes.
+In 1776, America told the world something new. A government gets its power from "the consent of the governed." [beat] The people have to say yes.
 
 The men who locked this door called their government a republic. Just like America's.
 
@@ -101,7 +103,7 @@ Then people found gold there.
 
 Then the 1890 census reported that "there can hardly be said to be a frontier line" anymore. The continent was full.
 
-[curious] So where next?
+So where next?
 
 ---
 
@@ -127,7 +129,7 @@ And here's the thing about the Pacific. It's enormous. And right in the middle o
 
 *The Preacher.* Josiah Strong was a Protestant minister, and in 1885 he wrote a bestseller called *Our Country*. His pitch: America had been given Christianity and civilization, and it owed them to the world. In Hawaiʻi, missionaries had been arriving since 1820.
 
-*The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. [firmly] It wasn't.
+*The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races. Strong peoples, they said, were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. It wasn't.
 
 And here's the strange part. The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled."
 
@@ -189,7 +191,7 @@ What the planters wanted was {annexation}: one country officially adding another
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
-[slower] Remember the Declaration of Independence? Its list of complaints against King George the Third includes this one: "For taking away our Charters, abolishing our most valuable Laws, and altering fundamentally the Forms of our Governments."
+Remember the Declaration of Independence? Its list of complaints against King George the Third includes this one: "For taking away our Charters, abolishing our most valuable Laws, and altering fundamentally the Forms of our Governments."
 
 That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a queen.
 
@@ -199,7 +201,7 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 `ch08_under_protest.txt` · 211 words · about 77 s
 
-[quiet] In January 1895, the Queen's supporters tried to put her back in power. They failed. She was arrested and brought here, to this room.
+In January 1895, the Queen's supporters tried to put her back in power. They failed. She was arrested and brought here, to this room.
 
 Eight days later, as a prisoner, she signed away her throne. Then a military court sentenced her to "a fine of $5,000, and imprisonment at hard labor for five years." She later put it simply: "My palace was my prison."
 
@@ -217,7 +219,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 `ch09_back_to_the_question.txt` · 202 words · about 68 s
 
-[thoughtful] So let's go back to the question. Was this a betrayal of American ideals, or an expression of them?
+So let's go back to the question. Was this a betrayal of American ideals, or an expression of them?
 
 All four pitches spoke the language of American ideals: markets, a strong navy, Christianity, progress. The men who took Hawaiʻi even declared their republic on the Fourth of July.
 

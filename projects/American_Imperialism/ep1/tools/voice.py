@@ -103,11 +103,18 @@ MONTHS = "January|February|March|April|May|June|July|August|September|October|No
 HUSH = re.compile(r"\[(?:quiet(?:ly)?|soft(?:ly)?|whisper(?:s|ing)?|hushed|under (?:his|her|my) breath|barely audible)\]\s*", re.I)
 
 
+# [beat] and [pause] are timing marks, not voice tags: stripped here, and tools/beats.py puts a measured silence at each after
+# voicing (VOICE_MAX_PAUSE would shorten the voice's own pause anyway).
+BEAT = re.compile(r"\[(?:beat|pause)\]\s*", re.I)
+
+
 def spoken(text):
-    text = HUSH.sub("", text)
+    text = BEAT.sub("", HUSH.sub("", text))
     # "$7.2 million" -> "seven point two million dollars"; "$5,000," -> "five thousand dollars," (the comma stays outside)
     text = re.sub(r"\$(\d+)\.(\d+) (million|billion)", lambda m: f"{m.group(1)} point {' '.join(ONES[int(d)] for d in m.group(2))} {m.group(3)} dollars", text)
     text = re.sub(r"\$(\d+) (million|billion)", r"\1 \2 dollars", text)
+    # the same amount seen one word at a time (word timings): "$7.2" alone -> "seven point two dollars", so word counts match
+    text = re.sub(r"\$(\d+)\.(\d+)\b", lambda m: f"{m.group(1)} point {' '.join(ONES[int(d)] for d in m.group(2))} dollars", text)
     text = re.sub(r"\$(\d[\d,]*\d|\d)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
     # dates are said as ordinals: "November 3, 1944" -> "November third, nineteen forty-four" (the user's note, Nov 2026)
     text = re.sub(rf"\b({MONTHS}) (\d{{1,2}})(?:st|nd|rd|th)?\b(?![,.]?\d)", lambda m: m.group(1) + " " + ordinal(int(m.group(2))), text)
