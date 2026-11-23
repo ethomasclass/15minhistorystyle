@@ -1,6 +1,6 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 3 (not voiced) · 1642 words · about 9:17 of narration at the locked pace
+**Chunk History** · narration script · draft 3 (not voiced) · 1674 words · about 9:27 of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
@@ -34,14 +34,14 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 | # | Starts | Chapter | Words | Length |
 |---|---|---|---|---|
 | 1 | 0:00 | The Locked Room | 51 | 19 s |
-| 2 | 0:18 | The Question | 98 | 34 s |
-| 3 | 0:52 | The Old Guard | 123 | 42 s |
-| 4 | 1:34 | The Pitch Meeting | 426 | 140 s |
-| 5 | 3:54 | The Same Islands | 37 | 14 s |
-| 6 | 4:08 | The Heist | 443 | 146 s |
-| 7 | 6:34 | He Has, We Have | 51 | 19 s |
-| 8 | 6:52 | Under Protest | 211 | 77 s |
-| 9 | 8:09 | Back to the Question | 202 | 68 s |
+| 2 | 0:18 | The Question | 96 | 33 s |
+| 3 | 0:51 | The Old Guard | 123 | 42 s |
+| 4 | 1:33 | The Pitch Meeting | 460 | 151 s |
+| 5 | 4:04 | The Same Islands | 37 | 14 s |
+| 6 | 4:18 | The Heist | 443 | 146 s |
+| 7 | 6:44 | He Has, We Have | 51 | 19 s |
+| 8 | 7:02 | Under Protest | 211 | 77 s |
+| 9 | 8:20 | Back to the Question | 202 | 68 s |
 
 **Story arc check:**
 
@@ -72,7 +72,7 @@ And the men who put her here aren't a foreign army. They're mostly Americans. Or
 
 ## 0:18 | The Question
 
-`ch02_the_question.txt` · 98 words · about 34 s
+`ch02_the_question.txt` · 96 words · about 33 s
 
 [curious] In 1776, America told the world something new. A government gets its power from "the consent of the governed." [beat] The people have to say yes.
 
@@ -80,13 +80,13 @@ The men who locked this door called their government a republic. Just like Ameri
 
 So here's the question this series asks. When America started taking control of other places, was it betraying its own ideals? Or living them out?
 
-The answer starts with a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+The answer starts with four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
 
 We'll come back to this room. But first, the old rule.
 
 ---
 
-## 0:52 | The Old Guard
+## 0:51 | The Old Guard
 
 `ch03_the_old_guard.txt` · 123 words · about 42 s
 
@@ -105,13 +105,15 @@ Then the 1890 census reported that "there can hardly be said to be a frontier li
 
 ---
 
-## 1:34 | The Pitch Meeting
+## 1:33 | The Pitch Meeting
 
-`ch04_the_pitch_meeting.txt` · 426 words · about 140 s
+`ch04_the_pitch_meeting.txt` · 460 words · about 151 s
 
-By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it.
+By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it. Their arguments came from businessmen, naval officers, ministers and writers, in books, speeches and newspapers, spread over about thirty years. Nobody ever put them all in one room.
+> **CUT:** THE ROOM. On "one room," the pitch room (c1_pitch_room), empty: the long table, the chairs, the blank easel. 1 s of room tone.
 
-Think of it as a pitch meeting. Four pitchers, one investor: the United States.
+[beat] So let's do it for them. Think of it as a pitch meeting. Four pitchers, one investor: the United States.
+> **CUT:** On "do it for them," the four pitchers are standing in the room. No sound.
 
 Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
 
@@ -131,7 +133,7 @@ And here's the strange part. The Preacher and the Scientist were often the same 
 
 ---
 
-## 3:54 | The Same Islands
+## 4:04 | The Same Islands
 
 `ch05_the_same_islands.txt` · 37 words · about 14 s
 
@@ -139,7 +141,7 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 
 ---
 
-## 4:08 | The Heist
+## 4:18 | The Heist
 
 `ch06_the_heist.txt` · 443 words · about 146 s
 
@@ -183,7 +185,7 @@ What the planters wanted was {annexation}: one country officially adding another
 
 ---
 
-## 6:34 | He Has, We Have
+## 6:44 | He Has, We Have
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
@@ -193,7 +195,7 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ---
 
-## 6:52 | Under Protest
+## 7:02 | Under Protest
 
 `ch08_under_protest.txt` · 211 words · about 77 s
 
@@ -211,7 +213,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 ---
 
-## 8:09 | Back to the Question
+## 8:20 | Back to the Question
 
 `ch09_back_to_the_question.txt` · 202 words · about 68 s
 

@@ -12,7 +12,7 @@ The men who locked this door called their government a republic. Just like Ameri
 
 So here's the question this series asks. When America started taking control of other places, was it betraying its own ideals? Or living them out?
 
-The answer starts with a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+The answer starts with four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
 
 We'll come back to this room. But first, the old rule."""),
 
@@ -29,9 +29,11 @@ Then the 1890 census reported that "there can hardly be said to be a frontier li
 
 [curious] So where next?"""),
 
-("ch04_the_pitch_meeting", "The Pitch Meeting", 185, """By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it.
+("ch04_the_pitch_meeting", "The Pitch Meeting", 185, """By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it. Their arguments came from businessmen, naval officers, ministers and writers, in books, speeches and newspapers, spread over about thirty years. Nobody ever put them all in one room.
+@CUT THE ROOM. On "one room," the pitch room (c1_pitch_room), empty: the long table, the chairs, the blank easel. 1 s of room tone.
 
-Think of it as a pitch meeting. Four pitchers, one investor: the United States.
+[beat] So let's do it for them. Think of it as a pitch meeting. Four pitchers, one investor: the United States.
+@CUT On "do it for them," the four pitchers are standing in the room. No sound.
 
 Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
 
