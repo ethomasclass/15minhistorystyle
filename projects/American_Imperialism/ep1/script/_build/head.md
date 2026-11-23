@@ -1,7 +1,9 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 3 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
-(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. **Delivery: deadpan throughout** (Ellis,
+**Chunk History** · narration script · draft 4 (voiced from draft 3; re-voice pending) · {TOTAL} words · about {NARR} of narration at the locked pace
+(185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. **Voice (draft 4):** the rules in [`../../research/VOICE_STUDY.md`](../../research/VOICE_STUDY.md) section 6: long sentences that
+land on short ones, contractions, plain meaning before each term, no signposts or stock idioms, every dry line literally
+true. **Delivery: deadpan throughout** (Ellis,
 Nov 2026): no emotion tags. `[beat]` and `[pause]` are timing marks, never sent to the voice: `tools/beats.py` puts a 0.6 s
 silence at each after voicing. Voice: `eleven_v4_turbo`, stability 0.75, style 0, the voice's own pauses capped at 0.25 s (test
 take A5).

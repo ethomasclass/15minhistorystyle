@@ -40,4 +40,4 @@ Every flagged claim, what the sources say, and what changed in the script.
 | 15 | No vote on annexation was ever held in Hawaiʻi (draft 3) | **Confirmed.** No plebiscite was held; the 1898 Senate report argued one "would work a revolution in Hawaii which would abolish its constitution." PL 103-150: Native Hawaiians never relinquished their sovereignty "either through their monarchy or through a plebiscite or referendum" | `apology_resolution.txt`; National Archives, Hawaii petition lesson; Teaching American History | "No vote on annexation was ever held there." |
 | 16 | The government that held her in 1895 called itself a republic (draft 3) | **Confirmed.** The Republic of Hawaii, declared July 4, 1894 | already in ch 6 | "called their government a republic" |
 
-Nothing left open. One judgment call stays with you: "For the planters, that was the last straw" is interpretation, not a quoted fact.
+Nothing left open. One judgment call stays with you: "For the planters, that settled it" (draft 4; draft 3 had "that was the last straw") is interpretation, not a quoted fact.
