@@ -8,7 +8,7 @@ Suno can't drift back to them.
 
 | Cue | Sound world | The idea |
 |---|---|---|
-| `ai_theme` | Two small-town brass bands playing the same hymn in different keys | The series question: one America, two versions of it, overlapping |
+| `ai_theme` | A noble trumpet motif and a dark low answer, arguing the whole way through | The series question: betrayal or expression, never settled |
 | `ai_locked_room` | Glass and bowed metal tones, a faint band heard through a closed window | Confinement: the world goes on outside, muffled |
 | `ai_old_rule` | Hammered dulcimer and wooden flute, then wide open strings that stop dead | A young country minding its own business, until the continent runs out |
 | `ai_pitch_meeting` | A banjo two-step recorded like an 1890s wax-cylinder record | A sales pitch on the newest gadget of the day; four sections, one per pitcher |
@@ -39,21 +39,57 @@ stands: her song (1878) is in the public domain, and a quiet arrangement made by
 
 ---
 
-### 1. `ai_theme.mp3`: the series theme, "Two Bands"
+### 1. `ai_theme.mp3`: the series theme, "The Argument"
 *Used in:* ch 2 (the 1776 line), ch 9 (the answer, the Ledger, the end screen); every episode's last chapter.
 *Length:* **at least 2:00**
 
+The conflict runs the whole length, not just one moment: a proud voice states the idea, a dark voice answers with the same tune
+turned wrong, and they never agree. Try **A** first; **B** and **C** are other ways to get the same conflict if A's takes come
+out too polite.
+
+**A. The Argument** (recommended)
 ```
-a slow, earnest patriotic hymn played by a small 1890s town brass band, cornets, alto horns, baritone horn and tuba, warm but a little out of tune; halfway through, a second brass band far in the distance drifts in playing the same hymn in a different key and a slightly different tempo, the two overlapping uneasily like two parades meeting on one street; then the near band stops and the distant band finishes alone, thin and far away, on a chord that does not resolve, 66 BPM, 4/4, B-flat major clouded by a second key; documentary underscore, sparse, space for narrator, instrumental
+a documentary main theme built as an argument that never resolves: a proud, bright solo trumpet states a short noble patriotic motif, and each time a low, dark bass clarinet with low brass answers with the same motif bent into minor and slightly wrong; the two trade phrases the whole way through and overlap more as it goes, the harmony underneath shifting between major and minor so it never settles; serious and restrained, never loud, one snare roll at the midpoint, ends with the two voices holding notes that clash, 72 BPM, 4/4, C major against C minor; documentary underscore, sparse, space for narrator, instrumental
 ```
 
 ```
 [Instrumental]
-[Intro: near brass band, the hymn's first phrase, soft]
-[Verse: the full hymn, warm, a little out of tune]
-[Bridge: a distant second band enters in another key, the two overlap uneasily]
-[Break: the near band stops, only the distant band remains]
-[Outro: the distant band alone, unresolved chord, fades]
+[Intro: solo trumpet, the noble motif]
+[Answer: bass clarinet and low brass, the motif in minor, wrong]
+[Verse: trumpet and the low voice trade phrases]
+[Build: they overlap, the harmony shifting major to minor, a snare roll]
+[Verse: the argument continues, quieter]
+[Outro: both hold clashing notes, unresolved]
+[End]
+```
+
+**B. Proud and Wrong** (a hymn harmonized in the wrong key, all the way through)
+```
+a stately patriotic hymn on a small brass ensemble, the melody noble and sincere, but harmonized throughout by low strings in a different, darker key, so every chord sounds proud and wrong at the same time; the clash never goes away; slow and dignified, builds once to a restrained swell where the clash is strongest, then thins, ends on a chord that cannot resolve, 66 BPM, 4/4, polytonal, D major over E-flat minor; documentary underscore, sparse, space for narrator, instrumental
+```
+
+```
+[Instrumental]
+[Intro: the hymn's first phrase, brass, with the clashing low strings]
+[Verse: the full hymn, proud and wrong]
+[Build: one restrained swell, the clash strongest]
+[Break: thins to brass and one low string note]
+[Outro: an unresolved polytonal chord, fades]
+[End]
+```
+
+**C. The March That Can't March** (pride on unsteady feet)
+```
+a stately American military march on brass, field drum and fife, with a proud, confident melody, but in an uneven 7/8 meter so it keeps stumbling and never falls into step; the field drum insists on the beat while the melody pulls against it; serious, not comic, restrained, room to breathe, ends mid-phrase on a held unresolved chord, 84 BPM, 7/8, B-flat major leaning minor; documentary underscore, sparse, space for narrator, instrumental
+```
+
+```
+[Instrumental]
+[Intro: field drum alone, the uneven 7/8 pattern]
+[Verse: brass and fife, the proud march melody, never quite in step]
+[Break: drum alone again]
+[Verse: the march returns, darker]
+[Outro: stops mid-phrase, a held unresolved chord]
 [End]
 ```
 
@@ -202,4 +238,4 @@ a quiet, dignified hymn on a single old reed pump organ, as if played alone in a
 | 6 The Heist | `ai_heist` | Drop-outs for the Committee, Stevens and pineapple cuts |
 | 7 He Has, We Have | `ai_he_has` | |
 | 8 Under Protest | `ai_under_protest` | Or the *Aloha ʻOe* arrangement |
-| 9 Back to the Question | `ai_theme` | Through the end screen; the two bands overlap under "betrayal or expression" |
+| 9 Back to the Question | `ai_theme` | Through the end screen; the trumpet and its dark answer sit under "betrayal or expression" |
