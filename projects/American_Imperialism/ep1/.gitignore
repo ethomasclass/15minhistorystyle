@@ -1,2 +1,4 @@
 build/
 img/raw/bk_*.jpg
+public/audio/cache/
+public/audio/vt_*

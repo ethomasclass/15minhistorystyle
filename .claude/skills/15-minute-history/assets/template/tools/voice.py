@@ -22,6 +22,9 @@ SENT_GAP = float(os.environ.get("VOICE_SENT_GAP", "0"))   # extra breath added a
 LEAD_IN = 0.4     # silence before the first word
 SPEED = float(os.environ.get("VOICE_SPEED", "1.0"))  # ElevenLabs speed, 0.7-1.2
 STRETCH = float(os.environ.get("VOICE_STRETCH", "1.0"))  # local pitch-preserving tempo; <1 is slower (v2 ignores SPEED; try 0.93)
+# Delivery: higher stability and zero style give a flatter, steadier read (deadpan). v3 accepts only 0.0, 0.5 or 1.0.
+STABILITY = float(os.environ["VOICE_STABILITY"]) if os.environ.get("VOICE_STABILITY") else None
+STYLE = float(os.environ["VOICE_STYLE"]) if os.environ.get("VOICE_STYLE") else None
 MAX_PAUSE = float(os.environ.get("VOICE_MAX_PAUSE", "0"))  # >0: shorten the voice's own pauses to at most this (s)
 CACHE = os.path.join(OUT, "cache")
 # Default since the West series (user's pick): the whole chapter in ONE ElevenLabs request on eleven_v4, so the model
@@ -97,12 +100,15 @@ MONTHS = "January|February|March|April|May|June|July|August|September|October|No
 
 # Tags that make the voice whisper or drop way down: never sent (the user's note, Nov 2026: "I shouldn't be whispering to the
 # audience or getting super quiet"). Use [serious] for weight instead.
-HUSH = re.compile(r"\[(?:quietly|softly|whisper(?:s|ing)?|hushed|under (?:his|her|my) breath|barely audible)\]\s*", re.I)
+HUSH = re.compile(r"\[(?:quiet(?:ly)?|soft(?:ly)?|whisper(?:s|ing)?|hushed|under (?:his|her|my) breath|barely audible)\]\s*", re.I)
 
 
 def spoken(text):
     text = HUSH.sub("", text)
-    text = re.sub(r"\$([\d,]+)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
+    # "$7.2 million" -> "seven point two million dollars"; "$5,000," -> "five thousand dollars," (the comma stays outside)
+    text = re.sub(r"\$(\d+)\.(\d+) (million|billion)", lambda m: f"{m.group(1)} point {' '.join(ONES[int(d)] for d in m.group(2))} {m.group(3)} dollars", text)
+    text = re.sub(r"\$(\d+) (million|billion)", r"\1 \2 dollars", text)
+    text = re.sub(r"\$(\d[\d,]*\d|\d)", lambda m: DOLLARS.get(m.group(1), m.group(1)) + " dollars", text)
     # dates are said as ordinals: "November 3, 1944" -> "November third, nineteen forty-four" (the user's note, Nov 2026)
     text = re.sub(rf"\b({MONTHS}) (\d{{1,2}})(?:st|nd|rd|th)?\b(?![,.]?\d)", lambda m: m.group(1) + " " + ordinal(int(m.group(2))), text)
     for k, v in PRONOUNCE.items():
@@ -127,10 +133,11 @@ def eleven(text, prev, nxt):
         # v3: most expressive model; stability is one of 0.0 creative / 0.5 natural / 1.0 robust,
         # and it does not accept neighbouring-paragraph context yet.
         body = {"text": text, "model_id": model,
-                "voice_settings": {"stability": 0.5, "similarity_boost": 0.85, "speed": SPEED}}
+                "voice_settings": {"stability": STABILITY if STABILITY is not None else 0.5, "similarity_boost": 0.85, "speed": SPEED}}
     else:
         body = {"text": text, "model_id": model, "previous_text": prev, "next_text": nxt,
-                "voice_settings": {"stability": 0.45, "similarity_boost": 0.85, "style": 0.15,
+                "voice_settings": {"stability": STABILITY if STABILITY is not None else 0.45, "similarity_boost": 0.85,
+                                   "style": STYLE if STYLE is not None else 0.15,
                                    "use_speaker_boost": True, "speed": SPEED}}
     # Responses are cached by request body so re-running (e.g. to change pauses) spends no credits.
     key = hashlib.sha1(json.dumps([voice, body], sort_keys=True).encode()).hexdigest()[:16]
