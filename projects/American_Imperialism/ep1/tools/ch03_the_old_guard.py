@@ -42,7 +42,7 @@ SH = Shots([
     (t_grow, 'A', Camera([(t_grow, 960, 600, 0.98), (t_nug, 960, 590, 1.08)], wobble=0.8)),
     (t_nug, 'N', Camera([(t_nug, 960, 560, 1.0), (t_census, 960, 560, 1.03)], wobble=0.4)),
     (t_census, 'C', Camera([(t_census, 960, 520, 1.0), (t_full, 960, 520, 1.06)], wobble=0.8)),
-    (t_full, 'W', Camera([(t_full, 820, 640, 1.35), (t_where, 900, 600, 1.2), (TL.dur, 1300, 420, 1.12)], wobble=0.8)),
+    (t_full, 'W', Camera([(t_full, 820, 640, 1.35), (t_where, 900, 600, 1.2), (TL.dur, 1060, 440, 1.12)], wobble=0.8)),
 ])
 
 # the wagon: enters during the census line, rolls right across the grass and stops short of the cliff edge
