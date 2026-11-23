@@ -28,9 +28,55 @@ COAL = ['#151510', '#1f1e17', '#2a2920', '#37352a']
 IVORY = ['#bdb7a3', '#d3cdb7', '#e4dfcc', '#efeadb']
 
 
+# ---------------------------------------------------------------- facet shading (the Flow look: every surface broken into
+# a few big angular planes, lit from the upper left, lighter on the lit side and darker in shade)
+def fpoly(pts, base, spread=0.11, cell=None, contrast=1.35, bias=0.0, n=5, height=None):
+    xs = [q[0] for q in pts]; ys = [q[1] for q in pts]
+    size = max(max(xs) - min(xs), max(ys) - min(ys), 1)
+    cell = cell or max(22, size / 3.2)
+    h = height or hill_h(1.6 / size, size * 0.45)
+    return facets(pts, F.tones(base, n, spread), h, cell=cell, contrast=contrast, bias=bias)
+
+
+def fcloud(cx, cy, w, h, fill=CLOUD, belly=BELLY, n=9, seed_=0):
+    """a scalloped cloud in two tiers of billows (big ones behind, small in front), built from flat planes, with a darker
+    faceted belly: the Flow plates' clouds"""
+    r = np.random.default_rng(int(seed_) + 100)
+    base = cy + h * 0.32
+    o = ''
+    for tier, (k_w, k_r, dy, tone) in enumerate(((0.8, 0.62, -0.18, 0.04), (1.0, 0.42, 0.06, 0.0))):
+        ww = w * k_w
+        nb = max(4, int(ww / (h * k_r * 1.25)))
+        cxs = np.linspace(cx - ww / 2, cx + ww / 2, nb) + r.uniform(-0.15, 0.15, nb) * h
+        rs = [h * k_r * (0.55 + 0.45 * math.sin(math.pi * (i + 0.5) / nb)) * r.uniform(0.85, 1.25) for i in range(nb)]
+        cys = [cy + dy * h - h * 0.25 * math.sin(math.pi * (i + 0.5) / nb) for i in range(nb)]
+        top = []
+        for x in np.arange(cxs[0] - rs[0], cxs[-1] + rs[-1] + 1, 8):
+            ys = [yc - math.sqrt(max(0, R * R - (x - xi) ** 2)) for xi, yc, R in zip(cxs, cys, rs) if abs(x - xi) < R]
+            top.append((x, min(ys) if ys else base))
+        top = [(x, min(y, base)) for x, y in top]
+        outline = top + [(top[-1][0], base), (top[0][0], base)]
+        col = F.shift(fill, tone)
+        o += facets(outline, F.tones(col, 5, 0.06), hill_h(2.2 / w, h * 1.1), cell=h * 0.42, contrast=1.3, bias=0.12)
+        if belly and tier == 1:
+            bl = [(x, max(y, base - h * 0.3)) for x, y in top]
+            o += facets(bl + [(bl[-1][0], base), (bl[0][0], base)], F.tones(belly, 4, 0.06), hill_h(2.0 / w, h * 0.5), cell=h * 0.35, contrast=1.1)
+    return o
+
+
+def sky_planes(seed_=0, col='#efe2c0', op=0.12):
+    """a few huge pale wedges across the sky, like the light planes in the Flow plates"""
+    r = np.random.default_rng(seed_ + 7)
+    o = ''
+    for k in range(4):
+        x = r.uniform(-200, 1600)
+        o += f'<polygon points="{x:.0f},-200 {x + r.uniform(150, 400):.0f},-200 {x + r.uniform(700, 1200):.0f},900 {x + r.uniform(300, 600):.0f},900" fill="{col}" opacity="{op * r.uniform(0.5, 1):.3f}"/>'
+    return o
+
+
 def sky(top=SKY_T, bot=SKY_B, gid='skyg'):
     return (f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{top}"/><stop offset="1" stop-color="{bot}"/></linearGradient>'
-            f'<rect x="-3000" y="-3000" width="7920" height="6000" fill="url(#{gid})"/>')
+            f'<rect x="-3000" y="-3000" width="7920" height="6000" fill="url(#{gid})"/>' + sky_planes(len(gid)))
 
 
 def drift_group(gid, svg):
@@ -236,7 +282,7 @@ def crate(x, y, w, h, k=2, side=0.0):
     if side:
         o += poly([(x + w, y), (x + w + d * side, y - d), (x + w + d * side, y - h - d), (x + w, y - h)], c[max(0, k - 1)])
     o += poly([(x, y - h), (x + w, y - h), (x + w + d * side, y - h - d), (x + d * side, y - h - d)], c[min(5, k + 2)])
-    o += poly([(x, y), (x + w, y), (x + w, y - h), (x, y - h)], c[k])
+    o += fpoly([(x, y), (x + w, y), (x + w, y - h), (x, y - h)], c[k], spread=0.07, cell=max(18, w / 2.2))
     b = max(3, w * 0.07)
     o += f'<rect x="{x}" y="{y - h}" width="{w}" height="{h}" fill="none" stroke="{c[max(0, k - 2)]}" stroke-width="{b:.1f}"/>'
     o += f'<line x1="{x + b}" y1="{y - b}" x2="{x + w - b}" y2="{y - h + b}" stroke="{c[max(0, k - 2)]}" stroke-width="{b:.1f}"/>'
@@ -276,7 +322,7 @@ class Scene:
 def scene_docks(prefix, t0=0.0):
     """An American wharf around 1890, piled with more than it can hold (copied from Flow c5_docks)."""
     o = sky()
-    o += F.cloud2(320, 120, 820, 150, CLOUD, belly=BELLY, n=10) + F.cloud2(1560, 80, 760, 130, CLOUD, belly=BELLY, n=9)
+    o += fcloud(320, 120, 820, 150, n=10, seed_=320) + fcloud(1560, 80, 760, 130, n=9, seed_=1560)
     o += facets([(600, 600), (700, 520), (820, 470), (930, 500), (1050, 540), (1200, 560), (1200, 620), (600, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
     o += facets([(1180, 560), (1300, 470), (1420, 430), (1560, 470), (1700, 520), (2400, 540), (2400, 620), (1180, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
     o += f'<g id="{prefix}sea"></g>'
@@ -309,7 +355,7 @@ def scene_docks(prefix, t0=0.0):
         o += poly([(xa, ya_b - 40), (xb, yb_b - 30), (xb, yb_t + 60), (xa, ya_t + 80)], '#2a1f19')
         o += poly([(xa, ya_t + 80), (xb, yb_t + 60), (xb, yb_t + 70), (xa, ya_t + 92)], BRICK[0])
     # the wharf deck
-    o += poly([(-300, 1080), (760, 760), (2400, 760), (2400, 1400), (-300, 1400)], WOOD[2])
+    o += fpoly([(-300, 1080), (760, 760), (2400, 760), (2400, 1400), (-300, 1400)], WOOD[2], cell=160, contrast=0.8)
     for i in range(30):
         x = -300 + i * 110
         o += f'<line x1="{x}" y1="1400" x2="{760 + (x - 760) * 0.1:.0f}" y2="760" stroke="{WOOD[1]}" stroke-width="3" opacity="0.7"/>'
@@ -320,15 +366,13 @@ def scene_docks(prefix, t0=0.0):
         o += f'<line x1="{xm - 80}" y1="{ym + 60}" x2="{xm + 80}" y2="{ym + 60}" stroke="#3a3530" stroke-width="5"/>'
         for dx in (-170, -70, 70, 190):
             o += f'<line x1="{xm}" y1="{ym}" x2="{xm + dx}" y2="{455 + dy}" stroke="#4a443c" stroke-width="2"/>'
-    o += poly([(sx + 330, 470 + dy), (sx + 330, 250 + dy), (sx + 392, 250 + dy), (sx + 392, 470 + dy)], '#d8c79a')
-    o += poly([(sx + 362, 250 + dy), (sx + 392, 250 + dy), (sx + 392, 470 + dy), (sx + 362, 470 + dy)], '#c2b07f')
+    o += fpoly([(sx + 330, 470 + dy), (sx + 330, 250 + dy), (sx + 392, 250 + dy), (sx + 392, 470 + dy)], '#d0bf92', spread=0.09, cell=40)
     o += poly([(sx + 330, 250 + dy), (sx + 392, 250 + dy), (sx + 392, 285 + dy), (sx + 330, 285 + dy)], '#2a2824')
-    o += poly([(sx + 150, 470 + dy), (sx + 560, 470 + dy), (sx + 560, 410 + dy), (sx + 150, 410 + dy)], '#e2dbc6')
-    o += poly([(sx + 380, 470 + dy), (sx + 560, 470 + dy), (sx + 560, 410 + dy), (sx + 380, 410 + dy)], '#cfc6ae')
+    o += fpoly([(sx + 150, 470 + dy), (sx + 560, 470 + dy), (sx + 560, 410 + dy), (sx + 150, 410 + dy)], '#dcd4bc', spread=0.07, cell=60)
     for x in range(sx + 170, sx + 550, 34):
         o += f'<rect x="{x}" y="{428 + dy}" width="14" height="14" fill="#3a3732"/>'
     hull = [(sx - 30, 430 + dy), (sx + 60, 465 + dy), (sx + 780, 470 + dy), (sx + 760, 600 + dy), (sx + 90, 610 + dy)]
-    o += poly(hull, '#2c2a24') + poly([(sx + 400, 468 + dy), (sx + 780, 470 + dy), (sx + 760, 600 + dy), (sx + 400, 606 + dy)], '#24221d')
+    o += fpoly(hull, '#2e2c26', spread=0.06, cell=90, contrast=1.1)
     o += poly([(sx + 90, 610 + dy), (sx + 760, 600 + dy), (sx + 754, 632 + dy), (sx + 100, 640 + dy)], '#8f3b2e')
     o += poly([(sx - 30, 430 + dy), (sx + 60, 465 + dy), (sx + 780, 470 + dy), (sx + 780, 482 + dy), (sx + 58, 478 + dy), (sx - 30, 444 + dy)], '#e2dbc6')
     o += f'<path d="M{sx + 60},{520 + dy} Q{sx - 100},{600 + dy} {sx - 250},{700 + dy}" fill="none" stroke="#c9b98f" stroke-width="5"/>'
@@ -361,7 +405,7 @@ def scene_docks(prefix, t0=0.0):
 def scene_coaling(prefix):
     """A U.S. cruiser at a coaling station on a rocky Pacific island (copied from Flow c6_coaling_station)."""
     o = sky('#a9c1bb', '#cfd3bf', prefix + 'sk')
-    o += F.cloud2(420, 120, 900, 170, CLOUD, belly=BELLY, n=10) + F.cloud2(1640, 170, 720, 160, CLOUD, belly=BELLY, n=9)
+    o += fcloud(420, 120, 900, 170, n=10, seed_=420) + fcloud(1640, 170, 720, 160, n=9, seed_=1640)
     o += f'<g id="{prefix}sea"></g>'
     # the island
     isl = [(1240, 1100), (1290, 940), (1420, 860), (1560, 700), (1640, 540), (1720, 460), (1800, 520), (1880, 640), (2000, 760), (2300, 900), (2300, 1100)]
@@ -370,7 +414,7 @@ def scene_coaling(prefix):
     # coal heaps, the shed and the lighthouse
     for cx, cy, w, h in ((1400, 870, 150, 70), (1520, 885, 180, 85), (1650, 880, 150, 70), (1470, 905, 130, 55)):
         o += facets([(cx - w / 2, cy + 10), (cx - w * 0.2, cy - h * 0.8), (cx + w * 0.1, cy - h), (cx + w / 2, cy + 10)], COAL, ridge_h(0.05, 20, 0.1), cell=26, contrast=1.2)
-    o += poly([(1600, 820), (1700, 820), (1700, 760), (1600, 760)], WOOD[2]) + poly([(1588, 765), (1650, 725), (1712, 765)], WOOD[1])
+    o += fpoly([(1600, 820), (1700, 820), (1700, 760), (1600, 760)], WOOD[2], cell=30) + fpoly([(1588, 765), (1650, 725), (1712, 765)], WOOD[1], cell=30)
     o += f'<rect x="1640" y="785" width="22" height="35" fill="#2a2420"/>'
     lx, ly = 1440, 720
     o += poly([(lx - 22, ly), (lx + 22, ly), (lx + 15, ly - 120), (lx - 15, ly - 120)], IVORY[3]) + poly([(lx, ly), (lx + 22, ly), (lx + 15, ly - 120), (lx, ly - 120)], IVORY[1])
@@ -386,11 +430,11 @@ def scene_coaling(prefix):
     o += f'<line x1="{hx + 230}" y1="740" x2="{hx + 230}" y2="400" stroke="#6b5a40" stroke-width="9"/><line x1="{hx + 700}" y1="740" x2="{hx + 700}" y2="390" stroke="#6b5a40" stroke-width="9"/>'
     for xm, ym in ((hx + 230, 400), (hx + 700, 390)):
         o += f'<line x1="{xm - 45}" y1="{ym + 50}" x2="{xm + 45}" y2="{ym + 50}" stroke="#6b5a40" stroke-width="6"/>'
-    o += poly([(hx + 180, 770), (hx + 820, 770), (hx + 800, 720), (hx + 210, 720)], '#d9cfae') + poly([(hx + 500, 770), (hx + 820, 770), (hx + 800, 720), (hx + 500, 720)], '#c4b993')
+    o += fpoly([(hx + 180, 770), (hx + 820, 770), (hx + 800, 720), (hx + 210, 720)], '#d2c7a4', spread=0.08, cell=55)
     for fx in (hx + 380, hx + 560):
-        o += poly([(fx, 720), (fx + 56, 720), (fx + 52, 560), (fx + 4, 560)], '#d8c79a') + poly([(fx + 28, 720), (fx + 56, 720), (fx + 52, 560), (fx + 28, 560)], '#c2b07f')
+        o += fpoly([(fx, 720), (fx + 56, 720), (fx + 52, 560), (fx + 4, 560)], '#d0bf92', spread=0.1, cell=34)
         o += poly([(fx + 2, 560), (fx + 54, 560), (fx + 54, 535), (fx + 2, 535)], '#2a2824')
-    o += poly([(hx - 60, 760), (hx + 1000, 750), (hx + 940, 860), (hx + 40, 870)], IVORY[3]) + poly([(hx + 470, 755), (hx + 1000, 750), (hx + 940, 860), (hx + 470, 866)], IVORY[2])
+    o += fpoly([(hx - 60, 760), (hx + 1000, 750), (hx + 940, 860), (hx + 40, 870)], IVORY[1], spread=0.14, cell=95, contrast=1.3)
     o += poly([(hx + 40, 870), (hx + 940, 860), (hx + 930, 880), (hx + 52, 890)], '#8f3b2e')
     for x in range(hx + 80, hx + 900, 46):
         o += f'<circle cx="{x}" cy="{800 - (x - hx) * 0.008:.0f}" r="5" fill="#3a3832"/>'
@@ -417,27 +461,27 @@ def scene_coaling(prefix):
 def scene_church(prefix, t_arrive=0.0):
     """A white mission church in Hawaiʻi, 1880s, Sunday morning (copied from Flow c7_mission_church)."""
     o = sky()
-    o += F.cloud2(300, 110, 800, 150, CLOUD, belly=BELLY, n=10) + F.cloud2(1560, 230, 700, 150, CLOUD, belly=BELLY, n=9)
+    o += fcloud(300, 110, 800, 150, n=10, seed_=300) + fcloud(1560, 230, 700, 150, n=9, seed_=1560)
     o += F.seam(facets([(-400, 900), (-400, 520), (0, 400), (200, 300), (420, 190), (560, 230), (700, 330), (900, 300), (1100, 360), (1300, 440),
                         (1500, 480), (1700, 420), (1900, 470), (2400, 520), (2400, 900)], MTN, ridge_h(0.005, 110, 0.12, namp=30), cell=110, contrast=1.0))
     o += poly([(-400, 1000), (-400, 800), (300, 790), (700, 810), (1300, 805), (1700, 790), (2400, 800), (2400, 1000)], TREE[1])
-    o += facets([(-500, 905), (2500, 905), (2500, 1400), (-500, 1400)], LAWN, hill_h(0.003, 60), cell=170, contrast=0.35, bias=0.1)
+    o += facets([(-500, 905), (2500, 905), (2500, 1400), (-500, 1400)], LAWN, hill_h(0.003, 90), cell=200, contrast=0.8, bias=0.05)
     o += poly([(-500, 1000), (2500, 1000), (2500, 1014), (-500, 1014)], '#c8bb9c')
     o += poly([(895, 1000), (1025, 1000), (1120, 1400), (800, 1400)], '#c3b495')
     # the church: gabled meeting house, porch gable, tower and steeple
     cx = 960
     ch = []
-    ch.append(poly([(cx - 270, 980), (cx + 270, 980), (cx + 270, 760), (cx - 270, 760)], IVORY[2]))
+    ch.append(fpoly([(cx - 270, 980), (cx + 270, 980), (cx + 270, 760), (cx - 270, 760)], IVORY[1], spread=0.15, cell=90, contrast=1.4))
     for y in range(770, 980, 14):
         ch.append(f'<line x1="{cx - 270}" y1="{y}" x2="{cx + 270}" y2="{y}" stroke="{IVORY[0]}" stroke-width="2" opacity="0.6"/>')
-    ch.append(poly([(cx - 300, 768), (cx, 610), (cx + 300, 768)], IVORY[3]) + poly([(cx, 610), (cx + 300, 768), (cx + 255, 768), (cx, 638)], IVORY[1]))
-    ch.append(poly([(cx - 110, 980), (cx + 110, 980), (cx + 110, 790), (cx - 110, 790)], IVORY[3]))
-    ch.append(poly([(cx - 130, 796), (cx, 720), (cx + 130, 796)], IVORY[2]))
-    ch.append(poly([(cx - 70, 720), (cx + 70, 720), (cx + 70, 560), (cx - 70, 560)], IVORY[3]) + poly([(cx, 720), (cx + 70, 720), (cx + 70, 560), (cx, 560)], IVORY[1]))
+    ch.append(fpoly([(cx - 300, 768), (cx, 610), (cx + 300, 768)], IVORY[2], spread=0.14, cell=70))
+    ch.append(fpoly([(cx - 110, 980), (cx + 110, 980), (cx + 110, 790), (cx - 110, 790)], IVORY[2], spread=0.14, cell=55))
+    ch.append(fpoly([(cx - 130, 796), (cx, 720), (cx + 130, 796)], IVORY[1], spread=0.14, cell=45))
+    ch.append(fpoly([(cx - 70, 720), (cx + 70, 720), (cx + 70, 560), (cx - 70, 560)], IVORY[2], spread=0.14, cell=40))
     ch.append(poly([(cx - 80, 560), (cx + 80, 560), (cx + 80, 548), (cx - 80, 548)], IVORY[2]))
-    ch.append(poly([(cx - 52, 548), (cx + 52, 548), (cx + 52, 470), (cx - 52, 470)], IVORY[3]))
+    ch.append(fpoly([(cx - 52, 548), (cx + 52, 548), (cx + 52, 470), (cx - 52, 470)], IVORY[3], spread=0.08, cell=30))
     ch.append(f'<path d="M{cx - 18},540 V500 A18,18 0 0 1 {cx + 18},500 V540 Z" fill="#4a4c48"/>')
-    ch.append(poly([(cx - 58, 470), (cx, 330), (cx + 58, 470)], IVORY[2]) + poly([(cx, 330), (cx + 58, 470), (cx, 470)], IVORY[0]))
+    ch.append(fpoly([(cx - 58, 470), (cx, 330), (cx + 58, 470)], IVORY[2], spread=0.1, cell=30))
     ch.append(f'<line x1="{cx}" y1="330" x2="{cx}" y2="300" stroke="#6a6458" stroke-width="4"/>')
     for x in (cx - 210, cx - 160, cx + 160, cx + 210):
         ch.append(poly([(x - 18, 940), (x + 18, 940), (x + 18, 830), (x - 18, 830)], '#5a6260') + f'<line x1="{x}" y1="830" x2="{x}" y2="940" stroke="{IVORY[3]}" stroke-width="3"/>')
