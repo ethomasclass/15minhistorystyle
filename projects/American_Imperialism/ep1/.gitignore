@@ -2,3 +2,4 @@ build/
 img/raw/bk_*.jpg
 public/audio/cache/
 public/audio/vt_*
+renders/coldopen_blender_preview_720p.mp4
