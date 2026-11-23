@@ -362,8 +362,8 @@ box('stackboard', -0.36, -0.24, 0.76, 0.36, 0.26, 0.78, DESK_DK, ST)
 rr = random.Random(21)
 layers = {PAPER: [], PAPER2: []}
 z = 0.78
-for k in range(80):
-    h = rr.uniform(0.0028, 0.0048) if rr.random() < 0.85 else rr.uniform(0.006, 0.009)
+for k in range(64):                                         # true to size: about 9 cm of paper, not a tower
+    h = rr.uniform(0.0010, 0.0015) if rr.random() < 0.85 else rr.uniform(0.0020, 0.0030)
     a = math.radians(rr.uniform(-1.0, 1.0))
     dx, dy = rr.uniform(-0.005, 0.005), rr.uniform(-0.005, 0.005)
     W2, D2 = 0.2, 0.15
@@ -453,15 +453,25 @@ ee.use_bloom, ee.bloom_threshold, ee.bloom_intensity, ee.bloom_radius = True, 1.
 cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
-SP = Vector((sx_, sy_, sz_ + 0.85))
+SP = Vector((sx_, sy_, sz_ + 0.78 + (STACK_TOP - 0.78) * 0.5))   # the middle of the stack
 fwd = Vector((math.sin(sa_), -math.cos(sa_), 0))            # from the dais toward this desk's chair
 rgt = Vector((math.cos(sa_), math.sin(sa_), 0))
-# S1: low across the desk lid from beside the stack, the stack's edge at frame right, its top out of frame
-c1a = SP + rgt * -0.92 + fwd * 0.02 + Vector((0, 0, -0.03))
-c1b = SP + rgt * -0.86 + fwd * -0.08 + Vector((0, 0, -0.03))
-l1a = SP + rgt * 1.0 + fwd * -0.62 + Vector((0, 0, 0.06))
+# S1: low and close, a lens just above the board a hand's width from the paper, aimed past the stack's near corner: the
+# sheets' edges run down frame right, receding to the corner, its top out of frame, the chamber dark and soft beyond
+dais = -fwd                                                 # (rgt, dais, up) is right-handed
+BASE = Vector((sx_, sy_, sz_ + 0.78))
+def lp(u, v, h):
+    return BASE + rgt * u + dais * v + Vector((0, 0, h))
+CORNER = lp(-0.2, 0.15, 0.0)
+def aim(cp, turn):
+    d = (CORNER - cp); d.z = 0
+    a = math.atan2(d.dot(dais), d.dot(rgt)) + math.radians(turn)
+    return cp + (rgt * math.cos(a) + dais * math.sin(a)) * 1.0 + Vector((0, 0, 0.04))
+c1a = lp(-0.36, -0.06, 0.02)
+c1b = lp(-0.35, -0.02, 0.02)
+l1a, l1b = aim(c1a, 8), aim(c1b, 8)
 KEYS = [(FS['S2'][0], (1.3, YS - 1.4, 10.0), (0.0, 3.0, 2.0), 14), (FS['S2'][1] - 1, (0.6, YS - 1.2, 9.9), (0.0, 3.0, 2.0), 14),
-        (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (N - 1, tuple(c1b), tuple(l1a + rgt * 0.05), 50)]
+        (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (N - 1, tuple(c1b), tuple(l1b), 50)]
 CUTS = {FS['S2'][1] - 1}
 for fr, pos, look, lens in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=fr)
@@ -472,7 +482,7 @@ for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT' if int(kp.co[0]) in CUTS else 'LINEAR'
 cam.data.dof.use_dof = True
-for fr, dist, fs in ((FS['S2'][0], 16.0, 5.6), (FS['S1'][0], (SP - c1a).length - 0.16, 2.4)):
+for fr, dist, fs in ((FS['S2'][0], 16.0, 5.6), (FS['S1'][0], (CORNER - c1a).length - 0.02, 4.0)):
     cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = dist, fs
     cam.data.dof.keyframe_insert('focus_distance', frame=fr)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=fr)
