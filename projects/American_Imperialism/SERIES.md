@@ -137,6 +137,11 @@ No plug in the middle of the video. Each chapter closes one loop and opens the n
    `projects/Hawaii_Samples/`, samples 6 and 7), with people who move (sample 8). We enter the world through a picture on
    the desk and leave it through a document inside the scene. Real people's faces come only from period photographs, so
    illustrated figures stay distant or turned away. The quiet chapter stays on the desk.
+   **Decided (November 2026): the world scenes are built in Blender**, as low-poly dioramas made in code and copied from the
+   Google Flow plates (layout, proportions, palette): real geometry, one hard sun, real shadows, haze over distance, camera
+   moves with true parallax. People are faceless low-poly figures (Quaternius' CC0 base body, flat palette colours, period
+   clothing fitted in code) walking with planted feet, stepped at 12 fps. The desk, the cards, the notes and the finish stay as
+   they are. Test and tools: `tests/blender_church/`.
 3. **Ep 4 ledger voice.** Decide when Ep 4 is outlined.
 4. **Classroom companions.** The Ledger is built to be the graphic organizer if they are wanted.
 5. **Gilded Age link.** Ep 1 can open its pitch with the overproduction problem in one line, with or without naming the earlier series.

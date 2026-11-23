@@ -134,39 +134,190 @@ def shell(name, vf, col, arm, bone):
 
 hz, sz_, headz, topz = HIPS.z, SP2.z, HEAD.z, TOP.z
 hx, hyy = HIPS.x, HIPS.y
+# ---- garments fitted to the body: at each height, sample the body mesh all the way round and wrap it
+VPTS = []                                                  # (raw position, dominant bone) for every body vertex
+for v in me.vertices:
+    if v.groups:
+        g = max(v.groups, key=lambda g: g.weight)
+        VPTS.append((BM @ v.co, gname[g.group]))
+TORSO = {'Hips', 'Spine', 'Spine1', 'Spine2', 'Neck', 'LeftShoulder', 'RightShoulder'}
+HIPLEG = TORSO | {'LeftUpLeg', 'RightUpLeg'}
+NB = 20
+
+
+def ring(z, groups, off, cx=None, cy=None, band=0.09, floor_r=0.2):
+    """NB points round the body at height z: the outermost body surface in each direction, pushed out by off"""
+    pts = [p for p, g in VPTS if g in groups and abs(p.z - z) < band]
+    if cx is None:
+        cx = sum(p.x for p in pts) / len(pts) if pts else 0.0
+        cy = sum(p.y for p in pts) / len(pts) if pts else 0.0
+    r = [0.0] * NB
+    for p in pts:
+        k = int(((math.atan2(p.y - cy, p.x - cx) + math.pi) / (2 * math.pi)) * NB) % NB
+        r[k] = max(r[k], math.hypot(p.x - cx, p.y - cy))
+    for _ in range(NB):                                    # fill directions with no vertices from their neighbours
+        r = [r[k] if r[k] > 0 else max(r[(k - 1) % NB], r[(k + 1) % NB]) for k in range(NB)]
+    r = [max(v, floor_r) for v in r]
+    r = [(r[(k - 1) % NB] + 2 * r[k] + r[(k + 1) % NB]) / 4 for k in range(NB)]     # smooth a little
+    return [(cx + (rr + off) * math.cos(-math.pi + 2 * math.pi * (k + 0.5) / NB), cy + (rr + off) * math.sin(-math.pi + 2 * math.pi * (k + 0.5) / NB), z)
+            for k, rr in enumerate(r)], (cx, cy)
+
+
+def circle(z, r, cx, cy, sx=1.0, sy=1.0):
+    return [(cx + r * sx * math.cos(-math.pi + 2 * math.pi * (k + 0.5) / NB), cy + r * sy * math.sin(-math.pi + 2 * math.pi * (k + 0.5) / NB), z) for k in range(NB)]
+
+
+def blend(ra, rb, u):
+    return [(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u) for a, b in zip(ra, rb)]
+
+
+def loft(rings, open_front=0.0, back_only=0.0):
+    """faces between consecutive rings; open_front leaves a gap of that half-angle (deg) at the front (+x)"""
+    verts = [v for rg in rings for v in rg]
+    faces = []
+    for j in range(len(rings) - 1):
+        for k in range(NB):
+            a = math.degrees(-math.pi + 2 * math.pi * (k + 0.5) / NB)
+            if open_front and abs(a) < open_front:
+                continue
+            if back_only and abs(a) < 180 - back_only:
+                continue
+            k2 = (k + 1) % NB
+            faces.append((j * NB + k, j * NB + k2, (j + 1) * NB + k2, (j + 1) * NB + k))
+    return verts, faces
+
+
+ZW = (HIPS.z * 0.45 + SP2.z * 0.55)                          # the natural waist
+ZH = HIPS.z - 0.12                                         # the widest part of the hips
+ZN = bone_head('Neck').z
+ZC = SP2.z + 0.25                                          # the chest
+
+
+def skirt(hem_z, hem_r, top='waist', top_off=0.035):
+    if top == 'chest':
+        r0, c = ring(ZC, TORSO, top_off)
+        r1, _ = ring(ZW, TORSO, top_off + 0.1, *c)
+        rings = [r0, r1]
+    else:
+        r1, c = ring(ZW, TORSO, top_off)
+        rings = [r1]
+    rh, _ = ring(ZH, HIPLEG, top_off + 0.07, *c)
+    hem = circle(hem_z, hem_r, c[0] - 0.05, c[1], sx=0.92, sy=1.0)
+    mid = blend(rh, hem, 0.45)
+    return loft(rings + [rh, mid, hem])
+
+
+def tails(knee_z=1.3, flare=0.82):
+    r1, c = ring(ZW, TORSO, 0.04)
+    rh, _ = ring(ZH, HIPLEG, 0.08, *c)
+    kn = circle(knee_z, flare, c[0] - 0.06, c[1], sx=0.9, sy=1.0)
+    return loft([r1, rh, blend(rh, kn, 0.5), kn], open_front=38)
+
+
+def band(z, h, groups=TORSO, off=0.045):
+    r0, c = ring(z - h / 2, groups, off)
+    r1, _ = ring(z + h / 2, groups, off, *c)
+    return loft([r0, r1])
+
+
+def collar(h=0.2, off=0.03):
+    r0, c = ring(ZN - 0.02, {'Neck'}, off, band=0.06, floor_r=0.1)
+    r1, _ = ring(ZN + h, {'Neck'}, off - 0.01, *c, band=0.06, floor_r=0.09)
+    return loft([r0, r1])
+
+
+def sailor_collar():
+    r0, c = ring(SP2.z + 0.62, TORSO, 0.04)
+    r1, _ = ring(SP2.z + 0.05, TORSO, 0.05, *c)
+    return loft([r0, r1], back_only=70)
+
+
+def legging(side):
+    grp = {side + 'Leg'}
+    rings, c = [], None
+    for z in (0.38, 0.8, 1.22):
+        rg, c2 = ring(z, grp, 0.045, band=0.12, floor_r=0.12)
+        rings.append(rg)
+    return loft(rings)
+
+
+def head_r():
+    pts = [p for p, g in VPTS if g == 'Head' and abs(p.z - (TOP.z - 0.35)) < 0.08]
+    cx = sum(p.x for p in pts) / len(pts); cy = sum(p.y for p in pts) / len(pts)
+    return max(math.hypot(p.x - cx, p.y - cy) for p in pts), cx, cy
+
+
+HR, HCX, HCY = head_r()
+print('HEAD r', round(HR, 3), 'waist', round(ZW, 2), 'neck', round(ZN, 2))
+
+
+def hat_top():
+    return frustum(TOP.z - 0.18, TOP.z + 0.62, HR + 0.03, HR + 0.05, 12, cap=True, cx=HCX, cy=HCY)
+
+
+def hat_brim(r, z=None, cx=None):
+    z = TOP.z - 0.18 if z is None else z
+    return frustum(z, z + 0.035, r, r, 16, cap=True, cx=HCX if cx is None else cx, cy=HCY)
+
+
+def hat_crown(h):
+    return frustum(TOP.z - 0.18, TOP.z - 0.18 + h, HR + 0.03, HR - 0.02, 12, cap=True, cx=HCX, cy=HCY)
+
+
+def cap(h=0.24, top_r=None):
+    return frustum(TOP.z - 0.24, TOP.z - 0.24 + h, HR + 0.03, top_r or HR + 0.12, 12, cap=True, cx=HCX, cy=HCY)
+
+
+def peak():
+    return frustum(TOP.z - 0.26, TOP.z - 0.22, HR + 0.05, HR + 0.2, 8, -50, 50, HCX, HCY)
+
+
+def bonnet():
+    """a bonnet: a crown over the back and top of the head, and a brim that frames the face like a halo, open at the chin"""
+    v, f = dome(TOP.z - 0.42, HR + 0.1, 1.05, 12, 4, HCX - 0.08, HCY, front_cut=(4, 2))
+    n0 = len(v)
+    xf = HCX + HR * 0.55                                   # the brim stands just in front of the face
+    zc = TOP.z - 0.5
+    seg = 14
+    for i in range(seg + 1):
+        a = math.radians(-130 + 260 * i / seg)             # from beside the chin, over the top, to the other side
+        for rr, dx in ((HR * 0.95, 0.0), (HR * 1.45, 0.12)):
+            v.append((xf + dx, HCY + rr * math.sin(a), zc + rr * math.cos(a)))
+    for i in range(seg):
+        a0 = n0 + 2 * i
+        f.append((a0, a0 + 2, a0 + 3, a0 + 1))
+    return v, f
+
 COSTUMES = {
     'gentleman': dict(coat='#2b2824', skin='#d9b38f', hair='#5b4330', legs='#3a3631', shoes='#1d1b18',
-                      parts=[('tails', 'Hips', lambda: frustum(hz + 0.15, 1.35, 0.62, 0.84, 12, 50, 310, hx, hyy), '#2b2824'),
-                             ('hat', 'Head', lambda: frustum(topz - 0.12, topz + 0.72, 0.36, 0.38, 10, cap=True, cx=HEAD.x, cy=HEAD.y + 0.03), '#1f1d1a'),
-                             ('brim', 'Head', lambda: frustum(topz - 0.12, topz - 0.08, 0.62, 0.62, 12, cap=True, cx=HEAD.x, cy=HEAD.y + 0.03), '#1f1d1a'),
-                             ('collar', 'Spine2', lambda: frustum(sz_ + 0.62, sz_ + 0.82, 0.34, 0.3, 10, -60, 60, SP2.x, SP2.y - 0.02), '#efe9dc')]),
+                      parts=[('tails', 'Hips', lambda: tails(1.32, 0.8), '#2b2824'),
+                             ('waist', 'Hips', lambda: band(ZW, 0.1), '#2b2824'),
+                             ('collar', 'Spine2', lambda: collar(0.18), '#efe9dc'),
+                             ('hat', 'Head', hat_top, '#1f1d1a'), ('brim', 'Head', lambda: hat_brim(HR + 0.2), '#1f1d1a')]),
     'holoku': dict(coat='#d98b8c', skin='#8f6a4c', hair='#2a2622', legs='#d98b8c', shoes='#3a2c22',
-                   parts=[('dress', 'Hips', lambda: frustum(hz + 1.05, 0.42, 0.62, 1.15, 14, cx=hx, cy=hyy), '#d98b8c'),
-                          ('yoke', 'Spine2', lambda: frustum(sz_ + 0.3, sz_ + 0.75, 0.62, 0.38, 12, cx=SP2.x, cy=SP2.y), '#e6a6a3'),
-                          ('straw', 'Head', lambda: frustum(topz - 0.2, topz - 0.16, 0.85, 0.85, 14, cap=True, cx=HEAD.x, cy=HEAD.y), '#d9c79a'),
-                          ('crown', 'Head', lambda: frustum(topz - 0.2, topz + 0.18, 0.4, 0.36, 10, cap=True, cx=HEAD.x, cy=HEAD.y), '#cdb98a'),
-                          ('band', 'Head', lambda: frustum(topz - 0.16, topz - 0.04, 0.41, 0.4, 10, cx=HEAD.x, cy=HEAD.y), '#8f3b2e')]),
+                   parts=[('dress', 'Hips', lambda: skirt(0.42, 1.08, top='chest'), '#d98b8c'),
+                          ('collar', 'Spine2', lambda: collar(0.16, 0.035), '#e9a7a4'),
+                          ('crown', 'Head', lambda: hat_crown(0.3), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR + 0.36), '#d9c79a'),
+                          ('band', 'Head', lambda: frustum(TOP.z - 0.15, TOP.z - 0.05, HR + 0.04, HR + 0.03, 12, cx=HCX, cy=HCY), '#8f3b2e')]),
     'missionary': dict(coat='#3a2f3a', skin='#e3c4a2', hair='#5b4330', legs='#3a2f3a', shoes='#1d1b18',
-                       parts=[('dress', 'Hips', lambda: frustum(hz + 0.95, 0.42, 0.6, 1.1, 14, cx=hx, cy=hyy), '#3a2f3a'),
-                              ('collar', 'Spine2', lambda: frustum(sz_ + 0.62, sz_ + 0.8, 0.33, 0.29, 10, -70, 70, SP2.x, SP2.y - 0.02), '#efe9dc'),
-                              ('bonnet', 'Head', lambda: dome(headz + 0.1, 0.55, 1.05, 10, 3, HEAD.x, HEAD.y + 0.08, front_cut=(3, 2)), '#ece4d0')]),
+                       parts=[('dress', 'Hips', lambda: skirt(0.42, 1.04), '#3a2f3a'),
+                              ('waist', 'Hips', lambda: band(ZW, 0.1), '#2e252e'),
+                              ('collar', 'Spine2', lambda: collar(0.17), '#efe9dc'),
+                              ('bonnet', 'Head', bonnet, '#ece4d0')]),
     'sailor': dict(coat='#27324a', skin='#c79b78', hair='#2a2622', legs='#27324a', shoes='#1d1b18',
-                   parts=[('collar', 'Spine2', lambda: frustum(sz_ + 0.35, sz_ + 0.78, 0.66, 0.38, 10, 120, 240, SP2.x, SP2.y), '#3f5a86'),
-                          ('stripe', 'Spine2', lambda: frustum(sz_ + 0.36, sz_ + 0.42, 0.68, 0.64, 10, 120, 240, SP2.x, SP2.y), '#efe9dc'),
-                          ('cap', 'Head', lambda: frustum(topz - 0.25, topz - 0.05, 0.42, 0.5, 12, cap=True, cx=HEAD.x, cy=HEAD.y), '#1f2a3c'),
-                          ('belt', 'Hips', lambda: frustum(hz + 0.2, hz + 0.45, 0.6, 0.6, 12, cx=hx, cy=hyy), '#b79a68'),
-                          ('legL', 'LeftLeg', lambda: frustum(0.35, 1.25, 0.26, 0.24, 8, cx=bone_head('LeftLeg').x, cy=bone_head('LeftLeg').y), '#b79a68'),
-                          ('legR', 'RightLeg', lambda: frustum(0.35, 1.25, 0.26, 0.24, 8, cx=bone_head('RightLeg').x, cy=bone_head('RightLeg').y), '#b79a68')]),
+                   parts=[('collar', 'Spine2', sailor_collar, '#3f5a86'),
+                          ('cap', 'Head', lambda: cap(0.2), '#1f2a3c'),
+                          ('belt', 'Hips', lambda: band(ZW - 0.05, 0.2), '#b79a68'),
+                          ('legL', 'LeftLeg', lambda: legging('Left'), '#b79a68'),
+                          ('legR', 'RightLeg', lambda: legging('Right'), '#b79a68')]),
     'officer': dict(coat='#1f2a44', skin='#d9b38f', hair='#6e5a45', legs='#ece6d6', shoes='#1d1b18',
-                    parts=[('tails', 'Hips', lambda: frustum(hz + 0.15, 1.05, 0.62, 0.84, 12, 45, 315, hx, hyy), '#1f2a44'),
-                           ('cap', 'Head', lambda: frustum(topz - 0.22, topz + 0.05, 0.42, 0.52, 12, cap=True, cx=HEAD.x, cy=HEAD.y), '#1b2333'),
-                           ('peak', 'Head', lambda: frustum(topz - 0.24, topz - 0.2, 0.47, 0.5, 8, -55, 55, HEAD.x, HEAD.y), '#111111'),
-                           ('belt', 'Hips', lambda: frustum(hz + 0.3, hz + 0.45, 0.62, 0.62, 12, cx=hx, cy=hyy), '#c9a648'),
-                           ('collar', 'Spine2', lambda: frustum(sz_ + 0.62, sz_ + 0.82, 0.34, 0.3, 10, -60, 60, SP2.x, SP2.y - 0.02), '#efe9dc')]),
+                    parts=[('tails', 'Hips', lambda: tails(1.2, 0.78), '#1f2a44'),
+                           ('belt', 'Hips', lambda: band(ZW, 0.13), '#c9a648'),
+                           ('collar', 'Spine2', lambda: collar(0.17), '#efe9dc'),
+                           ('cap', 'Head', lambda: cap(0.22), '#1b2333'), ('peak', 'Head', peak, '#111111')]),
     'worker': dict(coat='#e3dccb', skin='#8f6a4c', hair='#2a2622', legs='#4a4439', shoes='#2a2622',
-                   parts=[('straw', 'Head', lambda: frustum(topz - 0.2, topz - 0.16, 0.8, 0.8, 14, cap=True, cx=HEAD.x, cy=HEAD.y), '#d9c79a'),
-                          ('crown', 'Head', lambda: frustum(topz - 0.2, topz + 0.15, 0.4, 0.34, 10, cap=True, cx=HEAD.x, cy=HEAD.y), '#cdb98a'),
-                          ('sash', 'Hips', lambda: frustum(hz + 0.25, hz + 0.45, 0.6, 0.6, 12, cx=hx, cy=hyy), '#8f3b2e')]),
+                   parts=[('sash', 'Hips', lambda: band(ZW, 0.16), '#8f3b2e'),
+                          ('crown', 'Head', lambda: hat_crown(0.28), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR + 0.33), '#d9c79a')]),
 }
 
 
@@ -242,8 +393,9 @@ tgt = bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
 
-if MODE == 'lineup':
-    PEOPLE = [person(f'p{i}', c, (-5.0 + i * 2.0, -10.0, 0.0), 180) for i, c in enumerate(ORDER)]   # caught mid-stride, walking toward us
+if MODE in ('lineup', 'back'):
+    HD = 180 if MODE == 'lineup' else 0
+    PEOPLE = [person(f'p{i}', c, (-5.0 + i * 2.0, -10.0, 0.0), HD) for i, c in enumerate(ORDER)]   # caught mid-stride
     for i, (root, arm) in enumerate(PEOPLE):
         bake(arm, WALK, [0.0], RATE, phase=3.0 + i * 4.0)
     cam.location, tgt.location = (1.2, -24.5, 1.7), (0.0, -10.0, 1.05)
