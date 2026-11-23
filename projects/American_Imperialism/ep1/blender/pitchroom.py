@@ -139,15 +139,35 @@ for i, (x, y) in enumerate(((-5.0, 3.9), (-2.7, 3.3), (-1.2, 3.9), (0.1, 3.3), (
 cyl('carafe', (-2.0, 3.85, TZ), (-2.0, 3.85, TZ + 0.2), 0.09, 0.07, GLASS, n=12)
 cyl('carafe_neck', (-2.0, 3.85, TZ + 0.2), (-2.0, 3.85, TZ + 0.32), 0.04, 0.03, GLASS, n=12)
 
-# ---- the easel and its blank board (the portal), at the end of the table
+# ---- the easel and its board (the portal): landscape 16:9, so when it fills the frame it is the frame. Its face shows a
+# picture without shading (emission), so the hand-off to the full-screen graphic is exact.
 EX, EY = 4.3, 4.2
-BW, BH, BZ = 1.15, 1.45, 1.05                                # the board: width, height, bottom edge
-board = box('board', EX - BW / 2, EY - 0.03, BZ, EX + BW / 2, EY, BZ + BH, '#efe6d0')
-box('boardframe', EX - BW / 2 - 0.05, EY, BZ - 0.05, EX + BW / 2 + 0.05, EY + 0.04, BZ + BH + 0.05, '#8a6a45')
-for sx in (-1, 1):
-    cyl(f'eleg{sx}', (EX + sx * 0.5, EY - 0.25, 0), (EX + sx * 0.12, EY + 0.02, BZ + BH + 0.25), 0.025, 0.02, '#8a6a45', n=6)
-cyl('eleg_back', (EX, EY + 0.7, 0), (EX, EY + 0.05, BZ + BH + 0.1), 0.025, 0.02, '#8a6a45', n=6)
-box('eledge', EX - 0.6, EY - 0.12, BZ - 0.08, EX + 0.6, EY + 0.04, BZ - 0.03, '#8a6a45')
+BW, BH, BZ = 1.6, 0.9, 1.15                                  # the board: width, height, bottom edge
+BOARD_IMG = os.environ.get('BOARD_IMG', os.path.join(HERE, 'assets', 'board_imperialism.png'))
+box('boardback', EX - BW / 2, EY - 0.02, BZ, EX + BW / 2, EY + 0.01, BZ + BH, '#efe6d0')
+box('boardframe', EX - BW / 2 - 0.05, EY - 0.015, BZ - 0.05, EX + BW / 2 + 0.05, EY + 0.04, BZ + BH + 0.05, '#8a6a45')
+bpy.ops.mesh.primitive_plane_add(size=1)
+bf = bpy.context.active_object
+bf.name = 'boardface'
+bf.scale = (BW, BH, 1)
+bf.rotation_euler = (math.radians(90), 0, 0)
+bf.location = (EX, EY - 0.025, BZ + BH / 2)
+bm_ = bpy.data.materials.new('boardface')
+bm_.use_nodes = True
+nt_ = bm_.node_tree
+for n_ in list(nt_.nodes):
+    nt_.nodes.remove(n_)
+ti = nt_.nodes.new('ShaderNodeTexImage')
+ti.image = bpy.data.images.load(BOARD_IMG)
+em = nt_.nodes.new('ShaderNodeEmission')
+ou = nt_.nodes.new('ShaderNodeOutputMaterial')
+nt_.links.new(ti.outputs['Color'], em.inputs['Color'])
+nt_.links.new(em.outputs[0], ou.inputs['Surface'])
+bf.data.materials.append(bm_)
+for sx in (-1, 1):                                          # the front legs stand just behind the board, splayed
+    cyl(f'eleg{sx}', (EX + sx * 0.62, EY + 0.07, 0), (EX + sx * 0.2, EY + 0.07, BZ + BH + 0.3), 0.025, 0.02, '#8a6a45', n=6)
+cyl('eleg_back', (EX, EY + 0.75, 0), (EX, EY + 0.1, BZ + BH + 0.15), 0.025, 0.02, '#8a6a45', n=6)
+box('eledge', EX - 0.85, EY - 0.12, BZ - 0.08, EX + 0.85, EY + 0.04, BZ - 0.03, '#8a6a45')   # the ledge the board sits on
 
 # ---- the hanging lamp over the table, and the light: daylight through the windows, the lamp's warm pool
 LX, LY = -3.2, 3.8
@@ -175,7 +195,7 @@ bpy.data.objects['sun'].data.energy = 0.0                    # indoors: no sun
 
 # ---- the four pitchers, standing behind the table in a loose row (only in 'full')
 N = 60
-if MODE == 'full':
+if MODE in ('full', 'push'):
     PITCHERS = [('businessman', (-3.1, 5.75), 182, {}), ('captain', (-1.0, 6.0), 178, {}),
                 ('minister', (0.9, 5.8), 186, {'RightArm': (60, 0, -20), 'RightForeArm': (0, 0, -60)}),
                 ('lecturer', (2.9, 5.6), 200, {'RightArm': (40, 0, -30), 'RightForeArm': (0, 0, -20)})]
@@ -192,15 +212,56 @@ LK['finish'](sc, fill_strength=0.7, haze=(60.0, 400.0, 0.0), rules={
 cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
-cam.data.lens = 30
-cam.location, tgt.location = (-0.6, -4.6, 1.65), (-0.2, 8.0, 1.75)
-cam.data.dof.use_dof = True
-cam.data.dof.focus_distance = 9.0
-cam.data.dof.aperture_fstop = 4.0
-sc.frame_start, sc.frame_end = 0, N - 1
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
-sc.frame_set(0)
-sc.render.filepath = os.path.join(OUT, f'pitchroom_{MODE}.png')
-bpy.ops.render.render(write_still=True)
-print('PITCHROOM', MODE, 'written')
+cam.data.dof.use_dof = True
+if MODE != 'push':
+    cam.data.lens = 30
+    cam.location, tgt.location = (-0.6, -4.6, 1.65), (-0.2, 8.0, 1.75)
+    cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = 9.0, 4.0
+    sc.frame_set(0)
+    sc.render.filepath = os.path.join(OUT, f'pitchroom_{MODE}.png')
+    bpy.ops.render.render(write_still=True)
+    print('PITCHROOM', MODE, 'written')
+else:
+    import json as _json
+    ws = _json.load(open(os.path.join(HERE, '..', 'public', 'audio', 'ch04_the_pitch_meeting.words.json')))['words']
+    def _at(word, after=0.0):
+        return next(w['s'] for w in ws if w['w'].strip('.,:').lower() == word.lower() and w['s'] >= after)
+    T0 = _at('What', 20) - 0.35                       # the shot starts here in chapter 4
+    T_PUSH = _at('has', T0) - 0.1                     # "has a name": the push begins
+    i_s = next(i for i, w in enumerate(ws) if w['w'].lower() == 'strong' and w['s'] >= T_PUSH)
+    T_END = ws[i_s - 1]['s'] - 0.05                   # "A strong country": the board fills the frame; the card takes over
+    NF = int(round((T_END - T0) * FPS))
+    cam.data.lens = 35
+    d = BW * cam.data.lens / cam.data.sensor_width    # the distance at which the board exactly fills the frame
+    face = Vector((EX, EY - 0.025, BZ + BH / 2))
+    keys = [(0, (0.2, -1.2, 1.75), (2.4, 5.0, 1.35)),                         # the table, the four pitchers, the easel
+            (int((T_PUSH - T0) * FPS), (0.5, -0.9, 1.72), (2.7, 4.9, 1.38)),
+            (NF - 1, (face.x, face.y - d, face.z), (face.x, face.y + 2, face.z))]
+    for f, pos, look in keys:
+        cam.location = pos; cam.keyframe_insert('location', frame=f)
+        tgt.location = look; tgt.keyframe_insert('location', frame=f)
+    for ob in (cam, tgt):
+        for fc in ob.animation_data.action.fcurves:
+            for kp in fc.keyframe_points:
+                kp.interpolation = 'BEZIER'
+                kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
+    cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves}
+    for f in range(0, NF, 3):
+        c = Vector([cfc[i].evaluate(f) for i in range(3)])
+        cam.data.dof.focus_distance = (face - c).length
+        cam.data.dof.aperture_fstop = 2.8
+        cam.data.dof.keyframe_insert('focus_distance', frame=f)
+    sc.frame_start, sc.frame_end = 0, NF - 1
+    print('PUSH', round(T0, 2), round(T_PUSH, 2), round(T_END, 2), NF, 'frames; board distance', round(d, 3))
+    FR = [int(v) for v in os.environ['FRAMES'].split(',')] if os.environ.get('FRAMES') else range(NF)
+    for f in FR:
+        f = min(f, NF - 1)
+        p_ = os.path.join(OUT, f'{f:04d}.png')
+        if os.path.exists(p_):
+            continue
+        sc.frame_set(f)
+        sc.render.filepath = p_
+        bpy.ops.render.render(write_still=True)
+        print('FRAME', f, flush=True)
