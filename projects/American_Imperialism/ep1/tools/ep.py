@@ -31,7 +31,7 @@ def norm(w):
 class Timeline:
     """word start/end times for one chapter file, at wpm. at('phrase') = when the phrase starts, end('phrase') = when it ends."""
 
-    def __init__(self, slug, wpm=185):
+    def __init__(self, slug, wpm=185, gaps=None):
         txt = open(os.path.join(EP, 'script', slug + '.txt')).read()
         sec = 60 / wpm
         t, self.w = 0.35, []
@@ -52,6 +52,10 @@ class Timeline:
                     t += 0.12
             t += 0.45
         self.dur = t + 0.6
+        for phrase, g in (gaps or {}).items():          # silent holds for the humor cuts (no narration under them)
+            i = self._find(phrase)[0]
+            self.w = self.w[:i] + [(n, a + g, b + g) for n, a, b in self.w[i:]]
+            self.dur += g
 
     def _find(self, phrase, k=1):
         ws = [norm(x) for x in phrase.split()]
@@ -88,7 +92,8 @@ class Shots:
     def frame(self, t):
         a = self.active(t)
         T = {a[1]: a[2].transform(t)}
-        O = {s[1]: (1 if s is a else 0) for s in self.s}
+        O = {s[1]: 0 for s in self.s}
+        O[a[1]] = 1
         return a[1], T, O
 
 
