@@ -21,6 +21,8 @@ W_ = json.load(open(os.path.join(EP, 'public', 'audio', 'ch03_the_old_guard.word
 def at(word, k=1):
     n = 0
     for w in W_:
+        if w['s'] < T0 - 0.1:                 # only words inside this clip (ch 3 says "alliances" earlier too)
+            continue
         if w['w'].strip('".,:').lower().startswith(word.lower()):
             n += 1
             if n == k:
@@ -65,55 +67,85 @@ def pop(t, t0, d=0.34):
     return back_out((step12(t) - t0) / d) if t >= t0 else 0.0
 
 
+def ease_io(u):
+    u = clamp(u)
+    return 4 * u ** 3 if u < 0.5 else 1 - (-2 * u + 2) ** 3 / 2
+
+
+def pop_s(t, t0, d=0.34, s_=1.6):
+    """a smooth pop (not stepped): 0 before t0, overshoots a little, settles at 1"""
+    return back_out((t - t0) / d, s_) if t >= t0 else 0.0
+
+
+T_WORDS = WORD_T['"entangling']
+T_SLIDE = T_WORDS - 0.85                      # the portrait glides left just before the quote starts
+CX1, CY1 = PX + PW / 2, PY + PH / 2           # where the portrait block ends up (its centre)
+CX0, CY0, SC0 = 960, 430, 1.12                # where it starts: centre stage, a little larger
+
+
 def frame(t):
     tq = step12(t)
     o = ''
-    tj = at('Thomas')[0]
-    s = pop(t, tj, 0.4)
+    # ---- the portrait group: pops in at centre, the name and source land under it, then it glides left
+    tj, tn = at('Thomas')[0], at('Jefferson')[0]
+    s = pop_s(t, tj, 0.45)
     if s > 0:
-        cx, cy = PX + PW / 2, PY + PH / 2
-        o += (f'<g transform="translate({cx},{cy}) scale({s:.4f}) translate({-PW / 2},{-PH / 2})">'
-              f'<path d="{slab(PW, PH, C)}" fill="#0d0c09" transform="translate(10,12)"/>'
-              f'<g clip-path="url(#pclip)"><use href="#portrait"/></g>'
-              f'<path d="{slab(PW, PH, C)}" fill="none" stroke="{TE}" stroke-width="6"/></g>')
-    tn = at('Jefferson')[0]
-    if t >= tn:
-        o += highlight(PX - 10, PY + PH + 86, 'THOMAS JEFFERSON', 52, prog=(tq - tn) / 0.27)
-    if t >= at('first')[0]:
-        o += tag(PX, PY + PH + 140, 'FIRST INAUGURAL ADDRESS, MARCH 4, 1801', 20, '#b9b1a3')
-    tq0 = WORD_T['"entangling'] - 0.25
-    qs = pop(t, tq0, 0.3)
-    if qs > 0:
-        o += f'<g transform="translate({QX - 20},300) scale({qs:.3f})"><text x="0" y="0" font-family="\'Abril\'" font-size="300" fill="{OR}">“</text></g>'
-    # the words rise in as they're spoken (the opening quotation mark is the big orange one)
+        u = ease_io((t - T_SLIDE) / 0.65)
+        cx, cy = CX0 + (CX1 - CX0) * u, CY0 + (CY1 - CY0) * u
+        sc = (SC0 + (1.0 - SC0) * u) * s
+        rot = -5 * (1 - clamp((t - tj) / 0.45)) + 2.2 * __import__('math').sin(u * 3.14159)   # settles, then tips as it moves
+        grp = (f'<path d="{slab(PW, PH, C)}" fill="#0d0c09" transform="translate({PX + 10},{PY + 12})"/>'
+               f'<g transform="translate({PX},{PY})"><g clip-path="url(#pclip)"><use href="#portrait"/></g>'
+               f'<path d="{slab(PW, PH, C)}" fill="none" stroke="{TE}" stroke-width="6"/></g>')
+        if t >= tn:
+            grp += highlight(PX - 10, PY + PH + 86, 'THOMAS JEFFERSON', 52, prog=(tq - tn) / 0.27)
+        tf = at('first')[0]
+        if t >= tf:
+            grp += f'<g opacity="{clamp((t - tf) / 0.3):.3f}">' + tag(PX, PY + PH + 140, 'FIRST INAUGURAL ADDRESS, MARCH 4, 1801', 20, '#b9b1a3') + '</g>'
+        o += f'<g transform="translate({cx:.1f},{cy:.1f}) rotate({rot:.2f}) scale({sc:.4f}) translate({-CX1:.1f},{-CY1:.1f})">{grp}</g>'
+    # ---- the opening mark drops in with a swing
+    tq0 = T_WORDS - 0.3
+    if t >= tq0:
+        u = clamp((t - tq0) / 0.4)
+        qs, qr, qy = pop_s(t, tq0, 0.4, 2.2), -28 * (1 - back_out(u, 2.4)), -60 * (1 - ease_out(u))
+        o += (f'<g transform="translate({QX + 40},{240 + qy:.1f}) rotate({qr:.2f}) scale({qs:.3f})">'
+              f'<text x="-60" y="60" font-family="\'Abril\'" font-size="300" fill="{OR}">“</text></g>')
+    # ---- the words: each slides in from the right, scales up past full size and settles, as it is spoken
+    tnone = at('none')[0]
     for line, y in LINES:
         x = QX + 130
         for wd in line.split():
-            key = wd if wd in WORD_T else wd
-            tw = WORD_T.get(key, WORD_T.get(wd.strip('"'), 0))
+            tw = WORD_T.get(wd, WORD_T.get(wd.strip('"'), 0))
             shown = wd.lstrip('"')
             wpx = len(shown) * 66 + 34
-            if t >= tw:
-                u = ease_out((tq - tw) / 0.25)
-                o += (f'<g opacity="{u:.3f}" transform="translate(0,{24 * (1 - u):.1f})">'
-                      + text(x, y, shown, 120, 'Inter8', CREAM) + '</g>')
+            if t >= tw - 0.04:
+                u = clamp((t - tw + 0.04) / 0.32)
+                sc = 0.72 + 0.28 * back_out(u, 2.0)
+                if shown == 'none.':                 # a small punch on the last word
+                    sc *= 1 + 0.07 * __import__('math').sin(clamp((t - tnone - 0.2) / 0.3) * 3.14159)
+                dx = 70 * (1 - ease_out(u))
+                o += (f'<g opacity="{clamp(u * 2.5):.3f}" transform="translate({x + dx:.1f},{y}) scale({sc:.4f})">'
+                      + text(0, 0, shown, 120, 'Inter8', CREAM) + '</g>')
             x += wpx
     tc = at('none')[1]
-    cs = pop(t, tc - 0.1, 0.3)
+    cs = pop_s(t, tc - 0.1, 0.35, 2.2)
     if cs > 0:                                # the closing mark, orange like the opening one
         o += f'<g transform="translate({QX + 772},668) scale({cs:.3f})"><text x="0" y="0" font-family="\'Abril\'" font-size="150" fill="{OR}">”</text></g>'
     # teal underline under the key words, drawn while they're spoken
     tw0, tw1 = at('with')[0], at('none')[1]
     if t >= tw0:
-        p = clamp((tq - tw0) / max(0.3, tw1 - tw0))
+        p = ease_out(clamp((t - tw0) / max(0.3, tw1 - tw0)), 2)
         o += (f'<path d="M{QX + 130},672 Q{QX + 420},686 {QX + 760},668" fill="none" stroke="{TE}" stroke-width="12" '
               f'stroke-linecap="round" stroke-dasharray="{700 * p:.0f} 900"/>')
     # the signature writes on after the quote
-    ts = at('none')[1] + 0.2
+    ts = at('none')[1] + 0.25
     if t >= ts:
-        p = clamp((tq - ts) / 0.8)
+        p = ease_io(clamp((t - ts) / 0.9))
         o += (f'<clipPath id="sw"><rect x="{QX + 120}" y="730" width="{(SW + 20) * p:.0f}" height="{SH + 40}"/></clipPath>'
               f'<g clip-path="url(#sw)"><use href="#sig" transform="translate({QX + 130},740)"/></g>')
+    # a slow push-in over the whole card, so it never sits dead still
+    z = 1 + 0.03 * clamp(t / DUR)
+    o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
     o += tag(40, 1050, 'PORTRAIT: T. JOHNSON, AFTER GILBERT STUART, 1887 · LIBRARY OF CONGRESS (TRACED)', 16, '#8d857a')
     return {'h': {'ov': o}}
 
