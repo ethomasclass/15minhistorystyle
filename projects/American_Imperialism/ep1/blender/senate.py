@@ -11,7 +11,7 @@
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python senate.py -- <out_dir> [scale%] [mode]
 #   mode: a still, or several comma-separated: wide (S2), stack (S1), anim (the frames in $FRAMES)
 import bpy, bmesh, math, os, sys, random, time
-from mathutils import Vector
+from mathutils import Vector, Matrix
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
@@ -132,7 +132,7 @@ cn.nodes['Principled BSDF'].inputs['Specular IOR Level'].default_value = 0.05
 # the gallery's parapet at ZG; the galleries step up behind to the outer walls; the ceiling at ZC with the skylight
 XF, YS, YN, ZG = 10.0, -8.0, 8.0, 5.2
 XO, YSO, YNO, ZGT, ZC = 14.5, -12.5, 12.5, 8.2, 12.0
-fl = box('floor', -XF, YS, -0.05, XF, YN, 0.0, '#7a2c27')
+fl = box('floor', -XF - 0.5, YS - 0.5, -0.05, XF + 0.5, YN + 0.5, 0.0, '#7a2c27')
 recolor(fl, carpet)
 # the floor walls: pilasters, blue-grey panels, doors; a cornice under the parapet
 for side, (x0, y0, x1, y1, axis) in {'N': (-XF, YN, XF, YN + 0.4, 'x'), 'S': (-XF, YS - 0.4, XF, YS, 'x'),
@@ -198,7 +198,7 @@ for k in range(GROWS):
             xx0, xx1 = (x1 - 0.65, x1 - 0.3) if nm_ == 'W' else (x0 + 0.3, x0 + 0.65)
             box(f'gb{nm_}{k}', xx0, y0 + 0.3, z, xx1, y1 - 0.3, z + 0.45, GBENCH)
             box(f'gbb{nm_}{k}', xx0 if nm_ == 'W' else xx1 - 0.08, y0 + 0.3, z + 0.45, xx0 + 0.08 if nm_ == 'W' else xx1, y1 - 0.3, z + 0.95, GBENCH)
-for nm_, (x0, y0, x1, y1) in {'N': (-XO, YNO, XO, YNO + 0.4), 'S': (-XO, YSO - 0.4, XO, YSO), 'W': (-XO - 0.4, YSO, -XO, YNO), 'E': (XO, YSO, XO + 0.4, YNO)}.items():
+for nm_, (x0, y0, x1, y1) in {'N': (-XO, YNO, XO, YNO + 0.4), 'S': (-XO, YSO - 0.4, XO, YSO), 'W': (-XO - 0.4, YSO - 0.4, -XO, YNO + 0.4), 'E': (XO, YSO - 0.4, XO + 0.4, YNO + 0.4)}.items():
     box('ow' + nm_, x0, y0, ZG - 0.2, x1, y1, ZC, WALL)
     n_ = 7 if nm_ in 'NS' else 9
     for k in range(n_):                                       # the gallery's doors and panels on the outer walls
@@ -223,7 +223,7 @@ for i in range(-7, 7):
         cof.append((x - 0.7, y - 0.7, ZC - 0.02, x + 0.7, y + 0.7, ZC))
 bm = bmesh.new()
 for (x0, y0, z0, x1, y1, z1) in cof:
-    bmesh.ops.create_cube(bm, size=1.0, matrix=__import__('mathutils').Matrix.LocRotScale(Vector(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2)), None, Vector((x1 - x0, y1 - y0, z1 - z0))))
+    bmesh.ops.create_cube(bm, size=1.0, matrix=Matrix.LocRotScale(Vector(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2)), None, Vector((x1 - x0, y1 - y0, z1 - z0))))
 CG['obj_from_bm']('coffers', bm, COFF)
 for (x0, y0, x1, y1) in ((-SKX - 0.6, -SKY - 0.6, SKX + 0.6, -SKY), (-SKX - 0.6, SKY, SKX + 0.6, SKY + 0.6), (-SKX - 0.6, -SKY, -SKX, SKY), (SKX, -SKY, SKX + 0.6, SKY)):
     box(f'skframe{x0:.0f}{y0:.0f}', x0, y0, ZC - 0.35, x1, y1, ZC, CEIL_DK)
@@ -237,7 +237,7 @@ for k in range(-5, 6):
     bars.append((-SKX, k * SKY / 5.5 - 0.04, ZC + 0.1, SKX, k * SKY / 5.5 + 0.04, ZC + 0.24))
 bm = bmesh.new()
 for (x0, y0, z0, x1, y1, z1) in bars:
-    bmesh.ops.create_cube(bm, size=1.0, matrix=__import__('mathutils').Matrix.LocRotScale(Vector(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2)), None, Vector((x1 - x0, y1 - y0, z1 - z0))))
+    bmesh.ops.create_cube(bm, size=1.0, matrix=Matrix.LocRotScale(Vector(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2)), None, Vector((x1 - x0, y1 - y0, z1 - z0))))
 CG['obj_from_bm']('skybars', bm, IRON)
 EMB = emit('skyemblem', '#b88a4a', 0.5)
 for i in range(-3, 4):                                       # painted emblems in the glass, one per pane row (as in the plate)
@@ -308,6 +308,10 @@ clip.hide_render = True
 clip.display_type = 'WIRE'
 md = steps.modifiers.new('clip', 'BOOLEAN')
 md.operation, md.object, md.solver = 'INTERSECT', clip, 'EXACT'
+bpy.context.view_layer.update()                             # bake the clip once (an exact boolean every frame costs time)
+_me = bpy.data.meshes.new_from_object(steps.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+steps.modifiers.clear()
+steps.data = _me
 DESKS = []
 
 
@@ -348,7 +352,7 @@ for k, r in enumerate(ROWS):
                 continue
             d_ = desk(f'desk{k}_{side}_{j}', x, y, z, ar)
             DESKS.append(d_)
-            if k == 2 and side < 0 and j == 2:
+            if k == 1 and side < 0 and j == 1:
                 STACK_AT = (x, y, z, ar)
 # the stack: some three hundred loose folio sheets in uneven bundles on one desk's lid (it slopes; the stack sits on a
 # flat board laid across it), the edges catching the light
@@ -388,17 +392,22 @@ print('STACK', tuple(round(v, 2) for v in (sx_, sy_, sz_)), 'height', round(STAC
 bpy.data.objects['sun'].data.energy = 0.0
 sk = bpy.data.lights.new('skylight', 'AREA')
 sk.shape, sk.size, sk.size_y = 'RECTANGLE', SKX * 2, SKY * 2
-sk.energy, sk.color = 1300, (1.0, 0.82, 0.58)
+sk.energy, sk.color = 450, (1.0, 0.82, 0.58)
 sko = bpy.data.objects.new('skylight', sk)
 sc.collection.objects.link(sko)
 sko.location = (0, 0, ZC + 0.05)
+fp = bpy.data.lights.new('floorpool', 'SPOT')              # most of the skylight's glow lands on the floor, the walls fall away
+fp.energy, fp.color, fp.spot_size, fp.spot_blend, fp.shadow_soft_size = 7000, (1.0, 0.8, 0.55), math.radians(78), 0.7, 1.5
+fpo = bpy.data.objects.new('floorpool', fp)
+sc.collection.objects.link(fpo)
+fpo.location = (0, 0.5, ZC - 0.4)
 GAS = []
 for i, (x, y) in enumerate([(-XF - 0.1, yy) for yy in (-5, 0, 5)] + [(XF + 0.1, yy) for yy in (-5, 0, 5)] + [(xx, YS - 0.1) for xx in (-6, 0, 6)] + [(xx, YN + 0.1) for xx in (-7, 7)]):
     lt = bpy.data.lights.new(f'gas{i}', 'POINT')
-    lt.energy, lt.color, lt.shadow_soft_size = 22, (1.0, 0.72, 0.42), 0.1
+    lt.energy, lt.color, lt.shadow_soft_size = 30, (1.0, 0.72, 0.42), 0.1
+    lt.use_shadow = False                                   # dim brackets: their shadows are not worth the render time
     lo = bpy.data.objects.new(f'gas{i}', lt)
     sc.collection.objects.link(lo)
-    inward = Vector((-x, -y, 0)).normalized() * 0.4 if abs(x) > XF - 0.5 or abs(y) > 7.5 else Vector()
     lo.location = Vector((x, y, ZG - 0.9)) + Vector((1 if x < -XF + 1 else (-1 if x > XF - 1 else 0), 1 if y < YS + 1 else (-1 if y > YN - 1 else 0), 0)) * 0.45
     GAS.append(lt)
     gb = ico(f'gasglobe{i}', tuple(lo.location), 0.13, '#ffffff', 1)
@@ -421,7 +430,7 @@ klo.rotation_euler = (Vector((sx_, sy_, sz_ + 0.95)) - klo.location).to_track_qu
 for lt in GAS:
     rg = random.Random(hash(lt.name) % 977)
     for fr in range(0, N, 3):
-        lt.energy = 22 * (1 + rg.uniform(-0.05, 0.05))
+        lt.energy = 30 * (1 + rg.uniform(-0.05, 0.05))
         lt.keyframe_insert('energy', frame=fr)
     for kp in lt.animation_data.action.fcurves[0].keyframe_points:
         kp.interpolation = 'CONSTANT'
@@ -433,6 +442,12 @@ LK['finish'](sc, fill_strength=0.12, shadow_fill='#8a8f9c', haze=(60.0, 400.0, 0
     WALL: (0.10, 0.4, None, 1.0), PARA: (0.08, 0.4, None, 1.0), CEIL: (0.08, 0.3, None, 1.0), PANEL: (0.08, 0.6, None, 1.0),
     DESK: (0.07, 1.5, None, 1.0), DESK_DK: (0.07, 1.5, None, 1.0), LEATHER: (0.08, 1.5, None, 1.0), PAPER: (0.02, 4.0, None, 1.0),
     PAPER2: (0.02, 4.0, None, 1.0), DRAPE: (0.12, 1.0, None, 1.0)})
+wn = sc.world.node_tree                                     # the camera never sees the sky in here: dark, so no seam can show it
+mixw = [n for n in wn.nodes if n.type == 'MIX_SHADER'][0]
+seen = mixw.inputs[2].links[0].from_node
+for l_ in list(seen.inputs['Color'].links):
+    wn.links.remove(l_)
+seen.inputs['Color'].default_value = (0.01, 0.01, 0.012, 1)
 ee = sc.eevee
 ee.use_bloom, ee.bloom_threshold, ee.bloom_intensity, ee.bloom_radius = True, 1.4, 0.04, 5.0
 cam, tgt = sc.camera, bpy.data.objects['target']
@@ -442,10 +457,10 @@ SP = Vector((sx_, sy_, sz_ + 0.85))
 fwd = Vector((math.sin(sa_), -math.cos(sa_), 0))            # from the dais toward this desk's chair
 rgt = Vector((math.cos(sa_), math.sin(sa_), 0))
 # S1: low across the desk lid from beside the stack, the stack's edge at frame right, its top out of frame
-c1a = SP + rgt * -1.05 + fwd * 0.05 + Vector((0, 0, -0.03))
-c1b = SP + rgt * -0.98 + fwd * -0.06 + Vector((0, 0, -0.03))
+c1a = SP + rgt * -0.92 + fwd * 0.02 + Vector((0, 0, -0.03))
+c1b = SP + rgt * -0.86 + fwd * -0.08 + Vector((0, 0, -0.03))
 l1a = SP + rgt * 1.0 + fwd * -0.62 + Vector((0, 0, 0.06))
-KEYS = [(FS['S2'][0], (1.2, YS - 2.6, ZG + 3.3), (0.0, 3.0, 3.6), 15), (FS['S2'][1] - 1, (0.5, YS - 2.4, ZG + 3.2), (0.0, 3.0, 3.6), 15),
+KEYS = [(FS['S2'][0], (1.3, YS - 1.4, 10.0), (0.0, 3.0, 2.0), 14), (FS['S2'][1] - 1, (0.6, YS - 1.2, 9.9), (0.0, 3.0, 2.0), 14),
         (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (N - 1, tuple(c1b), tuple(l1a + rgt * 0.05), 50)]
 CUTS = {FS['S2'][1] - 1}
 for fr, pos, look, lens in KEYS:

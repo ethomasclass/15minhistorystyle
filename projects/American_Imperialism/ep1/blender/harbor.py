@@ -73,7 +73,7 @@ BUFF, BUFF_DK, SPAR, RIG, IRON = '#cfae6e', '#3a3630', '#a3855a', '#3e3832', '#2
 SAIL = '#ddd4bf'
 GUN = '#3c3d3b'
 DH, DH_DK = '#a19b6e', '#8a8466'
-LAND, LAND_DRY, MTN, MTN_DK, RIDGE, ROCK = '#7f8a4c', '#9a9660', '#7a9259', '#5e7352', '#8c9a6a', '#8a957f'
+LAND, LAND_DRY, MTN, MTN_DK, RIDGE, ROCK = '#7f8a4c', '#9a9660', '#7a9259', '#5e7352', '#8c9a6a', '#879a7b'
 TREE = ['#3f5233', '#4a5f38', '#56693d']
 WOOD, WOOD_DK, PILE = '#8b7457', '#6b5640', '#56473a'
 WALLS = ['#e2d7bd', '#d8ccae', '#9b4a3a', '#a85a44', '#8f9a92', '#c9bfa4', '#7f8c90', '#b69a74']
@@ -168,14 +168,14 @@ facets('water', -900, 900, -900, -1.0, 150, 75, 0.2, WATER, 1)
 facets('water_far', -16000, 16000, -16000, 0.0, 64, 32, 0.6, WATER, 2, z=-0.9)
 
 
-def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0)):
+def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0), k=0.35):
     """long thin horizontal wedges on the water, like the plate's highlights, sized for the eye that sees them"""
     rr = random.Random(seed)
     verts, faces = [], []
     for k in range(n):
         y = rr.uniform(y0, y1)
         x = rr.uniform(x0, x1)
-        d = math.hypot(x - eye[0], y - eye[1]) * 0.35 + 8
+        d = math.hypot(x - eye[0], y - eye[1]) * k + 8
         L = rr.uniform(0.015, 0.045) * d
         w = rr.uniform(0.004, 0.011) * d
         a = len(verts)
@@ -184,8 +184,8 @@ def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0)
     return mesh_from(name, verts, faces, col)
 
 
-slivers('glints', 380, GLINT, 3, eye=(50.0, -450.0))
-slivers('glints_dk', 380, GLINT_DK, 4, eye=(50.0, -450.0))
+slivers('glints', 170, GLINT, 3, y0=-420, eye=(50.0, -450.0), k=0.45)
+slivers('glints_dk', 150, GLINT_DK, 4, y0=-420, eye=(50.0, -450.0), k=0.45)
 slivers('glints2', 160, GLINT, 5, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 slivers('glints2_dk', 160, GLINT_DK, 6, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 
@@ -250,7 +250,7 @@ def ridges(x, y):
 ground('koolau', -12000, 12000, 1900, 9000, 210, 56, ridges, MTN)
 
 
-def rock_faces(ob, col, steep=0.42, seed=9):
+def rock_faces(ob, col, steep=0.36, seed=9):
     """steep faces take a second (rock) colour, as in the plate's grey cliffs among the green"""
     rr = random.Random(seed)
     ob.data.materials.append(mat(col))
@@ -298,7 +298,7 @@ def blobs(name, items, col):
 
 CL = []                                                       # cloud banks resting on the ridges, heaviest at the left as in the plate
 crr = random.Random(77)
-for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1150, 2600, 26), (-1200, 7400, 1450, 1400, 14), (3600, 7600, 1600, 1700, 16), (8200, 6800, 1400, 1600, 14))):
+for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1150, 2600, 26), (-1600, 7000, 1080, 1700, 16), (3600, 7600, 1600, 1700, 16), (8200, 6800, 1400, 1600, 14))):
     for k in range(n):
         u = crr.uniform(-0.5, 0.5)
         r = cw * crr.uniform(0.1, 0.17) * (1 - abs(u))
@@ -458,9 +458,9 @@ for row, (y0, y1, dens) in enumerate(((32, 60, 0.75), (70, 110, 0.65), (125, 180
         k += 1
 # beyond: roofs among dense trees up to the foot of Punchbowl and the ridges
 CAN = [[], [], []]
-for j in range(4200):
+for j in range(5600):
     x = rnd.uniform(-3400, 3600)
-    y = 370 + 2100 * rnd.random() ** 1.6
+    y = 370 + 3000 * rnd.random() ** 1.5
     if math.hypot(x - PBX, (y - PBY) * 1.2) < 380:
         continue
     z = town_h(x, y)
@@ -631,12 +631,13 @@ for side in (-1, 1):
     box(f'bscreen{side}', BXB - 1.3, side * 6.2 - 0.05, ZD + SH + 2.6, BXB + 1.3, side * 6.2 + 0.05, ZD + SH + 3.5, HULL)
 box('bscreen_f', BXB + 1.25, -6.2, ZD + SH + 2.6, BXB + 1.35, 6.2, ZD + SH + 3.5, HULL)
 # masts, tops, yards with furled sails, gaffs, a little rigging
+BRACE = math.radians(-35)
 MASTS = [(0.69, 0.0), (0.28, -1.8)]                           # (position, height offset): fore, main
 for mi, (f, dh) in enumerate(MASTS):
     x = fx(f)
     zb = ZD + SH
     cyl(f'mast{mi}', (x, 0, zb), (x, 0, 21 + dh), 0.45, 0.36, SPAR, n=8)
-    cyl(f'top{mi}', (x, 0, 18.4 + dh), (x, 0, 18.9 + dh), 1.9, 1.9, '#6e5a40', n=12)
+    cyl(f'top{mi}', (x, 0, 18.2 + dh), (x, 0, 19.1 + dh), 2.3, 2.1, '#5a4a36', n=12)
     cyl(f'tmast{mi}', (x, 0, 19.5 + dh), (x, 0, 31.2 + dh), 0.28, 0.22, SPAR, n=6)
     box(f'xtree{mi}', x - 0.5, -1.4, 30.5 + dh, x + 0.5, 1.4, 30.7 + dh, '#6e5a40')
     cyl(f'tgmast{mi}', (x, 0, 30.6 + dh), (x, 0, 39.6 + dh), 0.16, 0.1, SPAR, n=6)
@@ -644,9 +645,11 @@ for mi, (f, dh) in enumerate(MASTS):
     for yi, (z, yl) in enumerate(((17.6, 16.0), (24.6, 12.0), (32.0, 8.6), (36.4, 5.6))):
         z += dh
         yl *= 0.93 if mi else 1.0
-        cyl(f'yard{mi}{yi}', (x + 0.4, -yl / 2, z), (x + 0.4, yl / 2, z), 0.16, 0.16, SPAR, n=6)
+        bx, by = math.sin(BRACE), math.cos(BRACE)               # the yards braced round, as they ride at anchor
+        cyl(f'yard{mi}{yi}', (x + 0.4 - bx * yl / 2, -by * yl / 2, z), (x + 0.4 + bx * yl / 2, by * yl / 2, z), 0.16, 0.16, SPAR, n=6)
         if yi < 3:
-            cyl(f'furl{mi}{yi}', (x + 0.55, -yl / 2 + 0.8, z - 0.25), (x + 0.55, yl / 2 - 0.8, z - 0.25), 0.3, 0.3, SAIL, n=6)
+            q = yl / 2 - 0.8
+            cyl(f'furl{mi}{yi}', (x + 0.55 - bx * q, -by * q, z - 0.25), (x + 0.55 + bx * q, by * q, z - 0.25), 0.3, 0.3, SAIL, n=6)
     cyl(f'gaff{mi}', (x - 0.4, 0, 19.0 + dh), (x - 8.5, 0, 23.5 + dh), 0.14, 0.11, SPAR, n=6)
     for side in (-1, 1):                                      # shrouds: lower mast to the deck edge, topmast to the top's rim
         for k, dx in enumerate((-1.6, 0.0, 1.6)):
@@ -807,7 +810,7 @@ def seated(name, costume, boat, lx, ly, seat_z, heading, pose):
 CUTTERS = []
 
 
-def cutter(name, start, heading, phase, crew, marines):
+def cutter(name, start, heading, phase, crew, marines, moving=True):
     """a 30-foot cutter, bow toward +y in its own frame: 4 double-banked thwarts of rowers, armed men in the stern sheets"""
     b4 = set(bpy.data.objects)
     bt = empty(name, (0, 0, 0))
@@ -819,6 +822,22 @@ def cutter(name, start, heading, phase, crew, marines):
         box(f'{name}th{k}', -1.05, y - 0.15, 0.36, 1.05, y + 0.15, 0.42, '#9a8462')
     box(name + 'sheets', -1.0, -4.1, 0.36, 1.0, -2.3, 0.42, '#9a8462')
     adopt(bt, b4)
+    if moving:                                                # a bow wave and a wake of light slivers, carried with the boat
+        wv, wf = [], []
+        rr = random.Random(len(CUTTERS) + 11)
+        for side in (-1, 1):
+            for k in range(14):
+                t = k / 13
+                y = 4.2 - t * 16.0
+                x = side * (0.9 + t * 3.2 + rr.uniform(-0.3, 0.3))
+                Ls = rr.uniform(0.8, 1.8) * (1 - 0.4 * t)
+                a = len(wv)
+                wv += [(x, y, 0.2), (x + side * 0.15, y - Ls, 0.2), (x - side * 0.12, y - Ls * 0.6, 0.2)]
+                wf.append((a, a + 1, a + 2))
+            a = len(wv)
+            wv += [(side * 0.05, 4.55, 0.2), (side * 1.25, 3.2, 0.2), (side * 1.1, 3.0, 0.2)]
+            wf.append((a, a + 1, a + 2))
+        mesh_from(name + 'wake', wv, wf, GLINT, parent=bt)
     rowers, oars = [], []
     for k, y in enumerate(THW):
         for side in (-1, 1):
@@ -850,10 +869,10 @@ for i, ((mx, my), ph, mar) in enumerate(CUT_MID):
     st = Vector((mx, my, 0)) - dv * BOAT_V * TQ[H2_MID]
     bt = cutter(f'cut{i}', tuple(st), hd, ph, 'sailor', mar)
     if i == 0:                                                # the boat ensign at the lead cutter's stern
-        cyl('bens_staff', (0, -4.6, 0.5), (0, -4.9, 2.6), 0.03, 0.025, SPAR, n=5, parent=bt)
-        bf = flag('bens', 'us_flag_44.png', 1.15, 0.6, (0, -4.9, 2.55), math.pi * 1.5, parent=bt, wave=0.05)
+        cyl('bens_staff', (0, -4.5, 0.5), (0, -4.7, 2.1), 0.025, 0.02, SPAR, n=5, parent=bt)
+        flag('bens', 'us_flag_44.png', 0.9, 0.47, (0, -4.7, 2.08), math.pi * 1.5, parent=bt, wave=0.05)
 # a cutter still alongside at the ladder, half loaded
-cutter('cut_l', tuple(on_ship((LX - 6.0, B / 2 + 3.2, 0.0))), math.degrees(BOS_R) + 180, 0.0, 'sailor', True)
+cutter('cut_l', tuple(on_ship((LX - 6.0, B / 2 + 3.2, 0.0))), math.degrees(BOS_R) + 180, 0.0, 'sailor', True, moving=False)
 CUTTERS[-1] = CUTTERS[-1][:3] + (None,) + CUTTERS[-1][4:]
 
 
@@ -943,7 +962,7 @@ LK = {'__name__': 'look'}
 exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
 LK['finish'](sc, fill_strength=0.7, haze=(250.0, 9000.0, 0.5), rules={
     WATER: (0.16, 0.012, None, 1.0), WATER_DK: (0.16, 0.012, None, 1.0), GLINT: (0.0, 0.1, None, 1.0), GLINT_DK: (0.0, 0.1, None, 1.0),
-    HULL: (0.03, 0.15, None, 1.0), HULL_SH: (0.03, 0.15, None, 1.0), BUFF: (0.04, 0.5, None, 1.0),
+    HULL: (0.07, 0.06, None, 1.0), HULL_SH: (0.06, 0.06, None, 1.0), BUFF: (0.04, 0.5, None, 1.0),
     LAND: (0.14, 0.004, None, 1.0), MTN: (0.16, 0.0012, None, 1.0), ROCK: (0.12, 0.002, None, 1.0), MTN_DK: (0.12, 0.0008, None, 1.0), RIDGE: (0.14, 0.003, None, 1.0),
     CLOUD: (0.05, 0.003, None, 1.0), WOOD: (0.1, 0.25, None, 1.0), '#e6e0cf': (0.03, 0.4, None, 1.0)})
 

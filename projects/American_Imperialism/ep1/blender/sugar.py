@@ -63,7 +63,7 @@ TQ = [math.floor(f / FPS * 12) / 12 for f in range(N)]            # scene time, 
 print('SUGAR TIMES', round(T0, 2), round(T_MILL, 2), round(T_END, 2), FW, N)
 
 # ---- palette (from the plates)
-CANE, CANE_LT, CANE_DK, STALK = '#5f7a3a', '#7f9a46', '#3f5530', '#7a7a44'
+CANE, CANE_LT, CANE_DK, STALK = '#56703a', '#768f44', '#3a4d2e', '#7a7a44'
 YOUNG, YOUNG2, PASTURE = '#8fae52', '#a3bb5e', '#86a04c'
 SOIL, SOIL_DK, ROAD = '#8d5a3c', '#6e4430', '#9a6a48'
 MTN, MTN_DK, MTN_LT = '#56724a', '#40593c', '#6d8a55'
@@ -188,32 +188,49 @@ stone_material(BRICKC, BRICKC, BRICKC_DK, '#7a4a38', 0.5, 0.2, 0.02)
 
 # ================================================================ the ground, the roads, the mountains
 GZ = lambda x, y: 0.0                                       # the plain is flat around the mill; it rises gently to the north
-terrain('plain', -900, 900, -500, 700, 40, 30, lambda x, y: 0.15 * math.sin(x * 0.05) * math.cos(y * 0.04) - 0.2 + max(0.0, y - 250) * 0.06, PASTURE)
+terrain('plain', -2400, 2400, -600, 1200, 60, 36, lambda x, y: 0.15 * math.sin(x * 0.05) * math.cos(y * 0.04) - 0.2, PASTURE)
 
 
 def ridges(x, y):
     h = 0
-    for (px, py, ph, pw) in ((-380, 900, 360, 260), (-60, 1050, 300, 250), (260, 900, 420, 230), (620, 1000, 330, 260), (-750, 1000, 260, 240),
-                             (60, 760, 140, 150), (-260, 740, 110, 140)):
-        h += ph * math.exp(-((x - px) ** 2 + (y - py) ** 2 * 0.7) / (2 * pw * pw))
-    rid = 28 * abs(math.sin(x * 0.012 + 0.5 * math.sin(y * 0.01))) + 12 * abs(math.sin(x * 0.031 + y * 0.008))
-    return h + rid * min(1.0, h / 80) - 6
+    for (px, py, ph, pw) in ((-480, 1500, 210, 260), (-120, 1650, 190, 280), (260, 1450, 240, 240), (640, 1600, 200, 260), (-860, 1600, 170, 240),
+                             (90, 1180, 80, 170), (-300, 1160, 70, 150)):
+        h += ph * math.exp(-math.sqrt((x - px) ** 2 + (y - py) ** 2 * 0.7) / (pw * 0.62))     # peaked, like the plates' volcanic ridges
+    rid = 34 * abs(math.sin(x * 0.012 + 0.5 * math.sin(y * 0.01))) + 12 * abs(math.sin(x * 0.031 + y * 0.008))
+    foot = min(1.0, max(0.0, (y - 930) / 260)) ** 1.5     # the slopes rise out of the plain
+    return (h + rid * min(1.0, h / 80)) * foot - 3
 
 
-terrain('mountains', -1500, 1500, 520, 1500, 64, 22, ridges, MTN)
+terrain('mountains', -2200, 2200, 900, 2200, 70, 24, ridges, MTN)
+
+
+def far_range(x, y):
+    h = 0
+    for (px, py, ph, pw) in ((-900, 3000, 420, 420), (-200, 3200, 380, 380), (500, 2900, 460, 380), (1200, 3100, 400, 420)):
+        h += ph * math.exp(-math.sqrt((x - px) ** 2 + (y - py) ** 2) / (pw * 0.7))
+    return h + 30 * abs(math.sin(x * 0.006)) - 20
+
+
+terrain('farrange', -3000, 3000, 2300, 3600, 50, 12, far_range, '#7d958a')
 # the yard round the mill, and the roads (red earth)
 mb = MB()
 mb.poly([(-70, -30, 0.02), (60, -30, 0.02), (60, 40, 0.02), (-70, 40, 0.02)], [(0, 1, 2, 3)], SOIL)
-ROADPTS = [(-74, -200), (-68, -120), (-58, -80), (-44, -48), (-30, -30), (-16, -20)]
+ROADPTS = [(-68, -260), (-67, -140), (-64, -95), (-54, -60), (-38, -36), (-18, -20)]
 for i in range(len(ROADPTS) - 1):
     (x0, y0), (x1, y1) = ROADPTS[i], ROADPTS[i + 1]
     d = Vector((x1 - x0, y1 - y0, 0)).normalized()
     nrm = Vector((-d.y, d.x, 0)) * 3.2
     mb.poly([(x0 - nrm.x, y0 - nrm.y, 0.04), (x0 + nrm.x, y0 + nrm.y, 0.04), (x1 + nrm.x, y1 + nrm.y, 0.04), (x1 - nrm.x, y1 - nrm.y, 0.04)], [(0, 1, 2, 3)], ROAD)
+for k in range(6):                                          # wheel ruts and darker patches in the yard
+    x0, y0 = RND.uniform(-60, 40), RND.uniform(-28, 30)
+    a = RND.uniform(0, math.pi)
+    d = Vector((math.cos(a), math.sin(a), 0)) * RND.uniform(8, 20)
+    n_ = Vector((-d.y, d.x, 0)).normalized() * RND.uniform(1.5, 4)
+    mb.poly([(x0 - n_.x, y0 - n_.y, 0.03), (x0 + d.x - n_.x * 0.6, y0 + d.y - n_.y * 0.6, 0.03), (x0 + d.x + n_.x, y0 + d.y + n_.y, 0.03), (x0 + n_.x * 0.7, y0 + n_.y * 0.7, 0.03)], [(0, 1, 2, 3)], SOIL_DK)
 mb.build('yard')
 
 # ================================================================ the cane: fields in a patchwork, rows of clumps near the camera, faceted masses far away
-CAM_WIDE = Vector((-62.0, -128.0, 9.5))
+CAM_WIDE = Vector((-66.0, -150.0, 8.5))
 
 
 def clump_geo(mb, x, y, H, rr, cols):
@@ -244,8 +261,8 @@ def field(name, x0, y0, x1, y1, H, cols, rows_along='y', detail=None, seed=0, cu
     d = (Vector(((x0 + x1) / 2, (y0 + y1) / 2, 0)) - CAM_WIDE).length if detail is None else (0 if detail else 999)
     mb = MB()
     if d < 130:
-        core = H * 0.72
-        mb.box(x0 + 0.6, y0 + 0.6, 0, x1 - 0.6, y1 - 0.6, core, CANE_DK)
+        core = H * 0.6
+        mb.box(x0 + 1.3, y0 + 1.3, 0, x1 - 1.3, y1 - 1.3, core, CANE_DK)
         sp, rs = 0.75, 1.5
         if rows_along == 'y':
             nr, nc = int((x1 - x0) / rs), int((y1 - y0) / sp)
@@ -282,22 +299,24 @@ def field(name, x0, y0, x1, y1, H, cols, rows_along='y', detail=None, seed=0, cu
 GREENS = [[CANE, CANE_LT], [CANE_LT, '#6e8c40'], ['#567236', CANE], ['#6b8a3c', '#88a44c']]
 NF = 0
 # the near fields either side of the road (detailed)
-field('f_nearL', -150, -175, -76, -66, 3.6, [CANE, CANE_LT, '#6e8c40'], 'y', True, 1)
-field('f_nearR', -60, -175, -2, -60, 3.4, [CANE, '#6e8c40', CANE_LT], 'y', True, 2)
+field('f_nearL1', -130, -200, -72, -112, 3.6, [CANE, CANE_LT, '#6e8c40'], 'y', True, 1)
+field('f_nearL2', -130, -112, -78, -82, 3.6, [CANE, CANE_LT, '#6e8c40'], 'y', True, 3)
+field('f_nearL3', -130, -82, -68, -56, 3.6, [CANE, CANE_LT, '#6e8c40'], 'y', True, 4)
+field('f_nearR', -60, -200, -6, -66, 3.4, [CANE, '#6e8c40', CANE_LT], 'y', True, 2)
 # the cut strip at the top of the left field: stubble, cut cane in piles, the gang at work
 mb = MB()
-for k in range(160):
-    x, y = RND.uniform(-128, -86), RND.uniform(-66, -58)
+for k in range(140):                                        # the cut strip along the roadside edge: stubble
+    x, y = RND.uniform(-77.6, -72.5), RND.uniform(-111, -83)
     mb.cyl((x, y, 0), (x + RND.uniform(-0.05, 0.05), y, RND.uniform(0.15, 0.4)), 0.03, 0.025, STALK, n=4, caps=False)
-for k in range(14):                                         # bundles of cut cane lying in the strip
-    x, y = -125 + k * 2.9 + RND.uniform(-0.6, 0.6), RND.uniform(-64, -59)
-    a = RND.uniform(-0.3, 0.3)
+for k in range(10):                                         # bundles of cut cane lying in the strip
+    x, y = RND.uniform(-76.5, -73.5), -109 + k * 2.6 + RND.uniform(-0.5, 0.5)
+    a = math.pi / 2 + RND.uniform(-0.3, 0.3)
     for j in range(7):
         d = Vector((math.cos(a), math.sin(a), 0))
         o = Vector((-d.y, d.x, 0)) * (j % 4 - 1.5) * 0.08
         p = Vector((x, y, 0.05 + 0.07 * (j // 4))) + o
         mb.cyl(p - d * 1.4, p + d * 1.4, 0.035, 0.035, '#8a8a4a' if j % 2 else STALK, n=5)
-mb.poly([(-130, -66, 0.03), (-84, -66, 0.03), (-84, -57, 0.03), (-130, -57, 0.03)], [(0, 1, 2, 3)], '#9a8a52')
+mb.poly([(-78, -112, 0.03), (-71, -112, 0.03), (-71, -82, 0.03), (-78, -82, 0.03)], [(0, 1, 2, 3)], '#9a8a52')
 mb.build('cutstrip')
 # the field beyond the cut strip (its far side) and the patchwork beyond, in blocks separated by roads
 for gy, y0 in enumerate(range(-50, 520, 58)):
@@ -457,6 +476,15 @@ for k in range(40):
     d = Vector((math.cos(a), math.sin(a), 0))
     z = 0.06 + RND.uniform(0, 1.2) * (1 - abs(y - (SY0 + SY1) / 2) / 6)
     mb.cyl(Vector((x, y, z)) - d * 1.5, Vector((x, y, z)) + d * 1.5, 0.05, 0.05, '#8a8a4a' if k % 3 else STALK, n=5)
+# heaps of cut cane waiting by the line, and a stack of bagasse (crushed cane, dried for the boiler fires)
+for (hx, hy, n) in ((-44.0, -15.5, 60), (-36.0, -15.0, 45), (-27.0, 9.5, 50)):
+    for k in range(n):
+        x, y = hx + RND.uniform(-2.2, 2.2), hy + RND.uniform(-1.2, 1.2)
+        a = RND.uniform(-0.2, 0.2)
+        d = Vector((math.cos(a), math.sin(a), RND.uniform(-0.04, 0.04)))
+        z = 0.06 + RND.uniform(0, 1.0) * (1 - (abs(y - hy) / 1.4) ** 2)
+        mb.cyl(Vector((x, y, z)) - d * 1.5, Vector((x, y, z)) + d * 1.5, 0.05, 0.05, ('#8a8a4a', STALK, '#9a9456', '#6e7a3e')[k % 4], n=5)
+mb.poly([(34 + 6 * math.cos(a * math.pi / 5), -14 + 4 * math.sin(a * math.pi / 5), 0.02) for a in range(10)] + [(34, -14, 3.2)], [(a, (a + 1) % 10, 10) for a in range(10)], '#b5a36e')
 mb.build('mill')
 # the gang's camp and the manager's house, small, off to the east among trees
 mb = MB()
@@ -617,7 +645,7 @@ CART, LOCO = cart_src(), loco_src()
 TRAIN = [inst(LOCO, 'loco', (0, 0, 0))] + [inst(CART, f'cart{k}', (0, 0, 0)) for k in range(7)]
 GAP = [0.0, 5.0] + [4.6] * 6                               # spacing along the track to each car
 # the train comes in toward the shed (s decreases), easing to a crawl as it reaches the shed
-S_START, V_TR = 58.0, 2.6
+S_START, V_TR = 40.5, 2.6
 PARKED = [inst(CART, f'parked{k}', (0, 0, 0)) for k in range(3)]   # empties waiting under the shed roof
 for k, ob in enumerate(PARKED):
     p, d = at(3.0 + k * 4.7)
@@ -656,14 +684,14 @@ def smoke(name, base, n, size, rise, drift, col, life=7.0, seed=0, follow=None):
         PUFFS.append((p, Vector(base), k / n, size, rise, Vector(drift), life, rr.uniform(0, 6), follow))
 
 
-smoke('chim', (CHX, CHY, CHH + 1.2), 16, 1.7, 16.0, (34.0, 14.0, 0.0), '#d9d4c8', life=9.0, seed=1)
-smoke('chim2', (CHX, CHY, CHH + 1.2), 9, 1.3, 11.0, (24.0, 9.0, 0.0), '#c4bfb4', life=7.0, seed=2)
-smoke('loco', (0, 0, 0), 7, 0.45, 4.0, (3.0, 2.0, 0.0), '#bdb8ae', life=2.4, seed=3, follow=True)
+smoke('chim', (CHX, CHY, CHH + 1.2), 16, 1.7, 16.0, (34.0, 14.0, 0.0), '#c3beb2', life=9.0, seed=1)
+smoke('chim2', (CHX, CHY, CHH + 1.2), 9, 1.3, 11.0, (24.0, 9.0, 0.0), '#aeaaa0', life=7.0, seed=2)
+smoke('loco', (0, 0, 0), 6, 0.32, 2.6, (-1.5, 3.0, 0.0), '#a9a49a', life=1.8, seed=3, follow=True)
 
 
 def loco_stack(t):
     p, d = at(train_s(t))
-    return Vector((p.x, p.y, 3.4)) - d * 2.0 * -1
+    return Vector((p.x, p.y, 3.4)) - d * 2.0
 
 
 for f in range(N):
@@ -860,31 +888,28 @@ def cutter(name, costume, x, y, heading, phase, period=1.5):
     return root
 
 
-GANG = [('field_cn', -124.0, -66.6, 8), ('field_jp', -119.5, -66.2, -6), ('field_hw', -114.0, -66.8, 4), ('field_cn2', -108.5, -66.4, 10),
-        ('field_pt', -103.0, -66.7, -4), ('field_jp2', -97.0, -66.3, 6), ('field_cn', -91.5, -66.6, -8)]
-for i, (cos, x, y, hd) in enumerate(GANG):
-    cutter(f'cut{i}', cos, x, y, 180 + hd, i * 0.37, 1.4 + 0.1 * (i % 3))
+GANG = [('field_cn', -78.4, -101.5, 8), ('field_jp', -78.6, -98.0, -6), ('field_hw', -78.3, -94.6, 4), ('field_cn2', -78.5, -91.2, 10),
+        ('field_pt', -78.4, -87.8, -4), ('field_jp2', -78.6, -84.4, 6)]
+for i, (cos, x, y, hd) in enumerate(GANG):                  # facing into the standing cane (west)
+    cutter(f'cut{i}', cos, x, y, 90 + hd, i * 0.37, 1.4 + 0.1 * (i % 3))
 # two men carrying bundles of cane from the strip toward the road, and a luna (field overseer) standing, a hand on his hip
 PEOPLE = []
 
 
 def bundle():
-    """a bundle of cut cane across the right shoulder, the stalks running front to back (raw body units)"""
+    """a sheaf of cut cane across the right shoulder, the stalks running front to back (raw body units)"""
     sh = PG['bone_head']('RightArm')
-    vs, fs = [], []
-    for k in range(9):
-        y = sh.y - 0.15 + (k % 3 - 1) * 0.14
-        z = sh.z + 0.42 + (k // 3) * 0.14
-        a = len(vs)
-        for (dx, dy, dz) in ((-3.0, -0.06, -0.06), (-3.0, 0.06, -0.06), (-3.0, 0.06, 0.06), (-3.0, -0.06, 0.06)):
-            vs.append((dx - 0.5, y + dy, z + dz - 0.25))
-        for (dx, dy, dz) in ((-3.0, -0.06, -0.06), (-3.0, 0.06, -0.06), (-3.0, 0.06, 0.06), (-3.0, -0.06, 0.06)):
-            vs.append((-dx + 0.5, y + dy, z + dz - 0.05))
-        fs += [(a, a + 1, a + 5, a + 4), (a + 1, a + 2, a + 6, a + 5), (a + 2, a + 3, a + 7, a + 6), (a + 3, a, a + 4, a + 7)]
-    return vs, fs
+    V_, F_ = [], []
+    for k, (dy, dz, r) in enumerate(((0.0, 0.0, 0.3), (-0.22, 0.12, 0.2), (0.18, 0.2, 0.18))):
+        v, f = PG['tube']((-3.6, sh.y - 0.25 + dy, sh.z + 0.42 + dz), (3.2, sh.y - 0.25 + dy, sh.z + 0.62 + dz),
+                          [(0.0, r * 0.6), (0.08, r), (0.92, r), (1.0, r * 0.7)], n=6, caps=True)
+        n0 = len(V_)
+        V_ += v
+        F_ += [tuple(i + n0 for i in q) for q in f]
+    return V_, F_
 
 
-for i, (cos, (x, y), hd, t0, ph) in enumerate((('field_hw', (-84.0, -63.0), 90, 0.0, 3.0), ('field_jp', (-96.0, -60.5), 90, 0.6, 9.0))):
+for i, (cos, (x, y), hd, t0, ph) in enumerate((('field_hw', (-74.0, -101.0), 0, 0.0, 3.0), ('field_jp', (-73.2, -95.0), 180, 0.6, 9.0))):
     root, arm = person(f'carry{i}', cos, (x, y, 0.0), hd)
     pose = dict(ZERO_SH, **solve(arm, [('RightArm', (0.25, 0.25, 1.0)), ('RightForeArm', (0.15, 1.0, -0.55))]))
     TT = [max(0.0, tq - t0) for tq in TQ]
@@ -900,12 +925,18 @@ for i, (cos, (x, y), hd, t0, ph) in enumerate((('field_hw', (-84.0, -63.0), 90, 
     PG['shell'](f'carry{i}_cane', bundle(), '#8a8a4a', arm, 'Spine2').modifiers.clear()
 C['luna'] = dict(coat='#e6e0d0', skin='#d9b38f', hair='#5b4330', legs='#4a4540', shoes='#2a2622',
                  parts=[('hat', 'Head', felt_hat, '#8a7a5c'), ('brim', 'Head', felt_brim, '#8a7a5c'), ('belt', 'Hips', BELT, '#3a2e25')])
-lr, la = person('luna', 'luna', (-80.0, -68.5, 0.0), 120)
+lr, la = person('luna', 'luna', (-71.0, -88.0, 0.0), 100)
 stand(la, N, pose=dict(ZERO_SH, **solve(la, [('LeftArm', (-0.1, -0.7, -0.75)), ('LeftForeArm', (0.6, 0.2, 0.75))])), k=0.6)
 # at the mill: men unloading a cart into the shed, one with a bundle walking in
-for i, (cos, (x, y), hd, k) in enumerate((('field_pt', (-24.5, -13.0), 20, 0.2), ('field_cn2', (-20.0, -13.2), -10, 0.9), ('field_hw', (-16.0, -7.0), 180, 1.4))):
-    r_, a_ = person(f'mill{i}', cos, (x, y, 0.0), hd)
-    stand(a_, N, pose=dict(ZERO_SH, **solve(a_, [('RightArm', (0.6, 0.3, 0.5)), ('RightForeArm', (0.6, 0.7, -0.2)), ('LeftArm', (0.6, 0.3, -0.5)), ('LeftForeArm', (0.6, 0.7, 0.2))] if i < 2 else [])), k=k)
+LIFT_UP = [('RightArm', (0.75, 0.35, 0.3)), ('RightForeArm', (0.8, 0.55, -0.2)), ('LeftArm', (0.75, 0.35, -0.3)), ('LeftForeArm', (0.8, 0.55, 0.2))]
+LIFT_DN = [('RightArm', (0.6, -0.75, 0.2)), ('RightForeArm', (0.8, -0.3, -0.35)), ('LeftArm', (0.6, -0.75, -0.2)), ('LeftForeArm', (0.8, -0.3, 0.35))]
+for i, (cos, (x, y), hd, k) in enumerate((('field_pt', (-24.6, -13.0), 0, 0.2), ('field_cn2', (-20.0, -13.2), 0, 0.9))):
+    r_, a_ = person(f'mill{i}', cos, (x, y, 0.0), hd)     # pulling cane down off a cart, stepped
+    pa = dict(ZERO_SH, **solve(a_, LIFT_UP, {'Spine': (-4, 0, 0), 'Spine1': (0, 0, 0), 'Neck': (-10, 0, 0)}))
+    pb_ = dict(ZERO_SH, **solve(a_, LIFT_DN, {'Spine': (22, 0, 0), 'Spine1': (10, 0, 0), 'Neck': (-10, 0, 0)}))
+    work(a_, pa, pb_, 2.2, k, N)
+r_, a_ = person('mill2', 'field_hw', (-16.0, -7.0, 0.0), 200)
+stand(a_, N, k=1.4)
 
 # sway for palms and trees (stepped at 12 fps)
 for f in range(0, N):
@@ -928,11 +959,11 @@ so.data.shadow_cascade_max_distance = 200
 # ---- the finishing pass
 LK = {'__name__': 'look'}
 exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
-LK['finish'](sc, fill_strength=0.72, haze=(90.0, 1400.0, 0.5), rules={
+LK['finish'](sc, fill_strength=0.72, haze=(120.0, 2600.0, 0.36), rules={
     CANE: (0.14, 0.15, None, 1.0), CANE_LT: (0.14, 0.15, None, 1.0), CANE_DK: (0.12, 0.2, None, 1.0), '#6e8c40': (0.14, 0.15, None, 1.0),
     YOUNG: (0.14, 0.05, None, 1.0), YOUNG2: (0.14, 0.05, None, 1.0), PASTURE: (0.14, 0.03, None, 1.0), SOIL: (0.12, 0.08, None, 1.0), ROAD: (0.1, 0.1, None, 1.0),
-    MTN: (0.22, 0.008, None, 1.0), TIMBER: (0.12, 0.5, None, 1.0), TIMBER_DK: (0.10, 0.5, None, 1.0), RUST: (0.10, 0.6, None, 1.0), IRON_GR: (0.10, 0.6, None, 1.0),
-    RUST_LT: (0.10, 0.6, None, 1.0), CLOUD: (0.05, 0.02, None, 1.0), '#d9d4c8': (0.05, 0.4, None, 1.0)})
+    MTN: (0.22, 0.008, None, 1.0), '#7d958a': (0.12, 0.004, None, 1.0), SOIL_DK: (0.1, 0.1, None, 1.0), TIMBER: (0.12, 0.5, None, 1.0), TIMBER_DK: (0.10, 0.5, None, 1.0), RUST: (0.10, 0.6, None, 1.0), IRON_GR: (0.10, 0.6, None, 1.0),
+    RUST_LT: (0.10, 0.6, None, 1.0), CLOUD: (0.05, 0.02, None, 1.0), '#c3beb2': (0.05, 0.4, None, 1.0)})
 w = sc.world.node_tree
 rmp = [n for n in w.nodes if n.type == 'VALTORGB'][0]
 rmp.color_ramp.elements[0].color = lin('#97b8c2')
@@ -945,8 +976,8 @@ cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
 cam.data.clip_end = 6000
-KEYS = [(0, 30, tuple(CAM_WIDE), (-18.0, 60.0, 6.0)), (FW - 1, 30, tuple(CAM_WIDE + Vector((2.5, 3.0, -0.4))), (-16.0, 60.0, 6.0)),
-        (FW, 32, (-46.0, -40.0, 3.6), (-4.0, 0.0, 6.5)), (N - 1, 32, (-43.0, -38.5, 3.5), (-3.0, 1.0, 6.5))]
+KEYS = [(0, 30, tuple(CAM_WIDE), (-34.0, 60.0, 9.0)), (FW - 1, 30, tuple(CAM_WIDE + Vector((0.6, 4.0, -0.3))), (-33.0, 60.0, 9.0)),
+        (FW, 26, (-41.0, -35.0, 2.1), (-18.0, -1.0, 8.2)), (N - 1, 26, (-39.4, -34.4, 2.1), (-16.6, -0.5, 8.2))]
 for f, lens, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -958,7 +989,7 @@ for ob in (cam, tgt, cam.data):
             kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
 cam.data.dof.use_dof = True
 cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
-SUBJ = [(0, FW, Vector((-10.0, 0.0, 6.0)), 16.0), (FW, N, Vector((-14.0, -8.0, 3.0)), 8.0)]
+SUBJ = [(0, FW, Vector((-10.0, 0.0, 6.0)), 16.0), (FW, N, Vector((-30.0, -10.5, 2.0)), 8.0)]
 for a, b, P, fs in SUBJ:
     for f in list(range(a, b, 6)) + [b - 1]:
         c = Vector([cfc[i].evaluate(f) for i in range(3)])

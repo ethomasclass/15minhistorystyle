@@ -240,6 +240,10 @@ roomclip.hide_render = True
 roomclip.display_type = 'WIRE'
 bmod = tiers.modifiers.new('clip', 'BOOLEAN')
 bmod.operation, bmod.object, bmod.solver = 'INTERSECT', roomclip, 'EXACT'
+bpy.context.view_layer.update()                             # bake the clip once (an exact boolean every frame costs time)
+_me = bpy.data.meshes.new_from_object(tiers.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+tiers.modifiers.clear()
+tiers.data = _me
 arc_obj('seats', seats, BENCH_LT)
 arc_obj('backs', backs, BENCH)
 arc_obj('desks', desks, BENCH_LT)
