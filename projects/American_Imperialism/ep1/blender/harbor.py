@@ -73,7 +73,7 @@ BUFF, BUFF_DK, SPAR, RIG, IRON = '#cfae6e', '#3a3630', '#a3855a', '#3e3832', '#2
 SAIL = '#ddd4bf'
 GUN = '#3c3d3b'
 DH, DH_DK = '#a19b6e', '#8a8466'
-LAND, LAND_DRY, MTN, MTN_DK, RIDGE, ROCK = '#7f8a4c', '#9a9660', '#7a9259', '#5e7352', '#8c9a6a', '#8d9183'
+LAND, LAND_DRY, MTN, MTN_DK, RIDGE, ROCK = '#7f8a4c', '#9a9660', '#7a9259', '#5e7352', '#8c9a6a', '#8a957f'
 TREE = ['#3f5233', '#4a5f38', '#56693d']
 WOOD, WOOD_DK, PILE = '#8b7457', '#6b5640', '#56473a'
 WALLS = ['#e2d7bd', '#d8ccae', '#9b4a3a', '#a85a44', '#8f9a92', '#c9bfa4', '#7f8c90', '#b69a74']
@@ -250,7 +250,7 @@ def ridges(x, y):
 ground('koolau', -12000, 12000, 1900, 9000, 210, 56, ridges, MTN)
 
 
-def rock_faces(ob, col, steep=0.5, seed=9):
+def rock_faces(ob, col, steep=0.42, seed=9):
     """steep faces take a second (rock) colour, as in the plate's grey cliffs among the green"""
     rr = random.Random(seed)
     ob.data.materials.append(mat(col))
@@ -297,9 +297,12 @@ def blobs(name, items, col):
 
 
 CL = []                                                       # cloud banks resting on the ridges, heaviest at the left as in the plate
-for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1250, 2600, 14), (-1200, 7400, 1500, 1500, 9), (3600, 7600, 1650, 1700, 9), (8200, 6800, 1450, 1600, 8))):
+crr = random.Random(77)
+for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1150, 2600, 26), (-1200, 7400, 1450, 1400, 14), (3600, 7600, 1600, 1700, 16), (8200, 6800, 1400, 1600, 14))):
     for k in range(n):
-        CL.append(((cx + (k - n / 2) * cw * 0.11, cy + (k % 3) * 120, cz + (k % 4) * 70 - (abs(k - n / 2) / n) * 260), cw * (0.1 + 0.03 * (k % 3)), (2.1, 1.0, 0.45), ci * 20 + k))
+        u = crr.uniform(-0.5, 0.5)
+        r = cw * crr.uniform(0.1, 0.17) * (1 - abs(u))
+        CL.append(((cx + u * cw, cy + crr.uniform(-150, 150), cz + r * 0.25 + crr.uniform(0, 0.25) * cw * (0.5 - abs(u))), r, (1.6, 1.0, 0.68), ci * 40 + k))
 blobs('clouds', CL, CLOUD)
 
 # ================================================================ the wharves (the Fort Street landing at x ~ -60)
@@ -795,6 +798,9 @@ def seated(name, costume, boat, lx, ly, seat_z, heading, pose):
     root.parent = pv
     root.location = (0, 0, -HIPZ)
     stand(arm, N, pose=pose, breathe=False)
+    bpy.context.view_layer.update()                           # sit the hips exactly on the seat
+    hz = (arm.matrix_world @ arm.pose.bones['Hips'].head).z
+    root.location.z -= hz - pv.matrix_world.translation.z - 0.06
     return pv, root, arm
 
 
@@ -806,19 +812,19 @@ def cutter(name, start, heading, phase, crew, marines):
     b4 = set(bpy.data.objects)
     bt = empty(name, (0, 0, 0))
     Lb, Bb = 9.0, 2.3
-    small_hull(name + 'h', Lb, Bb, 0.78, '#e6e0cf', WOOD_DK)
-    box(name + 'floor', -0.85, -3.6, 0.12, 0.85, 3.0, 0.2, '#8c7656')
+    small_hull(name + 'h', Lb, Bb, 0.62, '#e6e0cf', WOOD_DK)
+    box(name + 'floor', -0.85, -3.6, 0.1, 0.85, 3.0, 0.16, '#8c7656')
     THW = [2.3, 1.15, 0.0, -1.15]
     for k, y in enumerate(THW):
-        box(f'{name}th{k}', -1.05, y - 0.15, 0.38, 1.05, y + 0.15, 0.45, '#9a8462')
-    box(name + 'sheets', -1.0, -4.1, 0.38, 1.0, -2.3, 0.45, '#9a8462')
+        box(f'{name}th{k}', -1.05, y - 0.15, 0.36, 1.05, y + 0.15, 0.42, '#9a8462')
+    box(name + 'sheets', -1.0, -4.1, 0.36, 1.0, -2.3, 0.42, '#9a8462')
     adopt(bt, b4)
     rowers, oars = [], []
     for k, y in enumerate(THW):
         for side in (-1, 1):
-            pv, root, arm = seated(f'{name}r{k}{side}', crew, bt, side * 0.42, y, 0.46, 180, REACH)
+            pv, root, arm = seated(f'{name}r{k}{side}', crew, bt, side * 0.42, y, 0.42, 180, REACH)
             rowers.append((pv, arm, side))
-            ol = empty(f'{name}ol{k}{side}', (side * 1.12, y - 0.45, 0.82), bt)
+            ol = empty(f'{name}ol{k}{side}', (side * 1.12, y - 0.45, 0.68), bt)
             dip = empty(f'{name}od{k}{side}', (0, 0, 0), ol)
             cyl(f'{name}oar{k}{side}', (-side * 1.15, 0, 0.02), (side * 3.0, 0, 0), 0.04, 0.035, '#c9b48a', n=4, parent=dip)
             box(f'{name}blade{k}{side}', min(side * 2.5, side * 3.4), -0.09, -0.02, max(side * 2.5, side * 3.4), 0.09, 0.02, '#c9b48a', parent=dip)
@@ -826,9 +832,9 @@ def cutter(name, start, heading, phase, crew, marines):
     pas = []
     for k, (x, y, hd) in enumerate(((-0.62, -2.6, 90), (0.62, -2.6, -90), (-0.62, -3.4, 90), (0.62, -3.4, -90))):
         c = 'marine' if marines else 'sailor'
-        pv, root, arm = seated(f'{name}p{k}', c, bt, x, y, 0.46, hd, HOLD)
+        pv, root, arm = seated(f'{name}p{k}', c, bt, x, y, 0.42, hd, HOLD)
         pas.append(arm)
-    pv, root, arm = seated(f'{name}cox', 'officer', bt, 0.0, -4.0, 0.46, 0, {'RightArm': (80, 0, -30), 'RightForeArm': (0, 0, -40)})
+    pv, root, arm = seated(f'{name}cox', 'officer', bt, 0.0, -4.0, 0.42, 0, {'RightArm': (80, 0, -30), 'RightForeArm': (0, 0, -40)})
     bt.location = start
     bt.rotation_euler = (0, 0, math.radians(heading))
     CUTTERS.append((bt, start, heading, phase, rowers, oars, pas))
@@ -837,12 +843,15 @@ def cutter(name, start, heading, phase, crew, marines):
 
 LANDING = Vector((-62.0, -68.0, 0.0))                        # the cutters make for the landing steps
 H2_MID = FB + (N - FB) // 2
-CUT_MID = [((-30.8, -128.2), 0.0, False), ((-27.5, -92.6), 0.8, True), ((-44.2, -105.0), 1.5, False)]   # where each is mid-H2
+CUT_MID = [((-33.7, -128.8), 0.0, False), ((-9.4, -99.2), 0.8, True), ((-38.6, -104.4), 1.5, False)]   # where each is mid-H2
 for i, ((mx, my), ph, mar) in enumerate(CUT_MID):
     dv = (LANDING - Vector((mx, my, 0))).normalized()
     hd = math.degrees(math.atan2(-dv.x, dv.y))
     st = Vector((mx, my, 0)) - dv * BOAT_V * TQ[H2_MID]
-    cutter(f'cut{i}', tuple(st), hd, ph, 'sailor', mar)
+    bt = cutter(f'cut{i}', tuple(st), hd, ph, 'sailor', mar)
+    if i == 0:                                                # the boat ensign at the lead cutter's stern
+        cyl('bens_staff', (0, -4.6, 0.5), (0, -4.9, 2.6), 0.03, 0.025, SPAR, n=5, parent=bt)
+        bf = flag('bens', 'us_flag_44.png', 1.15, 0.6, (0, -4.9, 2.55), math.pi * 1.5, parent=bt, wave=0.05)
 # a cutter still alongside at the ladder, half loaded
 cutter('cut_l', tuple(on_ship((LX - 6.0, B / 2 + 3.2, 0.0))), math.degrees(BOS_R) + 180, 0.0, 'sailor', True)
 CUTTERS[-1] = CUTTERS[-1][:3] + (None,) + CUTTERS[-1][4:]
@@ -960,7 +969,7 @@ cam.data.clip_start, cam.data.clip_end = 0.2, 40000
 cam.data.lens = 45
 KEYS = [  # frame, camera position, look-at; H1 pushes in slowly, H2 drifts with the boats
     (0, (55.0, -455.0, 15.0), (22.0, 0.0, 44.0)), (FB - 1, (52.0, -432.0, 15.2), (20.0, 0.0, 43.0)),
-    (FB, (-46.0, -151.0, 2.1), (-30.0, -92.0, 5.5)), (N - 1, (-44.5, -147.5, 2.2), (-31.5, -88.0, 5.5))]
+    (FB, (-46.0, -151.0, 2.1), (-27.0, -92.0, 5.0)), (N - 1, (-44.8, -148.0, 2.2), (-28.5, -88.0, 5.0))]
 LENS = [(0, 45.0), (FB, 35.0)]
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)

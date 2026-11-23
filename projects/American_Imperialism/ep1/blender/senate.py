@@ -174,7 +174,6 @@ for side, (x0, y0, x1, y1, axis) in {'N': (-XF, YN, XF, YN + 0.4, 'x'), 'S': (-X
     else:
         xa, xb = (face, face + 0.25) if inward[0] > 0 else (face - 0.25, face)
         box('corn' + side, xa, y0, ZG - 0.4, xb, y1, ZG - 0.1, WALL_LT)
-    box('wain' + side, *((x0, y0 if inward[1] >= 0 else y0 - 0.0, 0) if True else ()), *(x1, y1, 0.0), WALL) if False else None
 # the gallery: a parapet round the floor, then five rows of benches stepping up to the outer walls
 box('paraN', -XF - 0.4, YN, ZG, XF + 0.4, YN + 0.35, ZG + 0.95, PARA)
 box('paraS', -XF - 0.4, YS - 0.35, ZG, XF + 0.4, YS, ZG + 0.95, PARA)
@@ -228,7 +227,7 @@ for (x0, y0, z0, x1, y1, z1) in cof:
 CG['obj_from_bm']('coffers', bm, COFF)
 for (x0, y0, x1, y1) in ((-SKX - 0.6, -SKY - 0.6, SKX + 0.6, -SKY), (-SKX - 0.6, SKY, SKX + 0.6, SKY + 0.6), (-SKX - 0.6, -SKY, -SKX, SKY), (SKX, -SKY, SKX + 0.6, SKY)):
     box(f'skframe{x0:.0f}{y0:.0f}', x0, y0, ZC - 0.35, x1, y1, ZC, CEIL_DK)
-SKM = emit('skylight', '#d9b878', 0.55)
+SKM = emit('skylight', '#d9b878', 0.32)
 gl = box('skyglass', -SKX, -SKY, ZC + 0.25, SKX, SKY, ZC + 0.3, '#ffffff')
 recolor(gl, SKM)
 bars = []
@@ -359,10 +358,10 @@ box('stackboard', -0.36, -0.24, 0.76, 0.36, 0.26, 0.78, DESK_DK, ST)
 rr = random.Random(21)
 layers = {PAPER: [], PAPER2: []}
 z = 0.78
-for k in range(46):
-    h = rr.uniform(0.005, 0.009)
-    a = math.radians(rr.uniform(-2.2, 2.2))
-    dx, dy = rr.uniform(-0.012, 0.012), rr.uniform(-0.012, 0.012)
+for k in range(80):
+    h = rr.uniform(0.0028, 0.0048) if rr.random() < 0.85 else rr.uniform(0.006, 0.009)
+    a = math.radians(rr.uniform(-1.0, 1.0))
+    dx, dy = rr.uniform(-0.005, 0.005), rr.uniform(-0.005, 0.005)
     W2, D2 = 0.2, 0.15
     pts = [(-W2, -D2), (W2, -D2), (W2, D2), (-W2, D2)]
     pts = [(dx + px * math.cos(a) - py * math.sin(a), dy + px * math.sin(a) + py * math.cos(a)) for px, py in pts]
@@ -389,14 +388,14 @@ print('STACK', tuple(round(v, 2) for v in (sx_, sy_, sz_)), 'height', round(STAC
 bpy.data.objects['sun'].data.energy = 0.0
 sk = bpy.data.lights.new('skylight', 'AREA')
 sk.shape, sk.size, sk.size_y = 'RECTANGLE', SKX * 2, SKY * 2
-sk.energy, sk.color = 9000, (1.0, 0.82, 0.58)
+sk.energy, sk.color = 1300, (1.0, 0.82, 0.58)
 sko = bpy.data.objects.new('skylight', sk)
 sc.collection.objects.link(sko)
 sko.location = (0, 0, ZC + 0.05)
 GAS = []
 for i, (x, y) in enumerate([(-XF - 0.1, yy) for yy in (-5, 0, 5)] + [(XF + 0.1, yy) for yy in (-5, 0, 5)] + [(xx, YS - 0.1) for xx in (-6, 0, 6)] + [(xx, YN + 0.1) for xx in (-7, 7)]):
     lt = bpy.data.lights.new(f'gas{i}', 'POINT')
-    lt.energy, lt.color, lt.shadow_soft_size = 90, (1.0, 0.72, 0.42), 0.1
+    lt.energy, lt.color, lt.shadow_soft_size = 22, (1.0, 0.72, 0.42), 0.1
     lo = bpy.data.objects.new(f'gas{i}', lt)
     sc.collection.objects.link(lo)
     inward = Vector((-x, -y, 0)).normalized() * 0.4 if abs(x) > XF - 0.5 or abs(y) > 7.5 else Vector()
@@ -406,15 +405,23 @@ for i, (x, y) in enumerate([(-XF - 0.1, yy) for yy in (-5, 0, 5)] + [(XF + 0.1, 
     recolor(gb, emit(f'gasg{i}', '#ffd9a0', 2.5, shadow=False))
     cyl(f'gasarm{i}', tuple(lo.location - Vector((1 if x < -XF + 1 else (-1 if x > XF - 1 else 0), 1 if y < YS + 1 else (-1 if y > YN - 1 else 0), 0)) * 0.45), tuple(lo.location - Vector((0, 0, 0.12))), 0.02, 0.02, GOLD, n=5)
 dl = bpy.data.lights.new('desklight', 'SPOT')               # the stack's desk sits in a pool from the skylight
-dl.energy, dl.color, dl.spot_size, dl.spot_blend, dl.shadow_soft_size = 500, (1.0, 0.84, 0.62), math.radians(16), 0.8, 0.3
+dl.energy, dl.color, dl.spot_size, dl.spot_blend, dl.shadow_soft_size = 220, (1.0, 0.84, 0.62), math.radians(16), 0.8, 0.3
 dlo = bpy.data.objects.new('desklight', dl)
 sc.collection.objects.link(dlo)
 dlo.location = (sx_ + 1.0, sy_ + 1.5, ZC - 0.5)
 dlo.rotation_euler = (Vector((sx_, sy_, sz_ + 0.9)) - dlo.location).to_track_quat('-Z', 'Y').to_euler()
+kl = bpy.data.lights.new('stackkey', 'AREA')                 # a soft warm light across the stack's edges from the dais side
+kl.energy, kl.size, kl.color = 14, 0.6, (1.0, 0.8, 0.55)
+klo = bpy.data.objects.new('stackkey', kl)
+sc.collection.objects.link(klo)
+fwd_ = Vector((math.sin(sa_), -math.cos(sa_), 0))
+rgt_ = Vector((math.cos(sa_), math.sin(sa_), 0))
+klo.location = Vector((sx_, sy_, sz_ + 1.0)) - rgt_ * 0.7 - fwd_ * 0.9 + Vector((0, 0, 0.5))
+klo.rotation_euler = (Vector((sx_, sy_, sz_ + 0.95)) - klo.location).to_track_quat('-Z', 'Y').to_euler()
 for lt in GAS:
     rg = random.Random(hash(lt.name) % 977)
     for fr in range(0, N, 3):
-        lt.energy = 90 * (1 + rg.uniform(-0.05, 0.05))
+        lt.energy = 22 * (1 + rg.uniform(-0.05, 0.05))
         lt.keyframe_insert('energy', frame=fr)
     for kp in lt.animation_data.action.fcurves[0].keyframe_points:
         kp.interpolation = 'CONSTANT'
@@ -422,7 +429,7 @@ for lt in GAS:
 # ---- the finishing pass, then the cameras
 LK = {'__name__': 'look'}
 exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
-LK['finish'](sc, fill_strength=0.3, shadow_fill='#8a8f9c', haze=(60.0, 400.0, 0.0), rules={
+LK['finish'](sc, fill_strength=0.12, shadow_fill='#8a8f9c', haze=(60.0, 400.0, 0.0), rules={
     WALL: (0.10, 0.4, None, 1.0), PARA: (0.08, 0.4, None, 1.0), CEIL: (0.08, 0.3, None, 1.0), PANEL: (0.08, 0.6, None, 1.0),
     DESK: (0.07, 1.5, None, 1.0), DESK_DK: (0.07, 1.5, None, 1.0), LEATHER: (0.08, 1.5, None, 1.0), PAPER: (0.02, 4.0, None, 1.0),
     PAPER2: (0.02, 4.0, None, 1.0), DRAPE: (0.12, 1.0, None, 1.0)})
@@ -435,10 +442,10 @@ SP = Vector((sx_, sy_, sz_ + 0.85))
 fwd = Vector((math.sin(sa_), -math.cos(sa_), 0))            # from the dais toward this desk's chair
 rgt = Vector((math.cos(sa_), math.sin(sa_), 0))
 # S1: low across the desk lid from beside the stack, the stack's edge at frame right, its top out of frame
-c1a = SP + rgt * -0.95 + fwd * 0.55 + Vector((0, 0, -0.05))
-c1b = SP + rgt * -0.9 + fwd * 0.42 + Vector((0, 0, -0.04))
-l1a = SP + rgt * 0.05 + fwd * -0.6 + Vector((0, 0, 0.05))
-KEYS = [(FS['S2'][0], (-XF - 2.6, YS - 2.2, ZG + 2.9), (1.5, 2.0, 0.6), 24), (FS['S2'][1] - 1, (-XF - 2.3, YS - 2.0, ZG + 2.8), (1.3, 2.2, 0.6), 24),
+c1a = SP + rgt * -1.05 + fwd * 0.05 + Vector((0, 0, -0.03))
+c1b = SP + rgt * -0.98 + fwd * -0.06 + Vector((0, 0, -0.03))
+l1a = SP + rgt * 1.0 + fwd * -0.62 + Vector((0, 0, 0.06))
+KEYS = [(FS['S2'][0], (1.2, YS - 2.6, ZG + 3.3), (0.0, 3.0, 3.6), 15), (FS['S2'][1] - 1, (0.5, YS - 2.4, ZG + 3.2), (0.0, 3.0, 3.6), 15),
         (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (N - 1, tuple(c1b), tuple(l1a + rgt * 0.05), 50)]
 CUTS = {FS['S2'][1] - 1}
 for fr, pos, look, lens in KEYS:
@@ -450,7 +457,7 @@ for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT' if int(kp.co[0]) in CUTS else 'LINEAR'
 cam.data.dof.use_dof = True
-for fr, dist, fs in ((FS['S2'][0], 16.0, 5.6), (FS['S1'][0], (SP - c1a).length, 1.6)):
+for fr, dist, fs in ((FS['S2'][0], 16.0, 5.6), (FS['S1'][0], (SP - c1a).length - 0.16, 2.4)):
     cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = dist, fs
     cam.data.dof.keyframe_insert('focus_distance', frame=fr)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=fr)
