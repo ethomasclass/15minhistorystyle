@@ -333,6 +333,39 @@ for ci, (cx, cyy, cz, cw) in enumerate(((-90, 330, 110, 85), (100, 340, 95, 75),
     for k in range(9):
         ico(f'cl{ci}{k}', (cx + (k - 4) * cw * 0.12, cyy + (k % 3) * 5, cz + (k % 2) * 4), cw * (0.2 + 0.03 * (k % 3)), '#ead9ae', 1, (1.4, 0.8, 0.75), seed=ci * 20 + k)
 
+# depth layers for the pull-back: low hedges and iron lamp posts along the walk (repeats that shrink into the distance),
+# shrubs along the basement, and two tall palms near the camera's last position whose crowns frame the top corners
+HEDGE = '#3c4a30'
+for sx in (-1, 1):
+    box(f'hedge{sx}', sx * 4.6 - 0.45, -150, 0.0, sx * 4.6 + 0.45, -11.0, 0.85, HEDGE)
+    for k in range(7):
+        y = -14 - k * 9.0
+        x = sx * 5.6
+        cyl(f'lp{sx}{k}', (x, y, 0), (x, y, 3.3), 0.07, 0.05, IRON, n=6)
+        box(f'lpb{sx}{k}', x - 0.14, y - 0.14, 0, x + 0.14, y + 0.14, 0.4, IRON)
+        box(f'lpl{sx}{k}', x - 0.17, y - 0.17, 3.3, x + 0.17, y + 0.17, 3.8, '#e9dfbf')
+        mesh_from(f'lpc{sx}{k}', [(x - 0.22, y - 0.22, 3.8), (x + 0.22, y - 0.22, 3.8), (x + 0.22, y + 0.22, 3.8), (x - 0.22, y + 0.22, 3.8), (x, y, 4.15)],
+                  [(0, 1, 4), (1, 2, 4), (2, 3, 4), (3, 0, 4)], IRON)
+for k in range(26):
+    x = -21.5 + k * 1.72
+    if abs(x) > 6.2:
+        ico(f'shrub{k}', (x, -1.6, 0.5), 0.85 + 0.2 * (k % 3), HEDGE, 1, (1.2, 0.9, 0.8), seed=200 + k)
+CG['palm'](21.5, -57, 17, -0.08, 12, 4.8, 77)
+CG['palm'](-5.0, -64, 21, 0.12, 12, 4.6, 78)
+CG['palm'](24.0, -36, 13, 0.05, 12, 3.8, 79)
+
+# the sun through the Queen's window: a hard spot along the sun's own direction, so the floor gets a window-shaped patch
+bpy.context.view_layer.update()
+SD = bpy.data.objects['sun'].matrix_world.to_3x3() @ Vector((0, 0, -1))
+sp = bpy.data.lights.new('winsun', 'SPOT')
+sp.energy, sp.color, sp.shadow_soft_size, sp.spot_size, sp.spot_blend = 2600, (1.0, 0.9, 0.72), 0.0, math.radians(32), 0.05
+spo = bpy.data.objects.new('winsun', sp)
+sc.collection.objects.link(spo)
+wc = Vector((WX, 3.0, RZ0 + 2.45))
+spo.location = wc - SD * 2.2
+spo.rotation_euler = SD.to_track_quat('-Z', 'Y').to_euler()
+print('SUN DIR', tuple(round(v, 2) for v in SD), 'winsun at', tuple(round(v, 2) for v in spo.location))
+
 # sway for the palms (stepped at 12 fps)
 for f in range(0, N):
     tq = math.floor(f / FPS * 12) / 12
@@ -343,6 +376,16 @@ for ob, *_ in CG['MOVERS']:
     for fc in ob.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT'
+
+
+# ---- the finishing pass: facets, coursing, bevels, cool shadow fill, grade, haze (look.py)
+LK = {'__name__': 'look'}
+exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
+LK['finish'](sc, fill_strength=0.75, rules={
+    STONE: (0.08, 0.3, 0.62, 0.9), STONE_LT: (0.08, 0.3, 0.62, 0.91), STONE_DK: (0.05, 0.3, None, 1.0), BASE: (0.07, 0.3, 0.45, 0.84),
+    SLATE: (0.08, 0.6, 0.28, 0.85), SLATE_DK: (0.08, 0.6, 0.28, 0.85), WALL: (0.13, 0.5, None, 1.0), HWALL: (0.12, 0.42, None, 1.0),
+    LAWN: (0.12, 0.08, None, 1.0), '#7d8b69': (0.14, 0.02, None, 1.0), PATH: (0.08, 0.2, None, 1.0), '#ead9ae': (0.04, 0.03, None, 1.0),
+    CURT: (0.12, 1.6, None, 1.0), HEDGE: (0.12, 0.4, None, 1.0), '#3f4b33': (0.12, 0.15, None, 1.0)})
 
 # ================================================================ cameras: one camera, cut between shots by jumping
 cam, tgt = sc.camera, bpy.data.objects['target']
@@ -367,8 +410,24 @@ for ob in (cam, tgt):
             # a jump between shots: hold until the cut frame
             kp.interpolation = 'CONSTANT' if f in (FB - 1, FC1 - 1, FC2 - 1) else 'BEZIER'
             kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
+
+# ---- shallow focus indoors (a miniature's depth of field), sharp outside; focus follows the subject of each shot
+cam.data.dof.use_dof = True
+cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
+SUBJ = [(FA, FB, Vector((QX, QY, RZ0 + 1.5)), 1.4), (FB, FC1, Vector((GX, GY, 1.4)), 1.6), (FC1, FC2, Vector((QX, QY, RZ0 + 1.55)), 1.4),
+        (FC2, FC2 + 150, Vector((WX, 3.0, RZ0 + 2.0)), 8.0), (FC2 + 150, N, Vector((0, 4, 12)), 22.0)]
+for a, b, P, fs in SUBJ:
+    for f in list(range(a, b, 6)) + [b - 1]:
+        c = Vector([cfc[i].evaluate(f) for i in range(3)])
+        cam.data.dof.focus_distance = (P - c).length
+        cam.data.dof.aperture_fstop = fs
+        cam.data.dof.keyframe_insert('focus_distance', frame=f)
+        cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
+for fc in cam.data.animation_data.action.fcurves:
+    for kp in fc.keyframe_points:
+        kp.interpolation = 'CONSTANT' if fc.data_path.endswith('fstop') else 'LINEAR'
 sc.render.resolution_percentage = SCALE
-for lt, on in ((wl, 260), (rf, 70)):                       # the room's lamps are off for the exterior shot (they glow through the glass)
+for lt, on in ((wl, 260), (rf, 70), (sp, 2600)):                       # the room's lamps are off for the exterior shot (they glow through the glass)
     lt.energy = on; lt.keyframe_insert('energy', frame=0)
     lt.energy = on * 0.08; lt.keyframe_insert('energy', frame=FC2)
     for kp in lt.animation_data.action.fcurves[0].keyframe_points:
