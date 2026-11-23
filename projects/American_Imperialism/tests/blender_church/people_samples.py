@@ -252,36 +252,36 @@ print('HEAD r', round(HR, 3), 'waist', round(ZW, 2), 'neck', round(ZN, 2))
 
 
 def hat_top():
-    return frustum(TOP.z - 0.18, TOP.z + 0.62, HR + 0.03, HR + 0.05, 12, cap=True, cx=HCX, cy=HCY)
+    return frustum(TOP.z - 0.22, TOP.z + 0.32, HR * 0.9, HR * 0.94, 12, cap=True, cx=HCX, cy=HCY)
 
 
 def hat_brim(r, z=None, cx=None):
-    z = TOP.z - 0.18 if z is None else z
+    z = TOP.z - 0.22 if z is None else z
     return frustum(z, z + 0.035, r, r, 16, cap=True, cx=HCX if cx is None else cx, cy=HCY)
 
 
 def hat_crown(h):
-    return frustum(TOP.z - 0.18, TOP.z - 0.18 + h, HR + 0.03, HR - 0.02, 12, cap=True, cx=HCX, cy=HCY)
+    return frustum(TOP.z - 0.22, TOP.z - 0.22 + h, HR * 0.9, HR * 0.84, 12, cap=True, cx=HCX, cy=HCY)
 
 
 def cap(h=0.24, top_r=None):
-    return frustum(TOP.z - 0.24, TOP.z - 0.24 + h, HR + 0.03, top_r or HR + 0.12, 12, cap=True, cx=HCX, cy=HCY)
+    return frustum(TOP.z - 0.26, TOP.z - 0.26 + h, HR * 0.9, top_r or HR * 0.98, 12, cap=True, cx=HCX, cy=HCY)
 
 
 def peak():
-    return frustum(TOP.z - 0.26, TOP.z - 0.22, HR + 0.05, HR + 0.2, 8, -50, 50, HCX, HCY)
+    return frustum(TOP.z - 0.27, TOP.z - 0.24, HR * 0.9, HR * 1.12, 8, -50, 50, HCX, HCY)
 
 
 def bonnet():
     """a bonnet: a crown over the back and top of the head, and a brim that frames the face like a halo, open at the chin"""
-    v, f = dome(TOP.z - 0.42, HR + 0.1, 1.05, 12, 4, HCX - 0.08, HCY, front_cut=(4, 2))
+    v, f = dome(TOP.z - 0.42, HR * 0.95, 1.05, 12, 4, HCX - 0.06, HCY, front_cut=(4, 2))
     n0 = len(v)
     xf = HCX + HR * 0.55                                   # the brim stands just in front of the face
     zc = TOP.z - 0.5
     seg = 14
     for i in range(seg + 1):
         a = math.radians(-130 + 260 * i / seg)             # from beside the chin, over the top, to the other side
-        for rr, dx in ((HR * 0.95, 0.0), (HR * 1.45, 0.12)):
+        for rr, dx in ((HR * 0.85, 0.0), (HR * 1.12, 0.06)):
             v.append((xf + dx, HCY + rr * math.sin(a), zc + rr * math.cos(a)))
     for i in range(seg):
         a0 = n0 + 2 * i
@@ -293,12 +293,12 @@ COSTUMES = {
                       parts=[('tails', 'Hips', lambda: tails(1.32, 0.8), '#2b2824'),
                              ('waist', 'Hips', lambda: band(ZW, 0.1), '#2b2824'),
                              ('collar', 'Spine2', lambda: collar(0.18), '#efe9dc'),
-                             ('hat', 'Head', hat_top, '#1f1d1a'), ('brim', 'Head', lambda: hat_brim(HR + 0.2), '#1f1d1a')]),
+                             ('hat', 'Head', hat_top, '#1f1d1a'), ('brim', 'Head', lambda: hat_brim(HR * 1.2), '#1f1d1a')]),
     'holoku': dict(coat='#d98b8c', skin='#8f6a4c', hair='#2a2622', legs='#d98b8c', shoes='#3a2c22',
                    parts=[('dress', 'Hips', lambda: skirt(0.42, 1.08, top='chest'), '#d98b8c'),
                           ('collar', 'Spine2', lambda: collar(0.16, 0.035), '#e9a7a4'),
-                          ('crown', 'Head', lambda: hat_crown(0.3), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR + 0.36), '#d9c79a'),
-                          ('band', 'Head', lambda: frustum(TOP.z - 0.15, TOP.z - 0.05, HR + 0.04, HR + 0.03, 12, cx=HCX, cy=HCY), '#8f3b2e')]),
+                          ('crown', 'Head', lambda: hat_crown(0.2), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR * 1.38), '#d9c79a'),
+                          ('band', 'Head', lambda: frustum(TOP.z - 0.21, TOP.z - 0.13, HR * 0.91, HR * 0.9, 12, cx=HCX, cy=HCY), '#8f3b2e')]),
     'missionary': dict(coat='#3a2f3a', skin='#e3c4a2', hair='#5b4330', legs='#3a2f3a', shoes='#1d1b18',
                        parts=[('dress', 'Hips', lambda: skirt(0.42, 1.04), '#3a2f3a'),
                               ('waist', 'Hips', lambda: band(ZW, 0.1), '#2e252e'),
@@ -306,7 +306,7 @@ COSTUMES = {
                               ('bonnet', 'Head', bonnet, '#ece4d0')]),
     'sailor': dict(coat='#27324a', skin='#c79b78', hair='#2a2622', legs='#27324a', shoes='#1d1b18',
                    parts=[('collar', 'Spine2', sailor_collar, '#3f5a86'),
-                          ('cap', 'Head', lambda: cap(0.2), '#1f2a3c'),
+                          ('cap', 'Head', lambda: cap(0.15), '#1f2a3c'),
                           ('belt', 'Hips', lambda: band(ZW - 0.05, 0.2), '#b79a68'),
                           ('legL', 'LeftLeg', lambda: legging('Left'), '#b79a68'),
                           ('legR', 'RightLeg', lambda: legging('Right'), '#b79a68')]),
@@ -314,10 +314,10 @@ COSTUMES = {
                     parts=[('tails', 'Hips', lambda: tails(1.2, 0.78), '#1f2a44'),
                            ('belt', 'Hips', lambda: band(ZW, 0.13), '#c9a648'),
                            ('collar', 'Spine2', lambda: collar(0.17), '#efe9dc'),
-                           ('cap', 'Head', lambda: cap(0.22), '#1b2333'), ('peak', 'Head', peak, '#111111')]),
+                           ('cap', 'Head', lambda: cap(0.17), '#1b2333'), ('peak', 'Head', peak, '#111111')]),
     'worker': dict(coat='#e3dccb', skin='#8f6a4c', hair='#2a2622', legs='#4a4439', shoes='#2a2622',
                    parts=[('sash', 'Hips', lambda: band(ZW, 0.16), '#8f3b2e'),
-                          ('crown', 'Head', lambda: hat_crown(0.28), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR + 0.33), '#d9c79a')]),
+                          ('crown', 'Head', lambda: hat_crown(0.18), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR * 1.35), '#d9c79a')]),
 }
 
 
