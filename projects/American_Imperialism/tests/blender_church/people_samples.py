@@ -640,19 +640,27 @@ GUARD_PARTS = [('belt', 'Hips', lambda: band(ZW, 0.16), '#e8e2d4'),
 COSTUMES['guard'] = dict(coat='#232c40', skin='#d9b38f', hair='#3a2e25', legs='#2b3346', shoes='#15171c', parts=GUARD_PARTS)
 COSTUMES['patrol'] = dict(COSTUMES['guard'], parts=GUARD_PARTS + [('stock', 'Spine2', rifle_stock, '#5a4532'), ('barrel', 'Spine2', rifle_barrel, '#2b2622')])
 
-ORDER_ARMS = {'LeftArm': (84, 0, 5), 'LeftForeArm': (0, 0, 4), 'RightArm': (82, 0, -4), 'RightForeArm': (0, 0, -24)}
+ORDER_ARMS = {'LeftArm': (84, 0, 5), 'LeftForeArm': (0, 0, 4), 'RightArm': (82, 0, -4), 'RightForeArm': (0, 0, -24),
+              'RightHandIndex1': (70, 0, 0), 'RightHandIndex2': (75, 0, 0), 'RightHandIndex3': (60, 0, 0),   # the fingers closed in a fist
+              'RightHandThumb2': (30, 0, 0)}
 
 
 def order_arms(name, arm, frame=0):
     """a rifle standing on its butt beside the right foot, the barrel in the right hand (placed in the world, at frame)"""
     sc.frame_set(frame)
     bpy.context.view_layer.update()
-    h = arm.matrix_world @ arm.pose.bones['RightHand'].head
+    # the middle of the closed fist: the centre of the posed hand's own vertices
+    body = [o for o in arm.children if o.type == 'MESH' and o.data.vertices and len(o.vertex_groups) > 10][0]
+    ev = body.evaluated_get(bpy.context.evaluated_depsgraph_get()).data
+    gn = {g.index: g.name for g in body.vertex_groups}
+    ids = [v.index for v in body.data.vertices if v.groups and gn[max(v.groups, key=lambda g: g.weight).group].startswith('RightHand')]
+    h = body.matrix_world @ (sum((ev.vertices[i].co for i in ids), Vector()) / len(ids))
     gz = arm.parent.matrix_world.translation.z
     x, y = h.x, h.y
-    G['cyl'](name + '_stock', (x, y, gz + 0.01), (x, y, gz + 0.72), 0.042, 0.03, '#5a4532', n=6)
+    G['cyl'](name + '_stock', (x, y, gz + 0.01), (x, y, gz + 0.62), 0.042, 0.032, '#5a4532', n=6)
     G['cyl'](name + '_butt', (x, y, gz + 0.01), (x, y, gz + 0.2), 0.05, 0.046, '#5a4532', n=6)
-    G['cyl'](name + '_barrel', (x, y, gz + 0.6), (x, y, gz + 1.32), 0.017, 0.014, '#2b2622', n=6)
+    G['cyl'](name + '_fore', (x, y, gz + 0.6), (x, y, max(gz + 1.0, h.z + 0.12)), 0.026, 0.022, '#5a4532', n=6)    # the wooden fore-end he grips
+    G['cyl'](name + '_barrel', (x, y, gz + 0.9), (x, y, gz + 1.32), 0.015, 0.013, '#2b2622', n=6)
     return h
 
 
