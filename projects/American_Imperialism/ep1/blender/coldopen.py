@@ -1,10 +1,13 @@
-# Ep 1 cold open (chapters 1 and 2 up to "But first"), built in Blender in the diorama style, copied from the Flow plates
-# (p4_palace, a1_prison_room, a3_palace_hall). Shots, timed to the placeholder narration:
-#   A  0.00-5.23   the locked room: the Queen at the window, from behind; the camera drifts from the door toward her
-#   B  5.23-7.78   the upstairs hall: a guard of the Republic stands at her door
-#   C1 7.78-24.5   back in the room, close behind her; a slow push toward the window
-#   C2 24.5-41.37  outside: the camera pulls back from her window and cranes up to the whole palace, the flag waving
-#   (then the hard cut to the Declaration on the desk, which stays 2D)
+# Ep 1 cold open (chapter 1, and the palace beats of chapter 2), built in Blender in the diorama style, copied from the Flow
+# plates (p4_palace, a1_prison_room, a3_palace_hall). Shots are keyed to the real narration's words (public/audio):
+#   A   "The Queen of Hawaiʻi..."            the locked room: the Queen at the window, from behind; the camera drifts toward her
+#   B   "There's an armed guard"             the upstairs hall: a guard of the Republic at her door
+#   C1  "and from her window"                back in the room, close behind her; a slow push toward the window
+#   C2  "The men who put her here"           the camera pulls back out of her window and cranes up to the whole palace, the
+#                                            sentries and the patrol on the grounds, the flag waving
+#   (ch 2 "In 1776": the Declaration, 2D, covers this timeline from G + 0.45 s until "The men who locked this door")
+#   C3  "The men who locked this door"       the palace wide again, a slow drift on the flag, until "So when America"
+# Film time: chapter 1 starts at 0, chapter 2 at G.
 #   xvfb-run -a blender -b --python coldopen.py -- <out_dir> <first> <last> [scale%]
 import bpy, bmesh, math, os, sys
 from mathutils import Vector
@@ -36,10 +39,29 @@ for ob in list(bpy.data.objects):                          # clear the church se
         bpy.data.objects.remove(ob, do_unlink=True)
 CG['MOVERS'].clear()
 FPS = 30
-DUR = 41.37
+import json as _json
+def _wt(stem, phrase, end=False):
+    """start (or end) time of a phrase in a narration chapter"""
+    ws = _json.load(open(os.path.join(HERE, '..', 'public', 'audio', stem + '.words.json')))['words']
+    nm = lambda w: ''.join(ch for ch in w.lower() if ch.isalnum() or ch in "'ʻ")
+    p = [nm(x) for x in phrase.split()]
+    for i in range(len(ws) - len(p) + 1):
+        if [nm(w['w']) for w in ws[i:i + len(p)]] == p:
+            return ws[i + len(p) - 1]['e'] if end else ws[i]['s']
+    raise KeyError(phrase)
+
+
+G = 20.2                                                    # chapter 2 starts here in the film
+T_B = _wt('ch01_the_locked_room', "There's an armed guard") - 0.05
+T_C1 = _wt('ch01_the_locked_room', 'and from her window') - 0.05
+T_C2 = _wt('ch01_the_locked_room', 'The men who put') - 0.05
+T_WIDE = _wt('ch01_the_locked_room', 'Or the sons') + 0.5     # the crane has reached the whole palace
+T_DECL = G + _wt('ch02_the_question', 'In 1776') - 0.05
+T_C3 = G + _wt('ch02_the_question', 'The men who locked') - 0.05
+DUR = G + _wt('ch02_the_question', 'So when America') - 0.05
 N = int(DUR * FPS)
 sc.frame_start, sc.frame_end = 0, N - 1
-T_B, T_C1, T_C2 = 5.23, 7.78, 24.5
+print('COLDOPEN TIMES', round(T_B, 2), round(T_C1, 2), round(T_C2, 2), round(T_WIDE, 2), round(T_DECL, 2), round(T_C3, 2), round(DUR, 2))
 
 # ---- palette (from the Flow palace plate)
 STONE, STONE_LT, STONE_DK, BASE = '#ddd4ba', '#e8e1cb', '#c9bea2', '#b3a78c'
@@ -449,8 +471,8 @@ KEYS = [  # frame, camera position, look-at, interpolation into the next key
     (FA, (RX1 - 0.5, RY1 - 0.5, RZ0 + 1.65), (RX0 + 1.6, RY0 + 0.6, RZ0 + 1.45)), (FB - 1, (RX1 - 1.1, RY1 - 1.0, RZ0 + 1.62), (RX0 + 1.9, RY0 + 0.4, RZ0 + 1.5)),
     (FB, (HX - 0.6, HL - 9.5, 1.6), (HX + 0.3, HL, 1.25)), (FC1 - 1, (HX - 0.6, HL - 8.6, 1.6), (HX + 0.3, HL, 1.25)),
     (FC1, (QX + 0.55, QY + 2.6, RZ0 + 1.6), (QX - 0.15, RY0 - 3, RZ0 + 1.85)), (FC2 - 1, (QX + 0.35, QY + 1.7, RZ0 + 1.6), (QX - 0.1, RY0 - 3, RZ0 + 1.85)),
-    (FC2, (WX, -5.5, RZ0 + 2.2), (WX, 3.5, RZ0 + 2.3)), (FC2 + 150, (WX - 1.0, -16, RZ0 + 3.0), (WX - 3, 4, RZ0 + 1.6)),
-    (int(36.58 * FPS), (12, -72, 16), (0, 8, 12.5)), (N - 1, (10.5, -76, 17), (0, 8, 12.8))]
+    (FC2, (WX, -5.5, RZ0 + 2.2), (WX, 3.5, RZ0 + 2.3)), (FC2 + 48, (WX - 1.0, -16, RZ0 + 3.0), (WX - 3, 4, RZ0 + 1.6)),
+    (int(T_WIDE * FPS), (12, -72, 16), (0, 8, 12.5)), (N - 1, (9.0, -80, 17.6), (0, 8, 12.9))]
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -467,7 +489,7 @@ for ob in (cam, tgt):
 cam.data.dof.use_dof = True
 cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
 SUBJ = [(FA, FB, Vector((QX, QY, RZ0 + 1.5)), 1.4), (FB, FC1, Vector((GX, GY, 1.4)), 1.6), (FC1, FC2, Vector((QX, QY, RZ0 + 1.55)), 1.4),
-        (FC2, FC2 + 150, Vector((WX, 3.0, RZ0 + 2.0)), 8.0), (FC2 + 150, N, Vector((0, 4, 12)), 22.0)]
+        (FC2, FC2 + 48, Vector((WX, 3.0, RZ0 + 2.0)), 8.0), (FC2 + 48, N, Vector((0, 4, 12)), 22.0)]
 for a, b, P, fs in SUBJ:
     for f in list(range(a, b, 6)) + [b - 1]:
         c = Vector([cfc[i].evaluate(f) for i in range(3)])
@@ -488,7 +510,8 @@ for lt, on in ((wl, 260), (rf, 70), (sp, 2600)):                       # the roo
 FR = range(F0, min(F1, N - 1) + 1)
 if os.environ.get('FRAMES', '').startswith('every:'):          # every:<step>:<offset>, skipping frames already on disk
     st_, of_ = map(int, os.environ['FRAMES'].split(':')[1:])
-    FR = [f for f in range(of_, N, st_) if not os.path.exists(os.path.join(OUT, f'{f:04d}.png'))]
+    HIDDEN = range(int(T_DECL * FPS) + 3, int(T_C3 * FPS) - 3)      # under the Declaration: never on screen
+    FR = [f for f in range(of_, N, st_) if f not in HIDDEN and not os.path.exists(os.path.join(OUT, f'{f:04d}.png'))]
 elif os.environ.get('FRAMES'):
     FR = [int(v) for v in os.environ['FRAMES'].split(',')]
 for f in FR:
