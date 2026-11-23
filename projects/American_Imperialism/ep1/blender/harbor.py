@@ -168,14 +168,14 @@ facets('water', -900, 900, -900, -1.0, 150, 75, 0.2, WATER, 1)
 facets('water_far', -16000, 16000, -16000, 0.0, 64, 32, 0.6, WATER, 2, z=-0.9)
 
 
-def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0), k=0.35):
+def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0), kd=0.35):
     """long thin horizontal wedges on the water, like the plate's highlights, sized for the eye that sees them"""
     rr = random.Random(seed)
     verts, faces = [], []
     for k in range(n):
         y = rr.uniform(y0, y1)
         x = rr.uniform(x0, x1)
-        d = math.hypot(x - eye[0], y - eye[1]) * k + 8
+        d = math.hypot(x - eye[0], y - eye[1]) * kd + 8
         L = rr.uniform(0.015, 0.045) * d
         w = rr.uniform(0.004, 0.011) * d
         a = len(verts)
@@ -184,8 +184,8 @@ def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0)
     return mesh_from(name, verts, faces, col)
 
 
-slivers('glints', 170, GLINT, 3, y0=-420, eye=(50.0, -450.0), k=0.45)
-slivers('glints_dk', 150, GLINT_DK, 4, y0=-420, eye=(50.0, -450.0), k=0.45)
+slivers('glints', 320, GLINT, 3, y0=-420, eye=(50.0, -450.0), kd=0.6)
+slivers('glints_dk', 220, GLINT_DK, 4, y0=-420, eye=(50.0, -450.0), kd=0.6)
 slivers('glints2', 160, GLINT, 5, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 slivers('glints2_dk', 160, GLINT_DK, 6, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 
@@ -214,6 +214,8 @@ def ground(name, x0, x1, y0, y1, nx, ny, hfun, col, seed=5):
 
 def town_h(x, y):
     z = 2.2 + 0.02 * y
+    u = min(1.0, max(0.0, (y - 1300) / 1900))                  # the land rises into the foothills of the ridges
+    z += 110 * u * u * (3 - 2 * u)
     r = math.hypot(x - PBX, (y - PBY) * 1.2)
     if r < 330:                                               # the crater: a broad low cone with a flat rim
         z += 105 * (0.8 + 0.2 * (r / 330) ** 3)
@@ -1016,6 +1018,10 @@ for fc in cam.data.animation_data.action.fcurves:
     for kp in fc.keyframe_points:
         kp.interpolation = 'CONSTANT'
 
+for pre in filter(None, os.environ.get('HIDE', '').split(',')):     # debugging: hide objects by name prefix
+    for ob in bpy.data.objects:
+        if ob.name.startswith(pre):
+            ob.hide_render = True
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
 if MODE == 'wide':
