@@ -83,6 +83,46 @@ def drift_group(gid, svg):
     return f'<g id="{gid}">{svg}</g>'
 
 
+# ---------------------------------------------------------------- depth: one sun at the upper left, so every shadow falls
+# to the lower right; contact shadows where things meet the ground; haze over distance; a light-and-shade wash
+SUN = (0.7, 0.18)            # a point h px above the ground throws its shadow h*0.7 right and h*0.18 down
+SH = '#1b1810'
+
+
+def proj_shadow(pts, base, op=0.3, k=SUN, col=SH):
+    """the shadow on flat ground (at y = base) of an upright outline"""
+    q = [(x + (base - y) * k[0], base + (base - y) * k[1]) for x, y in pts]
+    return f'<polygon points="{P2(q)}" fill="{col}" opacity="{op}"/>'
+
+
+def box_shadow(x0, x1, top, base, op=0.3, k=SUN, col=SH):
+    dx, dy = (base - top) * k[0], (base - top) * k[1]
+    return f'<polygon points="{P2([(x0, base), (x1, base), (x1 + dx, base + dy), (x0 + dx, base + dy)])}" fill="{col}" opacity="{op}"/>'
+
+
+def blob_shadow(x, y, rx, ry, op=0.28, col=SH):
+    return f'<ellipse cx="{x:.1f}" cy="{y:.1f}" rx="{rx:.1f}" ry="{ry:.1f}" fill="{col}" opacity="{op}"/>'
+
+
+def ao(x0, x1, base, h=36, op=0.4, gid='ao'):
+    """a soft darkening just above where something meets the ground"""
+    return (f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{SH}" stop-opacity="0"/>'
+            f'<stop offset="1" stop-color="{SH}" stop-opacity="{op}"/></linearGradient><rect x="{x0}" y="{base - h}" width="{x1 - x0}" height="{h}" fill="url(#{gid})"/>')
+
+
+def haze(x0, y0, x1, y1, col=SKY_B, op=0.35):
+    return f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" fill="{col}" opacity="{op}"/>'
+
+
+def light_wash(prefix, warm='#f6e7c4', dark=SH):
+    """sunlight pooling from the upper left and shade gathering at the lower right, over the whole scene"""
+    return (f'<radialGradient id="{prefix}lw" cx="0.12" cy="0.02" r="0.9"><stop offset="0" stop-color="{warm}" stop-opacity="0.28"/>'
+            f'<stop offset="0.55" stop-color="{warm}" stop-opacity="0"/></radialGradient>'
+            f'<linearGradient id="{prefix}dw" x1="0.2" y1="0.1" x2="1" y2="1"><stop offset="0.45" stop-color="{dark}" stop-opacity="0"/>'
+            f'<stop offset="1" stop-color="{dark}" stop-opacity="0.32"/></linearGradient>'
+            f'<rect x="-400" y="-300" width="2720" height="1680" fill="url(#{prefix}lw)"/><rect x="-400" y="-300" width="2720" height="1680" fill="url(#{prefix}dw)"/>')
+
+
 # ---------------------------------------------------------------- palms (each frond sways on its own)
 def palm_specs(palms):
     """palms: [(base x, base y, crown x, crown y, frond length, n fronds, seed, fan)] -> precomputed frond angles"""
@@ -325,6 +365,7 @@ def scene_docks(prefix, t0=0.0):
     o += fcloud(320, 120, 820, 150, n=10, seed_=320) + fcloud(1560, 80, 760, 130, n=9, seed_=1560)
     o += facets([(600, 600), (700, 520), (820, 470), (930, 500), (1050, 540), (1200, 560), (1200, 620), (600, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
     o += facets([(1180, 560), (1300, 470), (1420, 430), (1560, 470), (1700, 520), (2400, 540), (2400, 620), (1180, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
+    o += haze(500, 380, 2400, 640, SKY_B, 0.4)
     o += f'<g id="{prefix}sea"></g>'
     # the warehouse, in perspective, receding from the left edge
     wall = [(-300, 1080), (-300, -40), (760, 430), (760, 760)]
@@ -349,6 +390,8 @@ def scene_docks(prefix, t0=0.0):
             q = [wpt(u0, f0 + 0.004), wpt(u1, f0 + 0.004), wpt(u1, f1 - 0.006), wpt(u0, f1 - 0.006)]
             o += poly(q, BRICK[int(rb.integers(0, 5))])
     o += poly([(-300, -40), (760, 430), (760, 412), (-300, -90)], '#3b3a35')            # the roof edge
+    o += f'<polygon points="-300,-40 760,430 760,490 -300,90" fill="{SH}" opacity="0.38"/>'   # the eave's shadow on the wall
+    o += f'<polygon points="-300,-40 760,430 760,760 -300,1080" fill="{SH}" opacity="0.12"/>'  # the wall faces away from the sun
     for (xa, xb) in ((-120, 90), (200, 360), (460, 570), (650, 720)):                  # the open doors
         ya_t, ya_b = -40 + (xa + 300) / 1060 * 470 + 120 * (1 - (xa + 300) / 1060), 1080 - (xa + 300) / 1060 * 320
         yb_t, yb_b = -40 + (xb + 300) / 1060 * 470 + 120 * (1 - (xb + 300) / 1060), 1080 - (xb + 300) / 1060 * 320
@@ -359,6 +402,8 @@ def scene_docks(prefix, t0=0.0):
     for i in range(30):
         x = -300 + i * 110
         o += f'<line x1="{x}" y1="1400" x2="{760 + (x - 760) * 0.1:.0f}" y2="760" stroke="{WOOD[1]}" stroke-width="3" opacity="0.7"/>'
+    o += ao(-300, 760, 790, 60, 0.45, prefix + 'aow')
+    o += f'<polygon points="760,760 -300,1080 -300,1400 600,1400 1000,820" fill="{SH}" opacity="0.22"/>'   # the warehouse's shadow across the deck
     # the steamship, moored on the right: low black hull with a raised bow, buff funnel, two masts
     sx, dy = 1250, 90
     for xm, ym in ((sx + 190, 150), (sx + 540, 110)):
@@ -375,6 +420,9 @@ def scene_docks(prefix, t0=0.0):
     o += fpoly(hull, '#2e2c26', spread=0.06, cell=90, contrast=1.1)
     o += poly([(sx + 90, 610 + dy), (sx + 760, 600 + dy), (sx + 754, 632 + dy), (sx + 100, 640 + dy)], '#8f3b2e')
     o += poly([(sx - 30, 430 + dy), (sx + 60, 465 + dy), (sx + 780, 470 + dy), (sx + 780, 482 + dy), (sx + 58, 478 + dy), (sx - 30, 444 + dy)], '#e2dbc6')
+    o += f'<polygon points="{sx + 90},{612 + dy} {sx + 760},{602 + dy} {sx + 860},{660 + dy} {sx + 160},{676 + dy}" fill="{SH}" opacity="0.35"/>'   # the hull's shadow on the water
+    o += f'<polygon points="{sx - 30},{444 + dy} {sx + 780},{482 + dy} {sx + 780},{500 + dy} {sx + 50},{494 + dy}" fill="{SH}" opacity="0.35"/>'   # under the rail
+    o += f'<polygon points="{sx + 392},{250 + dy} {sx + 392},{410 + dy} {sx + 470},{410 + dy}" fill="{SH}" opacity="0.22"/>'   # the funnel's shadow
     o += f'<path d="M{sx + 60},{520 + dy} Q{sx - 100},{600 + dy} {sx - 250},{700 + dy}" fill="none" stroke="#c9b98f" stroke-width="5"/>'
     # cargo: crates, barrels, bales, sacks; far ones small, near ones big
     r = np.random.default_rng(3)
@@ -384,15 +432,20 @@ def scene_docks(prefix, t0=0.0):
             stack = int(r.integers(1, 4 - row))
             for j in range(stack):
                 w = 150 * s * r.uniform(0.85, 1.15)
+                if j == 0:
+                    o += box_shadow(x, x + w, yb - 100 * s * stack, yb, 0.3)
                 o += crate(x, yb - j * 110 * s, w, 100 * s, int(r.integers(1, 4)), side=0.6)
+                if j == 0:
+                    o += f'<rect x="{x:.0f}" y="{yb - 8 * s:.0f}" width="{w:.0f}" height="{8 * s:.0f}" fill="{SH}" opacity="0.35"/>'
     for x, y, s in ((560, 920, 0.9), (640, 930, 0.95), (720, 925, 0.9), (1000, 1000, 1.0), (1090, 1010, 1.05), (1180, 1000, 1.0)):
-        o += barrel(x, y, 90 * s, 120 * s, 3)
+        o += box_shadow(x + 10 * s, x + 80 * s, y - 120 * s, y, 0.3) + barrel(x, y, 90 * s, 120 * s, 3)
     for x, y, w, h in ((1300, 930, 210, 120), (1340, 1030, 240, 140), (1560, 1050, 250, 150), (1500, 940, 200, 115), (1430, 830, 190, 110)):
-        o += bale(x, y, w, h)
+        o += box_shadow(x + 10, x + w - 10, y - h, y, 0.28) + bale(x, y, w, h)
     for x, y in ((880, 1000), (940, 1010)):
-        o += sack(x, y, 80, 100)
+        o += box_shadow(x + 8, x + 72, y - 90, y, 0.28) + sack(x, y, 80, 100)
+    o += box_shadow(170, 370, 900, 1060, 0.32) + box_shadow(240, 390, 780, 900, 0.32) + box_shadow(-40, 140, 930, 1080, 0.32)
     o += crate(170, 1060, 200, 160, 2, side=0.5) + crate(240, 900, 150, 120, 3, side=0.5) + crate(-40, 1080, 180, 150, 1, side=0.5)
-    o += f'<g id="{prefix}dyn"></g>'
+    o += f'<g id="{prefix}dyn"></g>' + light_wash(prefix)
     flock = [(400, 160, 22, 26, 0.0), (520, 210, 18, 18, 1.4), (1060, 230, 26, 22, 2.2), (1190, 270, 20, 14, 3.1)]
     sk = (('c3',))
 
@@ -406,21 +459,27 @@ def scene_coaling(prefix):
     """A U.S. cruiser at a coaling station on a rocky Pacific island (copied from Flow c6_coaling_station)."""
     o = sky('#a9c1bb', '#cfd3bf', prefix + 'sk')
     o += fcloud(420, 120, 900, 170, n=10, seed_=420) + fcloud(1640, 170, 720, 160, n=9, seed_=1640)
-    o += f'<g id="{prefix}sea"></g>'
+    o += f'<g id="{prefix}sea"></g>' + haze(-600, 560, 2520, 700, '#cfd3bf', 0.35)
     # the island
     isl = [(1240, 1100), (1290, 940), (1420, 860), (1560, 700), (1640, 540), (1720, 460), (1800, 520), (1880, 640), (2000, 760), (2300, 900), (2300, 1100)]
     o += F.seam(facets(isl, ROCK, ridge_h(0.012, 80, 0.1), cell=70, contrast=1.1))
     o += facets([(1180, 1100), (1240, 980), (1380, 930), (1560, 950), (1700, 1010), (1760, 1100)], ROCK, ridge_h(0.02, 40, 0.1), cell=55, contrast=1.0)
+    o += f'<polygon points="1180,1060 1250,1010 1450,1000 1700,1040 2300,1030 2300,1110 1180,1110" fill="{SH}" opacity="0.35"/>'   # where rock meets sea
+    o += f'<polyline points="1170,1062 1250,1012 1450,1002 1700,1042 2300,1032" fill="none" stroke="#e9e3cf" stroke-width="3" opacity="0.6"/>'
+    o += f'<polygon points="1720,460 1800,520 1880,640 2000,760 2300,900 2300,1040 1640,1000 1560,700 1640,540" fill="{SH}" opacity="0.18"/>'   # the island's shaded side
     # coal heaps, the shed and the lighthouse
     for cx, cy, w, h in ((1400, 870, 150, 70), (1520, 885, 180, 85), (1650, 880, 150, 70), (1470, 905, 130, 55)):
+        o += blob_shadow(cx + w * 0.25, cy + 12, w * 0.6, 10, 0.4)
         o += facets([(cx - w / 2, cy + 10), (cx - w * 0.2, cy - h * 0.8), (cx + w * 0.1, cy - h), (cx + w / 2, cy + 10)], COAL, ridge_h(0.05, 20, 0.1), cell=26, contrast=1.2)
     o += fpoly([(1600, 820), (1700, 820), (1700, 760), (1600, 760)], WOOD[2], cell=30) + fpoly([(1588, 765), (1650, 725), (1712, 765)], WOOD[1], cell=30)
     o += f'<rect x="1640" y="785" width="22" height="35" fill="#2a2420"/>'
     lx, ly = 1440, 720
+    o += box_shadow(1600, 1700, 730, 820, 0.3) + box_shadow(lx - 15, lx + 15, ly - 170, ly, 0.3)
     o += poly([(lx - 22, ly), (lx + 22, ly), (lx + 15, ly - 120), (lx - 15, ly - 120)], IVORY[3]) + poly([(lx, ly), (lx + 22, ly), (lx + 15, ly - 120), (lx, ly - 120)], IVORY[1])
     o += poly([(lx - 22, ly - 120), (lx + 22, ly - 120), (lx + 22, ly - 128), (lx - 22, ly - 128)], '#3a3832')
     o += f'<rect x="{lx - 13}" y="{ly - 155}" width="26" height="27" fill="#e9d38f"/><path d="M{lx - 17},{ly - 155} L{lx},{ly - 175} L{lx + 17},{ly - 155} Z" fill="#3a3832"/>'
-    # the pier on piles
+    # the pier on piles, and its shadow on the water
+    o += f'<polygon points="830,880 1420,868 1440,905 850,918" fill="{SH}" opacity="0.3"/>'
     o += poly([(820, 846), (1410, 836), (1410, 852), (820, 864)], WOOD[3])
     for x in range(840, 1410, 70):
         o += f'<rect x="{x}" y="850" width="10" height="{80 - (x - 840) * 0.02:.0f}" fill="{WOOD[1]}"/>'
@@ -436,9 +495,13 @@ def scene_coaling(prefix):
         o += poly([(fx + 2, 560), (fx + 54, 560), (fx + 54, 535), (fx + 2, 535)], '#2a2824')
     o += fpoly([(hx - 60, 760), (hx + 1000, 750), (hx + 940, 860), (hx + 40, 870)], IVORY[1], spread=0.14, cell=95, contrast=1.3)
     o += poly([(hx + 40, 870), (hx + 940, 860), (hx + 930, 880), (hx + 52, 890)], '#8f3b2e')
+    o += f'<polygon points="{hx + 52},{890} {hx + 930},{880} {hx + 1060},{935} {hx + 140},{950}" fill="{SH}" opacity="0.32"/>'   # the hull's shadow on the water
+    o += f'<polygon points="{hx - 60},{760} {hx + 1000},{750} {hx + 995},{772} {hx - 40},{784}" fill="{SH}" opacity="0.3"/>'   # under the deck edge
+    for fx in (hx + 380, hx + 560):
+        o += f'<polygon points="{fx + 56},{720} {fx + 52},{600} {fx + 120},{720}" fill="{SH}" opacity="0.22"/>'   # each funnel's shadow on the deckhouse
     for x in range(hx + 80, hx + 900, 46):
         o += f'<circle cx="{x}" cy="{800 - (x - hx) * 0.008:.0f}" r="5" fill="#3a3832"/>'
-    o += f'<g id="{prefix}dyn"></g>'
+    o += f'<g id="{prefix}dyn"></g>' + light_wash(prefix)
 
     def dyn(tq):
         s = (smoke(tq + 8, hx + 408, 530, rate=2.2, life=8.0, rise=24, wind=(-62, -12), size=52, cols=('#3f3d37', '#4f4c44', '#625e53'), seed_=1)
@@ -462,15 +525,30 @@ def scene_church(prefix, t_arrive=0.0):
     """A white mission church in Hawaiʻi, 1880s, Sunday morning (copied from Flow c7_mission_church)."""
     o = sky()
     o += fcloud(300, 110, 800, 150, n=10, seed_=300) + fcloud(1560, 230, 700, 150, n=9, seed_=1560)
+    o += facets([(-400, 900), (-400, 470), (300, 380), (700, 300), (1150, 340), (1600, 300), (2000, 360), (2400, 400), (2400, 900)], FAR, ridge_h(0.006, 70, 0.1), cell=100, contrast=0.8)
+    o += haze(-400, 250, 2400, 900, SKY_B, 0.45)
     o += F.seam(facets([(-400, 900), (-400, 520), (0, 400), (200, 300), (420, 190), (560, 230), (700, 330), (900, 300), (1100, 360), (1300, 440),
                         (1500, 480), (1700, 420), (1900, 470), (2400, 520), (2400, 900)], MTN, ridge_h(0.005, 110, 0.12, namp=30), cell=110, contrast=1.0))
+    o += haze(-400, 150, 2400, 900, SKY_B, 0.18)
     o += poly([(-400, 1000), (-400, 800), (300, 790), (700, 810), (1300, 805), (1700, 790), (2400, 800), (2400, 1000)], TREE[1])
     o += facets([(-500, 905), (2500, 905), (2500, 1400), (-500, 1400)], LAWN, hill_h(0.003, 90), cell=200, contrast=0.8, bias=0.05)
     o += poly([(-500, 1000), (2500, 1000), (2500, 1014), (-500, 1014)], '#c8bb9c')
     o += poly([(895, 1000), (1025, 1000), (1120, 1400), (800, 1400)], '#c3b495')
-    # the church: gabled meeting house, porch gable, tower and steeple
+    # the church: gabled meeting house, porch gable, tower and steeple, seen a little from the left so its right side shows
     cx = 960
+    o += proj_shadow([(cx + 270, 982), (cx + 400, 958), (cx + 430, 742), (cx + 130, 585), (cx + 98, 552), (cx + 80, 464), (cx, 330), (cx - 20, 470), (cx - 270, 982)], 982, 0.3)
     ch = []
+    ch.append(fpoly([(cx + 270, 980), (cx + 270, 760), (cx + 400, 735), (cx + 400, 955)], IVORY[0], spread=0.08, cell=60))
+    for k in range(13):
+        ch.append(f'<line x1="{cx + 270}" y1="{770 + k * 16}" x2="{cx + 400}" y2="{745 + k * 16 * 0.95:.0f}" stroke="#8f8a7a" stroke-width="2" opacity="0.5"/>')
+    for x0 in (cx + 300, cx + 350):
+        ch.append(poly([(x0, 935), (x0 + 30, 929), (x0 + 30, 815), (x0, 822)], '#4c5452'))
+    ch.append(f'<polygon points="{cx + 270},980 {cx + 270},760 {cx + 400},735 {cx + 400},955" fill="{SH}" opacity="0.32"/>')
+    ch.append(fpoly([(cx + 300, 768), (cx, 610), (cx + 130, 585), (cx + 432, 742)], '#a9a392', spread=0.1, cell=60))
+    ch.append(fpoly([(cx + 70, 720), (cx + 70, 560), (cx + 100, 550), (cx + 100, 712)], IVORY[0], spread=0.06, cell=30))
+    ch.append(f'<polygon points="{cx + 70},720 {cx + 70},560 {cx + 100},550 {cx + 100},712" fill="{SH}" opacity="0.35"/>')
+    ch.append(f'<polygon points="{cx + 52},548 {cx + 52},470 {cx + 74},464 {cx + 74},542" fill="#8f8a7a"/>')
+    ch.append(f'<polygon points="{cx},330 {cx + 58},470 {cx + 78},464" fill="#8f8a7a"/>')
     ch.append(fpoly([(cx - 270, 980), (cx + 270, 980), (cx + 270, 760), (cx - 270, 760)], IVORY[1], spread=0.15, cell=90, contrast=1.4))
     for y in range(770, 980, 14):
         ch.append(f'<line x1="{cx - 270}" y1="{y}" x2="{cx + 270}" y2="{y}" stroke="{IVORY[0]}" stroke-width="2" opacity="0.6"/>')
@@ -489,8 +567,12 @@ def scene_church(prefix, t_arrive=0.0):
     ch.append(poly([(cx - 52, 850), (cx + 52, 850), (cx + 52, 812), (cx - 52, 812)], '#5a6260'))
     for k in range(5):
         ch.append(f'<rect x="{cx - 150 - k * 12}" y="{980 + k * 5}" width="{300 + k * 24}" height="6" fill="{IVORY[2] if k % 2 else IVORY[1]}"/>')
+    ch.append(f'<polygon points="{cx - 300},768 {cx + 300},768 {cx + 270},790 {cx - 270},790" fill="{SH}" opacity="0.3"/>')   # under the eaves
+    ch.append(f'<polygon points="{cx - 130},796 {cx + 130},796 {cx + 110},812 {cx - 110},812" fill="{SH}" opacity="0.3"/>')
+    ch.append(f'<polygon points="{cx + 110},980 {cx + 110},796 {cx + 150},796 {cx + 150},980" fill="{SH}" opacity="0.2"/>')   # the porch's shadow on the front
+    ch.append(ao(cx - 270, cx + 400, 982, 40, 0.4, prefix + 'aoc'))
     o += F.seam(''.join(ch))
-    o += f'<g id="{prefix}dyn"></g>'
+    o += f'<g id="{prefix}dyn"></g>' + light_wash(prefix)
     PSP = palm_specs([(70, 1040, 110, 340, 260, 9, 11, False), (210, 980, 205, 640, 120, 12, 12, True), (1700, 960, 1705, 650, 110, 12, 13, True),
                       (1880, 1050, 1840, 330, 270, 9, 14, False)])
     TSP = tree_specs([(560, 1000, 230, 260, 21), (1360, 1000, 230, 260, 22)])
@@ -504,7 +586,13 @@ def scene_church(prefix, t_arrive=0.0):
              (2000, 1046, 200, -1, 0.2, 6.2), (2200, 1050, 195, -1, 0.7, 7.0), (2420, 1044, 185, -1, 1.1, 7.6)]
 
     def dyn(tq):
-        s = trees(tq, TSP)
+        s = ''.join(blob_shadow(x + h * 0.55, base + h * 0.1, w * 0.5, w * 0.12, 0.3) + box_shadow(x - 8, x + 8, base - h * 0.5, base, 0.3)
+                    for (x, base, h, w, sd), _ in TSP)
+        for (bx, by, cx_, cy_, L, n, sd, fan), _ in PSP:
+            hh = by - cy_
+            s += f'<line x1="{bx}" y1="{by}" x2="{bx + hh * SUN[0]:.0f}" y2="{by + hh * SUN[1]:.0f}" stroke="{SH}" stroke-width="{hh * 0.03 + 4:.0f}" opacity="0.25"/>'
+            s += blob_shadow(bx + hh * SUN[0], by + hh * SUN[1], L * 0.8, L * 0.22, 0.25)
+        s += trees(tq, TSP)
         for i, (x0, y, h, f, d, walk) in enumerate(sched):
             svg, J, x = walker(tq, x0, y, h, facing=f, t0=t_arrive + d, t1=t_arrive + d + walk, phase=0.2 * i, **LOOKS[i])
             s += svg
