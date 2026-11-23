@@ -847,7 +847,7 @@ def cutter(name, start, heading, phase, crew, marines, moving=True):
             rowers.append((pv, arm, side))
             ol = empty(f'{name}ol{k}{side}', (side * 1.12, y - 0.45, 0.68), bt)
             dip = empty(f'{name}od{k}{side}', (0, 0, 0), ol)
-            cyl(f'{name}oar{k}{side}', (-side * 1.15, 0, 0.02), (side * 3.0, 0, 0), 0.04, 0.035, '#c9b48a', n=4, parent=dip)
+            cyl(f'{name}oar{k}{side}', (-side * 0.85, 0, 0.0), (side * 3.0, 0, 0), 0.04, 0.035, '#c9b48a', n=4, parent=dip)   # the handle comes to the rower's chest
             box(f'{name}blade{k}{side}', min(side * 2.5, side * 3.4), -0.09, -0.02, max(side * 2.5, side * 3.4), 0.09, 0.02, '#c9b48a', parent=dip)
             oars.append((ol, dip, side))
     pas = []
@@ -908,7 +908,7 @@ for bt, start, heading, phase, rowers, oars, pas in CUTTERS:
                     fc.keyframe_points.insert(f, math.radians(v)).interpolation = 'CONSTANT'
         for ol, dip, side in oars:
             ol.rotation_euler = (0, 0, side * math.radians(30 * (1 - p) - 26 * p))
-            dip.rotation_euler = (0, side * (0.2 if drive else 0.05), 0)
+            dip.rotation_euler = (0, side * (0.27 if drive else 0.08), 0)   # blade buried on the drive, feathered clear on the recovery
             ol.keyframe_insert('rotation_euler', frame=f)
             dip.keyframe_insert('rotation_euler', frame=f)
     if phase is None:

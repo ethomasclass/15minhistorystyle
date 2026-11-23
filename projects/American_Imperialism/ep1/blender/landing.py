@@ -3,12 +3,13 @@
 # (img/archival ch06_king_street_arion_hall_1898book, ch06_government_building_aliiolani_hale_1898book,
 # ch06_uss_boston_land_drill_1890s): a wide dirt street with the horse-tram rails, wooden and lava-stone business
 # blocks with two-storey verandas, false-fronted stores, palms, a banyan over the street, and the Government Building
-# (Aliʻiōlani Hale) with its clock tower at the end, the Hawaiian flag still flying. The column, in step: an officer,
-# the colour bearer with the 44-star ensign, the Marine guard (dark blue, sky-blue trousers, white belts) and a company of
-# seamen (blue, canvas leggings), rifles at right shoulder arms.
+# (Aliʻiōlani Hale) with its clock tower at the end, the Hawaiian flag still flying. The column marches up the street toward
+# it (they were bound for Arion Hall, across from the palace), in step: an officer leading, the Marine guard (dark blue,
+# sky-blue trousers, white belts), the colour bearer with the 44-star ensign, a second officer and a company of seamen
+# (blue, canvas leggings), rifles at right shoulder arms.
 # Shot, keyed to the chapter 6 narration (public/audio/ch06_the_heist.words.json):
-#   L1  "Minister, here, means diplomat ... is called"   low three-quarter at the roadside: the column marches toward the
-#        camera and the head of it passes close by; the camera turns a little to follow (until "interventionism")
+#   L1  "Minister, here, means diplomat ... is called"   low behind the column, a little to its left: the column marches away
+#        up King Street toward the Hawaiian flag, the camera dollying slowly after it so it recedes (until "interventionism")
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python landing.py -- <out_dir> [scale%] [mode: march|anim]
 #   mode march renders one still (FRAME, default the middle); anim renders FRAMES (comma list) or the whole shot
 import bpy, bmesh, math, os, sys, random
@@ -490,7 +491,7 @@ def palm(x, y, h, lean, L, seed):
     CG['palm'](x, y, h, lean, 12, L, seed)
 
 
-banyan('banyan', 17.0, -4.0, 13.5, 11.5, 1)                   # on the east side in the gap between blocks, its canopy over the street
+banyan('banyan', 17.5, -4.0, 13.0, 9.5, 1)                   # on the east side in the gap between blocks, its canopy over the street
 umbrella('monkeypod', -15.0, 58.0, 13.0, 9.0, 2)
 for i, (x, y, h, lean, L) in enumerate(((-12.6, -36.0, 17, 0.08, 4.8), (-13.0, 26.0, 15, -0.06, 4.4), (12.8, -12.5, 14, 0.1, 4.2),
                                          (13.0, 64.0, 16, -0.05, 4.4), (-20.0, 86.0, 18, 0.05, 4.6), (22.0, 88.0, 17, -0.08, 4.6),
@@ -605,10 +606,11 @@ SHOULDER = {'RightArm': (82, 0, -8), 'RightForeArm': (0, 0, -96), 'RightHandInde
 CARRY = {'RightArm': (80, 0, -12), 'RightForeArm': (0, 0, -80), 'RightHandIndex1': (70, 0, 0), 'RightHandIndex2': (75, 0, 0),
          'RightHandIndex3': (60, 0, 0), 'RightHandThumb2': (30, 0, 0)}
 LEFT_ON_HILT = {'LeftArm': (78, 0, 4), 'LeftForeArm': (0, 0, 30)}
-CAMY = -24.0                                                  # the camera's place along the street
-HEAD_Y0 = CAMY + 12.0                                         # where the officer is at frame 0
-CX = 0.9                                                      # the column's centre line (the camera stands to its left)
+REAR_Y0 = 8.0                                                 # the rear rank's place at frame 0 (past the banyan)
+CAMY = REAR_Y0 - 6.5                                          # the camera starts this far behind the column
+CX = 0.6                                                      # the column's centre line (the camera follows a little to its left)
 FILES = (CX - 0.6, CX + 0.6)
+FWD = Vector((0.0, 1.0, 0.0))                                 # the column marches north, toward the Government Building
 TT = TQ[:]                                                    # everyone steps off together, in step
 
 
@@ -654,13 +656,13 @@ MEN = []
 
 
 def marcher(name, costume, x, y, kind):
-    root, arm = person(name, costume, (x, y, 0.0), 180)
+    root, arm = person(name, costume, (x, y, 0.0), 0)
     act, pose = ACTS[kind]
     for bn in pose:
         arm.pose.bones[bn].rotation_mode = 'XYZ'
     arm.animation_data.action = act
     for f, tt in enumerate(TT):                               # the body moves at the speed of the planted foot
-        root.location = (x, y - VM * tt, 0.0)
+        root.location = (x, y + VM * tt, 0.0)
         root.keyframe_insert('location', frame=f)
     for fc in root.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
@@ -669,20 +671,24 @@ def marcher(name, costume, x, y, kind):
     return root, arm
 
 
-marcher('lt', 'lieutenant', CX, HEAD_Y0, 'officer')
-marcher('colour', 'seaman', CX, HEAD_Y0 + 2.6, 'colour')
-y = HEAD_Y0 + 5.2
+HEAD_Y0 = REAR_Y0 + 2.4 + 7 * 1.45 + 2.35 + 2.4 + 2.4 + 6 * 1.45   # the officer at the head, front to rear below
+y = HEAD_Y0
+marcher('lt', 'lieutenant', CX, y, 'officer')
+y -= 2.4
 for r in range(8):                                            # the Marine guard, two files
     for i, x in enumerate(FILES):
         marcher(f'mar{r}{i}', 'marine', x, y, 'rifle')
-    y += 1.45
-y += 1.6
+    y -= 1.45
+y -= 0.9
+marcher('colour', 'seaman', CX, y, 'colour')                 # the colour, between the Marines and the seamen
+y -= 2.4
 marcher('lt2', 'lieutenant', CX, y, 'officer')
-y += 2.6
-for r in range(10):                                           # a company of seamen
+y -= 2.4
+for r in range(7):                                            # a company of seamen, the rear nearest the camera
     for i, x in enumerate(FILES):
         marcher(f'sea{r}{i}', 'seaman', x, y, 'rifle')
-    y += 1.45
+    y -= 1.45
+print('COLUMN head', round(HEAD_Y0, 2), 'rear', round(y + 1.45, 2))
 # rifles on the right shoulder, the colour on its staff: built where the hand is at frame 0, then carried by the hand
 sc.frame_set(0)
 for name, root, arm, kind in MEN:
@@ -692,7 +698,7 @@ for name, root, arm, kind in MEN:
     H = hand_pos(arm)
     if kind == 'rifle':
         S = arm.matrix_world @ arm.pose.bones['RightArm'].head
-        tip = S + Vector((0.06, 0.0, 0.14)) + Vector((0, 0.12, 0))     # just over the shoulder (the men face -y; back is +y)
+        tip = S + Vector((-0.06, 0.0, 0.14)) - FWD * 0.12               # just over the shoulder, sloping back
         ax = (tip - H).normalized()
         b0 = H - ax * 0.12
         parts = [cyl(f'{name}_stock', b0, b0 + ax * 0.78, 0.05, 0.036, '#5a4532', n=6),
@@ -700,17 +706,20 @@ for name, root, arm, kind in MEN:
                  cyl(f'{name}_barrel', b0 + ax * 0.74, b0 + ax * 1.28, 0.017, 0.014, '#2b2622', n=6)]
     else:
         base = H + Vector((0, 0, -0.75))
-        top = H + Vector((0, -0.12, 2.35))
+        top = H + FWD * 0.12 + Vector((0, 0, 2.35))
         parts = [cyl(f'{name}_staff', base, top, 0.028, 0.022, '#6b5442', n=6),
                  ico(f'{name}_finial', tuple(top + Vector((0, 0, 0.1))), 0.07, '#b8923e', 1),
-                 flag('colour_flag', 'us_flag_44.png', 1.75, 0.92, tuple(top + Vector((0, 0.03, -0.05))), math.radians(88), wave=0.06)]
+                 flag('colour_flag', 'us_flag_44.png', 1.8, 0.95, tuple(top + Vector((-0.03, -0.03, -0.05))), math.radians(222), wave=0.06)]
+        # (the trade wind from the north-east blows the colour out to the south-west, so it shows its face to the camera)
     for ob in parts:
         bone_attach(ob, arm, 'RightHand')
 # onlookers on the sidewalks and verandas: townspeople watching, standing still
 WATCH = [('gentleman', -9.2, -14.0, 80), ('holoku', -9.4, -12.5, 95), ('worker', -9.0, -6.0, 70), ('gentleman', 9.3, -4.0, 270),
          ('worker', 9.4, 3.0, 285), ('holoku', 9.2, 6.0, 260), ('gentleman', -9.1, 20.0, 95), ('worker', 9.0, 38.0, 265),
          ('gentleman', 9.3, 15.0, 250), ('holoku', -9.3, 33.0, 80), ('worker', -9.4, 52.0, 100), ('gentleman', 9.1, 55.0, 255),
-         ('worker', -8.9, -2.5, 75), ('missionary', -9.5, 0.5, 90), ('gentleman', -9.0, 9.0, 85), ('worker', 9.2, 22.0, 275)]
+         ('worker', -8.9, -2.5, 75), ('missionary', -9.5, 0.5, 90), ('gentleman', -9.0, 9.0, 85), ('worker', 9.2, 22.0, 275),
+         ('gentleman', -9.2, 62.0, 100), ('holoku', 9.3, 66.0, 260), ('worker', -9.3, 71.0, 80), ('gentleman', 9.2, 74.0, 275),
+         ('holoku', -9.4, 44.0, 95), ('worker', 9.4, 47.0, 255)]
 for k, (c, x, yy, hd) in enumerate(WATCH):
     r_, a_ = person(f'w{k}', c, (x, yy, 0.14), hd)
     stand(a_, N, k=k * 0.8)
@@ -725,9 +734,9 @@ for ob, *_ in CG['MOVERS']:
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT'
 
-# ---- light: the sun from the south-west behind the camera, lighting the column's front and the east side
+# ---- light: the sun from the south-west behind the camera, lighting the column's backs, the east side and the building
 sun = bpy.data.objects['sun']
-sun.rotation_euler = (math.radians(55), 0, math.radians(-42))
+sun.rotation_euler = (math.radians(55), 0, math.radians(-31))   # from the south-south-west: the west side's shadows stay off the camera's half
 sun.data.energy = 4.6
 sun.data.color = (1.0, 0.93, 0.82)
 sun.data.shadow_cascade_max_distance = 220
@@ -760,13 +769,13 @@ k2 = ct.nodes.new('CompositorNodeMath'); k2.operation = 'MULTIPLY'
 ct.links.new(mmul.outputs[0], k2.inputs[0]); ct.links.new(k1.outputs[0], k2.inputs[1])
 ct.links.new(k2.outputs[0], mixn.inputs['Fac'])
 
-# ================================================================ camera: low at the left roadside, turning to follow the head of the column
+# ================================================================ camera: low behind the column, dollying slowly after it
 cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
 cam.data.clip_start, cam.data.clip_end = 0.1, 40000
 cam.data.lens = 30
-KEYS = [(0, (-4.2, CAMY, 1.25), (18.0, 66.0, 7.5)), (N - 1, (-4.35, CAMY + 0.5, 1.2), (31.0, 62.0, 6.0))]
+KEYS = [(0, (-1.9, CAMY, 1.35), (1.6, 100.0, 7.0)), (N - 1, (-1.6, CAMY + 6.0, 1.4), (1.2, 100.0, 7.4))]
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -775,12 +784,12 @@ for ob in (cam, tgt):
         for kp in fc.keyframe_points:
             kp.interpolation = 'BEZIER'
             kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
-cam.data.dof.use_dof = True                                   # focus rides on the head of the column
-lt_root = MEN[0][1]
+cam.data.dof.use_dof = True                                   # focus rides on the colour
+lt_root = [m[1] for m in MEN if m[0] == 'colour'][0]
 for f in list(range(0, N, 3)) + [N - 1]:
     sc.frame_set(f)
     c = cam.matrix_world.translation
-    cam.data.dof.focus_distance = max(2.0, (Vector((CX, lt_root.location.y + 3.0, 1.5)) - c).length)
+    cam.data.dof.focus_distance = max(2.0, (Vector((CX, lt_root.location.y, 1.8)) - c).length)
     cam.data.dof.aperture_fstop = 4.0
     cam.data.dof.keyframe_insert('focus_distance', frame=f)
 for fc in cam.data.animation_data.action.fcurves:
