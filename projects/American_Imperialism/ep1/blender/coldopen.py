@@ -121,14 +121,47 @@ def tower(name, x0, x1, y0, y1, top, roof_top, oc_r):
 tower('towerL', -22.2, -16.1, -0.6, 5.5, 16.2, 19.6, 0.55)
 tower('towerR', 16.1, 22.2, -0.6, 5.5, 16.2, 19.6, 0.55)
 tower('towerC', -4.3, 4.3, -1.0, 6.0, 18.4, 23.2, 0.8)
+# the central tower's openings are real recesses, so sun and shade fall inside them: three deep-set upper windows,
+# a loggia behind the big arch with glazed doors at its back, and an entrance vestibule with the palace's panelled doors
+TC = bpy.data.objects['towerC']
+GLASS, GLASS_LT, DOORW = '#55616b', '#8d9893', '#5e4330'
 for x in (-1.9, 0.0, 1.9):                                 # the central tower's three upper windows
     arch_panel(f'cwin{x}', x - 0.6, x + 0.6, -1.15, -1.0, 15.6, 17.2, 17.8, STONE_LT)
-    box(f'cwing{x}', x - 0.38, -1.05, 15.6, x + 0.38, -0.98, 17.6, '#33322c')
-box('bigarch_back', -2.4, -1.05, 9.6, 2.4, -0.98, 13.75, DARK)
+    cut(TC, cutter(f'cwincut{x}', x - 0.38, -1.3, 15.6, x + 0.38, -0.5, 17.62))
+    box(f'cwing{x}', x - 0.38, -0.58, 15.6, x + 0.38, -0.52, 17.62, GLASS)
+    box(f'cwinv{x}', x - 0.025, -0.62, 15.6, x + 0.025, -0.56, 17.62, STONE_LT)
+    box(f'cwinh{x}', x - 0.38, -0.62, 16.55, x + 0.38, -0.56, 16.61, STONE_LT)
+    box(f'cwins{x}', x - 0.45, -1.25, 15.5, x + 0.45, -0.5, 15.62, STONE_LT)
 arch_panel('bigarch', -2.6, 2.6, -1.15, -1.0, 9.6, 11.2, 13.9, STONE_LT)       # crown at 13.58, under the panel top
+cut(TC, cutter('loggiacut', -2.36, -1.3, 9.65, 2.36, 1.4, 13.7))
+box('loggia_floor', -2.36, -1.0, 9.6, 2.36, 1.42, 9.66, '#b9ad91')
+box('loggia_back', -2.36, 1.38, 9.65, 2.36, 1.48, 13.7, STONE)
+for xs in (-1, 1):                                         # glazed double doors and a transom at the back of the loggia
+    box(f'ld{xs}', xs * 0.02, 1.3, 9.66, xs * 0.82, 1.38, 12.35, DOORW)
+    for zz in (9.75, 11.0):
+        box(f'ldg{xs}{zz}', xs * 0.12, 1.27, zz + 0.12, xs * 0.72, 1.3, zz + 1.12, GLASS)
+box('ltran_f', -0.92, 1.28, 12.35, 0.92, 1.38, 13.05, DOORW)
+box('ltran', -0.8, 1.26, 12.45, 0.8, 1.28, 12.95, GLASS)
 box('balcony', -2.8, -1.8, 9.4, 2.8, -1.0, 9.65, STONE_LT)
-box('door_back', -1.6, -1.05, BZ, 1.6, -0.98, 6.2, '#26231f')
+for k in range(13):                                        # the balcony's balustrade, across the arch
+    xb = -2.4 + k * 0.4
+    box(f'lbal{k}', xb - 0.05, -1.7, 9.65, xb + 0.05, -1.6, 10.5, STONE_LT)
+box('lrail', -2.6, -1.75, 10.5, 2.6, -1.55, 10.62, STONE_LT)
 arch_panel('doorarch', -1.8, 1.8, -1.15, -1.0, BZ, 5.0, 6.6, STONE_LT)
+cut(TC, cutter('vestcut', -1.56, -1.3, BZ, 1.56, 1.85, 6.6))
+box('vest_floor', -1.56, -1.3, BZ - 0.3, 1.56, 1.85, BZ, BASE)
+box('vest_back', -1.56, 1.8, BZ, 1.56, 1.9, 6.6, STONE)
+for xs in (-1, 1):                                         # the front doors: panelled wood with etched-glass lights
+    box(f'fd{xs}', xs * 0.02, 1.72, BZ, xs * 0.78, 1.8, BZ + 3.1, DOORW)
+    box(f'fdg{xs}', xs * 0.14, 1.69, BZ + 1.3, xs * 0.66, 1.72, BZ + 2.85, GLASS_LT)
+    box(f'fdp{xs}', xs * 0.14, 1.69, BZ + 0.2, xs * 0.66, 1.72, BZ + 1.1, '#4a3424')
+box('fdtran_f', -0.9, 1.7, BZ + 3.1, 0.9, 1.8, BZ + 3.85, DOORW)
+box('fdtran', -0.78, 1.67, BZ + 3.2, 0.78, 1.7, BZ + 3.75, GLASS_LT)
+vl = bpy.data.lights.new('vestibule', 'POINT')             # a little lamplight inside the vestibule
+vl.energy, vl.color, vl.shadow_soft_size = 60, (1.0, 0.86, 0.65), 0.3
+vlo = bpy.data.objects.new('vestibule', vl)
+sc.collection.objects.link(vlo)
+vlo.location = (0, 0.6, BZ + 3.6)
 for k in range(10):                                        # the grand staircase
     box(f'st{k}', -5.4 - k * 0.15, -1.1 - (k + 1) * 0.55, GND, 5.4 + k * 0.15, -1.1 - k * 0.55, BZ - k * 0.24, STONE_DK if k % 2 else BASE)
 cyl('flagpole', (0, 2.5, 23.2), (0, 2.5, 31.5), 0.09, 0.06, IRON, n=8)
@@ -305,9 +338,8 @@ for k, yl in enumerate((6, 14, 21)):
     hlo.location = (HX, yl, HH - 0.5)
 GX, GY = HX + 0.95, HL - 0.6                               # the guard, beside the door, facing down the hall
 g_root, g_arm = person('guard', 'guard', (GX, GY, 0.05), 180)
-stand(g_arm, N, pose={'LeftArm': (70, 0, 18), 'LeftForeArm': (0, 0, 70)}, k=1.1)
-cyl('rifle', (GX + 0.3, GY - 0.05, 0.06), (GX + 0.3, GY + 0.02, 1.5), 0.022, 0.018, '#2b2622', n=6)
-cyl('rifle_stock', (GX + 0.3, GY - 0.05, 0.06), (GX + 0.3, GY - 0.04, 0.6), 0.045, 0.035, '#5a4532', n=6)
+stand(g_arm, N, pose=PG['ORDER_ARMS'], k=1.1)               # at attention, rifle grounded at his right foot
+PG['order_arms']('guard', g_arm)
 
 # ================================================================ the grounds, the mountains, palms
 terrain('lawn', -200, 200, -160, 140, 24, 16, lambda x, y: 0.4 * math.sin(x * 0.07) * math.cos(y * 0.09) - 0.25, LAWN)
@@ -353,6 +385,26 @@ for k in range(26):
 CG['palm'](21.5, -57, 17, -0.08, 12, 4.8, 77)
 CG['palm'](-5.0, -64, 21, 0.12, 12, 4.6, 78)
 CG['palm'](24.0, -36, 13, 0.05, 12, 3.8, 79)
+
+# soldiers of the Republic on the grounds: two sentries at the foot of the steps, and men walking their rounds
+# (they start walking at the cut outside; walking steps at 12 fps and moves at the speed of the planted foot)
+for i, sx in enumerate((-1, 1)):
+    s_root, s_arm = person(f'sentry{i}', 'guard', (sx * 6.3, -8.0, 0.0), 180)
+    stand(s_arm, N, pose=PG['ORDER_ARMS'], k=0.4 + i)
+    PG['order_arms'](f'sentry{i}', s_arm)
+PATROL = [((-28.0, -8.6), -90, 0.0), ((-29.3, -9.3), -90, 0.15), ((27.0, -8.9), 90, 1.2), ((1.9, -12.5), 180, 0.6)]
+TQ = [math.floor(f / FPS * 12) / 12 for f in range(N)]
+for i, ((x, y), hd, t0) in enumerate(PATROL):
+    p_root, p_arm = person(f'patrol{i}', 'patrol', (x, y, 0.0), hd)
+    TT = [max(0.0, tq - T_C2 - t0) for tq in TQ]
+    a = math.radians(hd)
+    for f, tt in enumerate(TT):
+        p_root.location = (x - math.sin(a) * PG['V'] * tt, y + math.cos(a) * PG['V'] * tt, 0.0)
+        p_root.keyframe_insert('location', frame=f)
+    for fc in p_root.animation_data.action.fcurves:
+        for kp in fc.keyframe_points:
+            kp.interpolation = 'CONSTANT'
+    bake(p_arm, WALK, TT, PG['RATE'], phase=i * 3.0)
 
 # the sun through the Queen's window: a hard spot along the sun's own direction, so the floor gets a window-shaped patch
 bpy.context.view_layer.update()

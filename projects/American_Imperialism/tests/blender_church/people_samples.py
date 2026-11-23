@@ -171,7 +171,7 @@ def blend(ra, rb, u):
     return [(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u) for a, b in zip(ra, rb)]
 
 
-def loft(rings, open_front=0.0, back_only=0.0):
+def loft(rings, open_front=0.0, back_only=0.0, front_only=0.0):
     """faces between consecutive rings; open_front leaves a gap of that half-angle (deg) at the front (+x)"""
     verts = [v for rg in rings for v in rg]
     faces = []
@@ -181,6 +181,8 @@ def loft(rings, open_front=0.0, back_only=0.0):
             if open_front and abs(a) < open_front:
                 continue
             if back_only and abs(a) < 180 - back_only:
+                continue
+            if front_only and abs(a) > front_only:
                 continue
             k2 = (k + 1) % NB
             faces.append((j * NB + k, j * NB + k2, (j + 1) * NB + k2, (j + 1) * NB + k))
@@ -193,7 +195,7 @@ ZN = bone_head('Neck').z
 ZC = SP2.z + 0.25                                          # the chest
 
 
-def skirt(hem_z, hem_r, top='waist', top_off=0.035):
+def skirt(hem_z, hem_r, top='waist', top_off=0.035, train=0.0):
     if top == 'chest':
         r0, c = ring(ZC, TORSO, top_off)
         r1, _ = ring(ZW, TORSO, top_off + 0.1, *c)
@@ -203,6 +205,8 @@ def skirt(hem_z, hem_r, top='waist', top_off=0.035):
         rings = [r1]
     rh, _ = ring(ZH, HIPLEG, top_off + 0.07, *c)
     hem = circle(hem_z, hem_r, c[0] - 0.05, c[1], sx=0.92, sy=1.0)
+    if train:                                              # the back of the hem sweeps out behind (-x is the back)
+        hem = [(x - train * max(0.0, -math.cos(-math.pi + 2 * math.pi * (k + 0.5) / NB)) ** 2, y, z) for k, (x, y, z) in enumerate(hem)]
     mid = blend(rh, hem, 0.45)
     return loft(rings + [rh, mid, hem])
 
@@ -382,6 +386,12 @@ def person(name, costume, loc, heading_deg, yaw_fix=0.0):
             md.object = arm
     for i, s in enumerate(SLOTS):
         m.data.materials[i] = mat(C[s])
+    if C.get('nape'):                                      # hair worn up: the lower back of the head shows skin
+        for p in m.data.polygons:
+            if p.material_index == SLOTS.index('hair'):
+                cz = (BM @ (sum((m.data.vertices[i].co for i in p.vertices), Vector()) / len(p.vertices))).z
+                if cz < C['nape']:
+                    p.material_index = SLOTS.index('skin')
     for pn, bone, fn, col in C['parts']:
         shell(f'{name}_{pn}', fn(), col, arm, bone)
     arm.animation_data_create()
@@ -429,6 +439,15 @@ STAND = {'LeftArm': (78, 0, 9), 'RightArm': (78, 0, -9), 'LeftForeArm': (0, 0, 8
 def stand(arm, n, pose=None, breathe=True, k=0.0):
     """a calm standing pose (arms down, a little forward), breathing on twos, for n scene frames"""
     pose = dict(STAND, **(pose or {}))
+    # the template carries a frame of its Idle animation: bent knees, one leg cocked, the hips tilted. Stand up straight:
+    # keep only the hips' facing (their twist about the spine) and clear every other bone
+    # (the Idle frame's twist is 43 degrees off square; the Walk's first frame faces straight ahead, so take the twist from that)
+    hq = [WALK.fcurves.find('pose.bones["Hips"].rotation_quaternion', index=i).evaluate(WALK.frame_range[0]) for i in range(4)]
+    tw = math.hypot(hq[0], hq[2])
+    for pb in arm.pose.bones:
+        pb.location = (0, 0, 0)
+        pb.rotation_quaternion = (hq[0] / tw, 0, hq[2] / tw, 0) if pb.name == 'Hips' else (1, 0, 0, 0)
+        pb.rotation_euler = (0, 0, 0)
     act = bpy.data.actions.new(arm.name + '_stand')
     for bn, (x, y, z) in pose.items():
         arm.pose.bones[bn].rotation_mode = 'XYZ'
@@ -464,14 +483,178 @@ def bun():
     return v + v2, f + [tuple(i + n for i in q) for q in f2]
 
 
-COSTUMES['queen'] = dict(coat='#3b2a3a', skin='#8f6a4c', hair='#1f1b18', legs='#3b2a3a', shoes='#1d1b18',
-                         parts=[('dress', 'Hips', lambda: skirt(0.1, 1.15, top='chest'), '#3b2a3a'),
-                                ('collar', 'Spine2', lambda: collar(0.2, 0.035), '#4a3648'),
-                                ('sash', 'Spine1', sash, '#e6d6ae'), ('bun', 'Head', bun, '#1f1b18')])
-COSTUMES['guard'] = dict(coat='#232c40', skin='#d9b38f', hair='#3a2e25', legs='#2b3346', shoes='#15171c',
-                         parts=[('belt', 'Hips', lambda: band(ZW, 0.16), '#e8e2d4'),
-                                ('collar', 'Spine2', lambda: collar(0.16), '#232c40'),
-                                ('cap', 'Head', peaked_cap, '#1b2333'), ('peak', 'Head', visor, '#111111')])
+def tube(p0, p1, prof, n=10, caps=False):
+    """rings round the segment p0 -> p1 (raw units); prof = [(fraction along, radius), ...]"""
+    p0, p1 = Vector(p0), Vector(p1)
+    ax = p1 - p0
+    L = ax.length
+    ax.normalize()
+    u = ax.orthogonal().normalized()
+    w = ax.cross(u)
+    verts, faces = [], []
+    for t, r in prof:
+        c = p0 + ax * (L * t)
+        for i in range(n):
+            a = 2 * math.pi * i / n
+            verts.append(tuple(c + (u * math.cos(a) + w * math.sin(a)) * r))
+    for j in range(len(prof) - 1):
+        for i in range(n):
+            faces.append((j * n + i, j * n + (i + 1) % n, (j + 1) * n + (i + 1) % n, (j + 1) * n + i))
+    if caps:
+        for j, t in ((0, prof[0][0]), (len(prof) - 1, prof[-1][0])):
+            verts.append(tuple(p0 + ax * (L * t)))
+            faces += [(j * n + i, j * n + (i + 1) % n, len(verts) - 1) for i in range(n)]
+    return verts, faces
+
+
+def bone_tail(n):
+    return BM @ T_ARM.data.bones[n].tail_local
+
+
+def limb_r(bone):
+    """the radius of a limb: how far its vertices sit from the bone's axis"""
+    a, b = bone_head(bone), bone_tail(bone)
+    ax = (b - a).normalized()
+    ds = [((p - a) - ax * (p - a).dot(ax)).length for p, g in VPTS if g == bone]
+    ds.sort()
+    return ds[int(len(ds) * 0.9)] if ds else 0.15
+
+
+def puff(side):
+    """a leg-of-mutton sleeve head: full at the shoulder, gathered in above the elbow"""
+    b = side + 'Arm'
+    r = limb_r(b)
+    return tube(bone_head(b), bone_tail(b), [(-0.06, r * 1.0), (0.08, r * 1.42), (0.28, r * 1.58), (0.5, r * 1.36), (0.66, r * 1.06)], n=12, caps=True)
+
+
+def cuff(side):
+    b = side + 'ForeArm'
+    r = limb_r(b)
+    return tube(bone_head(b), bone_tail(b), [(0.84, r * 1.06), (0.92, r * 1.28), (1.0, r * 1.32)], n=10)
+
+
+def hairdo():
+    """hair drawn smoothly back from the face over the head to the nape"""
+    rings, c = [], None
+    for z, off in ((HZTOP - 0.86, 0.0), (HZTOP - 0.7, 0.004), (HZTOP - 0.55, 0.03), (HZTOP - 0.36, 0.045), (HZTOP - 0.14, 0.035)):
+        rg, c2 = hring(z, off, c)
+        c = c or c2
+        rings.append(rg)
+    rings.append(scaled(rings[-1], 0.62, c, 0.12))
+    return capped(rings[1:], open_front=78)                # crown and sides, clear of the face; stops at the hairline (the nape is bare)
+
+
+def topknot():
+    """the knot of hair high on the back of the crown"""
+    cx, cy = C0[0] - 0.2, C0[1]
+    v, f = dome(HZTOP - 0.02, 0.21, 0.9, 10, 3, cx, cy)
+    v2, f2 = dome(HZTOP - 0.02, 0.21, -0.55, 10, 2, cx, cy)
+    n = len(v)
+    return v + v2, f + [tuple(i + n for i in q) for q in f2]
+
+
+def fringe():
+    """a short curled fringe along the front hairline"""
+    rg, c = hring(HZTOP - 0.3, 0.06)
+    V_, F_ = [], []
+    for k in range(NB):
+        a = math.degrees(-math.pi + 2 * math.pi * (k + 0.5) / NB)
+        if abs(a) > 55:
+            continue
+        x, y, z = rg[k]
+        v, f = dome(z + 0.02, 0.065, 0.9, 6, 2, x, y)
+        n = len(V_)
+        V_ += v
+        F_ += [tuple(i + n for i in q) for q in f]
+    return V_, F_
+
+
+def lace_collar():
+    """a low lace collar round the base of the neck, so skin shows between it and the hair"""
+    r0, c = ring(ZN + 0.04, {'Neck'}, 0.1, band=0.08, floor_r=0.12)
+    r1, _ = ring(ZN + 0.13, {'Neck'}, 0.075, *c, band=0.08, floor_r=0.1)
+    return loft([r0, r1])
+
+
+NAPE = HZTOP - 0.7                                          # with hair swept up, the head below this line at the back is skin
+
+
+def jabot():
+    """lace falling from the throat down the front of the bodice"""
+    r0, c = ring(ZN - 0.1, TORSO | {'Neck'}, 0.06, band=0.08)
+    r1, _ = ring(ZC - 0.1, TORSO, 0.07, *c)
+    return loft([r0, r1], front_only=12)
+
+
+def buttons(col_z0=None, n=6):
+    """a column of small buttons down the front of a tunic"""
+    V_, F_ = [], []
+    for k in range(n):
+        z = ZW + 0.12 + k * (ZN - 0.2 - ZW - 0.12) / (n - 1)
+        fx = max((q.x for q, g in VPTS if g in TORSO and abs(q.z - z) < 0.09 and abs(q.y - HIPS.y) < 0.12), default=0.4)
+        p = Vector((fx + 0.035, HIPS.y, z))                # on the body's midline, just proud of the front
+        v, f = tube(p - Vector((0.02, 0, 0)), p + Vector((0.03, 0, 0)), [(0, 0.045), (1, 0.045)], n=6, caps=True)
+        m = len(V_)
+        V_ += v
+        F_ += [tuple(i + m for i in q) for q in f]
+    return V_, F_
+
+
+def sling_rifle():
+    """a rifle slung muzzle-up across the back: butt at the left hip, muzzle over the right shoulder"""
+    rg, c = ring(ZC, TORSO, 0.0)
+    bx = min(p[0] for p in rg) - 0.16                       # behind the shoulder blades (-x is the back)
+    L = 1.25 / K
+    top = Vector((bx, c[1] - 0.55, ZN + 1.0))
+    dy = 1.25
+    bot = Vector((bx + 0.05, c[1] + 0.7, top.z - math.sqrt(L * L - dy * dy)))
+    v1, f1 = tube(bot, top, [(0.0, 0.13), (0.42, 0.1), (0.5, 0.075)], n=6, caps=True)
+    v2, f2 = tube(bot, top, [(0.45, 0.05), (1.0, 0.04)], n=6, caps=True)
+    return v1, f1, v2, f2
+
+
+def rifle_stock():
+    v1, f1, _, _ = sling_rifle()
+    return v1, f1
+
+
+def rifle_barrel():
+    _, _, v2, f2 = sling_rifle()
+    return v2, f2
+
+
+QUEEN_SKIN = '#8a6143'                                       # a warm medium brown, after her photographs
+DRESS, LACE = '#29242b', '#ebe4d3'
+QHAIR = '#36302c'                                          # dark, going grey by 1895
+COSTUMES['queen'] = dict(nape=NAPE, coat=DRESS, skin=QUEEN_SKIN, hair=QHAIR, legs=DRESS, shoes='#1d1b18',
+                         parts=[('dress', 'Hips', lambda: skirt(0.03, 1.2, train=0.55), DRESS),
+                                ('waist', 'Hips', lambda: band(ZW, 0.09, off=0.05), '#1d1a1f'),
+                                ('lace', 'Spine2', lace_collar, LACE), ('jabot', 'Spine2', jabot, LACE),
+                                ('puffL', 'LeftArm', lambda: puff('Left'), DRESS), ('puffR', 'RightArm', lambda: puff('Right'), DRESS),
+                                ('cuffL', 'LeftForeArm', lambda: cuff('Left'), LACE), ('cuffR', 'RightForeArm', lambda: cuff('Right'), LACE),
+                                ('hairdo', 'Head', hairdo, QHAIR), ('knot', 'Head', topknot, QHAIR), ('fringe', 'Head', fringe, QHAIR)])
+GUARD_PARTS = [('belt', 'Hips', lambda: band(ZW, 0.16), '#e8e2d4'),
+               ('collar', 'Spine2', lambda: collar(0.16), '#232c40'),
+               ('buttons', 'Spine2', buttons, '#c9a648'),
+               ('cap', 'Head', peaked_cap, '#1b2333'), ('peak', 'Head', visor, '#111111')]
+COSTUMES['guard'] = dict(coat='#232c40', skin='#d9b38f', hair='#3a2e25', legs='#2b3346', shoes='#15171c', parts=GUARD_PARTS)
+COSTUMES['patrol'] = dict(COSTUMES['guard'], parts=GUARD_PARTS + [('stock', 'Spine2', rifle_stock, '#5a4532'), ('barrel', 'Spine2', rifle_barrel, '#2b2622')])
+
+ORDER_ARMS = {'LeftArm': (84, 0, 5), 'LeftForeArm': (0, 0, 4), 'RightArm': (82, 0, -4), 'RightForeArm': (0, 0, -24)}
+
+
+def order_arms(name, arm, frame=0):
+    """a rifle standing on its butt beside the right foot, the barrel in the right hand (placed in the world, at frame)"""
+    sc.frame_set(frame)
+    bpy.context.view_layer.update()
+    h = arm.matrix_world @ arm.pose.bones['RightHand'].head
+    gz = arm.parent.matrix_world.translation.z
+    x, y = h.x, h.y
+    G['cyl'](name + '_stock', (x, y, gz + 0.01), (x, y, gz + 0.72), 0.042, 0.03, '#5a4532', n=6)
+    G['cyl'](name + '_butt', (x, y, gz + 0.01), (x, y, gz + 0.2), 0.05, 0.046, '#5a4532', n=6)
+    G['cyl'](name + '_barrel', (x, y, gz + 0.6), (x, y, gz + 1.32), 0.017, 0.014, '#2b2622', n=6)
+    return h
+
 
 FOOT = 0.212                                               # raw units per action frame while a foot is planted (measured)
 RATE = 17.0                                                # action frames per second: a calm walk
