@@ -16,7 +16,7 @@ a = np.array(d['data'], dtype=np.float32).reshape(h, w)
 UP = 4                                              # upsample and soften, so the cut edges are smooth curves, not pixels
 big = cv2.resize(a, (w * UP, h * UP), interpolation=cv2.INTER_CUBIC)
 big = cv2.GaussianBlur(big, (0, 0), 2.4)
-SOFT = float(__import__('os').environ.get('SOFT', 7.0))   # the land above the shore is cut from a softer surface: rounded sheets
+SOFT = float(__import__('os').environ.get('SOFT', 12.0))   # the land above the shore is cut from a softer surface: rounded sheets
 soft = cv2.GaussianBlur(big, (0, 0), SOFT)
 sx, sy = d['kmW'] / 10.0 / (w * UP), d['kmH'] / 10.0 / (h * UP)   # map units per upsampled pixel
 cx, cy = w * UP / 2, h * UP / 2
@@ -42,7 +42,7 @@ if WATER:                                           # a mapped shoreline (e.g. T
     water = np.asarray(im) < 128
     big = np.where(water, np.minimum(big, -2.0), np.maximum(big, 2.0))
     soft = np.where(water, -9999.0, soft)
-KER = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))
+KER = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 17))
 
 
 def rings_at(level):
@@ -50,7 +50,7 @@ def rings_at(level):
     m = ((soft if inland else big) >= level).astype(np.uint8) * 255
     if inland:                                      # no specks or hairline slivers: open, then close, then drop the small bits
         m = cv2.morphologyEx(cv2.morphologyEx(m, cv2.MORPH_OPEN, KER), cv2.MORPH_CLOSE, KER)
-    amin, eps = (500, 1.8) if inland else (60, 0.8)
+    amin, eps = (900, 2.4) if inland else (60, 0.8)
     cs, hier = cv2.findContours(m, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
     shapes = []
     if hier is None:

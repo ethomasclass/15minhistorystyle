@@ -2,7 +2,7 @@
 # from tools/relief_bake.py (AWS Terrarium elevation: SRTM on land, GEBCO under the sea): the sea floor in slate-teal
 # shelves, the island in coral sheets (Hawaiʻi is the subject), on the dark desk. Pins are cut-corner teal tablets on posts.
 #   first: python3 tools/geo_bake.py heightmap assets/geo/oahu_hm.json --name=oahu --bbox=21.22,21.73,-158.30,-157.62 --w=440 --h=355 --zoom=11
-#          python3 tools/relief_bake.py assets/geo/oahu_hm.json assets/geo/oahu_relief.json 200 400 assets/geo/oahu_water.json   (SOFT=7 blur for the inland sheets)
+#          python3 tools/relief_bake.py assets/geo/oahu_hm.json assets/geo/oahu_relief.json 250 400 assets/geo/oahu_water.json   (SOFT=12 blur for the inland sheets)
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python map3d.py -- <out_dir> [scale%] [mode]
 #   mode: top (straight down, like the flat island card), tilt (three-quarter from the south), rise (frames in $FRAMES:
 #         the sheets rise from flat, stepped at 12 fps, while the camera tilts down toward Honolulu harbor)
