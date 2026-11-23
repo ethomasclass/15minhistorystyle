@@ -155,8 +155,10 @@ renders/     720p video, thumbnails, (LFS) 1080p master
 - "Plan a series" / "a multi-part video": `references/script-writing.md` §10 (one arc every episode follows, a unit question,
   a recurring card, hinge years, a callback table). Worked example: `projects/American_West/SERIES.md` and its episode outlines
   in the style repo; `projects/Reconstruction/` for a series built around the collage board.
-- "Music for a new video": reuse the library first; for new cues give the user a copy-paste Suno doc like
-  `projects/American_West/SUNO_PROMPTS.md` (style + tempo, structure tags, minimum lengths); levels with `bed()`.
+- "Music for a new video": reuse library cues that truly fit (not ones already in three or more videos); for new cues give the
+  user a copy-paste Suno doc like `projects/American_Imperialism/SUNO_PROMPTS.md` (style + tempo, structure tags, minimum lengths),
+  with **a different sound world for every cue** and the channel's worn-out sounds in Exclude (`references/voice-and-audio.md`,
+  "Mix up the sound"); levels with `bed()`.
 - "Send me the script" / "a readable file": `python3 tools/script_pdf.py "<Title>" "<Subtitle>" review/<Slug>_script.pdf`.
 - Working inside an existing video project (not the template): the same kit lives under `src/v3/` or `src/jh/`
   there; read that project's `HANDOFF.md` or `README.md` first and follow its paths.

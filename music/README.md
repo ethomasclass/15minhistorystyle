@@ -196,6 +196,10 @@ These cues have become the channel's regulars:
   > vocals, choir, lyrics, humming, drum kit, EDM, trap, pop, rock, synth lead, dubstep, rap, gospel vocals, banjo, comedic, upbeat
 
   Drop `comedic, upbeat` when the cue is meant to be funny.
+- **Variety rule (Nov 2026):** also add `pizzicato strings, felt piano, ticking clock, solo cello` to the Exclude line unless the
+  cue truly needs one; the library already has plenty of those. Give each new cue its own sound world (see
+  `projects/American_Imperialism/SUNO_PROMPTS.md`), and check a cue's "Used in" column before reusing it: three or more videos
+  means it's worn out.
 - Suno makes 2+ minute tracks. Pick the take whose **first 30–40 seconds** already sound like the cue, because most cues are built from their opening.
 - Write the Styles text as: genre and period, instruments, tempo and pulse, how it changes over time, then "documentary, restrained, space for narrator, instrumental". The prompts for every Suno cue are below.
 - **One-melody trick** (planned for Ouija, never made): make the theme first, then make each other cue as a **Cover** of that take with new Styles text, so one tune comes back in several arrangements.

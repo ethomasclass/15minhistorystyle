@@ -320,6 +320,10 @@ column says where each was made.
 - **ElevenLabs Music stays the in-project generator** (`tools/music_eleven.py`); **Suno** cues are made by you from written prompts
   (West series: `projects/American_West/MUSIC.md`, prefix `aw_`). Reuse the library first; every new cue is written for reuse beyond
   its video. Mureka was looked at and set aside (licensing questions).
+- **Mix up the music styles (Nov 2026).** Recent videos sounded samey (felt piano, pizzicato, ticking clocks, solo cello over a
+  string pad). Every new cue gets its own sound world and a one-line idea; those habits go in Suno's Exclude line; library cues
+  already in three or more videos are retired unless you ask. Be creative: new instruments, genres and recording textures
+  (worked example: `projects/American_Imperialism/SUNO_PROMPTS.md`).
 - **No AI imitation of Native music** ("Native flute", "tribal drums", chanting come out as Hollywood stereotype). Grave cues for
   Native history use the channel's own strings and piano; dignity through restraint.
 

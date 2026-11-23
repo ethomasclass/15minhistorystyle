@@ -156,6 +156,17 @@ shifts. Re-check stills for that chapter after re-voicing.
   write the turn into the section tags, or make two takes and join them with `ep1/tools/collapse.py`, a tape-stop); words
   like *tremolo*, *drone* and *bleak* make a cue sound like horror (the first `aw_panic`); put `horror, eerie, drone, string
   tremolo` in its Exclude. Suno files may run long with silence at the end: trim them (`aw_long_grief` was cut to 3:04).
+- **Mix up the sound (Ellis, Nov 2026: "we've been samey").** Recent cues lean on the same few sounds: felt piano, pizzicato,
+  a ticking clock, a solo cello over a string pad, clarinet and bassoon, parlor piano. For every new video:
+  1. **Give each new cue its own sound world** and say the idea in one line (a concept, not just a mood). Worked example:
+     `projects/American_Imperialism/SUNO_PROMPTS.md` (two brass bands in different keys for the series question, a wax-cylinder
+     banjo two-step for a sales pitch, two pianos out of step for a plan unfolding, a ship's bell, a reed pump organ, glass
+     harmonica). Reach for instruments, genres and recording textures the library doesn't have yet.
+  2. **Ban the habits in Exclude:** add `pizzicato strings, felt piano, ticking clock, solo cello` to every cue's Exclude line
+     unless that cue truly needs one of them.
+  3. **Reuse with a limit:** before reusing a library cue, check its "Used in" column; skip cues already in three or more videos
+     (`j_intrigue`, `r_cold_open`, `j_grief` and others are worn out) unless the user asks for them.
+  4. Show the palette as a table (cue, sound world, idea) at the top of the prompt doc, so the variety is visible at a glance.
 - **Generate with ElevenLabs** (`tools/music_eleven.py <name>`; how Reconstruction's `rc_` cues were made):
   1. The key is the narration key, in `.env`. Check the budget first (`GET /v1/user/subscription`); music costs
      roughly 850 credits a minute, so make 60–80 s cues and reuse them across chapters.
