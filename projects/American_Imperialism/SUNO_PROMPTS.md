@@ -1,241 +1,360 @@
-# Suno prompts: American Imperialism, Episode 1 (v2, a new palette)
+# Suno prompts: American Imperialism, Episode 1 (v3, one tune in three voices)
 
-Copy each **Style** box and its **Lyrics** box (structure tags only) into Suno. Everything else is labels.
+Built from `research/SCORING_RESEARCH.md`. v2 gave every cue its own instruments but nothing tied them together. v3 keeps
+the variety in the **instruments** and puts one short **tune** through the whole series, the way documentary scores do it.
 
-**Why v2:** the channel's recent cues lean on the same few sounds (felt piano, pizzicato, ticking clocks, a solo cello over a
-string pad, clarinet and bassoon). This set gives every cue its own sound world, and the exclude list now bans those habits so
-Suno can't drift back to them.
+## The idea: one argument, three voices
 
-| Cue | Sound world | The idea |
-|---|---|---|
-| `ai_theme` | A noble trumpet motif and a dark low answer, arguing the whole way through | The series question: betrayal or expression, never settled |
-| `ai_locked_room` | Glass and bowed metal tones, a faint band heard through a closed window | Confinement: the world goes on outside, muffled |
-| `ai_old_rule` | Hammered dulcimer and wooden flute, then wide open strings that stop dead | A young country minding its own business, until the continent runs out |
-| `ai_pitch_meeting` | A banjo two-step recorded like an 1890s wax-cylinder record | A sales pitch on the newest gadget of the day; four sections, one per pitcher |
-| `ai_same_islands` | A ship's bell struck four times, then a pipe organ chord | Four arguments, one harbor |
-| `ai_heist` | Two pianos in an interlocking minimalist pulse, a snare approaching | A plan working like a machine |
-| `ai_he_has` | A harpsichord's royal chords, taken over by an American brass choir | The crown changes hands |
-| `ai_under_protest` | One old reed pump organ, a hymn on a weekday | Quiet dignity (she wrote hymns herself) |
+| Voice | Stands for | Sound | Rule |
+|---|---|---|---|
+| **The Claim** | What America said | The tune proud and sincere: cornet band, major key | Always played straight, never mocked |
+| **The Deed** | What America did | The same tune bent: euphonium and tuba, slower, a little flat; or a player piano | Never louder than the Claim. Same tune, not a villain |
+| **The Answer** | Who answered back | Its own tune, new each episode. Ep 1: one small reed organ, a hymn in the tradition Liliʻuokalani wrote in | Never the Claim's tune |
 
-## Settings (same for every cue)
+The series theme is the Claim and the Deed played against each other in two keys at once (the 1890s composer Charles Ives
+built pieces from two bands marching past each other in different keys). The argument never settles until chapter 9, where
+the two play together, in one key, once: "the answer is both."
 
-- **Custom** mode, **Instrumental OFF**, and paste only the structure tags in the Lyrics box (they start with [Instrumental],
-  so there are no words to sing). If a take hums or sings, throw it out.
-- **Exclude styles** (paste every time):
+**Silence is part of the score:**
+- **The Declaration line** (ch 2, twice in ch 6, ch 9) is always silent. The cue before it stops dead on the cut, so the
+  missing music becomes the sign.
+- **Humor cuts** go to silence. The music comes back on the first beat of a **new** phrase, never where it stopped.
+- **No music** under "I yield to the superior force," and none under the Queen's own words in chapter 8.
+
+## How to make them
+
+Make **cue 1 first**. Most of the others are **Covers** of it (Suno's Cover keeps the melody and changes the style), so the
+tune carries through. If a Cover loses the tune, make that cue fresh with the same Style text.
+
+**Settings:**
+- **Custom** mode. Paste the **Style** box and the **Lyrics** box (structure tags only, no words).
+- **Instrumental:** v2 used OFF with tags; the music library's notes say ON. On cue 1, try **both** and tell me which one
+  stayed free of voices. Use that setting for the rest.
+- **Exclude styles:** a short core every time, plus the few extra words each cue lists:
 
 ```
-vocals, choir, lyrics, humming, whistling, drum kit, EDM, trap, pop, rock, dubstep, rap, synth lead, epic trailer, cartoon, comedic, ukulele, luau, tiki, hula, slack key guitar, steel guitar, exotica, western movie theme, pizzicato strings, felt piano, ticking clock, solo cello
+vocals, choir, humming, wordless vocals, drum kit, synth
 ```
 
-- Make **2 to 4 takes**; keep the one whose **first 30 to 40 seconds** already sound right.
-- If a take is too short, **Extend** from its last good section. Longer is always fine: I trim and fade.
-- **Download as MP3**, named exactly as shown (e.g. `ai_theme.mp3`), and send them back. I level them about 13 LU under the
-  voice.
-- The humor cuts play in **silence**, so the cues ask for clean stops I can cut into.
+- Make **2 to 4 takes**. Keep the one whose **first 30 to 40 seconds** already sound right and keep to the tempo and key.
+- Too short? **Extend** from the last good section. Longer is fine: I trim, fade and cut the stops myself.
+- Download as **MP3**, named exactly as shown, and send them back. I level them about 13 LU under the voice and audition
+  every take under the real narration. A take that hides the consonants gets rejected.
+- **Get Stems**, if your plan has it, on cues 2, 6 and 9: I may need to pull the lead out under busy lines.
 
-**On Hawaiʻi and the music:** still no "island" sounds (no ukulele, steel or slack key guitar). The reed organ in cue 8 is the
-nearest thing to a nod: hymns were at the center of 1890s Honolulu, and Liliʻuokalani wrote them. The *Aloha ʻOe* offer still
-stands: her song (1878) is in the public domain, and a quiet arrangement made by us could replace cue 8 under her own words.
+**Still banned** (the channel's overused sounds and the island clichés): felt piano, pizzicato, ticking clocks, solo cello
+over a pad, clarinet and bassoon, ukulele, steel or slack-key guitar, hula drums. And never type "Hawaiian", "island" or
+"tropical" as a style: name instruments instead.
+
+| # | File | Voice | Used in | Make it as |
+|---|---|---|---|---|
+| 1 | `ai_motif.mp3` | Claim | the seed (and the ch 2 rise) | new |
+| 2 | `ai_theme.mp3` | Claim vs Deed | ch 2, ch 9, every episode | Cover of 1 |
+| 3 | `ai_locked_room.mp3` | (room) | ch 1, ch 8 room | new |
+| 4 | `ai_palace_band.mp3` | Claim as a waltz | through the wall in ch 1; the ch 8 flag change | Cover of 1 |
+| 5 | `ai_old_rule.mp3` | Claim, small | ch 3 | Cover of 1 |
+| 6a-d | `ai_pitch_business/admiral/preacher/scientist.mp3` | Claim, four ways | ch 4 | Covers of 1, same tempo and key |
+| 7 | `ai_four_bells.mp3` | (organ) | ch 5, into the dive to Honolulu | new |
+| 8 | `ai_mechanism.mp3` | Deed | ch 6 | Cover of 1 |
+| 9 | `ai_charge.mp3` | signature | ch 7, every episode | new |
+| 10 | `ai_answer.mp3` | Answer | ch 8, ch 9's last chord | new |
+| 11 | `ai_ledger.mp3` | all three | ch 9, every episode | new |
+| 12 | `ai_both.mp3` | Claim and Deed together | ch 9 "the answer is both" | Cover of 1 |
+| 13 | `ai_next.mp3` | (tease) | ch 9 end, the *Maine* | new |
 
 ---
 
-### 1. `ai_theme.mp3`: the series theme, "The Argument"
-*Used in:* ch 2 (the 1776 line), ch 9 (the answer, the Ledger, the end screen); every episode's last chapter.
-*Length:* **at least 2:00**
+### 1. `ai_motif.mp3`: the tune, plainly
+*Length:* **0:40 or more**. *Make first.* Everything else grows from this. It should be hummable after one hearing:
+a short phrase that opens on a rising bugle-like leap, simple as a hymn.
 
-The conflict runs the whole length, not just one moment: a proud voice states the idea, a dark voice answers with the same tune
-turned wrong, and they never agree. Try **A** first; **B** and **C** are other ways to get the same conflict if A's takes come
-out too polite.
-
-**A. The Argument** (recommended)
+**Style**
 ```
-a documentary main theme built as an argument that never resolves: a proud, bright solo trumpet states a short noble patriotic motif, and each time a low, dark bass clarinet with low brass answers with the same motif bent into minor and slightly wrong; the two trade phrases the whole way through and overlap more as it goes, the harmony underneath shifting between major and minor so it never settles; serious and restrained, never loud, one snare roll at the midpoint, ends with the two voices holding notes that clash, 72 BPM, 4/4, C major against C minor; documentary underscore, sparse, space for narrator, instrumental
+1890s American cornet band, solo cornet melody, simple noble hymn-like tune opening with a rising bugle leap, 72 BPM, 4/4, B-flat major, sincere, clean modern recording, regular 8-bar phrases, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: solo trumpet, the noble motif]
-[Answer: bass clarinet and low brass, the motif in minor, wrong]
-[Verse: trumpet and the low voice trade phrases]
-[Build: they overlap, the harmony shifting major to minor, a snare roll]
-[Verse: the argument continues, quieter]
-[Outro: both hold clashing notes, unresolved]
+[Intro: solo cornet, the tune once, alone]
+[Verse: soft tuba and bass drum join, same tune]
+[Outro: cornet alone, final cadence]
 [End]
 ```
+*Exclude extra:* `trumpet fanfare, orchestra, epic`
 
-**B. Proud and Wrong** (a hymn harmonized in the wrong key, all the way through)
-```
-a stately patriotic hymn on a small brass ensemble, the melody noble and sincere, but harmonized throughout by low strings in a different, darker key, so every chord sounds proud and wrong at the same time; the clash never goes away; slow and dignified, builds once to a restrained swell where the clash is strongest, then thins, ends on a chord that cannot resolve, 66 BPM, 4/4, polytonal, D major over E-flat minor; documentary underscore, sparse, space for narrator, instrumental
-```
+---
 
+### 2. `ai_theme.mp3`: the series theme, "Claim and Deed"
+*Length:* **2:00 or more**. *Cover of `ai_motif`.* The tune proud on cornet; the same tune answered by euphonium and tuba,
+slower and a half step flat, like a second band in the wrong key. They overlap more and more and never agree.
+
+**Style**
+```
+documentary theme, two brass bands in different keys, cornet plays the tune in B-flat major, euphonium and tuba answer the same tune slower and slightly flat, 72 BPM, 4/4, restrained, unresolved, sparse, instrumental
+```
+**Lyrics**
 ```
 [Instrumental]
-[Intro: the hymn's first phrase, brass, with the clashing low strings]
-[Verse: the full hymn, proud and wrong]
-[Build: one restrained swell, the clash strongest]
-[Break: thins to brass and one low string note]
-[Outro: an unresolved polytonal chord, fades]
+[Intro: solo cornet, the tune]
+[Verse: euphonium and tuba answer, the tune bent and flat]
+[Verse: cornet and euphonium trade phrases, field drum]
+[Bridge: both at once, two keys clashing, soft]
+[Outro: cornet and tuba hold clashing notes]
 [End]
 ```
+*Exclude extra:* `trumpet, orchestra, epic trailer, choir`
 
-**C. The March That Can't March** (pride on unsteady feet)
-```
-a stately American military march on brass, field drum and fife, with a proud, confident melody, but in an uneven 7/8 meter so it keeps stumbling and never falls into step; the field drum insists on the beat while the melody pulls against it; serious, not comic, restrained, room to breathe, ends mid-phrase on a held unresolved chord, 84 BPM, 7/8, B-flat major leaning minor; documentary underscore, sparse, space for narrator, instrumental
-```
+---
 
+### 3. `ai_locked_room.mp3`: confinement
+*Length:* **1:30 or more**. *New.* The room itself: still, glassy, a held breath. (The band outside is cue 4, a separate
+file, so I can filter it "through the wall" and bring it back in chapter 8.)
+
+**Style**
+```
+minimal ambient score, bowed vibraphone, glass harmonica, low bowed double bass drone, 60 BPM, free time, D minor, still and confined, very sparse, instrumental
+```
+**Lyrics**
 ```
 [Instrumental]
-[Intro: field drum alone, the uneven 7/8 pattern]
-[Verse: brass and fife, the proud march melody, never quite in step]
-[Break: drum alone again]
-[Verse: the march returns, darker]
-[Outro: stops mid-phrase, a held unresolved chord]
+[Intro: one bowed vibraphone note]
+[Verse: glass harmonica, slow, the bass drone under]
+[Outro: the drone alone, fading]
 [End]
 ```
+*Exclude extra:* `piano, strings swell, percussion`
 
-### 2. `ai_locked_room.mp3`: the cold open, "Through the Wall"
-*Used in:* ch 1 and the start of ch 2 (the room, the hall, the pull back to the palace).
-*Length:* **at least 1:15**
+---
 
+### 4. `ai_palace_band.mp3`: the band outside
+*Length:* **1:00 or more**. *Cover of `ai_motif`.* The tune as a slow waltz by a European-style military band, the kind
+Henri Berger led in Honolulu. Record it plain: I'll muffle it myself. In chapter 8 it plays under the flag change.
+
+**Style**
 ```
-a still, close, airless room made of sound: long glassy tones of bowed vibraphone and glass harmonica that hang in the air and fade, a very low bowed double bass note now and then, and, as if heard through a closed window from far across the grounds, a faint muffled brass band playing a slow waltz that drifts in and out; patient, dignified, confined; no beat, free time; ends on one bowed glass tone fading to silence; documentary underscore, sparse, space for narrator, instrumental
+1890s military brass band waltz, cornets, alto horns, tuba, bass drum, the tune in slow 3/4, 84 BPM, B-flat major, stately, outdoor band, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: a single bowed glass tone, long silence]
-[Verse: glass harmonica and bowed vibraphone, low bowed bass]
-[Bridge: a faint distant brass waltz drifts in, muffled, then away]
-[Outro: one bowed tone fades to silence]
+[Verse: the band plays the tune as a waltz]
+[Verse: again, fuller]
+[Outro: final chord]
 [End]
 ```
+*Exclude extra:* `orchestra, strings, accordion`
 
-### 3. `ai_old_rule.mp3`: the old guard, "Minding Its Own Business"
-*Used in:* ch 3 (isolation, Alaska, the closed frontier). Replaces the library's `g_founding`.
-*Length:* **at least 1:15** (needs about 45 s)
+---
 
+### 5. `ai_old_rule.mp3`: a young country minding its own business
+*Length:* **1:30 or more**. *Cover of `ai_motif`.* Small and homespun, fife and field drum, widening into a village band
+as the country grows west. I'll cut it dead on "The continent was full."
+
+**Style**
 ```
-a modest, homespun early American tune on hammered dulcimer and wooden flute over a soft upright bass, unhurried and self-contained, like a small town that never needs to leave home; one clean stop in the middle; in the second half the tune widens into open, airy strings as if looking out across a whole continent, then stops abruptly on an open chord, as if it has run out of room, 92 BPM, 3/4, D major; documentary underscore, space for narrator, instrumental
+1860s American fife and drum, wooden fife plays the tune, field drum, then a small village cornet band joins, 96 BPM, 2/4 march, B-flat major, innocent and open, regular 8-bar phrases, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: hammered dulcimer alone, the tune]
-[Verse: wooden flute and upright bass join, easy and modest]
-[Stop]
-[Verse: the tune again]
-[Build: open airy strings widen underneath]
-[Outro: abrupt stop on an open chord]
+[Intro: fife alone, the tune]
+[Verse: field drum joins]
+[Verse: small cornet band joins, wider]
+[Outro: full band, final cadence]
 [End]
 ```
+*Exclude extra:* `bagpipes, celtic, orchestra`
 
-### 4. `ai_pitch_meeting.mp3`: the pitch room, "The Wax Cylinder Pitch"
-*Used in:* ch 4, the four pitches (about 2:30).
-*Length:* **at least 3:00**
+---
 
+### 6. The four pitches (`ai_pitch_business`, `ai_pitch_admiral`, `ai_pitch_preacher`, `ai_pitch_scientist`)
+*Length:* **0:50 or more each**. *Covers of `ai_motif`, all at **108 BPM in B-flat**,* so I can cut from one to the next.
+All four play it **straight**: each pitcher believes what he's selling. The silences ("one room," "It wasn't.") are mine.
+
+**6a. `ai_pitch_business.mp3`: the Businessman**
 ```
-a confident, polished sales pitch in music, recorded like an 1890s wax cylinder phonograph record: thin, warm, narrow, a gentle crackle and hiss; a bright five-string banjo and a small parlor orchestra play a strutting two-step; four short sections with clean stops between them, each a different pitch: first jaunty banjo and cornet, prosperous; then brisk bugle calls and a parade snare, naval and proud; then a reed organ hymn, earnest and pious; then a cold, precise xylophone figure over a dry snare rim, clinical and uneasy; never loud, persuasive with a hint of menace, 100 BPM, 2/4, G major turning minor at the end; documentary underscore, space for narrator, instrumental
+1890s cornet band two-step, cornets and tuba, fingerpicked classic parlor banjo, the tune in 6/8, 108 BPM, B-flat major, prosperous and confident, regular 8-bar phrases, instrumental
 ```
-
+**6b. `ai_pitch_admiral.mp3`: the Admiral**
+```
+naval brass, bugle calls quoting the tune, field drum, low brass chords, 108 BPM, 4/4, B-flat major, disciplined and expansive, short phrases with space between, instrumental
+```
+**6c. `ai_pitch_preacher.mp3`: the Preacher**
+```
+instrumental gospel hymn tune, pipe organ and brass quartet, the tune as a Sunday hymn, 108 BPM, 4/4, B-flat major, public and confident, regular phrases, instrumental
+```
+**6d. `ai_pitch_scientist.mp3`: the "Scientist"**
+```
+precise player piano, xylophone, snare rim clicks, the tune exact and mechanical, 108 BPM, 4/4, B-flat major, clinical and self-assured, regular 8-bar phrases, instrumental
+```
+**Lyrics** (the same for all four)
 ```
 [Instrumental]
-[Intro: banjo alone, a strutting two-step figure]
-[Section 1: banjo and cornet, prosperous]
-[Stop]
-[Section 2: bugle calls and parade snare, naval and proud]
-[Stop]
-[Section 3: reed organ hymn, earnest]
-[Stop]
-[Section 4: cold xylophone and snare rim, clinical, uneasy]
-[Outro: back to the banjo figure alone, then stops]
+[Verse: the tune]
+[Verse: the tune again, a little fuller]
+[Outro: final cadence]
 [End]
 ```
+*Exclude extra:* 6a `bluegrass, country, minstrel`; 6b `trumpet fanfare, epic`; 6c `choir, gospel vocals, church choir`;
+6d `ticking clock, music box, synth`
 
-### 5. `ai_same_islands.mp3`: the twist, "Four Bells"
-*Used in:* ch 5 (four pins land on the map, then through the map to Honolulu).
-*Length:* **at least 0:30** (needs about 20 s)
+---
 
+### 7. `ai_four_bells.mp3`: four arguments, one harbor
+*Length:* **0:40 or more**. *New.* I place the four ship's-bell strikes by hand on the badges, so this is only the organ
+swell that follows and carries the camera down into Honolulu.
+
+**Style**
 ```
-a short reveal: four strikes of a large ship's bell, each one closer together and a little louder, a bowed cymbal and a low pipe organ pedal note swelling underneath, then on the reveal everything opens into one vast, quiet, sustained pipe organ chord like a cathedral above the sea, 80 BPM, 4/4; documentary underscore, sparse, instrumental
+pipe organ, one long rising swell from a low pedal note to a full chord, slow, 60 BPM, B-flat major, grand but not loud, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: one ship's bell strike]
-[Build: three more strikes, closer together, organ pedal rising]
-[Hit: the fourth strike]
-[Outro: a vast quiet organ chord, fades]
+[Intro: low organ pedal note]
+[Build: the organ swells to a full chord]
+[Outro: the chord held, then released]
 [End]
 ```
+*Exclude extra:* `choir, bells, wedding`
 
-### 6. `ai_heist.mp3`: sugar, the harbor, the overthrow, "The Mechanism"
-*Used in:* ch 6 (about 2:30).
-*Length:* **at least 3:15**
+---
 
+### 8. `ai_mechanism.mp3`: the plan working like a machine (the Deed)
+*Length:* **2:30 or more** (Extend as needed: chapter 6 is long). *Cover of `ai_motif`.* The tune on a player piano,
+exact and unhurried, a steam-engine pulse under it, a field drum getting closer. The tune in the low brass, bent, near
+the end (for the flag going up). Many silences get cut into this one, so steady phrases matter.
+
+**Style**
 ```
-a cold, slowly tightening minimalist pulse: two pianos playing the same short repeating pattern a fraction out of step so it shimmers and slowly shifts, a muted plucked harp doubling the pattern, long low bowed double bass notes, and a distant military snare that slowly approaches in the middle as if troops are coming ashore, then recedes; methodical and controlled, never exciting, like watching a plan work; several clean drop-outs to silence, no climax, 112 BPM in steady eighth notes, 4/4, E minor; documentary underscore, space for narrator, instrumental
+player piano plays the tune exact and mechanical, steady low pulse like a steam engine, distant field drum slowly approaching, 92 BPM, 4/4, B-flat minor, cool and inevitable, regular 8-bar phrases, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: one piano, the repeating pattern]
-[Verse: the second piano enters slightly out of step, harp doubles]
-[Stop]
-[Build: the pattern shifts, low bass, a distant snare approaches]
-[Main: steady and tense, snare close]
-[Stop]
-[Break: low bass alone]
-[Verse: the pattern returns, quieter, snare receding]
-[Outro: the pianos drop away to one held bass note]
+[Intro: player piano alone, the tune in minor]
+[Verse: the steam pulse joins]
+[Verse: the field drum, far away]
+[Verse: the drum closer, steady]
+[Outro: euphonium and tuba play the tune slow and flat]
 [End]
 ```
+*Exclude extra:* `ticking clock, felt piano, orchestra, epic`
 
-### 7. `ai_he_has.mp3`: the George III callback, "The Crown Changes Hands" (same cue every episode)
-*Used in:* ch 7, and the callback in every episode, so viewers learn the sound.
-*Length:* **at least 0:30** (needs about 20 s)
+---
 
+### 9. `ai_charge.mp3`: the George III callback (the same file every episode)
+*Length:* **0:20**, with the first **3 to 5 seconds** recognizable on their own. *New.* Dry royal harpsichord chords,
+taken over by an American brass choir: the crown changes hands. It rings into silence.
+
+**Style**
 ```
-a short signature cue for a recurring moment: a solo harpsichord plays four stately, formal court chords like a royal decree, then a low timpani roll rises under them and a grave, quiet American brass choir takes over the same four chords and holds the last one; formal and heavy, like a charge read aloud in court; free time, about 60 BPM; documentary underscore, instrumental
+baroque harpsichord, three dry royal chords, then a brass choir of cornets, alto horns and euphonium takes the same chords, timpani roll, 80 BPM, D major, formal and grave, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: solo harpsichord, four formal chords]
-[Build: low timpani roll rises]
-[Swell: brass choir takes over the same four chords]
-[Outro: the last chord held, fades]
+[Intro: harpsichord, three chords]
+[Verse: the brass choir takes the chords, timpani roll]
+[Outro: one held brass chord]
 [End]
 ```
+*Exclude extra:* `orchestra, epic trailer, choir`
 
-### 8. `ai_under_protest.mp3`: the quiet chapter, "Weekday Hymn"
-*Used in:* ch 8 (about 1:20).
-*Length:* **at least 1:45**
+---
 
+### 10. `ai_answer.mp3`: the Answer (chapter 8, and the last chord of the episode)
+*Length:* **2:00 or more**. *New, not a Cover:* its own tune. One small reed pump organ in a quiet parlor, the bellows
+audible, a hymn tune played slowly and plainly. No swell, no strings, nothing added. This is the quiet chapter.
+
+**Style**
 ```
-a quiet, dignified hymn on a single old reed pump organ, as if played alone in a small wooden church on a weekday: slow simple chords, soft breathy bellows you can hear, a few long held notes and long pauses, imperfect and human, no swell, no build, no melodrama, the same gentle level throughout, ends in silence, free time, about 56 BPM; documentary underscore, sparse, space for narrator, instrumental
+small reed pump organ, instrumental hymn tune, audible bellows, played slowly and plainly, 56 BPM, free time, F major, intimate and dignified, no swell, instrumental
 ```
-
+**Lyrics**
 ```
 [Instrumental]
-[Intro: the bellows, one soft chord]
-[Verse: slow hymn chords, long pauses]
+[Verse: reed organ, the hymn tune]
 [Verse: the hymn again, softer]
-[Outro: one held chord, then silence]
+[Outro: one long chord]
 [End]
 ```
+*Exclude extra:* `choir, church choir, pipe organ, strings, piano`
+
+**Her own music, as an option:** Liliʻuokalani composed *Ke Aloha o ka Haku* (The Queen's Prayer) on March 22, 1895,
+imprisoned in the room this episode shows, as a hymn of forgiveness. The score is in the public domain. I can arrange it
+for reed organ myself (credited on screen) to use in place of, or after, this cue. Don't ask Suno to imitate it. I'd
+avoid *Aloha ʻOe*: American sheet music turned it into a tourist farewell.
 
 ---
 
-## Where each cue sits in Episode 1
+### 11. `ai_ledger.mp3`: the Ledger (every episode; only the third phrase changes)
+*Length:* **0:15**. *New.* Three equal phrases, one per column: Said (cornet), Did (euphonium, a little flat), Answered
+back (reed organ). Make the whole thing here; in later episodes only the last phrase gets remade.
 
-| Chapter | Cue | Notes |
+**Style**
+```
+three short equal phrases: solo cornet, then euphonium slightly flat, then small reed organ, simple hymn-like phrases, 72 BPM, 4/4, B-flat major, plain and even, instrumental
+```
+**Lyrics**
+```
+[Instrumental]
+[Verse: solo cornet, one phrase]
+[Verse: euphonium, one phrase]
+[Verse: reed organ, one phrase]
+[End]
+```
+*Exclude extra:* `orchestra, percussion, choir`
+
+---
+
+### 12. `ai_both.mp3`: "the answer is both"
+*Length:* **0:30 or more**. *Cover of `ai_motif`.* The Claim and the Deed together for the first time: cornet and
+euphonium play the tune in unison, in **one** key, at equal weight. Grave, not triumphant.
+
+**Style**
+```
+cornet and euphonium play the tune together in unison, same key, equal weight, soft tuba under, 72 BPM, 4/4, B-flat major, grave and honest, not triumphant, instrumental
+```
+**Lyrics**
+```
+[Instrumental]
+[Verse: cornet and euphonium together, the tune]
+[Outro: held unison note]
+[End]
+```
+*Exclude extra:* `trumpet fanfare, epic, orchestra`
+
+---
+
+### 13. `ai_next.mp3`: the tease (the USS *Maine*, Episode 2)
+*Length:* **0:30**. *New.* A new texture for a new story: a lone field drum and a low brass note that doesn't resolve.
+
+**Style**
+```
+lone military field drum, slow roll, one low brass note held under it, 70 BPM, 4/4, unresolved, ominous but restrained, instrumental
+```
+**Lyrics**
+```
+[Instrumental]
+[Intro: field drum roll]
+[Verse: low brass note under the drum]
+[End]
+```
+*Exclude extra:* `orchestra, epic trailer, cinematic hit`
+
+---
+
+## Where each cue plays (Episode 1)
+
+| Ch | Music | Silence |
 |---|---|---|
-| 1 The Locked Room | `ai_locked_room` | |
-| 2 The Question | `ai_locked_room` → `ai_theme` | The theme's first phrase lands on the 1776 line |
-| 3 The Old Guard | `ai_old_rule` | Its stop sits on the gold-nugget cut; the abrupt end on "The continent was full." |
-| 4 The Pitch Meeting | `ai_pitch_meeting` | Silence under the empty room; one section per pitcher |
-| 5 The Same Islands | `ai_same_islands` | One bell per pitch |
-| 6 The Heist | `ai_heist` | Drop-outs for the Committee, Stevens and pineapple cuts |
-| 7 He Has, We Have | `ai_he_has` | |
-| 8 Under Protest | `ai_under_protest` | Or the *Aloha ʻOe* arrangement |
-| 9 Back to the Question | `ai_theme` | Through the end screen; the trumpet and its dark answer sit under "betrayal or expression" |
+| 1 Locked Room | `ai_locked_room`, with `ai_palace_band` faint through the wall | |
+| 2 Question | `ai_motif` rises on the "In 1776" pull-back; `ai_theme` under the two tablets; ends on "First, the old rule." | the parchment |
+| 3 Old Guard | `ai_old_rule`; one held low note carries "So where next?" into the pitch room | the nugget; a dead stop on "The continent was full." |
+| 4 Pitch Meeting | room tone, then `ai_pitch_*` one per pitcher | "one room," the pitchers' appearance, "It wasn't." |
+| 5 Same Islands | four bell strikes by hand, then `ai_four_bells` into the dive | |
+| 6 Heist | `ai_mechanism`; the bent tune in the low brass at the flag | both underlines, every humor cut, "I yield" |
+| 7 He Has | `ai_charge`, ringing out | after it |
+| 8 Under Protest | `ai_answer` from "brought here, to this room"; `ai_palace_band`, muffled, under the flag change | the Queen's own words |
+| 9 The Question | `ai_theme` low; `ai_ledger`; `ai_both` on "the answer is both"; `ai_answer`'s last chord after the window; `ai_next` under the *Maine* | the circle (2 s); "Except the asking." |
