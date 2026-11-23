@@ -241,64 +241,104 @@ def legging(side):
     return loft(rings)
 
 
-def head_r():
-    pts = [p for p, g in VPTS if g == 'Head' and abs(p.z - (TOP.z - 0.35)) < 0.08]
-    cx = sum(p.x for p in pts) / len(pts); cy = sum(p.y for p in pts) / len(pts)
-    return max(math.hypot(p.x - cx, p.y - cy) for p in pts), cx, cy
+HEADG = {'Head'}
+HZTOP = max(p.z for p, g in VPTS if g == 'Head')          # the real top of the head (hair included)
+ZB = HZTOP - 0.37                                          # the brow line, where a hat sits
 
 
-HR, HCX, HCY = head_r()
-print('HEAD r', round(HR, 3), 'waist', round(ZW, 2), 'neck', round(ZN, 2))
+def hring(z, off, c=None):
+    return ring(z, HEADG, off, *(c or (None, None)), band=0.06, floor_r=0.15)
 
 
-def hat_top():
-    return frustum(TOP.z - 0.22, TOP.z + 0.32, HR * 0.9, HR * 0.94, 12, cap=True, cx=HCX, cy=HCY)
+def scaled(rg, k, c, dz=0.0, kx=None):
+    kx = k if kx is None else kx
+    return [(c[0] + (x - c[0]) * kx, c[1] + (y - c[1]) * k, z + dz) for x, y, z in rg]
 
 
-def hat_brim(r, z=None, cx=None):
-    z = TOP.z - 0.22 if z is None else z
-    return frustum(z, z + 0.035, r, r, 16, cap=True, cx=HCX if cx is None else cx, cy=HCY)
+def capped(rings, **kw):
+    """loft the rings and close the last one with a flat top"""
+    v, f = loft(rings, **kw)
+    last = rings[-1]
+    cx = sum(p[0] for p in last) / NB; cy = sum(p[1] for p in last) / NB; cz = last[0][2]
+    v = v + [(cx, cy, cz)]
+    base = (len(rings) - 1) * NB
+    f = f + [(base + k, base + (k + 1) % NB, len(v) - 1) for k in range(NB)]
+    return v, f
 
 
-def hat_crown(h):
-    return frustum(TOP.z - 0.22, TOP.z - 0.22 + h, HR * 0.9, HR * 0.84, 12, cap=True, cx=HCX, cy=HCY)
+def disc(inner, outer, curl=0.0):
+    """a flat brim between two rings; curl lifts the sides"""
+    o2 = [(x, y, z + curl * abs(math.sin(-math.pi + 2 * math.pi * (k + 0.5) / NB))) for k, (x, y, z) in enumerate(outer)]
+    return loft([inner, o2])
 
 
-def cap(h=0.24, top_r=None):
-    return frustum(TOP.z - 0.26, TOP.z - 0.26 + h, HR * 0.9, top_r or HR * 0.98, 12, cap=True, cx=HCX, cy=HCY)
+R0, C0 = hring(ZB, 0.06)                                   # the head's outline at the brow, plus a little room
 
 
-def peak():
-    return frustum(TOP.z - 0.27, TOP.z - 0.24, HR * 0.9, HR * 1.12, 8, -50, 50, HCX, HCY)
+def top_hat():
+    return capped([R0, scaled(R0, 1.06, C0, 0.78)])
+
+
+def top_brim():
+    return disc(scaled(R0, 0.98, C0), scaled(R0, 1.32, C0, 0.0, 1.22), curl=0.07)
+
+
+def boater():
+    return capped([R0, scaled(R0, 1.0, C0, 0.42)])
+
+
+def boater_brim(k=1.55):
+    return disc(scaled(R0, 0.98, C0), scaled(R0, k, C0, 0.0, k * 0.94))
+
+
+def hat_band(z0, h, col_off=0.012):
+    return loft([scaled(R0, 1.0 + col_off * 3, C0, z0), scaled(R0, 1.0 + col_off * 3, C0, z0 + h)])
+
+
+def flat_cap():
+    rb, c = hring(ZB + 0.02, 0.05)
+    return capped([rb, scaled(rb, 1.0, c, 0.16), scaled(rb, 1.22, c, 0.24), scaled(rb, 1.2, c, 0.27)])
+
+
+def peaked_cap():
+    rb, c = hring(ZB, 0.05)
+    return capped([rb, scaled(rb, 1.0, c, 0.17), scaled(rb, 1.16, c, 0.3), scaled(rb, 1.12, c, 0.33)])
+
+
+def visor():
+    rb, c = hring(ZB, 0.055)
+    inner, outer = [], []
+    for k, (x, y, z) in enumerate(rb):
+        a = math.degrees(-math.pi + 2 * math.pi * (k + 0.5) / NB)
+        if abs(a) <= 60:
+            inner.append((x, y, z))
+            outer.append((c[0] + (x - c[0]) * 1.45, c[1] + (y - c[1]) * 1.12, z - 0.07))
+    v = inner + outer
+    n = len(inner)
+    return v, [(i, i + 1, n + i + 1, n + i) for i in range(n - 1)]
 
 
 def bonnet():
-    """a bonnet: a crown over the back and top of the head, and a brim that frames the face like a halo, open at the chin"""
-    v, f = dome(TOP.z - 0.42, HR * 0.95, 1.05, 12, 4, HCX - 0.06, HCY, front_cut=(4, 2))
-    n0 = len(v)
-    xf = HCX + HR * 0.55                                   # the brim stands just in front of the face
-    zc = TOP.z - 0.5
-    seg = 14
-    for i in range(seg + 1):
-        a = math.radians(-130 + 260 * i / seg)             # from beside the chin, over the top, to the other side
-        for rr, dx in ((HR * 0.85, 0.0), (HR * 1.12, 0.06)):
-            v.append((xf + dx, HCY + rr * math.sin(a), zc + rr * math.cos(a)))
-    for i in range(seg):
-        a0 = n0 + 2 * i
-        f.append((a0, a0 + 2, a0 + 3, a0 + 1))
-    return v, f
+    """a hood over the back and top of the head, open round the face, with its front edge standing a little forward"""
+    rings, c = [], None
+    for z in (HZTOP - 0.95, HZTOP - 0.7, HZTOP - 0.42, HZTOP - 0.15):
+        rg, c2 = hring(z, 0.07, c)
+        c = c or c2
+        rings.append(rg)
+    rings.append(scaled(rings[-1], 0.7, c, 0.14))
+    return capped(rings, open_front=72)
 
 COSTUMES = {
     'gentleman': dict(coat='#2b2824', skin='#d9b38f', hair='#5b4330', legs='#3a3631', shoes='#1d1b18',
                       parts=[('tails', 'Hips', lambda: tails(1.32, 0.8), '#2b2824'),
                              ('waist', 'Hips', lambda: band(ZW, 0.1), '#2b2824'),
                              ('collar', 'Spine2', lambda: collar(0.18), '#efe9dc'),
-                             ('hat', 'Head', hat_top, '#1f1d1a'), ('brim', 'Head', lambda: hat_brim(HR * 1.2), '#1f1d1a')]),
+                             ('hat', 'Head', top_hat, '#1f1d1a'), ('brim', 'Head', top_brim, '#1f1d1a'), ('hband', 'Head', lambda: hat_band(0.02, 0.1), '#3a3631')]),
     'holoku': dict(coat='#d98b8c', skin='#8f6a4c', hair='#2a2622', legs='#d98b8c', shoes='#3a2c22',
                    parts=[('dress', 'Hips', lambda: skirt(0.42, 1.08, top='chest'), '#d98b8c'),
                           ('collar', 'Spine2', lambda: collar(0.16, 0.035), '#e9a7a4'),
-                          ('crown', 'Head', lambda: hat_crown(0.2), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR * 1.38), '#d9c79a'),
-                          ('band', 'Head', lambda: frustum(TOP.z - 0.21, TOP.z - 0.13, HR * 0.91, HR * 0.9, 12, cx=HCX, cy=HCY), '#8f3b2e')]),
+                          ('crown', 'Head', boater, '#d9c79a'), ('brim', 'Head', boater_brim, '#d9c79a'),
+                          ('band', 'Head', lambda: hat_band(0.03, 0.12), '#8f3b2e')]),
     'missionary': dict(coat='#3a2f3a', skin='#e3c4a2', hair='#5b4330', legs='#3a2f3a', shoes='#1d1b18',
                        parts=[('dress', 'Hips', lambda: skirt(0.42, 1.04), '#3a2f3a'),
                               ('waist', 'Hips', lambda: band(ZW, 0.1), '#2e252e'),
@@ -306,7 +346,7 @@ COSTUMES = {
                               ('bonnet', 'Head', bonnet, '#ece4d0')]),
     'sailor': dict(coat='#27324a', skin='#c79b78', hair='#2a2622', legs='#27324a', shoes='#1d1b18',
                    parts=[('collar', 'Spine2', sailor_collar, '#3f5a86'),
-                          ('cap', 'Head', lambda: cap(0.15), '#1f2a3c'),
+                          ('cap', 'Head', flat_cap, '#1f2a3c'),
                           ('belt', 'Hips', lambda: band(ZW - 0.05, 0.2), '#b79a68'),
                           ('legL', 'LeftLeg', lambda: legging('Left'), '#b79a68'),
                           ('legR', 'RightLeg', lambda: legging('Right'), '#b79a68')]),
@@ -314,10 +354,10 @@ COSTUMES = {
                     parts=[('tails', 'Hips', lambda: tails(1.2, 0.78), '#1f2a44'),
                            ('belt', 'Hips', lambda: band(ZW, 0.13), '#c9a648'),
                            ('collar', 'Spine2', lambda: collar(0.17), '#efe9dc'),
-                           ('cap', 'Head', lambda: cap(0.17), '#1b2333'), ('peak', 'Head', peak, '#111111')]),
+                           ('cap', 'Head', peaked_cap, '#1b2333'), ('peak', 'Head', visor, '#111111'), ('cband', 'Head', lambda: hat_band(0.03, 0.08), '#c9a648')]),
     'worker': dict(coat='#e3dccb', skin='#8f6a4c', hair='#2a2622', legs='#4a4439', shoes='#2a2622',
                    parts=[('sash', 'Hips', lambda: band(ZW, 0.16), '#8f3b2e'),
-                          ('crown', 'Head', lambda: hat_crown(0.18), '#cdb98a'), ('brim', 'Head', lambda: hat_brim(HR * 1.35), '#d9c79a')]),
+                          ('crown', 'Head', boater, '#cdb98a'), ('brim', 'Head', lambda: boater_brim(1.5), '#cdb98a'), ('band', 'Head', lambda: hat_band(0.03, 0.1), '#5a4130')]),
 }
 
 
@@ -393,13 +433,18 @@ tgt = bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
 
-if MODE in ('lineup', 'back'):
-    HD = 180 if MODE == 'lineup' else 0
+if MODE in ('lineup', 'back', 'close'):
+    HD = 0 if MODE == 'back' else 180
     PEOPLE = [person(f'p{i}', c, (-5.0 + i * 2.0, -10.0, 0.0), HD) for i, c in enumerate(ORDER)]   # caught mid-stride
     for i, (root, arm) in enumerate(PEOPLE):
         bake(arm, WALK, [0.0], RATE, phase=3.0 + i * 4.0)
     cam.location, tgt.location = (1.2, -24.5, 1.7), (0.0, -10.0, 1.05)
     cam.data.lens = 45
+    if MODE == 'close':                                     # heads and shoulders, for checking hats and collars
+        CX = float(os.environ.get('CLOSE_X', '0'))
+        cam.location, tgt.location = (CX, -15.5, 1.75), (CX, -10.0, 1.6)
+        cam.data.lens = 46
+        sc.render.resolution_y = 540
     sc.frame_start = sc.frame_end = 0
     frames = [0]
 else:
