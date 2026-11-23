@@ -1,0 +1,373 @@
+{
+ "a1_prison_room": {
+  "edges": {
+   "top": "#eee0c5",
+   "bottom": "#ece0c3",
+   "left": "#a89879",
+   "right": "#b5a78a"
+  }
+ },
+ "a3_palace_hall": {
+  "edges": {
+   "top": "#eee1c6",
+   "bottom": "#eee1c4",
+   "left": "#b5a991",
+   "right": "#a4997d"
+  }
+ },
+ "b1_frontier_cliff": {
+  "edges": {
+   "top": "#ece3c9",
+   "bottom": "#ede0c2",
+   "left": "#c5b083",
+   "right": "#979f8d"
+  }
+ },
+ "c1_pitch_room": {
+  "edges": {
+   "top": "#f2e5ca",
+   "bottom": "#efe2c6",
+   "left": "#645a3c",
+   "right": "#4f3926"
+  }
+ },
+ "c5_docks": {
+  "edges": {
+   "top": "#eee2c8",
+   "bottom": "#ede1c4",
+   "left": "#674c3a",
+   "right": "#a1a695"
+  }
+ },
+ "c6_coaling_station": {
+  "edges": {
+   "top": "#ebe0c6",
+   "bottom": "#ebe2c6",
+   "left": "#aab39c",
+   "right": "#93937c"
+  }
+ },
+ "c7_mission_church": {
+  "edges": {
+   "top": "#ede0c5",
+   "bottom": "#ede0c2",
+   "left": "#93916e",
+   "right": "#908d6a"
+  }
+ },
+ "d1_cane_fields": {
+  "edges": {
+   "top": "#ece1c7",
+   "bottom": "#ece0c3",
+   "left": "#83805d",
+   "right": "#7b7957"
+  }
+ },
+ "d2_committee_room": {
+  "edges": {
+   "top": "#ece3ca",
+   "bottom": "#ede1c4",
+   "left": "#281c13",
+   "right": "#291e15"
+  }
+ },
+ "d3_government_building": {
+  "edges": {
+   "top": "#ede0c5",
+   "bottom": "#ede1c2",
+   "left": "#827f61",
+   "right": "#888564"
+  }
+ },
+ "d4_pineapple_fields": {
+  "edges": {
+   "top": "#eddfc5",
+   "bottom": "#eddfc2",
+   "left": "#8b8467",
+   "right": "#807053"
+  }
+ },
+ "e1_pearl_harbor_base": {
+  "edges": {
+   "top": "#efe3c8",
+   "bottom": "#ece2c5",
+   "left": "#969672",
+   "right": "#7c7c5b"
+  }
+ },
+ "a2_palace_window": {
+  "kind": "rect",
+  "x0": 876.0,
+  "y0": 428.0,
+  "x1": 1044.0,
+  "y1": 839.0,
+  "edges": {
+   "top": "#eddfc4",
+   "bottom": "#ece1c4",
+   "left": "#d3c5a5",
+   "right": "#d7c9aa"
+  }
+ },
+ "c2_pitch_easel": {
+  "kind": "rect",
+  "x0": 599.0,
+  "y0": 273.0,
+  "x1": 1321.0,
+  "y1": 716.0,
+  "edges": {
+   "top": "#eee3ca",
+   "bottom": "#ede1c5",
+   "left": "#33251b",
+   "right": "#292319"
+  }
+ },
+ "c3_pitch_map": {
+  "kind": "circle",
+  "cx": 1003.0,
+  "cy": 421.0,
+  "r": 65.0,
+  "edges": {
+   "top": "#392a1f",
+   "bottom": "#39291d",
+   "left": "#38281d",
+   "right": "#30231b"
+  }
+ },
+ "s1_pitchers": {
+  "cutouts": [
+   {
+    "file": "s1_pitchers_1.png",
+    "w": 544,
+    "h": 683,
+    "at": [
+     30,
+     210
+    ]
+   },
+   {
+    "file": "s1_pitchers_2.png",
+    "w": 465,
+    "h": 684,
+    "at": [
+     557,
+     209
+    ]
+   },
+   {
+    "file": "s1_pitchers_3.png",
+    "w": 258,
+    "h": 681,
+    "at": [
+     1000,
+     212
+    ]
+   },
+   {
+    "file": "s1_pitchers_4.png",
+    "w": 213,
+    "h": 680,
+    "at": [
+     1214,
+     213
+    ]
+   },
+   {
+    "file": "s1_pitchers_5.png",
+    "w": 288,
+    "h": 684,
+    "at": [
+     1418,
+     209
+    ]
+   },
+   {
+    "file": "s1_pitchers_6.png",
+    "w": 205,
+    "h": 684,
+    "at": [
+     1677,
+     209
+    ]
+   }
+  ]
+ },
+ "s2_honolulu_men": {
+  "cutouts": [
+   {
+    "file": "s2_honolulu_men_1.png",
+    "w": 274,
+    "h": 827,
+    "at": [
+     38,
+     137
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_2.png",
+    "w": 272,
+    "h": 825,
+    "at": [
+     303,
+     139
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_3.png",
+    "w": 265,
+    "h": 825,
+    "at": [
+     564,
+     139
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_4.png",
+    "w": 286,
+    "h": 851,
+    "at": [
+     812,
+     113
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_5.png",
+    "w": 276,
+    "h": 846,
+    "at": [
+     1079,
+     118
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_6.png",
+    "w": 271,
+    "h": 831,
+    "at": [
+     1358,
+     132
+    ]
+   },
+   {
+    "file": "s2_honolulu_men_7.png",
+    "w": 272,
+    "h": 829,
+    "at": [
+     1636,
+     134
+    ]
+   }
+  ]
+ },
+ "s3_props": {
+  "cutouts": [
+   {
+    "file": "s3_props_1.png",
+    "w": 208,
+    "h": 459,
+    "at": [
+     89,
+     63
+    ]
+   },
+   {
+    "file": "s3_props_2.png",
+    "w": 785,
+    "h": 138,
+    "at": [
+     372,
+     69
+    ]
+   },
+   {
+    "file": "s3_props_3.png",
+    "w": 785,
+    "h": 137,
+    "at": [
+     372,
+     193
+    ]
+   },
+   {
+    "file": "s3_props_4.png",
+    "w": 575,
+    "h": 309,
+    "at": [
+     1256,
+     55
+    ]
+   },
+   {
+    "file": "s3_props_5.png",
+    "w": 785,
+    "h": 138,
+    "at": [
+     372,
+     316
+    ]
+   },
+   {
+    "file": "s3_props_6.png",
+    "w": 302,
+    "h": 300,
+    "at": [
+     524,
+     420
+    ]
+   },
+   {
+    "file": "s3_props_7.png",
+    "w": 301,
+    "h": 300,
+    "at": [
+     865,
+     420
+    ]
+   },
+   {
+    "file": "s3_props_8.png",
+    "w": 577,
+    "h": 321,
+    "at": [
+     1294,
+     413
+    ]
+   },
+   {
+    "file": "s3_props_9.png",
+    "w": 501,
+    "h": 339,
+    "at": [
+     62,
+     686
+    ]
+   },
+   {
+    "file": "s3_props_10.png",
+    "w": 389,
+    "h": 253,
+    "at": [
+     668,
+     763
+    ]
+   },
+   {
+    "file": "s3_props_11.png",
+    "w": 273,
+    "h": 296,
+    "at": [
+     1153,
+     735
+    ]
+   },
+   {
+    "file": "s3_props_12.png",
+    "w": 377,
+    "h": 235,
+    "at": [
+     1492,
+     790
+    ]
+   }
+  ]
+ }
+}
