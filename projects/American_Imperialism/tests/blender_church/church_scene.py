@@ -405,7 +405,7 @@ WALKERS = [  # name, look, start (x, y), heading (deg, 0 = walking +y, toward th
     ('w4', dict(coat='#3c4a3d', legs='#2f2c28', skin='#d9b38f', hat='top', hatcol='#2b2824'), (-15.5, -6.6), -90, 0.6, 9.0),
     ('w5', dict(coat='#f1ead8', legs='#f1ead8', skin='#d9b38f', hat='bonnet', hatcol='#e3d9c2', dress=True), (13, -7.4), 90, 0.3, 9.0),
     ('w6', dict(coat='#4f5d6a', legs='#3a3a34', skin='#8f6a4c'), (15.5, -6.2), 90, 0.9, 9.0)]
-FIGS = [(figure(n, **look), (x, y), hd, t0, tw) for n, look, (x, y), hd, t0, tw in WALKERS]
+FIGS = [(figure(n, **look), (x, y), hd, t0, tw) for n, look, (x, y), hd, t0, tw in WALKERS] if os.environ.get('CHURCH_PEOPLE', '1') == '1' else []
 V = 2 * A_ST * U / (DUTY * PERIOD)                      # m/s: the planted foot's speed, so no sliding
 
 # ---------------------------------------------------------------- animation: keyframes per frame, stepped at 12 fps
@@ -543,12 +543,13 @@ ct.links.new(mcurve.outputs[0], mix.inputs['Fac'])
 ct.links.new(rl.outputs['Image'], mix.inputs[1])
 ct.links.new(mix.outputs[0], comp.inputs['Image'])
 
-bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HERE, 'church_scene.blend'))
-os.makedirs(OUT, exist_ok=True)
-import time
-for f in range(F0, F1 + 1):
-    sc.frame_set(f)
-    sc.render.filepath = os.path.join(OUT, f'{f:04d}.png')
-    t = time.time()
-    bpy.ops.render.render(write_still=True)
-    print('FRAME', f, round(time.time() - t, 2), flush=True)
+if not os.environ.get('CHURCH_NORENDER'):
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HERE, 'church_scene.blend'))
+    os.makedirs(OUT, exist_ok=True)
+    import time
+    for f in range(F0, F1 + 1):
+        sc.frame_set(f)
+        sc.render.filepath = os.path.join(OUT, f'{f:04d}.png')
+        t = time.time()
+        bpy.ops.render.render(write_still=True)
+        print('FRAME', f, round(time.time() - t, 2), flush=True)
