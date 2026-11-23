@@ -7,7 +7,7 @@ import json, math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 EP = os.path.abspath(os.path.join(HERE, '..'))
 sys.path.insert(0, os.path.join(EP, '..', '..', 'Hawaii_Samples', 'tools'))
-from kit import Stage, clamp, back_out, ease_out, ease, step12, text   # noqa: E402
+from kit import Stage, clamp, back_out, ease_out, ease, step12, text, highlight, COMMON_DEFS   # noqa: E402
 
 WORDS = json.load(open(os.path.join(EP, 'public', 'audio', 'ch05_the_same_islands.words.json')))['words']
 
@@ -28,18 +28,21 @@ S.dir = os.path.join(EP, 'build', 'vec_ch05')
 os.makedirs(S.dir, exist_ok=True)
 
 # ---- palette: the channel's colours as flat fills, each with a darker shade for the turned side
-BG, BG2 = '#1f2f38', '#25404b'
-CREAM, INK = '#f4efe6', '#16181a'
+# the brand palette (brand/palette.json): teal draws and explains, orange labels, coral is the subject (Hawaiʻi), ink is
+# type on colour, cream and bone for paper things, all on the warm dark desk
+CREAM, BONE, BONE_D, INK = '#F4EFE6', '#EDE7DC', '#cfc6b4', '#111111'
 OR, OR_D = '#FF9F1C', '#d47f0c'
 TE, TE_D = '#2FE0C4', '#1fae98'
 CO, CO_D = '#FF6F61', '#d4514a'
-SAND, SAND_D, SAND_T = '#e9d6a8', '#c8b07c', '#7a5c33'
-SEA, SEA_D, LAND, LAND_D = '#2e7d8f', '#245f6d', '#86ab5d', '#6a8d46'
-NAVY = '#24345e'
+SAND, SAND_D, SAND_T = BONE, BONE_D, INK
+SEA, SEA_D, LAND, LAND_D = '#1d1b17', '#0d0c09', CO, CO_D
+NAVY = INK
 
-S.defs.append('<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>')
-S.world.append(f'<rect width="1920" height="1080" fill="{BG}"/><circle cx="960" cy="560" r="620" fill="{BG2}"/>'
-               f'<circle cx="960" cy="560" r="430" fill="{BG}" opacity="0.35"/>')
+S.defs.append(COMMON_DEFS.replace('stdDeviation="14"', 'stdDeviation="10"'))
+S.defs.append('<radialGradient id="desk" cx="45%" cy="40%" r="75%"><stop offset="0" stop-color="#2a2620"/>'
+              '<stop offset="0.7" stop-color="#16140f"/><stop offset="1" stop-color="#0d0c09"/></radialGradient>')
+S.world.append('<rect width="1920" height="1080" fill="url(#desk)"/><g opacity="0.12">'
+               + ''.join(f'<rect x="0" y="{y}" width="1920" height="1" fill="#fff" opacity="0.35"/>' for y in range(32, 1080, 64)) + '</g>')
 S.over.append('<g id="ov"></g>')
 
 
@@ -59,10 +62,15 @@ def shadow(w, dy):
 
 
 # ---------------------------------------------------------------- icons (drawn around 0,0, about 200 px across)
+def tablet(w, h, c):
+    """a block with cut corners, like the logo's slabs"""
+    return f'M{-w + c},{-h} L{w - c},{-h} L{w},{-h + c} L{w},{h - c} L{w - c},{h} L{-w + c},{h} L{-w},{h - c} L{-w},{-h + c} z'
+
+
 def badge(fill, shade, icon):
-    return (f'<circle r="130" fill="{shade}"/><circle r="130" fill="{fill}" clip-path="inset(0 0 0 0)"/>'
-            f'<path d="M-130,0 A130,130 0 0,0 130,0 A130,95 0 0,1 -130,0 z" fill="{shade}" opacity="0.55"/>'
-            f'<circle r="112" fill="none" stroke="{CREAM}" stroke-width="5" opacity="0.5"/>{icon}')
+    return (f'<path d="{tablet(124, 124, 30)}" fill="{shade}" transform="translate(6,8)"/>'
+            f'<path d="{tablet(124, 124, 30)}" fill="{fill}"/>'
+            f'<path d="M124,-94 L124,94 L94,124 L-94,124 Z" fill="{shade}" opacity="0.45"/>{icon}')
 
 
 def coins():
@@ -153,8 +161,8 @@ def harbor():
     px, py = (-157.97 - lon0) * KLAT * k, -(21.37 - lat0) * k
     return (f'<circle r="215" fill="{SEA_D}"/><circle r="200" fill="{SEA}"/>'
             f'<path d="{land}" fill="{LAND_D}" transform="translate(5,7)"/><path d="{land}" fill="{LAND}"/>'
-            f'<circle cx="{px:.1f}" cy="{py:.1f}" r="15" fill="{SEA}" stroke="{CREAM}" stroke-width="5"/>'
-            f'<circle r="200" fill="none" stroke="{CREAM}" stroke-width="10"/>'), (px, py)
+            f'<circle cx="{px:.1f}" cy="{py:.1f}" r="15" fill="{SEA}" stroke="{TE}" stroke-width="6"/>'
+            f'<circle r="200" fill="none" stroke="{TE}" stroke-width="8"/>'), (px, py)
 
 
 def steamer(c=INK):
@@ -195,8 +203,9 @@ def stamp():
 
 
 def islands(p=1.0):
-    o = (f'<rect x="-430" y="-240" width="860" height="480" rx="40" fill="{SEA}"/>'
-         f'<rect x="-430" y="-240" width="860" height="480" rx="40" fill="none" stroke="{CREAM}" stroke-width="8"/>')
+    card = tablet(430, 240, 46)
+    o = (f'<path d="{card}" fill="{SEA_D}" transform="translate(8,10)"/><path d="{card}" fill="{SEA}"/>'
+         f'<path d="{card}" fill="none" stroke="{TE}" stroke-width="6"/>')
     names = list(COAST)
     for i, n in enumerate(names):
         s_ = back_out((p * len(names) - i) / 1.6) if p * len(names) > i else 0
@@ -246,12 +255,13 @@ def frame(t):
             lp = clamp((tq - T_END - 0.75) / 0.4)
             if lp > 0:
                 tx, ty = 960 + OAHU[0], 600 + OAHU[1]
-                lines.append(f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x + (tx - x) * lp:.0f}" y2="{y + (ty - y) * lp:.0f}" stroke="{fill}" '
+                lines.append(f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x + (tx - x) * lp:.0f}" y2="{y + (ty - y) * lp:.0f}" stroke="{TE}" '
                              f'stroke-width="7" stroke-dasharray="16 12" stroke-linecap="round"/>')
         badges += g(x, y, s, badge(fill, shade, icon), op=op)
         if t >= T_DIFF + i * 0.16 and shrink < 1:
-            n = int(clamp((tq - T_DIFF - i * 0.16) / 0.5) * len(label) + 0.999)
-            o += f'<g opacity="{1 - shrink:.3f}">' + text(ROW_X[i], 690, label[:n], 40, 'Inter8', CREAM, 'middle', extra='letter-spacing="3"') + '</g>'
+            sz = 34
+            wch = sz * 0.62 * len(label) + sz * 0.5
+            o += f'<g opacity="{1 - shrink:.3f}">' + highlight(ROW_X[i] - wch / 2, 700, label, sz, prog=(tq - T_DIFF - i * 0.16) / 0.27, rot=-2) + '</g>'
     # the item for each pitch (pops on its word, shrinks away when the next pitch starts)
     def out(t1):
         return 1 - ease((tq - t1) / 0.2) if tq >= t1 else 1.0
@@ -260,9 +270,9 @@ def frame(t):
         o += g(760, 620, pop(t, T_SUGAR) * k, sack())
         p = clamp((tq - (T_AMER - 0.6)) / 0.6)
         if p > 0:
-            o += f'<path d="M930,600 Q1060,520 1180,600" fill="none" stroke="{CREAM}" stroke-width="12" stroke-linecap="round" stroke-dasharray="{300 * p:.0f} 400" opacity="{k:.3f}"/>'
+            o += f'<path d="M930,600 Q1060,520 1180,600" fill="none" stroke="{TE}" stroke-width="12" stroke-linecap="round" stroke-dasharray="{300 * p:.0f} 400" opacity="{k:.3f}"/>'
             if p >= 1:
-                o += f'<path d="M1150,575 L1188,605 L1146,628" fill="none" stroke="{CREAM}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="{k:.3f}"/>'
+                o += f'<path d="M1150,575 L1188,605 L1146,628" fill="none" stroke="{TE}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="{k:.3f}"/>'
         o += g(1380, 600, pop(t, T_AMER) * k, flag())
     if T_NAVY - 0.05 <= t < T_MISS + 0.25:
         k = out(T_MISS)
@@ -272,22 +282,22 @@ def frame(t):
         if T_HARB <= t:
             o += g(960 + hx + 230 * (1 - ease_out(sp)), 610 + hy + 60 * (1 - ease_out(sp)), 0.45 * k, steamer(INK))
         if t >= T_HARB + 0.2:
-            o += f'<g opacity="{k:.3f}">' + text(960, 870, 'PEARL HARBOR', 38, 'Inter8', CREAM, 'middle', extra='letter-spacing="4"') + '</g>'
+            o += f'<g opacity="{k:.3f}">' + highlight(960 - (40 * 0.62 * 12 + 20) / 2, 885, 'PEARL HARBOR', 40, prog=(tq - T_HARB - 0.2) / 0.27) + '</g>'
     if T_MISS - 0.05 <= t < T_SCI + 0.25:
         k = out(T_SCI)
         o += g(680, 640, pop(t, T_MISS) * k, church())
-        for j, (h, coat, hair) in enumerate(((230, NAVY, '#c9c4bb'), (205, TE_D, '#3a2a20'), (165, OR_D, '#3a2a20'))):
+        for j, (h, coat, hair) in enumerate(((230, BONE_D, '#f4efe6'), (205, TE_D, '#3a2a20'), (165, OR_D, '#3a2a20'))):
             o += g(1080 + j * 150, 810, pop(t, T_THREE + j * 0.25) * k, person(h, coat, hair, j))
     if T_SCI - 0.05 <= t < T_END + 0.2:
         k = out(T_END)
-        o += g(700, 640, pop(t, T_SCI) * k, shadow(150, 92) + f'<circle r="0"/>' + microscope(INK, 1.9))
+        o += g(700, 640, pop(t, T_SCI) * k, shadow(150, 92) + microscope(BONE, 1.9))
         o += g(1240, 620, pop(t, at('told')) * k, certificate())
         if t >= T_RIGHT:
             sl = clamp((tq - T_RIGHT) / 0.17)
             o += g(1240, 640, (2.2 - 1.2 * sl) * k, stamp(), op=sl)
     o += ''.join(lines) + badges
     if t >= T_END + 1.2:
-        o += text(960, 1000, 'THE SAME ISLANDS', 44, 'Inter8', CREAM, 'middle', extra='letter-spacing="6"')
+        o += highlight(960 - (54 * 0.62 * 16 + 27) / 2, 1010, 'THE SAME ISLANDS', 54, prog=(tq - T_END - 1.2) / 0.27)
     return {'h': {'ov': o}}
 
 
