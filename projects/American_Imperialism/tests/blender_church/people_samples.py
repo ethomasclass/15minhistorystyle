@@ -136,18 +136,18 @@ hz, sz_, headz, topz = HIPS.z, SP2.z, HEAD.z, TOP.z
 hx, hyy = HIPS.x, HIPS.y
 COSTUMES = {
     'gentleman': dict(coat='#2b2824', skin='#d9b38f', hair='#5b4330', legs='#3a3631', shoes='#1d1b18',
-                      parts=[('tails', 'Hips', lambda: frustum(hz + 0.15, 1.15, 0.62, 0.86, 12, 50, 310, hx, hyy), '#2b2824'),
+                      parts=[('tails', 'Hips', lambda: frustum(hz + 0.15, 1.35, 0.62, 0.84, 12, 50, 310, hx, hyy), '#2b2824'),
                              ('hat', 'Head', lambda: frustum(topz - 0.12, topz + 0.72, 0.36, 0.38, 10, cap=True, cx=HEAD.x, cy=HEAD.y + 0.03), '#1f1d1a'),
                              ('brim', 'Head', lambda: frustum(topz - 0.12, topz - 0.08, 0.62, 0.62, 12, cap=True, cx=HEAD.x, cy=HEAD.y + 0.03), '#1f1d1a'),
                              ('collar', 'Spine2', lambda: frustum(sz_ + 0.62, sz_ + 0.82, 0.34, 0.3, 10, -60, 60, SP2.x, SP2.y - 0.02), '#efe9dc')]),
     'holoku': dict(coat='#d98b8c', skin='#8f6a4c', hair='#2a2622', legs='#d98b8c', shoes='#3a2c22',
-                   parts=[('dress', 'Hips', lambda: frustum(hz + 1.05, 0.08, 0.62, 1.18, 14, cx=hx, cy=hyy), '#d98b8c'),
+                   parts=[('dress', 'Hips', lambda: frustum(hz + 1.05, 0.42, 0.62, 1.15, 14, cx=hx, cy=hyy), '#d98b8c'),
                           ('yoke', 'Spine2', lambda: frustum(sz_ + 0.3, sz_ + 0.75, 0.62, 0.38, 12, cx=SP2.x, cy=SP2.y), '#e6a6a3'),
                           ('straw', 'Head', lambda: frustum(topz - 0.2, topz - 0.16, 0.85, 0.85, 14, cap=True, cx=HEAD.x, cy=HEAD.y), '#d9c79a'),
                           ('crown', 'Head', lambda: frustum(topz - 0.2, topz + 0.18, 0.4, 0.36, 10, cap=True, cx=HEAD.x, cy=HEAD.y), '#cdb98a'),
                           ('band', 'Head', lambda: frustum(topz - 0.16, topz - 0.04, 0.41, 0.4, 10, cx=HEAD.x, cy=HEAD.y), '#8f3b2e')]),
     'missionary': dict(coat='#3a2f3a', skin='#e3c4a2', hair='#5b4330', legs='#3a2f3a', shoes='#1d1b18',
-                       parts=[('dress', 'Hips', lambda: frustum(hz + 0.95, 0.08, 0.6, 1.12, 14, cx=hx, cy=hyy), '#3a2f3a'),
+                       parts=[('dress', 'Hips', lambda: frustum(hz + 0.95, 0.42, 0.6, 1.1, 14, cx=hx, cy=hyy), '#3a2f3a'),
                               ('collar', 'Spine2', lambda: frustum(sz_ + 0.62, sz_ + 0.8, 0.33, 0.29, 10, -70, 70, SP2.x, SP2.y - 0.02), '#efe9dc'),
                               ('bonnet', 'Head', lambda: dome(headz + 0.1, 0.55, 1.05, 10, 3, HEAD.x, HEAD.y + 0.08, front_cut=(3, 2)), '#ece4d0')]),
     'sailor': dict(coat='#27324a', skin='#c79b78', hair='#2a2622', legs='#27324a', shoes='#1d1b18',
@@ -208,6 +208,30 @@ def drive(arm, action, f, tq, rate, phase=0.0, length=24):
     st.keyframe_insert('strip_time', frame=f)
 
 
+SCALE_BONES = {'Head': 0.8, 'LeftHand': 0.75, 'RightHand': 0.75}     # smaller heads and hands than the stock model
+
+
+def bake(arm, action, times, rate, phase=0.0, length=24):
+    """write this person's own action: the source action sampled at stepped times (one entry per scene frame)"""
+    act = bpy.data.actions.new(arm.name + '_baked')
+    n = len(times)
+    keys = [(f, ((t * rate + phase) % length) + action.frame_range[0]) for f, t in enumerate(times)]
+    for fc in action.fcurves:
+        nfc = act.fcurves.new(fc.data_path, index=fc.array_index)
+        nfc.keyframe_points.add(n)
+        for k, (f, ta) in enumerate(keys):
+            nfc.keyframe_points[k].co = (f, fc.evaluate(ta))
+            nfc.keyframe_points[k].interpolation = 'CONSTANT'
+    for b, k_ in SCALE_BONES.items():
+        for i in range(3):
+            path = f'pose.bones["{b}"].scale'
+            nfc = act.fcurves.find(path, index=i) or act.fcurves.new(path, index=i)
+            nfc.keyframe_points.clear()
+            nfc.keyframe_points.insert(0, k_).interpolation = 'CONSTANT'
+    arm.animation_data.action = act
+    return act
+
+
 FOOT = 0.212                                               # raw units per action frame while a foot is planted (measured)
 RATE = 17.0                                                # action frames per second: a calm walk
 V = FOOT * RATE * K                                        # metres per second
@@ -219,9 +243,9 @@ for ob in (cam, tgt):
     ob.animation_data_clear()
 
 if MODE == 'lineup':
-    PEOPLE = [person(f'p{i}', c, (-5.0 + i * 2.0, -10.0, 0.0), 180, yaw_fix=25.0) for i, c in enumerate(ORDER)]   # the idle pose is turned 25 degrees
+    PEOPLE = [person(f'p{i}', c, (-5.0 + i * 2.0, -10.0, 0.0), 180) for i, c in enumerate(ORDER)]   # caught mid-stride, walking toward us
     for i, (root, arm) in enumerate(PEOPLE):
-        drive(arm, IDLE, 0, 0.6 + i * 0.37, 24, length=240)
+        bake(arm, WALK, [0.0], RATE, phase=3.0 + i * 4.0)
     cam.location, tgt.location = (1.2, -24.5, 1.7), (0.0, -10.0, 1.05)
     cam.data.lens = 45
     sc.frame_start = sc.frame_end = 0
@@ -235,22 +259,17 @@ else:
         PEOPLE.append((root, arm, (x, y), hd, t0))
     n = int(4.0 * FPS)
     sc.frame_start, sc.frame_end = 0, n - 1
-    for f in range(n):
-        t = f / FPS
-        tq = math.floor(t * 12) / 12
-        for i, (root, arm, (x, y), hd, t0) in enumerate(PEOPLE):
-            tt = max(0.0, tq - t0)
-            a = math.radians(hd)
+    TQ = [math.floor(f / FPS * 12) / 12 for f in range(n)]
+    for i, (root, arm, (x, y), hd, t0) in enumerate(PEOPLE):
+        TT = [max(0.0, tq - t0) for tq in TQ]
+        a = math.radians(hd)
+        for f, tt in enumerate(TT):
             root.location = (x - math.sin(a) * V * tt, y + math.cos(a) * V * tt, 0)
             root.keyframe_insert('location', frame=f)
-            drive(arm, WALK, f, tt, RATE, phase=i * 3.0)
-    for root, arm, *_ in PEOPLE:
         for fc in root.animation_data.action.fcurves:
             for kp in fc.keyframe_points:
                 kp.interpolation = 'CONSTANT'
-        for fc in arm.animation_data.nla_tracks[0].strips[0].fcurves:
-            for kp in fc.keyframe_points:
-                kp.interpolation = 'CONSTANT'
+        bake(arm, WALK, TT, RATE, phase=i * 3.0)
     cam.data.lens = 32
     cam.location, tgt.location = (2.5, -34, 2.6), (0.0, -11.0, 4.0)      # still camera: people move on twos, so only 12 renders a second
     frames = [f for f in range(n) if f == 0 or math.floor(f / FPS * 12) != math.floor((f - 1) / FPS * 12)]
