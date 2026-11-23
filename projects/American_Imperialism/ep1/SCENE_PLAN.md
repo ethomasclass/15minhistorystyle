@@ -14,6 +14,18 @@ about 10 s after chapter 2. Replaces the visual notes in `../EP1_PITCH_MEETING_O
 | **Voice** | Anything quoted | Vector quote card: a portrait traced from the period image, name on the orange strip, words in on their spoken time, teal underline, traced signature | `tools/vec_quote.py`, `tools/vtrace.py` | Jefferson test |
 | **Evidence** | The real thing: documents and photographs | Archival scans on the dark desk, the channel's marks (swipe, underline, circle), mono source tags | Hawaiʻi kit desk pieces (`tools/ep.py`), `img/archival/` | Petition light table (Hawaiʻi sample 3) |
 
+**3D maps** are the bridge between the Explainer and the World: real terrain and sea floor (AWS Terrarium elevation,
+SRTM and GEBCO; shorelines from U.S. Census TIGER water areas so harbors and lochs cut true) built in Blender as stacked
+paper sheets in the explainer palette (coral island, slate-teal shelves, teal pins), on the dark desk
+(`tools/geo_bake.py` → `tools/relief_bake.py` → `blender/map3d.py`). Where they go:
+
+| Line | 3D map |
+|---|---|
+| ch 4 "Now look at the Pacific" ... "one of the best harbors anywhere" | off the pitch-room wall map into a Pacific relief, pushing in to Oʻahu; Pearl Harbor's lochs catch the light |
+| ch 5 end into ch 6 | **map to world**: the flat island card's Oʻahu rises sheet by sheet (stepped at 12 fps), the camera dives to Honolulu harbor and matches into the Blender harbor wide |
+| ch 6 "Pearl Harbor" (1887) | Oʻahu relief, the orange pin drops on Pearl Harbor |
+| ch 9 "Pearl Harbor" | the same relief, the same pin, quiet light |
+
 **Transitions** (the magnates style) are what make it one film instead of four: continuous camera moves that pass
 through something into the next language. Through a window, into a picture on an easel, down onto a map that rises into a
 3D island, along a document into the world it describes. Every chapter has at least one, and no chapter cuts to black
