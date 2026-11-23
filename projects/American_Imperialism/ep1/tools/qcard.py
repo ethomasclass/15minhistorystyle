@@ -89,6 +89,19 @@ CARDS = {
                  portrait=dict(path=ARC('ch06_sanford_dole_1896book.jpg'), rotate=180, frac=(0.20, 0.16, 0.84, 0.74), cuts=[30, 55, 80]), name='SANFORD B. DOLE',
                  source='PRESIDENT OF THE NEW GOVERNMENT, 1893', source_at='a lawyer named',
                  credit='PORTRAIT: S. B. DOLE · W. D. ALEXANDER, 1896 (TRACED)', gag=dict(slide='Yes', pop='fruit cups')),
+    'mahan_intro': dict(stem='ch04_the_pitch_meeting', start='The Admiral', name_at='Alfred Thayer Mahan', end='got so powerful', hold=0.3,
+                        portrait=dict(path=ARC('ch04_mahan_portrait_nh126.jpg'), frac=(0.15, 0.08, 0.88, 0.70)), name='ALFRED THAYER MAHAN',
+                        source='U.S. NAVY CAPTAIN', source_at='a navy captain',
+                        retitle=dict(at='The Admiral', old='the Admiral', strike='Technically', new='captain'),
+                        side=dict(path=ARC('ch04_mahan_sea_power_title_1890.jpg'), frac=(0.0, 0.0, 1.0, 1.0), at='wrote a book', w=380,
+                                  tag='FIRST U.S. EDITION, 1890 · INTERNET ARCHIVE'),
+                        credit='PORTRAIT: NAVAL HISTORY AND HERITAGE COMMAND NH 126 (TRACED)'),
+    'strong_intro': dict(stem='ch04_the_pitch_meeting', start='Josiah Strong was', name_at='Josiah Strong was', end='owed them to the world', hold=0.4,
+                         portrait=dict(path=ARC('ch04_josiah_strong.jpg'), frac=(0.14, 0.04, 0.92, 0.72)), name='REV. JOSIAH STRONG',
+                         source='PROTESTANT MINISTER', source_at='Protestant minister',
+                         side=dict(path=ARC('ch04_strong_our_country_title.jpg'), frac=(0.0, 0.0, 1.0, 1.0), at='a bestseller called', w=380,
+                                   tag='OUR COUNTRY, 1885, A LATER PRINTING · INTERNET ARCHIVE'),
+                         credit='PORTRAIT: JOSIAH STRONG, PUBLISHED 1907 · WIKIMEDIA COMMONS (TRACED)'),
 }
 
 # coloured backgrounds for variety: coral for the story's subject (Hawaiʻi's own voices, never in the quiet chapter),
@@ -331,19 +344,25 @@ def build_name(key):
     PH = min(PH, 600)
     S.defs.append(f'<clipPath id="pclip"><path d="{slab(PW, PH, 34)}"/></clipPath><g id="portrait">{psvg}</g>')
     S.over.append('<g id="ov"></g>')
-    PX, PY = 960 - PW / 2, 470 - PH / 2 - 70
+    PX, PY = 960 - PW / 2, 470 - PH / 2 - 70 + (50 if c.get('retitle') else 0)
     CX1, CY1 = PX + PW / 2, PY + PH / 2
     t_in = Wd.at(c['name_at']) - 0.25 if c['name_at'] != c['start'] else Wd.at(c['start'])
     t_in = min(t_in, Wd.at(c['name_at']))
     gag = c.get('gag')
+    side = c.get('side')
     coral = c.get('tone') == 'coral'
+    if side:                                  # a period page (title page, document) that joins the portrait, as a real print
+        ssvg, SHh = portrait_svg(key + '_side', dict(side, print=True), False)
+        S.defs.append(f'<g id="side">{ssvg}</g>')
+    slide_at = Wd.at(gag['slide']) if gag else Wd.at(side['at']) if side else None
+    rt = c.get('retitle')
 
     def frame(t):
         tq = step12(t)
         o = ''
         s = pop_s(t, t_in, 0.45)
         if s > 0:
-            u = ease_io((t - Wd.at(gag['slide'])) / 0.7) if gag and t >= Wd.at(gag['slide']) else 0.0
+            u = ease_io((t - slide_at) / 0.7) if slide_at is not None and t >= slide_at else 0.0
             cx = CX1 - 330 * u
             rot = -4 * (1 - clamp((t - t_in) / 0.45)) + 1.5 * math.sin(u * math.pi)
             grp = (f'<path d="{slab(PW, PH, 34)}" fill="#0d0c09" transform="translate({PX + 10},{PY + 12})"/>'
@@ -355,7 +374,23 @@ def build_name(key):
             ts = Wd.at(c['source_at'])
             if t >= ts:
                 grp += f'<g opacity="{clamp((t - ts) / 0.3):.3f}">' + tag(PX, PY + PH + 132, c['source'], 19, TAG) + '</g>'
+            if rt and t >= Wd.at(rt['at']):         # a handwritten title over the portrait, corrected on its word
+                grp += note(PX + 20, PY - 30, rt['old'], 44, TE, prog=(tq - Wd.at(rt['at'])) / 0.6)
+                ts_ = Wd.at(rt['strike'])
+                if t >= ts_:
+                    pk = ease_out(clamp((tq - ts_) / 0.25))
+                    grp += f'<path d="M{PX + 8},{PY - 58} L{PX + 8 + 300 * pk:.0f},{PY - 54}" stroke="{TE}" stroke-width="7" stroke-linecap="round"/>'
+                    grp += note(PX + 345, PY - 30, rt['new'], 44, TE, prog=(tq - ts_ - 0.25) / 0.5)
             o += f'<g transform="translate({cx:.1f},{CY1:.1f}) rotate({rot:.2f}) scale({s:.4f}) translate({-CX1:.1f},{-CY1:.1f})">{grp}</g>'
+        if side and t >= slide_at:
+            sw_ = side.get('w', 380)
+            sx_, sy_ = 1290, CY1 - SHh / 2 - 20
+            ss = pop_s(t, slide_at + 0.15, 0.4)
+            body = (f'<rect x="10" y="12" width="{sw_}" height="{SHh:.0f}" fill="#0d0c09"/><use href="#side"/>'
+                    f'<rect width="{sw_}" height="{SHh:.0f}" fill="none" stroke="{CREAM}" stroke-width="3" opacity="0.5"/>')
+            o += f'<g transform="translate({sx_ + sw_ / 2:.0f},{sy_ + SHh / 2:.0f}) rotate({3 - 5 * (1 - clamp((t - slide_at - 0.15) / 0.4)):.2f}) scale({ss:.4f}) translate({-sw_ / 2:.0f},{-SHh / 2:.0f})">{body}</g>'
+            if t >= slide_at + 0.5:
+                o += f'<g opacity="{clamp((t - slide_at - 0.5) / 0.3):.3f}">' + tag(sx_, sy_ + SHh + 40, side['tag'], 17, TAG) + '</g>'
         if gag:
             tp = Wd.at(gag['pop'])
             if t >= tp:
