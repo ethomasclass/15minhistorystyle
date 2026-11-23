@@ -169,6 +169,52 @@ Quiet palette (bone and teal, no orange, no coral tint, no gags). Slower camera.
 | "Except the asking." | **The Queen's window**, the opening image, held | W | cold open | reuse |
 | "a ship that blew up in Havana" | The USS *Maine* wreck photo; then a newspaper front page | D | image search | build |
 
+## Transition map: every join in the episode (Nov 23)
+
+The rule: **the camera never stops between scenes unless the cut is the joke.** Each join below is one of six moves,
+so they read as a family and not as effects:
+
+| Move | What happens | Example |
+|---|---|---|
+| **THROUGH** | The camera flies through an opening (window, easel board, picture frame) and comes out in the next scene | the easel into the docks |
+| **MATCH** | A shape or colour in one scene lines up with the same shape in the next, and the scene changes under it | the flag's stripes become the parchment's lines |
+| **RISE** | A flat map becomes 3D terrain, then the world (or back the other way) | the island card into Honolulu harbor |
+| **PULL** | The camera pulls back and the scene turns out to be a picture inside another scene | the open sea is the wall map in the pitch room |
+| **CARRY** | One object travels across the join and changes language on the way (vector to 3D or back) | the sugar sack from the wharf to the tariff gate |
+| **WIPE** | Something in the scene passes the lens, filling the frame, and the next scene is behind it | a cutter's bow passes the camera |
+
+Hard cuts stay only where they are the joke or the signature: the Declaration line, the humor cuts, the logo breaks.
+
+| # | Ch | From → to (on the word) | Move | How it's made | Builder |
+|---|---|---|---|---|---|
+| 1 | 1→2 | Queen's window → Declaration ("In 1776") | THROUGH + MATCH | coldopen C2 pull-back keeps rising, tilts down on the flag until its stripes fill frame; the stripes dissolve into the parchment's ruled lines at the same angle | cold open tail |
+| 2 | 2 | Declaration → palace ("called their government a republic") | MATCH (reverse) | the parchment's lines become the flag again, the camera pulls back down to the palace wide | cold open tail |
+| 3 | 2 | palace → question card ("betraying") | PULL | the palace frame shrinks into a print lying on the desk; the two tablets drop beside it | desk |
+| 4 | 3→4 | census sea → pitch room ("So where next?") | PULL | the vector sea pulls back; it's the Pacific on the pitch-room wall map, the empty room around it | pitch room |
+| 5 | 4 | room → docks ("The Businessman") | THROUGH | the camera pushes into the easel board, which shows the docks' first frame; the board fills frame and the docks shot starts moving | pitch room + docks |
+| 6 | 4 | docks → room ("new customers overseas") | PULL | reverse of 5: the docks shot freezes into the board and the camera pulls back into the room | pitch room |
+| 7 | 4 | coal map → Imperial Federation map ("Britain, France and Germany") | CARRY | the steamship sails off the coal map onto the 1886 scan, which inks in French and German colonies | desk |
+| 8 | 4 | Federation map → wall map → 3D Pacific ("Now look at the Pacific") | PULL then RISE | the 1886 map pulls back onto the pitch-room easel; the camera crosses to the wall map, pushes into the Pacific, which rises into the 3D relief and pushes in to Oʻahu, Pearl Harbor's lochs catching the light | pitch room + 3D maps |
+| 9 | 4 | room → church ("The Preacher") | THROUGH | as 5, into the mission church | pitch room + church |
+| 10 | 4 | room → lecture hall ("The 'Scientist'") | THROUGH | as 5, into the lecture hall (L1 is the board picture) | pitch room + lecture |
+| 11 | 5→6 | island card → Honolulu harbor (ch 5 end) ★ | RISE | the flat island card tilts back, Oʻahu rises into the 3D relief (stepped at 12 fps), the camera dives to Honolulu harbor; the relief matches into the harbor set's wide | 3D maps + harbor |
+| 12 | 6 | harbor → tariff gate ("a tax at the border") | CARRY | a sugar sack swung up on the harbor wharf crane fills the frame and lands, flat, as the vector sack at the gate | harbor + desk |
+| 13 | 6 | tariff gate → cane fields ("Plantations boomed") | MATCH | the gate's flat green horizon strip lines up with the 3D field's horizon, the gate graphics fall away | desk + sugar |
+| 14 | 6 | sugar mill → Oʻahu relief ("Pearl Harbor") | RISE (reverse) | the camera rises with the mill smoke, through it, and comes out above the 3D Oʻahu; the orange pin drops on Pearl Harbor | sugar + 3D maps |
+| 15 | 6 | Pearl pin → Kalākaua ("King Kalākaua") | MATCH | the camera pushes into the pin tablet until its colour fills frame; it becomes the quote card's ground | 3D maps + desk |
+| 16 | 6 | committee room → harbor ("The help came") | THROUGH | from the rifles, the camera rises to the window and flies out through it over the town to the harbor wide | committee + harbor |
+| 17 | 6 | cutters → landing march ("who ordered sailors and Marines") | WIPE | the nearest cutter's bow passes the lens; behind it, the column on King Street | harbor + landing |
+| 18 | 6 | flag up → Declaration underline 2 ("flag") | MATCH | the 44-star flag fills frame as it reaches the top; its stripes become the parchment lines (rhymes with 1) | govbuilding |
+| 19 | 6 | pineapple fields → Dole payoff ("his cousin James") | CARRY | a pineapple off the wagon is the one cubed into the fruit cup | pineapple + desk |
+| 20 | 6→8 | Senate stack ("a stack of paper") ↔ petition (ch 8 "21,269 names") | MATCH | the light table's stack and the Senate desk's stack share one frame; ch 8 pulls back from the petition to the Senate desk | senate + desk |
+| 21 | 8 | room in later light → abdication document ("signed away her throne") | MATCH | the re-lit room's camera tilts down to her writing table; the paper there becomes the archival scan at the same angle | cold open + desk |
+| 22 | 8 | palace flag swap ("annexed Hawaiʻi anyway") | — | the cold open wide, the same frame; the Hawaiian flag comes down, the U.S. flag goes up | cold open |
+| 23 | 9 | Ledger → Pearl Harbor ("Pearl Harbor") | RISE | the ledger's "did" column lies on the desk; the camera tips over it onto the 3D Oʻahu in quiet light | 3D maps |
+| 24 | 9 | question card → Queen's window ("Except the asking.") | THROUGH (reverse of 1) | the camera pushes back in through her window to the opening image | cold open |
+
+**Inside the desk pieces**, the explainer and evidence shots in one chapter sit on **one long desk**, and the camera slides
+from one to the next instead of cutting (ch 3: globe → vocab → Jefferson → Alaska check → census map).
+
 ## What to build, in order
 
 1. **Kit pieces used everywhere** (one week of quality in one place): the vocab card, the quote card generalised for any
