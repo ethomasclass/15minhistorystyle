@@ -640,6 +640,34 @@ GUARD_PARTS = [('belt', 'Hips', lambda: band(ZW, 0.16), '#e8e2d4'),
 COSTUMES['guard'] = dict(coat='#232c40', skin='#d9b38f', hair='#3a2e25', legs='#2b3346', shoes='#15171c', parts=GUARD_PARTS)
 COSTUMES['patrol'] = dict(COSTUMES['guard'], parts=GUARD_PARTS + [('stock', 'Spine2', rifle_stock, '#5a4532'), ('barrel', 'Spine2', rifle_barrel, '#2b2622')])
 
+def spectacles():
+    """two small round rims at eye level, standing just off the face"""
+    fx = max((q.x for q, gname_ in VPTS if gname_ == 'Head' and abs(q.z - (ZB - 0.16)) < 0.06), default=0.5)
+    V_, F_ = [], []
+    for side in (-1, 1):
+        c = Vector((fx + 0.02, C0[1] + side * 0.1, ZB - 0.16))
+        v, f = tube(c, c + Vector((0.02, 0, 0)), [(0, 0.075), (1, 0.075)], n=12)
+        v2, f2 = tube(c, c + Vector((0.02, 0, 0)), [(0, 0.055), (1, 0.055)], n=12)
+        m = len(V_)
+        V_ += v + v2
+        F_ += [tuple(i + m for i in q) for q in f] + [tuple(i + m + len(v) for i in q) for q in f2]
+    return V_, F_
+
+
+COSTUMES['businessman'] = dict(coat='#2b2824', skin='#d9b38f', hair='#8a8378', legs='#4a4540', shoes='#1d1b18',
+                               parts=[('tails', 'Hips', lambda: tails(1.32, 0.8), '#2b2824'),
+                                      ('vest', 'Spine1', lambda: band(ZC - 0.3, 0.5, off=0.05), '#77736b'),
+                                      ('collar', 'Spine2', lambda: collar(0.18), '#efe9dc')])
+COSTUMES['minister'] = dict(coat='#1c1a1d', skin='#e3c4a2', hair='#5b4330', legs='#1c1a1d', shoes='#111111',
+                            parts=[('tails', 'Hips', lambda: tails(1.05, 0.84), '#1c1a1d'),
+                                   ('collar', 'Spine2', lambda: collar(0.12, 0.03), '#f4efe6')])
+COSTUMES['lecturer'] = dict(coat='#6b5034', skin='#d9b38f', hair='#6e5a45', legs='#5a4535', shoes='#2a2622',
+                            parts=[('tails', 'Hips', lambda: tails(1.85, 0.72), '#6b5034'),
+                                   ('collar', 'Spine2', lambda: collar(0.16), '#efe9dc'),
+                                   ('specs', 'Head', spectacles, '#2a2622')])
+COSTUMES['captain'] = COSTUMES['officer']
+
+
 ORDER_ARMS = {'LeftArm': (84, 0, 5), 'LeftForeArm': (0, 0, 4), 'RightArm': (82, 0, -4), 'RightForeArm': (0, 0, -24),
               'RightHandIndex1': (70, 0, 0), 'RightHandIndex2': (75, 0, 0), 'RightHandIndex3': (60, 0, 0),   # the fingers closed in a fist
               'RightHandThumb2': (30, 0, 0)}
