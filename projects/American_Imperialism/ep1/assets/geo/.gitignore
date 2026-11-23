@@ -1,0 +1,4 @@
+# build files from tools/terrain_bake.py (regenerate, do not commit)
+*.f32
+*.i32
+*_terrain.npz

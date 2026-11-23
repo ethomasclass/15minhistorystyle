@@ -1,0 +1,1 @@
+{"w": 880, "h": 710, "wu": 7.044199999999999, "hu": 5.6585, "base": -0.27, "exag": 3.0, "bounds": {"lat0": 21.22, "lat1": 21.73, "lon0": -158.3, "lon1": -157.62}, "source": "AWS Terrarium elevation tiles (Mapzen; SRTM / GEBCO / USGS NED), s3.amazonaws.com/elevation-tiles-prod"}

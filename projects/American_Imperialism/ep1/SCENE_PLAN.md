@@ -15,9 +15,10 @@ about 10 s after chapter 2. Replaces the visual notes in `../EP1_PITCH_MEETING_O
 | **Evidence** | The real thing: documents and photographs | Archival scans on the dark desk, the channel's marks (swipe, underline, circle), mono source tags | Hawaiʻi kit desk pieces (`tools/ep.py`), `img/archival/` | Petition light table (Hawaiʻi sample 3) |
 
 **3D maps** are the bridge between the Explainer and the World: real terrain and sea floor (AWS Terrarium elevation,
-SRTM and GEBCO; shorelines from U.S. Census TIGER water areas so harbors and lochs cut true) built in Blender as stacked
-paper sheets in the explainer palette (coral island, slate-teal shelves, teal pins), on the dark desk
-(`tools/geo_bake.py` → `tools/relief_bake.py` → `blender/map3d.py`). Where they go:
+SRTM and GEBCO; shorelines from U.S. Census TIGER water areas so harbors and lochs cut true) built in Blender as one
+continuous, smooth-shaded relief in the explainer palette (coral land, slate-teal sea floor under a clear teal water block,
+teal pins), cut like a museum model on the dark desk (`tools/geo_bake.py` → `tools/terrain_bake.py` → `blender/terrain3d.py`).
+The stacked-paper version (`tools/relief_bake.py` → `blender/map3d.py`) stays as an alternative look. Where they go:
 
 | Line | 3D map |
 |---|---|
