@@ -186,8 +186,8 @@ def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0)
 
 slivers('glints', 320, GLINT, 3, y0=-420, eye=(50.0, -450.0), kd=0.6)
 slivers('glints_dk', 220, GLINT_DK, 4, y0=-420, eye=(50.0, -450.0), kd=0.6)
-slivers('glints2', 160, GLINT, 5, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
-slivers('glints2_dk', 160, GLINT_DK, 6, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
+slivers('glints2', 140, GLINT, 5, y0=-128, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
+slivers('glints2_dk', 140, GLINT_DK, 6, y0=-128, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 
 # ================================================================ the land
 PBX, PBY = 760.0, 1750.0                                      # Punchbowl (Puowaina), behind the town to the right
@@ -832,12 +832,12 @@ def cutter(name, start, heading, phase, crew, marines, moving=True):
                 t = k / 13
                 y = 4.2 - t * 16.0
                 x = side * (0.9 + t * 3.2 + rr.uniform(-0.3, 0.3))
-                Ls = rr.uniform(0.8, 1.8) * (1 - 0.4 * t)
+                Ls = rr.uniform(1.0, 2.4) * (1 - 0.4 * t)
                 a = len(wv)
-                wv += [(x, y, 0.2), (x + side * 0.15, y - Ls, 0.2), (x - side * 0.12, y - Ls * 0.6, 0.2)]
+                wv += [(x, y, 0.3), (x + side * 0.22, y - Ls, 0.3), (x - side * 0.18, y - Ls * 0.6, 0.3)]
                 wf.append((a, a + 1, a + 2))
             a = len(wv)
-            wv += [(side * 0.05, 4.55, 0.2), (side * 1.25, 3.2, 0.2), (side * 1.1, 3.0, 0.2)]
+            wv += [(side * 0.05, 4.6, 0.3), (side * 1.35, 3.0, 0.3), (side * 1.1, 2.7, 0.3)]
             wf.append((a, a + 1, a + 2))
         mesh_from(name + 'wake', wv, wf, GLINT, parent=bt)
     rowers, oars = [], []
@@ -872,7 +872,7 @@ for i, ((mx, my), ph, mar) in enumerate(CUT_MID):
     bt = cutter(f'cut{i}', tuple(st), hd, ph, 'sailor', mar)
     if i == 0:                                                # the boat ensign at the lead cutter's stern
         cyl('bens_staff', (0, -4.5, 0.5), (0, -4.7, 2.1), 0.025, 0.02, SPAR, n=5, parent=bt)
-        flag('bens', 'us_flag_44.png', 0.9, 0.47, (0, -4.7, 2.08), math.pi * 1.5, parent=bt, wave=0.05)
+        flag('bens', 'us_flag_44.png', 0.75, 0.4, (0, -4.7, 2.08), math.pi * 1.5, parent=bt, wave=0.05)
 # a cutter still alongside at the ladder, half loaded
 cutter('cut_l', tuple(on_ship((LX - 6.0, B / 2 + 3.2, 0.0))), math.degrees(BOS_R) + 180, 0.0, 'sailor', True, moving=False)
 CUTTERS[-1] = CUTTERS[-1][:3] + (None,) + CUTTERS[-1][4:]
@@ -990,7 +990,7 @@ cam.data.clip_start, cam.data.clip_end = 0.2, 40000
 cam.data.lens = 45
 KEYS = [  # frame, camera position, look-at; H1 pushes in slowly, H2 drifts with the boats
     (0, (55.0, -455.0, 15.0), (22.0, 0.0, 44.0)), (FB - 1, (52.0, -432.0, 15.2), (20.0, 0.0, 43.0)),
-    (FB, (-46.0, -151.0, 2.1), (-27.0, -92.0, 5.0)), (N - 1, (-44.8, -148.0, 2.2), (-28.5, -88.0, 5.0))]
+    (FB, (-41.0, -146.5, 1.8), (-16.5, -89.5, 4.6)), (N - 1, (-40.0, -144.0, 1.85), (-23.0, -85.0, 4.6))]
 LENS = [(0, 45.0), (FB, 35.0)]
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
@@ -1010,7 +1010,7 @@ cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data
 for f in list(range(0, N, 6)) + [FB - 1, FB]:
     c = Vector([cfc[i].evaluate(f) for i in range(3)])
     subj = Vector((BOS_X, BOS_Y, 8.0)) if f < FB else CUTTERS[0][0].matrix_world.translation
-    cam.data.dof.focus_distance = (subj - c).length if f < FB else 26.0
+    cam.data.dof.focus_distance = (subj - c).length if f < FB else 19.0
     cam.data.dof.aperture_fstop = 22.0 if f < FB else 5.6
     cam.data.dof.keyframe_insert('focus_distance', frame=f)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
