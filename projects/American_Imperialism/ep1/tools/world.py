@@ -14,7 +14,7 @@ P2 = lambda q: ' '.join(f'{x:.1f},{y:.1f}' for x, y in q)
 # ---------------------------------------------------------------- shared palette (from the Flow plates)
 SKY_T, SKY_B = '#b8c5b8', '#cdd0bf'
 CLOUD, BELLY = '#e6d6ad', '#cfb88c'
-MTN = ['#55634f', '#5f6e59', '#6b7a62', '#748265', '#838e73', '#93a083']
+MTN = ['#45533f', '#55634f', '#62715a', '#717f66', '#838e73', '#97a386', '#aab397']
 FAR = ['#7f8b6d', '#8d987b', '#9aa48a', '#a8b096']
 TREE = ['#3a4630', '#404d35', '#4b5a3d']
 LAWN = ['#7d8245', '#878b4b', '#8f9150', '#9a9b58']
@@ -23,14 +23,14 @@ TRUNK = ['#53402c', '#664d34']
 SEA = ['#3f6a6b', '#4f7776', '#5e8784', '#6f9997', '#86aba6']
 WOOD = ['#4a3726', '#5a4130', '#6e5038', '#86643f', '#9c7a4f', '#b08e5e']
 BRICK = ['#4f2a20', '#5e3226', '#6b3b2c', '#7a4532', '#8a5038']
-ROCK = ['#3f4230', '#4d523a', '#5e6545', '#6c7550', '#7e855e', '#8f9670']
+ROCK = ['#2f3224', '#3f4230', '#4d523a', '#5e6545', '#6c7550', '#7e855e', '#939a74']
 COAL = ['#151510', '#1f1e17', '#2a2920', '#37352a']
 IVORY = ['#bdb7a3', '#d3cdb7', '#e4dfcc', '#efeadb']
 
 
 # ---------------------------------------------------------------- facet shading (the Flow look: every surface broken into
 # a few big angular planes, lit from the upper left, lighter on the lit side and darker in shade)
-def fpoly(pts, base, spread=0.11, cell=None, contrast=1.35, bias=0.0, n=5, height=None):
+def fpoly(pts, base, spread=0.17, cell=None, contrast=2.0, bias=0.0, n=6, height=None):
     xs = [q[0] for q in pts]; ys = [q[1] for q in pts]
     size = max(max(xs) - min(xs), max(ys) - min(ys), 1)
     cell = cell or max(22, size / 3.2)
@@ -57,10 +57,10 @@ def fcloud(cx, cy, w, h, fill=CLOUD, belly=BELLY, n=9, seed_=0):
         top = [(x, min(y, base)) for x, y in top]
         outline = top + [(top[-1][0], base), (top[0][0], base)]
         col = F.shift(fill, tone)
-        o += facets(outline, F.tones(col, 5, 0.06), hill_h(2.2 / w, h * 1.1), cell=h * 0.42, contrast=1.3, bias=0.12)
+        o += facets(outline, F.tones(col, 6, 0.09), hill_h(2.2 / w, h * 1.3), cell=h * 0.42, contrast=1.8, bias=0.12)
         if belly and tier == 1:
             bl = [(x, max(y, base - h * 0.3)) for x, y in top]
-            o += facets(bl + [(bl[-1][0], base), (bl[0][0], base)], F.tones(belly, 4, 0.06), hill_h(2.0 / w, h * 0.5), cell=h * 0.35, contrast=1.1)
+            o += facets(bl + [(bl[-1][0], base), (bl[0][0], base)], F.tones(belly, 5, 0.09), hill_h(2.0 / w, h * 0.6), cell=h * 0.35, contrast=1.6)
     return o
 
 
@@ -86,16 +86,16 @@ def drift_group(gid, svg):
 # ---------------------------------------------------------------- depth: one sun at the upper left, so every shadow falls
 # to the lower right; contact shadows where things meet the ground; haze over distance; a light-and-shade wash
 SUN = (0.7, 0.18)            # a point h px above the ground throws its shadow h*0.7 right and h*0.18 down
-SH = '#1b1810'
+SH = '#17140d'
 
 
-def proj_shadow(pts, base, op=0.3, k=SUN, col=SH):
+def proj_shadow(pts, base, op=0.42, k=SUN, col=SH):
     """the shadow on flat ground (at y = base) of an upright outline"""
     q = [(x + (base - y) * k[0], base + (base - y) * k[1]) for x, y in pts]
     return f'<polygon points="{P2(q)}" fill="{col}" opacity="{op}"/>'
 
 
-def box_shadow(x0, x1, top, base, op=0.3, k=SUN, col=SH):
+def box_shadow(x0, x1, top, base, op=0.42, k=SUN, col=SH):
     dx, dy = (base - top) * k[0], (base - top) * k[1]
     return f'<polygon points="{P2([(x0, base), (x1, base), (x1 + dx, base + dy), (x0 + dx, base + dy)])}" fill="{col}" opacity="{op}"/>'
 
@@ -119,7 +119,7 @@ def light_wash(prefix, warm='#f6e7c4', dark=SH):
     return (f'<radialGradient id="{prefix}lw" cx="0.12" cy="0.02" r="0.9"><stop offset="0" stop-color="{warm}" stop-opacity="0.28"/>'
             f'<stop offset="0.55" stop-color="{warm}" stop-opacity="0"/></radialGradient>'
             f'<linearGradient id="{prefix}dw" x1="0.2" y1="0.1" x2="1" y2="1"><stop offset="0.45" stop-color="{dark}" stop-opacity="0"/>'
-            f'<stop offset="1" stop-color="{dark}" stop-opacity="0.32"/></linearGradient>'
+            f'<stop offset="1" stop-color="{dark}" stop-opacity="0.5"/></linearGradient>'
             f'<rect x="-400" y="-300" width="2720" height="1680" fill="url(#{prefix}lw)"/><rect x="-400" y="-300" width="2720" height="1680" fill="url(#{prefix}dw)"/>')
 
 
@@ -363,13 +363,13 @@ def scene_docks(prefix, t0=0.0):
     """An American wharf around 1890, piled with more than it can hold (copied from Flow c5_docks)."""
     o = sky()
     o += fcloud(320, 120, 820, 150, n=10, seed_=320) + fcloud(1560, 80, 760, 130, n=9, seed_=1560)
-    o += facets([(600, 600), (700, 520), (820, 470), (930, 500), (1050, 540), (1200, 560), (1200, 620), (600, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
-    o += facets([(1180, 560), (1300, 470), (1420, 430), (1560, 470), (1700, 520), (2400, 540), (2400, 620), (1180, 620)], FAR, hill_h(0.01, 40), cell=60, contrast=0.6)
+    o += facets([(600, 600), (700, 520), (820, 470), (930, 500), (1050, 540), (1200, 560), (1200, 620), (600, 620)], FAR, hill_h(0.01, 60), cell=60, contrast=1.2)
+    o += facets([(1180, 560), (1300, 470), (1420, 430), (1560, 470), (1700, 520), (2400, 540), (2400, 620), (1180, 620)], FAR, hill_h(0.01, 60), cell=60, contrast=1.2)
     o += haze(500, 380, 2400, 640, SKY_B, 0.4)
     o += f'<g id="{prefix}sea"></g>'
     # the warehouse, in perspective, receding from the left edge
     wall = [(-300, 1080), (-300, -40), (760, 430), (760, 760)]
-    o += facets(wall, BRICK, hill_h(0.02, 20), cell=60, contrast=0.4, stroke=True)
+    o += facets(wall, BRICK, hill_h(0.012, 60), cell=110, contrast=1.3, stroke=True)
     for i in range(26):                                        # brick courses converging to the vanishing point
         f_ = i / 26
         y_left = -40 + 1120 * f_
@@ -462,7 +462,7 @@ def scene_coaling(prefix):
     o += f'<g id="{prefix}sea"></g>' + haze(-600, 560, 2520, 700, '#cfd3bf', 0.35)
     # the island
     isl = [(1240, 1100), (1290, 940), (1420, 860), (1560, 700), (1640, 540), (1720, 460), (1800, 520), (1880, 640), (2000, 760), (2300, 900), (2300, 1100)]
-    o += F.seam(facets(isl, ROCK, ridge_h(0.012, 80, 0.1), cell=70, contrast=1.1))
+    o += F.seam(facets(isl, ROCK, ridge_h(0.012, 110, 0.1), cell=70, contrast=1.7))
     o += facets([(1180, 1100), (1240, 980), (1380, 930), (1560, 950), (1700, 1010), (1760, 1100)], ROCK, ridge_h(0.02, 40, 0.1), cell=55, contrast=1.0)
     o += f'<polygon points="1180,1060 1250,1010 1450,1000 1700,1040 2300,1030 2300,1110 1180,1110" fill="{SH}" opacity="0.35"/>'   # where rock meets sea
     o += f'<polyline points="1170,1062 1250,1012 1450,1002 1700,1042 2300,1032" fill="none" stroke="#e9e3cf" stroke-width="3" opacity="0.6"/>'
@@ -528,10 +528,10 @@ def scene_church(prefix, t_arrive=0.0):
     o += facets([(-400, 900), (-400, 470), (300, 380), (700, 300), (1150, 340), (1600, 300), (2000, 360), (2400, 400), (2400, 900)], FAR, ridge_h(0.006, 70, 0.1), cell=100, contrast=0.8)
     o += haze(-400, 250, 2400, 900, SKY_B, 0.45)
     o += F.seam(facets([(-400, 900), (-400, 520), (0, 400), (200, 300), (420, 190), (560, 230), (700, 330), (900, 300), (1100, 360), (1300, 440),
-                        (1500, 480), (1700, 420), (1900, 470), (2400, 520), (2400, 900)], MTN, ridge_h(0.005, 110, 0.12, namp=30), cell=110, contrast=1.0))
+                        (1500, 480), (1700, 420), (1900, 470), (2400, 520), (2400, 900)], MTN, ridge_h(0.005, 140, 0.12, namp=30), cell=110, contrast=1.6))
     o += haze(-400, 150, 2400, 900, SKY_B, 0.18)
     o += poly([(-400, 1000), (-400, 800), (300, 790), (700, 810), (1300, 805), (1700, 790), (2400, 800), (2400, 1000)], TREE[1])
-    o += facets([(-500, 905), (2500, 905), (2500, 1400), (-500, 1400)], LAWN, hill_h(0.003, 90), cell=200, contrast=0.8, bias=0.05)
+    o += facets([(-500, 905), (2500, 905), (2500, 1400), (-500, 1400)], LAWN, hill_h(0.003, 120), cell=190, contrast=1.3, bias=0.0)
     o += poly([(-500, 1000), (2500, 1000), (2500, 1014), (-500, 1014)], '#c8bb9c')
     o += poly([(895, 1000), (1025, 1000), (1120, 1400), (800, 1400)], '#c3b495')
     # the church: gabled meeting house, porch gable, tower and steeple, seen a little from the left so its right side shows
