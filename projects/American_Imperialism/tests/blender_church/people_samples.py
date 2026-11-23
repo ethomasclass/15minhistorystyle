@@ -423,10 +423,66 @@ def bake(arm, action, times, rate, phase=0.0, length=24):
     return act
 
 
+STAND = {'LeftArm': (78, 0, 9), 'RightArm': (78, 0, -9), 'LeftForeArm': (0, 0, 8), 'RightForeArm': (0, 0, -8)}
+
+
+def stand(arm, n, pose=None, breathe=True, k=0.0):
+    """a calm standing pose (arms down, a little forward), breathing on twos, for n scene frames"""
+    pose = dict(STAND, **(pose or {}))
+    act = bpy.data.actions.new(arm.name + '_stand')
+    for bn, (x, y, z) in pose.items():
+        arm.pose.bones[bn].rotation_mode = 'XYZ'
+        for i, v in enumerate((x, y, z)):
+            fc = act.fcurves.new(f'pose.bones["{bn}"].rotation_euler', index=i)
+            fc.keyframe_points.insert(0, math.radians(v)).interpolation = 'CONSTANT'
+    if breathe:
+        arm.pose.bones['Spine1'].rotation_mode = 'XYZ'
+        fc = act.fcurves.new('pose.bones["Spine1"].rotation_euler', index=2)
+        for f in range(0, n, 2):
+            tq = math.floor(f / 30 * 12) / 12
+            fc.keyframe_points.insert(f, math.radians(1.6 * math.sin(tq * 1.5 + k))).interpolation = 'CONSTANT'
+    for b, k_ in SCALE_BONES.items():
+        for i in range(3):
+            act.fcurves.new(f'pose.bones["{b}"].scale', index=i).keyframe_points.insert(0, k_).interpolation = 'CONSTANT'
+    arm.animation_data.action = act
+    return act
+
+
+def sash():
+    """a sash from the right shoulder to the left hip"""
+    r0, c = ring(ZC - 0.35, TORSO, 0.06)
+    rows = []
+    for dz in (0.0, 0.17):
+        rows.append([(x, y, z + dz + 0.5 * (-math.sin(-math.pi + 2 * math.pi * (k + 0.5) / NB))) for k, (x, y, z) in enumerate(r0)])
+    return loft(rows)
+
+
+def bun():
+    v, f = dome(HZTOP - 0.25, 0.2, 1.0, 8, 3, C0[0] - 0.34, C0[1])
+    v2, f2 = dome(HZTOP - 0.25, 0.2, -1.0, 8, 3, C0[0] - 0.34, C0[1])
+    n = len(v)
+    return v + v2, f + [tuple(i + n for i in q) for q in f2]
+
+
+COSTUMES['queen'] = dict(coat='#3b2a3a', skin='#8f6a4c', hair='#1f1b18', legs='#3b2a3a', shoes='#1d1b18',
+                         parts=[('dress', 'Hips', lambda: skirt(0.1, 1.15, top='chest'), '#3b2a3a'),
+                                ('collar', 'Spine2', lambda: collar(0.2, 0.035), '#4a3648'),
+                                ('sash', 'Spine1', sash, '#e6d6ae'), ('bun', 'Head', bun, '#1f1b18')])
+COSTUMES['guard'] = dict(coat='#232c40', skin='#d9b38f', hair='#3a2e25', legs='#2b3346', shoes='#15171c',
+                         parts=[('belt', 'Hips', lambda: band(ZW, 0.16), '#e8e2d4'),
+                                ('collar', 'Spine2', lambda: collar(0.16), '#232c40'),
+                                ('cap', 'Head', peaked_cap, '#1b2333'), ('peak', 'Head', visor, '#111111')])
+
 FOOT = 0.212                                               # raw units per action frame while a foot is planted (measured)
 RATE = 17.0                                                # action frames per second: a calm walk
 V = FOOT * RATE * K                                        # metres per second
 
+class LibDone(Exception):
+    pass
+
+
+if MODE == 'lib':
+    raise LibDone()
 ORDER = ['gentleman', 'holoku', 'missionary', 'sailor', 'officer', 'worker']
 cam = sc.camera
 tgt = bpy.data.objects['target']
