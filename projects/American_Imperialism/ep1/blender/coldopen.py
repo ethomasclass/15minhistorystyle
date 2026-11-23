@@ -124,8 +124,8 @@ tower('towerC', -4.3, 4.3, -1.0, 6.0, 18.4, 23.2, 0.8)
 for x in (-1.9, 0.0, 1.9):                                 # the central tower's three upper windows
     arch_panel(f'cwin{x}', x - 0.6, x + 0.6, -1.15, -1.0, 15.6, 17.2, 17.8, STONE_LT)
     box(f'cwing{x}', x - 0.38, -1.05, 15.6, x + 0.38, -0.98, 17.6, '#33322c')
-box('bigarch_back', -2.4, -1.05, 9.6, 2.4, -0.98, 13.4, DARK)
-arch_panel('bigarch', -2.6, 2.6, -1.15, -1.0, 9.6, 11.4, 13.6, STONE_LT)
+box('bigarch_back', -2.4, -1.05, 9.6, 2.4, -0.98, 13.75, DARK)
+arch_panel('bigarch', -2.6, 2.6, -1.15, -1.0, 9.6, 11.2, 13.9, STONE_LT)       # crown at 13.58, under the panel top
 box('balcony', -2.8, -1.8, 9.4, 2.8, -1.0, 9.65, STONE_LT)
 box('door_back', -1.6, -1.05, BZ, 1.6, -0.98, 6.2, '#26231f')
 arch_panel('doorarch', -1.8, 1.8, -1.15, -1.0, BZ, 5.0, 6.6, STONE_LT)
