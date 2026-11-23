@@ -2,7 +2,7 @@ import re, os
 CH = [
 ("ch01_the_locked_room", "The Locked Room", 185, """The Queen of Hawaiʻi is a prisoner in her own palace.
 
-It's 1895. There's an armed guard outside her door, and from her window she can see the city she used to rule.
+It's 1895, and Hawaiʻi is still its own country. There's an armed guard outside her door, and from her window she can see the city she used to rule.
 
 The men who put her here aren't a foreign army. They're mostly Americans. Or the sons of Americans."""),
 
@@ -10,7 +10,7 @@ The men who put her here aren't a foreign army. They're mostly Americans. Or the
 
 The men who locked this door called their government a republic. Just like America's.
 
-So when America started taking control of other places, was it betraying its own ideals, or living them out? That's what this series is trying to figure out.
+So when America started taking control of other places, was it betraying its own ideals, the things it said it stood for, or living them out? That's what this series is trying to figure out.
 
 It starts with four arguments for going overseas, and some of them still sound convincing.
 
@@ -23,7 +23,7 @@ America did grow, but it grew across its own continent. In 1867 it bought Alaska
 
 Then people found gold there.
 
-The 1890 census reported that "there can hardly be said to be a frontier line" anymore. The continent was full.
+For a century, Americans had talked about the frontier, the edge where their settlements stopped and Native land began. The 1890 census reported that "there can hardly be said to be a frontier line" anymore. As far as the government was concerned, the continent was full.
 
 So where next?"""),
 
@@ -43,23 +43,25 @@ So, in this series' words: was American imperialism a betrayal of American ideal
 
 Now look at the Pacific. It's enormous, and right in the middle of it sat one of the best harbors anywhere. [beat] It belonged to a queen.
 
-*The Preacher.* Josiah Strong was a Protestant minister, and in 1885 he wrote a bestseller called *Our Country*. His pitch was that America had been given Christianity and civilization, and it owed them to the world. In Hawaiʻi, missionaries had been arriving since 1820.
+*The Preacher.* Josiah Strong was a Protestant minister, and in 1885 he wrote a bestseller called *Our Country*. His pitch was that America had been given Christianity and civilization, and it owed them to the world. In Hawaiʻi, missionaries, people sent to spread Christianity, had been arriving since 1820.
 
 *The "Scientist."* A British writer named Herbert Spencer took Charles Darwin's ideas about plants and animals and coined a phrase: "survival of the fittest." People started applying it to nations and races, and the idea was that strong peoples were meant to rule weaker ones. It's called {Social Darwinism}. It sounded like science. It wasn't.
 
-The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled."
+The Preacher and the Scientist were often the same man. Josiah Strong's own book looked forward to "the final competition of races, for which the Anglo-Saxon is being schooled." By Anglo-Saxon, he meant "all English-speaking peoples," and he called them a race.
 """),
 
 ("ch05_the_same_islands", "The Same Islands", 185, """Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already sold almost entirely to America. A navy base? The best harbor in the Pacific. Missionaries? Three generations of them. And the "science" told them they had every right."""),
 
-("ch06_the_heist", "The Heist", 185, """In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed and their owners got very rich. Many of them were the sons and grandsons of those missionaries.
+("ch06_the_heist", "The Heist", 185, """Sugar coming into the United States from another country paid a tax at the border, called a {tariff}. In 1875, a trade deal let Hawaiian sugar in with no tariff at all, so it was cheaper than everyone else's. Plantations boomed and their owners got very rich. Many of them were the sons and grandsons of those missionaries.
 
-In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced the king to sign a new constitution that took away most of his power, and its new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely. People called it the Bayonet Constitution.
+In 1887 the deal was renewed, and this time the U.S. got something extra: the right to use a harbor called Pearl Harbor. That same year, a group of armed planters forced King Kalākaua, under threat of force, to sign a new constitution that took away most of his power, and its new money and property rules kept many Native Hawaiians from voting. Asian residents were shut out completely. People called it the Bayonet Constitution.
 @CUT THE LINE, 1 of 3. On "Bayonet Constitution," hard cut to the Declaration, the words "consent of the governed" large and readable. One teal underline draws itself. 1.5 s of room tone.
 
-Then, in 1890, the McKinley Tariff let all foreign sugar in tax-free and paid American growers a bonus on top, so overnight, Hawaiian sugar lost its advantage. The planters' fastest way back in? Make Hawaiʻi part of America.
+Then, in 1890, Congress passed a new tax law, the McKinley Tariff, and it changed two things. It took the tariff off all foreign sugar, so everyone's sugar got in free, and Hawaiʻi's head start was gone overnight. And it paid sugar growers inside the United States a bonus of two cents a pound. Hawaiian sugar didn't get the bonus, because Hawaiʻi wasn't part of the United States.
 
-In 1891, a new ruler took the throne: Liliʻuokalani, the king's sister. She wanted a new constitution that gave power back to her people. For the planters, that settled it.
+So the planters saw a fix. If Hawaiʻi became part of America, their sugar would count as American sugar, and it would get the bonus too.
+
+In 1891, a new ruler took the throne: Liliʻuokalani, Kalākaua's sister. She wanted a new constitution that gave power back to her people. For the planters, that settled it.
 
 In January 1893, they acted, and they gave themselves a name: the Committee of Safety.
 @CUT CONTRADICTION. On "Safety," hard cut to rifles being laid out on a table. Snap zoom. 1.5 s of silence.
@@ -117,15 +119,15 @@ All four pitches spoke the language of American ideals: markets, a strong navy, 
 But the people of Hawaiʻi were never asked. No vote on annexation was ever held there.
 @CUT THE LINE, 3 of 3. Hard cut to the Declaration, "consent of the governed" large and readable, two underlines. The teal pen circles it. 2 s of silence.
 
-On the ledger. What America said: "entangling alliances with none." What it did: took a kingdom's harbor, then the kingdom. Who answered back: Liliʻuokalani, and 21,269 of her people.
+This series keeps a ledger, one line per episode. What America said: "entangling alliances with none." What it did: took a kingdom's harbor, then the kingdom. Who answered back: Liliʻuokalani, and 21,269 of her people.
 
-The harbor the Admiral wanted became a naval base, and forty-three years later its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
+The harbor the Admiral wanted became a naval base, and forty-three years later its name would be the most famous in American military history: Pearl Harbor. A base that far from home let the navy reach across the whole Pacific, and that's what people mean when they say a country "projects its power."
 
 In 1993, a hundred years after the overthrow, Congress formally apologized to Native Hawaiians.
 
 So, betrayal or expression? [beat] In Hawaiʻi, the answer is both. Everything was done in the name of American ideals. Except the asking.
 
-Hawaiʻi only got annexed because America was suddenly at war, a war that started, depending on who you ask, with a ship that blew up in Havana. Or with a newspaper."""),
+Hawaiʻi only got annexed because America was suddenly at war, a war that started, depending on who you ask, with a ship that blew up in Havana, Cuba. Or with a newspaper."""),
 ]
 
 def words(t):
