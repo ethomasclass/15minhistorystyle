@@ -72,6 +72,7 @@ HULL, HULL_SH, BOOT, DECK = '#e9e4d6', '#d5d0c2', '#34332f', '#b5a684'
 BUFF, BUFF_DK, SPAR, RIG, IRON = '#cfae6e', '#3a3630', '#a3855a', '#3e3832', '#2f2e2b'
 SAIL = '#ddd4bf'
 GUN = '#3c3d3b'
+DH, DH_DK = '#a19b6e', '#8a8466'
 LAND, LAND_DRY, MTN, MTN_DK, RIDGE, ROCK = '#7f8a4c', '#9a9660', '#7a9259', '#5e7352', '#8c9a6a', '#8d9183'
 TREE = ['#3f5233', '#4a5f38', '#56693d']
 WOOD, WOOD_DK, PILE = '#8b7457', '#6b5640', '#56473a'
@@ -167,14 +168,14 @@ facets('water', -900, 900, -900, -1.0, 150, 75, 0.2, WATER, 1)
 facets('water_far', -16000, 16000, -16000, 0.0, 64, 32, 0.6, WATER, 2, z=-0.9)
 
 
-def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600):
-    """long thin horizontal wedges on the water, like the plate's highlights"""
+def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600, eye=(0.0, 0.0)):
+    """long thin horizontal wedges on the water, like the plate's highlights, sized for the eye that sees them"""
     rr = random.Random(seed)
     verts, faces = [], []
     for k in range(n):
         y = rr.uniform(y0, y1)
         x = rr.uniform(x0, x1)
-        d = abs(y) + 40
+        d = math.hypot(x - eye[0], y - eye[1]) * 0.35 + 8
         L = rr.uniform(0.015, 0.045) * d
         w = rr.uniform(0.004, 0.011) * d
         a = len(verts)
@@ -183,8 +184,10 @@ def slivers(name, n, col, seed, y0=-700, y1=-20, x0=-600, x1=600):
     return mesh_from(name, verts, faces, col)
 
 
-slivers('glints', 380, GLINT, 3)
-slivers('glints_dk', 380, GLINT_DK, 4)
+slivers('glints', 380, GLINT, 3, eye=(50.0, -450.0))
+slivers('glints_dk', 380, GLINT_DK, 4, eye=(50.0, -450.0))
+slivers('glints2', 160, GLINT, 5, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
+slivers('glints2_dk', 160, GLINT_DK, 6, y0=-140, y1=-30, x0=-90, x1=60, eye=(-45.0, -150.0))
 
 # ================================================================ the land
 PBX, PBY = 760.0, 1750.0                                      # Punchbowl (Puowaina), behind the town to the right
@@ -224,7 +227,7 @@ box('quay', -1200, -1.0, -1.5, 300, 0.4, 2.15, '#7d705e')                 # the 
 
 
 def coast_h(x, y):
-    yc = -(x - 260) * 0.27                                    # the shore runs east-south-east toward Waikiki
+    yc = -(x - 260) * 0.42                                    # the shore runs south-east toward Waikiki and Diamond Head
     return -3.0 if y < yc else 2.2
 
 
@@ -273,12 +276,14 @@ def diamond(x, y):
     r = math.hypot(dx, dy)
     a = math.atan2(dy, dx)
     rim = 120 + 105 * max(0.0, -math.sin(a + 0.5)) ** 1.5    # highest on the south-west
+    gul = 1 + 0.12 * math.sin(a * 11)                        # gullies down the outer flanks
     if r < 0.75:
         return 70 + (rim - 70) * (r / 0.75) ** 3
-    return max(-3.0, rim * math.exp(-((r - 0.75) / 0.45) ** 2))
+    return max(-3.0, rim * math.exp(-((r - 0.75) / (0.42 * gul)) ** 2))
 
 
-ground('diamondhead', 3700, 6400, -3500, -1300, 32, 28, diamond, RIDGE)
+ground('diamondhead', 3700, 6400, -3500, -1300, 44, 40, diamond, DH)
+rock_faces(bpy.data.objects['diamondhead'], DH_DK, steep=0.75, seed=4)
 def blobs(name, items, col):
     """many low-poly lumps in one mesh (tree canopies, cloud banks): items are (centre, radius, squash, seed)"""
     bm = bmesh.new()
@@ -499,15 +504,15 @@ for i in range(34):
     palm(xp, yp, town_h(xp, yp), rnd.uniform(13, 21), rnd.uniform(-0.12, 0.12), rnd.uniform(4.2, 5.4), 40 + i)
 for i in range(14):                                           # palms along the coast toward Waikiki
     xp = rnd.uniform(320, 2600)
-    yp = -(xp - 260) * 0.27 + rnd.uniform(8, 60)
+    yp = -(xp - 260) * 0.42 + rnd.uniform(8, 60)
     palm(xp, yp, coast_h(xp, yp), rnd.uniform(12, 18), rnd.uniform(-0.12, 0.12), 4.4, 80 + i)
 for i in range(140):                                          # the trees of Kakaʻako and Waikiki along the coast
     xp = rnd.uniform(300, 4300)
-    yp = -(xp - 260) * 0.27 + rnd.uniform(15, 500)
+    yp = -(xp - 260) * 0.42 + rnd.uniform(15, 500)
     ico(f'ct{i}', (xp, yp, coast_h(xp, yp) + 6), rnd.uniform(8, 16), TREE[i % 3], 1, (1.4, 1.2, 0.7), seed=1500 + i)
 for i in range(30):
     xp = rnd.uniform(320, 3800)
-    yp = -(xp - 260) * 0.27 + rnd.uniform(20, 300)
+    yp = -(xp - 260) * 0.42 + rnd.uniform(20, 300)
     box(f'ch{i}', xp, yp, coast_h(xp, yp), xp + 9, yp + 8, coast_h(xp, yp) + 4.2, rnd.choice(WALLS))
     hip_roof(f'chr{i}', xp, yp, xp + 9, yp + 8, coast_h(xp, yp) + 4.2, 2.6, rnd.choice(ROOFS))
 
@@ -519,8 +524,8 @@ ZD = 5.0                                                      # main deck above 
 
 def hw(f):
     """half-breadth at the deck, f = 0 at the stern to 1 at the bow"""
-    if f < 0.32:
-        return B / 2 * (0.5 + 0.5 * math.sin(math.pi / 2 * f / 0.32))
+    if f < 0.32:                                              # a rounded (elliptical) stern
+        return B / 2 * math.sqrt(max(0.0, 1 - ((0.32 - f) / 0.345) ** 2))
     if f < 0.58:
         return B / 2
     return max(0.08, B / 2 * (1 - ((f - 0.58) / 0.42) ** 1.7))
@@ -528,7 +533,7 @@ def hw(f):
 
 def hwl(f):
     if f < 0.32:
-        return B / 2 * 0.97 * (0.22 + 0.78 * math.sin(math.pi / 2 * f / 0.32))
+        return B / 2 * 0.97 * math.sqrt(max(0.0, 1 - ((0.32 - f) / 0.33) ** 2)) * (0.3 + 0.7 * min(1.0, f / 0.12))
     return hw(f) * 0.97
 
 
@@ -540,7 +545,7 @@ def zdeck(f):
     return ZD + 0.7 * max(0.0, (f - 0.72) / 0.28) ** 2 + 0.2 * max(0.0, (0.15 - f) / 0.15)
 
 
-ST = [0.0, 0.02, 0.06, 0.12, 0.2, 0.3, 0.42, 0.55, 0.66, 0.76, 0.85, 0.92, 0.97, 1.0]
+ST = [0.0, 0.01, 0.025, 0.045, 0.07, 0.1, 0.14, 0.2, 0.26, 0.32, 0.42, 0.55, 0.66, 0.76, 0.85, 0.92, 0.97, 1.0]
 secs = []
 for f in ST:
     x, h, hl, zd = fx(f), hw(f), hwl(f), zdeck(f)
@@ -830,10 +835,14 @@ def cutter(name, start, heading, phase, crew, marines):
     return bt
 
 
-AH = 38.0                                                     # the course: toward the landing pier, north-west
-CUT_START = [((-2.0, -128.0, 0.0), 0.0, 'sailor', False), ((14.0, -140.0, 0.0), 0.8, 'sailor', True), ((-18.0, -146.0, 0.0), 1.5, 'sailor', False)]
-for i, (st, ph, crew, mar) in enumerate(CUT_START):
-    cutter(f'cut{i}', st, AH, ph, crew, mar)
+LANDING = Vector((-62.0, -68.0, 0.0))                        # the cutters make for the landing steps
+H2_MID = FB + (N - FB) // 2
+CUT_MID = [((-30.8, -128.2), 0.0, False), ((-27.5, -92.6), 0.8, True), ((-44.2, -105.0), 1.5, False)]   # where each is mid-H2
+for i, ((mx, my), ph, mar) in enumerate(CUT_MID):
+    dv = (LANDING - Vector((mx, my, 0))).normalized()
+    hd = math.degrees(math.atan2(-dv.x, dv.y))
+    st = Vector((mx, my, 0)) - dv * BOAT_V * TQ[H2_MID]
+    cutter(f'cut{i}', tuple(st), hd, ph, 'sailor', mar)
 # a cutter still alongside at the ladder, half loaded
 cutter('cut_l', tuple(on_ship((LX - 6.0, B / 2 + 3.2, 0.0))), math.degrees(BOS_R) + 180, 0.0, 'sailor', True)
 CUTTERS[-1] = CUTTERS[-1][:3] + (None,) + CUTTERS[-1][4:]
@@ -951,8 +960,8 @@ cam.data.clip_start, cam.data.clip_end = 0.2, 40000
 cam.data.lens = 45
 KEYS = [  # frame, camera position, look-at; H1 pushes in slowly, H2 drifts with the boats
     (0, (55.0, -455.0, 15.0), (22.0, 0.0, 44.0)), (FB - 1, (52.0, -432.0, 15.2), (20.0, 0.0, 43.0)),
-    (FB, (-58.0, -100.0, 2.3), (45.0, -175.0, 9.0)), (N - 1, (-60.0, -95.0, 2.4), (40.0, -178.0, 9.0))]
-LENS = [(0, 45.0), (FB, 40.0)]
+    (FB, (-46.0, -151.0, 2.1), (-30.0, -92.0, 5.5)), (N - 1, (-44.5, -147.5, 2.2), (-31.5, -88.0, 5.5))]
+LENS = [(0, 45.0), (FB, 35.0)]
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -971,7 +980,7 @@ cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data
 for f in list(range(0, N, 6)) + [FB - 1, FB]:
     c = Vector([cfc[i].evaluate(f) for i in range(3)])
     subj = Vector((BOS_X, BOS_Y, 8.0)) if f < FB else CUTTERS[0][0].matrix_world.translation
-    cam.data.dof.focus_distance = (subj - c).length if f < FB else 34.0
+    cam.data.dof.focus_distance = (subj - c).length if f < FB else 26.0
     cam.data.dof.aperture_fstop = 22.0 if f < FB else 5.6
     cam.data.dof.keyframe_insert('focus_distance', frame=f)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=f)

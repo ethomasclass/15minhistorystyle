@@ -4,6 +4,7 @@
 #   chart_diagram.png     the lecturer's chart: a branching tree drawn as a "scientific" diagram, one branch climbing
 #                         highest and arrowed; labels are ink strokes, not words
 #   chart_blank.png       the same sheet, blank (the cut "It wasn't.")
+#   senate_carpet.png     one tile (2 m square) of the Senate floor's carpet: deep red, a gold lozenge lattice, rosettes
 #   python3 make_set_textures.py
 import math, os, random
 from PIL import Image, ImageDraw, ImageFilter
@@ -126,7 +127,28 @@ def chart(path, blank):
     print('wrote', path)
 
 
+def carpet(path, W=512):
+    S = 2
+    im = Image.new('RGB', (W * S, W * S), (112, 38, 34))
+    d = ImageDraw.Draw(im)
+    w = W * S
+    GOLD, DK, MID = (164, 122, 60), (84, 26, 26), (132, 50, 40)
+    for (cx, cy) in ((0, 0), (w, 0), (0, w), (w, w), (w / 2, w / 2)):     # the lozenge lattice
+        r = w / 2
+        d.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], outline=GOLD, width=10 * S)
+        d.polygon([(cx, cy - r * 0.42), (cx + r * 0.42, cy), (cx, cy + r * 0.42), (cx - r * 0.42, cy)], fill=DK)
+        d.polygon([(cx, cy - r * 0.26), (cx + r * 0.26, cy), (cx, cy + r * 0.26), (cx - r * 0.26, cy)], fill=GOLD)
+        d.ellipse([cx - r * 0.09, cy - r * 0.09, cx + r * 0.09, cy + r * 0.09], fill=MID)
+    for (cx, cy) in ((w / 2, 0), (0, w / 2), (w, w / 2), (w / 2, w)):       # small rosettes where the lattice crosses
+        r = w * 0.06
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=MID, outline=GOLD, width=4 * S)
+    im = im.resize((W, W), Image.LANCZOS)
+    im.save(path)
+    print('wrote', path)
+
+
 if __name__ == '__main__':
+    carpet(os.path.join(A, 'senate_carpet.png'))
     us_flag(os.path.join(A, 'us_flag_44.png'))
     chart(os.path.join(A, 'chart_diagram.png'), False)
     chart(os.path.join(A, 'chart_blank.png'), True)
