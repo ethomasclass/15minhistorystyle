@@ -3,8 +3,11 @@
 **Chunk History** · series plan (phase 2, step 1, for four videos) · built from `HANDOFF.md` and the channel's series method
 (`script-writing.md` section 10; worked example `projects/American_West/SERIES.md`)
 
-**Unit question** (every episode answers one piece of it out loud):
-> Can a republic born fighting an empire become one?
+**Series question** (every episode answers one piece of it out loud; set by Ellis, November 2026):
+> Was American imperialism a betrayal of American ideals, or an expression of them?
+
+(It replaces the planning chat's "Can a republic born fighting an empire become one?" The episode answers below were written for
+that older question; Ep 1's is updated, and Ep 2-4's get recast when each episode is outlined.)
 
 **Series closer** (Ep 4 asks it and stops, Harkness-style):
 > You're the president. An island in crisis, American lives and money at stake. Do you go Roosevelt, Taft, or Wilson?
@@ -12,7 +15,7 @@
 
 | Ep | Working title | Years | The answer America gives itself | Outline |
 |---|---|---|---|---|
-| 1 | **The Pitch Meeting** · *How America Talked Itself Into an Empire* | 1867-1898 | "Almost. It took a kingdom, but it wouldn't use the word." | [`EP1_PITCH_MEETING_OUTLINE.md`](EP1_PITCH_MEETING_OUTLINE.md) |
+| 1 | **The Pitch Meeting** · *How America Talked Itself Into an Empire* | 1867-1898 | "Both. Everything was done in the name of American ideals, except the asking." | [`EP1_PITCH_MEETING_OUTLINE.md`](EP1_PITCH_MEETING_OUTLINE.md) |
 | 2 | **Whose War Was It?** · *Cuba, the Maine, and the Splendid Little War* | 1895-1898 | "We're liberators, not an empire." | to write |
 | 3 | **The Road to China** · *The Philippines, the Open Door, and the War Nobody Named* | 1898-1902 | "Yes, and some Americans knew it." | to write |
 | 4 | **America's Backyard** · *Big Stick, Dollars, and Morals* | 1898-1917 | "Yes, just without the name." | to write |

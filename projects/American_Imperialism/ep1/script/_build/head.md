@@ -1,21 +1,23 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 2 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
+**Chunk History** · narration script · draft 3 (not voiced) · {TOTAL} words · about {NARR} of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
 Series: *American Imperialism, 1867-1898*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_PITCH_MEETING_OUTLINE.md`](../../EP1_PITCH_MEETING_OUTLINE.md)
 
-**Unit question:** Can a republic born fighting an empire become one?
+**Series question (asked in chapter 2 in plain words, in full in chapter 4, answered for Hawaiʻi in chapter 9):** Was American
+imperialism a betrayal of American ideals, or an expression of them?
 
-**Driving question (cold open, answered in chapter 9):** How does a country that was born breaking away from a king end up
-locking a queen in her own palace?
+**The irony the episode runs on:** a country founded on "the consent of the governed" took islands whose people said no, and the
+men who did it called their government a republic and declared it on the Fourth of July.
 
 **Answer:** Through a pitch. Four arguments (markets, sea power, religion and civilization, Social Darwinism) all pointed at
 Hawaiʻi. American planters overthrew the Queen with U.S. troops ashore; an American president called it an act of war and could
-not undo it; Congress annexed the islands anyway in 1898. Ep 1's answer to the unit question: it took a kingdom, but it wouldn't
-use the word. Ledger row 1.
+not undo it; Congress annexed the islands anyway in 1898. Ep 1's answer to the series question: both.
+Everything was done in the name of American ideals, except the asking (no vote on annexation was ever held in Hawaiʻi). Ledger
+row 1.
 
 **Title:** The Pitch Meeting · *How America Talked Itself Into an Empire* · dates *1867-1898* (thumbnail working pick: A,
 "WHO TOOK HAWAIʻI?")
@@ -38,13 +40,13 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 | Beat | Where |
 |---|---|
 | Hook is the first sentence, no date | Ch 1 line 1 |
-| Question and bridge by about 0:45, one promise | Ch 2 ("We'll come back to this room.") |
+| Question and bridge by about 0:45, one promise | Ch 2 (the consent line, the series question in plain words, "We'll come back to this room.") |
 | Setup, then the case, a loop about every minute | Ch 3-4 (the harbor "belonged to a queen" sits near 3:00) |
 | Twist | Ch 5 (all four point at the same islands) |
-| Both readings | Ch 6 (the planters' case, then Cleveland) |
+| Both readings | Ch 6 (the planters' case, then Cleveland: "For a moment, Washington's answer was no.") |
 | George III callback | Ch 7 |
 | Quiet chapter, the ledger voice | Ch 8 |
-| "So let's go back to the question," Ledger row 1, reversal, hand-off | Ch 9 |
+| "So let's go back to the question," betrayal or expression, Ledger row 1 (spoken), reversal, hand-off | Ch 9 |
 
 ---
 

@@ -6,11 +6,15 @@ It's 1895. There's an armed guard outside her door. From her window, she can see
 
 And the men who put her here aren't a foreign army. They're mostly Americans. Or the sons of Americans."""),
 
-("ch02_the_question", "The Question", 185, """[curious] So here's the question. How does a country that was born breaking away from a king end up locking a queen in her own palace?
+("ch02_the_question", "The Question", 185, """[curious] In 1776, America told the world something new. A government gets its power from "the consent of the governed." [beat] The people have to say yes.
 
-It didn't happen in a day. It happened through a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+The men who locked this door called their government a republic. Just like America's.
 
-We'll come back to this room. But first, a phrase from 1776. America told the world that a government gets its power from "the consent of the governed." [beat] Hold on to that. It's coming back."""),
+So here's the question this series asks. When America started taking control of other places, was it betraying its own ideals? Or living them out?
+
+The answer starts with a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+
+We'll come back to this room. But first, the old rule."""),
 
 ("ch03_the_old_guard", "The Old Guard", 185, """For most of the 1800s, America had a simple rule for the rest of the world: stay out of it.
 
@@ -30,6 +34,8 @@ Then the 1890 census reported that "there can hardly be said to be a frontier li
 Think of it as a pitch meeting. Four pitchers, one investor: the United States.
 
 Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
+
+So here's this series' question, in full: was American imperialism a betrayal of American ideals, or an expression of them? Listen to the pitches. Every one of them was made in the name of something Americans believed in.
 
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
 
@@ -73,6 +79,8 @@ The planters told it differently. The Queen, they said, was the one breaking the
 
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
+For a moment, Washington's answer was no.
+
 Dole refused.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
@@ -98,16 +106,20 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 [pause] On July 7th, 1898, the United States annexed Hawaiʻi anyway. Not with a treaty, which needed two-thirds of the Senate, but with a joint resolution, which only needed a majority in each house. The country was at war with Spain, and suddenly a navy base in the middle of the Pacific looked very useful."""),
 
-("ch09_back_to_the_question", "Back to the Question", 185, """[thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
+("ch09_back_to_the_question", "Back to the Question", 185, """[thoughtful] So let's go back to the question. Was this a betrayal of American ideals, or an expression of them?
 
-With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
+All four pitches spoke the language of American ideals: markets, a strong navy, Christianity, progress. The men who took Hawaiʻi even declared their republic on the Fourth of July.
+
+But the people of Hawaiʻi were never asked. No vote on annexation was ever held there.
 @CUT THE LINE, 3 of 3. Hard cut to the Declaration, "consent of the governed" large and readable, two underlines. The teal pen circles it. 2 s of silence.
+
+On the ledger. What America said: "entangling alliances with none." What it did: took a kingdom's harbor, then the kingdom. Who answered back: Liliʻuokalani, and 21,269 of her people.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 
 In 1993, a hundred years after the overthrow, Congress formally apologized to Native Hawaiians.
 
-So can a republic born fighting an empire become one? [beat] It had taken a kingdom. It just wouldn't use the word.
+So, betrayal or expression? [beat] In Hawaiʻi, the honest answer is both. Everything was done in the name of American ideals. Except the asking.
 
 And Hawaiʻi only got annexed because America was suddenly at war. A war that started, depending on who you ask, with a ship that blew up in Havana. Or with a newspaper."""),
 ]

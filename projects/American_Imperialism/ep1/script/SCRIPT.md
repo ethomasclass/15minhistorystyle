@@ -1,21 +1,23 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 2 (not voiced) · 1569 words · about 8:53 of narration at the locked pace
+**Chunk History** · narration script · draft 3 (not voiced) · 1642 words · about 9:17 of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. `[tags]` are delivery
 cues for the voice, never spoken or shown.
 
 Series: *American Imperialism, 1867-1898*, part 1 of 4 ([`../../SERIES.md`](../../SERIES.md)) · outline:
 [`../../EP1_PITCH_MEETING_OUTLINE.md`](../../EP1_PITCH_MEETING_OUTLINE.md)
 
-**Unit question:** Can a republic born fighting an empire become one?
+**Series question (asked in chapter 2 in plain words, in full in chapter 4, answered for Hawaiʻi in chapter 9):** Was American
+imperialism a betrayal of American ideals, or an expression of them?
 
-**Driving question (cold open, answered in chapter 9):** How does a country that was born breaking away from a king end up
-locking a queen in her own palace?
+**The irony the episode runs on:** a country founded on "the consent of the governed" took islands whose people said no, and the
+men who did it called their government a republic and declared it on the Fourth of July.
 
 **Answer:** Through a pitch. Four arguments (markets, sea power, religion and civilization, Social Darwinism) all pointed at
 Hawaiʻi. American planters overthrew the Queen with U.S. troops ashore; an American president called it an act of war and could
-not undo it; Congress annexed the islands anyway in 1898. Ep 1's answer to the unit question: it took a kingdom, but it wouldn't
-use the word. Ledger row 1.
+not undo it; Congress annexed the islands anyway in 1898. Ep 1's answer to the series question: both.
+Everything was done in the name of American ideals, except the asking (no vote on annexation was ever held in Hawaiʻi). Ledger
+row 1.
 
 **Title:** The Pitch Meeting · *How America Talked Itself Into an Empire* · dates *1867-1898* (thumbnail working pick: A,
 "WHO TOOK HAWAIʻI?")
@@ -32,27 +34,27 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 | # | Starts | Chapter | Words | Length |
 |---|---|---|---|---|
 | 1 | 0:00 | The Locked Room | 51 | 19 s |
-| 2 | 0:18 | The Question | 88 | 31 s |
-| 3 | 0:49 | The Old Guard | 123 | 42 s |
-| 4 | 1:30 | The Pitch Meeting | 388 | 128 s |
-| 5 | 3:38 | The Same Islands | 37 | 14 s |
-| 6 | 3:52 | The Heist | 436 | 143 s |
-| 7 | 6:16 | He Has, We Have | 51 | 19 s |
-| 8 | 6:34 | Under Protest | 211 | 77 s |
-| 9 | 7:52 | Back to the Question | 184 | 62 s |
+| 2 | 0:18 | The Question | 98 | 34 s |
+| 3 | 0:52 | The Old Guard | 123 | 42 s |
+| 4 | 1:34 | The Pitch Meeting | 426 | 140 s |
+| 5 | 3:54 | The Same Islands | 37 | 14 s |
+| 6 | 4:08 | The Heist | 443 | 146 s |
+| 7 | 6:34 | He Has, We Have | 51 | 19 s |
+| 8 | 6:52 | Under Protest | 211 | 77 s |
+| 9 | 8:09 | Back to the Question | 202 | 68 s |
 
 **Story arc check:**
 
 | Beat | Where |
 |---|---|
 | Hook is the first sentence, no date | Ch 1 line 1 |
-| Question and bridge by about 0:45, one promise | Ch 2 ("We'll come back to this room.") |
+| Question and bridge by about 0:45, one promise | Ch 2 (the consent line, the series question in plain words, "We'll come back to this room.") |
 | Setup, then the case, a loop about every minute | Ch 3-4 (the harbor "belonged to a queen" sits near 3:00) |
 | Twist | Ch 5 (all four point at the same islands) |
-| Both readings | Ch 6 (the planters' case, then Cleveland) |
+| Both readings | Ch 6 (the planters' case, then Cleveland: "For a moment, Washington's answer was no.") |
 | George III callback | Ch 7 |
 | Quiet chapter, the ledger voice | Ch 8 |
-| "So let's go back to the question," Ledger row 1, reversal, hand-off | Ch 9 |
+| "So let's go back to the question," betrayal or expression, Ledger row 1 (spoken), reversal, hand-off | Ch 9 |
 
 ---
 
@@ -70,17 +72,21 @@ And the men who put her here aren't a foreign army. They're mostly Americans. Or
 
 ## 0:18 | The Question
 
-`ch02_the_question.txt` · 88 words · about 31 s
+`ch02_the_question.txt` · 98 words · about 34 s
 
-[curious] So here's the question. How does a country that was born breaking away from a king end up locking a queen in her own palace?
+[curious] In 1776, America told the world something new. A government gets its power from "the consent of the governed." [beat] The people have to say yes.
 
-It didn't happen in a day. It happened through a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+The men who locked this door called their government a republic. Just like America's.
 
-We'll come back to this room. But first, a phrase from 1776. America told the world that a government gets its power from "the consent of the governed." [beat] Hold on to that. It's coming back.
+So here's the question this series asks. When America started taking control of other places, was it betraying its own ideals? Or living them out?
+
+The answer starts with a pitch: four arguments for why America should reach beyond its own shores. Some of them still sound convincing.
+
+We'll come back to this room. But first, the old rule.
 
 ---
 
-## 0:49 | The Old Guard
+## 0:52 | The Old Guard
 
 `ch03_the_old_guard.txt` · 123 words · about 42 s
 
@@ -99,15 +105,17 @@ Then the 1890 census reported that "there can hardly be said to be a frontier li
 
 ---
 
-## 1:30 | The Pitch Meeting
+## 1:34 | The Pitch Meeting
 
-`ch04_the_pitch_meeting.txt` · 388 words · about 128 s
+`ch04_the_pitch_meeting.txt` · 426 words · about 140 s
 
 By the 1890s, a lot of powerful Americans thought it was time to stop staying out of it.
 
 Think of it as a pitch meeting. Four pitchers, one investor: the United States.
 
 Two words before we start. {Imperialism}: a strong country taking control of weaker places, either by owning them outright or by running them from the outside. And {interventionism}: stepping into other countries' affairs to protect your own interests. The model everybody had in mind was the biggest empire on earth: Britain's.
+
+So here's this series' question, in full: was American imperialism a betrayal of American ideals, or an expression of them? Listen to the pitches. Every one of them was made in the name of something Americans believed in.
 
 *The Businessman.* America's farms and factories were making more than Americans could buy. More wheat, more cotton, more steel. And when there's too much of something, prices fall. The answer, said the Businessman, was new customers overseas. Anywhere with people and money.
 
@@ -123,7 +131,7 @@ And here's the strange part. The Preacher and the Scientist were often the same 
 
 ---
 
-## 3:38 | The Same Islands
+## 3:54 | The Same Islands
 
 `ch05_the_same_islands.txt` · 37 words · about 14 s
 
@@ -131,9 +139,9 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 
 ---
 
-## 3:52 | The Heist
+## 4:08 | The Heist
 
-`ch06_the_heist.txt` · 436 words · about 143 s
+`ch06_the_heist.txt` · 443 words · about 146 s
 
 In 1875, a trade deal let Hawaiian sugar into America with no tax at all. Plantations boomed, and the men who owned them got very rich. Many of them were the sons and grandsons of those missionaries.
 
@@ -162,6 +170,8 @@ The planters told it differently. The Queen, they said, was the one breaking the
 
 In Washington, a new president, Grover Cleveland, sent an investigator to find out what happened. Then he told Congress the overthrow was an "act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress." He called it a "substantial wrong," and he asked for the Queen to be put back on her throne.
 
+For a moment, Washington's answer was no.
+
 Dole refused.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
@@ -173,7 +183,7 @@ What the planters wanted was {annexation}: one country officially adding another
 
 ---
 
-## 6:16 | He Has, We Have
+## 6:34 | He Has, We Have
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
@@ -183,7 +193,7 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ---
 
-## 6:34 | Under Protest
+## 6:52 | Under Protest
 
 `ch08_under_protest.txt` · 211 words · about 77 s
 
@@ -201,20 +211,24 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 ---
 
-## 7:52 | Back to the Question
+## 8:09 | Back to the Question
 
-`ch09_back_to_the_question.txt` · 184 words · about 62 s
+`ch09_back_to_the_question.txt` · 202 words · about 68 s
 
-[thoughtful] So let's go back to the question. How does a country born breaking away from a king end up locking a queen in her own palace?
+[thoughtful] So let's go back to the question. Was this a betrayal of American ideals, or an expression of them?
 
-With a pitch. Businessmen wanted markets, admirals wanted bases, preachers wanted converts, and a fake science said they deserved to win. All four pointed at the same islands. When a small group of Americans took them, the United States stood by, then admitted it was wrong, then took the islands anyway.
+All four pitches spoke the language of American ideals: markets, a strong navy, Christianity, progress. The men who took Hawaiʻi even declared their republic on the Fourth of July.
+
+But the people of Hawaiʻi were never asked. No vote on annexation was ever held there.
 > **CUT:** THE LINE, 3 of 3. Hard cut to the Declaration, "consent of the governed" large and readable, two underlines. The teal pen circles it. 2 s of silence.
+
+On the ledger. What America said: "entangling alliances with none." What it did: took a kingdom's harbor, then the kingdom. Who answered back: Liliʻuokalani, and 21,269 of her people.
 
 And the harbor the Admiral wanted? It became a naval base. Forty-three years later, its name would be the most famous in American military history: Pearl Harbor. That's what people mean when they say a country "projects its power."
 
 In 1993, a hundred years after the overthrow, Congress formally apologized to Native Hawaiians.
 
-So can a republic born fighting an empire become one? [beat] It had taken a kingdom. It just wouldn't use the word.
+So, betrayal or expression? [beat] In Hawaiʻi, the honest answer is both. Everything was done in the name of American ideals. Except the asking.
 
 And Hawaiʻi only got annexed because America was suddenly at war. A war that started, depending on who you ask, with a ship that blew up in Havana. Or with a newspaper.
 
@@ -259,5 +273,7 @@ Every flagged claim, what the sources say, and what changed in the script.
 | 12 | Annexed "with a simple majority vote" | **Reworded.** The joint resolution needed only a majority; the actual votes were House 209-91 (June 15) and Senate 42-21 (July 6), exactly two-thirds in the Senate. McKinley signed July 7 | National Archives Milestone Documents; Voteview | **rewritten**: "the United States annexed Hawaiʻi anyway ... with a joint resolution, which only needed a majority in each house" |
 | 13 | 1993 apology | **Confirmed.** PL 103-150 "apologizes to Native Hawaiians on behalf of the people of the United States" | `apology_resolution.txt` | unchanged |
 | 14 | 1890 census and the frontier | **Reworded** for precision: the 1890 census *reported* it (Turner quotes the superintendent's bulletin) | `turner_1893.txt` | "the 1890 census reported" |
+| 15 | No vote on annexation was ever held in Hawaiʻi (draft 3) | **Confirmed.** No plebiscite was held; the 1898 Senate report argued one "would work a revolution in Hawaii which would abolish its constitution." PL 103-150: Native Hawaiians never relinquished their sovereignty "either through their monarchy or through a plebiscite or referendum" | `apology_resolution.txt`; National Archives, Hawaii petition lesson; Teaching American History | "No vote on annexation was ever held there." |
+| 16 | The government that held her in 1895 called itself a republic (draft 3) | **Confirmed.** The Republic of Hawaii, declared July 4, 1894 | already in ch 6 | "called their government a republic" |
 
 Nothing left open. One judgment call stays with you: "For the planters, that was the last straw" is interpretation, not a quoted fact.

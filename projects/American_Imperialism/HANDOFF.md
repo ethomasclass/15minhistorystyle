@@ -10,7 +10,7 @@ Handoff from a planning chat with Ellis Thomas to a Claude Code session. The goa
 |---|---|
 | **Channel** | Ellis's faceless YouTube history explainer channel ("fifteen minute history") |
 | **Series** | American Imperialism, 1867-1917, in 4 episodes |
-| **Compelling question** | *Can a republic born fighting an empire become one?* |
+| **Compelling question** | *Was American imperialism a betrayal of American ideals, or an expression of them?* (set by Ellis, November 2026; replaces "Can a republic born fighting an empire become one?") |
 | **Audience** | General audience, pitched at 8th-11th graders with no prior context. Ellis also teaches this unit (11th grade CPA US History), so episodes should work in class. |
 | **Format** | Faceless: voiceover over visuals (archival images, maps, motion graphics, possibly AI-generated video) |
 | **Runtime** | Not decided. See Open Decisions. |
@@ -65,7 +65,8 @@ Each episode gives real voice to someone on the receiving end of U.S. power, so 
 Ep 3 is the **Pacific** (Philippines and China); Ep 4 is the **Caribbean and Latin America**. China becomes the reason the Pacific mattered, and Cuba's Platt Amendment lands in Ep 4 as the payoff to the Teller Amendment from Ep 2.
 
 ### E. Answering the compelling question
-Each episode should end with its own partial answer, and the answers get darker:
+Each episode should end with its own partial answer, and the answers get darker. (The list below was written for the older
+question; Ep 1 now answers "both," and the rest get recast to "betrayal or expression" as each episode is outlined.)
 - Ep 1: "Not yet... but it's practicing."
 - Ep 2: "We're liberators, not an empire." (Then the U.S. ends up holding colonies.)
 - Ep 3: "Yes, and some Americans knew it."
