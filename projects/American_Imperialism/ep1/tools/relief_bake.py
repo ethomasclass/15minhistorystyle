@@ -16,6 +16,8 @@ a = np.array(d['data'], dtype=np.float32).reshape(h, w)
 UP = 4                                              # upsample and soften, so the cut edges are smooth curves, not pixels
 big = cv2.resize(a, (w * UP, h * UP), interpolation=cv2.INTER_CUBIC)
 big = cv2.GaussianBlur(big, (0, 0), 2.4)
+SOFT = float(__import__('os').environ.get('SOFT', 7.0))   # the land above the shore is cut from a softer surface: rounded sheets
+soft = cv2.GaussianBlur(big, (0, 0), SOFT)
 sx, sy = d['kmW'] / 10.0 / (w * UP), d['kmH'] / 10.0 / (h * UP)   # map units per upsampled pixel
 cx, cy = w * UP / 2, h * UP / 2
 WATER = sys.argv[5] if len(sys.argv) > 5 else None
@@ -39,10 +41,16 @@ if WATER:                                           # a mapped shoreline (e.g. T
                 dr.polygon([toxy(*p) for p in r['ring']], fill=255)
     water = np.asarray(im) < 128
     big = np.where(water, np.minimum(big, -2.0), np.maximum(big, 2.0))
+    soft = np.where(water, -9999.0, soft)
+KER = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))
 
 
 def rings_at(level):
-    m = (big >= level).astype(np.uint8) * 255
+    inland = level > 1.0
+    m = ((soft if inland else big) >= level).astype(np.uint8) * 255
+    if inland:                                      # no specks or hairline slivers: open, then close, then drop the small bits
+        m = cv2.morphologyEx(cv2.morphologyEx(m, cv2.MORPH_OPEN, KER), cv2.MORPH_CLOSE, KER)
+    amin, eps = (500, 1.8) if inland else (60, 0.8)
     cs, hier = cv2.findContours(m, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
     shapes = []
     if hier is None:
@@ -51,13 +59,13 @@ def rings_at(level):
     for i, c in enumerate(cs):
         if hier[i][3] != -1:                        # holes are collected with their outer ring
             continue
-        if cv2.contourArea(c) < 60:
+        if cv2.contourArea(c) < amin:
             continue
-        ring = [cv2.approxPolyDP(c, 0.8, True)]
+        ring = [cv2.approxPolyDP(c, eps, True)]
         k = hier[i][2]
         while k != -1:
-            if cv2.contourArea(cs[k]) >= 60:
-                ring.append(cv2.approxPolyDP(cs[k], 0.8, True))
+            if cv2.contourArea(cs[k]) >= amin:
+                ring.append(cv2.approxPolyDP(cs[k], eps, True))
             k = hier[k][0]
         rings = [[[round((p[0][0] - cx) * sx, 4), round((cy - p[0][1]) * sy, 4)] for p in r] for r in ring if len(r) >= 3]
         flat = np.array([q for r in rings for q in r], dtype=np.float64)
@@ -75,7 +83,7 @@ while z < 0:                                        # the sea floor shelves, sha
     levels.append(dict(kind='sea', m=z, shapes=rings_at(z)))
     z += SEA_STEP
 z = 0.0
-while z < float(big.max()):                         # the land, sheet by sheet
+while z < float(soft.max()) or z == 0.0:                         # the land, sheet by sheet
     levels.append(dict(kind='land', m=z, shapes=rings_at(z if z > 0 else 0.5)))
     z += LAND_STEP
 json.dump(dict(name=d['name'], bounds=d['bounds'], kmW=d['kmW'], kmH=d['kmH'], w_units=d['kmW'] / 10, h_units=d['kmH'] / 10,
