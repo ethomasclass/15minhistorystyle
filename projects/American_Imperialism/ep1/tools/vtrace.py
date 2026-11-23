@@ -25,7 +25,7 @@ def _path(mask, k, eps, min_area=6):
     return ''.join(d)
 
 
-def trace(path, crop=None, colors=('#111111', '#1fae98', '#F4EFE6'), width=520, work=360, blur=5, cuts=None, eps=1.1, invert=False, min_area=6):
+def trace(path, crop=None, colors=('#111111', '#1fae98', '#F4EFE6'), width=520, work=360, blur=5, cuts=None, eps=1.1, invert=False, min_area=6, clahe=0.0):
     """returns (svg group string, (width, height)); cuts are the tone thresholds as percentiles of the crop"""
     im = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     if crop:
@@ -36,6 +36,8 @@ def trace(path, crop=None, colors=('#111111', '#1fae98', '#F4EFE6'), width=520, 
     h0, w0 = im.shape
     s = work / w0
     im = cv2.resize(im, (work, int(h0 * s)), interpolation=cv2.INTER_AREA)
+    if clahe:                                  # local contrast, for soft, low-contrast photos (a vignette, a faded print)
+        im = cv2.createCLAHE(clipLimit=clahe, tileGridSize=(6, 6)).apply(im)
     im = cv2.bilateralFilter(im, 9, 40, 9)
     im = cv2.GaussianBlur(im, (blur, blur), 0)
     n = len(colors)
