@@ -5,6 +5,7 @@ import os
 from ep import *
 from portal import Scene, Journey
 from people import person, walker, toil, SKIN, HAIR, tint
+import world as Wd
 
 TL = Timeline('ch04_the_pitch_meeting', 185)
 S = EpStage('ch04', TL.dur, bg='#111111', grain=0.5)
@@ -30,9 +31,12 @@ def easel(who, gid):
 
 
 # ---- the worlds (people are drawn per frame into the named groups)
-docks = plate(S, 'c5_docks') + '<g id="pp_docks"></g>'
-coal = plate(S, 'c6_coaling_station') + '<g id="pp_coal"></g>'
-church = plate(S, 'c7_mission_church') + '<g id="pp_church"></g>'
+WD = Wd.scene_docks('kd_')
+WC = Wd.scene_coaling('kc_')
+WH = Wd.scene_church('kh_', t_pre + 2.0)
+docks = WD.static + '<g id="pp_docks"></g>'
+coal = WC.static
+church = WH.static
 
 JB = Journey([Scene('ez', easel('bus', 'pz1'), hole, F, keys=[(t_bus, 960, 560, 1.0), (t_bus + 1.4, 900, 520, 1.12)]),
               Scene('docks', docks, keys=[(at('More wheat') + 1.0, 900, 640, 1.08), (t_adm, 760, 700, 1.15)])],
@@ -86,7 +90,6 @@ LOOKS = [dict(coat='#5a4b3a', coat_len=0.2, trousers='#3b362e', skin=SKIN[0], ha
          dict(coat='#9a8a6c', coat_len=0.0, trousers='#4b4033', skin=SKIN[1], hair=HAIR[1], hat='cap', hat_col='#3a332b'),
          dict(coat='#46505a', coat_len=0.2, trousers='#2b2a28', skin=SKIN[2], hair=HAIR[0], hat='bowler')]
 _, sp = finfo('s3_props')
-CRATE, SACK = (S.img(os.path.join(EPI('flow'), sp['cutouts'][k - 1]['file'])) for k in (12, 11))
 
 
 def pp_docks(tq):
@@ -98,11 +101,11 @@ def pp_docks(tq):
         if arms == 'carry':
             hx, hy = J['hand_b']
             cw = h * 0.36
-            svg += f'<image href="{CRATE}" x="{hx - cw * 0.35 * f - cw / 2:.0f}" y="{hy - cw * 0.55:.0f}" width="{cw:.0f}" height="{cw * 0.62:.0f}"/>'
+            svg += Wd.crate(hx - cw * 0.35 * f - cw / 2, hy + cw * 0.1, cw, cw * 0.62, 3)
         if arms == 'shoulder':
             sx, sy = J['shoulder']
             cw = h * 0.3
-            svg += f'<image href="{SACK}" x="{sx - cw / 2:.0f}" y="{sy - cw * 0.95:.0f}" width="{cw:.0f}" height="{cw * 1.08:.0f}"/>'
+            svg += Wd.sack(sx - cw / 2, sy + cw * 0.1, cw, cw * 1.05)
         o += svg
     return o
 
@@ -154,9 +157,12 @@ def frame(t):
         T[s[1]] = s[2].transform(t)
     for i, gid in enumerate(('pz1', 'pz2', 'pz3', 'pz4')):
         T[gid] = breathe(t, 420, 1050, i)
-    h['pp_docks'] = pp_docks(tq) if s[2] is JB else ''
-    h['pp_coal'] = pp_coal(tq) if s[2] is JA else ''
-    h['pp_church'] = pp_church(tq) if s[2] is JP else ''
+    if s[2] is JB:
+        h['pp_docks'] = pp_docks(tq); h.update(WD.dyn(tq))
+    if s[2] is JA:
+        h.update(WC.dyn(tq))
+    if s[2] is JP:
+        h.update(WH.dyn(tq))
     o = ''
     if s[1] == 'VOC':
         v = ''
