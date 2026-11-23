@@ -192,3 +192,24 @@ Quiet palette (bone and teal, no orange, no coral tint, no gags). Slower camera.
 - Blender people: feet planted, faces plain, clothes fitted; no gliding, no floating props.
 - Motion: pops and marks at 12 fps, camera moves smooth, nothing dead still for more than 3 s.
 - Check stills of every shot at full size before rendering a chapter, and frames from the finished render after.
+
+## Coverage check (Nov 23)
+
+Every line of the script has a planned scene. Status by piece; **bold** is still to build.
+
+| Ch | Built (test renders in `renders/tests/`) | Still to build |
+|---|---|---|
+| 1-2 | Cold open in Blender (full render running), Declaration line (plain), question card (kit reel), four badges unlit | **Window-to-Declaration tail** (crane up, flag stripes match the parchment), **palace wide push on the flag** (from the cold open) |
+| 3 | Globe and fence, ISOLATIONISM, Jefferson card, Alaska check and acre coin, Seward card, gold cut, census ink map to open sea | **Census sea into the pitch-room wall map** (the Blender reveal) |
+| 4 | Pitch room set and four pitchers, IMPERIALISM card and board push, docks, Mahan name card, coal map, Mahan quote, Strong name card, lecture hall (chart and blank chart), Spencer card, Strong quote | **Empty room beat, pitchers' entrance and gestures**, **easel portals** into the docks, the church and the lecture hall, **Imperial Federation map** (1886 scan, colonies inking in), **"Now look at the Pacific"** (wall map into the 3D Pacific, push to Oʻahu) |
+| 5 | Badges converging on the islands (ch 5 test) | **Map-to-world dive** (island card rises into the 3D Oʻahu, dive into the harbor) |
+| 6 | Tariff gate 1875 and 1890, TARIFF, sugar fields and mill, Kalākaua card, Declaration underline 1, Liliʻuokalani card, committee room, COUP, harbor and cutters, landing march, INTERVENTIONISM, yield card, Dole card and fruit cup, Government Building flag (and the Republic bunting), Declaration underline 2, PROTECTORATE, Cleveland card, pineapple fields, ANNEXATION, Senate stack | **Pearl Harbor pin** (3D Oʻahu), **1887 constitution** (a drawn page: no scan exists), **Stevens lower third** over the harbor wide, **James Dole + fruit-cup payoff** (his 1927 portrait; no pre-1930 Dole label exists), **Cleveland and Dole holds** |
+| 7 | George III callback | its **own sound** (with the score) |
+| 8 | Sentence card (throne room print), prison card, honest card, vote bars, 1898 map | **The room in later light** (cold open re-lit), **abdication document** (still to source), **petition light table** (rebuild of Hawaiʻi sample 3 with the Kūʻē pages, ending on the ch 6 stack), **flag swap on the palace** (cold open wide) |
+| 9 | Question card, badges lit, Declaration circled, Ledger | **Question card settling level**, **Pearl Harbor** (3D Oʻahu, quiet light), **Apology Resolution page**, **USS *Maine* wreck and the *Evening Journal* front page**, **the Queen's window** (reuse) |
+
+Assets still to source: the 1895 abdication document (Hawaiʻi State Archives; printed text in *Hawaii's Story* appendix as
+a fallback). Everything else in the table has its image, data or set.
+
+Not yet started: the **score** (see `../research/SCORING_RESEARCH.md` when it lands) and **sound design** (room tones per set,
+the George III signature, the humor-cut silences), then **chapter assembly**.
