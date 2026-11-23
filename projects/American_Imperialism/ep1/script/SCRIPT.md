@@ -1,6 +1,6 @@
 # The Pitch Meeting: How America Talked Itself Into an Empire
 
-**Chunk History** · narration script · draft 4 (voiced from draft 3; re-voice pending) · 1870 words · about 10:31 of narration at the locked pace
+**Chunk History** · narration script · draft 4 (voiced from draft 3; re-voice pending) · 1876 words · about 10:33 of narration at the locked pace
 (185 wpm; the quiet chapter at about 168), about 10:00 finished with the intro, title card and end screen. **Voice (draft 4):** the rules in [`../../research/VOICE_STUDY.md`](../../research/VOICE_STUDY.md) section 6: long sentences that
 land on short ones, contractions, plain meaning before each term, no signposts or stock idioms, every dry line literally
 true. **Delivery: deadpan throughout** (Ellis,
@@ -42,10 +42,10 @@ Markup: `*emphasis*`, `{vocab term}` (defined where it appears).
 | 3 | 0:54 | The Old Guard | 153 | 52 s |
 | 4 | 1:46 | The Pitch Meeting | 478 | 157 s |
 | 5 | 4:23 | The Same Islands | 37 | 14 s |
-| 6 | 4:37 | The Heist | 561 | 184 s |
-| 7 | 7:41 | He Has, We Have | 51 | 19 s |
-| 8 | 8:00 | Under Protest | 212 | 78 s |
-| 9 | 9:17 | Back to the Question | 221 | 74 s |
+| 6 | 4:37 | The Heist | 567 | 186 s |
+| 7 | 7:43 | He Has, We Have | 51 | 19 s |
+| 8 | 8:01 | Under Protest | 212 | 78 s |
+| 9 | 9:19 | Back to the Question | 221 | 74 s |
 
 **Story arc check:**
 
@@ -145,7 +145,7 @@ Four pitches. Four different reasons. [beat] Markets? Hawaiʻi's sugar already s
 
 ## 4:37 | The Heist
 
-`ch06_the_heist.txt` · 561 words · about 184 s
+`ch06_the_heist.txt` · 567 words · about 186 s
 
 Sugar coming into the United States from another country paid a tax at the border, called a {tariff}. In 1875, a trade deal let Hawaiian sugar in with no tariff at all, so it was cheaper than everyone else's. Plantations boomed and their owners got very rich. Many of them were the sons and grandsons of those missionaries.
 
@@ -170,8 +170,8 @@ Stepping into another country's affairs to protect your own interests is called 
 
 The Queen would not start a war with the United States, so she stepped aside, in writing, and under protest: "I yield to the superior force of the United States of America."
 
-The new government's president was a lawyer named Sanford Dole. [beat] Yes. That Dole.
-> **CUT:** THE PINEAPPLE, setup. Dole's portrait on the desk, and a pineapple sitting beside it. Nobody explains it yet.
+The new government's president was a lawyer named Sanford Dole. [beat] Yes, Dole. As in the fruit cups.
+> **CUT:** THE FRUIT CUP, setup. Dole's portrait on the desk, and a drawn fruit cup sitting beside it (no real logo). Nobody explains it yet.
 
 On February 1st, Stevens raised the American flag and put Hawaiʻi under America's protection, which is called a {protectorate}.
 > **CUT:** THE LINE, 2 of 3. On "flag," hard cut to the Declaration, the words "consent of the governed" large and readable. A second teal underline draws itself under the first. 1.5 s.
@@ -186,14 +186,14 @@ Dole refused.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
 
-A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
-> **CUT:** THE PINEAPPLE, payoff. Back on Dole's portrait and the pineapple. Hard cut to a period pineapple-can label with DOLE on it. Silence.
+A few years later his cousin James arrived and started growing pineapples. The company James started is where the name on those fruit cups comes from.
+> **CUT:** THE FRUIT CUP, payoff. Back on Dole's portrait and the fruit cup. Hard cut to a period pineapple-can label with DOLE on it. Silence.
 
 What the planters wanted was for the United States to officially add Hawaiʻi to itself, which is called {annexation}. But their treaty kept stalling in the Senate. [beat] Partly because of a stack of paper.
 
 ---
 
-## 7:41 | He Has, We Have
+## 7:43 | He Has, We Have
 
 `ch07_he_has_we_have.txt` · 51 words · about 19 s
 
@@ -203,7 +203,7 @@ That was what a king did to America. [beat] In Hawaiʻi, Americans did it to a q
 
 ---
 
-## 8:00 | Under Protest
+## 8:01 | Under Protest
 
 `ch08_under_protest.txt` · 212 words · about 78 s
 
@@ -221,7 +221,7 @@ In 1898, she published a book, and she wrote to Americans directly.
 
 ---
 
-## 9:17 | Back to the Question
+## 9:19 | Back to the Question
 
 `ch09_back_to_the_question.txt` · 221 words · about 74 s
 
@@ -289,3 +289,4 @@ Every flagged claim, what the sources say, and what changed in the script.
 | 17 | The tariff passage (draft 4): sugar paid a tariff; the 1875 deal let Hawaiian sugar in free, so it was cheaper; the 1890 McKinley Tariff took the tariff off all foreign sugar and paid U.S. growers two cents a pound; annexation would have made Hawaiian sugar American sugar | **Confirmed** (row 2: the two-cent bounty on domestic sugar; the reciprocity advantage and its loss in 1890 are the standard account). The bounty was repealed in 1894, after the overthrow, so the script says only what the planters saw in 1890-93 | Taussig; FRUS 1894 | added |
 | 18 | Hawaiʻi was still its own country in 1895; King Kalākaua signed the 1887 constitution under threat | **Confirmed.** The Republic of Hawaii was independent until annexation in 1898; Kalākaua signed under pressure from the armed Honolulu Rifles | NLM Native Voices; Hawaiʻi State Archives | added |
 | 19 | Strong's "Anglo-Saxon" glossed in his own words | **Quoted:** "I use the term somewhat broadly to include all English-speaking peoples," in the chapter "The Anglo-Saxon and the World's Future," where he calls them "this race" | `ourcountryitspos00strorich.txt` | added |
+| 20 | The Dole fruit cups trace back to James Dole's company | **Confirmed.** The Dole Sunshine Company (Dole Packaged Foods, which makes Fruit Bowls) dates its history to James Dole founding the Hawaiian Pineapple Company in 1901, and lists Fruit Bowls as introduced in 1999. The script says only that the name comes from James's company; Sanford Dole never ran it | dolesunshine.com/history; Wikipedia, "James Dole" | "Yes, Dole. As in the fruit cups." / "The company James started is where the name on those fruit cups comes from." |

@@ -75,8 +75,8 @@ Stepping into another country's affairs to protect your own interests is called 
 
 The Queen would not start a war with the United States, so she stepped aside, in writing, and under protest: "I yield to the superior force of the United States of America."
 
-The new government's president was a lawyer named Sanford Dole. [beat] Yes. That Dole.
-@CUT THE PINEAPPLE, setup. Dole's portrait on the desk, and a pineapple sitting beside it. Nobody explains it yet.
+The new government's president was a lawyer named Sanford Dole. [beat] Yes, Dole. As in the fruit cups.
+@CUT THE FRUIT CUP, setup. Dole's portrait on the desk, and a drawn fruit cup sitting beside it (no real logo). Nobody explains it yet.
 
 On February 1st, Stevens raised the American flag and put Hawaiʻi under America's protection, which is called a {protectorate}.
 @CUT THE LINE, 2 of 3. On "flag," hard cut to the Declaration, the words "consent of the governed" large and readable. A second teal underline draws itself under the first. 1.5 s.
@@ -91,8 +91,8 @@ Dole refused.
 
 On July 4th, 1894, Dole's government declared itself the Republic of Hawaii.
 
-A few years later his cousin James arrived and started growing pineapples. His company is why the name Dole is on pineapple cans today.
-@CUT THE PINEAPPLE, payoff. Back on Dole's portrait and the pineapple. Hard cut to a period pineapple-can label with DOLE on it. Silence.
+A few years later his cousin James arrived and started growing pineapples. The company James started is where the name on those fruit cups comes from.
+@CUT THE FRUIT CUP, payoff. Back on Dole's portrait and the fruit cup. Hard cut to a period pineapple-can label with DOLE on it. Silence.
 
 What the planters wanted was for the United States to officially add Hawaiʻi to itself, which is called {annexation}. But their treaty kept stalling in the Senate. [beat] Partly because of a stack of paper."""),
 
