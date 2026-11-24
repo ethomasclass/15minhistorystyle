@@ -254,8 +254,11 @@ mb.cyl((WX, WY - 2.0, 0.85), (WX - 0.2, WY - 4.6, 0.05), 0.05, 0.04, WOOD, n=6) 
 mb.build('wagon')
 mb = MB()
 rr = random.Random(77)
+HP = Vector((WX - 0.12, WY - 1.35, 1.86))                  # join 19: the hero pineapple's base, on top of the heap
 for k in range(110):                                        # the load: fruit heaped above the boards, crowns up
     x, y = WX + rr.uniform(-0.62, 0.62), WY + rr.uniform(-1.85, 1.85)
+    if math.hypot(x - HP.x, y - HP.y) < 0.42:                # (room round the hero, so it stands on its own)
+        continue
     z = 1.05 + rr.uniform(0, 0.5) + 0.35 * (1 - (abs(x - WX) / 0.7) ** 2) * (1 - (abs(y - WY) / 2.0) ** 4)
     bm = bmesh.new()
     bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0)
@@ -429,7 +432,6 @@ for ci, (cx, cyy, cz, cw) in enumerate(((-900, 3200, 800, 420), (-200, 3600, 108
 
 # ---- join 19: the hero pineapple on top of the wagon's load, modelled closer than the heap's: a faceted body in
 # offset rings of diamond-shaped eyes, each with its dark point, and a crown of stiff leaves in two greens
-HP = Vector((WX - 0.12, WY - 1.35, 1.69))                  # the base of the fruit
 def hero_pineapple(base, h=0.25, r=0.085, rings=9, seg=12):
     mb_ = MB()
     rr_ = random.Random(19)
@@ -456,7 +458,7 @@ def hero_pineapple(base, h=0.25, r=0.085, rings=9, seg=12):
         for j in range(seg):
             a_, b_ = P[k][j], P[k][(j + 1) % seg]
             c_ = P[k + 1][(j + (k % 2)) % seg]
-            mb_.poly([a_, b_, c_], [(0, 1, 2)], '#a8742a')
+            mb_.poly([a_, b_, c_], [(0, 1, 2)], '#bb8b38')
     top = Vector((base.x, base.y, base.z + h))
     for k in range(22):                                     # the crown: stiff leaves fanning up and out, the inner ones taller
         a = 2 * math.pi * k / 7.3 + rr_.uniform(-0.15, 0.15)
@@ -473,7 +475,7 @@ def hero_pineapple(base, h=0.25, r=0.085, rings=9, seg=12):
         mb_.poly([mid - side * 0.6, mid + side * 0.6, tipp], [(0, 1, 2)], col)
     return mb_.build('hero_pineapple')
 hero_pineapple(HP)
-HERO_C = HP + Vector((0, 0, 0.2))                           # the middle of fruit and crown together
+HERO_C = HP + Vector((0, 0, 0.255))                         # the middle of fruit and crown together (0.51 m tall)
 
 # ---- the sun: from the front right, mid-afternoon, so each plant throws its shadow across the furrow
 so = bpy.data.objects['sun']
@@ -502,8 +504,8 @@ for ob in (cam, tgt):
 cam.data.clip_end = 9000
 cam.data.lens = 26
 # join 19: the push down the furrow turns right and rises to the wagon, ending close on the hero pineapple: at 85 mm and
-# 2.4 m the fruit and crown (0.47 m) fill about 60% of the frame's height
-D_END, LENS_END = 2.4, 85.0
+# 3.55 m the fruit and crown (0.51 m) fill about 60% of the frame's height
+D_END, LENS_END = 3.55, 85.0
 C_END = HERO_C + Vector((-0.97, -0.24, 0.12)).normalized() * D_END
 PATH = [Vector(v) for v in ((0.0, -4.0, 1.25), (0.0, -2.2, 1.32), (1.0, 4.5, 1.55), (2.4, 9.5, 1.75))] + [C_END]
 def _cr(P, t):

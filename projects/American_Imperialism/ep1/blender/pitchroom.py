@@ -935,6 +935,7 @@ for f, p in paths:
     at_fill = (Vector(cam_at(keys, tf(f))[0:3]) - Vector(FILL[0])).length < 1e-4 and not os.environ.get('DBG_CAM')
     BOARDTX.interpolation = 'Closest' if at_fill else 'Linear'
     sc.render.filter_size = 0.0 if at_fill else 1.5
+    sc.render.dither_intensity = 0.0 if at_fill else 1.0
     sc.frame_set(f)
     sc.render.filepath = p
     t0_ = time.time()
