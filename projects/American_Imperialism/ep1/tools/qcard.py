@@ -77,9 +77,11 @@ CARDS = {
                      name='THE THRONE ROOM', source='WHERE THE MILITARY COMMISSION TRIED HER, 1895', source_at='sentenced her',
                      credit="PLATE: THE THRONE ROOM, ʻIOLANI PALACE · HAWAII'S STORY BY HAWAII'S QUEEN, 1898"),
     # name cards: no quote, the portrait holds at centre with the name and a role line (optional gag)
+    # head=<colour>: the card opens on a full frame of that flat colour, which shrinks into the name strip (join 15:
+    # the Pearl Harbor pin tablet's orange fills the frame, then becomes the strip)
     'kalakaua': dict(stem='ch06_the_heist', start='King Kalākaua', name_at='King Kalākaua', end='most of his power', hold=0.3, tone='coral',
                      portrait=dict(path=ARC('ch06_king_kalakaua.jpg'), frac=(0.12, 0.06, 0.92, 0.62), cuts=[26, 50, 76]), name='KING KALĀKAUA',
-                     source='KING OF HAWAIʻI, 1874 TO 1891', source_at='under threat',
+                     source='KING OF HAWAIʻI, 1874 TO 1891', source_at='under threat', head=OR,
                      credit='PORTRAIT: KING KALĀKAUA, 1880s · LIBRARY OF CONGRESS (TRACED)'),
     'liliu': dict(stem='ch06_the_heist', start='a new ruler took the throne', name_at='Liliʻuokalani', end='back to her people', hold=0.5, tone='coral',
                   portrait=dict(path=ARC('ch01_liliuokalani_c1898_prince.jpg'), frac=(0.12, 0.07, 0.88, 0.80), cuts=[22, 48, 78]), name='LILIʻUOKALANI',
@@ -356,6 +358,25 @@ def build_name(key):
         S.defs.append(f'<g id="side">{ssvg}</g>')
     slide_at = Wd.at(gag['slide']) if gag else Wd.at(side['at']) if side else None
     rt = c.get('retitle')
+    head = c.get('head')
+    HEAD_T0, HEAD_T1 = 0.07, 0.62                 # the colour field holds two frames, then shrinks into the strip
+    nsize = 50 if len(c['name']) <= 16 else 44
+    if head:                                  # the portrait waits for the strip to land
+        t_in = max(t_in, HEAD_T1 - 0.12)
+
+    def head_field(t):
+        """the flat colour field, shrinking from the full frame onto the name strip's rectangle (highlight geometry)"""
+        hx, hy = PX - 10, PY + PH + 80
+        sw_, sh_ = nsize * 0.62 * len(c['name']) + nsize * 0.5, nsize * 1.18
+        u = ease_io(clamp((t - HEAD_T0) / (HEAD_T1 - HEAD_T0)))
+        x0, y0, w0, h0 = -40, -40, 2000, 1160
+        x1, y1 = hx, hy - sh_ * 0.86
+        cx0, cy0, cx1, cy1 = x0 + w0 / 2, y0 + h0 / 2, x1 + sw_ / 2, y1 + sh_ / 2
+        w_, h_ = w0 * (sw_ / w0) ** u, h0 * (sh_ / h0) ** u          # sizes in log space, like a camera zoom
+        k = (w0 - w_) / max(1e-6, w0 - sw_)                          # the centre follows the size
+        cx, cy = cx0 + (cx1 - cx0) * k, cy0 + (cy1 - cy0) * k
+        return (f'<g transform="rotate({-2 * u:.3f} {hx + (cx - cx1):.1f} {hy + (cy - cy1):.1f})">'
+                f'<rect x="{cx - w_ / 2:.1f}" y="{cy - h_ / 2:.1f}" width="{w_:.1f}" height="{h_:.1f}" fill="{head}"/></g>')
 
     def frame(t):
         tq = step12(t)
@@ -369,8 +390,8 @@ def build_name(key):
                    f'<g transform="translate({PX},{PY})"><g clip-path="url(#pclip)"><use href="#portrait"/></g>'
                    f'<path d="{slab(PW, PH, 34)}" fill="none" stroke="{CO if coral else TE}" stroke-width="6"/></g>')
             tn = Wd.at(c['name_at'])
-            if t >= tn:
-                grp += highlight(PX - 10, PY + PH + 80, c['name'], 50 if len(c['name']) <= 16 else 44, prog=(tq - tn) / 0.27)
+            if t >= tn and not head:
+                grp += highlight(PX - 10, PY + PH + 80, c['name'], nsize, prog=(tq - tn) / 0.27)
             ts = Wd.at(c['source_at'])
             if t >= ts:
                 grp += f'<g opacity="{clamp((t - ts) / 0.3):.3f}">' + tag(PX, PY + PH + 132, c['source'], 19, TAG) + '</g>'
@@ -382,6 +403,11 @@ def build_name(key):
                     grp += f'<path d="M{PX + 8},{PY - 58} L{PX + 8 + 300 * pk:.0f},{PY - 54}" stroke="{TE}" stroke-width="7" stroke-linecap="round"/>'
                     grp += note(PX + 345, PY - 30, rt['new'], 44, TE, prog=(tq - ts_ - 0.25) / 0.5)
             o += f'<g transform="translate({cx:.1f},{CY1:.1f}) rotate({rot:.2f}) scale({s:.4f}) translate({-CX1:.1f},{-CY1:.1f})">{grp}</g>'
+        if head:                                  # the strip stays put (it was the frame a moment ago); its name lands on it
+            if t < HEAD_T1:
+                o += head_field(t)
+            else:
+                o += highlight(PX - 10, PY + PH + 80, c['name'], nsize, prog=1.0)
         if side and t >= slide_at:
             sw_ = side.get('w', 380)
             sx_, sy_ = 1290, CY1 - SHh / 2 - 20
@@ -395,9 +421,10 @@ def build_name(key):
             tp = Wd.at(gag['pop'])
             if t >= tp:
                 o += g(1260, 760, pop(t, tp, 0.32), fruit_cup(), rot=3.0)
-        z = 1 + 0.03 * clamp(t / (b - a))
+        z = 1 + 0.03 * clamp((t - (HEAD_T1 if head else 0)) / (b - a))
         o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
-        o += tag(40, 1050, c['credit'], 16, '#8d857a')
+        if not head or t >= HEAD_T1:
+            o += tag(40, 1050, c['credit'], 16, '#8d857a')
         return {'h': {'ov': o}}
     return S, frame, c['stem'], a, b
 

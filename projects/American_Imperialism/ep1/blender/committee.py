@@ -5,11 +5,17 @@
 # Shots, keyed to the chapter 6 narration (public/audio/ch06_the_heist.words.json); frame 0 is "In January":
 #   K1  "In January 1893, they acted"     the empty office, the table bare, the lamp lit; a slow push down the table
 #   K2  "Safety." (hard cut)              the same frame, the rifles now on the table; a snap zoom (lens 28 to 50 in 6
-#                                         frames) onto the row of rifles, then a slow creep, held to "The help came"
+#                                         frames) onto the row of rifles, then a slow creep, held to "This one had help"
+#   K3  "This one had help. The help"     join 16: the camera rises off the rifles to the tall window and flies out
+#                                         through its upper-left pane, crossing the glass on "help" (the path is shared
+#                                         with harbor.py through join16.py); from K3 on the night outside is hidden, so in
+#                                         mode window the pane is transparent and the harbor is laid in behind it
 # The lamp flickers on twos at 12 fps; the palm outside sways on the same steps.
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python committee.py -- <out_dir> [scale%] [mode]
 #   mode: a still, or several comma-separated: bare (K1), rifles_cut (K2's first frame), rifles (K2 after the zoom),
-#         anim (render the frames in $FRAMES, "all" or a comma list, into <out_dir>/NNNN.png)
+#         anim (render the frames in $FRAMES, "all" or a comma list, into <out_dir>/NNNN.png),
+#         window (join 16: from a second before K3 to the crossing, every $STEP-th frame, with a transparent background,
+#         into <out_dir>/window/NNNN.png; frame F_K3 here is frame 0 of harbor.py)
 import bpy, bmesh, math, os, sys, random, time
 from mathutils import Vector
 
@@ -56,11 +62,14 @@ def _wt(stem, phrase, end=False):
 
 T0 = _wt('ch06_the_heist', 'In January 1893') - 0.05
 T_CUT = _wt('ch06_the_heist', 'Safety') - 0.05
-T_END = _wt('ch06_the_heist', 'The help came') - 0.05
+J16 = {'_wt': _wt, '__name__': 'join16'}
+exec(compile(open(os.path.join(HERE, 'join16.py')).read(), os.path.join(HERE, 'join16.py'), 'exec'), J16)
+T_END = J16['T_X'] + 2.0 / FPS                               # the room ends as the camera crosses the window (join 16)
 F_CUT, N = int(round((T_CUT - T0) * FPS)), int(round((T_END - T0) * FPS))
+F_K3 = int(round((J16['T_K3'] - T0) * FPS))
 F_ZOOM = F_CUT + 7                                          # the snap zoom starts a beat after the cut
 sc.frame_start, sc.frame_end = 0, N - 1
-print('COMMITTEE TIMES', round(T0, 2), round(T_CUT, 2), round(T_END, 2), 'frames', F_CUT, N)
+print('COMMITTEE TIMES', round(T0, 2), round(T_CUT, 2), round(T_END, 2), 'frames', F_CUT, N, 'K3 from', F_K3)
 
 # ---- palette (from the plate)
 WALL, WAIN, WAIN_DK = '#2c4744', '#3b2a1f', '#2c1f17'
@@ -198,6 +207,7 @@ PALM_M = emit('palmsil', '#0d1626', 1.0)
 before = set(bpy.data.objects)
 CG['palm'](WX - 0.7, Y1 + 3.0, 6.4, -0.1, 12, 4.4, 31)
 bpy.data.objects['palm31'].scale = (0.4, 0.4, 0.4)           # (the kit's fronds have a fixed width: build big, scale down)
+OUTSIDE = [o for o in bpy.data.objects if o not in before] + [sky, m1, m2] + [o for o in bpy.data.objects if o.name.startswith('star')]
 for ob in set(bpy.data.objects) - before:
     if ob.type == 'MESH':
         recolor(ob, PALM_M)
@@ -407,6 +417,9 @@ for ob in STATE2:
 for ob in STATE1:
     ob.hide_render = False; ob.keyframe_insert('hide_render', frame=0)
     ob.hide_render = True; ob.keyframe_insert('hide_render', frame=F_CUT)
+for ob in OUTSIDE:                                          # K3: the painted night goes, the harbor is laid in behind the glass
+    ob.hide_render = False; ob.keyframe_insert('hide_render', frame=0)
+    ob.hide_render = True; ob.keyframe_insert('hide_render', frame=F_K3)
 
 # ---- the lamp's flicker and the palm's sway, both stepped at 12 fps
 rf = random.Random(3)
@@ -443,7 +456,10 @@ A_POS, A_LOOK = (0.85, -5.6, 2.05), (-0.55, 3.6, 0.95)
 B_POS, B_LOOK = (0.6, -4.7, 1.95), (-0.45, 3.6, 0.98)
 Z_LOOK = (0.05, 0.5, 0.78)
 KEYS = [(0, A_POS, A_LOOK, 28), (F_CUT - 1, B_POS, B_LOOK, 28), (F_CUT, A_POS, A_LOOK, 28), (F_ZOOM, A_POS, A_LOOK, 28),
-        (F_ZOOM + 6, (0.55, -3.1, 2.85), Z_LOOK, 40), (N - 1, (0.6, -3.35, 2.8), (0.05, 0.55, 0.78), 43)]
+        (F_ZOOM + 6, (0.55, -3.1, 2.85), Z_LOOK, 40), (F_K3, (0.6, -3.35, 2.8), (0.05, 0.55, 0.78), 43)]
+for f in range(F_K3 + 1, N):                                # K3, every frame from the shared path
+    p_, l_, ln_ = J16['room'](T0 + f / FPS)
+    KEYS.append((f, tuple(p_), tuple(l_), ln_))
 for f, pos, look, lens in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -452,15 +468,24 @@ for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
     for fc in ad.action.fcurves:
         for kp in fc.keyframe_points:
             f = int(kp.co[0])
-            kp.interpolation = 'CONSTANT' if f in (F_CUT - 1, F_CUT) else ('LINEAR' if f in (0, F_ZOOM + 6) else 'BEZIER')
+            kp.interpolation = 'CONSTANT' if f in (F_CUT - 1, F_CUT) else ('LINEAR' if f in (0, F_ZOOM + 6) or f >= F_K3 else 'BEZIER')
             if f == F_ZOOM:
                 kp.interpolation = 'EXPO'                    # the snap: fast out of the start, settling onto the rifles
                 kp.easing = 'EASE_OUT'
 cam.data.dof.use_dof = True
 cam.data.dof.aperture_fstop = 2.2
-for f, d in ((0, 6.6), (F_CUT, 6.6), (F_ZOOM, 6.6), (F_ZOOM + 6, 3.95), (N - 1, 4.15)):
+for f, d in ((0, 6.6), (F_CUT, 6.6), (F_ZOOM, 6.6), (F_ZOOM + 6, 3.95), (F_K3, 4.15)):
     cam.data.dof.focus_distance = d
     cam.data.dof.keyframe_insert('focus_distance', frame=f)
+cam.data.dof.keyframe_insert('aperture_fstop', frame=F_K3)
+for f in range(F_K3 + 1, N):                                # K3: focus follows the window, stopping down a little
+    p_, l_, ln_ = J16['room'](T0 + f / FPS)
+    u_ = (f - F_K3) / max(1, N - 1 - F_K3)
+    cam.data.dof.focus_distance = max(0.3, min(4.15 + u_ * 3, (J16['PANE'] - p_).length))
+    cam.data.dof.aperture_fstop = 2.2 + 3.4 * min(1.0, u_ * 1.5)
+    cam.data.dof.keyframe_insert('focus_distance', frame=f)
+    cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
+cam.data.clip_start = 0.03
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
 STILL = {'bare': F_CUT // 2, 'rifles_cut': F_CUT + 2, 'rifles': F_ZOOM + 20}
@@ -469,6 +494,10 @@ for mode in MODES:
         fr = os.environ.get('FRAMES', '')
         frames = range(N) if fr == 'all' else [int(v) for v in fr.split(',') if v]
         paths = [(f, os.path.join(OUT, f'{f:04d}.png')) for f in frames]
+    elif mode == 'window':
+        sc.render.film_transparent = True
+        sc.render.image_settings.color_mode = 'RGBA'
+        paths = [(f, os.path.join(OUT, 'window', f'{f:04d}.png')) for f in range(F_K3 - 16, N, int(os.environ.get('STEP', '1')))]
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'committee_{mode}.png'))]
     for f, p in paths:

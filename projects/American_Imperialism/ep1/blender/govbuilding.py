@@ -6,13 +6,16 @@
 # Two states, back to back on the timeline, keyed to the chapter 6 narration (public/audio/ch06_the_heist.words.json):
 #   G1  "On February 1st"  (to "protectorate")  February 1, 1893: from the lawn past the statue, up at the tower; the U.S.
 #                                               flag (44 stars) goes up the staff on twos, reaching the top on "flag", and
-#                                               flies; the camera tilts up with it
+#                                               flies; the camera tilts up with it, then (join 18) cranes up and in so that
+#                                               on "flag" it is square on the flag, the stripes horizontal and filling the
+#                                               frame, flying gently (the lead matches them into the parchment's lines)
 #   G2  "On July 4th"      (to "A few years")   July 4, 1894, the Republic: the building dressed in bunting, strings of
 #                                               flags from the tower, a crowd on the lawn, the Hawaiian flag (the Republic
 #                                               kept it) on the staff; the wide from the street, a slow push
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python govbuilding.py -- <out_dir> [scale%] [mode]
 #   mode: a still, or several comma-separated: flag_low (G1, the flag starting up), flag (G1, the flag at the top),
-#         republic (G2), anim (the frames in $FRAMES)
+#         republic (G2), flag_end (join 18: G1's frame on "flag"), anim (the frames in $FRAMES), flagrun (join 18: G1
+#         from the start to a second past "flag", every $STEP-th frame, into <out_dir>/flagrun/)
 import bpy, bmesh, math, os, sys, random, time
 from mathutils import Vector
 
@@ -486,9 +489,28 @@ a1, b1 = FS['G1']
 a2, b2 = FS['G2']
 FT0 = Vector((1.6, TCY, ZBOT + 1.0))
 FT1 = Vector((1.6, TCY, ZTOP - 0.6))
-KEYS = [  # frame, camera, look-at, lens
-    (a1, (3.5, -44.0, 3.5), (0.8, TCY, 22.2), 45), (F_UP1, (3.3, -43.0, 3.5), (0.8, TCY, 23.4), 45), (b1 - 1, (3.2, -42.4, 3.5), (0.8, TCY, 23.6), 45),
-    (a2, (8.0, -52.0, 4.6), (0.0, 0.0, 13.0), 25), (b2 - 1, (7.4, -49.0, 4.5), (0.0, 0.0, 13.0), 25)]
+# join 18: G1 tilts up with the flag, then cranes up and in, arriving square on the flag's stripes on "flag" (F_FLAG)
+F_FLAG = FS['G1'][0] + int(round((_wt(CH, 'flag and put') - T_G1) * FPS))
+F_CR0 = F_UP0 + int(0.25 * (F_FLAG - F_UP0))                 # the crane starts once the flag is well on its way
+FX_ = 0.1 + UW * 0.66                                        # aim right of the canton: stripes across the whole frame
+D_TIGHT, LENS_T = 5.0, 82.0                                  # 2.2 m of flag across the frame
+def flag_z(f_):
+    step = math.floor(f_ / FPS * 12) / 12 * FPS
+    u = min(1.0, max(0.0, (step - F_UP0) / max(1, F_UP1 - F_UP0)))
+    return ZBOT + (ZTOP - ZBOT) * (1 - (1 - u) ** 1.3)
+C_END = Vector((FX_, TCY - D_TIGHT, ZTOP))
+KEYS = [(a1, (3.5, -44.0, 3.5), (0.8, TCY, 22.2), 45)]
+C0, L0 = Vector((3.4, -43.6, 3.5)), Vector((0.8, TCY, 22.6))
+for fr in range(F_CR0, b1):
+    u = min(1.0, (fr - F_CR0) / (F_FLAG - 2 - F_CR0))
+    e = u * u * (3 - 2 * u)
+    ez = 1 - (1 - e) ** 1.6                                  # it rises a little ahead of moving in, clearing the facade
+    pos = Vector((C0.x + (C_END.x - C0.x) * e, C0.y + (C_END.y - C0.y) * e, C0.z + (C_END.z - C0.z) * ez))
+    zf = (flag_z(fr) + ZTOP) / 2 if u < 1 else ZTOP          # (the look-at rides with the climbing flag, smoothed)
+    look = L0.lerp(Vector((FX_, TCY, ZTOP)), e)
+    look.z = L0.z + (zf - L0.z) * min(1.0, e * 1.4) if u < 1 else ZTOP
+    KEYS.append((fr, tuple(pos), tuple(look), 45 + (LENS_T - 45) * e ** 1.5))
+KEYS += [(a2, (8.0, -52.0, 4.6), (0.0, 0.0, 13.0), 25), (b2 - 1, (7.4, -49.0, 4.5), (0.0, 0.0, 13.0), 25)]
 CUTS = {b1 - 1}
 for fr, pos, look, lens in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=fr)
@@ -497,10 +519,14 @@ for fr, pos, look, lens in KEYS:
 for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
     for fc in ad.action.fcurves:
         for kp in fc.keyframe_points:
-            kp.interpolation = 'CONSTANT' if int(kp.co[0]) in CUTS else 'BEZIER'
+            kp.interpolation = 'CONSTANT' if int(kp.co[0]) in CUTS else ('LINEAR' if F_CR0 <= int(kp.co[0]) < b1 else 'BEZIER')
             kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
 cam.data.dof.use_dof = True
-for fr, dist, fs in ((a1, 50.0, 8.0), (a2, 52.0, 11.0)):
+DOFK = [(a1, 50.0, 8.0)]
+for k_ in KEYS:                                             # during the crane, focus on the flag
+    if F_CR0 <= k_[0] < b1 and k_[0] % 3 == 0:
+        DOFK.append((k_[0], max(D_TIGHT, (Vector((FX_, TCY, flag_z(k_[0]))) - Vector(k_[1])).length), 8.0))
+for fr, dist, fs in DOFK + [(a2, 52.0, 11.0)]:
     cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = dist, fs
     cam.data.dof.keyframe_insert('focus_distance', frame=fr)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=fr)
@@ -509,12 +535,14 @@ for fc in cam.data.animation_data.action.fcurves:
         kp.interpolation = 'CONSTANT'
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
-STILL = {'flag_low': F_UP0 + 8, 'flag': F_UP1 + 10, 'republic': a2 + 40}
+STILL = {'flag_low': F_UP0 + 8, 'flag': F_UP1 + 10, 'republic': a2 + 40, 'flag_end': F_FLAG}
 print('FLAG UP', F_UP0, F_UP1)
 for mode in MODES:
     if mode == 'anim':
         fr_ = os.environ.get('FRAMES', '')
         paths = [(fr, os.path.join(OUT, f'{fr:04d}.png')) for fr in (range(N) if fr_ == 'all' else [int(v) for v in fr_.split(',') if v])]
+    elif mode == 'flagrun':
+        paths = [(fr, os.path.join(OUT, 'flagrun', f'{fr:04d}.png')) for fr in range(a1, min(b1, F_FLAG + 30), int(os.environ.get('STEP', '1')))]
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'govbuilding_{mode}.png'))]
     for fr, p in paths:

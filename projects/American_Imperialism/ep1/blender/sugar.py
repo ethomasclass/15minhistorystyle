@@ -6,9 +6,17 @@
 # Portuguese and Native Hawaiian laborers in plain work clothes and hats (faceless kit figures, no caricature).
 # Everything that moves steps at 12 fps (smoke, the train, the workers' cane knives, the palms). Shots, keyed to the
 # narration (ch06):
-#   WIDE  "Plantations boomed"         from above the near field: rows of cane, the road in, the mill, the mountains
-#   MILL  "Many of them were the sons"  closer on the mill: the train of cane carts rolling in past the cane shed
-#   xvfb-run -a blender -b --python sugar.py -- <out_dir> [scale%] [mode: wide|mill|anim]
+#   WIDE  "Plantations boomed"         from above the near field: rows of cane, the road in, the mill, the mountains.
+#                                      Join 13: it opens held for half a second with the far edge of the fields against the
+#                                      mountains' foot at 60% down the frame (y = 648 of 1080), where the tariff gate's flat
+#                                      green horizon strip sits, then drifts
+#   MILL  "Many of them were the sons"  closer on the mill: the train of cane carts rolling in past the cane shed, a slow
+#                                      creep to "the right to use"; then join 14: the camera rises up the chimney with the
+#                                      smoke and into the plume, until the frame is a flat field of bone haze #EDE7DC on
+#                                      "called" (the 3D Oʻahu starts from that haze on "Pearl Harbor")
+# Clouds and the chimney's smoke are fx.py's painted heaps and plume.
+#   xvfb-run -a blender -b --python sugar.py -- <out_dir> [scale%] [mode: wide|mill|anim|fields|rise]
+#   fields: the WIDE's first 1.5 s, rise: the last 3 s of MILL; both every $STEP-th frame into <out_dir>/<mode>/
 import bpy, bmesh, math, os, sys, random
 from mathutils import Vector, Matrix
 
@@ -56,8 +64,13 @@ def _wt(stem, phrase, end=False):
 
 T0 = _wt('ch06_the_heist', 'Plantations boomed') - 0.3
 T_MILL = _wt('ch06_the_heist', 'Many of them') - 0.05
-T_END = _wt('ch06_the_heist', 'In 1887') - 0.05
+T_RISE = _wt('ch06_the_heist', 'the right to use') - 0.1      # join 14: the rise up the smoke starts
+T_HAZE = _wt('ch06_the_heist', 'called Pearl Harbor')         # the frame is all haze
+T_END = _wt('ch06_the_heist', 'Pearl Harbor') - 0.05          # the 3D Oʻahu takes over
 FW, N = int(round((T_MILL - T0) * FPS)), int(round((T_END - T0) * FPS))
+F_RISE, F_HAZE = int(round((T_RISE - T0) * FPS)), int(round((T_HAZE - T0) * FPS))
+FX = {'sc': sc, 'lin': lin, '__name__': 'fx'}
+exec(compile(open(os.path.join(HERE, 'fx.py')).read(), os.path.join(HERE, 'fx.py'), 'exec'), FX)
 sc.frame_start, sc.frame_end = 0, N - 1
 TQ = [math.floor(f / FPS * 12) / 12 for f in range(N)]            # scene time, stepped at 12 fps
 print('SUGAR TIMES', round(T0, 2), round(T_MILL, 2), round(T_END, 2), FW, N)
@@ -684,9 +697,15 @@ def smoke(name, base, n, size, rise, drift, col, life=7.0, seed=0, follow=None):
         PUFFS.append((p, Vector(base), k / n, size, rise, Vector(drift), life, rr.uniform(0, 6), follow))
 
 
-smoke('chim', (CHX, CHY, CHH + 1.2), 16, 1.7, 16.0, (34.0, 14.0, 0.0), '#c3beb2', life=9.0, seed=1)
-smoke('chim2', (CHX, CHY, CHH + 1.2), 9, 1.3, 11.0, (24.0, 9.0, 0.0), '#aeaaa0', life=7.0, seed=2)
+SMOKE_M = FX['soft_mat']('smoke', '#efe9de', '#a29f97', lo=0.15, hi=1.2, feather=0.45, alpha=0.92)
+PLUME = FX['Plume']('chim', (CHX, CHY, CHH + 1.0), SMOKE_M, n=34, r0=1.0, r1=8.5, rise=34.0, drift=(34.0, 14.0, 0.0), life=9.0, seed=1)
+PLUME.key(range(N), TQ)
 smoke('loco', (0, 0, 0), 6, 0.32, 2.6, (-1.5, 3.0, 0.0), '#a9a49a', life=1.8, seed=3, follow=True)
+for p_, *_ in PUFFS:                                          # the engine's puffs in the same painted smoke
+    p_.data.materials.clear()
+    p_.data.materials.append(SMOKE_M)
+    for poly in p_.data.polygons:
+        poly.use_smooth = True
 
 
 def loco_stack(t):
@@ -721,13 +740,9 @@ for k in range(30):                                         # a windbreak line o
 
 # clouds: banks over the mountains, cream
 CLOUD = '#ece1c6'
-for ci, (cx, cyy, cz, cw) in enumerate(((-560, 1700, 420, 280), (-120, 1800, 560, 240), (330, 1650, 470, 320), (820, 1750, 560, 260), (-980, 1800, 600, 260))):
-    rr = random.Random(ci)
-    for k in range(7):
-        u = (k - 3) / 3
-        r = cw * (0.32 - 0.14 * abs(u)) * rr.uniform(0.85, 1.1)
-        ico(f'cl{ci}{k}', (cx + u * cw * 0.85, cyy + rr.uniform(-30, 30), cz + r * 0.25), r, CLOUD, 2, (1.6, 0.6, 0.62), seed=ci * 20 + k)
-    box(f'clbase{ci}', cx - cw * 1.05, cyy - 40, cz - 4, cx + cw * 1.05, cyy + 40, cz + cw * 0.05, CLOUD)
+CLOUD_M = FX['soft_mat']('cloud', '#f6efdc', '#aab2b0', lo=0.15, hi=1.25, feather=0.6, shadows=False)
+for ci, (cx, cyy, cz, cw) in enumerate(((-560, 1700, 400, 280), (-120, 1800, 540, 240), (330, 1650, 450, 320), (820, 1750, 540, 260), (-980, 1800, 580, 260))):
+    FX['bank'](f'cl{ci}', (cx, cyy, cz), cw * 2.0, CLOUD_M, seed=ci + 3, n=3, height=cw * 0.42)
 
 # ================================================================ the field workers
 C = PG['COSTUMES']
@@ -976,8 +991,39 @@ cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
 cam.data.clip_end = 6000
-KEYS = [(0, 30, tuple(CAM_WIDE), (-34.0, 60.0, 9.0)), (FW - 1, 30, tuple(CAM_WIDE + Vector((0.6, 4.0, -0.3))), (-33.0, 60.0, 9.0)),
-        (FW, 26, (-41.0, -35.0, 2.1), (-18.0, -1.0, 8.2)), (N - 1, 26, (-39.4, -34.4, 2.1), (-16.6, -0.5, 8.2))]
+# join 13: aim the WIDE's opening so the far edge of the fields (where the plain meets the mountains' foot) is 60% down
+HZ = Vector((-34.0, 1000.0, 0.5))
+def _ndc_y(pos, look, lens, pt):
+    q = (Vector(look) - Vector(pos)).to_track_quat('-Z', 'Y')
+    v = q.inverted() @ (pt - Vector(pos))
+    return 0.5 + (v.y / -v.z) / (2 * 18.0 * (1080 / 1920) / lens)
+lo_, hi_ = -60.0, 80.0
+for _ in range(50):                                          # bisect the look-at height for ndc y = 0.4 (from the bottom)
+    mid_ = (lo_ + hi_) / 2
+    if _ndc_y(CAM_WIDE, (-34.0, 60.0, mid_), 30, HZ) > 0.4:
+        lo_ = mid_
+    else:
+        hi_ = mid_
+LOOK_W0 = (-34.0, 60.0, mid_)
+print('WIDE opening look-at z', round(mid_, 3), 'horizon ndc', round(_ndc_y(CAM_WIDE, LOOK_W0, 30, HZ), 4))
+F_HOLD = int(round(0.5 * FPS))
+KEYS = [(0, 30, tuple(CAM_WIDE), LOOK_W0), (F_HOLD, 30, tuple(CAM_WIDE), LOOK_W0),
+        (FW - 1, 30, tuple(CAM_WIDE + Vector((0.6, 4.0, -0.3))), (-33.0, 60.0, 9.0)),
+        (FW, 26, (-41.0, -35.0, 2.1), (-18.0, -1.0, 8.2)), (F_RISE, 26, (-38.6, -34.0, 2.15), (-15.8, -0.3, 8.3))]
+# join 14: up the chimney with the smoke and into the plume (every frame, accelerating from the creep)
+RP = [Vector(v) for v in ((-38.6, -34.0, 2.15), (-30.0, -24.0, 8.0), (-12.0, -6.0, 22.0), (4.0, 6.0, 36.0), (13.0, 13.0, 45.0), (20.0, 17.0, 52.0))]
+RL = [Vector(v) for v in ((-15.8, -0.3, 8.3), (CHX, CHY, CHH + 2.0), (30.0, 22.0, 60.0))]
+def _cr(P, t):
+    i = min(int(t), len(P) - 2); t -= i
+    p0, p1, p2, p3 = P[max(i - 1, 0)], P[i], P[i + 1], P[min(i + 2, len(P) - 1)]
+    return 0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3)
+for f in range(F_RISE + 1, N):
+    u = min(1.0, (f - F_RISE) / (F_HAZE - F_RISE))
+    e = u * u * (2 - u) if u < 1 else 1.0                     # out of the creep, flying fast into the plume
+    pos = _cr(RP, e * (len(RP) - 1.001))
+    w = u * u * (3 - 2 * u)
+    look = RL[0].lerp(RL[1], min(1.0, w / 0.5)).lerp(RL[2], max(0.0, (w - 0.4) / 0.6))
+    KEYS.append((f, 26 - 4 * w, tuple(pos), tuple(look)))
 for f, lens, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -985,11 +1031,11 @@ for f, lens, pos, look in KEYS:
 for ob in (cam, tgt, cam.data):
     for fc in ob.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
-            kp.interpolation = 'CONSTANT' if int(kp.co[0]) == FW - 1 else 'BEZIER'
+            kp.interpolation = 'CONSTANT' if int(kp.co[0]) == FW - 1 else ('LINEAR' if int(kp.co[0]) > F_RISE else 'BEZIER')
             kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
 cam.data.dof.use_dof = True
 cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
-SUBJ = [(0, FW, Vector((-10.0, 0.0, 6.0)), 16.0), (FW, N, Vector((-30.0, -10.5, 2.0)), 8.0)]
+SUBJ = [(0, FW, Vector((-10.0, 0.0, 6.0)), 16.0), (FW, F_RISE, Vector((-30.0, -10.5, 2.0)), 8.0), (F_RISE, N, Vector((CHX, CHY, CHH)), 11.0)]
 for a, b, P, fs in SUBJ:
     for f in list(range(a, b, 6)) + [b - 1]:
         c = Vector([cfc[i].evaluate(f) for i in range(3)])
@@ -1001,6 +1047,17 @@ for fc in cam.data.animation_data.action.fcurves:
     if 'dof' in fc.data_path:
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT' if fc.data_path.endswith('fstop') else 'LINEAR'
+# the haze: once the camera is in the plume the frame settles on flat bone, the colour the 3D Oʻahu starts from
+ct = sc.node_tree
+comp = [n for n in ct.nodes if n.type == 'COMPOSITE'][0]
+src = comp.inputs['Image'].links[0].from_socket
+hz = ct.nodes.new('CompositorNodeMixRGB')
+hz.inputs[2].default_value = lin('#EDE7DC')
+ct.links.new(src, hz.inputs[1])
+ct.links.new(hz.outputs['Image'], comp.inputs['Image'])
+for f, v in ((0, 0.0), (F_HAZE - 12, 0.0), (F_HAZE, 1.0)):
+    hz.inputs[0].default_value = v
+    hz.inputs[0].keyframe_insert('default_value', frame=f)
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
 
@@ -1008,6 +1065,10 @@ import time
 if MODE in ('wide', 'mill'):
     f = int(FW * 0.6) if MODE == 'wide' else FW + int((N - FW) * 0.6)
     FR = [(f, os.path.join(OUT, f'sugar_{MODE}.png'))]
+elif MODE in ('fields', 'rise'):
+    st_ = int(os.environ.get('STEP', '1'))
+    rng = range(0, int(1.5 * FPS), st_) if MODE == 'fields' else range(max(FW, N - 3 * FPS), N, st_)
+    FR = [(f, os.path.join(OUT, MODE, f'{f:04d}.png')) for f in rng]
 else:
     FR = [(int(v), None) for v in os.environ['FRAMES'].split(',')] if os.environ.get('FRAMES') else [(f, None) for f in range(N)]
 for f, path in FR:

@@ -5,12 +5,19 @@
 # both masts with round tops, cowl ventilators, a plumb ram bow; the waterfront of timber wharves, iron-roofed sheds and
 # two-storey verandas, palms and dense trees, Punchbowl, the Koʻolau ridges behind and Diamond Head down the coast.
 # Shots, keyed to the chapter 6 narration (public/audio/ch06_the_heist.words.json):
+#   H0  "This one had help. The help came from the American minister"   join 16, the head of H1: the room camera of
+#        committee.py, copied through a third-floor window placed behind the waterfront (join16.py), flies out over the
+#        roofs, swings round the Boston and settles into H1. Until the crossing (on "help") this is only seen through the
+#        room's window, composited behind committee.py's mode window render
 #   H1  "The help came from the American minister in Honolulu, John Stevens"   the harbor wide: the Boston at anchor, the
 #        waterfront and the mountains; a slow push in (the Stevens lower third sits over this)
 #   H2  "who ordered sailors and Marines ashore from the warship USS Boston"  low on the water off the landing: the cutters
 #        row toward and past the camera, the Boston behind them, Diamond Head down the coast
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python harbor.py -- <out_dir> [scale%] [mode: wide|boats|anim]
-#   mode anim renders the frames in FRAMES (comma list) or the whole timeline
+#   mode anim renders the frames in FRAMES (comma list) or the whole timeline; mode head renders H0 and a second of H1,
+#   every $STEP-th frame, into <out_dir>/head/. In mode head (or with J16=1 for anim) frame 0 is the start of H0 (join
+#   16's rise in the committee room), not "The help came"; otherwise the timeline is as before, frame 0 on "The help came"
+#   (the times are printed as HARBOR TIMES)
 import bpy, bmesh, math, os, sys, random
 from mathutils import Vector, Matrix
 
@@ -56,14 +63,20 @@ def _wt(stem, phrase, end=False):
 
 
 STEM = 'ch06_the_heist'
-T0 = _wt(STEM, 'The help came') - 0.05                       # H1 starts (chapter 6 time)
+J16 = {'_wt': _wt, '__name__': 'join16'}
+exec(compile(open(os.path.join(HERE, 'join16.py')).read(), os.path.join(HERE, 'join16.py'), 'exec'), J16)
+T_H1 = _wt(STEM, 'The help came') - 0.05                     # H1's own push is keyed from here (chapter 6 time)
+HEAD = MODE == 'head' or os.environ.get('J16') == '1'       # with H0 (join 16) the timeline starts earlier
+T0 = J16['T_K3'] if HEAD else T_H1                           # frame 0: H0 starts (seen through the committee room's window)
+FH = int(round((J16['T_B'] - T0) * FPS)) if HEAD else 0      # H0 has settled into H1
 T_H2 = _wt(STEM, 'who ordered') - 0.05                       # H2 starts
 T_END = _wt(STEM, 'Minister here') - 0.05                    # the street (landing.py) takes over
 N = int(round((T_END - T0) * FPS))
 FB = int(round((T_H2 - T0) * FPS))
 sc.frame_start, sc.frame_end = 0, N - 1
 TQ = [math.floor(f / FPS * 12) / 12 for f in range(N)]       # animation time, stepped at 12 fps
-print('HARBOR TIMES', round(T0, 2), round(T_H2, 2), round(T_END, 2), 'frames', N, 'cut at', FB)
+print('HARBOR TIMES', round(T0, 2), round(T_H2, 2), round(T_END, 2), 'frames', N, 'cut at', FB, 'H0 crosses at',
+      int(round((J16['T_X'] - T0) * FPS)), 'H0 settles at', FH)
 rnd = random.Random(1893)
 
 # ---- palette (from the Flow plates h1 and s4)
@@ -988,10 +1001,27 @@ for ob in (cam, tgt):
     ob.animation_data_clear()
 cam.data.clip_start, cam.data.clip_end = 0.2, 40000
 cam.data.lens = 45
-KEYS = [  # frame, camera position, look-at; H1 pushes in slowly, H2 drifts with the boats
-    (0, (55.0, -455.0, 15.0), (22.0, 0.0, 44.0)), (FB - 1, (52.0, -432.0, 15.2), (20.0, 0.0, 43.0)),
+H1A, H1B = ((55.0, -455.0, 15.0), (22.0, 0.0, 44.0)), ((52.0, -432.0, 15.2), (20.0, 0.0, 43.0))   # H1's push, "The help came" to H2
+_u = (J16['T_B'] - T_H1) / (T_H2 - 1.0 / FPS - T_H1)
+H1S = tuple(Vector(H1A[k]).lerp(Vector(H1B[k]), _u) for k in range(2))   # where H1's push is when H0 settles into it
+if not HEAD:
+    H1S = H1A
+KEYS = [(f, *J16['harbor'](T0 + f / FPS, H1S[0], H1S[1])[:2]) for f in range(FH)] + [  # frame, camera position, look-at
+    (FH, H1S[0], H1S[1]), (FB - 1, H1B[0], H1B[1]),
     (FB, (-41.0, -146.5, 1.8), (-16.5, -89.5, 4.6)), (N - 1, (-40.0, -144.0, 1.85), (-23.0, -85.0, 4.6))]
-LENS = [(0, 45.0), (FB, 35.0)]
+LENS = [(f, J16['harbor'](T0 + f / FPS, H1S[0], H1S[1])[2]) for f in range(FH)] + [(FH, 45.0), (FB, 35.0)]
+# the committee room's place in the town (join16.PANE_H): clear what stands inside it, so the window looks out
+_lo = J16['to_harbor'](Vector((4.8, 5.2, -0.3)))
+_hi = J16['to_harbor'](Vector((-4.8, -7.2, 3.9)))
+_lo, _hi = Vector(map(min, _lo, _hi)), Vector(map(max, _lo, _hi))
+_lo.z = -50.0                                                # (and everything under the room: the camera looks down)
+bpy.context.view_layer.update()
+for ob in (bpy.data.objects if HEAD else []):
+    if ob.type != 'MESH' or ob.hide_render or max(ob.dimensions) > 60:
+        continue
+    bb = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
+    if all(any(bb[i][a] >= _lo[a] for i in range(8)) and any(bb[i][a] <= _hi[a] for i in range(8)) for a in range(3)):
+        ob.hide_render = True
 for f, pos, look in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
@@ -1004,7 +1034,7 @@ for ob in (cam, tgt):
             kp.interpolation = 'CONSTANT' if int(kp.co[0]) == FB - 1 else 'LINEAR'
 for fc in cam.data.animation_data.action.fcurves:
     for kp in fc.keyframe_points:
-        kp.interpolation = 'CONSTANT'
+        kp.interpolation = 'CONSTANT' if int(kp.co[0]) >= FH else 'LINEAR'
 cam.data.dof.use_dof = True
 cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
 for f in list(range(0, N, 6)) + [FB - 1, FB]:
@@ -1025,7 +1055,9 @@ for pre in filter(None, os.environ.get('HIDE', '').split(',')):     # debugging:
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
 if MODE == 'wide':
-    FR = [int(os.environ.get('FRAME', FB // 2))]
+    FR = [int(os.environ.get('FRAME', (FH + FB) // 2))]
+elif MODE == 'head':
+    FR = list(range(0, min(N, FH + 30), int(os.environ.get('STEP', '1'))))
 elif MODE == 'boats':
     FR = [int(os.environ.get('FRAME', FB + (N - FB) // 2))]
 else:
@@ -1033,7 +1065,7 @@ else:
 import time
 for f in FR:
     sc.frame_set(f)
-    sc.render.filepath = os.path.join(OUT, f'harbor_{MODE}.png' if MODE in ('wide', 'boats') else f'{f:04d}.png')
+    sc.render.filepath = os.path.join(OUT, f'harbor_{MODE}.png' if MODE in ('wide', 'boats') else (f'head/{f:04d}.png' if MODE == 'head' else f'{f:04d}.png'))
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t, 2), flush=True)

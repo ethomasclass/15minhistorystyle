@@ -1,6 +1,10 @@
 # The Ep 1 explainers (flat vector, the chapter 5 badge look), each keyed to the narration's words:
 #   coal          ch 4  "ruled the sea ... bases and coaling stations"   the coal gauge map (real Pacific coastlines)
 #   tariff_1875   ch 6  "Sugar coming into the United States ... Plantations boomed"   the tariff gate
+#                 head (join 12, H12): opens on the harbor's sack, centred, upright, 70% of the frame wide; it shrinks
+#                 and drops into its place at the gate. tail (join 13): on "Plantations" a flat green field rises to a
+#                 horizon at y = 648 px; the gate graphics fall away on twos and the strip holds 0.3 s alone (the sugar
+#                 set opens on its horizon at that height)
 #   tariff_1890   ch 6  "Then, in 1890 ... it would get the bonus too"   the same gate, the booth gone, the bonus chute
 #   vote          ch 8  "Not with a treaty ... a majority in each house"   two-thirds against a majority (quiet palette)
 #   pacific1898   ch 8  "at war with Spain ... looked useful"   Hawaiʻi between San Francisco and Manila (quiet)
@@ -270,11 +274,11 @@ def gate(lift):
             + arm + f'<circle cx="{GX}" cy="{GROUND - 118}" r="13" fill="{INK}" stroke="{BONE_D}" stroke-width="4"/>')
 
 
-def scenery(t, tq, us_label=True):
-    """the ground, the border line and the two side labels"""
+def scenery(t, tq, us_label=True, ground=True):
+    """the ground, the border line and the two side labels (ground=False: no ground line, the field is the ground)"""
     o = (f'<rect x="0" y="{GROUND}" width="1920" height="10" fill="{BONE_D}" opacity="0.5"/>'
-         f'<rect x="0" y="{GROUND + 10}" width="1920" height="270" fill="#000" opacity="0.12"/>'
-         f'<line x1="{BORDER}" y1="370" x2="{BORDER}" y2="{GROUND + 90}" stroke="{TE}" stroke-width="5" stroke-dasharray="18 14" opacity="0.9"/>')
+         f'<rect x="0" y="{GROUND + 10}" width="1920" height="270" fill="#000" opacity="0.12"/>' if ground else '')
+    o += (f'<line x1="{BORDER}" y1="370" x2="{BORDER}" y2="{GROUND + 90}" stroke="{TE}" stroke-width="5" stroke-dasharray="18 14" opacity="0.9"/>')
     o += text(BORDER - 40, 400, 'FOREIGN SUGAR', 22, 'Plex', TAG, 'end', extra='letter-spacing="3"')
     if us_label:
         o += text(BORDER + 40, 400, 'THE UNITED STATES', 22, 'Plex', TAG, 'start', extra='letter-spacing="3"')
@@ -319,22 +323,36 @@ def price_tag(x, n, s):
     return g(x, GROUND - 176, s, body)
 
 
-def tariff_1875():
+FIELD, FIELD_HI, HORIZON = '#86a14e', '#9cb860', 648                # the join-13 field strip and its horizon (screen px)
+H12_W, H12_T = 0.70, 0.62                                           # the head sack's width (of the frame) and landing time
+
+
+def zoom_pt(x, y):
+    """a point of the gate layout -> screen px (through ZOOM)"""
+    return 960 + (x - 960) * 1.18, 640 + (y - 640) * 1.18
+
+
+def tariff_1875(head=True, tail=True):
     stem = 'ch06_the_heist'
     W0 = Words(stem)
     a = W0.at('Sugar coming into') - 0.25
     b = W0.end('Plantations boomed') + 0.25
     Wd = Words(stem, t0=a)
-    S = stage('ex_tariff_1875', b - a)
-    S.over.append('<g id="ov"></g>')
     T_SUGAR, T_COMING, T_STATES, T_ANOTHER = Wd.at('Sugar'), Wd.at('coming'), Wd.at('States'), Wd.at('another country')
     T_TAX, T_BORDER, T_TARIFF = Wd.at('tax at the border'), Wd.at('border'), Wd.at('called a tariff') + 0.5
     T_1875, T_HAW, T_NO = Wd.at('1875'), Wd.at('Hawaiian sugar'), Wd.at('no tariff at all')
     T_CHEAP, T_PLANT, T_BOOM = Wd.at('cheaper'), Wd.at('Plantations'), Wd.at('boomed')
+    T_FALL, FALL_D, FALL_K = T_BOOM + 0.42, 0.25, 0.04                # the tail: when the graphics fall, how long, stagger
+    if tail:
+        b = a + T_FALL + 8 * FALL_K + FALL_D + 0.3
+    S = stage('ex_tariff_1875', b - a)
+    S.over.append('<g id="ov"></g>')
     US = {'CUBA': 1650, 'BRAZIL': 1470, 'JAVA': 1290, 'HAWAIʻI': 1000}
     # who pays when: (coin time, arm up, arm down)
     PAY = [(T_TAX, T_BORDER, T_BORDER + 0.95), (T_TARIFF + 0.1, T_TARIFF + 0.45, T_TARIFF + 1.25), (T_1875 + 0.75, T_1875 + 1.05, T_1875 + 1.9)]
-    SACKS = [('CUBA', BONE, BONE_D, T_SUGAR, Walk(-120, [(T_COMING, T_TAX - 0.3, STOP), (T_BORDER + 0.15, T_BORDER + 1.05, US['CUBA'])])),
+    cuba_walk = (Walk(STOP, [(T_BORDER + 0.15, T_BORDER + 1.05, US['CUBA'])]) if head else
+                 Walk(-120, [(T_COMING, T_TAX - 0.3, STOP), (T_BORDER + 0.15, T_BORDER + 1.05, US['CUBA'])]))
+    SACKS = [('CUBA', BONE, BONE_D, H12_T if head else T_SUGAR, cuba_walk),
              ('BRAZIL', BONE, BONE_D, T_STATES - 0.3, Walk(-120, [(T_STATES - 0.3, T_TAX - 0.1, Q2), (T_BORDER + 0.25, T_BORDER + 0.7, STOP),
                                                                      (T_TARIFF + 0.55, T_TARIFF + 1.35, US['BRAZIL'])])),
              ('JAVA', BONE, BONE_D, T_ANOTHER, Walk(-120, [(T_ANOTHER, T_TAX + 0.2, Q3), (T_BORDER + 0.35, T_BORDER + 0.8, Q2),
@@ -342,21 +360,56 @@ def tariff_1875():
              ('HAWAIʻI', CO, CO_D, T_HAW - 0.1, Walk(-120, [(T_HAW - 0.1, T_NO - 0.25, STOP), (T_NO + 0.3, T_NO + 1.0, US['HAWAIʻI'])]))]
     PILE = [(1140, 0, 1.0, False), (1070, -116, 1.0, False), (1074, -232, 1.0, False)]   # x, dy, scale, behind
 
+    def fall(k, body):
+        """the tail: element k drops out of frame on twos, turning a little (the field stays)"""
+        if not tail or not body:
+            return body
+        u = (step12(t_now[0]) - T_FALL - k * FALL_K) / FALL_D
+        if u <= 0:
+            return body
+        if u >= 1:
+            return ''
+        cx = 300 + 190 * k
+        return f'<g transform="translate(0,{900 * u * u:.1f}) rotate({(8 if k % 2 else -8) * u:.2f} {cx} {GROUND})">{body}</g>'
+
+    def head_sack(t):
+        """the head: the harbor's sack (burlap at first), centred and 70% of the frame wide, shrinks and drops into
+        its place in the queue at the gate (smooth, like the camera that carried it), then a squash on twos"""
+        s0 = 1920 * H12_W / 136                                    # sack() is about 136 px wide
+        x1, y1 = zoom_pt(STOP, GROUND)
+        u = ease_io(clamp(t / H12_T))
+        sc = s0 * (1.18 / s0) ** u
+        k = (s0 - sc) / (s0 - 1.18)
+        bx = 960 + (x1 - 960) * k
+        by = (540 + 66 * s0) + (y1 - (540 + 66 * s0)) * k - 140 * math.sin(math.pi * k) * (1 - k)   # a little arc down
+        fill = mix_hex('#c8b98f', BONE, k)
+        shade = mix_hex('#a89a72', BONE_D, k)
+        return f'<g transform="translate({bx:.1f},{by:.1f}) scale({sc:.4f})">{sack(fill, shade, "")}</g>'
+
+    t_now = [0.0]
+
     def frame(t):
         tq = step12(t)
-        o = scenery(t, tq)
+        t_now[0] = t
+        field = ''
+        if tail and t >= T_PLANT - 0.05:                  # the field rises to its horizon on twos
+            u = ease_out(clamp((tq - T_PLANT + 0.05) / 0.34), 2)
+            top = 1080 - (1080 - HORIZON) * u
+            field = (f'<rect x="-20" y="{top:.1f}" width="1960" height="{1100 - top:.1f}" fill="{FIELD}"/>'
+                     f'<rect x="-20" y="{top:.1f}" width="1960" height="5" fill="{FIELD_HI}"/>')
+        o = fall(0, scenery(t, tq, ground=not field or tq < T_PLANT + 0.25))
         n_coins = sum(1 for c, _, _ in PAY if tq >= c + 0.3)
         wave = None
         if T_NO - 0.1 <= tq < T_NO + 1.0:
             wave = 25 * math.sin((tq - T_NO) * 2 * math.pi * 2.2)
         sign = (tq - T_TARIFF + 0.5) / 0.27 if t >= T_TARIFF - 0.5 else None
-        o += booth(n_coins, wave, sign, tq)
+        o += fall(2, booth(n_coins, wave, sign, tq))
         # the arm: up while each payer goes through; up for the Hawaiian sack with no coin; up again for the boom
         lift = 0.0
         for up, dn in [(u_, d_) for _, u_, d_ in PAY] + [(T_NO + 0.05, T_NO + 1.1), (T_PLANT, 1e9)]:
             if up <= tq < dn + 0.25:
                 lift = max(lift, ease_out(clamp((tq - up) / 0.25)) * (1 - ease(clamp((tq - dn) / 0.25))))
-        o += gate(lift)
+        o += fall(3, gate(lift))
         for c, _, _ in PAY:
             o += coin_flight(tq, c, STOP + 20)
         pile = ['', '']
@@ -364,23 +417,34 @@ def tariff_1875():
             s = pop(t, T_BOOM - 0.05 + k * 0.16, 0.3)
             if s > 0:
                 pile[back] += g(px, GROUND + dy, s * ps, sack(CO, CO_D, 'HAWAIʻI') if not back else sack(CO_D, '#b8443e', 'HAWAIʻI'))
-        o += pile[1]
-        for name, fill, shade, t_in, walk in SACKS:
+        o += fall(6, pile[1])
+        for j, (name, fill, shade, t_in, walk) in enumerate(SACKS):
             if t < t_in:
                 continue
             x, hy = walk.at(tq)
-            o += g(x, GROUND + hy, 1.0, sack(fill, shade, name))
+            if head and name == 'CUBA' and t < H12_T + 0.25:       # the landing: a squash, then its name prints on
+                sq = 1 + 0.16 * math.exp(-(tq - H12_T) * 9) * math.cos((tq - H12_T) * 20)
+                o += f'<g transform="translate({x},{GROUND}) scale({1 / sq:.3f},{sq:.3f})">{sack(fill, shade, name if tq >= H12_T + 0.08 else "")}</g>'
+                continue
+            o += fall(4 + (j % 2) * 3 + j // 2, g(x, GROUND + hy, 1.0, sack(fill, shade, name)))
         # cheaper: the price tags (tariff paid on top of the price), the Hawaiian one without it
         if T_CHEAP - 0.05 <= t < T_PLANT - 0.05:
             for k, (name, xx) in enumerate(US.items()):
                 o += price_tag(xx, 1 if name == 'HAWAIʻI' else 2, pop(t, T_CHEAP - 0.05 + 0.08 * (3 - k), 0.3))
             o += highlight(US['HAWAIʻI'] - 96, GROUND - 228, 'CHEAPER', 38, prog=(tq - T_CHEAP - 0.2) / 0.27)
-        o += pile[0]                                      # plantations boomed: the Hawaiian sugar piles up
-        o = f'<g transform="{ZOOM}">{o}</g>'
+        o += fall(5, pile[0])                             # plantations boomed: the Hawaiian sugar piles up
+        o = field + f'<g transform="{ZOOM}">{o}</g>'
         if t >= T_1875:
-            o += highlight(140, 200, '1875', 70, prog=(tq - T_1875) / 0.27)
+            o += fall(1, highlight(140, 200, '1875', 70, prog=(tq - T_1875) / 0.27))
+        if head and t < H12_T:
+            o += head_sack(t)
         return {'h': {'ov': o}}
     return S, frame, stem, a, b
+
+
+def mix_hex(c0, c1, u):
+    a_, b_ = [int(c0[i:i + 2], 16) for i in (1, 3, 5)], [int(c1[i:i + 2], 16) for i in (1, 3, 5)]
+    return '#' + ''.join(f'{round(x + (y - x) * clamp(u)):02x}' for x, y in zip(a_, b_))
 
 
 def chute(x, shake=0.0):

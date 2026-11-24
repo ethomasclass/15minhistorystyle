@@ -8,8 +8,17 @@
 #                                                       pale block on one desk among the rows
 #   S1  "a stack of paper"  (to the chapter's end + 2 s) close on one desk at desk-top height: only the edge of the stack, its
 #                                                       top out of frame, the chamber dark and soft behind; a slow slide along it
+# And one shot keyed to chapter 8 (public/audio/ch08_under_protest.words.json), after the petition light table:
+#   S8  "The treaty never got the votes it needed. In 1898,"  (from just after "pages." to "she published a book")
+#                                                       opens square on the stack's side, only the sheets' edges in frame,
+#                                                       horizontal and filling it (the light table's last frame matches it),
+#                                                       and pulls slowly back and up to the desk in the dark chamber: the
+#                                                       petition was that stack. The chamber by day in the quiet palette
+#                                                       (bone light from the skylight, teal-grey shadows)
 #   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python senate.py -- <out_dir> [scale%] [mode]
-#   mode: a still, or several comma-separated: wide (S2), stack (S1), anim (the frames in $FRAMES)
+#   mode: a still, or several comma-separated: wide (S2), stack (S1), anim (the frames in $FRAMES); the chapter 8 modes
+#   edge (S8's first frame) and reveal (S8's frames, every $STEP-th, into <out_dir>/reveal/) switch on the quiet light,
+#   so run them apart from the chapter 6 modes
 import bpy, bmesh, math, os, sys, random, time
 from mathutils import Vector, Matrix
 
@@ -55,8 +64,13 @@ def _wt(stem, phrase, end=False):
 
 
 CH = 'ch06_the_heist'
+CH8 = 'ch08_under_protest'
 SHOTS = [('S2', _wt(CH, 'kept stalling') - 0.05, _wt(CH, 'a stack of paper') - 0.05),
-         ('S1', _wt(CH, 'a stack of paper') - 0.05, _wt(CH, 'a stack of paper', end=True) + 2.0)]
+         ('S1', _wt(CH, 'a stack of paper') - 0.05, _wt(CH, 'a stack of paper', end=True) + 2.0),
+         # S8 sits on the chapter 8 timeline, not after S1: it follows the petition light table ("21,269 names, on 556
+         # pages."), opens on "The treaty never got the votes it needed" and runs to "she published a book"
+         ('S8', _wt(CH8, 'pages', end=True) + 0.1, _wt(CH8, 'she published a book') - 0.05)]
+QUIET = any(m in ('edge', 'reveal') for m in MODES)          # the chapter 8 light (bone and teal); S8 modes only
 FS = {}
 f = 0
 for name, t0, t1 in SHOTS:
@@ -440,8 +454,8 @@ LK = {'__name__': 'look'}
 exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
 LK['finish'](sc, fill_strength=0.12, shadow_fill='#8a8f9c', haze=(60.0, 400.0, 0.0), rules={
     WALL: (0.10, 0.4, None, 1.0), PARA: (0.08, 0.4, None, 1.0), CEIL: (0.08, 0.3, None, 1.0), PANEL: (0.08, 0.6, None, 1.0),
-    DESK: (0.07, 1.5, None, 1.0), DESK_DK: (0.07, 1.5, None, 1.0), LEATHER: (0.08, 1.5, None, 1.0), PAPER: (0.02, 4.0, None, 1.0),
-    PAPER2: (0.02, 4.0, None, 1.0), DRAPE: (0.12, 1.0, None, 1.0)})
+    DESK: (0.07, 1.5, None, 1.0), DESK_DK: (0.07, 1.5, None, 1.0), LEATHER: (0.08, 1.5, None, 1.0), PAPER: (0.02, 4.0, 0.00045, 0.82),
+    PAPER2: (0.02, 4.0, 0.00045, 0.82), DRAPE: (0.12, 1.0, None, 1.0)})
 wn = sc.world.node_tree                                     # the camera never sees the sky in here: dark, so no seam can show it
 mixw = [n for n in wn.nodes if n.type == 'MIX_SHADER'][0]
 seen = mixw.inputs[2].links[0].from_node
@@ -450,6 +464,40 @@ for l_ in list(seen.inputs['Color'].links):
 seen.inputs['Color'].default_value = (0.01, 0.01, 0.012, 1)
 ee = sc.eevee
 ee.use_bloom, ee.bloom_threshold, ee.bloom_intensity, ee.bloom_radius = True, 1.4, 0.04, 5.0
+if QUIET:
+    # chapter 8, the quiet palette: the same chamber by day (the petition reached the Senate in December 1897), daylight
+    # through the skylight in bone, cool teal-grey in the shadows, the gas turned down; the carpet's red pulled back
+    SKM.node_tree.nodes['Emission'].inputs['Color'].default_value = lin('#EDE7DC')
+    SKM.node_tree.nodes['Emission'].inputs['Strength'].default_value = 0.55
+    EMB.node_tree.nodes['Emission'].inputs['Color'].default_value = lin('#9fb7b2')
+    sk.color, sk.energy = (0.93, 0.92, 0.88), 260
+    fp.color, fp.energy = (0.93, 0.92, 0.88), 2600
+    dl.color, dl.energy = (0.95, 0.94, 0.90), 110
+    kl.color, kl.energy = (0.92, 0.93, 0.92), 10
+    for lt in GAS:
+        lt.animation_data_clear()
+        lt.energy = 6
+        lt.color = (0.9, 0.9, 0.85)
+    for m in bpy.data.materials:
+        if m.name.startswith('gasg'):
+            m.node_tree.nodes['Emission'].inputs['Strength'].default_value = 0.25
+    el = bpy.data.lights.new('edgekey', 'AREA')                # a soft raking light along the sheets' edges, so each reads
+    el.energy, el.size, el.color = 4, 0.25, (0.93, 0.92, 0.88)
+    elo = bpy.data.objects.new('edgekey', el)
+    sc.collection.objects.link(elo)
+    elo.location = Vector((sx_, sy_, sz_ + 0.83)) - rgt_ * 0.45 - fwd_ * 0.35 + Vector((0, 0, 0.35))
+    elo.rotation_euler = (Vector((sx_, sy_, sz_ + 0.83)) - elo.location).to_track_quat('-Z', 'Y').to_euler()
+    amb_ = mixw.inputs[1].links[0].from_node
+    amb_.inputs['Color'].default_value = tuple(lin('#5f7f7c')[:3]) + (1,)
+    amb_.inputs['Strength'].default_value = 0.06
+    ct_ = sc.node_tree
+    cb_ = [n for n in ct_.nodes if n.type == 'COLORBALANCE'][0]
+    cb_.lift, cb_.gain = (0.99, 1.0, 1.006), (0.99, 1.0, 1.0)
+    hs = ct_.nodes.new('CompositorNodeHueSat')
+    hs.inputs['Saturation'].default_value = 0.55
+    comp_ = [n for n in ct_.nodes if n.type == 'COMPOSITE'][0]
+    ct_.links.new(cb_.outputs['Image'], hs.inputs['Image'])
+    ct_.links.new(hs.outputs['Image'], comp_.inputs['Image'])
 cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
@@ -471,8 +519,8 @@ c1a = lp(-0.36, -0.06, 0.02)
 c1b = lp(-0.35, -0.02, 0.02)
 l1a, l1b = aim(c1a, 8), aim(c1b, 8)
 KEYS = [(FS['S2'][0], (1.3, YS - 1.4, 10.0), (0.0, 3.0, 2.0), 14), (FS['S2'][1] - 1, (0.6, YS - 1.2, 9.9), (0.0, 3.0, 2.0), 14),
-        (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (N - 1, tuple(c1b), tuple(l1b), 50)]
-CUTS = {FS['S2'][1] - 1}
+        (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (FS['S1'][1] - 1, tuple(c1b), tuple(l1b), 50)]
+CUTS = {FS['S2'][1] - 1, FS['S1'][1] - 1}
 for fr, pos, look, lens in KEYS:
     cam.location = pos; cam.keyframe_insert('location', frame=fr)
     tgt.location = look; tgt.keyframe_insert('location', frame=fr)
@@ -481,23 +529,53 @@ for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
     for fc in ad.action.fcurves:
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT' if int(kp.co[0]) in CUTS else 'LINEAR'
+# S8 (chapter 8): it opens square on the stack's left side, so close that only the paper's edges show, horizontal and
+# filling the frame (the light table ends on the same picture), then pulls slowly back and up over the next desk until the
+# stack is a small pale block on its desk in the dark chamber, the dais beyond. Keyed every frame on an eased curve.
+FACE = lp(-0.2, 0.03, (STACK_TOP - 0.78) * 0.5)              # the middle of the left face, a little off the string
+D0, D1 = 0.16, 2.3
+S8KEYS = []
+for fr in range(FS['S8'][0], FS['S8'][1]):
+    u = (fr - FS['S8'][0]) / max(1, FS['S8'][1] - 1 - FS['S8'][0])
+    e = u * u * (3 - 2 * u)                                  # smoothstep: a gentle start and a gentle settle
+    dist = D0 * (D1 / D0) ** e
+    w = e ** 1.6
+    dirv = (-rgt * (1 - 0.55 * w) + fwd * 0.8 * w + Vector((0, 0, 0.5 * w))).normalized()
+    cp = FACE + dirv * dist
+    look = FACE.lerp(BASE + dais * 3.2 + rgt * 0.6 + Vector((0, 0, 0.1)), w)
+    lens = 50 - 16 * w
+    S8KEYS.append((fr, cp, look, lens, max(0.05, (FACE - cp).length), 11.0 - 6.5 * w))
+for fr, cp, look, lens, fd, fs in S8KEYS:
+    cam.location = cp; cam.keyframe_insert('location', frame=fr)
+    tgt.location = look; tgt.keyframe_insert('location', frame=fr)
+    cam.data.lens = lens; cam.data.keyframe_insert('lens', frame=fr)
 cam.data.dof.use_dof = True
 for fr, dist, fs in ((FS['S2'][0], 16.0, 5.6), (FS['S1'][0], (CORNER - c1a).length - 0.02, 4.0)):
     cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = dist, fs
+    cam.data.dof.keyframe_insert('focus_distance', frame=fr)
+    cam.data.dof.keyframe_insert('aperture_fstop', frame=fr)
+for fr, cp, look, lens, fd, fs in S8KEYS:
+    cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = fd, fs
     cam.data.dof.keyframe_insert('focus_distance', frame=fr)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=fr)
 for fc in cam.data.animation_data.action.fcurves:
     for kp in fc.keyframe_points:
         kp.interpolation = 'CONSTANT'
 sc.render.resolution_percentage = SCALE
+if os.environ.get('SAMPLES'):
+    sc.eevee.taa_render_samples = int(os.environ['SAMPLES'])
 os.makedirs(OUT, exist_ok=True)
-STILL = {'wide': FS['S2'][0] + 30, 'stack': FS['S1'][0] + 30}
+STILL = {'wide': FS['S2'][0] + 30, 'stack': FS['S1'][0] + 30, 'edge': FS['S8'][0]}
 for mode in MODES:
     if mode == 'anim':
         fr_ = os.environ.get('FRAMES', '')
         paths = [(fr, os.path.join(OUT, f'{fr:04d}.png')) for fr in (range(N) if fr_ == 'all' else [int(v) for v in fr_.split(',') if v])]
+    elif mode == 'reveal':                                   # S8's frames, numbered from 0, every STEP-th
+        st_ = int(os.environ.get('STEP', '1'))
+        paths = [(fr, os.path.join(OUT, 'reveal', f'{fr - FS["S8"][0]:04d}.png')) for fr in range(FS['S8'][0], FS['S8'][1], st_)]
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'senate_{mode}.png'))]
+    sc.render.resolution_percentage = int(os.environ.get('ANIM_SCALE', SCALE)) if mode in ('anim', 'reveal') else SCALE
     for fr, p in paths:
         sc.frame_set(fr)
         sc.render.filepath = p
