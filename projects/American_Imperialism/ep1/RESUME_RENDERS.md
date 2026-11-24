@@ -5,6 +5,11 @@ continues where it stopped. Run long commands as tracked background jobs. All Bl
 (a shared two-slot lock: `/usr/local/bin/blender-queue`, recreate it if the machine was replaced:
 `while true; do for s in 1 2; do exec 9>/tmp/blender_slot$s.lock; if flock -n 9; then exec nice -n 10 "$@"; fi; done; sleep 3; done`).
 
+**Render kit for the user's computer:** repo `ethomasclass/Imperialism-Video` (38 MB): the same folder layout, Blender
+scripts and assets, `render/shots.json` (41 final shots, 19 still untested), `render/run_all.py` (resumable runner, encodes
+with Blender's own encoder), double-click launchers for Windows and Mac. Needs Blender 4.1. When scripts change here,
+copy them into the kit and push. Results come back as videos in its `renders/`.
+
 Decision pending: run the final (full-frame-rate) renders here, or on the user's computer if it has a GPU (about 1 hour
 vs about 12 hours here).
 
