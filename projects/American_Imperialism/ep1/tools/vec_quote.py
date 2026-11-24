@@ -146,7 +146,7 @@ def frame(t):
     # a slow push-in over the whole card, so it never sits dead still
     z = 1 + 0.03 * clamp(t / DUR)
     o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
-    o += tag(40, 1050, 'PORTRAIT: T. JOHNSON, AFTER GILBERT STUART, 1887 · LIBRARY OF CONGRESS (TRACED)', 16, '#8d857a')
+    o += tag(100, 1014, 'PORTRAIT: T. JOHNSON, AFTER GILBERT STUART, 1887 · LIBRARY OF CONGRESS (TRACED)', 16, '#8d857a')
     return {'h': {'ov': o}}
 
 

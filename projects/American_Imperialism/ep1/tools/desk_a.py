@@ -624,9 +624,9 @@ def federation():
     S.defs.append('<filter id="blot" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>'
                   '<mask id="mfr" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="12000" height="12000"><g id="mfrg"></g></mask>'
                   '<mask id="mde" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="12000" height="12000"><g id="mdeg"></g></mask>')
-    FR_C, DE_C, US_C = '#6c86d4', '#857455', TE
-    S.world.append(f'<g mask="url(#mfr)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in fr.values() for r in v], SX0, SY0, k)}" fill="{FR_C}" opacity="0.92"/></g>'
-                   f'<g mask="url(#mde)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in de.values() for r in v], SX0, SY0, k)}" fill="{DE_C}" opacity="0.95"/></g>'
+    FR_C, DE_C, US_C = '#5573d0', '#6e5f45', TE
+    S.world.append(f'<g mask="url(#mfr)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in fr.values() for r in v], SX0, SY0, k)}" fill="{FR_C}" stroke="#2c3f86" stroke-width="2.5" stroke-linejoin="round" opacity="0.95"/></g>'
+                   f'<g mask="url(#mde)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in de.values() for r in v], SX0, SY0, k)}" fill="{DE_C}" stroke="#3a3122" stroke-width="2.5" stroke-linejoin="round" opacity="0.95"/></g>'
                    f'<g id="usg" opacity="0" style="mix-blend-mode:multiply"><path d="{fed_path(us_rings, SX0, SY0, k)}" fill="{US_C}" opacity="0.6"/></g>'
                    '<g id="fedlab"></g>')
 
@@ -697,10 +697,10 @@ def federation():
             lx, ly = at(-42, 47)
             lab += strip(lx, ly, 'BRITAIN', 38, prog=(tq - T_BRIT) / 0.27)
         if t >= T_FR + 0.15:
-            lx, ly = at(-4, 27)
+            lx, ly = at(-36, 31)
             lab += strip(lx, ly, 'FRANCE', 38, prog=(tq - T_FR - 0.15) / 0.27)
         if t >= T_DE + 0.15:
-            lx, ly = at(3, -26)
+            lx, ly = at(-30, -21)
             lab += strip(lx, ly, 'GERMANY', 38, prog=(tq - T_DE - 0.15) / 0.27)
         if t >= T_AMER + 0.1:
             lx, ly = at(-108, 40)

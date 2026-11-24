@@ -53,7 +53,7 @@ def seg_a():
 
     def frame(t):
         dim = 0.62 * ease_out(clamp((t - tc + 0.1) / 0.6))
-        o = tag(40, 1050, 'THE DECLARATION OF INDEPENDENCE · W. J. STONE FACSIMILE, 1823', 16, '#8d857a')
+        o = tag(100, 1014, 'THE DECLARATION OF INDEPENDENCE · W. J. STONE FACSIMILE, 1823', 16, '#8d857a')
         return {'t': {'CAM': cam.transform(t)}, 'o': {'dim': f'{dim:.3f}'}, 'h': {'ov': o}}
     return S, frame, 'ch02_the_question', 0.0, t_end
 
