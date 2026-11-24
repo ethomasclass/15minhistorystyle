@@ -266,7 +266,7 @@ for key, png, w in (('us', 'us_flag_44.png', 1.9), ('haw', 'hawaii_flag.png', 2.
     fm.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 1.0
     fl.data.materials.append(fm)
     wv = fl.modifiers.new('wave', 'WAVE')
-    wv.use_x, wv.use_y, wv.height, wv.width, wv.speed, wv.narrowness = True, False, 0.2, 1.3, 0.2, 1.0
+    wv.use_x, wv.use_y, wv.height, wv.width, wv.speed, wv.narrowness = True, False, 0.3, 1.3, 0.2, 1.0   # (flying gently: a visible ripple)
     wv.start_position_x = -H * w / 2
     for p in fl.data.polygons:
         p.use_smooth = False
