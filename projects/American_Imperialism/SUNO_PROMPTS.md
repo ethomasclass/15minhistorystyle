@@ -8,7 +8,7 @@ variety comes from the scenes: wonder, a wink, persuasion, dread, grief, resolve
 
 - **The music tells them how to feel; the narration tells them what happened.** Under deadpan narration, the cue
   carries the emotion, so the voice never has to.
-- **Play the persuasion straight.** The four pitches should sound convincing. If the music mocks them, the
+- **Play the persuasion straight.** The pitches should sound convincing. If the music mocks them, the
   viewer stops thinking. The irony comes from the cuts and the facts.
 - **Earn the dark turn.** The first half of the episode stays light and curious, so the coup lands. Nothing ominous
   before chapter 6 except the cold open.
@@ -37,10 +37,7 @@ variety comes from the scenes: wonder, a wink, persuasion, dread, grief, resolve
 | 2 | `ai_question` | ch 2 the Declaration and the question | curiosity, the weight of a big question |
 | 3 | `ai_old_rule` | ch 3 the young country minds its business | warm nostalgia, a little innocence |
 | 4 | `ai_pitch_room` | ch 4 the room and the four men | intrigue, a sly wink |
-| 5a | `ai_pitch_business` | the Businessman | optimism, money to be made |
-| 5b | `ai_pitch_admiral` | the Admiral | strategy, power, momentum |
-| 5c | `ai_pitch_preacher` | the Preacher | warmth, moral certainty |
-| 5d | `ai_pitch_scientist` | the "Scientist" | cold, clinical confidence (slightly eerie) |
+| 5 | `ai_pitches` | the four pitches | persuasion: confident, ambitious, convincing |
 | 6 | `ai_same_islands` | ch 5 all four point at Hawaiʻi; the dive | momentum, everything converging |
 | 7 | `ai_sugar_boom` | ch 6 tariffs and plantations | prosperity with something off underneath |
 | 8 | `ai_heist` | ch 6 the coup | tension, inevitability, injustice |
@@ -140,44 +137,29 @@ sly documentary score, muted upright bass walking line, soft brushed snare, mari
 
 ---
 
-### 5. The four pitches
-*Length:* **0:50 or more each.** Each one should be **convincing**: we feel why people believed it. They don't need
-to match; I cut between them hard, and the silences are mine.
+### 5. `ai_pitches.mp3`: the four pitches
+*Feel:* persuasion. Confident, ambitious and forward-moving, so we feel why people believed all four arguments. One cue
+runs under all four pitchers, played straight. I cut the silences into it ("one room," "It wasn't."), so its phrases
+should be steady and regular.
+*Length:* **3:00 or more** (chapter 4's pitches run about three minutes; Extend as needed).
 
-**5a. `ai_pitch_business.mp3`: the Businessman.** *Feel:* optimism, opportunity, money to be made.
+**Style**
 ```
-upbeat documentary score, bright piano chords, driving strings, light claps and shaker, confident pulse, 116 BPM, 4/4, D major, optimistic, ambitious, forward-moving, instrumental
+confident documentary score, bright piano chords, driving strings ostinato, light percussion and claps, warm horns, steady building pulse, 108 BPM, 4/4, D major, optimistic, persuasive, ambitious, forward-moving, regular 8-bar phrases, instrumental
 ```
-*Exclude extra:* `corporate jingle, EDM, synth lead`
-
-**5b. `ai_pitch_admiral.mp3`: the Admiral.** *Feel:* strategy, power, momentum, a fleet on the move.
-```
-driving documentary score, low strings ostinato, deep toms and snare, French horns, building steadily, 100 BPM, 4/4, C minor, determined, strategic, powerful, restrained, instrumental
-```
-*Exclude extra:* `trailer, braam, cinematic hit, epic choir`
-
-**5c. `ai_pitch_preacher.mp3`: the Preacher.** *Feel:* warmth and moral certainty, a man who means every word.
-```
-warm uplifting documentary score, soft organ pad, gentle strings, warm piano, slow swell, 72 BPM, 4/4, E-flat major, sincere, hopeful, reverent, moving, instrumental
-```
-*Exclude extra:* `gospel vocals, church choir, bells`
-
-**5d. `ai_pitch_scientist.mp3`: the "Scientist."** *Feel:* cold, clinical confidence that is slightly eerie. It sounds
-like science; it isn't.
-```
-cool clinical documentary score, precise arpeggiated piano, glassy synth pad, soft mechanical pulse, high sustained strings, 90 BPM, 4/4, G minor, detached, analytical, quietly unsettling, instrumental
-```
-*Exclude extra:* `horror, EDM, ticking clock, music box`
-
-**Lyrics** (the same for all four)
+**Lyrics**
 ```
 [Instrumental]
-[Intro: the rhythm first]
-[Verse: the main idea]
-[Verse: fuller]
+[Intro: piano chords and pulse]
+[Verse: strings ostinato joins]
+[Verse: horns, fuller]
+[Verse: steady, confident]
+[Build: rising]
+[Verse: the groove again]
 [Outro: a clean ending]
 [End]
 ```
+*Exclude extra:* `corporate jingle, EDM, trailer, braam, synth lead`
 
 ---
 
@@ -422,7 +404,7 @@ ominous documentary tease, low pulsing strings, a distant deep boom, rising tens
 | 1 Locked Room | `ai_locked_room` | |
 | 2 Question | `ai_question` (stops dead before the parchment, returns after) | the Declaration line |
 | 3 Old Guard | `ai_old_rule` | the nugget; a dead stop on "The continent was full." |
-| 4 Pitch Meeting | `ai_pitch_room`, then `ai_pitch_*` one per pitcher | "one room," the pitchers' appearance, "It wasn't." |
+| 4 Pitch Meeting | `ai_pitch_room`, then `ai_pitches` under all four pitchers | "one room," the pitchers' appearance, "It wasn't." |
 | 5 Same Islands | `ai_same_islands`, peaking on the dive | |
 | 6 Heist | `ai_sugar_boom`, then `ai_heist` from the Committee of Safety, `ai_stalled` from the Republic | both underlines, every humor cut, "I yield" |
 | 7 He Has | `ai_charge`, ringing out | after it |
