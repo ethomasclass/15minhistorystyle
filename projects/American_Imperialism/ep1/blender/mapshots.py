@@ -644,7 +644,8 @@ def build_pacific():
     render_setup()
     cam_d.clip_start, cam_d.clip_end = 0.5, 8000
     ee = sc.eevee
-    ee.shadow_cascade_max_distance = 3000
+    so.data.shadow_cascade_max_distance = 4000
+    so.data.shadow_cascade_count = 4
     ee.gtao_distance = 6.0
     T0 = wt('ch04_the_pitch_meeting', 'the Pacific') + 0.02                     # H8 is reached: start
     T_ENOR = wt('ch04_the_pitch_meeting', "It's enormous")
