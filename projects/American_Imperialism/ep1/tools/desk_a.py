@@ -136,7 +136,23 @@ def finish(piece, out_name):
         C3.encode_mix(S, stem, a, b, clip)
     else:
         encode_clip(S.name, stem, a, b, clip)
-    return to720(clip, os.path.join(TR, out_name))
+    out = to720(clip, os.path.join(TR, out_name))
+    clean_frames(S)
+    return out
+
+
+def clean_frames(S):
+    """the disk rule: once the mp4 is made, keep three key stills (build/deskA/keys) and drop the frame folder"""
+    fd = os.path.join(S.dir, 'f')
+    fs = sorted(os.listdir(fd)) if os.path.isdir(fd) else []
+    os.makedirs(os.path.join(B, 'keys'), exist_ok=True)
+    base = S.name.split('/')[-1]
+    for k, f in enumerate(fs[i] for i in sorted({0, len(fs) // 2, len(fs) - 1}) if fs):
+        Image.open(os.path.join(fd, f)).convert('RGB').save(os.path.join(B, 'keys', f'{base}_{f[:-4]}.jpg'), quality=90)
+    shutil.rmtree(fd, ignore_errors=True)
+    for f in ('silent.mp4', 'audio.wav'):
+        if os.path.exists(os.path.join(S.dir, f)):
+            os.remove(os.path.join(S.dir, f))
 
 
 def render_frames(S, idx, dest_names):
@@ -145,7 +161,7 @@ def render_frames(S, idx, dest_names):
     shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d)
     for f in os.listdir(S.dir):
-        if f == 'base.html' or re.match(r'(i\d+|L_.*)\.', f):
+        if f not in ('f', 'frames.ndjson', 'clip.mp4', 'silent.mp4', 'audio.wav'):
             os.symlink(os.path.join(S.dir, f), os.path.join(d, f))
     lines = open(os.path.join(S.dir, 'frames.ndjson')).read().splitlines()
     open(os.path.join(d, 'frames.ndjson'), 'w').write('\n'.join(lines[min(i, len(lines) - 1)] for i in idx) + '\n')
@@ -343,7 +359,7 @@ def stevens_render():
     S, frame, stem, a, b = stevens_l3()
     S.write(frame)
     run_node(ALPHA_JS, S.dir)
-    mov = os.path.join(B, 'stevens_lower_third_alpha.mov')
+    mov = os.path.join(B, 'stevens_lower_third_alpha.mov')                # ProRes 4444 with alpha (the overlay to use)
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(FPS), '-i', os.path.join(S.dir, 'fa', '%04d.png'), '-c:v', 'prores_ks',
                     '-profile:v', '4444', '-pix_fmt', 'yuva444p10le', '-vendor', 'apl0', mov], check=True)
     bg = os.path.join(EP, 'renders', 'tests', 'sets', 'harbor_wide.png')
@@ -353,6 +369,7 @@ def stevens_render():
                     '-ss', f'{a:.3f}', '-to', f'{b:.3f}', '-i', wav,
                     '-filter_complex', f'[0:v]scale=1920:1080:flags=lanczos,format=rgb24[bg];[bg][1:v]overlay=0:0:shortest=1,scale=1280:720:flags=lanczos,format=yuv420p[v]',
                     '-map', '[v]', '-map', '2:a', '-c:v', 'libx264', '-crf', '24', '-c:a', 'aac', '-b:a', '128k', '-shortest', pv], check=True)
+    shutil.rmtree(os.path.join(S.dir, 'fa'), ignore_errors=True)
     return pv
 
 
@@ -725,17 +742,275 @@ def census_end():
     return S, frame, stem, a, b
 
 
+
+# ================================================================ 2 · chapter 3 on one long desk
+# Each piece keeps its own drawing code and its own clock; here its world (and its screen overlay, carried into the world
+# through the inverse of its own camera) is laid on one desk at an offset and angle, every id prefixed so the pieces can
+# share one page. The camera follows each piece's own camera during its shot and glides from one to the next between
+# them; the cut to the gold nugget stays a hard cut (the joke), and the nugget's second of nothing is a real pause in the
+# narration. The census sheet lies on the wall map, which is square on the desk; the census sheet is the one at an angle.
+CAM_RE = re.compile(r'translate\(([-\d.]+) ([-\d.]+)\) rotate\(([-\d.]+)\) scale\(([-\d.]+)\) translate\(([-\d.]+) ([-\d.]+)\)')
+DESK_RE = re.compile(r'url\(#desk[w]?\)')
+
+
+def parse_cam(tf):
+    m = CAM_RE.match(tf)
+    _, _, r, z, nx, ny = map(float, m.groups())
+    return -nx, -ny, z, r
+
+
+def prefixer(pfx):
+    rx = re.compile(r'(id="|url\(#|href="#)([^")]+)')
+    ri = re.compile(r'href="(i\d+\.\w+)"')
+
+    def f(sv):
+        return ri.sub(lambda m: f'href="{pfx}{m.group(1)}"', rx.sub(lambda m: m.group(1) + pfx + m.group(2), sv))
+    return f
+
+
+class Panel:
+    """one piece on the long desk: piece world -> desk = rotate(rot) then translate(ox, oy)"""
+
+    def __init__(self, k, piece, ox, oy, rot=0.0, tmap=None, camera=True):
+        self.S, self.frame, self.stem, self.a, self.b = piece
+        self.k, self.ox, self.oy, self.rot, self.camera = k, ox, oy, rot, camera
+        self.pfx = f'p{k}_'
+        self.fix = prefixer(self.pfx)
+        self.tmap = tmap or (lambda tn: tn - self.a)
+        self.dur = self.S.dur
+        self._c = {}
+
+    def local(self, tv, tn):
+        return min(max(self.tmap(tn), 0.0), self.dur - 1 / FPS)
+
+    def fr(self, tp):
+        key = round(tp * FPS)
+        if key not in self._c:
+            self._c = {key: self.frame(key / FPS)}
+        return self._c[key]
+
+    def to_desk(self, x, y):
+        c, s_ = math.cos(math.radians(self.rot)), math.sin(math.radians(self.rot))
+        return self.ox + c * x - s_ * y, self.oy + s_ * x + c * y
+
+    def cam(self, tp):
+        """this piece's camera, in desk terms (x, y, zoom, rot)"""
+        if self.camera:
+            x, y, z, r = parse_cam(self.fr(tp)['t']['CAM'])
+        else:
+            x, y, z, r = 960, 540, 1.0, 0.0
+        X, Y = self.to_desk(x, y)
+        return X, Y, z, r - self.rot
+
+    def svg(self):
+        """its defs, its world (no desk of its own), and its overlay under an id that carries the inverse camera"""
+        S = self.S
+        world = ''.join(w for w in S.world if not DESK_RE.search(w))
+        ov = ''.join(S.over)
+        body = world + (f'<g id="ovT">{ov}</g>' if self.camera else ov)
+        return (self.fix(''.join(S.defs)),
+                self.fix(f'<g transform="translate({self.ox:.1f} {self.oy:.1f}) rotate({self.rot:.4f})">{body}</g>'))
+
+    def update(self, tp):
+        f = self.fr(tp)
+        out = {}
+        for kind in ('t', 'h', 'o', 'a'):
+            for key, v in (f.get(kind) or {}).items():
+                if key == 'CAM':
+                    continue
+                out.setdefault(kind, {})[self.pfx + key] = self.fix(v) if kind == 'h' else v
+        if self.camera:
+            x, y, z, r = parse_cam(f['t']['CAM'])
+            out.setdefault('t', {})[self.pfx + 'ovT'] = f'translate({x:.2f} {y:.2f}) scale({1 / z:.5f}) rotate({-r:.4f}) translate(-960 -540)'
+        return out
+
+
+def long_desk():
+    import ch03_explainers as C3
+    import vocab, qcard
+    stem = C3.STEM
+    W0 = Words(stem)
+    g_piece = C3.gold()
+    T_GOLD = g_piece[3]                                           # the hard cut (narration time = video time up to here)
+    T_GN = g_piece[4]                                             # the narration stops here ...
+    SIL = g_piece[0].dur - (g_piece[4] - g_piece[3])              # ... for the nugget's second of nothing
+    c_piece = C3.census(bounded=True)
+    END_N = c_piece[4]
+    DUR = END_N + SIL
+
+    def tn_of(tv):
+        return tv if tv < T_GN else max(T_GN, tv - SIL)
+
+    def tv_of(tn):
+        return tn if tn < T_GN else tn + SIL
+    # the census and its wall map: square on the desk (the wall map's own angle taken back out), its top-left corner at
+    # desk (OXC, 0); the row of the other pieces runs above it, left to right
+    PHI = -C3.WALL_ROT
+    cx0, cy0 = C3.wall_xy(95 + C3.WALL_SHEET[0] / 3000 * 205, 68 - C3.WALL_SHEET[1] / 1500 * 118)
+    OXC = 0.0
+    cph, sph = math.cos(math.radians(PHI)), math.sin(math.radians(PHI))
+    ocx, ocy = OXC - (cph * cx0 - sph * cy0), 0.0 - (sph * cx0 + cph * cy0)
+    census_p = Panel(6, c_piece, ocx, ocy, PHI)
+    sx, sy, _, _ = census_p.cam(0.0)                             # where the census shot starts, on the desk
+    gold_p = Panel(5, g_piece, 0, 0, PHI, tmap=None)
+    gx, gy = sx - 300, -1250                                      # the nugget lies on the desk just above the wall map
+    gold_p.ox, gold_p.oy = gx - (cph * 960 - sph * 640), gy - (sph * 960 + cph * 640)
+    gold_p.tmap = lambda tn, a=T_GOLD: tn - a                     # (replaced below by video time)
+    ROW = -1900                                                   # the row's top edge
+    seward_p = Panel(4, qcard.build('seward'), gx - 960 - 2200, ROW, camera=False)
+    alaska_piece = C3.alaska()
+    A_A = alaska_piece[3]
+    LEAD = 1.3                                                    # the warrant slides in slower, starting 1.3 s early
+
+    def alaska_t(tn):
+        if tn < A_A + 0.75:
+            return (tn - (A_A - LEAD)) * 0.75 / (0.75 + LEAD)
+        return tn - A_A
+    alaska_p = Panel(3, alaska_piece, seward_p.ox - 3450, ROW + 60, tmap=alaska_t)
+    jeff_p = Panel(2, qcard.build('jefferson'), alaska_p.ox - 2150, ROW, camera=False)
+    vocab_p = Panel(1, vocab.build('isolationism'), jeff_p.ox - 2100, ROW, camera=False)
+    globe_p = Panel(0, C3.globe_fence(), vocab_p.ox - 2150, ROW)
+    panels = [globe_p, vocab_p, jeff_p, alaska_p, seward_p, gold_p, census_p]
+    S = dstage('long_desk', DUR, bg=False)
+    S.sounds.append(['dry-thud', T_GOLD + 0.23, 0.7])
+    # copy each piece's pictures in under its prefix
+    for P in panels:
+        for f in os.listdir(P.S.dir):
+            if re.match(r'i\d+\.\w+$', f):
+                shutil.copy(os.path.join(P.S.dir, f), os.path.join(S.dir, P.pfx + f))
+    # the desk: one long top, a pool of lamp light under each piece, the grain lines across all of it
+    X0, X1 = globe_p.ox - 2600, OXC + 8790 + 2600
+    Y0, Y1 = ROW - 2200, 5065 + 2400
+    S.defs.append('<radialGradient id="pool"><stop offset="0" stop-color="#2c2721"/><stop offset="0.55" stop-color="#211d18" stop-opacity="0.85"/>'
+                  '<stop offset="1" stop-color="#16140f" stop-opacity="0"/></radialGradient>')
+    desk = f'<rect x="{X0}" y="{Y0}" width="{X1 - X0}" height="{Y1 - Y0}" fill="#121009"/>'
+    for P in panels[:-1]:
+        cxp, cyp = P.to_desk(960 if P is not alaska_p else 1700, 540)
+        desk += f'<ellipse cx="{cxp:.0f}" cy="{cyp:.0f}" rx="{2300 if P is alaska_p else 1700}" ry="1300" fill="url(#pool)"/>'
+    desk += f'<ellipse cx="{OXC + 4400:.0f}" cy="2500" rx="7000" ry="4600" fill="url(#pool)"/>'
+    desk += '<g opacity="0.12">' + ''.join(f'<rect x="{X0}" y="{y}" width="{X1 - X0}" height="1" fill="#fff" opacity="0.35"/>' for y in range(Y0 + 32, Y1, 64)) + '</g>'
+    S.world.append(desk)
+    for P in panels:
+        d, w = P.svg()
+        S.defs.append(d)
+        S.world.append(w)
+    # the shots: (from, to, panel) in video time; glides fill the gaps between them; the gold is cut to, not glided to
+    W = lambda p, k=1: W0.at(p, k)
+    SHOTS = [(0.0, 5.95, globe_p), (6.6, 10.95, vocab_p), (11.45, W('it grew across') + 0.3, jeff_p),
+             (A_A - LEAD + 0.05, 29.95, alaska_p), (W('one nickname') - 0.1, T_GOLD, seward_p),
+             (T_GOLD, tv_of(T_GN) + 0.12, gold_p), (tv_of(c_piece[3]) - 0.15, DUR, census_p)]
+    CUTS = {5}                                                    # shot 5 (the gold) starts on a hard cut
+
+    def local(P, tv):
+        if P is gold_p:
+            return min(max(tv - T_GOLD, 0.0), P.dur - 1 / FPS)
+        return P.local(tv, tn_of(tv))
+
+    def cam_at(tv):
+        for i, (t0, t1, P) in enumerate(SHOTS):
+            if t0 <= tv < t1 or (i == len(SHOTS) - 1 and tv >= t0):
+                return P.cam(local(P, tv)), i, None
+            nxt = SHOTS[i + 1] if i + 1 < len(SHOTS) else None
+            if nxt and t1 <= tv < nxt[0]:
+                if i + 1 in CUTS:
+                    return P.cam(local(P, tv)), i, None
+                A = P.cam(local(P, t1))
+                Bc = nxt[2].cam(local(nxt[2], nxt[0]))
+                u = ease_io((tv - t1) / (nxt[0] - t1))
+                dist = math.hypot(Bc[0] - A[0], Bc[1] - A[1])
+                lz = math.log(A[2]) + (math.log(Bc[2]) - math.log(A[2])) * u - min(0.45, dist / 9000) * math.sin(math.pi * u)
+                return (A[0] + (Bc[0] - A[0]) * u, A[1] + (Bc[1] - A[1]) * u, math.exp(lz), A[3] + (Bc[3] - A[3]) * u), i, (P, nxt[2])
+        return SHOTS[0][2].cam(0.0), 0, None
+
+    def frame(tv):
+        (x, y, z, r), i, gl = cam_at(tv)
+        if not SHOTS[i][2].camera or gl:                          # card shots and glides get the handheld drift
+            w = 1.2
+            x += w * (math.sin(tv * 0.83 + 1.1) * 0.6 + math.sin(tv * 1.71 + 2.3) * 0.3) / z
+            y += w * (math.sin(tv * 0.67 + 0.4) * 0.6 + math.sin(tv * 1.39 + 4.1) * 0.3) / z
+        out = {'t': {'CAM': f'translate(960 540) rotate({r:.4f}) scale({z:.5f}) translate({-x:.2f} {-y:.2f})'}}
+        live = {SHOTS[i][2]} | (set(gl) if gl else set())
+        if i + 1 < len(SHOTS) and tv > SHOTS[i][1] - 0.6:
+            live.add(SHOTS[i + 1][2])
+        for P in panels:
+            if P in live or tv < 0.04:
+                for kind, d in P.update(local(P, tv)).items():
+                    out.setdefault(kind, {}).update(d)
+        return out
+    return S, frame, stem, 0.0, DUR, (T_GN, SIL)
+
+
+def long_desk_render():
+    S, frame, stem, a, DUR, (T_GN, SIL) = long_desk()
+    S.write(frame)
+    d = S.dir
+    subprocess.run(['nice', '-n', '10', 'node', os.path.join(KIT, 'anim_render.mjs'), d], check=True, capture_output=True)
+    subprocess.run(['nice', '-n', '10', sys.executable, os.path.join(KIT, 'encode.py'), d, os.path.join(d, 'silent.mp4')], check=True, capture_output=True)
+    wav = os.path.join(EP, 'public', 'audio', stem + '.wav')
+    clip = os.path.join(d, 'clip.mp4')
+    END_N = DUR - SIL
+    flt = (f'[1:a]atrim=0:{T_GN:.3f},asetpts=PTS-STARTPTS,apad=pad_dur={SIL:.3f}[n1];'
+           f'[1:a]atrim={T_GN:.3f}:{END_N:.3f},asetpts=PTS-STARTPTS,afade=t=out:st={END_N - T_GN - 0.1:.3f}:d=0.1[n2];'
+           '[n1][n2]concat=n=2:v=0:a=1,apad[n];[0:a]volume=0.35[s];[n][s]amix=inputs=2:duration=shortest:normalize=0[a]')
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', os.path.join(d, 'silent.mp4'), '-i', wav, '-filter_complex', flt,
+                    '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', clip], check=True)
+    out = to720(clip, os.path.join(TR, 'ch03_long_desk.mp4'), crf=26)
+    clean_frames(S)
+    return out
+
+
+
+# ================================================================ the contact sheet
+SHEET = [('03_palace_print.mp4', [0.05, 0.9, 2.6, 4.2, 8.5]), ('ch03_long_desk.mp4', [3, 6.3, 11.2, 21, 24.5, 30.6, 37.9, 40.4, 45, 56.0, 57.0]),
+         ('04_census_end.mp4', [13.0, 13.9, 14.3, 14.7, 15.3]), ('07_federation.mp4', [0.05, 0.9, 1.6, 2.6, 4.0, 7.7]),
+         ('12_13_tariff_ends.mp4', [0.0, 0.25, 0.45, 0.7, 13.6, 14.5, 14.75, 15.3]), ('15_kalakaua_head.mp4', [0.03, 0.25, 0.45, 0.6, 1.5]),
+         ('stevens_lower_third.mp4', [0.3, 1.0, 3.5, 5.6]), ('constitution_1887.mp4', [0.3, 1.0, 3.0, 5.8, 7.3])]
+
+
+def contact_sheet():
+    tw, th, cols = 384, 216, 6
+    rows = []
+    font = ImageFont.truetype(os.path.join(KIT, '..', 'fonts', 'IBMPlexMono-full.ttf'), 13)
+    for name, ts in SHEET:
+        src = os.path.join(TR, name)
+        if not os.path.exists(src):
+            continue
+        dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', src], capture_output=True, text=True).stdout)
+        tiles = []
+        for t in ts:
+            t = min(t, dur - 0.05)
+            tmp = os.path.join(B, '_sheet.png')
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t:.2f}', '-i', src, '-frames:v', '1', '-vf', f'scale={tw}:{th}', tmp], check=True)
+            im = Image.open(tmp).convert('RGB')
+            d = ImageDraw.Draw(im)
+            d.rectangle([0, 0, tw, 17], fill=(0, 0, 0))
+            d.text((4, 1), f'{name[:-4]}  {t:.2f}s', fill=(255, 210, 120), font=font)
+            tiles.append(im)
+        for i in range(0, len(tiles), cols):
+            rows.append(tiles[i:i + cols])
+    sheet = Image.new('RGB', (cols * tw + (cols + 1) * 4, len(rows) * (th + 4) + 4), (20, 20, 20))
+    for r, row in enumerate(rows):
+        for c, im in enumerate(row):
+            sheet.paste(im, (4 + c * (tw + 4), 4 + r * (th + 4)))
+    out = os.path.join(TR, 'deskA_sheet.jpg')
+    sheet.save(out, quality=86)
+    return out
+
+
 # ================================================================ the list
 PIECES = {'palace_print': (palace_print, '03_palace_print.mp4'), 'tariff_ends': (tariff_ends, '12_13_tariff_ends.mp4'),
           'kalakaua_head': (kalakaua_head, '15_kalakaua_head.mp4'), 'stevens_l3': (stevens_l3, None),
           'constitution': (constitution, 'constitution_1887.mp4'), 'federation': (federation, '07_federation.mp4'),
-          'census_end': (census_end, '04_census_end.mp4')}
+          'census_end': (census_end, '04_census_end.mp4'), 'long_desk': (lambda: long_desk()[:5], None)}
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     if args[:1] == ['--still']:
         print('\n'.join(stills(PIECES[args[1]][0](), args[2:])))
+        sys.exit()
+    if args[:1] == ['--sheet']:
+        print(contact_sheet())
         sys.exit()
     if args[:1] == ['--check']:
         for k in args[1:]:
@@ -745,4 +1020,7 @@ if __name__ == '__main__':
         sys.exit()
     for k in args or list(PIECES):
         fn, name = PIECES[k]
-        print('piece', k, stevens_render() if k == 'stevens_l3' else finish(fn(), name), flush=True)
+        res = stevens_render() if k == 'stevens_l3' else long_desk_render() if k == 'long_desk' else finish(fn(), name)
+        if k == 'federation':
+            print('handoff', federation_handoff())
+        print('piece', k, res, flush=True)

@@ -779,13 +779,11 @@ mb.build('harbourships')
 
 # clouds: long soft cream banks low over the hills, as in the plate (smooth-ish ellipsoids with flat bottoms)
 CLOUD = '#ece1c6'
-for ci, (cx, cyy, cz, cw) in enumerate(((-420, 1000, 330, 260), (-60, 1150, 430, 220), (330, 1000, 300, 300), (720, 1100, 420, 220), (-800, 1150, 450, 240))):
-    rr = random.Random(ci)
-    for k in range(7):
-        u = (k - 3) / 3
-        r = cw * (0.32 - 0.14 * abs(u)) * rr.uniform(0.85, 1.1)
-        ico(f'cl{ci}{k}', (cx + u * cw * 0.85, cyy + rr.uniform(-30, 30), cz + r * 0.25), r, CLOUD, 2, (1.6, 0.6, 0.62), seed=ci * 20 + k)
-    box(f'clbase{ci}', cx - cw * 1.05, cyy - 40, cz - 4, cx + cw * 1.05, cyy + 40, cz + cw * 0.05, CLOUD)
+FX = {'sc': sc, 'lin': lin, '__name__': 'fx'}                # fx.py's painted heaps and plumes (the polish pass)
+exec(compile(open(os.path.join(HERE, 'fx.py')).read(), os.path.join(HERE, 'fx.py'), 'exec'), FX)
+CLOUD_M = FX['soft_mat']('cloud', '#f6efdc', '#aab4b0', lo=0.15, hi=1.25, feather=0.6, shadows=False)
+for ci, (cx, cyy, cz, cw) in enumerate(((-420, 1000, 310, 260), (-60, 1150, 410, 220), (330, 1000, 280, 300), (720, 1100, 400, 220), (-800, 1150, 430, 240))):
+    FX['bank'](f'cl{ci}', (cx, cyy, cz), cw * 2.0, CLOUD_M, seed=ci + 41, n=3, height=cw * 0.4)
 
 # ================================================================ smoke from the far chimneys and the freighter's funnel (stepped)
 PUFFS = []
@@ -799,9 +797,13 @@ def smoke(name, base, n, size, rise, drift, col, life=7.0, seed=0):
         PUFFS.append((p, Vector(base), k / n, size, rise, Vector(drift), life, rr.uniform(0, 6)))
 
 
+SMOKE_M = FX['soft_mat']('smoke', '#e9e3d6', '#8f8c86', lo=0.15, hi=1.2, feather=0.45, alpha=0.92)
+SMOKE_D = FX['soft_mat']('smoke_dk', '#c9c3b8', '#77746f', lo=0.15, hi=1.2, feather=0.45, alpha=0.92)
+PLUMES = []
 for i, (x, y, h) in enumerate(CHIMNEYS):
-    smoke(f'smk{i}', (x, y, h + 0.5), 8, 1.6, 12.0 + 3 * (i % 2), (-22.0, 6.0, 0.0), '#bfbab0' if i % 2 else '#99948c', life=8.0 + i, seed=i + 1)
-smoke('fun', (XC, FY + 1.8, DECKZ + 14.0), 7, 0.9, 7.0, (-9.0, 5.0, 0), '#cfc8ba', life=5.0, seed=9)
+    PLUMES.append(FX['Plume'](f'smk{i}', (x, y, h + 0.5), SMOKE_M if i % 2 else SMOKE_D, n=18, r0=1.2, r1=9.0, rise=18.0 + 4 * (i % 2),
+                              drift=(-30.0, 8.0, 0.0), life=8.0 + i, seed=i + 1))
+PLUMES.append(FX['Plume']('fun', (XC, FY + 1.8, DECKZ + 14.0), SMOKE_M, n=14, r0=0.8, r1=4.5, rise=9.0, drift=(-12.0, 6.0, 0), life=5.0, seed=9))
 
 
 def animate_smoke():
@@ -821,6 +823,8 @@ def animate_smoke():
 
 
 animate_smoke()
+for pl_ in PLUMES:
+    pl_.key(range(N), TQ)
 
 # gulls wheeling over the wharf (wings flap, stepped)
 GULLS = []

@@ -421,9 +421,11 @@ for i, (x, y, h, lean) in enumerate(((-27, -6, 17, 0.1), (-31, 6, 12, -0.05), (-
     CG['palm'](x, y, h, lean, 12, 4.6 if h > 14 else 3.6, 60 + i)
 for i, (x, y, h, w) in enumerate(((-24, 12, 10, 9), (24, 13, 10.5, 10), (-40, 14, 9, 8))):
     CG['breadfruit'](x, y, h, w, 90 + i)
-for ci, (cx, cyy, cz, cw) in enumerate(((-90, 330, 110, 85), (100, 340, 95, 75), (10, 300, 135, 50), (-75, 330, 175, 60), (85, 345, 200, 70))):
-    for k in range(9):
-        ico(f'cl{ci}{k}', (cx + (k - 4) * cw * 0.12, cyy + (k % 3) * 5, cz + (k % 2) * 4), cw * (0.2 + 0.03 * (k % 3)), '#ead9ae', 1, (1.4, 0.8, 0.75), seed=ci * 20 + k)
+FX = {'sc': sc, 'lin': lin, '__name__': 'fx'}                # clouds: fx.py's painted heaps
+exec(compile(open(os.path.join(HERE, 'fx.py')).read(), os.path.join(HERE, 'fx.py'), 'exec'), FX)
+CLOUD_M = FX['soft_mat']('cloud', '#f6efdc', '#aab4b0', lo=0.15, hi=1.25, feather=0.6, shadows=False)
+for ci, (cx, cyy, cz, cw) in enumerate(((-90, 330, 100, 85), (100, 340, 85, 75), (10, 300, 125, 50), (-75, 330, 165, 60), (85, 345, 190, 70))):
+    FX['bank'](f'cl{ci}', (cx, cyy, cz), cw * 1.6, CLOUD_M, seed=ci + 21, n=3, height=cw * 0.35)
 
 # ================================================================ the crowd for the proclamation (G2): men in dark coats and boaters,
 # women in white and in holokū, sailors; standing on the lawn before the steps, facing the building
@@ -472,13 +474,29 @@ for ob in [o for o, *_ in CG['MOVERS']] + [us, FLAGS['us'][0], FLAGS['haw'][0]]:
                 for kp in fc.keyframe_points:
                     kp.interpolation = 'CONSTANT'
 
+# ---- the arcade shadows: the sun lower and raking from the left, so each pier throws its shadow across the veranda
+# floor and the arches print on the back wall; the veranda's back wall a shade deeper than the front, the glass darker
+so_ = bpy.data.objects['sun']
+so_.rotation_euler = Vector((0.62, 0.6, -0.5)).normalized().to_track_quat('-Z', 'Y').to_euler()
+so_.data.angle = math.radians(0.4)
+so_.data.shadow_cascade_max_distance = 90
+sc.eevee.shadow_cascade_size = '4096'
+sc.eevee.use_soft_shadows = True
+for ob in bpy.data.objects:
+    if ob.type == 'MESH' and (ob.name.startswith('vback') or ob.name.startswith('vwin')):
+        ob.data.materials.clear()
+        ob.data.materials.append(mat('#c2b393'))
+    if ob.type == 'MESH' and ob.name.startswith('vgl'):
+        ob.data.materials.clear()
+        ob.data.materials.append(mat('#2f3538'))
+
 # ---- the finishing pass: facets, coursing, bevels, cool shadow fill, grade, haze (look.py)
 LK = {'__name__': 'look'}
 exec(compile(open(os.path.join(HERE, 'look.py')).read(), os.path.join(HERE, 'look.py'), 'exec'), LK)
 LK['finish'](sc, fill_strength=0.75, rules={
     STONE: (0.08, 0.3, 0.62, 0.9), STONE_LT: (0.08, 0.3, 0.62, 0.91), STONE_DK: (0.05, 0.3, None, 1.0), BASE: (0.07, 0.3, 0.45, 0.84),
     SLATE: (0.08, 0.6, 0.28, 0.85), LAWN: (0.12, 0.08, None, 1.0), '#7d8b69': (0.14, 0.02, None, 1.0), PATH: (0.08, 0.2, None, 1.0),
-    ROAD: (0.08, 0.2, None, 1.0), '#ead9ae': (0.04, 0.03, None, 1.0), '#3c4a30': (0.12, 0.4, None, 1.0), '#3f4b33': (0.12, 0.15, None, 1.0),
+    '#c2b393': (0.06, 0.3, 0.62, 0.9), ROAD: (0.08, 0.2, None, 1.0), '#ead9ae': (0.04, 0.03, None, 1.0), '#3c4a30': (0.12, 0.4, None, 1.0), '#3f4b33': (0.12, 0.15, None, 1.0),
     RED: (0.04, 1.0, None, 1.0), WHITE: (0.03, 1.0, None, 1.0), BLUE: (0.04, 1.0, None, 1.0)})
 
 # ================================================================ cameras

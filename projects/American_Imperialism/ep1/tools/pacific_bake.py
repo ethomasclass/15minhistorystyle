@@ -3,7 +3,7 @@
 # resampled to an equirectangular grid in the wall map's projection (tools/pacmap.py), the shoreline from the same
 # Natural Earth 1:50m coast as the wall map (assets/geo/pacific_coast.json), so the relief lies exactly under the map.
 # Writes the same raw mesh files as tools/terrain_bake.py (verts, quads, colours, a JSON header) plus the map UV frame.
-#   python3 tools/pacific_bake.py assets/geo/pacific_terrain [zoom=5] [step_deg=0.1]
+#   python3 tools/pacific_bake.py assets/geo/pacific_terrain [zoom=5] [step_deg=0.15]
 # Map units: 1 = 10 km at the latitude of Honolulu (x), true km in y; the origin is lon 202 E, lat 21.3 N (the H8 frame
 # centre). Land and sea floor share one vertical exaggeration (EXAG), the sea floor clipped at SEA_MAX.
 import json, math, os, sys

@@ -336,7 +336,11 @@ for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1150, 2600, 26), (-1600,
         u = crr.uniform(-0.5, 0.5)
         r = cw * crr.uniform(0.1, 0.17) * (1 - abs(u))
         CL.append(((cx + u * cw, cy + crr.uniform(-150, 150), cz + r * 0.25 + crr.uniform(0, 0.25) * cw * (0.5 - abs(u))), r, (1.6, 1.0, 0.68), ci * 40 + k))
-blobs('clouds', CL, CLOUD)
+FX = {'sc': sc, 'lin': lin, '__name__': 'fx'}                # the cloud banks as fx.py's painted heaps (the polish pass)
+exec(compile(open(os.path.join(HERE, 'fx.py')).read(), os.path.join(HERE, 'fx.py'), 'exec'), FX)
+CLOUD_M = FX['soft_mat']('cloud', '#f6ecd4', '#a9b5b2', lo=0.15, hi=1.25, feather=0.6, shadows=False)
+for ci, (cx, cy, cz, cw, n) in enumerate(((-4300, 6400, 1150, 2600, 26), (-1600, 7000, 1080, 1700, 16), (3600, 7600, 1600, 1700, 16), (8200, 6800, 1400, 1600, 14))):
+    FX['bank'](f'clouds{ci}', (cx, cy, cz), cw * 1.1, CLOUD_M, seed=ci + 31, n=4 if cw > 2000 else 3, height=cw * 0.2)
 
 # ================================================================ the wharves (the Fort Street landing at x ~ -60)
 DZ = 2.2                                                      # wharf deck level

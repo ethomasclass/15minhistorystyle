@@ -500,6 +500,7 @@ def pencil():
 WALL_M = (6.95766, 2.65867, -13015.74, -6853.97)                 # world = [a -b; b a] p + (tx, ty)
 WALL_ROT = math.degrees(math.atan2(WALL_M[1], WALL_M[0]))        # 20.9 degrees: the camera banks this much to square it
 H4 = (228.0, 33.0, 40.0)                                          # the handoff frame: centre lon, lat, degrees across
+WALL_SHEET = (1600, 0, 2780, 680)                                 # bounded (the long desk): the wall map's extent, map px
 
 
 def wall_xy(lon, lat):
@@ -552,7 +553,7 @@ def census(bounded=False):
     href_wall = S.img(os.path.join(EP, 'blender', 'assets', 'pitch_map.png'))
     if not bounded:
         S.world.append(f'<rect x="-9000" y="-6000" width="{MW + 18000}" height="{MH + 12000}" fill="{SEA}"/>')
-    S.world.append(wall_layer(S, href_wall, bounds=(1150, 120, 2700, 1020) if bounded else None))
+    S.world.append(wall_layer(S, href_wall, bounds=WALL_SHEET if bounded else None))
     S.world.append('<g id="sheet">')
     S.defs.append('<filter id="inkblur" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="5"/></filter>'
                   f'<mask id="inkm" maskUnits="userSpaceOnUse" x="-100" y="-100" width="{MW + 200}" height="{MH + 200}"><g id="inkg"></g></mask>'

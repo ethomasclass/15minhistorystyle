@@ -62,9 +62,9 @@ for r, y in enumerate(ROWS):                                 # backrests on the 
         for xe in (x0, x1 - 0.06):
             box(f'pewend{r}{x0}{xe}', xe, y, 0.6, xe + 0.06, y + 0.5, 1.8, PEW_DK)
 box('platform', -3.0, D - 2.8, 0.6, 3.0, D - 0.2, 0.85, PEW)
-box('pulpit', -0.75, D - 2.4, 0.85, 0.75, D - 1.75, 1.95, PEW_DK)
-box('pulpit_top', -0.85, D - 2.5, 1.95, 0.85, D - 1.65, 2.05, PEW)
-box('bible', -0.3, D - 2.3, 2.05, 0.3, D - 1.95, 2.1, '#3a2a22')
+box('pulpit', -0.75, D - 2.4, 0.85, 0.75, D - 1.75, 1.8, PEW_DK)
+box('pulpit_top', -0.85, D - 2.5, 1.8, 0.85, D - 1.65, 1.9, PEW)
+box('bible', -0.3, D - 2.3, 1.9, 0.3, D - 1.95, 1.95, '#3a2a22')
 box('cross_v', -0.09, D - 0.3, 2.6, 0.09, D - 0.2, 4.6, '#7a5c35')                 # a plain wooden cross on the back wall
 box('cross_h', -0.6, D - 0.3, 3.75, 0.6, D - 0.2, 3.93, '#7a5c35')
 
@@ -86,8 +86,41 @@ for r in range(1, 8):
             stand(arm, N, k=rr.uniform(0, 6))
             k += 1
 print('CONGREGATION', k)
-mroot, marm = person('preacher', 'minister', (0.0, D - 1.25, 0.85), 180)
-stand(marm, N, pose={'RightArm': (25, 0, -60), 'RightForeArm': (0, 0, -70), 'LeftArm': (60, 0, 20), 'LeftForeArm': (0, 0, 40)}, k=0.5)
+WALK = PG['WALK']
+
+
+def solve(arm, aims):
+    """(after docks.py) bone eulers (degrees) that point each bone along a direction in body terms (front, up, right)"""
+    hq = [WALK.fcurves.find('pose.bones["Hips"].rotation_quaternion', index=i).evaluate(WALK.frame_range[0]) for i in range(4)]
+    tw = math.hypot(hq[0], hq[2])
+    for pb in arm.pose.bones:
+        pb.location = (0, 0, 0)
+        pb.rotation_quaternion = (hq[0] / tw, 0, hq[2] / tw, 0) if pb.name == 'Hips' else (1, 0, 0, 0)
+        pb.rotation_euler = (0, 0, 0)
+    bpy.context.view_layer.update()
+    H = arm.pose.bones['Hips'].matrix
+    F, U = Vector(H.col[2][:3]).normalized(), Vector(H.col[1][:3]).normalized()
+    R = F.cross(U)
+    out = {}
+    for bn, d in aims:
+        pb = arm.pose.bones[bn]
+        pb.rotation_mode = 'XYZ'
+        bpy.context.view_layer.update()
+        M = pb.matrix.copy()
+        y_ = Vector(M.col[1][:3]).normalized()
+        want = (F * d[0] + U * d[1] + R * d[2]).normalized()
+        M2 = (y_.rotation_difference(want).to_matrix() @ M.to_3x3()).to_4x4()
+        M2.translation = M.translation
+        pb.matrix = M2
+        bpy.context.view_layer.update()
+        out[bn] = tuple(math.degrees(v) for v in pb.rotation_euler)
+    return out
+
+
+box('pulpit_step', -1.0, D - 1.7, 0.85, 1.0, D - 0.7, 1.1, PEW)                  # he stands on a step behind the pulpit
+mroot, marm = person('preacher', 'minister', (0.0, D - 1.2, 1.1), 180)
+stand(marm, N, pose=solve(marm, [('RightArm', (0.45, 0.55, 0.7)), ('RightForeArm', (0.3, 0.95, 0.08)),
+                                 ('LeftArm', (0.35, -0.9, -0.2)), ('LeftForeArm', (0.9, 0.1, 0.3))]), k=0.5)
 
 # ---- light inside: a warm fill under the ceiling, sunbeams through the left windows
 fill = bpy.data.lights.new('fill', 'AREA')
@@ -127,7 +160,7 @@ for i, y in enumerate((3.5, 7.5, 11.5, 15.5)):
 cam, tgt = sc.camera, bpy.data.objects['target']
 for ob in (cam, tgt):
     ob.animation_data_clear()
-cam.data.lens = 28
+cam.data.lens = 32
 for f, pos, look in ((0, (0.35, 1.0, 2.45), (0.0, D, 2.35)), (N - 1, (0.3, 3.2, 2.35), (0.0, D, 2.4))):
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)

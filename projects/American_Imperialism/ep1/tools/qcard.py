@@ -314,7 +314,7 @@ def build(key):
                   f'<g clip-path="url(#sw)"><use href="#sig" transform="translate({QX + 60},{ys:.0f})"/></g>')
         z = 1 + 0.03 * clamp(t / (b - a))
         o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
-        o += tag(40, 1050, c['credit'], 16, '#3a302c' if bg else '#8d857a')
+        o += tag(100, 1014, c['credit'], 16, '#3a302c' if bg else '#8d857a')
         return {'h': {'ov': o}}
     return S, frame, c['stem'], a, b
 
@@ -424,7 +424,7 @@ def build_name(key):
         z = 1 + 0.03 * clamp((t - (HEAD_T1 if head else 0)) / (b - a))
         o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
         if not head or t >= HEAD_T1:
-            o += tag(40, 1050, c['credit'], 16, '#8d857a')
+            o += tag(100, 1014, c['credit'], 16, '#8d857a')
         return {'h': {'ov': o}}
     return S, frame, c['stem'], a, b
 

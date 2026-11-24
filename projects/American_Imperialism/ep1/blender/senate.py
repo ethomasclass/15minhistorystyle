@@ -241,9 +241,41 @@ for (x0, y0, z0, x1, y1, z1) in cof:
 CG['obj_from_bm']('coffers', bm, COFF)
 for (x0, y0, x1, y1) in ((-SKX - 0.6, -SKY - 0.6, SKX + 0.6, -SKY), (-SKX - 0.6, SKY, SKX + 0.6, SKY + 0.6), (-SKX - 0.6, -SKY, -SKX, SKY), (SKX, -SKY, SKX + 0.6, SKY)):
     box(f'skframe{x0:.0f}{y0:.0f}', x0, y0, ZC - 0.35, x1, y1, ZC, CEIL_DK)
-SKM = emit('skylight', '#d9b878', 0.32)
-gl = box('skyglass', -SKX, -SKY, ZC + 0.25, SKX, SKY, ZC + 0.3, '#ffffff')
+SKM = emit('skylight', '#d9b878', 0.32)                    # (the glass's base tone, kept for the chapter 8 light switch)
+gl = box('skyglass', -SKX, -SKY, ZC + 0.3, SKX, SKY, ZC + 0.32, '#ffffff')
 recolor(gl, SKM)
+# the skylight as the 1890s chamber had it: a field of small panes of painted glass in iron, lighter toward the middle,
+# a border of deeper amber panes, and a pale medallion at the centre; each pane its own tone, so the glass reads as glass
+SKP = [emit(f'skypane{i}', c, st) for i, (c, st) in enumerate((('#e4c98e', 0.42), ('#d8b672', 0.36), ('#c99a55', 0.30), ('#efe0b8', 0.5), ('#b98a4c', 0.26)))]
+rrp = random.Random(7)
+bm = bmesh.new()
+pane_mat = []
+nx_, ny_ = 30, 22
+for i in range(nx_):
+    for j in range(ny_):
+        x0_, x1_ = -SKX + 2 * SKX * i / nx_, -SKX + 2 * SKX * (i + 1) / nx_
+        y0_, y1_ = -SKY + 2 * SKY * j / ny_, -SKY + 2 * SKY * (j + 1) / ny_
+        cx_, cy_ = (x0_ + x1_) / 2, (y0_ + y1_) / 2
+        rad = math.hypot(cx_ / SKX, cy_ / SKY)
+        if i in (0, nx_ - 1) or j in (0, ny_ - 1):
+            k_ = 4
+        elif rad < 0.22:
+            k_ = 3
+        elif min(i, j, nx_ - 1 - i, ny_ - 1 - j) in (2,):
+            k_ = 2
+        else:
+            k_ = 0 if rrp.random() < 0.6 - 0.3 * rad else 1
+        vs_ = [bm.verts.new((x, y, ZC + 0.26)) for x, y in ((x0_ + 0.015, y0_ + 0.015), (x1_ - 0.015, y0_ + 0.015), (x1_ - 0.015, y1_ - 0.015), (x0_ + 0.015, y1_ - 0.015))]
+        bm.faces.new(vs_)
+        pane_mat.append(k_)
+me_ = bpy.data.meshes.new('skypanes')
+bm.to_mesh(me_); bm.free()
+for m_ in SKP:
+    me_.materials.append(m_)
+for p_, k_ in zip(me_.polygons, pane_mat):
+    p_.material_index = k_
+pobj = bpy.data.objects.new('skypanes', me_)
+sc.collection.objects.link(pobj)
 bars = []
 for k in range(-7, 8):
     bars.append((k * SKX / 7.5 - 0.04, -SKY, ZC + 0.1, k * SKX / 7.5 + 0.04, SKY, ZC + 0.24))
@@ -469,6 +501,9 @@ if QUIET:
     # through the skylight in bone, cool teal-grey in the shadows, the gas turned down; the carpet's red pulled back
     SKM.node_tree.nodes['Emission'].inputs['Color'].default_value = lin('#EDE7DC')
     SKM.node_tree.nodes['Emission'].inputs['Strength'].default_value = 0.55
+    for i, m_ in enumerate(SKP):                              # the painted glass by day: bone, a little teal-grey in the border
+        m_.node_tree.nodes['Emission'].inputs['Color'].default_value = lin(('#e9e3d6', '#ddd8cc', '#c9cbc2', '#f1ece2', '#a9b8b3')[i])
+        m_.node_tree.nodes['Emission'].inputs['Strength'].default_value = 0.6
     EMB.node_tree.nodes['Emission'].inputs['Color'].default_value = lin('#9fb7b2')
     sk.color, sk.energy = (0.93, 0.92, 0.88), 260
     fp.color, fp.energy = (0.93, 0.92, 0.88), 2600
@@ -518,7 +553,8 @@ def aim(cp, turn):
 c1a = lp(-0.36, -0.06, 0.02)
 c1b = lp(-0.35, -0.02, 0.02)
 l1a, l1b = aim(c1a, 8), aim(c1b, 8)
-KEYS = [(FS['S2'][0], (1.3, YS - 1.4, 10.0), (0.0, 3.0, 2.0), 14), (FS['S2'][1] - 1, (0.6, YS - 1.2, 9.9), (0.0, 3.0, 2.0), 14),
+KEYS = [(FS['S2'][0], (1.3, YS - 1.4, 10.0), (0.0, 3.0, 8.6), 14), (FS['S2'][0] + 20, (1.22, YS - 1.38, 10.0), (0.0, 3.0, 7.6), 14),
+        (FS['S2'][1] - 1, (0.6, YS - 1.2, 9.9), (0.0, 3.0, 2.0), 14),
         (FS['S1'][0], tuple(c1a), tuple(l1a), 50), (FS['S1'][1] - 1, tuple(c1b), tuple(l1b), 50)]
 CUTS = {FS['S2'][1] - 1, FS['S1'][1] - 1}
 for fr, pos, look, lens in KEYS:

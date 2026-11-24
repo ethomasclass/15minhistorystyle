@@ -580,7 +580,7 @@ def petition():
         # the count, over the signatures as the loupe reads them
         if t >= t_cnt - 0.1:
             n = int(round(21269 * ease_out(clamp((t - t_cnt) / (t_cnt1 - t_cnt)), 2.4)))
-            op = 1 - clamp((t - t_tip0 - 0.3) / 0.4)
+            op = 1 - clamp((t - t_tip0 + 0.15) / 0.35)
             if op > 0:
                 lab = 'NAMES' + (' · 556 PAGES' if t >= t_556 else '')
                 o += (f'<g opacity="{op:.3f}"><rect x="110" y="800" width="560" height="176" fill="#111" opacity="0.82"/>'
@@ -857,8 +857,8 @@ def ledger_off():
         u = clamp((t - (t_s - 0.0)) / D)
         dy = -1240 * ease_io(u)
         p = ease_io(clamp(t / max(0.5, t_s - 0.1)))           # the hold drifts toward the "did" column
-        z = 1 + 0.035 * p
-        cx, cy = 960 + 120 * p, 430 + 10 * p
+        z = 1 + 0.025 * p
+        cx, cy = 960 + 45 * p, 430 + 8 * p
         body = desk() + f'<g transform="translate(960,430) scale({z:.4f}) translate({-cx:.1f},{-cy:.1f})">{last}</g>'
         o = ''
         if u > 0:

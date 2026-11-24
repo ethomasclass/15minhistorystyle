@@ -20,8 +20,8 @@ PANE = Vector((WX - WW / 4, Y1 + 0.1, (WZ0 + WZ1) / 2 + (WZ1 - WZ0) / 4))
 # where that pane sits in the harbor's world: a third-floor office behind the waterfront, looking down Fort Street's
 # roofs to the harbor (room +x is harbor -x, room +y is harbor -y)
 PANE_H = Vector((-34.0, 30.0, 15.0))
-CROOM = [Vector(v) for v in ((0.6, -3.35, 2.8), (0.25, -1.2, 3.05), (-1.6, 1.9, 2.85), (PANE.x, 3.9, PANE.z), PANE,
-                              (PANE.x, 7.0, PANE.z + 0.3))]
+CROOM = [Vector(v) for v in ((0.6, -3.35, 2.8), (0.0, -1.9, 3.05), (-1.9, 0.4, 2.9), (PANE.x, 2.4, PANE.z + 0.05),
+                              (PANE.x, 3.9, PANE.z), PANE, (PANE.x, 7.0, PANE.z + 0.3))]
 LROOM = [Vector((0.05, 0.55, 0.78)), Vector((PANE.x, 40.0, PANE.z - 3.5))]
 LENS0, LENS_X, LENS_H1 = 43.0, 26.0, 45.0
 
@@ -66,7 +66,7 @@ def _ss(x):
 
 
 _RP, _RA = _arc(CROOM)
-S_X = _RA[int(400 * 4 / 5)]                                   # arc length to the pane (control point 4 of 5 segments)
+S_X = _RA[int(400 * 5 / 6)]                                   # arc length to the pane (control point 5 of 6 segments)
 D_K3 = T_X - T_K3
 V_X = 2.0 * S_X / D_K3                                        # s = S_X u^2: from rest, accelerating, through the glass
 
@@ -76,8 +76,7 @@ def room(t):
     u = (t - T_K3) / D_K3
     s = S_X * u * u if u <= 1 else S_X + V_X * (t - T_X)
     pos = _at(_RP, _RA, s)
-    w = _ss(u / 0.75)
-    look = LROOM[0].lerp(LROOM[1], w)
+    look = LROOM[0].lerp(PANE, _ss(u / 0.45)).lerp(LROOM[1], _ss((u - 0.45) / 0.4))   # turn to the window, then through it
     lens = LENS0 + (LENS_X - LENS0) * _ss(u / 0.9)
     return pos, look, lens
 
