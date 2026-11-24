@@ -669,7 +669,208 @@ def abdication():
     return S, frame, [(stem, a, b)], '21_abdication.mp4'
 
 
-PIECES = dict(maine=maine, apology=apology, question=question, petition=petition, abdication=abdication)
+# ================================================================ James Dole and the fruit-cup payoff (ch 6, join 19)
+# Opens on the pineapple from the fields (19_pineapple_end.png, the sets builder's: a pineapple centred, about 60% of
+# frame height), matched by a vector pineapple of the same size and place that dissolves across; three chops on twos
+# (the crown flies off, the body slices, the slices cube), the cubes drop into the plain fruit cup from the Dole card
+# and the lid snaps on as "fruit cups" is said; the cup slides to the spot it held on the Dole card (1260, 760) as
+# James Dole's name card pops in where Sanford's portrait sat. No period can label is shown: none before the 1930s.
+PINE = dict(cx=960, cy=540, h=648)                          # the pineapple in the handoff frame (crown tip to base)
+CUP_BIG = (960, 1010, 1.5)                                  # the cup while the pineapple is cubed: base x, y, scale
+CUP_CARD = (1260, 760, 1.0, 3.0)                            # where the Dole card had it (qcard.build_name)
+CUBES = ((-98, -88, OR, -8), (-46, -80, '#ffc857', 6), (6, -92, OR, 12), (54, -84, '#ffc857', -5),
+         (-80, -136, '#ffc857', 15), (-24, -130, OR, -10), (30, -138, '#ffc857', 4), (70, -128, OR, 18),
+         (-60, -180, OR, 3), (0, -176, '#ffc857', -14), (48, -184, OR, 9))          # qcard.fruit_cup's cubes
+
+
+def pineapple_body(w, h):
+    """the fruit without its crown, centred on 0,0: gold, a diamond lattice, eyes, a shaded side"""
+    rx, ry = w / 2, h / 2
+    lat = ''.join(f'<path d="M{-rx * 2 + i * 44:.0f},{-ry} l{ry * 1.2:.0f},{2 * ry}" stroke="{OR_D}" stroke-width="5" opacity="0.7"/>'
+                  f'<path d="M{rx * 2 - i * 44:.0f},{-ry} l{-ry * 1.2:.0f},{2 * ry}" stroke="{OR_D}" stroke-width="5" opacity="0.7"/>'
+                  for i in range(0, 12))
+    eyes = ''.join(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="5" fill="#8a4d0a" opacity="0.6"/>'
+                   for x in range(int(-rx), int(rx), 44) for y in range(int(-ry) + 22, int(ry), 46))
+    return (f'<clipPath id="pbc"><ellipse rx="{rx}" ry="{ry}"/></clipPath>'
+            f'<ellipse rx="{rx}" ry="{ry}" fill="#ffc857"/><g clip-path="url(#pbc)">{lat}{eyes}'
+            f'<ellipse cx="{rx * 0.55:.0f}" rx="{rx * 0.7:.0f}" ry="{ry * 1.1:.0f}" fill="{OR}" opacity="0.45"/>'
+            f'<ellipse cx="{-rx * 0.45:.0f}" cy="{-ry * 0.35:.0f}" rx="{rx * 0.22:.0f}" ry="{ry * 0.4:.0f}" fill="#fff" opacity="0.18"/></g>'
+            f'<ellipse rx="{rx}" ry="{ry}" fill="none" stroke="{INK}" stroke-width="5" opacity="0.5"/>')
+
+
+def pineapple_crown(h):
+    """spiky leaves in the explainer's teals, base at 0,0"""
+    o = ''
+    for ang, ln, c in ((-38, 0.62, '#16675b'), (38, 0.62, '#16675b'), (-22, 0.85, TE_D), (22, 0.85, TE_D),
+                       (-8, 1.0, TE), (8, 0.95, TE_D), (0, 0.8, '#16675b')):
+        L = h * ln
+        o += (f'<path d="M-16,8 Q-10,{-L * 0.5:.0f} 0,{-L:.0f} Q10,{-L * 0.5:.0f} 16,8 z" fill="{c}" stroke="{INK}" stroke-width="3" '
+              f'stroke-opacity="0.35" transform="rotate({ang})"/>')
+    return o
+
+
+def dole():
+    import qcard
+    stem = 'ch06_the_heist'
+    W0 = Words(stem)
+    a = W0.at('is where the name') - 0.05                    # pineapple.py's T_END: the fields hand over here
+    b = W0.at('the United States to officially') - 0.3       # the ANNEXATION card's lead-in
+    Wd = Words(stem, t0=a)
+    S = dstage('dole_payoff', b - a)
+    S.over.append('<g id="ov"></g>')
+    HANDOFF = HAND('19_pineapple_end.png')
+    hand = S.img(HANDOFF) if os.path.exists(HANDOFF) else None
+    if hand:
+        S.over.insert(0, f'<image id="hand" href="{hand}" x="0" y="0" width="1920" height="1080"/>')
+    # the pineapple: crown 38% of its height, body 62%
+    Hh = PINE['h']
+    BH, CH = Hh * 0.62, Hh * 0.42
+    BW = BH * 0.74
+    top = PINE['cy'] - Hh / 2
+    BCY = top + Hh - BH / 2                                  # body centre
+    CBY = BCY - BH / 2 + 18                                  # crown base
+    S.defs.append(f'<g id="pbody">{pineapple_body(BW, BH)}</g><g id="pcrown">{pineapple_crown(CH)}</g>')
+    # the portrait (qcard's name-card builders)
+    psvg, PH = qcard.portrait_svg('james', dict(path=ARC('ch06_james_d_dole_1927.jpg'), frac=(0.14, 0.05, 0.86, 0.62), cuts=[30, 55, 80],
+                                               clahe=1.5), False)
+    PW_ = qcard.PW
+    PH = min(PH, 600)
+    S.defs.append(f'<clipPath id="pclip"><path d="{slab(PW_, PH, 34)}"/></clipPath><g id="portrait">{psvg}</g>')
+    PX, PY = 960 - PW_ / 2 - 330, 470 - PH / 2 - 70
+    CX1, CY1 = PX + PW_ / 2, PY + PH / 2
+    t_c = [0.32 + k / 6 for k in range(3)]                   # three chops, two drawings apart
+    t_fall = t_c[2] + 0.1
+    t_cups = Wd.at('fruit cups')
+    t_lid = min(t_cups, t_fall + 0.55)
+    t_slide = Wd.at('cups comes from') + 0.15
+    t_por = t_slide + 0.1
+    S.sound('scrape', t_c[0] - 0.03, 0.4)
+    S.sound('scrape', t_c[1] - 0.03, 0.35)
+    S.sound('scrape', t_c[2] - 0.03, 0.35)
+    S.sound('block_tap_soft', t_fall + 0.38, 0.5)
+    S.sound('tape_press', t_lid, 0.5)
+    S.sound('card_slide_soft', t_slide, 0.4)
+    cbx, cby, cbs = CUP_BIG
+    # each cube's start (inside the body) and end (its place in the cup, big)
+    starts = [(PINE['cx'] + (i % 4 - 1.5) * BW * 0.24, BCY + (i // 4 - 1) * BH * 0.28) for i in range(len(CUBES))]
+    ends = [(cbx + (x + 23) * cbs, cby + (y + 20) * cbs) for x, y, c, r in CUBES]
+
+    def cup_empty():
+        return (shadow(150, 4) + f'<path d="M-104,0 L104,0 L134,-226 L-134,-226 Z" fill="{CREAM}" opacity="0.16"/>'
+                + f'<path d="M-104,0 L104,0 L134,-226 L-134,-226 Z" fill="none" stroke="{CREAM}" stroke-width="6" stroke-linejoin="round"/>')
+
+    def frame(t):
+        tq = step12(t)
+        o = ''
+        k = sum(1 for c in t_c if tq >= c)                  # chops made
+        # the cup rises in under the fruit (smooth), then glides to its place from the Dole card
+        cu = ease_out(clamp((t - t_c[1]) / 0.35))
+        if cu > 0:
+            sl = ease_io(clamp((t - t_slide) / 0.65))
+            x = cbx + (CUP_CARD[0] - cbx) * sl
+            y = cby + 380 * (1 - cu) + (CUP_CARD[1] - cby) * sl
+            s = cbs + (CUP_CARD[2] - cbs) * sl
+            rot = CUP_CARD[3] * sl
+            body = qcard.fruit_cup() if t >= t_lid else cup_empty()
+            if t >= t_lid:                                    # the lid snaps on (a little pop)
+                s *= 1 + 0.06 * (1 - clamp((tq - t_lid) / 0.17))
+            o += g(x, y, s, body, rot=rot)
+        if k == 0:                                           # the whole pineapple
+            o += f'<use href="#pcrown" transform="translate({PINE["cx"]},{CBY:.1f})"/><use href="#pbody" transform="translate({PINE["cx"]},{BCY:.1f})"/>'
+        else:
+            # the crown flies off up and right after the first chop
+            u = clamp((t - t_c[0]) / 0.6)
+            if u < 1:
+                o += (f'<g opacity="{1 - u:.3f}" transform="translate({PINE["cx"] + 420 * u:.1f},{CBY - 260 * u + 380 * u * u:.1f}) '
+                      f'rotate({70 * u:.1f})"><use href="#pcrown"/></g>')
+            if k < 3:                                         # the body in k+1 slices, drifting apart
+                n = k + 1
+                for j in range(n):
+                    y0 = -BH / 2 + BH * j / n
+                    dy = (j - (n - 1) / 2) * 14
+                    o += (f'<clipPath id="sl{j}"><rect x="{-BW}" y="{y0:.1f}" width="{2 * BW}" height="{BH / n:.1f}"/></clipPath>'
+                          f'<g transform="translate({PINE["cx"]},{BCY + dy:.1f})"><g clip-path="url(#sl{j})"><use href="#pbody"/></g></g>')
+            elif t < t_lid:                                    # cubes, falling into the cup on twos
+                for i, ((x, y, c, r), (sx, sy), (ex, ey)) in enumerate(zip(CUBES, starts, ends)):
+                    u = clamp((tq - t_fall - i * 0.025) / 0.4)
+                    px = sx + (ex - sx) * ease_io(u)
+                    py = sy + (ey - sy) * u * u
+                    o += g(px, py, cbs, f'<rect x="-23" y="-20" width="46" height="40" rx="9" fill="{c}"/>', rot=r * u + 25 * (1 - u) * (i % 2 * 2 - 1))
+            # the chop: a cream slash for two drawings
+            for j, c in enumerate(t_c):
+                if c <= tq < c + 1 / 6:
+                    yy = [CBY - 4, BCY - BH * 0.17, BCY + BH * 0.17][j]
+                    o += f'<path d="M{PINE["cx"] - BW * 0.9:.0f},{yy + 30:.0f} L{PINE["cx"] + BW * 0.9:.0f},{yy - 30:.0f}" stroke="{CREAM}" stroke-width="9" stroke-linecap="round"/>'
+        # James Dole's name card, where Sanford's portrait sat on his card
+        s = pop_s(t, t_por, 0.45)
+        if s > 0:
+            grp = (f'<path d="{slab(PW_, PH, 34)}" fill="#0d0c09" transform="translate({PX + 10},{PY + 12})"/>'
+                   f'<g transform="translate({PX},{PY})"><g clip-path="url(#pclip)"><use href="#portrait"/></g>'
+                   f'<path d="{slab(PW_, PH, 34)}" fill="none" stroke="{TE}" stroke-width="6"/></g>')
+            tn = t_por + 0.25
+            if t >= tn:
+                grp += highlight(PX - 10, PY + PH + 80, 'JAMES DOLE', 50, prog=(tq - tn) / 0.27)
+            ts = t_por + 0.5
+            if t >= ts:
+                grp += f'<g opacity="{clamp((t - ts) / 0.3):.3f}">' + tag(PX, PY + PH + 132, "SANFORD DOLE'S COUSIN · STARTED GROWING PINEAPPLES", 19, TAG) + '</g>'
+            rot = -4 * (1 - clamp((t - t_por) / 0.45))
+            o += f'<g transform="translate({CX1:.1f},{CY1:.1f}) rotate({rot:.2f}) scale({s:.4f}) translate({-CX1:.1f},{-CY1:.1f})">{grp}</g>'
+            o += f'<g opacity="{clamp((t - t_por) / 0.3):.3f}">' + credit('PORTRAIT: JAMES D. DOLE, 1927 · HARTSOOK · LIBRARY OF CONGRESS, BAIN COLL. (TRACED)', dark=False, fill='#8d857a') + '</g>'
+        z = 1 + 0.025 * clamp(t / S.dur)
+        o = f'<g transform="translate(960,540) scale({z:.4f}) translate(-960,-540)">{o}</g>'
+        ret = {'h': {'ov': o}}
+        if hand:
+            ret['o'] = {'hand': f'{1 - ease_io(clamp((t - 0.04) / 0.3)):.3f}'}
+        return ret
+    return S, frame, [(stem, a, b)], '19_dole_payoff.mp4'
+
+
+# ================================================================ the Ledger slides off (ch 9, join 23)
+# The Ledger (declaration.ledger) held in its last frame through "The harbor the Admiral wanted ... forty-three years
+# later its name would be ...", the camera easing toward the "did" column ("took a kingdom's harbor"); on "Pearl
+# Harbor" the whole sheet, desk and all, slides off the top of frame, a plain smooth move, uncovering the 3D map's first
+# frame (23_pearl_start.png, the 3D-map builder's) or the dark desk until it exists.
+def ledger_off():
+    import declaration
+    stem = 'ch09_back_to_the_question'
+    W0 = Words(stem)
+    SL, f0, segs0, durL = declaration.ledger()
+    aL = segs0[0][1]
+    a = aL + durL                                            # where the Ledger clip ends
+    b = W0.at('Pearl Harbor') + 1.3
+    Wd = Words(stem, t0=a)
+    S = dstage('ledger_off', b - a, bg=False)
+    pearl = HAND('23_pearl_start.png')
+    if os.path.exists(pearl):
+        S.world.append(f'<image href="{S.img(pearl)}" x="0" y="0" width="1920" height="1080"/>')
+    else:
+        S.world.append(desk())
+    last = f0(durL - 1 / FPS)['h']['ov']
+    S.defs.append('<linearGradient id="slsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.55"/>'
+                  '<stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>')
+    S.over.append('<g id="slide"></g>')
+    t_s = Wd.at('Pearl Harbor') - 0.4
+    D = 0.85
+    S.sound('card_slide_soft', t_s, 0.4)
+
+    def frame(t):
+        u = clamp((t - (t_s - 0.0)) / D)
+        dy = -1240 * ease_io(u)
+        p = ease_io(clamp(t / max(0.5, t_s - 0.1)))           # the hold drifts toward the "did" column
+        z = 1 + 0.035 * p
+        cx, cy = 960 + 120 * p, 430 + 10 * p
+        body = (f'<rect width="1920" height="1080" fill="url(#desk)"/>'
+                f'<g transform="translate({cx:.1f},{cy:.1f}) scale({z:.4f}) translate(-960,-430)">{last}</g>')
+        body = desk() + body[body.index('<g transform'):] if True else body
+        o = ''
+        if u > 0:
+            o += f'<rect x="0" y="{1080 + dy:.1f}" width="1920" height="90" fill="url(#slsh)"/>'
+        o += f'<g transform="translate(0,{dy:.1f})">{body}</g>'
+        return {'h': {'slide': o}}
+    return S, frame, [(stem, a, b)], '23_ledger_off.mp4'
+
+
+PIECES = dict(maine=maine, apology=apology, question=question, petition=petition, abdication=abdication, dole=dole, ledger_off=ledger_off)
 
 
 def sheet():
