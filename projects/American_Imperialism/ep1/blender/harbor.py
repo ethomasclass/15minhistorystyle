@@ -12,8 +12,18 @@
 #   H1  "The help came from the American minister in Honolulu, John Stevens"   the harbor wide: the Boston at anchor, the
 #        waterfront and the mountains; a slow push in (the Stevens lower third sits over this)
 #   H2  "who ordered sailors and Marines ashore from the warship USS Boston"  low on the water off the landing: the cutters
-#        row toward and past the camera, the Boston behind them, Diamond Head down the coast
-#   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python harbor.py -- <out_dir> [scale%] [mode: wide|boats|anim]
+#        row toward and past the camera, the Boston behind them, Diamond Head down the coast. Join 17: in its last second
+#        the camera sinks to the waterline and trucks right as a cutter coasting in to the landing (oars tossed) crosses
+#        close in front, bow first; its hull fills the frame on "Minister, here" and, as its stern clears, the street
+#        (landing.py L1) is behind it. Mode wipe renders the last 1.5 s of H2 and a second beyond into <out_dir>/wipe/,
+#        then the same frames with only that cutter, on transparent, into <out_dir>/wipemask/ (the matte; mode
+#        wipemask renders only that);
+#        frame N_H2 (printed) is L1's frame 0
+#   SK  join 12 (chapter 6's opening, the 2 s before "a tax at the border"): on the wharf, the derrick's boom swings a
+#        sling of sugar sacks in toward the camera; it settles with its front sack centred, upright, about 70% of the
+#        frame's width, the harbor soft behind (handoff H12: the desk's vector tariff gate starts with its sack there).
+#        Mode sack renders it (every $STEP-th frame, and always the last) into <out_dir>/sack/; the cutters are hidden
+#   xvfb-run -a -s "-screen 0 1920x1080x24" blender -b --python harbor.py -- <out_dir> [scale%] [mode: wide|boats|anim|head|wipe|sack]
 #   mode anim renders the frames in FRAMES (comma list) or the whole timeline; mode head renders H0 and a second of H1,
 #   every $STEP-th frame, into <out_dir>/head/. In mode head (or with J16=1 for anim) frame 0 is the start of H0 (join
 #   16's rise in the committee room), not "The help came"; otherwise the timeline is as before, frame 0 on "The help came"
@@ -72,9 +82,17 @@ FH = int(round((J16['T_B'] - T0) * FPS)) if HEAD else 0      # H0 has settled in
 T_H2 = _wt(STEM, 'who ordered') - 0.05                       # H2 starts
 T_END = _wt(STEM, 'Minister here') - 0.05                    # the street (landing.py) takes over
 N = int(round((T_END - T0) * FPS))
+if MODE == 'sack':                                           # join 12: its own short timeline at the chapter's opening
+    T_TAX = _wt(STEM, 'a tax at the border')
+    T0, N = T_TAX - 2.0, int(round((2.0 - 0.05) * FPS))
+N_H2 = N                                                     # the last frame of H2 is N_H2 - 1 (the street takes over)
+WIPE = MODE in ('wipe', 'wipemask')                          # join 17: H2 runs on a second under the street's start
+if WIPE:
+    N += 30
 FB = int(round((T_H2 - T0) * FPS))
 sc.frame_start, sc.frame_end = 0, N - 1
 TQ = [math.floor(f / FPS * 12) / 12 for f in range(N)]       # animation time, stepped at 12 fps
+print('WIPE: H2 ends at frame', N_H2)
 print('HARBOR TIMES', round(T0, 2), round(T_H2, 2), round(T_END, 2), 'frames', N, 'cut at', FB, 'H0 crosses at',
       int(round((J16['T_X'] - T0) * FPS)), 'H0 settles at', FH)
 rnd = random.Random(1893)
@@ -942,12 +960,129 @@ for bt, start, heading, phase, rowers, oars, pas in CUTTERS:
         loc = bt.matrix_world.inverted() @ h
         cyl(f'{bt.name}rs{k}', (loc.x, loc.y, 0.2), (loc.x, loc.y, loc.z + 0.1), 0.04, 0.032, '#5a4532', n=6, parent=bt)
         cyl(f'{bt.name}rb{k}', (loc.x, loc.y, loc.z + 0.05), (loc.x, loc.y, loc.z + 0.55), 0.016, 0.014, '#2b2622', n=6, parent=bt)
+# join 17: the wipe cutter, coasting in to the landing with its oars tossed, crossing close in front of the lens; placed
+# once the camera is keyed (below)
+if WIPE:
+    CUT_W = cutter('cut_w', (0.0, 0.0, 0.0), 0.0, 0.0, 'sailor', True, moving=False)
+    for ol, dip, side in CUTTERS[-1][5]:
+        ol.rotation_euler = (0, 0, 0)
+        dip.rotation_euler = (0, side * -1.35, 0)
+    sc.frame_set(0)
+    for k, arm in enumerate(CUTTERS[-1][6]):
+        h = hand_pos(arm)
+        loc = CUT_W.matrix_world.inverted() @ h
+        cyl(f'cut_wrs{k}', (loc.x, loc.y, 0.2), (loc.x, loc.y, loc.z + 0.1), 0.04, 0.032, '#5a4532', n=6, parent=CUT_W)
+        cyl(f'cut_wrb{k}', (loc.x, loc.y, loc.z + 0.05), (loc.x, loc.y, loc.z + 0.55), 0.016, 0.014, '#2b2622', n=6, parent=CUT_W)
 # people watching from the landing pier and the wharf
 for k, (c, x, y, hd) in enumerate((('gentleman', -63.0, -60.0, 200), ('worker', -57.0, -58.5, 170), ('worker', -61.5, -55.0, 185),
                                    ('holoku', -66.0, -40.0, 190), ('gentleman', -48.0, -11.5, 200), ('worker', -40.0, -12.0, 160),
                                    ('officer', -59.5, -62.0, 180))):
     r_, a_ = person(f'onl{k}', c, (x, y, DZ), hd)
     stand(a_, N, k=k * 0.9)
+
+# ================================================================ join 12: the wharf derrick and its sling of sugar sacks
+if MODE == 'sack':
+    SACK, SACK_DK, ROPE = '#cbb98c', '#b19f74', '#8a7a5c'
+    CAMS = Vector((-150.0, -7.6, DZ + 1.55))                 # on the wharf, looking out over the harbor
+    D_S = 0.69                                               # 0.5 m of sack at 70% of a 35 mm frame's width
+    HERO = CAMS + Vector((0.0, -D_S, -0.05))                 # where the front sack settles
+    MAST = Vector((-147.0, -13.3, DZ))
+    for ob in list(bpy.data.objects):                        # clear the wharf round the camera, and the 1893 boats
+        if ob.type == 'MESH' and (ob.name.startswith('cut') or ((ob.matrix_world.translation - CAMS).length < 5.0 and max(ob.dimensions) < 4)):
+            ob.hide_render = True
+    for ob in bpy.data.objects:
+        r_ = ob
+        while r_.parent:
+            r_ = r_.parent
+        if r_.name.startswith('cut'):
+            ob.hide_render = True
+
+    def sack_mesh(name, w=0.5, d=0.34, h=0.78, seed=0, col=SACK):
+        """a filled sugar sack standing: a soft, slightly bulging bag, the top gathered and tied"""
+        rr = random.Random(seed)
+        bm = bmesh.new()
+        bmesh.ops.create_cube(bm, size=1.0)
+        bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=3, use_grid_fill=True)
+        for v in bm.verts:
+            x, y, z = v.co
+            b = 1 + 0.18 * (1 - (2 * z) ** 2)                 # bulge at the middle
+            top = max(0.0, (z - 0.25) / 0.25)                # gathered toward the neck
+            k = b * (1 - 0.72 * top ** 1.5)
+            v.co = Vector((x * w * k * (1 + rr.uniform(-0.03, 0.03)), y * d * k * (1 + rr.uniform(-0.03, 0.03)), (z + 0.5) * h * (1 - 0.04 * top)))
+        for v in bm.verts:
+            if v.co.z < 0.02:
+                v.co.z = 0.0
+        ob = CG['obj_from_bm'](name, bm, col)
+        for p_ in ob.data.polygons:
+            p_.use_smooth = True
+        tie = cyl(name + 'tie', (0, 0, h * 0.93), (0, 0, h * 0.97), w * 0.16, w * 0.15, ROPE, n=8)
+        tie.parent = ob
+        ear = ico(name + 'ear', (0, 0, h * 1.02), w * 0.13, col, 1, (1.2, 0.8, 0.8), seed=seed)
+        ear.parent = ob
+        return ob
+
+    SL = empty('sling', (0, 0, 0))                           # the sling's frame: hook at the origin, sacks hanging below
+    sacks = [sack_mesh('herosack', seed=1)]
+    sacks[0].parent = SL; sacks[0].location = (0.0, 0.2, -1.55)        # local +y faces the camera at the end
+    for k, (x, y) in enumerate(((-0.27, -0.22), (0.27, -0.22))):
+        sk_ = sack_mesh(f'slsack{k}', seed=k + 2, col=SACK_DK if k else SACK)
+        sk_.parent = SL; sk_.location = (x, y, -1.55); sk_.rotation_euler[2] = 0.15 * (1 - 2 * k)
+    for k, (x, y) in enumerate(((-0.6, -0.45), (0.6, -0.45), (-0.6, 0.45), (0.6, 0.45))):   # the sling's ropes up to the hook
+        cyl(f'slrope{k}', (x, y, -1.62), (0, 0, -0.05), 0.012, 0.012, ROPE, n=4, parent=SL)
+    box('slboard', -0.62, -0.47, -1.62, 0.62, 0.47, -1.55, WOOD_DK, parent=SL)   # a sling board under the sacks
+    cyl('hook', (0, 0, -0.05), (0, 0, 0.12), 0.03, 0.025, IRON, n=6, parent=SL)
+    box('block', -0.08, -0.06, 0.12, 0.08, 0.06, 0.38, WOOD_DK, parent=SL)
+    # the derrick: a timber mast stayed to the wharf, a boom slewing on it, the fall from the boom head to the block
+    cyl('dmast', tuple(MAST), tuple(MAST + Vector((0, 0, 11.0))), 0.18, 0.14, SPAR, n=8)
+    for a in (0.6, 2.4, 4.2):
+        line(f'dstay{a}', MAST + Vector((0, 0, 10.8)), MAST + Vector((7 * math.cos(a), 7 * math.sin(a) * 0.4 + 2.5, 0.2)), 0.025)
+    BOOM = empty('dboom', tuple(MAST + Vector((0, 0, 1.2))))
+    BL = 8.5
+    cyl('dboomspar', (0, 0, 0), (BL, 0, 0), 0.13, 0.09, SPAR, n=8, parent=BOOM)
+    BOOM_EL = math.radians(38)
+    FALL = cyl('dfall', (0, 0, 0), (0, 0, 1), 0.015, 0.015, RIG, n=4)
+    TOPPING = cyl('dtop', (0, 0, 0), (0, 0, 1), 0.015, 0.015, RIG, n=4)
+    # the move: the boom slews in from over the water, the sling swinging a little behind it and lowering, settling with
+    # the front sack square to the lens; hero = sling + (0, -0.2, -1.55) turned by the sling's yaw
+    hero_off = Vector((0.0, 0.2, -1.55 + 0.39))              # (to the sack's middle)
+    def boom_head(slew):
+        d = Vector((math.cos(slew) * math.cos(BOOM_EL), math.sin(slew) * math.cos(BOOM_EL), math.sin(BOOM_EL)))
+        return BOOM.location + d * BL
+    # the final slew puts the boom head above the hero's spot
+    end_xy = HERO - MAST
+    slew1 = math.atan2(end_xy.y, end_xy.x)
+    slew0 = slew1 - math.radians(70)                         # starts out over the water
+    for f in range(N):
+        u = min(1.0, f / (N - 8))
+        e = 1 - (1 - u) ** 2.6                               # a swing that decelerates into place
+        slew = slew0 + (slew1 - slew0) * e
+        BOOM.rotation_euler = (0, -BOOM_EL, slew)
+        BOOM.keyframe_insert('rotation_euler', frame=f)
+        bh = boom_head(slew)
+        sway = math.radians(9) * (1 - e) * math.sin(f * 0.21) + math.radians(2.5) * math.sin(f * 0.17) * (1 - u) ** 0.5
+        lag = Vector((-math.sin(slew), math.cos(slew), 0)) * (-1.4 * (1 - e) ** 1.5)   # trailing the slew
+        drop = 3.2 * (1 - e)                                 # coming down to the last spot
+        yaw = math.radians(-35) * (1 - e) + math.radians(0)
+        # where the hook is so that, at the end, the hero sack sits at HERO facing the camera
+        Rz = Matrix.Rotation(yaw, 3, 'Z')
+        hook_end = HERO - hero_off
+        hook = hook_end.lerp(Vector((bh.x, bh.y, hook_end.z)), 1 - e) + lag + Vector((0, 0, drop))
+        SL.location = hook
+        SL.rotation_euler = (sway, sway * 0.4, yaw)
+        SL.keyframe_insert('location', frame=f)
+        SL.keyframe_insert('rotation_euler', frame=f)
+        for rope, a_, b_ in ((FALL, bh, hook + Vector((0, 0, 0.38))), (TOPPING, bh, MAST + Vector((0, 0, 10.9)))):
+            dv = b_ - a_
+            rope.location = a_
+            rope.rotation_euler = dv.to_track_quat('Z', 'Y').to_euler()
+            rope.scale = (1, 1, dv.length)
+            rope.keyframe_insert('location', frame=f)
+            rope.keyframe_insert('rotation_euler', frame=f)
+            rope.keyframe_insert('scale', frame=f)
+    for ob in (BOOM, SL, FALL, TOPPING):
+        for fc in ob.animation_data.action.fcurves:
+            for kp in fc.keyframe_points:
+                kp.interpolation = 'LINEAR'
 
 # ---- palms sway (stepped at 12 fps)
 for f, tq in enumerate(TQ):
@@ -1028,13 +1163,45 @@ for f, pos, look in KEYS:
 for f, ln in LENS:
     cam.data.lens = ln
     cam.data.keyframe_insert('lens', frame=f)
+if WIPE:                                                     # join 17: sink to the waterline, truck right past the crossing cutter
+    PA, PB = (Vector((-41.0, -146.5, 1.8)), Vector((-16.5, -89.5, 4.6))), (Vector((-40.0, -144.0, 1.85)), Vector((-23.0, -85.0, 4.6)))
+    def _ss(x):
+        x = max(0.0, min(1.0, x)); return x * x * (3 - 2 * x)
+    off, offs = 0.0, {}
+    for f in range(N_H2 - 50, N):
+        v = 7.0 * _ss((f - (N_H2 - 22)) / 12) - 6.0 * _ss((f - (N_H2 + 10)) / 10)
+        off += v / FPS
+        offs[f] = off
+    WK = {}
+    for f in range(N_H2 - 50, N):
+        u = (f - FB) / (N_H2 - 1 - FB)
+        c, l = PA[0].lerp(PB[0], u), PA[1].lerp(PB[1], u)
+        d = _ss((f - (N_H2 - 50)) / 34)
+        fwd_ = (l - c); fwd_.z = 0; fwd_.normalize()
+        rgt_ = Vector((fwd_.y, -fwd_.x, 0))
+        c = c + rgt_ * offs[f]; l = l + rgt_ * offs[f]
+        c.z = c.z + (0.33 - c.z) * d
+        l.z = l.z + (0.9 - l.z) * d
+        WK[f] = (c, l, fwd_, rgt_)
+        cam.location = c; cam.keyframe_insert('location', frame=f)
+        tgt.location = l; tgt.keyframe_insert('location', frame=f)
+    c0, l0, fwd0, rgt0 = WK[N_H2]
+    a_ = math.atan2(rgt0.x, -rgt0.y)                          # bow toward the frame's left
+    X0 = c0 + fwd0 * (0.5 + 1.15)                             # its starboard side half a metre from the lens on the cut
+    for f in range(N):
+        CUT_W.location = X0 - rgt0 * 1.7 * (f - N_H2) / FPS + Vector((0, 0, 0.03 * math.sin(f * 0.15)))
+        CUT_W.rotation_euler = (0.01 * math.sin(f * 0.11), 0.012 * math.sin(f * 0.13), a_)
+        CUT_W.keyframe_insert('location', frame=f)
+        CUT_W.keyframe_insert('rotation_euler', frame=f)
+    cam.data.lens = 20.0; cam.data.keyframe_insert('lens', frame=N_H2 - 16)
+    cam.data.lens = 35.0; cam.data.keyframe_insert('lens', frame=N_H2 - 50)
 for ob in (cam, tgt):
     for fc in ob.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
             kp.interpolation = 'CONSTANT' if int(kp.co[0]) == FB - 1 else 'LINEAR'
 for fc in cam.data.animation_data.action.fcurves:
     for kp in fc.keyframe_points:
-        kp.interpolation = 'CONSTANT' if int(kp.co[0]) >= FH else 'LINEAR'
+        kp.interpolation = 'CONSTANT' if int(kp.co[0]) >= FH and not (WIPE and int(kp.co[0]) == N_H2 - 50) else 'LINEAR'
 cam.data.dof.use_dof = True
 cfc = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
 for f in list(range(0, N, 6)) + [FB - 1, FB]:
@@ -1042,12 +1209,41 @@ for f in list(range(0, N, 6)) + [FB - 1, FB]:
     subj = Vector((BOS_X, BOS_Y, 8.0)) if f < FB else CUTTERS[0][0].matrix_world.translation
     cam.data.dof.focus_distance = (subj - c).length if f < FB else 19.0
     cam.data.dof.aperture_fstop = 22.0 if f < FB else 5.6
+    if WIPE and f >= N_H2 - 24:                               # focus pulls to the crossing hull
+        cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = 0.7, 8.0
     cam.data.dof.keyframe_insert('focus_distance', frame=f)
     cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
 for fc in cam.data.animation_data.action.fcurves:
     for kp in fc.keyframe_points:
         kp.interpolation = 'CONSTANT'
 
+if MODE == 'sack':                                           # join 12's camera: on the wharf, a slight push, the sack arriving
+    for ob in (cam, tgt):
+        ob.animation_data_clear()
+    cam.data.animation_data_clear()
+    cam.data.lens = 35.0
+    for f in range(N):                                       # a hand-held breath of drift, ending exactly at CAMS
+        u = f / (N - 1)
+        cam.location = CAMS + Vector((0.05, 0.08, 0.02)) * (1 - u) ** 2
+        cam.keyframe_insert('location', frame=f)
+    # the look-at: across the harbor at first, settling on the hero sack's middle at the end
+    far = CAMS + Vector((0.0, -60.0, -1.0))
+    for f in range(N):
+        sc.frame_set(f)
+        hs = bpy.data.objects['herosack'].matrix_world @ Vector((0, 0, 0.39))
+        u = min(1.0, f / (N - 8))
+        w = u * u * (3 - 2 * u)
+        d0, d1 = (far - cam.location).normalized(), (hs - cam.location).normalized()
+        tgt.location = cam.location + d0.lerp(d1, w).normalized() * 5.0
+        tgt.keyframe_insert('location', frame=f)
+        cam.data.dof.focus_distance = max(D_S, (hs - cam.location).length)
+        cam.data.dof.aperture_fstop = 2.8
+        cam.data.dof.keyframe_insert('focus_distance', frame=f)
+        cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
+    # (the camera ends square on: the last frames aim straight at the sack's middle)
+    FR_S = list(range(0, N, int(os.environ.get('STEP', '1'))))
+    if N - 1 not in FR_S:
+        FR_S.append(N - 1)
 for pre in filter(None, os.environ.get('HIDE', '').split(',')):     # debugging: hide objects by name prefix
     for ob in bpy.data.objects:
         if ob.name.startswith(pre):
@@ -1058,6 +1254,24 @@ if MODE == 'wide':
     FR = [int(os.environ.get('FRAME', (FH + FB) // 2))]
 elif MODE == 'head':
     FR = list(range(0, min(N, FH + 30), int(os.environ.get('STEP', '1'))))
+elif MODE == 'sack':
+    FR = FR_S
+elif WIPE:
+    FR = list(range(N_H2 - 45, N, int(os.environ.get('STEP', '1'))))
+    sc.render.use_motion_blur = True
+    sc.eevee.motion_blur_shutter = 0.5
+    def _maskmode():                                          # only the wipe cutter (and its crew), on transparent
+        def _root(o):
+            while o.parent:
+                o = o.parent
+            return o
+        for ob in bpy.data.objects:
+            if ob.type in ('MESH', 'CURVE') and _root(ob).name != 'cut_w':
+                ob.hide_render = True
+        sc.render.film_transparent = True
+        sc.render.image_settings.color_mode = 'RGBA'
+    if MODE == 'wipemask':
+        _maskmode()
 elif MODE == 'boats':
     FR = [int(os.environ.get('FRAME', FB + (N - FB) // 2))]
 else:
@@ -1065,7 +1279,14 @@ else:
 import time
 for f in FR:
     sc.frame_set(f)
-    sc.render.filepath = os.path.join(OUT, f'harbor_{MODE}.png' if MODE in ('wide', 'boats') else (f'head/{f:04d}.png' if MODE == 'head' else f'{f:04d}.png'))
+    sc.render.filepath = os.path.join(OUT, f'harbor_{MODE}.png' if MODE in ('wide', 'boats') else (f'{MODE}/{f:04d}.png' if MODE in ('head', 'wipe', 'wipemask', 'sack') else f'{f:04d}.png'))
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t, 2), flush=True)
+if MODE == 'wipe':                                            # then the matte, in the same run
+    _maskmode()
+    for f in FR:
+        sc.frame_set(f)
+        sc.render.filepath = os.path.join(OUT, f'wipemask/{f:04d}.png')
+        bpy.ops.render.render(write_still=True)
+        print('MASK', f, flush=True)

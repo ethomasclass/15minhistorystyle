@@ -28,6 +28,7 @@ from vkit import *   # noqa: F401,F403
 from vkit import EP, KIT
 from kit import card, Spline, ease_in, note
 from vtrace import trace
+from pacmap import Pac, PLACES
 
 Image.MAX_IMAGE_PIXELS = None
 B = os.path.join(EP, 'build', 'deskA')
@@ -493,10 +494,242 @@ def label_tag(x, y, s_, size=17):
             + tag(x, y, s_, size, PAPER, 'middle'))
 
 
+
+# ================================================================ 4 · join 7: the coal map's ship sails onto the 1886 map
+FED_SRC = ARC('ch04_imperial_federation_map_1886.jpg')            # 10496 x 7848, Mercator, Greenwich centre
+FED_W, FED_H = 10496, 7848
+FED_K, FED_X0, FED_R, FED_Y0 = 20.25, 5169.0, 1165.0, 3948.0      # lon/lat -> scan px (fitted to coast points)
+FED_WW = 2400.0                                                     # the scan's width on the desk (world px)
+FED_CROP = (60, 750, 10436, 6586)                                   # the final frame (scan px, 16:9, inside the scanner's dark edge)
+
+
+def fed_px(lon, lat):
+    lat = max(-80.0, min(80.0, lat))
+    return FED_X0 + FED_K * lon, FED_Y0 - FED_R * math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
+
+
+def clip_ring(ring, keep):
+    """Sutherland-Hodgman against one half-plane: keep(p) -> signed value, >= 0 inside (linear in lon or lat)"""
+    out = []
+    n = len(ring)
+    for i in range(n):
+        p, q = ring[i], ring[(i + 1) % n]
+        a_, b_ = keep(p), keep(q)
+        if a_ >= 0:
+            out.append(p)
+        if (a_ >= 0) != (b_ >= 0):
+            u = a_ / (a_ - b_)
+            out.append((p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u))
+    return out
+
+
+def colonies_1886():
+    """approximate French and German holdings in 1886 (lon/lat rings), from Natural Earth admin-0 (public domain) cut to
+    what each power held or claimed that year; a map-maker's approximation, labelled as such on screen"""
+    feats = {f['properties']['ADM0_A3']: f for f in json.load(open(os.path.join(EP, 'build', 'geo', 'ne_50m_admin_0_countries.geojson')))['features']}
+
+    def rings_of(code, test=None, cut=None, min_pts=6):
+        gm = feats[code]['geometry']
+        polys = gm['coordinates'] if gm['type'] == 'MultiPolygon' else [gm['coordinates']]
+        out = []
+        for poly in polys:
+            r = [tuple(p) for p in poly[0]]
+            if test and not test(r):
+                continue
+            for c in (cut or []):
+                r = clip_ring(r, c)
+            if len(r) >= min_pts:
+                out.append(r)
+        return out
+    cx = lambda r: sum(p[0] for p in r) / len(r)
+    cy = lambda r: sum(p[1] for p in r) / len(r)
+    fr = {'France': rings_of('FRA', lambda r: cx(r) > -6), 'Algeria': rings_of('DZA', cut=[lambda p: p[1] - 30.0]),
+          'Tunisia': rings_of('TUN'), 'Senegal': rings_of('SEN'), 'French Congo': rings_of('GAB') + rings_of('COG'),
+          'Obock': rings_of('DJI'), 'Indochina': rings_of('VNM') + rings_of('KHM'), 'New Caledonia': rings_of('NCL'),
+          'Guiana': rings_of('FRA', lambda r: cx(r) < -40)}
+    de = {'Germany': rings_of('DEU'), 'Togo': rings_of('TGO'), 'Kamerun': rings_of('CMR', cut=[lambda p: 6.0 - p[1]]),
+          'South West Africa': rings_of('NAM'), 'East Africa': rings_of('TZA', lambda r: len(r) > 40),
+          'New Guinea': rings_of('PNG', lambda r: cy(r) > -7.2 and cx(r) < 156.5, cut=[lambda p: p[1] + 7.6])}
+    return fr, de
+
+
+def fed_path(rings, sx0, sy0, k):
+    d = ''
+    for r in rings:
+        pts = [fed_px(lo, la) for lo, la in r]
+        d += 'M' + ' L'.join(f'{sx0 + x * k:.1f},{sy0 + y * k:.1f}' for x, y in pts) + 'z'
+    return d
+
+
+def left_tag(x, y, s_, size=16):
+    w = len(s_) * size * 0.62 + 24
+    return (f'<rect x="{x - 12:.1f}" y="{y - size - 6:.1f}" width="{w:.1f}" height="{size + 14}" rx="3" fill="{CREAM}" opacity="0.9"/>'
+            + tag(x, y, s_, size, PAPER))
+
+
+FED_CLEAN = [False]                                                 # the handoff still: the picture only, no screen tags
+
+
+def federation():
+    import explainers as EX
+    from vocab import strip
+    import ch03_explainers as C3
+    stem = 'ch04_the_pitch_meeting'
+    W0 = Words(stem)
+    a = W0.at('At the same time') - 0.25
+    b = W0.at('Now look at the Pacific') - 0.05
+    Wd = Words(stem, t0=a)
+    S = dstage('federation', b - a, bg=False)
+    T_BRIT, T_FR, T_DE = Wd.at('Britain'), Wd.at('France'), Wd.at('Germany')
+    T_GRAB, T_WORLD, T_AMER, T_LEFT = Wd.at('grabbing colonies'), Wd.end('all over the world'), Wd.at('a lot of Americans'), Wd.end('left out')
+    # the coal map as the coal piece leaves it (its last frame), without its ship: this one carries on
+    Sc, fc, *_ = EX.coal()
+    coal_world = Sc.world[1]
+    coal_ov = fc(Sc.dur - 1 / FPS)['h']['ov']
+    coal_ov = re.sub(r'<g transform="[^"]*" opacity="[^"]*">' + re.escape(EX.steamship()) + '</g>', '', coal_ov)
+    m = Pac(111.5, 72.5, 1697, 935, bbox=(112, -18, 250, 58))
+    # the scan lies under the coal map's left side, its own longitudes lined up with the coal map's left edge (lon 112)
+    k = FED_WW / FED_W
+    ex, ey = m.xy(112, 18)
+    px, py = fed_px(112, 18)
+    SX0, SY0 = ex - 12 - px * k, ey - py * k
+    small = os.path.join(B, 'fed_4800.jpg')
+    if not os.path.exists(small):
+        Image.open(FED_SRC).convert('RGB').resize((4800, round(4800 * FED_H / FED_W)), Image.LANCZOS).save(small, quality=90)
+    href = S.img(small)
+    C3.wide_desk(S, x0=-4000, y0=-2500, w=9000, h=6000, cx=0, cy=600, r=2600)
+    S.world.append(f'<rect x="{SX0 + 14:.1f}" y="{SY0 + 22:.1f}" width="{FED_WW}" height="{FED_H * k:.1f}" fill="#000" opacity="0.5" filter="url(#soft)"/>'
+                   f'<image href="{href}" x="{SX0:.1f}" y="{SY0:.1f}" width="{FED_WW}" height="{FED_H * k:.1f}"/>')
+    # the colonies: flat fills printed on the scan, inked in from each colony's middle (masks of growing blots)
+    fr, de = colonies_1886()
+    U = C3.usa()
+    us_rings = [U['lower48']] + [[(x - 360 if x > 180 else x, y) for x, y in r] for r in U['alaska']]
+    S.defs.append('<filter id="blot" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>'
+                  '<mask id="mfr" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="12000" height="12000"><g id="mfrg"></g></mask>'
+                  '<mask id="mde" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="12000" height="12000"><g id="mdeg"></g></mask>')
+    FR_C, DE_C, US_C = '#6c86d4', '#857455', TE
+    S.world.append(f'<g mask="url(#mfr)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in fr.values() for r in v], SX0, SY0, k)}" fill="{FR_C}" opacity="0.92"/></g>'
+                   f'<g mask="url(#mde)" style="mix-blend-mode:multiply"><path d="{fed_path([r for v in de.values() for r in v], SX0, SY0, k)}" fill="{DE_C}" opacity="0.95"/></g>'
+                   f'<g id="usg" opacity="0" style="mix-blend-mode:multiply"><path d="{fed_path(us_rings, SX0, SY0, k)}" fill="{US_C}" opacity="0.6"/></g>'
+                   '<g id="fedlab"></g>')
+
+    def blots(group, t0, step):
+        """(time, x, y, radius) per colony, in the order they ink in"""
+        out = []
+        for j, (name, rs) in enumerate(group.items()):
+            pts = [fed_px(lo, la) for r in rs for lo, la in r]
+            xs, ys = [SX0 + p[0] * k for p in pts], [SY0 + p[1] * k for p in pts]
+            cx_, cy_ = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+            out.append((t0 + j * step, cx_, cy_, 0.75 * math.hypot(max(xs) - min(xs), max(ys) - min(ys)) + 12))
+        return out
+    BL_FR, BL_DE = blots(fr, T_FR - 0.05, 0.1), blots(de, T_DE - 0.05, 0.11)
+    S.world.append(f'<g id="coalg">{coal_world}{coal_ov}</g><g id="ship"></g>')
+    S.over.append('<g id="ov"></g>')
+    # the ship: Yokohama on the coal map, south-west off its edge (lon 112), on across the scan to Singapore
+    pts_c = [m.xy(*PLACES['Yokohama']), m.xy(128, 24), m.xy(112, 18)]
+    pts_s = [(SX0 + x * k, SY0 + y * k) for x, y in (fed_px(*q) for q in ((112, 18), (111, 9), (104.6, 1.6)))]
+    path = pts_c + pts_s[1:]
+    seg = [math.dist(p, q) for p, q in zip(path, path[1:])]
+    T_SH0, T_SH1, T_SHOFF = 0.1, T_FR - 0.3, T_WORLD + 0.1
+    T_SL0, T_SL1 = 0.95, 1.75                                     # the coal map slides away, off the desk
+    cxf, cyf = SX0 + (FED_CROP[0] + FED_CROP[2]) / 2 * k, SY0 + (FED_CROP[1] + FED_CROP[3]) / 2 * k   # the final frame: centre, zoom
+    zf = 1920 / ((FED_CROP[2] - FED_CROP[0]) * k)
+    afx, afy = SX0 + fed_px(12, 8)[0] * k, SY0 + fed_px(12, 8)[1] * k            # Africa, for the push while they ink in
+    cam = Camera([(0, 960, 540, 1.0), (0.9, 520, 560, 0.92), (T_SL1, cxf + 40, cyf + 10, zf * 1.02), (T_FR + 0.2, (cxf + afx) / 2, (cyf + afy) / 2, zf * 1.12),
+                  (T_GRAB + 0.3, (cxf * 0.3 + afx * 0.7), (cyf * 0.3 + afy * 0.7), zf * 1.2), (T_AMER - 0.3, cxf, cyf, zf * 1.02),
+                  (S.dur - 0.45, cxf, cyf, zf), (S.dur, cxf, cyf, zf)], wobble=0.0)
+
+    def ship_at(t):
+        u = ease_io(clamp((t - T_SH0) / (T_SH1 - T_SH0)))
+        d = u * sum(seg)
+        for p, q, L in zip(path, path[1:], seg):
+            if d <= L:
+                f = d / L
+                return (p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f), math.degrees(math.atan2(q[1] - p[1], q[0] - p[0])) - 180, 0 < u < 1
+            d -= L
+        p, q = path[-2], path[-1]
+        return q, math.degrees(math.atan2(q[1] - p[1], q[0] - p[0])) - 180, False
+
+    def frame(t):
+        tq = step12(t)
+        # the camera: smooth, its handheld drift fading out so the last frames are dead still and square
+        x, y, z, r = cam.at(t)
+        w = 1.4 * (1 - clamp((t - (S.dur - 1.2)) / 0.75))
+        x += w * (math.sin(t * 0.83 + 1.1) * 0.6 + math.sin(t * 1.71 + 2.3) * 0.3) / z
+        y += w * (math.sin(t * 0.67 + 0.4) * 0.6 + math.sin(t * 1.39 + 4.1) * 0.3) / z
+        T = {'CAM': f'translate(960 540) scale({z:.5f}) translate({-x:.2f} {-y:.2f})'}
+        sl = ease_io(clamp((t - T_SL0) / (T_SL1 - T_SL0)))
+        T['coalg'] = f'translate({1900 * sl:.1f},{-160 * sl:.1f}) rotate({4 * sl:.2f} 960 540)'
+        h = {}
+        # the ship (on twos while it bobs), gone once the colonies are in
+        (sx, sy), ang, moving = ship_at(t)
+        sp = 1.0 if t < T_SHOFF else max(0.0, 1 - back_out((tq - T_SHOFF) / 0.25, 1.6))
+        ang = (ang + 180) % 360 - 180
+        h['ship'] = g(sx, sy - 6 + 2.5 * math.sin(tq * 5), sp * 0.95, EX.smoke(tq, moving) + EX.steamship(), rot=max(-14, min(14, ang * 0.5))) if sp > 0 else ''
+        # the inks
+        for gid, bl in (('mfrg', BL_FR), ('mdeg', BL_DE)):
+            h[gid] = ''.join(f'<circle cx="{bx:.1f}" cy="{by:.1f}" r="{rr * ease_out(clamp((tq - t0) / 0.42), 2):.1f}" fill="#fff" filter="url(#blot)"/>'
+                             for t0, bx, by, rr in bl if tq >= t0)
+        o = {'usg': f'{0.0 if t < T_AMER else min(1.0, step12(t - T_AMER) / 0.25):.3f}'}
+        # the labels, printed on the scan (they stay in the handoff picture)
+        lab = ''
+        def at(lon, lat):
+            px_, py_ = fed_px(lon, lat)
+            return SX0 + px_ * k, SY0 + py_ * k
+        if t >= T_BRIT:
+            lx, ly = at(-42, 47)
+            lab += strip(lx, ly, 'BRITAIN', 38, prog=(tq - T_BRIT) / 0.27)
+        if t >= T_FR + 0.15:
+            lx, ly = at(-4, 27)
+            lab += strip(lx, ly, 'FRANCE', 38, prog=(tq - T_FR - 0.15) / 0.27)
+        if t >= T_DE + 0.15:
+            lx, ly = at(3, -26)
+            lab += strip(lx, ly, 'GERMANY', 38, prog=(tq - T_DE - 0.15) / 0.27)
+        if t >= T_AMER + 0.1:
+            lx, ly = at(-108, 40)
+            lab += highlight(lx, ly, 'U.S.', 38, prog=(tq - T_AMER - 0.1) / 0.27, fill=TE)
+        h['fedlab'] = lab
+        ov = ''
+        if not FED_CLEAN[0] and t >= T_SL1 - 0.2:
+            op = clamp((t - T_SL1 + 0.2) / 0.3)
+            ov += (f'<g opacity="{op:.3f}">' + left_tag(112, 976, 'IMPERIAL FEDERATION: MAP OF THE WORLD, 1886 · THE GRAPHIC · BOSTON PUBLIC LIBRARY')
+                   + (left_tag(112, 1010, 'FRENCH AND GERMAN HOLDINGS DRAWN IN, APPROXIMATE') if t >= T_FR + 0.4 else '') + '</g>')
+        h['ov'] = ov
+        return {'t': T, 'h': h, 'o': o}
+    return S, frame, stem, a, b
+
+
+def federation_handoff():
+    """H8: the last frame without the screen tags (the scan with its inks and labels, square-on, filling the frame)"""
+    FED_CLEAN[0] = True
+    S, frame, *_ = federation()
+    S.write(frame)
+    n = int(round(S.dur * FPS)) - 1
+    out = os.path.join(TR, '07_federation_end.png')
+    render_frames(S, [n], [out])
+    FED_CLEAN[0] = False
+    return out
+
+
+
+# ================================================================ 3 · join 4: the census ends on the pitch-room wall map (H4)
+def census_end():
+    import ch03_explainers as C3
+    S, frame, stem, a, b = C3.census()
+    old = S.dir
+    S.name, S.dir = 'deskA/census', os.path.join(B, 'census')
+    os.makedirs(S.dir, exist_ok=True)
+    for f in os.listdir(old):
+        if re.match(r'i\d+\.', f):
+            shutil.copy(os.path.join(old, f), S.dir)
+    return S, frame, stem, a, b
+
+
 # ================================================================ the list
 PIECES = {'palace_print': (palace_print, '03_palace_print.mp4'), 'tariff_ends': (tariff_ends, '12_13_tariff_ends.mp4'),
           'kalakaua_head': (kalakaua_head, '15_kalakaua_head.mp4'), 'stevens_l3': (stevens_l3, None),
-          'constitution': (constitution, 'constitution_1887.mp4')}
+          'constitution': (constitution, 'constitution_1887.mp4'), 'federation': (federation, '07_federation.mp4'),
+          'census_end': (census_end, '04_census_end.mp4')}
 
 
 if __name__ == '__main__':

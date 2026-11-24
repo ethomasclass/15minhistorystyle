@@ -859,9 +859,7 @@ def ledger_off():
         p = ease_io(clamp(t / max(0.5, t_s - 0.1)))           # the hold drifts toward the "did" column
         z = 1 + 0.035 * p
         cx, cy = 960 + 120 * p, 430 + 10 * p
-        body = (f'<rect width="1920" height="1080" fill="url(#desk)"/>'
-                f'<g transform="translate({cx:.1f},{cy:.1f}) scale({z:.4f}) translate(-960,-430)">{last}</g>')
-        body = desk() + body[body.index('<g transform'):] if True else body
+        body = desk() + f'<g transform="translate(960,430) scale({z:.4f}) translate({-cx:.1f},{-cy:.1f})">{last}</g>'
         o = ''
         if u > 0:
             o += f'<rect x="0" y="{1080 + dy:.1f}" width="1920" height="90" fill="url(#slsh)"/>'

@@ -69,7 +69,7 @@ CRATE, CRATE_LT, CRATE_DK = '#a3845a', '#b8986a', '#7d6443'
 BARREL, HOOP = '#8a6a48', '#3d342c'
 SACK, SACK_DK = '#b9a27a', '#9c8762'
 COTTON, BAND = '#cbbf9f', '#5a5044'
-STEEL, STEEL_DK, DUNNAGE = '#59606a', '#40454d', '#6e5a44'
+STEEL, STEEL_DK, DUNNAGE = '#5b5652', '#3a3633', '#6e5a44'           # mill-scale steel, a little rust in it
 HULL, BOOT, STRAKE, WHITE = '#2a2826', '#8a3a2e', '#ddd2b8', '#e6dfcc'
 FUNNEL, FUNNEL_TOP, MAST, RIG = '#c9a86a', '#1f1d1b', '#6a5a46', '#3a332c'
 WATER, WATER_LT = '#86a09f', '#b3c6c0'
@@ -432,12 +432,13 @@ SRC['sack'] = lumpy('src_sack', (0.5, 0.95, 0.34), SACK, seed=7, sub=2, pinch=0.
 SRC['sack2'] = lumpy('src_sack2', (0.52, 0.9, 0.36), SACK_DK, seed=9, sub=2, pinch=0.35)
 
 
-def beam_src(L=7.5, h=0.4, wf=0.22):
+def beam_src(L=7.5, h=0.3, wf=0.16):
+    """a rolled I-beam lying on its flange (12-inch section): two flanges and the web, with the ends showing the I"""
     mb = MB()
-    t = 0.035
+    t = 0.025
     mb.box(-wf / 2, -L / 2, 0, wf / 2, L / 2, t, STEEL)
     mb.box(-wf / 2, -L / 2, h - t, wf / 2, L / 2, h, STEEL)
-    mb.box(-0.018, -L / 2, t, 0.018, L / 2, h - t, STEEL_DK)
+    mb.box(-0.014, -L / 2, t, 0.014, L / 2, h - t, STEEL_DK)
     ob = mb.build('src_beam')
     ob.hide_render = True
     return ob
@@ -521,15 +522,20 @@ def barrels(x0, y0, nx, ny, two=False, seed=0):
 
 
 def beam_stack(x0, y0, nlay, n=7, seed=0):
-    """steel beams in layers on timber dunnage, each layer a little narrower"""
+    """steel I-beams as a yard stacks them: each layer of beams standing upright on their flanges, a hand's width apart,
+    on three timber sticks across; the layers set in a little each time, the beams' ends a little ragged"""
+    rr = random.Random(seed)
     z = 0.0
+    P = 0.26                                                 # beam pitch: 0.16 flange + a 0.10 gap
     for k in range(nlay):
-        for d in (-2.8, 0.0, 2.8):
-            box(f'dun{x0:.0f}{y0:.0f}{k}{d}', x0 - 0.2, y0 + d - 0.12, z, x0 + (n - k) * 0.28 + 0.1, y0 + d + 0.12, z + 0.12, DUNNAGE)
-        z += 0.12
-        for i in range(n - k):
-            put('beam', x0 + i * 0.28 + 0.14 + k * 0.0, y0, z)
-        z += 0.4
+        m = n - k
+        xa = x0 + k * P / 2
+        for d in (-2.6, 0.0, 2.6):                           # the sticks: 4x4 timbers, a little proud each side
+            box(f'dun{x0:.0f}{y0:.0f}{k}{d}', xa - 0.12, y0 + d - 0.05, z, xa + m * P + 0.02, y0 + d + 0.05, z + 0.1, DUNNAGE)
+        z += 0.1
+        for i in range(m):
+            put('beam', xa + i * P + 0.08, y0 + rr.uniform(-0.25, 0.25), z, rr.uniform(-0.006, 0.006))
+        z += 0.3
 
 
 # the arrangement (lanes left clear by the warehouse doors, x < -5.6, and along the ship, x > 5.6)
@@ -951,15 +957,44 @@ VP = PG['VPTS']
 HEADY = PG['bone_head']
 
 
-def load_mesh(kind):
-    """the load in raw body units (the body faces +x, its right is -y, z up), to ride on the chest bone"""
+def hands_raw(arm, bone='Spine2'):
+    """the posed hands in raw body units, in the frame a shell parented to `bone` is built in (so a load made there sits
+    in the hands as the body walks)"""
+    bpy.context.view_layer.update()
+    body = [o for o in arm.children if o.type == 'MESH' and o.data.vertices and len(o.vertex_groups) > 10][0]
+    ev = body.evaluated_get(bpy.context.evaluated_depsgraph_get()).data
+    gn = {g.index: g.name for g in body.vertex_groups}
+    pb = arm.pose.bones[bone]
+    to_raw = PG['bone_parent_inverse'](bone).inverted() @ (arm.matrix_world @ pb.matrix @ Matrix.Translation((0, pb.length, 0))).inverted()
+    out = {}
+    for side in ('Left', 'Right'):
+        ids = [v.index for v in body.data.vertices if v.groups and gn[max(v.groups, key=lambda g: g.weight).group].startswith(side + 'Hand')]
+        out[side] = to_raw @ (body.matrix_world @ (sum((ev.vertices[i].co for i in ids), Vector()) / len(ids)))
+    return out
+
+
+def load_mesh(kind, hands=None):
+    """the load in raw body units (the body faces +x, its right is -y, z up), to ride on the chest bone; with `hands`
+    (hands_raw) it is fitted to them: the crate held between the palms, the sack with the right hand on it"""
     sh = HEADY('RightArm')
     if kind == 'sack':                                      # a sack across the right shoulder, beside the head
         cx, cy, cz = -0.15, sh.y - 0.15, sh.z + 0.62
         sx_, sy_, sz_ = 1.45, 0.6, 0.45
+        if hands:                                           # slide it toward the right hand until the palm rests on its side
+            h = hands['Right']
+            c = Vector((cx, cy, cz))
+            d = (c - h)
+            c = h + d.normalized() * (sz_ * 0.95)
+            cx, cy = c.x, c.y
+            cz = max(cz - 0.1, c.z)
     else:                                                   # a crate held against the belly
         cx, cy, cz = 1.15, 0.0, 3.45
         sx_, sy_, sz_ = 0.7, 0.62, 0.55
+        if hands:                                           # between the palms: its sides where the hands are
+            hl, hr = hands['Left'], hands['Right']
+            m = (hl + hr) / 2
+            sy_ = max(0.35, abs(hl.y - hr.y) / 2 - 0.12)
+            cx, cy, cz = m.x - 0.05, m.y, m.z + 0.1
     if kind == 'sack':
         rr = random.Random(4)
         bm = bmesh.new()
@@ -998,7 +1033,8 @@ def walker(name, costume, start, heading, t0, kind, phase, stop=None):
     if pose:
         hold(arm, pose)
     if kind in ('sack', 'crate'):
-        vf, col = load_mesh(kind)
+        sc.frame_set(0)
+        vf, col = load_mesh(kind, hands_raw(arm))
         PG['shell'](f'{name}_load', vf, col, arm, 'Spine2').modifiers.clear()
     if kind == 'truck':                                     # a two-wheeled hand truck with a cotton bale, pushed ahead
         bpy.context.view_layer.update()

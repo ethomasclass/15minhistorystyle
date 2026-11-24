@@ -378,14 +378,14 @@ T = dict(alot=_wt('a lot of powerful'), nobody=_wt('nobody ever'), so=_wt("So le
          bus=_wt('The Businessman'), farms=_wt("America's farms"), factories=_wt('factories'), new=_wt('new customers overseas'),
          anywhere=_wt('Anywhere with people'), adm=_wt('The Admiral'), tech=_wt('Technically'), amer=_wt("Americans didn't want"),
          pac=_wt('Now look at the Pacific', end=True), queen=_wt('It belonged to a queen'), pre=_wt('The Preacher'),
-         strongwas=_wt('Strong was a'), sci=_wt('The Scientist'), british=_wt('A British writer'),
+         minister=_wt('minister'), sci=_wt('The Scientist'), british=_wt('A British writer'),
          same0=_wt('The Preacher and the Scientist'), same=_wt('the same man'), js=_wt("Josiah Strong's own"))
 DOCKS_T0 = T['farms'] - 0.6                                  # docks.py frame 0 (its own timeline)
 LECTURE_T0 = T['sci'] - 0.05                                 # lecture.py frame 0 (L1)
 TH_B = DOCKS_T0 + 52 / FPS                                   # j05: the board fills the frame (docks.py frame 52)
 TH_N = DOCKS_T0 + 335 / FPS                                  # j06: starts on docks.py frame 335 ("new customers overseas")
 TH_S = LECTURE_T0 + 35 / FPS                                 # j10: the board fills the frame (lecture.py frame 35, "A British")
-TH_P = T['strongwas'] - 0.05                                 # j09: the board fills the frame (the church takes over)
+TH_P = T['minister'] - 0.05                                  # j09: the board fills the frame (the church takes over)
 B = lambda n: os.path.join(BUILD, n)
 SEG = {  # name: (first frame's time, last frame's time, board picture)
     'j04': (0.0, T['so'] - 0.05 - 1 / FPS, os.path.join(HERE, 'assets', 'board_imperialism.png')),
@@ -675,7 +675,7 @@ def rodv(y0, y1, r, n=6, ox=0.0, oz=0.0):
 # places on the floor: the four homes behind the table (between the chairs), the two presenter spots by the board
 HOME = {'lecturer': (-3.05, 5.6, 182), 'minister': (-0.75, 5.65, 178), 'captain': (1.45, 5.6, 181), 'businessman': (3.0, 5.25, 192)}
 LEFT_SPOT, RIGHT_SPOT = (3.05, 3.85, 207), (5.6, 3.85, 152)
-WAIT_L, WAIT_R = (2.35, 4.95, 200), (6.15, 4.85, 160)
+WAIT_L, WAIT_R = (2.35, 4.95, 200), (5.85, 4.45, 160)
 PEOPLE = []
 if MODE != 'empty' and SEGN != 'j04':
     pos = dict(HOME)
@@ -717,7 +717,7 @@ if MODE != 'empty' and SEGN != 'j04':
         for i, p in enumerate((le, mi, ca, bu)):
             p.nod(T['four'] + 0.05 + i * 0.22)
     if SEGN == 'j05':                                        # "The Businessman": steps up to the board and presents it
-        arr = bu.walk(T['bus'] - 0.35, *LEFT_SPOT)
+        arr = bu.walk(T['bus'] - 0.85, *LEFT_SPOT)
         bu.gesture(arr - 0.1, 99, PRESENT, ramp=0.35)
     if SEGN == 'j06':
         bu.gesture(-1, T['anywhere'] - 0.15, PRESENT, ramp=0.1, ramp_out=0.3)
@@ -727,10 +727,10 @@ if MODE != 'empty' and SEGN != 'j04':
     if SEGN == 'j08':
         ca.gesture(-1, 99, ca.pose([('LeftArm', (0.5, -0.1, -0.86)), ('LeftForeArm', (0.62, 0.2, -0.76))], {'Head': (0, -22, 0)}), ramp=0.1)
     if SEGN == 'j09':                                        # "The Preacher": steps up to the board, his right hand raised
-        arr = mi.walk(T['pre'] - 0.25, *LEFT_SPOT)
+        arr = mi.walk(T['pre'] - 0.6, *LEFT_SPOT)
         mi.gesture(arr - 0.05, 99, PREACH, ramp=0.35)
     if SEGN == 'j10':                                        # "The 'Scientist'": steps up and points at the board
-        arr = le.walk(T['sci'] - 0.4, *RIGHT_SPOT)
+        arr = le.walk(T['sci'] - 0.7, *RIGHT_SPOT)
         le.gesture(arr - 0.1, 99, POINT, ramp=0.3)
     if SEGN == 'same':                                       # "the same man": the two step together in front of the board
         mi.walk(T['same'] - 0.35, EX - 0.24, 3.72, 186)
@@ -814,14 +814,13 @@ CAM = {
     'pitch': [K(T['so'] - 0.05, WIDE), K(T['four'] + 1.1, WIDE),
               K(T['has'] - 0.05, ((0.35, -2.4, 1.72), (2.0, 5.6, 1.5), 32.0), False), K(T['strong'] - 0.05, FILL)],
     'j05': [K(T['every'] - 0.05, ((1.3, -2.5, 1.72), (2.2, 6.0, 1.5), 30.0), False),
-            K(T['bus'] + 0.3, ((2.05, -1.1, 1.7), (3.2, 5.5, 1.5), 31.0), False), K(TH_B, FILL)],
+            K(T['bus'] + 0.55, ((2.1, -1.0, 1.7), (3.25, 5.5, 1.5), 31.0), False), K(TH_B, FILL)],
     'j06': [K(TH_N, FILL), K(TH_N + 2.3, ((3.1, -0.6, 1.72), (3.1, 5.6, 1.5), 30.0), False),
             K(T['tech'] - 0.05, ((2.2, -0.9, 1.72), (2.2, 5.6, 1.55), 31.0))],
     'j08': [K(T['amer'] - 0.05, FILL), K(T['amer'] + 1.15, ((4.05, 1.15, 1.95), (3.9, 6.0, 1.85), 33.0), False),
             K(T['amer'] + 2.2, ((3.75, 3.35, 2.85), (3.6, 8.0, 2.95), 34.0), False), K(T['pac'] + 0.15, H8)],
-    'j09': [K(T['queen'] - 0.05, H8), K(T['pre'] - 0.05, map_frame(202.0, 21.0, 72.0)),
-            K(T['pre'] + 1.0, ((3.95, 2.6, 2.55), (4.1, 6.5, 1.85), 33.0), False),
-            K(T['pre'] + 1.6, ((4.25, 1.55, 1.75), (4.3, 5.6, 1.62), 34.0), False), K(TH_P, FILL)],
+    'j09': [K(T['queen'] - 0.05, H8), K(T['pre'] - 0.1, map_frame(202.0, 21.0, 72.0)),
+            K(T['pre'] + 1.35, ((4.1, 1.3, 1.82), (4.15, 5.6, 1.62), 32.0)), K(TH_P, FILL)],
     'j10': [K(T['sci'] - 0.45, ((4.55, 0.4, 1.68), (4.45, 5.6, 1.55), 30.0), False),
             K(T['sci'] + 0.35, ((4.45, 1.0, 1.66), (4.35, 5.6, 1.58), 32.0), False), K(TH_S, FILL)],
     'same': [K(T['same0'] - 0.05, ((4.3, -0.2, 1.62), (4.3, 5.6, 1.42), 30.0), False),

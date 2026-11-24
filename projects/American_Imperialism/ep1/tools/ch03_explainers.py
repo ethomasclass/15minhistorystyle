@@ -8,6 +8,10 @@
 #   census       "the frontier ... So where next?": the 1890 census map; settlement inks in west on the map's own data;
 #                a teal pencil hunts for the frontier line and lifts away with nothing drawn; the Census Office line typed;
 #                the ink reaches the coast and beads; the camera slides off the map's edge into the wall map's open sea
+#                (join 4): the sheet lies on the pitch-room wall map itself (pacmap's projection, its coast lined up with
+#                the census coast, so it lies at an angle); the census sheet fades, the camera banks and pulls back until
+#                the wall map is square in frame, and the vector sea dissolves into the wall map's own texture: the
+#                last 0.4 s is exactly H4 (blender/assets/pitch_map.png, lon 228, lat 33, 40 degrees of longitude wide)
 #   python3 tools/ch03_explainers.py [key ...]          renders each, then renders/tests/ch03_explainers.mp4
 #   python3 tools/ch03_explainers.py --still key t ...  stills at t s into the piece (negative: from the end)
 # Map data: Natural Earth 1:50m land and admin-0 countries (public domain), cut into build/geo once.
@@ -491,7 +495,40 @@ def pencil():
             f'<rect x="494" y="-16" width="4" height="32" fill="#a89f8e"/><path d="M508,-16 L540,-16 Q548,0 540,16 L508,16 z" fill="#b9b1a3"/>')
 
 
-def census():
+# the wall map (pitch-map px, 3000 x 1500, pacmap bbox 95..300 E, -50..68 N) laid under the census sheet: a similarity
+# fitted to six coast points (Cape Flattery, Cape Mendocino, Point Arena, the Golden Gate, Point Conception, San Diego)
+WALL_M = (6.95766, 2.65867, -13015.74, -6853.97)                 # world = [a -b; b a] p + (tx, ty)
+WALL_ROT = math.degrees(math.atan2(WALL_M[1], WALL_M[0]))        # 20.9 degrees: the camera banks this much to square it
+H4 = (228.0, 33.0, 40.0)                                          # the handoff frame: centre lon, lat, degrees across
+
+
+def wall_xy(lon, lat):
+    """lon/lat -> world px through the wall map laid under the census sheet"""
+    a_, b_, tx, ty = WALL_M
+    x, y = (lon - 95) / 205 * 3000, (68 - lat) / 118 * 1500
+    return a_ * x - b_ * y + tx, b_ * x + a_ * y + ty
+
+
+def wall_layer(S, href=None, bounds=None):
+    """the wall map's graticule and land (pacmap.wall_texture, in its own px) under its transform; with href, the
+    texture itself on top (id wallpng, opacity 0, for the dissolve); bounds (x0, y0, x1, y1) in map px cut it to a sheet"""
+    import pacmap
+    m = pacmap.Pac(0, 0, 3000, 1500, bbox=(95, -50, 300, 68))
+    a_, b_, tx, ty = WALL_M
+    o = f'<g transform="matrix({a_},{b_},{-b_},{a_},{tx},{ty})">'
+    if bounds:
+        x0, y0, x1, y1 = bounds
+        S.defs.append(f'<clipPath id="wallclip"><rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}"/></clipPath>')
+        o += (f'<rect x="{x0 + 3}" y="{y0 + 5}" width="{x1 - x0}" height="{y1 - y0}" fill="#000" opacity="0.45" filter="url(#soft4)"/>'
+              f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" fill="{SEA}"/><g clip-path="url(#wallclip)">')
+    o += (f'<rect x="0" y="0" width="3000" height="1500" fill="{SEA2}" opacity="0.35"/>' + m.graticule(15, GRAT, 0.22, 2.5)
+          + m.land_svg('#eadcb9', shade='#5f8885', dx=4, dy=6, stroke='#cdbf9c', sw=1.6))
+    if href:
+        o += f'<image id="wallpng" href="{href}" x="0" y="0" width="3000" height="1500" opacity="0"/>'
+    return o + ('</g>' if bounds else '') + '</g>'
+
+
+def census(bounded=False):
     a = W0.at('the frontier') - 0.07
     b = W0.end('So where next?') + 0.9
     Wd = Words(STEM, t0=a)
@@ -510,11 +547,13 @@ def census():
         if k not in cache:
             cache[k] = ink_path(TF, p)
         return cache[k]
-    # the world: the wall map's sea everywhere (with its faint graticule), the census sheet lying on it
-    grat = ''.join(f'<line x1="{x}" y1="-3000" x2="{x}" y2="{MH + 3000}" stroke="{GRAT}" stroke-width="2.5" opacity="0.22"/>' for x in range(-4800, MW + 2400, 240))
-    grat += ''.join(f'<line x1="-6000" y1="{y}" x2="{MW + 3000}" y2="{y}" stroke="{GRAT}" stroke-width="2.5" opacity="0.22"/>' for y in range(-2400, MH + 2400, 240))
-    S.world.append(f'<rect x="-6000" y="-3000" width="{MW + 9000}" height="{MH + 6000}" fill="{SEA}"/>'
-                   f'<rect x="-6000" y="-3000" width="{MW + 9000}" height="{MH + 6000}" fill="{SEA2}" opacity="0.35"/>' + grat)
+    # the world: the census sheet lying on the pitch-room wall map (at the angle that lines their coasts up); bounded,
+    # the wall map is a sheet on the long desk, otherwise its sea runs on past the frame everywhere
+    href_wall = S.img(os.path.join(EP, 'blender', 'assets', 'pitch_map.png'))
+    if not bounded:
+        S.world.append(f'<rect x="-9000" y="-6000" width="{MW + 18000}" height="{MH + 12000}" fill="{SEA}"/>')
+    S.world.append(wall_layer(S, href_wall, bounds=(1150, 120, 2700, 1020) if bounded else None))
+    S.world.append('<g id="sheet">')
     S.defs.append('<filter id="inkblur" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="5"/></filter>'
                   f'<mask id="inkm" maskUnits="userSpaceOnUse" x="-100" y="-100" width="{MW + 200}" height="{MH + 200}"><g id="inkg"></g></mask>'
                   f'<mask id="wetm" maskUnits="userSpaceOnUse" x="-100" y="-100" width="{MW + 200}" height="{MH + 200}"><g id="wetg"></g></mask>')
@@ -522,13 +561,27 @@ def census():
                    f'<image href="{hb}" x="0" y="0" width="{MW}" height="{MH}"/>'
                    f'<image href="{hc}" x="0" y="0" width="{MW}" height="{MH}" mask="url(#inkm)"/>'
                    f'<image href="{hc}" x="0" y="0" width="{MW}" height="{MH}" mask="url(#wetm)" style="mix-blend-mode:multiply" opacity="0.6"/>'
-                   '<g id="cz"></g>')
+                   '<g id="cz"></g></g>')
     S.over.append('<g id="ov"></g>')
     ink = Spline([(0, 0.30), (t_edge, 0.33), (t_began, 0.50), (t_cens, 0.56), (t_any, 0.66), (t_conc, 0.80), (t_full - 0.2, 1.1)])
     sf = k24(250, 0)[0]                                          # the coast at San Francisco's longitude, more or less
+    # the end (join 4): off the coast west and back, banking to square the wall map; settled 0.4 s before the end on H4
+    hx, hy = wall_xy(H4[0], H4[1])
+    hz = 1920 / (H4[2] / 205 * 3000 * math.hypot(WALL_M[0], WALL_M[1]))
+    T_SET, T_FADE = (b - a) - 0.42, (t_so + 0.35, t_so + 0.95)
+    T_DIS = (T_SET - 0.38, T_SET - 0.02)                          # the vector sea dissolves into the texture
     cam = Camera([(0, 3150, 1480, 0.92), (t_began, 2450, 1430, 0.9), (t_cens, 2200, 1420, 0.9), (t_any, 1900, 1400, 0.9),
-                  (t_full, 950, 1360, 0.88), (t_so, 760, 1350, 0.88), (t_so + 1.05, -1500, 1330, 0.9), (b - a, -1560, 1330, 0.9)],
-                 wobble=1.0)
+                  (t_full, 950, 1360, 0.88), (t_so, 760, 1350, 0.88, 0.0), (t_so + 0.55, 120, 1380, 0.66, -9.0),
+                  (T_SET, hx, hy, hz, -WALL_ROT), (b - a, hx, hy, hz, -WALL_ROT)], wobble=0.0)
+
+    def cam_tf(t):
+        """the camera with its handheld drift, which fades out so the handoff frames are dead still"""
+        x, y, z, r = cam.at(t)
+        w = 1.0 * (1 - clamp((t - t_so) / (T_SET - t_so)))
+        x += w * (math.sin(t * 0.83 + 1.1) * 0.6 + math.sin(t * 1.71 + 2.3) * 0.3) / z
+        y += w * (math.sin(t * 0.67 + 0.4) * 0.6 + math.sin(t * 1.39 + 4.1) * 0.3) / z
+        r += 0.06 * w * math.sin(t * 0.51 + 0.7)
+        return f'translate({W / 2} {H / 2}) rotate({r:.4f}) scale({z:.5f}) translate({-x:.2f} {-y:.2f})'
     # the pencil: waypoints of the tip (world px) and its height over the paper; it never touches down
     HUNT = [(2350, 1180, 40), (2190, 1480, 9), (2260, 1700, 34), (2040, 1460, 7), (1930, 1180, 36), (2090, 1320, 6), (1990, 1590, 26)]
     hunt_t = [t_cens + 0.55 + i * (t_any - t_cens - 0.6) / (len(HUNT) - 1) for i in range(len(HUNT))]
@@ -601,7 +654,9 @@ def census():
                    f'<rect x="{QX0}" y="782" width="{QW}" height="150" fill="{CREAM}" filter="url(#tear)"/>'
                    + text(QX0 + 42, 860, q, 50, 'Elite', INK)
                    + tag(QX0 + 44, 906, 'U.S. CENSUS OFFICE, EXTRA CENSUS BULLETIN NO. 2, 1891', 17, PAPER_INK) + '</g>')
-        return {'t': {'CAM': cam.transform(t)}, 'h': {'inkg': ink_m, 'wetg': wet_m, 'cz': cz, 'ov': ov}}
+        op = {'sheet': f'{1 - ease_io(clamp((t - T_FADE[0]) / (T_FADE[1] - T_FADE[0]))):.3f}',
+              'wallpng': f'{ease_io(clamp((t - T_DIS[0]) / (T_DIS[1] - T_DIS[0]))):.3f}'}
+        return {'t': {'CAM': cam_tf(t)}, 'o': op, 'h': {'inkg': ink_m, 'wetg': wet_m, 'cz': cz, 'ov': ov}}
     return S, frame, STEM, a, b
 
 
