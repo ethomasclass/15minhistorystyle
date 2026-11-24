@@ -569,16 +569,16 @@ def build_dive():
     D0 = (X1 - X0) * 50 / 36                                  # 50 mm, the card frame exactly across the width
     L0 = ((X0 + X1) / 2, (Y0 + Y1) / 2, 0.0)
     # the end pose: low over the water south of the harbor front, heading a little west of north as H1 does
-    CEND = (hx_ - 0.03, hy_ - 0.33, 0.016)                   # 3.3 km off the harbor front, 160 m up (map units)
-    _d = (math.sin(math.radians(-4)) * math.cos(math.radians(-1)), math.cos(math.radians(-4)) * math.cos(math.radians(-1)),
-          math.sin(math.radians(1)))
+    CEND = (hx_ - 0.03, hy_ - 0.25, 0.028)                   # 2.5 km off the harbor front, 280 m up (map units)
+    _d = (math.sin(math.radians(-4)), math.cos(math.radians(-4)), 0.0)
+    ZEND = 1.4                                                # the relief grows toward the set's mountains as it lands
     LEND = tuple(CEND[k] + 0.5 * _d[k] for k in range(3))
     KEYS = [  # time, (look-at x, y, z), distance (log), pitch, heading, lens
         (0.00, L0, D0, 90.0, 0.0, 50.0),
         (0.35, L0, D0, 90.0, 0.0, 50.0),
         (1.60, (hx_ * 0.4 + L0[0] * 0.6, hy_ * 0.4 + L0[1] * 0.6, 0.0), 40.0, 62.0, -2.0, 45.0),
         (3.30, (hx_ - 0.1, hy_ + 0.5, 0.0), 3.2, 30.0, -4.0, 42.0),
-        (DUR, LEND, 0.5, -1.0, -4.0, 40.0),
+        (DUR, LEND, 0.5, 0.0, -4.0, 40.0),
     ]
 
     def cam_at(t):
@@ -589,7 +589,7 @@ def build_dive():
                 if t1 == KEYS[-1][0]:
                     e = ease_out(u) * 0.7 + ease(u) * 0.3
                 return pose(mix(l0, l1, e), logmix(d0, d1, e), mix(p0, p1, e), mix(h0, h1, e), mix(n0, n1, e))
-        return pose(LEND, 0.5, -1.0, -4.0, 40.0)
+        return pose(LEND, 0.5, 0.0, -4.0, 40.0)
 
     T_AB = (0.05, 0.30)            # the card's Oʻahu becomes the true coastline (a quick dissolve, flat)
     T_RISE = (0.55, 1.75)          # Oʻahu rises out of the card, stepped
@@ -601,7 +601,7 @@ def build_dive():
         ab = ease((t - T_AB[0]) / (T_AB[1] - T_AB[0]))
         ab_card.default_value = ab_lid.default_value = ab
         r = ease(step12(t - T_RISE[0]) / (T_RISE[1] - T_RISE[0])) if t >= T_RISE[0] else 0.0
-        T.ob.scale = (1, 1, max(r, 1e-4))
+        T.ob.scale = (1, 1, max(r, 1e-4) * mix(1.0, ZEND, ease((t - 3.4) / (DUR - 3.4))))
         T.ob.hide_render = r <= 0.0
         T.relief.default_value = ease((t - T_RISE[0] - 0.15) / 0.9)
         a_lid.default_value = 1 - ease((t - T_WIN[0]) / (T_WIN[1] - T_WIN[0]))

@@ -10,6 +10,9 @@
 #   petition    ch 8  ★ "In 1897 ... 21,269 names, on 556 pages": the Kuʻē pages on the light table (rebuild of the
 #                     Hawaiʻi sample s3), quiet palette; the loupe reads the heading, the count runs down the
 #                     signatures, the pages stack up, the camera tips down to close on the stack's edge (join 20)
+#   wrote       ch 8  "She was let out on parole ... She wrote.": the prison card, the camera drifts off it along the desk
+#                     to her signed inscription in Hawaii's Story, eases along her signature, and the light table's first
+#                     frame slides in over it (hands into petition)
 #   abdication  ch 8  "signed away her throne": the paper on her writing table (join 21) becomes the scan on the desk
 #   dole        ch 6  "is where the name on those fruit cups comes from": a pineapple (join 19) is cubed into the fruit cup
 #                     from the Dole card, then James Dole's name card
@@ -418,7 +421,7 @@ def _edge_bands(total, seed=20):
 def petition():
     stem = 'ch08_under_protest'
     W0 = Words(stem)
-    a = W0.at('In 1897') - 0.6
+    a = W0.at('In 1897') - 0.3                             # after "She wrote." (the wrote piece hands over here)
     b = W0.at('The treaty') + 0.6                          # the Senate desk takes over on "The treaty never got the votes"
     Wd = Words(stem, t0=a)
     S = dstage('petition', b - a, grain=0.3)
@@ -868,12 +871,82 @@ def ledger_off():
     return S, frame, [(stem, a, b)], '23_ledger_off.mp4'
 
 
-PIECES = dict(maine=maine, apology=apology, question=question, petition=petition, abdication=abdication, dole=dole, ledger_off=ledger_off)
+# ================================================================ "She wrote." (ch 8, fills 24.3 to 28.7 s)
+# Carries on from the prison card (qcard 'prison', its own frames continued); on "parole" the camera drifts right off
+# it along the warm desk to a print of her inscription in Hawaii's Story ("Compliments of the Author, Liliuokalani of
+# Hawaii, Washington D.C., Feb 9, 1898"), eases in along her signature through "she didn't stop. She wrote.", and the
+# petition table's first frame (rendered from petition() itself) slides in from the right over the last 0.45 s, so
+# the cut into 20_petition_table.mp4 is frame-exact. Quiet palette, no marks (the script names no words on the page).
+def _petition_first(p):
+    S, frame, segs, out = petition()
+    shutil.copy(stills(S, frame, [0.0])[0], p)
+
+
+def wrote():
+    import qcard
+    stem = 'ch08_under_protest'
+    W0 = Words(stem)
+    a = W0.at('She was let out') - 0.04
+    b = W0.at('In 1897') - 0.3                               # petition() starts here
+    Wd = Words(stem, t0=a)
+    S, f0, _, ca, cb = qcard.build('prison')
+    S.dur, S.name, S.dir = b - a, 'wrote', os.path.join(B, 'wrote')
+    os.makedirs(S.dir, exist_ok=True)
+    first = cached('petition_first.png', _petition_first)
+    ins = S.img(cached('inscription.jpg', lambda p: _tone_print(ARC('ch08_hawaiis_story_signed_inscription_1898.jpg'), p)))
+    pf = S.img(first)
+    S.defs.append('<linearGradient id="deskw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0c09"/>'
+                  '<stop offset="0.25" stop-color="#211e18"/><stop offset="0.5" stop-color="#2a2620"/><stop offset="0.75" stop-color="#211e18"/>'
+                  '<stop offset="1" stop-color="#0d0c09"/></linearGradient>')
+    S.defs.append('<linearGradient id="slsh2" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0.55"/>'
+                  '<stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>')
+    PH_ = 900.0
+    PW_ = PH_ * 2582 / 4001
+    PCX, PCY, PR = 2900.0, 540.0, -1.5
+    PX_, PY_ = PCX - PW_ / 2, PCY - PH_ / 2
+    k = PH_ / 4001
+    src = lambda x, y: rot_pt(PX_ + x * k, PY_ + y * k, PCX, PCY, PR)
+    SIG0, SIG1 = src(300, 2600), src(2300, 2640)              # along "Liliuokalani of Hawaii."
+    S.world[:] = ['<rect x="-1000" y="-200" width="5000" height="1480" fill="url(#deskw)"/><g opacity="0.12">'
+                  + ''.join(f'<rect x="-1000" y="{y}" width="5000" height="1" fill="#fff" opacity="0.35"/>' for y in range(32, 1080, 64)) + '</g>'
+                  '<rect x="-1000" y="-200" width="5000" height="1480" fill="url(#desk)" opacity="0.0"/>',
+                  page(ins, PX_, PY_, PW_, PH_, PR, shadow_op=0.5, border=12), '<g id="ov"></g>']
+    S.over[:] = ['<g id="ov2"></g>']
+    t_par, t_stop, t_wrote = Wd.at('parole'), Wd.at("didn't stop"), Wd.at('She wrote')
+    t_sl = S.dur - 0.45
+    cam = Camera([(0.0, 960, 540, 1.0), (t_par - 0.05, 960, 540, 1.0), (t_par + 1.25, PCX, PCY, 1.0),
+                  (t_stop - 0.3, PCX + 10, PCY + 30, 1.08), (t_wrote - 0.1, SIG0[0] + 175, SIG0[1] + 10, 2.5),
+                  (S.dur, SIG0[0] + 285, SIG1[1] + 10, 2.9)], wobble=0.8)
+    S.sound('paper-handle-1', t_sl - 0.05, 0.25)
+
+    def frame(t):
+        ov = f0(min(t + a - ca, cb - ca - 1 / FPS))['h']['ov']
+        o2 = f'<g opacity="{clamp((t - t_par - 1.0) / 0.4) * (1 - clamp((t - t_sl) / 0.2)):.3f}">' + \
+            credit("LILIʻUOKALANI'S INSCRIPTION, FEB. 9, 1898 · HAWAII'S STORY BY HAWAII'S QUEEN · LIBRARY OF CONGRESS COPY") + '</g>'
+        u = ease_io(clamp((t - t_sl) / 0.45))
+        if u > 0:
+            x = 1920 * (1 - u)
+            o2 += (f'<rect x="{x - 90:.1f}" y="0" width="90" height="1080" fill="url(#slsh2)"/>'
+                   f'<image href="{pf}" x="{x:.1f}" y="0" width="1920" height="1080"/>')
+        return {'t': {'CAM': cam.transform(t)}, 'h': {'ov': ov, 'ov2': o2}}
+    return S, frame, [(stem, a, b)], 'ch08_she_wrote.mp4'
+
+
+def _tone_print(src_path, p):
+    """a page toned part way to bone (the quiet palette), as a print"""
+    from PIL import ImageOps
+    im = Image.open(src_path).convert('RGB')
+    im.thumbnail((1600, 2400), Image.LANCZOS)
+    gr = ImageOps.colorize(ImageOps.autocontrast(im.convert('L'), cutoff=0.5), black='#2b2620', white='#efe8da', mid='#a39a88')
+    Image.blend(im, gr, 0.55).save(p, quality=90)
+
+
+PIECES = dict(wrote=wrote, maine=maine, apology=apology, question=question, petition=petition, abdication=abdication, dole=dole, ledger_off=ledger_off)
 
 
 def sheet():
     """one row of frames per output clip"""
-    names = ['19_dole_payoff', 'ch06_holds', '20_petition_table', '21_abdication', 'apology', 'maine_tease', 'question_level', '23_ledger_off']
+    names = ['19_dole_payoff', 'ch06_holds', 'ch08_she_wrote', '20_petition_table', '21_abdication', 'apology', 'maine_tease', 'question_level', '23_ledger_off']
     rows = []
     for n in names:
         p = os.path.join(OUT, n + '.mp4')
