@@ -408,7 +408,7 @@ NF = int(round((S_T1 - S_T0) * FPS)) + 1
 S_T0 = S_T1 - (NF - 1) / FPS                                 # the last frame lands exactly on its key
 tf = lambda f: S_T0 + f / FPS                                # narration time of a segment frame
 print('SEGMENT', SEGN, round(S_T0, 3), round(S_T1, 3), NF, 'frames; board', os.path.basename(BOARD_IMG))
-BOARDM, BOARDMIX, _ = picture_mat('boardface', BOARD_IMG, 1.0)
+BOARDM, BOARDMIX, BOARDTX = picture_mat('boardface', BOARD_IMG, 1.0)
 bf.data.materials.append(BOARDM)
 
 # ============================================================== people: a small pose engine
@@ -930,6 +930,11 @@ print('PITCHROOM', SEGN, 'frames', NF, 'rendering', len(paths), flush=True)
 for f, p in paths:
     if os.path.exists(p) and not os.environ.get('FORCE'):
         continue
+    # where the board exactly fills the frame, sample its picture texel for texel with no reconstruction blur, so the
+    # frame is the picture itself (the hand-off); elsewhere the usual filtering
+    at_fill = (Vector(cam_at(keys, tf(f))[0:3]) - Vector(FILL[0])).length < 1e-4 and not os.environ.get('DBG_CAM')
+    BOARDTX.interpolation = 'Closest' if at_fill else 'Linear'
+    sc.render.filter_size = 0.0 if at_fill else 1.5
     sc.frame_set(f)
     sc.render.filepath = p
     t0_ = time.time()
