@@ -497,7 +497,7 @@ for mode in MODES:
     elif mode == 'window':
         sc.render.film_transparent = True
         sc.render.image_settings.color_mode = 'RGBA'
-        paths = [(f, os.path.join(OUT, 'window', f'{f:04d}.png')) for f in range(F_K3 - 16, N, int(os.environ.get('STEP', '1')))]
+        paths = [(f, os.path.join(OUT, 'window', f'{f:04d}.png')) for f in range(int(os.environ.get('FROM', F_K3 - 16)), N, int(os.environ.get('STEP', '1')))]
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'committee_{mode}.png'))]
     for f, p in paths:

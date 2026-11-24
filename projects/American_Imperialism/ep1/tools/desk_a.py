@@ -360,28 +360,31 @@ def rifleman(h, pose=0):
     """a flat ink silhouette of a militiaman, feet at 0,0, h tall: slouch hat, coat, rifle with bayonet (no face)
     pose 0: rifle on the shoulder; 1: rifle at the order, butt on the ground; 2: at the port, across the chest"""
     k = h / 100.0
-    o = (f'<path d="M{-9 * k:.1f},{-46 * k:.1f} L{-8 * k:.1f},0 L{-1 * k:.1f},0 L{0},{-40 * k:.1f} L{1 * k:.1f},0 L{8 * k:.1f},0 L{9 * k:.1f},{-46 * k:.1f} z"/>'
-         f'<path d="M{-15 * k:.1f},{-80 * k:.1f} Q0,{-84 * k:.1f} {15 * k:.1f},{-80 * k:.1f} L{17 * k:.1f},{-42 * k:.1f} L{-17 * k:.1f},{-42 * k:.1f} z"/>'
-         f'<rect x="{-4 * k:.1f}" y="{-86 * k:.1f}" width="{8 * k:.1f}" height="{8 * k:.1f}"/>'
-         f'<circle cy="{-91 * k:.1f}" r="{6.6 * k:.1f}"/>'
-         f'<ellipse cy="{-95.5 * k:.1f}" rx="{11 * k:.1f}" ry="{2.2 * k:.1f}"/>'
-         f'<path d="M{-6.5 * k:.1f},{-96 * k:.1f} Q0,{-106 * k:.1f} {6.5 * k:.1f},{-96 * k:.1f} z"/>')
-    rw = 2.4 * k
+    o = (f'<path d="M{-9 * k:.1f},{-46 * k:.1f} L{-7.5 * k:.1f},0 L{-1.2 * k:.1f},0 L{0},{-38 * k:.1f} L{1.2 * k:.1f},0 L{7.5 * k:.1f},0 L{9 * k:.1f},{-46 * k:.1f} z"/>'
+         f'<path d="M{-12 * k:.1f},{-81 * k:.1f} Q0,{-84 * k:.1f} {12 * k:.1f},{-81 * k:.1f} L{11 * k:.1f},{-58 * k:.1f} L{14 * k:.1f},{-42 * k:.1f} '
+         f'L{-14 * k:.1f},{-42 * k:.1f} L{-11 * k:.1f},{-58 * k:.1f} z"/>'
+         f'<path d="M{-12 * k:.1f},{-80 * k:.1f} L{-16.5 * k:.1f},{-77 * k:.1f} L{-18 * k:.1f},{-50 * k:.1f} L{-13.5 * k:.1f},{-50 * k:.1f} L{-12.5 * k:.1f},{-68 * k:.1f} z"/>'
+         f'<rect x="{-3.2 * k:.1f}" y="{-87 * k:.1f}" width="{6.4 * k:.1f}" height="{7 * k:.1f}"/>'
+         f'<ellipse cy="{-91.5 * k:.1f}" rx="{5.6 * k:.1f}" ry="{6.4 * k:.1f}"/>'
+         f'<ellipse cy="{-96 * k:.1f}" rx="{10 * k:.1f}" ry="{1.9 * k:.1f}"/>'
+         f'<path d="M{-5.8 * k:.1f},{-96 * k:.1f} Q{-5 * k:.1f},{-104 * k:.1f} 0,{-103.5 * k:.1f} Q{5 * k:.1f},{-104 * k:.1f} {5.8 * k:.1f},{-96 * k:.1f} z"/>')
+    rw = 1.9 * k
     if pose == 0:                                          # shouldered: up from the right hand past the shoulder
-        x0, y0, x1, y1 = 17 * k, -52 * k, 9 * k, -122 * k
-        o += f'<path d="M{15 * k:.1f},{-80 * k:.1f} L{20 * k:.1f},{-56 * k:.1f} L{14 * k:.1f},{-52 * k:.1f} L{10 * k:.1f},{-78 * k:.1f} z"/>'
+        x0, y0, x1, y1 = 15 * k, -52 * k, 9 * k, -112 * k
+        o += f'<path d="M{12 * k:.1f},{-80 * k:.1f} L{17 * k:.1f},{-56 * k:.1f} L{13 * k:.1f},{-52 * k:.1f} L{9 * k:.1f},{-74 * k:.1f} z"/>'
     elif pose == 1:                                        # at the order: upright at the right side
-        x0, y0, x1, y1 = 22 * k, 0, 22 * k, -100 * k
-        o += f'<path d="M{15 * k:.1f},{-80 * k:.1f} L{24 * k:.1f},{-58 * k:.1f} L{20 * k:.1f},{-54 * k:.1f} L{12 * k:.1f},{-74 * k:.1f} z"/>'
+        x0, y0, x1, y1 = 20 * k, 0, 20 * k, -86 * k
+        o += f'<path d="M{12 * k:.1f},{-80 * k:.1f} L{21 * k:.1f},{-58 * k:.1f} L{18 * k:.1f},{-54 * k:.1f} L{10 * k:.1f},{-72 * k:.1f} z"/>'
     else:                                                  # at the port: across the chest
-        x0, y0, x1, y1 = 14 * k, -50 * k, -10 * k, -116 * k
+        x0, y0, x1, y1 = 14 * k, -50 * k, -8 * k, -108 * k
+        o += f'<path d="M{12 * k:.1f},{-80 * k:.1f} L{16 * k:.1f},{-56 * k:.1f} L{2 * k:.1f},{-62 * k:.1f} L{9 * k:.1f},{-72 * k:.1f} z"/>'
     dx, dy = x1 - x0, y1 - y0
     L = math.hypot(dx, dy)
     ux, uy = dx / L, dy / L
     o += f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y1:.1f}" stroke="{INK}" stroke-width="{rw:.1f}" stroke-linecap="round"/>'
     o += (f'<path d="M{x0 - uy * rw * 1.2:.1f},{y0 + ux * rw * 1.2:.1f} L{x0 + uy * rw * 1.2:.1f},{y0 - ux * rw * 1.2:.1f} '
           f'L{x0 + ux * 14 * k + uy * rw * 0.8:.1f},{y0 + uy * 14 * k - ux * rw * 0.8:.1f} L{x0 + ux * 14 * k - uy * rw * 0.8:.1f},{y0 + uy * 14 * k + ux * rw * 0.8:.1f} z"/>')
-    bx, by = x1 + ux * 16 * k, y1 + uy * 16 * k                    # the bayonet
+    bx, by = x1 + ux * 13 * k, y1 + uy * 13 * k                    # the bayonet
     o += (f'<path d="M{x1 - uy * rw * 0.6:.1f},{y1 + ux * rw * 0.6:.1f} L{bx:.1f},{by:.1f} L{x1 + uy * rw * 0.6:.1f},{y1 - ux * rw * 0.6:.1f} z"/>')
     return f'<g fill="{INK}">{o}</g>', (bx, by)
 
@@ -403,7 +406,7 @@ def constitution():
     t_asian, t_shut = Wd.at('Asian residents'), Wd.end('shut out completely')
     t_people = Wd.at('People called')
     PWD, PHT, PCX, PCY = 620, 800, 960, 566                   # the page
-    MEN = [(250, 640, 1), (420, 700, 0), (585, 735, 0), (790, 780, 0), (1060, 790, 2), (1290, 760, 0), (1470, 715, 0), (1650, 650, 1)]
+    MEN = [(330, 430, 1), (452, 470, 0), (572, 492, 2), (700, 505, 0), (1222, 505, 0), (1352, 488, 0), (1474, 466, 2), (1598, 432, 1)]
     men = [rifleman(h, pose) for _, h, pose in MEN]
     # the page's furniture: title (the only words), then two columns of ruled lines with article breaks
     rng = np.random.default_rng(1887)
@@ -458,7 +461,7 @@ def constitution():
             if u <= 0:
                 continue
             dy = (1 - ease_out(u, 2)) * 700
-            m += f'<g transform="translate({x},{1040 + dy:.1f})">{body}'
+            m += f'<g transform="translate({x},{982 + dy:.1f})">{body}'
             if t >= t_people - 0.1:
                 tg = (tq - t_people + 0.1 - 0.08 * j) * 6
                 if 0 <= tg < 2:
@@ -474,13 +477,20 @@ def constitution():
         o = ''
         if t >= 0.3:
             o += highlight(140, 196, '1887', 70, prog=(tq - 0.3) / 0.27)
-        o += f'<g opacity="{clamp((t - 0.6) / 0.3):.3f}">' + tag(PCX, 1006, 'DRAWN: NO SCAN SHOWN', 17, PAPER, 'middle') + '</g>'
-        o += f'<g opacity="{clamp((t - 1.0) / 0.3):.3f}">' + tag(1640, 1006, 'THE HONOLULU RIFLES', 17, PAPER, 'middle') + '</g>'
+        o += f'<g opacity="{clamp((t - 0.6) / 0.3):.3f}">' + label_tag(PCX, 1012, 'DRAWN: NO SCAN SHOWN') + '</g>'
+        o += f'<g opacity="{clamp((t - 1.0) / 0.3):.3f}">' + label_tag(1460, 1012, 'THE HONOLULU RIFLES') + '</g>'
         return {'t': {'CAM': cam}, 'h': {'men': m, 'page': pg, 'ov': o}}
     return S, frame, stem, a, b
 
 
 PAPER = '#5b5040'
+
+
+def label_tag(x, y, s_, size=17):
+    """a mono tag on a small cream label, centred on x (readable over anything)"""
+    w = len(s_) * size * 0.62 + 26
+    return (f'<rect x="{x - w / 2:.1f}" y="{y - size - 6:.1f}" width="{w:.1f}" height="{size + 15}" rx="3" fill="{CREAM}" opacity="0.92"/>'
+            + tag(x, y, s_, size, PAPER, 'middle'))
 
 
 # ================================================================ the list

@@ -601,7 +601,75 @@ def petition():
     return S, frame, [(stem, a, b)], '20_petition_table.mp4'
 
 
-PIECES = dict(maine=maine, apology=apology, question=question, petition=petition)
+# ================================================================ the abdication (ch 8, join 21)
+# The scan: Hawaiʻi State Archives, "Abdication Document", PNS-131, negative 21690 (ark:70111/4ZpP): page 2 of the
+# January 24, 1895 statement ("... forever abdicate, renounce and release ... all claims ... to the late throne of
+# Hawaii ..."), her signature "Liliuokalani Dominis" up the margin (sources: build/deskB/abdication_has/SOURCES.txt).
+# It opens as the paper on her writing table in the re-lit room (21_room_paper_end.png, the lead's), matched by the
+# rectangle PAPER, and becomes the scan on the desk; the camera straightens and reads it: a teal line beside the
+# signature on "signed", under "throne" on "throne". Quiet palette.
+PAPER = dict(cx=960, cy=540, h=648, rot=-4.0)               # the paper in the handoff frame (fallback until it exists)
+
+
+def _abdication(p):
+    from PIL import ImageOps
+    im = Image.open(os.path.join(B, 'abdication_has', 'has_PNS-131-21690.jpeg')).convert('L').crop((1260, 1000, 4640, 6040))
+    im = im.resize((1700, int(1700 * im.height / im.width)), Image.LANCZOS)
+    ImageOps.colorize(ImageOps.autocontrast(im, cutoff=0.7), black='#2b2620', white=BONE, mid='#9a9384').save(p, quality=90)
+
+
+def abdication():
+    stem = 'ch08_under_protest'
+    W0 = Words(stem)
+    a = W0.at('as a prisoner') - 0.15
+    b = W0.at('Then a military') - 0.04                       # the sentence card takes over
+    Wd = Words(stem, t0=a)
+    S = dstage('abdication', b - a, grain=0.3)
+    S.over.append('<g id="ov"></g>')
+    href = S.img(cached('abdication.jpg', _abdication))
+    PHh = PAPER['h']
+    PWw = PHh * 1700 / 2534
+    PXx, PYy, R = PAPER['cx'] - PWw / 2, PAPER['cy'] - PHh / 2, PAPER['rot']
+    k = PHh / 2534                                           # world px per crop px
+    src = lambda x, y: rot_pt(PXx + x * k, PYy + y * k, PAPER['cx'], PAPER['cy'], R)
+    HANDOFF = HAND('21_room_paper_end.png')
+    hand = S.img(HANDOFF) if os.path.exists(HANDOFF) else None
+    S.world.append(f'<g transform="rotate({R} {PAPER["cx"]} {PAPER["cy"]})">'
+                   f'<rect x="{PXx + 8:.1f}" y="{PYy + 12:.1f}" width="{PWw:.1f}" height="{PHh}" fill="#000" opacity="0.5" filter="url(#soft4)"/>'
+                   f'<rect x="{PXx:.1f}" y="{PYy:.1f}" width="{PWw:.1f}" height="{PHh}" fill="{BONE}"/>'
+                   f'<image id="scan" href="{href}" x="{PXx:.1f}" y="{PYy:.1f}" width="{PWw:.1f}" height="{PHh}" preserveAspectRatio="none" opacity="0"/>'
+                   f'<g id="marks"></g></g>')
+    if hand:
+        S.over.insert(0, f'<image id="hand" href="{hand}" x="0" y="0" width="1920" height="1080"/>')
+    t_sig, t_sig1, t_thr, t_thr1 = Wd.at('signed'), Wd.end('signed away'), Wd.at('throne'), Wd.end('throne')
+    SIG = src(250, 990)
+    THR = src(430, 1600)
+    cam = Camera([(0.0, PAPER['cx'], PAPER['cy'], 1.0, 0.0), (0.35, PAPER['cx'], PAPER['cy'], 1.01, 0.0),
+                  (t_sig + 0.1, *SIG, 2.2, -R), (t_thr - 0.1, THR[0] - 10, THR[1] - 60, 2.45, -R),
+                  (S.dur, THR[0] - 14, THR[1] - 50, 2.55, -R)], wobble=0.8)
+    S.sound('paper-handle-1', 0.1, 0.2)
+    S.sound('pencil-write', t_sig, 0.25)
+
+    def frame(t):
+        tq = step12(t)
+        m = ''
+        u = clamp((tq - t_sig) / max(0.5, t_sig1 - t_sig))
+        if u > 0:                                   # beside the signature (it runs up the margin)
+            x0, y0 = PXx + 252 * k, PYy + 560 * k
+            m += drawn_path(f'M{x0:.1f},{y0:.1f} C{x0 + 1.5:.1f},{y0 + 60:.1f} {x0 - 1:.1f},{y0 + 160:.1f} {x0 + 1:.1f},{PYy + 1420 * k:.1f}', u, TE, 2.6)
+        u = clamp((tq - t_thr) / max(0.4, t_thr1 - t_thr + 0.1))
+        if u > 0:
+            x0, x1, y = PXx + 318 * k, PXx + 536 * k, PYy + 1752 * k
+            m += drawn_path(f'M{x0:.1f},{y:.1f} C{x0 + 20:.1f},{y + 1.5:.1f} {x1 - 30:.1f},{y - 1:.1f} {x1:.1f},{y + 0.5:.1f}', u, TE, 2.6)
+        o = credit("LILIʻUOKALANI'S ABDICATION, JANUARY 24, 1895, PAGE 2 · HAWAIʻI STATE ARCHIVES, PNS-131")
+        ret = {'t': {'CAM': cam.transform(t)}, 'o': {'scan': f'{ease_io(clamp((t - 0.05) / 0.45)):.3f}'}, 'h': {'marks': m, 'ov': o}}
+        if hand:
+            ret['o']['hand'] = f'{1 - ease_io(clamp((t - 0.05) / 0.4)):.3f}'
+        return ret
+    return S, frame, [(stem, a, b)], '21_abdication.mp4'
+
+
+PIECES = dict(maine=maine, apology=apology, question=question, petition=petition, abdication=abdication)
 
 
 def sheet():

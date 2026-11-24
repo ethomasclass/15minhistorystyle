@@ -3,8 +3,13 @@
 # spiky rosettes, some carrying their fruit) on bare red earth, running away to the plain between the two mountain ranges,
 # a farm wagon loaded with fruit standing in a lane, and a few field hands at a distance (faceless kit figures in plain
 # work clothes and hats). People step at 12 fps. One shot, keyed to the narration (ch06):
-#   ROWS  "his cousin James"   low over the rows, a slow push down a furrow
-#   xvfb-run -a blender -b --python pineapple.py -- <out_dir> [scale%] [mode: rows|anim]
+#   ROWS  "his cousin James"   low over the rows, a slow push down a furrow; then (join 19) the camera swings right and
+#                              rises to the farm wagon, ending close on one pineapple on top of the load: centred, about
+#                              60% of the frame's height, on its own against soft focus (the desk builder's fruit cup
+#                              picks it up from that frame)
+# Clouds are fx.py's painted heaps.
+#   xvfb-run -a blender -b --python pineapple.py -- <out_dir> [scale%] [mode: rows|anim|end|run]
+#   end: the last frame (pineapple_end.png); run: the whole shot every $STEP-th frame into <out_dir>/run/
 import bpy, bmesh, math, os, sys, random
 from mathutils import Vector, Matrix
 
@@ -416,13 +421,59 @@ stand(a_, N, pose=dict(ZERO_SH, **solve(a_, [('LeftArm', (0.5, -0.8, -0.2)), ('L
 
 # clouds: soft cream banks, the plate's big heap at the right
 CLOUD = '#ece1c6'
-for ci, (cx, cyy, cz, cw) in enumerate(((-900, 3200, 820, 420), (-200, 3600, 1100, 360), (700, 3000, 700, 520), (1500, 3400, 1000, 380), (300, 3800, 1500, 300))):
-    rr = random.Random(ci)
-    for k in range(7):
-        u = (k - 3) / 3
-        r = cw * (0.32 - 0.14 * abs(u)) * rr.uniform(0.85, 1.1)
-        ico(f'cl{ci}{k}', (cx + u * cw * 0.85, cyy + rr.uniform(-30, 30), cz + r * 0.25), r, CLOUD, 2, (1.6, 0.6, 0.62), seed=ci * 20 + k)
-    box(f'clbase{ci}', cx - cw * 1.05, cyy - 40, cz - 4, cx + cw * 1.05, cyy + 40, cz + cw * 0.05, CLOUD)
+FX = {'sc': sc, 'lin': lin, '__name__': 'fx'}
+exec(compile(open(os.path.join(HERE, 'fx.py')).read(), os.path.join(HERE, 'fx.py'), 'exec'), FX)
+CLOUD_M = FX['soft_mat']('cloud', '#f6efdc', '#aab4b0', lo=0.15, hi=1.25, feather=0.6, shadows=False)
+for ci, (cx, cyy, cz, cw) in enumerate(((-900, 3200, 800, 420), (-200, 3600, 1080, 360), (700, 3000, 680, 520), (1500, 3400, 980, 380), (300, 3800, 1480, 300))):
+    FX['bank'](f'cl{ci}', (cx, cyy, cz), cw * 2.0, CLOUD_M, seed=ci + 11, n=3, height=cw * 0.42)
+
+# ---- join 19: the hero pineapple on top of the wagon's load, modelled closer than the heap's: a faceted body in
+# offset rings of diamond-shaped eyes, each with its dark point, and a crown of stiff leaves in two greens
+HP = Vector((WX - 0.12, WY - 1.35, 1.69))                  # the base of the fruit
+def hero_pineapple(base, h=0.25, r=0.085, rings=9, seg=12):
+    mb_ = MB()
+    rr_ = random.Random(19)
+    def ring_pt(k, j):
+        t = k / rings
+        z = base.z + h * t
+        rad = r * math.sin(math.pi * (0.12 + 0.82 * t)) ** 0.7 * (1.0 if 0 < k < rings else 0.55)
+        a = 2 * math.pi * (j + 0.5 * (k % 2)) / seg
+        return Vector((base.x + rad * math.cos(a), base.y + rad * math.sin(a), z))
+    P = [[ring_pt(k, j) for j in range(seg)] for k in range(rings + 1)]
+    for k in range(1, rings):                               # a diamond eye at every other vertex between rings
+        for j in range(seg):
+            c = P[k][j]
+            up, dn = P[k + 1][j - (1 - k % 2)] .lerp(P[k + 1][(j + (k % 2)) % seg], 0.5), P[k - 1][j - (1 - k % 2)].lerp(P[k - 1][(j + (k % 2)) % seg], 0.5)
+            lf, rt = P[k][j - 1], P[k][(j + 1) % seg]
+            out = (c - Vector((base.x, base.y, c.z))).normalized()
+            tip = c + out * 0.008
+            q = [c.lerp(up, 0.5), c.lerp(rt, 0.5), c.lerp(dn, 0.5), c.lerp(lf, 0.5)]
+            col = FRUIT if (j + k) % 3 else '#c99436'
+            for i in range(4):
+                mb_.poly([q[i], q[(i + 1) % 4], tip], [(0, 1, 2)], col if i < 2 else FRUIT_DK)
+            mb_.poly([tip - out * 0.001 + (up - c) * 0.08, tip + (rt - c) * 0.08, tip + (dn - c) * 0.08, tip + (lf - c) * 0.08], [(0, 1, 2, 3)], '#5a3f1c')
+    for k in range(rings):                                  # the skin between the eyes
+        for j in range(seg):
+            a_, b_ = P[k][j], P[k][(j + 1) % seg]
+            c_ = P[k + 1][(j + (k % 2)) % seg]
+            mb_.poly([a_, b_, c_], [(0, 1, 2)], '#a8742a')
+    top = Vector((base.x, base.y, base.z + h))
+    for k in range(22):                                     # the crown: stiff leaves fanning up and out, the inner ones taller
+        a = 2 * math.pi * k / 7.3 + rr_.uniform(-0.15, 0.15)
+        inner = k / 22
+        L = 0.11 + 0.15 * inner + rr_.uniform(-0.02, 0.02)
+        lean = 0.95 - 0.7 * inner
+        d = Vector((math.cos(a) * math.sin(lean), math.sin(a) * math.sin(lean), math.cos(lean)))
+        side = Vector((-math.sin(a), math.cos(a), 0)) * (0.012 + 0.006 * (1 - inner))
+        root = top + Vector((0, 0, -0.01 + 0.02 * inner))
+        mid = root + d * L * 0.55 + Vector((0, 0, 0.01))
+        tipp = root + d * L + Vector((0, 0, -0.02 * (1 - inner)))
+        col = CROWN if k % 2 else '#678a5a'
+        mb_.poly([root - side, root + side, mid + side * 0.6, mid - side * 0.6], [(0, 1, 2, 3)], col)
+        mb_.poly([mid - side * 0.6, mid + side * 0.6, tipp], [(0, 1, 2)], col)
+    return mb_.build('hero_pineapple')
+hero_pineapple(HP)
+HERO_C = HP + Vector((0, 0, 0.2))                           # the middle of fruit and crown together
 
 # ---- the sun: from the front right, mid-afternoon, so each plant throws its shadow across the furrow
 so = bpy.data.objects['sun']
@@ -450,23 +501,46 @@ for ob in (cam, tgt):
     ob.animation_data_clear()
 cam.data.clip_end = 9000
 cam.data.lens = 26
-KEYS = [(0, (0.0, -4.0, 1.25), (0.6, 120.0, 2.6)), (N - 1, (0.0, -1.6, 1.35), (0.6, 122.0, 2.6))]
-for f, pos, look in KEYS:
+# join 19: the push down the furrow turns right and rises to the wagon, ending close on the hero pineapple: at 85 mm and
+# 2.4 m the fruit and crown (0.47 m) fill about 60% of the frame's height
+D_END, LENS_END = 2.4, 85.0
+C_END = HERO_C + Vector((-0.97, -0.24, 0.12)).normalized() * D_END
+PATH = [Vector(v) for v in ((0.0, -4.0, 1.25), (0.0, -2.2, 1.32), (1.0, 4.5, 1.55), (2.4, 9.5, 1.75))] + [C_END]
+def _cr(P, t):
+    i = min(int(t), len(P) - 2); t -= i
+    p0, p1, p2, p3 = P[max(i - 1, 0)], P[i], P[i + 1], P[min(i + 2, len(P) - 1)]
+    return 0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3)
+F_SET = N - int(0.6 * FPS)                                  # settled for the last 0.6 s, the fruit held
+FAR = Vector((0.6, 120.0, 2.6))
+for f in range(N):
+    u = min(1.0, f / F_SET)
+    e = u * u * u * (u * (6 * u - 15) + 10)
+    pos = _cr(PATH, e * (len(PATH) - 1.0001))
+    w = max(0.0, min(1.0, (e - 0.15) / 0.8))
+    w = w * w * (3 - 2 * w)
+    look = FAR.lerp(HERO_C, w)
+    if w > 0:                                               # aim by direction (the far point and the fruit differ hugely in range)
+        d0, d1 = (FAR - pos).normalized(), (HERO_C - pos).normalized()
+        look = pos + d0.lerp(d1, w).normalized() * 10.0
+    lens = 26 + (LENS_END - 26) * max(0.0, (e - 0.35) / 0.65) ** 1.4
     cam.location = pos; cam.keyframe_insert('location', frame=f)
     tgt.location = look; tgt.keyframe_insert('location', frame=f)
-for ob in (cam, tgt):
-    for fc in ob.animation_data.action.fcurves:
-        for kp in fc.keyframe_points:
-            kp.interpolation = 'BEZIER'
-            kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
+    cam.data.lens = lens; cam.data.keyframe_insert('lens', frame=f)
+    cam.data.dof.focus_distance = 14.0 + ((HERO_C - pos).length - 14.0) * w
+    cam.data.dof.aperture_fstop = 5.6 - 3.6 * w
+    cam.data.dof.keyframe_insert('focus_distance', frame=f)
+    cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
 cam.data.dof.use_dof = True
-cam.data.dof.focus_distance, cam.data.dof.aperture_fstop = 14.0, 5.6
 sc.render.resolution_percentage = SCALE
 os.makedirs(OUT, exist_ok=True)
 
 import time
 if MODE == 'rows':
-    FR = [(int(N * 0.5), os.path.join(OUT, 'pineapple_rows.png'))]
+    FR = [(int(N * 0.25), os.path.join(OUT, 'pineapple_rows.png'))]
+elif MODE == 'end':
+    FR = [(N - 1, os.path.join(OUT, 'pineapple_end.png'))]
+elif MODE == 'run':
+    FR = [(f, os.path.join(OUT, 'run', f'{f:04d}.png')) for f in range(0, N, int(os.environ.get('STEP', '1')))] + [(N - 1, os.path.join(OUT, 'run', f'{N - 1:04d}.png'))]
 else:
     FR = [(int(v), None) for v in os.environ['FRAMES'].split(',')] if os.environ.get('FRAMES') else [(f, None) for f in range(N)]
 for f, path in FR:
