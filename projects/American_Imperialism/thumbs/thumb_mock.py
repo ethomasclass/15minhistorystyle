@@ -102,20 +102,21 @@ AMB = ((28, 18, 8), (236, 178, 84))
 TEA = ((6, 26, 24), (120, 228, 206))
 sx = int(W * 0.47)
 
-# A: the Queen between the landing party and the palace
-make('A_who_took_hawaii.jpg',
-     duo(Image.open(RAW + 'boston_landing.jpg'), *AMB, (sx, H)),
-     duo(Image.open(FLOW + 'p4_palace.jpg'), *TEA, (W - sx, H), (0.55, 0.4)),
-     figure('loc_liliuokalani_1891', 640, (0.2, 0.2, 0.7, 0.66), poly=[(.40,.24),(.50,.225),(.535,.30),(.535,.36),(.59,.37),(.61,.43),(.63,.53),(.65,.70),(.24,.70),(.26,.55),(.28,.43),(.30,.38),(.37,.355),(.385,.31)]), 'WHO TOOK', 'HAWAIʻI?')
+if __name__ == "__main__":
+    # A: the Queen between the landing party and the palace
+    make('A_who_took_hawaii.jpg',
+         duo(Image.open(RAW + 'boston_landing.jpg'), *AMB, (sx, H)),
+         duo(Image.open(FLOW + 'p4_palace.jpg'), *TEA, (W - sx, H), (0.55, 0.4)),
+         figure('loc_liliuokalani_1891', 640, (0.2, 0.2, 0.7, 0.66), poly=[(.40,.24),(.50,.225),(.535,.30),(.535,.36),(.59,.37),(.61,.43),(.63,.53),(.65,.70),(.24,.70),(.26,.55),(.28,.43),(.30,.38),(.37,.355),(.385,.31)]), 'WHO TOOK', 'HAWAIʻI?')
 
-# B: Dole between the annexation ceremony and the Queen
-make('B_yes_that_dole.jpg',
-     duo(Image.open(RAW + 'loc_annexation_ceremony.jpg'), *AMB, (sx, H)),
-     duo(Image.open(RAW + 'loc_liliuokalani_portrait.jpg'), *TEA, (W - sx, H), (0.5, 0.25)),
-     figure('loc_dole', 660, (0, 0, 1, 0.7)), 'YES, THAT', 'DOLE.', s2=190)
+    # B: Dole between the annexation ceremony and the Queen
+    make('B_yes_that_dole.jpg',
+         duo(Image.open(RAW + 'loc_annexation_ceremony.jpg'), *AMB, (sx, H)),
+         duo(Image.open(RAW + 'loc_liliuokalani_portrait.jpg'), *TEA, (W - sx, H), (0.5, 0.25)),
+         figure('loc_dole', 660, (0, 0, 1, 0.7)), 'YES, THAT', 'DOLE.', s2=190)
 
-# C: the Queen between the USS Boston and the palace grounds
-make('C_her_own_palace.jpg',
-     duo(Image.open(RAW + 'loc_uss_boston_1891.jpg'), *AMB, (sx, H)),
-     duo(Image.open(RAW + 'loc_palace_grounds.jpg'), *TEA, (W - sx, H)),
-     figure('loc_liliuokalani_1891', 640, (0.2, 0.2, 0.7, 0.66), poly=[(.40,.24),(.50,.225),(.535,.30),(.535,.36),(.59,.37),(.61,.43),(.63,.53),(.65,.70),(.24,.70),(.26,.55),(.28,.43),(.30,.38),(.37,.355),(.385,.31)]), 'LOCKED IN', 'HER PALACE', s2=130)
+    # C: the Queen between the USS Boston and the palace grounds
+    make('C_her_own_palace.jpg',
+         duo(Image.open(RAW + 'loc_uss_boston_1891.jpg'), *AMB, (sx, H)),
+         duo(Image.open(RAW + 'loc_palace_grounds.jpg'), *TEA, (W - sx, H)),
+         figure('loc_liliuokalani_1891', 640, (0.2, 0.2, 0.7, 0.66), poly=[(.40,.24),(.50,.225),(.535,.30),(.535,.36),(.59,.37),(.61,.43),(.63,.53),(.65,.70),(.24,.70),(.26,.55),(.28,.43),(.30,.38),(.37,.355),(.385,.31)]), 'LOCKED IN', 'HER PALACE', s2=130)
