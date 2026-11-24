@@ -7,9 +7,9 @@
 # Everything that moves steps at 12 fps (smoke, the train, the workers' cane knives, the palms). Shots, keyed to the
 # narration (ch06):
 #   WIDE  "Plantations boomed"         from above the near field: rows of cane, the road in, the mill, the mountains.
-#                                      Join 13: it opens held for half a second with the far edge of the fields against the
-#                                      mountains' foot at 60% down the frame (y = 648 of 1080), where the tariff gate's flat
-#                                      green horizon strip sits, then drifts
+#                                      Join 13: it opens (0.25 s before the end of "boomed") held for 0.75 s with the far edge
+#                                      of the fields against the mountains' foot at 60% down the frame (y = 648 of 1080),
+#                                      where the tariff gate's flat green horizon strip sits as it ends, then drifts
 #   MILL  "Many of them were the sons"  closer on the mill: the train of cane carts rolling in past the cane shed, a slow
 #                                      creep to "the right to use"; then join 14: the camera rises up the chimney with the
 #                                      smoke and into the plume, until the frame is a flat field of bone haze #EDE7DC on
@@ -62,7 +62,7 @@ def _wt(stem, phrase, end=False):
     raise KeyError(phrase)
 
 
-T0 = _wt('ch06_the_heist', 'Plantations boomed') - 0.3
+T0 = _wt('ch06_the_heist', 'boomed', end=True) - 0.25          # the tariff gate (desk) ends on its green strip just after "boomed"
 T_MILL = _wt('ch06_the_heist', 'Many of them') - 0.05
 T_RISE = _wt('ch06_the_heist', 'the right to use') - 0.1      # join 14: the rise up the smoke starts
 T_HAZE = _wt('ch06_the_heist', 'called Pearl Harbor')         # the frame is all haze
@@ -1006,7 +1006,7 @@ for _ in range(50):                                          # bisect the look-a
         hi_ = mid_
 LOOK_W0 = (-34.0, 60.0, mid_)
 print('WIDE opening look-at z', round(mid_, 3), 'horizon ndc', round(_ndc_y(CAM_WIDE, LOOK_W0, 30, HZ), 4))
-F_HOLD = int(round(0.5 * FPS))
+F_HOLD = int(round(0.75 * FPS))                              # held over the gate's last moments, whenever the cut lands
 KEYS = [(0, 30, tuple(CAM_WIDE), LOOK_W0), (F_HOLD, 30, tuple(CAM_WIDE), LOOK_W0),
         (FW - 1, 30, tuple(CAM_WIDE + Vector((0.6, 4.0, -0.3))), (-33.0, 60.0, 9.0)),
         (FW, 26, (-41.0, -35.0, 2.1), (-18.0, -1.0, 8.2)), (F_RISE, 26, (-38.6, -34.0, 2.15), (-15.8, -0.3, 8.3))]
