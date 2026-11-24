@@ -718,20 +718,20 @@ if MODE != 'empty' and SEGN != 'j04':
             p.nod(T['four'] + 0.05 + i * 0.22)
     if SEGN == 'j05':                                        # "The Businessman": steps up to the board and presents it
         arr = bu.walk(T['bus'] - 0.85, *LEFT_SPOT)
-        bu.gesture(arr - 0.1, 99, PRESENT, ramp=0.35)
+        bu.gesture(arr - 0.1, TH_B - 0.7, PRESENT, ramp=0.35, ramp_out=0.4)       # his arm drops as we enter the board
     if SEGN == 'j06':
-        bu.gesture(-1, T['anywhere'] - 0.15, PRESENT, ramp=0.1, ramp_out=0.3)
+        bu.gesture(TH_N + 0.35, T['anywhere'] - 0.15, PRESENT, ramp=0.4, ramp_out=0.3)   # (out of the board's frame at frame 0)
         bu.gesture(T['anywhere'] - 0.1, T['anywhere'] + 1.2, OPEN, ramp=0.3, ramp_out=0.5)   # "Anywhere": he opens his hands
         arr = ca.walk(T['adm'] - 0.2, HOME['captain'][0] + 0.05, 4.98, 180)                   # "The Admiral": a step up
         ca.gesture(arr + 0.05, arr + 1.25, SALUTE, ramp=0.25, ramp_out=0.35)
     if SEGN == 'j08':
-        ca.gesture(-1, 99, ca.pose([('LeftArm', (0.5, -0.1, -0.86)), ('LeftForeArm', (0.62, 0.2, -0.76))], {'Head': (0, -22, 0)}), ramp=0.1)
+        ca.gesture(T['amer'] + 0.35, 99, ca.pose([('LeftArm', (0.5, -0.1, -0.86)), ('LeftForeArm', (0.62, 0.2, -0.76))], {'Head': (0, -22, 0)}), ramp=0.4)
     if SEGN == 'j09':                                        # "The Preacher": steps up to the board, his right hand raised
         arr = mi.walk(T['pre'] - 0.6, *LEFT_SPOT)
         mi.gesture(arr - 0.05, 99, PREACH, ramp=0.35)
     if SEGN == 'j10':                                        # "The 'Scientist'": steps up and points at the board
         arr = le.walk(T['sci'] - 0.7, *RIGHT_SPOT)
-        le.gesture(arr - 0.1, 99, POINT, ramp=0.3)
+        le.gesture(arr - 0.1, TH_S - 0.5, POINT, ramp=0.3, ramp_out=0.3)          # the pointer leaves the board before the hand-off
     if SEGN == 'same':                                       # "the same man": the two step together in front of the board
         mi.walk(T['same'] - 0.35, EX - 0.24, 3.72, 186)
         le.walk(T['same'] - 0.3, EX + 0.24, 3.72, 174)

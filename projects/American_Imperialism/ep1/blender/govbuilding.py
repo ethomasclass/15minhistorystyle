@@ -510,7 +510,7 @@ FT1 = Vector((1.6, TCY, ZTOP - 0.6))
 # join 18: G1 tilts up with the flag, then cranes up and in, arriving square on the flag's stripes on "flag" (F_FLAG)
 F_FLAG = FS['G1'][0] + int(round((_wt(CH, 'flag and put') - T_G1) * FPS))
 F_CR0 = F_UP0 + int(0.25 * (F_FLAG - F_UP0))                 # the crane starts once the flag is well on its way
-FX_ = 0.1 + UW * 0.66                                        # aim right of the canton: stripes across the whole frame
+FX_ = 0.1 + UW * 0.71                                        # aim right of the canton: stripes across the whole frame
 D_TIGHT, LENS_T = 5.0, 82.0                                  # 2.2 m of flag across the frame
 def flag_z(f_):
     step = math.floor(f_ / FPS * 12) / 12 * FPS

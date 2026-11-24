@@ -569,8 +569,9 @@ def build_dive():
     D0 = (X1 - X0) * 50 / 36                                  # 50 mm, the card frame exactly across the width
     L0 = ((X0 + X1) / 2, (Y0 + Y1) / 2, 0.0)
     # the end pose: low over the water south of the harbor front, heading a little west of north as H1 does
-    CEND = (hx_ - 0.03, hy_ - 0.25, 0.028)                   # 2.5 km off the harbor front, 280 m up (map units)
-    _d = (math.sin(math.radians(-4)), math.cos(math.radians(-4)), 0.0)
+    CEND = (hx_ - 0.01, hy_ - 0.42, 0.036)                   # 4 km off the harbor front, 360 m up (map units)
+    _d = (math.sin(math.radians(-3)) * math.cos(math.radians(-1)), math.cos(math.radians(-3)) * math.cos(math.radians(-1)),
+          math.sin(math.radians(1)))
     ZEND = 1.4                                                # the relief grows toward the set's mountains as it lands
     LEND = tuple(CEND[k] + 0.5 * _d[k] for k in range(3))
     KEYS = [  # time, (look-at x, y, z), distance (log), pitch, heading, lens
@@ -578,7 +579,7 @@ def build_dive():
         (0.35, L0, D0, 90.0, 0.0, 50.0),
         (1.60, (hx_ * 0.4 + L0[0] * 0.6, hy_ * 0.4 + L0[1] * 0.6, 0.0), 40.0, 62.0, -2.0, 45.0),
         (3.30, (hx_ - 0.1, hy_ + 0.5, 0.0), 3.2, 30.0, -4.0, 42.0),
-        (DUR, LEND, 0.5, 0.0, -4.0, 40.0),
+        (DUR, LEND, 0.5, -1.0, -3.0, 40.0),
     ]
 
     def cam_at(t):
@@ -589,7 +590,7 @@ def build_dive():
                 if t1 == KEYS[-1][0]:
                     e = ease_out(u) * 0.7 + ease(u) * 0.3
                 return pose(mix(l0, l1, e), logmix(d0, d1, e), mix(p0, p1, e), mix(h0, h1, e), mix(n0, n1, e))
-        return pose(LEND, 0.5, 0.0, -4.0, 40.0)
+        return pose(LEND, 0.5, -1.0, -3.0, 40.0)
 
     T_AB = (0.05, 0.30)            # the card's Oʻahu becomes the true coastline (a quick dissolve, flat)
     T_RISE = (0.55, 1.75)          # Oʻahu rises out of the card, stepped
@@ -645,7 +646,7 @@ def build_pacific():
     ee = sc.eevee
     ee.shadow_cascade_max_distance = 3000
     ee.gtao_distance = 6.0
-    T0 = wt('ch04_the_pitch_meeting', 'look at the Pacific', end=True) - 0.1    # H8 is reached: start
+    T0 = wt('ch04_the_pitch_meeting', 'the Pacific') + 0.02                     # H8 is reached: start
     T_ENOR = wt('ch04_the_pitch_meeting', "It's enormous")
     T_MID = wt('ch04_the_pitch_meeting', 'right in the middle')
     T_SAT = wt('ch04_the_pitch_meeting', 'sat one of')
