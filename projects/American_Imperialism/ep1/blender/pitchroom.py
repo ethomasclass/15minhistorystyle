@@ -928,7 +928,7 @@ if os.environ.get('DBG_CAM'):                                # a fixed camera fo
     cam.data.dof.use_dof = False
 print('PITCHROOM', SEGN, 'frames', NF, 'rendering', len(paths), flush=True)
 for f, p in paths:
-    if os.path.exists(p) and not os.environ.get('FORCE'):
+    if os.path.exists(p) and os.path.getsize(p) > 0 and not os.environ.get('FORCE'):     # resumable: skip finished frames
         continue
     # where the board exactly fills the frame, sample its picture texel for texel with no reconstruction blur, so the
     # frame is the picture itself (the hand-off); elsewhere the usual filtering

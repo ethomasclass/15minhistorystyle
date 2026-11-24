@@ -613,19 +613,28 @@ if TAIL:
                 o_.location.y += 0.62
         PX, PY, PZ = TX + 0.02, RY0 + 3.62, RZ0 + 0.781
         box('paper', PX - 0.165, PY - 0.105, PZ, PX + 0.165, PY + 0.105, PZ + 0.002, '#efe7d4')
-        bpy.data.objects['paper'].rotation_euler.z = math.radians(-4)
+        po_ = bpy.data.objects['paper']                   # box() builds round the world origin: turn it about its own centre
+        from mathutils import Matrix
+        c_ = Vector((PX, PY, PZ))
+        po_.data.transform(Matrix.Translation(-c_))
+        po_.location = c_
+        po_.rotation_euler.z = math.radians(-4)
         cyl('inkwell', (PX - 0.2, PY + 0.2, PZ), (PX - 0.2, PY + 0.2, PZ + 0.045), 0.03, 0.022, '#1c1c22', n=8)
         cyl('pen', (PX + 0.06, PY + 0.14, PZ + 0.006), (PX + 0.2, PY + 0.02, PZ + 0.006), 0.004, 0.003, '#2a2018', n=5)
         # late afternoon: a lower, warmer window light reaching across the floor, the room dimmer and warmer
         room_lights(True)
-        wl.energy, wl.color = 230, (1.0, 0.70, 0.45)
-        wlo.rotation_euler = (math.radians(72), 0, math.radians(-12))
-        rf.energy, rf.color = 38, (1.0, 0.84, 0.68)
-        sp.energy = 1400
+        wl.energy, wl.color = 420, (1.0, 0.58, 0.30)       # late sun: low, orange, a long patch across the floor
+        wlo.rotation_euler = (math.radians(74), 0, math.radians(-14))
+        rf.energy, rf.color = 22, (0.80, 0.86, 0.95)        # the rest of the room falls cool and dim
+        sp.energy = 900
         sunob = bpy.data.objects.get('sun')
         if sunob:
-            sunob.data.color = (1.0, 0.74, 0.5)
-            sunob.rotation_euler.x = math.radians(72)
+            sunob.data.color = (1.0, 0.56, 0.28)
+            sunob.data.energy = sunob.data.energy * 1.25
+            sunob.rotation_euler.x = math.radians(76)
+        if sc.world and sc.world.use_nodes and 'Background' in sc.world.node_tree.nodes:
+            bg_ = sc.world.node_tree.nodes['Background'].inputs['Strength']
+            bg_.default_value = bg_.default_value * 0.55
         END_P = Vector((PX + 0.42, PY + 0.02, PZ + 0.78))
         END_L = Vector((PX - 0.02, PY, PZ))
         path([(f0, A_P, A_L), (f0 + int(2.4 * FPS), A_P + Vector((0.05, 0.04, -0.02)), A_L + Vector((-0.1, 0.25, -0.05))), (f1, END_P, END_L)])
@@ -677,6 +686,8 @@ if TAIL:
         raise SystemExit('unknown TAIL ' + TAIL)
     st = int(os.environ.get('TAIL_STEP', '1'))
     FR = [f for f in FR if (f - FR[0]) % st == 0 or f == FR[-1]]
+    if os.environ.get('TAIL_ONLY'):                      # e.g. TAIL_ONLY=0,0.5,1: frames at these fractions of the move
+        FR = sorted({FR[0] + round(float(u) * (FR[-1] - FR[0])) for u in os.environ['TAIL_ONLY'].split(',')})
     print('TAIL', TAIL, FR[0], FR[-1], len(FR), flush=True)
 elif os.environ.get('FRAMES', '').startswith('every:'):          # every:<step>:<offset>, skipping frames already on disk
     st_, of_ = map(int, os.environ['FRAMES'].split(':')[1:])
@@ -685,6 +696,8 @@ elif os.environ.get('FRAMES', '').startswith('every:'):          # every:<step>:
 elif os.environ.get('FRAMES'):
     FR = [int(v) for v in os.environ['FRAMES'].split(',')]
 for f in FR:
+    if TAIL and os.path.exists(os.path.join(OUT, f'{f:04d}.png')) and os.path.getsize(os.path.join(OUT, f'{f:04d}.png')) > 0:
+        continue                                              # resumable: a restart loses only the frame in progress
     sc.frame_set(f)
     sc.render.filepath = os.path.join(OUT, f'{f:04d}.png')
     import time

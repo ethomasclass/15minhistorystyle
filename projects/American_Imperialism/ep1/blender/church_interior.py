@@ -181,8 +181,11 @@ elif ':' in fr:
 else:
     frames = [int(v) for v in fr.split(',') if v]
 for f in frames:
+    p_ = os.path.join(OUT, f'{f:04d}.png')
+    if os.path.exists(p_) and os.path.getsize(p_) > 0:       # resumable: skip finished frames
+        continue
     sc.frame_set(f)
-    sc.render.filepath = os.path.join(OUT, f'{f:04d}.png')
+    sc.render.filepath = p_
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t, 2), flush=True)

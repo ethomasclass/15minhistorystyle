@@ -126,16 +126,49 @@ def to720(src, dst, crf=25):
     return dst
 
 
+def render_resume(S):
+    """render the frames of a written stage, skipping frames already on disk (a restart costs little); the last frame
+    on disk is re-rendered, in case it was cut off mid-write"""
+    n = int(round(S.dur * FPS))
+    fd = os.path.join(S.dir, 'f')
+    ok = lambda i: os.path.exists(os.path.join(fd, f'{i:04d}.png')) and os.path.getsize(os.path.join(fd, f'{i:04d}.png')) > 0
+    first = next((i for i in range(n) if not ok(i)), n)
+    if first < n:
+        subprocess.run(['nice', '-n', '10', 'node', os.path.join(KIT, 'anim_render.mjs'), S.dir, str(max(0, first - 1)), str(n - 1)],
+                       check=True, capture_output=True)
+    for f in os.listdir(fd):                                      # frames left over from a longer earlier version
+        if f.endswith('.png') and int(f[:4]) >= n:
+            os.remove(os.path.join(fd, f))
+
+
+def encode_resume(S):
+    """encode.py (the kit finish: grain, vignette, the effects track) unless silent.mp4 is already complete"""
+    sil = os.path.join(S.dir, 'silent.mp4')
+    try:
+        d = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', sil],
+                                 capture_output=True, text=True).stdout)
+    except ValueError:
+        d = 0.0
+    if abs(d - S.dur) > 0.1:
+        subprocess.run(['nice', '-n', '10', sys.executable, os.path.join(KIT, 'encode.py'), S.dir, sil], check=True, capture_output=True)
+    return sil
+
+
 def finish(piece, out_name):
-    """write, render, encode (the kit finish and the narration), then the 720p test copy"""
+    """write, render, encode (the kit finish and the narration), then the 720p test copy (resumable)"""
     S, frame, stem, a, b = piece
     S.write(frame)
     clip = os.path.join(S.dir, 'clip.mp4')
-    if S.sounds:
-        import ch03_explainers as C3
-        C3.encode_mix(S, stem, a, b, clip)
-    else:
-        encode_clip(S.name, stem, a, b, clip)
+    render_resume(S)
+    sil = encode_resume(S)
+    wav = os.path.join(EP, 'public', 'audio', stem + '.wav')
+    if S.sounds:                                                  # as ch03_explainers.encode_mix: effects under the narration
+        flt = (f'[1:a]afade=t=out:st={b - a - 0.08:.3f}:d=0.08,apad[n];[0:a]volume=0.35[s];[n][s]amix=inputs=2:duration=shortest:normalize=0[a]')
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', sil, '-ss', f'{a:.3f}', '-to', f'{b:.3f}', '-i', wav, '-filter_complex', flt,
+                        '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', clip], check=True)
+    else:                                                         # as vkit.encode_clip
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', sil, '-ss', f'{a:.3f}', '-to', f'{b:.3f}', '-i', wav, '-map', '0:v', '-map', '1:a',
+                        '-c:v', 'copy', '-af', f'afade=t=out:st={b - a - 0.12:.3f}:d=0.12,apad', '-c:a', 'aac', '-b:a', '192k', '-shortest', clip], check=True)
     out = to720(clip, os.path.join(TR, out_name))
     clean_frames(S)
     return out
@@ -944,8 +977,8 @@ def long_desk_render():
     S, frame, stem, a, DUR, (T_GN, SIL) = long_desk()
     S.write(frame)
     d = S.dir
-    subprocess.run(['nice', '-n', '10', 'node', os.path.join(KIT, 'anim_render.mjs'), d], check=True, capture_output=True)
-    subprocess.run(['nice', '-n', '10', sys.executable, os.path.join(KIT, 'encode.py'), d, os.path.join(d, 'silent.mp4')], check=True, capture_output=True)
+    render_resume(S)
+    encode_resume(S)
     wav = os.path.join(EP, 'public', 'audio', stem + '.wav')
     clip = os.path.join(d, 'clip.mp4')
     END_N = DUR - SIL

@@ -613,6 +613,8 @@ for mode in MODES:
         paths = [(STILL[mode], os.path.join(OUT, f'senate_{mode}.png'))]
     sc.render.resolution_percentage = int(os.environ.get('ANIM_SCALE', SCALE)) if mode in ('anim', 'reveal') else SCALE
     for fr, p in paths:
+        if os.path.exists(p) and os.path.getsize(p) > 0 and not os.environ.get('FORCE'):   # resumable: keep frames already written
+            continue
         sc.frame_set(fr)
         sc.render.filepath = p
         t = time.time()

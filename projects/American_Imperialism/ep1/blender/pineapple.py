@@ -544,8 +544,11 @@ elif MODE == 'run':
 else:
     FR = [(int(v), None) for v in os.environ['FRAMES'].split(',')] if os.environ.get('FRAMES') else [(f, None) for f in range(N)]
 for f, path in FR:
+    path = path or os.path.join(OUT, f'{f:04d}.png')
+    if os.path.exists(path) and os.path.getsize(path) > 0 and not os.environ.get('FORCE'):   # resumable: keep frames already written
+        continue
     sc.frame_set(f)
-    sc.render.filepath = path or os.path.join(OUT, f'{f:04d}.png')
+    sc.render.filepath = path
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t, 2), flush=True)

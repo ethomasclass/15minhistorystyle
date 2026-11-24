@@ -804,8 +804,11 @@ else:
     FR = [int(v) for v in os.environ['FRAMES'].split(',')] if os.environ.get('FRAMES') else range(N)
 import time
 for f in FR:
+    path = os.path.join(OUT, 'landing_march.png' if MODE == 'march' else f'{f:04d}.png')
+    if os.path.exists(path) and os.path.getsize(path) > 0 and not os.environ.get('FORCE'):   # resumable: keep frames already written
+        continue
     sc.frame_set(f)
-    sc.render.filepath = os.path.join(OUT, 'landing_march.png' if MODE == 'march' else f'{f:04d}.png')
+    sc.render.filepath = path
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t, 2), flush=True)

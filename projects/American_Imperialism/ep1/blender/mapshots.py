@@ -822,8 +822,11 @@ else:
 json.dump(dict(mode=MODE, n=N, fps=FPS, t0=SHOT['t0'], note=SHOT['note']), open(os.path.join(OUT, 'shot.json'), 'w'))
 import time
 for f in FR:
+    path = os.path.join(OUT, f'{f:04d}.png')
+    if os.path.exists(path) and os.path.getsize(path) > 0:       # resumable: a restart costs only the frame in progress
+        continue
     SHOT['state'](f)
-    sc.render.filepath = os.path.join(OUT, f'{f:04d}.png')
+    sc.render.filepath = path
     t_ = time.time()
     bpy.ops.render.render(write_still=True)
     print('FRAME', f, round(time.time() - t_, 2), flush=True)

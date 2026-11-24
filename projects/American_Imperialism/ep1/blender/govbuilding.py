@@ -563,7 +563,10 @@ for mode in MODES:
         paths = [(fr, os.path.join(OUT, 'flagrun', f'{fr:04d}.png')) for fr in range(a1, min(b1, F_FLAG + 30), int(os.environ.get('STEP', '1')))]
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'govbuilding_{mode}.png'))]
+    sc.render.resolution_percentage = int(os.environ.get('ANIM_SCALE', SCALE)) if mode in ('anim', 'flagrun') else SCALE
     for fr, p in paths:
+        if os.path.exists(p) and os.path.getsize(p) > 0 and not os.environ.get('FORCE'):   # resumable: keep frames already written
+            continue
         sc.frame_set(fr)
         sc.render.filepath = p
         t = time.time()

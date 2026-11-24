@@ -501,6 +501,8 @@ for mode in MODES:
     else:
         paths = [(STILL[mode], os.path.join(OUT, f'committee_{mode}.png'))]
     for f, p in paths:
+        if os.path.exists(p) and os.path.getsize(p) > 0 and not os.environ.get('FORCE'):   # resumable: keep frames already written
+            continue
         sc.frame_set(f)
         sc.render.filepath = p
         t = time.time()
