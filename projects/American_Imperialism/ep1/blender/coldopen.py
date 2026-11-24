@@ -508,7 +508,177 @@ for lt, on in ((wl, 260), (rf, 70), (sp, 2600)):                       # the roo
         kp.interpolation = 'CONSTANT'
 
 FR = range(F0, min(F1, N - 1) + 1)
-if os.environ.get('FRAMES', '').startswith('every:'):          # every:<step>:<offset>, skipping frames already on disk
+
+# ================================================================ TAIL: the transition shots built from this set
+# TAIL=<name> renders one camera move into <out_dir> (frames named by scene frame), leaving the cold open itself alone:
+#   decl_in      ch 1 to 2 (join 1): from the palace wide, the camera flies to the flag until its stripes fill the frame
+#                at "In 1776" + 0.45 s; the comp dissolves the stripes into the parchment's lines
+#   decl_out     ch 2 (join 2): reverse, from the stripes back out to the palace wide on "The men who locked this door"
+#   window_push  ch 9 (join 24, part 1): from the palace wide, in through the veranda arch to her window, square on
+#   window_room  ch 9 (join 24, part 2): inside, behind her, the window square on; a slow drift back to the opening image
+#   later_light  ch 8 (join 21): the room at the opening's angle, late-afternoon light; the camera turns down to her table
+#                and the paper on it at "signed away her throne"
+#   flag_swap    ch 8 (join 22): the palace wide; the Hawaiian flag comes down, the 45-star U.S. flag goes up
+# Tail timing is in film seconds of the chapter it belongs to (the chapter's words file); scene frames are borrowed from
+# this timeline only for the movers and the flag's wave.
+TAIL = os.environ.get('TAIL')
+if TAIL:
+    cfa = {fc.array_index: fc for fc in cam.animation_data.action.fcurves if fc.data_path == 'location'}
+    tfa = {fc.array_index: fc for fc in tgt.animation_data.action.fcurves if fc.data_path == 'location'}
+    def cam_at(f):
+        return Vector([cfa[i].evaluate(f) for i in range(3)]), Vector([tfa[i].evaluate(f) for i in range(3)])
+    def path(keys, lens=None, ease='BEZIER'):
+        """keys: (frame, pos, look); lens: (frame, mm) pairs"""
+        for ob in (cam, tgt):
+            ob.animation_data_clear()
+        cam.data.animation_data_clear()
+        for f, pos, look in keys:
+            cam.location = pos; cam.keyframe_insert('location', frame=f)
+            tgt.location = look; tgt.keyframe_insert('location', frame=f)
+        for f, mm in (lens or [(keys[0][0], 32)]):
+            cam.data.lens = mm; cam.data.keyframe_insert('lens', frame=f)
+        for ad in (cam.animation_data, tgt.animation_data, cam.data.animation_data):
+            for fc in ad.action.fcurves:
+                for kp in fc.keyframe_points:
+                    kp.interpolation = ease
+                    kp.handle_left_type = kp.handle_right_type = 'AUTO_CLAMPED'
+    def focus_on(P, fstop, frames):
+        cam.data.dof.use_dof = True
+        for f in frames:
+            sc.frame_set(f)
+            cam.data.dof.focus_distance = (P - cam.matrix_world.translation).length
+            cam.data.dof.aperture_fstop = fstop
+            cam.data.dof.keyframe_insert('focus_distance', frame=f)
+            cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
+    def room_lights(on):
+        for lt, e in ((wl, 260), (rf, 70), (sp, 2600)):
+            lt.animation_data_clear()
+            lt.energy = e if on else e * 0.08
+    if TAIL in ('decl_in', 'decl_out', 'flag_swap'):     # the hi-res flag for the close-ups (same colours, a clean canton)
+        hi = os.path.join(HERE, 'assets', 'hawaii_flag_hi.png')
+        for nd in fm.node_tree.nodes:
+            if nd.type == 'TEX_IMAGE':
+                nd.image = bpy.data.images.load(hi)
+    sc.eevee.use_motion_blur, sc.eevee.motion_blur_shutter = True, 0.5
+    # the stripes close-up: the lower fly quarter of the flag (4 stripes, 1.8 x 0.9 m), square on, 50 mm
+    STRIPES_P, STRIPES_L = Vector((2.8, 2.5 - 2.3, 29.95)), Vector((2.8, 2.5, 29.95))   # 56 mm: 1.48 x 0.83 m, inside the quarter
+    if TAIL == 'decl_in':
+        f0, f1 = int((T_DECL - 1.3) * FPS), int((T_DECL + 0.55) * FPS)
+        p0, l0 = cam_at(f0)
+        fm_ = f0 + int((f1 - f0) * 0.38)                  # the eye finds the flag first, then the camera flies to it
+        fa_ = f1 - 9                                      # the stripes fill the frame 9 frames early; a slow creep while they bleach
+        path([(f0, p0, l0), (fm_, p0 + (STRIPES_P - p0) * 0.22, STRIPES_L), (fa_, STRIPES_P, STRIPES_L),
+              (f1, STRIPES_P + Vector((0, 0.12, 0)), STRIPES_L)], lens=[(f0, 32), (fa_, 56)])
+        cam.data.dof.use_dof = False
+        FR = range(f0, f1 + 1)
+    elif TAIL == 'decl_out':
+        f0, f1 = int(T_C3 * FPS), int((T_C3 + 1.7) * FPS)
+        p1, l1 = cam_at(f1)
+        fh_ = f0 + 9                                      # 9 frames on the full stripes while the colour comes back, then out
+        fm_ = fh_ + int((f1 - fh_) * 0.62)
+        path([(f0, STRIPES_P + Vector((0, 0.12, 0)), STRIPES_L), (fh_, STRIPES_P, STRIPES_L), (fm_, p1 + (STRIPES_P - p1) * 0.22, STRIPES_L),
+              (f1, p1, l1)], lens=[(fh_, 56), (f1, 32)])
+        cam.data.dof.use_dof = False
+        FR = range(f0, f1 + 1)
+    elif TAIL == 'window_push':                          # ch 9: 2.4 s, scene frames borrowed from the wide
+        f0 = int(T_WIDE * FPS)
+        f1 = f0 + int(2.4 * FPS)
+        p0, l0 = cam_at(N - 1)
+        WIN_Z = RZ0 + 1.95
+        path([(f0, p0, l0), (f0 + int(1.3 * FPS), Vector((WX, -9.0, WIN_Z + 0.6)), Vector((WX, 3.5, WIN_Z))),
+              (f1, Vector((WX, 3.05 - 3.35, WIN_Z)), Vector((WX, 3.5, WIN_Z)))])
+        room_lights(False)
+        cam.data.dof.use_dof = False
+        FR = range(f0, f1 + 1)
+    elif TAIL == 'window_room':                          # ch 9: the window square on from inside, then back to the opening
+        f0 = int(T_WIDE * FPS) + int(2.4 * FPS) - 8      # 8 frames of overlap with window_push for the dissolve
+        f1 = f0 + int(7.5 * FPS)
+        WIN_Z = RZ0 + 1.95
+        A_P, A_L = Vector((RX1 - 0.5, RY1 - 0.5, RZ0 + 1.65)), Vector((RX0 + 1.6, RY0 + 0.6, RZ0 + 1.45))
+        path([(f0, Vector((WX, RY0 + 3.35, WIN_Z)), Vector((WX, RY0 - 3, WIN_Z))), (f0 + 20, Vector((WX + 0.05, RY0 + 3.45, WIN_Z - 0.05)), Vector((WX, RY0 - 3, WIN_Z - 0.05))),
+              (f1 - 45, A_P, A_L), (f1, A_P + Vector((0.08, 0.06, 0)), A_L)])
+        room_lights(True)
+        focus_on(Vector((QX, QY, RZ0 + 1.5)), 1.4, list(range(f0, f1 + 1, 6)) + [f1])
+        FR = range(f0, f1 + 1)
+    elif TAIL == 'later_light':                          # ch 8: "brought here" -1 s to "signed" (about 5 s)
+        t0 = _wt('ch08_under_protest', 'brought here') - 1.0
+        t1 = _wt('ch08_under_protest', 'signed away')
+        f0 = 30                                           # borrowed scene frames (the Queen stands still; no movers here)
+        f1 = f0 + int((t1 - t0) * FPS)
+        A_P, A_L = Vector((RX1 - 0.5, RY1 - 0.5, RZ0 + 1.65)), Vector((RX0 + 1.6, RY0 + 0.6, RZ0 + 1.45))
+        # her writing on the table: the basin and jug moved off, the paper, an inkwell and a pen
+        for nm_ in ('basin', 'jug', 'jugneck'):
+            o_ = bpy.data.objects.get(nm_)
+            if o_:
+                o_.location.y += 0.62
+        PX, PY, PZ = TX + 0.02, RY0 + 3.62, RZ0 + 0.781
+        box('paper', PX - 0.165, PY - 0.105, PZ, PX + 0.165, PY + 0.105, PZ + 0.002, '#efe7d4')
+        bpy.data.objects['paper'].rotation_euler.z = math.radians(-4)
+        cyl('inkwell', (PX - 0.2, PY + 0.2, PZ), (PX - 0.2, PY + 0.2, PZ + 0.045), 0.03, 0.022, '#1c1c22', n=8)
+        cyl('pen', (PX + 0.06, PY + 0.14, PZ + 0.006), (PX + 0.2, PY + 0.02, PZ + 0.006), 0.004, 0.003, '#2a2018', n=5)
+        # late afternoon: a lower, warmer window light reaching across the floor, the room dimmer and warmer
+        room_lights(True)
+        wl.energy, wl.color = 230, (1.0, 0.70, 0.45)
+        wlo.rotation_euler = (math.radians(72), 0, math.radians(-12))
+        rf.energy, rf.color = 38, (1.0, 0.84, 0.68)
+        sp.energy = 1400
+        sunob = bpy.data.objects.get('sun')
+        if sunob:
+            sunob.data.color = (1.0, 0.74, 0.5)
+            sunob.rotation_euler.x = math.radians(72)
+        END_P = Vector((PX + 0.42, PY + 0.02, PZ + 0.78))
+        END_L = Vector((PX - 0.02, PY, PZ))
+        path([(f0, A_P, A_L), (f0 + int(2.4 * FPS), A_P + Vector((0.05, 0.04, -0.02)), A_L + Vector((-0.1, 0.25, -0.05))), (f1, END_P, END_L)])
+        focus_on(Vector((QX, QY, RZ0 + 1.5)), 1.4, list(range(f0, f0 + int(2.6 * FPS), 6)))
+        for f in range(f0 + int(2.6 * FPS), f1 + 1, 3):
+            sc.frame_set(f)
+            cam.data.dof.focus_distance = (Vector((PX, PY, PZ)) - cam.matrix_world.translation).length
+            cam.data.dof.aperture_fstop = 2.0
+            cam.data.dof.keyframe_insert('focus_distance', frame=f)
+            cam.data.dof.keyframe_insert('aperture_fstop', frame=f)
+        FR = range(f0, f1 + 1)
+    elif TAIL == 'flag_swap':                            # ch 8: "July 7th" to "Not with a treaty" (about 4.6 s)
+        t0 = _wt('ch08_under_protest', 'July 7th') - 0.1
+        t1 = _wt('ch08_under_protest', 'Not with a treaty')
+        f0 = N - 1 - int((t1 - t0) * FPS)
+        f1 = N - 1
+        cam.data.dof.use_dof = False
+        # the U.S. flag: a copy of the Hawaiian flag's mesh and wave with the 45-star texture
+        us = fl.copy(); us.data = fl.data.copy(); sc.collection.objects.link(us)
+        us.animation_data.action = fl.animation_data.action.copy()   # its own keys (the wave's time offsets come along)
+        um = fm.copy()
+        for nd in um.node_tree.nodes:
+            if nd.type == 'TEX_IMAGE':
+                nd.image = bpy.data.images.load(os.path.join(HERE, 'assets', 'us_flag_45.png'))
+        us.data.materials.clear(); us.data.materials.append(um)
+        us.scale = (3.42, 1.8, 1)                        # 1.9 : 1
+        us.location.x = 0.1 + 1.71
+        TOP, LOW = 30.4, 24.3
+        n_ = f1 - f0
+        down_end, up_start = f0 + int(n_ * 0.40), f0 + int(n_ * 0.50)
+        for f in range(f0, f1 + 1):                      # on twos at 12 fps, the halyard hand over hand
+            fs = f0 + math.floor((f - f0) / FPS * 12) / 12 * FPS
+            u_d = min(1.0, max(0.0, (fs - f0) / (down_end - f0)))
+            u_u = min(1.0, max(0.0, (fs - up_start) / (f1 - 8 - up_start)))
+            fl.location.z = TOP - (TOP - LOW) * u_d
+            fl.hide_render = u_d >= 1.0
+            us.location.z = LOW + (TOP - LOW) * u_u
+            us.hide_render = u_u <= 0.0
+            for ob_ in (fl, us):
+                ob_.keyframe_insert('location', index=2, frame=f)
+                ob_.keyframe_insert('hide_render', frame=f)
+        for ob_ in (fl, us):
+            for fc in ob_.animation_data.action.fcurves:
+                if fc.data_path in ('location', 'hide_render'):
+                    for kp in fc.keyframe_points:
+                        kp.interpolation = 'CONSTANT'
+        FR = range(f0, f1 + 1)
+    else:
+        raise SystemExit('unknown TAIL ' + TAIL)
+    st = int(os.environ.get('TAIL_STEP', '1'))
+    FR = [f for f in FR if (f - FR[0]) % st == 0 or f == FR[-1]]
+    print('TAIL', TAIL, FR[0], FR[-1], len(FR), flush=True)
+elif os.environ.get('FRAMES', '').startswith('every:'):          # every:<step>:<offset>, skipping frames already on disk
     st_, of_ = map(int, os.environ['FRAMES'].split(':')[1:])
     HIDDEN = range(int(T_DECL * FPS) + 3, int(T_C3 * FPS) - 3)      # under the Declaration: never on screen
     FR = [f for f in range(of_, N, st_) if f not in HIDDEN and not os.path.exists(os.path.join(OUT, f'{f:04d}.png'))]

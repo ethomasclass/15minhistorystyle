@@ -1,6 +1,10 @@
 # Textures for the chapter 4 and 6 sets (system python3 + PIL; run once, writes into assets/):
 #   us_flag_44.png        the 44-star U.S. flag (July 1891 to July 1896): 13 stripes, stars in rows of 8, 7, 7, 7, 7, 8,
 #                         proportions 1.9 : 1 (the canton 7 stripes deep and 0.76 of the hoist wide)
+#   us_flag_45.png        the 45-star flag (July 1896 to July 1908; the one raised at the palace on August 12, 1898): rows of
+#                         8, 7, 8, 7, 8, 7, staggered
+#   hawaii_flag_hi.png    the Hawaiian flag at 2400 x 1200 for the close-ups that fill the frame with it: eight stripes
+#                         (white, red, blue from the top), the Union Jack in the canton; the same colours as hawaii_flag.png
 #   chart_diagram.png     the lecturer's chart: a branching tree drawn as a "scientific" diagram, one branch climbing
 #                         highest and arrowed; labels are ink strokes, not words
 #   chart_blank.png       the same sheet, blank (the cut "It wasn't.")
@@ -23,7 +27,7 @@ def star(d, cx, cy, r, col):
     d.polygon(pts, fill=col)
 
 
-def us_flag(path, H=600):
+def us_flag(path, H=600, rows=(8, 7, 7, 7, 7, 8)):
     S = 4                                                   # supersample, then shrink (clean star edges)
     h, w = H * S, int(H * 1.9) * S
     im = Image.new('RGB', (w, h), WHITE)
@@ -34,15 +38,54 @@ def us_flag(path, H=600):
             d.rectangle([0, round(k * sh), w, round((k + 1) * sh)], fill=RED)
     cw, ch = 0.76 * h, 7 * sh
     d.rectangle([0, 0, round(cw), round(ch)], fill=BLUE)
-    rows = [8, 7, 7, 7, 7, 8]
     r = 0.0616 * h / 2 * 1.0                                # star diameter 0.0616 of the hoist
+    stagger = len(set(rows)) > 1 and rows[0] != rows[-1]    # 45 stars: the short rows sit between the long rows' stars
     for i, n in enumerate(rows):
         y = ch * (i + 0.5) / len(rows)
         mx = cw * 0.06
         for j in range(n):
-            x = mx + (cw - 2 * mx) * (j + 0.5) / n
+            if stagger:
+                step = (cw - 2 * mx) / max(rows)
+                x = mx + step * (j + (0.5 if n == max(rows) else 1.0))
+            else:
+                x = mx + (cw - 2 * mx) * (j + 0.5) / n
             star(d, x, y, r, WHITE)
     im = im.resize((w // S, h // S), Image.LANCZOS)
+    im.save(path)
+    print('wrote', path, im.size)
+
+
+def hawaii_flag(path, W=2400):
+    H_RED, H_WHITE, H_BLUE = (168, 50, 44), (236, 228, 208), (44, 63, 115)
+    S = 2
+    w, h = W * S, W * S // 2
+    im = Image.new('RGB', (w, h), H_WHITE)
+    d = ImageDraw.Draw(im)
+    sh = h / 8
+    for k in range(8):                                      # white, red, blue from the top
+        d.rectangle([0, round(k * sh), w, round((k + 1) * sh)], fill=(H_WHITE, H_RED, H_BLUE)[k % 3])
+    cw, ch = w // 2, h // 2                                 # the Union Jack, 2 : 1, in 60 x 30 units, drawn on its own and pasted
+    u = cw / 60
+    uj = Image.new('RGB', (cw, ch), H_BLUE)
+    dj = ImageDraw.Draw(uj)
+    def band(p, q, wd, col):
+        dj.line([p, q], fill=col, width=round(wd * u))
+    E = 4 * u                                               # run the diagonals past the corners; the paste clips them
+    band((-2 * E, -E), (cw + 2 * E, ch + E), 6, H_WHITE)
+    band((-2 * E, ch + E), (cw + 2 * E, -E), 6, H_WHITE)
+    # the red saltire, 2 wide, one edge on the white's centre line, each arm shifted anticlockwise (counterchanged)
+    r5 = math.sqrt(5)
+    n, m = (-u / r5, 2 * u / r5), (u / r5, 2 * u / r5)       # unit normals (x 1 unit) of the two diagonals, pointing down
+    C = (cw / 2, ch / 2)
+    for corner, off in (((-2 * E, -E), n), ((cw + 2 * E, ch + E), (-n[0], -n[1])),
+                        ((cw + 2 * E, -E), (-m[0], -m[1])), ((-2 * E, ch + E), m)):
+        band((C[0] + off[0], C[1] + off[1]), (corner[0] + off[0], corner[1] + off[1]), 2, H_RED)
+    dj.rectangle([cw / 2 - 5 * u, 0, cw / 2 + 5 * u, ch], fill=H_WHITE)
+    dj.rectangle([0, ch / 2 - 5 * u, cw, ch / 2 + 5 * u], fill=H_WHITE)
+    dj.rectangle([cw / 2 - 3 * u, 0, cw / 2 + 3 * u, ch], fill=H_RED)
+    dj.rectangle([0, ch / 2 - 3 * u, cw, ch / 2 + 3 * u], fill=H_RED)
+    im.paste(uj, (0, 0))
+    im = im.resize((W, W // 2), Image.LANCZOS)
     im.save(path)
     print('wrote', path, im.size)
 
@@ -148,6 +191,11 @@ def carpet(path, W=512):
 
 
 if __name__ == '__main__':
+    import sys
+    if sys.argv[1:] == ['flags']:
+        us_flag(os.path.join(A, 'us_flag_45.png'), H=1200, rows=(8, 7, 8, 7, 8, 7))
+        hawaii_flag(os.path.join(A, 'hawaii_flag_hi.png'))
+        sys.exit()
     carpet(os.path.join(A, 'senate_carpet.png'))
     us_flag(os.path.join(A, 'us_flag_44.png'))
     chart(os.path.join(A, 'chart_diagram.png'), False)
